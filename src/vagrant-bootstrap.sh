@@ -12,7 +12,7 @@ sudo apt-get purge php5-common -y
 sudo apt-get install php7.0 php7.0-fpm php7.0-mysql -y
 sudo apt-get --purge autoremove -y
 
-sudo apt-get nginx -y
+sudo apt-get install nginx -y
 
 # ##########
 # UPDATE NPM
