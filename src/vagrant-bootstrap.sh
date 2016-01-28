@@ -3,14 +3,16 @@
 # ###############
 # APT-GET SECTION
 # ###############
-apt-get install -y gem nodejs npm
-apt-get install -y php5 php5-curl php5-cli php5-fpm php5-imagick php5-json php5-memcache php5-xdebug
+#apt-get install -y gem nodejs npm
+#apt-get install -y php5 php5-curl php5-cli php5-fpm php5-imagick php5-json php5-memcache php5-xdebug
 
-#sudo LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
-#sudo apt-get update
-#sudo apt-get purge php5-common -y
-#sudo apt-get install php7.0 php7.0-fpm php7.0-mysql -y
-#sudo apt-get --purge autoremove -y
+sudo LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php -y
+sudo apt-get update
+sudo apt-get purge php5-common -y
+sudo apt-get install php7.0 php7.0-fpm php7.0-mysql -y
+sudo apt-get --purge autoremove -y
+
+sudo apt-get nginx -y
 
 # ##########
 # UPDATE NPM
