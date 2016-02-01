@@ -1,11 +1,10 @@
-<form>
-  <div>
-    <span>Input: </span>
-    <input type="text" placeholder="Enter the number..."/>
-  </div>
-  <div>
-    <span>Result:</span>
-    <span></span>
-  </div>
-  <input type="submit" value="Submit">
-</form>
+<article class="route-square">
+  <h1>This is a Square Service</h1>
+  <nav>
+    <ul>
+      <li><a [routerLink]="['./Homes']">Home</a></li>
+      <li><a [routerLink]="['./Calculate']">Calculate</a></li>
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>
+</article>

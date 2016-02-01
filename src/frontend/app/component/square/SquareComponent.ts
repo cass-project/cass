@@ -1,15 +1,24 @@
 import {Component} from 'angular2/core';
-import {RouteConfig, RouterOutlet} from 'angular2/router';
+import {RouteConfig, RouterOutlet, ROUTER_DIRECTIVES} from 'angular2/router';
+
+import {SquareHomeComponent} from './home/SquareHomeComponent';
+import {SquareCalculateComponent} from './calculate/SquareCalculateComponent';
 
 @Component({
-    selector: 'app',
     template: require('./template.html'),
-    directives: [RouterOutlet]
+    directives: [RouterOutlet, ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-    {path:'/', name: 'Square', component: SquareComponent, useAsDefault: true},
+    {
+        path: '/',
+        name: 'Home',
+        component: SquareHomeComponent,
+        useAsDefault: true
+    },
+    {
+        path: '/calculate',
+        name: 'Calculate',
+        component: SquareCalculateComponent
+    }
 ])
-export class SquareComponent
-{
-    input:number = 0;
-}
+export class SquareComponent {}

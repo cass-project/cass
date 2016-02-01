@@ -1,12 +1,13 @@
 var webpack = require("webpack");
 
+var STAGE = 'development';
 var PATHS = {
   'www': __dirname + '/../www/app/public/assets'
 };
 
 module.exports = {
   entry: [
-    './app/bootstrap.ts',
+    './app/app.ts',
   ],
   output: {
     filename: '[name].js',
@@ -54,6 +55,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({minimize: true})
+    // new webpack.optimize.UglifyJsPlugin({minimize: true})
   ]
 };

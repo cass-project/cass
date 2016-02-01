@@ -1,10 +1,12 @@
 <?php
 namespace Square\Middleware\CalculateSquare;
 
+use Application\REST\GenericRESTResponseBuilder;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Square\Service\Square\SquareService;
 use Zend\Stratigility\MiddlewareInterface;
+use Square\Service\Square\InvalidInputException;
 
 class CalculateSquareMiddleware implements MiddlewareInterface
 {
@@ -20,14 +22,23 @@ class CalculateSquareMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $input = $request->getAttribute('input');
+        $responseBuilder = new GenericRESTResponseBuilder($response);
 
-        $response->withHeader('Content-Type', 'application/json');
-        $response->getBody()->write(json_encode([
-            'success' => true,
-            'result' => $this->squareService->calculate($input)
-        ]));
+        try {
+            $input = $request->getAttribute('input');
+            $result = $this->squareService->calculate($input);
 
-        return $response;
+            $responseBuilder
+                ->setStatusSuccess()
+                ->setJson(['result' => $result])
+            ;
+        }catch(InvalidInputException $e) {
+            $responseBuilder
+                ->setStatusNotAllowed()
+                ->setError($e)
+            ;
+        }
+
+        return $responseBuilder->build();
     }
 }

@@ -3,9 +3,6 @@
 # ###############
 # APT-GET SECTION
 # ###############
-#apt-get install -y gem nodejs npm
-#apt-get install -y php5 php5-curl php5-cli php5-fpm php5-imagick php5-json php5-memcache php5-xdebug
-
 sudo LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php -y
 sudo apt-get update
 sudo apt-get purge php5-common -y
@@ -20,6 +17,16 @@ sudo apt-get install nginx -y
 npm cache clean -f
 npm install -g n
 n stable
+
+# #####
+# MYSQL
+# #####
+debconf-set-selections <<< 'mysql-server mysql-server/root_password password 1234'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 1234'
+apt-get install mysql-client mysql-server
+
+mysql  -uroot -p"1234" -e "CREATE DATABASE cass_development"
+mysql  -uroot -p"1234" -e "CREATE DATABASE cass_stage"
 
 # ###################
 # Configuring backend
@@ -39,7 +46,10 @@ composer.phar install
 
 # Phinx
 chmod a+x ./vendor/bin/phinx
-ln -s ./bin/phinx /usr/bin/phinx
+ln -s ./vendor/bin/phinx /usr/bin/phinx
+
+cp phinx.yml.dist phinx.yml
+vendor/bin/phinx migrate
 
 # ####################
 # Configuring frontend

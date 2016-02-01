@@ -1,20 +1,44 @@
-require('./stylesheets/main.scss');
+import 'es6-shim';
+import 'es6-promise';
+import 'reflect-metadata';
 
-import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {provide, Component} from 'angular2/core';
+import {bootstrap, ELEMENT_PROBE_PROVIDERS} from 'angular2/platform/browser';
+import {RouteConfig, ROUTER_PROVIDERS, ROUTER_DIRECTIVES} from 'angular2/router';
+
+import {WelcomeComponent} from './component/welcome/WelcomeComponent';
 import {SquareComponent} from './component/square/SquareComponent';
 
+console.error.bind(console);
+
 @Component({
-    selector: 'app',
-    template: require('./app.html')
+    selector: 'cass-bootstrap',
+    template: require('./app.html'),
+    directives: [
+        ROUTER_DIRECTIVES,
+    ]
 })
 @RouteConfig([
     {
-        path: '/square/calculate/',
-        name: 'SquareCalculate',
-        component: SquareComponent
+        path: '/welcome',
+        name: 'Welcome',
+        component: WelcomeComponent,
+    },
+    {
+        path: '/square/...',
+        name: 'Square',
+        component: SquareComponent,
+        useAsDefault: true
     }
 ])
-export class App
+class App
 {
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    bootstrap(App, [
+        ROUTER_PROVIDERS
+    ]).catch((err) => {
+        console.log(err.message);
+    });
+});
