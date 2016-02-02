@@ -9,6 +9,7 @@ sudo apt-get purge php5-common -y
 sudo apt-get install php7.0 php7.0-fpm php7.0-mysql -y
 sudo apt-get --purge autoremove -y
 
+sudo apt-get install npm -y
 sudo apt-get install nginx -y
 
 # ##########
@@ -57,6 +58,24 @@ vendor/bin/phinx migrate
 cd /vagrant/frontend
 
 ln -s /usr/bin/nodejs /usr/bin/node
+
+# #######
+# SWAGGER
+# #######
+
+mkdir /swagger
+cd /swagger
+git clone https://github.com/swagger-api/swagger-ui.git
+cd swagger-ui
+npm install
+npm run build
+cd dist
+rm index.html
+ln -s /vagrant/support-files/swagger/index.html /swagger/swagger-ui/dist/index.html
+ln -s /vagrant/support-files/swagger/style.css /swagger/swagger-ui/dist/style.css
+ln -s /vagrant/support-files/swagger/swagger.json /swagger/swagger-ui/dist/swagger.json
+cp /
+php -S 0.0.0.0:3001 &
 
 # ##########
 # RUN SERVER
