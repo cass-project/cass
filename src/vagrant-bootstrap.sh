@@ -21,9 +21,9 @@ n stable
 # #####
 # MYSQL
 # #####
-debconf-set-selections <<< 'mysql-server mysql-server/root_password password 1234'
-debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 1234'
-apt-get install mysql-client mysql-server
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password 1234'
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 1234'
+sudo apt-get install mysql-client mysql-server -y
 
 mysql  -uroot -p"1234" -e "CREATE DATABASE cass_development"
 mysql  -uroot -p"1234" -e "CREATE DATABASE cass_stage"

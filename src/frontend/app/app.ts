@@ -9,8 +9,6 @@ import {RouteConfig, ROUTER_PROVIDERS, ROUTER_DIRECTIVES} from 'angular2/router'
 import {WelcomeComponent} from './component/welcome/WelcomeComponent';
 import {SquareComponent} from './component/square/SquareComponent';
 
-console.error.bind(console);
-
 @Component({
     selector: 'cass-bootstrap',
     template: require('./app.html'),
@@ -21,12 +19,12 @@ console.error.bind(console);
 @RouteConfig([
     {
         path: '/welcome',
-        name: 'Welcome',
+        as: 'Welcome',
         component: WelcomeComponent,
     },
     {
         path: '/square/...',
-        name: 'Square',
+        as: 'Square',
         component: SquareComponent,
         useAsDefault: true
     }

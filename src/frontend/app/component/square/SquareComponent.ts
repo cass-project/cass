@@ -6,18 +6,18 @@ import {SquareCalculateComponent} from './calculate/SquareCalculateComponent';
 
 @Component({
     template: require('./template.html'),
-    directives: [RouterOutlet, ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([
     {
         path: '/',
-        name: 'Home',
+        as: 'Home',
         component: SquareHomeComponent,
         useAsDefault: true
     },
     {
         path: '/calculate',
-        name: 'Calculate',
+        as: 'Calculate',
         component: SquareCalculateComponent
     }
 ])
