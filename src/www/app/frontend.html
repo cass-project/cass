@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Your Application</title>
@@ -7,6 +7,12 @@
     <base href="/">
   </head>
   <body>
-    <cass-bootstrap></cass-bootstrap>
+    <nav>
+      <ul>
+        <li><a ui-sref="welcome">Welcome</a></li>
+        <li><a ui-sref="square">Square</a></li>
+      </ul>
+    </nav>
+    <div ui-view></div>
   </body>
 </html>
