@@ -77,8 +77,12 @@ ln -s /vagrant/support-files/swagger/swagger.json /swagger/swagger-ui/dist/swagg
 cp /
 php -S 0.0.0.0:3001 &
 
-# ##########
-# RUN SERVER
-# ##########
-cd /vagrant/www/app
-php -S 0.0.0.0:3000 server.php &
+# #######
+# STARTUP
+ # ######
+
+cp /vagrant/support-files/vagrant/server-startup.sh /usr/bin/cass-server-startup.sh
+chmod a+x /usr/bin/cass-server-startup.sh
+touch /etc/cron.d/cass-server
+echo "@reboot   root    /usr/bin/cass-server-startup.sh" < /etc/cron.d/cass-server
+/vagrant/support-files/vagrant/server-startup.sh &

@@ -1,0 +1,1 @@
+import WelcomeComponent from './component/WelcomeComponent';
