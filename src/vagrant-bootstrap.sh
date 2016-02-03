@@ -10,7 +10,25 @@ sudo apt-get install php7.0 php7.0-fpm php7.0-mysql -y
 sudo apt-get --purge autoremove -y
 
 sudo apt-get install npm -y
-sudo apt-get install nginx -y
+sudo apt-get install nginx nginx-extras -y
+
+# ########
+# PHP7-FPM
+# ########
+
+rm /etc/php/7.0/fpm/php.ini
+ln -s /vagrant/support-files/php7-fpm/php.ini /etc/php/7.0/fpm/php.ini
+rm /etc/php/7.0/fpm/pool.d/www.conf
+ln -s /vagrant/support-files/php7-fpm/www.conf /etc/php/7.0/fpm/pool.d/www.conf
+sudo service php7.0-fpm restart
+
+# #####
+# NGINX
+# #####
+
+rm /etc/nginx/sites-available/default
+ln -s /vagrant/support-files/nginx/default /etc/nginx/sites-available/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 # ##########
 # UPDATE NPM
