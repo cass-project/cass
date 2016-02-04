@@ -3,17 +3,19 @@ import 'es6-promise';
 import 'reflect-metadata';
 
 require('zone.js');
+require('reset-css/reset.css');
+require('./global.head.scss');
 
-import {provide, Component} from 'angular2/core';
-import {bootstrap, ELEMENT_PROBE_PROVIDERS} from 'angular2/platform/browser';
-import {RouteConfig, ROUTER_PROVIDERS, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component} from 'angular2/core';
+import {bootstrap} from 'angular2/platform/browser';
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 
-import {WelcomeComponent} from './component/welcome/WelcomeComponent';
-import {SquareComponent} from './component/square/SquareComponent';
+import {WelcomeComponent} from './module/welcome/index';
+import {SquareComponent} from './module/square/index';
 
 @Component({
     selector: 'cass-bootstrap',
-    template: require('./app.html'),
+    template: require('./template.html'),
     directives: [
         ROUTER_DIRECTIVES,
     ]
@@ -21,12 +23,12 @@ import {SquareComponent} from './component/square/SquareComponent';
 @RouteConfig([
     {
         path: '/welcome',
-        as: 'Welcome',
+        name: 'Welcome',
         component: WelcomeComponent,
     },
     {
         path: '/square/...',
-        as: 'Square',
+        name: 'Square',
         component: SquareComponent,
         useAsDefault: true
     }
@@ -36,7 +38,8 @@ class App
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    bootstrap(App, [
+    bootstrap(
+        App, [
         ROUTER_PROVIDERS
     ]).catch((err) => {
         console.log(err.message);

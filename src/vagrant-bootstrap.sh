@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# UTF-8 Locale Issue
+sudo locale-gen UTF-8
+
 # ###############
 # APT-GET SECTION
 # ###############
@@ -42,6 +45,11 @@ sudo apt-get install mysql-client mysql-server -y
 mysql  -uroot -p"1234" -e "CREATE DATABASE cass_development"
 mysql  -uroot -p"1234" -e "CREATE DATABASE cass_stage"
 
+# #####
+# MONGO
+# #####
+
+
 # ###################
 # Configuring backend
 # ###################
@@ -60,6 +68,12 @@ composer.phar install
 
 cp phinx.yml.dist phinx.yml
 vendor/bin/phinx migrate
+
+# ###
+# NPM
+# ###
+
+npm install -g typings webpack live-server
 
 # ####################
 # Configuring frontend

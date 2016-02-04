@@ -1,12 +1,12 @@
 import {Component} from 'angular2/core';
-import {RouteConfig, RouterOutlet, ROUTER_DIRECTIVES} from 'angular2/router';
+import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
-import {SquareHomeComponent} from './home/SquareHomeComponent';
-import {SquareCalculateComponent} from './calculate/SquareCalculateComponent';
+import {SquareHomeComponent} from './component/SquareHomeComponent/component';
+import {SquareCalculateComponent} from './component/SquareCalculateComponent/component';
 
 @Component({
     template: require('./template.html'),
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
 })
 @RouteConfig([
     {
@@ -21,6 +21,6 @@ import {SquareCalculateComponent} from './calculate/SquareCalculateComponent';
         component: SquareCalculateComponent
     }
 ])
-export class SquareComponent {
-    constructor() {}
+export class SquareComponent
+{
 }
