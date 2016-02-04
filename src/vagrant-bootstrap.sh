@@ -49,6 +49,24 @@ mysql  -uroot -p"1234" -e "CREATE DATABASE cass_stage"
 # MONGO
 # #####
 
+sudo apt-get install mongodb -y
+npm install -g mongo-express
+
+rm /etc/mongodb.conf
+ln -s /vagrant/support-files/mongo/mongodb.conf /etc/mongodb.conf
+service mongodb restart
+
+# #############
+# MONGO-EXPRESS
+# #############
+mkdir /mongo-express
+cd /mongo-express
+npm install mongo-express
+ln -s /vagrant/support-files/mongo-express/config.js /mongo-express/node_modules/mongo-express/config.js
+
+# TODO: auto-startup server
+node ./node_modules/mongo-express/app.js
+
 
 # ###################
 # Configuring backend
@@ -64,8 +82,6 @@ ln -s /usr/bin/composer.phar /usr/bin/composer
 
 # Install composer dependencies
 composer.phar install
-
-
 cp phinx.yml.dist phinx.yml
 vendor/bin/phinx migrate
 
