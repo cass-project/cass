@@ -11,7 +11,14 @@ server {
     location ~ "^/backend/.*$"
     {
         try_files $uri /server.php /server.php =404;
-        include common/php-fpm;
+
+        fastcgi_pass	php-fpm;
+        include fastcgi_params;
+        fastcgi_split_path_info			^(.+?\.php)(/.*)?$;
+        fastcgi_param	SCRIPT_FILENAME		$document_root$fastcgi_script_name;
+        fastcgi_param	PATH_TRANSLATED		$document_root$fastcgi_script_name;
+        set		$path_info		$fastcgi_path_info;
+        fastcgi_param	PATH_INFO		$path_info;
     }
 
     location ~ "^/api-docs/.*$"
