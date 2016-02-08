@@ -12,6 +12,8 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
 
 import {WelcomeComponent} from './module/welcome/index';
 import {SquareComponent} from './module/square/index';
+import {AuthComponent} from './module/auth/index';
+
 
 @Component({
     selector: 'cass-bootstrap',
@@ -25,12 +27,17 @@ import {SquareComponent} from './module/square/index';
         path: '/welcome',
         name: 'Welcome',
         component: WelcomeComponent,
+        useAsDefault: true
     },
     {
         path: '/square/...',
         name: 'Square',
         component: SquareComponent,
-        useAsDefault: true
+    },
+    {
+        path: '/auth/...',
+        name: 'Auth',
+        component: AuthComponent
     }
 ])
 class App
