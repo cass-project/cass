@@ -1,9 +1,9 @@
 <?php
-namespace Application;
+namespace Auth;
 
 use Application\Bootstrap\Bundle\GenericBundle;
 
-class ApplicationBundle extends GenericBundle
+class AuthBundle extends GenericBundle
 {
     public function getDir()
     {
