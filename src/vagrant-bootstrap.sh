@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# UTF-8 Locale Issue
+## UTF-8 Locale Issue
 sudo locale-gen UTF-8
 
 # ###############
@@ -9,7 +9,6 @@ sudo locale-gen UTF-8
 sudo add-apt-repository ppa:ondrej/php -y
 sudo apt-get update
 sudo apt-get install -y php7.0 php7.0-fpm php7.0-mysql git npm nginx nginx-extras
-
 
 # ########
 # PHP7-FPM
@@ -65,7 +64,7 @@ npm install mongo-express
 ln -s /vagrant/support-files/mongo-express/config.js /mongo-express/node_modules/mongo-express/config.js
 
 # TODO: auto-startup server
-node ./node_modules/mongo-express/app.js
+node ./node_modules/mongo-express/app.js &
 
 
 # ###################
