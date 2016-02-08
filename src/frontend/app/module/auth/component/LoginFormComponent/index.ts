@@ -23,5 +23,4 @@ export class LoginFormComponent{
     attemptSignIn(){
         var isSigned:boolean = this.authService.attemptSignIn(this.login,this.password);
     }
-
 }

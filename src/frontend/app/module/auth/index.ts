@@ -5,6 +5,7 @@ import {COMMON_DIRECTIVES} from 'angular2/common';
 import {AuthControlsComponent} from './component/AuthControlsComponent/index';
 import {AuthService, AuthServiceProvider} from './service/AuthService';
 import {SignInComponent} from './component/SignInComponent/index';
+import {LogOutComponent} from './component/LogOutComponent/index';
 
 @Component({
     template: require('./template.html'),
@@ -22,6 +23,11 @@ import {SignInComponent} from './component/SignInComponent/index';
         name: 'SignIn',
         component: SignInComponent,
         useAsDefault: true
+    },
+    {
+        path: '/logout',
+        name: 'Logout',
+        component: LogOutComponent,
     }
 ])
 
@@ -31,9 +37,5 @@ export class AuthComponent
 
     constructor(authServiceProvider:AuthServiceProvider){
         this.authService = authServiceProvider.getInstance();
-    }
-
-    isUserSigningIn() {
-        return this.authService.isUserSigningIn;
     }
 }

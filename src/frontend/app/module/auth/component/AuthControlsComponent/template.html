@@ -1,9 +1,9 @@
 <div>
   <div *ngIf="!isAuthenticated()">
-    <a>Sign Up</a>
-    <a>Sign In</a>
+    <a [routerLink]="['/Auth/SignIn']">Sign Up</a>
+    <a [routerLink]="['/Auth/SignIn']">Sign In</a>
   </div>
   <div *ngIf="isAuthenticated()">
-    <a href="">Log Out</a>
+    <a [routerLink]="['/Auth/Logout']">Log Out</a>
   </div>
 </div>

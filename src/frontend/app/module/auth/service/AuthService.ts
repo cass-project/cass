@@ -20,13 +20,13 @@ export class AuthServiceProvider
 export class AuthService {
     isAuthenticated:boolean = false;
 
-    constructor() {
-        alert('AuthService instance');
-    }
-
     attemptSignIn(login:string, password:string) {
         this.isAuthenticated = !!(login == 'admin' && password == '1234');
 
         return this.isAuthenticated;
+    }
+
+    logOut(){
+        this.isAuthenticated = false;
     }
 }
