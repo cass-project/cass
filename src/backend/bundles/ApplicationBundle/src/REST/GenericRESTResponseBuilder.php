@@ -4,6 +4,7 @@ namespace Application\REST;
 class GenericRESTResponseBuilder extends RESTResponseBuilder
 {
     const CODE_SUCCESS = 200;
+    const CODE_BAD_REQUEST = 400;
     const CODE_NOT_FOUND = 404;
     const CODE_NOT_ALLOWED = 403;
 
@@ -21,6 +22,12 @@ class GenericRESTResponseBuilder extends RESTResponseBuilder
 
     public function setStatusNotAllowed(): self {
         $this->setStatus(self::CODE_NOT_ALLOWED);
+
+        return $this;
+    }
+
+    public function setStatusBadRequest(): self {
+        $this->setStatus(self::CODE_BAD_REQUEST);
 
         return $this;
     }
