@@ -24,8 +24,7 @@ sudo service php7.0-fpm restart
 ## #####
 rm /etc/nginx/sites-available/default
 ln -s /vagrant/support-files/nginx/default /etc/nginx/sites-available/default
-sudo mkdir /etc/nginx/common
-ln -s /vagrant/support-files/nginx/php-fpm /etc/nginx/common/php-fpm
+sudo service nginx restart
 
 # ##########
 # UPDATE NPM
