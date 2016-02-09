@@ -1,5 +1,5 @@
 <?php
-namespace Application;
+namespace Auth;
 
 use Auth\Middleware\AuthMiddleware;
 use Auth\Middleware\AuthMiddlewareFactory;

@@ -1,6 +1,7 @@
 import 'es6-shim';
 import 'es6-promise';
 import 'reflect-metadata';
+import 'rxjs/Rx';
 
 require('zone.js');
 require('reset-css/reset.css');
@@ -9,6 +10,7 @@ require('./global.head.scss');
 import {Component} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {HTTP_PROVIDERS} from 'angular2/http';
 
 import {WelcomeComponent} from './module/welcome/index';
 import {SquareComponent} from './module/square/index';
@@ -47,7 +49,8 @@ class App
 document.addEventListener('DOMContentLoaded', () => {
     bootstrap(
         App, [
-        ROUTER_PROVIDERS
+        ROUTER_PROVIDERS,
+        HTTP_PROVIDERS
     ]).catch((err) => {
         console.log(err.message);
     });

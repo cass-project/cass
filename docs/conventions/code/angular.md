@@ -117,3 +117,13 @@ article {
 </article>
 ```
 
+Проблемы
+--------
+
+Q. PhpStorm со временем начинает тормозить
+A. ~/www/app/asssets/bundles/main.js -> mark as plain text
+
+Обязательно к прочтению:
+------------------------
+
+- HTTP в Angular 2: (https://auth0.com/blog/2015/10/15/angular-2-series-part-3-using-http/)
