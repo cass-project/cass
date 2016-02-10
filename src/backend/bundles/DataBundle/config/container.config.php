@@ -10,6 +10,6 @@ return [
     ],
 
     'services' => [
-        'DoctrineConfig' => require(__DIR__.'doctrine.config.php')
+        'DoctrineConfig' => require(__DIR__ . '/doctrine.config.php')
     ]
 ];
