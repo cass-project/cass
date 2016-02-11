@@ -40,6 +40,10 @@ class AuthMiddleware implements MiddlewareInterface
                     $this->signIn($request, $responseBuilder);
                     break;
 
+                case 'sign-up':
+                    $this->signUp($request, $responseBuilder);
+                    break;
+
                 case 'logout':
                     $this->logOut($request, $responseBuilder);
                     break;
@@ -63,6 +67,29 @@ class AuthMiddleware implements MiddlewareInterface
             $password = $qp['password'];
 
             $this->authService->attemptSignIn($login, $password);
+
+            $responseBuilder->setStatusSuccess();
+        }catch(InvalidCredentialsException $e) {
+            $responseBuilder
+                ->setStatusNotFound()
+                ->setError($e)
+            ;
+        }
+    }
+
+    private function signUp(Request $request, GenericRESTResponseBuilder $responseBuilder){
+        try {
+            $qp = $request->getQueryParams();
+            $login = $qp['login'];
+            $password = $qp['password'];
+            $passwordAgain = $qp['passwordAgain'];
+            if(strcmp($password, $passwordAgain)) {
+                throw new InvalidCredentialsException('Passwords does not match');
+            }
+
+            /*
+             * @todo: saving data
+             */
 
             $responseBuilder->setStatusSuccess();
         }catch(InvalidCredentialsException $e) {
