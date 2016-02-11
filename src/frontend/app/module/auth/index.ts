@@ -5,6 +5,7 @@ import {COMMON_DIRECTIVES} from 'angular2/common';
 import {AuthControlsComponent} from './component/AuthControlsComponent/index';
 import {AuthService, AuthServiceProvider} from './service/AuthService';
 import {SignInComponent} from './component/SignInComponent/index';
+import {SignUpComponent} from './component/SignUpComponent/index';
 import {LogOutComponent} from './component/LogOutComponent/index';
 
 @Component({
@@ -23,6 +24,11 @@ import {LogOutComponent} from './component/LogOutComponent/index';
         name: 'SignIn',
         component: SignInComponent,
         useAsDefault: true
+    },
+    {
+        path: '/sign-up',
+        name: 'SignUp',
+        component: SignUpComponent,
     },
     {
         path: '/logout',
