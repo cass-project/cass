@@ -7,10 +7,10 @@ require('zone.js');
 require('reset-css/reset.css');
 require('./global.head.scss');
 
-import {Component} from 'angular2/core';
+import {Component, provide} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
-import {HTTP_PROVIDERS} from 'angular2/http';
+import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, URLSearchParams} from 'angular2/http';
 
 import {WelcomeComponent} from './module/welcome/index';
 import {SquareComponent} from './module/square/index';
@@ -46,11 +46,19 @@ class App
 {
 }
 
+class OAuthRequestOptions extends BaseRequestOptions {
+    constructor () {
+        super();
+        this.headers.append('My-Custom-Header','MyCustomHeaderValue');
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     bootstrap(
         App, [
         ROUTER_PROVIDERS,
-        HTTP_PROVIDERS
+        HTTP_PROVIDERS,
+        provide(RequestOptions, {useClass: OAuthRequestOptions})
     ]).catch((err) => {
         console.log(err.message);
     });

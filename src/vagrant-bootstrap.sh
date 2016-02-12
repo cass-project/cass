@@ -8,7 +8,7 @@ sudo locale-gen UTF-8
 # ###############
 sudo add-apt-repository ppa:ondrej/php -y
 sudo apt-get update
-sudo apt-get install -y php7.0 php7.0-fpm php7.0-mysql git npm nginx nginx-extras
+sudo apt-get install -y php7.0 php7.0-fpm php7.0-mysql php7.0-curl git npm nginx nginx-extras
 
 # ########
 # PHP7-FPM
