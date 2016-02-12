@@ -1,3 +1,5 @@
+///<reference path="node_modules/angular2/typings/browser.d.ts"/>
+
 import 'es6-shim';
 import 'es6-promise';
 import 'reflect-metadata';
