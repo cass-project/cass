@@ -8,10 +8,10 @@
   "license": "ISC",
   "dependencies": {
     "angular-new-router": "github:angular/router",
-    "angular2": "2.0.0-beta.1",
+    "angular2": "2.0.0-beta.6",
     "css-loader": "0.23.1",
     "es6-promise": "3.0.2",
-    "es6-shim": "0.33.13",
+    "es6-shim": "0.33.3",
     "node-sass": "3.4.2",
     "raw-loader": "0.5.1",
     "reflect-metadata": "0.1.2",
@@ -21,7 +21,8 @@
     "style-loader": "0.13.0",
     "ts-loader": "0.7.2",
     "typescript": "1.7.5",
+    "typings": "^0.6.8",
     "webpack": "1.12.11",
-    "zone.js": "0.5.10"
+    "zone.js": "0.5.14"
   }
 }
