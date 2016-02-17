@@ -7,8 +7,10 @@ use Auth\Service\AuthService;
 use Auth\Service\AuthServiceFactory;
 
 return [
-    'factories' => [
-        AuthService::class => AuthServiceFactory::class,
-        AuthMiddleware::class => AuthMiddlewareFactory::class
+    'zend_service_manager' => [
+        'factories' => [
+            AuthService::class => AuthServiceFactory::class,
+            AuthMiddleware::class => AuthMiddlewareFactory::class
+        ]
     ]
 ];
