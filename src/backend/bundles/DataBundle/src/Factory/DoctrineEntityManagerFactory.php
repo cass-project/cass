@@ -2,6 +2,7 @@
 namespace DataBundle\src\Factory;
 
 use Application\Bootstrap\Bundle\BundleService;
+use Application\Service\SharedConfigService;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
@@ -22,7 +23,9 @@ class DoctrineEntityManagerFactory implements FactoryInterface
             }
         }
 
-        $config = $container->get('DoctrineConfig');
+        /** @var SharedConfigService $sharedConfigService */
+        $sharedConfigService = $container->get(SharedConfigService::class);
+        $config = $sharedConfigService->get('doctrine2');
 
         $doctrineConfig = Setup::createAnnotationMetadataConfiguration($entitySourceDirs, $config['isDevMode']);
 

@@ -1,3 +1,6 @@
+/// <reference path="./../typings/tsd.d.ts" />
+/// <reference path="./../node_modules/angular2/typings/browser.d.ts" />
+
 import 'es6-shim';
 import 'es6-promise';
 import 'reflect-metadata';
@@ -55,7 +58,7 @@ class OAuthRequestOptions extends BaseRequestOptions {
 
 document.addEventListener('DOMContentLoaded', () => {
     bootstrap(
-        App, [
+        <any>App, [
         ROUTER_PROVIDERS,
         HTTP_PROVIDERS,
         provide(RequestOptions, {useClass: OAuthRequestOptions})

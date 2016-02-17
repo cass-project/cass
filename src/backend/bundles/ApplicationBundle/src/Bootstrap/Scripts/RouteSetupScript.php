@@ -14,7 +14,7 @@ class RouteSetupScript
         $prefix = $serviceManager->get('paths')['prefix'];
 
         foreach($bundlesService->getConfigDirs() as $configDir) {
-            $routeConfigFile = sprintf('%s/routes.config.php', $configDir);
+            $routeConfigFile = sprintf('%s/routes.php', $configDir);
 
             if(file_exists($routeConfigFile)) {
                 $callback = require $routeConfigFile;

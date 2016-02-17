@@ -96,6 +96,8 @@ cd /vagrant/frontend
 
 ln -s /usr/bin/nodejs /usr/bin/node
 
+npm install -g tsd webpack
+
 # #######
 # SWAGGER
 # #######
