@@ -79,11 +79,11 @@ class LBApplicationBootstrap
     }
 
     private function initSharedConfigService() {
-        (new SharedConfigServiceSetupScript())->run($this->app, $this->serviceManager);
+        (new SharedConfigServiceSetupScript($this->app, $this->serviceManager))->run();
     }
 
     private function initRoutes() {
-        (new RouteSetupScript())->run($this->app, $this->serviceManager);
+        (new RouteSetupScript($this->app, $this->serviceManager))->run();
     }
 
     public function bootstrap() {

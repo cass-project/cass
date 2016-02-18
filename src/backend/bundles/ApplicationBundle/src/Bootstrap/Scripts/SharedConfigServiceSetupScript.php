@@ -9,30 +9,62 @@ use Zend\ServiceManager\ServiceManager;
 
 class SharedConfigServiceSetupScript
 {
-    public function run(Application $app, ServiceManager $zendServiceManager) {
-        /** @var BundleService $bundlesService */
-        $bundlesService = $zendServiceManager->get(BundleService::class);
+    /**
+     * @var Application
+     */
+    private $app;
+
+    /**
+     * @var ServiceManager
+     */
+    private $zendServiceManager;
+
+    public function __construct(Application $app, ServiceManager $zendServiceManager)
+    {
+        $this->app = $app;
+        $this->zendServiceManager = $zendServiceManager;
+    }
+
+    public function run() {
         $sharedConfigService = new SharedConfigService();
 
-        foreach($bundlesService->getBundles() as $bundle) {
+        $this->mergeBundleConfigs($sharedConfigService);
+        $this->mergeProvideConfig($sharedConfigService);
+
+        $this->zendServiceManager->setService(SharedConfigService::class, $sharedConfigService);
+    }
+
+    private function mergeBundleConfigs(SharedConfigService $sharedConfigService)
+    {
+        /** @var BundleService $bundlesService */
+        $bundlesService = $this->zendServiceManager->get(BundleService::class);
+
+        foreach ($bundlesService->getBundles() as $bundle) {
             $dir = $bundle->getConfigDir();
 
             Chain::create(scandir($dir))
-                ->filter(function($input) use ($dir) {
-                    return is_file($dir.'/'.$input);
+                ->filter(function ($input) use ($dir) {
+                    return is_file($dir . '/' . $input);
                 })
-                ->filter(function($input) use ($dir) {
+                ->filter(function ($input) use ($dir) {
                     return preg_match('/\.config.php$/', $input);
                 })
-                ->map(function($input) use ($dir) {
-                    return require $dir.'/'.$input;
+                ->map(function ($input) use ($dir) {
+                    return require $dir . '/' . $input;
                 })
-                ->reduce(function($carry, $config) use ($sharedConfigService) {
+                ->reduce(function ($carry, $config) use ($sharedConfigService) {
                     $sharedConfigService->merge($config);
-                })
-            ;
+                });
         }
+    }
 
-        $zendServiceManager->setService(SharedConfigService::class, $sharedConfigService);
+    private function mergeProvideConfig(SharedConfigService $sharedConfigService)
+    {
+        $paths = $this->zendServiceManager->get('paths');
+        $provideConfigFileName = sprintf('%s/provide/provide.config.php', $paths['backend']);
+
+        if(file_exists($provideConfigFileName)) {
+            $sharedConfigService->merge(require  $provideConfigFileName);
+        }
     }
 }
