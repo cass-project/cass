@@ -18,6 +18,7 @@ class DoctrineEntityManagerFactory implements FactoryInterface
         $entitySourceDirs = [];
         foreach($bundleService->getBundles() as $bundle ){
             $bundleEntityDir = $bundle->getDir()."/Entity";
+
             if(is_dir($bundleEntityDir)){
                 $entitySourceDirs[] = $bundleEntityDir;
             }

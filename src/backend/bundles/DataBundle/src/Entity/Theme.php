@@ -1,0 +1,36 @@
+<?php
+namespace Data\Entity;
+
+/**
+ * Class Theme
+ * @package Data\Entity
+ * @Entity
+ * @Table(name="theme")
+ */
+class Theme
+{
+    /**
+     * @Id
+     * @GeneratedValue
+     * @Column(type="integer")
+     * @var int
+     */
+    private $id;
+
+    /**
+     * @OneToMany(targetEntity="Data\Entity\Theme", mappedBy="parent")
+     */
+    private $children;
+
+    /**
+     * @ManyToOne(targetEntity="Category", inversedBy="children")
+     * @JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    private $parent;
+
+    /**
+     * @Column(type="string")
+     * @var string
+     */
+    private $title;
+}
