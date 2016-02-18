@@ -1,6 +1,7 @@
 <?php
 namespace Auth\OauthProvider;
 
+use League\OAuth2\Client\Grant\AbstractGrant;
 use \League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
@@ -15,6 +16,10 @@ use Psr\Http\Message\ResponseInterface;
  */
 class Vk extends AbstractProvider
 {
+
+
+	public $user_id;
+
 	public function getBaseAuthorizationUrl(){
 		return 'https://oauth.vk.com/authorize';
 	}
@@ -50,8 +55,14 @@ class Vk extends AbstractProvider
 							 'universities',
 							 'schools',
 							 'verified', ];
-		return "https://api.vk.com/method/users.get?user_id={$token->uid}&fields="
+		return "https://api.vk.com/method/users.get?user_id={$token->getResourceOwnerId()}&fields="
 					 .implode(",", $fields)."&access_token={$token}";
+	}
+
+	protected function createAccessToken(array $response, AbstractGrant $grant)
+	{
+		$response['resource_owner_id'] = $response['user_id'];
+		return new AccessToken($response);
 	}
 
 	protected function getDefaultScopes(){
@@ -59,6 +70,7 @@ class Vk extends AbstractProvider
 	}
 
 	protected function checkResponse(ResponseInterface $response, $data){
+		return parent::checkResponse($response,$data);
 		// TODO: Implement checkResponse() method.
 	}
 

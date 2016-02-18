@@ -240,10 +240,12 @@ class AuthMiddleware implements MiddlewareInterface
                       'code' => $_GET['code']
                     ]);
 
+                    $url = $provider->getResourceOwnerDetailsUrl($accessToken);
 
+                    $res= http_request($url);
 
-                    /*var_dump($accessToken);*/
-                    var_dump($accessToken);
+                    var_dump($res);
+//                    var_dump($accessToken);
                     die();
 
 //                    print_r($accessToken);
