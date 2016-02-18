@@ -22,8 +22,8 @@ sudo service php7.0-fpm restart
 ## #####
 ## NGINX
 ## #####
-rm /etc/nginx/sites-available/default
-ln -s /vagrant/support-files/nginx/default /etc/nginx/sites-available/default
+sudo sh -c "echo \"include /vagrant/support-files/nginx/default;\" > /etc/nginx/sites-available/default"
+sudo sh -c "echo \"service nginx restart\" > /etc/rc.local"
 sudo service nginx restart
 
 # ##########
