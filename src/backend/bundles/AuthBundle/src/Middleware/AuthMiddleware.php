@@ -95,19 +95,10 @@ class AuthMiddleware implements MiddlewareInterface
         }
     }
 
-    private function signUp(Request $request, GenericRESTResponseBuilder $responseBuilder){
+    private function signUp(Request $request, GenericRESTResponseBuilder $responseBuilder)
+    {
         try {
-            $qp = $request->getQueryParams();
-            $login = $qp['login'];
-            $password = $qp['password'];
-            $passwordAgain = $qp['passwordAgain'];
-            if(strcmp($password, $passwordAgain)) {
-                throw new InvalidCredentialsException('Passwords does not match');
-            }
-
-            /*
-             * @todo: saving data
-             */
+            $this->authService->signUp($request->getQueryParams());
 
             $responseBuilder->setStatusSuccess();
         }catch(InvalidCredentialsException $e) {
@@ -123,7 +114,8 @@ class AuthMiddleware implements MiddlewareInterface
 
     }
 
-    private function oauth(Request $request, GenericRESTResponseBuilder $responseBuilder){
+    private function oauth(Request $request, GenericRESTResponseBuilder $responseBuilder)
+    {
         try{
 
             $provider = new \League\OAuth2\Client\Provider\GenericProvider(

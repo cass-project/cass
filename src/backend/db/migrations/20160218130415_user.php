@@ -37,7 +37,8 @@ class User extends AbstractMigration
             ->addColumn('email', 'string')
             ->addColumn('phone', 'integer', ['null' => true])
             ->addColumn('password', 'string', ['limit' => 40])
-            ->addColumn('salt', 'string')
+            ->addIndex(['phone'], ['unique' => true])
+            ->addIndex(['email'], ['unique' => true])
             ->create()
         ;
 
@@ -62,16 +63,15 @@ class User extends AbstractMigration
         $this->insertData();
     }
 
-
     private function insertData(){
         $this->table($this->accountTableName)->insert([
             'email' => 'cass@cass.io',
             'password' => '57f43b6042ed2d842591d3af449ff3e685d1dba1', // 1234
-            'salt' => "o&(iEuh123x@#wdq"
         ])->saveData();
 
         $this->table($this->oauthProviderTableName)->insert([
             ['name' => 'vk'],
+            ['name' => 'facebook'],
             ['name' => 'ok'],
             ['name' => 'mailru'],
             ['name' => 'yandex'],

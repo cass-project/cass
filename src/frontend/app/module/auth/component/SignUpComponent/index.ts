@@ -6,7 +6,8 @@ import {Http, URLSearchParams} from 'angular2/http';
 })
 
 export class SignUpComponent{
-    login:string;
+    email:string;
+    phone:string;
     password:string;
     passwordAgain:string;
 
@@ -14,7 +15,8 @@ export class SignUpComponent{
 
     attemptSignUp(){
         let args = new URLSearchParams();
-        args.set('login', this.login);
+        if(this.email) args.set('email', this.email);
+        if(this.phone) args.set('phone', this.phone);
         args.set('password', this.password);
         args.set('passwordAgain', this.passwordAgain);
 
