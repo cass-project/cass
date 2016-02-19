@@ -18,7 +18,7 @@ return function(Application $app, string $prefix) {
     );
 
     $app->post(
-        sprintf('%s/protected/host-admin/theme-editor/entity/{command:move}/{themeId}/under/{parentThemeId}', $prefix),
+        sprintf('%s/protected/host-admin/theme-editor/entity/{command:move}/{themeId}/under/{parentThemeId}/in-position/{position}', $prefix),
         ThemeEditorCRUDMiddleware::class,
         'theme-editor-move'
     );

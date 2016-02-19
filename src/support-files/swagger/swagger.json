@@ -8,6 +8,10 @@
     {
       "name": "square",
       "description": "Square Service"
+    },
+    {
+      "name": "theme-editor",
+      "description": "Theme Editor Service"
     }
   ],
   "paths": {
@@ -21,7 +25,7 @@
           {
             "name": "input",
             "in": "path",
-            "description": "Число, которое нужно возвести в квадрат",
+            "description": "Число, которое нужно возвести в квадрат\n",
             "required": true,
             "type": "number",
             "format": "integer"
@@ -44,6 +48,51 @@
                 },
                 "result": {
                   "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/backend/api/protected/host-admin/theme-editor/entity/create/": {
+      "put": {
+        "tags": [
+          "theme-editor"
+        ],
+        "description": "Создает новую тематику в текущем хосте\n",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "Название тематики"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfull response\n",
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "success"
+              ],
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "description": "ID созданной темы"
+                },
+                "success": {
+                  "type": "boolean"
                 }
               }
             }
