@@ -4,9 +4,9 @@ namespace ThemeEditor\Middleware;
 use Application\REST\GenericRESTResponseBuilder;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use ThemeEditor\Middleware\Command\Command;
 use ThemeEditor\Middleware\Command\CreateThemeCommand;
 use ThemeEditor\Middleware\Command\DeleteThemeCommand;
+use ThemeEditor\Middleware\Command\MoveThemeCommand;
 use ThemeEditor\Middleware\Command\ReadThemeCommand;
 use ThemeEditor\Middleware\Command\UpdateThemeCommand;
 use ThemeEditor\Middleware\Exception\CommandException;
@@ -66,6 +66,9 @@ class ThemeEditorCRUDMiddleware implements MiddlewareInterface
 
             case 'delete':
                 return new DeleteThemeCommand();
+
+            case 'move':
+                return new MoveThemeCommand();
         }
     }
 }

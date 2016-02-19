@@ -12,10 +12,10 @@ class CreateThemeCommand extends Command
         $parentId = $body['parent_id'] ?? null;
 
         $themeEditorService = $this->getThemeEditorService();
-        $themeEditorService->create($title, $parentId);
+        $theme = $themeEditorService->create($title, $parentId);
 
         return [
-            'title' => $body['title'],
+            'id' => $theme->getId(),
             'success' => true
         ];
     }

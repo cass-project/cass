@@ -25,6 +25,7 @@ class Theme
     /**
      * @ManyToOne(targetEntity="Theme", inversedBy="children")
      * @JoinColumn(name="parent_id", referencedColumnName="id")
+     * @var Theme|null
      */
     private $parent;
 
@@ -34,6 +35,14 @@ class Theme
      */
     private $title;
 
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function setTitle($title): self
     {
         $this->title = $title;
@@ -41,8 +50,30 @@ class Theme
         return $this;
     }
 
+    public function hasParent()
+    {
+        return $this->parent !== null;
+    }
+
+    public function getParent(): Theme
+    {
+        if(!$this->hasParent()) {
+            throw new \Exception('No parent available');
+        }
+
+        return $this->parent;
+    }
+
     public function setParent(Theme $parent = null)
     {
         $this->parent = $parent;
+    }
+
+    public function toJSON()
+    {
+        return [
+            'title' => $this->title,
+            'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null
+        ];
     }
 }
