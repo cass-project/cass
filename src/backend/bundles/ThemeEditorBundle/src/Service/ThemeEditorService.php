@@ -74,7 +74,7 @@ class ThemeEditorService
         $theme = $this->getThemeById($themeId);
 
         $em = $this->entityManager;
-        $em->detach($theme);
+        $em->remove($theme);
         $em->flush($theme);
     }
 
