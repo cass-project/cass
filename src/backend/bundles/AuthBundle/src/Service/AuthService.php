@@ -3,7 +3,6 @@ namespace Auth\Service;
 
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Data\Entity\Account;
-use Data\Repository\AccountRepository;
 use Doctrine\ORM\EntityManager;
 
 class AuthService
@@ -15,14 +14,24 @@ class AuthService
         $this->entityManager = $entityManager;
     }
 
-    public function attemptSignIn($login, $password) {
-        //$this->entityManager->createQuery("");
-        $result = ($login === 'admin' && $password === '1234');
+    public function attemptSignIn($data) {
+        $required = ["login","password"];
+        $data = array_intersect_key($data,array_flip($required));
+        if(count($required)>count($data)) {
+            throw new InvalidCredentialsException('Email or phone and password are required');
+        }
 
-        if($result) {
-            return true;
-        }else{
-            throw new InvalidCredentialsException(sprintf('Fail to sign-in with login `%s`', $login));
+        $account  = $this
+                        ->entityManager
+                        ->getRepository(Account::class)
+                        ->createQueryBuilder('account')
+                        ->where('account.email = :login OR account.phone = :login')
+                        ->setParameter("login", $data['login'])
+                        ->getQuery()
+                        ->getSingleResult();
+
+        if(!$account instanceof Account || !password_verify($data['password'], $account->getPassword())){
+            throw new InvalidCredentialsException(sprintf('Fail to sign-in with login `%s`', $data['login']));
         }
     }
 
@@ -45,8 +54,7 @@ class AuthService
             throw new InvalidCredentialsException("Passwords must be at least 6 characters contain one uppercase letter and digit.");
         }
 
-        $em = $this->entityManager;
-        $accountRepository = $em->getRepository(Account::class);
+        $accountRepository = $this->entityManager->getRepository(Account::class);
 
         if(isset($email) && $accountRepository->findOneBy(["email"=>$email])){
             throw new InvalidCredentialsException(sprintf('Account with email `%s` already exist.', $email));
@@ -64,8 +72,8 @@ class AuthService
             ->setPassword(password_hash($password, PASSWORD_DEFAULT))
         ;
 
-        $em->persist($account);
-        $em->flush();
+        $this->entityManager->persist($account);
+        $this->entityManager->flush();
     }
 
     public function logOut() {

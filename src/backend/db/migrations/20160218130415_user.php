@@ -36,7 +36,7 @@ class User extends AbstractMigration
         $this->table($this->accountTableName)
             ->addColumn('email', 'string')
             ->addColumn('phone', 'integer', ['null' => true])
-            ->addColumn('password', 'string', ['limit' => 40])
+            ->addColumn('password', 'string')
             ->addIndex(['phone'], ['unique' => true])
             ->addIndex(['email'], ['unique' => true])
             ->create()

@@ -80,12 +80,7 @@ class AuthMiddleware implements MiddlewareInterface
     private function signIn(Request $request, GenericRESTResponseBuilder $responseBuilder)
     {
         try {
-            $qp = $request->getQueryParams();
-            $login = $qp['login'];
-            $password = $qp['password'];
-
-            $this->authService->attemptSignIn($login, $password);
-
+            $this->authService->attemptSignIn($request->getQueryParams());
             $responseBuilder->setStatusSuccess();
         }catch(InvalidCredentialsException $e) {
             $responseBuilder
@@ -99,7 +94,6 @@ class AuthMiddleware implements MiddlewareInterface
     {
         try {
             $this->authService->signUp($request->getQueryParams());
-
             $responseBuilder->setStatusSuccess();
         }catch(InvalidCredentialsException $e) {
             $responseBuilder
