@@ -19,14 +19,20 @@ class SharedConfigServiceSetupScript
      */
     private $zendServiceManager;
 
+    /**
+     * @var SharedConfigService
+     */
+    private $sharedConfigService;
+
     public function __construct(Application $app, ServiceManager $zendServiceManager)
     {
         $this->app = $app;
         $this->zendServiceManager = $zendServiceManager;
+        $this->sharedConfigService = new SharedConfigService();
     }
 
     public function run() {
-        $sharedConfigService = new SharedConfigService();
+        $sharedConfigService = $this->sharedConfigService;
 
         $this->mergeBundleConfigs($sharedConfigService);
         $this->mergeProvideConfig($sharedConfigService);
@@ -36,8 +42,10 @@ class SharedConfigServiceSetupScript
 
     private function mergeBundleConfigs(SharedConfigService $sharedConfigService)
     {
+        $sm = $this->zendServiceManager;
+
         /** @var BundleService $bundlesService */
-        $bundlesService = $this->zendServiceManager->get(BundleService::class);
+        $bundlesService = $sm->get(BundleService::class);
 
         foreach ($bundlesService->getBundles() as $bundle) {
             $dir = $bundle->getConfigDir();
@@ -56,15 +64,26 @@ class SharedConfigServiceSetupScript
                     $sharedConfigService->merge($config);
                 });
         }
+
+        $sm->setService('ApplicationOnlyConfig', $sharedConfigService->all());
     }
 
     private function mergeProvideConfig(SharedConfigService $sharedConfigService)
     {
-        $paths = $this->zendServiceManager->get('paths');
+        $sm = $this->zendServiceManager;
+        $paths = $sm->get('paths');
         $provideConfigFileName = sprintf('%s/provide/provide.config.php', $paths['backend']);
 
         if(file_exists($provideConfigFileName)) {
-            $sharedConfigService->merge(require  $provideConfigFileName);
+            $provideConfig = require  $provideConfigFileName;
+            $isDevelopment = isset($provideConfig['development']) && $provideConfig['development'];
+
+            if($isDevelopment) {
+                $sm->setService('DevelopmentApplicationConfig', $sharedConfigService->all());
+                $sm->setService('DevelopmentProvideConfig', $provideConfig);
+            }
+
+            $sharedConfigService->merge($provideConfig);
         }
     }
 }

@@ -1,4 +1,8 @@
 <?php
 return [
-    'development' => true
+    'zend_service_manager' => [
+        'services' => [
+            'development' => true
+        ]
+    ]
 ];
