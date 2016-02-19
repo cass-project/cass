@@ -5,7 +5,8 @@
       "Square\\": "bundles/SquareBundle/src",
       "Auth\\": "bundles/AuthBundle/src",
       "Data\\": "bundles/DataBundle/src",
-      "ThemeEditor\\": "bundles/ThemeEditorBundle/src"
+      "ThemeEditor\\": "bundles/ThemeEditorBundle/src",
+      "Development\\": "bundles/DevelopmentBundle/src"
     }
   },
   "require": {
