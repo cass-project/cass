@@ -20,8 +20,15 @@ class ThemeEditorService
         $this->entityManager = $entityManager;
     }
 
-    public function create(Theme $theme) {
+    public function create($title, $parentId = null) {
         $em = $this->entityManager;
+
+        $theme = new Theme();
+        $theme->setTitle($title);
+
+        if($parentId) {
+            $theme->setParent($em->getReference(Theme::class, $parentId));
+        }
 
         $em->persist($theme);
         $em->flush($theme);
@@ -29,7 +36,6 @@ class ThemeEditorService
 
     public function update(Theme $theme) {
         $em = $this->entityManager;
-
         $em->persist($theme);
         $em->flush($theme);
     }

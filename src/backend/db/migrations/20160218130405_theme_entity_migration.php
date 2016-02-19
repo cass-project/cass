@@ -7,9 +7,12 @@ class ThemeEntityMigration extends AbstractMigration
     public function change()
     {
         $this->table('theme')
-            ->addColumn('parent_id', 'integer')
+            ->addColumn('parent_id', 'integer', [
+                'null' => true
+            ])
             ->addColumn('title', 'string')
             ->addForeignKey('parent_id', 'theme', 'id')
+            ->create()
         ;
     }
 }

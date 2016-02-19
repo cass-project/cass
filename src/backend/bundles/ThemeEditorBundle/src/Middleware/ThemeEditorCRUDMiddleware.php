@@ -9,6 +9,7 @@ use ThemeEditor\Middleware\Command\CreateThemeCommand;
 use ThemeEditor\Middleware\Command\DeleteThemeCommand;
 use ThemeEditor\Middleware\Command\ReadThemeCommand;
 use ThemeEditor\Middleware\Command\UpdateThemeCommand;
+use ThemeEditor\Middleware\Exception\CommandException;
 use ThemeEditor\Service\ThemeEditorService;
 use Zend\Stratigility\MiddlewareInterface;
 
@@ -26,23 +27,26 @@ class ThemeEditorCRUDMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $command = $this->commandFactory($request);
-        $result = $command->run();
-
         $responseBuilder = new GenericRESTResponseBuilder($response);
-        $responseBuilder
-            ->setStatusSuccess()
-            ->setJson($result)
-        ;
+
+        try {
+            $command = $this->commandFactory($request);
+            $command->setThemeEditorService($this->themeEditorService);
+
+            $responseBuilder
+                ->setStatusSuccess()
+                ->setJson($command->run($request))
+            ;
+        }catch(CommandException $e){
+            $responseBuilder
+                ->setStatusBadRequest()
+                ->setError($e)
+            ;
+        }
 
         return $responseBuilder->build();
     }
 
-    /**
-     * @param Request $request
-     * @return Command
-     * @throws \Exception
-     */
     private function commandFactory(Request $request)
     {
         $command = $request->getAttribute('command');
@@ -52,16 +56,16 @@ class ThemeEditorCRUDMiddleware implements MiddlewareInterface
                 throw new \Exception(sprintf('Command `%s` not found', $command));
 
             case 'read':
-                return new ReadThemeCommand($request);
+                return new ReadThemeCommand();
 
             case 'create':
-                return new CreateThemeCommand($request);
+                return new CreateThemeCommand();
 
             case 'update':
-                return new UpdateThemeCommand($request);
+                return new UpdateThemeCommand();
 
             case 'delete':
-                return new DeleteThemeCommand($request);
+                return new DeleteThemeCommand();
         }
     }
 }

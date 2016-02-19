@@ -1,7 +1,7 @@
 <?php
 namespace Data;
 
-use DataBundle\src\Factory\DoctrineEntityManagerFactory;
+use Data\Factory\DoctrineEntityManagerFactory;
 use Doctrine\ORM\EntityManager;
 
 return [

@@ -3,18 +3,33 @@ namespace ThemeEditor\Middleware\Command;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use ThemeEditor\Service\ThemeEditorService;
 
 abstract class Command
 {
     /**
-     * @var RequestInterface
+     * @var ThemeEditorService
      */
-    private $request;
+    private $themeEditorService;
 
-    public function __construct(RequestInterface $request)
+    /**
+     * @param ThemeEditorService $themeEditorService
+     */
+    public function setThemeEditorService($themeEditorService)
     {
-        $this->request = $request;
+        $this->themeEditorService = $themeEditorService;
     }
 
-    abstract public function run();
+    protected function getThemeEditorService()
+    {
+        if($this->themeEditorService === null) {
+            throw new \Exception('No theme editor service available');
+        }
+
+        return $this->themeEditorService;
+    }
+
+
+
+    abstract public function run(RequestInterface $request);
 }
