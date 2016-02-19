@@ -7,14 +7,33 @@ use Zend\ServiceManager\ServiceManager;
 
 class RouteSetupScript
 {
-    public function run(Application $app, ServiceManager $serviceManager)
+    /**
+     * @var Application
+     */
+    private $app;
+
+    /**
+     * @var ServiceManager
+     */
+    private $zendServiceManager;
+
+    public function __construct(Application $app, ServiceManager $zendServiceManager)
     {
+        $this->app = $app;
+        $this->zendServiceManager = $zendServiceManager;
+    }
+
+    public function run()
+    {
+        $app = $this->app;
+        $serviceManager = $this->zendServiceManager;
+
         /** @var BundleService $bundlesService */
         $bundlesService = $serviceManager->get(BundleService::class);
         $prefix = $serviceManager->get('paths')['prefix'];
 
         foreach($bundlesService->getConfigDirs() as $configDir) {
-            $routeConfigFile = sprintf('%s/routes.config.php', $configDir);
+            $routeConfigFile = sprintf('%s/routes.php', $configDir);
 
             if(file_exists($routeConfigFile)) {
                 $callback = require $routeConfigFile;

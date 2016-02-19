@@ -139,7 +139,7 @@ class AuthMiddleware implements MiddlewareInterface
               ]
             );
 
-            // If we don't have an authorization code then get one
+// If we don't have an authorization code then get one
             if (!isset($_GET['code'])) {
 
                 // Fetch the authorization URL from the provider; this returns the
@@ -154,13 +154,14 @@ class AuthMiddleware implements MiddlewareInterface
                 header('Location: ' . $authorizationUrl);
                 exit;
 
-                // Check given state against previously stored one to mitigate CSRF attack
+// Check given state against previously stored one to mitigate CSRF attack
             } elseif (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
 
                 unset($_SESSION['oauth2state']);
                 exit('Invalid state');
 
             } else {
+
                 try {
 
                     // Try to get an access token using the authorization code grant.

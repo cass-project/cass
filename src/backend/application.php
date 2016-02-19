@@ -2,6 +2,9 @@
 require __DIR__.'/vendor/autoload.php';
 
 use Application\Bootstrap\Bundle\Bundle;
+use Application\Bootstrap\Scripts\RouteSetupScript;
+use Application\Bootstrap\Scripts\SharedConfigServiceSetupScript;
+use Application\Service\SharedConfigService;
 use Zend\Expressive\AppFactory;
 
 class LBApplicationBootstrap
@@ -67,11 +70,20 @@ class LBApplicationBootstrap
     }
 
     private function initContainer() {
-        (new \Application\Bootstrap\Scripts\ContainerSetupScript())->run($this->app, $this->serviceManager);
+        /** @var SharedConfigService $sharedConfigService */
+        $sharedConfigService = $this->serviceManager->get(SharedConfigService::class);
+
+        $this->serviceManager->configure(
+            $sharedConfigService->get('zend_service_manager')
+        );
+    }
+
+    private function initSharedConfigService() {
+        (new SharedConfigServiceSetupScript($this->app, $this->serviceManager))->run();
     }
 
     private function initRoutes() {
-        (new \Application\Bootstrap\Scripts\RouteSetupScript())->run($this->app, $this->serviceManager);
+        (new RouteSetupScript($this->app, $this->serviceManager))->run();
     }
 
     public function bootstrap() {
@@ -82,6 +94,7 @@ class LBApplicationBootstrap
 
         $this->initConstants();
         $this->initBundles();
+        $this->initSharedConfigService();
         $this->initContainer();
         $this->initRoutes();
 

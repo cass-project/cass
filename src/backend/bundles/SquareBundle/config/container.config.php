@@ -5,8 +5,10 @@ use Square\Service\Square\SquareService;
 use Square\Service\Square\SquareServiceFactory;
 
 return [
-    'factories' => [
-        SquareService::class => SquareServiceFactory::class,
-        CalculateSquareMiddleware::class => CalculateSquareMiddlewareFactory::class
+    'zend_service_manager' => [
+        'factories' => [
+            SquareService::class => SquareServiceFactory::class,
+            CalculateSquareMiddleware::class => CalculateSquareMiddlewareFactory::class
+        ]
     ]
 ];

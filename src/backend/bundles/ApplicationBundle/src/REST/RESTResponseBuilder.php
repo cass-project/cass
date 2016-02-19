@@ -66,12 +66,11 @@ abstract class RESTResponseBuilder
         $this->checkRequirements();
 
         $this->response->getBody()->write(json_encode($this->makeJSONResponse()));
-        $this->response
+
+        return $this->response
             ->withStatus($this->status)
             ->withHeader('Content-Type', 'application/json')
         ;
-
-        return $this->response;
     }
 
     public function checkRequirements()
