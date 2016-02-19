@@ -1,5 +1,5 @@
 <?php
-namespace DataBundle\src\Factory;
+namespace Data\Factory;
 
 use Application\Bootstrap\Bundle\BundleService;
 use Doctrine\ORM\Tools\Setup;

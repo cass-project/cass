@@ -9,6 +9,6 @@ use Auth\Service\AuthServiceFactory;
 return [
     'factories' => [
         AuthService::class => AuthServiceFactory::class,
-        AuthMiddleware::class => AuthMiddlewareFactory::class
+        AuthMiddleware::class => AuthMiddlewareFactory::class,
     ]
 ];
