@@ -1,9 +1,8 @@
 <?php
 namespace ThemeEditor\Middleware\Command;
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use ThemeEditor\Service\ThemeEditorService;
+use Psr\Http\Message\ServerRequestInterface;
 
 abstract class Command
 {
@@ -29,7 +28,5 @@ abstract class Command
         return $this->themeEditorService;
     }
 
-
-
-    abstract public function run(RequestInterface $request);
+    abstract public function run(ServerRequestInterface $request);
 }

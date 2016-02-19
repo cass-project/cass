@@ -1,11 +1,11 @@
 <?php
 namespace ThemeEditor\Middleware\Command;
 
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class CreateThemeCommand extends Command
 {
-    public function run(RequestInterface $request)
+    public function run(ServerRequestInterface $request)
     {
         $body = json_decode($request->getBody(), true);
         $title = $body['title'];

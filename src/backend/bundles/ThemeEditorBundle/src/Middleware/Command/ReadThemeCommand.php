@@ -1,11 +1,11 @@
 <?php
 namespace ThemeEditor\Middleware\Command;
 
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class ReadThemeCommand extends Command
 {
-    public function run(RequestInterface $request)
+    public function run(ServerRequestInterface $request)
     {
         $themeEditorService = $this->getThemeEditorService();
         $entities = $themeEditorService->read();
@@ -16,5 +16,4 @@ class ReadThemeCommand extends Command
             'success' => true
         ];
     }
-
 }

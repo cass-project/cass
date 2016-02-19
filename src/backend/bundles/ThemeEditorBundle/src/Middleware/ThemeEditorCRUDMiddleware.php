@@ -44,7 +44,9 @@ class ThemeEditorCRUDMiddleware implements MiddlewareInterface
             ;
         }
 
-        return $responseBuilder->build();
+        return $responseBuilder
+            ->build()
+        ;
     }
 
     private function commandFactory(Request $request)
