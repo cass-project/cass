@@ -2,7 +2,7 @@
 namespace Auth\Middleware;
 
 use Application\REST\GenericRESTResponseBuilder;
-use Application\REST\UnknownActionException;
+use Application\REST\Exceptions\UnknownActionException;
 use Auth\OauthProvider\Vk;
 use Auth\Service\AuthService;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
@@ -36,7 +36,7 @@ class AuthMiddleware implements MiddlewareInterface
 
             switch($action) {
                 default:
-                    throw new UnknownActionException(sprintf('Unknown exception `%s`', $action));
+                    throw new UnknownActionException(sprintf('Unknown action `%s`', $action));
 
                 case 'sign-in':
                     $this->signIn($request, $responseBuilder);

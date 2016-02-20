@@ -1,4 +1,4 @@
 <?php
-namespace Application\REST;
+namespace Application\REST\Exceptions;
 
 class UnknownActionException extends \Exception {}
