@@ -45,7 +45,9 @@ class ThemeEditorService
         return Chain::create($themeRepository->findBy($criteria))
             ->map(function(Theme $theme) {
                 return $theme->toJSON();
-            });
+            })
+            ->array
+        ;
     }
 
     public function update($themeId, $title) {

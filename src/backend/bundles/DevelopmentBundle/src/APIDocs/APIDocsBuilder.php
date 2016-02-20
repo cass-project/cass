@@ -95,7 +95,7 @@ class APIDocsBuilder
                     $files = array_merge($files, $this->recursiveListYAMLFiles($subDirectory));
                     break;
 
-                case is_file($file = "{$directory}/{$input}"):
+                case is_file(($file = "{$directory}/{$input}")) && preg_match('/\.yml$/', $file):
                     $files[] = $file;
                     break;
             }
