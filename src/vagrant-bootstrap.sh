@@ -116,3 +116,10 @@ rm index.html
 ln -s /vagrant/support-files/swagger/index.html /swagger/swagger-ui/dist/index.html
 ln -s /vagrant/support-files/swagger/style.css /swagger/swagger-ui/dist/style.css
 ln -s /vagrant/support-files/swagger/swagger.json /swagger/swagger-ui/dist/swagger.json
+
+########
+# UPDATE
+########
+
+ln -s /vagrant/support-files/bin/fix-everything.sh /usr/bin/fix-everything.sh
+chmod a+x /usr/bin/fix-everything.sh
