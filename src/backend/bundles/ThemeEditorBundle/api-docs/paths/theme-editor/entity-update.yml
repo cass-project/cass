@@ -1,0 +1,54 @@
+'/backend/api/protected/host-admin/theme-editor/entity/update/{themeId}':
+  post:
+    tags:
+      - theme-editor
+    description: |
+      Обновляет данные о тематике
+    parameters:
+      - name: themeId
+        in: path
+        required: true
+        type: number
+        description: |
+          ID тематики
+
+      - name: body
+        in: body
+        required: true
+        description: JSON Request
+        schema:
+          type: object
+          properties:
+            title:
+              type: string
+              description: Название темы
+            parent_id:
+              type: number
+              description: ID родительской тематики
+    responses:
+      '200':
+        description: |
+          Succesful response
+        schema:
+          type: object
+          required:
+            - success
+          properties:
+            success:
+              type: boolean
+              description: "= true"
+      '404':
+        description: |
+          Тематика не найдена
+        schema:
+          type: object
+          required:
+            - success
+            - error
+          properties:
+            success:
+              type: boolean
+              description: "= false"
+            error:
+              type: string
+              description: Сообщение об ошибке

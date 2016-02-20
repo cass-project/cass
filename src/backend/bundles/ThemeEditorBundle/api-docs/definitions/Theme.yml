@@ -1,0 +1,16 @@
+Theme:
+  type: object
+  required:
+    - id
+    - parent_id
+    - title
+  properties:
+    id:
+      type: number
+      description: ID
+    parent_id:
+      type: number
+      description: ID родительской тематики
+    title:
+      type: string
+      description: Название

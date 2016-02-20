@@ -7,7 +7,7 @@ composer.phar dump-autoload
 
 # update frontend
 cd /vagrant/frontend
-npm install
+npm install --no-bin-link
 tsd install
 
 # restart services
