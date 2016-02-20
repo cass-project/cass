@@ -1,0 +1,5 @@
+<input #newTheme
+       (keyup.enter)="addTheme(newTheme.value)"
+       (blur)="addTheme(newTheme.value); newTheme.value='' ">
+<button (click)=addTheme(newTheme.value)>Add</button>
+  <ul><li *ngFor="#theme of themes">{{themes}}</li></ul>
