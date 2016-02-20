@@ -4,100 +4,127 @@ namespace Auth\Service;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Data\Entity\Account;
 use Doctrine\ORM\EntityManager;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthService
 {
     private $entityManager;
-    private $account_token;
 
     public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->account_token = isset($_COOKIE['account_token']) ? $_COOKIE['account_token'] : false;
     }
 
-    public function attemptSignIn($data)
+    public function attemptSignIn(Request $request) : Account
     {
-        if(!$this->account_token && (empty($data['login']) || empty($data['password']))) {
-            throw new InvalidCredentialsException('Email or phone and password are required');
+        $request = $request->getQueryParams();
+
+        if(isset($request['login']) || isset($request['password'])) {
+            $this->removeToken();
+
+            if(!isset($request['login'], $request['password'])) {
+                throw new InvalidCredentialsException('Email or phone and password are required');
+            }
         }
 
-        if($this->account_token && empty($data['login'])){
-            $data['login'] = $this->account_token;
-        }
         /** @var Account $account */
         $account  = $this->entityManager
                         ->getRepository(Account::class)
-                        ->createQueryBuilder('account')
-                            ->where('account.email = :login OR account.phone = :login OR account.token = :login')
-                                ->setParameter("login", $data['login'])
+                        ->createQueryBuilder('a')
+                            ->where('a.email = :login OR a.phone = :login OR a.token = :token')
+                                ->setParameter("login", $request['login'] ?? null)
+                                ->setParameter("token", $this->getToken())
                         ->getQuery()->getSingleResult();
 
         if(!$this->validateAccountToken($account)) {
-            if($this->validateAccountPassword($account,$data['password'])) {
-                $account
-                    ->setToken()
-                    ->setTokenExpired(strtotime("+7 days"));
-
-                $this->entityManager->persist($account);
-                $this->entityManager->flush();
+            if(isset($request['password']) && $this->validateAccountPassword($account, $request['password'])) {
+                $account->setToken();
             } else {
-                throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $data['login']));
+                throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $request['login']));
             }
         }
-        setcookie('account_token', $account->getToken(), $account->getTokenExpired());
+
+        $account->setTokenExpired(strtotime("+1 hour"));
+        $this->setToken($account->getToken());
+        $this->entityManager->persist($account);
+        $this->entityManager->flush();
+
+        return $account;
     }
 
-    private function validateAccountToken(Account $account) : bool{
-        return $this->account_token && $this->account_token == $account->getToken() && time() < $account->getTokenExpired();
-    }
-
-    private function validateAccountPassword(Account $account, $password) : bool{
-        return password_verify($password, $account->getPassword());
-    }
-
-    public function signUp($data)
+    public function signUp(Request $request, bool $signInAfter = true) : Account
     {
-        if(empty($data['email']) && empty($data['phone']) || empty($data['password'])) {
+        $request = $request->getQueryParams();
+
+        if(empty($request['email']) && empty($request['phone']) || empty($request['password'])) {
             throw new InvalidCredentialsException('Email or phone and password are required');
         }
 
-        if(isset($data['email']) && false === filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        if(isset($request['email']) && false === filter_var($request['email'], FILTER_VALIDATE_EMAIL)) {
             throw new InvalidCredentialsException("Invalid email format");
         }
 
-        if(strcmp($data['password'], $data['passwordAgain'])){
+        if(empty($request['passwordAgain']) || strcmp($request['password'], $request['passwordAgain'])) {
             throw new InvalidCredentialsException("Passwords does not match");
         }
 
-        if(preg_match("~((?=.*[a-z])(?=.*\d)(?=.*[A-Z]).{6,})~", $data['password'])==0){
+        if(preg_match("~((?=.*[a-z])(?=.*\d)(?=.*[A-Z]).{6,})~", $request['password'])==0) {
             throw new InvalidCredentialsException("Passwords must be at least 6 characters contain one uppercase letter and digit.");
         }
 
-        $accountRepository = $this->entityManager->getRepository(Account::class);
+        $sameAccounts = $this->entityManager->getRepository(Account::class)->createQueryBuilder('a')
+            ->where('a.email = :login OR a.phone = :login')
+                ->setParameter("login", $request['email'] ?? $request['phone'])->getQuery()->getResult();
 
-        if(isset($data['email']) && $accountRepository->findOneBy(["email"=>$data['email']])){
-            throw new InvalidCredentialsException(sprintf('Account with email `%s` already exist.', $data['email']));
+        if(count($sameAccounts)>0) {
+            throw new InvalidCredentialsException(sprintf('%s already in use.', $request['email'] ?? $request['phone']));
         }
 
-        if(isset($data['phone']) && $accountRepository->findOneBy(["phone"=>$data['phone']])){
-            throw new InvalidCredentialsException(sprintf('Account with phone `%s` already exist.', $data['phone']));
-        }
-
-        $account = new Account();
-        $account
-            ->setEmail(isset($data['email'])?$data['email']:null)
-            ->setPhone(isset($data['phone'])?$data['phone']:null)
-            ->setPassword(password_hash($data['password'], PASSWORD_DEFAULT))
+        $account = (new Account())
+            ->setEmail($request['email'] ?? null)
+            ->setPhone($request['phone'] ?? null)
+            ->setPassword(password_hash($request['password'], PASSWORD_DEFAULT))
             ->setToken()
+            ->setTokenExpired(strtotime("+1 hour"));
         ;
 
         $this->entityManager->persist($account);
         $this->entityManager->flush();
+
+        if($signInAfter) {
+            $this->setToken($account->getToken());
+        }
+        return $account;
     }
 
-    public function logOut()
+    public function signOut()
     {
-        return true;
+        $this->removeToken();
     }
+
+    private function setToken($token)
+    {
+        $_SESSION['account_token'] = $token;
+    }
+
+    private function getToken()
+    {
+        return $_SESSION['account_token'] ?? null;
+    }
+
+    private function removeToken()
+    {
+        unset($_SESSION['account_token']);
+    }
+
+    private function validateAccountToken(Account $account) : bool
+    {
+        return $this->getToken() && $this->getToken() == $account->getToken() && time() < $account->getTokenExpired();
+    }
+
+    private function validateAccountPassword(Account $account, $password) : bool
+    {
+        return password_verify($password, $account->getPassword());
+    }
+
 }

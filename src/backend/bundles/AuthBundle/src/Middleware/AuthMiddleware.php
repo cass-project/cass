@@ -6,7 +6,6 @@ use Application\REST\Exceptions\UnknownActionException;
 use Auth\OauthProvider\Vk;
 use Auth\Service\AuthService;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
-use Doctrine\ORM\NoResultException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
@@ -81,7 +80,7 @@ class AuthMiddleware implements MiddlewareInterface
     private function signIn(Request $request, GenericRESTResponseBuilder $responseBuilder)
     {
         try {
-            $this->authService->attemptSignIn($request->getQueryParams());
+            $this->authService->attemptSignIn($request);
             $responseBuilder->setStatusSuccess();
         }catch(\Exception $e) {
             $responseBuilder
@@ -94,7 +93,7 @@ class AuthMiddleware implements MiddlewareInterface
     private function signUp(Request $request, GenericRESTResponseBuilder $responseBuilder)
     {
         try {
-            $this->authService->signUp($request->getQueryParams());
+            $this->authService->signUp($request);
             $responseBuilder->setStatusSuccess();
         }catch(InvalidCredentialsException $e) {
             $responseBuilder
