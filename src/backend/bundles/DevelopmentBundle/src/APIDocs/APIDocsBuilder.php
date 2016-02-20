@@ -29,52 +29,63 @@ class APIDocsBuilder
                 return is_dir($directory);
             })
             ->map(function /* list files to merge */ ($directory) {
-                $files = [
-                    'merge' => [],
-                    'paths' => [],
-                    'definitions' => []
-                ];
+                $definitions = Chain::create(scandir($directory))
+                    ->filter(function($input) use ($directory) {
+                        return $input !== '.' && $input !== '..' && is_dir("{$directory}/{$input}");
+                    })
+                    ->map(function($prefix) use ($directory) {
+                        $subDirectory = "{$directory}/{$prefix}";
+
+                        return [
+                            'prefix' => $prefix,
+                            'files' => $this->recursiveListYAMLFiles($subDirectory)
+                        ];
+                    })
+                    ->array
+                ;
 
                 if(file_exists($globalFile = "{$directory}/global.yml")) {
-                    $files['merge'][] = $globalFile;
+                    $definitions[] = [
+                        'prefix' => null,
+                        'files' => [
+                            $globalFile
+                        ]
+                    ];
                 }
 
-                $pathsDir = "{$directory}/paths";
-                $definitionsDir = "{$directory}/definitions";
-
-                if(is_dir($pathsDir)) {
-                    $files['paths'] = $this->recursiveListYAMLFiles($pathsDir);
-                }
-
-                if(is_dir($definitionsDir)) {
-                    $files['definitions'] = $this->recursiveListYAMLFiles($pathsDir);
-                }
-
-                return $files;
+                return $definitions;
             })
-            ->map(function /* read yml files to arrays */ ($files) {
-                $ymlParsed = [];
+            ->map(function /* read yml files to arrays */ ($definitions) {
+                $config = [];
 
-                foreach($files['merge'] as $file) {
-                    $ymlParsed[] = Yaml::parse(file_get_contents($file));
-                }
+                foreach($definitions as $definition) {
+                    $prefix = $definition['prefix'];
+                    $files = $definition['files'];
 
-                foreach($files['paths'] as $file) {
-                    $ymlParsed[] = ['paths' => Yaml::parse(file_get_contents($file))];
-                }
+                    $ymlParsedFiles = Chain::create($files)
+                        ->map(function($file) {
+                            return Yaml::parse(file_get_contents($file));
+                        })
+                        ->reduce(function($carry, $item) {
+                            return array_merge_recursive($carry, $item);
+                        }, [])
+                    ;
 
-                foreach($files['definitions'] as $file) {
-                    $ymlParsed[] = ['definitions' =>  Yaml::parse(file_get_contents($file))];
-                }
+                    if($prefix === null) {
+                        $config = $config + $ymlParsedFiles;
+                    }else{
+                        if(!(isset($config[$prefix]))) {
+                            $config[$prefix] = [];
+                        }
 
-                return $ymlParsed;
-            })
-            ->reduce(function /* merge all bundle configs into swagger.json */ ($config, $yml) {
-                foreach($yml as $ymlConfig) {
-                    $config = array_merge_recursive($config, $ymlConfig);
+                        $config = array_merge_recursive($config, [$prefix => $ymlParsedFiles]);
+                    }
                 }
 
                 return $config;
+            })
+            ->reduce(function /* merge all bundle configs into swagger.json */ ($config, $yml) {
+                return array_merge_recursive($config, $yml);
             }, [
                 'paths' => [],
                 'definitions' => []
