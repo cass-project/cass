@@ -11,7 +11,7 @@ import {AuthService, AuthServiceProvider} from './../../service/AuthService';
 })
 
 
-export class LoginFormComponent{
+export class LoginFormComponent {
     login:string;
     password:string;
     authService:AuthService;
@@ -21,6 +21,6 @@ export class LoginFormComponent{
     }
 
     attemptSignIn(){
-        var isSigned:boolean = this.authService.attemptSignIn(this.login,this.password);
+        this.authService.attemptSignIn(this.login,this.password);
     }
 }

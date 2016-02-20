@@ -7,11 +7,6 @@ export class AuthServiceProvider
     static instance:AuthService;
 
     constructor(private http: Http) {
-        let credentials = {
-            login: 'admin',
-            password: '1234'
-        };
-
         if(AuthServiceProvider.instance == null) {
             AuthServiceProvider.instance = new AuthService(http);
         }
@@ -26,33 +21,25 @@ export class AuthServiceProvider
 @Injectable()
 export class AuthService {
     isAuthenticated:boolean = false;
+    isAuthenticating:boolean = false;
+    success;
 
-    constructor(private http: Http) {}
+    constructor(private http: Http) {
+
+    }
 
     attemptSignIn(login:string, password:string) {
-        let credentials = {
-            login: login,
-            password: password
-        };
-
         let args = new URLSearchParams();
         args.set('login', login);
-        args.set('password', password)
-
-        console.log(credentials);
-
-        this.http.get('/backend/api/auth/sign-in', {
-            search: args
-        })
+        args.set('password', password);
+        this.isAuthenticating = true;
+        this.http.get('/backend/api/auth/sign-in', {search: args})
             .map(res => res.json())
             .subscribe(
-                data => console.log,
-                err => console.log);
-
-
-        this.isAuthenticated = !!(login == 'admin' && password == '1234');
-
-        return this.isAuthenticated;
+                data => this.isAuthenticated = true,
+                err => this.isAuthenticating = this.isAuthenticated = false,
+                () => this.isAuthenticating = false
+            );
     }
 
     logOut(){

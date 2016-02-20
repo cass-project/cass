@@ -1,5 +1,8 @@
-<form (ngSubmit)="attemptSignIn()">
-  <div>Login: <input [(ngModel)]="login" type="text" /></div>
-  <div>Password: <input [(ngModel)]="password" type="password" /></div>
-  <input type="submit" />
-</form>
+<div>
+  <form *ngIf="!authService.isAuthenticated && !authService.authProcess" (ngSubmit)="attemptSignIn()">
+    <div>Login: <input [(ngModel)]="login" type="text" /></div>
+    <div>Password: <input [(ngModel)]="password" type="password" /></div>
+    <input type="submit" />
+  </form>
+  <div *ngIf="authService.authProcess">Authorizing....</div>
+</div>

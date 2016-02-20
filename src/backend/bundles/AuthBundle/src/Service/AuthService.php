@@ -4,6 +4,7 @@ namespace Auth\Service;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Data\Entity\Account;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\NoResultException;
 
 class AuthService
 {
@@ -21,16 +22,19 @@ class AuthService
             throw new InvalidCredentialsException('Email or phone and password are required');
         }
 
-        $account  = $this
-                        ->entityManager
+        try{
+            $account  = $this->entityManager
                         ->getRepository(Account::class)
                         ->createQueryBuilder('account')
                         ->where('account.email = :login OR account.phone = :login')
                         ->setParameter("login", $data['login'])
                         ->getQuery()
                         ->getSingleResult();
+        }catch(NoResultException $e){
+            throw new InvalidCredentialsException(sprintf('Fail to sign-in with login `%s`', $data['login']));
+        }
 
-        if(!$account instanceof Account || !password_verify($data['password'], $account->getPassword())){
+        if(!password_verify($data['password'], $account->getPassword())){
             throw new InvalidCredentialsException(sprintf('Fail to sign-in with login `%s`', $data['login']));
         }
     }
