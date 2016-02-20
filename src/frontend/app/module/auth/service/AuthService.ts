@@ -21,8 +21,7 @@ export class AuthServiceProvider
 @Injectable()
 export class AuthService {
     isAuthenticated:boolean = false;
-    isAuthenticating:boolean = false;
-    success;
+    isLoading:boolean = false;
 
     constructor(private http: Http) {
 
@@ -32,14 +31,32 @@ export class AuthService {
         let args = new URLSearchParams();
         args.set('login', login);
         args.set('password', password);
-        this.isAuthenticating = true;
+        this.isLoading = true;
         this.http.get('/backend/api/auth/sign-in', {search: args})
             .map(res => res.json())
             .subscribe(
                 data => this.isAuthenticated = true,
-                err => this.isAuthenticating = this.isAuthenticated = false,
-                () => this.isAuthenticating = false
+                err => this.isLoading = this.isAuthenticated = false,
+                () => this.isLoading = false
             );
+    }
+
+    attemptSignUp(email:string, phone:string, password:string, passwordAgain:string){
+        let args = new URLSearchParams();
+        if(email) args.set('email', email);
+        if(phone) args.set('phone', phone);
+        args.set('password', password);
+        args.set('passwordAgain', passwordAgain);
+
+        this.isLoading = true;
+        this.http.get('/backend/api/auth/sign-up', {search: args})
+            .map(res => res.json())
+            .subscribe(
+                data => this.isAuthenticated = true,
+                err => this.isLoading = this.isAuthenticated = false,
+                () => this.isLoading = false
+            );
+
     }
 
     logOut(){

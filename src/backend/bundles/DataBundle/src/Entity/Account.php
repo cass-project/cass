@@ -35,6 +35,18 @@ class Account
      */
     private $password;
 
+    /**
+     * @Column(type="string")
+     * @var string
+     */
+    private $token;
+
+    /**
+     * @Column(type="string")
+     * @var string
+     */
+    private $tokenExpired;
+
     public function getId()
     {
         return $this->id;
@@ -70,6 +82,28 @@ class Account
     public function setEmail($email)
     {
         $this->email = $email;
+        return $this;
+    }
+
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    public function setToken($token=null)
+    {
+        $this->token = $token===null?bin2hex(random_bytes(30)):$token;
+        return $this;
+    }
+
+    public function getTokenExpired()
+    {
+        return $this->tokenExpired;
+    }
+
+    public function setTokenExpired(int $tokenExpired)
+    {
+        $this->tokenExpired = $tokenExpired;
         return $this;
     }
 }

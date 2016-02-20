@@ -1,8 +1,8 @@
 import {Component} from 'angular2/core';
-import {Http, URLSearchParams} from 'angular2/http';
+import {AuthService, AuthServiceProvider} from './../../service/AuthService';
 
 @Component({
-    template: require('./template.html')
+    template: require('./template.html'),
 })
 
 export class SignUpComponent{
@@ -10,24 +10,15 @@ export class SignUpComponent{
     phone:string;
     password:string;
     passwordAgain:string;
+    authService:AuthService;
 
-    constructor(private http: Http) {}
+    constructor(authServiceProvider:AuthServiceProvider){
+        this.authService = authServiceProvider.getInstance();
+    }
 
     attemptSignUp(){
-        let args = new URLSearchParams();
-        if(this.email) args.set('email', this.email);
-        if(this.phone) args.set('phone', this.phone);
-        args.set('password', this.password);
-        args.set('passwordAgain', this.passwordAgain);
-
-        this.http.get('/backend/api/auth/sign-up', {search: args})
-            .map(res => res.json())
-            .subscribe(
-                data => function(data){console.log(data)},
-                err => function(data){console.log(data)},
-                () => function(data){console.log(data)}
-            );
-
+        this.authService.attemptSignUp(this.email, this.phone, this.password, this.passwordAgain);
     }
+
 
 }

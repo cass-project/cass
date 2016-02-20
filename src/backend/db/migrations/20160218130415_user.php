@@ -37,6 +37,8 @@ class User extends AbstractMigration
             ->addColumn('email', 'string')
             ->addColumn('phone', 'integer', ['null' => true])
             ->addColumn('password', 'string')
+            ->addColumn('token', 'string', ['null' => true])
+            ->addColumn('tokenExpired', 'integer', ['null' => true])
             ->addIndex(['phone'], ['unique' => true])
             ->addIndex(['email'], ['unique' => true])
             ->create()
@@ -65,8 +67,10 @@ class User extends AbstractMigration
 
     private function insertData(){
         $this->table($this->accountTableName)->insert([
-            'email' => 'cass@cass.io',
-            'password' => '57f43b6042ed2d842591d3af449ff3e685d1dba1', // 1234
+            ['email' => 'artem.baydin@cass.io',             'password' => password_hash("Lolipop1234", PASSWORD_DEFAULT)],
+            ['email' => 'vyacheslav.savushkin@cass.io',     'password' => password_hash("1234", PASSWORD_DEFAULT)],
+            ['email' => 'dmitriy.borisenko.baydin@cass.io', 'password' => password_hash("1234", PASSWORD_DEFAULT)],
+            ['email' => 'philip.mantrov@cass.io',           'password' => password_hash("1234", PASSWORD_DEFAULT)]
         ])->saveData();
 
         $this->table($this->oauthProviderTableName)->insert([

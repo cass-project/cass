@@ -3,5 +3,5 @@
   <div>Phone: <input [(ngModel)]="phone" type="text" /></div>
   <div>Password: <input [(ngModel)]="password" type="password" /></div>
   <div>Retype Password: <input [(ngModel)]="passwordAgain" type="password" /></div>
-  <button>Register</button>
+  <input type="submit" [disabled]="authService.isLoading" [value]="authService.isLoading?'Loading...':'Sign Up'" />
 </form>

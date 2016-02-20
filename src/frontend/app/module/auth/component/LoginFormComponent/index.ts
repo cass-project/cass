@@ -7,7 +7,6 @@ import {AuthService, AuthServiceProvider} from './../../service/AuthService';
         require('./style.shadow.scss')
     ],
     selector: 'login-form',
-    providers: [AuthService, AuthServiceProvider]
 })
 
 
