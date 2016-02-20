@@ -1,25 +1,35 @@
-import {Component} from 'angular2/core';
+import {Component, enableProdMode, Injectable, OnInit} from 'angular2/core';
 import {Injectable} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-interface Theme {
-    id: number;
-    name: string;
-}
+import {Http, Headers, HTTP_PROVIDERS, URLSearchParams} from 'angular2/http';
+import {BaseRequestOptions} from "angular2/http"
 
 @Component({
     selector: 'host-admin',
     template: require('./template.html'),
     directives: [ROUTER_DIRECTIVES],
 })
-export class HostAdminComponent
-{
-    themes = THEMES;
-    addTheme(newTheme:string){
-        if(newTheme){
-            this.themes.push({"id": THEMES.length + 2, "name": newTheme});
+
+@Injectable()
+export class HostAdminComponent {
+    themes;
+    data;
+    constructor(http:Http) {
+
+        http.get('/backend/api/protected/host-admin/theme-editor/read/entities/')
+            .map(res => res.json())
+            .subscribe(data => this.themes = data.entities);
+        function create(value){
+            http.put('/backend/api/protected/host-admin/theme-editor/entity/create', JSON.stringify({title: value}))
         }
-        //selectedTheme: Theme;
-        //onselect(theme: Theme) {this.selectedTheme = theme;}
+    }
+   createTheme(value: string){
+
+    }
+    deleteTheme(value: string){
+
+    }
+    updateTheme(value: string){
+
     }
 }
-var THEMES = [{"id": 1, "name": "test1"}, {"id": 2, "name": "test2"}];

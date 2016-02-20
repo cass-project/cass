@@ -1,5 +1,7 @@
 <input #newTheme
-       (keyup.enter)="addTheme(newTheme.value)"
-       (blur)="addTheme(newTheme.value); newTheme.value='' ">
-<button (click)=addTheme(newTheme.value)>Add</button>
-  <ul><li *ngFor="#theme of themes">{{themes}}</li></ul>
+       (keyup.enter)="create(newTheme.value)"
+       (blur)="create(newTheme.value); newTheme.value='' ">
+<button (click)=create(newTheme.value)>Add</button>
+<button (click)=deleteTheme(blurTheme.value)>Delete</button>
+<button (click)=updateTheme(blurTheme.value)>Update</button>
+<ul><li *ngFor="#theme of themes">{{theme.title}}</li></ul>
