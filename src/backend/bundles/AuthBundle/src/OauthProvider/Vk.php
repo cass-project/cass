@@ -70,7 +70,9 @@ class Vk extends AbstractProvider
 	}
 
 	protected function checkResponse(ResponseInterface $response, $data){
-		return parent::checkResponse($response,$data);
+
+
+		//return parent::checkResponse($response,$data);
 		// TODO: Implement checkResponse() method.
 	}
 
