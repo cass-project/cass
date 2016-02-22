@@ -66,18 +66,13 @@ class Vk extends AbstractProvider
 	}
 
 	protected function getDefaultScopes(){
-		// TODO: Implement getDefaultScopes() method.
 	}
 
 	protected function checkResponse(ResponseInterface $response, $data){
-
-
 		//return parent::checkResponse($response,$data);
-		// TODO: Implement checkResponse() method.
 	}
 
 	protected function createResourceOwner(array $response, AccessToken $token){
-		// TODO: Implement createResourceOwner() method.
 	}
 
 
