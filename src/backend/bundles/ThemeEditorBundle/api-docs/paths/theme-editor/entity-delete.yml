@@ -23,6 +23,8 @@
             success:
               type: boolean
               description: "= true"
+      '400':
+          $ref: '#/responses/error'
       '404':
         description: |
           Тематика не найдена

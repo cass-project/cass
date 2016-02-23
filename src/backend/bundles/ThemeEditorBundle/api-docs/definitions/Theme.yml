@@ -1,4 +1,4 @@
-Theme:
+Data_Entity_Theme:
   type: object
   required:
     - id

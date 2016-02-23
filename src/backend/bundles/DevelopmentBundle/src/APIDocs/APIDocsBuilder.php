@@ -88,7 +88,8 @@ class APIDocsBuilder
                 return array_merge_recursive($config, $yml);
             }, [
                 'paths' => [],
-                'definitions' => []
+                'definitions' => [],
+                'responses' => []
             ])
         ;
     }

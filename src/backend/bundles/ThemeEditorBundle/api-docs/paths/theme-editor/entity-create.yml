@@ -19,6 +19,8 @@
               type: number
               description: ID родительской тематики
     responses:
+      '400':
+          $ref: '#/responses/error'
       '200':
         description: |
           Successfull response
@@ -33,4 +35,5 @@
               description: ID созданной темы
             success:
               type: boolean
+              default: true
               description: "= true"

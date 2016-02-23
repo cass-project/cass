@@ -6,7 +6,7 @@
       Перемешение тематики на указанную позицию, изменение родителя указанной тематики
     parameters:
       - name: themeId
-        in: apth
+        in: path
         required: true
         type: number
         description: |
@@ -34,6 +34,8 @@
             success:
               type: boolean
               description: "= true"
+      '400':
+          $ref: '#/responses/error'
       '404':
         description: |
           Тематика не найдена
