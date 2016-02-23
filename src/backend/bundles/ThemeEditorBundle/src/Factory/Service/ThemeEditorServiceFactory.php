@@ -1,7 +1,7 @@
 <?php
 namespace ThemeEditor\Factory\Service;
 
-use Doctrine\ORM\EntityManager;
+use Data\Repository\ThemeRepository;
 use Interop\Container\ContainerInterface;
 use ThemeEditor\Service\ThemeEditorService;
 use Zend\ServiceManager\Factory\FactoryInterface;
@@ -10,9 +10,8 @@ class ThemeEditorServiceFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var EntityManager $entityManager */
-        $entityManager = $container->get(EntityManager::class);
+        $themeRepository = $container->get(ThemeRepository::class); /** @var ThemeRepository $themeRepository */
 
-        return new ThemeEditorService($entityManager);
+        return new ThemeEditorService($themeRepository);
     }
 }

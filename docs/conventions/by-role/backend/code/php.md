@@ -16,3 +16,10 @@
      * @var ContainerInterface
      */
     private $container;
+    
+Doctrine2
+---------
+
+- 1. Инжектирование `EntityManager` в сервисы, миддлвари и прочий клиентский код *строго запрещено*.
+
+- 2. Вместо `EntityManager` инжектируйте непосредственно репозитории.

@@ -43,6 +43,10 @@ class Theme
         return $this->id;
     }
 
+    public function getTitle() {
+        return $this->title;
+    }
+
     public function setTitle($title): self
     {
         $this->title = $title;
@@ -72,7 +76,8 @@ class Theme
     public function toJSON()
     {
         return [
-            'title' => $this->title,
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
             'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null
         ];
     }

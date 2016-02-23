@@ -1,89 +1,39 @@
 <?php
 namespace ThemeEditor\Service;
 
-use Cocur\Chain\Chain;
-use Data\Entity\Theme;
 use Data\Repository\ThemeRepository;
-use Doctrine\ORM\EntityManager;
+use ThemeEditor\Middleware\Request\DeleteThemeRequest;
+use ThemeEditor\Middleware\Request\GetThemeRequest;
+use ThemeEditor\Middleware\Request\MoveThemeRequest;
+use ThemeEditor\Middleware\Request\PutThemeRequest;
+use ThemeEditor\Middleware\Request\UpdateThemeRequest;
 
 class ThemeEditorService
 {
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
+    /** @var ThemeRepository */
+    private $themeRepository;
 
-    /**
-     * ThemeEditorService constructor.
-     * @param EntityManager $entityManager
-     */
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
+    public function __construct(ThemeRepository $themeRepository) {
+        $this->themeRepository = $themeRepository;
     }
 
-    public function create($title, $parentId = null) {
-        $em = $this->entityManager;
-
-        $theme = new Theme();
-        $theme->setTitle($title);
-
-        if($parentId) {
-            $theme->setParent($em->getReference(Theme::class, $parentId));
-        }
-
-        $em->persist($theme);
-        $em->flush($theme);
-
-        return $theme;
+    public function create(PutThemeRequest $putThemeRequest) {
+        return $this->themeRepository->create($putThemeRequest);
     }
 
-    public function read(array $criteria = []) {
-        $em = $this->entityManager;
-        $themeRepository = $em->getRepository(Theme::class); /** @var ThemeRepository $themeRepository */
-
-        return Chain::create($themeRepository->findBy($criteria))
-            ->map(function(Theme $theme) {
-                return $theme->toJSON();
-            })
-            ->array
-        ;
+    public function read(GetThemeRequest $getThemeRequest) {
+        return $this->themeRepository->getThemes($getThemeRequest);
     }
 
-    public function update($themeId, $title) {
-        $em = $this->entityManager;
-
-        $themeRepository = $em->getRepository(Theme::class); /** @var ThemeRepository $themeRepository */
-        $theme = $themeRepository->find($themeId); /** @var Theme $theme */
-
-        $theme->setTitle($title);
-
-        $em->persist($theme);
-        $em->flush($theme);
+    public function update(UpdateThemeRequest $updateThemeRequest) {
+        return $this->themeRepository->update($updateThemeRequest);
     }
 
-    public function move(int $themeId, int $parentThemeId) {
-        $em = $this->entityManager;
-
-        $theme = $this->getThemeById($themeId);
-        $theme->setParent($em->getReference(Theme::class, $parentThemeId));
-
-        $em->persist($theme);
-        $em->flush($theme);
+    public function move(MoveThemeRequest $moveThemeRequest) {
+        return $this->themeRepository->move($moveThemeRequest);
     }
 
-    public function destroy(int $themeId) {
-        $theme = $this->getThemeById($themeId);
-
-        $em = $this->entityManager;
-        $em->remove($theme);
-        $em->flush($theme);
-    }
-
-    private function getThemeById(int $themeId) {
-        $em = $this->entityManager;
-        $themeRepository = $em->getRepository(Theme::class); /** @var ThemeRepository $themeRepository */
-
-        return $themeRepository->find($themeId); /** @var Theme $theme */
+    public function delete(DeleteThemeRequest $deleteThemeRequest) {
+        return $this->themeRepository->delete($deleteThemeRequest);
     }
 }
