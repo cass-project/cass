@@ -2,6 +2,7 @@
 namespace ThemeEditor\Middleware;
 
 use Application\REST\GenericRESTResponseBuilder;
+use Data\Exception\DataEntityNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use ThemeEditor\Middleware\Command\CreateThemeCommand;
@@ -40,6 +41,11 @@ class ThemeEditorCRUDMiddleware implements MiddlewareInterface
         }catch(CommandException $e){
             $responseBuilder
                 ->setStatusBadRequest()
+                ->setError($e)
+            ;
+        }catch(DataEntityNotFoundException $e){
+            $responseBuilder
+                ->setStatusNotFound()
                 ->setError($e)
             ;
         }

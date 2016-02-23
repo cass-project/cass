@@ -3,6 +3,7 @@ namespace Data\Repository;
 
 use Cocur\Chain\Chain;
 use Data\Entity\Theme;
+use Data\Exception\DataEntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use ThemeEditor\Middleware\Request\DeleteThemeRequest;
 use ThemeEditor\Middleware\Request\GetThemeRequest;
@@ -41,6 +42,10 @@ class ThemeRepository extends EntityRepository
         $em = $this->getEntityManager();
         $themeEntity = $this->find($updateThemeRequest->getId()); /** @var Theme $themeEntity */
 
+        if($themeEntity === null) {
+            throw new DataEntityNotFoundException(sprintf("Entity with ID `%d` not found", $updateThemeRequest->getThemeId()));
+        }
+
         if($updateThemeRequest->getTitle() !== null) {
             $themeEntity->setTitle($updateThemeRequest->getTitle());
         }
@@ -56,6 +61,10 @@ class ThemeRepository extends EntityRepository
 
         $themeEntity = $this->find($moveThemeRequest->getThemeId()); /** @var Theme $themeEntity */
 
+        if($themeEntity === null) {
+            throw new DataEntityNotFoundException(sprintf("Entity with ID `%d` not found", $moveThemeRequest->getThemeId()));
+        }
+
         if($parentId = $moveThemeRequest->getParentThemeId()) {
             $themeEntity->setParent($em->getReference(Theme::class, $parentId));
         }else{
@@ -70,6 +79,10 @@ class ThemeRepository extends EntityRepository
 
     public function delete(DeleteThemeRequest $deleteThemeRequest) {
         $themeEntity = $this->find($deleteThemeRequest->getId()); /** @var Theme $themeEntity */
+
+        if($themeEntity === null) {
+            throw new DataEntityNotFoundException(sprintf("Entity with ID `%d` not found", $deleteThemeRequest->getId()));
+        }
 
         $em = $this->getEntityManager();
         $em->remove($themeEntity);
