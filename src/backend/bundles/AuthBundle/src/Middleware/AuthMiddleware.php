@@ -268,6 +268,7 @@ class AuthMiddleware implements MiddlewareInterface
               ->setError($e);
         }
     }
+
     private function oauthGoogle(Request $request, GenericRESTResponseBuilder $responseBuilder){
         try{
             $provider = new Google(
