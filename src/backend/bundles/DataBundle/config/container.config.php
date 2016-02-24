@@ -2,7 +2,9 @@
 namespace Data;
 
 use Data\Factory\DoctrineEntityManagerFactory;
+use Data\Factory\Repository\HostRepositoryFactory;
 use Data\Factory\Repository\ThemeRepositoryFactory;
+use Data\Repository\HostRepository;
 use Data\Repository\ThemeRepository;
 use Doctrine\ORM\EntityManager;
 
@@ -11,10 +13,10 @@ return [
         'factories' => [
             EntityManager::class => DoctrineEntityManagerFactory::class,
             ThemeRepository::class => ThemeRepositoryFactory::class,
+            HostRepository::class => HostRepositoryFactory::class,
         ],
-
         'services' => [
-            'DoctrineConfig' => require(__DIR__ . '/doctrine.config.php')
+            'DoctrineConfig' => require(__DIR__ . '/doctrine.config.php'),
         ]
     ]
 ];

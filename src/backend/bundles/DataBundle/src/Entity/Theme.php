@@ -2,8 +2,6 @@
 namespace Data\Entity;
 
 /**
- * Class Theme
- * @package Data\Entity
  * @Entity(repositoryClass="Data\Repository\ThemeRepository")
  * @Table(name="theme")
  */

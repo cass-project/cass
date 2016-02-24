@@ -32,5 +32,4 @@ class DoctrineEntityManagerFactory implements FactoryInterface
 
         return EntityManager::create($config['connection_options'], $doctrineConfig);
     }
-
 }

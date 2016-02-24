@@ -13,7 +13,11 @@ use ThemeEditor\Middleware\Request\UpdateThemeRequest;
 
 class ThemeRepository extends EntityRepository
 {
-    public function getThemes(GetThemeRequest $getThemeRequest) {
+    /**
+     * @param GetThemeRequest $getThemeRequest
+     * @return Theme[]
+     */
+    public function getThemes(GetThemeRequest $getThemeRequest): array {
         return Chain::create($this->findBy($getThemeRequest->getCriteria()))
             ->map(function(Theme $theme) {
                 return $theme->toJSON();
@@ -22,7 +26,7 @@ class ThemeRepository extends EntityRepository
         ;
     }
 
-    public function create(PutThemeRequest $PUTEntityRequest) {
+    public function create(PutThemeRequest $PUTEntityRequest): Theme {
         $em = $this->getEntityManager();
 
         $themeEntity = new Theme();
@@ -38,12 +42,12 @@ class ThemeRepository extends EntityRepository
         return $themeEntity;
     }
 
-    public function update(UpdateThemeRequest $updateThemeRequest) {
+    public function update(UpdateThemeRequest $updateThemeRequest): Theme {
         $em = $this->getEntityManager();
         $themeEntity = $this->find($updateThemeRequest->getId()); /** @var Theme $themeEntity */
 
         if($themeEntity === null) {
-            throw new DataEntityNotFoundException(sprintf("Entity with ID `%d` not found", $updateThemeRequest->getThemeId()));
+            throw new DataEntityNotFoundException(sprintf("Entity with ID `%d` not found", $updateThemeRequest->getId()));
         }
 
         if($updateThemeRequest->getTitle() !== null) {
@@ -56,7 +60,7 @@ class ThemeRepository extends EntityRepository
         return $themeEntity;
     }
 
-    public function move(MoveThemeRequest $moveThemeRequest) {
+    public function move(MoveThemeRequest $moveThemeRequest): Theme {
         $em = $this->getEntityManager();
 
         $themeEntity = $this->find($moveThemeRequest->getThemeId()); /** @var Theme $themeEntity */
@@ -77,7 +81,7 @@ class ThemeRepository extends EntityRepository
         return $themeEntity;
     }
 
-    public function delete(DeleteThemeRequest $deleteThemeRequest) {
+    public function delete(DeleteThemeRequest $deleteThemeRequest): Theme {
         $themeEntity = $this->find($deleteThemeRequest->getId()); /** @var Theme $themeEntity */
 
         if($themeEntity === null) {
