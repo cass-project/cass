@@ -6,7 +6,8 @@
       "Auth\\": "bundles/AuthBundle/src",
       "Data\\": "bundles/DataBundle/src",
       "ThemeEditor\\": "bundles/ThemeEditorBundle/src",
-      "Development\\": "bundles/DevelopmentBundle/src"
+      "Development\\": "bundles/DevelopmentBundle/src",
+      "Host\\": "bundles/HostBundle/src"
     }
   },
   "require": {
