@@ -46,5 +46,4 @@ class VkCommand extends Command
             }
         }
     }
-
 }
