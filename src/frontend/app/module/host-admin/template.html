@@ -1,7 +1,8 @@
-<input #Themes
-       (keyup.enter)="newTheme(Themes.value)"
-       (blur)="newTheme(Themes.value); newTheme.value='' ">
-<button (click)="newTheme(Themes.value)">Add</button>
-<button (click)=deleteTheme(blurTheme.value)>Delete</button>
+<button (click)="createTheme.clicked()">Add</button>
+<button (click)="deleteTheme.deleteTheme()">Delete</button>
 <button (click)=updateTheme(blurTheme.value)>Update</button>
+<div *ngIf="createTheme.show">
+    <input #Themes
+           (keyup.enter)="createTheme.putTheme(Themes.value)">
+</div>
 <ul><li *ngFor="#theme of getThemes.themes">{{theme.title}}</li></ul>

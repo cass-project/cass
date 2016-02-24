@@ -12,23 +12,24 @@ import {DeleteTheme} from "./component/ThemesAdminService/index";
     selector: 'host-admin',
     template: require('./template.html'),
     directives: [ROUTER_DIRECTIVES],
-    providers: [GetThemes, CreateTheme]
+    providers: [GetThemes, CreateTheme, DeleteTheme]
 })
 
 export class HostAdminComponent {
-    themes;
     getThemes: GetThemes;
     createTheme: CreateTheme;
-    constructor(getThemes:GetThemes, createTheme: CreateTheme) {
-        this.themes = getThemes.themes;
+    deleteTheme: DeleteTheme;
+    constructor(getThemes: GetThemes, createTheme: CreateTheme, deleteTheme: DeleteTheme) {
         this.getThemes = getThemes;
         this.createTheme = createTheme;
-        this.load();
+        this.deleteTheme = deleteTheme;
+        this.getThemes.loadThemes();
    }
-    load(){
-        this.getThemes.loadThemes()
-    }
-    newTheme(value){
-        this.createTheme.putTheme(value)
-    }
+    //newTheme(value){
+    //    this.createTheme.putTheme(value);
+    //    this.createTheme.clicked();
+    //}
+    //newClick(){
+    //    this.createTheme.clicked();
+    //}
 };
