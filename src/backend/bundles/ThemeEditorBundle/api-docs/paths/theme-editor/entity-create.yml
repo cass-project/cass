@@ -37,3 +37,5 @@
               type: boolean
               default: true
               description: "= true"
+            entity:
+              $ref: '#/definitions/Data_Entity_Theme'

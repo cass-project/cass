@@ -7,10 +7,17 @@ namespace Data\Entity;
  */
 class Host
 {
-    /** @var int */
+    /**
+     * @Id
+     * @Column(type="integer")
+     * @var int
+     */
     private $id;
 
-    /** @var string */
+    /**
+     * @Column(type="string")
+     * @var string
+     */
     private $domain;
 
     public function getId(): int
@@ -28,5 +35,13 @@ class Host
         $this->domain = $domain;
 
         return $this;
+    }
+
+    public function toJSON()
+    {
+        return [
+            'id' => $this->getId(),
+            'domain' => $this->getDomain()
+        ];
     }
 }

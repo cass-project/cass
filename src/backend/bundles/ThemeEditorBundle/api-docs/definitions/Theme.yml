@@ -3,6 +3,8 @@ Data_Entity_Theme:
   required:
     - id
     - parent_id
+    - host
+    - position
     - title
   properties:
     id:
@@ -11,6 +13,12 @@ Data_Entity_Theme:
     parent_id:
       type: number
       description: ID родительской тематики
+    host:
+      type: object
+      $ref: '#/definitions/Data_Entity_Host'
+    position:
+      type: number
+      description: Позиция в текущем уровне дерева тематик
     title:
       type: string
       description: Название

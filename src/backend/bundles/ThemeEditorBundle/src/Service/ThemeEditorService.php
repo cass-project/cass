@@ -2,6 +2,7 @@
 namespace ThemeEditor\Service;
 
 use Data\Repository\ThemeRepository;
+use Host\Service\CurrentHostService;
 use ThemeEditor\Middleware\Request\DeleteThemeRequest;
 use ThemeEditor\Middleware\Request\GetThemeRequest;
 use ThemeEditor\Middleware\Request\MoveThemeRequest;
@@ -10,15 +11,20 @@ use ThemeEditor\Middleware\Request\UpdateThemeRequest;
 
 class ThemeEditorService
 {
+    /** @var CurrentHostService */
+    private $currentHostService;
+
     /** @var ThemeRepository */
     private $themeRepository;
 
-    public function __construct(ThemeRepository $themeRepository) {
+    public function __construct(CurrentHostService $currentHostService, ThemeRepository $themeRepository)
+    {
+        $this->currentHostService = $currentHostService;
         $this->themeRepository = $themeRepository;
     }
 
     public function create(PutThemeRequest $putThemeRequest) {
-        return $this->themeRepository->create($putThemeRequest);
+        return $this->themeRepository->create($this->currentHostService->getCurrentHost(), $putThemeRequest);
     }
 
     public function read(GetThemeRequest $getThemeRequest) {

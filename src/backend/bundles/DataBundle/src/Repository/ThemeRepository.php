@@ -2,6 +2,7 @@
 namespace Data\Repository;
 
 use Cocur\Chain\Chain;
+use Data\Entity\Host;
 use Data\Entity\Theme;
 use Data\Exception\DataEntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
@@ -26,11 +27,12 @@ class ThemeRepository extends EntityRepository
         ;
     }
 
-    public function create(PutThemeRequest $PUTEntityRequest): Theme {
+    public function create(Host $host, PutThemeRequest $PUTEntityRequest): Theme {
         $em = $this->getEntityManager();
 
         $themeEntity = new Theme();
         $themeEntity->setTitle($PUTEntityRequest->getTitle());
+        $themeEntity->setHost($host);
 
         if($parentId = $PUTEntityRequest->getParentId()) {
             $themeEntity->setParent($em->getReference(Theme::class, $parentId));

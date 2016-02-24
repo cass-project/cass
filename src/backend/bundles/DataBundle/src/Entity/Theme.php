@@ -28,6 +28,17 @@ class Theme
     private $parent;
 
     /**
+     * @ManyToOne(targetEntity="Data\Entity\Host")
+     * @JoinColumn(name="host_id", referencedColumnName="id")
+     */
+    private $host;
+
+    /**
+     * @Column(type="integer")
+     */
+    private $position = 1;
+
+    /**
      * @Column(type="string")
      * @var string
      */
@@ -71,12 +82,37 @@ class Theme
         $this->parent = $parent;
     }
 
+    public function getHost(): Host
+    {
+        return $this->host;
+    }
+
+    public function setHost($host): self
+    {
+        $this->host = $host;
+
+        return $this;
+    }
+    
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): self
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
     public function toJSON()
     {
         return [
             'id' => $this->getId(),
             'title' => $this->getTitle(),
-            'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null
+            'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null,
+            'host' => $this->getHost()->toJSON()
         ];
     }
 }
