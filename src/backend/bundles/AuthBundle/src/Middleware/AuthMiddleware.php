@@ -3,9 +3,12 @@ namespace Auth\Middleware;
 
 use Application\REST\GenericRESTResponseBuilder;
 use Application\REST\Exceptions\UnknownActionException;
+use Auth\OauthProvider\Mailru;
 use Auth\OauthProvider\Vk;
+use Auth\OauthProvider\Yandex;
 use Auth\Service\AuthService;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
+use League\OAuth2\Client\Provider\Google;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
@@ -52,17 +55,24 @@ class AuthMiddleware implements MiddlewareInterface
                 case 'oauth':
                     switch($request->getAttribute('provider')){
                         case 'vk':
-
-//                            die("test");
+                            $this->oauthVk($request, $responseBuilder);
+                        break;
+                        case 'mailru':
+                            $this->oauthMailru($request, $responseBuilder);
+                        break;
+                        case 'yandex':
+                            $this->oauthYandex($request, $responseBuilder);
+                        break;
+                        case 'google':
+                            $this->oauthGoogle($request, $responseBuilder);
+                        break;
+                        case 'facebook':
+                            $this->oauthVk($request, $responseBuilder);
+                        break;
+                        case 'odnoklassniki':
                             $this->oauthVk($request, $responseBuilder);
                         break;
                     }
-
-
-
-
-
-
                 break;
 
 
@@ -108,149 +118,210 @@ class AuthMiddleware implements MiddlewareInterface
 
     }
 
-    private function oauth(Request $request, GenericRESTResponseBuilder $responseBuilder)
-    {
-        try{
 
-            $provider = new \League\OAuth2\Client\Provider\GenericProvider(
+    /**
+     * Аторизация вконтакте
+     *
+     * @param Request                    $request
+     * @param GenericRESTResponseBuilder $responseBuilder
+     */
+    private function oauthVk(Request $request, GenericRESTResponseBuilder $responseBuilder){
+        try{
+            $provider = new Vk(
               [
-                'clientId'                => 'demoapp',
-                // The client ID assigned to you by the provider
-                'clientSecret'            => 'demopass',
-                // The client password assigned to you by the provider
-                'redirectUri'             => 'http://localhost:8080/backend/api/auth/oauth',
-                'urlAuthorize'            => 'http://brentertainment.com/oauth2/lockdin/authorize',
-                'urlAccessToken'          => 'http://brentertainment.com/oauth2/lockdin/token',
-                'urlResourceOwnerDetails' => 'http://brentertainment.com/oauth2/lockdin/resource'
+                'clientId'     => '5289954',
+                'clientSecret' => 'BXjBPK8sdfYoFcYPUArK',
+                'redirectUri'  => 'http://localhost:8080/backend/api/auth/oauth/vk',
+                'v'            => 5.45,
               ]
             );
 
-// If we don't have an authorization code then get one
-            if (!isset($_GET['code'])) {
-
-                // Fetch the authorization URL from the provider; this returns the
-                // urlAuthorize option and generates and applies any necessary parameters
-                // (e.g. state).
+            if(!isset($_GET['code'])){
                 $authorizationUrl = $provider->getAuthorizationUrl();
-
-                // Get the state generated for you and store it to the session.
                 $_SESSION['oauth2state'] = $provider->getState();
-
-                // Redirect the user to the authorization URL.
                 header('Location: ' . $authorizationUrl);
                 exit;
-
-// Check given state against previously stored one to mitigate CSRF attack
-            } elseif (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
-
+            }
+            elseif(empty($_GET['state']) ||
+                   ($_GET['state'] !== $_SESSION['oauth2state'])
+            ){
                 unset($_SESSION['oauth2state']);
                 exit('Invalid state');
-
-            } else {
-
-                try {
-
-                    // Try to get an access token using the authorization code grant.
-                    $accessToken = $provider->getAccessToken('authorization_code', [
-                      'code' => $_GET['code']
-                    ]);
-
-
-                    $resourceOwner = $provider->getResourceOwner($accessToken);
-
-
-                    $result = [
-//                      'acces_token' =>      $accessToken,
-                      'resource_owner' =>   print_r($resourceOwner,TRUE)
-                    ];
-
-
-                    $responseBuilder->setStatusSuccess()->setJson($result);
-
-                } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
-
-                    // Failed to get the access token or user details.
-                    exit($e->getMessage());
-
-                }
-
             }
+            else{
+                try{
+                    $accessToken = $provider->getAccessToken('authorization_code', [
+                            'code' => $_GET['code']
+                        ]
+                    );
 
+                    $responseBuilder->setStatusSuccess()
+                                    ->setJson([$accessToken]);
 
+                } catch(\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e){
+                    exit($e->getMessage());
+                }
+            }
         } catch(UnknownActionException $e){
             $responseBuilder
               ->setStatusBadRequest()
               ->setError($e);
         }
-
     }
 
-
-    private function oauthVk(Request $request, GenericRESTResponseBuilder $responseBuilder){
+    /**
+     * Авторизация через Mail.ru
+     * @param Request                    $request
+     * @param GenericRESTResponseBuilder $responseBuilder
+     */
+    private function oauthMailru(Request $request, GenericRESTResponseBuilder $responseBuilder){
         try{
-//            http://localhost:8080/backend/api/auth/oauth/vk
-            $provider = new Vk(
+            $provider = new Mailru(
               [
-                'clientId' => '5289954',
-                'clientSecret' => 'BXjBPK8sdfYoFcYPUArK',
-                'redirectUri' => 'http://localhost:8080/backend/api/auth/oauth/vk',
-                'v'=> 5.45,
+                'clientId'     => '741989',
+//                'private_key'=>'105c83cafdef7aa90eaf8077c25d97a3',
+                'clientSecret' => '624101a79a67e6918ea420338de3002f',
+                'redirectUri'  => 'http://localhost:8080/backend/api/auth/oauth/mailru',
               ]
             );
 
-
-
-            // If we don't have an authorization code then get one
-            if (!isset($_GET['code'])) {
-
-                // Fetch the authorization URL from the provider; this returns the
-                // urlAuthorize option and generates and applies any necessary parameters
-                // (e.g. state).['v'=> 5.45]
+            if(!isset($_GET['code'])){
                 $authorizationUrl = $provider->getAuthorizationUrl();
-
-
-                // Get the state generated for you and store it to the session.
                 $_SESSION['oauth2state'] = $provider->getState();
-
-                // Redirect the user to the authorization URL.
                 header('Location: ' . $authorizationUrl);
-
                 exit;
-
-                // Check given state against previously stored one to mitigate CSRF attack
-            } elseif (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
+            }
+            elseif(empty($_GET['state']) ||
+                   ($_GET['state'] !== $_SESSION['oauth2state'])
+            ){
                 unset($_SESSION['oauth2state']);
                 exit('Invalid state');
-            }else {
-                try {
+            }
+            else{
+                try{
                     $accessToken = $provider->getAccessToken('authorization_code', [
-                      'code' => $_GET['code']
-                    ]);
-
-                    $url = $provider->getResourceOwnerDetailsUrl($accessToken);
-
-                    $res= http_request($url);
-
-                    var_dump($res);
-//                    var_dump($accessToken);
-                    die();
-
-//                    print_r($accessToken);
+                            'code' => $_GET['code']
+                        ]
+                    );
 
 
+                    $responseBuilder->setStatusSuccess()
+                                    ->setJson([$accessToken]);
 
-                    $responseBuilder->setStatusSuccess()->setJson([$accessToken]);
-
-                } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
-
-                    // Failed to get the access token or user details.
+                } catch(\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e){
                     exit($e->getMessage());
+                }
+            }
+        } catch(UnknownActionException $e){
+            $responseBuilder
+              ->setStatusBadRequest()
+              ->setError($e);
+        }
+    }
+
+    /**
+     * Авторизация яндекс
+     * @param Request                    $request
+     * @param GenericRESTResponseBuilder $responseBuilder
+     */
+    private function oauthYandex(Request $request, GenericRESTResponseBuilder $responseBuilder){
+        try{
+            $provider = new Yandex(
+              [
+                'clientId'     => '37ba46dfecd8464f8298612ecb5641ff',
+                'clientSecret' => '20177d8b3379445ead1e262a3ffa76ee',
+                'redirectUri'  => 'http://localhost:8080/backend/api/auth/oauth/yandex',
+              ]
+            );
+
+            if(!isset($_GET['code'])){
+                $authorizationUrl = $provider->getAuthorizationUrl();
+                $_SESSION['oauth2state'] = $provider->getState();
+                header('Location: ' . $authorizationUrl);
+                exit;
+            }
+            elseif(empty($_GET['state']) ||
+                   ($_GET['state'] !== $_SESSION['oauth2state'])
+            ){
+                unset($_SESSION['oauth2state']);
+                exit('Invalid state');
+            }
+            else{
+                try{
+                    $accessToken = $provider->getAccessToken('authorization_code', [
+                            'code' => $_GET['code']
+                        ]
+                    );
+
+
+                    $responseBuilder->setStatusSuccess()
+                                    ->setJson([$accessToken]);
+
+                } catch(\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e){
+                    exit($e->getMessage());
+                }
+            }
+        } catch(UnknownActionException $e){
+            $responseBuilder
+              ->setStatusBadRequest()
+              ->setError($e);
+        }
+    }
+
+    private function oauthGoogle(Request $request, GenericRESTResponseBuilder $responseBuilder){
+        try{
+            $provider = new Google(
+              [
+                'clientId'     => '992284499181-ccsf7gh4ucck8348g9kaimqs2s9i2fjt.apps.googleusercontent.com',
+                'clientSecret' => 'VLSX8IMfFfkAll-dAtiEkUiZ',
+                'redirectUri'  => 'http://localhost:8080/backend/api/auth/oauth/google',
+                'hostedDomain' => 'localhost:8080',
+              ]
+            );
+
+            if (!empty($_GET['error'])) {
+
+                // Got an error, probably user denied access
+                exit('Got error: ' . $_GET['error']);
+
+            } elseif (empty($_GET['code'])) {
+
+                // If we don't have an authorization code then get one
+                $authUrl = $provider->getAuthorizationUrl();
+                $_SESSION['oauth2state'] = $provider->getState();
+                header('Location: ' . $authUrl);
+                exit;
+
+            } elseif (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
+
+                // State is invalid, possible CSRF attack in progress
+                unset($_SESSION['oauth2state']);
+                exit('Invalid state');
+
+            } else {
+
+                // Try to get an access token (using the authorization code grant)
+                $token = $provider->getAccessToken('authorization_code', [
+                  'code' => $_GET['code']
+                ]);
+
+                // Optional: Now you have a token you can look up a users profile data
+                try {
+
+                    // We got an access token, let's now get the owner details
+                    $ownerDetails = $provider->getResourceOwner($token);
+
+                    // Use these details to create a new profile
+                    $responseBuilder->setStatusSuccess()
+                                    ->setJson([$ownerDetails]);
+
+                } catch (\Exception $e) {
+
+                    // Failed to get user details
+                    exit('Something went wrong: ' . $e->getMessage());
 
                 }
-
             }
-
-
         } catch(UnknownActionException $e){
             $responseBuilder
               ->setStatusBadRequest()

@@ -18,6 +18,9 @@
     "league/oauth2-client": "^1.2",
     "anahkiasen/underscore-php": "^2.0",
     "cocur/chain": "^0.2.0",
-    "justinrainbow/json-schema": "^1.6"
+    "justinrainbow/json-schema": "^1.6",
+    "league/oauth2-google": "^1.0",
+    "league/oauth2-facebook": "^1.1",
+    "league/oauth2-instagram": "^0.2.1"
   }
 }
