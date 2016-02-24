@@ -4,7 +4,7 @@ namespace Data\Entity;
 /**
  * Class Account
  * @package Data\Entity
- * @Entity()
+ * @Entity(repositoryClass="Data\Repository\AccountRepository")
  * @Table(name="account")
  */
 class Account

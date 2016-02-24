@@ -3,16 +3,22 @@ namespace Auth\Service;
 
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Data\Entity\Account;
+use Data\Repository\AccountRepository;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthService
 {
+    /**
+     * @var AccountRepository
+     */
+    private $accountRepository;
     private $entityManager;
 
     public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
+        $this->accountRepository = $entityManager->getRepository(Account::class);
     }
 
     public function attemptSignIn(Request $request) : Account
@@ -28,13 +34,7 @@ class AuthService
         }
 
         /** @var Account $account */
-        $account  = $this->entityManager
-                        ->getRepository(Account::class)
-                        ->createQueryBuilder('a')
-                            ->where('a.email = :login OR a.phone = :login OR a.token = :token')
-                                ->setParameter("login", $request['login'] ?? null)
-                                ->setParameter("token", $this->getToken())
-                        ->getQuery()->getSingleResult();
+        $account = $this->accountRepository->findByLoginOrToken($request['login'] ?? $this->getToken());
 
         if(!$this->validateAccountToken($account)) {
             if(isset($request['password']) && $this->validateAccountPassword($account, $request['password'])) {
@@ -72,11 +72,7 @@ class AuthService
             throw new InvalidCredentialsException("Passwords must be at least 6 characters contain one uppercase letter and digit.");
         }
 
-        $sameAccounts = $this->entityManager->getRepository(Account::class)->createQueryBuilder('a')
-            ->where('a.email = :login OR a.phone = :login')
-                ->setParameter("login", $request['email'] ?? $request['phone'])->getQuery()->getResult();
-
-        if(count($sameAccounts)>0) {
+        if($this->accountRepository->isAccountExist($request['email'] ?? $request['phone'])) {
             throw new InvalidCredentialsException(sprintf('%s already in use.', $request['email'] ?? $request['phone']));
         }
 
