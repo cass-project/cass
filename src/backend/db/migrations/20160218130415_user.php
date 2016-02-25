@@ -26,7 +26,6 @@ class User extends AbstractMigration
      * with the Table class.
      */
     private $accountTableName = 'account';
-    private $oauthProviderTableName = 'oauth_provider';
     private $oauthAccountTableName = 'oauth_account';
 
 
@@ -44,21 +43,13 @@ class User extends AbstractMigration
             ->create()
         ;
 
-        // Adding aouth provider table
-        $this->table($this->oauthProviderTableName)
-            ->addColumn('app_id', 'integer')
-            ->addColumn('name', 'string')
-            ->create()
-        ;
-
         // Adding aouth account table
         $this->table($this->oauthAccountTableName)
             ->addColumn('account_id', 'integer')
             ->addForeignKey('account_id', $this->accountTableName, 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
             ->addColumn('token', 'string')
             ->addColumn('expires', 'timestamp')
-            ->addColumn('provider_id', 'integer')
-            ->addForeignKey('provider_id', $this->oauthProviderTableName, 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
+            ->addColumn('provider_name', 'string')
             ->create()
         ;
 
@@ -71,15 +62,6 @@ class User extends AbstractMigration
             ['email' => 'vyacheslav.savushkin@cass.io',     'password' => password_hash("1234", PASSWORD_DEFAULT)],
             ['email' => 'dmitriy.borisenko.baydin@cass.io', 'password' => password_hash("1234", PASSWORD_DEFAULT)],
             ['email' => 'philip.mantrov@cass.io',           'password' => password_hash("1234", PASSWORD_DEFAULT)]
-        ])->saveData();
-
-        $this->table($this->oauthProviderTableName)->insert([
-            ['name' => 'vk'],
-            ['name' => 'facebook'],
-            ['name' => 'ok'],
-            ['name' => 'mailru'],
-            ['name' => 'yandex'],
-            ['name' => 'google']
         ])->saveData();
     }
 }
