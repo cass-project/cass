@@ -5,6 +5,7 @@ use Cocur\Chain\Chain;
 use Data\Entity\Host;
 use Data\Entity\Theme;
 use Data\Exception\DataEntityNotFoundException;
+use Data\Repository\Theme\SaveThemeProperties;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use ThemeEditor\Middleware\Request\DeleteThemeRequest;
@@ -20,7 +21,7 @@ class ThemeRepository extends EntityRepository
      * @return Theme[]
      */
     public function getThemes(GetThemeRequest $getThemeRequest): array {
-        return Chain::create($this->findBy($getThemeRequest->getCriteria()))
+        return Chain::create($this->findBy([]))
             ->map(function(Theme $theme) {
                 return $theme->toJSON();
             })
@@ -28,50 +29,27 @@ class ThemeRepository extends EntityRepository
         ;
     }
 
-    public function create(Host $host, PutThemeRequest $PUTEntityRequest): Theme {
-        $em = $this->getEntityManager();
-
+    public function create(Host $host, PutThemeRequest $PUTEntityRequest): Theme
+    {
         $themeEntity = new Theme();
-        $themeEntity->setTitle($PUTEntityRequest->getTitle()->value());
         $themeEntity->setHost($host);
 
-        $PUTEntityRequest->getParentId()->on(function($value) use ($themeEntity, $em) {
-            $themeEntity->setParent($em->getReference(Theme::class, $value));
-        });
+        $this->setupEntity($themeEntity, $PUTEntityRequest);
 
-        $PUTEntityRequest->getPosition()
-            ->on(function($value) use ($themeEntity) {
-                $themeEntity->setPosition($value);
-            })
-            ->none(function() use ($themeEntity) {
-                $parentId = $themeEntity->hasParent() ? $themeEntity->getParent()->getId() : null;
-                $position = $this->getLastPosition($parentId);
-
-                $themeEntity->setPosition($position + 1);
-            })
-        ;
-
-        $parentId = $themeEntity->hasParent() ? $themeEntity->getParent()->getId() : null;
-        $this->shiftPositions($themeEntity->getPosition(), $parentId);
-
+        $em = $this->getEntityManager();
         $em->persist($themeEntity);
         $em->flush();
 
         return $themeEntity;
     }
 
-    public function update(UpdateThemeRequest $updateThemeRequest): Theme {
+    public function update(UpdateThemeRequest $updateThemeRequest): Theme
+    {
+        $themeEntity = $this->findThemeEntity($updateThemeRequest->getId());
+
+        $this->setupEntity($themeEntity, $updateThemeRequest);
+
         $em = $this->getEntityManager();
-        $themeEntity = $this->find($updateThemeRequest->getId()); /** @var Theme $themeEntity */
-
-        if($themeEntity === null) {
-            throw new DataEntityNotFoundException(sprintf("Entity with ID `%d` not found", $updateThemeRequest->getId()));
-        }
-
-        if($updateThemeRequest) {
-            $themeEntity->setTitle($updateThemeRequest->getTitle());
-        }
-
         $em->persist($themeEntity);
         $em->flush($themeEntity);
 
@@ -79,36 +57,11 @@ class ThemeRepository extends EntityRepository
     }
 
     public function move(MoveThemeRequest $moveThemeRequest): Theme {
-        $em = $this->getEntityManager();
-
-        $themeEntity = $this->find($moveThemeRequest->getThemeId()); /** @var Theme $themeEntity */
-
-        if($themeEntity === null) {
-            throw new DataEntityNotFoundException(sprintf("Entity with ID `%d` not found", $moveThemeRequest->getThemeId()));
-        }
-
-        if($parentId = $moveThemeRequest->getParentThemeId()) {
-            $themeEntity->setParent($em->getReference(Theme::class, $parentId));
-        }else{
-            $themeEntity->setParent(null);
-        }
-
-        if($position = $moveThemeRequest->getPosition()) {
-
-        }
-
-        $em->persist($themeEntity);
-        $em->flush($themeEntity);
-
-        return $themeEntity;
+        throw new \Exception('Not implemented');
     }
 
     public function delete(DeleteThemeRequest $deleteThemeRequest): Theme {
-        $themeEntity = $this->find($deleteThemeRequest->getId()); /** @var Theme $themeEntity */
-
-        if($themeEntity === null) {
-            throw new DataEntityNotFoundException(sprintf("Entity with ID `%d` not found", $deleteThemeRequest->getId()));
-        }
+        $themeEntity = $this->findThemeEntity($deleteThemeRequest->getId());
 
         $em = $this->getEntityManager();
         $em->remove($themeEntity);
@@ -117,7 +70,32 @@ class ThemeRepository extends EntityRepository
         return $themeEntity;
     }
 
-    public function getLastPosition(int $parentId = null): int {
+    private function setupEntity(Theme $themeEntity, SaveThemeProperties $saveThemeProperties) {
+        $em = $this->getEntityManager();
+
+        $themeEntity->setTitle($saveThemeProperties->getTitle()->value());
+
+        $saveThemeProperties->getParentId()->on(function($value) use ($themeEntity, $em) {
+            $themeEntity->setParent($em->getReference(Theme::class, $value));
+        });
+
+        $parentId = $themeEntity->hasParent() ? $themeEntity->getParent()->getId() : null;
+
+        $saveThemeProperties->getPosition()
+            ->on(function($value) use ($themeEntity, $parentId) {
+                $themeEntity->setPosition($value);
+                $this->shiftPositions($value, $parentId, $themeEntity->getId());
+            })
+            ->none(function() use ($themeEntity, $parentId) {
+                if($themeEntity->getId() === null) {
+                    $position = $this->getLastPosition($parentId) + 1;
+                    $themeEntity->setPosition($position);
+                }
+            })
+        ;
+    }
+
+    private function getLastPosition(int $parentId = null): int {
         $qb = $this->createQueryBuilder('theme')
             ->select('MAX(theme.position) AS last_theme_position')
         ;
@@ -127,16 +105,22 @@ class ThemeRepository extends EntityRepository
             : $qb->where('theme.parent = :parentId')->setParameter('parentId', $parentId)
         ;
 
-        return (int) $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+        $result = (int) $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+
+        return ($result === null || $result < 1) ? 1 : (int) $result;
     }
 
-    public function shiftPositions(int $fromPosition, int $parentId = null) {
+    private function shiftPositions(int $fromPosition, int $parentId = null, int $excludedId = null) {
         $em = $this->getEntityManager();
 
         $qb = $this->createQueryBuilder('t')
             ->andWhere('t.position = :position')
             ->setParameter('position', $fromPosition)
         ;
+
+        if($excludedId) {
+            $qb->andWhere('t.id != :excludedId')->setParameter('excludedId', $excludedId);
+        }
 
         is_null($parentId)
             ? $qb->andWhere('t.parent IS NULL')
@@ -148,5 +132,16 @@ class ThemeRepository extends EntityRepository
 
             $em->persist($themeEntity);
         }
+    }
+
+    private function findThemeEntity(int $id): Theme
+    {
+        $themeEntity = $this->find($id);
+        /** @var Theme $themeEntity */
+
+        if ($themeEntity === null) {
+            throw new DataEntityNotFoundException(sprintf("Theme Entity with ID `%d` not found", $moveThemeRequest->getThemeId()));
+        }
+        return $themeEntity;
     }
 }

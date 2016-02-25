@@ -15,8 +15,7 @@ class CreateThemeCommand extends Command
             'id' => $theme->getId(),
             'entity' => [
                 $theme->toJSON()
-            ],
-            'success' => true
+            ]
         ];
     }
 }

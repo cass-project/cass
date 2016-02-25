@@ -1,18 +1,39 @@
 <?php
 namespace ThemeEditor\Middleware\Request;
 
-use Application\REST\RESTRequest;
-use Application\Service\JSONSchema;
+use Application\Tools\RequestParams\RequestParams;
+use Psr\Http\Message\ServerRequestInterface;
 
-class MoveThemeRequest extends RESTRequest
+class MoveThemeRequest implements RequestParams
 {
-    protected function setup()
+    /** @var int */
+    private $themeId;
+
+    /** @var int */
+    private $parentThemeId;
+
+    /** @var int */
+    private $position;
+
+    public function __construct(ServerRequestInterface $request)
     {
-        // TODO: Implement setup() method.
+        $this->themeId = (int) $request->getAttribute('themeId');
+        $this->parentThemeId = (int) $request->getAttribute('parentThemeId');
+        $this->position = (int) $request->getAttribute('position');
     }
 
-    protected function getValidatorSchema(): JSONSchema
+    public function getThemeId(): int
     {
-        // TODO: Implement getValidatorSchema() method.
+        return $this->themeId;
+    }
+
+    public function getParentThemeId(): int
+    {
+        return $this->parentThemeId;
+    }
+
+    public function getPosition(): int
+    {
+        return $this->position;
     }
 }

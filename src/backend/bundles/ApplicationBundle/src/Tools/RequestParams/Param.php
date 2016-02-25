@@ -1,5 +1,5 @@
 <?php
-namespace Application\REST;
+namespace Application\Tools\RequestParams;
 
 class ParamIsRequiredException extends \Exception {}
 
@@ -15,9 +15,9 @@ class Param
     {
         $this->key = $key;
 
-        if(is_array($data)) {
+        if (is_array($data)) {
             $this->value = $data[$key] ?? null;
-        }else{
+        } else {
             $this->value = $data->$key ?? null;
         }
 

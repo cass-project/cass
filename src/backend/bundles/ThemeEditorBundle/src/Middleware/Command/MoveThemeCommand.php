@@ -11,8 +11,6 @@ class MoveThemeCommand extends Command
         $themeEditorService = $this->getThemeEditorService();
         $themeEditorService->move(new MoveThemeRequest($request));
 
-        return [
-            'success' => true
-        ];
+        return [];
     }
 }

@@ -1,12 +1,13 @@
 <?php
 namespace ThemeEditor\Middleware\Request;
 
-use Application\REST\RESTRequest;
+use Application\Tools\RequestParams\RequestParamsWithSchema;
 use Application\Service\JSONSchema;
-use Application\REST\Param;
+use Application\Tools\RequestParams\Param;
+use Data\Repository\Theme\SaveThemeProperties;
 use ThemeEditor\ThemeEditorBundle;
 
-class PutThemeRequest extends RESTRequest
+class PutThemeRequest extends RequestParamsWithSchema implements SaveThemeProperties
 {
     /** @var string */
     private $title;
@@ -21,9 +22,9 @@ class PutThemeRequest extends RESTRequest
     {
         $data = $this->getData();
 
-        $this->title = new Param($data, 'title', true);
-        $this->parentId = new Param($data, 'parent_id');
-        $this->position = new Param($data, 'position');
+        $this->title = $this->createParam($data, 'title', true);
+        $this->parentId = $this->createParam($data, 'parent_id');
+        $this->position = $this->createParam($data, 'position');
     }
 
     protected function getValidatorSchema(): JSONSchema

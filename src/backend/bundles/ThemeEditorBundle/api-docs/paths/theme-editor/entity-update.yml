@@ -11,20 +11,12 @@
         type: number
         description: |
           ID тематики
-
       - name: body
         in: body
         required: true
         description: JSON Request
         schema:
-          type: object
-          properties:
-            title:
-              type: string
-              description: Название темы
-            parent_id:
-              type: number
-              description: ID родительской тематики
+          $ref: '#/definitions/Update_Theme_Request'
     responses:
       '200':
         description: |
@@ -32,11 +24,19 @@
         schema:
           type: object
           required:
+            - id
             - success
+            - entity
           properties:
+            id:
+              type: number
+              description: ID созданной темы
             success:
               type: boolean
+              default: true
               description: "= true"
+            entity:
+              $ref: '#/definitions/Data_Entity_Theme'
       '400':
           $ref: '#/responses/error'
       '404':

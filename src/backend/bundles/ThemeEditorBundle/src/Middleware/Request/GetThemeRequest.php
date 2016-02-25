@@ -1,18 +1,12 @@
 <?php
 namespace ThemeEditor\Middleware\Request;
 
-use Application\REST\RESTRequest;
-use Application\Service\JSONSchema;
+use Application\Tools\RequestParams\RequestParams;
+use Psr\Http\Message\ServerRequestInterface;
 
-class GetThemeRequest extends RESTRequest
+class GetThemeRequest implements RequestParams
 {
-    protected function setup()
+    public function __construct(ServerRequestInterface $request)
     {
-        // TODO: Implement setup() method.
-    }
-
-    protected function getValidatorSchema(): JSONSchema
-    {
-        // TODO: Implement getValidatorSchema() method.
     }
 }

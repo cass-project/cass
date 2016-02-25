@@ -1,25 +1,21 @@
 <?php
 namespace ThemeEditor\Middleware\Request;
 
-use Application\REST\RESTRequest;
-use Application\REST\SchemaRESTRequest;
+use Application\Tools\RequestParams\RequestParams;
 use Psr\Http\Message\ServerRequestInterface;
 
-class DeleteThemeRequest extends SchemaRESTRequest
+class DeleteThemeRequest implements RequestParams
 {
     /** @var int */
     private $id;
 
-    public function __construct(int $id) {
-        $this->id = $id;
-    }
-
-    public function getId() {
-        return $this->id;
-    }
-
-    public static function factory(ServerRequestInterface $request)
+    public function __construct(ServerRequestInterface $request)
     {
-        // TODO: Implement factory() method.
+        $this->id = (int) $request->getAttribute('themeId');
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 }

@@ -77,8 +77,17 @@ class Theme
         return $this->parent;
     }
 
+    public function getParentId()
+    {
+        return $this->parent === null ? null : $this->parent->getId();
+    }
+
     public function setParent(Theme $parent = null)
     {
+        if($parent && $parent->getId() === $this->getId()) {
+            throw new \Exception('Unable to setup parent');
+        }
+
         $this->parent = $parent;
     }
 

@@ -1,5 +1,11 @@
 <?php
-namespace Application\REST;
+/**
+ * Created by PhpStorm.
+ * User: dborisenko
+ * Date: 25.02.16
+ * Time: 16:29
+ */
+namespace Application\Tools\RequestParams;
 
 use Application\Service\JSONSchema;
 use Application\Service\SchemaService;
@@ -7,7 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class InvalidRESTRequestException extends \Exception {}
 
-abstract class RESTRequest
+abstract class RequestParamsWithSchema implements RequestParams
 {
     /** @var SchemaService */
     private static $schemaService;
@@ -18,11 +24,13 @@ abstract class RESTRequest
     /** @var object */
     private $data;
 
-    public static function injectSchemaService(SchemaService $schemaService) {
+    public static function injectSchemaService(SchemaService $schemaService)
+    {
         self::$schemaService = $schemaService;
     }
 
-    public static function getSchemaService(): SchemaService {
+    public static function getSchemaService(): SchemaService
+    {
         return self::$schemaService;
     }
 
@@ -35,21 +43,34 @@ abstract class RESTRequest
         $this->setup();
     }
 
-    private function validateSchema() {
+    protected function createParam($source, $key, $isRequired = false)
+    {
+        return new Param($source, $key, $isRequired);
+    }
+
+    private function validateSchema()
+    {
         $data = $this->data;
 
         $schema = $this->getValidatorSchema();
         $validator = $schema->validate($data);
 
-        if(!($validator->isValid())) {
+        if (!($validator->isValid())) {
             throw new InvalidRESTRequestException('Invalid JSON');
         }
     }
 
-    public function getData() {
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
+    }
+
+    public function getData()
+    {
         return $this->data;
     }
 
     protected abstract function setup();
+
     protected abstract function getValidatorSchema(): JSONSchema;
 }
