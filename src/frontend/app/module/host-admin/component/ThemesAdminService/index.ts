@@ -2,11 +2,16 @@ import {Injectable} from 'angular2/core';
 import {Http, RequestOptions} from 'angular2/http';
 import {Headers} from "angular2/http";
 
+
 @Injectable()
-export class GetThemes {
+export class ManageThemes {
     themes;
     public http:Http;
-
+    active: boolean = true;
+    show: boolean = false;
+   public clicked(){
+        this.show = !this.show;
+    }
     constructor(public http:Http) {
         this.http = http;
     }
@@ -15,50 +20,40 @@ export class GetThemes {
         return this.http.get('/backend/api/protected/host-admin/theme-editor/read/entities/')
             .map(res => res.json())
             .subscribe(data => this.themes = data.entities);
+    }
+      putTheme(value){
+        var headers = new Headers();
+        headers.append('Content-type', 'application/json');
+        var options = new RequestOptions({
+            headers: headers
+        });
+          return this.http.put('/backend/api/protected/host-admin/theme-editor/entity/create', JSON.stringify({title: value}), options).subscribe(
+            data =>{console.log(data); this.loadThemes();},
+            err => {console.log(err);}
+        );
+    }
 
-    }
-};
-
-@Injectable()
-export class CreateTheme {
-    show: boolean = false;
-    clicked(){
-        this.show = !this.show;
-    }
-    public http:Http;
-    constructor(public http:Http) {
-        this.http = http;
-    }
-    putTheme(value){
-        //var headers = new Headers();
-        //headers.append('Content-type', 'application/json');
-        console.log(value);
-        console.log(JSON.stringify({title: value}));
-        console.log(this.http.put('/backend/api/protected/host-admin/theme-editor/entity/create', JSON.stringify({title: value})).map(res => res.json()));
-       return this.http.put('/backend/api/protected/host-admin/theme-editor/entity/create', JSON.stringify({title: value}));
-    }
-};
-
-@Injectable()
-export class UpdateTheme{
-    public http:Http;
-    constructor(public http:Http) {
-        this.http = http;
-    }
     updateTheme(id, value){
-         this.http.post('/backend/api/protected/host-admin/theme-editor/entity/update/' + id, JSON.stringify({title: value}));
-    }
-};
-
-@Injectable()
-export class DeleteTheme {
-    public http:Http;
-
-    constructor(public http:Http) {
-        this.http = http;
+        var headers = new Headers();
+        headers.append('Content-type', 'application/json');
+        var options = new RequestOptions({
+            headers: headers
+        });
+        this.http.post('/backend/api/protected/host-admin/theme-editor/entity/update/' + id, JSON.stringify({title: value}), options).subscribe(
+            data =>{ console.log(data); this.loadThemes();},
+            err => {console.log(err);}
+        );
     }
 
     deleteTheme(id) {
-        this.http.delete('/backend/api/protected/host-admin/theme-editor/entity/delete/' + id);
+        var headers = new Headers();
+        headers.append('Content-type', 'application/json');
+        var options = new RequestOptions({
+            headers: headers
+        });
+        this.http.delete('/backend/api/protected/host-admin/theme-editor/entity/delete/' + id, options).subscribe(
+            data =>{ console.log(data); this.loadThemes();},
+            err => {console.log(err);}
+        );
     }
 };
