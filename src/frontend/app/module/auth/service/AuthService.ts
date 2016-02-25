@@ -28,11 +28,11 @@ export class AuthService {
     }
 
     attemptSignIn(login:string, password:string) {
-        let args = new URLSearchParams();
-        args.set('login', login);
-        args.set('password', password);
         this.isLoading = true;
-        this.http.get('/backend/api/auth/sign-in', {search: args})
+        this.http.post('/backend/api/auth/sign-in', JSON.stringify({
+                "login"         : login,
+                "password"      : password
+        }))
             .map(res => res.json())
             .subscribe(
                 data => this.isAuthenticated = true,
@@ -42,14 +42,14 @@ export class AuthService {
     }
 
     attemptSignUp(email:string, phone:string, password:string, passwordAgain:string){
-        let args = new URLSearchParams();
-        if(email) args.set('email', email);
-        if(phone) args.set('phone', phone);
-        args.set('password', password);
-        args.set('passwordAgain', passwordAgain);
 
         this.isLoading = true;
-        this.http.get('/backend/api/auth/sign-up', {search: args})
+        this.http.post('/backend/api/auth/sign-up', JSON.stringify({
+                "email"         : email,
+                "phone"         : phone,
+                "password"      : password,
+                "passwordAgain" : passwordAgain
+        }))
             .map(res => res.json())
             .subscribe(
                 data => this.isAuthenticated = true,
