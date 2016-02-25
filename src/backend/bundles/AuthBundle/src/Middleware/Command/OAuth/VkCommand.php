@@ -4,12 +4,16 @@ namespace Auth\Middleware\Command\OAuth;
 use Application\REST\GenericRESTResponseBuilder;
 use Auth\Middleware\Command\Command;
 use Auth\OauthProvider\Vk;
+use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Zend\Diactoros\ServerRequestFactory;
 
 class VkCommand extends Command
 {
     public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder)
     {
+
         $provider = new Vk(
             [
                 'clientId'     => '5289954',
@@ -20,7 +24,7 @@ class VkCommand extends Command
         );
 
         if(!isset($_GET['code'])){
-            $authorizationUrl = $provider->getAuthorizationUrl();
+            $authorizationUrl = $provider->getAuthorizationUrl(['scope'=>'email']);
             $_SESSION['oauth2state'] = $provider->getState();
             header('Location: ' . $authorizationUrl);
             exit;
@@ -38,12 +42,15 @@ class VkCommand extends Command
                     ]
                 );
 
+
                 $responseBuilder->setStatusSuccess()
-                    ->setJson([$accessToken]);
+                    ->setJson([$accessToken,'user_id'=>$provider->user_id,'email'=> $provider->user_email]);
 
             } catch(\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e){
                 exit($e->getMessage());
             }
         }
+
+
     }
 }

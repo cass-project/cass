@@ -16,9 +16,8 @@ use Psr\Http\Message\ResponseInterface;
  */
 class Vk extends AbstractProvider
 {
-
-
 	public $user_id;
+	public $user_email;
 
 	public function getBaseAuthorizationUrl(){
 		return 'https://oauth.vk.com/authorize';
@@ -56,12 +55,14 @@ class Vk extends AbstractProvider
 							 'schools',
 							 'verified', ];
 		return "https://api.vk.com/method/users.get?user_id={$token->getResourceOwnerId()}&fields="
-					 .implode(",", $fields)."&access_token={$token}";
+					 .implode(",", $fields)."&access_token={$token}&scope=email";
 	}
 
 	protected function createAccessToken(array $response, AbstractGrant $grant)
 	{
-		$response['resource_owner_id'] = $response['user_id'];
+		$this->user_id = isset($response['user_id'])?$response['user_id']:null;
+		$this->user_email = isset($response['email'])?$response['email']:null;
+		$response['resource_owner_id'] = $this->user_id;
 		return new AccessToken($response);
 	}
 

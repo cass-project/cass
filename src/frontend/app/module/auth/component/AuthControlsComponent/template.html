@@ -2,6 +2,11 @@
   <div *ngIf="!authService.isAuthenticated">
     <a [routerLink]="['/Auth/SignUp']">Sign Up</a>
     <a [routerLink]="['/Auth/SignIn']">Sign In</a>
+
+    <div class="oauth2">
+      <a href="backend/api/auth/oauth/vk">авторизоваться через вконтакте</a>
+    </div>
+
   </div>
   <div *ngIf="authService.isAuthenticated">
     <a [routerLink]="['/Auth/Logout']">Log Out</a>
