@@ -8,6 +8,7 @@ use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Zend\Diactoros\ServerRequestFactory;
+use Zend\Diactoros\Stream;
 
 class VkCommand extends Command
 {
@@ -41,6 +42,33 @@ class VkCommand extends Command
                         'code' => $_GET['code']
                     ]
                 );
+
+                $authService = $this->getAuthService();
+                if(!$authService->isAccountExist($provider->user_email)){
+                    $authRequest = ServerRequestFactory::fromGlobals();
+
+
+                    $body = new Stream('php://output', 'rw');
+                    $body->write(json_encode([
+                                               'email' => $provider->user_email,
+                                               'password' => 'a1fsfsA',
+                                               'passwordAgain'=> 'a1fsfsA']));
+
+                    $authRequest->withBody($body);
+
+                    print_r($authRequest);
+                    die();
+
+                   $account =  $authService->signUp($authRequest);
+
+                    var_dump($account);
+
+                    die();
+                }
+
+
+
+
 
 
                 $responseBuilder->setStatusSuccess()
