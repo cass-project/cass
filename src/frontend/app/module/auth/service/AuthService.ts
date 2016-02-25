@@ -35,7 +35,10 @@ export class AuthService {
         }))
             .map(res => res.json())
             .subscribe(
-                data => this.isAuthenticated = true,
+                data => {
+                    this.isAuthenticated = true;
+                    localStorage.setItem('account_token',data['account_token']);
+                },
                 err => this.isLoading = this.isAuthenticated = false,
                 () => this.isLoading = false
             );
