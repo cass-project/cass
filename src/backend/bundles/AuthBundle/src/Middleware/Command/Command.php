@@ -23,7 +23,7 @@ abstract class Command
 
             case 'sign-in': return new SignInCommand();
             case 'sign-up': return new SignUpCommand();
-            case 'logout': return new LogOutCommand();
+            case 'sign-out': return new SignOutCommand();
             case 'oauth':
                 switch($request->getAttribute('provider')){
                     case 'vk': return new VkCommand();

@@ -10,8 +10,7 @@ class SignInCommand extends Command
     public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder)
     {
         try {
-            $this->getAuthService()->attemptSignIn($request);
-            
+            $this->getAuthService()->signIn($request);
             $responseBuilder->setStatusSuccess();
         }catch(InvalidCredentialsException $e) {
             $responseBuilder
