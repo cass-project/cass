@@ -75,7 +75,7 @@ class AuthService
             throw new ValidationException("Passwords must be at least 6 characters contain one uppercase letter and digit.");
         }
 
-        if($this->accountRepository->isAccountExist($request['email'] ?? $request['phone'])) {
+        if($this->isAccountExist($request['email'] ?? $request['phone'])) {
             throw new DuplicateAccountException(sprintf('%s already in use.', $request['email'] ?? $request['phone']));
         }
 
@@ -94,6 +94,10 @@ class AuthService
             $this->setToken($account->getToken());
         }
         return $account;
+    }
+
+    public function isAccountExist($login){
+        return $this->accountRepository->isAccountExist($login);
     }
 
     public function signOut()
