@@ -14,7 +14,6 @@ class ReadThemeCommand extends Command
         return [
             'entities' => $entities,
             'total' => count($entities),
-            'success' => true
         ];
     }
 }

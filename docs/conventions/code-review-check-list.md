@@ -16,6 +16,8 @@ Instant reject:
 
 - Закомментированный код
 
+- `if(getSomething() === null) { ... }`
+
 98% reject:
 -----------
 

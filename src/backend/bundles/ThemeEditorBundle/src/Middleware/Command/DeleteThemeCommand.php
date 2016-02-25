@@ -11,8 +11,6 @@ class DeleteThemeCommand extends Command
         $themeEditorService = $this->getThemeEditorService();
         $themeEditorService->delete(new DeleteThemeRequest($request));
 
-        return [
-            'success' => true
-        ];
+        return [];
     }
 }

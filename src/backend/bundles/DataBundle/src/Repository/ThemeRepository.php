@@ -87,7 +87,7 @@ class ThemeRepository extends EntityRepository
                 $this->shiftPositions($value, $parentId, $themeEntity->getId());
             })
             ->none(function() use ($themeEntity, $parentId) {
-                if($themeEntity->getId() === null) {
+                if($themeEntity->hasId()) {
                     $position = $this->getLastPosition($parentId) + 1;
                     $themeEntity->setPosition($position);
                 }
@@ -128,7 +128,7 @@ class ThemeRepository extends EntityRepository
         ;
 
         foreach($qb->getQuery()->getResult() as $themeEntity) { /** @var Theme $themeEntity */
-            $themeEntity->inrementPosition();
+            $themeEntity->incrementPosition();
 
             $em->persist($themeEntity);
         }
@@ -140,7 +140,7 @@ class ThemeRepository extends EntityRepository
         /** @var Theme $themeEntity */
 
         if ($themeEntity === null) {
-            throw new DataEntityNotFoundException(sprintf("Theme Entity with ID `%d` not found", $moveThemeRequest->getThemeId()));
+            throw new DataEntityNotFoundException(sprintf("Theme Entity with ID `%d` not found", $id));
         }
         return $themeEntity;
     }

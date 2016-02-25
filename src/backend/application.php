@@ -6,7 +6,7 @@ use Application\Bootstrap\Scripts\RouteSetupScript;
 use Application\Bootstrap\Scripts\SharedConfigServiceSetupScript;
 use Application\Service\SchemaService;
 use Application\Service\SharedConfigService;
-use Zend\Expressive\AppFactory;
+use Zend\Diactoros\Response\SapiEmitter;
 
 class LBApplicationBootstrap
 {
@@ -92,7 +92,13 @@ class LBApplicationBootstrap
     }
 
     public function bootstrap() {
-        $app = AppFactory::create();
+        $container = new \Zend\ServiceManager\ServiceManager();
+        $router = new \Zend\Expressive\Router\FastRouteRouter();
+        $errorHandler = new \Application\Bootstrap\ErrorHandler();
+        $emitter = new \Zend\Expressive\Emitter\EmitterStack();
+        $emitter->push(new SapiEmitter());
+
+        $app = new \Zend\Expressive\Application($router, $container, $errorHandler, $emitter);
 
         $this->app = $app;
         $this->serviceManager = $app->getContainer();

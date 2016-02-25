@@ -9,7 +9,7 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 
 class ThemeEditorServiceFactory implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): ThemeEditorService
     {
         $themeRepository = $container->get(ThemeRepository::class); /** @var ThemeRepository $themeRepository */
         $currentHostService = $container->get(CurrentHostService::class); /** @var CurrentHostService $currentHostService*/

@@ -37,7 +37,7 @@ class Host
         return $this;
     }
 
-    public function toJSON()
+    public function toJSON(): array
     {
         return [
             'id' => $this->getId(),

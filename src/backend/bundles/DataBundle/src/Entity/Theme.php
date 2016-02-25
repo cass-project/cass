@@ -47,12 +47,17 @@ class Theme
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTitle() {
+    public function hasId(): int
+    {
+        return $this->id !== null;
+    }
+
+    public function getTitle(): string {
         return $this->title;
     }
 
@@ -63,7 +68,7 @@ class Theme
         return $this;
     }
 
-    public function hasParent()
+    public function hasParent(): bool
     {
         return $this->parent !== null;
     }
@@ -82,13 +87,15 @@ class Theme
         return $this->parent === null ? null : $this->parent->getId();
     }
 
-    public function setParent(Theme $parent = null)
+    public function setParent(Theme $parent = null): self
     {
-        if($parent && $parent->getId() === $this->getId()) {
+        if($parent && $this->hasId() && $parent->getId() === $this->getId()) {
             throw new \Exception('Unable to setup parent');
         }
 
         $this->parent = $parent;
+
+        return $this;
     }
 
     public function getHost(): Host
@@ -119,12 +126,12 @@ class Theme
         return $this;
     }
 
-    public function inrementPosition()
+    public function incrementPosition()
     {
         ++$this->position;
     }
 
-    public function toJSON()
+    public function toJSON(): array
     {
         return [
             'id' => $this->getId(),

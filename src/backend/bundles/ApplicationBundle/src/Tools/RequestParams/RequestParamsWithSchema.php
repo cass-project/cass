@@ -11,7 +11,7 @@ use Application\Service\JSONSchema;
 use Application\Service\SchemaService;
 use Psr\Http\Message\ServerRequestInterface;
 
-class InvalidRESTRequestException extends \Exception {}
+class InvalidJSONSchema extends \Exception {}
 
 abstract class RequestParamsWithSchema implements RequestParams
 {
@@ -56,7 +56,7 @@ abstract class RequestParamsWithSchema implements RequestParams
         $validator = $schema->validate($data);
 
         if (!($validator->isValid())) {
-            throw new InvalidRESTRequestException('Invalid JSON');
+            throw new InvalidJSONSchema('Invalid JSON');
         }
     }
 

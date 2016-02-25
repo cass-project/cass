@@ -11,7 +11,10 @@ class ThemeEntityMigration extends AbstractMigration
                 'null' => true
             ])
             ->addColumn('title', 'string')
-            ->addForeignKey('parent_id', 'theme', 'id')
+            ->addForeignKey('parent_id', 'theme', 'id', [
+                'delete' => 'cascade',
+                'update' => 'cascade'
+            ])
             ->create()
         ;
     }

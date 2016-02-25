@@ -8,7 +8,10 @@ class ThemeHostForeignKeyMigration extends AbstractMigration
     {
         $this->table('theme')
             ->addColumn('host_id', 'integer')
-            ->addForeignKey('host_id', 'host', 'id')
+            ->addForeignKey('host_id', 'host', 'id', [
+                'delete' => 'cascade',
+                'update' => 'cascade'
+            ])
             ->update()
         ;
     }

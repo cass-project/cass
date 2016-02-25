@@ -2,7 +2,6 @@
   "autoload": {
     "psr-4": {
       "Application\\": "bundles/ApplicationBundle/src",
-      "Square\\": "bundles/SquareBundle/src",
       "Auth\\": "bundles/AuthBundle/src",
       "Data\\": "bundles/DataBundle/src",
       "ThemeEditor\\": "bundles/ThemeEditorBundle/src",
