@@ -26,7 +26,7 @@ class AuthService
 
     public function signIn(Request $request) : Account
     {
-        $request = $request->getQueryParams();
+        $request =  json_decode($request->getBody(), true);
 
         if(isset($request['login']) || isset($request['password'])) {
             $this->removeToken();
@@ -57,7 +57,7 @@ class AuthService
 
     public function signUp(Request $request, bool $signInAfter = true) : Account
     {
-        $request = $request->getQueryParams();
+        $request =  json_decode($request->getBody(), true);
 
         if(empty($request['email']) && empty($request['phone']) || empty($request['password'])) {
             throw new MissingReqiuredFieldException('Email or phone and password are required');
