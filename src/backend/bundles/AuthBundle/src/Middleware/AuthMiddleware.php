@@ -16,10 +16,6 @@ class AuthMiddleware implements MiddlewareInterface
      */
     private $authService;
 
-    /**
-     * AuthMiddleware constructor.
-     * @param AuthService $authService
-     */
     public function __construct(AuthService $authService)
     {
         $this->authService = $authService;

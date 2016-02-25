@@ -1,7 +1,10 @@
 <?php
 namespace Auth\Service;
 
+use Auth\Service\AuthService\Exceptions\DuplicateAccountException;
+use Auth\Service\AuthService\Exceptions\ValidationException;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
+use Auth\Service\AuthService\Exceptions\MissingReqiuredFieldException;
 use Data\Entity\Account;
 use Data\Repository\AccountRepository;
 use Doctrine\ORM\EntityManager;
@@ -21,7 +24,7 @@ class AuthService
         $this->accountRepository = $entityManager->getRepository(Account::class);
     }
 
-    public function attemptSignIn(Request $request) : Account
+    public function signIn(Request $request) : Account
     {
         $request = $request->getQueryParams();
 
@@ -57,23 +60,23 @@ class AuthService
         $request = $request->getQueryParams();
 
         if(empty($request['email']) && empty($request['phone']) || empty($request['password'])) {
-            throw new InvalidCredentialsException('Email or phone and password are required');
+            throw new MissingReqiuredFieldException('Email or phone and password are required');
         }
 
         if(isset($request['email']) && false === filter_var($request['email'], FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidCredentialsException("Invalid email format");
+            throw new ValidationException("Invalid email format");
         }
 
         if(empty($request['passwordAgain']) || strcmp($request['password'], $request['passwordAgain'])) {
-            throw new InvalidCredentialsException("Passwords does not match");
+            throw new ValidationException("Passwords does not match");
         }
 
         if(preg_match("~((?=.*[a-z])(?=.*\d)(?=.*[A-Z]).{6,})~", $request['password'])==0) {
-            throw new InvalidCredentialsException("Passwords must be at least 6 characters contain one uppercase letter and digit.");
+            throw new ValidationException("Passwords must be at least 6 characters contain one uppercase letter and digit.");
         }
 
         if($this->accountRepository->isAccountExist($request['email'] ?? $request['phone'])) {
-            throw new InvalidCredentialsException(sprintf('%s already in use.', $request['email'] ?? $request['phone']));
+            throw new DuplicateAccountException(sprintf('%s already in use.', $request['email'] ?? $request['phone']));
         }
 
         $account = (new Account())

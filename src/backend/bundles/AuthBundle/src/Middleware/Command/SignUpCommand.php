@@ -2,7 +2,9 @@
 namespace Auth\Middleware\Command;
 
 use Application\REST\GenericRESTResponseBuilder;
-use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
+use Auth\Service\AuthService\Exceptions\DuplicateAccountException;
+use Auth\Service\AuthService\Exceptions\MissingReqiuredFieldException;
+use Auth\Service\AuthService\Exceptions\ValidationException;
 use Psr\Http\Message\ServerRequestInterface;
 
 class SignUpCommand extends Command
@@ -12,7 +14,17 @@ class SignUpCommand extends Command
         try {
             $this->getAuthService()->signUp($request);
             $responseBuilder->setStatusSuccess();
-        }catch(InvalidCredentialsException $e) {
+        }catch(MissingReqiuredFieldException $e) {
+            $responseBuilder
+                ->setStatusNotFound()
+                ->setError($e)
+            ;
+        }catch(DuplicateAccountException $e) {
+            $responseBuilder
+                ->setStatusNotFound()
+                ->setError($e)
+            ;
+        }catch(ValidationException $e) {
             $responseBuilder
                 ->setStatusNotFound()
                 ->setError($e)
