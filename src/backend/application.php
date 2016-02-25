@@ -4,6 +4,7 @@ require __DIR__.'/vendor/autoload.php';
 use Application\Bootstrap\Bundle\Bundle;
 use Application\Bootstrap\Scripts\RouteSetupScript;
 use Application\Bootstrap\Scripts\SharedConfigServiceSetupScript;
+use Application\Service\SchemaService;
 use Application\Service\SharedConfigService;
 use Zend\Expressive\AppFactory;
 
@@ -86,6 +87,10 @@ class LBApplicationBootstrap
         (new RouteSetupScript($this->app, $this->serviceManager))->run();
     }
 
+    private function initSchemaRESTRequest() {
+        \Application\REST\RESTRequest::injectSchemaService($this->serviceManager->get(SchemaService::class));
+    }
+
     public function bootstrap() {
         $app = AppFactory::create();
 
@@ -97,6 +102,7 @@ class LBApplicationBootstrap
         $this->initSharedConfigService();
         $this->initContainer();
         $this->initRoutes();
+        $this->initSchemaRESTRequest();
 
         $app->run();
     }

@@ -14,7 +14,6 @@ Data_Entity_Theme:
       type: number
       description: ID родительской тематики
     host:
-      type: object
       $ref: '#/definitions/Data_Entity_Host'
     position:
       type: number

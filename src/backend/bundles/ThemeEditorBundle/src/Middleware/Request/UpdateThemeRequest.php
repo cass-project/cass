@@ -2,43 +2,17 @@
 namespace ThemeEditor\Middleware\Request;
 
 use Application\REST\RESTRequest;
-use Psr\Http\Message\ServerRequestInterface;
+use Application\Service\JSONSchema;
 
-class UpdateThemeRequest implements RESTRequest
+class UpdateThemeRequest extends RESTRequest
 {
-    /** @var int */
-    private $id;
-
-    /** @var string */
-    private $title;
-
-    public function __construct(int $id) {
-        $this->id = $id;
+    protected function setup()
+    {
+        // TODO: Implement setup() method.
     }
 
-    public static function factory(ServerRequestInterface $request) {
-        $body = json_decode($request->getBody(), true);
-        $themeId = $request->getAttribute('themeId');
-        $title = $body['title'] ?? null;
-
-        $updateThemeRequest = new static($themeId);
-
-        if($title !== null) {
-            $updateThemeRequest->setTitle($title);
-        }
-
-        return $updateThemeRequest;
-    }
-
-    public function getId() {
-        return $this->id;
-    }
-
-    public function getTitle() {
-        return $this->title;
-    }
-
-    public function setTitle(string $title) {
-        $this->title = $title;
+    protected function getValidatorSchema(): JSONSchema
+    {
+        // TODO: Implement getValidatorSchema() method.
     }
 }

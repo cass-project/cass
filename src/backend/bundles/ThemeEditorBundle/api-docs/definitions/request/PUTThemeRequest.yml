@@ -1,0 +1,15 @@
+PUT_Theme_Request:
+    type: object
+    required:
+      - title
+    properties:
+      title:
+        type: string
+        description: Название тематики
+      parent_id:
+        type: number
+        description: ID родительской тематики
+      position:
+        type: number
+        description: Позиция в текущем дереве
+        default: 1

@@ -9,7 +9,7 @@ class ReadThemeCommand extends Command
     public function run(ServerRequestInterface $request)
     {
         $themeEditorService = $this->getThemeEditorService();
-        $entities = $themeEditorService->read(GetThemeRequest::factory($request));
+        $entities = $themeEditorService->read(new GetThemeRequest($request));
 
         return [
             'entities' => $entities,

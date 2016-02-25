@@ -2,9 +2,12 @@
 namespace ThemeEditor\Middleware;
 
 use Application\REST\GenericRESTResponseBuilder;
+use Application\REST\InvalidRESTRequestException;
+
 use Data\Exception\DataEntityNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use ThemeEditor\Middleware\Command\Command;
 use ThemeEditor\Middleware\Command\CreateThemeCommand;
 use ThemeEditor\Middleware\Command\DeleteThemeCommand;
 use ThemeEditor\Middleware\Command\MoveThemeCommand;
@@ -16,9 +19,7 @@ use Zend\Stratigility\MiddlewareInterface;
 
 class ThemeEditorCRUDMiddleware implements MiddlewareInterface
 {
-    /**
-     * @var ThemeEditorService
-     */
+    /** @var ThemeEditorService */
     private $themeEditorService;
 
     public function __construct(ThemeEditorService $themeEditorService)
@@ -48,6 +49,11 @@ class ThemeEditorCRUDMiddleware implements MiddlewareInterface
                 ->setStatusNotFound()
                 ->setError($e)
             ;
+        }catch(InvalidRESTRequestException $e){
+            $responseBuilder
+                ->setStatusBadRequest()
+                ->setError($e)
+            ;
         }
 
         return $responseBuilder
@@ -55,7 +61,7 @@ class ThemeEditorCRUDMiddleware implements MiddlewareInterface
         ;
     }
 
-    private function commandFactory(Request $request)
+    private function commandFactory(Request $request): Command
     {
         $command = $request->getAttribute('command');
 

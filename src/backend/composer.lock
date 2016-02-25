@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3d4f874e1e0830852753f16276b5b89d",
-    "content-hash": "bb99d96e826e777a328e2323350b5e38",
+    "hash": "2ee9078f6d729e691bc539574f7215e9",
+    "content-hash": "011c850b369c4b557679335ee5e2e51b",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",

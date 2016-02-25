@@ -4,6 +4,7 @@
 cd /vagrant/backend
 composer.phar install
 composer.phar dump-autoload
+./vendor/bin/phinx migrate
 
 # update frontend
 cd /vagrant/frontend

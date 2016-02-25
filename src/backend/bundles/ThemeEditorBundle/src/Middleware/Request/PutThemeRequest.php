@@ -2,48 +2,47 @@
 namespace ThemeEditor\Middleware\Request;
 
 use Application\REST\RESTRequest;
-use Psr\Http\Message\ServerRequestInterface;
+use Application\Service\JSONSchema;
+use Application\REST\Param;
+use ThemeEditor\ThemeEditorBundle;
 
-class PutThemeRequest implements RESTRequest
+class PutThemeRequest extends RESTRequest
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $title;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $parentId;
 
-    public static function factory(ServerRequestInterface $request) {
-        $body = json_decode($request->getBody(), true);
-        $title = $body['title'];
-        $parentId = $body['parent_id'] ?? null;
+    /** @var int */
+    private $position;
 
-        $PUTEntityRequest = new static($title);
-        $PUTEntityRequest->setParentId($parentId);
+    protected function setup()
+    {
+        $data = $this->getData();
 
-        return $PUTEntityRequest;
+        $this->title = new Param($data, 'title', true);
+        $this->parentId = new Param($data, 'parent_id');
+        $this->position = new Param($data, 'position');
     }
 
-    public function __construct($title) {
-        $this->title = $title;
+    protected function getValidatorSchema(): JSONSchema
+    {
+        return self::getSchemaService()->getSchema(ThemeEditorBundle::class, './definitions/request/PUTThemeRequest.yml');
     }
 
-    public function getTitle() {
+    public function getTitle(): Param
+    {
         return $this->title;
     }
 
-    public function setTitle(string $title) {
-        $this->title = $title;
-    }
-
-    public function getParentId() {
+    public function getParentId(): Param
+    {
         return $this->parentId;
     }
 
-    public function setParentId(int $parentId = null) {
-        $this->parentId = $parentId;
+    public function getPosition(): Param
+    {
+        return $this->position;
     }
 }

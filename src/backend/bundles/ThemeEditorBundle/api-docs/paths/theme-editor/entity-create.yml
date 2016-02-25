@@ -10,14 +10,7 @@
         required: true
         description: JSON Request
         schema:
-          type: object
-          properties:
-            title:
-              type: string
-              description: Название тематики
-            parent_id:
-              type: number
-              description: ID родительской тематики
+          $ref: '#/definitions/PUT_Theme_Request'
     responses:
       '400':
           $ref: '#/responses/error'

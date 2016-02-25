@@ -1,30 +1,22 @@
 <?php
 namespace ThemeEditor\Middleware\Command;
 
+use Application\Service\SchemaService;
 use ThemeEditor\Service\ThemeEditorService;
 use Psr\Http\Message\ServerRequestInterface;
 
 abstract class Command
 {
-    /**
-     * @var ThemeEditorService
-     */
+    /** @var ThemeEditorService */
     private $themeEditorService;
 
-    /**
-     * @param ThemeEditorService $themeEditorService
-     */
-    public function setThemeEditorService($themeEditorService)
+    public function setThemeEditorService(ThemeEditorService $themeEditorService)
     {
         $this->themeEditorService = $themeEditorService;
     }
 
-    protected function getThemeEditorService()
+    protected function getThemeEditorService(): ThemeEditorService
     {
-        if($this->themeEditorService === null) {
-            throw new \Exception('No theme editor service available');
-        }
-
         return $this->themeEditorService;
     }
 

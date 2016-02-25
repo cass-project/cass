@@ -101,9 +101,18 @@ class Theme
 
     public function setPosition(int $position): self
     {
+        if($position <= 1) {
+            $position = 1;
+        }
+
         $this->position = $position;
 
         return $this;
+    }
+
+    public function inrementPosition()
+    {
+        ++$this->position;
     }
 
     public function toJSON()
@@ -112,7 +121,8 @@ class Theme
             'id' => $this->getId(),
             'title' => $this->getTitle(),
             'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null,
-            'host' => $this->getHost()->toJSON()
+            'host' => $this->getHost()->toJSON(),
+            'position' => $this->getPosition()
         ];
     }
 }
