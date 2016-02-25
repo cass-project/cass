@@ -96,7 +96,8 @@ class AuthService
         return $account;
     }
 
-    public function isAccountExist($login){
+    public function isAccountExist($login) : bool
+    {
         return $this->accountRepository->isAccountExist($login);
     }
 
