@@ -5,6 +5,7 @@ use Application\Bootstrap\Bundle\BundleService;
 use Application\Service\SharedConfigService;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Doctrine\DBAL\Logging\DebugStack;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
@@ -29,7 +30,9 @@ class DoctrineEntityManagerFactory implements FactoryInterface
         $config = $sharedConfigService->get('doctrine2');
 
         $doctrineConfig = Setup::createAnnotationMetadataConfiguration($entitySourceDirs, $config['isDevMode']);
-
+        if($config['isDevMode']) {
+            $doctrineConfig->setSQLLogger(new DebugStack());
+        }
         return EntityManager::create($config['connection_options'], $doctrineConfig);
     }
 
