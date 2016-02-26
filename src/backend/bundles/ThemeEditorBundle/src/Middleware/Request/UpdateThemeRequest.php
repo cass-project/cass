@@ -12,13 +12,13 @@ class UpdateThemeRequest extends RequestParamsWithSchema implements SaveThemePro
     /** @var int */
     private $id;
 
-    /** @var string */
+    /** @var Param */
     private $title;
 
-    /** @var int */
+    /** @var Param */
     private $parentId;
 
-    /** @var int */
+    /** @var Param */
     private $position;
 
     protected function setup()
@@ -27,7 +27,7 @@ class UpdateThemeRequest extends RequestParamsWithSchema implements SaveThemePro
         $request = $this->getRequest();
 
         $this->id = (int) $request->getAttribute('themeId');
-        $this->title = $this->createParam($data, 'title', true);
+        $this->title = $this->createParam($data, 'title');
         $this->parentId = $this->createParam($data, 'parent_id');
         $this->position = $this->createParam($data, 'position');
     }

@@ -35,10 +35,6 @@ class SerialManager
 
     public function insertAs(SerialEntity $entity, int $toPosition)
     {
-        if($this->has($entity)) {
-            throw new \Exception('You can\'t use method insertAs with already existing items');
-        }
-
         if($toPosition > $this->max()) {
             $this->insertLast($entity);
         }else{
@@ -49,7 +45,10 @@ class SerialManager
             }
 
             $entity->setPosition($toPosition);
-            $this->entities[] = $entity;
+
+            if(!($this->has($entity))) {
+                $this->entities[] = $entity;
+            }
         }
 
         $this->normalize();

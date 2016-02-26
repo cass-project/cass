@@ -9,7 +9,7 @@ class MoveThemeRequest implements RequestParams
     /** @var int */
     private $themeId;
 
-    /** @var int */
+    /** @var int|null */
     private $parentThemeId;
 
     /** @var int */
@@ -18,8 +18,21 @@ class MoveThemeRequest implements RequestParams
     public function __construct(ServerRequestInterface $request)
     {
         $this->themeId = (int) $request->getAttribute('themeId');
-        $this->parentThemeId = (int) $request->getAttribute('parentThemeId');
         $this->position = (int) $request->getAttribute('position');
+
+        switch($parentId = $request->getAttribute('parentThemeId')) {
+            case 0:
+            case null:
+            case 'null':
+            case 'root':
+            case 'none':
+                $this->parentThemeId = 0;
+                break;
+
+            default:
+                $this->parentThemeId = (int) $parentId;
+                break;
+        }
     }
 
     public function getThemeId(): int
@@ -27,7 +40,7 @@ class MoveThemeRequest implements RequestParams
         return $this->themeId;
     }
 
-    public function getParentThemeId(): int
+    public function getParentThemeId()
     {
         return $this->parentThemeId;
     }

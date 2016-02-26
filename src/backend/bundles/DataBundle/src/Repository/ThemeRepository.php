@@ -1,12 +1,12 @@
 <?php
 namespace Data\Repository;
 
+use Application\Tools\SerialManager\SerialManager;
 use Cocur\Chain\Chain;
 use Data\Entity\Host;
 use Data\Entity\Theme;
 use Data\Exception\DataEntityNotFoundException;
 use Data\Repository\Theme\SaveThemeProperties;
-use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use ThemeEditor\Middleware\Request\DeleteThemeRequest;
 use ThemeEditor\Middleware\Request\GetThemeRequest;
@@ -20,7 +20,8 @@ class ThemeRepository extends EntityRepository
      * @param GetThemeRequest $getThemeRequest
      * @return Theme[]
      */
-    public function getThemes(GetThemeRequest $getThemeRequest): array {
+    public function getThemes(GetThemeRequest $getThemeRequest): array
+    {
         return Chain::create($this->findBy([]))
             ->map(function(Theme $theme) {
                 return $theme->toJSON();
@@ -45,96 +46,113 @@ class ThemeRepository extends EntityRepository
 
     public function update(UpdateThemeRequest $updateThemeRequest): Theme
     {
-        $themeEntity = $this->findThemeEntity($updateThemeRequest->getId());
+        $themeEntity = $this->getThemeEntity($updateThemeRequest->getId());
 
         $this->setupEntity($themeEntity, $updateThemeRequest);
 
         $em = $this->getEntityManager();
         $em->persist($themeEntity);
-        $em->flush($themeEntity);
+        $em->flush();
 
         return $themeEntity;
     }
 
-    public function move(MoveThemeRequest $moveThemeRequest): Theme {
-        throw new \Exception('Not implemented');
+    public function move(MoveThemeRequest $moveThemeRequest): Theme
+    {
+        $em = $this->getEntityManager();
+        $themeEntity = $this->getThemeEntity($moveThemeRequest->getThemeId());
+
+        $parentId = $moveThemeRequest->getParentThemeId();
+
+        if($parentId == 0) {
+            $themeEntity->setParent(null);
+        }else{
+            $themeEntity->setParent($em->getReference(Theme::class, $parentId));
+        }
+
+        $siblings = new SerialManager($this->getThemesWithParent($moveThemeRequest->getParentThemeId()));
+        $siblings->insertAs($themeEntity, $moveThemeRequest->getPosition());
+
+        $em->persist($themeEntity);
+        $em->flush();
+
+        return $themeEntity;
     }
 
-    public function delete(DeleteThemeRequest $deleteThemeRequest): Theme {
-        $themeEntity = $this->findThemeEntity($deleteThemeRequest->getId());
+    public function delete(DeleteThemeRequest $deleteThemeRequest): Theme
+    {
+        $themeEntity = $this->getThemeEntity($deleteThemeRequest->getId());
+
+        $parentId = $themeEntity->hasParent() ? $themeEntity->getParent()->getId() : null;
+        $siblings = new SerialManager($this->getThemesWithParent($parentId));
+
+        $siblings->remove($themeEntity);
 
         $em = $this->getEntityManager();
         $em->remove($themeEntity);
-        $em->flush($themeEntity);
+        $em->flush();
 
         return $themeEntity;
     }
 
-    private function setupEntity(Theme $themeEntity, SaveThemeProperties $saveThemeProperties) {
+    private function setupEntity(Theme $themeEntity, SaveThemeProperties $saveThemeProperties)
+    {
         $em = $this->getEntityManager();
 
-        $themeEntity->setTitle($saveThemeProperties->getTitle()->value());
+        $saveThemeProperties->getTitle()->on(function($value) use($themeEntity) {
+            $themeEntity->setTitle($value);
+        });
 
         $saveThemeProperties->getParentId()->on(function($value) use ($themeEntity, $em) {
-            $themeEntity->setParent($em->getReference(Theme::class, $value));
+            if($value == 0) {
+                $themeEntity->setParent(null);
+            }else{
+                $themeEntity->setParent($em->getReference(Theme::class, $value));
+            }
         });
 
         $parentId = $themeEntity->hasParent() ? $themeEntity->getParent()->getId() : null;
+        $siblings = new SerialManager($this->getThemesWithParent($parentId));
 
-        $saveThemeProperties->getPosition()
-            ->on(function($value) use ($themeEntity, $parentId) {
-                $themeEntity->setPosition($value);
-                $this->shiftPositions($value, $parentId, $themeEntity->getId());
-            })
-            ->none(function() use ($themeEntity, $parentId) {
-                if($themeEntity->hasId()) {
-                    $position = $this->getLastPosition($parentId) + 1;
-                    $themeEntity->setPosition($position);
-                }
-            })
-        ;
-    }
-
-    private function getLastPosition(int $parentId = null): int {
-        $qb = $this->createQueryBuilder('theme')
-            ->select('MAX(theme.position) AS last_theme_position')
-        ;
-
-        is_null($parentId)
-            ? $qb->where('theme.parent IS NULL')
-            : $qb->where('theme.parent = :parentId')->setParameter('parentId', $parentId)
-        ;
-
-        $result = (int) $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
-
-        return ($result === null || $result < 1) ? 1 : (int) $result;
-    }
-
-    private function shiftPositions(int $fromPosition, int $parentId = null, int $excludedId = null) {
-        $em = $this->getEntityManager();
-
-        $qb = $this->createQueryBuilder('t')
-            ->andWhere('t.position = :position')
-            ->setParameter('position', $fromPosition)
-        ;
-
-        if($excludedId) {
-            $qb->andWhere('t.id != :excludedId')->setParameter('excludedId', $excludedId);
+        if($themeEntity->isNewEntity()) {
+            $saveThemeProperties->getPosition()
+                ->on(function($value) use ($siblings, $themeEntity) {
+                    $siblings->insertAs($themeEntity, $value);
+                })
+                ->none(function() use($siblings, $themeEntity) {
+                    $siblings->insertLast($themeEntity);
+                });
+        }else{
+            $saveThemeProperties->getPosition()
+                ->on(function($value) use ($siblings, $themeEntity) {
+                    $siblings->insertAs($themeEntity, $value);
+                })
+                ->none(function() use($siblings, $themeEntity) {
+                    $siblings->insertLast($themeEntity);
+                });
         }
 
-        is_null($parentId)
-            ? $qb->andWhere('t.parent IS NULL')
-            : $qb->andWhere('t.parent = :parentId')->setParameter('parentId', $parentId);
-        ;
-
-        foreach($qb->getQuery()->getResult() as $themeEntity) { /** @var Theme $themeEntity */
-            $themeEntity->incrementPosition();
-
-            $em->persist($themeEntity);
-        }
+        $siblings->normalize();
     }
 
-    private function findThemeEntity(int $id): Theme
+    /**
+     * @return Theme[]
+     */
+    public function getThemesWithParent(int $parentId = null)
+    {
+        if($parentId) {
+            $qb = $this->createQueryBuilder('theme')
+                ->andWhere('theme.parent = :parent')
+                ->setParameter('parent', $parentId);
+        }else{
+            $qb = $this->createQueryBuilder('theme')
+                ->andWhere('theme.parent is null');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getThemeEntity(int $id): Theme
     {
         $themeEntity = $this->find($id);
         /** @var Theme $themeEntity */
