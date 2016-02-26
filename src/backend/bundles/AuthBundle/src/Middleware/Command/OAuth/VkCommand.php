@@ -4,12 +4,15 @@ namespace Auth\Middleware\Command\OAuth;
 use Application\REST\GenericRESTResponseBuilder;
 use Auth\Middleware\Command\Command;
 use Auth\OauthProvider\Vk;
+use Auth\Service\AuthService\Exceptions\DuplicateAccountException;
+use Auth\Service\AuthService\Exceptions\MissingReqiuredFieldException;
+use Auth\Service\AuthService\Exceptions\ValidationException;
+use Data\Entity\Account;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
-use Zend\Diactoros\ServerRequestFactory;
-use Zend\Diactoros\Stream;
-
+use Zend\Diactoros\ServerRequest;
+use Auth\Service\AuthService\Exceptions\DuplicateAccountExeption;
 class VkCommand extends Command
 {
     public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder)
@@ -43,42 +46,35 @@ class VkCommand extends Command
                     ]
                 );
 
-                $authService = $this->getAuthService();
-                if(!$authService->isAccountExist($provider->user_email)){
-                    $authRequest = ServerRequestFactory::fromGlobals();
 
+                fwrite($stream = fopen('php://temp', 'w+'), json_encode([
+                    'email'         => $provider->user_email,
+                    'password'      => 'a1fsfsA',
+                    'passwordAgain' => 'a1fsfsA'
+                ]));
+                $authRequest = new ServerRequest([],[],null,null,$stream);
+                try {
+                    $this->getAuthService()->signUp($authRequest);
+                    $responseBuilder->setStatusSuccess()
+                        ->setJson(['user_id'=>$provider->user_id,'email'=> $provider->user_email]);
 
-                    $body = new Stream('php://output', 'rw');
-                    $body->write(json_encode([
-                                               'email' => $provider->user_email,
-                                               'password' => 'a1fsfsA',
-                                               'passwordAgain'=> 'a1fsfsA']));
-
-                    $authRequest->withBody($body);
-
-                    print_r($authRequest);
-                    die();
-
-                   $account =  $authService->signUp($authRequest);
-
-                    var_dump($account);
-
-                    die();
+                }catch(DuplicateAccountException $e) {
+                    $responseBuilder->setStatusSuccess()
+                        ->setJson(['user_id'=>$provider->user_id,'email'=> $provider->user_email]);
+                }catch(MissingReqiuredFieldException $e) {
+                    $responseBuilder
+                        ->setStatusNotFound()
+                        ->setError($e)
+                    ;
+                }catch(ValidationException $e) {
+                    $responseBuilder
+                        ->setStatusNotFound()
+                        ->setError($e)
+                    ;
                 }
-
-
-
-
-
-
-                $responseBuilder->setStatusSuccess()
-                    ->setJson([$accessToken,'user_id'=>$provider->user_id,'email'=> $provider->user_email]);
-
             } catch(\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e){
                 exit($e->getMessage());
             }
         }
-
-
     }
 }
