@@ -53,7 +53,7 @@ class OAuthRequestOptions extends BaseRequestOptions {
     constructor () {
         super();
         if(localStorage['account_token']){
-            this.headers.append('account_token', localStorage['account_token']);
+            this.headers.set('Account-Token', localStorage['account_token']);
         }
     }
 }
