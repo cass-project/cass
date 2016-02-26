@@ -24,33 +24,30 @@ class AuthService
         $this->accountRepository = $entityManager->getRepository(Account::class);
     }
 
-    public function signIn(Request $request) : Account
+    public function attemptSignIn(Request $request) : Account
     {
-        $request =  json_decode($request->getBody(), true);
+        $credentials = json_decode($request->getBody(), true);
 
-        if(isset($request['login']) || isset($request['password'])) {
-            $this->removeToken();
+        if(isset($credentials['login']) || isset($credentials['password'])) {
+            $this->signOut();
 
-            if(!isset($request['login'], $request['password'])) {
+            if(!isset($credentials['login'], $credentials['password'])) {
                 throw new InvalidCredentialsException('Email or phone and password are required');
             }
         }
 
-        /** @var Account $account */
-        $account = $this->accountRepository->findByLoginOrToken($request['login'] ?? $this->getToken());
-
-        if(!$this->validateAccountToken($account)) {
-            if(isset($request['password']) && $this->validateAccountPassword($account, $request['password'])) {
-                $account->setToken();
-            } else {
-                throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $request['login']));
-            }
+        if(isset($_SESSION['account'])) {
+            $account = unserialize($_SESSION['account']); /** @var Account $account */
+        } else {
+            $account = $this->accountRepository
+                ->findByLoginOrToken($credentials['login'] ?? $this->getToken($request));
         }
 
-        $account->setTokenExpired(strtotime("+1 hour"));
-        $this->setToken($account->getToken());
-        $this->entityManager->persist($account);
-        $this->entityManager->flush();
+        if(!$this->verifyToken($account, $request) && !$this->verifyPassword($account, $request)) {
+            throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $credentials['login']));
+        }
+
+        $this->signIn($account);
 
         return $account;
     }
@@ -75,7 +72,7 @@ class AuthService
             throw new ValidationException("Passwords must be at least 6 characters contain one uppercase letter and digit.");
         }
 
-        if($this->isAccountExist($request['email'] ?? $request['phone'])) {
+        if($this->accountRepository->isAccountExist($request['email'] ?? $request['phone'])) {
             throw new DuplicateAccountException(sprintf('%s already in use.', $request['email'] ?? $request['phone']));
         }
 
@@ -83,52 +80,51 @@ class AuthService
             ->setEmail($request['email'] ?? null)
             ->setPhone($request['phone'] ?? null)
             ->setPassword(password_hash($request['password'], PASSWORD_DEFAULT))
-            ->setToken()
-            ->setTokenExpired(strtotime("+1 hour"));
         ;
 
-        $this->entityManager->persist($account);
-        $this->entityManager->flush();
-
         if($signInAfter) {
-            $this->setToken($account->getToken());
+            $this->signIn($account);
+        } else {
+            $this->entityManager->persist($account);
+            $this->entityManager->flush();
         }
+
         return $account;
     }
 
-    public function isAccountExist($login) : bool
-    {
-        return $this->accountRepository->isAccountExist($login);
+    public function signIn(Account $account){
+        if(!$account->getToken() || $account->getTokenExpired() < time()){
+            $account->setToken()
+                ->setTokenExpired(strtotime("+30 minutes"))
+            ;
+            $this->entityManager->persist($account);
+            $this->entityManager->flush();
+        }
+        $_SESSION['account'] = serialize($account);
     }
 
     public function signOut()
     {
-        $this->removeToken();
+        unset($_SESSION['account']);
     }
 
-    private function setToken($token)
+    private function getToken(Request $request)
     {
-        $_SESSION['account_token'] = $token;
+        return $request->hasHeader("Account-Token") ? $request->getHeader("Account-Token")[0] : null;
     }
 
-    private function getToken()
+
+    private function verifyToken(Account $account, Request $request) : bool
     {
-        return $_SESSION['account_token'] ?? null;
+        return $account->getToken() &&
+               $account->getToken() === $this->getToken($request);
     }
 
-    private function removeToken()
+    private function verifyPassword(Account $account, Request $request) : bool
     {
-        unset($_SESSION['account_token']);
-    }
-
-    private function validateAccountToken(Account $account) : bool
-    {
-        return $this->getToken() && $this->getToken() == $account->getToken() && time() < $account->getTokenExpired();
-    }
-
-    private function validateAccountPassword(Account $account, $password) : bool
-    {
-        return password_verify($password, $account->getPassword());
+        $credentials = json_decode($request->getBody(), true);
+        return isset($credentials['password']) &&
+               password_verify($credentials['password'], $account->getPassword());
     }
 
 }

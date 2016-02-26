@@ -10,7 +10,7 @@ class SignInCommand extends Command
     public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder)
     {
         try {
-            $account = $this->getAuthService()->signIn($request);
+            $account = $this->getAuthService()->attemptSignIn($request);
             $responseBuilder->setStatusSuccess()->setJson([
                     "account_token"=>$account->getToken()
             ]);
