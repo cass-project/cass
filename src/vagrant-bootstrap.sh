@@ -123,3 +123,11 @@ ln -s /vagrant/support-files/swagger/swagger.json /swagger/swagger-ui/dist/swagg
 
 ln -s /vagrant/support-files/bin/fix-everything.sh /usr/bin/fix-everything.sh
 chmod a+x /usr/bin/fix-everything.sh
+
+#########
+# PHPUNIT
+#########
+cd /vagrant/backend
+wget https://phar.phpunit.de/phpunit.phar
+chmod +x phpunit.phar
+mv phpunit.phar /usr/local/bin/phpunit

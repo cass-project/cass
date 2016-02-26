@@ -6,6 +6,8 @@ PHP
 
 Instant reject:
 ---------------
+- Наличие констант-массивов (`const MY_CONST = ['some' => 'foo', 'any' => 'bar']`)
+
 - Наличие `isset($arr['foo']) ? $arr['foo'] : null` вместо Null Coalesce Operator
 
 - Наличие `try { ... }catch(\Exception $e){ ... }`

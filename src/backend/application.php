@@ -7,17 +7,18 @@ use Application\Bootstrap\Scripts\SharedConfigServiceSetupScript;
 use Application\Service\SchemaService;
 use Application\Service\SharedConfigService;
 use Zend\Diactoros\Response\SapiEmitter;
+use Zend\Expressive\Application;
+use Zend\ServiceManager\ServiceManager;
 
 class LBApplicationBootstrap
 {
-    /**
-     * @var \Zend\Expressive\Application
-     */
+    const ENV_WWW = 'www';
+    const ENV_TEST = 'test';
+
+    /** @var Application */
     private $app;
 
-    /**
-     * @var \Zend\ServiceManager\ServiceManager
-     */
+    /** @var ServiceManager */
     private $serviceManager;
 
     private function initConstants() {
@@ -91,14 +92,27 @@ class LBApplicationBootstrap
         \Application\Tools\RequestParams\RequestParamsWithSchema::injectSchemaService($this->serviceManager->get(SchemaService::class));
     }
 
+    /**
+     * @return Application
+     */
+    public function getApp(): Application
+    {
+        return $this->app;
+    }
+
+    public function getServiceManager(): ServiceManager
+    {
+        return $this->serviceManager;
+    }
+
     public function bootstrap() {
-        $container = new \Zend\ServiceManager\ServiceManager();
+        $container = new ServiceManager();
         $router = new \Zend\Expressive\Router\FastRouteRouter();
         $errorHandler = new \Application\Bootstrap\ErrorHandler();
         $emitter = new \Zend\Expressive\Emitter\EmitterStack();
         $emitter->push(new SapiEmitter());
 
-        $app = new \Zend\Expressive\Application($router, $container, $errorHandler, $emitter);
+        $app = new Application($router, $container, $errorHandler, $emitter);
 
         $this->app = $app;
         $this->serviceManager = $app->getContainer();
@@ -109,9 +123,11 @@ class LBApplicationBootstrap
         $this->initContainer();
         $this->initRoutes();
         $this->initSchemaRESTRequest();
+    }
 
-        $app->run();
+    public function run() {
+        $this->app->run();
     }
 }
 
-(new LBApplicationBootstrap())->bootstrap();
+return new LBApplicationBootstrap();
