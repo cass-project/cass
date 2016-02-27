@@ -1,4 +1,5 @@
 import {Component} from 'angular2/core';
+import {Router} from 'angular2/router';
 
 import {AuthService, AuthServiceProvider} from './../../service/AuthService';
 import {SignInComponent} from './../SignInComponent/index';
@@ -15,8 +16,6 @@ export class LogOutComponent
 
     constructor(authServiceProvider:AuthServiceProvider){
         this.authService = authServiceProvider.getInstance();
-        this.authService.logOut();
+        this.authService.signOut();
     }
-
-
 }
