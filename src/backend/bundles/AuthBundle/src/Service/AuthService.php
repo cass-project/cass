@@ -12,15 +12,17 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthService
 {
+
     /**
      * @var AccountRepository
      */
     private $accountRepository;
+
     private $entityManager;
 
     public function __construct(EntityManager $entityManager)
     {
-        $this->entityManager = $entityManager;
+        $this->entityManager     = $entityManager;
         $this->accountRepository = $entityManager->getRepository(Account::class);
     }
 
@@ -28,22 +30,22 @@ class AuthService
     {
         $credentials = json_decode($request->getBody(), true);
 
-        if(isset($credentials['login']) || isset($credentials['password'])) {
+        if (isset($credentials['login']) || isset($credentials['password'])) {
             $this->signOut();
 
-            if(!isset($credentials['login'], $credentials['password'])) {
+            if (!isset($credentials['login'], $credentials['password'])) {
                 throw new InvalidCredentialsException('Email or phone and password are required');
             }
         }
 
-        if(isset($_SESSION['account'])) {
+        if (isset($_SESSION['account'])) {
             $account = unserialize($_SESSION['account']); /** @var Account $account */
         } else {
             $account = $this->accountRepository
                 ->findByLoginOrToken($credentials['login'] ?? $this->getToken($request));
         }
 
-        if(!$this->verifyToken($account, $request) && !$this->verifyPassword($account, $request)) {
+        if (!$this->verifyToken($account, $request) && !$this->verifyPassword($account, $request)) {
             throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $credentials['login']));
         }
 
@@ -52,27 +54,24 @@ class AuthService
         return $account;
     }
 
-    public function signUp(Request $request, bool $signInAfter = true) : Account
+    public function signUp(Request $request, bool $signInAfter=true) : Account
     {
-        $request =  json_decode($request->getBody(), true);
+        $request = json_decode($request->getBody(), true);
 
-        if(empty($request['email']) && empty($request['phone']) || empty($request['password'])) {
+        switch (true) {
+            case empty($request['email']) && empty($request['phone']) || empty($request['password']):
             throw new MissingReqiuredFieldException('Email or phone and password are required');
-        }
 
-        if(isset($request['email']) && false === filter_var($request['email'], FILTER_VALIDATE_EMAIL)) {
-            throw new ValidationException("Invalid email format");
-        }
+            case isset($request['email']) && false === filter_var($request['email'], FILTER_VALIDATE_EMAIL):
+            throw new ValidationException('Invalid email format');
 
-        if(empty($request['passwordAgain']) || strcmp($request['password'], $request['passwordAgain'])) {
-            throw new ValidationException("Passwords does not match");
-        }
+            case empty($request['passwordAgain']) || strcmp($request['password'], $request['passwordAgain']):
+            throw new ValidationException('Passwords does not match');
 
-        if(preg_match("~((?=.*[a-z])(?=.*\d)(?=.*[A-Z]).{6,})~", $request['password'])==0) {
-            throw new ValidationException("Passwords must be at least 6 characters contain one uppercase letter and digit.");
-        }
+            case preg_match('~((?=.*[a-z])(?=.*\d)(?=.*[A-Z]).{6,})~', $request['password']) == 0:
+            throw new ValidationException('Password must be at least 6 characters with one uppercase letter and digit.');
 
-        if($this->accountRepository->isAccountExist($request['email'] ?? $request['phone'])) {
+            case $this->accountRepository->isAccountExist($request['email'] ?? $request['phone']):
             throw new DuplicateAccountException(sprintf('%s already in use.', $request['email'] ?? $request['phone']));
         }
 
@@ -82,7 +81,7 @@ class AuthService
             ->setPassword(password_hash($request['password'], PASSWORD_DEFAULT))
         ;
 
-        if($signInAfter) {
+        if ($signInAfter) {
             $this->signIn($account);
         } else {
             $this->entityManager->persist($account);
@@ -92,14 +91,16 @@ class AuthService
         return $account;
     }
 
-    public function signIn(Account $account){
-        if(!$account->getToken() || $account->getTokenExpired() < time()){
+    public function signIn(Account $account)
+    {
+        if (!$account->getToken() || $account->getTokenExpired() < time()) {
             $account->setToken()
-                ->setTokenExpired(strtotime("+30 minutes"))
+                ->setTokenExpired(strtotime('+30 minutes'))
             ;
             $this->entityManager->persist($account);
             $this->entityManager->flush();
         }
+
         $_SESSION['account'] = serialize($account);
     }
 
@@ -110,9 +111,8 @@ class AuthService
 
     private function getToken(Request $request)
     {
-        return $request->hasHeader("Account-Token") ? $request->getHeader("Account-Token")[0] : null;
+        return $request->hasHeader('Account-Token') ? $request->getHeader('Account-Token')[0] : null;
     }
-
 
     private function verifyToken(Account $account, Request $request) : bool
     {
