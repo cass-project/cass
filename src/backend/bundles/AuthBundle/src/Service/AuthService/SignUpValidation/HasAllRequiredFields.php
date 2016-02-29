@@ -8,9 +8,12 @@ class HasAllRequiredFields implements Validator
 {
     public function validate(ServerRequestInterface $request)
     {
-        $isValid = (empty($request['email']) && empty($request['phone']) || empty($request['password']));
+        $hasEmailOrPhone = !(empty($request['email']) && empty($request['phone']));
+        $hasPassword = !empty($request['password']);
 
-        if(!($isValid)) {
+        $isValid = $hasEmailOrPhone && $hasPassword;
+
+        if(!$isValid) {
             throw new MissingReqiuredFieldException('Email or phone and password are required');
         }
     }

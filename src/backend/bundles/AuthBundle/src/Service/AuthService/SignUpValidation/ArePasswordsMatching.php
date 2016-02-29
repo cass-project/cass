@@ -7,9 +7,9 @@ use Psr\Http\Message\ServerRequestInterface;
 class ArePasswordsMatching implements Validator
 {
     public function validate(ServerRequestInterface $request) {
-        $isValid = empty($request['passwordAgain']) || strcmp($request['password'], $request['passwordAgain']);
+        $isValid = $request['password'] === $request['passwordAgain'];
 
-        if(!($isValid)) {
+        if(!$isValid) {
             throw new ValidationException('Passwords does not match');
         }
     }

@@ -7,9 +7,9 @@ use Psr\Http\Message\ServerRequestInterface;
 class IsEmailValid implements Validator
 {
     public function validate(ServerRequestInterface $request) {
-        $isValid = !(isset($request['email']) && false === filter_var($request['email'], FILTER_VALIDATE_EMAIL));
+        $isValid = (isset($request['email']) && (true === filter_var($request['email'], FILTER_VALIDATE_EMAIL)));
 
-        if(!($isValid)) {
+        if(!$isValid) {
             throw new ValidationException('Invalid email format');
         }
     }
