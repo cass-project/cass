@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+exec('git rev-parse --abbrev-ref HEAD', $brunchName, $status); // get branch name
+$brunchName = $brunchName[0];
+
+if($status===0 && $brunchName!='master') {
+    $commitMsgPath = realpath(__DIR__ . "/../../" . $argv[1]); // COMMIT_EDITMSG file path
+    $commitMsg = trim(file_get_contents($commitMsgPath));
+
+    if(strpos($commitMsg, $brunchName)!==0) {
+        file_put_contents($commitMsgPath, sprintf('%s / %s', $brunchName, $commitMsg));
+    }
+}
