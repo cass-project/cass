@@ -9,11 +9,20 @@ class ReadThemeCommand extends Command
     public function run(ServerRequestInterface $request)
     {
         $themeEditorService = $this->getThemeEditorService();
-        $entities = $themeEditorService->read();
 
-        return [
-            'entities' => $entities,
-            'total' => count($entities),
-        ];
+        if($themeId = $request->getAttribute('themeId', false)) {
+            $entity = $themeEditorService->get((int) $themeId);
+
+            return [
+                'entity' => $entity->toJSON()
+            ];
+        }else{
+            $entities = $themeEditorService->read();
+
+            return [
+                'entities' => $entities,
+                'total' => count($entities),
+            ];
+        }
     }
 }

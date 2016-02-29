@@ -30,6 +30,10 @@ class ThemeEditorService
         return $this->themeRepository->getThemes();
     }
 
+    public function get(int $themeId) {
+        return $this->themeRepository->getThemeEntity($themeId);
+    }
+
     public function update(UpdateThemeParameters $updateThemeParameters) {
         return $this->themeRepository->update($updateThemeParameters);
     }
