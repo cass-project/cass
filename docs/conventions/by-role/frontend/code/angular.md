@@ -127,3 +127,5 @@ A. ~/www/app/asssets/bundles/main.js -> mark as plain text
 ------------------------
 
 - HTTP в Angular 2: (https://auth0.com/blog/2015/10/15/angular-2-series-part-3-using-http/)
+
+- Providing Custom View Templates For Components: (http://www.bennadel.com/blog/3034-providing-custom-view-templates-for-components-in-angular-2-beta-6.htm), (http://www.michaelbromley.co.uk/blog/513/components-with-custom-templates-in-angular-2)
