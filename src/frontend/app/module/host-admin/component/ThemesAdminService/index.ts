@@ -9,7 +9,8 @@ import {Control} from "angular2/common";
 @Injectable()
 export class ManageThemes {
     themes;
-    dirictories = [];
+    theme;
+    directories;
     parentThemes = [];
     childThemes = [];
     themeId: number;
@@ -26,13 +27,29 @@ export class ManageThemes {
 
     }
 
+    loadTheme(id){
+        return this.http.get('/backend/api/protected/host-admin/theme-editor/read/entity/' + id)
+            .map(res => res.json())
+            .subscribe(data => this.theme = data);
+    }
+
+    returnTitle(id){
+        return this.http.get('/backend/api/protected/host-admin/theme-editor/read/entity/' + id)
+            .map(res => res.json())
+            .subscribe(data => {
+                this.theme = data;
+                return this.theme.entity.title;
+            });
+    }
+
     public loadThemes() {
         return this.http.get('/backend/api/protected/host-admin/theme-editor/read/entities/')
             .map(res => res.json())
             .subscribe(data => {this.themes = data.entities;
                 for(var i = 0; i < this.themes.length; i++){
                 if(this.themes[i].parent_id){
-                    this.dirThemes(this.themes[i].id, this.themes[i].parent_id)
+                    this.parentThemes[i] = new ThemeModel(this.themes[i].parent_id, this.returnTitle(this.themes[i].parent_id));
+                    this.parentThemes[i].children.push(new ThemeModel(this.themes[i].id, this.themes[i].title))
                 } else this.parentThemes.push(this.themes[i]);
             }});
 
@@ -53,9 +70,6 @@ export class ManageThemes {
         this.showChild = false;
     }
 
-    dirThemes(id, parentId){
-
-    }
 
     takeTheme(theme){
         this.themeId = theme.id;
@@ -84,7 +98,7 @@ export class ManageThemes {
         });
         if(parrentId == undefined) parrentId = 0;
         this.http.post('/backend/api/protected/host-admin/theme-editor/entity/update/' + id, JSON.stringify({title: value, parent_id: parrentId}), options).subscribe(
-            data =>{console.log(data); console.log(this.themes, this.parentThemes); this.eraseArrays(); this.loadThemes();},
+            data =>{console.log(data); console.log(this.theme, this.themes, this.parentThemes); this.eraseArrays(); this.loadThemes();},
             err => {console.log(err);}
         );
     }
@@ -106,3 +120,27 @@ export class ManageThemes {
 
     }
 };
+
+class ThemeModel{
+    children: Array<ThemeModel>;
+    id: number;
+    title: string;
+    icon: string;
+    visible:Boolean = true;
+
+    constructor(id, title){
+        this.children = [];
+        this.id = id;
+        this.title = title;
+        //this.icon = this.getIcon();
+    }
+    //getIcon(){
+    //    if (this.children.length > 0) {
+    //        if (this.children[0].visible === false) {
+    //            return '+ ';
+    //        }
+    //        return '- ';
+    //    }
+    //    return null;
+    //}
+}
