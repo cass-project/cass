@@ -2,7 +2,7 @@
 namespace Data\Factory\Repository;
 
 use Data\Entity\Theme;
-use Data\Repository\ThemeRepository;
+use Data\Repository\Theme\ThemeRepository;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;

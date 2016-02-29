@@ -1,26 +1,20 @@
 <?php
-namespace Data\Repository;
+namespace Data\Repository\Theme;
 
 use Application\Tools\SerialManager\SerialManager;
 use Cocur\Chain\Chain;
 use Data\Entity\Host;
 use Data\Entity\Theme;
 use Data\Exception\DataEntityNotFoundException;
-use Data\Repository\Theme\SaveThemeProperties;
+use Data\Repository\Theme\Parameters\CreateThemeParameters;
+use Data\Repository\Theme\Parameters\DeleteThemeParameters;
+use Data\Repository\Theme\Parameters\MoveThemeParameters;
+use Data\Repository\Theme\Parameters\UpdateThemeParameters;
 use Doctrine\ORM\EntityRepository;
-use ThemeEditor\Middleware\Request\DeleteThemeRequest;
-use ThemeEditor\Middleware\Request\GetThemeRequest;
-use ThemeEditor\Middleware\Request\MoveThemeRequest;
-use ThemeEditor\Middleware\Request\PutThemeRequest;
-use ThemeEditor\Middleware\Request\UpdateThemeRequest;
 
 class ThemeRepository extends EntityRepository
 {
-    /**
-     * @param GetThemeRequest $getThemeRequest
-     * @return Theme[]
-     */
-    public function getThemes(GetThemeRequest $getThemeRequest): array
+    public function getThemes(): array
     {
         return Chain::create($this->findBy([]))
             ->map(function(Theme $theme) {
@@ -30,12 +24,12 @@ class ThemeRepository extends EntityRepository
         ;
     }
 
-    public function create(Host $host, PutThemeRequest $PUTEntityRequest): Theme
+    public function create(Host $host, CreateThemeParameters $createThemeParameters): Theme
     {
         $themeEntity = new Theme();
         $themeEntity->setHost($host);
 
-        $this->setupEntity($themeEntity, $PUTEntityRequest);
+        $this->setupEntity($themeEntity, $createThemeParameters);
 
         $em = $this->getEntityManager();
         $em->persist($themeEntity);
@@ -44,11 +38,11 @@ class ThemeRepository extends EntityRepository
         return $themeEntity;
     }
 
-    public function update(UpdateThemeRequest $updateThemeRequest): Theme
+    public function update(UpdateThemeParameters $updateThemeParameters): Theme
     {
-        $themeEntity = $this->getThemeEntity($updateThemeRequest->getId());
+        $themeEntity = $this->getThemeEntity($updateThemeParameters->getId());
 
-        $this->setupEntity($themeEntity, $updateThemeRequest);
+        $this->setupEntity($themeEntity, $updateThemeParameters);
 
         $em = $this->getEntityManager();
         $em->persist($themeEntity);
@@ -57,12 +51,12 @@ class ThemeRepository extends EntityRepository
         return $themeEntity;
     }
 
-    public function move(MoveThemeRequest $moveThemeRequest): Theme
+    public function move(MoveThemeParameters $moveThemeParameters): Theme
     {
         $em = $this->getEntityManager();
-        $themeEntity = $this->getThemeEntity($moveThemeRequest->getThemeId());
+        $themeEntity = $this->getThemeEntity($moveThemeParameters->getThemeId());
 
-        $parentId = $moveThemeRequest->getParentThemeId();
+        $parentId = $moveThemeParameters->getMoveToParentThemeId();
 
         if($parentId == 0) {
             $themeEntity->setParent(null);
@@ -70,8 +64,8 @@ class ThemeRepository extends EntityRepository
             $themeEntity->setParent($em->getReference(Theme::class, $parentId));
         }
 
-        $siblings = new SerialManager($this->getThemesWithParent($moveThemeRequest->getParentThemeId()));
-        $siblings->insertAs($themeEntity, $moveThemeRequest->getPosition());
+        $siblings = new SerialManager($this->getThemesWithParent($moveThemeParameters->getMoveToParentThemeId()));
+        $siblings->insertAs($themeEntity, $moveThemeParameters->getMoveToPosition());
 
         $em->persist($themeEntity);
         $em->flush();
@@ -79,9 +73,9 @@ class ThemeRepository extends EntityRepository
         return $themeEntity;
     }
 
-    public function delete(DeleteThemeRequest $deleteThemeRequest): Theme
+    public function delete(DeleteThemeParameters $deleteThemeParameters): Theme
     {
-        $themeEntity = $this->getThemeEntity($deleteThemeRequest->getId());
+        $themeEntity = $this->getThemeEntity($deleteThemeParameters->getThemeId());
 
         $parentId = $themeEntity->hasParent() ? $themeEntity->getParent()->getId() : null;
         $siblings = new SerialManager($this->getThemesWithParent($parentId));

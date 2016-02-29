@@ -1,7 +1,7 @@
 <?php
 namespace ThemeEditor\Factory\Service;
 
-use Data\Repository\ThemeRepository;
+use Data\Repository\Theme\ThemeRepository;
 use Host\Service\CurrentHostService;
 use Interop\Container\ContainerInterface;
 use ThemeEditor\Service\ThemeEditorService;

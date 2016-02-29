@@ -1,21 +1,17 @@
 <?php
 namespace ThemeEditor\Middleware\Request;
 
+
 use Application\Tools\RequestParams\RequestParams;
+use Data\Repository\Theme\Parameters\DeleteThemeParameters;
 use Psr\Http\Message\ServerRequestInterface;
 
-class DeleteThemeRequest implements RequestParams
+class DeleteThemeRequest extends RequestParams
 {
-    /** @var int */
-    private $id;
-
-    public function __construct(ServerRequestInterface $request)
+    protected function generateParams(ServerRequestInterface $request)
     {
-        $this->id = (int) $request->getAttribute('themeId');
-    }
+        $themeId = (int) $request->getAttribute('themeId');
 
-    public function getId(): int
-    {
-        return $this->id;
+        return new DeleteThemeParameters($themeId);
     }
 }
