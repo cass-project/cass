@@ -58,7 +58,9 @@ class App
 class OAuthRequestOptions extends BaseRequestOptions {
     constructor () {
         super();
-        this.headers.append('My-Custom-Header','MyCustomHeaderValue');
+        if(localStorage['account_token']){
+            this.headers.set('Account-Token', localStorage['account_token']);
+        }
     }
 }
 

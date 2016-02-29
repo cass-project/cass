@@ -9,7 +9,7 @@ class DeleteThemeCommand extends Command
     public function run(ServerRequestInterface $request)
     {
         $themeEditorService = $this->getThemeEditorService();
-        $themeEditorService->delete(new DeleteThemeRequest($request));
+        $themeEditorService->delete((new DeleteThemeRequest($request))->getParameters());
 
         return [];
     }

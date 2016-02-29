@@ -30,6 +30,12 @@ return function(Application $app, string $prefix) {
     );
 
     $app->get(
+        sprintf('%s/protected/host-admin/theme-editor/{command:read}/entity/{themeId}', $prefix),
+        ThemeEditorCRUDMiddleware::class,
+        'theme-editor-read-entity'
+    );
+
+    $app->get(
         sprintf('%s/protected/host-admin/theme-editor/{command:read}/entities/', $prefix),
         ThemeEditorCRUDMiddleware::class,
         'theme-editor-read'

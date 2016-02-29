@@ -7,11 +7,10 @@ import {AuthService, AuthServiceProvider} from './../../service/AuthService';
         require('./style.shadow.scss')
     ],
     selector: 'login-form',
-    providers: [AuthService, AuthServiceProvider]
 })
 
 
-export class LoginFormComponent{
+export class LoginFormComponent {
     login:string;
     password:string;
     authService:AuthService;
@@ -21,6 +20,6 @@ export class LoginFormComponent{
     }
 
     attemptSignIn(){
-        var isSigned:boolean = this.authService.attemptSignIn(this.login,this.password);
+        this.authService.attemptSignIn(this.login,this.password);
     }
 }

@@ -14,6 +14,7 @@ class ErrorHandler
     {
         $responseBuilder = new GenericRESTResponseBuilder($response);
         $responseBuilder->setError($error);
+        $responseBuilder->setStatusBadRequest();
 
         $errorType = 'unknown';
 

@@ -1,0 +1,34 @@
+'/backend/api/protected/host-admin/theme-editor/read/entity/{themeId}':
+  get:
+    tags:
+      - theme-editor
+    description: |
+      Список тематик
+    parameters:
+      - name: themeId
+        in: path
+        required: true
+        type: number
+        description: ID тематики
+    responses:
+      '400':
+          $ref: '#/responses/error'
+      '200':
+        description: Список тематик
+        schema:
+          type: object
+          required:
+            - success
+            - total
+            - entities
+          properties:
+            success:
+              type: boolean
+              description: "= true"
+            total:
+              type: number
+              description: "Количество тематик"
+            entities:
+              type: array
+              items:
+                $ref: "#/definitions/Data_Entity_Theme"

@@ -24,8 +24,4 @@ export class AuthControlsComponent
     constructor(authServiceProvider:AuthServiceProvider) {
         this.authService = authServiceProvider.getInstance();
     }
-
-    isAuthenticated() {
-        return this.authService.isAuthenticated;
-    }
 }

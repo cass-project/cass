@@ -1,49 +1,28 @@
 <?php
 namespace ThemeEditor\Middleware\Request;
 
-use Application\Tools\RequestParams\RequestParamsWithSchema;
 use Application\Service\JSONSchema;
 use Application\Tools\RequestParams\Param;
-use Data\Repository\Theme\SaveThemeProperties;
+use Application\Tools\RequestParams\SchemaParams;
+use Data\Repository\Theme\Parameters\CreateThemeParameters;
 use ThemeEditor\ThemeEditorBundle;
 
-class PutThemeRequest extends RequestParamsWithSchema implements SaveThemeProperties
+class PutThemeRequest extends SchemaParams
 {
-    /** @var string */
-    private $title;
-
-    /** @var int */
-    private $parentId;
-
-    /** @var int */
-    private $position;
-
-    protected function setup()
+    public function getParameters()
     {
         $data = $this->getData();
 
-        $this->title = $this->createParam($data, 'title', true);
-        $this->parentId = $this->createParam($data, 'parent_id');
-        $this->position = $this->createParam($data, 'position');
+        $title = new Param($data, 'title', true);
+        $parentId = new Param($data, 'parent_id');
+        $position = new Param($data, 'position');
+
+        return new CreateThemeParameters($title, $parentId, $position);
     }
 
-    protected function getValidatorSchema(): JSONSchema
+    protected function getSchema(): JSONSchema
     {
         return self::getSchemaService()->getSchema(ThemeEditorBundle::class, './definitions/request/PUTThemeRequest.yml');
     }
 
-    public function getTitle(): Param
-    {
-        return $this->title;
-    }
-
-    public function getParentId(): Param
-    {
-        return $this->parentId;
-    }
-
-    public function getPosition(): Param
-    {
-        return $this->position;
-    }
 }

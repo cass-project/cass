@@ -1,9 +1,17 @@
-<button (click)="manageThemes.clicked()">Manage Themes</button>
-<div *ngIf="manageThemes.show">
-    <input #Themes>
-    <button (click)="manageThemes.putTheme(Themes.value)">Add</button>
-    <button (click)="manageThemes.deleteTheme(themeId)">Delete</button>
-    <button (click)="manageThemes.updateTheme(themeId, Themes.value)">Update</button>
-    <div *ngIf="manageThemes.active">
-    <ul><li *ngFor="#theme of manageThemes.themes">{{theme.title}}</li></ul>
-</div></div>
+<form *ngFor="#theme of manageThemes.parentThemes; #i=index" (click)="manageThemes.takeTheme(theme); manageThemes.crudShow = !manageThemes.crudShow;">{{i + 1}} {{theme.title}}</form>
+    <button (click)="manageThemes.showAdd = !manageThemes.showAdd">Add</button>
+    <div *ngIf="manageThemes.crudShow">
+        <button (click)="manageThemes.showUpdate = !manageThemes.showUpdate">Update</button>
+        <button (click)="manageThemes.deleteTheme(manageThemes.themeId)">Delete</button>
+    </div>
+
+    <div *ngIf="manageThemes.showUpdate">
+        <input #UpdateThemes>
+        <button (click)="manageThemes.updateTheme(manageThemes.themeId, UpdateThemes.value); manageThemes.showUpdate = !manageThemes.showUpdate; manageThemes.crudShow = !manageThemes.crudShow">Confirm</button>
+        <button (click)="manageThemes.showUpdate = !manageThemes.showUpdate">Cancel</button>
+    </div>
+    <div *ngIf="manageThemes.showAdd">
+        <input #AddThemes>
+        <button (click)="manageThemes.putTheme(AddThemes.value); manageThemes.putThemeClick()">Confirm</button>
+        <button (click)="manageThemes.showAdd = !manageThemes.showAdd">Cancel</button>
+    </div>

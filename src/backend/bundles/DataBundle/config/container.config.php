@@ -5,7 +5,7 @@ use Data\Factory\DoctrineEntityManagerFactory;
 use Data\Factory\Repository\HostRepositoryFactory;
 use Data\Factory\Repository\ThemeRepositoryFactory;
 use Data\Repository\HostRepository;
-use Data\Repository\ThemeRepository;
+use Data\Repository\Theme\ThemeRepository;
 use Doctrine\ORM\EntityManager;
 
 return [

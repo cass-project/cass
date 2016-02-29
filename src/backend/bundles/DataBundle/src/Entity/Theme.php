@@ -1,11 +1,12 @@
 <?php
 namespace Data\Entity;
+use Application\Tools\SerialManager\SerialEntity;
 
 /**
- * @Entity(repositoryClass="Data\Repository\ThemeRepository")
+ * @Entity(repositoryClass="Data\Repository\Theme\ThemeRepository")
  * @Table(name="theme")
  */
-class Theme
+class Theme implements SerialEntity
 {
     /**
      * @Id
@@ -57,11 +58,16 @@ class Theme
         return $this->id !== null;
     }
 
+    public function isNewEntity(): bool
+    {
+        return $this->hasId() === false;
+    }
+
     public function getTitle(): string {
         return $this->title;
     }
 
-    public function setTitle($title): self
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 

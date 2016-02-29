@@ -9,7 +9,7 @@ class MoveThemeCommand extends Command
     public function run(ServerRequestInterface $request)
     {
         $themeEditorService = $this->getThemeEditorService();
-        $themeEditorService->move(new MoveThemeRequest($request));
+        $themeEditorService->move((new MoveThemeRequest($request))->getParameters());
 
         return [];
     }

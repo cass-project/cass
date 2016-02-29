@@ -2,38 +2,30 @@
 namespace ThemeEditor\Middleware\Request;
 
 use Application\Tools\RequestParams\RequestParams;
+use Data\Repository\Theme\Parameters\MoveThemeParameters;
 use Psr\Http\Message\ServerRequestInterface;
 
-class MoveThemeRequest implements RequestParams
+class MoveThemeRequest extends RequestParams
 {
-    /** @var int */
-    private $themeId;
-
-    /** @var int */
-    private $parentThemeId;
-
-    /** @var int */
-    private $position;
-
-    public function __construct(ServerRequestInterface $request)
+    protected function generateParams(ServerRequestInterface $request)
     {
-        $this->themeId = (int) $request->getAttribute('themeId');
-        $this->parentThemeId = (int) $request->getAttribute('parentThemeId');
-        $this->position = (int) $request->getAttribute('position');
-    }
+        $themeId = (int) $request->getAttribute('themeId');
+        $position = (int) $request->getAttribute('position');
 
-    public function getThemeId(): int
-    {
-        return $this->themeId;
-    }
+        switch($parentId = $request->getAttribute('parentThemeId')) {
+            case 0:
+            case null:
+            case 'null':
+            case 'root':
+            case 'none':
+                $parentId = 0;
+                break;
 
-    public function getParentThemeId(): int
-    {
-        return $this->parentThemeId;
-    }
+            default:
+                $parentId = (int) $parentId;
+                break;
+        }
 
-    public function getPosition(): int
-    {
-        return $this->position;
+        return new MoveThemeParameters($themeId, $parentId, $position);
     }
 }
