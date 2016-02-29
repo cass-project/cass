@@ -30,8 +30,3 @@
     <button (click)="manageThemes.putTheme(AddThemes.value); manageThemes.putThemeClick()">Confirm</button>
     <button (click)="manageThemes.showAdd = !manageThemes.showAdd">Cancel</button>
 </div>
-
-
-<form *ngFor="#theme of manageThemes.themes" (click)="manageThemes.takeTheme(theme)">{{theme.title}}
-
-</form>
