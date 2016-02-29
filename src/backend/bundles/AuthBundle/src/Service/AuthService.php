@@ -2,9 +2,13 @@
 namespace Auth\Service;
 
 use Auth\Service\AuthService\Exceptions\DuplicateAccountException;
-use Auth\Service\AuthService\Exceptions\ValidationException;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
-use Auth\Service\AuthService\Exceptions\MissingReqiuredFieldException;
+use Auth\Service\AuthService\SignUpValidation\ArePasswordsMatching;
+use Auth\Service\AuthService\SignUpValidation\HasAllRequiredFields;
+use Auth\Service\AuthService\SignUpValidation\HasSameAccount;
+use Auth\Service\AuthService\SignUpValidation\IsEmailValid;
+use Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
+use Auth\Service\AuthService\SignUpValidation\Validator;
 use Data\Entity\Account;
 use Data\Repository\AccountRepository;
 use Doctrine\ORM\EntityManager;
@@ -58,22 +62,15 @@ class AuthService
     {
         $request = json_decode($request->getBody(), true);
 
-        switch (true) {
-            case empty($request['email']) && empty($request['phone']) || empty($request['password']):
-            throw new MissingReqiuredFieldException('Email or phone and password are required');
-
-            case isset($request['email']) && false === filter_var($request['email'], FILTER_VALIDATE_EMAIL):
-            throw new ValidationException('Invalid email format');
-
-            case empty($request['passwordAgain']) || strcmp($request['password'], $request['passwordAgain']):
-            throw new ValidationException('Passwords does not match');
-
-            case preg_match('~((?=.*[a-z])(?=.*\d)(?=.*[A-Z]).{6,})~', $request['password']) == 0:
-            throw new ValidationException('Password must be at least 6 characters with one uppercase letter and digit.');
-
-            case $this->accountRepository->isAccountExist($request['email'] ?? $request['phone']):
-            throw new DuplicateAccountException(sprintf('%s already in use.', $request['email'] ?? $request['phone']));
-        }
+        array_map(function(Validator $validator) use ($request) {
+            $validator->validate($request);
+        }, [
+            new HasAllRequiredFields(),
+            new IsEmailValid(),
+            new ArePasswordsMatching(),
+            new PasswordHasRequiredLength(),
+            new HasSameAccount($this->accountRepository)
+        ]);
 
         $account = (new Account())
             ->setEmail($request['email'] ?? null)
