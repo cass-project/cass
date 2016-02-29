@@ -1,21 +1,16 @@
 <?php
 namespace ThemeEditor\Middleware\Command;
 
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use ThemeEditor\Middleware\Request\DeleteThemeRequest;
 
 class DeleteThemeCommand extends Command
 {
-    public function run(RequestInterface $request)
+    public function run(ServerRequestInterface $request)
     {
-        $body = json_decode($request->getBody(), true);
-        $themeId = $body['id'];
-
         $themeEditorService = $this->getThemeEditorService();
-        $themeEditorService->destroy($themeId);
+        $themeEditorService->delete(new DeleteThemeRequest($request));
 
-        return [
-            'success' => true
-        ];
+        return [];
     }
-
 }

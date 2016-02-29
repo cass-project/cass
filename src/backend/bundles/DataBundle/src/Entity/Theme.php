@@ -1,13 +1,12 @@
 <?php
 namespace Data\Entity;
+use Application\Tools\SerialManager\SerialEntity;
 
 /**
- * Class Theme
- * @package Data\Entity
  * @Entity(repositoryClass="Data\Repository\ThemeRepository")
  * @Table(name="theme")
  */
-class Theme
+class Theme implements SerialEntity
 {
     /**
      * @Id
@@ -30,6 +29,17 @@ class Theme
     private $parent;
 
     /**
+     * @ManyToOne(targetEntity="Data\Entity\Host")
+     * @JoinColumn(name="host_id", referencedColumnName="id")
+     */
+    private $host;
+
+    /**
+     * @Column(type="integer")
+     */
+    private $position = 1;
+
+    /**
      * @Column(type="string")
      * @var string
      */
@@ -38,19 +48,33 @@ class Theme
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function setTitle($title): self
+    public function hasId(): int
+    {
+        return $this->id !== null;
+    }
+
+    public function isNewEntity(): bool
+    {
+        return $this->hasId() === false;
+    }
+
+    public function getTitle(): string {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function hasParent()
+    public function hasParent(): bool
     {
         return $this->parent !== null;
     }
@@ -64,16 +88,63 @@ class Theme
         return $this->parent;
     }
 
-    public function setParent(Theme $parent = null)
+    public function getParentId()
     {
-        $this->parent = $parent;
+        return $this->parent === null ? null : $this->parent->getId();
     }
 
-    public function toJSON()
+    public function setParent(Theme $parent = null): self
+    {
+        if($parent && $this->hasId() && $parent->getId() === $this->getId()) {
+            throw new \Exception('Unable to setup parent');
+        }
+
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    public function getHost(): Host
+    {
+        return $this->host;
+    }
+
+    public function setHost($host): self
+    {
+        $this->host = $host;
+
+        return $this;
+    }
+    
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): self
+    {
+        if($position <= 1) {
+            $position = 1;
+        }
+
+        $this->position = $position;
+
+        return $this;
+    }
+
+    public function incrementPosition()
+    {
+        ++$this->position;
+    }
+
+    public function toJSON(): array
     {
         return [
-            'title' => $this->title,
-            'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null,
+            'host' => $this->getHost()->toJSON(),
+            'position' => $this->getPosition()
         ];
     }
 }

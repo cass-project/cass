@@ -1,0 +1,14 @@
+error:
+  description: Error
+  schema:
+    type: object
+    required:
+      - success
+    properties:
+      success:
+        type: boolean
+        default: false
+      error:
+        type: string
+        description: |
+          Текст ошибки

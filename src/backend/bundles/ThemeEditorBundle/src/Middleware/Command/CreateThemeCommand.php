@@ -1,22 +1,21 @@
 <?php
 namespace ThemeEditor\Middleware\Command;
 
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use ThemeEditor\Middleware\Request\PutThemeRequest;
 
 class CreateThemeCommand extends Command
 {
-    public function run(RequestInterface $request)
+    public function run(ServerRequestInterface $request)
     {
-        $body = json_decode($request->getBody(), true);
-        $title = $body['title'];
-        $parentId = $body['parent_id'] ?? null;
-
         $themeEditorService = $this->getThemeEditorService();
-        $theme = $themeEditorService->create($title, $parentId);
+        $theme = $themeEditorService->create(new PutThemeRequest($request));
 
         return [
             'id' => $theme->getId(),
-            'success' => true
+            'entity' => [
+                $theme->toJSON()
+            ]
         ];
     }
 }

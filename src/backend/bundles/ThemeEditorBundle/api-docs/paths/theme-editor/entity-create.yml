@@ -1,0 +1,35 @@
+/backend/api/protected/host-admin/theme-editor/entity/create:
+  put:
+    tags:
+      - theme-editor
+    description: |
+      Создает новую тематику в текущем хосте
+    parameters:
+      - name: body
+        in: body
+        required: true
+        description: JSON Request
+        schema:
+          $ref: '#/definitions/PUT_Theme_Request'
+    responses:
+      '400':
+          $ref: '#/responses/error'
+      '200':
+        description: |
+          Successfull response
+        schema:
+          type: object
+          required:
+            - id
+            - success
+            - entity
+          properties:
+            id:
+              type: number
+              description: ID созданной темы
+            success:
+              type: boolean
+              default: true
+              description: "= true"
+            entity:
+              $ref: '#/definitions/Data_Entity_Theme'

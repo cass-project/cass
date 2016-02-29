@@ -1,21 +1,16 @@
 <?php
 namespace ThemeEditor\Middleware\Command;
 
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use ThemeEditor\Middleware\Request\MoveThemeRequest;
 
 class MoveThemeCommand extends Command
 {
-    public function run(RequestInterface $request)
+    public function run(ServerRequestInterface $request)
     {
-        $body = json_decode($request->getBody(), true);
-        $themeId = $body['id'];
-        $themeNewParentId = $body['parent_id'];
-
         $themeEditorService = $this->getThemeEditorService();
-        $themeEditorService->move($themeId, $themeNewParentId);
+        $themeEditorService->move(new MoveThemeRequest($request));
 
-        return [
-            'success' => true
-        ];
+        return [];
     }
 }

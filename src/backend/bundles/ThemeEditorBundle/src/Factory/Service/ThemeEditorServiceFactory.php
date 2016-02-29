@@ -1,18 +1,19 @@
 <?php
 namespace ThemeEditor\Factory\Service;
 
-use Doctrine\ORM\EntityManager;
+use Data\Repository\ThemeRepository;
+use Host\Service\CurrentHostService;
 use Interop\Container\ContainerInterface;
 use ThemeEditor\Service\ThemeEditorService;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 class ThemeEditorServiceFactory implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): ThemeEditorService
     {
-        /** @var EntityManager $entityManager */
-        $entityManager = $container->get(EntityManager::class);
+        $themeRepository = $container->get(ThemeRepository::class); /** @var ThemeRepository $themeRepository */
+        $currentHostService = $container->get(CurrentHostService::class); /** @var CurrentHostService $currentHostService*/
 
-        return new ThemeEditorService($entityManager);
+        return new ThemeEditorService($currentHostService, $themeRepository);
     }
 }

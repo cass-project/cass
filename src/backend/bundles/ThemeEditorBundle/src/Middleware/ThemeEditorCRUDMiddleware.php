@@ -4,20 +4,13 @@ namespace ThemeEditor\Middleware;
 use Application\REST\GenericRESTResponseBuilder;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use ThemeEditor\Middleware\Command\CreateThemeCommand;
-use ThemeEditor\Middleware\Command\DeleteThemeCommand;
-use ThemeEditor\Middleware\Command\MoveThemeCommand;
-use ThemeEditor\Middleware\Command\ReadThemeCommand;
-use ThemeEditor\Middleware\Command\UpdateThemeCommand;
-use ThemeEditor\Middleware\Exception\CommandException;
+use ThemeEditor\Middleware\Command\Command;
 use ThemeEditor\Service\ThemeEditorService;
 use Zend\Stratigility\MiddlewareInterface;
 
 class ThemeEditorCRUDMiddleware implements MiddlewareInterface
 {
-    /**
-     * @var ThemeEditorService
-     */
+    /** @var ThemeEditorService */
     private $themeEditorService;
 
     public function __construct(ThemeEditorService $themeEditorService)
@@ -29,46 +22,13 @@ class ThemeEditorCRUDMiddleware implements MiddlewareInterface
     {
         $responseBuilder = new GenericRESTResponseBuilder($response);
 
-        try {
-            $command = $this->commandFactory($request);
-            $command->setThemeEditorService($this->themeEditorService);
+        $command = Command::factory($request);
+        $command->setThemeEditorService($this->themeEditorService);
 
-            $responseBuilder
-                ->setStatusSuccess()
-                ->setJson($command->run($request))
-            ;
-        }catch(CommandException $e){
-            $responseBuilder
-                ->setStatusBadRequest()
-                ->setError($e)
-            ;
-        }
-
-        return $responseBuilder->build();
-    }
-
-    private function commandFactory(Request $request)
-    {
-        $command = $request->getAttribute('command');
-
-        switch ($command) {
-            default:
-                throw new \Exception(sprintf('Command `%s` not found', $command));
-
-            case 'read':
-                return new ReadThemeCommand();
-
-            case 'create':
-                return new CreateThemeCommand();
-
-            case 'update':
-                return new UpdateThemeCommand();
-
-            case 'delete':
-                return new DeleteThemeCommand();
-
-            case 'move':
-                return new MoveThemeCommand();
-        }
+        return $responseBuilder
+            ->setStatusSuccess()
+            ->setJson($command->run($request))
+            ->build()
+        ;
     }
 }

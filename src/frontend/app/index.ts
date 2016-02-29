@@ -18,6 +18,7 @@ import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, URLSearchParams} fro
 import {WelcomeComponent} from './module/welcome/index';
 import {SquareComponent} from './module/square/index';
 import {AuthComponent} from './module/auth/index';
+import {HostAdminComponent} from './module/host-admin/index';
 
 
 @Component({
@@ -43,6 +44,11 @@ import {AuthComponent} from './module/auth/index';
         path: '/auth/...',
         name: 'Auth',
         component: AuthComponent
+    },
+    {
+        path: '/host-admin/',
+        name: 'Host-Admin',
+        component: HostAdminComponent
     }
 ])
 class App
