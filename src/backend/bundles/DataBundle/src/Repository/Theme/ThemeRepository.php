@@ -40,6 +40,7 @@ class ThemeRepository extends EntityRepository
         return $tree;
     }
 
+
     public function create(Host $host, CreateThemeParameters $createThemeParameters): Theme
     {
         $themeEntity = new Theme();
