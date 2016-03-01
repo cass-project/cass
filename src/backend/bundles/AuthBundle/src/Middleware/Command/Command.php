@@ -9,23 +9,22 @@ use Psr\Http\Message\ServerRequestInterface;
 
 abstract class Command
 {
+
     /**
      * @var AuthService
      */
     private $authService;
 
-    public static function factory(ServerRequestInterface $request): Command {
+    public static function factory(ServerRequestInterface $request) : Command
+    {
         $action = $request->getAttribute('action');
 
-        switch($action) {
-            default:
-                throw new UnknownActionException(sprintf('Unknown action `%s`', $action));
-
+        switch ($action) {
             case 'sign-in': return new SignInCommand();
             case 'sign-up': return new SignUpCommand();
             case 'sign-out': return new SignOutCommand();
             case 'oauth':
-                switch($request->getAttribute('provider')){
+                switch ($request->getAttribute('provider')) {
                     case 'vk': return new VkCommand();
                     case 'mailru': return new VkCommand();
                     case 'yandex': return new VkCommand();
@@ -34,11 +33,13 @@ abstract class Command
                     case 'odnoklassniki': return new VkCommand();
                 }
         }
+
+        throw new UnknownActionException('Unknown action');
     }
 
     public function getAuthService(): AuthService
     {
-        if($this->authService === null) {
+        if ($this->authService === null) {
             throw new \Exception('No AuthService available');
         }
 
@@ -49,8 +50,6 @@ abstract class Command
     {
         $this->authService = $authService;
     }
-
-
 
     abstract public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder);
 }

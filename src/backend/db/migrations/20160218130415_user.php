@@ -4,6 +4,7 @@ use Phinx\Migration\AbstractMigration;
 
 class User extends AbstractMigration
 {
+
     /**
      * Change Method.
      *
@@ -26,15 +27,15 @@ class User extends AbstractMigration
      * with the Table class.
      */
     private $accountTableName = 'account';
-    private $oauthAccountTableName = 'oauth_account';
 
+    private $oauthAccountTableName = 'oauth_account';
 
     public function change()
     {
         // Adding account table
         $this->table($this->accountTableName)
             ->addColumn('email', 'string')
-            ->addColumn('phone', 'integer', ['null' => true])
+            ->addColumn('phone', 'biginteger', ['null' => true])
             ->addColumn('password', 'string')
             ->addColumn('token', 'string', ['null' => true])
             ->addColumn('tokenExpired', 'integer', ['null' => true])
@@ -46,7 +47,7 @@ class User extends AbstractMigration
         // Adding aouth account table
         $this->table($this->oauthAccountTableName)
             ->addColumn('account_id', 'integer')
-            ->addForeignKey('account_id', $this->accountTableName, 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
+            ->addForeignKey('account_id', $this->accountTableName, 'id', ['delete' => 'CASCADE', 'update' => 'NO_ACTION'])
             ->addColumn('token', 'string')
             ->addColumn('expires', 'timestamp')
             ->addColumn('provider_name', 'string')
@@ -56,12 +57,25 @@ class User extends AbstractMigration
         $this->insertData();
     }
 
-    private function insertData(){
+    private function insertData()
+    {
         $this->table($this->accountTableName)->insert([
-            ['email' => 'artem.baydin@cass.io',             'password' => password_hash("Lolipop1234", PASSWORD_DEFAULT)],
-            ['email' => 'vyacheslav.savushkin@cass.io',     'password' => password_hash("1234", PASSWORD_DEFAULT)],
-            ['email' => 'dmitriy.borisenko.baydin@cass.io', 'password' => password_hash("1234", PASSWORD_DEFAULT)],
-            ['email' => 'philip.mantrov@cass.io',           'password' => password_hash("1234", PASSWORD_DEFAULT)]
+            [
+                'email' => 'artem.baydin@cass.io',
+                'password' => password_hash('Lolipop1234', PASSWORD_DEFAULT)
+            ],
+            [
+                'email' => 'vyacheslav.savushkin@cass.io',
+                'password' => password_hash('1234', PASSWORD_DEFAULT)
+            ],
+            [
+                'email' => 'dmitriy.borisenko.baydin@cass.io',
+                'password' => password_hash('1234', PASSWORD_DEFAULT)
+            ],
+            [
+                'email' => 'philip.mantrov@cass.io',
+                'password' => password_hash('1234', PASSWORD_DEFAULT)
+            ],
         ])->saveData();
     }
 }
