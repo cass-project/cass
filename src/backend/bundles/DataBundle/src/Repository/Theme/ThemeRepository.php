@@ -16,12 +16,28 @@ class ThemeRepository extends EntityRepository
 {
     public function getThemes(): array
     {
-        return Chain::create($this->findBy([]))
-            ->map(function(Theme $theme) {
-                return $theme->toJSON();
-            })
-            ->array
-        ;
+        return $this->findBy([]);
+    }
+
+    public function getThemesAsTree(/** @var $themes Theme[] */array $themes, int $parentId = null): array
+    {
+        $tree = [];
+
+        foreach($themes as $theme) {
+            if($theme->getParentId() === $parentId) {
+                if($theme->hasChildren()) {
+                    $children = $this->getThemesAsTree($themes, $theme->getId());
+                }else{
+                    $children = [];
+                }
+
+                $tree[] = array_merge($theme->toJSON(), [
+                    'children' =>  $children
+                ]);
+            }
+        }
+
+        return $tree;
     }
 
     public function create(Host $host, CreateThemeParameters $createThemeParameters): Theme

@@ -1,11 +1,16 @@
 <?php
 namespace ThemeEditor\Middleware\Command;
 
+use Cocur\Chain\Chain;
+use Data\Entity\Theme;
 use Psr\Http\Message\ServerRequestInterface;
 use ThemeEditor\Middleware\Request\GetThemeRequest;
 
 class ReadThemeCommand extends Command
 {
+    const MODE_ENTITIES_AS_PLAIN = 'entities';
+    const MODE_ENTITIES_AS_TREE = 'entities-tree';
+
     public function run(ServerRequestInterface $request)
     {
         $themeEditorService = $this->getThemeEditorService();
@@ -17,12 +22,27 @@ class ReadThemeCommand extends Command
                 'entity' => $entity->toJSON()
             ];
         }else{
-            $entities = $themeEditorService->read();
+            $mode = $request->getAttribute('mode');
 
-            return [
-                'entities' => $entities,
-                'total' => count($entities),
-            ];
+            if($mode == self::MODE_ENTITIES_AS_PLAIN) {
+                $entities = Chain::create($themeEditorService->read())
+                    ->map(function(Theme $theme) {
+                        return $theme->toJSON();
+                    })
+                    ->array
+                ;
+
+                return [
+                    'total' => count($entities),
+                    'entities' => $entities
+                ];
+            }else if($mode == self::MODE_ENTITIES_AS_TREE) {
+                return [
+                    'entities' => $themeEditorService->readTree(),
+                ];
+            }else{
+                throw new \Exception('Unknown mode');
+            }
         }
     }
 }

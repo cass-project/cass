@@ -30,6 +30,12 @@ class ThemeEditorService
         return $this->themeRepository->getThemes();
     }
 
+    public function readTree() {
+        return $this->themeRepository->getThemesAsTree(
+            $this->themeRepository->getThemes()
+        );
+    }
+
     public function get(int $themeId) {
         return $this->themeRepository->getThemeEntity($themeId);
     }

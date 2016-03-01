@@ -104,6 +104,16 @@ class Theme implements SerialEntity
         return $this;
     }
 
+    public function getChildren(): array
+    {
+        return $this->children;
+    }
+
+    public function hasChildren(): bool
+    {
+        return count($this->children) > 0;
+    }
+
     public function getHost(): Host
     {
         return $this->host;
