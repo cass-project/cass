@@ -1,0 +1,10 @@
+<div>
+    <ul class="theme-tree">
+        <li *ngFor="#theme of tree">
+            <div [class.selected]="isThemeSelected(theme)" (click)="select(theme)">
+                <span>{{theme.title}}</span>
+            </div>
+            <theme-tree *ngIf="hasChildren(theme)" [tree]="getChildren(theme)"></theme-tree>
+        </li>
+    </ul>
+</div>

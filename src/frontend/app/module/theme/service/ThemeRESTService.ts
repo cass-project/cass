@@ -5,16 +5,19 @@ import {Injectable} from 'angular2/core';
 import {URLSearchParams} from 'angular2/http';
 import {Headers} from "angular2/http";
 import {RequestOptions} from "angular2/http";
+import {ThemeTree, Theme, ThemeHost} from '../Theme';
 
 @Injectable()
 export class ThemeRESTService
 {
-
     constructor(public http:Http) {}
 
     public getThemes() {
-        return this.http.get('/backend/api/protected/host-admin/theme-editor/read/entities/').subscribe(data =>{console.log(data);},
-            err => {console.log(err);});
+        return this.http.get('/backend/api/protected/host-admin/theme-editor/read/entities/');
+    }
+
+    public getThemesTree() {
+        return this.http.get('/backend/api/protected/host-admin/theme-editor/read/entities-tree/');
     }
 
     public getThemeById(id: number) {
@@ -61,27 +64,10 @@ export class ThemeRESTService
         }).subscribe(data =>{console.log(data);},
             err => {console.log(err);});
     }
-    
-}
-
-export class ThemeHost
-{
-    id: number;
-    domain: string;
-}
-
-export class Theme
-{
-    id: number;
-    parent_id: number;
-    host: ThemeHost;
-    position: number;
-    title: string;
 }
 
 export interface ReadThemeEntityResponse extends ResponseInterface
 {
-
     entity: Theme;
 }
 

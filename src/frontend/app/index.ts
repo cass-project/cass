@@ -7,7 +7,6 @@ import 'reflect-metadata';
 import 'rxjs/Rx';
 
 require('zone.js');
-require('reset-css/reset.css');
 require('./global.head.scss');
 
 import {Component, provide} from 'angular2/core';
@@ -18,7 +17,7 @@ import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, URLSearchParams} fro
 import {WelcomeComponent} from './module/welcome/index';
 import {SquareComponent} from './module/square/index';
 import {AuthComponent} from './module/auth/index';
-import {HostAdminComponent} from './module/host-admin/index';
+import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorComponent/component';
 
 
 @Component({
@@ -46,9 +45,9 @@ import {HostAdminComponent} from './module/host-admin/index';
         component: AuthComponent
     },
     {
-        path: '/host-admin/',
-        name: 'Host-Admin',
-        component: HostAdminComponent
+        path: '/theme-editor/...',
+        name: 'Theme-Editor',
+        component: ThemeEditorComponent
     }
 ])
 class App

@@ -1,0 +1,16 @@
+<article class="component component-theme-editor">
+    <header>
+        <h1>Theme Editor</h1>
+    </header>
+    <theme-tree [tree]="getThemesTree()"></theme-tree>
+    <div class="form-content-box" *ngIf="showFormContentBox">
+        <div class="backdrop"></div>
+        <div class="content-box">
+            <button (click)="closeFormContentBox()">Close</button>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <footer>
+        <button (click)="openCreateThemeForm()">Create</button>
+    </footer>
+</article>
