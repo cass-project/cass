@@ -6,6 +6,7 @@ import {URLSearchParams} from 'angular2/http';
 import {Headers} from "angular2/http";
 import {RequestOptions} from "angular2/http";
 import {ThemeTree, Theme, ThemeHost} from '../Theme';
+import {ThemeEditorComponent} from '../../host-admin/component/ThemeEditorComponent/component';
 
 @Injectable()
 export class ThemeRESTService
@@ -26,8 +27,7 @@ export class ThemeRESTService
 
         return this.http.get('/backend/api/protected/host-admin/theme-editor/read/entity/{themeId}', {
             search: params
-        }).subscribe(data =>{console.log(data);},
-            err => {console.log(err);});
+        });
     }
 
     public createTheme(tittle: string, parentId: number){
@@ -36,10 +36,10 @@ export class ThemeRESTService
         let options = new RequestOptions({
             headers: headers
         });
-        if(parentId == undefined) parentId = 0;
+        if(!parentId) parentId = 0;
         return this.http.put('/backend/api/protected/host-admin/theme-editor/entity/create', JSON.stringify({title: tittle, parent_id: parentId}), options).subscribe(
-            data =>{console.log(data);},
-            err => {console.log(err);}
+            data => {console.log(data)},
+            err => {console.log(err)}
         );
     }
 
@@ -51,18 +51,14 @@ export class ThemeRESTService
         });
         if(parrentId == undefined) parrentId = 0;
         this.http.post('/backend/api/protected/host-admin/theme-editor/entity/update/' + id, JSON.stringify({title: title, parent_id: parrentId}), options).subscribe(
-            data =>{console.log(data);},
-            err => {console.log(err);}
-        );
+            data => {console.log(data)},
+            err => {console.log(err)});
     }
 
     public deleteTheme(id) {
-        let params = new URLSearchParams();
-        params.set('themeId', id.toString());
-        return this.http.delete('/backend/api/protected/host-admin/theme-editor/entity/delete/{themeId}', {
-            search: params
-        }).subscribe(data =>{console.log(data);},
-            err => {console.log(err);});
+        return this.http.delete('/backend/api/protected/host-admin/theme-editor/entity/delete/' + id, {
+        }).subscribe(data => {console.log(data)},
+        err => {console.log(err)});
     }
 }
 

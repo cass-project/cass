@@ -5,6 +5,8 @@ import {ThemeTree} from '../../../theme/Theme';
 import {ThemeTreeComponent} from '../ThemeTreeComponent/component';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {CreateThemeForm} from '../../form/CreateThemeForm/component';
+import {ThemeCleaner} from '../../component/ThemeCleaner/component'
+import {UpdateThemeForm} from '../../form/UpdateThemeForm/component'
 
 @Component({
     template: require('./template.html'),
@@ -23,32 +25,42 @@ import {CreateThemeForm} from '../../form/CreateThemeForm/component';
 @RouteConfig([
     {
         useAsDefault: true,
+        path: '/',
+        name: 'Theme-Cleaner',
+        component: ThemeCleaner
+    },
+    {
+
         path: '/create-theme',
         name: 'Theme-Editor-Create',
         component: CreateThemeForm
+    },
+    {
+        path: '/update-theme',
+        name: 'Theme-Editor-Update',
+        component: UpdateThemeForm
     }
 ])
 export class ThemeEditorComponent
 {
-    showFormContentBox: boolean = false;
-    themesTree: ThemeTree[];
 
     constructor(
-        private themeRESTService: ThemeRESTService,
-        public themeEditorService: ThemeEditorService,
-        private router: Router
+        public themeRESTService: ThemeRESTService,
+        public  themeEditorService: ThemeEditorService,
+        public router: Router
     ) {}
 
     ngOnInit() {
         this.themeRESTService.getThemesTree()
             .map(res => res.json())
             .subscribe(data => {
-                this.themesTree = data['entities'];
+                this.themeEditorService.themesTree = data['entities'];
         });
     }
 
-    getThemesTree() {
-        return this.themesTree;
+    deleteTheme(){
+        this.themeRESTService.deleteTheme(this.themeEditorService.selectedThemeId);
+        this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
     }
 
     openCreateThemeForm() {
@@ -56,12 +68,22 @@ export class ThemeEditorComponent
         this.router.navigate(['Theme-Editor-Create']);
     }
 
+    openUpdateThemeForm(){
+        this.openFormContentBox();
+        this.router.navigate(['Theme-Editor-Update']);
+    }
+
+    returnTheme(id){
+        this.themeRESTService.getThemeById(id);
+    }
+
+
     openFormContentBox() {
-        this.showFormContentBox = true;
+        this.themeEditorService.showFormContentBox = true;
     }
 
     closeFormContentBox() {
-        this.showFormContentBox = false;
-        this.router.navigate(['Theme-Editor']);
+        this.themeEditorService.showFormContentBox = false;
+        this.router.parent.navigate(['Theme-Editor']);
     }
 }

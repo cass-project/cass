@@ -2,8 +2,8 @@
     <header>
         <h1>Theme Editor</h1>
     </header>
-    <theme-tree [tree]="getThemesTree()"></theme-tree>
-    <div class="form-content-box" *ngIf="showFormContentBox">
+    <theme-tree [tree]="themeEditorService.themesTree"></theme-tree>
+    <div class="form-content-box" *ngIf="themeEditorService.showFormContentBox">
         <div class="backdrop"></div>
         <div class="content-box">
             <button (click)="closeFormContentBox()">Close</button>
@@ -12,5 +12,8 @@
     </div>
     <footer>
         <button (click)="openCreateThemeForm()">Create</button>
+        <div *ngIf="themeEditorService.selectedThemeId">
+        <button (click)="openUpdateThemeForm()">Update</button><button (click)="deleteTheme()">Delete</button>
+        </div>
     </footer>
 </article>
