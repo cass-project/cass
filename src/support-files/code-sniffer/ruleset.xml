@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<ruleset name="Cass">
+
+    <rule ref="Squiz">
+        <!-- Обязательный phpdoc comment к скриптам, функциям, классам, переменным, переменным -->
+        <exclude name="Squiz.Commenting.FunctionComment.Missing"/>
+        <exclude name="Squiz.Commenting.VariableComment.Missing"/>
+        <exclude name="Squiz.Commenting.ClassComment.Missing"/>
+        <exclude name="Squiz.Commenting.FileComment.Missing"/>
+        
+        <exclude name="Squiz.Commenting.ClosingDeclarationComment.Missing"/>            <!-- Обязывает использовать //end после закрывающих фигурных скобок -->
+        <exclude name="Squiz.Commenting.InlineComment"/>                                <!-- Запрет на /**/ в одну строку -->
+        <exclude name="Squiz.Commenting.BlockComment.WrongStart"/>                      <!-- Запрет на /** ... */ в одну строку -->
+
+        <exclude name="Generic.Commenting.DocComment"/>                                 <!-- Ненужные нам стандарты комментариев -->
+
+        <exclude name="Squiz.Operators.ComparisonOperatorUsage.NotAllowed"/>            <!-- Запрет на использование ==  и != -->
+        <exclude name="Squiz.Operators.ComparisonOperatorUsage.ImplicitTrue"/>          <!-- Запрет на if(func($var)) только if(true===func($var)) --> 
+
+        <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeClose"/> <!-- Ждёт одну пустую строку перед закрытием функции -->
+        <exclude name="Squiz.WhiteSpace.ObjectOperatorSpacing.Before"/>                 <!-- Запрет на пробелы перед оператором "->" -->
+        <exclude name="Squiz.Objects.ObjectInstantiation.NotAssigned"/>                 <!-- $var = (new Object())->method() highlight this -->
+        <exclude name="Squiz.Files.FileExtension"/>                                     <!-- Запрет на расширение файла php если это класс и на расширение файла inc если это не класс. -->
+
+        <!-- Запрет на объявление приватных переменных и функций без префикса "__" -->
+        <exclude name="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore"/> 
+        <exclude name="Squiz.NamingConventions.ValidFunctionName.PrivateNoUnderscore"/>
+
+        <exclude name="Squiz.PHP.DisallowInlineIf.Found"/>                              <!-- Запрет на $foo ?? $bar ?? $baz -->
+        <exclude name="Squiz.PHP.DisallowBooleanStatement.Found"/>                      <!-- Запрет на bool вне if/while и т.п типа return $foo > $bar -->
+        
+        <exclude name="PEAR.Functions.FunctionCallSignature.SpaceAfterCloseBracket"/>   <!-- Запрет переноса точки с зарятой после функции -->
+        <exclude name="Squiz.WhiteSpace.SemicolonSpacing.Incorrect"/>                   <!-- Запрет переноса точки с зарятой после функции -->
+        <!--exclude name="Squiz.WhiteSpace.FunctionSpacing.After"/-->                   <!-- Запрет на отсутствие новой строки после функции -->
+        <exclude name="Squiz.ControlStructures.SwitchDeclaration.MissingDefault"/>      <!-- Обязательное объявление default в switch -->
+    </rule>
+    
+    <!-- The number of spaces before and after a string concat. -->
+    <rule ref="Squiz.Strings.ConcatenationSpacing">
+        <properties>
+            <property name="spacing" type="integer" value="1"/>
+        </properties>
+    </rule>
+    
+    <!-- The number of blank lines between functions. -->
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing">
+        <properties>
+            <property name="spacing" type="integer" value="1"/>
+        </properties>
+    </rule>
+
+    <!-- Lines can be 120 chars long, but never show errors -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="200"/>
+            <property name="absoluteLineLimit" value="200"/>
+        </properties>
+    </rule>    
+</ruleset>
