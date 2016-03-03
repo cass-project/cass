@@ -12,9 +12,9 @@ class SignInCommand extends Command
         try {
             $account = $this->getAuthService()->attemptSignIn($request);
             $responseBuilder->setStatusSuccess()->setJson([
-                    "account_token"=>$account->getToken()
+                'account_token' => $account->getToken()
             ]);
-        }catch(InvalidCredentialsException $e) {
+        } catch (InvalidCredentialsException $e) {
             $responseBuilder
                 ->setStatusNotFound()
                 ->setError($e)

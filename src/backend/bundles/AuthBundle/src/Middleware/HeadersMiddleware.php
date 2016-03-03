@@ -9,6 +9,7 @@ use Zend\Stratigility\MiddlewareInterface;
 
 class HeadersMiddleware implements MiddlewareInterface
 {
+
     /**
      * @var AuthService
      */
@@ -23,8 +24,10 @@ class HeadersMiddleware implements MiddlewareInterface
     {
         try {
             $this->authService->attemptSignIn($request);
-            $response = $response->withAddedHeader("Authenticatied", "true");
-        }catch (InvalidCredentialsException $e) {}
+            $response = $response->withAddedHeader('Authenticatied', 'true');
+        } catch (InvalidCredentialsException $e) {
+            // Response without header
+        }
 
         return $out($request, $response);
     }

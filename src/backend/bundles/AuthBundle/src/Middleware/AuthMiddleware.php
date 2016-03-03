@@ -11,6 +11,7 @@ use Zend\Stratigility\MiddlewareInterface;
 
 class AuthMiddleware implements MiddlewareInterface
 {
+
     /**
      * @var AuthService
      */
@@ -29,7 +30,7 @@ class AuthMiddleware implements MiddlewareInterface
             $command = Command::factory($request);
             $command->setAuthService($this->authService);
             $command->run($request, $responseBuilder);
-        }catch (UnknownActionException $e) {
+        } catch (UnknownActionException $e) {
             $responseBuilder
                 ->setStatusBadRequest()
                 ->setError($e)
@@ -38,5 +39,4 @@ class AuthMiddleware implements MiddlewareInterface
 
         return $responseBuilder->build();
     }
-
 }

@@ -1,14 +1,13 @@
 <?php
 namespace Auth\Service;
 
-use Auth\Service\AuthService\Exceptions\DuplicateAccountException;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
-use Auth\Service\AuthService\SignUpValidation\ArePasswordsMatching;
-use Auth\Service\AuthService\SignUpValidation\HasAllRequiredFields;
-use Auth\Service\AuthService\SignUpValidation\HasSameAccount;
-use Auth\Service\AuthService\SignUpValidation\IsEmailValid;
-use Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
-use Auth\Service\AuthService\SignUpValidation\Validator;
+use Auth\Service\AuthService\Validations\SignUp\HasAllRequiredFields;
+use Auth\Service\AuthService\Validations\SignUp\IsPasswordValid;
+use Auth\Service\AuthService\Validations\SignUp\IsNewAccount;
+use Auth\Service\AuthService\Validations\SignUp\IsEmailValid;
+use Auth\Service\AuthService\Validations\SignUp\IsPhoneValid;
+use Auth\Service\AuthService\Validations\SignUp\Validator;
 use Data\Entity\Account;
 use Data\Repository\AccountRepository;
 use Doctrine\ORM\EntityManager;
@@ -58,24 +57,25 @@ class AuthService
         return $account;
     }
 
-    public function signUp(Request $request, bool $signInAfter=true) : Account
+    public function signUp(Request $request, bool $signInAfter = true) : Account
     {
-        $request = json_decode($request->getBody(), true);
-
-        array_map(function(Validator $validator) use ($request) {
-            $validator->validate($request);
+        array_map(function (Validator $validator) use ($request) {
+            $validator->setCredentials($request)->validate();
         }, [
             new HasAllRequiredFields(),
             new IsEmailValid(),
-            new ArePasswordsMatching(),
-            new PasswordHasRequiredLength(),
-            new HasSameAccount($this->accountRepository)
-        ]);
+            new IsPhoneValid(),
+            new IsPasswordValid(),
+            new IsNewAccount($this->accountRepository),
+           ]
+        );
+
+        $credentials = json_decode($request->getBody(), true);
 
         $account = (new Account())
-            ->setEmail($request['email'] ?? null)
-            ->setPhone($request['phone'] ?? null)
-            ->setPassword(password_hash($request['password'], PASSWORD_DEFAULT))
+            ->setEmail($credentials['email'] ?? null)
+            ->setPhone($credentials['phone'] ?? null)
+            ->setPassword(password_hash($credentials['password'], PASSWORD_DEFAULT))
         ;
 
         if ($signInAfter) {
@@ -108,7 +108,7 @@ class AuthService
 
     private function getToken(Request $request)
     {
-        return $request->hasHeader('Account-Token') ? $request->getHeader('Account-Token')[0] : null;
+        return $request->getHeader('Account-Token')[0] ?? null;
     }
 
     private function verifyToken(Account $account, Request $request) : bool
@@ -123,5 +123,4 @@ class AuthService
         return isset($credentials['password']) &&
                password_verify($credentials['password'], $account->getPassword());
     }
-
 }

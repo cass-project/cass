@@ -4,6 +4,7 @@ use Phinx\Migration\AbstractMigration;
 
 class User extends AbstractMigration
 {
+
     /**
      * Change Method.
      *
@@ -56,12 +57,25 @@ class User extends AbstractMigration
         $this->insertData();
     }
 
-    private function insertData(){
+    private function insertData()
+    {
         $this->table(self::TABLE_NAME)->insert([
-            ['email' => 'artem.baydin@cass.io',             'password' => password_hash("Lolipop1234", PASSWORD_DEFAULT)],
-            ['email' => 'vyacheslav.savushkin@cass.io',     'password' => password_hash("1234", PASSWORD_DEFAULT)],
-            ['email' => 'dmitriy.borisenko.baydin@cass.io', 'password' => password_hash("1234", PASSWORD_DEFAULT)],
-            ['email' => 'philip.mantrov@cass.io',           'password' => password_hash("1234", PASSWORD_DEFAULT)]
+            [
+                'email' => 'artem.baydin@cass.io',
+                'password' => password_hash('Lolipop1234', PASSWORD_DEFAULT)
+            ],
+            [
+                'email' => 'vyacheslav.savushkin@cass.io',
+                'password' => password_hash('1234', PASSWORD_DEFAULT)
+            ],
+            [
+                'email' => 'dmitriy.borisenko.baydin@cass.io',
+                'password' => password_hash('1234', PASSWORD_DEFAULT)
+            ],
+            [
+                'email' => 'philip.mantrov@cass.io',
+                'password' => password_hash('1234', PASSWORD_DEFAULT)
+            ],
         ])->saveData();
     }
 }

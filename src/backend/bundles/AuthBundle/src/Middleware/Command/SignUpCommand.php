@@ -14,17 +14,17 @@ class SignUpCommand extends Command
         try {
             $this->getAuthService()->signUp($request);
             $responseBuilder->setStatusSuccess();
-        }catch(MissingReqiuredFieldException $e) {
+        } catch (MissingReqiuredFieldException $e) {
             $responseBuilder
                 ->setStatusNotFound()
                 ->setError($e)
             ;
-        }catch(DuplicateAccountException $e) {
+        } catch (DuplicateAccountException $e) {
             $responseBuilder
                 ->setStatusNotFound()
                 ->setError($e)
             ;
-        }catch(ValidationException $e) {
+        } catch (ValidationException $e) {
             $responseBuilder
                 ->setStatusNotFound()
                 ->setError($e)
