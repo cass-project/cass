@@ -3,29 +3,11 @@ import {Http, URLSearchParams} from 'angular2/http';
 import {Router} from "angular2/router";
 
 @Injectable()
-export class AuthServiceProvider
-{
-    static instance:AuthService;
-
-    constructor(private http: Http, private router:Router) {
-        if(AuthServiceProvider.instance == null) {
-            AuthServiceProvider.instance = new AuthService(http, router);
-        }
-    }
-
-    getInstance() {
-        return AuthServiceProvider.instance;
-    }
-}
-
-
-@Injectable()
 export class AuthService
 {
     isLoading:boolean = false;
 
-    constructor(private http: Http, private router:Router) {
-    }
+    constructor(private http: Http, private router:Router) {}
 
     public attemptSignIn(login:string, password:string) {
         this.isLoading = true;

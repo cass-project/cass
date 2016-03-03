@@ -1,7 +1,30 @@
 <form (ngSubmit)="attemptSignUp()">
-  <div>Email: <input [(ngModel)]="email" type="text" /></div>
-  <div>Phone: <input [(ngModel)]="phone" type="text" /></div>
-  <div>Password: <input [(ngModel)]="password" type="password" /></div>
-  <div>Retype Password: <input [(ngModel)]="passwordAgain" type="password" /></div>
-  <input type="submit" [disabled]="authService.isLoading" [value]="authService.isLoading?'Loading...':'Sign Up'" />
+  <header>
+    <h1>Sign Up</h1>
+  </header>
+  <fieldset class="form-group">
+    <label for="inputSignUpComponentEmail">E-mail</label>
+    <input autofocus id="inputSignUpComponentEmail" class="form-control" [(ngModel)]="email" type="email" placeholder="your@email.com"/>
+    <small class="text-muted">We'll never share your email with anyone else.</small>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="inputSignUpComponentPassword">Password</label>
+    <input id="inputSignUpComponentPassword" class="form-control"  [(ngModel)]="password" type="password" placeholder="Type password for your new account..."/>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="inputSignUpComponentPasswordAgain">Retype Password</label>
+    <input id="inputSignUpComponentPasswordAgain" class="form-control" [(ngModel)]="passwordAgain" type="password" placeholder="...and retype it again"/>
+  </fieldset>
+  <div>
+    <button [disabled]="authService.isLoading" class="btn btn-primary" type="submit">Sign Up</button>
+    <button [disabled]="authService.isLoading" class="btn btn-secondary" type="submit">Sign Up, but I'm from another computer</button>
+    or use existing account:
+    <oauth2-login></oauth2-login>
+  </div>
+  <!--<ul>-->
+    <!--<li>-->
+      <!--<a href="#">I'm from another computer</a>-->
+      <!--<a href="#">Sign In with existing account</a>-->
+    <!--</li>-->
+  <!--</ul>-->
 </form>

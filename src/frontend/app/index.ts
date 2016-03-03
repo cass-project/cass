@@ -7,7 +7,6 @@ import 'reflect-metadata';
 import 'rxjs/Rx';
 
 require('zone.js');
-
 require('bootstrap/dist/css/bootstrap.css');
 require('./global.head.scss');
 
@@ -15,6 +14,8 @@ import {Component, provide} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, URLSearchParams} from 'angular2/http';
+
+import {AuthService} from './module/auth/service/AuthService';
 
 import {WelcomeComponent} from './module/welcome/index';
 import {AuthComponent} from './module/auth/index';
@@ -27,6 +28,9 @@ import {HeaderNavComponent} from './module/main/component/HeaderNavComponent/com
     directives: [
         ROUTER_DIRECTIVES,
         HeaderNavComponent
+    ],
+    providers: [
+        AuthService
     ]
 })
 @RouteConfig([

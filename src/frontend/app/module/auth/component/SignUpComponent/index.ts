@@ -1,8 +1,12 @@
 import {Component} from 'angular2/core';
-import {AuthService, AuthServiceProvider} from './../../service/AuthService';
+import {AuthService} from './../../service/AuthService';
+import {OAuth2Component} from '../OAuth2Component/index';
 
 @Component({
     template: require('./template.html'),
+    directives: [
+        OAuth2Component
+    ]
 })
 
 export class SignUpComponent{
@@ -10,15 +14,10 @@ export class SignUpComponent{
     phone:string;
     password:string;
     passwordAgain:string;
-    authService:AuthService;
 
-    constructor(authServiceProvider:AuthServiceProvider){
-        this.authService = authServiceProvider.getInstance();
-    }
+    constructor(public authService: AuthService){}
 
     attemptSignUp(){
         this.authService.attemptSignUp(this.email, this.phone, this.password, this.passwordAgain);
     }
-
-
 }

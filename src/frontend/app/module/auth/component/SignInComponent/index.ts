@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
-import {LoginFormComponent} from './../LoginFormComponent/index'
+import {OAuth2Component} from '../OAuth2Component/index';
+import {AuthService} from './../../service/AuthService';
 
 @Component({
     template: require('./template.html'),
@@ -7,9 +8,16 @@ import {LoginFormComponent} from './../LoginFormComponent/index'
         require('./style.shadow.scss')
     ],
     directives: [
-        LoginFormComponent
+        OAuth2Component
     ]
 })
 export class SignInComponent{
+    login:string;
+    password:string;
 
+    constructor(public authService: AuthService){}
+
+    attemptSignIn(){
+        this.authService.attemptSignIn(this.login,this.password);
+    }
 }
