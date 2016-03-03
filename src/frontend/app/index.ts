@@ -8,6 +8,8 @@ import 'rxjs/Rx';
 
 require('zone.js');
 require('./global.head.scss');
+require('normalize.css');
+require('skeleton-css/css/skeleton.css');
 
 import {Component, provide} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
