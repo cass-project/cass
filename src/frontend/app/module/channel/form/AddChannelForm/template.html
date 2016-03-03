@@ -1,0 +1,6 @@
+<form (ngSubmit)="submit()">
+    <input [(ngModel)]="name" type="text" placeholder="Channel name" />
+    <input [(ngModel)]="theme" type="text" placeholder="Theme" />
+    <input type="submit" value="Create Channel"/>
+    <input type="button" value="Close" (click)="close()"/>
+</form>

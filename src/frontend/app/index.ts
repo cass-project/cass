@@ -48,8 +48,8 @@ import {ChannelComponent} from './module/channel/index';
         component: ThemeEditorComponent
     },
     {
-        path: '/channel/...',
-        name: 'Channel',
+        path: '/channels/...',
+        name: 'Channels',
         component: ChannelComponent
     }
 ])

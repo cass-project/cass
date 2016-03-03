@@ -1,8 +1,5 @@
-import {Http, Response, Headers, RequestOptions} from 'angular2/http';
+import {Http, Headers, RequestOptions, RequestOptionsArgs} from 'angular2/http';
 import {Injectable} from 'angular2/core';
-import {RequestOptions} from "angular2/http";
-import {RequestOptionsArgs} from "angular2/http";
-
 
 @Injectable()
 export class ChannelRESTService

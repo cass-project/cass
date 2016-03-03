@@ -1,3 +1,5 @@
 <div>
-    <router-outlet></router-outlet>
+    <h1>Channels</h1>
+    <input type="button" value="Add new channel" (click)="addChannel()"/>
+    <create-channel-form *ngIf="isAddChannelRouteActive()"></create-channel-form>
 </div>
