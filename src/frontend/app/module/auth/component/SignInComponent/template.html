@@ -2,6 +2,7 @@
   <header>
     <h1>Sign In</h1>
   </header>
+  <div class="alert alert-danger" role="alert" *ngIf="authService.error">{{authService.error}}</div>
   <fieldset class="form-group">
     <label>E-mail</label>
     <input [(ngModel)]="email" type="email" placeholder="your@mail.com" class="form-control" />

@@ -12,12 +12,12 @@ import {AuthService} from './../../service/AuthService';
     ]
 })
 export class SignInComponent{
-    login:string;
-    password:string;
+    email: string;
+    password: string;
 
     constructor(public authService: AuthService){}
 
     attemptSignIn(){
-        this.authService.attemptSignIn(this.login,this.password);
+        this.authService.attemptSignIn(this.email, this.password);
     }
 }

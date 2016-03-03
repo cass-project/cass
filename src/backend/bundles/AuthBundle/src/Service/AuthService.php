@@ -38,7 +38,7 @@ class AuthService
             $this->signOut();
 
             if (!isset($credentials['login'], $credentials['password'])) {
-                throw new InvalidCredentialsException('Email or phone and password are required');
+                throw new InvalidCredentialsException('Email and password are required');
             }
         }
 

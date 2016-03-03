@@ -18,6 +18,6 @@ export class SignUpComponent{
     constructor(public authService: AuthService){}
 
     attemptSignUp(){
-        this.authService.attemptSignUp(this.email, this.phone, this.password, this.passwordAgain);
+        this.authService.attemptSignUp(this.email, this.password, this.passwordAgain);
     }
 }
