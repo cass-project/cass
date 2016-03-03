@@ -1,8 +1,15 @@
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <nav class="nav nav-inline">
-      <a class="nav-link" [routerLink]="['Welcome']">Welcome</a>
-      <a class="nav-link" [routerLink]="['Theme-Editor']">Theme Editor</a>
-    </nav>
+      <nav class="nav nav-inline">
+          <a class="nav-link" [routerLink]="['Welcome']">Welcome</a>
+          <a class="nav-link" [routerLink]="['Theme-Editor']">Theme Editor</a>
+      </nav>
+      <nav *ngIf="!authService.isAuthenticated()" class="auth-controls">
+          <a [routerLink]="['/Auth/SignUp']">Sign Up</a>
+          <a [routerLink]="['/Auth/SignIn']">Sign In</a>
+      </nav>
+      <nav *ngIf="authService.isAuthenticated()" class="auth-controls">
+          <a [routerLink]="['/Auth/Logout']">Log Out</a>
+      </nav>
   </div>
 </div>
