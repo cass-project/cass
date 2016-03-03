@@ -4,9 +4,10 @@ namespace ThemeEditor\Middleware\Request;
 use Application\Tools\RequestParams\RequestParams;
 use Psr\Http\Message\ServerRequestInterface;
 
-class GetThemeRequest implements RequestParams
+class GetThemeRequest extends RequestParams
 {
-    public function __construct(ServerRequestInterface $request)
+    protected function generateParams(ServerRequestInterface $request)
     {
+        return false;
     }
 }

@@ -30,8 +30,20 @@ return function(Application $app, string $prefix) {
     );
 
     $app->get(
-        sprintf('%s/protected/host-admin/theme-editor/{command:read}/entities/', $prefix),
+        sprintf('%s/protected/host-admin/theme-editor/{command:read}/entity/{themeId}', $prefix),
+        ThemeEditorCRUDMiddleware::class,
+        'theme-editor-read-entity'
+    );
+
+    $app->get(
+        sprintf('%s/protected/host-admin/theme-editor/{command:read}/{mode:entities}/', $prefix),
         ThemeEditorCRUDMiddleware::class,
         'theme-editor-read'
+    );
+
+    $app->get(
+        sprintf('%s/protected/host-admin/theme-editor/{command:read}/{mode:entities-tree}/', $prefix),
+        ThemeEditorCRUDMiddleware::class,
+        'theme-editor-read-tree'
     );
 };

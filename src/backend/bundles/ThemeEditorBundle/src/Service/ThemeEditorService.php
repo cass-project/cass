@@ -1,13 +1,12 @@
 <?php
 namespace ThemeEditor\Service;
 
-use Data\Repository\ThemeRepository;
+use Data\Repository\Theme\Parameters\CreateThemeParameters;
+use Data\Repository\Theme\Parameters\DeleteThemeParameters;
+use Data\Repository\Theme\Parameters\MoveThemeParameters;
+use Data\Repository\Theme\Parameters\UpdateThemeParameters;
+use Data\Repository\Theme\ThemeRepository;
 use Host\Service\CurrentHostService;
-use ThemeEditor\Middleware\Request\DeleteThemeRequest;
-use ThemeEditor\Middleware\Request\GetThemeRequest;
-use ThemeEditor\Middleware\Request\MoveThemeRequest;
-use ThemeEditor\Middleware\Request\PutThemeRequest;
-use ThemeEditor\Middleware\Request\UpdateThemeRequest;
 
 class ThemeEditorService
 {
@@ -23,23 +22,33 @@ class ThemeEditorService
         $this->themeRepository = $themeRepository;
     }
 
-    public function create(PutThemeRequest $putThemeRequest) {
-        return $this->themeRepository->create($this->currentHostService->getCurrentHost(), $putThemeRequest);
+    public function create(CreateThemeParameters $createThemeParameters) {
+        return $this->themeRepository->create($this->currentHostService->getCurrentHost(), $createThemeParameters);
     }
 
-    public function read(GetThemeRequest $getThemeRequest) {
-        return $this->themeRepository->getThemes($getThemeRequest);
+    public function read() {
+        return $this->themeRepository->getThemes();
     }
 
-    public function update(UpdateThemeRequest $updateThemeRequest) {
-        return $this->themeRepository->update($updateThemeRequest);
+    public function readTree() {
+        return $this->themeRepository->getThemesAsTree(
+            $this->themeRepository->getThemes()
+        );
     }
 
-    public function move(MoveThemeRequest $moveThemeRequest) {
-        return $this->themeRepository->move($moveThemeRequest);
+    public function get(int $themeId) {
+        return $this->themeRepository->getThemeEntity($themeId);
     }
 
-    public function delete(DeleteThemeRequest $deleteThemeRequest) {
-        return $this->themeRepository->delete($deleteThemeRequest);
+    public function update(UpdateThemeParameters $updateThemeParameters) {
+        return $this->themeRepository->update($updateThemeParameters);
+    }
+
+    public function move(MoveThemeParameters $moveThemeParameters) {
+        return $this->themeRepository->move($moveThemeParameters);
+    }
+
+    public function delete(DeleteThemeParameters $deleteThemeParameters) {
+        return $this->themeRepository->delete($deleteThemeParameters);
     }
 }

@@ -3,7 +3,7 @@ namespace Data\Entity;
 use Application\Tools\SerialManager\SerialEntity;
 
 /**
- * @Entity(repositoryClass="Data\Repository\ThemeRepository")
+ * @Entity(repositoryClass="Data\Repository\Theme\ThemeRepository")
  * @Table(name="theme")
  */
 class Theme implements SerialEntity
@@ -102,6 +102,16 @@ class Theme implements SerialEntity
         $this->parent = $parent;
 
         return $this;
+    }
+
+    public function getChildren(): array
+    {
+        return $this->children;
+    }
+
+    public function hasChildren(): bool
+    {
+        return count($this->children) > 0;
     }
 
     public function getHost(): Host

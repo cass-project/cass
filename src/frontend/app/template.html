@@ -1,11 +1,6 @@
-<div class="app">
-  <nav>
-    <ul>
-      <li><a [routerLink]="['Welcome']">Welcome</a></li>
-      <li><a [routerLink]="['Square']">Square</a></li>
-      <li><a [routerLink]="['Auth']">Auth</a></li>
-      <li><a [routerLink]="['Host-Admin']">Host Admin</a></li>
-    </ul>
-  </nav>
-  <router-outlet></router-outlet>
-</div>
+<main>
+  <cass-header-bar></cass-header-bar>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</main>

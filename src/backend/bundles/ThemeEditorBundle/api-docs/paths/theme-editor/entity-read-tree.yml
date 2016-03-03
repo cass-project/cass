@@ -1,0 +1,26 @@
+'/backend/api/protected/host-admin/theme-editor/read/entities-tree/':
+  get:
+    tags:
+      - theme-editor
+    description: |
+      Список тематик в виде дерава
+    parameters:
+      - name: themeId
+        in: path
+        required: true
+        type: number
+        description: ID тематики
+    responses:
+      '400':
+          $ref: '#/responses/error'
+      '200':
+        description: Список тематик
+        schema:
+          type: object
+          required:
+            - success
+            - tree
+          properties:
+            success:
+              type: boolean
+              description: "= true"

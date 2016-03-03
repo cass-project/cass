@@ -9,7 +9,7 @@ class UpdateThemeCommand extends Command
     public function run(ServerRequestInterface $request)
     {
         $themeEditorService = $this->getThemeEditorService();
-        $themeEntity = $themeEditorService->update(new UpdateThemeRequest($request));
+        $themeEntity = $themeEditorService->update((new UpdateThemeRequest($request))->getParameters());
 
         return [
             'id' => $themeEntity->getId(),

@@ -23,6 +23,8 @@
     "league/oauth2-facebook": "^1.1",
     "league/oauth2-instagram": "^0.2.1",
     "symfony/yaml": "^3.0",
-    "phpunit/phpunit": "^5.2"
+    "zendframework/zend-filter": "^2.6",
+    "zendframework/zend-uri": "^2.5",
+    "zendframework/zend-i18n": "^2.6"
   }
 }

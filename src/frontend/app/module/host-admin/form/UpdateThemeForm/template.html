@@ -1,0 +1,12 @@
+<form>
+    <ul class="form-controls">
+        <li>
+            <label>Title</label>
+            <input [(ngModel)]="title" placeholder="Theme title">
+            <input [(ngModel)]="parent" placeholder="Theme parent">
+        </li>
+    </ul>
+    <footer>
+        <input type="submit" (click)="submit()"/>
+    </footer>
+</form>

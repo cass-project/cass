@@ -1,0 +1,11 @@
+div.navbar {
+  border-bottom: 1px solid #ccc;
+}
+
+div.navbar nav {
+  display: inline-block;
+}
+
+div.navbar nav.auth-controls {
+  float: right;
+}

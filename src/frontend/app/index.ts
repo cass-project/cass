@@ -7,7 +7,8 @@ import 'reflect-metadata';
 import 'rxjs/Rx';
 
 require('zone.js');
-require('reset-css/reset.css');
+
+require('bootstrap/dist/css/bootstrap.css');
 require('./global.head.scss');
 
 import {Component, provide} from 'angular2/core';
@@ -16,16 +17,17 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
 import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, URLSearchParams} from 'angular2/http';
 
 import {WelcomeComponent} from './module/welcome/index';
-import {SquareComponent} from './module/square/index';
 import {AuthComponent} from './module/auth/index';
-import {HostAdminComponent} from './module/host-admin/index';
-
+import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorComponent/component';
+import {HeaderNavComponent} from './module/main/component/HeaderNavComponent/component';
+import {ChannelComponent} from './module/channel/index';
 
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),
     directives: [
         ROUTER_DIRECTIVES,
+        HeaderNavComponent
     ]
 })
 @RouteConfig([
@@ -36,19 +38,19 @@ import {HostAdminComponent} from './module/host-admin/index';
         useAsDefault: true
     },
     {
-        path: '/square/...',
-        name: 'Square',
-        component: SquareComponent,
-    },
-    {
         path: '/auth/...',
         name: 'Auth',
         component: AuthComponent
     },
     {
-        path: '/host-admin/',
-        name: 'Host-Admin',
-        component: HostAdminComponent
+        path: '/theme-editor/...',
+        name: 'Theme-Editor',
+        component: ThemeEditorComponent
+    },
+    {
+        path: '/channel/...',
+        name: 'Channel',
+        component: ChannelComponent
     }
 ])
 class App
