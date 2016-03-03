@@ -51,6 +51,10 @@ export class ThemeEditorComponent
     ) {}
 
     ngOnInit() {
+        this.themeRESTService.getThemes()
+            .map(res => res.json())
+            .subscribe(data => {this.themeEditorService.themes = data['entities']
+            });
         this.themeRESTService.getThemesTree()
             .map(res => res.json())
             .subscribe(data => {
@@ -70,6 +74,11 @@ export class ThemeEditorComponent
 
     openUpdateThemeForm(){
         this.openFormContentBox();
+        //for(var i = 0; i < this.themes.length; i++){
+        //    if(this.themes[i].parent_id){
+        //        this.themes[i].title = this.themes[i].title;
+        //    }
+        //}
         this.router.navigate(['Theme-Editor-Update']);
     }
 
