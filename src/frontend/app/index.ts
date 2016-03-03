@@ -7,9 +7,9 @@ import 'reflect-metadata';
 import 'rxjs/Rx';
 
 require('zone.js');
+
+require('bootstrap/dist/css/bootstrap.css');
 require('./global.head.scss');
-require('normalize.css');
-require('skeleton-css/css/skeleton.css');
 
 import {Component, provide} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
@@ -17,16 +17,16 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
 import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, URLSearchParams} from 'angular2/http';
 
 import {WelcomeComponent} from './module/welcome/index';
-import {SquareComponent} from './module/square/index';
 import {AuthComponent} from './module/auth/index';
 import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorComponent/component';
-
+import {HeaderNavComponent} from './module/main/component/HeaderNavComponent/component';
 
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),
     directives: [
         ROUTER_DIRECTIVES,
+        HeaderNavComponent
     ]
 })
 @RouteConfig([
@@ -35,11 +35,6 @@ import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorCom
         name: 'Welcome',
         component: WelcomeComponent,
         useAsDefault: true
-    },
-    {
-        path: '/square/...',
-        name: 'Square',
-        component: SquareComponent,
     },
     {
         path: '/auth/...',
