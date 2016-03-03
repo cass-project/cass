@@ -96,9 +96,9 @@ cd /vagrant/frontend
 
 ln -s /usr/bin/nodejs /usr/bin/node
 
-npm install -g tsd webpack
+npm install -g typings webpack
 npm install --no-bin-link
-tsd install
+typings install
 
 webpack
 
