@@ -13,9 +13,6 @@ import {FormBuilder} from "angular2/common";
 @Component({
     selector: 'create-channel-form',
     template: require('./template.html'),
-    styles: [
-        require('./style.shadow.scss'),
-    ],
     directives: [
         COMMON_DIRECTIVES,
         FORM_DIRECTIVES,
