@@ -4,6 +4,7 @@ import {COMMON_DIRECTIVES} from 'angular2/common';
 
 import {ChannelRESTService} from './service/ChannelRESTService';
 import {AddChannelFormComponent} from './form/AddChannelForm/index';
+import {Location} from "angular2/router";
 
 @Component({
     template: require('./template.html'),
@@ -12,7 +13,7 @@ import {AddChannelFormComponent} from './form/AddChannelForm/index';
         ROUTER_DIRECTIVES,
         AddChannelFormComponent
     ],
-    providers:[ChannelRESTService]
+    providers:[ChannelRESTService],
 })
 
 @RouteConfig([
@@ -31,7 +32,8 @@ import {AddChannelFormComponent} from './form/AddChannelForm/index';
 export class ChannelComponent
 {
     constructor(
-        private router: Router
+        private router: Router,
+        private location: Location
     ){}
 
     public addChannel(){
@@ -39,7 +41,6 @@ export class ChannelComponent
     }
 
     public isAddChannelRouteActive() : boolean{
-        let addChannelRoute = this.router.generate(['AddChannel']);
-        return this.router.isRouteActive(addChannelRoute);
+        return this.location.path()=="/channels/add";
     }
 }
