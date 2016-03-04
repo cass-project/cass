@@ -1,6 +1,36 @@
-<form (ngSubmit)="submit()">
-    <input [(ngModel)]="name" type="text" placeholder="Channel name" />
-    <input [(ngModel)]="theme" type="text" placeholder="Theme" />
-    <input type="submit" value="Create Channel"/>
-    <input type="button" value="Close" (click)="close()"/>
-</form>
+<div>
+    <div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Create channel</h4>
+            </div>
+            <form (ngSubmit)="submit()" [ngFormModel]="form" >
+            <div class="modal-body">
+                <div class="form-group">
+                        <input class="form-control"
+                               [class.form-control-danger]="!form.valid"
+                               ngControl="name" type="text" placeholder="Channel name" />
+                    <!--div *ngIf="name.dirty && !name.valid">Your name needs to be at least 4 characters.
+                        <p *ngIf="name.errors.minlength">
+                            Your name needs to be at least 4 characters.
+                        </p>
+                    </div-->
+                </div>
+                <div class="form-group">
+                    <input class="form-control" ngControl="theme" type="text" placeholder="Theme" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" value="Close" class="btn btn-secondary" (click)="close()"/>
+                <input type="submit" [disabled]="!form.valid" value="Create Channel" class="btn btn-primary"/>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in"></div>
+</div>

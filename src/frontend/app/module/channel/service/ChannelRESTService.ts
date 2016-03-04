@@ -10,27 +10,11 @@ export class ChannelRESTService
     constructor(public http:Http) {
     }
 
-    public addChannel(name: string, themeId: number){
-        if (name && themeId) {
-            let headers = new Headers();
-
-            headers.append('Content-Type', 'application/json');
-
-            let options = new RequestOptions({headers: headers});
-            let body = JSON.stringify({
-                    name: name,
-                    theme_id: themeId
-                });
-            //this.http.put(this.API_PATH_PROTECTED + '/channel/add', body, options).map(res=>res.json())
-            this.put('/channel/add', body, options).subscribe(
-                success => console.log,
-                error => {
-                    console.log(error.json());
-                }
-            );
-        } else {
-            alert("Some required fields are blank.")
-        }
+    public addChannel(data){
+        this.put('/channel/add', JSON.stringify(data)).subscribe(
+            success => console.log,
+            error => {console.log(error.json());}
+        );
     }
 
     private get(uri:string, options?: RequestOptionsArgs) {
@@ -42,6 +26,9 @@ export class ChannelRESTService
     }
 
     private put(uri:string, body: string, options?: RequestOptionsArgs) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let options = options||new RequestOptions({headers: headers});
         return this.http.put(this.API_PATH_PROTECTED + uri, body, options||null).map(res => res.json());
     }
 }
