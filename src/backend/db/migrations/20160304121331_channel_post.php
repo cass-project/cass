@@ -2,9 +2,9 @@
 
 use Phinx\Migration\AbstractMigration;
 
-
-class Post extends AbstractMigration
+class ChannelPost extends AbstractMigration
 {
+    CONST TABLE_NAME = 'channel_post';
     /**
      * Change Method.
      *
@@ -26,22 +26,20 @@ class Post extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-
-    const TABLE_NAME = 'post';
-
-
     public function change()
     {
-      // Adding account table
-      $this->table(self::TABLE_NAME)
-           ->addColumn('description', 'string')
-           ->addColumn('created', 'datetime')
-           ->addColumn('updated', 'datetime', array('null' => TRUE))
-           ->addColumn('status', 'string')
-           ->addColumn('account_id', 'integer')
-        ->addForeignKey('account_id', 'account',
-                        'id', ['delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION'])
-      ->create();
+        $this->table(self::TABLE_NAME)
+             ->addColumn('channel_id', 'integer')
+             ->addForeignKey('channel_id', 'channel', 'id', [
+               'delete' => 'cascade',
+               'update' => 'cascade'
+             ])
+             ->addColumn('post_id', 'integer')
+             ->addForeignKey('post_id', 'post', 'id', [
+               'delete' => 'cascade',
+               'update' => 'cascade'
+             ])
+             ->create()
+        ;
     }
-
 }
