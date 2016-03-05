@@ -3,6 +3,7 @@
       <nav class="nav nav-inline">
           <a class="nav-link" [routerLink]="['Welcome']">Welcome</a>
           <a class="nav-link" [routerLink]="['Theme-Editor']">Theme Editor</a>
+          <a class="nav-link" [routerLink]="['Channels']">Channels</a>
       </nav>
       <nav *ngIf="!authService.isAuthenticated()" class="auth-controls">
           <a [routerLink]="['/Auth/SignUp']">Sign Up</a>
