@@ -5,6 +5,7 @@
       "Auth\\": "bundles/AuthBundle/src",
       "Data\\": "bundles/DataBundle/src",
       "ThemeEditor\\": "bundles/ThemeEditorBundle/src",
+      "Channel\\": "bundles/ChannelBundle/src",
       "Development\\": "bundles/DevelopmentBundle/src",
       "Host\\": "bundles/HostBundle/src"
     }
