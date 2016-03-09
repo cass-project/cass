@@ -5,6 +5,12 @@ use Channel\Middleware\ChannelCRUDMiddleware;
 use Zend\Expressive\Application;
 
 return function (Application $app, string $prefix) {
-    $app->get(sprintf('%s/channel/{action}', $prefix), ChannelCRUDMiddleware::class);
-//    $app->any(sprintf('%s/channel/{action}', $prefix), AuthMiddleware::class);
+    $app->any(sprintf('%s/protected/channel/{command:create}', $prefix),
+              ChannelCRUDMiddleware::class,
+              'channel-create'
+    );
+    $app->any(sprintf('%s/protected/channel/{command:read}', $prefix),
+              ChannelCRUDMiddleware::class,
+              'channel-read'
+    );
 };

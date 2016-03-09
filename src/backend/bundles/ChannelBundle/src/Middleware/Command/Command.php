@@ -10,20 +10,29 @@ abstract class Command
 {
 	private $channelService;
 
+	public function getChannelService():ChannelService
+	{
+		return $this->channelService;
+	}
+
+	public function setChannelService(ChannelService $channelService):self
+	{
+		$this->channelService = $channelService;
+		return $this;
+	}
+
+
 	static public function factory(ServerRequestInterface $request)
 	{
-		$action = $request->getAttribute('action');
+		$action = $request->getAttribute('command');
 
 		switch ($action) {
 			case 'create':
 				return new CreateCommand();
 			break;
-
 			case 'read':
 				return new ReadCommand();
 			break;
-
-
 			case 'update': break;
 			case 'delete': break;
 
@@ -33,9 +42,6 @@ abstract class Command
 		throw new UnknownActionException('Unknown action');
 	}
 
-	public function setChannelService(ChannelService $channelService){
-		$this->channelService = $channelService;
-	}
 
 	abstract public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder);
 }

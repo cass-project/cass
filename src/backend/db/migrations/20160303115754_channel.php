@@ -33,6 +33,7 @@ class Channel extends AbstractMigration
     {
         // Adding account table
         $this->table(self::TABLE_NAME)
+             ->addColumn('name', 'string')
              ->addColumn('description', 'string')
              ->addColumn('created', 'datetime')
              ->addColumn('updated', 'datetime', array('null' => TRUE))
