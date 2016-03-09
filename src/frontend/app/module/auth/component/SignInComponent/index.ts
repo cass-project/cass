@@ -16,32 +16,35 @@ export class SignInComponent{
     private loading = false;
     private model = {
         email: "",
-        password: ""
+        password: "",
+        remember: false,
     };
 
     constructor(private authService: AuthService, private router: Router){}
 
     attemptSignIn(){
         this.loading = true;
-        this.authService.attemptSignIn({
-            email: this.model.email,
-            password: this.model.password,
-            remember: true
-        }).add(() => {
+        this.model.remember = true;
+
+        this.authService.attemptSignIn(this.model).add(() => {
             this.loading = false;
-            this.router.navigate(['/Welcome']);
+
+            if(!this.authService.lastError) {
+                this.router.navigate(['/Welcome']);
+            }
         });
     }
 
     attemptSignInNoRemember() {
         this.loading = true;
-        this.authService.attemptSignIn({
-            email: this.model.email,
-            password: this.model.password,
-            remember: false
-        }).add(() => {
+        this.model.remember = false;
+
+        this.authService.attemptSignIn(this.model).add(() => {
             this.loading = false;
-            this.router.navigate(['/Welcome']);
+
+            if(!this.authService.lastError) {
+                this.router.navigate(['/Welcome']);
+            }
         });
     }
 }

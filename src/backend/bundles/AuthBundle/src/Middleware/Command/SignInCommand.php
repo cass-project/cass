@@ -3,6 +3,7 @@ namespace Auth\Middleware\Command;
 
 use Application\REST\GenericRESTResponseBuilder;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
+use Data\Exception\Auth\AccountNotFoundException;
 use Psr\Http\Message\ServerRequestInterface;
 
 class SignInCommand extends Command
@@ -14,13 +15,16 @@ class SignInCommand extends Command
         try {
             $account = $this->getAuthService()->signIn($request);
             $responseBuilder->setStatusSuccess()->setJson([
-                "api_key"=>$account->getToken()
+                "api_key" => $account->getToken()
             ]);
+        }catch(AccountNotFoundException $e) {
+            $responseBuilder
+                ->setStatusNotFound()
+                ->setError($e);
         }catch(InvalidCredentialsException $e) {
             $responseBuilder
-                ->setStatusSuccess()
-                ->setError($e)
-            ;
+                ->setStatusNotFound()
+                ->setError($e);
         }
     }
 }

@@ -3,7 +3,6 @@ namespace Auth\Service\AuthService\SignUpValidation;
 
 use Auth\Service\AuthService\Exceptions\DuplicateAccountException;
 use Data\Repository\AccountRepository;
-use Psr\Http\Message\ServerRequestInterface;
 
 class HasSameAccount implements Validator
 {
@@ -14,13 +13,13 @@ class HasSameAccount implements Validator
         $this->accountRepository = $accountRepository;
     }
 
-    public function validate(ServerRequestInterface $request) {
-        $hasSameAccount = $this->accountRepository->hasAccountWithEmail($request['email'] ?? $request['phone']);
+    public function validate(array $request) {
+        $hasSameAccount = $this->accountRepository->hasAccountWithEmail($request['email']);
 
         $isValid = !$hasSameAccount;
 
         if(!$isValid) {
-            throw new DuplicateAccountException(sprintf('%s already in use.', $request['email'] ?? $request['phone']));
+            throw new DuplicateAccountException(sprintf('%s already in use.', $request['email']));
         }
     }
 

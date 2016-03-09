@@ -6,7 +6,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class HasAllRequiredFields implements Validator
 {
-    public function validate(ServerRequestInterface $request)
+    public function validate(array $request)
     {
         $hasEmailOrPhone = !(empty($request['email']) && empty($request['phone']));
         $hasPassword = !empty($request['password']);

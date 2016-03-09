@@ -2,29 +2,24 @@
   <header>
     <h1>Sign Up</h1>
   </header>
+  <div class="alert alert-danger" role="alert" *ngIf="authService.lastError">{{authService.lastError.message}}</div>
   <fieldset class="form-group">
     <label for="inputSignUpComponentEmail">E-mail</label>
-    <input autofocus id="inputSignUpComponentEmail" class="form-control" [(ngModel)]="email" type="email" placeholder="your@email.com"/>
+    <input autofocus id="inputSignUpComponentEmail" class="form-control" [disabled]="loading" [(ngModel)]="model.email" type="email" placeholder="your@email.com"/>
     <small class="text-muted">We'll never share your email with anyone else.</small>
   </fieldset>
   <fieldset class="form-group">
     <label for="inputSignUpComponentPassword">Password</label>
-    <input id="inputSignUpComponentPassword" class="form-control"  [(ngModel)]="password" type="password" placeholder="Type password for your new account..."/>
+    <input id="inputSignUpComponentPassword" class="form-control" [disabled]="loading" [(ngModel)]="model.password" type="password" placeholder="Type password for your new account..."/>
   </fieldset>
   <fieldset class="form-group">
     <label for="inputSignUpComponentPasswordAgain">Retype Password</label>
-    <input id="inputSignUpComponentPasswordAgain" class="form-control" [(ngModel)]="passwordAgain" type="password" placeholder="...and retype it again"/>
+    <input id="inputSignUpComponentPasswordAgain" class="form-control" [disabled]="loading" [(ngModel)]="model.repeat" type="password" placeholder="...and retype it again"/>
   </fieldset>
   <div>
-    <button [disabled]="authService.isLoading" class="btn btn-primary" type="submit">Sign Up</button>
-    <button [disabled]="authService.isLoading" class="btn btn-secondary" type="submit">Sign Up, but I'm from another computer</button>
+    <button [disabled]="loading" class="btn btn-primary" type="submit">Sign Up</button>
+    <button [disabled]="loading" class="btn btn-secondary" type="button" (click)="attemptSignUpNoRemember()">Sign Up, but I'm from another computer</button>
     or use existing account:
     <oauth2-login></oauth2-login>
   </div>
-  <!--<ul>-->
-    <!--<li>-->
-      <!--<a href="#">I'm from another computer</a>-->
-      <!--<a href="#">Sign In with existing account</a>-->
-    <!--</li>-->
-  <!--</ul>-->
 </form>

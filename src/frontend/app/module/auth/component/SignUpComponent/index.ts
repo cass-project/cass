@@ -1,4 +1,5 @@
 import {Component} from 'angular2/core';
+import {Router} from 'angular2/router';
 import {AuthService} from './../../service/AuthService';
 import {OAuth2Component} from '../OAuth2Component/index';
 
@@ -10,18 +11,40 @@ import {OAuth2Component} from '../OAuth2Component/index';
 })
 
 export class SignUpComponent{
-    email:string;
-    phone:string;
-    password:string;
-    passwordAgain:string;
+    private loading = false;
 
-    constructor(public authService: AuthService){}
+    private model = {
+        email: "",
+        password: "",
+        repeat: "",
+        remember: false
+    };
 
-    attemptSignUp(){
-        this.authService.attemptSignUp({
-            email: this.email,
-            password: this.password,
-            repeat: this.passwordAgain
+    constructor(private authService: AuthService, private router: Router){}
+
+    attemptSignUp() {
+        this.loading = true;
+        this.model.remember = true;
+
+        this.authService.attemptSignUp(this.model).add(() => {
+            if(!this.authService.lastError) {
+                this.router.navigate(['/Welcome']);
+            }
+
+            this.loading = false;
+        });
+    }
+
+    attemptSignUpNoRemember() {
+        this.loading = true;
+        this.model.remember = false;
+
+        this.authService.attemptSignUp(this.model).add(() => {
+            if(!this.authService.lastError) {
+                this.router.navigate(['/Welcome']);
+            }
+
+            this.loading = false;
         });
     }
 }

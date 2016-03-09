@@ -24,40 +24,34 @@ export class AuthService
     public attemptSignIn(request: SignInModel) {
         this.lastError = null;
 
-        let jsonRequest = JSON.stringify({
-            "email" : request.email,
-            "password" : request.password,
-            "remember": request.remember
-        });
-
-        return this.http.post('/backend/api/auth/sign-in', jsonRequest)
-            .map(res => res.json())
-            .subscribe(
-                response => {
-                    if(response.success) {
-                        this.signedIn = true;
-                        this.token.setToken(response.api_key);
-
-                        Cookie.setCookie('api_key', response.api_key, request.remember ? 14 : undefined);
-                    }else{
-                        this.signedIn = false;
-                        this.lastError = new BackendError(response);
-                    }
-                },
-                error => {
-                    this.signedIn = false;
-                    this.lastError = new BackendError(error);
-                }
-            )
-        ;
+        console.log(request.remember, 'remember?');
+        return this.signIn(this.http.post('/backend/api/auth/sign-in', JSON.stringify(request)), request.remember);
     }
 
     public attemptSignUp(request: SignUpModel) {
-        return this.http.post('/backend/api/auth/sign-up', JSON.stringify({
-            "email": request.email,
-            "password": request.password,
-            "passwordAgain": request.repeat
-        }));
+        this.lastError = null;
+
+        return this.signIn(this.http.post('/backend/api/auth/sign-up', JSON.stringify(request)), request.remember);
+    }
+
+    private signIn(http, remember = false) {
+        return http.map(res => res.json()).subscribe(
+            response => {
+                if(response.success) {
+                    this.signedIn = true;
+                    this.token.setToken(response.api_key);
+
+                    Cookie.setCookie('api_key', response.api_key, remember ? 14 : undefined);
+                }else{
+                    this.signedIn = false;
+                    this.lastError = new BackendError(response);
+                }
+            },
+            error => {
+                this.signedIn = false;
+                this.lastError = new BackendError(error);
+            }
+        );
     }
 
     public signOut() {
@@ -110,7 +104,7 @@ interface SignInModel
 {
     email: string;
     password: string;
-    remember: boolean;
+    remember?: boolean;
 }
 
 interface SignUpModel
@@ -118,4 +112,5 @@ interface SignUpModel
     email: string;
     password: string;
     repeat: string;
+    remember?: boolean;
 }
