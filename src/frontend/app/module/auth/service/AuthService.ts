@@ -2,91 +2,120 @@ import {Injectable} from 'angular2/core';
 import {Http, URLSearchParams} from 'angular2/http';
 import {Router} from "angular2/router";
 import {ResponseInterface} from "../../main/ResponseInterface";
+import {Cookie} from 'ng2-cookies';
+import {BackendError} from '../../main/BackendError';
 
 @Injectable()
 export class AuthService
 {
-    public isLoading: boolean = false;
+    public token: AuthToken;
     public signedIn: boolean = false;
-    public error: string;
+    public lastError: BackendError;
 
-    private token: string;
+    constructor(private http: Http, private router:Router) {
+        this.token = new AuthToken();
 
-    constructor(private http: Http, private router:Router) {}
-
-    public attemptSignIn(login:string, password:string) {
-        this.error = null;
-        this.isLoading = true;
-
-        let httpHandler = this.http.post('/backend/api/auth/sign-in', JSON.stringify({
-            "login" : login,
-            "password" : password
-        }));
-
-        httpHandler.map(res => res.json()).debounceTime(400).subscribe(
-            response => {
-                if(response['success']) {
-                    this.token = response['account_token'];
-                    this.signedIn = true;
-                    this.router.navigate(['Welcome']);
-                }
-
-                this.isLoading = false;
-            },
-            err => {
-                let errData = err.json();
-
-                if(errData.error) {
-                    this.error = errData.error;
-                }else{
-                    this.error = 'Unknown error. Check your internet connection.'
-                }
-
-                this.isLoading = false;
-            }
-        );
-
-        return httpHandler;
+        if(Cookie.getCookie('api_key')) {
+            this.signedIn = true;
+            this.token.setToken(Cookie.getCookie('api_key'));
+        }
     }
 
-    public attemptSignUp(email:string, password:string, passwordAgain:string) {
-        this.isLoading = true;
+    public attemptSignIn(request: SignInModel) {
+        this.lastError = null;
 
-        let httpHandler = this.http.post('/backend/api/auth/sign-up', JSON.stringify({
-            "email"         : email,
-            "password"      : password,
-            "passwordAgain" : passwordAgain
+        let jsonRequest = JSON.stringify({
+            "email" : request.email,
+            "password" : request.password,
+            "remember": request.remember
+        });
+
+        return this.http.post('/backend/api/auth/sign-in', jsonRequest)
+            .map(res => res.json())
+            .subscribe(
+                response => {
+                    if(response.success) {
+                        this.signedIn = true;
+                        this.token.setToken(response.api_key);
+
+                        Cookie.setCookie('api_key', response.api_key, request.remember ? 14 : undefined);
+                    }else{
+                        this.signedIn = false;
+                        this.lastError = new BackendError(response);
+                    }
+                },
+                error => {
+                    this.signedIn = false;
+                    this.lastError = new BackendError(error);
+                }
+            )
+        ;
+    }
+
+    public attemptSignUp(request: SignUpModel) {
+        return this.http.post('/backend/api/auth/sign-up', JSON.stringify({
+            "email": request.email,
+            "password": request.password,
+            "passwordAgain": request.repeat
         }));
-
-        httpHandler.subscribe(
-            response => {
-
-            },
-            err => this.isLoading = false
-        );
-
-        return httpHandler;
     }
 
     public signOut() {
-        this.isLoading = true;
-
-        let httpHandler = this.http.get('/backend/api/auth/sign-out');
-
-        httpHandler.subscribe(
-            () => {
-                this.token = null;
+        return this.http.get('/backend/api/auth/sign-out').subscribe(
+            response => {
                 this.signedIn = false;
-                this.router.navigate(['SignIn']);
-            },
-            () => this.isLoading = false
-        );
+                this.router.navigate(['Welcome']);
 
-        return httpHandler;
+                Cookie.deleteCookie('api_key');
+            }
+        );
+    }
+}
+
+class AuthToken
+{
+    public apiKey: string;
+
+    setToken(apiKey) {
+        localStorage.setItem('api_key', apiKey);
+
+        this.apiKey = apiKey;
+    }
+
+    reset() {
+        localStorage.removeItem('api_key');
+
+        this.apiKey = null;
+    }
+
+    hasApiKey() {
+        return !!this.apiKey;
+    }
+
+    getApiKey(): string {
+        if(!this.hasApiKey()) {
+            throw new Error('No api_key available');
+        }
+
+        return this.apiKey;
     }
 }
 
 export interface SignInResponse extends ResponseInterface
 {
-    account_token: string;
+    api_key: string;
+}
+
+interface SignInModel
+{
+    email: string;
+    password: string;
+    remember: boolean;
+}
+
+interface SignUpModel
+{
+    email: string;
+    password: string;
+    repeat: string;
 }

@@ -34,6 +34,6 @@ class GenericRESTResponseBuilder extends RESTResponseBuilder
 
     public function isSuccess(): bool
     {
-        return $this->getStatus() === self::CODE_SUCCESS;
+        return !$this->getError() && ($this->getStatus() === self::CODE_SUCCESS);
     }
 }

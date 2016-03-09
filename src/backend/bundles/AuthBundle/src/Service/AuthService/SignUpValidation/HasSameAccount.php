@@ -15,7 +15,7 @@ class HasSameAccount implements Validator
     }
 
     public function validate(ServerRequestInterface $request) {
-        $hasSameAccount = $this->accountRepository->isAccountExist($request['email'] ?? $request['phone']);
+        $hasSameAccount = $this->accountRepository->hasAccountWithEmail($request['email'] ?? $request['phone']);
 
         $isValid = !$hasSameAccount;
 

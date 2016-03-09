@@ -22,8 +22,7 @@ class HeadersMiddleware implements MiddlewareInterface
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
         try {
-            $this->authService->attemptSignIn($request);
-            $response = $response->withAddedHeader("Authenticatied", "true");
+            $this->authService->signIn($request);
         }catch (InvalidCredentialsException $e) {}
 
         return $out($request, $response);

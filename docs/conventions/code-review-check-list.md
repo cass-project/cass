@@ -36,3 +36,8 @@ Clean-up reject
 ---------------
 
 - Отсутствие `Return type declaration`, `Scalar type declarations`
+
+Front-end
+---------
+
+- Check tab-index

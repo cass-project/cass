@@ -85,6 +85,11 @@ class Account
         return $this;
     }
 
+    public function getAPIKey()
+    {
+        return $this->password;
+    }
+
     public function getToken()
     {
         return $this->token;

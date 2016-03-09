@@ -1,7 +1,6 @@
 <?php
 namespace Auth\Service;
 
-use Auth\Service\AuthService\Exceptions\DuplicateAccountException;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Auth\Service\AuthService\SignUpValidation\ArePasswordsMatching;
 use Auth\Service\AuthService\SignUpValidation\HasAllRequiredFields;
@@ -11,56 +10,24 @@ use Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
 use Auth\Service\AuthService\SignUpValidation\Validator;
 use Data\Entity\Account;
 use Data\Repository\AccountRepository;
-use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthService
 {
-
-    /**
-     * @var AccountRepository
-     */
+    /** @var AccountRepository */
     private $accountRepository;
 
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
+    public function __construct(AccountRepository $accountRepository)
     {
-        $this->entityManager     = $entityManager;
-        $this->accountRepository = $entityManager->getRepository(Account::class);
+        $this->accountRepository = $accountRepository;
     }
 
-    public function attemptSignIn(Request $request) : Account
-    {
-        $credentials = json_decode($request->getBody(), true);
-
-        if (isset($credentials['login']) || isset($credentials['password'])) {
-            $this->signOut();
-
-            if (!isset($credentials['login'], $credentials['password'])) {
-                throw new InvalidCredentialsException('Email and password are required');
-            }
-        }
-
-        if (isset($_SESSION['account'])) {
-            $account = unserialize($_SESSION['account']); /** @var Account $account */
-        } else {
-            $account = $this->accountRepository
-                ->findByLoginOrToken($credentials['login'] ?? $this->getToken($request));
-        }
-
-        if (!$this->verifyToken($account, $request) && !$this->verifyPassword($account, $request)) {
-            throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $credentials['login']));
-        }
-
-        $this->signIn($account);
-
-        return $account;
-    }
-
-    public function signUp(Request $request, bool $signInAfter=true) : Account
+    public function signUp(Request $request) : Account
     {
         $request = json_decode($request->getBody(), true);
+
+        $email = $request['email'] ?? null;
+        $password = $request['password'] ?? null;
 
         array_map(function(Validator $validator) use ($request) {
             $validator->validate($request);
@@ -73,55 +40,48 @@ class AuthService
         ]);
 
         $account = (new Account())
-            ->setEmail($request['email'] ?? null)
-            ->setPhone($request['phone'] ?? null)
-            ->setPassword(password_hash($request['password'], PASSWORD_DEFAULT))
+            ->setEmail($email)
+            ->setPassword(password_hash($password, PASSWORD_DEFAULT))
         ;
 
-        if ($signInAfter) {
-            $this->signIn($account);
-        } else {
-            $this->entityManager->persist($account);
-            $this->entityManager->flush();
+        $this->accountRepository->saveAccount($account);
+
+        return $account;
+    }
+
+    public function signIn(Request $request) : Account
+    {
+        list($email, $password) = $this->unpackCredentials($request);
+
+        $account = $this->accountRepository->findByEmail($email);
+
+        if(!$this->verifyPassword($account, $password)) {
+            throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $email));
         }
 
         return $account;
     }
 
-    public function signIn(Account $account)
-    {
-        if (!$account->getToken() || $account->getTokenExpired() < time()) {
-            $account->setToken()
-                ->setTokenExpired(strtotime('+30 minutes'))
-            ;
-            $this->entityManager->persist($account);
-            $this->entityManager->flush();
-        }
-
-        $_SESSION['account'] = serialize($account);
-    }
-
     public function signOut()
     {
-        unset($_SESSION['account']);
+        unset($_COOKIE['api_key']);
     }
 
-    private function getToken(Request $request)
+    private function verifyPassword(Account $account, string $password): bool
     {
-        return $request->hasHeader('Account-Token') ? $request->getHeader('Account-Token')[0] : null;
+        return password_verify($password, $account->getPassword());
     }
 
-    private function verifyToken(Account $account, Request $request) : bool
-    {
-        return $account->getToken() &&
-               $account->getToken() === $this->getToken($request);
-    }
-
-    private function verifyPassword(Account $account, Request $request) : bool
+    private function unpackCredentials(Request $request): array
     {
         $credentials = json_decode($request->getBody(), true);
-        return isset($credentials['password']) &&
-               password_verify($credentials['password'], $account->getPassword());
-    }
+        $email = $credentials['email'] ?? null;
+        $password = $credentials['password'] ?? null;
 
+        if ($email === null || $password === null) {
+            throw new InvalidCredentialsException('Email and password are required');
+        }
+
+        return array($email, $password);
+    }
 }

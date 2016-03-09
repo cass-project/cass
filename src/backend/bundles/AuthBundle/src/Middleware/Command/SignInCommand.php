@@ -9,14 +9,16 @@ class SignInCommand extends Command
 {
     public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder)
     {
+        sleep(1);
+
         try {
-            $account = $this->getAuthService()->attemptSignIn($request);
+            $account = $this->getAuthService()->signIn($request);
             $responseBuilder->setStatusSuccess()->setJson([
-                    "account_token"=>$account->getToken()
+                "api_key"=>$account->getToken()
             ]);
         }catch(InvalidCredentialsException $e) {
             $responseBuilder
-                ->setStatusNotAllowed()
+                ->setStatusSuccess()
                 ->setError($e)
             ;
         }

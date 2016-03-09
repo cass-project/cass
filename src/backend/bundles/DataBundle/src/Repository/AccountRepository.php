@@ -1,30 +1,41 @@
 <?php
 namespace Data\Repository;
 
-use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Data\Entity\Account;
+use Data\Exception\Auth\AccountNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 
 class AccountRepository extends EntityRepository
 {
-    function findByLoginOrToken($login) : Account
+    public function findByEmail($email) : Account
     {
         try {
             return $this->createQueryBuilder('a')
-                    ->where('a.email = :login OR a.phone = :login OR a.token = :login')
-                        ->setParameter("login", $login)
-                ->getQuery()->getSingleResult();
+                ->where('a.email = :email')
+                ->setParameter("email", $email)
+                ->getQuery()
+                ->getSingleResult()
+            ;
         }catch (NoResultException $e) {
-            throw new InvalidCredentialsException("Fail to sign-in.");
+            throw new AccountNotFoundException(sprintf('Account with email `%s` not found', $email));
         }
     }
 
-    function isAccountExist($login) : bool
+    public function hasAccountWithEmail($email) : bool
     {
-        return !!$this->createQueryBuilder('a')
-            ->select('COUNT(a.id)')
-            ->where('a.email = :login OR a.phone = :login')
-            ->setParameter("login", $login)->getQuery()->getSingleScalarResult();
+        try {
+            $this->findByEmail($email);
+
+            return true;
+        }catch(AccountNotFoundException $e) {
+            return false;
+        }
+    }
+
+    public function saveAccount(Account $account)
+    {
+        $this->getEntityManager()->persist($account);
+        $this->getEntityManager()->flush($account);
     }
 }
