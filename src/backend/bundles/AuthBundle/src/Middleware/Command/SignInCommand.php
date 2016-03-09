@@ -10,10 +10,11 @@ class SignInCommand extends Command
 {
     public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder)
     {
-        sleep(1);
-
         try {
             $account = $this->getAuthService()->signIn($request);
+
+            setcookie('api_key', $account->getAPIKey(), time() + 60 /* sec */ * 60 /* min */ * 24 /* hours */ * 30 /* days */, '/');
+
             $responseBuilder->setStatusSuccess()->setJson([
                 "api_key" => $account->getToken()
             ]);

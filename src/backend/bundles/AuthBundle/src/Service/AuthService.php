@@ -2,14 +2,16 @@
 namespace Auth\Service;
 
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
+use Auth\Service\AuthService\OAuth2\RegistrationRequest;
 use Auth\Service\AuthService\SignUpValidation\ArePasswordsMatching;
 use Auth\Service\AuthService\SignUpValidation\HasAllRequiredFields;
 use Auth\Service\AuthService\SignUpValidation\HasSameAccount;
 use Auth\Service\AuthService\SignUpValidation\IsEmailValid;
 use Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
-use Auth\Service\AuthService\SignUpValidation\Validator;
+use Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
 use Data\Entity\Account;
 use Data\Repository\AccountRepository;
+use Data\Repository\OAuthAccountRepository;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthService
@@ -17,9 +19,17 @@ class AuthService
     /** @var AccountRepository */
     private $accountRepository;
 
-    public function __construct(AccountRepository $accountRepository)
+    /** @var OAuthAccountRepository */
+    private $oauthAccountRepository;
+
+    /** @var array */
+    private $oauth2Config;
+
+    public function __construct(AccountRepository $accountRepository, OAuthAccountRepository $oAuthAccountRepository, array $oauth2Config)
     {
         $this->accountRepository = $accountRepository;
+        $this->oauthAccountRepository = $oAuthAccountRepository;
+        $this->oauth2Config = $oauth2Config;
     }
 
     public function signUp(Request $request) : Account
@@ -29,7 +39,7 @@ class AuthService
         $email = $request['email'] ?? null;
         $password = $request['password'] ?? null;
 
-        array_map(function(Validator $validator) use ($request) {
+        array_map(function(SignUpValidator $validator) use ($request) {
             $validator->validate($request);
         }, [
             new HasAllRequiredFields(),
@@ -62,9 +72,31 @@ class AuthService
         return $account;
     }
 
+    public function signInOauth2(RegistrationRequest $registrationRequest)
+    {
+        $oauthRepository = $this->oauthAccountRepository;
+
+        if(!$this->accountRepository->hasAccountWithEmail($registrationRequest->getEmail())) {
+            $oauthRepository->create($registrationRequest);
+        }
+
+        return $oauthRepository->findAccount($registrationRequest->getProvider(), $registrationRequest->getProviderAccountId());
+    }
+
     public function signOut()
     {
         unset($_COOKIE['api_key']);
+    }
+
+    public function getOAuth2Config($provider): array
+    {
+        $config = $this->oauth2Config[$provider] ?? null;
+
+        if(!$config) {
+            throw new \Exception(sprintf('OAuth2 configuration for provider `%s` not found', $provider));
+        }
+
+        return $config;
     }
 
     private function verifyPassword(Account $account, string $password): bool

@@ -8,12 +8,6 @@ use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * User: юзер
- * Date: 15.02.2016
- * Time: 17:03
- * To change this template use File | Settings | File Templates.
- */
 class Vk extends AbstractProvider
 {
 	public $user_id;
@@ -28,41 +22,19 @@ class Vk extends AbstractProvider
 	}
 
 	public function getResourceOwnerDetailsUrl(AccessToken $token){
-		$fields = ['email',
-							 'nickname',
-							 'screen_name',
-							 'sex',
-							 'bdate',
-							 'city',
-							 'country',
-							 'timezone',
-							 'photo_50',
-							 'photo_100',
-							 'photo_200_orig',
-							 'has_mobile',
-							 'contacts',
-							 'education',
-							 'online',
-							 'counters',
-							 'relation',
-							 'last_seen',
-							 'status',
-							 'can_write_private_message',
-							 'can_see_all_posts',
-							 'can_see_audio',
-							 'can_post',
-							 'universities',
-							 'schools',
-							 'verified', ];
+		$fields = $this->requestFields();
+
 		return "https://api.vk.com/method/users.get?user_id={$token->getResourceOwnerId()}&fields="
 					 .implode(",", $fields)."&access_token={$token}&scope=email";
 	}
 
 	protected function createAccessToken(array $response, AbstractGrant $grant)
 	{
-		$this->user_id = isset($response['user_id'])?$response['user_id']:null;
-		$this->user_email = isset($response['email'])?$response['email']:null;
+		$this->user_id = $response['user_id'] ?? null;
+		$this->user_email = $response['user_email'] ?? null;
+
 		$response['resource_owner_id'] = $this->user_id;
+
 		return new AccessToken($response);
 	}
 
@@ -76,7 +48,21 @@ class Vk extends AbstractProvider
 	protected function createResourceOwner(array $response, AccessToken $token){
 	}
 
-
-
-
+	/**
+	 * @return array
+	 */
+	private function requestFields()
+	{
+		$fields = [
+			'email',
+			'nickname',
+			'screen_name',
+			'sex',
+			'timezone',
+			'photo_50',
+			'photo_100',
+			'photo_200_orig'
+		];
+		return $fields;
+	}
 }

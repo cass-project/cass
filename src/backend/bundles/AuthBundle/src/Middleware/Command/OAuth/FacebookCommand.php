@@ -3,11 +3,12 @@ namespace Auth\Middleware\Command\OAuth;
 
 use Application\REST\GenericRESTResponseBuilder;
 use Auth\Middleware\Command\Command;
+use League\OAuth2\Client\Provider\AbstractProvider;
 use Psr\Http\Message\ServerRequestInterface;
 
-class FacebookCommand extends Command
+class FacebookCommand extends AbstractCommand
 {
-    public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder)
+    protected function getOAuth2Provider(): AbstractProvider
     {
         throw new \Exception('Not implemented');
     }
