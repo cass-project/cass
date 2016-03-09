@@ -24,6 +24,7 @@ class ChannelCRUDMiddleware implements MiddlewareInterface
 
 		try {
 			$command = Command::factory($request);
+			$command->setChannelService($this->channelServicel);
 //			$command->setAuthService($this->authService);
 			$command->run($request, $responseBuilder);
 		} catch (UnknownActionException $e) {

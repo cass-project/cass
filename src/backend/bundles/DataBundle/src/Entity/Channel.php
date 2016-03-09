@@ -14,12 +14,40 @@ namespace Data\Entity;
  */
 class Channel
 {
-
+	/**
+	 * @Id
+	 * @GeneratedValue
+	 * @Column(type="integer")
+	 * @var int
+	 */
 	private $id;
+
+	/**
+	 * @Name
+	 * @Column(type="string")
+	 * @var string
+	 */
 	private $name;
+	/**
+	 * @Column(type="string")
+	 * @var string
+	 */
 	private $description;
+
+	/**
+	 * @Column(type="string")
+	 * @var string
+	 */
 	private $created;
+	/**
+	 * @Column(type="string")
+	 * @var string
+	 */
 	private $updated;
+	/**
+	 * @Column(type="string")
+	 * @var string
+	 */
 	private $status;
 
 	/**

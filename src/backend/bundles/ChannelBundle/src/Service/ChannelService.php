@@ -1,6 +1,8 @@
 <?php
 namespace Channel\Service;
 
+use Data\Repository\ChannelRepository;
+
 class ChannelService
 {
 
@@ -13,16 +15,19 @@ class ChannelService
 	}
 
 	/**
-	 * @return mixed
+	 * @return ChannelRepository
 	 */
-	public function getChannelRepository(){
+	public function getChannelRepository():ChannelRepository
+	{
 		return $this->channelRepository;
 	}
 
 	/**
-	 * @param mixed $channelRepository
+	 * @param ChannelRepository $channelRepository
+	 *
+	 * @return ChannelService
 	 */
-	public function setChannelRepository($channelRepository):self
+	public function setChannelRepository(ChannelRepository $channelRepository):self
 	{
 		$this->channelRepository = $channelRepository;
 		return $this;

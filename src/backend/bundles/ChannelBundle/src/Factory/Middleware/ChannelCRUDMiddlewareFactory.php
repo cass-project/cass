@@ -10,6 +10,7 @@ namespace Channel\Factory\Middleware;
 
 
 use Channel\Middleware\ChannelCRUDMiddleware;
+use Channel\Service\ChannelService;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
@@ -20,7 +21,8 @@ class ChannelCRUDMiddlewareFactory implements FactoryInterface
 {
 	public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL):ChannelCRUDMiddleware
 	{
-
+		$channelsService = $container->get(ChannelService::class);
+		return new ChannelCRUDMiddleware($channelsService);
 	}
 
 }

@@ -8,6 +8,9 @@ use Psr\Http\Message\ServerRequestInterface;
 
 abstract class Command
 {
+	/**
+	 * @var ChannelService
+	 */
 	private $channelService;
 
 	public function getChannelService():ChannelService

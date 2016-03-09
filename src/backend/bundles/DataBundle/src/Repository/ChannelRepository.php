@@ -10,10 +10,15 @@ namespace Data\Repository;
 
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 class ChannelRepository extends EntityRepository
 {
 	public function getChannels(){
-		return $this->findAll();
+
+		return $this->createQueryBuilder('e')
+									->select('e')
+									->getQuery()
+									->getResult(Query::HYDRATE_ARRAY);
 	}
 }
