@@ -38,7 +38,7 @@ class Channel extends AbstractMigration
              ->addColumn('created', 'datetime')
              ->addColumn('updated', 'datetime', array('null' => TRUE))
              ->addColumn('status', 'string')
-             ->addColumn('account_id', 'integer')
+             /*->addColumn('account_id', 'integer', array('null' => TRUE))
               ->addForeignKey('account_id', 'account',
                               'id', ['delete' => 'NO_ACTION',
                                      'update' => 'NO_ACTION'
@@ -49,7 +49,45 @@ class Channel extends AbstractMigration
                               'id', ['delete' => 'NO_ACTION',
                                      'update' => 'NO_ACTION'
                               ]
-              )
+              )*/
              ->create();
+        $this->insertData();
+    }
+
+    private function insertData()
+    {
+      $date_time = (new \DateTime())->format("Y-m-d");
+
+      $this->table(self::TABLE_NAME)->insert([
+         [
+           'name'    => 'Канал о политике 1',
+           'description' => '1 Наш канал создан исключительно в развлекательных целях и не имеет цель оскорбить или опорочить кого либо. Наши ролики создаются в жанре литературной, музыкальной или иной пародии,в жанре карикатуры на основе другого (оригинального) правомерно обнародованного произведения.',
+           'created'=> $date_time,
+           'updated'=> $date_time,
+           'status' => '1'
+         ],
+         [
+           'name'    => 'Канал о политике 2',
+           'description' => '2 Наш канал создан исключительно в развлекательных целях и не имеет цель оскорбить или опорочить кого либо. Наши ролики создаются в жанре литературной, музыкальной или иной пародии,в жанре карикатуры на основе другого (оригинального) правомерно обнародованного произведения.',
+           'created'=> $date_time,
+           'updated'=> $date_time,
+           'status' => '1'
+         ],
+         [
+           'name'    => 'Канал о политике 3',
+           'description' => '3 Наш канал создан исключительно в развлекательных целях и не имеет цель оскорбить или опорочить кого либо. Наши ролики создаются в жанре литературной, музыкальной или иной пародии,в жанре карикатуры на основе другого (оригинального) правомерно обнародованного произведения.',
+           'created'=> $date_time,
+           'updated'=> $date_time,
+           'status' => '1'
+         ],
+         [
+           'name'    => 'Канал о политике 4',
+           'description' => '4 Наш канал создан исключительно в развлекательных целях и не имеет цель оскорбить или опорочить кого либо. Наши ролики создаются в жанре литературной, музыкальной или иной пародии,в жанре карикатуры на основе другого (оригинального) правомерно обнародованного произведения.',
+           'created'=> $date_time,
+           'updated'=> $date_time,
+           'status' => '1'
+         ]
+      ]
+      )->saveData();
     }
 }

@@ -2,6 +2,7 @@
 namespace Channel\Factory\Service;
 
 use Channel\Service\ChannelService;
+use Data\Repository\ChannelRepository;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
@@ -18,8 +19,7 @@ class ChannelServiceFactory implements FactoryInterface
 {
 	public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL): ChannelService
 	{
-
-		$channelRepository = $container->get();
+		$channelRepository = $container->get(ChannelRepository::class);
 		return new ChannelService($channelRepository);
 	}
 
