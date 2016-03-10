@@ -22,8 +22,8 @@ return [
             'redirectUri'  => 'http://localhost:8080/backend/api/auth/oauth/yandex',
         ],
         'google' => [
-            'clientId'     => '992284499181-ccsf7gh4ucck8348g9kaimqs2s9i2fjt.apps.googleusercontent.com',
-            'clientSecret' => 'VLSX8IMfFfkAll-dAtiEkUiZ',
+            'clientId'     => '169665663953-m3rthq2l5fgttjub259f98h74k98nmip.apps.googleusercontent.com',
+            'clientSecret' => 'D7ktTED59FXlywru5oMybqlJ',
             'redirectUri'  => 'http://localhost:8080/backend/api/auth/oauth/google',
             'hostedDomain' => 'localhost:8080',
         ],
