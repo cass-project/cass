@@ -11,6 +11,7 @@ export class Theme
     host: ThemeHost;
     position: number;
     title: string;
+    show:boolean;
 }
 
 export class ThemeTree
@@ -20,5 +21,5 @@ export class ThemeTree
     host: ThemeHost;
     position: number;
     title: string;
-    children: ThemeTree[]
+    children: ThemeTree[];
 }
