@@ -38,18 +38,18 @@ class Channel extends AbstractMigration
              ->addColumn('created', 'datetime')
              ->addColumn('updated', 'datetime', array('null' => TRUE))
              ->addColumn('status', 'string')
-             /*->addColumn('account_id', 'integer', array('null' => TRUE))
+             ->addColumn('account_id', 'integer', array('null' => TRUE))
               ->addForeignKey('account_id', 'account',
                               'id', ['delete' => 'NO_ACTION',
                                      'update' => 'NO_ACTION'
                               ]
               )
-              ->addColumn('theme_id', 'integer')
+              ->addColumn('theme_id', 'integer', array('null' => TRUE))
               ->addForeignKey('theme_id', 'theme',
                               'id', ['delete' => 'NO_ACTION',
                                      'update' => 'NO_ACTION'
                               ]
-              )*/
+              )
              ->create();
         $this->insertData();
     }
