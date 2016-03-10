@@ -28,9 +28,10 @@ return [
             'hostedDomain' => 'localhost:8080',
         ],
         'facebook' => [
-            'clientId' => '',
-            'clientSecret' => '',
-            'redirectUri' => '',
+            'clientId' => '1029948993728845',
+            'clientSecret' => '131f2a99539788aad056f056e0c65801',
+            'redirectUri' => 'http://localhost:8080/backend/api/auth/oauth/facebook',
+            'graphApiVersion' => 'v2.5'
         ]
     ]
 ];

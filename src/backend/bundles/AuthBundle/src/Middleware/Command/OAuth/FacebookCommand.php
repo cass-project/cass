@@ -6,6 +6,7 @@ use Auth\Middleware\Command\Command;
 use Auth\Service\AuthService\OAuth2\RegistrationRequest;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Facebook;
+use League\OAuth2\Client\Provider\FacebookUser;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -18,10 +19,9 @@ class FacebookCommand extends AbstractCommand
 
     protected function makeRegistrationRequest(AbstractProvider $provider, AccessToken $accessToken): RegistrationRequest
     {
-        /** @var Facebook $provider */
+        /** @var FacebookUser $resourceOwner */
         $resourceOwner = $provider->getResourceOwner($accessToken);
 
-        var_dump($resourceOwner->toArray());
-        die();
+        return new RegistrationRequest('facebook', $resourceOwner->getId(), $resourceOwner->getEmail());
     }
 }
