@@ -31,13 +31,8 @@ export class ThemeRESTService
     }
 
     public createTheme(tittle: string, parentId: number){
-           let headers = new Headers();
-        headers.append('Content-type', 'application/json');
-        let options = new RequestOptions({
-            headers: headers
-        });
         if(!parentId) parentId = 0;
-        return this.http.put('/backend/api/protected/host-admin/theme-editor/entity/create', JSON.stringify({title: tittle, parent_id: parentId}), options).subscribe(
+        return this.http.put('/backend/api/protected/host-admin/theme-editor/entity/create', JSON.stringify({title: tittle, parent_id: parentId})).subscribe(
             data => {console.log(data)},
             err => {console.log(err)}
         );

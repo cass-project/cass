@@ -60,6 +60,8 @@ class OAuthRequestOptions extends BaseRequestOptions {
     constructor () {
         super();
 
+        this.headers.append('Content-type', 'application/json');
+
         if(Cookie.getCookie('api_key')) {
             this.headers.set('X-Api-Key', Cookie.getCookie('api_key'));
         }
