@@ -10,22 +10,19 @@ export class ChannelRESTService
     constructor(public http:Http) {
     }
 
-    public addChannel(data){
-        this.put('/channel/add', JSON.stringify(data)).subscribe(
-            success => console.log,
-            error => {console.log(error.json());}
-        );
+    public addChannel(data) {
+        return this.put('/channel/create', JSON.stringify(data));
     }
 
     private get(uri:string, options?: RequestOptionsArgs) {
         return this.http.get(this.API_PATH_PROTECTED + uri, options||null).map(res => res.json());
     }
 
-    private post(uri:string, body: string, options?: RequestOptionsArgs) {
+    private post(uri:string, body:string, options?: RequestOptionsArgs) {
         return this.http.post(this.API_PATH_PROTECTED + uri, body, options||null).map(res => res.json());
     }
 
-    private put(uri:string, body: string, options?: RequestOptionsArgs) {
+    private put(uri:string, body:string, options?: RequestOptionsArgs) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         let options = options||new RequestOptions({headers: headers});

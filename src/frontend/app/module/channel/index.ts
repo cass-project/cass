@@ -1,10 +1,12 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router, RouteConfig} from 'angular2/router';
 import {COMMON_DIRECTIVES} from 'angular2/common';
+import {Location} from "angular2/router";
+import {CanActivate} from "angular2/router";
 
 import {ChannelRESTService} from './service/ChannelRESTService';
+import {ThemeRESTService} from '../theme/service/ThemeRESTService';
 import {AddChannelFormComponent} from './form/AddChannelForm/index';
-import {Location} from "angular2/router";
 
 @Component({
     template: require('./template.html'),
@@ -13,7 +15,7 @@ import {Location} from "angular2/router";
         ROUTER_DIRECTIVES,
         AddChannelFormComponent
     ],
-    providers:[ChannelRESTService],
+    providers: [ChannelRESTService, ThemeRESTService]
 })
 
 @RouteConfig([
@@ -35,10 +37,6 @@ export class ChannelComponent
         private router: Router,
         private location: Location
     ){}
-
-    public addChannel(){
-        this.router.navigate(['AddChannel'])
-    }
 
     public isAddChannelRouteActive() : boolean{
         return this.location.path()=="/channels/add";
