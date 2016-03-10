@@ -1,6 +1,7 @@
 <?php
-namespace Auth\Middleware;
+namespace Auth\Factory\Middleware;
 
+use Auth\Middleware\AuthMiddleware;
 use Auth\Service\AuthService;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;

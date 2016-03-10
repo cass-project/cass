@@ -1,7 +1,8 @@
 <?php
-namespace Auth\Service;
+namespace Auth\Factory\Service;
 
 use Application\Service\SharedConfigService;
+use Auth\Service\AuthService;
 use Data\Repository\AccountRepository;
 use Data\Repository\OAuthAccountRepository;
 use Interop\Container\ContainerInterface;

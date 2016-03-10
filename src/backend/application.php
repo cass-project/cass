@@ -6,15 +6,13 @@ use Application\Bootstrap\Scripts\RouteSetupScript;
 use Application\Bootstrap\Scripts\SharedConfigServiceSetupScript;
 use Application\Service\SchemaService;
 use Application\Service\SharedConfigService;
+use Auth\Middleware\ProtectedMiddleware;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Expressive\Application;
 use Zend\ServiceManager\ServiceManager;
 
 class LBApplicationBootstrap
 {
-    const ENV_WWW = 'www';
-    const ENV_TEST = 'test';
-
     /** @var Application */
     private $app;
 
@@ -92,6 +90,10 @@ class LBApplicationBootstrap
         \Application\Tools\RequestParams\SchemaParams::injectSchemaService($this->serviceManager->get(SchemaService::class));
     }
 
+    private function initProtectedRoutes() {
+        $this->app->pipe(ProtectedMiddleware::class);
+    }
+
     /**
      * @return Application
      */
@@ -121,6 +123,7 @@ class LBApplicationBootstrap
         $this->initBundles();
         $this->initSharedConfigService();
         $this->initContainer();
+        $this->initProtectedRoutes();
         $this->initRoutes();
         $this->initSchemaRESTRequest();
     }

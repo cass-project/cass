@@ -14,6 +14,7 @@ import {Component, provide} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, URLSearchParams} from 'angular2/http';
+import {Cookie} from 'ng2-cookies';
 
 import {AuthService} from './module/auth/service/AuthService';
 
@@ -58,8 +59,9 @@ class App
 class OAuthRequestOptions extends BaseRequestOptions {
     constructor () {
         super();
-        if(localStorage['account_token']){
-            this.headers.set('Account-Token', localStorage['account_token']);
+
+        if(Cookie.getCookie('api_key')) {
+            this.headers.set('X-Api-Key', Cookie.getCookie('api_key'));
         }
     }
 }

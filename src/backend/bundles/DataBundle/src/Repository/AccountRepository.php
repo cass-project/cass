@@ -38,4 +38,17 @@ class AccountRepository extends EntityRepository
         $this->getEntityManager()->persist($account);
         $this->getEntityManager()->flush($account);
     }
+
+    public function findByAPIKey(string $apiKey)
+    {
+        $account = $this->findOneBy([
+            'password' => $apiKey
+        ]);
+
+        if($account === null) {
+            throw new AccountNotFoundException(sprintf('Account with api_key `%s` not found', $apiKey));
+        }
+
+        return $account;
+    }
 }
