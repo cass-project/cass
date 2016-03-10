@@ -3,6 +3,7 @@ namespace Auth\Middleware\Command;
 
 use Application\REST\Exceptions\UnknownActionException;
 use Application\REST\GenericRESTResponseBuilder;
+use Auth\Middleware\Command\OAuth\BattleNetCommand;
 use Auth\Middleware\Command\OAuth\FacebookCommand;
 use Auth\Middleware\Command\OAuth\GoogleCommand;
 use Auth\Middleware\Command\OAuth\MailruCommand;
@@ -38,6 +39,7 @@ abstract class Command
                     case 'google': return new GoogleCommand($authService->getOAuth2Config('google'), $authService);
                     case 'facebook': return new FacebookCommand($authService->getOAuth2Config('facebook'), $authService);
                     case 'odnoklassniki': return new OdnoklassnikiCommand($authService->getOAuth2Config('odnoklassniki'), $authService);
+                    case 'battle.net': return new BattleNetCommand($authService->getOAuth2Config('battle.net'), $authService);
                 }
         }
     }
