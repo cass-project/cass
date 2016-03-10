@@ -16,7 +16,7 @@ class SignInCommand extends Command
             setcookie('api_key', $account->getAPIKey(), time() + 60 /* sec */ * 60 /* min */ * 24 /* hours */ * 30 /* days */, '/');
 
             $responseBuilder->setStatusSuccess()->setJson([
-                "api_key" => $account->getToken()
+                "api_key" => $account->getAPIKey()
             ]);
         }catch(AccountNotFoundException $e) {
             $responseBuilder

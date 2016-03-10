@@ -26,6 +26,11 @@ return [
             'clientSecret' => 'VLSX8IMfFfkAll-dAtiEkUiZ',
             'redirectUri'  => 'http://localhost:8080/backend/api/auth/oauth/google',
             'hostedDomain' => 'localhost:8080',
+        ],
+        'facebook' => [
+            'clientId' => '',
+            'clientSecret' => '',
+            'redirectUri' => '',
         ]
     ]
 ];
