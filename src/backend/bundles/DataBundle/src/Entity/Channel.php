@@ -9,7 +9,7 @@
 namespace Data\Entity;
 
 /**
- * @Entity(repositoryClass="Data\Repository\ChannelRepository")
+ * @Entity(repositoryClass="Data\Repository\Channel\ChannelRepository")
  * @Table(name="channel")
  */
 class Channel
@@ -22,12 +22,30 @@ class Channel
 	 */
 	private $id;
 
+
+	/**
+	 * @Account_id
+	 * @GeneratedValue
+	 * @Column(type="integer")
+	 * @var int
+	 */
+	private $account_id;
+
+	/**
+	 * @Theme_id
+	 * @GeneratedValue
+	 * @Column(type="integer")
+	 * @var int
+	 */
+	private $theme_id;
+
 	/**
 	 * @Name
 	 * @Column(type="string")
 	 * @var string
 	 */
 	private $name;
+
 	/**
 	 * @Column(type="string")
 	 * @var string
@@ -39,11 +57,13 @@ class Channel
 	 * @var string
 	 */
 	private $created;
+
 	/**
 	 * @Column(type="string")
 	 * @var string
 	 */
 	private $updated;
+
 	/**
 	 * @Column(type="string")
 	 * @var string
@@ -97,6 +117,34 @@ class Channel
 	 */
 	public function getCreated(){
 		return $this->created;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getAccountId(){
+		return $this->account_id;
+	}
+
+	/**
+	 * @param int $account_id
+	 */
+	public function setAccountId($account_id){
+		$this->account_id = $account_id;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getThemeId(){
+		return $this->theme_id;
+	}
+
+	/**
+	 * @param int $theme_id
+	 */
+	public function setThemeId($theme_id){
+		$this->theme_id = $theme_id;
 	}
 
 	/**

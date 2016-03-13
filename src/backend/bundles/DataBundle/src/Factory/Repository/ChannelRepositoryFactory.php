@@ -10,7 +10,7 @@ namespace Data\Factory\Repository;
 
 
 use Data\Entity\Channel;
-use Data\Repository\ChannelRepository;
+use Data\Repository\Channel\ChannelRepository;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;

@@ -2,7 +2,7 @@
 namespace Channel\Factory\Service;
 
 use Channel\Service\ChannelService;
-use Data\Repository\ChannelRepository;
+use Data\Repository\Channel\ChannelRepository;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;

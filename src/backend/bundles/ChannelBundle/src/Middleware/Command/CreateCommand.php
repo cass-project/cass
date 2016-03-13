@@ -10,6 +10,7 @@ namespace Channel\Middleware\Command;
 
 
 use Application\REST\GenericRESTResponseBuilder;
+use Channel\Middleware\Request\PutChannelRequest;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
@@ -26,8 +27,23 @@ class CreateCommand extends Command
 				'status' => 2
 			];
 
+			$channelEditorService = $this->getChannelService();
+
+
+			$channel = $channelEditorService->create(
+				(new PutChannelRequest($request))->getParameters()
+			);
+
+			/*return [
+				'id' => $theme->getId(),
+				'entity' => [
+					$theme->toJSON()
+				]
+			];*/
+
+
 			$responseBuilder->setStatusSuccess()->setJson([
-																											'entity'          => $entity,
+																											'entity'          => $channel,
 																											'channel_created' => true
 																										]
 			);

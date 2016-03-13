@@ -1,12 +1,12 @@
 <?php
 namespace Channel\Service;
 
-use Data\Repository\ChannelRepository;
+
+use Data\Repository\Channel\ChannelRepository;
+use Data\Repository\Channel\Parameters\CreateChannelParemeters;
 
 class ChannelService
 {
-
-
 	private $channelRepository;
 
 	public function __construct($chanelRepository)
@@ -31,6 +31,12 @@ class ChannelService
 	{
 		$this->channelRepository = $channelRepository;
 		return $this;
+	}
+
+
+	public function create(CreateChannelParemeters $createChannelParemeters)
+	{
+		return $this->getChannelRepository()->create($createChannelParemeters);
 	}
 
 
