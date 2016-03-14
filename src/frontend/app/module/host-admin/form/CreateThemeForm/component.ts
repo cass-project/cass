@@ -23,10 +23,10 @@ export class CreateThemeForm
         this.themeRESTService.createTheme(this.title, this.themeEditorService.selectedThemeId);
         this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
         this.themeEditorService.showFormContentBox = false;
-        this.router.parent.navigate(['Theme-Editor']);  //This navigate return full page reload, dunno why, need investigate
+        this.router.parent.navigate(['Theme-Cleaner']);
     }
     close(){
         this.themeEditorService.showFormContentBox = false;
-        this.router.parent.navigate(['Theme-Editor']);
+        this.router.parent.navigate(['Theme-Cleaner']);
     }
 }

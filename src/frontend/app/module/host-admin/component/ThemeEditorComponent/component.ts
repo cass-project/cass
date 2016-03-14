@@ -65,6 +65,7 @@ export class ThemeEditorComponent
     deleteTheme(){
         this.themeRESTService.deleteTheme(this.themeEditorService.selectedThemeId);
         this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
+        this.router.navigate(['Theme-Cleaner']);
     }
 
     openCreateThemeForm() {
@@ -74,11 +75,6 @@ export class ThemeEditorComponent
 
     openUpdateThemeForm(){
         this.openFormContentBox();
-        //for(var i = 0; i < this.themes.length; i++){
-        //    if(this.themes[i].parent_id){
-        //        this.themes[i].title = this.themes[i].title;
-        //    }
-        //}
         this.router.navigate(['Theme-Editor-Update']);
     }
 
@@ -88,5 +84,12 @@ export class ThemeEditorComponent
 
     openFormContentBox() {
         this.themeEditorService.showFormContentBox = true;
+    }
+
+    clearSelection(){
+        if(this.themeEditorService.selectedThemeId){
+           this.themeEditorService.clear();
+            console.log(this.themeEditorService.selectedThemeId);
+        }
     }
 }

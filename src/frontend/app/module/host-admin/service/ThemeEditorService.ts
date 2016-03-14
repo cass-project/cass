@@ -19,11 +19,6 @@ export class ThemeEditorService
         this.selectedThemeId = themeId;
         console.log(this.selectedThemeId);
         console.log(this.themes, this.themesTree);
-        //for(var i = 0; i < this.themes.length; i++){
-        //    if(this.themes[i].parent_id){
-        //        this.themes[i].title = this.themes[i].title;
-        //    }
-        //}
     }
 
     public clear() {

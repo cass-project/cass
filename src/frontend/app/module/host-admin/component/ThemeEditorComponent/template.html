@@ -1,10 +1,12 @@
 <article class="component component-theme-editor">
-    <header>
+    <header (click)="clearSelection()">
         <h1>Theme Editor</h1>
     </header>
+    <body (click)="clearSelection()">
+    </body>
     <theme-tree [tree]="themeEditorService.themesTree"></theme-tree>
     <div class="form-content-box" *ngIf="themeEditorService.showFormContentBox">
-            <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
     </div>
     <footer>
         <button (click)="openCreateThemeForm()" class="btn btn-success">Create</button>
@@ -14,5 +16,4 @@
         </div>
     </footer>
 </article>
-
 
