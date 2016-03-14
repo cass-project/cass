@@ -1,23 +1,28 @@
-Data_Entity_Theme:
+Data_Entity_Channel:
   type: object
   required:
     - id
-    - parent_id
-    - host
-    - position
-    - title
+    - name
+    - description
+    - theme_id
+    - account_id
+    - status
   properties:
     id:
       type: number
       description: ID
-    parent_id:
+    theme_id:
       type: number
       description: ID родительской тематики
-    host:
-      $ref: '#/definitions/Data_Entity_Host'
-    position:
+    account_id:
       type: number
-      description: Позиция в текущем уровне дерева тематик
-    title:
+      description: ID аккаунта
+    name:
       type: string
       description: Название
+    status:
+      type: string
+      description: Название
+    description:
+      type: string
+      description: Описание

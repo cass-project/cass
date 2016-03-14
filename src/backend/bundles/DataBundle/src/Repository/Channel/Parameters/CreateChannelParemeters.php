@@ -28,18 +28,39 @@ class CreateChannelParemeters
 
 	/** @var Param */
 	private $theme_id;
+	/** @var Param */
+	private $created;
 
+	/** @var Param */
+	private $updated;
 
 	public function __construct(Param $name, Param $description, Param $status,
-															Param $account_id, Param $theme_id)
+															Param $account_id, Param $theme_id, Param $created,
+	Param $updated)
 	{
 		$this->name = $name;
 		$this->description = $description;
 		$this->status = $status;
 		$this->account_id = $account_id;
 		$this->theme_id = $theme_id;
+		$this->created = $created;
+		$this->updated = $updated;
 	}
 
+
+	/**
+	 * @return Param
+	 */
+	public function getCreated(){
+		return $this->created;
+	}
+
+	/**
+	 * @return Param
+	 */
+	public function getUpdated(){
+		return $this->updated;
+	}
 	/**
 	 * @return Param
 	 */

@@ -30,6 +30,16 @@ class CreateCommand extends Command
 			$channelEditorService = $this->getChannelService();
 
 
+//			$name = $request->getAttribute('name');
+
+//			$credentials = json_decode($request->getBody(), true);
+//			$name = $credentials['name'];
+
+
+//			print_r(json_decode($request->getBody()));
+//			die();
+
+
 			$channel = $channelEditorService->create(
 				(new PutChannelRequest($request))->getParameters()
 			);
@@ -41,9 +51,11 @@ class CreateCommand extends Command
 				]
 			];*/
 
+//			print_r($channel->getAccountId());
+//			die();
 
 			$responseBuilder->setStatusSuccess()->setJson([
-																											'entity'          => $channel,
+																											'entity'          => $channel->toJSON(),
 																											'channel_created' => true
 																										]
 			);

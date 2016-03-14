@@ -43,19 +43,19 @@ class ChannelRepository extends EntityRepository
 		});
 
 		$saveChannelProperties->getAccountId()->on(function($value) use($channelEntity) {
-			$channelEntity->getAccountId($value);
+			$channelEntity->setAccountId($value);
 		});
 
 		$saveChannelProperties->getDescription()->on(function($value) use($channelEntity) {
-			$channelEntity->getDescription($value);
+			$channelEntity->setDescription($value);
 		});
 
 		$saveChannelProperties->getStatus()->on(function($value) use($channelEntity) {
-			$channelEntity->getStatus($value);
+			$channelEntity->setStatus($value);
 		});
 
 		$saveChannelProperties->getThemeId()->on(function($value) use($channelEntity) {
-			$channelEntity->getThemeId($value);
+			$channelEntity->setThemeId($value);
 		});
 
 	}

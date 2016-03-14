@@ -34,17 +34,17 @@ class Channel extends AbstractMigration
         // Adding account table
         $this->table(self::TABLE_NAME)
              ->addColumn('name', 'string')
-             ->addColumn('description', 'string')
-             ->addColumn('created', 'datetime')
-             ->addColumn('updated', 'datetime', array('null' => TRUE))
-             ->addColumn('status', 'string')
-             ->addColumn('account_id', 'integer', array('null' => TRUE))
+             ->addColumn('description', 'string', ['null'=>TRUE])
+             ->addColumn('created', 'datetime', ['null'=>TRUE])
+             ->addColumn('updated', 'datetime', ['null' => TRUE])
+             ->addColumn('status', 'string',['null' => TRUE])
+             ->addColumn('account_id', 'integer', ['null' => TRUE])
               ->addForeignKey('account_id', 'account',
                               'id', ['delete' => 'NO_ACTION',
                                      'update' => 'NO_ACTION'
                               ]
               )
-              ->addColumn('theme_id', 'integer', array('null' => TRUE))
+              ->addColumn('theme_id', 'integer', ['null' => TRUE])
               ->addForeignKey('theme_id', 'theme',
                               'id', ['delete' => 'NO_ACTION',
                                      'update' => 'NO_ACTION'

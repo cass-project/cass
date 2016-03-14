@@ -25,7 +25,7 @@ class PutChannelRequest extends SchemaParams
 
 		$name = new Param($data, 'name', true);
 		$description = new Param($data, 'description');
-		$status = new Param($data, 'status');
+		$status = new Param($data, 'status',true);
 		$account_id = new Param($data, 'account_id');
 		$theme_id = new Param($data, 'theme_id');
 

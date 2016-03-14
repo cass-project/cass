@@ -183,4 +183,18 @@ class Channel
 	}
 
 
+	public function toJSON()
+	{
+		return [
+			'id' 						=> $this->id,
+			'theme_id'			=> $this->theme_id,
+			'account_id'		=> $this->account_id,
+			'created'				=> $this->created,
+			'updated'				=> $this->updated,
+			'description'		=> $this->description,
+			'name'					=> $this->name,
+			'status'				=> $this->status
+		];
+	}
+
 }
