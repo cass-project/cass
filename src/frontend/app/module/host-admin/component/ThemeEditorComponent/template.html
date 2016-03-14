@@ -4,18 +4,10 @@
     </header>
     <theme-tree [tree]="themeEditorService.themesTree"></theme-tree>
     <div class="form-content-box" *ngIf="themeEditorService.showFormContentBox">
-        <div class="backdrop"></div>
-        <div class="content-box">
-            <button (click)="closeFormContentBox()" class="btn btn-danger">Close</button>
-            <!--<theme-tree [tree]="themeEditorService.themesTree"></theme-tree>-->
             <router-outlet></router-outlet>
-        </div>
     </div>
     <footer>
         <button (click)="openCreateThemeForm()" class="btn btn-success">Create</button>
-
-
-
         <div *ngIf="themeEditorService.selectedThemeId">
             <button (click)="openUpdateThemeForm()" class="btn btn-warning">Update</button>
             <button (click)="deleteTheme()" class="btn btn-danger">Delete</button>

@@ -86,13 +86,7 @@ export class ThemeEditorComponent
         this.themeRESTService.getThemeById(id);
     }
 
-
     openFormContentBox() {
         this.themeEditorService.showFormContentBox = true;
-    }
-
-    closeFormContentBox() {
-        this.themeEditorService.showFormContentBox = false;
-        this.router.parent.navigate(['Theme-Editor']);
     }
 }

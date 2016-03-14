@@ -21,8 +21,8 @@ export class UpdateThemeForm
     ){}
     submit() {
         this.themeRESTService.updateTheme(this.themeEditorService.selectedThemeId, this.title, this.parent);
-        //this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
-        //this.themeEditorService.showFormContentBox = false;
+        this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
+        this.themeEditorService.showFormContentBox = false;
         this.router.parent.navigate(['Theme-Editor']);
     }
 }

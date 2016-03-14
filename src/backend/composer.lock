@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6282bc29cafdc9ef6c19880a99c4f158",
-    "content-hash": "3013397ace526a7d711ac74fb47e402e",
+    "hash": "1d6e4d283472063b166615548eb746a6",
+    "content-hash": "fdef8c72e09ce1a15613e4c197de6948",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -113,6 +113,49 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "time": "2014-12-30 15:22:37"
+        },
+        {
+            "name": "depotwarehouse/oauth2-bnet",
+            "version": "5.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tpavlek/oauth2-bnet.git",
+                "reference": "2e9ac69f87e6cb2ab7d258495c8c9daa9941916b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tpavlek/oauth2-bnet/zipball/2e9ac69f87e6cb2ab7d258495c8c9daa9941916b",
+                "reference": "2e9ac69f87e6cb2ab7d258495c8c9daa9941916b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^5.1",
+                "league/oauth2-client": "^1.0",
+                "php": ">=5.5.0"
+            },
+            "suggest": {
+                "illuminate/support": "Laravel integration"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Depotwarehouse\\OAuth2\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Troy Pavlek",
+                    "email": "troy@tpavlek.me",
+                    "homepage": "http://tpavlek.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Battle.net provider for league/oauth2-client",
+            "time": "2016-01-15 00:28:16"
         },
         {
             "name": "doctrine/annotations",
@@ -883,6 +926,48 @@
                 "uri"
             ],
             "time": "2016-02-18 21:54:00"
+        },
+        {
+            "name": "illuminate/contracts",
+            "version": "v5.2.21",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/contracts.git",
+                "reference": "eea3cf7ce90651e067a914d16383b019da45fcb5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/eea3cf7ce90651e067a914d16383b019da45fcb5",
+                "reference": "eea3cf7ce90651e067a914d16383b019da45fcb5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Contracts\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "description": "The Illuminate Contracts package.",
+            "homepage": "http://laravel.com",
+            "time": "2016-02-22 09:18:57"
         },
         {
             "name": "ircmaxell/random-lib",

@@ -38,7 +38,7 @@ abstract class AbstractCommand extends Command
         $provider = $this->getOAuth2Provider();
 
         if(isset($_GET['code'])) {
-            $this->preventCSRFAttack();
+            // TODO:: fix; $this->preventCSRFAttack();
 
             $accessToken = $provider->getAccessToken('authorization_code', [
                 'code' => $_GET['code']
