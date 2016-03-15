@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+cd /vagrant/backend
+./vendor/bin/phinx migrate
+
+cd /vagrant/frontend
+webpack
