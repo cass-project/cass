@@ -3,13 +3,16 @@ Update_Channel_Request:
     properties:
       name:
         type: string
-        description: Название темы
+        description: Название тематики
       theme_id:
         type: number
         description: ID родительской тематики
       account_id:
         type: number
-        description: ID аккаунта
+        description: ID родительской тематики
       description:
         type: string
         description: Описание канала
+      status:
+        type: string
+        description: Статуы канала
