@@ -29,7 +29,9 @@ class PutChannelRequest extends SchemaParams
 		$account_id = new Param($data, 'account_id');
 		$theme_id = new Param($data, 'theme_id');
 
-		return new CreateChannelParemeters($name, $description, $status, $account_id, $theme_id);
+		return new CreateChannelParemeters($name, $description, $status, $account_id,
+																			 $theme_id
+		);
 	}
 
 	protected function getSchema(): JSONSchema

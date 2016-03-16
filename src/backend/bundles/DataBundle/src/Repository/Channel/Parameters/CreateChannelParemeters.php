@@ -35,16 +35,17 @@ class CreateChannelParemeters
 	private $updated;
 
 	public function __construct(Param $name, Param $description, Param $status,
-															Param $account_id, Param $theme_id, Param $created,
-	Param $updated)
+															Param $account_id, Param $theme_id)
 	{
 		$this->name = $name;
 		$this->description = $description;
 		$this->status = $status;
 		$this->account_id = $account_id;
 		$this->theme_id = $theme_id;
-		$this->created = $created;
-		$this->updated = $updated;
+
+
+		$this->created = (new \DateTime())->format("Y-m-d");
+		$this->updated = $this->created ;
 	}
 
 

@@ -58,5 +58,9 @@ class ChannelRepository extends EntityRepository
 			$channelEntity->setThemeId($value);
 		});
 
+
+		$channelEntity->setCreated($saveChannelProperties->getCreated());
+		$channelEntity->setUpdated($saveChannelProperties->getUpdated());
+
 	}
 }
