@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: CoffeeTurbo
- * Date: 13.03.2016
- * Time: 17:15
+ * User: юзер
+ * Date: 16.03.2016
+ * Time: 16:34
+ * To change this template use File | Settings | File Templates.
  */
 
 namespace Data\Repository\Channel\Parameters;
@@ -12,8 +12,11 @@ namespace Data\Repository\Channel\Parameters;
 use Application\Tools\RequestParams\Param;
 use Data\Repository\Channel\SaveChannelProperties;
 
-class CreateChannelParemeters implements SaveChannelProperties
+class UpdateChannelParameters implements SaveChannelProperties
 {
+	/** @var Param */
+	private $id;
+
 
 	/** @var Param */
 	private $name;
@@ -35,21 +38,25 @@ class CreateChannelParemeters implements SaveChannelProperties
 	/** @var Param */
 	private $updated;
 
-	public function __construct(Param $name, Param $description, Param $status,
+	public function __construct(int $id, Param $name, Param $description, Param $status,
 															Param $account_id, Param $theme_id)
 	{
+		$this->id = $id;
 		$this->name = $name;
 		$this->description = $description;
 		$this->status = $status;
 		$this->account_id = $account_id;
 		$this->theme_id = $theme_id;
 
-
-		$this->created = (new \DateTime())->format("Y-m-d");
-		$this->updated = $this->created ;
+		$this->updated = (new \DateTime())->format("Y-m-d");
 	}
 
-
+	/**
+	 * @return Param
+	 */
+	public function getId(){
+		return $this->id;
+	}
 	/**
 	 * @return Param
 	 */
@@ -97,7 +104,4 @@ class CreateChannelParemeters implements SaveChannelProperties
 	public function getThemeId():Param{
 		return $this->theme_id;
 	}
-
-
-
 }

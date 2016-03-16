@@ -2,6 +2,7 @@
 namespace Channel\Middleware\Command;
 
 
+use Application\REST\Exceptions\UnknownActionException;
 use Application\REST\GenericRESTResponseBuilder;
 use Channel\Service\ChannelService;
 use Psr\Http\Message\ServerRequestInterface;
@@ -36,7 +37,9 @@ abstract class Command
 			case 'read':
 				return new ReadCommand();
 			break;
-			case 'update': break;
+			case 'update':
+				return new UpdateCommand();
+			break;
 			case 'delete':
 				return new DeleteCommand();
 			break;

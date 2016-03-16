@@ -4,6 +4,7 @@ namespace Channel\Service;
 
 use Data\Repository\Channel\ChannelRepository;
 use Data\Repository\Channel\Parameters\CreateChannelParemeters;
+use Data\Repository\Channel\Parameters\UpdateChannelParameters;
 
 class ChannelService
 {
@@ -39,10 +40,8 @@ class ChannelService
 		return $this->getChannelRepository()->create($createChannelParemeters);
 	}
 
-
-
-
-
-
+	public function update(UpdateChannelParameters $updateChannelParemeters){
+		return $this->getChannelRepository()->update($updateChannelParemeters);
+	}
 
 }
