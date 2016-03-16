@@ -17,9 +17,11 @@
                             <!--<input type="button" value="" (click)="showLinkInput = !showLinkInput" class="btn btn-secondary"/>-->
                             <!--</div>-->
                         <div *ngIf="showLinkInput">
-
                             <input class="form-control" [(ngModel)]="link" placeholder="Link URL">
-                            <input type="file">
+                            <label class="file">
+                                <input type="file">
+                                <span class="file-custom"></span>
+                            </label>
                         </div>
                     </div>
                 </div>
