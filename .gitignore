@@ -4,6 +4,9 @@ node_modules
 npm-debug.log
 npm-debug.log.*
 
+# composer
+composer.lock
+
 # Phinx
 phinx.yml
 
