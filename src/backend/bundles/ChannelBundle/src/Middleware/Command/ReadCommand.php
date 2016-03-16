@@ -11,13 +11,29 @@ class ReadCommand extends Command
 	public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder){
 
 		$service = $this->getChannelService();
-		$channels = $service->getChannelRepository()->getChannels();
 
-		$responseBuilder->setStatusSuccess()->setJson([
-																										'entities'      => $channels,
-																										'channels_read' => true
-																									]
-		);
+		$response = [];
+
+
+		if($request->getAttribute('channelId')){
+
+			$channelId = $request->getAttribute('channelId');
+			$channel = $service->getChannelRepository()->getChannel($channelId);
+
+			$response = [
+				'entity'      	=> $channel,
+				'channels_read' => true
+			];
+		} else {
+			$channels = $service->getChannelRepository()->getChannels();
+
+			$response = [
+				'entities'      => $channels,
+				'channels_read' => true
+			];
+		}
+
+		$responseBuilder->setStatusSuccess()->setJson($response);
 	}
 
 }

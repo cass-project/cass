@@ -16,6 +16,15 @@ use Doctrine\ORM\Query;
 
 class ChannelRepository extends EntityRepository
 {
+	public function getChannel($channelId){
+		return $this->createQueryBuilder('e')
+								->select('e')
+								->where('e.id = :id')
+								->setParameter('id', $channelId)
+								->getQuery()
+								->getResult(Query::HYDRATE_ARRAY);
+	}
+
 	public function getChannels(){
 
 		return $this->createQueryBuilder('e')
