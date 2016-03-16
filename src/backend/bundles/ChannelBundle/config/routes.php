@@ -19,4 +19,8 @@ return function (Application $app, string $prefix) {
               ChannelCRUDMiddleware::class,
               'channel-read-entity'
     );
+    $app->post(sprintf('%s/protected/channel/{command:delete}/{channelId}', $prefix),
+              ChannelCRUDMiddleware::class,
+              'channel-delete-entity'
+    );
 };

@@ -45,6 +45,21 @@ class ChannelRepository extends EntityRepository
 		return $channelEntity;
 	}
 
+	public function delete($channelId){
+		$em = $this->getEntityManager();
+		$channelEntity = $this->createQueryBuilder('e')
+																 ->select('e')
+																 ->where('e.id = :id')
+																 ->setParameter('id', $channelId)
+																 ->getQuery()
+																 ->getSingleResult();
+
+		$em->remove($channelEntity);
+		$em->flush();
+
+		return $channelEntity;
+	}
+
 	private function setupEntity(Channel $channelEntity, CreateChannelParemeters $saveChannelProperties)
 	{
 		$saveChannelProperties->getName()->on(function($value) use($channelEntity) {

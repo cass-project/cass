@@ -37,7 +37,9 @@ abstract class Command
 				return new ReadCommand();
 			break;
 			case 'update': break;
-			case 'delete': break;
+			case 'delete':
+				return new DeleteCommand();
+			break;
 
 		}
 

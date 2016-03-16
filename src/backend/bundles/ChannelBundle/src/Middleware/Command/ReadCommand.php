@@ -14,7 +14,6 @@ class ReadCommand extends Command
 
 		$response = [];
 
-
 		if($request->getAttribute('channelId')){
 
 			$channelId = $request->getAttribute('channelId');
@@ -25,8 +24,9 @@ class ReadCommand extends Command
 				'channels_read' => true
 			];
 		} else {
-			$channels = $service->getChannelRepository()->getChannels();
 
+
+			$channels = $service->getChannelRepository()->getChannels();
 			$response = [
 				'entities'      => $channels,
 				'channels_read' => true
