@@ -31,26 +31,22 @@ export class ThemeRESTService
     }
 
     public createTheme(tittle: string, parentId: number){
-           let headers = new Headers();
-        headers.append('Content-type', 'application/json');
-        let options = new RequestOptions({
-            headers: headers
-        });
         if(!parentId) parentId = 0;
-        return this.http.put('/backend/api/protected/host-admin/theme-editor/entity/create', JSON.stringify({title: tittle, parent_id: parentId}), options).subscribe(
+        return this.http.put('/backend/api/protected/host-admin/theme-editor/entity/create', JSON.stringify({title: tittle, parent_id: parentId})).subscribe(
             data => {console.log(data)},
             err => {console.log(err)}
         );
     }
 
-    public updateTheme(id, title, parrentId){
+    public updateTheme(id, title, parentId){
         let headers = new Headers();
         headers.append('Content-type', 'application/json');
         let options = new RequestOptions({
             headers: headers
         });
-        if(parrentId == undefined) parrentId = 0;
-        this.http.post('/backend/api/protected/host-admin/theme-editor/entity/update/' + id, JSON.stringify({title: title, parent_id: parrentId}), options).subscribe(
+        console.log(parentId);
+        if(parentId == undefined || null) parentId = 0;
+        this.http.post('/backend/api/protected/host-admin/theme-editor/entity/update/' + id, JSON.stringify({title: title, parent_id: parseInt(parentId)}), options).subscribe(
             data => {console.log(data)},
             err => {console.log(err)});
     }

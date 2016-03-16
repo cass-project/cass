@@ -1,44 +1,54 @@
 <?php
 namespace Data\Repository;
 
-use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Data\Entity\Account;
+use Data\Exception\Auth\AccountNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 
 class AccountRepository extends EntityRepository
 {
-    public function findByLoginOrToken($login) : Account
+    public function findByEmail($email) : Account
     {
         try {
             return $this->createQueryBuilder('a')
-                    ->where('a.email = :login OR a.phone = :phone OR a.token = :login')
-                        ->setParameter('login', $login)
-                        ->setParameter('phone', self::clearPhone($login))
-                ->getQuery()->getSingleResult();
-        } catch (NoResultException $e) {
-            throw new InvalidCredentialsException('Fail to sign-in.');
+                ->where('a.email = :email')
+                ->setParameter("email", $email)
+                ->getQuery()
+                ->getSingleResult()
+            ;
+        }catch (NoResultException $e) {
+            throw new AccountNotFoundException(sprintf('Account with email `%s` not found', $email));
         }
     }
 
-    public function isAccountExist($email, $phone = null) : bool
+    public function hasAccountWithEmail($email) : bool
     {
-        return !!$this->createQueryBuilder('a')
-            ->select('COUNT(a.id)')
-            ->where('a.email = :email OR a.phone = :phone')
-            ->setParameter('email', $email)
-            ->setParameter('phone', self::clearPhone($phone))
-            ->getQuery()->getSingleScalarResult();
+        try {
+            $this->findByEmail($email);
+
+            return true;
+        }catch(AccountNotFoundException $e) {
+            return false;
+        }
     }
 
-    public static function clearPhone(&$phone)
+    public function saveAccount(Account $account)
     {
-        if ($phone) {
-            $phone = preg_replace('~\D~', '', $phone);
-            $phone = preg_replace('~^(\d{10})$~', '7$1', $phone);
-            $phone = preg_replace('~^8~', '7', $phone);
+        $this->getEntityManager()->persist($account);
+        $this->getEntityManager()->flush($account);
+    }
+
+    public function findByAPIKey(string $apiKey)
+    {
+        $account = $this->findOneBy([
+            'password' => $apiKey
+        ]);
+
+        if($account === null) {
+            throw new AccountNotFoundException(sprintf('Account with api_key `%s` not found', $apiKey));
         }
 
-        return $phone;
+        return $account;
     }
 }

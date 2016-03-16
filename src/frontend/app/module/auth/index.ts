@@ -3,7 +3,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {COMMON_DIRECTIVES} from 'angular2/common';
 
 import {AuthControlsComponent} from './component/AuthControlsComponent/index';
-import {AuthService, AuthServiceProvider} from './service/AuthService';
+import {AuthService} from './service/AuthService';
 import {SignInComponent} from './component/SignInComponent/index';
 import {SignUpComponent} from './component/SignUpComponent/index';
 import {LogOutComponent} from './component/LogOutComponent/index';
@@ -15,7 +15,9 @@ import {LogOutComponent} from './component/LogOutComponent/index';
         COMMON_DIRECTIVES,
         AuthControlsComponent
     ],
-    providers:[AuthServiceProvider]
+    styles: [
+        require('./style.shadow.scss')
+    ]
 })
 
 @RouteConfig([
@@ -39,9 +41,5 @@ import {LogOutComponent} from './component/LogOutComponent/index';
 
 export class AuthComponent
 {
-    authService:AuthService;
-
-    constructor(authServiceProvider:AuthServiceProvider){
-        this.authService = authServiceProvider.getInstance();
-    }
+    constructor(public authService:AuthService){}
 }

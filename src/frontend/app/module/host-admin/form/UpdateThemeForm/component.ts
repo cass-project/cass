@@ -20,8 +20,9 @@ export class UpdateThemeForm
         public router: Router
     ){}
     submit() {
-        this.themeRESTService.updateTheme(this.themeEditorService.selectedThemeId, this.title, parseInt(this.parent));
+        this.themeRESTService.updateTheme(this.themeEditorService.selectedThemeId, this.title, this.parent);
         this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
+        this.themeEditorService.showFormContentBox = false;
         this.router.parent.navigate(['Theme-Editor']);
     }
 }
