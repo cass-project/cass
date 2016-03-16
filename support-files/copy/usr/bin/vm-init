@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+
+## UTF-8 Locale Issue
+sudo locale-gen UTF-8
+
+# ###############
+# APT-GET SECTION
+# ###############
+sudo add-apt-repository ppa:ondrej/php -y
+sudo apt-get update
+sudo apt-get install -y php7.0 php7.0-fpm php7.0-mysql php7.0-curl git npm nginx nginx-extras
+
+# ##########
+# UPDATE NPM
+# ##########
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+
+# #####
+# MYSQL
+# #####
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password 1234'
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 1234'
+sudo apt-get install mysql-client mysql-server -y
+
+mysql  -uroot -p"1234" -e "CREATE DATABASE cass_development"
+
+# #####
+# MONGO
+# #####
+
+sudo apt-get install mongodb -y
+sudo npm install -g mongo-express
+
+# #############
+# MONGO-EXPRESS
+# #############
+sudo mkdir /opt/mongo-express
+sudo chown vagrant /opt/mongo-express
+cd /opt/mongo-express
+npm install mongo-express
+
+# #######
+# Backend
+# #######
+
+cd /vagrant/backend/
+
+# Install composer.phar
+curl -sS https://getcomposer.org/installer | php
+chmod a+x composer.phar
+sudo mv composer.phar /usr/bin/
+sudo ln -s /usr/bin/composer.phar /usr/bin/composer
+
+# Install composer dependencies
+composer.phar install
+cp phinx.yml.dist phinx.yml
+vendor/bin/phinx migrate
+
+# ########
+# Frontend
+# ########
+cd /vagrant/frontend
+
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+
+sudo npm install -g typings webpack
+npm install --no-bin-link
+npm rebuild node-sass
+typings install
+
+webpack
+
+# #######
+# SWAGGER
+# #######
+sudo mkdir /opt/swagger
+sudo chown vagrant /opt/swagger
+cd /opt/swagger
+git clone https://github.com/swagger-api/swagger-ui.git
+cd swagger-ui
+npm install
+npm run build
+
+#########
+# PHPUNIT
+#########
+cd /vagrant/backend
+wget https://phar.phpunit.de/phpunit.phar
+chmod +x phpunit.phar
+sudo mv phpunit.phar /usr/local/bin/phpunit
+
+# #############
+# Update server
+# #############
+
+sudo cp -R /support-files/copy/* /
+
+sudo service mongodb restart
+sudo service php7.0-fpm restart
+sudo service nginx restart
+
+# ############
+# Update chmod
+# ############
+
+sudo chmod a+x /usr/bin/vm-server-update
+sudo chmod a+x /usr/bin/vm-project-update
+sudo chmod a+x /usr/bin/vm-init

@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {COMMON_DIRECTIVES} from 'angular2/common';
-import {AuthService, AuthServiceProvider} from './../../service/AuthService';
+import {AuthService} from './../../service/AuthService';
 
 @Component({
     template: require('./template.html'),
@@ -12,16 +12,11 @@ import {AuthService, AuthServiceProvider} from './../../service/AuthService';
     directives: [
         COMMON_DIRECTIVES,
         ROUTER_DIRECTIVES
-    ],
-    providers: [AuthServiceProvider]
+    ]
 })
 
 
 export class AuthControlsComponent
 {
-    authService:AuthService;
-
-    constructor(authServiceProvider:AuthServiceProvider) {
-        this.authService = authServiceProvider.getInstance();
-    }
+    constructor(public authService: AuthService) {}
 }

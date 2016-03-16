@@ -3,43 +3,50 @@ namespace Auth\Middleware\Command;
 
 use Application\REST\Exceptions\UnknownActionException;
 use Application\REST\GenericRESTResponseBuilder;
+use Auth\Middleware\Command\OAuth\BattleNetCommand;
+use Auth\Middleware\Command\OAuth\FacebookCommand;
+use Auth\Middleware\Command\OAuth\GoogleCommand;
+use Auth\Middleware\Command\OAuth\MailruCommand;
+use Auth\Middleware\Command\OAuth\OdnoklassnikiCommand;
 use Auth\Middleware\Command\OAuth\VkCommand;
+use Auth\Middleware\Command\OAuth\YandexCommand;
 use Auth\Service\AuthService;
 use Psr\Http\Message\ServerRequestInterface;
 
 abstract class Command
 {
-
     /**
      * @var AuthService
      */
     private $authService;
 
-    public static function factory(ServerRequestInterface $request) : Command
-    {
+    public static function factory(ServerRequestInterface $request, AuthService $authService): Command {
         $action = $request->getAttribute('action');
 
-        switch ($action) {
+        switch($action) {
+            default:
+                throw new UnknownActionException(sprintf('Unknown action `%s`', $action));
+
             case 'sign-in': return new SignInCommand();
             case 'sign-up': return new SignUpCommand();
             case 'sign-out': return new SignOutCommand();
             case 'oauth':
-                switch ($request->getAttribute('provider')) {
-                    case 'vk': return new VkCommand();
-                    case 'mailru': return new VkCommand();
-                    case 'yandex': return new VkCommand();
-                    case 'google': return new VkCommand();
-                    case 'facebook': return new VkCommand();
-                    case 'odnoklassniki': return new VkCommand();
+                switch($request->getAttribute('provider')){
+                    default: throw new \Exception('Unknown provider');
+                    case 'vk': return new VkCommand($authService->getOAuth2Config('vk'), $authService);
+                    case 'mailru': return new MailruCommand($authService->getOAuth2Config('mailru'), $authService);
+                    case 'yandex': return new YandexCommand($authService->getOAuth2Config('yandex'), $authService);
+                    case 'google': return new GoogleCommand($authService->getOAuth2Config('google'), $authService);
+                    case 'facebook': return new FacebookCommand($authService->getOAuth2Config('facebook'), $authService);
+                    case 'odnoklassniki': return new OdnoklassnikiCommand($authService->getOAuth2Config('odnoklassniki'), $authService);
+                    case 'battle.net': return new BattleNetCommand($authService->getOAuth2Config('battle.net'), $authService);
                 }
         }
-
-        throw new UnknownActionException('Unknown action');
     }
 
     public function getAuthService(): AuthService
     {
-        if ($this->authService === null) {
+        if($this->authService === null) {
             throw new \Exception('No AuthService available');
         }
 
@@ -50,6 +57,8 @@ abstract class Command
     {
         $this->authService = $authService;
     }
+
+
 
     abstract public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder);
 }

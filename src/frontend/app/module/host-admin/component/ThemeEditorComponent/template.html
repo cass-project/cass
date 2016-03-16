@@ -1,19 +1,19 @@
 <article class="component component-theme-editor">
-    <header>
+    <header (click)="clearSelection()">
         <h1>Theme Editor</h1>
     </header>
+    <body (click)="clearSelection()">
+    </body>
     <theme-tree [tree]="themeEditorService.themesTree"></theme-tree>
     <div class="form-content-box" *ngIf="themeEditorService.showFormContentBox">
-        <div class="backdrop"></div>
-        <div class="content-box">
-            <button (click)="closeFormContentBox()">Close</button>
-            <router-outlet></router-outlet>
-        </div>
+        <router-outlet></router-outlet>
     </div>
     <footer>
-        <button (click)="openCreateThemeForm()">Create</button>
+        <button (click)="openCreateThemeForm()" class="btn btn-success">Create</button>
         <div *ngIf="themeEditorService.selectedThemeId">
-        <button (click)="openUpdateThemeForm()">Update</button><button (click)="deleteTheme()">Delete</button>
+            <button (click)="openUpdateThemeForm()" class="btn btn-warning">Update</button>
+            <button (click)="deleteTheme()" class="btn btn-danger">Delete</button>
         </div>
     </footer>
 </article>
+

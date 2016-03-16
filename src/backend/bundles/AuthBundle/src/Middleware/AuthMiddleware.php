@@ -27,7 +27,7 @@ class AuthMiddleware implements MiddlewareInterface
         $responseBuilder = new GenericRESTResponseBuilder($response);
 
         try {
-            $command = Command::factory($request);
+            $command = Command::factory($request, $this->authService);
             $command->setAuthService($this->authService);
             $command->run($request, $responseBuilder);
         } catch (UnknownActionException $e) {

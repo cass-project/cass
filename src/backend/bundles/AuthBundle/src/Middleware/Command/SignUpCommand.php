@@ -12,21 +12,27 @@ class SignUpCommand extends Command
     public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder)
     {
         try {
-            $this->getAuthService()->signUp($request);
-            $responseBuilder->setStatusSuccess();
-        } catch (MissingReqiuredFieldException $e) {
+            $account = $this->getAuthService()->signUp($request);
+
+            $responseBuilder
+                ->setStatusSuccess()
+                ->setJson([
+                    'api_key' => $account->getAPIKey()
+                ])
+            ;
+        }catch(MissingReqiuredFieldException $e) {
             $responseBuilder
                 ->setStatusNotFound()
                 ->setError($e)
             ;
-        } catch (DuplicateAccountException $e) {
+        }catch(DuplicateAccountException $e) {
             $responseBuilder
                 ->setStatusNotFound()
                 ->setError($e)
             ;
-        } catch (ValidationException $e) {
+        }catch(ValidationException $e) {
             $responseBuilder
-                ->setStatusNotFound()
+                ->setStatusBadRequest()
                 ->setError($e)
             ;
         }

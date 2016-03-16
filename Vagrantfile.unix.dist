@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+config.vm.box = "ubuntu/trusty64"
+  config.vm.provision :shell, path: "./support-files/provision.sh"
+
+  config.vm.network "private_network", ip: "192.168.8.150"
+  config.vm.network "forwarded_port", guest: 3000, host: 8080 # www
+  config.vm.network "forwarded_port", guest: 3001, host: 8081 # mongo-express
+  config.vm.network "forwarded_port", guest: 27017, host: 27017 # mongo
+
+  config.vm.synced_folder "./src", "/vagrant", type: "nfs"
+  config.vm.synced_folder "./support-files", "/support-files", type: "nfs"
+
+   config.vm.provider "virtualbox" do |vb|
+     vb.gui = false
+     vb.memory = "1024"
+   end
+end

@@ -1,21 +1,19 @@
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 
-import {AuthService, AuthServiceProvider} from './../../service/AuthService';
+import {AuthService} from './../../service/AuthService';
 import {SignInComponent} from './../SignInComponent/index';
 
 @Component({
-    template: require('./template.html'),
-    providers:[AuthServiceProvider]
+    template: require('./template.html')
 })
 
 
 export class LogOutComponent
 {
-    authService:AuthService;
+    constructor(public authService: AuthService) {}
 
-    constructor(authServiceProvider:AuthServiceProvider){
-        this.authService = authServiceProvider.getInstance();
+    ngOnInit() {
         this.authService.signOut();
     }
 }

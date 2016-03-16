@@ -50,6 +50,11 @@ class Account
      */
     private $tokenExpired;
 
+    /**
+     * @OneToMany(targetEntity="Data\Entity\OAuthAccount", mappedBy="account")
+     */
+    private $oauth2;
+
     public function getId()
     {
         return $this->id;
@@ -86,6 +91,11 @@ class Account
     {
         $this->email = $email;
         return $this;
+    }
+
+    public function getAPIKey()
+    {
+        return $this->password;
     }
 
     public function getToken()

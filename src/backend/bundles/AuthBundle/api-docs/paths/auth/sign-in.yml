@@ -1,0 +1,32 @@
+'/backend/api/auth/sign-in/':
+  post:
+    tags:
+      - auth
+    description:
+      Попытка аутентификации
+    parameters:
+      - name: body
+        in: body
+        required: true
+        description: JSON Request
+        schema:
+          $ref: '#/definitions/Auth_SignIn_Request'
+    responses:
+      '400':
+          $ref: '#/responses/error'
+      '200':
+        description: |
+          Successfull auth
+        schema:
+          type: object
+          required:
+            - account_token
+            - success
+          properties:
+            account_token:
+              type: string
+              description: Токен (API Key)
+            success:
+              type: boolean
+              default: true
+              description: "= true"

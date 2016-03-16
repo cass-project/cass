@@ -20,9 +20,13 @@ export class CreateThemeForm
         public router: Router
     ){}
     submit() {
-        console.log(this.title);
         this.themeRESTService.createTheme(this.title, this.themeEditorService.selectedThemeId);
         this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
-        this.router.parent.navigate(['Theme-Editor']);  //This navigate return full page reload, dunno why, need investigate
+        this.themeEditorService.showFormContentBox = false;
+        this.router.parent.navigate(['Theme-Cleaner']);
+    }
+    close(){
+        this.themeEditorService.showFormContentBox = false;
+        this.router.parent.navigate(['Theme-Cleaner']);
     }
 }

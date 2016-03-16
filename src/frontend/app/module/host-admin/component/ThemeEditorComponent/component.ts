@@ -51,6 +51,10 @@ export class ThemeEditorComponent
     ) {}
 
     ngOnInit() {
+        this.themeRESTService.getThemes()
+            .map(res => res.json())
+            .subscribe(data => {this.themeEditorService.themes = data['entities']
+            });
         this.themeRESTService.getThemesTree()
             .map(res => res.json())
             .subscribe(data => {
@@ -61,6 +65,7 @@ export class ThemeEditorComponent
     deleteTheme(){
         this.themeRESTService.deleteTheme(this.themeEditorService.selectedThemeId);
         this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
+        this.router.navigate(['Theme-Cleaner']);
     }
 
     openCreateThemeForm() {
@@ -77,13 +82,14 @@ export class ThemeEditorComponent
         this.themeRESTService.getThemeById(id);
     }
 
-
     openFormContentBox() {
         this.themeEditorService.showFormContentBox = true;
     }
 
-    closeFormContentBox() {
-        this.themeEditorService.showFormContentBox = false;
-        this.router.parent.navigate(['Theme-Editor']);
+    clearSelection(){
+        if(this.themeEditorService.selectedThemeId){
+           this.themeEditorService.clear();
+            console.log(this.themeEditorService.selectedThemeId);
+        }
     }
 }

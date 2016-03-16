@@ -1,93 +1,116 @@
 import {Injectable} from 'angular2/core';
 import {Http, URLSearchParams} from 'angular2/http';
 import {Router} from "angular2/router";
-
-@Injectable()
-export class AuthServiceProvider
-{
-    static instance:AuthService;
-
-    constructor(private http: Http, private router:Router) {
-        if(AuthServiceProvider.instance == null) {
-            AuthServiceProvider.instance = new AuthService(http, router);
-        }
-    }
-
-    getInstance() {
-        return AuthServiceProvider.instance;
-    }
-}
-
+import {ResponseInterface} from "../../main/ResponseInterface";
+import {Cookie} from 'ng2-cookies';
+import {BackendError} from '../../main/BackendError';
 
 @Injectable()
 export class AuthService
 {
-    isLoading:boolean = false;
+    public token: AuthToken;
+    public signedIn: boolean = false;
+    public lastError: BackendError;
 
     constructor(private http: Http, private router:Router) {
-    }
+        this.token = new AuthToken();
 
-    public attemptSignIn(login:string, password:string) {
-        this.isLoading = true;
-        let requestBody;
-
-        if(!this.isAuthenticated()) {
-            requestBody = JSON.stringify({
-                "login" : login,
-                "password" : password
-            });
+        if(Cookie.getCookie('api_key')) {
+            this.signedIn = true;
+            this.token.setToken(Cookie.getCookie('api_key'));
         }
-
-        this.http.post('/backend/api/auth/sign-in', requestBody).subscribe(
-            data => AuthService.setToken(data.json()["account_token"]),
-            () => {
-                AuthService.removeToken();
-                this.isLoading = false;
-            },
-            () => this.isLoading = false
-        );
     }
 
-    public attemptSignUp(email:string, phone:string, password:string, passwordAgain:string) {
-        this.isLoading = true;
-        let requestBody = JSON.stringify({
-            "email"         : email,
-            "phone"         : phone,
-            "password"      : password,
-            "passwordAgain" : passwordAgain
-        });
-        this.http.post('/backend/api/auth/sign-up', requestBody).subscribe(
-            data => AuthService.setToken(data.json()["account_token"]),
-            () => this.isLoading = false,
-            () => this.isLoading = false
+    public attemptSignIn(request: SignInModel) {
+        this.lastError = null;
+
+        console.log(request.remember, 'remember?');
+        return this.signIn(this.http.post('/backend/api/auth/sign-in', JSON.stringify(request)), request.remember);
+    }
+
+    public attemptSignUp(request: SignUpModel) {
+        this.lastError = null;
+
+        return this.signIn(this.http.post('/backend/api/auth/sign-up', JSON.stringify(request)), request.remember);
+    }
+
+    private signIn(http, remember = false) {
+        return http.map(res => res.json()).subscribe(
+            response => {
+                if(response.success) {
+                    this.signedIn = true;
+                    this.token.setToken(response.api_key);
+
+                    Cookie.setCookie('api_key', response.api_key, remember ? 14 : undefined);
+                }else{
+                    this.signedIn = false;
+                    this.lastError = new BackendError(response);
+                }
+            },
+            error => {
+                this.signedIn = false;
+                this.lastError = new BackendError(error);
+            }
         );
     }
 
     public signOut() {
-        this.isLoading = true;
-        this.http.get('/backend/api/auth/sign-out').subscribe(
-            () => {
-                AuthService.removeToken();
-                this.router.navigate(['SignIn']);
-            },
-            () => this.isLoading = false,
-            () => this.isLoading = false
+        return this.http.get('/backend/api/auth/sign-out').subscribe(
+            response => {
+                this.signedIn = false;
+                this.router.navigate(['Welcome']);
+
+                Cookie.deleteCookie('api_key');
+            }
         );
     }
+}
 
-    public isAuthenticated() : boolean {
-        return !!AuthService.getToken();
+class AuthToken
+{
+    public apiKey: string;
+
+    setToken(apiKey) {
+        localStorage.setItem('api_key', apiKey);
+
+        this.apiKey = apiKey;
     }
 
-    private static setToken(token:string) {
-        localStorage.setItem("account_token", token);
+    reset() {
+        localStorage.removeItem('api_key');
+
+        this.apiKey = null;
     }
 
-    private static getToken() {
-        return localStorage.getItem("account_token");
+    hasApiKey() {
+        return !!this.apiKey;
     }
 
-    private static removeToken() {
-        localStorage.removeItem("account_token");
+    getApiKey(): string {
+        if(!this.hasApiKey()) {
+            throw new Error('No api_key available');
+        }
+
+        return this.apiKey;
     }
+}
+
+export interface SignInResponse extends ResponseInterface
+{
+    api_key: string;
+}
+
+interface SignInModel
+{
+    email: string;
+    password: string;
+    remember?: boolean;
+}
+
+interface SignUpModel
+{
+    email: string;
+    password: string;
+    repeat: string;
+    remember?: boolean;
 }

@@ -2,125 +2,118 @@
 namespace Auth\Service;
 
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
-use Auth\Service\AuthService\Validations\SignUp\HasAllRequiredFields;
-use Auth\Service\AuthService\Validations\SignUp\IsPasswordValid;
-use Auth\Service\AuthService\Validations\SignUp\IsNewAccount;
-use Auth\Service\AuthService\Validations\SignUp\IsEmailValid;
-use Auth\Service\AuthService\Validations\SignUp\IsPhoneValid;
-use Auth\Service\AuthService\Validations\SignUp\Validator;
+use Auth\Service\AuthService\OAuth2\RegistrationRequest;
+use Auth\Service\AuthService\SignUpValidation\ArePasswordsMatching;
+use Auth\Service\AuthService\SignUpValidation\HasAllRequiredFields;
+use Auth\Service\AuthService\SignUpValidation\HasSameAccount;
+use Auth\Service\AuthService\SignUpValidation\IsEmailValid;
+use Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
+use Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
 use Data\Entity\Account;
 use Data\Repository\AccountRepository;
-use Doctrine\ORM\EntityManager;
+use Data\Repository\OAuthAccountRepository;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthService
 {
-
-    /**
-     * @var AccountRepository
-     */
+    /** @var AccountRepository */
     private $accountRepository;
 
-    private $entityManager;
+    /** @var OAuthAccountRepository */
+    private $oauthAccountRepository;
 
-    public function __construct(EntityManager $entityManager)
+    /** @var array */
+    private $oauth2Config;
+
+    public function __construct(AccountRepository $accountRepository, OAuthAccountRepository $oAuthAccountRepository, array $oauth2Config)
     {
-        $this->entityManager     = $entityManager;
-        $this->accountRepository = $entityManager->getRepository(Account::class);
+        $this->accountRepository = $accountRepository;
+        $this->oauthAccountRepository = $oAuthAccountRepository;
+        $this->oauth2Config = $oauth2Config;
     }
 
-    public function attemptSignIn(Request $request) : Account
+    public function signUp(Request $request) : Account
     {
-        $credentials = json_decode($request->getBody(), true);
+        $request = json_decode($request->getBody(), true);
 
-        if (isset($credentials['login']) || isset($credentials['password'])) {
-            $this->signOut();
+        $email = $request['email'] ?? null;
+        $password = $request['password'] ?? null;
 
-            if (!isset($credentials['login'], $credentials['password'])) {
-                throw new InvalidCredentialsException('Email or phone and password are required');
-            }
-        }
-
-        if (isset($_SESSION['account'])) {
-            $account = unserialize($_SESSION['account']); /** @var Account $account */
-        } else {
-            $account = $this->accountRepository
-                ->findByLoginOrToken($credentials['login'] ?? $this->getToken($request));
-        }
-
-        if (!$this->verifyToken($account, $request) && !$this->verifyPassword($account, $request)) {
-            throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $credentials['login']));
-        }
-
-        $this->signIn($account);
-
-        return $account;
-    }
-
-    public function signUp(Request $request, bool $signInAfter = true) : Account
-    {
-        array_map(function (Validator $validator) use ($request) {
-            $validator->setCredentials($request)->validate();
+        array_map(function(SignUpValidator $validator) use ($request) {
+            $validator->validate($request);
         }, [
             new HasAllRequiredFields(),
             new IsEmailValid(),
-            new IsPhoneValid(),
-            new IsPasswordValid(),
-            new IsNewAccount($this->accountRepository),
-           ]
-        );
-
-        $credentials = json_decode($request->getBody(), true);
+            new ArePasswordsMatching(),
+            new PasswordHasRequiredLength(),
+            new HasSameAccount($this->accountRepository)
+        ]);
 
         $account = (new Account())
-            ->setEmail($credentials['email'] ?? null)
-            ->setPhone($credentials['phone'] ?? null)
-            ->setPassword(password_hash($credentials['password'], PASSWORD_DEFAULT))
+            ->setEmail($email)
+            ->setPassword(password_hash($password, PASSWORD_DEFAULT))
         ;
 
-        if ($signInAfter) {
-            $this->signIn($account);
-        } else {
-            $this->entityManager->persist($account);
-            $this->entityManager->flush();
+        $this->accountRepository->saveAccount($account);
+
+        return $account;
+    }
+
+    public function signIn(Request $request) : Account
+    {
+        list($email, $password) = $this->unpackCredentials($request);
+
+        $account = $this->accountRepository->findByEmail($email);
+
+        if(!$this->verifyPassword($account, $password)) {
+            throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $email));
         }
 
         return $account;
     }
 
-    public function signIn(Account $account)
+    public function signInOauth2(RegistrationRequest $registrationRequest)
     {
-        if (!$account->getToken() || $account->getTokenExpired() < time()) {
-            $account->setToken()
-                ->setTokenExpired(strtotime('+30 minutes'))
-            ;
-            $this->entityManager->persist($account);
-            $this->entityManager->flush();
+        $oauthRepository = $this->oauthAccountRepository;
+
+        if(!$this->accountRepository->hasAccountWithEmail($registrationRequest->getEmail())) {
+            $oauthRepository->create($registrationRequest);
         }
 
-        $_SESSION['account'] = serialize($account);
+        return $oauthRepository->findAccount($registrationRequest->getProvider(), $registrationRequest->getProviderAccountId());
     }
 
     public function signOut()
     {
-        unset($_SESSION['account']);
+        unset($_COOKIE['api_key']);
     }
 
-    private function getToken(Request $request)
+    public function getOAuth2Config($provider): array
     {
-        return $request->getHeader('Account-Token')[0] ?? null;
+        $config = $this->oauth2Config[$provider] ?? null;
+
+        if(!$config) {
+            throw new \Exception(sprintf('OAuth2 configuration for provider `%s` not found', $provider));
+        }
+
+        return $config;
     }
 
-    private function verifyToken(Account $account, Request $request) : bool
+    private function verifyPassword(Account $account, string $password): bool
     {
-        return $account->getToken() &&
-               $account->getToken() === $this->getToken($request);
+        return password_verify($password, $account->getPassword());
     }
 
-    private function verifyPassword(Account $account, Request $request) : bool
+    private function unpackCredentials(Request $request): array
     {
         $credentials = json_decode($request->getBody(), true);
-        return isset($credentials['password']) &&
-               password_verify($credentials['password'], $account->getPassword());
+        $email = $credentials['email'] ?? null;
+        $password = $credentials['password'] ?? null;
+
+        if ($email === null || $password === null) {
+            throw new InvalidCredentialsException('Email and password are required');
+        }
+
+        return array($email, $password);
     }
 }

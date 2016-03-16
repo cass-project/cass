@@ -1,0 +1,36 @@
+upstream php-fpm {
+    server unix:/var/run/php/php7.0-fpm.sock;
+}
+
+server {
+    listen 3000;
+    root /vagrant/www/app/;
+    index frontend.html;
+    server_name localhost;
+    sendfile off;
+
+    location ~ "^/backend/.*$"
+    {
+        try_files $uri /server.php /server.php =404;
+
+        fastcgi_pass	php-fpm;
+        include fastcgi_params;
+        fastcgi_split_path_info			^(.+?\.php)(/.*)?$;
+        fastcgi_param	SCRIPT_FILENAME		$document_root$fastcgi_script_name;
+        fastcgi_param	PATH_TRANSLATED		$document_root$fastcgi_script_name;
+        set		$path_info		$fastcgi_path_info;
+        fastcgi_param	PATH_INFO		$path_info;
+    }
+
+    location ~ "^/api-docs/.*$"
+    {
+        rewrite ^/api-docs/(.*)$ /../../../opt/swagger/swagger-ui/dist/$1 break;
+        index index.html;
+    }
+
+    location ~ "^/.*$"
+    {
+        try_files $uri /frontend.html /frontend.html =404;
+	}
+
+}

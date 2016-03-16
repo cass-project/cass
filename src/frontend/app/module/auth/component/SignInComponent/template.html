@@ -1,3 +1,20 @@
-<div>
-  <login-form></login-form>
-</div>
+<form (ngSubmit)="attemptSignIn()">
+  <header>
+    <h1>Sign In</h1>
+  </header>
+  <div class="alert alert-danger" role="alert" *ngIf="authService.lastError">{{authService.lastError.message}}</div>
+  <fieldset class="form-group">
+    <label>E-mail</label>
+    <input [(ngModel)]="model.email" [disabled]="loading" type="email" placeholder="your@mail.com" class="form-control" />
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="inputSignUpComponentPassword">Password</label>
+    <input id="inputSignUpComponentPassword" class="form-control" [disabled]="loading" [(ngModel)]="model.password" type="password" placeholder="Password"/>
+  </fieldset>
+  <div>
+    <button [disabled]="loading" class="btn btn-primary" type="submit">Sign In</button>
+    <button [disabled]="loading" class="btn btn-secondary" type="button" (click)="attemptSignInNoRemember()">Sign In, but I'm from another computer</button>
+    or use existing account:
+    <oauth2-login></oauth2-login>
+  </div>
+</form>
