@@ -6,7 +6,8 @@ import {ThemeTreeComponent} from '../ThemeTreeComponent/component';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {CreateThemeForm} from '../../form/CreateThemeForm/component';
 import {ThemeCleaner} from '../../component/ThemeCleaner/component'
-import {UpdateThemeForm} from '../../form/UpdateThemeForm/component'
+import {UpdateThemeForm} from '../../form/UpdateThemeForm/component';
+import {CreationFormPost} from  '../../form/CreationFormPost/component';
 
 @Component({
     template: require('./template.html'),
@@ -39,6 +40,11 @@ import {UpdateThemeForm} from '../../form/UpdateThemeForm/component'
         path: '/update-theme',
         name: 'Theme-Editor-Update',
         component: UpdateThemeForm
+    },
+    {
+        path: '/creation-form-post',
+        name: 'Creation-Form-Post',
+        component: CreationFormPost
     }
 ])
 export class ThemeEditorComponent
@@ -66,6 +72,11 @@ export class ThemeEditorComponent
         this.themeRESTService.deleteTheme(this.themeEditorService.selectedThemeId);
         this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
         this.router.navigate(['Theme-Cleaner']);
+    }
+
+    openCreatePostForm(){
+        this.openFormContentBox();
+        this.router.navigate(['Creation-Form-Post']);
     }
 
     openCreateThemeForm() {
