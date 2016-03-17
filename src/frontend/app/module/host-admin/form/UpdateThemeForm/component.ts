@@ -25,4 +25,8 @@ export class UpdateThemeForm
         this.themeEditorService.showFormContentBox = false;
         this.router.parent.navigate(['Theme-Editor']);
     }
+    close(){
+        this.themeEditorService.showFormContentBox = false;
+        this.router.parent.navigate(['Theme-Cleaner']);
+    }
 }

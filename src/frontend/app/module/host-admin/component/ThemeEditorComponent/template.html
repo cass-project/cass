@@ -10,11 +10,11 @@
     </div>
     <footer>
         <button (click)="openCreateThemeForm()" class="btn btn-success">Create</button>
-        <div *ngIf="themeEditorService.selectedThemeId">
-            <button (click)="openUpdateThemeForm()" class="btn btn-warning">Update</button>
-            <button (click)="deleteTheme()" class="btn btn-danger">Delete</button>
-            <button (click)="openCreatePostForm()" class="btn btn-success">Create Post</button>
-        </div>
+        <!--<div *ngIf="themeEditorService.selectedThemeId">-->
+            <button (click)="openUpdateThemeForm()" [disabled]="!themeEditorService.selectedThemeId" class="btn btn-warning">Update</button>
+            <button (click)="deleteTheme()" [disabled]="!themeEditorService.selectedThemeId" class="btn btn-danger">Delete</button>
+            <button (click)="openCreatePostForm()" [disabled]="!themeEditorService.selectedThemeId" class="btn btn-success">Create Post</button>
+        <!--</div>-->
     </footer>
 </article>
 
