@@ -41,7 +41,7 @@ export class AuthService
                     this.signedIn = true;
                     this.token.setToken(response.api_key);
 
-                    Cookie.setCookie('api_key', response.api_key, remember ? 14 : undefined);
+                    Cookie.setCookie('api_key', response.api_key, remember ? 14 : undefined, '/');
                 }else{
                     this.signedIn = false;
                     this.lastError = new BackendError(response);
