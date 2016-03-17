@@ -1,10 +1,8 @@
 <div>
     <ul class="theme-tree">
-        <li class="list-group-item" *ngFor="#theme of tree">
-            <div [class.selected]="isThemeSelected(theme)">
+        <li [class.selected]="isThemeSelected(theme)" class="list-group-item" *ngFor="#theme of tree">
                 <i *ngIf="hasChildren(theme)" (click)="toggle(tree)" class="fa" [ngClass]="{'fa-plus':!tree.show, 'fa-minus':tree.show}"></i>
                 <span (click)="select(theme)">{{theme.title}}</span>
-            </div>
             <theme-tree *ngIf="hasChildren(theme) && tree.show" [tree]="getChildren(theme)"></theme-tree>
         </li>
     </ul>
