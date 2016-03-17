@@ -16,13 +16,13 @@ Data_Entity_Channel:
       description: ID родительской тематики
     account_id:
       type: number
-      description: ID создателя канала
+      description: ID аккаунта
     name:
       type: string
-      description: Название канала
-    description:
-      type: string
-      description: Описание канала
+      description: Название
     status:
       type: string
-      description: Статус канала
+      description: Название
+    description:
+      type: string
+      description: Описание

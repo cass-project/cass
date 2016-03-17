@@ -4,6 +4,7 @@ use Phinx\Migration\AbstractMigration;
 
 class User extends AbstractMigration
 {
+
     /**
      * Change Method.
      *
@@ -25,14 +26,14 @@ class User extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    private $accountTableName = 'account';
+    const TABLE_NAME = 'account';
     private $oauthAccountTableName = 'oauth_account';
 
 
     public function change()
     {
         // Adding account table
-        $this->table($this->accountTableName)
+        $this->table(self::TABLE_NAME)
             ->addColumn('email', 'string')
             ->addColumn('phone', 'integer', ['null' => true])
             ->addColumn('password', 'string')
@@ -46,7 +47,7 @@ class User extends AbstractMigration
         // Adding aouth account table
         $this->table($this->oauthAccountTableName)
             ->addColumn('account_id', 'integer')
-            ->addForeignKey('account_id', $this->accountTableName, 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
+            ->addForeignKey('account_id', self::TABLE_NAME, 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
             ->addColumn('token', 'string')
             ->addColumn('expires', 'timestamp')
             ->addColumn('provider_name', 'string')
@@ -56,12 +57,25 @@ class User extends AbstractMigration
         $this->insertData();
     }
 
-    private function insertData(){
-        $this->table($this->accountTableName)->insert([
-            ['email' => 'artem.baydin@cass.io',             'password' => password_hash("Lolipop1234", PASSWORD_DEFAULT)],
-            ['email' => 'vyacheslav.savushkin@cass.io',     'password' => password_hash("1234", PASSWORD_DEFAULT)],
-            ['email' => 'dmitriy.borisenko.baydin@cass.io', 'password' => password_hash("1234", PASSWORD_DEFAULT)],
-            ['email' => 'philip.mantrov@cass.io',           'password' => password_hash("1234", PASSWORD_DEFAULT)]
+    private function insertData()
+    {
+        $this->table(self::TABLE_NAME)->insert([
+            [
+                'email' => 'artem.baydin@cass.io',
+                'password' => password_hash('Lolipop1234', PASSWORD_DEFAULT)
+            ],
+            [
+                'email' => 'vyacheslav.savushkin@cass.io',
+                'password' => password_hash('1234', PASSWORD_DEFAULT)
+            ],
+            [
+                'email' => 'dmitriy.borisenko.baydin@cass.io',
+                'password' => password_hash('1234', PASSWORD_DEFAULT)
+            ],
+            [
+                'email' => 'philip.mantrov@cass.io',
+                'password' => password_hash('1234', PASSWORD_DEFAULT)
+            ],
         ])->saveData();
     }
 }

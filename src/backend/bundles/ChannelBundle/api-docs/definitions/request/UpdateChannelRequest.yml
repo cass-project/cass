@@ -1,0 +1,18 @@
+Update_Channel_Request:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Название тематики
+      theme_id:
+        type: number
+        description: ID родительской тематики
+      account_id:
+        type: number
+        description: ID родительской тематики
+      description:
+        type: string
+        description: Описание канала
+      status:
+        type: string
+        description: Статуы канала

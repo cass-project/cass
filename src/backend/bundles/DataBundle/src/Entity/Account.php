@@ -1,14 +1,17 @@
 <?php
 namespace Data\Entity;
+use Data\Repository\AccountRepository;
 
 /**
  * Class Account
  * @package Data\Entity
  * @Entity(repositoryClass="Data\Repository\AccountRepository")
  * @Table(name="account")
+ * @HasLifecycleCallbacks
  */
 class Account
 {
+
     /**
      * @Id
      * @GeneratedValue
@@ -100,9 +103,9 @@ class Account
         return $this->token;
     }
 
-    public function setToken($token=null)
+    public function setToken()
     {
-        $this->token = $token===null?bin2hex(random_bytes(30)):$token;
+        $this->token = bin2hex(random_bytes(30));
         return $this;
     }
 
@@ -115,5 +118,13 @@ class Account
     {
         $this->tokenExpired = $tokenExpired;
         return $this;
+    }
+
+    /** @PrePersist */
+    public function clearPhone()
+    {
+        if ($this->phone) {
+            AccountRepository::clearPhone($this->phone);
+        }
     }
 }
