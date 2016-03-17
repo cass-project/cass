@@ -22,7 +22,6 @@ import {WelcomeComponent} from './module/welcome/index';
 import {AuthComponent} from './module/auth/index';
 import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorComponent/component';
 import {HeaderNavComponent} from './module/main/component/HeaderNavComponent/component';
-import {ChannelComponent} from './module/channel/index';
 
 @Component({
     selector: 'cass-bootstrap',
@@ -51,11 +50,6 @@ import {ChannelComponent} from './module/channel/index';
         path: '/theme-editor/...',
         name: 'Theme-Editor',
         component: ThemeEditorComponent
-    },
-    {
-        path: '/channels/...',
-        name: 'Channels',
-        component: ChannelComponent
     }
 ])
 class App

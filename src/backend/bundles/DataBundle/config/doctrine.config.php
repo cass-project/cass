@@ -6,8 +6,7 @@ return [
             'host'     => '127.0.0.1',
             'dbname'   => 'cass_development',
             'user'     => 'root',
-            'password' => '1234',
-            'charset'  => 'utf8'
+            'password' => '1234'
         ],
         'isDevMode' => true
     ]

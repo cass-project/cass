@@ -2,8 +2,15 @@
 <ruleset name="Cass">
 
     <rule ref="Squiz">
-        <!-- Проверка комментариев -->
-        <exclude name="Squiz.Commenting"/>
+        <!-- Обязательный phpdoc comment к скриптам, функциям, классам, переменным, переменным -->
+        <exclude name="Squiz.Commenting.FunctionComment.Missing"/>
+        <exclude name="Squiz.Commenting.VariableComment.Missing"/>
+        <exclude name="Squiz.Commenting.ClassComment.Missing"/>
+        <exclude name="Squiz.Commenting.FileComment.Missing"/>
+        
+        <exclude name="Squiz.Commenting.ClosingDeclarationComment.Missing"/>            <!-- Обязывает использовать //end после закрывающих фигурных скобок -->
+        <exclude name="Squiz.Commenting.InlineComment"/>                                <!-- Запрет на /**/ в одну строку -->
+        <exclude name="Squiz.Commenting.BlockComment.WrongStart"/>                      <!-- Запрет на /** ... */ в одну строку -->
 
         <exclude name="Generic.Commenting.DocComment"/>                                 <!-- Ненужные нам стандарты комментариев -->
 
@@ -26,30 +33,6 @@
         <exclude name="Squiz.WhiteSpace.SemicolonSpacing.Incorrect"/>                   <!-- Запрет переноса точки с зарятой после функции -->
         <!--exclude name="Squiz.WhiteSpace.FunctionSpacing.After"/-->                   <!-- Запрет на отсутствие новой строки после функции -->
         <exclude name="Squiz.ControlStructures.SwitchDeclaration.MissingDefault"/>      <!-- Обязательное объявление default в switch -->
-        <exclude name="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>  <!-- Вложенные функции на новых строках -->
-
-        <!-- Отступ вложенных функций -->
-        <exclude name="PEAR.Functions.FunctionCallSignature.Indent"/>
-        <exclude name="PEAR.Functions.FunctionCallSignature.MultipleArguments"/>
-        <exclude name="PSR2.Files.EndFileNewline.NoneFound"/>                           <!-- Последняя строка файла должна быть пустая -->
-
-        <exclude name="Squiz.ControlStructures.SwitchDeclaration"/>
-        <exclude name="Squiz.WhiteSpace.ScopeClosingBrace.ContentBefore"/>
-        <exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>                      <!-- LF / CRLF -->
-        <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNotAligned"/>
-        <exclude name="Squiz.Arrays.ArrayDeclaration.KeyNotAligned"/>
-        <exclude name="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned"/>
-        <exclude name="Squiz.WhiteSpace.FunctionSpacing.Before"/>
-        <exclude name="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-
-    </rule>
-
-
-    <!-- How many spaces should surround the equals signs. -->
-    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
-        <properties>
-            <property name="equalsSpacing" type="integer" value="1"/>
-        </properties>
     </rule>
     
     <!-- The number of spaces before and after a string concat. -->
@@ -58,7 +41,7 @@
             <property name="spacing" type="integer" value="1"/>
         </properties>
     </rule>
-
+    
     <!-- The number of blank lines between functions. -->
     <rule ref="Squiz.WhiteSpace.FunctionSpacing">
         <properties>

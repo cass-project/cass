@@ -9,9 +9,7 @@ class CreateThemeCommand extends Command
     public function run(ServerRequestInterface $request)
     {
         $themeEditorService = $this->getThemeEditorService();
-        $theme = $themeEditorService->create(
-          (new PutThemeRequest($request))->getParameters()
-        );
+        $theme = $themeEditorService->create((new PutThemeRequest($request))->getParameters());
 
         return [
             'id' => $theme->getId(),
