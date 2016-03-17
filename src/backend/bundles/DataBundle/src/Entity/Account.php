@@ -18,6 +18,12 @@ class Account
     private $id;
 
     /**
+     * @Column(type="integer")
+     * @var bool
+     */
+    private $is_anonymous = false;
+
+    /**
      * @Column(type="string")
      * @var string
      */
@@ -51,6 +57,11 @@ class Account
      * @OneToMany(targetEntity="Data\Entity\OAuthAccount", mappedBy="account")
      */
     private $oauth2;
+
+    public function isAnonymous()
+    {
+        return $this->is_anonymous;
+    }
 
     public function getId()
     {
