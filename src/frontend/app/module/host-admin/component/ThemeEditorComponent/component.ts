@@ -9,6 +9,8 @@ import {ThemeCleaner} from '../../component/ThemeCleaner/component'
 import {UpdateThemeForm} from '../../form/UpdateThemeForm/component';
 import {CreationFormPost} from  '../../form/CreationFormPost/component';
 
+
+
 @Component({
     template: require('./template.html'),
     styles: [
@@ -68,31 +70,31 @@ export class ThemeEditorComponent
         });
     }
 
-    deleteTheme(){
-        this.themeRESTService.deleteTheme(this.themeEditorService.selectedThemeId);
-        this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
-        this.router.navigate(['Theme-Cleaner']);
-    }
-
-    openCreatePostForm(){
-        this.openFormContentBox();
-        this.router.navigate(['Creation-Form-Post']);
-    }
-
+    //deleteTheme(){
+    //    this.themeRESTService.deleteTheme(this.themeEditorService.selectedThemeId);
+    //    this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
+    //    this.router.navigate(['Theme-Cleaner']);
+    //}
+    //
+    //openCreatePostForm(){
+    //    this.openFormContentBox();
+    //    this.router.navigate(['Creation-Form-Post']);
+    //}
+    //
     openCreateThemeForm() {
         this.openFormContentBox();
         this.router.navigate(['Theme-Editor-Create']);
     }
-
-    openUpdateThemeForm(){
-        this.openFormContentBox();
-        this.router.navigate(['Theme-Editor-Update']);
-    }
-
-    returnTheme(id){
-        this.themeRESTService.getThemeById(id);
-    }
-
+    //
+    //openUpdateThemeForm(){
+    //    this.openFormContentBox();
+    //    this.router.navigate(['Theme-Editor-Update']);
+    //}
+    //
+    //returnTheme(id){
+    //    this.themeRESTService.getThemeById(id);
+    //}
+    //
     openFormContentBox() {
         this.themeEditorService.showFormContentBox = true;
     }
