@@ -23,7 +23,7 @@ export class UpdateThemeForm
         this.themeRESTService.updateTheme(this.themeEditorService.selectedThemeId, this.title, this.parent);
         this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
         this.themeEditorService.showFormContentBox = false;
-        this.router.parent.navigate(['Theme-Editor']);
+        this.router.parent.navigate(['Theme-Cleaner']);
     }
     close(){
         this.themeEditorService.showFormContentBox = false;
