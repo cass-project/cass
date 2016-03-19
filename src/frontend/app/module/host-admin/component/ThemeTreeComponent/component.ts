@@ -28,6 +28,7 @@ export class ThemeTreeComponent
 
     select(theme: ThemeTree) {
         this.themeEditorService.selectThemeId(theme.id);
+        this.themeEditorService.theme = theme;
     }
 
     deleteTheme(){
@@ -41,6 +42,10 @@ export class ThemeTreeComponent
         this.router.navigate(['Creation-Form-Post']);
     }
 
+    openCreateThemeForm() {
+        this.openFormContentBox();
+        this.router.navigate(['Theme-Editor-Create']);
+    }
 
     openUpdateThemeForm(){
         this.openFormContentBox();
