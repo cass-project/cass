@@ -22,12 +22,7 @@ export class ThemeRESTService
     }
 
     public getThemeById(id: number) {
-        let params = new URLSearchParams();
-        params.set('themeId', id.toString());
-
-        return this.http.get('/backend/api/protected/host-admin/theme-editor/read/entity/{themeId}', {
-            search: params
-        });
+        return this.http.get('/backend/api/protected/host-admin/theme-editor/read/entity/' + id);
     }
 
     public createTheme(tittle: string, parentId: number){
@@ -39,14 +34,8 @@ export class ThemeRESTService
     }
 
     public updateTheme(id, title, parentId){
-        let headers = new Headers();
-        headers.append('Content-type', 'application/json');
-        let options = new RequestOptions({
-            headers: headers
-        });
-        console.log(parentId);
         if(parentId == undefined || null) parentId = 0;
-        this.http.post('/backend/api/protected/host-admin/theme-editor/entity/update/' + id, JSON.stringify({title: title, parent_id: parseInt(parentId)}), options).subscribe(
+        this.http.post('/backend/api/protected/host-admin/theme-editor/entity/update/' + id, JSON.stringify({title: title, parent_id: parseInt(parentId)})).subscribe(
             data => {console.log(data)},
             err => {console.log(err)});
     }

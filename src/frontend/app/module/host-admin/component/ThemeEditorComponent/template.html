@@ -9,11 +9,7 @@
         <router-outlet></router-outlet>
     </div>
     <footer>
-        <button (click)="openCreateThemeForm()" class="btn btn-success">Create</button>
-        <div *ngIf="themeEditorService.selectedThemeId">
-            <button (click)="openUpdateThemeForm()" class="btn btn-warning">Update</button>
-            <button (click)="deleteTheme()" class="btn btn-danger">Delete</button>
-        </div>
+        <button (click)="openCreateThemeForm()" class="btn btn-success">Create new Theme</button>
     </footer>
 </article>
 

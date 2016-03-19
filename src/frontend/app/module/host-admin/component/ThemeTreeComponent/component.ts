@@ -3,6 +3,8 @@ import {ThemeEditorService} from '../../service/ThemeEditorService';
 import {Component, Input} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 import {Theme} from "../../../theme/Theme";
+import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
+import {ThemeRESTService} from '../../../theme/service/ThemeRESTService';
 
 @Component({
     selector: 'theme-tree',
@@ -19,10 +21,43 @@ export class ThemeTreeComponent
 {
     @Input() public tree: ThemeTree[];
 
-    constructor(public themeEditorService: ThemeEditorService) {}
+    constructor(public themeEditorService: ThemeEditorService,
+                public themeRESTService: ThemeRESTService,
+                public router: Router
+    ) {}
 
     select(theme: ThemeTree) {
         this.themeEditorService.selectThemeId(theme.id);
+        this.themeEditorService.theme = theme;
+    }
+
+    deleteTheme(){
+        this.themeRESTService.deleteTheme(this.themeEditorService.selectedThemeId);
+        this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
+        this.router.navigate(['Theme-Cleaner']);
+    }
+
+    openCreatePostForm(){
+        this.openFormContentBox();
+        this.router.navigate(['Creation-Form-Post']);
+    }
+
+    openCreateThemeForm() {
+        this.openFormContentBox();
+        this.router.navigate(['Theme-Editor-Create']);
+    }
+
+    openUpdateThemeForm(){
+        this.openFormContentBox();
+        this.router.navigate(['Theme-Editor-Update']);
+    }
+
+    returnTheme(id){
+        this.themeRESTService.getThemeById(id);
+    }
+
+    openFormContentBox() {
+        this.themeEditorService.showFormContentBox = true;
     }
 
     isThemeSelected(theme: ThemeTree) {

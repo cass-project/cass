@@ -1,8 +1,16 @@
-li > div.selected {
-  color: white;
-  background-color: #000;
+li.selected {
+  background-color: #90d8fa;
+}
+
+li:hover {
+  background-color: #eeeeee;
 }
 
 li {
   list-style-type: none;
+}
+
+.list-group-item
+{
+  width: auto;
 }

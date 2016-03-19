@@ -21,6 +21,9 @@ WebpackConfigBuilder.prototype = {
       resolve: {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
       },
+      watchOptions: {
+        poll: true
+      },
       module: {
         loaders: [
           {

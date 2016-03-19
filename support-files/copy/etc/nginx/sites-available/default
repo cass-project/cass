@@ -24,7 +24,7 @@ server {
 
     location ~ "^/api-docs/.*$"
     {
-        rewrite ^/api-docs/(.*)$ /../../../swagger/swagger-ui/dist/$1 break;
+        rewrite ^/api-docs/(.*)$ /../../../opt/swagger/swagger-ui/dist/$1 break;
         index index.html;
     }
 

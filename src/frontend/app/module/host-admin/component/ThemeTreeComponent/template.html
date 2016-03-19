@@ -1,11 +1,16 @@
-<div>
-    <ul class="theme-tree">
-        <li class="list-group-item" *ngFor="#theme of tree">
-            <div [class.selected]="isThemeSelected(theme)">
-                <i *ngIf="hasChildren(theme)" (click)="toggle(tree)" class="fa" [ngClass]="{'fa-plus':!tree.show, 'fa-minus':tree.show}"></i>
-                <span (click)="select(theme)">{{theme.title}}</span>
+ <ul class="theme-tree">
+        <li #li [class.selected]="isThemeSelected(theme)" class="list-group-item" *ngFor="#theme of tree">
+            <i *ngIf="hasChildren(theme)" (click)="toggle(tree)" class="fa" [ngClass]="{'fa-plus':!tree.show, 'fa-minus':tree.show}"></i>
+            <span (click)="select(theme)">{{theme.title}}</span>
+            <div *ngIf="isThemeSelected(theme)">
+                <button (click)="openCreateThemeForm()" class="btn btn-success">Create Child Theme</button>
+                <button (click)="openUpdateThemeForm()" [disabled]="!themeEditorService.selectedThemeId" class="btn btn-warning">Update</button>
+                <button (click)="deleteTheme()" [disabled]="!themeEditorService.selectedThemeId" class="btn btn-danger">Delete</button>
+                <button (click)="openCreatePostForm()" [disabled]="!themeEditorService.selectedThemeId"class="btn btn-success">Create Post</button>
             </div>
             <theme-tree *ngIf="hasChildren(theme) && tree.show" [tree]="getChildren(theme)"></theme-tree>
         </li>
     </ul>
-</div>
+
+
+
