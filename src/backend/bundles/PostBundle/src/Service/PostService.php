@@ -11,5 +11,21 @@ namespace Post\Service;
 
 class PostService
 {
+	private $postRepository;
 
+	/**
+	 * @return mixed
+	 */
+	public function getPostRepository(){
+		return $this->postRepository;
+	}
+
+	/**
+	 * @param mixed $postRepository
+	 */
+	public function setPostRepository($postRepository){
+		$this->postRepository = $postRepository;
+	}
+	public function create(){}
+	public function update(){}
 }
