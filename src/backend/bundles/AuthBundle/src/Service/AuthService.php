@@ -1,6 +1,7 @@
 <?php
 namespace Auth\Service;
 
+use Auth\Middleware\AuthStrategy\SessionStrategy;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Auth\Service\AuthService\OAuth2\RegistrationRequest;
 use Auth\Service\AuthService\SignUpValidation\ArePasswordsMatching;
@@ -32,7 +33,15 @@ class AuthService
         $this->oauth2Config = $oauth2Config;
     }
 
-    public function signUp(Request $request) : Account
+    public function auth(Account $account): Account
+    {
+        setcookie('api_key', $account->getAPIKey(), time() + 60 /* sec */ * 60 /* min */ * 24 /* hours */ * 30 /* days */, '/');
+        $_SESSION[SessionStrategy::SESSION_API_KEY] = $account->getAPIKey();
+
+        return $account;
+    }
+
+    public function signUp(Request $request): Account
     {
         $request = json_decode($request->getBody(), true);
 
@@ -69,7 +78,7 @@ class AuthService
             throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $email));
         }
 
-        return $account;
+        return $this->auth($account);
     }
 
     public function signInOauth2(RegistrationRequest $registrationRequest)
@@ -80,7 +89,9 @@ class AuthService
             $oauthRepository->create($registrationRequest);
         }
 
-        return $oauthRepository->findAccount($registrationRequest->getProvider(), $registrationRequest->getProviderAccountId());
+        $oauth2Account = $oauthRepository->findOAuthAccount($registrationRequest->getProvider(), $registrationRequest->getProviderAccountId());
+
+        return $this->auth($oauth2Account->getAccount());
     }
 
     public function signOut()

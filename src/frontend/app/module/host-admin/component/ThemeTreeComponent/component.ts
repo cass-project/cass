@@ -21,6 +21,7 @@ export class ThemeTreeComponent
 {
     @Input() public tree: ThemeTree[];
 
+
     constructor(public themeEditorService: ThemeEditorService,
                 public themeRESTService: ThemeRESTService,
                 public router: Router
@@ -60,7 +61,7 @@ export class ThemeTreeComponent
         this.themeEditorService.showFormContentBox = true;
     }
 
-    isThemeSelected(theme: ThemeTree) {
+    isThemeSelected(theme: ThemeTree): boolean {
         return this.themeEditorService.selectedThemeId == theme.id;
     }
 
@@ -77,6 +78,8 @@ export class ThemeTreeComponent
     }
 
     public toggle(theme:Theme) {
+        console.log(theme);
         theme.show=!theme.show;
+
     }
 }
