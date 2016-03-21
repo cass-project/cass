@@ -101,10 +101,14 @@ sudo service mongodb restart
 sudo service php7.0-fpm restart
 sudo service nginx restart
 
-# ############
-# Update chmod
-# ############
+# ###############
+# Update vm-tools
+# ###############
 
 sudo chmod a+x /usr/bin/vm-server-update
 sudo chmod a+x /usr/bin/vm-project-update
 sudo chmod a+x /usr/bin/vm-init
+
+sudo sed -i 's/\r$//' /usr/bin/vm-init
+sudo sed -i 's/\r$//' /usr/bin/vm-project-update
+sudo sed -i 's/\r$//' /usr/bin/vm-server-update
