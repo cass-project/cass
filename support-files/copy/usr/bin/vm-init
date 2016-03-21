@@ -8,7 +8,7 @@ sudo locale-gen UTF-8
 # ###############
 sudo add-apt-repository ppa:ondrej/php -y
 sudo apt-get update
-sudo apt-get install -y php7.0 php7.0-fpm php7.0-mysql php7.0-curl git npm nginx nginx-extras
+sudo apt-get install -y php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl git npm nginx nginx-extras
 
 # ##########
 # UPDATE NPM
@@ -101,10 +101,14 @@ sudo service mongodb restart
 sudo service php7.0-fpm restart
 sudo service nginx restart
 
-# ############
-# Update chmod
-# ############
+# ###############
+# Update vm-tools
+# ###############
 
 sudo chmod a+x /usr/bin/vm-server-update
 sudo chmod a+x /usr/bin/vm-project-update
 sudo chmod a+x /usr/bin/vm-init
+
+sudo sed -i 's/\r$//' /usr/bin/vm-init
+sudo sed -i 's/\r$//' /usr/bin/vm-project-update
+sudo sed -i 's/\r$//' /usr/bin/vm-server-update
