@@ -19,20 +19,21 @@ class ThemeRepository extends EntityRepository
         return $this->findBy([]);
     }
 
-    public function getThemesAsTree(/** @var $themes Theme[] */array $themes, int $parentId = null): array
+    public function getThemesAsTree(/** @var $themes Theme[] */array $themes, int $parentId = null, $depth = 0): array
     {
         $tree = [];
 
         foreach($themes as $theme) {
             if($theme->getParentId() === $parentId) {
                 if($theme->hasChildren()) {
-                    $children = $this->getThemesAsTree($themes, $theme->getId());
+                    $children = $this->getThemesAsTree($themes, $theme->getId(), $depth + 1);
                 }else{
                     $children = [];
                 }
 
                 $tree[] = array_merge($theme->toJSON(), [
-                    'children' =>  $children
+                    'children' =>  $children,
+                    'depth' => $depth
                 ]);
             }
         }

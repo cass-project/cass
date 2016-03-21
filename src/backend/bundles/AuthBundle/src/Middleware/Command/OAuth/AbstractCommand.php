@@ -50,10 +50,8 @@ abstract class AbstractCommand extends Command
             try {
                 $account = $this->getAuthService()->signInOauth2($registrationRequest);
 
-                setcookie('api_key', $account->getAccount()->getAPIKey(), time() + 60 /* sec */ * 60 /* min */ * 24 /* hours */ * 30 /* days */, '/');
-
                 $responseBuilder->setStatusSuccess()->setJson([
-                    "api_key" => $account->getAccount()->getAPIKey()
+                    "api_key" => $account->getAPIKey()
                 ]);
 
                 header('Location: /');
