@@ -18,7 +18,7 @@
                             <!--</div>-->
                         <div *ngIf="showLinkInput">
                             <input class="form-control" [(ngModel)]="link" placeholder="Link URL">
-                            <div class="card" *ngIf="detectURL(link)">
+                            <div class="card" *ngIf="detectURL(link, text)">
                             <img class="card-img-top" data-src="imgLink" alt="Card image cap">
                             <div class="card-block">
                                 <p class="card-text">{{textLink}}</p>

@@ -23,9 +23,9 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
         public router: Router
     ){}
 
-    detectURL(link){
+    detectURL(link, text){
        var regExp = /^(?:([a-z]+):(?:([a-z]*):)?\/\/)?(?:([^:@]*)(?::([^:@]*))?@)?((?:[a-z0-9_-]+\.)+[a-z]{2,}|localhost|(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])\.){3}(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])))(?::(\d+))?(?:([^:\?\#]+))?(?:\?([^\#]+))?(?:\#([^\s]+))?$/i
-    return regExp.test(link)
+    return regExp.test(link) ||  regExp.test(text);
     }
 
     submit() {
