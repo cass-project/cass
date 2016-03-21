@@ -13,6 +13,8 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
  export class CreationFormPost{
     text: string;
     link:string;
+    imgLink: string;
+    textLink:string;
     showLinkInput: boolean = false;
 
     constructor(
@@ -20,6 +22,11 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
         private themeEditorService: ThemeEditorService,
         public router: Router
     ){}
+
+    detectURL(link){
+       var regExp = /^(?:([a-z]+):(?:([a-z]*):)?\/\/)?(?:([^:@]*)(?::([^:@]*))?@)?((?:[a-z0-9_-]+\.)+[a-z]{2,}|localhost|(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])\.){3}(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])))(?::(\d+))?(?:([^:\?\#]+))?(?:\?([^\#]+))?(?:\#([^\s]+))?$/i
+    return regExp.test(link)
+    }
 
     submit() {
        // this.themeRESTService //create post api request

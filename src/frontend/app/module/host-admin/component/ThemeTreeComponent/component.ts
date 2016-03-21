@@ -78,7 +78,6 @@ export class ThemeTreeComponent
     }
 
     public toggle(theme:Theme) {
-        console.log(theme);
         theme.show=!theme.show;
 
     }
