@@ -2,6 +2,7 @@
 namespace Auth\Service;
 
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
+use Auth\Service\AuthService\Exceptions\NoWakabaException;
 use Auth\Service\AuthService\OAuth2\RegistrationRequest;
 use Auth\Service\AuthService\SignUpValidation\ArePasswordsMatching;
 use Auth\Service\AuthService\SignUpValidation\HasAllRequiredFields;
@@ -67,6 +68,10 @@ class AuthService
 
         if(!$this->verifyPassword($account, $password)) {
             throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $email));
+        }
+
+        if($account->isAnonymous()) {
+            throw new NoWakabaException('You cant login with anonymous account');
         }
 
         return $account;
