@@ -21,6 +21,11 @@ export class ThemeRESTService
         return this.http.get('/backend/api/protected/host-admin/theme-editor/read/entities-tree/');
     }
 
+    public preViewLink(link: string){
+        var metadata;
+        return this.http.post('/backend/api/protected/post/link/parse/', JSON.stringify({url: link}));
+    }
+
     public getThemeById(id: number) {
         return this.http.get('/backend/api/protected/host-admin/theme-editor/read/entity/' + id);
     }

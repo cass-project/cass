@@ -16,6 +16,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
     imgLink: string;
     textLink:string;
     showLinkInput: boolean = false;
+    itsLink: boolean = false;
 
     constructor(
         private themeRESTService: ThemeRESTService,
@@ -25,14 +26,17 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 
     detectURL(link, text){
        var regExp = /^(?:([a-z]+):(?:([a-z]*):)?\/\/)?(?:([^:@]*)(?::([^:@]*))?@)?((?:[a-z0-9_-]+\.)+[a-z]{2,}|localhost|(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])\.){3}(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])))(?::(\d+))?(?:([^:\?\#]+))?(?:\?([^\#]+))?(?:\#([^\s]+))?$/i
-    return regExp.test(link) ||  regExp.test(text);
+        if(regExp.test(link) ||  regExp.test(text)){
+            this.itsLink = false;
+        }
+        return this.itsLink
     }
 
     submit() {
-       // this.themeRESTService //create post api request
-        // this.themeRESTService //update post info
-        this.themeEditorService.showFormContentBox = false;
-        this.router.parent.navigate(['Theme-Cleaner']);
+        //this.themeRESTService //create post api request
+        //this.themeRESTService //update post info
+        //this.themeEditorService.showFormContentBox = false;
+        //this.router.parent.navigate(['Theme-Cleaner']);
     }
     reset(){
         this.router.parent.navigate(['Theme-Cleaner']);
