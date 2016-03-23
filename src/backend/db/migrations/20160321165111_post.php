@@ -33,8 +33,8 @@ class Post extends AbstractMigration
              ])
              ->addColumn('name', 'string')
              ->addColumn('description', 'string')
-             ->addColumn('created', 'datetime')
-             ->addColumn('updated', 'datetime')
+             ->addColumn('created', 'datetime',['null' => true])
+             ->addColumn('updated', 'datetime',['null' => true])
              ->addColumn('status', 'string')
              ->addForeignKey('account_id', 'account', 'id', [
                'delete' => 'cascade',

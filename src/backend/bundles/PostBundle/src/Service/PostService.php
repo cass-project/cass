@@ -3,29 +3,40 @@
 namespace Post\Service;
 
 
+use Data\Entity\Post;
+use Data\Repository\Post\Parameters\CreatePostParameters;
+use Data\Repository\Post\PostRepository;
+
 class PostService
 {
 	private $postRepository;
 
+	public function __construct(PostRepository $postRepository)
+	{
+		$this->postRepository = $postRepository;
+	}
+
 	/**
-	 * @return mixed
+	 * @return PostRepository
 	 */
-	public function getPostRepository(){
+	public function getPostRepository():PostRepository{
 		return $this->postRepository;
 	}
 
 	/**
-	 * @param mixed $postRepository
+	 * @param PostRepository $postRepository
 	 */
-	public function setPostRepository($postRepository){
+	public function setPostRepository(PostRepository $postRepository){
 		$this->postRepository = $postRepository;
 	}
-	public function create(){}
+	public function create(CreatePostParameters $createPostParameters):Post
+	{
+		return $this->getPostRepository()->create($createPostParameters);
+	}
 	public function update(){}
 
 
 	public function getLinkOptions($link){
-		$link = 'https://www.youtube.com/watch?v=TLSqjngMEo8';
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $link);

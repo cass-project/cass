@@ -2,28 +2,28 @@
 /**
  * Created by PhpStorm.
  * User: CoffeeTurbo
- * Date: 22.03.2016
- * Time: 14:21
+ * Date: 23.03.2016
+ * Time: 16:05
  */
 
-namespace Post\Factory\Service;
+namespace Data\Factory\Repository;
 
 
+use Data\Entity\Post;
 use Data\Repository\Post\PostRepository;
+use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
-use Post\Service\PostService;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-class PostServiceFactory implements FactoryInterface
+class PostRepositoryFactory implements FactoryInterface
 {
 	public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL){
+		$entityManager = $container->get(EntityManager::class); /** @var EntityManager $entityManager */
 
-		$postRepository = $container->get(PostRepository::class);
-
-		return new PostService($postRepository);
+		return $entityManager->getRepository(Post::class);
 	}
 
 }

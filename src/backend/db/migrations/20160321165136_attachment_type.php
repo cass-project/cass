@@ -29,10 +29,6 @@ class AttachmentType extends AbstractMigration
     {
         $this->table('attachment_type')
              ->addColumn('name', 'string')
-             ->addForeignKey('type', 'attachment_type', 'id', [
-               'delete' => 'cascade',
-               'update' => 'cascade'
-             ])
              ->create()
         ;
     }

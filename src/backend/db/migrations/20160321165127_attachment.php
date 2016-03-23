@@ -36,10 +36,10 @@ class Attachment extends AbstractMigration
              ->addColumn('created', 'datetime')
              ->addColumn('updated', 'datetime')
              ->addColumn('status', 'string')
-             ->addForeignKey('type', 'attachment_type', 'id', [
+             /*->addForeignKey('type', 'attachment_type', 'id', [
                'delete' => 'cascade',
                'update' => 'cascade'
-             ])
+             ])*/
              ->create()
         ;
     }

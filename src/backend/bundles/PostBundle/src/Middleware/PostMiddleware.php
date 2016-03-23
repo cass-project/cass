@@ -34,9 +34,8 @@ class PostMiddleware implements MiddlewareInterface
 
 				$data = json_decode($request->getBody(), true);
 
-				/*print_r($data);
-				die();*/
-					$opts = $this->postService->getLinkOptions($data['url']);
+
+				$opts = $this->postService->getLinkOptions($data['url']);
 
 				return $responseBuilder
 					->setStatusSuccess()
