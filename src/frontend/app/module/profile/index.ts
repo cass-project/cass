@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
+import {AuthService} from '../auth/service/AuthService';
 import {ProfileChannelComponent} from './component/ProfileChannelComponent/index';
 import {ProfilePersonalDataComponent} from './component/ProfilePersonalDataComponent/index';
 
@@ -28,4 +29,9 @@ import {ProfilePersonalDataComponent} from './component/ProfilePersonalDataCompo
 ])
 export class ProfileComponent
 {
+    constructor(private router: Router, private auth: AuthService) {
+        if(!this.auth.signedIn) {
+            router.navigate(['Auth']);
+        }
+    }
 }

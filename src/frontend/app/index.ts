@@ -18,6 +18,7 @@ import {Cookie} from 'ng2-cookies';
 
 import {MainMenu} from './module/main/component/MainMenu/index'
 import {AuthService} from './module/auth/service/AuthService';
+import {HeaderNavComponent} from './module/main/component/HeaderNavComponent/index';
 
 import {AuthComponent} from './module/auth/index';
 import {ProfileComponent} from './module/profile/index';
@@ -29,7 +30,8 @@ import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorCom
     template: require('./template.html'),
     directives: [
         ROUTER_DIRECTIVES,
-        MainMenu
+        MainMenu,
+        HeaderNavComponent
     ],
     providers: [
         AuthService
