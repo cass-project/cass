@@ -18,6 +18,12 @@
                             <!--</div>-->
                         <div *ngIf="showLinkInput">
                             <input class="form-control" [(ngModel)]="link" placeholder="Link URL">
+                            <div class="card" *ngIf="detectURL(link, text)">
+                            <img class="card-img-top" data-src="imgLink" alt="Card image cap">
+                            <div class="card-block">
+                                <p class="card-text">{{textLink}}</p>
+                            </div>
+                        </div>
                             <label class="file">
                                 <input type="file">
                                 <span class="file-custom"></span>
@@ -26,7 +32,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" value="Submit" class="btn btn-primary"/>
+                    <input type="submit" value="Submit" class="btn btn-primary" (click)="submit()"/>
                     <input type="button" value="Reset" class="btn btn-secondary" (click)="reset()"/>
                 </div>
             </div>

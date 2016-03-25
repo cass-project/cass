@@ -24,7 +24,7 @@ abstract class Command
 
     public static function factory(ServerRequestInterface $request): Command
     {
-        $command = $request->getAttribute('command');
+            $command = $request->getAttribute('command');
 
         switch ($command) {
             default:

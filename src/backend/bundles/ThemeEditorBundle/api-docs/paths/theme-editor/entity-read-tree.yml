@@ -3,13 +3,7 @@
     tags:
       - theme-editor
     description: |
-      Список тематик в виде дерава
-    parameters:
-      - name: themeId
-        in: path
-        required: true
-        type: number
-        description: ID тематики
+      Список тематик в виде дерева
     responses:
       '400':
           $ref: '#/responses/error'
