@@ -1,7 +1,6 @@
 <?php
 namespace Auth\Service;
 
-use Auth\Middleware\AuthStrategy\Strategy;
 use Data\Entity\Account;
 use Data\Exception\Auth\AccountNotFoundException;
 use Data\Repository\AccountRepository;
@@ -9,6 +8,8 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class CurrentProfileService
 {
+    const HEADER_API_KEY = 'X-Api-Key';
+
     /** @var AccountRepository */
     private $accountRepository;
 
@@ -24,24 +25,30 @@ class CurrentProfileService
         return $this->account;
     }
 
-    /**
-     * @param Strategy[] $strategies
-     * @throws NotAuthenticatedException
-     */
-    public function attempt(array $strategies)
-    {
-        foreach($strategies as $strategy) {
-            if($strategy->isAPIKeyAvailable()) {
-                try {
-                    $this->account = $this->accountRepository->findByAPIKey($strategy->getAPIKey());
+    public function setupAccountFromJSONBody(ServerRequestInterface $request) {
+        $jsonBody = json_encode($request->getBody(), true);
 
-                    return;
-                }catch(AccountNotFoundException $e) {
-                    throw new NotAuthenticatedException(sprintf('Invalid API Key with used strategy `%s`', get_class($strategy)));
-                }
-            }
+        if(!isset($jsonBody['api_key'])) {
+            throw new NotAuthenticatedException('API Key is not available');
         }
 
-        throw new NotAuthenticatedException('No API Key available');
+        try {
+            $this->account = $this->accountRepository->findByAPIKey($jsonBody['api_key']);
+        }catch(AccountNotFoundException $e) {
+            throw new NotAuthenticatedException('Invalid API Key');
+        }
+    }
+
+    public function setupAccountFromHeader(ServerRequestInterface $request)
+    {
+        if(!$request->hasHeader(self::HEADER_API_KEY)) {
+            throw new NotAuthenticatedException('API Key is not available');
+        }
+
+        try {
+            $this->account = $this->accountRepository->findByAPIKey($request->getHeader(self::HEADER_API_KEY)[0]);
+        }catch(AccountNotFoundException $e) {
+            throw new NotAuthenticatedException('Invalid API Key');
+        }
     }
 }

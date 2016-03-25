@@ -2,9 +2,6 @@
 namespace Auth\Middleware;
 
 use Application\REST\GenericRESTResponseBuilder;
-use Auth\Middleware\AuthStrategy\HeaderStrategy;
-use Auth\Middleware\AuthStrategy\JSONBodyStrategy;
-use Auth\Middleware\AuthStrategy\SessionStrategy;
 use Auth\Service\CurrentProfileService;
 use Auth\Service\NotAuthenticatedException;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -27,15 +24,14 @@ class ProtectedMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $isURLProtected = strpos($request->getUri()->getPath(), "{$this->prefix}/protected/") === 0;
+        $isURLProtectedByHeader = strpos($request->getUri()->getPath(), "{$this->prefix}/protected/") === 0;
+        $isURLProtectedByJSONBody = strpos($request->getUri()->getPath(), "{$this->prefix}/protected-body/") === 0;
 
         try {
-            if($isURLProtected) {
-                $this->currentProfileService->attempt([
-                    new HeaderStrategy($request),
-                    new JSONBodyStrategy($request),
-                    new SessionStrategy($request)
-                ]);
+            if($isURLProtectedByHeader) {
+                $this->currentProfileService->setupAccountFromHeader($request);
+            }else if($isURLProtectedByJSONBody) {
+                $this->currentProfileService->setupAccountFromJSONBody($request);
             }
 
             return $out($request, $response);
