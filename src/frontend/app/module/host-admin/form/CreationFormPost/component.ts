@@ -25,11 +25,15 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
     ){}
 
     detectURL(link, text){
-       var regExp = /^(?:([a-z]+):(?:([a-z]*):)?\/\/)?(?:([^:@]*)(?::([^:@]*))?@)?((?:[a-z0-9_-]+\.)+[a-z]{2,}|localhost|(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])\.){3}(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])))(?::(\d+))?(?:([^:\?\#]+))?(?:\?([^\#]+))?(?:\#([^\s]+))?$/i
-        if(regExp.test(link) ||  regExp.test(text)){
-            this.itsLink = false;
+       var regExp = /^(?:([a-z]+):(?:([a-z]*):)?\/\/)?(?:([^:@]*)(?::([^:@]*))?@)?((?:[a-z0-9_-]+\.)+[a-z]{2,}|localhost|(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])\.){3}(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])))(?::(\d+))?(?:([^:\?\#]+))?(?:\?([^\#]+))?(?:\#([^\s]+))?$/g;
+        if(regExp.test(link)){
+            this.imgLink = link;
+            return true;
         }
-        return this.itsLink
+        if(regExp.test(text)){
+            this.imgLink = text.match(regExp);
+            return true;
+        }
     }
 
     submit() {
