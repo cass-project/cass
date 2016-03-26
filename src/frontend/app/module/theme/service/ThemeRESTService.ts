@@ -22,7 +22,7 @@ export class ThemeRESTService
     }
 
     public preViewLink(link: string){
-        var metadata;
+        let metadata;
         return this.http.post('/backend/api/protected/post/link/parse/', JSON.stringify({url: link}));
     }
 
