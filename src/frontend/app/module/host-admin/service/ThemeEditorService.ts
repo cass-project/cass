@@ -6,19 +6,19 @@ import {ThemeTree} from "../../theme/Theme";
 @Injectable()
 export class ThemeEditorService
 {
-    theme;
     themes: Theme[];
     showFormContentBox: boolean = false;
     themesTree: ThemeTree[];
     selectedThemeId: number;
-    createFirstParent: boolean = false;
 
     constructor(public themeRESTService: ThemeRESTService) {
+        console.log('wtf');
     }
 
     public selectThemeId(themeId: number) {
         this.selectedThemeId = themeId;
         console.log(this.selectedThemeId);
+        console.log(this.themes, this.themesTree);
     }
 
     public clear() {

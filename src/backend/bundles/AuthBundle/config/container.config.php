@@ -2,6 +2,8 @@
 namespace Auth;
 
 use Auth\Factory\Middleware\ProtectedMiddlewareFactory;
+use Auth\Service\Anonymous;
+use Auth\Factory\Service\AnonymousFactory;
 use Auth\Factory\Service\CurrentProfileServiceFactory;
 use Auth\Middleware\AuthMiddleware;
 use Auth\Factory\Middleware\AuthMiddlewareFactory;
@@ -16,7 +18,8 @@ return [
             AuthService::class => AuthServiceFactory::class,
             AuthMiddleware::class => AuthMiddlewareFactory::class,
             ProtectedMiddleware::class => ProtectedMiddlewareFactory::class,
-            CurrentProfileService::class => CurrentProfileServiceFactory::class
+            CurrentProfileService::class => CurrentProfileServiceFactory::class,
+            Anonymous::class => AnonymousFactory::class,
         ]
     ]
 ];

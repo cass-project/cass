@@ -1,8 +1,8 @@
 <?php
 namespace Auth\Service;
 
-use Auth\Middleware\AuthStrategy\SessionStrategy;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
+use Auth\Service\AuthService\Exceptions\NoWakabaException;
 use Auth\Service\AuthService\OAuth2\RegistrationRequest;
 use Auth\Service\AuthService\SignUpValidation\ArePasswordsMatching;
 use Auth\Service\AuthService\SignUpValidation\HasAllRequiredFields;
@@ -33,15 +33,7 @@ class AuthService
         $this->oauth2Config = $oauth2Config;
     }
 
-    public function auth(Account $account): Account
-    {
-        setcookie('api_key', $account->getAPIKey(), time() + 60 /* sec */ * 60 /* min */ * 24 /* hours */ * 30 /* days */, '/');
-        $_SESSION[SessionStrategy::SESSION_API_KEY] = $account->getAPIKey();
-
-        return $account;
-    }
-
-    public function signUp(Request $request): Account
+    public function signUp(Request $request) : Account
     {
         $request = json_decode($request->getBody(), true);
 
@@ -78,7 +70,11 @@ class AuthService
             throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $email));
         }
 
-        return $this->auth($account);
+        if($account->isAnonymous()) {
+            throw new NoWakabaException('You cant login with anonymous account');
+        }
+
+        return $account;
     }
 
     public function signInOauth2(RegistrationRequest $registrationRequest)
@@ -89,9 +85,7 @@ class AuthService
             $oauthRepository->create($registrationRequest);
         }
 
-        $oauth2Account = $oauthRepository->findOAuthAccount($registrationRequest->getProvider(), $registrationRequest->getProviderAccountId());
-
-        return $this->auth($oauth2Account->getAccount());
+        return $oauthRepository->findAccount($registrationRequest->getProvider(), $registrationRequest->getProviderAccountId());
     }
 
     public function signOut()

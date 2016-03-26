@@ -20,10 +20,6 @@ export class CreateThemeForm
         public router: Router
     ){}
     submit() {
-        if(this.themeEditorService.createFirstParent){
-            this.themeEditorService.clear()
-            this.themeEditorService.createFirstParent = false;
-        }
         this.themeRESTService.createTheme(this.title, this.themeEditorService.selectedThemeId);
         this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
         this.themeEditorService.showFormContentBox = false;

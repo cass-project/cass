@@ -94,7 +94,7 @@ abstract class RESTResponseBuilder
             }else if($this->error === null){
                 $errorMessage = 'No error message available';
             }else{
-                $errorMessage = (string) $this->error;
+                $errorMessage = var_export($this->error, true);
             }
 
             $json['error'] = $errorMessage;

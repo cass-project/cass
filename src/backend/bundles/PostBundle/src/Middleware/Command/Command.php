@@ -10,37 +10,17 @@ namespace Post\Middleware\Command;
 
 
 use Application\REST\Exceptions\UnknownActionException;
-use Post\Service\PostService;
 use Psr\Http\Message\ServerRequestInterface;
 
-abstract class Command
+class Command
 {
-
-	private $postService;
-
-	/**
-	 * @return PostService
-	 */
-	public function getPostService():PostService{
-		return $this->postService;
-	}
-
-	/**
-	 * @param PostService $postService
-	 */
-	public function setPostService(PostService $postService){
-		$this->postService = $postService;
-	}
-
-	abstract public function run(ServerRequestInterface $request);
-
-	static public function factory(ServerRequestInterface $request):Command
+	static public function factory(ServerRequestInterface $request)
 	{
 		$action = $request->getAttribute('command');
 
 		switch ($action) {
 			case 'create':
-				return new CreatePostCommand();
+				return new CreateCommand();
 			break;
 			case 'read':
 				return new ReadCommand();
