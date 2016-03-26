@@ -41,4 +41,3 @@ Front-end
 ---------
 
 - Check tab-index
-- ParseInt без основания

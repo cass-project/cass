@@ -16,21 +16,18 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
 import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, URLSearchParams} from 'angular2/http';
 import {Cookie} from 'ng2-cookies';
 
-import {MainMenu} from './module/main/component/MainMenu/index'
 import {AuthService} from './module/auth/service/AuthService';
-import {HeaderNavComponent} from './module/main/component/HeaderNavComponent/index';
 
+import {WelcomeComponent} from './module/welcome/index';
 import {AuthComponent} from './module/auth/index';
-import {ProfileComponent} from './module/profile/index';
-import {CatalogComponent} from './module/catalog/index';
 import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorComponent/component';
+import {HeaderNavComponent} from './module/main/component/HeaderNavComponent/component';
 
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),
     directives: [
         ROUTER_DIRECTIVES,
-        MainMenu,
         HeaderNavComponent
     ],
     providers: [
@@ -39,20 +36,15 @@ import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorCom
 })
 @RouteConfig([
     {
-        path: '/auth/...',
-        name: 'Auth',
-        component: AuthComponent
-    },
-    {
-        path: '/profile/...',
-        name: 'Profile',
-        component: ProfileComponent,
+        path: '/welcome',
+        name: 'Welcome',
+        component: WelcomeComponent,
         useAsDefault: true
     },
     {
-        path: '/catalog/',
-        name: 'Catalog',
-        component: CatalogComponent
+        path: '/auth/...',
+        name: 'Auth',
+        component: AuthComponent
     },
     {
         path: '/theme-editor/...',

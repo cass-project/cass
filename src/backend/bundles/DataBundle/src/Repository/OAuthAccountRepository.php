@@ -42,7 +42,7 @@ class OAuthAccountRepository extends EntityRepository
         $em->flush($oauthAccount);
     }
 
-    public function findAccount($provider, $providerAccountId): OAuthAccount
+    public function findOAuthAccount($provider, $providerAccountId): OAuthAccount
     {
         $result = $this->findOneBy([
             'provider' => $provider,

@@ -1,13 +1,5 @@
 <?php
-/**
- * User: юзер
- * Date: 18.03.2016
- * Time: 15:02
- * To change this template use File | Settings | File Templates.
- */
-
 namespace Post\Factory\Middleware;
-
 
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;

@@ -1,0 +1,15 @@
+PUT_Post_Request:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        description: Название поста
+      description:
+        type: string
+        description: описание поста
+      position:
+        type: string
+        description: Статус поста
+        default: 1

@@ -8,18 +8,20 @@
   "license": "ISC",
   "dependencies": {
     "angular-new-router": "github:angular/router",
-    "angular2": "2.0.0-beta.12",
+    "angular2": "2.0.0-beta.8",
     "bootstrap": "^4.0.0-alpha.2",
     "css-loader": "0.23.1",
-    "es6-shim": "^0.35.0",
+    "es6-promise": "3.0.2",
+    "es6-shim": "0.33.3",
     "file-loader": "^0.8.5",
     "font-awesome": "^4.5.0",
     "font-awesome-webpack": "0.0.4",
+    "ng2-bootstrap": "^1.0.5",
     "ng2-cookies": "^0.1.4",
     "node-sass": "^3.4.2",
     "raw-loader": "0.5.1",
     "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.2",
+    "rxjs": "^5.0.0-beta.2",
     "sass-loader": "^3.1.2",
     "style-loader": "0.13.0",
     "ts-loader": "0.7.2",
@@ -27,6 +29,6 @@
     "typings": "^0.6.8",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.11",
-    "zone.js": "^0.6.6"
+    "zone.js": "^0.5.15"
   }
 }

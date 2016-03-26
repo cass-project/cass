@@ -1,4 +1,4 @@
- #!/usr/bin/env bash
+#!/usr/bin/env bash
 sudo cp -R /support-files/copy/* /
 
 sudo sed -i 's/\r$//' /usr/bin/vm-init

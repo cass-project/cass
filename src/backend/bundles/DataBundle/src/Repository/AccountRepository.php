@@ -39,13 +39,6 @@ class AccountRepository extends EntityRepository
         $this->getEntityManager()->flush($account);
     }
 
-    public function findAnonymous(): Account
-    {
-        return $this->findOneBy([
-            'is_anonymous' => true
-        ]);
-    }
-
     public function findByAPIKey(string $apiKey)
     {
         $account = $this->findOneBy([
