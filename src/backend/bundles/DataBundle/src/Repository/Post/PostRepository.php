@@ -26,16 +26,16 @@ class PostRepository extends EntityRepository
 	public function update(UpdatePostParameters $updatePostParameters):Post
 	{
 
+		$postEntity = $this->getPostEntity($updatePostParameters->getId()->value());
 
-
-
-		/*print_r($updatePostParameters->getId());
-		die();*/
-		$postEntity = $this->getPostEntity();
 		$this->setupEntity($postEntity, $updatePostParameters);
 		$em = $this->getEntityManager();
 		$em->persist($postEntity);
 		$em->flush();
+
+		print_r($postEntity);
+		die();
+
 		return $postEntity;
 	}
 
@@ -51,12 +51,13 @@ class PostRepository extends EntityRepository
 
 	public function getPostEntity(int $id):Post
 	{
+
 		return $this->createQueryBuilder('p')
 								->select('p')
 								->where('p.id = :id')
 								->setParameter('id', $id)
 								->getQuery()
-								->getResult();
+								->getSingleResult();
 	}
 
 	public function getPosts():array

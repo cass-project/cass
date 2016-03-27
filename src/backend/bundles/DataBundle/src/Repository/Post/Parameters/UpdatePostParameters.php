@@ -17,8 +17,8 @@ class UpdatePostParameters implements SavePostProperties
 	private $description;
 	private $status;
 
-	public function __construct(Param $name, Param $description, Param $status){
-//		$this->id = $id;
+	public function __construct(Param $name, Param $description, Param $status,Param $id){
+		$this->id = $id;
 		$this->name = $name;
 		$this->description = $description;
 		$this->status = $status;
