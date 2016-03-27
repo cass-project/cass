@@ -5,6 +5,7 @@ namespace Post\Service;
 
 use Data\Entity\Post;
 use Data\Repository\Post\Parameters\CreatePostParameters;
+use Data\Repository\Post\Parameters\UpdatePostParameters;
 use Data\Repository\Post\PostRepository;
 
 class PostService
@@ -29,11 +30,16 @@ class PostService
 	public function setPostRepository(PostRepository $postRepository){
 		$this->postRepository = $postRepository;
 	}
+
 	public function create(CreatePostParameters $createPostParameters):Post
 	{
 		return $this->getPostRepository()->create($createPostParameters);
 	}
-	public function update(){}
+
+	public function update(UpdatePostParameters $updatePostParameters):Post
+	{
+		return $this->getPostRepository()->update($updatePostParameters);
+	}
 
 
 	public function getLinkOptions($link){

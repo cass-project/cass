@@ -182,7 +182,8 @@ class Post
 			'id'          => $this->getId(),
 			'name'        => $this->getName(),
 			'description' => $this->getDescription(),
-			'status'      => $this->getStatus()
+			'status'      => $this->getStatus(),
+			'account_id'	=> $this->getAccountId()
 		];
 	}
 

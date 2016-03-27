@@ -17,7 +17,8 @@ use Post\PostBundle;
 
 class PutPostRequest extends SchemaParams
 {
-	public function getParameters(){
+	public function getParameters():CreatePostParameters
+	{
 		$data = $this->getData();
 
 		$name = new Param($data, 'name', true);
@@ -27,7 +28,8 @@ class PutPostRequest extends SchemaParams
 		return new CreatePostParameters($name, $description, $status);
 	}
 
-	protected function getSchema(): JSONSchema{
+	protected function getSchema(): JSONSchema
+	{
 		return self::getSchemaService()->getSchema(PostBundle::class, './definitions/request/PUTPostRequest.yml');
 	}
 

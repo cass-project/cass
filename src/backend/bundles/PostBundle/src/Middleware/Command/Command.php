@@ -1,11 +1,4 @@
 <?php
-/**
- * User: юзер
- * Date: 18.03.2016
- * Time: 15:19
- * To change this template use File | Settings | File Templates.
- */
-
 namespace Post\Middleware\Command;
 
 
@@ -59,10 +52,10 @@ abstract class Command
 				return new CreatePostCommand();
 			break;
 			case 'read':
-				return new ReadCommand();
+				return new ReadPostCommand();
 			break;
 			case 'update':
-				return new UpdateCommand();
+				return new UpdatePostCommand();
 			break;
 			case 'delete':
 				return new DeleteCommand();

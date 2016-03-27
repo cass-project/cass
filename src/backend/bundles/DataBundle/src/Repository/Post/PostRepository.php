@@ -4,8 +4,10 @@ namespace Data\Repository\Post;
 
 use Data\Entity\Post;
 use Data\Repository\Post\Parameters\CreatePostParameters;
+use Data\Repository\Post\Parameters\UpdatePostParameters;
 use Data\Repository\Post\SavePostProperties;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 class PostRepository extends EntityRepository
 {
@@ -20,6 +22,51 @@ class PostRepository extends EntityRepository
 
 		return $postEntity;
 	}
+
+	public function update(UpdatePostParameters $updatePostParameters):Post
+	{
+
+
+
+
+		/*print_r($updatePostParameters->getId());
+		die();*/
+		$postEntity = $this->getPostEntity();
+		$this->setupEntity($postEntity, $updatePostParameters);
+		$em = $this->getEntityManager();
+		$em->persist($postEntity);
+		$em->flush();
+		return $postEntity;
+	}
+
+	public function getPost(int $id):array
+	{
+		return $this->createQueryBuilder('p')
+								->select('p')
+								->where('p.id = :id')
+								->setParameter('id', $id)
+								->getQuery()
+								->getResult(Query::HYDRATE_ARRAY);
+	}
+
+	public function getPostEntity(int $id):Post
+	{
+		return $this->createQueryBuilder('p')
+								->select('p')
+								->where('p.id = :id')
+								->setParameter('id', $id)
+								->getQuery()
+								->getResult();
+	}
+
+	public function getPosts():array
+	{
+		return $this->createQueryBuilder('p')
+								->select('p')
+								->getQuery()
+								->getResult(Query::HYDRATE_ARRAY);
+	}
+
 
 
 	private function setupEntity(Post $postEntity, SavePostProperties $savePostProperties)
