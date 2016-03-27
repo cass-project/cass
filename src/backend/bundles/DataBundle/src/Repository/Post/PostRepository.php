@@ -34,8 +34,10 @@ class PostRepository extends EntityRepository
 			$postEntity->setStatus($value);
 		});
 
+		$savePostProperties->getAccountId()->on(function($value)use($postEntity){
+			$postEntity->setAccountId($value);
+		});
 
-//		$date = (new \DateTime())->format("Y-m-d");
 		$date = (new \DateTime());
 
 		$postEntity->setCreated($date);

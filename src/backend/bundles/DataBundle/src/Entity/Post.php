@@ -17,6 +17,15 @@ class Post
 	private $id;
 
 	private $account;
+
+
+
+	/**
+	 * @account_id
+	 * @Column(type="integer")
+	 * @var int
+	 */
+	private $account_id;
 	private $attachment;
 	/**
 	 * @Column(type="string")
@@ -67,6 +76,20 @@ class Post
 	 */
 	public function setAccount($account){
 		$this->account = $account;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getAccountId(){
+		return $this->account_id;
+	}
+
+	/**
+	 * @param mixed $account_id
+	 */
+	public function setAccountId($account_id){
+		$this->account_id = $account_id;
 	}
 
 	/**

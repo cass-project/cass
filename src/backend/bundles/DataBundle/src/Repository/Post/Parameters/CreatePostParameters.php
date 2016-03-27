@@ -9,6 +9,7 @@ class CreatePostParameters implements SavePostProperties
 	private $name;
 	private $description;
 	private $status;
+	private $accountId;
 
 
 
@@ -28,5 +29,14 @@ class CreatePostParameters implements SavePostProperties
 
 	public function getStatus():Param{
 		return $this->status;
+	}
+
+	public function getAccountId():Param{
+		return $this->accountId;
+	}
+
+	public function setAccountId(Param $id){
+		$this->accountId = $id;
+		return $this;
 	}
 }

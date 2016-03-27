@@ -2,6 +2,7 @@
 namespace Post\Middleware;
 
 use Application\REST\GenericRESTResponseBuilder;
+use Auth\Service\CurrentProfileService;
 use Post\Middleware\Command\Command;
 use Post\Service\PostService;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -12,8 +13,11 @@ class PostCRUDMiddleware implements MiddlewareInterface
 {
 
 	private $postSevice;
-	public function __construct(PostService $postService){
+	private $currentProfileService;
+
+	public function __construct(PostService $postService, CurrentProfileService $currentProfileService ){
 		$this->postSevice = $postService;
+		$this->currentProfileService = $currentProfileService;
 	}
 
 
@@ -23,7 +27,7 @@ class PostCRUDMiddleware implements MiddlewareInterface
 
 		$command = Command::factory($request);
 		$command->setPostService($this->postSevice);
-
+		$command->setCurrentProfileService($this->currentProfileService);
 
 		$responseBuilder
 			->setStatusSuccess()
