@@ -24,10 +24,11 @@
                         </label>
                         </div>
                         <br>
-                        <div class="card" *ngIf="detectURL(link, text)">
-                            <img class="card-img-top img-fluid" src="{{imgLink}}" alt="Card image cap">
-                            <div class="card-block">
-                                <p class="card-text">{{textLink}}</p>
+                        <div class="thumbnail" *ngIf="detectURL(link, text)">
+                            <img class="img-fluid" src="{{linkImg}}" alt="image cap">
+                            <div class="caption">
+                                <h3>{{linkLabel}}</h3>
+                                <p>{{linkText}}</p>
                             </div>
                         </div>
                     </div>
