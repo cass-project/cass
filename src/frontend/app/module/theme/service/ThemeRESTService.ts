@@ -36,10 +36,8 @@ export class ThemeRESTService
     }
 
     public updateTheme(id, title, parentId){
-        if(parentId == undefined || null) parentId = 0;
-        this.http.post('/backend/api/protected/host-admin/theme-editor/entity/update/' + id, JSON.stringify({title: title, parent_id: parseInt(parentId)})).subscribe(
-            data => {console.log(data)},
-            err => {console.log(err)});
+        if(!parentId) parentId = 0;
+        return this.http.post('/backend/api/protected/host-admin/theme-editor/entity/update/' + id, JSON.stringify({title: title, parent_id: parseInt(parentId)}));
     }
 
     public deleteTheme(id) {
