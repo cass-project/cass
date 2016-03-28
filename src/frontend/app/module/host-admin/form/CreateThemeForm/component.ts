@@ -21,13 +21,16 @@ export class CreateThemeForm
     ){}
     submit() {
         if(this.themeEditorService.createFirstParent){
-            this.themeEditorService.clear()
+            this.themeEditorService.clear();
             this.themeEditorService.createFirstParent = false;
         }
-        this.themeRESTService.createTheme(this.title, this.themeEditorService.selectedThemeId);
-        this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
-        this.themeEditorService.showFormContentBox = false;
-        this.router.parent.navigate(['Theme-Cleaner']);
+        this.themeRESTService.createTheme(this.title, this.themeEditorService.selectedThemeId).subscribe(
+            data => {
+                this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
+                this.themeEditorService.showFormContentBox = false;
+                this.router.parent.navigate(['Theme-Cleaner']);
+            },
+            err => {console.log(err)});
     }
     close(){
         this.themeEditorService.showFormContentBox = false;

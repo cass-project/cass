@@ -32,10 +32,7 @@ export class ThemeRESTService
 
     public createTheme(tittle: string, parentId: number){
         if(!parentId) parentId = 0;
-        return this.http.put('/backend/api/protected/host-admin/theme-editor/entity/create', JSON.stringify({title: tittle, parent_id: parentId})).subscribe(
-            data => {console.log(data)},
-            err => {console.log(err)}
-        );
+        return this.http.put('/backend/api/protected/host-admin/theme-editor/entity/create', JSON.stringify({title: tittle, parent_id: parentId}));
     }
 
     public updateTheme(id, title, parentId){
