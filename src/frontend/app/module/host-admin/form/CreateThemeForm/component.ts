@@ -26,9 +26,7 @@ export class CreateThemeForm
         }
         this.themeRESTService.createTheme(this.title, this.themeEditorService.selectedThemeId).subscribe(
             data => {
-                this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
-                this.themeEditorService.showFormContentBox = false;
-                this.router.parent.navigate(['Theme-Cleaner']);
+                this.themeEditorService.updateInfoOnPage();
             },
             err => {console.log(err)});
     }

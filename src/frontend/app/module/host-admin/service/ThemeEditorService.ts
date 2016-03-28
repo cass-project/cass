@@ -2,6 +2,7 @@ import {Injectable} from 'angular2/core';
 import {Theme} from "../../theme/Theme";
 import {ThemeRESTService} from "../../theme/service/ThemeRESTService";
 import {ThemeTree} from "../../theme/Theme";
+import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 
 @Injectable()
 export class ThemeEditorService
@@ -13,7 +14,8 @@ export class ThemeEditorService
     selectedThemeId: number;
     createFirstParent: boolean = false;
 
-    constructor(public themeRESTService: ThemeRESTService) {
+    constructor(public themeRESTService: ThemeRESTService,
+                public router: Router) {
     }
 
     public selectThemeId(themeId: number) {
@@ -23,5 +25,12 @@ export class ThemeEditorService
 
     public clear() {
         this.selectedThemeId = undefined;
+    }
+
+    public updateInfoOnPage(){
+        this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themesTree = data['entities']);
+        this.themeRESTService.getThemes().map(res => res.json()).subscribe(data => this.themes = data['entities']);
+        this.showFormContentBox = false;
+        this.router.parent.navigate(['Theme-Cleaner']);
     }
 }

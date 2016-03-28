@@ -26,13 +26,10 @@ export class UpdateThemeForm
         }
         this.themeRESTService.updateTheme(this.themeEditorService.selectedThemeId, this.title, this.parent).subscribe(
             data => {
-                this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themeEditorService.themesTree = data['entities']);
-                this.themeRESTService.getThemes().map(res => res.json()).subscribe(data => this.themeEditorService.themes = data['entities']);
-                this.themeEditorService.showFormContentBox = false;
-                this.router.parent.navigate(['Theme-Cleaner']);
+                this.themeEditorService.updateInfoOnPage();
             },
             err => {
-                console.log(err)
+                console.log(err);
             }
         );
     }
