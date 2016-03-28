@@ -12,9 +12,10 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 
  export class CreationFormPost{
     text: string;
-    link:string;
-    imgLink: string;
-    textLink:string;
+    link: string;
+    linkImg: string;
+    linkLabel: string;
+    linkText: string;
     showLinkInput: boolean = false;
     itsLink: boolean = false;
 
@@ -27,11 +28,14 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
     detectURL(link, text){
        let detectURLregExp = /^(?:([a-z]+):(?:([a-z]*):)?\/\/)?(?:([^:@]*)(?::([^:@]*))?@)?((?:[a-z0-9_-]+\.)+[a-z]{2,}|localhost|(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])\.){3}(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])))(?::(\d+))?(?:([^:\?\#]+))?(?:\?([^\#]+))?(?:\#([^\s]+))?$/g;
         if(detectURLregExp.test(link)){
-            this.imgLink = link;
+            //Test block
+            this.linkImg = link;
+            this.linkLabel = "Thumbnail label";
+            this.linkText = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.";
             return true;
         }
         if(detectURLregExp.test(text)){
-            this.imgLink = text.match(detectURLregExp);
+            this.linkImg = text.match(detectURLregExp);
             return true;
         }
     }
