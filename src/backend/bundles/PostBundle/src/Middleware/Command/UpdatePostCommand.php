@@ -10,14 +10,15 @@ class UpdatePostCommand extends Command
 {
 	public function run(ServerRequestInterface $request){
 
-
 		$postService = $this->getPostService();
 
 		$postEntity = $postService->update(
 			(new UpdatePostRequest($request))->getParameters()
 		);
 
-		return $postEntity;
+
+
+		return $postEntity->toJSON();
 	}
 
 }

@@ -9,7 +9,7 @@ PUT_Post_Request:
       description:
         type: string
         description: описание поста
-      position:
+      status:
         type: string
         description: Статус поста
-        default: 1
+        default: "1"

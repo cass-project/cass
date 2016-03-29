@@ -137,29 +137,35 @@ class Post
 	/**
 	 * @return mixed
 	 */
-	public function getCreated(){
+	public function getCreated():\DateTime{
 		return $this->created;
 	}
 
 	/**
-	 * @param mixed $created
+	 * @param \DateTime $created
+	 *
+	 * @return $this
 	 */
-	public function setCreated($created){
+	public function setCreated(\DateTime $created){
 		$this->created = $created;
+		return $this;
 	}
 
 	/**
-	 * @return mixed
+	 * @return \DateTime
 	 */
-	public function getUpdated(){
+	public function getUpdated():\DateTime{
 		return $this->updated;
 	}
 
 	/**
-	 * @param mixed $updated
+	 * @param \DateTime $updated
+	 *
+	 * @return $this
 	 */
-	public function setUpdated($updated){
+	public function setUpdated(\DateTime $updated){
 		$this->updated = $updated;
+		return $this;
 	}
 
 	/**
@@ -183,7 +189,9 @@ class Post
 			'name'        => $this->getName(),
 			'description' => $this->getDescription(),
 			'status'      => $this->getStatus(),
-			'account_id'	=> $this->getAccountId()
+			'account_id'	=> $this->getAccountId(),
+			'created'			=> $this->getCreated()->format("Y-m-d H:i:s"),
+			'updated'			=> $this->getUpdated()->format("Y-m-d H:i:s")
 		];
 	}
 

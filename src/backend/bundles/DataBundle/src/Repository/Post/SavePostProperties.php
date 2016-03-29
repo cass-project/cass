@@ -12,4 +12,6 @@ interface SavePostProperties
 	public function getDescription():Param;
 	public function getStatus():Param;
 	public function getAccountId():Param;
+	public function getCreated():Param;
+	public function getUpdated():Param;
 }

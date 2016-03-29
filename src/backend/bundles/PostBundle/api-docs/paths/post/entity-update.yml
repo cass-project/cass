@@ -1,16 +1,10 @@
-'/backend/api/protected/post/update/':
+'/backend/api/protected/post/update':
   post:
     tags:
       - post
     description: |
       Обновляет данные о тематике
     parameters:
-      - name: themeId
-        in: path
-        required: true
-        type: number
-        description: |
-          ID тематики
       - name: body
         in: body
         required: true
