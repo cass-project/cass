@@ -98,6 +98,8 @@ sudo mv phpunit.phar /usr/local/bin/phpunit
 
 sudo cp -R /support-files/copy/* /
 
+sudo indexer --all
+sudo service sphinxsearch start
 sudo service mongodb restart
 sudo service php7.0-fpm restart
 sudo service nginx restart
