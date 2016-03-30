@@ -7,16 +7,23 @@ class SearchCommand extends Command
 {
     public function run(ServerRequestInterface $request)
     {
-        $text = $request->getAttribute('text');
-
-        $sphinx = $this->getSphinxService();
+        $sphinx      = $this->getSphinxService();
+        $queryParams = $request->getQueryParams();
+        $text     = $request->getAttribute('text');
+        $limit    = $queryParams["limit"] ?? $sphinx->limit;
+        $page     = $queryParams["page"]  ?? 1;
+        /**
+         * @DOTO maxLimit via sharedConfigService
+        $sharedConfigService = $container->get(SharedConfigService::class);
+        $config = $sharedConfigService->get('seatch');
+         */
+        $maxLimit = 150;
+        $limit    = min([$maxLimit, $limit]);
+        $offset   = ($page-1) * $limit;
 
         $sphinx->SetMatchMode($sphinx::SPH_MATCH_ALL);
+        $sphinx->setLimits($offset, $limit);
 
-        $sphinx->setLimits(0,100);
-
-        $result = $sphinx->Query($text);
-
-        return ['entities' => $result];
+        return $sphinx->Query(urldecode($text));
     }
 }

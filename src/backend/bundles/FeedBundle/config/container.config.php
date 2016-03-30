@@ -9,5 +9,10 @@ return [
         'factories' => [
             FeedMiddleware::class => FeedMiddlewareFactory::class
         ]
+    ],
+    'services' => [
+        'SearchConfig' => [
+                "maxLimit" => 150
+        ],
     ]
 ];
