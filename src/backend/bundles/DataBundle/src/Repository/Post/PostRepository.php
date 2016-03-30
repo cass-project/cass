@@ -36,6 +36,15 @@ class PostRepository extends EntityRepository
 		return $postEntity;
 	}
 
+	public function delete(int $id):Post
+	{
+		$em = $this->getEntityManager();
+		$postEntity = $this->getPostEntity($id);
+		$em->remove($postEntity);
+		$em->flush();
+		return $postEntity;
+	}
+
 	public function getPost(int $id):array
 	{
 		return $this->createQueryBuilder('p')
@@ -64,8 +73,6 @@ class PostRepository extends EntityRepository
 								->getQuery()
 								->getResult(Query::HYDRATE_ARRAY);
 	}
-
-
 
 	private function setupEntity(Post $postEntity, SavePostProperties $savePostProperties)
 	{

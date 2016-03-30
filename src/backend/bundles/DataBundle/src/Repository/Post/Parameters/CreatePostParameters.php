@@ -11,8 +11,6 @@ class CreatePostParameters implements SavePostProperties
 	private $status;
 	private $accountId;
 
-
-
 	public function __construct(Param $name, Param $description, Param $status)
 	{
 		$this->name        = $name;

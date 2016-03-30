@@ -3,6 +3,7 @@
 namespace Application;
 
 
+use Post\Middleware\PostAttachmentMiddleware;
 use Post\Middleware\PostCRUDMiddleware;
 use Post\Middleware\PostMiddleware;
 use Zend\Expressive\Application;
@@ -30,9 +31,23 @@ return function(Application $app, string $prefix){
 		'post-update-entity'
 	);
 
+
+
+	$app->post(
+		sprintf('%s/protected/post/attachment/{command:add}', $prefix),
+		PostAttachmentMiddleware::class,
+		'post-add-attachment'
+	);
+
+
+
+
 	$app->post(
 		sprintf('%s/protected/post/link/{command:parse}', $prefix),
 		PostMiddleware::class,
 		'link-parse'
 	);
+
+
+
 };

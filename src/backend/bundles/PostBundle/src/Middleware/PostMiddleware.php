@@ -18,10 +18,7 @@ class PostMiddleware implements MiddlewareInterface
 
 	public function __invoke(Request $request, Response $response, callable $out = NULL){
 		$responseBuilder = new GenericRESTResponseBuilder($response);
-
 		switch($request->getAttribute('command')){
-
-
 			default :{
 				return $responseBuilder
 					->setStatusNotFound()
@@ -31,10 +28,7 @@ class PostMiddleware implements MiddlewareInterface
 
 			case 'parse': {
 				// парсим урл и
-
 				$data = json_decode($request->getBody(), true);
-
-
 				$opts = $this->postService->getLinkOptions($data['url']);
 
 				return $responseBuilder
@@ -45,7 +39,5 @@ class PostMiddleware implements MiddlewareInterface
 				break;
 			}
 		}
-
 	}
-
 }

@@ -26,7 +26,7 @@ class Post
 	 * @var int
 	 */
 	private $account_id;
-	private $attachment;
+	private $attachments;
 	/**
 	 * @Column(type="string")
 	 * @var string
@@ -95,15 +95,15 @@ class Post
 	/**
 	 * @return mixed
 	 */
-	public function getAttachment(){
-		return $this->attachment;
+	public function getAttachments(){
+		return $this->attachments;
 	}
 
 	/**
-	 * @param mixed $attachment
+	 * @param mixed $attachments
 	 */
-	public function setAttachment($attachment){
-		$this->attachment = $attachment;
+	public function setAttachments($attachments){
+		$this->attachments = $attachments;
 	}
 
 	/**
@@ -180,6 +180,11 @@ class Post
 	 */
 	public function setStatus($status){
 		$this->status = $status;
+	}
+
+	public function addAttachment(Attachment $attachment)
+	{
+		$this->attachments[$attachment->getId()] = $attachment;
 	}
 
 	public function toJSON()

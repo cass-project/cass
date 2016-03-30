@@ -17,18 +17,13 @@ class PostService
 		$this->postRepository = $postRepository;
 	}
 
-	/**
-	 * @return PostRepository
-	 */
 	public function getPostRepository():PostRepository{
 		return $this->postRepository;
 	}
 
-	/**
-	 * @param PostRepository $postRepository
-	 */
 	public function setPostRepository(PostRepository $postRepository){
 		$this->postRepository = $postRepository;
+		return $this;
 	}
 
 	public function create(CreatePostParameters $createPostParameters):Post
@@ -42,8 +37,8 @@ class PostService
 	}
 
 
-	public function getLinkOptions($link){
-
+	public function getLinkOptions($link):array
+	{
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $link);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
