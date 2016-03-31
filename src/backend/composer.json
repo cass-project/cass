@@ -7,6 +7,7 @@
       "ThemeEditor\\": "bundles/ThemeEditorBundle/src",
       "Development\\": "bundles/DevelopmentBundle/src",
       "Host\\": "bundles/HostBundle/src",
+      "Channel\\": "bundles/ChannelBundle/src",
       "Post\\": "bundles/PostBundle/src",
       "Feed\\": "bundles/FeedBundle/src"
     }
