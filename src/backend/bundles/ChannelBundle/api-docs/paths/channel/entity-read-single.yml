@@ -1,0 +1,30 @@
+'/backend/api/protected/channel/read/{channelId}':
+  get:
+    tags:
+      - channel
+    description: |
+      Канал по id
+    parameters:
+      - name: channelId
+        in: path
+        required: true
+        type: number
+        description: ID канала
+    responses:
+      '400':
+          $ref: '#/responses/error'
+      '200':
+        description: Канал
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: "= true"
+            entity:
+              type: object
+              items:
+                $ref: "#/definitions/Data_Entity_Channel"

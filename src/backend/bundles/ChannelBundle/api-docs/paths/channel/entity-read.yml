@@ -1,0 +1,28 @@
+'/backend/api/protected/channel/read':
+  get:
+    tags:
+      - channel
+    description: |
+      Список каналов
+    responses:
+      '400':
+          $ref: '#/responses/error'
+      '200':
+        description: Список каналов
+        schema:
+          type: object
+          required:
+            - success
+            - total
+            - entities
+          properties:
+            success:
+              type: boolean
+              description: "= true"
+            total:
+              type: number
+              description: "Количество каналов"
+            entities:
+              type: array
+              items:
+                $ref: "#/definitions/Data_Entity_Channel"
