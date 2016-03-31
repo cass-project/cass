@@ -4,6 +4,8 @@ import {Router} from "angular2/router";
 import {ResponseInterface} from "../../main/ResponseInterface";
 import {Cookie} from 'ng2-cookies';
 import {BackendError} from '../../main/BackendError';
+import {CurrentProfileService} from '../../profile/service/CurrentProfileService';
+import {Profile} from "../../profile/service/CurrentProfileService";
 
 @Injectable()
 export class AuthService
@@ -12,7 +14,7 @@ export class AuthService
     public signedIn: boolean = false;
     public lastError: BackendError;
 
-    constructor(private http: Http, private router:Router) {
+    constructor(private http: Http, private router:Router, private profile: CurrentProfileService) {
         this.token = new AuthToken();
 
         if(Cookie.getCookie('api_key')) {
@@ -24,7 +26,6 @@ export class AuthService
     public attemptSignIn(request: SignInModel) {
         this.lastError = null;
 
-        console.log(request.remember, 'remember?');
         return this.signIn(this.http.post('/backend/api/auth/sign-in', JSON.stringify(request)), request.remember);
     }
 
@@ -40,10 +41,22 @@ export class AuthService
                 if(response.success) {
                     this.signedIn = true;
                     this.token.setToken(response.api_key);
+                    this.profile.set({
+                        name: "Foo Bar",
+                        email: "demo@gmail.com",
+                        avatar: {
+                            publicUrl: "/public/assets/profile-default.png",
+                            size: {
+                                width: 200,
+                                height: 200
+                            }
+                        }
+                    });
 
                     Cookie.setCookie('api_key', response.api_key, remember ? 14 : undefined, '/');
                 }else{
                     this.signedIn = false;
+                    this.profile.empty();
                     this.lastError = new BackendError(response);
                 }
             },
@@ -58,6 +71,7 @@ export class AuthService
         return this.http.get('/backend/api/auth/sign-out').subscribe(
             response => {
                 this.signedIn = false;
+                this.profile.empty();
                 this.router.navigate(['Welcome']);
 
                 Cookie.deleteCookie('api_key');

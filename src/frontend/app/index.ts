@@ -18,6 +18,7 @@ import {Cookie} from 'ng2-cookies';
 
 import {MainMenu} from './module/main/component/MainMenu/index'
 import {AuthService} from './module/auth/service/AuthService';
+import {CurrentProfileService} from './module/profile/service/CurrentProfileService';
 
 import {AuthComponent} from './module/auth/index';
 import {ProfileComponent} from './module/profile/index';
@@ -32,7 +33,8 @@ import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorCom
         MainMenu,
     ],
     providers: [
-        AuthService
+        AuthService,
+        CurrentProfileService
     ]
 })
 @RouteConfig([
@@ -79,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             HTTP_PROVIDERS,
             provide(RequestOptions, {useClass: OAuthRequestOptions})
         ]).catch((err) => {
-        console.log(err.message);
-    });
+            console.log(err.message);
+        }
+    );
 });
