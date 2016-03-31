@@ -1,31 +1,30 @@
 .btn-group-vertical {
-  font-family: verdana;
-  font-size: 12px;
-  font-weight: 200;
-  background-color: #2e353d;
-  position: fixed;
-  top: 50px;
-  width: 40px;
-  height: 100%;
+  background: #2e353d;
   color: #e1ffff;
-}
-.btn-group-vertical li:hover {
-  border-left: 3px solid #d19b3d;
-  background-color: #4f5b69;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  -ms-transition: all 1s ease;
-  transition: all 1s ease;
+  position: fixed;
+  width: 45px;
+  height: 100%;
 }
 
-.fa{
-  color: #fff;
-  text-shadow: 1px 1px 1px #ccc;
-  font-size: 1.5rem;
+.btn-group-vertical li {
   list-style: none;
-  padding: 0px;
-  margin: 0px;
-  line-height: 10px;
-  cursor: pointer;
+  display: block;
+}
+
+.btn-group-vertical li a {
+  display: block;
+  padding:4px;
+  color:#FFF;
+  font-size: 1.5rem;
+  border-left: 0 solid;
+  -webkit-transition: all .15s linear;
+  -moz-transition: all .15s linear;
+  -o-transition: all .15s linear;
+  -ms-transition: all .15s linear;
+  transition: all .15s linear;
+}
+
+.btn-group-vertical li a:hover {
+  border-left: 5px solid #d19b3d;
+  background-color: #4f5b69;
 }
