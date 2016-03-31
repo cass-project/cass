@@ -7,7 +7,8 @@
       "ThemeEditor\\": "bundles/ThemeEditorBundle/src",
       "Development\\": "bundles/DevelopmentBundle/src",
       "Host\\": "bundles/HostBundle/src",
-      "Post\\": "bundles/PostBundle/src"
+      "Post\\": "bundles/PostBundle/src",
+      "Feed\\": "bundles/FeedBundle/src"
     }
   },
   "require": {
@@ -27,6 +28,7 @@
     "zendframework/zend-filter": "^2.6",
     "zendframework/zend-uri": "^2.5",
     "zendframework/zend-i18n": "^2.6",
-    "depotwarehouse/oauth2-bnet": "^5.0"
+    "depotwarehouse/oauth2-bnet": "^5.0",
+    "gigablah/sphinxphp": "2.0.*"
   }
 }
