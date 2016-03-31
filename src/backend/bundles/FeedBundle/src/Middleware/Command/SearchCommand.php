@@ -23,7 +23,6 @@ class SearchCommand extends Command
 
         $sphinx->SetMatchMode($sphinx::SPH_MATCH_ALL);
         $sphinx->setLimits($offset, $limit);
-
         return $sphinx->Query(urldecode($text));
     }
 }

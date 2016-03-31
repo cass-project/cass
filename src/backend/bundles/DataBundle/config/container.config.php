@@ -27,8 +27,8 @@ return [
             ThemeRepository::class => ThemeRepositoryFactory::class,
             HostRepository::class => HostRepositoryFactory::class,
             PostRepository::class         => PostRepositoryFactory::class,
-            AttachmentRepository::class   => AttachmentRepositoryFactory::class
-            SphinxClient::class => SphinxClientFactory::class,
+            AttachmentRepository::class   => AttachmentRepositoryFactory::class,
+            SphinxClient::class => SphinxClientFactory::class
         ],
         'services' => [
             'DoctrineConfig' => require(__DIR__ . '/doctrine.config.php'),

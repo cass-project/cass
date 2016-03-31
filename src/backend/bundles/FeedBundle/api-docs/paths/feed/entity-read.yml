@@ -1,0 +1,21 @@
+'/backend/api/feed/search/':
+  get:
+    tags:
+      - feed
+    description: |
+      Лента
+    responses:
+      '400':
+          $ref: '#/responses/error'
+      '200':
+        description: Список постов
+        schema:
+          type: object
+          required:
+            - text
+            - total
+            - entities
+          properties:
+            text:
+              type: string
+              description: "Поисковой запрос"
