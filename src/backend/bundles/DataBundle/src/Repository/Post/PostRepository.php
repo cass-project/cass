@@ -25,17 +25,23 @@ class PostRepository extends EntityRepository
 
 	public function update(UpdatePostParameters $updatePostParameters):Post
 	{
+		$postId=$updatePostParameters->getId()->value();
 
-		$postEntity = $this->getPostEntity($updatePostParameters->getId()->value());
+		$postEntity = $this->getPostEntity($postId);
 
 		$this->setupEntity($postEntity, $updatePostParameters);
 		$em = $this->getEntityManager();
 		$em->persist($postEntity);
 		$em->flush();
+		return $postEntity;
+	}
 
-		print_r($postEntity);
-		die();
-
+	public function delete(int $id):Post
+	{
+		$em = $this->getEntityManager();
+		$postEntity = $this->getPostEntity($id);
+		$em->remove($postEntity);
+		$em->flush();
 		return $postEntity;
 	}
 
@@ -68,8 +74,6 @@ class PostRepository extends EntityRepository
 								->getResult(Query::HYDRATE_ARRAY);
 	}
 
-
-
 	private function setupEntity(Post $postEntity, SavePostProperties $savePostProperties)
 	{
 		$savePostProperties->getName()->on(function($value) use($postEntity) {
@@ -88,7 +92,10 @@ class PostRepository extends EntityRepository
 
 		$date = (new \DateTime());
 
-		$postEntity->setCreated($date);
+		$savePostProperties->getCreated()->on(function($value)use($postEntity){
+			$postEntity->setCreated($value);
+		});
+
 		$postEntity->setUpdated($date);
 	}
 

@@ -26,7 +26,7 @@ class Post
 	 * @var int
 	 */
 	private $account_id;
-	private $attachment;
+	private $attachments;
 	/**
 	 * @Column(type="string")
 	 * @var string
@@ -95,15 +95,15 @@ class Post
 	/**
 	 * @return mixed
 	 */
-	public function getAttachment(){
-		return $this->attachment;
+	public function getAttachments(){
+		return $this->attachments;
 	}
 
 	/**
-	 * @param mixed $attachment
+	 * @param mixed $attachments
 	 */
-	public function setAttachment($attachment){
-		$this->attachment = $attachment;
+	public function setAttachments($attachments){
+		$this->attachments = $attachments;
 	}
 
 	/**
@@ -137,29 +137,35 @@ class Post
 	/**
 	 * @return mixed
 	 */
-	public function getCreated(){
+	public function getCreated():\DateTime{
 		return $this->created;
 	}
 
 	/**
-	 * @param mixed $created
+	 * @param \DateTime $created
+	 *
+	 * @return $this
 	 */
-	public function setCreated($created){
+	public function setCreated(\DateTime $created){
 		$this->created = $created;
+		return $this;
 	}
 
 	/**
-	 * @return mixed
+	 * @return \DateTime
 	 */
-	public function getUpdated(){
+	public function getUpdated():\DateTime{
 		return $this->updated;
 	}
 
 	/**
-	 * @param mixed $updated
+	 * @param \DateTime $updated
+	 *
+	 * @return $this
 	 */
-	public function setUpdated($updated){
+	public function setUpdated(\DateTime $updated){
 		$this->updated = $updated;
+		return $this;
 	}
 
 	/**
@@ -176,6 +182,11 @@ class Post
 		$this->status = $status;
 	}
 
+	public function addAttachment(Attachment $attachment)
+	{
+		$this->attachments[$attachment->getId()] = $attachment;
+	}
+
 	public function toJSON()
 	{
 		return [
@@ -183,7 +194,9 @@ class Post
 			'name'        => $this->getName(),
 			'description' => $this->getDescription(),
 			'status'      => $this->getStatus(),
-			'account_id'	=> $this->getAccountId()
+			'account_id'	=> $this->getAccountId(),
+			'created'			=> $this->getCreated()->format("Y-m-d H:i:s"),
+			'updated'			=> $this->getUpdated()->format("Y-m-d H:i:s")
 		];
 	}
 

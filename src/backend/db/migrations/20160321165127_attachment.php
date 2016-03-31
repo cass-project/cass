@@ -31,12 +31,16 @@ class Attachment extends AbstractMigration
              ->addColumn('type', 'integer', [
                'null' => true
              ])
-             ->addColumn('name', 'string')
-             ->addColumn('description', 'string')
-             ->addColumn('created', 'datetime')
-             ->addColumn('updated', 'datetime')
-             ->addColumn('status', 'string')
-             ->create()
+          ->addColumn('post_id', 'integer', ['null' => TRUE])
+          ->addForeignKey('post_id', 'post', 'id', [
+                                     'delete' => 'cascade',
+                                     'update' => 'cascade'
+                                   ]
+          )
+          ->addColumn('content', 'string')
+          ->addColumn('created', 'datetime')
+          ->addColumn('updated', 'datetime')
+          ->create()
         ;
     }
 }

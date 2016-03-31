@@ -1,15 +1,21 @@
 Update_Post_Request:
-    type: object
-    required:
-      - name
-    properties:
-      name:
-        type: string
-        description: Название поста
-      description:
-        type: string
-        description: описание поста
-      position:
-        type: string
-        description: Статус поста
-        default: 1
+  type: object
+  required:
+    - id
+  properties:
+    id:
+      type: string
+      description: id поста
+    account_id:
+      type: string
+      description: account id
+    name:
+      type: string
+      description: Название поста
+    description:
+      type: string
+      description: описание поста
+    status:
+      type: string
+      description: Статус поста
+      default: "1"

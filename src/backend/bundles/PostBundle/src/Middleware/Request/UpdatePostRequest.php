@@ -18,7 +18,7 @@ class UpdatePostRequest extends SchemaParams
 		$description = new Param($data, 'description');
 		$status = new Param($data, 'status');
 
-		return new UpdatePostParameters($name,$description,$status,$id);
+		return new UpdatePostParameters($name, $description, $status, $id);
 	}
 
 	protected function getSchema(): JSONSchema{

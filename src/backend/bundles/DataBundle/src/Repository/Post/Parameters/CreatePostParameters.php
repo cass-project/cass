@@ -11,32 +11,48 @@ class CreatePostParameters implements SavePostProperties
 	private $status;
 	private $accountId;
 
-
-
-	public function __construct(Param $name, Param $description, Param $status){
+	public function __construct(Param $name, Param $description, Param $status)
+	{
 		$this->name        = $name;
 		$this->description = $description;
 		$this->status      = $status;
 	}
 
-	public function getName():Param{
+	public function getName():Param
+	{
 		return $this->name;
 	}
 
-	public function getDescription():Param{
+	public function getDescription():Param
+	{
 		return $this->description;
 	}
 
-	public function getStatus():Param{
+	public function getStatus():Param
+	{
 		return $this->status;
 	}
 
-	public function getAccountId():Param{
+	public function getAccountId():Param
+	{
 		return $this->accountId;
 	}
 
-	public function setAccountId(Param $id){
+	public function setAccountId(Param $id)
+	{
 		$this->accountId = $id;
 		return $this;
+	}
+
+	public function getCreated():Param
+	{
+		$updated['created'] = new \DateTime();
+		return new Param($updated, 'created');
+	}
+
+	public function getUpdated():Param
+	{
+		$updated['updated'] = new \DateTime();
+		return new Param($updated, 'updated');
 	}
 }

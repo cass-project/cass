@@ -1,15 +1,14 @@
-PUT_Post_Request:
+PUT_Attachment_Request:
     type: object
     required:
-      - name
     properties:
-      name:
+      post_id:
         type: string
         description: Название поста
-      description:
+      content:
         type: string
         description: описание поста
-      status:
+      type:
         type: string
         description: Статус поста
         default: "1"
