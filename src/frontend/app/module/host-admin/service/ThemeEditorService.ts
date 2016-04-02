@@ -23,14 +23,13 @@ export class ThemeEditorService
         console.log(this.selectedThemeId);
     }
 
-    public clear() {
-        this.selectedThemeId = undefined;
-    }
-
     public updateInfoOnPage(){
         this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themesTree = data['entities']);
         this.themeRESTService.getThemes().map(res => res.json()).subscribe(data => this.themes = data['entities']);
         this.showFormContentBox = false;
-        this.router.parent.navigate(['Theme-Cleaner']);
+    }
+
+    public clear() {
+        this.selectedThemeId = undefined;
     }
 }

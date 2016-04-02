@@ -27,6 +27,7 @@ export class UpdateThemeForm
         this.themeRESTService.updateTheme(this.themeEditorService.selectedThemeId, this.title, this.parent).subscribe(
             data => {
                 this.themeEditorService.updateInfoOnPage();
+                this.router.parent.navigate(['Theme-Cleaner']);
             },
             err => {
                 console.log(err);
