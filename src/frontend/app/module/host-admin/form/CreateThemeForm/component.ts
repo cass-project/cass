@@ -27,6 +27,7 @@ export class CreateThemeForm
         this.themeRESTService.createTheme(this.title, this.themeEditorService.selectedThemeId).subscribe(
             data => {
                 this.themeEditorService.updateInfoOnPage();
+                this.router.parent.navigate(['Theme-Cleaner']);
             },
             err => {console.log(err)});
     }
