@@ -22,12 +22,13 @@ class Attachment
 	 * @Column(type="integer")
 	 */
 	private $type;
+
 	/**
-	 * @post_id
-	 * @Column(type="integer")
-	 * @var int
+	 * @ManyToOne(targetEntity="Data\Entity\Post", inversedBy="attachments")
+	 * @JoinColumn(name="post_id", referencedColumnName="id")
 	 */
 	private $post_id;
+
 	/**
 	 * @Column(type="string")
 	 */

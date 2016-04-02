@@ -20,7 +20,7 @@ class ReadPostCommand extends Command
 		if($request->getAttribute('postId')){
 
 			$postId = $request->getAttribute('postId');
-			$post = $service->getPostRepository()->getPost($postId);
+			$post = $service->getPostRepository()->getPostWithAttachments($postId);
 			$response = [
 				'success' => true,
 				'entity'  => $post,

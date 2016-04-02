@@ -1,6 +1,7 @@
 <?php
 
 namespace Data\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Entity(repositoryClass="Data\Repository\Post\PostRepository")
@@ -26,7 +27,12 @@ class Post
 	 * @var int
 	 */
 	private $account_id;
-	private $attachments;
+
+
+	/**
+	 * @OneToMany(targetEntity="Data\Entity\Attachment", mappedBy="post_id")
+	 */
+	private $attachments=[];
 	/**
 	 * @Column(type="string")
 	 * @var string
@@ -49,6 +55,10 @@ class Post
 	 * @Column(type="string")
 	 */
 	private $status;
+
+	public function __construct() {
+		$this->attachments = new ArrayCollection();
+	}
 
 	/**
 	 * @return mixed
@@ -95,7 +105,8 @@ class Post
 	/**
 	 * @return mixed
 	 */
-	public function getAttachments(){
+	public function getAttachments():array
+	{
 		return $this->attachments;
 	}
 

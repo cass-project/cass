@@ -55,6 +55,18 @@ class PostRepository extends EntityRepository
 								->getResult(Query::HYDRATE_ARRAY);
 	}
 
+	public function getPostWithAttachments($id):array
+	{
+		return $this->createQueryBuilder('p')
+								->select('p')
+								->leftJoin('p.attachments', 'a')
+								->where('p.id = :id')
+								->setParameter('id', $id)
+								->getQuery()
+								->getResult(Query::HYDRATE_ARRAY);
+
+	}
+
 	public function getPostEntity(int $id):Post
 	{
 
