@@ -23,6 +23,15 @@ class PostRepository extends EntityRepository
 		return $postEntity;
 	}
 
+	public function save(Post $post):Post
+	{
+		$em = $this->getEntityManager();
+		$em->persist($post);
+		$em->flush();
+
+		return $post;
+	}
+
 	public function update(UpdatePostParameters $updatePostParameters):Post
 	{
 		$postId=$updatePostParameters->getId()->value();

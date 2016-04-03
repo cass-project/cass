@@ -37,6 +37,17 @@ class PostService
 	}
 
 
+	public function addAttachment()
+	{
+
+	}
+
+	public function save(Post $post):Post
+	{
+		return $this->postRepository->save($post);
+	}
+
+
 	public function getLinkOptions($link):array
 	{
 		$ch = curl_init();

@@ -117,6 +117,16 @@ class Post
 		$this->attachments = $attachments;
 	}
 
+	public function addAttachment(Attachment $attachment)
+	{
+		$this->attachments[] = $attachment;
+		return $this;
+	}
+	public function removeAttachment(Attachment $attachment)
+	{
+		$this->attachments->removeElement($attachment);
+	}
+
 	/**
 	 * @return mixed
 	 */
@@ -187,15 +197,13 @@ class Post
 	}
 
 	/**
-	 * @param mixed $status
+	 * @param $status
+	 *
+	 * @return $this
 	 */
 	public function setStatus($status){
 		$this->status = $status;
-	}
-
-	public function addAttachment(Attachment $attachment)
-	{
-		$this->attachments[$attachment->getId()] = $attachment;
+		return $this;
 	}
 
 	public function toJSON()

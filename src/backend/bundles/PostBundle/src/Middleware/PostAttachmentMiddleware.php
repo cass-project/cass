@@ -4,6 +4,7 @@ namespace Post\Middleware;
 
 use Application\REST\GenericRESTResponseBuilder;
 use Post\Middleware\Request\PutPostAttachmentRequest;
+use Post\Middleware\Request\PutPostRequest;
 use Post\Service\AttachmentService;
 use Post\Service\PostService;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -54,7 +55,17 @@ class PostAttachmentMiddleware implements MiddlewareInterface
 				} else {
 					// создаём пост и
 					// добавляем аттачмент
-					die("Создаём пост и аттач");
+
+					$post = $this->postService->create(
+						(new PutPostRequest($request))->getParameters()
+					);
+
+					$attachment = $this->attachmentService->create(
+						(new PutPostAttachmentRequest($request))->getParameters()
+					);
+
+					$post->addAttachment($attachment);
+					$this->postService->save($post);
 
 				}
 
