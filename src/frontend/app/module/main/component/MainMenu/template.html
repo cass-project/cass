@@ -1,4 +1,86 @@
-<div class="btn-group btn-group-vertical">
-    <li class="text-xs-center"><a [routerLink]="['Profile']"><i class="fa fa-user fa-fw"></i></a></li>
-    <li class="text-xs-center"><a [routerLink]="['Catalog']"><i class="fa fa-folder-o fa-fw"></i></a></li>
+<div>
+    <div class="main-menu main-menu-extended">
+        <nav id="cassMainMenu" class="main-menu-nav main-menu-nav-common">
+            <ul class="main-menu-list main-menu-list-common">
+                <li>
+                    <a class="main-menu-item" href="#" tabindex="1">
+                        <div class="image image-src">
+                            <img src="/public/assets/profile-default.png" alt="[&#9829;]">
+                        </div>
+                        <div class="description">
+                            <h1>Erick Evance</h1>
+                            <p>Your Profile</p>
+                        </div>
+                    </a>
+                    <a class="main-menu-item" href="#" tabindex="2">
+                        <div class="image image-fa">
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <div class="description">
+                            <h1>Collections</h1>
+                            <p>Your's collected content</p>
+                        </div>
+                    </a>
+                    <a class="main-menu-item" href="#" tabindex="3">
+                        <div class="image image-fa">
+                            <i class="fa fa-hashtag"></i>
+                        </div>
+                        <div class="description">
+                            <h1>Public content</h1>
+                            <p>Content collected by others</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <footer>
+                <ul class="main-menu-list main-menu-list-logout">
+                    <li>
+                        <a class="main-menu-item main-menu-item-no-sub" href="#">
+                            <div class="image image-fa">
+                                <i class="fa fa-sign-out"></i>
+                            </div>
+                            <div class="description">
+                                <h1>Sign Out</h1>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </footer>
+        </nav>
+        <nav class="main-menu-nav main-menu-nav-extended">
+            <div class="nav-block">
+                <header>
+                    <h1>Actions</h1>
+                </header>
+                <ul class="list">
+                    <li>
+                        <a href="#" class="list-item">
+                            <i class="fa fa-plus-square"></i>
+                            <span>Add collection</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="list-item">
+                            <i class="fa fa-bars"></i>
+                            <span>Manage collections</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-block">
+                <header>
+                    <h1>Your collections</h1>
+                </header>
+                <ul class="list">
+                    <li><a class="list-item" href="#">Auto</a></li>
+                    <li><a class="list-item" href="#">Games</a></li>
+                    <li><a class="list-item" href="#">Software Development</a></li>
+                    <li><a class="list-item" href="#">MMO</a></li>
+                    <li><a class="list-item" href="#">/vg/</a></li>
+                    <li><a class="list-item" href="#">Auto</a></li>
+                    <li><a class="list-item" href="#">Games</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </div>
