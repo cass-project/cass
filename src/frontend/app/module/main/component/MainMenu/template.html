@@ -1,4 +1,49 @@
-<div class="btn-group btn-group-vertical">
-    <li class="text-xs-center"><a [routerLink]="['Profile']"><i class="fa fa-user fa-fw"></i></a></li>
-    <li class="text-xs-center"><a [routerLink]="['Catalog']"><i class="fa fa-folder-o fa-fw"></i></a></li>
+<div>
+    <nav class="main-menu" id="cassMainMenu">
+        <ul class="main-menu-list main-menu-list-common">
+            <li>
+                <a class="main-menu-item" href="#">
+                    <div class="image image-src">
+                        <img src="/public/assets/profile-default.png" alt="[&#9829;]">
+                    </div>
+                    <div class="description">
+                        <h1>Erick Evance</h1>
+                        <p>Your Profile</p>
+                    </div>
+                </a>
+                <a class="main-menu-item" href="#">
+                    <div class="image image-fa">
+                        <i class="fa fa-folder-o"></i>
+                    </div>
+                    <div class="description">
+                        <h1>Collections</h1>
+                        <p>Your's collected content</p>
+                    </div>
+                </a>
+                <a class="main-menu-item" href="#">
+                    <div class="image image-fa">
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <div class="description">
+                        <h1>Public content</h1>
+                        <p>Content collected by others</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <footer>
+            <ul class="main-menu-list main-menu-list-logout">
+                <li>
+                    <a class="main-menu-item main-menu-item-no-sub" href="#">
+                        <div class="image image-fa">
+                            <i class="fa fa-sign-out"></i>
+                        </div>
+                        <div class="description">
+                            <h1>Sign Out</h1>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </footer>
+    </nav>
 </div>

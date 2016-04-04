@@ -1,30 +1,99 @@
-.btn-group-vertical {
-  background: #2e353d;
-  color: #e1ffff;
+@import "./../../../../palette.scss";
+
+$listItemSize: 45px;
+
+nav.main-menu {
+  background-color: $color5;
+  font-family: "League Spartan", "Segoi UI Semibold", sans-serif;
+
+  display: block;
   position: fixed;
-  width: 45px;
-  height: 100%;
+  top: 0; height: 100%;
+  left: 0; width: 260px;
+  min-height: 400px;
+
+  p, h1 {
+    margin: 0;
+    padding: 0;
+  }
+
+  p {
+    margin-top: 2px;
+  }
+
+  p {
+    font-size: 12px;
+    color: $color3;
+  }
+
+  h1 {
+    font-size: 14px;
+    color: $color2;
+  }
+
+  ul.main-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0;
+
+    a.main-menu-item {
+      display: block;
+      margin: 0 5px;
+      overflow: hidden;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background-color 0.1s;
+      padding: 5px;
+
+      &:hover, &:active {
+        background-color: $color4;
+      }
+
+      div.image, div.description {
+        vertical-align: middle;
+      }
+
+      div.image {
+        display: inline-block;
+        width: $listItemSize;
+        height: $listItemSize;
+        overflow: hidden;
+        border: 1px solid $color4;
+        border-radius: 3px;
+        margin-right: 5px;
+      }
+
+      div.image-src img {
+        width: $listItemSize;
+      }
+
+      div.image-fa {
+        color: $color2;
+        text-align: center;
+        vertical-align: middle;
+        line-height: $listItemSize;
+      }
+
+      div.description {
+        display: inline-block;
+      }
+    }
+
+    a.main-menu-item-no-sub {
+      div.image, div.image-fa {
+        height: auto;
+        line-height: 30px;
+      }
+    }
+  }
+
+  >footer {
+    position: absolute;
+    bottom: 0;
+    left: 0; width: 100%;
+  }
 }
 
-.btn-group-vertical li {
-  list-style: none;
-  display: block;
-}
+nav.main-menu-extended {
 
-.btn-group-vertical li a {
-  display: block;
-  padding:4px;
-  color:#FFF;
-  font-size: 1.5rem;
-  border-left: 0 solid;
-  -webkit-transition: all .15s linear;
-  -moz-transition: all .15s linear;
-  -o-transition: all .15s linear;
-  -ms-transition: all .15s linear;
-  transition: all .15s linear;
-}
-
-.btn-group-vertical li a:hover {
-  border-left: 5px solid #d19b3d;
-  background-color: #4f5b69;
 }
