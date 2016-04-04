@@ -54,7 +54,7 @@ class Post
 	/**
 	 * @Column(type="string")
 	 */
-	private $status;
+	private $publish;
 
 	public function __construct() {
 		$this->attachments = new ArrayCollection();
@@ -192,17 +192,17 @@ class Post
 	/**
 	 * @return mixed
 	 */
-	public function getStatus(){
-		return $this->status;
+	public function getPublish(){
+		return $this->publish;
 	}
 
 	/**
-	 * @param $status
+	 * @param $publish
 	 *
 	 * @return $this
 	 */
-	public function setStatus($status){
-		$this->status = $status;
+	public function setPublish($publish){
+		$this->publish = $publish;
 		return $this;
 	}
 
@@ -212,7 +212,7 @@ class Post
 			'id'          => $this->getId(),
 			'name'        => $this->getName(),
 			'description' => $this->getDescription(),
-			'status'      => $this->getStatus(),
+			'publish'      => $this->getPublish(),
 			'account_id'	=> $this->getAccountId(),
 			'created'			=> $this->getCreated()->format("Y-m-d H:i:s"),
 			'updated'			=> $this->getUpdated()->format("Y-m-d H:i:s")

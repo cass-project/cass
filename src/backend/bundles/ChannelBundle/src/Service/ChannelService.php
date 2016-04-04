@@ -10,7 +10,7 @@ class ChannelService
 {
 	private $channelRepository;
 
-	public function __construct($chanelRepository)
+	public function __construct(ChannelRepository $chanelRepository)
 	{
 		$this->channelRepository = $chanelRepository;
 	}

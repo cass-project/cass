@@ -37,7 +37,7 @@ class Attachment extends AbstractMigration
                                      'update' => 'cascade'
                                    ]
           )
-          ->addColumn('content', 'string')
+          ->addColumn('content', 'text')
           ->addColumn('created', 'datetime')
           ->addColumn('updated', 'datetime')
           ->create()

@@ -32,10 +32,10 @@ class Post extends AbstractMigration
                'null' => true
              ])
              ->addColumn('name', 'string')
-             ->addColumn('description', 'string')
+             ->addColumn('description', 'text')
              ->addColumn('created', 'datetime',['null' => true])
              ->addColumn('updated', 'datetime',['null' => true])
-             ->addColumn('status', 'string')
+             ->addColumn('publish', 'string',['default'=> 'false'])
              ->addForeignKey('account_id', 'account', 'id', [
                'delete' => 'cascade',
                'update' => 'cascade'
@@ -55,21 +55,21 @@ class Post extends AbstractMigration
            'description' => 'Описание 1',
            'created' => (new \DateTime())->format("Y-m-d H:i:s"),
            'updated' => (new \DateTime())->format("Y-m-d H:i:s"),
-           'status' => '1',
+           'publish' => 'true',
           ],
           ['account_id'    => 2,
            'name' => "Имя 2 ",
            'description' => 'Описание 2',
            'created' => (new \DateTime())->format("Y-m-d H:i:s"),
            'updated' => (new \DateTime())->format("Y-m-d H:i:s"),
-           'status' => '2',
+           'publish' => 'true',
           ],
           ['account_id'    => 2,
            'name' => "Имя 3 ",
            'description' => 'Описание 3',
            'created' => (new \DateTime())->format("Y-m-d H:i:s"),
            'updated' => (new \DateTime())->format("Y-m-d H:i:s"),
-           'status' => '3',
+           'publish' => 'false',
           ],
         ]
     )->saveData();

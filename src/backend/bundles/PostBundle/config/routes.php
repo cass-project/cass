@@ -3,31 +3,35 @@
 namespace Application;
 
 
-use Post\Middleware\PostAttachmentMiddleware;
-use Post\Middleware\PostCRUDMiddleware;
+use Post\Middleware\AttachmentMiddleware;
 use Post\Middleware\PostMiddleware;
 use Zend\Expressive\Application;
 
 return function(Application $app, string $prefix){
 	$app->put(
 		sprintf('%s/protected/post/{command:create}', $prefix),
-		PostCRUDMiddleware::class,
+		PostMiddleware::class,
 		'post-create'
 	);
 
 	$app->get(
 		sprintf('%s/protected/post/{command:read}', $prefix),
-		PostCRUDMiddleware::class,
+		PostMiddleware::class,
 		'post-read'
 	);
 	$app->get(
 		sprintf('%s/protected/post/{command:read}/{postId}', $prefix),
-		PostCRUDMiddleware::class,
+		PostMiddleware::class,
 		'post-read-entity'
 	);
 	$app->post(
 		sprintf('%s/protected/post/{command:update}', $prefix),
-		PostCRUDMiddleware::class,
+		PostMiddleware::class,
+		'post-update-entity'
+	);
+	$app->post(
+		sprintf('%s/protected/post/{command:delete}/{postId}', $prefix),
+		PostMiddleware::class,
 		'post-update-entity'
 	);
 
@@ -35,11 +39,18 @@ return function(Application $app, string $prefix){
 
 	$app->post(
 		sprintf('%s/protected/post/attachment/{command:add}', $prefix),
-		PostAttachmentMiddleware::class,
+		AttachmentMiddleware::class,
 		'post-add-attachment'
+	);
+	$app->post(
+		sprintf('%s/protected/post/attachment/{command:delete}/attachmentId', $prefix),
+		AttachmentMiddleware::class,
+		'post-delete-attachment'
 	);
 
 
+
+	// post persist
 
 
 	$app->post(

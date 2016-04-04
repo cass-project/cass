@@ -104,7 +104,7 @@ class PostRepository extends EntityRepository
 			$postEntity->setDescription($value);
 		});
 		$savePostProperties->getStatus()->on(function($value) use($postEntity) {
-			$postEntity->setStatus($value);
+			$postEntity->setPublish($value);
 		});
 
 		$savePostProperties->getAccountId()->on(function($value)use($postEntity){

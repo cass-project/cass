@@ -21,7 +21,8 @@ class AttachmentService
 	/**
 	 * @return AttachmentRepository
 	 */
-	public function getAttachmentRepository():AttachmentRepository{
+	public function getAttachmentRepository():AttachmentRepository
+	{
 		return $this->attachmentRepository;
 	}
 

@@ -4,7 +4,7 @@ namespace Post\Factory\Middleware;
 
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
-use Post\Middleware\PostAttachmentMiddleware;
+use Post\Middleware\AttachmentMiddleware;
 use Post\Service\AttachmentService;
 use Post\Service\PostService;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
@@ -18,7 +18,7 @@ class PostAttachmentMiddlewareFactory implements FactoryInterface
 		$postService = $container->get(PostService::class);
 		$attachmentService = $container->get(AttachmentService::class);
 
-		return new PostAttachmentMiddleware($postService, $attachmentService);
+		return new AttachmentMiddleware($postService, $attachmentService);
 	}
 
 }

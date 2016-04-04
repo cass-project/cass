@@ -11,7 +11,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
 
-class PostAttachmentMiddleware implements MiddlewareInterface
+class AttachmentMiddleware implements MiddlewareInterface
 {
 	/**
 	 * @var PostService

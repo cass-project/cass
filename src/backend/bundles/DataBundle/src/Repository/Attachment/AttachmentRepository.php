@@ -22,6 +22,22 @@ class AttachmentRepository extends EntityRepository
 		return $attachmentEntity;
 	}
 
+	public function delete(int $id)
+	{
+		$em = $this->getEntityManager();
+		$Entity = $this->createQueryBuilder('e')
+													->select('e')
+													->where('e.id = :id')
+													->setParameter('id', $id)
+													->getQuery()
+													->getSingleResult();
+
+		$em->remove($Entity);
+		$em->flush();
+
+		return $Entity;
+	}
+
 
 	public function setupEntity(Attachment $attachment,  SaveAttachmentProperties $saveAttachmentProperties )
 	{
