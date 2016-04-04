@@ -14,6 +14,7 @@ import {Component, provide} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, URLSearchParams} from 'angular2/http';
+import {CORE_DIRECTIVES} from 'angular2/common';
 import {Cookie} from 'ng2-cookies';
 
 import {MainMenu} from './module/main/component/MainMenu/index'
@@ -30,6 +31,7 @@ import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorCom
     template: require('./template.html'),
     directives: [
         ROUTER_DIRECTIVES,
+        CORE_DIRECTIVES,
         MainMenu,
     ],
     providers: [

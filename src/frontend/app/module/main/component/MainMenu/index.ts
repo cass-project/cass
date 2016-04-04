@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router'
+import {AuthService} from '../../../auth/service/AuthService';
 
 @Component({
     selector: 'cass-main-menu',
@@ -13,4 +14,9 @@ import {ROUTER_DIRECTIVES} from 'angular2/router'
 })
 export class MainMenu
 {
+    constructor(private authService: AuthService) {}
+
+    showSignOut() {
+        return this.authService.signedIn;
+    }
 }

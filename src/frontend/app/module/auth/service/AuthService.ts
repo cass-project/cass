@@ -72,7 +72,7 @@ export class AuthService
             response => {
                 this.signedIn = false;
                 this.profile.empty();
-                this.router.navigate(['Welcome']);
+                this.router.navigate(['Profile']);
 
                 Cookie.deleteCookie('api_key');
             }
