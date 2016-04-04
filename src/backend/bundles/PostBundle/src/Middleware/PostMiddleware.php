@@ -3,6 +3,8 @@ namespace Post\Middleware;
 
 
 use Application\REST\GenericRESTResponseBuilder;
+use Auth\Service\CurrentProfileService;
+use Post\Middleware\Command\Command;
 use Post\Service\PostService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -11,33 +13,26 @@ use Zend\Stratigility\MiddlewareInterface;
 class PostMiddleware implements MiddlewareInterface
 {
 
-	private $postService;
-	public function __construct(PostService $postService){
-		$this->postService = $postService;
+	private $postSevice;
+	private $currentProfileService;
+
+	public function __construct(PostService $postService, CurrentProfileService $currentProfileService ){
+		$this->postSevice = $postService;
+		$this->currentProfileService = $currentProfileService;
 	}
+
 
 	public function __invoke(Request $request, Response $response, callable $out = NULL){
 		$responseBuilder = new GenericRESTResponseBuilder($response);
-		switch($request->getAttribute('command')){
-			default :{
-				return $responseBuilder
-					->setStatusNotFound()
-					->build()
-					;
-			}
 
-			case 'parse': {
-				// парсим урл и
-				$data = json_decode($request->getBody(), true);
-				$opts = $this->postService->getLinkOptions($data['url']);
+		$command = Command::factory($request);
+		$command->setPostService($this->postSevice);
+		$command->setCurrentProfileService($this->currentProfileService);
 
-				return $responseBuilder
-					->setStatusSuccess()
-					->setJson($opts)
-					->build()
-					;
-				break;
-			}
-		}
+		$responseBuilder
+			->setStatusSuccess()
+			->setJson($command->run($request))
+			->build()
+		;
 	}
 }

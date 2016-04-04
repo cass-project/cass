@@ -17,9 +17,7 @@ return [
 		'factories' => [
 			PostService::class              => PostServiceFactory::class,
 			AttachmentService::class				=> AttachmentServiceFactory::class,
-
 			PostMiddleware::class           => PostMiddlewareFactory::class,
-			PostCRUDMiddleware::class       => PostCRUDMIddlewareFactory::class,
 			PostAttachmentMiddleware::class => PostAttachmentMiddlewareFactory::class
 		]
 	]

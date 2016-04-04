@@ -1,6 +1,12 @@
 <?php
 namespace Data\Entity;
 
+
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
+
 /**
  * @Entity(repositoryClass="Data\Repository\Attachment\AttachmentRepository")
  * @Table(name="attachment")
@@ -10,7 +16,7 @@ class Attachment
 	const TYPE_VIDEO_LINK = 1;
 
 	/**
-	 * @Id
+	 * @Id()
 	 * @GeneratedValue
 	 * @Column(type="integer")
 	 * @var int

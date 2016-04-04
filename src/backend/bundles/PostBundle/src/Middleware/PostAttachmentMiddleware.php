@@ -41,10 +41,10 @@ class PostAttachmentMiddleware implements MiddlewareInterface
 
 			case 'add': {
 
-				$json_r = json_decode($request->getBody());
+				$json_r = json_decode($request->getBody(),true);
 				$r=[];
 
-				if(isset($json_r->post_id) && $json_r->post_id){
+				if(isset($json_r['post_id']) && $json_r['post_id']){
 					// добавляем аттачмент
 					$postAttachmentParam = (new PutPostAttachmentRequest($request))->getParameters();
 

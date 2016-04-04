@@ -61,6 +61,12 @@ abstract class Command
 				return new DeleteCommand();
 			break;
 
+			case 'parse': {
+				return new ParseUrl();
+			break;
+			}
+
+
 		}
 
 
