@@ -29,8 +29,6 @@ return [
           ThemeRepository::class        => ThemeRepositoryFactory::class,
           HostRepository::class         => HostRepositoryFactory::class,
           PostRepository::class         => PostRepositoryFactory::class,
-          AttachmentRepository::class   => AttachmentRepositoryFactory::class,
-          SphinxClient::class           => SphinxClientFactory::class,
           ChannelRepository::class      => ChannelRepositoryFactory::class,
           AttachmentRepository::class   => AttachmentRepositoryFactory::class,
           SphinxClient::class           => SphinxClientFactory::class
