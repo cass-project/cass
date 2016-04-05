@@ -7,7 +7,7 @@ class SearchCommand extends Command
 {
     public function run(ServerRequestInterface $request)
     {
-        $sphinx      = $this->getSphinxService();
+        $sphinx      = $this->getSphinxClient();
         $queryParams = $request->getQueryParams();
         $text     = $request->getAttribute('text');
         $limit    = $queryParams["limit"] ?? $sphinx->limit;

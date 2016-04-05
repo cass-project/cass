@@ -12,8 +12,8 @@ class FeedMiddlewareFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null): FeedMiddleware
     {
         $schemaService = $container->get(SchemaService::class);
-        $sphinxService = $container->get(SphinxClient::class);
-        return new FeedMiddleware($sphinxService,$schemaService);
+        $sphinxClient = $container->get(SphinxClient::class);
+        return new FeedMiddleware($sphinxClient,$schemaService);
 
     }
 }

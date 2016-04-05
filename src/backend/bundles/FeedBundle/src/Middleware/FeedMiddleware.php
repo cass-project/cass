@@ -10,17 +10,17 @@ use Feed\Middleware\Command\Command;
 
 class FeedMiddleware implements MiddlewareInterface
 {
-    private $sphinxService;
-    public function __construct(SphinxClient $sphinxService)
+    private $sphinxClient;
+    public function __construct(SphinxClient $sphinxClient)
     {
-        $this->sphinxService = $sphinxService;
+        $this->sphinxClient = $sphinxClient;
     }
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
         $responseBuilder = new GenericRESTResponseBuilder($response);
         $command = Command::factory($request);
-        $command->setSphinxService($this->sphinxService);
+        $command->setSphinxClient($this->sphinxClient);
         return $responseBuilder
             ->setStatusSuccess()
             ->setJson($command->run($request))
