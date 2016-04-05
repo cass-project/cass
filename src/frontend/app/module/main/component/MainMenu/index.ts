@@ -14,7 +14,10 @@ import {AuthService} from '../../../auth/service/AuthService';
 })
 export class MainMenu
 {
+    Name: String = "Eric Evance";
     constructor(private authService: AuthService) {}
+
+    navElementClicked: boolean = false;
 
     showSignOut() {
         return this.authService.signedIn;
