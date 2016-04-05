@@ -64,10 +64,6 @@
             window.SwaggerTranslator.translate();
           }
 
-          $('pre code').each(function(i, e) {
-            hljs.highlightBlock(e)
-          });
-
           addApiKeyAuthorization();
         },
         onFailure: function(data) {
@@ -81,11 +77,10 @@
       });
 
       function addApiKeyAuthorization(){
-        var key = encodeURIComponent($('#input_apiKey')[0].value);
+        var key = $('#input_apiKey')[0].value;
         if(key && key.trim() != "") {
-            var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("api_key", key, "query");
-            window.swaggerUi.api.clientAuthorizations.add("api_key", apiKeyAuth);
-            log("added key " + key);
+          var authKeyHeader = new SwaggerClient.ApiKeyAuthorization("X-Api-Key", key, "header");
+          window.swaggerUi.api.clientAuthorizations.add("X-Api-Key", authKeyHeader);
         }
       }
 
@@ -93,9 +88,9 @@
 
       // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
       /*
-        var apiKey = "myApiKeyXXXX123456789";
-        $('#input_apiKey').val(apiKey);
-      */
+       var apiKey = "myApiKeyXXXX123456789";
+       $('#input_apiKey').val(apiKey);
+       */
 
       window.swaggerUi.load();
 
@@ -104,14 +99,17 @@
           console.log.apply(console, arguments);
         }
       }
-  });
+    });
   </script>
 </head>
 
 <body class="swagger-section">
 <div id='header'>
   <div class="swagger-ui-wrap">
-    <a id="logo" href="http://swagger.io">swagger</a>
+    <a id="logo" href="http://swagger.io">cass</a>
+    <form id='api_selector'>
+      <div class='input'><input placeholder="X-Api-Key" id="input_apiKey" name="apiKey" type="text"/></div>
+    </form>
   </div>
 </div>
 <div id="swagger_info" class="swagger-ui-wrap">
