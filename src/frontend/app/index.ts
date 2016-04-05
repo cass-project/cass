@@ -20,7 +20,7 @@ import {Cookie} from 'ng2-cookies';
 import {MainMenu} from './module/main/component/MainMenu/index'
 import {AuthService} from './module/auth/service/AuthService';
 import {CurrentProfileService} from './module/profile/service/CurrentProfileService';
-
+import {WorkUnderway} from './module/capWorkUnderway/index'
 import {AuthComponent} from './module/auth/index';
 import {ProfileComponent} from './module/profile/index';
 import {CatalogComponent} from './module/catalog/index';
@@ -60,6 +60,11 @@ import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorCom
         path: '/theme-editor/...',
         name: 'Theme-Editor',
         component: ThemeEditorComponent
+    },
+    {
+        path: '/working/...',
+        name: 'Working',
+        component: WorkUnderway
     }
 ])
 class App
