@@ -103,7 +103,7 @@ class PostRepository extends EntityRepository
 		$savePostProperties->getDescription()->on(function($value) use($postEntity) {
 			$postEntity->setDescription($value);
 		});
-		$savePostProperties->getStatus()->on(function($value) use($postEntity) {
+		$savePostProperties->getPublish()->on(function($value) use($postEntity) {
 			$postEntity->setPublish($value);
 		});
 

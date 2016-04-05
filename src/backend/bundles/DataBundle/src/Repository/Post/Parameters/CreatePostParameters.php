@@ -5,17 +5,15 @@ use Data\Repository\Post\SavePostProperties;
 
 class CreatePostParameters implements SavePostProperties
 {
-
 	private $name;
 	private $description;
-	private $status;
+	private $publish;
 	private $accountId;
 
-	public function __construct(Param $name, Param $description, Param $status)
+	public function __construct(Param $name, Param $description)
 	{
 		$this->name        = $name;
 		$this->description = $description;
-		$this->status      = $status;
 	}
 
 	public function getName():Param
@@ -28,9 +26,15 @@ class CreatePostParameters implements SavePostProperties
 		return $this->description;
 	}
 
-	public function getStatus():Param
+	public function getPublish():Param
 	{
-		return $this->status;
+		return $this->publish;
+	}
+
+	public function setPublish(Param $publish)
+	{
+		$this->publish = $publish;
+		return $this;
 	}
 
 	public function getAccountId():Param
@@ -43,6 +47,7 @@ class CreatePostParameters implements SavePostProperties
 		$this->accountId = $id;
 		return $this;
 	}
+
 
 	public function getCreated():Param
 	{

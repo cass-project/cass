@@ -3,6 +3,9 @@ namespace Post\Middleware;
 
 
 use Application\REST\GenericRESTResponseBuilder;
+use Post\Middleware\Command\AttachmentCommand;
+use Post\Middleware\Command\Command;
+use Post\Middleware\Command\CreateAttachmentCommand;
 use Post\Middleware\Request\PutPostAttachmentRequest;
 use Post\Middleware\Request\PutPostRequest;
 use Post\Service\AttachmentService;
@@ -31,56 +34,19 @@ class AttachmentMiddleware implements MiddlewareInterface
 
 	public function __invoke(Request $request, Response $response, callable $out = NULL){
 		$responseBuilder = new GenericRESTResponseBuilder($response);
-		switch($request->getAttribute('command')){
-			default :{
-				return $responseBuilder
-					->setStatusNotFound()
-					->build()
-					;
-			}
 
-			case 'add': {
 
-				$json_r = json_decode($request->getBody(),true);
-				$r=[];
+		$responseBuilder = new GenericRESTResponseBuilder($response);
 
-				if(isset($json_r['post_id']) && $json_r['post_id']){
-					// добавляем аттачмент
-					$postAttachmentParam = (new PutPostAttachmentRequest($request))->getParameters();
+		$command = AttachmentCommand::factory($request);
+		$command->setPostService($this->postService);
+		$command->setAttachmentService($this->attachmentService);
 
-					$attachment = $this->attachmentService->create($postAttachmentParam);
-
-					$r = $attachment->toJSON();
-
-				} else {
-					// создаём пост и
-					// добавляем аттачмент
-
-					$post = $this->postService->create(
-						(new PutPostRequest($request))->getParameters()
-					);
-
-					$attachment = $this->attachmentService->create(
-						(new PutPostAttachmentRequest($request))->getParameters()
-					);
-
-					$post->addAttachment($attachment);
-					$this->postService->save($post);
-
-				}
-
-				return $responseBuilder
-					->setStatusSuccess()
-					->setJson([
-											'result'  => $r,
-											'success' => TRUE
-										]
-					)
-					->build()
-					;
-				break;
-			}
-		}
+		$responseBuilder
+			->setStatusSuccess()
+			->setJson($command->run($request))
+			->build()
+		;
 	}
 
 }

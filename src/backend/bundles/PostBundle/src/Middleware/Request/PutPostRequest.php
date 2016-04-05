@@ -16,9 +16,8 @@ class PutPostRequest extends SchemaParams
 
 		$name = new Param($data, 'name', true);
 		$description = new Param($data, 'description');
-		$status = new Param($data, 'status');
 
-		return new CreatePostParameters($name, $description, $status);
+		return new CreatePostParameters($name, $description);
 	}
 
 	protected function getSchema(): JSONSchema

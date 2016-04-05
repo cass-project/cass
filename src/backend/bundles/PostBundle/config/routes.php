@@ -48,9 +48,7 @@ return function(Application $app, string $prefix){
 		'post-delete-attachment'
 	);
 
-
-
-	// post persist
+	//post persist saves persis post
 
 
 	$app->post(

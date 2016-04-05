@@ -37,7 +37,7 @@ class UpdatePostParameters implements SavePostProperties
 		return $this->description;
 	}
 
-	public function getStatus():Param
+	public function getPublish():Param
 	{
 		return $this->status;
 	}

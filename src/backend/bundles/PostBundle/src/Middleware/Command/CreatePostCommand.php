@@ -19,6 +19,7 @@ class CreatePostCommand extends Command
 			(new PutPostRequest($request))
 															->getParameters()
 															->setAccountId($accountIdParam)
+															->setPublish(new Param(['publish'=> 'true'],'publish'))
 		);
 
 		return [

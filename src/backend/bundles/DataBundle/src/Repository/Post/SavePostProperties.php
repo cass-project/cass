@@ -12,7 +12,7 @@ interface SavePostProperties
 
 	public function getDescription():Param;
 
-	public function getStatus():Param;
+	public function getPublish():Param;
 
 	public function getAccountId():Param;
 
