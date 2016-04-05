@@ -8,7 +8,8 @@
                             <img src="/public/assets/profile-default.png" alt="[&#9829;]">
                         </div>
                         <div class="description" *ngIf="!authService.signedIn">
-                            <h1>Unregistered</h1>
+                            <h1>Sign In</h1>
+                            <p>Collect&Organize your content</p>
                         </div>
                         <div class="description" *ngIf="authService.signedIn">
                             <h1>{{Name}}</h1>
