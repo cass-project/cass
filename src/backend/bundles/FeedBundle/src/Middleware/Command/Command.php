@@ -7,16 +7,16 @@ use Sphinx\SphinxClient;
 
 abstract class Command
 {
-    private $sphinxService;
+    private $sphinxClient;
 
-    public function setSphinxService(SphinxClient $sphinxService)
+    public function setSphinxClient(SphinxClient $sphinxClient)
     {
-        $this->sphinxService = $sphinxService;
+        $this->sphinxClient = $sphinxClient;
     }
 
-    protected function getSphinxService(): SphinxClient
+    protected function getSphinxClient(): SphinxClient
     {
-        return $this->sphinxService;
+        return $this->sphinxClient;
     }
 
     abstract public function run(ServerRequestInterface $request);
@@ -27,6 +27,8 @@ abstract class Command
         switch ($command) {
             default:
                 throw new CommandNotFoundException(sprintf('Command `%s` not found', $command));
+            case '':
+                return new DefaultCommand();
             case 'search':
                 return new SearchCommand();
         }
