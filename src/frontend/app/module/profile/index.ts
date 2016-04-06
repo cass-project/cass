@@ -3,8 +3,8 @@ import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {AuthService} from '../auth/service/AuthService';
 import {ProfileChannelComponent} from './component/ProfileChannelComponent/index';
 import {ProfilePersonalDataComponent} from './component/ProfilePersonalDataComponent/index';
-import {ThemeCleaner} from "../host-admin/component/ThemeCleaner/component";
 import {ProfileEdit} from "./component/ProfileEdit/index";
+import {RouterCleaner} from "../routerCleaner/component";
 
 @Component({
     template: require('./template.html'),
@@ -19,8 +19,8 @@ import {ProfileEdit} from "./component/ProfileEdit/index";
     {
         useAsDefault: true,
         path: '/',
-        name: 'Theme-Cleaner',
-        component: ThemeCleaner
+        name: 'RouterCleaner',
+        component: RouterCleaner
     },
     {
         path: '/personal',

@@ -5,9 +5,9 @@ import {ThemeTree} from '../../../theme/Theme';
 import {ThemeTreeComponent} from '../ThemeTreeComponent/component';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {CreateThemeForm} from '../../form/CreateThemeForm/component';
-import {ThemeCleaner} from '../../component/ThemeCleaner/component'
 import {UpdateThemeForm} from '../../form/UpdateThemeForm/component';
 import {CreationFormPost} from  '../../form/CreationFormPost/component';
+import {RouterCleaner} from "../../../routerCleaner/component";
 
 
 
@@ -29,8 +29,8 @@ import {CreationFormPost} from  '../../form/CreationFormPost/component';
     {
         useAsDefault: true,
         path: '/',
-        name: 'Theme-Cleaner',
-        component: ThemeCleaner
+        name: 'RouterCleaner',
+        component: RouterCleaner
     },
     {
 
