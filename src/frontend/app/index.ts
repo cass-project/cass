@@ -5,6 +5,7 @@ import 'es6-shim';
 import 'es6-promise';
 import 'reflect-metadata';
 import 'rxjs/Rx';
+import {Aggregator} from "./module/main/component/Aggregator/component";
 
 require('zone.js');
 require('bootstrap/dist/css/bootstrap.css');
@@ -25,6 +26,8 @@ import {AuthComponent} from './module/auth/index';
 import {ProfileComponent} from './module/profile/index';
 import {CatalogComponent} from './module/catalog/index';
 import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorComponent/component';
+import {Collections} from "./module/main/component/Collections/component";
+import {Collection} from "./module/main/component/Collection/component";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -52,9 +55,19 @@ import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorCom
         useAsDefault: true
     },
     {
-        path: '/catalog/',
-        name: 'Catalog',
-        component: CatalogComponent
+        path: '/collections/...',
+        name: 'Collections',
+        component: Collections
+    },
+    {
+        path: '/collection/...',
+        name: 'Collection',
+        component: Collection
+    },
+    {
+        path: '/aggregator/...',
+        name: 'Aggregator',
+        component: Aggregator
     },
     {
         path: '/theme-editor/...',
