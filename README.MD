@@ -1,29 +1,5 @@
 CASS Project
 ============
 
-Видение проекта
----------------
-
-[https://drive.google.com/folderview?id=0By57mnIwXGUhdFV4TG9zVWRRbFk&tid=0By57mnIwXGUheXE5dXFfUWVaSjQ] (https://drive.google.com/folderview?id=0By57mnIwXGUhdFV4TG9zVWRRbFk&tid=0By57mnIwXGUheXE5dXFfUWVaSjQ)
-
-Рабочая документация
---------------------
-[https://drive.google.com/folderview?id=0By57mnIwXGUheXE5dXFfUWVaSjQ] (https://drive.google.com/folderview?id=0By57mnIwXGUheXE5dXFfUWVaSjQ)
-
-Прочти это:
------------
-
-- Рабочий процесс: [https://drive.google.com/folderview?id=0By57mnIwXGUhS0wxeXJSV0tvNnc&tid=0By57mnIwXGUheXE5dXFfUWVaSjQ] (https://drive.google.com/folderview?id=0By57mnIwXGUhS0wxeXJSV0tvNnc&tid=0By57mnIwXGUheXE5dXFfUWVaSjQ)
-
-Потом прочти это: стандарты кода
---------------------------------
-
-- General: Soon!
-- PHP: Soon!
-- JavaScript, Angular: Soon!
-
-И подними проект:
------------------
-
-- Как поднять проект: Soon!
-
+- Видение проекта: [https://drive.google.com/open?id=0BxgzA4OWII8-QzhxbjgzOWJnOVE]()
+- Рабочая документация: [https://drive.google.com/folderview?id=0BxgzA4OWII8-U2xWZnNPQ0h6cXM&usp=sharing]()
