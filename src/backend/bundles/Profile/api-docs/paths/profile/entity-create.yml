@@ -1,0 +1,29 @@
+/backend/api/protected/profile/create:
+  put:
+    tags:
+      - profile
+    description: |
+      Создать новый профиль
+    parameters:
+      - name: body
+        in: body
+        required: true
+        description: JSON Request
+        schema:
+          $ref: '#/definitions/PUT_Profile_Request'
+    responses:
+      '200':
+        description: |
+          Successfull response
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              default: true
+              description: "= true"
+            entity:
+              $ref: '#/definitions/Data_Entity_Profile'
