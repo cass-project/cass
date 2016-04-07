@@ -1,41 +1,26 @@
 import {Component} from 'angular2/core';
 import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {AuthService} from '../auth/service/AuthService';
-import {ProfileChannelComponent} from './component/ProfileChannelComponent/index';
-import {ProfilePersonalDataComponent} from './component/ProfilePersonalDataComponent/index';
-import {ProfileEdit} from "./component/ProfileEdit/index";
-import {RouterCleaner} from "../routerCleaner/component";
+import {ProfileEditComponent} from "./component/ProfileEdit/index";
+import {ProfileDashboardComponent} from "./component/ProfileDashboard/index";
 
 @Component({
     template: require('./template.html'),
     directives: [
         ROUTER_DIRECTIVES
-    ],
-    styles: [
-        require('./style.shadow.scss')
     ]
 })
 @RouteConfig([
     {
         useAsDefault: true,
+        name: 'Dashboard',
         path: '/',
-        name: 'RouterCleaner',
-        component: RouterCleaner
+        component: ProfileDashboardComponent
     },
     {
-        path: '/personal',
-        name: 'ProfilePersonalData',
-        component: ProfilePersonalDataComponent
-    },
-    {
-        path: '/channel/:channelId',
-        name: 'ProfileChannel',
-        component: ProfileChannelComponent
-    },
-    {
+        name: 'Edit',
         path: '/edit',
-        name: 'ProfileEdit',
-        component: ProfileEdit
+        component: ProfileEditComponent
     }
 ])
 export class ProfileComponent

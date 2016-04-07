@@ -1,9 +1,9 @@
 import {Injectable} from 'angular2/core';
 import {Http, URLSearchParams} from 'angular2/http';
 import {Router} from "angular2/router";
-import {ResponseInterface} from "../../main/ResponseInterface";
+import {ResponseInterface} from "../../common/ResponseInterface";
 import {Cookie} from 'ng2-cookies';
-import {BackendError} from '../../main/BackendError';
+import {BackendError} from '../../common/BackendError';
 import {CurrentProfileService} from '../../profile/service/CurrentProfileService';
 import {Profile} from "../../profile/service/CurrentProfileService";
 

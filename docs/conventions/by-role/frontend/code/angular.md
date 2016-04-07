@@ -19,7 +19,7 @@
     module/
         square/
             /component
-                /SquareCalculateComponent
+                /SquareCalculate
                     component.ts <<< Исходный код
                     template.html
                     style.shadow.scsss
@@ -32,7 +32,7 @@
         square/
             /component
                 component/
-                    SquareOptionsComponent
+                    SquareOptions
                         component.ts
                         template.html
                         style.shadow.scss
@@ -50,7 +50,7 @@
         square/
             /component
                 component/
-                    SquareOptionsComponent
+                    SquareOptions
                         component.ts
                         template.html
                         style.shadow.scss
@@ -58,7 +58,7 @@
                     SquareForm.ts
                 service/
                     SquareRESTService.ts
-                SquareCalculateComponent/
+                SquareCalculate/
                     component.ts
                     template.html
                     style.shadow.scss

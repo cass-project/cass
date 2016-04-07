@@ -5,7 +5,6 @@ import 'es6-shim';
 import 'es6-promise';
 import 'reflect-metadata';
 import 'rxjs/Rx';
-import {Aggregator} from "./module/main/component/Aggregator/component";
 
 require('zone.js');
 require('bootstrap/dist/css/bootstrap.css');
@@ -18,16 +17,15 @@ import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, URLSearchParams} fro
 import {CORE_DIRECTIVES} from 'angular2/common';
 import {Cookie} from 'ng2-cookies';
 
-import {MainMenu} from './module/main/component/MainMenu/index'
+import {MainMenu} from './module/common/component/MainMenu/index'
 import {AuthService} from './module/auth/service/AuthService';
 import {CurrentProfileService} from './module/profile/service/CurrentProfileService';
-import {WorkUnderway} from './module/capWorkUnderway/index'
 import {AuthComponent} from './module/auth/index';
 import {ProfileComponent} from './module/profile/index';
 import {CatalogComponent} from './module/catalog/index';
-import {ThemeEditorComponent} from './module/host-admin/component/ThemeEditorComponent/component';
-import {Collections} from "./module/main/component/Collections/component";
-import {Collection} from "./module/main/component/Collection/component";
+import {CollectionComponent} from "./module/collection/index";
+import {WorkInProgress} from "./module/common/component/WorkInProgress/index";
+import {Nothing} from "./module/common/component/Nothing/index";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -35,7 +33,7 @@ import {Collection} from "./module/main/component/Collection/component";
     directives: [
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,
-        MainMenu,
+        MainMenu
     ],
     providers: [
         AuthService,
@@ -44,45 +42,28 @@ import {Collection} from "./module/main/component/Collection/component";
 })
 @RouteConfig([
     {
+        useAsDefault: true,
+        path: '/profile/...',
+        name: 'Profile',
+        component: ProfileComponent,
+    },
+    {
         path: '/auth/...',
         name: 'Auth',
         component: AuthComponent
     },
     {
-        path: '/profile/...',
-        name: 'Profile',
-        component: ProfileComponent,
-        useAsDefault: true
-    },
-    {
-        path: '/collections/...',
-        name: 'Collections',
-        component: Collections
-    },
-    {
         path: '/collection/...',
         name: 'Collection',
-        component: Collection
+        component: CollectionComponent
     },
     {
-        path: '/aggregator/...',
-        name: 'Aggregator',
-        component: Aggregator
-    },
-    {
-        path: '/theme-editor/...',
-        name: 'Theme-Editor',
-        component: ThemeEditorComponent
-    },
-    {
-        path: '/working/...',
-        name: 'Working',
-        component: WorkUnderway
+        path: '/catalog/...',
+        name: 'Catalog',
+        component: CatalogComponent
     }
 ])
-class App
-{
-}
+class App {}
 
 class OAuthRequestOptions extends BaseRequestOptions {
     constructor () {

@@ -2,11 +2,11 @@ import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {COMMON_DIRECTIVES} from 'angular2/common';
 
-import {AuthControlsComponent} from './component/AuthControlsComponent/index';
+import {AuthControlsComponent} from './component/AuthControls/index';
 import {AuthService} from './service/AuthService';
-import {SignInComponent} from './component/SignInComponent/index';
-import {SignUpComponent} from './component/SignUpComponent/index';
-import {LogOutComponent} from './component/LogOutComponent/index';
+import {SignInComponent} from './component/SignIn/index';
+import {SignUpComponent} from './component/SignUp/index';
+import {LogOutComponent} from './component/LogOut/index';
 
 @Component({
     template: require('./template.html'),
