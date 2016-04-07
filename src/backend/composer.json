@@ -9,7 +9,8 @@
       "Host\\": "bundles/Host/src",
       "Channel\\": "bundles/Channel/src",
       "Post\\": "bundles/Post/src",
-      "Feed\\": "bundles/Feed/src"
+      "Feed\\": "bundles/Feed/src",
+      "Profile\\": "bundles/Profile/src"
     }
   },
   "require": {
