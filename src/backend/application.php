@@ -47,12 +47,11 @@ class LBApplicationBootstrap
         $bundlesPath = $this->serviceManager->get('paths')['bundles'];
 
         $directories = array_filter(scandir($bundlesPath), function($input) use ($bundlesPath) {
-            return is_dir(sprintf('%s/%s', $bundlesPath, $input))
-                && preg_match('/^(.*)Bundle$/', $input);
+            return $input != '.' && $input != '..' && is_dir(sprintf('%s/%s', $bundlesPath, $input));
         });
 
         foreach($directories as $directory) {
-            $bundleName = substr($directory, 0, -6);
+            $bundleName = $directory;
             $bundleClassName = sprintf('\%s\%sBundle', $bundleName, $bundleName);
 
             if(!class_exists($bundleClassName)) {
