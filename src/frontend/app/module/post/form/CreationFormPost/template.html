@@ -8,6 +8,7 @@
                 </div>
                 <div class="modal-body" >
                     <div class="form-group">
+                        <textarea class="form-control" [(ngModel)]="title" rows="1"></textarea>
                         <textarea class="form-control" [(ngModel)]="text" rows="3"></textarea>
                         <!--<div class="btn-group" role="group" >-->
                             <input type="button"  value="Attachment" (click)="showLinkInput = !showLinkInput" class="btn btn-secondary pull-right"/>

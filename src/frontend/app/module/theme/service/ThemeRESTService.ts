@@ -6,7 +6,7 @@ import {URLSearchParams} from 'angular2/http';
 import {Headers} from "angular2/http";
 import {RequestOptions} from "angular2/http";
 import {ThemeTree, Theme, ThemeHost} from '../Theme';
-import {ThemeEditorComponent} from '../../host-admin/component/ThemeEditorComponent/component';
+import {ThemeEditorComponent} from '../../host-admin_TEMP/component/ThemeEditorComponent/component';
 
 @Injectable()
 export class ThemeRESTService

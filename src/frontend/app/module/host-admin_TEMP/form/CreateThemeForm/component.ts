@@ -8,7 +8,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
     styles: [
         require('./style.shadow.scss')
     ],
-    template: require('./template.html')
+    template: require('./template.html'),
 })
 export class CreateThemeForm
 {

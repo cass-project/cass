@@ -1,16 +1,25 @@
 import {Component} from 'angular2/core';
-import {ThemeRESTService} from  '../../../theme/service/ThemeRESTService';
-import {ThemeEditorService} from '../../service/ThemeEditorService';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
+import {PostService} from "../../service/PostService";
+import {PostRestService} from "../../service/PostRestService";
+
 
 @Component({
+    template: require('./template.html'),
     styles: [
-        require('./style.shadow.scss')
+        require('./style.shadow.scss'),
     ],
-    template: require('./template.html')
+    'directives': [
+        ROUTER_DIRECTIVES
+    ],
+    'providers': [
+        PostRestService,
+        PostService
+    ]
 })
 
  export class CreationFormPost{
+    title: string;
     text: string;
     link: string;
     linkImg: string;
@@ -20,8 +29,8 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
     itsLink: boolean = false;
 
     constructor(
-        private themeRESTService: ThemeRESTService,
-        private themeEditorService: ThemeEditorService,
+        private postRESTService: PostRestService,
+        private postService: PostService,
         public router: Router
     ){}
 
@@ -41,19 +50,19 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
     }
 
     submit() {
-        //this.themeRESTService //create post api request
-        //this.themeRESTService //update post info
-        //this.themeEditorService.showFormContentBox = false;
-        //this.router.parent.navigate(['Theme-Cleaner']);
+        this.postRESTService.createPost(this.title, this.text).subscribe(data => {
+            //this.themeRESTService //update post's info
+            this.close();
+        });
     }
     reset(){
         this.router.parent.navigate(['RouterCleaner']);
         this.router.parent.navigate(['Creation-Form-Post']);
-        this.themeEditorService.showFormContentBox = true;
+        this.postService.showFormContentBox = true;
     }
 
     close(){
-        this.themeEditorService.showFormContentBox = false;
+        this.postService.showFormContentBox = false;
         this.router.parent.navigate(['RouterCleaner']);
     }
 }

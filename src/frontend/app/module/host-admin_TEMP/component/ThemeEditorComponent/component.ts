@@ -6,8 +6,8 @@ import {ThemeTreeComponent} from '../ThemeTreeComponent/component';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {CreateThemeForm} from '../../form/CreateThemeForm/component';
 import {UpdateThemeForm} from '../../form/UpdateThemeForm/component';
-import {CreationFormPost} from  '../../form/CreationFormPost/component';
 import {RouterCleaner} from "../../../host-admin_TEMP/routerCleaner/component";
+import {CreationFormPost} from "../../../post/form/CreationFormPost/component";
 
 
 
