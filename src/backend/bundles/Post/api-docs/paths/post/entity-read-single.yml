@@ -1,4 +1,4 @@
-'/protected/post/read/{themeId}':
+'/backend/api/protected/post/read/{postId}':
   get:
     tags:
       - post
@@ -20,7 +20,7 @@
           required:
             - success
             - total
-            - entities
+            - entity
           properties:
             success:
               type: boolean
@@ -28,7 +28,7 @@
             total:
               type: number
               description: "Количество тематик"
-            entities:
-              type: array
+            entity:
+              type: object
               items:
                 $ref: "#/definitions/Data_Entity_Post"
