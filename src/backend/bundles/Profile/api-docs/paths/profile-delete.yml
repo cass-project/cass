@@ -1,0 +1,22 @@
+'/protected/profile/delete/{id}':
+  delete:
+    tags:
+      - profile
+    description: Remove existing profile
+    security:
+      - x_api_key: []
+    responses:
+      200:
+        description: Remove profile successfully
+        schema:
+          required:
+            - success
+          properties:
+            success:
+              type: boolean
+              default: true
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        description: Profile not found
+        $ref: '#/responses/NotFound'

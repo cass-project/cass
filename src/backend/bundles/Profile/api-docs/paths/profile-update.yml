@@ -1,0 +1,32 @@
+'/protected/profile/update/{id}':
+  post:
+    tags:
+      - profile
+    description: Edit existing profile
+    security:
+      - x_api_key: []
+    parameters:
+      - name: body
+        in: body
+        required: true
+        description: Profile entity
+        schema:
+          $ref: '#/definitions/Profile'
+    responses:
+      200:
+        description: Edit profile successfully
+        schema:
+          properties:
+            success:
+              type: boolean
+              default: true
+            entity:
+              $ref: '#/definitions/Profile'
+          required:
+            - success
+            - entity
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        description: Profile not found
+        $ref: '#/responses/NotFound'

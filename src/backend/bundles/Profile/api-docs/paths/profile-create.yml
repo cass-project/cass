@@ -1,0 +1,29 @@
+/protected/profile/create:
+  put:
+    tags:
+      - profile
+    description: Create new profile
+    security:
+      - x_api_key: []
+    parameters:
+      - name: body
+        in: body
+        required: true
+        description: Profile entity
+        schema:
+          $ref: '#/definitions/Profile'
+    responses:
+      200:
+        description: Creating profile successfully
+        schema:
+          properties:
+            success:
+              type: boolean
+              default: true
+            entity:
+              $ref: '#/definitions/Profile'
+          required:
+            - success
+            - entity
+      403:
+        $ref: '#/responses/Unauthorized'
