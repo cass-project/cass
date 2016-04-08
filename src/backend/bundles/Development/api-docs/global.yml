@@ -3,3 +3,8 @@ basePath: /backend/api
 info:
   version: 0.0.1
   title: CASS API
+securityDefinitions:
+  x_api_key:
+    type: apiKey
+    name: X-Api-Key
+    in: header
