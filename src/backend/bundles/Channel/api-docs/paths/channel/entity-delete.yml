@@ -1,4 +1,4 @@
-'/backend/api/protected/channel/delete/{channelId}':
+'/protected/channel/delete/{channelId}':
   delete:
     tags:
       - channel

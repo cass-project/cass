@@ -1,4 +1,4 @@
-'/backend/api/protected/channel/update/{channelId}':
+'/protected/channel/update/{channelId}':
   post:
     tags:
       - channel

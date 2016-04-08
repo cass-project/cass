@@ -1,4 +1,4 @@
-/backend/api/protected/post/create:
+/protected/post/create:
   put:
     tags:
       - post

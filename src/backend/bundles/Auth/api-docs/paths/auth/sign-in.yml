@@ -1,4 +1,4 @@
-'/backend/api/auth/sign-in/':
+'/auth/sign-in/':
   post:
     tags:
       - auth

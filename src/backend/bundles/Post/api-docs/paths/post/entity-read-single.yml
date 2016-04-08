@@ -1,4 +1,4 @@
-'/backend/api/protected/post/read/{themeId}':
+'/protected/post/read/{themeId}':
   get:
     tags:
       - post

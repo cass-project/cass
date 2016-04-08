@@ -1,4 +1,4 @@
-'/backend/api/protected/channel/read/{channelId}':
+'/protected/channel/read/{channelId}':
   get:
     tags:
       - channel

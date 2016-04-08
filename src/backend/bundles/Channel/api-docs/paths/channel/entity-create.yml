@@ -1,4 +1,4 @@
-/backend/api/protected/channel/create:
+/protected/channel/create:
   put:
     tags:
       - channel

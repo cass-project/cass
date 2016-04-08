@@ -1,4 +1,4 @@
-/backend/api/protected/host-admin/theme-editor/entity/create:
+/protected/host-admin/theme-editor/entity/create:
   put:
     tags:
       - theme-editor

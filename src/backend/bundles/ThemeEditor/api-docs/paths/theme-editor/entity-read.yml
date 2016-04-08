@@ -1,4 +1,4 @@
-'/backend/api/protected/host-admin/theme-editor/read/entities/':
+'/protected/host-admin/theme-editor/read/entities/':
   get:
     tags:
       - theme-editor

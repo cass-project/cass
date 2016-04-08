@@ -1,4 +1,4 @@
-'/backend/api/protected/host-admin/theme-editor/entity/move/{themeId}/under/{parentThemeId}/in-position/{position}':
+'/protected/host-admin/theme-editor/entity/move/{themeId}/under/{parentThemeId}/in-position/{position}':
   post:
     tags:
       - theme-editor

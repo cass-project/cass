@@ -1,4 +1,4 @@
-'/backend/api/protected/post/update':
+'/protected/post/update':
   post:
     tags:
       - post
