@@ -1,4 +1,4 @@
-Data_Entity_Profile:
+Profile:
   type: object
   required:
     - id
