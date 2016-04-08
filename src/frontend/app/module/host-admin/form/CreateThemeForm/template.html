@@ -1,0 +1,22 @@
+<form (ngSubmit)="submit()" (keyup.esc)="close()">
+    <div class="modal" tabindex="-1" style="display: block;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="close()">&times;</button>
+                    <h4 class="modal-title">Create theme</h4>
+                </div>
+                <div class="modal-body" >
+                    <div class="form-group">
+                        <input class="form-control" [(ngModel)]="title" placeholder="Theme title">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" value="Close" class="btn btn-secondary" (click)="close()"/>
+                    <input type="submit" value="Submit" class="btn btn-primary"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade in"></div>
+</form>

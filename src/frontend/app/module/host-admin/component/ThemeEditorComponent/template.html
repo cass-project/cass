@@ -1,0 +1,20 @@
+<article class="component component-theme-editor">
+    <header (click)="clearSelection()">
+        <h1>Theme Editor</h1>
+    </header>
+    <body (click)="clearSelection()">
+    </body>
+    <theme-tree [tree]="themeEditorService.themesTree"></theme-tree>
+    <div class="form-content-box" *ngIf="themeEditorService.showFormContentBox">
+        <router-outlet></router-outlet>
+    </div>
+    <footer>
+        <button (click)="openCreateThemeForm()" class="btn btn-success">Create</button>
+        <!--<div *ngIf="themeEditorService.selectedThemeId">-->
+            <button (click)="openUpdateThemeForm()" [disabled]="!themeEditorService.selectedThemeId" class="btn btn-warning">Update</button>
+            <button (click)="deleteTheme()" [disabled]="!themeEditorService.selectedThemeId" class="btn btn-danger">Delete</button>
+            <button (click)="openCreatePostForm()" [disabled]="!themeEditorService.selectedThemeId" class="btn btn-success">Create Post</button>
+        <!--</div>-->
+    </footer>
+</article>
+
