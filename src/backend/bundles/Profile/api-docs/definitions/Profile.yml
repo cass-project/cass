@@ -2,10 +2,14 @@ Profile:
   type: object
   required:
     - id
+    - call
   properties:
     id:
       type: number
       description: ID
+    call:
+      type: string
+      description: Отображаемое имя
     name:
       type: string
       description: Имя
@@ -27,3 +31,6 @@ Profile:
     avatar:
       type: string
       description: Аватар
+    account_id:
+      type: number
+      description: Идентефикатор аккаунта
