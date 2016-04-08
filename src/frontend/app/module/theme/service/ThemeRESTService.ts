@@ -1,4 +1,4 @@
-import {ResponseInterface} from '../../main/ResponseInterface.ts';
+import {ResponseInterface} from '../../../module/common/ResponseInterface.ts';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {Injectable} from 'angular2/core';

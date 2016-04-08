@@ -6,6 +6,5 @@ import {Component} from 'angular2/core';
     ],
     template: require('./template.html')
 })
-export class ThemeCleaner {
-
+export class RouterCleaner {
 }

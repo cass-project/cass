@@ -47,13 +47,13 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
         //this.router.parent.navigate(['Theme-Cleaner']);
     }
     reset(){
-        this.router.parent.navigate(['Theme-Cleaner']);
+        this.router.parent.navigate(['RouterCleaner']);
         this.router.parent.navigate(['Creation-Form-Post']);
         this.themeEditorService.showFormContentBox = true;
     }
 
     close(){
         this.themeEditorService.showFormContentBox = false;
-        this.router.parent.navigate(['Theme-Cleaner']);
+        this.router.parent.navigate(['RouterCleaner']);
     }
 }

@@ -26,6 +26,7 @@ import {CatalogComponent} from './module/catalog/index';
 import {CollectionComponent} from "./module/collection/index";
 import {WorkInProgress} from "./module/common/component/WorkInProgress/index";
 import {Nothing} from "./module/common/component/Nothing/index";
+import {ThemeEditorComponent} from "./module/host-admin_TEMP/component/ThemeEditorComponent/component";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -46,6 +47,11 @@ import {Nothing} from "./module/common/component/Nothing/index";
         path: '/profile/...',
         name: 'Profile',
         component: ProfileComponent,
+    },
+    {
+        path: '/host-admin/...',
+        name: 'Theme-Editor',
+        component: ThemeEditorComponent
     },
     {
         path: '/auth/...',
