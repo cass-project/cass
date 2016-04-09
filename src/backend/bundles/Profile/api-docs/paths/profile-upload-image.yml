@@ -11,6 +11,12 @@
         type: "file"
         required: true
         description: Файл
+      - name: body
+        in: body
+        required: true
+        description: Image properties
+        schema:
+          $ref: '#/definitions/Profile_UploadImage_Request'
     responses:
       200:
         $ref: '#/responses/success'
