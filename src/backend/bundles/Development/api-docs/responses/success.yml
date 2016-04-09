@@ -1,0 +1,10 @@
+success:
+  description: Success
+  schema:
+    type: object
+    required:
+      - success
+    properties:
+      success:
+        type: boolean
+        default: true

@@ -1,0 +1,34 @@
+/protected/profile/{profileId}/greetings-as/fl/:
+  post:
+    tags:
+      - profile
+    description: Назвать пользователя по имени и фамилии
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
+      - name: body
+        in: body
+        required: true
+        description: Профиль
+        schema:
+          required:
+            - first_name
+            - last_name
+          properties:
+            first_name:
+              type: string
+              description: Имя
+            last_name:
+              type: string
+              description: Фамилия
+    responses:
+      200:
+        schema:
+          $ref: '#/responses/success'
+      403:
+        $ref: '#/responses/Unauthorized'

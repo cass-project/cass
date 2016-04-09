@@ -1,0 +1,21 @@
+'/protected/profile/{id}/image/upload':
+  post:
+    tags:
+      - profile
+    description: Загрузка аватара к профилю пользователя
+    security:
+      - x_api_key: []
+    parameters:
+      - name: file
+        in: body
+        type: "file"
+        required: true
+        description: Файл
+    responses:
+      200:
+        $ref: '#/responses/success'
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        description: Profile not found
+        $ref: '#/responses/NotFound'

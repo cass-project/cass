@@ -1,0 +1,31 @@
+/protected/profile/{profileId}/greetings-as/n/:
+  post:
+    tags:
+      - profile
+    description: Назвать пользователя по никнейму
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
+      - name: body
+        in: body
+        required: true
+        description: Профиль
+        schema:
+          required:
+            - last_name
+            - first_name
+          properties:
+            nickname:
+              type: string
+              description: Ник
+    responses:
+      200:
+        schema:
+          $ref: '#/responses/success'
+      403:
+        $ref: '#/responses/Unauthorized'

@@ -13,6 +13,9 @@ Profile_Entity_Profile:
     account_id:
       type: number
       description: ID аккаунта, которому принадлежит профиль
+    is_initialized:
+      type: boolean
+      description: Флаг, при значении FALSE значит, что профиль не проиницизилирован
     is_current:
       type: boolean
       description: Флаг "данный профиль является текущим"
