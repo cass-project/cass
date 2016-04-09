@@ -1,0 +1,34 @@
+"/protected/collection/entities/by-profile-id/{profileId}":
+  get:
+    tags:
+      - collection
+    description:
+      Возвращает все коллекции указанного профиля
+    parameters:
+      - name: profileId
+        in: path
+        required: true
+        type: number
+        description: ID профиля
+    responses:
+      '400':
+          $ref: '#/responses/error'
+      '200':
+        description: Дерево коллекций
+        schema:
+          type: object
+          required:
+            - success
+            - total
+            - entities
+          properties:
+            success:
+              type: boolean
+              description: "= true"
+            total:
+              type: number
+              description: "Количество коллекций"
+            entities:
+              type: array
+              items:
+                $ref: "#/definitions/Collection_Entity_Theme"

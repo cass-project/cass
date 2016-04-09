@@ -1,0 +1,24 @@
+Collection_Entity_Theme:
+  type: object
+  required:
+    - id
+    - parent_id
+    - title
+    - description
+    - position
+  properties:
+    id:
+      type: number
+      description: ID
+    parent_id:
+      type: number
+      description: ID родительской коллекции
+    title:
+      type: string
+      description: Название (заголовок) коллекции
+    description:
+      type: string
+      description: Описание коллекции
+    position:
+      type: number
+      description: Позиция

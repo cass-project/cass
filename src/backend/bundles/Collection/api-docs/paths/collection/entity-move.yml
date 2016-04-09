@@ -1,0 +1,22 @@
+"/protected/collection/entity/move/{collectionId}/under/{collectionParentId}/in-position/{position}":
+  post:
+    tags:
+      - collection
+    description:
+      Создает новую коллекцию для указанного профиля
+    parameters:
+      - name: collectionId
+        in: path
+        required: true
+        type: number
+        description: ID коллекции
+      - name: collectionParentId
+        in: path
+        required: true
+        type: number
+        description: ID коллекции, под которую нужно переместить указанную
+      - name: position
+        in: path
+        required: true
+        type: number
+        description: Позиция коллекции

@@ -1,0 +1,19 @@
+"/protected/collection/entity/update/{collectionId}":
+  post:
+    tags:
+      - collection
+    description:
+      Обновляет данные указанной коллекции
+    parameters:
+      - name: collectionId
+        in: path
+        required: true
+        type: number
+        description:
+          ID коллекции
+      - name: body
+        in: body
+        required: true
+        description: JSON Request
+        schema:
+          $ref: '#/definitions/Collection_Entity_Request'

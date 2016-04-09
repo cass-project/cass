@@ -1,0 +1,21 @@
+Collection_Entity_Request:
+    type: object
+    required:
+      - title
+      - description
+      - parent_id
+      - position
+    properties:
+      title:
+        type: string
+        description: Название коллекции
+      description:
+        type: string
+        description: Описание коллекции
+      parent_id:
+        type: number
+        description: ID родительской коллекции
+      position:
+        type: number
+        description: Позиция в текущем дереве коллекций
+        default: 1

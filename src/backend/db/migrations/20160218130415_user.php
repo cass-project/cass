@@ -52,16 +52,5 @@ class User extends AbstractMigration
             ->addColumn('provider_name', 'string')
             ->create()
         ;
-
-        $this->insertData();
-    }
-
-    private function insertData(){
-        $this->table($this->accountTableName)->insert([
-            ['email' => 'artem.baydin@cass.io',             'password' => password_hash("Lolipop1234", PASSWORD_DEFAULT)],
-            ['email' => 'vyacheslav.savushkin@cass.io',     'password' => password_hash("1234", PASSWORD_DEFAULT)],
-            ['email' => 'dmitriy.borisenko.baydin@cass.io', 'password' => password_hash("1234", PASSWORD_DEFAULT)],
-            ['email' => 'philip.mantrov@cass.io',           'password' => password_hash("1234", PASSWORD_DEFAULT)]
-        ])->saveData();
     }
 }

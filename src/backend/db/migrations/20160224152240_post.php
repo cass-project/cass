@@ -42,36 +42,5 @@ class Post extends AbstractMigration
              ])
              ->create()
         ;
-      $this->insertData();
     }
-
-
-  private function insertData(){
-    $this->table('post')
-      ->insert(
-        [
-          ['account_id'    => 2,
-           'name' => "Имя 1 ",
-           'description' => 'Описание 1',
-           'created' => (new \DateTime())->format("Y-m-d H:i:s"),
-           'updated' => (new \DateTime())->format("Y-m-d H:i:s"),
-           'publish' => 'true',
-          ],
-          ['account_id'    => 2,
-           'name' => "Имя 2 ",
-           'description' => 'Описание 2',
-           'created' => (new \DateTime())->format("Y-m-d H:i:s"),
-           'updated' => (new \DateTime())->format("Y-m-d H:i:s"),
-           'publish' => 'true',
-          ],
-          ['account_id'    => 2,
-           'name' => "Имя 3 ",
-           'description' => 'Описание 3',
-           'created' => (new \DateTime())->format("Y-m-d H:i:s"),
-           'updated' => (new \DateTime())->format("Y-m-d H:i:s"),
-           'publish' => 'false',
-          ],
-        ]
-    )->saveData();
-  }
 }

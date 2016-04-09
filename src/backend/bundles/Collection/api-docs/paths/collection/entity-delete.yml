@@ -1,0 +1,13 @@
+"/protected/collection/entity/delete/{collectionId}":
+  delete:
+    tags:
+      - collection
+    description:
+      Удаляет коллекцию с указанным ID
+    parameters:
+      - name: collectionId
+        in: path
+        required: true
+        type: number
+        description:
+          ID коллекции
