@@ -14,9 +14,8 @@ export class PostRestService{
         return this.http.get('backend/api/protected/post/read/' + id);
     }
 
-    public createPost(title, postMessage){
+    public createPost(postMessage){
         return this.http.put('backend/api/protected/post/create', JSON.stringify({
-            name: title,
             description: postMessage
         }));
     }
