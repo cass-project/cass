@@ -7,10 +7,10 @@
       "ThemeEditor\\": "bundles/ThemeEditor/src",
       "Development\\": "bundles/Development/src",
       "Host\\": "bundles/Host/src",
-      "Channel\\": "bundles/Channel/src",
       "Post\\": "bundles/Post/src",
       "Feed\\": "bundles/Feed/src",
-      "Profile\\": "bundles/Profile/src"
+      "Profile\\": "bundles/Profile/src",
+      "Collection\\": "bundles/Collection/src"
     }
   },
   "require": {

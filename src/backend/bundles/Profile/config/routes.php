@@ -6,15 +6,9 @@ use Zend\Expressive\Application;
 
 return function (Application $app, string $prefix) {
     $app->get(
-        sprintf('%s/profile', $prefix),
+        sprintf('%s/profile/{id}', $prefix),
         ProfileMiddleware::class,
-        'profile-read'
-    );
-
-    $app->get(
-        sprintf('%s/profiles/{id}', $prefix),
-        ProfileMiddleware::class,
-        'profile-read-by-id'
+        'profile-get-by-id'
     );
 
     $app->put(
@@ -34,5 +28,4 @@ return function (Application $app, string $prefix) {
         ProfileMiddleware::class,
         'profile-delete'
     );
-
 };
