@@ -77,12 +77,8 @@ export class ThemeEditorComponent
 
     openCreateThemeForm() {
         this.themeEditorService.createFirstParent = true;
-        this.openFormContentBox();
-        this.router.navigate(['Theme-Editor-Create']);
-    }
-
-    openFormContentBox() {
         this.modal.showFormContentBox = true;
+        this.router.navigate(['Theme-Editor-Create']);
     }
 
     clearSelection(){

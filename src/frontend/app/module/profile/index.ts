@@ -5,6 +5,7 @@ import {ProfileEditComponent} from "./component/ProfileEdit/index";
 import {ProfileDashboardComponent} from "./component/ProfileDashboard/index";
 import {AccountWelcome} from "./component/AccountWelcome/component";
 import {Modal} from "../common/component/Modal/index";
+import {CurrentProfileRestService} from "./service/CurrentProfileRestService";
 
 @Component({
     template: require('./template.html'),
@@ -12,7 +13,8 @@ import {Modal} from "../common/component/Modal/index";
         ROUTER_DIRECTIVES
     ],
     'providers': [
-        Modal
+        Modal,
+        CurrentProfileRestService
     ]
 })
 @RouteConfig([
@@ -38,12 +40,14 @@ export class ProfileComponent
     constructor(private router: Router,
                 private auth: AuthService,
                 private modal: Modal
+
     ) {
         if(!this.auth.signedIn) {
             router.navigate(['Auth']);
         }
     }
-    openFormContentBox() {
+    openAccountWelcome() {
         this.modal.showFormContentBox = true;
+        this.router.navigate(['Welcome']);
     }
 }
