@@ -21,11 +21,16 @@
           type: object
           required:
             - account_token
+            - profiles
             - success
           properties:
             account_token:
               type: string
               description: Токен (API Key)
+            profiles:
+              type: array
+              items:
+                $ref: "#/definitions/Profile_Entity_Profile"
             success:
               type: boolean
               default: true

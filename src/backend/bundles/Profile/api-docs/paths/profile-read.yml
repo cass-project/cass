@@ -2,10 +2,9 @@
   get:
     tags:
       - profile
-    description: Read profile data
+    description: Возвращает данные указанного профиля
     responses:
       200:
-        description: Reading profile successfully
         schema:
           required:
             - success
@@ -15,7 +14,7 @@
               type: boolean
               default: true
             entity:
-              $ref: '#/definitions/Profile'
+              $ref: '#/definitions/Profile_Entity_Profile'
           required:
             - success
             - entity

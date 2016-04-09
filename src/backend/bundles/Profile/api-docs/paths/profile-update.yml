@@ -21,7 +21,7 @@
               type: boolean
               default: true
             entity:
-              $ref: '#/definitions/Profile'
+              $ref: '#/definitions/Profile_Entity_Profile'
           required:
             - success
             - entity

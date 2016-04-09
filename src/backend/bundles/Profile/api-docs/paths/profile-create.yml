@@ -2,26 +2,25 @@
   put:
     tags:
       - profile
-    description: Create new profile
+    description: Создать новый профиль
     security:
       - x_api_key: []
     parameters:
       - name: body
         in: body
         required: true
-        description: Profile entity
+        description: Профиль
         schema:
           $ref: '#/definitions/Profile'
     responses:
       200:
-        description: Creating profile successfully
         schema:
           properties:
             success:
               type: boolean
               default: true
             entity:
-              $ref: '#/definitions/Profile'
+              $ref: '#/definitions/Profile_Entity_Profile'
           required:
             - success
             - entity

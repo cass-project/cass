@@ -2,7 +2,7 @@
   delete:
     tags:
       - profile
-    description: Remove existing profile
+    description: Удалить существующий профиль
     security:
       - x_api_key: []
     responses:
