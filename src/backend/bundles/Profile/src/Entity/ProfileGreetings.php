@@ -9,12 +9,14 @@ class ProfileGreetings
 {
     /**
      * @Column(type="integer")
+     * @Id
+     * @GeneratedValue
      * @var int
      */
     private $id;
 
     /**
-     * @OneToOne(targetEntity="Profile\Entity\Profile")
+     * @OneToOne(targetEntity="Profile\Entity\Profile", inversedBy="profileGreetings")
      * @JoinColumn(name="profile_id", referencedColumnName="id")
      * @var Profile
      */
@@ -49,6 +51,12 @@ class ProfileGreetings
      * @var string
      */
     private $nickName;
+
+    public function __construct(Profile $profile)
+    {
+        $this->profile = $profile;
+        $this->profile->setProfileGreetings($this);
+    }
 
     public function hasId(): bool
     {

@@ -1,5 +1,6 @@
 <?php
 namespace Profile\Entity;
+use Auth\Entity\Account;
 
 /**
  * @Entity(repositoryClass="Profile\Repository\ProfileRepository")
@@ -9,39 +10,39 @@ class Profile
 {
     /**
      * @var int
+     * @Id
+     * @GeneratedValue
      * @Column(type="integer")
      */
     private $id;
 
     /**
-     * @var int
-     * @Column(type="integer")
+     * @ManyToOne(targetEntity="Auth\Entity\Account")
+     * @JoinColumn(name="account_id", referencedColumnName="id")
      */
-    private $accountId;
+    private $account;
 
     /**
      * @var bool
      * @Column(type="integer",name="is_current")
      */
-    private $isCurrent;
+    private $isCurrent = false;
 
     /**
-     * @OneToOne(targetEntity="Profile\Entity\ProfileGreetings")
-     * @JoinColumn(name="profile_greetings_id", referencedColumnName="id")
+     * @OneToOne(targetEntity="Profile\Entity\ProfileGreetings", mappedBy="profile", cascade={"persist", "remove"})
      * @var ProfileGreetings
      */
     private $profileGreetings;
 
     /**
-     * @OneToOne(targetEntity="Profile\Entity\ProfileImage")
-     * @JoinColumn(name="profile_image_id", referencedColumnName="id")
+     * @OneToOne(targetEntity="Profile\Entity\ProfileImage", mappedBy="profile", cascade={"persist", "remove"})
      * @var ProfileImage
      */
     private $profileImage;
 
-    public function __construct(int $accountId)
+    public function __construct(Account $account)
     {
-        $this->accountId = $accountId;
+        $this->account = $account;
     }
 
     public function hasId(): bool
@@ -54,16 +55,9 @@ class Profile
         return $this->id;
     }
 
-    public function getAccountId(): int
+    public function getAccount(): Account
     {
-        return $this->accountId;
-    }
-
-    public function setAccountId(int $accountId): self
-    {
-        $this->accountId = $accountId;
-
-        return $this;
+        return $this->account;
     }
 
     public function isCurrent(): bool
@@ -78,6 +72,11 @@ class Profile
         return $this;
     }
 
+    public function hasProfileGreetings(): bool
+    {
+        return $this->profileGreetings !== null;
+    }
+
     public function getProfileGreetings(): ProfileGreetings
     {
         return $this->profileGreetings;
@@ -88,6 +87,11 @@ class Profile
         $this->profileGreetings = $profileGreetings;
 
         return $this;
+    }
+
+    public function hasProfileImage(): bool
+    {
+        return $this->profileImage !== null;
     }
 
     public function getProfileImage(): ProfileImage

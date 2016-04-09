@@ -32,10 +32,8 @@ return function(Application $app, string $prefix){
 	$app->post(
 		sprintf('%s/protected/post/{command:delete}/{postId}', $prefix),
 		PostMiddleware::class,
-		'post-update-entity'
+		'post-delete-entity'
 	);
-
-
 
 	$app->post(
 		sprintf('%s/protected/post/attachment/{command:add}', $prefix),

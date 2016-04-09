@@ -6,6 +6,7 @@ use Auth\Entity\Account;
 use Auth\Entity\OAuthAccount;
 use Data\Exception\Auth\AccountNotFoundException;
 use Doctrine\ORM\EntityRepository;
+use Profile\Service\ProfileService;
 
 class OAuthAccountRepository extends EntityRepository
 {
@@ -23,23 +24,6 @@ class OAuthAccountRepository extends EntityRepository
             'provider' => $registrationRequest->getProvider(),
             'providerAccountId' => $registrationRequest->getProviderAccountId()
         ]);
-    }
-
-    public function create(RegistrationRequest $registrationRequest)
-    {
-        $em = $this->getEntityManager();
-
-        $account = new Account();
-        $account->setEmail($registrationRequest->getEmail());
-        $account->setPassword(md5(rand(0, 99999999)));
-
-        $oauthAccount = new OAuthAccount();
-        $oauthAccount->setAccount($account);
-        $oauthAccount->setProvider($registrationRequest->getProvider());
-        $oauthAccount->setProviderAccountId($registrationRequest->getProviderAccountId());
-
-        $em->persist($oauthAccount);
-        $em->flush($oauthAccount);
     }
 
     public function findOAuthAccount($provider, $providerAccountId): OAuthAccount

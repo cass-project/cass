@@ -1,6 +1,7 @@
 <?php
 namespace Auth\Service;
 
+use Account\Service\AccountService;
 use Auth\Middleware\AuthStrategy\SessionStrategy;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Auth\Service\AuthService\OAuth2\RegistrationRequest;
@@ -13,6 +14,7 @@ use Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
 use Auth\Entity\Account;
 use Auth\Repository\AccountRepository;
 use Auth\Repository\OAuthAccountRepository;
+use Profile\Service\ProfileService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthService
@@ -23,11 +25,19 @@ class AuthService
     /** @var OAuthAccountRepository */
     private $oauthAccountRepository;
 
+    /** @var AccountService */
+    private $accountService;
+
     /** @var array */
     private $oauth2Config;
 
-    public function __construct(AccountRepository $accountRepository, OAuthAccountRepository $oAuthAccountRepository, array $oauth2Config)
-    {
+    public function __construct(
+        AccountService $accountService,
+        AccountRepository $accountRepository,
+        OAuthAccountRepository $oAuthAccountRepository,
+        array $oauth2Config
+    ) {
+        $this->accountService = $accountService;
         $this->accountRepository = $accountRepository;
         $this->oauthAccountRepository = $oAuthAccountRepository;
         $this->oauth2Config = $oauth2Config;
@@ -58,14 +68,7 @@ class AuthService
             new HasSameAccount($this->accountRepository)
         ]);
 
-        $account = (new Account())
-            ->setEmail($email)
-            ->setPassword(password_hash($password, PASSWORD_DEFAULT))
-        ;
-
-        $this->accountRepository->saveAccount($account);
-
-        return $account;
+        return $this->accountService->createAccount($email, password_hash($password, PASSWORD_DEFAULT));
     }
 
     public function signIn(Request $request) : Account
@@ -86,7 +89,11 @@ class AuthService
         $oauthRepository = $this->oauthAccountRepository;
 
         if(!$this->accountRepository->hasAccountWithEmail($registrationRequest->getEmail())) {
-            $oauthRepository->create($registrationRequest);
+            $this->accountService->createOAuth2Account(
+                $registrationRequest->getEmail(),
+                $registrationRequest->getProvider(),
+                $registrationRequest->getProviderAccountId()
+            );
         }
 
         $oauth2Account = $oauthRepository->findOAuthAccount($registrationRequest->getProvider(), $registrationRequest->getProviderAccountId());

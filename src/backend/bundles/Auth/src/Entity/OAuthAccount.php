@@ -33,6 +33,11 @@ class OAuthAccount
      */
     private $providerAccountId;
 
+    public function __construct(Account $account)
+    {
+        $this->account = $account;
+    }
+
     public function hasId()
     {
         return $this->id !== null;
@@ -53,13 +58,6 @@ class OAuthAccount
     public function getAccount(): Account
     {
         return $this->account;
-    }
-
-    public function setAccount(Account $account): self
-    {
-        $this->account = $account;
-
-        return $this;
     }
 
     public function getProvider(): string

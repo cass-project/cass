@@ -1,6 +1,9 @@
 <?php
 namespace Auth\Entity;
 
+use Doctrine\ORM\PersistentCollection;
+use Profile\Entity\Profile;
+
 /**
  * Class Account
  * @package Data\Entity
@@ -16,6 +19,12 @@ class Account
      * @var int
      */
     private $id;
+
+    /**
+     * @OneToMany(targetEntity="Profile\Entity\Profile", mappedBy="account")
+     * @var PersistentCollection
+     */
+    private $profiles;
 
     /**
      * @Column(type="string")
@@ -47,14 +56,19 @@ class Account
      */
     private $tokenExpired;
 
-    /**
-     * @OneToMany(targetEntity="Auth\Entity\OAuthAccount", mappedBy="account")
-     */
-    private $oauth2;
-
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getProfiles(): PersistentCollection
+    {
+        return $this->profiles;
+    }
+
+    public function hasAnyProfile(): bool
+    {
+        return $this->profiles->count() > 0;
     }
 
     public function getPassword()

@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class Attachment extends AbstractMigration
+class AttachmentMigration extends AbstractMigration
 {
     /**
      * Change Method.

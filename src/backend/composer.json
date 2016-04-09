@@ -10,7 +10,8 @@
       "Post\\": "bundles/Post/src",
       "Feed\\": "bundles/Feed/src",
       "Profile\\": "bundles/Profile/src",
-      "Collection\\": "bundles/Collection/src"
+      "Collection\\": "bundles/Collection/src",
+      "Account\\": "bundles/Account/src"
     }
   },
   "require": {

@@ -2,9 +2,11 @@
 namespace Auth\Repository;
 
 use Auth\Entity\Account;
+use Auth\Entity\OAuthAccount;
 use Data\Exception\Auth\AccountNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
+use Profile\Entity\Profile;
 
 class AccountRepository extends EntityRepository
 {
@@ -33,10 +35,17 @@ class AccountRepository extends EntityRepository
         }
     }
 
-    public function saveAccount(Account $account)
+    public function saveAccount(Account $account, Profile $profile)
     {
         $this->getEntityManager()->persist($account);
-        $this->getEntityManager()->flush($account);
+        $this->getEntityManager()->persist($profile);
+        $this->getEntityManager()->flush([$account, $profile]);
+    }
+
+    public function saveOAuth2Account(OAuthAccount $OAuth2Account)
+    {
+        $this->getEntityManager()->persist($OAuth2Account);
+        $this->getEntityManager()->flush($OAuth2Account);
     }
 
     public function findByAPIKey(string $apiKey)
