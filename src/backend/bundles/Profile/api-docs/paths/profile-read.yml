@@ -1,4 +1,32 @@
-'/protected/profile/{id}':
+'/protected/profile':
+  get:
+    tags:
+      - profile
+    description: Возвращает данные текущего профиля
+    security:
+      - x_api_key: []
+    responses:
+      200:
+        schema:
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              default: true
+            entity:
+              $ref: '#/definitions/Profile_Entity_Profile'
+          required:
+            - success
+            - entity
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        description: Profile not found
+        $ref: '#/responses/NotFound'
+
+'/profile/{id}':
   get:
     tags:
       - profile
