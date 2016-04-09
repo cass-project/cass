@@ -1,6 +1,6 @@
 <article class="component component-profile">
-    <router-outlet></router-outlet>
     <div class="form-content-box" *ngIf="modal.showFormContentBox">
-        <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
     </div>
+    <input type="button" (click)="openAccountWelcome()">
 </article>
