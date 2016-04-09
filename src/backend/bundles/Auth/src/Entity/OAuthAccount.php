@@ -1,8 +1,8 @@
 <?php
-namespace Data\Entity;
+namespace Auth\Entity;
 
 /**
- * @Entity(repositoryClass="Data\Repository\OAuthAccountRepository")
+ * @Entity(repositoryClass="Auth\Repository\OAuthAccountRepository")
  * @Table(name="oauth_account")
  */
 class OAuthAccount
@@ -16,7 +16,7 @@ class OAuthAccount
     private $id;
 
     /**
-     * @ManyToOne(targetEntity="Data\Entity\Account",cascade={"persist"})
+     * @ManyToOne(targetEntity="Auth\Entity\Account",cascade={"persist"})
      * @JoinColumn(name="account_id", referencedColumnName="id")
      */
     private $account;

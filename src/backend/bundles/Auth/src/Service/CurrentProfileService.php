@@ -2,9 +2,9 @@
 namespace Auth\Service;
 
 use Auth\Middleware\AuthStrategy\Strategy;
-use Data\Entity\Account;
+use Auth\Entity\Account;
 use Data\Exception\Auth\AccountNotFoundException;
-use Data\Repository\AccountRepository;
+use Auth\Repository\AccountRepository;
 use Psr\Http\Message\ServerRequestInterface;
 
 class CurrentProfileService

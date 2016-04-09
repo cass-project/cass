@@ -1,10 +1,10 @@
 <?php
-namespace Data\Entity;
+namespace Auth\Entity;
 
 /**
  * Class Account
  * @package Data\Entity
- * @Entity(repositoryClass="Data\Repository\AccountRepository")
+ * @Entity(repositoryClass="Auth\Repository\AccountRepository")
  * @Table(name="account")
  */
 class Account
@@ -48,7 +48,7 @@ class Account
     private $tokenExpired;
 
     /**
-     * @OneToMany(targetEntity="Data\Entity\OAuthAccount", mappedBy="account")
+     * @OneToMany(targetEntity="Auth\Entity\OAuthAccount", mappedBy="account")
      */
     private $oauth2;
 

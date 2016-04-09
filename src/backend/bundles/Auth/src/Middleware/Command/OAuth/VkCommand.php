@@ -7,7 +7,7 @@ use Auth\OauthProvider\Vk;
 use Auth\Service\AuthService\Exceptions\DuplicateAccountException;
 use Auth\Service\AuthService\Exceptions\MissingReqiuredFieldException;
 use Auth\Service\AuthService\Exceptions\ValidationException;
-use Data\Entity\Account;
+use Auth\Entity\Account;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ServerRequestInterface;

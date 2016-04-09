@@ -1,9 +1,9 @@
 <?php
-namespace Data\Repository;
+namespace Auth\Repository;
 
 use Auth\Service\AuthService\OAuth2\RegistrationRequest;
-use Data\Entity\Account;
-use Data\Entity\OAuthAccount;
+use Auth\Entity\Account;
+use Auth\Entity\OAuthAccount;
 use Data\Exception\Auth\AccountNotFoundException;
 use Doctrine\ORM\EntityRepository;
 

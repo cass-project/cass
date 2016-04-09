@@ -2,7 +2,7 @@
 namespace Auth\Factory\Service;
 
 use Auth\Service\CurrentProfileService;
-use Data\Repository\AccountRepository;
+use Auth\Repository\AccountRepository;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 

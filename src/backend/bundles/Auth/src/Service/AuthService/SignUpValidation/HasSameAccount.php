@@ -2,7 +2,7 @@
 namespace Auth\Service\AuthService\SignUpValidation;
 
 use Auth\Service\AuthService\Exceptions\DuplicateAccountException;
-use Data\Repository\AccountRepository;
+use Auth\Repository\AccountRepository;
 
 class HasSameAccount implements Validator
 {

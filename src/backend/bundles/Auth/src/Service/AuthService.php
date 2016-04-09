@@ -10,9 +10,9 @@ use Auth\Service\AuthService\SignUpValidation\HasSameAccount;
 use Auth\Service\AuthService\SignUpValidation\IsEmailValid;
 use Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
 use Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
-use Data\Entity\Account;
-use Data\Repository\AccountRepository;
-use Data\Repository\OAuthAccountRepository;
+use Auth\Entity\Account;
+use Auth\Repository\AccountRepository;
+use Auth\Repository\OAuthAccountRepository;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthService

@@ -3,8 +3,8 @@ namespace Auth\Factory\Service;
 
 use Application\Service\SharedConfigService;
 use Auth\Service\AuthService;
-use Data\Repository\AccountRepository;
-use Data\Repository\OAuthAccountRepository;
+use Auth\Repository\AccountRepository;
+use Auth\Repository\OAuthAccountRepository;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
