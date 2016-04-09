@@ -2,6 +2,7 @@ import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {OAuth2Component} from '../OAuth2/index';
 import {AuthService} from './../../service/AuthService';
+import {ROUTER_DIRECTIVES} from "angular2/router";
 
 @Component({
     template: require('./template.html'),
@@ -9,7 +10,8 @@ import {AuthService} from './../../service/AuthService';
         require('./style.shadow.scss')
     ],
     directives: [
-        OAuth2Component
+        OAuth2Component,
+        ROUTER_DIRECTIVES
     ]
 })
 export class SignInComponent{
