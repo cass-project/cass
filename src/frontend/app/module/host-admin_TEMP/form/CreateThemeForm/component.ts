@@ -2,6 +2,7 @@ import {Component} from 'angular2/core';
 import {ThemeRESTService} from  '../../../theme/service/ThemeRESTService';
 import {ThemeEditorService} from '../../service/ThemeEditorService';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
+import {Modal} from "../../../common/component/Modal/index";
 
 
 @Component({
@@ -17,6 +18,7 @@ export class CreateThemeForm
     constructor(
         private themeRESTService: ThemeRESTService,
         private themeEditorService: ThemeEditorService,
+        private modal: Modal,
         public router: Router
     ){}
     submit() {
@@ -32,7 +34,7 @@ export class CreateThemeForm
             err => {console.log(err)});
     }
     close(){
-        this.themeEditorService.showFormContentBox = false;
+        this.modal.showFormContentBox = false;
         this.router.parent.navigate(['RouterCleaner']);
     }
 }

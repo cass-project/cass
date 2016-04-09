@@ -1,7 +1,8 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
-import {PostService} from "../../service/PostService";
 import {PostRestService} from "../../service/PostRestService";
+import {Modal} from "../../../common/component/Modal/index";
+import {Modal} from "../../../common/component/Modal/index";
 
 
 @Component({
@@ -14,7 +15,7 @@ import {PostRestService} from "../../service/PostRestService";
     ],
     'providers': [
         PostRestService,
-        PostService
+        Modal
     ]
 })
 
@@ -29,7 +30,7 @@ import {PostRestService} from "../../service/PostRestService";
 
     constructor(
         private postRESTService: PostRestService,
-        private postService: PostService,
+        private modal: Modal,
         public router: Router
     ){}
 
@@ -57,11 +58,11 @@ import {PostRestService} from "../../service/PostRestService";
     reset(){
         this.router.parent.navigate(['RouterCleaner']);
         this.router.parent.navigate(['Creation-Form-Post']);
-        this.postService.showFormContentBox = true;
+        this.modal.showFormContentBox = true;
     }
 
     close(){
-        this.postService.showFormContentBox = false;
+        this.modal.showFormContentBox = false;
         this.router.parent.navigate(['RouterCleaner']);
     }
 }

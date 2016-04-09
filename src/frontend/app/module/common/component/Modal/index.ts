@@ -3,8 +3,11 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 
 
 @Injectable()
-export class PostService
+export class Modal
 {
+
+    showFormContentBox: boolean = false;
+
     constructor(public router: Router) {
     }
 

@@ -1,0 +1,119 @@
+<article class="component component-account-welcome">
+    <form (ngSubmit)="submit()">
+        <div class="modal" tabindex="-1" style="display: block;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Create Profile</h4>
+                    </div>
+                    <div class="modal-body" >
+                        <div class="form-group">
+                            <fieldset class="form-group">
+                                <legend>How should we call you?</legend>
+                                <div class="radio radio-inline">
+                                    <label>
+                                        <input type="radio" name="greetings" value="by-fio">
+                                        <span>By First and Last name</span>
+                                    </label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <label>
+                                        <input type="radio" name="greetings" value="by-nick">
+                                        <span>By nickname</span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <legend>What is your name?</legend>
+                                <label>
+                                    <span>First Name</span>
+                                    <input class="form-control">
+                                </label>
+                                <label>
+                                    <span>Last Name</span>
+                                    <input class="form-control">
+                                </label>
+                                <label>
+                                    <input type="checkbox">
+                                </label>
+                                <label>
+                                    <span>Middle Name</span>
+                                    <input class="form-control">
+                                </label>
+                                <label>
+                                    <input type="checkbox">
+                                </label>
+                                <label>
+                                    <span>Nick Name</span>
+                                    <input class="form-control">
+                                </label>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <legend>Contacts</legend>
+                                <div class="form-group">
+                                    <label>
+                                        <span>E-mail</span>
+                                        <input class="form-control">
+                                    </label>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <input type="submit" value="Submit" class="btn btn-primary" (click)="submit()"/>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+
+</article>>
+
+
+
+
+
+<!--<form (ngSubmit)="submit()" (keyup.esc)="close()">-->
+    <!--<div class="modal" tabindex="-1" style="display: block;">-->
+        <!--<div class="modal-dialog">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                    <!--<button type="button" class="close" (click)="close()">&times;</button>-->
+                    <!--<h4 class="modal-title">Create Post</h4>-->
+                <!--</div>-->
+                <!--<div class="modal-body" >-->
+                    <!--<div class="form-group">-->
+                        <!--<textarea class="form-control" [(ngModel)]="text" rows="3"></textarea>-->
+                        <!--&lt;!&ndash;<div class="btn-group" role="group" >&ndash;&gt;-->
+                            <!--<input type="button"  value="Attachment" (click)="showLinkInput = !showLinkInput" class="btn btn-secondary pull-right"/>-->
+                        <!--<br>-->
+                            <!--&lt;!&ndash;<input type="button" value="WebM" (click)="showLinkInput = !showLinkInput" class="btn btn-secondary"/>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="button" value="" (click)="showLinkInput = !showLinkInput" class="btn btn-secondary"/>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="button" value="" (click)="showLinkInput = !showLinkInput" class="btn btn-secondary"/>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--<div *ngIf="showLinkInput">-->
+                            <!--<input class="form-control" [(ngModel)]="link" placeholder="Link URL">-->
+                            <!--<label class="file">-->
+                            <!--<input type="file">-->
+                            <!--<span class="file-custom"></span>-->
+                        <!--</label>-->
+                        <!--</div>-->
+                        <!--<br>-->
+                        <!--<div class="thumbnail" *ngIf="detectURL(link, text)">-->
+                            <!--<img class="img-thumbnail" src="{{linkImg}}" alt="image cap">-->
+                            <!--<div class="caption">-->
+                                <!--<h3 class="text-primary">{{linkLabel}}</h3>-->
+                                <!--<p class="text-muted">{{linkText}}</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<input type="submit" value="Submit" class="btn btn-primary" (click)="submit()"/>-->
+                    <!--<input type="button" value="Reset" class="btn btn-secondary" (click)="reset()"/>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="modal-backdrop fade in"></div>-->
+<!--</form>-->

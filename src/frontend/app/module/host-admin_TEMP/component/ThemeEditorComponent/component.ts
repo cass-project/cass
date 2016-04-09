@@ -8,6 +8,7 @@ import {CreateThemeForm} from '../../form/CreateThemeForm/component';
 import {UpdateThemeForm} from '../../form/UpdateThemeForm/component';
 import {RouterCleaner} from "../../../host-admin_TEMP/routerCleaner/component";
 import {CreationFormPost} from "../../../post/form/CreationFormPost/component";
+import {Modal} from "../../../common/component/Modal/index";
 
 
 
@@ -22,7 +23,8 @@ import {CreationFormPost} from "../../../post/form/CreationFormPost/component";
     ],
     'providers': [
         ThemeRESTService,
-        ThemeEditorService
+        ThemeEditorService,
+        Modal
     ]
 })
 @RouteConfig([
@@ -56,6 +58,7 @@ export class ThemeEditorComponent
     constructor(
         public themeRESTService: ThemeRESTService,
         public themeEditorService: ThemeEditorService,
+        public modal: Modal,
         public router: Router
     ) {}
 
@@ -79,7 +82,7 @@ export class ThemeEditorComponent
     }
 
     openFormContentBox() {
-        this.themeEditorService.showFormContentBox = true;
+        this.modal.showFormContentBox = true;
     }
 
     clearSelection(){

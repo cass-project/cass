@@ -1,3 +1,6 @@
 <article class="component component-profile">
     <router-outlet></router-outlet>
+    <div class="form-content-box" *ngIf="modal.showFormContentBox">
+        <router-outlet></router-outlet>
+    </div>
 </article>

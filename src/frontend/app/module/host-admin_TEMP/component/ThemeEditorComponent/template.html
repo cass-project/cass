@@ -5,7 +5,7 @@
     <body (click)="clearSelection()">
     </body>
     <theme-tree [tree]="themeEditorService.themesTree"></theme-tree>
-    <div class="form-content-box" *ngIf="themeEditorService.showFormContentBox">
+    <div class="form-content-box" *ngIf="modal.showFormContentBox">
         <router-outlet></router-outlet>
     </div>
     <footer>
