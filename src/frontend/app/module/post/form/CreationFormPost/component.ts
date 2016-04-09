@@ -19,7 +19,6 @@ import {PostRestService} from "../../service/PostRestService";
 })
 
  export class CreationFormPost{
-    title: string;
     text: string;
     link: string;
     linkImg: string;
@@ -50,7 +49,7 @@ import {PostRestService} from "../../service/PostRestService";
     }
 
     submit() {
-        this.postRESTService.createPost(this.title, this.text).subscribe(data => {
+        this.postRESTService.createPost(this.text).subscribe(data => {
             //this.themeRESTService //update post's info
             this.close();
         });
