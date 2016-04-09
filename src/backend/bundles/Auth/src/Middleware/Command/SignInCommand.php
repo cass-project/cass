@@ -14,7 +14,8 @@ class SignInCommand extends Command
             $account = $this->getAuthService()->signIn($request);
 
             $responseBuilder->setStatusSuccess()->setJson([
-                "api_key" => $account->getAPIKey()
+                "api_key" => $account->getAPIKey(),
+                "profiles" => []
             ]);
         }catch(AccountNotFoundException $e) {
             $responseBuilder
