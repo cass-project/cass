@@ -2,7 +2,6 @@ import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper/src/imageCropper';
 import {CurrentProfileRestService} from "../../service/CurrentProfileRestService";
-import {Modal} from "../../../common/component/Modal/index";
 
 @Component({
     template: require('./template.html'),
@@ -19,7 +18,6 @@ import {Modal} from "../../../common/component/Modal/index";
 
 export class AccountWelcome {
     constructor (private currentProfileRestService: CurrentProfileRestService,
-                 public modal: Modal,
                  public router: Router
     ){
         this.cropperSettings = new CropperSettings();
@@ -53,7 +51,6 @@ export class AccountWelcome {
     reset(){
         this.router.parent.navigate(['Profile']);
         this.router.parent.navigate(['Welcome']);
-        this.modal.showFormContentBox = true;
     }
 
     sumbit(){

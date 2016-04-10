@@ -4,7 +4,6 @@ import {AuthService} from '../auth/service/AuthService';
 import {ProfileEditComponent} from "./component/ProfileEdit/index";
 import {ProfileDashboardComponent} from "./component/ProfileDashboard/index";
 import {AccountWelcome} from "./component/AccountWelcome/component";
-import {Modal} from "../common/component/Modal/index";
 import {CurrentProfileRestService} from "./service/CurrentProfileRestService";
 
 @Component({
@@ -13,7 +12,6 @@ import {CurrentProfileRestService} from "./service/CurrentProfileRestService";
         ROUTER_DIRECTIVES
     ],
     'providers': [
-        Modal,
         CurrentProfileRestService
     ]
 })
@@ -38,16 +36,13 @@ import {CurrentProfileRestService} from "./service/CurrentProfileRestService";
 export class ProfileComponent
 {
     constructor(private router: Router,
-                private auth: AuthService,
-                private modal: Modal
-
+                private auth: AuthService
     ) {
         if(!this.auth.signedIn) {
             router.navigate(['Auth']);
         }
     }
     openAccountWelcome() {
-        this.modal.showFormContentBox = true;
-        this.router.navigate(['Welcome']);
+        this.router.navigate(['/Profile/Welcome']);
     }
 }
