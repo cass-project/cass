@@ -5,7 +5,6 @@ import {CORE_DIRECTIVES} from 'angular2/common';
 import {Theme} from "../../../theme/Theme";
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {ThemeRESTService} from '../../../theme/service/ThemeRESTService';
-import {Modal} from "../../../common/component/Modal/index";
 
 @Component({
     selector: 'theme-tree',
@@ -25,7 +24,6 @@ export class ThemeTreeComponent
 
     constructor(public themeEditorService: ThemeEditorService,
                 public themeRESTService: ThemeRESTService,
-                public modal: Modal,
                 public router: Router
     ) {}
 
@@ -46,26 +44,19 @@ export class ThemeTreeComponent
     }
 
     openCreatePostForm(){
-        this.openFormContentBox();
         this.router.navigate(['Creation-Form-Post']);
     }
 
     openCreateThemeForm() {
-        this.openFormContentBox();
         this.router.navigate(['Theme-Editor-Create']);
     }
 
     openUpdateThemeForm(){
-        this.openFormContentBox();
         this.router.navigate(['Theme-Editor-Update']);
     }
 
     returnTheme(id){
         this.themeRESTService.getThemeById(id);
-    }
-
-    openFormContentBox() {
-        this.modal.showFormContentBox = true;
     }
 
     isThemeSelected(theme: ThemeTree): boolean {
