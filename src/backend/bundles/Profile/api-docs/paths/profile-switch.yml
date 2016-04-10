@@ -13,7 +13,16 @@
         description: ID профиля
     responses:
       200:
-        $ref: '#/responses/success'
+        schema:
+          required:
+            - entity
+            - success
+          properties:
+            entity:
+              $ref: '#/definitions/Profile_Entity_Profile'
+            success:
+              type: booleand
+              default: true
       403:
         $ref: '#/responses/Unauthorized'
       404:

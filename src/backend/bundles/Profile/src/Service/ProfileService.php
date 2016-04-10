@@ -44,6 +44,10 @@ class ProfileService
 
         $account->getProfiles()->add($profile = new Profile($account));
 
+        array_map(function(Profile $profile) {
+            $profile->setIsCurrent(false);
+        }, $account->getProfiles()->toArray());
+
         $profile->setIsCurrent(true)
             ->setProfileGreetings(new ProfileGreetings($profile))
             ->setProfileImage(new ProfileImage($profile));
@@ -80,6 +84,19 @@ class ProfileService
     public function nameN(int $profileId, string $nickName)
     {
         $this->profileRepository->nameN($profileId, $nickName);
+    }
+
+    public function switchTo(Account $account, int $profileId): Profile
+    {
+        $profile = $this->getProfileById($profileId);
+
+        if(!$account->getProfiles()->contains($profile)) {
+            throw new PermissionsDeniedException("You're not an owner of this profile");
+        }
+
+        $this->profileRepository->switchTo($account->getProfiles()->toArray(), $profile);
+
+        return $profile;
     }
 
     public function uploadImage(int $profileId, string $tmpFile, int $startX, int $startY, int $endX, int $endY): ProfileImage

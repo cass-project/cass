@@ -7,6 +7,11 @@ class SwitchCommand extends Command
 {
     public function run(ServerRequestInterface $request)
     {
-        return [];
+        $profileId = $this->validateProfileId($request->getAttribute('profileId'));
+        $profile = $this->profileService->switchTo($this->currentAccountService->getCurrentAccount(), $profileId);
+
+        return [
+            'entity' => $profile->toJSON()
+        ];
     }
 }

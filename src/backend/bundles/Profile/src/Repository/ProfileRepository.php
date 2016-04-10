@@ -84,6 +84,24 @@ class ProfileRepository extends EntityRepository
         $em->flush($greetings);
     }
 
+    public function switchTo(array $profiles, Profile $profile)
+    {
+        $em = $this->getEntityManager();
+
+        /** @var Profile[] $profiles */
+        foreach($profiles as $compare) {
+            if($compare->getId() === $profile->getId()) {
+                $compare->setIsCurrent(true);
+            }else{
+                $compare->setIsCurrent(false);
+            }
+
+            $em->persist($compare);
+        }
+
+        $em->flush($profiles);
+    }
+
     public function updateImage(int $profileId, string $storagePath, string $publicPath): ProfileImage
     {
         $em = $this->getEntityManager();
