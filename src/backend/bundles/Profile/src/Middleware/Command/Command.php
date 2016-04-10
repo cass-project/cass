@@ -13,7 +13,8 @@ abstract class Command
     const COMMAND_GET = 'get';
     const COMMAND_GREETINGS_AS = 'greetings-as';
     const COMMAND_IMAGE_UPLOAD = 'image-upload';
-    const COMMAND_UPDATE = 'update';
+    const COMMAND_EDIT_PERSONAL = 'edit-personal';
+    const COMMAND_SWITCH = 'switch';
 
     /** @var ProfileService */
     protected $profileService;
@@ -60,8 +61,11 @@ abstract class Command
             case self::COMMAND_IMAGE_UPLOAD:
                 return new ImageUploadCommand();
 
-            case self::COMMAND_UPDATE:
-                return new UpdateCommand();
+            case self::COMMAND_EDIT_PERSONAL:
+                return new EditPersonalCommand();
+
+            case self::COMMAND_SWITCH:
+                return new SwitchCommand();
         }
     }
 

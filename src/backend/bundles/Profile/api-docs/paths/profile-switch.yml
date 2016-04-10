@@ -1,0 +1,21 @@
+'/protected/profile/{profileId}/switch/':
+  post:
+    tags:
+      - profile
+    description: Переключиться на указанный профиль
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
+    responses:
+      200:
+        $ref: '#/responses/success'
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        description: Profile not found
+        $ref: '#/responses/NotFound'

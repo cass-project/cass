@@ -1,0 +1,25 @@
+/protected/profile/{profileId}/edit-personal/:
+  post:
+    tags:
+      - profile
+    description: Редактирование данных пользователя
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
+      - name: body
+        in: body
+        required: true
+        description: Персональные данные
+        schema:
+          $ref: '#/definitions/Profile_EditPersonal_Request'
+    responses:
+      200:
+        schema:
+          $ref: '#/responses/success'
+      403:
+        $ref: '#/responses/Unauthorized'

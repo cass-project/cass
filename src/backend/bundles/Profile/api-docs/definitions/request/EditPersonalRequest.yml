@@ -1,0 +1,26 @@
+Profile_EditPersonal_Request:
+  type: object
+  required:
+    - greetings_type
+    - first_name
+    - last_name
+    - middle_name
+    - nick_name
+  properties:
+    greetings_type:
+      type: string
+      default: "fl"
+      description: |
+        Способ приветствия. Возможные значения: fl, lfm, n
+    last_name:
+      type: string
+      description: Фамилия
+    first_name:
+      type: string
+      description: Имя
+    middle_name:
+      type: string
+      description: Отчество
+    nickname:
+      type: string
+      description: Ник

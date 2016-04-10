@@ -18,9 +18,15 @@ return function (Application $app, string $prefix) {
     );
 
     $app->post(
-        sprintf('%s/protected/profile/{profileId}/{command:update}[/]', $prefix),
+        sprintf('%s/protected/profile/{profileId}/{command:edit-personal}[/]', $prefix),
         ProfileMiddleware::class,
-        'profile-update'
+        'profile-edit-personal'
+    );
+
+    $app->post(
+        sprintf('%s/protected/profile/{profileId}/{command:switch}[/]', $prefix),
+        ProfileMiddleware::class,
+        'profile-switch'
     );
 
     $app->post(
