@@ -1,4 +1,4 @@
-'/protected/profile/{profileId}/image-upload':
+'/protected/profile/{profileId}/image-upload/crop-start/{x1}/{y1}/crop-end/{x2}/{y2}':
   post:
     tags:
       - profile
@@ -11,20 +11,51 @@
         in: path
         required: true
         description: ID профиля
+      - name: x1
+        type: number
+        in: path
+        required: true
+        description: Crop, Start.X
+      - name: y1
+        type: number
+        in: path
+        required: true
+        description: Crop, Start.Y
+      - name: x2
+        type: number
+        in: path
+        required: true
+        description: Crop, End.X
+      - name: y2
+        type: number
+        in: path
+        required: true
+        description: Crop, End.Y
       - name: file
-        in: body
-        type: "file"
-        required: true
         description: Файл
-      - name: body
-        in: body
+        type: file
         required: true
-        description: Image properties
-        schema:
-          $ref: '#/definitions/Profile_UploadImage_Request'
+        in: formData
+        allowMultiple: false
     responses:
       200:
-        $ref: '#/responses/success'
+        description: Success
+        schema:
+          type: object
+          required:
+            - success
+            - profile_id
+            - public_path
+          properties:
+            success:
+              type: boolean
+              default: true
+            profile_id:
+              type: number
+              description: ID профиля
+            public_path:
+              type: string
+              description: Путь (/public) к картинке
       403:
         $ref: '#/responses/Unauthorized'
       404:

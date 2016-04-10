@@ -115,7 +115,7 @@ class LBApplicationBootstrap
         $emitter = new \Zend\Expressive\Emitter\EmitterStack();
         $emitter->push(new SapiEmitter());
 
-        $app = new Application($router, $container, null, $emitter);
+        $app = new Application($router, $container, $errorHandler, $emitter);
 
         $this->app = $app;
         $this->serviceManager = $app->getContainer();

@@ -1,6 +1,7 @@
 <?php
 namespace Common\Bootstrap;
 
+use Common\Exception\BadCommandCallException;
 use Common\Exception\CommandNotFoundException;
 use Common\REST\GenericRESTResponseBuilder;
 use Common\Tools\RequestParams\InvalidJSONSchema;
@@ -29,6 +30,8 @@ class ErrorHandler
                 $responseBuilder->setStatusBadRequest();
             }catch(CommandNotFoundException $e) {
                 $responseBuilder->setStatusNotFound();
+            }catch(BadCommandCallException $e) {
+                $responseBuilder->setStatusBadRequest();
             }
         }
 

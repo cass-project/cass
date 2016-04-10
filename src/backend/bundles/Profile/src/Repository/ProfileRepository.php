@@ -6,6 +6,7 @@ use Common\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Profile\Entity\Profile;
 use Profile\Entity\ProfileGreetings;
+use Profile\Entity\ProfileImage;
 
 class ProfileRepository extends EntityRepository
 {
@@ -69,7 +70,7 @@ class ProfileRepository extends EntityRepository
         $em->flush($greetings);
     }
 
-    public function updateImage(int $profileId, string $storagePath, string $publicPath)
+    public function updateImage(int $profileId, string $storagePath, string $publicPath): ProfileImage
     {
         $em = $this->getEntityManager();
 
@@ -80,5 +81,7 @@ class ProfileRepository extends EntityRepository
 
         $em->persist($image);
         $em->flush($image);
+
+        return $image;
     }
 }

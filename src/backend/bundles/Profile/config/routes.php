@@ -30,7 +30,7 @@ return function (Application $app, string $prefix) {
     );
 
     $app->post(
-        sprintf('%s/protected/profile/{profileId}/{command:image-upload}/[/]', $prefix),
+        sprintf('%s/protected/profile/{profileId}/{command:image-upload}/crop-start/{x1}/{y1}/crop-end/{x2}/{y2}[/]', $prefix),
         ProfileMiddleware::class,
         'profile-image-upload'
     );

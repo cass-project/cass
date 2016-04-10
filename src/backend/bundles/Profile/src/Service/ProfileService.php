@@ -5,6 +5,8 @@ use PHPImageWorkshop\Core\ImageWorkshopLayer;
 use PHPImageWorkshop\ImageWorkshop;
 use Profile\Entity\Profile;
 use Profile\Entity\ProfileImage;
+use Profile\Exception\ImageIsNotASquareException;
+use Profile\Exception\ImageTooBigException;
 use Profile\Exception\ImageTooSmallException;
 use Profile\Repository\ProfileRepository;
 
@@ -42,7 +44,7 @@ class ProfileService
         $this->profileRepository->nameN($profileId, $nickName);
     }
 
-    public function uploadImage(int $profileId, string $tmpFile, int $startX, int $startY, int $endX, int $endY)
+    public function uploadImage(int $profileId, string $tmpFile, int $startX, int $startY, int $endX, int $endY): ProfileImage
     {
         $profile = $this->getProfileById($profileId);
 
@@ -58,7 +60,7 @@ class ProfileService
         $storagePath = $this->profileStorageDir.'/'.$imageFileName;
         $publicPath = '/public/storage/'.$imageFileName;
 
-        $this->profileRepository->updateImage($profile->getId(), $storagePath, $publicPath);
+        return $this->profileRepository->updateImage($profile->getId(), $storagePath, $publicPath);
     }
 
     private function validateCropPoints(ImageWorkshopLayer $image, int $startX, int $startY, int $endX, int $endY)
@@ -71,12 +73,27 @@ class ProfileService
             throw new \OutOfBoundsException('endX/endY should be lest than image width/height');
         }
 
-        if (($endX - $startX) < ProfileImage::MIN_WIDTH) {
+        $resultWidth = ($endX - $startX);
+        $resultHeight = ($endY - $startY);
+
+        if ($resultWidth < ProfileImage::MIN_WIDTH) {
             throw new ImageTooSmallException(sprintf('Image width should me more than %s pixels', ProfileImage::MIN_WIDTH));
         }
 
-        if (($endY - $startY) < ProfileImage::MIN_HEIGHT) {
+        if ($resultHeight < ProfileImage::MIN_HEIGHT) {
             throw new ImageTooSmallException(sprintf('Image height should me more than %s pixels', ProfileImage::MIN_HEIGHT));
+        }
+
+        if($resultWidth > ProfileImage::MAX_WIDTH) {
+            throw new ImageTooBigException(sprintf('Image width should me less than %s pixels', ProfileImage::MAX_WIDTH));
+        }
+
+        if($resultHeight > ProfileImage::MAX_HEIGHT) {
+            throw new ImageTooBigException(sprintf('Image height should me less than %s pixels', ProfileImage::MAX_HEIGHT));
+        }
+
+        if($resultWidth !== $resultHeight) {
+            throw new ImageIsNotASquareException('Image should be a square');
         }
     }
 }
