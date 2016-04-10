@@ -24,7 +24,7 @@ return function (Application $app, string $prefix) {
     );
 
     $app->post(
-        sprintf('%s/protected/profile/{profileId}/{command:greetings-as}/{greetingsType}/[/]', $prefix),
+        sprintf('%s/protected/profile/{profileId}/{command:greetings-as}/{greetingsMethod}/[/]', $prefix),
         ProfileMiddleware::class,
         'profile-greetings-as'
     );

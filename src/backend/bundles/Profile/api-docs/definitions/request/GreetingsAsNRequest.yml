@@ -1,0 +1,8 @@
+Profile_GreetingsAsN_Request:
+  type: object
+  required:
+    - nickname
+  properties:
+    nickname:
+      type: string
+      description: Ник

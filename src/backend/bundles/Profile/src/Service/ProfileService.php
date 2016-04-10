@@ -18,4 +18,19 @@ class ProfileService
     {
         return $this->profileRepository->getProfileById($profileId);
     }
+
+    public function nameFL(int $profileId, string $firstName, string $lastName)
+    {
+        $this->profileRepository->nameFL($profileId, $firstName, $lastName);
+    }
+
+    public function nameLFM(int $profileId, string $lastName, string $firstName, string $middleName)
+    {
+        $this->profileRepository->nameLFM($profileId, $lastName, $firstName, $middleName);
+    }
+
+    public function nameN(int $profileId, string $nickName)
+    {
+        $this->profileRepository->nameN($profileId, $nickName);
+    }
 }

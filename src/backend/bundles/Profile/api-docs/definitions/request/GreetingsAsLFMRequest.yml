@@ -1,0 +1,16 @@
+Profile_GreetingsAsLFM_Request:
+  type: object
+  required:
+    - last_name
+    - first_name
+    - middle_name
+  properties:
+    last_name:
+      type: string
+      description: Фамилия
+    first_name:
+      type: string
+      description: Имя
+    middle_name:
+      type: string
+      description: Отчество

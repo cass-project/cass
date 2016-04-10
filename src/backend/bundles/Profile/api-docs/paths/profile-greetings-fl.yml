@@ -2,7 +2,7 @@
   post:
     tags:
       - profile
-    description: Назвать пользователя по имени и фамилии
+    description: Назвать пользователя по имени и фамилии. Также отмечает профиль как проинициализированый.
     security:
       - x_api_key: []
     parameters:
@@ -16,16 +16,7 @@
         required: true
         description: Профиль
         schema:
-          required:
-            - first_name
-            - last_name
-          properties:
-            first_name:
-              type: string
-              description: Имя
-            last_name:
-              type: string
-              description: Фамилия
+          $ref: '#/definitions/Profile_GreetingsAsFL_Request'
     responses:
       200:
         schema:

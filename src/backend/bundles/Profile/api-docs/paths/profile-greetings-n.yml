@@ -2,7 +2,7 @@
   post:
     tags:
       - profile
-    description: Назвать пользователя по никнейму
+    description: Назвать пользователя по никнейму. Также отмечает профиль как проинициализированый.
     security:
       - x_api_key: []
     parameters:
@@ -16,13 +16,7 @@
         required: true
         description: Профиль
         schema:
-          required:
-            - last_name
-            - first_name
-          properties:
-            nickname:
-              type: string
-              description: Ник
+          $ref: '#/definitions/Profile_GreetingsAsN_Request'
     responses:
       200:
         schema:

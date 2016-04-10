@@ -2,6 +2,7 @@
 namespace Profile\Middleware;
 
 use Common\REST\GenericRESTResponseBuilder;
+use Profile\Exception\UnknownGreetingsException;
 use Profile\Middleware\Command\Command;
 use Profile\Service\ProfileService;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -21,12 +22,25 @@ class ProfileMiddleware implements MiddlewareInterface
     public function __invoke(Request $request, Response $response, callable $out = NULL)
     {
         $responseBuilder = new GenericRESTResponseBuilder($response);
-        $command = Command::factory($request, $this->profileService);
-        $result = $command->run($request);
 
-        return $responseBuilder
-            ->setStatusSuccess()
-            ->setJson($result)
-        ->build();
+        try {
+            $command = Command::factory($request, $this->profileService);
+            $result = $command->run($request);
+
+            if($result === true) {
+                $result = [];
+            }
+
+            $responseBuilder
+                ->setStatusSuccess()
+                ->setJson($result);
+        }catch(UnknownGreetingsException $e) {
+            $responseBuilder
+                ->setStatusBadRequest()
+                ->setError($e)
+            ;
+        }
+
+        return $responseBuilder->build();
     }
 }

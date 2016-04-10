@@ -2,7 +2,7 @@
   post:
     tags:
       - profile
-    description: Назвать пользователя по ФИО
+    description: Назвать пользователя по ФИО. Также отмечает профиль как проинициализированый.
     security:
       - x_api_key: []
     parameters:
@@ -16,20 +16,7 @@
         required: true
         description: Профиль
         schema:
-          required:
-            - first_name
-            - last_name
-            - middle_name
-          properties:
-            last_name:
-              type: string
-              description: Фамилия
-            first_name:
-              type: string
-              description: Имя
-            middle_name:
-              type: string
-              description: Отчество
+          $ref: '#/definitions/Profile_GreetingsAsLFM_Request'
     responses:
       200:
         schema:
