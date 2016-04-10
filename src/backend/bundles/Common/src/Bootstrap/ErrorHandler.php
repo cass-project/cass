@@ -3,6 +3,7 @@ namespace Common\Bootstrap;
 
 use Common\Exception\BadCommandCallException;
 use Common\Exception\CommandNotFoundException;
+use Common\Exception\PermissionsDeniedException;
 use Common\REST\GenericRESTResponseBuilder;
 use Common\Tools\RequestParams\InvalidJSONSchema;
 use Data\Exception\DataEntityNotFoundException;
@@ -32,6 +33,8 @@ class ErrorHandler
                 $responseBuilder->setStatusNotFound();
             }catch(BadCommandCallException $e) {
                 $responseBuilder->setStatusBadRequest();
+            }catch(PermissionsDeniedException $e){
+                $responseBuilder->setStatusNotAllowed();
             }
         }
 

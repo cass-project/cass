@@ -2,6 +2,7 @@
 namespace Profile\Service;
 
 use Account\Entity\Account;
+use Common\Exception\PermissionsDeniedException;
 use PHPImageWorkshop\Core\ImageWorkshopLayer;
 use PHPImageWorkshop\ImageWorkshop;
 use Profile\Entity\Profile;
@@ -10,6 +11,7 @@ use Profile\Entity\ProfileImage;
 use Profile\Exception\ImageIsNotASquareException;
 use Profile\Exception\ImageTooBigException;
 use Profile\Exception\ImageTooSmallException;
+use Profile\Exception\LastProfileException;
 use Profile\Exception\MaxProfilesReachedException;
 use Profile\Repository\ProfileRepository;
 
@@ -36,7 +38,7 @@ class ProfileService
 
     public function createProfileForAccount(Account $account): Profile
     {
-        if($account->getProfiles()->count() >= self::MAX_PROFILES_PER_ACCOUNT) {
+        if ($account->getProfiles()->count() >= self::MAX_PROFILES_PER_ACCOUNT) {
             throw new MaxProfilesReachedException(sprintf('You can only have %d profiles per account', self::MAX_PROFILES_PER_ACCOUNT));
         }
 
@@ -44,10 +46,25 @@ class ProfileService
 
         $profile->setIsCurrent(true)
             ->setProfileGreetings(new ProfileGreetings($profile))
-            ->setProfileImage(new ProfileImage($profile))
-        ;
+            ->setProfileImage(new ProfileImage($profile));
 
         return $this->profileRepository->createProfile($profile);
+    }
+
+    public function deleteProfile(int $profileId, int $currentAccountId)
+    {
+        $profile = $this->getProfileById($profileId);
+        $account = $profile->getAccount();
+
+        if($account->getId() !== $currentAccountId) {
+            throw new PermissionsDeniedException("You're not an owner of this profile");
+        }
+
+        if($account->getProfiles()->count() === 1) {
+            throw new LastProfileException('This is your last profile. Sorry you need at least one profile per account.');
+        }
+
+        $this->profileRepository->deleteProfile($profile);
     }
 
     public function nameFL(int $profileId, string $firstName, string $lastName)
