@@ -2,16 +2,9 @@
   put:
     tags:
       - profile
-    description: Создать новый профиль
+    description: Создать новый профиль для текущего аккаунта
     security:
       - x_api_key: []
-    parameters:
-      - name: body
-        in: body
-        required: true
-        description: Профиль
-        schema:
-          $ref: '#/definitions/Profile'
     responses:
       200:
         schema:

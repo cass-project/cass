@@ -2,13 +2,13 @@
 namespace Auth;
 
 use Auth\Factory\Middleware\ProtectedMiddlewareFactory;
-use Auth\Factory\Service\CurrentProfileServiceFactory;
+use Auth\Factory\Service\CurrentAccountServiceFactory;
 use Auth\Middleware\AuthMiddleware;
 use Auth\Factory\Middleware\AuthMiddlewareFactory;
 use Auth\Middleware\ProtectedMiddleware;
 use Auth\Service\AuthService;
 use Auth\Factory\Service\AuthServiceFactory;
-use Auth\Service\CurrentProfileService;
+use Auth\Service\CurrentAccountService;
 
 return [
     'zend_service_manager' => [
@@ -16,7 +16,7 @@ return [
             AuthService::class => AuthServiceFactory::class,
             AuthMiddleware::class => AuthMiddlewareFactory::class,
             ProtectedMiddleware::class => ProtectedMiddlewareFactory::class,
-            CurrentProfileService::class => CurrentProfileServiceFactory::class
+            CurrentAccountService::class => CurrentAccountServiceFactory::class
         ]
     ]
 ];

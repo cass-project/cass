@@ -5,9 +5,9 @@ use Auth\Middleware\AuthStrategy\Strategy;
 use Account\Entity\Account;
 use Data\Exception\Auth\AccountNotFoundException;
 use Account\Repository\AccountRepository;
-use Psr\Http\Message\ServerRequestInterface;
+use Profile\Entity\Profile;
 
-class CurrentProfileService
+class CurrentAccountService
 {
     /** @var AccountRepository */
     private $accountRepository;
@@ -20,16 +20,27 @@ class CurrentProfileService
         $this->accountRepository = $accountRepository;
     }
 
-    public function getCurrentAccount(): Account {
+    public function getCurrentAccount(): Account
+    {
         return $this->account;
     }
 
-    /**
-     * @param Strategy[] $strategies
-     * @throws NotAuthenticatedException
-     */
+    public function getCurrentProfile(): Profile
+    {
+        foreach($this->getCurrentAccount()->getProfiles() as $profile) {
+            /** @var Profile $profile */
+            if($profile->isCurrent()) {
+                return $profile;
+            }
+        }
+
+        throw new \Exception('No current profile is available');
+    }
+
     public function attempt(array $strategies)
     {
+        /** @var Strategy[] $strategies */
+
         foreach($strategies as $strategy) {
             if($strategy->isAPIKeyAvailable()) {
                 try {

@@ -3,7 +3,7 @@ namespace Post\Middleware\Command;
 
 
 use Common\REST\Exceptions\UnknownActionException;
-use Auth\Service\CurrentProfileService;
+use Auth\Service\CurrentAccountService;
 use Post\Service\AttachmentService;
 use Post\Service\PostService;
 use Psr\Http\Message\ServerRequestInterface;
@@ -34,9 +34,9 @@ abstract class Command
 	}
 
 	/**
-	 * @return CurrentProfileService
+	 * @return CurrentAccountService
 	 */
-	public function getCurrentProfileService():CurrentProfileService
+	public function getCurrentProfileService():CurrentAccountService
 	{
 		return $this->currentProfileService;
 	}
@@ -44,7 +44,7 @@ abstract class Command
 	/**
 	 * @param mixed $currentProfileService
 	 */
-	public function setCurrentProfileService(CurrentProfileService $currentProfileService)
+	public function setCurrentProfileService(CurrentAccountService $currentProfileService)
 	{
 		$this->currentProfileService = $currentProfileService;
 	}

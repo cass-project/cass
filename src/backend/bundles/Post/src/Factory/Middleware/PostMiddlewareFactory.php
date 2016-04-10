@@ -1,7 +1,7 @@
 <?php
 namespace Post\Factory\Middleware;
 
-use Auth\Service\CurrentProfileService;
+use Auth\Service\CurrentAccountService;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Post\Middleware\PostMiddleware;
@@ -14,9 +14,9 @@ class PostMiddlewareFactory implements FactoryInterface
 {
 	public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL){
 		$postService = $container->get(PostService::class);
-		$currentProfileService = $container->get(CurrentProfileService::class);
+		$currentAccountService = $container->get(CurrentAccountService::class);
 
-		return new PostMiddleware($postService,	$currentProfileService );
+		return new PostMiddleware($postService,	$currentAccountService );
 	}
 
 }

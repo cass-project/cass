@@ -5,7 +5,7 @@ use Common\REST\GenericRESTResponseBuilder;
 use Auth\Middleware\AuthStrategy\HeaderStrategy;
 use Auth\Middleware\AuthStrategy\JSONBodyStrategy;
 use Auth\Middleware\AuthStrategy\SessionStrategy;
-use Auth\Service\CurrentProfileService;
+use Auth\Service\CurrentAccountService;
 use Auth\Service\NotAuthenticatedException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -13,15 +13,15 @@ use Zend\Stratigility\MiddlewareInterface;
 
 class ProtectedMiddleware implements MiddlewareInterface
 {
-    /** @var CurrentProfileService */
-    private $currentProfileService;
+    /** @var CurrentAccountService */
+    private $currentAccountService;
 
     /** @var string */
     private $prefix;
 
-    public function __construct(CurrentProfileService $currentProfileService, string $prefix)
+    public function __construct(CurrentAccountService $currentAccountService, string $prefix)
     {
-        $this->currentProfileService = $currentProfileService;
+        $this->currentAccountService = $currentAccountService;
         $this->prefix = $prefix;
     }
 
@@ -31,7 +31,7 @@ class ProtectedMiddleware implements MiddlewareInterface
 
         try {
             if($isURLProtected) {
-                $this->currentProfileService->attempt([
+                $this->currentAccountService->attempt([
                     new HeaderStrategy($request),
                     new JSONBodyStrategy($request),
                     new SessionStrategy($request)
