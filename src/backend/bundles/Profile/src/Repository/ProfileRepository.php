@@ -68,4 +68,17 @@ class ProfileRepository extends EntityRepository
         $em->persist($greetings);
         $em->flush($greetings);
     }
+
+    public function updateImage(int $profileId, string $storagePath, string $publicPath)
+    {
+        $em = $this->getEntityManager();
+
+        $image = $this->getProfileById($profileId)->getProfileImage();
+        $image
+            ->setStoragePath($storagePath)
+            ->setPublicPath($publicPath);
+
+        $em->persist($image);
+        $em->flush($image);
+    }
 }

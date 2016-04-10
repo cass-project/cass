@@ -7,6 +7,9 @@ namespace Profile\Entity;
  */
 class ProfileImage
 {
+    const MIN_WIDTH = 64;
+    const MIN_HEIGHT = 64;
+
     const DEFAULT_PROFILE_IMAGE_PUBLIC = '/public/assets/profile-default.png';
     const DEFAULT_PROFILE_IMAGE_STORAGE = __DIR__.'/../../../../../www/app/public/assets/profile-default.png';
 

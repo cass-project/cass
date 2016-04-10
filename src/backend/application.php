@@ -26,6 +26,7 @@ class LBApplicationBootstrap
             'LB_BACKEND_BUNDLES_DIR',
             'LB_FRONTEND_DIRECTORY',
             'LB_FRONTEND_BASE_URL',
+            'LB_STORAGE_DIRECTORY',
         ];
 
         foreach($requiredConstants as $required) {
@@ -38,7 +39,8 @@ class LBApplicationBootstrap
             'prefix' => LB_BACKEND_ROUTE_PREFIX,
             'backend' => LB_BACKEND_DIRECTORY,
             'bundles' => LB_BACKEND_BUNDLES_DIR,
-            'frontend' => LB_FRONTEND_DIRECTORY
+            'frontend' => LB_FRONTEND_DIRECTORY,
+            'storage' => LB_STORAGE_DIRECTORY
         ]);
     }
 
@@ -113,7 +115,7 @@ class LBApplicationBootstrap
         $emitter = new \Zend\Expressive\Emitter\EmitterStack();
         $emitter->push(new SapiEmitter());
 
-        $app = new Application($router, $container, $errorHandler, $emitter);
+        $app = new Application($router, $container, null, $emitter);
 
         $this->app = $app;
         $this->serviceManager = $app->getContainer();
