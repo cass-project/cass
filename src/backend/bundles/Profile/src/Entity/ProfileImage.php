@@ -48,6 +48,15 @@ class ProfileImage
         $this->storagePath = $storagePath;
     }
 
+    public function toJSON(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'profile_id' => $this->getProfile()->getId(),
+            'public_path' => $this->getPublicPath()
+        ];
+    }
+
     public function hasId(): bool
     {
         return $this->id !== null;

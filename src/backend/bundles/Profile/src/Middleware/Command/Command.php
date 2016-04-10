@@ -1,8 +1,9 @@
 <?php
 namespace Profile\Middleware\Command;
 
-use Common\REST\Exceptions\UnknownActionException;
+use Profile\Service\ProfileService;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Component\Console\Exception\CommandNotFoundException;
 
 abstract class Command
 {
@@ -13,13 +14,25 @@ abstract class Command
     const COMMAND_IMAGE_UPLOAD = 'image-upload';
     const COMMAND_UPDATE = 'update';
 
-    public static function factory(ServerRequestInterface $request): Command
-    {
-        $action = $request->getAttribute('command');
+    /** @var ProfileService */
+    protected $profileService;
 
-        switch ($action) {
+    private function setProfileService(ProfileService $profileService) {
+        $this->profileService = $profileService;
+    }
+
+    public static function factory(ServerRequestInterface $request, ProfileService $profileService): Command
+    {
+        $command = self::factoryCommand($request->getAttribute('command'));
+        $command->setProfileService($profileService);
+
+        return $command;
+    }
+
+    private static function factoryCommand(string $command) {
+        switch ($command) {
             default:
-                throw new UnknownActionException;
+                throw new CommandNotFoundException(sprintf("Command %s::%s not found", self::class, $command));
 
             case self::COMMAND_CREATE:
                 return new CreateCommand();
@@ -42,4 +55,16 @@ abstract class Command
     }
 
     abstract public function run(ServerRequestInterface $request);
+
+    protected function validateProfileId($input): int
+    {
+        $isInteger = filter_var($input, FILTER_VALIDATE_INT);
+        $isMoreThanZero = (int) $input > 0;
+
+        if(!($isInteger && $isMoreThanZero)) {
+            throw new \InvalidArgumentException('Invalid profileId');
+        }
+
+        return (int) $input;
+    }
 }

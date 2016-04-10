@@ -9,12 +9,18 @@ use Account\Entity\Account;
 class Profile
 {
     /**
-     * @var int
      * @Id
      * @GeneratedValue
      * @Column(type="integer")
+     * @var int
      */
     private $id;
+
+    /**
+     * @Column(type="boolean", name="is_initialized")
+     * @var bool
+     */
+    private $isInitialized = false;
 
     /**
      * @ManyToOne(targetEntity="Account\Entity\Account")
@@ -40,6 +46,18 @@ class Profile
      */
     private $profileImage;
 
+    public function toJSON(): array
+    {
+        return [
+            'id' => (int) $this->getId(),
+            'account_id' => (int) $this->getAccount()->getId(),
+            'current' => (bool) $this->isCurrent(),
+            'is_initialized' => $this->isInitialized(),
+            'greetings' => $this->getProfileGreetings()->toJSON(),
+            'image' => $this->getProfileImage()->toJSON()
+        ];
+    }
+
     public function __construct(Account $account)
     {
         $this->account = $account;
@@ -53,6 +71,18 @@ class Profile
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function isInitialized(): bool
+    {
+        return (bool) $this->isInitialized;
+    }
+
+    public function setAsInitialized(): self
+    {
+        $this->isInitialized = true;
+
+        return $this;
     }
 
     public function getAccount(): \Account\Entity\Account

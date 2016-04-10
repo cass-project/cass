@@ -8,6 +8,11 @@ class GetCommand extends Command
 {
     public function run(ServerRequestInterface $request)
     {
-        return [];
+        $profileId = $this->validateProfileId($request->getAttribute('profileId'));
+        $profile = $this->profileService->getProfileById($profileId);
+
+        return [
+            'entity' => $profile->toJSON()
+        ];
     }
 }

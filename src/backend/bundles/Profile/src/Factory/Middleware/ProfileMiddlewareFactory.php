@@ -3,15 +3,15 @@ namespace Profile\Factory\Middleware;
 
 use Interop\Container\ContainerInterface;
 use Profile\Middleware\ProfileMiddleware;
-use Profile\Repository\ProfileRepository;
+use Profile\Service\ProfileService;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 class ProfileMiddlewareFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $profileRepository = $container->get(ProfileRepository::class); /** @var ProfileRepository $profileRepository */
+        $profileService = $container->get(ProfileService::class); /** @var ProfileService $profileService */
 
-        return new ProfileMiddleware($profileRepository);
+        return new ProfileMiddleware($profileService);
     }
 }

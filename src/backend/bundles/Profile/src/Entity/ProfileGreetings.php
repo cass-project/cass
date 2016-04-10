@@ -7,6 +7,10 @@ namespace Profile\Entity;
  */
 class ProfileGreetings
 {
+    const GREETINGS_FL = 'fl';
+    const GREETINGS_LFM = 'lfm';
+    const GREETINGS_N = 'n';
+
     /**
      * @Column(type="integer")
      * @Id
@@ -26,7 +30,7 @@ class ProfileGreetings
      * @Column(type="string",name="greetings_method")
      * @var string
      */
-    private $greetingsMethod = 'fl';
+    private $greetingsMethod = self::GREETINGS_FL;
 
     /**
      * @Column(type="string",name="first_name")
@@ -56,6 +60,20 @@ class ProfileGreetings
     {
         $this->profile = $profile;
         $this->profile->setProfileGreetings($this);
+    }
+
+    public function toJSON(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'profile_id' => $this->getProfile()->getId(),
+            'greetings_method' => $this->getGreetingsMethod(),
+            'greetings' => $this->getGreetings(),
+            'first_name' => $this->getFirstName(),
+            'last_name' => $this->getLastName(),
+            'middle_name' => $this->getMiddleName(),
+            'nickname' => $this->getNickName()
+        ];
     }
 
     public function hasId(): bool
@@ -99,6 +117,20 @@ class ProfileGreetings
         return $this->greetingsMethod;
     }
 
+    public function getGreetings(): string
+    {
+        switch($this->greetingsMethod) {
+            default:
+                return $this->getProfile()->getAccount()->getEmail();
+            case self::GREETINGS_FL:
+                return sprintf('%s %s', $this->getFirstName(), $this->getLastName());
+            case self::GREETINGS_LFM:
+                return sprintf('%s %s %s', $this->getLastName(), $this->getFirstName(), $this->getMiddleName());
+            case self::GREETINGS_N:
+                return $this->getNickName();
+        }
+    }
+
     public function setGreetingsMethod(string $greetingsMethod): self
     {
         $this->greetingsMethod = $greetingsMethod;
@@ -108,7 +140,7 @@ class ProfileGreetings
 
     public function getFirstName(): string
     {
-        return $this->firstName;
+        return (string) $this->firstName;
     }
 
     public function setFirstName(string $firstName): self
@@ -120,7 +152,7 @@ class ProfileGreetings
 
     public function getLastName(): string
     {
-        return $this->lastName;
+        return (string) $this->lastName;
     }
 
     public function setLastName(string $lastName): self
@@ -132,7 +164,7 @@ class ProfileGreetings
 
     public function getMiddleName(): string
     {
-        return $this->middleName;
+        return (string) $this->middleName;
     }
 
     public function setMiddleName(string $middleName): self
@@ -144,7 +176,7 @@ class ProfileGreetings
 
     public function getNickName(): string
     {
-        return $this->nickName;
+        return (string) $this->nickName;
     }
 
     public function setNickName(string $nickName): self

@@ -1,4 +1,4 @@
-'/profile/{profileId}':
+'/profile/{profileId}/get':
   get:
     tags:
       - profile

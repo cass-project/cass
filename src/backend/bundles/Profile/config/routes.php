@@ -6,7 +6,7 @@ use Zend\Expressive\Application;
 
 return function (Application $app, string $prefix) {
     $app->get(
-        sprintf('%s/profile/{profileId}[/]', $prefix),
+        sprintf('%s/profile/{profileId}/{command:get}[/]', $prefix),
         ProfileMiddleware::class,
         'profile-get-by-id'
     );

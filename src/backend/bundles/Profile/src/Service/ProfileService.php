@@ -1,7 +1,6 @@
 <?php
 namespace Profile\Service;
 
-use Account\Entity\Account;
 use Profile\Entity\Profile;
 use Profile\Repository\ProfileRepository;
 
@@ -15,8 +14,8 @@ class ProfileService
         $this->profileRepository = $profileRepository;
     }
 
-    public function createProfileForAccount(Account $account): Profile
+    public function getProfileById(int $profileId): Profile
     {
-        return $this->profileRepository->attachProfileToAccount(new Profile($account), $account);
+        return $this->profileRepository->getProfileById($profileId);
     }
 }
