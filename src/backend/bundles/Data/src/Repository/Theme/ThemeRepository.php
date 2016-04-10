@@ -1,7 +1,7 @@
 <?php
 namespace Data\Repository\Theme;
 
-use Application\Tools\SerialManager\SerialManager;
+use Common\Tools\SerialManager\SerialManager;
 use Cocur\Chain\Chain;
 use Data\Entity\Host;
 use Data\Entity\Theme;

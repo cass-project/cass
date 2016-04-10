@@ -2,7 +2,7 @@
 namespace Post\Middleware;
 
 
-use Application\REST\GenericRESTResponseBuilder;
+use Common\REST\GenericRESTResponseBuilder;
 use Post\Middleware\Command\AttachmentCommand;
 use Post\Middleware\Command\Command;
 use Post\Middleware\Command\CreateAttachmentCommand;

@@ -1,7 +1,7 @@
 <?php
 namespace ThemeEditor\Middleware\Command;
 
-use Application\Exception\CommandNotFoundException;
+use Common\Exception\CommandNotFoundException;
 use ThemeEditor\Service\ThemeEditorService;
 use Psr\Http\Message\ServerRequestInterface;
 

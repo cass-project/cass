@@ -2,7 +2,7 @@
 namespace Auth\Factory\Service;
 
 use Account\Service\AccountService;
-use Application\Service\SharedConfigService;
+use Common\Service\SharedConfigService;
 use Auth\Service\AuthService;
 use Account\Repository\AccountRepository;
 use Account\Repository\OAuthAccountRepository;

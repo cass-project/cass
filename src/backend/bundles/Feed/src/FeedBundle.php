@@ -1,7 +1,7 @@
 <?php
 namespace Feed;
 
-use Application\Bootstrap\Bundle\GenericBundle;
+use Common\Bootstrap\Bundle\GenericBundle;
 
 class FeedBundle extends GenericBundle
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Data\Repository\Theme\Parameters;
 
-use Application\Tools\RequestParams\Param;
+use Common\Tools\RequestParams\Param;
 use Data\Repository\Theme\SaveThemeProperties;
 
 class UpdateThemeParameters implements SaveThemeProperties

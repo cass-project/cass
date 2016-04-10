@@ -1,7 +1,7 @@
 {
   "autoload": {
     "psr-4": {
-      "Application\\": "bundles/Application/src",
+      "Common\\": "bundles/Common/src",
       "Auth\\": "bundles/Auth/src",
       "Data\\": "bundles/Data/src",
       "ThemeEditor\\": "bundles/ThemeEditor/src",

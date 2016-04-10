@@ -1,7 +1,7 @@
 <?php
 namespace Account;
 
-use Application\Bootstrap\Bundle\GenericBundle;
+use Common\Bootstrap\Bundle\GenericBundle;
 
 class AccountBundle extends GenericBundle
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Development\Service;
 
-use Application\Bootstrap\Bundle\BundleService;
+use Common\Bootstrap\Bundle\BundleService;
 use Development\APIDocs\APIDocsBuilder;
 use Development\APIDocs\APIDocsBuilderRequest;
 

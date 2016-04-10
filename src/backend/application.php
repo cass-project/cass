@@ -1,11 +1,11 @@
 <?php
 require __DIR__.'/vendor/autoload.php';
 
-use Application\Bootstrap\Bundle\Bundle;
-use Application\Bootstrap\Scripts\RouteSetupScript;
-use Application\Bootstrap\Scripts\SharedConfigServiceSetupScript;
-use Application\Service\SchemaService;
-use Application\Service\SharedConfigService;
+use Common\Bootstrap\Bundle\Bundle;
+use Common\Bootstrap\Scripts\RouteSetupScript;
+use Common\Bootstrap\Scripts\SharedConfigServiceSetupScript;
+use Common\Service\SchemaService;
+use Common\Service\SharedConfigService;
 use Auth\Middleware\ProtectedMiddleware;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Expressive\Application;
@@ -43,7 +43,7 @@ class LBApplicationBootstrap
     }
 
     private function initBundles() {
-        $bundleService = new \Application\Bootstrap\Bundle\BundleService();
+        $bundleService = new \Common\Bootstrap\Bundle\BundleService();
         $bundlesPath = $this->serviceManager->get('paths')['bundles'];
 
         $directories = array_filter(scandir($bundlesPath), function($input) use ($bundlesPath) {
@@ -65,7 +65,7 @@ class LBApplicationBootstrap
             $bundleService->addBundle(new $bundleClassName());
         }
 
-        $this->serviceManager->setService('Application\Bootstrap\Bundle\BundleService', $bundleService);
+        $this->serviceManager->setService('Common\Bootstrap\Bundle\BundleService', $bundleService);
     }
 
     private function initContainer() {
@@ -86,7 +86,7 @@ class LBApplicationBootstrap
     }
 
     private function initSchemaRESTRequest() {
-        \Application\Tools\RequestParams\SchemaParams::injectSchemaService($this->serviceManager->get(SchemaService::class));
+        \Common\Tools\RequestParams\SchemaParams::injectSchemaService($this->serviceManager->get(SchemaService::class));
     }
 
     private function initProtectedRoutes() {
@@ -109,7 +109,7 @@ class LBApplicationBootstrap
     public function bootstrap() {
         $container = new ServiceManager();
         $router = new \Zend\Expressive\Router\FastRouteRouter();
-        $errorHandler = new \Application\Bootstrap\ErrorHandler();
+        $errorHandler = new \Common\Bootstrap\ErrorHandler();
         $emitter = new \Zend\Expressive\Emitter\EmitterStack();
         $emitter->push(new SapiEmitter());
 

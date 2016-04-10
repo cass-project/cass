@@ -1,7 +1,7 @@
 <?php
 namespace Auth;
 
-use Application\Bootstrap\Bundle\GenericBundle;
+use Common\Bootstrap\Bundle\GenericBundle;
 
 class AuthBundle extends GenericBundle
 {

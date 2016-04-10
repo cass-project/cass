@@ -1,7 +1,7 @@
 <?php
 namespace Auth\Middleware\Command;
 
-use Application\REST\GenericRESTResponseBuilder;
+use Common\REST\GenericRESTResponseBuilder;
 use Auth\Service\AuthService\Exceptions\DuplicateAccountException;
 use Auth\Service\AuthService\Exceptions\MissingReqiuredFieldException;
 use Auth\Service\AuthService\Exceptions\ValidationException;

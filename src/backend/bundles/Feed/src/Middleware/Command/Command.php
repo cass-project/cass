@@ -1,7 +1,7 @@
 <?php
 namespace Feed\Middleware\Command;
 
-use Application\Exception\CommandNotFoundException;
+use Common\Exception\CommandNotFoundException;
 use Psr\Http\Message\ServerRequestInterface;
 use Sphinx\SphinxClient;
 

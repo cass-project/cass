@@ -1,5 +1,5 @@
 <?php
-namespace Application;
+namespace Common;
 
 use Feed\Middleware\FeedMiddleware;
 use Zend\Expressive\Application;

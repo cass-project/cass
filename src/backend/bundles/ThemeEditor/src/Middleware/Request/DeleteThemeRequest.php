@@ -2,7 +2,7 @@
 namespace ThemeEditor\Middleware\Request;
 
 
-use Application\Tools\RequestParams\RequestParams;
+use Common\Tools\RequestParams\RequestParams;
 use Data\Repository\Theme\Parameters\DeleteThemeParameters;
 use Psr\Http\Message\ServerRequestInterface;
 

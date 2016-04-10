@@ -1,7 +1,7 @@
 <?php
 namespace Development\Factory\Service;
 
-use Application\Bootstrap\Bundle\BundleService;
+use Common\Bootstrap\Bundle\BundleService;
 use Interop\Container\ContainerInterface;
 use Development\Service\APIDocsService;
 use Zend\ServiceManager\Factory\FactoryInterface;

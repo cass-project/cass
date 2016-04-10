@@ -1,7 +1,7 @@
 <?php
 namespace Development\Middleware;
 
-use Application\REST\GenericRESTResponseBuilder;
+use Common\REST\GenericRESTResponseBuilder;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Development\Service\APIDocsService;

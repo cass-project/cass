@@ -1,6 +1,6 @@
 <?php
 namespace Data\Entity;
-use Application\Tools\SerialManager\SerialEntity;
+use Common\Tools\SerialManager\SerialEntity;
 
 /**
  * @Entity(repositoryClass="Data\Repository\Theme\ThemeRepository")

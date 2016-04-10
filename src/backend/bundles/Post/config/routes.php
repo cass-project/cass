@@ -1,6 +1,6 @@
 <?php
 
-namespace Application;
+namespace Common;
 
 
 use Post\Middleware\AttachmentMiddleware;

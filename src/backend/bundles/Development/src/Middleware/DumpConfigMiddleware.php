@@ -1,7 +1,7 @@
 <?php
 namespace Development\Middleware;
 
-use Application\REST\GenericRESTResponseBuilder;
+use Common\REST\GenericRESTResponseBuilder;
 use Development\Middleware\Exception\DevelopmentToolsAreNotEnabledException;
 use Development\Middleware\Exception\UnknownSourceException;
 use Development\Service\DumpConfigService;

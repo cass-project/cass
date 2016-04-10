@@ -1,7 +1,7 @@
 <?php
 namespace Profile\Middleware\Command;
 
-use Application\REST\Exceptions\UnknownActionException;
+use Common\REST\Exceptions\UnknownActionException;
 use Psr\Http\Message\ServerRequestInterface;
 
 abstract class Command

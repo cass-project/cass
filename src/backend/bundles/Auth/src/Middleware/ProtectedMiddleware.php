@@ -1,7 +1,7 @@
 <?php
 namespace Auth\Middleware;
 
-use Application\REST\GenericRESTResponseBuilder;
+use Common\REST\GenericRESTResponseBuilder;
 use Auth\Middleware\AuthStrategy\HeaderStrategy;
 use Auth\Middleware\AuthStrategy\JSONBodyStrategy;
 use Auth\Middleware\AuthStrategy\SessionStrategy;

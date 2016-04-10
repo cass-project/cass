@@ -1,7 +1,7 @@
 <?php
 namespace ThemeEditor;
 
-use Application\Bootstrap\Bundle\GenericBundle;
+use Common\Bootstrap\Bundle\GenericBundle;
 
 class ThemeEditorBundle extends GenericBundle
 {

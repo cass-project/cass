@@ -1,8 +1,8 @@
 <?php
 namespace Auth\Middleware\Command;
 
-use Application\REST\Exceptions\UnknownActionException;
-use Application\REST\GenericRESTResponseBuilder;
+use Common\REST\Exceptions\UnknownActionException;
+use Common\REST\GenericRESTResponseBuilder;
 use Auth\Middleware\Command\OAuth\BattleNetCommand;
 use Auth\Middleware\Command\OAuth\FacebookCommand;
 use Auth\Middleware\Command\OAuth\GoogleCommand;

@@ -1,7 +1,7 @@
 <?php
 namespace Post;
 
-use Application\Bootstrap\Bundle\GenericBundle;
+use Common\Bootstrap\Bundle\GenericBundle;
 
 class PostBundle extends GenericBundle
 {

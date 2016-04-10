@@ -2,7 +2,7 @@
 namespace Post\Middleware\Command;
 
 
-use Application\REST\Exceptions\UnknownActionException;
+use Common\REST\Exceptions\UnknownActionException;
 use Post\Middleware\Request\PutPostAttachmentRequest;
 use Post\Middleware\Request\PutPostRequest;
 use Post\Service\AttachmentService;

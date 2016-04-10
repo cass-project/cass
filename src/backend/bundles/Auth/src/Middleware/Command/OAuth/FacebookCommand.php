@@ -1,7 +1,7 @@
 <?php
 namespace Auth\Middleware\Command\OAuth;
 
-use Application\REST\GenericRESTResponseBuilder;
+use Common\REST\GenericRESTResponseBuilder;
 use Auth\Middleware\Command\Command;
 use Auth\Service\AuthService\OAuth2\RegistrationRequest;
 use League\OAuth2\Client\Provider\AbstractProvider;

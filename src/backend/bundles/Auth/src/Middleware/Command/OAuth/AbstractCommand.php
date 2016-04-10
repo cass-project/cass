@@ -1,7 +1,7 @@
 <?php
 namespace Auth\Middleware\Command\OAuth;
 
-use Application\REST\GenericRESTResponseBuilder;
+use Common\REST\GenericRESTResponseBuilder;
 use Auth\Middleware\Command\Command;
 use Auth\Service\AuthService;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;

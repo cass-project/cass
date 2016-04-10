@@ -1,7 +1,7 @@
 <?php
 namespace ThemeEditor\Middleware\Request;
 
-use Application\Tools\RequestParams\RequestParams;
+use Common\Tools\RequestParams\RequestParams;
 use Psr\Http\Message\ServerRequestInterface;
 
 class GetThemeRequest extends RequestParams

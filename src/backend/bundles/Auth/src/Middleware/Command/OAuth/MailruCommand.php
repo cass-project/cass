@@ -1,7 +1,7 @@
 <?php
 namespace Auth\Middleware\Command\OAuth;
 
-use Application\REST\GenericRESTResponseBuilder;
+use Common\REST\GenericRESTResponseBuilder;
 use Auth\Middleware\Command\Command;
 use Auth\OauthProvider\Mailru;
 use League\OAuth2\Client\Provider\AbstractProvider;

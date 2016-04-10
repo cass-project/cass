@@ -1,8 +1,8 @@
 <?php
 namespace Auth\Middleware;
 
-use Application\REST\GenericRESTResponseBuilder;
-use Application\REST\Exceptions\UnknownActionException;
+use Common\REST\GenericRESTResponseBuilder;
+use Common\REST\Exceptions\UnknownActionException;
 use Auth\Middleware\Command\Command;
 use Auth\Service\AuthService;
 use Psr\Http\Message\ResponseInterface as Response;

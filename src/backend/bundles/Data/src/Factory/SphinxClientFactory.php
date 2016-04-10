@@ -1,7 +1,7 @@
 <?php
 namespace Data\Factory;
 
-use Application\Service\SharedConfigService;
+use Common\Service\SharedConfigService;
 use Interop\Container\ContainerInterface;
 use Sphinx\SphinxClient;
 use Zend\ServiceManager\Factory\FactoryInterface;

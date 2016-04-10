@@ -1,7 +1,7 @@
 <?php
 namespace Host;
 
-use Application\Bootstrap\Bundle\GenericBundle;
+use Common\Bootstrap\Bundle\GenericBundle;
 
 class HostBundle extends GenericBundle
 {

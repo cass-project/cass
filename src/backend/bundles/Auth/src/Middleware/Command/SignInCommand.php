@@ -1,7 +1,7 @@
 <?php
 namespace Auth\Middleware\Command;
 
-use Application\REST\GenericRESTResponseBuilder;
+use Common\REST\GenericRESTResponseBuilder;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Data\Exception\Auth\AccountNotFoundException;
 use Psr\Http\Message\ServerRequestInterface;

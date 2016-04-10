@@ -2,7 +2,7 @@
 namespace Post\Middleware\Command;
 
 
-use Application\REST\Exceptions\UnknownActionException;
+use Common\REST\Exceptions\UnknownActionException;
 use Auth\Service\CurrentProfileService;
 use Post\Service\AttachmentService;
 use Post\Service\PostService;

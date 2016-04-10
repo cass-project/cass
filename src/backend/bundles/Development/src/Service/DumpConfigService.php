@@ -1,7 +1,7 @@
 <?php
 namespace Development\Service;
 
-use Application\Service\SharedConfigService;
+use Common\Service\SharedConfigService;
 use Interop\Container\ContainerInterface;
 
 class DumpConfigService

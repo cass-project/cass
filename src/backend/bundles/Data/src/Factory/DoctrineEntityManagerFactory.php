@@ -1,8 +1,8 @@
 <?php
 namespace Data\Factory;
 
-use Application\Bootstrap\Bundle\BundleService;
-use Application\Service\SharedConfigService;
+use Common\Bootstrap\Bundle\BundleService;
+use Common\Service\SharedConfigService;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\Logging\DebugStack;

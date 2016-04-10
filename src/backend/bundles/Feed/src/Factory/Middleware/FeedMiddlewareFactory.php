@@ -1,7 +1,7 @@
 <?php
 namespace Feed\Factory\Middleware;
 
-use Application\Service\SchemaService;
+use Common\Service\SchemaService;
 use Feed\Middleware\FeedMiddleware;
 use Interop\Container\ContainerInterface;
 use Sphinx\SphinxClient;

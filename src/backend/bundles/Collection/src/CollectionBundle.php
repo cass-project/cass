@@ -1,7 +1,7 @@
 <?php
 namespace Collection;
 
-use Application\Bootstrap\Bundle\GenericBundle;
+use Common\Bootstrap\Bundle\GenericBundle;
 
 class CollectionBundle extends GenericBundle
 {

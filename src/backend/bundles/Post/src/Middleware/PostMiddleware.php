@@ -2,7 +2,7 @@
 namespace Post\Middleware;
 
 
-use Application\REST\GenericRESTResponseBuilder;
+use Common\REST\GenericRESTResponseBuilder;
 use Auth\Service\CurrentProfileService;
 use Post\Middleware\Command\Command;
 use Post\Service\PostService;

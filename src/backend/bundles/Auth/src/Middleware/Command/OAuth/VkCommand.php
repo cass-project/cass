@@ -1,7 +1,7 @@
 <?php
 namespace Auth\Middleware\Command\OAuth;
 
-use Application\REST\GenericRESTResponseBuilder;
+use Common\REST\GenericRESTResponseBuilder;
 use Auth\Middleware\Command\Command;
 use Auth\OauthProvider\Vk;
 use Auth\Service\AuthService\Exceptions\DuplicateAccountException;

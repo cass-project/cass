@@ -1,7 +1,7 @@
 <?php
 namespace Data;
 
-use Application\Bootstrap\Bundle\GenericBundle;
+use Common\Bootstrap\Bundle\GenericBundle;
 
 class DataBundle extends GenericBundle
 {

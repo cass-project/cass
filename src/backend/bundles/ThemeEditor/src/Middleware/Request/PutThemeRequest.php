@@ -1,9 +1,9 @@
 <?php
 namespace ThemeEditor\Middleware\Request;
 
-use Application\Service\JSONSchema;
-use Application\Tools\RequestParams\Param;
-use Application\Tools\RequestParams\SchemaParams;
+use Common\Service\JSONSchema;
+use Common\Tools\RequestParams\Param;
+use Common\Tools\RequestParams\SchemaParams;
 use Data\Repository\Theme\Parameters\CreateThemeParameters;
 use ThemeEditor\ThemeEditorBundle;
 

@@ -1,5 +1,5 @@
 <?php
-namespace Application;
+namespace Common;
 
 use Profile\Middleware\ProfileMiddleware;
 use Zend\Expressive\Application;

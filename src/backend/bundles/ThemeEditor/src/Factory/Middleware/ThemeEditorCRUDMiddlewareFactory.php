@@ -1,7 +1,7 @@
 <?php
 namespace ThemeEditor\Factory\Middleware;
 
-use Application\Service\SchemaService;
+use Common\Service\SchemaService;
 use Interop\Container\ContainerInterface;
 use ThemeEditor\Middleware\ThemeEditorCRUDMiddleware;
 use ThemeEditor\Service\ThemeEditorService;

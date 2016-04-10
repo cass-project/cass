@@ -1,5 +1,5 @@
 <?php
-namespace Application;
+namespace Common;
 
 use Zend\Expressive\Application;
 

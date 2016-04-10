@@ -2,7 +2,7 @@
 namespace Post\Middleware\Command;
 
 
-use Application\Tools\RequestParams\Param;
+use Common\Tools\RequestParams\Param;
 use Post\Middleware\Request\PutPostRequest;
 use Psr\Http\Message\ServerRequestInterface;
 

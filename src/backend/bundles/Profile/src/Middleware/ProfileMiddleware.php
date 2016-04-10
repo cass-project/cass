@@ -1,7 +1,7 @@
 <?php
 namespace Profile\Middleware;
 
-use Application\REST\GenericRESTResponseBuilder;
+use Common\REST\GenericRESTResponseBuilder;
 use Profile\Middleware\Command\Command;
 use Profile\Repository\ProfileRepository;
 use Psr\Http\Message\ResponseInterface as Response;
