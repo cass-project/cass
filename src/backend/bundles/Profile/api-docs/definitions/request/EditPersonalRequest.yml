@@ -5,7 +5,7 @@ Profile_EditPersonal_Request:
     - first_name
     - last_name
     - middle_name
-    - nick_name
+    - nickname
   properties:
     greetings_type:
       type: string

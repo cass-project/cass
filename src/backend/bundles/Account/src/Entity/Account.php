@@ -66,6 +66,11 @@ class Account
         return $this->profiles;
     }
 
+    public function isYoursProfile(Profile $profile)
+    {
+        return $this->profiles->contains($profile);
+    }
+
     public function hasAnyProfile(): bool
     {
         return $this->profiles->count() > 0;

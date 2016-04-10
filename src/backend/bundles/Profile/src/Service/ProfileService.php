@@ -13,6 +13,7 @@ use Profile\Exception\ImageTooBigException;
 use Profile\Exception\ImageTooSmallException;
 use Profile\Exception\LastProfileException;
 use Profile\Exception\MaxProfilesReachedException;
+use Profile\Middleware\Parameters\EditPersonalParameters;
 use Profile\Repository\ProfileRepository;
 
 class ProfileService
@@ -34,6 +35,22 @@ class ProfileService
     public function getProfileById(int $profileId): Profile
     {
         return $this->profileRepository->getProfileById($profileId);
+    }
+
+    public function updatePersonalData(int $profileId, EditPersonalParameters $editPersonalParameters)
+    {
+        $profile = $this->getProfileById($profileId);
+        $profile->getProfileGreetings()
+            ->setGreetingsMethod($editPersonalParameters->getGreetingsType())
+            ->setFirstName($editPersonalParameters->getFirstName())
+            ->setLastName($editPersonalParameters->getLastName())
+            ->setMiddleName($editPersonalParameters->getMiddleName())
+            ->setNickName($editPersonalParameters->getNickName())
+        ;
+
+        $this->profileRepository->updateProfile($profile);
+
+        return true;
     }
 
     public function createProfileForAccount(Account $account): Profile

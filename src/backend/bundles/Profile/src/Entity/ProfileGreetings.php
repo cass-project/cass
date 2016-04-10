@@ -11,6 +11,12 @@ class ProfileGreetings
     const GREETINGS_LFM = 'lfm';
     const GREETINGS_N = 'n';
 
+    const AVAILABLE_GREETINGS = [
+        self::GREETINGS_FL,
+        self::GREETINGS_LFM,
+        self::GREETINGS_N
+    ];
+
     /**
      * @Column(type="integer")
      * @Id

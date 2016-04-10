@@ -116,4 +116,10 @@ class ProfileRepository extends EntityRepository
 
         return $image;
     }
+
+    public function updateProfile(Profile $profile)
+    {
+        $this->getEntityManager()->persist($profile);
+        $this->getEntityManager()->flush();
+    }
 }
