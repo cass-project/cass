@@ -1,4 +1,4 @@
-'/protected/profile/{id}/image/upload':
+'/protected/profile/{profileId}/image/upload':
   post:
     tags:
       - profile
@@ -6,6 +6,11 @@
     security:
       - x_api_key: []
     parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
       - name: file
         in: body
         type: "file"

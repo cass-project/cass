@@ -1,10 +1,16 @@
-'/protected/profile/delete/{id}':
+'/protected/profile/{profileId}/delete/':
   delete:
     tags:
       - profile
     description: Удалить существующий профиль
     security:
       - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
     responses:
       200:
         description: Remove profile successfully

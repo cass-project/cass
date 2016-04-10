@@ -1,26 +1,20 @@
-'/protected/profile/{profileId}/update':
-  post:
+'/profile/{profileId}':
+  get:
     tags:
       - profile
-    description: Edit existing profile
-    security:
-      - x_api_key: []
+    description: Возвращает данные указанного профиля
     parameters:
       - name: profileId
         type: number
         in: path
         required: true
         description: ID профиля
-      - name: body
-        in: body
-        required: true
-        description: Profile entity
-        schema:
-          $ref: '#/definitions/Profile'
     responses:
       200:
-        description: Edit profile successfully
         schema:
+          required:
+            - success
+            - entity
           properties:
             success:
               type: boolean
