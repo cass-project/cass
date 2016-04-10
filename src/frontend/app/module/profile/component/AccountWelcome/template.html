@@ -24,11 +24,14 @@
                             <input type="text"  [(ngModel)]="Nickname" class="form-control" placeholder="Nickname" aria-describedby="sizing-addon3">
                         </div>
                         <div *ngIf="AvatarShow" class="input-group input-group-sm accountN">
-                            <input type="text"  [(ngModel)]="Nickname" class="form-control" placeholder="Nickname" aria-describedby="sizing-addon3">
+                            <fieldset class="form-group">
+                                <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                                <img-cropper [image]="data" [settings]="cropperSettings" id="exampleInputFile"></img-cropper>
+                            </fieldset>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input *ngIf="NextShow" type="button" value="Next" class="btn btn-primary" (click)="NextShow = false; SubmitShow = true;">
+                        <input *ngIf="NextShow" type="button" value="Next" class="btn btn-primary" (click)="chooseFL = chooseLFM = chooseN = false; AvatarShow = true; NextShow = false; SubmitShow = true;">
                         <input *ngIf="SubmitShow" type="submit" value="Submit" class="btn btn-primary" (click)="submit()"/>
                         <input type="button" value="Reset" class="btn btn-secondary" (click)="reset()"/>
                     </div>
