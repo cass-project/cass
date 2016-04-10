@@ -63,7 +63,7 @@ class GreetingsAsCommand extends Command
         $greetingsRequest = new GreetingsNRequest($request);
         $greetingsData = $greetingsRequest->getParameters();
 
-        $nickName = $greetingsData['nick_name'];
+        $nickName = $greetingsData['nickname'];
 
         $ps->nameN($profileId, $nickName);
 
