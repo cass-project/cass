@@ -3,8 +3,6 @@ import {Theme} from "../../theme/Theme";
 import {ThemeRESTService} from "../../theme/service/ThemeRESTService";
 import {ThemeTree} from "../../theme/Theme";
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
-import {Modal} from "../../common/component/Modal/index";
-
 @Injectable()
 export class ThemeEditorService
 {
@@ -15,7 +13,6 @@ export class ThemeEditorService
     createFirstParent: boolean = false;
 
     constructor(public themeRESTService: ThemeRESTService,
-                public modal: Modal,
                 public router: Router) {
     }
 
@@ -27,7 +24,7 @@ export class ThemeEditorService
     public updateInfoOnPage(){
         this.themeRESTService.getThemesTree().map(res => res.json()).subscribe(data => this.themesTree = data['entities']);
         this.themeRESTService.getThemes().map(res => res.json()).subscribe(data => this.themes = data['entities']);
-        this.modal.showFormContentBox = false;
+        this.router.parent.navigate(['Theme-Editor'])
     }
 
     public clear() {
