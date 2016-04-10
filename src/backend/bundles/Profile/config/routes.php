@@ -12,7 +12,7 @@ return function (Application $app, string $prefix) {
     );
 
     $app->put(
-        sprintf('%s/protected/profile/{command:create}[/]', $prefix),
+        sprintf('%s/protected/profile/{command:create}/{accountId}[/]', $prefix),
         ProfileMiddleware::class,
         'profile-create'
     );

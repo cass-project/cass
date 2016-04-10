@@ -1,17 +1,22 @@
 <?php
 namespace Profile\Service;
 
+use Account\Entity\Account;
 use PHPImageWorkshop\Core\ImageWorkshopLayer;
 use PHPImageWorkshop\ImageWorkshop;
 use Profile\Entity\Profile;
+use Profile\Entity\ProfileGreetings;
 use Profile\Entity\ProfileImage;
 use Profile\Exception\ImageIsNotASquareException;
 use Profile\Exception\ImageTooBigException;
 use Profile\Exception\ImageTooSmallException;
+use Profile\Exception\MaxProfilesReachedException;
 use Profile\Repository\ProfileRepository;
 
 class ProfileService
 {
+    const MAX_PROFILES_PER_ACCOUNT = 10;
+
     /** @var ProfileRepository */
     private $profileRepository;
 
@@ -27,6 +32,22 @@ class ProfileService
     public function getProfileById(int $profileId): Profile
     {
         return $this->profileRepository->getProfileById($profileId);
+    }
+
+    public function createProfileForAccount(Account $account): Profile
+    {
+        if($account->getProfiles()->count() >= self::MAX_PROFILES_PER_ACCOUNT) {
+            throw new MaxProfilesReachedException(sprintf('You can only have %d profiles per account', self::MAX_PROFILES_PER_ACCOUNT));
+        }
+
+        $account->getProfiles()->add($profile = new Profile($account));
+
+        $profile->setIsCurrent(true)
+            ->setProfileGreetings(new ProfileGreetings($profile))
+            ->setProfileImage(new ProfileImage($profile))
+        ;
+
+        return $this->profileRepository->createProfile($profile);
     }
 
     public function nameFL(int $profileId, string $firstName, string $lastName)

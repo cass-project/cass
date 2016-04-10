@@ -1,6 +1,7 @@
 <?php
 namespace Profile\Middleware;
 
+use Auth\Service\CurrentAccountService;
 use Common\REST\GenericRESTResponseBuilder;
 use Profile\Exception\UnknownGreetingsException;
 use Profile\Middleware\Command\Command;
@@ -14,9 +15,13 @@ class ProfileMiddleware implements MiddlewareInterface
     /** @var ProfileService */
     private $profileService;
 
-    public function __construct(ProfileService $profileService)
+    /** @var CurrentAccountService */
+    private $currentAccountService;
+
+    public function __construct(ProfileService $profileService, CurrentAccountService $currentAccountService)
     {
         $this->profileService = $profileService;
+        $this->currentAccountService = $currentAccountService;
     }
 
     public function __invoke(Request $request, Response $response, callable $out = NULL)
@@ -24,7 +29,7 @@ class ProfileMiddleware implements MiddlewareInterface
         $responseBuilder = new GenericRESTResponseBuilder($response);
 
         try {
-            $command = Command::factory($request, $this->profileService);
+            $command = Command::factory($request, $this->profileService, $this->currentAccountService);
             $result = $command->run($request);
 
             if($result === true) {

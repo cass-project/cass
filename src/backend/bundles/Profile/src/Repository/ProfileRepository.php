@@ -17,6 +17,14 @@ class ProfileRepository extends EntityRepository
         return $profile;
     }
 
+    public function createProfile($profile): Profile
+    {
+        $this->getEntityManager()->persist($profile);
+        $this->getEntityManager()->flush($profile);
+
+        return $profile;
+    }
+
     public function getProfileById(int $profileId): Profile
     {
         $result = $this->find($profileId);

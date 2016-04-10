@@ -1,6 +1,7 @@
 <?php
 namespace Profile\Middleware\Command;
 
+use Auth\Service\CurrentAccountService;
 use Profile\Service\ProfileService;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
@@ -17,14 +18,24 @@ abstract class Command
     /** @var ProfileService */
     protected $profileService;
 
-    private function setProfileService(ProfileService $profileService) {
+    /** @var CurrentAccountService */
+    protected $currentAccountService;
+
+    private function setProfileService(ProfileService $profileService)
+    {
         $this->profileService = $profileService;
     }
 
-    public static function factory(ServerRequestInterface $request, ProfileService $profileService): Command
+    public function setCurrentAccountService($currentAccountService)
+    {
+        $this->currentAccountService = $currentAccountService;
+    }
+
+    public static function factory(ServerRequestInterface $request, ProfileService $profileService, CurrentAccountService $currentAccountService): Command
     {
         $command = self::factoryCommand($request->getAttribute('command'));
         $command->setProfileService($profileService);
+        $command->setCurrentAccountService($currentAccountService);
 
         return $command;
     }
