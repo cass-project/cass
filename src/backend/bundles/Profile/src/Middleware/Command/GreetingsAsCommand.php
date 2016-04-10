@@ -5,6 +5,7 @@ use Profile\Entity\ProfileGreetings;
 use Profile\Exception\UnknownGreetingsException;
 use Profile\Middleware\Request\GreetingsFLRequest;
 use Profile\Middleware\Request\GreetingsLFMRequest;
+use Profile\Middleware\Request\GreetingsNRequest;
 use Profile\Service\ProfileService;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -24,6 +25,9 @@ class GreetingsAsCommand extends Command
 
             case ProfileGreetings::GREETINGS_LFM:
                 return $this->greetingsAsLFM($request, $ps, $profileId);
+
+            case ProfileGreetings::GREETINGS_N:
+                return $this->greetingsAsN($request, $ps, $profileId);
         }
     }
 
@@ -50,6 +54,18 @@ class GreetingsAsCommand extends Command
         $middleName = $greetingsData['middle_name'];
 
         $ps->nameLFM($profileId, $lastName, $firstName, $middleName);
+
+        return true;
+    }
+
+    private function greetingsAsN(ServerRequestInterface $request, ProfileService $ps, $profileId)
+    {
+        $greetingsRequest = new GreetingsNRequest($request);
+        $greetingsData = $greetingsRequest->getParameters();
+
+        $nickName = $greetingsData['nick_name'];
+
+        $ps->nameN($profileId, $nickName);
 
         return true;
     }
