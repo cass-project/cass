@@ -12,34 +12,19 @@ use Auth\Service\AuthService\SignUpValidation\IsEmailValid;
 use Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
 use Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
 use Account\Entity\Account;
-use Account\Repository\AccountRepository;
-use Account\Repository\OAuthAccountRepository;
-use Profile\Service\ProfileService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthService
 {
-    /** @var AccountRepository */
-    private $accountRepository;
-
-    /** @var OAuthAccountRepository */
-    private $oauthAccountRepository;
-
     /** @var AccountService */
     private $accountService;
 
     /** @var array */
     private $oauth2Config;
 
-    public function __construct(
-        AccountService $accountService,
-        AccountRepository $accountRepository,
-        OAuthAccountRepository $oAuthAccountRepository,
-        array $oauth2Config
-    ) {
+    public function __construct(AccountService $accountService, array $oauth2Config)
+    {
         $this->accountService = $accountService;
-        $this->accountRepository = $accountRepository;
-        $this->oauthAccountRepository = $oAuthAccountRepository;
         $this->oauth2Config = $oauth2Config;
     }
 
@@ -65,7 +50,7 @@ class AuthService
             new IsEmailValid(),
             new ArePasswordsMatching(),
             new PasswordHasRequiredLength(),
-            new HasSameAccount($this->accountRepository)
+            new HasSameAccount($this->accountService)
         ]);
 
         return $this->accountService->createAccount($email, password_hash($password, PASSWORD_DEFAULT));
@@ -75,7 +60,7 @@ class AuthService
     {
         list($email, $password) = $this->unpackCredentials($request);
 
-        $account = $this->accountRepository->findByEmail($email);
+        $account = $this->accountService->findByEmail($email);
 
         if(!$this->verifyPassword($account, $password)) {
             throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $email));
@@ -86,9 +71,7 @@ class AuthService
 
     public function signInOauth2(RegistrationRequest $registrationRequest)
     {
-        $oauthRepository = $this->oauthAccountRepository;
-
-        if(!$this->accountRepository->hasAccountWithEmail($registrationRequest->getEmail())) {
+        if(!$this->accountService->hasAccountWithEmail($registrationRequest->getEmail())) {
             $this->accountService->createOAuth2Account(
                 $registrationRequest->getEmail(),
                 $registrationRequest->getProvider(),
@@ -96,7 +79,7 @@ class AuthService
             );
         }
 
-        $oauth2Account = $oauthRepository->findOAuthAccount($registrationRequest->getProvider(), $registrationRequest->getProviderAccountId());
+        $oauth2Account = $this->accountService->findOAuthAccount($registrationRequest->getProvider(), $registrationRequest->getProviderAccountId());
 
         return $this->auth($oauth2Account->getAccount());
     }

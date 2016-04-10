@@ -1,20 +1,21 @@
 <?php
 namespace Auth\Service\AuthService\SignUpValidation;
 
+use Account\Service\AccountService;
 use Auth\Service\AuthService\Exceptions\DuplicateAccountException;
-use Account\Repository\AccountRepository;
 
 class HasSameAccount implements Validator
 {
-    /** @var \Account\Repository\AccountRepository */
-    private $accountRepository;
+    /** @var AccountService */
+    private $accountService;
 
-    public function __construct(AccountRepository $accountRepository) {
-        $this->accountRepository = $accountRepository;
+    public function __construct(AccountService $accountService)
+    {
+        $this->accountService = $accountService;
     }
 
     public function validate(array $request) {
-        $hasSameAccount = $this->accountRepository->hasAccountWithEmail($request['email']);
+        $hasSameAccount = $this->accountService->hasAccountWithEmail($request['email']);
 
         $isValid = !$hasSameAccount;
 

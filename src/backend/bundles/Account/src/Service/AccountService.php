@@ -4,6 +4,7 @@ namespace Account\Service;
 use Account\Entity\Account;
 use Account\Entity\OAuthAccount;
 use Account\Repository\AccountRepository;
+use Account\Repository\OAuthAccountRepository;
 use Profile\Entity\Profile;
 use Profile\Entity\ProfileGreetings;
 use Profile\Entity\ProfileImage;
@@ -13,9 +14,13 @@ class AccountService
     /** @var AccountRepository */
     private $accountRepository;
 
-    public function __construct(AccountRepository $accountRepository)
+    /** @var OAuthAccountRepository */
+    private $oauthAccountRepository;
+
+    public function __construct(AccountRepository $accountRepository, OAuthAccountRepository $oauthAccountRepository)
     {
         $this->accountRepository = $accountRepository;
+        $this->oauthAccountRepository = $oauthAccountRepository;
     }
 
     public function createAccount($email, $password = null): Account
@@ -50,8 +55,14 @@ class AccountService
         return $account;
     }
 
+    public function findOAuthAccount(string $provider, string $providerAccountId): OAuthAccount
+    {
+        return $this->oauthAccountRepository->findOAuthAccount($provider, $providerAccountId);
+    }
+
     /** @see http://stackoverflow.com/questions/4356289/php-random-string-generator */
-    private function generateRandomString($length = 10) {
+    private function generateRandomString($length = 10)
+    {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
@@ -61,5 +72,15 @@ class AccountService
         }
 
         return $randomString;
+    }
+
+    public function hasAccountWithEmail(string $email)
+    {
+        return $this->accountRepository->hasAccountWithEmail($email);
+    }
+
+    public function findByEmail(string $email): Account
+    {
+        return $this->accountRepository->findByEmail($email);
     }
 }
