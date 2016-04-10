@@ -2,11 +2,11 @@
 namespace Auth\Service\AuthService\SignUpValidation;
 
 use Auth\Service\AuthService\Exceptions\DuplicateAccountException;
-use Auth\Repository\AccountRepository;
+use Account\Repository\AccountRepository;
 
 class HasSameAccount implements Validator
 {
-    /** @var AccountRepository */
+    /** @var \Account\Repository\AccountRepository */
     private $accountRepository;
 
     public function __construct(AccountRepository $accountRepository) {

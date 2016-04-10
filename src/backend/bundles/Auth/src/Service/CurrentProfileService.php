@@ -2,9 +2,9 @@
 namespace Auth\Service;
 
 use Auth\Middleware\AuthStrategy\Strategy;
-use Auth\Entity\Account;
+use Account\Entity\Account;
 use Data\Exception\Auth\AccountNotFoundException;
-use Auth\Repository\AccountRepository;
+use Account\Repository\AccountRepository;
 use Psr\Http\Message\ServerRequestInterface;
 
 class CurrentProfileService
@@ -12,7 +12,7 @@ class CurrentProfileService
     /** @var AccountRepository */
     private $accountRepository;
 
-    /** @var Account */
+    /** @var \Account\Entity\Account */
     private $account;
 
     public function __construct(AccountRepository $accountRepository)

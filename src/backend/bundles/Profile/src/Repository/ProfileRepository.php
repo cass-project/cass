@@ -1,7 +1,7 @@
 <?php
 namespace Profile\Repository;
 
-use Auth\Entity\Account;
+use Account\Entity\Account;
 use Doctrine\ORM\EntityRepository;
 use Profile\Entity\Profile;
 

@@ -1,6 +1,6 @@
 <?php
 namespace Profile\Entity;
-use Auth\Entity\Account;
+use Account\Entity\Account;
 
 /**
  * @Entity(repositoryClass="Profile\Repository\ProfileRepository")
@@ -17,7 +17,7 @@ class Profile
     private $id;
 
     /**
-     * @ManyToOne(targetEntity="Auth\Entity\Account")
+     * @ManyToOne(targetEntity="Account\Entity\Account")
      * @JoinColumn(name="account_id", referencedColumnName="id")
      */
     private $account;
@@ -55,7 +55,7 @@ class Profile
         return $this->id;
     }
 
-    public function getAccount(): Account
+    public function getAccount(): \Account\Entity\Account
     {
         return $this->account;
     }

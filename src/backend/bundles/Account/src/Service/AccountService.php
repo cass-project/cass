@@ -1,9 +1,9 @@
 <?php
 namespace Account\Service;
 
-use Auth\Entity\Account;
-use Auth\Entity\OAuthAccount;
-use Auth\Repository\AccountRepository;
+use Account\Entity\Account;
+use Account\Entity\OAuthAccount;
+use Account\Repository\AccountRepository;
 use Profile\Entity\Profile;
 use Profile\Entity\ProfileGreetings;
 use Profile\Entity\ProfileImage;

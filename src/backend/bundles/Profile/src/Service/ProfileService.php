@@ -1,7 +1,7 @@
 <?php
 namespace Profile\Service;
 
-use Auth\Entity\Account;
+use Account\Entity\Account;
 use Profile\Entity\Profile;
 use Profile\Repository\ProfileRepository;
 

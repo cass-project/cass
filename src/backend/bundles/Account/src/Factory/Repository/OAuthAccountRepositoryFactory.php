@@ -1,8 +1,8 @@
 <?php
-namespace Auth\Factory\Repository;
+namespace Account\Factory\Repository;
 
-use Auth\Entity\OAuthAccount;
-use Auth\Repository\OAuthAccountRepository;
+use Account\Entity\OAuthAccount;
+use Account\Repository\OAuthAccountRepository;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;

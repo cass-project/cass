@@ -1,5 +1,5 @@
 <?php
-namespace Auth\Entity;
+namespace Account\Entity;
 
 use Doctrine\ORM\PersistentCollection;
 use Profile\Entity\Profile;
@@ -7,7 +7,7 @@ use Profile\Entity\Profile;
 /**
  * Class Account
  * @package Data\Entity
- * @Entity(repositoryClass="Auth\Repository\AccountRepository")
+ * @Entity(repositoryClass="Account\Repository\AccountRepository")
  * @Table(name="account")
  */
 class Account

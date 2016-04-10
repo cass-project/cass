@@ -11,9 +11,9 @@ use Auth\Service\AuthService\SignUpValidation\HasSameAccount;
 use Auth\Service\AuthService\SignUpValidation\IsEmailValid;
 use Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
 use Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
-use Auth\Entity\Account;
-use Auth\Repository\AccountRepository;
-use Auth\Repository\OAuthAccountRepository;
+use Account\Entity\Account;
+use Account\Repository\AccountRepository;
+use Account\Repository\OAuthAccountRepository;
 use Profile\Service\ProfileService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 

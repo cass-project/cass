@@ -1,8 +1,8 @@
 <?php
-namespace Auth\Repository;
+namespace Account\Repository;
 
-use Auth\Entity\Account;
-use Auth\Entity\OAuthAccount;
+use Account\Entity\Account;
+use Account\Entity\OAuthAccount;
 use Data\Exception\Auth\AccountNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
