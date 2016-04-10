@@ -9,13 +9,9 @@ Update_Post_Request:
     account_id:
       type: string
       description: account id
-    name:
+    title:
       type: string
       description: Название поста
     description:
       type: string
       description: описание поста
-    status:
-      type: string
-      description: Статус поста
-      default: "1"

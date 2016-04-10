@@ -1,9 +1,9 @@
-'/backend/api/protected/post/read/{postId}':
+'/protected/post/read/{postId}':
   get:
     tags:
       - post
     description: |
-      Список постов
+      Информация о посте
     parameters:
       - name: postId
         in: path
@@ -14,21 +14,15 @@
       '400':
           $ref: '#/responses/error'
       '200':
-        description: Список тематик
+        description: информация о посте
         schema:
           type: object
           required:
             - success
-            - total
-            - entity
           properties:
             success:
               type: boolean
               description: "= true"
-            total:
-              type: number
-              description: "Количество тематик"
             entity:
-              type: object
-              items:
-                $ref: "#/definitions/Data_Entity_Post"
+               $ref: '#/definitions/Data_Entity_Post'
+

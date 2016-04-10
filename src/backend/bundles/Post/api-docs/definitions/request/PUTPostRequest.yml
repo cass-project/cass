@@ -1,9 +1,9 @@
 PUT_Post_Request:
     type: object
     required:
-      - name
+      - title
     properties:
-      name:
+      title:
         type: string
         description: Название поста
       description:

@@ -8,11 +8,11 @@ use Common\Tools\RequestParams\Param;
 
 interface SavePostProperties
 {
-	public function getName():Param;
+	public function getTitle():Param;
 
 	public function getDescription():Param;
 
-	public function getPublish():Param;
+	public function isPublished():Param;
 
 	public function getAccountId():Param;
 

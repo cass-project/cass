@@ -1,0 +1,24 @@
+Data_Entity_Post:
+  type: object
+  required:
+    - id
+    - account_id
+    - title
+    - is_published
+  properties:
+    id:
+      type: number
+      description: ID
+    account_id:
+      type: number
+      description: ID родительской тематики
+    title:
+      type: string
+      description: Название
+    is_published:
+      type: boolean
+      description: публиковать
+    attachments:
+      type: array
+      items:
+        $ref: '#/definitions/Data_Entity_Attachment'

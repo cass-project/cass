@@ -2,6 +2,7 @@
 namespace Data\Repository\Attachment;
 
 use Data\Entity\Attachment;
+use Data\Entity\Post;
 use Data\Repository\Post\CreateAttachmentParameters;
 use Doctrine\ORM\EntityRepository;
 
@@ -46,7 +47,11 @@ class AttachmentRepository extends EntityRepository
 		});
 
 		$saveAttachmentProperties->getPostId()->on(function($value) use($attachment) {
-			$attachment->setPostId($value);
+
+			$repository=	$this->getEntityManager()->getRepository(Post::class);
+			/** @var Post $post */
+			$post = $repository->find($value);
+			$attachment->setPost($post);
 		});
 
 		$saveAttachmentProperties->getType()->on(function($value) use($attachment) {

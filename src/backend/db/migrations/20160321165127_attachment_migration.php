@@ -37,6 +37,7 @@ class AttachmentMigration extends AbstractMigration
                                      'update' => 'cascade'
                                    ]
           )
+          ->addColumn('is_published', 'boolean',['default'=> 0])
           ->addColumn('content', 'text')
           ->addColumn('created', 'datetime')
           ->addColumn('updated', 'datetime')

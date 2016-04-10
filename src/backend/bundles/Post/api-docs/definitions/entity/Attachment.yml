@@ -1,0 +1,25 @@
+Data_Entity_Attachment:
+  type: object
+  required:
+    - content
+  properties:
+    id:
+      type: number
+      description: ID
+    post_id:
+      type: number
+      description: ID родительского поста
+    type:
+      type: number
+      description: тип прикрепления
+    url:
+      type: string
+    is_published:
+      type: boolean
+      description: публиковать
+    content:
+      type: text
+    created:
+      type: datetime
+    updated:
+      type: datetime

@@ -37,7 +37,7 @@ class Post
 	 * @Column(type="string")
 	 * @var string
 	 */
-	private $name;
+	private $title;
 	/**
 	 * @Column(type="string")
 	 * @var string
@@ -52,9 +52,9 @@ class Post
 	 */
 	private $updated;
 	/**
-	 * @Column(type="string")
+	 * @Column(type="boolean")
 	 */
-	private $publish;
+	private $is_published;
 
 	public function __construct() {
 		$this->attachments = new ArrayCollection();
@@ -128,17 +128,21 @@ class Post
 	}
 
 	/**
-	 * @return mixed
+	 * @return string
 	 */
-	public function getName(){
-		return $this->name;
+	public function getTitle(){
+		return $this->title;
 	}
 
+
 	/**
-	 * @param mixed $name
+	 * @param $title
+	 *
+	 * @return $this
 	 */
-	public function setName($name){
-		$this->name = $name;
+	public function setTitle($title){
+		$this->title = $title;
+		return $this;
 	}
 
 	/**
@@ -189,20 +193,14 @@ class Post
 		return $this;
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getPublish(){
-		return $this->publish;
+
+	public function isPublished(){
+		return $this->is_published;
 	}
 
-	/**
-	 * @param $publish
-	 *
-	 * @return $this
-	 */
-	public function setPublish($publish){
-		$this->publish = $publish;
+
+	public function setPublished($publish){
+		$this->is_published = $publish;
 		return $this;
 	}
 
@@ -210,12 +208,12 @@ class Post
 	{
 		return [
 			'id'          => $this->getId(),
-			'name'        => $this->getName(),
+			'title'       => $this->getTitle(),
 			'description' => $this->getDescription(),
-			'publish'      => $this->getPublish(),
-			'account_id'	=> $this->getAccountId(),
-			'created'			=> $this->getCreated()->format("Y-m-d H:i:s"),
-			'updated'			=> $this->getUpdated()->format("Y-m-d H:i:s")
+			'publish'     => $this->isPublished(),
+			'account_id'  => $this->getAccountId(),
+			'created'     => $this->getCreated()->format("Y-m-d H:i:s"),
+			'updated'     => $this->getUpdated()->format("Y-m-d H:i:s")
 		];
 	}
 

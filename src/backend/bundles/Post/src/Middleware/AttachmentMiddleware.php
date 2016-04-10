@@ -33,8 +33,6 @@ class AttachmentMiddleware implements MiddlewareInterface
 
 
 	public function __invoke(Request $request, Response $response, callable $out = NULL){
-		$responseBuilder = new GenericRESTResponseBuilder($response);
-
 
 		$responseBuilder = new GenericRESTResponseBuilder($response);
 

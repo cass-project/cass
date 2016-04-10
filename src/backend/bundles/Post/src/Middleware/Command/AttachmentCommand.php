@@ -63,7 +63,6 @@ abstract class AttachmentCommand
 		switch ($action) {
 
 			case 'add':
-
 				$json_r = json_decode($request->getBody(), true);
 				if(isset($json_r['post_id']) && $json_r['post_id']){
 					// добавляем аттачмент

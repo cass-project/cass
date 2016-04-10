@@ -62,13 +62,13 @@ class Attachment
 	}
 
 
-	public function getPostId():int
+	public function getPost():Post
 	{
 		return $this->post_id;
 	}
 
 
-	public function setPostId(int $post_id)
+	public function setPost(Post $post_id)
 	{
 		$this->post_id = $post_id;
 		return $this;
@@ -131,7 +131,7 @@ class Attachment
 		return [
 			'id'      => $this->getId(),
 			'type'    => $this->getType(),
-			'post_id' => $this->getPostId(),
+			'post_id' => $this->getPost()->getId(),
 			'content' => $this->getContent(),
 			'created' => $this->getCreated()->format("Y-m-d H:i:s"),
 			'updated' => $this->getUpdated()->format("Y-m-d H:i:s"),

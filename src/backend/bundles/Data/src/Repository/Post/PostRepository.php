@@ -34,7 +34,7 @@ class PostRepository extends EntityRepository
 
 	public function update(UpdatePostParameters $updatePostParameters):Post
 	{
-		$postId=$updatePostParameters->getId()->value();
+		$postId = $updatePostParameters->getId()->value();
 
 		$postEntity = $this->getPostEntity($postId);
 
@@ -64,15 +64,15 @@ class PostRepository extends EntityRepository
 								->getResult(Query::HYDRATE_ARRAY);
 	}
 
-	public function getPostWithAttachments($id):array
+	public function getPostWithAttachments($id)
 	{
 		return $this->createQueryBuilder('p')
-								->select('p')
+								->select('p','a')
 								->leftJoin('p.attachments', 'a')
 								->where('p.id = :id')
 								->setParameter('id', $id)
 								->getQuery()
-								->getResult(Query::HYDRATE_ARRAY);
+								->getSingleResult(Query::HYDRATE_ARRAY);
 
 	}
 
@@ -97,14 +97,14 @@ class PostRepository extends EntityRepository
 
 	private function setupEntity(Post $postEntity, SavePostProperties $savePostProperties)
 	{
-		$savePostProperties->getName()->on(function($value) use($postEntity) {
-			$postEntity->setName($value);
+		$savePostProperties->getTitle()->on(function($value) use($postEntity) {
+			$postEntity->setTitle($value);
 		});
 		$savePostProperties->getDescription()->on(function($value) use($postEntity) {
 			$postEntity->setDescription($value);
 		});
-		$savePostProperties->getPublish()->on(function($value) use($postEntity) {
-			$postEntity->setPublish($value);
+		$savePostProperties->isPublished()->on(function($value) use($postEntity) {
+			$postEntity->setPublished($value);
 		});
 
 		$savePostProperties->getAccountId()->on(function($value)use($postEntity){

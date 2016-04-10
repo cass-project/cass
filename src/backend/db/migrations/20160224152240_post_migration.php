@@ -31,11 +31,11 @@ class PostMigration extends AbstractMigration
              ->addColumn('account_id', 'integer', [
                'null' => true
              ])
-             ->addColumn('name', 'string')
+             ->addColumn('title', 'string')
              ->addColumn('description', 'text')
              ->addColumn('created', 'datetime',['null' => true])
              ->addColumn('updated', 'datetime',['null' => true])
-             ->addColumn('publish', 'string',['default'=> 'false'])
+             ->addColumn('is_published', 'boolean',['default'=> 0])
              ->addForeignKey('account_id', 'account', 'id', [
                'delete' => 'cascade',
                'update' => 'cascade'

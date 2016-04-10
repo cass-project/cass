@@ -14,10 +14,10 @@ class PutPostRequest extends SchemaParams
 	{
 		$data = $this->getData();
 
-		$name = new Param($data, 'name', true);
+		$title = new Param($data, 'title', true);
 		$description = new Param($data, 'description');
 
-		return new CreatePostParameters($name, $description);
+		return new CreatePostParameters($title, $description);
 	}
 
 	protected function getSchema(): JSONSchema

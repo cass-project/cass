@@ -5,20 +5,20 @@ use Data\Repository\Post\SavePostProperties;
 
 class CreatePostParameters implements SavePostProperties
 {
-	private $name;
-	private $description;
-	private $publish;
-	private $accountId;
+	protected $title;
+	protected $description;
+	protected $is_published;
+	protected $accountId;
 
-	public function __construct(Param $name, Param $description)
+	public function __construct(Param $title, Param $description)
 	{
-		$this->name        = $name;
+		$this->title        = $title;
 		$this->description = $description;
 	}
 
-	public function getName():Param
+	public function getTitle():Param
 	{
-		return $this->name;
+		return $this->title;
 	}
 
 	public function getDescription():Param
@@ -26,14 +26,20 @@ class CreatePostParameters implements SavePostProperties
 		return $this->description;
 	}
 
-	public function getPublish():Param
+	public function isPublished():Param
 	{
-		return $this->publish;
+		return $this->is_published;
 	}
 
-	public function setPublish(Param $publish)
+	public function publish()
 	{
-		$this->publish = $publish;
+		$this->is_published = new Param(['is_published'=> 1],'is_published');
+		return $this;
+	}
+
+	public function unpublish()
+	{
+		$this->is_published = new Param(['is_published'=> 0],'is_published');
 		return $this;
 	}
 
@@ -42,12 +48,15 @@ class CreatePostParameters implements SavePostProperties
 		return $this->accountId;
 	}
 
-	public function setAccountId(Param $id)
+	public function setAccountId($id)
 	{
-		$this->accountId = $id;
+		if($id instanceof Param){
+			$this->accountId = $id;
+		}else {
+			$this->accountId=	new Param(['account_id'=>$id], 'account_id');
+		}
 		return $this;
 	}
-
 
 	public function getCreated():Param
 	{

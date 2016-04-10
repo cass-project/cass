@@ -7,7 +7,3 @@ PUT_Attachment_Request:
       content:
         type: string
         description: описание поста
-      type:
-        type: string
-        description: Статус поста
-        default: "1"
