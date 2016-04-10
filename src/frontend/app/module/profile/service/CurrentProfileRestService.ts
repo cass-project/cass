@@ -26,4 +26,18 @@ export class CurrentProfileRestService{
     greetingsAsN(profileId, nick){
         return this.http.post('backend/api/protected/profile/' + profileId + '/greetings-as/n/', JSON.stringify({nickname: nick}));
     }
+
+    avatarUpload(profileId, xS, yS, xE, yE){
+        return this.http.post('backend/api/protected/profile/' + profileId + '/image/upload', JSON.stringify({
+            crop: {
+                start: {
+                    x: xS,
+                    y: yS
+                },
+                end: {
+                    x: xE,
+                    y: yE
+                }
+            }}));
+    }
 }
