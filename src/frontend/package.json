@@ -18,7 +18,6 @@
     "font-awesome-webpack": "0.0.4",
     "ng2-bootstrap": "^1.0.5",
     "ng2-cookies": "^0.1.4",
-    "ng2-img-cropper": "0.2.0",
     "node-sass": "^3.4.2",
     "raw-loader": "0.5.1",
     "reflect-metadata": "0.1.2",

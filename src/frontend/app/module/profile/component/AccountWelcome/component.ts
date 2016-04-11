@@ -1,6 +1,5 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
-import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper/src/imageCropper';
 import {CurrentProfileRestService} from "../../service/CurrentProfileRestService";
 
 @Component({
@@ -10,28 +9,14 @@ import {CurrentProfileRestService} from "../../service/CurrentProfileRestService
     ],
     'providers': [
         CurrentProfileRestService
-    ],
-    directives: [
-        ImageCropperComponent
     ]
 })
 
 export class AccountWelcome {
     constructor (private currentProfileRestService: CurrentProfileRestService,
                  public router: Router
-    ){
-        this.cropperSettings = new CropperSettings();
-        this.cropperSettings.width = 100;
-        this.cropperSettings.height = 100;
-        this.cropperSettings.croppedWidth =100;
-        this.cropperSettings.croppedHeight = 100;
-        this.cropperSettings.canvasWidth = 400;
-        this.cropperSettings.canvasHeight = 300;
-        this.data = {};
-    }
+    ){}
 
-    cropperSettings: CropperSettings;
-    data: any;
     profileId: number;
     nickname: string;
     firstname: string;
