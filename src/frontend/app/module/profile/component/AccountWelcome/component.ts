@@ -1,6 +1,7 @@
-import {Component} from 'angular2/core';
+import {Component, ViewChild, ElementRef} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {CurrentProfileRestService} from "../../service/CurrentProfileRestService";
+import {ImageCropper} from "../../../../../node_modules/ng2-img-cropper/src/imageCropper";
 
 declare var Cropper;
 
@@ -19,6 +20,10 @@ export class AccountWelcome {
                  public router: Router
     ){}
 
+    @ViewChild('cropcanvas') cropcanvas: ElementRef;
+    private cropper: ImageCropper;
+
+    data: any;
     profileId: number;
     nickname: string;
     firstname: string;
@@ -34,9 +39,20 @@ export class AccountWelcome {
     SubmitShow: boolean = false;
     AvatarShow: boolean = false;
 
-    ngOnInit() {
-        console.log('cropper', Cropper);
-    }
+    //ngOnInit() {
+    //    let cropper = new Cropper(this.image, {
+    //        aspectRatio: 16 / 9,
+    //        crop: function(e) {
+    //            console.log(e.detail.x);
+    //            console.log(e.detail.y);
+    //            console.log(e.detail.width);
+    //            console.log(e.detail.height);
+    //            console.log(e.detail.rotate);
+    //            console.log(e.detail.scaleX);
+    //            console.log(e.detail.scaleY);
+    //        }
+    //    })
+    //}
 
     reset(){
         this.router.parent.navigate(['Profile']);
