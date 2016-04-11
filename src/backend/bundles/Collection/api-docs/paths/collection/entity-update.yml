@@ -1,4 +1,4 @@
-"/protected/collection/entity/update/{collectionId}":
+"/protected/collection/update/{collectionId}":
   post:
     tags:
       - collection
@@ -16,4 +16,4 @@
         required: true
         description: JSON Request
         schema:
-          $ref: '#/definitions/Collection_Entity_Request'
+          $ref: '#/definitions/Collection_Update_Request'

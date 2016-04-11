@@ -1,4 +1,4 @@
-"/protected/collection/entity/move/{collectionId}/under/{collectionParentId}/in-position/{position}":
+"/protected/collection/move/{collectionId}/under/{collectionParentId}/in-position/{position}":
   post:
     tags:
       - collection

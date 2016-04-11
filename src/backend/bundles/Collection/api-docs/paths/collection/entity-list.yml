@@ -1,4 +1,4 @@
-"/protected/collection/entities/by-profile-id/{profileId}":
+"/protected/profile/{profileId}/collection/list":
   get:
     tags:
       - collection
@@ -31,4 +31,4 @@
             entities:
               type: array
               items:
-                $ref: "#/definitions/Collection_Entity_Theme"
+                $ref: "#/definitions/Collection_Entity_Collection"

@@ -1,4 +1,4 @@
-Collection_Entity_Request:
+Collection_Update_Request:
     type: object
     required:
       - parent_id

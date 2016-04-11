@@ -1,8 +1,10 @@
-Collection_Entity_Theme:
+Collection_Entity_Collection:
   type: object
+  description: Коллекция.
   required:
     - id
     - parent_id
+    - theme_id
     - title
     - description
     - position
@@ -12,7 +14,10 @@ Collection_Entity_Theme:
       description: ID
     parent_id:
       type: number
-      description: ID родительской коллекции
+      description: ID родительской коллекции. Может содержать значение NULL.
+    theme_id:
+      type: number
+      description: Тематика, которой принадлежит данная коллекция. Может содержать значение NULL.
     title:
       type: string
       description: Название (заголовок) коллекции
@@ -21,4 +26,4 @@ Collection_Entity_Theme:
       description: Описание коллекции
     position:
       type: number
-      description: Позиция
+      description: Позиция в текущем дереве

@@ -1,4 +1,4 @@
-"/protected/collection/entity/create/for-profile/{profileId}":
+"/protected/profile/{profileId}/collection/create":
   put:
     tags:
       - collection
