@@ -86,7 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <any>App, [
             ROUTER_PROVIDERS,
             HTTP_PROVIDERS,
-            provide(RequestOptions, {useClass: OAuthRequestOptions})
+            provide(RequestOptions, {useClass: OAuthRequestOptions}),
+            provide(Window, {useValue: window})
         ]).catch((err) => {
             console.log(err.message);
         }

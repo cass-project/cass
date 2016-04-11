@@ -2,6 +2,8 @@ import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {CurrentProfileRestService} from "../../service/CurrentProfileRestService";
 
+declare var Cropper;
+
 @Component({
     template: require('./template.html'),
     styles: [
@@ -32,6 +34,9 @@ export class AccountWelcome {
     SubmitShow: boolean = false;
     AvatarShow: boolean = false;
 
+    ngOnInit() {
+        console.log('cropper', Cropper);
+    }
 
     reset(){
         this.router.parent.navigate(['Profile']);
