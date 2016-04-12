@@ -1,12 +1,12 @@
 import {Component, ViewChild, ElementRef} from "angular2/core";
+import {Router} from "angular2/router"
 
 declare let Cropper;
 
 @Component({
     template: require('./template.html'),
     styles: [require('./style.shadow.scss')],
-    providers:[FileReader],
-    selector: 'avatar-cropper'
+    providers:[FileReader]
 })
 
 export class AvatarCropper {
@@ -14,7 +14,9 @@ export class AvatarCropper {
     @ViewChild('cropImage') cropImage:ElementRef;
     private cropper;
 
-    constructor(private fileReader:FileReader) {}
+    constructor(private fileReader:FileReader,
+                public router: Router
+    ) {}
 
     ngOnInit() : void {
         let testComponent = this;
@@ -46,6 +48,10 @@ export class AvatarCropper {
             zoomable    : false
             // Lookup: https://www.npmjs.com/package/cropperjs
         });
+    }
+
+    private close(){
+        this.router.parent.navigate(['PreInfo'])
     }
 
     private destroyCropper() : void {

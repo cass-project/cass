@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">
-                        <i class="fa fa-fw fa-upload" aria-hidden="true"></i> Upload your avatar
+                        <i class="fa fa-fw fa-upload" aria-hidden="true"></i> Upload your photo
                     </h4>
                 </div>
                 <div class="modal-body text-xs-center" >
@@ -16,12 +16,11 @@
                     </label>
                 </div>
                 <div class="modal-footer" *ngIf="cropper">
-                    <button class="btn btn-secondary" (click)="destroyCropper()">
-                        <i class="fa fa-fw fa-chevron-left" aria-hidden="true"></i> Back
-                    </button>
-                    <button class="btn btn-primary"  (click)="getData()">
-                        <i class="fa fa-fw fa-crop" aria-hidden="true"></i> Done
-                    </button>
+                    <input type="button" class="btn btn-primary" value="Back"  (click)="destroyCropper()">
+                    <input type="button" class="btn btn-primary" value="Done"  (click)="getData()">
+                </div>
+                <div class="modal-footer" *ngIf="!cropper">
+                    <input type="button" value="Close" class="btn btn-primary" (click)="close()"/>
                 </div>
             </div>
         </div>
