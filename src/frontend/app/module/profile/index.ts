@@ -6,7 +6,6 @@ import {ProfileDashboardComponent} from "./component/ProfileDashboard/index";
 import {AccountWelcome} from "./component/AccountWelcome/component";
 import {CurrentProfileRestService} from "./service/CurrentProfileRestService";
 import {AvatarCropper} from "./component/ProfileEdit/AvatarCropper/AvatarCropper";
-import {PreInfo} from "./component/AccountWelcome/PreInfo/component";
 
 @Component({
     template: require('./template.html'),
@@ -38,13 +37,7 @@ import {PreInfo} from "./component/AccountWelcome/PreInfo/component";
         name: 'AvatarEdit',
         path: '/edit/avatar',
         component: AvatarCropper
-    },
-    {
-        name: 'PreInfo',
-        path: 'edit/preinfo',
-        component: PreInfo
     }
-
 ])
 export class ProfileComponent
 {

@@ -1,0 +1,27 @@
+<div *ngIf="ChangeAvatar" class="modal" tabindex="-1" style="display: block;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <i class="fa fa-fw fa-upload" aria-hidden="true"></i> Upload your photo
+                    </h4>
+                </div>
+                <div class="modal-body text-xs-center" >
+                    <img #cropImage />
+                    <label *ngIf="!cropper" class="text-xs-left m-t-1 btn btn-primary">
+                        <input type="file" placeholder="s" (change)="onFileUploaded($event)">
+                        <i class="fa  fa-fw fa-folder-open" aria-hidden="true"></i>
+                        Choose photo from computer
+                    </label>
+                </div>
+                <div class="modal-footer" *ngIf="cropper">
+                    <input type="button" value="Back" class="btn btn-secondary" (click)="destroyCropper()"/>
+                    <input type="button" class="btn btn-primary" value="Done" (click)="getData()"/>
+                </div>
+                <div class="modal-footer" *ngIf="!cropper">
+                    <input type="button" value="Close" class="btn btn-secondary" (click)="close()"/>
+                </div>
+            </div>
+        </div>
+</div>
+<div *ngIf="ChangeAvatar" class="modal-backdrop fade in"></div>

@@ -13,20 +13,32 @@
                             <input type="button" value="Nickname" class="btn btn-secondary" (click)="chooseN = true; chooseType = false; NextShow = true;"/>
                         </div>
                         <div *ngIf="chooseFL" class="input-group input-group-sm accountFL">
-                            <input type="text"  [(ngModel)]="preInfo.firstname" class="form-control" placeholder="Firstname" aria-describedby="sizing-addon3">
-                            <input type="text"  [(ngModel)]="preInfo.lastname" class="form-control" placeholder="Lastname" aria-describedby="sizing-addon3">
+                            <input type="text"  [(ngModel)]="firstname" class="form-control" placeholder="Firstname" aria-describedby="sizing-addon3">
+                            <input type="text"  [(ngModel)]="lastname" class="form-control" placeholder="Lastname" aria-describedby="sizing-addon3">
                         </div>
                         <div *ngIf="chooseLFM" class="input-group input-group-sm accountLFM">
-                            <input type="text"  [(ngModel)]="preInfo.firstname" class="form-control" placeholder="Firstname" aria-describedby="sizing-addon3">
-                            <input type="text"  [(ngModel)]="preInfo.lastname" class="form-control" placeholder="Lastname" aria-describedby="sizing-addon3">
-                            <input type="text"  [(ngModel)]="preInfo.middlename" class="form-control" placeholder="Middlename" aria-describedby="sizing-addon3">
+                            <input type="text"  [(ngModel)]="firstname" class="form-control" placeholder="Firstname" aria-describedby="sizing-addon3">
+                            <input type="text"  [(ngModel)]="lastname" class="form-control" placeholder="Lastname" aria-describedby="sizing-addon3">
+                            <input type="text"  [(ngModel)]="middlename" class="form-control" placeholder="Middlename" aria-describedby="sizing-addon3">
                         </div>
                         <div *ngIf="chooseN" class="input-group input-group-sm accountN">
-                            <input type="text"  [(ngModel)]="preInfo.nickname" class="form-control" placeholder="Nickname" aria-describedby="sizing-addon3">
+                            <input type="text"  [(ngModel)]="nickname" class="form-control" placeholder="Nickname" aria-describedby="sizing-addon3">
+                        </div>
+                        <div *ngIf="PreInfo" class="input-group input-group-sm accountN">
+                            <h1>{{firstname}}</h1>
+                            <h1>{{lastname}}</h1>
+                            <h1>{{middlename}}</h1>
+                            <h1>{{nickname}}</h1>
+                            <img src="{{Avatar || '/public/assets/profile-default.png'}}" class="img-rounded pull-xs-left">
+                            <input type="button" value="Change Avatar" (click)="avatarCropper.ChangeAvatar = true" />
+                            <div *ngIf="avatarCropper.ChangeAvatar" class="form-group">
+                                    <avatar-cropper></avatar-cropper>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input *ngIf="NextShow" [routerLink]="['PreInfo']" type="button" value="Next" class="btn btn-primary" (click)="chooseFL = chooseLFM = chooseN = false; preInfo = true; NextShow = false; SubmitShow = true;">
+                        <input *ngIf="NextShow" type="button" value="Next" class="btn btn-primary" (click)="chooseFL = chooseLFM = chooseN = false; PreInfo = true; NextShow = false; SubmitShow = true;">
+                        <input *ngIf="SubmitShow" type="submit" value="Submit" class="btn btn-primary" (click)="submit()"/>
                         <input type="button" value="Reset" class="btn btn-secondary" (click)="reset()"/>
                     </div>
                 </div>
