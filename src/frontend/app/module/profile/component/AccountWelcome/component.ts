@@ -1,32 +1,31 @@
-import {Component, ViewChild, ElementRef} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {CurrentProfileRestService} from "../../service/CurrentProfileRestService";
+import {AvatarCropper} from "../ProfileEdit/AvatarCropper/AvatarCropper";
+import {PreInfo} from "./PreInfo/component";
 
-declare var Cropper;
+
+
 
 @Component({
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss'),
     ],
+    directives: [
+        ROUTER_DIRECTIVES
+    ],
     'providers': [
-        CurrentProfileRestService
+        CurrentProfileRestService,
+        PreInfo
     ]
 })
 
 export class AccountWelcome {
     constructor (private currentProfileRestService: CurrentProfileRestService,
-                 public router: Router
+                 public router: Router,
+                 public preInfo: PreInfo
     ){}
-
-    @ViewChild('cropcanvas') cropcanvas: ElementRef;
-
-    data: any;
-    profileId: number;
-    nickname: string;
-    firstname: string;
-    lastname: string;
-    middlename: string;
 
     chooseType: boolean = true;
     chooseFL: boolean = false;
@@ -35,41 +34,12 @@ export class AccountWelcome {
 
     NextShow: boolean = false;
     SubmitShow: boolean = false;
-    AvatarShow: boolean = false;
+    AvatarCropper: boolean = false;
+    preInfo: boolean = false;
 
-    //ngOnInit() {
-    //    let cropper = new Cropper(this.image, {
-    //        aspectRatio: 16 / 9,
-    //        crop: function(e) {
-    //            console.log(e.detail.x);
-    //            console.log(e.detail.y);
-    //            console.log(e.detail.width);
-    //            console.log(e.detail.height);
-    //            console.log(e.detail.rotate);
-    //            console.log(e.detail.scaleX);
-    //            console.log(e.detail.scaleY);
-    //        }
-    //    })
-    //}
 
     reset(){
         this.router.parent.navigate(['Profile']);
         this.router.parent.navigate(['Welcome']);
     }
-
-    sumbit(){
-        let xS;
-        let yS;
-        let xE;
-        let yE;
-
-        if(this.chooseFL){
-            this.currentProfileRestService.greetingsAsFL(this.profileId, this.firstname, this.lastname).subscribe(data => {
-                this.currentProfileRestService.avatarUpload(this.profileId, xS, yS, xE, yE).subscribe(data => {
-                    this.router.parent.navigate(['Collection'])
-                });
-            });
-        }
-    }
-
 }

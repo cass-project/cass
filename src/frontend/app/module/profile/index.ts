@@ -5,7 +5,8 @@ import {ProfileEditComponent} from "./component/ProfileEdit/index";
 import {ProfileDashboardComponent} from "./component/ProfileDashboard/index";
 import {AccountWelcome} from "./component/AccountWelcome/component";
 import {CurrentProfileRestService} from "./service/CurrentProfileRestService";
-import {TestComponent} from "./component/Test/index";
+import {AvatarCropper} from "./component/ProfileEdit/AvatarCropper/AvatarCropper";
+import {PreInfo} from "./component/AccountWelcome/PreInfo/component";
 
 @Component({
     template: require('./template.html'),
@@ -34,10 +35,16 @@ import {TestComponent} from "./component/Test/index";
         component: AccountWelcome
     },
     {
-        name: 'Test',
-        path: '/test',
-        component: TestComponent
+        name: 'AvatarEdit',
+        path: '/edit/avatar',
+        component: AvatarCropper
+    },
+    {
+        name: 'PreInfo',
+        path: 'edit/preinfo',
+        component: PreInfo
     }
+
 ])
 export class ProfileComponent
 {
