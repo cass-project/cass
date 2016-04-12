@@ -1,0 +1,18 @@
+img{
+    max-width: 100%;
+    max-height: 600px;
+}
+
+.modal-body{padding:15px 0;}
+
+label input[type=file]{display: none}
+
+
+/**
+ * Cropper.js VK Style
+ **/
+.cropper-point, .cropper-point.point-se{width:10px; height:10px; background:#DCDCDC; transition: 250ms; opacity: 0.3;}
+.cropper-crop-box:active .cropper-point{opacity: .6; transition:0ms;}
+.cropper-point.point-n, .cropper-point.point-w, .cropper-point.point-s, .cropper-point.point-e, .cropper-line{display: none}
+.cropper-view-box{outline: none}
+.cropper-modal{opacity: .75}
