@@ -1,7 +1,6 @@
 import {Component, ViewChild, ElementRef} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {CurrentProfileRestService} from "../../service/CurrentProfileRestService";
-import {ImageCropper} from "../../../../../node_modules/ng2-img-cropper/src/imageCropper";
 
 declare var Cropper;
 
@@ -21,7 +20,6 @@ export class AccountWelcome {
     ){}
 
     @ViewChild('cropcanvas') cropcanvas: ElementRef;
-    private cropper: ImageCropper;
 
     data: any;
     profileId: number;
