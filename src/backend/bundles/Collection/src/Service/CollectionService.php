@@ -30,6 +30,20 @@ class CollectionService
         return $this->collectionRepository->create($this->currentAccountService->getCurrentProfile(), $collectionCreateParameters);
     }
 
+    public function read(array $params=[], $treeLike=false) {
+        if (isset($params['id'])) {
+            return $this->collectionRepository->getCollectionEntity($params['id']);
+        } else {
+            $collectionEntities = $this->collectionRepository->getCollections($params);
+        }
+
+        if ($treeLike) {
+            $collectionEntities = $this->collectionRepository->getCollectionsAsTree($collectionEntities);
+        }
+
+        return $collectionEntities;
+    }
+
     public function update(CollectionUpdateParameters $collectionUpdateParameters) {
         return $this->collectionRepository->update($collectionUpdateParameters);
     }

@@ -91,6 +91,11 @@ class Collection implements SerialEntity
         return $this;
     }
 
+    public function getParentId()
+    {
+        return $this->parent === null ? null : $this->parent->getId();
+    }
+
     public function getParent(): Collection
     {
         if(!$this->hasParent()) {
@@ -103,6 +108,11 @@ class Collection implements SerialEntity
     public function getChildren(): PersistentCollection
     {
         return $this->children;
+    }
+
+    public function hasChildren(): bool
+    {
+        return count($this->children) > 0;
     }
 
     public function getProfile(): Profile
@@ -173,5 +183,17 @@ class Collection implements SerialEntity
     public function incrementPosition()
     {
         ++$this->position;
+    }
+
+    public function toJSON(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'description' => $this->getDescription(),
+            'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null,
+            'theme_id' => $this->hasTheme() ? $this->getTheme()->getId() : null,
+            'position' => $this->getPosition()
+        ];
     }
 }

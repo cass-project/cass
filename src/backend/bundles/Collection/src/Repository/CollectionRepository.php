@@ -13,6 +13,33 @@ use Profile\Entity\Profile;
 
 class CollectionRepository extends EntityRepository
 {
+    public function getCollections($params): array
+    {
+        return $this->findBy($params);
+    }
+
+    public function getCollectionsAsTree(/** @var $collections Collection[] */array $collections, int $parentId = null, $depth = 0): array
+    {
+        $tree = [];
+
+        foreach($collections as $collection) {
+            if($collection->getParentId() === $parentId) {
+                if($collection->hasChildren()) {
+                    $children = $this->getCollectionsAsTree($collections, $collection->getId(), $depth + 1);
+                }else{
+                    $children = [];
+                }
+
+                $tree[] = array_merge($collection->toJSON(), [
+                    'children' =>  $children,
+                    'depth' => $depth
+                ]);
+            }
+        }
+
+        return $tree;
+    }
+
     public function create(Profile $profile, CollectionCreateParameters $collectionCreateParameters): Collection
     {
         $collectionEntity = new Collection($profile);
