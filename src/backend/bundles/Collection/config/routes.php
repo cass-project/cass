@@ -23,6 +23,12 @@ return function(Application $app, string $prefix) {
         'collection-list'
     );
 
+    $app->get(
+        sprintf('%s/protected/profile/{profileId}/collection/{command:tree}', $prefix),
+        CollectionMiddleware::class,
+        'collection-tree'
+    );
+
     $app->post(
         sprintf('%s/protected/collection/{command:move}/{collectionId}/under/{collectionParentId}/in-position/{position}', $prefix),
         CollectionMiddleware::class,

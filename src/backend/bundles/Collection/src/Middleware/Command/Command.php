@@ -10,6 +10,7 @@ abstract class Command
     const COMMAND_CREATE = 'create';
     const COMMAND_DELETE = 'delete';
     const COMMAND_LIST = 'list';
+    const COMMAND_TREE = 'tree';
     const COMMAND_MOVE = 'move';
     const COMMAND_UPDATE = 'update';
 
@@ -48,6 +49,9 @@ abstract class Command
 
             case self::COMMAND_LIST:
                 return new ListCommand();
+
+            case self::COMMAND_TREE:
+                return new TreeCommand();
 
             case self::COMMAND_MOVE:
                 return new MoveCommand();
