@@ -3,7 +3,7 @@ namespace Collection\Service\Parameters\CollectionService;
 
 use Common\Tools\RequestParams\Param;
 
-class CollectionCreateParameters implements CollectionParemeters
+class CollectionCreateParameters implements CollectionParameters
 {
     /** @var Param */
     private $title;

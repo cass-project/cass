@@ -3,7 +3,7 @@ namespace Collection\Service\Parameters\CollectionService;
 
 use Common\Tools\RequestParams\Param;
 
-interface CollectionParemeters
+interface CollectionParameters
 {
     public function getTitle(): Param;
     public function getDescription(): Param;

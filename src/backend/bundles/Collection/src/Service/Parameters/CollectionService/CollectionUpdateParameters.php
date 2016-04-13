@@ -3,7 +3,7 @@ namespace Collection\Service\Parameters\CollectionService;
 
 use Common\Tools\RequestParams\Param;
 
-class CollectionUpdateParameters implements CollectionParemeters
+class CollectionUpdateParameters implements CollectionParameters
 {
     /** @var int */
     private $id;
