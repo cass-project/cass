@@ -16,7 +16,7 @@
                 </div>
                 <div class="modal-footer" *ngIf="cropper">
                     <input type="button" value="Back" class="btn btn-secondary" (click)="destroyCropper()"/>
-                    <input type="button" class="btn btn-primary" value="Done" (click)="getData()"/>
+                    <input type="button" class="btn btn-primary" value="Done" (click)="submit()"/>
                 </div>
                 <div class="modal-footer" *ngIf="!cropper">
                     <input type="button" value="Close" class="btn btn-secondary" (click)="close()"/>
