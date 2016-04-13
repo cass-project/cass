@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
+mysql  -uroot -p"1234" -e "DROP DATABASE cass_development"
+mysql  -uroot -p"1234" -e "CREATE DATABASE cass_development"
 cd /vagrant/backend
 composer install
 ./vendor/bin/phinx migrate
-
-cd /vagrant/frontend
-webpack

@@ -1,4 +1,5 @@
 import {Component, ViewChild, ElementRef, Injectable} from "angular2/core";
+import {AvatarCropperService} from "../../../service/AvatarCropperService";
 
 require('./style.head.scss');
 declare let Cropper;
@@ -13,16 +14,19 @@ declare let Cropper;
 @Injectable()
 export class AvatarCropper {
 
-    ChangeAvatar: boolean = false;
+    constructor(private fileReader:FileReader,
+                public avatarCropperService: AvatarCropperService
+    ){}
+
+
 
     @ViewChild('cropImage') cropImage:ElementRef;
     private cropper;
 
-    constructor(private fileReader:FileReader
-    ) {}
 
     ngOnInit() : void {
         let testComponent = this;
+        this.fileReader = new FileReader();
         this.fileReader.onload = function() {
             testComponent.initCropper();
         }
@@ -53,8 +57,8 @@ export class AvatarCropper {
         });
     }
 
-    close(){
-        this.ChangeAvatar = false;
+    private close(){
+        this.avatarCropperService.isAvatarFormVisible = false;
         this.destroyCropper();
     }
 

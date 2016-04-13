@@ -2,6 +2,7 @@ import {Component, Injectable} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {CurrentProfileRestService} from "../../service/CurrentProfileRestService";
 import {AvatarCropper} from "./AvatarCropper/index";
+import {AvatarCropperService} from "../../service/AvatarCropperService";
 
 declare var Cropper;
 
@@ -12,6 +13,7 @@ declare var Cropper;
     ],
     'providers': [
         CurrentProfileRestService,
+        AvatarCropperService
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -22,10 +24,11 @@ declare var Cropper;
 @Injectable()
 export class AccountWelcome {
     constructor (private currentProfileRestService: CurrentProfileRestService,
-                 public router: Router
+                 public router: Router,
+                 public avatarCropperService: AvatarCropperService
     ){}
 
-    avatarCropper: AvatarCropper;
+
 
     avatar: any;
     profileId: number;
@@ -42,7 +45,10 @@ export class AccountWelcome {
     NextShow: boolean = false;
     SubmitShow: boolean = false;
     PreInfo: boolean = false;
-    ChangeAvatar: boolean = false;
+
+    showAvatarCropper(){
+        this.avatarCropperService.isAvatarFormVisible = true;
+    }
 
     reset(){
         this.router.parent.navigate(['Profile']);
