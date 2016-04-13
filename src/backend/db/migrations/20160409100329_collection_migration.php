@@ -10,7 +10,7 @@ class CollectionMigration extends AbstractMigration
             ->addColumn('profile_id', 'integer')
             ->addColumn('title', 'string')
             ->addColumn('description', 'text')
-            ->addColumn('parent_id', 'integer')
+            ->addColumn('parent_id', 'integer', ['null' => true])
             ->addColumn('position', 'integer')
             ->addForeignKey('profile_id', 'profile', 'id', [
                 'delete' => 'cascade',

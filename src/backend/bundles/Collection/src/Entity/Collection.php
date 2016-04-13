@@ -1,6 +1,7 @@
 <?php
 namespace Collection\Entity;
 
+use Common\Tools\SerialManager\SerialEntity;
 use Data\Entity\Theme;
 use Doctrine\ORM\PersistentCollection;
 use Profile\Entity\Profile;
@@ -9,7 +10,7 @@ use Profile\Entity\Profile;
  * @Entity(repositoryClass="Collection\Repository\CollectionRepository")
  * @Table(name="collection")
  */
-class Collection
+class Collection implements SerialEntity
 {
     /**
      * @Column(type="integer")
@@ -84,8 +85,18 @@ class Collection
         return $this->parent !== null;
     }
 
+    public function setParent($parent) : self
+    {
+        $this->parent = $parent;
+        return $this;
+    }
+
     public function getParent(): Collection
     {
+        if(!$this->hasParent()) {
+            throw new \Exception('No parent available');
+        }
+
         return $this->parent;
     }
 
@@ -157,5 +168,10 @@ class Collection
     {
         $this->position = $position;
         return $this;
+    }
+
+    public function incrementPosition()
+    {
+        ++$this->position;
     }
 }

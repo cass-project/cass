@@ -21,6 +21,11 @@ abstract class Command
         $this->collectionService = $collectionService;
     }
 
+    public function getCollectionService() : CollectionService
+    {
+        return $this->collectionService;
+    }
+
     public static function factory(ServerRequestInterface $request, CollectionService $collectionService)
     {
         $command = self::factoryCommand($request->getAttribute('command'));
