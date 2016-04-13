@@ -3,6 +3,8 @@ namespace Collection\Service;
 
 use Auth\Service\CurrentAccountService;
 use Collection\Repository\CollectionRepository;
+use Collection\Service\Parameters\CollectionService\CollectionCreateParameters;
+use Doctrine\Common\Collections\Collection;
 
 class CollectionService
 {
@@ -17,4 +19,13 @@ class CollectionService
         $this->collectionRepository = $collectionRepository;
         $this->currentAccountService = $currentAccountService;
     }
+
+    public function create(CollectionCreateParameters $collectionCreateParameters) {
+        /**
+         * @author: hck
+         * @DOTO: Добавить возможность указывать любой профиль
+         */
+        return $this->collectionRepository->create($this->currentAccountService->getCurrentProfile(), $collectionCreateParameters);
+    }
+
 }

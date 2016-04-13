@@ -10,6 +10,8 @@ class CreateCommand extends Command
     {
         $createRequest = new CollectionCreateRequest($request);
 
+        $this->getCollectionService()->create($createRequest->getParameters());
+
         return [];
     }
 }
