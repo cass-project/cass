@@ -3,7 +3,7 @@
     tags:
       - collection
     description:
-      Создает новую коллекцию для указанного профиля
+      Изменяет родителя коллекции и её позицию
     parameters:
       - name: collectionId
         in: path
