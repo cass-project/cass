@@ -4,7 +4,8 @@ namespace Collection\Repository;
 use Collection\Entity\Collection;
 use Collection\Service\Parameters\CollectionService\CollectionCreateParameters;
 use Collection\Service\Parameters\CollectionService\CollectionDeleteParameters;
-use Collection\Service\Parameters\CollectionService\CollectionParemeters;
+use Collection\Service\Parameters\CollectionService\CollectionMoveParameters;
+use Collection\Service\Parameters\CollectionService\CollectionParameters;
 use Collection\Service\Parameters\CollectionService\CollectionUpdateParameters;
 use Common\Tools\SerialManager\SerialManager;
 use Data\Exception\DataEntityNotFoundException;
@@ -82,7 +83,29 @@ class CollectionRepository extends EntityRepository
         return $collectionEntity;
     }
 
-    private function setupEntity(Collection $collectionEntity, CollectionParemeters $collectionParameters)
+    public function move(CollectionMoveParameters $collectionMoveParameters): Collection
+    {
+        $em = $this->getEntityManager();
+        $collectionEntity = $this->getCollectionEntity($collectionMoveParameters->getCollectionId());
+
+        $parentId = $collectionMoveParameters->getMoveToParentCollectionId();
+
+        if($parentId == 0) {
+            $collectionEntity->setParent(null);
+        }else{
+            $collectionEntity->setParent($em->getReference(Collection::class, $parentId));
+        }
+
+        $siblings = new SerialManager($this->getCollectionsWithParent($collectionMoveParameters->getMoveToParentCollectionId()));
+        $siblings->insertAs($collectionEntity, $collectionMoveParameters->getMoveToPosition());
+
+        $em->persist($collectionEntity);
+        $em->flush();
+
+        return $collectionEntity;
+    }
+
+    private function setupEntity(Collection $collectionEntity, CollectionParameters $collectionParameters)
     {
         $em = $this->getEntityManager();
 

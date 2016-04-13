@@ -5,8 +5,8 @@ use Auth\Service\CurrentAccountService;
 use Collection\Repository\CollectionRepository;
 use Collection\Service\Parameters\CollectionService\CollectionCreateParameters;
 use Collection\Service\Parameters\CollectionService\CollectionDeleteParameters;
+use Collection\Service\Parameters\CollectionService\CollectionMoveParameters;
 use Collection\Service\Parameters\CollectionService\CollectionUpdateParameters;
-use Doctrine\Common\Collections\Collection;
 
 class CollectionService
 {
@@ -52,4 +52,7 @@ class CollectionService
         return $this->collectionRepository->delete($collectionDeleteParameters);
     }
 
+    public function move(CollectionMoveParameters $collectionMoveParameters) {
+        return $this->collectionRepository->move($collectionMoveParameters);
+    }
 }
