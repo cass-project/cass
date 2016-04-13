@@ -5,6 +5,7 @@ use Auth\Service\CurrentAccountService;
 use Collection\Repository\CollectionRepository;
 use Collection\Service\Parameters\CollectionService\CollectionCreateParameters;
 use Collection\Service\Parameters\CollectionService\CollectionDeleteParameters;
+use Collection\Service\Parameters\CollectionService\CollectionUpdateParameters;
 use Doctrine\Common\Collections\Collection;
 
 class CollectionService
@@ -27,6 +28,10 @@ class CollectionService
          * @DOTO: Добавить возможность указывать любой профиль
          */
         return $this->collectionRepository->create($this->currentAccountService->getCurrentProfile(), $collectionCreateParameters);
+    }
+
+    public function update(CollectionUpdateParameters $collectionUpdateParameters) {
+        return $this->collectionRepository->update($collectionUpdateParameters);
     }
 
     public function delete(CollectionDeleteParameters $collectionDeleteParameters) {

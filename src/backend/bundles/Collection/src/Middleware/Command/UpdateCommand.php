@@ -10,6 +10,8 @@ class UpdateCommand extends Command
     {
         $updateRequest = new CollectionUpdateRequest($request);
 
+        $this->getCollectionService()->update($updateRequest->getParameters());
+
         return [];
     }
 }

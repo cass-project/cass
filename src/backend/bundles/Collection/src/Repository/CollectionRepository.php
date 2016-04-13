@@ -5,6 +5,7 @@ use Collection\Entity\Collection;
 use Collection\Service\Parameters\CollectionService\CollectionCreateParameters;
 use Collection\Service\Parameters\CollectionService\CollectionDeleteParameters;
 use Collection\Service\Parameters\CollectionService\CollectionParemeters;
+use Collection\Service\Parameters\CollectionService\CollectionUpdateParameters;
 use Common\Tools\SerialManager\SerialManager;
 use Data\Exception\DataEntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
@@ -23,6 +24,19 @@ class CollectionRepository extends EntityRepository
         $em->flush();
 
         return $collectionEntity;
+    }
+
+    public function update(CollectionUpdateParameters $collectionUpdateParameters): Collection
+    {
+        $themeEntity = $this->getCollectionEntity($collectionUpdateParameters->getId());
+
+        $this->setupEntity($themeEntity, $collectionUpdateParameters);
+
+        $em = $this->getEntityManager();
+        $em->persist($themeEntity);
+        $em->flush();
+
+        return $themeEntity;
     }
 
     public function delete(CollectionDeleteParameters $collectionDeleteParameters): Collection
