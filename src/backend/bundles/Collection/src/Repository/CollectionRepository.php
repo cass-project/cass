@@ -3,8 +3,10 @@ namespace Collection\Repository;
 
 use Collection\Entity\Collection;
 use Collection\Service\Parameters\CollectionService\CollectionCreateParameters;
+use Collection\Service\Parameters\CollectionService\CollectionDeleteParameters;
 use Collection\Service\Parameters\CollectionService\CollectionParemeters;
 use Common\Tools\SerialManager\SerialManager;
+use Data\Exception\DataEntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Profile\Entity\Profile;
 
@@ -23,6 +25,21 @@ class CollectionRepository extends EntityRepository
         return $collectionEntity;
     }
 
+    public function delete(CollectionDeleteParameters $collectionDeleteParameters): Collection
+    {
+        $collectionEntity = $this->getCollectionEntity($collectionDeleteParameters->getCollectionId());
+
+        $parentId = $collectionEntity->hasParent() ? $collectionEntity->getParent()->getId() : null;
+        $siblings = new SerialManager($this->getCollectionsWithParent($parentId));
+
+        $siblings->remove($collectionEntity);
+
+        $em = $this->getEntityManager();
+        $em->remove($collectionEntity);
+        $em->flush();
+
+        return $collectionEntity;
+    }
 
     private function setupEntity(Collection $collectionEntity, CollectionParemeters $collectionParameters)
     {
@@ -64,4 +81,14 @@ class CollectionRepository extends EntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
 
+    public function getCollectionEntity(int $id): Collection
+    {
+        $collectionEntity = $this->find($id);
+        /** @var Collection $collectionEntity */
+
+        if ($collectionEntity === null) {
+            throw new DataEntityNotFoundException(sprintf("Theme Entity with ID `%d` not found", $id));
+        }
+        return $collectionEntity;
+    }
 }
