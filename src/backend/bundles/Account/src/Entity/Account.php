@@ -33,12 +33,6 @@ class Account
     private $email;
 
     /**
-     * @Column(type="integer")
-     * @var int
-     */
-    private $phone;
-
-    /**
      * @Column(type="string")
      * @var string
      */
@@ -84,17 +78,6 @@ class Account
     public function setPassword($password)
     {
         $this->password = $password;
-        return $this;
-    }
-
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
         return $this;
     }
 

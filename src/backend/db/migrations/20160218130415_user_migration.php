@@ -33,11 +33,9 @@ class UserMigration extends AbstractMigration
     {
         $this->table($this->accountTableName)
             ->addColumn('email', 'string')
-            ->addColumn('phone', 'integer', ['null' => true])
             ->addColumn('password', 'string')
             ->addColumn('token', 'string', ['null' => true])
             ->addColumn('tokenExpired', 'integer', ['null' => true])
-            ->addIndex(['phone'], ['unique' => true])
             ->addIndex(['email'], ['unique' => true])
             ->create()
         ;

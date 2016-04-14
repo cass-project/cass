@@ -95,7 +95,6 @@ sudo mv phpunit.phar /usr/local/bin/phpunit
 # #############
 # Update server
 # #############
-
 sudo cp -R /support-files/copy/* /
 
 sudo indexer --all
@@ -107,11 +106,19 @@ sudo service nginx restart
 # ###############
 # Update vm-tools
 # ###############
-
 sudo chmod a+x /usr/bin/vm-server-update
 sudo chmod a+x /usr/bin/vm-project-update
 sudo chmod a+x /usr/bin/vm-init
+sudo chmod a+x /usr/bin/vm-db-test
+sudo chmod a+x /usr/bin/vm-db-recreate
 
 sudo sed -i 's/\r$//' /usr/bin/vm-init
 sudo sed -i 's/\r$//' /usr/bin/vm-project-update
 sudo sed -i 's/\r$//' /usr/bin/vm-server-update
+sudo sed -i 's/\r$//' /usr/bin/vm-db-recreate
+sudo sed -i 's/\r$//' /usr/bin/vm-db-test
+
+# ##########
+# vm-db-test
+# ##########
+vm-db-test
