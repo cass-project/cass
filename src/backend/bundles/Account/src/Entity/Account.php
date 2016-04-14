@@ -50,6 +50,24 @@ class Account
      */
     private $tokenExpired;
 
+    /**
+     * @Column(type="boolean", name="is_disabled")
+     * @var bool
+     */
+    private $isDisabled = false;
+
+    /**
+     * @Column(type="string", name="disabled_reason")
+     * @var string
+     */
+    private $disabledReason;
+
+    /**
+     * @Column(type="boolean", name="is_email_verified")
+     * @var bool
+     */
+    private $isEmailVerified = false;
+
     public function getId()
     {
         return $this->id;
@@ -117,5 +135,41 @@ class Account
     {
         $this->tokenExpired = $tokenExpired;
         return $this;
+    }
+
+    public function disableAccount(string $reason)
+    {
+        $this->isDisabled = true;
+        $this->disabledReason = $reason;
+    }
+
+    public function unlockAccount()
+    {
+        $this->isDisabled = false;
+        $this->disabledReason = '';
+    }
+
+    public function setAsEmailVerified()
+    {
+        $this->isEmailVerified = true;
+    }
+
+    public function isEmailVerified(): bool
+    {
+        return $this->isEmailVerified;
+    }
+
+    public function isDisabled(): bool
+    {
+        return $this->isDisabled;
+    }
+
+    public function getDisabledReason(): string
+    {
+        if(!$this->isDisabled()) {
+            throw new \Exception('Account is not disabled');
+        }
+
+        return $this->isDisabled;
     }
 }
