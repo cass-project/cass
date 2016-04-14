@@ -8,7 +8,7 @@ interface SaveAttachmentProperties
 {
 	public function getId():Param;
 
-	public function getType():Param;
+	public function getUrl():Param;
 
 	public function getContent():Param;
 

@@ -1,0 +1,28 @@
+'/protected/post/read':
+  get:
+    tags:
+      - post
+    description: |
+      Все посты
+    responses:
+      '400':
+          $ref: '#/responses/error'
+      '200':
+        description: все посты
+        schema:
+          type: object
+          required:
+            - success
+            - total
+            - entities
+          properties:
+            success:
+              type: boolean
+              description: "= true"
+            total:
+              type: number
+              description: количество постов
+            entities:
+              type: array
+              items:
+                $ref: "#/definitions/Data_Entity_Post"

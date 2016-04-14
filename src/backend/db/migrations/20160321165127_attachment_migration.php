@@ -38,6 +38,7 @@ class AttachmentMigration extends AbstractMigration
                                    ]
           )
           ->addColumn('is_published', 'boolean',['default'=> 0])
+          ->addColumn('url', 'string')
           ->addColumn('content', 'text')
           ->addColumn('created', 'datetime')
           ->addColumn('updated', 'datetime')

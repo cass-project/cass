@@ -22,33 +22,36 @@ return function(Application $app, string $prefix){
 	$app->get(
 		sprintf('%s/protected/post/{command:read}/{postId}', $prefix),
 		PostMiddleware::class,
-		'post-read-entity'
+		'post-entity-read'
 	);
 	$app->post(
 		sprintf('%s/protected/post/{command:update}', $prefix),
 		PostMiddleware::class,
-		'post-update-entity'
+		'post-entity-update'
 	);
-	$app->post(
+	$app->delete(
 		sprintf('%s/protected/post/{command:delete}/{postId}', $prefix),
 		PostMiddleware::class,
-		'post-delete-entity'
+		'post-entity-delete'
 	);
 
-	$app->post(
+	/*
+	 * =========== Attachments ===========
+	 */
+
+	$app->put(
 		sprintf('%s/protected/post/attachment/{command:add}', $prefix),
 		AttachmentMiddleware::class,
-		'post-add-attachment'
+		'post-attachment-add'
 	);
+
 	$app->post(
 		sprintf('%s/protected/post/attachment/{command:delete}/attachmentId', $prefix),
 		AttachmentMiddleware::class,
-		'post-delete-attachment'
+		'post-attachment-delete'
 	);
 
 	//post persist saves persis post
-
-
 	$app->post(
 		sprintf('%s/protected/post/link/{command:parse}', $prefix),
 		PostMiddleware::class,

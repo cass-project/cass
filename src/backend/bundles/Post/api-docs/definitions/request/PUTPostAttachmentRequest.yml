@@ -3,7 +3,7 @@ PUT_Attachment_Request:
     properties:
       post_id:
         type: string
-        description: Название поста
-      content:
+        description: id posta
+      url:
         type: string
-        description: описание поста
+        description: путь до аттача

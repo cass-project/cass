@@ -30,7 +30,7 @@ class Post
 
 
 	/**
-	 * @OneToMany(targetEntity="Data\Entity\Attachment", mappedBy="post_id")
+	 * @OneToMany(targetEntity="Data\Entity\Attachment", mappedBy="post")
 	 */
 	private $attachments=[];
 	/**
@@ -206,12 +206,18 @@ class Post
 
 	public function toJSON()
 	{
+
+		$attachments = $this->attachments->map(function(Attachment $attachment) {
+			return $attachment->toJSON();
+		});
+
 		return [
 			'id'          => $this->getId(),
 			'title'       => $this->getTitle(),
 			'description' => $this->getDescription(),
 			'publish'     => $this->isPublished(),
 			'account_id'  => $this->getAccountId(),
+			'attachments'	=> $attachments->toArray(),
 			'created'     => $this->getCreated()->format("Y-m-d H:i:s"),
 			'updated'     => $this->getUpdated()->format("Y-m-d H:i:s")
 		];

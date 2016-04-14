@@ -13,8 +13,8 @@ class UpdatePostRequest extends SchemaParams
 	public function getParameters(){
 		$data = $this->getData();
 
-		$id = new Param($data, 'id');
-		$name = new Param($data, 'name', true);
+		$id = new Param($data, 'id',true);
+		$name = new Param($data, 'name');
 		$description = new Param($data, 'description');
 		$status = new Param($data, 'status');
 

@@ -63,34 +63,16 @@ abstract class AttachmentCommand
 		switch ($action) {
 
 			case 'add':
-				$json_r = json_decode($request->getBody(), true);
-				if(isset($json_r['post_id']) && $json_r['post_id']){
-					// добавляем аттачмент
-					return new CreateAttachmentCommand();
-
-				} else {
-					// создаём пост и
-					// добавляем аттачмент
-
-					/*$post = $this->getPostService()->create(
-						(new PutPostRequest($request))->getParameters()
-					);
-
-					$attachment = $this->getAttachmentService()->create(
-						(new PutPostAttachmentRequest($request))->getParameters()
-					);
-
-					$post->addAttachment($attachment);
-					$this->getPostService()->save($post);*/
-
-				}
+				return new CreateAttachmentCommand();
 			break;
 
 			case 'delete':
 				return new DeleteAttachmentCommand();
 			break;
+
+			default: throw new UnknownActionException('Unknown action');
 		}
 
-		throw new UnknownActionException('Unknown action');
+
 	}
 }

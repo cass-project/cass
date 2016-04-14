@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: CoffeeTurbo
- * Date: 27.03.2016
- * Time: 19:23
- */
-
 namespace Post\Middleware\Command;
 
 

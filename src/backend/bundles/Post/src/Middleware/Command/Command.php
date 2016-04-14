@@ -81,7 +81,7 @@ abstract class Command
 			case 'update':
 				return new UpdatePostCommand();
 			break;
-			case 'delete-post':
+			case 'delete':
 				return new DeletePostCommand();
 			break;
 			case 'delete-attachment':

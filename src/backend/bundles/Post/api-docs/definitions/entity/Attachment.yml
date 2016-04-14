@@ -1,16 +1,16 @@
 Data_Entity_Attachment:
   type: object
   required:
-    - content
+    - url
   properties:
     id:
-      type: number
+      type: string
       description: ID
     post_id:
-      type: number
+      type: string
       description: ID родительского поста
     type:
-      type: number
+      type: string
       description: тип прикрепления
     url:
       type: string
@@ -18,7 +18,7 @@ Data_Entity_Attachment:
       type: boolean
       description: публиковать
     content:
-      type: text
+      type: string
     created:
       type: datetime
     updated:

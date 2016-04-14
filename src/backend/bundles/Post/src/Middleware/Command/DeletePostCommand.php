@@ -9,8 +9,7 @@ class DeletePostCommand extends Command
 	public function run(ServerRequestInterface $request)
 	{
 		$postId = $request->getAttribute('postId');
-		$this->getPostService()->getPostRepository()->delete($postId);
-		return [];
+		return $this->getPostService()->getPostRepository()->delete($postId)->toJSON();
 	}
 
 }

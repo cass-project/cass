@@ -1,0 +1,13 @@
+'/protected/post/attachment/add':
+  put:
+    tags:
+      - post
+    description: |
+      Добавляет аттачмент
+    parameters:
+      - name: body
+        in: body
+        required: true
+        description: JSON Request
+        schema:
+          $ref: '#/definitions/PUT_Attachment_Request'

@@ -9,15 +9,21 @@ class CreateAttachmentParameters implements SaveAttachmentProperties
 {
 	private $id;
 	private $post_id;
-	private $type;
+	private $url;
+
+
 	private $content;
 
-	public function __construct(Param $post_id, Param $type, Param $content)
+	/**
+	 * @param Param $post_id
+	 * @param Param $url
+	 */
+	public function __construct(Param $post_id, Param $url)
 	{
 		$this->post_id = $post_id;
-		$this->type    = $type;
-		$this->content = $content;
+		$this->url    = $url;
 	}
+
 
 	/**
 	 * @return Param
@@ -41,6 +47,25 @@ class CreateAttachmentParameters implements SaveAttachmentProperties
 	/**
 	 * @return Param
 	 */
+	public function getUrl():Param
+	{
+		return $this->url;
+	}
+
+
+	/**
+	 * @param Param $url
+	 *
+	 * @return $this
+	 */
+	public function setUrl(Param $url){
+		$this->url = $url;
+		return $this;
+	}
+
+	/**
+	 * @return Param
+	 */
 	public function getPostId():Param
 	{
 		return $this->post_id;
@@ -57,24 +82,7 @@ class CreateAttachmentParameters implements SaveAttachmentProperties
 		return $this;
 	}
 
-	/**
-	 * @return Param
-	 */
-	public function getType():Param
-	{
-		return $this->type;
-	}
 
-	/**
-	 * @param Param $type
-	 *
-	 * @return $this
-	 */
-	public function setType(Param $type)
-	{
-		$this->type = $type;
-		return $this;
-	}
 
 
 	/**

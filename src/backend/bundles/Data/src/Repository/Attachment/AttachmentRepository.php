@@ -48,22 +48,32 @@ class AttachmentRepository extends EntityRepository
 
 		$saveAttachmentProperties->getPostId()->on(function($value) use($attachment) {
 
-			$repository=	$this->getEntityManager()->getRepository(Post::class);
+			$repository =	$this->getEntityManager()->getRepository(Post::class);
 			/** @var Post $post */
 			$post = $repository->find($value);
 			$attachment->setPost($post);
 		});
 
-		$saveAttachmentProperties->getType()->on(function($value) use($attachment) {
-			$attachment->setType($value);
+		$saveAttachmentProperties->getUrl()->on(function($value) use($attachment) {
+			$attachment->setUrl($value);
 		});
 
+		$saveAttachmentProperties->getContent()->on(function($value) use($attachment) {
+			$attachment->setContent($value);
+		});
 
+		$saveAttachmentProperties->getPostId()->on(function($value) use($attachment) {
+			if(!empty($value)){
+				/** @var $Post Post */
+				$Post = $this->getEntityManager()->getRepository(Post::class)->find($value);
+				$attachment->setPostId($Post->getId());
+				$attachment->setPost($Post);
+			}
+		});
 		if($saveAttachmentProperties instanceof CreateAttachmentParameters){
 			$saveAttachmentProperties->getUpdated()->on(function($value) use($attachment) {
 				$attachment->setUpdated($value);
 			});
-
 			$saveAttachmentProperties->getCreated()->on(function($value) use($attachment) {
 				$attachment->setCreated($value);
 			});

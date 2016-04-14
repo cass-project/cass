@@ -7,10 +7,10 @@ Data_Entity_Post:
     - is_published
   properties:
     id:
-      type: number
+      type: string
       description: ID
     account_id:
-      type: number
+      type: string
       description: ID родительской тематики
     title:
       type: string

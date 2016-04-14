@@ -1,0 +1,45 @@
+'/protected/post/delete/{postId}':
+  delete:
+    tags:
+      - post
+    description: |
+      Удаление тематики
+    parameters:
+      - name: postId
+        in: path
+        required: true
+        type: number
+        description: |
+          ID поста
+    responses:
+      '200':
+        description: |
+          Succesful response
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: "= true"
+            entity:
+              $ref: '#/definitions/Data_Entity_Post'
+      '400':
+          $ref: '#/responses/error'
+      '404':
+        description: |
+          Пост не найдена
+        schema:
+          type: object
+          required:
+            - success
+            - error
+          properties:
+            success:
+              type: boolean
+              description: "= false"
+            error:
+              type: string
+              description: Сообщение об ошибке

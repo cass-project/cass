@@ -13,11 +13,10 @@ class PutPostAttachmentRequest extends SchemaParams
 	public function getParameters(){
 		$data = $this->getData();
 
-		$post_id = new Param($data, 'post_id', true);
-		$type = new Param($data, 'type');
-		$content = new Param($data, 'content');
+		$post_id = new Param($data, 'post_id');
+		$url = new Param($data, 'url');
 
-		return new CreateAttachmentParameters($post_id, $type, $content);
+		return new CreateAttachmentParameters($post_id, $url);
 	}
 
 	protected function getSchema(): JSONSchema{

@@ -33,7 +33,16 @@ class Attachment
 	 * @ManyToOne(targetEntity="Data\Entity\Post", inversedBy="attachments")
 	 * @JoinColumn(name="post_id", referencedColumnName="id")
 	 */
+	private $post;
+
 	private $post_id;
+
+
+
+	/**
+	 * @Column(type="string")
+	 */
+	private $url;
 
 	/**
 	 * @Column(type="string")
@@ -49,7 +58,7 @@ class Attachment
 	private $updated;
 
 
-	public function getType():int
+	public function getType()
 	{
 		return $this->type;
 	}
@@ -61,16 +70,33 @@ class Attachment
 		return $this;
 	}
 
+	public function getUrl(){
+		return $this->url;
+	}
 
-	public function getPost():Post
-	{
+	public function setUrl($url){
+		$this->url = $url;
+		return $this;
+	}
+
+	public function getPostId(){
 		return $this->post_id;
 	}
 
-
-	public function setPost(Post $post_id)
-	{
+	public function setPostId($post_id){
 		$this->post_id = $post_id;
+		return $this;
+	}
+
+	public function getPost()
+	{
+		return $this->post;
+	}
+
+
+	public function setPost(Post $post)
+	{
+		$this->post = $post;
 		return $this;
 	}
 

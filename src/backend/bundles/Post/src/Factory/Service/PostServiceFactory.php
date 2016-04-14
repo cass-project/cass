@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: CoffeeTurbo
- * Date: 22.03.2016
- * Time: 14:21
- */
-
 namespace Post\Factory\Service;
 
 
