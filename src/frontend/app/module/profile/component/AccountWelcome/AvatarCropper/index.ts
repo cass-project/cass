@@ -1,49 +1,52 @@
+declare var Cropper;
+
 import {Component, ViewChild, ElementRef, Injectable} from "angular2/core";
-import {AvatarCropperService} from "../../../service/AvatarCropperService";
 import {CurrentProfileRestService} from "../../../service/CurrentProfileRestService";
 
 require('./style.head.scss');
-declare let Cropper;
 
 @Component({
     template: require('./template.html'),
     styles: [require('./style.shadow.scss')],
-    providers:[FileReader],
+    providers: [
+        FileReader
+    ],
     selector: 'avatar-cropper'
 })
 
 @Injectable()
 export class AvatarCropper {
-
-    constructor(private fileReader:FileReader,
-                public avatarCropperService: AvatarCropperService,
+    constructor(private fileReader: FileReader,
                 public currentProfileRestService: CurrentProfileRestService
     ){}
 
-
-
     @ViewChild('cropImage') cropImage:ElementRef;
     private cropper;
-
+    private file: Blob;
 
     ngOnInit() : void {
-        let testComponent = this;
         this.fileReader = new FileReader();
-        this.fileReader.onload = function() {
-            testComponent.initCropper();
-        }
+        this.fileReader.onload = () => {
+            this.initCropper();
+        };
     }
 
-    private onFileUploaded(event) : void {
-        this.fileReader.readAsDataURL(event.srcElement.files[0]);
+    private onFileChange(event) : void {
+        this.file = event.target.files[0];
+        this.fileReader.readAsDataURL(this.file);
     }
 
     private initCropper() : void {
         this.cropImage.nativeElement.src = this.fileReader.result;
         if (this.cropper) this.cropper.destroy();
+
+        /**
+         * @see https://www.npmjs.com/package/cropperjs
+         * @see http://fengyuanchen.github.io/cropperjs/
+         */
         this.cropper = new Cropper(this.cropImage.nativeElement, {
-            aspectRatio : 1/1,
-            viewMode    : 3,
+            aspectRatio : 1 /* 1/1 */,
+            viewMode    : 3 /* VM3 */,
             background  : false,
             center      : false,
             highlight   : false,
@@ -55,12 +58,10 @@ export class AvatarCropper {
             scalable    : false,
             toggleDragModeOnDblclick : false,
             zoomable    : false
-            // Lookup: https://www.npmjs.com/package/cropperjs
         });
     }
 
     private close(){
-        this.avatarCropperService.isAvatarFormVisible = false;
         this.destroyCropper();
     }
 
@@ -72,7 +73,17 @@ export class AvatarCropper {
 
     private submit(){
         let coord = this.getData();
-        this.currentProfileRestService.avatarUpload("1", coord.x, coord.y, (coord.x + coord.width), (coord.y + coord.height)).subscribe(data => {console.log("work")}, err => {console.log("not work")})
+
+        this.currentProfileRestService.avatarUpload("1", this.file, {
+            start: {
+                x: coord.x,
+                y: coord.y
+            },
+            end: {
+                x: coord.x + coord.width,
+                y: coord.y + coord.height
+            }
+        });
     }
 
     private getData() {

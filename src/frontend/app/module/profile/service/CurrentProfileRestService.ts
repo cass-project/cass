@@ -27,7 +27,25 @@ export class CurrentProfileRestService{
         return this.http.post('backend/api/protected/profile/' + profileId + '/greetings-as/n/', JSON.stringify({nickname: nick}));
     }
 
-    avatarUpload(profileId, xS, yS, xE, yE){
-        return this.http.post('backend/api/protected/profile/' + profileId + '/image-upload/crop-start/' + xS + '/' + yS + '/crop-end/' + xE + '/' + yE, JSON.stringify({}));
+    avatarUpload(profileId, file: Blob, crop: Crop){
+        let url = `/backend/api/protected/profile/${profileId}/image-upload/crop-start/${crop.start.x}/${crop.start.y}/crop-end/${crop.end.x}/${crop.end.y}`;
+        let formData = new FormData();
+            formData.append("file", file);
+
+        let xmlRequest = new XMLHttpRequest();
+        xmlRequest.open("POST", url);
+        xmlRequest.send(formData);
+    }
+}
+
+export interface Crop
+{
+    start: {
+        x: number;
+        y: number;
+    },
+    end: {
+        x: number;
+        y: number;
     }
 }
