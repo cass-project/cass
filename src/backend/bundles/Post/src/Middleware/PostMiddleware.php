@@ -29,6 +29,7 @@ class PostMiddleware implements MiddlewareInterface
 		$command->setPostService($this->postSevice);
 		$command->setCurrentAccountService($this->currentAccountService);
 
+
 		return $responseBuilder
 			->setStatusSuccess()
 			->setJson($command->run($request))
