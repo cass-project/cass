@@ -28,16 +28,6 @@ export class CurrentProfileRestService{
     }
 
     avatarUpload(profileId, xS, yS, xE, yE){
-        return this.http.post('backend/api/protected/profile/' + profileId + '/image/upload', JSON.stringify({
-            crop: {
-                start: {
-                    x: xS,
-                    y: yS
-                },
-                end: {
-                    x: xE,
-                    y: yE
-                }
-            }}));
+        return this.http.post('backend/api/protected/profile/' + profileId + '/image-upload/crop-start/' + xS + '/' + yS + '/crop-end/' + xE + '/' + yE, JSON.stringify({}));
     }
 }

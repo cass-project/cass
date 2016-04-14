@@ -1,4 +1,6 @@
 import {Component, ViewChild, ElementRef, Injectable} from "angular2/core";
+import {AvatarCropperService} from "../../../service/AvatarCropperService";
+import {CurrentProfileRestService} from "../../../service/CurrentProfileRestService";
 
 require('./style.head.scss');
 declare let Cropper;
@@ -13,16 +15,20 @@ declare let Cropper;
 @Injectable()
 export class AvatarCropper {
 
-    ChangeAvatar: boolean = false;
+    constructor(private fileReader:FileReader,
+                public avatarCropperService: AvatarCropperService,
+                public currentProfileRestService: CurrentProfileRestService
+    ){}
+
+
 
     @ViewChild('cropImage') cropImage:ElementRef;
     private cropper;
 
-    constructor(private fileReader:FileReader
-    ) {}
 
     ngOnInit() : void {
         let testComponent = this;
+        this.fileReader = new FileReader();
         this.fileReader.onload = function() {
             testComponent.initCropper();
         }
@@ -53,8 +59,8 @@ export class AvatarCropper {
         });
     }
 
-    close(){
-        this.ChangeAvatar = false;
+    private close(){
+        this.avatarCropperService.isAvatarFormVisible = false;
         this.destroyCropper();
     }
 
@@ -64,7 +70,12 @@ export class AvatarCropper {
         this.cropImage.nativeElement.src="";
     }
 
-    private getData() : string {
+    private submit(){
+        let coord = this.getData();
+        this.currentProfileRestService.avatarUpload("1", coord.x, coord.y, (coord.x + coord.width), (coord.y + coord.height)).subscribe(data => {console.log("work")}, err => {console.log("not work")})
+    }
+
+    private getData() {
         console.log(this.cropper.getData(true));
         return this.cropper.getData(true);
     }

@@ -30,8 +30,8 @@
                             <h1>{{middlename}}</h1>
                             <h1>{{nickname}}</h1>
                             <img src="{{Avatar || '/public/assets/profile-default.png'}}" class="img-rounded pull-xs-left">
-                            <input type="button" value="Change Avatar" (click)="avatarCropper.ChangeAvatar = true" />
-                            <div *ngIf="avatarCropper.ChangeAvatar" class="form-group">
+                            <input type="button" value="Change Avatar" (click)="showAvatarCropper()" />
+                            <div *ngIf="avatarCropperService.isAvatarFormVisible" class="form-group">
                                     <avatar-cropper></avatar-cropper>
                             </div>
                         </div>

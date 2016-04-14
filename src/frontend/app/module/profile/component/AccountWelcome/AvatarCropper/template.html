@@ -1,4 +1,4 @@
-<div *ngIf="ChangeAvatar" class="modal" tabindex="-1" style="display: block;">
+<div class="modal" tabindex="-1" style="display: block;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="modal-footer" *ngIf="cropper">
                     <input type="button" value="Back" class="btn btn-secondary" (click)="destroyCropper()"/>
-                    <input type="button" class="btn btn-primary" value="Done" (click)="getData()"/>
+                    <input type="button" class="btn btn-primary" value="Done" (click)="submit()"/>
                 </div>
                 <div class="modal-footer" *ngIf="!cropper">
                     <input type="button" value="Close" class="btn btn-secondary" (click)="close()"/>
@@ -24,4 +24,4 @@
             </div>
         </div>
 </div>
-<div *ngIf="ChangeAvatar" class="modal-backdrop fade in"></div>
+<div *ngIf="isAvatarFormVisible" class="modal-backdrop fade in"></div>
