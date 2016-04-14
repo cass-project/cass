@@ -12,7 +12,7 @@ class CreatePostCommand extends Command
 	public function run(ServerRequestInterface $request){
 		$postService= $this->getPostService();
 
-		$account = $this->getCurrentProfileService()->getCurrentAccount();
+		$account = $this->getCurrentAccountService()->getCurrentAccount();
 
 		$post = $postService->create(
 			(new PutPostRequest($request))

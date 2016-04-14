@@ -12,7 +12,7 @@ abstract class Command
 {
 
 	private $postService;
-	private $currentProfileService;
+	private $currentAccountService;
 	private $attachmentService;
 
 	/**
@@ -36,17 +36,17 @@ abstract class Command
 	/**
 	 * @return CurrentAccountService
 	 */
-	public function getCurrentProfileService():CurrentAccountService
+	public function getCurrentAccountService():CurrentAccountService
 	{
-		return $this->currentProfileService;
+		return $this->currentAccountService;
 	}
 
 	/**
 	 * @param mixed $currentProfileService
 	 */
-	public function setCurrentProfileService(CurrentAccountService $currentProfileService)
+	public function setCurrentAccountService(CurrentAccountService $currentProfileService)
 	{
-		$this->currentProfileService = $currentProfileService;
+		$this->currentAccountService = $currentProfileService;
 	}
 
 	/**

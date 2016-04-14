@@ -2,6 +2,7 @@
 namespace Post\Middleware;
 
 
+use Auth\Service\CurrentAccountService;
 use Common\REST\GenericRESTResponseBuilder;
 use Post\Middleware\Command\AttachmentCommand;
 use Post\Middleware\Command\Command;
@@ -25,10 +26,18 @@ class AttachmentMiddleware implements MiddlewareInterface
 	 * @var AttachmentService
 	 */
 	private $attachmentService;
-	public function __construct(PostService $postService, AttachmentService $attachmentService)
+
+	/**
+	 * @var CurrentAccountService
+	 */
+	private $currentAccountService;
+
+	public function __construct(PostService $postService, AttachmentService $attachmentService,CurrentAccountService $currentAccountService)
 	{
+
 		$this->postService       = $postService;
 		$this->attachmentService = $attachmentService;
+		$this->currentAccountService = $currentAccountService;
 	}
 
 
@@ -38,6 +47,7 @@ class AttachmentMiddleware implements MiddlewareInterface
 
 		$command = AttachmentCommand::factory($request);
 		$command->setPostService($this->postService);
+		$command->setCurrentAccountService($this->currentAccountService);
 		$command->setAttachmentService($this->attachmentService);
 
 		$responseBuilder

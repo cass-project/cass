@@ -1,7 +1,5 @@
 PUT_Post_Request:
     type: object
-    required:
-      - title
     properties:
       title:
         type: string

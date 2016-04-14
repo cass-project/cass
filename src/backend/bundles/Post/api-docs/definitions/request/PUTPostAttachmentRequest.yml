@@ -1,5 +1,7 @@
 PUT_Attachment_Request:
     type: object
+    required:
+      - url
     properties:
       post_id:
         type: string
