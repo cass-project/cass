@@ -50,7 +50,7 @@ class AttachmentMiddleware implements MiddlewareInterface
 		$command->setCurrentAccountService($this->currentAccountService);
 		$command->setAttachmentService($this->attachmentService);
 
-		$responseBuilder
+		return $responseBuilder
 			->setStatusSuccess()
 			->setJson($command->run($request))
 			->build()
