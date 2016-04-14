@@ -15,7 +15,8 @@ class ParseUrl extends Command
 {
 	public function run(ServerRequestInterface $request){
 		$data = json_decode($request->getBody(), true);
-		return $this->getPostService()->getLinkOptions($data['url']);
+
+		return ['entity' =>  $this->getPostService()->getLinkOptions($data['url'])];
 	}
 
 }

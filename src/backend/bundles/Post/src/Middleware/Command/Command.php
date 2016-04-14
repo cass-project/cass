@@ -85,8 +85,6 @@ abstract class Command
 				return new DeletePostCommand();
 			break;
 			case 'delete-attachment':
-
-
 				return new DeleteAttachmentCommand();
 			break;
 

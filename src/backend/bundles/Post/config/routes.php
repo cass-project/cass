@@ -35,6 +35,13 @@ return function(Application $app, string $prefix){
 		'post-entity-delete'
 	);
 
+	//post persist saves persis post
+	$app->post(
+		sprintf('%s/protected/post/link/{command:parse}', $prefix),
+		PostMiddleware::class,
+		'link-parse'
+	);
+
 	/*
 	 * =========== Attachments ===========
 	 */
@@ -51,12 +58,8 @@ return function(Application $app, string $prefix){
 		'post-attachment-delete'
 	);
 
-	//post persist saves persis post
-	$app->post(
-		sprintf('%s/protected/post/link/{command:parse}', $prefix),
-		PostMiddleware::class,
-		'link-parse'
-	);
+
+
 
 
 
