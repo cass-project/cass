@@ -28,7 +28,7 @@ export class SignUpComponent{
 
         this.authService.attemptSignUp(this.model).add(() => {
             if(!this.authService.lastError) {
-                this.router.navigate(['/Welcome']);
+                this.router.navigate(['/Collection/Home']);
             }
 
             this.loading = false;
@@ -41,7 +41,7 @@ export class SignUpComponent{
 
         this.authService.attemptSignUp(this.model).add(() => {
             if(!this.authService.lastError) {
-                this.router.navigate(['/Welcome']);
+                this.router.navigate(['/Collection/Home']);
             }
 
             this.loading = false;
