@@ -26,8 +26,17 @@ export class CurrentProfileService
     }
 }
 
+export class ProfileWelcomeInfo
+{
+    nickname: string;
+    firstname: string;
+    lastname: string;
+    middlename: string;
+}
+
 export interface Profile
 {
+    id: number;
     name: string;
     email: string;
     avatar: {
