@@ -3,6 +3,9 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {CurrentProfileRestService} from "../../service/CurrentProfileRestService";
 import {AvatarCropper} from "./AvatarCropper/index";
 import {CORE_DIRECTIVES} from "angular2/common";
+import {AccountWelcomeService} from "./service";
+import {AuthService} from "../../../auth/service/AuthService";
+import {ProfileWelcomeInfo} from "../../service/CurrentProfileService";
 
 declare var Cropper;
 
@@ -12,7 +15,9 @@ declare var Cropper;
         require('./style.shadow.scss'),
     ],
     'providers': [
-        CurrentProfileRestService
+        CurrentProfileRestService,
+        AccountWelcomeService,
+        AuthService
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -24,17 +29,15 @@ declare var Cropper;
 @Injectable()
 export class AccountWelcome {
     constructor (private currentProfileRestService: CurrentProfileRestService,
-                 public router: Router
+                 public router: Router,
+                 public accountWelcomeService: AccountWelcomeService,
+                 public authService: AuthService
     ){}
 
-    isAvatarFormVisibleFlag: boolean = false;
 
-    avatar: any;
-    profileId: number;
-    nickname: string;
-    firstname: string;
-    lastname: string;
-    middlename: string;
+    profileInfo: ProfileWelcomeInfo = new ProfileWelcomeInfo();
+
+    preInfo: boolean = false;
 
     chooseType: boolean = true;
     chooseFL: boolean = false;
@@ -46,12 +49,11 @@ export class AccountWelcome {
     PreInfo: boolean = false;
 
     showAvatarCropper() {
-        console.log('show Avatar Form');
-        this.isAvatarFormVisibleFlag = true;
+        this.accountWelcomeService.isAvatarFormVisibleFlag = true;
     }
 
     isAvatarFormVisible() {
-        return this.isAvatarFormVisibleFlag;
+        return this.accountWelcomeService.isAvatarFormVisibleFlag;
     }
 
     reset(){
@@ -59,14 +61,8 @@ export class AccountWelcome {
         this.router.parent.navigate(['Welcome']);
     }
 
-    sumbit(){
-        let xS;
-        let yS;
-        let xE;
-        let yE;
-
-        if(this.chooseFL){
-        }
+    ngSubmit(){
+        this.router.navigate(['Profile']);
     }
-
 }
+

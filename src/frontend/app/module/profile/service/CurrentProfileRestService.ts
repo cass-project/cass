@@ -11,8 +11,10 @@ import {RequestOptions} from "angular2/http";
 export class CurrentProfileRestService{
     constructor(public http:Http) {}
 
-    getProfileInfo(login, pass){
-        return this.http.post('backend/api/auth/sign-in/', JSON.stringify({email: login, password: pass}));
+    getProfileInfo(profileId){
+        let url = `/backend/api/protected/profile/${profileId}/get`;
+
+        return this.http.post(url, JSON.stringify({}));
     }
 
     greetingsAsFL(profileId ,firsname, lastname){

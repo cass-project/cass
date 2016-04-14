@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router'
 import {AuthService} from '../../../auth/service/AuthService';
+import {Profile} from "../../../profile/service/CurrentProfileService";
 
 @Component({
     selector: 'cass-main-menu',
@@ -14,6 +15,9 @@ import {AuthService} from '../../../auth/service/AuthService';
 })
 export class MainMenu
 {
+
+    profileInfo : Profile;
+
     Name: String = "Eric Evance";
     constructor(private authService: AuthService) {}
 

@@ -30,6 +30,7 @@ export class SignInComponent{
 
         this.authService.attemptSignIn(this.model).add(() => {
             this.loading = false;
+            this.router.navigate(['Profile']);
 
             if(!this.authService.lastError) {
                 this.router.navigate(['/Collection/Home']);
