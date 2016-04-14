@@ -204,7 +204,7 @@ class Post
 		return $this;
 	}
 
-	public function toJSON()
+	public function toJSON():array
 	{
 
 		$attachments = $this->attachments->map(function(Attachment $attachment) {

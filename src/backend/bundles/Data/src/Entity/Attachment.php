@@ -88,6 +88,9 @@ class Attachment
 		return $this;
 	}
 
+	/**
+	 * @return Post
+	 */
 	public function getPost()
 	{
 		return $this->post;
@@ -138,16 +141,12 @@ class Attachment
 		return $this;
 	}
 
-	/**
-	 * @return mixed
-	 */
+
 	public function getId(){
 		return $this->id;
 	}
 
-	/**
-	 * @param mixed $id
-	 */
+
 	public function setId($id){
 		$this->id = $id;
 	}
@@ -155,10 +154,9 @@ class Attachment
 	public function toJSON()
 	{
 		return [
-			'id'      => $this->getId(),
-			'type'    => $this->getType(),
-			'post_id' => $this->getPost()->getId(),
-			'content' => $this->getContent(),
+			'id'      => $this->id,
+			'type'    => $this->type,
+			'content' => $this->content,
 			'created' => $this->getCreated()->format("Y-m-d H:i:s"),
 			'updated' => $this->getUpdated()->format("Y-m-d H:i:s"),
 		];

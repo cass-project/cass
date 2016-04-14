@@ -25,18 +25,26 @@ class CreateAttachmentCommand extends Command
 			return $attachment->toJSON();
 		} else	{
 
+
+			$accId = $this->getCurrentAccountService()->getCurrentAccount()->getId();
+
 			$post = $this->getPostService()->create(
 				(new PutPostRequest($request))->getParameters()
+					->unpublish()
+					->setAccountId($accId)
 			);
 
 			$postAttachmentParam = (new PutPostAttachmentRequest($request))
 				->getParameters();
-			$postAttachmentParam->setContent(new Param(['content'=> $json_r], 'content'));
+			$content = $this->getPostService()->getLinkOptions($postAttachmentParam->getUrl()->value());
 
+			$postAttachmentParam->setContent(new Param(['content'=> json_encode($content)], 'content'));
 			$attachment = $this->getAttachmentService()->create(
 				$postAttachmentParam
 			);
 			$post->addAttachment($attachment);
+
+			$post = $this->getPostService()->save($post);
 			return $this->getPostService()->save($post)->toJSON();
 		}
 

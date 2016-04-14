@@ -27,7 +27,7 @@ class PostMiddleware implements MiddlewareInterface
 
 		$command = Command::factory($request);
 		$command->setPostService($this->postSevice);
-		$command->setCurrentProfileService($this->currentAccountService);
+		$command->setCurrentAccountService($this->currentAccountService);
 
 		$responseBuilder
 			->setStatusSuccess()

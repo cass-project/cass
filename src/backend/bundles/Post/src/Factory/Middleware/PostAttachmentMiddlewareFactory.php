@@ -2,6 +2,7 @@
 namespace Post\Factory\Middleware;
 
 
+use Auth\Service\CurrentAccountService;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Post\Middleware\AttachmentMiddleware;
@@ -17,8 +18,9 @@ class PostAttachmentMiddlewareFactory implements FactoryInterface
 	{
 		$postService = $container->get(PostService::class);
 		$attachmentService = $container->get(AttachmentService::class);
+		$currentAccountService = $container->get(CurrentAccountService::class);
 
-		return new AttachmentMiddleware($postService, $attachmentService);
+		return new AttachmentMiddleware($postService, $attachmentService, $currentAccountService);
 	}
 
 }

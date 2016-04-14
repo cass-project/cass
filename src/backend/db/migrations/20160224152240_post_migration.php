@@ -31,8 +31,8 @@ class PostMigration extends AbstractMigration
              ->addColumn('account_id', 'integer', [
                'null' => true
              ])
-             ->addColumn('title', 'string')
-             ->addColumn('description', 'text')
+             ->addColumn('title', 'string',['null' => true])
+             ->addColumn('description', 'text',['null' => true])
              ->addColumn('created', 'datetime',['null' => true])
              ->addColumn('updated', 'datetime',['null' => true])
              ->addColumn('is_published', 'boolean',['default'=> 0])

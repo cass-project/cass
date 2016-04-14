@@ -14,7 +14,7 @@ class PutPostRequest extends SchemaParams
 	{
 		$data = $this->getData();
 
-		$title = new Param($data, 'title', true);
+		$title = new Param($data, 'title');
 		$description = new Param($data, 'description');
 
 		return new CreatePostParameters($title, $description);
