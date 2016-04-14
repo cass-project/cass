@@ -1,0 +1,16 @@
+"/backend/api/protected/email-verification/request/{newEmail}":
+  get:
+    tags:
+      - email_verification
+    description:
+      Отправить запрос на подтверждение (привязку) email'а к аккаунту
+    parameters:
+      - name: newEmail
+        in: path
+        required: true
+        type: string
+        description:
+          E-mail
+    responses:
+      '200':
+        $ref: '#/responses/success'

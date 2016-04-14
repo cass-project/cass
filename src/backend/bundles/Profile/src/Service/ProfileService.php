@@ -127,6 +127,18 @@ class ProfileService
         $this->validateCropPoints($image = ImageWorkshop::initFromPath($tmpFile), $startX, $startY, $endX, $endY);
 
         $image->crop(ImageWorkshopLayer::UNIT_PIXEL, $endX - $startX, $endY - $startY, $startX, $startY);
+
+        $currentImageWidth = $image->getWidth();
+        $currentImageHeight = $image->getWidth();
+
+        if($currentImageWidth> ProfileImage::MIN_WIDTH) {
+            $scale = ProfileImage::MAX_WIDTH / $currentImageWidth;
+            $newWidth = $currentImageWidth * $scale;
+            $newHeight = $currentImageHeight * $scale;
+
+            $image->resize(ImageWorkshopLayer::UNIT_PIXEL, $newWidth, $newHeight, false);
+        }
+
         $image->save($this->profileStorageDir, $imageFileName = sprintf('%d.png', $profile->getId()), false, 'ffffff');
 
         $storagePath = $this->profileStorageDir.'/'.$imageFileName;
@@ -154,14 +166,6 @@ class ProfileService
 
         if ($resultHeight < ProfileImage::MIN_HEIGHT) {
             throw new ImageTooSmallException(sprintf('Image height should me more than %s pixels', ProfileImage::MIN_HEIGHT));
-        }
-
-        if($resultWidth > ProfileImage::MAX_WIDTH) {
-            throw new ImageTooBigException(sprintf('Image width should me less than %s pixels', ProfileImage::MAX_WIDTH));
-        }
-
-        if($resultHeight > ProfileImage::MAX_HEIGHT) {
-            throw new ImageTooBigException(sprintf('Image height should me less than %s pixels', ProfileImage::MAX_HEIGHT));
         }
 
         if($resultWidth !== $resultHeight) {
