@@ -2,6 +2,7 @@ declare var Cropper;
 
 import {Component, ViewChild, ElementRef, Injectable} from "angular2/core";
 import {CurrentProfileRestService} from "../../../service/CurrentProfileRestService";
+import {AccountWelcomeService} from "../service";
 
 require('./style.head.scss');
 
@@ -17,7 +18,8 @@ require('./style.head.scss');
 @Injectable()
 export class AvatarCropper {
     constructor(private fileReader: FileReader,
-                public currentProfileRestService: CurrentProfileRestService
+                public currentProfileRestService: CurrentProfileRestService,
+                public accountWelcomeService: AccountWelcomeService
     ){}
 
     @ViewChild('cropImage') cropImage:ElementRef;
@@ -62,6 +64,7 @@ export class AvatarCropper {
     }
 
     private close(){
+        this.accountWelcomeService.isAvatarFormVisibleFlag = false;
         this.destroyCropper();
     }
 
@@ -84,10 +87,12 @@ export class AvatarCropper {
                 y: coord.y + coord.height
             }
         });
+        /* ToDo: Добавить обработчик успеха заливания аватарки, ибо тут у нас не http request а XML request дрочка */
+        this.accountWelcomeService.isAvatarFormVisibleFlag = false;
     }
 
     private getData() {
-        console.log(this.cropper.getData(true));
+        console.log(this.cropper.getData(true), this.accountWelcomeService.isAvatarFormVisibleFlag);
         return this.cropper.getData(true);
     }
 }
