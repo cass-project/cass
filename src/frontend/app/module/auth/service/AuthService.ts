@@ -83,6 +83,7 @@ export class AuthService
 class AuthToken
 {
     public apiKey: string;
+    public profile: Profile;
 
     setToken(apiKey) {
         localStorage.setItem('api_key', apiKey);
