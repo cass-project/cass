@@ -7,7 +7,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/trusty64"
   config.vm.provision :shell, path: "./support-files/provision.sh"
 
   config.vm.synced_folder "./src", "/vagrant", owner: "www-data", group: "www-data"

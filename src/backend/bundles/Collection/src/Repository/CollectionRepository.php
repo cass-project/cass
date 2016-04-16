@@ -8,7 +8,7 @@ use Collection\Service\Parameters\CollectionService\CollectionMoveParameters;
 use Collection\Service\Parameters\CollectionService\CollectionParameters;
 use Collection\Service\Parameters\CollectionService\CollectionUpdateParameters;
 use Common\Tools\SerialManager\SerialManager;
-use Data\Exception\DataEntityNotFoundException;
+use Common\Exception\DataEntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Profile\Entity\Profile;
 

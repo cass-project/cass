@@ -1,6 +1,4 @@
 <?php
-namespace Collection;
-
 use Collection\Factory\Middleware\CollectionMiddlewareFactory;
 use Collection\Factory\Repository\CollectionRepositoryFactory;
 use Collection\Factory\Service\CollectionServiceFactory;

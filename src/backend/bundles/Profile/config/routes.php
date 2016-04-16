@@ -1,6 +1,4 @@
 <?php
-namespace Profile;
-
 use Profile\Middleware\ProfileMiddleware;
 use Zend\Expressive\Application;
 

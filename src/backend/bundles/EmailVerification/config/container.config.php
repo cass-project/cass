@@ -1,6 +1,4 @@
 <?php
-namespace EmailVerification;
-
 use EmailVerification\Factory\Middleware\EmailVerificationMiddlewareFactory;
 use EmailVerification\Factory\Repository\EmailVerificationRepositoryFactory;
 use EmailVerification\Factory\Service\EmailVerificationServiceFactory;

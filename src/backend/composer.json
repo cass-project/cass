@@ -2,16 +2,13 @@
   "autoload": {
     "psr-4": {
       "Common\\": "bundles/Common/src",
+      "Swagger\\": "bundles/Swagger/src",
       "Auth\\": "bundles/Auth/src",
-      "Data\\": "bundles/Data/src",
-      "ThemeEditor\\": "bundles/ThemeEditor/src",
-      "Development\\": "bundles/Development/src",
-      "Host\\": "bundles/Host/src",
-      "Post\\": "bundles/Post/src",
-      "Feed\\": "bundles/Feed/src",
+      "Theme\\": "bundles/Theme/src",
       "Profile\\": "bundles/Profile/src",
       "Collection\\": "bundles/Collection/src",
       "Account\\": "bundles/Account/src",
+      "Frontline\\": "bundles/Frontline/src",
       "EmailVerification\\": "bundles/EmailVerification/src"
     }
   },

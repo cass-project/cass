@@ -32,7 +32,7 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-          url = '/backend/api/debug/api-docs/api-docs.json';
+          url = '/backend/api/api-docs.json';
       }
       window.swaggerUi = new SwaggerUi({
         url: url,
@@ -89,6 +89,16 @@
       -khtml-border-radius: 4px;
       border-radius: 4px;
     }
+
+    #swagger-info {
+      padding: 5px;
+      font-size: 12px;
+      color: #999;
+    }
+
+    #swagger-info a, #swagger-info a:visited {
+      color: #999;
+    }
   </style>
 </head>
 
@@ -105,12 +115,12 @@
   </div>
 </div>
 <div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div>
-<div id="swagger_info" class="swagger-ui-wrap">
+<div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+<div id="swagger-info" class="swagger-ui-wrap">
   <ul>
-    <li>JSON: <a target="_blank" href="/backend/api/debug/api-docs/api-docs.json">/backend/api/debug/api-docs/api-docs.json</a></li>
+    <li>[ JSON: <a target="_blank" href="/backend/api/api-docs.json">/backend/api/debug/api-docs/api-docs.json ]</a></li>
   </ul>
   <br/>
 </div>
-<div id="swagger-ui-container" class="swagger-ui-wrap"></div>
 </body>
 </html>

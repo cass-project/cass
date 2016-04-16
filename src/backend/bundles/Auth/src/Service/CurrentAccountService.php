@@ -3,7 +3,7 @@ namespace Auth\Service;
 
 use Auth\Middleware\AuthStrategy\Strategy;
 use Account\Entity\Account;
-use Data\Exception\Auth\AccountNotFoundException;
+use Account\Exception\AccountNotFoundException;
 use Account\Repository\AccountRepository;
 use Profile\Entity\Profile;
 

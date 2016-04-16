@@ -1,0 +1,17 @@
+"/frontline":
+  get:
+    tags:
+      - frontline
+    description:
+      Возвращает все записанные с помощью FrontlineService в сессию данные
+    responses:
+      200:
+        schema:
+          type: object
+          properties:
+            account:
+              $ref: "#/definitions/Account_Entity_Account"
+            profiles:
+              type: array
+              items:
+                $ref: "#/definitions/Profile_Entity_Profile"

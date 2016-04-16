@@ -3,7 +3,7 @@ namespace Account\Repository;
 
 use Account\Entity\Account;
 use Account\Entity\OAuthAccount;
-use Data\Exception\Auth\AccountNotFoundException;
+use Account\Exception\AccountNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 use Profile\Entity\Profile;

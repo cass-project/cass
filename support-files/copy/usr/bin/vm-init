@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-## UTF-8 Locale Issue
-sudo locale-gen UTF-8
+# sudo apt-get install language-pack-en language-pack-en-base -y
+# sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 
 # ###############
 # APT-GET SECTION
@@ -24,7 +24,7 @@ sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password passwor
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 1234'
 sudo apt-get install mysql-client mysql-server -y
 
-mysql  -uroot -p"1234" -e "CREATE DATABASE cass_development"
+mysql -uroot -p"1234" -e "CREATE DATABASE cass_development"
 
 # #####
 # MONGO

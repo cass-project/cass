@@ -1,6 +1,4 @@
 <?php
-namespace Post;
-
 use Profile\Factory\Middleware\ProfileMiddlewareFactory;
 use Profile\Factory\Repository\ProfileGreetingsRepositoryFactory;
 use Profile\Factory\Repository\ProfileImageRepositoryFactory;

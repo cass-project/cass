@@ -12,3 +12,9 @@ sudo sed -i 's/\r$//' /usr/bin/vm-project-update
 sudo sed -i 's/\r$//' /usr/bin/vm-server-update
 sudo sed -i 's/\r$//' /usr/bin/vm-db-test
 sudo sed -i 's/\r$//' /usr/bin/vm-db-recreate
+
+sudo locale-gen UTF-8
+echo "LC_ALL=en_US.UTF-8" > /etc/envinroment
+echo "LANG=en_US.UTF-8" > /etc/envinroment
+
+sudo usermod -a -G www-data vagrant

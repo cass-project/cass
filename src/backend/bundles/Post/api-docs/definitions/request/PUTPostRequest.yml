@@ -1,9 +1,0 @@
-PUT_Post_Request:
-    type: object
-    properties:
-      title:
-        type: string
-        description: Название поста
-      description:
-        type: string
-        description: описание поста

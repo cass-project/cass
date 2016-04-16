@@ -1,6 +1,4 @@
 <?php
-namespace Auth;
-
 use Auth\Factory\Middleware\ProtectedMiddlewareFactory;
 use Auth\Factory\Service\CurrentAccountServiceFactory;
 use Auth\Middleware\AuthMiddleware;

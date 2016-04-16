@@ -1,6 +1,4 @@
 <?php
-namespace Collection;
-
 use Collection\Middleware\CollectionMiddleware;
 use Zend\Expressive\Application;
 

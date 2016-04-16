@@ -1,6 +1,4 @@
 <?php
-namespace Auth;
-
 use Account\Factory\Repository\AccountRepositoryFactory;
 use Account\Factory\Repository\OAuthAccountRepositoryFactory;
 use Account\Factory\Service\AccountServiceFactory;

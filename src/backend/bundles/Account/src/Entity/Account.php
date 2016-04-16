@@ -39,18 +39,6 @@ class Account
     private $password;
 
     /**
-     * @Column(type="string")
-     * @var string
-     */
-    private $token;
-
-    /**
-     * @Column(type="string")
-     * @var string
-     */
-    private $tokenExpired;
-
-    /**
      * @Column(type="boolean", name="is_disabled")
      * @var bool
      */
@@ -113,28 +101,6 @@ class Account
     public function getAPIKey()
     {
         return $this->password;
-    }
-
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    public function setToken($token=null)
-    {
-        $this->token = $token===null?bin2hex(random_bytes(30)):$token;
-        return $this;
-    }
-
-    public function getTokenExpired()
-    {
-        return $this->tokenExpired;
-    }
-
-    public function setTokenExpired(int $tokenExpired)
-    {
-        $this->tokenExpired = $tokenExpired;
-        return $this;
     }
 
     public function disableAccount(string $reason)

@@ -3,7 +3,7 @@ namespace Auth\Middleware\Command;
 
 use Common\REST\GenericRESTResponseBuilder;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
-use Data\Exception\Auth\AccountNotFoundException;
+use Account\Exception\AccountNotFoundException;
 use Profile\Entity\Profile;
 use Psr\Http\Message\ServerRequestInterface;
 

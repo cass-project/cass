@@ -1,6 +1,4 @@
 <?php
-namespace EmailVerification;
-
 use EmailVerification\Middleware\EmailVerificationMiddleware;
 use Zend\Expressive\Application;
 

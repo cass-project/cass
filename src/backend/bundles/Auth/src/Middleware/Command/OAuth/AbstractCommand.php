@@ -6,7 +6,7 @@ use Auth\Middleware\Command\Command;
 use Auth\Service\AuthService;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Auth\Service\AuthService\OAuth2\RegistrationRequest;
-use Data\Exception\Auth\AccountNotFoundException;
+use Account\Exception\AccountNotFoundException;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ServerRequestInterface;

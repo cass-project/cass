@@ -1,0 +1,11 @@
+Account_Entity_Account:
+  type: object
+  required:
+    - id
+  properties:
+    id:
+      type: number
+      description: ID аккаунт
+    email:
+      type: string
+      description: E-mail

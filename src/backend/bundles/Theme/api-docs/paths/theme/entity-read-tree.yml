@@ -1,0 +1,20 @@
+'/protected/host-admin/theme-editor/read/entities-tree/':
+  get:
+    tags:
+      - theme
+    description: |
+      Список тематик в виде дерева
+    responses:
+      '400':
+          $ref: '#/responses/error'
+      '200':
+        description: Список тематик
+        schema:
+          type: object
+          required:
+            - success
+            - tree
+          properties:
+            success:
+              type: boolean
+              description: "= true"

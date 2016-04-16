@@ -2,7 +2,7 @@
 namespace Collection\Entity;
 
 use Common\Tools\SerialManager\SerialEntity;
-use Data\Entity\Theme;
+use Theme\Entity\Theme;
 use Doctrine\ORM\PersistentCollection;
 use Profile\Entity\Profile;
 
@@ -29,7 +29,7 @@ class Collection implements SerialEntity
     /**
      * @ManyToOne(targetEntity="Collection\Entity\Collection", inversedBy="children")
      * @JoinColumn(name="parent_id", referencedColumnName="id")
-     * @var Theme|null
+     * @var \Theme\Entity\Theme|null
      */
     private $parent = null;
 
@@ -41,9 +41,9 @@ class Collection implements SerialEntity
     private $profile;
 
     /**
-     * @ManyToOne(targetEntity="Data\Entity\Theme")
+     * @ManyToOne(targetEntity="Theme\Entity\Theme")
      * @JoinColumn(name="theme_id", referencedColumnName="id")
-     * @var Theme
+     * @var \Theme\Entity\Theme
      */
     private $theme;
 
@@ -126,7 +126,7 @@ class Collection implements SerialEntity
         return $this;
     }
 
-    public function getTheme(): Theme
+    public function getTheme(): \Theme\Entity\Theme
     {
         return $this->theme;
     }

@@ -3,7 +3,7 @@ namespace Account\Repository;
 
 use Auth\Service\AuthService\OAuth2\RegistrationRequest;
 use Account\Entity\OAuthAccount;
-use Data\Exception\Auth\AccountNotFoundException;
+use Account\Exception\AccountNotFoundException;
 use Doctrine\ORM\EntityRepository;
 
 class OAuthAccountRepository extends EntityRepository

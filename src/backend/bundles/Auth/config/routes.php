@@ -1,6 +1,4 @@
 <?php
-namespace Common;
-
 use Auth\Middleware\AuthMiddleware;
 use Zend\Expressive\Application;
 

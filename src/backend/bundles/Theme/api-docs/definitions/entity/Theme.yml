@@ -1,0 +1,20 @@
+Data_Entity_Theme:
+  type: object
+  required:
+    - id
+    - parent_id
+    - position
+    - title
+  properties:
+    id:
+      type: number
+      description: ID
+    parent_id:
+      type: number
+      description: ID родительской тематики
+    position:
+      type: number
+      description: Позиция в текущем уровне дерева тематик
+    title:
+      type: string
+      description: Название

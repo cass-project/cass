@@ -6,7 +6,7 @@ use Common\Exception\CommandNotFoundException;
 use Common\Exception\PermissionsDeniedException;
 use Common\REST\GenericRESTResponseBuilder;
 use Common\Tools\RequestParams\InvalidJSONSchema;
-use Data\Exception\DataEntityNotFoundException;
+use Common\Exception\DataEntityNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
