@@ -10,7 +10,7 @@ class ReadAppConfigScript
     /** @var string */
     private $backendPath;
 
-    public function __construct(\string $backendPath)
+    public function __construct(string $backendPath)
     {
         $this->backendPath = $backendPath;
     }

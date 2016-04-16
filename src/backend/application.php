@@ -34,14 +34,13 @@ class LBApplicationBootstrap
         $emitter = new \Zend\Expressive\Emitter\EmitterStack();
         $emitter->push(new SapiEmitter());
 
-        $app = new Application($router, $this->container, $errorHandler, $emitter);
-
-        $this->app = $app;
-
         $this->initConstants();
         $this->initBundlesService();
         $this->initAppConfig();
         $this->initDI();
+
+        $this->app = new Application($router, $this->container, $errorHandler, $emitter);
+
         $this->initProtectedRoutes();
         $this->initRoutes();
         $this->initSchemaRESTRequest();
@@ -114,14 +113,15 @@ class LBApplicationBootstrap
 
         $containerBuilder->addDefinitions($this->config->get('php-di'));
         $containerBuilder->addDefinitions([
-            BundleService::class => $this->bundles
+            BundleService::class => $this->bundles,
+            SharedConfigService::class => $this->config,
         ]);
         $containerBuilder->addDefinitions([
-            new DI\Definition\ValueDefinition('constants.backend', $this->paths->backend()),
-            new DI\Definition\ValueDefinition('constants.bundles', $this->paths->bundles()),
-            new DI\Definition\ValueDefinition('constants.frontend', $this->paths->frontend()),
-            new DI\Definition\ValueDefinition('constants.prefix', $this->paths->prefix()),
-            new DI\Definition\ValueDefinition('constants.storage', $this->paths->storage()),
+            'constants.backend' => $this->paths->backend(),
+            'constants.bundles' => $this->paths->bundles(),
+            'constants.frontend' => $this->paths->frontend(),
+            'constants.prefix' => $this->paths->prefix(),
+            'constants.storage' => $this->paths->storage(),
         ]);
 
         $this->container = $containerBuilder->build();
@@ -167,23 +167,23 @@ class LBAppConstants
         $this->storage = $storage;
     }
 
-    public function prefix() {
+    public function prefix(): string {
         return $this->prefix;
     }
 
-    public function backend() {
+    public function backend(): string {
         return $this->backend;
     }
 
-    public function bundles() {
+    public function bundles(): string {
         return $this->bundles;
     }
 
-    public function frontend() {
+    public function frontend(): string {
         return $this->frontend;
     }
 
-    public function storage() {
+    public function storage(): string {
         return $this->storage;
     }
 }

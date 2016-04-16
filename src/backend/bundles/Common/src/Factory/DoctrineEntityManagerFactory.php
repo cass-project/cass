@@ -9,7 +9,7 @@ use Interop\Container\ContainerInterface;
 
 class DoctrineEntityManagerFactory
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): EntityManager
+    public function __invoke(ContainerInterface $container)
     {
         $bundleService =  $container->get(BundleService::class); /** @var BundleService $bundleService */
         $entitySourceDirs = [];
@@ -24,7 +24,6 @@ class DoctrineEntityManagerFactory
 
         $sharedConfigService = $container->get(SharedConfigService::class); /** @var SharedConfigService $sharedConfigService */
         $config = $sharedConfigService->get('doctrine2');
-
         $doctrineConfig = Setup::createAnnotationMetadataConfiguration($entitySourceDirs, true);
 
         return EntityManager::create($config['connection_options'], $doctrineConfig);

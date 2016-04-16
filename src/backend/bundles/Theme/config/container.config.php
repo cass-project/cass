@@ -1,5 +1,6 @@
 <?php
-use Doctrine\ORM\EntityManager;
+use Common\Factory\DoctrineRepositoryFactory;
+use Theme\Entity\Theme;
 use Theme\Repository\ThemeRepository;
 
 use function DI\object;
@@ -8,6 +9,6 @@ use function DI\get;
 
 return [
     'php-di' => [
-        ThemeRepository::class => factory([EntityManager::class, 'getRepository'])
+        ThemeRepository::class => factory(new DoctrineRepositoryFactory(Theme::class))
     ]
 ];
