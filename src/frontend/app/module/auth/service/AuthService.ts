@@ -45,7 +45,7 @@ export class AuthService
                         name: "Foo Bar",
                         email: "demo@gmail.com",
                         avatar: {
-                            publicUrl: "/public/assets/profile-default.png",
+                            publicUrl: response.profiles[0].image.public_path,
                             size: {
                                 width: 200,
                                 height: 200
@@ -54,6 +54,7 @@ export class AuthService
                     });
 
                     Cookie.setCookie('api_key', response.api_key, remember ? 14 : undefined, '/');
+                    this.profile.get();
                 }else{
                     this.signedIn = false;
                     this.profile.empty();

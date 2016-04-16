@@ -17,7 +17,7 @@ import {CurrentProfileService} from "../../../profile/service/CurrentProfileServ
 export class MainMenu
 {
 
-    Name: String = "Eric Evance";
+
     constructor(private authService: AuthService,
                 public currentProfileService: CurrentProfileService
     ) {}

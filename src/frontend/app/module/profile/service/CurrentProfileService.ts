@@ -1,11 +1,11 @@
 import {Injectable} from 'angular2/core';
 
+
 @Injectable()
 export class CurrentProfileService
 {
-    private profile: Profile;
+    public profile: Profile;
     public currentAvatar: string;
-
 
     isAvailable(): boolean {
         return !!this.profile;
@@ -23,7 +23,8 @@ export class CurrentProfileService
         if(!this.isAvailable()) {
             throw new Error('No profile available');
         }
-
+        this.currentAvatar = this.profile.avatar.publicUrl;
+        console.log(this.currentAvatar);
         return this.profile;
     }
 }

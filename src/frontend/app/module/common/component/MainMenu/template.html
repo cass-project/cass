@@ -12,7 +12,7 @@
                             <p>Collect and Organize your content</p>
                         </div>
                         <div class="description" *ngIf="authService.signedIn">
-                            <h1>{{Name}}</h1>
+                            <h1>{{currentProfileService.currentName}}</h1>
                             <p>Your Profile</p>
                         </div>
                     </a>
