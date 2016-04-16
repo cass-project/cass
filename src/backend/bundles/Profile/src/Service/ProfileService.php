@@ -142,7 +142,7 @@ class ProfileService
         $image->save($this->profileStorageDir, $imageFileName = sprintf('%d.png', $profile->getId()), false, 'ffffff');
 
         $storagePath = $this->profileStorageDir.'/'.$imageFileName;
-        $publicPath = '/public/storage/'.$imageFileName;
+        $publicPath = '/public/storage/profile/profile-image/'.$imageFileName;
 
         return $this->profileRepository->updateImage($profile->getId(), $storagePath, $publicPath);
     }
