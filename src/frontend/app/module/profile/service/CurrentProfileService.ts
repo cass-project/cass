@@ -4,6 +4,8 @@ import {Injectable} from 'angular2/core';
 export class CurrentProfileService
 {
     private profile: Profile;
+    public currentAvatar: string;
+
 
     isAvailable(): boolean {
         return !!this.profile;
