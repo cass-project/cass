@@ -6,6 +6,7 @@ import {CORE_DIRECTIVES} from "angular2/common";
 import {AccountWelcomeService} from "./service";
 import {AuthService} from "../../../auth/service/AuthService";
 import {ProfileWelcomeInfo} from "../../service/CurrentProfileService";
+import {CurrentProfileService} from "../../service/CurrentProfileService";
 
 declare var Cropper;
 
@@ -31,7 +32,8 @@ export class AccountWelcome {
     constructor (private currentProfileRestService: CurrentProfileRestService,
                  public router: Router,
                  public accountWelcomeService: AccountWelcomeService,
-                 public authService: AuthService
+                 public authService: AuthService,
+                 public currentProfileService: CurrentProfileService
     ){}
 
 

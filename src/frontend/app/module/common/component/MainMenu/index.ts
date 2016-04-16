@@ -2,6 +2,7 @@ import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router'
 import {AuthService} from '../../../auth/service/AuthService';
 import {Profile} from "../../../profile/service/CurrentProfileService";
+import {CurrentProfileService} from "../../../profile/service/CurrentProfileService";
 
 @Component({
     selector: 'cass-main-menu',
@@ -16,10 +17,10 @@ import {Profile} from "../../../profile/service/CurrentProfileService";
 export class MainMenu
 {
 
-    profileInfo : Profile;
-
     Name: String = "Eric Evance";
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService,
+                public currentProfileService: CurrentProfileService
+    ) {}
 
     navElementClicked: boolean = false;
 
