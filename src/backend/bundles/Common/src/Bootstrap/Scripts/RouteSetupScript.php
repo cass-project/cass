@@ -1,38 +1,13 @@
 <?php
 namespace Common\Bootstrap\Scripts;
 
-use Common\Bootstrap\Bundle\BundleService;
 use Zend\Expressive\Application;
-use Zend\ServiceManager\ServiceManager;
 
 class RouteSetupScript
 {
-    /**
-     * @var Application
-     */
-    private $app;
-
-    /**
-     * @var ServiceManager
-     */
-    private $zendServiceManager;
-
-    public function __construct(Application $app, ServiceManager $zendServiceManager)
+    public function __invoke(Application $app, array $configDirs, string $prefix)
     {
-        $this->app = $app;
-        $this->zendServiceManager = $zendServiceManager;
-    }
-
-    public function run()
-    {
-        $app = $this->app;
-        $serviceManager = $this->zendServiceManager;
-
-        /** @var BundleService $bundlesService */
-        $bundlesService = $serviceManager->get(BundleService::class);
-        $prefix = $serviceManager->get('paths')['prefix'];
-
-        foreach($bundlesService->getConfigDirs() as $configDir) {
+        foreach($configDirs as $configDir) {
             $routeConfigFile = sprintf('%s/routes.php', $configDir);
 
             if(file_exists($routeConfigFile)) {
