@@ -1,17 +1,21 @@
 <?php
-use Account\Factory\Repository\AccountRepositoryFactory;
-use Account\Factory\Repository\OAuthAccountRepositoryFactory;
-use Account\Factory\Service\AccountServiceFactory;
 use Account\Repository\AccountRepository;
 use Account\Repository\OAuthAccountRepository;
 use Account\Service\AccountService;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Repository\RepositoryFactory;
+
+use function DI\object;
+use function DI\factory;
+use function DI\get;
 
 return [
-    'zend_service_manager' => [
-        'factories' => [
-            AccountService::class => AccountServiceFactory::class,
-            AccountRepository::class => AccountRepositoryFactory::class,
-            OAuthAccountRepository::class => OAuthAccountRepositoryFactory::class,
-        ]
-    ]
+    'php-di' => [
+        AccountService::class => object()->constructor(
+            get(AccountRepository::class),
+            get(OAuthAccountRepository::class)
+        ),
+        AccountRepository::class => factory([EntityManager::class, 'getRepository']),
+        OAuthAccountRepository::class => factory([RepositoryFactory::class, OAuthAccountRepository::class]),
+    ],
 ];

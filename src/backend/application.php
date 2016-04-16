@@ -111,7 +111,18 @@ class LBApplicationBootstrap
 
     private function initDI() {
         $containerBuilder = new \DI\ContainerBuilder();
+
         $containerBuilder->addDefinitions($this->config->get('php-di'));
+        $containerBuilder->addDefinitions([
+            BundleService::class => $this->bundles
+        ]);
+        $containerBuilder->addDefinitions([
+            new DI\Definition\ValueDefinition('constants.backend', $this->paths->backend()),
+            new DI\Definition\ValueDefinition('constants.bundles', $this->paths->bundles()),
+            new DI\Definition\ValueDefinition('constants.frontend', $this->paths->frontend()),
+            new DI\Definition\ValueDefinition('constants.prefix', $this->paths->prefix()),
+            new DI\Definition\ValueDefinition('constants.storage', $this->paths->storage()),
+        ]);
 
         $this->container = $containerBuilder->build();
     }
