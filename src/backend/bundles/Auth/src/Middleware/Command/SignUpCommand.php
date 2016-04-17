@@ -1,6 +1,7 @@
 <?php
 namespace Auth\Middleware\Command;
 
+use Auth\Formatter\SignInFormatter;
 use Common\REST\GenericRESTResponseBuilder;
 use Auth\Service\AuthService\Exceptions\DuplicateAccountException;
 use Auth\Service\AuthService\Exceptions\MissingReqiuredFieldException;
@@ -16,9 +17,7 @@ class SignUpCommand extends Command
 
             $responseBuilder
                 ->setStatusSuccess()
-                ->setJson([
-                    'api_key' => $account->getAPIKey()
-                ])
+                ->setJson((new SignInFormatter())->format($account))
             ;
         }catch(MissingReqiuredFieldException $e) {
             $responseBuilder

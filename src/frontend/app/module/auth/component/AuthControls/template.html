@@ -1,5 +1,5 @@
 <div>
-  <div *ngIf="!authService.signedIn">
+  <div *ngIf="! authService.isSignedIn()">
     <ul class="nav navbar-nav">
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/Auth/SignUp']">
@@ -15,7 +15,7 @@
       </li>
     </ul>
   </div>
-  <div *ngIf="authService.signedIn">
+  <div *ngIf="authService.isSignedIn()">
     <ul class="nav navbar-nav">
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/Auth/Logout']">

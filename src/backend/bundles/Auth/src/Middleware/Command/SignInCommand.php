@@ -1,6 +1,7 @@
 <?php
 namespace Auth\Middleware\Command;
 
+use Auth\Formatter\SignInFormatter;
 use Common\REST\GenericRESTResponseBuilder;
 use Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Account\Exception\AccountNotFoundException;
@@ -14,14 +15,10 @@ class SignInCommand extends Command
         try {
             $account = $this->getAuthService()->signIn($request);
 
-            $profiles = array_map(function(Profile $profile) {
-                return $profile->toJSON();
-            }, $account->getProfiles()->toArray());
-
-            $responseBuilder->setStatusSuccess()->setJson([
-                "api_key" => $account->getAPIKey(),
-                "profiles" => $profiles
-            ]);
+            $responseBuilder
+                ->setStatusSuccess()
+                ->setJson((new SignInFormatter())->format($account))
+            ;
         }catch(AccountNotFoundException $e) {
             $responseBuilder
                 ->setStatusNotFound()

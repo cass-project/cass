@@ -6,7 +6,6 @@ import {URLSearchParams} from 'angular2/http';
 import {Headers} from "angular2/http";
 import {RequestOptions} from "angular2/http";
 
-
 @Injectable()
 export class CurrentProfileRestService{
     constructor(public http:Http) {}
@@ -38,6 +37,14 @@ export class CurrentProfileRestService{
         xmlRequest.open("POST", url);
         xmlRequest.send(formData);
     }
+}
+
+export class ProfileWelcomeInfo
+{
+    nickname: string;
+    firstname: string;
+    lastname: string;
+    middlename: string;
 }
 
 export interface Crop

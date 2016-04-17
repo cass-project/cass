@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router'
+import {ROUTER_DIRECTIVES, Router} from 'angular2/router'
 import {AuthService} from '../../../auth/service/AuthService';
-import {Profile} from "../../../profile/service/CurrentProfileService";
+import {Profile} from "../../../profile/entity/Profile";
 
 @Component({
     selector: 'cass-main-menu',
@@ -15,15 +15,29 @@ import {Profile} from "../../../profile/service/CurrentProfileService";
 })
 export class MainMenu
 {
+    constructor(private authService: AuthService, private router: Router) {}
 
-    profileInfo : Profile;
+    isSignedIn() {
+        return AuthService.isSignedIn();
+    }
 
-    Name: String = "Eric Evance";
-    constructor(private authService: AuthService) {}
+    getGreetings() {
+        return this.isSignedIn()
+            ? AuthService.getAuthToken().getCurrentProfile().greetings
+            : 'Anonymous'
+        ;
+    }
 
-    navElementClicked: boolean = false;
+    getProfileAvatar() {
+        return this.isSignedIn()
+            ? AuthService.getAuthToken().getCurrentProfile().entity.image.public_path
+            : Profile.AVATAR_DEFAULT;
+    }
 
-    showSignOut() {
-        return this.authService.signedIn;
+
+    signOut() {
+        this.authService.signOut().add(() => {
+            this.router.navigate(['/Auth/Logout']);
+        })
     }
 }

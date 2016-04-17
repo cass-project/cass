@@ -3,7 +3,8 @@ Profile_Entity_Profile:
   required:
     - id
     - account_id
-    - current
+    - is_initialized
+    - is_current
     - greetings
     - image
   properties:

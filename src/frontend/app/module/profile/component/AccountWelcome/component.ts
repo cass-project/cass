@@ -5,7 +5,7 @@ import {AvatarCropper} from "./AvatarCropper/index";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {AccountWelcomeService} from "./service";
 import {AuthService} from "../../../auth/service/AuthService";
-import {ProfileWelcomeInfo} from "../../service/CurrentProfileService";
+import {ProfileWelcomeInfo} from "../../service/CurrentProfileRestService";
 
 declare var Cropper;
 

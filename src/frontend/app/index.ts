@@ -19,14 +19,12 @@ import {Cookie} from 'ng2-cookies';
 
 import {MainMenu} from './module/common/component/MainMenu/index'
 import {AuthService} from './module/auth/service/AuthService';
-import {CurrentProfileService} from './module/profile/service/CurrentProfileService';
 import {AuthComponent} from './module/auth/index';
 import {ProfileComponent} from './module/profile/index';
 import {CatalogComponent} from './module/catalog/index';
 import {CollectionComponent} from "./module/collection/index";
 import {WorkInProgress} from "./module/common/component/WorkInProgress/index";
 import {Nothing} from "./module/common/component/Nothing/index";
-import {ThemeEditorComponent} from "./module/host-admin_TEMP/component/ThemeEditorComponent/component";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -37,8 +35,7 @@ import {ThemeEditorComponent} from "./module/host-admin_TEMP/component/ThemeEdit
         MainMenu
     ],
     providers: [
-        AuthService,
-        CurrentProfileService
+        AuthService
     ]
 })
 @RouteConfig([
@@ -47,11 +44,6 @@ import {ThemeEditorComponent} from "./module/host-admin_TEMP/component/ThemeEdit
         path: '/profile/...',
         name: 'Profile',
         component: ProfileComponent,
-    },
-    {
-        path: '/host-admin/...',
-        name: 'Theme-Editor',
-        component: ThemeEditorComponent
     },
     {
         path: '/auth/...',
@@ -74,9 +66,11 @@ class App {}
 class OAuthRequestOptions extends BaseRequestOptions {
     constructor () {
         super();
+
         this.headers.append('Content-type', 'application/json');
-        if(Cookie.getCookie('api_key')) {
-            this.headers.set('X-Api-Key', Cookie.getCookie('api_key'));
+
+        if(AuthService.isSignedIn()) {
+            this.headers.set('X-Api-Key', AuthService.getAuthToken().apiKey);
         }
     }
 }

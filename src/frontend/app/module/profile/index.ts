@@ -41,14 +41,10 @@ import {AvatarCropper} from "./component/ProfileEdit/AvatarCropper/AvatarCropper
 ])
 export class ProfileComponent
 {
-    constructor(private router: Router,
-                private auth: AuthService
+    constructor(private router: Router
     ) {
-        if(!this.auth.signedIn) {
+        if(! AuthService.isSignedIn()) {
             router.navigate(['Auth']);
         }
-    }
-    openAccountWelcome() {
-        this.router.navigate(['/Profile/Welcome']);
     }
 }

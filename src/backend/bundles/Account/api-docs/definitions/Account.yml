@@ -9,3 +9,17 @@ Account_Entity_Account:
     email:
       type: string
       description: E-mail
+    disabled:
+      type: object
+      description: Информация о блокировке аккаунта
+      schema:
+        required:
+          - is_disabled
+          - reason
+        properties:
+          is_disabled:
+            type: boolean
+            description: Флаг "заблокирован ли аккаунт"
+          reason:
+            type: string
+            description: Причина блокировки. Может содержать значение NULL.

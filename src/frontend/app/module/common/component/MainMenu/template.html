@@ -1,90 +1,55 @@
 <div>
-    <div class="main-menu main-menu-extended">
-        <nav id="cassMainMenu" class="main-menu-nav main-menu-nav-common">
-            <ul class="main-menu-list main-menu-list-common">
-                <li>
-                    <a class="main-menu-item" [routerLink]="['/Profile']" tabindex="1">
-                        <div class="image image-src">
-                            <img src="{{profileInfo.avatar || '/public/assets/profile-default.png'}}" alt="[&#9829;]">
-                        </div>
-                        <div class="description" *ngIf="!authService.signedIn">
-                            <h1>Sign In</h1>
-                            <p>Collect and Organize your content</p>
-                        </div>
-                        <div class="description" *ngIf="authService.signedIn">
-                            <h1>{{Name}}</h1>
-                            <p>Your Profile</p>
-                        </div>
-                    </a>
-                    <a class="main-menu-item" (click)="navElementClicked = !navElementClicked" *ngIf="authService.signedIn" tabindex="2">
-                        <div class="image image-fa">
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="description">
-                            <h1>Collections</h1>
-                            <p>Your's collected content</p>
-                        </div>
-                    </a>
-                    <a class="main-menu-item" (click)="navElementClicked = !navElementClicked" tabindex="3">
-                        <div class="image image-fa">
-                            <i class="fa fa-hashtag"></i>
-                        </div>
-                        <div class="description">
-                            <h1>Public content</h1>
-                            <p>Content collected by others</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <footer>
-                <ul class="main-menu-list main-menu-list-logout" *ngIf="showSignOut()">
-                    <li>
-                        <a [routerLink]="['/Auth/Logout']" class="main-menu-item main-menu-item-no-sub" href="#">
-                            <div class="image image-fa">
-                                <i class="fa fa-sign-out"></i>
-                            </div>
-                            <div class="description">
-                                <h1>Sign Out</h1>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </footer>
-        </nav>
-        <nav class="main-menu-nav main-menu-nav-extended" *ngIf="navElementClicked">
-            <div class="nav-block">
-                <header>
-                    <h1>Actions</h1>
-                </header>
-                <ul class="list">
-                    <li>
-                        <a [routerLink]="['Collection/Add']" class="list-item">
-                            <i class="fa fa-fw fa-plus-square"></i>
-                            <span>Add collection</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['Collection/Manage']" class="list-item">
-                            <i class="fa fa-fw fa-bars"></i>
-                            <span>Manage collections</span>
-                        </a>
-                    </li>
-                </ul>
+  <div class="main-menu main-menu-extended">
+    <nav id="cassMainMenu" class="main-menu-nav main-menu-nav-common">
+      <ul class="main-menu-list main-menu-list-common">
+        <li>
+          <a class="main-menu-item" [routerLink]="['/Profile']" tabindex="1">
+            <div class="image image-src">
+              <img src="{{ getProfileAvatar() }}" alt="[&#9829;]">
             </div>
-            <div class="nav-block">
-                <header>
-                    <h1>Your collections</h1>
-                </header>
-                <ul class="list">
-                    <li><a class="list-item" href="#">Auto</a></li>
-                    <li><a class="list-item" href="#">Games</a></li>
-                    <li><a class="list-item" href="#">Software Development</a></li>
-                    <li><a class="list-item" href="#">MMO</a></li>
-                    <li><a class="list-item" href="#">/vg/</a></li>
-                    <li><a class="list-item" href="#">Auto</a></li>
-                    <li><a class="list-item" href="#">Games</a></li>
-                </ul>
+            <div class="description" *ngIf="! isSignedIn()">
+              <h1>Sign In</h1>
+              <p>Collect and Organize your content</p>
             </div>
-        </nav>
-    </div>
+            <div class="description" *ngIf="isSignedIn()">
+              <h1>{{Name}}</h1>
+              <p>Your Profile</p>
+            </div>
+          </a>
+          <a class="main-menu-item" *ngIf="isSignedIn()" tabindex="2">
+            <div class="image image-fa">
+              <i class="fa fa-star"></i>
+            </div>
+            <div class="description">
+              <h1>Collections</h1>
+              <p>Your's collected content</p>
+            </div>
+          </a>
+          <a class="main-menu-item" tabindex="3">
+            <div class="image image-fa">
+              <i class="fa fa-hashtag"></i>
+            </div>
+            <div class="description">
+              <h1>Public content</h1>
+              <p>Content collected by others</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+      <footer>
+        <ul class="main-menu-list main-menu-list-logout" *ngIf="isSignedIn()">
+          <li>
+            <a (click)="signOut()" class="main-menu-item main-menu-item-no-sub" href="#">
+              <div class="image image-fa">
+                <i class="fa fa-sign-out"></i>
+              </div>
+              <div class="description">
+                <h1>Sign Out</h1>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </footer>
+    </nav>
+  </div>
 </div>

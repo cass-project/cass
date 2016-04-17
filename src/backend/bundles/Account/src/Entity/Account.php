@@ -56,6 +56,18 @@ class Account
      */
     private $isEmailVerified = false;
 
+    public function toJSON()
+    {
+        return [
+            'id' => $this->getId(),
+            'email' => $this->getEmail(),
+            'disabled' => [
+                'is_disabled' => $this->isDisabled(),
+                'reason' => $this->isDisabled() ? $this->getDisabledReason() : null
+            ]
+        ];
+    }
+
     public function getId()
     {
         return $this->id;
