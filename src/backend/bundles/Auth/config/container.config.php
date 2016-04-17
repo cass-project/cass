@@ -1,20 +1,30 @@
 <?php
-use Auth\Factory\Middleware\ProtectedMiddlewareFactory;
-use Auth\Factory\Service\CurrentAccountServiceFactory;
+use Account\Repository\AccountRepository;
+use Account\Service\AccountService;
 use Auth\Middleware\AuthMiddleware;
-use Auth\Factory\Middleware\AuthMiddlewareFactory;
 use Auth\Middleware\ProtectedMiddleware;
 use Auth\Service\AuthService;
-use Auth\Factory\Service\AuthServiceFactory;
 use Auth\Service\CurrentAccountService;
 
+use function DI\object;
+use function DI\factory;
+use function DI\get;
+
 return [
-    'zend_service_manager' => [
-        'factories' => [
-            AuthService::class => AuthServiceFactory::class,
-            AuthMiddleware::class => AuthMiddlewareFactory::class,
-            ProtectedMiddleware::class => ProtectedMiddlewareFactory::class,
-            CurrentAccountService::class => CurrentAccountServiceFactory::class
-        ]
+    'php-di' => [
+        AuthService::class => object()->constructor(
+            get(AccountService::class),
+            get('oauth2_providers')
+        ),
+        AuthMiddleware::class => object()->constructor(
+            get(AuthService::class)
+        ),
+        ProtectedMiddleware::class => object()->constructor(
+            get(CurrentAccountService::class),
+            get('constants.prefix')
+        ),
+        CurrentAccountService::class => object()->constructor(
+            get(AccountRepository::class)
+        )
     ]
 ];

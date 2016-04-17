@@ -1,14 +1,19 @@
 <?php
-use Swagger\Factory\Middleware\APIDocsMiddlewareFactory;
-use Swagger\Factory\Service\APIDocsServiceFactory;
+use Common\Bootstrap\Bundle\BundleService;
 use Swagger\Middleware\APIDocsMiddleware;
 use Swagger\Service\APIDocsService;
 
+use function DI\object;
+use function DI\factory;
+use function DI\get;
+
 return [
-    'zend_service_manager' => [
-        'factories' => [
-            APIDocsMiddleware::class => APIDocsMiddlewareFactory::class,
-            APIDocsService::class => APIDocsServiceFactory::class
-        ]
+    'php-di' => [
+        APIDocsService::class => object()->constructor(
+            get(BundleService::class)
+        ),
+        APIDocsMiddleware::class => object()->constructor(
+            get(APIDocsService::class)
+        )
     ]
 ];

@@ -5,18 +5,15 @@ use Common\Bootstrap\Bundle\BundleService;
 use Common\Service\SharedConfigService;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
-use Doctrine\DBAL\Logging\DebugStack;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
 
-class DoctrineEntityManagerFactory implements FactoryInterface
+class DoctrineEntityManagerFactory
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container)
     {
-        // Create a simple "default" Doctrine ORM configuration for Annotations
-        /** @var BundleService $bundleService */
-        $bundleService =  $container->get(BundleService::class);
+        $bundleService =  $container->get(BundleService::class); /** @var BundleService $bundleService */
         $entitySourceDirs = [];
+
         foreach($bundleService->getBundles() as $bundle ){
             $bundleEntityDir = $bundle->getDir()."/Entity";
 
@@ -25,14 +22,10 @@ class DoctrineEntityManagerFactory implements FactoryInterface
             }
         }
 
-        /** @var SharedConfigService $sharedConfigService */
-        $sharedConfigService = $container->get(SharedConfigService::class);
+        $sharedConfigService = $container->get(SharedConfigService::class); /** @var SharedConfigService $sharedConfigService */
         $config = $sharedConfigService->get('doctrine2');
+        $doctrineConfig = Setup::createAnnotationMetadataConfiguration($entitySourceDirs, true);
 
-        $doctrineConfig = Setup::createAnnotationMetadataConfiguration($entitySourceDirs, $config['isDevMode']);
-        if($config['isDevMode']) {
-            $doctrineConfig->setSQLLogger(new DebugStack());
-        }
         return EntityManager::create($config['connection_options'], $doctrineConfig);
     }
 }

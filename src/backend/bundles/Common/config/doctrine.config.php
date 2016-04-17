@@ -8,7 +8,6 @@ return [
             'user'     => 'root',
             'password' => '1234',
             'charset'  => 'utf8'
-        ],
-        'isDevMode' => true,
+        ]
     ]
 ];

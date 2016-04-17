@@ -1,23 +1,54 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use Common\Bootstrap\Bundle\Bundle;
+use Common\Bootstrap\Bundle\BundleService;
 use Common\Bootstrap\Scripts\RouteSetupScript;
-use Common\Bootstrap\Scripts\SharedConfigServiceSetupScript;
+use Common\Bootstrap\Scripts\ReadAppConfigScript;
 use Common\Service\SchemaService;
 use Common\Service\SharedConfigService;
 use Auth\Middleware\ProtectedMiddleware;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Expressive\Application;
-use Zend\ServiceManager\ServiceManager;
 
 class LBApplicationBootstrap
 {
     /** @var Application */
     private $app;
 
-    /** @var ServiceManager */
-    private $serviceManager;
+    /** @var SharedConfigService */
+    private $config;
+
+    /** @var LBAppConstants */
+    private $paths;
+
+    /** @var BundleService */
+    private $bundles;
+
+    /** @var \DI\Container */
+    private $container;
+
+    public function bootstrap() {
+        $router = new \Zend\Expressive\Router\FastRouteRouter();
+        $errorHandler = new \Common\Bootstrap\ErrorHandler();
+        $emitter = new \Zend\Expressive\Emitter\EmitterStack();
+        $emitter->push(new SapiEmitter());
+
+        $this->initConstants();
+        $this->initBundlesService();
+        $this->initAppConfig();
+        $this->initDI();
+
+        $this->app = new Application($router, $this->container, $errorHandler, $emitter);
+
+        $this->initProtectedRoutes();
+        $this->initRoutes();
+        $this->initSchemaRESTRequest();
+    }
+
+    public function run() {
+        $this->app->run();
+    }
 
     private function initConstants() {
         $requiredConstants = [
@@ -29,108 +60,131 @@ class LBApplicationBootstrap
             'LB_STORAGE_DIRECTORY',
         ];
 
-        foreach($requiredConstants as $required) {
-            if(!defined($required)) {
+        foreach ($requiredConstants as $required) {
+            if (!defined($required)) {
                 throw new \Exception(sprintf('Constant `%s` is required', $required));
             }
         }
 
-        $this->serviceManager->setService('paths', [
-            'prefix' => LB_BACKEND_ROUTE_PREFIX,
-            'backend' => LB_BACKEND_DIRECTORY,
-            'bundles' => LB_BACKEND_BUNDLES_DIR,
-            'frontend' => LB_FRONTEND_DIRECTORY,
-            'storage' => LB_STORAGE_DIRECTORY
-        ]);
+        $this->paths = new LBAppConstants(
+            LB_BACKEND_ROUTE_PREFIX,
+            LB_BACKEND_DIRECTORY,
+            LB_BACKEND_BUNDLES_DIR,
+            LB_FRONTEND_DIRECTORY,
+            LB_STORAGE_DIRECTORY
+        );
     }
 
-    private function initBundles() {
-        $bundleService = new \Common\Bootstrap\Bundle\BundleService();
-        $bundlesPath = $this->serviceManager->get('paths')['bundles'];
+    private function initBundlesService() {
+        $bundleService = new BundleService();
+        $bundlesPath = $this->paths->bundles();
 
-        $directories = array_filter(scandir($bundlesPath), function($input) use ($bundlesPath) {
+        $directories = array_filter(scandir($bundlesPath), function ($input) use ($bundlesPath) {
             return $input != '.' && $input != '..' && is_dir(sprintf('%s/%s', $bundlesPath, $input));
         });
 
-        foreach($directories as $directory) {
+        foreach ($directories as $directory) {
             $bundleName = $directory;
             $bundleClassName = sprintf('\%s\%sBundle', $bundleName, $bundleName);
 
-            if(!class_exists($bundleClassName)) {
+            if (!class_exists($bundleClassName)) {
                 throw new \Exception(sprintf('No Bundle available for bundle `%s`', $bundleName));
             }
 
-            if(!is_subclass_of($bundleClassName, Bundle::class)) {
+            if (!is_subclass_of($bundleClassName, Bundle::class)) {
                 throw new \Exception(sprintf('Bundle `%s` should implements interface %s', $bundleClassName, Bundle::class));
             }
 
             $bundleService->addBundle(new $bundleClassName());
         }
 
-        $this->serviceManager->setService('Common\Bootstrap\Bundle\BundleService', $bundleService);
+        $this->bundles = $bundleService;
     }
 
-    private function initContainer() {
-        /** @var SharedConfigService $sharedConfigService */
-        $sharedConfigService = $this->serviceManager->get(SharedConfigService::class);
+    private function initAppConfig() {
+        $this->config = new SharedConfigService();
 
-        $this->serviceManager->configure(
-            $sharedConfigService->get('zend_service_manager')
-        );
+        $script = new ReadAppConfigScript($this->paths->backend());
+        $script($this->config, $this->bundles->getBundles());
     }
 
-    private function initSharedConfigService() {
-        (new SharedConfigServiceSetupScript($this->app, $this->serviceManager))->run();
-    }
+    private function initDI() {
+        $containerBuilder = new \DI\ContainerBuilder();
 
-    private function initRoutes() {
-        (new RouteSetupScript($this->app, $this->serviceManager))->run();
-    }
+        $containerBuilder->addDefinitions($this->config->get('php-di'));
+        $containerBuilder->addDefinitions([
+            BundleService::class => $this->bundles,
+            SharedConfigService::class => $this->config,
+        ]);
+        $containerBuilder->addDefinitions([
+            'constants.backend' => $this->paths->backend(),
+            'constants.bundles' => $this->paths->bundles(),
+            'constants.frontend' => $this->paths->frontend(),
+            'constants.prefix' => $this->paths->prefix(),
+            'constants.storage' => $this->paths->storage(),
+        ]);
 
-    private function initSchemaRESTRequest() {
-        \Common\Tools\RequestParams\SchemaParams::injectSchemaService($this->serviceManager->get(SchemaService::class));
+        $this->container = $containerBuilder->build();
     }
 
     private function initProtectedRoutes() {
         $this->app->pipe(ProtectedMiddleware::class);
     }
 
-    /**
-     * @return Application
-     */
-    public function getApp(): Application
-    {
-        return $this->app;
+    private function initRoutes() {
+        $script = new RouteSetupScript();
+        $script($this->app, $this->bundles->getConfigDirs(), $this->paths->prefix());
     }
 
-    public function getServiceManager(): ServiceManager
-    {
-        return $this->serviceManager;
+    private function initSchemaRESTRequest() {
+        \Common\Tools\RequestParams\SchemaParams::injectSchemaService($this->container->get(SchemaService::class));
+    }
+}
+
+
+class LBAppConstants
+{
+    /** @var string */
+    private $prefix;
+
+    /** @var string */
+    private $backend;
+
+    /** @var string */
+    private $bundles;
+
+    /** @var string */
+    private $frontend;
+
+    /** @var string */
+    private $storage;
+
+    public function __construct(string $prefix, string $backend, string $bundles, string $frontend, string $storage) {
+        $this->prefix = $prefix;
+        $this->backend = $backend;
+        $this->bundles = $bundles;
+        $this->frontend = $frontend;
+        $this->storage = $storage;
     }
 
-    public function bootstrap() {
-        $container = new ServiceManager();
-        $router = new \Zend\Expressive\Router\FastRouteRouter();
-        $errorHandler = new \Common\Bootstrap\ErrorHandler();
-        $emitter = new \Zend\Expressive\Emitter\EmitterStack();
-        $emitter->push(new SapiEmitter());
-
-        $app = new Application($router, $container, $errorHandler, $emitter);
-
-        $this->app = $app;
-        $this->serviceManager = $app->getContainer();
-
-        $this->initConstants();
-        $this->initBundles();
-        $this->initSharedConfigService();
-        $this->initContainer();
-        $this->initProtectedRoutes();
-        $this->initRoutes();
-        $this->initSchemaRESTRequest();
+    public function prefix(): string {
+        return $this->prefix;
     }
 
-    public function run() {
-        $this->app->run();
+    public function backend(): string {
+        return $this->backend;
+    }
+
+    public function bundles(): string {
+        return $this->bundles;
+    }
+
+    public function frontend(): string {
+        return $this->frontend;
+    }
+
+    public function storage(): string {
+        return $this->storage;
     }
 }
 

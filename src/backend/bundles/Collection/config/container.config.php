@@ -1,17 +1,26 @@
 <?php
-use Collection\Factory\Middleware\CollectionMiddlewareFactory;
-use Collection\Factory\Repository\CollectionRepositoryFactory;
-use Collection\Factory\Service\CollectionServiceFactory;
+use Auth\Service\CurrentAccountService;
+use Collection\Entity\Collection;
 use Collection\Middleware\CollectionMiddleware;
 use Collection\Repository\CollectionRepository;
 use Collection\Service\CollectionService;
+use Common\Factory\DoctrineRepositoryFactory;
+use Doctrine\ORM\EntityManager;
+
+use function DI\object;
+use function DI\factory;
+use function DI\get;
 
 return [
-    'zend_service_manager' => [
-        'factories' => [
-            CollectionService::class => CollectionServiceFactory::class,
-            CollectionRepository::class => CollectionRepositoryFactory::class,
-            CollectionMiddleware::class => CollectionMiddlewareFactory::class
-        ]
+    'php-di' => [
+        CollectionRepository::class => factory(new DoctrineRepositoryFactory(Collection::class)),
+        CollectionService::class => object()->constructor(
+            get(CollectionRepository::class),
+            get(CurrentAccountService::class)
+        ),
+        CollectionMiddleware::class => object()->constructor(
+            CollectionService::class,
+            CurrentAccountService::class
+        )
     ]
 ];

@@ -1,8 +1,9 @@
 <?php
-use Account\Entity\Account;
+namespace EmailVerification\Entity;
 
+use Account\Entity\Account;
 /**
- * @Entity(repositoryClass="EmailVerification\Repository\EmailVerificationRepository")
+ * @Entity(repositoryClass="EmailVerification\Entity\EmailVerification\Repository\EmailVerificationRepository")
  * @Table(name="email_verification")
  */
 class EmailVerification
@@ -46,50 +47,41 @@ class EmailVerification
      */
     private $dateConfirmation;
 
-    public function __construct(Account $forAccount)
-    {
+    public function __construct(Account $forAccount) {
         $this->forAccount = $forAccount;
         $this->dateRequested = new \DateTime();
     }
 
-    public function getId(): int
-    {
+    public function getId(): int {
         return $this->id;
     }
 
-    public function isPersisted()
-    {
+    public function isPersisted() {
         return $this->id;
     }
 
-    public function getForAccount(): Account
-    {
+    public function getForAccount(): Account {
         return $this->forAccount;
     }
 
-    public function getDateRequested(): DateTime
-    {
+    public function getDateRequested(): DateTime {
         return $this->dateRequested;
     }
 
-    public function getToken(): string
-    {
+    public function getToken(): string {
         return $this->token;
     }
 
-    public function setToken(string $token): self
-    {
+    public function setToken(string $token): self {
         $this->token = $token;
         return $this;
     }
 
-    public function isConfirmed(): bool
-    {
+    public function isConfirmed(): bool {
         return $this->isConfirmed;
     }
 
-    public function confirm()
-    {
+    public function confirm() {
         $this->dateConfirmation = new DateTime();
         $this->isConfirmed = true;
     }

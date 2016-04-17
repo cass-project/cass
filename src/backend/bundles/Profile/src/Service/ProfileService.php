@@ -9,7 +9,6 @@ use Profile\Entity\Profile;
 use Profile\Entity\ProfileGreetings;
 use Profile\Entity\ProfileImage;
 use Profile\Exception\ImageIsNotASquareException;
-use Profile\Exception\ImageTooBigException;
 use Profile\Exception\ImageTooSmallException;
 use Profile\Exception\LastProfileException;
 use Profile\Exception\MaxProfilesReachedException;

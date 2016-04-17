@@ -15,7 +15,6 @@
   "require": {
     "robmorgan/phinx": "^0.5.1",
     "zendframework/zend-expressive": "^0.5.3",
-    "zendframework/zend-servicemanager": "^3.0",
     "zendframework/zend-expressive-fastroute": "^1.0",
     "doctrine/orm": "^2.5",
     "league/oauth2-client": "^1.2",
@@ -31,6 +30,7 @@
     "zendframework/zend-i18n": "^2.6",
     "depotwarehouse/oauth2-bnet": "^5.0",
     "gigablah/sphinxphp": "2.0.*",
-    "sybio/image-workshop": "2.0"
+    "sybio/image-workshop": "2.0",
+    "php-di/php-di": "^5.2"
   }
 }
