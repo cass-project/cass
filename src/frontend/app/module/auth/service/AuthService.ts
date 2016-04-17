@@ -1,10 +1,8 @@
-import {Cookie} from 'ng2-cookies/ng2-cookies';
 import {Injectable} from 'angular2/core';
 import {Http, URLSearchParams} from 'angular2/http';
-import {Router} from "angular2/router";
 import {ResponseInterface} from "../../common/ResponseInterface";
 import {BackendError} from '../../common/BackendError';
-import {Profile, ProfileEntity} from './../../profile/entity/Profile';
+import {Profile} from './../../profile/entity/Profile';
 import {Account, AccountEntity} from './../../account/entity/Account';
 import {FrontlineService} from "../../frontline/service";
 
@@ -15,7 +13,12 @@ export class AuthService
     public lastError: BackendError;
 
     constructor(private http: Http, private frontline: FrontlineService) {
-        console.log(frontline);
+        let hasAuth = frontline.session.auth && (typeof frontline.session.auth.api_key == "string") && (frontline.session.auth.api_key.length > 0);
+
+        if(hasAuth) {
+            let auth = frontline.session.auth;
+            AuthService.token = new AuthToken(auth.api_key, new Account(auth.account, auth.profiles));
+        }
     }
 
     static isSignedIn() {

@@ -16,9 +16,6 @@ abstract class AbstractCommand extends Command
     /** @var array */
     private $oauth2Config;
 
-    /** @var AuthService */
-    private $authService;
-
     public function __construct(array $oauth2Config, AuthService $authService)
     {
         $this->oauth2Config = $oauth2Config;

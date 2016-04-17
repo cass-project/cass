@@ -14,7 +14,7 @@ export class Account
 {
     public profiles: Profiles;
 
-    constructor(public entity: Account, profiles: Array<ProfileEntity>) {
+    constructor(public entity: AccountEntity, profiles: Array<ProfileEntity>) {
         this.profiles = new Profiles(profiles.map(entity => {
             return new Profile(this, entity);
         }));

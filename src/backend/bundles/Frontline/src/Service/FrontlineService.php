@@ -18,6 +18,12 @@ class FrontlineService
         $_SESSION[self::SESSION_KEY][$key] = $value;
     }
 
+    public function destroy($key) {
+        if($this->has($key)) {
+            $_SESSION[self::SESSION_KEY][$key] = null;
+        }
+    }
+
     public function get($key) {
         $this->validateKey($key);
 

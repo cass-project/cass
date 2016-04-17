@@ -18,6 +18,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthService
 {
+    const FRONTLINE_KEY = 'auth';
+
     /** @var AccountService */
     private $accountService;
 
@@ -38,7 +40,7 @@ class AuthService
     {
         $_SESSION[SessionStrategy::SESSION_API_KEY] = $account->getAPIKey();
 
-        $this->frontlineService->export('auth', [
+        $this->frontlineService->export(self::FRONTLINE_KEY, [
             'api_key' => $account->getAPIKey(),
             'account' => $account->toJSON(),
             'profiles' => array_map(function(Profile $profile) {
@@ -99,7 +101,8 @@ class AuthService
 
     public function signOut()
     {
-        unset($_COOKIE['api_key']);
+        $_SESSION[SessionStrategy::SESSION_API_KEY] = null;
+        $this->frontlineService->destroy(self::FRONTLINE_KEY);
     }
 
     public function getOAuth2Config($provider): array
