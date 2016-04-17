@@ -1,7 +1,7 @@
 <?php
-namespace Common\Middleware;
+namespace Frontline\Middleware;
 
-use Common\Service\FrontlineService;
+use Frontline\Service\FrontlineService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
@@ -18,6 +18,10 @@ class FrontlineMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        return $this->frontlineService->importToJSON();
+        $response->getBody()->write($this->frontlineService->importToJSON());
+
+        return $response
+            ->withStatus(200)
+            ->withHeader('Content-Type', 'application/json');
     }
 }

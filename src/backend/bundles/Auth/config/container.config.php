@@ -9,15 +9,18 @@ use Auth\Service\CurrentAccountService;
 use function DI\object;
 use function DI\factory;
 use function DI\get;
+use Frontline\Service\FrontlineService;
 
 return [
     'php-di' => [
         AuthService::class => object()->constructor(
             get(AccountService::class),
+            get(FrontlineService::class),
             get('oauth2_providers')
         ),
         AuthMiddleware::class => object()->constructor(
-            get(AuthService::class)
+            get(AuthService::class),
+            get(FrontlineService::class)
         ),
         ProtectedMiddleware::class => object()->constructor(
             get(CurrentAccountService::class),

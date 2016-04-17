@@ -12,6 +12,8 @@ use Auth\Service\AuthService\SignUpValidation\IsEmailValid;
 use Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
 use Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
 use Account\Entity\Account;
+use Frontline\Service\FrontlineService;
+use Profile\Entity\Profile;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthService
@@ -19,19 +21,30 @@ class AuthService
     /** @var AccountService */
     private $accountService;
 
+    /** @var FrontlineService */
+    private $frontlineService;
+
     /** @var array */
     private $oauth2Config;
 
-    public function __construct(AccountService $accountService, array $oauth2Config)
+    public function __construct(AccountService $accountService, FrontlineService $frontlineService, array $oauth2Config)
     {
         $this->accountService = $accountService;
+        $this->frontlineService = $frontlineService;
         $this->oauth2Config = $oauth2Config;
     }
 
     public function auth(Account $account): Account
     {
-        setcookie('api_key', $account->getAPIKey(), time() + 60 /* sec */ * 60 /* min */ * 24 /* hours */ * 30 /* days */, '/');
         $_SESSION[SessionStrategy::SESSION_API_KEY] = $account->getAPIKey();
+
+        $this->frontlineService->export('auth', [
+            'api_key' => $account->getAPIKey(),
+            'account' => $account->toJSON(),
+            'profiles' => array_map(function(Profile $profile) {
+                return $profile->toJSON();
+            }, $account->getProfiles()->toArray())
+        ]);
 
         return $account;
     }

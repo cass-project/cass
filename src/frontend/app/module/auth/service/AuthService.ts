@@ -6,6 +6,7 @@ import {ResponseInterface} from "../../common/ResponseInterface";
 import {BackendError} from '../../common/BackendError';
 import {Profile, ProfileEntity} from './../../profile/entity/Profile';
 import {Account, AccountEntity} from './../../account/entity/Account';
+import {FrontlineService} from "../../frontline/service";
 
 @Injectable()
 export class AuthService
@@ -13,7 +14,8 @@ export class AuthService
     public static token: AuthToken;
     public lastError: BackendError;
 
-    constructor(private http: Http, private router:Router) {
+    constructor(private http: Http, private frontline: FrontlineService) {
+        console.log(frontline);
     }
 
     static isSignedIn() {

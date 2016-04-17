@@ -3,6 +3,22 @@ a:hover, a:active, a:focus, a:active {
 }
 
 body {
+  &>div#loading {
+    z-index: 99999;
+    background-color: white;
+    position: fixed;
+    top: 0; height: 100%;
+    left: 0; width: 100%;
+
+    div.image {
+      width: 16px;
+      height: 11px;
+      position: absolute;
+      top: 50%; margin-top: -8px;
+      left: 50%; margin-left: -5px;
+    }
+  }
+
   main>div.container {
     margin-left: 300px;
     margin-top: 15px;

@@ -15,7 +15,6 @@ import {bootstrap} from 'angular2/platform/browser';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, URLSearchParams} from 'angular2/http';
 import {CORE_DIRECTIVES} from 'angular2/common';
-import {Cookie} from 'ng2-cookies';
 
 import {MainMenu} from './module/common/component/MainMenu/index'
 import {AuthService} from './module/auth/service/AuthService';
@@ -23,8 +22,7 @@ import {AuthComponent} from './module/auth/index';
 import {ProfileComponent} from './module/profile/index';
 import {CatalogComponent} from './module/catalog/index';
 import {CollectionComponent} from "./module/collection/index";
-import {WorkInProgress} from "./module/common/component/WorkInProgress/index";
-import {Nothing} from "./module/common/component/Nothing/index";
+import {frontline, FrontlineService} from "./module/frontline/service";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -76,14 +74,19 @@ class OAuthRequestOptions extends BaseRequestOptions {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    bootstrap(
-        <any>App, [
-            ROUTER_PROVIDERS,
-            HTTP_PROVIDERS,
-            provide(RequestOptions, {useClass: OAuthRequestOptions}),
-            provide(Window, {useValue: window})
-        ]).catch((err) => {
-            console.log(err.message);
-        }
-    );
+    frontline(session => {
+        document.getElementById('loading').remove();
+
+        bootstrap(
+            <any>App, [
+                ROUTER_PROVIDERS,
+                HTTP_PROVIDERS,
+                provide(RequestOptions, {useClass: OAuthRequestOptions}),
+                provide(FrontlineService, {useValue: new FrontlineService(session)}),
+                provide(Window, {useValue: session})
+            ]).catch((err) => {
+                console.log(err.message);
+            }
+        );
+    });
 });

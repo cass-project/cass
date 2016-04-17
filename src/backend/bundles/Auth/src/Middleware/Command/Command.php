@@ -11,14 +11,16 @@ use Auth\Middleware\Command\OAuth\OdnoklassnikiCommand;
 use Auth\Middleware\Command\OAuth\VkCommand;
 use Auth\Middleware\Command\OAuth\YandexCommand;
 use Auth\Service\AuthService;
+use Frontline\Service\FrontlineService;
 use Psr\Http\Message\ServerRequestInterface;
 
 abstract class Command
 {
-    /**
-     * @var AuthService
-     */
-    private $authService;
+    /** @var AuthService */
+    protected $authService;
+
+    /** @var FrontlineService */
+    protected $frontlineService;
 
     public static function factory(ServerRequestInterface $request, AuthService $authService): Command {
         $action = $request->getAttribute('action');
@@ -58,7 +60,10 @@ abstract class Command
         $this->authService = $authService;
     }
 
-
+    public function setFrontlineService(FrontlineService $frontlineService) 
+    {
+        $this->frontlineService = $frontlineService;
+    }
 
     abstract public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder);
 }

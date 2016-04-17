@@ -1,6 +1,5 @@
 <?php
 use Common\Bootstrap\Bundle\BundleService;
-use Common\Service\FrontlineService;
 use Common\Service\SchemaService;
 use Common\Service\TransactionService;
 
@@ -15,7 +14,6 @@ return [
     'php-di' => [
         SchemaService::class => object()->constructor(get(BundleService::class)),
         TransactionService::class => object()->constructor(get(EntityManager::class)),
-        FrontlineService::class => object(),
         EntityManager::class => factory(DoctrineEntityManagerFactory::class)
     ]
 ];
