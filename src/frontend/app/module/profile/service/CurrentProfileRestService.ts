@@ -1,3 +1,5 @@
+var xmlRequest = new XMLHttpRequest();
+
 import {ResponseInterface} from '../../../module/common/ResponseInterface.ts';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
@@ -5,10 +7,13 @@ import {Injectable} from 'angular2/core';
 import {URLSearchParams} from 'angular2/http';
 import {Headers} from "angular2/http";
 import {RequestOptions} from "angular2/http";
+import {CurrentProfileService} from "./CurrentProfileService";
 
 @Injectable()
 export class CurrentProfileRestService{
-    constructor(public http:Http) {}
+    constructor(public http:Http,
+                public currentProfileService: CurrentProfileService
+    ) {}
 
     getProfileInfo(profileId){
         let url = `/backend/api/protected/profile/${profileId}/get`;
@@ -33,9 +38,9 @@ export class CurrentProfileRestService{
         let formData = new FormData();
             formData.append("file", file);
 
-        let xmlRequest = new XMLHttpRequest();
-        xmlRequest.open("POST", url);
+        xmlRequest.open("POST", url, false);
         xmlRequest.send(formData);
+        this.currentProfileService.currentAvatar = JSON.parse(xmlRequest.responseText).public_path;
     }
 }
 
