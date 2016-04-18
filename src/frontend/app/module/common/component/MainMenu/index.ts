@@ -2,6 +2,7 @@ import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router} from 'angular2/router'
 import {AuthService} from '../../../auth/service/AuthService';
 import {Profile} from "../../../profile/entity/Profile";
+import {ProfileService} from "../../../profile/service/ProfileService";
 
 @Component({
     selector: 'cass-main-menu',

@@ -12,7 +12,7 @@
                             <h1>{{profileInfo.lastname}}</h1>
                             <h1>{{profileInfo.middlename}}</h1>
                             <h1>{{profileInfo.nickname}}</h1>
-                            <img src="{{getProfileAvatar()}}" class="img-rounded pull-xs-left">
+                            <img src="{{profileService.currentAvatar}}" class="img-rounded pull-xs-left">
                             <input type="button" value="Change Avatar" (click)="showAvatarCropper()" />
                             <div *ngIf="isAvatarFormVisible()" class="form-group">
                                 <avatar-cropper></avatar-cropper>
