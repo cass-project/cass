@@ -33,7 +33,7 @@ export class AvatarCropper {
     private cropper;
     private file: Blob;
 
-    ngOnInit() : void {
+    ngOnInit(): void {
         this.fileReader = new FileReader();
         this.fileReader.onload = () => {
             this.initCropper();
@@ -83,7 +83,6 @@ export class AvatarCropper {
 
     private submit(){
         let coord = this.getData();
-
         this.profileService.avatarUpload(AuthService.getAuthToken().getCurrentProfile().entity.id, this.file, {
             start: {
                 x: coord.x,
@@ -95,7 +94,6 @@ export class AvatarCropper {
             }
         });
         this.router.parent.navigate(['Confirm']);
-        //window.location.reload();
     }
 
     private getData() {

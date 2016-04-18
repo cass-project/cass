@@ -57,15 +57,6 @@ export class AccountWelcomeHome {
         this.router.parent.navigate(['Welcome']);
     }
 
-    isSignedIn() {
-        return AuthService.isSignedIn();
-    }
-
-    getProfileAvatar() {
-        return this.isSignedIn()
-            ? AuthService.getAuthToken().getCurrentProfile().entity.image.public_path
-            : Profile.AVATAR_DEFAULT;
-    }
 
     ngSubmit(){
         this.router.navigate(['Profile']);

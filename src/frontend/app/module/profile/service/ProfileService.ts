@@ -1,4 +1,3 @@
-
 var xmlRequest = new XMLHttpRequest();
 
 import {ResponseInterface} from '../../../module/common/ResponseInterface.ts';
@@ -9,6 +8,7 @@ import {URLSearchParams} from 'angular2/http';
 import {Headers} from "angular2/http";
 import {RequestOptions} from "angular2/http";
 import {AvatarCropperService} from "../component/AvatarCropper/service";
+import {AuthService} from "../../auth/service/AuthService";
 
 var avatarLoadEnd = false;
 
@@ -17,6 +17,8 @@ export class ProfileService {
     constructor(public http:Http,
                 public avatarCropperService:AvatarCropperService) {
     }
+
+    currentAvatar: string;
 
     getProfileInfo(profileId) {
         let url = `/backend/api/protected/profile/${profileId}/get`;
@@ -54,6 +56,8 @@ export class ProfileService {
             if (xmlRequest.readyState === 4) {
                 if (xmlRequest.status === 200) {
                     this.avatarCropperService.isAvatarFormVisibleFlag = false;
+                    this.currentAvatar = AuthService.getAuthToken().getCurrentProfile().entity.image.public_path;
+                    console.log(AuthService.getAuthToken().getCurrentProfile().entity.image.public_path);
                 }
 
             }

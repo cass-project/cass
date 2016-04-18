@@ -38,6 +38,9 @@ export class AccountConfirm {
 
     profileInfo: ProfileWelcomeInfo = new ProfileWelcomeInfo();
 
+    ngOnInit(): void {
+        this.getProfileAvatar();
+    }
 
     showAvatarCropper() {
         this.avatarCropperService.isAvatarFormVisibleFlag = true;
@@ -58,7 +61,7 @@ export class AccountConfirm {
 
     getProfileAvatar() {
         return this.isSignedIn()
-            ? AuthService.getAuthToken().getCurrentProfile().entity.image.public_path
+            ? this.profileService.currentAvatar = AuthService.getAuthToken().getCurrentProfile().entity.image.public_path
             : Profile.AVATAR_DEFAULT;
     }
 
