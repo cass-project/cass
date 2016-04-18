@@ -48,7 +48,7 @@ export class AccountConfirm {
     }
 
     reset(){
-        this.router.parent.navigate(['Profile']);
+        this.router.parent.navigate(['Dashboard']);
         this.router.parent.navigate(['Welcome']);
     }
 
