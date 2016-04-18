@@ -8,6 +8,7 @@ use Account\Repository\OAuthAccountRepository;
 use Profile\Entity\Profile;
 use Profile\Entity\ProfileGreetings;
 use Profile\Entity\ProfileImage;
+use function Common\Util\generateRandomString;
 
 class AccountService
 {
@@ -60,18 +61,10 @@ class AccountService
         return $this->oauthAccountRepository->findOAuthAccount($provider, $providerAccountId);
     }
 
-    /** @see http://stackoverflow.com/questions/4356289/php-random-string-generator */
+
     private function generateRandomString($length = 10)
     {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-
-        for($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-
-        return $randomString;
+        return generateRandomString($length);
     }
 
     public function hasAccountWithEmail(string $email)

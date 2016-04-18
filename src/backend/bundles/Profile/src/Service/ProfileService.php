@@ -14,6 +14,7 @@ use Profile\Exception\LastProfileException;
 use Profile\Exception\MaxProfilesReachedException;
 use Profile\Middleware\Parameters\EditPersonalParameters;
 use Profile\Repository\ProfileRepository;
+use function Common\Util\generateRandomString;
 
 class ProfileService
 {
@@ -138,7 +139,7 @@ class ProfileService
             $image->resize(ImageWorkshopLayer::UNIT_PIXEL, $newWidth, $newHeight, false);
         }
 
-        $image->save($this->profileStorageDir, $imageFileName = sprintf('%d.png', $profile->getId()), false, 'ffffff');
+        $image->save($this->profileStorageDir, $imageFileName = sprintf('%d/%s.png', $profile->getId(), generateRandomString(12)), true, 'ffffff');
 
         $storagePath = $this->profileStorageDir.'/'.$imageFileName;
         $publicPath = '/public/storage/profile/profile-image/'.$imageFileName;
