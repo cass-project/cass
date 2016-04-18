@@ -40,14 +40,6 @@ class AuthService
     {
         $_SESSION[SessionStrategy::SESSION_API_KEY] = $account->getAPIKey();
 
-        $this->frontlineService->export(self::FRONTLINE_KEY, [
-            'api_key' => $account->getAPIKey(),
-            'account' => $account->toJSON(),
-            'profiles' => array_map(function(Profile $profile) {
-                return $profile->toJSON();
-            }, $account->getProfiles()->toArray())
-        ]);
-
         return $account;
     }
 
@@ -102,7 +94,6 @@ class AuthService
     public function signOut()
     {
         $_SESSION[SessionStrategy::SESSION_API_KEY] = null;
-        $this->frontlineService->destroy(self::FRONTLINE_KEY);
     }
 
     public function getOAuth2Config($provider): array

@@ -18,7 +18,7 @@ class FrontlineMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $response->getBody()->write($this->frontlineService->importToJSON());
+        $response->getBody()->write(json_encode($this->frontlineService->exportToJSON(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 
         return $response
             ->withStatus(200)

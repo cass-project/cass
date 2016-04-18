@@ -8,6 +8,7 @@ use Common\Bootstrap\Scripts\ReadAppConfigScript;
 use Common\Service\SchemaService;
 use Common\Service\SharedConfigService;
 use Auth\Middleware\ProtectedMiddleware;
+use Frontline\Service\FrontlineService;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Expressive\Application;
 
@@ -38,6 +39,7 @@ class LBApplicationBootstrap
         $this->initBundlesService();
         $this->initAppConfig();
         $this->initDI();
+        $this->initFrontline();
 
         $this->app = new Application($router, $this->container, $errorHandler, $emitter);
 
@@ -125,6 +127,17 @@ class LBApplicationBootstrap
         ]);
 
         $this->container = $containerBuilder->build();
+    }
+
+    private function initFrontline() {
+        $container = $this->container;
+        $frontlineService = $container->get(FrontlineService::class);
+
+        foreach($this->bundles->getBundles() as $bundle) {
+            if($bundle instanceof \Common\Bootstrap\Bundle\FrontlineBundleInjectable) {
+                $bundle->initFrontline($container, $frontlineService);
+            }
+        }
     }
 
     private function initProtectedRoutes() {

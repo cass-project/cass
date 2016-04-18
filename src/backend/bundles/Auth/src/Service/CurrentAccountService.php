@@ -20,6 +20,11 @@ class CurrentAccountService
         $this->accountRepository = $accountRepository;
     }
 
+    public function isAvailable()
+    {
+        return $this->account !== null;
+    }
+
     public function getCurrentAccount(): Account
     {
         return $this->account;

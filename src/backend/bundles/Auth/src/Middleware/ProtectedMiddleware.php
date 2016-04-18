@@ -30,23 +30,23 @@ class ProtectedMiddleware implements MiddlewareInterface
         $isURLProtected = strpos($request->getUri()->getPath(), "{$this->prefix}/protected/") === 0;
 
         try {
-            if($isURLProtected) {
-                $this->currentAccountService->attempt([
-                    new HeaderStrategy($request),
-                    new JSONBodyStrategy($request),
-                    new SessionStrategy($request)
-                ]);
-            }
-
-            return $out($request, $response);
+            $this->currentAccountService->attempt([
+                new HeaderStrategy($request),
+                new JSONBodyStrategy($request),
+                new SessionStrategy($request)
+            ]);
         }catch(NotAuthenticatedException $e) {
-            $responseBuilder = new GenericRESTResponseBuilder($response);
+            if($isURLProtected) {
+                $responseBuilder = new GenericRESTResponseBuilder($response);
 
-            return $responseBuilder
-                ->setStatusBadRequest()
-                ->setError($e)
-                ->build()
-            ;
+                return $responseBuilder
+                    ->setStatusBadRequest()
+                    ->setError($e)
+                    ->build()
+                    ;
+            }
         }
+
+        return $out($request, $response);
     }
 }
