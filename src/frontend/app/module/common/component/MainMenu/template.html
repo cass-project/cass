@@ -5,7 +5,7 @@
         <li>
           <a class="main-menu-item" [routerLink]="['/Profile']" tabindex="1">
             <div class="image image-src">
-              <img src="{{ getProfileAvatar() }}" alt="[&#9829;]">
+              <img src="{{getProfileAvatar()}}" alt="[&#9829;]">
             </div>
             <div class="description" *ngIf="! isSignedIn()">
               <h1>Sign In</h1>
