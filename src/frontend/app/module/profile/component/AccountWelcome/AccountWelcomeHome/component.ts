@@ -53,6 +53,7 @@ export class AccountWelcomeHome {
     }
 
     reset(){
+        this.router.parent.navigate(['Dashboard']);
         this.router.parent.navigate(['Welcome']);
     }
 
