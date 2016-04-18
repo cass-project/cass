@@ -5,7 +5,7 @@ use Account\Entity\Account;
 use DateTime;
 
 /**
- * @Entity(repositoryClass="EmailVerification\Entity\EmailVerification\Repository\EmailVerificationRepository")
+ * @Entity(repositoryClass="EmailVerification\Repository\EmailVerificationRepository")
  * @Table(name="email_verification")
  */
 class EmailVerification
