@@ -1,0 +1,10 @@
+Profile_Request_SendRequest:
+  type: object
+  description:
+    Тело сообщения
+  required:
+    - content
+  properties:
+    content:
+      type: string
+      description: Текст сообщения

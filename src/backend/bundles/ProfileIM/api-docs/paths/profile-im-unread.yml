@@ -1,0 +1,13 @@
+"/protected/profile-im/unread":
+  get:
+    tags:
+      - profile_im
+    description:
+      Возвращает информацию о непрочитанных сообщениях текущего профиля
+    security:
+      - x_api_key: []
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        $ref: '#/responses/ProfileIM_Response_200_UnreadMessages'

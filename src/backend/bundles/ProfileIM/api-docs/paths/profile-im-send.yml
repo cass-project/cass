@@ -1,0 +1,27 @@
+"/protected/profile-im/send/to/{targetProfileId}":
+  put:
+    tags:
+      - profile_im
+    description:
+      Отправить сообщение другому профилю.
+    security:
+      - x_api_key: []
+    parameters:
+      - name: targetProfileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля-получателя сообщения
+      - name: body
+        in: body
+        required: true
+        description:
+        schema:
+          $ref: '#/definitions/Profile_Request_SendRequest'
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        $ref: '#responses/ProfileIM_Response_404_ProfileNotFound'
+      200:
+        $ref: '#/responses/ProfileIM_Response_200_SendMessageSuccess'

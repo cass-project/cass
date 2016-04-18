@@ -1,0 +1,11 @@
+ProfileIM_Response_200_SendMessageSuccess:
+  description: Сообщение успешно отправлено. В ответе отсылается отправленное сообщение.
+  schema:
+    required:
+      - success
+      - message
+    properties:
+      success:
+        type: boolean
+      message:
+        $ref: '#/definitions/ProfileIM_Entity_ProfileMessage'

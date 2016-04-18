@@ -9,7 +9,8 @@
       "Collection\\": "bundles/Collection/src",
       "Account\\": "bundles/Account/src",
       "Frontline\\": "bundles/Frontline/src",
-      "EmailVerification\\": "bundles/EmailVerification/src"
+      "EmailVerification\\": "bundles/EmailVerification/src",
+      "ProfileIM\\": "bundles/ProfileIM/src"
     }
   },
   "require": {

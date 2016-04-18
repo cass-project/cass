@@ -1,0 +1,34 @@
+"/protected/profile-im/messages/from/{sourceProfileId}/offset/{offset}/limit/{limit}":
+  get:
+    tags:
+      - profile_im
+    description:
+      Получить сообщение от указанного источника
+    parameters:
+      - in: path
+        name: sourceProfileId
+        type: number
+        required: true
+        description: ID профиля-источника сообщений; ID профиля, чьи сообщение хочется получить
+      - in: path
+        name: offset
+        type: number
+        required: true
+        description: Выборка, Offset
+      - in: path
+        name: limit
+        type: number
+        required: true
+        description: Выборка, Limit
+      - in: query
+        name: markAsRead
+        type: boolean
+        required: false
+        description: Если флаг установлен в значение true, то все полученные сообщение должны быть отмечены флагом как прочитанные
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        $ref: '#/responses/ProfileIM_Response_404_ProfileNotFound'
+      200:
+        $ref: '#/responses/ProfileIM_Response_200_Messages'

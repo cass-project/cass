@@ -1,0 +1,18 @@
+ProfileIM_Entity_ProfileCache:
+  required:
+    - id
+    - type
+    - greetings
+    - profile_avatar
+  properties:
+    id:
+      type: number
+      description: ID профиля
+      default: 1
+    greetings:
+      type: string
+      description: Приветствие, имя профиля
+      default: "Firstname Lastname"
+    profile_avatar:
+      type: string
+      description: Путь (/public) к изображению профиля

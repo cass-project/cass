@@ -1,0 +1,12 @@
+ProfileIM_Definitions_ProfileMessageReadStatus:
+    type: object
+    description: Статус, сообщающий о том, просмотрено ли сообщение или нет
+    required:
+      - is_read
+    properties:
+      is_read:
+        type: boolean
+        description: Флаг "сообщение прочитано"
+      date_read:
+        type: string
+        description: Дата просмотра сообщения, если сообщение было прочитано. Если сообщение еще не прочитано, то содержит NULL.

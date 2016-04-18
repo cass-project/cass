@@ -2,6 +2,8 @@
 namespace EmailVerification\Entity;
 
 use Account\Entity\Account;
+use DateTime;
+
 /**
  * @Entity(repositoryClass="EmailVerification\Entity\EmailVerification\Repository\EmailVerificationRepository")
  * @Table(name="email_verification")
@@ -57,7 +59,7 @@ class EmailVerification
     }
 
     public function isPersisted() {
-        return $this->id;
+        return $this->id !== null;
     }
 
     public function getForAccount(): Account {
