@@ -1,8 +1,11 @@
 declare var Cropper;
 
 import {Component, ViewChild, ElementRef, Injectable} from "angular2/core";
-import {CurrentProfileRestService} from "../../../service/CurrentProfileRestService";
-import {AccountWelcomeService} from "../service";
+import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {ProfileService} from "../../service/ProfileService";
+import {AvatarCropperService} from "./service";
+import {AuthService} from "../../../auth/service/AuthService";
+import {AccountConfirm} from "../AccountWelcome/Confirm/component";
 
 require('./style.head.scss');
 
@@ -12,14 +15,18 @@ require('./style.head.scss');
     providers: [
         FileReader
     ],
-    selector: 'avatar-cropper'
+    selector: 'avatar-cropper',
+    directives: [
+        ROUTER_DIRECTIVES
+    ]
 })
 
 @Injectable()
 export class AvatarCropper {
     constructor(private fileReader: FileReader,
-                public currentProfileRestService: CurrentProfileRestService,
-                public accountWelcomeService: AccountWelcomeService
+                public profileService: ProfileService,
+                public avatarCropperService: AvatarCropperService,
+                public router: Router
     ){}
 
     @ViewChild('cropImage') cropImage:ElementRef;
@@ -64,7 +71,7 @@ export class AvatarCropper {
     }
 
     private close(){
-        this.accountWelcomeService.isAvatarFormVisibleFlag = false;
+        this.avatarCropperService.isAvatarFormVisibleFlag = false;
         this.destroyCropper();
     }
 
@@ -77,7 +84,7 @@ export class AvatarCropper {
     private submit(){
         let coord = this.getData();
 
-        this.currentProfileRestService.avatarUpload("1", this.file, {
+        this.profileService.avatarUpload(AuthService.getAuthToken().getCurrentProfile().entity.id, this.file, {
             start: {
                 x: coord.x,
                 y: coord.y
@@ -87,12 +94,12 @@ export class AvatarCropper {
                 y: coord.y + coord.height
             }
         });
-        /* ToDo: Добавить обработчик успеха заливания аватарки, ибо тут у нас не http request а XML request дрочка */
-        this.accountWelcomeService.isAvatarFormVisibleFlag = false;
+        this.router.parent.navigate(['Confirm']);
+        //window.location.reload();
     }
 
     private getData() {
-        console.log(this.cropper.getData(true), this.accountWelcomeService.isAvatarFormVisibleFlag);
+        console.log(this.cropper.getData(true), this.avatarCropperService.isAvatarFormVisibleFlag);
         return this.cropper.getData(true);
     }
 }

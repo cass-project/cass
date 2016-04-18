@@ -4,8 +4,8 @@ import {AuthService} from '../auth/service/AuthService';
 import {ProfileEditComponent} from "./component/ProfileEdit/index";
 import {ProfileDashboardComponent} from "./component/ProfileDashboard/index";
 import {AccountWelcome} from "./component/AccountWelcome/component";
-import {CurrentProfileRestService} from "./service/CurrentProfileRestService";
-import {AvatarCropper} from "./component/ProfileEdit/AvatarCropper/AvatarCropper";
+import {AvatarCropper} from "./component/AvatarCropper/index";
+import {ProfileService} from "./service/ProfileService";
 
 @Component({
     template: require('./template.html'),
@@ -13,7 +13,7 @@ import {AvatarCropper} from "./component/ProfileEdit/AvatarCropper/AvatarCropper
         ROUTER_DIRECTIVES
     ],
     'providers': [
-        CurrentProfileRestService
+        ProfileService
     ]
 })
 @RouteConfig([
@@ -30,7 +30,7 @@ import {AvatarCropper} from "./component/ProfileEdit/AvatarCropper/AvatarCropper
     },
     {
         name: 'Welcome',
-        path: '/welcome',
+        path: '/welcome/...',
         component: AccountWelcome
     },
     {
