@@ -1,7 +1,6 @@
 <?php
 use Auth\Service\CurrentAccountService;
 use Common\Factory\DoctrineRepositoryFactory;
-use Doctrine\ORM\EntityManager;
 use Profile\Entity\Profile;
 use Profile\Entity\ProfileGreetings;
 use Profile\Entity\ProfileImage;
@@ -14,6 +13,7 @@ use Profile\Service\ProfileService;
 use function DI\object;
 use function DI\factory;
 use function DI\get;
+
 
 return [
     'php-di' => [

@@ -1,6 +1,7 @@
 <?php
 use Auth\Service\CurrentAccountService;
 use Common\Factory\DoctrineRepositoryFactory;
+use ProfileIM\Middleware\ProfileIMMiddleware;
 use ProfileIM\Repository\ProfileMessageRepository;
 use ProfileIM\Service\ProfileIMService;
 use Profile\Middleware\ProfileMiddleware;
@@ -16,7 +17,7 @@ return [
             get(CurrentAccountService::class),
             get(ProfileMessageRepository::class)
         ),
-        ProfileMiddleware::class => object()->constructor(
+        ProfileIMMiddleware::class => object()->constructor(
             get(CurrentAccountService::class),
             get(ProfileIMService::class)
         )

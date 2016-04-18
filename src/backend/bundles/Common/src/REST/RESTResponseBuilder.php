@@ -89,6 +89,10 @@ abstract class RESTResponseBuilder
         if(!$json['success']) {
             if($this->error instanceof \Exception) {
                 $errorMessage = $this->error->getMessage();
+                $json['error_stack'] = $this->error->getTrace();
+            }else if($this->error instanceof \TypeError) {
+                $errorMessage = $this->error->getMessage();
+                $json['error_stack'] = $this->error->getTrace();
             }else if(is_string($this->error)) {
                 $errorMessage = $this->error;
             }else if($this->error === null){

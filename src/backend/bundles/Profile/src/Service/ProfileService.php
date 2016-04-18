@@ -14,7 +14,7 @@ use Profile\Exception\LastProfileException;
 use Profile\Exception\MaxProfilesReachedException;
 use Profile\Middleware\Parameters\EditPersonalParameters;
 use Profile\Repository\ProfileRepository;
-use function Common\Util\generateRandomString;
+use Common\Util\GenerateRandomString;
 
 class ProfileService
 {
@@ -139,12 +139,24 @@ class ProfileService
             $image->resize(ImageWorkshopLayer::UNIT_PIXEL, $newWidth, $newHeight, false);
         }
 
-        $image->save($this->profileStorageDir, $imageFileName = sprintf('%d/%s.png', $profile->getId(), generateRandomString(12)), true, 'ffffff');
+        $oldProfileImage = $profile->getProfileImage()->isDefaultImage()
+            ? false
+            : $profile->getProfileImage()->getStoragePath();
 
-        $storagePath = $this->profileStorageDir.'/'.$imageFileName;
-        $publicPath = '/public/storage/profile/profile-image/'.$imageFileName;
+        $imageFileName = sprintf('%s.png', GenerateRandomString::gen(12));
+        $targetDir = (string) $profile->getId();
 
-        return $this->profileRepository->updateImage($profile->getId(), $storagePath, $publicPath);
+        $storagePath = sprintf('%s/%s/%s', $this->profileStorageDir, $targetDir, $imageFileName);
+        $publicPath =  sprintf('/public/storage/profile/profile-image/%d/%s', $targetDir, $imageFileName);
+
+        $image->save(sprintf('%s/%s', $this->profileStorageDir, $targetDir), $imageFileName, true, 'ffffff');
+        $newProfileImage = $this->profileRepository->updateImage($profile->getId(), $storagePath, $publicPath);
+
+        if($oldProfileImage && file_exists($oldProfileImage)) {
+            unlink($oldProfileImage);
+        }
+
+        return $newProfileImage;
     }
 
     private function validateCropPoints(ImageWorkshopLayer $image, int $startX, int $startY, int $endX, int $endY)

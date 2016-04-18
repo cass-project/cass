@@ -8,7 +8,7 @@ use Account\Repository\OAuthAccountRepository;
 use Profile\Entity\Profile;
 use Profile\Entity\ProfileGreetings;
 use Profile\Entity\ProfileImage;
-use function Common\Util\generateRandomString;
+use Common\Util\GenerateRandomString;
 
 class AccountService
 {
@@ -64,7 +64,7 @@ class AccountService
 
     private function generateRandomString($length = 10)
     {
-        return generateRandomString($length);
+        return GenerateRandomString::gen($length);
     }
 
     public function hasAccountWithEmail(string $email)

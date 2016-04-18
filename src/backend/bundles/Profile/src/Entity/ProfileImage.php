@@ -73,6 +73,11 @@ class ProfileImage
         return $this->id;
     }
 
+    public function isDefaultImage()
+    {
+        return $this->publicPath === self::DEFAULT_PROFILE_IMAGE_PUBLIC;
+    }
+
     public function getProfile(): Profile
     {
         return $this->profile;
