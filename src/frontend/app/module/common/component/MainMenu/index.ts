@@ -26,7 +26,20 @@ export class MainMenu
         return this.isSignedIn()
             ? AuthService.getAuthToken().getCurrentProfile().greetings
             : 'Anonymous'
-        ;
+    }
+
+    getProfileName(){
+        if(this.getGreetings()){
+            switch(AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method){
+                case 'fl': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name}`;
+                    break;
+                case 'flm': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name}`;
+                    break;
+                case 'n': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname}`;
+                    break;
+            }
+        }
+
     }
 
     getProfileAvatar() {

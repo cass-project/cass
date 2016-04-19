@@ -18,33 +18,51 @@ export class ProfileService {
                 public avatarCropperService:AvatarCropperService) {
     }
 
-    getProfileInfo(profileId) {
-        let url = `/backend/api/protected/profile/${profileId}/get`;
+    getProfileInfo() {
+        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/get`;
 
         return this.http.post(url, JSON.stringify({}));
     }
 
-    greetingsAsFL(profileId, firsname, lastname) {
-        return this.http.post('backend/api/protected/profile/' + profileId + '/greetings-as/fl/', JSON.stringify({
-            first_name: firsname,
+    greetingsAsFL(firstname, lastname) {
+        let url = `backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/greetings-as/fl/`;
+
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = 'fl';
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name = firstname;
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name = lastname;
+
+        return this.http.post(url, JSON.stringify({
+            first_name: firstname,
             last_name: lastname
         }));
     }
 
-    greetingsAsFLM(profileId, firstname, lastname, midlename) {
-        return this.http.post('backend/api/protected/profile/' + profileId + '/greetings-as/lfm/', JSON.stringify({
+    greetingsAsFLM(firstname, lastname, middlename) {
+        let url =`backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/greetings-as/lfm/`;
+
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = 'flm';
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name = firstname;
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name = lastname;
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name = middlename;
+
+        return this.http.post(url, JSON.stringify({
             last_name: lastname,
             first_name: firstname,
-            middle_name: midlename
+            middle_name: middlename
         }));
     }
 
-    greetingsAsN(profileId, nick) {
-        return this.http.post('backend/api/protected/profile/' + profileId + '/greetings-as/n/', JSON.stringify({nickname: nick}));
+    greetingsAsN(nickname) {
+        let url = `backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/greetings-as/n/`;
+
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = 'n';
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname = nickname;
+
+        return this.http.post(url, JSON.stringify({nickname: nickname}));
     }
 
-    avatarUpload(profileId, file:Blob, crop:Crop) {
-        let url = `/backend/api/protected/profile/${profileId}/image-upload/crop-start/${crop.start.x}/${crop.start.y}/crop-end/${crop.end.x}/${crop.end.y}`;
+    avatarUpload(file:Blob, crop:Crop) {
+        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/image-upload/crop-start/${crop.start.x}/${crop.start.y}/crop-end/${crop.end.x}/${crop.end.y}`;
         let formData = new FormData();
         formData.append("file", file);
 
@@ -61,7 +79,7 @@ export class ProfileService {
     }
 }
 
-export class ProfileWelcomeInfo
+export class ProfileNameInfo
 {
     nickname: string;
     firstname: string;
