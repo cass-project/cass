@@ -61,7 +61,7 @@ export class AccountConfirm {
 
     getProfileAvatar() {
         return this.isSignedIn()
-            ? this.profileService.currentAvatar = AuthService.getAuthToken().getCurrentProfile().entity.image.public_path
+            ? AuthService.getAuthToken().getCurrentProfile().entity.image.public_path
             : Profile.AVATAR_DEFAULT;
     }
 
