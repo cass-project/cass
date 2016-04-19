@@ -4,7 +4,7 @@ import {ProfileService} from "../../../service/ProfileService";
 import {AvatarCropper} from "../../AvatarCropper/index";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {AuthService} from "../../../../auth/service/AuthService";
-import {ProfileWelcomeInfo} from "../../../service/ProfileService";
+import {ProfileNameInfo} from "../../../service/ProfileService";
 import {Profile} from "../../../entity/Profile";
 import {AvatarCropperService} from "../../AvatarCropper/service";
 
@@ -17,8 +17,7 @@ declare var Cropper;
     ],
     'providers': [
         ProfileService,
-        AvatarCropperService,
-        AuthService
+        AvatarCropperService
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -32,11 +31,10 @@ declare var Cropper;
 export class AccountConfirm {
     constructor (private profileService: ProfileService,
                  public router: Router,
-                 public avatarCropperService: AvatarCropperService,
-                 public authService: AuthService
+                 public avatarCropperService: AvatarCropperService
     ){}
 
-    profileInfo: ProfileWelcomeInfo = new ProfileWelcomeInfo();
+
 
     ngOnInit(): void {
         this.getProfileAvatar();
@@ -59,14 +57,33 @@ export class AccountConfirm {
         return AuthService.isSignedIn();
     }
 
+    getGreetings() {
+        return this.isSignedIn()
+            ? AuthService.getAuthToken().getCurrentProfile().greetings
+            : 'Anonymous'
+    }
+
+    getProfileName(){
+        if(this.getGreetings()){
+            switch(AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method){
+                case 'fl': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name}`;
+                    break;
+                case 'flm': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name}`;
+                    break;
+                case 'n': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname}`;
+                    break;
+            }
+        }
+    }
+
     getProfileAvatar() {
         return this.isSignedIn()
             ? AuthService.getAuthToken().getCurrentProfile().entity.image.public_path
             : Profile.AVATAR_DEFAULT;
     }
 
-    ngSubmit(){
-        this.router.navigate(['Profile']);
+    submit(){
+        this.router.parent.navigate(['Dashboard']);
     }
 }
 

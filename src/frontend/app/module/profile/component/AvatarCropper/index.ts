@@ -83,7 +83,7 @@ export class AvatarCropper {
 
     private submit(){
         let coord = this.getData();
-        this.profileService.avatarUpload(AuthService.getAuthToken().getCurrentProfile().entity.id, this.file, {
+        this.profileService.avatarUpload(this.file, {
             start: {
                 x: coord.x,
                 y: coord.y
@@ -97,7 +97,6 @@ export class AvatarCropper {
     }
 
     private getData() {
-        console.log(this.cropper.getData(true), this.avatarCropperService.isAvatarFormVisibleFlag);
         return this.cropper.getData(true);
     }
 }

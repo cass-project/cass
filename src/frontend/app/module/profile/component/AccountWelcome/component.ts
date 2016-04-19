@@ -4,7 +4,6 @@ import {ProfileService} from "../../service/ProfileService";
 import {AvatarCropper} from "../AvatarCropper/index";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {AuthService} from "../../../auth/service/AuthService";
-import {ProfileWelcomeInfo} from "../../service/ProfileService";
 import {Profile} from "../../entity/Profile";
 import {AvatarCropperService} from "../AvatarCropper/service";
 import {AccountConfirm} from "./Confirm/component";
