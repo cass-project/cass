@@ -2,10 +2,6 @@
 namespace Theme\Entity;
 
 use Common\Tools\SerialManager\SerialEntity;
-use Data\Entity\bool;
-use Data\Entity\int;
-use Data\Entity\string;
-
 /**
  * @Entity(repositoryClass="Data\Repository\Theme\ThemeRepository")
  * @Table(name="theme")
@@ -43,6 +39,12 @@ class Theme implements SerialEntity
      */
     private $title;
 
+    /**
+     * @Column(type="text")
+     * @var string
+     */
+    private $description = '';
+
     public function getId(): int
     {
         return $this->id;
@@ -67,6 +69,14 @@ class Theme implements SerialEntity
         $this->title = $title;
 
         return $this;
+    }
+
+    public function getDescription(): string {
+        return $this->description;
+    }
+
+    public function setDescription(string $description) {
+        $this->description = $description;
     }
 
     public function hasParent(): bool
