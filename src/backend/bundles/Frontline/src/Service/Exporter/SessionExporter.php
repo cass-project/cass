@@ -11,7 +11,7 @@ class SessionExporter
     const SESSION_KEY = 'frontline';
 
     public function __construct() {
-        if (!$_SESSION[self::SESSION_KEY]) {
+        if (!isset($_SESSION[self::SESSION_KEY])) {
             $_SESSION[self::SESSION_KEY] = [];
         }
     }

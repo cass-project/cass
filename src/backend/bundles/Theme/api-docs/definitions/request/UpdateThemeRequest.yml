@@ -1,13 +1,12 @@
 Update_Theme_Request:
-    type: object
-    properties:
-      title:
-        type: string
-        description: Название темы
-      parent_id:
-        type: number
-        description: ID родительской тематики
-      position:
-        type: number
-        description: Позиция в текущем дереве
-        default: 1
+  type: object
+  properties:
+    - title
+    - description
+  properties:
+    title:
+      type: string
+      description: Название тематики
+    description:
+      type: string
+      description: Описание тематики

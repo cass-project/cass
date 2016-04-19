@@ -1,9 +1,8 @@
-'/protected/host-admin/theme-editor/read/entity/{themeId}':
+'/theme/{themeId}/get':
   get:
     tags:
       - theme
-    description: |
-      Список тематик
+    description: Возвращает тематику по ее ID
     parameters:
       - name: themeId
         in: path
@@ -13,6 +12,8 @@
     responses:
       '400':
           $ref: '#/responses/error'
+      '404':
+        $ref: '#/responses/Theme_Response_404_NotFound'
       '200':
         description: Список тематик
         schema:
@@ -31,4 +32,4 @@
             entities:
               type: array
               items:
-                $ref: "#/definitions/Data_Entity_Theme"
+                $ref: "#/definitions/Theme_Entity_Theme"

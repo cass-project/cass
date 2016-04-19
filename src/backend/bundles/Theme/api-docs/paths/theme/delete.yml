@@ -1,0 +1,18 @@
+'/protected/theme/{themeId}/delete':
+  delete:
+    tags:
+      - theme
+    description: Удаление тематики
+    parameters:
+      - name: themeId
+        in: path
+        required: true
+        type: number
+        description: ID тематики
+    responses:
+      '200':
+        $ref: '#/responses/success'
+      '400':
+        $ref: '#/responses/error'
+      '404':
+        $ref: '#/responses/Theme_Response_404_NotFound'

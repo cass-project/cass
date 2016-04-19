@@ -1,0 +1,30 @@
+'/protected/theme/{themeId}/move/under/{parentThemeId}/in-position/{position}':
+  post:
+    tags:
+      - theme
+    description: |
+      Перемещение тематики на указанную позицию, изменение родителя указанной тематики
+    parameters:
+      - name: themeId
+        in: path
+        required: true
+        type: number
+        description: |
+          ID тематики
+      - name: parentThemeId
+        in: path
+        required: true
+        type: number
+        description: ID родительской тематики
+      - name: position
+        in: path
+        required: true
+        type: number
+        description: Желаемая позиция в дереве тематики.
+    responses:
+      '200':
+        $ref: '#/responses/success'
+      '400':
+        $ref: '#/responses/error'
+      '404':
+        $ref: '#/responses/Theme_Response_404_NotFound'

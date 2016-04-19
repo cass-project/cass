@@ -1,22 +1,22 @@
-/protected/host-admin/theme-editor/entity/create:
-  put:
+"/protected/theme/{themeId}/update":
+  post:
     tags:
       - theme
     description: |
-      Создает новую тематику в текущем хосте
+      Обновляет данные о тематике
     parameters:
       - name: body
         in: body
         required: true
-        description: JSON Request
         schema:
           $ref: '#/definitions/PUT_Theme_Request'
+      - name: themeId
+        in: path
+        required: true
+        type: number
+        description: ID тематики
     responses:
-      '400':
-          $ref: '#/responses/error'
       '200':
-        description: |
-          Successfull response
         schema:
           type: object
           required:
@@ -24,12 +24,12 @@
             - success
             - entity
           properties:
-            id:
-              type: number
-              description: ID созданной темы
             success:
               type: boolean
-              default: true
               description: "= true"
             entity:
-              $ref: '#/definitions/Data_Entity_Theme'
+              $ref: '#/definitions/Theme_Entity_Theme'
+      '403':
+        $ref: '#/responses/Unauthorized'
+      '200':
+        $ref: '#/responses/success'

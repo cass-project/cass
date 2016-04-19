@@ -1,0 +1,32 @@
+"/protected/theme/create":
+  put:
+    tags:
+      - theme
+    description: |
+      Создает новую тематику
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/PUT_Theme_Request'
+    responses:
+      '400':
+        $ref: '#/responses/error'
+      '403':
+        $ref: '#/responses/Unauthorized'
+      '200':
+        description: |
+          Successfull response
+        schema:
+          type: object
+          required:
+            - id
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: "= true"
+            entity:
+              $ref: '#/definitions/Theme_Entity_Theme'

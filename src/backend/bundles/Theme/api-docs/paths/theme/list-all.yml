@@ -1,9 +1,8 @@
-'/protected/host-admin/theme-editor/read/entities/':
+'/theme/get/list-all':
   get:
     tags:
       - theme
-    description: |
-      Список тематик
+    description: Список тематик
     responses:
       '400':
           $ref: '#/responses/error'
@@ -21,8 +20,8 @@
               description: "= true"
             total:
               type: number
-              description: "Количество тематик"
+              description: "Общее количество тематик"
             entities:
               type: array
               items:
-                $ref: "#/definitions/Data_Entity_Theme"
+                $ref: "#/definitions/Theme_Entity_Theme"

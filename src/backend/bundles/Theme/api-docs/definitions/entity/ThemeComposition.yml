@@ -1,4 +1,4 @@
-Theme_Entity_Theme:
+Theme_Entity_ThemeComposition:
   type: object
   required:
     - id
@@ -22,3 +22,5 @@ Theme_Entity_Theme:
     description:
       type: string
       description: Описание тематики
+    children:
+      $ref: '#/definitions/Theme_Entity_ThemeComposition'

@@ -1,14 +1,13 @@
-'/protected/host-admin/theme-editor/read/entities-tree/':
+'/theme/get/tree':
   get:
     tags:
       - theme
-    description: |
-      Список тематик в виде дерева
+    description: Возвращает все существующие тематики в виде дерева
     responses:
       '400':
           $ref: '#/responses/error'
       '200':
-        description: Список тематик
+        description: Дерево тематик
         schema:
           type: object
           required:
@@ -18,3 +17,5 @@
             success:
               type: boolean
               description: "= true"
+            entities:
+              $ref: "#/definitions/Theme_Entity_ThemeComposition"
