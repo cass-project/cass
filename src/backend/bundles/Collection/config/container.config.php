@@ -19,8 +19,8 @@ return [
             get(CurrentAccountService::class)
         ),
         CollectionMiddleware::class => object()->constructor(
-            CollectionService::class,
-            CurrentAccountService::class
+            get(CollectionService::class),
+            get(CurrentAccountService::class)
         )
     ]
 ];
