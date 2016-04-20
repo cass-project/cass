@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityRepository;
 use Profile\Entity\Profile;
 use Profile\Entity\ProfileGreetings;
 use Profile\Entity\ProfileImage;
+use Profile\Exception\ProfileNotFoundException;
 
 class ProfileRepository extends EntityRepository
 {
@@ -36,7 +37,7 @@ class ProfileRepository extends EntityRepository
         $result = $this->find($profileId);
 
         if($result === null) {
-            throw new EntityNotFoundException("Entity with ID {$profileId} not found");
+            throw new ProfileNotFoundException("Entity with ID {$profileId} not found");
         }
 
         return $result;

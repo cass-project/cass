@@ -1,6 +1,7 @@
 <?php
 use Auth\Service\CurrentAccountService;
 use Common\Factory\DoctrineRepositoryFactory;
+use Profile\Console\Command\ProfileCard;
 use Profile\Entity\Profile;
 use Profile\Entity\ProfileGreetings;
 use Profile\Entity\ProfileImage;
@@ -13,7 +14,6 @@ use Profile\Service\ProfileService;
 use function DI\object;
 use function DI\factory;
 use function DI\get;
-
 
 return [
     'php-di' => [
@@ -29,6 +29,9 @@ return [
         ProfileMiddleware::class => object()->constructor(
             get(ProfileService::class),
             get(CurrentAccountService::class)
+        ),
+        ProfileCard::class => object()->constructor(
+            get(ProfileService::class)
         )
     ],
 ];

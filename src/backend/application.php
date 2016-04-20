@@ -30,26 +30,35 @@ class LBApplicationBootstrap
     private $container;
 
     public function bootstrap() {
-        $router = new \Zend\Expressive\Router\FastRouteRouter();
-        $errorHandler = new \Common\Bootstrap\ErrorHandler();
-        $emitter = new \Zend\Expressive\Emitter\EmitterStack();
-        $emitter->push(new SapiEmitter());
-
         $this->initConstants();
         $this->initBundlesService();
         $this->initAppConfig();
         $this->initDI();
         $this->initFrontline();
+    }
+
+    public function run() {
+        $router = new \Zend\Expressive\Router\FastRouteRouter();
+        $errorHandler = new \Common\Bootstrap\ErrorHandler();
+        $emitter = new \Zend\Expressive\Emitter\EmitterStack();
+        $emitter->push(new SapiEmitter());
 
         $this->app = new Application($router, $this->container, $errorHandler, $emitter);
 
         $this->initProtectedRoutes();
         $this->initRoutes();
         $this->initSchemaRESTRequest();
+
+        $this->app->run();
     }
 
-    public function run() {
-        $this->app->run();
+    public function getContainer(): \Interop\Container\ContainerInterface {
+        return $this->container;
+    }
+
+    public function getAppConfig(): SharedConfigService
+    {
+        return $this->container->get(SharedConfigService::class);
     }
 
     private function initConstants() {

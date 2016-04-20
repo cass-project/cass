@@ -3,6 +3,7 @@ namespace Profile\Middleware;
 
 use Auth\Service\CurrentAccountService;
 use Common\REST\GenericRESTResponseBuilder;
+use Profile\Exception\ProfileNotFoundException;
 use Profile\Exception\UnknownGreetingsException;
 use Profile\Middleware\Command\Command;
 use Profile\Service\ProfileService;
@@ -32,13 +33,17 @@ class ProfileMiddleware implements MiddlewareInterface
             $command = Command::factory($request, $this->profileService, $this->currentAccountService);
             $result = $command->run($request);
 
-            if($result === true) {
+            if ($result === true) {
                 $result = [];
             }
 
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson($result);
+        }catch(ProfileNotFoundException $e) {
+            $responseBuilder
+                ->setStatusNotFound()
+                ->setError($e);
         }catch(UnknownGreetingsException $e) {
             $responseBuilder
                 ->setStatusBadRequest()
