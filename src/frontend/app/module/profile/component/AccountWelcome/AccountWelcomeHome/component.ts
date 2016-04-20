@@ -5,7 +5,6 @@ import {AvatarCropper} from "../../AvatarCropper/index";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {AuthService} from "../../../../auth/service/AuthService";
 import {ProfileNameInfo} from "../../../service/ProfileService";
-import {Profile} from "../../../entity/Profile";
 import {AvatarCropperService} from "../../AvatarCropper/service";
 
 declare var Cropper;
@@ -33,6 +32,11 @@ export class AccountWelcomeHome {
                  public router: Router,
                  public avatarCropperService: AvatarCropperService
     ){}
+
+    ngOnInit() {
+    }
+
+
 
     profileNameInfo: ProfileNameInfo = new ProfileNameInfo();
 
