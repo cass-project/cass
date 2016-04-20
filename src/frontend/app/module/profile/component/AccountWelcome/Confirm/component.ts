@@ -84,6 +84,8 @@ export class AccountConfirm {
 
     submit(){
         this.router.parent.navigate(['Dashboard']);
+        AuthService.getAuthToken().getCurrentProfile().entity.is_initialized = true;
+        console.log(AuthService.getAuthToken().getCurrentProfile().entity.is_initialized);
     }
 }
 

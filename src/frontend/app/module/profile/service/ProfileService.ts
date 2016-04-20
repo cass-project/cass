@@ -15,7 +15,8 @@ var avatarLoadEnd = false;
 @Injectable()
 export class ProfileService {
     constructor(public http:Http,
-                public avatarCropperService:AvatarCropperService) {
+                public avatarCropperService:AvatarCropperService
+    ) {
     }
 
     getProfileInfo() {
@@ -50,6 +51,10 @@ export class ProfileService {
             first_name: firstname,
             middle_name: middlename
         }));
+    }
+
+    checkInitProfile(){
+       return AuthService.getAuthToken().getCurrentProfile().entity.is_initialized;
     }
 
     greetingsAsN(nickname) {
