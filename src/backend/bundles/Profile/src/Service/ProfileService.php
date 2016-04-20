@@ -91,16 +91,19 @@ class ProfileService
     public function nameFL(int $profileId, string $firstName, string $lastName)
     {
         $this->profileRepository->nameFL($profileId, $firstName, $lastName);
+        $this->profileRepository->setAsInitialized($profileId);
     }
 
     public function nameLFM(int $profileId, string $lastName, string $firstName, string $middleName)
     {
         $this->profileRepository->nameLFM($profileId, $lastName, $firstName, $middleName);
+        $this->profileRepository->setAsInitialized($profileId);
     }
 
     public function nameN(int $profileId, string $nickName)
     {
         $this->profileRepository->nameN($profileId, $nickName);
+        $this->profileRepository->setAsInitialized($profileId);
     }
 
     public function switchTo(Account $account, int $profileId): Profile

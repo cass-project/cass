@@ -85,6 +85,17 @@ class ProfileRepository extends EntityRepository
         $em->flush($greetings);
     }
 
+    public function setAsInitialized(int $profileId)
+    {
+        $em = $this->getEntityManager();
+
+        $profile = $this->getProfileById($profileId);
+        $profile->setAsInitialized();
+
+        $em->persist($profile);
+        $em->flush($profile);
+    }
+
     public function switchTo(array $profiles, Profile $profile)
     {
         $em = $this->getEntityManager();
