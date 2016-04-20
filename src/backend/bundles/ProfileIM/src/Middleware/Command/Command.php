@@ -2,6 +2,7 @@
 namespace ProfileIM\Middleware\Command;
 
 use Auth\Service\CurrentAccountService;
+use Profile\Service\ProfileService;
 use ProfileIM\Service\ProfileIMService;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
@@ -14,9 +15,12 @@ abstract class Command
 
     /** @var CurrentAccountService */
     protected $currentAccountService;
-
     /** @var ProfileIMService */
     protected $profileIMService;
+
+
+    /** @var  ProfileService */
+    protected $profileService;
 
     public function setCurrentAccountService($currentAccountService): self
     {
@@ -30,16 +34,24 @@ abstract class Command
         return $this;
     }
 
+    public function setProfileService(ProfileService $profileService): self
+    {
+        $this->profileService = $profileService;
+        return $this;
+    }
+
     static public function factory(
         ServerRequestInterface $request,
         CurrentAccountService $currentAccountService,
-        ProfileIMService $profileIMService)
+        ProfileIMService $profileIMService,
+        ProfileService $profileService)
     {
         $command = self::factoryCommand($request->getAttribute('command'));
 
         return $command
             ->setCurrentAccountService($currentAccountService)
-            ->setProfileIMService($profileIMService);
+            ->setProfileIMService($profileIMService)
+            ->setProfileService($profileService);
     }
 
     static private function factoryCommand(string $command): Command

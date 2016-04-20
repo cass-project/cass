@@ -128,4 +128,19 @@ class ProfileMessage
         $this->content = $content;
         return $this;
     }
+
+    public function toJSON()
+    {
+        return [
+          'id'           => $this->id,
+          'date_created' => $this->getDateCreated()->format('Y-m-d H:i:s'),
+          'read_status'  => [
+                'is_read'   => $this->isRead,
+                'date_read' => $this->getDateRead()->format('Y-m-d H:i:s')
+          ],
+          'content'      => $this->getContent(),
+
+        ];
+    }
+
 }

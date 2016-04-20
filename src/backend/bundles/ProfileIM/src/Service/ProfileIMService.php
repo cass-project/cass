@@ -2,6 +2,7 @@
 namespace ProfileIM\Service;
 
 use Auth\Service\CurrentAccountService;
+use ProfileIM\Entity\ProfileMessage;
 use ProfileIM\Repository\ProfileMessageRepository;
 
 class ProfileIMService
@@ -17,4 +18,23 @@ class ProfileIMService
         $this->currentAccountService = $currentAccountService;
         $this->profileMessageRepository = $profileMessageRepository;
     }
+
+
+    public function getMessagesBy($criteria){
+       return $this->profileMessageRepository->getMessageBy($criteria);
+    }
+
+    public function getMessageById($id){
+        return $this->profileMessageRepository->getMessageById($id);
+    }
+
+    public function saveMessage(ProfileMessage $message):ProfileMessage
+    {
+        return $this->profileMessageRepository->saveMessage($message);
+    }
+
+
+
+
+
 }
