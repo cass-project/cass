@@ -10,7 +10,7 @@ class MessageIsNotReadException extends \Exception {}
  * @Entity(repositoryClass="ProfileIM\Repository\ProfileMessageRepository")
  * @Table(name="profile_message")
  */
-class ProfileMessage
+class   ProfileMessage
 {
     /**
      * @Id
@@ -132,13 +132,16 @@ class ProfileMessage
     public function toJSON()
     {
         return [
-          'id'           => $this->id,
-          'date_created' => $this->getDateCreated()->format('Y-m-d H:i:s'),
-          'read_status'  => [
-                'is_read'   => $this->isRead,
-                'date_read' => $this->isRead ? $this->getDateRead()->format('Y-m-d H:i:s') : null
+          'id'                => $this->id,
+          'source_profile_id' => $this->getSourceProfile()->getId(),
+          'target_profile_id' => $this->getTargetProfile()->getId(),
+          'date_created'      => $this->getDateCreated()->format('Y-m-d H:i:s'),
+          'read_status'       => [
+            'is_read'   => $this->isRead,
+            'date_read' => $this->isRead ? $this->getDateRead()
+                                                ->format('Y-m-d H:i:s') : NULL
           ],
-          'content'      => $this->getContent(),
+          'content'           => $this->getContent(),
         ];
     }
 
