@@ -42,4 +42,9 @@ class ThemeService
 
         return $this->themeRepository->getThemesByParentId($parentId);
     }
+
+    public function deleteTheme(int $themeId)
+    {
+        $this->themeRepository->deleteTheme($themeId);
+    }
 }

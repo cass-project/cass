@@ -47,4 +47,19 @@ class ThemeRepository extends EntityRepository
     {
         return $this->findBy([]);
     }
+
+    public function deleteTheme(int $themeId)
+    {
+        $theme = $this->getThemeById($themeId);
+
+        $sameLevelThemes = $this->getThemesByParentId($theme->hasParent() ? $theme->getParent()->getId() : null);
+
+        $serialManager = new SerialManager($sameLevelThemes);
+        $serialManager->remove($theme);
+        $serialManager->normalize();
+
+
+        $this->getEntityManager()->remove($theme);
+        $this->getEntityManager()->flush($sameLevelThemes + [$theme]);
+    }
 }
