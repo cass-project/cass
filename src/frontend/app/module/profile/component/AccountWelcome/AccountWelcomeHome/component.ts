@@ -34,6 +34,9 @@ export class AccountWelcomeHome {
     ){}
 
     ngOnInit() {
+        if(this.profileService.checkInitProfile()){
+            this.router.parent.navigate(['Dashboard']);
+        }
     }
 
 
