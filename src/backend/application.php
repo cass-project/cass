@@ -35,6 +35,8 @@ class LBApplicationBootstrap
         $this->initBundlesService();
         $this->initAppConfig();
         $this->initDI();
+        $this->initPHPSAPI();
+
         $this->initFrontline();
     }
 
@@ -87,6 +89,11 @@ class LBApplicationBootstrap
             LB_FRONTEND_DIRECTORY,
             LB_STORAGE_DIRECTORY
         );
+    }
+
+    private function initPHPSAPI()
+    {
+        $this->container->set("PHP_SAPI_NAME", php_sapi_name());
     }
 
     private function initBundlesService() {
