@@ -46,7 +46,7 @@ export class AccountWelcomeHome {
             this.router.parent.navigate(['Dashboard']);
         } else {
             greetings.greetings_method = '';
-            greetings.greetings.first_name = '';
+            greetings.first_name = '';
             greetings.last_name = '';
             greetings.middle_name = '';
             greetings.nickname = '';
@@ -84,7 +84,7 @@ export class AccountWelcomeHome {
         let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
 
         greetings.greetings_method = '';
-        greetings.greetings.first_name = '';
+        greetings.first_name = '';
         greetings.last_name = '';
         greetings.middle_name = '';
         greetings.nickname = '';
