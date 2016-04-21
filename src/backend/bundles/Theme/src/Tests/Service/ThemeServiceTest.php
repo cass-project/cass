@@ -1,12 +1,11 @@
 <?php
 namespace Theme\Tests\Service;
 
+use Common\Tests\TestCase;
+
 /**
  * @backupGlobals disabled
  */
-class ThemeServiceTest extends \PHPUnit_Framework_TestCase
+class ThemeServiceTest extends TestCase
 {
-    public function testCreateService()
-    {
-    }
 }
