@@ -29,10 +29,8 @@ class ProfileMessageRepository extends EntityRepository
 	public function getMessagesBySourceProfile(int $sourceProfileId, Seek $seek): array
 	{
 		return $this->findBy([
-			'source_profile_id' => $sourceProfileId,
-			'offset' => $seek->getOffset(),
-			'limit' => $seek->getLimit(),
-		]);
+			'sourceProfile' => $sourceProfileId
+		], ['id' => 'desc'], $seek->getLimit(), $seek->getOffset());
 	}
 
 	public function saveMessage(ProfileMessage $message): ProfileMessage
