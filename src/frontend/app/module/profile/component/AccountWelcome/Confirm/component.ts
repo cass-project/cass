@@ -66,16 +66,18 @@ export class AccountConfirm {
     }
 
     getProfileName() {
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
         if (this.getGreetings()) {
-            switch (AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method) {
+            switch (greetings.greetings_method) {
                 case 'fl':
-                    return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name}`;
+                    return `${greetings.first_name} ${greetings.last_name}`;
                     break;
                 case 'flm':
-                    return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name}`;
+                    return `${greetings.first_name} ${greetings.last_name} ${greetings.middle_name}`;
                     break;
                 case 'n':
-                    return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname}`;
+                    return `${greetings.nickname}`;
                     break;
             }
         }
@@ -88,8 +90,10 @@ export class AccountConfirm {
     }
 
     submit() {
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
         if (this.getGreetings()) {
-            switch (AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method){
+            switch (greetings.greetings_method){
                 case 'fl':
                     this.profileService.greetingsAsFL().subscribe(data => {
                         this.router.parent.navigate(['Dashboard']);

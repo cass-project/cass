@@ -24,21 +24,23 @@ export class ProfileService {
     }
 
     greetingsAsFL() {
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
         let url = `backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/greetings-as/fl/`;
 
         return this.http.post(url, JSON.stringify({
-            first_name: AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name,
-            last_name: AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name
+            first_name: greetings.first_name,
+            last_name: greetings.greetings.last_name
         }));
     }
 
     greetingsAsFLM() {
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
         let url =`backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/greetings-as/lfm/`;
 
         return this.http.post(url, JSON.stringify({
-            last_name: AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name,
-            first_name: AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name,
-            middle_name: AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name
+            last_name: greetings.last_name,
+            first_name: greetings.first_name,
+            middle_name: greetings.greetings.middle_name
         }));
     }
 
@@ -47,8 +49,12 @@ export class ProfileService {
     }
 
     greetingsAsN() {
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
         let url = `backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/greetings-as/n/`;
-        return this.http.post(url, JSON.stringify({nickname: AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname}));
+
+        return this.http.post(url, JSON.stringify({
+            nickname: greetings.nickname
+        }));
     }
 
     avatarUpload(file:Blob, crop:Crop) {

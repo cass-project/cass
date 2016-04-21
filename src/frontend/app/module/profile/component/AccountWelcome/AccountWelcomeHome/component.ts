@@ -40,14 +40,16 @@ export class AccountWelcomeHome {
     isVisibleChooseType: boolean = true;
 
     ngOnInit() {
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
         if(this.profileService.checkInitProfile()){
             this.router.parent.navigate(['Dashboard']);
         } else {
-            AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = '';
-            AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name = '';
-            AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name = '';
-            AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name = '';
-            AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname = '';
+            greetings.greetings_method = '';
+            greetings.greetings.first_name = '';
+            greetings.last_name = '';
+            greetings.middle_name = '';
+            greetings.nickname = '';
         }
     }
 
@@ -79,11 +81,13 @@ export class AccountWelcomeHome {
     }
 
     reset(){
-        AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = '';
-        AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name = '';
-        AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name = '';
-        AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name = '';
-        AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname = '';
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
+        greetings.greetings_method = '';
+        greetings.greetings.first_name = '';
+        greetings.last_name = '';
+        greetings.middle_name = '';
+        greetings.nickname = '';
 
         this.router.parent.navigate(['Dashboard']);
         this.router.parent.navigate(['Welcome']);
@@ -102,19 +106,21 @@ export class AccountWelcomeHome {
 
 
     submit(){
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
         if (this.getGreetings()) {
-            switch (AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method){
+            switch (greetings.greetings_method){
                 case 'fl':
-                    AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name = this.profileNameInfo.firstname;
-                    AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name = this.profileNameInfo.lastname;
+                    greetings.first_name = this.profileNameInfo.firstname;
+                    greetings.last_name = this.profileNameInfo.lastname;
                     break;
                 case 'flm':
-                    AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name = this.profileNameInfo.firstname;
-                    AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name = this.profileNameInfo.lastname;
-                    AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name = this.profileNameInfo.middlename;
+                    greetings.first_name = this.profileNameInfo.firstname;
+                    greetings.last_name = this.profileNameInfo.lastname;
+                    greetings.middle_name = this.profileNameInfo.middlename;
                     break;
                 case 'n':
-                    AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname = this.profileNameInfo.nickname;
+                    greetings.nickname = this.profileNameInfo.nickname;
                     break;
             }
         }
