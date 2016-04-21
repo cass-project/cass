@@ -31,6 +31,11 @@ class ThemeRepository extends EntityRepository
         return $themeEntity;
     }
 
+    public function getThemeById(int $themeId): Theme
+    {
+        return $this->find($themeId);
+    }
+
     /** @return Theme[] */
     public function getThemesByParentId(int $parentId = null): array
     {

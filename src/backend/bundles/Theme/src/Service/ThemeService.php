@@ -24,6 +24,11 @@ class ThemeService
         return $this->themeRepository->createTheme($title, $description, $parentId);
     }
 
+    public function getThemeById(int $themeId)
+    {
+        return $this->themeRepository->getThemeById($themeId);
+    }
+
     /** @return Theme[] */
     public function getAllThemes(): array
     {

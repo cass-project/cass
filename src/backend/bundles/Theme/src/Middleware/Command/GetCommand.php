@@ -6,6 +6,8 @@ use Psr\Http\Message\ServerRequestInterface;
 final class GetCommand extends Command
 {
     public function run(ServerRequestInterface $request) {
-        throw new \Exception('Not implemented');
+        return [
+            'entity' => $this->themeService->getThemeById($request->getAttribute('themeId'))->toJSON()
+        ];
     }
 }

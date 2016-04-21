@@ -26,10 +26,5 @@
             success:
               type: boolean
               description: "= true"
-            total:
-              type: number
-              description: "Количество тематик"
-            entities:
-              type: array
-              items:
-                $ref: "#/definitions/Theme_Entity_Theme"
+            entity:
+              $ref: "#/definitions/Theme_Entity_Theme"
