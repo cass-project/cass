@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {AuthService} from '../auth/service/AuthService';
-import {ProfileEditComponent} from "./component/ProfileEdit/index";
+import {ProfileEdit} from "./component/ProfileEdit/index";
 import {ProfileDashboardComponent} from "./component/ProfileDashboard/index";
 import {AccountWelcome} from "./component/AccountWelcome/component";
 import {AvatarCropper} from "./component/AvatarCropper/index";
@@ -26,7 +26,7 @@ import {ProfileService} from "./service/ProfileService";
     {
         name: 'Edit',
         path: '/edit',
-        component: ProfileEditComponent
+        component: ProfileEdit
     },
     {
         name: 'Welcome',

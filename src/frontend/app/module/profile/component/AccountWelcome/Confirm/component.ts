@@ -50,7 +50,15 @@ export class AccountConfirm {
         return this.avatarCropperService.isAvatarFormVisibleFlag;
     }
 
-    reset() {
+    reset(){
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
+        greetings.greetings_method = '';
+        greetings.first_name = '';
+        greetings.last_name = '';
+        greetings.middle_name = '';
+        greetings.nickname = '';
+
         this.router.parent.navigate(['Dashboard']);
         this.router.parent.navigate(['Welcome']);
     }
