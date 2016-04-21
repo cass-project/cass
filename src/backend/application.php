@@ -9,6 +9,7 @@ use Common\Service\SchemaService;
 use Common\Service\SharedConfigService;
 use Auth\Middleware\ProtectedMiddleware;
 use Frontline\Service\FrontlineService;
+use ProfileIM\Middleware\ProfileIMMiddleware;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Expressive\Application;
 
@@ -48,6 +49,8 @@ class LBApplicationBootstrap
         $this->initProtectedRoutes();
         $this->initRoutes();
         $this->initSchemaRESTRequest();
+
+        $this->container->get(ProfileIMMiddleware::class);
 
         $this->app->run();
     }

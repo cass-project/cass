@@ -1,6 +1,7 @@
 <?php
 namespace ProfileIM\Repository;
 
+use Common\Util\Seek;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use ProfileIM\Entity\ProfileMessage;
@@ -8,7 +9,8 @@ use ProfileIM\Entity\ProfileMessage;
 class ProfileMessageRepository extends EntityRepository
 {
 
-	public function getMessage($criteria){
+	public function getMessage($criteria)
+	{
 
 		return $this->find($criteria);
 	}
@@ -23,26 +25,15 @@ class ProfileMessageRepository extends EntityRepository
 		return $products = $query->getResult();
 	}
 
-	public function getMessageBy(array $criteria)
+	/** @return ProfileMessage[] */
+	public function getMessagesBySourceProfile(int $sourceProfileId, Seek $seek): array
 	{
-
-		$qb = $this->createQueryBuilder('m, sp')
-							->join('m.source_profile', 'sp');
-							/*->where('m.id = :id')
-							->setParameter('id', $criteria['source_profile']);*/
-
-		/*if($criteria['source_profile']){
-			$qb->where('m.id = :id')
-				 ->setParameter('id', $criteria['source_profile']);
-
-		}*/
-
-		$query = $qb->getQuery();
-		$products = $query->getResult(Query::HYDRATE_ARRAY);
+		return $this->findBy([
+			'source_profile_id' => $sourceProfileId,
+			'offset' => $seek->getOffset(),
+			'limit' => $seek->getLimit(),
+		]);
 	}
-
-
-
 
 	public function saveMessage(ProfileMessage $message): ProfileMessage
 	{

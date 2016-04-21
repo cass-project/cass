@@ -16,8 +16,8 @@ abstract class Command
     /** @var CurrentAccountService */
     protected $currentAccountService;
     /** @var ProfileIMService */
-    protected $profileIMService;
 
+    protected $profileIMService;
 
     /** @var  ProfileService */
     protected $profileService;

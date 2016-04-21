@@ -1,40 +1,35 @@
 <?php
 namespace ProfileIM\Middleware\Command;
 
+use Common\Util\Seek;
 use ProfileIM\Entity\ProfileMessage;
 use Psr\Http\Message\ServerRequestInterface;
 
 class MessagesCommand extends Command
 {
+  const MAX_MESSAGE_LIMIT = 500;
+
   public function run(ServerRequestInterface $request){
+    $qp = $request->getQueryParams();
+
     $sourceProfileId = $request->getAttribute('sourceProfileId');
     $offset          = $request->getAttribute('offset');
     $limit           = $request->getAttribute('limit');
-    $markAsRead      = $request->getQueryParams()['markAsRead'];
+    $markAsRead      = $qp['markAsRead'] ?? false;
 
+    $seek = new Seek(self::MAX_MESSAGE_LIMIT, $offset, $limit);
+    $messages = $this->profileIMService->getMessagesBySourceProfile($sourceProfileId, $seek);
 
+    if($markAsRead) {
+        $this->profileIMService->markMessagesAsRead($messages);
+    }
 
-    $criteria = [
-      'source_profile' => $sourceProfileId,
-      'offset'         => $offset,
-      'limit'          => $limit,
-      'is_read'        => $markAsRead == 'true' ? 1 : 0
+    return [
+        'source_profile' => $sourceProfileId,
+        'messages' => array_map(function (ProfileMessage $message) {
+          return $message->toJSON();
+        }, $messages),
+        'total' => count($messages),
     ];
-
-
-    $messages = array_map(
-      function (ProfileMessage $message){
-        return $message->toJSON();
-      },
-      $this->profileIMService->getMessagesBy($criteria)
-    );
-
-    $result = [
-      'source_profile' => $sourceProfileId,
-      'messages'       => $messages,
-      'total'          => count($messages),
-    ];
-
-    return $result;
   }
 }

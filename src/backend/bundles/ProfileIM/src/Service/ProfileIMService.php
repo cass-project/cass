@@ -2,6 +2,7 @@
 namespace ProfileIM\Service;
 
 use Auth\Service\CurrentAccountService;
+use Common\Util\Seek;
 use ProfileIM\Entity\ProfileMessage;
 use ProfileIM\Repository\ProfileMessageRepository;
 
@@ -19,11 +20,6 @@ class ProfileIMService
         $this->profileMessageRepository = $profileMessageRepository;
     }
 
-
-    public function getMessagesBy($criteria){
-       return $this->profileMessageRepository->getMessageBy($criteria);
-    }
-
     public function getMessageById($id){
         return $this->profileMessageRepository->getMessageById($id);
     }
@@ -34,7 +30,14 @@ class ProfileIMService
     }
 
 
+    /** @return ProfileMessage[] */
+    public function getMessagesBySourceProfile(int $sourceProfileId, Seek $seek): array
+    {
+        return $this->profileMessageRepository->getMessagesBySourceProfile($sourceProfileId, $seek);
+    }
 
-
-
+    public function markMessagesAsRead(array $messages)
+    {
+        return true;
+    }
 }

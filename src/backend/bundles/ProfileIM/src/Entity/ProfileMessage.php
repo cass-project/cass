@@ -139,7 +139,6 @@ class ProfileMessage
                 'date_read' => $this->getDateRead()->format('Y-m-d H:i:s')
           ],
           'content'      => $this->getContent(),
-
         ];
     }
 
