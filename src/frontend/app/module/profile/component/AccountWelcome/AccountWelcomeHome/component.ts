@@ -6,7 +6,7 @@ import {CORE_DIRECTIVES} from "angular2/common";
 import {AuthService} from "../../../../auth/service/AuthService";
 import {AvatarCropperService} from "../../AvatarCropper/service";
 import {AccountConfirm} from "../Confirm/component";
-import {ProfileNameInfo} from "../../../service/ProfileService";
+import {ProfileInfo} from "../../../service/ProfileService";
 
 declare var Cropper;
 
@@ -36,7 +36,7 @@ export class AccountWelcomeHome {
                  public accountConfirm: AccountConfirm
     ){}
 
-    profileNameInfo: ProfileNameInfo = new ProfileNameInfo();
+    profileNameInfo: ProfileInfo = new ProfileInfo();
     isVisibleChooseType: boolean = true;
 
     ngOnInit() {
@@ -55,11 +55,15 @@ export class AccountWelcomeHome {
 
 
     greetingsMethodReturn(){
-        return AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method;
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
+        return greetings.greetings_method;
     }
 
     greetingsMethod(greetingsAs){
-        AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = greetingsAs;
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
+        greetings.greetings_method = greetingsAs;
         this.showNextStage();
     }
 

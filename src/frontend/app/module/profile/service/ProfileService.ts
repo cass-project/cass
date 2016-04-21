@@ -75,12 +75,14 @@ export class ProfileService {
     }
 }
 
-export class ProfileNameInfo
+export class ProfileInfo
 {
     nickname: string;
     firstname: string;
     lastname: string;
     middlename: string;
+    sex: string;
+    birthday: string;
 }
 
 export interface Crop
