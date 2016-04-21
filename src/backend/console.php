@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 /** @see https://xtreamwayz.com/blog/2016-02-07-zend-expressive-console-cli-commands */
 /** Example: php console profile:card 1 */

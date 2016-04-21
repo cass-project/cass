@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-php /vagrant/backend/console $*
+php /vagrant/backend/console.php $*
