@@ -49,6 +49,11 @@ class ThemeService
         return $this->themeRepository->moveTheme($themeId, $newParentThemeId, $position);
     }
 
+    public function updateTheme(int $themeId, string $title, string $description = ''): Theme
+    {
+        return $this->themeRepository->updateTheme($themeId, $title, $description);
+    }
+
     public function deleteTheme(int $themeId)
     {
         $this->themeRepository->deleteTheme($themeId);

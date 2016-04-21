@@ -2,10 +2,20 @@
 namespace Theme\Middleware\Command;
 
 use Psr\Http\Message\ServerRequestInterface;
+use Theme\Middleware\Request\UpdateThemeRequest;
 
 final class UpdateCommand extends Command
 {
     public function run(ServerRequestInterface $request) {
-        throw new \Exception('Not implemented');
+        $params = (new UpdateThemeRequest($request))->getParameters();
+        $theme = $this->themeService->updateTheme(
+            (int) $request->getAttribute('themeId'),
+            (string) $params['title'],
+            (string) $params['description']
+        );
+
+        return [
+            'entity' => $theme->toJSON()
+        ];
     }
 }

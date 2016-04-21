@@ -23,7 +23,18 @@
         description: Желаемая позиция в дереве тематики.
     responses:
       '200':
-        $ref: '#/responses/success'
+        schema:
+          type: object
+          required:
+            - success
+            - total
+            - entities
+          properties:
+            success:
+              type: boolean
+              description: "= true"
+            entity:
+              $ref: "#/definitions/Theme_Entity_Theme"
       '400':
         $ref: '#/responses/error'
       '404':

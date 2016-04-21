@@ -36,12 +36,12 @@ class ThemeRepository extends EntityRepository
         $theme = $this->getThemeById($themeId);
         $themeIsMovingToAnotherTree = $theme->getParentId() !== $newParentThemeId;
 
-        if($themeIsMovingToAnotherTree) {
+        if ($themeIsMovingToAnotherTree) {
             $oldParentId = $theme->getParentId();
 
-            if($newParentThemeId === null) {
+            if ($newParentThemeId === null) {
                 $theme->setParent(null);
-            }else{
+            } else {
                 $theme->setParent($this->getEntityManager()->getReference(Theme::class, $newParentThemeId));
             }
 
@@ -54,7 +54,7 @@ class ThemeRepository extends EntityRepository
             $this->normalizeTree($oldParentId);
 
             $this->getEntityManager()->flush();
-        }else{
+        } else {
             $sameLevelThemes = $this->getThemesByParentId($newParentThemeId);
 
             $serialManager = new SerialManager($sameLevelThemes);
@@ -63,6 +63,18 @@ class ThemeRepository extends EntityRepository
 
             $this->getEntityManager()->flush();
         }
+
+        return $theme;
+    }
+
+    public function updateTheme(int $themeId, string $title, string $description = ''): Theme
+    {
+        $theme = $this->getThemeById($themeId);
+        $theme
+            ->setTitle($title)
+            ->setDescription($description);
+
+        $this->getEntityManager()->flush($theme);
 
         return $theme;
     }

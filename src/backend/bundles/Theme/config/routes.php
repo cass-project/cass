@@ -39,7 +39,7 @@ return function (Application $app, string $prefix) {
         'theme-tree'
     );
 
-    $app->put(
+    $app->post(
         sprintf('%s/protected/theme/{themeId}/{command:update}', $prefix),
         ThemeMiddleware::class,
         'theme-update'
