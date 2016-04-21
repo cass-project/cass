@@ -55,6 +55,8 @@ abstract class Command
                 return new DeleteCommand();
             case self::COMMAND_GET:
                 return new GetCommand();
+            case self::COMMAND_LIST_ALL:
+                return new ListAllCommand();
             case self::COMMAND_MOVE:
                 return new MoveCommand();
             case self::COMMAND_TREE:

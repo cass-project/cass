@@ -15,7 +15,7 @@ class ThemeRepository extends EntityRepository
         $themeEntity->setTitle($title);
         $themeEntity->setDescription($description);
 
-        if($parentId) {
+        if ($parentId) {
             $themeEntity->setParent($em->getReference(Theme::class, $parentId));
         }
 
@@ -35,5 +35,11 @@ class ThemeRepository extends EntityRepository
     public function getThemesByParentId(int $parentId = null): array
     {
         return $this->findBy(['parent' => $parentId]);
+    }
+
+    /** @return Theme[] */
+    public function getAllThemes(): array
+    {
+        return $this->findBy([]);
     }
 }

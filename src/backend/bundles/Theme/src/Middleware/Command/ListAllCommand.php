@@ -2,10 +2,18 @@
 namespace Theme\Middleware\Command;
 
 use Psr\Http\Message\ServerRequestInterface;
+use Theme\Entity\Theme;
 
 final class ListAllCommand extends Command
 {
     public function run(ServerRequestInterface $request) {
-        throw new \Exception('Not implemented');
+        $themes = $this->themeService->getAllThemes();
+
+        return [
+            'total' => count($themes),
+            'entities' => array_map(function(Theme $theme) {
+                return $theme->toJSON();
+            }, $themes)
+        ];
     }
 }
