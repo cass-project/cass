@@ -1,12 +1,13 @@
 <?php
 namespace Theme\Entity;
 
+use Common\REST\JSONSerializable;
 use Common\Tools\SerialManager\SerialEntity;
 /**
  * @Entity(repositoryClass="Theme\Repository\ThemeRepository")
  * @Table(name="theme")
  */
-class Theme implements SerialEntity
+class Theme implements SerialEntity, JSONSerializable
 {
     /**
      * @Id

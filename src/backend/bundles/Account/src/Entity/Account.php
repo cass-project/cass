@@ -1,6 +1,7 @@
 <?php
 namespace Account\Entity;
 
+use Common\REST\JSONSerializable;
 use Doctrine\ORM\PersistentCollection;
 use Profile\Entity\Profile;
 
@@ -10,7 +11,7 @@ use Profile\Entity\Profile;
  * @Entity(repositoryClass="Account\Repository\AccountRepository")
  * @Table(name="account")
  */
-class Account
+class Account implements JSONSerializable
 {
     /**
      * @Id

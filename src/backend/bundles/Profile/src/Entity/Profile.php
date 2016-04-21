@@ -1,12 +1,13 @@
 <?php
 namespace Profile\Entity;
 use Account\Entity\Account;
+use Common\REST\JSONSerializable;
 
 /**
  * @Entity(repositoryClass="Profile\Repository\ProfileRepository")
  * @Table(name="profile")
  */
-class Profile
+class Profile implements JSONSerializable
 {
     /**
      * @Id

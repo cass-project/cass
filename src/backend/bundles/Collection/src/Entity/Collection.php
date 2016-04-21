@@ -1,6 +1,7 @@
 <?php
 namespace Collection\Entity;
 
+use Common\REST\JSONSerializable;
 use Common\Tools\SerialManager\SerialEntity;
 use Theme\Entity\Theme;
 use Doctrine\ORM\PersistentCollection;
@@ -10,7 +11,7 @@ use Profile\Entity\Profile;
  * @Entity(repositoryClass="Collection\Repository\CollectionRepository")
  * @Table(name="collection")
  */
-class Collection implements SerialEntity
+class Collection implements SerialEntity, JSONSerializable
 {
     /**
      * @Column(type="integer")

@@ -1,6 +1,7 @@
 <?php
 namespace ProfileIM\Entity;
 
+use Common\REST\JSONSerializable;
 use Profile\Entity\Profile;
 use \Datetime;
 
@@ -10,7 +11,7 @@ class MessageIsNotReadException extends \Exception {}
  * @Entity(repositoryClass="ProfileIM\Repository\ProfileMessageRepository")
  * @Table(name="profile_message")
  */
-class ProfileMessage
+class ProfileMessage implements JSONSerializable
 {
     /**
      * @Id

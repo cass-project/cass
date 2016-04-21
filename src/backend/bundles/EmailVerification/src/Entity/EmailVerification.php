@@ -2,13 +2,14 @@
 namespace EmailVerification\Entity;
 
 use Account\Entity\Account;
+use Common\REST\JSONSerializable;
 use DateTime;
 
 /**
  * @Entity(repositoryClass="EmailVerification\Repository\EmailVerificationRepository")
  * @Table(name="email_verification")
  */
-class EmailVerification
+class EmailVerification /* implements JSONSerializable */
 {
     /**
      * @Column(type="integer")
