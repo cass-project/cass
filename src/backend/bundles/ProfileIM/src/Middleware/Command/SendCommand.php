@@ -16,7 +16,7 @@ class SendCommand extends Command
         );
 
         if($sourceProfile->getId() == $targetProfile->getId()){
-            throw new SameTargetAndSourceException();
+            throw new SameTargetAndSourceException("souurce profile must not be same as target profile");
         }
 
         $message = new ProfileMessage($sourceProfile, $targetProfile);

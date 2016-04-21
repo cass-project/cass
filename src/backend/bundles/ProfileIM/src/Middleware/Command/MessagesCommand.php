@@ -19,7 +19,9 @@ class MessagesCommand extends Command
     $limit           = $request->getAttribute('limit');
     $markAsRead      = (bool) ($qp['markAsRead'] ?? null);
 
-    if($sourceProfileId == $targetProfileId) throw new SameTargetAndSourceException();
+    if($sourceProfileId == $targetProfileId) {
+      throw new SameTargetAndSourceException("souurce profile must not be same as target profile");
+    }
 
     $seek = new Seek(self::MAX_MESSAGE_LIMIT, $offset, $limit);
     $messages = $this->profileIMService->getMessages($sourceProfileId, $targetProfileId, $seek);
