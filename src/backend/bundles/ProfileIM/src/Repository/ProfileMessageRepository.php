@@ -24,10 +24,30 @@ class ProfileMessageRepository extends EntityRepository
 
 	public function createMessage(ProfileMessage $message): ProfileMessage
 	{
-		$em =$this->getEntityManager();
+		$em = $this->getEntityManager();
 		$em->persist($message);
 		$em->flush();
 
 		return $message;
+	}
+
+	public function updateMessages(array $messages)
+	{
+		$em = $this->getEntityManager();
+		array_walk( $messages,
+			function (ProfileMessage $message) use ($em){
+				$em->persist($message);
+			}
+		);
+		$em->flush();
+		return $messages;
+	}
+
+	public function getUnreadMessagesByProfile($profileId): array
+	{
+		return $this->findBy([
+				 'targetProfile' => $profileId,
+				 'isRead'       => 0
+	 	], ['id' => 'desc'], 100);
 	}
 }

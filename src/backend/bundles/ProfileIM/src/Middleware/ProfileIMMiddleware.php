@@ -3,6 +3,7 @@ namespace ProfileIM\Middleware;
 
 use Auth\Service\CurrentAccountService;
 use Common\REST\GenericRESTResponseBuilder;
+use ProfileIM\Exception\SameTargetAndSourceException;
 use ProfileIM\Middleware\Command\Command;
 use Profile\Service\ProfileService;
 use ProfileIM\Service\ProfileIMService;
@@ -31,17 +32,19 @@ class ProfileIMMiddleware implements MiddlewareInterface
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
         $responseBuilder = new GenericRESTResponseBuilder($response);
+        try{
+            $command = Command::factory($request, $this->currentAccountService, $this->profileIMService, $this->profileService);
+            $result  = $command->run($request);
 
-        $command = Command::factory($request, $this->currentAccountService, $this->profileIMService,$this->profileService);
-        $result = $command->run($request);
-
-        if($result === true) {
-            $result = [];
+            $responseBuilder
+              ->setStatusSuccess()
+              ->setJson($result);
+        } catch(SameTargetAndSourceException $e){
+            $responseBuilder
+              ->setStatusBadRequest()
+              ->setError($e);
         }
 
-        $responseBuilder
-            ->setStatusSuccess()
-            ->setJson($result);
 
         return $responseBuilder->build();
     }
