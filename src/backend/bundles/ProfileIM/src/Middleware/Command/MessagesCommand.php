@@ -13,19 +13,20 @@ class MessagesCommand extends Command
     $qp = $request->getQueryParams();
 
     $sourceProfileId = $request->getAttribute('sourceProfileId');
+    $targetProfileId = $this->currentAccountService->getCurrentProfile()->getId();
     $offset          = $request->getAttribute('offset');
     $limit           = $request->getAttribute('limit');
     $markAsRead      = $qp['markAsRead'] ?? false;
 
     $seek = new Seek(self::MAX_MESSAGE_LIMIT, $offset, $limit);
-    $messages = $this->profileIMService->getMessagesBySourceProfile($sourceProfileId, $seek);
+    $messages = $this->profileIMService->getMessages($sourceProfileId, $targetProfileId, $seek);
 
     if($markAsRead) {
         $this->profileIMService->markMessagesAsRead($messages);
     }
 
     return [
-        'source_profile' => $sourceProfileId,
+        'source_profile' => $this->profileService->getProfileById($sourceProfileId)->toJSON(),
         'messages' => array_map(function (ProfileMessage $message) {
           return $message->toJSON();
         }, $messages),

@@ -30,9 +30,9 @@ class ProfileIMService
     }
 
     /** @return ProfileMessage[] */
-    public function getMessagesBySourceProfile(int $sourceProfileId, Seek $seek): array
+    public function getMessages(int $sourceProfileId, int $targetProfileId, Seek $seek): array
     {
-        return $this->profileMessageRepository->getMessagesBySourceProfile($sourceProfileId, $seek);
+        return $this->profileMessageRepository->getMessages($sourceProfileId, $targetProfileId, $seek);
     }
 
     public function markMessagesAsRead(array $messages)

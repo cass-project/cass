@@ -3,7 +3,7 @@
     tags:
       - profile_im
     description:
-      Получить сообщение от указанного источника
+      Получить сообщение от указанного источника, предзнаначенные для текущего аккаунта
     parameters:
       - in: path
         name: sourceProfileId

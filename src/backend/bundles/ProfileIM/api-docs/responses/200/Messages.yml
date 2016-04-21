@@ -7,8 +7,7 @@ ProfileIM_Response_200_Messages:
       - total
     properties:
       source_profile:
-        type: number
-        description: Профиль источника сообщений
+        $ref: '#/definitions/Profile_Entity_Profile'
       messages:
         type: array
         description: Сообщения

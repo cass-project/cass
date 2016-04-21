@@ -14,10 +14,11 @@ class ProfileMessageRepository extends EntityRepository
 	}
 
 	/** @return ProfileMessage[] */
-	public function getMessagesBySourceProfile(int $sourceProfileId, Seek $seek): array
+	public function getMessages(int $sourceProfileId, int $targetProfileId, Seek $seek): array
 	{
 		return $this->findBy([
-			'sourceProfile' => $sourceProfileId
+			'sourceProfile' => $sourceProfileId,
+			'targetProfile' => $targetProfileId,
 		], ['id' => 'desc'], $seek->getLimit(), $seek->getOffset());
 	}
 

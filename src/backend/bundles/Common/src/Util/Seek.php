@@ -12,7 +12,7 @@ class Seek
     /** @var int */
     private $limit;
 
-    public function __construct(int $maxLimit, int $limit, int $offset)
+    public function __construct(int $maxLimit, int $offset, int $limit)
     {
         if($limit > $maxLimit) {
             throw new \OutOfBoundsException(sprintf('Max limit exceeed, limit: %d, maxLimit: %d', $limit, $maxLimit));
