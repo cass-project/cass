@@ -2,6 +2,7 @@
 namespace ProfileIM\Middleware\Command;
 
 use ProfileIM\Entity\ProfileMessage;
+use ProfileIM\Exception\SameTargetAndSourceException;
 use ProfileIM\Middleware\Request\SendMessageRequest;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -13,6 +14,10 @@ class SendCommand extends Command
         $targetProfile = $this->profileService->getProfileById(
           $request->getAttribute('targetProfileId')
         );
+
+        if($sourceProfile->getId() == $targetProfile->getId()){
+            throw new SameTargetAndSourceException("souurce profile must not be same as target profile");
+        }
 
         $message = new ProfileMessage($sourceProfile, $targetProfile);
 

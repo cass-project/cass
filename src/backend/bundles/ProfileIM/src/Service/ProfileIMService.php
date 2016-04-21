@@ -37,6 +37,15 @@ class ProfileIMService
 
     public function markMessagesAsRead(array $messages)
     {
-        return true;
+        array_walk($messages, function(ProfileMessage $message){
+            $message->setAsRead();
+        });
+
+        return $this->profileMessageRepository->updateMessages($messages);
+    }
+
+    public function getUnreadMessagesByProfileId(int $profileId): array
+    {
+        return $this->profileMessageRepository->getUnreadMessagesByProfile($profileId);
     }
 }
