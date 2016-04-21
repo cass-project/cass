@@ -3,7 +3,7 @@ namespace Theme\Entity;
 
 use Common\Tools\SerialManager\SerialEntity;
 /**
- * @Entity(repositoryClass="Data\Repository\Theme\ThemeRepository")
+ * @Entity(repositoryClass="Theme\Repository\ThemeRepository")
  * @Table(name="theme")
  */
 class Theme implements SerialEntity

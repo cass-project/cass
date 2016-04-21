@@ -4,9 +4,9 @@ import {ProfileService} from "../../../service/ProfileService";
 import {AvatarCropper} from "../../AvatarCropper/index";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {AuthService} from "../../../../auth/service/AuthService";
-import {ProfileNameInfo} from "../../../service/ProfileService";
 import {Profile} from "../../../entity/Profile";
 import {AvatarCropperService} from "../../AvatarCropper/service";
+import {AccountWelcomeHome} from "../AccountWelcomeHome/component";
 
 declare var Cropper;
 
@@ -29,16 +29,15 @@ declare var Cropper;
 
 @Injectable()
 export class AccountConfirm {
-    constructor (private profileService: ProfileService,
-                 public router: Router,
-                 public avatarCropperService: AvatarCropperService
-    ){}
+    constructor(private profileService: ProfileService,
+                public router: Router,
+                public avatarCropperService: AvatarCropperService) {
+    }
 
 
-
-    ngOnInit(): void {
+    ngOnInit():void {
         this.getProfileAvatar();
-        if(this.profileService.checkInitProfile()){
+        if (this.profileService.checkInitProfile()) {
             this.router.parent.navigate(['Dashboard']);
         }
     }
@@ -51,7 +50,7 @@ export class AccountConfirm {
         return this.avatarCropperService.isAvatarFormVisibleFlag;
     }
 
-    reset(){
+    reset() {
         this.router.parent.navigate(['Dashboard']);
         this.router.parent.navigate(['Welcome']);
     }
@@ -66,14 +65,19 @@ export class AccountConfirm {
             : 'Anonymous'
     }
 
-    getProfileName(){
-        if(this.getGreetings()){
-            switch(AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method){
-                case 'fl': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name}`;
+    getProfileName() {
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
+        if (this.getGreetings()) {
+            switch (greetings.greetings_method) {
+                case 'fl':
+                    return `${greetings.first_name} ${greetings.last_name}`;
                     break;
-                case 'flm': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name}`;
+                case 'flm':
+                    return `${greetings.first_name} ${greetings.last_name} ${greetings.middle_name}`;
                     break;
-                case 'n': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname}`;
+                case 'n':
+                    return `${greetings.nickname}`;
                     break;
             }
         }
@@ -85,10 +89,33 @@ export class AccountConfirm {
             : Profile.AVATAR_DEFAULT;
     }
 
-    submit(){
-        this.router.parent.navigate(['Dashboard']);
-        AuthService.getAuthToken().getCurrentProfile().entity.is_initialized = true;
-        console.log(AuthService.getAuthToken().getCurrentProfile().entity.is_initialized);
+    submit() {
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
+        if (this.getGreetings()) {
+            switch (greetings.greetings_method){
+                case 'fl':
+                    this.profileService.greetingsAsFL().subscribe(data => {
+                        this.router.parent.navigate(['Dashboard']);
+                        AuthService.getAuthToken().getCurrentProfile().entity.is_initialized = true;
+                    });
+                    break;
+                case 'flm':
+                    this.profileService.greetingsAsFLM().subscribe(data => {
+                        this.router.parent.navigate(['Dashboard']);
+                        AuthService.getAuthToken().getCurrentProfile().entity.is_initialized = true;
+                    });
+                    break;
+                case 'n':
+                    this.profileService.greetingsAsN().subscribe(data => {
+                        this.router.parent.navigate(['Dashboard']);
+                        AuthService.getAuthToken().getCurrentProfile().entity.is_initialized = true;
+                    });
+                    break;
+            }
+        }
+
+
     }
 }
 
