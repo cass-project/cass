@@ -3,6 +3,8 @@ namespace Theme\Entity;
 
 use Common\REST\JSONSerializable;
 use Common\Tools\SerialManager\SerialEntity;
+use Doctrine\ORM\PersistentCollection;
+
 /**
  * @Entity(repositoryClass="Theme\Repository\ThemeRepository")
  * @Table(name="theme")
@@ -110,7 +112,7 @@ class Theme implements SerialEntity, JSONSerializable
         return $this;
     }
 
-    public function getChildren(): array
+    public function getChildren(): PersistentCollection
     {
         return $this->children;
     }

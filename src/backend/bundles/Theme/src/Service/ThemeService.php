@@ -29,4 +29,12 @@ class ThemeService
     {
         return $this->themeRepository->getAllThemes();
     }
+
+    /** @return Theme[] */
+    public function getThemesAsTree(int $parentId = null): array
+    {
+        $this->themeRepository->getAllThemes();
+
+        return $this->themeRepository->getThemesByParentId($parentId);
+    }
 }
