@@ -4,8 +4,9 @@ import {ProfileService} from "../../../service/ProfileService";
 import {AvatarCropper} from "../../AvatarCropper/index";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {AuthService} from "../../../../auth/service/AuthService";
-import {ProfileNameInfo} from "../../../service/ProfileService";
 import {AvatarCropperService} from "../../AvatarCropper/service";
+import {AccountConfirm} from "../Confirm/component";
+import {ProfileInfo} from "../../../service/ProfileService";
 
 declare var Cropper;
 
@@ -16,7 +17,8 @@ declare var Cropper;
     ],
     'providers': [
         ProfileService,
-        AvatarCropperService
+        AvatarCropperService,
+        AccountConfirm
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -30,32 +32,47 @@ declare var Cropper;
 export class AccountWelcomeHome {
     constructor (private profileService: ProfileService,
                  public router: Router,
-                 public avatarCropperService: AvatarCropperService
+                 public avatarCropperService: AvatarCropperService,
+                 public accountConfirm: AccountConfirm
     ){}
 
+    profileNameInfo: ProfileInfo = new ProfileInfo();
+    isVisibleChooseType: boolean = true;
+
     ngOnInit() {
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
         if(this.profileService.checkInitProfile()){
             this.router.parent.navigate(['Dashboard']);
+        } else {
+            greetings.greetings_method = '';
+            greetings.first_name = '';
+            greetings.last_name = '';
+            greetings.middle_name = '';
+            greetings.nickname = '';
         }
     }
 
 
+    greetingsMethodReturn(){
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
 
-    profileNameInfo: ProfileNameInfo = new ProfileNameInfo();
+        return greetings.greetings_method;
+    }
+
+    greetingsMethod(greetingsAs){
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
+        greetings.greetings_method = greetingsAs;
+        this.showNextStage();
+    }
 
     stageButtons: any = {
         nextShowButton: false
     };
 
-    chooseNameType: any = {
-        isVisibleChooseType: true,
-        chooseFL: false,
-        chooseFLM: false,
-        chooseN: false
-    };
-
     showNextStage(){
-        this.chooseNameType.isVisibleChooseType = false;
+        this.isVisibleChooseType = false;
         this.stageButtons.nextShowButton = true;
     }
 
@@ -68,26 +85,49 @@ export class AccountWelcomeHome {
     }
 
     reset(){
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
+        greetings.greetings_method = '';
+        greetings.first_name = '';
+        greetings.last_name = '';
+        greetings.middle_name = '';
+        greetings.nickname = '';
+
         this.router.parent.navigate(['Dashboard']);
         this.router.parent.navigate(['Welcome']);
     }
 
 
+    isSignedIn() {
+        return AuthService.isSignedIn();
+    }
+
+    getGreetings() {
+        return this.isSignedIn()
+            ? AuthService.getAuthToken().getCurrentProfile().greetings
+            : 'Anonymous'
+    }
+
+
     submit(){
-        if(this.chooseNameType.chooseFL) {
-            this.profileService.greetingsAsFL(this.profileNameInfo.firstname, this.profileNameInfo.lastname).subscribe(data => {
-                this.router.parent.navigate(['Confirm']);
-                AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = 'fl';
-            });
-        } else if(this.chooseNameType.chooseFLM) {
-            this.profileService.greetingsAsFLM(this.profileNameInfo.firstname, this.profileNameInfo.lastname, this.profileNameInfo.middlename).subscribe(data => {
-                this.router.parent.navigate(['Confirm']);
-            });
-        } else if(this.chooseNameType.chooseN){
-            this.profileService.greetingsAsN(this.profileNameInfo.nickname).subscribe(data => {
-                this.router.parent.navigate(['Confirm']);
-            });
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
+        if (this.getGreetings()) {
+            switch (greetings.greetings_method){
+                case 'fl':
+                    greetings.first_name = this.profileNameInfo.firstname;
+                    greetings.last_name = this.profileNameInfo.lastname;
+                    break;
+                case 'flm':
+                    greetings.first_name = this.profileNameInfo.firstname;
+                    greetings.last_name = this.profileNameInfo.lastname;
+                    greetings.middle_name = this.profileNameInfo.middlename;
+                    break;
+                case 'n':
+                    greetings.nickname = this.profileNameInfo.nickname;
+                    break;
+            }
         }
+        this.router.parent.navigate(['Confirm']);
     }
 }
-

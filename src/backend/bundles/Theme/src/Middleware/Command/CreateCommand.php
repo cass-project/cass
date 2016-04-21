@@ -2,10 +2,16 @@
 namespace Theme\Middleware\Command;
 
 use Psr\Http\Message\ServerRequestInterface;
+use Theme\Middleware\Request\CreateThemeRequest;
 
 final class CreateCommand extends Command
 {
     public function run(ServerRequestInterface $request) {
-        throw new \Exception('Not implemented');
+        $params = (new CreateThemeRequest($request))->getParameters();
+        $theme = $this->themeService->createTheme($params['title'], $params['description'], $params['parent_id']);
+
+        return [
+            'entity' => $theme->toJSON()
+        ];
     }
 }

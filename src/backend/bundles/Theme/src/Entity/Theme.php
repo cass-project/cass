@@ -1,12 +1,16 @@
 <?php
 namespace Theme\Entity;
 
+use Common\REST\JSONSerializable;
 use Common\Tools\SerialManager\SerialEntity;
+use Common\Tools\SerialManager\SerialManager;
+use Doctrine\ORM\PersistentCollection;
+
 /**
- * @Entity(repositoryClass="Data\Repository\Theme\ThemeRepository")
+ * @Entity(repositoryClass="Theme\Repository\ThemeRepository")
  * @Table(name="theme")
  */
-class Theme implements SerialEntity
+class Theme implements SerialEntity, JSONSerializable
 {
     /**
      * @Id
@@ -31,7 +35,7 @@ class Theme implements SerialEntity
     /**
      * @Column(type="integer")
      */
-    private $position = 1;
+    private $position = SerialManager::POSITION_LAST;
 
     /**
      * @Column(type="string")
@@ -109,7 +113,7 @@ class Theme implements SerialEntity
         return $this;
     }
 
-    public function getChildren(): array
+    public function getChildren(): PersistentCollection
     {
         return $this->children;
     }

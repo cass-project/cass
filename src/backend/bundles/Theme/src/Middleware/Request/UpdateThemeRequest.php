@@ -8,7 +8,12 @@ use Theme\ThemeBundle;
 class UpdateThemeRequest extends SchemaParams
 {
     public function getParameters() {
-        throw new \Exception('Not implemented');
+        $data = $this->getData();
+
+        return [
+            'title' => $data->title,
+            'description' => $data->description
+        ];
     }
 
     protected function getSchema(): JSONSchema {

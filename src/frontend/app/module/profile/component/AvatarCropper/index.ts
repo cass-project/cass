@@ -30,7 +30,7 @@ export class AvatarCropper {
     ){}
 
     @ViewChild('cropImage') cropImage:ElementRef;
-    private cropper;
+    public cropper;
     private file: Blob;
 
     ngOnInit(): void {
@@ -74,12 +74,12 @@ export class AvatarCropper {
         this.avatarCropperService.isAvatarFormVisibleFlag = false;
         this.destroyCropper();
     }
-
     private destroyCropper() : void {
         if(this.cropper) this.cropper.destroy();
         this.cropper = undefined;
         this.cropImage.nativeElement.src="";
     }
+
 
     private submit(){
         let coord = this.getData();
@@ -93,7 +93,6 @@ export class AvatarCropper {
                 y: coord.y + coord.height
             }
         });
-        this.router.parent.navigate(['Confirm']);
     }
 
     private getData() {

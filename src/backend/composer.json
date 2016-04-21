@@ -34,6 +34,7 @@
     "sybio/image-workshop": "2.0",
     "php-di/php-di": "^5.2",
     "php-amqplib/php-amqplib": "2.5.*",
-    "symfony/console": "^3.0"
+    "symfony/console": "^3.0",
+    "phpunit/phpunit": "^5.3"
   }
 }

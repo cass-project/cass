@@ -4,7 +4,11 @@ sudo cp -R /support-files/copy/* /
 sudo sed -i 's/\r$//' /usr/bin/vm-init
 sudo sed -i 's/\r$//' /usr/bin/vm-project-update
 sudo sed -i 's/\r$//' /usr/bin/vm-server-update
+sudo sed -i 's/\r$//' /usr/bin/cass-console
+sudo sed -i 's/\r$//' /usr/bin/vm-db-recreate
+sudo sed -i 's/\r$//' /usr/bin/vm-db-test
+
 
 sudo service mongodb restart
-sudo service php7-fpm restart
+sudo service php7.0-fpm restart
 sudo service nginx restart

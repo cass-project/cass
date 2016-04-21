@@ -9,7 +9,7 @@
         in: body
         required: true
         schema:
-          $ref: '#/definitions/PUT_Theme_Request'
+          $ref: '#/definitions/Update_Theme_Request'
       - name: themeId
         in: path
         required: true

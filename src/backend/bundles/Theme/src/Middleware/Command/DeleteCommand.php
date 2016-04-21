@@ -5,7 +5,10 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class DeleteCommand extends Command
 {
-    public function run(ServerRequestInterface $request) {
-        throw new \Exception('Not implemented');
+    public function run(ServerRequestInterface $request)
+    {
+        $this->themeService->deleteTheme($request->getAttribute('themeId'));
+
+        return [];
     }
 }

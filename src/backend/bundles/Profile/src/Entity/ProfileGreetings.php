@@ -1,11 +1,12 @@
 <?php
 namespace Profile\Entity;
+use Common\REST\JSONSerializable;
 
 /**
  * @Entity(repositoryClass="Profile\Repository\ProfileGreetingsRepository")
  * @Table(name="profile_greetings")
  */
-class ProfileGreetings
+class ProfileGreetings implements JSONSerializable
 {
     const GREETINGS_FL = 'fl';
     const GREETINGS_LFM = 'lfm';

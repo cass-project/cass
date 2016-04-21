@@ -15,7 +15,7 @@
       '404':
         $ref: '#/responses/Theme_Response_404_NotFound'
       '200':
-        description: Список тематик
+        description: Тематика
         schema:
           type: object
           required:
@@ -26,10 +26,5 @@
             success:
               type: boolean
               description: "= true"
-            total:
-              type: number
-              description: "Количество тематик"
-            entities:
-              type: array
-              items:
-                $ref: "#/definitions/Theme_Entity_Theme"
+            entity:
+              $ref: "#/definitions/Theme_Entity_Theme"

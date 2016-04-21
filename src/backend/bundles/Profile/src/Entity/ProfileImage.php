@@ -1,11 +1,12 @@
 <?php
 namespace Profile\Entity;
+use Common\REST\JSONSerializable;
 
 /**
  * @Entity(repositoryClass="Profile\Repository\ProfileImageRepository")
  * @Table(name="profile_image")
  */
-class ProfileImage
+class ProfileImage implements JSONSerializable
 {
     const MIN_WIDTH = 64;
     const MIN_HEIGHT = 64;

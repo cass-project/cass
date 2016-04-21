@@ -7,6 +7,7 @@ class SerialManager
     private $entities;
 
     const POSITION_START = 1;
+    const POSITION_LAST = -1;
 
     public function __construct(array $entities)
     {
@@ -33,8 +34,12 @@ class SerialManager
         }
     }
 
-    public function insertAs(SerialEntity $entity, int $toPosition)
+    public function insertAs(SerialEntity $entity, int $toPosition = self::POSITION_LAST)
     {
+        if($toPosition === self::POSITION_LAST) {
+            $toPosition = $this->max()+1;
+        }
+
         if($toPosition > $this->max()) {
             $this->insertLast($entity);
         }else{
@@ -60,7 +65,7 @@ class SerialManager
             throw new \Exception('You can\'t use method swap with these entities');
         }
 
-        $swap = $entityB->getPosition();
+        $swap = $entityA->getPosition();
         $entityA->setPosition($entityB->getPosition());
         $entityB->setPosition($swap);
 
