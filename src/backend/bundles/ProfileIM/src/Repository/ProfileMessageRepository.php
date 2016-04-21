@@ -8,21 +8,9 @@ use ProfileIM\Entity\ProfileMessage;
 
 class ProfileMessageRepository extends EntityRepository
 {
-
-	public function getMessage($criteria)
+	public function getMessageById($messageId): ProfileMessage
 	{
-
-		return $this->find($criteria);
-	}
-
-	public function getMessageById($id)
-	{
-		$query = $this->createQueryBuilder('m')
-			->where('m.id = :id')
-			->setParameter('id', $id)
-			->getQuery();
-
-		return $products = $query->getResult();
+		return $this->find($messageId);
 	}
 
 	/** @return ProfileMessage[] */
@@ -33,7 +21,7 @@ class ProfileMessageRepository extends EntityRepository
 		], ['id' => 'desc'], $seek->getLimit(), $seek->getOffset());
 	}
 
-	public function saveMessage(ProfileMessage $message): ProfileMessage
+	public function createMessage(ProfileMessage $message): ProfileMessage
 	{
 		$em =$this->getEntityManager();
 		$em->persist($message);

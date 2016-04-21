@@ -136,7 +136,7 @@ class ProfileMessage
           'date_created' => $this->getDateCreated()->format('Y-m-d H:i:s'),
           'read_status'  => [
                 'is_read'   => $this->isRead,
-                'date_read' => $this->getDateRead()->format('Y-m-d H:i:s')
+                'date_read' => $this->isRead ? $this->getDateRead()->format('Y-m-d H:i:s') : null
           ],
           'content'      => $this->getContent(),
         ];

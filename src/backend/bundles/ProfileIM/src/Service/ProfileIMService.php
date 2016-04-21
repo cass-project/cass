@@ -20,15 +20,14 @@ class ProfileIMService
         $this->profileMessageRepository = $profileMessageRepository;
     }
 
-    public function getMessageById($id){
+    public function getMessageById($id): ProfileMessage {
         return $this->profileMessageRepository->getMessageById($id);
     }
 
-    public function saveMessage(ProfileMessage $message):ProfileMessage
+    public function createMessage(ProfileMessage $message): ProfileMessage
     {
-        return $this->profileMessageRepository->saveMessage($message);
+        return $this->profileMessageRepository->createMessage($message);
     }
-
 
     /** @return ProfileMessage[] */
     public function getMessagesBySourceProfile(int $sourceProfileId, Seek $seek): array
