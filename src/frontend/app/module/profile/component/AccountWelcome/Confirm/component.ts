@@ -38,6 +38,9 @@ export class AccountConfirm {
 
     ngOnInit(): void {
         this.getProfileAvatar();
+        if(this.profileService.checkInitProfile()){
+            this.router.parent.navigate(['Dashboard']);
+        }
     }
 
     showAvatarCropper() {
