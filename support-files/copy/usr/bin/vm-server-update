@@ -10,5 +10,5 @@ sudo sed -i 's/\r$//' /usr/bin/vm-db-test
 
 
 sudo service mongodb restart
-sudo service php7-fpm restart
+sudo service php7.0-fpm restart
 sudo service nginx restart
