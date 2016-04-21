@@ -12,12 +12,7 @@ if(php_sapi_name() !== 'cli') {
     die('This script can be only executed in CLI');
 }
 
-define('LB_BACKEND_DIRECTORY', __DIR__);
-define('LB_BACKEND_ROUTE_PREFIX', '/backend/api');
-define('LB_BACKEND_BUNDLES_DIR', __DIR__.'/bundles');
-define('LB_FRONTEND_BASE_URL', '/public');
-define('LB_FRONTEND_DIRECTORY', __DIR__.'/../frontend');
-define('LB_STORAGE_DIRECTORY', __DIR__.'/../www/app/public/storage');
+require_once(__DIR__.'/constants.php');
 
 /** @var LBApplicationBootstrap $application */
 $application = require LB_BACKEND_DIRECTORY.'/application.php';

@@ -1,9 +1,12 @@
 <?php
 namespace Application\Tests;
 
-use Application\Tools\SerialManager\SerialEntity;
-use Application\Tools\SerialManager\SerialManager;
+use Common\Tools\SerialManager\SerialEntity;
+use Common\Tools\SerialManager\SerialManager;
 
+/**
+ * @backupGlobals disabled
+ */
 class SerialManagerTest extends \PHPUnit_Framework_TestCase
 {
     const HOW_MANY_STACKS_HAS_NASUS = 800;
