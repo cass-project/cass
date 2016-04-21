@@ -29,7 +29,7 @@ export class ProfileService {
 
         return this.http.post(url, JSON.stringify({
             first_name: greetings.first_name,
-            last_name: greetings.greetings.last_name
+            last_name: greetings.last_name
         }));
     }
 
@@ -40,7 +40,7 @@ export class ProfileService {
         return this.http.post(url, JSON.stringify({
             last_name: greetings.last_name,
             first_name: greetings.first_name,
-            middle_name: greetings.greetings.middle_name
+            middle_name: greetings.middle_name
         }));
     }
 
