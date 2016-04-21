@@ -74,20 +74,6 @@ export class AccountWelcomeHome {
 
 
     submit(){
-        if(this.chooseNameType.chooseFL) {
-            this.profileService.greetingsAsFL(this.profileNameInfo.firstname, this.profileNameInfo.lastname).subscribe(data => {
                 this.router.parent.navigate(['Confirm']);
-                AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = 'fl';
-            });
-        } else if(this.chooseNameType.chooseFLM) {
-            this.profileService.greetingsAsFLM(this.profileNameInfo.firstname, this.profileNameInfo.lastname, this.profileNameInfo.middlename).subscribe(data => {
-                this.router.parent.navigate(['Confirm']);
-            });
-        } else if(this.chooseNameType.chooseN){
-            this.profileService.greetingsAsN(this.profileNameInfo.nickname).subscribe(data => {
-                this.router.parent.navigate(['Confirm']);
-            });
-        }
     }
 }
-
