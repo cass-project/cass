@@ -4,7 +4,6 @@ import {ProfileService} from "../../../service/ProfileService";
 import {AvatarCropper} from "../../AvatarCropper/index";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {AuthService} from "../../../../auth/service/AuthService";
-import {ProfileNameInfo} from "../../../service/ProfileService";
 import {Profile} from "../../../entity/Profile";
 import {AvatarCropperService} from "../../AvatarCropper/service";
 import {AccountWelcomeHome} from "../AccountWelcomeHome/component";
@@ -30,10 +29,9 @@ declare var Cropper;
 
 @Injectable()
 export class AccountConfirm {
-    constructor(private profileService:ProfileService,
-                public router:Router,
-                public avatarCropperService:AvatarCropperService,
-                public accountWelcomeHome:AccountWelcomeHome) {
+    constructor(private profileService: ProfileService,
+                public router: Router,
+                public avatarCropperService: AvatarCropperService) {
     }
 
 
@@ -90,20 +88,30 @@ export class AccountConfirm {
     }
 
     submit() {
-        if (this.accountWelcomeHome.chooseNameType.chooseFL) {
-            this.profileService.greetingsAsFL(this.accountWelcomeHome.profileNameInfo.firstname, this.accountWelcomeHome.profileNameInfo.lastname).subscribe(data => {
-                AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = 'fl';
-            });
-        } else if (this.accountWelcomeHome.chooseNameType.chooseFLM) {
-            this.profileService.greetingsAsFLM(this.accountWelcomeHome.profileNameInfo.firstname, this.accountWelcomeHome.profileNameInfo.lastname, this.accountWelcomeHome.profileNameInfo.middlename).subscribe(data => {
-            });
-        } else if (this.accountWelcomeHome.chooseNameType.chooseN) {
-            this.profileService.greetingsAsN(this.accountWelcomeHome.profileNameInfo.nickname).subscribe(data => {
-            });
-
-            this.router.parent.navigate(['Dashboard']);
-            //AuthService.getAuthToken().getCurrentProfile().entity.is_initialized = true;
+        if (this.getGreetings()) {
+            switch (AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method){
+                case 'fl':
+                    this.profileService.greetingsAsFL().subscribe(data => {
+                        this.router.parent.navigate(['Dashboard']);
+                        AuthService.getAuthToken().getCurrentProfile().entity.is_initialized = true;
+                    });
+                    break;
+                case 'flm':
+                    this.profileService.greetingsAsFLM().subscribe(data => {
+                        this.router.parent.navigate(['Dashboard']);
+                        AuthService.getAuthToken().getCurrentProfile().entity.is_initialized = true;
+                    });
+                    break;
+                case 'n':
+                    this.profileService.greetingsAsN().subscribe(data => {
+                        this.router.parent.navigate(['Dashboard']);
+                        AuthService.getAuthToken().getCurrentProfile().entity.is_initialized = true;
+                    });
+                    break;
+            }
         }
+
+
     }
 }
 

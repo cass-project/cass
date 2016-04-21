@@ -4,8 +4,9 @@ import {ProfileService} from "../../../service/ProfileService";
 import {AvatarCropper} from "../../AvatarCropper/index";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {AuthService} from "../../../../auth/service/AuthService";
-import {ProfileNameInfo} from "../../../service/ProfileService";
 import {AvatarCropperService} from "../../AvatarCropper/service";
+import {AccountConfirm} from "../Confirm/component";
+import {ProfileNameInfo} from "../../../service/ProfileService";
 
 declare var Cropper;
 
@@ -16,7 +17,8 @@ declare var Cropper;
     ],
     'providers': [
         ProfileService,
-        AvatarCropperService
+        AvatarCropperService,
+        AccountConfirm
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -30,32 +32,41 @@ declare var Cropper;
 export class AccountWelcomeHome {
     constructor (private profileService: ProfileService,
                  public router: Router,
-                 public avatarCropperService: AvatarCropperService
+                 public avatarCropperService: AvatarCropperService,
+                 public accountConfirm: AccountConfirm
     ){}
+
+    profileNameInfo: ProfileNameInfo = new ProfileNameInfo();
+    isVisibleChooseType: boolean = true;
 
     ngOnInit() {
         if(this.profileService.checkInitProfile()){
             this.router.parent.navigate(['Dashboard']);
+        } else {
+            AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = '';
+            AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name = '';
+            AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name = '';
+            AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name = '';
+            AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname = '';
         }
     }
 
 
+    greetingsMethodReturn(){
+        return AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method;
+    }
 
-    profileNameInfo: ProfileNameInfo = new ProfileNameInfo();
+    greetingsMethod(greetingsAs){
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = greetingsAs;
+        this.showNextStage();
+    }
 
     stageButtons: any = {
         nextShowButton: false
     };
 
-    chooseNameType: any = {
-        isVisibleChooseType: true,
-        chooseFL: false,
-        chooseFLM: false,
-        chooseN: false
-    };
-
     showNextStage(){
-        this.chooseNameType.isVisibleChooseType = false;
+        this.isVisibleChooseType = false;
         this.stageButtons.nextShowButton = true;
     }
 
@@ -68,12 +79,45 @@ export class AccountWelcomeHome {
     }
 
     reset(){
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = '';
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name = '';
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name = '';
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name = '';
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname = '';
+
         this.router.parent.navigate(['Dashboard']);
         this.router.parent.navigate(['Welcome']);
     }
 
 
+    isSignedIn() {
+        return AuthService.isSignedIn();
+    }
+
+    getGreetings() {
+        return this.isSignedIn()
+            ? AuthService.getAuthToken().getCurrentProfile().greetings
+            : 'Anonymous'
+    }
+
+
     submit(){
-                this.router.parent.navigate(['Confirm']);
+        if (this.getGreetings()) {
+            switch (AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method){
+                case 'fl':
+                    AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name = this.profileNameInfo.firstname;
+                    AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name = this.profileNameInfo.lastname;
+                    break;
+                case 'flm':
+                    AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name = this.profileNameInfo.firstname;
+                    AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name = this.profileNameInfo.lastname;
+                    AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name = this.profileNameInfo.middlename;
+                    break;
+                case 'n':
+                    AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname = this.profileNameInfo.nickname;
+                    break;
+            }
+        }
+        this.router.parent.navigate(['Confirm']);
     }
 }
