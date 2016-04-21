@@ -3,6 +3,7 @@ namespace Theme\Entity;
 
 use Common\REST\JSONSerializable;
 use Common\Tools\SerialManager\SerialEntity;
+use Common\Tools\SerialManager\SerialManager;
 use Doctrine\ORM\PersistentCollection;
 
 /**
@@ -34,7 +35,7 @@ class Theme implements SerialEntity, JSONSerializable
     /**
      * @Column(type="integer")
      */
-    private $position = 1;
+    private $position = SerialManager::POSITION_LAST;
 
     /**
      * @Column(type="string")

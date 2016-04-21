@@ -27,7 +27,7 @@ return function (Application $app, string $prefix) {
         'theme-list-all'
     );
 
-    $app->get(
+    $app->post(
         sprintf('%s/protected/theme/{themeId}/{command:move}/under/{parentThemeId}/in-position/{position}', $prefix),
         ThemeMiddleware::class,
         'theme-move'

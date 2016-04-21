@@ -31,6 +31,66 @@ class ThemeRepository extends EntityRepository
         return $themeEntity;
     }
 
+    public function moveTheme(int $themeId, int $newParentThemeId = null, int $position = SerialManager::POSITION_LAST): Theme
+    {
+        $theme = $this->getThemeById($themeId);
+        $themeIsMovingToAnotherTree = $theme->getParentId() !== $newParentThemeId;
+
+        if($themeIsMovingToAnotherTree) {
+            $oldParentId = $theme->getParentId();
+
+            if($newParentThemeId === null) {
+                $theme->setParent(null);
+            }else{
+                $theme->setParent($this->getEntityManager()->getReference(Theme::class, $newParentThemeId));
+            }
+
+            $sameLevelThemes = $this->getThemesByParentId($newParentThemeId);
+
+            $serialManager = new SerialManager($sameLevelThemes);
+            $serialManager->insertAs($theme, $position);
+            $serialManager->normalize();
+
+            $this->normalizeTree($oldParentId);
+
+            $this->getEntityManager()->flush();
+        }else{
+            $sameLevelThemes = $this->getThemesByParentId($newParentThemeId);
+
+            $serialManager = new SerialManager($sameLevelThemes);
+            $serialManager->swap($serialManager->locate($position), $theme);
+            $serialManager->normalize();
+
+            $this->getEntityManager()->flush();
+        }
+
+        return $theme;
+    }
+
+    public function deleteTheme(int $themeId)
+    {
+        $theme = $this->getThemeById($themeId);
+
+        $sameLevelThemes = $this->getThemesByParentId($theme->getParentId());
+
+        $serialManager = new SerialManager($sameLevelThemes);
+        $serialManager->remove($theme);
+        $serialManager->normalize();
+
+        $this->getEntityManager()->remove($theme);
+        $this->getEntityManager()->flush($sameLevelThemes + [$theme]);
+    }
+
+    private function normalizeTree(int $parentId = null)
+    {
+        $themes = $this->getThemesByParentId($parentId);
+
+        $serialManager = new SerialManager($themes);
+        $serialManager->normalize();
+
+        return $themes;
+    }
+
     public function getThemeById(int $themeId): Theme
     {
         return $this->find($themeId);
@@ -46,20 +106,5 @@ class ThemeRepository extends EntityRepository
     public function getAllThemes(): array
     {
         return $this->findBy([]);
-    }
-
-    public function deleteTheme(int $themeId)
-    {
-        $theme = $this->getThemeById($themeId);
-
-        $sameLevelThemes = $this->getThemesByParentId($theme->hasParent() ? $theme->getParent()->getId() : null);
-
-        $serialManager = new SerialManager($sameLevelThemes);
-        $serialManager->remove($theme);
-        $serialManager->normalize();
-
-
-        $this->getEntityManager()->remove($theme);
-        $this->getEntityManager()->flush($sameLevelThemes + [$theme]);
     }
 }

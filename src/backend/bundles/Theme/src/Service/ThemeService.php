@@ -2,6 +2,7 @@
 namespace Theme\Service;
 
 use Auth\Service\CurrentAccountService;
+use Common\Tools\SerialManager\SerialManager;
 use Theme\Entity\Theme;
 use Theme\Repository\ThemeRepository;
 
@@ -41,6 +42,11 @@ class ThemeService
         $this->themeRepository->getAllThemes();
 
         return $this->themeRepository->getThemesByParentId($parentId);
+    }
+
+    public function moveTheme(int $themeId, int $newParentThemeId = null, int $position = SerialManager::POSITION_LAST): Theme
+    {
+        return $this->themeRepository->moveTheme($themeId, $newParentThemeId, $position);
     }
 
     public function deleteTheme(int $themeId)
