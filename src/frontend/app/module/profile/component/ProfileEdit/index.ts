@@ -34,35 +34,20 @@ export class ProfileEdit {
                 public avatarCropperService: AvatarCropperService) {
     }
 
-    showEdit: boolean = false;
-    isVisibleChooseType: boolean = true;
     profileInfo: ProfileInfo = new ProfileInfo();
 
     ngOnInit():void {
-        this.getProfileAvatar();
         this.getCurrentProfileInfo();
     }
 
     greetingsMethodReturn(){
-        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
-        if(!this.isVisibleChooseType) {
-            return greetings.greetings_method;
-        }
+            return this.profileInfo.greetings_method;
     }
 
-    greetingsMethod(greetingsAs){
-        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
-
-        greetings.greetings_method = greetingsAs;
+    setGreetingsMethod(greetingAS){
+        this.profileInfo.greetings_method = greetingAS;
     }
 
-    showAvatarCropper() {
-        this.avatarCropperService.isAvatarFormVisibleFlag = true;
-    }
-
-    isAvatarFormVisible() {
-        return this.avatarCropperService.isAvatarFormVisibleFlag;
-    }
 
     isSignedIn() {
         return AuthService.isSignedIn();
@@ -85,10 +70,8 @@ export class ProfileEdit {
         this.profileInfo.sex = "Male";
     }
 
-    getProfileAvatar() {
-        return this.isSignedIn()
-            ? AuthService.getAuthToken().getCurrentProfile().entity.image.public_path
-            : Profile.AVATAR_DEFAULT;
+    cancel(){
+        this.router.parent.navigate(['Dashboard']);
     }
 
     reset(){
@@ -98,31 +81,33 @@ export class ProfileEdit {
 
     submit() {
         let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+        greetings.greetings_method = this.profileInfo.greetings_method;
 
         if (this.getGreetings()) {
             switch (greetings.greetings_method){
                 case 'fl':
+                    greetings.first_name = this.profileInfo.firstname;
+                    greetings.last_name = this.profileInfo.lastname;
                     this.profileService.greetingsAsFL().subscribe(data => {
                         this.router.parent.navigate(['Dashboard']);
-                        AuthService.getAuthToken().getCurrentProfile().entity.is_initialized = true;
                     });
                     break;
                 case 'flm':
+                    greetings.first_name = this.profileInfo.firstname;
+                    greetings.last_name = this.profileInfo.lastname;
+                    greetings.middle_name = this.profileInfo.middlename;
                     this.profileService.greetingsAsFLM().subscribe(data => {
                         this.router.parent.navigate(['Dashboard']);
-                        AuthService.getAuthToken().getCurrentProfile().entity.is_initialized = true;
                     });
                     break;
                 case 'n':
+                    greetings.nickname = this.profileInfo.nickname;
                     this.profileService.greetingsAsN().subscribe(data => {
                         this.router.parent.navigate(['Dashboard']);
-                        AuthService.getAuthToken().getCurrentProfile().entity.is_initialized = true;
                     });
                     break;
             }
         }
-
-
     }
 }
 
