@@ -77,6 +77,7 @@ export class ProfileService {
 
 export class ProfileInfo
 {
+    greetings_method: string;
     nickname: string;
     firstname: string;
     lastname: string;
