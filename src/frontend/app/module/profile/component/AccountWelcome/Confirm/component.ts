@@ -35,7 +35,7 @@ export class AccountConfirm {
 
     ngOnInit():void {
         this.getProfileAvatar();
-        if (this.profileService.checkInitProfile()) {
+        if (ProfileService.checkInitProfile()) {
             this.router.parent.navigate(['Dashboard']);
         }
     }
@@ -61,20 +61,10 @@ export class AccountConfirm {
         this.router.parent.navigate(['Welcome']);
     }
 
-    isSignedIn() {
-        return AuthService.isSignedIn();
-    }
-
-    getGreetings() {
-        return this.isSignedIn()
-            ? AuthService.getAuthToken().getCurrentProfile().greetings
-            : 'Anonymous'
-    }
-
     getProfileName() {
         let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
 
-        if (this.getGreetings()) {
+        if (AuthService.getGreetings()) {
             switch (greetings.greetings_method) {
                 case 'fl':
                     return `${greetings.first_name} ${greetings.last_name}`;
@@ -90,7 +80,7 @@ export class AccountConfirm {
     }
 
     getProfileAvatar() {
-        return this.isSignedIn()
+        return AuthService.isSignedIn()
             ? AuthService.getAuthToken().getCurrentProfile().entity.image.public_path
             : Profile.AVATAR_DEFAULT;
     }
@@ -98,7 +88,7 @@ export class AccountConfirm {
     submit() {
         let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
 
-        if (this.getGreetings()) {
+        if (AuthService.getGreetings()) {
             switch (greetings.greetings_method){
                 case 'fl':
                     this.profileService.greetingsAsFL().subscribe(data => {

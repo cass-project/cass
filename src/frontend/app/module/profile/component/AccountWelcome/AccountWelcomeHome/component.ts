@@ -40,7 +40,7 @@ export class AccountWelcomeHome {
     ngOnInit() {
         let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
 
-        if(this.profileService.checkInitProfile()){
+        if(ProfileService.checkInitProfile()){
             this.router.parent.navigate(['Dashboard']);
         } else {
             greetings.greetings_method = '';
@@ -50,7 +50,6 @@ export class AccountWelcomeHome {
             greetings.nickname = '';
         }
     }
-
 
     greetingsMethodReturn(){
         let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
@@ -96,21 +95,10 @@ export class AccountWelcomeHome {
     }
 
 
-    isSignedIn() {
-        return AuthService.isSignedIn();
-    }
-
-    getGreetings() {
-        return this.isSignedIn()
-            ? AuthService.getAuthToken().getCurrentProfile().greetings
-            : 'Anonymous'
-    }
-
-
     submit(){
         let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
 
-        if (this.getGreetings()) {
+        if (AuthService.getGreetings()) {
             switch (greetings.greetings_method){
                 case 'fl':
                     greetings.first_name = this.profileInfo.firstname;

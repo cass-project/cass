@@ -21,6 +21,12 @@ export class AuthService
         }
     }
 
+    static getGreetings() {
+        return AuthService.isSignedIn()
+            ? AuthService.getAuthToken().getCurrentProfile().greetings
+            : 'Anonymous'
+    }
+
     static isSignedIn() {
         return AuthService.token instanceof AuthToken;
     }
