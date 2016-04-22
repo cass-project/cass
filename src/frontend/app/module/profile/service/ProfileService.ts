@@ -14,8 +14,7 @@ import {AuthService} from "../../auth/service/AuthService";
 export class ProfileService {
     constructor(public http:Http,
                 public avatarCropperService:AvatarCropperService
-    ) {
-    }
+    ){}
 
     getProfileInfo() {
         let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/get`;
@@ -44,7 +43,7 @@ export class ProfileService {
         }));
     }
 
-    checkInitProfile(){
+    static checkInitProfile(){
        return AuthService.getAuthToken().getCurrentProfile().entity.is_initialized;
     }
 
