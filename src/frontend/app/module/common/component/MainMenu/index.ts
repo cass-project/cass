@@ -1,57 +1,29 @@
-import {Component} from 'angular2/core';
+import {Component, ViewEncapsulation} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router} from 'angular2/router'
 import {AuthService} from '../../../auth/service/AuthService';
-import {Profile} from "../../../profile/entity/Profile";
-import {ProfileService} from "../../../profile/service/ProfileService";
+import {MainMenuSignInItem} from "./items/sign-in/index";
+import {MainMenuProfileItem} from "./items/profile/index";
+import {MainMenuSignOutItem} from "./items/sign-out/index";
+import {MainMenuBrowseItem} from "./items/browse/index";
 
 @Component({
     selector: 'cass-main-menu',
     template: require('./template.html'),
     directives: [
-        ROUTER_DIRECTIVES
+        ROUTER_DIRECTIVES,
+        MainMenuSignInItem,
+        MainMenuProfileItem,
+        MainMenuBrowseItem,
+        MainMenuSignOutItem
     ],
     styles: [
         require('./style.shadow.scss')
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class MainMenu
 {
-    constructor(private authService: AuthService, private router: Router) {}
-
     isSignedIn() {
         return AuthService.isSignedIn();
-    }
-
-    getGreetings() {
-        return this.isSignedIn()
-            ? AuthService.getAuthToken().getCurrentProfile().greetings
-            : 'Anonymous'
-    }
-
-    getProfileName(){
-        if(this.getGreetings()){
-            switch(AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method){
-                case 'fl': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name}`;
-                    break;
-                case 'flm': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name}`;
-                    break;
-                case 'n': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname}`;
-                    break;
-            }
-        }
-
-    }
-
-    getProfileAvatar() {
-        return this.isSignedIn()
-            ? AuthService.getAuthToken().getCurrentProfile().entity.image.public_path
-            : Profile.AVATAR_DEFAULT;
-    }
-
-
-    signOut() {
-        this.authService.signOut().add(() => {
-            this.router.navigate(['/Auth/Logout']);
-        })
     }
 }

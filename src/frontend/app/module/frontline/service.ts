@@ -1,6 +1,8 @@
 import {AccountEntity} from "../account/entity/Account";
 import {ProfileEntity} from "../profile/entity/Profile";
 import {Injectable, Inject} from "angular2/core";
+import {ThemeTree} from "../theme/Theme";
+import {CollectionLeaf} from "../collection/Collection";
 
 export class FrontlineService
 {
@@ -12,8 +14,10 @@ export interface FrontlineSessionData
     auth?: {
         api_key: string,
         account: AccountEntity,
-        profiles: Array<ProfileEntity>
-    }
+        profiles: Array<ProfileEntity>,
+    },
+    themes: ThemeTree[],
+    collections?: CollectionLeaf[];
 }
 
 

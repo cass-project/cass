@@ -10,8 +10,10 @@ class CreateCommand extends Command
     {
         $createRequest = new CollectionCreateRequest($request);
 
-        $this->getCollectionService()->create($createRequest->getParameters());
+        $collection = $this->getCollectionService()->create($createRequest->getParameters());
 
-        return [];
+        return [
+            'entity' => $collection->toJSON()
+        ];
     }
 }

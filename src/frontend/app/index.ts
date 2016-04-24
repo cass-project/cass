@@ -23,6 +23,7 @@ import {ProfileComponent} from './module/profile/index';
 import {CatalogComponent} from './module/catalog/index';
 import {CollectionComponent} from "./module/collection/index";
 import {frontline, FrontlineService} from "./module/frontline/service";
+import {ThemeService} from "./module/theme/service/ThemeService";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -31,9 +32,6 @@ import {frontline, FrontlineService} from "./module/frontline/service";
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,
         MainMenu
-    ],
-    providers: [
-        AuthService
     ]
 })
 @RouteConfig([
@@ -59,7 +57,11 @@ import {frontline, FrontlineService} from "./module/frontline/service";
         component: CatalogComponent
     }
 ])
-class App {}
+class App {
+    constructor(private authService: AuthService) {
+        // Do not(!) remove authService dependency.
+    }
+}
 
 class OAuthRequestOptions extends BaseRequestOptions {
     constructor () {
@@ -79,10 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         bootstrap(
             <any>App, [
+                provide(FrontlineService, {useValue: new FrontlineService(session)}),
+                provide(AuthService, { useClass: AuthService }),
+                provide(ThemeService, { useClass: ThemeService }),
                 ROUTER_PROVIDERS,
                 HTTP_PROVIDERS,
                 provide(RequestOptions, {useClass: OAuthRequestOptions}),
-                provide(FrontlineService, {useValue: new FrontlineService(session)}),
                 provide(Window, {useValue: session})
             ]).catch((err) => {
                 console.log(err.message);

@@ -1,0 +1,45 @@
+<div>
+  <div *ngIf="addCollectionModal.isOpen()">
+    <collection-add-modal></collection-add-modal>
+  </div>
+  <div class="profile-menu">
+    <div class="menu-group">
+      <header>
+        <h1>Profile</h1>
+      </header>
+      <div>
+        <ul class="menu-item-list">
+          <li>
+            <a class="menu-item" [routerLink]="['Profile/Edit']">
+              <i class="fa fa-fw fa-user"></i>
+              <span class="title">Edit personal data</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="menu-group">
+      <header>
+        <h1>Collections</h1>
+      </header>
+      <div>
+        <ul class="menu-item-list">
+          <li>
+            <a class="menu-item" (click)="addCollectionModal.open()" href="javascript:void(0)">
+              <i class="fa fa-fw fa-plus-square"></i>
+              <span class="title">Add collection</span>
+            </a>
+          </li>
+        </ul>
+        <hr/>
+      </div>
+      <ul>
+        <li *ngFor="#collection of service.collections">
+          <a class="menu-item" href="#" title="{{ collection.description }}">
+            <span class="title">{{ collection.title }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

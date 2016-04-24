@@ -18,9 +18,33 @@ body {
       left: 50%; margin-left: -5px;
     }
   }
+}
 
-  main>div.container {
-    margin-left: 300px;
-    margin-top: 15px;
+#cassAppContainer
+{
+  display: flex;
+
+  #cassMainMenu {
+    width: 65px;
+  }
+
+  main {
+    width: 100%;
+    margin-top: 25px;
+  }
+}
+
+@media all and (max-width: 640px) {
+  #cassAppContainer {
+    display: block;
+
+    #cassMainMenu {
+      width: 100%;
+    }
+  }
+}
+
+button.submit-progress {
+  img {
   }
 }

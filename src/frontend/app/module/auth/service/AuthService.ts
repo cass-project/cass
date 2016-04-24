@@ -50,6 +50,10 @@ export class AuthService
 
         return this.signIn(this.http.post('/backend/api/auth/sign-up', JSON.stringify(request)), request.remember);
     }
+    
+    public getAuthToken() {
+        return AuthService.getAuthToken();
+    }
 
     private signIn(http, remember = false) {
         return http.map(res => res.json()).subscribe(

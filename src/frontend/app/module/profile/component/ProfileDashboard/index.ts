@@ -29,36 +29,4 @@ export class ProfileDashboardComponent {
             this.router.parent.navigate(['Welcome']);
         }
     }
-
-    showAvatarCropper() {
-        this.avatarCropperService.isAvatarFormVisibleFlag = true;
-    }
-
-    isAvatarFormVisible() {
-        return this.avatarCropperService.isAvatarFormVisibleFlag;
-    }
-
-    getProfileName() {
-        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
-
-        if (AuthService.getGreetings()) {
-            switch (greetings.greetings_method) {
-                case 'fl':
-                    return `${greetings.first_name} ${greetings.last_name}`;
-                    break;
-                case 'flm':
-                    return `${greetings.first_name} ${greetings.last_name} ${greetings.middle_name}`;
-                    break;
-                case 'n':
-                    return `${greetings.nickname}`;
-                    break;
-            }
-        }
-    }
-
-    getProfileAvatar() {
-            return AuthService.isSignedIn()
-                ? AuthService.getAuthToken().getCurrentProfile().entity.image.public_path
-                : Profile.AVATAR_DEFAULT;
-    }
 }

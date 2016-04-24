@@ -43,6 +43,10 @@ class CollectionService
 
         return $collectionEntities;
     }
+    
+    public function getRootCollections(int $profileId) {
+        return $this->collectionRepository->getRootCollections($profileId);
+    }
 
     public function update(CollectionUpdateParameters $collectionUpdateParameters) {
         return $this->collectionRepository->update($collectionUpdateParameters);
