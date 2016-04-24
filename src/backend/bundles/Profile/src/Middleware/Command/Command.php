@@ -15,6 +15,12 @@ abstract class Command
     const COMMAND_IMAGE_UPLOAD = 'image-upload';
     const COMMAND_EDIT_PERSONAL = 'edit-personal';
     const COMMAND_SWITCH = 'switch';
+    const COMMAND_EXPERT_IN_POST = 'expert-in-post';
+    const COMMAND_EXPERT_IN_PUT = 'expert-in-put';
+    const COMMAND_EXPERT_IN_DELETE = 'expert-in-delete';
+    const COMMAND_INTERESTING_IN_POST = 'interesting-in-post';
+    const COMMAND_INTERESTING_IN_PUT = 'interesting-in-put';
+    const COMMAND_INTERESTING_IN_DELETE = 'interesting-in-delete';
 
     /** @var ProfileService */
     protected $profileService;
@@ -81,5 +87,13 @@ abstract class Command
         }
 
         return (int) $input;
+    }
+
+    protected function validateIsOwnProfile($profileId): bool
+    {
+        // TODO: метод должен реализовывать проверку на то, что
+        // переданный ID профиля принадлежит текущему аккаунту (см. $this->currrentAccountService)
+        // TODO: Удалить этот комментарий.
+        throw new \Exception('Not Implemented');
     }
 }

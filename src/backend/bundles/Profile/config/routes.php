@@ -44,4 +44,40 @@ return function (Application $app, string $prefix) {
         ProfileMiddleware::class,
         'profile-delete'
     );
+
+    $app->put(
+        sprintf('%s/protected/profile/{profileId}/{command:expert-in-put}[/]', $prefix),
+        ProfileMiddleware::class,
+        'profile-expert-in-put'
+    );
+
+    $app->post(
+        sprintf('%s/protected/profile/{profileId}/{command:expert-in-post}[/]', $prefix),
+        ProfileMiddleware::class,
+        'profile-expert-in-post'
+    );
+
+    $app->delete(
+        sprintf('%s/protected/profile/{profileId}/{command:expert-in-delete}[/]', $prefix),
+        ProfileMiddleware::class,
+        'profile-expert-in-delete'
+    );
+
+    $app->post(
+        sprintf('%s/protected/profile/{profileId}/{command:interesting-in-post}[/]', $prefix),
+        ProfileMiddleware::class,
+        'profile-interesting-in-post'
+    );
+
+    $app->put(
+        sprintf('%s/protected/profile/{profileId}/{command:interesting-in-put}[/]', $prefix),
+        ProfileMiddleware::class,
+        'profile-interesting-in-put'
+    );
+
+    $app->delete(
+        sprintf('%s/protected/profile/{profileId}/{command:interesting-in}[/]', $prefix),
+        ProfileMiddleware::class,
+        'profile-interesting-in-put'
+    );
 };
