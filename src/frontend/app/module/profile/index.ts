@@ -46,7 +46,7 @@ export class ProfileComponent
     constructor(private router: Router
     ) {
         if(! AuthService.isSignedIn()) {
-            // router.navigate(['Auth']);
+            router.navigate(['Auth']);
         }
     }
 }

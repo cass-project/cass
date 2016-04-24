@@ -7,6 +7,8 @@ Profile_Entity_Profile:
     - is_current
     - greetings
     - image
+    - expert_in
+    - interesting_in
   properties:
     id:
       type: number
@@ -26,3 +28,13 @@ Profile_Entity_Profile:
     image:
       type: object
       $ref: '#/definitions/Profile_Entity_ProfileImage'
+    expert_in:
+      type: array
+      items:
+        type: number
+        description: ID тематики
+    interesting_in:
+      type: array
+      items:
+        type: number
+        description: ID тематики

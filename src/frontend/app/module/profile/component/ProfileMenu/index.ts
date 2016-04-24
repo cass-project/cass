@@ -25,6 +25,6 @@ export class ProfileMenu
     }
     
     isCollectionManagerAvailable() {
-        return true; //.
+        return true; 
     }
 }

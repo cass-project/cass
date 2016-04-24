@@ -26,4 +26,4 @@ export class MainMenu
     isSignedIn() {
         return AuthService.isSignedIn();
     }
-}
+} // .

@@ -1,0 +1,24 @@
+'/protected/profile/{profileId}/expert-in':
+  delete:
+    tags:
+      - profile
+    description: Удалить тематики из уже существующего списка экспертных тематик
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Profile_ExpertIn_Request'
+    responses:
+      200:
+        schema:
+          $ref: '#/responses/success'
+      403:
+        $ref: '#/responses/Unauthorized'
