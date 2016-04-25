@@ -20,6 +20,12 @@ export class ThemeSelector{
     searchStr: string = '';
 
 
+
+    deleteSelector(theme){
+        let deleteThis = this.selectedThemes.indexOf(theme);
+        this.selectedThemes.splice(deleteThis, 1);
+    }
+
     addSelector(theme){
         this.selectedThemes.push(theme);
         console.log(this.selectedThemes);

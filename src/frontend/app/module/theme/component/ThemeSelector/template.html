@@ -1,5 +1,5 @@
 <div class="input-group">
-<span class="input-group-addon" id="basic-addon3"  *ngFor="#theme of selectedThemes">+{{theme.title}}</span>
+<span class="input-group-addon" id="basic-addon3"  *ngFor="#theme of selectedThemes">+{{theme.title}}<button (click)="deleteSelector(theme.title)">x</button></span>
 <input class="form-control" aria-describedby="basic-addon3" type="text" [(ngModel)]="searchStr"/>
     </div>
 <div *ngIf="showSelector()">
