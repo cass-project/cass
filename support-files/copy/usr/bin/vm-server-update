@@ -9,6 +9,9 @@ sudo sed -i 's/\r$//' /usr/bin/vm-db-recreate
 sudo sed -i 's/\r$//' /usr/bin/vm-db-test
 
 
+sudo indexer --all --rotate
+sudo service amqp-listner restart
+sudo service sphinxsearch restart
 sudo service mongodb restart
 sudo service php7.0-fpm restart
 sudo service nginx restart

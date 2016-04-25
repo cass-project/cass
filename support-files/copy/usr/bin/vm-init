@@ -8,7 +8,8 @@
 # ###############
 sudo add-apt-repository ppa:ondrej/php -y
 sudo apt-get update
-sudo apt-get install -y php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring
+sudo apt-get install -y php7.0 php7.0-fpm
+sudo apt-get install -y php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom
 sudo apt-get install -y git npm nginx nginx-extras sphinxsearch rabbitmq-server
 
 # ##########
@@ -96,13 +97,9 @@ sudo mv phpunit.phar /usr/local/bin/phpunit
 # #############
 # Update server
 # #############
-sudo cp -R /support-files/copy/* /
+/support-files/copy/usr/bin/vm-server-update
 
-sudo indexer --all
-sudo service sphinxsearch start
-sudo service mongodb restart
-sudo service php7.0-fpm restart
-sudo service nginx restart
+sudo update-rc.d -f amqp-listner defaults
 
 # ###############
 # Update vm-tools
@@ -112,12 +109,6 @@ sudo chmod a+x /usr/bin/vm-project-update
 sudo chmod a+x /usr/bin/vm-init
 sudo chmod a+x /usr/bin/vm-db-test
 sudo chmod a+x /usr/bin/vm-db-recreate
-
-sudo sed -i 's/\r$//' /usr/bin/vm-init
-sudo sed -i 's/\r$//' /usr/bin/vm-project-update
-sudo sed -i 's/\r$//' /usr/bin/vm-server-update
-sudo sed -i 's/\r$//' /usr/bin/vm-db-recreate
-sudo sed -i 's/\r$//' /usr/bin/vm-db-test
 
 # ##########
 # vm-db-test
