@@ -6,6 +6,7 @@ import 'es6-promise';
 import 'reflect-metadata';
 import 'rxjs/Rx';
 
+
 require('zone.js');
 require('bootstrap/dist/css/bootstrap.css');
 require('./global.head.scss');
@@ -24,6 +25,7 @@ import {CatalogComponent} from './module/catalog/index';
 import {CollectionComponent} from "./module/collection/index";
 import {frontline, FrontlineService} from "./module/frontline/service";
 import {ThemeService} from "./module/theme/service/ThemeService";
+import {ThemeSelector} from "./module/theme/component/ThemeSelector/component";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -55,6 +57,11 @@ import {ThemeService} from "./module/theme/service/ThemeService";
         path: '/catalog/...',
         name: 'Catalog',
         component: CatalogComponent
+    },
+    {
+        path: '/test/',
+        name: 'Test',
+        component: ThemeSelector
     }
 ])
 class App {
