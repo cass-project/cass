@@ -1,0 +1,48 @@
+@import "./../../../../globals";
+@import "./../../../../palette";
+
+$width: 250px;
+
+div.profile-menu {
+  background-color: $color1;
+  position: fixed;
+  top: 0; height: 100%; width: $width;
+  padding: 10px;
+
+  div.menu-group {
+    margin-bottom: 20px;
+
+    header {
+      h1 {
+        font-size: 20px;
+      }
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      padding-left: 15px;
+
+      li {
+        padding: 5px;
+      }
+
+      a.menu-item {
+        display: block;
+        padding: 3px;
+        border-radius: 3px;
+        text-decoration: none;
+
+        i {
+          display: inline-block;
+        }
+
+        &:hover {
+          background-color: $color5;
+          color: $color1;
+        }
+      }
+    }
+  }
+}

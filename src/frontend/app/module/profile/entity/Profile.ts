@@ -35,15 +35,15 @@ export class Profile
 
     constructor(public owner: Account, public entity: ProfileEntity) {}
 
-    getId() {
+    getId(): number {
         return this.entity.id;
     }
 
-    greetings() {
-        return this.entity.greetings;
+    greetings(): string {
+        return this.entity.greetings.greetings;
     }
 
-    public isCurrent() {
+    public isCurrent(): boolean {
         return !!this.entity.is_current;
     }
 

@@ -1,55 +1,32 @@
 <div>
-  <div class="main-menu main-menu-extended">
-    <nav id="cassMainMenu" class="main-menu-nav main-menu-nav-common">
-      <ul class="main-menu-list main-menu-list-common">
-        <li>
-          <a class="main-menu-item" [routerLink]="['/Profile']" tabindex="1">
-            <div class="image image-src">
-              <img src="{{getProfileAvatar()}}" alt="[&#9829;]">
-            </div>
-            <div class="description" *ngIf="! isSignedIn()">
-              <h1>Sign In</h1>
-              <p>Collect and Organize your content</p>
-            </div>
-            <div class="description" *ngIf="isSignedIn()">
-              <h1>{{getProfileName()}}</h1>
-              <p>Your Profile</p>
-            </div>
-          </a>
-          <a class="main-menu-item" *ngIf="isSignedIn()" tabindex="2">
-            <div class="image image-fa">
-              <i class="fa fa-star"></i>
-            </div>
-            <div class="description">
-              <h1>Collections</h1>
-              <p>Your's collected content</p>
-            </div>
-          </a>
-          <a class="main-menu-item" tabindex="3">
-            <div class="image image-fa">
-              <i class="fa fa-hashtag"></i>
-            </div>
-            <div class="description">
-              <h1>Public content</h1>
-              <p>Content collected by others</p>
-            </div>
-          </a>
-        </li>
-      </ul>
-      <footer>
-        <ul class="main-menu-list main-menu-list-logout" *ngIf="isSignedIn()">
+  <div class="cass-main-menu">
+    <nav class="main-menu-nav">
+      <div *ngIf="! isSignedIn()">
+        <ul class="main-menu-list">
           <li>
-            <a (click)="signOut()" class="main-menu-item main-menu-item-no-sub">
-              <div class="image image-fa">
-                <i class="fa fa-sign-out"></i>
-              </div>
-              <div class="description">
-                <h1>Sign Out</h1>
-              </div>
-            </a>
+            <main-menu-item-profile></main-menu-item-profile>
+          </li>
+          <li>
+            <hr/>
+          </li>
+          <li>
+            <main-menu-item-browse></main-menu-item-browse>
           </li>
         </ul>
-      </footer>
+      </div>
+      <div *ngIf="isSignedIn()">
+        <ul class="main-menu-list">
+          <li>
+            <main-menu-item-profile></main-menu-item-profile>
+          </li>
+          <li>
+            <hr/>
+          </li>
+          <li>
+            <main-menu-item-browse></main-menu-item-browse>
+          </li>
+        </ul>
+      </div>
     </nav>
   </div>
 </div>

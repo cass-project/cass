@@ -19,6 +19,14 @@ class CollectionRepository extends EntityRepository
         return $this->findBy($params);
     }
 
+    public function getRootCollections(int $profileId)
+    {
+        return $this->findBy([
+            'parent' => null,
+            'profile' => $profileId
+        ], ['position' => 'asc']);
+    }
+
     public function getCollectionsAsTree(/** @var $collections Collection[] */array $collections, int $parentId = null, $depth = 0): array
     {
         $tree = [];

@@ -1,0 +1,10 @@
+Profile_ExpertIn_Request:
+  type: object
+  required:
+    - theme_ids
+  properties:
+    theme_ids:
+      type: array
+      items:
+        type: number
+        description: ID тематики

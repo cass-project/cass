@@ -48,17 +48,6 @@ export class ProfileEdit {
         this.profileInfo.greetings_method = greetingAS;
     }
 
-
-    isSignedIn() {
-        return AuthService.isSignedIn();
-    }
-
-    getGreetings() {
-        return this.isSignedIn()
-            ? AuthService.getAuthToken().getCurrentProfile().greetings
-            : 'Anonymous'
-    }
-
     getCurrentProfileInfo(){
         let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
 
@@ -83,7 +72,7 @@ export class ProfileEdit {
         let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
         greetings.greetings_method = this.profileInfo.greetings_method;
 
-        if (this.getGreetings()) {
+        if (AuthService.getGreetings()) {
             switch (greetings.greetings_method){
                 case 'fl':
                     greetings.first_name = this.profileInfo.firstname;

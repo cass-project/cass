@@ -21,6 +21,12 @@ export class AuthService
         }
     }
 
+    static getGreetings() {
+        return AuthService.isSignedIn()
+            ? AuthService.getAuthToken().getCurrentProfile().greetings
+            : 'Anonymous'
+    }
+
     static isSignedIn() {
         return AuthService.token instanceof AuthToken;
     }
@@ -43,6 +49,10 @@ export class AuthService
         this.lastError = null;
 
         return this.signIn(this.http.post('/backend/api/auth/sign-up', JSON.stringify(request)), request.remember);
+    }
+    
+    public getAuthToken() {
+        return AuthService.getAuthToken();
     }
 
     private signIn(http, remember = false) {

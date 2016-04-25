@@ -29,46 +29,4 @@ export class ProfileDashboardComponent {
             this.router.parent.navigate(['Welcome']);
         }
     }
-
-    isSignedIn() {
-            return AuthService.isSignedIn();
-    }
-
-    showAvatarCropper() {
-        this.avatarCropperService.isAvatarFormVisibleFlag = true;
-    }
-
-    isAvatarFormVisible() {
-        return this.avatarCropperService.isAvatarFormVisibleFlag;
-    }
-
-    getGreetings() {
-        return this.isSignedIn()
-            ? AuthService.getAuthToken().getCurrentProfile().greetings
-            : 'Anonymous'
-    }
-
-    getProfileName() {
-        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
-
-        if (this.getGreetings()) {
-            switch (greetings.greetings_method) {
-                case 'fl':
-                    return `${greetings.first_name} ${greetings.last_name}`;
-                    break;
-                case 'flm':
-                    return `${greetings.first_name} ${greetings.last_name} ${greetings.middle_name}`;
-                    break;
-                case 'n':
-                    return `${greetings.nickname}`;
-                    break;
-            }
-        }
-    }
-
-    getProfileAvatar() {
-            return this.isSignedIn()
-                ? AuthService.getAuthToken().getCurrentProfile().entity.image.public_path
-                : Profile.AVATAR_DEFAULT;
-    }
 }

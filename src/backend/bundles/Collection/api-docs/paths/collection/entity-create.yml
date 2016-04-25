@@ -17,3 +17,16 @@
         description: JSON Request
         schema:
           $ref: '#/definitions/Collection_Entity_Request'
+    responses:
+      200:
+        description: Коллекция создана
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          success:
+            type: boolean
+            description: '=true'
+          entity:
+            $ref: "#/definitions/Collection_Entity_Collection"
