@@ -14,10 +14,11 @@ class ExpertInPutCommand extends Command
         if(! $this->validateIsOwnProfile($profileId)) {
             throw new NotOwnProfileException(sprintf('Profile with ID `%s` is not yours', $profileId));
         }
-        
+
         $expertInRequest = new ExpertInRequest($request);
         $expertInParameters = $expertInRequest->getParameters();
 
-        throw new \Exception('Not implemented');
+        $updatedProfile = $this->profileService->setExpertsInParameters($profileId, $expertInParameters);
+        return ['success'=> TRUE];
     }
 }

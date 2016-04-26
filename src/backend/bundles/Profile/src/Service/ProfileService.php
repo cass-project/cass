@@ -13,6 +13,7 @@ use Profile\Exception\ImageTooSmallException;
 use Profile\Exception\LastProfileException;
 use Profile\Exception\MaxProfilesReachedException;
 use Profile\Middleware\Parameters\EditPersonalParameters;
+use Profile\Middleware\Parameters\ExpertInParameters;
 use Profile\Repository\ProfileRepository;
 use Common\Util\GenerateRandomString;
 
@@ -186,5 +187,11 @@ class ProfileService
         if($resultWidth !== $resultHeight) {
             throw new ImageIsNotASquareException('Image should be a square');
         }
+    }
+
+
+    public function setExpertsInParameters(int $profileId, ExpertInParameters $expertInParameters ): Profile
+    {
+        return $this->profileRepository->setExpertsInParameters($profileId, $expertInParameters);
     }
 }

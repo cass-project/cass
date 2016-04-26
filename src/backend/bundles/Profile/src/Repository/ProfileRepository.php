@@ -8,6 +8,7 @@ use Profile\Entity\Profile;
 use Profile\Entity\ProfileGreetings;
 use Profile\Entity\ProfileImage;
 use Profile\Exception\ProfileNotFoundException;
+use Profile\Middleware\Parameters\ExpertInParameters;
 
 class ProfileRepository extends EntityRepository
 {
@@ -133,5 +134,18 @@ class ProfileRepository extends EntityRepository
     {
         $this->getEntityManager()->persist($profile);
         $this->getEntityManager()->flush();
+    }
+
+    public function setExpertsInParameters($profileId, ExpertInParameters $expertInParameters): Profile
+    {
+
+        /** @var Profile $profile */
+        $profile = $this->getProfileById($profileId);
+        $profile->setExpertInIds(json_encode($expertInParameters->getThemeIds()));
+
+
+        $this->updateProfile($profile);
+
+        return $profile;
     }
 }

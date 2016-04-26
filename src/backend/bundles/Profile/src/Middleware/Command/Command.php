@@ -2,6 +2,7 @@
 namespace Profile\Middleware\Command;
 
 use Auth\Service\CurrentAccountService;
+use Profile\Entity\Profile;
 use Profile\Service\ProfileService;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
@@ -72,6 +73,9 @@ abstract class Command
 
             case self::COMMAND_SWITCH:
                 return new SwitchCommand();
+
+            case self::COMMAND_EXPERT_IN_PUT:
+                return new ExpertInPutCommand();
         }
     }
 
@@ -91,9 +95,15 @@ abstract class Command
 
     protected function validateIsOwnProfile($profileId): bool
     {
-        // TODO: метод должен реализовывать проверку на то, что
-        // переданный ID профиля принадлежит текущему аккаунту (см. $this->currrentAccountService)
-        // TODO: Удалить этот комментарий.
-        throw new \Exception('Not Implemented');
+        $profiles = $this->currentAccountService->getCurrentAccount()->getProfiles();
+
+
+        foreach($profiles as $profile){
+            if($profile instanceof Profile){
+                if ($profile->getId() == $profileId) return TRUE;
+            }
+        }
+
+        return false;
     }
 }

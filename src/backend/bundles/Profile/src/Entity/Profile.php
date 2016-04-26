@@ -47,15 +47,38 @@ class Profile implements JSONSerializable
      */
     private $profileImage;
 
+
+
+
+    private $expert_in = [];
+    private $interesting_in = [];
+
+    /**
+     * @var string
+     * @Column(type="string",name="expert_in_ids")
+     */
+    private $expert_in_ids;
+
+    /**
+     * @var string
+     * @Column(type="string",name="interesting_in_str")
+     */
+    private $interesting_in_str;
+
+
+
+
     public function toJSON(): array
     {
         return [
-            'id' => (int) $this->getId(),
-            'account_id' => (int) $this->getAccount()->getId(),
-            'current' => (bool) $this->isCurrent(),
-            'is_initialized' => $this->isInitialized(),
-            'greetings' => $this->getProfileGreetings()->toJSON(),
-            'image' => $this->getProfileImage()->toJSON()
+          'id'              => (int) $this->getId(),
+          'account_id'      => (int) $this->getAccount()->getId(),
+          'current'         => (bool) $this->isCurrent(),
+          'is_initialized'  => $this->isInitialized(),
+          'greetings'       => $this->getProfileGreetings()->toJSON(),
+          'image'           => $this->getProfileImage()->toJSON(),
+          'expert_in_ids'       => json_encode($this->expert_in_ids),
+          'intersting_in_str'   => json_encode($this->interesting_in_str)
         ];
     }
 
@@ -63,6 +86,64 @@ class Profile implements JSONSerializable
     {
         $this->account = $account;
     }
+
+    /**
+     * @return string
+     */
+    public function getInterestingInStr(){
+        return $this->interesting_in_str;
+    }
+
+    /**
+     * @param string $interesting_in_str
+     */
+    public function setInterestingInStr($interesting_in_str){
+        $this->interesting_in_str = $interesting_in_str;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExpertInIds(){
+        return $this->expert_in_ids;
+    }
+
+    /**
+     * @param string $expert_in_ids
+     */
+    public function setExpertInIds($expert_in_ids){
+        $this->expert_in_ids = $expert_in_ids;
+    }
+
+    /**
+     * @return array
+     */
+    public function getInterestingIn(){
+        return $this->interesting_in;
+    }
+
+    /**
+     * @param array $interesting_in
+     */
+    public function setInterestingIn($interesting_in){
+        $this->interesting_in = $interesting_in;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExpertIn(){
+        return $this->expert_in;
+    }
+
+    /**
+     * @param array $expert_in
+     */
+    public function setExpertIn($expert_in){
+        $this->expert_in = $expert_in;
+    }
+
+
 
     public function hasId(): bool
     {
