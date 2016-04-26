@@ -16,19 +16,36 @@ export class ThemeSelector{
 
     constructor(public themeService: ThemeService){};
 
+    MultipleChoise: boolean = true;
     selectedThemes = [];
     searchStr: string = '';
 
 
+    onMultipleChoise(){
+        this.MultipleChoise = true;
+    }
+
+    offMultipleChoise(){
+        this.MultipleChoise = false;
+    }
+
 
     deleteSelector(theme){
-        let deleteThis = this.selectedThemes.indexOf(theme);
-        this.selectedThemes.splice(deleteThis, 1);
+        if(this.MultipleChoise) {
+            let deleteThis = this.selectedThemes.indexOf(theme);
+            this.selectedThemes.splice(deleteThis, 1);
+        } else {
+            this.selectedThemes = [];
+        }
     }
 
     addSelector(theme){
-        this.selectedThemes.push(theme);
-        console.log(this.selectedThemes);
+        if(this.MultipleChoise) {
+            this.selectedThemes.push(theme);
+        } else {
+            this.selectedThemes = [];
+            this.selectedThemes.push(theme);
+        }
     }
 
     showSelector(){
