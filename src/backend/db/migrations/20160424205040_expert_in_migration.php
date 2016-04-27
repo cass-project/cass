@@ -20,7 +20,7 @@ class ExpertInMigration extends AbstractMigration
         ->create();
 
         $this->table('profile')
-            ->addColumn('expert_in_ids', 'string')
+            ->addColumn('expert_in_ids', 'string',['null'=>TRUE])
         ->save();
     }
 }

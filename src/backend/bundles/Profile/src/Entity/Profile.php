@@ -3,6 +3,9 @@ namespace Profile\Entity;
 use Account\Entity\Account;
 use Common\REST\JSONSerializable;
 
+use \Doctrine\Common\Collections\ArrayCollection;
+use Theme\Entity\Theme;
+
 /**
  * @Entity(repositoryClass="Profile\Repository\ProfileRepository")
  * @Table(name="profile")
@@ -47,10 +50,22 @@ class Profile implements JSONSerializable
      */
     private $profileImage;
 
-
-
-
+    /**
+     * @ManyToMany(targetEntity="Theme\Entity\Theme")
+     * @JoinTable(name="profile_expert_in",
+     *      joinColumns={@JoinColumn(name="profile_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="theme_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
     private $expert_in = [];
+
+    /**
+     * @ManyToMany(targetEntity="Theme\Entity\Theme")
+     * @JoinTable(name="profile_interesting_in",
+     *      joinColumns={@JoinColumn(name="profile_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="theme_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
     private $interesting_in = [];
 
     /**
@@ -61,86 +76,87 @@ class Profile implements JSONSerializable
 
     /**
      * @var string
-     * @Column(type="string",name="interesting_in_str")
+     * @Column(type="string",name="interesting_in_ids")
      */
-    private $interesting_in_str;
-
-
-
+    private $interesting_in_ids;
 
     public function toJSON(): array
     {
+        $expertsInJSON = array_map(function(Theme $theme){
+            return $theme->toJSON();
+        }, $this->expert_in->toArray());
+
+        $interesting_inJSON = array_map(function(Theme $theme){
+            return $theme->toJSON();
+        }, $this->interesting_in->toArray());
+
         return [
-          'id'              => (int) $this->getId(),
-          'account_id'      => (int) $this->getAccount()->getId(),
-          'current'         => (bool) $this->isCurrent(),
-          'is_initialized'  => $this->isInitialized(),
-          'greetings'       => $this->getProfileGreetings()->toJSON(),
-          'image'           => $this->getProfileImage()->toJSON(),
-          'expert_in_ids'       => json_encode($this->expert_in_ids),
-          'intersting_in_str'   => json_encode($this->interesting_in_str)
+          'id'                 => (int) $this->getId(),
+          'account_id'         => (int) $this->getAccount()->getId(),
+          'current'            => (bool) $this->isCurrent(),
+          'is_initialized'     => $this->isInitialized(),
+          'greetings'          => $this->getProfileGreetings()->toJSON(),
+          'image'              => $this->getProfileImage()->toJSON(),
+          'expert_in_ids'      => json_encode($this->expert_in_ids),
+          'interesting_in_ids' => json_encode($this->interesting_in_ids),
+          'expert_in'          => $expertsInJSON,
+          'interesting_in'     => $interesting_inJSON
         ];
     }
 
     public function __construct(Account $account)
     {
-        $this->account = $account;
+        $this->account        = $account;
+        $this->expert_in      = new ArrayCollection();
+        $this->interesting_in = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
-    public function getInterestingInStr(){
-        return $this->interesting_in_str;
+    public function getExpertIn()
+    {
+        return $this->expert_in;
     }
 
-    /**
-     * @param string $interesting_in_str
-     */
-    public function setInterestingInStr($interesting_in_str){
-        $this->interesting_in_str = $interesting_in_str;
+    public function setExpertIn(array $expertIn): self
+    {
+        $this->expert_in = $expertIn;
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getExpertInIds(){
+    public function getExpertInIds(): string
+    {
         return $this->expert_in_ids;
     }
 
-    /**
-     * @param string $expert_in_ids
-     */
-    public function setExpertInIds($expert_in_ids){
-        $this->expert_in_ids = $expert_in_ids;
+    public function setExpertInIds(array $expertInIds): self
+    {
+        $expertInIds = array_map(function(Theme $theme){
+            return $theme->getId();
+        }, $expertInIds);
+
+        $this->expert_in_ids = json_encode($expertInIds);
+        return $this;
     }
 
-    /**
-     * @return array
-     */
+    public function getInterestingInIds(): string{
+        return $this->interesting_in_ids;
+    }
+
+    public function setInterestingInIds(array $interestingInIds): self
+    {
+        $interestingInIds = array_map(function(Theme $theme){
+            return $theme->getId();
+        }, $interestingInIds);
+
+        $this->interesting_in_ids = json_encode($interestingInIds);
+        return $this;
+    }
+
     public function getInterestingIn(){
         return $this->interesting_in;
     }
 
-    /**
-     * @param array $interesting_in
-     */
     public function setInterestingIn($interesting_in){
         $this->interesting_in = $interesting_in;
-    }
-
-    /**
-     * @return array
-     */
-    public function getExpertIn(){
-        return $this->expert_in;
-    }
-
-    /**
-     * @param array $expert_in
-     */
-    public function setExpertIn($expert_in){
-        $this->expert_in = $expert_in;
     }
 
 

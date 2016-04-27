@@ -194,4 +194,9 @@ class ProfileService
     {
         return $this->profileRepository->setExpertsInParameters($profileId, $expertInParameters);
     }
+
+    public function mergeExpertsInParameters(int $profileId, ExpertInParameters $expertInParameters): Profile
+    {
+        return $this->profileRepository->mergeExpertsInParameters($profileId, $expertInParameters);
+    }
 }
