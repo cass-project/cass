@@ -1,0 +1,28 @@
+"/protected/post/{postId}/get":
+  get:
+    tags:
+      - post
+    description:
+      Получить пост по ID
+    security:
+      - x_api_key: []
+    parameters:
+      - name: postId
+        type: number
+        in: path
+        required: true
+        description: ID поста
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        schema:
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Post_Entity_Post'

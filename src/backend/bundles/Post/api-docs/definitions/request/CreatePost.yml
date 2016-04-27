@@ -1,0 +1,16 @@
+Post_Request_CreatePost:
+  type: object
+  required:
+    - profile_id
+    - collection_id
+    - content
+  properties:
+    profile_id:
+      type: number
+      description: ID профиля
+    collection_id:
+      type: number
+      description: ID коллекции, в которой будет размещен пост
+    content:
+      type: string
+      description: Содержание сообщения

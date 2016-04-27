@@ -1,0 +1,19 @@
+"/protected/post/{postId}/delete":
+  delete:
+    tags:
+      - post
+    description:
+      Удалить пост
+    security:
+      - x_api_key: []
+    parameters:
+      - name: postId
+        in: path
+        required: true
+        type: number
+        description: ID поста
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        $ref: '#/responses/success'

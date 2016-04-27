@@ -1,0 +1,29 @@
+"/protected/post/create":
+  put:
+    tags:
+      - post
+    description:
+      Создать пост в коллекции
+    security:
+      - x_api_key: []
+    parameters:
+      - name: body
+        in: body
+        required: true
+        description:
+        schema:
+          $ref: '#/definitions/Post_Request_CreatePost'
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        schema:
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Post_Entity_Post'

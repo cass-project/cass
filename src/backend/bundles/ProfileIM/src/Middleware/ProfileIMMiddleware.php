@@ -32,6 +32,7 @@ class ProfileIMMiddleware implements MiddlewareInterface
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
         $responseBuilder = new GenericRESTResponseBuilder($response);
+        
         try{
             $command = Command::factory($request, $this->currentAccountService, $this->profileIMService, $this->profileService);
             $result  = $command->run($request);

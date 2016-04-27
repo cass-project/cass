@@ -1,0 +1,33 @@
+"/protected/post/{postId}/edit":
+  post:
+    tags:
+      - post
+    description:
+      Редактирование поста
+    security:
+      - x_api_key: []
+    parameters:
+      - name: postId
+        type: number
+        in: path
+        required: true
+        description: ID поста
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Post_Request_EditPost'
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        schema:
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Post_Entity_Post'

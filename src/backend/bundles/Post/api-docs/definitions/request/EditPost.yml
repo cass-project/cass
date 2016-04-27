@@ -1,0 +1,12 @@
+Post_Request_EditPost:
+  type: object
+  required:
+    - collection_id
+    - content
+  properties:
+    collection_id:
+      type: number
+      description: ID коллекции, в которой будет размещен пост
+    content:
+      type: string
+      description: Содержание сообщения
