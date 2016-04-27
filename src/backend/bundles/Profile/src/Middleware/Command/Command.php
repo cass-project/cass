@@ -18,9 +18,7 @@ abstract class Command
     const COMMAND_EDIT_PERSONAL = 'edit-personal';
     const COMMAND_SWITCH = 'switch';
     const COMMAND_EXPERT_IN = 'expert-in';
-    const COMMAND_INTERESTING_IN_POST = 'interesting-in-post';
-    const COMMAND_INTERESTING_IN_PUT = 'interesting-in-put';
-    const COMMAND_INTERESTING_IN_DELETE = 'interesting-in-delete';
+    const COMMAND_INTERESTING_IN = 'interesting-in';
 
     /** @var ProfileService */
     protected $profileService;
@@ -81,6 +79,13 @@ abstract class Command
                     case 'DELETE': return new ExpertInDeleteCommand();
                 }
 
+            case self::COMMAND_INTERESTING_IN:
+                switch($method){
+                    default: throw new UnknownActionException();
+                    case 'POST': return new InterestingInPostCommand();
+                    case 'PUT': return new InterestingInPutCommand();
+                    case 'DELETE': return new ExpertInDeleteCommand();
+                }
         }
     }
 

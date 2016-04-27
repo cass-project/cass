@@ -10,6 +10,7 @@ use Profile\Entity\ProfileImage;
 use Profile\Exception\NoThemesToMerge;
 use Profile\Exception\ProfileNotFoundException;
 use Profile\Middleware\Parameters\ExpertInParameters;
+use Profile\Middleware\Parameters\InterestingInParameters;
 use Theme\Entity\Theme;
 
 class ProfileRepository extends EntityRepository
@@ -176,7 +177,7 @@ class ProfileRepository extends EntityRepository
             }
         }
 
-        if(count($themes)==0) throw new NoThemesToMerge("there is no new themes to add to interestIn");
+        if(count($themes)==0) throw new NoThemesToMerge("there is no new themes to add to expertIn");
 
         foreach($themes as $theme){
             $profile->getExpertIn()->add($theme);
@@ -188,8 +189,53 @@ class ProfileRepository extends EntityRepository
         return $profile;
     }
 
-    public function getProfileWithExpertsIn(int $profileId): Profile
+    public function setInterestingInParameters(int $profileId, InterestingInParameters $inParameters): Profile
     {
-        return $this->find($profileId);
+        /** @var Profile $profile */
+        $profile = $this->getProfileById($profileId);
+
+        // получаем темы по ids
+        $themes = $this->getEntityManager()->getRepository(Theme::class)->findBy(
+          ['id' => $inParameters->getThemeIds()]
+        );
+
+        $profile->setInterestingIn($themes)
+                ->setInterestingInIds($profile->getInterestingIn());
+
+        $this->updateProfile($profile);
+
+        return $profile;
+    }
+
+    public function mergeInterestingInParameters(int $profileId, InterestingInParameters $inParameters): Profile
+    {
+        /** @var Profile $profile */
+        $profile = $this->getProfileById($profileId);
+
+        // получаем темы по ids
+        $themes = $this->getEntityManager()->getRepository(Theme::class)->findBy(
+          ['id' => $inParameters->getThemeIds()]
+        );
+
+        // removing exist themes
+        foreach($themes as $k => $theme){
+            foreach($profile->getInterestingIn()->toArray() as $profile_theme){
+                if($theme->getId() == $profile_theme->getId()) {
+                    unset($themes[$k]);
+                    continue(2);
+                }
+            }
+        }
+
+        if(count($themes)==0) throw new NoThemesToMerge("there is no new themes to add to interestIn");
+
+        foreach($themes as $theme){
+            $profile->getInterestingIn()->add($theme);
+        }
+
+        $profile->setExpertInIds($profile->getInterestingIn()->toArray());
+
+        $this->updateProfile($profile);
+        return $profile;
     }
 }

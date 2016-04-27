@@ -18,6 +18,7 @@ class InterestingInPutCommand extends Command
         $interestingInRequest = new InterestingInRequest($request);
         $interestingInParameters = $interestingInRequest->getParameters();
 
-        throw new \Exception('Not implemented');
+        $this->profileService->setInterestingInParameters($profileId, $interestingInParameters);
+        return ['success'=> TRUE];
     }
 }

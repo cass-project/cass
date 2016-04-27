@@ -14,6 +14,7 @@ use Profile\Exception\LastProfileException;
 use Profile\Exception\MaxProfilesReachedException;
 use Profile\Middleware\Parameters\EditPersonalParameters;
 use Profile\Middleware\Parameters\ExpertInParameters;
+use Profile\Middleware\Parameters\InterestingInParameters;
 use Profile\Repository\ProfileRepository;
 use Common\Util\GenerateRandomString;
 
@@ -199,4 +200,15 @@ class ProfileService
     {
         return $this->profileRepository->mergeExpertsInParameters($profileId, $expertInParameters);
     }
+
+    public function setInterestingInParameters(int $profileId, InterestingInParameters $inParameters): Profile
+    {
+        return $this->profileRepository->setInterestingInParameters($profileId,$inParameters);
+    }
+
+    public function mergeInterestingInParameters(int $profileId, InterestingInParameters $inParameters): Profile
+    {
+        return $this->profileRepository->mergeInterestingInParameters($profileId, $inParameters);
+    }
+
 }

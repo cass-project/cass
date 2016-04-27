@@ -18,6 +18,7 @@ class InterestingInPostCommand extends Command
         $interestingInRequest = new InterestingInRequest($request);
         $interestingInParameters = $interestingInRequest->getParameters();
 
-        throw new \Exception('Not implemented');
+        $this->profileService->mergeInterestingInParameters($profileId, $interestingInParameters);
+        return ['success'=> TRUE];
     }
 }

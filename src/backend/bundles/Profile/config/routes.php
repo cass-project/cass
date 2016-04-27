@@ -63,21 +63,21 @@ return function (Application $app, string $prefix) {
         'profile-expert-in-delete'
     );
 
-    $app->post(
-        sprintf('%s/protected/profile/{profileId}/{command:interesting-in-post}[/]', $prefix),
-        ProfileMiddleware::class,
-        'profile-interesting-in-post'
-    );
-
     $app->put(
-        sprintf('%s/protected/profile/{profileId}/{command:interesting-in-put}[/]', $prefix),
+        sprintf('%s/protected/profile/{profileId}/{command:interesting-in}[/]', $prefix),
         ProfileMiddleware::class,
         'profile-interesting-in-put'
+    );
+
+    $app->post(
+      sprintf('%s/protected/profile/{profileId}/{command:interesting-in}[/]', $prefix),
+      ProfileMiddleware::class,
+      'profile-interesting-in-post'
     );
 
     $app->delete(
         sprintf('%s/protected/profile/{profileId}/{command:interesting-in}[/]', $prefix),
         ProfileMiddleware::class,
-        'profile-interesting-in-put'
+        'profile-interesting-in-delete'
     );
 };

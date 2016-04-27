@@ -151,15 +151,16 @@ class Profile implements JSONSerializable
         return $this;
     }
 
-    public function getInterestingIn(){
+    public function getInterestingIn()
+    {
         return $this->interesting_in;
     }
 
-    public function setInterestingIn($interesting_in){
-        $this->interesting_in = $interesting_in;
+    public function setInterestingIn(array $interestingIn): self
+    {
+        $this->interesting_in = $interestingIn;
+        return $this;
     }
-
-
 
     public function hasId(): bool
     {
