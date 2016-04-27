@@ -41,7 +41,7 @@
       </div>
       <ul class="menu-item-list">
         <li *ngFor="#collection of service.collections">
-          <a class="menu-item" href="#" title="{{ collection.description }}">
+          <a class="menu-item" href="#" title="{{ collection.description }}" [routerLink]="['/Profile/Collections/View', { collectionId: collection.id }]">
             <i class="fa fa-fw fa-circle-o"></i>
             <span class="title">{{ collection.title }}</span>
           </a>

@@ -5,6 +5,7 @@ import {FormSubmittingIndicator} from "../../../common/component/FormSubmittingI
 import {CollectionRESTService} from "../../service/CollectionRESTService";
 import {AuthService} from "../../../auth/service/AuthService";
 import {CollectionService} from "../../service/CollectionService";
+import {Router} from "angular2/router";
 
 @Injectable()
 export class AddCollectionModalService
@@ -47,7 +48,8 @@ export class AddCollectionModal
         private themes: ThemeService,
         private collectionService: CollectionService,
         private collectionREST: CollectionRESTService,
-        private authService: AuthService
+        private authService: AuthService,
+        private router: Router
     ) {
         this.themes = themes.getThemeSelectOptions();
     }
@@ -99,6 +101,7 @@ export class AddCollectionModal
         this.collectionREST.putCreate(profileId, body).map(res => res.json()).subscribe(
             response => {
                 this.collectionService.collections.push(response.entity);
+                this.router.navigate(['/Profile/Collections/View', { collectionId: response.entity.id }]);
                 this.close();
             },
             error => {

@@ -21,7 +21,6 @@ import {AuthService} from './module/auth/service/AuthService';
 import {AuthComponent} from './module/auth/index';
 import {ProfileComponent} from './module/profile/index';
 import {CatalogComponent} from './module/catalog/index';
-import {CollectionComponent} from "./module/collection/index";
 import {frontline, FrontlineService} from "./module/frontline/service";
 import {ThemeService} from "./module/theme/service/ThemeService";
 import {ThemeSelector} from "./module/theme/component/ThemeSelector/component";
@@ -46,11 +45,6 @@ import {ThemeSelector} from "./module/theme/component/ThemeSelector/component";
         path: '/auth/...',
         name: 'Auth',
         component: AuthComponent
-    },
-    {
-        path: '/collection/...',
-        name: 'Collection',
-        component: CollectionComponent
     },
     {
         path: '/catalog/...',

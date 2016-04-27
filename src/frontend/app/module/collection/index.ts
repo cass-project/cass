@@ -1,5 +1,6 @@
 import {Component} from "angular2/core";
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {ROUTER_DIRECTIVES, RouteConfig} from "angular2/router";
+import {ViewCollection} from "./component/ViewCollection/index";
 
 @Component({
     template: require('./template.html'),
@@ -7,4 +8,11 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
         ROUTER_DIRECTIVES
     ]
 })
-export class CollectionComponent {}
+@RouteConfig([
+    {
+        name: 'View',
+        path: '/view/:collectionId',
+        component: ViewCollection
+    }
+])
+export class CollectionComponent {} 

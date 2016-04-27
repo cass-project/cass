@@ -7,6 +7,7 @@ import {AccountWelcome} from "./component/AccountWelcome/component";
 import {AvatarCropper} from "./component/AvatarCropper/index";
 import {ProfileService} from "./service/ProfileService";
 import {ProfileMenu} from "./component/ProfileMenu/index";
+import {CollectionComponent} from "../collection/index";
 
 @Component({
     template: require('./template.html'),
@@ -37,6 +38,11 @@ import {ProfileMenu} from "./component/ProfileMenu/index";
         name: 'Welcome',
         path: '/welcome/...',
         component: AccountWelcome
+    },
+    {
+        name: 'Collections',
+        path: '/collections/...',
+        component: CollectionComponent
     },
     {
         name: 'AvatarEdit',
