@@ -6,6 +6,8 @@
 – Добавляйте пробел в Return type declarations: `public function getRequest(): ServerRequestInterface`
 - Всегда указывайте область видимости (`public`, `protected`, `private`) методов и свойств класса
 – Не используйте выравнивание в массивах (`"foo"     => "bar"` -> `"foo" => "bar"`)
+- Название свойств классов, переменных, названия классов, методов и функций должны быть в формате *camelCase*: `$myCollection`, `$this->profileId`, `isProfileInitialized()`
+- Ключи в JSON-ответах должны быть в формате *underscore*: `in_initialized`, `profile_id`, `attachment_ids`
 
 Один класс - не всегда один файл
 --------------------------------
