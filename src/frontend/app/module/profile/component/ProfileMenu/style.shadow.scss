@@ -1,47 +1,44 @@
-@import "./../../../../globals";
-@import "./../../../../palette";
+@import "../../../../globals";
 
-$width: 250px;
+$panelWidth: 250px;
 
 div.profile-menu {
-  background-color: $color1;
+  background-color: $color2;
+  display: block;
   position: fixed;
-  top: 0; height: 100%; width: $width;
+  left: $leftPanelWidth; width: $panelWidth;
+  top: 0; height: 100%;
+  overflow: hidden;
   padding: 10px;
 
-  div.menu-group {
-    margin-bottom: 20px;
+  @include card(1);
 
-    header {
+  div.menu-group {
+    >header {
       h1 {
         font-size: 20px;
+        color: $color1;
       }
     }
 
-    ul {
+    ul.menu-item-list {
       list-style-type: none;
-      margin: 0;
-      padding: 0;
-      padding-left: 15px;
+      margin: 20px 0; padding: 0;
 
       li {
-        padding: 5px;
+        margin: 3px;
       }
+    }
 
-      a.menu-item {
-        display: block;
-        padding: 3px;
-        border-radius: 3px;
-        text-decoration: none;
+    a.menu-item {
+      display: block;
+      text-decoration: none;
+      color: $color4;
+      border-radius: 3px;
 
-        i {
-          display: inline-block;
-        }
-
-        &:hover {
-          background-color: $color5;
-          color: $color1;
-        }
+      &:hover {
+        background-color: $color5;
+        color: $color2;
       }
     }
   }

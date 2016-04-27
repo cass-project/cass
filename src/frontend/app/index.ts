@@ -6,10 +6,9 @@ import 'es6-promise';
 import 'reflect-metadata';
 import 'rxjs/Rx';
 
-
 require('zone.js');
-require('bootstrap/dist/css/bootstrap.css');
 require('./global.head.scss');
+require("./../node_modules/bootstrap/dist/css/bootstrap.min.css");
 
 import {Component, provide} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';

@@ -31,5 +31,8 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.11",
     "zone.js": "^0.6.6"
+  },
+  "devDependencies": {
+    "sass-material-colors": "0.0.5"
   }
 }

@@ -39,9 +39,10 @@
         </ul>
         <hr/>
       </div>
-      <ul>
+      <ul class="menu-item-list">
         <li *ngFor="#collection of service.collections">
           <a class="menu-item" href="#" title="{{ collection.description }}">
+            <i class="fa fa-fw fa-circle-o"></i>
             <span class="title">{{ collection.title }}</span>
           </a>
         </li>

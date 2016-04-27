@@ -1,61 +1,103 @@
-@import "./../../../../globals.scss";
-@import "./../../../../palette.scss";
+@import '../../../../../node_modules/sass-material-colors/sass/sass-material-colors';
+@import "../../../../globals";
 
-div.cass-main-menu
-{
+div.cass-main-menu {
+  @include card(5);
+
   position: fixed;
+  background-color: $color5;
   top: 0; height: 100%;
-  left: 0; width: $mainMenuWidth;
-  padding: 5px;
+  left: 0; width: $leftPanelWidth;
+  z-index: 9999;
 
-  ul.main-menu-list {
-    list-style-type: none;
-
-    &,li {
-      margin: 0;
-      padding: 0;
-    }
-
-    li {
-      margin: 5px;
-    }
-  }
-
-  hr {
-    border-color: #ccc;
-  }
-
-  a.main-menu-item {
+  nav {
     display: block;
 
-    div.image {
-      width: $mainMenuIconSize;
-      height: $mainMenuIconSize;
-      overflow: hidden;
-      border-radius: 5px;
-    }
-
-    div.image-src {
-      img {
-        width: 100%;
-      }
-    }
-
-    div.image-fa {
-      color: $mainMenuColor3;
-      vertical-align: middle;
+    ul.community-list {
+      display: block;
+      height: 100%;
       text-align: center;
-      line-height: $mainMenuIconSize - 4px;
-      font-size: $mainMenuFAFontSize;
-    }
+      padding: 0;
+      margin: 0;
+      margin-top: 5px;
+      list-style-type: none;
 
-    div.description {
-      display: none;
-    }
+      li {
+        display: inline-block;
+        margin: 3px;
 
-    &:hover {
-      div.image-fa {
-        color: black;
+        a.main-menu-item {
+          display: block;
+          position: relative;
+
+          div.image {
+            width: $iconSize;
+            height: $iconSize;
+            overflow: hidden;
+            border-radius: 3px;
+            border: 2px solid $color4;
+          }
+
+
+          div.image-fa {
+            background-color: $color2;
+            color: $color5;
+            line-height: $iconSize;
+            text-align: center;
+            font-size: $faIconSize;
+          }
+
+          div.image-src {
+            img {
+              width: 100%;
+            }
+          }
+
+          div.description {
+            @include card(3);
+
+            display: none;
+            white-space: nowrap;
+            position: absolute;
+            left: $iconSize + 15px;
+            top: 0;
+            background-color: $color5;
+            color: $color1;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: left;
+
+            h1 {
+              font-size: 20px;
+              font-weight: bold;
+              margin: 0;
+              padding: 0;
+              color: $color2;
+            }
+
+            p {
+              font-size: 14px;
+              color: $color3;
+              margin: 0;
+              padding: 0;
+            }
+          }
+
+          &:hover {
+            div.image {
+              border-color: $color4;
+            }
+
+            div.description {
+              display: block;
+            }
+
+            div.image-src img {
+              filter: brightness(120%);
+              -webkit-filter: brightness(120%);
+            }
+          }
+        }
       }
     }
   }

@@ -14,7 +14,10 @@ import {ProfileMenu} from "./component/ProfileMenu/index";
         ROUTER_DIRECTIVES,
         ProfileMenu
     ],
-    'providers': [
+    styles: [
+        require('./style.shadow.scss')
+    ],
+    providers: [
         ProfileService
     ]
 })

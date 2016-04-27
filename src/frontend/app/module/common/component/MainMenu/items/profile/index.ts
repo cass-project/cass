@@ -22,7 +22,7 @@ export class MainMenuProfileItem
     }
 
     public getDescription(): string {
-        return "Profile settings";
+        return "Dashboard, your collections and settings";
     }
 
     public getImageSrc() {
