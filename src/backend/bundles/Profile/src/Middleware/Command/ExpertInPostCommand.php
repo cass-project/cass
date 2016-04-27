@@ -18,6 +18,7 @@ class ExpertInPostCommand extends Command
         $expertInRequest = new ExpertInRequest($request);
         $expertInParameters = $expertInRequest->getParameters();
 
-        throw new \Exception('Not implemented');
+        $this->profileService->mergeExpertsInParameters($profileId, $expertInParameters);
+        return ['success'=> TRUE];
     }
 }

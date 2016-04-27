@@ -46,19 +46,19 @@ return function (Application $app, string $prefix) {
     );
 
     $app->put(
-        sprintf('%s/protected/profile/{profileId}/{command:expert-in-put}[/]', $prefix),
+        sprintf('%s/protected/profile/{profileId}/{command:expert-in}[/]', $prefix),
         ProfileMiddleware::class,
         'profile-expert-in-put'
     );
 
     $app->post(
-        sprintf('%s/protected/profile/{profileId}/{command:expert-in-post}[/]', $prefix),
+        sprintf('%s/protected/profile/{profileId}/{command:expert-in}[/]', $prefix),
         ProfileMiddleware::class,
         'profile-expert-in-post'
     );
 
     $app->delete(
-        sprintf('%s/protected/profile/{profileId}/{command:expert-in-delete}[/]', $prefix),
+        sprintf('%s/protected/profile/{profileId}/{command:expert-in}[/]', $prefix),
         ProfileMiddleware::class,
         'profile-expert-in-delete'
     );

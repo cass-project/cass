@@ -2,6 +2,7 @@
 namespace Profile\Middleware\Command;
 
 use Auth\Service\CurrentAccountService;
+use Common\REST\Exceptions\UnknownActionException;
 use Profile\Entity\Profile;
 use Profile\Service\ProfileService;
 use Psr\Http\Message\ServerRequestInterface;
@@ -16,9 +17,7 @@ abstract class Command
     const COMMAND_IMAGE_UPLOAD = 'image-upload';
     const COMMAND_EDIT_PERSONAL = 'edit-personal';
     const COMMAND_SWITCH = 'switch';
-    const COMMAND_EXPERT_IN_POST = 'expert-in-post';
-    const COMMAND_EXPERT_IN_PUT = 'expert-in-put';
-    const COMMAND_EXPERT_IN_DELETE = 'expert-in-delete';
+    const COMMAND_EXPERT_IN = 'expert-in';
     const COMMAND_INTERESTING_IN_POST = 'interesting-in-post';
     const COMMAND_INTERESTING_IN_PUT = 'interesting-in-put';
     const COMMAND_INTERESTING_IN_DELETE = 'interesting-in-delete';
@@ -41,14 +40,14 @@ abstract class Command
 
     public static function factory(ServerRequestInterface $request, ProfileService $profileService, CurrentAccountService $currentAccountService): Command
     {
-        $command = self::factoryCommand($request->getAttribute('command'));
+        $command = self::factoryCommand($request->getAttribute('command'), $request->getMethod() );
         $command->setProfileService($profileService);
         $command->setCurrentAccountService($currentAccountService);
 
         return $command;
     }
 
-    private static function factoryCommand(string $command) {
+    private static function factoryCommand(string $command, string $method) {
         switch ($command) {
             default:
                 throw new CommandNotFoundException(sprintf("Command %s::%s not found", self::class, $command));
@@ -74,8 +73,14 @@ abstract class Command
             case self::COMMAND_SWITCH:
                 return new SwitchCommand();
 
-            case self::COMMAND_EXPERT_IN_PUT:
-                return new ExpertInPutCommand();
+            case self::COMMAND_EXPERT_IN:
+                switch($method){
+                    default: throw new UnknownActionException();
+                    case 'POST': return new ExpertInPostCommand();
+                    case 'PUT': return new ExpertInPutCommand();
+                    case 'DELETE': return new ExpertInDeleteCommand();
+                }
+
         }
     }
 

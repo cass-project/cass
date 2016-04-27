@@ -20,7 +20,7 @@ class InterestingInMigration extends AbstractMigration
         ->create();
 
         $this->table('profile')
-            ->addColumn('interesting_in_str', 'text')
+            ->addColumn('interesting_in_ids', 'text',['null'=>TRUE])
             ->save()
         ;
     }

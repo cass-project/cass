@@ -3,6 +3,7 @@ namespace Profile\Middleware;
 
 use Auth\Service\CurrentAccountService;
 use Common\REST\GenericRESTResponseBuilder;
+use Profile\Exception\NoThemesToMerge;
 use Profile\Exception\ProfileNotFoundException;
 use Profile\Exception\UnknownGreetingsException;
 use Profile\Middleware\Command\Command;
@@ -48,6 +49,11 @@ class ProfileMiddleware implements MiddlewareInterface
             $responseBuilder
                 ->setStatusBadRequest()
                 ->setError($e)
+            ;
+        } catch(NoThemesToMerge $e){
+            $responseBuilder
+              ->setStatusBadRequest()
+              ->setError($e)
             ;
         }
 
