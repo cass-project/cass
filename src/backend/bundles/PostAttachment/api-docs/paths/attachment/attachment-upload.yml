@@ -1,0 +1,28 @@
+"/protected/post-attachment/upload":
+  put:
+    tags:
+      - post_attachment
+    description: Загрузка аттачмента с файлом на сервер
+    parameters:
+      - name: file
+        description: Файл
+        type: file
+        required: true
+        in: formData
+        allowMultiple: false
+    security:
+      - x_api_key: []
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        schema:
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/PostAttachment_Entity_PostAttachmentEntity'
