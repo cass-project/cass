@@ -9,8 +9,8 @@
           <label>
             <input #gmFL
                    type="radio"
-                   [checked]="profileInfo.greetings_method == gmFL.value"
-                   (click)="profileInfo.greetings_method = gmFL.value"
+                   [checked]="profileService.profileInfo.greetings_method == gmFL.value"
+                   (click)="profileService.profileInfo.greetings_method = gmFL.value"
                    name="greetings_method" value="fl">
             <span>By First and Last name</span>
           </label>
@@ -19,8 +19,8 @@
           <label>
             <input #gmFLM
                    type="radio"
-                   [checked]="profileInfo.greetings_method == gmFLM.value"
-                   (click)="profileInfo.greetings_method = gmFLM.value"
+                   [checked]="profileService.profileInfo.greetings_method == gmFLM.value"
+                   (click)="profileService.profileInfo.greetings_method = gmFLM.value"
                    name="greetings_method" value="flm">
             <span>By First, Last name and Middle name</span>
           </label>
@@ -29,8 +29,8 @@
           <label>
             <input #gmN
                    type="radio"
-                   [checked]="profileInfo.greetings_method == gmN.value"
-                   (click)="profileInfo.greetings_method = gmN.value"
+                   [checked]="profileService.profileInfo.greetings_method == gmN.value"
+                   (click)="profileService.profileInfo.greetings_method = gmN.value"
                    name="greetings_method" value="n">
               <span>By Nickname</span>
           </label>
@@ -42,38 +42,38 @@
           <div *ngSwitchWhen="'fl'">
             <div class="form-group">
               <label class="form-control-label" for="InputFirstname">Firstname</label>
-              <input class="form-control" type="text" [(ngModel)]="profileInfo.firstname" id="InputFirstname">
+              <input class="form-control" type="text" [(ngModel)]="profileService.profileInfo.firstname" id="InputFirstname">
             </div>
             <div class="form-group">
               <label class="form-control-label" for="InputLastname">Lastname</label>
-              <input type="text" [(ngModel)]="profileInfo.lastname" class="form-control" id="InputLastname">
+              <input type="text" [(ngModel)]="profileService.profileInfo.lastname" class="form-control" id="InputLastname">
             </div>
           </div>
           <div *ngSwitchWhen="'flm'">
             <div class="form-group">
               <label class="form-control-label" for="InputLastname">Lastname</label>
-              <input type="text" [(ngModel)]="profileInfo.lastname" class="form-control" id="InputLastname">
+              <input type="text" [(ngModel)]="profileService.profileInfo.lastname" class="form-control" id="InputLastname">
             </div>
             <div class="form-group">
               <label for="InputFirstname">Firstname</label>
-              <input type="text" [(ngModel)]="profileInfo.firstname" class="form-control" id="InputFirstname">
+              <input type="text" [(ngModel)]="profileService.profileInfo.firstname" class="form-control" id="InputFirstname">
             </div>
             <div class="form-group">
               <label for="InputMiddlename">Middlename</label>
-              <input type="text" [(ngModel)]="profileInfo.middlename" class="form-control" id="InputMiddlename">
+              <input type="text" [(ngModel)]="profileService.profileInfo.middlename" class="form-control" id="InputMiddlename">
             </div>
           </div>
           <div *ngSwitchWhen="'n'">
             <div class="form-group">
               <label class="form-control-label" for="InputNickname">Nickname</label>
-              <input type="text" [(ngModel)]="profileInfo.nickname"  class="form-control" id="InputNickname">
+              <input type="text" [(ngModel)]="profileService.profileInfo.nickname"  class="form-control" id="InputNickname">
             </div>
           </div>
         </div>
       </fieldset>
       <fieldset>
         <legend>Profile Image</legend>
-        <button class="btn btn-primary">Upload new profile image</button>
+        <button class="btn btn-primary" (click)="showAvatarCropper()">Change profile image</button>
       </fieldset>
       <fieldset>
         <legend>What is your interests?</legend>
@@ -88,3 +88,7 @@
       </footer>
     </form>
 </article>
+
+<div *ngIf="isAvatarFormVisible()" class="form-group">
+  <avatar-cropper></avatar-cropper>
+</div>

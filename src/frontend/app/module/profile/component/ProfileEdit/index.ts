@@ -36,53 +36,56 @@ export class ProfileEdit {
         this.getCurrentProfileInfo();
     }
 
-    profileInfo: ProfileInfo = new ProfileInfo();
-
-    greetingsMethodReturn(){
-            return this.profileInfo.greetings_method;
-    }
-
     getGreetingsMethod() {
-        return this.profileInfo.greetings_method;
+        return this.profileService.profileInfo.greetings_method;
     }
 
     setGreetingsMethod(greetingAS){
-        this.profileInfo.greetings_method = greetingAS;
+        this.profileService.profileInfo.greetings_method = greetingAS;
     }
 
     getCurrentProfileInfo(){
         let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
 
-        this.profileInfo.greetings_method = greetings.greetings_method;
-        this.profileInfo.firstname = greetings.first_name;
-        this.profileInfo.lastname = greetings.last_name;
-        this.profileInfo.middlename = greetings.middle_name;
-        this.profileInfo.nickname = greetings.nickname;
+        this.profileService.profileInfo.greetings_method = greetings.greetings_method;
+        this.profileService.profileInfo.firstname = greetings.first_name;
+        this.profileService.profileInfo.lastname = greetings.last_name;
+        this.profileService.profileInfo.middlename = greetings.middle_name;
+        this.profileService.profileInfo.nickname = greetings.nickname;
     }
+
+    showAvatarCropper() {
+        this.avatarCropperService.isAvatarFormVisibleFlag = true;
+    }
+
+    isAvatarFormVisible() {
+        return this.avatarCropperService.isAvatarFormVisibleFlag;
+    }
+
 
     submit() {
         let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
-        greetings.greetings_method = this.profileInfo.greetings_method;
+        greetings.greetings_method = this.profileService.profileInfo.greetings_method;
 
         if (AuthService.getGreetings()) {
             switch (greetings.greetings_method){
                 case 'fl':
-                    greetings.first_name = this.profileInfo.firstname;
-                    greetings.last_name = this.profileInfo.lastname;
+                    greetings.first_name = this.profileService.profileInfo.firstname;
+                    greetings.last_name = this.profileService.profileInfo.lastname;
                     this.profileService.greetingsAsFL().subscribe(data => {
                         this.router.parent.navigate(['Dashboard']);
                     });
                     break;
                 case 'flm':
-                    greetings.first_name = this.profileInfo.firstname;
-                    greetings.last_name = this.profileInfo.lastname;
-                    greetings.middle_name = this.profileInfo.middlename;
+                    greetings.first_name = this.profileService.profileInfo.firstname;
+                    greetings.last_name = this.profileService.profileInfo.lastname;
+                    greetings.middle_name = this.profileService.profileInfo.middlename;
                     this.profileService.greetingsAsFLM().subscribe(data => {
                         this.router.parent.navigate(['Dashboard']);
                     });
                     break;
                 case 'n':
-                    greetings.nickname = this.profileInfo.nickname;
+                    greetings.nickname = this.profileService.profileInfo.nickname;
                     this.profileService.greetingsAsN().subscribe(data => {
                         this.router.parent.navigate(['Dashboard']);
                     });

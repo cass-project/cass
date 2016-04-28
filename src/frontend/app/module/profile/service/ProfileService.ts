@@ -16,6 +16,11 @@ export class ProfileService {
                 public avatarCropperService:AvatarCropperService
     ){}
 
+
+    progress = '0';
+
+    public profileInfo: ProfileInfo = new ProfileInfo();
+
     getProfileInfo() {
         let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/get`;
 
@@ -56,13 +61,21 @@ export class ProfileService {
         }));
     }
 
-    avatarUpload(file:Blob, crop:Crop) {
+    progressFunction(evt) {
+        if (evt.lengthComputable) {
+            this.progress = Math.round(evt.loaded / evt.total * 100) + "%";
+        }
+    }
+
+        avatarUpload(file:Blob, crop:Crop) {
         let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/image-upload/crop-start/${crop.start.x}/${crop.start.y}/crop-end/${crop.end.x}/${crop.end.y}`;
         let formData = new FormData();
         formData.append("file", file);
 
         xmlRequest.open("POST", url);
         xmlRequest.send(formData);
+        xmlRequest.upload.addEventListener("progress", this.progressFunction, false);
+
         xmlRequest.onreadystatechange = () => {
             if (xmlRequest.readyState === 4) {
                 if (xmlRequest.status === 200) {
