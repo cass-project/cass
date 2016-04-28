@@ -11,11 +11,11 @@
         in: path
         required: true
         description: ID профиля
-      - name: body
-        in: body
+      - name: theme_ids
+        description: список id тематик через запятую
+        type: string
+        in: path
         required: true
-        schema:
-          $ref: '#/definitions/Profile_InterestingIn_Request'
     responses:
       200:
         schema:

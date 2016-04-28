@@ -58,7 +58,7 @@ return function (Application $app, string $prefix) {
     );
 
     $app->delete(
-        sprintf('%s/protected/profile/{profileId}/{command:expert-in}[/]', $prefix),
+        sprintf('%s/protected/profile/{profileId}/{command:expert-in}/{theme_ids}', $prefix),
         ProfileMiddleware::class,
         'profile-expert-in-delete'
     );
@@ -76,7 +76,7 @@ return function (Application $app, string $prefix) {
     );
 
     $app->delete(
-        sprintf('%s/protected/profile/{profileId}/{command:interesting-in}[/]', $prefix),
+        sprintf('%s/protected/profile/{profileId}/{command:interesting-in}/{theme_ids}', $prefix),
         ProfileMiddleware::class,
         'profile-interesting-in-delete'
     );

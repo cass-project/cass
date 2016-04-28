@@ -15,9 +15,9 @@ class ExpertInDeleteCommand extends Command
             throw new NotOwnProfileException(sprintf('Profile with ID `%s` is not yours', $profileId));
         }
         
-        $expertInRequest = new ExpertInRequest($request);
-        $expertInParameters = $expertInRequest->getParameters();
+        $expertInParameters = explode(',',$request->getAttribute('theme_ids'));
 
-        throw new \Exception('Not implemented');
+        $this->profileService->deleteExpertsInParameters($profileId, $expertInParameters);
+        return ['success'=> TRUE];
     }
 }
