@@ -18,10 +18,12 @@ return [
         AMQPStreamConnection::class => factory(AMQPStreamConnectionFactory::class),
         EmailVerificationService::class => object()->constructor(
             get(CurrentAccountService::class),
-            get(EmailVerificationRepository::class)
+            get(EmailVerificationRepository::class),
+            get(AMQPStreamConnection::class)
         ),
         EmailVerificationMiddleware::class => object()->constructor(
-            get(EmailVerificationService::class)
+            get(EmailVerificationService::class),
+            get(CurrentAccountService::class)
         )
     ]
 ];

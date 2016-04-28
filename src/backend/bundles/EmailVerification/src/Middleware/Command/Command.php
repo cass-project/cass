@@ -1,6 +1,7 @@
 <?php
 namespace EmailVerification\Middleware\Command;
 
+use Auth\Service\CurrentAccountService;
 use Common\Exception\CommandNotFoundException;
 use EmailVerification\Service\EmailVerificationService;
 use Psr\Http\Message\ServerRequestInterface;
@@ -12,6 +13,7 @@ abstract class Command
 
     /** @var EmailVerificationService */
     private $emailVerificationService;
+    private $currentAccountService;
 
     public function setEmailVerificationService(EmailVerificationService $emailVerificationService)
     {
@@ -22,10 +24,20 @@ abstract class Command
         return $this->emailVerificationService;
     }
 
-    public static function factory(ServerRequestInterface $request, EmailVerificationService $emailVerificationService)
+    public function setCurrentAccountService(CurrentAccountService $currentAccountService)
+    {
+        $this->currentAccountService = $currentAccountService;
+    }
+
+    public function getCurrentAccountService() : CurrentAccountService {
+        return $this->currentAccountService;
+    }
+
+    public static function factory(ServerRequestInterface $request, EmailVerificationService $emailVerificationService, CurrentAccountService $currentAccountService)
     {
         $command = self::factoryCommand($request->getAttribute('command'));
         $command->setEmailVerificationService($emailVerificationService);
+        $command->setCurrentAccountService($currentAccountService);
 
         return $command;
     }
