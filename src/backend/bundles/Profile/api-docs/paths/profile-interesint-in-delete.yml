@@ -1,4 +1,4 @@
-'/protected/profile/{profileId}/interesting-in':
+'/protected/profile/{profileId}/interesting-in/{theme_ids}':
   delete:
     tags:
       - profile
