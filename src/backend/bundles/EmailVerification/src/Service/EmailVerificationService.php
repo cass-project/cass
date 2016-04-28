@@ -30,13 +30,7 @@ class EmailVerificationService
         $token =  md5(uniqid(rand(), TRUE));
         $subject = "Email confirmation";
         $message = "Open the link below:\nhttp://localhost:8080/backend/api/email-verification/confirm/{$token}";
-        $body = [
-            "to" => $requestedEmail,
-            "subject" => $subject,
-            "message" => $message,
-        ];
-        mail($body['to'], $body['subject'], $body['message']);
-        return;
+
         $AMQPChannel = $this->AMQPStreamConnection->channel();
         $AMQPChannel->queue_declare('sendMail');
         $AMQPChannel->basic_publish(
