@@ -45,7 +45,7 @@ class EmailVerification /* implements JSONSerializable */
     private $isConfirmed = false;
 
     /**
-     * @Column(type="datetime", name="date_confirmation")
+     * @Column(type="datetime", name="date_confirmed")
      * @var DateTime
      */
     private $dateConfirmation;
