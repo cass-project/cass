@@ -18,7 +18,7 @@ export class MainMenuProfileItem
 {
 
     getProfileName(){
-        if(this.getGreetings()){
+        if(AuthService.isSignedIn()){
             switch(AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method){
                 case 'fl': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name} ${AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name}`;
                     break;
@@ -27,15 +27,8 @@ export class MainMenuProfileItem
                 case 'n': return `${AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname}`;
                     break;
             }
-        } else return this.getGreetings();
+        } else return 'Anonymous';
 
-    }
-
-
-    public getGreetings() {
-        return AuthService.isSignedIn()
-            ? AuthService.getAuthToken().getCurrentProfile().greetings()
-            : 'Anonymous';
     }
 
     public getDescription(): string {
