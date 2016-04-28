@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class AQMPReceive extends Command
+class AQMPSendMail extends Command
 {
     public function __construct()
     {
@@ -17,29 +17,19 @@ class AQMPReceive extends Command
 
     protected function configure()
     {
-        $this
-            ->setName('amqp:receive')
-            ->setDescription('Receive message via AMQP')
-            ->addOption(
-                'channel',
-                'c',
-                InputOption::VALUE_REQUIRED,
-                'Channel name',
-                'general'
-            );
+        $this->setName('amqp:sendMail')->setDescription('Send email via AMQP');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $channelName = $input->getOption('channel');
-
         $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
         $channel = $connection->channel();
-        $channel->queue_declare($channelName);
+        $channel->queue_declare('sendMail');
 
-        $channel->basic_consume($channelName, '', false, true, false, false, function(AMQPMessage $msg) use ($output) {
-            $this->clearScreen($output)
-                 ->write($msg->body);
+        $channel->basic_consume('sendMail', '', false, true, false, false, function(AMQPMessage $msg) use ($output) {
+            $body = json_decode($msg->body, true);
+            mail($body['to'], $body['subject'], $body['message']);
+            $this->clearScreen($output)->write($msg->body);
         });
 
         $this->clearScreen($output)->write("Waiting for...");

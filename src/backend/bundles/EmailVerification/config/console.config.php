@@ -1,13 +1,11 @@
 <?php
-use EmailVerification\Console\Command\AQMPReceive;
-use EmailVerification\Console\Command\AQMPSend;
+use EmailVerification\Console\Command\AQMPSendMail;
 
 return [
     'console' => [
         'commands' => [
             'AQMP' => [
-                AQMPSend::class,
-                AQMPReceive::class
+                AQMPSendMail::class
             ]
         ]
     ]
