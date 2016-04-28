@@ -11,7 +11,7 @@ class EmailVerificationMigration extends AbstractMigration
             ->addColumn('date_requested', 'datetime')
             ->addColumn('token', 'string')
             ->addColumn('is_confirmed', 'boolean')
-            ->addColumn('date_confirmed', 'datetime')
+            ->addColumn('date_confirmed', 'datetime', ['null' => true])
             ->addForeignKey('for_account_id', 'account', 'id', [
                 'delete' => 'cascade',
                 'update' => 'cascade'
