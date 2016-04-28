@@ -1,4 +1,4 @@
-"/backend/api/protected/email-verification/request/{newEmail}":
+"/protected/email-verification/request/{newEmail}":
   get:
     tags:
       - email_verification

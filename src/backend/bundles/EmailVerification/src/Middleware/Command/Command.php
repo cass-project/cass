@@ -18,6 +18,10 @@ abstract class Command
         $this->emailVerificationService = $emailVerificationService;
     }
 
+    public function getEmailVerificationService() : EmailVerificationService {
+        return $this->emailVerificationService;
+    }
+
     public static function factory(ServerRequestInterface $request, EmailVerificationService $emailVerificationService)
     {
         $command = self::factoryCommand($request->getAttribute('command'));

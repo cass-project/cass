@@ -21,7 +21,9 @@ class EmailVerificationService
 
     public function requestForProfile(Account $forAccount, string $requestedEmail)
     {
-        throw new \Exception('Not implemented');
+        $token =  md5(uniqid(rand(), TRUE));
+        $message = "<a href='" . $token . "'>Confirm</a>";
+        mail($requestedEmail, "Email verification", $message);
     }
 
     public function confirm(string $token)
