@@ -2,7 +2,6 @@
 namespace Auth\Middleware;
 
 use Common\REST\GenericRESTResponseBuilder;
-use Common\REST\Exceptions\UnknownActionException;
 use Auth\Middleware\Command\Command;
 use Auth\Service\AuthService;
 use Frontline\Service\FrontlineService;
@@ -28,17 +27,10 @@ class AuthMiddleware implements MiddlewareInterface
     {
         $responseBuilder = new GenericRESTResponseBuilder($response);
 
-        try {
-            $command = Command::factory($request, $this->authService);
-            $command->setAuthService($this->authService);
-            $command->setFrontlineService($this->frontlineService);
-            $command->run($request, $responseBuilder);
-        }catch (UnknownActionException $e) {
-            $responseBuilder
-                ->setStatusBadRequest()
-                ->setError($e)
-            ;
-        }
+        $command = Command::factory($request, $this->authService);
+        $command->setAuthService($this->authService);
+        $command->setFrontlineService($this->frontlineService);
+        $command->run($request, $responseBuilder);
 
         return $responseBuilder->build();
     }

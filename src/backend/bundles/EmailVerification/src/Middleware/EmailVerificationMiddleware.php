@@ -1,7 +1,6 @@
 <?php
 namespace EmailVerification\Middleware;
 
-use Common\REST\Exceptions\UnknownActionException;
 use Common\REST\GenericRESTResponseBuilder;
 use EmailVerification\Middleware\Command\Command;
 use EmailVerification\Service\EmailVerificationService;

@@ -2,11 +2,10 @@
 namespace Profile\Middleware\Command;
 
 use Auth\Service\CurrentAccountService;
-use Common\REST\Exceptions\UnknownActionException;
+use Common\Exception\CommandNotFoundException;
 use Profile\Entity\Profile;
 use Profile\Service\ProfileService;
 use Psr\Http\Message\ServerRequestInterface;
-use Symfony\Component\Console\Exception\CommandNotFoundException;
 
 abstract class Command
 {
@@ -73,7 +72,7 @@ abstract class Command
 
             case self::COMMAND_EXPERT_IN:
                 switch($method){
-                    default: throw new UnknownActionException();
+                    default: throw new CommandNotFoundException(sprintf("Command %s::%s, method: %s not found", self::class, $command, $method));
                     case 'POST': return new ExpertInPostCommand();
                     case 'PUT': return new ExpertInPutCommand();
                     case 'DELETE': return new ExpertInDeleteCommand();
@@ -81,7 +80,7 @@ abstract class Command
 
             case self::COMMAND_INTERESTING_IN:
                 switch($method){
-                    default: throw new UnknownActionException();
+                    default: throw new CommandNotFoundException(sprintf("Command %s::%s, method: %s not found", self::class, $command, $method));
                     case 'POST': return new InterestingInPostCommand();
                     case 'PUT': return new InterestingInPutCommand();
                     case 'DELETE': return new ExpertInDeleteCommand();

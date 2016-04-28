@@ -1,7 +1,6 @@
 <?php
 namespace Auth\Middleware\Command;
 
-use Common\REST\Exceptions\UnknownActionException;
 use Common\REST\GenericRESTResponseBuilder;
 use Auth\Middleware\Command\OAuth\BattleNetCommand;
 use Auth\Middleware\Command\OAuth\FacebookCommand;
@@ -13,6 +12,7 @@ use Auth\Middleware\Command\OAuth\YandexCommand;
 use Auth\Service\AuthService;
 use Frontline\Service\FrontlineService;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Component\Console\Exception\CommandNotFoundException;
 
 abstract class Command
 {
@@ -23,11 +23,11 @@ abstract class Command
     protected $frontlineService;
 
     public static function factory(ServerRequestInterface $request, AuthService $authService): Command {
-        $action = $request->getAttribute('action');
+        $method = $request->getAttribute('action');
 
-        switch($action) {
+        switch($method) {
             default:
-                throw new UnknownActionException(sprintf('Unknown action `%s`', $action));
+                throw new CommandNotFoundException(sprintf('Unknown action `%s`', $method));
 
             case 'sign-in': return new SignInCommand();
             case 'sign-up': return new SignUpCommand();
