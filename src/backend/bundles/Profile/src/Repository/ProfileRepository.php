@@ -169,7 +169,9 @@ class ProfileRepository extends EntityRepository
 
         // removing exist themes
         foreach($themes as $k => $theme){
+            /** @var $theme Theme */
             foreach($profile->getExpertIn()->toArray() as $profile_theme){
+                /** @var $profile_theme Theme */
                 if($theme->getId() == $profile_theme->getId()) {
                     unset($themes[$k]);
                     continue(2);
@@ -219,7 +221,9 @@ class ProfileRepository extends EntityRepository
 
         // removing exist themes
         foreach($themes as $k => $theme){
+            /** @var $theme Theme */
             foreach($profile->getInterestingIn()->toArray() as $profile_theme){
+                /** @var $profile_theme Theme */
                 if($theme->getId() == $profile_theme->getId()) {
                     unset($themes[$k]);
                     continue(2);
@@ -233,8 +237,47 @@ class ProfileRepository extends EntityRepository
             $profile->getInterestingIn()->add($theme);
         }
 
-        $profile->setExpertInIds($profile->getInterestingIn()->toArray());
+        $profile->setInterestingInIds($profile->getInterestingIn()->toArray());
 
+        $this->updateProfile($profile);
+        return $profile;
+    }
+
+    public function deleteExpertsInParameters(int $profileId, array $expertInParameters): Profile
+    {
+
+        /** @var Profile $profile */
+        $profile = $this->getProfileById($profileId);
+
+        foreach($expertInParameters as $theme_id){
+            foreach($profile->getExpertIn() as $key => $theme){
+                /** @var $theme Theme */
+                if ($theme->getId() == $theme_id){
+                    unset($profile->getExpertIn()[$key]);
+                }
+            }
+        }
+
+        $profile->setExpertInIds($profile->getExpertIn()->toArray());
+        $this->updateProfile($profile);
+        return $profile;
+    }
+
+    public function deleteInterestingInParameters(int $profileId, $interestingInParameters): Profile
+    {
+        /** @var Profile $profile */
+        $profile = $this->getProfileById($profileId);
+
+        foreach($interestingInParameters as $theme_id){
+            foreach($profile->getInterestingIn() as $key => $theme){
+                /** @var $theme Theme */
+                if ($theme->getId() == $theme_id){
+                    unset($profile->getInterestingIn()[$key]);
+                }
+            }
+        }
+
+        $profile->setInterestingInIds($profile->getInterestingIn()->toArray());
         $this->updateProfile($profile);
         return $profile;
     }

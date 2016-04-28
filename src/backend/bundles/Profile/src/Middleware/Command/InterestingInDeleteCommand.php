@@ -14,10 +14,10 @@ class InterestingInDeleteCommand extends Command
         if(! $this->validateIsOwnProfile($profileId)) {
             throw new NotOwnProfileException(sprintf('Profile with ID `%s` is not yours', $profileId));
         }
-        
-        $interestingInRequest = new InterestingInRequest($request);
-        $interestingInParameters = $interestingInRequest->getParameters();
 
-        throw new \Exception('Not implemented');
+        $interestingInParameters = explode(',',$request->getAttribute('theme_ids'));
+
+        $this->profileService->deleteInterestingInParameters($profileId, $interestingInParameters);
+        return ['success'=> TRUE];
     }
 }

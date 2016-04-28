@@ -211,4 +211,15 @@ class ProfileService
         return $this->profileRepository->mergeInterestingInParameters($profileId, $inParameters);
     }
 
+
+    public function deleteExpertsInParameters(int $profileId, array $expertInParameters): Profile
+    {
+        return $this->profileRepository->deleteExpertsInParameters($profileId, $expertInParameters);
+    }
+
+    public function deleteInterestingInParameters(int $profileId, array $interestingInParameters)
+    {
+        return $this->profileRepository->deleteInterestingInParameters($profileId, $interestingInParameters);
+    }
+
 }
