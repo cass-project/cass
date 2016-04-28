@@ -1,4 +1,4 @@
 <?php
 namespace Post\Exception;
 
-class PostNotFountException extends \Exception {}
+class PostNotFoundException extends \Exception {}

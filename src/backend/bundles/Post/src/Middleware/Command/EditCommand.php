@@ -1,15 +1,18 @@
 <?php
 namespace Post\Middleware\Command;
  
-use Common\Exception\NotImplementedException;
 use Post\Middleware\Request\EditPostRequest;
 use Psr\Http\Message\ServerRequestInterface;
 
-class EditPostCommand extends Command
+class EditCommand extends Command
 {
     public function run(ServerRequestInterface $request) {
         $editPostParameters = (new EditPostRequest($request))->getParameters();
-        
-        throw new NotImplementedException;
+
+        $post = $this->postService->editPost($editPostParameters);
+
+        return [
+            'entity' => $post->toJSON()
+        ];
     }
 }

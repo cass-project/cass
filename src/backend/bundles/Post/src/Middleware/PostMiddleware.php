@@ -3,7 +3,7 @@ namespace Post\Middleware;
 
 use Auth\Service\CurrentAccountService;
 use Common\REST\GenericRESTResponseBuilder;
-use Post\Exception\PostNotFountException;
+use Post\Exception\PostNotFoundException;
 use Post\Middleware\Command\Command;
 use Post\Service\PostService;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -34,7 +34,7 @@ class PostMiddleware implements MiddlewareInterface
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson($result);
-        }catch(PostNotFountException $e) {
+        }catch(PostNotFoundException $e) {
             $responseBuilder
                 ->setStatusNotFound()
                 ->setError($e);

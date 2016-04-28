@@ -4,7 +4,7 @@ use Auth\Service\CurrentAccountService;
 use Common\Factory\DoctrineRepositoryFactory;
 use Post\Entity\Post;
 use Post\Middleware\PostMiddleware;
-use Post\PostRepository;
+use Post\Repository\PostRepository;
 
 use function DI\object;
 use function DI\factory;
@@ -13,7 +13,7 @@ use Post\Service\PostService;
 
 return [
     'php-di' => [
-        PostRepository::class => (new DoctrineRepositoryFactory(Post::class)),
+        PostRepository::class => factory(new DoctrineRepositoryFactory(Post::class)),
         PostService::class => object()->constructor(
             get(CurrentAccountService::class),
             get(PostRepository::class)

@@ -14,10 +14,10 @@ abstract class Command
     const COMMAND_GET = 'get';
 
     /** @var PostService */
-    private $postService;
+    protected $postService;
 
     /** @var CurrentAccountService */
-    private $currentProfileService;
+    protected $currentProfileService;
 
     abstract public function run(ServerRequestInterface $request);
 
@@ -46,7 +46,7 @@ abstract class Command
             case self::COMMAND_CREATE:
                 return new CreateCommand();
             case self::COMMAND_EDIT:
-                return new EditPostCommand();
+                return new EditCommand();
             case self::COMMAND_DELETE:
                 return new DeleteCommand();
             case self::COMMAND_GET:

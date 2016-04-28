@@ -9,10 +9,11 @@ use Post\PostBundle;
 class EditPostRequest extends SchemaParams
 {
     public function getParameters(): EditPostParameters {
+        $request = $this->getRequest();
         $data = $this->getData();
 
         return new EditPostParameters(
-            (int) $data->post_id,
+            (int) $request->getAttribute('postId'),
             (int) $data->collection_id,
             (string) $data->content
         );

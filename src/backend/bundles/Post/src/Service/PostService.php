@@ -2,37 +2,45 @@
 namespace Post\Service;
 
 use Auth\Service\CurrentAccountService;
-use Common\Exception\NotImplementedException;
+use Post\Entity\Post;
 use Post\Parameters\CreatePostParameters;
 use Post\Parameters\EditPostParameters;
-use Post\PostRepository;
+use Post\Repository\PostRepository;
 
 class PostService
 {
-    /** @var PostRepository */
-    private $postRepository;
-
     /** @var CurrentAccountService */
     private $currentAccountService;
 
-    public function __construct(PostRepository $postRepository, CurrentAccountService $currentAccountService) {
-        $this->postRepository = $postRepository;
+    /** @var PostRepository */
+    private $postRepository;
+
+    public function __construct(CurrentAccountService $currentAccountService, PostRepository $postRepository) {
         $this->currentAccountService = $currentAccountService;
+        $this->postRepository = $postRepository;
     }
 
-    public function createPost(CreatePostParameters $createPostParameters) {
-        throw new NotImplementedException;
+    public function createPost(CreatePostParameters $createPostParameters): Post {
+        return $this->postRepository->createPost(
+            $createPostParameters->getProfileId(),
+            $createPostParameters->getCollectionId(),
+            $createPostParameters->getContent()
+        );
     }
 
-    public function editPost(EditPostParameters $editPostParameters) {
-        throw new NotImplementedException;
+    public function editPost(EditPostParameters $editPostParameters): Post {
+        return $this->postRepository->editPost(
+            $editPostParameters->getPostId(),
+            $editPostParameters->getCollectionId(),
+            $editPostParameters->getContent()
+        );
     }
 
     public function deletePost(int $postId) {
-        throw new NotImplementedException;
+        $this->postRepository->deletePost($postId);
     }
 
-    public function getPostById(int $postId) {
-        throw new NotImplementedException;
+    public function getPostById(int $postId): Post {
+        return $this->postRepository->getPost($postId);
     }
 }

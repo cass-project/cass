@@ -51,6 +51,16 @@ class Post
         $this->dateCreatedOn = new \DateTime();
     }
 
+    public function toJSON() {
+        return [
+            'id' => $this->getId(),
+            'date_create_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),
+            'author_profile_id' => $this->getAuthorProfile()->getId(),
+            'collection_id' => $this->getCollection()->getId(),
+            'content' => $this->getContent()
+        ];
+    }
+
     public function isPersisted() {
         return $this->id !== null;
     }

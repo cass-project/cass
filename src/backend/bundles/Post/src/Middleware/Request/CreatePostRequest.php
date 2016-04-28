@@ -19,6 +19,6 @@ class CreatePostRequest extends SchemaParams
     }
 
     protected function getSchema(): JSONSchema {
-        
+        return self::getSchemaService()->getSchema(PostBundle::class, './definitions/request/CreatePost.yml');
     }
 }

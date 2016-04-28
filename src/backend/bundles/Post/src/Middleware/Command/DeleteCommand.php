@@ -9,6 +9,8 @@ class DeleteCommand extends Command
     public function run(ServerRequestInterface $request) {
         $postId = (int) $request->getAttribute('postId');
 
-        throw new NotImplementedException;
+        $this->postService->deletePost($postId);
+
+        return [];
     }
 }
