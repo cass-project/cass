@@ -7,6 +7,7 @@ import {ThemeService} from "../../service/ThemeService";
     template: require('./template.html'),
     'providers': [
     ],
+    selector: 'theme-selector',
     directives: [
         ROUTER_DIRECTIVES
     ]
@@ -57,9 +58,9 @@ export class ThemeSelector{
     search(){
         let results = [];
 
-        for(let i = 0; i < this.themeService.themes.length; i++){
-            if (this.themeService.themes[i].title.toLowerCase().indexOf(this.searchStr.toLowerCase())!=-1){
-                results.push(this.themeService.themes[i])
+        for(let i = 0; i < this.themeService.getThemeSelectOptions().length; i++){
+            if (this.themeService.getThemeSelectOptions()[i].title.toLowerCase().indexOf(this.searchStr.toLowerCase())!=-1){
+                results.push(this.themeService.getThemeSelectOptions()[i])
             }
         }
         return results

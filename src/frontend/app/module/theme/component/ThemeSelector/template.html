@@ -18,7 +18,7 @@
 <div class="card">
     <div class="card-block">
             <h4 class="card-title">Themes</h4>
-            <p class="card-text" *ngFor="#theme of themeService.themes" (click)="addSelector(theme)">{{theme.title}}</p>
+            <p class="card-text" *ngFor="#theme of themeService.getThemeSelectOptions()" (click)="addSelector(theme)">{{theme.title}}</p>
         </div>
     </div>
 </div>
