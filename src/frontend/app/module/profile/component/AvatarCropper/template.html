@@ -17,6 +17,7 @@
                 <div class="modal-footer" *ngIf="cropper">
                     <input type="button" value="Back" class="btn btn-secondary" (click)="destroyCropper()"/>
                     <input type="button" class="btn btn-primary" value="Done" (click)="submit()"/>
+                    <progress class="progress progress-striped" value="{{profileService.progressBar}}" max="100"></progress>
                 </div>
                 <div class="modal-footer" *ngIf="!cropper">
                     <input type="button" value="Close" class="btn btn-secondary" (click)="close()"/>
@@ -24,4 +25,4 @@
             </div>
         </div>
 </div>
-<div *ngIf="isAvatarFormVisible" class="modal-backdrop fade in"></div>
+<div class="modal-backdrop fade in"></div>
