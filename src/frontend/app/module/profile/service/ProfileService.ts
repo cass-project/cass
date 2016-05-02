@@ -19,6 +19,9 @@ export class ProfileService {
                 public themeService: ThemeService
     ){}
 
+    public crop;
+    public file;
+    public tryNumber: number = 0;
     public progressBar: number;
     public profileInfo: ProfileInfo = new ProfileInfo();
 
@@ -91,13 +94,11 @@ export class ProfileService {
     }
 
 
-
-
-
-    avatarUpload(file:Blob, crop:Crop) {
-        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/image-upload/crop-start/${crop.start.x}/${crop.start.y}/crop-end/${crop.end.x}/${crop.end.y}`;
+    avatarUpload() {
+        this.tryNumber++;
+        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/image-upload/crop-start/${this.crop.start.x}/${this.crop.start.y}/crop-end/${this.crop.end.x}/${this.crop.end.y}`;
         let formData = new FormData();
-        formData.append("file", file);
+        formData.append("file", this.file);
 
         xmlRequest.open("POST", url);
         xmlRequest.upload.onprogress = (e) => {
@@ -114,6 +115,9 @@ export class ProfileService {
                     this.avatarCropperService.isAvatarFormVisibleFlag = false;
                     AuthService.getAuthToken().getCurrentProfile().entity.image.public_path = JSON.parse(xmlRequest.responseText).public_path;
                     this.progressBar = 0;
+                    this.tryNumber = 0;
+                } else {
+                    this.avatarUpload();
                 }
             }
         }

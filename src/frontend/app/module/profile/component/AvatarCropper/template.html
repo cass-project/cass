@@ -7,19 +7,22 @@
                     </h4>
                 </div>
                 <div class="modal-body text-xs-center" >
-                    <img #cropImage />
+                    <img #cropImage/>
                     <label *ngIf="!cropper" class="text-xs-left m-t-1 btn btn-primary">
                         <input type="file" placeholder="s" (change)="onFileChange($event)">
                         <i class="fa  fa-fw fa-folder-open" aria-hidden="true"></i>
                         Choose photo from computer
                     </label>
                 </div>
-                <div class="modal-footer" *ngIf="cropper">
+                <div *ngIf="showProgressBar">
+                    <progress class="progress progress-striped" value="{{profileService.progressBar}}" max="100"></progress>
+                    <input *ngIf="profileService.tryNumber >= 2" type="button" value="Abort" class="btn btn-secondary" (click)="close()">
+                </div>
+                <div class="modal-footer" *ngIf="cropper && !showProgressBar">
                     <input type="button" value="Back" class="btn btn-secondary" (click)="destroyCropper()"/>
                     <input type="button" class="btn btn-primary" value="Done" (click)="submit()"/>
-                    <progress class="progress progress-striped" value="{{profileService.progressBar}}" max="100"></progress>
                 </div>
-                <div class="modal-footer" *ngIf="!cropper">
+                <div class="modal-footer" *ngIf="!cropper && !showProgressBar">
                     <input type="button" value="Close" class="btn btn-secondary" (click)="close()"/>
                 </div>
             </div>
