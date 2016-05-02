@@ -24,6 +24,7 @@ import {CatalogComponent} from './module/catalog/index';
 import {frontline, FrontlineService} from "./module/frontline/service";
 import {ThemeService} from "./module/theme/service/ThemeService";
 import {ThemeSelector} from "./module/theme/component/ThemeSelector/component";
+import {PostRestService} from "./module/post/service/PostRestService";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -32,6 +33,9 @@ import {ThemeSelector} from "./module/theme/component/ThemeSelector/component";
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,
         MainMenu
+    ],
+    providers: [
+        PostRestService
     ]
 })
 @RouteConfig([

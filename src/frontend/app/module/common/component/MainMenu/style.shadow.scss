@@ -1,8 +1,6 @@
 @import "../../../../globals";
 
 div.cass-main-menu {
-  @include card(5);
-
   position: fixed;
   background-color: $color5;
   top: 0; height: 100%;
@@ -53,8 +51,6 @@ div.cass-main-menu {
           }
 
           div.description {
-            @include card(3);
-
             display: none;
             white-space: nowrap;
             position: absolute;

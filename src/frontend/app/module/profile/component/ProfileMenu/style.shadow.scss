@@ -11,8 +11,6 @@ div.profile-menu {
   overflow: hidden;
   padding: 10px;
 
-  @include card(1);
-
   div.menu-group {
     >header {
       h1 {
