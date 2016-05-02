@@ -7,6 +7,7 @@ import {AuthService} from "../../../auth/service/AuthService";
 import {AvatarCropperService} from "../AvatarCropper/service";
 import {ProfileInfo} from "../../service/ProfileService";
 import {ThemeSelector} from "../../../theme/component/ThemeSelector/component";
+import {ThemeService} from "../../../theme/service/ThemeService";
 
 declare var Cropper;
 
@@ -32,7 +33,9 @@ declare var Cropper;
 export class ProfileEdit {
     constructor(private profileService: ProfileService,
                 public router: Router,
-                public avatarCropperService: AvatarCropperService) {
+                public avatarCropperService: AvatarCropperService,
+                public themeService: ThemeService
+    ) {
         this.getCurrentProfileInfo();
     }
 
@@ -66,6 +69,8 @@ export class ProfileEdit {
     submit() {
         let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
         greetings.greetings_method = this.profileService.profileInfo.greetings_method;
+
+        this.profileService.createExpertList().subscribe(data => {console.log(data)}, err => {console.log(err)});
 
         if (AuthService.getGreetings()) {
             switch (greetings.greetings_method){

@@ -30,6 +30,8 @@ export class AvatarCropper {
     ){}
 
     @ViewChild('cropImage') cropImage:ElementRef;
+
+    public showProgressBar = false;
     public cropper;
     private file: Blob;
 
@@ -82,8 +84,10 @@ export class AvatarCropper {
 
 
     private submit(){
+        this.showProgressBar = true;
         let coord = this.getData();
-        this.profileService.avatarUpload(this.file, {
+        this.profileService.file = this.file;
+        this.profileService.crop = {
             start: {
                 x: coord.x,
                 y: coord.y
@@ -92,7 +96,8 @@ export class AvatarCropper {
                 x: coord.x + coord.width,
                 y: coord.y + coord.height
             }
-        });
+        };
+        this.profileService.avatarUpload();
     }
 
     private getData() {

@@ -18,7 +18,6 @@ export class ThemeSelector{
     constructor(public themeService: ThemeService){};
 
     MultipleChoise: boolean = true;
-    selectedThemes = [];
     searchStr: string = '';
 
 
@@ -33,25 +32,25 @@ export class ThemeSelector{
 
     deleteSelector(theme){
         if(this.MultipleChoise) {
-            let deleteThis = this.selectedThemes.indexOf(theme);
-            this.selectedThemes.splice(deleteThis, 1);
+            let deleteThis = this.themeService.selectedThemes.indexOf(theme);
+            this.themeService.selectedThemes.splice(deleteThis, 1);
         } else {
-            this.selectedThemes = [];
+            this.themeService.selectedThemes = [];
         }
     }
 
     addSelector(theme){
         if(this.MultipleChoise) {
-            this.selectedThemes.push(theme);
+            this.themeService.selectedThemes.push(theme);
         } else {
-            this.selectedThemes = [];
-            this.selectedThemes.push(theme);
+            this.themeService.selectedThemes = [];
+            this.themeService.selectedThemes.push(theme);
         }
     }
 
     showSelector(){
         if(this.searchStr){
-            return true
+            return true;
         }
     }
 

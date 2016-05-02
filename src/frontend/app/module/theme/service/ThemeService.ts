@@ -5,6 +5,7 @@ import {ThemeTree, Theme} from "../Theme";
 @Injectable()
 export class ThemeService
 {
+    public selectedThemes = [];
     public themes: ThemeTree[];
     private themesSelectOptions: ThemeSelect[];
     

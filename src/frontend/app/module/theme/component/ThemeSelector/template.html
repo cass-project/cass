@@ -6,7 +6,7 @@
     <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" (click)="offMultipleChoise()"> Off Multiple Choise
 </label>
 <div class="input-group">
-<span class="input-group-addon" id="basic-addon3"  *ngFor="#theme of selectedThemes">+{{theme.title}}<button (click)="deleteSelector(theme.title)">x</button></span>
+<span class="input-group-addon" id="basic-addon3"  *ngFor="#theme of themeService.selectedThemes">+{{theme.title}}<button (click)="deleteSelector(theme.title)">x</button></span>
 <input class="form-control" aria-describedby="basic-addon3" type="text" [(ngModel)]="searchStr"/>
     </div>
 <div class="col-xs-3" *ngIf="showSelector()">
