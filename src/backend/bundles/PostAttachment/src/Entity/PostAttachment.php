@@ -1,5 +1,6 @@
 <?php
 namespace PostAttachment\Entity;
+
 use Post\Entity\Post;
 
 /**
@@ -17,7 +18,7 @@ class PostAttachment
     private $id;
 
     /**
-     * @Column(type="datetime")
+     * @Column(type="datetime", name="date_created_on")
      * @var \DateTime
      */
     private $dateCreatedOn;
@@ -30,7 +31,7 @@ class PostAttachment
     private $post;
 
     /**
-     * @Column(type="boolean")
+     * @Column(type="boolean", name="is_attached_to_post")
      * @var bool
      */
     private $isAttachedToPost = false;
@@ -43,15 +44,26 @@ class PostAttachment
 
     /**
      * @Column(type="json_array")
-     * @var \stdClass
+     * @var array
      */
-    private $attachment = (object) [];
+    private $attachment = [];
 
-    public function __construct(string $attachmentType, $attachment)
+    public function __construct(string $attachmentType)
     {
         $this->attachmentType = $attachmentType;
-        $this->attachment = $attachment;
         $this->dateCreatedOn = new \DateTime();
+    }
+    
+    public function toJSON()
+    {
+        return [
+            'id' => $this->getId(),
+            'date_created_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),
+            'is_attached_to_post' => $this->isAttachedToPost(),
+            'post_id' => $this->isAttachedToPost() ? $this->getPost()->getId() : null,
+            'attachment_type' => $this->getAttachmentType(),
+            'attachment' => $this->getAttachment()
+        ];
     }
 
     public function isPersisted()
@@ -79,7 +91,7 @@ class PostAttachment
         return $this->post;
     }
 
-    public function setPost(Post $post)
+    public function attachToPost(Post $post)
     {
         $this->post = $post;
         $this->isAttachedToPost = true;
@@ -90,7 +102,7 @@ class PostAttachment
         return $this->attachmentType;
     }
 
-    public function getAttachment()
+    public function getAttachment(): array
     {
         return $this->attachment;
     }
@@ -98,5 +110,11 @@ class PostAttachment
     public function setAttachment($attachment)
     {
         $this->attachment = $attachment;
+    }
+
+    public function mergeAttachment(array $extends): self
+    {
+        $this->attachment = array_merge_recursive($this->attachment, $extends);
+        return $this;
     }
 }

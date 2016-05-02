@@ -1,5 +1,5 @@
 "/protected/post-attachment/upload":
-  put:
+  post:
     tags:
       - post_attachment
     description: Загрузка аттачмента с файлом на сервер
