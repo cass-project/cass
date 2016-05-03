@@ -12,7 +12,8 @@
       "EmailVerification\\": "bundles/EmailVerification/src",
       "ProfileIM\\": "bundles/ProfileIM/src",
       "Post\\": "bundles/Post/src",
-      "PostAttachment\\": "bundles/PostAttachment/src"
+      "PostAttachment\\": "bundles/PostAttachment/src",
+      "Feed\\": "bundles/Feed/src"
     }
   },
   "require": {
