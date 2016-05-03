@@ -2,6 +2,7 @@
 namespace Post\Repository;
 
 use Collection\Entity\Collection;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Feed\Feed\Criteria\SeekCriteria;
 use Feed\Feed\CriteriaRequest;
@@ -69,5 +70,17 @@ class PostRepository extends EntityRepository
         });
 
         return $this->findBy($qbCriteria, ['id' => 'desc'], $limit, $offset);
+    }
+
+    public function getFeedTotal(int $collectionId, CriteriaRequest $criteriaRequest): int {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder()
+            ->select('count(p.id) as cnt')
+            ->from(Post::class, 'p')
+            ->where('p.collection=:collectionId')
+            ->setParameter('collectionId', $collectionId)
+        ;
+
+        return (int) $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
     }
 }

@@ -20,6 +20,7 @@ class ResultSetFormatter
         $cachedProfiles = $this->profileRepository->getProfileByIds($this->getProfileIdsToCache($resultSet));
 
         return [
+            'total' => $resultSet->getTotal(),
             'posts' => array_map(function(Post $post) {
                 return $post->toJSON();
             }, $resultSet->getPosts()),

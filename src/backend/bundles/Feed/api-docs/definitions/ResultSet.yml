@@ -11,3 +11,7 @@ Feed_ResultSet:
       type: array
       items:
         $ref: '#/definitions/Post_Entity_Post'
+    total:
+      type: number
+      description:
+        Общее количество постов из выборки

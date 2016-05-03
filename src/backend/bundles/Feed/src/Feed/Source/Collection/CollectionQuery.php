@@ -25,6 +25,9 @@ final class CollectionQuery implements Query
     }
 
     public function execute() {
-        return new ResultSet($this->postRepository->getFeed($this->collectionId, $this->criteriaRequest));
+        return new ResultSet(
+            $this->postRepository->getFeed($this->collectionId, $this->criteriaRequest),
+            $this->postRepository->getFeedTotal($this->collectionId, $this->criteriaRequest)
+        );
     }
 }
