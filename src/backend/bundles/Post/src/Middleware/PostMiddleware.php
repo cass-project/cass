@@ -3,6 +3,7 @@ namespace Post\Middleware;
 
 use Auth\Service\CurrentAccountService;
 use Common\REST\GenericRESTResponseBuilder;
+use Common\Service\TransactionService;
 use Post\Exception\PostNotFoundException;
 use Post\Middleware\Command\Command;
 use Post\Service\PostService;

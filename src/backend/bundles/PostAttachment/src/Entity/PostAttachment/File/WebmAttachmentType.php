@@ -21,6 +21,6 @@ class WebmAttachmentType implements FileAttachmentType, AttachmentTypeDetector
     }
 
     public function getMaxFileSizeBytes() {
-        return 64 * 1024;
+        return 64 * 1024 * 1024;
     }
 }

@@ -3,6 +3,7 @@
     tags:
       - post_attachment
     description: Загрузка аттачмента с файлом на сервер
+    consumes: ["multipart/form-data"]
     parameters:
       - name: file
         description: Файл

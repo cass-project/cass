@@ -12,10 +12,18 @@ class CreatePostParameters
     /** @var string */
     private $content;
     
-    public function __construct(int $profileId, int $collectionId, string $content) {
+    /** @var LinkParameters[] */
+    private $links;
+
+    /** @var int[] */
+    private $attachmentIds;
+
+    public function __construct(int $profileId, int $collectionId, string $content, array $links, array $attachmentIds) {
         $this->profileId = $profileId;
         $this->collectionId = $collectionId;
         $this->content = $content;
+        $this->links = $links;
+        $this->attachmentIds = $attachmentIds;
     }
 
     public function getProfileId(): int {
@@ -28,5 +36,14 @@ class CreatePostParameters
 
     public function getContent(): string {
         return $this->content;
+    }
+
+    /** @return LinkParameters[] */
+    public function getLinks(): array {
+        return $this->links;
+    }
+
+    public function getAttachmentIds(): array {
+        return $this->attachmentIds;
     }
 }

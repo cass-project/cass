@@ -2,12 +2,14 @@
 namespace PostAttachment\Service;
 
 use Common\Util\FileNameFilter;
+use Post\Entity\Post;
 use PostAttachment\Entity\PostAttachment;
 use PostAttachment\Entity\PostAttachment\AttachmentType;
 use PostAttachment\Entity\PostAttachment\File\GenericFileAttachmentType;
 use PostAttachment\Entity\PostAttachment\File\ImageAttachmentType;
 use PostAttachment\Entity\PostAttachment\File\WebmAttachmentType;
 use PostAttachment\Entity\PostAttachment\FileAttachmentType;
+use PostAttachment\Entity\PostAttachment\Link\GenericLinkAttachmentType;
 use PostAttachment\Exception\FileTooBigException;
 use PostAttachment\Exception\FileTooSmallException;
 use PostAttachment\Repository\PostAttachmentRepository;
@@ -30,11 +32,27 @@ class PostAttachmentService
         $this->postAttachmentRepository = $postAttachmentRepository;
     }
 
+    public function createLinkAttachment(Post $post, string $url, array $metadata): PostAttachment
+    {
+        $attachmentType = $this->factoryLinkAttachmentType($url, $metadata);
+
+        $postAttachment = new PostAttachment($attachmentType->getCode());
+        $postAttachment->attachToPost($post);
+        $postAttachment->setAttachment([
+            'url' => $url,
+            'metadata' => $metadata
+        ]);
+
+        $this->postAttachmentRepository->savePostAttachment($postAttachment);
+
+        return $postAttachment;
+    }
+
     public function uploadAttachment(string $tmpFile, string $desiredFileName): PostAttachment
     {
         $desiredFileName = FileNameFilter::filter($desiredFileName);
 
-        $attachmentType = $this->factoryAttachmentType($tmpFile);
+        $attachmentType = $this->factoryFileAttachmentType($tmpFile);
 
         if($attachmentType instanceof FileAttachmentType) {
             $this->validateFileSize($tmpFile, $attachmentType);
@@ -69,8 +87,12 @@ class PostAttachmentService
 
         return $postAttachmentEntity;
     }
+    
+    public function setAttachments(Post $post, array $attachmentIds) {
+        $this->postAttachmentRepository->assignAttachmentsToPost($post, $attachmentIds);
+    }
 
-    private function factoryAttachmentType(string $tmpFile): AttachmentType {
+    private function factoryFileAttachmentType(string $tmpFile): AttachmentType {
         if(ImageAttachmentType::detect($tmpFile)) {
             return new ImageAttachmentType();
         }else if(WebmAttachmentType::detect($tmpFile)) {
@@ -78,6 +100,11 @@ class PostAttachmentService
         }else{
             return new GenericFileAttachmentType();
         }
+    }
+
+    private function factoryLinkAttachmentType(string $url, array $metadata): AttachmentType {
+        // TODO:: validate link
+        return new GenericLinkAttachmentType();
     }
 
     private function validateFileSize(string $tmpFile, FileAttachmentType $attachmentType) {

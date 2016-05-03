@@ -10,12 +10,14 @@ use function DI\object;
 use function DI\factory;
 use function DI\get;
 use Post\Service\PostService;
+use PostAttachment\Service\PostAttachmentService;
 
 return [
     'php-di' => [
         PostRepository::class => factory(new DoctrineRepositoryFactory(Post::class)),
         PostService::class => object()->constructor(
             get(CurrentAccountService::class),
+            get(PostAttachmentService::class),
             get(PostRepository::class)
         ),
         PostMiddleware::class => object()->constructor(

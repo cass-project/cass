@@ -17,7 +17,7 @@ class ImageAttachmentType implements FileAttachmentType, AttachmentTypeDetector,
     }
 
     public function getMaxFileSizeBytes() {
-        return 1024 * 32 /* mb */;
+        return 1024 * 1024 * 32 /* mb */;
     }
 
     public function extend(PostAttachment $postAttachment): array {

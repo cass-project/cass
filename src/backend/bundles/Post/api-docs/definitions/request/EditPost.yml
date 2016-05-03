@@ -10,3 +10,23 @@ Post_Request_EditPost:
     content:
       type: string
       description: Содержание сообщения
+    attachments:
+      type: array
+      items:
+        type: number
+        description: ID аттачмента
+    links:
+      type: array
+      items:
+        type: object
+        schema:
+          required:
+            - url
+            - metadata
+          properties:
+            url:
+              type: string
+              description: URL
+            metadata:
+              type: object
+              description: Метаданные. Могут содержать метатеги, title, путь к изображению и.т.д..
