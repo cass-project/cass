@@ -3,6 +3,8 @@ namespace Post\Repository;
 
 use Collection\Entity\Collection;
 use Doctrine\ORM\EntityRepository;
+use Feed\Feed\Criteria\SeekCriteria;
+use Feed\Feed\CriteriaRequest;
 use Post\Entity\Post;
 use Post\Exception\PostNotFoundException;
 use Profile\Entity\Profile;
@@ -55,5 +57,17 @@ class PostRepository extends EntityRepository
         }
 
         return $post;
+    }
+
+    public function getFeed(int $collectionId, CriteriaRequest $criteriaRequest) {
+        $qbCriteria = [
+            'collection' => $collectionId
+        ];
+        
+        list($limit, $offset) = $criteriaRequest->doWith(SeekCriteria::class, function(SeekCriteria $seekCriteria) {
+            return [$seekCriteria->getLimit(), $seekCriteria->getOffset()];
+        });
+
+        return $this->findBy($qbCriteria, ['id' => 'desc'], $limit, $offset);
     }
 }

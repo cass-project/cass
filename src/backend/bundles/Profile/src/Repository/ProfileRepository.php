@@ -46,6 +46,22 @@ class ProfileRepository extends EntityRepository
 
         return $result;
     }
+    
+    public function getProfileByIds(array $profileIds): array
+    {
+        $profileIds = array_filter($profileIds, 'is_integer');
+
+        if(! count($profileIds)) {
+            throw new \Exception('No profile ids available');
+        }
+
+        /** @var Profile[] $result */
+        $result = $this->findBy([
+            'id' => $profileIds
+        ]);
+
+        return $result;
+    }
 
     public function nameFL(int $profileId, string $firstName, string $lastName)
     {

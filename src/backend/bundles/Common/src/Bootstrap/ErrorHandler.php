@@ -9,6 +9,7 @@ use Common\Tools\RequestParams\InvalidJSONSchema;
 use Common\Exception\DataEntityNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Zend\Expressive\Container\Exception\NotFoundException;
 
 class ErrorHandler
 {
@@ -33,6 +34,8 @@ class ErrorHandler
                 $responseBuilder->setStatusNotFound();
             }catch(BadCommandCallException $e) {
                 $responseBuilder->setStatusBadRequest();
+            }catch(NotFoundException $e){
+                $responseBuilder->setStatusNotFound();
             }catch(PermissionsDeniedException $e){
                 $responseBuilder->setStatusNotAllowed();
             }

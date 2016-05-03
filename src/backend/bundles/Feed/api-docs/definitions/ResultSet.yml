@@ -1,0 +1,13 @@
+Feed_ResultSet:
+  required:
+    - cached_profiles
+    - posts
+  properties:
+    cached_profiles:
+      type: array
+      items:
+        $ref: '#/definitions/Profile_Entity_Profile'
+    posts:
+      type: array
+      items:
+        $ref: '#/definitions/Post_Entity_Post'
