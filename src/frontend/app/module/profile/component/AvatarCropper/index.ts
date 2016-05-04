@@ -98,6 +98,46 @@ export class AvatarCropper {
             }
         };
         this.profileService.avatarUpload();
+        console.log(`
+        previewHeight: ${this.getPreviewImageData('previewHeight')},
+        width: ${this.getPreviewImageData('width')},
+        height: ${this.getPreviewImageData('height')},
+        marginLeft: ${this.getPreviewImageData('marginLeft')},
+        marginTop: ${this.getPreviewImageData('height')},
+        getData: ${this.getData().y}
+        `);
+    }
+
+    private getPreviewImageData(data: string){
+        let coord = this.getData();
+
+        let aspectRatio = this.cropper.aspectRatio;
+        let previewWidth = this.getImageData().width;
+        let previewHeight = previewWidth;
+
+
+
+        switch (data) {
+        case 'previewHeight':
+            return previewHeight;
+            break;
+        case 'width':
+            return coord.x;
+            break;
+        case 'height':
+            return coord.y;
+            break;
+        case 'marginLeft':
+            return  -(coord.x + coord.width);
+            break;
+        case 'marginTop':
+            return -(coord.y + coord.height);
+            break;
+        }
+    }
+
+    private getImageData(){
+        return this.cropper.getImageData(true);
     }
 
     private getData() {

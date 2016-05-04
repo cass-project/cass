@@ -6,7 +6,7 @@
                         <i class="fa fa-fw fa-upload" aria-hidden="true"></i> Upload your photo
                     </h4>
                 </div>
-                <div class="modal-body text-xs-center" >
+                <div *ngIf="!showProgressBar" class="modal-body text-xs-center" >
                     <img #cropImage/>
                     <label *ngIf="!cropper" class="text-xs-left m-t-1 btn btn-primary">
                         <input type="file" placeholder="s" (change)="onFileChange($event)">
@@ -15,6 +15,11 @@
                     </label>
                 </div>
                 <div *ngIf="showProgressBar">
+                        <img [style.width.px] = "getPreviewImageData('width')"
+                             [style.height.px] = "getPreviewImageData('height')"
+                             [style.marginLeft.px] = "getPreviewImageData('marginLeft')"
+                             [style.marginTop.px] = "getPreviewImageData('marginTop')"
+                             src="{{fileReader.result}}"/>
                     <progress class="progress progress-striped" value="{{profileService.progressBar}}" max="100"></progress>
                     <input *ngIf="profileService.tryNumber >= 2" type="button" value="Abort" class="btn btn-secondary" (click)="close()">
                 </div>
