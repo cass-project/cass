@@ -4,6 +4,7 @@ use Account\Entity\Account;
 use Common\REST\JSONSerializable;
 
 use \Doctrine\Common\Collections\ArrayCollection;
+use Profile\Exception\UnknownGenderException;
 use Theme\Entity\Theme;
 
 /**
@@ -12,6 +13,9 @@ use Theme\Entity\Theme;
  */
 class Profile implements JSONSerializable
 {
+    const GENDER_MALE = 1;
+    const GENDER_FEMALE = 0;
+
     /**
      * @Id
      * @GeneratedValue
@@ -19,6 +23,12 @@ class Profile implements JSONSerializable
      * @var int
      */
     private $id;
+
+    /**
+     * @Column(type="bool")
+     * @var int
+     */
+    private $gender;
 
     /**
      * @Column(type="boolean", name="is_initialized")
@@ -103,6 +113,19 @@ class Profile implements JSONSerializable
         $this->account        = $account;
         $this->expert_in      = new ArrayCollection();
         $this->interesting_in = new ArrayCollection();
+    }
+
+    public function getGender(){
+        return $this->gender;
+    }
+
+    public function setGender(int $gender): self
+    {
+        if(!in_array($gender, [self::GENDER_FEMALE, self::GENDER_MALE]))
+            throw new UnknownGenderException("the gender: %s is unknown",$gender);
+
+        $this->gender = $gender;
+        return $this;
     }
 
     public function getExpertIn()

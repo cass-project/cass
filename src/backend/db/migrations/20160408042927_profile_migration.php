@@ -9,6 +9,7 @@ class ProfileMigration extends AbstractMigration
         $this->table('profile')
             ->addColumn('account_id', 'integer')
             ->addColumn('is_current', 'boolean')
+            ->addColumn('gender', 'boolean', ['null' => true ])
         ->create();
 
         $this->table('profile_greetings')
