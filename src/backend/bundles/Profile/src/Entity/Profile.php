@@ -82,14 +82,6 @@ class Profile implements JSONSerializable
 
     public function toJSON(): array
     {
-        $expertsInJSON = array_map(function(Theme $theme){
-            return $theme->toJSON();
-        }, $this->expert_in->toArray());
-
-        $interesting_inJSON = array_map(function(Theme $theme){
-            return $theme->toJSON();
-        }, $this->interesting_in->toArray());
-
         return [
           'id'                 => (int) $this->getId(),
           'account_id'         => (int) $this->getAccount()->getId(),
@@ -97,10 +89,12 @@ class Profile implements JSONSerializable
           'is_initialized'     => $this->isInitialized(),
           'greetings'          => $this->getProfileGreetings()->toJSON(),
           'image'              => $this->getProfileImage()->toJSON(),
-          'expert_in_ids'      => json_encode($this->expert_in_ids),
-          'interesting_in_ids' => json_encode($this->interesting_in_ids),
-          'expert_in'          => $expertsInJSON,
-          'interesting_in'     => $interesting_inJSON
+          'expert_in'          => array_map(function(Theme $theme){
+              return $theme->getId();
+          }, $this->expert_in->toArray()),
+          'interesting_in'     => array_map(function(Theme $theme){
+              return $theme->getId();
+          }, $this->interesting_in->toArray())
         ];
     }
 
