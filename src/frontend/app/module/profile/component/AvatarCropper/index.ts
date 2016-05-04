@@ -99,11 +99,12 @@ export class AvatarCropper {
         };
         this.profileService.avatarUpload();
         console.log(`
-        previewHeight: ${this.getPreviewImageData('previewHeight')},
+        parentWidth: ${this.getPreviewImageData('parentWidth')},
+        parentHeight: ${this.getPreviewImageData('parentHeight')},
         width: ${this.getPreviewImageData('width')},
         height: ${this.getPreviewImageData('height')},
         marginLeft: ${this.getPreviewImageData('marginLeft')},
-        marginTop: ${this.getPreviewImageData('height')},
+        marginTop: ${this.getPreviewImageData('marginTop')},
         getData: ${this.getData().y}
         `);
     }
@@ -111,27 +112,27 @@ export class AvatarCropper {
     private getPreviewImageData(data: string){
         let coord = this.getData();
 
-        let aspectRatio = this.cropper.aspectRatio;
-        let previewWidth = this.getImageData().width;
-        let previewHeight = previewWidth;
-
-
+        let parentWidth = this.getImageData().width;
+        let parentHeight = this.getImageData().height;
 
         switch (data) {
-        case 'previewHeight':
-            return previewHeight;
+        case 'parentWidth':
+            return parentWidth;
+            break;
+        case 'parentHeight':
+            return parentHeight;
             break;
         case 'width':
-            return coord.x;
+            return 300 * parentWidth / coord.width;
             break;
         case 'height':
-            return coord.y;
+            return 300 * parentHeight / coord.height;
             break;
         case 'marginLeft':
-            return  -(coord.x + coord.width);
+            return -coord.x * parentWidth / coord.width;
             break;
         case 'marginTop':
-            return -(coord.y + coord.height);
+            return -coord.y * parentHeight / coord.height;
             break;
         }
     }

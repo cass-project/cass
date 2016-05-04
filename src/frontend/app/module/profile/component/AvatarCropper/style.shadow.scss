@@ -3,6 +3,27 @@ img{
     max-height: 600px;
 }
 
+.img-preview {
+    background-color: #f7f7f7;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.img-preview > img {
+    max-width: 300px;
+}
+
+.preview-lg {
+    width: 300px;
+    height: 300px;
+}
+
+
+.img-src {
+    min-height: 0px !important; max-width: none !important; max-height: none !important; transform: none;
+}
+
 .modal-body{padding:15px 0;}
 
 label input[type=file]{display: none}

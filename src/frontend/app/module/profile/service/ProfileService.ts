@@ -112,7 +112,7 @@ export class ProfileService {
         xmlRequest.onreadystatechange = () => {
             if (xmlRequest.readyState === 4) {
                 if (xmlRequest.status === 200) {
-                    this.avatarCropperService.isAvatarFormVisibleFlag = false;
+                    //this.avatarCropperService.isAvatarFormVisibleFlag = false;
                     AuthService.getAuthToken().getCurrentProfile().entity.image.public_path = JSON.parse(xmlRequest.responseText).public_path;
                     this.progressBar = 0;
                     this.tryNumber = 0;

@@ -15,12 +15,15 @@
                     </label>
                 </div>
                 <div *ngIf="showProgressBar">
-                        <img [style.width.px] = "getPreviewImageData('width')"
-                             [style.height.px] = "getPreviewImageData('height')"
-                             [style.marginLeft.px] = "getPreviewImageData('marginLeft')"
-                             [style.marginTop.px] = "getPreviewImageData('marginTop')"
-                             src="{{fileReader.result}}"/>
-                    <progress class="progress progress-striped" value="{{profileService.progressBar}}" max="100"></progress>
+                    <div class="img-preview preview-lg">
+                    <img class="img-src"
+                            [style.width.px] = "getPreviewImageData('width')"
+                            [style.height.px] = "getPreviewImageData('height')"
+                            [style.marginLeft.px] = "getPreviewImageData('marginLeft')"
+                            [style.marginTop.px] = "getPreviewImageData('marginTop')"
+                            src="{{fileReader.result}}"/>
+                    </div>
+                <progress class="progress progress-striped" value="{{profileService.progressBar}}" max="100"></progress>
                     <input *ngIf="profileService.tryNumber >= 2" type="button" value="Abort" class="btn btn-secondary" (click)="close()">
                 </div>
                 <div class="modal-footer" *ngIf="cropper && !showProgressBar">
