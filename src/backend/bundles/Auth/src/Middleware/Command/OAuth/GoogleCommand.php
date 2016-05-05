@@ -22,6 +22,6 @@ class GoogleCommand extends AbstractCommand
         $email = $resourceOwner->getEmail();
         $providerAccountId = (string) $resourceOwner->getId();
 
-        return new RegistrationRequest('google', $providerAccountId, $email);
+        return new RegistrationRequest('google', $providerAccountId, $email, $resourceOwner);
     }
 }

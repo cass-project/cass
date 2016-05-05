@@ -22,6 +22,6 @@ class FacebookCommand extends AbstractCommand
         /** @var FacebookUser $resourceOwner */
         $resourceOwner = $provider->getResourceOwner($accessToken);
 
-        return new RegistrationRequest('facebook', $resourceOwner->getId(), $resourceOwner->getEmail());
+        return new RegistrationRequest('facebook', $resourceOwner->getId(), $resourceOwner->getEmail(), $resourceOwner);
     }
 }
