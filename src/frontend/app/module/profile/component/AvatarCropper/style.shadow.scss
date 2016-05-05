@@ -3,25 +3,18 @@ img{
     max-height: 600px;
 }
 
-.img-preview {
-    background-color: #f7f7f7;
-    width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
-}
-
-.img-preview > img {
-    max-width: 300px;
-}
-
-.preview-lg {
+div.wrapper {
     width: 300px;
     height: 300px;
-}
+    overflow: hidden;
+    position: relative; /* position: relative объявляет локальную координатную сетку */
 
-
-.img-src {
-    min-height: 0px !important; max-width: none !important; max-height: none !important; transform: none;
+    div.image {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background-repeat: no-repeat;
+    }
 }
 
 .modal-body{padding:15px 0;}

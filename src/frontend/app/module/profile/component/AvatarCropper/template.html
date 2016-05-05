@@ -14,15 +14,16 @@
                         Choose photo from computer
                     </label>
                 </div>
-                <div *ngIf="showProgressBar">
-                    <div class="img-preview preview-lg">
-                    <img class="img-src"
-                            [style.width.px] = "getPreviewImageData('width')"
-                            [style.height.px] = "getPreviewImageData('height')"
-                            [style.marginLeft.px] = "getPreviewImageData('marginLeft')"
-                            [style.marginTop.px] = "getPreviewImageData('marginTop')"
-                            src="{{fileReader.result}}"/>
-                    </div>
+                <div *ngIf="cropper">
+                    <div class="wrapper">
+                            <div class="image"
+                                 [ngStyle]="{'background-image': 'url(' + imgPath + ')'}"
+                                 [style.background-position-x.px] = "getPreviewImageData('x1')"
+                                 [style.background-position-y.px] = "getPreviewImageData('y1')"
+                                 [style.background-size] = "getPreviewImageData('height') + 'px' + ' ' + getPreviewImageData('width') + 'px'"
+                            >
+                            </div>
+                        </div>
                 <progress class="progress progress-striped" value="{{profileService.progressBar}}" max="100"></progress>
                     <input *ngIf="profileService.tryNumber >= 2" type="button" value="Abort" class="btn btn-secondary" (click)="close()">
                 </div>

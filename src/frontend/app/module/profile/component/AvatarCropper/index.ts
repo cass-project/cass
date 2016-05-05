@@ -34,6 +34,7 @@ export class AvatarCropper {
     public showProgressBar = false;
     public cropper;
     private file: Blob;
+    private imgPath;
 
     ngOnInit(): void {
         this.fileReader = new FileReader();
@@ -44,6 +45,7 @@ export class AvatarCropper {
 
     private onFileChange(event) : void {
         this.file = event.target.files[0];
+        this.imgPath = URL.createObjectURL(event.target.files[0]);
         this.fileReader.readAsDataURL(this.file);
     }
 
@@ -99,40 +101,35 @@ export class AvatarCropper {
         };
         this.profileService.avatarUpload();
         console.log(`
-        parentWidth: ${this.getPreviewImageData('parentWidth')},
-        parentHeight: ${this.getPreviewImageData('parentHeight')},
         width: ${this.getPreviewImageData('width')},
         height: ${this.getPreviewImageData('height')},
-        marginLeft: ${this.getPreviewImageData('marginLeft')},
-        marginTop: ${this.getPreviewImageData('marginTop')},
-        getData: ${this.getData().y}
+        x1: ${this.getPreviewImageData('x1')},
+        y1: ${this.getPreviewImageData('y1')},
+        getData: ${this.getData().x} ${this.getData().y} ${this.getData().width} ${this.getData().height}
         `);
     }
 
     private getPreviewImageData(data: string){
         let coord = this.getData();
+        let avatarSize = 300;
+        let scaleX = avatarSize / (coord.width);
+        let scaleY = avatarSize / (coord.height);
 
         let parentWidth = this.getImageData().width;
         let parentHeight = this.getImageData().height;
 
         switch (data) {
-        case 'parentWidth':
-            return parentWidth;
+        case 'x1':
+            return -Math.round(scaleX * coord.x);
             break;
-        case 'parentHeight':
-            return parentHeight;
+        case 'y1':
+            return -Math.round(scaleY * coord.y);
             break;
         case 'width':
-            return 300 * parentWidth / coord.width;
+            return Math.round(parentWidth * scaleX);
             break;
         case 'height':
-            return 300 * parentHeight / coord.height;
-            break;
-        case 'marginLeft':
-            return -coord.x * parentWidth / coord.width;
-            break;
-        case 'marginTop':
-            return -coord.y * parentHeight / coord.height;
+            return Math.round(parentHeight * scaleY);
             break;
         }
     }
