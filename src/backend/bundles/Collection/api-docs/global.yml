@@ -1,3 +1,7 @@
 tags:
   - name: collection
     description: Collections API
+  - name: collection_profile
+    description: Profile Collections API
+  - name: collection_community
+    description: Community Collections API

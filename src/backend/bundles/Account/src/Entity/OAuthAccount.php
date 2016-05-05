@@ -1,5 +1,6 @@
 <?php
 namespace Account\Entity;
+use Common\Util\IdTrait;
 
 /**
  * @Entity(repositoryClass="Account\Repository\OAuthAccountRepository")
@@ -7,13 +8,7 @@ namespace Account\Entity;
  */
 class OAuthAccount
 {
-    /**
-     * @Id
-     * @Column(type="integer")
-     * @GeneratedValue
-     * @var int
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @ManyToOne(targetEntity="Account\Entity\Account",cascade={"persist"})
@@ -36,23 +31,6 @@ class OAuthAccount
     public function __construct(Account $account)
     {
         $this->account = $account;
-    }
-
-    public function hasId()
-    {
-        return $this->id !== null;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getAccount(): Account

@@ -1,6 +1,7 @@
 <?php
 namespace Profile\Entity;
 use Common\REST\JSONSerializable;
+use Common\Util\IdTrait;
 
 /**
  * @Entity(repositoryClass="Profile\Repository\ProfileGreetingsRepository")
@@ -18,13 +19,7 @@ class ProfileGreetings implements JSONSerializable
         self::GREETINGS_N
     ];
 
-    /**
-     * @Column(type="integer")
-     * @Id
-     * @GeneratedValue
-     * @var int
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @OneToOne(targetEntity="Profile\Entity\Profile", inversedBy="profileGreetings")
@@ -81,16 +76,6 @@ class ProfileGreetings implements JSONSerializable
             'middle_name' => $this->getMiddleName(),
             'nickname' => $this->getNickName()
         ];
-    }
-
-    public function hasId(): bool
-    {
-        return $this->id !== null;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     public function getProfile(): Profile

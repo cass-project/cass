@@ -1,0 +1,54 @@
+"/protected/community/{communityId}/image-upload/crop-start/{x1}/{y1}/crop-end/{x2}/{y2}":
+  post:
+    tags:
+      - community
+    description:
+      Создать коммунити
+    security:
+      - x_api_key: []
+    parameters:
+      - name: communityId
+        in: path
+        required: true
+        type: number:
+        description: ID коммунити
+      - name: x1
+        type: number
+        in: path
+        required: true
+        description: Crop, Start.X
+      - name: y1
+        type: number
+        in: path
+        required: true
+        description: Crop, Start.Y
+      - name: x2
+        type: number
+        in: path
+        required: true
+        description: Crop, End.X
+      - name: y2
+        type: number
+        in: path
+        required: true
+        description: Crop, End.Y
+      - name: file
+        description: Файл
+        type: file
+        required: true
+        in: formData
+        allowMultiple: false
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        schema:
+          required:
+            - success
+            - image
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            image:
+              $ref: '#/definitions/Community_Entity_CommunityImage'

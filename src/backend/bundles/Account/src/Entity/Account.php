@@ -2,6 +2,7 @@
 namespace Account\Entity;
 
 use Common\REST\JSONSerializable;
+use Common\Util\IdTrait;
 use Doctrine\ORM\PersistentCollection;
 use Profile\Entity\Profile;
 
@@ -13,13 +14,7 @@ use Profile\Entity\Profile;
  */
 class Account implements JSONSerializable
 {
-    /**
-     * @Id
-     * @GeneratedValue
-     * @Column(type="integer")
-     * @var int
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @OneToMany(targetEntity="Profile\Entity\Profile", mappedBy="account")
@@ -67,11 +62,6 @@ class Account implements JSONSerializable
                 'reason' => $this->isDisabled() ? $this->getDisabledReason() : null
             ]
         ];
-    }
-
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function getProfiles(): PersistentCollection

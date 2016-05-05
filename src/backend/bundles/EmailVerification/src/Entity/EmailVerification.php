@@ -3,6 +3,7 @@ namespace EmailVerification\Entity;
 
 use Account\Entity\Account;
 use Common\REST\JSONSerializable;
+use Common\Util\IdTrait;
 use DateTime;
 
 /**
@@ -11,13 +12,7 @@ use DateTime;
  */
 class EmailVerification /* implements JSONSerializable */
 {
-    /**
-     * @Column(type="integer")
-     * @Id
-     * @GeneratedValue
-     * @var int
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @ManyToOne(targetEntity="Account\Entity\Account")
@@ -53,14 +48,6 @@ class EmailVerification /* implements JSONSerializable */
     public function __construct(Account $forAccount) {
         $this->forAccount = $forAccount;
         $this->dateRequested = new \DateTime();
-    }
-
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function isPersisted() {
-        return $this->id !== null;
     }
 
     public function getForAccount(): Account {

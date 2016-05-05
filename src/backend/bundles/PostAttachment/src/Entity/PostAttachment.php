@@ -1,6 +1,7 @@
 <?php
 namespace PostAttachment\Entity;
 
+use Common\Util\IdTrait;
 use Post\Entity\Post;
 
 /**
@@ -9,13 +10,7 @@ use Post\Entity\Post;
  */
 class PostAttachment
 {
-    /**
-     * @Id
-     * @GeneratedValue
-     * @Column(type="integer")
-     * @var int
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @Column(type="datetime", name="date_created_on")
@@ -64,16 +59,6 @@ class PostAttachment
             'attachment_type' => $this->getAttachmentType(),
             'attachment' => $this->getAttachment()
         ];
-    }
-
-    public function isPersisted()
-    {
-        return $this->id !== null;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     public function getDateCreatedOn(): \DateTime

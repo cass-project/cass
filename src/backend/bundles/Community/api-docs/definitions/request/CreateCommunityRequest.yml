@@ -1,0 +1,15 @@
+Community_Request_CreateCommunity:
+  required:
+    - title
+    - description
+    - theme_id
+  properties:
+    title:
+      type: string
+      description: Название (заголовок) коммунити
+    description:
+      type: string
+      description: Название (подзаголовок) коммунити
+    theme_id:
+      type: number
+      description: ID тематики

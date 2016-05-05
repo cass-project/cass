@@ -1,0 +1,11 @@
+Community_Entity_CommunityImage:
+  required:
+    - community_id
+    - public_path
+  properties:
+    community_id:
+      type: number
+      description: Community Id
+    public_path:
+      type: string
+      description: Путь к картинке

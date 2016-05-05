@@ -3,6 +3,7 @@ namespace Collection\Entity;
 
 use Common\REST\JSONSerializable;
 use Common\Tools\SerialManager\SerialEntity;
+use Common\Util\IdTrait;
 use Theme\Entity\Theme;
 use Doctrine\ORM\PersistentCollection;
 use Profile\Entity\Profile;
@@ -13,13 +14,7 @@ use Profile\Entity\Profile;
  */
 class Collection implements SerialEntity, JSONSerializable
 {
-    /**
-     * @Column(type="integer")
-     * @Id
-     * @GeneratedValue
-     * @var int
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @OneToMany(targetEntity="Collection\Entity\Collection", mappedBy="parent")
@@ -69,16 +64,6 @@ class Collection implements SerialEntity, JSONSerializable
     public function __construct(Profile $profile)
     {
         $this->profile = $profile;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function hasId(): bool
-    {
-        return $this->id !== null;
     }
 
     public function hasParent(): bool

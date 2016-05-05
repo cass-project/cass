@@ -2,6 +2,7 @@
 namespace ProfileIM\Entity;
 
 use Common\REST\JSONSerializable;
+use Common\Util\IdTrait;
 use Profile\Entity\Profile;
 use \Datetime;
 
@@ -13,13 +14,7 @@ class MessageIsNotReadException extends \Exception {}
  */
 class ProfileMessage implements JSONSerializable
 {
-    /**
-     * @Id
-     * @GeneratedValue
-     * @Column(type="integer")
-     * @var int
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @ManyToOne(targetEntity="Profile\Entity\Profile")
@@ -64,16 +59,6 @@ class ProfileMessage implements JSONSerializable
         $this->sourceProfile = $sourceProfile;
         $this->targetProfile = $targetProfile;
         $this->dateCreated = new \DateTime();
-    }
-
-    public function isPersisted()
-    {
-        return $this->id !== null;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     public function getSourceProfile(): Profile

@@ -13,7 +13,8 @@
       "ProfileIM\\": "bundles/ProfileIM/src",
       "Post\\": "bundles/Post/src",
       "PostAttachment\\": "bundles/PostAttachment/src",
-      "Feed\\": "bundles/Feed/src"
+      "Feed\\": "bundles/Feed/src",
+      "Community\\": "bundles/Community/src"
     }
   },
   "require": {

@@ -1,0 +1,29 @@
+"/protected/community/create":
+  put:
+    tags:
+      - community
+    description:
+      Редактировать основные параметры коммунити
+    security:
+      - x_api_key: []
+    parameters:
+      - name: body
+        in: body
+        required: true
+        description:
+        schema:
+          $ref: '#/definitions/Community_Request_CreateCommunity'
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        schema:
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Community_Entity_Community'

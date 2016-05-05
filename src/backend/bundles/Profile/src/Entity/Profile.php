@@ -3,6 +3,7 @@ namespace Profile\Entity;
 use Account\Entity\Account;
 use Common\REST\JSONSerializable;
 
+use Common\Util\IdTrait;
 use \Doctrine\Common\Collections\ArrayCollection;
 use Profile\Exception\UnknownGenderException;
 use Theme\Entity\Theme;
@@ -16,13 +17,7 @@ class Profile implements JSONSerializable
     const GENDER_MALE = 1;
     const GENDER_FEMALE = 0;
 
-    /**
-     * @Id
-     * @GeneratedValue
-     * @Column(type="integer")
-     * @var int
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @Column(type="integer")
@@ -177,16 +172,6 @@ class Profile implements JSONSerializable
     {
         $this->interesting_in = $interestingIn;
         return $this;
-    }
-
-    public function hasId(): bool
-    {
-        return $this->id !== null;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     public function isInitialized(): bool

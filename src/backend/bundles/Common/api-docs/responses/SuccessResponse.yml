@@ -1,4 +1,4 @@
-success:
+Success:
   description: Success
   schema:
     type: object

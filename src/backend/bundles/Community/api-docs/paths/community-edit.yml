@@ -1,0 +1,34 @@
+"/protected/community/{communityId}/edit":
+  post:
+    tags:
+      - community
+    description:
+      Создать коммунити
+    security:
+      - x_api_key: []
+    parameters:
+      - name: communityId
+        in: path
+        required: true
+        type: number:
+        description: ID коммунити
+      - name: body
+        in: body
+        required: true
+        description:
+        schema:
+          $ref: '#/definitions/Community_Request_EditCommunity'
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        schema:
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Comminity_Entity_Community'

@@ -2,6 +2,7 @@
 namespace Post\Entity;
 
 use Collection\Entity\Collection;
+use Common\Util\IdTrait;
 use Profile\Entity\Profile;
 
 /**
@@ -10,13 +11,7 @@ use Profile\Entity\Profile;
  */
 class Post
 {
-    /**
-     * @Id
-     * @GeneratedValue
-     * @Column(type="integer")
-     * @var int
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @ManyToOne(targetEntity="Profile\Entity\Profile")
@@ -59,14 +54,6 @@ class Post
             'collection_id' => $this->getCollection()->getId(),
             'content' => $this->getContent()
         ];
-    }
-
-    public function isPersisted() {
-        return $this->id !== null;
-    }
-
-    public function getId(): int {
-        return $this->id;
     }
 
     public function getAuthorProfile(): Profile {

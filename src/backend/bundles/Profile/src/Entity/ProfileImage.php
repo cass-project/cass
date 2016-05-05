@@ -1,6 +1,7 @@
 <?php
 namespace Profile\Entity;
 use Common\REST\JSONSerializable;
+use Common\Util\IdTrait;
 
 /**
  * @Entity(repositoryClass="Profile\Repository\ProfileImageRepository")
@@ -17,13 +18,7 @@ class ProfileImage implements JSONSerializable
     const DEFAULT_PROFILE_IMAGE_PUBLIC = '/public/assets/profile-default.png';
     const DEFAULT_PROFILE_IMAGE_STORAGE = __DIR__.'/../../../../../www/app/public/assets/profile-default.png';
 
-    /**
-     * @var int
-     * @Id
-     * @GeneratedValue
-     * @Column(type="integer")
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @OneToOne(targetEntity="Profile\Entity\Profile", inversedBy="profileImage")
@@ -62,16 +57,6 @@ class ProfileImage implements JSONSerializable
             'profile_id' => $this->getProfile()->getId(),
             'public_path' => $this->getPublicPath()
         ];
-    }
-
-    public function hasId(): bool
-    {
-        return $this->id !== null;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     public function isDefaultImage()
