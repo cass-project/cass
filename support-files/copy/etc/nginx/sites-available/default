@@ -2,6 +2,10 @@ upstream php-fpm {
     server unix:/var/run/php/php7.0-fpm.sock;
 }
 
+upstream react-php  {
+    server 127.0.0.1:1337;
+}
+
 server {
     listen 3000;
     root /vagrant/www/app/;
@@ -11,7 +15,7 @@ server {
 
     location ~ "^/backend/.*$"
     {
-        try_files $uri /server.php /server.php =404;
+        try_files $uri /backend.php =404;
 
         fastcgi_pass	php-fpm;
         include fastcgi_params;
@@ -33,4 +37,29 @@ server {
         try_files $uri /frontend.html /frontend.html =404;
 	}
 
+}
+
+server {
+    listen 3002;
+    root /vagrant/www/app/;
+    server_name localhost;
+
+    location ~ "^/backend/.*$"
+    {
+        if (!-f $request_filename) {
+            proxy_pass http://react-php;
+            break;
+        }
+    }
+
+    location ~ "^/api-docs/.*$"
+    {
+        rewrite ^/api-docs/(.*)$ /../../../opt/swagger/swagger-ui/dist/$1 break;
+        index index.html;
+    }
+
+    location ~ "^/.*$"
+    {
+        try_files $uri /frontend.html /frontend.html =404;
+	}
 }

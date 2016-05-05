@@ -40,6 +40,8 @@
     "php-amqplib/php-amqplib": "2.5.*",
     "symfony/console": "^3.0",
     "phpunit/phpunit": "^5.3",
-    "symfony/validator": "^3.0"
+    "symfony/validator": "^3.0",
+    "react/http": "^0.5@dev",
+    "phly/react2psr7": "^0.1.1"
   }
 }

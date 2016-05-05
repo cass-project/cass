@@ -1,12 +1,8 @@
 <?php
-define('LB_BACKEND_DIRECTORY', __DIR__.'/../../backend');
-define('LB_BACKEND_ROUTE_PREFIX', '/backend/api');
-define('LB_BACKEND_BUNDLES_DIR', __DIR__.'/../../backend/bundles');
-define('LB_FRONTEND_BASE_URL', '/public');
-define('LB_FRONTEND_DIRECTORY', __DIR__.'/../../frontend');
-define('LB_STORAGE_DIRECTORY', __DIR__.'/public/storage');
+require_once(__DIR__ . '/../../backend/constants.php');
 
 /** @var LBApplicationBootstrap $application */
-$application = require LB_BACKEND_DIRECTORY.'/application.php';
+$application = require(LB_BACKEND_DIRECTORY . '/application.php');
 $application->bootstrap();
+$application->createApplication();
 $application->run();

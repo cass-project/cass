@@ -40,7 +40,7 @@ class LBApplicationBootstrap
         $this->initFrontline();
     }
 
-    public function run() {
+    public function createApplication() {
         $router = new \Zend\Expressive\Router\FastRouteRouter();
         $errorHandler = new \Common\Bootstrap\ErrorHandler();
         $emitter = new \Zend\Expressive\Emitter\EmitterStack();
@@ -48,13 +48,16 @@ class LBApplicationBootstrap
 
         $this->app = new Application($router, $this->container, $errorHandler, $emitter);
 
+        $this->container->set(Application::class, $this->app);
         $this->initProtectedRoutes();
         $this->initRoutes();
         $this->initSchemaRESTRequest();
 
         $this->container->get(ProfileIMMiddleware::class);
+    }
 
-        $this->app->run();
+    public function run(\Psr\Http\Message\ServerRequestInterface $request=null, \Psr\Http\Message\ResponseInterface $response=null) {
+        $this->app->run($request ?? null, $response ?? null);
     }
 
     public function getContainer(): \Interop\Container\ContainerInterface {
