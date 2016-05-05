@@ -65,7 +65,7 @@ export class ProfileService {
         }));
     }
 
-    getSelectedThemesId(){
+    getSelectedThemesIds(){
         let arrayPush = [];
 
         for(let i = 0; i < this.themeService.selectedThemes.length; i++){
@@ -80,7 +80,7 @@ export class ProfileService {
 
 
         return this.http.put(url, JSON.stringify({
-            theme_id: this.getSelectedThemesId()
+            theme_ids: this.getSelectedThemesIds()
         }));
     }
 
@@ -89,7 +89,7 @@ export class ProfileService {
         let url = `backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/interesting-in`;
 
         return this.http.put(url, JSON.stringify({
-            theme_id: this.themeService.selectedThemes
+            theme_ids: this.getSelectedThemesIds()
         }));
     }
 
