@@ -25,7 +25,7 @@ class Profile implements JSONSerializable
     private $id;
 
     /**
-     * @Column(type="bool")
+     * @Column(type="integer")
      * @var int
      */
     private $gender;
