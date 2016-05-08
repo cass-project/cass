@@ -2,9 +2,9 @@
 /** @see https://xtreamwayz.com/blog/2016-02-07-zend-expressive-console-cli-commands */
 /** Example: php console profile:card 1 */
 
-use Common\Bootstrap\Bundle\BundleService;
-use Common\CommonBundle;
-use Common\Service\SharedConfigService;
+use Application\Common\Bootstrap\Bundle\BundleService;
+use Application\Common\CommonBundle;
+use Application\Common\Service\SharedConfigService;
 use Symfony\Component\Console\Application as ConsoleApplication;
 
 if(php_sapi_name() !== 'cli') {

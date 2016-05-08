@@ -53,7 +53,7 @@ import {PostRestService} from "../../service/PostRestService";
     }
     reset(){
         this.router.parent.navigate(['RouterCleaner']);
-        this.router.parent.navigate(['Creation-Form-Post']);
+        this.router.parent.navigate(['Creation-Form-Application\Post']);
     }
 
     close(){

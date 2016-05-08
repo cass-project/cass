@@ -47,7 +47,7 @@ import {PostRestService} from "./module/post/service/PostRestService";
     },
     {
         path: '/auth/...',
-        name: 'Auth',
+        name: 'Application\Auth',
         component: AuthComponent
     },
     {

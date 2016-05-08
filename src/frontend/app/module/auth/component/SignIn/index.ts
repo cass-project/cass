@@ -32,7 +32,7 @@ export class SignInComponent{
             this.loading = false;
 
             if(!this.authService.lastError) {
-                this.router.navigate(['/Collection/Home']);
+                this.router.navigate(['/Application\Collection/Home']);
             }
         });
     }
@@ -45,7 +45,7 @@ export class SignInComponent{
             this.loading = false;
 
             if(!this.authService.lastError) {
-                this.router.navigate(['/Collection/Home']);
+                this.router.navigate(['/Application\Collection/Home']);
             }
         });
     }

@@ -1,0 +1,28 @@
+'/protected/profile/{profileId}/delete/':
+  delete:
+    tags:
+      - profile
+    description: Удалить существующий профиль
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
+    responses:
+      200:
+        description: Remove profile successfully
+        schema:
+          required:
+            - success
+          properties:
+            success:
+              type: boolean
+              default: true
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        description: Application\Profile not found
+        $ref: '#/responses/NotFound'

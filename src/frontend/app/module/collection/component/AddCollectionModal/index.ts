@@ -101,7 +101,7 @@ export class AddCollectionModal
         this.collectionREST.putCreate(profileId, body).map(res => res.json()).subscribe(
             response => {
                 this.collectionService.collections.push(response.entity);
-                this.router.navigate(['/Profile/Collections/View', { collectionId: response.entity.id }]);
+                this.router.navigate(['/Application\Profile/Collections/View', { collectionId: response.entity.id }]);
                 this.close();
             },
             error => {

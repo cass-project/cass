@@ -1,21 +1,4 @@
 {
-  "autoload": {
-    "psr-4": {
-      "Common\\": "bundles/Common/src",
-      "Swagger\\": "bundles/Swagger/src",
-      "Auth\\": "bundles/Auth/src",
-      "Theme\\": "bundles/Theme/src",
-      "Profile\\": "bundles/Profile/src",
-      "Collection\\": "bundles/Collection/src",
-      "Account\\": "bundles/Account/src",
-      "Frontline\\": "bundles/Frontline/src",
-      "EmailVerification\\": "bundles/EmailVerification/src",
-      "ProfileIM\\": "bundles/ProfileIM/src",
-      "Post\\": "bundles/Post/src",
-      "PostAttachment\\": "bundles/PostAttachment/src",
-      "Feed\\": "bundles/Feed/src"
-    }
-  },
   "require": {
     "robmorgan/phinx": "^0.5.1",
     "zendframework/zend-expressive": "^0.5.3",

@@ -6,7 +6,7 @@
 
 - Все публичное и доступное для фронтенд-разработчиков REST API должно быть задокументировано.
 
-- Мы используем Swagger в качестве инструмента документирования / отображения документации REST API
+- Мы используем Application\Swagger в качестве инструмента документирования / отображения документации REST API
 
 - Вся документация по REST API описывается в одном JSON-ответе нашего сервера.
 
@@ -28,6 +28,6 @@
 
 - OpenAPI Specification: [https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md)
 
-- Swagger Editor: [http://editor.swagger.io/#/](http://editor.swagger.io/#/)
+- Application\Swagger Editor: [http://editor.swagger.io/#/](http://editor.swagger.io/#/)
 
-- Swagger Editor, Paste JSON: [http://127.0.0.1:8080/backend/api/debug/api-docs/api-docs.json](http://127.0.0.1:8080/backend/api/debug/api-docs/api-docs.json)
+- Application\Swagger Editor, Paste JSON: [http://127.0.0.1:8080/backend/api/debug/api-docs/api-docs.json](http://127.0.0.1:8080/backend/api/debug/api-docs/api-docs.json)

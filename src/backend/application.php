@@ -1,15 +1,15 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-use Common\Bootstrap\Bundle\Bundle;
-use Common\Bootstrap\Bundle\BundleService;
-use Common\Bootstrap\Scripts\RouteSetupScript;
-use Common\Bootstrap\Scripts\ReadAppConfigScript;
-use Common\Service\SchemaService;
-use Common\Service\SharedConfigService;
-use Auth\Middleware\ProtectedMiddleware;
-use Frontline\Service\FrontlineService;
-use ProfileIM\Middleware\ProfileIMMiddleware;
+use Application\Common\Bootstrap\Bundle\Bundle;
+use Application\Common\Bootstrap\Bundle\BundleService;
+use Application\Common\Bootstrap\Scripts\RouteSetupScript;
+use Application\Common\Bootstrap\Scripts\ReadAppConfigScript;
+use Application\Common\Service\SchemaService;
+use Application\Common\Service\SharedConfigService;
+use Application\Auth\Middleware\ProtectedMiddleware;
+use Application\Frontline\Service\FrontlineService;
+use Application\ProfileIM\Middleware\ProfileIMMiddleware;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Expressive\Application;
 
@@ -42,7 +42,7 @@ class LBApplicationBootstrap
 
     public function run() {
         $router = new \Zend\Expressive\Router\FastRouteRouter();
-        $errorHandler = new \Common\Bootstrap\ErrorHandler();
+        $errorHandler = new \Application\Common\Bootstrap\ErrorHandler();
         $emitter = new \Zend\Expressive\Emitter\EmitterStack();
         $emitter->push(new SapiEmitter());
 
@@ -153,7 +153,7 @@ class LBApplicationBootstrap
         $frontlineService = $container->get(FrontlineService::class);
 
         foreach($this->bundles->getBundles() as $bundle) {
-            if($bundle instanceof \Common\Bootstrap\Bundle\FrontlineBundleInjectable) {
+            if($bundle instanceof \Application\Common\Bootstrap\Bundle\FrontlineBundleInjectable) {
                 $bundle->initFrontline($container, $frontlineService);
             }
         }
@@ -169,7 +169,7 @@ class LBApplicationBootstrap
     }
 
     private function initSchemaRESTRequest() {
-        \Common\Tools\RequestParams\SchemaParams::injectSchemaService($this->container->get(SchemaService::class));
+        \Application\Common\Tools\RequestParams\SchemaParams::injectSchemaService($this->container->get(SchemaService::class));
     }
 }
 

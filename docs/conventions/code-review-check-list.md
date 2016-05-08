@@ -5,7 +5,7 @@ General
 =======
 
 - Использование сторонних ресурсов (иконки, фото и.т.д..) без указания того, откуда это было взято.
-- Frontline: добавленные во Frontline данные описаны в swagger-документации
+- Application\Frontline: добавленные во Application\Frontline данные описаны в swagger-документации
 
 Instant reject:
 ---------------
@@ -41,7 +41,7 @@ Front-end
 - Check tab-index
 - ParseInt без основания
 
-Swagger
+Application\Swagger
 -------
 
 - Прописан ключ security

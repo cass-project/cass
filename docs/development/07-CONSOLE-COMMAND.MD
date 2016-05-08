@@ -5,10 +5,10 @@
 
 ```php
 <?php
-namespace Profile\Console\Command;
+namespace Application\Profile\Console\Command;
 
-use Profile\Exception\ProfileNotFoundException;
-use Profile\Service\ProfileService;
+use Application\Profile\Exception\ProfileNotFoundException;
+use Application\Profile\Service\ProfileService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,7 +31,7 @@ class ProfileCard extends Command
         $this
             ->setName('profile:card')
             ->setDescription('ProfleBundle: show profile card')
-            ->addArgument('id', InputArgument::REQUIRED, 'Profile ID');
+            ->addArgument('id', InputArgument::REQUIRED, 'Application\Profile ID');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -42,14 +42,14 @@ class ProfileCard extends Command
             $profile = $this->profileService->getProfileById($profileId);
 
             $output->writeln([
-                "Profile(#{$profile->getId()}): ",
+                "Application\Profile(#{$profile->getId()}): ",
                 "-----",
                 "AccountID: {$profile->getAccount()->getId()}",
                 "Greetings: {$profile->getProfileGreetings()->getGreetings()}",
                 "-----",
             ]);
         }catch(ProfileNotFoundException $e) {
-            $output->writeln(sprintf("Profile with id `%d` not found", $profileId));
+            $output->writeln(sprintf("Application\Profile with id `%d` not found", $profileId));
         }
     }
 }
@@ -59,7 +59,7 @@ class ProfileCard extends Command
 
 ```php
 <?php
-use Profile\Console\Command\ProfileCard;
+use Application\Profile\Console\Command\ProfileCard;
 
 use function DI\object;
 use function DI\factory;
@@ -79,7 +79,7 @@ return [
 
 ```
 <?php
-use Profile\Console\Command\ProfileCard;
+use Application\Profile\Console\Command\ProfileCard;
 
 return [
     'console' => [
