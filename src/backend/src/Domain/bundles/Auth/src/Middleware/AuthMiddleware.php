@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Auth\Middleware;
 
-use Application\Common\REST\GenericRESTResponseBuilder;
+use Application\REST\Response\GenericResponseBuilder;
 use Domain\Auth\Middleware\Command\Command;
 use Domain\Auth\Service\AuthService;
 use Application\Frontline\Service\FrontlineService;
@@ -25,7 +25,7 @@ class AuthMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $responseBuilder = new GenericRESTResponseBuilder($response);
+        $responseBuilder = new GenericResponseBuilder($response);
 
         $command = Command::factory($request, $this->authService);
         $command->setAuthService($this->authService);

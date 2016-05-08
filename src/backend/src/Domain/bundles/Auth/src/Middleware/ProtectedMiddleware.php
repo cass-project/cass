@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Auth\Middleware;
 
-use Application\Common\REST\GenericRESTResponseBuilder;
+use Application\REST\Response\GenericResponseBuilder;
 use Domain\Auth\Middleware\AuthStrategy\HeaderStrategy;
 use Domain\Auth\Middleware\AuthStrategy\JSONBodyStrategy;
 use Domain\Auth\Middleware\AuthStrategy\SessionStrategy;
@@ -37,7 +37,7 @@ class ProtectedMiddleware implements MiddlewareInterface
             ]);
         }catch(NotAuthenticatedException $e) {
             if($isURLProtected) {
-                $responseBuilder = new GenericRESTResponseBuilder($response);
+                $responseBuilder = new GenericResponseBuilder($response);
 
                 return $responseBuilder
                     ->setStatusBadRequest()

@@ -3,9 +3,9 @@ namespace Domain\Collection\Middleware\Request;
 
 use Domain\Collection\CollectionBundle;
 use Domain\Collection\Service\Parameters\CollectionService\CollectionCreateParameters;
-use Application\Common\Service\JSONSchema;
-use Application\Common\Tools\RequestParams\Param;
-use Application\Common\Tools\RequestParams\SchemaParams;
+use Application\REST\Service\JSONSchema;
+use Domain\Request\Params\Param;
+use Domain\Request\Params\SchemaParams;
 
 class CollectionCreateRequest extends SchemaParams
 {

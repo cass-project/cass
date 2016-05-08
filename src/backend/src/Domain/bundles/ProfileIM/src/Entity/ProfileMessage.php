@@ -1,7 +1,7 @@
 <?php
 namespace Domain\ProfileIM\Entity;
 
-use Application\Common\REST\JSONSerializable;
+use Application\Util\JSONSerializable;
 use Domain\Profile\Entity\Profile;
 use \Datetime;
 

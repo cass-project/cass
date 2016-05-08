@@ -1,7 +1,7 @@
 <?php
-namespace Application\Common\REST;
+namespace Application\REST\Response;
 
-class GenericRESTResponseBuilder extends RESTResponseBuilder
+class GenericResponseBuilder extends ResponseBuilder
 {
     const CODE_SUCCESS = 200;
     const CODE_BAD_REQUEST = 400;

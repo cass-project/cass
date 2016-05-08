@@ -2,7 +2,7 @@
 namespace Domain\Theme\Middleware;
 
 use Domain\Auth\Service\CurrentAccountService;
-use Application\Common\REST\GenericRESTResponseBuilder;
+use Application\REST\Response\GenericResponseBuilder;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Domain\Theme\Middleware\Command\Command;
@@ -25,7 +25,7 @@ class ThemeMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $responseBuilder = new GenericRESTResponseBuilder($response);
+        $responseBuilder = new GenericResponseBuilder($response);
 
         $command = Command::factory($request, $this->currentAccountService, $this->themeService);
         $result = $command->run($request);

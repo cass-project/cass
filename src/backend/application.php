@@ -5,7 +5,7 @@ use Application\Bundle\Bundle;
 use Application\Service\BundleService;
 use Application\Bootstrap\Scripts\RouteSetupScript;
 use Application\Bootstrap\Scripts\ReadAppConfigScript;
-use Application\Common\Service\SchemaService;
+use Application\REST\Service\SchemaService;
 use Application\Service\ConfigService;
 use Domain\Auth\Middleware\ProtectedMiddleware;
 use Application\Frontline\Service\FrontlineService;
@@ -169,7 +169,7 @@ class LBApplicationBootstrap
     }
 
     private function initSchemaRESTRequest() {
-        \Application\Common\Tools\RequestParams\SchemaParams::injectSchemaService($this->container->get(SchemaService::class));
+        \Domain\Request\Params\SchemaParams::injectSchemaService($this->container->get(SchemaService::class));
     }
 }
 

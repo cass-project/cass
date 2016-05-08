@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Post\Middleware\Request;
 
-use Application\Common\Service\JSONSchema;
-use Application\Common\Tools\RequestParams\SchemaParams;
+use Application\REST\Service\JSONSchema;
+use Domain\Request\Params\SchemaParams;
 use Domain\Post\Parameters\EditPostParameters;
 use Domain\Post\PostBundle;
 

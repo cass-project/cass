@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Collection\Service\Parameters\CollectionService;
 
-use Application\Common\Tools\RequestParams\Param;
+use Domain\Request\Params\Param;
 
 class CollectionCreateParameters implements CollectionParameters
 {

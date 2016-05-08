@@ -1,7 +1,7 @@
 <?php
 namespace Application\Swagger\Middleware;
 
-use Application\Common\REST\GenericRESTResponseBuilder;
+use Application\REST\Response\GenericResponseBuilder;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Application\Swagger\Service\APIDocsService;
@@ -25,7 +25,7 @@ class APIDocsMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $restResponseBuilder = new GenericRESTResponseBuilder($response);
+        $restResponseBuilder = new GenericResponseBuilder($response);
         $restResponseBuilder->setJson($this->apiDocsService->buildAPIDocs());
         $restResponseBuilder->setStatusSuccess();
 

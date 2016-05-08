@@ -6,7 +6,7 @@ use function DI\factory;
 use function DI\get;
 
 use Domain\Auth\Service\CurrentAccountService;
-use Application\Common\Factory\DoctrineRepositoryFactory;
+use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Post\Entity\Post;
 use Domain\Post\Middleware\PostMiddleware;
 use Domain\Post\Repository\PostRepository;

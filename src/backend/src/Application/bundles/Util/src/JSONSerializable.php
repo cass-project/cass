@@ -1,5 +1,5 @@
 <?php
-namespace Application\Common\REST;
+namespace Application\Util;
 
 interface JSONSerializable
 {

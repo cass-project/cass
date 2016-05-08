@@ -10,7 +10,7 @@ use Domain\Account\Entity\OAuthAccount;
 use Domain\Account\Repository\AccountRepository;
 use Domain\Account\Repository\OAuthAccountRepository;
 use Domain\Account\Service\AccountService;
-use Application\Common\Factory\DoctrineRepositoryFactory;
+use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 
 return [
     'php-di' => [

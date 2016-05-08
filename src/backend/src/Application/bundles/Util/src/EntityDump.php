@@ -1,7 +1,7 @@
 <?php
 namespace Application\Util;
 
-use Application\Common\REST\JSONSerializable;
+use Application\Util\JSONSerializable;
 
 class EntityDump
 {

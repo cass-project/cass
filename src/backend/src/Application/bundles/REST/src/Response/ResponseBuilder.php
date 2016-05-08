@@ -1,9 +1,11 @@
 <?php
-namespace Application\Common\REST;
+namespace Application\REST\Response;
 
+use Application\Common\REST\bool;
+use Application\Common\REST\int;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class RESTResponseBuilder
+abstract class ResponseBuilder
 {
     /** @var ResponseInterface */
     private $response;

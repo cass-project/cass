@@ -1,9 +1,9 @@
 <?php
-namespace Application\Common;
+namespace Application\REST;
 
 use Application\Bundle\GenericBundle;
 
-class CommonBundle extends GenericBundle
+class RESTBundle extends GenericBundle
 {
     public function getDir()
     {

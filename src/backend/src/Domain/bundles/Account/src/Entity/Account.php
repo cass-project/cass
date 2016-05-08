@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Account\Entity;
 
-use Application\Common\REST\JSONSerializable;
+use Application\Util\JSONSerializable;
 use Doctrine\ORM\PersistentCollection;
 use Domain\Profile\Entity\Profile;
 

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Collection\Entity;
 
-use Application\Common\REST\JSONSerializable;
+use Application\Util\JSONSerializable;
 use Application\Util\SerialManager\SerialEntity;
 use Domain\Theme\Entity\Theme;
 use Doctrine\ORM\PersistentCollection;

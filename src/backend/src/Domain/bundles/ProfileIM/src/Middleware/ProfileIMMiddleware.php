@@ -2,7 +2,7 @@
 namespace Domain\ProfileIM\Middleware;
 
 use Domain\Auth\Service\CurrentAccountService;
-use Application\Common\REST\GenericRESTResponseBuilder;
+use Application\REST\Response\GenericResponseBuilder;
 use Domain\ProfileIM\Exception\SameTargetAndSourceException;
 use Domain\ProfileIM\Middleware\Command\Command;
 use Domain\Profile\Service\ProfileService;
@@ -31,7 +31,7 @@ class ProfileIMMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $responseBuilder = new GenericRESTResponseBuilder($response);
+        $responseBuilder = new GenericResponseBuilder($response);
         
         try{
             $command = Command::factory($request, $this->currentAccountService, $this->profileIMService, $this->profileService);

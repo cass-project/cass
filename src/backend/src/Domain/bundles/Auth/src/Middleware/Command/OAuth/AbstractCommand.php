@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Auth\Middleware\Command\OAuth;
 
-use Application\Common\REST\GenericRESTResponseBuilder;
+use Application\REST\Response\GenericResponseBuilder;
 use Domain\Auth\Middleware\Command\Command;
 use Domain\Auth\Service\AuthService;
 use Domain\Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
@@ -30,7 +30,7 @@ abstract class AbstractCommand extends Command
     abstract protected function getOAuth2Provider(): AbstractProvider;
     abstract protected function makeRegistrationRequest(AbstractProvider $provider, AccessToken $accessToken): RegistrationRequest;
 
-    public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder)
+    public function run(ServerRequestInterface $request, GenericResponseBuilder $responseBuilder)
     {
         $provider = $this->getOAuth2Provider();
 

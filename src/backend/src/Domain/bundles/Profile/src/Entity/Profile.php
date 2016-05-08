@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Profile\Entity;
 use Domain\Account\Entity\Account;
-use Application\Common\REST\JSONSerializable;
+use Application\Util\JSONSerializable;
 
 use \Doctrine\Common\Collections\ArrayCollection;
 use Domain\Theme\Entity\Theme;

@@ -1,8 +1,7 @@
 <?php
-namespace Application\Common\Factory;
+namespace Application\Doctrine2\Factory;
 
 use Application\Service\BundleService;
-use Application\Service\ConfigService;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;

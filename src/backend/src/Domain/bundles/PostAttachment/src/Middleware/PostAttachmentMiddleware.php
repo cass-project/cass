@@ -2,7 +2,7 @@
 namespace Domain\PostAttachment\Middleware;
 
 use Domain\Auth\Service\CurrentAccountService;
-use Application\Common\REST\GenericRESTResponseBuilder;
+use Application\REST\Response\GenericResponseBuilder;
 use Domain\PostAttachment\Exception\PostAttachmentFactoryException;
 use Domain\PostAttachment\Middleware\Command\Command;
 use Domain\PostAttachment\Service\PostAttachmentService;
@@ -24,7 +24,7 @@ class PostAttachmentMiddleware implements MiddlewareInterface
     }
 
     public function __invoke(Request $request, Response $response, callable $out = null) {
-        $responseBuilder = new GenericRESTResponseBuilder($response);
+        $responseBuilder = new GenericResponseBuilder($response);
         $command = Command::factory($request, $this->currentAccountService, $this->postAttachmentService);
 
         try {

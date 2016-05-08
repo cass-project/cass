@@ -2,7 +2,7 @@
 namespace Domain\EmailVerification\Entity;
 
 use Domain\Account\Entity\Account;
-use Application\Common\REST\JSONSerializable;
+use Application\Util\JSONSerializable;
 use DateTime;
 
 /**

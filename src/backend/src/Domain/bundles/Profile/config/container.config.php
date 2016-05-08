@@ -6,7 +6,7 @@ use function DI\factory;
 use function DI\get;
 
 use Domain\Auth\Service\CurrentAccountService;
-use Application\Common\Factory\DoctrineRepositoryFactory;
+use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Profile\Console\Command\ProfileCard;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\ProfileGreetings;

@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Feed\Middleware;
 
-use Application\Common\Service\JSONSchema;
-use Application\Common\Tools\RequestParams\SchemaParams;
+use Application\REST\Service\JSONSchema;
+use Domain\Request\Params\SchemaParams;
 use Domain\Feed\Feed\Criteria\SeekCriteria;
 use Domain\Feed\Feed\CriteriaRequest;
 use Domain\Feed\FeedBundle;

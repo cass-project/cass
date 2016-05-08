@@ -1,6 +1,4 @@
 <?php
-namespace Application\Common\Service;
-
 use Application\Service\BundleService;
 use JsonSchema\Validator;
 use Symfony\Component\Yaml\Yaml;

@@ -10,7 +10,7 @@ use Domain\Collection\Entity\Collection;
 use Domain\Collection\Middleware\CollectionMiddleware;
 use Domain\Collection\Repository\CollectionRepository;
 use Domain\Collection\Service\CollectionService;
-use Application\Common\Factory\DoctrineRepositoryFactory;
+use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 
 return [
     'php-di' => [

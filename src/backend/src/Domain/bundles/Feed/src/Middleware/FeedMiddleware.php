@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Feed\Middleware;
 
-use Application\Common\REST\GenericRESTResponseBuilder;
+use Application\REST\Response\GenericResponseBuilder;
 use Domain\Feed\Feed\ResultSet;
 use Domain\Feed\Feed\Source;
 use Domain\Feed\Service\FeedSourcesService;
@@ -23,7 +23,7 @@ class FeedMiddleware implements MiddlewareInterface
     }
 
     public function __invoke(Request $request, Response $response, callable $out = null) {
-        $responseBuilder = new GenericRESTResponseBuilder($response);
+        $responseBuilder = new GenericResponseBuilder($response);
 
         $feedRequest = new FeedRequest($request);
 

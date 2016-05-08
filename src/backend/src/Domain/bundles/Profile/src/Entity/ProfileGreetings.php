@@ -1,6 +1,6 @@
 <?php
 namespace Domain\Profile\Entity;
-use Application\Common\REST\JSONSerializable;
+use Application\Util\JSONSerializable;
 
 /**
  * @Entity(repositoryClass="Domain\Profile\Repository\ProfileGreetingsRepository")

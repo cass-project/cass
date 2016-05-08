@@ -6,7 +6,7 @@ use function DI\factory;
 use function DI\get;
 
 use Domain\Auth\Service\CurrentAccountService;
-use Application\Common\Factory\DoctrineRepositoryFactory;
+use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\PostAttachment\Middleware\PostAttachmentMiddleware;
 use Domain\PostAttachment\Repository\PostAttachmentRepository;

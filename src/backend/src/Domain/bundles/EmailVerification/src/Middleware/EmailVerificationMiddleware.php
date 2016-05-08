@@ -2,7 +2,7 @@
 namespace Domain\EmailVerification\Middleware;
 
 use Domain\Auth\Service\CurrentAccountService;
-use Application\Common\REST\GenericRESTResponseBuilder;
+use Application\REST\Response\GenericResponseBuilder;
 use Domain\EmailVerification\Middleware\Command\Command;
 use Domain\EmailVerification\Service\EmailVerificationService;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -22,7 +22,7 @@ class EmailVerificationMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $responseBuilder = new GenericRESTResponseBuilder($response);
+        $responseBuilder = new GenericResponseBuilder($response);
 
             $command = Command::factory($request, $this->emailVerificationService, $this->currentAccountService);
             $result = $command->run($request);

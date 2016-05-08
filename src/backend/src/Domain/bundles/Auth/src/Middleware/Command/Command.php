@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Auth\Middleware\Command;
 
-use Application\Common\REST\GenericRESTResponseBuilder;
+use Application\REST\Response\GenericResponseBuilder;
 use Domain\Auth\Middleware\Command\OAuth\BattleNetCommand;
 use Domain\Auth\Middleware\Command\OAuth\FacebookCommand;
 use Domain\Auth\Middleware\Command\OAuth\GoogleCommand;
@@ -65,5 +65,5 @@ abstract class Command
         $this->frontlineService = $frontlineService;
     }
 
-    abstract public function run(ServerRequestInterface $request, GenericRESTResponseBuilder $responseBuilder);
+    abstract public function run(ServerRequestInterface $request, GenericResponseBuilder $responseBuilder);
 }

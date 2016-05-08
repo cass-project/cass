@@ -4,7 +4,7 @@ namespace Domain\Collection\Middleware;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Collection\Middleware\Command\Command;
 use Domain\Collection\Service\CollectionService;
-use Application\Common\REST\GenericRESTResponseBuilder;
+use Application\REST\Response\GenericResponseBuilder;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
@@ -25,7 +25,7 @@ class CollectionMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $responseBuilder = new GenericRESTResponseBuilder($response);
+        $responseBuilder = new GenericResponseBuilder($response);
 
         $command = Command::factory($request, $this->collectionService);
         $result = $command->run($request);

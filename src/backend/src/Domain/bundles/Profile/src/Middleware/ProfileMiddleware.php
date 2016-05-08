@@ -2,7 +2,7 @@
 namespace Domain\Profile\Middleware;
 
 use Domain\Auth\Service\CurrentAccountService;
-use Application\Common\REST\GenericRESTResponseBuilder;
+use Application\REST\Response\GenericResponseBuilder;
 use Domain\Profile\Exception\NoThemesToMerge;
 use Domain\Profile\Exception\ProfileNotFoundException;
 use Domain\Profile\Exception\UnknownGreetingsException;
@@ -28,7 +28,7 @@ class ProfileMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = NULL)
     {
-        $responseBuilder = new GenericRESTResponseBuilder($response);
+        $responseBuilder = new GenericResponseBuilder($response);
 
         try {
             $command = Command::factory($request, $this->profileService, $this->currentAccountService);

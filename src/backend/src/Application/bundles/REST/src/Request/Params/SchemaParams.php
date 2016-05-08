@@ -1,8 +1,8 @@
 <?php
-namespace Application\Common\Tools\RequestParams;
+namespace Domain\Request\Params;
 
-use Application\Common\Service\JSONSchema;
-use Application\Common\Service\SchemaService;
+use Application\REST\Service\JSONSchema;
+use Application\REST\Service\SchemaService;
 use Psr\Http\Message\ServerRequestInterface;
 
 class InvalidJSONSchema extends \Exception {}

@@ -2,8 +2,8 @@
 namespace Domain\Post\Middleware;
 
 use Domain\Auth\Service\CurrentAccountService;
-use Application\Common\REST\GenericRESTResponseBuilder;
-use Application\Common\Service\TransactionService;
+use Application\REST\Response\GenericResponseBuilder;
+use Application\REST\Service\TransactionService;
 use Domain\Post\Exception\PostNotFoundException;
 use Domain\Post\Middleware\Command\Command;
 use Domain\Post\Service\PostService;
@@ -26,7 +26,7 @@ class PostMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null) 
     {
-        $responseBuilder = new GenericRESTResponseBuilder($response);
+        $responseBuilder = new GenericResponseBuilder($response);
         
         try {
             $command = Command::factory($request, $this->currentAccountService, $this->postService);

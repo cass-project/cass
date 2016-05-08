@@ -1,5 +1,5 @@
 <?php
-namespace Application\Common\Factory;
+namespace Application;
 
 use DI\Definition\FactoryDefinition;
 use Interop\Container\ContainerInterface;
