@@ -1,7 +1,8 @@
 {
   "autoload": {
     "psr-4": {
-      "Application\\": "src/Application/src"
+      "Application\\": "src/Application/src",
+      "Domain\\": "src/Domain/src"
     }
   },
   "require": {
@@ -27,7 +28,6 @@
     "php-amqplib/php-amqplib": "2.5.*",
     "symfony/console": "^3.0",
     "phpunit/phpunit": "^5.3",
-    "symfony/validator": "^3.0",
-    "pom86/php-amqplib": "^2.5"
+    "symfony/validator": "^3.0"
   }
 }

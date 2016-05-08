@@ -24,7 +24,7 @@ class ProfileCard extends Command
     {
         $this
             ->setName('profile:card')
-            ->setDescription('ProfleBundle: show profile card')
+            ->setDescription('ProfileBundle: show profile card')
             ->addArgument('id', InputArgument::REQUIRED, 'Domain\Profile ID');
     }
 

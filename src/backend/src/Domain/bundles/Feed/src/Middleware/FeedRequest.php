@@ -2,7 +2,7 @@
 namespace Domain\Feed\Middleware;
 
 use Application\REST\Service\JSONSchema;
-use Domain\Request\Params\SchemaParams;
+use Application\REST\Request\Params\SchemaParams;
 use Domain\Feed\Feed\Criteria\SeekCriteria;
 use Domain\Feed\Feed\CriteriaRequest;
 use Domain\Feed\FeedBundle;

@@ -3,5 +3,5 @@ namespace Application\Util;
 
 interface JSONSerializable
 {
-    public function toJSON();
+    public function toJSON(): array;
 }

@@ -1,8 +1,7 @@
 <?php
 namespace Domain\Auth\Service\AuthService\SignUpValidation;
 
-use Domain\Auth\Service\AuthService\Exceptions\MissingReqiuredFieldException;
-use Psr\Http\Message\ServerRequestInterface;
+use Domain\Auth\Service\AuthService\Exceptions\MissingRequiredFieldException;
 
 class HasAllRequiredFields implements Validator
 {
@@ -14,7 +13,7 @@ class HasAllRequiredFields implements Validator
         $isValid = $hasEmailOrPhone && $hasPassword;
 
         if(!$isValid) {
-            throw new MissingReqiuredFieldException('Email or phone and password are required');
+            throw new MissingRequiredFieldException('Email or phone and password are required');
         }
     }
 }

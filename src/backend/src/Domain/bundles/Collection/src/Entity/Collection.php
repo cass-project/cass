@@ -30,7 +30,7 @@ class Collection implements SerialEntity, JSONSerializable
     /**
      * @ManyToOne(targetEntity="Domain\Collection\Entity\Domain\Collection", inversedBy="children")
      * @JoinColumn(name="parent_id", referencedColumnName="id")
-     * @var \Domain\Theme\Entity\Theme|null
+     * @var Theme|null
      */
     private $parent = null;
 
@@ -44,7 +44,7 @@ class Collection implements SerialEntity, JSONSerializable
     /**
      * @ManyToOne(targetEntity="Domain\Theme\Entity\Domain\Theme")
      * @JoinColumn(name="theme_id", referencedColumnName="id")
-     * @var \Domain\Theme\Entity\Theme
+     * @var Theme
      */
     private $theme;
 
@@ -127,7 +127,7 @@ class Collection implements SerialEntity, JSONSerializable
         return $this;
     }
 
-    public function getTheme(): \Domain\Theme\Entity\Theme
+    public function getTheme(): Theme
     {
         return $this->theme;
     }

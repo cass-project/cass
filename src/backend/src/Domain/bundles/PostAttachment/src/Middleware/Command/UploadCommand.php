@@ -2,7 +2,6 @@
 namespace Domain\PostAttachment\Middleware\Command;
 
 use Application\Exception\FileNotUploadedException;
-use Application\Exception\NotImplementedException;
 use Psr\Http\Message\ServerRequestInterface;
 
 class UploadCommand extends Command

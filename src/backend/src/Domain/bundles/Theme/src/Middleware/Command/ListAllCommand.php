@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Theme\Middleware\Command;
 
+use Domain\Theme\Entity\Theme;
 use Psr\Http\Message\ServerRequestInterface;
-use Application\Theme\Entity\Theme;
 
 final class ListAllCommand extends Command
 {

@@ -169,7 +169,7 @@ class LBApplicationBootstrap
     }
 
     private function initSchemaRESTRequest() {
-        \Domain\Request\Params\SchemaParams::injectSchemaService($this->container->get(SchemaService::class));
+        \Application\REST\Request\Params\SchemaParams::injectSchemaService($this->container->get(SchemaService::class));
     }
 }
 

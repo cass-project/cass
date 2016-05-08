@@ -6,7 +6,7 @@ use function DI\factory;
 use function DI\get;
 
 use Application\Service\BundleService;
-use SchemaService;
+use Application\REST\Service\SchemaService;
 
 return [
     'php-di' => [

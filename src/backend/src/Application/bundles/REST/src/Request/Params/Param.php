@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Request\Params;
+namespace Application\REST\Request\Params;
 
 class ParamIsRequiredException extends \Exception {}
 

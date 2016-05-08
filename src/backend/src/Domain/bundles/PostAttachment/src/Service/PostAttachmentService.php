@@ -3,7 +3,7 @@ namespace Domain\PostAttachment\Service;
 
 use Application\Util\FileNameFilter;
 use Domain\Post\Entity\Post;
-use Application\PostAttachment\Entity\PostAttachment;
+use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\PostAttachment\Entity\PostAttachment\AttachmentType;
 use Domain\PostAttachment\Entity\PostAttachment\File\GenericFileAttachmentType;
 use Domain\PostAttachment\Entity\PostAttachment\File\ImageAttachmentType;
@@ -13,7 +13,6 @@ use Domain\PostAttachment\Entity\PostAttachment\Link\GenericLinkAttachmentType;
 use Domain\PostAttachment\Exception\FileTooBigException;
 use Domain\PostAttachment\Exception\FileTooSmallException;
 use Domain\PostAttachment\Repository\PostAttachmentRepository;
-use Domain\PostAttachment\Service\AttachmentTypeExtension;
 
 class PostAttachmentService
 {

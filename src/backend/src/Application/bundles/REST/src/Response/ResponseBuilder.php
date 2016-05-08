@@ -1,8 +1,6 @@
 <?php
 namespace Application\REST\Response;
 
-use Application\Common\REST\bool;
-use Application\Common\REST\int;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class ResponseBuilder

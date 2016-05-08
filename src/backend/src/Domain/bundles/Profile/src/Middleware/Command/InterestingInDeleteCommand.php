@@ -2,7 +2,6 @@
 namespace Domain\Profile\Middleware\Command;
 
 use Domain\Profile\Exception\NotOwnProfileException;
-use Domain\Profile\Middleware\Request\InterestingInRequest;
 use Psr\Http\Message\ServerRequestInterface;
 
 class InterestingInDeleteCommand extends Command

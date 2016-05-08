@@ -2,7 +2,6 @@
 namespace Domain\Profile\Middleware\Command;
 
 use Domain\Profile\Exception\NotOwnProfileException;
-use Domain\Profile\Middleware\Request\ExpertInRequest;
 use Psr\Http\Message\ServerRequestInterface;
 
 class ExpertInDeleteCommand extends Command

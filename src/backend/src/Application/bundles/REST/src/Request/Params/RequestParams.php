@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Request\Params;
+namespace Application\REST\Request\Params;
 
 use Psr\Http\Message\ServerRequestInterface;
 

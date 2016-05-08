@@ -11,9 +11,9 @@ class WebmAttachmentType implements FileAttachmentType, AttachmentTypeDetector
     }
 
     public static function detect(string $tmpFile) {
-        $finfoMime = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $tmpFile);
+        $fInfoMIME = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $tmpFile);
 
-        return in_array($finfoMime, ['audio/webm', 'video/webm']);
+        return in_array($fInfoMIME, ['audio/webm', 'video/webm']);
     }
 
     public function getMinFileSizeBytes() {

@@ -184,7 +184,7 @@ class Profile implements JSONSerializable
         return $this;
     }
 
-    public function getAccount(): \Domain\Account\Entity\Account
+    public function getAccount(): Account
     {
         return $this->account;
     }

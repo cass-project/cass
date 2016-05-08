@@ -23,10 +23,7 @@ class CollectionService
     }
 
     public function create(CollectionCreateParameters $collectionCreateParameters) {
-        /**
-         * @author: hck
-         * @DOTO: Добавить возможность указывать любой профиль
-         */
+        // TODO: Добавить возможность указывать любой профиль
         return $this->collectionRepository->create($this->currentAccountService->getCurrentProfile(), $collectionCreateParameters);
     }
 

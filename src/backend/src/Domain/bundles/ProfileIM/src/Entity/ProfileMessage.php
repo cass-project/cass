@@ -3,9 +3,7 @@ namespace Domain\ProfileIM\Entity;
 
 use Application\Util\JSONSerializable;
 use Domain\Profile\Entity\Profile;
-use \Datetime;
-
-class MessageIsNotReadException extends \Exception {}
+use Domain\ProfileIM\Exception\MessageIsNotReadException;
 
 /**
  * @Entity(repositoryClass="Domain\ProfileIM\Repository\ProfileMessageRepository")
@@ -66,6 +64,21 @@ class ProfileMessage implements JSONSerializable
         $this->dateCreated = new \DateTime();
     }
 
+    public function toJSON()
+    {
+        return [
+            'id' => $this->id,
+            'source_profile_id' => $this->getSourceProfile()->getId(),
+            'target_profile_id' => $this->getTargetProfile()->getId(),
+            'date_created' => $this->getDateCreated()->format('Y-m-d H:i:s'),
+            'read_status' => [
+                'is_read' => $this->isRead,
+                'date_read' => $this->isRead ? $this->getDateRead()->format('Y-m-d H:i:s') : NULL
+            ],
+            'content' => $this->getContent(),
+        ];
+    }
+
     public function isPersisted()
     {
         return $this->id !== null;
@@ -86,12 +99,12 @@ class ProfileMessage implements JSONSerializable
         return $this->targetProfile;
     }
 
-    public function getDateCreated(): DateTime
+    public function getDateCreated(): \DateTime
     {
         return $this->dateCreated;
     }
 
-    public function getDateRead(): DateTime
+    public function getDateRead(): \DateTime
     {
         if(! $this->isRead()) {
             throw new MessageIsNotReadException(sprintf('Message with id `%s` is not read', $this->getId()));
@@ -108,7 +121,7 @@ class ProfileMessage implements JSONSerializable
     public function setAsRead()
     {
         $this->isRead = true;
-        $this->dateRead = new DateTime();
+        $this->dateRead = new \DateTime();
         return $this;
     }
 
@@ -129,21 +142,4 @@ class ProfileMessage implements JSONSerializable
         $this->content = $content;
         return $this;
     }
-
-    public function toJSON()
-    {
-        return [
-          'id'                => $this->id,
-          'source_profile_id' => $this->getSourceProfile()->getId(),
-          'target_profile_id' => $this->getTargetProfile()->getId(),
-          'date_created'      => $this->getDateCreated()->format('Y-m-d H:i:s'),
-          'read_status'       => [
-            'is_read'   => $this->isRead,
-            'date_read' => $this->isRead ? $this->getDateRead()
-                                                ->format('Y-m-d H:i:s') : NULL
-          ],
-          'content'      => $this->getContent(),
-        ];
-    }
-
 }

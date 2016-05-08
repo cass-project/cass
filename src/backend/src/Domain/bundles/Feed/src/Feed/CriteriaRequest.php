@@ -5,10 +5,10 @@ use Domain\Feed\Feed\Criteria;
 
 class CriteriaRequest
 {
-    /** @var \Domain\Feed\Feed\Criteria[] */
+    /** @var Criteria[] */
     private $criteria = [];
 
-    public function addCriteria(\Domain\Feed\Feed\Criteria $criteria) {
+    public function addCriteria($criteria) {
         $criteriaClassName = get_class($criteria);
 
         if($this->hasCriteria($criteriaClassName)) {
@@ -20,7 +20,7 @@ class CriteriaRequest
 
     public function hasCriteria(string $criteriaClassName) {
         return isset($this->criteria[$criteriaClassName])
-            && ($this->criteria[$criteriaClassName] instanceof \Domain\Feed\Feed\Criteria);
+            && ($this->criteria[$criteriaClassName] instanceof Criteria);
     }
 
     public function gracefullyWith(string $criteriaClassName, Callable $callback) {
@@ -31,7 +31,7 @@ class CriteriaRequest
 
     public function doWith(string $criteriaClassName, Callable $callback) {
         if(!$this->hasCriteria($criteriaClassName)) {
-            throw new \Exception(sprintf('Criteria `%s` is not availabe', $criteriaClassName));
+            throw new \Exception(sprintf('Criteria `%s` is not available', $criteriaClassName));
         }
 
         return $callback($this->criteria[$criteriaClassName]);

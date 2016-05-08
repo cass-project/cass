@@ -1,9 +1,8 @@
 <?php
 namespace Domain\Profile\Middleware\Request;
 
+use Application\REST\Request\Params\SchemaParams;
 use Application\REST\Service\JSONSchema;
-use Domain\Request\Params\SchemaParams;
-use Domain\Profile\Middleware\Parameters\ExpertInParameters;
 use Domain\Profile\Middleware\Parameters\InterestingInParameters;
 use Domain\Profile\ProfileBundle;
 

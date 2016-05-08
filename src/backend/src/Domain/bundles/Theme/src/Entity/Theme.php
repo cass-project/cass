@@ -123,13 +123,6 @@ class Theme implements SerialEntity, JSONSerializable
         return count($this->children) > 0;
     }
 
-    public function setHost($host): self
-    {
-        $this->host = $host;
-
-        return $this;
-    }
-    
     public function getPosition(): int
     {
         return $this->position;

@@ -2,7 +2,7 @@
 namespace Domain\Post\Middleware\Request;
 
 use Application\REST\Service\JSONSchema;
-use Domain\Request\Params\SchemaParams;
+use Application\REST\Request\Params\SchemaParams;
 use Domain\Post\Parameters\CreatePostParameters;
 use Domain\Post\Parameters\LinkParameters;
 use Domain\Post\PostBundle;

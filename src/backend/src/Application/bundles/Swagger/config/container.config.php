@@ -5,9 +5,9 @@ use function DI\object;
 use function DI\factory;
 use function DI\get;
 
-use Application\Common\Bootstrap\Bundle\BundleService;
 use Application\Swagger\Middleware\APIDocsMiddleware;
 use Application\Swagger\Service\APIDocsService;
+use Application\Service\BundleService;
 
 return [
     'php-di' => [

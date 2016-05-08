@@ -1,7 +1,6 @@
 <?php
 namespace Domain\Post\Middleware\Command;
 
-use Application\Exception\NotImplementedException;
 use Psr\Http\Message\ServerRequestInterface;
 
 class DeleteCommand extends Command

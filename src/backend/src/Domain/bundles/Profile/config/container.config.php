@@ -5,6 +5,7 @@ use function DI\object;
 use function DI\factory;
 use function DI\get;
 
+use DI\Container;
 use Domain\Auth\Service\CurrentAccountService;
 use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Profile\Console\Command\ProfileCard;
@@ -24,7 +25,7 @@ return [
         ProfileGreetingsRepository::class => factory(new DoctrineRepositoryFactory(ProfileGreetings::class)),
         ProfileService::class => object()->constructor(
             get(ProfileRepository::class),
-            factory(function(\DI\Container $container) {
+            factory(function(Container $container) {
                 return sprintf('%s/profile/profile-image', $container->get('constants.storage'));
             })
         ),

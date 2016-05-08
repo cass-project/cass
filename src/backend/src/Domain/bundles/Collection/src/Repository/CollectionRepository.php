@@ -137,9 +137,6 @@ class CollectionRepository extends EntityRepository
         $siblings->$insert($collectionEntity, $position);
     }
 
-    /**
-     * @return Collection[]
-     */
     public function getCollectionsWithParent(int $parentId = null)
     {
         if ($parentId) {
@@ -150,7 +147,11 @@ class CollectionRepository extends EntityRepository
             $queryBuilder = $this->createQueryBuilder('c')
                 ->andWhere('c.parent IS NULL');
         }
-        return $queryBuilder->getQuery()->getResult();
+
+        /** @var Collection[] $result */
+        $result = $queryBuilder->getQuery()->getResult();
+
+        return $result;
     }
 
     public function getCollectionEntity(int $id): Collection

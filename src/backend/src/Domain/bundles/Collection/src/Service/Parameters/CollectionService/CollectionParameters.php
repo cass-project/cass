@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Collection\Service\Parameters\CollectionService;
 
-use Domain\Request\Params\Param;
+use Application\REST\Request\Params\Param;
 
 interface CollectionParameters
 {

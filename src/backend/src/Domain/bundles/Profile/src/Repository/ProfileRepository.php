@@ -2,7 +2,6 @@
 namespace Domain\Profile\Repository;
 
 use Domain\Account\Entity\Account;
-use Application\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\ProfileGreetings;

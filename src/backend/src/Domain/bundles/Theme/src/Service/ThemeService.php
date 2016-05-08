@@ -35,13 +35,15 @@ class ThemeService
     {
         return $this->themeRepository->getAllThemes();
     }
-
-    /** @return Theme[] */
+    
     public function getThemesAsTree(int $parentId = null): array
     {
         $this->themeRepository->getAllThemes();
 
-        return $this->themeRepository->getThemesByParentId($parentId);
+        /** @var Theme[] $result */
+        $result = $this->themeRepository->getThemesByParentId($parentId);
+
+        return $result;
     }
 
     public function moveTheme(int $themeId, int $newParentThemeId = null, int $position = SerialManager::POSITION_LAST): Theme

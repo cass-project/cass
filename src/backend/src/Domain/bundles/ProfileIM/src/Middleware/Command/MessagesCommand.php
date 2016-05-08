@@ -20,7 +20,7 @@ class MessagesCommand extends Command
     $markAsRead      = (bool) ($qp['markAsRead'] ?? null);
 
     if($sourceProfileId == $targetProfileId) {
-      throw new SameTargetAndSourceException("souurce profile must not be same as target profile");
+      throw new SameTargetAndSourceException("Source profile must not be same as target profile");
     }
 
     $seek = new Seek(self::MAX_MESSAGE_LIMIT, $offset, $limit);

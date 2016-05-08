@@ -18,7 +18,8 @@ class ExpertInPutCommand extends Command
         $expertInRequest = new ExpertInRequest($request);
         $expertInParameters = $expertInRequest->getParameters();
 
-        $updatedProfile = $this->profileService->setExpertsInParameters($profileId, $expertInParameters);
-        return ['success'=> TRUE];
+        $this->profileService->setExpertsInParameters($profileId, $expertInParameters);
+
+        return true;
     }
 }

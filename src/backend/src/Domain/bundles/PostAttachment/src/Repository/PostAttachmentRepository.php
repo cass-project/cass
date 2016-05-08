@@ -4,7 +4,6 @@ namespace Domain\PostAttachment\Repository;
 use Doctrine\ORM\EntityRepository;
 use Domain\Post\Entity\Post;
 use Domain\PostAttachment\Entity\PostAttachment;
-use PostAttachment\Repository\string;
 
 class PostAttachmentRepository extends EntityRepository
 {

@@ -5,7 +5,6 @@ use Domain\Auth\Formatter\SignInFormatter;
 use Application\REST\Response\GenericResponseBuilder;
 use Domain\Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Domain\Account\Exception\AccountNotFoundException;
-use Domain\Profile\Entity\Profile;
 use Psr\Http\Message\ServerRequestInterface;
 
 class SignInCommand extends Command

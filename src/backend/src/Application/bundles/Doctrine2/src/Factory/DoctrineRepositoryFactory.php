@@ -1,7 +1,6 @@
 <?php
 namespace Application\Doctrine2\Factory;
 
-use Application\Common\Factory\string;
 use DI\Container;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;

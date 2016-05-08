@@ -2,7 +2,7 @@
 namespace Domain\Collection\Middleware\Request;
 
 use Domain\Collection\Service\Parameters\CollectionService\CollectionMoveParameters;
-use Domain\Request\Params\RequestParams;
+use Application\REST\Request\Params\RequestParams;
 use Psr\Http\Message\ServerRequestInterface;
 
 class CollectionMoveRequest extends RequestParams

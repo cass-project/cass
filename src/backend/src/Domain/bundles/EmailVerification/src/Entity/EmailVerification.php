@@ -1,15 +1,14 @@
 <?php
 namespace Domain\EmailVerification\Entity;
 
-use Domain\Account\Entity\Account;
 use Application\Util\JSONSerializable;
-use DateTime;
+use Domain\Account\Entity\Account;
 
 /**
  * @Entity(repositoryClass="Domain\EmailVerification\Repository\EmailVerificationRepository")
  * @Table(name="email_verification")
  */
-class EmailVerification /* implements JSONSerializable */
+class EmailVerification implements JSONSerializable
 {
     /**
      * @Column(type="integer")
@@ -28,7 +27,7 @@ class EmailVerification /* implements JSONSerializable */
 
     /**
      * @Column(type="datetime", name="date_requested")
-     * @var DateTime
+     * @var \DateTime
      */
     private $dateRequested;
 
@@ -46,7 +45,7 @@ class EmailVerification /* implements JSONSerializable */
 
     /**
      * @Column(type="datetime", name="date_confirmed")
-     * @var DateTime
+     * @var \DateTime
      */
     private $dateConfirmation;
 
@@ -54,6 +53,25 @@ class EmailVerification /* implements JSONSerializable */
         $this->forAccount = $forAccount;
         $this->dateRequested = new \DateTime();
     }
+
+    public function toJSON(): array {
+        $result = [
+            'id' => $this->getId(),
+            'for_account' => [
+                'id' => $this->getForAccount()->getId()
+            ],
+            'date_requested' => $this->getDateRequested()->format(\DateTime::RFC2822),
+            'token' => $this->getToken(),
+            'is_confirmed' => $this->isConfirmed(),
+        ];
+
+        if($this->isConfirmed()) {
+            $result['date_confirmed'] = $this->getDateConfirmed()->format(\DateTime::RFC2822);
+        }
+
+        return $result;
+    }
+
 
     public function getId(): int {
         return $this->id;
@@ -67,8 +85,12 @@ class EmailVerification /* implements JSONSerializable */
         return $this->forAccount;
     }
 
-    public function getDateRequested(): DateTime {
+    public function getDateRequested(): \DateTime {
         return $this->dateRequested;
+    }
+
+    public function getDateConfirmed(): \DateTime {
+        return $this->dateConfirmation;
     }
 
     public function getToken(): string {
@@ -85,7 +107,7 @@ class EmailVerification /* implements JSONSerializable */
     }
 
     public function confirm() {
-        $this->dateConfirmation = new DateTime();
+        $this->dateConfirmation = new \DateTime();
         $this->isConfirmed = true;
     }
 }

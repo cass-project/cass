@@ -6,7 +6,7 @@ use Application\Exception\BadCommandCallException;
 use Application\Exception\CommandNotFoundException;
 use Application\Exception\PermissionsDeniedException;
 use Application\REST\Response\GenericResponseBuilder;
-use Domain\Request\Params\InvalidJSONSchema;
+use Application\REST\Request\Params\InvalidJSONSchema;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Expressive\Container\Exception\NotFoundException;

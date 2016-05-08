@@ -1,8 +1,6 @@
 <?php
 namespace Application\Util;
 
-use Application\Common\Util\int;
-
 class GenerateRandomString
 {
     static public function gen(int $length = 10) {

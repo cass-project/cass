@@ -28,11 +28,13 @@ class ProfileIMService
     {
         return $this->profileMessageRepository->createMessage($message);
     }
-
-    /** @return ProfileMessage[] */
+    
     public function getMessages(int $sourceProfileId, int $targetProfileId, Seek $seek): array
     {
-        return $this->profileMessageRepository->getMessages($sourceProfileId, $targetProfileId, $seek);
+        /** @var ProfileMessage[] $result */
+        $result = $this->profileMessageRepository->getMessages($sourceProfileId, $targetProfileId, $seek);;
+
+        return $result;
     }
 
     public function markMessagesAsRead(array $messages)

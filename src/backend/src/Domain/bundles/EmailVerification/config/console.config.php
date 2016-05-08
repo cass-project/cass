@@ -1,13 +1,13 @@
 <?php
 namespace Domain\EmailVerification;
 
-use Domain\EmailVerification\Console\Command\AQMPSendMail;
+use Domain\EmailVerification\Console\Command\AMQPSendMail;
 
 return [
     'console' => [
         'commands' => [
-            'AQMP' => [
-                AQMPSendMail::class
+            'AMQP' => [
+                AMQPSendMail::class
             ]
         ]
     ]

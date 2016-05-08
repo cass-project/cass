@@ -4,8 +4,8 @@ namespace Domain\Collection\Middleware\Request;
 use Domain\Collection\CollectionBundle;
 use Domain\Collection\Service\Parameters\CollectionService\CollectionUpdateParameters;
 use Application\REST\Service\JSONSchema;
-use Domain\Request\Params\Param;
-use Domain\Request\Params\SchemaParams;
+use Application\REST\Request\Params\Param;
+use Application\REST\Request\Params\SchemaParams;
 
 class CollectionUpdateRequest extends SchemaParams
 {
