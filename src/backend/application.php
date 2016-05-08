@@ -1,15 +1,15 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-use Application\Common\Bootstrap\Bundle\Bundle;
-use Application\Common\Bootstrap\Bundle\BundleService;
-use Application\Common\Bootstrap\Scripts\RouteSetupScript;
-use Application\Common\Bootstrap\Scripts\ReadAppConfigScript;
+use Application\Bundle\Bundle;
+use Application\Service\BundleService;
+use Application\Bootstrap\Scripts\RouteSetupScript;
+use Application\Bootstrap\Scripts\ReadAppConfigScript;
 use Application\Common\Service\SchemaService;
-use Application\Common\Service\SharedConfigService;
-use Application\Auth\Middleware\ProtectedMiddleware;
+use Application\Service\ConfigService;
+use Domain\Auth\Middleware\ProtectedMiddleware;
 use Application\Frontline\Service\FrontlineService;
-use Application\ProfileIM\Middleware\ProfileIMMiddleware;
+use Domain\ProfileIM\Middleware\ProfileIMMiddleware;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Expressive\Application;
 
@@ -18,7 +18,7 @@ class LBApplicationBootstrap
     /** @var Application */
     private $app;
 
-    /** @var SharedConfigService */
+    /** @var \Application\Service\ConfigService */
     private $config;
 
     /** @var LBAppConstants */
@@ -42,7 +42,7 @@ class LBApplicationBootstrap
 
     public function run() {
         $router = new \Zend\Expressive\Router\FastRouteRouter();
-        $errorHandler = new \Application\Common\Bootstrap\ErrorHandler();
+        $errorHandler = new \Application\Bootstrap\ErrorHandler();
         $emitter = new \Zend\Expressive\Emitter\EmitterStack();
         $emitter->push(new SapiEmitter());
 
@@ -61,9 +61,9 @@ class LBApplicationBootstrap
         return $this->container;
     }
 
-    public function getAppConfig(): SharedConfigService
+    public function getAppConfig(): ConfigService
     {
-        return $this->container->get(SharedConfigService::class);
+        return $this->container->get(ConfigService::class);
     }
 
     private function initConstants() {
@@ -123,7 +123,7 @@ class LBApplicationBootstrap
     }
 
     private function initAppConfig() {
-        $this->config = new SharedConfigService();
+        $this->config = new ConfigService();
 
         $script = new ReadAppConfigScript($this->paths->backend());
         $script($this->config, $this->bundles->getBundles());
@@ -135,7 +135,7 @@ class LBApplicationBootstrap
         $containerBuilder->addDefinitions($this->config->get('php-di'));
         $containerBuilder->addDefinitions([
             BundleService::class => $this->bundles,
-            SharedConfigService::class => $this->config,
+            ConfigService::class => $this->config,
         ]);
         $containerBuilder->addDefinitions([
             'constants.backend' => $this->paths->backend(),
@@ -153,7 +153,7 @@ class LBApplicationBootstrap
         $frontlineService = $container->get(FrontlineService::class);
 
         foreach($this->bundles->getBundles() as $bundle) {
-            if($bundle instanceof \Application\Common\Bootstrap\Bundle\FrontlineBundleInjectable) {
+            if($bundle instanceof \Application\Frontline\FrontlineBundleInjectable) {
                 $bundle->initFrontline($container, $frontlineService);
             }
         }

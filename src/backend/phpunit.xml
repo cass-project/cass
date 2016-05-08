@@ -4,7 +4,7 @@
             <directory>bundles/Application\Common/src/Tests</directory>
         </testsuite>
         <testsuite name="theme">
-            <directory>bundles/Application\Theme/src/Tests</directory>
+            <directory>bundles/Domain\Theme/src/Tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

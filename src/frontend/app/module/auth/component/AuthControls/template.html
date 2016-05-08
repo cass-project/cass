@@ -2,13 +2,13 @@
   <div *ngIf="! authService.isSignedIn()">
     <ul class="nav navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/Application\Auth/SignUp']">
+        <a class="nav-link" [routerLink]="['/Domain\Auth/SignUp']">
           <i class="fa fa-user-plus"></i>
           <span>Sign Up</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/Application\Auth/SignIn']">
+        <a class="nav-link" [routerLink]="['/Domain\Auth/SignIn']">
           <i class="fa fa-sign-in"></i>
           <span>Sign In</span>
         </a>
@@ -18,7 +18,7 @@
   <div *ngIf="authService.isSignedIn()">
     <ul class="nav navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/Application\Auth/Logout']">
+        <a class="nav-link" [routerLink]="['/Domain\Auth/Logout']">
           <i class="fa fa-sign-out"></i>
           <span>Log Out</span>
         </a>

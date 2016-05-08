@@ -2,7 +2,6 @@
 namespace Application\Common\REST;
 
 use Psr\Http\Message\ResponseInterface;
-use Zend\Diactoros\Stream;
 
 abstract class RESTResponseBuilder
 {

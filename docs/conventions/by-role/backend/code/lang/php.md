@@ -21,7 +21,7 @@
 - Комментарии нежелательны. В вашем коде не должно быть комментариев.
 - Типизация переменных (для IDE) выполняйте в той же строчке, что и сам код:
 
-    `$sharedConfigService = $container->get(SharedConfigService::class); /** @var SharedConfigService $sharedConfigService */`
+    `$sharedConfigService = $container->get(ConfigService::class); /** @var ConfigService $sharedConfigService */`
 - Типизация свойств в классах выполняйте стандартно, в несколько строчек:
     /**
      * @var ContainerInterface

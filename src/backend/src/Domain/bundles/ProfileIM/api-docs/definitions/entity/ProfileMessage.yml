@@ -1,0 +1,29 @@
+ProfileIM_Entity_ProfileMessage:
+  type: object
+  description:
+    Сообщение, переданное с помощью Domain\ProfileIM
+  required:
+    - id
+    - date_created
+    - source_profile_id
+    - target_profile_id
+    - read_status
+    - content
+  properties:
+    id:
+      type: number
+      description: ID сообщения
+    date_created:
+      type: string
+      description: Дата создания сообщения
+    source_profile_id:
+      type: number
+      description: ID профиля, отправившего это сообщение
+    target_profile_id:
+      type: number
+      description: ID профиля, которому отправленно это сообщение
+    read_status:
+      $ref: '#/definitions/ProfileIM_Definitions_ProfileMessageReadStatus'
+    content:
+      type: string
+      description: Текст сообщения

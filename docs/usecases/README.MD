@@ -15,4 +15,4 @@ ATTACHED
 Неназначенные юзекейсы
 ----------------------
 
-- UC-0001 Application\Auth
+- UC-0001 Domain\Auth

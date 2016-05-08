@@ -1,8 +1,8 @@
 <?php
 namespace Application\Common\Factory;
 
-use Application\Common\Bootstrap\Bundle\BundleService;
-use Application\Common\Service\SharedConfigService;
+use Application\Service\BundleService;
+use Application\Service\ConfigService;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
@@ -11,7 +11,7 @@ class DoctrineEntityManagerFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $bundleService =  $container->get(BundleService::class); /** @var BundleService $bundleService */
+        $bundleService =  $container->get(BundleService::class); /** @var \Application\Service\BundleService $bundleService */
         $entitySourceDirs = [];
 
         foreach($bundleService->getBundles() as $bundle ){
@@ -22,8 +22,7 @@ class DoctrineEntityManagerFactory
             }
         }
 
-        $sharedConfigService = $container->get(SharedConfigService::class); /** @var SharedConfigService $sharedConfigService */
-        $config = $sharedConfigService->get('doctrine2');
+        $config = $container->get('config.doctrine2');
         $doctrineConfig = Setup::createAnnotationMetadataConfiguration($entitySourceDirs, true);
 
         return EntityManager::create($config['connection_options'], $doctrineConfig);

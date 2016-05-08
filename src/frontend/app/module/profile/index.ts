@@ -55,7 +55,7 @@ export class ProfileComponent
     constructor(private router: Router
     ) {
         if(! AuthService.isSignedIn()) {
-            router.navigate(['Application\Auth']);
+            router.navigate(['Domain\Auth']);
         }
     }
 }

@@ -1,14 +1,14 @@
 <?php
 namespace Application\Swagger\Service;
 
-use Application\Common\Bootstrap\Bundle\BundleService;
+use Application\Service\BundleService;
 use Application\Swagger\APIDocs\APIDocsBuilder;
 use Application\Swagger\APIDocs\APIDocsBuilderRequest;
 
 class APIDocsService
 {
     /**
-     * @var BundleService
+     * @var \Application\Service\BundleService
      */
     private $bundlesService;
 

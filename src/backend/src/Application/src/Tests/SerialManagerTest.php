@@ -1,8 +1,8 @@
 <?php
 namespace Application\Tests;
 
-use Application\Common\Tools\SerialManager\SerialEntity;
-use Application\Common\Tools\SerialManager\SerialManager;
+use Application\Util\SerialManager\SerialEntity;
+use Application\Util\SerialManager\SerialManager;
 
 /**
  * @backupGlobals disabled

@@ -2,9 +2,7 @@
 /** @see https://xtreamwayz.com/blog/2016-02-07-zend-expressive-console-cli-commands */
 /** Example: php console profile:card 1 */
 
-use Application\Common\Bootstrap\Bundle\BundleService;
-use Application\Common\CommonBundle;
-use Application\Common\Service\SharedConfigService;
+use Interop\Container\ContainerInterface;
 use Symfony\Component\Console\Application as ConsoleApplication;
 
 if(php_sapi_name() !== 'cli') {
@@ -23,7 +21,7 @@ $appConfig = $application->getAppConfig();
 $consoleApplication = new ConsoleApplication('CASS Console', 'dev');
 $consoleCommands = $appConfig->get('console')['commands'];
 
-function addCommands(ConsoleApplication $application, \Interop\Container\ContainerInterface $appContainer, array $commands) {
+function addCommands(ConsoleApplication $application, ContainerInterface $appContainer, array $commands) {
     foreach($commands as $input) {
         if(is_array($input)) {
             addCommands($application, $appContainer, $input);

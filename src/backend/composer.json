@@ -1,4 +1,9 @@
 {
+  "autoload": {
+    "psr-4": {
+      "Application\\": "src/Application/src"
+    }
+  },
   "require": {
     "robmorgan/phinx": "^0.5.1",
     "zendframework/zend-expressive": "^0.5.3",
@@ -22,6 +27,7 @@
     "php-amqplib/php-amqplib": "2.5.*",
     "symfony/console": "^3.0",
     "phpunit/phpunit": "^5.3",
-    "symfony/validator": "^3.0"
+    "symfony/validator": "^3.0",
+    "pom86/php-amqplib": "^2.5"
   }
 }

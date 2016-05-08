@@ -1,7 +1,7 @@
 <?php
 namespace Application\Common;
 
-use Application\Common\Bootstrap\Bundle\GenericBundle;
+use Application\Bundle\GenericBundle;
 
 class CommonBundle extends GenericBundle
 {

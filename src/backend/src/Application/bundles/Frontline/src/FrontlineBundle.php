@@ -1,7 +1,7 @@
 <?php
 namespace Application\Frontline;
 
-use Application\Common\Bootstrap\Bundle\GenericBundle;
+use Application\Bundle\GenericBundle;
 
 class FrontlineBundle extends GenericBundle
 {
