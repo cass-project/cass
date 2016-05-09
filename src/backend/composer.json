@@ -19,13 +19,15 @@
       "Domain\\PostAttachment\\": "src/Domain/bundles/PostAttachment/src",
       "Domain\\Profile\\": "src/Domain/bundles/Profile/src",
       "Domain\\ProfileIM\\": "src/Domain/bundles/ProfileIM/src",
-      "Domain\\Theme\\": "src/Domain/bundles/Theme/src"
+      "Domain\\Theme\\": "src/Domain/bundles/Theme/src",
+      "Domain\\Community\\": "src/Domain/bundles/Community/src"
     }
   },
   "require": {
     "robmorgan/phinx": "^0.5.1",
     "zendframework/zend-expressive": "1.0.0",
     "zendframework/zend-expressive-fastroute": "^1.0",
+    "zendframework/zend-expressive-router": "^1.2",
     "doctrine/orm": "^2.5",
     "league/oauth2-client": "^1.2",
     "anahkiasen/underscore-php": "^2.0",
@@ -48,6 +50,6 @@
     "symfony/validator": "^3.0",
     "react/http": "^0.5@dev",
     "phly/react2psr7": "^0.1.1",
-    "zendframework/zend-expressive-router": "^1.2"
+    "zendframework/zend-servicemanager": "^3.0"
   }
 }

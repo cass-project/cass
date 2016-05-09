@@ -7,7 +7,7 @@ if(php_sapi_name() !== 'cli') {
 }
 
 /** @var \Zend\Expressive\Application $app */
-$app = require __DIR__.'/bootstrap.php';
+$app = require __DIR__.'/bootstrap/bootstrap.php';
 
 /** @var  Symfony\Component\Console\Application $consoleApp */
 $consoleApp = $app->getContainer()->get(Symfony\Component\Console\Application::class);

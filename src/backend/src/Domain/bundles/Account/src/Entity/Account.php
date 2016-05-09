@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Account\Entity;
 
-use Util\IdTrait;
+use Application\Util\IdTrait;
 use Application\Util\JSONSerializable;
 use Doctrine\ORM\PersistentCollection;
 use Domain\Profile\Entity\Profile;

@@ -28,42 +28,37 @@ class ProfileService
     /** @var string */
     private $profileStorageDir;
 
-    public function __construct(ProfileRepository $profileRepository, string $profileStorageDir)
-    {
+    public function __construct(ProfileRepository $profileRepository, string $profileStorageDir) {
         $this->profileRepository = $profileRepository;
         $this->profileStorageDir = $profileStorageDir;
     }
 
-    public function getProfileById(int $profileId): Profile
-    {
+    public function getProfileById(int $profileId): Profile {
         return $this->profileRepository->getProfileById($profileId);
     }
 
-    public function updatePersonalData(int $profileId, EditPersonalParameters $editPersonalParameters)
-    {
+    public function updatePersonalData(int $profileId, EditPersonalParameters $editPersonalParameters) {
         $profile = $this->getProfileById($profileId);
         $profile->getProfileGreetings()
             ->setGreetingsMethod($editPersonalParameters->getGreetingsType())
             ->setFirstName($editPersonalParameters->getFirstName())
             ->setLastName($editPersonalParameters->getLastName())
             ->setMiddleName($editPersonalParameters->getMiddleName())
-            ->setNickName($editPersonalParameters->getNickName())
-        ;
+            ->setNickName($editPersonalParameters->getNickName());
 
         $this->profileRepository->updateProfile($profile);
 
         return true;
     }
 
-    public function createProfileForAccount(Account $account): Profile
-    {
+    public function createProfileForAccount(Account $account): Profile {
         if ($account->getProfiles()->count() >= self::MAX_PROFILES_PER_ACCOUNT) {
             throw new MaxProfilesReachedException(sprintf('You can only have %d profiles per account', self::MAX_PROFILES_PER_ACCOUNT));
         }
 
         $account->getProfiles()->add($profile = new Profile($account));
 
-        array_map(function(Profile $profile) {
+        array_map(function (Profile $profile) {
             $profile->setIsCurrent(false);
         }, $account->getProfiles()->toArray());
 
@@ -74,45 +69,40 @@ class ProfileService
         return $this->profileRepository->createProfile($profile);
     }
 
-    public function deleteProfile(int $profileId, int $currentAccountId)
-    {
+    public function deleteProfile(int $profileId, int $currentAccountId) {
         $profile = $this->getProfileById($profileId);
         $account = $profile->getAccount();
 
-        if($account->getId() !== $currentAccountId) {
+        if ($account->getId() !== $currentAccountId) {
             throw new PermissionsDeniedException("You're not an owner of this profile");
         }
 
-        if($account->getProfiles()->count() === 1) {
+        if ($account->getProfiles()->count() === 1) {
             throw new LastProfileException('This is your last profile. Sorry you need at least one profile per account.');
         }
 
         $this->profileRepository->deleteProfile($profile);
     }
 
-    public function nameFL(int $profileId, string $firstName, string $lastName)
-    {
+    public function nameFL(int $profileId, string $firstName, string $lastName) {
         $this->profileRepository->nameFL($profileId, $firstName, $lastName);
         $this->profileRepository->setAsInitialized($profileId);
     }
 
-    public function nameLFM(int $profileId, string $lastName, string $firstName, string $middleName)
-    {
+    public function nameLFM(int $profileId, string $lastName, string $firstName, string $middleName) {
         $this->profileRepository->nameLFM($profileId, $lastName, $firstName, $middleName);
         $this->profileRepository->setAsInitialized($profileId);
     }
 
-    public function nameN(int $profileId, string $nickName)
-    {
+    public function nameN(int $profileId, string $nickName) {
         $this->profileRepository->nameN($profileId, $nickName);
         $this->profileRepository->setAsInitialized($profileId);
     }
 
-    public function switchTo(Account $account, int $profileId): Profile
-    {
+    public function switchTo(Account $account, int $profileId): Profile {
         $profile = $this->getProfileById($profileId);
 
-        if(!$account->getProfiles()->contains($profile)) {
+        if (!$account->getProfiles()->contains($profile)) {
             throw new PermissionsDeniedException("You're not an owner of this profile");
         }
 
@@ -121,11 +111,10 @@ class ProfileService
         return $profile;
     }
 
-    public function uploadImage(int $profileId, string $tmpFile, int $startX, int $startY, int $endX, int $endY): ProfileImage
-    {
+    public function uploadImage(int $profileId, string $tmpFile, int $startX, int $startY, int $endX, int $endY): ProfileImage {
         $profile = $this->getProfileById($profileId);
 
-        if(!$profile->isPersisted()) {
+        if (!$profile->isPersisted()) {
             throw new \Exception('Unable to upload image for new non-persisted profile');
         }
 
@@ -136,7 +125,7 @@ class ProfileService
         $currentImageWidth = $image->getWidth();
         $currentImageHeight = $image->getWidth();
 
-        if($currentImageWidth> ProfileImage::MIN_WIDTH) {
+        if ($currentImageWidth > ProfileImage::MIN_WIDTH) {
             $scale = ProfileImage::MAX_WIDTH / $currentImageWidth;
             $newWidth = $currentImageWidth * $scale;
             $newHeight = $currentImageHeight * $scale;
@@ -149,23 +138,22 @@ class ProfileService
             : $profile->getProfileImage()->getStoragePath();
 
         $imageFileName = sprintf('%s.png', GenerateRandomString::gen(12));
-        $targetDir = (string) $profile->getId();
+        $targetDir = (string)$profile->getId();
 
         $storagePath = sprintf('%s/%s/%s', $this->profileStorageDir, $targetDir, $imageFileName);
-        $publicPath =  sprintf('/public/storage/profile/profile-image/%d/%s', $targetDir, $imageFileName);
+        $publicPath = sprintf('/public/storage/profile/profile-image/%d/%s', $targetDir, $imageFileName);
 
         $image->save(sprintf('%s/%s', $this->profileStorageDir, $targetDir), $imageFileName, true, 'ffffff');
         $newProfileImage = $this->profileRepository->updateImage($profile->getId(), $storagePath, $publicPath);
 
-        if($oldProfileImage && file_exists($oldProfileImage)) {
+        if ($oldProfileImage && file_exists($oldProfileImage)) {
             unlink($oldProfileImage);
         }
 
         return $newProfileImage;
     }
 
-    private function validateCropPoints(ImageWorkshopLayer $image, int $startX, int $startY, int $endX, int $endY)
-    {
+    private function validateCropPoints(ImageWorkshopLayer $image, int $startX, int $startY, int $endX, int $endY) {
         if ($startX < 0 || $startY < 0) {
             throw new \OutOfBoundsException('startX/startY should be more than zero');
         }
@@ -185,40 +173,33 @@ class ProfileService
             throw new ImageTooSmallException(sprintf('Image height should me more than %s pixels', ProfileImage::MIN_HEIGHT));
         }
 
-        if($resultWidth !== $resultHeight) {
+        if ($resultWidth !== $resultHeight) {
             throw new ImageIsNotASquareException('Image should be a square');
         }
     }
-
-
-    public function setExpertsInParameters(int $profileId, ExpertInParameters $expertInParameters ): Profile
-    {
+    
+    public function setExpertsInParameters(int $profileId, ExpertInParameters $expertInParameters): Profile {
         return $this->profileRepository->setExpertsInParameters($profileId, $expertInParameters);
     }
 
-    public function mergeExpertsInParameters(int $profileId, ExpertInParameters $expertInParameters): Profile
-    {
+    public function mergeExpertsInParameters(int $profileId, ExpertInParameters $expertInParameters): Profile {
         return $this->profileRepository->mergeExpertsInParameters($profileId, $expertInParameters);
     }
 
-    public function setInterestingInParameters(int $profileId, InterestingInParameters $inParameters): Profile
-    {
-        return $this->profileRepository->setInterestingInParameters($profileId,$inParameters);
+    public function setInterestingInParameters(int $profileId, InterestingInParameters $inParameters): Profile {
+        return $this->profileRepository->setInterestingInParameters($profileId, $inParameters);
     }
 
-    public function mergeInterestingInParameters(int $profileId, InterestingInParameters $inParameters): Profile
-    {
+    public function mergeInterestingInParameters(int $profileId, InterestingInParameters $inParameters): Profile {
         return $this->profileRepository->mergeInterestingInParameters($profileId, $inParameters);
     }
 
 
-    public function deleteExpertsInParameters(int $profileId, array $expertInParameters): Profile
-    {
+    public function deleteExpertsInParameters(int $profileId, array $expertInParameters): Profile {
         return $this->profileRepository->deleteExpertsInParameters($profileId, $expertInParameters);
     }
 
-    public function deleteInterestingInParameters(int $profileId, array $interestingInParameters)
-    {
+    public function deleteInterestingInParameters(int $profileId, array $interestingInParameters) {
         return $this->profileRepository->deleteInterestingInParameters($profileId, $interestingInParameters);
     }
 

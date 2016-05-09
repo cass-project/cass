@@ -9,57 +9,51 @@ use Application\Util\IdTrait;
  */
 class OAuthAccount
 {
-        use IdTrait;
+    use IdTrait;
 
-        /**
-         * @ManyToOne(targetEntity="Domain\Account\Entity\Domain\Account",cascade={"persist"})
-         * @JoinColumn(name="account_id", referencedColumnName="id")
-         */
-        private $account;
+    /**
+     * @ManyToOne(targetEntity="Domain\Account\Entity\Domain\Account",cascade={"persist"})
+     * @JoinColumn(name="account_id", referencedColumnName="id")
+     */
+    private $account;
 
-        /**
-         * @Column(type="string")
-         * @var string
-         */
-        private $provider;
+    /**
+     * @Column(type="string")
+     * @var string
+     */
+    private $provider;
 
-        /**
-         * @Column(type="integer",name="provider_account_id")
-         * @var string
-         */
-        private $providerAccountId;
+    /**
+     * @Column(type="integer",name="provider_account_id")
+     * @var string
+     */
+    private $providerAccountId;
 
-        public function __construct(Account $account)
-        {
-                $this->account = $account;
-        }
+    public function __construct(Account $account) {
+        $this->account = $account;
+    }
 
-        public function getAccount(): Account
-        {
-                return $this->account;
-        }
+    public function getAccount(): Account {
+        return $this->account;
+    }
 
-        public function getProvider(): string
-        {
-                return $this->provider;
-        }
+    public function getProvider(): string {
+        return $this->provider;
+    }
 
-        public function setProvider(string $provider): self
-        {
-                $this->provider = $provider;
+    public function setProvider(string $provider): self {
+        $this->provider = $provider;
 
-                return $this;
-        }
+        return $this;
+    }
 
-        public function getProviderAccountId(): string
-        {
-                return $this->providerAccountId;
-        }
+    public function getProviderAccountId(): string {
+        return $this->providerAccountId;
+    }
 
-        public function setProviderAccountId(string $providerAccountId): self
-        {
-                $this->providerAccountId = $providerAccountId;
+    public function setProviderAccountId(string $providerAccountId): self {
+        $this->providerAccountId = $providerAccountId;
 
-                return $this;
-        }
+        return $this;
+    }
 }

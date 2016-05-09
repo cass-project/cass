@@ -3,6 +3,7 @@ namespace Application;
 
 return [
     'php-di' => [
+        'config.env' => 'development',
         'config.doctrine2' => [
             'connection_options' => [
                 'host'     => '127.0.0.1',
@@ -23,8 +24,8 @@ return [
             'pass' => 'guest'
         ],
         'config.console' => [
-            'title' => 'Console',
-            'version' => 'dec'
+            'title' => 'CASS Console',
+            'version' => 'dev'
         ]
     ]
 ];

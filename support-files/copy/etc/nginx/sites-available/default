@@ -18,8 +18,6 @@ server {
         try_files $uri /backend.php /backend.php =404;
 
         fastcgi_pass	php-fpm;
-        fastcgi_param   APPLICATION_ENV development;
-
         include fastcgi_params;
         fastcgi_split_path_info			^(.+?\.php)(/.*)?$;
         fastcgi_param	SCRIPT_FILENAME		$document_root$fastcgi_script_name;

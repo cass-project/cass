@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Theme\Entity;
 
+use Application\Util\IdTrait;
 use Application\Util\JSONSerializable;
 use Application\Util\SerialManager\SerialEntity;
 use Application\Util\SerialManager\SerialManager;
@@ -43,12 +44,20 @@ class Theme implements SerialEntity, JSONSerializable
      */
     private $description = '';
 
+    public function toJSON(): array {
+        return [
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null,
+            'position' => $this->getPosition()
+        ];
+    }
+
     public function getTitle(): string {
         return $this->title;
     }
 
-    public function setTitle(string $title): self
-    {
+    public function setTitle(string $title): self {
         $this->title = $title;
 
         return $this;
@@ -62,28 +71,24 @@ class Theme implements SerialEntity, JSONSerializable
         $this->description = $description;
     }
 
-    public function hasParent(): bool
-    {
+    public function hasParent(): bool {
         return $this->parent !== null;
     }
 
-    public function getParent(): Theme
-    {
-        if(!$this->hasParent()) {
+    public function getParent(): Theme {
+        if (!$this->hasParent()) {
             throw new \Exception('No parent available');
         }
 
         return $this->parent;
     }
 
-    public function getParentId()
-    {
+    public function getParentId() {
         return $this->parent === null ? null : $this->parent->getId();
     }
 
-    public function setParent(Theme $parent = null): self
-    {
-        if($parent && $this->isPersisted() && $parent->getId() === $this->getId()) {
+    public function setParent(Theme $parent = null): self {
+        if ($parent && $this->isPersisted() && $parent->getId() === $this->getId()) {
             throw new \Exception('Unable to setup parent');
         }
 
@@ -92,24 +97,20 @@ class Theme implements SerialEntity, JSONSerializable
         return $this;
     }
 
-    public function getChildren(): PersistentCollection
-    {
+    public function getChildren(): PersistentCollection {
         return $this->children;
     }
 
-    public function hasChildren(): bool
-    {
+    public function hasChildren(): bool {
         return count($this->children) > 0;
     }
 
-    public function getPosition(): int
-    {
+    public function getPosition(): int {
         return $this->position;
     }
 
-    public function setPosition(int $position): self
-    {
-        if($position <= 1) {
+    public function setPosition(int $position): self {
+        if ($position <= 1) {
             $position = 1;
         }
 
@@ -118,18 +119,7 @@ class Theme implements SerialEntity, JSONSerializable
         return $this;
     }
 
-    public function incrementPosition()
-    {
+    public function incrementPosition() {
         ++$this->position;
-    }
-
-    public function toJSON(): array
-    {
-        return [
-            'id' => $this->getId(),
-            'title' => $this->getTitle(),
-            'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null,
-            'position' => $this->getPosition()
-        ];
     }
 }

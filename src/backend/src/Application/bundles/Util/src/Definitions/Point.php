@@ -1,7 +1,6 @@
 <?php
 namespace Application\Util\Definitions;
 
-use Common\Util\Definitions\int;
 use Common\Util\Definitions\InvalidCoordException;
 
 class Point
