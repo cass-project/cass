@@ -41,6 +41,20 @@
     responses:
       403:
         $ref: '#/responses/Unauthorized'
+      422:
+        description:
+          Ошибка обработки входного файла (слишком большой, неправильный аспект ратио и.т.д..)
+        schema:
+          required:
+            - success
+            - error
+          properties:
+            success:
+              type: boolean
+              description: '=false'
+            error:
+              type: string
+              description: Сообщение об ошибке
       200:
         schema:
           required:

@@ -1,4 +1,4 @@
-w<?php
+<?php
 namespace Domain\Community\Parameters;
 
 class EditCommunityParameters

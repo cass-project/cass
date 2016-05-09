@@ -1,0 +1,19 @@
+"/protected/collection/{collectionId}/edit":
+  post:
+    tags:
+      - collection
+    description:
+      Редактировать данные указанной коллекции
+    parameters:
+      - name: collectionId
+        in: path
+        required: true
+        type: number
+        description:
+          ID коллекции
+      - name: body
+        in: body
+        required: true
+        description: JSON Request
+        schema:
+          $ref: '#/definitions/Collection_Update_Request'

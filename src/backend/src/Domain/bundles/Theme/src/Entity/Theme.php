@@ -68,8 +68,10 @@ class Theme implements SerialEntity, JSONSerializable
         return $this->description;
     }
 
-    public function setDescription(string $description) {
+    public function setDescription(string $description): self {
         $this->description = $description;
+
+        return $this;
     }
 
     public function hasParent(): bool {

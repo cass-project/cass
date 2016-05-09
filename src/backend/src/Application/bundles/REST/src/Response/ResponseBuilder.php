@@ -22,7 +22,7 @@ abstract class ResponseBuilder
         $this->response = $response;
     }
 
-    protected final function setStatus($status): self
+    public final function setStatus($status): self
     {
         $this->status = $status;
 

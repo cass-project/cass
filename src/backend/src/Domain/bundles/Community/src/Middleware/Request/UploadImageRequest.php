@@ -5,6 +5,7 @@ use Application\REST\Request\Params\RequestParamsInterface;
 use Application\Util\Definitions\Point;
 use Domain\Community\Parameters\UploadImageParameters;
 use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\UploadedFile;
 
 class UploadImageRequest implements RequestParamsInterface
 {
@@ -30,6 +31,10 @@ class UploadImageRequest implements RequestParamsInterface
             (int) $request->getAttribute('y2')
         );
 
-        return new UploadImageParameters($_FILES['file']['tmp_name'], $pointStart, $pointEnd);
+        /** @var UploadedFile $file */
+        $file = $request->getUploadedFiles()['file'];
+        $file->getStream()->getMetadata('uri');
+
+        return new UploadImageParameters($file->getStream()->getMetadata('uri'), $pointStart, $pointEnd);
     }
 }

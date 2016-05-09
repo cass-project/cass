@@ -1,6 +1,7 @@
 <?php
-namespace Community\Repository;
+namespace Domain\Community\Repository;
 
+use Application\Exception\EntityNotFoundException;
 use Domain\Community\Entity\Community;
 use Doctrine\ORM\EntityRepository;
 
@@ -17,6 +18,16 @@ class CommunityRepository extends EntityRepository
         $this->getEntityManager()->flush($community);
 
         return $community;
+    }
+
+    public function getCommunityById(int $communityId): Community {
+        $entity = $this->find($communityId);
+
+        if($entity === null) {
+            throw new EntityNotFoundException(sprintf('Community with ID `%s` not found', $entity));
+        }
+
+        return $entity;
     }
 
     public function deleteCommunity(Community $community) {

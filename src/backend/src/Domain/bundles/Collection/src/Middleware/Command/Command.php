@@ -9,10 +9,7 @@ abstract class Command
 {
     const COMMAND_CREATE = 'create';
     const COMMAND_DELETE = 'delete';
-    const COMMAND_LIST = 'list';
-    const COMMAND_TREE = 'tree';
-    const COMMAND_MOVE = 'move';
-    const COMMAND_UPDATE = 'update';
+    const COMMAND_EDIT = 'edit';
 
     /** @var CollectionService */
     private $collectionService;
@@ -40,24 +37,12 @@ abstract class Command
         switch($command) {
             default:
                 throw new CommandNotFoundException(sprintf("Command %s::%s not found", self::class, $command));
-
             case self::COMMAND_CREATE:
                 return new CreateCommand();
-
             case self::COMMAND_DELETE:
                 return new DeleteCommand();
-
-            case self::COMMAND_LIST:
-                return new ListCommand();
-
-            case self::COMMAND_TREE:
-                return new TreeCommand();
-
-            case self::COMMAND_MOVE:
-                return new MoveCommand();
-
-            case self::COMMAND_UPDATE:
-                return new UpdateCommand();
+            case self::COMMAND_EDIT:
+                return new EditCommand();
         }
     }
 
