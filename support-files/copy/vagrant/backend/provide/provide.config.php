@@ -2,8 +2,8 @@
 namespace Application;
 
 return [
-    'env' => 'development',
     'php-di' => [
+        'config.env' => 'development',
         'config.console' => [
             'title' => 'CASS Console',
             'version' => 'dev'
@@ -16,6 +16,7 @@ return [
         'config.doctrine2' => [
             'env.development' => [
                 'connection_options' => [
+                    'driver'   => 'pdo_mysql',
                     'host'     => '127.0.0.1',
                     'dbname'   => 'cass_development',
                     'user'     => 'root',
@@ -24,6 +25,7 @@ return [
             ],
             'env.test' => [
                 'connection_options' => [
+                    'driver'   => 'pdo_mysql',
                     'host'     => '127.0.0.1',
                     'dbname'   => 'cass_testing',
                     'user'     => 'root',
