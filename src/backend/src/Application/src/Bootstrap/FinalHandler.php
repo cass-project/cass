@@ -26,26 +26,31 @@ class FinalHandler
                 ->setStatusNotFound()
                 ->setError('404 Not Found')
             ;
-        }else if($error instanceof  \Exception){
+        }else if($error instanceof  \Exception) {
             $errorType = get_class($error);
 
             try {
                 throw $error;
-            }catch(EntityNotFoundException $e){
+            } catch (EntityNotFoundException $e) {
                 $responseBuilder->setStatusNotFound();
-            }catch(InvalidJSONSchema $e){
+            } catch (InvalidJSONSchema $e) {
                 $responseBuilder->setStatusBadRequest();
-            }catch(CommandNotFoundException $e) {
+            } catch (CommandNotFoundException $e) {
                 $responseBuilder->setStatusNotFound();
-            }catch(BadCommandCallException $e) {
+            } catch (BadCommandCallException $e) {
                 $responseBuilder->setStatusBadRequest();
-            }catch(NotFoundException $e){
+            } catch (NotFoundException $e) {
                 $responseBuilder->setStatusNotFound();
-            }catch(PermissionsDeniedException $e){
+            } catch (PermissionsDeniedException $e) {
                 $responseBuilder->setStatusNotAllowed();
             }
+        }else if($error instanceof \Error) {
+            throw $error;
+        }else if(is_int($error)) {
+            $errorType = "INT_CODE";
+            $responseBuilder->setError(sprintf("ErrorCode: %d", $error));
         }else{
-            throw new \Exception('Unknown error');
+            throw new \Exception(sprintf('Unknown error: %s', get_class($error)));
         }
 
         return $responseBuilder->setJson([

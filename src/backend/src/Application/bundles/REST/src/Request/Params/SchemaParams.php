@@ -21,7 +21,12 @@ abstract class SchemaParams implements RequestParamsInterface
     public function __construct(ServerRequestInterface $request)
     {
         $this->request = $request;
-        $this->data = json_decode($request->getBody());
+
+        if($request->getParsedBody()) {
+            $this->data = $request->getParsedBody();
+        }else{
+            $this->data = json_decode($request->getBody());
+        }
 
         $this->validateSchema();
     }

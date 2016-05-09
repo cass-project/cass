@@ -4,14 +4,19 @@ namespace {
 }
 
 namespace PhpUnitBootstrap {
+
+    use Application\PHPUnit\TestCase\MiddlewareTestCase;
+
     $app = (new \Application\Bootstrap\AppBuilder([
         new \Application\ApplicationBundle(),
         new \Domain\DomainBundle()
-    ]))->build();
-
+    ]))->disableSAPIEmitter()->build();
+    
+    $app->getEmitter();
+    
     /** @var \DI\Container $container */
     $container = $app->getContainer();
     $container->set('config.env', 'test');
 
-    \Application\PHPUnit\TestCase\MiddlewareTestCase::$app = $app;
+    MiddlewareTestCase::$app = $app;
 }

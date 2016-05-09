@@ -36,10 +36,10 @@ class ProtectedMiddleware implements MiddlewareInterface
                 $responseBuilder = new GenericResponseBuilder($response);
 
                 return $responseBuilder
-                    ->setStatusBadRequest()
+                    ->setStatusNotAllowed()
                     ->setError($e)
                     ->build()
-                    ;
+                ;
             }
         }
 

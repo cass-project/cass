@@ -42,6 +42,10 @@ class CurrentAccountService
         throw new \Exception('No current profile is available');
     }
 
+    public function emptyToken() {
+        $this->account = null;
+    }
+
     public function attempt(array $strategies)
     {
         /** @var Strategy[] $strategies */

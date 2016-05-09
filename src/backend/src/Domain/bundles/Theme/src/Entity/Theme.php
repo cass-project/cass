@@ -48,6 +48,7 @@ class Theme implements SerialEntity, JSONSerializable
         return [
             'id' => $this->getId(),
             'title' => $this->getTitle(),
+            'description' => $this->getDescription(),
             'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null,
             'position' => $this->getPosition()
         ];

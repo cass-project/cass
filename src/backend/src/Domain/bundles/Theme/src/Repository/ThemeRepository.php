@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Theme\Repository;
 
+use Application\Exception\EntityNotFoundException;
 use Application\Util\SerialManager\SerialManager;
 use Doctrine\ORM\EntityRepository;
 use Domain\Theme\Entity\Theme;
@@ -105,7 +106,13 @@ class ThemeRepository extends EntityRepository
 
     public function getThemeById(int $themeId): Theme
     {
-        return $this->find($themeId);
+        $result = $this->find($themeId);
+
+        if($result === null) {
+            throw new EntityNotFoundException(sprintf('Theme with ID `%s` not found', $themeId));
+        }
+
+        return $result;
     }
     
     public function getThemesByParentId(int $parentId = null): array

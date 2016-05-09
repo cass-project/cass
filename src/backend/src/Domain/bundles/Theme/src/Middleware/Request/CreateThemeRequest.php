@@ -21,4 +21,3 @@ class CreateThemeRequest extends SchemaParams
         return self::getSchemaService()->getSchema(ThemeBundle::class, './definitions/request/CreateThemeRequest.yml');
     }
 }
-

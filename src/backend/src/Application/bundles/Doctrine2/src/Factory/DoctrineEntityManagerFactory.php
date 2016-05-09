@@ -21,7 +21,8 @@ class DoctrineEntityManagerFactory
             }
         }
 
-        $config = $container->get('config.doctrine2');
+        $env = $container->get('config.env');
+        $config = $container->get('config.doctrine2')["env.{$env}"];
         $doctrineConfig = Setup::createAnnotationMetadataConfiguration($entitySourceDirs, true);
 
         return EntityManager::create($config['connection_options'], $doctrineConfig);

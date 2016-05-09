@@ -12,7 +12,7 @@ class OAuthAccount
     use IdTrait;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Account\Entity\Domain\Account",cascade={"persist"})
+     * @ManyToOne(targetEntity="Domain\Account\Entity\Account",cascade={"persist"})
      * @JoinColumn(name="account_id", referencedColumnName="id")
      */
     private $account;
