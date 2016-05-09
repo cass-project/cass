@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Theme\Tests;
 
-use Application\PHPUnit\Fixtures\DemoAccountFixture;
-use Application\PHPUnit\Fixtures\DemoProfileFixture;
+use Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Zend\Stratigility\Http\Response;
 

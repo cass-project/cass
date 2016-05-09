@@ -1,8 +1,9 @@
 <?php
-namespace Application\PHPUnit\Fixtures;
+namespace Domain\Profile\Tests\Fixtures;
 
 use Application\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
+use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\ProfileGreetings;
 use Domain\Profile\Entity\ProfileImage;

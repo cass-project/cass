@@ -1,5 +1,5 @@
 <?php
-namespace Application\PHPUnit\Fixtures;
+namespace Domain\Account\Tests\Fixtures;
 
 use Application\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
