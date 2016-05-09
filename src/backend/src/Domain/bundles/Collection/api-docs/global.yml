@@ -4,4 +4,4 @@ tags:
   - name: collection_profile
     description: Profile Collections API
   - name: collection_community
-    description: Domain\Community Collections API
+    description: Community Collections API
