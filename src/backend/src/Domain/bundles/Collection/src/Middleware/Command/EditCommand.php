@@ -4,9 +4,10 @@ namespace Domain\Collection\Middleware\Command;
 use Application\Exception\NotImplementedException;
 use Psr\Http\Message\ServerRequestInterface;
 
-class CreateCommand extends Command
+class EditCommand extends Command
 {
-    public function run(ServerRequestInterface $request) {
+    public function run(ServerRequestInterface $request)
+    {
         throw new NotImplementedException;
     }
 }

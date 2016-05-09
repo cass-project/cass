@@ -1,9 +1,9 @@
-"/protected/collection/update/{collectionId}":
+"/protected/collection/{collectionId}/edit":
   post:
     tags:
       - collection
     description:
-      Обновляет данные указанной коллекции
+      Редактировать данные указанной коллекции
     parameters:
       - name: collectionId
         in: path

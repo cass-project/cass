@@ -1,14 +1,10 @@
 Collection_Update_Request:
     type: object
     required:
-      - parent_id
       - theme_id
       - title
       - description
     properties:
-      parent_id:
-        type: number
-        description: ID родительской коллекции. Может содержать значение NULL.
       theme_id:
         type: number
         description: ID тематики. Может содержать значение NULL.

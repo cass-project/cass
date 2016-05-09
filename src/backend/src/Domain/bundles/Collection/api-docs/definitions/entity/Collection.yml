@@ -3,18 +3,15 @@ Collection_Entity_Collection:
   description: Коллекция.
   required:
     - id
-    - parent_id
-    - theme_id
     - title
     - description
-    - position
   properties:
     id:
       type: number
       description: ID
-    parent_id:
-      type: number
-      description: ID родительской коллекции. Может содержать значение NULL.
+    has_theme:
+      type: boolean
+      description: Возвращает TRUE, если коллекция привязана к какой-либо тематике
     theme_id:
       type: number
       description: Тематика, которой принадлежит данная коллекция. Может содержать значение NULL.
@@ -24,6 +21,3 @@ Collection_Entity_Collection:
     description:
       type: string
       description: Описание коллекции
-    position:
-      type: number
-      description: Позиция в текущем дереве

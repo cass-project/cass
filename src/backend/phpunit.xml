@@ -9,5 +9,8 @@
         <testsuite name="domain_community">
             <directory>src/Domain/bundles/Community/src/Tests</directory>
         </testsuite>
+        <testsuite name="domain_collection">
+            <directory>src/Domain/bundles/Community/src/Tests</directory>
+        </testsuite>
     </testsuites>
 </phpunit>

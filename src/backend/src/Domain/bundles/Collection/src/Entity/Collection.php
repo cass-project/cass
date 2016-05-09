@@ -3,46 +3,15 @@ namespace Domain\Collection\Entity;
 
 use Application\Util\IdTrait;
 use Application\Util\JSONSerializable;
-use Application\Util\SerialManager\SerialEntity;
 use Domain\Theme\Entity\Theme;
-use Doctrine\ORM\PersistentCollection;
-use Domain\Profile\Entity\Profile;
 
 /**
  * @Entity(repositoryClass="Domain\Collection\Repository\CollectionRepository")
  * @Table(name="collection")
  */
-class Collection implements SerialEntity, JSONSerializable
+class Collection implements JSONSerializable
 {
     use IdTrait;
-
-    /**
-     * @Column(type="integer")
-     * @Id
-     * @GeneratedValue
-     * @var int
-     */
-    private $id;
-
-    /**
-     * @OneToMany(targetEntity="Domain\Collection\Entity\Domain\Collection", mappedBy="parent")
-     * @var PersistentCollection
-     */
-    private $children = [];
-
-    /**
-     * @ManyToOne(targetEntity="Domain\Collection\Entity\Domain\Collection", inversedBy="children")
-     * @JoinColumn(name="parent_id", referencedColumnName="id")
-     * @var Theme|null
-     */
-    private $parent = null;
-
-    /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
-     * @JoinColumn(name="profile_id", referencedColumnName="id")
-     * @var Profile
-     */
-    private $profile;
 
     /**
      * @ManyToOne(targetEntity="Domain\Theme\Entity\Domain\Theme")
@@ -63,63 +32,14 @@ class Collection implements SerialEntity, JSONSerializable
      */
     private $description;
 
-    /**
-     * @Column(type="integer")
-     * @var int
-     */
-    private $position = 1;
-
-    public function __construct(Profile $profile) {
-        $this->profile = $profile;
-    }
-
     public function toJSON(): array {
         return [
             'id' => $this->getId(),
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
-            'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null,
+            'has_theme' => $this->hasTheme(),
             'theme_id' => $this->hasTheme() ? $this->getTheme()->getId() : null,
-            'position' => $this->getPosition()
         ];
-    }
-
-    public function hasParent(): bool {
-        return $this->parent !== null;
-    }
-
-    public function setParent($parent) : self {
-        $this->parent = $parent;
-        return $this;
-    }
-
-    public function getParentId() {
-        return $this->parent === null ? null : $this->parent->getId();
-    }
-
-    public function getParent(): Collection {
-        if (!$this->hasParent()) {
-            throw new \Exception('No parent available');
-        }
-
-        return $this->parent;
-    }
-
-    public function getChildren(): PersistentCollection {
-        return $this->children;
-    }
-
-    public function hasChildren(): bool {
-        return count($this->children) > 0;
-    }
-
-    public function getProfile(): Profile {
-        return $this->profile;
-    }
-
-    public function setProfile(Profile $profile): self {
-        $this->profile = $profile;
-        return $this;
     }
 
     public function getTheme(): Theme {
@@ -155,18 +75,5 @@ class Collection implements SerialEntity, JSONSerializable
     public function setDescription(string $description): self {
         $this->description = $description;
         return $this;
-    }
-
-    public function getPosition(): int {
-        return $this->position;
-    }
-
-    public function setPosition(int $position): self {
-        $this->position = $position;
-        return $this;
-    }
-
-    public function incrementPosition() {
-        ++$this->position;
     }
 }

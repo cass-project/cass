@@ -1,4 +1,4 @@
-"/protected/profile/{profileId}/collection/{collectionId}/delete":
+"/protected/collection/{collectionId}/delete":
   delete:
     tags:
       - collection
