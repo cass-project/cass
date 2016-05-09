@@ -11,7 +11,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Expressive\Container\Exception\NotFoundException;
 
-class ErrorHandler
+class FinalHandler
 {
     public function __invoke(Request $request, Response $response, $error)
     {
@@ -19,9 +19,14 @@ class ErrorHandler
         $responseBuilder->setError($error);
         $responseBuilder->setStatusBadRequest();
 
-        $errorType = 'unknown';
+        if($error === null) {
+            $errorType = '404';
 
-        if($error instanceof \Exception) {
+            $responseBuilder
+                ->setStatusNotFound()
+                ->setError('404 Not Found')
+            ;
+        }else if($error instanceof  \Exception){
             $errorType = get_class($error);
 
             try {
@@ -39,8 +44,12 @@ class ErrorHandler
             }catch(PermissionsDeniedException $e){
                 $responseBuilder->setStatusNotAllowed();
             }
+        }else{
+            throw new \Exception('Unknown error');
         }
 
-        return $responseBuilder->setJson(['errorType' => $errorType])->build();
+        return $responseBuilder->setJson([
+            'error_type' => $errorType
+        ])->build();
     }
 }

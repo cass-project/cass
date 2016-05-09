@@ -1,13 +1,13 @@
 <?php
-namespace Application\Bootstrap\Scripts;
+namespace Application\Bootstrap\Scripts\Bootstrap;
 
 use Application\Bootstrap\AppBuilder;
-use Application\Bootstrap\InitScript;
+use Application\Bootstrap\Scripts\BootstrapScript;
 use Application\Bundle\Bundle;
 use Application\Service\ConfigService;
 use Cocur\Chain\Chain;
 
-class ReadAppConfigScript implements InitScript
+class ReadAppConfigScript implements BootstrapScript
 {
     public function __invoke(AppBuilder $appBuilder) {
         $configService = new ConfigService();

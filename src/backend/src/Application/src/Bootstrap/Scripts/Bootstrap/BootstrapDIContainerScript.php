@@ -1,14 +1,14 @@
 <?php
-namespace Application\Bootstrap\Scripts;
+namespace Application\Bootstrap\Scripts\Bootstrap;
 
 use DI\Container;
 use DI\ContainerBuilder;
 use Application\Bootstrap\AppBuilder;
-use Application\Bootstrap\InitScript;
+use Application\Bootstrap\Scripts\BootstrapScript;
 use Application\Service\BundleService;
 use Application\Service\ConfigService;
 
-class InitDIContainerScript implements InitScript
+class BootstrapDIContainerScript implements BootstrapScript
 {
     public function __invoke(AppBuilder $appBuilder) {
         $containerBuilder = new ContainerBuilder();

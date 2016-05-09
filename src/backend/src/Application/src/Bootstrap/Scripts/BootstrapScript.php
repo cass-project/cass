@@ -1,9 +1,9 @@
 <?php
-namespace Application\Bootstrap;
+namespace Application\Bootstrap\Scripts;
 
 use Application\Bootstrap\AppBuilder;
 
-interface InitScript
+interface BootstrapScript
 {
     public function __invoke(AppBuilder $appBuilder);
 }

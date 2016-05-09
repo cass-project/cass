@@ -1,11 +1,12 @@
 <?php
 namespace Application\Bootstrap\Scripts\AppInit;
 
+use Application\Bootstrap\Scripts\AppInitScript;
 use Application\Bundle\Bundle;
 use Application\Service\BundleService;
 use Zend\Expressive\Application;
 
-class RoutesSetupScript implements AppInit
+class RoutesSetupScript implements AppInitScript
 {
     public function __invoke(Application $app) {
         $bundleService = $app->getContainer()->get(BundleService::class); /** @var BundleService $bundleService */

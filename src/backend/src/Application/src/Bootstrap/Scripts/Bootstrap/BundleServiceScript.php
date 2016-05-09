@@ -1,13 +1,13 @@
 <?php
-namespace Application\Bootstrap\Scripts;
+namespace Application\Bootstrap\Scripts\Bootstrap;
 
 use Application\Bootstrap\AppBuilder;
-use Application\Bootstrap\InitScript;
+use Application\Bootstrap\Scripts\BootstrapScript;
 use Application\Bundle\Bundle;
 use Application\Service\BundleService;
 use Cocur\Chain\Chain;
 
-class BundleServiceScript implements InitScript
+class BundleServiceScript implements BootstrapScript
 {
     public function __invoke(AppBuilder $appBuilder) {
         $bundleService = new BundleService();

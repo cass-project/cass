@@ -1,10 +1,11 @@
 <?php
 namespace Application\Bootstrap;
 
+use Application\Bootstrap\Scripts\AppInit\PipeMiddlewareScript;
 use Application\Bootstrap\Scripts\AppInit\RoutesSetupScript;
-use Application\Bootstrap\Scripts\BundleServiceScript;
-use Application\Bootstrap\Scripts\InitDIContainerScript;
-use Application\Bootstrap\Scripts\ReadAppConfigScript;
+use Application\Bootstrap\Scripts\Bootstrap\BundleServiceScript;
+use Application\Bootstrap\Scripts\Bootstrap\BootstrapDIContainerScript;
+use Application\Bootstrap\Scripts\Bootstrap\ReadAppConfigScript;
 use Application\Service\BundleService;
 use Application\Service\ConfigService;
 use DI\Container;
@@ -18,11 +19,12 @@ class AppBuilder
     const DEFAULT_INIT = [
         BundleServiceScript::class,
         ReadAppConfigScript::class,
-        InitDIContainerScript::class
+        BootstrapDIContainerScript::class
     ];
     
     const DEFAULT_INIT_APP = [
-        RoutesSetupScript::class
+        RoutesSetupScript::class,
+        PipeMiddlewareScript::class
     ];
 
     /** @var string[] */
@@ -79,7 +81,7 @@ class AppBuilder
 
     public function build(): Application {
         $router = new FastRouteRouter();
-        $errorHandler = new ErrorHandler();
+        $finalHandler = new FinalHandler();
         $emitter = new EmitterStack();
         $emitter->push(new SapiEmitter());
 
@@ -88,7 +90,7 @@ class AppBuilder
             $script($this);
         }
 
-        $app = new Application($router, $this->container, $errorHandler, $emitter);
+        $app = new Application($router, $this->container, $finalHandler);
 
         foreach ($this->initAppScripts as $initAppScriptClassName) {
             $script = new $initAppScriptClassName;
