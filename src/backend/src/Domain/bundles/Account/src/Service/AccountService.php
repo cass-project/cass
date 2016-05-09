@@ -46,6 +46,7 @@ class AccountService
     public function createOAuth2Account(string $email, string $provider, $providerAccountId): Account
     {
         $account = $this->createAccount($email, $this->generateRandomString(32));
+        $profile = $account->getProfiles()->first();
 
         $oauthAccount = new OAuthAccount($account);
         $oauthAccount->setProvider($provider);

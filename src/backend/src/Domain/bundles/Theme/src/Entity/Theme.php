@@ -12,13 +12,7 @@ use Doctrine\ORM\PersistentCollection;
  */
 class Theme implements SerialEntity, JSONSerializable
 {
-    /**
-     * @Id
-     * @GeneratedValue
-     * @Column(type="integer")
-     * @var int
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @OneToMany(targetEntity="Domain\Theme\Entity\Domain\Theme", mappedBy="parent")
@@ -48,21 +42,6 @@ class Theme implements SerialEntity, JSONSerializable
      * @var string
      */
     private $description = '';
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function hasId(): int
-    {
-        return $this->id !== null;
-    }
-
-    public function isNewEntity(): bool
-    {
-        return $this->hasId() === false;
-    }
 
     public function getTitle(): string {
         return $this->title;
@@ -104,7 +83,7 @@ class Theme implements SerialEntity, JSONSerializable
 
     public function setParent(Theme $parent = null): self
     {
-        if($parent && $this->hasId() && $parent->getId() === $this->getId()) {
+        if($parent && $this->isPersisted() && $parent->getId() === $this->getId()) {
             throw new \Exception('Unable to setup parent');
         }
 

@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 return (new \Application\Bootstrap\AppBuilder([
     new \Application\ApplicationBundle(),

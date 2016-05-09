@@ -1,237 +1,239 @@
 <?php
-namespace Domain\Profile\Entity;
-use Domain\Account\Entity\Account;
-use Application\Util\JSONSerializable;
+namespace Profile\Entity;
+use Account\Entity\Account;
+use Common\REST\JSONSerializable;
 
+use Common\Util\IdTrait;
 use \Doctrine\Common\Collections\ArrayCollection;
-use Domain\Theme\Entity\Theme;
+use Profile\Exception\UnknownGenderException;
+use Theme\Entity\Theme;
 
 /**
- * @Entity(repositoryClass="Domain\Profile\Repository\ProfileRepository")
+ * @Entity(repositoryClass="Profile\Repository\ProfileRepository")
  * @Table(name="profile")
  */
 class Profile implements JSONSerializable
 {
-    /**
-     * @Id
-     * @GeneratedValue
-     * @Column(type="integer")
-     * @var int
-     */
-    private $id;
+        const GENDER_MALE = 1;
+        const GENDER_FEMALE = 0;
 
-    /**
-     * @Column(type="boolean", name="is_initialized")
-     * @var bool
-     */
-    private $isInitialized = false;
+        use IdTrait;
 
-    /**
-     * @ManyToOne(targetEntity="Domain\Account\Entity\Domain\Account")
-     * @JoinColumn(name="account_id", referencedColumnName="id")
-     */
-    private $account;
+        /**
+         * @Column(type="integer")
+         * @var int
+         */
+        private $gender;
 
-    /**
-     * @var bool
-     * @Column(type="integer",name="is_current")
-     */
-    private $isCurrent = false;
+        /**
+         * @Column(type="boolean", name="is_initialized")
+         * @var bool
+         */
+        private $isInitialized = false;
 
-    /**
-     * @OneToOne(targetEntity="Domain\Profile\Entity\ProfileGreetings", mappedBy="profile", cascade={"persist", "remove"})
-     * @var ProfileGreetings
-     */
-    private $profileGreetings;
+        /**
+         * @ManyToOne(targetEntity="Account\Entity\Account")
+         * @JoinColumn(name="account_id", referencedColumnName="id")
+         */
+        private $account;
 
-    /**
-     * @OneToOne(targetEntity="Domain\Profile\Entity\ProfileImage", mappedBy="profile", cascade={"persist", "remove"})
-     * @var ProfileImage
-     */
-    private $profileImage;
+        /**
+         * @var bool
+         * @Column(type="integer",name="is_current")
+         */
+        private $isCurrent = false;
 
-    /**
-     * @ManyToMany(targetEntity="Domain\Theme\Entity\Domain\Theme")
-     * @JoinTable(name="profile_expert_in",
-     *      joinColumns={@JoinColumn(name="profile_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="theme_id", referencedColumnName="id", unique=true)}
-     *      )
-     */
-    private $expert_in = [];
+        /**
+         * @OneToOne(targetEntity="Profile\Entity\ProfileGreetings", mappedBy="profile", cascade={"persist", "remove"})
+         * @var ProfileGreetings
+         */
+        private $profileGreetings;
 
-    /**
-     * @ManyToMany(targetEntity="Domain\Theme\Entity\Domain\Theme")
-     * @JoinTable(name="profile_interesting_in",
-     *      joinColumns={@JoinColumn(name="profile_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="theme_id", referencedColumnName="id", unique=true)}
-     *      )
-     */
-    private $interesting_in = [];
+        /**
+         * @OneToOne(targetEntity="Profile\Entity\ProfileImage", mappedBy="profile", cascade={"persist", "remove"})
+         * @var ProfileImage
+         */
+        private $profileImage;
 
-    /**
-     * @var string
-     * @Column(type="string",name="expert_in_ids")
-     */
-    private $expert_in_ids;
+        /**
+         * @ManyToMany(targetEntity="Theme\Entity\Theme")
+         * @JoinTable(name="profile_expert_in",
+         *      joinColumns={@JoinColumn(name="profile_id", referencedColumnName="id")},
+         *      inverseJoinColumns={@JoinColumn(name="theme_id", referencedColumnName="id", unique=true)}
+         *      )
+         */
+        private $expert_in = [];
 
-    /**
-     * @var string
-     * @Column(type="string",name="interesting_in_ids")
-     */
-    private $interesting_in_ids;
+        /**
+         * @ManyToMany(targetEntity="Theme\Entity\Theme")
+         * @JoinTable(name="profile_interesting_in",
+         *      joinColumns={@JoinColumn(name="profile_id", referencedColumnName="id")},
+         *      inverseJoinColumns={@JoinColumn(name="theme_id", referencedColumnName="id", unique=true)}
+         *      )
+         */
+        private $interesting_in = [];
 
-    public function toJSON(): array
-    {
-        $expertsInJSON = array_map(function(Theme $theme){
-            return $theme->toJSON();
-        }, $this->expert_in->toArray());
+        /**
+         * @var string
+         * @Column(type="string",name="expert_in_ids")
+         */
+        private $expert_in_ids;
 
-        $interesting_inJSON = array_map(function(Theme $theme){
-            return $theme->toJSON();
-        }, $this->interesting_in->toArray());
+        /**
+         * @var string
+         * @Column(type="string",name="interesting_in_ids")
+         */
+        private $interesting_in_ids;
 
-        return [
-          'id'                 => (int) $this->getId(),
-          'account_id'         => (int) $this->getAccount()->getId(),
-          'current'            => (bool) $this->isCurrent(),
-          'is_initialized'     => $this->isInitialized(),
-          'greetings'          => $this->getProfileGreetings()->toJSON(),
-          'image'              => $this->getProfileImage()->toJSON(),
-          'expert_in_ids'      => json_encode($this->expert_in_ids),
-          'interesting_in_ids' => json_encode($this->interesting_in_ids),
-          'expert_in'          => $expertsInJSON,
-          'interesting_in'     => $interesting_inJSON
-        ];
-    }
+        public function toJSON(): array
+        {
+                return [
+                    'id'                 => (int) $this->getId(),
+                    'account_id'         => (int) $this->getAccount()->getId(),
+                    'current'            => (bool) $this->isCurrent(),
+                    'is_initialized'     => $this->isInitialized(),
+                    'greetings'          => $this->getProfileGreetings()->toJSON(),
+                    'image'              => $this->getProfileImage()->toJSON(),
+                    'expert_in'          => array_map(function(Theme $theme){
+                            return $theme->getId();
+                    }, $this->expert_in->toArray()),
+                    'interesting_in'     => array_map(function(Theme $theme){
+                            return $theme->getId();
+                    }, $this->interesting_in->toArray())
+                ];
+        }
 
-    public function __construct(Account $account)
-    {
-        $this->account        = $account;
-        $this->expert_in      = new ArrayCollection();
-        $this->interesting_in = new ArrayCollection();
-    }
+        public function __construct(Account $account)
+        {
+                $this->account        = $account;
+                $this->expert_in      = new ArrayCollection();
+                $this->interesting_in = new ArrayCollection();
+        }
 
-    public function getExpertIn()
-    {
-        return $this->expert_in;
-    }
+        public function getGender(){
+                return $this->gender;
+        }
 
-    public function setExpertIn(array $expertIn): self
-    {
-        $this->expert_in = $expertIn;
-        return $this;
-    }
+        public function setGender(int $gender): self
+        {
+                if(!in_array($gender, [self::GENDER_FEMALE, self::GENDER_MALE]))
+                        throw new UnknownGenderException("the gender: %s is unknown",$gender);
 
-    public function getExpertInIds(): string
-    {
-        return $this->expert_in_ids;
-    }
+                $this->gender = $gender;
+                return $this;
+        }
 
-    public function setExpertInIds(array $expertInIds): self
-    {
-        $expertInIds = array_map(function(Theme $theme){
-            return $theme->getId();
-        }, $expertInIds);
+        public function getExpertIn()
+        {
+                return $this->expert_in;
+        }
 
-        $this->expert_in_ids = json_encode($expertInIds);
-        return $this;
-    }
+        public function setExpertIn(array $expertIn): self
+        {
+                $this->expert_in = $expertIn;
+                return $this;
+        }
 
-    public function getInterestingInIds(): string{
-        return $this->interesting_in_ids;
-    }
+        public function getExpertInIds(): string
+        {
+                return $this->expert_in_ids;
+        }
 
-    public function setInterestingInIds(array $interestingInIds): self
-    {
-        $interestingInIds = array_map(function(Theme $theme){
-            return $theme->getId();
-        }, $interestingInIds);
+        public function setExpertInIds(array $expertInIds): self
+        {
+                $expertInIds = array_map(function(Theme $theme){
+                        return $theme->getId();
+                }, $expertInIds);
 
-        $this->interesting_in_ids = json_encode($interestingInIds);
-        return $this;
-    }
+                $this->expert_in_ids = json_encode($expertInIds);
+                return $this;
+        }
 
-    public function getInterestingIn()
-    {
-        return $this->interesting_in;
-    }
+        public function getInterestingInIds(): string{
+                return $this->interesting_in_ids;
+        }
 
-    public function setInterestingIn(array $interestingIn): self
-    {
-        $this->interesting_in = $interestingIn;
-        return $this;
-    }
+        public function setInterestingInIds(array $interestingInIds): self
+        {
+                $interestingInIds = array_map(function(Theme $theme){
+                        return $theme->getId();
+                }, $interestingInIds);
 
-    public function hasId(): bool
-    {
-        return $this->id !== null;
-    }
+                $this->interesting_in_ids = json_encode($interestingInIds);
+                return $this;
+        }
 
-    public function getId(): int
-    {
-        return $this->id;
-    }
+        public function getInterestingIn()
+        {
+                return $this->interesting_in;
+        }
 
-    public function isInitialized(): bool
-    {
-        return (bool) $this->isInitialized;
-    }
+        public function setInterestingIn(array $interestingIn): self
+        {
+                $this->interesting_in = $interestingIn;
+                return $this;
+        }
 
-    public function setAsInitialized(): self
-    {
-        $this->isInitialized = true;
+        public function isInitialized(): bool
+        {
+                return (bool) $this->isInitialized;
+        }
 
-        return $this;
-    }
+        public function setAsInitialized(): self
+        {
+                $this->isInitialized = true;
 
-    public function getAccount(): Account
-    {
-        return $this->account;
-    }
+                return $this;
+        }
 
-    public function isCurrent(): bool
-    {
-        return $this->isCurrent;
-    }
+        public function getAccount(): \Account\Entity\Account
+        {
+                return $this->account;
+        }
 
-    public function setIsCurrent(bool $isCurrent): self
-    {
-        $this->isCurrent = $isCurrent;
+        public function isCurrent(): bool
+        {
+                return $this->isCurrent;
+        }
 
-        return $this;
-    }
+        public function setIsCurrent(bool $isCurrent): self
+        {
+                $this->isCurrent = $isCurrent;
 
-    public function hasProfileGreetings(): bool
-    {
-        return $this->profileGreetings !== null;
-    }
+                return $this;
+        }
 
-    public function getProfileGreetings(): ProfileGreetings
-    {
-        return $this->profileGreetings;
-    }
+        public function hasProfileGreetings(): bool
+        {
+                return $this->profileGreetings !== null;
+        }
 
-    public function setProfileGreetings(ProfileGreetings $profileGreetings): self
-    {
-        $this->profileGreetings = $profileGreetings;
+        public function getProfileGreetings(): ProfileGreetings
+        {
+                return $this->profileGreetings;
+        }
 
-        return $this;
-    }
+        public function setProfileGreetings(ProfileGreetings $profileGreetings): self
+        {
+                $this->profileGreetings = $profileGreetings;
 
-    public function hasProfileImage(): bool
-    {
-        return $this->profileImage !== null;
-    }
+                return $this;
+        }
 
-    public function getProfileImage(): ProfileImage
-    {
-        return $this->profileImage;
-    }
+        public function hasProfileImage(): bool
+        {
+                return $this->profileImage !== null;
+        }
 
-    public function setProfileImage(ProfileImage $profileImage): self
-    {
-        $this->profileImage = $profileImage;
+        public function getProfileImage(): ProfileImage
+        {
+                return $this->profileImage;
+        }
 
-        return $this;
-    }
+        public function setProfileImage(ProfileImage $profileImage): self
+        {
+                $this->profileImage = $profileImage;
+
+                return $this;
+        }
 }

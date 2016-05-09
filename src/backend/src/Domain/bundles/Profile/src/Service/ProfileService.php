@@ -125,7 +125,7 @@ class ProfileService
     {
         $profile = $this->getProfileById($profileId);
 
-        if(!$profile->hasId()) {
+        if(!$profile->isPersisted()) {
             throw new \Exception('Unable to upload image for new non-persisted profile');
         }
 

@@ -1,0 +1,33 @@
+Community_Entity_Community:
+  required:
+    - id
+    - date_created_on
+    - title
+    - description
+    - theme_id
+    - has_image
+  properties:
+    id:
+      type: number
+      description: Domain\Community Id
+    date_created_on:
+      type: string
+      description: Дата создания коммунити
+    title:
+      type: string
+      description: Название (заголовок) коммунитики
+    description:
+      type: string
+      description: Описание (подзаголовок) коммунити
+    theme_id:
+      type: number
+      description: ID тематики
+    has_image:
+      type: boolean
+      description: Флаг "Есть ли у коммунити изображение"
+    image:
+      $ref: '#/definitions/Community_Entity_CommunityImage'
+    collections:
+      type: array
+      items:
+        $ref: '#/definitions/Collection_Entity_Collection'

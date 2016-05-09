@@ -8,188 +8,180 @@ use Application\Util\JSONSerializable;
  */
 class ProfileGreetings implements JSONSerializable
 {
-    const GREETINGS_FL = 'fl';
-    const GREETINGS_LFM = 'lfm';
-    const GREETINGS_N = 'n';
+        use IdTrait;
+        
+        const GREETINGS_FL = 'fl';
+        const GREETINGS_LFM = 'lfm';
+        const GREETINGS_N = 'n';
 
-    const AVAILABLE_GREETINGS = [
-        self::GREETINGS_FL,
-        self::GREETINGS_LFM,
-        self::GREETINGS_N
-    ];
-
-    /**
-     * @Column(type="integer")
-     * @Id
-     * @GeneratedValue
-     * @var int
-     */
-    private $id;
-
-    /**
-     * @OneToOne(targetEntity="Domain\Profile\Entity\Profile", inversedBy="profileGreetings")
-     * @JoinColumn(name="profile_id", referencedColumnName="id")
-     * @var Profile
-     */
-    private $profile;
-
-    /**
-     * @Column(type="string",name="greetings_method")
-     * @var string
-     */
-    private $greetingsMethod = self::GREETINGS_FL;
-
-    /**
-     * @Column(type="string",name="first_name")
-     * @var string
-     */
-    private $firstName;
-
-    /**
-     * @Column(type="string",name="last_name")
-     * @var string
-     */
-    private $lastName;
-
-    /**
-     * @Column(type="string",name="middle_name")
-     * @var string
-     */
-    private $middleName;
-
-    /**
-     * @Column(type="string",name="nick_name")
-     * @var string
-     */
-    private $nickName;
-
-    public function __construct(Profile $profile)
-    {
-        $this->profile = $profile;
-        $this->profile->setProfileGreetings($this);
-    }
-
-    public function toJSON(): array
-    {
-        return [
-            'id' => $this->getId(),
-            'profile_id' => $this->getProfile()->getId(),
-            'greetings_method' => $this->getGreetingsMethod(),
-            'greetings' => $this->getGreetings(),
-            'first_name' => $this->getFirstName(),
-            'last_name' => $this->getLastName(),
-            'middle_name' => $this->getMiddleName(),
-            'nickname' => $this->getNickName()
+        const AVAILABLE_GREETINGS = [
+            self::GREETINGS_FL,
+            self::GREETINGS_LFM,
+            self::GREETINGS_N
         ];
-    }
 
-    public function hasId(): bool
-    {
-        return $this->id !== null;
-    }
+        /**
+         * @Column(type="integer")
+         * @Id
+         * @GeneratedValue
+         * @var int
+         */
+        private $id;
 
-    public function getId(): int
-    {
-        return $this->id;
-    }
+        /**
+         * @OneToOne(targetEntity="Domain\Profile\Entity\Profile", inversedBy="profileGreetings")
+         * @JoinColumn(name="profile_id", referencedColumnName="id")
+         * @var Profile
+         */
+        private $profile;
 
-    public function getProfile(): Profile
-    {
-        return $this->profile;
-    }
+        /**
+         * @Column(type="string",name="greetings_method")
+         * @var string
+         */
+        private $greetingsMethod = self::GREETINGS_FL;
 
-    public function nameFL(string $firstName, string $lastName)
-    {
-        $this->greetingsMethod = 'fl';
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-    }
+        /**
+         * @Column(type="string",name="first_name")
+         * @var string
+         */
+        private $firstName;
 
-    public function nameLFM(string $firstName, string $lastName, string $middleName)
-    {
-        $this->greetingsMethod = 'lfm';
-        $this->lastName = $lastName;
-        $this->firstName = $firstName;
-        $this->middleName = $middleName;
-    }
+        /**
+         * @Column(type="string",name="last_name")
+         * @var string
+         */
+        private $lastName;
 
-    public function nameN(string $nickName)
-    {
-        $this->greetingsMethod = 'n';
-        $this->nickName = $nickName;
-    }
+        /**
+         * @Column(type="string",name="middle_name")
+         * @var string
+         */
+        private $middleName;
 
-    public function getGreetingsMethod(): string
-    {
-        return $this->greetingsMethod;
-    }
+        /**
+         * @Column(type="string",name="nick_name")
+         * @var string
+         */
+        private $nickName;
 
-    public function getGreetings(): string
-    {
-        switch($this->greetingsMethod) {
-            default:
-                return $this->getProfile()->getAccount()->getEmail();
-            case self::GREETINGS_FL:
-                return sprintf('%s %s', $this->getFirstName(), $this->getLastName());
-            case self::GREETINGS_LFM:
-                return sprintf('%s %s %s', $this->getLastName(), $this->getFirstName(), $this->getMiddleName());
-            case self::GREETINGS_N:
-                return $this->getNickName();
+        public function __construct(Profile $profile)
+        {
+                $this->profile = $profile;
+                $this->profile->setProfileGreetings($this);
         }
-    }
 
-    public function setGreetingsMethod(string $greetingsMethod): self
-    {
-        $this->greetingsMethod = $greetingsMethod;
+        public function toJSON(): array
+        {
+                return [
+                    'id' => $this->getId(),
+                    'profile_id' => $this->getProfile()->getId(),
+                    'greetings_method' => $this->getGreetingsMethod(),
+                    'greetings' => $this->getGreetings(),
+                    'first_name' => $this->getFirstName(),
+                    'last_name' => $this->getLastName(),
+                    'middle_name' => $this->getMiddleName(),
+                    'nickname' => $this->getNickName()
+                ];
+        }
 
-        return $this;
-    }
+        public function getProfile(): Profile
+        {
+                return $this->profile;
+        }
 
-    public function getFirstName(): string
-    {
-        return (string) $this->firstName;
-    }
+        public function nameFL(string $firstName, string $lastName)
+        {
+                $this->greetingsMethod = 'fl';
+                $this->firstName = $firstName;
+                $this->lastName = $lastName;
+        }
 
-    public function setFirstName(string $firstName): self
-    {
-        $this->firstName = $firstName;
+        public function nameLFM(string $firstName, string $lastName, string $middleName)
+        {
+                $this->greetingsMethod = 'lfm';
+                $this->lastName = $lastName;
+                $this->firstName = $firstName;
+                $this->middleName = $middleName;
+        }
 
-        return $this;
-    }
+        public function nameN(string $nickName)
+        {
+                $this->greetingsMethod = 'n';
+                $this->nickName = $nickName;
+        }
 
-    public function getLastName(): string
-    {
-        return (string) $this->lastName;
-    }
+        public function getGreetingsMethod(): string
+        {
+                return $this->greetingsMethod;
+        }
 
-    public function setLastName(string $lastName): self
-    {
-        $this->lastName = $lastName;
+        public function getGreetings(): string
+        {
+                switch($this->greetingsMethod) {
+                        default:
+                                return $this->getProfile()->getAccount()->getEmail();
+                        case self::GREETINGS_FL:
+                                return sprintf('%s %s', $this->getFirstName(), $this->getLastName());
+                        case self::GREETINGS_LFM:
+                                return sprintf('%s %s %s', $this->getLastName(), $this->getFirstName(), $this->getMiddleName());
+                        case self::GREETINGS_N:
+                                return $this->getNickName();
+                }
+        }
 
-        return $this;
-    }
+        public function setGreetingsMethod(string $greetingsMethod): self
+        {
+                $this->greetingsMethod = $greetingsMethod;
 
-    public function getMiddleName(): string
-    {
-        return (string) $this->middleName;
-    }
+                return $this;
+        }
 
-    public function setMiddleName(string $middleName): self
-    {
-        $this->middleName = $middleName;
+        public function getFirstName(): string
+        {
+                return (string) $this->firstName;
+        }
 
-        return $this;
-    }
+        public function setFirstName(string $firstName): self
+        {
+                $this->firstName = $firstName;
 
-    public function getNickName(): string
-    {
-        return (string) $this->nickName;
-    }
+                return $this;
+        }
 
-    public function setNickName(string $nickName): self
-    {
-        $this->nickName = $nickName;
+        public function getLastName(): string
+        {
+                return (string) $this->lastName;
+        }
 
-        return $this;
-    }
+        public function setLastName(string $lastName): self
+        {
+                $this->lastName = $lastName;
+
+                return $this;
+        }
+
+        public function getMiddleName(): string
+        {
+                return (string) $this->middleName;
+        }
+
+        public function setMiddleName(string $middleName): self
+        {
+                $this->middleName = $middleName;
+
+                return $this;
+        }
+
+        public function getNickName(): string
+        {
+                return (string) $this->nickName;
+        }
+
+        public function setNickName(string $nickName): self
+        {
+                $this->nickName = $nickName;
+
+                return $this;
+        }
 }

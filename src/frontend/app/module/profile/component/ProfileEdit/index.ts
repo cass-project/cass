@@ -67,10 +67,25 @@ export class ProfileEdit {
 
 
     submit() {
+        let profileInfo;
         let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
         greetings.greetings_method = this.profileService.profileInfo.greetings_method;
 
-        this.profileService.createExpertList().subscribe(data => {console.log(data)}, err => {console.log(err)});
+
+        this.profileService.getProfileInfo().subscribe(data => {
+            profileInfo = data;
+            /*if(profileInfo.entity.expert_in.length > 0) {
+                this.profileService.createExpertList().subscribe(data => {console.log(data)}, err => {console.log(err)});
+            } else {
+                this.profileService.addInExpertList().subscribe(data => {console.log(data)}, err => {console.log(err)});
+            }*/
+
+            if(profileInfo.entity.interesting_in.length > 0){
+                this.profileService.createInterestList().subscribe(data => {console.log(data)}, err => {console.log(err)});
+            } else {
+                this.profileService.addInInterestList().subscribe(data => {console.log(data)}, err => {console.log(err)});
+            }
+        });
 
         if (AuthService.getGreetings()) {
             switch (greetings.greetings_method){

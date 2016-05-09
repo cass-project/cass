@@ -1,25 +1,18 @@
 <?php
 namespace Domain\Account\Entity;
 
+use Util\IdTrait;
 use Application\Util\JSONSerializable;
 use Doctrine\ORM\PersistentCollection;
 use Domain\Profile\Entity\Profile;
 
 /**
- * Class Domain\Account
- * @package Data\Entity
  * @Entity(repositoryClass="Domain\Account\Repository\AccountRepository")
  * @Table(name="account")
  */
 class Account implements JSONSerializable
 {
-    /**
-     * @Id
-     * @GeneratedValue
-     * @Column(type="integer")
-     * @var int
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @OneToMany(targetEntity="Domain\Profile\Entity\Profile", mappedBy="account")
@@ -67,11 +60,6 @@ class Account implements JSONSerializable
                 'reason' => $this->isDisabled() ? $this->getDisabledReason() : null
             ]
         ];
-    }
-
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function getProfiles(): PersistentCollection
@@ -146,7 +134,7 @@ class Account implements JSONSerializable
     public function getDisabledReason(): string
     {
         if(!$this->isDisabled()) {
-            throw new \Exception('Domain\Account is not disabled');
+            throw new \Exception('Account is not disabled');
         }
 
         return $this->isDisabled;

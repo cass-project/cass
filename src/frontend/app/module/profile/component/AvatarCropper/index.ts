@@ -34,6 +34,7 @@ export class AvatarCropper {
     public showProgressBar = false;
     public cropper;
     private file: Blob;
+    private imgPath;
 
     ngOnInit(): void {
         this.fileReader = new FileReader();
@@ -44,6 +45,7 @@ export class AvatarCropper {
 
     private onFileChange(event) : void {
         this.file = event.target.files[0];
+        this.imgPath = URL.createObjectURL(event.target.files[0]);
         this.fileReader.readAsDataURL(this.file);
     }
 
@@ -98,6 +100,42 @@ export class AvatarCropper {
             }
         };
         this.profileService.avatarUpload();
+        console.log(`
+        width: ${this.getPreviewImageData('width')},
+        height: ${this.getPreviewImageData('height')},
+        x1: ${this.getPreviewImageData('x1')},
+        y1: ${this.getPreviewImageData('y1')},
+        getData: ${this.getData().x} ${this.getData().y} ${this.getData().width} ${this.getData().height}
+        `);
+    }
+
+    private getPreviewImageData(data: string){
+        let coord = this.getData();
+        let avatarSize = 300;
+        let scaleX = avatarSize / (coord.width);
+        let scaleY = avatarSize / (coord.height);
+
+        let parentWidth = this.getImageData().width;
+        let parentHeight = this.getImageData().height;
+
+        switch (data) {
+        case 'x1':
+            return -Math.round(scaleX * coord.x);
+            break;
+        case 'y1':
+            return -Math.round(scaleY * coord.y);
+            break;
+        case 'width':
+            return Math.round(parentWidth * scaleX);
+            break;
+        case 'height':
+            return Math.round(parentHeight * scaleY);
+            break;
+        }
+    }
+
+    private getImageData(){
+        return this.cropper.getImageData(true);
     }
 
     private getData() {

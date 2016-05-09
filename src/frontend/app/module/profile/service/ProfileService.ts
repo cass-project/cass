@@ -26,9 +26,9 @@ export class ProfileService {
     public profileInfo: ProfileInfo = new ProfileInfo();
 
     getProfileInfo() {
-        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/get`;
+        let url = `/backend/api/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/get`;
 
-        return this.http.post(url, JSON.stringify({}));
+        return this.http.get(url);
     }
 
     greetingsAsFL() {
@@ -65,7 +65,7 @@ export class ProfileService {
         }));
     }
 
-    getSelectedThemesId(){
+    getSelectedThemesIds(){
         let arrayPush = [];
 
         for(let i = 0; i < this.themeService.selectedThemes.length; i++){
@@ -75,21 +75,42 @@ export class ProfileService {
         return arrayPush;
     }
 
+
+    /*This function is under discussion*/
+
+    /*addInExpertList(){
+        let url = `backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/expert-in`;
+
+
+        return this.http.post(url, JSON.stringify({
+            theme_ids: this.getSelectedThemesIds()
+        }));
+    }
+
+
     createExpertList(){
         let url = `backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/expert-in`;
 
 
         return this.http.put(url, JSON.stringify({
-            theme_id: this.getSelectedThemesId()
+            theme_ids: this.getSelectedThemesIds()
+        }));
+    }*/
+
+
+    addInInterestList(){
+        let url = `backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/interesting-in`;
+
+        return this.http.post(url, JSON.stringify({
+            theme_ids: this.getSelectedThemesIds()
         }));
     }
-
 
     createInterestList(){
         let url = `backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/interesting-in`;
 
         return this.http.put(url, JSON.stringify({
-            theme_id: this.themeService.selectedThemes
+            theme_ids: this.getSelectedThemesIds()
         }));
     }
 
@@ -112,7 +133,7 @@ export class ProfileService {
         xmlRequest.onreadystatechange = () => {
             if (xmlRequest.readyState === 4) {
                 if (xmlRequest.status === 200) {
-                    this.avatarCropperService.isAvatarFormVisibleFlag = false;
+                    //this.avatarCropperService.isAvatarFormVisibleFlag = false;
                     AuthService.getAuthToken().getCurrentProfile().entity.image.public_path = JSON.parse(xmlRequest.responseText).public_path;
                     this.progressBar = 0;
                     this.tryNumber = 0;
