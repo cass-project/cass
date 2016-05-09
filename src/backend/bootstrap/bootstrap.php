@@ -1,4 +1,6 @@
 <?php
+define('APP_TIMER_START', microtime(true));
+
 require __DIR__ . '/../vendor/autoload.php';
 
 return (new \Application\Bootstrap\AppBuilder([

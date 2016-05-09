@@ -103,6 +103,10 @@ abstract class ResponseBuilder
             $json['error'] = $errorMessage;
         }
 
+        if(defined('APP_TIMER_START')) {
+            $json['time'] = (microtime(true) - APP_TIMER_START).'ms';
+        }
+
         return $json;
     }
 }

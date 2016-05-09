@@ -97,6 +97,8 @@ class AppBuilder
             $script($app);
         }
 
+        $this->container->set(Application::class, $app);
+
         return $app;
     }
 }
