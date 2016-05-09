@@ -26,7 +26,7 @@ class ProfileImage implements JSONSerializable
     private $id;
 
     /**
-     * @OneToOne(targetEntity="Domain\Profile\Entity\Domain\Profile", inversedBy="profileImage")
+     * @OneToOne(targetEntity="Domain\Profile\Entity\Profile", inversedBy="profileImage")
      * @JoinColumn(name="profile_id", referencedColumnName="id")
      * @var Profile
      */

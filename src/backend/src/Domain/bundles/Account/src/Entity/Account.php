@@ -22,7 +22,7 @@ class Account implements JSONSerializable
     private $id;
 
     /**
-     * @OneToMany(targetEntity="Domain\Profile\Entity\Domain\Profile", mappedBy="account")
+     * @OneToMany(targetEntity="Domain\Profile\Entity\Profile", mappedBy="account")
      * @var PersistentCollection
      */
     private $profiles;
@@ -57,7 +57,7 @@ class Account implements JSONSerializable
      */
     private $isEmailVerified = false;
 
-    public function toJSON()
+    public function toJSON(): array
     {
         return [
             'id' => $this->getId(),

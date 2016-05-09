@@ -1,39 +1,20 @@
 <?php
 namespace Domain\Auth;
 
-use Domain\Auth\Service\CurrentAccountService;
+use Application\Auth\Frontline\AuthTokenScript;
 use Application\Frontline\FrontlineBundleInjectable;
 use Application\Bundle\GenericBundle;
-use DI\Container;
-use Application\Frontline\Service\FrontlineService;
-use Domain\Profile\Entity\Profile;
 
 class AuthBundle extends GenericBundle implements FrontlineBundleInjectable
 {
-    public function initFrontline(Container $container, FrontlineService $frontlineService)
-    {
-        $container->call(function(CurrentAccountService $currentAccountService) use ($frontlineService) {
-            $frontlineService::$exporters->addExporter("auth", function() use ($currentAccountService) {
-                if($currentAccountService->isAvailable()) {
-                    return [
-                        'auth' => [
-                            'api_key' => $currentAccountService->getCurrentAccount()->getAPIKey(),
-                            'account' => $currentAccountService->getCurrentAccount()->toJSON(),
-                            'profiles' => array_map(function(Profile $profile) {
-                                return $profile->toJSON();
-                            }, $currentAccountService->getCurrentAccount()->getProfiles()->toArray())
-                        ]
-                    ];
-                }else{
-                    return [];
-                }
-            });
-        });
-    }
-
-
     public function getDir()
     {
         return __DIR__;
+    }
+
+    public function getFrontlineScripts(): array {
+        return [
+            'auth' => AuthTokenScript::class
+        ];
     }
 }

@@ -22,5 +22,9 @@ return [
             'user' => 'guest',
             'pass' => 'guest'
         ],
+        'config.console' => [
+            'title' => 'Console',
+            'version' => 'dec'
+        ]
     ]
 ];

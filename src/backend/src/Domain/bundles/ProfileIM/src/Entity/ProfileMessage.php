@@ -20,14 +20,14 @@ class ProfileMessage implements JSONSerializable
     private $id;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Domain\Profile")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
      * @JoinColumn(name="source_profile_id", referencedColumnName="id")
      * @var Profile
      */
     private $sourceProfile;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Domain\Profile")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
      * @JoinColumn(name="target_profile_id", referencedColumnName="id")
      * @var Profile
      */
@@ -64,7 +64,7 @@ class ProfileMessage implements JSONSerializable
         $this->dateCreated = new \DateTime();
     }
 
-    public function toJSON()
+    public function toJSON(): array
     {
         return [
             'id' => $this->id,

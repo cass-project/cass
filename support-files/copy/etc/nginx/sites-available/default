@@ -11,7 +11,7 @@ server {
 
     location ~ "^/backend/.*$"
     {
-        try_files $uri /server.php /server.php =404;
+        try_files $uri /backend.php /backend.php =404;
 
         fastcgi_pass	php-fpm;
         include fastcgi_params;

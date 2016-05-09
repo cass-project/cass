@@ -35,7 +35,7 @@ class Collection implements SerialEntity, JSONSerializable
     private $parent = null;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Domain\Profile")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
      * @JoinColumn(name="profile_id", referencedColumnName="id")
      * @var Profile
      */

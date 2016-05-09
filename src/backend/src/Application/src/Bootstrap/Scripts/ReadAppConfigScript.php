@@ -1,50 +1,48 @@
 <?php
 namespace Application\Bootstrap\Scripts;
 
+use Application\Bootstrap\AppBuilder;
+use Application\Bootstrap\InitScript;
+use Application\Bundle\Bundle;
 use Application\Service\ConfigService;
 use Cocur\Chain\Chain;
 
-class ReadAppConfigScript
+class ReadAppConfigScript implements InitScript
 {
-    /** @var string */
-    private $backendPath;
+    public function __invoke(AppBuilder $appBuilder) {
+        $configService = new ConfigService();
 
-    public function __construct(string $backendPath)
-    {
-        $this->backendPath = $backendPath;
-    }
+        $this->mergeBundleConfigs($configService, $appBuilder->getBundleService()->getBundles());
+        $this->mergeProvideConfig($configService, $configService->get('php-di')['paths']['backend']);
 
-    public function __invoke(ConfigService $configService, array $bundles)
-    {
-        $this->mergeBundleConfigs($configService, $bundles);
-        $this->mergeProvideConfig($configService);
+        $appBuilder->setConfigService($configService);
     }
 
     private function mergeBundleConfigs(ConfigService $configService, array $bundles)
     {
-        /** @var \Application\Bundle\Bundle[] $bundles */
-        foreach ($bundles as $bundle) {
+        array_walk($bundles, function(Bundle $bundle) use ($configService) {
             $dir = $bundle->getConfigDir();
 
-            Chain::create(scandir($dir))
-                ->filter(function ($input) use ($dir) {
-                    return is_file($dir . '/' . $input);
-                })
-                ->filter(function ($input) use ($dir) {
-                    return preg_match('/\.config.php$/', $input);
-                })
-                ->map(function ($input) use ($dir) {
-                    return require $dir . '/' . $input;
-                })
-                ->reduce(function ($carry, $config) use ($configService) {
-                    $configService->merge($config);
-                });
-        }
+            if(is_dir($dir)) {
+                Chain::create(scandir($dir))
+                    ->filter(function ($input) use ($dir) {
+                        return is_file($dir . '/' . $input) && preg_match('/\.config.php$/', $input);
+                    })
+                    ->map(function ($input) use ($dir) {
+                        return require $dir . '/' . $input;
+                    })
+                    ->map(function (array $config) use ($configService) {
+                        $configService->merge($config);
+
+                        return null;
+                    });
+            }
+        });
     }
 
-    private function mergeProvideConfig(ConfigService $configService)
+    private function mergeProvideConfig(ConfigService $configService, string $backendPath)
     {
-        $provideConfigFileName = sprintf('%s/provide/provide.config.php', $this->backendPath);
+        $provideConfigFileName = sprintf('%s/provide/provide.config.php', $backendPath);
 
         if(file_exists($provideConfigFileName)) {
             $provideConfig = require $provideConfigFileName;

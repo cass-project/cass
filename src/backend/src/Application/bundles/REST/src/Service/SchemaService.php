@@ -1,6 +1,7 @@
 <?php
 namespace Application\REST\Service;
 
+use Application\REST\Request\Params\SchemaParams;
 use Application\Service\BundleService;
 use Symfony\Component\Yaml\Yaml;
 use JsonSchema\Validator;
@@ -89,6 +90,8 @@ class SchemaService
                 $this->schemas = [];
             }
         };
+
+        SchemaParams::injectSchemaService($this);
     }
 
     public function getSchema($bundleName, $path) {

@@ -11,6 +11,7 @@ use Domain\Auth\Middleware\AuthMiddleware;
 use Domain\Auth\Middleware\ProtectedMiddleware;
 use Domain\Auth\Service\AuthService;
 use Domain\Auth\Service\CurrentAccountService;
+use Application\Auth\Frontline\AuthTokenScript;
 use Application\Frontline\Service\FrontlineService;
 
 return [
@@ -26,10 +27,13 @@ return [
         ),
         ProtectedMiddleware::class => object()->constructor(
             get(CurrentAccountService::class),
-            get('constants.prefix')
+            get('route-prefix')
         ),
         CurrentAccountService::class => object()->constructor(
             get(AccountRepository::class)
+        ),
+        AuthTokenScript::class => object()->constructor(
+            get(CurrentAccountService::class)
         )
     ]
 ];

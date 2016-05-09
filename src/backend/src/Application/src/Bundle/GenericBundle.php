@@ -8,27 +8,20 @@ abstract class GenericBundle implements Bundle
         return static::class;
     }
 
+    public function getNamespace(): string {
+        return substr(get_called_class(), 0, strrpos(get_called_class(), "\\"));
+    }
+
     public function hasBundles() {
         return is_dir($this->getDir().'/../bundles');
     }
 
-    public function getBundles(): array {
-        $bundlesPath = $this->getDir().'/../bundles';
-
+    public function getBundlesDir(): string {
         if(! $this->hasBundles()) {
             throw new \Exception('No bundles available');
         }
 
-        $bundleDirs = array_filter(scandir($bundlesPath), function ($input) use ($bundlesPath) {
-            return $input != '.' && $input != '..' && is_dir(sprintf('%s/%s', $bundlesPath, $input));
-        });
-
-        return array_map(function(string $bundleDir) use ($bundlesPath) {
-            return [
-                'name' => $bundleDir,
-                'path' => sprintf('%s/%s', $bundlesPath, $bundleDir)
-            ];
-        }, $bundleDirs);
+        return $this->getDir().'/../bundles';
     }
 
     final public function getConfigDir()

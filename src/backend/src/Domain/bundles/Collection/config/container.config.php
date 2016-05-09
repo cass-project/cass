@@ -7,6 +7,7 @@ use function DI\get;
 
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Collection\Entity\Collection;
+use Domain\Collection\Frontline\CurrentProfileCollectionsScript;
 use Domain\Collection\Middleware\CollectionMiddleware;
 use Domain\Collection\Repository\CollectionRepository;
 use Domain\Collection\Service\CollectionService;
@@ -20,6 +21,10 @@ return [
             get(CurrentAccountService::class)
         ),
         CollectionMiddleware::class => object()->constructor(
+            get(CollectionService::class),
+            get(CurrentAccountService::class)
+        ),
+        CurrentProfileCollectionsScript::class => object()->constructor(
             get(CollectionService::class),
             get(CurrentAccountService::class)
         )

@@ -27,7 +27,7 @@ class ProfileGreetings implements JSONSerializable
     private $id;
 
     /**
-     * @OneToOne(targetEntity="Domain\Profile\Entity\Domain\Profile", inversedBy="profileGreetings")
+     * @OneToOne(targetEntity="Domain\Profile\Entity\Profile", inversedBy="profileGreetings")
      * @JoinColumn(name="profile_id", referencedColumnName="id")
      * @var Profile
      */

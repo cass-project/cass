@@ -3,10 +3,7 @@ namespace Domain\Theme;
 
 use Application\Frontline\FrontlineBundleInjectable;
 use Application\Bundle\GenericBundle;
-use DI\Container;
-use Application\Frontline\Service\FrontlineService;
-use Domain\Theme\Entity\Theme;
-use Domain\Theme\Service\ThemeService;
+use Domain\Theme\Frontline\ThemeScript;
 
 class ThemeBundle extends GenericBundle implements FrontlineBundleInjectable
 {
@@ -15,22 +12,10 @@ class ThemeBundle extends GenericBundle implements FrontlineBundleInjectable
         return __DIR__;
     }
 
-    public function initFrontline(Container $container, FrontlineService $frontlineService) {
-        $themeService = $container->get(ThemeService::class); /** @var ThemeService $themeService */
-
-        $frontlineService::$exporters->addExporter('themes', function() use ($themeService) {
-            return [
-                'themes' => $this->buildJSON($themeService->getThemesAsTree())
-            ];
-        });
-    }
-
-    private function buildJSON(array $themes) {
-        return array_map(function(Theme $theme) {
-            $result = $theme->toJSON();
-            $result['children'] = $theme->hasChildren() ? $this->buildJSON($theme->getChildren()->toArray()) : [];
-
-            return $result;
-        }, $themes);
+    public function getFrontlineScripts(): array
+    {
+        return [
+            'themes' => ThemeScript::class
+        ];
     }
 }

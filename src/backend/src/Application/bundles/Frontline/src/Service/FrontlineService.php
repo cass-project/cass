@@ -1,71 +1,36 @@
 <?php
 namespace Application\Frontline\Service;
 
-use Application\Frontline\Service\Exporter\SessionExporter;
+use Application\Frontline\FrontlineBundleInjectable;
+use Application\Service\BundleService;
+use DI\Container;
 
 class HasExporterWithSameIdException extends \Exception {}
 
-class FrontlineService implements FrontlineExporter
+class FrontlineService
 {
-    /** @var FrontlineExporterManager */
-    static $exporters;
+    /** @var Container */
+    private $container;
+    
+    /** @var BundleService */
+    private $bundlesService;
 
-    public function exportToJSON() {
-        return array_reduce(self::$exporters->getAllExporters(), function(array $carry, $exporter) {
-            if($exporter instanceof FrontlineExporter) {
-                $result = $exporter->exportToJSON();
-            }else if(is_callable($exporter)) {
-                $result = $exporter();
-            }else{
-                throw new \Exception('Invalid exporter');
+    public function fetchFrontlineResult() {
+        $result = [];
+        
+        foreach ($this->bundlesService->getBundles() as $bundle) {
+            if($bundle instanceof FrontlineBundleInjectable) {
+                foreach($bundle->getFrontlineScripts() as $key => $scriptName) {
+                    if(isset($result[$key])) {
+                        throw new \Exception(sprintf('Overwrite attempt by frontline script `%s`', $scriptName));
+                    }
+
+                    $script = $this->container->get($scriptName);
+                    $result[$key] = $script($this->container);
+                }
             }
-
-            return array_merge($carry, $result);
-        }, []);
-    }
-
-}
-
-FrontlineService::$exporters = new FrontlineExporterManager();
-
-class FrontlineExporterManager
-{
-    /** @var FrontlineExporter[]|Callable[] */
-    private $exporters = [];
-
-    public function __construct()
-    {
-        $this->exporters['session'] = new SessionExporter();
-    }
-
-    public function getSession(): SessionExporter
-    {
-        return $this->exporters['session'];
-    }
-
-    public function getAllExporters()
-    {
-        return $this->exporters;
-    }
-
-    public function addExporter(string $id,  $exporter)
-    {
-        if($this->hasExporterWithId($id)) {
-            throw new HasExporterWithSameIdException(sprintf('Exported with id "%s" is already exists', $id));
         }
 
-        $this->exporters[$id] = $exporter;
-    }
-
-    public function removeExporter(string $id)
-    {
-        if($this->hasExporterWithId($id)) {
-            unset($this->exporters[$id]);
-        }
-    }
-
-    public function hasExporterWithId(string $id)
-    {
-        return isset($this->exporters[$id]);
+        return $result;
     }
 }

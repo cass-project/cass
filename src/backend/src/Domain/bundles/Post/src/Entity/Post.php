@@ -19,7 +19,7 @@ class Post
     private $id;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Domain\Profile")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
      * @JoinColumn(name="author_profile_id", referencedColumnName="id")
      * @var Profile
      */
