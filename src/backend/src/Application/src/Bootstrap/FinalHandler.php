@@ -16,12 +16,12 @@ class FinalHandler
     public function __invoke(Request $request, Response $response, $error)
     {
         $responseBuilder = new GenericResponseBuilder($response);
-        $responseBuilder->setError($error);
         $responseBuilder->setStatusBadRequest();
 
         if($error === null) {
             $errorType = '404';
 
+            $responseBuilder->setError($error);
             $responseBuilder
                 ->setStatusNotFound()
                 ->setError('404 Not Found')
