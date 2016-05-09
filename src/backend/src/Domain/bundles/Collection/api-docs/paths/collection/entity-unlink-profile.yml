@@ -1,0 +1,31 @@
+"/protected/collection/{collectionId}/unlink-profile/{profileId}":
+  delete:
+    tags:
+      - collection
+    description:
+      Открепляет коллекцию от указанного профиля
+    parameters:
+      - name: collectionId
+        in: path
+        required: true
+        type: number
+        description:
+          ID коллекции
+      - name: profileId
+        in: path
+        required: true
+        type: number
+        description:
+          ID профиля
+    responses:
+      200:
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          success:
+            type: boolean
+            description: '=true'
+          entity:
+            $ref: "#/definitions/Collection_Entity_Collection"

@@ -1,0 +1,31 @@
+"/protected/collection/{collectionId}/link-community/{communityId}":
+  put:
+    tags:
+      - collection
+    description:
+      Прикрепляет коллекцию к указанному коммунити
+    parameters:
+      - name: collectionId
+        in: path
+        required: true
+        type: number
+        description:
+          ID коллекции
+      - name: communityId
+        in: path
+        required: true
+        type: number
+        description:
+          ID коммунити
+    responses:
+      200:
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          success:
+            type: boolean
+            description: '=true'
+          entity:
+            $ref: "#/definitions/Collection_Entity_Collection"

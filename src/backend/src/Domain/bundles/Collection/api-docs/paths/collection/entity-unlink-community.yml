@@ -1,25 +1,24 @@
-"/protected/profile/{profileId}/collection/create":
-  put:
+"/protected/collection/{collectionId}/unlink-community/{communityId}":
+  delete:
     tags:
       - collection
     description:
-      Создает новую коллекцию для указанного профиля
+      Открепляет коллекцию от указанного коммунити
     parameters:
-      - name: profileId
+      - name: collectionId
         in: path
         required: true
         type: number
         description:
-          ID профиля (владельца коллекции)
-      - name: body
-        in: body
+          ID коллекции
+      - name: communityId
+        in: path
         required: true
-        description: JSON Request
-        schema:
-          $ref: '#/definitions/Collection_Entity_Request'
+        type: number
+        description:
+          ID коммунити
     responses:
       200:
-        description: Коллекция создана
         schema:
           type: object
           required:
