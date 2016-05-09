@@ -4,22 +4,22 @@ namespace Domain\ProfileIM;
 use Domain\ProfileIM\Middleware\ProfileIMMiddleware;
 use Zend\Expressive\Application;
 
-return function (Application $app, string $prefix)
+return function (Application $app)
 {
     $app->put(
-        sprintf('%s/protected/profile-im/{command:send}/to/{targetProfileId}', $prefix),
+        '%s/protected/profile-im/{command:send}/to/{targetProfileId}',
         ProfileIMMiddleware::class,
         'profile-im-send'
     );
 
     $app->get(
-        sprintf('%s/protected/profile-im/{command:unread}',  $prefix),
+        '%s/protected/profile-im/{command:unread}',
         ProfileIMMiddleware::class,
         'profile-im-unread'
     );
 
     $app->get(
-        sprintf('%s/protected/profile-im/{command:messages}/from/{sourceProfileId}/offset/{offset}/limit/{limit}', $prefix),
+        '/protected/profile-im/{command:messages}/from/{sourceProfileId}/offset/{offset}/limit/{limit}',
         ProfileIMMiddleware::class,
         'profile-im-messages'
     );

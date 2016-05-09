@@ -4,39 +4,39 @@ namespace Domain\Collection;
 use Domain\Collection\Middleware\CollectionMiddleware;
 use Zend\Expressive\Application;
 
-return function(Application $app, string $prefix) {
+return function(Application $app) {
     $app->put(
-        sprintf('%s/protected/profile/{profileId}/collection/{command:create}', $prefix),
+        '/protected/profile/{profileId}/collection/{command:create}',
         CollectionMiddleware::class,
         'collection-create'
     );
 
     $app->delete(
-        sprintf('%s/protected/profile/{profileId}/collection/{collectionId}/{command:delete}', $prefix),
+        '/protected/profile/{profileId}/collection/{collectionId}/{command:delete}',
         CollectionMiddleware::class,
         'collection-delete'
     );
 
     $app->get(
-        sprintf('%s/protected/profile/{profileId}/collection/{command:list}', $prefix),
+        '/protected/profile/{profileId}/collection/{command:list}',
         CollectionMiddleware::class,
         'collection-list'
     );
 
     $app->get(
-        sprintf('%s/protected/profile/{profileId}/collection/{command:tree}', $prefix),
+        '/protected/profile/{profileId}/collection/{command:tree}',
         CollectionMiddleware::class,
         'collection-tree'
     );
 
     $app->post(
-        sprintf('%s/protected/collection/{command:move}/{collectionId}/under/{collectionParentId}/in-position/{position}', $prefix),
+        '/protected/collection/{command:move}/{collectionId}/under/{collectionParentId}/in-position/{position}',
         CollectionMiddleware::class,
         'collection-move'
     );
 
     $app->put(
-        sprintf('%s/protected/collection/{command:update}/{collectionId}', $prefix),
+        '/protected/collection/{command:update}/{collectionId}',
         CollectionMiddleware::class,
         'collection-update'
     );

@@ -4,81 +4,81 @@ namespace Domain\Profile;
 use Domain\Profile\Middleware\ProfileMiddleware;
 use Zend\Expressive\Application;
 
-return function (Application $app, string $prefix) {
+return function (Application $app) {
     $app->get(
-        sprintf('%s/profile/{profileId}/{command:get}[/]', $prefix),
+        '/profile/{profileId}/{command:get}[/]',
         ProfileMiddleware::class,
         'profile-get-by-id'
     );
 
     $app->put(
-        sprintf('%s/protected/profile/{command:create}/{accountId}[/]', $prefix),
+        '/protected/profile/{command:create}/{accountId}[/]',
         ProfileMiddleware::class,
         'profile-create'
     );
 
     $app->post(
-        sprintf('%s/protected/profile/{profileId}/{command:edit-personal}[/]', $prefix),
+        '/protected/profile/{profileId}/{command:edit-personal}[/]',
         ProfileMiddleware::class,
         'profile-edit-personal'
     );
 
     $app->post(
-        sprintf('%s/protected/profile/{profileId}/{command:switch}[/]', $prefix),
+        '/protected/profile/{profileId}/{command:switch}[/]',
         ProfileMiddleware::class,
         'profile-switch'
     );
 
     $app->post(
-        sprintf('%s/protected/profile/{profileId}/{command:greetings-as}/{greetingsMethod}/[/]', $prefix),
+        '/protected/profile/{profileId}/{command:greetings-as}/{greetingsMethod}/[/]',
         ProfileMiddleware::class,
         'profile-greetings-as'
     );
 
     $app->post(
-        sprintf('%s/protected/profile/{profileId}/{command:image-upload}/crop-start/{x1}/{y1}/crop-end/{x2}/{y2}[/]', $prefix),
+        '/protected/profile/{profileId}/{command:image-upload}/crop-start/{x1}/{y1}/crop-end/{x2}/{y2}[/]',
         ProfileMiddleware::class,
         'profile-image-upload'
     );
 
     $app->delete(
-        sprintf('%s/protected/profile/{profileId}/{command:delete}[/]', $prefix),
+        '/protected/profile/{profileId}/{command:delete}[/]',
         ProfileMiddleware::class,
         'profile-delete'
     );
 
     $app->put(
-        sprintf('%s/protected/profile/{profileId}/{command:expert-in}[/]', $prefix),
+        '/protected/profile/{profileId}/{command:expert-in}[/]',
         ProfileMiddleware::class,
         'profile-expert-in-put'
     );
 
     $app->post(
-        sprintf('%s/protected/profile/{profileId}/{command:expert-in}[/]', $prefix),
+        '/protected/profile/{profileId}/{command:expert-in}[/]',
         ProfileMiddleware::class,
         'profile-expert-in-post'
     );
 
     $app->delete(
-        sprintf('%s/protected/profile/{profileId}/{command:expert-in}/{theme_ids}', $prefix),
+        '/protected/profile/{profileId}/{command:expert-in}/{theme_ids}',
         ProfileMiddleware::class,
         'profile-expert-in-delete'
     );
 
     $app->put(
-        sprintf('%s/protected/profile/{profileId}/{command:interesting-in}[/]', $prefix),
+        '/protected/profile/{profileId}/{command:interesting-in}[/]',
         ProfileMiddleware::class,
         'profile-interesting-in-put'
     );
 
     $app->post(
-      sprintf('%s/protected/profile/{profileId}/{command:interesting-in}[/]', $prefix),
-      ProfileMiddleware::class,
-      'profile-interesting-in-post'
+        '/protected/profile/{profileId}/{command:interesting-in}[/]',
+        ProfileMiddleware::class,
+        'profile-interesting-in-post'
     );
 
     $app->delete(
-        sprintf('%s/protected/profile/{profileId}/{command:interesting-in}/{theme_ids}', $prefix),
+        '/protected/profile/{profileId}/{command:interesting-in}/{theme_ids}',
         ProfileMiddleware::class,
         'profile-interesting-in-delete'
     );

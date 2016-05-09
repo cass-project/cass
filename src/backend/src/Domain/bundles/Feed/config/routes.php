@@ -2,9 +2,9 @@
 use Domain\Feed\Middleware\FeedMiddleware;
 use Zend\Expressive\Application;
 
-return function (Application $app, string $prefix) {
+return function (Application $app) {
     $app->post(
-        sprintf('%s/feed/{source:collection}/{collectionId}', $prefix),
+        '/feed/{source:collection}/{collectionId}',
         FeedMiddleware::class,
         'feed-collection'
     );

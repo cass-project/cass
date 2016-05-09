@@ -4,6 +4,6 @@ namespace Application\Swagger;
 use Application\Swagger\Middleware\APIDocsMiddleware;
 use Zend\Expressive\Application;
 
-return function (Application $app, string $prefix) {
-    $app->get(sprintf('%s/api-docs.json', $prefix), APIDocsMiddleware::class);
+return function (Application $app) {
+    $app->get('/api-docs.json', APIDocsMiddleware::class);
 };

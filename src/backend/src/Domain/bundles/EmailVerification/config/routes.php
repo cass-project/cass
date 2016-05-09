@@ -4,16 +4,16 @@ namespace Domain\EmailVerification;
 use Domain\EmailVerification\Middleware\EmailVerificationMiddleware;
 use Zend\Expressive\Application;
 
-return function (Application $app, string $prefix)
+return function (Application $app)
 {
     $app->get(
-        sprintf('%s/protected/email-verification/{command:request}/{newEmail}[/]', $prefix),
+        '/protected/email-verification/{command:request}/{newEmail}[/]',
         EmailVerificationMiddleware::class,
         'email-verification-request'
     );
 
     $app->get(
-        sprintf('%s/email-verification/{command: confirm}/{token}[/]', $prefix),
+        '/email-verification/{command: confirm}/{token}[/]',
         EmailVerificationMiddleware::class,
         'email-verification-confirm'
     );

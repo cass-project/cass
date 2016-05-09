@@ -3,7 +3,6 @@ namespace Application;
 
 return [
     'php-di' => [
-        'route-prefix' => '/backend/api',
         'paths' => [
             'backend' => sprintf('%s/../../../', __DIR__),
             'frontend' => sprintf('%s/../../../../frontend', __DIR__),

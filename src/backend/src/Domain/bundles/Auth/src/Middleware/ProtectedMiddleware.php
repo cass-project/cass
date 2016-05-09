@@ -16,18 +16,14 @@ class ProtectedMiddleware implements MiddlewareInterface
     /** @var CurrentAccountService */
     private $currentAccountService;
 
-    /** @var string */
-    private $prefix;
-
-    public function __construct(CurrentAccountService $currentAccountService, string $prefix)
+    public function __construct(CurrentAccountService $currentAccountService)
     {
         $this->currentAccountService = $currentAccountService;
-        $this->prefix = $prefix;
     }
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $isURLProtected = strpos($request->getUri()->getPath(), "{$this->prefix}/protected/") === 0;
+        $isURLProtected = strpos($request->getUri()->getPath(), "/protected/") === 0;
 
         try {
             $this->currentAccountService->attempt([

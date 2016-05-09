@@ -4,27 +4,27 @@ namespace Domain\Post;
 use Domain\Post\Middleware\PostMiddleware;
 use Zend\Expressive\Application;
 
-return function (Application $app, string $prefix) {
+return function (Application $app) {
     $app->put(
-        sprintf("%s/protected/post/{command:create}", $prefix),
+        "%s/protected/post/{command:create}",
         PostMiddleware::class,
         'post-create'
     );
 
     $app->delete(
-        sprintf("%s/protected/post/{postId}/{command:delete}", $prefix),
+        "%s/protected/post/{postId}/{command:delete}",
         PostMiddleware::class,
         'post-delete'
     );
 
     $app->post(
-        sprintf("%s/protected/post/{postId}/{command:edit}", $prefix),
+        "%s/protected/post/{postId}/{command:edit}",
         PostMiddleware::class,
         'post-edit'
     );
 
     $app->get(
-        sprintf("%s/protected/post/{postId}/{command:get}", $prefix),
+        "%s/protected/post/{postId}/{command:get}",
         PostMiddleware::class,
         'post-get'
     );

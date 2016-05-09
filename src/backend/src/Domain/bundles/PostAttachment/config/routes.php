@@ -2,9 +2,9 @@
 use Domain\PostAttachment\Middleware\PostAttachmentMiddleware;
 use Zend\Expressive\Application;
 
-return function (Application $app, string $prefix) {
+return function (Application $app) {
     $app->post(
-        sprintf('%s/protected/post-attachment/{command:upload}[/]', $prefix),
+        '%s/protected/post-attachment/{command:upload}[/]',
         PostAttachmentMiddleware::class,
         'post-attachment-upload'
     );

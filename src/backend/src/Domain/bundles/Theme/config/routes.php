@@ -4,45 +4,45 @@ namespace Domain\Theme;
 use Domain\Theme\Middleware\ThemeMiddleware;
 use Zend\Expressive\Application;
 
-return function (Application $app, string $prefix) {
+return function (Application $app) {
     $app->put(
-        sprintf('%s/protected/theme/{command:create}', $prefix),
+        '/protected/theme/{command:create}',
         ThemeMiddleware::class,
         'theme-create'
     );
 
     $app->delete(
-        sprintf('%s/protected/theme/{themeId}/{command:delete}', $prefix),
+        '/protected/theme/{themeId}/{command:delete}',
         ThemeMiddleware::class,
         'theme-delete'
     );
 
     $app->get(
-        sprintf('%s/theme/{themeId}/{command:get}', $prefix),
+        '/theme/{themeId}/{command:get}',
         ThemeMiddleware::class,
         'theme-get'
     );
 
     $app->get(
-        sprintf('%s/theme/get/{command:list-all}', $prefix),
+        '/theme/get/{command:list-all}',
         ThemeMiddleware::class,
         'theme-list-all'
     );
 
     $app->post(
-        sprintf('%s/protected/theme/{themeId}/{command:move}/under/{parentThemeId}/in-position/{position}', $prefix),
+        '/protected/theme/{themeId}/{command:move}/under/{parentThemeId}/in-position/{position}',
         ThemeMiddleware::class,
         'theme-move'
     );
 
     $app->get(
-        sprintf('%s/theme/get/{command:tree}', $prefix),
+        '/theme/get/{command:tree}',
         ThemeMiddleware::class,
         'theme-tree'
     );
 
     $app->post(
-        sprintf('%s/protected/theme/{themeId}/{command:update}', $prefix),
+        '/protected/theme/{themeId}/{command:update}',
         ThemeMiddleware::class,
         'theme-update'
     );
