@@ -20,11 +20,9 @@ import {MainMenu} from './module/common/component/MainMenu/index'
 import {AuthService} from './module/auth/service/AuthService';
 import {AuthComponent} from './module/auth/index';
 import {ProfileComponent} from './module/profile/index';
-import {CatalogComponent} from './module/catalog/index';
 import {frontline, FrontlineService} from "./module/frontline/service";
 import {ThemeService} from "./module/theme/service/ThemeService";
 import {ThemeSelector} from "./module/theme/component/ThemeSelector/component";
-import {PostRestService} from "./module/post/service/PostRestService";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -33,9 +31,6 @@ import {PostRestService} from "./module/post/service/PostRestService";
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,
         MainMenu
-    ],
-    providers: [
-        PostRestService
     ]
 })
 @RouteConfig([
@@ -47,13 +42,8 @@ import {PostRestService} from "./module/post/service/PostRestService";
     },
     {
         path: '/auth/...',
-        name: 'Domain\Auth',
+        name: 'Auth',
         component: AuthComponent
-    },
-    {
-        path: '/catalog/...',
-        name: 'Catalog',
-        component: CatalogComponent
     },
     {
         path: '/test/',

@@ -5,18 +5,18 @@
   <div class="profile-menu">
     <div class="menu-group">
       <header>
-        <h1>Domain\Profile</h1>
+        <h1>Profile</h1>
       </header>
       <div>
         <ul class="menu-item-list">
           <li>
-            <a class="menu-item" [routerLink]="['Domain\Profile/Edit']">
+            <a class="menu-item" [routerLink]="['Profile/Edit']">
               <i class="fa fa-fw fa-user"></i>
               <span class="title">Edit personal data</span>
             </a>
           </li>
           <li>
-            <a class="menu-item" [routerLink]="['Domain\Auth/Logout']">
+            <a class="menu-item" [routerLink]="['Auth/Logout']">
               <i class="fa fa-fw fa-sign-out"></i>
               <span class="title">Sign Out</span>
             </a>
@@ -41,7 +41,7 @@
       </div>
       <ul class="menu-item-list">
         <li *ngFor="#collection of service.collections">
-          <a class="menu-item" href="#" title="{{ collection.description }}" [routerLink]="['/Domain\Profile/Collections/View', { collectionId: collection.id }]">
+          <a class="menu-item" href="#" title="{{ collection.description }}" [routerLink]="['/Profile/Collections/View', { collectionId: collection.id }]">
             <i class="fa fa-fw fa-circle-o"></i>
             <span class="title">{{ collection.title }}</span>
           </a>

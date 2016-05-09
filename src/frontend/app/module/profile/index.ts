@@ -7,7 +7,6 @@ import {AccountWelcome} from "./component/AccountWelcome/component";
 import {AvatarCropper} from "./component/AvatarCropper/index";
 import {ProfileService} from "./service/ProfileService";
 import {ProfileMenu} from "./component/ProfileMenu/index";
-import {CollectionComponent} from "../collection/index";
 
 @Component({
     template: require('./template.html'),
@@ -40,11 +39,6 @@ import {CollectionComponent} from "../collection/index";
         component: AccountWelcome
     },
     {
-        name: 'Collections',
-        path: '/collections/...',
-        component: CollectionComponent
-    },
-    {
         name: 'AvatarEdit',
         path: '/edit/avatar',
         component: AvatarCropper
@@ -55,7 +49,7 @@ export class ProfileComponent
     constructor(private router: Router
     ) {
         if(! AuthService.isSignedIn()) {
-            router.navigate(['Domain\Auth']);
+            router.navigate(['/Auth']);
         }
     }
 }
