@@ -73,7 +73,7 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
             'uri' => $uri,
             'method' => $method,
             'jsonRequest' => $jsonRequest,
-            'uploadedFiles' => [],
+            'uploadedFiles' => false,
             'headers' => [],
             'x-api-key' => false,
             'server' => [],
@@ -96,6 +96,10 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
 
         if($params['jsonRequest']) {
             $request = $request->withParsedBody(json_decode(json_encode($params['jsonRequest'])));
+        }
+
+        if($params['uploadedFiles']) {
+            $request = $request->withUploadedFiles($params['uploadedFiles']);
         }
 
         ob_start();

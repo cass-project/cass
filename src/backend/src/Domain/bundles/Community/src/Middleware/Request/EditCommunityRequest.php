@@ -4,7 +4,6 @@ namespace Domain\Community\Middleware\Request;
 use Application\REST\Request\Params\SchemaParams;
 use Application\REST\Service\JSONSchema;
 use Domain\Community\CommunityBundle;
-use Domain\Community\Parameters\CreateCommunityParameters;
 use Domain\Community\Parameters\EditCommunityParameters;
 
 class EditCommunityRequest extends SchemaParams
@@ -13,7 +12,7 @@ class EditCommunityRequest extends SchemaParams
     {
         $data = $this->getData();
 
-        return new CreateCommunityParameters(
+        return new EditCommunityParameters(
             $data->title,
             $data->description,
             (int) $data->theme_id

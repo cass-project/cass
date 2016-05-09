@@ -10,6 +10,7 @@ abstract class Command
     const COMMAND_CREATE = 'create';
     const COMMAND_EDIT = 'edit';
     const COMMAND_IMAGE_UPLOAD = 'image-upload';
+    const COMMAND_GET_BY_ID = 'get';
 
     /** @var CommunityService */
     protected $communityService;
@@ -41,6 +42,8 @@ abstract class Command
                 return new EditCommand();
             case self::COMMAND_IMAGE_UPLOAD:
                 return new ImageUploadCommand();
+            case self::COMMAND_GET_BY_ID:
+                return new GetByIdCommand();
         }
     }
 }

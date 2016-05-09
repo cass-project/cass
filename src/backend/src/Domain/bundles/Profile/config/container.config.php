@@ -26,12 +26,15 @@ return [
         ProfileService::class => object()->constructor(
             get(ProfileRepository::class),
             factory(function(Container $container) {
-                return sprintf('%s/profile/profile-image', $container->get('constants.storage'));
+                return sprintf('%s/profile/profile-image', $container->get('config.storage'));
             })
         ),
         ProfileMiddleware::class => object()->constructor(
             get(ProfileService::class),
-            get(CurrentAccountService::class)
+            get(CurrentAccountService::class),
+            factory(function(Container $container) {
+                return sprintf('%s/community/community-image', $container->get('config.storage'));
+            })
         ),
         ProfileCard::class => object()->constructor(
             get(ProfileService::class)

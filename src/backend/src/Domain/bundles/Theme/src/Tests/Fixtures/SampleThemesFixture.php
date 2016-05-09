@@ -6,8 +6,12 @@ use Doctrine\ORM\EntityManager;
 use Domain\Theme\Service\ThemeService;
 use Zend\Expressive\Application;
 
-class SampleThemeFixtures implements Fixture
+class SampleThemesFixture implements Fixture
 {
+    private static $themes = [
+
+    ];
+
     public function up(Application $app, EntityManager $em) {
         $themeService = $app->getContainer()->get(ThemeService::class); /** @var ThemeService $themeService */
         
@@ -36,5 +40,16 @@ class SampleThemeFixtures implements Fixture
             2 => $themeService->createTheme('Theme 5.2', 'My Theme 5.2', $themes[5]->getId()),
             3 => $themeService->createTheme('Theme 5.3', 'My Theme 5.3', $themes[5]->getId()),
         ];
+
+        self::$themes = [
+            'themes_root' => $themes,
+            'themes_sub_2' => $subThemes2,
+            'themes_sub_2_3' => $subThemes23,
+            'themes_sub_5' => $subThemes5
+        ];
+    }
+
+    public static function getThemes() {
+        return self::$themes;
     }
 }

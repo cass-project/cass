@@ -1,7 +1,9 @@
 <?php
 namespace Domain\Community\Entity\Community;
 
-class CommunityImage
+use Application\Util\JSONSerializable;
+
+class CommunityImage implements JSONSerializable
 {
     /** @var string */
     private $storagePath;
@@ -12,11 +14,17 @@ class CommunityImage
     public function __construct(string $storagePath, string $publicPath)
     {
         if(! (is_file($storagePath) && file_exists($storagePath))) {
-            throw new \Exception('File `%s` does\'nt exists');
+            throw new \Exception(sprintf('File `%s` does\'nt exists', $storagePath));
         }
 
         $this->storagePath = $storagePath;
         $this->publicPath = $publicPath;
+    }
+
+    public function toJSON(): array {
+        return [
+            'public_path' => $this->getPublicPath()
+        ];
     }
 
     public function getStoragePath(): string
