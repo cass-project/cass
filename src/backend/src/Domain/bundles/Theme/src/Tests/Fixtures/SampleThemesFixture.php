@@ -8,9 +8,7 @@ use Zend\Expressive\Application;
 
 class SampleThemesFixture implements Fixture
 {
-    private static $themes = [
-
-    ];
+    private static $themes;
 
     public function up(Application $app, EntityManager $em) {
         $themeService = $app->getContainer()->get(ThemeService::class); /** @var ThemeService $themeService */
@@ -49,7 +47,7 @@ class SampleThemesFixture implements Fixture
         ];
     }
 
-    public static function getThemes() {
+    public static function getThemes(): array {
         return self::$themes;
     }
 }

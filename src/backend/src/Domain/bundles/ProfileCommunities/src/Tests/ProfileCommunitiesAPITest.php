@@ -1,9 +1,11 @@
 <?php
 namespace Domain\ProfileCommunities\Tests;
 
-use Application\PHPUnit\Fixtures\DemoAccountFixture;
-use Application\PHPUnit\Fixtures\DemoProfileFixture;
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
+use Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
+use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
+use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 
 /**
  * @backupGlobals disabled
@@ -14,6 +16,8 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
         return [
             new DemoAccountFixture(),
             new DemoProfileFixture(),
+            new SampleThemesFixture(),
+            new SampleCommunitiesFixture(),
         ];
     }
 
