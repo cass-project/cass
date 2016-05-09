@@ -1,0 +1,28 @@
+"/protected/community/{communityId}/leave":
+  delete:
+    tags:
+      - profile_communities
+    description:
+      Покинуть коммунити, т.е. убрать коммунити из закладок текущего аккаунта/профиля
+    security:
+      - x_api_key: []
+    parameters:
+      - name: communityId
+        type: number
+        in: path
+        required: true
+        description: ID коммунити
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        schema:
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Community_Entity_Community'

@@ -6,5 +6,8 @@
         <testsuite name="domain_theme">
             <directory>src/Domain/bundles/Theme/src/Tests</directory>
         </testsuite>
+        <testsuite name="domain_profile_communities">
+            <directory>src/Domain/bundles/ProfileCommunities/src/Tests</directory>
+        </testsuite>
     </testsuites>
 </phpunit>

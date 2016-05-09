@@ -1,0 +1,24 @@
+"/protected/profile/current/joined-communities":
+  get:
+    tags:
+      - profile_communities
+    description:
+      Список коммунити, к которым текущий профиль заджойнился
+    security:
+      - x_api_key: []
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        schema:
+          required:
+            - success
+            - communities
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            communities:
+              type: array
+              items:
+                $ref: '#/definitions/Community_Entity_Community'
