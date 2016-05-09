@@ -7,9 +7,6 @@ npm-debug.log.*
 # composer
 composer.lock
 
-# Phinx
-phinx.yml
-
 # Vagrant
 .vagrant
 Vagrantfile

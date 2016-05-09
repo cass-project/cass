@@ -67,7 +67,7 @@ class Profile implements JSONSerializable
     private $expert_in = [];
 
     /**
-     * @ManyToMany(targetEntity="Theme\Entity\Theme")
+     * @ManyToMany(targetEntity="Domain\Theme\Entity\Theme")
      * @JoinTable(
      *     name="profile_interesting_in",
      *     joinColumns={@JoinColumn(name="profile_id", referencedColumnName="id")},

@@ -16,12 +16,12 @@ class Theme implements SerialEntity, JSONSerializable
     use IdTrait;
 
     /**
-     * @OneToMany(targetEntity="Domain\Theme\Entity\Domain\Theme", mappedBy="parent")
+     * @OneToMany(targetEntity="Domain\Theme\Entity\Theme", mappedBy="parent")
      */
     private $children = [];
 
     /**
-     * @ManyToOne(targetEntity="Domain\Theme", inversedBy="children")
+     * @ManyToOne(targetEntity="Domain\Theme\Entity\Theme", inversedBy="children")
      * @JoinColumn(name="parent_id", referencedColumnName="id")
      * @var Theme|null
      */

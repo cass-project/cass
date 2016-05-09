@@ -1,13 +1,17 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
+namespace {
+    require __DIR__ . '/../vendor/autoload.php';
+}
 
-$app = (new \Application\Bootstrap\AppBuilder([
-    new \Application\ApplicationBundle(),
-    new \Domain\DomainBundle()
-]))->build();
+namespace PhpUnitBootstrap {
+    $app = (new \Application\Bootstrap\AppBuilder([
+        new \Application\ApplicationBundle(),
+        new \Domain\DomainBundle()
+    ]))->build();
 
-/** @var \DI\Container $container */
-$container = $app->getContainer();
-$container->set('config.env', 'test');
+    /** @var \DI\Container $container */
+    $container = $app->getContainer();
+    $container->set('config.env', 'test');
 
-return $app;
+    \Application\PHPUnit\TestCase\MiddlewareTestCase::$app = $app;
+}

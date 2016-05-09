@@ -1,5 +1,5 @@
 <?php
-namespace Application\Common;
+namespace Application;
 
 return [
     'php-di' => [

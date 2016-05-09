@@ -1,10 +1,10 @@
 <phpunit bootstrap="bootstrap/bootstrap-phpunit.php">
     <testsuites>
-        <testsuite name="common">
-            <directory>bundles/Application\Common/src/Tests</directory>
+        <testsuite name="application">
+            <directory>src/Application/src/Tests</directory>
         </testsuite>
-        <testsuite name="theme">
-            <directory>bundles/Domain\Theme/src/Tests</directory>
+        <testsuite name="domain_theme">
+            <directory>src/Domain/bundles/Theme/src/Tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

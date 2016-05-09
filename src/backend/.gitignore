@@ -1,1 +1,4 @@
 vendor
+
+# Phinx
+phinx.yml

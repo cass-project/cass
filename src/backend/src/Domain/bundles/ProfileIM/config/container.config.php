@@ -1,4 +1,6 @@
 <?php
+namespace Domain\ProfileIM;
+
 use function DI\object;
 use function DI\factory;
 use function DI\get;

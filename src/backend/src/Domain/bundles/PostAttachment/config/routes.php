@@ -1,4 +1,6 @@
 <?php
+namespace Domain\PostAttachment;
+
 use Domain\PostAttachment\Middleware\PostAttachmentMiddleware;
 use Zend\Expressive\Application;
 

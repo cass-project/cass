@@ -43,7 +43,8 @@ class ProfileImage implements JSONSerializable
     public function __construct(
         Profile $profile,
         string $publicPath = self::DEFAULT_PROFILE_IMAGE_PUBLIC,
-        string $storagePath = self::DEFAULT_PROFILE_IMAGE_STORAGE) {
+        string $storagePath = self::DEFAULT_PROFILE_IMAGE_STORAGE)
+    {
         $this->profile = $profile;
         $this->profile->setProfileImage($this);
         $this->publicPath = $publicPath;

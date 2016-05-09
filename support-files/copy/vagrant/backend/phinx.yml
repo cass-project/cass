@@ -13,3 +13,11 @@ environments:
         pass: 1234
         port: 3306
         charset: utf8
+    cass_testing:
+        adapter: mysql
+        host: localhost
+        name: cass_testing
+        user: root
+        pass: 1234
+        port: 3306
+        charset: utf8

@@ -1,4 +1,6 @@
 <?php
+namespace Domain\Feed;
+
 use Domain\Feed\Middleware\FeedMiddleware;
 use Zend\Expressive\Application;
 

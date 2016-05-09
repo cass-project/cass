@@ -10,6 +10,7 @@
       "Application\\REST\\": "src/Application/bundles/REST/src",
       "Application\\Swagger\\": "src/Application/bundles/Swagger/src",
       "Application\\Util\\": "src/Application/bundles/Util/src",
+      "Application\\PHPUnit\\": "src/Application/bundles/PHPUnit/src",
       "Domain\\Account\\": "src/Domain/bundles/Account/src",
       "Domain\\Auth\\": "src/Domain/bundles/Auth/src",
       "Domain\\Collection\\": "src/Domain/bundles/Collection/src",
@@ -46,10 +47,12 @@
     "php-di/php-di": "^5.2",
     "php-amqplib/php-amqplib": "2.5.*",
     "symfony/console": "^3.0",
-    "phpunit/phpunit": "^5.3",
     "symfony/validator": "^3.0",
     "react/http": "^0.5@dev",
     "phly/react2psr7": "^0.1.1",
     "zendframework/zend-servicemanager": "^3.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.3"
   }
 }
