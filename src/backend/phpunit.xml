@@ -3,6 +3,9 @@
         <testsuite name="application">
             <directory>src/Application/src/Tests</directory>
         </testsuite>
+        <testsuite name="application_frontline">
+            <directory>src/Application/bundles/Frontline/src/Tests</directory>
+        </testsuite>
         <testsuite name="domain_theme">
             <directory>src/Domain/bundles/Theme/src/Tests</directory>
         </testsuite>

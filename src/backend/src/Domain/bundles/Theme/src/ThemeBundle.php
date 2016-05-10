@@ -15,7 +15,7 @@ class ThemeBundle extends GenericBundle implements FrontlineBundleInjectable
     public function getFrontlineScripts(): array
     {
         return [
-            'themes' => ThemeScript::class
+            // 'themes' => ThemeScript::class
         ];
     }
 }

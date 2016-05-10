@@ -13,8 +13,8 @@ use DI\Container;
 return [
     'php-di' => [
         FrontlineService::class => object()->constructor(
-            get(BundleService::class),
-            get(Container::class)
+            get(Container::class),
+            get(BundleService::class)
         ),
         FrontlineMiddleware::class => object()->constructor(
             get(FrontlineService::class)

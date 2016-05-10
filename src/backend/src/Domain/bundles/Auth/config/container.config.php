@@ -11,7 +11,7 @@ use Domain\Auth\Middleware\AuthMiddleware;
 use Domain\Auth\Middleware\ProtectedMiddleware;
 use Domain\Auth\Service\AuthService;
 use Domain\Auth\Service\CurrentAccountService;
-use Application\Auth\Frontline\AuthTokenScript;
+use Domain\Auth\Frontline\AuthTokenScript;
 use Application\Frontline\Service\FrontlineService;
 
 return [

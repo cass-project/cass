@@ -1,5 +1,5 @@
 <?php
-namespace Application\Auth\Frontline;
+namespace Domain\Auth\Frontline;
 
 use Application\Frontline\FrontlineScript;
 use Domain\Auth\Service\CurrentAccountService;

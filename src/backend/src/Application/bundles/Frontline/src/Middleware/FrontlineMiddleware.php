@@ -22,6 +22,7 @@ class FrontlineMiddleware implements MiddlewareInterface
 
         return $response
             ->withStatus(200)
-            ->withHeader('Content-Type', 'application/json');
+            ->withHeader('Content-Type', 'application/json')
+        ;
     }
 }

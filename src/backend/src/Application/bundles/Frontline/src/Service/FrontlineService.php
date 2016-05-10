@@ -1,6 +1,7 @@
 <?php
 namespace Application\Frontline\Service;
 
+use Domain\Auth\Frontline\AuthTokenScript;
 use Application\Frontline\FrontlineBundleInjectable;
 use Application\Service\BundleService;
 use DI\Container;
@@ -15,9 +16,16 @@ class FrontlineService
     /** @var BundleService */
     private $bundlesService;
 
-    public function fetchFrontlineResult() {
+    public function __construct(Container $container, BundleService $bundlesService)
+    {
+        $this->container = $container;
+        $this->bundlesService = $bundlesService;
+    }
+
+    public function fetchFrontlineResult()
+    {
         $result = [];
-        
+
         foreach ($this->bundlesService->getBundles() as $bundle) {
             if($bundle instanceof FrontlineBundleInjectable) {
                 foreach($bundle->getFrontlineScripts() as $key => $scriptName) {

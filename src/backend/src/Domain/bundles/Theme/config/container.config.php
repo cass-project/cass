@@ -20,7 +20,7 @@ return [
             get(ThemeRepository::class)
         ),
         ThemeScript::class => object()->constructor(
-            get(ThemeRepository::class)
+            get(ThemeService::class)
         )
     ]
 ];

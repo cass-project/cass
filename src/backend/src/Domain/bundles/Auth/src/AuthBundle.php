@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Auth;
 
-use Application\Auth\Frontline\AuthTokenScript;
+use Domain\Auth\Frontline\AuthTokenScript;
 use Application\Frontline\FrontlineBundleInjectable;
 use Application\Bundle\GenericBundle;
 
