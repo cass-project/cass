@@ -5,7 +5,6 @@ use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Uri;
-use Zend\Expressive\Application;
 
 class Request
 {

@@ -154,6 +154,20 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
     /* =============== */
 
     /**
+     * Выводит в консоль содержимое текущего ответа
+     */
+    protected function dump(): self {
+        var_dump("");
+        var_dump("===== DUMP START =====");
+        var_dump(sprintf('STATUS CODE: %s', self::$currentResult->getHttpResponse()->getStatusCode()));
+        var_dump("CONTENT: ");
+        print_r(self::$currentResult->getContent());
+        var_dump("===== DUMP END =====");
+
+        return $this;
+    }
+
+    /**
      * Проверка HTTP-кода
      * @param int $statusCode
      * @return MiddlewareTestCase
