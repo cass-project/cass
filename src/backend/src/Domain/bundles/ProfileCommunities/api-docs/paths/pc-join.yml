@@ -15,6 +15,11 @@
     responses:
       403:
         $ref: '#/responses/Unauthorized'
+      409:
+        description:
+          Пользователь уже заджойнился к этому коммунити
+        schema:
+          $ref: '#/responses/error'
       200:
         schema:
           required:
@@ -25,4 +30,4 @@
               type: boolean
               description: '=true'
             entity:
-              $ref: '#/definitions/Community_Entity_Community'
+              $ref: '#/definitions/ProfileCommunities_Entity_ProfileCommunityEQEntity'

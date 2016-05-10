@@ -2,6 +2,7 @@
 namespace Domain\ProfileCommunities\Entity;
 
 use Application\Util\IdTrait;
+use Application\Util\JSONSerializable;
 use Domain\Community\Entity\Community;
 use Domain\Profile\Entity\Profile;
 
@@ -9,7 +10,7 @@ use Domain\Profile\Entity\Profile;
  * @Entity(repositoryClass="Domain\ProfileCommunities\Repository\ProfileCommunitiesRepository")
  * @Table(name="profile_communities")
  */
-class ProfileCommunityEQ
+class ProfileCommunityEQ implements JSONSerializable
 {
     use IdTrait;
 
@@ -30,6 +31,15 @@ class ProfileCommunityEQ
     public function __construct(Profile $profile, Community $community) {
         $this->profile = $profile;
         $this->community = $community;
+    }
+
+    public function toJSON(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'profile_id' => $this->getProfile()->getId(),
+            'community' => $this->getCommunity()->toJSON()
+        ];
     }
 
     public function getProfile(): Profile {

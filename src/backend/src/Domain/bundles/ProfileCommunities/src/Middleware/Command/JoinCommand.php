@@ -7,6 +7,12 @@ use Psr\Http\Message\ServerRequestInterface;
 class JoinCommand extends Command
 {
     public function __invoke(ServerRequestInterface $request) {
-        throw new NotImplementedException;
+        $communityId = $request->getAttribute('communityId');
+        
+        $eq = $this->profileCommunitiesService->joinToCommunity($communityId);
+
+        return [
+            'entity' => $eq->toJSON()
+        ];
     }
 }

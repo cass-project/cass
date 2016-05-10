@@ -2,6 +2,8 @@
 namespace Domain\ProfileCommunities\Middleware;
 
 use Application\REST\Response\GenericResponseBuilder;
+use Domain\ProfileCommunities\Exception\AlreadyJoinedException;
+use Domain\ProfileCommunities\Exception\AlreadyLeavedException;
 use Domain\ProfileCommunities\Middleware\Command\Command;
 use Domain\ProfileCommunities\Service\ProfileCommunitiesService;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -20,12 +22,22 @@ class ProfileCommunitiesMiddleware implements MiddlewareInterface
     public function __invoke(Request $request, Response $response, callable $out = null) {
         $responseBuilder = new GenericResponseBuilder($response);
 
-        $command = Command::factory($request, $this->profileCommunitiesService);
-        $result = $command($request);
+        try {
+            $command = Command::factory($request, $this->profileCommunitiesService);
+            $result = $command($request);
 
-        $responseBuilder
-            ->setStatusSuccess()
-            ->setJson($result);
+            $responseBuilder
+                ->setStatusSuccess()
+                ->setJson($result);
+        }catch(AlreadyJoinedException $e) {
+            $responseBuilder
+                ->setStatus(409)
+                ->setError($e);
+        }catch(AlreadyLeavedException $e) {
+            $responseBuilder
+                ->setStatus(409)
+                ->setError($e);
+        }
 
         return $responseBuilder->build();
     }

@@ -15,14 +15,16 @@
     responses:
       403:
         $ref: '#/responses/Unauthorized'
+      409:
+        description:
+          Пользователь уже ливнул из этого коммунити либо никогда к нему не джойнился
+        schema:
+          $ref: '#/responses/error'
       200:
         schema:
           required:
             - success
-            - entity
           properties:
             success:
               type: boolean
               description: '=true'
-            entity:
-              $ref: '#/definitions/Community_Entity_Community'

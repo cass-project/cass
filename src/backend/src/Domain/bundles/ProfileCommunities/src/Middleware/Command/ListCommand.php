@@ -7,6 +7,8 @@ use Psr\Http\Message\ServerRequestInterface;
 class ListCommand extends Command
 {
     public function __invoke(ServerRequestInterface $request) {
-        throw new NotImplementedException;
+        return [
+            'bookmarks' => $this->profileCommunitiesService->getBookmarksOfCurrentProfile()
+        ];
     }
 }

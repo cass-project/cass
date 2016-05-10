@@ -13,12 +13,12 @@
         schema:
           required:
             - success
-            - communities
+            - bookmarks
           properties:
             success:
               type: boolean
               description: '=true'
-            communities:
+            bookmarks:
               type: array
               items:
-                $ref: '#/definitions/Community_Entity_Community'
+                $ref: '#/definitions/ProfileCommunities_Entity_ProfileCommunityEQEntity'
