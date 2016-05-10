@@ -4,6 +4,7 @@ namespace Domain\Collection\Service;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Collection\Entity\Collection;
 use Domain\Collection\Parameters\CreateCollectionParameters;
+use Domain\Collection\Parameters\EditCollectionParameters;
 use Domain\Collection\Repository\CollectionRepository;
 use Domain\Community\Repository\CommunityRepository;
 use Domain\Profile\Repository\ProfileRepository;
@@ -78,5 +79,25 @@ class CollectionService
         }
 
         $this->collectionRepository->deleteCollection($collectionId);
+    }
+
+    public function editCollection(int $collectionId, EditCollectionParameters $parameters): Collection
+    {
+        $collection = $this->collectionRepository->getCollectionById($collectionId);
+        list($owner, $ownerId) = explode(':', $collection->getOwnerSID());
+
+        if($owner === 'profile') {
+            $profile = $this->profileRepository->getProfileById($ownerId);
+
+            $this->validationService->validateIsCollectionOwnedByProfile($collection, $profile);
+        }else if($owner === 'community') {
+            $community = $this->communityRepository->getCommunityById($ownerId);
+
+            $this->validationService->validateIsCollectionOwnedByCommunity($collection, $community);
+        }else{
+            throw new \Exception('Unknown owner');
+        }
+
+        return $this->collectionRepository->editCollection($collectionId, $parameters);
     }
 }

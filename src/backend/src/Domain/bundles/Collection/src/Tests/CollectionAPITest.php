@@ -235,6 +235,60 @@ class CollectionAPITest extends MiddlewareTestCase
         ;
     }
 
+    public function testEditCollection()
+    {
+        $this->upFixture(new SampleCollectionsFixture());
+
+        $collection = SampleCollectionsFixture::getCommunityCollection(1);
+        $json = [
+            'title' => '* my edited title',
+            'description' => '* my edited description',
+            'theme_id' => SampleThemesFixture::getTheme(5)->getId()
+        ];
+
+        $this->requestEditCollection($collection->getId(), $json)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true,
+                'entity' => [
+                    'title' => $json['title'],
+                    'description' => $json['description'],
+                    'theme_id' => SampleThemesFixture::getTheme(5)->getId()
+                ]
+            ])
+        ;
+    }
+
+    public function testEditCollectionUnsetTheme()
+    {
+        $this->upFixture(new SampleCollectionsFixture());
+
+        $collection = SampleCollectionsFixture::getCommunityCollection(1);
+        $json = [
+            'title' => '* my edited title',
+            'description' => '* my edited description',
+            'theme_id' => 0
+        ];
+
+        $this->requestEditCollection($collection->getId(), $json)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true,
+                'entity' => [
+                    'title' => $json['title'],
+                    'description' => $json['description'],
+                    'theme_id' => null
+                ]
+            ])
+        ;
+    }
+
     private function requestCreateCommunityCollection(int $communityId, array $json): RESTRequest
     {
         return $this->request('PUT', sprintf('/protected/community/%d/collection/create', $communityId))
@@ -260,6 +314,12 @@ class CollectionAPITest extends MiddlewareTestCase
     private function requestDeleteCollection(int $collectionId): RESTRequest
     {
         return $this->request('DELETE', sprintf('/protected/collection/%d/delete', $collectionId));
+    }
+
+    private function requestEditCollection(int $collectionId, array $json): RESTRequest
+    {
+        return $this->request('POST', sprintf('/protected/collection/%d/edit', $collectionId))
+            ->setParameters($json);
     }
 }
 
