@@ -4,6 +4,7 @@ namespace Domain\Collection\Tests;
 use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
@@ -145,6 +146,95 @@ class CollectionAPITest extends MiddlewareTestCase
         ;
     }
 
+    public function testProfileDeleteCollection() {
+        $this->upFixture(new SampleCollectionsFixture());
+
+        $collectionToDelete = SampleCollectionsFixture::getProfileCollection(1);
+        $collectionId = $collectionToDelete->getId();
+        list($owner, $profileId) = explode(':', $collectionToDelete->getOwnerSID());
+
+        $this->requestGetProfile($profileId)
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expect(function(array $jsonResponse) use ($collectionId) {
+                $collectionIds = array_map(function(array $input) {
+                    return $input['collection_id'];
+                }, $jsonResponse['entity']['collections']);
+
+                $this->assertTrue(in_array($collectionId, $collectionIds));
+            })
+        ;
+
+        $this->requestDeleteCollection($collectionToDelete->getId())
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true
+            ])
+        ;
+
+        $this->requestGetProfile($profileId)
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expect(function(array $jsonResponse) use ($collectionId) {
+                $collectionIds = array_map(function(array $input) {
+                    return $input['collection_id'];
+                }, $jsonResponse['entity']['collections']);
+
+                $this->assertFalse(in_array($collectionId, $collectionIds));
+            })
+        ;
+    }
+
+    public function testCommunityDeleteCollection()
+    {
+        $this->upFixture(new SampleCollectionsFixture());
+
+        $collectionToDelete = SampleCollectionsFixture::getCommunityCollection(1);
+        $collectionId = $collectionToDelete->getId();
+        list($owner, $communityId) = explode(':', $collectionToDelete->getOwnerSID());
+
+        $this->requestGetCommunity($communityId)
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expect(function(array $jsonResponse) use ($collectionId) {
+                $collectionIds = array_map(function(array $input) {
+                    return $input['collection_id'];
+                }, $jsonResponse['entity']['collections']);
+
+                $this->assertTrue(in_array($collectionId, $collectionIds));
+            })
+        ;
+
+        $this->requestDeleteCollection($collectionToDelete->getId())
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true
+            ])
+        ;
+
+        $this->requestGetCommunity($communityId)
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expect(function(array $jsonResponse) use ($collectionId) {
+                $collectionIds = array_map(function(array $input) {
+                    return $input['collection_id'];
+                }, $jsonResponse['entity']['collections']);
+
+                $this->assertFalse(in_array($collectionId, $collectionIds));
+            })
+        ;
+    }
+
     private function requestCreateCommunityCollection(int $communityId, array $json): RESTRequest
     {
         return $this->request('PUT', sprintf('/protected/community/%d/collection/create', $communityId))
@@ -166,4 +256,10 @@ class CollectionAPITest extends MiddlewareTestCase
     {
         return $this->request('GET', sprintf('/profile/%d/get', $profileId));
     }
+
+    private function requestDeleteCollection(int $collectionId): RESTRequest
+    {
+        return $this->request('DELETE', sprintf('/protected/collection/%d/delete', $collectionId));
+    }
 }
+

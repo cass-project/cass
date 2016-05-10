@@ -8,6 +8,10 @@ class DeleteCommand extends Command
 {
     public function run(ServerRequestInterface $request)
     {
-        throw new NotImplementedException;
+        $collectionId = $request->getAttribute('collectionId');
+
+        $this->collectionService->deleteCollection($collectionId);
+
+        return [];
     }
 }

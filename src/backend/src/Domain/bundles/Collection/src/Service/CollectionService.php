@@ -6,15 +6,15 @@ use Domain\Collection\Entity\Collection;
 use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Repository\CollectionRepository;
 use Domain\Community\Repository\CommunityRepository;
-use Domain\Community\Service\CommunityService;
 use Domain\Profile\Repository\ProfileRepository;
-use Domain\Profile\Service\ProfileService;
-use Domain\Theme\Repository\ThemeRepository;
 
 class CollectionService
 {
     /** @var CurrentAccountService */
     private $currentAccountService;
+
+    /** @var CollectionValidatorsService */
+    private $validationService;
 
     /** @var CollectionRepository */
     private $collectionRepository;
@@ -26,11 +26,13 @@ class CollectionService
     private $profileRepository;
 
     public function __construct(
+        CollectionValidatorsService $collectionValidatorsService,
         CurrentAccountService $currentAccountService,
         CollectionRepository $collectionRepository,
         CommunityRepository $communityRepository,
         ProfileRepository $profileRepository
     ) {
+        $this->validationService = $collectionValidatorsService;
         $this->currentAccountService = $currentAccountService;
         $this->collectionRepository = $collectionRepository;
         $this->communityRepository = $communityRepository;
@@ -39,7 +41,7 @@ class CollectionService
 
     public function createCommunityCollection(int $communityId, CreateCollectionParameters $parameters): Collection
     {
-        $collection = $this->collectionRepository->createCollection($parameters);
+        $collection = $this->collectionRepository->createCollection(sprintf('community:%d', $communityId), $parameters);
 
         $this->communityRepository->linkCollection($communityId, $collection->getId());
 
@@ -50,9 +52,31 @@ class CollectionService
     {
         $profileId = $this->currentAccountService->getCurrentProfile()->getId();
 
-        $collection = $this->collectionRepository->createCollection($parameters);
+        $collection = $this->collectionRepository->createCollection(sprintf('profile:%d', $profileId), $parameters);
         $this->profileRepository->linkCollection($profileId, $collection->getId());
 
         return $collection;
+    }
+
+    public function deleteCollection(int $collectionId)
+    {
+        $collection = $this->collectionRepository->getCollectionById($collectionId);
+        list($owner, $ownerId) = explode(':', $collection->getOwnerSID());
+
+        if($owner === 'profile') {
+            $profile = $this->profileRepository->getProfileById($ownerId);
+
+            $this->validationService->validateIsCollectionOwnedByProfile($collection, $profile);
+            $this->profileRepository->unlinkCollection($profile->getId(), $collectionId);
+        }else if($owner === 'community') {
+            $community = $this->communityRepository->getCommunityById($ownerId);
+
+            $this->validationService->validateIsCollectionOwnedByCommunity($collection, $community);
+            $this->communityRepository->unlinkCollection($community->getId(), $collectionId);
+        }else{
+            throw new \Exception('Unknown owner');
+        }
+
+        $this->collectionRepository->deleteCollection($collectionId);
     }
 }

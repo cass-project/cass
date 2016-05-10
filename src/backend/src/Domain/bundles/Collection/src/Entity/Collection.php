@@ -16,6 +16,12 @@ class Collection implements JSONSerializable
     use IdTrait;
 
     /**
+     * @Column(type="string", name="owner_sid")
+     * @var string
+     */
+    private $ownerSID;
+
+    /**
      * @ManyToOne(targetEntity="Domain\Theme\Entity\Theme")
      * @JoinColumn(name="theme_id", referencedColumnName="id")
      * @var Theme
@@ -34,8 +40,9 @@ class Collection implements JSONSerializable
      */
     private $description;
 
-    public function __construct(string $title, string $description, Theme $theme = null)
+    public function __construct(string $ownerSID, string $title, string $description, Theme $theme = null)
     {
+        $this->ownerSID = $ownerSID;
         $this->theme = $theme;
         $this->title = $title;
         $this->description = $description;
@@ -49,6 +56,11 @@ class Collection implements JSONSerializable
             'has_theme' => $this->hasTheme(),
             'theme_id' => $this->hasTheme() ? $this->getTheme()->getId() : null,
         ];
+    }
+
+    public function getOwnerSID(): string
+    {
+        return $this->ownerSID;
     }
 
     public function getTheme(): Theme {
