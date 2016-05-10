@@ -4,8 +4,6 @@
       - theme
     description: Возвращает все существующие тематики в виде дерева
     responses:
-      '400':
-          $ref: '#/responses/error'
       '200':
         description: Дерево тематик
         schema:

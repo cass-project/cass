@@ -4,8 +4,6 @@
       - theme
     description: Список тематик
     responses:
-      '400':
-          $ref: '#/responses/error'
       '200':
         description: Список тематик
         schema:
