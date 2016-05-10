@@ -18,6 +18,10 @@
         schema:
           $ref: '#/definitions/Collection_Entity_Request'
     responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        $ref: '#/responses/NotFound'
       200:
         description: Коллекция создана
         schema:

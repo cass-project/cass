@@ -45,4 +45,14 @@ class CollectionService
 
         return $collection;
     }
+
+    public function createProfileCollection(CreateCollectionParameters $parameters): Collection
+    {
+        $profileId = $this->currentAccountService->getCurrentProfile()->getId();
+
+        $collection = $this->collectionRepository->createCollection($parameters);
+        $this->profileRepository->linkCollection($profileId, $collection->getId());
+
+        return $collection;
+    }
 }

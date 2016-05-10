@@ -296,4 +296,32 @@ class ProfileRepository extends EntityRepository
         $this->updateProfile($profile);
         return $profile;
     }
+
+    public function linkCollection(int $profileId, int $collectionId): Profile
+    {
+        $profile = $this->getProfileById($profileId);
+        $collections = $profile->getCollections();
+
+        if(! $collections->hasCollection($collectionId)) {
+            $collections->attachChild($collectionId);
+        }
+
+        $this->getEntityManager()->flush($profile);
+
+        return $profile;
+    }
+
+    public function unlinkCollection(int $profileId, int $collectionId): Profile
+    {
+        $profile = $this->getProfileById($profileId);
+        $collections = $profile->getCollections();
+
+        if($collections->hasCollection($collectionId)) {
+            $collections->detachChild($collectionId);
+        }
+
+        $this->getEntityManager()->flush($profile);
+
+        return $profile;
+    }
 }

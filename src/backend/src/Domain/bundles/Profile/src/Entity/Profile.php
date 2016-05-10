@@ -5,6 +5,8 @@ use Application\Util\IdTrait;
 use Application\Util\JSONSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Domain\Account\Entity\Account;
+use Domain\Collection\Collection\CollectionTree;
+use Domain\Collection\Traits\CollectionOwnerTrait;
 use Domain\Theme\Entity\Theme;
 use Domain\Profile\Exception\UnknownGenderException;
 
@@ -18,6 +20,7 @@ class Profile implements JSONSerializable
     const GENDER_FEMALE = 0;
 
     use IdTrait;
+    use CollectionOwnerTrait;
 
     /**
      * @Column(type="integer")
@@ -102,7 +105,8 @@ class Profile implements JSONSerializable
             }, $this->expert_in->toArray()),
             'interesting_in' => array_map(function (Theme $theme) {
                 return $theme->getId();
-            }, $this->interesting_in->toArray())
+            }, $this->interesting_in->toArray()),
+            'collections' => $this->collections->toJSON()
         ];
     }
 
@@ -110,6 +114,7 @@ class Profile implements JSONSerializable
         $this->account = $account;
         $this->expert_in = new ArrayCollection();
         $this->interesting_in = new ArrayCollection();
+        $this->collections = new CollectionTree();
     }
 
     public function getGender() {

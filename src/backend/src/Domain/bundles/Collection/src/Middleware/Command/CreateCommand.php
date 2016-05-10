@@ -31,7 +31,7 @@ class CreateCommand extends Command
                 $parameters
             );
         }else if($owner === 'profile') {
-            throw new NotImplementedException;
+            return $this->collectionService->createProfileCollection($parameters);
         }else{
             throw new CommandNotFoundException('Unknown collection owner');
         }
