@@ -3,6 +3,8 @@ namespace Domain\Collection\Entity;
 
 use Application\Util\IdTrait;
 use Application\Util\JSONSerializable;
+use Domain\Community\Entity\Community;
+use Domain\Profile\Entity\Profile;
 use Domain\Theme\Entity\Theme;
 
 /**
@@ -14,7 +16,7 @@ class Collection implements JSONSerializable
     use IdTrait;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Theme\Entity\Domain\Theme")
+     * @ManyToOne(targetEntity="Domain\Theme\Entity\Theme")
      * @JoinColumn(name="theme_id", referencedColumnName="id")
      * @var Theme
      */
@@ -31,6 +33,13 @@ class Collection implements JSONSerializable
      * @var string
      */
     private $description;
+
+    public function __construct(string $title, string $description, Theme $theme = null)
+    {
+        $this->theme = $theme;
+        $this->title = $title;
+        $this->description = $description;
+    }
 
     public function toJSON(): array {
         return [

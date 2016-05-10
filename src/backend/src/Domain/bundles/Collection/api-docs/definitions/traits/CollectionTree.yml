@@ -1,0 +1,4 @@
+Collection_Traits_CollectionTree:
+  type: array
+  items:
+    $ref: '#/definitions/Collection_Traits_CollectionItem'

@@ -2,6 +2,8 @@
 namespace Domain\Community\Entity;
 
 use Application\Util\IdTrait;
+use Domain\Collection\Collection\CollectionTree;
+use Domain\Collection\Traits\CollectionOwnerTrait;
 use Domain\Community\Entity\Community\CommunityImage;
 use Domain\Theme\Entity\Theme;
 
@@ -12,6 +14,7 @@ use Domain\Theme\Entity\Theme;
 class Community
 {
     use IdTrait;
+    use CollectionOwnerTrait;
 
     /**
      * @Column(type="datetime", name="date_created_on")
@@ -47,6 +50,7 @@ class Community
     public function __construct(string $title, string $description, Theme $theme)
     {
         $this->dateCreatedOn = new \DateTime();
+        $this->collections = new CollectionTree();
         $this
             ->setTitle($title)
             ->setDescription($description)
@@ -60,7 +64,8 @@ class Community
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
             'theme_id' => $this->getTheme()->getId(),
-            'has_image' => $this->hasImage()
+            'has_image' => $this->hasImage(),
+            'collections' => $this->collections->toJSON()
         ];
 
         if($result['has_image']) {

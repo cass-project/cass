@@ -6,19 +6,25 @@ use Zend\Expressive\Application;
 
 return function(Application $app) {
     $app->put(
-        '/protected/{source:profile|community}/{sourceId}/collection/{command:create}',
+        '/protected/{owner:community}/{communityId}/collection/{command:create}[/]',
         CollectionMiddleware::class,
-        'collection-create'
+        'collection-create-community'
+    );
+
+    $app->put(
+        '/protected/{owner:profile}/current/collection/{command:create}[/]',
+        CollectionMiddleware::class,
+        'collection-create-profile'
     );
 
     $app->delete(
-        '/protected/collection/{collectionId}/{command:delete}',
+        '/protected/collection/{collectionId}/{command:delete}[/]',
         CollectionMiddleware::class,
         'collection-delete'
     );
 
     $app->post(
-        '/protected/collection/{collectionId}/{command:edit}',
+        '/protected/collection/{collectionId}/{command:edit}[/]',
         CollectionMiddleware::class,
         'collection-edit'
     );

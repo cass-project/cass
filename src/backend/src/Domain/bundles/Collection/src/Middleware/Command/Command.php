@@ -12,7 +12,7 @@ abstract class Command
     const COMMAND_EDIT = 'edit';
 
     /** @var CollectionService */
-    private $collectionService;
+    protected $collectionService;
 
     public function setCollectionService(CollectionService $collectionService)
     {

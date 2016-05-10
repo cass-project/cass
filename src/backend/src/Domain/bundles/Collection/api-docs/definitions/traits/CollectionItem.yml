@@ -1,0 +1,13 @@
+Collection_Traits_CollectionItem:
+  required:
+    - collection_id
+    - position
+  properties:
+    collection_id:
+      type: number
+      description: ID коллекции
+    position:
+      type: number
+      description: Позиция в списке
+    sub:
+      $ref: '#/definitions/Collection_Traits_CollectionTree'

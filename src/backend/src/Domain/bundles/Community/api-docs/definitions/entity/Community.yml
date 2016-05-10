@@ -6,6 +6,7 @@ Community_Entity_Community:
     - description
     - theme_id
     - has_image
+    - collections
   properties:
     id:
       type: number
@@ -30,4 +31,4 @@ Community_Entity_Community:
     collections:
       type: array
       items:
-        $ref: '#/definitions/Collection_Entity_Collection'
+        $ref: '#/definitions/Collection_Traits_CollectionTree'
