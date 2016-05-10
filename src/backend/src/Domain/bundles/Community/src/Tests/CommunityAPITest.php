@@ -1,21 +1,23 @@
 <?php
 namespace Domain\Community\Tests;
 
+use Application\PHPUnit\RESTRequest\Request;
 use Application\Util\Definitions\Point;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Theme\Entity\Theme;
 use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 use Zend\Diactoros\UploadedFile;
-use Zend\Stratigility\Http\Response;
 
 /**
  * @backupGlobals disabled
  */
 class CommunityAPITests extends MiddlewareTestCase
 {
-    protected function getFixtures(): array {
+    protected function getFixtures(): array
+    {
         return [
             new DemoAccountFixture(),
             new DemoProfileFixture(),
@@ -23,148 +25,159 @@ class CommunityAPITests extends MiddlewareTestCase
         ];
     }
 
-    private function createCommunity(array $json): int {
-        $response = $this->executeJSONRequest('/protected/community/create', 'PUT', $json, ['x-api-key' => DemoAccountFixture::getAccount()->getAPIKey()]);
-        $output = $this->output;
+    public function testCreateCommunity()
+    {
+        $theme = SampleThemesFixture::getTheme(1);
+        /** @var Theme $theme */
+        $json = [
+            'title' => 'Community 1',
+            'description' => 'My Community 1',
+            'theme_id' => $theme->getId()
+        ];
 
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(true, $output['success']);
-        $this->assertArrayHasKey('id', $output['entity']);
-        $this->assertEquals($json['title'], $output['entity']['title']);
-        $this->assertEquals($json['description'], $output['entity']['description']);
-        $this->assertEquals($json['theme_id'], $output['entity']['theme_id']);
-
-        return $output['entity']['id'];
+        $this->requestCreateCommunity($json)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(200)
+            ->expectJSONBody([
+                'success' => true,
+                'entity' => array_merge_recursive([
+                    'id' => $this->expectId()
+                ], $json)
+            ]);
     }
-    
-    private function uploadImage(int $communityId, Point $start, Point $end): Response {
-        $url = "/protected/community/{$communityId}/image-upload/crop-start/{$start->getX()}/{$start->getY()}/crop-end/{$end->getX()}/{$end->getY()}/";
 
-        $fileName = __DIR__.'/resources/grid-example.png';
-        $uploadedFile = new UploadedFile($fileName, filesize($fileName), 0);
+    public function testCreateCommunity403()
+    {
+        $theme = SampleThemesFixture::getTheme(1);
+        /** @var Theme $theme */
+        $json = [
+            'title' => 'Community 1',
+            'description' => 'My Community 1',
+            'theme_id' => $theme->getId()
+        ];
 
-        return $this->executeJSONRequest($url, 'POST', [], [
-            'x-api-key' => DemoAccountFixture::getAccount()->getAPIKey(),
-            'uploadedFiles' => [
-                'file' => $uploadedFile
-            ]
+        $this->requestCreateCommunity($json)
+            ->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(403)
+            ->expectJSONError();
+    }
+
+    public function testEditCommunity()
+    {
+        $this->upFixture(new SampleCommunitiesFixture());
+
+        $sampleCommunity = SampleCommunitiesFixture::getCommunity(2);
+        $moveToTheme = SampleThemesFixture::getTheme(5);
+
+        $this->requestEditCommunity($sampleCommunity->getId(), [
+            'title' => '* title_edited',
+            'description' => '* description_edited',
+            'theme_id' => $moveToTheme->getId()
+        ])->auth(DemoAccountFixture::getAccount()->getAPIKey())->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(200)
+            ->expectJSONBody([
+                'success' => true,
+                'entity' => [
+                    'title' => '* title_edited',
+                    'description' => '* description_edited',
+                    'theme_id' => $moveToTheme->getId()
+                ]
+            ]);
+    }
+
+    public function testCommunityGetById()
+    {
+        $this->upFixture(new SampleCommunitiesFixture());
+
+        $sampleCommunity = SampleCommunitiesFixture::getCommunity(2);
+
+        $this->requestGetCommunityById($sampleCommunity->getId())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true,
+                'entity' => [
+                    'title' => $sampleCommunity->getTitle(),
+                    'description' => $sampleCommunity->getDescription(),
+                    'theme_id' => $sampleCommunity->getTheme()->getId()
+                ]
         ]);
     }
 
-    private function getCommunityById(int $communityId, array $json) {
-        $response = $this->executeJSONRequest(sprintf('/community/%d/get', $communityId), 'GET');
-        $output = $this->output;
+    public function testCommunityGetByIdNotFound()
+    {
+        $this->upFixture(new SampleCommunitiesFixture());
 
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(true, $output['success']);
-        $this->assertEquals($communityId, $output['entity']['id']);
-        $this->assertEquals($json['title'], $output['entity']['title']);
-        $this->assertEquals($json['description'], $output['entity']['description']);
-        $this->assertEquals($json['theme_id'], $output['entity']['theme_id']);
+        $this->requestGetCommunityById(999999)
+            ->execute()
+            ->expectStatusCode(404)
+            ->expectJSONContentType()
+            ->expectJSONError();
     }
 
-    private function editCommunity(int $communityId, array $json) {
-        $response = $this->executeJSONRequest(
-            sprintf('/protected/community/%d/edit', $communityId),
-            'POST',
-            $json,
-            ['x-api-key' => DemoAccountFixture::getAccount()->getAPIKey()]
-        );
-        $output = $this->output;
+    public function testUploadImage()
+    {
+        $this->upFixture(new SampleCommunitiesFixture());
 
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(true, $output['success']);
-        $this->assertArrayHasKey('id', $output['entity']);
-        $this->assertEquals($communityId, $output['entity']['id']);
-        $this->assertEquals($json['title'], $output['entity']['title']);
-        $this->assertEquals($json['description'], $output['entity']['description']);
-        $this->assertEquals($json['theme_id'], $output['entity']['theme_id']);
+        $sampleCommunity = SampleCommunitiesFixture::getCommunity(2);
+
+        $this->requestUploadImage($sampleCommunity->getId(), new Point(0, 0), new Point(200, 200))
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(200)
+            ->expectJSONBody([
+                'success' => true,
+                'image' => [
+                    'public_path' => $this->expectString()
+                ]
+            ]);
     }
 
-    public function testCreateCommunityNotAuthorized() {
-        $theme = SampleThemesFixture::getThemes()['themes_root'][1]; /** @var Theme $theme */
-        $response = $this->executeJSONRequest('/protected/community/create', 'PUT', [
-            'title' => 'Community 1',
-            'description' => 'My Community 1',
-            'theme_id' => $theme->getId()
-        ]);
+    public function testUploadImageTooBig()
+    {
+        $this->upFixture(new SampleCommunitiesFixture());
 
-        $this->assertEquals(403, $response->getStatusCode());
-        $this->assertEquals(false, $this->output['success']);
+        $sampleCommunity = SampleCommunitiesFixture::getCommunity(2);
+
+        $this->requestUploadImage($sampleCommunity->getId(), new Point(0, 0), new Point(9999, 9999))
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(422)
+            ->expectJSONError();
     }
 
-    public function testCreateCommunitySuccessWay() {
-        $theme = SampleThemesFixture::getThemes()['themes_root'][1]; /** @var Theme $theme */
-        $json = [
-            'title' => 'Community 1',
-            'description' => 'My Community 1',
-            'theme_id' => $theme->getId()
-        ];
-
-        $this->createCommunity($json);
+    private function requestCreateCommunity(array $json): Request
+    {
+        return $this->request('PUT', '/protected/community/create')
+            ->setParameters($json);
     }
 
-    public function testEditCommunitySuccessWay() {
-        $theme = SampleThemesFixture::getThemes()['themes_root'][1]; /** @var Theme $theme */
-        $json = [
-            'title' => 'Community 1',
-            'description' => 'My Community 1',
-            'theme_id' => $theme->getId()
-        ];
-
-        /** @var Theme $sTheme */
-        $sTheme = SampleThemesFixture::getThemes()['themes_root'][2];
-        $communityId = $this->createCommunity($json);
-        $this->editCommunity($communityId, [
-            'title' => '* Community 1',
-            'description' => '* My Community 1',
-            'theme_id' => $sTheme->getId()
-        ]);
+    private function requestEditCommunity(int $communityId, array $json)
+    {
+        return $this->request('POST', sprintf('/protected/community/%d/edit', $communityId))
+            ->setParameters($json);
     }
 
-    public function testGetById() {
-        $theme = SampleThemesFixture::getThemes()['themes_root'][1]; /** @var Theme $theme */
-        $json = [
-            'title' => 'Community 1',
-            'description' => 'My Community 1',
-            'theme_id' => $theme->getId()
-        ];
+    private function requestUploadImage(int $communityId, Point $start, Point $end): Request
+    {
+        $uri = "/protected/community/{$communityId}/image-upload/crop-start/{$start->getX()}/{$start->getY()}/crop-end/{$end->getX()}/{$end->getY()}/";
+        $fileName = __DIR__ . '/resources/grid-example.png';
 
-        $communityId = $this->createCommunity($json);
-        $this->getCommunityById($communityId, $json);
+        return $this->request('POST', $uri)
+            ->setUploadedFiles([
+                'file' => new UploadedFile($fileName, filesize($fileName), 0)
+            ]);
     }
 
-    public function testUploadImageSuccessWay() {
-        $theme = SampleThemesFixture::getThemes()['themes_root'][1]; /** @var Theme $theme */
-        $json = [
-            'title' => 'Community 1',
-            'description' => 'My Community 1',
-            'theme_id' => $theme->getId()
-        ];
-
-        $communityId = $this->createCommunity($json);
-        $response = $this->uploadImage($communityId, new Point(0, 0), new Point(200, 200));
-        $output = $this->output;
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(true, $output['success']);
-        $this->assertArrayHasKey('image', $output);
-        $this->assertArrayHasKey('public_path', $output['image']);
-    }
-
-    public function testUploadImageTooBig() {
-        $theme = SampleThemesFixture::getThemes()['themes_root'][1]; /** @var Theme $theme */
-        $json = [
-            'title' => 'Community 1',
-            'description' => 'My Community 1',
-            'theme_id' => $theme->getId()
-        ];
-
-        $communityId = $this->createCommunity($json);
-        $response = $this->uploadImage($communityId, new Point(0, 0), new Point(1024, 1024));
-        $output = $this->output;
-
-        $this->assertEquals(422, $response->getStatusCode());
-        $this->assertEquals(false, $output['success']);
+    private function requestGetCommunityById(int $communityId): Request
+    {
+        return $this->request('GET', sprintf('/community/%d/get', $communityId));
     }
 }
