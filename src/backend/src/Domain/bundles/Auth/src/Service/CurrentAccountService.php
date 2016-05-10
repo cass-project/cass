@@ -42,6 +42,10 @@ class CurrentAccountService
         throw new \Exception('No current profile is available');
     }
 
+    public function forceSignIn(Account $account) {
+        $this->account = $account;
+    }
+
     public function emptyToken() {
         $this->account = null;
     }

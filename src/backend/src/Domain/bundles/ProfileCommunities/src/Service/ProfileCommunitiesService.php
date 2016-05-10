@@ -15,6 +15,12 @@ class ProfileCommunitiesService
     /** @var CurrentAccountService */
     private $currentAccountService;
 
+    public function __construct(ProfileCommunitiesRepository $profileCommunitiesRepository, CurrentAccountService $currentAccountService)
+    {
+        $this->profileCommunitiesRepository = $profileCommunitiesRepository;
+        $this->currentAccountService = $currentAccountService;
+    }
+
     private function getCurrentProfileId(): int {
         return $this->currentAccountService->getCurrentProfile()->getId();
     }

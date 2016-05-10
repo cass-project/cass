@@ -4,6 +4,7 @@ namespace Domain\Account\Tests\Fixtures;
 use Application\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
 use Domain\Account\Entity\Account;
+use Domain\Auth\Service\CurrentAccountService;
 use Zend\Expressive\Application;
 
 class DemoAccountFixture implements Fixture
@@ -23,6 +24,9 @@ class DemoAccountFixture implements Fixture
 
         $em->persist($account);
         $em->flush($account);
+
+        $currentAccountService = $app->getContainer()->get(CurrentAccountService::class); /** @var CurrentAccountService $currentAccountService */
+        $currentAccountService->forceSignIn($account);
 
         self::$account = $account;
     }

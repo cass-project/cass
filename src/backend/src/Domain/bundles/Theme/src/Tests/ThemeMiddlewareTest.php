@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Theme\Tests;
 
-use Application\PHPUnit\RESTRequest\Request;
+use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\PHPUnit\RESTRequest\Result;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
@@ -44,7 +44,7 @@ class ThemeMiddlewareTest extends MiddlewareTestCase
         ;
     }
 
-    private function requestCreateTheme(array $json): Request {
+    private function requestCreateTheme(array $json): RESTRequest {
         return $this->request('PUT', '/protected/theme/create')
             ->setParameters($json)
         ;

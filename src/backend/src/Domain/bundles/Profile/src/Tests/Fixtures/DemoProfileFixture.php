@@ -28,6 +28,10 @@ class DemoProfileFixture implements Fixture
             ->setProfileGreetings(new ProfileGreetings($profile))
         ;
 
+        $account->getProfiles()->add($profile);
+
+        self::$profile = $profile;
+
         $em->persist($profile);
         $em->flush($account);
     }

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Community\Tests;
 
-use Application\PHPUnit\RESTRequest\Request;
+use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\Util\Definitions\Point;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
@@ -153,7 +153,7 @@ class CommunityAPITests extends MiddlewareTestCase
             ->expectJSONError();
     }
 
-    private function requestCreateCommunity(array $json): Request
+    private function requestCreateCommunity(array $json): RESTRequest
     {
         return $this->request('PUT', '/protected/community/create')
             ->setParameters($json);
@@ -165,7 +165,7 @@ class CommunityAPITests extends MiddlewareTestCase
             ->setParameters($json);
     }
 
-    private function requestUploadImage(int $communityId, Point $start, Point $end): Request
+    private function requestUploadImage(int $communityId, Point $start, Point $end): RESTRequest
     {
         $uri = "/protected/community/{$communityId}/image-upload/crop-start/{$start->getX()}/{$start->getY()}/crop-end/{$end->getX()}/{$end->getY()}/";
         $fileName = __DIR__ . '/resources/grid-example.png';
@@ -176,7 +176,7 @@ class CommunityAPITests extends MiddlewareTestCase
             ]);
     }
 
-    private function requestGetCommunityById(int $communityId): Request
+    private function requestGetCommunityById(int $communityId): RESTRequest
     {
         return $this->request('GET', sprintf('/community/%d/get', $communityId));
     }

@@ -6,7 +6,7 @@ use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Uri;
 
-class Request
+class RESTRequest
 {
     /**
      * Юнит-тест, которому принадлежит реквест

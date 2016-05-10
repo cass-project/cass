@@ -75,6 +75,11 @@ class Community
         return $result;
     }
 
+    public function getDateCreatedOn(): \DateTime
+    {
+        return $this->dateCreatedOn;
+    }
+
     public function getTitle(): string
     {
         return $this->title;

@@ -20,5 +20,5 @@ return [
         ),
         AccountRepository::class => factory(new DoctrineRepositoryFactory(Account::class)),
         OAuthAccountRepository::class => factory(new DoctrineRepositoryFactory(OAuthAccount::class)),
-    ],
+    ]
 ];

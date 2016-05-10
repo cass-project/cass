@@ -3,6 +3,8 @@ namespace Domain\Account\Entity;
 
 use Application\Util\IdTrait;
 use Application\Util\JSONSerializable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\PersistentCollection;
 use Domain\Profile\Entity\Profile;
 
@@ -16,7 +18,7 @@ class Account implements JSONSerializable
 
     /**
      * @OneToMany(targetEntity="Domain\Profile\Entity\Profile", mappedBy="account")
-     * @var PersistentCollection
+     * @var Collection
      */
     private $profiles;
 
@@ -50,6 +52,11 @@ class Account implements JSONSerializable
      */
     private $isEmailVerified = false;
 
+    public function __construct()
+    {
+        $this->profiles = new ArrayCollection();
+    }
+
     public function toJSON(): array
     {
         return [
@@ -62,7 +69,7 @@ class Account implements JSONSerializable
         ];
     }
 
-    public function getProfiles(): PersistentCollection
+    public function getProfiles(): Collection
     {
         return $this->profiles;
     }

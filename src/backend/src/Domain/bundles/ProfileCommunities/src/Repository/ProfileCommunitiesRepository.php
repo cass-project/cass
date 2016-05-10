@@ -28,7 +28,7 @@ class ProfileCommunitiesRepository extends EntityRepository
         return $entity;
     }
 
-    public function leaveCommunity(int $profileId, int $communityId): ProfileCommunityEQ {
+    public function leaveCommunity(int $profileId, int $communityId) {
         if($this->hasBookmark($profileId, $communityId)) {
             $bookmark = $this->getBookmark($profileId, $communityId);
 

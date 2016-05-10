@@ -3,7 +3,7 @@ namespace Application\PHPUnit\TestCase;
 
 use Application\Doctrine2\Service\TransactionService;
 use Application\PHPUnit\Fixture;
-use Application\PHPUnit\RESTRequest\Request;
+use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\REST\Request\Params\SchemaParams;
 use Application\REST\Service\SchemaService;
 use Doctrine\ORM\EntityManager;
@@ -111,11 +111,11 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
      *      ;
      * @param string $method HTTP-метод
      * @param string $uri URI
-     * @return Request
+     * @return RESTRequest
      */
-    protected function request(string $method, string $uri): Request
+    protected function request(string $method, string $uri): RESTRequest
     {
-        return new Request($this, $method, $uri);
+        return new RESTRequest($this, $method, $uri);
     }
 
     /**
@@ -194,6 +194,16 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         $this->assertEquals('application/json', self::$currentResult->getHttpResponse()->getHeader('Content-Type')[0]);
 
         return $this;
+    }
+
+    /**
+     * Ожидается ошибка 403 Не авторизован
+     * @return MiddlewareTestCase
+     */
+    protected function expectAuthError(): self {
+        return $this->expectJSONContentType()
+            ->expectStatusCode(403)
+            ->expectJSONError();
     }
 
     protected function expectJSONError(): self {
