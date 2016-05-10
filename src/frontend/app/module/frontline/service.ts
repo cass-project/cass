@@ -1,7 +1,5 @@
 import {AccountEntity} from "../account/entity/Account";
 import {ProfileEntity} from "../profile/entity/Profile";
-import {Injectable, Inject} from "angular2/core";
-import {ThemeTree} from "../theme/Theme";
 
 export class FrontlineService
 {
@@ -15,7 +13,6 @@ export interface FrontlineSessionData
         account: AccountEntity,
         profiles: Array<ProfileEntity>,
     },
-    themes: ThemeTree[];
 }
 
 

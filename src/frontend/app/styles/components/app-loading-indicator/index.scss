@@ -1,0 +1,17 @@
+@import "./../../mixins/disable-text-select";
+
+body>div#loading
+{
+  @include disable-text-select;
+
+  position: fixed;
+  top: 0; height: 100%;
+  left: 0; width: 100%;
+
+  div.image {
+    position: absolute;
+    left: 50%; top: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+  }
+}

@@ -7,50 +7,27 @@ import 'reflect-metadata';
 import 'rxjs/Rx';
 
 require('zone.js');
-require('./global.head.scss');
-require("./../node_modules/bootstrap/dist/css/bootstrap.min.css");
 
-import {Component, provide} from 'angular2/core';
+require('./../node_modules/reset.css/reset.css');
+require('./styles/index.scss');
+
 import {bootstrap} from 'angular2/platform/browser';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
-import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions, URLSearchParams} from 'angular2/http';
+import {Component, provide} from 'angular2/core';
+import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions} from 'angular2/http';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
-import {MainMenu} from './module/common/component/MainMenu/index'
 import {AuthService} from './module/auth/service/AuthService';
-import {AuthComponent} from './module/auth/index';
-import {ProfileComponent} from './module/profile/index';
 import {frontline, FrontlineService} from "./module/frontline/service";
-import {ThemeService} from "./module/theme/service/ThemeService";
-import {ThemeSelector} from "./module/theme/component/ThemeSelector/component";
 
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),
     directives: [
         ROUTER_DIRECTIVES,
-        CORE_DIRECTIVES,
-        MainMenu
+        CORE_DIRECTIVES
     ]
 })
-@RouteConfig([
-    {
-        useAsDefault: true,
-        path: '/profile/...',
-        name: 'Profile',
-        component: ProfileComponent,
-    },
-    {
-        path: '/auth/...',
-        name: 'Auth',
-        component: AuthComponent
-    },
-    {
-        path: '/test/',
-        name: 'Test',
-        component: ThemeSelector
-    }
-])
 class App {
     constructor(private authService: AuthService) {
         // Do not(!) remove authService dependency.
@@ -77,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <any>App, [
                 provide(FrontlineService, {useValue: new FrontlineService(session)}),
                 provide(AuthService, { useClass: AuthService }),
-                provide(ThemeService, { useClass: ThemeService }),
                 ROUTER_PROVIDERS,
                 HTTP_PROVIDERS,
                 provide(RequestOptions, {useClass: OAuthRequestOptions}),
