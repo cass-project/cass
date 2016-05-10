@@ -9,23 +9,26 @@ import 'rxjs/Rx';
 require('zone.js');
 
 require('./../node_modules/reset.css/reset.css');
-require('./styles/index.scss');
+require('./styles/index.head.scss');
 
 import {bootstrap} from 'angular2/platform/browser';
 import {Component, provide} from 'angular2/core';
 import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions} from 'angular2/http';
 import {CORE_DIRECTIVES} from 'angular2/common';
-
 import {AuthService} from './module/auth/service/AuthService';
 import {frontline, FrontlineService} from "./module/frontline/service";
+import {SidebarComponent} from "./module/sidebar/component/index";
+import {AuthComponent} from "./module/auth/component/Auth/index";
 
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),
     directives: [
         ROUTER_DIRECTIVES,
-        CORE_DIRECTIVES
+        CORE_DIRECTIVES,
+        AuthComponent,
+        SidebarComponent
     ]
 })
 class App {

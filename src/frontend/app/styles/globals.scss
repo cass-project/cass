@@ -1,2 +1,10 @@
+@import "./mixins/disable-text-select";
+@import "./mixins/full-screen-component";
+@import "./mixins/card";
+
 $APP_MIN_WIDTH: 640px;
 $APP_MIN_HEIGHT: 480px;
+
+$MATERIAL_BACKGROUND: #f0f0f0;
+$BACKDROP_COLOR: #f0f0f0;
+$BACKDROP_OPACITY: 0.8;

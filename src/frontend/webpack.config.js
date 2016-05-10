@@ -71,7 +71,8 @@ WebpackConfigBuilder.prototype = {
           },
           {
             test: /\.scss$/,
-            loaders: ["style", "css", "sass"]
+            loaders: ["style", "css", "sass"],
+            exclude: /head|shadow\.scss$/
           },
           {
             test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,

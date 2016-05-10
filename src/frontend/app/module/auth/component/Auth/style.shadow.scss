@@ -1,0 +1,22 @@
+div.sign-in-modal, div.sign-up-modal, div.sign-out-modal {
+  display: none;
+}
+
+div.stages {
+  div.stage-sign-in-modal {
+    div.sign-in-modal {
+      display: block;
+    }
+  }
+  div.stage-sign-up-modal {
+    div.sign-up-modal {
+      display: block;
+    }
+  }
+
+  div.stage-sign-out-modal {
+    div.sign-out-modal {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+form.form {
+  position: relative;
+
+  div.form-placeholder-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    h1 {
+      color: #999;
+      font-size: 24px;
+      display: block;
+    }
+  }
+}
