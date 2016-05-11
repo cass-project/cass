@@ -78,11 +78,7 @@ class AuthService
     public function signInOauth2(RegistrationRequest $registrationRequest)
     {
         if(!$this->accountService->hasAccountWithEmail($registrationRequest->getEmail())) {
-            $this->accountService->createOAuth2Account(
-                $registrationRequest->getEmail(),
-                $registrationRequest->getProvider(),
-                $registrationRequest->getProviderAccountId()
-            );
+            $this->accountService->createOAuth2Account($registrationRequest);
         }
 
         $oauth2Account = $this->accountService->findOAuthAccount($registrationRequest->getProvider(), $registrationRequest->getProviderAccountId());

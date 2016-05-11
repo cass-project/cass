@@ -1,6 +1,8 @@
 <?php
 namespace Domain\Auth\Service\AuthService\OAuth2;
 
+use League\OAuth2\Client\Provider\ResourceOwnerInterface;
+
 class RegistrationRequest
 {
     /** @var string */
@@ -11,12 +13,15 @@ class RegistrationRequest
 
     /** @var string */
     private $email;
+    /** @var  ResourceOwnerInterface */
+    private $resourceOwner;
 
-    public function __construct(string $provider, string $providerAccountId, string $email)
+    public function __construct(string $provider, string $providerAccountId, string $email, ResourceOwnerInterface $resourceOwner)
     {
         $this->providerAccountId = $providerAccountId;
         $this->provider = $provider;
         $this->email = $email;
+        $this->resourceOwner = $resourceOwner;
     }
 
     public function getProviderAccountId(): string
@@ -32,5 +37,10 @@ class RegistrationRequest
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function getResourceOwner():ResourceOwnerInterface
+    {
+        return $this->resourceOwner;
     }
 }
