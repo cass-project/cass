@@ -21,6 +21,10 @@ import {frontline, FrontlineService} from "./module/frontline/service";
 import {SidebarComponent} from "./module/sidebar/component/index";
 import {AuthComponent} from "./module/auth/component/Auth/index";
 import {AuthComponentService} from "./module/auth/component/Auth/service";
+import {RouterOutlet} from "angular2/router";
+import {RouteConfig} from "angular2/router";
+import {LandingComponent} from "./module/landing/index";
+import {ProfileComponent} from "./module/profile/index";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -32,9 +36,23 @@ import {AuthComponentService} from "./module/auth/component/Auth/service";
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,
         AuthComponent,
-        SidebarComponent
+        SidebarComponent,
+        RouterOutlet
     ]
 })
+@RouteConfig([
+    {
+        name: 'Landing',
+        path: '/',
+        component: LandingComponent,
+        useAsDefault: true
+    },
+    {
+        name: 'Profile',
+        path: '/profile/...',
+        component: ProfileComponent
+    }
+])
 class App {
     constructor(private authService: AuthService) {
         // Do not(!) remove authService dependency.

@@ -22,4 +22,12 @@ import {AuthComponentService} from "./service";
 export class AuthComponent
 {
     constructor(private service: AuthComponentService) {}
+
+    signIn() {
+        this.service.modals.openSignInModal();
+    }
+
+    signUp() {
+        this.service.modals.openSignUpModal();
+    }
 }

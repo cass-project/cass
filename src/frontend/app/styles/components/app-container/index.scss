@@ -3,8 +3,10 @@
 div#cassAppContainer {
   min-width: $APP_MIN_WIDTH;
   min-height: $APP_MIN_HEIGHT;
-  position: absolute;
-  top: 0; height: 100%;
-  left: 0; width: 100%;
   background-color: $MATERIAL_BACKGROUND;
+  display: flex;
+
+  div.cass-app-container-section {
+    display: flex;
+  }
 }

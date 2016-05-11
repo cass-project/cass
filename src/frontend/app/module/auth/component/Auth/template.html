@@ -1,4 +1,8 @@
 <div>
+  <div class="cass-padding-box-15 form">
+    <button class="form-button form-button-primary" (click)="signIn()">Sign In</button>
+    <button class="form-button" (click)="signUp()">Sign Up</button>
+  </div>
   <div class="sign-in-modal" *ngIf="service.modals.isSignInModalOpened()">
     <cass-modal>
       <cass-auth-sign-in></cass-auth-sign-in>
