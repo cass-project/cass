@@ -69,6 +69,11 @@ class Account implements JSONSerializable
         ];
     }
 
+    public function addProfile(Profile $profile){
+        $this->profiles[] = $profile;
+        return $this;
+    }
+
     public function getProfiles(): Collection
     {
         return $this->profiles;
