@@ -1,9 +1,10 @@
 @import "./globals";
 @import "./components/app-loading-indicator/index";
 @import "./components/app-container/index";
+@import "./components/padding-box/index";
 @import "./components/forms/index";
 
 html {
-  font-family: 'Roboto',Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-family: $FONT_FAMILY;
   font-size: 13px;
 }

@@ -1,0 +1,11 @@
+@import "./../../globals";
+
+label.form-label {
+  span.label-text {
+    display: block;
+    font-family: $FONT_FAMILY;
+    font-size: $FONT_SIZE_SMALL;
+    color: #333;
+    padding: 3px;
+  }
+}

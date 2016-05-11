@@ -1,4 +1,9 @@
 form.form {
+  @import "./input";
+  @import "./label";
+  @import "./input-group";
+  @import "./footer";
+
   position: relative;
 
   div.form-placeholder-text {

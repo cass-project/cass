@@ -25,7 +25,7 @@ div.modal {
   div.modal-content {
     background-color: #fff;
     z-index: 10001;
-    @include card(1);
+    @include card(2);
     max-height: calc(100% - 100px);
     position: fixed;
     top: 50%;

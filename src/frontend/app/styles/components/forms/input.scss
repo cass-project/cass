@@ -1,0 +1,26 @@
+@import "./../../globals";
+
+input.form-input {
+  color: #000;
+  font-family: $FONT_FAMILY;
+  font-size: $FONT_SIZE_NORMAL;
+  outline: 0!important;;
+}
+
+input[type="text"].form-input,
+input[type="password"].form-input {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #bbb;
+  padding: 2px 2px 1px;
+  line-height: 26px;
+  height: 30px;
+  box-sizing: border-box;
+
+  &:focus {
+    border-bottom-color: material-color('cyan', '400');
+    border-width: 0 0 2px;
+    padding-bottom: 0;
+  }
+}
