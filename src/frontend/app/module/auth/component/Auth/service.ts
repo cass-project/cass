@@ -26,14 +26,6 @@ class ModalControls
         return this.currentModal === Modals.SignUp;
     }
 
-    openSignOutModal() {
-        this.currentModal = Modals.SignOut;
-    }
-
-    isSignOutModalOpened() {
-        return this.currentModal === Modals.SignOut;
-    }
-
     closeModals() {
         this.currentModal = Modals.None;
     }
@@ -42,6 +34,5 @@ class ModalControls
 enum Modals {
     None,
     SignIn,
-    SignUp,
-    SignOut
+    SignUp
 }

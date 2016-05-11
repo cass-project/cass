@@ -21,7 +21,7 @@ input[type="email"].form-input
   box-sizing: border-box;
 
   &:focus {
-    border-bottom-color: material-color('cyan', '400');
+    border-bottom-color: material-color('light-blue', '400');
     border-width: 0 0 2px;
     padding-bottom: 0;
   }

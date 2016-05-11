@@ -19,8 +19,4 @@ export class SidebarComponent
     signUp() {
         this.authComponentService.modals.openSignUpModal();
     }
-
-    signOut() {
-        this.authComponentService.modals.openSignOutModal();
-    }
 }
