@@ -183,6 +183,12 @@ class Profile implements JSONSerializable
         return $this;
     }
 
+
+    public function setAccount(Account $account)
+    {
+        $this->account = $account;
+        return $this;
+    }
     public function getAccount(): Account {
         return $this->account;
     }

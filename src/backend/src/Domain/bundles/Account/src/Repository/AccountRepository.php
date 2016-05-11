@@ -37,9 +37,13 @@ class AccountRepository extends EntityRepository
 
     public function saveAccount(Account $account, Profile $profile)
     {
-        $this->getEntityManager()->persist($account);
-        $this->getEntityManager()->persist($profile);
-        $this->getEntityManager()->flush([$account, $profile]);
+        $em = $this->getEntityManager();
+
+        $account->addProfile($profile);
+        $profile->setAccount($account);
+        $em->persist($account);
+        $em->persist($profile);
+        $em->flush([$account, $profile]);
     }
 
     public function saveOAuth2Account(OAuthAccount $OAuth2Account)
