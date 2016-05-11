@@ -1,8 +1,11 @@
-form.form {
+.form {
+  @import "./header";
   @import "./input";
   @import "./label";
   @import "./input-group";
   @import "./footer";
+  @import "./button";
+  @import "./errors";
 
   position: relative;
 

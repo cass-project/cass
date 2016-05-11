@@ -1,0 +1,21 @@
+@import "./../../globals";
+
+.error-message {
+
+}
+
+.input-error {
+  color: material-color("red", "a700");
+  padding: 6px 3px;
+}
+
+div.error-message-box
+{
+  > div {
+    padding: 10px;
+  }
+  > div.urgent {
+    color: white;
+    background-color: material-color("red", "900");
+  }
+}

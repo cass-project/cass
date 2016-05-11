@@ -1,19 +1,17 @@
-<div class="stages">
-  <div class="stage-sign-in-modal">
-    <div class="sign-in-modal">
-      <cass-modal>
-        <cass-auth-sign-in></cass-auth-sign-in>
-      </cass-modal>
-    </div>
-    <div class="sign-up-modal">
-      <cass-modal>
-        <cass-auth-sign-up></cass-auth-sign-up>
-      </cass-modal>
-    </div>
-    <div class="sign-out-modal">
-      <cass-modal>
-        <cass-auth-sign-out></cass-auth-sign-out>
-      </cass-modal>
-    </div>
+<div>
+  <div class="sign-in-modal" *ngIf="service.modals.isSignInModalOpened()">
+    <cass-modal>
+      <cass-auth-sign-in></cass-auth-sign-in>
+    </cass-modal>
+  </div>
+  <div class="sign-up-modal" *ngIf="service.modals.isSignUpModalOpened()">
+    <cass-modal>
+      <cass-auth-sign-up></cass-auth-sign-up>
+    </cass-modal>
+  </div>
+  <div class="sign-out-modal" *ngIf="service.modals.isSignOutModalOpened()">
+    <cass-modal>
+      <cass-auth-sign-out></cass-auth-sign-out>
+    </cass-modal>
   </div>
 </div>

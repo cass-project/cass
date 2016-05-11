@@ -8,7 +8,9 @@ input.form-input {
 }
 
 input[type="text"].form-input,
-input[type="password"].form-input {
+input[type="password"].form-input,
+input[type="email"].form-input
+{
   display: block;
   width: 100%;
   border: 0;
@@ -23,4 +25,15 @@ input[type="password"].form-input {
     border-width: 0 0 2px;
     padding-bottom: 0;
   }
+
+  &:disabled {
+    color: material-color('grey', '400');
+  }
+}
+
+input[type="text"].ng-invalid,
+input[type="password"].ng-invalid,
+input[type="email"].ng-invalid
+{
+  border-bottom-color: material-color('red', 'a700')!important;
 }

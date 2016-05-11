@@ -9,3 +9,11 @@ label.form-label {
     padding: 3px;
   }
 }
+
+p.form-text {
+  display: block;
+  font-family: $FONT_FAMILY;
+  font-size: $FONT_SIZE_SMALL;
+  color: #333;
+  padding: 3px;
+}

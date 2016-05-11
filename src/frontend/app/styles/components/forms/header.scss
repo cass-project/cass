@@ -1,0 +1,20 @@
+@import "./../../globals";
+
+header.form-header
+{
+  padding: 20px;
+  margin-bottom: 5px;
+  font-weight: 100  ;
+  background-color: material-color("grey", "200");
+  color: black;
+
+  h1 {
+    font-size: $FONT_SIZE_LARGE;
+    font-weight: 200;
+  }
+}
+
+header.form-header-light-blue {
+  color: white;
+  background-color: material-color("light-blue", "500");
+}

@@ -20,10 +20,14 @@ import {AuthService} from './module/auth/service/AuthService';
 import {frontline, FrontlineService} from "./module/frontline/service";
 import {SidebarComponent} from "./module/sidebar/component/index";
 import {AuthComponent} from "./module/auth/component/Auth/index";
+import {AuthComponentService} from "./module/auth/component/Auth/service";
 
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),
+    providers: [
+        AuthComponentService
+    ],
     directives: [
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,
