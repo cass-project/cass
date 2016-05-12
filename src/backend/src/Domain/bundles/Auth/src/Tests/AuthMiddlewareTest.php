@@ -110,7 +110,7 @@ class AuthMiddlewareTest extends MiddlewareTestCase
 
     private function requestSignIn(array $json): RESTRequest
     {
-        return $this->request('GET', '/auth/sign-in')
+        return $this->request('POST', '/auth/sign-in')
             ->setParameters($json);
     }
 }
