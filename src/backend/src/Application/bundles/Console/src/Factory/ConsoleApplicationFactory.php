@@ -2,15 +2,14 @@
 namespace Application\Console\Factory;
 
 use Application\DIFactoryInterface;
-use DI\Definition\FactoryDefinition;
 use Interop\Container\ContainerInterface;
 use Symfony\Component\Console\Application as ConsoleApplication;
 
 class ConsoleApplicationFactory implements DIFactoryInterface
 {
-    public function __invoke(ContainerInterface $container, FactoryDefinition $definition) {
-        $config = $container->get('console.config');
-        $consoleApplication = new ConsoleApplication($config['title'] ?? 'Console', $container['version'] ?? '1.0');
+    public function __invoke(ContainerInterface $container) {
+        $config = $container->get('config.console');
+        $consoleApplication = new ConsoleApplication($config['title'] ?? 'Console', $config['version'] ?? '1.0');
         $this->addCommands($consoleApplication, $container, $config['commands']);
 
         return $consoleApplication;

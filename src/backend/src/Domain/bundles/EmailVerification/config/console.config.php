@@ -4,10 +4,12 @@ namespace Domain\EmailVerification;
 use Domain\EmailVerification\Console\Command\AMQPSendMail;
 
 return [
-    'console' => [
-        'commands' => [
-            'AMQP' => [
-                AMQPSendMail::class
+    'php-di' => [
+        'config.console' => [
+            'commands' => [
+                'AMQP' => [
+                    AMQPSendMail::class
+                ]
             ]
         ]
     ]
