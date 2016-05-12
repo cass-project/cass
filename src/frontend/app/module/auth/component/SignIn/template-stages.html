@@ -1,6 +1,6 @@
 <div class="stages stage-show-1">
   <div class="stage stage-1 stage-normal">
-    <form class="form form-auth-sign-in">
+    <form class="form form-auth-sign-in" (ngSubmit)="attemptSignIn()" (keyup.escape)="service.modals.closeModals()" (keyup.enter)="attemptSignIn()">
       <div class="cass-padding-box-10">
         <div class="input-group">
           <p class="form-text">Войдите с помощью социальных сетей: </p>
@@ -16,6 +16,7 @@
                     autocomplete="off"
                     autofocus="autofocus"
                     tabindex="1"
+                    [(ngModel)]="personalInfo.email"
             />
           </label>
         </div>
@@ -26,6 +27,7 @@
                    placeholder="**********"
                    autocomplete="off"
                    tabindex="2"
+                   [(ngModel)]="personalInfo.password"
             />
           </label>
         </div>
@@ -33,13 +35,13 @@
       <footer class="form-footer">
         <div class="form-footer-section">
           <div class="cass-padding-box-5">
-            <button type="button" tabindex="4" class="form-text-button">Создать аккаунт</button>
+            <button type="button" tabindex="4" class="form-text-button" (click)="createNewAccount()">Создать аккаунт</button>
           </div>
         </div>
         <div class="form-footer-section">
           <div class="form-footer-item">
             <div class="cass-padding-box-5">
-              <button type="button" tabindex="5" class="form-text-button">Закрыть</button>
+              <button type="button" tabindex="5" class="form-text-button" (click)="service.modals.closeModals()">Закрыть</button>
               <button type="submit" tabindex="3" class="form-button form-button-primary">Войти</button>
             </div>
           </div>
