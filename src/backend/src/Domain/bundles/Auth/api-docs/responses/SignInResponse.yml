@@ -1,0 +1,22 @@
+Auth_Response_SignInResponse:
+  description:
+    Sign In Response
+  schema:
+    required:
+      - api_key
+      - profiles
+      - success
+    properties:
+      api_key:
+        type: string
+        description: Токен (API Key)
+      account:
+        $ref: "#/definitions/Account_Entity_Account"
+      profiles:
+        type: array
+        items:
+          $ref: "#/definitions/Profile_Entity_Profile"
+      success:
+        type: boolean
+        default: true
+        description: "= true"

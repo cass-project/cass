@@ -3,6 +3,8 @@ namespace Domain\Auth\Service;
 
 use Domain\Account\Service\AccountService;
 use Domain\Auth\Middleware\AuthStrategy\SessionStrategy;
+use Domain\Auth\Parameters\SignInParameters;
+use Domain\Auth\Parameters\SignUpParameters;
 use Domain\Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
 use Domain\Auth\Service\AuthService\SignUpValidation\ArePasswordsMatching;
@@ -13,7 +15,6 @@ use Domain\Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
 use Domain\Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
 use Domain\Account\Entity\Account;
 use Application\Frontline\Service\FrontlineService;
-use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthService
 {
@@ -42,15 +43,13 @@ class AuthService
         return $account;
     }
 
-    public function signUp(Request $request): Account
+    public function signUp(SignUpParameters $signUpParameters): Account
     {
-        $request = json_decode($request->getBody(), true);
+        $email = $signUpParameters->getEmail();
+        $password = $signUpParameters->getPassword();
 
-        $email = $request['email'] ?? null;
-        $password = $request['password'] ?? null;
-
-        array_map(function(SignUpValidator $validator) use ($request) {
-            $validator->validate($request);
+        array_map(function(SignUpValidator $validator) use ($signUpParameters) {
+            $validator->validate($signUpParameters);
         }, [
             new HasAllRequiredFields(),
             new IsEmailValid(),
@@ -59,16 +58,17 @@ class AuthService
             new HasSameAccount($this->accountService)
         ]);
 
-        return $this->accountService->createAccount($email, password_hash($password, PASSWORD_DEFAULT));
+        return $this->accountService->createAccount($email, $password);
     }
 
-    public function signIn(Request $request) : Account
+    public function signIn(SignInParameters $parameters) : Account
     {
-        list($email, $password) = $this->unpackCredentials($request);
+        $email = $parameters->getEmail();
+        $password = $parameters->getPassword();
 
         $account = $this->accountService->findByEmail($email);
 
-        if(!$this->verifyPassword($account, $password)) {
+        if(! $this->verifyPassword($account, $password)) {
             throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $email));
         }
 
@@ -105,18 +105,5 @@ class AuthService
     private function verifyPassword(Account $account, string $password): bool
     {
         return password_verify($password, $account->getPassword());
-    }
-
-    private function unpackCredentials(Request $request): array
-    {
-        $credentials = json_decode($request->getBody(), true);
-        $email = $credentials['email'] ?? null;
-        $password = $credentials['password'] ?? null;
-
-        if ($email === null || $password === null) {
-            throw new InvalidCredentialsException('Email and password are required');
-        }
-
-        return array($email, $password);
     }
 }

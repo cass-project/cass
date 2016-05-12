@@ -1,0 +1,17 @@
+'/auth/sign-in/oauth2/{provider}':
+  get:
+    tags:
+      - auth
+    description:
+      Попытка аутентификации
+    produces:
+      - text/html
+    parameters:
+      - name: provider
+        in: path
+        type: string
+        description: Oauth2-провайдер
+    responses:
+      200:
+        description:
+          Переход на страницу авторизации

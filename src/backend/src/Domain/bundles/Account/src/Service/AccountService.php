@@ -5,7 +5,7 @@ use Domain\Account\Entity\Account;
 use Domain\Account\Entity\OAuthAccount;
 use Domain\Account\Repository\AccountRepository;
 use Domain\Account\Repository\OAuthAccountRepository;
-use Domain\Auth\Scripts\SetupProfile\SetupProfileScript;
+use Domain\Auth\Scripts\SetupProfileScript;
 use Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\ProfileGreetings;
@@ -37,7 +37,7 @@ class AccountService
         $account = new Account();
         $account
             ->setEmail($email)
-            ->setPassword($password);
+            ->setPassword(password_hash($password, PASSWORD_DEFAULT));
 
         $profile = new Profile($account);
         $profile
@@ -63,9 +63,8 @@ class AccountService
         /** @var Profile $profile */
         $profile = $account->getProfiles()->first();
 
-//        $setupScript = new SetupProfileScript($resourceOwner, $profile);
-//        $greeting = $setupScript->fetchProfileGreetings();
-//        $this->profileGreetingsRepository->saveGreetings($greeting);
+        $setupScript = new SetupProfileScript($provider, $resourceOwner, $profile->getProfileGreetings());
+        $this->profileGreetingsRepository->saveGreetings( $setupScript->fetchProfileGreetings() );
 
         $oauthAccount = new OAuthAccount($account);
         $oauthAccount->setProvider($provider);

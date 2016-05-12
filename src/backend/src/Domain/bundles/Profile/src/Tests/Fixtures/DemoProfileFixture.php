@@ -19,21 +19,7 @@ class DemoProfileFixture implements Fixture
     ];
     
     public function up(Application $app, EntityManager $em) {
-        $account = DemoAccountFixture::getAccount();
-        $profile = new Profile($account);
-        $profile
-            ->setGender(self::DEFAULTS['gender'])
-            ->setIsCurrent(true)
-            ->setProfileImage(new ProfileImage($profile))
-            ->setProfileGreetings(new ProfileGreetings($profile))
-        ;
-
-        $account->getProfiles()->add($profile);
-
-        self::$profile = $profile;
-
-        $em->persist($profile);
-        $em->flush($account);
+        self::$profile = DemoAccountFixture::getAccount()->getProfiles()->first();
     }
 
     public static function getProfile(): Profile {
