@@ -5,6 +5,7 @@ use Application\Bootstrap\Scripts\AppInit\PipeMiddlewareScript;
 use Application\Bootstrap\Scripts\AppInit\RoutesSetupScript;
 use Application\Bootstrap\Scripts\Bootstrap\BundleServiceScript;
 use Application\Bootstrap\Scripts\Bootstrap\BootstrapDIContainerScript;
+use Application\Bootstrap\Scripts\Bootstrap\InjectSchemaServiceScript;
 use Application\Bootstrap\Scripts\Bootstrap\ReadAppConfigScript;
 use Application\PHPUnit\PHPUnitEmitter;
 use Application\Service\BundleService;
@@ -20,7 +21,8 @@ class AppBuilder
     const DEFAULT_INIT = [
         BundleServiceScript::class,
         ReadAppConfigScript::class,
-        BootstrapDIContainerScript::class
+        BootstrapDIContainerScript::class,
+        InjectSchemaServiceScript::class
     ];
     
     const DEFAULT_INIT_APP = [
