@@ -15,9 +15,13 @@ export class OAuth2Component
     constructor(){
     }
 
+    private getOAuth2Url(provider){
+        let url = 'backend/api/auth/oauth/';
+        return `${url}${provider}`
+    }
 
-    oAuthGo(url: string){
+    oAuthGo(provider: string){
         /*ToDo: Make angular2 great again!*/
-        return window.location.href = url;
+        return window.location.href = this.getOAuth2Url(provider);
     }
 }
