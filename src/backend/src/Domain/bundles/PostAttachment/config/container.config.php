@@ -7,6 +7,7 @@ use function DI\get;
 
 use Domain\Auth\Service\CurrentAccountService;
 use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
+use Domain\PostAttachment\Console\Command\PostAttachmentCleanup;
 use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\PostAttachment\Middleware\PostAttachmentMiddleware;
 use Domain\PostAttachment\Repository\PostAttachmentRepository;
@@ -25,5 +26,9 @@ return [
             get(CurrentAccountService::class),
             get(PostAttachmentService::class)
         ),
+        PostAttachmentCleanup::class => object()->constructor(
+            get('config.post-attachment'),
+            get(PostAttachmentRepository::class)
+        )
     ]
 ];

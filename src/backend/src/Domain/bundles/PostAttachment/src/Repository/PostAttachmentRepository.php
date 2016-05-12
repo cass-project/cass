@@ -1,6 +1,7 @@
 <?php
 namespace Domain\PostAttachment\Repository;
 
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Domain\Post\Entity\Post;
 use Domain\PostAttachment\Entity\PostAttachment;
@@ -21,6 +22,14 @@ class PostAttachmentRepository extends EntityRepository
         $this->getEntityManager()->flush($postAttachment);
     }
 
+    public function deletePostAttachments(array $postAttachments)
+    {
+        foreach($postAttachments as $postAttachment) {
+            $this->getEntityManager()->remove($postAttachment);
+        }
+        $this->getEntityManager()->flush();
+    }
+
     public function assignAttachmentsToPost(Post $post, array $attachmentIds) {
         /** @var PostAttachment[] $attachments */
         $attachments = $this->findBy([
@@ -32,5 +41,10 @@ class PostAttachmentRepository extends EntityRepository
         }
 
         $this->getEntityManager()->flush($attachments);
+    }
+
+    public function getUnattachedAttachments(int $timeInterval)
+    {
+        //$this->findBy()
     }
 }
