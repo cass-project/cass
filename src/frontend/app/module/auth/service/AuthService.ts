@@ -42,20 +42,26 @@ export class AuthService
     public attemptSignIn(request: SignInModel) {
         this.lastError = null;
 
-        return this.signIn(this.http.post('/backend/api/auth/sign-in', JSON.stringify(request)), request.remember);
+        return this.signIn(this.http.post('/backend/api/auth/sign-in', JSON.stringify(request)));
+    }
+
+    public attemptProviderSignIn(provider: String){
+        this.lastError = null;
+
+        return this.signIn(this.http.get(`/backend/api/auth/sign-in/oauth/${provider}`));
     }
 
     public attemptSignUp(request: SignUpModel) {
         this.lastError = null;
 
-        return this.signIn(this.http.post('/backend/api/auth/sign-up', JSON.stringify(request)), request.remember);
+        return this.signIn(this.http.put('/backend/api/auth/sign-up', JSON.stringify(request)));
     }
     
     public getAuthToken() {
         return AuthService.getAuthToken();
     }
 
-    private signIn(http, remember = false) {
+    private signIn(http) {
         return http.map(res => res.json()).subscribe(
             response => {
                 if(response.success) {
@@ -108,7 +114,6 @@ interface SignInModel
 {
     email: string;
     password: string;
-    remember?: boolean;
 }
 
 interface SignUpModel
@@ -116,5 +121,4 @@ interface SignUpModel
     email: string;
     password: string;
     repeat: string;
-    remember?: boolean;
 }
