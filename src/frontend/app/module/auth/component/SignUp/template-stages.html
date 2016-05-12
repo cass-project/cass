@@ -1,6 +1,6 @@
 <div class="stages stage-show-1">
   <div class="stage stage-1 stage-normal">
-    <form class="form form-auth-sign-in">
+    <form class="form form-auth-sign-in" (ngSubmit)="attemptSignUp()" (keyup.escape)="service.modals.closeModals()" (keyup.enter)="attemptSignUp()">
       <header class="form-header">
         <h1>Регистрация</h1>
       </header>
@@ -13,6 +13,7 @@
                     autocomplete="off"
                     autofocus="autofocus"
                     tabindex="1"
+                   [(ngModel)]="personalInfo.email"
             />
           </label>
         </div>
@@ -23,6 +24,7 @@
                    placeholder="**********"
                    autocomplete="off"
                    tabindex="2"
+                   [(ngModel)]="personalInfo.password"
             />
           </label>
         </div>
@@ -33,6 +35,7 @@
                    placeholder="**********"
                    autocomplete="off"
                    tabindex="2"
+                   [(ngModel)]="personalInfo.repeat"
             />
           </label>
         </div>
@@ -40,13 +43,13 @@
       <footer class="form-footer">
         <div class="form-footer-section">
           <div class="cass-padding-box-5">
-            <button type="button" tabindex="4" class="form-text-button">Назад</button>
+            <button type="button" tabindex="4" class="form-text-button" (click)="service.modals.closeModals()">Назад</button>
           </div>
         </div>
         <div class="form-footer-section">
           <div class="form-footer-item">
             <div class="cass-padding-box-5">
-              <button type="button" tabindex="5" class="form-text-button">Закрыть</button>
+              <button type="button" tabindex="5" class="form-text-button" (click)="service.modals.closeModals()">Закрыть</button>
               <button type="submit" tabindex="3" class="form-button form-button-primary">Войти</button>
             </div>
           </div>
