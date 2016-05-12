@@ -17,7 +17,7 @@ return function(Application $app) {
         'auth-sign-in'
     );
 
-    $app->post(
+    $app->get(
         '/auth/sign-in/{action:oauth2}/{provider}[/]',
         AuthMiddleware::class,
         'auth-oauth'
