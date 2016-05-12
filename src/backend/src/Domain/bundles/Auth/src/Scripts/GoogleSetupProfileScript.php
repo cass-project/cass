@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Domain\Auth\Scripts\SetupProfile;
+namespace Domain\Auth\Scripts;
 
 
 use Domain\Profile\Entity\ProfileGreetings;
@@ -14,7 +14,7 @@ class GoogleSetupProfileScript
     /** @var GoogleUser $resourceOwner */
     $resourceOwner = $profileScript->getResourceOwner();
 
-    $profileScript->getGreetings()
+    return $profileScript->getGreetings()
              ->setFirstName($resourceOwner->getFirstName())
              ->setLastName($resourceOwner->getLastName());
 
