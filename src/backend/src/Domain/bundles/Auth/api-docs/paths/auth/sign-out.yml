@@ -1,0 +1,10 @@
+'/auth/sign-out/':
+  get:
+    tags:
+      - auth
+    description:
+      Удаление текущей сессии
+    responses:
+      200:
+        schema:
+          $ref: '#/responses/success'
