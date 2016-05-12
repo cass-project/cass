@@ -44,6 +44,20 @@ class ThemeMiddlewareTest extends MiddlewareTestCase
         ;
     }
 
+    public function testUnAuthCreateTheme()
+    {
+        $json = [
+          'title' => 'Theme 1',
+          'description' => 'My Demo Theme Descrition',
+          'parent_id' => 0
+        ];
+
+        $this->requestCreateTheme($json)
+             ->execute()
+             ->expectAuthError()
+        ;
+    }
+
     private function requestCreateTheme(array $json): RESTRequest {
         return $this->request('PUT', '/protected/theme/create')
             ->setParameters($json)
