@@ -18,7 +18,7 @@ return function(Application $app) {
     );
 
     $app->get(
-        '/auth/sign-in/{action:oauth2}/{provider}[/]',
+        '/auth/{action:oauth}/{provider}[/]',
         AuthMiddleware::class,
         'auth-oauth'
     );

@@ -1,4 +1,4 @@
-'/auth/sign-in/oauth2/{provider}':
+'/auth/oauth/{provider}':
   get:
     tags:
       - auth

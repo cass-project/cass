@@ -32,7 +32,7 @@ abstract class Command
             case 'sign-in': return new SignInCommand();
             case 'sign-up': return new SignUpCommand();
             case 'sign-out': return new SignOutCommand();
-            case 'oauth2':
+            case 'oauth':
                 switch($request->getAttribute('provider')){
                     default: throw new \Exception('Unknown provider');
                     case 'vk': return new VkCommand($authService->getOAuth2Config('vk'), $authService);
