@@ -3,6 +3,7 @@ namespace Domain\Auth\Middleware\Command;
 
 use Domain\Auth\Formatter\SignInFormatter;
 use Application\REST\Response\GenericResponseBuilder;
+use Domain\Auth\Middleware\Request\SignUpRequest;
 use Domain\Auth\Service\AuthService\Exceptions\DuplicateAccountException;
 use Domain\Auth\Service\AuthService\Exceptions\MissingRequiredFieldException;
 use Domain\Auth\Service\AuthService\Exceptions\ValidationException;
@@ -13,7 +14,8 @@ class SignUpCommand extends Command
     public function run(ServerRequestInterface $request, GenericResponseBuilder $responseBuilder)
     {
         try {
-            $account = $this->getAuthService()->signUp($request);
+            $request = new SignUpRequest($request);
+            $account = $this->getAuthService()->signUp($request->getParameters());
 
             $responseBuilder
                 ->setStatusSuccess()

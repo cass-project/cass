@@ -13,8 +13,18 @@ use Application\PHPUnit\RESTRequest\Result;
 use Zend\Expressive\Application;
 use DI\Container;
 
-class ExpectId {}
-class ExpectString {}
+class ExpectId {
+    public function __toString(): string
+    {
+        return "{{ID}}";
+    }
+}
+class ExpectString {
+    public function __toString(): string
+    {
+        return "{{STRING}}";
+    }
+}
 
 /**
  * @backupGlobals disabled
@@ -71,6 +81,14 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         $app = $this->app();
         $em = $this->container()->get(EntityManager::class);
         $fixture->up($app, $em);
+
+        return $this;
+    }
+
+    protected function upFixtures(array $fixtures): self {
+        foreach($fixtures as $fixture) {
+            $this->upFixture($fixture);
+        }
 
         return $this;
     }
@@ -167,6 +185,20 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         return $this;
     }
 
+    protected function dumpError(): self {
+        $result = self::$currentResult->getContent();
+
+        if(isset($result['error'])) {
+            var_dump("");
+            var_dump("===== ERROR START =====");
+            var_dump(sprintf('STATUS CODE: %s', self::$currentResult->getHttpResponse()->getStatusCode()));
+            var_dump(sprintf("ERROR: ", $result['error']));
+            var_dump("===== ERROR END =====");
+        }else{
+            throw new \Exception('No error');
+        }
+    }
+
     /**
      * Проверка HTTP-кода
      * @param int $statusCode
@@ -236,8 +268,12 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         return $this;
     }
 
-    private function recursiveAssertEquals(array $expected, array $actual) {
+    private function recursiveAssertEquals(array $expected, array $actual, string $level = '- ') {
         foreach($expected as $key=>$value) {
+            if(! is_array($value)) {
+                echo sprintf("\n%sASSERT: %s == %s", $level, $key, (string) $actual[$key]);
+            }
+
             $this->assertArrayHasKey($key, $actual);
 
             if($value instanceof ExpectId) {
@@ -246,7 +282,7 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
             }else if($value instanceof ExpectString) {
                 $this->assertTrue(is_string($actual[$key]));
             }else if(is_array($value)) {
-                $this->recursiveAssertEquals($value, $actual[$key]);
+                $this->recursiveAssertEquals($value, $actual[$key], $level . '- ');
             }else{
                 $this->assertEquals($expected[$key], $actual[$key]);
             }

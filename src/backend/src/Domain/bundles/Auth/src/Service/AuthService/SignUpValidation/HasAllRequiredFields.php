@@ -1,19 +1,20 @@
 <?php
 namespace Domain\Auth\Service\AuthService\SignUpValidation;
 
+use Domain\Auth\Parameters\SignUpParameters;
 use Domain\Auth\Service\AuthService\Exceptions\MissingRequiredFieldException;
 
 class HasAllRequiredFields implements Validator
 {
-    public function validate(array $request)
+    public function validate(SignUpParameters $signUpParameters)
     {
-        $hasEmailOrPhone = !(empty($request['email']) && empty($request['phone']));
-        $hasPassword = !empty($request['password']);
+        $hasEmail = strlen($signUpParameters->getEmail()) > 0;
+        $hasPassword = !empty($signUpParameters->getPassword());
 
-        $isValid = $hasEmailOrPhone && $hasPassword;
+        $isValid = $hasEmail && $hasPassword;
 
-        if(!$isValid) {
-            throw new MissingRequiredFieldException('Email or phone and password are required');
+        if(! $isValid) {
+            throw new MissingRequiredFieldException('Email and password are required');
         }
     }
 }

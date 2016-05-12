@@ -2,6 +2,7 @@
 namespace Domain\Auth\Service\AuthService\SignUpValidation;
 
 use Domain\Account\Service\AccountService;
+use Domain\Auth\Parameters\SignUpParameters;
 use Domain\Auth\Service\AuthService\Exceptions\DuplicateAccountException;
 
 class HasSameAccount implements Validator
@@ -14,13 +15,13 @@ class HasSameAccount implements Validator
         $this->accountService = $accountService;
     }
 
-    public function validate(array $request) {
-        $hasSameAccount = $this->accountService->hasAccountWithEmail($request['email']);
+    public function validate(SignUpParameters $parameters) {
+        $hasSameAccount = $this->accountService->hasAccountWithEmail($parameters->getPassword());
 
         $isValid = !$hasSameAccount;
 
         if(!$isValid) {
-            throw new DuplicateAccountException(sprintf('%s already in use.', $request['email']));
+            throw new DuplicateAccountException(sprintf('%s already in use.', $parameters->getEmail()));
         }
     }
 

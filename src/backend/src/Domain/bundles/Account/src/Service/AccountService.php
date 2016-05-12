@@ -37,7 +37,7 @@ class AccountService
         $account = new Account();
         $account
             ->setEmail($email)
-            ->setPassword($password);
+            ->setPassword(password_hash($password, PASSWORD_DEFAULT));
 
         $profile = new Profile($account);
         $profile

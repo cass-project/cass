@@ -96,7 +96,7 @@ class Profile implements JSONSerializable
         return [
             'id' => (int)$this->getId(),
             'account_id' => (int)$this->getAccount()->getId(),
-            'current' => (bool)$this->isCurrent(),
+            'is_current' => (bool)$this->isCurrent(),
             'is_initialized' => $this->isInitialized(),
             'greetings' => $this->getProfileGreetings()->toJSON(),
             'image' => $this->getProfileImage()->toJSON(),

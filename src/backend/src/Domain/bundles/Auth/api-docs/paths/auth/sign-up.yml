@@ -1,5 +1,5 @@
-'/auth/sign-in/':
-  post:
+'/auth/sign-up/':
+  put:
     tags:
       - auth
     description:
@@ -10,9 +10,9 @@
         required: true
         description: JSON Request
         schema:
-          $ref: '#/definitions/Auth_SignIn_Request'
+          $ref: '#/definitions/Auth_SignUp_Request'
     responses:
       '400':
-          $ref: '#/responses/error'
+        $ref: '#/responses/error'
       '200':
         $ref: '#/responses/Auth_Response_SignInResponse'

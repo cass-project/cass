@@ -12,6 +12,8 @@ class ProfileGreetings implements JSONSerializable
 {
     use IdTrait;
 
+    const DEFAULT_GREETINGS = self::GREETINGS_FL;
+
     const GREETINGS_FL = 'fl';
     const GREETINGS_LFM = 'lfm';
     const GREETINGS_N = 'n';
@@ -33,7 +35,7 @@ class ProfileGreetings implements JSONSerializable
      * @Column(type="string",name="greetings_method")
      * @var string
      */
-    private $greetingsMethod = self::GREETINGS_FL;
+    private $greetingsMethod = self::DEFAULT_GREETINGS;
 
     /**
      * @Column(type="string",name="first_name")

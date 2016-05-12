@@ -6,6 +6,9 @@
         <testsuite name="application_frontline">
             <directory>src/Application/bundles/Frontline/src/Tests</directory>
         </testsuite>
+        <testsuite name="domain_auth">
+            <directory>src/Domain/bundles/Auth/src/Tests</directory>
+        </testsuite>
         <testsuite name="domain_theme">
             <directory>src/Domain/bundles/Theme/src/Tests</directory>
         </testsuite>
