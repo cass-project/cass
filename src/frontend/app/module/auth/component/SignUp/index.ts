@@ -23,14 +23,12 @@ export class SignUpComponent
         email: '',
         password: '',
         repeat: '',
-        remember: false
     };
 
     constructor(private authService: AuthService, private service: AuthComponentService, private router: Router){}
 
     attemptSignUp() {
         this.loading = true;
-        this.personalInfo.remember = true;
 
         this.authService.attemptSignUp(this.personalInfo).add(() => {
             if(!this.authService.lastError) {
@@ -43,11 +41,10 @@ export class SignUpComponent
 
     attemptSignUpNoRemember() {
         this.loading = true;
-        this.personalInfo.remember = false;
 
         this.authService.attemptSignUp(this.personalInfo).add(() => {
             if(!this.authService.lastError) {
-                this.router.navigate(['/']);
+                this.service.modals.closeModals();
             }
 
             this.loading = false;
