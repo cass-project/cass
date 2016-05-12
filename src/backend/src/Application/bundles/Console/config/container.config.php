@@ -14,6 +14,6 @@ return [
             'title' => 'Application Console',
             'version' => '1.0'
         ],
-        Application::class => factory(ConsoleApplicationFactory::class)
+        Application::class => factory(new ConsoleApplicationFactory())
     ]
 ];

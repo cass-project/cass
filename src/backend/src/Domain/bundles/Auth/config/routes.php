@@ -11,13 +11,13 @@ return function(Application $app) {
         'auth-sign-up'
     );
 
-    $app->get(
+    $app->post(
         '/auth/{action:sign-in}[/]',
         AuthMiddleware::class,
         'auth-sign-in'
     );
 
-    $app->get(
+    $app->post(
         '/auth/sign-in/{action:oauth2}/{provider}[/]',
         AuthMiddleware::class,
         'auth-oauth'
