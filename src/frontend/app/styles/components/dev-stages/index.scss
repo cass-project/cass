@@ -1,0 +1,15 @@
+@mixin devStage($level: 1) {
+  *.dev-stage-{$level} {
+    display: block;
+  }
+}
+
+*.dev-stages {
+  *.dev-stage {
+    display: none;
+  }
+
+  @for $i from 1 through 30 {
+    devStage($i);
+  }
+}
