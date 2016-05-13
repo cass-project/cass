@@ -130,7 +130,7 @@ INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (124,120,'Suzuk
 INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (125,120,'BMW',0);
 INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (126,120,'Kawasaki',0);
 INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (127,120,'KTM',0);
-INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (128,120,'Другие марки',0);
+INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (128,120,'Грузовики',0);
 INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (129,117,'Ремонт мототехники',0);
 INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (130,117,'Экипировка',0);
 INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (131,117,'Мотоспорт, мотошоу',0);

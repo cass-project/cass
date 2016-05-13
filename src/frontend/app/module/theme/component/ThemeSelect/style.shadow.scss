@@ -1,0 +1,42 @@
+@import "./../../../../styles/globals";
+
+div.component-theme-select {
+  @include disable-text-select;
+
+  span.info {
+    display: block;
+    font-size: $FONT_SIZE_INFO;
+    color: material-color("grey", "400");
+    margin: 5px 0;
+  }
+
+  div.values {
+    div.value {
+      display: inline-block;
+      padding: 5px;
+      margin: 3px;
+      border-radius: 3px;
+      background-color: material-color("grey", "200");
+      border-color: material-color("grey", "800");
+      font-size: $FONT_SIZE_INFO;
+      color: material-color("grey", "700");
+
+      span.title, span.close {
+        display: inline-block;
+      }
+
+      span.title {
+        @include enable-text-select;
+      }
+
+      span.close {
+        margin-left: 5px;
+        cursor: pointer;
+
+        &:hover {
+          color: material-color("red", "400");
+        }
+      }
+    }
+  }
+}
