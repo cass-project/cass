@@ -62,6 +62,10 @@ cp phinx.yml.dist phinx.yml
 vendor/bin/phinx migrate -e cass_development
 vendor/bin/phinx migrate -e cass_testing
 
+# error log
+sudo touch /var/log/php-errors.log
+sudo chown www-data /var/log/php-errors.log
+
 # ########
 # Frontend
 # ########
@@ -102,6 +106,14 @@ sudo mv phpunit.phar /usr/local/bin/phpunit
 /support-files/copy/usr/bin/vm-server-update
 
 sudo update-rc.d -f amqp-listner defaults
+
+# ####
+# PIMP
+# ####
+
+cd /opt/pimp
+sudo git clone https://github.com/potsky/PimpMyLog.git
+chown -R www-data /opt/pimp
 
 # ###############
 # Update vm-tools
