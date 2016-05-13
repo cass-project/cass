@@ -27,7 +27,7 @@ class Post
     private $dateCreatedOn;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Collection\Entity\Domain\Collection")
+     * @ManyToOne(targetEntity="Domain\Collection\Entity\Collection")
      * @JoinColumn(name="collection_id", referencedColumnName="id")
      * @var Collection
      */

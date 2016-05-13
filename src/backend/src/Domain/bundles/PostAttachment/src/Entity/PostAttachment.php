@@ -27,7 +27,7 @@ class PostAttachment
     private $dateCreatedOn;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Post\Entity\Domain\Post")
+     * @ManyToOne(targetEntity="Domain\Post\Entity\Post")
      * @JoinColumn(name="post_id", referencedColumnName="id")
      * @var Post|null
      */
