@@ -68,7 +68,6 @@ class AuthMiddlewareTest extends MiddlewareTestCase
 
         $request->execute();
         $request->execute()
-            ->dump()
             ->expectStatusCode(409)
             ->expectJSONBody([
                 'success' => false,
