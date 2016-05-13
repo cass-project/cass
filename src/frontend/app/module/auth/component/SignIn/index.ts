@@ -23,6 +23,7 @@ import {AuthService} from "../../service/AuthService";
 })
 export class SignInComponent
 {
+    private SignInTry = 0;
     private loading = false;
     private personalInfo = {
         email: "",
@@ -35,11 +36,12 @@ export class SignInComponent
         this.loading = true;
 
         this.authService.attemptSignIn(this.personalInfo).add(() => {
-            this.loading = false;
 
             if(!this.authService.lastError) {
                 this.service.modals.closeModals();
+                this.router.navigate(['/']);
             }
+            this.loading = false;
         });
     }
 

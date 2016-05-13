@@ -17,6 +17,7 @@
                     autofocus="autofocus"
                     tabindex="1"
                     [(ngModel)]="personalInfo.email"
+                    [readonly]="loading"
             />
           </label>
         </div>
@@ -28,6 +29,7 @@
                    autocomplete="off"
                    tabindex="2"
                    [(ngModel)]="personalInfo.password"
+                   [readonly]="loading"
             />
           </label>
         </div>
