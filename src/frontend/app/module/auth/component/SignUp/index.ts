@@ -18,6 +18,7 @@ import {AuthService} from "../../service/AuthService";
 })
 export class SignUpComponent
 {
+    private SignUpTry = 0;
     private loading = false;
     private personalInfo = {
         email: '',
@@ -32,10 +33,17 @@ export class SignUpComponent
 
         this.authService.attemptSignUp(this.personalInfo).add(() => {
             if(!this.authService.lastError) {
+                this.service.modals.closeModals();
                 this.router.navigate(['/']);
+                this.loading = false;
+            } else if(this.SignUpTry < 5){
+                setTimeout(() => {this.attemptSignUp()}, 3000);
+                this.SignUpTry++;
+            } else {
+                console.log("Превышен интервал попыток");
+                this.SignUpTry = 0;
+                this.loading = false;
             }
-
-            this.loading = false;
         });
     }
 
