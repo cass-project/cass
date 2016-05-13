@@ -28,7 +28,7 @@ class SignUpCommand extends Command
             ;
         }catch(DuplicateAccountException $e) {
             $responseBuilder
-                ->setStatusNotFound()
+                ->setStatusDuplicate()
                 ->setError($e)
             ;
         }catch(ValidationException $e) {

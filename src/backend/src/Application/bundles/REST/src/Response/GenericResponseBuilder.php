@@ -7,6 +7,7 @@ class GenericResponseBuilder extends ResponseBuilder
     const CODE_BAD_REQUEST = 400;
     const CODE_NOT_FOUND = 404;
     const CODE_NOT_ALLOWED = 403;
+    const CODE_CONFLICT = 409;
 
     public function setStatusSuccess(): self {
         $this->setStatus(self::CODE_SUCCESS);
@@ -28,6 +29,12 @@ class GenericResponseBuilder extends ResponseBuilder
 
     public function setStatusBadRequest(): self {
         $this->setStatus(self::CODE_BAD_REQUEST);
+
+        return $this;
+    }
+
+    public function setStatusDuplicate(): self {
+        $this->setStatus(self::CODE_CONFLICT);
 
         return $this;
     }

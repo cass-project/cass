@@ -16,7 +16,7 @@ class HasSameAccount implements Validator
     }
 
     public function validate(SignUpParameters $parameters) {
-        $hasSameAccount = $this->accountService->hasAccountWithEmail($parameters->getPassword());
+        $hasSameAccount = $this->accountService->hasAccountWithEmail($parameters->getEmail());
 
         $isValid = !$hasSameAccount;
 
