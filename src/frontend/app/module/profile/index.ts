@@ -24,4 +24,5 @@ import {ProfileDashboardComponent} from "./page/Dashbord/index";
     }
 ])
 export class ProfileComponent
-{}
+{
+}

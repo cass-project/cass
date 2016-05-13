@@ -1,3 +1,66 @@
 <article class="component component-profile-setup">
-
+  <cass-modal (submit)="ngSubmit()">
+    <form class="form form-profile-setup">
+      <div class="cass-padding-box-10">
+        <div class="stages">
+          <div class="stage stage-welcome" *ngIf="stage.isOnWelcomeStage()">
+            <div class="container">
+              <h1>Вы создали новый профиль!</h1>
+              <p>Но перед тем, как начать пользоваться нашим сервисом, нам нужно задать вам парочку вопросов.</p>
+              <button *ngIf="isSubmitButtonVisible()" type="submit" class="form-button form-button-primary">Продолжить</button>
+            </div>
+          </div>
+          <div class="stage-greetings" *ngIf="stage.isOnGreetingsStage()">
+            <header class="stage-header">
+              <h1>Как вас называть?</h1>
+            </header>
+            <cass-profile-settings-greetings></cass-profile-settings-greetings>
+          </div>
+          <div class="stage-image" *ngIf="stage.isOnImageStage()">
+            <header class="stage-header">
+              <h1>Изображение профиля</h1>
+            </header>
+            <cass-profile-settings-image></cass-profile-settings-image>
+          </div>
+          <div class="stage-interests" *ngIf="stage.isOnInterestsStage()">
+            <header class="stage-header">
+              <h1>Чем вы интересуетесь?</h1>
+            </header>
+            <cass-profile-settings-interests></cass-profile-settings-interests>
+            <header class="stage-header">
+              <h1>А в чем являетесь экспертом?</h1>
+            </header>
+            <cass-profile-settings-expert-in></cass-profile-settings-expert-in>
+          </div>
+          <div class="stage-finish" *ngIf="stage.isOnFinishStage()">
+            <div class="stage stage-finish" *ngIf="stage.isOnFinishStage()">
+              <div class="container">
+                <h1>Готово!</h1>
+                <p>Мы можем сразу вас направить в ваш профиль.</p>
+                <div class="buttons">
+                  <button class="form-text-button">Нет, просто закройте это окно</button>
+                  <button class="form-button form-button-primary">В профиль</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="form-footer" *ngIf="isFooterVisible()">
+        <div class="form-footer-section">
+          <div class="cass-padding-box-5">
+            <button *ngIf="isPreviousButtonVisible()" (click)="prevStage()" type="button" class="form-text-button">Назад</button>
+          </div>
+        </div>
+        <div class="form-footer-section">
+          <div class="form-footer-item">
+            <div class="cass-padding-box-5">
+              <button *ngIf="isSkipButtonVisible()" type="submit" class="form-text-button">Пропустить</button>
+              <button *ngIf="isSubmitButtonVisible()" type="submit" class="form-button form-button-primary">Следующий шаг</button>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </form>
+  </cass-modal>
 </article>

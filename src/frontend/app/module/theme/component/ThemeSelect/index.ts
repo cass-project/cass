@@ -1,12 +1,12 @@
 import {Component} from "angular2/core";
 
 @Component({
-    selector: 'cass-profile-image-settings',
+    selector: 'cass-theme-select',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
-export class ProfileImageSettings
+export class ThemeSelect
 {
 }
