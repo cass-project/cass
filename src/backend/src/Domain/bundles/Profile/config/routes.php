@@ -78,8 +78,14 @@ return function (Application $app) {
     );
 
     $app->delete(
-        '/protected/profile/{profileId}/{command:interesting-in}/{theme_ids}',
+        '/protected/profile/{profileId}/{command:interesting-in}/{theme_ids}[/]',
         ProfileMiddleware::class,
         'profile-interesting-in-delete'
+    );
+
+    $app->post(
+        '/protected/profile/{profileId}/{command:set-gender}[/]',
+        ProfileMiddleware::class,
+        'profile-set-gender'
     );
 };

@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Profile;
 
+use Application\Service\CommandService;
 use function DI\object;
 use function DI\factory;
 use function DI\get;
@@ -30,14 +31,10 @@ return [
             })
         ),
         ProfileMiddleware::class => object()->constructor(
-            get(ProfileService::class),
-            get(CurrentAccountService::class),
-            factory(function(Container $container) {
-                return sprintf('%s/community/community-image', $container->get('config.storage'));
-            })
+            get(CommandService::class)
         ),
         ProfileCard::class => object()->constructor(
             get(ProfileService::class)
-        )
+        ),
     ],
 ];

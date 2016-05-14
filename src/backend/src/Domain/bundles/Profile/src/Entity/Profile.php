@@ -93,7 +93,7 @@ class Profile implements JSONSerializable
     private $interesting_in_ids;
 
     public function toJSON(): array {
-        return [
+        $result = [
             'id' => (int)$this->getId(),
             'account_id' => (int)$this->getAccount()->getId(),
             'is_current' => (bool)$this->isCurrent(),
@@ -106,8 +106,17 @@ class Profile implements JSONSerializable
             'interesting_in' => array_map(function (Theme $theme) {
                 return $theme->getId();
             }, $this->interesting_in->toArray()),
-            'collections' => $this->collections->toJSON()
+            'collections' => $this->collections->toJSON(),
         ];
+
+        if($this->isGenderSpecified()) {
+            $result['gender'] = [
+                'int' => $this->getGender(),
+                'string' => $this->getGenderStringCode()
+            ];
+        }
+
+        return $result;
     }
 
     public function __construct(Account $account) {
@@ -121,11 +130,39 @@ class Profile implements JSONSerializable
         return $this->gender;
     }
 
+    public function isGenderSpecified(): bool {
+        return $this->gender !== null;
+    }
+
     public function setGender(int $gender): self {
         if (!in_array($gender, [self::GENDER_FEMALE, self::GENDER_MALE]))
-            throw new UnknownGenderException("the gender: %s is unknown", $gender);
+            throw new UnknownGenderException("Unknown gender `%d`", $gender);
 
         $this->gender = $gender;
+        return $this;
+    }
+
+    public function getGenderStringCode(): string {
+        if($this->gender === self::GENDER_MALE) {
+            return 'male';
+        }else if($this->gender === self::GENDER_FEMALE) {
+            return 'female';
+        }else{
+            throw new \Exception(sprintf('Unknown gender string code `%s`', $this->gender));
+        }
+    }
+
+    public function setGenderFromStringCode(string $genderCode): self {
+        $genderCode = strtolower($genderCode);
+
+        if($genderCode === 'male') {
+            $this->setGender(self::GENDER_MALE);
+        }else if($genderCode === 'female') {
+            $this->setGender(self::GENDER_FEMALE);
+        }else{
+            throw new \Exception('Failed to parse gender string code');
+        }
+
         return $this;
     }
 

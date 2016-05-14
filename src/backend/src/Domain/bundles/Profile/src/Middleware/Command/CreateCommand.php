@@ -2,13 +2,14 @@
 namespace Domain\Profile\Middleware\Command;
 
 use Application\Exception\BadCommandCallException;
+use Application\REST\Response\ResponseBuilder;
 use Domain\Profile\Exception\MaxProfilesReachedException;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface as Response;
 
-class CreateCommand extends Command
+final class CreateCommand extends Command
 {
-    public function run(ServerRequestInterface $request)
-    {
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): Response {
         $accountId = $request->getAttribute('accountId');
 
         if($accountId === 'current') {
@@ -20,9 +21,12 @@ class CreateCommand extends Command
         try {
             $profile = $this->profileService->createProfileForAccount($account);
 
-            return [
-                'entity' => $profile->toJSON()
-            ];
+            return $responseBuilder
+                ->setStatusSuccess()
+                ->setJson([
+                    'entity' => $profile->toJSON()
+                ])
+                ->build();
         }catch(MaxProfilesReachedException $e){
             throw new BadCommandCallException($e->getMessage());
         }

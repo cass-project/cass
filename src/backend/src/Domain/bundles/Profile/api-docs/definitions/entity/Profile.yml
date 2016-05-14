@@ -28,6 +28,19 @@ Profile_Entity_Profile:
     image:
       type: object
       $ref: '#/definitions/Profile_Entity_ProfileImage'
+    gender:
+      type: object
+      description: Пол
+      required:
+        - int
+        - string
+      properties:
+        int:
+          type: number
+          description: Пол (числовой код)
+        string:
+          type: string
+          description: Пол (строковой код)
     expert_in:
       type: array
       items:

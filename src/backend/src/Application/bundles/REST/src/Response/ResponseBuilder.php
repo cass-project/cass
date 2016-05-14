@@ -3,7 +3,7 @@ namespace Application\REST\Response;
 
 use Psr\Http\Message\ResponseInterface;
 
-abstract class ResponseBuilder
+class ResponseBuilder
 {
     /** @var ResponseInterface */
     private $response;
@@ -34,6 +34,47 @@ abstract class ResponseBuilder
         return $this->status;
     }
 
+    const CODE_SUCCESS = 200;
+    const CODE_BAD_REQUEST = 400;
+    const CODE_NOT_FOUND = 404;
+    const CODE_NOT_ALLOWED = 403;
+    const CODE_CONFLICT = 409;
+
+    public function setStatusSuccess(): self {
+        $this->setStatus(self::CODE_SUCCESS);
+
+        return $this;
+    }
+
+    public function setStatusNotFound(): self {
+        $this->setStatus(self::CODE_NOT_FOUND);
+
+        return $this;
+    }
+
+    public function setStatusNotAllowed(): self {
+        $this->setStatus(self::CODE_NOT_ALLOWED);
+
+        return $this;
+    }
+
+    public function setStatusBadRequest(): self {
+        $this->setStatus(self::CODE_BAD_REQUEST);
+
+        return $this;
+    }
+
+    public function setStatusDuplicate(): self {
+        $this->setStatus(self::CODE_CONFLICT);
+
+        return $this;
+    }
+
+    public function isSuccess(): bool
+    {
+        return !$this->getError() && ($this->getStatus() === self::CODE_SUCCESS);
+    }
+
     public final function getJson(): array
     {
         return $this->json;
@@ -57,8 +98,6 @@ abstract class ResponseBuilder
 
         return $this;
     }
-
-    abstract public function isSuccess(): bool;
 
     public final function build(): ResponseInterface
     {

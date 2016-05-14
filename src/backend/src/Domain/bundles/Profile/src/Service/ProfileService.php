@@ -203,4 +203,7 @@ class ProfileService
         return $this->profileRepository->deleteInterestingInParameters($profileId, $interestingInParameters);
     }
 
+    public function setGenderFromStringCode(int $profileId, string $genderCode): Profile {
+        return $this->profileRepository->setGenderFromStringCode($profileId, $genderCode);
+    }
 }

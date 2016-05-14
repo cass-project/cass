@@ -324,4 +324,14 @@ class ProfileRepository extends EntityRepository
 
         return $profile;
     }
+
+    public function setGenderFromStringCode(string $profileId, string $genderCode): Profile
+    {
+        $profile = $this->getProfileById($profileId);
+        $profile->setGenderFromStringCode($genderCode);
+
+        $this->getEntityManager()->flush($profile);
+
+        return $profile;
+    }
 }

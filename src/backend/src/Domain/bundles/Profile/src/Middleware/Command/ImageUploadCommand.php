@@ -2,15 +2,16 @@
 namespace Domain\Profile\Middleware\Command;
 
 use Application\Exception\BadCommandCallException;
+use Application\REST\Response\ResponseBuilder;
 use Domain\Profile\Exception\ImageIsNotASquareException;
 use Domain\Profile\Exception\ImageTooBigException;
 use Domain\Profile\Exception\ImageTooSmallException;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface as Response;
 
 class ImageUploadCommand extends Command
 {
-    public function run(ServerRequestInterface $request)
-    {
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): Response {
         try {
             $profileId = $this->validateProfileId($request->getAttribute('profileId'));
 
@@ -23,10 +24,13 @@ class ImageUploadCommand extends Command
                 $request->getAttribute('y2')
             );
 
-            return [
-                'profile_id' => $newProfileImage->getProfile()->getId(),
-                'public_path' => $newProfileImage->getPublicPath()
-            ];
+            return $responseBuilder
+                ->setStatusSuccess()
+                ->setJson([
+                    'profile_id' => $newProfileImage->getProfile()->getId(),
+                    'public_path' => $newProfileImage->getPublicPath()
+                ])
+                ->build();
         }catch(ImageTooSmallException $e) {
             throw new BadCommandCallException($e->getMessage());
         }catch(ImageTooBigException $e) {
@@ -35,4 +39,5 @@ class ImageUploadCommand extends Command
             throw new BadCommandCallException($e->getMessage());
         }
     }
+
 }

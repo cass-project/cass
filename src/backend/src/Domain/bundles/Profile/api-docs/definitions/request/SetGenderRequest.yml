@@ -1,0 +1,7 @@
+Profile_SetGender_Request:
+  required:
+    - gender
+  properties:
+    gender:
+      type: string
+      description: Пол ("male", "female")
