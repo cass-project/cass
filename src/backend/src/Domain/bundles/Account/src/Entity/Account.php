@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\PersistentCollection;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Exception\NoCurrentProfileException;
 
 /**
  * @Entity(repositoryClass="Domain\Account\Repository\AccountRepository")
@@ -77,6 +78,18 @@ class Account implements JSONSerializable
     public function getProfiles(): Collection
     {
         return $this->profiles;
+    }
+    
+    public function getCurrentProfile(): Profile
+    {
+        foreach($this->getProfiles() as $profile) {
+            /** @var Profile $profile */
+            if($profile->isCurrent()) {
+                return $profile;
+            }
+        }
+        
+        throw new NoCurrentProfileException(sprintf('No current profile available for account ID: %d', $this->isPersisted() ? $this->getId() : 'NEW_INSTANCE'));
     }
 
     public function isYoursProfile(Profile $profile)

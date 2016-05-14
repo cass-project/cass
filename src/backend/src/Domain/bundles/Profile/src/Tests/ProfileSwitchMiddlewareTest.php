@@ -114,7 +114,7 @@ class ProfileSwitchMiddlewareTest extends ProfileMiddlewareTestCase
 
     }
 
-    public function testSwithSelf()
+    public function testSwitchSelf()
     {
         $account = DemoAccountFixture::getAccount();
         $profile = DemoProfileFixture::getProfile();

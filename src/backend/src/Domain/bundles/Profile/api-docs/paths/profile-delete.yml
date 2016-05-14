@@ -14,7 +14,15 @@
     responses:
       200:
         schema:
-          $ref: '#/responses/success'
+          required:
+            - success
+            - current_profile_id
+          success:
+            type: booleand
+            description: '=true'
+          current_profile_id:
+            type: number
+            description: ID текущего профиля аккаунта. Если удаляется текущий профиль, то содержит ID профиля, на который автоматически переключился аккаунт.
       403:
         schema:
           $ref: '#/responses/Unauthorized'

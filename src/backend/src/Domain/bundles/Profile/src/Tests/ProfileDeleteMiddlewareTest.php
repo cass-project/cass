@@ -40,7 +40,8 @@ class ProfileDeleteMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([
-                'success' => true
+                'success' => true,
+                'current_profile_id' => $newProfileId
             ])
         ;
 
@@ -92,7 +93,14 @@ class ProfileDeleteMiddlewareTest extends ProfileMiddlewareTestCase
 
         $this->requestDeleteProfile($newProfileId)
             ->auth($account->getAPIKey())
-            ->execute();
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true,
+                'current_profile_id' => $profile->getId()
+            ])
+        ;
 
         $this->requestGetProfile($profile->getId())
             ->auth($account->getAPIKey())
