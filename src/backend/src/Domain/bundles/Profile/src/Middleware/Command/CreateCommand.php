@@ -10,13 +10,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 final class CreateCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): Response {
-        $accountId = $request->getAttribute('accountId');
-
-        if($accountId === 'current') {
-            $account = $this->currentAccountService->getCurrentAccount();
-        }else{
-            throw new \Exception('Not implemented');
-        }
+        $account = $this->currentAccountService->getCurrentAccount();
 
         try {
             $profile = $this->profileService->createProfileForAccount($account);

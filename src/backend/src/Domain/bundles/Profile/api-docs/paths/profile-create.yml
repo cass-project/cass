@@ -1,4 +1,4 @@
-/protected/profile/create/{accountId}:
+/protected/profile/create:
   put:
     tags:
       - profile
@@ -24,4 +24,5 @@
             - success
             - entity
       403:
-        $ref: '#/responses/Unauthorized'
+        schema:
+          $ref: '#/responses/Unauthorized'

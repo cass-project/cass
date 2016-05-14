@@ -82,6 +82,12 @@ class ProfileService
         }
 
         $this->profileRepository->deleteProfile($profile);
+
+        $account->getProfiles()->removeElement($profile);
+
+        if($profile->isCurrent()) {
+            $this->profileRepository->switchTo($account->getProfiles()->toArray(), $account->getProfiles()->first());
+        }
     }
 
     public function nameFL(int $profileId, string $firstName, string $lastName) {

@@ -9,7 +9,7 @@ use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 /**
  * @backupGlobals disabled
  */
-class ProfileMiddlewareTest extends MiddlewareTestCase
+class ProfileMiddlewareTest extends ProfileMiddlewareTestCase
 {
     protected function getFixtures(): array {
         return [

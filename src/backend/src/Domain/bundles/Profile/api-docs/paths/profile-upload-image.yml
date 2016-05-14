@@ -57,7 +57,9 @@
               type: string
               description: Путь (/public) к картинке
       403:
-        $ref: '#/responses/Unauthorized'
+        schema:
+          $ref: '#/responses/Unauthorized'
       404:
-        description: Domain\Profile not found
-        $ref: '#/responses/NotFound'
+        description: Profile not found
+        schema:
+          $ref: '#/responses/NotFound'

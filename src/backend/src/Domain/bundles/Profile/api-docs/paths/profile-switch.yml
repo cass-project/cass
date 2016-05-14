@@ -24,7 +24,9 @@
               type: booleand
               default: true
       403:
-        $ref: '#/responses/Unauthorized'
+        schema:
+          $ref: '#/responses/Unauthorized'
       404:
         description: Domain\Profile not found
-        $ref: '#/responses/NotFound'
+        schema:
+          $ref: '#/responses/NotFound'

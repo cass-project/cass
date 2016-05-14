@@ -20,7 +20,10 @@ class DeleteCommand extends Command
                 ->setStatusSuccess()
                 ->build();
         }catch(LastProfileException $e){
-            throw new BadCommandCallException($e->getMessage());
+            return $responseBuilder
+                ->setStatusConflict()
+                ->setError($e)
+                ->build();
         }
     }
 }

@@ -13,16 +13,16 @@
         description: ID профиля
     responses:
       200:
-        description: Remove profile successfully
         schema:
-          required:
-            - success
-          properties:
-            success:
-              type: boolean
-              default: true
+          $ref: '#/responses/success'
       403:
-        $ref: '#/responses/Unauthorized'
+        schema:
+          $ref: '#/responses/Unauthorized'
       404:
-        description: Domain\Profile not found
-        $ref: '#/responses/NotFound'
+        description: Profile not found
+        schema:
+          $ref: '#/responses/NotFound'
+      409:
+        description: Попытка удалить последний оставшийся профиль
+        schema:
+          $ref: '#/responses/error'

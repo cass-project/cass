@@ -36,7 +36,7 @@ class AuthMiddleware implements MiddlewareInterface
             $command->run($request, $responseBuilder);
         }catch(DuplicateAccountException $e) {
             $responseBuilder
-                ->setStatusDuplicate()
+                ->setStatusConflict()
                 ->setError($e);
         }
 

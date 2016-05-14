@@ -12,7 +12,7 @@ return function (Application $app) {
     );
 
     $app->put(
-        '/protected/profile/{command:create}/{accountId}[/]',
+        '/protected/profile/{command:create}[/]',
         ProfileMiddleware::class,
         'profile-create'
     );

@@ -137,6 +137,20 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Возвращает последний возвращенный результат
+     * @return array
+     */
+    protected function getLastResult(): Result
+    {
+        return self::$currentResult;
+    }
+
+    protected function getParsedLastResult(): array
+    {
+        return self::$currentResult->getContent();
+    }
+
+    /**
      * При выполнении каждого юнит-теста происходят следующие действия:
      *
      *  1. Стартует транзакция

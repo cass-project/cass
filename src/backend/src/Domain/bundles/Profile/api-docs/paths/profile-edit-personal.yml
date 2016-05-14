@@ -22,4 +22,5 @@
         schema:
           $ref: '#/responses/success'
       403:
-        $ref: '#/responses/Unauthorized'
+        schema:
+          $ref: '#/responses/Unauthorized'

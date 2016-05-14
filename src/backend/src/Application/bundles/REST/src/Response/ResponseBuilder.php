@@ -64,7 +64,7 @@ class ResponseBuilder
         return $this;
     }
 
-    public function setStatusDuplicate(): self {
+    public function setStatusConflict(): self {
         $this->setStatus(self::CODE_CONFLICT);
 
         return $this;
