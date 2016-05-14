@@ -34,4 +34,8 @@ abstract class ProfileMiddlewareTestCase extends MiddlewareTestCase
         return $this->request('POST', sprintf('/protected/profile/%d/edit-personal', $profileId))
             ->setParameters($json);
     }
+
+    protected function requestSwitch(int $profileId): RESTRequest {
+        return $this->request('POST', sprintf('/protected/profile/%d/switch', $profileId));
+    }
 }

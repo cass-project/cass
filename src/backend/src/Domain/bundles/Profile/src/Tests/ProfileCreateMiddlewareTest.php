@@ -1,5 +1,6 @@
 <?php
 namespace Domain\Profile\Tests;
+
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 
