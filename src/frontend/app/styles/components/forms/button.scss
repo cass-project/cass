@@ -1,6 +1,10 @@
 @import '~sass-material-colors';
 @import "./../../globals";
 
+@mixin form-button-default-hover {
+  background-color: material-color('grey', '200');
+}
+
 button.form-button {
   @include card(1);
   @include disable-text-select;
@@ -28,7 +32,7 @@ button.form-button {
   overflow: hidden;
 
   &:hover, &:focus, &:disabled {
-    background-color: material-color('grey', '200');
+    @include form-button-default-hover;
   }
 
   &:disabled {

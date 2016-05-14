@@ -5,6 +5,8 @@
 @import "./components/forms/index";
 
 html {
+  @include disable-text-select;
+
   font-family: $FONT_FAMILY;
   font-size: 13px;
 }

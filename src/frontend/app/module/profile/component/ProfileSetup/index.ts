@@ -6,6 +6,7 @@ import {ProfileSettingsImage} from "../ProfileSettings/ProfileSettingsImage/inde
 import {ProfileSettingsInterests} from "../ProfileSettings/ProfileSettingsInterests/index";
 import {ProfileSettingsExpertIn} from "../ProfileSettings/ProfileSettingsExpertIn/index";
 import {ProfileSetupModel} from "./model";
+import {ProfileSettingsGender} from "../ProfileSettings/ProfileSettingsGender/index";
 
 @Component({
     selector: 'cass-profile-setup',
@@ -18,6 +19,7 @@ import {ProfileSetupModel} from "./model";
     ],
     directives: [
         ModalComponent,
+        ProfileSettingsGender,
         ProfileSettingsGreetings,
         ProfileSettingsImage,
         ProfileSettingsInterests,
@@ -43,7 +45,11 @@ export class ProfileSetup
     }
 
     isPreviousButtonVisible() {
-        return ! (this.stage.isOnFinishStage() || this.stage.isOnWelcomeStage() || this.stage.isOnGreetingsStage());
+        return ! (
+            this.stage.isOnFinishStage() ||
+            this.stage.isOnWelcomeStage() ||
+            this.stage.isOnGreetingsStage()
+        );
     }
 
     isSubmitButtonVisible() {
@@ -51,7 +57,10 @@ export class ProfileSetup
     }
 
     isSkipButtonVisible() {
-        return this.stage.isOnImageStage() || this.stage.isOnInterestsStage();
+        return this.stage.isOnGenderStage() ||
+            this.stage.isOnImageStage() ||
+            this.stage.isOnInterestsStage()
+        ;
     }
 
     isFooterVisible() {
@@ -65,7 +74,8 @@ class StageControls
     private map = (() => {
         let map = {};
 
-        map[ProfileSetupStage.StageWelcome] = ProfileSetupStage.StageGreetings;
+        map[ProfileSetupStage.StageWelcome] = ProfileSetupStage.StageGender;
+        map[ProfileSetupStage.StageGender] = ProfileSetupStage.StageGreetings;
         map[ProfileSetupStage.StageGreetings] = ProfileSetupStage.StageImage;
         map[ProfileSetupStage.StageImage] = ProfileSetupStage.StageInterests;
         map[ProfileSetupStage.StageInterests] = ProfileSetupStage.StageFinish;
@@ -93,6 +103,10 @@ class StageControls
         return this.stage === ProfileSetupStage.StageWelcome;
     }
 
+    isOnGenderStage() {
+        return this.stage === ProfileSetupStage.StageGender;
+    }
+
     isOnGreetingsStage() {
         return this.stage === ProfileSetupStage.StageGreetings;
     }
@@ -112,6 +126,7 @@ class StageControls
 
 enum ProfileSetupStage {
     StageWelcome,
+    StageGender,
     StageGreetings,
     StageImage,
     StageInterests,

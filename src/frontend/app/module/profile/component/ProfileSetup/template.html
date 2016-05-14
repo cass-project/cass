@@ -10,6 +10,12 @@
               <button *ngIf="isSubmitButtonVisible()" type="submit" class="form-button form-button-primary">Продолжить</button>
             </div>
           </div>
+          <div class="stage-gender" *ngIf="stage.isOnGenderStage()">
+            <header class="stage-header">
+              <h1>Укажите ваш пол</h1>
+            </header>
+            <cass-profile-settings-gender></cass-profile-settings-gender>
+          </div>
           <div class="stage-greetings" *ngIf="stage.isOnGreetingsStage()">
             <header class="stage-header">
               <h1>Как вас называть?</h1>

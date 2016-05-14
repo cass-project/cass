@@ -1,0 +1,41 @@
+@import "./../../../../../styles/globals";
+@import "./../../../../../styles/components/forms/button";
+
+div.component-profile-settings-gender
+{
+  div.gender-select {
+    display: flex;
+  }
+
+  div.gender-option {
+    width: 50%;
+    border: 1px solid material-color("grey", "300");
+    margin: 5px;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      border-color: material-color("grey", "500");
+
+      span.icon {
+        color: material-color("grey", "900");
+      }
+
+      button {
+        @include form-button-default-hover;
+      }
+    }
+
+    span.icon {
+      display: block;
+      line-height: 200px;
+      font-size: 64px;
+      color: material-color("grey", "800");
+    }
+
+    button {
+      margin: 20px;
+    }
+  }
+}

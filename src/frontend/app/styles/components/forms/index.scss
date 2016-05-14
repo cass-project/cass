@@ -1,12 +1,12 @@
-.form {
-  @import "./header";
-  @import "./input";
-  @import "./label";
-  @import "./input-group";
-  @import "./footer";
-  @import "./button";
-  @import "./errors";
+@import "./header";
+@import "./input";
+@import "./label";
+@import "./input-group";
+@import "./footer";
+@import "./button";
+@import "./errors";
 
+.form {
   position: relative;
 
   div.form-placeholder-text {
