@@ -5,7 +5,7 @@
   background-color: material-color('grey', '200');
 }
 
-button.form-button {
+.form-button {
   @include card(1);
   @include disable-text-select;
 
@@ -46,7 +46,7 @@ button.form-button {
   }
 }
 
-button.form-button-primary {
+.form-button-primary {
   color: white;
   background-color: material-color('blue', '600');
 
@@ -59,7 +59,7 @@ button.form-button-primary {
   }
 }
 
-button.form-text-button {
+.form-text-button {
   color: material-color('grey', '900');
   box-sizing: border-box;
   outline: 0;

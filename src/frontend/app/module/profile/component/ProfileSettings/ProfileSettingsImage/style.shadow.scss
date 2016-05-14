@@ -1,0 +1,48 @@
+@import "./../../../../../styles/globals";
+
+$PROGRESS_HEIGHT: 18px;
+
+div.component-profile-settings-image
+{
+  div.drop-area {
+    text-align: center;
+    border: 1px dashed material-color("grey", "400");
+    border-radius: 5px;
+    line-height: 250px;
+
+    p {
+      font-size: $FONT_SIZE_NORMAL;
+    }
+
+    div.form-button {
+      vertical-align: middle;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    div.progress-box {
+      width: 70%;
+      display: inline-block;
+    }
+
+    div.progress {
+      width: 100%;
+      background-color: material-color("grey", "200");
+      height: $PROGRESS_HEIGHT;
+      position: relative;
+
+      div.progress-bar {
+        position: absolute;
+        height: $PROGRESS_HEIGHT;
+        background-color: material-color("green", "400");
+      }
+    }
+  }
+
+  div.drop-area-active {
+    background-color: material-color("yellow", "100");
+    border-color: material-color("yellow", "900");
+  }
+}

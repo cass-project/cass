@@ -53,7 +53,7 @@ export class ProfileSetup
     }
 
     isSubmitButtonVisible() {
-        return ! this.stage.isOnFinishStage();
+        return ! (this.stage.isOnFinishStage() || this.stage.isOnGenderStage());
     }
 
     isSkipButtonVisible() {

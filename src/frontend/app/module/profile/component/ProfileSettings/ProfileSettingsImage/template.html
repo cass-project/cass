@@ -1,3 +1,21 @@
 <div class="component component-profile-settings-image">
+  <!-- stage 1: select image -->
+  <div class="drop-area drop-area-active"> <!-- drop-area-active on drag'n'drop -->
+    <p>
+      <span>Перетащите сюда картинку или</span>
+      <label for="profileSettingsImageUpload">
+        <div class="form-button form-button-primary">Выберите файл</div>
+      </label>
+    </p>
+    <input type="file" id="profileSettingsImageUpload">
+  </div>
 
+  <!-- stage 2: uploading image -->
+  <div class="drop-area">
+    <div class="progress-box">
+      <div class="progress">
+        <div class="progress-bar" style="width:35%;"></div>
+      </div>
+    </div>
+  </div>
 </div>
