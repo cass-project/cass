@@ -15,6 +15,63 @@ div.component-theme-select {
     margin: 5px 0;
   }
 
+  a.link-browser {
+    white-space: nowrap;
+    color: material-color("light-blue", "300");
+
+    &:hover {
+      color: material-color("light-blue", "600");
+    }
+  }
+
+  div.hide-browser {
+    text-align: right;
+    line-height: 30px;
+  }
+
+  div.browser {
+    height: 300px;
+    border-bottom: 1px solid material-color("grey", "300");
+
+    div.view {
+      overflow-y: hidden;
+      overflow-x: auto;
+      height: 300px;
+      white-space: nowrap;
+
+      div.column {
+        display: inline-block;
+        max-width: 250px;
+        height: 300px;
+        border-right: 1px solid material-color("grey", "300");
+        vertical-align: top;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        ul.theme-list {
+          margin: 0;
+
+          li {
+            color: black;
+            font-size: $FONT_SIZE_SMALL;
+            line-height: 25px;
+            padding: 0 5px;
+            padding-right: 20px;
+
+            &:hover {
+              background-color: material-color("grey", "100");
+            }
+          }
+
+          li.active, li.active:hover {
+            color: white;
+            background-color: material-color("blue", "400");
+          }
+        }
+      }
+    }
+  }
+
   div.auto-complete {
     @include card(2);
 

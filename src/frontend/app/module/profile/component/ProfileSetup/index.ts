@@ -78,7 +78,8 @@ class StageControls
         map[ProfileSetupStage.StageGender] = ProfileSetupStage.StageGreetings;
         map[ProfileSetupStage.StageGreetings] = ProfileSetupStage.StageImage;
         map[ProfileSetupStage.StageImage] = ProfileSetupStage.StageInterests;
-        map[ProfileSetupStage.StageInterests] = ProfileSetupStage.StageFinish;
+        map[ProfileSetupStage.StageInterests] = ProfileSetupStage.StageExpertIn;
+        map[ProfileSetupStage.StageExpertIn] = ProfileSetupStage.StageFinish;
 
         return map;
     })();
@@ -119,6 +120,10 @@ class StageControls
         return this.stage === ProfileSetupStage.StageInterests;
     }
 
+    isOnExpertInStage() {
+        return this.stage === ProfileSetupStage.StageExpertIn;
+    }
+
     isOnFinishStage() {
         return this.stage === ProfileSetupStage.StageFinish;
     }
@@ -130,5 +135,6 @@ enum ProfileSetupStage {
     StageGreetings,
     StageImage,
     StageInterests,
+    StageExpertIn,
     StageFinish
 }

@@ -36,10 +36,6 @@ div.component-profile-settings-greetings {
         margin: 10px 0;
       }
 
-      &.active label.greetings-radio-view {
-        border-color: material-color("yellow", "600");
-        background-color: material-color("yellow", "100");
-      }
     }
 
     input[type="radio"].greetings-radio {
