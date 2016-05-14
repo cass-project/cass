@@ -29,6 +29,8 @@ class FinalHandler
         }else if($error instanceof  \Exception) {
             $errorType = get_class($error);
 
+            $responseBuilder->setError($error);
+
             try {
                 throw $error;
             } catch (EntityNotFoundException $e) {
@@ -43,6 +45,8 @@ class FinalHandler
                 $responseBuilder->setStatusNotFound();
             } catch (PermissionsDeniedException $e) {
                 $responseBuilder->setStatusNotAllowed();
+            } catch (\Exception $e) {
+                $responseBuilder->setStatusInternalError();
             }
         }else if($error instanceof \Error) {
             throw $error;

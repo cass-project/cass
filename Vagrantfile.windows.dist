@@ -10,6 +10,8 @@ Vagrant.configure(2) do |config|
 
   config.vm.network "forwarded_port", guest: 3000, host: 8080 # www
   config.vm.network "forwarded_port", guest: 3001, host: 8081 # mongo-express
+  config.vm.network "forwarded_port", guest: 3002, host: 8082 # react-php
+  config.vm.network "forwarded_port", guest: 3003, host: 8083 # pimp
   config.vm.network "forwarded_port", guest: 27017, host: 27017 # mongo
 
    config.vm.provider "virtualbox" do |vb|

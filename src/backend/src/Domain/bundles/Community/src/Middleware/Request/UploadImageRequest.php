@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Community\Middleware\Request;
 
+use Application\Exception\FileNotUploadedException;
 use Application\REST\Request\Params\RequestParamsInterface;
 use Application\Util\Definitions\Point;
 use Domain\Community\Parameters\UploadImageParameters;
@@ -31,9 +32,12 @@ class UploadImageRequest implements RequestParamsInterface
             (int) $request->getAttribute('y2')
         );
 
+        if(! isset($request->getUploadedFiles()['file'])) {
+            throw new FileNotUploadedException('File not uplaoded');
+        }
+
         /** @var UploadedFile $file */
         $file = $request->getUploadedFiles()['file'];
-        $file->getStream()->getMetadata('uri');
 
         return new UploadImageParameters($file->getStream()->getMetadata('uri'), $pointStart, $pointEnd);
     }

@@ -5,6 +5,13 @@ use Psr\Http\Message\ResponseInterface;
 
 class ResponseBuilder
 {
+    const CODE_SUCCESS = 200;
+    const CODE_BAD_REQUEST = 400;
+    const CODE_NOT_FOUND = 404;
+    const CODE_NOT_ALLOWED = 403;
+    const CODE_CONFLICT = 409;
+    const CODE_INTERNAL_ERROR = 500;
+
     /** @var ResponseInterface */
     private $response;
 
@@ -34,12 +41,6 @@ class ResponseBuilder
         return $this->status;
     }
 
-    const CODE_SUCCESS = 200;
-    const CODE_BAD_REQUEST = 400;
-    const CODE_NOT_FOUND = 404;
-    const CODE_NOT_ALLOWED = 403;
-    const CODE_CONFLICT = 409;
-
     public function setStatusSuccess(): self {
         $this->setStatus(self::CODE_SUCCESS);
 
@@ -66,6 +67,12 @@ class ResponseBuilder
 
     public function setStatusConflict(): self {
         $this->setStatus(self::CODE_CONFLICT);
+
+        return $this;
+    }
+
+    public function setStatusInternalError(): self {
+        $this->setStatus(self::CODE_INTERNAL_ERROR);
 
         return $this;
     }
