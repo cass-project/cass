@@ -1,27 +1,47 @@
 <?php
 namespace Domain\Profile\Middleware\Parameters;
 
-use Domain\Profile\Entity\ProfileGreetings;
-
 class EditPersonalParameters
 {
+    private $gender;
     private $greetingsType;
     private $firstName;
     private $lastName;
     private $middleName;
     private $nickName;
 
-    public function __construct(\stdClass $data)
-    {
-        $this->greetingsType = $data->greetings_type;
-        $this->firstName = (string) $data->first_name;
-        $this->lastName = (string) $data->last_name;
-        $this->middleName = (string) $data->middle_name;
-        $this->nickName = (string) $data->nickname;
+    /**
+     * EditPersonalParameters constructor.
+     * @param $greetingsType
+     * @param $firstName
+     * @param $lastName
+     * @param $middleName
+     * @param $nickName
+     */
+    public function __construct(
+        string $greetingsType,
+        string $firstName,
+        string $lastName,
+        string $middleName,
+        string $nickName
+    ) {
+        $this->greetingsType = $greetingsType;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->middleName = $middleName;
+        $this->nickName = $nickName;
+    }
 
-        if(!in_array($this->greetingsType, ProfileGreetings::AVAILABLE_GREETINGS)) {
-            throw new \Exception('Invalid greetings');
-        }
+    public function specifyGender(string $gender) {
+        $this->gender = $gender;
+    }
+
+    public function isGenderSpecified(): bool {
+        return $this->gender !== null;
+    }
+
+    public function getGender(): string {
+        return $this->gender;
     }
 
     public function getGreetingsType(): string

@@ -20,7 +20,15 @@
     responses:
       200:
         schema:
-          $ref: '#/responses/success'
+          properties:
+            success:
+              type: boolean
+              default: true
+            entity:
+              $ref: '#/definitions/Profile_Entity_Profile'
+          required:
+            - success
+            - entity
       403:
         schema:
           $ref: '#/responses/Unauthorized'

@@ -8,9 +8,22 @@ use Domain\Profile\ProfileBundle;
 
 class EditPersonalRequest extends SchemaParams
 {
-    public function getParameters()
+    public function getParameters(): EditPersonalParameters
     {
-        return new EditPersonalParameters($this->getData());
+        $data = $this->getData();
+        $parameters = new EditPersonalParameters(
+            $data->greetings_method,
+            $data->first_name,
+            $data->last_name,
+            $data->middle_name,
+            $data->nickname
+        );
+
+        if(isset($data->gender) && is_string($data->gender)) {
+            $parameters->specifyGender($data->gender);
+        }
+
+        return $parameters;
     }
 
     protected function getSchema(): JSONSchema

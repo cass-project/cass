@@ -1,13 +1,17 @@
 Profile_EditPersonal_Request:
   type: object
   required:
-    - greetings_type
+    - greetings_method
     - first_name
     - last_name
     - middle_name
     - nickname
   properties:
-    greetings_type:
+    gender:
+      type: string
+      description: |
+        Пол. Возможные значения: male, female, null
+    greetings_method:
       type: string
       default: "fl"
       description: |

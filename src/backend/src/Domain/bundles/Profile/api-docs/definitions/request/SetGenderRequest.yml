@@ -4,4 +4,5 @@ Profile_SetGender_Request:
   properties:
     gender:
       type: string
-      description: Пол ("male", "female")
+      description: |
+        Пол. Возможные значения: male, female, null

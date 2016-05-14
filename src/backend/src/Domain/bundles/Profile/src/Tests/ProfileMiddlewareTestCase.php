@@ -6,6 +6,9 @@ use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 
+/**
+ * @backupGlobals disabled
+ */
 abstract class ProfileMiddlewareTestCase extends MiddlewareTestCase
 {
     protected function getFixtures(): array {
@@ -25,5 +28,10 @@ abstract class ProfileMiddlewareTestCase extends MiddlewareTestCase
 
     protected function requestDeleteProfile(int $profileId): RESTRequest {
         return $this->request('DELETE', sprintf('/protected/profile/%d/delete', $profileId));
+    }
+
+    protected function requestEditPersonal(int $profileId, array $json): RESTRequest {
+        return $this->request('POST', sprintf('/protected/profile/%d/edit-personal', $profileId))
+            ->setParameters($json);
     }
 }

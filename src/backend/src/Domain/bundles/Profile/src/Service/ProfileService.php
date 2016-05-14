@@ -37,14 +37,18 @@ class ProfileService
         return $this->profileRepository->getProfileById($profileId);
     }
 
-    public function updatePersonalData(int $profileId, EditPersonalParameters $editPersonalParameters) {
+    public function updatePersonalData(int $profileId, EditPersonalParameters $parameters) {
         $profile = $this->getProfileById($profileId);
         $profile->getProfileGreetings()
-            ->setGreetingsMethod($editPersonalParameters->getGreetingsType())
-            ->setFirstName($editPersonalParameters->getFirstName())
-            ->setLastName($editPersonalParameters->getLastName())
-            ->setMiddleName($editPersonalParameters->getMiddleName())
-            ->setNickName($editPersonalParameters->getNickName());
+            ->setGreetingsMethod($parameters->getGreetingsType())
+            ->setFirstName($parameters->getFirstName())
+            ->setLastName($parameters->getLastName())
+            ->setMiddleName($parameters->getMiddleName())
+            ->setNickName($parameters->getNickName());
+
+        if($parameters->isGenderSpecified()) {
+            $profile->setGenderFromStringCode($parameters->getGender());
+        }
 
         $this->profileRepository->updateProfile($profile);
 
