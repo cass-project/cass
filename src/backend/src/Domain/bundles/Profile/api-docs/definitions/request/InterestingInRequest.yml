@@ -1,5 +1,4 @@
 Profile_InterestingIn_Request:
-  type: object
   required:
     - theme_ids
   properties:

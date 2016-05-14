@@ -1,7 +1,6 @@
 <?php
 namespace Domain\Profile\Tests;
 
-use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
@@ -9,7 +8,7 @@ use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 /**
  * @backupGlobals disabled
  */
-class ProfileMiddlewareTest extends ProfileMiddlewareTestCase
+class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
 {
     protected function getFixtures(): array {
         return [
