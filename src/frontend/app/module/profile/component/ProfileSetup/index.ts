@@ -64,7 +64,7 @@ export class ProfileSetup
     }
 
     isFooterVisible() {
-        return ! (this.stage.isOnWelcomeStage() || this.stage.isOnFinishStage());
+        return ! (this.stage.isOnWelcomeStage() || this.stage.isOnSavingStage() || this.stage.isOnFinishStage());
     }
 }
 
@@ -79,7 +79,8 @@ class StageControls
         map[ProfileSetupStage.StageGreetings] = ProfileSetupStage.StageImage;
         map[ProfileSetupStage.StageImage] = ProfileSetupStage.StageInterests;
         map[ProfileSetupStage.StageInterests] = ProfileSetupStage.StageExpertIn;
-        map[ProfileSetupStage.StageExpertIn] = ProfileSetupStage.StageFinish;
+        map[ProfileSetupStage.StageExpertIn] = ProfileSetupStage.StageSaving;
+        map[ProfileSetupStage.StageSaving] = ProfileSetupStage.StageFinish;
 
         return map;
     })();
@@ -124,6 +125,10 @@ class StageControls
         return this.stage === ProfileSetupStage.StageExpertIn;
     }
 
+    isOnSavingStage() {
+        return this.stage === ProfileSetupStage.StageSaving;
+    }
+
     isOnFinishStage() {
         return this.stage === ProfileSetupStage.StageFinish;
     }
@@ -136,5 +141,6 @@ enum ProfileSetupStage {
     StageImage,
     StageInterests,
     StageExpertIn,
+    StageSaving,
     StageFinish
 }

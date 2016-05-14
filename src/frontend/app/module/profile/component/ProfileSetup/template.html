@@ -40,6 +40,17 @@
             </header>
             <cass-profile-settings-expert-in></cass-profile-settings-expert-in>
           </div>
+          <div class="stage-saving" *ngIf="stage.isOnSavingStage()">
+            <header class="stage-header">
+              <h1>Мы сохраняем ваш выбор</h1>
+            </header>
+            <div class="loading-indicator-box">
+              <div class="loading-indicator">
+                <div class="bar"></div>
+              </div>
+            </div>
+            <p>Приносим извинения, что заставляем вас ждать.</p>
+          </div>
           <div class="stage-finish" *ngIf="stage.isOnFinishStage()">
             <div class="stage stage-finish" *ngIf="stage.isOnFinishStage()">
               <div class="container">
