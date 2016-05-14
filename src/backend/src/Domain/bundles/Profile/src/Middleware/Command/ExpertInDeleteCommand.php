@@ -3,12 +3,12 @@ namespace Domain\Profile\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
 use Domain\Profile\Exception\NotOwnProfileException;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Stdlib\Response;
 
 class ExpertInDeleteCommand extends Command
 {
-    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): Response {
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface {
         $profileId = (int) $request->getAttribute('profileId');
 
         if(! $this->validateIsOwnProfile($profileId)) {

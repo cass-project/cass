@@ -8,9 +8,9 @@ use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 /**
  * @backupGlobals disabled
  */
-class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
+class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
 {
-    public function testPutInterests() {
+    public function testPutExpertIn() {
         $this->upFixture(
             new SampleThemesFixture()
         );
@@ -24,12 +24,12 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             SampleThemesFixture::getTheme(3)->getId(),
         ];
 
-        $this->requestInterestingInPUT($profile->getId(), ['theme_ids' => $themeIds])
+        $this->requestExpertInPUT($profile->getId(), ['theme_ids' => $themeIds])
             ->execute()
             ->expectAuthError()
         ;
 
-        $this->requestInterestingInPUT($profile->getId(), ['theme_ids' => $themeIds])
+        $this->requestExpertInPUT($profile->getId(), ['theme_ids' => $themeIds])
             ->auth($account->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
@@ -39,7 +39,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ])
         ;
 
-        $this->expectInterestingInIds($profile->getId(), $themeIds);
+        $this->expectExpertInIds($profile->getId(), $themeIds);
 
         $newThemeIds = [
             SampleThemesFixture::getTheme(5)->getId(),
@@ -47,7 +47,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             SampleThemesFixture::getTheme(4)->getId(),
         ];
 
-        $this->requestInterestingInPUT($profile->getId(), ['theme_ids' => $newThemeIds])
+        $this->requestExpertInPUT($profile->getId(), ['theme_ids' => $newThemeIds])
             ->auth($account->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
@@ -57,10 +57,10 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ])
         ;
 
-        $this->expectInterestingInIds($profile->getId(), $newThemeIds);
+        $this->expectExpertInIds($profile->getId(), $newThemeIds);
     }
 
-    public function testPostInterests() {
+    public function testPostExpertIn() {
         $this->upFixture(
             new SampleThemesFixture()
         );
@@ -74,7 +74,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             SampleThemesFixture::getTheme(3)->getId(),
         ];
 
-        $this->requestInterestingInPOST($profile->getId(), ['theme_ids' => $themeIds])
+        $this->requestExpertInPOST($profile->getId(), ['theme_ids' => $themeIds])
             ->execute()
             ->expectAuthError()
         ;
@@ -89,7 +89,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ])
         ;
 
-        $this->expectInterestingInIds($profile->getId(), $themeIds);
+        $this->expectExpertInIds($profile->getId(), $themeIds);
 
         $newThemeIds = [
             SampleThemesFixture::getTheme(5)->getId(),
@@ -97,7 +97,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             SampleThemesFixture::getTheme(4)->getId(),
         ];
 
-        $this->requestInterestingInPOST($profile->getId(), ['theme_ids' => $newThemeIds])
+        $this->requestExpertInPOST($profile->getId(), ['theme_ids' => $newThemeIds])
             ->auth($account->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
@@ -107,10 +107,10 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ])
         ;
 
-        $this->expectInterestingInIds($profile->getId(), array_merge($themeIds, $newThemeIds));
+        $this->expectExpertInIds($profile->getId(), array_merge($themeIds, $newThemeIds));
     }
 
-    public function testDeleteInterests() {
+    public function testDeleteExpertIn() {
         $this->upFixture(
             new SampleThemesFixture()
         );
@@ -124,7 +124,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             SampleThemesFixture::getTheme(3)->getId(),
         ];
 
-        $this->requestInterestingInPOST($profile->getId(), ['theme_ids' => $themeIds])
+        $this->requestExpertInPOST($profile->getId(), ['theme_ids' => $themeIds])
             ->auth($account->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
@@ -134,7 +134,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ])
         ;
 
-        $this->expectInterestingInIds($profile->getId(), $themeIds);
+        $this->expectExpertInIds($profile->getId(), $themeIds);
 
         $deleteThemeIds = [
             SampleThemesFixture::getTheme(5)->getId(),
@@ -142,7 +142,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             SampleThemesFixture::getTheme(4)->getId(),
         ];
 
-        $this->requestInterestingInDELETE($profile->getId(), $deleteThemeIds)
+        $this->requestExpertInDELETE($profile->getId(), $deleteThemeIds)
             ->auth($account->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
@@ -152,13 +152,13 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ])
         ;
 
-        $this->expectInterestingInIds($profile->getId(), [
+        $this->expectExpertInIds($profile->getId(), [
             SampleThemesFixture::getTheme(2)->getId(),
             SampleThemesFixture::getTheme(3)->getId(),
         ]);
     }
 
-    private function expectInterestingInIds(int $profileId, array $ids) {
+    private function expectExpertInIds(int $profileId, array $ids) {
         $result = $this->requestGetProfile($profileId)
             ->execute()
             ->expectStatusCode(200)
@@ -169,7 +169,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ->getParsedLastResult()
         ;
 
-        $compareIds = $result['entity']['interesting_in'];
+        $compareIds = $result['entity']['expert_in'];
 
         $this->assertEquals(sort($compareIds), sort($ids));
     }

@@ -1,15 +1,14 @@
 <?php
 namespace Domain\Profile\Middleware\Command;
 
-use Application\Exception\BadCommandCallException;
 use Application\REST\Response\ResponseBuilder;
 use Domain\Profile\Exception\LastProfileException;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface as Response;
 
 class DeleteCommand extends Command
 {
-    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): Response {
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface {
         try {
             $currentAccount = $this->currentAccountService->getCurrentAccount();
             

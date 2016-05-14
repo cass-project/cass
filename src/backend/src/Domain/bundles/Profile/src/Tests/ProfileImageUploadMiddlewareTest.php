@@ -28,7 +28,6 @@ class ProfileImageUploadMiddlewareTest extends ProfileMiddlewareTestCase
         $this->requestUploadImage($profile->getId(), $p1, $p2, $localFile)
             ->auth($account->getAPIKey())
             ->execute()
-            ->dump()
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([
@@ -36,6 +35,11 @@ class ProfileImageUploadMiddlewareTest extends ProfileMiddlewareTestCase
                 'profile_id' => $profile->getId(),
                 'public_path' => $this->expectString()
             ])
+            ->expect(function(array $result) use ($wwwPath) {
+                $file = sprintf('%s/%s', $wwwPath, $result['public_path']);
+
+                $this->assertTrue(file_exists($file));
+            })
         ;
     }
 }

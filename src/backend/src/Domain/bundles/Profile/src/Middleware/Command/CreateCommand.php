@@ -4,12 +4,12 @@ namespace Domain\Profile\Middleware\Command;
 use Application\Exception\BadCommandCallException;
 use Application\REST\Response\ResponseBuilder;
 use Domain\Profile\Exception\MaxProfilesReachedException;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface as Response;
 
 final class CreateCommand extends Command
 {
-    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): Response {
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface {
         $account = $this->currentAccountService->getCurrentAccount();
 
         try {
