@@ -1,7 +1,6 @@
 <?php
 namespace Application\Frontline\Service;
 
-use Domain\Auth\Frontline\AuthTokenScript;
 use Application\Frontline\FrontlineBundleInjectable;
 use Application\Service\BundleService;
 use DI\Container;
@@ -22,7 +21,7 @@ class FrontlineService
         $this->bundlesService = $bundlesService;
     }
 
-    public function fetchFrontlineResult()
+    public function fetchFrontlineResult(): array 
     {
         $result = [];
 

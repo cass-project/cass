@@ -15,9 +15,7 @@ class ThemeScript implements FrontlineScript
     }
 
     public function __invoke(): array {
-        return [
-            'themes' => $this->buildJSON($this->themeService->getThemesAsTree())
-        ];
+        return $this->buildJSON($this->themeService->getThemesAsTree());
     }
 
     private function buildJSON(array $themes) {

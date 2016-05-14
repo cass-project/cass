@@ -1,13 +1,72 @@
 @import "./../../../../styles/globals";
 
+$ITEMS_IN_LIST: 10;
+$ITEM_HEIGHT: 35px;
+
 div.component-theme-select {
   @include disable-text-select;
+
+  position: relative;
 
   span.info {
     display: block;
     font-size: $FONT_SIZE_INFO;
     color: material-color("grey", "400");
     margin: 5px 0;
+  }
+
+  div.auto-complete {
+    @include card(2);
+
+    position: absolute;
+    background-color: white;
+    border: 1px solid material-color("grey", "300");
+    border-radius: 5px;
+    padding: 6px;
+    left: 20px;
+
+    div.auto-complete-scroll-box {
+      max-height: $ITEMS_IN_LIST * $ITEM_HEIGHT;
+      overflow-y: auto;
+      overflow-x: hidden;;
+    }
+
+    ul.auto-complete-list {
+      li {
+        color: material-color("grey", "900");
+        font-size: $FONT_SIZE_NORMAL;
+        cursor: pointer;
+        padding: 0 15px;
+        line-height: $ITEM_HEIGHT;
+        white-space: nowrap;
+
+        mark {
+          background-color: material-color("yellow", "400");
+        }
+
+        &:hover {
+          background-color: material-color("grey", "200");
+        }
+
+        span.title {
+          @include enable-text-select;
+        }
+      }
+
+      li.active {
+        color: white;
+        background-color: material-color("blue", "400");
+
+        &:hover {
+          background-color: material-color("blue", "600");
+        }
+
+        mark {
+          background-color: transparent;
+          color: material-color("cyan", "100");
+        }
+      }
+    }
   }
 
   div.values {
