@@ -59,7 +59,8 @@ export class ProfileSetup
     isSkipButtonVisible() {
         return this.stage.isOnGenderStage() ||
             this.stage.isOnImageStage() ||
-            this.stage.isOnInterestsStage()
+            this.stage.isOnInterestsStage() ||
+            this.stage.isOnExpertInStage()
         ;
     }
 
