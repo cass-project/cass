@@ -4,15 +4,16 @@
       <div class="form">
         <div class="search">
           <input type="text"
+                 [(ngModel)]="searchStr"
                  class="form-input"
                  placeholder="Поиск тематики">
           <span class="info">
             <span>Начните набирать название тематики или попробуйте ее выбрать из</span>
-            <a class="link-browser" href="javascript:void(0)">списка<i class="fa fa-fw fa-angle-down"></i></a>
+            <a class="link-browser" (click)="showListByClick()">списка<i class="fa fa-fw fa-angle-down"></i></a>
           </span>
           <!-- Подсказка исчезает, если в поле что-то введено или открыт браузер тематик -->
         </div>
-        <div class="auto-complete">
+        <div class="auto-complete" *ngIf="showListReturn()">
           <!-- Автокомплит. По нему должна быть навигация стрелочками вверх/вниз -->
           <!-- Учесть, что здесь может быть больше 20 записей. -->
           <!-- Ограничить выборку общуюю максимум 100 записей. -->
@@ -70,10 +71,10 @@
             <!-- Тематики здесь выбираются по двойному щелчку -->
             <div class="column">
               <ul class="theme-list">
-                <li>
-                  <span class="title">Theme 1</span>
+                <li [class.active]="checkActiveTheme(true)">
+                  <span class="title" (dblclick)="selectTheme('test')">Theme 1</span>
                 </li>
-                <li class="active">
+                <li [class.active]="checkActiveTheme(true)">
                   <span class="title">Theme 2</span>
                 </li>
                 <li>
