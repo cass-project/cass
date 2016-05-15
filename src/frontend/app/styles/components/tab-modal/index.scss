@@ -58,7 +58,7 @@ $PANEL_WIDTH: 230px;
     footer.tab-content-footer {
       display: flex;
       justify-content: space-between;
-      background-color: material-color("grey", "200");
+      border-top: 1px solid material-color("grey", "200");
       padding: 5px;
     }
   }
@@ -73,7 +73,7 @@ $PANEL_WIDTH: 230px;
     h2 {
       font-size: 20px;
       color: black;
-      margin: 20px 0;
+      margin-bottom: 10px;
     }
   }
 }

@@ -5,6 +5,17 @@ import {AccountTab} from "./Tab/Account/index";
 import {PersonalTab} from "./Tab/Personal/index";
 import {InterestsTab} from "./Tab/Interests/index";
 import {ProfilesTab} from "./Tab/Profiles/index";
+import {ImageTab} from "./Tab/Image/index";
+
+enum ProfileModalTab
+{
+    Account = <any>"Account",
+    Personal = <any>"Personal",
+    Image = <any>"Image",
+    Interests = <any>"Interests",
+    Profiles = <any>"Profile",
+    SignOut = <any>"SignOut"
+}
 
 @Component({
     selector: 'cass-profile-modal',
@@ -15,6 +26,7 @@ import {ProfilesTab} from "./Tab/Profiles/index";
     directives: [
         AccountTab,
         PersonalTab,
+        ImageTab,
         InterestsTab,
         ProfilesTab
     ],
@@ -30,7 +42,9 @@ export class ProfileModal
 
 class TabControls
 {
-    current: ProfileModalTab = ProfileModalTab.Account;
+    static DEFAULT_TAB = ProfileModalTab.Image;
+
+    current: ProfileModalTab = TabControls.DEFAULT_TAB;
 
     go(tab: ProfileModalTab) {
         this.current = tab;
@@ -39,13 +53,4 @@ class TabControls
     isCurrent(tab: ProfileModalTab) {
         return this.current === tab;
     }
-}
-
-enum ProfileModalTab
-{
-    Account = <any>"Account",
-    Personal = <any>"Personal",
-    Interests = <any>"Interests",
-    Profiles = <any>"Profile",
-    SignOut = <any>"SignOut"
 }

@@ -28,4 +28,8 @@ div.profile-modal-tab-account
     color: material-color("blue", "500");
     cursor: not-allowed;
   }
+
+  .tab-modal-header h2 {
+    margin: 20px 0;
+  }
 }

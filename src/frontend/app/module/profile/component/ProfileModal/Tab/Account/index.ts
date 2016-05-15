@@ -9,10 +9,16 @@ import {Component} from "angular2/core";
 })
 export class AccountTab
 {
+    requestButtonDisabled: boolean =false;
     flagDeleteAccount: boolean = false;
 
     requestDeleteAccount() {
-        this.flagDeleteAccount = true;
+        this.requestButtonDisabled = true;
+
+        setTimeout(() => {
+            this.flagDeleteAccount = true;
+            this.requestButtonDisabled = false;
+        }, 1000);
     }
 
     cancelDeleteAccountRequest() {

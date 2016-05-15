@@ -9,9 +9,13 @@
             </button>
           </li>
           <li>
-            <!-- По умолчанию этот таб -->
             <button class="tab-link active" (click)="tabs.go('Personal')" [ngClass]="{'tab-link-active': tabs.isCurrent('Personal')}">
-              <span>Имя, пол, изображение</span>
+              <span>Профиль</span>
+            </button>
+          </li>
+          <li>
+            <button class="tab-link active" (click)="tabs.go('Image')" [ngClass]="{'tab-link-active': tabs.isCurrent('Image')}">
+              <span>Изображение</span>
             </button>
           </li>
           <li>
@@ -45,7 +49,10 @@
           <cass-profile-modal-tab-account></cass-profile-modal-tab-account>
         </div>
         <div class="tab-personal" *ngIf="tabs.isCurrent('Personal')">
-
+          <cass-profile-modal-tab-personal></cass-profile-modal-tab-personal>
+        </div>
+        <div class="tab-interests" *ngIf="tabs.isCurrent('Image')">
+          <cass-profile-modal-tab-image></cass-profile-modal-tab-image>
         </div>
         <div class="tab-interests" *ngIf="tabs.isCurrent('Interests')">
 

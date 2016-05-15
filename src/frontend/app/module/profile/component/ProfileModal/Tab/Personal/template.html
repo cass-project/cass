@@ -1,1 +1,95 @@
-<div class="profile-modal-tab-personal"></div>
+<div class="profile-modal-tab-personal">
+  <div class="form">
+    <header class="tab-modal-header">
+      <h2>Как вас называть?</h2>
+    </header>
+    <ul class="greetings-options">
+      <li>
+        <label class="greeting-option">
+          <input type="radio" name="greetings_type">
+          <span class="text">По имени и фамилии</span>
+        </label>
+      </li>
+      <li>
+        <label class="greeting-option">
+          <input type="radio" name="greetings_type">
+          <span class="text">По нику</span>
+        </label>
+      </li>
+      <li>
+        <label class="greeting-option">
+          <input type="radio" name="greetings_type">
+          <span class="text">По отчеству и имени</span>
+        </label>
+      </li>
+      <li>
+        <label class="greeting-option">
+          <input type="radio" name="greetings_type">
+          <span class="text">По фамилии, имени и отчеству</span>
+        </label>
+      </li>
+    </ul>
+  </div>
+  <div class="form">
+    <header class="tab-modal-header">
+      <h2>Ник</h2>
+    </header>
+    <div class="input-group">
+      <label class="form-label">
+        <input class="form-input" type="text" placeholder="Любое имя, из латинских, русских букв, цифр или знака `_`">
+      </label>
+    </div>
+  </div>
+  <div class="form">
+    <header class="tab-modal-header">
+      <h2>ФИО</h2>
+    </header>
+    <div class="input-group">
+      <label class="form-label">
+        <!-- Нужны ли эти плейсхолдеры? -->
+        <!-- По идеи минимизируем ошибки пользователей, а с другой стороны - какого х*я я Иванова Елена Ивановна? -->
+        <span class="label-text">Фамилия</span>
+        <input class="form-input" type="text" placeholder="Иванов|Иванова">
+      </label>
+    </div>
+    <div class="input-group">
+      <label class="form-label">
+        <span class="label-text">Имя</span>
+        <input class="form-input" type="text" placeholder="Иван|Елена">
+      </label>
+    </div>
+    <div class="input-group">
+      <label class="form-label">
+        <span class="label-text">Отчество</span>
+        <input class="form-input" type="text" placeholder="Ивановыч|Ивановна">
+      </label>
+    </div>
+  </div>
+  <div class="form">
+    <header class="tab-modal-header">
+      <h2>Пол</h2>
+    </header>
+    <ul class="gender-options">
+      <li>
+        <label class="gender-option">
+          <input type="radio" name="gender">
+          <span class="text">Оставить в тайне</span>
+        </label>
+      </li>
+      <li>
+        <label class="gender-option gender-option-active">
+          <input type="radio" name="gender">
+          <i class="fa fa-fw fa-male"></i>
+          <span class="text">Мужской</span>
+        </label>
+      </li>
+      <li>
+        <label class="gender-option">
+          <input type="radio" name="gender">
+          <i class="fa fa-fw fa-female"></i>
+          <span class="text">Женский</span>
+        </label>
+      </li>
+    </ul>
+  </div>
+</div>

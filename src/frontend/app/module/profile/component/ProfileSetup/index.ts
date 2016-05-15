@@ -138,12 +138,12 @@ class StageControls
 }
 
 enum ProfileSetupStage {
-    StageWelcome,
-    StageGender,
-    StageGreetings,
-    StageImage,
-    StageInterests,
-    StageExpertIn,
-    StageSaving,
-    StageFinish
+    StageWelcome = <any>"Welcome",
+    StageGender = <any>"Gender",
+    StageGreetings = <any>"Greetings",
+    StageImage = <any>"Image",
+    StageInterests = <any>"Interests",
+    StageExpertIn = <any>"ExpertIn",
+    StageSaving = <any>"Saving",
+    StageFinish = <any>"Finish"
 }

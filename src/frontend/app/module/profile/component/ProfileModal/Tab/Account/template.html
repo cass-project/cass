@@ -40,7 +40,7 @@
     <header class="tab-modal-header">
       <h2>Действия</h2>
     </header>
-    <button class="form-text-button" *ngIf="! isDeleteAccountRequested()" (click)="requestDeleteAccount()">
+    <button class="form-text-button" *ngIf="! isDeleteAccountRequested()" [disabled]="requestButtonDisabled" (click)="requestDeleteAccount()">
       <i class="fa fa-fw fa-trash"></i>
       <span>Я хочу удалить этот аккаунт</span>
     </button>

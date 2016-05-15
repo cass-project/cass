@@ -71,6 +71,32 @@
   @include form-button-color("red")
 }
 
+.form-button-remove {
+  $color: "red";
+
+  &:hover, &:focus {
+    color: white;
+    background-color: material-color($color, '700');
+  }
+
+  &:active {
+    color: white;
+    background-color: material-color($color, '700');
+  }
+}
+
+.form-button-text-remove {
+  $color: "red";
+
+  &:hover, &:focus {
+    color: material-color($color, '700');
+  }
+
+  &:active {
+    color: material-color($color, '800');
+  }
+}
+
 .form-text-button {
   color: material-color('grey', '900');
   box-sizing: border-box;

@@ -49,7 +49,9 @@
             <header class="stage-header">
               <h1>Мы сохраняем ваш выбор</h1>
             </header>
-            <cass-loading-linear-indicator></cass-loading-linear-indicator>
+            <div class="loading-indicator-box">
+              <cass-loading-linear-indicator></cass-loading-linear-indicator>
+            </div>
             <p>Приносим извинения, что заставляем вас ждать.</p>
           </div>
           <div class="stage-finish" *ngIf="stage.isOnFinishStage()">
