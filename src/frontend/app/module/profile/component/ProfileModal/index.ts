@@ -42,7 +42,7 @@ export class ProfileModal
 
 class TabControls
 {
-    static DEFAULT_TAB = ProfileModalTab.Image;
+    static DEFAULT_TAB = ProfileModalTab.Interests;
 
     current: ProfileModalTab = TabControls.DEFAULT_TAB;
 

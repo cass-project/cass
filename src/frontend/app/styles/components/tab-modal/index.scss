@@ -75,5 +75,10 @@ $PANEL_WIDTH: 230px;
       color: black;
       margin-bottom: 10px;
     }
+
+    p.sub {
+      font-size: $FONT_SIZE_SMALL;
+      color: material-color("grey", "800");
+    }
   }
 }
