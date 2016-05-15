@@ -21,47 +21,8 @@
           <!-- <mark>'ом отмечается сматченный текст -->
           <div class="auto-complete-scroll-box">
             <ul class="auto-complete-list">
-              <li>
-                <span class="title">League of <mark>leg</mark>ends</span>
-              </li>
-              <li class="active">
-                <span class="title">World <mark>of war</mark>craft</span>
-              </li>
-              <li>
-                <span class="title">Автомобили и радиотехника</span>
-              </li>
-              <li>
-                <span class="title">Экскала<mark>торы</mark>, элева<mark>торы</mark></span>
-              </li>
-              <li>
-                <span class="title">Аквариумные рыбки</span>
-              </li>
-              <li>
-                <span class="title">Лунный <em>огонь</em></span>
-              </li>
-              <li>
-                <span class="title">Лунный огонь</span>
-              </li>
-              <li>
-                <span class="title">Солнечный огонь</span>
-              </li>
-              <li>
-                <span class="title">Просто огонь</span>
-              </li>
-              <li>
-                <span class="title">Звездопад прожал</span>
-              </li>
-              <li>
-                <span class="title">Лунный огонь</span>
-              </li>
-              <li>
-                <span class="title">Солнечный огонь</span>
-              </li>
-              <li>
-                <span class="title">Просто огонь</span>
-              </li>
-              <li>
-                <span class="title">Звездопад прожал</span>
+              <li *ngFor="#theme of search()">
+                <span class="title">{{theme.title}}</span>
               </li>
             </ul>
           </div>
