@@ -1,37 +1,61 @@
 @import "./../../../styles/globals";
 
-div.modal {
-  z-index: 9999;
-  @include full-screen-component;
+@media all and (max-width: $APP_MIN_WIDTH) {
+  div.modal {
+    z-index: 9999;
 
-  div.modal-backdrop {
-    z-index: 10000;
-    background-color: $BACKDROP_COLOR;
-    opacity: $BACKDROP_OPACITY;
-    position: absolute;
-    top: 0; height: 100%;
-    left: 0; width: 100%;
-  }
-
-  div.modal-flex-container {
-    position: absolute;
-    top: 0; height: 100%;
-    left: 0; width: 100%;
-    display: flex;
-    align-items: center;
-    align-content: center;
-  }
-
-  div.modal-content {
-    background-color: #fff;
-    border-radius: 3px;
-    z-index: 10001;
-    @include card(2);
-    max-height: calc(100% - 100px);
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0; height: 100%;
+    left: 0; width: 100%;
     overflow: hidden;
+
+    div.modal-backdrop, div.modal-flex-container {
+      display: none;
+    }
+
+    div.modal-content {
+      position: absolute;
+      overflow: auto;
+      top: 0; height: 100%;
+      left: 0; width: 100%;
+    }
+  }
+}
+
+@media all and (min-width: $APP_MIN_WIDTH) {
+  div.modal {
+    z-index: 9999;
+    @include full-screen-component;
+
+    div.modal-backdrop {
+      z-index: 10000;
+      background-color: $BACKDROP_COLOR;
+      opacity: $BACKDROP_OPACITY;
+      position: absolute;
+      top: 0; height: 100%;
+      left: 0; width: 100%;
+    }
+
+    div.modal-flex-container {
+      position: absolute;
+      top: 0; height: 100%;
+      left: 0; width: 100%;
+      display: flex;
+      align-items: center;
+      align-content: center;
+    }
+
+    div.modal-content {
+      background-color: #fff;
+      border-radius: 3px;
+      z-index: 10001;
+      @include card(2);
+      max-height: calc(100% - 100px);
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      overflow: hidden;
+    }
   }
 }
