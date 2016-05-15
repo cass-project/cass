@@ -1,0 +1,41 @@
+@import "./../../../../styles/globals";
+
+div.component-profile-modal {
+  width: 750px;
+  position: relative;
+
+  .tab-modal {
+    .tab-panel {
+      width: 200px;
+    }
+
+    .tab-content {
+      min-height: 500px;
+    }
+  }
+
+  button.switch-profile-button {
+    width: 100%;
+    color:  material-color("blue-grey", "200");
+    background-color: material-color("blue-grey", "800");
+    font-size: 20px;
+    padding: 10px 0;
+    text-align: center;
+    border: 0;
+    outline: 0;
+  }
+
+  div.profile-header {
+    display: flex;
+    background-color: material-color("blue-grey", "600");
+    margin-bottom: 20px;
+
+    div.profile-image-container {
+      width: 48px;
+    }
+
+    div.profile-greetings-container {
+
+    }
+  }
+}

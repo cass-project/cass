@@ -12,6 +12,17 @@ form.form-profile-setup {
     }
   }
 
+  p.why {
+    font-size: $FONT_SIZE_SMALL;
+    margin: 30px 5px;
+    color: material-color("grey", "700");
+    text-align: center;
+
+    em {
+      font-style: italic;
+    }
+  }
+
   div.stage {
     @include disable-text-select;
 

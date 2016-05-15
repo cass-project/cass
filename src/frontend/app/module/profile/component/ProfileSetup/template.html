@@ -32,12 +32,17 @@
             <header class="stage-header">
               <h1>Чем вы интересуетесь?</h1>
             </header>
+            <p class="why">Мы не собираемся слать вам таргетированный спам. Укажите свои интересы,
+              чтобы вас могли найти другие пользователи нашего сервиса, а мы могли
+              сразу предложить вам подходящий контент.</p>
             <cass-profile-settings-interests></cass-profile-settings-interests>
           </div>
           <div class="stage-expert-in" *ngIf="stage.isOnExpertInStage()">
             <header class="stage-header">
               <h1>А в чем являетесь экспертом?</h1>
             </header>
+            <p class="why">Люди иногда ищут не просто тех, кто интересуется чем либо, но и тех,
+            кто действительно <em>разбирается</em> в указанной области.</p>
             <cass-profile-settings-expert-in></cass-profile-settings-expert-in>
           </div>
           <div class="stage-saving" *ngIf="stage.isOnSavingStage()">

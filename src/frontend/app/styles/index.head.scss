@@ -3,6 +3,7 @@
 @import "./components/app-container/index";
 @import "./components/padding-box/index";
 @import "./components/forms/index";
+@import "./components/tab-modal/index";
 
 html {
   @include disable-text-select;

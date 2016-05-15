@@ -1,0 +1,62 @@
+@import "./../../globals";
+
+$PANEL_WIDTH: 230px;
+
+.tab-modal {
+  display: flex;
+  position: relative;
+  border-radius: 3px;
+  background-color: white;
+  height: 100%;
+
+  .tab-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: material-color("blue-grey", "900");
+    width: $PANEL_WIDTH;
+
+    >div.top {
+
+    }
+
+    >div.bottom {
+
+    }
+  }
+
+  .tab-panel-header {
+    display: none;
+  }
+
+  .tab-link {
+    display: block;
+    font-family: $FONT_FAMILY;
+    font-size: $FONT_SIZE_SMALL;
+    color: material-color("blue-grey", "400");
+    background-color: transparent;
+    text-align: right;
+    font-weight: 500;
+    border: 0;
+    width: 100%;
+    padding: 10px 20px;
+    border-left: 7px solid material-color("blue-grey", "900");
+    cursor: pointer;
+    transition: border-left-color 0.1s;
+    text-transform: uppercase;
+    outline: 0;
+
+    &:hover {
+      color: material-color("blue-grey", "200");
+      border-left-color: material-color("blue-grey", "500");
+    }
+  }
+
+  .tab-link-active {
+    border-left-color: material-color("blue", "500");
+
+    &:hover {
+      border-left-color: material-color("blue", "500");
+    }
+  }
+}

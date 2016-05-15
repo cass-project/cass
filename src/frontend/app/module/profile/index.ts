@@ -4,6 +4,8 @@ import {ProfileMenuComponent} from "./component/ProfileMenu/index";
 import {RouterOutlet} from "angular2/router";
 import {RouteConfig} from "angular2/router";
 import {ProfileDashboardComponent} from "./page/Dashbord/index";
+import {ProfileModal} from "./component/ProfileModal/index";
+import {ModalComponent} from "../modal/component/index";
 
 @Component({
     template: require('./template.html'),
@@ -12,7 +14,9 @@ import {ProfileDashboardComponent} from "./page/Dashbord/index";
     ],
     directives: [
         RouterOutlet,
+        ModalComponent,
         ProfileMenuComponent,
+        ProfileModal,
     ]
 })
 @RouteConfig([
