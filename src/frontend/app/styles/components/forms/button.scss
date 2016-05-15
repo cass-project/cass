@@ -5,6 +5,19 @@
   background-color: material-color('grey', '200');
 }
 
+@mixin form-button-color($color) {
+  color: white;
+  background-color: material-color($color, '600');
+
+  &:hover, &:focus {
+    background-color: material-color($color, '300');
+  }
+
+  &:active {
+    background-color: material-color($color, '700');
+  }
+}
+
 .form-button {
   @include card(1);
   @include disable-text-select;
@@ -47,16 +60,15 @@
 }
 
 .form-button-primary {
-  color: white;
-  background-color: material-color('blue', '600');
+  @include form-button-color("blue")
+}
 
-  &:hover, &:focus {
-    background-color: material-color('blue', '300');
-  }
+.form-button-green {
+  @include form-button-color("green")
+}
 
-  &:active {
-    background-color: material-color('blue', '700');
-  }
+.form-button-red {
+  @include form-button-color("red")
 }
 
 .form-text-button {

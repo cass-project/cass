@@ -4,18 +4,18 @@
       <div class="top">
         <ul class="tab-list">
           <li>
-            <button class="tab-link">
+            <button class="tab-link" (click)="tabs.go('Account')" [ngClass]="{'tab-link-active': tabs.isCurrent('Account')}">
               <span>Аккаунт</span>
             </button>
           </li>
           <li>
             <!-- По умолчанию этот таб -->
-            <button class="tab-link tab-link-active">
+            <button class="tab-link active" (click)="tabs.go('Personal')" [ngClass]="{'tab-link-active': tabs.isCurrent('Personal')}">
               <span>Имя, пол, изображение</span>
             </button>
           </li>
           <li>
-            <button class="tab-link">
+            <button class="tab-link" (click)="tabs.go('Interests')" [ngClass]="{'tab-link-active': tabs.isCurrent('Interests')}">
               <span>Интересы и экспертиза</span>
             </button>
           </li>
@@ -24,13 +24,14 @@
       <div class="bottom">
         <ul class="tab-list">
           <li>
-            <button class="tab-link">
+            <button class="tab-link" (click)="tabs.go('Profiles')" [ngClass]="{'tab-link-active': tabs.isCurrent('Profiles')}">
               <i class="fa fa-fw fa-list-alt"></i>
               <span>Управление профилями</span>
             </button>
           </li>
           <li>
-            <button class="tab-link">
+            <!-- Редирект на /auth/sign-out. Без вопросов и SMS. -->
+            <button class="tab-link" (click)="signOut()">
               <i class="fa fa-fw fa-sign-out"></i>
               <span>Выход из аккаунта</span>
             </button>
@@ -39,7 +40,33 @@
       </div>
     </div>
     <div class="tab-content">
+      <div class="tab-content-container">
+        <div class="tab-account" *ngIf="tabs.isCurrent('Account')">
+          <cass-profile-modal-tab-account></cass-profile-modal-tab-account>
+        </div>
+        <div class="tab-personal" *ngIf="tabs.isCurrent('Personal')">
 
+        </div>
+        <div class="tab-interests" *ngIf="tabs.isCurrent('Interests')">
+
+        </div>
+        <div class="tab-profiles" *ngIf="tabs.isCurrent('Profiles')">
+
+        </div>
+      </div>
+      <footer class="tab-content-footer">
+        <div class="left">
+          <button class="form-text-button">Закрыть</button>
+        </div>
+        <div class="right">
+          <!-- Кнопка отображается в тот момент, когда были сделаны изменения в модели -->
+          <button class="form-text-button">Отменить изменения</button>
+
+          <!-- Кнопка задизеблена, если нет изменений в модели. -->
+          <!-- После сохранения окно должно закрываться -->
+          <button class="form-button form-button-green">Сохранить</button>
+        </div>
+      </footer>
     </div>
   </div>
 </div>

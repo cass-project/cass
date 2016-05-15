@@ -15,14 +15,6 @@ $PANEL_WIDTH: 230px;
     justify-content: space-between;
     background-color: material-color("blue-grey", "900");
     width: $PANEL_WIDTH;
-
-    >div.top {
-
-    }
-
-    >div.bottom {
-
-    }
   }
 
   .tab-panel-header {
@@ -52,11 +44,36 @@ $PANEL_WIDTH: 230px;
     }
   }
 
-  .tab-link-active {
+  .tab-link-active, .tab-link-active:hover {
+    color: material-color("blue-grey", "100");
     border-left-color: material-color("blue", "500");
+  }
 
-    &:hover {
-      border-left-color: material-color("blue", "500");
+  .tab-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+
+    footer.tab-content-footer {
+      display: flex;
+      justify-content: space-between;
+      background-color: material-color("grey", "200");
+      padding: 5px;
+    }
+  }
+
+  .tab-modal-header {
+    h1 {
+      font-size: 24px;
+      color: black;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 20px;
+      color: black;
+      margin: 20px 0;
     }
   }
 }

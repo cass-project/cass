@@ -2,11 +2,13 @@
 
 div.component-profile-modal {
   width: 750px;
+  min-width: 400px;
+  min-height: 400px;
   position: relative;
 
   .tab-modal {
     .tab-panel {
-      width: 200px;
+      width: 220px;
     }
 
     .tab-content {

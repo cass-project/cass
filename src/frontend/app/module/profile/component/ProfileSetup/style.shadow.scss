@@ -53,28 +53,5 @@ form.form-profile-setup {
       width: 70%;
       margin-bottom: 20px;
     }
-
-    div.loading-indicator {
-      position: relative;
-      height: 10px;
-
-      div.bar {
-        content: "";
-        display: inline;
-        position: absolute;
-        width: 0;
-        height: 100%;
-        left: 50%;
-        text-align: center;
-        animation: loading 1.5s cubic-bezier(0.4, 0.0, 0.6, 1) infinite;
-        background-color: material-color("light-blue", "300");
-      }
-
-      @keyframes loading {
-        from {left: 0; width: 0;}
-        50% {left: 0; width: 100%;}
-        to {left: 100%; width: 0;}
-      }
-    }
   }
 }

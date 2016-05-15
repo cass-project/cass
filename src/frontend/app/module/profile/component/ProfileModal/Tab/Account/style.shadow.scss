@@ -1,0 +1,31 @@
+@import "./../../../../../../styles/globals";
+
+div.profile-modal-tab-account
+{
+  padding: 20px;
+
+  ul.email-info {
+    list-style-type: disc;
+    padding-left: 30px;
+    margin: 10px 0;
+
+    li {
+      font-size: $FONT_SIZE_INFO;
+      color: material-color("grey", "600");
+      line-height: 20px;
+
+      a {
+        color: material-color("blue-grey", "500");
+
+        &:hover {
+          color: material-color("blue-grey", "400");
+        }
+      }
+    }
+  }
+
+  input.account-email-input:disabled {
+    color: material-color("blue", "500");
+    cursor: not-allowed;
+  }
+}

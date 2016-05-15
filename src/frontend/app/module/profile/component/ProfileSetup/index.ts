@@ -7,6 +7,7 @@ import {ProfileSettingsInterests} from "../ProfileSettings/ProfileSettingsIntere
 import {ProfileSettingsExpertIn} from "../ProfileSettings/ProfileSettingsExpertIn/index";
 import {ProfileSetupModel} from "./model";
 import {ProfileSettingsGender} from "../ProfileSettings/ProfileSettingsGender/index";
+import {LoadingLinearIndicator} from "../../../util/component/LoadingLinearIndicator/index";
 
 @Component({
     selector: 'cass-profile-setup',
@@ -19,6 +20,7 @@ import {ProfileSettingsGender} from "../ProfileSettings/ProfileSettingsGender/in
     ],
     directives: [
         ModalComponent,
+        LoadingLinearIndicator,
         ProfileSettingsGender,
         ProfileSettingsGreetings,
         ProfileSettingsImage,
