@@ -19,10 +19,13 @@ export class ThemeSelect
 
 
     themes;
-    themesTree;
-    themesTreeSecondEmbedded;
-    themesTreeThirdEmbedded;
-    themesTreeFourthEmbedded;
+    themesTree = [
+        {level: 0, themes: [], highlightActive: 0},
+        {level: 1, themes: [], highlightActive: 0},
+        {level: 2, themes: [], highlightActive: 0},
+        {level: 3, themes: [], highlightActive: 0},
+        {level: 4, themes: [], highlightActive: 0}];
+    themesTreeTmp;
 
     selectedTheme;
     pickedThemes = [];
@@ -45,9 +48,9 @@ export class ThemeSelect
 
     getTreeThemes(){
         this.themeService.getThemeTreeList().subscribe(data => {
-            this.themesTree = data;
-            this.themesTree = JSON.parse(this.themesTree._body).entities;
-            this.themesTree = this.themesTree[0].children;
+            this.themesTreeTmp = data;
+            this.themesTree[0].themes = JSON.parse(this.themesTreeTmp._body).entities;
+            this.themesTree[1].themes = this.themesTree[0].themes[0].children;
         })
     }
 
@@ -69,28 +72,29 @@ export class ThemeSelect
     }
 
 
-    /*ToDo: Дописать checkActiveTheme*/
     checkActiveTheme(theme){
         if(this.selectedTheme) {
-            return (theme === this.selectedTheme);
+            return (theme === this.selectedTheme ||
+                    theme.id === this.themesTree[2].highlightActive ||
+                    theme.id === this.themesTree[3].highlightActive ||
+                    theme.id === this.themesTree[4].highlightActive);
         }
     }
 
-    selectTheme(embedded, theme){
+    selectTheme(level, theme){
         this.selectedTheme = theme;
 
-        if(embedded === 1){
-            this.themesTreeSecondEmbedded = this.getChildren();
-            this.themesTreeThirdEmbedded = [];
-            this.themesTreeFourthEmbedded = [];
-        } else if(embedded === 2){
-            this.themesTreeThirdEmbedded = this.getChildren();
-            this.themesTreeFourthEmbedded = [];
-        } else if(embedded === 3){
-            this.themesTreeFourthEmbedded = this.getChildren();
+        if(level === 1){
+            this.themesTree[2].themes = this.getChildren(); this.themesTree[2].highlightActive = theme.id;
+            this.themesTree[3].themes = []; this.themesTree[3].highlightActive = 0;
+            this.themesTree[4].themes = []; this.themesTree[4].highlightActive = 0;
+        } else if(level === 2){
+            this.themesTree[3].themes = this.getChildren(); this.themesTree[3].highlightActive = theme.id;
+            this.themesTree[4].themes = []; this.themesTree[4].highlightActive = 0;
+        } else if(level === 3){
+            this.themesTree[4].themes = this.getChildren(); this.themesTree[4].highlightActive = theme.id;
         }
     }
-
 
     getChildren(){
         if(this.selectedTheme) {
