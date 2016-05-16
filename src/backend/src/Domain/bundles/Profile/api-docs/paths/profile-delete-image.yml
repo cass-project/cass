@@ -1,0 +1,24 @@
+'/protected/profile/{profileId}/image-delete':
+  delete:
+    tags:
+      - profile
+    description: Удаление изображение профиля и замена ее на дефолтную
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
+    responses:
+      200:
+        schema:
+          $ref: '#/responses/success'
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        description: Profile not found
+        schema:
+          $ref: '#/responses/NotFound'

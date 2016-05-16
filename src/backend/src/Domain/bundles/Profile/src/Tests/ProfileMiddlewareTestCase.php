@@ -59,6 +59,10 @@ abstract class ProfileMiddlewareTestCase extends MiddlewareTestCase
             ]);
     }
 
+    protected function requestDeleteImage(int $profileId): RESTRequest {
+        return $this->request('DELETE', sprintf('/protected/profile/%d/image-delete', $profileId));
+    }
+
     protected function requestInterestingInPUT(int $profileId, array $json): RESTRequest {
         return $this->request('PUT', sprintf('/protected/profile/%d/interesting-in', $profileId))
             ->setParameters($json);

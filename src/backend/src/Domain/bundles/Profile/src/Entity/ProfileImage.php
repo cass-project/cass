@@ -59,6 +59,11 @@ class ProfileImage implements JSONSerializable
         ];
     }
 
+    public function defaults() {
+        $this->publicPath = self::DEFAULT_PROFILE_IMAGE_PUBLIC;
+        $this->storagePath = self::DEFAULT_PROFILE_IMAGE_STORAGE;
+    }
+
     public function isDefaultImage() {
         return $this->publicPath === self::DEFAULT_PROFILE_IMAGE_PUBLIC;
     }

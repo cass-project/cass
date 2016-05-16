@@ -94,6 +94,27 @@ class ProfileService
         }
     }
 
+    public function deleteProfileImage(int $profileId, int $currentAccountId) {
+        $profile = $this->getProfileById($profileId);
+        $account = $profile->getAccount();
+
+        if ($account->getId() !== $currentAccountId) {
+            throw new PermissionsDeniedException("You're not an owner of this profile");
+        }
+
+        $storagePath = $profile->getProfileImage()->getStoragePath();
+
+        if(file_exists($storagePath)) {
+            if(!is_writable($storagePath)) {
+                throw new \Exception('No permissions to delete profile avatar');
+            }
+
+            unlink($storagePath);
+        }
+
+        $this->profileRepository->deleteProfileImage($profile);
+    }
+
     public function nameFL(int $profileId, string $firstName, string $lastName) {
         $this->profileRepository->nameFL($profileId, $firstName, $lastName);
         $this->profileRepository->setAsInitialized($profileId);

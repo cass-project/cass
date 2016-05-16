@@ -15,6 +15,7 @@ use Domain\Profile\Middleware\Command\ExpertInPostCommand;
 use Domain\Profile\Middleware\Command\ExpertInPutCommand;
 use Domain\Profile\Middleware\Command\GetCommand;
 use Domain\Profile\Middleware\Command\GreetingsAsCommand;
+use Domain\Profile\Middleware\Command\ImageDeleteCommand;
 use Domain\Profile\Middleware\Command\ImageUploadCommand;
 use Domain\Profile\Middleware\Command\InterestingInDeleteCommand;
 use Domain\Profile\Middleware\Command\InterestingInPostCommand;
@@ -44,6 +45,7 @@ class ProfileMiddleware implements MiddlewareInterface
             ->attachDirect("get", GetCommand::class)
             ->attachDirect("greetings-as", GreetingsAsCommand::class)
             ->attachDirect("image-upload", ImageUploadCommand::class)
+            ->attachDirect('image-delete', ImageDeleteCommand::class)
             ->attachDirect("edit-personal", EditPersonalCommand::class)
             ->attachDirect("switch", SwitchCommand::class)
             ->attachDirect("expert-in", ExpertInPutCommand::class, 'put')

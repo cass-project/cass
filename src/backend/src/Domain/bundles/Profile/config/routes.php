@@ -42,6 +42,12 @@ return function (Application $app) {
     );
 
     $app->delete(
+        '/protected/profile/{profileId}/{command:image-delete}[/]',
+        ProfileMiddleware::class,
+        'profile-image-delete'
+    );
+
+    $app->delete(
         '/protected/profile/{profileId}/{command:delete}[/]',
         ProfileMiddleware::class,
         'profile-delete'

@@ -267,4 +267,10 @@ class Profile implements JSONSerializable
 
         return $this;
     }
+
+    public function emptyProfileImage(): self {
+        $this->profileImage->defaults();
+
+        return $this;
+    }
 }

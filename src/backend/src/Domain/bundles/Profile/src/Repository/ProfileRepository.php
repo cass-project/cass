@@ -35,6 +35,12 @@ class ProfileRepository extends EntityRepository
         $this->getEntityManager()->flush($profile);
     }
 
+    public function deleteProfileImage(Profile $profile)
+    {
+        $profile->emptyProfileImage();
+        $this->getEntityManager()->flush($profile);
+    }
+
     public function getProfileById(int $profileId): Profile
     {
         $result = $this->find($profileId);
