@@ -9,11 +9,11 @@
                  placeholder="Поиск тематики">
           <span class="info">
             <span>Начните набирать название тематики или попробуйте ее выбрать из</span>
-            <a class="link-browser" (click)="showListByClick()">списка<i class="fa fa-fw fa-angle-down"></i></a>
+            <a class="link-browser" (click)="browserSwitcher()">списка<i class="fa fa-fw fa-angle-down"></i></a>
           </span>
           <!-- Подсказка исчезает, если в поле что-то введено или открыт браузер тематик -->
         </div>
-        <div class="auto-complete" *ngIf="showListReturn()">
+        <div class="auto-complete" *ngIf="showSearchListReturn()">
           <!-- Автокомплит. По нему должна быть навигация стрелочками вверх/вниз -->
           <!-- Учесть, что здесь может быть больше 20 записей. -->
           <!-- Ограничить выборку общуюю максимум 100 записей. -->
@@ -27,109 +27,46 @@
             </ul>
           </div>
         </div>
-        <div class="browser">
+        <div class="browser" *ngIf="browserVisible">
           <div class="view">
             <!-- Тематики здесь выбираются по двойному щелчку -->
             <div class="column">
-              <ul class="theme-list">
-                <li [class.active]="checkActiveTheme(true)">
-                  <span class="title" (dblclick)="selectTheme('test')">Theme 1</span>
-                </li>
-                <li [class.active]="checkActiveTheme(true)">
-                  <span class="title">Theme 2</span>
-                </li>
-                <li>
-                  <span class="title">Theme 3</span>
+              <ul class="theme-list" *ngFor="#theme of themesTree">
+                <li [class.active]="checkActiveTheme(theme)" (click)="selectTheme(1, theme)" (dblclick)="pickTheme(theme)">
+                  <span class="title">{{theme.title}}</span>
                 </li>
               </ul>
             </div>
             <div class="column">
-              <ul class="theme-list">
-                <li>
-                  <span class="title">Theme 2.1</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.2</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.3</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.4</span>
-                </li>
-                <li class="active">
-                  <span class="title">Theme 2.5</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.6</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.7</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.8</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.9</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.10</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.11</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.12</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.13</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.14</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.15</span>
+              <ul class="theme-list" *ngFor="#theme of themesTreeSecondEmbedded">
+                <li [class.active]="checkActiveTheme(theme)" (click)="selectTheme(2, theme)" (dblclick)="pickTheme(theme)">
+                  <span class="title">{{theme.title}}</span>
                 </li>
               </ul>
             </div>
             <div class="column">
-              <ul class="theme-list">
-                <li class="active">
-                  <span class="title">Theme 2.5.1</span>
+              <ul class="theme-list" *ngFor="#theme of themesTreeThirdEmbedded">
+                <li class="active" [class.active]="checkActiveTheme(theme)" (click)="selectTheme(3, theme)" (dblclick)="pickTheme(theme)">
+                  <span class="title">{{theme.title}}</span>
                 </li>
               </ul>
             </div>
             <div class="column">
-              <ul class="theme-list">
-                <li>
-                  <span class="title">Theme 2.5.1.1</span>
-                </li>
-                <li>
-                  <span class="title">Theme 2.5.1.2</span>
+              <ul class="theme-list" *ngFor="#theme of themesTreeFourthEmbedded">
+                <li class="active" [class.active]="checkActiveTheme(theme)" (dblclick)="pickTheme(theme)">
+                  <span class="title">{{theme.title}}</span>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <div class="hide-browser"> <!-- Должно исчезать, если браузера уже скрыт -->
-          <a href="javascript:void(0);" class="link-browser">Скрыть<i class="fa fa-fw fa-angle-double-up"></i></a>
+        <div class="hide-browser" *ngIf="browserVisible"> <!-- Должно исчезать, если браузера уже скрыт -->
+          <a class="link-browser" (click)="browserSwitcher()">Скрыть<i class="fa fa-fw fa-angle-double-up"></i></a>
         </div>
         <div class="values">
-          <div class="value">
-            <span class="title">Юридические вопросы</span>
-            <span class="close"><i class="fa fa-times" aria-hidden="true"></i></span>
-          </div>
-          <div class="value">
-            <span class="title">Грузовики</span>
-            <span class="close"><i class="fa fa-times" aria-hidden="true"></i></span>
-          </div>
-          <div class="value">
-            <span class="title">Грузовики</span>
-            <span class="close"><i class="fa fa-times" aria-hidden="true"></i></span>
-          </div>
-          <div class="value">
-            <span class="title">Скотиш-фолд (шотландская вислоухая)</span>
-            <span class="close"><i class="fa fa-times" aria-hidden="true"></i></span>
+          <div class="value" *ngFor="#theme of pickedThemes">
+            <span class="title">{{theme.title}}</span>
+            <span class="close" (click)="deletePickTheme(theme)"><i class="fa fa-times" aria-hidden="true"></i></span>
           </div>
         </div>
       </div>

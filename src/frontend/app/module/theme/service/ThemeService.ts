@@ -13,4 +13,11 @@ export class ThemeService
         return this.http.get(url);
     }
 
+    getThemeTreeList(){
+        let url = 'backend/api/theme/get/tree';
+
+        return this.http.get(url);
+    }
+
 }
+

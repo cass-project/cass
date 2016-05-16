@@ -1,6 +1,8 @@
 import {Component, EventEmitter,Output} from "angular2/core";
 import {ThemeService} from "../../service/ThemeService";
 
+
+
 @Component({
     selector: 'cass-theme-select',
     template: require('./template.html'),
@@ -15,28 +17,38 @@ export class ThemeSelect
 {
     constructor(private themeService: ThemeService){}
 
+
     themes;
+    themesTree;
+    themesTreeSecondEmbedded;
+    themesTreeThirdEmbedded;
+    themesTreeFourthEmbedded;
+
+    selectedTheme;
+    pickedThemes = [];
+
     searchStr: string = '';
-    tmpSearchStr: string = '';
-    listVisibleByClick: boolean = false;
+    browserVisible: boolean = false;
 
     ngOnInit(){
         this.getAllThemes();
+        this.getTreeThemes();
     }
 
-    showListByClick(){
-        this.listVisibleByClick = !this.listVisibleByClick;
-        this.tmpSearchStr = this.searchStr;
+    browserSwitcher(){
+        this.browserVisible = !this.browserVisible;
     }
 
-    showListReturn(){
-        if(this.searchStr && this.tmpSearchStr != this.searchStr){
-            return true;
-        } else if(this.listVisibleByClick === true){
-            return true;
-        } else {
-            return false;
-        }
+    showSearchListReturn() {
+        return (this.searchStr.length > 0);
+    }
+
+    getTreeThemes(){
+        this.themeService.getThemeTreeList().subscribe(data => {
+            this.themesTree = data;
+            this.themesTree = JSON.parse(this.themesTree._body).entities;
+            this.themesTree = this.themesTree[0].children;
+        })
     }
 
 
@@ -47,15 +59,47 @@ export class ThemeSelect
         });
     }
 
-    /*ToDo: Когда Theme API будет добавлено сделать нормальное отображение активного селекта через [class.active]*/
-    checkActiveTheme(themeId){
-        return themeId
+    deletePickTheme(theme){
+        let deleteThis = this.pickedThemes.indexOf(theme);
+        this.pickedThemes.splice(deleteThis, 1);
     }
 
-    /*ToDo: Когда Theme API будет добавлено сделать нормальный селект*/
-    selectTheme(themeId){
-        console.log(themeId);
+    pickTheme(theme){
+        this.pickedThemes.push(theme);
     }
+
+
+    /*ToDo: Дописать checkActiveTheme*/
+    checkActiveTheme(theme){
+        if(this.selectedTheme) {
+            return (theme === this.selectedTheme);
+        }
+    }
+
+    selectTheme(embedded, theme){
+        this.selectedTheme = theme;
+
+        if(embedded === 1){
+            this.themesTreeSecondEmbedded = this.getChildren();
+            this.themesTreeThirdEmbedded = [];
+            this.themesTreeFourthEmbedded = [];
+        } else if(embedded === 2){
+            this.themesTreeThirdEmbedded = this.getChildren();
+            this.themesTreeFourthEmbedded = [];
+        } else if(embedded === 3){
+            this.themesTreeFourthEmbedded = this.getChildren();
+        }
+    }
+
+
+    getChildren(){
+        if(this.selectedTheme) {
+            if (this.selectedTheme.children.length > 0){
+                return this.selectedTheme.children;
+            }
+        }
+    }
+
 
     search(){
         let results = [];
