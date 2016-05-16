@@ -5,6 +5,7 @@ use Application\REST\Response\GenericResponseBuilder;
 use Application\Service\CommandService;
 use Domain\Account\Exception\AccountNotFoundException;
 use Domain\Account\Middleware\Command\CancelDeleteRequestCommand;
+use Domain\Account\Middleware\Command\ChangePasswordCommand;
 use Domain\Account\Middleware\Command\DeleteRequestCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -25,6 +26,7 @@ class AccountMiddleware implements MiddlewareInterface
         $responseBuilder = new GenericResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
+            ->attachDirect('change-password', ChangePasswordCommand::class)
             ->attachDirect('request-delete', DeleteRequestCommand::class)
             ->attachDirect('cancel-request-delete', CancelDeleteRequestCommand::class)
             ->resolve($request);

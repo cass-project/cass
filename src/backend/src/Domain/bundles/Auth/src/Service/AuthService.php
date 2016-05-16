@@ -14,25 +14,26 @@ use Domain\Auth\Service\AuthService\SignUpValidation\IsEmailValid;
 use Domain\Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
 use Domain\Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
 use Domain\Account\Entity\Account;
-use Application\Frontline\Service\FrontlineService;
-
 class AuthService
 {
     const FRONTLINE_KEY = 'auth';
 
     /** @var AccountService */
     private $accountService;
-
-    /** @var FrontlineService */
-    private $frontlineService;
+    
+    /** @var PasswordVerifyService */
+    private $passwordVerifyService;
 
     /** @var array */
     private $oauth2Config;
 
-    public function __construct(AccountService $accountService, FrontlineService $frontlineService, array $oauth2Config)
+    public function __construct(
+        AccountService $accountService,
+        PasswordVerifyService $passwordVerifyService,
+        array $oauth2Config)
     {
         $this->accountService = $accountService;
-        $this->frontlineService = $frontlineService;
+        $this->passwordVerifyService = $passwordVerifyService;
         $this->oauth2Config = $oauth2Config;
     }
 
@@ -102,8 +103,8 @@ class AuthService
         return $config;
     }
 
-    private function verifyPassword(Account $account, string $password): bool
+    public function verifyPassword(Account $account, string $password): bool
     {
-        return password_verify($password, $account->getPassword());
+        return $this->passwordVerifyService->verifyPassword($account, $password);
     }
 }

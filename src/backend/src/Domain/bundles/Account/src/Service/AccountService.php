@@ -4,16 +4,17 @@ namespace Domain\Account\Service;
 use Domain\Account\Entity\Account;
 use Domain\Account\Entity\OAuthAccount;
 use Domain\Account\Exception\AccountHasDeleleRequestException;
+use Domain\Account\Exception\InvalidOldPasswordException;
 use Domain\Account\Repository\AccountRepository;
 use Domain\Account\Repository\OAuthAccountRepository;
 use Domain\Auth\Scripts\SetupProfileScript;
 use Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
+use Domain\Auth\Service\PasswordVerifyService;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\ProfileGreetings;
 use Domain\Profile\Entity\ProfileImage;
 use Application\Util\GenerateRandomString;
 use Domain\Profile\Repository\ProfileGreetingsRepository;
-use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
 class AccountService
 {
@@ -26,11 +27,19 @@ class AccountService
     /** @var ProfileGreetingsRepository */
     private $profileGreetingsRepository;
 
-    public function __construct(AccountRepository $accountRepository, OAuthAccountRepository $oauthAccountRepository,ProfileGreetingsRepository $profileGreetingsRepository)
-    {
+    /** @var PasswordVerifyService */
+    private $passwordVerifyService;
+
+    public function __construct(
+        AccountRepository $accountRepository,
+        OAuthAccountRepository $oauthAccountRepository,
+        ProfileGreetingsRepository $profileGreetingsRepository,
+        PasswordVerifyService $passwordVerifyService
+    ) {
         $this->accountRepository = $accountRepository;
         $this->oauthAccountRepository = $oauthAccountRepository;
         $this->profileGreetingsRepository = $profileGreetingsRepository;
+        $this->passwordVerifyService = $passwordVerifyService;
     }
 
     public function createAccount($email, $password = null): Account
@@ -38,7 +47,7 @@ class AccountService
         $account = new Account();
         $account
             ->setEmail($email)
-            ->setPassword(password_hash($password, PASSWORD_DEFAULT));
+            ->setPassword($this->passwordVerifyService->generatePassword($password));
 
         $profile = new Profile($account);
         $profile
@@ -109,6 +118,19 @@ class AccountService
         $this->accountRepository->deleteAccount($account);
 
         return $account;
+    }
+
+    public function changePassword(Account $account, string $oldPassword, string $newPassword): string
+    {
+        if(! $this->passwordVerifyService->verifyPassword($account, $oldPassword)) {
+            throw new InvalidOldPasswordException('Invalid old password');
+        }
+        
+        $newPassword = $this->passwordVerifyService->generatePassword($newPassword);
+        
+        $this->accountRepository->changePassword($account, $newPassword);
+
+        return $newPassword;
     }
 
     private function generateRandomString($length = 10)

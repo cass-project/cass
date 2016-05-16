@@ -16,4 +16,9 @@ abstract class AccountMiddlewareTestCase extends MiddlewareTestCase
     protected function requestCancelDeleteRequest(): RESTRequest {
         return $this->request('DELETE', '/protected/account/cancel-request-delete');
     }
+
+    protected function requestChangePassword(array $json): RESTRequest {
+        return $this->request('POST', '/protected/account/change-password')
+            ->setParameters($json);
+    }
 }

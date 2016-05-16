@@ -73,6 +73,13 @@ class AccountRepository extends EntityRepository
         $this->getEntityManager()->flush($account);
     }
 
+    public function changePassword(Account $account, string $newPassword)
+    {
+        $account->setPassword($newPassword);
+        
+        $this->getEntityManager()->flush($account);
+    }
+
     public function saveOAuth2Account(OAuthAccount $OAuth2Account)
     {
         $this->getEntityManager()->persist($OAuth2Account);

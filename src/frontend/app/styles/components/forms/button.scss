@@ -10,11 +10,11 @@
   background-color: material-color($color, '600');
 
   &:hover, &:focus {
-    background-color: material-color($color, '300');
+    background-color: material-color($color, '700');
   }
 
   &:active {
-    background-color: material-color($color, '700');
+    background-color: material-color($color, '800');
   }
 }
 

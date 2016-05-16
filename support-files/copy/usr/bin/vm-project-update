@@ -5,4 +5,5 @@ mysql  -uroot -p"1234" -e "CREATE DATABASE cass_development"
 cd /vagrant/backend
 composer update
 composer install
-./vendor/bin/phinx migrate
+./vendor/bin/phinx migrate -e cass_development
+./vendor/bin/phinx migrate -e cass_testing

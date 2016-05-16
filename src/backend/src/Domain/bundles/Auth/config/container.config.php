@@ -13,12 +13,13 @@ use Domain\Auth\Service\AuthService;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Auth\Frontline\AuthTokenScript;
 use Application\Frontline\Service\FrontlineService;
+use Domain\Auth\Service\PasswordVerifyService;
 
 return [
     'php-di' => [
         AuthService::class => object()->constructor(
             get(AccountService::class),
-            get(FrontlineService::class),
+            get(PasswordVerifyService::class),
             get('oauth2_providers')
         ),
         AuthMiddleware::class => object()->constructor(
@@ -34,6 +35,7 @@ return [
         ),
         AuthTokenScript::class => object()->constructor(
             get(CurrentAccountService::class)
-        )
+        ),
+        PasswordVerifyService::class => object()->constructor()
     ]
 ];

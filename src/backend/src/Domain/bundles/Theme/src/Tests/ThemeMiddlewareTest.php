@@ -2,12 +2,10 @@
 namespace Domain\Theme\Tests;
 
 use Application\PHPUnit\RESTRequest\RESTRequest;
-use Application\PHPUnit\RESTRequest\Result;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
-use Zend\Stratigility\Http\Response;
 
 /**
  * @backupGlobals disabled
@@ -120,7 +118,7 @@ class ThemeMiddlewareTest extends MiddlewareTestCase
 
     public function testGetTheme404()
     {
-        $this->requestGetTheme(20)
+        $this->requestGetTheme(999999)
              ->execute()
           ->expectJSONContentType()
           ->expectStatusCode(404)
