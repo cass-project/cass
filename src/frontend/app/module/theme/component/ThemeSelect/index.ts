@@ -33,6 +33,7 @@ export class ThemeSelect
     searchStr: string = '';
     browserVisible: boolean = false;
 
+
     ngOnInit(){
         this.getAllThemes();
         this.getTreeThemes();
@@ -43,7 +44,9 @@ export class ThemeSelect
     }
 
     showSearchListReturn() {
-        return (this.searchStr.length > 0);
+        if(this.searchStr.length){
+            return (this.search().length)
+        }
     }
 
     getTreeThemes(){
@@ -62,13 +65,23 @@ export class ThemeSelect
         });
     }
 
-    deletePickTheme(theme){
-        let deleteThis = this.pickedThemes.indexOf(theme);
+    deletePickTheme(value){
+        let deleteThis = this.pickedThemes.indexOf(value);
         this.pickedThemes.splice(deleteThis, 1);
     }
 
-    pickTheme(theme){
-        this.pickedThemes.push(theme);
+    pickTheme(value){
+        let canIAdd = true;
+        if(this.pickedThemes.length > 0) {
+            for(let i = 0; i < this.pickedThemes.length; i++){
+                if(this.pickedThemes[i] === value){
+                    canIAdd = false;
+                }
+            }
+        }
+        if(canIAdd){
+            this.pickedThemes.push(value);
+        }
     }
 
 
@@ -83,6 +96,7 @@ export class ThemeSelect
 
     selectTheme(level, theme){
         this.selectedTheme = theme;
+
 
         if(level === 1){
             this.themesTree[2].themes = this.getChildren(); this.themesTree[2].highlightActive = theme.id;
@@ -116,6 +130,5 @@ export class ThemeSelect
 
         return results
     }
-
 }
 

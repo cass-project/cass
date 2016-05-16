@@ -20,8 +20,8 @@
           <!-- Здесь не должно быть в этом списке тематик, которые уже выбраны -->
           <!-- <mark>'ом отмечается сматченный текст -->
           <div class="auto-complete-scroll-box">
-            <ul class="auto-complete-list">
-              <li *ngFor="#theme of search()">
+            <ul class="auto-complete-list" *ngFor="#theme of search()">
+              <li (click)="pickTheme(theme)">
                 <span class="title">{{theme.title}}</span>
               </li>
             </ul>
