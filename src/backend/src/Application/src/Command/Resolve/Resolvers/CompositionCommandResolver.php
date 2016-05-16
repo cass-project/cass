@@ -39,6 +39,6 @@ final class CompositionCommandResolver implements CommandResolver
             }
         }
 
-        throw new UnresolvableCommandException;
+        throw new UnresolvableCommandException('Request is unresolvable');
     }
 }

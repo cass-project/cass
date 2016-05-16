@@ -3,6 +3,7 @@ namespace Domain\Account\Service;
 
 use Domain\Account\Entity\Account;
 use Domain\Account\Entity\OAuthAccount;
+use Domain\Account\Exception\AccountHasDeleleRequestException;
 use Domain\Account\Repository\AccountRepository;
 use Domain\Account\Repository\OAuthAccountRepository;
 use Domain\Auth\Scripts\SetupProfileScript;
@@ -75,11 +76,40 @@ class AccountService
         return $account;
     }
 
+    public function requestDelete(Account $account)
+    {
+        if($account->hasDeleteAccountRequest()) {
+            throw new AccountHasDeleleRequestException(sprintf('Account `%s` already has delete request', $account->getEmail()));
+        }
+
+         $this->accountRepository->requestDelete($account);
+    }
+
+    public function cancelDeleteRequest(Account $account)
+    {
+        if($account->hasDeleteAccountRequest()) {
+            $this->accountRepository->cancelDeleteRequest($account);
+        }
+    }
+
+    public function findById(int $accountId): Account
+    {
+        return $this->accountRepository->findById($accountId);
+    }
+
     public function findOAuthAccount(string $provider, string $providerAccountId): OAuthAccount
     {
         return $this->oauthAccountRepository->findOAuthAccount($provider, $providerAccountId);
     }
 
+    public function deleteAccount(int $accountId): Account
+    {
+        $account = $this->findById($accountId);
+
+        $this->accountRepository->deleteAccount($account);
+
+        return $account;
+    }
 
     private function generateRandomString($length = 10)
     {

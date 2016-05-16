@@ -53,6 +53,18 @@ class Account implements JSONSerializable
      */
     private $isEmailVerified = false;
 
+    /**
+     * @Column(type="boolean", name="is_account_delete_requested")
+     * @var bool
+     */
+    private $isAccountDeleteRequested = false;
+
+    /**
+     * @Column(type="datetime", name="date_account_delete_request")
+     * @var \DateTime|null
+     */
+    private $dateAccountDeleteRequest;
+
     public function __construct()
     {
         $this->profiles = new ArrayCollection();
@@ -66,6 +78,12 @@ class Account implements JSONSerializable
             'disabled' => [
                 'is_disabled' => $this->isDisabled(),
                 'reason' => $this->isDisabled() ? $this->getDisabledReason() : null
+            ],
+            'delete_request' => [
+                'has' => $this->hasDeleteAccountRequest(),
+                'date' =>  $this->hasDeleteAccountRequest()
+                    ? $this->getDateAccountDeleteRequested()->format(\DateTime::RFC822)
+                    : null
             ]
         ];
     }
@@ -163,5 +181,28 @@ class Account implements JSONSerializable
         }
 
         return $this->isDisabled;
+    }
+
+
+    public function requestAccountDelete()
+    {
+        $this->isAccountDeleteRequested = true;
+        $this->dateAccountDeleteRequest = new \DateTime();
+    }
+
+    public function cancelAccountRequestDelete()
+    {
+        $this->isAccountDeleteRequested = false;
+        $this->dateAccountDeleteRequest = null;
+    }
+
+    public function hasDeleteAccountRequest(): bool
+    {
+        return $this->isAccountDeleteRequested;
+    }
+
+    public function getDateAccountDeleteRequested(): \DateTime
+    {
+        return $this->dateAccountDeleteRequest;
     }
 }

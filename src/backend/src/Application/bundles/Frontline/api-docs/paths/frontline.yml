@@ -15,3 +15,6 @@
               type: array
               items:
                 $ref: "#/definitions/Profile_Entity_Profile"
+            delete_account_request_days:
+              type: number
+              description: Количество дней, по истечению которых удовлетворяется запрос на удаление аккаунта

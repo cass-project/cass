@@ -53,9 +53,7 @@ class ProfileMiddleware implements MiddlewareInterface
             ->attachDirect('interesting-in', InterestingInPostCommand::class, 'post')
             ->attachDirect('interesting-in', InterestingInDeleteCommand::class, 'delete')
             ->attachDirect('set-gender', SetGenderCommand::class)
-            ->resolve($request)
-        ;
-
+            ->resolve($request);
         try {
             return $resolver->run($request, $responseBuilder);
         }catch(ProfileNotFoundException $e) {

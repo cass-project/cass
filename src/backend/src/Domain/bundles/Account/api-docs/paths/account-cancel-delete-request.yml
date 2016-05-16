@@ -1,0 +1,14 @@
+"/protected/account/cancel-request-delete":
+  delete:
+    tags:
+      - account
+    description:
+      Отменить запрос на удаление аккаунта
+    security:
+      - x_api_key: []
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        schema:
+          $ref: '#/responses/success'

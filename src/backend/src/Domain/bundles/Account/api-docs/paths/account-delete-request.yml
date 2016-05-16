@@ -1,0 +1,27 @@
+"/protected/account/request-delete":
+  put:
+    tags:
+      - account
+    description:
+      Запрос на удаление аккаунта
+    security:
+      - x_api_key: []
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      409:
+        description: Аккаунт уже имеет запрос на удаление
+        schema:
+          $ref: '#/responses/error'
+      200:
+        schema:
+          required:
+            - success
+            - date_account_delete_request
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            date_account_delete_request:
+              type: string
+              description: Дата, к которой будет удален аккаунт

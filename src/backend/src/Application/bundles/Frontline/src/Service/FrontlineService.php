@@ -32,8 +32,17 @@ class FrontlineService
                         throw new \Exception(sprintf('Overwrite attempt by frontline script `%s`', $scriptName));
                     }
 
-                    $script = $this->container->get($scriptName);
-                    $result[$key] = $script($this->container);
+                    if(is_callable($scriptName)) {
+                        $script = $scriptName;
+                    }else{
+                        $script = $this->container->get($scriptName);
+                    }
+
+                    if(is_callable($script)) {
+                        $result[$key] = $script($this->container);
+                    }else{
+                        throw new \Exception('Invalid frontline script');
+                    }
                 }
             }
         }

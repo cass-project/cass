@@ -18,10 +18,21 @@ class AccountRepository extends EntityRepository
                 ->setParameter("email", $email)
                 ->getQuery()
                 ->getSingleResult()
-            ;
+                ;
         }catch (NoResultException $e) {
             throw new AccountNotFoundException(sprintf('Domain\Account with email `%s` not found', $email));
         }
+    }
+
+    public function findById(int $accountId): Account
+    {
+        $account = $this->find($accountId);
+
+        if($account === null) {
+            throw new AccountNotFoundException(sprintf('Account with ID `%d` not found', $accountId));
+        }
+
+        return $account;
     }
 
     public function hasAccountWithEmail($email) : bool
@@ -46,6 +57,22 @@ class AccountRepository extends EntityRepository
         $em->flush([$account, $profile]);
     }
 
+    public function requestDelete(Account $account)
+    {
+        $account->requestAccountDelete();
+
+        $this->getEntityManager()->flush($account);
+    }
+
+    public function cancelDeleteRequest(Account $account)
+    {
+        if($account->hasDeleteAccountRequest()) {
+            $account->cancelAccountRequestDelete();
+        }
+
+        $this->getEntityManager()->flush($account);
+    }
+
     public function saveOAuth2Account(OAuthAccount $OAuth2Account)
     {
         $this->getEntityManager()->persist($OAuth2Account);
@@ -63,5 +90,23 @@ class AccountRepository extends EntityRepository
         }
 
         return $account;
+    }
+
+    public function getPendingDeleteAccounts(int $days): array
+    {
+        /** @var Account[] $result */
+        $result = $this->createQueryBuilder('account')
+            ->andWhere('account.isAccountDeleteRequested = 1')
+            ->andWhere(sprintf("DATE_ADD(account.dateAccountDeleteRequest, %d, 'day') <= CURRENT_DATE()", $days))
+            ->getQuery()
+            ->getResult();
+
+        return $result;
+    }
+
+    public function deleteAccount(Account $account)
+    {
+        $this->getEntityManager()->remove($account);
+        $this->getEntityManager()->flush($account);
     }
 }
