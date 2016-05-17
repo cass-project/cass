@@ -8,11 +8,6 @@
                 </div>
                 <div *ngIf="!showProgressBar" class="modal-body text-xs-center" >
                     <img #cropImage/>
-                    <label *ngIf="!cropper" class="text-xs-left m-t-1 btn btn-primary">
-                        <input type="file" placeholder="s" (change)="onFileChange($event)">
-                        <i class="fa  fa-fw fa-folder-open" aria-hidden="true"></i>
-                        Choose photo from computer
-                    </label>
                 </div>
                 <div *ngIf="cropper">
                     <div class="wrapper">
