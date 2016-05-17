@@ -18,11 +18,18 @@ export class ThemeService
     sessionTmp;
 
 
+    treeToArray(tree, array) {
+        for (let o of tree) {
+            array.push(o);
+            this.treeToArray(o.children, array);
+        }
+        array.push()
+    }
 
     getThemeListAll(){
-        this.themes = this.themesTree[1].themes;
-        /*ToDo: tree array to flat array*/
-        console.log(this.themes);
+        let array = [];
+        this.treeToArray(this.themesTree[1].themes, array);
+        this.themes = array;
     }
 
     getThemeTreeList(){
