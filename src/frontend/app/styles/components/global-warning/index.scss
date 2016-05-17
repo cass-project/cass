@@ -1,0 +1,31 @@
+@import "./../../globals";
+
+div.global-message
+{
+  @include card(4);
+
+  position: fixed;
+  top: 0;
+  left: 80px; right: 0;
+  z-index: 9000;
+  background-color: white;
+
+  p {
+    margin: 15px;
+  }
+}
+
+@mixin global-message-colored($color)
+{
+  color: material-color($color, "100");
+  background-color: material-color($color, "700");
+}
+
+
+$colors: "red" "green" "blue" "indigo";
+
+@each $color in $colors {
+  div.global-message-#{$color} {
+    @include global-message-colored($color);
+  }
+}

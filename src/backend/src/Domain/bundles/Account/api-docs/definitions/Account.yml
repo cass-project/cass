@@ -2,6 +2,9 @@ Account_Entity_Account:
   type: object
   required:
     - id
+    - email
+    - disabled
+    - delete_request
   properties:
     id:
       type: number
@@ -23,3 +26,14 @@ Account_Entity_Account:
           reason:
             type: string
             description: Причина блокировки. Может содержать значение NULL.
+    delete_request:
+      schema:
+        required:
+          - has
+          - date
+        has:
+          type: boolean
+          description: Существует ли запрос на удаление аккаунта?
+        date:
+          type: string
+          description: К какой дате будет удален запрос. Содержит NULL в случае отсутствия запроса.

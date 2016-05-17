@@ -7,6 +7,10 @@ export interface AccountEntity
     disabled: {
         is_disabled: boolean;
         reason: string
+    },
+    delete_request: {
+        has: boolean;
+        date: string;
     }
 }
 

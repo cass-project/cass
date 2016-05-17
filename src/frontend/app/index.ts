@@ -27,6 +27,7 @@ import {LandingComponent} from "./module/landing/index";
 import {ProfileRoute} from "./module/profile/route/ProfileRoute/index";
 import {ProfileComponent} from "./module/profile/index";
 import {ProfileComponentService} from "./module/profile/service";
+import {AccountComponent} from "./module/account/index";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -39,6 +40,7 @@ import {ProfileComponentService} from "./module/profile/service";
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,
         AuthComponent,
+        AccountComponent,
         ProfileComponent,
         SidebarComponent,
         RouterOutlet
