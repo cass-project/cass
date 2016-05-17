@@ -2,10 +2,9 @@ declare var Cropper;
 
 import {Component, ViewChild, ElementRef, Injectable} from "angular2/core";
 import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {ProfileService} from "../../service/ProfileService";
 import {AvatarCropperService} from "./service";
 import {AuthService} from "../../../auth/service/AuthService";
-import {AccountConfirm} from "../AccountWelcome/Confirm/component";
+import {ProfileSettingsImage} from "../../../profile/component/ProfileSettings/ProfileSettingsImage/index";
 
 require('./style.head.scss');
 
@@ -24,7 +23,7 @@ require('./style.head.scss');
 @Injectable()
 export class AvatarCropper {
     constructor(private fileReader: FileReader,
-                public profileService: ProfileService,
+                public profileSettingsImage: ProfileSettingsImage,
                 public avatarCropperService: AvatarCropperService,
                 public router: Router
     ){}
@@ -33,10 +32,11 @@ export class AvatarCropper {
 
     public showProgressBar = false;
     public cropper;
-    private file: Blob;
     private imgPath;
+    /*private file: Blob;*/
 
-    ngOnInit(): void {
+
+    /*ngOnInit(): void {
         this.fileReader = new FileReader();
         this.fileReader.onload = () => {
             this.initCropper();
@@ -47,6 +47,15 @@ export class AvatarCropper {
         this.file = event.target.files[0];
         this.imgPath = URL.createObjectURL(event.target.files[0]);
         this.fileReader.readAsDataURL(this.file);
+    }*/
+
+    ngOnInit(): void {
+        this.fileReader = new FileReader();
+        this.fileReader.onload = () => {
+            this.initCropper();
+        };
+        this.fileReader.readAsDataURL(this.avatarCropperService.file);
+        this.imgPath = URL.createObjectURL(this.avatarCropperService.file);
     }
 
     private initCropper() : void {
@@ -84,32 +93,22 @@ export class AvatarCropper {
         this.cropImage.nativeElement.src="";
     }
 
-
     private submit(){
         this.showProgressBar = true;
-        let coord = this.getData();
-        this.profileService.file = this.file;
-        this.profileService.crop = {
+        let coord = {
             start: {
-                x: coord.x,
-                y: coord.y
+                x: this.cropper.getData(true).x,
+                y: this.cropper.getData(true).y
             },
             end: {
-                x: coord.x + coord.width,
-                y: coord.y + coord.height
+                x: this.cropper.getData(true).x + this.cropper.getData(true).width,
+                y: this.cropper.getData(true).y + this.cropper.getData(true).height
             }
         };
-        this.profileService.avatarUpload();
-        console.log(`
-        width: ${this.getPreviewImageData('width')},
-        height: ${this.getPreviewImageData('height')},
-        x1: ${this.getPreviewImageData('x1')},
-        y1: ${this.getPreviewImageData('y1')},
-        getData: ${this.getData().x} ${this.getData().y} ${this.getData().width} ${this.getData().height}
-        `);
+        return coord;
     }
 
-    private getPreviewImageData(data: string){
+    /*private getPreviewImageData(data: string){
         let coord = this.getData();
         let avatarSize = 300;
         let scaleX = avatarSize / (coord.width);
@@ -136,9 +135,7 @@ export class AvatarCropper {
 
     private getImageData(){
         return this.cropper.getImageData(true);
-    }
+    }*/
 
-    private getData() {
-        return this.cropper.getData(true);
-    }
+
 }
