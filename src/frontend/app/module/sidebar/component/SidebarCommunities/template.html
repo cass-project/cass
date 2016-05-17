@@ -1,0 +1,46 @@
+<div class="sidebar-communities">
+  <div class="sidebar-separator"></div>
+  <ul class="sidebar-items">
+    <li>
+      <div class="community-bookmark">
+        <a href="#" class="sidebar-fa-button">
+          <i class="fa fa-fw fa-search"></i>
+        </a>
+      </div>
+    </li>
+    <li>
+      <div class="switcher">
+        <div class="sidebar-switch-button" (click)="switchCommunityBookmarks()">
+          <i *ngIf="  isSwitched()" class="fa fa-chevron-up"></i>
+          <i *ngIf="! isSwitched()" class="fa fa-chevron-down"></i>
+        </div>
+      </div>
+    </li>
+    <li *ngIf="isSwitched()">
+      <div class="community-bookmark">
+        <a href="#" class="sidebar-button sidebar-community-icon">
+          <img class="sidebar-icon" src="/dist/assets/icons-demo/xerath.png"/>
+        </a>
+      </div>
+    </li>
+    <li *ngIf="isSwitched()">
+      <div class="community-bookmark">
+        <a href="#" class="sidebar-button sidebar-community-icon">
+          <img class="sidebar-icon" src="/dist/assets/icons-demo/gragas.png"/>
+        </a>
+      </div>
+    </li>
+    <li *ngIf="isSwitched()">
+      <div class="community-bookmark">
+        <a href="#" class="sidebar-button sidebar-community-icon">
+          <img class="sidebar-icon" src="/dist/assets/icons-demo/velkoz.png"/>
+        </a>
+      </div>
+    </li>
+    <li class="add-button" *ngIf="isSwitched()">
+      <div class="community-plus">
+        <i class="fa fa-plus"></i>
+      </div>
+    </li>
+  </ul>
+</div>

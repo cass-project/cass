@@ -1,0 +1,36 @@
+<div class="sidebar-unreaded-messages">
+  <div class="sidebar-separator"></div>
+  <ul class="sidebar-items">
+    <li>
+      <div>
+        <a href="#" class="sidebar-fa-button">
+          <i class="fa fa-envelope"></i>
+        </a>
+      </div>
+    </li>
+    <li>
+      <div class="switcher">
+        <div class="sidebar-switch-button" (click)="switchMessages()">
+          <i *ngIf="  isSwitched()" class="fa fa-chevron-up"></i>
+          <i *ngIf="! isSwitched()" class="fa fa-chevron-down"></i>
+        </div>
+      </div>
+    </li>
+    <li *ngIf="isSwitched()">
+      <div class="message">
+        <a href="#" class="sidebar-button sidebar-community-icon">
+          <img class="sidebar-icon" src="/dist/assets/icons-demo/gangplank.png"/>
+          <div class="counter counter-red">45</div>
+        </a>
+      </div>
+    </li>
+    <li *ngIf="isSwitched()">
+      <div class="message">
+        <a href="#" class="sidebar-button sidebar-community-icon">
+          <img class="sidebar-icon" src="/dist/assets/icons-demo/xerath.png"/>
+          <div class="counter counter-red">1</div>
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>

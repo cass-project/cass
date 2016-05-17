@@ -18,24 +18,28 @@ import {HTTP_PROVIDERS, BaseRequestOptions, RequestOptions} from 'angular2/http'
 import {CORE_DIRECTIVES} from 'angular2/common';
 import {AuthService} from './module/auth/service/AuthService';
 import {frontline, FrontlineService} from "./module/frontline/service";
-import {SidebarComponent} from "./module/sidebar/component/index";
+import {SidebarComponent} from "./module/sidebar/index";
 import {AuthComponent} from "./module/auth/component/Auth/index";
 import {AuthComponentService} from "./module/auth/component/Auth/service";
 import {RouterOutlet} from "angular2/router";
 import {RouteConfig} from "angular2/router";
 import {LandingComponent} from "./module/landing/index";
+import {ProfileRoute} from "./module/profile/route/ProfileRoute/index";
 import {ProfileComponent} from "./module/profile/index";
+import {ProfileComponentService} from "./module/profile/service";
 
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),
     providers: [
-        AuthComponentService
+        AuthComponentService,
+        ProfileComponentService,
     ],
     directives: [
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,
         AuthComponent,
+        ProfileComponent,
         SidebarComponent,
         RouterOutlet
     ]
@@ -50,7 +54,7 @@ import {ProfileComponent} from "./module/profile/index";
     {
         name: 'Profile',
         path: '/profile/...',
-        component: ProfileComponent
+        component: ProfileRoute
     }
 ])
 class App {

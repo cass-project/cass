@@ -6,6 +6,7 @@ import {PersonalTab} from "./Tab/Personal/index";
 import {InterestsTab} from "./Tab/Interests/index";
 import {ProfilesTab} from "./Tab/Profiles/index";
 import {ImageTab} from "./Tab/Image/index";
+import {ProfileComponentService} from "../../service";
 
 enum ProfileModalTab
 {
@@ -18,7 +19,7 @@ enum ProfileModalTab
 }
 
 @Component({
-    selector: 'cass-profile-modal',
+    selector: 'cass-profile-settings',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
@@ -31,20 +32,23 @@ enum ProfileModalTab
         ProfilesTab
     ],
     providers: [
-        ProfileModalModel,  // В эту модель сохраняются изменения, сделанные пользователем.
-                            // Этот коммент удалить.
+        ProfileModalModel,  // В эту модель сохраняются изменения, сделанные пользователем.// Этот коммент удалить.
     ]
 })
 export class ProfileModal
 {
     tabs: TabControls = new TabControls();
 
-    constructor(public model: ProfileModalModel) {}
+    constructor(public model: ProfileModalModel, private modals: ProfileComponentService) {}
+    
+    close() {
+        this.modals.modals.settings.close();
+    }
 }
 
 class TabControls
 {
-    static DEFAULT_TAB = ProfileModalTab.Profiles;
+    static DEFAULT_TAB = ProfileModalTab.Personal;
 
     current: ProfileModalTab = TabControls.DEFAULT_TAB;
 

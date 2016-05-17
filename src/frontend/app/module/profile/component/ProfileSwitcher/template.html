@@ -1,0 +1,71 @@
+<div class="component component-profile-switcher">
+  <div class="form" *ngIf="stage.isOn('Processing')">
+    <div class="processing-container">
+      <cass-loading-linear-indicator></cass-loading-linear-indicator>
+    </div>
+  </div>
+  <div class="form" *ngIf="stage.isOn('Choice')">
+    <header class="profile-switcher-header form-header">
+      <h1>Смена профиля</h1>
+    </header>
+    <ul class="profiles-list">
+      <li>
+        <section class="profile-option">
+          <div class="profile-image-container">
+            <cass-profile-image border="circle" url="/dist/assets/profile-demo.png"></cass-profile-image>
+          </div>
+          <div class="greetings">Foo Bar</div>
+        </section>
+      </li>
+      <li class="current-profile">
+        <section class="profile-option">
+          <div class="profile-image-container">
+            <cass-profile-image border="circle" url="/dist/assets/icons-demo/gangplank.png"></cass-profile-image>
+          </div>
+          <div class="greetings">Foo Bar</div>
+        </section>
+      </li>
+      <li>
+        <section class="profile-option">
+          <div class="profile-image-container">
+            <cass-profile-image border="circle" url="/dist/assets/icons-demo/gragas.png"></cass-profile-image>
+          </div>
+          <div class="greetings">Foo Bar</div>
+        </section>
+      </li>
+      <li>
+        <section class="profile-option">
+          <div class="profile-image-container">
+            <cass-profile-image border="circle" url="/dist/assets/icons-demo/velkoz.png"></cass-profile-image>
+          </div>
+          <div class="greetings">Foo Bar</div>
+        </section>
+      </li>
+      <li>
+        <section class="profile-option">
+          <div class="profile-image-container">
+            <cass-profile-image border="circle" url="/dist/assets/icons-demo/xerath.png"></cass-profile-image>
+          </div>
+          <div class="greetings">Foo Bar</div>
+        </section>
+      </li>
+    </ul>
+    <footer class="form-footer">
+      <div class="form-footer-section">
+        <div class="cass-padding-box-5">
+          <button class="form-text-button">
+            <i class="fa fa-fw fa-sign-out"></i>
+            <span>Выход из сервиса</span>
+          </button>
+        </div>
+      </div>
+      <div class="form-footer-section">
+        <div class="cass-padding-box-5">
+          <button class="form-text-button" (click)="close()">
+            <span>Отмена</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>

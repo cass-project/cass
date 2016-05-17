@@ -1,9 +1,18 @@
-<article class="component component-profile">
-  <cass-profile-menu></cass-profile-menu>
-
-  <cass-modal>
-    <cass-profile-modal></cass-profile-modal>
-  </cass-modal>
-
-  <router-outlet></router-outlet>
-</article>
+<div>
+  <script>alert(1);</script>
+  <div *ngIf="service.modals.setup.isActive()">
+    <cass-modal>
+      <cass-profile-setup></cass-profile-setup>
+    </cass-modal>
+  </div>
+  <div *ngIf="service.modals.settings.isActive()">
+    <cass-modal>
+      <cass-profile-settings></cass-profile-settings>
+    </cass-modal>
+  </div>
+  <div *ngIf="service.modals.switcher.isActive()">
+    <cass-modal>
+      <cass-profile-switcher></cass-profile-switcher>
+    </cass-modal>
+  </div>
+</div>

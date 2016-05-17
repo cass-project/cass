@@ -1,13 +1,11 @@
 import {Component} from "angular2/core";
-import {Input} from "angular2/core";
 
 @Component({
-    selector: 'cass-sidebar-item',
+    selector: 'cass-sidebar-sign-in-button',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
-export class SidebarItemComponent
-{
-}
+export class SidebarSignInButton
+{}

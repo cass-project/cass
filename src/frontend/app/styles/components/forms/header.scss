@@ -2,15 +2,13 @@
 
 header.form-header
 {
-  padding: 20px;
-  margin-bottom: 5px;
-  font-weight: 100  ;
-  background-color: material-color("grey", "200");
-  color: black;
-
   h1 {
-    font-size: $FONT_SIZE_LARGE;
-    font-weight: 200;
+    line-height: 50px;
+    text-align: center;
+    color: material-color("blue-grey", "100");
+    background-color: material-color("blue-grey", "900");
+    font-size: 15px;
+    font-weight: 600;
   }
 }
 
