@@ -31,28 +31,28 @@
           <div class="view">
             <!-- Тематики здесь выбираются по двойному щелчку -->
             <div class="column">
-              <ul class="theme-list" *ngFor="#theme of themesTree[1].themes">
+              <ul class="theme-list" *ngFor="#theme of themeService.themesTree[1].themes">
                 <li [class.active]="checkActiveTheme(theme)" (click)="selectTheme(1, theme)" (dblclick)="pickTheme(theme)">
                   <span class="title">{{theme.title}}</span>
                 </li>
               </ul>
             </div>
             <div class="column">
-              <ul class="theme-list" *ngFor="#theme of themesTree[2].themes">
+              <ul class="theme-list" *ngFor="#theme of themeService.themesTree[2].themes">
                 <li [class.active]="checkActiveTheme(theme)" (click)="selectTheme(2, theme)" (dblclick)="pickTheme(theme)">
                   <span class="title">{{theme.title}}</span>
                 </li>
               </ul>
             </div>
             <div class="column">
-              <ul class="theme-list" *ngFor="#theme of themesTree[3].themes">
+              <ul class="theme-list" *ngFor="#theme of themeService.themesTree[3].themes">
                 <li class="active" [class.active]="checkActiveTheme(theme)" (click)="selectTheme(3, theme)" (dblclick)="pickTheme(theme)">
                   <span class="title">{{theme.title}}</span>
                 </li>
               </ul>
             </div>
             <div class="column">
-              <ul class="theme-list" *ngFor="#theme of themesTree[4].themes">
+              <ul class="theme-list" *ngFor="#theme of themeService.themesTree[4].themes">
                 <li class="active" [class.active]="checkActiveTheme(theme)" (click)="selectTheme(4, theme)" (dblclick)="pickTheme(theme)">
                   <span class="title">{{theme.title}}</span>
                 </li>
