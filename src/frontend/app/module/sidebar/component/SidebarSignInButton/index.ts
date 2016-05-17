@@ -1,4 +1,5 @@
 import {Component} from "angular2/core";
+import {AuthComponentService} from "../../../auth/component/Auth/service";
 
 @Component({
     selector: 'cass-sidebar-sign-in-button',
@@ -8,4 +9,6 @@ import {Component} from "angular2/core";
     ]
 })
 export class SidebarSignInButton
-{}
+{
+    constructor(private service: AuthComponentService) {}
+}

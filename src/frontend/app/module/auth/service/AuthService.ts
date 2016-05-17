@@ -15,6 +15,7 @@ export class AuthService
     constructor(private http: Http, private frontline: FrontlineService) {
         let hasAuth = frontline.session.auth && (typeof frontline.session.auth.api_key == "string") && (frontline.session.auth.api_key.length > 0);
 
+        console.log(frontline.session, hasAuth);
         if(hasAuth) {
             let auth = frontline.session.auth;
             AuthService.token = new AuthToken(auth.api_key, new Account(auth.account, auth.profiles));

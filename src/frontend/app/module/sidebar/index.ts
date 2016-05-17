@@ -6,6 +6,7 @@ import {Component} from "angular2/core";
 import {SidebarSignInButton} from "./component/SidebarSignInButton/index";
 import {SidebarProfileIcon} from "./component/SidebarProfileIcon/index";
 import {SidebarCommunities} from "./component/SidebarCommunities/index";
+import {AuthService} from "../auth/service/AuthService";
 
 @Component({
     selector: 'cass-sidebar',
@@ -19,4 +20,9 @@ import {SidebarCommunities} from "./component/SidebarCommunities/index";
 })
 export class SidebarComponent
 {
+    constructor(private authService: AuthService) {}
+
+    isSignedIn() {
+        return AuthService.isSignedIn();
+    }
 }

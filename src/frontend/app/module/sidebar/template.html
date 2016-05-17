@@ -1,10 +1,10 @@
 <div class="cass-sidebar">
   <div class="sidebar-contents">
     <ul class="sidebar-items">
-      <li>
+      <li *ngIf="! isSignedIn()">
         <cass-sidebar-sign-in-button></cass-sidebar-sign-in-button>
       </li>
-      <li>
+      <li *ngIf="isSignedIn()">
         <cass-sidebar-profile-icon></cass-sidebar-profile-icon>
       </li>
     </ul>
