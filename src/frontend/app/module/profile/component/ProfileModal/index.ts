@@ -13,7 +13,7 @@ enum ProfileModalTab
     Personal = <any>"Personal",
     Image = <any>"Image",
     Interests = <any>"Interests",
-    Profiles = <any>"Profile",
+    Profiles = <any>"Profiles",
     SignOut = <any>"SignOut"
 }
 
@@ -38,11 +38,13 @@ enum ProfileModalTab
 export class ProfileModal
 {
     tabs: TabControls = new TabControls();
+
+    constructor(public model: ProfileModalModel) {}
 }
 
 class TabControls
 {
-    static DEFAULT_TAB = ProfileModalTab.Interests;
+    static DEFAULT_TAB = ProfileModalTab.Profiles;
 
     current: ProfileModalTab = TabControls.DEFAULT_TAB;
 

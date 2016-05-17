@@ -1,1 +1,232 @@
-<div class="profile-modal-tab-profiles"></div>
+<div class="profile-modal-tab-profiles">
+
+  <!-- Модальное окно "удалить профиль" (подтверждение) -->
+  <cass-modal *ngIf="service.isModalDeleteProfileActive()">
+    <div class="modal-profile  modal-profile-delete">
+      <header>
+        <h1>Вы действительно хотите удалить этот профиль?</h1>
+      </header>
+      <div class="cass-padding-box-15">
+        <div class="profile-info">
+          <div class="profile-image-container">
+            <cass-profile-image border="circle" url="/dist/assets/profile-demo.png"></cass-profile-image>
+          </div>
+          <div class="profile-about">
+            <div class="profile-greetings"><h1>Foo Bar</h1></div>
+            <p class="info">Вы сейчас используете сервис с помощью этого профиля. После удаление профиля мы
+              вам дадим выбор, с помощью какого профиля продолжить пользование нашим сервисом.</p>
+          </div>
+        </div>
+      </div>
+      <footer class="form-footer">
+        <div class="form-footer-section">
+          <button class="form-text-button">
+            <span>Отмена</span>
+          </button>
+        </div>
+        <div class="form-footer-section">
+          <button class="form-button form-button-red">
+            <i class="fa fa-fw fa-trash"></i>
+            <span>Да, удалить профиль</span>
+          </button>
+        </div>
+      </footer>
+    </div>
+  </cass-modal>
+
+  <!-- Модальное окно "подтверждение смены профиля" -->
+  <cass-modal *ngIf="service.isModalSwitchProfileActive()">
+    <div class="modal-profile modal-profile-switch">
+      <header>
+        <h1>Переход в другой профиль</h1>
+      </header>
+      <div class="cass-padding-box-15">
+        <div class="profile-info">
+          <div class="profile-image-container">
+            <cass-profile-image border="circle" url="/dist/assets/profile-demo.png"></cass-profile-image>
+          </div>
+          <div class="profile-about">
+            <div class="profile-greetings"><h1>Foo Bar</h1></div>
+          </div>
+        </div>
+      </div>
+      <footer class="form-footer">
+        <div class="form-footer-section">
+          <button class="form-text-button">
+            <span>Отмена</span>
+          </button>
+        </div>
+        <div class="form-footer-section">
+          <div class="form-text-button">
+            <span>Переход через 5 секунд</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </cass-modal>
+
+  <!-- Tab Content -->
+  <header class="tab-modal-header">
+    <h1>Управление профилями</h1>
+  </header>
+  <ul class="profile-list">
+    <li>
+      <section class="profile-control">
+        <div class="profile-info">
+          <div class="profile-image-container">
+            <cass-profile-image border="circle" url="/dist/assets/profile-demo.png"></cass-profile-image>
+          </div>
+          <div class="profile-about">
+            <div class="profile-greetings"><h1>Foo Bar</h1></div>
+            <div class="profile-is-current">Вы сейчас пользуетесь этим профилем</div>
+            <div class="profile-about-more">
+              <span class="title">Эксперт в:</span>
+              <ul class="expert-in-list">
+                <li><div class="expert-in">Компьютерные игры</div></li>
+                <li><div class="expert-in">Концерты</div></li>
+                <li><div class="expert-in">Хирургия</div></li>
+                <li><div class="expert-in">Кино</div></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <footer class="profile-controls">
+          <button class="form-text-button form-button-text-remove">
+            <i class="fa fa-fw fa-remove"></i>
+            <span>Удалить профиль</span>
+          </button>
+        </footer>
+      </section>
+    </li>
+    <li>
+      <section class="profile-control">
+        <div class="profile-info">
+          <div class="profile-image-container">
+            <cass-profile-image border="circle" url="/dist/assets/profile-demo.png"></cass-profile-image>
+          </div>
+          <div class="profile-about">
+            <div class="profile-greetings"><h1>Foo Bar</h1></div>
+            <div class="profile-about-more">
+              <p class="no-expert">У этого профиля не указано, по каким темам стоит обращаться к нему.</p>
+            </div>
+          </div>
+        </div>
+        <footer class="profile-controls">
+          <button class="form-text-button form-button-text-remove">
+            <i class="fa fa-fw fa-remove"></i>
+            <span>Удалить профиль</span>
+          </button>
+          <button class="form-text-button">
+            <i class="fa fa-fw fa-exchange"></i>
+            <span>Перейти в профиль</span>
+          </button>
+        </footer>
+      </section>
+    </li>
+    <li>
+      <section class="profile-control">
+        <div class="profile-info">
+          <div class="profile-image-container">
+            <cass-profile-image border="circle" url="/dist/assets/profile-demo.png"></cass-profile-image>
+          </div>
+          <div class="profile-about">
+            <div class="profile-greetings"><h1>Foo Bar</h1></div>
+            <div class="profile-about-more">
+              <span class="title">Эксперт в:</span>
+              <ul class="expert-in-list">
+                <li><div class="expert-in">Концерты</div></li>
+                <li><div class="expert-in">Кино</div></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <footer class="profile-controls">
+          <button class="form-text-button form-button-text-remove">
+            <i class="fa fa-fw fa-remove"></i>
+            <span>Удалить профиль</span>
+          </button>
+          <button class="form-text-button">
+            <i class="fa fa-fw fa-exchange"></i>
+            <span>Перейти в профиль</span>
+          </button>
+        </footer>
+      </section>
+    </li>
+    <li>
+      <section class="profile-control">
+        <div class="profile-info">
+          <div class="profile-image-container">
+            <cass-profile-image border="circle" url="/dist/assets/profile-demo.png"></cass-profile-image>
+          </div>
+          <div class="profile-about">
+            <div class="profile-greetings"><h1>Foo Bar</h1></div>
+            <div class="profile-about-more">
+              <span class="title">Эксперт в:</span>
+              <ul class="expert-in-list">
+                <li><div class="expert-in">Компьютерные игры</div></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <footer class="profile-controls">
+          <button class="form-text-button form-button-text-remove">
+            <i class="fa fa-fw fa-remove"></i>
+            <span>Удалить профиль</span>
+          </button>
+          <button class="form-text-button">
+            <i class="fa fa-fw fa-exchange"></i>
+            <span>Перейти в профиль</span>
+          </button>
+        </footer>
+      </section>
+    </li>
+    <li>
+      <section class="profile-control">
+        <div class="profile-info">
+          <div class="profile-image-container">
+            <cass-profile-image border="circle" url="/dist/assets/profile-demo.png"></cass-profile-image>
+          </div>
+          <div class="profile-about">
+            <div class="profile-greetings"><h1>Foo Bar</h1></div>
+            <div class="profile-about-more">
+              <span class="title">Эксперт в:</span>
+              <ul class="expert-in-list">
+                <li><div class="expert-in">Компьютерные игры</div></li>
+                <li><div class="expert-in">Концерты</div></li>
+                <li><div class="expert-in">Хирургия</div></li>
+                <li><div class="expert-in">Кино</div></li>
+                <li><div class="expert-in">Концерты</div></li>
+                <li><div class="expert-in">Кино</div></li>
+                <li><div class="expert-in">Хирургия</div></li>
+                <li><div class="expert-in">Кино</div></li>
+                <li><div class="expert-in">Концерты</div></li>
+                <li><div class="expert-in">Хирургия</div></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <footer class="profile-controls">
+          <button class="form-text-button form-button-text-remove">
+            <i class="fa fa-fw fa-remove"></i>
+            <span>Удалить профиль</span>
+          </button>
+          <button class="form-text-button">
+            <i class="fa fa-fw fa-exchange"></i>
+            <span>Перейти в профиль</span>
+          </button>
+        </footer>
+      </section>
+    </li>
+  </ul>
+  <footer class="add-profile">
+    <div class="buttons">
+      <button class="form-button form-button-green">
+        <i class="fa fa-fw fa-plus"></i>
+        <span>Создать новый профиль</span>
+      </button>
+    </div>
+    <div class="info">
+      <p>Вы можете создать не более 5 профилей на этом аккаунте</p>
+    </div>
+  </footer>
+</div>

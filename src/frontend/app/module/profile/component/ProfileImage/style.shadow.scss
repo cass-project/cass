@@ -1,5 +1,11 @@
 div.profile-image {
   img {
+    display: block;
     width: 100%;
+  }
+
+  div.profile-image-border-circle {
+    border-radius: 99999px;
+    overflow: hidden;
   }
 }
