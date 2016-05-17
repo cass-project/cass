@@ -19,5 +19,11 @@ export class ThemeService
         return this.http.get(url);
     }
 
+    getThemeById(themeId){
+        let url = `backend/api/theme/${themeId}/get`;
+
+        return this.http.get(url);
+    }
+
 }
 
