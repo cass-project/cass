@@ -4,7 +4,7 @@ import {Component, ViewChild, ElementRef, Injectable} from "angular2/core";
 import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {AvatarCropperService} from "./service";
 import {AuthService} from "../../../auth/service/AuthService";
-import {ProfileSettingsImage} from "../../../profile/component/ProfileSettings/ProfileSettingsImage/index";
+import {ProfileRESTService} from "../../../profile/component/ProfileService/ProfileRESTService";;
 
 require('./style.head.scss');
 
@@ -12,7 +12,8 @@ require('./style.head.scss');
     template: require('./template.html'),
     styles: [require('./style.shadow.scss')],
     providers: [
-        FileReader
+        FileReader,
+        ProfileRESTService
     ],
     selector: 'avatar-cropper',
     directives: [
@@ -23,8 +24,8 @@ require('./style.head.scss');
 @Injectable()
 export class AvatarCropper {
     constructor(private fileReader: FileReader,
-                public profileSettingsImage: ProfileSettingsImage,
                 public avatarCropperService: AvatarCropperService,
+                public profileRESTService: ProfileRESTService,
                 public router: Router
     ){}
 
@@ -32,40 +33,21 @@ export class AvatarCropper {
 
     public showProgressBar = false;
     public cropper;
-    private imgPath;
-    /*private file: Blob;*/
 
 
-    /*ngOnInit(): void {
-        this.fileReader = new FileReader();
-        this.fileReader.onload = () => {
-            this.initCropper();
-        };
-    }
-
-    private onFileChange(event) : void {
-        this.file = event.target.files[0];
-        this.imgPath = URL.createObjectURL(event.target.files[0]);
-        this.fileReader.readAsDataURL(this.file);
-    }*/
-
-    ngOnInit(): void {
+    ngOnInit() {
         this.fileReader = new FileReader();
         this.fileReader.onload = () => {
             this.initCropper();
         };
         this.fileReader.readAsDataURL(this.avatarCropperService.file);
-        this.imgPath = URL.createObjectURL(this.avatarCropperService.file);
+        this.avatarCropperService.imgPath = URL.createObjectURL(this.avatarCropperService.file);
     }
 
     private initCropper() : void {
         this.cropImage.nativeElement.src = this.fileReader.result;
         if (this.cropper) this.cropper.destroy();
 
-        /**
-         * @see https://www.npmjs.com/package/cropperjs
-         * @see http://fengyuanchen.github.io/cropperjs/
-         */
         this.cropper = new Cropper(this.cropImage.nativeElement, {
             aspectRatio : 1 /* 1/1 */,
             viewMode    : 3 /* VM3 */,
@@ -95,7 +77,7 @@ export class AvatarCropper {
 
     private submit(){
         this.showProgressBar = true;
-        let coord = {
+        let crop = {
             start: {
                 x: this.cropper.getData(true).x,
                 y: this.cropper.getData(true).y
@@ -105,7 +87,10 @@ export class AvatarCropper {
                 y: this.cropper.getData(true).y + this.cropper.getData(true).height
             }
         };
-        return coord;
+        this.avatarCropperService.crop = crop;
+        if(this.avatarCropperService.profileAvatar){
+            this.profileRESTService.avatarUpload();
+        }
     }
 
     /*private getPreviewImageData(data: string){
