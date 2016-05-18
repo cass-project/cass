@@ -4,64 +4,48 @@
 Расположение файлов
 -------------------
 
-1. Компонент/Сервис занимает один файл:
+1. Кейс 1: Компонент или сервис занимает один файл:
 
 ```
     module/
         square/
             service/
-                SquareRESTService.js
+                SquareRESTService.ts
 ```
 
-2. Компонент/Сервис состоит из нескольких файлов:
+2. Кейс 2: Компонент или сервис состоит из нескольких файлов:
 
 ```
     module/
         square/
             /component
                 /SquareCalculate
-                    component.ts <<< Исходный код
+                    index.ts <<< Исходный код
                     template.html
                     style.shadow.scsss
 ```
 
-3. Компонент/Сервис занимает один файл и содержит дочерние компоненты и сервисы:
+3. Кейс 3: Компонент/Сервис занимает один файл и содержит дочерние компоненты и сервисы:
 
 ```
     module/
         square/
             /component
                 component/
+                    Tab/
+                        SquareSizeTab/
+                            index.ts
+                            template.html
+                            style.shadow.scss
+                        SquareColorTab/
+                            index.ts
+                            template.html
+                            style.shadow.scss
                     SquareOptions
-                        component.ts
+                        index.ts
+                        service.ts <<< !
                         template.html
                         style.shadow.scss
-                        global.head.css
-                    SquareForm.ts
-                service/
-                    SquareRESTService.ts
-                SquareCalculateComponent.ts
-```
-
-3. Компонент/Сервис состоит из нескольких файлов и содержит дочерние компоненты и сервисы:
-
-```
-    module/
-        square/
-            /component
-                component/
-                    SquareOptions
-                        component.ts
-                        template.html
-                        style.shadow.scss
-                        global.head.css
-                    SquareForm.ts
-                service/
-                    SquareRESTService.ts
-                SquareCalculate/
-                    component.ts
-                    template.html
-                    style.shadow.scss
 ```
 
 4. Исключение: модуль
@@ -74,6 +58,17 @@
             template.html
             style.shadow.scss
 ```
+
+Роуты
+-----
+
+- Компоненты, которые являются компонентами для роутера (т.е. используются в @RouteConfig), должны иметь постфикс `*Route`
+- Компоненты-роуты находятся в отдельной директории `{MODULE_NAME}/route`
+
+
+Постфикс Component запрещен
+---------------------------
+- Его использование избыточно
 
 Селекторы
 ---------
@@ -129,6 +124,8 @@ A. ~/www/app/asssets/bundles/main.js -> mark as plain text
 
 Обязательно к прочтению:
 ------------------------
+
+- (https://angular.io/docs/ts/latest/guide/)[]
 
 - HTTP в Angular 2: (https://auth0.com/blog/2015/10/15/angular-2-series-part-3-using-http/)
 
