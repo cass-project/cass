@@ -1,16 +1,39 @@
 import {Component} from "angular2/core";
+import {ProfileService} from "../../../ProfileService/ProfileService";
+import {ProfileRESTService} from "../../../ProfileService/ProfileRESTService";
+import {AvatarCropperService} from "../../../../../util/component/AvatarCropper/service";
+import {ProfileModalModel} from "../../model";
+
 
 @Component({
     selector: 'cass-profile-modal-tab-account',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
+    ],
+    providers: [
+        ProfileService,
+        ProfileRESTService,
+        AvatarCropperService,
     ]
 })
 export class AccountTab
 {
+    constructor(public profileService: ProfileService,
+                public profileRESTService: ProfileRESTService,
+                public model: ProfileModalModel
+    ){}
+
+
+
     requestButtonDisabled: boolean =false;
     flagDeleteAccount: boolean = false;
+
+
+    deleteAccount(){
+        this.profileRESTService.requestAccountDelete().subscribe();
+        this.flagDeleteAccount = false;
+    }
 
     requestDeleteAccount() {
         this.requestButtonDisabled = true;
@@ -22,6 +45,8 @@ export class AccountTab
     }
 
     cancelDeleteAccountRequest() {
+        //ToDo: I think its temporary;
+        this.profileRESTService.requestAccountDeleteCancel().subscribe();
         this.flagDeleteAccount = false;
     }
 
