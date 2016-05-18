@@ -1,11 +1,10 @@
 import {Injectable} from 'angular2/core';
-import {Http, URLSearchParams} from 'angular2/http';
 import {frontline, FrontlineService} from "../../frontline/service";
 
 @Injectable()
 export class ThemeService
 {
-    constructor(public http: Http, public frontlineService: FrontlineService){}
+    constructor(public frontlineService: FrontlineService){}
 
     themes;
 
@@ -35,13 +34,19 @@ export class ThemeService
     getThemeTreeList(){
         this.sessionTmp = this.frontlineService.session;
         this.themesTree[0].themes = this.sessionTmp.themes;
-        this.themesTree[1].themes = this.themesTree[0].themes[0].children;
+        if(this.themesTree[0].themes[0].children) {
+            this.themesTree[1].themes = this.themesTree[0].themes[0].children;
+        }
     }
 
-    getThemeById(themeId){
-        let url = `backend/api/theme/${themeId}/get`;
 
-        return this.http.get(url);
+    /*Usage: this.themeService.getThemeById(this.selectedTheme.id);*/
+    getThemeById(themeId){
+        for(let i of this.themes){
+            if(i.id == themeId){
+                return i;
+            }
+        }
     }
 
 }
