@@ -1,4 +1,3 @@
-
 var xmlRequest = new XMLHttpRequest();
 
 import {Injectable} from 'angular2/core';
@@ -9,11 +8,32 @@ import {AvatarCropperService} from "../../../util/component/AvatarCropper/servic
 @Injectable()
 export class ProfileRESTService
 {
-    constructor(public http: Http, public avatarCropperService: AvatarCropperService){}
+    constructor(public http: Http, private avatarCropperService: AvatarCropperService){}
 
     public tryNumber: number = 0;
     public progressBar: number;
+    public changePasswordStn = {old_password: '', new_password: '', repeat_password: ''};
 
+    requestAccountDeleteCancel(){
+        let url = `/backend/api/protected/account/cancel-request-delete`;
+
+        return this.http.delete(url);
+    }
+
+    requestAccountDelete(){
+        let url = `/backend/api/protected/account/request-delete`;
+
+        return this.http.put(url, JSON.stringify(''));
+    }
+
+    changePassword(){
+        let url = `/backend/api/protected/account/change-password`;
+
+        return this.http.post(url, JSON.stringify({
+            old_password: this.changePasswordStn.old_password,
+            new_password: this.changePasswordStn.new_password
+        }));
+    }
 
     avatarUpload() {
         let crop = this.avatarCropperService.crop;
