@@ -6,7 +6,6 @@ use Application\Util\Definitions\Point;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
-use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Theme\Entity\Theme;
 use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 use Zend\Diactoros\UploadedFile;
@@ -14,7 +13,7 @@ use Zend\Diactoros\UploadedFile;
 /**
  * @backupGlobals disabled
  */
-class CommunityAPITests extends MiddlewareTestCase
+class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
 {
     protected function getFixtures(): array
     {
@@ -151,33 +150,5 @@ class CommunityAPITests extends MiddlewareTestCase
             ->expectJSONContentType()
             ->expectStatusCode(422)
             ->expectJSONError();
-    }
-
-    private function requestCreateCommunity(array $json): RESTRequest
-    {
-        return $this->request('PUT', '/protected/community/create')
-            ->setParameters($json);
-    }
-
-    private function requestEditCommunity(int $communityId, array $json)
-    {
-        return $this->request('POST', sprintf('/protected/community/%d/edit', $communityId))
-            ->setParameters($json);
-    }
-
-    private function requestUploadImage(int $communityId, Point $start, Point $end): RESTRequest
-    {
-        $uri = "/protected/community/{$communityId}/image-upload/crop-start/{$start->getX()}/{$start->getY()}/crop-end/{$end->getX()}/{$end->getY()}/";
-        $fileName = __DIR__ . '/resources/grid-example.png';
-
-        return $this->request('POST', $uri)
-            ->setUploadedFiles([
-                'file' => new UploadedFile($fileName, filesize($fileName), 0)
-            ]);
-    }
-
-    private function requestGetCommunityById(int $communityId): RESTRequest
-    {
-        return $this->request('GET', sprintf('/community/%d/get', $communityId));
     }
 }

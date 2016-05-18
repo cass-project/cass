@@ -1,9 +1,9 @@
-"/community/{communityId}/get":
-  get:
+"/protected/community/{communityId}/edit":
+  post:
     tags:
       - community
     description:
-      Возвращает данные о коммунити
+      Создать коммунити
     security:
       - x_api_key: []
     parameters:
@@ -12,7 +12,19 @@
         required: true
         type: number:
         description: ID коммунити
+      - name: body
+        in: body
+        required: true
+        description:
+        schema:
+          $ref: '#/definitions/Community_Request_EditCommunity'
     responses:
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        schema:
+          $ref: '#/responses/NotFound'
       200:
         schema:
           required:

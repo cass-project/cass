@@ -1,0 +1,33 @@
+"/protected/community/{communityId}/feature/{feature}/activate":
+  put:
+    tags:
+      - community_features
+    description:
+      Подключает, активирует указанную фичу
+    security:
+      - x_api_key: []
+    parameters:
+      - in: path
+        name: communityId
+        required: true
+        type: number:
+        description: ID коммунити
+      - in: path
+        name: feature
+        type: string
+        required: true
+        description: Фича (строковой код)
+    responses:
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        schema:
+          $ref: '#/responses/NotFound'
+      409:
+        description: Данная фича уже активирована
+        schema:
+          $ref: '#/responses/error'
+      200:
+        schema:
+          $ref: '#/responses/success'

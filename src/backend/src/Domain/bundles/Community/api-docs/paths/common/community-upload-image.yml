@@ -40,7 +40,11 @@
         allowMultiple: false
     responses:
       403:
-        $ref: '#/responses/Unauthorized'
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        schema:
+          $ref: '#/responses/NotFound'
       422:
         description:
           Ошибка обработки входного файла (слишком большой, неправильный аспект ратио и.т.д..)

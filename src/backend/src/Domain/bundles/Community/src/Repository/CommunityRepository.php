@@ -1,9 +1,9 @@
 <?php
 namespace Domain\Community\Repository;
 
-use Application\Exception\EntityNotFoundException;
 use Domain\Community\Entity\Community;
 use Doctrine\ORM\EntityRepository;
+use Domain\Community\Exception\CommunityNotFoundException;
 
 class CommunityRepository extends EntityRepository
 {
@@ -24,7 +24,7 @@ class CommunityRepository extends EntityRepository
         $entity = $this->find($communityId);
 
         if($entity === null) {
-            throw new EntityNotFoundException(sprintf('Community with ID `%s` not found', $entity));
+            throw new CommunityNotFoundException(sprintf('Community with ID `%s` not found', $entity));
         }
 
         return $entity;

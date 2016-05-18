@@ -7,6 +7,7 @@ Community_Entity_Community:
     - theme_id
     - has_image
     - collections
+    - features
   properties:
     id:
       type: number
@@ -32,3 +33,8 @@ Community_Entity_Community:
       type: array
       items:
         $ref: '#/definitions/Collection_Traits_CollectionTree'
+    features:
+      type: array
+      items:
+        type: string
+        description: Фича (строковой код)

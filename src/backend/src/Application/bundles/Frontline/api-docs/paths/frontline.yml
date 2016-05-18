@@ -11,10 +11,40 @@
           properties:
             account:
               $ref: "#/definitions/Account_Entity_Account"
+            config.account:
+              type: object
+              schema:
+                required:
+                  - delete_account_request_days
+                properties:
+                  delete_account_request_days:
+                    type: number
+                    description: Количество дней, после которых удовлетворяется запрос на удаление аккаунта
             profiles:
               type: array
               items:
                 $ref: "#/definitions/Profile_Entity_Profile"
+            config.profile:
+              type: object
+              schema:
+                required:
+                  - max_profiles
+                properties:
+                  max_profiles:
+                    type: number
+                    description: Максимальное количество профилей, которые могут быть созданы на этом аккаунте.
             delete_account_request_days:
               type: number
               description: Количество дней, по истечению которых удовлетворяется запрос на удаление аккаунта
+          config.community:
+            type: object
+            schema:
+              required:
+                - features_list
+              properties:
+                features:
+                  type: array
+                  description: Список доступных в проекте фич
+                  items:
+                    type: string
+                    description: Фича (строковой код)
