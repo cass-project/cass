@@ -7,6 +7,9 @@ import {InterestsTab} from "./Tab/Interests/index";
 import {ProfilesTab} from "./Tab/Profiles/index";
 import {ImageTab} from "./Tab/Image/index";
 import {ProfileComponentService} from "../../service";
+import {ProfileRESTService} from "../ProfileService/ProfileRESTService";
+import {AvatarCropperService} from "../../../util/component/AvatarCropper/service";
+import {ProfileService} from "../ProfileService/ProfileService";
 
 enum ProfileModalTab
 {
@@ -29,22 +32,33 @@ enum ProfileModalTab
         PersonalTab,
         ImageTab,
         InterestsTab,
-        ProfilesTab
+        ProfilesTab,
+
     ],
     providers: [
-        ProfileModalModel,  // В эту модель сохраняются изменения, сделанные пользователем.// Этот коммент удалить.
+        ProfileModalModel, // В эту модель сохраняются изменения, сделанные пользователем.// Этот коммент удалить.
+        ProfileRESTService,
+        ProfileService,
+        AvatarCropperService
     ]
 })
+
 export class ProfileModal
 {
     tabs: TabControls = new TabControls();
 
-    constructor(public model: ProfileModalModel, private modals: ProfileComponentService) {}
-    
+    constructor(public model: ProfileModalModel, private modals: ProfileComponentService){}
+
+    checkChanges(){
+        console.log(this.model.needToSave);
+        return this.model.needToSave;
+    }
+
     close() {
         this.modals.modals.settings.close();
     }
 }
+
 
 class TabControls
 {
