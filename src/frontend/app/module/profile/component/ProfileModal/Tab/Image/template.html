@@ -1,5 +1,5 @@
 <div class="profile-modal-tab-image">
-  <input type="file" id="profileModalImageFile">
+  <input type="file" id="profileModalImageFile" (change)="onFileChange($event)">
 
   <div class="form stage-view" *ngIf="stage.isOn('View')">
     <div class="profile-image-form">
@@ -33,7 +33,7 @@
     </div>
   </div>
   <div class="form stage-crop" *ngIf="stage.isOn('Crop')">
-    <!-- image cropper -->
+    <avatar-cropper></avatar-cropper>
   </div>
   <div class="form stage-processing" *ngIf="stage.isOn('Processing')">
     <div class="box">
