@@ -3,7 +3,7 @@
     <h1>Аккаунт</h1>
   </header>
   <div class="account-email">
-    <input type="email" disabled value="demo@gmail.com" class="form-input account-email-input">
+    <input type="email" disabled [value]="profileService.getAccountEmail()" class="form-input account-email-input">
     <ul class="email-info">
       <li>К этому почтовому ящику привязан ваш аккаунт.</li>
       <li>Вы можете сделать запрос на то, чтобы <a href="javascript:void(0);">привязать аккаунт к другому почтовому ящику</a>.</li>
@@ -20,19 +20,19 @@
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Текущий пароль</span>
-        <input class="form-input" type="password" placeholder="Пароль, который вы используете сейчас">
+        <input class="form-input" [(ngModel)]="profileRESTService.changePasswordStn.old_password" type="password" placeholder="Пароль, который вы используете сейчас">
       </label>
     </div>
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Новый пароль</span>
-        <input class="form-input" type="password" placeholder="*********">
+        <input class="form-input" (change)="model.onChange($event)" [(ngModel)]="profileRESTService.changePasswordStn.new_password" type="password" placeholder="*********">
       </label>
     </div>
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Повторите пароль</span>
-        <input class="form-input" type="password" placeholder="Введите то же самое – мы защищаем вас от ошибок!">
+        <input class="form-input" (change)="model.onChange($event)" [(ngModel)]="profileRESTService.changePasswordStn.repeat_password" type="password" placeholder="Введите то же самое – мы защищаем вас от ошибок!">
       </label>
     </div>
   </div>
@@ -45,7 +45,7 @@
       <span>Я хочу удалить этот аккаунт</span>
     </button>
     <div *ngIf="isDeleteAccountRequested()">
-      <button class="form-button form-button-red">
+      <button class="form-button form-button-red" (click)="deleteAccount()">
         <i class="fa fa-fw fa-trash"></i>
         <span>Удалить мой аккаунт через 7 дней</span>
       </button>
