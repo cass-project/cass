@@ -4,7 +4,7 @@ import {Component, ViewChild, ElementRef, Injectable} from "angular2/core";
 import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {AvatarCropperService} from "./service";
 import {AuthService} from "../../../auth/service/AuthService";
-import {ProfileRESTService} from "../../../profile/component/ProfileService/ProfileRESTService";;
+import {ProfileRESTService} from "../../../profile/component/ProfileService/ProfileRESTService";
 
 require('./style.head.scss');
 
