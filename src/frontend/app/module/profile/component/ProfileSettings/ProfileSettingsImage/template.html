@@ -7,12 +7,12 @@
         <div class="form-button form-button-primary">Выберите файл</div>
       </label>
     </p>
-    <input type="file" id="profileSettingsImageUpload" *ngModel="avatarCropperService.file">
+    <input type="file" id="profileSettingsImageUpload" (change)="onFileChange($event)">
   </div>
 
   <!-- stage 2: crop image -->
-  <div class="crop-image-area">
-    <!-- Просто помести сюда кроппер. Я сам сверстаю потом. -->
+  <div class="crop-image-area" *ngIf="isAvatarCropperVisible()">
+    <!--<avatar-cropper></avatar-cropper>-->
   </div>
 
   <!-- stage 3: uploading image -->
