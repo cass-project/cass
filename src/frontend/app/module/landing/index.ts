@@ -13,4 +13,9 @@ import {ThemeSelect} from "../theme/component/ThemeSelect/index";
 })
 export class LandingComponent {
     private devShowProfileSetup = false;
+    private themeIds = [16,17,18,19];
+
+    updateThemeIds($event) {
+        console.log('updateThemeIds', $event);
+    }
 }

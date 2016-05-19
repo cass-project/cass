@@ -1,5 +1,6 @@
 import {AccountEntity} from "../account/entity/Account";
 import {ProfileEntity} from "../profile/entity/Profile";
+import {ThemeTree} from "../theme/entity/Theme";
 
 export class FrontlineService
 {
@@ -13,6 +14,7 @@ export interface FrontlineSessionData
         account: AccountEntity,
         profiles: Array<ProfileEntity>,
     },
+    themes: ThemeTree[];
 }
 
 

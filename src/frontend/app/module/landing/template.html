@@ -10,6 +10,6 @@
   </div>
   <h1>Theme Select</h1>
   <div style="margin: 30px; padding: 20px; background-color: white; width: 550px" class="form">
-    <cass-theme-select multiple="true"></cass-theme-select>
+    <cass-theme-select [value]="themeIds" (change)="updateThemeIds($event)"></cass-theme-select>
   </div>
 </article>

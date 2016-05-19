@@ -1,138 +1,170 @@
-import {Component, EventEmitter,Output} from "angular2/core";
+import {Component, EventEmitter, Output, Input, ViewChild, ElementRef} from "angular2/core";
 import {ThemeService} from "../../service/ThemeService";
 import {Injectable} from 'angular2/core';
+import {ControlValueAccessor} from "angular2/common";
+import {ThemeTree} from "../../entity/Theme";
 
 
 @Component({
     selector: 'cass-theme-select',
     template: require('./template.html'),
-    'providers': [
+    providers: [
         ThemeService
+    ],
+    directives: [
     ],
     styles: [
         require('./style.shadow.scss')
     ]
 })
 @Injectable()
+
 export class ThemeSelect
 {
-    constructor(private themeService: ThemeService){console.log('test')}
+    private browser: ThemeSelectBrowser = new ThemeSelectBrowser(this, this.service);
+    private search: ThemeSelectSearch = new ThemeSelectSearch(this, this.service);
 
+    @ViewChild('searchInput') searchInput: ElementRef;
+    @ViewChild('scrolling') scrolling: ElementRef;
 
-    selectedTheme;
-    pickedInterestingInThemes = [];
-    pickedExpertInThemes = [];
-
-    inInterestingZone: boolean = true; //Usage: Так как мы стартуем во вкладке "Интересы" данная бул переменная будет true; ToDO: Обсудить с Димой.
-    inExpertZone: boolean = false;
-
-
-    searchStr: string = '';
-    browserVisible: boolean = false;
-
-
-    ngOnInit(){
-        this.themeService.getThemeTreeList();
-        this.themeService.getThemeListAll();
+    @Input('value') value = [];
+    @Input('multiple') multiple = "true";
+    @Output('change') change = new EventEmitter<Array<number>>();
+    
+    constructor(private service: ThemeService) {
+        this.browser.scrolling = this.scrolling;
     }
 
-
-    browserSwitcher(){
-        this.browserVisible = !this.browserVisible;
+    isMultiple(): boolean {
+        return this.multiple === "1" || this.multiple === "true";
     }
 
-    showSearchListReturn() {
-        if(this.searchStr.length){
-            return (this.search().length)
+    has(themeId: number) {
+        return ~this.value.indexOf(themeId);
+    }
+
+    exclude(themeId: number) {
+        let index = this.value.indexOf(themeId);
+
+        if(~index) {
+            this.value.splice(index, 1);
+            this.change.emit(this.value);
         }
     }
 
-
-    deletePickTheme(value){
-        if(this.inInterestingZone) {
-            let deleteThis = this.pickedInterestingInThemes.indexOf(value);
-            this.pickedInterestingInThemes.splice(deleteThis, 1);
-        } else if(this.inExpertZone){
-            let deleteThis = this.pickedExpertInThemes.indexOf(value);
-            this.pickedExpertInThemes.splice(deleteThis, 1);
-        }
-    }
-
-    pickTheme(value){
-        if(this.inInterestingZone) {
-            let canIAdd = true;
-            if (this.pickedInterestingInThemes.length > 0) {
-                for (let i = 0; i < this.pickedInterestingInThemes.length; i++) {
-                    if (this.pickedInterestingInThemes[i] === value) {
-                        canIAdd = false; //ToDo: Добавить обработчик/ошибку о том что данная тематика уже выбрана.
-                    }
-                }
-            }
-            if (canIAdd) {
-                this.pickedInterestingInThemes.push(value);
-                this.searchStr = '';
-            }
-        } else if(this.inExpertZone){
-            let canIAdd = true;
-            if (this.pickedExpertInThemes.length > 0) {
-                for (let i = 0; i < this.pickedExpertInThemes.length; i++) {
-                    if (this.pickedExpertInThemes[i] === value) {
-                        canIAdd = false;
-                    }
-                }
-            }
-            if (canIAdd) {
-                this.pickedExpertInThemes.push(value);
-                this.searchStr = '';
+    include(themeId: number) {
+        if(!~this.value.indexOf(themeId)) {
+            if(this.isMultiple()) {
+                this.value.push(themeId);
+                this.change.emit(this.value);
+            }else{
+                this.value = [themeId];
+                this.change.emit(this.value);
             }
         }
-    }
-
-
-    checkActiveTheme(theme){
-        if(this.selectedTheme) {
-            return (theme === this.selectedTheme ||
-                    theme.id === this.themeService.themesTree[2].highlightActive ||
-                    theme.id === this.themeService.themesTree[3].highlightActive ||
-                    theme.id === this.themeService.themesTree[4].highlightActive);
-        }
-    }
-
-    selectTheme(level, theme){
-        this.selectedTheme = theme;
-
-
-        if(level === 1){
-            this.themeService.themesTree[2].themes = this.getChildren(); this.themeService.themesTree[2].highlightActive = theme.id;
-            this.themeService.themesTree[3].themes = []; this.themeService.themesTree[3].highlightActive = 0;
-            this.themeService.themesTree[4].themes = []; this.themeService.themesTree[4].highlightActive = 0;
-        } else if(level === 2){
-            this.themeService.themesTree[3].themes = this.getChildren(); this.themeService.themesTree[3].highlightActive = theme.id;
-            this.themeService.themesTree[4].themes = []; this.themeService.themesTree[4].highlightActive = 0;
-        } else if(level === 3){
-            this.themeService.themesTree[4].themes = this.getChildren(); this.themeService.themesTree[4].highlightActive = theme.id;
-        }
-    }
-
-    getChildren(){
-        if(this.selectedTheme) {
-            if (this.selectedTheme.children.length > 0){
-                return this.selectedTheme.children;
-            }
-        }
-    }
-
-
-    search(){
-        let results = [];
-
-        for(let i = 0; i < this.themeService.themes.length; i++){
-            if(this.themeService.themes[i].title.toLowerCase().indexOf(this.searchStr.toLowerCase())!=-1){
-                results.push(this.themeService.themes[i])
-            }
-        }
-
-        return results
     }
 }
 
+class ThemeSelectSearch
+{
+    static MAX_RESULTS = 100;
+
+    enabled: boolean = false;
+    results: ThemeTree[] = [];
+    lastInput: string;
+
+    constructor(private themeSelect: ThemeSelect, private service: ThemeService) {}
+    
+    isResultsAvailable(): boolean {
+        return this.enabled && (this.results.length > 0);
+    }
+
+    update(input: string) {
+        this.lastInput = input;
+
+        this.results = this.fetch(input).filter((theme: ThemeTree) => {
+            return !this.themeSelect.has(theme.id);
+        });
+    }
+
+    enable() {
+        this.enabled = true;
+    }
+
+    disable() {
+        this.enabled = false;
+    }
+
+    fetch(input: string) {
+        var results = [];
+
+        if(input.replace(/\s/g, '').length > 0) {
+            this.service.each((theme: ThemeTree) => {
+                if(results.length <= ThemeSelectSearch.MAX_RESULTS) {
+                    if(~theme.title.indexOf(input) && !this.themeSelect.has(theme.id)) {
+                        results.push(theme);
+                    }
+                }
+            });
+        }
+
+        return results;
+    }
+
+    include(theme: ThemeTree) {
+        this.themeSelect.include(theme.id);
+        this.themeSelect.searchInput.nativeElement.focus();
+        this.update(this.lastInput);
+    }
+}
+
+class ThemeSelectBrowser
+{
+    public visible: boolean = false;
+    public columns: ThemeTree[] = [];
+    public scrolling: ElementRef;
+
+    constructor(private themeSelect: ThemeSelect, private service: ThemeService) {
+        this.columns.push(service.getRoot());
+    }
+
+    isActive(compare: ThemeTree): boolean {
+        for(let tree of this.columns) {
+            if(tree.id === compare.id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    setColumn(level: number, tree: ThemeTree) {
+        for(let n = this.columns.length; n > level; n--) {
+            this.columns.pop();
+        }
+
+        this.columns.push(tree);
+
+        if(level === (this.columns.length - 1)) {
+            this.themeSelect.scrolling.nativeElement.scrollLeft = 9999;
+        }
+    }
+
+    show() {
+        this.visible = true;
+    }
+
+    hide() {
+        this.visible = false;
+    }
+
+    toggle() {
+        this.visible = !this.visible;
+    }
+}
+
+interface ThemeSelectBrowserColumn
+{
+    tree: ThemeTree;
+    next?: ThemeSelectBrowserColumn;
+}

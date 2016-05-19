@@ -1,53 +1,58 @@
 import {Injectable} from 'angular2/core';
-import {frontline, FrontlineService} from "../../frontline/service";
+
+import {FrontlineService} from "../../frontline/service";
+import {ThemeTree} from "../entity/Theme";
 
 @Injectable()
 export class ThemeService
 {
-    constructor(public frontlineService: FrontlineService){}
+    root: ThemeTree;
+    themes: ThemeTree[];
+    themesMap = {};
+    
+    constructor(public frontlineService: FrontlineService) {
+        this.themes = frontlineService.session.themes;
 
-    themes;
+        var convertTreeToMap = (themes: Array<ThemeTree>) => {
+            for(let tree of themes) {
+                this.themesMap[tree.id.toString()] = tree;
 
-    themesTree = [
-        {level: 0, themes: [], highlightActive: 0},
-        {level: 1, themes: [], highlightActive: 0},
-        {level: 2, themes: [], highlightActive: 0},
-        {level: 3, themes: [], highlightActive: 0},
-        {level: 4, themes: [], highlightActive: 0}];
-    sessionTmp;
+                if(tree.children.length) {
+                    convertTreeToMap(tree.children);
+                }
+            }
+        };
 
-
-    treeToArray(tree, array) {
-        for (let o of tree) {
-            array.push(o);
-            this.treeToArray(o.children, array);
-        }
-        array.push()
+        convertTreeToMap(this.themes);
     }
 
-    getThemeListAll(){
-        let array = [];
-        this.treeToArray(this.themesTree[1].themes, array);
-        this.themes = array;
-    }
-
-    getThemeTreeList(){
-        this.sessionTmp = this.frontlineService.session;
-        this.themesTree[0].themes = this.sessionTmp.themes;
-        if(this.themesTree[0].themes[0].children) {
-            this.themesTree[1].themes = this.themesTree[0].themes[0].children;
-        }
-    }
-
-
-    /*Usage: this.themeService.getThemeById(this.selectedTheme.id);*/
-    getThemeById(themeId){
-        for(let i of this.themes){
-            if(i.id == themeId){
-                return i;
+    each(fn: { (theme: ThemeTree) }) {
+        for(let n in this.themesMap) {
+            if(this.themesMap.hasOwnProperty(n)) {
+                fn(this.themesMap[n]);
             }
         }
     }
 
-}
+    findById(themeId: number): ThemeTree {
+        if(this.themesMap.hasOwnProperty(themeId.toString())) {
+            return this.themesMap[themeId.toString()];
+        }else{
+            throw new Error(`Theme '${themeId}' not found`);
+        }
+    }
 
+    getRoot(): ThemeTree {
+        return {
+            id: 0,
+            parent_id: 0,
+            position: 0,
+            title: 'ROOT',
+            children: this.themes
+        };
+    }
+
+    getAll(): Array<ThemeTree> {
+        return this.themes;
+    }
+}
