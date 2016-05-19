@@ -1,11 +1,19 @@
 <div>
+    <button class="form-button form-button-primary" (click)="service.modals.route.open()">Route.open();</button>
+    <button class="form-button form-button-primary" (click)="service.modals.join.open()">Join.open();</button>
+    <button class="form-button form-button-primary" (click)="service.modals.create.open()">Create.open();</button>
+
     <div *ngIf="service.modals.route.isOpened()">
-        <cass-community-route-modal (close)="service.modals.route.close()"></cass-community-route-modal>
+        <cass-community-route-modal
+            (close)="service.modals.route.close()"
+            (join)="service.modals.route.close(); service.modals.join.open()"
+            (create)="service.modals.route.close(); service.modals.create.open()"
+        ></cass-community-route-modal>
     </div>
     <div *ngIf="service.modals.join.isOpened()">
-        <cass-community-join-modal (close)="service.modals.route.close()"></cass-community-join-modal>
+        <cass-community-join-modal (close)="service.modals.join.close()"></cass-community-join-modal>
     </div>
     <div *ngIf="service.modals.create.isOpened()">
-        <cass-community-create-modal (close)="service.modals.route.close()"></cass-community-create-modal>
+        <cass-community-create-modal (close)="service.modals.create.close()"></cass-community-create-modal>
     </div>
 </div>

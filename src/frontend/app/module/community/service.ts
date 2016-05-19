@@ -13,7 +13,4 @@ export class CommunityComponentService
         join: new ModalControl(),
         create: new ModalControl()
     };
-
-    constructor() {
-    }
 }

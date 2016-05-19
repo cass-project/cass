@@ -59,6 +59,13 @@
   }
 }
 
+
+@each $color in $ALL_COLORS {
+  .form-button-#{$color} {
+    @include form-button-color($color);
+  }
+}
+
 .form-button-primary {
   @include form-button-color("blue")
 }

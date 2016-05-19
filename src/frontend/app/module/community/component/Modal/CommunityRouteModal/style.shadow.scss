@@ -1,3 +1,71 @@
-div.community-modal-route {
+@import "./../../../../../styles/globals";
 
+div.community-modal-route {
+  width: 630px;
+
+  div.choices {
+    display: flex;
+
+    div.choice {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 50%;
+      height: 400px;
+      text-align: center;
+      padding: 20px 10px;
+      background-color: white;
+      border: 1px solid material-color("grey", "300");
+      border-radius: 3px;
+      margin: 5px;
+      cursor: pointer;
+      transition: border-color 0.5s;
+
+      div.info {
+        h1 {
+          line-height: 180px;
+          font-size: 40px;
+          font-weight: 200;
+        }
+
+        p {
+          color: material-color("grey", "700");
+          padding: 15px;
+        }
+      }
+
+      &:hover {
+        background-color: material-color("grey", "50");
+        border-color: material-color("grey", "400");
+
+        .form-button-green {
+          background-color: material-color("green", "700");
+        }
+
+        .form-button-light-blue {
+          background-color: material-color("light-blue", "700");
+        }
+      }
+
+      button.form-button {
+        width: 270px;
+      }
+    }
+
+    div.choice-join {
+      div.info {
+        h1 {
+          color: material-color("light-blue", "500");
+        }
+      }
+    }
+
+    div.choice-create {
+      div.info {
+        h1 {
+          color: material-color("green", "500");
+        }
+      }
+    }
+  }
 }

@@ -16,10 +16,20 @@ import {ModalComponent} from "../../../../modal/component/index";
 export class CommunityRouteModal
 {
     @Output("close") close = new EventEmitter<CommunityRouteModal>();
+    @Output("create") create = new EventEmitter<CommunityRouteModal>();
+    @Output("join") join = new EventEmitter<CommunityRouteModal>();
 
     constructor(private service: CommunityRESTService) {}
 
-    close() {
+    closeModal() {
         this.close.emit(this);
+    }
+
+    goCreate() {
+        this.create.emit(this);
+    }
+
+    goJoin() {
+        this.join.emit(this);
     }
 }
