@@ -1,14 +1,12 @@
 import {Component, EventEmitter,Output} from "angular2/core";
 import {ThemeService} from "../../service/ThemeService";
 import {Injectable} from 'angular2/core';
+import {ProfileModalModel} from "../../../profile/component/ProfileModal/model";
 
 
 @Component({
     selector: 'cass-theme-select',
     template: require('./template.html'),
-    'providers': [
-        ThemeService
-    ],
     styles: [
         require('./style.shadow.scss')
     ]
@@ -16,20 +14,40 @@ import {Injectable} from 'angular2/core';
 @Injectable()
 export class ThemeSelect
 {
-    constructor(private themeService: ThemeService){console.log('test')}
+    constructor(private themeService: ThemeService, private model: ProfileModalModel){}
 
 
     selectedTheme;
-    pickedInterestingInThemes = [];
-    pickedExpertInThemes = [];
-
-    inInterestingZone: boolean = true; //Usage: Так как мы стартуем во вкладке "Интересы" данная бул переменная будет true; ToDO: Обсудить с Димой.
-    inExpertZone: boolean = false;
 
 
     searchStr: string = '';
     browserVisible: boolean = false;
 
+
+    returnPickedThemesTitle(){
+        let results = [];
+
+        for(let i = 0; i < this.themeService.themes.length; i++){
+            if(this.themeService.themes[i].id.indexOf(this.searchStr.toLowerCase())!=-1){
+                results.push(this.themeService.themes[i])
+            }
+        }
+
+        return results
+    }
+
+
+    returnZoneEx(){
+        if(this.themeService.inExpertZone){
+            return true;
+        } return false;
+    }
+
+    returnZoneInt(){
+        if(this.themeService.inInterestingZone){
+           return true;
+        } else return false;
+    }
 
     ngOnInit(){
         this.themeService.getThemeTreeList();
@@ -49,40 +67,41 @@ export class ThemeSelect
 
 
     deletePickTheme(value){
-        if(this.inInterestingZone) {
-            let deleteThis = this.pickedInterestingInThemes.indexOf(value);
-            this.pickedInterestingInThemes.splice(deleteThis, 1);
-        } else if(this.inExpertZone){
-            let deleteThis = this.pickedExpertInThemes.indexOf(value);
-            this.pickedExpertInThemes.splice(deleteThis, 1);
+        if(this.themeService.inInterestingZone) {
+            let deleteThis = this.themeService.pickedInterestingInThemes.indexOf(value);
+            this.themeService.pickedInterestingInThemes.splice(deleteThis, 1);
+        } else if(this.themeService.inExpertZone){
+            let deleteThis = this.themeService.pickedExpertInThemes.indexOf(value);
+            this.themeService.pickedExpertInThemes.splice(deleteThis, 1);
         }
     }
 
     pickTheme(value){
-        if(this.inInterestingZone) {
+        if(this.themeService.inInterestingZone) {
             let canIAdd = true;
-            if (this.pickedInterestingInThemes.length > 0) {
-                for (let i = 0; i < this.pickedInterestingInThemes.length; i++) {
-                    if (this.pickedInterestingInThemes[i] === value) {
+            if (this.themeService.pickedInterestingInThemes.length > 0) {
+                for (let i = 0; i < this.themeService.pickedInterestingInThemes.length; i++) {
+                    if (this.themeService.pickedInterestingInThemes[i] === value) {
                         canIAdd = false; //ToDo: Добавить обработчик/ошибку о том что данная тематика уже выбрана.
                     }
                 }
             }
             if (canIAdd) {
-                this.pickedInterestingInThemes.push(value);
+                this.themeService.pickedInterestingInThemes.push(value);
                 this.searchStr = '';
+
             }
-        } else if(this.inExpertZone){
+        } else if(this.themeService.inExpertZone){
             let canIAdd = true;
-            if (this.pickedExpertInThemes.length > 0) {
-                for (let i = 0; i < this.pickedExpertInThemes.length; i++) {
-                    if (this.pickedExpertInThemes[i] === value) {
+            if (this.themeService.pickedExpertInThemes.length > 0) {
+                for (let i = 0; i < this.themeService.pickedExpertInThemes.length; i++) {
+                    if (this.themeService.pickedExpertInThemes[i] === value) {
                         canIAdd = false;
                     }
                 }
             }
             if (canIAdd) {
-                this.pickedExpertInThemes.push(value);
+                this.themeService.pickedExpertInThemes.push(value);
                 this.searchStr = '';
             }
         }

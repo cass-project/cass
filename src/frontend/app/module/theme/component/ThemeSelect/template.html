@@ -21,7 +21,7 @@
           <!-- <mark>'ом отмечается сматченный текст -->
           <div class="auto-complete-scroll-box">
             <ul class="auto-complete-list" *ngFor="#theme of search()">
-              <li (click)="pickTheme(theme)">
+              <li (click)="pickTheme(theme.id)">
                 <span class="title">{{theme.title}}</span>
               </li>
             </ul>
@@ -32,28 +32,28 @@
             <!-- Тематики здесь выбираются по двойному щелчку -->
             <div class="column">
               <ul class="theme-list" *ngFor="#theme of themeService.themesTree[1].themes">
-                <li [class.active]="checkActiveTheme(theme)" (click)="selectTheme(1, theme)" (dblclick)="pickTheme(theme)">
+                <li [class.active]="checkActiveTheme(theme)" (click)="selectTheme(1, theme)" (dblclick)="pickTheme(theme.id)">
                   <span class="title">{{theme.title}}</span>
                 </li>
               </ul>
             </div>
             <div class="column">
               <ul class="theme-list" *ngFor="#theme of themeService.themesTree[2].themes">
-                <li [class.active]="checkActiveTheme(theme)" (click)="selectTheme(2, theme)" (dblclick)="pickTheme(theme)">
+                <li [class.active]="checkActiveTheme(theme)" (click)="selectTheme(2, theme)" (dblclick)="pickTheme(theme.id)">
                   <span class="title">{{theme.title}}</span>
                 </li>
               </ul>
             </div>
             <div class="column">
               <ul class="theme-list" *ngFor="#theme of themeService.themesTree[3].themes">
-                <li class="active" [class.active]="checkActiveTheme(theme)" (click)="selectTheme(3, theme)" (dblclick)="pickTheme(theme)">
+                <li class="active" [class.active]="checkActiveTheme(theme)" (click)="selectTheme(3, theme)" (dblclick)="pickTheme(theme.id)">
                   <span class="title">{{theme.title}}</span>
                 </li>
               </ul>
             </div>
             <div class="column">
               <ul class="theme-list" *ngFor="#theme of themeService.themesTree[4].themes">
-                <li class="active" [class.active]="checkActiveTheme(theme)" (click)="selectTheme(4, theme)" (dblclick)="pickTheme(theme)">
+                <li class="active" [class.active]="checkActiveTheme(theme)" (click)="selectTheme(4, theme)" (dblclick)="pickTheme(theme.id)">
                   <span class="title">{{theme.title}}</span>
                 </li>
               </ul>
@@ -64,16 +64,16 @@
           <a class="link-browser" (click)="browserSwitcher()">Скрыть<i class="fa fa-fw fa-angle-double-up"></i></a>
         </div>
         <div class="values">
-          <div *ngIf="inInterestingZone">
-            <div class="value" *ngFor="#theme of pickedInterestingInThemes">
+          <div *ngIf="returnZoneInt()">
+            <div class="value" *ngFor="#theme of themeService.pickedInterestingInThemes">
               <span class="title">{{theme.title}}</span>
-              <span class="close" (click)="deletePickTheme(theme)"><i class="fa fa-times" aria-hidden="true"></i></span>
+              <span class="close" (click)="deletePickTheme(theme.id)"><i class="fa fa-times" aria-hidden="true"></i></span>
             </div>
           </div>
-          <div *ngIf="inExpertZone">
-            <div class="value" *ngFor="#theme of pickedExpertInThemes">
+          <div *ngIf="returnZoneEx()">
+            <div class="value" *ngFor="#theme of themeService.pickedExpertInThemes">
               <span class="title">{{theme.title}}</span>
-              <span class="close" (click)="deletePickTheme(theme)"><i class="fa fa-times" aria-hidden="true"></i></span>
+              <span class="close" (click)="deletePickTheme(theme.id)"><i class="fa fa-times" aria-hidden="true"></i></span>
             </div>
           </div>
       </div>

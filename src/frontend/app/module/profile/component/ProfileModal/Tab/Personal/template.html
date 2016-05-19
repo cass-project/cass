@@ -6,25 +6,25 @@
     <ul class="greetings-options">
       <li>
         <label class="greeting-option">
-          <input type="radio" name="greetings_type">
+          <input type="radio" name="greetings_type" (click)="chooseGreetings(greetings.firstname_lastname)">
           <span class="text">По имени и фамилии</span>
         </label>
       </li>
       <li>
         <label class="greeting-option">
-          <input type="radio" name="greetings_type">
+          <input type="radio" name="greetings_type" (click)="chooseGreetings(greetings.nickname)">
           <span class="text">По нику</span>
         </label>
       </li>
       <li>
         <label class="greeting-option">
-          <input type="radio" name="greetings_type">
+          <input type="radio" name="greetings_type" (click)="chooseGreetings(greetings.middlename_firstname)">
           <span class="text">По отчеству и имени</span>
         </label>
       </li>
       <li>
         <label class="greeting-option">
-          <input type="radio" name="greetings_type">
+          <input type="radio" name="greetings_type" (click)="chooseGreetings(greetings.lastname_firstname_middlename)">
           <span class="text">По фамилии, имени и отчеству</span>
         </label>
       </li>

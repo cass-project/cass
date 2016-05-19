@@ -4,15 +4,52 @@ import {Injectable} from 'angular2/core';
 import {Http, URLSearchParams} from 'angular2/http';
 import {AuthService} from "../../../auth/service/AuthService";
 import {AvatarCropperService} from "../../../util/component/AvatarCropper/service";
+import {ProfileModalModel} from "../ProfileModal/model";
+import {FrontlineService} from "../../../frontline/service";
+import {ThemeService} from "../../../theme/service/ThemeService";
 
 @Injectable()
 export class ProfileRESTService
 {
-    constructor(public http: Http, private avatarCropperService: AvatarCropperService){}
+    constructor(public http: Http, private avatarCropperService: AvatarCropperService, private frontlineService: FrontlineService, private themeService: ThemeService){}
 
     public tryNumber: number = 0;
     public progressBar: number;
     public changePasswordStn = {old_password: '', new_password: '', repeat_password: ''};
+
+
+    accountCondReset(){
+        this.changePasswordStn.old_password = '';
+        this.changePasswordStn.new_password = '';
+        this.changePasswordStn.repeat_password = '';
+    }
+
+    accountCondToSave(){
+        if(this.changePasswordStn.new_password.length > 0 &&
+            this.changePasswordStn.repeat_password.length > 0 &&
+            this.changePasswordStn.new_password === this.changePasswordStn.repeat_password &&
+            this.changePasswordStn.new_password !== this.changePasswordStn.old_password){
+            return true;
+        } else if(this.changePasswordStn.new_password.length > 0 &&
+            this.changePasswordStn.repeat_password.length > 0 &&
+            this.changePasswordStn.new_password === this.changePasswordStn.old_password &&
+            this.changePasswordStn.repeat_password === this.changePasswordStn.old_password){
+            console.log("Старый и новые пароли совпадают");
+        }
+    }
+
+    interestCondReset(){
+        this.themeService.pickedInterestingInThemes = this.frontlineService.session.auth.profiles[0].interesting_in;
+        this.themeService.pickedExpertInThemes = this.frontlineService.session.auth.profiles[0].expert_in;
+    }
+
+    interestCondToSave(){
+        console.log(this.frontlineService.session.auth.profiles[0].interesting_in, this.themeService.pickedInterestingInThemes);
+        if(this.frontlineService.session.auth.profiles[0].interesting_in != this.themeService.pickedInterestingInThemes ||
+            this.frontlineService.session.auth.profiles[0].expert_in != this.themeService.pickedExpertInThemes){
+            return true;
+        }
+    }
 
     requestAccountDeleteCancel(){
         let url = `/backend/api/protected/account/cancel-request-delete`;

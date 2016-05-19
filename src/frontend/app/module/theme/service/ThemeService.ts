@@ -8,6 +8,13 @@ export class ThemeService
 
     themes;
 
+    inInterestingZone: boolean = true;
+    inExpertZone: boolean = false;
+
+
+    pickedInterestingInThemes = this.frontlineService.session.auth.profiles[0].interesting_in;
+    pickedExpertInThemes = this.frontlineService.session.auth.profiles[0].expert_in;
+
     themesTree = [
         {level: 0, themes: [], highlightActive: 0},
         {level: 1, themes: [], highlightActive: 0},
