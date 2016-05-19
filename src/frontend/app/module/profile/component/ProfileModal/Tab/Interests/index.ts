@@ -1,6 +1,7 @@
 import {Component} from "angular2/core";
-
 import {ThemeSelect} from "../../../../../theme/component/ThemeSelect/index";
+import {ThemeService} from "../../../../../theme/service/ThemeService";
+
 
 enum InterestsTabScreen
 {
@@ -20,11 +21,14 @@ enum InterestsTabScreen
 })
 export class InterestsTab
 {
+    constructor(private themeSelect: ThemeSelect){}
+
     screen: Screens = new Screens();
 }
 
 class Screens
 {
+
     static DEFAULT_SCREEN = InterestsTabScreen.InterestingIn;
 
     public current: InterestsTabScreen = Screens.DEFAULT_SCREEN;

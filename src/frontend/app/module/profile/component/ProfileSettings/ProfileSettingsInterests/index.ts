@@ -7,9 +7,6 @@ import {ThemeSelect} from "../../../../theme/component/ThemeSelect/index";
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ThemeSelect
     ]
 })
 export class ProfileSettingsInterests
