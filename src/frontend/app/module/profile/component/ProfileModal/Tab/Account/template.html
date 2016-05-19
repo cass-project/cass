@@ -32,7 +32,7 @@
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Повторите пароль</span>
-        <input class="form-input" (change)="model.onChange($event)" [(ngModel)]="profileRESTService.changePasswordStn.repeat_password" type="password" placeholder="Введите то же самое – мы защищаем вас от ошибок!">
+        <input class="form-input" [(ngModel)]="profileRESTService.changePasswordStn.repeat_password" type="password" placeholder="Введите то же самое – мы защищаем вас от ошибок!">
       </label>
     </div>
   </div>

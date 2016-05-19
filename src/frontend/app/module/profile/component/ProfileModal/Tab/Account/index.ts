@@ -10,11 +10,6 @@ import {ProfileModalModel} from "../../model";
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    providers: [
-        ProfileService,
-        ProfileRESTService,
-        AvatarCropperService,
     ]
 })
 export class AccountTab
