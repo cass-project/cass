@@ -10,6 +10,9 @@ import {ProfileComponentService} from "../../service";
 import {ProfileRESTService} from "../ProfileService/ProfileRESTService";
 import {AvatarCropperService} from "../../../util/component/AvatarCropper/service";
 import {ProfileService} from "../ProfileService/ProfileService";
+import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
+import {ThemeService} from "../../../theme/service/ThemeService";
+
 
 enum ProfileModalTab
 {
@@ -39,7 +42,9 @@ enum ProfileModalTab
         ProfileModalModel, // В эту модель сохраняются изменения, сделанные пользователем.// Этот коммент удалить.
         ProfileRESTService,
         ProfileService,
-        AvatarCropperService
+        AvatarCropperService,
+        ThemeService,
+        ThemeSelect
     ]
 })
 
@@ -49,10 +54,6 @@ export class ProfileModal
 
     constructor(public model: ProfileModalModel, private modals: ProfileComponentService){}
 
-    checkChanges(){
-        console.log(this.model.needToSave);
-        return this.model.needToSave;
-    }
 
     close() {
         this.modals.modals.settings.close();

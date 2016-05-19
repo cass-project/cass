@@ -67,11 +67,11 @@
         </div>
         <div class="right">
           <!-- Кнопка отображается в тот момент, когда были сделаны изменения в модели -->
-          <button class="form-text-button" *ngIf="checkChanges()">Отменить изменения</button>
+          <button class="form-text-button" *ngIf="model.canSave()" (click)="model.cancel()">Отменить изменения</button>
 
           <!-- Кнопка задизеблена, если нет изменений в модели. -->
           <!-- После сохранения окно должно закрываться -->
-          <button class="form-button form-button-green" [disabled]="!checkChanges()" (click)="model.saveAllChanges(); close()">Сохранить</button>
+          <button class="form-button form-button-green" [disabled]="!model.canSave()" (click)="model.saveAllChanges()">Сохранить</button>
         </div>
       </footer>
     </div>
