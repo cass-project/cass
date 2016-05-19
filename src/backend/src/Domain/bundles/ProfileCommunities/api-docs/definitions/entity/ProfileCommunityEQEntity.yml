@@ -4,11 +4,19 @@ ProfileCommunities_Entity_ProfileCommunityEQEntity:
   required:
     - id
     - profile_id
+    - community_sid
+    - community_id
     - community
   properties:
     id:
       type: number
-      description: ID закладки
+      description: ID коммунити
+    community_id:
+      type: string
+      description: ID коммунити
+    community_sid:
+      type: string
+      description: ID коммунити (строка)
     profile_id:
       type: number
       description: ID профиля

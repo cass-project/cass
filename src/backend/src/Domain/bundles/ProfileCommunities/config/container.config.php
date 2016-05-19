@@ -7,6 +7,7 @@ use function DI\get;
 
 use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Auth\Service\CurrentAccountService;
+use Domain\Community\Repository\CommunityRepository;
 use Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
 use Domain\ProfileCommunities\Middleware\ProfileCommunitiesMiddleware;
 use Domain\ProfileCommunities\Repository\ProfileCommunitiesRepository;
@@ -16,6 +17,7 @@ return [
     'php-di' => [
         ProfileCommunitiesRepository::class => factory(new DoctrineRepositoryFactory(ProfileCommunityEQ::class)),
         ProfileCommunitiesService::class => object()->constructor(
+            get(CommunityRepository::class),
             get(ProfileCommunitiesRepository::class),
             get(CurrentAccountService::class)
         ),

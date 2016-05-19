@@ -1,6 +1,7 @@
 Community_Entity_Community:
   required:
     - id
+    - sid
     - date_created_on
     - title
     - description
@@ -12,6 +13,9 @@ Community_Entity_Community:
     id:
       type: number
       description: Domain\Community Id
+    sid:
+      type: string
+      description: ID (string)
     date_created_on:
       type: string
       description: Дата создания коммунити

@@ -22,10 +22,10 @@ class PostAttachmentRepository extends EntityRepository
         $this->getEntityManager()->flush($postAttachment);
     }
 
-    public function deletePostAttachments(array $postAttachments)
+    public function deletePostAttachments(array $attachments)
     {
-        foreach($postAttachments as $postAttachment) {
-            $this->getEntityManager()->remove($postAttachment);
+        foreach($attachments as $attachment) {
+            $this->getEntityManager()->remove($attachment);
         }
         $this->getEntityManager()->flush();
     }
@@ -43,8 +43,18 @@ class PostAttachmentRepository extends EntityRepository
         $this->getEntityManager()->flush($attachments);
     }
 
-    public function getUnattachedAttachments(int $timeInterval)
+    public function getUnattachedAttachments(\DateTime $timeInterval) : array
     {
-        //$this->findBy()
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+        $queryBuilder
+            ->select('a')
+            ->from(PostAttachment::class, 'a')
+            ->where('a.isAttachedToPost = :isAttachedToPost')
+            ->andWhere('a.post IS NULL')
+            ->andWhere('a.dateCreatedOn > :timeInterval')
+                ->setParameter("isAttachedToPost", false)
+                ->setParameter("timeInterval", $timeInterval)
+        ;
+        return $queryBuilder->getQuery()->getResult();
     }
 }

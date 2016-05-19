@@ -15,7 +15,7 @@ return [
         ],
         'config.post-attachment' => [
             'cleanup_options'=> [
-                'timeInterval' => "last week"
+                'timeInterval' => "1 week"
             ]
         ]
     ]

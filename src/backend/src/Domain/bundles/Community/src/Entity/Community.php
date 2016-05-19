@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Community\Entity;
 
+use Application\Util\GenerateRandomString;
 use Application\Util\IdTrait;
 use Domain\Collection\Collection\CollectionTree;
 use Domain\Collection\Traits\CollectionOwnerTrait;
@@ -13,8 +14,16 @@ use Domain\Theme\Entity\Theme;
  */
 class Community
 {
+    const SID_LENGTH = 8;
+
     use IdTrait;
     use CollectionOwnerTrait;
+
+    /**
+     * @Column(type="string", name="sid")
+     * @var string
+     */
+    private $sid;
 
     /**
      * @Column(type="datetime", name="date_created_on")
@@ -49,6 +58,7 @@ class Community
 
     public function __construct(string $title, string $description, Theme $theme)
     {
+        $this->sid = GenerateRandomString::gen(self::SID_LENGTH);
         $this->dateCreatedOn = new \DateTime();
         $this->collections = new CollectionTree();
         $this
@@ -60,6 +70,7 @@ class Community
     public function toJSON(): array {
         $result = [
             'id' => $this->getId(),
+            'sid' => $this->getSID(),
             'date_created_on' => $this->dateCreatedOn->format(\DateTime::RFC2822),
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
@@ -78,6 +89,11 @@ class Community
         }
 
         return $result;
+    }
+
+    public function getSID(): string
+    {
+        return $this->sid;
     }
 
     public function getDateCreatedOn(): \DateTime

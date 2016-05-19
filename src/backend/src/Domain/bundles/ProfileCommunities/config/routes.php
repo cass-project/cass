@@ -6,13 +6,13 @@ use Zend\Expressive\Application;
 
 return function(Application $app) {
     $app->put(
-        '/protected/community/{communityId}/{command:join}',
+        '/protected/community/{communitySID}/{command:join}',
         ProfileCommunitiesMiddleware::class,
         'profile-communities-join'
     );
 
     $app->delete(
-        '/protected/community/{communityId}/{command:leave}',
+        '/protected/community/{communitySID}/{command:leave}',
         ProfileCommunitiesMiddleware::class,
         'profile-communities-leave'
     );

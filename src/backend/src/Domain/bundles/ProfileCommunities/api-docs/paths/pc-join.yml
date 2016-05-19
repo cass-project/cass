@@ -1,4 +1,4 @@
-"/protected/community/{communityId}/join":
+"/protected/community/{communitySID}/join":
   put:
     tags:
       - profile_communities
@@ -7,11 +7,11 @@
     security:
       - x_api_key: []
     parameters:
-      - name: communityId
-        type: number
+      - name: communitySID
+        type: string
         in: path
         required: true
-        description: ID коммунити
+        description: SID коммунити
     responses:
       403:
         $ref: '#/responses/Unauthorized'

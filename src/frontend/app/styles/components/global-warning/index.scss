@@ -21,10 +21,7 @@ div.global-message
   background-color: material-color($color, "700");
 }
 
-
-$colors: "red" "green" "blue" "indigo";
-
-@each $color in $colors {
+@each $color in $ALL_COLORS {
   div.global-message-#{$color} {
     @include global-message-colored($color);
   }
