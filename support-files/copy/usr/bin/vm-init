@@ -113,7 +113,7 @@ sudo update-rc.d -f amqp-listner defaults
 
 cd /opt/pimp
 sudo git clone https://github.com/potsky/PimpMyLog.git
-chown -R www-data /opt/pimp
+sudo chown -R www-data /opt/pimp
 
 # ###############
 # Update vm-tools
