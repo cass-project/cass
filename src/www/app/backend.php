@@ -7,8 +7,8 @@ use Zend\ServiceManager\ServiceManager;
 
 $application = require __DIR__ . '/../../backend/bootstrap/bootstrap.php';
 
-$container = $container ?: new ServiceManager();
-$router    = $router    ?: new FastRouteRouter();
+$container = new ServiceManager();
+$router    = new FastRouteRouter();
 $emitter   = new EmitterStack();
 $emitter->push(new SapiEmitter());
 
