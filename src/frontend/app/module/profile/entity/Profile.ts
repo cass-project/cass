@@ -8,6 +8,8 @@ export interface ProfileEntity
     is_initialized: boolean;
     greetings: ProfileGreetingsEntity;
     image: ProfileImageEntity;
+    expert_in: any;
+    interesting_in: any;
 }
 
 export interface ProfileGreetingsEntity

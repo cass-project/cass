@@ -2,32 +2,29 @@ import {Injectable} from "angular2/core";
 import {ProfileRESTService} from "../ProfileService/ProfileRESTService";
 import {ProfileService} from "../ProfileService/ProfileService";
 import {ProfileComponentService} from "../../service";
+import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
 
 
 @Injectable()
 export class ProfileModalModel
 {
-    constructor(private profileRESTService: ProfileRESTService, private profileService: ProfileService, private modals: ProfileComponentService) {}
+    constructor(private profileRESTService: ProfileRESTService,
+                private profileService: ProfileService,
+                private modals: ProfileComponentService) {}
 
     needToSave: boolean = false;
 
     cancel(){
-        this.profileRESTService.changePasswordStn.old_password = '';
-        this.profileRESTService.changePasswordStn.new_password = '';
-        this.profileRESTService.changePasswordStn.repeat_password = '';
-
-        this.needToSave = false;
+        this.profileRESTService.accountCondReset();
+        this.profileRESTService.interestCondReset();
     }
 
     canSave(){
-        if(this.needToSave && this.profileRESTService.changePasswordStn.new_password === this.profileRESTService.changePasswordStn.repeat_password){
+        if(this.profileRESTService.accountCondToSave() ||
+            this.profileRESTService.interestCondToSave()){
             return true;
-        }
-    }
-
-    onChange(event){
-        if(event) {
-            this.needToSave = true;
+        } else {
+            return false;
         }
     }
 

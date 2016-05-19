@@ -21,9 +21,22 @@ enum InterestsTabScreen
 })
 export class InterestsTab
 {
-    constructor(private themeSelect: ThemeSelect){}
+    constructor(private themeService: ThemeService){}
 
+    changeInEx(){
+        this.themeService.inExpertZone = true;
+        this.themeService.inInterestingZone = false;
+        console.log(this.themeService.inInterestingZone, this.themeService.inExpertZone)
+    }
+
+    changeInInt(){
+        this.themeService.inExpertZone = false;
+        this.themeService.inInterestingZone = true;
+        console.log(this.themeService.inInterestingZone, this.themeService.inExpertZone)
+    }
     screen: Screens = new Screens();
+
+
 }
 
 class Screens

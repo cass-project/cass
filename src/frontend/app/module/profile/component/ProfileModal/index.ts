@@ -43,8 +43,7 @@ enum ProfileModalTab
         ProfileRESTService,
         ProfileService,
         AvatarCropperService,
-        ThemeService,
-        ThemeSelect
+        ThemeService
     ]
 })
 
