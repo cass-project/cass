@@ -64,11 +64,19 @@
           <a class="link-browser" (click)="browserSwitcher()">Скрыть<i class="fa fa-fw fa-angle-double-up"></i></a>
         </div>
         <div class="values">
-          <div class="value" *ngFor="#theme of pickedThemes">
-            <span class="title">{{theme.title}}</span>
-            <span class="close" (click)="deletePickTheme(theme)"><i class="fa fa-times" aria-hidden="true"></i></span>
+          <div *ngIf="inInterestingZone">
+            <div class="value" *ngFor="#theme of pickedInterestingInThemes">
+              <span class="title">{{theme.title}}</span>
+              <span class="close" (click)="deletePickTheme(theme)"><i class="fa fa-times" aria-hidden="true"></i></span>
+            </div>
           </div>
-        </div>
+          <div *ngIf="inExpertZone">
+            <div class="value" *ngFor="#theme of pickedExpertInThemes">
+              <span class="title">{{theme.title}}</span>
+              <span class="close" (click)="deletePickTheme(theme)"><i class="fa fa-times" aria-hidden="true"></i></span>
+            </div>
+          </div>
+      </div>
       </div>
     </div>
   </div>

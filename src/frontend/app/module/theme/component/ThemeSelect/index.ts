@@ -16,11 +16,16 @@ import {Injectable} from 'angular2/core';
 @Injectable()
 export class ThemeSelect
 {
-    constructor(private themeService: ThemeService){}
+    constructor(private themeService: ThemeService){console.log('test')}
 
 
     selectedTheme;
-    pickedThemes = [];
+    pickedInterestingInThemes = [];
+    pickedExpertInThemes = [];
+
+    inInterestingZone: boolean = true; //Usage: Так как мы стартуем во вкладке "Интересы" данная бул переменная будет true; ToDO: Обсудить с Димой.
+    inExpertZone: boolean = false;
+
 
     searchStr: string = '';
     browserVisible: boolean = false;
@@ -44,21 +49,42 @@ export class ThemeSelect
 
 
     deletePickTheme(value){
-        let deleteThis = this.pickedThemes.indexOf(value);
-        this.pickedThemes.splice(deleteThis, 1);
+        if(this.inInterestingZone) {
+            let deleteThis = this.pickedInterestingInThemes.indexOf(value);
+            this.pickedInterestingInThemes.splice(deleteThis, 1);
+        } else if(this.inExpertZone){
+            let deleteThis = this.pickedExpertInThemes.indexOf(value);
+            this.pickedExpertInThemes.splice(deleteThis, 1);
+        }
     }
 
     pickTheme(value){
-        let canIAdd = true;
-        if(this.pickedThemes.length > 0) {
-            for(let i = 0; i < this.pickedThemes.length; i++){
-                if(this.pickedThemes[i] === value){
-                    canIAdd = false;
+        if(this.inInterestingZone) {
+            let canIAdd = true;
+            if (this.pickedInterestingInThemes.length > 0) {
+                for (let i = 0; i < this.pickedInterestingInThemes.length; i++) {
+                    if (this.pickedInterestingInThemes[i] === value) {
+                        canIAdd = false; //ToDo: Добавить обработчик/ошибку о том что данная тематика уже выбрана.
+                    }
                 }
             }
-        }
-        if(canIAdd){
-            this.pickedThemes.push(value);
+            if (canIAdd) {
+                this.pickedInterestingInThemes.push(value);
+                this.searchStr = '';
+            }
+        } else if(this.inExpertZone){
+            let canIAdd = true;
+            if (this.pickedExpertInThemes.length > 0) {
+                for (let i = 0; i < this.pickedExpertInThemes.length; i++) {
+                    if (this.pickedExpertInThemes[i] === value) {
+                        canIAdd = false;
+                    }
+                }
+            }
+            if (canIAdd) {
+                this.pickedExpertInThemes.push(value);
+                this.searchStr = '';
+            }
         }
     }
 
