@@ -4,6 +4,7 @@ namespace Domain\Community\Tests;
 use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\Util\Definitions\Point;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use Domain\Community\Entity\Community;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Domain\Theme\Entity\Theme;
@@ -42,9 +43,15 @@ class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'entity' => array_merge_recursive([
-                    'id' => $this->expectId()
+                    'id' => $this->expectId(),
+                    'sid' => $this->expectString()
                 ], $json)
-            ]);
+            ])
+            ->expect(function(array $result) {
+                $sid = $result['entity']['sid'];
+
+                $this->assertEquals(Community::SID_LENGTH, strlen($sid));
+            });
     }
 
     public function testCreateCommunity403()

@@ -17,11 +17,11 @@ class SamplePCBookmarksFixture implements Fixture
         $service = $app->getContainer()->get(ProfileCommunitiesService::class); /** @var ProfileCommunitiesService $service */
 
         self::$bookmarks = [
-            1 => $service->joinToCommunity(SampleCommunitiesFixture::getCommunity(1)->getId()),
-            2 => $service->joinToCommunity(SampleCommunitiesFixture::getCommunity(2)->getId()),
-            3 => $service->joinToCommunity(SampleCommunitiesFixture::getCommunity(3)->getId()),
-            4 => $service->joinToCommunity(SampleCommunitiesFixture::getCommunity(4)->getId()),
-            5 => $service->joinToCommunity(SampleCommunitiesFixture::getCommunity(5)->getId()),
+            1 => $service->joinToCommunity(SampleCommunitiesFixture::getCommunity(1)->getSID()),
+            2 => $service->joinToCommunity(SampleCommunitiesFixture::getCommunity(2)->getSID()),
+            3 => $service->joinToCommunity(SampleCommunitiesFixture::getCommunity(3)->getSID()),
+            4 => $service->joinToCommunity(SampleCommunitiesFixture::getCommunity(4)->getSID()),
+            5 => $service->joinToCommunity(SampleCommunitiesFixture::getCommunity(5)->getSID()),
         ];
     }
 

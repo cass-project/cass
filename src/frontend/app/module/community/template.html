@@ -1,0 +1,11 @@
+<div>
+    <div *ngIf="service.modals.route.isOpened()">
+        <cass-community-route-modal (close)="service.modals.route.close()"></cass-community-route-modal>
+    </div>
+    <div *ngIf="service.modals.join.isOpened()">
+        <cass-community-join-modal (close)="service.modals.route.close()"></cass-community-join-modal>
+    </div>
+    <div *ngIf="service.modals.create.isOpened()">
+        <cass-community-create-modal (close)="service.modals.route.close()"></cass-community-create-modal>
+    </div>
+</div>

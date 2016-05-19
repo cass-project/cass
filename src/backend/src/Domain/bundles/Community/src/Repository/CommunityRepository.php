@@ -30,6 +30,18 @@ class CommunityRepository extends EntityRepository
         return $entity;
     }
 
+    public function getCommunityBySID(string $communitySID): Community {
+        $entity = $this->findOneBy([
+            'sid' => $communitySID
+        ]);
+
+        if($entity === null) {
+            throw new CommunityNotFoundException(sprintf('Community with SID `%s` not found', $communitySID));
+        }
+
+        return $entity;
+    }
+
     public function deleteCommunity(Community $community) {
         throw new \DomainException(sprintf('There is no way you can delete the community. Check out project documentations: %s', '/docs/stories/community/00-community-no-delete.md'));
     }

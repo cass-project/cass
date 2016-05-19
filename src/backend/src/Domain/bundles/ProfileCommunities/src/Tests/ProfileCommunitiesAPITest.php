@@ -26,7 +26,7 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
     public function testJoinCommunity() {
         $community = SampleCommunitiesFixture::getCommunity(1);
 
-        $this->requestJoin($community->getId())
+        $this->requestJoin($community->getSID())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectJSONContentType()
@@ -45,7 +45,7 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
     public function testJoinCommunity403() {
         $community = SampleCommunitiesFixture::getCommunity(1);
 
-        $this->requestJoin($community->getId())
+        $this->requestJoin($community->getSID())
             ->execute()
             ->expectAuthError()
         ;
@@ -54,11 +54,11 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
     public function testJoinCommunity409() {
         $community = SampleCommunitiesFixture::getCommunity(1);
 
-        $this->requestJoin($community->getId())
+        $this->requestJoin($community->getSID())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute();
 
-        $this->requestJoin($community->getId())
+        $this->requestJoin($community->getSID())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectJSONContentType()
@@ -72,7 +72,7 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
 
         $community = SampleCommunitiesFixture::getCommunity(2);
 
-        $this->requestLeave($community->getId())
+        $this->requestLeave($community->getSID())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
@@ -88,7 +88,7 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
 
         $community = SampleCommunitiesFixture::getCommunity(2);
 
-        $this->requestLeave($community->getId())
+        $this->requestLeave($community->getSID())
             ->execute()
             ->expectAuthError()
         ;
@@ -99,12 +99,12 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
 
         $community = SampleCommunitiesFixture::getCommunity(2);
 
-        $this->requestLeave($community->getId())
+        $this->requestLeave($community->getSID())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
         ;
 
-        $this->requestLeave($community->getId())
+        $this->requestLeave($community->getSID())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectJSONContentType()
@@ -143,12 +143,12 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
         ;
     }
 
-    private function requestJoin(int $communityId): RESTRequest {
-        return $this->request('PUT', sprintf('/protected/community/%d/join', $communityId));
+    private function requestJoin(string $communitySID): RESTRequest {
+        return $this->request('PUT', sprintf('/protected/community/%s/join', $communitySID));
     }
 
-    private function requestLeave(int $communityId): RESTRequest {
-        return $this->request('DELETE', sprintf('/protected/community/%d/leave', $communityId));
+    private function requestLeave(string $communitySID): RESTRequest {
+        return $this->request('DELETE', sprintf('/protected/community/%s/leave', $communitySID));
     }
 
     private function requestList(): RESTRequest {

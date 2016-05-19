@@ -15,6 +15,12 @@ class ProfileCommunityEQ implements JSONSerializable
     use IdTrait;
 
     /**
+     * @Column(type="string", name="community_sid")
+     * @var string
+     */
+    private $communitySID;
+
+    /**
      * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
      * @JoinColumn(name="profile_id", referencedColumnName="id")
      * @var Profile
@@ -31,6 +37,7 @@ class ProfileCommunityEQ implements JSONSerializable
     public function __construct(Profile $profile, Community $community) {
         $this->profile = $profile;
         $this->community = $community;
+        $this->communitySID = $community->getSID();
     }
 
     public function toJSON(): array
@@ -38,7 +45,9 @@ class ProfileCommunityEQ implements JSONSerializable
         return [
             'id' => $this->getId(),
             'profile_id' => $this->getProfile()->getId(),
-            'community' => $this->getCommunity()->toJSON()
+            'community' => $this->getCommunity()->toJSON(),
+            'community_id' => $this->getProfile()->getId(),
+            'community_sid' => $this->getCommunitySID(),
         ];
     }
 
@@ -48,5 +57,10 @@ class ProfileCommunityEQ implements JSONSerializable
 
     public function getCommunity(): Community {
         return $this->community;
+    }
+
+    public function getCommunitySID(): string
+    {
+        return $this->communitySID;
     }
 }
