@@ -38,7 +38,7 @@ export class ProfileRESTService
         }
     }
 
-    interestCondReset(){
+    /*interestCondReset(){
         this.themeService.pickedInterestingInThemes = this.frontlineService.session.auth.profiles[0].interesting_in;
         this.themeService.pickedExpertInThemes = this.frontlineService.session.auth.profiles[0].expert_in;
     }
@@ -49,7 +49,7 @@ export class ProfileRESTService
             this.frontlineService.session.auth.profiles[0].expert_in != this.themeService.pickedExpertInThemes){
             return true;
         }
-    }
+    }*/
 
     requestAccountDeleteCancel(){
         let url = `/backend/api/protected/account/cancel-request-delete`;

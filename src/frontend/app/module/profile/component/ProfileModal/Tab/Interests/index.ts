@@ -23,7 +23,7 @@ export class InterestsTab
 {
     constructor(private themeService: ThemeService){}
 
-    changeInEx(){
+    /*changeInEx(){
         this.themeService.inExpertZone = true;
         this.themeService.inInterestingZone = false;
         console.log(this.themeService.inInterestingZone, this.themeService.inExpertZone)
@@ -33,7 +33,7 @@ export class InterestsTab
         this.themeService.inExpertZone = false;
         this.themeService.inInterestingZone = true;
         console.log(this.themeService.inInterestingZone, this.themeService.inExpertZone)
-    }
+    }*/
     screen: Screens = new Screens();
 
 

@@ -16,12 +16,12 @@ export class ProfileModalModel
 
     cancel(){
         this.profileRESTService.accountCondReset();
-        this.profileRESTService.interestCondReset();
+       /* this.profileRESTService.interestCondReset();*/
     }
 
     canSave(){
-        if(this.profileRESTService.accountCondToSave() ||
-            this.profileRESTService.interestCondToSave()){
+        if(this.profileRESTService.accountCondToSave() /*||
+            this.profileRESTService.interestCondToSave()*/){
             return true;
         } else {
             return false;
