@@ -14,14 +14,15 @@ export class ProfileModalModel
 
     needToSave: boolean = false;
 
-    cancel(){
+    reset(){
         this.profileRESTService.accountCondReset();
+        this.profileRESTService.personalCondReset();
        /* this.profileRESTService.interestCondReset();*/
     }
 
     canSave(){
-        if(this.profileRESTService.accountCondToSave() /*||
-            this.profileRESTService.interestCondToSave()*/){
+        if(this.profileRESTService.accountCondToSave() ||
+            this.profileRESTService.personalCondToSave()){
             return true;
         } else {
             return false;
@@ -33,7 +34,12 @@ export class ProfileModalModel
         /*Accont section*/
         if(this.profileRESTService.changePasswordStn.new_password === this.profileRESTService.changePasswordStn.repeat_password &&
             this.profileRESTService.changePasswordStn.new_password.length >= 3){
-            this.profileRESTService.changePassword().subscribe(data => {this.modals.modals.settings.close()});
+            this.profileRESTService.changePassword().subscribe(data => {this.modals.modals.settings.close();  this.reset()});
+        }
+
+        /*Personal section*/
+        if(this.profileRESTService.personalCondToSave()){
+            this.profileRESTService.editPersonal().subscribe(data => {this.modals.modals.settings.close(); this.reset()})
         }
     }
 
