@@ -7,11 +7,11 @@ use Domain\Account\Entity\Account;
 use Domain\Account\Service\AccountService;
 use Zend\Expressive\Application;
 
+
 class DemoAccountsFixtures implements Fixture
 {
 
 	private static $accounts;
-
 
 	public function up(Application $app, EntityManager $em){
 
@@ -19,10 +19,9 @@ class DemoAccountsFixtures implements Fixture
 		$accountService = $app->getContainer()->get(AccountService::class);
 
 		self::$accounts = [
-			1 => $accountService->createAccount('test1@mail.ru', 'test'),
-			2 => $accountService->createAccount('test2@mail.ru', 'test')
+			1 => $accountService->createAccount('test1@mail.ru', 'test1'),
+			2 => $accountService->createAccount('test2@mail.ru', 'test2')
 		];
-
 	}
 
 
