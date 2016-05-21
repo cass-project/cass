@@ -16,7 +16,35 @@ export class ProfileRESTService
     public tryNumber: number = 0;
     public progressBar: number;
     public changePasswordStn = {old_password: '', new_password: '', repeat_password: ''};
+    greetings = {
+        id: 0,
+        profile_id: 0,
+        first_name: '',
+        last_name: '',
+        middle_name: '',
+        nickname: '',
+        greetings: '',
+        greetings_method: ''
+    };
 
+
+    personalCondReset(){
+        for (let key in this.frontlineService.session.auth.profiles[0].greetings) {
+            this.greetings[key] = this.frontlineService.session.auth.profiles[0].greetings[key];
+        }
+    }
+
+    personalCondToSave() {
+        if (this.greetings.id === 0) {
+            this.personalCondReset()
+        } else if (this.greetings.greetings_method != this.frontlineService.session.auth.profiles[0].greetings.greetings_method ||
+                   this.greetings.first_name != this.frontlineService.session.auth.profiles[0].greetings.first_name ||
+                   this.greetings.last_name != this.frontlineService.session.auth.profiles[0].greetings.last_name ||
+                   this.greetings.middle_name != this.frontlineService.session.auth.profiles[0].greetings.middle_name ||
+                   this.greetings.nickname != this.frontlineService.session.auth.profiles[0].greetings.nickname) {
+            return true;
+        }
+    }
 
     accountCondReset(){
         this.changePasswordStn.old_password = '';
@@ -50,6 +78,24 @@ export class ProfileRESTService
             return true;
         }
     }*/
+
+    editPersonal(){
+        let url = `/backend/api/protected/profile/${this.frontlineService.session.auth.profiles[0].id}/edit-personal/`;
+
+        this.frontlineService.session.auth.profiles[0].greetings.greetings_method = this.greetings.greetings_method;
+        this.frontlineService.session.auth.profiles[0].greetings.last_name =  this.greetings.last_name;
+        this.frontlineService.session.auth.profiles[0].greetings.first_name =  this.greetings.first_name;
+        this.frontlineService.session.auth.profiles[0].greetings.middle_name =  this.greetings.middle_name;
+        this.frontlineService.session.auth.profiles[0].greetings.nickname =  this.greetings.nickname;
+
+        return this.http.post(url, JSON.stringify({
+            greetings_method: this.greetings.greetings_method,
+            last_name: this.greetings.last_name,
+            first_name: this.greetings.first_name,
+            middle_name: this.greetings.middle_name,
+            nickname: this.greetings.nickname
+        }));
+    }
 
     requestAccountDeleteCancel(){
         let url = `/backend/api/protected/account/cancel-request-delete`;
