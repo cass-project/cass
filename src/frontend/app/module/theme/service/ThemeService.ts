@@ -2,6 +2,7 @@ import {Injectable} from 'angular2/core';
 
 import {FrontlineService} from "../../frontline/service";
 import {ThemeTree} from "../entity/Theme";
+import {ThemeSelect} from "../component/ThemeSelect/index";
 
 @Injectable()
 export class ThemeService
@@ -9,6 +10,12 @@ export class ThemeService
     root: ThemeTree;
     themes: ThemeTree[];
     themesMap = {};
+
+    inInterestingZone: boolean = true;
+    inExpertZone: boolean = false;
+    expertIn = this.frontlineService.session.auth.profiles[0].expert_in;
+    interestingIn = this.frontlineService.session.auth.profiles[0].interesting_in;
+
     
     constructor(public frontlineService: FrontlineService) {
         this.themes = frontlineService.session.themes;
