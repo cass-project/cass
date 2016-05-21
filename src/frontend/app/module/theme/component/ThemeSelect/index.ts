@@ -8,59 +8,93 @@ import {ThemeTree} from "../../entity/Theme";
 @Component({
     selector: 'cass-theme-select',
     template: require('./template.html'),
-    providers: [
-        ThemeService
-    ],
-    directives: [
-    ],
     styles: [
         require('./style.shadow.scss')
     ]
 })
 @Injectable()
 
-export class ThemeSelect
-{
-    private browser: ThemeSelectBrowser = new ThemeSelectBrowser(this, this.service);
-    private search: ThemeSelectSearch = new ThemeSelectSearch(this, this.service);
+export class ThemeSelect {
+    private browser:ThemeSelectBrowser = new ThemeSelectBrowser(this, this.service);
+    private search:ThemeSelectSearch = new ThemeSelectSearch(this, this.service);
 
-    @ViewChild('searchInput') searchInput: ElementRef;
-    @ViewChild('scrolling') scrolling: ElementRef;
+    @ViewChild('searchInput') searchInput:ElementRef;
+    @ViewChild('scrolling') scrolling:ElementRef;
 
-    @Input('value') value = [];
+    @Input('expertIn') expertIn = [];
+    @Input('interestingIn') interestingIn = [];
     @Input('multiple') multiple = "true";
     @Output('change') change = new EventEmitter<Array<number>>();
-    
-    constructor(private service: ThemeService) {
+
+    constructor(private service:ThemeService) {
         this.browser.scrolling = this.scrolling;
     }
 
-    isMultiple(): boolean {
-        return this.multiple === "1" || this.multiple === "true";
-    }
 
-    has(themeId: number) {
-        return ~this.value.indexOf(themeId);
-    }
-
-    exclude(themeId: number) {
-        let index = this.value.indexOf(themeId);
-
-        if(~index) {
-            this.value.splice(index, 1);
-            this.change.emit(this.value);
+    returnActiveList(value){
+        if(this.service.inExpertZone && value == 'expert'){
+            this.expertIn = this.service.expertIn;
+            console.log(this.expertIn, 'Эксперт');
+            return true;
+        } else if(this.service.inInterestingZone && value == 'interesting'){
+            this.interestingIn = this.service.interestingIn;
+            console.log(this.interestingIn, 'Интересуется');
+            return true;
         }
     }
 
-    include(themeId: number) {
-        if(!~this.value.indexOf(themeId)) {
-            if(this.isMultiple()) {
-                this.value.push(themeId);
-                this.change.emit(this.value);
-            }else{
-                this.value = [themeId];
-                this.change.emit(this.value);
+    isMultiple():boolean {
+        return this.multiple === "1" || this.multiple === "true";
+    }
+
+    has(themeId:number) {
+        if (this.service.inExpertZone) {
+            return ~this.expertIn.indexOf(themeId);
+        } else if (this.service.inInterestingZone) {
+            return ~this.interestingIn.indexOf(themeId)
+        }
+
+    }
+
+    exclude(themeId:number) {
+        if (this.service.inExpertZone) {
+            let index = this.service.expertIn.indexOf(themeId);
+            if (~index) {
+                this.expertIn.splice(index, 1);
+                this.change.emit(this.expertIn);
             }
+        } else if (this.service.inInterestingZone) {
+            let index = this.interestingIn.indexOf(themeId);
+            if (~index) {
+                this.interestingIn.splice(index, 1);
+                this.change.emit(this.interestingIn);
+            }
+        }
+    }
+
+    include(themeId:number) {
+        if (this.service.inExpertZone) {
+            if (!~this.expertIn.indexOf(themeId)) {
+                if (this.isMultiple()) {
+                    this.expertIn.push(themeId);
+                    this.searchInput.nativeElement.value = '';
+                    this.change.emit(this.expertIn);
+                } else {
+                    this.expertIn = [themeId];
+                    this.change.emit(this.expertIn);
+                }
+            }
+            } else if (this.service.inInterestingZone) {
+                if (!~this.interestingIn.indexOf(themeId)) {
+                    if (this.isMultiple()) {
+                        this.interestingIn.push(themeId);
+                        this.searchInput.nativeElement.value = '';
+                        this.change.emit(this.interestingIn);
+                    } else {
+                        this.interestingIn = [themeId];
+                        this.change.emit(this.interestingIn);
+                    }
+                }
         }
     }
 }
@@ -69,6 +103,7 @@ class ThemeSelectSearch
 {
     static MAX_RESULTS = 100;
 
+    showThemeSelect: boolean = false;
     enabled: boolean = false;
     results: ThemeTree[] = [];
     lastInput: string;
@@ -107,7 +142,6 @@ class ThemeSelectSearch
                 }
             });
         }
-
         return results;
     }
 

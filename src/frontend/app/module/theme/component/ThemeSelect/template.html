@@ -1,7 +1,20 @@
 <div class="dev-stages">
   <div class="component component-theme-select">
     <div class="form">
-      <div class="search">
+      <div class="values">
+        <div *ngIf="returnActiveList('expert')">
+        <div class="value" *ngFor="#themeId of expertIn">
+          <span class="title">{{service.findById(themeId).title}}</span>
+          <span class="close" (click)="exclude(themeId)"><i class="fa fa-times" aria-hidden="true"></i></span>
+        </div></div>
+        <div *ngIf="returnActiveList('interesting')">
+        <div class="value" *ngFor="#themeId of interestingIn">
+          <span class="title">{{service.findById(themeId).title}}</span>
+          <span class="close" (click)="exclude(themeId)"><i class="fa fa-times" aria-hidden="true"></i></span>
+        </div></div>
+        <span class="open" (click)="showThemeSelect = true" *ngIf="! showThemeSelect"><i class="fa fa-plus" aria-hidden="false"></i></span>
+      <div *ngIf="showThemeSelect">
+        <div class="search">
         <input type="text"
                #searchInput
                (keyup)="search.update(searchInput.value)"
@@ -16,6 +29,7 @@
       <div class="auto-complete" *ngIf="search.isResultsAvailable()">
         <div class="auto-complete-scroll-box">
           <ul class="auto-complete-list">
+            <span class="close pull-right" (click)="search.enabled = false;"><i class="fa fa-times" aria-hidden="true"></i></span>
             <li *ngFor="#result of search.results">
               <span class="title" (click)="search.include(result)">{{ result.title }}</span>
             </li>
@@ -39,11 +53,7 @@
       </div>
       <div class="hide-browser" *ngIf="browser.visible">
         <a class="link-browser" (click)="browser.hide()">Скрыть<i class="fa fa-fw fa-angle-double-up"></i></a>
-      </div>
-      <div class="values">
-        <div class="value" *ngFor="#themeId of value">
-          <span class="title">{{service.findById(themeId).title}}</span>
-          <span class="close" (click)="exclude(themeId)"><i class="fa fa-times" aria-hidden="true"></i></span>
+          </div>
         </div>
       </div>
     </div>
