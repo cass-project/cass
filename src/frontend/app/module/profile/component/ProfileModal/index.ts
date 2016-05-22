@@ -39,7 +39,7 @@ enum ProfileModalTab
 
     ],
     providers: [
-        ProfileModalModel, // В эту модель сохраняются изменения, сделанные пользователем.// Этот коммент удалить.
+        ProfileModalModel,
         ProfileRESTService,
         ProfileService,
         AvatarCropperService,
