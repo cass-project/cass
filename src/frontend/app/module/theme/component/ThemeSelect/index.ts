@@ -3,6 +3,8 @@ import {ThemeService} from "../../service/ThemeService";
 import {Injectable} from 'angular2/core';
 import {ControlValueAccessor} from "angular2/common";
 import {ThemeTree} from "../../entity/Theme";
+import {ProfileService} from "../../../profile/component/ProfileService/ProfileService";
+import {FrontlineService} from "../../../frontline/service";
 
 
 @Component({
@@ -26,19 +28,19 @@ export class ThemeSelect {
     @Input('multiple') multiple = "true";
     @Output('change') change = new EventEmitter<Array<number>>();
 
-    constructor(private service:ThemeService) {
+    constructor(private service:ThemeService, private profileService: ProfileService, private frontlineService: FrontlineService) {
         this.browser.scrolling = this.scrolling;
     }
 
 
     returnActiveList(value){
-        if(this.service.inExpertZone && value == 'expert'){
-            this.expertIn = this.service.expertIn;
+        if(this.profileService.inExpertZone && value == 'expert'){
+            this.expertIn = this.profileService.expertIn;
             console.log(this.expertIn, 'Эксперт');
             return true;
-        } else if(this.service.inInterestingZone && value == 'interesting'){
-            this.interestingIn = this.service.interestingIn;
-            console.log(this.interestingIn, 'Интересуется');
+        } else if(this.profileService.inInterestingZone && value == 'interesting'){
+            this.interestingIn = this.profileService.interestingIn;
+            console.log(this.interestingIn, this.profileService.interestingIn, 'Интересуется');
             return true;
         }
     }
@@ -48,22 +50,22 @@ export class ThemeSelect {
     }
 
     has(themeId:number) {
-        if (this.service.inExpertZone) {
+        if (this.profileService.inExpertZone) {
             return ~this.expertIn.indexOf(themeId);
-        } else if (this.service.inInterestingZone) {
+        } else if (this.profileService.inInterestingZone) {
             return ~this.interestingIn.indexOf(themeId)
         }
 
     }
 
     exclude(themeId:number) {
-        if (this.service.inExpertZone) {
-            let index = this.service.expertIn.indexOf(themeId);
+        if (this.profileService.inExpertZone) {
+            let index = this.profileService.expertIn.indexOf(themeId);
             if (~index) {
                 this.expertIn.splice(index, 1);
                 this.change.emit(this.expertIn);
             }
-        } else if (this.service.inInterestingZone) {
+        } else if (this.profileService.inInterestingZone) {
             let index = this.interestingIn.indexOf(themeId);
             if (~index) {
                 this.interestingIn.splice(index, 1);
@@ -73,7 +75,7 @@ export class ThemeSelect {
     }
 
     include(themeId:number) {
-        if (this.service.inExpertZone) {
+        if (this.profileService.inExpertZone) {
             if (!~this.expertIn.indexOf(themeId)) {
                 if (this.isMultiple()) {
                     this.expertIn.push(themeId);
@@ -84,7 +86,7 @@ export class ThemeSelect {
                     this.change.emit(this.expertIn);
                 }
             }
-            } else if (this.service.inInterestingZone) {
+            } else if (this.profileService.inInterestingZone) {
                 if (!~this.interestingIn.indexOf(themeId)) {
                     if (this.isMultiple()) {
                         this.interestingIn.push(themeId);
