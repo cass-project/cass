@@ -11,11 +11,6 @@ export class ThemeService
     themes: ThemeTree[];
     themesMap = {};
 
-    inInterestingZone: boolean = true;
-    inExpertZone: boolean = false;
-    expertIn = this.frontlineService.session.auth.profiles[0].expert_in;
-    interestingIn = this.frontlineService.session.auth.profiles[0].interesting_in;
-
     
     constructor(public frontlineService: FrontlineService) {
         this.themes = frontlineService.session.themes;
