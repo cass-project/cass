@@ -1,6 +1,7 @@
 import {Component} from "angular2/core";
 import {FrontlineService} from "../../../../../frontline/service";
 import {ProfileRESTService} from "../../../ProfileService/ProfileRESTService";
+import {ProfileService} from "../../../ProfileService/ProfileService";
 
 @Component({
     selector: 'cass-profile-modal-tab-personal',
@@ -11,11 +12,11 @@ import {ProfileRESTService} from "../../../ProfileService/ProfileRESTService";
 })
 export class PersonalTab
 {
-    constructor(public frontlineService: FrontlineService, private profileRESTService: ProfileRESTService){}
+    constructor(public frontlineService: FrontlineService, private profileRESTService: ProfileRESTService, private profileService: ProfileService){}
 
 
     returnActiveGreetings(value){
-        if(value === this.profileRESTService.greetings.greetings_method){
+        if(value === this.profileService.greetings.greetings_method){
             return true;
         }
     }
@@ -56,7 +57,7 @@ export class PersonalTab
 
 
     chooseGreetings(greetMethod){
-        let greetings = this.profileRESTService.greetings;
+        let greetings = this.profileService.greetings;
         greetings.greetings_method = greetMethod;
     }
 }
