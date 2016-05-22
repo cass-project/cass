@@ -1,6 +1,7 @@
 import {Component} from "angular2/core";
 import {ThemeSelect} from "../../../../../theme/component/ThemeSelect/index";
 import {ThemeService} from "../../../../../theme/service/ThemeService";
+import {ProfileService} from "../../../ProfileService/ProfileService";
 
 
 enum InterestsTabScreen
@@ -21,18 +22,18 @@ enum InterestsTabScreen
 })
 export class InterestsTab
 {
-    constructor(private themeService: ThemeService){}
+    constructor(private themeService: ThemeService, private profileService: ProfileService){}
 
     changeInEx(){
-        this.themeService.inExpertZone = true;
-        this.themeService.inInterestingZone = false;
-        console.log(this.themeService.inInterestingZone, this.themeService.inExpertZone)
+        this.profileService.inExpertZone = true;
+        this.profileService.inInterestingZone = false;
+        console.log(this.profileService.inInterestingZone, this.profileService.inExpertZone)
     }
 
     changeInInt(){
-        this.themeService.inExpertZone = false;
-        this.themeService.inInterestingZone = true;
-        console.log(this.themeService.inInterestingZone, this.themeService.inExpertZone)
+        this.profileService.inExpertZone = false;
+        this.profileService.inInterestingZone = true;
+        console.log(this.profileService.inInterestingZone, this.profileService.inExpertZone)
     }
     screen: Screens = new Screens();
 
