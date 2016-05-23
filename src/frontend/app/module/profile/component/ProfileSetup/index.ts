@@ -1,13 +1,26 @@
 import {Component} from "angular2/core";
 
 import {ModalComponent} from "../../../modal/component/index";
-import {ProfileSettingsGreetings} from "../ProfileSettings/ProfileSettingsGreetings/index";
-import {ProfileSettingsImage} from "../ProfileSettings/ProfileSettingsImage/index";
-import {ProfileSettingsInterests} from "../ProfileSettings/ProfileSettingsInterests/index";
-import {ProfileSettingsExpertIn} from "../ProfileSettings/ProfileSettingsExpertIn/index";
 import {ProfileSetupModel} from "./model";
-import {ProfileSettingsGender} from "../ProfileSettings/ProfileSettingsGender/index";
 import {LoadingLinearIndicator} from "../../../util/component/LoadingLinearIndicator/index";
+import {ProfileSetupScreenGreetings} from "./Screen/ProfileSetupScreenGreetings/index";
+import {ProfileSetupScreenGender} from "./Screen/ProfileSetupScreenGender/index";
+import {ProfileSetupScreenImage} from "./Screen/ProfileSetupScreenImage/index";
+import {ProfileSetupScreenInterests} from "./Screen/ProfileSetupScreenInterests/index";
+import {ProfileSetupScreenExpertIn} from "./Screen/ProfileSetupScreenExpertIn/index";
+import {ComponentStages} from "../../../util/classes/ComponentStages";
+import {ScreenControls} from "../../../util/classes/ScreenControls";
+
+enum ProfileSetupScreen {
+    Welcome = <any>"Welcome",
+    Gender = <any>"Gender",
+    Greetings = <any>"Greetings",
+    Image = <any>"Image",
+    Interests = <any>"Interests",
+    ExpertIn = <any>"ExpertIn",
+    Saving = <any>"Saving",
+    Finish = <any>"Finish"
+}
 
 @Component({
     selector: 'cass-profile-setup',
@@ -21,129 +34,70 @@ import {LoadingLinearIndicator} from "../../../util/component/LoadingLinearIndic
     directives: [
         ModalComponent,
         LoadingLinearIndicator,
-        ProfileSettingsGender,
-        ProfileSettingsGreetings,
-        ProfileSettingsImage,
-        ProfileSettingsInterests,
-        ProfileSettingsExpertIn,
+        ProfileSetupScreenGreetings,
+        ProfileSetupScreenGender,
+        ProfileSetupScreenImage,
+        ProfileSetupScreenInterests,
+        ProfileSetupScreenExpertIn,
     ]
 })
+
 export class ProfileSetup
 {
-    stage: StageControls = new StageControls();
+    public screens: ScreenControls<ProfileSetupScreen> = new ScreenControls<ProfileSetupScreen>(ProfileSetupScreen.Welcome);
 
-    constructor(model: ProfileSetupModel) {}
+    constructor(public model: ProfileSetupModel) {
+        this.screens
+            .add({ from: ProfileSetupScreen.Welcome, to: ProfileSetupScreen.Gender })
+            .add({ from: ProfileSetupScreen.Gender, to: ProfileSetupScreen.Greetings })
+            .add({ from: ProfileSetupScreen.Greetings, to: ProfileSetupScreen.Image })
+            .add({ from: ProfileSetupScreen.Image, to: ProfileSetupScreen.Interests })
+            .add({ from: ProfileSetupScreen.Interests, to: ProfileSetupScreen.ExpertIn })
+            .add({ from: ProfileSetupScreen.ExpertIn, to: ProfileSetupScreen.Saving })
+            .add({ from: ProfileSetupScreen.Saving, to: ProfileSetupScreen.Finish })
+        ;
+    }
 
     ngSubmit() {
         this.nextStage();
     }
 
     nextStage() {
-        this.stage.next();
+        this.screens.next();
     }
 
     prevStage() {
-        this.stage.previous();
+        this.screens.previous();
     }
 
     isPreviousButtonVisible() {
-        return ! (
-            this.stage.isOnFinishStage() ||
-            this.stage.isOnWelcomeStage() ||
-            this.stage.isOnGreetingsStage()
-        );
+        return this.screens.notIn([
+            ProfileSetupScreen.Finish,
+            ProfileSetupScreen.Welcome,
+            ProfileSetupScreen.Greetings,
+        ]);
     }
 
     isSubmitButtonVisible() {
-        return ! (this.stage.isOnFinishStage() || this.stage.isOnGenderStage());
+        return this.screens.notIn([
+            ProfileSetupScreen.Finish,
+            ProfileSetupScreen.Gender,
+        ]);
     }
 
     isSkipButtonVisible() {
-        return this.stage.isOnGenderStage() ||
-            this.stage.isOnImageStage() ||
-            this.stage.isOnInterestsStage() ||
-            this.stage.isOnExpertInStage()
-        ;
+        return this.screens.isIn([
+            ProfileSetupScreen.Image,
+            ProfileSetupScreen.Interests,
+            ProfileSetupScreen.ExpertIn,
+        ]);
     }
 
     isFooterVisible() {
-        return ! (this.stage.isOnWelcomeStage() || this.stage.isOnSavingStage() || this.stage.isOnFinishStage());
+        return this.screens.notIn([
+            ProfileSetupScreen.Welcome,
+            ProfileSetupScreen.Saving,
+            ProfileSetupScreen.Finish,
+        ]);
     }
-}
-
-class StageControls
-{
-    private stage: ProfileSetupStage = ProfileSetupStage.StageWelcome;
-    private map = (() => {
-        let map = {};
-
-        map[ProfileSetupStage.StageWelcome] = ProfileSetupStage.StageGender;
-        map[ProfileSetupStage.StageGender] = ProfileSetupStage.StageGreetings;
-        map[ProfileSetupStage.StageGreetings] = ProfileSetupStage.StageImage;
-        map[ProfileSetupStage.StageImage] = ProfileSetupStage.StageInterests;
-        map[ProfileSetupStage.StageInterests] = ProfileSetupStage.StageExpertIn;
-        map[ProfileSetupStage.StageExpertIn] = ProfileSetupStage.StageSaving;
-        map[ProfileSetupStage.StageSaving] = ProfileSetupStage.StageFinish;
-
-        return map;
-    })();
-
-    go(stage: ProfileSetupStage) {
-        this.stage = stage;
-    }
-
-    next() {
-        if(this.map[this.stage]) {
-            this.stage = this.map[this.stage];
-        }else{
-            throw new Error('Nowhere to go.');
-        }
-    }
-
-    previous() {
-        throw new Error('Not implemented');
-    }
-
-    isOnWelcomeStage() {
-        return this.stage === ProfileSetupStage.StageWelcome;
-    }
-
-    isOnGenderStage() {
-        return this.stage === ProfileSetupStage.StageGender;
-    }
-
-    isOnGreetingsStage() {
-        return this.stage === ProfileSetupStage.StageGreetings;
-    }
-
-    isOnImageStage() {
-        return this.stage === ProfileSetupStage.StageImage;
-    }
-
-    isOnInterestsStage() {
-        return this.stage === ProfileSetupStage.StageInterests;
-    }
-
-    isOnExpertInStage() {
-        return this.stage === ProfileSetupStage.StageExpertIn;
-    }
-
-    isOnSavingStage() {
-        return this.stage === ProfileSetupStage.StageSaving;
-    }
-
-    isOnFinishStage() {
-        return this.stage === ProfileSetupStage.StageFinish;
-    }
-}
-
-enum ProfileSetupStage {
-    StageWelcome = <any>"Welcome",
-    StageGender = <any>"Gender",
-    StageGreetings = <any>"Greetings",
-    StageImage = <any>"Image",
-    StageInterests = <any>"Interests",
-    StageExpertIn = <any>"ExpertIn",
-    StageSaving = <any>"Saving",
-    StageFinish = <any>"Finish"
 }

@@ -1,12 +1,12 @@
 import {Component} from "angular2/core";
 
 @Component({
-    selector: 'cass-profile-settings-greetings',
+    selector: 'cass-profile-setup-screen-gender',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
-export class ProfileSettingsGreetings
+export class ProfileSetupScreenGender
 {
 }

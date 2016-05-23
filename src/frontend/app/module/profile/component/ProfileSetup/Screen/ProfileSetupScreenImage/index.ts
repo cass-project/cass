@@ -1,11 +1,10 @@
 import {Component, Injectable} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
-import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {AvatarCropper} from "../../../../util/component/AvatarCropper/index";
-import {AvatarCropperService} from "../../../../util/component/AvatarCropper/service";
+
+import {AvatarCropperService} from "../../../../../util/component/AvatarCropper/service";
 
 @Component({
-    selector: 'cass-profile-settings-image',
+    selector: 'cass-profile-setup-screen-image',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
@@ -14,17 +13,14 @@ import {AvatarCropperService} from "../../../../util/component/AvatarCropper/ser
         AvatarCropperService
     ],
     directives: [
-        ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,
-        /*AvatarCropper*/
     ]
 })
 
 @Injectable()
-export class ProfileSettingsImage
+export class ProfileSetupScreenImage
 {
     constructor(private avatarCropperService: AvatarCropperService){}
-
 
     isAvatarCropperVisible(){
         return this.avatarCropperService.isAvatarFormVisibleFlag;

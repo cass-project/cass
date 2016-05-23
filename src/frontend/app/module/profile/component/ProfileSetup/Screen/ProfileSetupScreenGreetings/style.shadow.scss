@@ -1,6 +1,6 @@
-@import "./../../../../../styles/globals";
+@import "./../../../../../../styles/globals";
 
-div.component-profile-settings-greetings {
+.component-profile-setup-greetings {
   @include disable-text-select;
 
   header.component-header {
