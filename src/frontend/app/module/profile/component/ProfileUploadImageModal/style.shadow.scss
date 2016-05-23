@@ -1,0 +1,91 @@
+@import "./../../../../styles/globals";
+
+$PREVIEW_SIZE: 500px;
+$FOOTER_HEIGHT: 50px;
+
+div.component-profile-upload-image-modal {
+  position: relative;
+  width: $PREVIEW_SIZE;
+  height: $PREVIEW_SIZE + $FOOTER_HEIGHT;
+  overflow: hidden;
+
+  #profileModalImageFile {
+    display: none;
+  }
+
+  div.stage-file {
+    z-index: 10;
+
+   div.drop-area {
+      text-align: center;
+      border: 1px dashed material-color("grey", "400");
+      border-radius: 3px;
+      line-height: $PREVIEW_SIZE + $FOOTER_HEIGHT - 20px;
+      margin: 10px;
+      box-sizing: border-box;
+
+      p {
+        font-size: $FONT_SIZE_NORMAL;
+      }
+
+      div.form-button {
+        vertical-align: middle;
+      }
+    }
+
+    div.drop-area-active {
+      background-color: material-color("yellow", "100");
+      border-color: material-color("yellow", "900");
+    }
+  }
+
+  div.stage-crop {
+    z-index: 10;
+
+    div.image-editor {
+      position: relative;
+
+      div.image {
+        width: 100%;
+        height: $PREVIEW_SIZE;
+        overflow: hidden;
+        background-color: material-color("grey", "100");
+      }
+
+      footer {
+        height: $FOOTER_HEIGHT;
+      }
+    }
+  }
+
+  div.stage-processing {
+    z-index: 15;
+
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div.box {
+      width: 80%;
+      height: auto;
+    }
+
+    div.progress-bar-container {
+      height: 18px;
+    }
+
+    div.controls {
+      text-align: center;
+
+      p.info {
+        display: inline-block;
+        color: material-color("grey", "800");
+        font-size:$FONT_SIZE_INFO;
+      }
+    }
+  }
+}

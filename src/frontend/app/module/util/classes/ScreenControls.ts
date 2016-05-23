@@ -29,6 +29,10 @@ export class ScreenControls<T>
         throw new Error('NOT IMPLEMENTED');
     }
 
+    goto(stage: T) {
+        this.current = stage;
+    }
+
     isOn(stage: T) {
         return this.current === stage;
     }

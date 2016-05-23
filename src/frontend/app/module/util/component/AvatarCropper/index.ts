@@ -22,6 +22,7 @@ require('./style.head.scss');
 })
 
 @Injectable()
+/** @deprecated */
 export class AvatarCropper {
     constructor(private fileReader: FileReader,
                 public avatarCropperService: AvatarCropperService,

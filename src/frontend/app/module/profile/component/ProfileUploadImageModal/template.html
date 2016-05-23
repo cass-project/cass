@@ -1,0 +1,50 @@
+<cass-modal>
+  <div class="form component component-profile-upload-image-modal">
+    <input type="file" id="profileModalImageFile" (change)="onFileChange($event)">
+    <div class="stage-file" *ngIf="screen.isOn('File')">
+      <div class="drop-area"> <!-- drop-area-active on drag'n'drop -->
+        <p>
+          <span>Перетащите сюда картинку или</span>
+          <label for="profileModalImageFile">
+            <div class="form-button form-button-primary">Выберите файл</div>
+          </label>
+        </p>
+      </div>
+    </div>
+    <div class="form stage-crop" *ngIf="screen.isOn('Crop') || screen.isOn('Processing')">
+      <div class="image-editor form">
+        <div class="image">
+          <cass-image-cropper></cass-image-cropper>
+        </div>
+        <footer class="form-footer">
+          <div class="form-footer-section">
+            <button class="form-text-button" (click)="screen.goto('File')">
+              <span>Отмена</span>
+            </button>
+          </div>
+          <div class="form-footer-section">
+            <button class="form-button form-button-green" (click)="process()">
+              <span>Загрузить картинку</span>
+            </button>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <div class="form stage-processing" *ngIf="screen.isOn('Processing')">
+      <div class="box">
+        <div class="progress-bar-container">
+          <div class="progress-bar">
+            <div class="value" style="width: 64%;"></div>
+          </div>
+        </div>
+        <div class="controls">
+          <p class="info">Ваша картинка загружается на сервер</p>
+          <button class="form-text-button">
+            <i class="fa fa-fw fa-stop"></i>
+            <span>Отмена</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</cass-modal>

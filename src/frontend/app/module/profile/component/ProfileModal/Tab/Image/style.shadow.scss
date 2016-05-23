@@ -2,10 +2,9 @@
 
 div.profile-modal-tab-image
 {
-  padding: 20px;
-
   div.stage-view {
     text-align: center;
+    padding: 20px;
 
     div.profile-image-container {
       display: inline-block;
@@ -18,55 +17,6 @@ div.profile-modal-tab-image
 
     div.profile-image-controls {
       text-align: center;
-    }
-  }
-
-  #profileModalImageFile {
-    display: none;
-  }
-
-  div.stage-file {
-    div.drop-area {
-      text-align: center;
-      border: 1px dashed material-color("grey", "400");
-      border-radius: 5px;
-      line-height: 640px;
-
-      p {
-        font-size: $FONT_SIZE_NORMAL;
-      }
-
-      div.form-button {
-        vertical-align: middle;
-      }
-    }
-
-    div.drop-area-active {
-      background-color: material-color("yellow", "100");
-      border-color: material-color("yellow", "900");
-    }
-  }
-
-  div.stage-processing {
-    display: flex;
-    justify-content: center;
-
-    div.box {
-      width: 100%;
-    }
-
-    div.progress-bar-container {
-      height: 18px;
-    }
-
-    div.controls {
-      text-align: center;
-
-      p.info {
-        display: inline-block;
-        color: material-color("grey", "800");
-        font-size:$FONT_SIZE_INFO;
-      }
     }
   }
 }
