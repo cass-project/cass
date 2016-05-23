@@ -7,13 +7,13 @@ use Zend\Expressive\Application;
 return function (Application $app)
 {
     $app->put(
-        '%s/protected/profile-im/{command:send}/to/{targetProfileId}',
+        '/protected/profile-im/{command:send}/to/{targetProfileId}',
         ProfileIMMiddleware::class,
         'profile-im-send'
     );
 
     $app->get(
-        '%s/protected/profile-im/{command:unread}',
+        '/protected/profile-im/{command:unread}',
         ProfileIMMiddleware::class,
         'profile-im-unread'
     );
