@@ -15,16 +15,7 @@ export class ProfileModalModel
                 private frontlineService: FrontlineService) {}
 
     changePasswordStn = {old_password: '', new_password: '', repeat_password: ''};
-    greetings = {
-        id: 0,
-        profile_id: 0,
-        first_name: '',
-        last_name: '',
-        middle_name: '',
-        nickname: '',
-        greetings: '',
-        greetings_method: ''
-    };
+    greetings = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].greetings)));
 
     expertIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in))); //Nice method to clone object, lol
     interestingIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)));
