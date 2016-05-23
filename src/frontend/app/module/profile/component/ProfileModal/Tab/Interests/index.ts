@@ -25,16 +25,6 @@ export class InterestsTab
 {
     constructor(private themeService: ThemeService, private profileService: ProfileService, private model: ProfileModalModel){}
 
-
-    changeExertIn(value){
-        console.log(value);
-    }
-
-    changeInterestingIn(value){
-        console.log(value);
-        console.log(this.model.interestingIn);
-    }
-
     screen: Screens = new Screens();
 
 
