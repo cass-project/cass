@@ -9,6 +9,7 @@ import {ScreenImage} from "./Screen/ScreenImage/index";
 import {ScreenFeatures} from "./Screen/ScreenFeatures/index";
 import {ScreenProcessing} from "./Screen/ScreenProcessing/index";
 import {CommunityCreateModalModel} from "./model";
+import {ScreenControls} from "../../../../util/classes/ScreenControls";
 
 enum CreateStage {
     General = <any>"General",
@@ -16,7 +17,7 @@ enum CreateStage {
     Image = <any>"Image",
     Features = <any>"Features",
     Processing = <any>"Processing",
-    Complete = <any>"Complete"  // TODO: Редирект на коммунити
+    Complete = <any>"Complete"
 }
 
 @Component({
@@ -39,7 +40,12 @@ enum CreateStage {
 })
 export class CommunityCreateModal
 {
-    public screens: ScreenControls = new ScreenControls();
+    public screens: ScreenControls<CreateStage> = new ScreenControls<CreateStage>(CreateStage.General, (sc: ScreenControls<CreateStage>) => {
+        sc.add({ from: CreateStage.General, to: CreateStage.Theme })
+          .add({ from: CreateStage.Theme, to: CreateStage.Processing })
+          .add({ from: CreateStage.Processing, to: CreateStage.Complete })
+        ;
+    });
 
     @Output('close') closeEvent = new EventEmitter<CommunityCreateModal>();
 
@@ -59,41 +65,5 @@ export class CommunityCreateModal
 
     close() {
         this.closeEvent.emit(this);
-    }
-}
-
-class ScreenControls
-{
-    static DEFAULT_SCREEN = CreateStage.General;
-    static LIST_SCREENS = [
-        CreateStage.General,
-        CreateStage.Theme,
-        CreateStage.Image,
-        CreateStage.Features,
-        CreateStage.Processing,
-        CreateStage.Complete
-    ];
-
-    public current: CreateStage = ScreenControls.DEFAULT_SCREEN;
-    private map = {};
-
-    constructor() {
-        this.map[CreateStage.General] = CreateStage.Theme;
-        this.map[CreateStage.Theme] = CreateStage.Processing;
-        // this.map[CreateStage.Image] = CreateStage.Features;
-        // this.map[CreateStage.Features] = CreateStage.Processing;
-        this.map[CreateStage.Processing] = CreateStage.Complete;
-    }
-
-    next() {
-        if(!this.map[this.current]) {
-            throw new Error('Nowhere to go.');
-        }else{
-            this.current = this.map[this.current];
-        }
-    }
-
-    isOn(screen: CreateStage) {
-        return this.current == screen;
     }
 }

@@ -7,7 +7,7 @@ export class ScreenControls<T>
         this.current = defaults;
 
         if(map) {
-            this.map = map(this);
+            map(this);
         }
     }
 
