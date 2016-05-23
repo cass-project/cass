@@ -10,6 +10,9 @@ export interface ProfileEntity
     image: ProfileImageEntity;
     expert_in: any;
     interesting_in: any;
+    collections: any,
+    gender: any
+
 }
 
 export interface ProfileGreetingsEntity
