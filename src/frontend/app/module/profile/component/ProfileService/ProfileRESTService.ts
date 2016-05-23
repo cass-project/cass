@@ -5,55 +5,52 @@ import {Http, URLSearchParams} from 'angular2/http';
 import {AuthService} from "../../../auth/service/AuthService";
 import {AvatarCropperService} from "../../../util/component/AvatarCropper/service";
 import {FrontlineService} from "../../../frontline/service";
-import {ThemeService} from "../../../theme/service/ThemeService";
-import {ProfileService} from "./ProfileService";
 
 @Injectable()
 export class ProfileRESTService
 {
-    constructor(public http: Http, private avatarCropperService: AvatarCropperService,
-                private frontlineService: FrontlineService,
-                private themeService: ThemeService,
-                private profileService: ProfileService){}
+    constructor(public http: Http,
+                private avatarCropperService: AvatarCropperService,
+                private frontlineService: FrontlineService){}
 
     public tryNumber: number = 0;
     public progressBar: number;
 
-    editPersonal(){
+    editPersonal(greetings){
         let url = `/backend/api/protected/profile/${this.frontlineService.session.auth.profiles[0].id}/edit-personal/`;
 
-        this.frontlineService.session.auth.profiles[0].greetings.greetings_method = this.profileService.greetings.greetings_method;
-        this.frontlineService.session.auth.profiles[0].greetings.last_name =  this.profileService.greetings.last_name;
-        this.frontlineService.session.auth.profiles[0].greetings.first_name =  this.profileService.greetings.first_name;
-        this.frontlineService.session.auth.profiles[0].greetings.middle_name =  this.profileService.greetings.middle_name;
-        this.frontlineService.session.auth.profiles[0].greetings.nickname =  this.profileService.greetings.nickname;
+        this.frontlineService.session.auth.profiles[0].greetings.greetings_method = greetings.greetings_method;
+        this.frontlineService.session.auth.profiles[0].greetings.last_name =  greetings.last_name;
+        this.frontlineService.session.auth.profiles[0].greetings.first_name =  greetings.first_name;
+        this.frontlineService.session.auth.profiles[0].greetings.middle_name =  greetings.middle_name;
+        this.frontlineService.session.auth.profiles[0].greetings.nickname =  greetings.nickname;
 
         return this.http.post(url, JSON.stringify({
-            greetings_method: this.profileService.greetings.greetings_method,
-            last_name: this.profileService.greetings.last_name,
-            first_name: this.profileService.greetings.first_name,
-            middle_name: this.profileService.greetings.middle_name,
-            nickname: this.profileService.greetings.nickname
+            greetings_method: greetings.greetings_method,
+            last_name: greetings.last_name,
+            first_name: greetings.first_name,
+            middle_name: greetings.middle_name,
+            nickname: greetings.nickname
         }));
     }
 
-    updateExpertThemes(){
+    updateExpertThemes(expertIn){
         let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/expert-in`;
 
-        this.frontlineService.session.auth.profiles[0].expert_in = (JSON.parse(JSON.stringify(this.profileService.expertIn)));
+        this.frontlineService.session.auth.profiles[0].expert_in = (JSON.parse(JSON.stringify(expertIn)));
 
         return this.http.put(url, JSON.stringify({
-            theme_ids: this.profileService.expertIn
+            theme_ids: expertIn
         }));
     }
 
-    updateInterestThemes(){
+    updateInterestThemes(interestingIn){
         let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/interesting-in`;
 
-        this.frontlineService.session.auth.profiles[0].interesting_in = (JSON.parse(JSON.stringify(this.profileService.interestingIn)));
+        this.frontlineService.session.auth.profiles[0].interesting_in = (JSON.parse(JSON.stringify(interestingIn)));
 
         return this.http.put(url, JSON.stringify({
-            theme_ids: this.profileService.interestingIn
+            theme_ids: interestingIn
         }));
     }
 
@@ -70,12 +67,12 @@ export class ProfileRESTService
         return this.http.put(url, JSON.stringify(''));
     }
 
-    changePassword(){
+    changePassword(changePasswordStn){
         let url = `/backend/api/protected/account/change-password`;
 
         return this.http.post(url, JSON.stringify({
-            old_password: this.profileService.changePasswordStn.old_password,
-            new_password: this.profileService.changePasswordStn.new_password
+            old_password: changePasswordStn.old_password,
+            new_password: changePasswordStn.new_password
         }));
     }
 

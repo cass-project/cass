@@ -5,72 +5,58 @@ import {frontline, FrontlineService} from "../../../frontline/service";
 export class ProfileService {
     constructor(public frontlineService:FrontlineService) {}
 
-
-    changePasswordStn = {old_password: '', new_password: '', repeat_password: ''};
-    greetings = {
-        id: 0,
-        profile_id: 0,
-        first_name: '',
-        last_name: '',
-        middle_name: '',
-        nickname: '',
-        greetings: '',
-        greetings_method: ''
-    };
-
-    expertIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in))); //Nice method to clone object, lol
-    interestingIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)));
-
-
-    interestCondReset(){
-        this.expertIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in)));
-        this.interestingIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)));
+    interestCondReset(expertIn, interestingIn){
+        for (let key in this.frontlineService.session.auth.profiles[0].expert_in) {
+            expertIn[key] = this.frontlineService.session.auth.profiles[0].expert_in[key];
+        }
+        for (let key in this.frontlineService.session.auth.profiles[0].interesting_in) {
+            interestingIn[key] = this.frontlineService.session.auth.profiles[0].interesting_in[key];
+        }
     }
 
-    interestCondToSave(){
-        if(JSON.stringify(this.expertIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in) ||
-            JSON.stringify(this.interestingIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)){
-            console.log(JSON.stringify(this.expertIn), JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in));
+    interestCondToSave(expertIn, interestingIn){
+        if(JSON.stringify(expertIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in) ||
+            JSON.stringify(interestingIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)){
             return true;
         } else {
             return false;
         }
     }
 
-    accountCondReset(){
-        this.changePasswordStn.old_password = '';
-        this.changePasswordStn.new_password = '';
-        this.changePasswordStn.repeat_password = '';
+    accountCondReset(changePasswordStn){
+        changePasswordStn.old_password = '';
+        changePasswordStn.new_password = '';
+        changePasswordStn.repeat_password = '';
     }
 
-    accountCondToSave(){
-        if(this.changePasswordStn.new_password.length > 0 &&
-            this.changePasswordStn.repeat_password.length > 0 &&
-            this.changePasswordStn.new_password === this.changePasswordStn.repeat_password &&
-            this.changePasswordStn.new_password !== this.changePasswordStn.old_password){
+    accountCondToSave(changePasswordStn){
+        if(changePasswordStn.new_password.length > 0 &&
+            changePasswordStn.repeat_password.length > 0 &&
+            changePasswordStn.new_password === changePasswordStn.repeat_password &&
+            changePasswordStn.new_password !== changePasswordStn.old_password){
             return true;
-        } else if(this.changePasswordStn.new_password.length > 0 &&
-            this.changePasswordStn.repeat_password.length > 0 &&
-            this.changePasswordStn.new_password === this.changePasswordStn.old_password &&
-            this.changePasswordStn.repeat_password === this.changePasswordStn.old_password){
+        } else if(changePasswordStn.new_password.length > 0 &&
+            changePasswordStn.repeat_password.length > 0 &&
+            changePasswordStn.new_password === changePasswordStn.old_password &&
+            changePasswordStn.repeat_password === changePasswordStn.old_password){
             console.log("Старый и новые пароли совпадают");
         }
     }
 
-    personalCondReset(){
+    personalCondReset(greetings){
         for (let key in this.frontlineService.session.auth.profiles[0].greetings) {
-            this.greetings[key] = this.frontlineService.session.auth.profiles[0].greetings[key];
+            greetings[key] = this.frontlineService.session.auth.profiles[0].greetings[key];
         }
     }
 
-    personalCondToSave() {
-        if (this.greetings.id === 0) {
-            this.personalCondReset()
-        } else if (this.greetings.greetings_method != this.frontlineService.session.auth.profiles[0].greetings.greetings_method ||
-            this.greetings.first_name != this.frontlineService.session.auth.profiles[0].greetings.first_name ||
-            this.greetings.last_name != this.frontlineService.session.auth.profiles[0].greetings.last_name ||
-            this.greetings.middle_name != this.frontlineService.session.auth.profiles[0].greetings.middle_name ||
-            this.greetings.nickname != this.frontlineService.session.auth.profiles[0].greetings.nickname) {
+    personalCondToSave(greetings) {
+        if (greetings.id === 0) {
+            this.personalCondReset(greetings);
+        } else if (greetings.greetings_method != this.frontlineService.session.auth.profiles[0].greetings.greetings_method ||
+            greetings.first_name != this.frontlineService.session.auth.profiles[0].greetings.first_name ||
+            greetings.last_name != this.frontlineService.session.auth.profiles[0].greetings.last_name ||
+            greetings.middle_name != this.frontlineService.session.auth.profiles[0].greetings.middle_name ||
+            greetings.nickname != this.frontlineService.session.auth.profiles[0].greetings.nickname) {
             return true;
         }
     }

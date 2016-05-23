@@ -56,6 +56,7 @@ export class ThemeSelect
         if(!~this.value.indexOf(themeId)) {
             if(this.isMultiple()) {
                 this.value.push(themeId);
+                this.searchInput.nativeElement.value = '';
                 this.change.emit(this.value);
             }else{
                 this.value = [themeId];

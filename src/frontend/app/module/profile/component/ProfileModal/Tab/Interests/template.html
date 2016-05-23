@@ -11,7 +11,7 @@
         </h1>
         <p class="sub">То, чем вы интересуетесь, хотя и не во всем в действительности разбираетесь</p>
       </header>
-      <cass-theme-select [value]="profileService.interestingIn" (change)="changeInterestingIn($event)"></cass-theme-select>
+      <cass-theme-select [value]="model.interestingIn"></cass-theme-select>
     </div>
   </div>
   <div class="sreen-expert-in" *ngIf="screen.isOn('ExpertIn')">
@@ -26,7 +26,7 @@
         </h1>
         <p class="sub">То, чем вы не только интересуетесь, но еще и являетесь экспертом</p>
       </header>
-      <cass-theme-select></cass-theme-select>
+      <cass-theme-select [value]="model.expertIn"></cass-theme-select>
     </div>
   </div>
 </div>
