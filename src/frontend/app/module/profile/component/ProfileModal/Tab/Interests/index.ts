@@ -2,6 +2,7 @@ import {Component} from "angular2/core";
 import {ThemeSelect} from "../../../../../theme/component/ThemeSelect/index";
 import {ThemeService} from "../../../../../theme/service/ThemeService";
 import {ProfileService} from "../../../ProfileService/ProfileService";
+import {ProfileModalModel} from "../../model";
 
 
 enum InterestsTabScreen
@@ -22,7 +23,7 @@ enum InterestsTabScreen
 })
 export class InterestsTab
 {
-    constructor(private themeService: ThemeService, private profileService: ProfileService){}
+    constructor(private themeService: ThemeService, private profileService: ProfileService, private model: ProfileModalModel){}
 
 
     changeExertIn(value){
@@ -31,7 +32,7 @@ export class InterestsTab
 
     changeInterestingIn(value){
         console.log(value);
-        console.log(this.profileService.interestingIn);
+        console.log(this.model.interestingIn);
     }
 
     screen: Screens = new Screens();
