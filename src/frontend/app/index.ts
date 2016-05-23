@@ -30,6 +30,8 @@ import {ProfileComponentService} from "./module/profile/service";
 import {AccountComponent} from "./module/account/index";
 import {CommunityComponent} from "./module/community/index";
 import {CommunityComponentService} from "./module/community/service";
+import {ThemeService} from "./module/theme/service/ThemeService";
+import {CommunityRESTService} from "./module/community/service/CommunityRESTService";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -38,6 +40,8 @@ import {CommunityComponentService} from "./module/community/service";
         AuthComponentService,
         ProfileComponentService,
         CommunityComponentService,
+        CommunityRESTService,
+        ThemeService,
     ],
     directives: [
         ROUTER_DIRECTIVES,

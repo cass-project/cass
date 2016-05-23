@@ -9,9 +9,6 @@ import {CommunityComponentService} from "./service";
 @Component({
     selector: 'cass-community',
     template: require('./template.html'),
-    providers: [
-        CommunityRESTService,
-    ],
     directives: [
         CommunityRouteModal,
         CommunityCreateModal,
