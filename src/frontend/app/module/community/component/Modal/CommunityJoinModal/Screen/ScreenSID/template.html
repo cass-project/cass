@@ -1,0 +1,29 @@
+<form class="form screen screen-sid" (ngSubmit)="next()">
+  <div class="cass-padding-box-10">
+    <div class="input-group">
+      <label class="form-label">
+        <span class="label-text">Код приглашения (SID)</span>
+        <!-- TODO: Цифра 8 должна экспортироваться во фронтлайн, а после подставляться сюда -->
+        <!-- @see: Domain\Community\Entity\Community::SID_LENGTH -->
+        <input class="form-input" type="text" required minlength="8" maxlength="8" [(ngModel)]="themeSID" placeholder="XXXXXXXX"/>
+      </label>
+    </div>
+  </div>
+  <footer class="form-footer">
+    <div class="form-footer-section">
+      <div class="cass-padding-box-5">
+        <button class="form-text-button">
+          <span>Отмена</span>
+        </button>
+      </div>
+    </div>
+    <div class="form-footer-section">
+      <div class="cass-padding-box-5">
+        <!-- [disabled] -->
+        <button type="submit" class="form-button form-button-primary">
+          <span>Войти в коммунити</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+</form>
