@@ -3,8 +3,12 @@ export class ScreenControls<T>
     public current: T;
     private map = {};
 
-    constructor(defaults: T) {
+    constructor(defaults: T, map?: { (sc: ScreenControls<T>) }) {
         this.current = defaults;
+
+        if(map) {
+            this.map = map(this);
+        }
     }
 
     public add(rule: MapDefinition<T>): ScreenControls<T> {

@@ -44,19 +44,17 @@ enum ProfileSetupScreen {
 
 export class ProfileSetup
 {
-    public screens: ScreenControls<ProfileSetupScreen> = new ScreenControls<ProfileSetupScreen>(ProfileSetupScreen.Welcome);
+    public screens: ScreenControls<ProfileSetupScreen> = new ScreenControls<ProfileSetupScreen>(ProfileSetupScreen.Welcome, (sc: ScreenControls<ProfileSetupScreen>) => {
+        sc.add({ from: ProfileSetupScreen.Welcome, to: ProfileSetupScreen.Gender })
+          .add({ from: ProfileSetupScreen.Gender, to: ProfileSetupScreen.Greetings })
+          .add({ from: ProfileSetupScreen.Greetings, to: ProfileSetupScreen.Image })
+          .add({ from: ProfileSetupScreen.Image, to: ProfileSetupScreen.Interests })
+          .add({ from: ProfileSetupScreen.Interests, to: ProfileSetupScreen.ExpertIn })
+          .add({ from: ProfileSetupScreen.ExpertIn, to: ProfileSetupScreen.Saving })
+          .add({ from: ProfileSetupScreen.Saving, to: ProfileSetupScreen.Finish });
+    });
 
-    constructor(public model: ProfileSetupModel) {
-        this.screens
-            .add({ from: ProfileSetupScreen.Welcome, to: ProfileSetupScreen.Gender })
-            .add({ from: ProfileSetupScreen.Gender, to: ProfileSetupScreen.Greetings })
-            .add({ from: ProfileSetupScreen.Greetings, to: ProfileSetupScreen.Image })
-            .add({ from: ProfileSetupScreen.Image, to: ProfileSetupScreen.Interests })
-            .add({ from: ProfileSetupScreen.Interests, to: ProfileSetupScreen.ExpertIn })
-            .add({ from: ProfileSetupScreen.ExpertIn, to: ProfileSetupScreen.Saving })
-            .add({ from: ProfileSetupScreen.Saving, to: ProfileSetupScreen.Finish })
-        ;
-    }
+    constructor(public model: ProfileSetupModel) {}
 
     ngSubmit() {
         this.nextStage();

@@ -5,6 +5,7 @@ import {ModalComponent} from "../../../../modal/component/index";
 import {CommunityJoinModalModel} from "./model";
 import {ScreenProcessing} from "./Screen/ScreenProcessing/index";
 import {ScreenSID} from "./Screen/ScreenSID/index";
+import {ScreenControls} from "../../../../util/classes/ScreenControls";
 
 enum CommunityJoinScreen
 {
@@ -32,7 +33,10 @@ export class CommunityJoinModal
 {
     @Output("close") closeEvent = new EventEmitter<CommunityJoinModal>();
 
-    public screens: ScreenControls = new ScreenControls();
+    public screens: ScreenControls<CommunityJoinScreen> = new ScreenControls<CommunityJoinScreen>(CommunityJoinScreen.SID, (sc: ScreenControls<CommunityJoinScreen>) => {
+        sc.add({ from: CommunityJoinScreen.SID, to: CommunityJoinScreen.Processing })
+          .add({ from: CommunityJoinScreen.Processing, to: CommunityJoinScreen.Complete });
+    });
 
     constructor(private service: CommunityRESTService, public model: CommunityJoinModalModel) {}
 
@@ -50,34 +54,5 @@ export class CommunityJoinModal
 
     close() {
         this.closeEvent.emit(this);
-    }
-}
-
-class ScreenControls
-{
-    static DEFAULT_SCREEN = CommunityJoinScreen.SID;
-    static LIST_SCREENS = [
-        CommunityJoinScreen.SID,
-        CommunityJoinScreen.Processing,
-        CommunityJoinScreen.Complete
-    ];
-
-    public current: CommunityJoinScreen = ScreenControls.DEFAULT_SCREEN;
-    private map = {};
-
-    constructor() {
-        this.map[CommunityJoinScreen.SID] = CommunityJoinScreen.Processing;
-    }
-
-    next() {
-        if(!this.map[this.current]) {
-            throw new Error('Nowhere to go.');
-        }else{
-            this.current = this.map[this.current];
-        }
-    }
-
-    isOn(screen: CommunityJoinScreen) {
-        return this.current == screen;
     }
 }

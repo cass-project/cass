@@ -18,6 +18,7 @@ use Domain\Account\Scripts\DeleteAccountScript;
 use Domain\Account\Scripts\ProcessAccountDeleteRequestsScript;
 use Domain\Account\Service\AccountService;
 use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
+use Domain\Auth\Service\AuthService;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Auth\Service\PasswordVerifyService;
 use Domain\Profile\Repository\ProfileGreetingsRepository;
@@ -55,7 +56,8 @@ return [
         ),
         ChangePasswordCommand::class => object()->constructor(
             get(AccountService::class),
-            get(CurrentAccountService::class)
+            get(CurrentAccountService::class),
+            get(AuthService::class)
         ),
     ]
 ];
