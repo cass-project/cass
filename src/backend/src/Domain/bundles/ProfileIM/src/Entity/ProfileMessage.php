@@ -50,7 +50,7 @@ class ProfileMessage implements JSONSerializable
      * @Column(type="text")
      * @var string
      */
-    private $content = "";
+    private $content;
 
     public function __construct(Profile $sourceProfile, Profile $targetProfile) {
         $this->sourceProfile = $sourceProfile;
@@ -106,7 +106,7 @@ class ProfileMessage implements JSONSerializable
         return $this->content;
     }
 
-    public function setContent($content): self {
+    public function setContent(string $content): self {
         $this->content = $content;
         return $this;
     }
