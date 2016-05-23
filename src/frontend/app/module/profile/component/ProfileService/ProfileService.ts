@@ -43,20 +43,20 @@ export class ProfileService {
         }
     }
 
-    personalCondReset(greetings){
+    personalCondReset(profile){
         for (let key in this.frontlineService.session.auth.profiles[0].greetings) {
-            greetings[key] = this.frontlineService.session.auth.profiles[0].greetings[key];
-        }
+            profile.greetings[key] = this.frontlineService.session.auth.profiles[0].greetings[key];
+        };
+        profile.gender = this.frontlineService.session.auth.profiles[0].gender;
     }
 
-    personalCondToSave(greetings) {
-        if (greetings.id === 0) {
-            this.personalCondReset(greetings);
-        } else if (greetings.greetings_method != this.frontlineService.session.auth.profiles[0].greetings.greetings_method ||
-            greetings.first_name != this.frontlineService.session.auth.profiles[0].greetings.first_name ||
-            greetings.last_name != this.frontlineService.session.auth.profiles[0].greetings.last_name ||
-            greetings.middle_name != this.frontlineService.session.auth.profiles[0].greetings.middle_name ||
-            greetings.nickname != this.frontlineService.session.auth.profiles[0].greetings.nickname) {
+    personalCondToSave(profile) {
+        if (profile.greetings.greetings_method != this.frontlineService.session.auth.profiles[0].greetings.greetings_method ||
+            profile.greetings.first_name != this.frontlineService.session.auth.profiles[0].greetings.first_name ||
+            profile.greetings.last_name != this.frontlineService.session.auth.profiles[0].greetings.last_name ||
+            profile.greetings.middle_name != this.frontlineService.session.auth.profiles[0].greetings.middle_name ||
+            profile.greetings.nickname != this.frontlineService.session.auth.profiles[0].greetings.nickname ||
+            profile.gender.string != this.frontlineService.session.auth.profiles[0].gender.string){
             return true;
         }
     }

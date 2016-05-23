@@ -16,21 +16,34 @@ export class ProfileRESTService
     public tryNumber: number = 0;
     public progressBar: number;
 
-    editPersonal(greetings){
+
+    editSex(profile){
+        let url = `/backend/api/protected/profile/${this.frontlineService.session.auth.profiles[0].id}/set-gender`;
+
+        this.frontlineService.session.auth.profiles[0].gender = profile.gender;
+
+        console.log(profile.gender.string);
+        return this.http.post(url, JSON.stringify({
+            gender: profile.gender.string
+        }))
+    }
+
+    editPersonal(profile){
         let url = `/backend/api/protected/profile/${this.frontlineService.session.auth.profiles[0].id}/edit-personal/`;
 
-        this.frontlineService.session.auth.profiles[0].greetings.greetings_method = greetings.greetings_method;
-        this.frontlineService.session.auth.profiles[0].greetings.last_name =  greetings.last_name;
-        this.frontlineService.session.auth.profiles[0].greetings.first_name =  greetings.first_name;
-        this.frontlineService.session.auth.profiles[0].greetings.middle_name =  greetings.middle_name;
-        this.frontlineService.session.auth.profiles[0].greetings.nickname =  greetings.nickname;
+        this.frontlineService.session.auth.profiles[0].greetings.greetings_method = profile.greetings.greetings_method;
+        this.frontlineService.session.auth.profiles[0].greetings.last_name =  profile.greetings.last_name;
+        this.frontlineService.session.auth.profiles[0].greetings.first_name =  profile.greetings.first_name;
+        this.frontlineService.session.auth.profiles[0].greetings.middle_name =  profile.greetings.middle_name;
+        this.frontlineService.session.auth.profiles[0].greetings.nickname =  profile.greetings.nickname;
+
 
         return this.http.post(url, JSON.stringify({
-            greetings_method: greetings.greetings_method,
-            last_name: greetings.last_name,
-            first_name: greetings.first_name,
-            middle_name: greetings.middle_name,
-            nickname: greetings.nickname
+            greetings_method: profile.greetings.greetings_method,
+            last_name: profile.greetings.last_name,
+            first_name: profile.greetings.first_name,
+            middle_name: profile.greetings.middle_name,
+            nickname: profile.greetings.nickname
         }));
     }
 
