@@ -1,6 +1,26 @@
 <div class="component component-community-create-modal">
-    <cass-modal>
-        <div class="form community-modal community-modal-create">
+  <cass-modal>
+    <div>
+      <header class="form-header" *ngIf="isHeaderVisible()">
+        <h1>Мастер создания коммунити</h1>
+      </header>
+      <div class="form community-modal community-modal-create">
+        <div *ngIf="screens.isOn('General')">
+          <cass-community-create-modal-screen-general (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-general>
         </div>
-    </cass-modal>
+        <div *ngIf="screens.isOn('Theme')">
+          <cass-community-create-modal-screen-theme (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-theme>
+        </div>
+        <div *ngIf="screens.isOn('Image')">
+          <cass-community-create-modal-screen-image  (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-image>
+        </div>
+        <div *ngIf="screens.isOn('Features')">
+          <cass-community-create-modal-screen-features (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-features>
+        </div>
+        <div *ngIf="screens.isOn('Processing')">
+          <cass-community-create-modal-screen-processing (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-processing>
+        </div>
+      </div>
+    </div>
+  </cass-modal>
 </div>
