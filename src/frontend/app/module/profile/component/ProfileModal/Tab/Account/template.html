@@ -20,19 +20,19 @@
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Текущий пароль</span>
-        <input class="form-input" [(ngModel)]="profileService.changePasswordStn.old_password" type="password" placeholder="Пароль, который вы используете сейчас">
+        <input class="form-input" [(ngModel)]="model.changePasswordStn.old_password" type="password" placeholder="Пароль, который вы используете сейчас">
       </label>
     </div>
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Новый пароль</span>
-        <input class="form-input" [(ngModel)]="profileService.changePasswordStn.new_password" type="password" placeholder="*********">
+        <input class="form-input" [(ngModel)]="model.changePasswordStn.new_password" type="password" placeholder="*********">
       </label>
     </div>
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Повторите пароль</span>
-        <input class="form-input" [(ngModel)]="profileService.changePasswordStn.repeat_password" type="password" placeholder="Введите то же самое – мы защищаем вас от ошибок!">
+        <input class="form-input" [(ngModel)]="model.changePasswordStn.repeat_password" type="password" placeholder="Введите то же самое – мы защищаем вас от ошибок!">
       </label>
     </div>
   </div>
