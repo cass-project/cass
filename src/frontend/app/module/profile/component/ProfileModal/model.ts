@@ -15,7 +15,7 @@ export class ProfileModalModel
                 private frontlineService: FrontlineService) {}
 
     changePasswordStn = {old_password: '', new_password: '', repeat_password: ''};
-    greetings = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].greetings)));
+    profile = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0])));
 
     expertIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in))); //Nice method to clone object, lol
     interestingIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)));
@@ -24,13 +24,13 @@ export class ProfileModalModel
 
     reset(){
         this.profileService.accountCondReset(this.changePasswordStn);
-        this.profileService.personalCondReset(this.greetings);
+        this.profileService.personalCondReset(this.profile);
         this.profileService.interestCondReset(this.expertIn, this.interestingIn);
     }
 
     canSave(){
         if(this.profileService.accountCondToSave(this.changePasswordStn) ||
-            this.profileService.personalCondToSave(this.greetings) ||
+            this.profileService.personalCondToSave(this.profile) ||
             this.profileService.interestCondToSave(this.expertIn, this.interestingIn)){
             return true;
         } else {
@@ -39,9 +39,11 @@ export class ProfileModalModel
     }
 
     saveAllChanges(){
-        if(this.profileService.personalCondToSave(this.greetings) && this.profileService.interestCondToSave(this.expertIn, this.interestingIn) && this.profileService.accountCondToSave(this.changePasswordStn)){
-            this.profileRESTService.editPersonal(this.greetings).subscribe(data => {this.profileService.personalCondReset(this.greetings);
-                this.profileRESTService.updateInterestThemes(this.interestingIn).subscribe(data => {
+        if(this.profileService.personalCondToSave(this.profile) && this.profileService.interestCondToSave(this.expertIn, this.interestingIn) && this.profileService.accountCondToSave(this.changePasswordStn)){
+            this.profileRESTService.editPersonal(this.profile).subscribe(data => {
+                this.profileRESTService.editSex(this.profile).subscribe(data => {
+                    this.profileService.personalCondReset(this.profile);
+                    this.profileRESTService.updateInterestThemes(this.interestingIn).subscribe(data => {
                     this.profileRESTService.updateExpertThemes(this.expertIn).subscribe(data => {this.profileService.interestCondReset(this.expertIn, this.interestingIn);
                         this.profileRESTService.changePassword(this.changePasswordStn).subscribe(data => {
                             this.profileService.accountCondReset(this.changePasswordStn);
@@ -52,11 +54,17 @@ export class ProfileModalModel
                             this.modals.modals.settings.close();});
                     });
                 });
-            })
-        } else if(this.profileService.personalCondToSave(this.greetings) && this.profileService.interestCondToSave(this.expertIn, this.interestingIn)){
-            this.profileRESTService.editPersonal(this.greetings).subscribe(data => {this.profileService.personalCondReset(this.greetings);
+            });
+        });
+        } else if(this.profileService.personalCondToSave(this.profile) && this.profileService.interestCondToSave(this.expertIn, this.interestingIn)){
+            this.profileRESTService.editPersonal(this.profile).subscribe(data => {
+                this.profileRESTService.editSex(this.profile).subscribe(data => {
+                    this.profileService.personalCondReset(this.profile);
                 this.profileRESTService.updateInterestThemes(this.interestingIn).subscribe(data => {
-                    this.profileRESTService.updateExpertThemes(this.expertIn).subscribe(data => {this.profileService.interestCondReset(this.expertIn, this.interestingIn); this.modals.modals.settings.close();});
+                    this.profileRESTService.updateExpertThemes(this.expertIn).subscribe(data => {
+                        this.profileService.interestCondReset(this.expertIn, this.interestingIn); this.modals.modals.settings.close();
+                        });
+                    });
                 });
             });
         } else if(this.profileService.interestCondToSave(this.expertIn, this.interestingIn) && this.profileService.accountCondToSave(this.changePasswordStn)){
@@ -73,9 +81,10 @@ export class ProfileModalModel
                     });
                 });
             });
-        } else if(this.profileService.personalCondToSave(this.greetings) && this.profileService.accountCondToSave(this.changePasswordStn)) {
-            this.profileRESTService.editPersonal(this.greetings).subscribe(data => {
-                this.profileService.personalCondReset(this.greetings);
+        } else if(this.profileService.personalCondToSave(this.profile) && this.profileService.accountCondToSave(this.changePasswordStn)) {
+            this.profileRESTService.editPersonal(this.profile).subscribe(data => {
+                this.profileRESTService.editSex(this.profile).subscribe(data => {
+                    this.profileService.personalCondReset(this.profile);
                 this.profileRESTService.changePassword(this.changePasswordStn).subscribe(data => {
                     this.profileService.accountCondReset(this.changePasswordStn);
                     this.ApiKey = data;
@@ -84,9 +93,13 @@ export class ProfileModalModel
                     this.modals.modals.settings.close();
                 });
             });
-        } else if (this.profileService.personalCondToSave(this.greetings)){
-            this.profileRESTService.editPersonal(this.greetings).subscribe(data => {this.profileService.personalCondReset(this.greetings); this.modals.modals.settings.close();})
-
+        });
+        } else if (this.profileService.personalCondToSave(this.profile)){
+            this.profileRESTService.editPersonal(this.profile).subscribe(data => {
+                this.profileRESTService.editSex(this.profile).subscribe(data => {
+                    this.profileService.personalCondReset(this.profile); this.modals.modals.settings.close();
+                });
+            });
         } else if(this.profileService.interestCondToSave(this.expertIn, this.interestingIn)){
             this.profileRESTService.updateInterestThemes(this.interestingIn).subscribe(data => {
                 this.profileRESTService.updateExpertThemes(this.expertIn).subscribe(data => {this.profileService.interestCondReset(this.expertIn, this.interestingIn); this.modals.modals.settings.close();});
