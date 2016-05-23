@@ -6,14 +6,17 @@ export class ProfileService {
     constructor(public frontlineService:FrontlineService) {}
 
     interestCondReset(expertIn, interestingIn){
-        expertIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in)));
-        interestingIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)));
+        for (let key in this.frontlineService.session.auth.profiles[0].expert_in) {
+            expertIn[key] = this.frontlineService.session.auth.profiles[0].expert_in[key];
+        }
+        for (let key in this.frontlineService.session.auth.profiles[0].interesting_in) {
+            interestingIn[key] = this.frontlineService.session.auth.profiles[0].interesting_in[key];
+        }
     }
 
     interestCondToSave(expertIn, interestingIn){
         if(JSON.stringify(expertIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in) ||
             JSON.stringify(interestingIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)){
-            console.log(JSON.stringify(expertIn), JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in));
             return true;
         } else {
             return false;
