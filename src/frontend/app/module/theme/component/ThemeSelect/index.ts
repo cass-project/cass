@@ -101,7 +101,7 @@ class ThemeSelectSearch
         if(input.replace(/\s/g, '').length > 0) {
             this.service.each((theme: ThemeTree) => {
                 if(results.length <= ThemeSelectSearch.MAX_RESULTS) {
-                    if(~theme.title.indexOf(input) && !this.themeSelect.has(theme.id)) {
+                    if(~theme.title.toLocaleLowerCase().indexOf(input.toLocaleLowerCase()) && !this.themeSelect.has(theme.id)) {
                         results.push(theme);
                     }
                 }
