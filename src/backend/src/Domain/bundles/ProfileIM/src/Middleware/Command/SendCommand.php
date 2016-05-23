@@ -20,8 +20,13 @@ class SendCommand extends Command
 
         $message = new ProfileMessage($sourceProfile, $targetProfile);
 
-        $body = json_decode($request->getBody(), true);
-        $message->setContent($body['content']);
+        if($request->getParsedBody()) {
+            $body = $request->getParsedBody();
+        }else{
+            $body = json_decode($request->getBody());
+        }
+
+        $message->setContent($body->content);
 
         $this->profileIMService->createMessage($message);
 

@@ -24,6 +24,12 @@ export class InterestsTab
 {
     constructor(private themeService: ThemeService, private profileService: ProfileService){}
 
+    value;
+
+    test(ids){
+        console.log(ids);
+    }
+
     changeInEx(){
         this.profileService.inExpertZone = true;
         this.profileService.inInterestingZone = false;

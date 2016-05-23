@@ -27,19 +27,17 @@ class ProfileIMMiddlewareTest extends MiddlewareTestCase
 		$this->requestSendMessage($targetProfileId, ["content" => "string"])
 			->auth($currentAccount->getAPIKey())
 			->execute()
-			->dump()
 			->expectJSONContentType()
 			->expectStatusCode(200)
 			->expectJSONBody([
-												 'success' => true
-											 ])
-
+												 'success' => TRUE
+											 ]
+			)
 		;
 	}
 
 	public function testSendMessage403()
 	{
-
 		$targetProfileId = DemoAccountsFixtures::getAccount(2)->getProfiles()->first()->getId();
 
 		$this->requestSendMessage($targetProfileId, ["content" => "string"])
