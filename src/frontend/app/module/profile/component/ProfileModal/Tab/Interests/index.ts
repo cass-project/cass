@@ -24,23 +24,16 @@ export class InterestsTab
 {
     constructor(private themeService: ThemeService, private profileService: ProfileService){}
 
-    value;
 
-    test(ids){
-        console.log(ids);
+    changeExertIn(value){
+        console.log(value);
     }
 
-    changeInEx(){
-        this.profileService.inExpertZone = true;
-        this.profileService.inInterestingZone = false;
-        console.log(this.profileService.inInterestingZone, this.profileService.inExpertZone)
+    changeInterestingIn(value){
+        console.log(value);
+        console.log(this.profileService.interestingIn);
     }
 
-    changeInInt(){
-        this.profileService.inExpertZone = false;
-        this.profileService.inInterestingZone = true;
-        console.log(this.profileService.inInterestingZone, this.profileService.inExpertZone)
-    }
     screen: Screens = new Screens();
 
 

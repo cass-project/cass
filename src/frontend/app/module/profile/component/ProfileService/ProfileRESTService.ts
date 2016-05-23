@@ -4,7 +4,6 @@ import {Injectable} from 'angular2/core';
 import {Http, URLSearchParams} from 'angular2/http';
 import {AuthService} from "../../../auth/service/AuthService";
 import {AvatarCropperService} from "../../../util/component/AvatarCropper/service";
-import {ProfileModalModel} from "../ProfileModal/model";
 import {FrontlineService} from "../../../frontline/service";
 import {ThemeService} from "../../../theme/service/ThemeService";
 import {ProfileService} from "./ProfileService";

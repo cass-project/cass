@@ -13,8 +13,6 @@ export class ProfileModalModel
                 private profileService: ProfileService,
                 private modals: ProfileComponentService,
                 private frontlineService: FrontlineService) {}
-
-    needToSave: boolean = false;
     passwordData;
 
     reset(){

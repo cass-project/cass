@@ -18,9 +18,6 @@ export class ProfileService {
         greetings_method: ''
     };
 
-    inInterestingZone: boolean = true;
-    inExpertZone: boolean = false;
-    /*expertIn = Object.create(this.frontlineService.session.auth.profiles[0].expert_in);*/
     expertIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in))); //Nice method to clone object, lol
     interestingIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)));
 

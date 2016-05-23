@@ -4,14 +4,14 @@
       <header class="tab-modal-header">
         <h1>
           <span class="screen-selector">
-            <span class="tab tab-active" (click)="screen.go('InterestingIn'); changeInInt()">Интересы</span>
+            <span class="tab tab-active" (click)="screen.go('InterestingIn');">Интересы</span>
             <span class="separator">|</span>
-            <span class="tab" (click)="screen.go('ExpertIn'); changeInEx()">Экспертиза</span>
+            <span class="tab" (click)="screen.go('ExpertIn');">Экспертиза</span>
           </span>
         </h1>
         <p class="sub">То, чем вы интересуетесь, хотя и не во всем в действительности разбираетесь</p>
       </header>
-      <cass-theme-select [change]="test($event)"></cass-theme-select>
+      <cass-theme-select [value]="profileService.interestingIn" (change)="changeInterestingIn($event)"></cass-theme-select>
     </div>
   </div>
   <div class="sreen-expert-in" *ngIf="screen.isOn('ExpertIn')">
@@ -19,9 +19,9 @@
       <header class="tab-modal-header">
         <h1>
           <span class="screen-selector">
-            <span class="tab" (click)="screen.go('InterestingIn'); changeInInt()">Интересы</span>
+            <span class="tab" (click)="screen.go('InterestingIn');">Интересы</span>
             <span class="separator">|</span>
-            <span class="tab tab-active" (click)="screen.go('ExpertIn');  changeInEx()">Экспертиза</span>
+            <span class="tab tab-active" (click)="screen.go('ExpertIn');">Экспертиза</span>
           </span>
         </h1>
         <p class="sub">То, чем вы не только интересуетесь, но еще и являетесь экспертом</p>
