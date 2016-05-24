@@ -1,9 +1,12 @@
 import {UploadImageStrategy} from "../../util/component/UploadImage/strategy";
 import {UploadImageCropModel} from "../../util/component/UploadImage/strategy";
 import {UploadImageModal} from "../../util/component/UploadImage/index";
+import {ProfileRESTService} from "../component/ProfileService/ProfileRESTService";
 
 export class UploadProfileImageStrategy implements UploadImageStrategy
 {
+    constructor(private profileRESTService: ProfileRESTService){}
+
     getCropperOptions() {
         return {
             aspectRatio: 1 /* 1/1 */,
@@ -30,7 +33,9 @@ export class UploadProfileImageStrategy implements UploadImageStrategy
     }
 
     process(file: Blob, model: UploadImageCropModel, modal: UploadImageModal) {
-        console.log('upload image');
+        console.log(model);
+
+        this.profileRESTService.avatarUpload(file, model);
 
         modal.progress.reset();
 

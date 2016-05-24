@@ -55,6 +55,10 @@ export class UploadImageModal
         this.cropEvent.emit(this);
     }
 
+    complete(){
+        this.completeEvent.emit(this)
+    }
+
     process() {
         let model: UploadImageCropModel = {
             x: this.cropper.getX(),
