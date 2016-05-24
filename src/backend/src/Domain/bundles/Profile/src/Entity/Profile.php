@@ -16,6 +16,7 @@ use Domain\Profile\Exception\UnknownGenderException;
  */
 class Profile implements JSONSerializable
 {
+    const GENDER_NONE = null;
     const GENDER_MALE = 1;
     const GENDER_FEMALE = 0;
 
@@ -26,7 +27,7 @@ class Profile implements JSONSerializable
      * @Column(type="integer")
      * @var int
      */
-    private $gender;
+    private $gender = self::GENDER_NONE;
 
     /**
      * @Column(type="boolean", name="is_initialized")
@@ -142,8 +143,15 @@ class Profile implements JSONSerializable
         return $this;
     }
 
+    public function unsetGender(): self {
+        $this->gender = self::GENDER_NONE;
+        return $this;
+    }
+
     public function getGenderStringCode(): string {
-        if($this->gender === self::GENDER_MALE) {
+        if($this->gender === self::GENDER_NONE) {
+            return 'none';
+        }else if($this->gender === self::GENDER_MALE) {
             return 'male';
         }else if($this->gender === self::GENDER_FEMALE) {
             return 'female';
@@ -155,7 +163,9 @@ class Profile implements JSONSerializable
     public function setGenderFromStringCode(string $genderCode): self {
         $genderCode = strtolower($genderCode);
 
-        if($genderCode === 'male') {
+        if($genderCode === 'none') {
+            $this->unsetGender();
+        }else if($genderCode === 'male') {
             $this->setGender(self::GENDER_MALE);
         }else if($genderCode === 'female') {
             $this->setGender(self::GENDER_FEMALE);
@@ -219,7 +229,6 @@ class Profile implements JSONSerializable
 
         return $this;
     }
-
 
     public function setAccount(Account $account)
     {

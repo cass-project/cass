@@ -79,6 +79,59 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
 
     }
 
+    public function testUnsetGender()
+    {
+        $profile = DemoProfileFixture::getProfile();
+
+        $this->request('POST', sprintf('/protected/profile/%d/set-gender', $profile->getId()))
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->setParameters(['gender' => 'fEmale'])
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+        ;
+
+        $this->requestGet($profile->getId())
+            ->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(200)
+            ->expectJSONBody([
+                'success' => true,
+                'entity' => [
+                    'id' => $profile->getId(),
+                    'gender' => [
+                        'int' => Profile::GENDER_FEMALE,
+                        'string' => 'female'
+                    ]
+                ]
+            ])
+        ;
+
+        $this->request('POST', sprintf('/protected/profile/%d/set-gender', $profile->getId()))
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->setParameters(['gender' => 'none'])
+            ->execute()
+            ->dump()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+        ;
+
+        $this->requestGet($profile->getId())
+            ->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(200)
+            ->expectJSONBody([
+                'success' => true,
+                'entity' => [
+                    'id' => $profile->getId()
+                ]
+            ])
+            ->expect(function(array $response) {
+                $this->assertFalse(isset($response['entity']['gender']));
+            });
+        ;
+    }
+
     private function requestGet(int $profileId) {
         return $this->request('GET', sprintf('/profile/%d/get', $profileId));
     }
