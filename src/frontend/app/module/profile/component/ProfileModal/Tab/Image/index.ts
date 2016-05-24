@@ -35,6 +35,11 @@ export class ImageTab
     uploadProfileImage() {
         this.upload.open();
     }
+
+    closeUploadProfileImageModal() {
+        console.log('close???');
+        this.upload.close();
+    }
 }
 
 class UploadImageModalControl extends ModalControl {}

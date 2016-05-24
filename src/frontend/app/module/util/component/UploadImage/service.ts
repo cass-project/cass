@@ -21,4 +21,12 @@ export class UploadImageService
 
         this.strategy.process(file, model, modal);
     }
+
+    public abort(file: Blob, modal: UploadImageModal) {
+        if(!this.strategy) {
+            throw new Error('No strategy available');
+        }
+
+        this.strategy.abort(file, modal);
+    }
 }

@@ -18,6 +18,7 @@
       </button>
     </div>
   </div>
-
-  <cass-upload-image-modal (close)="upload.close()"></cass-upload-image-modal>
+  <div *ngIf="upload.isOpened()">
+    <cass-upload-image-modal (close)="upload.close()"></cass-upload-image-modal>
+  </div>
 </div>

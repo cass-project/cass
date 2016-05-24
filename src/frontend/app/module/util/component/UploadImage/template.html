@@ -34,12 +34,12 @@
       <div class="box">
         <div class="progress-bar-container">
           <div class="progress-bar">
-            <div class="value" style="width: 64%;"></div>
+            <div class="value" [style.width.%]="progress.value"></div>
           </div>
         </div>
         <div class="controls">
           <p class="info">Ваша картинка загружается на сервер</p>
-          <button class="form-text-button">
+          <button class="form-text-button" (click)="abort()">
             <i class="fa fa-fw fa-stop"></i>
             <span>Отмена</span>
           </button>
