@@ -28,7 +28,7 @@ export class ImageCropperService
         this.file = undefined;
     }
 
-    public getFile() {
+    public getFile(): Blob {
         if(this.file) {
             return this.file;
         }else{

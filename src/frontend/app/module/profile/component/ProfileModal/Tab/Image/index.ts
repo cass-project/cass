@@ -3,7 +3,9 @@ import {CORE_DIRECTIVES} from "angular2/common";
 import {ProfileImage} from "../../../ProfileImage/index";
 import {AvatarCropperService} from "../../../../../util/component/AvatarCropper/service";
 import {ModalControl} from "../../../../../util/classes/ModalControl";
-import {ProfileUploadImageModal} from "../../../ProfileUploadImageModal/index";
+import {UploadImageModal} from "../../../../../util/component/UploadImage/index";
+import {UploadImageService} from "../../../../../util/component/UploadImage/service";
+import {UploadProfileImageStrategy} from "../../../../util/UploadProfileImageStrategy";
 
 @Component({
     selector: 'cass-profile-modal-tab-image',
@@ -13,10 +15,11 @@ import {ProfileUploadImageModal} from "../../../ProfileUploadImageModal/index";
     ],
     directives: [
         ProfileImage,
-        ProfileUploadImageModal,
+        UploadImageModal,
     ],
     providers: [
-        CORE_DIRECTIVES
+        CORE_DIRECTIVES,
+        UploadImageService
     ]
 })
 
@@ -24,6 +27,10 @@ import {ProfileUploadImageModal} from "../../../ProfileUploadImageModal/index";
 export class ImageTab
 {
     upload: UploadImageModalControl = new UploadImageModalControl();
+
+    constructor(private uploadImageService: UploadImageService) {
+        uploadImageService.setUploadStrategy(new UploadProfileImageStrategy());
+    }
 
     uploadProfileImage() {
         this.upload.open();

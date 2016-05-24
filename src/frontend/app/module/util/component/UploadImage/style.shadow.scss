@@ -3,13 +3,13 @@
 $PREVIEW_SIZE: 500px;
 $FOOTER_HEIGHT: 50px;
 
-div.component-profile-upload-image-modal {
+div.component-upload-image-modal {
   position: relative;
   width: $PREVIEW_SIZE;
   height: $PREVIEW_SIZE + $FOOTER_HEIGHT;
   overflow: hidden;
 
-  #profileModalImageFile {
+  #uploadModalImageFile {
     display: none;
   }
 

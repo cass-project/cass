@@ -1,0 +1,24 @@
+import {Injectable} from "angular2/core";
+
+import {ImageCropperService} from "../ImageCropper/index";
+import {UploadImageStrategy} from "./strategy";
+import {UploadImageCropModel} from "./strategy";
+import {UploadImageModal} from "./index";
+
+@Injectable()
+export class UploadImageService
+{
+    private strategy: UploadImageStrategy;
+
+    public setUploadStrategy(strategy: UploadImageStrategy) {
+        this.strategy = strategy;
+    }
+
+    public process(file: Blob, model: UploadImageCropModel, modal: UploadImageModal) {
+        if(!this.strategy) {
+            throw new Error('No strategy available');
+        }
+
+        this.strategy.process(file, model, modal);
+    }
+}

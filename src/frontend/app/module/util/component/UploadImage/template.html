@@ -1,11 +1,11 @@
 <cass-modal>
-  <div class="form component component-profile-upload-image-modal">
-    <input type="file" id="profileModalImageFile" (change)="onFileChange($event)">
+  <div class="form component component-upload-image-modal">
+    <input type="file" id="uploadModalImageFile" (change)="onFileChange($event)">
     <div class="stage-file" *ngIf="screen.isOn('File')">
       <div class="drop-area"> <!-- drop-area-active on drag'n'drop -->
         <p>
           <span>Перетащите сюда картинку или</span>
-          <label for="profileModalImageFile">
+          <label for="uploadModalImageFile">
             <div class="form-button form-button-primary">Выберите файл</div>
           </label>
         </p>
