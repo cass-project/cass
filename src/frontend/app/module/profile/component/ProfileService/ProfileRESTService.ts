@@ -89,13 +89,23 @@ export class ProfileRESTService
         }));
     }
 
-    avatarUpload() {
-        let crop = this.avatarCropperService.crop;
+    avatarUpload(file, model) {
+
+        let crop = {
+            start: {
+                x: model.x,
+                y: model.y
+            },
+            end: {
+                x: model.width + model.x,
+                y: model.height + model.y
+            }
+        };
 
         this.tryNumber++;
         let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/image-upload/crop-start/${crop.start.x}/${crop.start.y}/crop-end/${crop.end.x}/${crop.end.y}`;
         let formData = new FormData();
-        formData.append("file", this.avatarCropperService.file);
+        formData.append("file", file);
 
         xmlRequest.open("POST", url);
         xmlRequest.upload.onprogress = (e) => {
@@ -114,7 +124,7 @@ export class ProfileRESTService
                     this.progressBar = 0;
                     this.tryNumber = 0;
                 } else {
-                    this.avatarUpload();
+                    this.avatarUpload(file, model);
                 }
             }
         }
