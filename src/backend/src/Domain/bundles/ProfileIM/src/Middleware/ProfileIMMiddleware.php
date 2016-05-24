@@ -3,6 +3,7 @@ namespace Domain\ProfileIM\Middleware;
 
 use Domain\Auth\Service\CurrentAccountService;
 use Application\REST\Response\GenericResponseBuilder;
+use Domain\Profile\Exception\ProfileNotFoundException;
 use Domain\ProfileIM\Exception\SameTargetAndSourceException;
 use Domain\ProfileIM\Middleware\Command\Command;
 use Domain\Profile\Service\ProfileService;
@@ -40,6 +41,10 @@ class ProfileIMMiddleware implements MiddlewareInterface
             $responseBuilder
               ->setStatusSuccess()
               ->setJson($result);
+        }catch (ProfileNotFoundException $e){
+            $responseBuilder
+              ->setStatusNotFound()
+              ->setError($e);
         } catch(SameTargetAndSourceException $e){
             $responseBuilder
               ->setStatusBadRequest()

@@ -6,6 +6,7 @@ namespace Domain\ProfileIM\Tests;
 use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\ProfileIM\Tests\Fixtures\DemoAccountsFixtures;
+use Domain\ProfileIM\Tests\Fixtures\DemoProfileMessagesIM;
 
 /**
  * @backupGlobals disabled
@@ -16,10 +17,11 @@ class ProfileIMMiddlewareTest extends MiddlewareTestCase
 
 		return [
 			new DemoAccountsFixtures(),
+			new DemoProfileMessagesIM()
 		];
 	}
 
-	public function testSendMessage()
+	public function testSendMessage200()
 	{
 		$targetProfileId = DemoAccountsFixtures::getAccount(2)->getProfiles()->first()->getId();
 		$currentAccount = DemoAccountsFixtures::getAccount(1);
@@ -43,6 +45,91 @@ class ProfileIMMiddlewareTest extends MiddlewareTestCase
 		$this->requestSendMessage($targetProfileId, ["content" => "string"])
 			->execute()
 			->expectAuthError();
+	}
+
+	public function testSendMessage404()
+	{
+		$currentAccount = DemoAccountsFixtures::getAccount(1);
+
+		$this->requestSendMessage(9999, ["content" => "string"])
+				 ->auth($currentAccount->getAPIKey())
+				 ->execute()
+				 ->expectJSONContentType()
+				 ->expectStatusCode(404)
+				 ->expectJSONBody([
+														'success' => FALSE
+													]
+				 )
+		;
+	}
+
+	public function testGetMessage200()
+	{
+		$targetProfile = DemoAccountsFixtures::getAccount(2)->getProfiles()->first();
+		$targetProfileId = $targetProfile->getId();
+		$currentAccount = DemoAccountsFixtures::getAccount(1);
+
+		$this->requestProfileIMGet($targetProfileId, 0, 1)
+			->auth($currentAccount->getAPIKey())
+			->execute()
+			->expectJSONContentType()
+			->expectStatusCode(200)
+			->expectJSONBody([
+												 'success' => TRUE
+											 ]
+			)
+		;
+	}
+
+	public function testGetMessage403()
+	{
+		$targetProfile = DemoAccountsFixtures::getAccount(2)->getProfiles()->first();
+		$targetProfileId = $targetProfile->getId();
+
+		$this->requestProfileIMGet($targetProfileId, 0, 1)
+				 ->execute()
+				 ->expectAuthError()
+		;
+	}
+
+	public function testGetMessage404()
+	{
+		$currentAccount = DemoAccountsFixtures::getAccount(1);
+
+		$this->requestProfileIMGet(99999, 0, 1)
+				 ->auth($currentAccount->getAPIKey())
+				 ->execute()
+				 ->expectJSONContentType()
+				 ->expectStatusCode(404)
+				 ->expectJSONBody([
+														'success' => FALSE
+													]
+				 )
+		;
+	}
+
+	public function testGetMessagesUnread200()
+	{
+		$currentAccount = DemoAccountsFixtures::getAccount(1);
+
+		$this->requestProfileIMUnreadGet()
+			->auth($currentAccount->getAPIKey())
+			->execute()
+			->expectJSONContentType()
+			->expectStatusCode(200)
+			->expectJSONBody([
+												 'success' => TRUE
+											 ]
+			)
+		;
+	}
+
+	public function testGetMessagesUnread403()
+	{
+		$this->requestProfileIMUnreadGet()
+				 ->execute()
+				 ->expectAuthError()
+		;
 	}
 
 	protected function requestSendMessage(int $targetProfileId, array $json): RESTRequest
