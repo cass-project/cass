@@ -6,6 +6,7 @@ import {ModalControl} from "../../../../../util/classes/ModalControl";
 import {UploadImageModal} from "../../../../../util/component/UploadImage/index";
 import {UploadImageService} from "../../../../../util/component/UploadImage/service";
 import {UploadProfileImageStrategy} from "../../../../util/UploadProfileImageStrategy";
+import {ProfileRESTService} from "../../../ProfileService/ProfileRESTService";
 
 @Component({
     selector: 'cass-profile-modal-tab-image',
@@ -28,8 +29,12 @@ export class ImageTab
 {
     upload: UploadImageModalControl = new UploadImageModalControl();
 
-    constructor(private uploadImageService: UploadImageService) {
-        uploadImageService.setUploadStrategy(new UploadProfileImageStrategy());
+    constructor(private uploadImageService: UploadImageService, private profileRESTService: ProfileRESTService) {
+        uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(profileRESTService));
+    }
+
+    upload(value){
+        console.log(value);
     }
 
     uploadProfileImage() {
