@@ -8,7 +8,6 @@ import {ProfilesTab} from "./Tab/Profiles/index";
 import {ImageTab} from "./Tab/Image/index";
 import {ProfileComponentService} from "../../service";
 import {ProfileRESTService} from "../ProfileService/ProfileRESTService";
-import {AvatarCropperService} from "../../../util/component/AvatarCropper/service";
 import {ProfileService} from "../ProfileService/ProfileService";
 import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
 import {ThemeService} from "../../../theme/service/ThemeService";
@@ -42,7 +41,6 @@ enum ProfileModalTab
         ProfileModalModel,
         ProfileRESTService,
         ProfileService,
-        AvatarCropperService,
         ThemeService
     ]
 })

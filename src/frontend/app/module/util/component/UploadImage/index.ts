@@ -1,7 +1,6 @@
 import {Component} from "angular2/core";
-import {Output} from "angular2/core";
+import {Output, Input} from "angular2/core";
 import {EventEmitter} from "angular2/core";
-
 import {ModalComponent} from "../../../modal/component/index";
 import {ImageCropperService} from "../../../util/component/ImageCropper/index";
 import {ImageCropper} from "../../../util/component/ImageCropper/index";

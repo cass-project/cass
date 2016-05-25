@@ -3,14 +3,12 @@ var xmlRequest = new XMLHttpRequest();
 import {Injectable} from 'angular2/core';
 import {Http, URLSearchParams} from 'angular2/http';
 import {AuthService} from "../../../auth/service/AuthService";
-import {AvatarCropperService} from "../../../util/component/AvatarCropper/service";
 import {FrontlineService} from "../../../frontline/service";
 
 @Injectable()
 export class ProfileRESTService
 {
     constructor(public http: Http,
-                private avatarCropperService: AvatarCropperService,
                 private frontlineService: FrontlineService){}
 
     public tryNumber: number = 0;
@@ -18,7 +16,7 @@ export class ProfileRESTService
 
 
     editSex(profile){
-        let url = `/backend/api/protected/profile/${this.frontlineService.session.auth.profiles[0].id}/set-gender`;
+        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/set-gender`;
 
         this.frontlineService.session.auth.profiles[0].gender = profile.gender;
 
@@ -29,7 +27,7 @@ export class ProfileRESTService
     }
 
     editPersonal(profile){
-        let url = `/backend/api/protected/profile/${this.frontlineService.session.auth.profiles[0].id}/edit-personal/`;
+        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/edit-personal/`;
 
         this.frontlineService.session.auth.profiles[0].greetings.greetings_method = profile.greetings.greetings_method;
         this.frontlineService.session.auth.profiles[0].greetings.last_name =  profile.greetings.last_name;
@@ -120,7 +118,7 @@ export class ProfileRESTService
             if (xmlRequest.readyState === 4) {
                 if (xmlRequest.status === 200) {
                     //this.avatarCropperService.isAvatarFormVisibleFlag = false;
-                    AuthService.getAuthToken().getCurrentProfile().entity.image.public_path = JSON.parse(xmlRequest.responseText).public_path;
+                    this.frontlineService.session.auth.profiles[0].image.public_path = JSON.parse(xmlRequest.responseText).public_path;
                     this.progressBar = 0;
                     this.tryNumber = 0;
                 } else {

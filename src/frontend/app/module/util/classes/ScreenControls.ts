@@ -26,7 +26,13 @@ export class ScreenControls<T>
     }
 
     previous() {
-        throw new Error('NOT IMPLEMENTED');
+        if(this.map.hasOwnProperty(<any>this.current)) {
+            for(let key in this.map){
+                if(this.current === this.map[key]){
+                    this.current = key;
+                }
+            }
+        }
     }
 
     goto(stage: T) {
