@@ -24,9 +24,9 @@ class CommunityFeaturesMiddleware implements MiddlewareInterface
         $responseBuilder = new GenericResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
-            ->attachDirect('feature', ActivateFeatureCommand::class, 'put')
-            ->attachDirect('feature', IsFeatureActivatedCommand::class, 'get')
-            ->attachDirect('feature', DeactivateFeatureCommand::class, 'delete')
+            ->attachDirect('activate', ActivateFeatureCommand::class)
+            ->attachDirect('is-activated', IsFeatureActivatedCommand::class)
+            ->attachDirect('deactivate', DeactivateFeatureCommand::class)
             ->resolve($request);
 
         return $resolver->run($request, $responseBuilder);

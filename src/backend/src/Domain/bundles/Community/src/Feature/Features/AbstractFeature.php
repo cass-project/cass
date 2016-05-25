@@ -10,14 +10,4 @@ abstract class AbstractFeature implements Feature
     {
         return $community->getFeatures()->hasFeature($this->getCode());
     }
-
-    public function activate(Community $community)
-    {
-        $community->getFeatures()->includeFeature($this->getCode());
-    }
-
-    public function deactivate(Community $community)
-    {
-        $community->getFeatures()->excludeFeature($this->getCode());
-    }
 }

@@ -21,4 +21,14 @@ final class BoardsFeature extends AbstractFeature
     {
         return true;
     }
+
+    public function activate(Community $community)
+    {
+        return true;
+    }
+
+    public function deactivate(Community $community)
+    {
+        return true;
+    }
 }

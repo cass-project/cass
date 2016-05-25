@@ -8,7 +8,7 @@ class CommunityFeatures
 
     public function __construct(array &$features)
     {
-        $this->features = explode(',', $features);
+        $this->features = $features;
     }
 
     public function hasFeature(string $code)
@@ -25,8 +25,8 @@ class CommunityFeatures
 
     public function excludeFeature(string $code)
     {
-        if($this->hasFeature($code)) {
-            foreach($this->features as $index => $compare) {
+        foreach($this->features as $index => $compare) {
+            if($compare === $code) {
                 unset($this->features[$index]);
             }
         }

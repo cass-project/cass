@@ -39,7 +39,8 @@ return [
             get(CommunityService::class)
         ),
         CommunityFeaturesService::class => object()->constructor(
-            get(CommunityRepository::class)
+            get(CommunityRepository::class),
+            get(FeaturesFactory::class)
         ),
         ActivateFeatureCommand::class => object()->constructor(
             get(CommunityService::class),
@@ -54,7 +55,7 @@ return [
             get(CommunityFeaturesService::class)
         ),
         CommunityFeaturesMiddleware::class => object()->constructor(
-            CommandService::class
+            get(CommandService::class)
         ),
         FeaturesListFrontlineScript::class => object()->constructor(
             get(FeaturesFactory::class)

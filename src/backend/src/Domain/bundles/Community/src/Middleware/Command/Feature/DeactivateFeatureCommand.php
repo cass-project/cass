@@ -3,7 +3,7 @@ namespace Domain\Community\Middleware\Command\Feature;
 
 use Application\REST\Response\ResponseBuilder;
 use Domain\Community\Exception\CommunityNotFoundException;
-use Domain\Community\Exception\FeatureIsActivatedException;
+use Domain\Community\Exception\FeatureIsNotActivatedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -20,7 +20,7 @@ class DeactivateFeatureCommand extends AbstractFeatureCommand
             $this->communityFeatureService->deactivateFeature($featureCode, $community);
 
             $responseBuilder->setStatusSuccess();
-        }catch(FeatureIsActivatedException $e) {
+        }catch(FeatureIsNotActivatedException $e) {
             $responseBuilder
                 ->setStatusConflict()
                 ->setError($e);

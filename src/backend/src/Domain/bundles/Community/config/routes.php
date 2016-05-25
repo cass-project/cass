@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Community;
 
+use Domain\Community\Middleware\CommunityFeaturesMiddleware;
 use Domain\Community\Middleware\CommunityMiddleware;
 use Zend\Expressive\Application;
 
@@ -27,5 +28,23 @@ return function(Application $app) {
         '/community/{communityId}/{command:get}[/]',
         CommunityMiddleware::class,
         'community-get-by-id'
+    );
+
+    $app->put(
+        '/protected/community/{communityId}/feature/{feature}/{command:activate}[/]',
+        CommunityFeaturesMiddleware::class,
+        'community-feature-activate'
+    );
+
+    $app->delete(
+        '/protected/community/{communityId}/feature/{feature}/{command:deactivate}[/]',
+        CommunityFeaturesMiddleware::class,
+        'community-feature-deactivate'
+    );
+
+    $app->get(
+        '/protected/community/{communityId}/feature/{feature}/{command:is-activated}[/]',
+        CommunityFeaturesMiddleware::class,
+        'community-feature-is-activated'
     );
 };

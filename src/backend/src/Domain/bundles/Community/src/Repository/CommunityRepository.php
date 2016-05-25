@@ -77,4 +77,14 @@ class CommunityRepository extends EntityRepository
 
         return $this->saveCommunity($community);
     }
+
+    public function activateFeature(Community $community, string $featureCode) {
+        $community->getFeatures()->includeFeature($featureCode);
+        $this->getEntityManager()->flush([$community]);
+    }
+
+    public function deactivateFeature(Community $community, string $featureCode) {
+        $community->getFeatures()->excludeFeature($featureCode);
+        $this->getEntityManager()->flush([$community]);
+    }
 }
