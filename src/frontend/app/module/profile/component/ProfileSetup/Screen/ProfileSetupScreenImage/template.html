@@ -1,6 +1,6 @@
 <div class="component component-profile-setup-screen-image">
   <!-- stage 1: select image -->
-  <div class="drop-area drop-area-active"> <!-- drop-area-active on drag'n'drop -->
+  <div class="drop-area drop-area-active" *ngIf="screen.isOn('File')"> <!-- drop-area-active on drag'n'drop -->
     <p>
       <span>Перетащите сюда картинку или</span>
       <label for="profileSettingsImageUpload">
@@ -11,15 +11,35 @@
   </div>
 
   <!-- stage 2: crop image -->
-  <div class="crop-image-area" *ngIf="isAvatarCropperVisible()">
-    <!--<avatar-cropper></avatar-cropper>-->
+  <div class="crop-image-area" *ngIf="screen.isOn('Crop')">
+    <cass-image-cropper></cass-image-cropper>
+    <footer class="form-footer">
+      <div class="form-footer-section">
+        <button class="form-text-button" (click)="screen.goto('File')">
+          <span>Отмена</span>
+        </button>
+      </div>
+      <div class="form-footer-section">
+        <button class="form-button form-button-green" (click)="process()">
+          <span>Загрузить картинку</span>
+        </button>
+      </div>
+    </footer>
   </div>
 
-  <!-- stage 3: uploading image -->
-  <div class="drop-area">
-    <div class="progress-box">
-      <div class="progress">
-        <div class="progress-bar" style="width:35%;"></div>
+  <div class="form stage-processing" *ngIf="screen.isOn('Processing')">
+    <div class="box">
+      <div class="progress-bar-container">
+        <div class="progress-bar">
+          <div class="value" [style.width.%]="progress.value"></div>
+        </div>
+      </div>
+      <div class="controls">
+        <p class="info">Ваша картинка загружается на сервер</p>
+        <button class="form-text-button" (click)="abort()">
+          <i class="fa fa-fw fa-stop"></i>
+          <span>Отмена</span>
+        </button>
       </div>
     </div>
   </div>
