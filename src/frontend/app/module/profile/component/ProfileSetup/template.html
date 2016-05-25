@@ -6,14 +6,14 @@
           <div class="container">
             <h1>Вы создали новый профиль!</h1>
             <p>Но перед тем, как начать пользоваться нашим сервисом, нам нужно задать вам парочку вопросов.</p>
-            <button *ngIf="isSubmitButtonVisible()" type="submit" class="form-button form-button-primary">Продолжить</button>
+            <button *ngIf="isSubmitButtonVisible()" (click)="ngSubmit()" type="submit" class="form-button form-button-primary">Продолжить</button>
           </div>
         </div>
         <div class="stage-gender" *ngIf="screens.isOn('Gender')">
           <header class="stage-header">
             <h1>Укажите ваш пол</h1>
           </header>
-          <cass-profile-setup-screen-gender></cass-profile-setup-screen-gender>
+          <cass-profile-setup-screen-gender (choice)="changeGender($event)"></cass-profile-setup-screen-gender>
         </div>
         <div class="stage-greetings" *ngIf="screens.isOn('Greetings')">
           <header class="stage-header">
@@ -76,8 +76,8 @@
       <div class="form-footer-section">
         <div class="form-footer-item">
           <div class="cass-padding-box-5">
-            <button *ngIf="isSkipButtonVisible()" type="submit" class="form-text-button">Пропустить</button>
-            <button *ngIf="isSubmitButtonVisible()" type="submit" class="form-button form-button-primary">Следующий шаг</button>
+            <button *ngIf="isSkipButtonVisible()" (click)="nextStage()" type="submit" class="form-text-button">Пропустить</button>
+            <button *ngIf="isSubmitButtonVisible()" [disabled]="!verifyStage()" (click)="nextStage()" type="submit" class="form-button form-button-primary">Следующий шаг</button>
           </div>
         </div>
       </div>

@@ -10,6 +10,8 @@ import {ProfileSetupScreenInterests} from "./Screen/ProfileSetupScreenInterests/
 import {ProfileSetupScreenExpertIn} from "./Screen/ProfileSetupScreenExpertIn/index";
 import {ComponentStages} from "../../../util/classes/ComponentStages";
 import {ScreenControls} from "../../../util/classes/ScreenControls";
+import {FrontlineService} from "../../../frontline/service";
+
 
 enum ProfileSetupScreen {
     Welcome = <any>"Welcome",
@@ -38,7 +40,7 @@ enum ProfileSetupScreen {
         ProfileSetupScreenGender,
         ProfileSetupScreenImage,
         ProfileSetupScreenInterests,
-        ProfileSetupScreenExpertIn,
+        ProfileSetupScreenExpertIn
     ]
 })
 
@@ -54,7 +56,40 @@ export class ProfileSetup
           .add({ from: ProfileSetupScreen.Saving, to: ProfileSetupScreen.Finish });
     });
 
-    constructor(public model: ProfileSetupModel) {}
+    constructor(public model: ProfileSetupModel, private frontlineService: FrontlineService) {}
+
+    changeGender(event){
+        if (!~['male', 'female'].indexOf(event)) {
+            throw new Error('MMM WHUT IS THIS U FILTHY CASUL?');
+        }
+
+        this.model.gender = event;
+        this.ngSubmit();
+    }
+
+    verifyStage(){
+        if(this.frontlineService.session.auth.profiles[0].image.public_path !== '/public/assets/profile-default.png'){
+            //return true;
+        }
+
+        /*Greetings stage*/
+        if(this.screens.isIn([ProfileSetupScreen.Greetings]) &&
+            this.model.greetings.greetingsMethod !== ''){
+            if(this.model.greetings.greetingsMethod === 'fl' &&
+                this.model.greetings.first_name.length > 0 && this.model.greetings.last_name.length > 0) {
+                return true;
+            } else if(this.model.greetings.greetingsMethod === 'n' &&
+                this.model.greetings.nickname.length > 0){
+                return true;
+            } else if(this.model.greetings.greetingsMethod === 'fm' &&
+                this.model.greetings.first_name.length > 0 && this.model.greetings.middle_name.length > 0){
+                return true;
+            } else if(this.model.greetings.greetingsMethod === 'lfm' &&
+                this.model.greetings.first_name.length > 0 && this.model.greetings.last_name.length > 0 && this.model.greetings.middle_name.length > 0){
+                return true;
+            }
+        }
+    }
 
     ngSubmit() {
         this.nextStage();
@@ -72,7 +107,7 @@ export class ProfileSetup
         return this.screens.notIn([
             ProfileSetupScreen.Finish,
             ProfileSetupScreen.Welcome,
-            ProfileSetupScreen.Greetings,
+            ProfileSetupScreen.Gender
         ]);
     }
 
@@ -80,6 +115,7 @@ export class ProfileSetup
         return this.screens.notIn([
             ProfileSetupScreen.Finish,
             ProfileSetupScreen.Gender,
+            ProfileSetupScreen.Image
         ]);
     }
 
@@ -88,6 +124,7 @@ export class ProfileSetup
             ProfileSetupScreen.Image,
             ProfileSetupScreen.Interests,
             ProfileSetupScreen.ExpertIn,
+            ProfileSetupScreen.Gender
         ]);
     }
 
