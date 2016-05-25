@@ -1,4 +1,5 @@
 import {Component} from "angular2/core";
+import {ProfileSetupModel} from "../../model";
 
 @Component({
     selector: 'cass-profile-setup-screen-greetings',
@@ -9,4 +10,15 @@ import {Component} from "angular2/core";
 })
 export class ProfileSetupScreenGreetings
 {
+    constructor(private model: ProfileSetupModel){}
+
+    getGreetingMethod(value){
+        if(value === this.model.greetings.greetingsMethod){
+            return true;
+        }
+    }
+
+    chooseGreetingMethod(value){
+        this.model.greetings.greetingsMethod = value;
+    }
 }

@@ -2,40 +2,41 @@
   <ul class="greetings-method">
     <li class="active"> <!-- non-active, active -->
       <label class="greetings-radio-view">
-        <input id="profileSettingsGreetingsRadioFL" class="greetings-radio" type="radio" name="profileGreetingsMethod" value="fl">
+        <input id="profileSettingsGreetingsRadioFL" class="greetings-radio" (click)="chooseGreetingMethod('fl')" type="radio" name="profileGreetingsMethod" value="fl">
         <span class="greetings-label">
           По имени и фамилии
         </span>
       </label>
-      <div class="greetings-subform"> <!-- ngIf selected -->
+      <div class="greetings-subform" *ngIf="getGreetingMethod('fl')">
         <div class="input-group">
           <label>
             <span class="form-label">Имя</span>
             <object>
-              <input type="text" class="form-input">
+              <input type="text" [(ngModel)]="model.greetings.first_name" class="form-input">
             </object>
           </label>
         </div>
         <label>
           <span class="form-label">Фамилия</span>
           <object>
-            <input type="text" class="form-input">
+            <input type="text" [(ngModel)]="model.greetings.last_name" class="form-input">
           </object>
         </label>
       </div>
     </li>
     <li class="non-active"> <!-- non-active, active -->
       <label class="greetings-radio-view">
-        <input id="profileSettingsGreetingsRadioN" class="greetings-radio" type="radio" name="profileGreetingsMethod" value="n">
+        <input id="profileSettingsGreetingsRadioN" class="greetings-radio" (click)="chooseGreetingMethod('n')" type="radio" name="profileGreetingsMethod" value="n">
         <span class="greetings-label">
           По никнейму
         </span>
       </label>
-      <div class="greetings-subform"> <!-- ngIf selected -->
-        <div class="input-group" style="display: none">
+      <div class="greetings-subform" *ngIf="getGreetingMethod('n')">
+        <div class="input-group">
           <label>
+            <span class="form-label">Никнейм</span>
             <object>
-              <input type="text" class="form-input">
+              <input type="text" [(ngModel)]="model.greetings.nickname" class="form-input">
             </object>
           </label>
         </div>
@@ -43,17 +44,17 @@
     </li>
     <li class="non-active"> <!-- non-active, active -->
       <label class="greetings-radio-view">
-        <input id="profileSettingsGreetingsRadioFM" class="greetings-radio" type="radio" name="profileGreetingsMethod" value="fm">
+        <input id="profileSettingsGreetingsRadioFM" class="greetings-radio" (click)="chooseGreetingMethod('fm')" type="radio" name="profileGreetingsMethod" value="fm">
         <span class="greetings-label">
           По имени и отчеству
         </span>
       </label>
-      <div class="greetings-subform" style="display: none"> <!-- ngIf selected -->
+      <div class="greetings-subform" *ngIf="getGreetingMethod('fm')">
         <div class="input-group">
           <label>
             <span class="form-label">Имя</span>
             <object>
-              <input type="text" class="form-input">
+              <input type="text" [(ngModel)]="model.greetings.first_name" class="form-input">
             </object>
           </label>
         </div>
@@ -61,7 +62,7 @@
           <label>
             <span class="form-label">Отчество</span>
             <object>
-              <input type="text" class="form-input">
+              <input type="text" [(ngModel)]="model.greetings.middle_name" class="form-input">
             </object>
           </label>
         </div>
@@ -69,17 +70,17 @@
     </li>
     <li class="non-active"> <!-- non-active, active -->
       <label class="greetings-radio-view">
-        <input id="profileSettingsGreetingsRadioLFM" class="greetings-radio" type="radio" name="profileGreetingsMethod" value="lfm">
+        <input id="profileSettingsGreetingsRadioLFM" class="greetings-radio" (click)="chooseGreetingMethod('lfm')" type="radio" name="profileGreetingsMethod" value="lfm">
         <span class="greetings-label">
           По ФИО
         </span>
       </label>
-      <div class="greetings-subform" style="display: none"> <!-- ngIf selected -->
-        <div class="input-group" style="display: none">
+      <div class="greetings-subform" *ngIf="getGreetingMethod('lfm')">
+        <div class="input-group">
           <label>
             <span class="form-label">Фамилия</span>
             <object>
-              <input type="text" class="form-input">
+              <input type="text" [(ngModel)]="model.greetings.last_name" class="form-input">
             </object>
           </label>
         </div>
@@ -87,7 +88,7 @@
           <label>
             <span class="form-label">Имя</span>
             <object>
-              <input type="text" class="form-input">
+              <input type="text" [(ngModel)]="model.greetings.first_name" class="form-input">
             </object>
           </label>
         </div>
@@ -95,7 +96,7 @@
           <label>
             <span class="form-label">Отчество</span>
             <object>
-              <input type="text" class="form-input">
+              <input type="text" [(ngModel)]="model.greetings.middle_name" class="form-input">
             </object>
           </label>
         </div>
