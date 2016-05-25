@@ -8,6 +8,10 @@ use function DI\get;
 use DI\Container;
 use Application\Service\CommandService;
 use Domain\Community\Entity\Community;
+use Domain\Community\Feature\FeaturesFactory;
+use Domain\Community\Feature\Features\BoardsFeature;
+use Domain\Community\Feature\Features\ChatFeature;
+use Domain\Community\Feature\Features\CollectionsFeature;
 use Domain\Community\Middleware\Command\Feature\ActivateFeatureCommand;
 use Domain\Community\Middleware\Command\Feature\DeactivateFeatureCommand;
 use Domain\Community\Middleware\Command\Feature\IsFeatureActivatedCommand;
@@ -15,6 +19,7 @@ use Domain\Community\Middleware\CommunityFeaturesMiddleware;
 use Domain\Community\Middleware\CommunityMiddleware;
 use Domain\Community\Repository\CommunityRepository;
 use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
+use Domain\Community\Scripts\FeaturesListFrontlineScript;
 use Domain\Community\Service\CommunityFeaturesService;
 use Domain\Community\Service\CommunityService;
 use Domain\Theme\Repository\ThemeRepository;
@@ -50,6 +55,15 @@ return [
         ),
         CommunityFeaturesMiddleware::class => object()->constructor(
             CommandService::class
-        )
+        ),
+        FeaturesListFrontlineScript::class => object()->constructor(
+            get(FeaturesFactory::class)
+        ),
+        FeaturesFactory::class => object()->constructor(
+            get(Container::class)
+        ),
+        CollectionsFeature::class => object()->constructor(),
+        BoardsFeature::class => object()->constructor(),
+        ChatFeature::class => object()->constructor(),
     ]
 ];

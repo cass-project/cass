@@ -15,11 +15,13 @@ class ProfileBundle extends GenericBundle implements FrontlineBundleInjectable
     public function getFrontlineScripts(): array
     {
         return [
-            'config.profile' => function() {
-                return [
-                    'max_profiles' => ProfileService::MAX_PROFILES_PER_ACCOUNT
-                ];
-            }
+            'config' => [
+                'profile' => function() {
+                    return [
+                        'max_profiles' => ProfileService::MAX_PROFILES_PER_ACCOUNT
+                    ];
+                }
+            ]
         ];
     }
 }

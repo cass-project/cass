@@ -27,23 +27,31 @@ class FrontlineService
 
         foreach ($this->bundlesService->getBundles() as $bundle) {
             if($bundle instanceof FrontlineBundleInjectable) {
-                foreach($bundle->getFrontlineScripts() as $key => $scriptName) {
-                    if(isset($result[$key])) {
-                        throw new \Exception(sprintf('Overwrite attempt by frontline script `%s`', $scriptName));
-                    }
+                $result = array_merge_recursive($result, $this->traverse($bundle->getFrontlineScripts()));
+            }
+        }
 
-                    if(is_callable($scriptName)) {
-                        $script = $scriptName;
-                    }else{
-                        $script = $this->container->get($scriptName);
-                    }
+        return $result;
+    }
 
-                    if(is_callable($script)) {
-                        $result[$key] = $script($this->container);
-                    }else{
-                        throw new \Exception('Invalid frontline script');
-                    }
+    private function traverse(array $scripts) {
+        $result = [];
+
+        foreach($scripts as $key => $script) {
+            if(is_array($script)) {
+                $result[$key] = $this->traverse($script);
+            }else if(is_string($script)) {
+                $script = $this->container->get($script);
+
+                if(is_callable($script)) {
+                    $result[$key] = $script($this->container);
+                }else{
+                    throw new \Exception('Invalid frontline script');
                 }
+            }else if(is_callable($script)) {
+                $result[$key] = $script($this->container);
+            }else{
+                throw new \Exception('Invalid frontline script');
             }
         }
 

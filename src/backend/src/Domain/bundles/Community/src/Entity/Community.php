@@ -5,6 +5,7 @@ use Application\Util\GenerateRandomString;
 use Application\Util\IdTrait;
 use Domain\Collection\Collection\CollectionTree;
 use Domain\Collection\Traits\CollectionOwnerTrait;
+use Domain\Community\Entity\Community\CommunityFeatures;
 use Domain\Community\Entity\Community\CommunityImage;
 use Domain\Theme\Entity\Theme;
 
@@ -55,6 +56,15 @@ class Community
      * @var array
      */
     private $image = [];
+
+    /**
+     * @Column(type="json_array", name="features")
+     * @var array
+     */
+    private $features = [];
+
+    /** @var CommunityFeatures */
+    private $featuresHandler;
 
     public function __construct(string $title, string $description, Theme $theme)
     {
@@ -157,5 +167,13 @@ class Community
         return isset($this->image['storage_path'])
             && is_string($this->image['storage_path'])
             && file_exists($this->image['storage_path']);
+    }
+
+    public function getFeatures(): CommunityFeatures {
+        if($this->featuresHandler === null) {
+            $this->featuresHandler = new CommunityFeatures($this->features);
+        }
+
+        return $this->featuresHandler;
     }
 }

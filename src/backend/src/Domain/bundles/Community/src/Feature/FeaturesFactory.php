@@ -1,0 +1,64 @@
+<?php
+namespace Domain\Community\Feature;
+
+use DI\Container;
+use Domain\Community\Exception\UnknownFeatureException;
+use Domain\Community\Feature\Features\BoardsFeature;
+use Domain\Community\Feature\Features\ChatFeature;
+use Domain\Community\Feature\Features\CollectionsFeature;
+
+class FeaturesFactory
+{
+    /** @var Container */
+    private $container;
+
+    /** @var array */
+    private $FEATURES = [];
+
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+        $this->FEATURES = [
+            CollectionsFeature::getCode() => CollectionsFeature::class,
+            BoardsFeature::getCode() => BoardsFeature::class,
+            ChatFeature::getCode() => ChatFeature::class,
+        ];
+    }
+
+    public function listFeatures(): array
+    {
+        return array_values($this->FEATURES);
+    }
+
+    public function listFeatureCodes(): array
+    {
+        return array_keys($this->FEATURES);
+    }
+
+    public function getFeatureClassNameFromStringCode(string $featureCode): string
+    {
+        if(! in_array($featureCode, $this->listFeatureCodes())) {
+            throw new UnknownFeatureException(sprintf('Unknown feature `%s`', $featureCode));
+        }
+
+        return $this->FEATURES[$featureCode];
+    }
+
+    public function createFeatureFromStringCode(string $featureCode): Feature
+    {
+        if(! in_array($featureCode, $this->listFeatureCodes())) {
+            throw new UnknownFeatureException(sprintf('Unknown feature `%s`', $featureCode));
+        }
+
+        return $this->container->get($this->getFeatureClassNameFromStringCode($featureCode));
+    }
+
+    public function createFeatureFromClassName(string $featureClassName): Feature
+    {
+        if(! in_array($featureClassName, $this->listFeatures())) {
+            throw new UnknownFeatureException(sprintf('Unknown feature class `%s`', $featureClassName));
+        }
+
+        return $this->container->get($featureClassName);
+    }
+}

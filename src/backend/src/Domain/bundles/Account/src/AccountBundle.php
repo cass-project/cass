@@ -15,11 +15,13 @@ class AccountBundle extends GenericBundle implements FrontlineBundleInjectable
     public function getFrontlineScripts(): array
     {
         return [
-            'config.account' => function() {
-                return [
-                    'delete_account_request_days' => ProcessAccountDeleteRequestsScript::DAYS_TO_ACCEPT_REQUEST
-                ];
-            }
+            'config' => [
+                'account' => function() {
+                    return [
+                        'delete_account_request_days' => ProcessAccountDeleteRequestsScript::DAYS_TO_ACCEPT_REQUEST
+                    ];
+                }
+            ]
         ];
     }
 }
