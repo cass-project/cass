@@ -1,12 +1,13 @@
 import {Component, Injectable} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {ProfileImage} from "../../../ProfileImage/index";
-import {AvatarCropperService} from "../../../../../util/component/AvatarCropper/service";
 import {ModalControl} from "../../../../../util/classes/ModalControl";
 import {UploadImageModal} from "../../../../../util/component/UploadImage/index";
 import {UploadImageService} from "../../../../../util/component/UploadImage/service";
 import {UploadProfileImageStrategy} from "../../../../util/UploadProfileImageStrategy";
 import {ProfileRESTService} from "../../../ProfileService/ProfileRESTService";
+import {FrontlineService} from "../../../../../frontline/service";
+
 
 @Component({
     selector: 'cass-profile-modal-tab-image',
@@ -29,12 +30,8 @@ export class ImageTab
 {
     upload: UploadImageModalControl = new UploadImageModalControl();
 
-    constructor(private uploadImageService: UploadImageService, private profileRESTService: ProfileRESTService) {
+    constructor(private uploadImageService: UploadImageService, private frontlineService: FrontlineService, private profileRESTService: ProfileRESTService) {
         uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(profileRESTService));
-    }
-
-    upload(value){
-        console.log(value);
     }
 
     uploadProfileImage() {
