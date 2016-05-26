@@ -16,6 +16,10 @@ class PostMiddlewareTest extends MiddlewareTestCase
   protected function getFixtures(): array{
    return [
      new DemoAccountFixture()
+     // создать Theme
+     // создать Comunity
+     // collection
+
    ];
   }
 
