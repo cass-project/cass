@@ -18,7 +18,7 @@ return [
         'post-attachment-storage-dir' => 'post/attachment',
         PostAttachmentRepository::class => factory(new DoctrineRepositoryFactory(PostAttachment::class)),
         PostAttachmentService::class => object()->constructor(
-            get('constants.storage'),
+            get('config.storage'),
             get('post-attachment-storage-dir'),
             get(PostAttachmentRepository::class)
         ),
