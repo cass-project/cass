@@ -20,6 +20,6 @@ export class ScreenGeneral extends Screen
     }
 
     submit() {
-        console.log('Model:', this.model);
+        this.nextEvent.emit(this);
     }
 }

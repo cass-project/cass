@@ -14,4 +14,10 @@ import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
     ]
 })
 export class ScreenTheme extends Screen
-{}
+{
+    private themeIds: number[] = [];
+
+    updateThemeIds(themeIds: number[]) {
+        console.log('CHANGE: ', themeIds, 'actual: ', this.themeIds);
+    }
+}

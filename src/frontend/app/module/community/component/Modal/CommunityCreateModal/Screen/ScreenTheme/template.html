@@ -2,7 +2,7 @@
   <div class="cass-padding-box-10">
     <p class="theme-description">Укажите тематику вашего коммунити</p>
     <div>
-      <cass-theme-select multiple="false"></cass-theme-select>
+      <cass-theme-select [value]="themeIds" (change)="updateThemeIds($event)" multiple="false"></cass-theme-select>
     </div>
   </div>
   <footer class="form-footer">
