@@ -18,6 +18,7 @@ export class CommunityRouteModal
     @Output("close") close = new EventEmitter<CommunityRouteModal>();
     @Output("create") create = new EventEmitter<CommunityRouteModal>();
     @Output("join") join = new EventEmitter<CommunityRouteModal>();
+    @Output("destroy") destroy = new EventEmitter<CommunityRouteModal>();
 
     constructor(private service: CommunityRESTService) {}
 

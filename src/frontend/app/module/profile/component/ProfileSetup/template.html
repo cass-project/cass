@@ -42,7 +42,7 @@
           </header>
           <p class="why">Люди иногда ищут не просто тех, кто интересуется чем либо, но и тех,
           кто действительно <em>разбирается</em> в указанной области.</p>
-          <cass-profile-setup-screen-export-in></cass-profile-setup-screen-export-in>
+          <cass-profile-setup-screen-expert-in></cass-profile-setup-screen-expert-in>
         </div>
         <div class="stage-saving" *ngIf="screens.isOn('Saving')">
           <header class="stage-header">
@@ -59,8 +59,8 @@
               <h1>Готово!</h1>
               <p>Мы можем сразу вас направить в ваш профиль.</p>
               <div class="buttons">
-                <button class="form-text-button">Нет, просто закройте это окно</button>
-                <button class="form-button form-button-primary">В профиль</button>
+                <button class="form-text-button" (click)="close()">Нет, просто закройте это окно</button>
+                <button class="form-button form-button-primary" (click)="close(); modals.modals.settings.open()">В профиль</button>
               </div>
             </div>
           </div>
@@ -78,6 +78,7 @@
           <div class="cass-padding-box-5">
             <button *ngIf="isSkipButtonVisible()" (click)="nextStage()" type="submit" class="form-text-button">Пропустить</button>
             <button *ngIf="isSubmitButtonVisible()" [disabled]="!verifyStage()" (click)="nextStage()" type="submit" class="form-button form-button-primary">Следующий шаг</button>
+            <button *ngIf="screens.isOn('ExpertIn')" (click)="SaveSetupChanges()" type="submit" class="form-button form-button-primary">Завершить создание</button>
           </div>
         </div>
       </div>

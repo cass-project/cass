@@ -10,7 +10,9 @@ import {ProfileSetupScreenInterests} from "./Screen/ProfileSetupScreenInterests/
 import {ProfileSetupScreenExpertIn} from "./Screen/ProfileSetupScreenExpertIn/index";
 import {ComponentStages} from "../../../util/classes/ComponentStages";
 import {ScreenControls} from "../../../util/classes/ScreenControls";
+import {ProfileRESTService} from "../ProfileService/ProfileRESTService";
 import {FrontlineService} from "../../../frontline/service";
+import {ProfileComponentService} from "../../service";
 
 
 enum ProfileSetupScreen {
@@ -31,7 +33,8 @@ enum ProfileSetupScreen {
         require('./style.shadow.scss')
     ],
     providers: [
-        ProfileSetupModel
+        ProfileSetupModel,
+        ProfileRESTService
     ],
     directives: [
         ModalComponent,
@@ -56,39 +59,67 @@ export class ProfileSetup
           .add({ from: ProfileSetupScreen.Saving, to: ProfileSetupScreen.Finish });
     });
 
-    constructor(public model: ProfileSetupModel, private frontlineService: FrontlineService) {}
+    constructor(public model: ProfileSetupModel, private frontlineService: FrontlineService,  private profileRESTService: ProfileRESTService, private modals: ProfileComponentService) {}
 
     changeGender(event){
         if (!~['male', 'female'].indexOf(event)) {
             throw new Error('MMM WHUT IS THIS U FILTHY CASUL?');
         }
 
-        this.model.gender = event;
+        this.model.profile.gender.string = event;
         this.ngSubmit();
     }
 
-    verifyStage(){
-        if(this.frontlineService.session.auth.profiles[0].image.public_path !== '/public/assets/profile-default.png'){
-            //return true;
-        }
+    verifyStage() {
+        /*if(this.frontlineService.session.auth.profiles[0].image.public_path !== '/public/assets/profile-default.png'){
+         return true;
+         }*/
 
         /*Greetings stage*/
-        if(this.screens.isIn([ProfileSetupScreen.Greetings]) &&
-            this.model.greetings.greetingsMethod !== ''){
-            if(this.model.greetings.greetingsMethod === 'fl' &&
+        if (this.screens.isIn([ProfileSetupScreen.Greetings]) &&
+            this.model.greetings.greetingsMethod !== '') {
+            if (this.model.greetings.greetingsMethod === 'fl' &&
                 this.model.greetings.first_name.length > 0 && this.model.greetings.last_name.length > 0) {
                 return true;
-            } else if(this.model.greetings.greetingsMethod === 'n' &&
-                this.model.greetings.nickname.length > 0){
+            } else if (this.model.greetings.greetingsMethod === 'n' &&
+                this.model.greetings.nickname.length > 0) {
                 return true;
-            } else if(this.model.greetings.greetingsMethod === 'fm' &&
-                this.model.greetings.first_name.length > 0 && this.model.greetings.middle_name.length > 0){
+            } else if (this.model.greetings.greetingsMethod === 'fm' &&
+                this.model.greetings.first_name.length > 0 && this.model.greetings.middle_name.length > 0) {
                 return true;
-            } else if(this.model.greetings.greetingsMethod === 'lfm' &&
-                this.model.greetings.first_name.length > 0 && this.model.greetings.last_name.length > 0 && this.model.greetings.middle_name.length > 0){
+            } else if (this.model.greetings.greetingsMethod === 'lfm' &&
+                this.model.greetings.first_name.length > 0 && this.model.greetings.last_name.length > 0 && this.model.greetings.middle_name.length > 0) {
                 return true;
             }
         }
+        /*InterestsIn stage*/
+        if (this.screens.isIn([ProfileSetupScreen.Interests]) &&
+            (JSON.stringify(this.model.interestingIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in))){
+            return true
+        }
+        /*ExpertIn stage*/
+         if (this.screens.isIn([ProfileSetupScreen.ExpertIn]) &&
+             (JSON.stringify(this.model.expertIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in))){
+            return true;
+        }
+    }
+
+
+    SaveSetupChanges(){
+        this.nextStage();
+        this.profileRESTService.editSex(this.model.profile).subscribe(data => {
+            this.profileRESTService.editPersonal(this.model.profile).subscribe(data => {
+                this.profileRESTService.updateInterestThemes(this.model.interestingIn).subscribe(data => {
+                    this.profileRESTService.updateExpertThemes(this.model.expertIn).subscribe(data => {
+                        this.nextStage();
+                    });
+                });
+            });
+        });
+    }
+
+    close(){
+        this.modals.modals.setup.close();
     }
 
     ngSubmit() {
@@ -115,7 +146,8 @@ export class ProfileSetup
         return this.screens.notIn([
             ProfileSetupScreen.Finish,
             ProfileSetupScreen.Gender,
-            ProfileSetupScreen.Image
+            ProfileSetupScreen.Image,
+            ProfileSetupScreen.ExpertIn
         ]);
     }
 
@@ -123,7 +155,6 @@ export class ProfileSetup
         return this.screens.isIn([
             ProfileSetupScreen.Image,
             ProfileSetupScreen.Interests,
-            ProfileSetupScreen.ExpertIn,
             ProfileSetupScreen.Gender
         ]);
     }
