@@ -16,8 +16,8 @@ export class ProfileService {
 
     interestCondToSave(expertIn, interestingIn){
         if(JSON.stringify(expertIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in) ||
-            JSON.stringify(interestingIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)){
-            return true;
+                JSON.stringify(interestingIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)){
+                return true;
         } else {
             return false;
         }
