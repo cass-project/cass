@@ -30,15 +30,23 @@ class CommunityService
         $this->storageDir = $storageDir;
     }
     
-    public function createCommunity(CreateCommunityParameters $parameters): Community {
+    public function createCommunityByParameters(CreateCommunityParameters $parameters): Community {
+
+        return $this->createCommunity(
+          $parameters->getTitle(),
+          $parameters->getDescription(),
+          $parameters->getThemeId());
+    }
+
+    public function createCommunity(string $title,string $description,int $themeId): Community {
         $entity = new Community(
-            $parameters->getTitle(), 
-            $parameters->getDescription(), 
-            $this->themeRepository->getThemeById($parameters->getThemeId())
+          $title,
+          $description,
+          $this->themeRepository->getThemeById($themeId)
         );
-        
+
         $this->communityRepository->createCommunity($entity);
-        
+
         return $entity;
     }
 

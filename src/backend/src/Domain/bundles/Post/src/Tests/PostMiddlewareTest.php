@@ -1,12 +1,15 @@
 <?php
 
 
-namespace Domain\Profile\Tests;
+namespace Domain\Post\Tests;
 
 
 use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use Domain\Post\Tests\Fixtures\DemoCollectionFixture;
+use Domain\Post\Tests\Fixtures\DemoCommunityFixture;
+use Domain\Post\Tests\Fixtures\DemoThemeFixtures;
 
 /**
  * @backupGlobals disabled
@@ -15,21 +18,20 @@ class PostMiddlewareTest extends MiddlewareTestCase
 {
   protected function getFixtures(): array{
    return [
-     new DemoAccountFixture()
-     // создать Theme
-     // создать Comunity
-     // collection
-
+//     new DemoAccountFixture(),
+//     new DemoThemeFixtures(),
+//     new DemoCommunityFixture(),
+//     new DemoCollectionFixture()
    ];
   }
 
-  public function testPostCreate200()
+  /*public function testPostCreate200()
   {
     $account = DemoAccountFixture::getAccount();
 
     $json = [
       "profile_id"    => $account->getCurrentProfile()->getId(),
-      "collection_id" => 0,
+      "collection_id" => DemoCollectionFixture::getCollection()->getId(),
       "content"       => "string"
     ];
 
@@ -39,7 +41,7 @@ class PostMiddlewareTest extends MiddlewareTestCase
       ->expectStatusCode(200)
       ->expectJSONBody(['success' => TRUE])
      ;
-  }
+  }*/
 
   public function testPostCreate403()
   {
