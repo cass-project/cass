@@ -15,7 +15,7 @@
     </div>
     <div class="form-footer-section">
       <div class="cass-padding-box-5">
-        <button class="form-text-button">
+        <button class="form-text-button" (click)="unsetTheme()">
           <span>Коммунити не имеет тематики</span>
         </button>
         <button type="submit" [disabled]="!stForm.form.valid" class="form-button form-button-primary">

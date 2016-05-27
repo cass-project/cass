@@ -23,4 +23,8 @@ export class ScreenTheme extends Screen
     updateThemeIds(themeIds: number[]) {
         this.model.theme_ids = themeIds;
     }
+
+    unsetTheme(){
+        this.model.theme_ids = null;
+    }
 }
