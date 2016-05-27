@@ -33,6 +33,3 @@ export class SidebarProfileIcon
 
 
 }
-
-
-//AuthService.getAuthToken().getCurrentProfile().entity.image.public_path
