@@ -18,21 +18,26 @@ class PostMiddlewareTest extends MiddlewareTestCase
 {
   protected function getFixtures(): array{
    return [
-//     new DemoAccountFixture(),
-//     new DemoThemeFixtures(),
-//     new DemoCommunityFixture(),
-//     new DemoCollectionFixture()
+     new DemoAccountFixture(),
+     new DemoThemeFixtures(),
+     new DemoCommunityFixture(),
+     new DemoCollectionFixture()
    ];
   }
 
-  /*public function testPostCreate200()
+  public function testPostCreate200()
   {
     $account = DemoAccountFixture::getAccount();
 
     $json = [
       "profile_id"    => $account->getCurrentProfile()->getId(),
       "collection_id" => DemoCollectionFixture::getCollection()->getId(),
-      "content"       => "string"
+      "content"       => "string",
+      "attachments"   => [0],
+      "links"         => [
+        "url" => "string",
+        "metadata"=> []
+      ]
     ];
 
     return $this->requestPostCreatePut($json)->auth($account->getAPIKey())->execute()
@@ -41,10 +46,12 @@ class PostMiddlewareTest extends MiddlewareTestCase
       ->expectStatusCode(200)
       ->expectJSONBody(['success' => TRUE])
      ;
-  }*/
+  }
 
   public function testPostCreate403()
   {
+
+
     $json = [
       'profile_id'    => 0,
       'collection_id' => 0,

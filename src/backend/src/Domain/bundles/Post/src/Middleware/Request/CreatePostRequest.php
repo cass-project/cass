@@ -15,7 +15,7 @@ class CreatePostRequest extends SchemaParams
         $links = array_map(function(array $params) {
             return new LinkParameters($params['url'], $params['metadata']);
         }, $data['links']);
-        
+
         return new CreatePostParameters(
             (int) $data['profile_id'],
             (int) $data['collection_id'],
