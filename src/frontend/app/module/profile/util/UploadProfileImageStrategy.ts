@@ -7,6 +7,7 @@ export class UploadProfileImageStrategy implements UploadImageStrategy
 {
     constructor(private profileRESTService: ProfileRESTService){}
 
+
     getCropperOptions() {
         return {
             aspectRatio: 1 /* 1/1 */,
@@ -36,17 +37,15 @@ export class UploadProfileImageStrategy implements UploadImageStrategy
         console.log(model);
 
         this.profileRESTService.avatarUpload(file, model);
-
         modal.progress.reset();
 
-        setTimeout(() => {
-            modal.progress.update(50);
-
-            setTimeout(() => {
-                console.log('upload complete');
+        while (this.profileRESTService.progressBar !== 100)  {
+            console.log(this.profileRESTService.progressBar);
+            modal.progress.update(this.profileRESTService.progressBar);
+            if(this.profileRESTService.progressBar === 99){
                 modal.progress.complete();
                 modal.close();
-            }, 1000);
-        }, 1000);
+            }
+        }
     }
 }

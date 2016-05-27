@@ -1,3 +1,4 @@
+import {UploadProfileImageStrategy} from "../../util/UploadProfileImageStrategy";
 var xmlRequest = new XMLHttpRequest();
 
 import {Injectable} from 'angular2/core';
@@ -108,7 +109,7 @@ export class ProfileRESTService
         xmlRequest.open("POST", url);
         xmlRequest.upload.onprogress = (e) => {
             if (e.lengthComputable) {
-                this.progressBar  = Math.floor((e.loaded / e.total) * 100);
+                this.progressBar = Math.floor((e.loaded / e.total) * 100);
             }
         };
 
