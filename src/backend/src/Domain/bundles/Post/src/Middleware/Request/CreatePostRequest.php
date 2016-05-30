@@ -12,9 +12,13 @@ class CreatePostRequest extends SchemaParams
     public function getParameters(): CreatePostParameters {
         $data = json_decode($this->getRequest()->getBody(), true);
 
-        $links = array_map(function(array $params) {
-            return new LinkParameters($params['url'], $params['metadata']);
-        }, $data['links']);
+        if(isset($data['links'])) {
+            $links = array_map(function(array $params) {
+                return new LinkParameters($params['url'], $params['metadata']);
+            }, $data['links']);
+        }else{
+            $links = [];
+        }
 
         return new CreatePostParameters(
             (int) $data['profile_id'],
