@@ -10,6 +10,7 @@ import {ScreenFeatures} from "./Screen/ScreenFeatures/index";
 import {ScreenProcessing} from "./Screen/ScreenProcessing/index";
 import {CommunityCreateModalModel} from "./model";
 import {ScreenControls} from "../../../../util/classes/ScreenControls";
+import {CommunityComponentService} from "../../../service";
 
 enum CreateStage {
     General = <any>"General",
@@ -42,17 +43,21 @@ export class CommunityCreateModal
 {
     public screens: ScreenControls<CreateStage> = new ScreenControls<CreateStage>(CreateStage.General, (sc: ScreenControls<CreateStage>) => {
         sc.add({ from: CreateStage.General, to: CreateStage.Theme })
-          .add({ from: CreateStage.Theme, to: CreateStage.Processing })
+          .add({ from: CreateStage.Theme, to: CreateStage.Image })
+          .add({ from: CreateStage.Image, to: CreateStage.Processing })
           .add({ from: CreateStage.Processing, to: CreateStage.Complete })
         ;
     });
 
     @Output('close') closeEvent = new EventEmitter<CommunityCreateModal>();
 
-    constructor(private service: CommunityRESTService, model: CommunityCreateModalModel) {}
+    constructor(
+        private communityComponentService: CommunityComponentService,
+        private service: CommunityRESTService, model: CommunityCreateModalModel
+    ) {}
 
     isHeaderVisible() {
-        return !~([CreateStage.Processing, CreateStage.Complete]).indexOf(this.screens.current);
+        return !~([CreateStage.Processing]).indexOf(this.screens.current);
     }
 
     next() {

@@ -1,3 +1,29 @@
-<form class="form screen screen-image">
-  <p>NOT IMPLEMENTED</p>
+<form #sgForm="ngForm" class="form screen screen-image" (ngSubmit)="submit()">
+  <div class="cass-padding-box-10">
+    <div class="input-group">
+      <label class="form-label" for="CommunityImageUpload">
+        <div class="form-button form-button-primary">Выберите файл</div>
+      </label>
+      <input style='display:none' type="file" id="CommunityImageUpload" (change)="onFileChange($event)">
+    </div>
+    <div class="input-group" *ngIf="cropper.file">
+      <cass-image-cropper></cass-image-cropper>
+    </div>
+  </div>
+  <footer class="form-footer">
+    <div class="form-footer-section">
+      <div class="cass-padding-box-5">
+        <button (click)="abort()" class="form-text-button">
+          <span>Отмена</span>
+        </button>
+      </div>
+    </div>
+    <div class="form-footer-section">
+      <div class="cass-padding-box-5">
+        <button type="submit" [disabled]="!sgForm.form.valid" class="form-button form-button-primary">
+          <span>Далее</span>
+        </button>
+      </div>
+    </div>
+  </footer>
 </form>

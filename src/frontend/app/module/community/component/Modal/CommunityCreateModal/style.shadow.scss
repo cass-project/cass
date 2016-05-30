@@ -1,3 +1,16 @@
 div.community-modal-create {
   width: 600px;
+
+  .screen-complete {
+    text-align: center;
+    i.fa.fa-thumbs-up {
+      font-size: 128px;
+      color: #263238;
+    }
+
+    h1 {
+      font-size: 20px
+    }
+  }
 }
+
