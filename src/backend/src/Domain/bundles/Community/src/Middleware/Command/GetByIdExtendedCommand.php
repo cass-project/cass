@@ -2,20 +2,18 @@
 namespace Domain\Community\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
-use Domain\Community\Middleware\Request\CreateCommunityRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class CreateCommand extends Command
+final class GetByIdExtendedCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $createCommunityRequest = new CreateCommunityRequest($request);
-
-        $community = $this->communityService->createCommunity($createCommunityRequest->getParameters());
+        $community = $this->communityService->getCommunityById($request->getAttribute('communityId'));
 
         return $responseBuilder->setStatusSuccess()->setJson([
-            'entity' => $community->toJSON()
+            'entity' => $community->toJSON(),
+            'access' => $this->communityService->getCommunityAccess($this->currentAccountService->getCurrentAccount(), $community)->toJSON()
         ])->build();
     }
 }

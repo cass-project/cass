@@ -15,8 +15,8 @@ class ProfileImage implements JSONSerializable
     const MIN_WIDTH = 64;
     const MIN_HEIGHT = 64;
 
-    const MAX_WIDTH = 256;
-    const MAX_HEIGHT = 256;
+    const MAX_WIDTH = 2048;
+    const MAX_HEIGHT = 2048;
 
     const DEFAULT_PROFILE_IMAGE_PUBLIC = '/public/assets/profile-default.png';
     const DEFAULT_PROFILE_IMAGE_STORAGE = __DIR__ . '/../../../../../www/app/public/assets/profile-default.png';
@@ -55,7 +55,12 @@ class ProfileImage implements JSONSerializable
         return [
             'id' => $this->getId(),
             'profile_id' => $this->getProfile()->getId(),
-            'public_path' => $this->getPublicPath()
+            'public_path' => $this->getPublicPath(),
+            'variants' => [
+                '48x48' => $this->getPublicPath(),
+                '64x64' => $this->getPublicPath(),
+                'full' => $this->getPublicPath()
+            ],
         ];
     }
 

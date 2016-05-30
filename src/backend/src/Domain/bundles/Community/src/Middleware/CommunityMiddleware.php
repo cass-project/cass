@@ -2,40 +2,37 @@
 namespace Domain\Community\Middleware;
 
 use Application\REST\Response\GenericResponseBuilder;
-use Application\Util\Scripts\AvatarUploadScriptException;
-use Domain\Community\Middleware\Command\Command;
-use Domain\Community\Service\CommunityService;
+use Application\Service\CommandService;
+use Domain\Community\Middleware\Command\CreateCommand;
+use Domain\Community\Middleware\Command\EditCommand;
+use Domain\Community\Middleware\Command\GetByIdCommand;
+use Domain\Community\Middleware\Command\GetByIdExtendedCommand;
+use Domain\Community\Middleware\Command\ImageUploadCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
 
 final class CommunityMiddleware implements MiddlewareInterface
 {
-    /** @var CommunityService */
-    private $communityService;
+    /** @var CommandService */
+    private $commandService;
 
-    public function __construct(CommunityService $communityService)
-    {
-        $this->communityService = $communityService;
+    public function __construct(CommandService $commandService) {
+        $this->commandService = $commandService;
     }
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
         $responseBuilder = new GenericResponseBuilder($response);
 
-        try {
-            $command = Command::factory($request, $this->communityService);
-            $result = $command->run($request);
+        $resolver = $this->commandService->createResolverBuilder()
+            ->attachDirect('create', CreateCommand::class)
+            ->attachDirect('edit', EditCommand::class)
+            ->attachDirect('image-upload', ImageUploadCommand::class)
+            ->attachDirect('get', GetByIdCommand::class)
+            ->attachDirect('get-extended', GetByIdExtendedCommand::class)
+            ->resolve($request);
 
-            $responseBuilder
-                ->setStatusSuccess()
-                ->setJson($result);
-        }catch(AvatarUploadScriptException $e) {
-            $responseBuilder
-                ->setStatus(422)
-                ->setError($e);
-        }
-
-        return $responseBuilder->build();
+        return $resolver->run($request, $responseBuilder);
     }
 }

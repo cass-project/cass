@@ -158,4 +158,27 @@ class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
             ->expectStatusCode(422)
             ->expectJSONError();
     }
+
+    public function testGetByIdExtended()
+    {
+        $this->upFixture(new SampleCommunitiesFixture());
+
+        $sampleCommunity = SampleCommunitiesFixture::getCommunity(2);
+
+        $this->requestGetCommunityByIdExtended($sampleCommunity->getId())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true,
+                'entity' => [
+                    'title' => $sampleCommunity->getTitle(),
+                    'description' => $sampleCommunity->getDescription(),
+                    'theme_id' => $sampleCommunity->getTheme()->getId(),
+                ],
+                'access' => [
+                    'admin' => true
+                ]
+            ]);
+    }
 }

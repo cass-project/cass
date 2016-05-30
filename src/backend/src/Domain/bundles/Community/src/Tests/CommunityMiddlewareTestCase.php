@@ -36,6 +36,11 @@ abstract class CommunityMiddlewareTestCase extends MiddlewareTestCase
         return $this->request('GET', sprintf('/community/%d/get', $communityId));
     }
 
+    protected function requestGetCommunityByIdExtended(int $communityId): RESTRequest
+    {
+        return $this->request('GET', sprintf('/community/%d/get-extended', $communityId));
+    }
+
     protected function requestActivateFeature(int $communityId, string $feature): RESTRequest
     {
         return $this->request('PUT', sprintf('/protected/community/%d/feature/%s/activate', $communityId, $feature));
