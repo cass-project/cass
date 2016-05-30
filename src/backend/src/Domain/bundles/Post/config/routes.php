@@ -24,7 +24,7 @@ return function (Application $app) {
     );
 
     $app->get(
-        "/protected/post/{postId}/{command:get}",
+        "/post/{postId}/{command:get}",
         PostMiddleware::class,
         'post-get'
     );

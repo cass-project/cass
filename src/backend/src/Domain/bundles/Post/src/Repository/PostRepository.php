@@ -4,11 +4,13 @@ namespace Domain\Post\Repository;
 use Domain\Collection\Entity\Collection;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
+use Domain\Collection\Exception\CollectionNotFoundException;
 use Domain\Feed\Feed\Criteria\SeekCriteria;
 use Domain\Feed\Feed\CriteriaRequest;
 use Domain\Post\Entity\Post;
 use Domain\Post\Exception\PostNotFoundException;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Exception\ProfileNotFoundException;
 
 class PostRepository extends EntityRepository
 {
@@ -17,8 +19,11 @@ class PostRepository extends EntityRepository
     public function createPost(int $profileId, int $collectionId, string $content): Post {
         $em = $this->getEntityManager();
 
-        $authorProfile = $em->getReference(Profile::class, $profileId); /** @var Profile $authorProfile */
-        $collection = $em->getReference(Collection::class, $collectionId); /** @var Collection $collection */
+        $authorProfile = $em->getRepository(Profile::class)->find($profileId);/** @var Profile $authorProfile */
+        if(is_null($authorProfile)) throw new ProfileNotFoundException("Profile {$profileId} not found ");
+
+        $collection = $em->getRepository(Collection::class)->find($collectionId);/** @var Collection $collection */
+        if(is_null($collection)) throw new CollectionNotFoundException("Collection {$collectionId} not found");
 
         $post = new Post($authorProfile, $collection, $content);
 

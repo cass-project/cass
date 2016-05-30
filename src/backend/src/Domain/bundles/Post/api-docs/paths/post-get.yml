@@ -1,4 +1,4 @@
-"/protected/post/{postId}/get":
+"/post/{postId}/get":
   get:
     tags:
       - post
@@ -13,8 +13,6 @@
         required: true
         description: ID поста
     responses:
-      403:
-        $ref: '#/responses/Unauthorized'
       200:
         schema:
           required:
