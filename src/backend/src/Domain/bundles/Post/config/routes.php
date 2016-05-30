@@ -6,25 +6,25 @@ use Zend\Expressive\Application;
 
 return function (Application $app) {
     $app->put(
-        "%s/protected/post/{command:create}",
+        "/protected/post/{command:create}",
         PostMiddleware::class,
         'post-create'
     );
 
     $app->delete(
-        "%s/protected/post/{postId}/{command:delete}",
+        "/protected/post/{postId}/{command:delete}",
         PostMiddleware::class,
         'post-delete'
     );
 
     $app->post(
-        "%s/protected/post/{postId}/{command:edit}",
+        "/protected/post/{postId}/{command:edit}",
         PostMiddleware::class,
         'post-edit'
     );
 
     $app->get(
-        "%s/protected/post/{postId}/{command:get}",
+        "/protected/post/{postId}/{command:get}",
         PostMiddleware::class,
         'post-get'
     );

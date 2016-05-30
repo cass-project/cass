@@ -9,7 +9,7 @@ final class CreateCommand extends Command
     public function run(ServerRequestInterface $request): array
     {
         $createCommunityRequest = new CreateCommunityRequest($request);
-        $community = $this->communityService->createCommunity($createCommunityRequest->getParameters());
+        $community = $this->communityService->createCommunityByParameters($createCommunityRequest->getParameters());
 
         return [
             'entity' => $community->toJSON()
