@@ -29,15 +29,14 @@ class PostMiddlewareTest extends MiddlewareTestCase
   {
     $account = DemoAccountFixture::getAccount();
 
+
+
+
     $json = [
       "profile_id"    => $account->getCurrentProfile()->getId(),
       "collection_id" => DemoCollectionFixture::getCollection()->getId(),
       "content"       => "string",
-      "attachments"   => [0],
-      "links"         => [
-        "url" => "string",
-        "metadata"=> []
-      ]
+      "attachments"   => [],
     ];
 
     return $this->requestPostCreatePut($json)->auth($account->getAPIKey())->execute()
