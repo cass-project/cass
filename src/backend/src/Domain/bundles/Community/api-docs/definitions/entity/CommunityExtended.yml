@@ -1,0 +1,17 @@
+Community_Entity_CommunityExtended:
+  required:
+    - community
+    - access
+  properties:
+    community:
+      $ref: "#/definitions/Community_Entity_Community"
+    access:
+      type: object
+      description: Права доступа
+      schema:
+        required:
+          - admin
+        properties:
+          admin:
+            type: boolean
+            description: Права администратора коммунити
