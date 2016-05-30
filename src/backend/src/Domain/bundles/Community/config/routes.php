@@ -30,6 +30,12 @@ return function(Application $app) {
         'community-get-by-id'
     );
 
+    $app->get(
+        '/community/{communityId}/{command:get-by-sid}[/]',
+        CommunityMiddleware::class,
+        'community-get-by-sid'
+    );
+
     $app->put(
         '/protected/community/{communityId}/feature/{feature}/{command:activate}[/]',
         CommunityFeaturesMiddleware::class,

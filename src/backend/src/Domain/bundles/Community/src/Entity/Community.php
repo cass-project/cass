@@ -63,11 +63,20 @@ class Community
      */
     private $features = [];
 
+    /**
+     * @Column(type="json_array", name="metadata")
+     * @var array
+     */
+    private $metadata = [];
+
     /** @var CommunityFeatures */
     private $featuresHandler;
 
-    public function __construct(string $title, string $description, Theme $theme)
+    public function __construct(int $creatorAccountId, string $title, string $description, Theme $theme)
     {
+        $this->metadata = [
+            'creatorAccountId' => $creatorAccountId
+        ];
         $this->sid = GenerateRandomString::gen(self::SID_LENGTH);
         $this->dateCreatedOn = new \DateTime();
         $this->collections = new CollectionTree();
@@ -86,7 +95,7 @@ class Community
             'description' => $this->getDescription(),
             'theme_id' => $this->getTheme()->getId(),
             'has_image' => $this->hasImage(),
-            'collections' => $this->collections->toJSON()
+            'collections' => $this->collections->toJSON(),
         ];
 
         if($result['has_image']) {
@@ -175,5 +184,9 @@ class Community
         }
 
         return $this->featuresHandler;
+    }
+
+    public function &getMetadata(): array {
+        return $this->metadata;
     }
 }

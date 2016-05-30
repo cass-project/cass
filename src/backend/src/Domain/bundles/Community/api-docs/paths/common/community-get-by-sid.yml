@@ -1,4 +1,4 @@
-"/community/{communityId}/get-extended":
+"/community/{communitySID}/get-by-sid":
   get:
     tags:
       - community
@@ -7,11 +7,11 @@
     security:
       - x_api_key: []
     parameters:
-      - name: communityId
+      - name: communitySID
         in: path
         required: true
-        type: number:
-        description: ID коммунити
+        type: string:
+        description: SID коммунити
     responses:
       404:
         schema:
@@ -26,4 +26,6 @@
               type: boolean
               description: '=true'
             entity:
-              $ref: '#/definitions/Community_Entity_CommunityExtended'
+              $ref: '#/definitions/Community_Entity_Community'
+            access:
+              $ref: '#/definitions/Community_Definitions_CommunityAccess'

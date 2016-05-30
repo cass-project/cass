@@ -1,49 +1,20 @@
 <?php
 namespace Domain\Community\Middleware\Command;
 
-use Application\Exception\CommandNotFoundException;
+use Domain\Auth\Service\CurrentAccountService;
 use Domain\Community\Service\CommunityService;
-use Psr\Http\Message\ServerRequestInterface;
 
-abstract class Command
+abstract class Command implements \Application\Command\Command
 {
-    const COMMAND_CREATE = 'create';
-    const COMMAND_EDIT = 'edit';
-    const COMMAND_IMAGE_UPLOAD = 'image-upload';
-    const COMMAND_GET_BY_ID = 'get';
+    /** @var CurrentAccountService */
+    protected $currentAccountService;
 
     /** @var CommunityService */
     protected $communityService;
 
-    public function setCommunityService(CommunityService $communityService): self
+    public function __construct(CurrentAccountService $currentAccountService, CommunityService $communityService)
     {
+        $this->currentAccountService = $currentAccountService;
         $this->communityService = $communityService;
-        return $this;
-    }
-
-    abstract public function run(ServerRequestInterface $request);
-
-    public static function factory(ServerRequestInterface $request, CommunityService $communityService)
-    {
-        $command = self::factoryCommand($request->getAttribute('command'));
-        $command->setCommunityService($communityService);
-
-        return $command;
-    }
-
-    private static function factoryCommand(string $command)
-    {
-        switch($command) {
-            default:
-                throw new CommandNotFoundException(sprintf("Command %s::%s not found", self::class, $command));
-            case self::COMMAND_CREATE:
-                return new CreateCommand();
-            case self::COMMAND_EDIT:
-                return new EditCommand();
-            case self::COMMAND_IMAGE_UPLOAD:
-                return new ImageUploadCommand();
-            case self::COMMAND_GET_BY_ID:
-                return new GetByIdCommand();
-        }
     }
 }

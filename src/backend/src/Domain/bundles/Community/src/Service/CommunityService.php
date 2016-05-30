@@ -1,17 +1,23 @@
 <?php
 namespace Domain\Community\Service;
 
-use Application\Exception\NotImplementedException;
+use Domain\Account\Entity\Account;
+use Domain\Auth\Service\CurrentAccountService;
+use Domain\Community\ACL\CommunityACL;
 use Domain\Community\Entity\Community;
 use Domain\Community\Parameters\CreateCommunityParameters;
 use Domain\Community\Parameters\EditCommunityParameters;
 use Domain\Community\Parameters\UploadImageParameters;
 use Domain\Community\Repository\CommunityRepository;
 use Domain\Community\Scripts\CommunityImageUploadScript;
+use Domain\Profile\Entity\Profile;
 use Domain\Theme\Repository\ThemeRepository;
 
 class CommunityService
 {
+    /** @var CurrentAccountService */
+    private $currentAccountService;
+
     /** @var CommunityRepository */
     private $communityRepository;
     
@@ -24,25 +30,26 @@ class CommunityService
     /** @var string */
     private $publicPath = '';
 
-    public function __construct(CommunityRepository $communityRepository, ThemeRepository $themeRepository, string $storageDir, string $publicPath) {
+    public function __construct(
+        CurrentAccountService $currentAccountService,
+        CommunityRepository $communityRepository,
+        ThemeRepository $themeRepository,
+        string $storageDir,
+        string $publicPath
+    ) {
+        $this->currentAccountService = $currentAccountService;
         $this->communityRepository = $communityRepository;
         $this->themeRepository = $themeRepository;
         $this->storageDir = $storageDir;
     }
     
-    public function createCommunityByParameters(CreateCommunityParameters $parameters): Community {
-
-        return $this->createCommunity(
-          $parameters->getTitle(),
-          $parameters->getDescription(),
-          $parameters->getThemeId());
-    }
-
-    public function createCommunity(string $title,string $description,int $themeId): Community {
+    public function createCommunity(CreateCommunityParameters $parameters): Community {
+        $owner = $this->currentAccountService->getCurrentAccount();
         $entity = new Community(
-          $title,
-          $description,
-          $this->themeRepository->getThemeById($themeId)
+            $owner->getId(),
+            $parameters->getTitle(),
+            $parameters->getDescription(),
+            $this->themeRepository->getThemeById($parameters->getThemeId())
         );
 
         $this->communityRepository->createCommunity($entity);
@@ -76,7 +83,18 @@ class CommunityService
         return $community;
     }
 
-    public function getCommunityById(int $communityId): Community {
+    public function getCommunityById(string $communityId): Community {
         return $this->communityRepository->getCommunityById($communityId);
+    }
+
+    public function getCommunityBySID(string $communitySID): Community {
+        return $this->communityRepository->getCommunityBySID($communitySID);
+    }
+
+    public function getCommunityAccess(Account $account, Community $community): CommunityACL
+    {
+        $hasAdminAccess = $community->getMetadata()['creatorAccountId'] === $account->getId();
+
+        return new CommunityACL($hasAdminAccess);
     }
 }
