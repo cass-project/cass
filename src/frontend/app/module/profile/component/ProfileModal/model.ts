@@ -22,10 +22,15 @@ export class ProfileModalModel
 
     ApiKey;
 
+    signOut(){
+        this.profileRESTService.signOut();
+    }
+
     reset(){
         this.profileService.accountCondReset(this.changePasswordStn);
         this.profileService.personalCondReset(this.profile);
         this.profileService.interestCondReset(this.expertIn, this.interestingIn);
+        this.profileRESTService.signOut()
     }
 
     canSave(){
