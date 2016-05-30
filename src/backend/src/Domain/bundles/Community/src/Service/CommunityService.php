@@ -83,8 +83,12 @@ class CommunityService
         return $community;
     }
 
-    public function getCommunityById(int $communityId): Community {
+    public function getCommunityById(string $communityId): Community {
         return $this->communityRepository->getCommunityById($communityId);
+    }
+
+    public function getCommunityBySID(string $communitySID): Community {
+        return $this->communityRepository->getCommunityBySID($communitySID);
     }
 
     public function getCommunityAccess(Account $account, Community $community): CommunityACL

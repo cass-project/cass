@@ -165,7 +165,7 @@ class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
 
         $sampleCommunity = SampleCommunitiesFixture::getCommunity(2);
 
-        $this->requestGetCommunityByIdExtended($sampleCommunity->getId())
+        $this->requestGetCommunityByIdExtended($sampleCommunity->getSID())
             ->execute()
             ->expectStatusCode(200)
             ->expectJSONContentType()

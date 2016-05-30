@@ -9,7 +9,7 @@ final class GetByIdExtendedCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $community = $this->communityService->getCommunityById($request->getAttribute('communityId'));
+        $community = $this->communityService->getCommunityBySID($request->getAttribute('communityId'));
 
         return $responseBuilder->setStatusSuccess()->setJson([
             'entity' => $community->toJSON(),
