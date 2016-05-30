@@ -20,6 +20,26 @@
         <div *ngIf="screens.isOn('Processing')">
           <cass-community-create-modal-screen-processing (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-processing>
         </div>
+        <div *ngIf="screens.isOn('Complete')">
+            <div class="cass-padding-box-10 screen screen-complete">
+              <div><i class="text-center fa fa-thumbs-up" aria-hidden="true"></i></div>
+              <h1>Создание коммунити успешно завершено!</h1>
+            </div>
+            <footer class="form-footer">
+              <div class="form-footer-section">
+                <div class="cass-padding-box-5">
+                  <button type="submit" class="form-button form-button-secondary" (click)="communityComponentService.modals.create.close()">
+                    <span>Закрыть</span>
+                  </button>
+<!--
+                  <button type="submit" class="form-button form-button-primary">
+                    <span>В коммунити</span>
+                  </button>
+-->
+                </div>
+              </div>
+            </footer>
+        </div>
       </div>
     </div>
   </cass-modal>

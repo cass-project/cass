@@ -7,6 +7,7 @@ import {UploadImageService} from "../../../../../util/component/UploadImage/serv
 import {UploadProfileImageStrategy} from "../../../../util/UploadProfileImageStrategy";
 import {ProfileRESTService} from "../../../ProfileService/ProfileRESTService";
 import {FrontlineService} from "../../../../../frontline/service";
+import {AuthService} from "../../../../../auth/service/AuthService";
 
 
 @Component({
@@ -29,10 +30,28 @@ import {FrontlineService} from "../../../../../frontline/service";
 export class ImageTab
 {
     upload: UploadImageModalControl = new UploadImageModalControl();
+    deleteProcessVisible = false;
 
     constructor(private uploadImageService: UploadImageService, private frontlineService: FrontlineService, private profileRESTService: ProfileRESTService) {
         uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(profileRESTService));
     }
+
+
+    getImageProfile(){
+        if(AuthService.isSignedIn()){
+            return AuthService.getAuthToken().getCurrentProfile().entity.image.public_path;
+        }
+    }
+
+    avatarDeletingProcess(){
+        this.deleteProcessVisible = true;
+        this.profileRESTService.deleteAvatar().subscribe(data => {
+            this.frontlineService.session.auth.profiles[0].image.public_path = '/public/assets/profile-default.png';
+            this.deleteProcessVisible = false;
+        });
+    }
+
+
 
     uploadProfileImage() {
         this.upload.open();

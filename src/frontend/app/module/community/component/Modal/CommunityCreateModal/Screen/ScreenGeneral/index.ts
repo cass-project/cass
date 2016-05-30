@@ -22,6 +22,6 @@ export class ScreenGeneral extends Screen
     submit() {
         this.model.title = this.title;
         this.model.description = this.description;
-        this.nextEvent.emit(this);
+        this.next();
     }
 }

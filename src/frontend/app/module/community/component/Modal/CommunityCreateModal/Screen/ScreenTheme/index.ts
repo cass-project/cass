@@ -20,11 +20,11 @@ export class ScreenTheme extends Screen
         super(model);
     }
 
-    updateThemeIds(themeIds: number[]) {
-        this.model.theme_ids = themeIds;
+    updateThemeId(themeIds: number[]) {
+        this.model.theme_id = themeIds[0];
     }
 
     unsetTheme(){
-        this.model.theme_ids = null;
+        this.model.theme_id = null;
     }
 }

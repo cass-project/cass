@@ -4,6 +4,7 @@ import {Screen} from "../../screen";
 import {LoadingLinearIndicator} from "../../../../../../util/component/LoadingLinearIndicator/index";
 import {CommunityRESTService} from "../../../../../service/CommunityRESTService";
 import {CommunityCreateModalModel} from "../../model";
+import {CommunityComponentService} from "../../../../../service";
 
 @Component({
     selector: 'cass-community-create-modal-screen-processing',
@@ -18,14 +19,21 @@ import {CommunityCreateModalModel} from "../../model";
 export class ScreenProcessing extends Screen
 {
 
-    constructor(private service: CommunityRESTService, protected model: CommunityCreateModalModel) {
+    constructor(
+        private communityRESTService: CommunityRESTService,
+        protected model: CommunityCreateModalModel
+    ) {
         super(model);
     }
 
     ngOnInit(){
-        this.service.create(this.model).subscribe(data => {
-            console.log(data);
-            //this.nextEvent.emit(this);
+        this.communityRESTService.create(this.model).map(data => data.json()).subscribe(data => {
+            this.communityRESTService.imageUpload(
+                data['entity'].id,
+                this.model.uploadImage,
+                this.model.uploadImageCrop,
+                () => { this.next(); }
+            );
         });
     }
 }
