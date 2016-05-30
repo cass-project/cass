@@ -117,6 +117,53 @@ article {
 </article>
 ```
 
+Сервисы
+-------
+
+Провайдеры сервисов, которые должны быть доступны глобально (практически все виды сервисов: REST-сервисы, сервисы предметной области,
+ сервисы "бандл"-компонентов), должны добавляться в компонент `App`:
+
+```typescript
+@Component({
+    selector: 'cass-bootstrap',
+    template: require('./template.html'),
+    providers: [
+        AuthService,
+        AuthComponentService,
+        ProfileComponentService,
+        CommunityComponentService,
+        CommunityRESTService,
+        ThemeService,
+        // ...
+    ],
+})
+export class App {
+    // ...
+}
+```
+
+*Исключения*
+
+- Сервисы, инстансы которых должны быть *локальными* на компонент (т.е. должны создаваться при каждом создании компонента):
+
+```typescript
+@Component({
+    selector: 'cass-upload-image-modal',
+    template: require('./template.html'),
+    styles: [
+        require('./style.shadow.scss')
+    ],
+    providers: [
+        ImageCropperService, // Каждый компонент должен иметь дело со своим личным инстансом этого сервиса
+    ],
+    directives: [
+        ModalComponent,
+        ImageCropper,
+    ]
+})
+export class UploadImageModal { /// ... }
+```
+
 Проблемы
 --------
 
