@@ -13,13 +13,13 @@ require('./styles/index.head.scss');
 
 import {provide} from "angular2/core";
 import {RequestOptions, HTTP_PROVIDERS} from "angular2/http";
-import {bootstrap} from "angular2/bootstrap";
 import {ROUTER_PROVIDERS} from "angular2/router";
 
 import {App} from "./app";
 import {frontline} from "./module/frontline/service";
 import {FrontlineService} from "./module/frontline/service";
 import {OAuthRequestOptions} from "./module/auth/OAuthRequestOptions";
+import {bootstrap} from "angular2/platform/browser";
 
 document.addEventListener('DOMContentLoaded', () => {
     frontline(session => {
