@@ -30,6 +30,12 @@ class FeaturesFactory
         return array_values($this->FEATURES);
     }
 
+    public function each(Callable $fn) {
+        foreach($this->listFeatures() as $feature) {
+            $fn($this->createFeatureFromClassName($feature));
+        }
+    }
+
     public function listFeatureCodes(): array
     {
         return array_keys($this->FEATURES);

@@ -16,6 +16,14 @@ class FeaturesListFrontlineScript implements FrontlineScript
 
     public function __invoke(): array
     {
-        return $this->featuresFactory->listFeatures();
+        return array_map(function($className) {
+            $feature = $this->featuresFactory->createFeatureFromClassName($className);
+
+            return [
+                'code' => $feature->getCode(),
+                'is_development_ready' => $feature->isDevelopmentReady(),
+                'is_production_ready' => $feature->isProductionReady(),
+            ];
+        }, $this->featuresFactory->listFeatures());
     }
 }
