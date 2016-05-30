@@ -10,11 +10,21 @@ use Domain\Post\PostBundle;
 class CreatePostRequest extends SchemaParams
 {
     public function getParameters(): CreatePostParameters {
-        $data = json_decode($this->getRequest()->getBody(), true);
 
-        $links = array_map(function(array $params) {
-            return new LinkParameters($params['url'], $params['metadata']);
-        }, $data['links']);
+        if($this->getRequest()->getParsedBody()){
+            $data = (array) ($this->getRequest()->getParsedBody());
+        }
+        else{
+            $data = json_decode($this->getRequest()->getBody(), TRUE);
+        }
+
+        if(isset($data['links'])) {
+            $links = array_map(function(array $params) {
+                return new LinkParameters($params['url'], $params['metadata']);
+            }, $data['links']);
+        }else{
+            $links = [];
+        }
 
         return new CreatePostParameters(
             (int) $data['profile_id'],

@@ -15,6 +15,21 @@ export interface FrontlineSessionData
         profiles: Array<ProfileEntity>,
     },
     themes: ThemeTree[];
+    config: {
+        account: {
+            delete_account_request_days: number
+        },
+        profile: {
+            max_profiles: number
+        },
+        community: {
+            features: {
+                code: string;
+                is_development_ready: boolean,
+                is_production_ready: boolean,
+            }[]
+        }
+    }
 }
 
 

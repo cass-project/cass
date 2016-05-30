@@ -8,9 +8,7 @@ class CreateCommand extends Command
 {
     public function run(ServerRequestInterface $request) {
         $createPostParameters = (new CreatePostRequest($request))->getParameters();
-
-        // TODO: Is current profile validator
-
+        
         $post = $this->postService->createPost($createPostParameters);
 
         return [
