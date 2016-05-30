@@ -1,13 +1,12 @@
 import {Component} from "angular2/core";
-import {RouteConfig} from "angular2/router";
+import {CORE_DIRECTIVES} from "angular2/common";
+import {RouteConfig, ROUTER_DIRECTIVES} from "angular2/router";
 
 import {AuthComponentService} from "./module/auth/component/Auth/service";
 import {ProfileComponentService} from "./module/profile/service";
 import {CommunityComponentService} from "./module/community/service";
 import {CommunityRESTService} from "./module/community/service/CommunityRESTService";
 import {ThemeService} from "./module/theme/service/ThemeService";
-import {ROUTER_DIRECTIVES} from "angular2/router";
-import {CORE_DIRECTIVES} from "angular2/common";
 import {AuthComponent} from "./module/auth/component/Auth/index";
 import {AccountComponent} from "./module/account/index";
 import {ProfileComponent} from "./module/profile/index";
