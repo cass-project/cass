@@ -34,18 +34,7 @@ export class UploadProfileImageStrategy implements UploadImageStrategy
     }
 
     process(file: Blob, model: UploadImageCropModel, modal: UploadImageModal) {
-        console.log(model);
-
-        this.profileRESTService.avatarUpload(file, model);
+        this.profileRESTService.avatarUpload(file, model, modal);
         modal.progress.reset();
-
-        while (this.profileRESTService.progressBar !== 100)  {
-            console.log(this.profileRESTService.progressBar);
-            modal.progress.update(this.profileRESTService.progressBar);
-            if(this.profileRESTService.progressBar === 99){
-                modal.progress.complete();
-                modal.close();
-            }
-        }
     }
 }
