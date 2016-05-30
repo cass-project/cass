@@ -19,7 +19,7 @@ use Domain\Community\Middleware\Command\Feature\ActivateFeatureCommand;
 use Domain\Community\Middleware\Command\Feature\DeactivateFeatureCommand;
 use Domain\Community\Middleware\Command\Feature\IsFeatureActivatedCommand;
 use Domain\Community\Middleware\Command\GetByIdCommand;
-use Domain\Community\Middleware\Command\GetByIdExtendedCommand;
+use Domain\Community\Middleware\Command\getBySIDCommand;
 use Domain\Community\Middleware\Command\ImageUploadCommand;
 use Domain\Community\Middleware\CommunityFeaturesMiddleware;
 use Domain\Community\Middleware\CommunityMiddleware;
@@ -65,7 +65,7 @@ return [
             get(CurrentAccountService::class),
             get(CommunityService::class)
         ),
-        GetByIdExtendedCommand::class => object()->constructor(
+        getBySIDCommand::class => object()->constructor(
             get(CurrentAccountService::class),
             get(CommunityService::class)
         ),

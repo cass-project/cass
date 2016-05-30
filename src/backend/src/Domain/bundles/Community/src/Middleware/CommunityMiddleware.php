@@ -6,7 +6,7 @@ use Application\Service\CommandService;
 use Domain\Community\Middleware\Command\CreateCommand;
 use Domain\Community\Middleware\Command\EditCommand;
 use Domain\Community\Middleware\Command\GetByIdCommand;
-use Domain\Community\Middleware\Command\GetByIdExtendedCommand;
+use Domain\Community\Middleware\Command\getBySIDCommand;
 use Domain\Community\Middleware\Command\ImageUploadCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -30,7 +30,7 @@ final class CommunityMiddleware implements MiddlewareInterface
             ->attachDirect('edit', EditCommand::class)
             ->attachDirect('image-upload', ImageUploadCommand::class)
             ->attachDirect('get', GetByIdCommand::class)
-            ->attachDirect('get-extended', GetByIdExtendedCommand::class)
+            ->attachDirect('get-by-sid', getBySIDCommand::class)
             ->resolve($request);
 
         return $resolver->run($request, $responseBuilder);

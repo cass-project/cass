@@ -5,7 +5,7 @@ use Application\REST\Response\ResponseBuilder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class GetByIdExtendedCommand extends Command
+final class getBySIDCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {

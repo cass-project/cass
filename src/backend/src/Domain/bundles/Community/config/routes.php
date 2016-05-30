@@ -31,9 +31,9 @@ return function(Application $app) {
     );
 
     $app->get(
-        '/community/{communityId}/{command:get-extended}[/]',
+        '/community/{communityId}/{command:get-by-sid}[/]',
         CommunityMiddleware::class,
-        'community-get-by-id-extended'
+        'community-get-by-sid'
     );
 
     $app->put(

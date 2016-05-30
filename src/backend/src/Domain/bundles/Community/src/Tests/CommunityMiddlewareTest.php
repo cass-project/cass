@@ -159,13 +159,13 @@ class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
             ->expectJSONError();
     }
 
-    public function testGetByIdExtended()
+    public function getBySID()
     {
         $this->upFixture(new SampleCommunitiesFixture());
 
         $sampleCommunity = SampleCommunitiesFixture::getCommunity(2);
 
-        $this->requestGetCommunityByIdExtended($sampleCommunity->getSID())
+        $this->requestGetCommunityBySID($sampleCommunity->getSID())
             ->execute()
             ->expectStatusCode(200)
             ->expectJSONContentType()
