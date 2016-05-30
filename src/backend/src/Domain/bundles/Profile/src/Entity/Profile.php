@@ -100,6 +100,10 @@ class Profile implements JSONSerializable
             'is_current' => (bool)$this->isCurrent(),
             'is_initialized' => $this->isInitialized(),
             'greetings' => $this->getProfileGreetings()->toJSON(),
+            'gender' => [
+                'int' => $this->getGender(),
+                'string' => $this->getGenderStringCode()
+            ],
             'image' => $this->getProfileImage()->toJSON(),
             'expert_in' => array_map(function (Theme $theme) {
                 return $theme->getId();
@@ -109,13 +113,6 @@ class Profile implements JSONSerializable
             }, $this->interesting_in->toArray()),
             'collections' => $this->collections->toJSON(),
         ];
-
-        if($this->isGenderSpecified()) {
-            $result['gender'] = [
-                'int' => $this->getGender(),
-                'string' => $this->getGenderStringCode()
-            ];
-        }
 
         return $result;
     }
