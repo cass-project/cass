@@ -16,6 +16,8 @@ import {AuthService} from "../auth/service/AuthService";
 export class LandingComponent
 {
     constructor(private pService: ProfileComponentService, private auth: AuthService) {
-        
+        /*if(!AuthService.getAuthToken().getCurrentProfile().entity.is_initialized){
+            this.pService.modals.setup.open();
+        }*/
     }
 }
