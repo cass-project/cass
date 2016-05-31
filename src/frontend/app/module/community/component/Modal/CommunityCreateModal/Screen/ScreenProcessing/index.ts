@@ -28,12 +28,16 @@ export class ScreenProcessing extends Screen
 
     ngOnInit(){
         this.communityRESTService.create(this.model).map(data => data.json()).subscribe(data => {
-            this.communityRESTService.imageUpload(
-                data['entity'].id,
-                this.model.uploadImage,
-                this.model.uploadImageCrop,
-                () => { this.next(); }
-            );
+            if(this.model.uploadImage){
+                this.communityRESTService.imageUpload(
+                    data['entity'].id,
+                    this.model.uploadImage,
+                    this.model.uploadImageCrop,
+                    () => { this.next(); }
+                );
+            }else{
+                this.next();
+            }
         });
     }
 }

@@ -41,9 +41,10 @@ enum CreateStage {
 })
 export class CommunityCreateModal
 {
-    public screens: ScreenControls<CreateStage> = new ScreenControls<CreateStage>(CreateStage.General, (sc: ScreenControls<CreateStage>) => {
+    public screens: ScreenControls<CreateStage> = new ScreenControls<CreateStage>(CreateStage.Features, (sc: ScreenControls<CreateStage>) => {
         sc.add({ from: CreateStage.General, to: CreateStage.Theme })
-          .add({ from: CreateStage.Theme, to: CreateStage.Image })
+          .add({ from: CreateStage.Theme, to: CreateStage.Features })
+          .add({ from: CreateStage.Features, to: CreateStage.Image })
           .add({ from: CreateStage.Image, to: CreateStage.Processing })
           .add({ from: CreateStage.Processing, to: CreateStage.Complete })
         ;
@@ -52,8 +53,7 @@ export class CommunityCreateModal
     @Output('close') closeEvent = new EventEmitter<CommunityCreateModal>();
 
     constructor(
-        private communityComponentService: CommunityComponentService,
-        private service: CommunityRESTService, model: CommunityCreateModalModel
+        private service: CommunityComponentService
     ) {}
 
     isHeaderVisible() {
