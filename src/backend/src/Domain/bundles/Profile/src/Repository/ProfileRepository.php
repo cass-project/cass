@@ -53,7 +53,7 @@ class ProfileRepository extends EntityRepository
 
         return $result;
     }
-    
+
     public function getProfileByIds(array $profileIds): array
     {
         $profileIds = array_filter($profileIds, 'is_integer');
@@ -169,10 +169,11 @@ class ProfileRepository extends EntityRepository
 
         // получаем темы по ids
         $themes = $this->getEntityManager()->getRepository(Theme::class)->findBy(
-          ['id' => $expertInParameters->getThemeIds()]
+            ['id' => $expertInParameters->getThemeIds()]
         );
 
-        $profile->setExpertIn($themes)->setExpertInIds($profile->getExpertIn()->toArray());
+        $profile->setExpertIn($themes)
+            ->setExpertInIds($profile->getExpertIn());
 
         $this->updateProfile($profile);
 
@@ -186,7 +187,7 @@ class ProfileRepository extends EntityRepository
 
         // получаем темы по ids
         $themes = $this->getEntityManager()->getRepository(Theme::class)->findBy(
-          ['id' => $expertInParameters->getThemeIds()]
+            ['id' => $expertInParameters->getThemeIds()]
         );
 
         // removing exist themes
@@ -220,10 +221,11 @@ class ProfileRepository extends EntityRepository
 
         // получаем темы по ids
         $themes = $this->getEntityManager()->getRepository(Theme::class)->findBy(
-          ['id' => $inParameters->getThemeIds()]
+            ['id' => $inParameters->getThemeIds()]
         );
 
-        $profile->setInterestingIn($themes)->setInterestingInIds($profile->getInterestingIn()->toArray());
+        $profile->setInterestingIn($themes)
+            ->setInterestingInIds($profile->getInterestingIn());
 
         $this->updateProfile($profile);
 
@@ -237,7 +239,7 @@ class ProfileRepository extends EntityRepository
 
         // получаем темы по ids
         $themes = $this->getEntityManager()->getRepository(Theme::class)->findBy(
-          ['id' => $inParameters->getThemeIds()]
+            ['id' => $inParameters->getThemeIds()]
         );
 
         // removing exist themes
