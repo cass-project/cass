@@ -94,7 +94,7 @@ class ProfileService
         }
     }
 
-    public function deleteProfileImage(int $profileId, int $currentAccountId) {
+    public function deleteProfileImage(int $profileId, int $currentAccountId): ProfileImage {
         $profile = $this->getProfileById($profileId);
         $account = $profile->getAccount();
 
@@ -112,7 +112,7 @@ class ProfileService
             unlink($storagePath);
         }
 
-        $this->profileRepository->deleteProfileImage($profile);
+        return $this->profileRepository->deleteProfileImage($profile);
     }
 
     public function nameFL(int $profileId, string $firstName, string $lastName) {

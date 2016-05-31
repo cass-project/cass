@@ -14,12 +14,12 @@ final class ChatFeature extends AbstractFeature
 
     public function isProductionReady(): bool
     {
-        return true;
+        return false;
     }
 
     public function isDevelopmentReady(): bool
     {
-        return true;
+        return false;
     }
 
     public function activate(Community $community)

@@ -9,4 +9,13 @@ export class CommunityCreateModalModel
     theme_id: number;
     uploadImage: Blob;
     uploadImageCrop: UploadImageCropModel;
+    features: CommunityFeaturesModel = new CommunityFeaturesModel();
+}
+
+
+export class CommunityFeaturesModel
+{
+    collections: boolean = false;
+    boards: boolean = false;
+    chat: boolean = false;
 }

@@ -13,9 +13,11 @@ class ImageDeleteCommand extends Command
         $profileId = $this->validateProfileId($request->getAttribute('profileId'));
 
         try {
-            $this->profileService->deleteProfileImage($profileId, $this->currentAccountService->getCurrentAccount()->getId());
+            $newProfileImage = $this->profileService->deleteProfileImage($profileId, $this->currentAccountService->getCurrentAccount()->getId());
 
-            $responseBuilder->setStatusSuccess();
+            $responseBuilder->setStatusSuccess()->setJson([
+                'image' => $newProfileImage->toJSON()
+            ]);
         }catch(ProfileNotFoundException $e) {
             $responseBuilder
                 ->setStatusNotFound()
