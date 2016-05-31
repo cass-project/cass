@@ -129,7 +129,7 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
                         'string' => 'none'
                     ]
                 ]
-            ])backe
+            ])
         ;
     }
 
