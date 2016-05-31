@@ -53,7 +53,12 @@ class ProfileImageDeleteMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([
-                'success' => true
+                'success' => true,
+                'image' => [
+                    'id' => $this->expectId(),
+                    'profile_id' => $profile->getId(),
+                    'public_path' => ProfileImage::DEFAULT_PROFILE_IMAGE_PUBLIC
+                ]
             ]);
 
         $this->requestGetProfile($profile->getId())

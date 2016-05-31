@@ -2,7 +2,7 @@
   delete:
     tags:
       - profile
-    description: Удаление изображение профиля и замена ее на дефолтную
+    description: Удаление изображение профиля и замена ее на автогенерируемую.
     security:
       - x_api_key: []
     parameters:
@@ -14,7 +14,17 @@
     responses:
       200:
         schema:
-          $ref: '#/responses/success'
+          required:
+            - success
+            - image
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            image:
+              type: object
+              schema:
+                $ref: '#/definitions/Profile_Entity_ProfileImage'
       403:
         schema:
           $ref: '#/responses/Unauthorized'

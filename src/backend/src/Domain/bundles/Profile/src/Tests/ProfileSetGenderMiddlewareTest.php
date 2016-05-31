@@ -123,12 +123,13 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
-                    'id' => $profile->getId()
+                    'id' => $profile->getId(),
+                    'gender' => [
+                        'int' => Profile::GENDER_NONE,
+                        'string' => 'none'
+                    ]
                 ]
-            ])
-            ->expect(function(array $response) {
-                $this->assertFalse(isset($response['entity']['gender']));
-            });
+            ])backe
         ;
     }
 
