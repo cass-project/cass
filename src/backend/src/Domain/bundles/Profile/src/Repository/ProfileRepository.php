@@ -38,7 +38,7 @@ class ProfileRepository extends EntityRepository
     public function deleteProfileImage(Profile $profile): ProfileImage
     {
         $profile->emptyProfileImage();
-        $this->getEntityManager()->flush($profile);
+        $this->getEntityManager()->flush($profile->getProfileImage());
 
         return $profile->getProfileImage();
     }
@@ -172,8 +172,7 @@ class ProfileRepository extends EntityRepository
           ['id' => $expertInParameters->getThemeIds()]
         );
 
-        $profile->setExpertIn($themes)
-          ->setExpertInIds($profile->getExpertIn());
+        $profile->setExpertIn($themes)->setExpertInIds($profile->getExpertIn()->toArray());
 
         $this->updateProfile($profile);
 
@@ -224,8 +223,7 @@ class ProfileRepository extends EntityRepository
           ['id' => $inParameters->getThemeIds()]
         );
 
-        $profile->setInterestingIn($themes)
-                ->setInterestingInIds($profile->getInterestingIn());
+        $profile->setInterestingIn($themes)->setInterestingInIds($profile->getInterestingIn()->toArray());
 
         $this->updateProfile($profile);
 
