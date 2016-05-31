@@ -39,25 +39,18 @@ export class ProfileRESTService {
 
     editPersonal(profile) {
         let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/edit-personal/`;
+        let entity = AuthService.getAuthToken().getCurrentProfile().entity;
+        let greetings = entity.greetings;
 
-        AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = profile.greetings.greetings_method;
-        AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name = profile.greetings.last_name;
-        AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name = profile.greetings.first_name;
-        AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name = profile.greetings.middle_name;
-        AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname = profile.greetings.nickname;
-        AuthService.getAuthToken().getCurrentProfile().entity.gender = profile.gender;
-
-        let log = {gender: profile.gender,
-            greetings_method: profile.greetings.greetings_method,
-            last_name: profile.greetings.last_name,
-            first_name: profile.greetings.first_name,
-            middle_name: profile.greetings.middle_name,
-            nickname: profile.greetings.nickname
-        };
-        console.log(log, profile);
+        greetings.greetings_method = profile.greetings.greetings_method;
+        greetings.last_name = profile.greetings.last_name;
+        greetings.first_name = profile.greetings.first_name;
+        greetings.middle_name = profile.greetings.middle_name;
+        greetings.nickname = profile.greetings.nickname;
+        entity.gender = profile.gender;
 
         return this.http.post(url, JSON.stringify({
-            gender: profile.gender,
+            gender: profile.gender.string,
             greetings_method: profile.greetings.greetings_method,
             last_name: profile.greetings.last_name,
             first_name: profile.greetings.first_name,
@@ -111,6 +104,7 @@ export class ProfileRESTService {
 
     signOut() {
         let url = `/backend/api/auth/sign-out/`;
+        
         return this.http.get(url).subscribe(data => {
             window.location.reload()
         });
@@ -123,7 +117,6 @@ export class ProfileRESTService {
     }
 
     avatarUpload(file, model, modal) {
-
         let crop = {
             start: {
                 x: model.x,
@@ -145,7 +138,6 @@ export class ProfileRESTService {
             if (e.lengthComputable) {
                 this.progressBar = Math.floor((e.loaded / e.total) * 100);
                 modal.progress.update(this.progressBar);
-
             }
         };
 

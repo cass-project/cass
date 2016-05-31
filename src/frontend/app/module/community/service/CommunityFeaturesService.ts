@@ -24,25 +24,12 @@ export class CommunityFeaturesService
     }
 
     getFeatureInfo(code) : FeaturesInfo {
-        for(i in this.featuresInfo) {
-            if(this.featuresInfo[i].code==code) {
-                return this.featuresInfo[i];
+        for(let feature of this.featuresInfo) {
+            if(feature.code === code) {
+                return feature;
             }
         }
-        //throw new Error(`Feature with code ${code} not found.`);
     }
-
-/*
-    getFeature(code) {
-        for(i in this.features) {
-            if (this.features[i].code == code) {
-                return this.features[i];
-            }
-        }
-        throw new Error(`Feature with code ${code} not found.`);
-    }
-*/
-
 }
 
 class FeaturesInfo

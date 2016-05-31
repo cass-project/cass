@@ -13,7 +13,7 @@ export class ProfilesTabService
     private modalDeleteActive: boolean = false;
     private newProfileId;
 
-    createNewProfile(){
+    createNewProfile() {
 
 
         this.profileRESTService.createNewProfile().subscribe(data => {

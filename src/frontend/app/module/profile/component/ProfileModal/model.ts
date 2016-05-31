@@ -42,7 +42,7 @@ export class ProfileModalModel
         }
     }
 
-    saveAllChanges(){
+    saveAllChanges() {
         if(this.profileService.personalCondToSave(this.profile) && this.profileService.interestCondToSave(this.expertIn, this.interestingIn) && this.profileService.accountCondToSave(this.changePasswordStn)){
             this.profileRESTService.editPersonal(this.profile).subscribe(data => {
                 this.profileRESTService.editSex(this.profile).subscribe(data => {

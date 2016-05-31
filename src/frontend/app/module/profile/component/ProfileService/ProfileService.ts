@@ -44,9 +44,14 @@ export class ProfileService {
     }
 
     personalCondReset(profile){
-        for (let key in AuthService.getAuthToken().getCurrentProfile().entity.greetings) {
-            profile.greetings[key] = AuthService.getAuthToken().getCurrentProfile().entity.greetings[key];
-        };
+        let greetings = AuthService.getAuthToken().getCurrentProfile().entity.greetings;
+
+        for (let key in greetings) {
+            if(greetings.hasOwnProperty(key)) {
+                profile.greetings[key] = AuthService.getAuthToken().getCurrentProfile().entity.greetings[key];
+            }
+        }
+
         profile.gender = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.gender));
     }
 
@@ -64,5 +69,4 @@ export class ProfileService {
     getAccountEmail(){
         return AuthService.getAuthToken().account.entity.email;
     }
-
 }
