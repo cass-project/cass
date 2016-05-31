@@ -20,7 +20,7 @@ import {Profile} from "./entity/Profile";
 })
 export class ProfileComponent
 {
-    currentProfile: Profile;
+    currentProfile;
 
     constructor(private service: ProfileComponentService) {
         if(AuthService.isSignedIn()) {

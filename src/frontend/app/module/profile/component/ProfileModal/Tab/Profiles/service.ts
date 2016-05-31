@@ -26,7 +26,7 @@ export class ProfilesTabService
 
 
     returnProfiles(){
-        return AuthService.getAuthToken().account.profiles;
+        return AuthService.getAuthToken().account.profiles.profiles;
     }
 
     closeModalDeleteProfile(){
