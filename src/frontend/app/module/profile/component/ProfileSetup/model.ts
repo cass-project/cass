@@ -1,4 +1,4 @@
-import {Injectable} from "angular2/core";
+import {Injectable, Input,} from "angular2/core";
 import {FrontlineService} from "../../../frontline/service";
 import {ProfileSetup} from "./index";
 
@@ -7,14 +7,17 @@ export class ProfileSetupModel
 {
     constructor(private frontlineService: FrontlineService){}
 
-    profile = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0])));
 
-    expertIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in)));
-    interestingIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)));
+    //profile = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0])));
 
+
+    interestingIn = [];
+    expertIn =  [];
+
+    gender = 'none';
 
     greetings = {
-        greetingsMethod: '',
+        greetings_method: '',
         first_name: '',
         last_name: '',
         middle_name: '',

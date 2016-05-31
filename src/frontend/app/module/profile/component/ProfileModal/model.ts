@@ -3,7 +3,7 @@ import {ProfileRESTService} from "../ProfileService/ProfileRESTService";
 import {ProfileService} from "../ProfileService/ProfileService";
 import {ProfileComponentService} from "../../service";
 import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
-import {FrontlineService} from "../../../frontline/service";
+import {AuthService} from "../../../auth/service/AuthService";
 
 
 @Injectable()
@@ -11,14 +11,13 @@ export class ProfileModalModel
 {
     constructor(private profileRESTService: ProfileRESTService,
                 private profileService: ProfileService,
-                private modals: ProfileComponentService,
-                private frontlineService: FrontlineService) {}
+                private modals: ProfileComponentService) {}
 
     changePasswordStn = {old_password: '', new_password: '', repeat_password: ''};
-    profile = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0])));
+    profile = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity));
 
-    expertIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in))); //Nice method to clone object, lol
-    interestingIn = (JSON.parse(JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)));
+    expertIn = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.expert_in));
+    interestingIn = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.interesting_in));
 
     ApiKey;
 
@@ -52,10 +51,9 @@ export class ProfileModalModel
                     this.profileRESTService.updateExpertThemes(this.expertIn).subscribe(data => {this.profileService.interestCondReset(this.expertIn, this.interestingIn);
                         this.profileRESTService.changePassword(this.changePasswordStn).subscribe(data => {
                             this.profileService.accountCondReset(this.changePasswordStn);
-                            //apiKey переназначается но сессия все равно заканчивается, нужно инвестигейтить
                             this.ApiKey = data;
                             this.ApiKey = JSON.parse(this.ApiKey._body);
-                            this.frontlineService.session.auth.api_key = this.ApiKey.apiKey;
+                            AuthService.getAuthToken().apiKey = this.ApiKey.apiKey;
                             this.modals.modals.settings.close();});
                     });
                 });
@@ -81,7 +79,7 @@ export class ProfileModalModel
                         //apiKey переназначается но сессия все равно заканчивается, нужно инвестигейтить
                         this.ApiKey = data;
                         this.ApiKey = JSON.parse(this.ApiKey._body);
-                        this.frontlineService.session.auth.api_key = this.ApiKey.apiKey;
+                        AuthService.getAuthToken().apiKey = this.ApiKey.apiKey;
                         this.modals.modals.settings.close();
                     });
                 });
@@ -94,7 +92,7 @@ export class ProfileModalModel
                     this.profileService.accountCondReset(this.changePasswordStn);
                     this.ApiKey = data;
                     this.ApiKey = JSON.parse(this.ApiKey._body);
-                    this.frontlineService.session.auth.api_key = this.ApiKey.apiKey;
+                    AuthService.getAuthToken().apiKey = this.ApiKey.apiKey;
                     this.modals.modals.settings.close();
                 });
             });
@@ -115,7 +113,7 @@ export class ProfileModalModel
                 //apiKey переназначается но сессия все равно заканчивается, нужно инвестигейтить
                 this.ApiKey = data;
                 this.ApiKey = JSON.parse(this.ApiKey._body);
-                this.frontlineService.session.auth.api_key = this.ApiKey.apiKey;
+                AuthService.getAuthToken().apiKey = this.ApiKey.apiKey;
                 this.modals.modals.settings.close();
             });
         }

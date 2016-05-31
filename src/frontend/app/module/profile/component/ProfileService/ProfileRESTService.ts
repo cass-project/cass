@@ -4,22 +4,32 @@ var xmlRequest = new XMLHttpRequest();
 import {Injectable} from 'angular2/core';
 import {Http, URLSearchParams} from 'angular2/http';
 import {AuthService} from "../../../auth/service/AuthService";
-import {FrontlineService} from "../../../frontline/service";
 
 @Injectable()
 export class ProfileRESTService {
-    constructor(public http:Http,
-                private frontlineService:FrontlineService) {
+    constructor(public http:Http) {
     }
 
     public tryNumber:number = 0;
     public progressBar:number = 0;
 
 
+    getProfileById(profileId){
+        let url = `/backend/api/profile/${profileId}/get`;
+
+        return this.http.get(url);
+    }
+
+    createNewProfile(){
+        let url = `/backend/api/protected/profile/create`;
+
+        return this.http.put(url, JSON.stringify({}));
+    }
+
     editSex(profile) {
         let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/set-gender`;
 
-        this.frontlineService.session.auth.profiles[0].gender = profile.gender;
+        AuthService.getAuthToken().getCurrentProfile().entity.gender = profile.gender;
 
         console.log(profile.gender.string);
         return this.http.post(url, JSON.stringify({
@@ -30,14 +40,24 @@ export class ProfileRESTService {
     editPersonal(profile) {
         let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/edit-personal/`;
 
-        this.frontlineService.session.auth.profiles[0].greetings.greetings_method = profile.greetings.greetings_method;
-        this.frontlineService.session.auth.profiles[0].greetings.last_name = profile.greetings.last_name;
-        this.frontlineService.session.auth.profiles[0].greetings.first_name = profile.greetings.first_name;
-        this.frontlineService.session.auth.profiles[0].greetings.middle_name = profile.greetings.middle_name;
-        this.frontlineService.session.auth.profiles[0].greetings.nickname = profile.greetings.nickname;
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method = profile.greetings.greetings_method;
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name = profile.greetings.last_name;
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name = profile.greetings.first_name;
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name = profile.greetings.middle_name;
+        AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname = profile.greetings.nickname;
+        AuthService.getAuthToken().getCurrentProfile().entity.gender = profile.gender;
 
+        let log = {gender: profile.gender,
+            greetings_method: profile.greetings.greetings_method,
+            last_name: profile.greetings.last_name,
+            first_name: profile.greetings.first_name,
+            middle_name: profile.greetings.middle_name,
+            nickname: profile.greetings.nickname
+        };
+        console.log(log, profile);
 
         return this.http.post(url, JSON.stringify({
+            gender: profile.gender,
             greetings_method: profile.greetings.greetings_method,
             last_name: profile.greetings.last_name,
             first_name: profile.greetings.first_name,
@@ -49,7 +69,7 @@ export class ProfileRESTService {
     updateExpertThemes(expertIn) {
         let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/expert-in`;
 
-        this.frontlineService.session.auth.profiles[0].expert_in = (JSON.parse(JSON.stringify(expertIn)));
+        AuthService.getAuthToken().getCurrentProfile().entity.expert_in = (JSON.parse(JSON.stringify(expertIn)));
 
         return this.http.put(url, JSON.stringify({
             theme_ids: expertIn
@@ -59,7 +79,7 @@ export class ProfileRESTService {
     updateInterestThemes(interestingIn) {
         let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/interesting-in`;
 
-        this.frontlineService.session.auth.profiles[0].interesting_in = (JSON.parse(JSON.stringify(interestingIn)));
+        AuthService.getAuthToken().getCurrentProfile().entity.interesting_in = (JSON.parse(JSON.stringify(interestingIn)));
 
         return this.http.put(url, JSON.stringify({
             theme_ids: interestingIn
@@ -134,7 +154,7 @@ export class ProfileRESTService {
         xmlRequest.onreadystatechange = () => {
             if (xmlRequest.readyState === 4) {
                 if (xmlRequest.status === 200) {
-                    this.frontlineService.session.auth.profiles[0].image.public_path = JSON.parse(xmlRequest.responseText).public_path;
+                    AuthService.getAuthToken().getCurrentProfile().entity.image.public_path = JSON.parse(xmlRequest.responseText).public_path;
                     modal.progress.complete();
                     modal.close();
                     this.progressBar = 0;

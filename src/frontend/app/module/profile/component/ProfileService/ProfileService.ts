@@ -1,22 +1,22 @@
 import {Injectable} from 'angular2/core';
-import {frontline, FrontlineService} from "../../../frontline/service";
+import {AuthService} from "../../../auth/service/AuthService";
 
 @Injectable()
 export class ProfileService {
-    constructor(public frontlineService:FrontlineService) {}
+    constructor() {}
 
     interestCondReset(expertIn, interestingIn){
-        for (let key in this.frontlineService.session.auth.profiles[0].expert_in) {
-            expertIn[key] = this.frontlineService.session.auth.profiles[0].expert_in[key];
+        for (let key in AuthService.getAuthToken().getCurrentProfile().entity.expert_in) {
+            expertIn[key] = AuthService.getAuthToken().getCurrentProfile().entity.expert_in[key];
         }
-        for (let key in this.frontlineService.session.auth.profiles[0].interesting_in) {
-            interestingIn[key] = this.frontlineService.session.auth.profiles[0].interesting_in[key];
+        for (let key in AuthService.getAuthToken().getCurrentProfile().entity) {
+            interestingIn[key] = AuthService.getAuthToken().getCurrentProfile().entity.interesting_in[key];
         }
     }
 
     interestCondToSave(expertIn, interestingIn){
-        if(JSON.stringify(expertIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in) ||
-                JSON.stringify(interestingIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in)){
+        if(JSON.stringify(expertIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.expert_in) ||
+                JSON.stringify(interestingIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.interesting_in)){
                 return true;
         } else {
             return false;
@@ -44,25 +44,25 @@ export class ProfileService {
     }
 
     personalCondReset(profile){
-        for (let key in this.frontlineService.session.auth.profiles[0].greetings) {
-            profile.greetings[key] = this.frontlineService.session.auth.profiles[0].greetings[key];
+        for (let key in AuthService.getAuthToken().getCurrentProfile().entity.greetings) {
+            profile.greetings[key] = AuthService.getAuthToken().getCurrentProfile().entity.greetings[key];
         };
-        profile.gender = this.frontlineService.session.auth.profiles[0].gender;
+        profile.gender = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.gender));
     }
 
     personalCondToSave(profile) {
-        if (profile.greetings.greetings_method != this.frontlineService.session.auth.profiles[0].greetings.greetings_method ||
-            profile.greetings.first_name != this.frontlineService.session.auth.profiles[0].greetings.first_name ||
-            profile.greetings.last_name != this.frontlineService.session.auth.profiles[0].greetings.last_name ||
-            profile.greetings.middle_name != this.frontlineService.session.auth.profiles[0].greetings.middle_name ||
-            profile.greetings.nickname != this.frontlineService.session.auth.profiles[0].greetings.nickname ||
-            profile.gender.string != this.frontlineService.session.auth.profiles[0].gender.string){
+        if (profile.greetings.greetings_method != AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method ||
+            profile.greetings.first_name != AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name ||
+            profile.greetings.last_name != AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name ||
+            profile.greetings.middle_name != AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name ||
+            profile.greetings.nickname != AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname ||
+            profile.gender.string != AuthService.getAuthToken().getCurrentProfile().entity.gender.string){
             return true;
         }
     }
 
     getAccountEmail(){
-        return this.frontlineService.session.auth.account.email;
+        return AuthService.getAuthToken().account.entity.email;
     }
 
 }
