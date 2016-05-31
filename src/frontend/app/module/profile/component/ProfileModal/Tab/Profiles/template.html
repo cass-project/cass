@@ -1,6 +1,40 @@
 <div class="profile-modal-tab-profiles">
 
 
+  <!-- Модальное окно "подтверждение удаления профиля" -->
+  <cass-modal *ngIf="service.isModalDeleteProfileActive()">
+    <div class="modal-profile  modal-profile-delete">
+      <header>
+        <h1>Вы действительно хотите удалить этот профиль?</h1>
+      </header>
+      <div class="cass-padding-box-15">
+        <div class="profile-info">
+          <div class="profile-image-container">
+            <cass-profile-image border="circle" [url]="service.getProfile().image.public_path"></cass-profile-image>
+          </div>
+          <div class="profile-about">
+            <div class="profile-greetings"><h1>{{service.getProfile().greetings.greetings}}</h1></div>
+            <p class="info" *ngIf="service.getProfile().is_current">Вы сейчас используете сервис с помощью этого профиля. После удаление профиля мы
+              вам дадим выбор, с помощью какого профиля продолжить пользование нашим сервисом.</p>
+          </div>
+        </div>
+      </div>
+      <footer class="form-footer">
+        <div class="form-footer-section">
+          <button class="form-text-button" (click)="service.closeModalDeleteProfile()">
+            <span>Отмена</span>
+          </button>
+        </div>
+        <div class="form-footer-section">
+          <button class="form-button form-button-red" (click)="service.requestDeleteProfile(service.getProfile().id)">
+            <i class="fa fa-fw fa-trash"></i>
+            <span>Да, удалить профиль</span>
+          </button>
+        </div>
+      </footer>
+    </div>
+  </cass-modal>
+
   <!-- Модальное окно "подтверждение смены профиля" -->
   <cass-modal *ngIf="service.isModalSwitchProfileActive()">
     <div class="modal-profile modal-profile-switch">
@@ -36,7 +70,8 @@
   <header class="tab-modal-header">
     <h1>Управление профилями</h1>
   </header>
-  <ul class="profile-list" *ngFor="#profile of service.returnProfiles()">
+
+  <ul class="profile-list" *ngFor="#profile of service.getProfiles()">
     <li>
       <section class="profile-control">
         <div class="profile-info">
@@ -60,53 +95,21 @@
           </div>
         </div>
         <footer class="profile-controls">
-          <button *ngIf="service.returnProfiles().length > 1" class="form-text-button form-button-text-remove" (click)="service.openModalDeleteProfile()">
+          <button *ngIf="service.getProfiles().length > 1" class="form-text-button form-button-text-remove" (click)="service.openModalDeleteProfile(profile.entity.id)">
             <i class="fa fa-fw fa-remove"></i>
             <span>Удалить профиль</span>
           </button>
-          <button *ngIf="!profile.is_current" class="form-text-button">
+          <button *ngIf="!profile.entity.is_current" class="form-text-button" (click)="service.switchProfile(profile.entity.id)">
             <i class="fa fa-fw fa-exchange"></i>
             <span>Перейти в профиль</span>
           </button>
         </footer>
       </section>
     </li>
-    <cass-modal *ngIf="service.isModalDeleteProfileActive()">
-    <div class="modal-profile  modal-profile-delete">
-      <header>
-        <h1>Вы действительно хотите удалить этот профиль?</h1>
-      </header>
-      <div class="cass-padding-box-15">
-        <div class="profile-info">
-          <div class="profile-image-container">
-            <cass-profile-image border="circle" [url]="profile.entity.image.public_path"></cass-profile-image>
-          </div>
-          <div class="profile-about">
-            <div class="profile-greetings"><h1>{{profile.entity.greetings.greetings}}</h1></div>
-            <p class="info" *ngIf="profile.entity.is_current">Вы сейчас используете сервис с помощью этого профиля. После удаление профиля мы
-              вам дадим выбор, с помощью какого профиля продолжить пользование нашим сервисом.</p>
-          </div>
-        </div>
-      </div>
-      <footer class="form-footer">
-        <div class="form-footer-section">
-          <button class="form-text-button" (click)="service.closeModalDeleteProfile()">
-            <span>Отмена</span>
-          </button>
-        </div>
-        <div class="form-footer-section">
-          <button class="form-button form-button-red">
-            <i class="fa fa-fw fa-trash"></i>
-            <span>Да, удалить профиль</span>
-          </button>
-        </div>
-      </footer>
-    </div>
-  </cass-modal>
   </ul>
   <footer class="add-profile">
     <div class="buttons">
-      <button class="form-button form-button-green" (click)="service.createNewProfile()">
+      <button class="form-button form-button-green" (click)="service.createNewProfile()" [disabled]="!service.getActiveCreateNewProfileButton()">
         <i class="fa fa-fw fa-plus"></i>
         <span>Создать новый профиль</span>
       </button>

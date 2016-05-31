@@ -7,25 +7,53 @@ import {AuthService} from "../../../../../auth/service/AuthService";
 @Injectable()
 export class ProfilesTabService
 {
-    constructor(private profileRESTService: ProfileRESTService, private pService: ProfileComponentService){}
+    constructor(private profileRESTService: ProfileRESTService, private pService: ProfileComponentService){
+    }
 
+    private createNewProfileButton: boolean = true;
     private modalSwitchActive: boolean = false;
     private modalDeleteActive: boolean = false;
     private newProfileId;
+    private pickedId;
+    private pickedElem;
+
+    getActiveCreateNewProfileButton(): boolean{
+        return this.createNewProfileButton;
+    }
+
+    switchProfile(profileId){
+        this.profileRESTService.switchProfile(profileId).subscribe(data => {
+            window.location.reload();
+        });
+    }
 
     createNewProfile() {
-
-
+        this.createNewProfileButton = false;
         this.profileRESTService.createNewProfile().subscribe(data => {
             this.newProfileId = data;
             this.newProfileId = JSON.parse(this.newProfileId._body).entity.id;
-            this.pService.modals.setup.open();
+            window.location.reload();
         });
-
     }
 
+    requestDeleteProfile(profileId){
+        this.profileRESTService.deleteProfile(profileId).subscribe(data => {
+            AuthService.getAuthToken().account.profiles.profiles.splice(this.pickedElem, 1);
+            console.log(AuthService.getAuthToken().account.profiles.profiles, this.pickedElem);
+            this.closeModalDeleteProfile();
+        });
+    }
 
-    returnProfiles(){
+    getProfile(){
+        for(let i = 0; i < AuthService.getAuthToken().account.profiles.profiles.length; i++){
+            if(this.pickedId === AuthService.getAuthToken().account.profiles.profiles[i].entity.id){
+                this.pickedElem = i;
+                return AuthService.getAuthToken().account.profiles.profiles[i].entity;
+            }
+        }
+    }
+
+    getProfiles(){
         return AuthService.getAuthToken().account.profiles.profiles;
     }
 
@@ -33,8 +61,9 @@ export class ProfilesTabService
         this.modalDeleteActive = false;
     }
 
-    openModalDeleteProfile(){
+    openModalDeleteProfile(profileId){
         this.modalDeleteActive = true;
+        this.pickedId = profileId;
     }
 
     isModalSwitchProfileActive(): boolean {
