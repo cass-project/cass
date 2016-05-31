@@ -5,6 +5,8 @@ use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Community\Feature\Features\BoardsFeature;
 use Domain\Community\Feature\Features\ChatFeature;
 use Domain\Community\Feature\Features\CollectionsFeature;
+use Domain\Community\Feature\FeaturesFactory;
+use Domain\Community\Service\CommunityFeaturesService;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
@@ -22,6 +24,41 @@ class CommunityFeatureMiddlewareTest extends CommunityMiddlewareTestCase
             new SampleThemesFixture(),
             new SampleCommunitiesFixture()
         ];
+    }
+
+    /**
+     * @throws \DI\NotFoundException
+     */
+    public function testDoNotActivateFeatureBeforeISay()
+    {
+        /** @var FeaturesFactory $service */
+        $service = $this->container()->get(FeaturesFactory::class);
+        $expected = [
+            CollectionsFeature::class => [
+                'code' => 'collections',
+                'is_development_ready' => true,
+                'is_production_ready' => true,
+            ],
+            BoardsFeature::class => [
+                'code' => 'boards',
+                'is_development_ready' => false,
+                'is_production_ready' => false,
+            ],
+            ChatFeature::class => [
+                'code' => 'chat',
+                'is_development_ready' => false,
+                'is_production_ready' => false,
+            ],
+        ];
+
+        foreach($service->listFeatures() as $className) {
+            $feature = $service->createFeatureFromClassName($className);
+
+            $this->assertTrue(isset($expected[$className]));
+            $this->assertEquals($expected[$className]['code'], $feature->getCode());
+            $this->assertEquals($expected[$className]['is_development_ready'], $feature->isDevelopmentReady());
+            $this->assertEquals($expected[$className]['is_production_ready'], $feature->isProductionReady());
+        }
     }
 
     public function testActivateFeature403()
