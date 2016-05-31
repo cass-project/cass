@@ -62,15 +62,15 @@ class ProfileService
 
         $account->getProfiles()->add($profile = new Profile($account));
 
-        array_map(function (Profile $profile) {
-            $profile->setIsCurrent(false);
-        }, $account->getProfiles()->toArray());
 
-        $profile->setIsCurrent(true)
+        $profile
             ->setProfileGreetings(new ProfileGreetings($profile))
             ->setProfileImage(new ProfileImage($profile));
 
-        return $this->profileRepository->createProfile($profile);
+        $this->profileRepository->createProfile($profile);
+        $this->profileRepository->switchTo($account->getProfiles()->toArray(), $profile);
+
+        return $profile;
     }
 
     public function deleteProfile(int $profileId, int $currentAccountId) {
