@@ -80,6 +80,18 @@ export class ProfileRESTService {
     }
 
 
+    switchProfile(profileId){
+        let url = `/backend/api/protected/profile/${profileId}/switch/`;
+
+        return this.http.post(url, JSON.stringify(''));
+    }
+
+    deleteProfile(profileId){
+        let url = `/backend/api/protected/profile/${profileId}/delete`;
+
+        return this.http.delete(url);
+    }
+
     requestAccountDeleteCancel() {
         let url = `/backend/api/protected/account/cancel-request-delete`;
 
