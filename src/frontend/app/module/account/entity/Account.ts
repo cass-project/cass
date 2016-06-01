@@ -29,7 +29,7 @@ class Profiles
 {
     constructor(public profiles: Array<Profile>) {}
 
-    getCurrent() {
+    getCurrent(): Profile {
         for(let profile of this.profiles) {
             if(profile.isCurrent()) {
                 return profile;

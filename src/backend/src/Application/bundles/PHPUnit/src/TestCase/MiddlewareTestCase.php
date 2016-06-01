@@ -248,6 +248,10 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         return $this;
     }
 
+    protected function with(Callable $callback): self { /* alias */
+        return $this->expect($callback);
+    }
+
     /**
      * Ожидается ошибка 403 Не авторизован
      * @return MiddlewareTestCase

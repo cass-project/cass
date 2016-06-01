@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component, Input} from "angular2/core";
 
 import {ModalComponent} from "../../../modal/component/index";
 import {ProfileSetupModel} from "./model";
@@ -13,6 +13,7 @@ import {ScreenControls} from "../../../util/classes/ScreenControls";
 import {ProfileRESTService} from "../ProfileService/ProfileRESTService";
 import {FrontlineService} from "../../../frontline/service";
 import {ProfileComponentService} from "../../service";
+import {AuthService} from "../../../auth/service/AuthService";
 
 
 enum ProfileSetupScreen {
@@ -49,6 +50,8 @@ enum ProfileSetupScreen {
 
 export class ProfileSetup
 {
+    @Input('profile') profile;
+
     public screens: ScreenControls<ProfileSetupScreen> = new ScreenControls<ProfileSetupScreen>(ProfileSetupScreen.Welcome, (sc: ScreenControls<ProfileSetupScreen>) => {
         sc.add({ from: ProfileSetupScreen.Welcome, to: ProfileSetupScreen.Gender })
           .add({ from: ProfileSetupScreen.Gender, to: ProfileSetupScreen.Greetings })
@@ -66,56 +69,56 @@ export class ProfileSetup
             throw new Error('MMM WHUT IS THIS U FILTHY CASUL?');
         }
 
-        this.model.profile.gender.string = event;
+        this.model.gender = event;
         this.ngSubmit();
     }
 
     verifyStage() {
-        /*if(this.frontlineService.session.auth.profiles[0].image.public_path !== '/public/assets/profile-default.png'){
-         return true;
-         }*/
 
         /*Greetings stage*/
         if (this.screens.isIn([ProfileSetupScreen.Greetings]) &&
-            this.model.greetings.greetingsMethod !== '') {
-            if (this.model.greetings.greetingsMethod === 'fl' &&
+            this.model.greetings.greetings_method !== '') {
+            if (this.model.greetings.greetings_method === 'fl' &&
                 this.model.greetings.first_name.length > 0 && this.model.greetings.last_name.length > 0) {
                 return true;
-            } else if (this.model.greetings.greetingsMethod === 'n' &&
+            } else if (this.model.greetings.greetings_method === 'n' &&
                 this.model.greetings.nickname.length > 0) {
                 return true;
-            } else if (this.model.greetings.greetingsMethod === 'fm' &&
+            } else if (this.model.greetings.greetings_method === 'fm' &&
                 this.model.greetings.first_name.length > 0 && this.model.greetings.middle_name.length > 0) {
                 return true;
-            } else if (this.model.greetings.greetingsMethod === 'lfm' &&
+            } else if (this.model.greetings.greetings_method === 'lfm' &&
                 this.model.greetings.first_name.length > 0 && this.model.greetings.last_name.length > 0 && this.model.greetings.middle_name.length > 0) {
                 return true;
             }
         }
         /*InterestsIn stage*/
         if (this.screens.isIn([ProfileSetupScreen.Interests]) &&
-            (JSON.stringify(this.model.interestingIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].interesting_in))){
+            (JSON.stringify(this.model.interestingIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.interesting_in))){
             return true
         }
         /*ExpertIn stage*/
          if (this.screens.isIn([ProfileSetupScreen.ExpertIn]) &&
-             (JSON.stringify(this.model.expertIn) != JSON.stringify(this.frontlineService.session.auth.profiles[0].expert_in))){
+             (JSON.stringify(this.model.expertIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.expert_in))){
             return true;
         }
     }
 
 
     SaveSetupChanges(){
+        this.profile.interesting_in = this.model.interestingIn;
+        this.profile.expert_in = this.model.expertIn;
+        this.profile.greetings = JSON.parse(JSON.stringify(this.model.greetings));
+        this.profile.gender = this.model.gender;
+
         this.nextStage();
-        this.profileRESTService.editSex(this.model.profile).subscribe(data => {
-            this.profileRESTService.editPersonal(this.model.profile).subscribe(data => {
-                this.profileRESTService.updateInterestThemes(this.model.interestingIn).subscribe(data => {
-                    this.profileRESTService.updateExpertThemes(this.model.expertIn).subscribe(data => {
+            this.profileRESTService.editPersonal(this.profile).subscribe(data => {
+                this.profileRESTService.updateInterestThemes(this.profile.interesting_in).subscribe(data => {
+                    this.profileRESTService.updateExpertThemes(this.profile.expert_in).subscribe(data => {
                         this.nextStage();
                     });
                 });
             });
-        });
     }
 
     close(){

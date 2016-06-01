@@ -5,6 +5,8 @@ import {ProfileModal} from "./component/ProfileModal/index";
 import {ModalComponent} from "../modal/component/index";
 import {ProfileSwitcher} from "./component/ProfileSwitcher/index";
 import {ProfileSetup} from "./component/ProfileSetup/index";
+import {AuthService} from "../auth/service/AuthService";
+import {Profile} from "./entity/Profile";
 
 @Component({
     selector: 'cass-profile',
@@ -18,5 +20,11 @@ import {ProfileSetup} from "./component/ProfileSetup/index";
 })
 export class ProfileComponent
 {
-    constructor(private service: ProfileComponentService) {}
+    currentProfile;
+
+    constructor(private service: ProfileComponentService) {
+        if(AuthService.isSignedIn()) {
+            this.currentProfile = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity));
+        }
+    }
 }

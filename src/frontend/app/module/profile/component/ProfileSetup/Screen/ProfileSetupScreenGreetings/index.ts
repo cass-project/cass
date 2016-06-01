@@ -13,12 +13,12 @@ export class ProfileSetupScreenGreetings
     constructor(private model: ProfileSetupModel){}
 
     getGreetingMethod(value){
-        if(value === this.model.greetings.greetingsMethod){
+        if(value === this.model.greetings.greetings_method){
             return true;
         }
     }
 
     chooseGreetingMethod(value){
-        this.model.greetings.greetingsMethod = value;
+        this.model.greetings.greetings_method = value;
     }
 }

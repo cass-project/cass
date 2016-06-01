@@ -46,7 +46,7 @@ export class ImageTab
     avatarDeletingProcess(){
         this.deleteProcessVisible = true;
         this.profileRESTService.deleteAvatar().subscribe(data => {
-            this.frontlineService.session.auth.profiles[0].image.public_path = '/public/assets/profile-default.png';
+            AuthService.getAuthToken().getCurrentProfile().entity.image.public_path = '/public/assets/profile-default.png';
             this.deleteProcessVisible = false;
         });
     }

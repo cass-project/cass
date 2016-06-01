@@ -1,7 +1,7 @@
 <div>
   <div *ngIf="service.modals.setup.isActive()">
     <cass-modal>
-      <cass-profile-setup></cass-profile-setup>
+      <cass-profile-setup [profile]="currentProfile"></cass-profile-setup>
     </cass-modal>
   </div>
   <div *ngIf="service.modals.settings.isActive()">
