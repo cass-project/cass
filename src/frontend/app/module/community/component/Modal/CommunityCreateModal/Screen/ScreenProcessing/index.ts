@@ -5,6 +5,7 @@ import {LoadingLinearIndicator} from "../../../../../../util/component/LoadingLi
 import {CommunityRESTService} from "../../../../../service/CommunityRESTService";
 import {CommunityCreateModalModel} from "../../model";
 import {CommunityComponentService} from "../../../../../service";
+import {COMMON_DIRECTIVES} from "angular2/common";
 
 @Component({
     selector: 'cass-community-create-modal-screen-processing',
@@ -26,18 +27,36 @@ export class ScreenProcessing extends Screen
         super(model);
     }
 
-    ngOnInit(){
-        this.communityRESTService.create(this.model).map(data => data.json()).subscribe(data => {
-            if(this.model.uploadImage){
-                this.communityRESTService.imageUpload(
-                    data['entity'].id,
-                    this.model.uploadImage,
-                    this.model.uploadImageCrop,
-                    () => { this.next(); }
+    ngOnInit() {
+        let model = this.model;
+        this.communityRESTService.create(model.title, model.description, model.theme_id)
+            .map(data => data.json())
+            .subscribe(data => {
+                let communityId = data['entity'].id;
+                let requests = [];
+
+                for(let feature of this.model.features) {
+                    console.log(feature);
+                    if(feature.is_activated) {
+                        requests.push(this.communityRESTService.activateFeature(communityId, feature.code));
+                    } else {
+                        requests.push(this.communityRESTService.deactivateFeature(communityId, feature.code));
+                    }
+                }
+
+                if(model.uploadImage) {
+                    requests.push(this.communityRESTService.imageUpload(
+                        communityId,
+                        this.model.uploadImage,
+                        this.model.uploadImageCrop
+                    ));
+                }
+
+                Promise.all(requests).then(
+                    () => {
+                        this.next();
+                    }
                 );
-            }else{
-                this.next();
-            }
-        });
+            });
     }
 }

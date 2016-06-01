@@ -1,23 +1,19 @@
-<form class="form screen screen-features" (ngSubmit)="submit()">
+<form class="form screen screen-features" (ngSubmit)="next()">
   <div class="cass-padding-box-10">
     <div class="input-group">
-      <label class="form-label">
-        <span class="label-text"><input [(ngModel)]="model.features.collections" type="checkbox" /> Коллекции</span>
-        <p>{{featuresService.getDescription("collections")}}</p>
-      </label>
-
-      <label class="form-label disabled">
-        <span class="label-text"><input disabled [(ngModel)]="model.features.board" type="checkbox" /> Форум</span>
-        <span class="label-text">Находится в стадии разработки</span>
-      </label>
-
-      <label class="form-label disabled">
-        <span class="label-text"><input disabled [(ngModel)]="model.features.chat" type="checkbox" /> Чат</span>
-        <span class="label-text">Находится в стадии разработки</span>
+      <label
+        class="form-label cass-padding-box-10"
+        [ngClass]="{disabled: feature.disabled}"
+        *ngFor="#feature of model.features;"
+      >
+        <span class="label-text">
+          <input [(ngModel)]="feature.is_activated" type="checkbox"  [disabled]="feature.disabled" />
+          <span>{{featuresService.getName(feature.code)}}</span>
+        </span>
+        <span class="label-description">{{featuresService.getDescription(feature.code)}}</span>
       </label>
     </div>
   </div>
-
   <footer class="form-footer">
     <div class="form-footer-section">
       <div class="cass-padding-box-5">
@@ -34,5 +30,4 @@
       </div>
     </div>
   </footer>
-
 </form>

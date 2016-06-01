@@ -5,14 +5,29 @@ import {FrontlineService} from "../../frontline/service";
 export class CommunityFeaturesService
 {
     private featuresInfo:FeaturesInfo[] = [
-        {code:"collections", "name": "Коллекции", "description":"Создание коллекций постов."},
-        {code:"board", "name": "Форум", "description":"Находится в стадии разработки"},
-        {code:"chat", "name": "Чат", "description":"Находится в стадии разработки"}
+        {
+            "code":"collections",
+            "name": "Коллекции",
+            "description":"Подключив фичу Коллекции, Вы сможете создавать посты товаров и объединять их в подборки. На главной странице комммунити будет отображаться блок с коллекциями."
+        },
+        {
+            "code":"boards",
+            "name": "Форум",
+            "description":"Находится в стадии разработки"
+        },
+        {
+            "code":"chat",
+            "name": "Чат",
+            "description":"Находится в стадии разработки"}
     ];
     private features;
 
     constructor(private frontline: FrontlineService) {
         this.features = frontline.session.config.community.features;
+    }
+
+    getFeatures() {
+        return this.features;
     }
 
     getName(code) : string {
@@ -24,9 +39,17 @@ export class CommunityFeaturesService
     }
 
     getFeatureInfo(code) : FeaturesInfo {
-        for(let feature of this.featuresInfo) {
-            if(feature.code === code) {
-                return feature;
+        for(let featureInfo of this.featuresInfo) {
+            if(featureInfo.code === code) {
+                return featureInfo;
+            }
+        }
+    }
+
+    isDisabled(code) : boolean {
+        for(let feature of this.features) {
+            if(feature.code===code) {
+                return !feature.is_production_ready;
             }
         }
     }
