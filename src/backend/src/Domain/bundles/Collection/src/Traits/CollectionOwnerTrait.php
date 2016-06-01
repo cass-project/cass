@@ -2,6 +2,7 @@
 namespace Domain\Collection\Traits;
 
 use Domain\Collection\Collection\CollectionTree;
+use Domain\Collection\Entity\Collection;
 
 trait CollectionOwnerTrait
 {
@@ -20,6 +21,12 @@ trait CollectionOwnerTrait
     {
         $this->collections = $collectionTree;
 
+        return $this;
+    }
+
+    public function setCollection(Collection $collection):self
+    {
+        $this->collections[] = $collection;
         return $this;
     }
 }

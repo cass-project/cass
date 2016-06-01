@@ -3,6 +3,7 @@ namespace Domain\Profile\Service;
 
 use Domain\Account\Entity\Account;
 use Application\Exception\PermissionsDeniedException;
+use Domain\Collection\Entity\Collection;
 use PHPImageWorkshop\Core\ImageWorkshopLayer;
 use PHPImageWorkshop\ImageWorkshop;
 use Domain\Profile\Entity\Profile;
@@ -62,10 +63,13 @@ class ProfileService
 
         $account->getProfiles()->add($profile = new Profile($account));
 
+        $collection = new Collection($profile->getId(),'Моя лента', '');
 
         $profile
             ->setProfileGreetings(new ProfileGreetings($profile))
-            ->setProfileImage(new ProfileImage($profile));
+            ->setProfileImage(new ProfileImage($profile))
+            ->setCollection($collection)
+        ;
 
         $this->profileRepository->createProfile($profile);
         $this->profileRepository->switchTo($account->getProfiles()->toArray(), $profile);
