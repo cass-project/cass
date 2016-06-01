@@ -41,7 +41,6 @@ class PostMiddlewareTest extends MiddlewareTestCase
     ];
 
     return $this->requestPostCreatePut($json)->auth($account->getAPIKey())->execute()
-      ->dump()
       ->expectJSONContentType()
       ->expectStatusCode(200)
       ->expectJSONBody(['success' => TRUE])
@@ -70,7 +69,6 @@ class PostMiddlewareTest extends MiddlewareTestCase
     ];
 
     return $this->requestPostCreatePut($json)->auth($account->getAPIKey())->execute()
-      ->dump()
                 ->expectJSONContentType()
                 ->expectStatusCode(404)
                 ->expectJSONBody(['success' => FALSE])

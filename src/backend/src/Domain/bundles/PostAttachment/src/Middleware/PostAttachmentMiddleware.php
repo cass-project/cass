@@ -3,6 +3,8 @@ namespace Domain\PostAttachment\Middleware;
 
 use Domain\Auth\Service\CurrentAccountService;
 use Application\REST\Response\GenericResponseBuilder;
+use Domain\PostAttachment\Exception\FileTooBigException;
+use Domain\PostAttachment\Exception\FileTooSmallException;
 use Domain\PostAttachment\Exception\PostAttachmentFactoryException;
 use Domain\PostAttachment\Middleware\Command\Command;
 use Domain\PostAttachment\Service\PostAttachmentService;
@@ -37,11 +39,20 @@ class PostAttachmentMiddleware implements MiddlewareInterface
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson($result);
-        }catch(PostAttachmentFactoryException $e) {
+        } catch(FileTooBigException  $e){
+            $responseBuilder
+              ->setStatus(409)
+              ->setError($e);
+        } catch(FileTooSmallException $e){
+            $responseBuilder
+              ->setStatus(409)
+              ->setError($e);
+        } catch(PostAttachmentFactoryException $e) {
             $responseBuilder
                 ->setStatusBadRequest()
                 ->setError($e);
         }
+
 
         return $responseBuilder->build();
     }

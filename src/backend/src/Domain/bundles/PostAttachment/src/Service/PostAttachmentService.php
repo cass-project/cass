@@ -68,8 +68,8 @@ class PostAttachmentService
             throw new \Exception('Failed to create subdirectory');
         }
 
-        if(move_uploaded_file($tmpFile, $resultDir.'/'.$desiredFileName) === false) {
-            throw new \Exception('Failed to move uploaded file');
+        if(copy($tmpFile, $resultDir.'/'.$desiredFileName) === false) {
+            throw new \Exception('Failed to copy uploaded file');
         }
 
         $postAttachmentEntity->setAttachment([
