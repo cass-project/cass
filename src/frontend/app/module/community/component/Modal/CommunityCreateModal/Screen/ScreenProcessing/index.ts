@@ -38,9 +38,10 @@ export class ScreenProcessing extends Screen
                 for(let feature of this.model.features) {
                     console.log(feature);
                     if(feature.is_activated) {
-                        requests.push(this.communityRESTService.activateFeature(communityId, feature.code));
+                        requests.push(this.communityRESTService.activateFeature(communityId, feature.code).toPromise()
+                        );
                     } else {
-                        requests.push(this.communityRESTService.deactivateFeature(communityId, feature.code));
+                        requests.push(this.communityRESTService.deactivateFeature(communityId, feature.code).toPromise());
                     }
                 }
 
