@@ -181,7 +181,11 @@ export class ProfileRESTService {
                 if (xmlRequest.status === 200) {
                     AuthService.getAuthToken().getCurrentProfile().entity.image.public_path = JSON.parse(xmlRequest.responseText).public_path;
                     modal.progress.complete();
-                    modal.close();
+                    if(modal.close){
+                        modal.close();
+                    } else {
+                        modal.screen.next();
+                    }
                     this.progressBar = 0;
                     this.tryNumber = 0;
                 } else {
