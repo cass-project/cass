@@ -16,7 +16,6 @@ import {ProfileComponentService} from "../../service";
 import {AuthService} from "../../../auth/service/AuthService";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
 
-
 enum ProfileSetupScreen {
     Welcome = <any>"Welcome",
     Gender = <any>"Gender",
