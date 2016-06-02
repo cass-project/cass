@@ -17,11 +17,14 @@ export class ProfilesTabService
     private pickedId;
     private pickedElem;
 
+    buttonActivate: boolean = false;
+
     getActiveCreateNewProfileButton(): boolean{
         return this.createNewProfileButton;
     }
 
     switchProfile(profileId){
+        this.buttonActivate = true;
         this.profileRESTService.switchProfile(profileId).subscribe(data => {
             window.location.reload();
         });
@@ -37,10 +40,12 @@ export class ProfilesTabService
     }
 
     requestDeleteProfile(profileId){
+        this.buttonActivate = true;
         this.profileRESTService.deleteProfile(profileId).subscribe(data => {
             AuthService.getAuthToken().account.profiles.profiles.splice(this.pickedElem, 1);
             console.log(AuthService.getAuthToken().account.profiles.profiles, this.pickedElem);
             this.closeModalDeleteProfile();
+            this.buttonActivate = false;
         });
     }
 
