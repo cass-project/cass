@@ -12,16 +12,7 @@ import {CommunityCreateModalModel} from "../../model";
 })
 export class ScreenGeneral extends Screen
 {
-    title: string = '';
-    description: string = '';
-
     constructor(protected model: CommunityCreateModalModel) {
         super(model);
-    }
-
-    submit() {
-        this.model.title = this.title;
-        this.model.description = this.description;
-        this.next();
     }
 }

@@ -41,7 +41,7 @@ enum CreateStage {
 })
 export class CommunityCreateModal
 {
-    public screens: ScreenControls<CreateStage> = new ScreenControls<CreateStage>(CreateStage.Complete, (sc: ScreenControls<CreateStage>) => {
+    public screens: ScreenControls<CreateStage> = new ScreenControls<CreateStage>(CreateStage.General, (sc: ScreenControls<CreateStage>) => {
         sc.add({ from: CreateStage.General, to: CreateStage.Theme })
           .add({ from: CreateStage.Theme, to: CreateStage.Features })
           .add({ from: CreateStage.Features, to: CreateStage.Image })

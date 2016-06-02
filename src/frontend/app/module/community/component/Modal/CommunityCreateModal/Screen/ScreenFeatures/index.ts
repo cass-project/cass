@@ -15,13 +15,17 @@ import {CommunityFeaturesService} from "../../../../../service/CommunityFeatures
 })
 export class ScreenFeatures extends Screen
 {
-    features;
+    public features = [];
+
     constructor(public model: CommunityCreateModalModel, private featuresService: CommunityFeaturesService) {
         super(model);
-    }
-
-    submit() {
-        console.log(this.model.features);
-        //this.next();
+        this.features = featuresService.getFeatures();
+        for(let feature of this.features) {
+            this.model.features.push({
+                "code" : feature.code,
+                "is_activated" : false,
+                "disabled": featuresService.isDisabled(feature.code)
+            });
+        }
     }
 }

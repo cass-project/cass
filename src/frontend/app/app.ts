@@ -16,6 +16,8 @@ import {RouterOutlet} from "angular2/router";
 import {LandingComponent} from "./module/landing/index";
 import {ProfileRoute} from "./module/profile/route/ProfileRoute/index";
 import {AuthService} from "./module/auth/service/AuthService";
+import {ProfileSwitcherService} from "./module/profile/component/ProfileSwitcher/service";
+import {ProfileRESTService} from "./module/profile/component/ProfileService/ProfileRESTService";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -27,6 +29,8 @@ import {AuthService} from "./module/auth/service/AuthService";
         CommunityComponentService,
         CommunityRESTService,
         ThemeService,
+        ProfileSwitcherService,
+        ProfileRESTService
     ],
     directives: [
         ROUTER_DIRECTIVES,

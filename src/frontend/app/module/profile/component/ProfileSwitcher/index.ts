@@ -4,6 +4,8 @@ import {ProfileImage} from "../ProfileImage/index";
 import {ComponentStages} from "../../../util/classes/ComponentStages";
 import {LoadingLinearIndicator} from "../../../util/component/LoadingLinearIndicator/index";
 import {ProfileComponentService} from "../../service";
+import {AuthService} from "../../../auth/service/AuthService";
+import {ProfileSwitcherService} from "./service";
 
 enum ProfileSwitcherStage
 {
@@ -22,13 +24,14 @@ enum ProfileSwitcherStage
         LoadingLinearIndicator
     ]
 })
+
 export class ProfileSwitcher
 {
     stage: ComponentStages<ProfileSwitcherStage> = new ComponentStages<ProfileSwitcherStage>(ProfileSwitcherStage.Choice);
 
-    constructor(private service: ProfileComponentService) {}
+    constructor(private pService: ProfileComponentService, private service: ProfileSwitcherService) {}
 
     close() {
-        this.service.modals.switcher.close();
+        this.pService.modals.switcher.close();
     }
 }

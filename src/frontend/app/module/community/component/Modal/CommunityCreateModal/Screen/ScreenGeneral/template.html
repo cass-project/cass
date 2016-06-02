@@ -1,4 +1,4 @@
-<form #sgForm="ngForm" class="form screen screen-general" (ngSubmit)="submit()">
+<form #sgForm="ngForm" class="form screen screen-general" (ngSubmit)="next()">
   <div class="cass-padding-box-10">
     <div class="input-group">
       <label class="form-label">
@@ -6,7 +6,7 @@
         <input
             class="form-input"
             required minlength="6" maxlength="30"
-            [(ngModel)]="title" #ngControlTitle="ngForm"
+            [(ngModel)]="model.title" #ngControlTitle="ngForm"
             type="text" placeholder="Название, заголовок коммунити"
         >
         <div [hidden]="ngControlTitle.valid || ngControlTitle.pristine" class="input-error">
@@ -17,7 +17,7 @@
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Описание</span>
-        <input class="form-input" [(ngModel)]="description" type="text" placeholder="(Опционально) В одну строку про коммунити">
+        <input class="form-input" [(ngModel)]="model.description" type="text" placeholder="(Опционально) В одну строку про коммунити">
       </label>
     </div>
   </div>
