@@ -3,6 +3,7 @@ import {Http} from 'angular2/http';
 import {CommunityCreateModalModel} from "../component/Modal/CommunityCreateModal/model";
 import {UploadImageCropModel} from "../../util/component/UploadImage/strategy";
 import {Observable} from "rxjs/Observable";
+import {Response} from "angular2/http";
 
 @Injectable()
 export class CommunityRESTService
@@ -20,7 +21,7 @@ export class CommunityRESTService
 
     public progressBar:number;
 
-    public imageUpload(communityId:number, uploadImage: Blob, uploadImageCrop: UploadImageCropModel) {
+    public imageUpload(communityId:number, uploadImage: Blob, uploadImageCrop: UploadImageCropModel) : Promise<Response> {
         return new Promise(function (resolve, reject) {
             let x1 = uploadImageCrop.x,
                 y1 = uploadImageCrop.y,

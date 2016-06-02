@@ -6,6 +6,7 @@ import {CommunityRESTService} from "../../../../../service/CommunityRESTService"
 import {CommunityCreateModalModel} from "../../model";
 import {CommunityComponentService} from "../../../../../service";
 import {COMMON_DIRECTIVES} from "angular2/common";
+import {Response} from "angular2/http";
 
 @Component({
     selector: 'cass-community-create-modal-screen-processing',
@@ -33,15 +34,11 @@ export class ScreenProcessing extends Screen
             .map(data => data.json())
             .subscribe(data => {
                 let communityId = data['entity'].id;
-                let requests = [];
+                let requests:Promise<Response>[] = [];
 
                 for(let feature of this.model.features) {
-                    console.log(feature);
-                    if(feature.is_activated) {
-                        requests.push(this.communityRESTService.activateFeature(communityId, feature.code).toPromise()
-                        );
-                    } else {
-                        requests.push(this.communityRESTService.deactivateFeature(communityId, feature.code).toPromise());
+                    if(feature.is_activated && !feature.disabled) {
+                        requests.push(this.communityRESTService.activateFeature(communityId, feature.code).toPromise());
                     }
                 }
 
@@ -53,11 +50,7 @@ export class ScreenProcessing extends Screen
                     ));
                 }
 
-                Promise.all(requests).then(
-                    () => {
-                        this.next();
-                    }
-                );
+                Promise.all(requests).then(() => { this.next(); });
             });
     }
 }
