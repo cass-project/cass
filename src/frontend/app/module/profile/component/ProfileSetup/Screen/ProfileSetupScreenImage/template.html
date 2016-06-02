@@ -12,7 +12,10 @@
 
   <!-- stage 2: crop image -->
   <div class="crop-image-area" *ngIf="screen.isOn('Crop')">
-    <cass-image-cropper></cass-image-cropper>
+    <div class="image-editor form">
+      <div class="image">
+        <cass-image-cropper></cass-image-cropper>
+      </div>
     <footer class="form-footer">
       <div class="form-footer-section">
         <button class="form-text-button" (click)="screen.goto('File')">
@@ -40,7 +43,8 @@
           <i class="fa fa-fw fa-stop"></i>
           <span>Отмена</span>
         </button>
-      </div>
-    </div>
-  </div>
+       </div>
+     </div>
+   </div>
+ </div>
 </div>

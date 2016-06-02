@@ -1,6 +1,23 @@
 @import "./../../../../../../styles/globals";
 
 $PROGRESS_HEIGHT: 18px;
+$PREVIEW_SIZE: 500px;
+$FOOTER_HEIGHT: 50px;
+
+div.image-editor {
+  position: relative;
+
+  div.image {
+    width: 100%;
+    height: $PREVIEW_SIZE;
+    overflow: hidden;
+    background-color: material-color("grey", "100");
+  }
+
+  footer {
+    height: $FOOTER_HEIGHT;
+  }
+}
 
 .component-profile-setup-screen-image
 {
