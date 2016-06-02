@@ -32,7 +32,7 @@ export class ImageTab
     upload: UploadImageModalControl = new UploadImageModalControl();
     deleteProcessVisible = false;
 
-    constructor(private uploadImageService: UploadImageService, private frontlineService: FrontlineService, private profileRESTService: ProfileRESTService) {
+    constructor(private uploadImageService: UploadImageService, private profileRESTService: ProfileRESTService) {
         uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(profileRESTService));
     }
 
