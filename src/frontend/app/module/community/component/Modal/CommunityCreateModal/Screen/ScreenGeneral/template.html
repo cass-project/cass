@@ -8,7 +8,7 @@
             required minlength="6" maxlength="30"
             [(ngModel)]="model.title" #ngControlTitle="ngForm"
             type="text" placeholder="Название, заголовок коммунити"
-        >
+        />
         <div [hidden]="ngControlTitle.valid || ngControlTitle.pristine" class="input-error">
           Вы должны обязательно задать название коммунити. В названии коммунити должно быть от шести до тридцати символов.
         </div>
@@ -24,7 +24,7 @@
   <footer class="form-footer">
     <div class="form-footer-section">
       <div class="cass-padding-box-5">
-        <button (click)="abort($event)" class="form-text-button">
+        <button type="button" (click)="abort($event)" class="form-text-button">
           <span>Отмена</span>
         </button>
       </div>

@@ -11,6 +11,7 @@ import {ScreenProcessing} from "./Screen/ScreenProcessing/index";
 import {CommunityCreateModalModel} from "./model";
 import {ScreenControls} from "../../../../util/classes/ScreenControls";
 import {CommunityComponentService} from "../../../service";
+import {AuthService} from "../../../../auth/service/AuthService";
 
 enum CreateStage {
     General = <any>"General",
@@ -67,4 +68,11 @@ export class CommunityCreateModal
     close() {
         this.closeEvent.emit(this);
     }
+
+    ngOnInit() {
+       if(!AuthService.isSignedIn()) {
+            this.close();
+        }
+    }
+
 }
