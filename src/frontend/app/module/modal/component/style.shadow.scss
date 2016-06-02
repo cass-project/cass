@@ -1,61 +1,99 @@
 @import "./../../../styles/globals";
 
-@media all and (max-width: $APP_MIN_WIDTH) {
+@mixin zDepth($level) {
+  div.cass-modal {
+    z-index: 9000 + 3*$level;
+  }
+
+  div.modal-backdrop {
+    z-index: 9001 + 3*$level;
+  }
+
+  div.modal-flex-container {
+    z-index: 9002 + 3*$level;
+  }
+}
+
+@include isDesktop {
   div.modal {
-    z-index: 9999;
-
-    position: fixed;
-    top: 0; height: 100%;
-    left: 0; width: 100%;
-    overflow: hidden;
-
-    div.modal-backdrop, div.modal-flex-container {
-      display: none;
-    }
-
-    div.modal-content {
-      position: absolute;
-      overflow: auto;
+    div.modal-backdrop {
+      display: block;
+      position: fixed;
       top: 0; height: 100%;
       left: 0; width: 100%;
+      background-color: $BACKDROP_COLOR;
+      opacity: $BACKDROP_OPACITY;
+    }
+
+    div.modal-flex-container {
+      display: flex;
+      position: fixed;
+      top: 0; height: 100%;
+      left: 0; width: 100%;
+      align-items: center;
+      justify-content: center;
+
+      overflow: auto;
+
+      div.modal-content {
+      }
     }
   }
 }
 
-@media all and (min-width: $APP_MIN_WIDTH) {
+@include isMobile {
   div.modal {
-    z-index: 9999;
-    @include full-screen-component;
-
     div.modal-backdrop {
-      z-index: 10000;
-      background-color: $BACKDROP_COLOR;
-      opacity: $BACKDROP_OPACITY;
-      position: absolute;
-      top: 0; height: 100%;
-      left: 0; width: 100%;
+      display: none;
     }
 
     div.modal-flex-container {
-      position: absolute;
+      position: fixed;
       top: 0; height: 100%;
       left: 0; width: 100%;
-      display: flex;
-      align-items: center;
-      align-content: center;
-    }
+      background-color: white;
 
-    div.modal-content {
-      background-color: #fff;
-      border-radius: 3px;
-      z-index: 10001;
-      @include card(2);
-      max-height: calc(100% - 100px);
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      overflow: hidden;
+      div.modal-content {
+        display: flex;
+        position: absolute;
+        top: 0; height: 100%;
+        left: 0; width: 100%;
+        justify-content: center;
+        align-items: center;
+        overflow: auto;
+      }
+    }
+  }
+}
+
+/* Don't look at this. */
+
+div.component-cass-modal {
+  @include zDepth(1);
+
+  div.cass-modal {
+    @include zDepth(2);
+
+    div.cass-modal {
+      @include zDepth(3);
+
+      div.cass-modal {
+        @include zDepth(4);
+
+        div.cass-modal {
+          @include zDepth(5);
+
+          div.cass-modal {
+            @include zDepth(6);
+
+            div.cass-modal {
+              @include zDepth(7);
+
+              /* We don't need to go deeper. */
+            }
+          }
+        }
+      }
     }
   }
 }

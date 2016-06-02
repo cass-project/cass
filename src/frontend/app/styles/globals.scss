@@ -1,11 +1,11 @@
+@import "./contants";
 @import '~sass-material-colors';
 
 @import "./mixins/disable-text-select";
 @import "./mixins/full-screen-component";
 @import "./mixins/card";
-
-$APP_MIN_WIDTH: 850px;
-$APP_MIN_HEIGHT: 480px;
+@import "./mixins/is-desktop";
+@import "./mixins/is-mobile";
 
 $FONT_FAMILY: 'Roboto',Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
 $FONT_SIZE_INFO: 12px;

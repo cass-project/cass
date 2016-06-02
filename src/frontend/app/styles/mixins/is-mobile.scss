@@ -1,0 +1,7 @@
+@import "./../contants";
+
+@mixin isMobile {
+  @media all and (max-width: $CASS_MIN_WIDTH) {
+    @content;
+  }
+}

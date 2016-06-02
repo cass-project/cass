@@ -14,6 +14,7 @@ import {ProfileRESTService} from "../ProfileService/ProfileRESTService";
 import {FrontlineService} from "../../../frontline/service";
 import {ProfileComponentService} from "../../service";
 import {AuthService} from "../../../auth/service/AuthService";
+import {ModalBoxComponent} from "../../../modal/component/box/index";
 
 
 enum ProfileSetupScreen {
@@ -39,6 +40,7 @@ enum ProfileSetupScreen {
     ],
     directives: [
         ModalComponent,
+        ModalBoxComponent,
         LoadingLinearIndicator,
         ProfileSetupScreenGreetings,
         ProfileSetupScreenGender,

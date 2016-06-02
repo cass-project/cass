@@ -7,6 +7,7 @@ import {ImageCropper} from "../../../util/component/ImageCropper/index";
 import {ScreenControls} from "../../../util/classes/ScreenControls";
 import {UploadImageService} from "./service";
 import {UploadImageCropModel} from "./strategy";
+import {ModalBoxComponent} from "../../../modal/component/box/index";
 
 enum UploadImageScreen {
     File = <any>"File",
@@ -25,6 +26,7 @@ enum UploadImageScreen {
     ],
     directives: [
         ModalComponent,
+        ModalBoxComponent,
         ImageCropper,
     ]
 })

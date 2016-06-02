@@ -18,11 +18,13 @@ import {ProfileRoute} from "./module/profile/route/ProfileRoute/index";
 import {AuthService} from "./module/auth/service/AuthService";
 import {ProfileSwitcherService} from "./module/profile/component/ProfileSwitcher/service";
 import {ProfileRESTService} from "./module/profile/component/ProfileService/ProfileRESTService";
+import {ModalService} from "./module/modal/component/service";
 
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),
     providers: [
+        ModalService,
         AuthService,
         AuthComponentService,
         ProfileComponentService,

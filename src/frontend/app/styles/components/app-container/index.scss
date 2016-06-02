@@ -1,8 +1,8 @@
 @import "./../../globals";
 
 div#cassAppContainer {
-  min-width: $APP_MIN_WIDTH;
-  min-height: $APP_MIN_HEIGHT;
+  min-width: $CASS_MIN_WIDTH;
+  min-height: $CASS_MIN_HEIGHT;
   background-color: $MATERIAL_BACKGROUND;
   display: flex;
 

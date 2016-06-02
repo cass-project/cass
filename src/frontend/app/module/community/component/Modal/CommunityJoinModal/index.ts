@@ -6,6 +6,7 @@ import {CommunityJoinModalModel} from "./model";
 import {ScreenProcessing} from "./Screen/ScreenProcessing/index";
 import {ScreenSID} from "./Screen/ScreenSID/index";
 import {ScreenControls} from "../../../../util/classes/ScreenControls";
+import {ModalBoxComponent} from "../../../../modal/component/box/index";
 
 enum CommunityJoinScreen
 {
@@ -22,6 +23,7 @@ enum CommunityJoinScreen
     ],
     directives: [
         ModalComponent,
+        ModalBoxComponent,
         ScreenProcessing,
         ScreenSID,
     ],

@@ -6,6 +6,7 @@ import {ModalComponent} from "../../../modal/component/index";
 import {ProfileMenuComponent} from "../../component/ProfileMenu/index";
 import {ProfileModal} from "../../component/ProfileModal/index";
 import {ProfileDashboardRoute} from "../ProfileDashboardRoute/index";
+import {ModalBoxComponent} from "../../../modal/component/box/index";
 
 @Component({
     template: require('./template.html'),
@@ -15,6 +16,7 @@ import {ProfileDashboardRoute} from "../ProfileDashboardRoute/index";
     directives: [
         RouterOutlet,
         ModalComponent,
+        ModalBoxComponent,
         ProfileMenuComponent,
         ProfileModal,
     ]

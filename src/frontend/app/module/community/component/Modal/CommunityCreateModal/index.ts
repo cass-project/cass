@@ -11,6 +11,7 @@ import {ScreenProcessing} from "./Screen/ScreenProcessing/index";
 import {CommunityCreateModalModel} from "./model";
 import {ScreenControls} from "../../../../util/classes/ScreenControls";
 import {CommunityComponentService} from "../../../service";
+import {ModalBoxComponent} from "../../../../modal/component/box/index";
 import {AuthService} from "../../../../auth/service/AuthService";
 
 enum CreateStage {
@@ -33,6 +34,7 @@ enum CreateStage {
     ],
     directives: [
         ModalComponent,
+        ModalBoxComponent,
         ScreenGeneral,
         ScreenTheme,
         ScreenImage,

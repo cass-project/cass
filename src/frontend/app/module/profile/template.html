@@ -1,17 +1,23 @@
 <div>
   <div *ngIf="service.modals.setup.isActive()">
     <cass-modal>
-      <cass-profile-setup [profile]="currentProfile"></cass-profile-setup>
+      <cass-modal-box width="500px">
+        <cass-profile-setup [profile]="currentProfile"></cass-profile-setup>
+      </cass-modal-box>
     </cass-modal>
   </div>
   <div *ngIf="service.modals.settings.isActive()">
     <cass-modal>
-      <cass-profile-settings></cass-profile-settings>
+      <cass-modal-box>
+        <cass-profile-settings></cass-profile-settings>
+      </cass-modal-box>
     </cass-modal>
   </div>
   <div *ngIf="service.modals.switcher.isActive()">
     <cass-modal>
-      <cass-profile-switcher></cass-profile-switcher>
+      <cass-modal-box width="340px">
+        <cass-profile-switcher></cass-profile-switcher>
+      </cass-modal-box>
     </cass-modal>
   </div>
 </div>
