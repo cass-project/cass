@@ -20,13 +20,8 @@ trait CollectionOwnerTrait
     public function replaceCollections(CollectionTree $collectionTree): self
     {
         $this->collections = $collectionTree;
-
         return $this;
     }
 
-    public function setCollection(Collection $collection):self
-    {
-        $this->collections[] = $collection;
-        return $this;
-    }
+
 }
