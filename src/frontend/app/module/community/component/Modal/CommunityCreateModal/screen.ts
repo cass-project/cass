@@ -14,7 +14,8 @@ export class Screen
         this.nextEvent.emit(this);
     }
 
-    abort() {
+    abort($event) {
+        $event.preventDefault();
         this.abortEvent.emit(this);
     }
 }
