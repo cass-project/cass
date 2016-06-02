@@ -19,6 +19,7 @@ export class ProfileModalModel
     expertIn = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.expert_in));
     interestingIn = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.interesting_in));
 
+    loading: boolean = false;
     ApiKey;
 
     signOut(){
@@ -43,6 +44,7 @@ export class ProfileModalModel
     }
 
     saveAllChanges() {
+        this.loading = true;
         if(this.profileService.personalCondToSave(this.profile) && this.profileService.interestCondToSave(this.expertIn, this.interestingIn) && this.profileService.accountCondToSave(this.changePasswordStn)){
             this.profileRESTService.editPersonal(this.profile).subscribe(data => {
                 this.profileRESTService.editSex(this.profile).subscribe(data => {
@@ -54,7 +56,9 @@ export class ProfileModalModel
                             this.ApiKey = data;
                             this.ApiKey = JSON.parse(this.ApiKey._body);
                             AuthService.getAuthToken().apiKey = this.ApiKey.apiKey;
-                            this.modals.modals.settings.close();});
+                            this.modals.modals.settings.close();
+                            this.loading = false;
+                        });
                     });
                 });
             });
