@@ -44,7 +44,7 @@ div.component-profile-modal {
   }
 }
 
-@media all and (max-width: $APP_MIN_WIDTH) {
+@include isMobile {
   div.component-profile-modal {
     width: 100%;
     height: 100%;
