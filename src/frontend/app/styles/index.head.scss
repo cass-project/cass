@@ -18,10 +18,8 @@ body {
   background-color: $MATERIAL_BACKGROUND;
 }
 
-@include isMobile {
-  body.cass-has-modals {
-    overflow: hidden;
-  }
+body.cass-has-modals {
+  overflow: hidden;
 }
 
 p {

@@ -5,6 +5,7 @@ import {ModalComponent} from "../../../modal/component/index";
 import {SignInComponent} from "../SignIn/index";
 import {SignUpComponent} from "../SignUp/index";
 import {AuthComponentService} from "./service";
+import {ModalBoxComponent} from "../../../modal/component/box/index";
 
 @Component({
     selector: 'cass-auth',
@@ -12,6 +13,7 @@ import {AuthComponentService} from "./service";
     directives: [
         CORE_DIRECTIVES,
         ModalComponent,
+        ModalBoxComponent,
         SignInComponent,
         SignUpComponent,
     ],

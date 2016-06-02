@@ -3,6 +3,7 @@ import {ProfileImage} from "../../../ProfileImage/index";
 import {ModalComponent} from "../../../../../modal/component/index";
 import {ProfilesTabService} from "./service";
 import {ThemeService} from "../../../../../theme/service/ThemeService";
+import {ModalBoxComponent} from "../../../../../modal/component/box/index";
 
 @Component({
     selector: 'cass-profile-modal-tab-profiles',
@@ -15,6 +16,7 @@ import {ThemeService} from "../../../../../theme/service/ThemeService";
     ],
     directives: [
         ModalComponent,
+        ModalBoxComponent,
         ProfileImage
     ],
 })

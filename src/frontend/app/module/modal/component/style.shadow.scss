@@ -5,73 +5,63 @@
     z-index: 9000 + 3*$level;
   }
 
-  div.modal-backdrop, div.modal-flex-container {
+  div.modal-backdrop {
     z-index: 9001 + 3*$level;
   }
 
-  div.modal-content {
+  div.modal-flex-container {
     z-index: 9002 + 3*$level;
-  }
-}
-
-@include isMobile {
-  div.modal {
-    position: fixed;
-    top: 0; height: 100%;
-    left: 0; width: 100%;
-    overflow: hidden;
-
-    div.modal-backdrop, div.modal-flex-container {
-      background-color: white;
-      opacity: 1;
-      position: absolute;
-      top: 0; height: 100%;
-      left: 0; width: 100%;
-      display: flex;
-      align-items: center;
-      align-content: center;
-    }
-
-    div.modal-content {
-      position: absolute;
-      overflow: auto;
-      top: 0; height: 100%;
-      left: 0; width: 100%;
-    }
   }
 }
 
 @include isDesktop {
   div.modal {
-    @include full-screen-component;
-
     div.modal-backdrop {
-      background-color: $BACKDROP_COLOR;
-      opacity: $BACKDROP_OPACITY;
-      position: absolute;
+      display: block;
+      position: fixed;
       top: 0; height: 100%;
       left: 0; width: 100%;
+      background-color: $BACKDROP_COLOR;
+      opacity: $BACKDROP_OPACITY;
     }
 
     div.modal-flex-container {
-      position: absolute;
+      display: flex;
+      position: fixed;
       top: 0; height: 100%;
       left: 0; width: 100%;
-      display: flex;
       align-items: center;
-      align-content: center;
+      justify-content: center;
+
+      overflow: auto;
+
+      div.modal-content {
+      }
+    }
+  }
+}
+
+@include isMobile {
+  div.modal {
+    div.modal-backdrop {
+      display: none;
     }
 
-    div.modal-content {
-      background-color: #fff;
-      border-radius: 3px;
-      @include card(2);
-      max-height: calc(100% - 100px);
+    div.modal-flex-container {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      overflow: hidden;
+      top: 0; height: 100%;
+      left: 0; width: 100%;
+      background-color: white;
+
+      div.modal-content {
+        display: flex;
+        position: absolute;
+        top: 0; height: 100%;
+        left: 0; width: 100%;
+        justify-content: center;
+        align-items: center;
+        overflow: auto;
+      }
     }
   }
 }

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Output} from "angular2/core";
 
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
 import {ModalComponent} from "../../../../modal/component/index";
+import {ModalBoxComponent} from "../../../../modal/component/box/index";
 
 @Component({
     selector: 'cass-community-route-modal',
@@ -10,7 +11,8 @@ import {ModalComponent} from "../../../../modal/component/index";
         require('./style.shadow.scss')
     ],
     directives: [
-        ModalComponent
+        ModalComponent,
+        ModalBoxComponent,
     ]
 })
 export class CommunityRouteModal

@@ -1,10 +1,10 @@
 @import "./../../../../styles/globals";
 
+$MIN_WIDTH: 730px;
 $MIN_HEIGHT: 680px;
 
 div.component-profile-modal {
-  width: 750px;
-  min-width: $MIN_HEIGHT;
+  min-width: $MIN_WIDTH;
   min-height: $MIN_HEIGHT;
   position: relative;
 
