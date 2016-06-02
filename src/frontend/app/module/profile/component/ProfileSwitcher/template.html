@@ -8,52 +8,20 @@
     <header class="profile-switcher-header form-header">
       <h1>Смена профиля</h1>
     </header>
-    <ul class="profiles-list">
-      <li>
+    <ul class="profiles-list" *ngFor="#profile of service.getProfiles()">
+      <li [style.cursor]="default" [class.current-profile]="profile.entity.is_current" (click)="service.switchProfile(profile.entity.id)">
         <section class="profile-option">
           <div class="profile-image-container">
-            <cass-profile-image border="circle" url="/dist/assets/profile-demo.png"></cass-profile-image>
+            <cass-profile-image border="circle" [url]="profile.entity.image.public_path"></cass-profile-image>
           </div>
-          <div class="greetings">Foo Bar</div>
-        </section>
-      </li>
-      <li class="current-profile">
-        <section class="profile-option">
-          <div class="profile-image-container">
-            <cass-profile-image border="circle" url="/dist/assets/icons-demo/gangplank.png"></cass-profile-image>
-          </div>
-          <div class="greetings">Foo Bar</div>
-        </section>
-      </li>
-      <li>
-        <section class="profile-option">
-          <div class="profile-image-container">
-            <cass-profile-image border="circle" url="/dist/assets/icons-demo/gragas.png"></cass-profile-image>
-          </div>
-          <div class="greetings">Foo Bar</div>
-        </section>
-      </li>
-      <li>
-        <section class="profile-option">
-          <div class="profile-image-container">
-            <cass-profile-image border="circle" url="/dist/assets/icons-demo/velkoz.png"></cass-profile-image>
-          </div>
-          <div class="greetings">Foo Bar</div>
-        </section>
-      </li>
-      <li>
-        <section class="profile-option">
-          <div class="profile-image-container">
-            <cass-profile-image border="circle" url="/dist/assets/icons-demo/xerath.png"></cass-profile-image>
-          </div>
-          <div class="greetings">Foo Bar</div>
+          <div class="greetings">{{profile.entity.greetings.greetings}}</div>
         </section>
       </li>
     </ul>
     <footer class="form-footer">
       <div class="form-footer-section">
         <div class="cass-padding-box-5">
-          <button class="form-text-button">
+          <button class="form-text-button" (click)="service.signOut()">
             <i class="fa fa-fw fa-sign-out"></i>
             <span>Выход из сервиса</span>
           </button>

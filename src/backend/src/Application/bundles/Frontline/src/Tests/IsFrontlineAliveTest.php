@@ -98,7 +98,11 @@ class IsFrontlineAliveTest extends MiddlewareTestCase
                            $this->assertTrue(is_array($input));
 
                            foreach($input as $item) {
-                               $this->assertTrue(is_string($item));
+                               $this->assertTrue(is_array($item));
+                               $this->assertTrue(isset($item['code']));
+                               $this->assertTrue(is_string($item['code']) && strlen($item['code']) > 0);
+                               $this->assertTrue(isset($item['is_development_ready']) && is_bool($item['is_development_ready']));
+                               $this->assertTrue(isset($item['is_production_ready']) && is_bool($item['is_production_ready']));
                            }
                        }
                    ]

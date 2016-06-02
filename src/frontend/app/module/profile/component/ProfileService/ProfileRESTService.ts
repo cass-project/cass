@@ -49,6 +49,27 @@ export class ProfileRESTService {
         greetings.nickname = profile.greetings.nickname;
         entity.gender = profile.gender;
 
+        switch (greetings.greetings_method){
+            case 'n':
+                greetings.greetings = greetings.nickname;
+                break;
+            case 'fl':
+                greetings.greetings = `${greetings.first_name} ${greetings.last_name}`;
+                break;
+            case 'fm':
+                greetings.greetings = `${greetings.first_name} ${greetings.middle_name}`;
+                break;
+            case 'lfm':
+                greetings.greetings = `${greetings.last_name} ${greetings.first_name} ${greetings.middle_name}`;
+                break;
+            default:
+                throw new Error('editPersonal in ProfileRESTService');
+        }
+
+
+
+
+
         return this.http.post(url, JSON.stringify({
             gender: profile.gender.string,
             greetings_method: profile.greetings.greetings_method,
