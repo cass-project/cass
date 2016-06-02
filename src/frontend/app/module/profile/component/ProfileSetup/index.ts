@@ -63,7 +63,7 @@ export class ProfileSetup
           .add({ from: ProfileSetupScreen.Saving, to: ProfileSetupScreen.Finish });
     });
 
-    constructor(public model: ProfileSetupModel, private frontlineService: FrontlineService,  private profileRESTService: ProfileRESTService, private modals: ProfileComponentService) {}
+    constructor(public model: ProfileSetupModel, private profileRESTService: ProfileRESTService, private modals: ProfileComponentService) {}
 
     changeGender(event){
         if (!~['male', 'female'].indexOf(event)) {
@@ -101,6 +101,10 @@ export class ProfileSetup
         /*ExpertIn stage*/
          if (this.screens.isIn([ProfileSetupScreen.ExpertIn]) &&
              (JSON.stringify(this.model.expertIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.expert_in))){
+            return true;
+        }
+
+        if(this.screens.isIn([ProfileSetupScreen.Image])){
             return true;
         }
     }
@@ -150,14 +154,12 @@ export class ProfileSetup
         return this.screens.notIn([
             ProfileSetupScreen.Finish,
             ProfileSetupScreen.Gender,
-            ProfileSetupScreen.Image,
             ProfileSetupScreen.ExpertIn
         ]);
     }
 
     isSkipButtonVisible() {
         return this.screens.isIn([
-            ProfileSetupScreen.Image,
             ProfileSetupScreen.Interests,
             ProfileSetupScreen.Gender
         ]);
