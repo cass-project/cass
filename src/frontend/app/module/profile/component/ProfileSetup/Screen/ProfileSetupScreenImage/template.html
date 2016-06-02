@@ -1,50 +1,26 @@
 <div class="component component-profile-setup-screen-image">
-  <!-- stage 1: select image -->
-  <div class="drop-area drop-area-active" *ngIf="screen.isOn('File')"> <!-- drop-area-active on drag'n'drop -->
-    <p>
-      <span>Перетащите сюда картинку или</span>
-      <label for="profileSettingsImageUpload">
-        <div class="form-button form-button-primary">Выберите файл</div>
-      </label>
-    </p>
-    <input type="file" id="profileSettingsImageUpload" (change)="onFileChange($event)">
+  <div class="profile-modal-tab-image">
+    <div class="profile-image-form">
+      <div class="profile-image-container">
+        <cass-profile-image border="square" [url]='getImageProfile()'></cass-profile-image>
+      </div>
+      <div class="profile-image-controls">
+        <button *ngIf="!deleteProcessVisible" (click)="avatarDeletingProcess()" class="form-text-button form-button-text-remove">
+          <i class="fa fa-fw fa-trash"></i>
+          <span>Удалить</span>
+        </button>
+        <button *ngIf="deleteProcessVisible" class="form-text-button form-button-text-remove">
+          <i class="fa fa-spinner fa-pulse fa-fw"></i>
+          <span>Удалить</span>
+        </button>
+        <button class="form-button form-button-primary" (click)="uploadProfileImage()">
+          <i class="fa fa-fw fa-upload"></i>
+          <span>Загрузить другое изображение</span>
+        </button>
+      </div>
+    </div>
+    <div *ngIf="upload.isOpened()">
+      <cass-upload-image-modal (close)="upload.close()"></cass-upload-image-modal>
+    </div>
   </div>
-
-  <!-- stage 2: crop image -->
-  <div class="crop-image-area" *ngIf="screen.isOn('Crop')">
-    <div class="image-editor form">
-      <div class="image">
-        <cass-image-cropper></cass-image-cropper>
-      </div>
-    <footer class="form-footer">
-      <div class="form-footer-section">
-        <button class="form-text-button" (click)="screen.goto('File')">
-          <span>Отмена</span>
-        </button>
-      </div>
-      <div class="form-footer-section">
-        <button class="form-button form-button-green" (click)="process()">
-          <span>Загрузить картинку</span>
-        </button>
-      </div>
-    </footer>
-  </div>
-
-  <div class="form stage-processing" *ngIf="screen.isOn('Processing')">
-    <div class="box">
-      <div class="progress-bar-container">
-        <div class="progress-bar">
-          <div class="value" [style.width.%]="progress.value"></div>
-        </div>
-      </div>
-      <div class="controls">
-        <p class="info">Ваша картинка загружается на сервер</p>
-        <button class="form-text-button" (click)="abort()">
-          <i class="fa fa-fw fa-stop"></i>
-          <span>Отмена</span>
-        </button>
-       </div>
-     </div>
-   </div>
  </div>
-</div>
