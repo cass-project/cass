@@ -39,14 +39,13 @@ export class SignInComponent
     attemptSignIn(){
         this.loading = true;
 
-        this.authService.attemptSignIn(this.personalInfo).add(() => {
-
+        this.authService.attemptSignIn(this.personalInfo).add(data => {
             if(!this.authService.lastError) {
                 this.service.modals.closeModals();
                 this.router.navigate(['/']);
             }
             this.loading = false;
-        });
+        })
     }
 
     createNewAccount(){
