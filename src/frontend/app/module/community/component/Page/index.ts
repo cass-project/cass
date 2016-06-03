@@ -23,6 +23,7 @@ export class CommunityPage
 {
     isAdmin:boolean = false;
     isLoaded:boolean = false;
+    isLoading:boolean = false;
 
     constructor(
         private community:CommunityModel,
@@ -32,7 +33,10 @@ export class CommunityPage
 
     }
 
-    ssngOnInit() {
+    ngOnInit() {
+
+        let t = setTimeout(()=>{ this.isLoading=true;}, 1000);
+
         this.service
             .getBySid(this.routeParams.get('sid'))
             .map(data => data.json())
@@ -41,6 +45,8 @@ export class CommunityPage
                     this.isAdmin = data.access.admin;
                     this.community = data.entity;
                     this.isLoaded = true;
+                    this.isLoading = false;
+                    clearTimeout(t);
                 }
             )
     }

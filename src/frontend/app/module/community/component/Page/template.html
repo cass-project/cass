@@ -1,21 +1,11 @@
-<div>
-    <cass-modal>
-        <cass-modal-box width="450px">
-            <div>test-div</div>
-            <div class="community" *ngIf="isLoaded">
-            <h1>{{community.sid}}</h1>
-            <ul>
-                <li>title {{community.title}}</li>
-                <li>description {{community.description}}</li>
-                <li>theme_id {{community.theme_id}}</li>
-                <li *ngIf="community.has_image">Image <img src="/public/storage/community{{community.image.public_path}}"/></li>
-                <li>collections {{community.collections}}</li>
-                <li>features {{community.features}}</li>
-            </ul>
-            </div>
-            <div class="cass-padding-box-15" style="width:300px">
-                <cass-loading-linear-indicator></cass-loading-linear-indicator>
-            </div>
-        </cass-modal-box>
+<div class="community">
+    <div *ngIf="isLoaded" class="cass-padding-box-15">
+        <h1>{{community.title}}</h1>
+        <img *ngIf="community.has_image" src="/public/storage/community/community-image{{community.image.public_path}}"/>
+        <pre>{{community| json}}</pre>
+    </div>
+    <cass-modal class="loading" *ngIf="isLoading">
+            <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+            <span>Получаем информацию о коммунити...</span>
     </cass-modal>
 </div>
