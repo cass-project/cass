@@ -60,20 +60,12 @@ class CommunityService
         );
 
 
-
         $community = $this->communityRepository->createCommunity($entity);
 
-
-        $createCollectionparameters = new CreateCollectionParameters('Лента комьюнити','Дефолтная коллекция');
-
-
+        $createCollectionparameters = new CreateCollectionParameters('Лента комьюнити','');
 
         $collection = $this->collectionRepository->createCollection("community:{$community->getId()}", $createCollectionparameters);
-
-
-
-//        $owner->getCurrentProfile()->getCollections()->attachChild($collection->getId());
-
+        $owner->getCurrentProfile()->getCollections()->attachChild($collection->getId());
         return $entity;
     }
 
