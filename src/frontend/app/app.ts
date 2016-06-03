@@ -19,6 +19,7 @@ import {AuthService} from "./module/auth/service/AuthService";
 import {ProfileSwitcherService} from "./module/profile/component/ProfileSwitcher/service";
 import {ProfileRESTService} from "./module/profile/component/ProfileService/ProfileRESTService";
 import {ModalService} from "./module/modal/component/service";
+import {CommunityRoute} from "./module/community/route/CommunityRoute/index";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -56,6 +57,11 @@ import {ModalService} from "./module/modal/component/service";
         name: 'Profile',
         path: '/profile/...',
         component: ProfileRoute
+    },
+    {
+        name: 'Community',
+        path: '/community/...',
+        component: CommunityRoute
     }
 ])
 export class App {
