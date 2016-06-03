@@ -3,6 +3,7 @@ import {RouterOutlet, RouteConfig} from "angular2/router";
 import {CommunityPage} from "../../component/Page/index";
 
 @Component({
+    selector: "community-router",
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
@@ -11,6 +12,7 @@ import {CommunityPage} from "../../component/Page/index";
         RouterOutlet
     ]
 })
+
 @RouteConfig([
     {
         name: 'CommunityPage',
@@ -19,6 +21,7 @@ import {CommunityPage} from "../../component/Page/index";
         useAsDefault: true
     }
 ])
+
 export class CommunityRoute
 {
 }
