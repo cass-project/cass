@@ -8,13 +8,12 @@ import {MessageBusNotificationsLevel} from "../../component/MessageBusNotificati
 export class MessageBusService implements MessageBusInterface
 {
     public notifications:MessageBusNotificationsModel[] = [];
+
     private autoIncrementIndex:number = 0;
     private maxNotifications:number = 3;
-    private notificationDelay:number = 5/*sec*/*1000/*ms*/;
+    private notificationDelay:number = 5 /*sec*/ * 1000 /*ms*/;
 
-    constructor(private http:Http) {
-
-    }
+    constructor(private http:Http) {}
 
     push(level: MessageBusNotificationsLevel, message: string) : MessageBusNotificationsModel[] {
         let notification:MessageBusNotificationsModel = {
@@ -28,15 +27,12 @@ export class MessageBusService implements MessageBusInterface
 
         if(this.notifications.length > 3) {
             this.notifications.splice(0, this.notifications.length-3);
-            //this.notifications = this.notifications.slice(this.notifications.length - 3);
         }
 
         setTimeout(()=> {
-            for(let i in this.notifications){
-                if(this.notifications.hasOwnProperty(i) && this.notifications[i].id == notification.id) {
-                    this.notifications.splice(i,1);
-                }
-            }
+            this.notifications = this.notifications.filter((input) => {
+                return input.id !== notification.id;
+            });
         }, this.notificationDelay);
 
         return this.notifications;

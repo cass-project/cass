@@ -86,6 +86,20 @@ import {MyComponent} from "my/some/MyComponent"
 
 - Все селекторы (т.е. название кастомных тегов) должны начинаться с префикаса `cass-`
 
+Импорты
+-------
+
+Импорты angular2-компонентов, и импорты модулей проекта должны быть отделены друг от друга одной пустой строкой.
+
+```
+import {Component} from "angular2/core";
+
+import {MessageBusService} from "../../service/MessageBusService/index";
+
+@Component({
+// ....
+```
+
 Что такое style.shadow.scss и global.head.scss?
 -----------------------------------------------
 
