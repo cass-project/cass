@@ -97,4 +97,16 @@ class Collection implements JSONSerializable
         $this->description = $description;
         return $this;
     }
+
+    public function setOwnerProfile(int $profileId )
+    {
+        $this->ownerSID = sprintf('profile:%d', $profileId);
+        return $this;
+    }
+
+    public function setOwnerCommunity(int $communityId)
+    {
+        $this->ownerSID = sprintf('community:%d', $communityId);
+        return $this;
+    }
 }

@@ -3,6 +3,9 @@ namespace Domain\Profile\Service;
 
 use Domain\Account\Entity\Account;
 use Application\Exception\PermissionsDeniedException;
+use Domain\Collection\Entity\Collection;
+use Domain\Collection\Parameters\CreateCollectionParameters;
+use Domain\Collection\Repository\CollectionRepository;
 use PHPImageWorkshop\Core\ImageWorkshopLayer;
 use PHPImageWorkshop\ImageWorkshop;
 use Domain\Profile\Entity\Profile;
@@ -25,12 +28,16 @@ class ProfileService
     /** @var ProfileRepository */
     private $profileRepository;
 
+    /** @var CollectionRepository */
+    private $collectionRepository;
+
     /** @var string */
     private $profileStorageDir;
 
-    public function __construct(ProfileRepository $profileRepository, string $profileStorageDir) {
+    public function __construct(ProfileRepository $profileRepository, string $profileStorageDir, CollectionRepository $collectionRepository) {
         $this->profileRepository = $profileRepository;
         $this->profileStorageDir = $profileStorageDir;
+        $this->collectionRepository = $collectionRepository;
     }
 
     public function getProfileById(int $profileId): Profile {
@@ -62,13 +69,20 @@ class ProfileService
 
         $account->getProfiles()->add($profile = new Profile($account));
 
-
         $profile
             ->setProfileGreetings(new ProfileGreetings($profile))
-            ->setProfileImage(new ProfileImage($profile));
+            ->setProfileImage(new ProfileImage($profile))
+        ;
 
         $this->profileRepository->createProfile($profile);
         $this->profileRepository->switchTo($account->getProfiles()->toArray(), $profile);
+
+        $collectionParameters = new CreateCollectionParameters('Моя лента', 'основная лента профиля');
+        $collection = $this->collectionRepository->createCollection("profile:{$profile->getId()}", $collectionParameters);
+
+        $profile->getCollections()->attachChild($collection->getId());
+
+        $this->profileRepository->updateProfile($profile);
 
         return $profile;
     }
