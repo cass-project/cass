@@ -1,0 +1,46 @@
+@import "./../../../../styles/globals";
+.container{
+  text-align: center;
+  position: absolute;
+  top: 10px;
+  left:0;
+  width:100%;
+
+  .notifications {
+    width:100%;
+  }
+
+  .notifications li{
+    display: block;
+  }
+  .message{
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    border-bottom: 1px solid;
+
+    &.critical{
+      color: material-color('red', '900');
+      border-bottom-color: material-color('red', '200');
+      background: material-color('red', '50');
+    }
+
+    &.warning {
+      color: material-color('amber', '900');
+      border-bottom-color: material-color('amber', '200');
+      background: material-color('amber', '50');
+    }
+
+    &.info{
+      color: material-color('blue-grey', '900');
+      border-bottom-color: material-color('blue-grey', '200');
+      background: material-color('blue-grey', '50');
+    }
+
+    &.debug {
+      color: material-color('grey', '900');
+      border-bottom-color: material-color('grey', '200');
+      background: material-color('grey', '50');
+    }
+  }
+}
