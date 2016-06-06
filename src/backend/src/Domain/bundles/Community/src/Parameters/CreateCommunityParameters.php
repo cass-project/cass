@@ -33,4 +33,10 @@ class CreateCommunityParameters
     {
         return $this->themeId;
     }
+
+    public function hasThemeId(): bool
+    {
+       return $this->themeId != null;
+    }
+
 }

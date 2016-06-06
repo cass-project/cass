@@ -3,6 +3,8 @@ namespace Domain\Community\Service;
 
 use Domain\Account\Entity\Account;
 use Domain\Auth\Service\CurrentAccountService;
+use Domain\Collection\Parameters\CreateCollectionParameters;
+use Domain\Collection\Repository\CollectionRepository;
 use Domain\Community\ACL\CommunityACL;
 use Domain\Community\Entity\Community;
 use Domain\Community\Parameters\CreateCommunityParameters;
@@ -11,6 +13,7 @@ use Domain\Community\Parameters\UploadImageParameters;
 use Domain\Community\Repository\CommunityRepository;
 use Domain\Community\Scripts\CommunityImageUploadScript;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Repository\ProfileRepository;
 use Domain\Theme\Repository\ThemeRepository;
 
 class CommunityService
@@ -23,6 +26,10 @@ class CommunityService
     
     /** @var ThemeRepository */
     private $themeRepository;
+    /** @var  CollectionRepository */
+    private $collectionRepository;
+    /** @var ProfileRepository  */
+    private $profileRepository;
 
     /** @var string */
     private $storageDir = '';
@@ -34,25 +41,37 @@ class CommunityService
         CurrentAccountService $currentAccountService,
         CommunityRepository $communityRepository,
         ThemeRepository $themeRepository,
+        CollectionRepository $collectionRepository,
+        ProfileRepository $profileRepository,
         string $storageDir,
         string $publicPath
     ) {
         $this->currentAccountService = $currentAccountService;
         $this->communityRepository = $communityRepository;
         $this->themeRepository = $themeRepository;
+        $this->collectionRepository = $collectionRepository;
+        $this->profileRepository = $profileRepository;
         $this->storageDir = $storageDir;
     }
     
     public function createCommunity(CreateCommunityParameters $parameters): Community {
         $owner = $this->currentAccountService->getCurrentAccount();
+
         $entity = new Community(
             $owner->getId(),
             $parameters->getTitle(),
             $parameters->getDescription(),
-            $this->themeRepository->getThemeById($parameters->getThemeId())
+            $parameters->hasThemeId() ? $this->themeRepository->getThemeById($parameters->getThemeId()): NULL
         );
 
-        $this->communityRepository->createCommunity($entity);
+        $community = $this->communityRepository->createCommunity($entity);
+        $createCollectionparameters = new CreateCollectionParameters('Лента комьюнити','');
+        $collection = $this->collectionRepository->createCollection("community:{$community->getId()}", $createCollectionparameters);
+        $community->getCollections()->attachChild($collection->getId());
+        $this->communityRepository->saveCommunity($community);
+
+        $owner->getCurrentProfile()->getCollections()->attachChild($collection->getId());
+        $this->profileRepository->updateProfile($owner->getCurrentProfile());
 
         return $entity;
     }
