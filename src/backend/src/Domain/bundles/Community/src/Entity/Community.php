@@ -72,7 +72,7 @@ class Community
     /** @var CommunityFeatures */
     private $featuresHandler;
 
-    public function __construct(int $creatorAccountId, string $title, string $description, Theme $theme)
+    public function __construct(int $creatorAccountId, string $title, string $description, Theme $theme = NULL)
     {
         $this->metadata = [
             'creatorAccountId' => $creatorAccountId
@@ -80,10 +80,10 @@ class Community
         $this->sid = GenerateRandomString::gen(self::SID_LENGTH);
         $this->dateCreatedOn = new \DateTime();
         $this->collections = new CollectionTree();
+        $this->theme = $theme;
         $this
             ->setTitle($title)
-            ->setDescription($description)
-            ->setTheme($theme);
+            ->setDescription($description);
     }
 
     public function toJSON(): array {
@@ -93,7 +93,7 @@ class Community
             'date_created_on' => $this->dateCreatedOn->format(\DateTime::RFC2822),
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
-            'theme_id' => $this->getTheme()->getId(),
+            'theme_id' => $this->hasTheme() ? $this->getTheme()->getId(): null ,
             'has_image' => $this->hasImage(),
             'collections' => $this->collections->toJSON(),
         ];
@@ -142,7 +142,7 @@ class Community
         return $this;
     }
 
-    public function getTheme(): Theme
+    public function getTheme()
     {
         return $this->theme;
     }
@@ -151,6 +151,11 @@ class Community
     {
         $this->theme = $theme;
         return $this;
+    }
+
+    public function hasTheme():bool
+    {
+        return $this->theme != null;
     }
 
     public function clearImage() {

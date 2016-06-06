@@ -3,6 +3,8 @@ namespace Domain\Community\Service;
 
 use Domain\Account\Entity\Account;
 use Domain\Auth\Service\CurrentAccountService;
+use Domain\Collection\Parameters\CreateCollectionParameters;
+use Domain\Collection\Repository\CollectionRepository;
 use Domain\Community\ACL\CommunityACL;
 use Domain\Community\Entity\Community;
 use Domain\Community\Parameters\CreateCommunityParameters;
@@ -23,6 +25,8 @@ class CommunityService
     
     /** @var ThemeRepository */
     private $themeRepository;
+    /** @var  CollectionRepository */
+    private $collectionRepository;
 
     /** @var string */
     private $storageDir = '';
@@ -34,26 +38,32 @@ class CommunityService
         CurrentAccountService $currentAccountService,
         CommunityRepository $communityRepository,
         ThemeRepository $themeRepository,
+        CollectionRepository $collectionRepository,
         string $storageDir,
         string $publicPath
     ) {
         $this->currentAccountService = $currentAccountService;
         $this->communityRepository = $communityRepository;
         $this->themeRepository = $themeRepository;
+        $this->collectionRepository = $collectionRepository;
         $this->storageDir = $storageDir;
     }
     
     public function createCommunity(CreateCommunityParameters $parameters): Community {
         $owner = $this->currentAccountService->getCurrentAccount();
+
         $entity = new Community(
             $owner->getId(),
             $parameters->getTitle(),
             $parameters->getDescription(),
-            $this->themeRepository->getThemeById($parameters->getThemeId())
+            $parameters->hasThemeId() ? $this->themeRepository->getThemeById($parameters->getThemeId()): NULL
         );
 
-        $this->communityRepository->createCommunity($entity);
-
+        $community = $this->communityRepository->createCommunity($entity);
+        $createCollectionparameters = new CreateCollectionParameters('Лента комьюнити','');
+        $collection = $this->collectionRepository->createCollection("community:{$community->getId()}", $createCollectionparameters);
+        $community->getCollections()->attachChild($collection->getId());
+        $this->communityRepository->saveCommunity($community);
         return $entity;
     }
 

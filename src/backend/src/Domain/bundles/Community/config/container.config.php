@@ -8,6 +8,7 @@ use function DI\get;
 use DI\Container;
 use Application\Service\CommandService;
 use Domain\Auth\Service\CurrentAccountService;
+use Domain\Collection\Repository\CollectionRepository;
 use Domain\Community\Entity\Community;
 use Domain\Community\Feature\FeaturesFactory;
 use Domain\Community\Feature\Features\BoardsFeature;
@@ -37,6 +38,7 @@ return [
             get(CurrentAccountService::class),
             get(CommunityRepository::class),
             get(ThemeRepository::class),
+            get(CollectionRepository::class),
             factory(function(Container $container) {
                 return sprintf('%s/community/community-image', $container->get('config.storage'));
             }),

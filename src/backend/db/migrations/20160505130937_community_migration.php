@@ -10,7 +10,7 @@ class CommunityMigration extends AbstractMigration
             ->addColumn('date_created_on', 'datetime')
             ->addColumn('title', 'string')
             ->addColumn('description', 'text')
-            ->addColumn('theme_id', 'integer')
+            ->addColumn('theme_id', 'integer', ['null'=> TRUE])
             ->addColumn('image', 'text')
             ->addForeignKey('theme_id', 'theme', 'id', [
                 'update' => 'cascade',
