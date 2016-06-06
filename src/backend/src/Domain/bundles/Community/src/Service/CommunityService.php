@@ -59,13 +59,11 @@ class CommunityService
             $parameters->hasThemeId() ? $this->themeRepository->getThemeById($parameters->getThemeId()): NULL
         );
 
-
         $community = $this->communityRepository->createCommunity($entity);
-
         $createCollectionparameters = new CreateCollectionParameters('Лента комьюнити','');
-
         $collection = $this->collectionRepository->createCollection("community:{$community->getId()}", $createCollectionparameters);
-        $owner->getCurrentProfile()->getCollections()->attachChild($collection->getId());
+        $community->getCollections()->attachChild($collection->getId());
+        $this->communityRepository->saveCommunity($community);
         return $entity;
     }
 

@@ -51,7 +51,12 @@ class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
                 $sid = $result['entity']['sid'];
 
                 $this->assertEquals(Community::SID_LENGTH, strlen($sid));
-            });
+            })
+          ->expect(function(array $result) {
+              $collecttions = $result['entity']['collections'];
+              $this->assertEquals(1, count($collecttions));
+          });
+        ;
     }
 
     public function testCreateCommunity403()
