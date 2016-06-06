@@ -11,19 +11,3 @@
   <div style="margin: 30px; padding: 20px; background-color: white; width: 550px" class="form">
   </div>
 </article>
-
-<label class="form-label">
-  <span class="label-text">busNotificationLevel:</span>
-  <select [(ngModel)]="busNotificationLevel">
-    <option value="critical">Critical</option>
-    <option value="warning">Warning</option>
-    <option value="info">Info</option>
-    <option value="debug">Debug</option>
-  </select>
-</label>
-<label class="form-label">
-  <span class="label-text">busNotificationMessage:</span>
-  <input class="form-input" type="text" [(ngModel)]="busNotificationMessage"/>
-</label>
-<button  class="form-button form-button-primary" (click)="push()">push()</button>
-<cass-message-bus-notifications></cass-message-bus-notifications>

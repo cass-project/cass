@@ -1,17 +1,13 @@
-import {Component} from "angular2/core";
-import {Router} from 'angular2/router';
+import {Component, Output, EventEmitter} from "angular2/core";
+
 import {OAuth2Component} from "../OAuth2/index";
 import {LoadingIndicator} from "../../../util/component/LoadingIndicator/index";
-import {AuthComponentService} from "../Auth/service";
-import {AuthService} from "../../service/AuthService";
+import {AuthService, SignInResponse} from "../../service/AuthService";
+import {MessageBusService} from "../../../message/service/MessageBusService/index";
+import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 
 @Component({
-    /*
-        Замени template-stages.html на template.html
-        template-stages содержит всю разработанную для компонента верстку
-        template же должен быть рабочим вариантом
-     */
-    template: require('./template.html'),
+    template: require('./template.jade'),
     selector: 'cass-auth-sign-in',
     styles: [
         require('./style.shadow.scss')
@@ -23,33 +19,56 @@ import {AuthService} from "../../service/AuthService";
 })
 export class SignInComponent
 {
-    private loading = false;
-    private personalInfo = {
-        email: "",
-        password: ""
+    private status: SignInStatus = {
+        loading: false
     };
 
-    checkEmail(){
-        let regexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return regexp.test(this.personalInfo.email);
+    private model: SignInModel = {
+        email: '',
+        password: ''
+    };
+
+    @Output('success') successEvent = new EventEmitter<SignInResponse>();
+    @Output('close') closeEvent = new EventEmitter<SignInModel>();
+    @Output('sign-up') signUpEvent = new EventEmitter<SignInModel>();
+
+    constructor(
+        private authService: AuthService,
+        private messages: MessageBusService
+    ) {}
+
+    submit(){
+        this.status.loading = true;
+
+        this.authService.attemptSignIn(this.model)
+            .then(response => {
+                this.successEvent.emit(response);
+            })
+            .catch(error => {
+                this.messages.push(MessageBusNotificationsLevel.Warning, error)
+            })
+            .then(() => {
+                this.status.loading = false;
+            })
+        ;
     }
 
-    constructor(private authService: AuthService, private service: AuthComponentService, private router: Router){}
-
-    attemptSignIn(){
-        this.loading = true;
-
-        this.authService.attemptSignIn(this.personalInfo).add(data => {
-            if(!this.authService.lastError) {
-                this.service.modals.closeModals();
-                this.router.navigate(['/']);
-            }
-            this.loading = false;
-        })
+    signUp(){
+        this.signUpEvent.emit(this.model);
     }
 
-    createNewAccount(){
-        this.service.modals.closeModals();
-        this.service.modals.openSignUpModal();
+    close() {
+        this.closeEvent.emit(this.model);
     }
+}
+
+interface SignInModel
+{
+    email: string;
+    password: string;
+}
+
+interface SignInStatus
+{
+    loading: boolean;
 }

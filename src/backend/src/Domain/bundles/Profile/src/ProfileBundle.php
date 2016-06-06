@@ -3,7 +3,7 @@ namespace Domain\Profile;
 
 use Application\Bundle\GenericBundle;
 use Application\Frontline\FrontlineBundleInjectable;
-use Domain\Profile\Service\ProfileService;
+use Domain\Profile\Frontline\ConfigProfileFrontlineScript;
 
 class ProfileBundle extends GenericBundle implements FrontlineBundleInjectable
 {
@@ -15,13 +15,7 @@ class ProfileBundle extends GenericBundle implements FrontlineBundleInjectable
     public function getFrontlineScripts(): array
     {
         return [
-            'config' => [
-                'profile' => function() {
-                    return [
-                        'max_profiles' => ProfileService::MAX_PROFILES_PER_ACCOUNT
-                    ];
-                }
-            ]
+            ConfigProfileFrontlineScript::class
         ];
     }
 }

@@ -14,16 +14,24 @@ class AuthTokenScript implements FrontlineScript
         $this->currentAccountService = $currentAccountService;
     }
 
+    public function tags(): array {
+        return [
+            FrontlineScript::TAG_IS_AUTHENTICATED
+        ];
+    }
+
     public function __invoke(): array {
         $currentAccountService = $this->currentAccountService;
 
         if($currentAccountService->isAvailable()) {
             return [
-                'api_key' => $currentAccountService->getCurrentAccount()->getAPIKey(),
-                'account' => $currentAccountService->getCurrentAccount()->toJSON(),
-                'profiles' => array_map(function(Profile $profile) {
-                    return $profile->toJSON();
-                }, $currentAccountService->getCurrentAccount()->getProfiles()->toArray())
+                'auth' => [
+                    'api_key' => $currentAccountService->getCurrentAccount()->getAPIKey(),
+                    'account' => $currentAccountService->getCurrentAccount()->toJSON(),
+                    'profiles' => array_map(function(Profile $profile) {
+                        return $profile->toJSON();
+                    }, $currentAccountService->getCurrentAccount()->getProfiles()->toArray())
+                ]
             ];
         }else{
             return [];

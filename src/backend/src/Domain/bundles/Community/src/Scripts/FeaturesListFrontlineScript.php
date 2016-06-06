@@ -14,6 +14,10 @@ class FeaturesListFrontlineScript implements FrontlineScript
         $this->featuresFactory = $featuresFactory;
     }
 
+    public function tags(): array {
+        return [FrontlineScript::TAG_GLOBAL];
+    }
+
     public function __invoke(): array
     {
         return array_map(function($className) {

@@ -14,12 +14,16 @@ use Domain\Auth\Service\AuthService\SignUpValidation\IsEmailValid;
 use Domain\Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
 use Domain\Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
 use Domain\Account\Entity\Account;
+
 class AuthService
 {
     const FRONTLINE_KEY = 'auth';
 
     /** @var AccountService */
     private $accountService;
+
+    /** @var CurrentAccountService */
+    private $currentAccountService;
     
     /** @var PasswordVerifyService */
     private $passwordVerifyService;
@@ -29,10 +33,12 @@ class AuthService
 
     public function __construct(
         AccountService $accountService,
+        CurrentAccountService $currentAccountService,
         PasswordVerifyService $passwordVerifyService,
         array $oauth2Config)
     {
         $this->accountService = $accountService;
+        $this->currentAccountService = $currentAccountService;
         $this->passwordVerifyService = $passwordVerifyService;
         $this->oauth2Config = $oauth2Config;
     }
@@ -40,6 +46,8 @@ class AuthService
     public function auth(Account $account): Account
     {
         $_SESSION[SessionStrategy::SESSION_API_KEY] = $account->getAPIKey();
+
+        $this->currentAccountService->forceSignIn($account);
 
         return $account;
     }

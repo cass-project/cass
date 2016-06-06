@@ -14,7 +14,7 @@ class AuthBundle extends GenericBundle implements FrontlineBundleInjectable
 
     public function getFrontlineScripts(): array {
         return [
-            'auth' => AuthTokenScript::class
+            AuthTokenScript::class
         ];
     }
 }

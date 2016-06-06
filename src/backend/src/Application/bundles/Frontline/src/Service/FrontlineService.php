@@ -1,8 +1,12 @@
 <?php
 namespace Application\Frontline\Service;
 
+use Application\Bundle\Bundle;
 use Application\Frontline\FrontlineBundleInjectable;
+use Application\Frontline\FrontlineScript;
+use Application\Frontline\Service\FrontlineService\Filter;
 use Application\Service\BundleService;
+use Cocur\Chain\Chain;
 use DI\Container;
 
 class HasExporterWithSameIdException extends \Exception {}
@@ -15,43 +19,37 @@ class FrontlineService
     /** @var BundleService */
     private $bundlesService;
 
-    public function __construct(Container $container, BundleService $bundlesService)
+    public function __construct(
+        Container $container,
+        BundleService $bundlesService)
     {
         $this->container = $container;
         $this->bundlesService = $bundlesService;
     }
 
-    public function fetchFrontlineResult(): array 
-    {
+    public function fetch(Filter $filter): array {
         $result = [];
+        $scripts = Chain::create($this->bundlesService->getBundles())
+            ->filter(function(Bundle $bundle) {
+                return $bundle instanceof FrontlineBundleInjectable;
+            })
+            ->map(function(FrontlineBundleInjectable $bundle) {
+                return $bundle->getFrontlineScripts();
+            })
+            ->reduce(function(array $carry, array $scripts) {
+                return array_merge($carry, $scripts);
+            }, [])
+        ;
 
-        foreach ($this->bundlesService->getBundles() as $bundle) {
-            if($bundle instanceof FrontlineBundleInjectable) {
-                $result = array_merge_recursive($result, $this->traverse($bundle->getFrontlineScripts()));
-            }
-        }
+        $scripts = array_map(function(string $script) {
+            return $this->container->get($script);
+        }, $scripts);
 
-        return $result;
-    }
-
-    private function traverse(array $scripts) {
-        $result = [];
-
-        foreach($scripts as $key => $script) {
-            if(is_array($script)) {
-                $result[$key] = $this->traverse($script);
-            }else if(is_string($script)) {
-                $script = $this->container->get($script);
-
-                if(is_callable($script)) {
-                    $result[$key] = $script($this->container);
-                }else{
-                    throw new \Exception('Invalid frontline script');
-                }
-            }else if(is_callable($script)) {
-                $result[$key] = $script($this->container);
+        foreach($filter->filter($scripts) as $script) {
+            if($script instanceof FrontlineScript) {
+                $result = array_merge_recursive($result, $script());
             }else{
-                throw new \Exception('Invalid frontline script');
+                throw new \Exception;
             }
         }
 

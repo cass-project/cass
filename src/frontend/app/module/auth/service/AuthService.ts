@@ -1,18 +1,21 @@
 import {Injectable} from 'angular2/core';
-import {Http, URLSearchParams} from 'angular2/http';
+import {Http, URLSearchParams, Response} from 'angular2/http';
 import {ResponseInterface} from "../../common/ResponseInterface";
 import {BackendError} from '../../common/BackendError';
 import {Profile} from './../../profile/entity/Profile';
 import {Account, AccountEntity} from './../../account/entity/Account';
 import {FrontlineService} from "../../frontline/service";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class AuthService
 {
     public static token: AuthToken;
-    public lastError: BackendError;
 
-    constructor(private http: Http, private frontline: FrontlineService) {
+    constructor(
+        private http: Http,
+        private frontline: FrontlineService)
+    {
         let hasAuth = frontline.session.auth && (typeof frontline.session.auth.api_key == "string") && (frontline.session.auth.api_key.length > 0);
 
         if(hasAuth) {
@@ -39,41 +42,37 @@ export class AuthService
         return AuthService.token;
     }
 
-    public attemptSignIn(request: SignInModel) {
-        this.lastError = null;
-
+    public attemptSignIn(request: SignInModel): Promise<SignInResponse> {
         return this.signIn(this.http.post('/backend/api/auth/sign-in', JSON.stringify(request)));
     }
 
-    public attemptProviderSignIn(provider: String){
-        this.lastError = null;
-
+    public attemptProviderSignIn(provider: String): Promise<SignInResponse> {
         return this.signIn(this.http.get(`/backend/api/auth/sign-in/oauth/${provider}`));
     }
 
-    public attemptSignUp(request: SignUpModel) {
-        this.lastError = null;
-
+    public attemptSignUp(request: SignUpModel): Promise<SignInResponse> {
         return this.signIn(this.http.put('/backend/api/auth/sign-up', JSON.stringify(request)));
     }
-    
+
     public getAuthToken() {
         return AuthService.getAuthToken();
     }
 
-    private signIn(http) {
-        return http.map(res => res.json()).subscribe(
-            response => {
-                if(response.success) {
-                    AuthService.token = new AuthToken(response.api_key, new Account(response.account, response.profiles));
-                }else{
-                    this.lastError = new BackendError(response);
-                }
-            },
-            error => {
-                this.lastError = new BackendError(error);
-            }
-        );
+    private signIn(http: Observable<Response>): Promise<SignInResponse> {
+        return new Promise((resolve, reject) => {
+            http
+                .map(res => res.json())
+                .subscribe(
+                    response => {
+                        AuthService.token = new AuthToken(response.api_key, new Account(response.account, response.profiles));
+                        this.frontline.merge(response.frontline);
+                        resolve(response);
+                    },
+                    error => {
+                        reject((new BackendError(error)).message);
+                    }
+                )
+        });
     }
 
     public signOut() {
@@ -108,6 +107,7 @@ export interface SignInResponse extends ResponseInterface
     api_key: string;
     account: AccountEntity;
     profiles: Profile[];
+    frontline: any;
 }
 
 interface SignInModel
@@ -116,7 +116,7 @@ interface SignInModel
     password: string;
 }
 
-interface SignUpModel
+export interface SignUpModel
 {
     email: string;
     password: string;

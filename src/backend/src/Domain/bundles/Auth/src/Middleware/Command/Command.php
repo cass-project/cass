@@ -46,7 +46,7 @@ abstract class Command
         }
     }
 
-    public function getAuthService(): AuthService
+    protected function getAuthService(): AuthService
     {
         if($this->authService === null) {
             throw new \Exception('No AuthService available');
@@ -63,6 +63,11 @@ abstract class Command
     public function setFrontlineService(FrontlineService $frontlineService) 
     {
         $this->frontlineService = $frontlineService;
+    }
+
+    protected function getFrontlineService(): FrontlineService
+    {
+        return $this->frontlineService;
     }
 
     abstract public function run(ServerRequestInterface $request, GenericResponseBuilder $responseBuilder);

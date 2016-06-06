@@ -20,12 +20,15 @@ import {ProfileSwitcherService} from "./module/profile/component/ProfileSwitcher
 import {ProfileRESTService} from "./module/profile/component/ProfileService/ProfileRESTService";
 import {ModalService} from "./module/modal/component/service";
 import {CommunityRoute} from "./module/community/route/CommunityRoute/index";
+import {MessageBusService} from "./module/message/service/MessageBusService/index";
+import {MessageBusNotifications} from "./module/message/component/MessageBusNotifications/index";
 
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),
     providers: [
         ModalService,
+        MessageBusService,
         AuthService,
         AuthComponentService,
         ProfileComponentService,
@@ -38,6 +41,7 @@ import {CommunityRoute} from "./module/community/route/CommunityRoute/index";
     directives: [
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,
+        MessageBusNotifications,
         AuthComponent,
         AccountComponent,
         ProfileComponent,

@@ -1,9 +1,6 @@
 @import "./../../../../styles/globals";
 
 div.cass-modal-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 @include isMobile {
@@ -18,6 +15,7 @@ div.cass-modal-box {
 @include isDesktop {
   div.cass-modal-box {
     @include card(2);
+
     background-color: white;
     border-radius: 3px;
   }
