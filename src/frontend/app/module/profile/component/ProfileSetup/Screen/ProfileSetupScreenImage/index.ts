@@ -5,6 +5,13 @@ import {UploadImageService} from "../../../../../util/component/UploadImage/serv
 import {ImageCropper} from "../../../../../util/component/ImageCropper/index";
 import {ScreenControls} from "../../../../../util/classes/ScreenControls";
 import {UploadImageCropModel} from "../../../../../util/component/UploadImage/strategy";
+import {ProfileRESTService} from "../../../ProfileService/ProfileRESTService";
+import {ProfileImage} from "../../../ProfileImage/index";
+import {AuthService} from "../../../../../auth/service/AuthService";
+import {UploadImageModal} from "../../../../../util/component/UploadImage/index";
+import {UploadImageService} from "../../../../../util/component/UploadImage/service";
+import {ModalControl} from "../../../../../util/classes/ModalControl";
+import {UploadProfileImageStrategy} from "../../../../util/UploadProfileImageStrategy";
 
 enum UploadImageScreen {
     File = <any>"File",
@@ -19,11 +26,12 @@ enum UploadImageScreen {
         require('./style.shadow.scss')
     ],
     providers: [
-        ImageCropperService
+        UploadImageService
     ],
     directives: [
         CORE_DIRECTIVES,
-        ImageCropper,
+        ProfileImage,
+        UploadImageModal,
     ]
 })
 
@@ -31,60 +39,30 @@ enum UploadImageScreen {
 @Injectable()
 export class ProfileSetupScreenImage
 {
-    public progress = new UploadProgress();
+    upload: UploadImageModalControl = new UploadImageModalControl();
+    deleteProcessVisible: boolean = false;
 
-    private screen: ScreenControls<UploadImageScreen> = new ScreenControls<UploadImageScreen>(UploadImageScreen.File, (sc: ScreenControls<UploadImageScreen>) => {
-        sc.add({ from: UploadImageScreen.File, to: UploadImageScreen.Crop });
-        sc.add({ from: UploadImageScreen.Crop, to: UploadImageScreen.Processing });
-    });
-
-    constructor(
-        public cropper: ImageCropperService) {}
-
-    private onFileChange($event) : void {
-        this.cropper.setFile($event.target.files[0]);
-        this.screen.goto(UploadImageScreen.Crop);
+    constructor(private uploadImageService: UploadImageService, private profileRESTService: ProfileRESTService) {
+        uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(profileRESTService));
     }
 
-    process() {
-        let model: UploadImageCropModel = {
-            x: this.cropper.getX(),
-            y: this.cropper.getY(),
-            width: this.cropper.getWidth(),
-            height: this.cropper.getHeight()
-        };
-
-        console.log(model);
-        this.screen.goto(UploadImageScreen.Processing);
-    }
-
-    abort() {
-        this.screen.goto(UploadImageScreen.Crop); //ToDo: Надо будет потом написать нормальный метод обрыва закачки.
-    }
-
-}
-
-class UploadProgress
-{
-    public value: number = 0;
-
-    public reset() {
-        this.value = 0;
-    }
-
-    abort() {
-        this.value = 0;
-    }
-
-    complete() {
-        this.value = 100;
-    }
-
-    update(value: number) {
-        if(value < 0 || value > 100) {
-            throw new Error(`Invalid progress ${value}`);
+    getImageProfile(){
+        if(AuthService.isSignedIn()){
+            return AuthService.getAuthToken().getCurrentProfile().entity.image.public_path;
         }
+    }
 
-        this.value = value;
+    avatarDeletingProcess(){
+        this.deleteProcessVisible = true;
+        this.profileRESTService.deleteAvatar().subscribe(data => {
+            AuthService.getAuthToken().getCurrentProfile().entity.image.public_path = '/public/assets/profile-default.png';
+            this.deleteProcessVisible = false;
+        });
+    }
+
+    uploadProfileImage() {
+        this.upload.open();
     }
 }
+
+class UploadImageModalControl extends ModalControl {}

@@ -33,6 +33,9 @@
             />
           </label>
         </div>
+        <div class="alert alert-danger" *ngIf="authService.lastError">
+        {{authService.lastError.message}}
+      </div>
       </div>
       <footer class="form-footer">
         <div class="form-footer-section">

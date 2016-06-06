@@ -1,15 +1,17 @@
 <div class="component component-community-join-modal">
   <cass-modal>
-    <header class="form-header" *ngIf="isHeaderVisible()">
-      <h1>Присоединиться к коммунити</h1>
-    </header>
-    <div class="form community-modal community-modal-join">
-      <div *ngIf="screens.isOn('SID')">
-        <cass-community-join-modal-screen-sid (abort)="abort()" (next)="next()"></cass-community-join-modal-screen-sid>
+    <cass-modal-box width="450px">
+      <header class="form-header" *ngIf="isHeaderVisible()">
+        <h1>Присоединиться к коммунити</h1>
+      </header>
+      <div class="form community-modal community-modal-join">
+        <div *ngIf="screens.isOn('SID')">
+          <cass-community-join-modal-screen-sid (abort)="abort()" (next)="next()"></cass-community-join-modal-screen-sid>
+        </div>
+        <div *ngIf="screens.isOn('Processing')">
+          <cass-community-join-modal-screen-processing (abort)="abort()" (next)="next()"></cass-community-join-modal-screen-processing>
+        </div>
       </div>
-      <div *ngIf="screens.isOn('Processing')">
-        <cass-community-join-modal-screen-processing (abort)="abort()" (next)="next()"></cass-community-join-modal-screen-processing>
-      </div>
-    </div>
+    </cass-modal-box>
   </cass-modal>
 </div>

@@ -1,6 +1,45 @@
 @import "./../../../../../../styles/globals";
 
 $PROGRESS_HEIGHT: 18px;
+$PREVIEW_SIZE: 500px;
+$FOOTER_HEIGHT: 50px;
+
+div.profile-modal-tab-image
+{
+  div.stage-view {
+    text-align: center;
+    padding: 20px;
+
+    div.profile-image-container {
+      display: inline-block;
+      margin-bottom: 20px;
+      max-width: 500px;
+      border: 3px solid white;
+      outline: 1px dotted material-color("grey", "400");
+      overflow: hidden;
+    }
+
+    div.profile-image-controls {
+      text-align: center;
+    }
+  }
+}
+
+
+div.image-editor {
+  position: relative;
+
+  div.image {
+    width: 100%;
+    height: $PREVIEW_SIZE;
+    overflow: hidden;
+    background-color: material-color("grey", "100");
+  }
+
+  footer {
+    height: $FOOTER_HEIGHT;
+  }
+}
 
 .component-profile-setup-screen-image
 {

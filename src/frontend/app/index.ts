@@ -32,7 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 HTTP_PROVIDERS,
                 provide(RequestOptions, {useClass: OAuthRequestOptions}),
                 provide(Window, {useValue: session})
-            ]).catch((err) => {
+            ]).then(() => {
+                setInterval(() => {
+                    let cassModalClass = 'cass-has-modals';
+                    let classList = document.body.classList;
+
+                    if(document.getElementsByClassName('cass-modal').length > 0) {
+                        classList.add(cassModalClass);
+                    }else if(classList.contains(cassModalClass)) {
+                        classList.remove(cassModalClass);
+                    }
+                }, 100);
+            }).catch((err) => {
                 console.log(err.message);
             }
         );

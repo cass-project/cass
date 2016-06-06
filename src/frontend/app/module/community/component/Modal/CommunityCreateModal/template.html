@@ -1,46 +1,48 @@
 <div class="component component-community-create-modal">
   <cass-modal>
-    <div>
-      <header class="form-header" *ngIf="isHeaderVisible()">
-        <h1>Мастер создания коммунити</h1>
-      </header>
-      <div class="form community-modal community-modal-create">
-        <div *ngIf="screens.isOn('General')">
-          <cass-community-create-modal-screen-general (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-general>
-        </div>
-        <div *ngIf="screens.isOn('Theme')">
-          <cass-community-create-modal-screen-theme (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-theme>
-        </div>
-        <div *ngIf="screens.isOn('Image')">
-          <cass-community-create-modal-screen-image  (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-image>
-        </div>
-        <div *ngIf="screens.isOn('Features')">
-          <cass-community-create-modal-screen-features (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-features>
-        </div>
-        <div *ngIf="screens.isOn('Processing')">
-          <cass-community-create-modal-screen-processing (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-processing>
-        </div>
-        <div *ngIf="screens.isOn('Complete')">
-            <div class="cass-padding-box-10 screen screen-complete">
-              <div><i class="text-center fa fa-thumbs-up" aria-hidden="true"></i></div>
-              <h1>Создание коммунити успешно завершено!</h1>
-            </div>
-            <footer class="form-footer">
-              <div class="form-footer-section">
-                <div class="cass-padding-box-5">
-                  <button type="submit" class="form-button form-button-secondary" (click)="close()">
-                    <span>Закрыть</span>
-                  </button>
-<!--
-                  <button type="submit" class="form-button form-button-primary">
-                    <span>В коммунити</span>
-                  </button>
--->
-                </div>
+    <cass-modal-box width="600px">
+      <div>
+        <header class="form-header" *ngIf="isHeaderVisible()">
+          <h1>Мастер создания коммунити</h1>
+        </header>
+        <div class="form community-modal community-modal-create">
+          <div *ngIf="screens.isOn('General')">
+            <cass-community-create-modal-screen-general (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-general>
+          </div>
+          <div *ngIf="screens.isOn('Theme')">
+            <cass-community-create-modal-screen-theme (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-theme>
+          </div>
+          <div *ngIf="screens.isOn('Image')">
+            <cass-community-create-modal-screen-image  (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-image>
+          </div>
+          <div *ngIf="screens.isOn('Features')">
+            <cass-community-create-modal-screen-features (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-features>
+          </div>
+          <div *ngIf="screens.isOn('Processing')">
+            <cass-community-create-modal-screen-processing (abort)="abort()" (next)="next()"></cass-community-create-modal-screen-processing>
+          </div>
+          <div *ngIf="screens.isOn('Complete')">
+              <div class="cass-padding-box-10 screen screen-complete">
+                <div><i class="text-center fa fa-thumbs-up" aria-hidden="true"></i></div>
+                <h1>Создание коммунити успешно завершено!</h1>
               </div>
-            </footer>
+              <footer class="form-footer">
+                <div class="form-footer-section">
+                  <div class="cass-padding-box-5">
+                    <button type="submit" class="form-button form-button-secondary" (click)="close()">
+                      <span>Закрыть</span>
+                    </button>
+  <!--
+                    <button type="submit" class="form-button form-button-primary">
+                      <span>В коммунити</span>
+                    </button>
+  -->
+                  </div>
+                </div>
+              </footer>
+          </div>
         </div>
       </div>
-    </div>
+    </cass-modal-box>
   </cass-modal>
 </div>

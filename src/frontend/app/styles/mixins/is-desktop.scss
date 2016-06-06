@@ -1,0 +1,7 @@
+@import "./../contants";
+
+@mixin isDesktop {
+  @media all and (min-width: $CASS_MIN_WIDTH) {
+    @content;
+  }
+}

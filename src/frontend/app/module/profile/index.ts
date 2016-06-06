@@ -7,12 +7,14 @@ import {ProfileSwitcher} from "./component/ProfileSwitcher/index";
 import {ProfileSetup} from "./component/ProfileSetup/index";
 import {AuthService} from "../auth/service/AuthService";
 import {Profile} from "./entity/Profile";
+import {ModalBoxComponent} from "../modal/component/box/index";
 
 @Component({
     selector: 'cass-profile',
     template: require('./template.html'),
     directives: [
         ModalComponent,
+        ModalBoxComponent,
         ProfileModal,
         ProfileSwitcher,
         ProfileSetup

@@ -4,7 +4,6 @@ import {Screen} from "../../screen";
 import {LoadingLinearIndicator} from "../../../../../../util/component/LoadingLinearIndicator/index";
 import {CommunityRESTService} from "../../../../../service/CommunityRESTService";
 import {CommunityCreateModalModel} from "../../model";
-import {CommunityComponentService} from "../../../../../service";
 import {COMMON_DIRECTIVES} from "angular2/common";
 
 @Component({
@@ -33,31 +32,30 @@ export class ScreenProcessing extends Screen
             .map(data => data.json())
             .subscribe(data => {
                 let communityId = data['entity'].id;
-                let requests = [];
+                let requests:Promise<any>[] = [];
 
                 for(let feature of this.model.features) {
-                    console.log(feature);
-                    if(feature.is_activated) {
-                        requests.push(this.communityRESTService.activateFeature(communityId, feature.code).toPromise()
+                    if(feature.is_activated && !feature.disabled) {
+                        requests.push(
+                            this.communityRESTService
+                                .activateFeature(communityId, feature.code)
+                                .toPromise()
                         );
-                    } else {
-                        requests.push(this.communityRESTService.deactivateFeature(communityId, feature.code).toPromise());
                     }
                 }
 
-                if(model.uploadImage) {
-                    requests.push(this.communityRESTService.imageUpload(
-                        communityId,
-                        this.model.uploadImage,
-                        this.model.uploadImageCrop
-                    ));
+                if(model.uploadImage && model.uploadImageCrop) {
+                    requests.push(
+                        this.communityRESTService
+                            .imageUpload(communityId, model.uploadImage, model.uploadImageCrop)
+                            .toPromise()
+                    );
                 }
 
-                Promise.all(requests).then(
-                    () => {
-                        this.next();
-                    }
-                );
+                Promise.all(requests).then(responses => {
+                    console.log(responses);
+                    this.next();
+                });
             });
     }
 }

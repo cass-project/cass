@@ -18,6 +18,10 @@ body {
   background-color: $MATERIAL_BACKGROUND;
 }
 
+body.cass-has-modals {
+  overflow: hidden;
+}
+
 p {
   font-size: $FONT_SIZE_NORMAL;
 }
