@@ -9,6 +9,8 @@ use function DI\get;
 use DI\Container;
 use Domain\Auth\Service\CurrentAccountService;
 use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
+use Domain\Collection\Entity\Collection;
+use Domain\Collection\Repository\CollectionRepository;
 use Domain\Profile\Console\Command\ProfileCard;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\ProfileGreetings;
@@ -26,9 +28,10 @@ return [
         ProfileGreetingsRepository::class => factory(new DoctrineRepositoryFactory(ProfileGreetings::class)),
         ProfileService::class => object()->constructor(
             get(ProfileRepository::class),
-            factory(function(Container $container) {
+            factory(function (Container $container) {
                 return sprintf('%s/profile/profile-image', $container->get('config.storage'));
-            })
+            }),
+            get(CollectionRepository::class)
         ),
         ProfileMiddleware::class => object()->constructor(
             get(CommandService::class)

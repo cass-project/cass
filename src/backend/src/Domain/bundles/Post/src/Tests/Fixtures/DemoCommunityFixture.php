@@ -10,21 +10,18 @@ use Zend\Expressive\Application;
 
 class DemoCommunityFixture implements Fixture
 {
-  /** @var  Community */
-  static private $community;
+    /** @var  Community */
+    static private $community;
 
-  public function up(Application $app, EntityManager $em){
+    public function up(Application $app, EntityManager $em) {
+        $communityService = $app->getContainer()->get(CommunityService::class);
 
-    /** @var CommunityService $communityService */
-    $communityService = $app->getContainer()->get(CommunityService::class);
+        self::$community = $communityService->createCommunity(
+            new CreateCommunityParameters('Title', 'Description', DemoThemeFixtures::getTheme()->getId())
+        );
+    }
 
-    self::$community = $communityService->createCommunity(
-        new CreateCommunityParameters('Title', 'Description', DemoThemeFixtures::getTheme()->getId())
-    );
-  }
-
-  static public function getCommunity():Community
-  {
-    return self::$community;
-  }
+    static public function getCommunity():Community {
+        return self::$community;
+    }
 }

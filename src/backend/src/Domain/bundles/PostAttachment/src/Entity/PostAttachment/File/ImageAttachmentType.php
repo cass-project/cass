@@ -8,6 +8,8 @@ use Domain\PostAttachment\Service\AttachmentTypeExtension;
 
 class ImageAttachmentType implements FileAttachmentType, AttachmentTypeDetector, AttachmentTypeExtension
 {
+    const MAX_FILE_SIZE_BYTES = 1024 * 1024 * 32 /* mb */;
+
     public function getCode() {
         return 'image';
     }
@@ -17,7 +19,7 @@ class ImageAttachmentType implements FileAttachmentType, AttachmentTypeDetector,
     }
 
     public function getMaxFileSizeBytes() {
-        return 1024 * 1024 * 32 /* mb */;
+        return self::MAX_FILE_SIZE_BYTES;
     }
 
     public function extend(PostAttachment $postAttachment): array {

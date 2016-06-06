@@ -64,8 +64,12 @@ class PostAttachmentService
         $subDirectory = $postAttachmentEntity->getId();
         $resultDir = $directory.'/'.$subDirectory;
 
-        if(mkdir($resultDir) === false) {
-            throw new \Exception('Failed to create subdirectory');
+        if(! file_exists($directory)) {
+            if(mkdir($resultDir) === false) {
+                throw new \Exception('Failed to create subdirectory');
+            }
+        }else if (!is_dir($directory)) {
+            throw new \Exception(sprintf('Path `%s` is not a directory', $directory));
         }
 
         if(copy($tmpFile, $resultDir.'/'.$desiredFileName) === false) {

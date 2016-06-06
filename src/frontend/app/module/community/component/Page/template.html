@@ -1,3 +1,11 @@
-<div>
-    NOT IMPLEMENTED
+<div class="community">
+    <div *ngIf="isLoaded" class="cass-padding-box-15">
+        <h1>{{community.title}}</h1>
+        <img *ngIf="community.has_image" src="/public/storage/community/community-image{{community.image.public_path}}"/>
+        <pre>{{community| json}}</pre>
+    </div>
+    <cass-modal class="loading" *ngIf="isLoading">
+            <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+            <span>Получаем информацию о коммунити...</span>
+    </cass-modal>
 </div>

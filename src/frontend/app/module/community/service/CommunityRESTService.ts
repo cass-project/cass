@@ -22,6 +22,10 @@ export class CommunityRESTService
         return this.http.put("/backend/api/protected/community/create", JSON.stringify(data));
     }
 
+    public getBySid(sid:string) {
+        return this.http.get(`/backend/api/community/${sid}/get-by-sid`);
+    }
+
     public progressBar:number;
 
     public imageUpload(communityId:number, uploadImage: Blob, uploadImageCrop: UploadImageCropModel) : Observable<Response> {
