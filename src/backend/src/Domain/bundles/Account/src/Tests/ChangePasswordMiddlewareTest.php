@@ -34,7 +34,6 @@ class ChangePasswordMiddlewareTest extends AccountMiddlewareTestCase
         $this->requestChangePassword($json)
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
-            ->dump()
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([
