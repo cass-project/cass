@@ -29,6 +29,7 @@ use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Community\Scripts\FeaturesListFrontlineScript;
 use Domain\Community\Service\CommunityFeaturesService;
 use Domain\Community\Service\CommunityService;
+use Domain\Profile\Repository\ProfileRepository;
 use Domain\Theme\Repository\ThemeRepository;
 
 return [
@@ -39,6 +40,7 @@ return [
             get(CommunityRepository::class),
             get(ThemeRepository::class),
             get(CollectionRepository::class),
+            get(ProfileRepository::class),
             factory(function(Container $container) {
                 return sprintf('%s/community/community-image', $container->get('config.storage'));
             }),

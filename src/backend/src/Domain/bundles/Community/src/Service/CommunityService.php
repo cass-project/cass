@@ -13,6 +13,7 @@ use Domain\Community\Parameters\UploadImageParameters;
 use Domain\Community\Repository\CommunityRepository;
 use Domain\Community\Scripts\CommunityImageUploadScript;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Repository\ProfileRepository;
 use Domain\Theme\Repository\ThemeRepository;
 
 class CommunityService
@@ -27,6 +28,8 @@ class CommunityService
     private $themeRepository;
     /** @var  CollectionRepository */
     private $collectionRepository;
+    /** @var ProfileRepository  */
+    private $profileRepository;
 
     /** @var string */
     private $storageDir = '';
@@ -39,6 +42,7 @@ class CommunityService
         CommunityRepository $communityRepository,
         ThemeRepository $themeRepository,
         CollectionRepository $collectionRepository,
+        ProfileRepository $profileRepository,
         string $storageDir,
         string $publicPath
     ) {
@@ -46,6 +50,7 @@ class CommunityService
         $this->communityRepository = $communityRepository;
         $this->themeRepository = $themeRepository;
         $this->collectionRepository = $collectionRepository;
+        $this->profileRepository = $profileRepository;
         $this->storageDir = $storageDir;
     }
     
@@ -64,6 +69,10 @@ class CommunityService
         $collection = $this->collectionRepository->createCollection("community:{$community->getId()}", $createCollectionparameters);
         $community->getCollections()->attachChild($collection->getId());
         $this->communityRepository->saveCommunity($community);
+
+        $owner->getCurrentProfile()->getCollections()->attachChild($collection->getId());
+        $this->profileRepository->updateProfile($owner->getCurrentProfile());
+
         return $entity;
     }
 
