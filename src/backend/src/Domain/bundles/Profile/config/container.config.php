@@ -22,13 +22,13 @@ use Domain\Profile\Repository\ProfileRepository;
 use Domain\Profile\Service\ProfileService;
 
 return [
-  'php-di' => [
-        ProfileRepository::class          => factory(new DoctrineRepositoryFactory(Profile::class)),
-        ProfileImageRepository::class     => factory(new DoctrineRepositoryFactory(ProfileImage::class)),
+    'php-di' => [
+        ProfileRepository::class => factory(new DoctrineRepositoryFactory(Profile::class)),
+        ProfileImageRepository::class => factory(new DoctrineRepositoryFactory(ProfileImage::class)),
         ProfileGreetingsRepository::class => factory(new DoctrineRepositoryFactory(ProfileGreetings::class)),
         ProfileService::class => object()->constructor(
             get(ProfileRepository::class),
-            factory(function(Container $container) {
+            factory(function (Container $container) {
                 return sprintf('%s/profile/profile-image', $container->get('config.storage'));
             }),
             get(CollectionRepository::class)

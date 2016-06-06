@@ -14,7 +14,6 @@ use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Collection\Service\CollectionValidatorsService;
 use Domain\Community\Repository\CommunityRepository;
 use Domain\Profile\Repository\ProfileRepository;
-use Domain\Theme\Repository\ThemeRepository;
 
 return [
     'php-di' => [
