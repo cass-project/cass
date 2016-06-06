@@ -29,7 +29,7 @@ export class UploadProfileImageStrategy implements UploadImageStrategy
     }
 
     abort(file: Blob, modal: UploadImageModal) {
-        console.log('upload aborted');
+        this.profileRESTService.cancelAvatarUpload();
         modal.progress.abort();
     }
 
