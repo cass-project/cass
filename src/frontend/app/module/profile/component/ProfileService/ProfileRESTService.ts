@@ -1,5 +1,4 @@
 import {UploadProfileImageStrategy} from "../../util/UploadProfileImageStrategy";
-var xmlRequest = new XMLHttpRequest();
 
 import {Injectable} from 'angular2/core';
 import {Http, URLSearchParams} from 'angular2/http';
@@ -9,6 +8,9 @@ import {AuthService} from "../../../auth/service/AuthService";
 export class ProfileRESTService {
     constructor(public http:Http) {
     }
+
+
+    private xmlRequest = new XMLHttpRequest();
 
     public tryNumber:number = 0;
     public progressBar:number = 0;
@@ -149,6 +151,11 @@ export class ProfileRESTService {
         return this.http.delete(url);
     }
 
+
+    cancelAvatarUpload(){
+        this.xmlRequest.abort();
+    }
+
     avatarUpload(file, model, modal) {
         let crop = {
             start: {
@@ -166,20 +173,20 @@ export class ProfileRESTService {
         let formData = new FormData();
         formData.append("file", file);
 
-        xmlRequest.open("POST", url);
-        xmlRequest.upload.onprogress = (e) => {
+        this.xmlRequest.open("POST", url);
+        this.xmlRequest.upload.onprogress = (e) => {
             if (e.lengthComputable) {
                 this.progressBar = Math.floor((e.loaded / e.total) * 100);
                 modal.progress.update(this.progressBar);
             }
         };
 
-        xmlRequest.send(formData);
+        this.xmlRequest.send(formData);
 
-        xmlRequest.onreadystatechange = () => {
-            if (xmlRequest.readyState === 4) {
-                if (xmlRequest.status === 200) {
-                    AuthService.getAuthToken().getCurrentProfile().entity.image.public_path = JSON.parse(xmlRequest.responseText).public_path;
+        this.xmlRequest.onreadystatechange = () => {
+            if (this.xmlRequest.readyState === 4) {
+                if (this.xmlRequest.status === 200) {
+                    AuthService.getAuthToken().getCurrentProfile().entity.image.public_path = JSON.parse(this.xmlRequest.responseText).public_path;
                     modal.progress.complete();
                     if(modal.close){
                         modal.close();
@@ -188,9 +195,8 @@ export class ProfileRESTService {
                     }
                     this.progressBar = 0;
                     this.tryNumber = 0;
-                } else {
-                    this.avatarUpload(file, model, modal);
                 }
+                /* ToDo: Сделать нормальный метод повтора загрузки с учетом "Отмены загрузки". */
             }
         }
     }
