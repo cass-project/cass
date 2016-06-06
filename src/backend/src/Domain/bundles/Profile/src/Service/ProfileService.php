@@ -77,7 +77,7 @@ class ProfileService
         $this->profileRepository->createProfile($profile);
         $this->profileRepository->switchTo($account->getProfiles()->toArray(), $profile);
 
-        $collectionParameters = new CreateCollectionParameters('Моя лента', 'основная лента профиля');
+        $collectionParameters = new CreateCollectionParameters('$gt_collection_my_feed_title', '$gt_collection_my_feed_description');
         $collection = $this->collectionRepository->createCollection("profile:{$profile->getId()}", $collectionParameters);
 
         $profile->getCollections()->attachChild($collection->getId());
