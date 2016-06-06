@@ -10,6 +10,7 @@ abstract class Command
     const COMMAND_CREATE = 'create';
     const COMMAND_DELETE = 'delete';
     const COMMAND_EDIT = 'edit';
+    const COMMAND_IMAGE_UPLOAD = 'image-upload';
 
     /** @var CollectionService */
     protected $collectionService;
@@ -43,6 +44,8 @@ abstract class Command
                 return new DeleteCommand();
             case self::COMMAND_EDIT:
                 return new EditCommand();
+            case self::COMMAND_IMAGE_UPLOAD:
+                return new ImageUploadCommand();
         }
     }
 
