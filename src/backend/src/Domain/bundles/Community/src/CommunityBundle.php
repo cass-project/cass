@@ -3,7 +3,7 @@ namespace Domain\Community;
 
 use Application\Bundle\GenericBundle;
 use Application\Frontline\FrontlineBundleInjectable;
-use Domain\Community\Frontline\ConfigCommunityFrontlineScript;
+use Domain\Community\Scripts\FeaturesListFrontlineScript;
 
 final class CommunityBundle extends GenericBundle implements FrontlineBundleInjectable
 {
@@ -15,7 +15,7 @@ final class CommunityBundle extends GenericBundle implements FrontlineBundleInje
     public function getFrontlineScripts(): array
     {
         return [
-            ConfigCommunityFrontlineScript::class
+            FeaturesListFrontlineScript::class
         ];
     }
 }
