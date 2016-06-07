@@ -1,0 +1,20 @@
+"/colors/get-palettes/":
+  get:
+    tags:
+      - colors
+    description:
+      Список всех доступных палитр
+    responses:
+      200:
+        schema:
+          required:
+            - success
+            - palettes
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            palettes:
+              type: array
+              items:
+                $ref: '#/definitions/Colors_Entity_Palette'

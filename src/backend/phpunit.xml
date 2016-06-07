@@ -36,5 +36,8 @@
         <testsuite name="domain_profile_communities">
             <directory>src/Domain/bundles/ProfileCommunities/src/Tests</directory>
         </testsuite>
+        <testsuite name="domain_colors">
+            <directory>src/Domain/bundles/Colors/src/Tests</directory>
+        </testsuite>
     </testsuites>
 </phpunit>

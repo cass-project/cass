@@ -22,7 +22,8 @@
       "Domain\\ProfileIM\\": "src/Domain/bundles/ProfileIM/src",
       "Domain\\Theme\\": "src/Domain/bundles/Theme/src",
       "Domain\\Community\\": "src/Domain/bundles/Community/src",
-      "Domain\\ProfileCommunities\\": "src/Domain/bundles/ProfileCommunities/src"
+      "Domain\\ProfileCommunities\\": "src/Domain/bundles/ProfileCommunities/src",
+      "Domain\\Colors\\": "src/Domain/bundles/Colors/src"
     }
   },
   "require": {
