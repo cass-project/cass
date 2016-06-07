@@ -56,6 +56,8 @@ class ColorsMiddlewareTest extends MiddlewareTestCase
                     $this->colorAsserts($palette['background']);
                     $this->assertTrue(isset($palette['foreground']) && is_array($palette['foreground']));
                     $this->colorAsserts($palette['foreground']);
+                    $this->assertTrue(isset($palette['border']) && is_array($palette['border']));
+                    $this->colorAsserts($palette['border']);
                 }
             });
     }

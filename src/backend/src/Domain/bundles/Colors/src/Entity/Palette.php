@@ -14,17 +14,22 @@ class Palette implements JSONSerializable
     /** @var Color */
     private $foreground;
 
-    public function __construct(string $code, Color $background, Color $foreground) {
+    /** @var Color */
+    private $border;
+
+    public function __construct(string $code, Color $background, Color $foreground, Color $border) {
         $this->code = $code;
         $this->background = $background;
         $this->foreground = $foreground;
+        $this->border = $border;
     }
 
     public function toJSON(): array {
         return [
             'code' => $this->code,
             'background' => $this->background->toJSON(),
-            'foreground' => $this->foreground->toJSON()
+            'foreground' => $this->foreground->toJSON(),
+            'border' => $this->border->toJSON(),
         ];
     }
 
@@ -38,5 +43,9 @@ class Palette implements JSONSerializable
 
     public function getForeground(): Color {
         return $this->foreground;
+    }
+
+    public function getBorder(): Color {
+        return $this->border;
     }
 }

@@ -1,3 +1,4 @@
+import {Palette} from "../util/definitions/palette";
 var merge = require('merge');
 
 import {AccountEntity} from "../account/entity/Account";
@@ -30,6 +31,7 @@ export interface FrontlineSessionData
         profile: {
             max_profiles: number
         },
+        colors: Palette[],
         community: {
             features: {
                 code: string;
@@ -39,7 +41,6 @@ export interface FrontlineSessionData
         }
     }
 }
-
 
 export function frontline(callback: { (session: FrontlineSessionData) }) {
     let xhr = new XMLHttpRequest();

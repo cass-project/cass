@@ -16,32 +16,33 @@ class PaletteRepository
 
         $palettes = [];
         $definitions = [
-            'red' => ['900', '50'],
-            'pink' => ['900', '50'],
-            'purple' => ['900', '50'],
-            'deep-purple' => ['900', '50'],
-            'indigo' => ['900', '50'],
-            'blue' => ['900', '50'],
-            'light-blue' => ['900', '50'],
-            'cyan' => ['900', '50'],
-            'teal' => ['900', '50'],
-            'green' => ['900', '50'],
-            'light-green' => ['900', '50'],
-            'lime' => ['900', '50'],
-            'yellow' => ['900', '50'],
-            'amber' => ['900', '50'],
-            'orange' => ['900', '50'],
-            'deep-orange' => ['900', '50'],
-            'brown' => ['900', '50'],
-            'grey' => ['900', '50'],
-            'blue-grey' => ['900', '50'],
+            'red' => ['500', '50', '900'],
+            'pink' => ['500', '50', '900'],
+            'purple' => ['500', '50', '900'],
+            'deep-purple' => ['500', '50', '900'],
+            'indigo' => ['500', '50', '900'],
+            'blue' => ['500', '50', '900'],
+            'light-blue' => ['500', '50', '900'],
+            'cyan' => ['500', '50', '900'],
+            'teal' => ['500', '50', '900'],
+            'green' => ['500', '50', '900'],
+            'light-green' => ['500', '50', '900'],
+            'lime' => ['500', '50', '900'],
+            'yellow' => ['500', '50', '900'],
+            'amber' => ['500', '50', '900'],
+            'orange' => ['500', '50', '900'],
+            'deep-orange' => ['500', '50', '900'],
+            'brown' => ['500', '50', '900'],
+            'grey' => ['500', '50', '900'],
+            'blue-grey' => ['500', '50', '900'],
         ];
 
         foreach($definitions as $code => $definition) {
             $palettes[$code] = new Palette(
                 $code,
                 $this->colorsRepository->getColor($code, $definition[0]),
-                $this->colorsRepository->getColor($code, $definition[1])
+                $this->colorsRepository->getColor($code, $definition[1]),
+                $this->colorsRepository->getColor($code, $definition[2])
             );
         }
 
