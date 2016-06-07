@@ -2,7 +2,7 @@
 namespace Domain\Auth\Service\AuthService\SignUpValidation;
 
 use Domain\Auth\Parameters\SignUpParameters;
-use Domain\Auth\Service\AuthService\Exceptions\MissingRequiredFieldException;
+use Domain\Auth\Exception\MissingRequiredFieldException;
 
 class HasAllRequiredFields implements Validator
 {

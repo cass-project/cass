@@ -18,20 +18,24 @@ final class DirectCommandResolver implements CommandResolver
     /** @var string|null */
     private $allowedMethod;
 
-    public function __construct(string $command, string $commandClassName, string $allowedMethod = null) {
+    /** @var string */
+    private $attr;
+
+    public function __construct(string $command, string $commandClassName, string $allowedMethod = null, string $attr = 'command') {
         $this->command = $command;
         $this->commandClassName = $commandClassName;
         $this->allowedMethod = strtolower($allowedMethod);
+        $this->attr = $attr;
     }
 
-    public function isResolvable(ServerRequestInterface $request) {
+    public function isResolvable(ServerRequestInterface $request): bool {
         if($this->allowedMethod) {
             if($this->allowedMethod !== strtolower($request->getMethod())) {
                 return false;
             }
         }
-
-        return $request->getAttribute('command') === $this->command;
+        
+        return $request->getAttribute($this->attr) === $this->command;
     }
 
     public function resolve(ServerRequestInterface $request, Container $container): Command {

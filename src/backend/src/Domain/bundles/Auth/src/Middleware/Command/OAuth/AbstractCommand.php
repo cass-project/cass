@@ -1,25 +1,29 @@
 <?php
 namespace Domain\Auth\Middleware\Command\OAuth;
 
-use Application\REST\Response\GenericResponseBuilder;
-use Domain\Auth\Middleware\Command\Command;
+use Application\Command\Command;
+use Application\REST\Response\ResponseBuilder;
+use Domain\Account\Exception\AccountNotFoundException;
 use Domain\Auth\Service\AuthService;
 use Domain\Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
-use Domain\Account\Exception\AccountNotFoundException;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-abstract class AbstractCommand extends Command
+abstract class AbstractCommand implements Command
 {
     /** @var array */
     private $oauth2Config;
 
-    public function __construct(array $oauth2Config, AuthService $authService)
+    /** @var AuthService */
+    private $authService;
+
+    public function __construct(AuthService $authService, array $oauth2Config)
     {
-        $this->oauth2Config = $oauth2Config;
         $this->authService = $authService;
+        $this->oauth2Config = $oauth2Config;
     }
 
     protected function getOauth2Config(): array
@@ -30,8 +34,7 @@ abstract class AbstractCommand extends Command
     abstract protected function getOAuth2Provider(): AbstractProvider;
     abstract protected function makeRegistrationRequest(AbstractProvider $provider, AccessToken $accessToken): RegistrationRequest;
 
-    public function run(ServerRequestInterface $request, GenericResponseBuilder $responseBuilder)
-    {
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface {
         $provider = $this->getOAuth2Provider();
 
         if(isset($_GET['code'])) {
@@ -41,11 +44,10 @@ abstract class AbstractCommand extends Command
                 'code' => $_GET['code']
             ]);
 
-
             $registrationRequest = $this->makeRegistrationRequest($provider, $accessToken);
 
             try {
-                $account = $this->getAuthService()->signInOauth2($registrationRequest);
+                $account = $this->authService->signInOauth2($registrationRequest);
 
                 $responseBuilder->setStatusSuccess()->setJson([
                     "api_key" => $account->getAPIKey()
@@ -65,7 +67,10 @@ abstract class AbstractCommand extends Command
         }else{
             $this->moveToAuth($provider);
         }
+
+        return $responseBuilder->build();
     }
+
 
     private function moveToAuth(AbstractProvider $provider)
     {
@@ -73,15 +78,5 @@ abstract class AbstractCommand extends Command
         $_SESSION['oauth2state'] = $provider->getState();
         header('Location: ' . $authorizationUrl);
         exit;
-    }
-
-    private function preventCSRFAttack()
-    {
-        $hasState = !empty($_GET['state']);
-        $isSameClient = !empty($_GET['state']) && ($_GET['state'] === $_SESSION['oauth2state']);
-
-        if (!($hasState && $isSameClient)) {
-            throw new \Exception('Invalid state. Looks like a CSRF attack so gtfo.');
-        }
     }
 }

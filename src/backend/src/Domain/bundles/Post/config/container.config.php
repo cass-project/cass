@@ -16,14 +16,5 @@ use Domain\PostAttachment\Service\PostAttachmentService;
 return [
     'php-di' => [
         PostRepository::class => factory(new DoctrineRepositoryFactory(Post::class)),
-        PostService::class => object()->constructor(
-            get(CurrentAccountService::class),
-            get(PostAttachmentService::class),
-            get(PostRepository::class)
-        ),
-        PostMiddleware::class => object()->constructor(
-            get(CurrentAccountService::class),
-            get(PostService::class)
-        )
     ]
 ];

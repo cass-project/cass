@@ -15,11 +15,9 @@ class ConfigProfileFrontlineScript implements FrontlineScript
     public function __invoke(): array {
         return [
             'config' => [
-                'profile' => function() {
-                    return [
-                        'max_profiles' => ProfileService::MAX_PROFILES_PER_ACCOUNT
-                    ];
-                }
+                'profile' => [
+                    'max_profiles' => ProfileService::MAX_PROFILES_PER_ACCOUNT
+                ]
             ]
         ];
     }

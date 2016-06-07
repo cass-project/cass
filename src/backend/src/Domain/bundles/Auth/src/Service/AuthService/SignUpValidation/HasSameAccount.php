@@ -3,7 +3,7 @@ namespace Domain\Auth\Service\AuthService\SignUpValidation;
 
 use Domain\Account\Service\AccountService;
 use Domain\Auth\Parameters\SignUpParameters;
-use Domain\Auth\Service\AuthService\Exceptions\DuplicateAccountException;
+use Domain\Auth\Exception\DuplicateAccountException;
 
 class HasSameAccount implements Validator
 {

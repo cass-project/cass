@@ -9,14 +9,10 @@ class SignUpParameters
     /** @var string */
     private $password;
 
-    /** @var string */
-    private $repeat;
-
-    public function __construct($email, $password, $repeat)
+    public function __construct($email, $password)
     {
         $this->email = $email;
         $this->password = $password;
-        $this->repeat = $repeat;
     }
 
     public function getEmail(): string
@@ -27,10 +23,5 @@ class SignUpParameters
     public function getPassword(): string
     {
         return $this->password;
-    }
-
-    public function getRepeat(): string
-    {
-        return $this->repeat;
     }
 }

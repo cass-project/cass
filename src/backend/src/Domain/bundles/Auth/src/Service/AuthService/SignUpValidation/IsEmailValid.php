@@ -2,7 +2,7 @@
 namespace Domain\Auth\Service\AuthService\SignUpValidation;
 
 use Domain\Auth\Parameters\SignUpParameters;
-use Domain\Auth\Service\AuthService\Exceptions\ValidationException;
+use Domain\Auth\Exception\ValidationException;
 
 class IsEmailValid implements Validator
 {

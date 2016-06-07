@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Auth\Service\AuthService\Exceptions;
+namespace Domain\Auth\Exception;
 
 class InvalidCredentialsException extends \Exception
 {

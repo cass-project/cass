@@ -15,11 +15,9 @@ class ConfigAccountFrontlineScript implements FrontlineScript
     public function __invoke(): array {
         return [
             'config' => [
-                'account' => function() {
-                    return [
-                        'delete_account_request_days' => ProcessAccountDeleteRequestsScript::DAYS_TO_ACCEPT_REQUEST
-                    ];
-                }
+                'account' => [
+                    'delete_account_request_days' => ProcessAccountDeleteRequestsScript::DAYS_TO_ACCEPT_REQUEST
+                ]
             ]
         ];
     }

@@ -1,15 +1,18 @@
 <?php
 namespace Domain\Auth\Middleware\Command;
 
-use Application\REST\Response\GenericResponseBuilder;
+use Application\REST\Response\ResponseBuilder;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class SignOutCommand extends Command
 {
-    public function run(ServerRequestInterface $request, GenericResponseBuilder $responseBuilder)
-    {
-        $this->getAuthService()->signOut();
-        
-        $responseBuilder->setStatusSuccess();
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface {
+        $this->authService->signOut();
+
+        return $responseBuilder
+            ->setStatusSuccess()
+            ->build()
+        ;
     }
 }

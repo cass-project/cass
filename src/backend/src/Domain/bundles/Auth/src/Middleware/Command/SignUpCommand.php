@@ -3,22 +3,22 @@ namespace Domain\Auth\Middleware\Command;
 
 use Application\Frontline\FrontlineScript;
 use Application\Frontline\Service\FrontlineService\IncludeFilter;
+use Application\REST\Response\ResponseBuilder;
 use Domain\Auth\Formatter\SignInFormatter;
-use Application\REST\Response\GenericResponseBuilder;
 use Domain\Auth\Middleware\Request\SignUpRequest;
-use Domain\Auth\Service\AuthService\Exceptions\DuplicateAccountException;
-use Domain\Auth\Service\AuthService\Exceptions\MissingRequiredFieldException;
-use Domain\Auth\Service\AuthService\Exceptions\ValidationException;
+use Domain\Auth\Exception\DuplicateAccountException;
+use Domain\Auth\Exception\MissingRequiredFieldException;
+use Domain\Auth\Exception\ValidationException;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class SignUpCommand extends Command
 {
-    public function run(ServerRequestInterface $request, GenericResponseBuilder $responseBuilder)
-    {
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface {
         try {
             $request = new SignUpRequest($request);
-            $account = $this->getAuthService()->signUp($request->getParameters());
-            $frontline = $this->getFrontlineService()->fetch(new IncludeFilter([
+            $account = $this->authService->signUp($request->getParameters());
+            $frontline = $this->frontlineService->fetch(new IncludeFilter([
                 FrontlineScript::TAG_IS_AUTHENTICATED
             ]));
 
@@ -42,5 +42,7 @@ class SignUpCommand extends Command
                 ->setError($e)
             ;
         }
+
+        return $responseBuilder->build();
     }
 }

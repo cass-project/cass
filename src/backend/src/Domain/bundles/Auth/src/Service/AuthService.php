@@ -5,9 +5,8 @@ use Domain\Account\Service\AccountService;
 use Domain\Auth\Middleware\AuthStrategy\SessionStrategy;
 use Domain\Auth\Parameters\SignInParameters;
 use Domain\Auth\Parameters\SignUpParameters;
-use Domain\Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
+use Domain\Auth\Exception\InvalidCredentialsException;
 use Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
-use Domain\Auth\Service\AuthService\SignUpValidation\ArePasswordsMatching;
 use Domain\Auth\Service\AuthService\SignUpValidation\HasAllRequiredFields;
 use Domain\Auth\Service\AuthService\SignUpValidation\HasSameAccount;
 use Domain\Auth\Service\AuthService\SignUpValidation\IsEmailValid;
@@ -28,19 +27,14 @@ class AuthService
     /** @var PasswordVerifyService */
     private $passwordVerifyService;
 
-    /** @var array */
-    private $oauth2Config;
-
     public function __construct(
         AccountService $accountService,
         CurrentAccountService $currentAccountService,
-        PasswordVerifyService $passwordVerifyService,
-        array $oauth2Config)
-    {
+        PasswordVerifyService $passwordVerifyService
+    ) {
         $this->accountService = $accountService;
         $this->currentAccountService = $currentAccountService;
         $this->passwordVerifyService = $passwordVerifyService;
-        $this->oauth2Config = $oauth2Config;
     }
 
     public function auth(Account $account): Account
@@ -62,7 +56,6 @@ class AuthService
         }, [
             new HasAllRequiredFields(),
             new IsEmailValid(),
-            new ArePasswordsMatching(),
             new PasswordHasRequiredLength(),
             new HasSameAccount($this->accountService)
         ]);
@@ -90,7 +83,10 @@ class AuthService
             $this->accountService->createOAuth2Account($registrationRequest);
         }
 
-        $oauth2Account = $this->accountService->findOAuthAccount($registrationRequest->getProvider(), $registrationRequest->getProviderAccountId());
+        $oauth2Account = $this->accountService->findOAuthAccount(
+            $registrationRequest->getProvider(),
+            $registrationRequest->getProviderAccountId()
+        );
 
         return $this->auth($oauth2Account->getAccount());
     }
@@ -98,17 +94,6 @@ class AuthService
     public function signOut()
     {
         $_SESSION[SessionStrategy::SESSION_API_KEY] = null;
-    }
-
-    public function getOAuth2Config($provider): array
-    {
-        $config = $this->oauth2Config[$provider] ?? null;
-
-        if(!$config) {
-            throw new \Exception(sprintf('OAuth2 configuration for provider `%s` not found', $provider));
-        }
-
-        return $config;
     }
 
     public function verifyPassword(Account $account, string $password): bool

@@ -22,7 +22,7 @@ final class CompositionCommandResolver implements CommandResolver
         });
     }
 
-    public function isResolvable(ServerRequestInterface $request) {
+    public function isResolvable(ServerRequestInterface $request): bool {
         foreach($this->resolvers as $commandResolver) {
             if($commandResolver->isResolvable($request)) {
                 return true;

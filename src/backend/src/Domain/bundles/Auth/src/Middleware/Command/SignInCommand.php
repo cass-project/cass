@@ -3,21 +3,21 @@ namespace Domain\Auth\Middleware\Command;
 
 use Application\Frontline\FrontlineScript;
 use Application\Frontline\Service\FrontlineService\IncludeFilter;
+use Application\REST\Response\ResponseBuilder;
 use Domain\Auth\Formatter\SignInFormatter;
-use Application\REST\Response\GenericResponseBuilder;
 use Domain\Auth\Middleware\Request\SignInRequest;
-use Domain\Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
+use Domain\Auth\Exception\InvalidCredentialsException;
 use Domain\Account\Exception\AccountNotFoundException;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class SignInCommand extends Command
 {
-    public function run(ServerRequestInterface $request, GenericResponseBuilder $responseBuilder)
-    {
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface {
         try {
             $request = new SignInRequest($request);
-            $account = $this->getAuthService()->signIn($request->getParameters());
-            $frontline = $this->getFrontlineService()->fetch(new IncludeFilter([
+            $account = $this->authService->signIn($request->getParameters());
+            $frontline = $this->frontlineService->fetch(new IncludeFilter([
                 FrontlineScript::TAG_IS_AUTHENTICATED
             ]));
 
@@ -34,5 +34,7 @@ class SignInCommand extends Command
                 ->setStatusNotFound()
                 ->setError($e);
         }
+
+        return $responseBuilder->build();
     }
 }

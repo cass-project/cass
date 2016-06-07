@@ -1,4 +1,4 @@
 <?php
-namespace Domain\Auth\Service;
+namespace Domain\Auth\Exception;
 
 class NotAuthenticatedException extends \Exception {}
