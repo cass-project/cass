@@ -9,6 +9,7 @@ use Domain\Account\Command\DeleteAccountCommand;
 use Domain\Account\Command\ProcessAccountDeleteRequestsCommand;
 use Domain\Account\Entity\Account;
 use Domain\Account\Entity\OAuthAccount;
+use Domain\Account\Frontline\ConfigAccountFrontlineScript;
 use Domain\Account\Middleware\Command\CancelDeleteRequestCommand;
 use Domain\Account\Middleware\Command\ChangePasswordCommand;
 use Domain\Account\Middleware\Command\DeleteRequestCommand;
@@ -22,6 +23,7 @@ use Domain\Auth\Service\AuthService;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Auth\Service\PasswordVerifyService;
 use Domain\Profile\Repository\ProfileGreetingsRepository;
+use Symfony\Component\Yaml\Tests\A;
 
 return [
     'php-di' => [
@@ -59,5 +61,6 @@ return [
             get(CurrentAccountService::class),
             get(AuthService::class)
         ),
+        ConfigAccountFrontlineScript::class => object()->constructor(),
     ]
 ];

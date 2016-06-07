@@ -1,0 +1,48 @@
+@import "./../../../../styles/globals";
+
+.container {
+  text-align: center;
+  position: fixed;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  z-index: 999999;
+
+  .notifications {
+    width: 100%;
+
+    li {
+      display: block;
+    }
+  }
+
+  .message {
+    @include card(3);
+
+    display: inline-block;
+    padding: 10px 30px;
+    margin: 10px;
+    font-size: 16px;
+    font-weight: 500;
+
+    &.critical {
+      color: material-color('red', '50');
+      background: material-color('red', '900');
+    }
+
+    &.warning {
+      color: material-color('amber', '900');
+      background: material-color('amber', '50');
+    }
+
+    &.info {
+      color: material-color('blue-grey', '900');
+      background: material-color('blue-grey', '50');
+    }
+
+    &.debug {
+      color: material-color('grey', '900');
+      background: material-color('grey', '50');
+    }
+  }
+}

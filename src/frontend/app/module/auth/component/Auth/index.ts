@@ -9,7 +9,7 @@ import {ModalBoxComponent} from "../../../modal/component/box/index";
 
 @Component({
     selector: 'cass-auth',
-    template: require('./template.html'),
+    template: require('./template.jade'),
     directives: [
         CORE_DIRECTIVES,
         ModalComponent,
@@ -26,10 +26,12 @@ export class AuthComponent
     constructor(private service: AuthComponentService) {}
 
     signIn() {
+        this.service.modals.closeModals();
         this.service.modals.openSignInModal();
     }
 
     signUp() {
+        this.service.modals.closeModals();
         this.service.modals.openSignUpModal();
     }
 }

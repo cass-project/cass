@@ -9,6 +9,7 @@ class SignOutCommand extends Command
     public function run(ServerRequestInterface $request, GenericResponseBuilder $responseBuilder)
     {
         $this->getAuthService()->signOut();
+        
         $responseBuilder->setStatusSuccess();
     }
 }

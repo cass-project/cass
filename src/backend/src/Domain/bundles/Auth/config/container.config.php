@@ -19,6 +19,7 @@ return [
     'php-di' => [
         AuthService::class => object()->constructor(
             get(AccountService::class),
+            get(CurrentAccountService::class),
             get(PasswordVerifyService::class),
             get('oauth2_providers')
         ),

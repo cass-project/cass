@@ -2,6 +2,7 @@
 namespace Domain\Collection\Traits;
 
 use Domain\Collection\Collection\CollectionTree;
+use Domain\Collection\Entity\Collection;
 
 trait CollectionOwnerTrait
 {
@@ -19,7 +20,8 @@ trait CollectionOwnerTrait
     public function replaceCollections(CollectionTree $collectionTree): self
     {
         $this->collections = $collectionTree;
-
         return $this;
     }
+
+
 }

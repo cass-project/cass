@@ -111,7 +111,6 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->setParameters(['gender' => 'none'])
             ->execute()
-            ->dump()
             ->expectStatusCode(200)
             ->expectJSONContentType()
         ;

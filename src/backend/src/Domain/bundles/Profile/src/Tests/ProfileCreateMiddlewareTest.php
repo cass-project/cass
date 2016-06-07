@@ -26,6 +26,10 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
                     'is_current' => true
                 ]
             ])
+          ->expect(function(array $result) {
+              $collecttions = $result['entity']['collections'];
+              $this->assertEquals(1, count($collecttions));
+          });
         ;
 
         $this->requestGetProfile($profile->getId())

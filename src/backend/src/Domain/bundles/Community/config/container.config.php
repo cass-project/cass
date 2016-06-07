@@ -13,6 +13,7 @@ use Domain\Community\Feature\FeaturesFactory;
 use Domain\Community\Feature\Features\BoardsFeature;
 use Domain\Community\Feature\Features\ChatFeature;
 use Domain\Community\Feature\Features\CollectionsFeature;
+use Domain\Community\Frontline\ConfigCommunityFrontlineScript;
 use Domain\Community\Middleware\Command\CreateCommand;
 use Domain\Community\Middleware\Command\EditCommand;
 use Domain\Community\Middleware\Command\Feature\ActivateFeatureCommand;
@@ -93,5 +94,6 @@ return [
         CollectionsFeature::class => object()->constructor(),
         BoardsFeature::class => object()->constructor(),
         ChatFeature::class => object()->constructor(),
+        ConfigCommunityFrontlineScript::class => object()->constructor()
     ]
 ];

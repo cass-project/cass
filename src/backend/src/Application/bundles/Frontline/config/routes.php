@@ -5,5 +5,5 @@ use Application\Frontline\Middleware\FrontlineMiddleware;
 use Zend\Expressive\Application;
 
 return function (Application $app) {
-    $app->get('/frontline[/]', FrontlineMiddleware::class, 'frontline');
+    $app->get('/frontline/{tags}[/]', FrontlineMiddleware::class, 'frontline');
 };

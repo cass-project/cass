@@ -18,7 +18,18 @@ class FrontlineMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $response->getBody()->write(json_encode(['success' => true] + $this->frontlineService->fetchFrontlineResult(), JSON_UNESCAPED_SLASHES));
+        $tags = explode(',', urldecode($request->getAttribute('tags')));
+
+        if(in_array('*', $tags)) {
+            $filter = new FrontlineService\NoneFilter();
+        }else{
+            $filter = new FrontlineService\IncludeFilter();
+            $filter->includeTags($tags);
+        }
+
+        $response->getBody()->write(json_encode([
+                'success' => true
+            ] + $this->frontlineService->fetch($filter), JSON_UNESCAPED_SLASHES));
 
         return $response
             ->withStatus(200)

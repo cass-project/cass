@@ -1,9 +1,15 @@
-"/frontline":
+"/frontline/{tags}/":
   get:
     tags:
       - frontline
     description:
       Возвращает все записанные с помощью FrontlineService в сессию данные
+    parameters:
+      - name: tags
+        type: string
+        in: path
+        required: true
+        description: Теги скриптов через запятую.
     responses:
       200:
         schema:

@@ -1,0 +1,44 @@
+form.form.form-auth-sign-in((ngSubmit)='submit()', (keyup.escape)='close()')
+  header.form-header
+    h1 Авторизация
+  .cass-padding-box-10
+    .input-group
+      p.form-text Войдите с помощью социальных сетей:
+      .cass-padding-box-5
+        cass-auth-oauth2
+    .input-group
+      label.form-label
+        span.label-text Либо используйте аккаунт нашего сервиса:
+        input.form.form-input(
+          type='email',
+          required='',
+          placeholder='Адрес электронного ящика, указанного при регистрации',
+          autocomplete='off', autofocus='autofocus',
+          tabindex='1',
+          [(ngModel)]='model.email',
+          [disabled]='status.loading'
+        )
+    .input-group
+      label.form-label
+        span.label-text Пароль
+        input.form.form-input(
+          type='password',
+          required='',
+          placeholder='**********',
+          autocomplete='off',
+          tabindex='2',
+          [(ngModel)]='model.password',
+          [disabled]='status.loading'
+        )
+  footer.form-footer
+    .form-footer-section
+      .cass-padding-box-5
+        button.form-text-button(type='button', tabindex='4', (click)='signUp()', [disabled]='status.loading')
+          span Создать аккаунт
+    .form-footer-section
+      .form-footer-item
+        .cass-padding-box-5
+          button.form-text-button(type='button', tabindex='5', (click)='close()', [disabled]='status.loading')
+            span Закрыть
+          button.form-button.form-button-primary(type='submit', tabindex='3', [disabled]='status.loading')
+            span Войти

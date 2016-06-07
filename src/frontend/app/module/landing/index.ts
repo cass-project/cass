@@ -4,20 +4,18 @@ import {ProfileSetup} from "../profile/component/ProfileSetup/index";
 import {ThemeSelect} from "../theme/component/ThemeSelect/index";
 import {ProfileComponentService} from "../profile/service";
 import {AuthService} from "../auth/service/AuthService";
+import {MessageBusService} from "../message/service/MessageBusService/index";
 
 @Component({
     template: require('./template.html'),
     directives: [
         AuthComponent,
         ProfileSetup,
-        ThemeSelect
-    ]
+        ThemeSelect,
+    ],
 })
 export class LandingComponent
 {
-    constructor(private pService: ProfileComponentService, private auth: AuthService) {
-        /*if(!AuthService.getAuthToken().getCurrentProfile().entity.is_initialized){
-            this.pService.modals.setup.open();
-        }*/
+    constructor(private pService: ProfileComponentService, private auth: AuthService, private messageBusService: MessageBusService) {
     }
 }

@@ -1,13 +1,14 @@
-import {Component} from "angular2/core";
-import {Router} from 'angular2/router';
+import {Component, Output, EventEmitter} from "angular2/core";
+
 import {LoadingIndicator} from "../../../util/component/LoadingIndicator/index";
 import {OAuth2Component} from "../OAuth2/index";
-import {AuthComponentService} from "../Auth/service";
-import {AuthService} from "../../service/AuthService";
+import {AuthService, SignUpModel, SignInResponse} from "../../service/AuthService";
+import {MessageBusService} from "../../../message/service/MessageBusService/index";
+import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 
 @Component({
     selector: 'cass-auth-sign-up',
-    template: require('./template.html'),
+    template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
@@ -18,44 +19,51 @@ import {AuthService} from "../../service/AuthService";
 })
 export class SignUpComponent
 {
-    private SignUpTry = 0;
-    private loading = false;
-    private personalInfo = {
+    @Output('back') backEvent = new EventEmitter<SignUpModel>();
+    @Output('close') closeEvent = new EventEmitter<SignUpModel>();
+    @Output('success') successEvent = new EventEmitter<SignInResponse>();
+    
+    private status: SignUpStatus = {
+        loading: false
+    };
+
+    private model: SignUpModel = {
         email: '',
         password: '',
         repeat: '',
     };
 
-    constructor(private authService: AuthService, private service: AuthComponentService, private router: Router){}
+    constructor(
+        private authService: AuthService,
+        private messages: MessageBusService
+    ) {}
 
-    attemptSignUp() {
-        this.loading = true;
+    submit() {
+        this.status.loading = true;
 
-        this.authService.attemptSignUp(this.personalInfo).add(() => {
-            if(!this.authService.lastError) {
-                this.service.modals.closeModals();
-                this.router.navigate(['/']);
-                this.loading = false;
-            } else if(this.SignUpTry < 5){
-                setTimeout(() => {this.attemptSignUp()}, 3000);
-                this.SignUpTry++;
-            } else {
-                console.log("Превышен интервал попыток");
-                this.SignUpTry = 0;
-                this.loading = false;
-            }
-        });
+        this.authService.attemptSignUp(this.model)
+            .then(response => {
+                this.successEvent.emit(response);
+            })
+            .catch(error => {
+                this.messages.push(MessageBusNotificationsLevel.Warning, error);
+            })
+            .then(() => {
+                this.status.loading = false;
+            })
+        ;
     }
 
-    attemptSignUpNoRemember() {
-        this.loading = true;
-
-        this.authService.attemptSignUp(this.personalInfo).add(() => {
-            if(!this.authService.lastError) {
-                this.service.modals.closeModals();
-            }
-
-            this.loading = false;
-        });
+    close() {
+        this.closeEvent.emit(this.model);
     }
+
+    back() {
+        this.backEvent.emit(this.model);
+    }
+}
+
+interface SignUpStatus
+{
+    loading: boolean;
 }

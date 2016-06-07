@@ -1,3 +1,5 @@
+var merge = require('merge');
+
 import {AccountEntity} from "../account/entity/Account";
 import {ProfileEntity} from "../profile/entity/Profile";
 import {ThemeTree} from "../theme/entity/Theme";
@@ -5,6 +7,12 @@ import {ThemeTree} from "../theme/entity/Theme";
 export class FrontlineService
 {
     constructor(public session: FrontlineSessionData) {}
+
+    merge(data) {
+        merge(this.session, data);
+
+        console.log(this.session);
+    }
 }
 
 export interface FrontlineSessionData
@@ -36,7 +44,7 @@ export interface FrontlineSessionData
 export function frontline(callback: { (session: FrontlineSessionData) }) {
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET', '/backend/api/frontline/', true);
+    xhr.open('GET', '/backend/api/frontline/*/', true);
     xhr.addEventListener("load", (event: Event) => {
         callback(JSON.parse(xhr.responseText));
     });

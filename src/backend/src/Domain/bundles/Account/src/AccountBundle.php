@@ -3,7 +3,7 @@ namespace Domain\Account;
 
 use Application\Bundle\GenericBundle;
 use Application\Frontline\FrontlineBundleInjectable;
-use Domain\Account\Scripts\ProcessAccountDeleteRequestsScript;
+use Domain\Account\Frontline\ConfigAccountFrontlineScript;
 
 class AccountBundle extends GenericBundle implements FrontlineBundleInjectable
 {
@@ -15,13 +15,7 @@ class AccountBundle extends GenericBundle implements FrontlineBundleInjectable
     public function getFrontlineScripts(): array
     {
         return [
-            'config' => [
-                'account' => function() {
-                    return [
-                        'delete_account_request_days' => ProcessAccountDeleteRequestsScript::DAYS_TO_ACCEPT_REQUEST
-                    ];
-                }
-            ]
+            ConfigAccountFrontlineScript::class
         ];
     }
 }

@@ -1,8 +1,5 @@
 <?php
-
-
 namespace Domain\Post\Tests\Fixtures;
-
 
 use Application\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
@@ -13,26 +10,24 @@ use Zend\Expressive\Application;
 
 class DemoCollectionFixture implements Fixture
 {
-  static private $collection;
+    static private $collection;
 
-  static public function getCollection():Collection
-  {
-    return self::$collection;
-  }
-  public function up(Application $app, EntityManager $em){
-    /** @var CollectionService $collectionService */
-    $collectionService = $app->getContainer()->get(CollectionService::class);
+    static public function getCollection():Collection {
+        return self::$collection;
+    }
 
+    public function up(Application $app, EntityManager $em) {
+        $collectionService = $app->getContainer()->get(CollectionService::class); /** @var CollectionService $collectionService */
+        
+        $collectionParameters = (new CreateCollectionParameters(
+            'test',
+            'testDescr',
+            DemoThemeFixtures::getTheme()->getId()
+        ));
 
-    $collectionParameters = (new CreateCollectionParameters('test',
-                                                            'testDescr',
-                                                            DemoThemeFixtures::getTheme()->getId()
-    ));
-
-    self::$collection = $collectionService->createCommunityCollection(
-      DemoCommunityFixture::getCommunity()->getId()
-      ,$collectionParameters);
-  }
-
-
+        self::$collection = $collectionService->createCommunityCollection(
+            DemoCommunityFixture::getCommunity()->getId()
+            , $collectionParameters
+        );
+    }
 }

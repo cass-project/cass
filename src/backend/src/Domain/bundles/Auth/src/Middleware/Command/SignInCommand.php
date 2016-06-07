@@ -1,6 +1,8 @@
 <?php
 namespace Domain\Auth\Middleware\Command;
 
+use Application\Frontline\FrontlineScript;
+use Application\Frontline\Service\FrontlineService\IncludeFilter;
 use Domain\Auth\Formatter\SignInFormatter;
 use Application\REST\Response\GenericResponseBuilder;
 use Domain\Auth\Middleware\Request\SignInRequest;
@@ -15,10 +17,13 @@ class SignInCommand extends Command
         try {
             $request = new SignInRequest($request);
             $account = $this->getAuthService()->signIn($request->getParameters());
+            $frontline = $this->getFrontlineService()->fetch(new IncludeFilter([
+                FrontlineScript::TAG_IS_AUTHENTICATED
+            ]));
 
             $responseBuilder
                 ->setStatusSuccess()
-                ->setJson((new SignInFormatter())->format($account))
+                ->setJson((new SignInFormatter())->format($account, $frontline))
             ;
         }catch(AccountNotFoundException $e) {
             $responseBuilder
