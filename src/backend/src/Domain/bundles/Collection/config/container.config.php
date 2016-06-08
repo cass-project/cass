@@ -13,23 +13,16 @@ use Domain\Collection\Repository\CollectionRepository;
 use Domain\Collection\Service\CollectionService;
 use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Collection\Service\CollectionValidatorsService;
-use Domain\Community\Repository\CommunityRepository;
-use Domain\Profile\Repository\ProfileRepository;
 
 return [
     'php-di' => [
         CollectionRepository::class => factory(new DoctrineRepositoryFactory(Collection::class)),
-        CollectionService::class => object()->constructor(
-            get(CollectionValidatorsService::class),
-            get(CurrentAccountService::class),
-            get(CollectionRepository::class),
-            get(CommunityRepository::class),
-            get(ProfileRepository::class),
-            factory(function(Container $container) {
-                return sprintf('%s/collection/community-image', $container->get('config.storage'));
-            }),
-            '/public/assets/storage/collection/community-image'
-        ),
+        CollectionService::class => object()
+          ->constructorParameter('storageDir', factory(function(Container $container) {
+              return sprintf('%s/collection/community-image', $container->get('config.storage'));
+          }))
+          ->constructorParameter('publicPath','/public/assets/storage/collection/community-image')
+          ,
         CollectionMiddleware::class => object()->constructor(
             get(CollectionService::class),
             get(CurrentAccountService::class)
