@@ -28,7 +28,11 @@ class CollectionService
     /** @var ProfileRepository */
     private $profileRepository;
 
+    /** @var string */
     private $storageDir = '';
+
+    /** @var string */
+    private $publicPath = '';
 
     public function __construct(
         CollectionValidatorsService $collectionValidatorsService,
