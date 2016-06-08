@@ -37,7 +37,7 @@
         </a>
       </div>
     </li>
-    <li class="add-button" *ngIf="isSwitched()">
+    <li class="add-button" *ngIf="isSwitched()" (click)="openCommunityModal()">
       <div class="community-plus">
         <i class="fa fa-plus"></i>
       </div>

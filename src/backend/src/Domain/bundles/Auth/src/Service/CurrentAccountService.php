@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Auth\Service;
 
+use Domain\Auth\Exception\NotAuthenticatedException;
 use Domain\Auth\Middleware\AuthStrategy\Strategy;
 use Domain\Account\Entity\Account;
 use Domain\Account\Exception\AccountNotFoundException;

@@ -21,12 +21,12 @@ class AuthMiddlewareTest extends MiddlewareTestCase
     {
         $json = [
             'email' => 'demo@gmail.com',
-            'password' => '1234',
-            'repeat' => '1234'
+            'password' => '1234'
         ];
 
         $this->requestSignUp($json)
             ->execute()
+            ->dump()
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([
@@ -61,7 +61,6 @@ class AuthMiddlewareTest extends MiddlewareTestCase
         $json = [
             'email' => 'demo@gmail.com',
             'password' => '1234',
-            'repeat' => '1234'
         ];
 
         $request = $this->requestSignUp($json);

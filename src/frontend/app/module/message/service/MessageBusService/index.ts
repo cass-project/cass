@@ -1,8 +1,9 @@
 import {Injectable} from "angular2/core";
-import {Http} from 'angular2/http';
+
 import {MessageBusNotificationsModel} from "../../component/MessageBusNotifications/model";
 import {MessageBusInterface} from "./interface";
 import {MessageBusNotificationsLevel} from "../../component/MessageBusNotifications/model";
+import {MessageBusNotificationsStates} from "../../component/MessageBusNotifications/model";
 
 @Injectable()
 export class MessageBusService implements MessageBusInterface
@@ -11,31 +12,44 @@ export class MessageBusService implements MessageBusInterface
 
     private autoIncrementIndex:number = 0;
     private maxNotifications:number = 3;
-    private notificationDelay:number = 5 /*sec*/ * 1000 /*ms*/;
+    private notificationDelay:number = 12 /*sec*/ * 1000 /*ms*/;
 
-    constructor(private http:Http) {}
+    push(level: MessageBusNotificationsLevel, message: string) {
 
-    push(level: MessageBusNotificationsLevel, message: string) : MessageBusNotificationsModel[] {
         let notification:MessageBusNotificationsModel = {
             id: this.autoIncrementIndex++,
             level: level,
-            date: new Date(),
             message: message,
+            state: MessageBusNotificationsStates.Showing,
+            timeout: setTimeout(() => {
+                this.hidding(notification);
+            }, this.notificationDelay)
         };
 
         this.notifications.push(notification);
 
-        if(this.notifications.length > 3) {
-            this.notifications.splice(0, this.notifications.length-3);
+        while(this.getNotifications().length > this.maxNotifications) {
+            this.remove(this.getNotifications()[0]);
         }
 
-        setTimeout(()=> {
-            this.notifications = this.notifications.filter((input) => {
-                return input.id !== notification.id;
-            });
-        }, this.notificationDelay);
-
         return this.notifications;
+    }
+
+    remove(notification) {
+        clearTimeout(notification.timeout);
+        delete this.notifications[this.notifications.indexOf(notification)];
+    }
+
+    hidding(notification){
+        let i = this.notifications.indexOf(notification);
+        this.notifications[i].state = MessageBusNotificationsStates.Hidding;
+        this.notifications[i].timeout = setTimeout(() => {
+            this.remove(notification);
+        }, 300);
+    }
+
+    getNotifications() : MessageBusNotificationsModel[] {
+        return this.notifications.filter((input) => { return input !== undefined; })
     }
 
     debug(json: Object) {

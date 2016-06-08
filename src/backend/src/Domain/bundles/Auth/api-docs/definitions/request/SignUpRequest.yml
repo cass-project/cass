@@ -3,14 +3,10 @@ Auth_SignUp_Request:
   required:
     - email
     - password
-    - repeat
   properties:
     email:
       type: string
       description: E-mail пользователя
     password:
-      type: string
-      description: Пароль
-    repeat:
       type: string
       description: Пароль

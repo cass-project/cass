@@ -1,0 +1,20 @@
+"/colors/get-colors/":
+  get:
+    tags:
+      - colors
+    description:
+      Список всех доступных цветов
+    responses:
+      200:
+        schema:
+          required:
+            - success
+            - colors
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            colors:
+              type: array
+              items:
+                $ref: '#/definitions/Colors_Entity_Color'

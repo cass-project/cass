@@ -1,0 +1,13 @@
+Colors_Entity_Color:
+  type: object
+  description: Цвет
+  required:
+    - code
+    - hexCode
+  properties:
+    code:
+      type: string
+      description: Код ("red", "yellow", "blue-grey", ...)
+    hexCode:
+      type: string
+      description: HEX-код цвета ("#FFFFFF")

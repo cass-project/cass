@@ -1,6 +1,8 @@
 import {Component} from "angular2/core";
 import {RouterOutlet, RouteConfig} from "angular2/router";
-import {CommunityPage} from "../../component/Page/index";
+import {CommunityComponent} from "../../index";
+import {CommunityPage} from "../CommunityPageRoute/index";
+import {CommunityMenuComponent} from "../../component/Menu/index";
 
 @Component({
     selector: "community-router",
@@ -9,16 +11,22 @@ import {CommunityPage} from "../../component/Page/index";
         require('./style.shadow.scss')
     ],
     directives: [
-        RouterOutlet
+        RouterOutlet,
+        CommunityMenuComponent
     ]
 })
 
 @RouteConfig([
     {
+        name: 'CommunityLanding',
+        path: '/',
+        component: CommunityComponent,
+        useAsDefault: true
+    },
+    {
         name: 'CommunityPage',
         path: '/id/:sid',
         component: CommunityPage,
-        useAsDefault: true
     }
 ])
 

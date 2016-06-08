@@ -24,7 +24,7 @@ class IsFrontlineAliveTest extends MiddlewareTestCase
     }
 
     public function testNoExceptionsPlease() {
-        $this->request('GET', '/frontline')
+        $this->request('GET', '/frontline/*/')
             ->execute()
             ->expectStatusCode(200)
             ->expectJSONContentType()
@@ -35,7 +35,7 @@ class IsFrontlineAliveTest extends MiddlewareTestCase
         $account = DemoAccountFixture::getAccount();
         $profile = DemoProfileFixture::getProfile();
 
-        $this->request('GET', '/frontline')
+        $this->request('GET', '/frontline/*/')
             ->auth($account->getAPIKey())
             ->execute()
             ->expectStatusCode(200)

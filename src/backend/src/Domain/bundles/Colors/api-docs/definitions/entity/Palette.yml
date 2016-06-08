@@ -1,0 +1,23 @@
+Colors_Entity_Palette:
+  type: object
+  description: Палитра
+  required:
+    - background
+    - foreground
+    - border
+  properties:
+    background:
+      type: object
+      description: Цвет 1, Background (depth 500)
+      schema:
+        $ref: '#/definitions/Colors_Entity_Color'
+    foreground:
+      type: object
+      description: Цвет 2, Foreground (depth 50)
+      schema:
+        $ref: '#/definitions/Colors_Entity_Color'
+    border:
+      type: object
+      description: Цвет 3, Border (depth 900)
+      schema:
+        $ref: '#/definitions/Colors_Entity_Color'

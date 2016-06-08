@@ -1,7 +1,8 @@
 export class MessageBusNotificationsModel {
     id:number;
     level:MessageBusNotificationsLevel;
-    date:Date = new Date();
+    state:MessageBusNotificationsStates = MessageBusNotificationsStates.Showing;
+    timeout:number;
     message:string;
 }
 
@@ -10,4 +11,9 @@ export enum MessageBusNotificationsLevel {
     Warning = <any>"warning",
     Info = <any>"info",
     Debug = <any>"debug",
+}
+
+export enum MessageBusNotificationsStates {
+    Showing = <any>"showing",
+    Hidding = <any>"hidding"
 }

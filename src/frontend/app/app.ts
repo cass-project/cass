@@ -22,6 +22,8 @@ import {ModalService} from "./module/modal/component/service";
 import {CommunityRoute} from "./module/community/route/CommunityRoute/index";
 import {MessageBusService} from "./module/message/service/MessageBusService/index";
 import {MessageBusNotifications} from "./module/message/component/MessageBusNotifications/index";
+import {HtmlComponent} from "./module/html/index";
+import {CommunityService} from "./module/community/service/CommunityService";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -34,6 +36,7 @@ import {MessageBusNotifications} from "./module/message/component/MessageBusNoti
         ProfileComponentService,
         CommunityComponentService,
         CommunityRESTService,
+        CommunityService,
         ThemeService,
         ProfileSwitcherService,
         ProfileRESTService
@@ -56,6 +59,11 @@ import {MessageBusNotifications} from "./module/message/component/MessageBusNoti
         path: '/',
         component: LandingComponent,
         useAsDefault: true
+    },
+    {
+        name: 'Html',
+        path: '/html/...',
+        component: HtmlComponent,
     },
     {
         name: 'Profile',

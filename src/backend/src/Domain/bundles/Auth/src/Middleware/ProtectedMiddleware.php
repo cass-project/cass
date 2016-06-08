@@ -6,7 +6,7 @@ use Domain\Auth\Middleware\AuthStrategy\HeaderStrategy;
 use Domain\Auth\Middleware\AuthStrategy\JSONBodyStrategy;
 use Domain\Auth\Middleware\AuthStrategy\SessionStrategy;
 use Domain\Auth\Service\CurrentAccountService;
-use Domain\Auth\Service\NotAuthenticatedException;
+use Domain\Auth\Exception\NotAuthenticatedException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

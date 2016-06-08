@@ -1,0 +1,37 @@
+@import "./../../../../styles/globals";
+
+$CASS_COMMUNITY_MENU_WIDTH: 230px;
+
+div.community-menu {
+  position: relative;
+  background-color: white;
+  width: $CASS_COMMUNITY_MENU_WIDTH;
+
+  >div.backdrop {
+    position: fixed;
+    top: 0; height: 100%;
+    width: $CASS_COMMUNITY_MENU_WIDTH;
+    background-color: white;
+    z-index: 100;
+
+    .community-settings{
+      z-index: 101;
+      position:absolute; bottom:10px; right:10px; cursor: pointer;
+      font-size:30px;
+      color: material-color('blue-grey', '400');
+      transition: all 500ms;
+    }
+
+    .community-settings:hover {
+      color: material-color('blue-grey', '900');
+    }
+
+  }
+
+  >div.community-menu-contents {
+    position: relative;
+    z-index: 101;
+  }
+
+}
+

@@ -1,7 +1,7 @@
 <div class="container">
     <ul class="notifications">
         <li *ngFor="#notification of messageBusService.notifications;">
-            <div class="message {{notification.level}}">{{notification.message}}</div>
+            <div *ngIf="notification" class="message {{notification.level}} {{notification.state}}">{{notification.message}}</div>
         </li>
     </ul>
 </div>
