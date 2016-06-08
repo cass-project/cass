@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from "angular2/core";
+/*import {Component, Input, Output, EventEmitter} from "angular2/core";
 import {FrontlineService} from "../../../frontline/service";
 
 @Component({
@@ -7,9 +7,37 @@ import {FrontlineService} from "../../../frontline/service";
 })
 export class ColorPicker
 {
-    constructor(private frontline: FrontlineService){}
+     constructor(private frontline: FrontlineService){}
 
     @Input ('value') percent: number = 0;
     @Input ('allow-none') color: string = 'black';
-    @Output ('change') change: any;
+    @Output ('change') change = new EventEmitter();
+}*/
+
+import {Component} from "angular2/core";
+import {FrontlineService} from "../../../frontline/service";
+import {Palette} from "../../../util/definitions/palette";
+
+
+@Component({
+    selector: 'colorPicker',
+    template: require('./template.jade'),
+    styles: [
+        require('./style.shadow.scss')
+    ]
+})
+export class ColorPicker
+{
+
+private palettes: Palette[] = [];
+
+constructor(frontline: FrontlineService) {
+    let colors = frontline.session.config.colors;
+
+    for(let n in colors) {
+        if(colors.hasOwnProperty(n)) {
+            this.palettes.push(colors[n]);
+        }
+    }
+}
 }
