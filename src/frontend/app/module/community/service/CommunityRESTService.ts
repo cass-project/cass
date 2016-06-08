@@ -1,12 +1,9 @@
 import {Injectable} from "angular2/core";
-import {Http} from 'angular2/http';
-import {UploadImageCropModel} from "../../util/component/UploadImage/strategy";
+import {Http, Response, ResponseType, ResponseOptions, Headers} from "angular2/http";
 import {Observable} from "rxjs/Observable";
-import {Response} from "angular2/http";
-import {ResponseOptions} from "angular2/http";
-import {ResponseType} from "angular2/http";
-import {Headers} from "angular2/http";
 import {getResponseURL} from "angular2/src/http/http_utils";
+
+import {UploadImageCropModel} from "../../util/component/UploadImage/strategy";
 
 @Injectable()
 export class CommunityRESTService

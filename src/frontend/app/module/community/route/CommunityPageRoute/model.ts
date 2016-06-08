@@ -1,3 +1,11 @@
+export class CommunityResponseModel {
+    access: {
+        admin: boolean
+    };
+    entity: CommunityModel;
+    success: boolean;
+}
+
 export class CommunityModel {
     id: number;
     sid: string;

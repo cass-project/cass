@@ -23,6 +23,7 @@ import {CommunityRoute} from "./module/community/route/CommunityRoute/index";
 import {MessageBusService} from "./module/message/service/MessageBusService/index";
 import {MessageBusNotifications} from "./module/message/component/MessageBusNotifications/index";
 import {HtmlComponent} from "./module/html/index";
+import {CommunityService} from "./module/community/service/CommunityService";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -35,6 +36,7 @@ import {HtmlComponent} from "./module/html/index";
         ProfileComponentService,
         CommunityComponentService,
         CommunityRESTService,
+        CommunityService,
         ThemeService,
         ProfileSwitcherService,
         ProfileRESTService
