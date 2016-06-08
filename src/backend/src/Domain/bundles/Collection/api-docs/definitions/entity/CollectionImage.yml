@@ -1,0 +1,7 @@
+Collection_Entity_CollectionImage:
+  required:
+    - public_path
+  properties:
+    public_path:
+      type: string
+      description: Путь к картинке

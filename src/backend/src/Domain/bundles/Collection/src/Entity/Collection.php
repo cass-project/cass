@@ -3,6 +3,7 @@ namespace Domain\Collection\Entity;
 
 use Application\Util\IdTrait;
 use Application\Util\JSONSerializable;
+use Domain\Collection\Entity\Collection\CollectionImage;
 use Domain\Community\Entity\Community;
 use Domain\Profile\Entity\Profile;
 use Domain\Theme\Entity\Theme;
@@ -39,6 +40,12 @@ class Collection implements JSONSerializable
      * @var string
      */
     private $description;
+
+    /**
+     * @Column(type="json_array", name="image")
+     * @var array
+     */
+    private $image = [];
 
     public function __construct(string $ownerSID, string $title, string $description, Theme $theme = null)
     {
@@ -109,4 +116,30 @@ class Collection implements JSONSerializable
         $this->ownerSID = sprintf('community:%d', $communityId);
         return $this;
     }
+
+    public function clearImage() {
+        $this->image = [];
+    }
+
+    public function setImage(CollectionImage $communityImage) {
+        $this->image = [
+          'storage_path' => $communityImage->getStoragePath(),
+          'public_path' => $communityImage->getPublicPath()
+        ];
+    }
+
+    public function getImage(): CollectionImage {
+        if($this->hasImage()) {
+            return new CollectionImage($this->image['storage_path'], $this->image['public_path']);
+        }else{
+            throw new \Exception(sprintf('No image available for community `%s`', ($this->isPersisted() ? $this->getId() : '#NEW_COLLECTION')));
+        }
+    }
+
+    public function hasImage() {
+        return isset($this->image['storage_path'])
+               && is_string($this->image['storage_path'])
+               && file_exists($this->image['storage_path']);
+    }
+
 }

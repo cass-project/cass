@@ -6,6 +6,8 @@ use Domain\Collection\Entity\Collection;
 use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Parameters\EditCollectionParameters;
 use Domain\Collection\Repository\CollectionRepository;
+use Domain\Collection\Scripts\CollectionImageUploadScript;
+use Domain\Community\Parameters\UploadImageParameters;
 use Domain\Community\Repository\CommunityRepository;
 use Domain\Profile\Repository\ProfileRepository;
 
@@ -25,6 +27,8 @@ class CollectionService
 
     /** @var ProfileRepository */
     private $profileRepository;
+
+    private $storageDir = '';
 
     public function __construct(
         CollectionValidatorsService $collectionValidatorsService,
@@ -99,5 +103,22 @@ class CollectionService
         }
 
         return $this->collectionRepository->editCollection($collectionId, $parameters);
+    }
+
+    public function uploadCollectoinImage(int $collectionId, UploadImageParameters $parameters): Collection
+    {
+        $collection = $this->collectionRepository->getCollectionById($collectionId);
+        $uploadScript = new CollectionImageUploadScript($this->storageDir);
+
+        $params = $uploadScript->__invoke($collectionId,$parameters->getTmpFile(),$parameters->getPointStart(),$parameters->getPointEnd());
+
+        $collection->setImage(
+          new Collection\CollectionImage(
+                                $params['path'],
+                                sprintf('%s/%d/%s', $this->publicPath, $params['id'], $params['file'])
+                              )
+        );
+
+        $this->collectionRepository->saveCollection($collection);
     }
 }
