@@ -8,6 +8,7 @@ import {ProfileSetup} from "./component/ProfileSetup/index";
 import {AuthService} from "../auth/service/AuthService";
 import {Profile} from "./entity/Profile";
 import {ModalBoxComponent} from "../modal/component/box/index";
+import {CreteCollectionMaster} from "../collection/component/CreateCollectionMaster/index";
 
 @Component({
     selector: 'cass-profile',
@@ -17,7 +18,8 @@ import {ModalBoxComponent} from "../modal/component/box/index";
         ModalBoxComponent,
         ProfileModal,
         ProfileSwitcher,
-        ProfileSetup
+        ProfileSetup,
+        CreteCollectionMaster
     ]
 })
 export class ProfileComponent
