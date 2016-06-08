@@ -1,0 +1,15 @@
+article.delete-me-im-demo
+  // Вариант 1: бесконечная загрузка (type: infinite, defaults)
+  article.delete-me-im-demo
+    .progress-bar.progress-bar-infinite([style.width.px]='550',[style.height.px]='10')
+      .progress-bar-value
+
+  // Вариант 2: процентная загрузка (type: percent), 45%
+  article.delete-me-im-demo
+    .progress-bar.progress-bar-percent([style.width.px]='550', [style.height.px] = '10')
+      .progress-bar-value([style.width.%]='progress_d1')
+
+  // Вариант 3: процентная загрузка (type: percent), 45%, цвет: red
+  article.delete-me-im-demo
+    .progress-bar.progress-bar-red.progress-bar-percent([style.width.px]='550', [style.height.px] = '10')
+      .progress-bar-value([style.width.%]='progress_d2')

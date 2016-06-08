@@ -3,6 +3,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from "angular2/router";
 import {Nothing} from "../util/component/Nothing/index";
 import {ColorPickerDemo} from "./demo/ColorPickerDemo/index";
 import {CollectionCreateMasterDemo} from "./demo/CollectionCreateMasterDemo/index";
+import {ProgressBarDemo} from "./demo/ProgressBarDemo/index";
 
 @Component({
     template: require('./template.jade'),
@@ -26,6 +27,11 @@ import {CollectionCreateMasterDemo} from "./demo/CollectionCreateMasterDemo/inde
         name: 'CollectionCreateMasterDemo',
         path: '/collection-create-master',
         component: CollectionCreateMasterDemo
+    },
+    {
+        name: 'ProgressBarDemo',
+        path: '/progress-bar-demo',
+        component: ProgressBarDemo
     }
 ])
 export class HtmlComponent
