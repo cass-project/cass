@@ -39,13 +39,17 @@ class CollectionService
         CurrentAccountService $currentAccountService,
         CollectionRepository $collectionRepository,
         CommunityRepository $communityRepository,
-        ProfileRepository $profileRepository
+        ProfileRepository $profileRepository,
+        string $storageDir,
+        string $publicPath
     ) {
         $this->validationService = $collectionValidatorsService;
         $this->currentAccountService = $currentAccountService;
         $this->collectionRepository = $collectionRepository;
         $this->communityRepository = $communityRepository;
         $this->profileRepository = $profileRepository;
+        $this->storageDir = $storageDir;
+        $this->publicPath = $publicPath;
     }
 
     public function createCommunityCollection(int $communityId, CreateCollectionParameters $parameters): Collection
@@ -123,6 +127,6 @@ class CollectionService
                               )
         );
 
-        $this->collectionRepository->saveCollection($collection);
+        return $this->collectionRepository->saveCollection($collection);
     }
 }

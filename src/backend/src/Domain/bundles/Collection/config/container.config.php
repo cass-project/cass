@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Collection;
 
+use DI\Container;
 use function DI\object;
 use function DI\factory;
 use function DI\get;
@@ -23,7 +24,11 @@ return [
             get(CurrentAccountService::class),
             get(CollectionRepository::class),
             get(CommunityRepository::class),
-            get(ProfileRepository::class)
+            get(ProfileRepository::class),
+            factory(function(Container $container) {
+                return sprintf('%s/collection/community-image', $container->get('config.storage'));
+            }),
+            '/public/assets/storage/collection/community-image'
         ),
         CollectionMiddleware::class => object()->constructor(
             get(CollectionService::class),

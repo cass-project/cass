@@ -300,6 +300,7 @@ class CollectionAPITest extends MiddlewareTestCase
         $this->requestUploadImage($collection->getId(), new Point(0, 0), new Point(200, 200))
              ->auth(DemoAccountFixture::getAccount()->getAPIKey())
              ->execute()
+            ->dump()
              ->expectJSONContentType()
              ->expectStatusCode(200)
              ->expectJSONBody([
@@ -310,7 +311,7 @@ class CollectionAPITest extends MiddlewareTestCase
                               ]);
     }
 
-    /*public function testUploadImageTooBig()
+    public function testUploadImageTooBig()
     {
         $this->upFixture(new SampleCollectionsFixture());
 
@@ -322,7 +323,7 @@ class CollectionAPITest extends MiddlewareTestCase
              ->expectJSONContentType()
              ->expectStatusCode(422)
              ->expectJSONError();
-    }*/
+    }
 
     private function requestCreateCommunityCollection(int $communityId, array $json): RESTRequest
     {

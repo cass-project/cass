@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Collection\Middleware\Command;
 
+use Application\REST\Response\ResponseBuilder;
 use Domain\Collection\Service\CollectionService;
 use Application\Exception\CommandNotFoundException;
 use Psr\Http\Message\ServerRequestInterface;
@@ -49,5 +50,5 @@ abstract class Command
         }
     }
 
-    abstract public function run(ServerRequestInterface $request);
+    abstract public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder);
 }
