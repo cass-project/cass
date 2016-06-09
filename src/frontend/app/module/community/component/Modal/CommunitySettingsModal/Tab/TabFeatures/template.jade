@@ -1,6 +1,6 @@
 .community-settings-modal-tab-features
   .input-group
-    label.form-label.cass-padding-box-10([ngClass]='{disabled: feature.disabled}', *ngFor='#feature of model.features;')
+    label.form-label.cass-padding-box-10([ngClass]='{disabled: feature.disabled}', *ngFor='#feature of features;')
       span.label-text
         input([(ngModel)]='feature.is_activated', type='checkbox', [disabled]='feature.disabled')
         span {{featuresService.getName(feature.code)}}

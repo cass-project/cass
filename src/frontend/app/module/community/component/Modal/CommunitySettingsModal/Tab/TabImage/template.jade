@@ -1,0 +1,6 @@
+.input-group
+  label.form-label(for='CommunityImageUpload')
+    .form-button.form-button-primary Выберите файл
+  input#CommunityImageUpload(style='display:none', type='file', (change)='onFileChange($event)')
+.input-group(*ngIf='cropper.file')
+  cass-image-cropper

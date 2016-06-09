@@ -1,6 +1,9 @@
 import {Component} from "angular2/core";
+
 import {CommunityCreateModalModel} from "../../../CommunityCreateModal/model";
 import {CommunityFeaturesService} from "../../../../../service/CommunityFeaturesService";
+import {CommunityModel} from "../../../../../model";
+import {CommunityFeaturesModel} from "../../../CommunityCreateModal/model";
 
 @Component({
     selector: 'cass-community-settings-modal-tab-features',
@@ -12,16 +15,16 @@ import {CommunityFeaturesService} from "../../../../../service/CommunityFeatures
 
 export class FeaturesTab {
 
-    constructor(public model: CommunityCreateModalModel, private featuresService: CommunityFeaturesService) {
-        if(!this.model.features.length) {
-            for(let feature of featuresService.getFeatures()) {
-                this.model.features.push({
-                    "code": feature.code,
-                    "is_activated": false,
-                    "disabled": featuresService.isDisabled(feature.code)
-                });
-            }
+    private features:CommunityFeaturesModel[] = [];
+
+    constructor(public model: CommunityModel, private featuresService: CommunityFeaturesService) {
+
+        for(let feature of featuresService.getFeatures()) {
+            this.features.push({
+                "code" : feature.code,
+                "is_activated" : false,
+                "disabled": featuresService.isDisabled(feature.code)
+            });
         }
     }
-
 }

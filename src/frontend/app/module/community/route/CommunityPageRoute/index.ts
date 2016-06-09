@@ -1,12 +1,14 @@
 import {Component} from "angular2/core";
 import {RouteParams, Router} from "angular2/router";
 
-import {CommunityModel} from "./model";
+import {CommunityModel} from "./../../model";
 import {CommunityService} from "../../service/CommunityService";
 import {ModalComponent} from "../../../modal/component/index";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
 import {ProfileMenuComponent} from "../../../profile/component/ProfileMenu/index";
 import {LoadingLinearIndicator} from "../../../util/component/LoadingLinearIndicator/index";
+import {ModalControl} from "../../../util/classes/ModalControl";
+import {CommunityComponentService} from "../../service";
 
 @Component({
     selector: "community-page",
@@ -27,7 +29,8 @@ export class CommunityPage
 
     constructor(
         private routeParams: RouteParams,
-        private service: CommunityService
+        private service: CommunityService,
+        private modalsService: CommunityComponentService
     ){}
 
     ngOnInit() {

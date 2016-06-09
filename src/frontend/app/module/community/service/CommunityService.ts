@@ -2,8 +2,7 @@ import {Injectable} from "angular2/core";
 import {Observable} from "rxjs/Observable";
 
 import {CommunityRESTService} from "./CommunityRESTService";
-import {CommunityModel} from "../route/CommunityPageRoute/model";
-import {CommunityResponseModel} from "../route/CommunityPageRoute/model";
+import {CommunityModel, CommunityResponseModel} from "../model";
 
 
 @Injectable()
