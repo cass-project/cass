@@ -11,7 +11,7 @@ import {MessageBusNotificationsLevel} from "../../../message/component/MessageBu
         require('./style.shadow.scss')
     ]
 })
-export class ProfileIDRoute
+export class ProfileIDCollectionsRoute
 {
     constructor(private messageBus: MessageBusService, params: RouteParams){
         this.sid = params.get('sid');

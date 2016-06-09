@@ -1,7 +1,8 @@
 import {Component} from "angular2/core";
-import {RouteConfig, RouterOutlet} from "angular2/router";
+import {RouteConfig, RouterOutlet, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteParams} from "angular2/router";
 import {MessageBusService} from "../../../message/service/MessageBusService/index";
 import {AuthService} from "../../../auth/service/AuthService";
+import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 
 
 @Component({
@@ -10,13 +11,19 @@ import {AuthService} from "../../../auth/service/AuthService";
         require('./style.shadow.scss')
     ]
 })
-export class ProfileCurrent
+export class ProfileCurrentCollectionsRoute
 {
-    constructor(private messageBus: MessageBusService){}
+    constructor(private messageBus: MessageBusService, params: RouteParams){
+        this.getSignIn();
+        this.sid = params.get('sid');
+        console.log(this.sid);
+    }
 
-    //getSignIn(){
-    //    if(!AuthService.isSignedIn()){
-    //        this.messageBus.push(info, "Вы не авторизованы");
-    //    }
-    //}
+    sid: string;
+
+    getSignIn(){
+        if(!AuthService.isSignedIn()){
+            this.messageBus.push(MessageBusNotificationsLevel.Info, "Вы не авторизованы");
+        }
+    }
 }
