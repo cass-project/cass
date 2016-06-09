@@ -49,7 +49,9 @@ class CommunityService
             $owner->getId(),
             $parameters->getTitle(),
             $parameters->getDescription(),
-            $this->themeRepository->getThemeById($parameters->getThemeId())
+            $parameters->hasThemeId()
+                ? $this->themeRepository->getThemeById($parameters->getThemeId())
+                : null
         );
 
         $this->communityRepository->createCommunity($entity);
@@ -61,7 +63,12 @@ class CommunityService
         $community = $this->communityRepository->getCommunityById($communityId);
         $community->setTitle($parameters->getTitle());
         $community->setDescription($parameters->getDescription());
-        $community->setTheme($this->themeRepository->getThemeById($parameters->getThemeId()));
+
+        if($parameters->hasThemeId()) {
+            $community->setTheme($this->themeRepository->getThemeById($parameters->getThemeId()));
+        }else{
+            $community->unsetTheme();
+        }
 
         $this->communityRepository->saveCommunity($community);
 

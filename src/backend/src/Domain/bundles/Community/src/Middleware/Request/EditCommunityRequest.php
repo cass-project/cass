@@ -15,7 +15,7 @@ class EditCommunityRequest extends SchemaParams
         return new EditCommunityParameters(
             $data->title,
             $data->description,
-            (int) $data->theme_id
+            isset($data->theme_id) ? (int) $data->theme_id : null
         );
     }
 

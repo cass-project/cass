@@ -42,10 +42,47 @@ class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
             ->expectStatusCode(200)
             ->expectJSONBody([
                 'success' => true,
-                'entity' => array_merge_recursive([
+                'entity' => [
                     'id' => $this->expectId(),
-                    'sid' => $this->expectString()
-                ], $json)
+                    'sid' => $this->expectString(),
+                    'title' => 'Community 1',
+                    'description' => 'My Community 1',
+                    'theme' => [
+                        'has' => true,
+                        'id' => $theme->getId()
+                    ]
+                ]
+            ])
+            ->expect(function(array $result) {
+                $sid = $result['entity']['sid'];
+
+                $this->assertEquals(Community::SID_LENGTH, strlen($sid));
+            });
+    }
+
+    public function testCreateCommunityWithoutTheme()
+    {
+        $json = [
+            'title' => 'Community 1',
+            'description' => 'My Community 1'
+        ];
+
+        $this->requestCreateCommunity($json)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(200)
+            ->expectJSONBody([
+                'success' => true,
+                'entity' => [
+                    'id' => $this->expectId(),
+                    'sid' => $this->expectString(),
+                    'title' => 'Community 1',
+                    'description' => 'My Community 1',
+                    'theme' => [
+                        'has' => false,
+                    ]
+                ]
             ])
             ->expect(function(array $result) {
                 $sid = $result['entity']['sid'];
@@ -90,7 +127,70 @@ class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
                 'entity' => [
                     'title' => '* title_edited',
                     'description' => '* description_edited',
-                    'theme_id' => $moveToTheme->getId()
+                    'theme' => [
+                        'has' => true,
+                        'id' => $moveToTheme->getId()
+                    ]
+                ]
+            ]);
+    }
+
+    public function testEditCommunityWithoutTheme()
+    {
+        $this->upFixture(new SampleCommunitiesFixture());
+
+        $sampleCommunity = SampleCommunitiesFixture::getCommunity(2);
+        $moveToTheme = SampleThemesFixture::getTheme(5);
+
+        $this->requestEditCommunity($sampleCommunity->getId(), [
+            'title' => '* title_edited',
+            'description' => '* description_edited',
+        ])->auth(DemoAccountFixture::getAccount()->getAPIKey())->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(200)
+            ->expectJSONBody([
+                'success' => true,
+                'entity' => [
+                    'title' => '* title_edited',
+                    'description' => '* description_edited',
+                    'theme' => [
+                        'has' => false,
+                    ]
+                ]
+            ]);
+    }
+
+    public function testSetTheme()
+    {
+        $this->upFixture(new SampleCommunitiesFixture());
+
+        $sampleCommunity = SampleCommunitiesFixture::getCommunity(2);
+        $moveToTheme = SampleThemesFixture::getTheme(5);
+
+        $this->requestEditCommunity($sampleCommunity->getId(), [
+            'title' => '* title_edited',
+            'description' => '* description_edited',
+        ])->auth(DemoAccountFixture::getAccount()->getAPIKey())->execute()
+            ->expectJSONContentType()
+            ->dump()
+            ->expectStatusCode(200);
+
+        $this->requestEditCommunity($sampleCommunity->getId(), [
+            'title' => '* title_edited',
+            'description' => '* description_edited',
+            'theme_id' => $moveToTheme->getId()
+        ])->auth(DemoAccountFixture::getAccount()->getAPIKey())->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(200)
+            ->expectJSONBody([
+                'success' => true,
+                'entity' => [
+                    'title' => '* title_edited',
+                    'description' => '* description_edited',
+                    'theme' => [
+                        'has' => true,
+                        'id' => $moveToTheme->getId()
+                    ]
                 ]
             ]);
     }
@@ -110,7 +210,10 @@ class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
                 'entity' => [
                     'title' => $sampleCommunity->getTitle(),
                     'description' => $sampleCommunity->getDescription(),
-                    'theme_id' => $sampleCommunity->getTheme()->getId()
+                    'theme' => [
+                        'has' => true,
+                        'id' => $sampleCommunity->getTheme()->getId()
+                    ]
                 ]
         ]);
     }
@@ -174,7 +277,10 @@ class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
                 'entity' => [
                     'title' => $sampleCommunity->getTitle(),
                     'description' => $sampleCommunity->getDescription(),
-                    'theme_id' => $sampleCommunity->getTheme()->getId(),
+                    'theme' => [
+                        'has' => true,
+                        'id' => $sampleCommunity->getTheme()->getId()
+                    ],
                 ],
                 'access' => [
                     'admin' => true

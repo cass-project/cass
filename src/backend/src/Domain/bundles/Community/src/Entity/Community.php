@@ -47,7 +47,7 @@ class Community
     /**
      * @ManyToOne(targetEntity="Domain\Theme\Entity\Theme")
      * @JoinColumn(name="theme_id", referencedColumnName="id")
-     * @var Theme
+     * @var Theme|null
      */
     private $theme;
 
@@ -72,7 +72,19 @@ class Community
     /** @var CommunityFeatures */
     private $featuresHandler;
 
-    public function __construct(int $creatorAccountId, string $title, string $description, Theme $theme)
+    /**
+     * @Column(type="boolean", name="public_enabled")
+     * @var bool
+     */
+    private $publicEnabled = true;
+
+    /**
+     * @Column(type="boolean", name="public_moderation_contract")
+     * @var bool
+     */
+    private $publicModerationContract = false;
+
+    public function __construct(int $creatorAccountId, string $title, string $description, Theme $theme = null)
     {
         $this->metadata = [
             'creatorAccountId' => $creatorAccountId
@@ -80,10 +92,11 @@ class Community
         $this->sid = GenerateRandomString::gen(self::SID_LENGTH);
         $this->dateCreatedOn = new \DateTime();
         $this->collections = new CollectionTree();
-        $this
-            ->setTitle($title)
-            ->setDescription($description)
-            ->setTheme($theme);
+        $this->setTitle($title)->setDescription($description);
+
+        if($theme) {
+            $this->setTheme($theme);
+        }
     }
 
     public function toJSON(): array {
@@ -92,11 +105,20 @@ class Community
             'sid' => $this->getSID(),
             'date_created_on' => $this->dateCreatedOn->format(\DateTime::RFC2822),
             'title' => $this->getTitle(),
+            'theme' => [
+                'has' => $this->hasTheme(),
+            ],
             'description' => $this->getDescription(),
-            'theme_id' => $this->getTheme()->getId(),
             'has_image' => $this->hasImage(),
             'collections' => $this->collections->toJSON(),
+            'public_options' => [
+
+            ]
         ];
+
+        if($this->hasTheme()) {
+            $result['theme']['id'] = $this->getTheme()->getId();
+        }
 
         if($result['has_image']) {
             $image = $this->getImage();
@@ -142,9 +164,24 @@ class Community
         return $this;
     }
 
+    public function hasTheme(): bool
+    {
+        return $this->theme !== null;
+    }
+
     public function getTheme(): Theme
     {
         return $this->theme;
+    }
+
+    public function unsetTheme(): self
+    {
+        $this->disablePublicDiscover();
+        $this->disableModerationContract();
+
+        $this->theme = null;
+
+        return $this;
     }
 
     public function setTheme(Theme $theme): self
@@ -184,6 +221,52 @@ class Community
         }
 
         return $this->featuresHandler;
+    }
+
+    public function isPublicEnabled(): boolean
+    {
+        return $this->publicEnabled;
+    }
+
+    public function enablePublicDiscover(): self
+    {
+        if(! $this->hasTheme()) {
+            throw new \Exception('No theme available');
+        }
+
+        $this->publicEnabled = true;
+
+        return $this;
+    }
+
+    public function disablePublicDiscover(): self
+    {
+        $this->publicEnabled = false;
+
+        return $this;
+    }
+
+    public function isModerationContractEnabled(): boolean
+    {
+        return $this->publicModerationContract;
+    }
+
+    public function enableModerationContract(): self
+    {
+        if(! $this->hasTheme()) {
+            throw new \Exception('No theme available');
+        }
+
+        $this->publicModerationContract = true;
+
+        return $this;
+    }
+
+    public function disableModerationContract(): self
+    {
+        $this->publicModerationContract = false;
+
+        return $this;
     }
 
     public function &getMetadata(): array {

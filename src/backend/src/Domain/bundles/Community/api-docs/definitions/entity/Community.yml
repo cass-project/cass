@@ -5,7 +5,8 @@ Community_Entity_Community:
     - date_created_on
     - title
     - description
-    - theme_id
+    - theme
+    - public_options
     - has_image
     - collections
     - features
@@ -25,9 +26,29 @@ Community_Entity_Community:
     description:
       type: string
       description: Описание (подзаголовок) коммунити
-    theme_id:
-      type: number
-      description: ID тематики
+    theme:
+      type: object
+      required:
+        - has_theme
+      properties:
+        has:
+          type: boolean
+          description: Флаг "есть тема"
+        id:
+          type: number
+          description: ID тематики
+    public_options:
+      type: object
+      required:
+        - enable_public
+        - moderation_contract
+      properties:
+        enable_public:
+          type: boolean
+          description: Коммунити должно отображаться в публичном каталоге
+        moderation_contract:
+          type: boolean
+          description: Коммунити обязалось быть отмодерированным
     has_image:
       type: boolean
       description: Флаг "Есть ли у коммунити изображение"
