@@ -23,15 +23,6 @@ cass-modal
                   [ngClass]="{'tab-link-active': screens.isOn('Features')}"
                 )
                   span Разделы
-          .bottom
-            ul.tab-list
-              li
-                button.tab-link(
-                  (click)="screens.goto('Collections')",
-                  [ngClass]="{'tab-link-active': screens.isOn('Collections')}"
-                )
-                  i.fa.fa-fw.fa-list-alt
-                  span Управление коллекциями
         .tab-content
           .tab-content-container
             form.form.tab.tab-community(*ngIf="screens.isOn('Community')")
@@ -121,8 +112,22 @@ cass-modal
                         i.fa.fa-fw.fa-ban
                         span Отозвать запрос
             form.form.tab.tab-image(*ngIf="screens.isOn('Image')")
-              header.tab-modal-header
-                h1 Изображение
+              .cass-padding-box-15
+                header.tab-modal-header
+                  h1 Изображение
+                .community-image-form
+                  .community-image-container
+                    cass-community-image(border="square", url="/dist/assets/profile-demo.png")
+                  .community-image-controls
+                    button.form-text-button.form-button-text-remove
+                      i.fa.fa-fw.fa-trash
+                      span Удалить
+                    button.form-text-button.form-button-text-remove(disabled)
+                      i.fa.fa-spinner.fa-pulse.fa-fw
+                      span Удалить
+                    button.form-button.form-button-primary
+                      i.fa.fa-fw.fa-upload
+                      span Загрузить другое изображение
             form.form.tab.tab-features(*ngIf="screens.isOn('Features')")
               .cass-padding-box-15
                 header.tab-modal-header
@@ -171,6 +176,12 @@ cass-modal
                 .cass-padding-box-15
                   header.tab-modal-header
                     h1 Коллекции коммунити
+                  table.collections-list
+                    thread
+                      tr
+                        th Название
+                        th Тематика
+
           footer.tab-content-footer
               .left
                 button.form-text-button

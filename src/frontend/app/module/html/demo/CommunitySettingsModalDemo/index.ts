@@ -3,6 +3,7 @@ import {ScreenControls} from "../../../util/classes/ScreenControls";
 import {ModalComponent} from "../../../modal/component/index";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
 import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
+import {CommunityImage} from "../../../community/component/Elements/CommunityImage/index";
 
 enum CommunitySettingsScreen
 {
@@ -35,11 +36,12 @@ let communitySettingsScreenMap = (sc: ScreenControls<CommunitySettingsScreen>) =
         ModalComponent,
         ModalBoxComponent,
         ThemeSelect,
+        CommunityImage,
     ]
 })
 export class CommunitySettingsModalDemo
 {
-    private screens: ScreenControls<CommunitySettingsScreen> = new ScreenControls<CommunitySettingsScreen>(CommunitySettingsScreen.Community, communitySettingsScreenMap);
+    private screens: ScreenControls<CommunitySettingsScreen> = new ScreenControls<CommunitySettingsScreen>(CommunitySettingsScreen.Image, communitySettingsScreenMap);
     private deleteRequest: CommunityDeleteRequestControls = new CommunityDeleteRequestControls();
 }
 
@@ -49,7 +51,6 @@ class CommunityDeleteRequestControls
     public stage: DeleteRequestStage = DeleteRequestStage.NoRequest;
 
     request() {
-        console.log('terqueger');
         this.buttonDisabled = true;
 
         setTimeout(() => {
