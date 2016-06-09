@@ -5,13 +5,19 @@ import {ThemeSelect} from "../theme/component/ThemeSelect/index";
 import {ProfileComponentService} from "../profile/service";
 import {AuthService} from "../auth/service/AuthService";
 import {MessageBusService} from "../message/service/MessageBusService/index";
+import {ModalBoxComponent} from "../modal/component/box/index";
+import {ModalComponent} from "../modal/component/index";
+import {CommunityComponent} from "../community/index";
 
 @Component({
     template: require('./template.html'),
     directives: [
+        ModalComponent,
+        ModalBoxComponent,
         AuthComponent,
         ProfileSetup,
         ThemeSelect,
+        CommunityComponent
     ],
 })
 export class LandingComponent

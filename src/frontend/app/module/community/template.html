@@ -12,4 +12,7 @@
     <div *ngIf="service.modals.create.isOpened()">
         <cass-community-create-modal (close)="service.modals.create.close()"></cass-community-create-modal>
     </div>
+    <div *ngIf="service.modals.settings.isOpened()">
+        <cass-community-settings-modal (close)="service.modals.settings.close()"></cass-community-settings-modal>
+    </div>
 </div>

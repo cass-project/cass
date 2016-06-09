@@ -1,0 +1,32 @@
+.community-settings-modal-tab-general.form
+  header.tab-modal-header
+    h1 Основные
+  .input-group
+    label.form-label
+      span.label-text Название
+      input.form-input(
+        required='',
+        minlength='6',
+        maxlength='30',
+        type="text",
+        placeholder="Название, заголовок коммунити",
+        [(ngModel)]="model.title",
+        #ngControlTitle="ngForm"
+      )
+      .input-error([hidden]="ngControlTitle.valid || ngControlTitle.pristine")
+        | Вы должны обязательно задать название коммунити. В названии коммунити должно быть от шести до тридцати символов.
+  .input-group
+    label.form-label
+      span.label-text Описание
+      input.form-input(
+        [(ngModel)]='model.description',
+        type='text',
+        placeholder='(Опционально) В одну строку про коммунити'
+    )
+
+  .theme-description Тематика вашего коммунити
+    div
+      cass-theme-select(
+        (change)="updateThemeId($event)",
+        multiple="false"
+      )
