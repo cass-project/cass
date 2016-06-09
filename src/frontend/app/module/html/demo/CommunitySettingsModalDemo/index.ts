@@ -2,6 +2,22 @@ import {Component} from "angular2/core";
 import {ScreenControls} from "../../../util/classes/ScreenControls";
 import {ModalComponent} from "../../../modal/component/index";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
+import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
+
+enum CommunitySettingsScreen
+{
+    Community = <any>"Community",
+    Image = <any>"Image",
+    Features = <any>"Features",
+    Collections = <any>"Collection"
+}
+
+enum DeleteRequestStage
+{
+    NoRequest,
+    PendingConfirmation,
+    Confirmed
+}
 
 let communitySettingsScreenMap = (sc: ScreenControls<CommunitySettingsScreen>) => {
     sc.add({ from:  CommunitySettingsScreen.Community, to: CommunitySettingsScreen.Image })
@@ -18,17 +34,47 @@ let communitySettingsScreenMap = (sc: ScreenControls<CommunitySettingsScreen>) =
     directives: [
         ModalComponent,
         ModalBoxComponent,
+        ThemeSelect,
     ]
 })
 export class CommunitySettingsModalDemo
 {
-    private screens: ScreenControls<CommunitySettingsScreen> = new ScreenControls<CommunitySettingsScreen>(CommunitySettingsScreen.Features, communitySettingsScreenMap);
+    private screens: ScreenControls<CommunitySettingsScreen> = new ScreenControls<CommunitySettingsScreen>(CommunitySettingsScreen.Community, communitySettingsScreenMap);
+    private deleteRequest: CommunityDeleteRequestControls = new CommunityDeleteRequestControls();
 }
 
-enum CommunitySettingsScreen
+class CommunityDeleteRequestControls
 {
-    Community = <any>"Community",
-    Image = <any>"Image",
-    Features = <any>"Features",
-    Collections = <any>"Collection"
+    private buttonDisabled: boolean = false;
+    public stage: DeleteRequestStage = DeleteRequestStage.NoRequest;
+
+    request() {
+        console.log('terqueger');
+        this.buttonDisabled = true;
+
+        setTimeout(() => {
+            this.stage = DeleteRequestStage.PendingConfirmation;
+            this.buttonDisabled = false;
+        }, 1000);
+    }
+
+    confirm() {
+        this.stage = DeleteRequestStage.Confirmed;
+    }
+
+    cancel() {
+        this.stage = DeleteRequestStage.NoRequest;
+    }
+
+    isButtonDisabled() {
+        return this.buttonDisabled;
+    }
+
+    isRequested() {
+        return this.stage === DeleteRequestStage.PendingConfirmation;
+    }
+
+    isConfirmed() {
+        return this.stage === DeleteRequestStage.Confirmed;
+    }
 }

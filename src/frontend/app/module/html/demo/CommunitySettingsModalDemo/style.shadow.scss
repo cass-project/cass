@@ -3,13 +3,31 @@
 $MIN_HEIGHT: 500px;
 
 article.component-community-settings-modal {
+  height: 100%;
   min-height: $MIN_HEIGHT;
+
+  div.form-section {
+    margin-bottom: 20px;
+  }
 
   .tab-content {
     min-height: $MIN_HEIGHT;
   }
 
   form.tab-community {
+    header.tab-modal-header {
+      h1 {
+        margin-bottom: 20px;
+      }
+    }
+
+    ul.theme-options {
+      margin: 20px 0;
+
+      li {
+        margin-bottom: 20px;
+      }
+    }
   }
 
   form.tab-image {
@@ -25,28 +43,31 @@ article.component-community-settings-modal {
         margin-bottom: 32px;
       }
     }
+  }
 
-    section.feature {
+  form.tab-collection {
+  }
+
+  .modal-list {
+    $ICON_SIZE: 32px;
+
+    .modal-list-icon-container {
+      display: inline-block;
+      background-color: material-color("grey", "200");
+      color: material-color("grey", "700");
+      width: $ICON_SIZE;
+      height: $ICON_SIZE;
+      text-align: center;
+      font-size: 14px;
+      line-height: $ICON_SIZE;
+      margin-right: 16px;
+      border-radius: 100%;
+    }
+
+    .modal-list-item {
       display: flex;
 
-      div.feature-icon {
-        $ICON_SIZE: 32px;
-
-        div.feature-icon-container {
-          display: inline-block;
-          background-color: material-color("grey", "200");
-          color: material-color("grey", "700");
-          width: $ICON_SIZE;
-          height: $ICON_SIZE;
-          text-align: center;
-          font-size: 14px;
-          line-height: $ICON_SIZE;
-          margin-right: 16px;
-          border-radius: 100%;
-        }
-      }
-
-      div.feature-info {
+      .modal-list-info {
         width: 100%;
 
         h1 {
@@ -70,13 +91,10 @@ article.component-community-settings-modal {
         }
       }
 
-      div.feature-controls {
+      .modal-list-controls {
         width: 70px;
         text-align: right;
       }
     }
-  }
-
-  form.tab-collection {
   }
 }
