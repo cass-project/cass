@@ -1,0 +1,21 @@
+$MIN_HEIGHT: 500px;
+
+article.component-community-settings-modal {
+  min-height: $MIN_HEIGHT;
+
+  .tab-content {
+    min-height: $MIN_HEIGHT;
+  }
+
+  form.tab-community {
+  }
+
+  form.tab-image {
+  }
+
+  form.tab-features {
+  }
+
+  form.tab-collection {
+  }
+}

@@ -1,0 +1,84 @@
+cass-modal
+  cass-modal-box(width="800px")
+    article.component.component-community-settings-modal
+      .tab-modal
+        .tab-panel
+          .top
+            ul.tab-list
+              li
+                button.tab-link(
+                  (click)="screens.goto('Community')"
+                  [ngClass]="{'tab-link-active': screens.isOn('Community')}"
+                )
+                  span Коммунити
+              li
+                button.tab-link(
+                  (click)="screens.goto('Image')"
+                  [ngClass]="{'tab-link-active': screens.isOn('Image')}"
+                )
+                  span Изображение
+              li
+                button.tab-link(
+                  (click)="screens.goto('Features')"
+                  [ngClass]="{'tab-link-active': screens.isOn('Features')}"
+                )
+                  span Разделы
+          .bottom
+            ul.tab-list
+              li
+                button.tab-link(
+                  (click)="screens.goto('Collections')"
+                  [ngClass]="{'tab-link-active': screens.isOn('Collections')}"
+                )
+                  i.fa.fa-fw.fa-list-alt
+                  span Управление коллекциями
+        .tab-content
+          .tab-content-container
+            form.tab.tab-community(*ngIf="screens.isOn('Community')")
+              header.tab-modal-header
+                h1 Основные свойства
+            form.tab.tab-image(*ngIf="screens.isOn('Image')")
+              header.tab-modal-header
+                h1 Изображение
+            form.tab.tab-features(*ngIf="screens.isOn('Features')")
+              .cass-padding-box-15
+                header.tab-modal-header
+                  h1 Разделы
+                ul.features
+                  li
+                    section.feature
+                      .feature-info
+                        h1 Коллекции и ленты сообщений
+                        p Активировав этот модуль, участники и/или модераторы этого коммунити могут создавать подборки контента, постить видео, ссылки, изображения и любые другие материалы.
+                      .feature-controls
+                        label.form-switch-button
+                          input(type="checkbox")
+                          div.form-switch-button-slider
+                  li
+                    section.feature
+                      .feature-info
+                        h1 Форум
+                        p Доска объявлений, система форумов для вашего коммунити.
+                      .feature-controls
+                        label.form-switch-button
+                          input(type="checkbox")
+                          div.form-switch-button-slider
+                  li
+                    section.feature
+                      .feature-info
+                        h1 Коллекции и ленты сообщений
+                        p Активировав этот модуль, участники и/или модераторы этого коммунити могут создавать подборки контента, постить видео, ссылки, изображения и любые другие материалы.
+                      .feature-controls
+                        label.form-switch-button
+                          input(type="checkbox")
+                          div.form-switch-button-slider
+            form.tab.tab-collection(*ngIf="screens.isOn('Collections')")
+                header.tab-modal-header
+                  h1 Коллекции коммунити
+          footer.tab-content-footer
+              .left
+                button.form-text-button
+                  span Закрыть
+              .right
+                button.form-button.form-button-green
+                  span Сохранить
