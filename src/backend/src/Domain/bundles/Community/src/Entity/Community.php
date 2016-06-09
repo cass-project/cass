@@ -7,6 +7,7 @@ use Domain\Collection\Collection\CollectionTree;
 use Domain\Collection\Traits\CollectionOwnerTrait;
 use Domain\Community\Entity\Community\CommunityFeatures;
 use Domain\Community\Entity\Community\CommunityImage;
+use Domain\Community\Exception\CommunityHasNoThemeException;
 use Domain\Theme\Entity\Theme;
 
 /**
@@ -76,7 +77,7 @@ class Community
      * @Column(type="boolean", name="public_enabled")
      * @var bool
      */
-    private $publicEnabled = true;
+    private $publicEnabled = false;
 
     /**
      * @Column(type="boolean", name="public_moderation_contract")
@@ -96,6 +97,7 @@ class Community
 
         if($theme) {
             $this->setTheme($theme);
+            $this->enablePublicDiscover();
         }
     }
 
@@ -112,7 +114,8 @@ class Community
             'has_image' => $this->hasImage(),
             'collections' => $this->collections->toJSON(),
             'public_options' => [
-
+                'public_enabled' => $this->isPublicEnabled(),
+                'moderation_contract' => $this->isModerationContractEnabled(),
             ]
         ];
 
@@ -177,7 +180,6 @@ class Community
     public function unsetTheme(): self
     {
         $this->disablePublicDiscover();
-        $this->disableModerationContract();
 
         $this->theme = null;
 
@@ -223,7 +225,7 @@ class Community
         return $this->featuresHandler;
     }
 
-    public function isPublicEnabled(): boolean
+    public function isPublicEnabled(): bool
     {
         return $this->publicEnabled;
     }
@@ -231,7 +233,7 @@ class Community
     public function enablePublicDiscover(): self
     {
         if(! $this->hasTheme()) {
-            throw new \Exception('No theme available');
+            throw new CommunityHasNoThemeException('No theme available');
         }
 
         $this->publicEnabled = true;
@@ -246,17 +248,13 @@ class Community
         return $this;
     }
 
-    public function isModerationContractEnabled(): boolean
+    public function isModerationContractEnabled(): bool
     {
         return $this->publicModerationContract;
     }
 
     public function enableModerationContract(): self
     {
-        if(! $this->hasTheme()) {
-            throw new \Exception('No theme available');
-        }
-
         $this->publicModerationContract = true;
 
         return $this;

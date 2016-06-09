@@ -50,6 +50,10 @@ class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
                     'theme' => [
                         'has' => true,
                         'id' => $theme->getId()
+                    ],
+                    'public_options' => [
+                        'public_enabled' => true,
+                        'moderation_contract' => false
                     ]
                 ]
             ])
@@ -81,6 +85,10 @@ class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
                     'description' => 'My Community 1',
                     'theme' => [
                         'has' => false,
+                    ],
+                    'public_options' => [
+                        'public_enabled' => false,
+                        'moderation_contract' => false
                     ]
                 ]
             ])
@@ -172,7 +180,6 @@ class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
             'description' => '* description_edited',
         ])->auth(DemoAccountFixture::getAccount()->getAPIKey())->execute()
             ->expectJSONContentType()
-            ->dump()
             ->expectStatusCode(200);
 
         $this->requestEditCommunity($sampleCommunity->getId(), [
@@ -262,28 +269,161 @@ class CommunityMiddlewareTest extends CommunityMiddlewareTestCase
             ->expectJSONError();
     }
 
-    public function getBySID()
+    public function testSetPublicOptions200()
     {
         $this->upFixture(new SampleCommunitiesFixture());
 
         $sampleCommunity = SampleCommunitiesFixture::getCommunity(2);
 
-        $this->requestGetCommunityBySID($sampleCommunity->getSID())
+        $this->requestGetCommunityById($sampleCommunity->getId())
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([
-                'success' => true,
                 'entity' => [
-                    'title' => $sampleCommunity->getTitle(),
-                    'description' => $sampleCommunity->getDescription(),
-                    'theme' => [
-                        'has' => true,
-                        'id' => $sampleCommunity->getTheme()->getId()
-                    ],
-                ],
-                'access' => [
-                    'admin' => true
+                    'id' => $sampleCommunity->getId(),
+                    'public_options' => [
+                        'public_enabled' => true,
+                        'moderation_contract' => false
+                    ]
+                ]
+        ]);
+
+        $this->requestSetPublicOptions($sampleCommunity->getId(), [
+            'public_enabled' => true,
+            'moderation_contract' => true
+        ])->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+        ;
+
+        $this->requestGetCommunityById($sampleCommunity->getId())
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'entity' => [
+                    'id' => $sampleCommunity->getId(),
+                    'public_options' => [
+                        'public_enabled' => true,
+                        'moderation_contract' => true
+                    ]
+                ]
+            ]);
+
+        $this->requestSetPublicOptions($sampleCommunity->getId(), [
+            'public_enabled' => false,
+            'moderation_contract' => false
+        ])->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+        ;
+
+        $this->requestGetCommunityById($sampleCommunity->getId())
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'entity' => [
+                    'id' => $sampleCommunity->getId(),
+                    'public_options' => [
+                        'public_enabled' => false,
+                        'moderation_contract' => false
+                    ]
+                ]
+            ]);
+    }
+
+    public function testSetPublicOptions409()
+    {
+        $id = null;
+        $json = [
+            'title' => 'Community 1',
+            'description' => 'My Community 1'
+        ];
+
+        $this->requestCreateCommunity($json)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(200)
+            ->with(function(array $result) use (&$id) {
+                $id = (int) $result['entity']['id'];
+            })
+        ;
+
+        $this->assertTrue($id > 0);
+
+
+        $this->requestSetPublicOptions($id, [
+            'public_enabled' => false,
+            'moderation_contract' => false
+        ])->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+        ;
+
+
+        $this->requestSetPublicOptions($id, [
+            'public_enabled' => false,
+            'moderation_contract' => true
+        ])->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+        ;
+
+        $this->requestSetPublicOptions($id, [
+            'public_enabled' => true,
+            'moderation_contract' => false
+        ])->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(409)
+            ->expectJSONContentType()
+        ;
+    }
+
+    public function testDoNotResetModerationContract()
+    {
+        $this->upFixture(new SampleCommunitiesFixture());
+
+        $sampleCommunity = SampleCommunitiesFixture::getCommunity(2);
+
+        $this->requestSetPublicOptions($sampleCommunity->getId(), [
+            'public_enabled' => true,
+            'moderation_contract' => true
+        ])->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+        ;
+
+        $this->requestEditCommunity($sampleCommunity->getId(), [
+            'title' => '* title_edited',
+            'description' => '* description_edited',
+        ])->auth(DemoAccountFixture::getAccount()->getAPIKey())->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(200);
+        ;
+
+        $this->requestGetCommunityById($sampleCommunity->getId())
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'entity' => [
+                    'id' => $sampleCommunity->getId(),
+                    'public_options' => [
+                        'public_enabled' => false,
+                        'moderation_contract' => true
+                    ]
                 ]
             ]);
     }

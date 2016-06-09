@@ -1,0 +1,11 @@
+Community_Request_SetPublicOptions:
+  required:
+    - public_enabled
+    - moderation_contract
+  properties:
+    public_enabled:
+      type: boolean
+      description: Включить/отключить исследование этого коммунити агрегатором публичного каталога
+    moderation_contract:
+      type: boolean
+      description: Установить флаг "это общество является модерируемым"

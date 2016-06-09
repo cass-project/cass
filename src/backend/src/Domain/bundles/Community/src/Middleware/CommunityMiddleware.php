@@ -8,6 +8,7 @@ use Domain\Community\Middleware\Command\EditCommand;
 use Domain\Community\Middleware\Command\GetByIdCommand;
 use Domain\Community\Middleware\Command\getBySIDCommand;
 use Domain\Community\Middleware\Command\ImageUploadCommand;
+use Domain\Community\Middleware\Command\SetPublicOptionsCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
@@ -31,6 +32,7 @@ final class CommunityMiddleware implements MiddlewareInterface
             ->attachDirect('image-upload', ImageUploadCommand::class)
             ->attachDirect('get', GetByIdCommand::class)
             ->attachDirect('get-by-sid', getBySIDCommand::class)
+            ->attachDirect('set-public-options', SetPublicOptionsCommand::class)
             ->resolve($request);
 
         return $resolver->run($request, $responseBuilder);

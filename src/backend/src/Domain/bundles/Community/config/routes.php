@@ -36,6 +36,12 @@ return function(Application $app) {
         'community-get-by-sid'
     );
 
+    $app->post(
+        '/community/{communityId}/{command:set-public-options}[/]',
+        CommunityMiddleware::class,
+        'community-set-public-options'
+    );
+
     $app->put(
         '/protected/community/{communityId}/feature/{feature}/{command:activate}[/]',
         CommunityFeaturesMiddleware::class,

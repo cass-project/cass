@@ -43,7 +43,7 @@ Community_Entity_Community:
         - enable_public
         - moderation_contract
       properties:
-        enable_public:
+        public_enabled:
           type: boolean
           description: Коммунити должно отображаться в публичном каталоге
         moderation_contract:
