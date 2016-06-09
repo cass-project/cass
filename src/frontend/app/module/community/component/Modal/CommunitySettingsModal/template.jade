@@ -1,0 +1,50 @@
+cass-modal
+  cass-modal-box(width="800px")
+    article.component.component-community-settings-modal
+      .tab-modal
+        .tab-panel
+          .top
+            ul.tab-list
+              li
+                button.tab-link(
+                  (click)="screens.goto('General')",
+                  [ngClass]="{'tab-link-active': screens.isOn('General')}"
+                )
+                  span Основные
+              li
+                button.tab-link(
+                  (click)="screens.goto('Features')",
+                  [ngClass]="{'tab-link-active': screens.isOn('Features')}"
+                )
+                  span Разделы
+              li
+                button.tab-link(
+                  (click)="screens.goto('Image')",
+                  [ngClass]="{'tab-link-active': screens.isOn('Image')}"
+                )
+                  span Изображение
+
+        .tab-content
+          .tab-content-container
+            .tab-account(*ngIf="screens.isOn('General')")
+              cass-community-settings-modal-tab-general
+          .tab-content-container
+            .tab-account(*ngIf="screens.isOn('Features')")
+              cass-community-settings-modal-tab-features
+          .tab-content-container
+            .tab-account(*ngIf="screens.isOn('Image')")
+              cass-community-settings-modal-tab-image
+          footer.tab-content-footer
+            .left
+              button.form-text-button(
+                (click)="close()"
+              ) Закрыть
+            .right
+              button.form-text-button(
+                *ngIf='canSave()',
+                (click) = 'reset()'
+              ) Отменить изменения
+              button.form-button.form-button-green(
+                [disabled]='!canSave()',
+                (click) = 'saveAllChanges()'
+              ) Сохранить
