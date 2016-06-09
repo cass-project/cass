@@ -1,10 +1,71 @@
-div.form-switch-button {
-  label {
-    input[type="checkbox"] {
-      display: none;
+@import "./../../globals";
+
+.form-switch-button {
+  position: relative;
+  width: 45px;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select: none;
+
+  .form-switch-button-checkbox {
+    display: none;
+  }
+
+  .form-switch-button-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    height: 18px;
+    padding: 0;
+    line-height: 18px;
+    border-radius: 18px;
+    background-color: material-color("grey", '400');
+    transition: background-color 0.1s ease-in;
+
+    &:before {
+      @include card(1);
+
+      content: "";
+      display: block;
+      height: 24px;
+      width: 24px;
+      margin: 0;
+      background: #FFFFFF;
+      position: absolute; top: 0; bottom: 0;
+      right: 25px;
+      border-radius: 18px;
+      margin-top: -3px;
+      transition: all 0.1s ease-in 0s;
+      text-align: center;
+      line-height: 24px;
+      font-size: 16px;
+      font-family: FontAwesome, serif;
+      color: material-color("grey", "400")
+    }
+  }
+
+  .form-switch-button-checkbox:checked + .form-switch-button-label {
+    background-color: material-color("green", "200");
+  }
+
+  .form-switch-button-checkbox:checked + .form-switch-button-label:before {
+    background-color: material-color("green", "700");
+  }
+
+  .form-switch-button-checkbox:checked + .form-switch-button-label, .form-switch-button-checkbox:checked + .form-switch-button-label:before {
+  }
+
+  .form-switch-button-checkbox:checked + .form-switch-button-label:before {
+    right: 0;
+  }
+
+  .form-switch-button-checkbox:disabled {
+    + .form-switch-button-label {
+      background-color: material-color("grey", "500");
     }
 
-    div.slider {
+    + .form-switch-button-label:before {
+      content: "\f05e";
     }
   }
 }

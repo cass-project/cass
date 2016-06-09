@@ -7,19 +7,19 @@ cass-modal
             ul.tab-list
               li
                 button.tab-link(
-                  (click)="screens.goto('Community')"
+                  (click)="screens.goto('Community')",
                   [ngClass]="{'tab-link-active': screens.isOn('Community')}"
                 )
                   span Коммунити
               li
                 button.tab-link(
-                  (click)="screens.goto('Image')"
+                  (click)="screens.goto('Image')",
                   [ngClass]="{'tab-link-active': screens.isOn('Image')}"
                 )
                   span Изображение
               li
                 button.tab-link(
-                  (click)="screens.goto('Features')"
+                  (click)="screens.goto('Features')",
                   [ngClass]="{'tab-link-active': screens.isOn('Features')}"
                 )
                   span Разделы
@@ -27,7 +27,7 @@ cass-modal
             ul.tab-list
               li
                 button.tab-link(
-                  (click)="screens.goto('Collections')"
+                  (click)="screens.goto('Collections')",
                   [ngClass]="{'tab-link-active': screens.isOn('Collections')}"
                 )
                   i.fa.fa-fw.fa-list-alt
@@ -47,31 +47,42 @@ cass-modal
                 ul.features
                   li
                     section.feature
+                      .feature-icon
+                        .feature-icon-container
+                          i.fa.fa-bookmark
                       .feature-info
                         h1 Коллекции и ленты сообщений
                         p Активировав этот модуль, участники и/или модераторы этого коммунити могут создавать подборки контента, постить видео, ссылки, изображения и любые другие материалы.
                       .feature-controls
-                        label.form-switch-button
-                          input(type="checkbox")
-                          div.form-switch-button-slider
+                        div.form-switch-button
+                          input.form-switch-button-checkbox(type="checkbox" id="communitySettingsModalFeatureCollections", checked)
+                          label.form-switch-button-label(for="communitySettingsModalFeatureCollections")
                   li
                     section.feature
+                      .feature-icon
+                        .feature-icon-container
+                          i.fa.fa-list-ul
                       .feature-info
                         h1 Форум
                         p Доска объявлений, система форумов для вашего коммунити.
+                        p.sorry К сожалению, мы пока что еще не сделали этот раздел. Но он скоро будет!
                       .feature-controls
-                        label.form-switch-button
-                          input(type="checkbox")
-                          div.form-switch-button-slider
+                        div.form-switch-button
+                          input.form-switch-button-checkbox(type="checkbox" id="communitySettingsModalFeatureForum", disabled)
+                          label.form-switch-button-label(for="communitySettingsModalFeatureForum")
                   li
                     section.feature
+                      .feature-icon
+                        .feature-icon-container
+                          i.fa.fa-comments
                       .feature-info
-                        h1 Коллекции и ленты сообщений
-                        p Активировав этот модуль, участники и/или модераторы этого коммунити могут создавать подборки контента, постить видео, ссылки, изображения и любые другие материалы.
+                        h1 Чат
+                        p Добавить коллективные чаты в ваше коммунити.
+                        p.sorry К сожалению, мы пока что еще не сделали этот раздел. Но он скоро будет!
                       .feature-controls
-                        label.form-switch-button
-                          input(type="checkbox")
-                          div.form-switch-button-slider
+                        div.form-switch-button
+                          input.form-switch-button-checkbox(type="checkbox" id="communitySettingsModalFeatureChat", disabled)
+                          label.form-switch-button-label(for="communitySettingsModalFeatureChat")
             form.tab.tab-collection(*ngIf="screens.isOn('Collections')")
                 header.tab-modal-header
                   h1 Коллекции коммунити
