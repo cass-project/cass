@@ -10,19 +10,19 @@ cass-modal
                   (click)="screens.goto('General')",
                   [ngClass]="{'tab-link-active': screens.isOn('General')}"
                 )
-                  span Основные {{screens.isOn('General')?1:0}}
+                  span Основные
               li
                 button.tab-link(
                   (click)="screens.goto('Features')",
                   [ngClass]="{'tab-link-active': screens.isOn('Features')}"
                 )
-                  span Разделы {{screens.isOn('Features')?1:0}}
+                  span Разделы
               li
                 button.tab-link(
                   (click)="screens.goto('Image')",
                   [ngClass]="{'tab-link-active': screens.isOn('Image')}"
                 )
-                  span Изображение {{screens.isOn('Image')?1:0}}
+                  span Изображение
 
         .tab-content
           .tab-content-container
