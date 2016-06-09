@@ -72,7 +72,4 @@ import {AuthService} from "../../../auth/service/AuthService";
 ])
 export class ProfileRoute
 {
-    /*constructor(private router: Router){
-        this.router.navigate(['ProfileCurrentCollectionsRoute']); /!*ToDo: редирект на дефолтную коллекцию*!/
-    }*/
 }
