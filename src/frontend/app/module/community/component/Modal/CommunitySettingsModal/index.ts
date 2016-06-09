@@ -1,22 +1,20 @@
-import {Component} from "angular2/core";
-import {EventEmitter} from "angular2/core";
+import {Component, EventEmitter, Output, Input} from "angular2/core";
+import {Input} from "angular2/core";
+
+import {ModalBoxComponent} from "../../../../modal/component/box/index";
+import {ModalComponent} from "../../../../modal/component/index";
+import {ScreenControls} from "../../../../util/classes/ScreenControls";
+
+import {CommunityModel} from "../../../model";
+import {CommunityService} from "../../../service/CommunityService";
+import {CommunityFeaturesService} from "../../../service/CommunityFeaturesService";
 
 import {FeaturesTab} from "./Tab/TabFeatures/index";
 import {GeneralTab} from "./Tab/TabGeneral/index";
 import {ImageTab} from "./Tab/TabImage/index";
-import {ModalBoxComponent} from "../../../../modal/component/box/index";
-import {ModalComponent} from "../../../../modal/component/index";
-import {CommunityCreateModalModel} from "../CommunityCreateModal/model";
-import {CommunityFeaturesService} from "../../../service/CommunityFeaturesService";
-import {Output} from "angular2/core";
-import {ScreenControls} from "../../../../util/classes/ScreenControls";
+import {CommunityResponseModel} from "../../../model";
 
 
-enum SettingsStage {
-    General = <any>"General",
-    Features = <any>"Features",
-    Image = <any>"Image"
-}
 
 @Component({
     selector: 'cass-community-settings-modal',
@@ -32,7 +30,8 @@ enum SettingsStage {
         FeaturesTab
     ],
     providers: [
-        CommunityCreateModalModel,
+        CommunityModel,
+        CommunityResponseModel,
         CommunityFeaturesService
     ]
 })
@@ -40,15 +39,32 @@ enum SettingsStage {
 export class CommunitySettingsModal
 {
     @Output('close') closeEvent = new EventEmitter<CommunitySettingsModal>();
+    protected sid:string = "XtPvOgjf";
 
-    public screens: ScreenControls<SettingsStage> = new ScreenControls<SettingsStage>(SettingsStage.Features);
+    constructor(protected responseModel: CommunityResponseModel, protected service: CommunityService) {
+    }
 
+    ngOnInit(){
+        this.service.getBySid(this.sid).subscribe(
+            data => {
+                this.responseModel.entity = data.entity;
+            }
+        );
+    }
+
+    public screens: ScreenControls<SettingsStage> = new ScreenControls<SettingsStage>(SettingsStage.General);
 
     close() {
         this.closeEvent.emit(this);
     }
 
-    canSave(){
+    canSave() {
         return true;
     }
+}
+
+enum SettingsStage {
+    General = <any>"General",
+    Features = <any>"Features",
+    Image = <any>"Image"
 }

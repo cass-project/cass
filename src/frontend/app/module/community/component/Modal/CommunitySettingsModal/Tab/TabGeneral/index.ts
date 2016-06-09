@@ -2,6 +2,7 @@ import {Component} from "angular2/core";
 
 import {CommunityCreateModalModel} from "../../../CommunityCreateModal/model";
 import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
+import {CommunityResponseModel, CommunityModel} from "../../../../../model";
 
 @Component({
     selector: 'cass-community-settings-modal-tab-general',
@@ -11,15 +12,14 @@ import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
     ],
     directives:[
         ThemeSelect
-    ],
-    providers:[
-        CommunityCreateModalModel
     ]
 })
 
 export class GeneralTab {
 
-    constructor(protected model: CommunityCreateModalModel) {}
+    constructor(protected model: CommunityModel, protected responseModel: CommunityResponseModel) {
+        this.model = responseModel.entity;
+    }
 
     updateThemeId(themeIds: number[]) {
         this.model.theme_id = themeIds[0];

@@ -19,7 +19,5 @@ import {CommunitySettingsModal} from "./component/Modal/CommunitySettingsModal/i
 })
 export class CommunityComponent
 {
-    constructor(private service: CommunityComponentService) {
-        service.modals.settings.open();
-    }
+    constructor(private service: CommunityComponentService) {}
 }
