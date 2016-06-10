@@ -1,6 +1,7 @@
 @import "./../../globals";
 
 .form-switch-button {
+  display: inline-block;
   position: relative;
   width: 45px;
   -webkit-user-select:none;

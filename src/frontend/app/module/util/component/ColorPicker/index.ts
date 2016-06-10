@@ -20,7 +20,7 @@ import {Palette} from "../../../util/definitions/palette";
 
 
 @Component({
-    selector: 'colorPicker',
+    selector: 'cass-color-picker',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
@@ -28,7 +28,7 @@ import {Palette} from "../../../util/definitions/palette";
 })
 export class ColorPicker
 {
-
+    
 private palettes: Palette[] = [];
 
 constructor(frontline: FrontlineService) {
