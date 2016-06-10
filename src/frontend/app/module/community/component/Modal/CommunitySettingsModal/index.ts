@@ -38,40 +38,32 @@ import {CommunityResponseModel} from "../../../model";
 
 export class CommunitySettingsModal
 {
+    public screens: ScreenControls<SettingsStage> = new ScreenControls<SettingsStage>(SettingsStage.General);
+
     @Output('close') closeEvent = new EventEmitter<CommunitySettingsModal>();
     protected sid:string = "e4juVgpP";
-
-    constructor(protected responseModel: CommunityResponseModel, protected service: CommunityService) {
-    }
-
-    ngOnInit() {
-        this.setDefaults();
+    private community: CommunityModel;
+    constructor(public service: CommunityService) {
+        service.getBySid(this.sid).subscribe(data => {
+            this.community = data.entity;
+        });
     }
 
     reset() {
-        this.setDefaults()
+        this.service.community = JSON.parse(JSON.stringify(this.community))
     }
 
-    setDefaults() {
-        this.service.getBySid(this.sid).subscribe(
-            data => {
-                this.responseModel.entity = data.entity;
-            }
-        );
-    }
-
-    public screens: ScreenControls<SettingsStage> = new ScreenControls<SettingsStage>(SettingsStage.General);
 
     close() {
         this.closeEvent.emit(this);
     }
 
     canSave() {
-        return true;
+        return JSON.stringify( this.service.community ) !== JSON.stringify( this.community )
     }
 
-    saveAllChanges(){
-        console.log(this.responseModel);
+    saveAllChanges() {
+        console.log(this.service.community);
     }
 }
 

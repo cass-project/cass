@@ -3,6 +3,7 @@ import {Component} from "angular2/core";
 import {CommunityCreateModalModel} from "../../../CommunityCreateModal/model";
 import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
 import {CommunityResponseModel, CommunityModel} from "../../../../../model";
+import {CommunityService} from "../../../../../service/CommunityService";
 
 @Component({
     selector: 'cass-community-settings-modal-tab-general',
@@ -22,9 +23,7 @@ export class GeneralTab {
     private isCommunitySettingsModalThemeEnablePublic: boolean;
     private isCommunitySettingsModalThemeWillModerate: boolean;
 
-    constructor(protected model: CommunityModel, protected responseModel: CommunityResponseModel) {
-        this.model = responseModel.entity;
-    }
+    constructor(public service: CommunityService) {}
 
     communitySettingsModalThemeEnabledChange($event: boolean) {
         if($event===false) {
