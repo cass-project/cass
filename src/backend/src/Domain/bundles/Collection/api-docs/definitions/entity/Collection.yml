@@ -3,21 +3,68 @@ Collection_Entity_Collection:
   description: Коллекция.
   required:
     - id
+    - author_profile_id
     - title
     - description
+    - theme
+    - imageы
+    - public_options
   properties:
     id:
       type: number
       description: ID
-    has_theme:
-      type: boolean
-      description: Возвращает TRUE, если коллекция привязана к какой-либо тематике
-    theme_id:
+    author_profile_id:
       type: number
-      description: Тематика, которой принадлежит данная коллекция. Может содержать значение NULL.
+      description: ID профиля, создавшего коллекцию
+    theme:
+      type: object
+      description: Тематика
+      schema:
+        required:
+          - has
+        properties:
+          has:
+            type: boolean
+            description: Возвращает TRUE, если коллекция привязана к какой-либо тематике
+          id:
+            type: number
+            description: Тематика, которой принадлежит данная коллекция. Может содержать значение NULL.
     title:
       type: string
       description: Название (заголовок) коллекции
     description:
       type: string
       description: Описание коллекции
+    imageы:
+      type: object
+      description: Изображения
+      schema:
+        required:
+          - small
+          - full
+        properties:
+          small:
+            type: string
+            description: Изображение (размер 64x64)
+          full:
+            type: string
+            description: Изображение (полный размер)
+    public_options:
+      type: object
+      schema:
+        description:
+          Опции для публичного каталога / публичного доступа
+        required:
+          - is_private
+          - public-enabled
+          - moderation_contract
+        properties:
+          is_private:
+            type: boolean
+            description: Коллекция является приватной
+          public_enabled:
+            type: boolean
+            description: Включить обнаружение коллекции аггрегатором
+          moderation_contract:
+            type: boolean
+            description: Владелец обязуется модерировать содержимое коллекции

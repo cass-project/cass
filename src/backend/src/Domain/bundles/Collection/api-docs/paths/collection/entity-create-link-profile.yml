@@ -1,4 +1,4 @@
-"/protected/profile/current/collection/create":
+"/protected/profile/collection/create":
   put:
     tags:
       - collection
@@ -29,8 +29,11 @@
           required:
             - success
             - entity
-          success:
-            type: boolean
-            description: '=true'
-          entity:
-            $ref: "#/definitions/Collection_Entity_Collection"
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              type: object
+              schema:
+                $ref: "#/definitions/Collection_Entity_Collection"

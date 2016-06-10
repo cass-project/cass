@@ -12,7 +12,7 @@ return function(Application $app) {
     );
 
     $app->put(
-        '/protected/{owner:profile}/current/collection/{command:create}[/]',
+        '/protected/{owner:profile}/collection/{command:create}[/]',
         CollectionMiddleware::class,
         'collection-create-profile'
     );

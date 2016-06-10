@@ -1,43 +1,43 @@
 <?php
 namespace Domain\Collection\Middleware;
 
-use Domain\Auth\Service\CurrentAccountService;
-use Domain\Collection\Middleware\Command\Command;
-use Domain\Collection\Service\CollectionService;
 use Application\REST\Response\GenericResponseBuilder;
+use Application\Service\CommandService;
+use Domain\Collection\Exception\CollectionNotFoundException;
+use Domain\Collection\Middleware\Command\CreateCommand;
+use Domain\Collection\Middleware\Command\DeleteCommand;
+use Domain\Collection\Middleware\Command\EditCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
 
 class CollectionMiddleware implements MiddlewareInterface
 {
-    /** @var CollectionService */
-    private $collectionService;
+    /** @var CommandService */
+    private $commandService;
 
-    /** @var CurrentAccountService */
-    private $currentAccountService;
-
-    public function __construct(CollectionService $collectionService, CurrentAccountService $currentAccountService)
+    public function __construct(CommandService $commandService)
     {
-        $this->collectionService = $collectionService;
-        $this->currentAccountService = $currentAccountService;
+        $this->commandService = $commandService;
     }
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
         $responseBuilder = new GenericResponseBuilder($response);
 
-        $command = Command::factory($request, $this->collectionService);
-        $result = $command->run($request);
+        try {
+            $resolver = $this->commandService->createResolverBuilder()
+                ->attachDirect('create', CreateCommand::class)
+                ->attachDirect('delete', DeleteCommand::class)
+                ->attachDirect('edit', EditCommand::class)
+                ->resolve($request);
 
-        if($result === true) {
-            $result = [];
+            return $resolver->run($request, $responseBuilder);
+        }catch(CollectionNotFoundException $e) {
+            return $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound()
+                ->build();
         }
-
-        $responseBuilder
-            ->setStatusSuccess()
-            ->setJson($result);
-
-        return $responseBuilder->build();
     }
 }

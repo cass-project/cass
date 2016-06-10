@@ -7,7 +7,11 @@ use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Parameters\EditCollectionParameters;
 use Domain\Collection\Repository\CollectionRepository;
 use Domain\Community\Repository\CommunityRepository;
+use Domain\Definitions\ImageCollection\Image;
+use Domain\Definitions\ImageCollection\ImageCollection;
 use Domain\Profile\Repository\ProfileRepository;
+use League\Flysystem\AdapterInterface;
+use League\Flysystem\FilesystemInterface;
 
 class CollectionService
 {
@@ -26,23 +30,38 @@ class CollectionService
     /** @var ProfileRepository */
     private $profileRepository;
 
+    /** @var FilesystemInterface */
+    private $images;
+
+    /** @var string */
+    private $assetsPath;
+
+    /** @var string */
+    private $assetsDir;
+
     public function __construct(
         CollectionValidatorsService $collectionValidatorsService,
         CurrentAccountService $currentAccountService,
         CollectionRepository $collectionRepository,
         CommunityRepository $communityRepository,
-        ProfileRepository $profileRepository
+        ProfileRepository $profileRepository,
+        FilesystemInterface $imagesFlySystem,
+        string $assetsPath,
+        string $assetsDir
     ) {
         $this->validationService = $collectionValidatorsService;
         $this->currentAccountService = $currentAccountService;
         $this->collectionRepository = $collectionRepository;
         $this->communityRepository = $communityRepository;
         $this->profileRepository = $profileRepository;
+        $this->images = $profileRepository;
+        $this->assetsPath = $assetsPath;
+        $this->assetsDir = $assetsDir;
     }
 
     public function createCommunityCollection(int $communityId, CreateCollectionParameters $parameters): Collection
     {
-        $collection = $this->collectionRepository->createCollection(sprintf('community:%d', $communityId), $parameters);
+        $collection = $this->collectionRepository->createCollection(sprintf('community:%d', $communityId), $this->getDefaultImages(), $parameters);
 
         $this->communityRepository->linkCollection($communityId, $collection->getId());
 
@@ -53,7 +72,7 @@ class CollectionService
     {
         $profileId = $this->currentAccountService->getCurrentProfile()->getId();
 
-        $collection = $this->collectionRepository->createCollection(sprintf('profile:%d', $profileId), $parameters);
+        $collection = $this->collectionRepository->createCollection(sprintf('profile:%d', $profileId), $this->getDefaultImages(), $parameters);
         $this->profileRepository->linkCollection($profileId, $collection->getId());
 
         return $collection;
@@ -99,5 +118,19 @@ class CollectionService
         }
 
         return $this->collectionRepository->editCollection($collectionId, $parameters);
+    }
+
+    private function getDefaultImages()
+    {
+        return (new ImageCollection())
+            ->attachImage('small', new Image(
+                sprintf('%s/community-default.png', $this->assetsDir),
+                sprintf('%s/community-default.png', $this->assetsPath)
+            ))
+            ->attachImage('small', new Image(
+                sprintf('%s/community-default.png', $this->assetsDir),
+                sprintf('%s/community-default.png', $this->assetsPath)
+            ))
+        ;
     }
 }

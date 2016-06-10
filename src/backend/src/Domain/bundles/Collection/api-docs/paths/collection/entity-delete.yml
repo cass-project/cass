@@ -17,3 +17,10 @@
         type: number
         description:
           ID коллекции
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        $ref: '#/responses/NotFound'
+      200:
+        $ref: '#/responses/success'

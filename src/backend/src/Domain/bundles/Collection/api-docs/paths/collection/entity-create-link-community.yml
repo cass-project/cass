@@ -19,18 +19,21 @@
           $ref: '#/definitions/Collection_Entity_Request'
     responses:
       403:
-        $ref: '#/responses/Unauthorized'
-      404:
-        $ref: '#/responses/NotFound'
-      200:
-        description: Коллекция создана
         schema:
-          type: object
+          $ref: '#/responses/Unauthorized'
+      404:
+        schema:
+          $ref: '#/responses/NotFound'
+      200:
+        schema:
+          description: Коллекция создана
           required:
             - success
             - entity
-          success:
-            type: boolean
-            description: '=true'
-          entity:
-            $ref: "#/definitions/Collection_Entity_Collection"
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              schema:
+                $ref: "#/definitions/Collection_Entity_Collection"

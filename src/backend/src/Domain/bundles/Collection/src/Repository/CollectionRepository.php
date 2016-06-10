@@ -6,20 +6,26 @@ use Doctrine\ORM\EntityRepository;
 use Domain\Collection\Entity\Collection;
 use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Parameters\EditCollectionParameters;
+use Domain\Definitions\ImageCollection\ImageCollection;
+use Domain\Profile\Entity\Profile;
 use Domain\Theme\Entity\Theme;
 
 class CollectionRepository extends EntityRepository
 {
-    public function createCollection(string $ownerSID, CreateCollectionParameters $parameters): Collection
+    public function createCollection(string $ownerSID, ImageCollection $images, CreateCollectionParameters $parameters): Collection
     {
         $em = $this->getEntityManager();
 
         $collection = new Collection(
+            $em->getReference(Profile::class, $parameters->getAuthorProfileId()),
             $ownerSID,
             $parameters->getTitle(),
             $parameters->getDescription(),
             $parameters->hasThemeId() ? $em->getReference(Theme::class, $parameters->getThemeId()) : null
         );
+
+
+        $collection->exportImages($images);
 
         $em->persist($collection);
         $em->flush($collection);

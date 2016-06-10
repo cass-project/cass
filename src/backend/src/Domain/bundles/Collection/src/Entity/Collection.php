@@ -3,7 +3,10 @@ namespace Domain\Collection\Entity;
 
 use Application\Util\IdTrait;
 use Application\Util\JSONSerializable;
+use Domain\Collection\Exception\CollectionIsPrivateException;
+use Domain\Collection\Exception\PublicEnabledException;
 use Domain\Community\Entity\Community;
+use Domain\Definitions\ImageCollection\ImageCollection;
 use Domain\Profile\Entity\Profile;
 use Domain\Theme\Entity\Theme;
 
@@ -14,6 +17,13 @@ use Domain\Theme\Entity\Theme;
 class Collection implements JSONSerializable
 {
     use IdTrait;
+
+    /**
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
+     * @JoinColumn(name="author_profile_id", referencedColumnName="id")
+     * @var Profile
+     */
+    private $authorProfile;
 
     /**
      * @Column(type="string", name="owner_sid")
@@ -40,8 +50,38 @@ class Collection implements JSONSerializable
      */
     private $description;
 
-    public function __construct(string $ownerSID, string $title, string $description, Theme $theme = null)
-    {
+    /**
+     * @Column(type="json_array")
+     * @var array
+     */
+    private $image = [];
+
+    /**
+     * @Column(type="boolean", name="is_private")
+     * @var bool
+     */
+    private $isPrivate = false;
+
+    /**
+     * @Column(type="boolean", name="public_enabled")
+     * @var boolean
+     */
+    private $publicEnabled = true;
+
+    /**
+     * @Column(type="boolean", name="moderation_contract")
+     * @var boolean
+     */
+    private $moderationContract = false;
+
+    public function __construct(
+        Profile $authorProfile,
+        string $ownerSID,
+        string $title,
+        string $description,
+        Theme $theme = null
+    ) {
+        $this->authorProfile = $authorProfile;
         $this->ownerSID = $ownerSID;
         $this->theme = $theme;
         $this->title = $title;
@@ -49,13 +89,32 @@ class Collection implements JSONSerializable
     }
 
     public function toJSON(): array {
-        return [
+        $result = [
             'id' => $this->getId(),
+            'author_profile_id' => $this->getAuthorProfile()->getId(),
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
-            'has_theme' => $this->hasTheme(),
-            'theme_id' => $this->hasTheme() ? $this->getTheme()->getId() : null,
+            'theme' => [
+                'has' => $this->hasTheme()
+            ],
+            'public_options' => [
+                'is_private' => $this->isPrivate(),
+                'public_enabled' => $this->isPublicEnabled(),
+                'moderation_contract' => $this->isModerationContractEnabled(),
+            ],
+            'image' => $this->fetchImages()->toJSON()
         ];
+
+        if($this->hasTheme()) {
+            $result['theme']['id'] = $this->hasTheme() ? $this->getTheme()->getId() : null;
+        }
+
+        return $result;
+    }
+
+    public function getAuthorProfile(): Profile
+    {
+        return $this->authorProfile;
     }
 
     public function getOwnerSID(): string
@@ -71,7 +130,7 @@ class Collection implements JSONSerializable
         $this->theme = null;
     }
 
-    public function hasTheme() {
+    public function hasTheme(): bool {
         return $this->theme !== null;
     }
 
@@ -98,15 +157,86 @@ class Collection implements JSONSerializable
         return $this;
     }
 
-    public function setOwnerProfile(int $profileId )
+    public function setOwnerProfile(int $profileId): self
     {
         $this->ownerSID = sprintf('profile:%d', $profileId);
         return $this;
     }
 
-    public function setOwnerCommunity(int $communityId)
+    public function setOwnerCommunity(int $communityId): self
     {
         $this->ownerSID = sprintf('community:%d', $communityId);
+        return $this;
+    }
+
+    public function isPrivate(): bool
+    {
+        return $this->isPrivate;
+    }
+
+    public function setAsPrivate(): self
+    {
+        if($this->isPublicEnabled()) {
+            throw new PublicEnabledException(sprintf('Collection `%s` is public', $this->getId()));
+        }
+
+        $this->isPrivate = true;
+
+        return $this;
+    }
+
+    public function unsetAsPrivate(): self
+    {
+        $this->isPrivate = false;
+
+        return $this;
+    }
+
+    public function isPublicEnabled(): bool
+    {
+        return $this->publicEnabled;
+    }
+
+    public function isModerationContractEnabled(): bool
+    {
+        return $this->moderationContract;
+    }
+
+    public function setPublicOptions(array $options): self
+    {
+        foreach(['is_private', 'public_enabled', 'moderation_contract'] as $required) {
+            if(! (isset($options[$required]) && is_bool($options[$required]))) {
+                throw new \InvalidArgumentException('Invalid public options');
+            }
+        }
+
+        $isPrivate = $options['is_private'];
+        $publicEnabled = $options['public_enabled'];
+        $moderationContract = $options['moderation_contract'];
+
+        if($isPrivate && $publicEnabled) {
+            throw new CollectionIsPrivateException(sprintf(
+                'Collection %s cannot be both private and indexed by public catalog',
+                $this->isPersisted() ? $this->getId() : '#NEW_COLLECTION'
+            ));
+        }
+
+        $this->isPrivate = $isPrivate;
+        $this->publicEnabled = $publicEnabled;
+        $this->moderationContract = $moderationContract;
+
+        return $this;
+    }
+
+    public function fetchImages(): ImageCollection
+    {
+        return ImageCollection::createFromJSON($this->image);
+    }
+
+    public function exportImages(ImageCollection $images): self
+    {
+        $this->image = $images->toJSON();
+
         return $this;
     }
 }

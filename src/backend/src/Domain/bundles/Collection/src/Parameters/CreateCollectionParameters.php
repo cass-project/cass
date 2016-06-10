@@ -3,6 +3,9 @@ namespace Domain\Collection\Parameters;
 
 class CreateCollectionParameters
 {
+    /** @var int */
+    private $authorProfileId;
+
     /** @var string */
     private $title;
 
@@ -12,11 +15,17 @@ class CreateCollectionParameters
     /** @var int|null */
     private $themeId;
 
-    public function __construct(string $title, string $description, int $themeId = null)
+    public function __construct(int $authorProfileId, string $title, string $description, int $themeId = null)
     {
+        $this->authorProfileId = $authorProfileId;
         $this->title = $title;
         $this->description = $description;
         $this->themeId = $themeId;
+    }
+
+    public function getAuthorProfileId(): int
+    {
+        return $this->authorProfileId;
     }
 
     public function getTitle(): string

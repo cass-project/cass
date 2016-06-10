@@ -12,7 +12,10 @@ return [
             'frontend' => sprintf('%s/../../../../frontend', __DIR__),
             'www' => sprintf('%s/../../../../www/app', __DIR__),
             'wwwPrefix' => '/public',
+            'assetsDir' => sprintf('%s/../../../../www/app/dist/assets', __DIR__),
         ],
-        'config.storage' => sprintf('%s/../../../../www/app/public/storage', __DIR__)
+        'config.storage' => sprintf('%s/../../../../www/app/public/storage', __DIR__),
+        'config.paths.assets.dir' => sprintf('%s/../../../../www/app/dist/assets', __DIR__),
+        'config.paths.assets.www' => '/dist/assets',
     ]
 ];

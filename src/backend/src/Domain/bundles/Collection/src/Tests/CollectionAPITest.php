@@ -26,9 +26,12 @@ class CollectionAPITest extends MiddlewareTestCase
 
     public function testCreateCommunityCollection200()
     {
+
+        $profile = DemoProfileFixture::getProfile();
         $theme = SampleThemesFixture::getTheme(1);
         $community = SampleCommunitiesFixture::getCommunity(1);
         $json = [
+            'author_profile_id' => $profile->getId(),
             'theme_id' => $theme->getId(),
             'title' => 'Demo Community Collection',
             'description' => 'Ny Demo Community Collection',
@@ -43,15 +46,17 @@ class CollectionAPITest extends MiddlewareTestCase
                 'success' => true,
                 'entity' => [
                     'id' => $this->expectId(),
+                    'author_profile_id' => $profile->getId(),
                     'title' => $json['title'],
                     'description' => $json['description'],
-                    'has_theme' => true,
-                    'theme_id' => $theme->getId()
+                    'theme' => [
+                        'has' => true,
+                        'id' => $theme->getId()
+                    ]
                 ]
             ])
         ;
 
-        // Проверяем, что в указанное коммунити добавлена коллекция
         $collectionId = self::$currentResult->getContent()['entity']['id'];
 
         $this->requestGetCommunity($community->getId())
@@ -71,9 +76,11 @@ class CollectionAPITest extends MiddlewareTestCase
 
     public function testCreateCommunityCollection403()
     {
+        $profile = DemoProfileFixture::getProfile();
         $theme = SampleThemesFixture::getTheme(1);
         $community = SampleCommunitiesFixture::getCommunity(1);
         $json = [
+            'author_profile_id' => $profile->getId(),
             'theme_id' => $theme->getId(),
             'title' => 'Demo Community Collection',
             'description' => 'Ny Demo Community Collection',
@@ -87,8 +94,10 @@ class CollectionAPITest extends MiddlewareTestCase
 
     public function testCreateCommunityCollection404()
     {
+        $profile = DemoProfileFixture::getProfile();
         $theme = SampleThemesFixture::getTheme(1);
         $json = [
+            'author_profile_id' => $profile->getId(),
             'theme_id' => $theme->getId(),
             'title' => 'Demo Community Collection',
             'description' => 'Ny Demo Community Collection',
@@ -103,8 +112,10 @@ class CollectionAPITest extends MiddlewareTestCase
 
     public function testCreateProfileCollection200()
     {
+        $profile = DemoProfileFixture::getProfile();
         $theme = SampleThemesFixture::getTheme(1);
         $json = [
+            'author_profile_id' => $profile->getId(),
             'theme_id' => $theme->getId(),
             'title' => 'Demo Community Collection',
             'description' => 'Ny Demo Community Collection',
@@ -120,14 +131,16 @@ class CollectionAPITest extends MiddlewareTestCase
                 'entity' => [
                     'id' => $this->expectId(),
                     'title' => $json['title'],
+                    'author_profile_id' => DemoProfileFixture::getProfile()->getId(),
                     'description' => $json['description'],
-                    'has_theme' => true,
-                    'theme_id' => $theme->getId()
+                    'theme' => [
+                        'has' => true,
+                        'id' => $theme->getId()
+                    ]
                 ]
             ])
         ;
 
-        // Проверяем, что в профиль добавлена коллекция
         $profileId = DemoProfileFixture::getProfile()->getId();
         $collectionId = self::$currentResult->getContent()['entity']['id'];
 
@@ -256,7 +269,10 @@ class CollectionAPITest extends MiddlewareTestCase
                 'entity' => [
                     'title' => $json['title'],
                     'description' => $json['description'],
-                    'theme_id' => SampleThemesFixture::getTheme(5)->getId()
+                    'theme' => [
+                        'has' => true,
+                        'id' => SampleThemesFixture::getTheme(5)->getId()
+                    ]
                 ]
             ])
         ;
@@ -283,7 +299,9 @@ class CollectionAPITest extends MiddlewareTestCase
                 'entity' => [
                     'title' => $json['title'],
                     'description' => $json['description'],
-                    'theme_id' => null
+                    'theme' => [
+                        'has' => false
+                    ]
                 ]
             ])
         ;
@@ -297,7 +315,7 @@ class CollectionAPITest extends MiddlewareTestCase
 
     public function requestCreateProfileCollection(array $json): RESTRequest
     {
-        return $this->request('PUT', '/protected/profile/current/collection/create')
+        return $this->request('PUT', '/protected/profile/collection/create')
             ->setParameters($json);
     }
 
@@ -322,4 +340,3 @@ class CollectionAPITest extends MiddlewareTestCase
             ->setParameters($json);
     }
 }
-

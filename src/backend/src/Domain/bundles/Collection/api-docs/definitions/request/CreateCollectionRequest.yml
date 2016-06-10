@@ -1,10 +1,14 @@
 Collection_Entity_Request:
     type: object
     required:
+      - author_profile_id
       - theme_id
       - title
       - description
     properties:
+      author_profile_id:
+        type: number
+        description: ID профиля-владельца коллекции
       theme_id:
         type: number
         description: ID тематики. Может содержать значение NULL.

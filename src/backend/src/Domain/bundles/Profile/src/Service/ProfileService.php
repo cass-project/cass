@@ -75,7 +75,7 @@ class ProfileService
         $this->profileRepository->createProfile($profile);
         $this->profileRepository->switchTo($account->getProfiles()->toArray(), $profile);
 
-        $collectionParameters = new CreateCollectionParameters('$gt_collection_my-feed_title', '$gt_collection_my-feed_description');
+        $collectionParameters = new CreateCollectionParameters($profile->getId(), '$gt_collection_my-feed_title', '$gt_collection_my-feed_description');
         $collection = $this->collectionRepository->createCollection("profile:{$profile->getId()}", $collectionParameters);
 
         $profile->getCollections()->attachChild($collection->getId());
