@@ -1,12 +1,14 @@
 <?php
 namespace Domain\Profile;
 
+use Application\Service\BundleService;
 use function DI\object;
 use function DI\factory;
 use function DI\get;
 
 use DI\Container;
 use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
+use Domain\DomainBundle;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\ProfileGreetings;
 use Domain\Profile\Entity\ProfileImage;
@@ -24,6 +26,11 @@ return [
         ProfileService::class => object()
             ->constructorParameter('profileStorageDir', factory(function (Container $container) {
                 return sprintf('%s/profile/profile-image', $container->get('config.storage'));
-            })),
+            }))
+            ->constructorParameter('fontPath',factory(function(Container $container){
+                return sprintf('%s/fonts/Roboto/Roboto-Medium.ttf',
+                               $container->get(BundleService::class)->getBundleByName(DomainBundle::class )->getResourcesDir());
+            }))
+        ,
     ],
 ];
