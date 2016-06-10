@@ -33,10 +33,13 @@ class ProfileService
     /** @var string */
     private $profileStorageDir;
 
-    public function __construct(ProfileRepository $profileRepository, string $profileStorageDir, CollectionRepository $collectionRepository) {
+    private $fontPath;
+
+    public function __construct(ProfileRepository $profileRepository, string $profileStorageDir, CollectionRepository $collectionRepository, string $fontPath) {
         $this->profileRepository = $profileRepository;
         $this->profileStorageDir = $profileStorageDir;
         $this->collectionRepository = $collectionRepository;
+        $this->fontPath = $fontPath;
     }
 
     public function getProfileById(int $profileId): Profile {
@@ -79,6 +82,8 @@ class ProfileService
         $collection = $this->collectionRepository->createCollection("profile:{$profile->getId()}", $collectionParameters);
 
         $profile->getCollections()->attachChild($collection->getId());
+
+        $this->generateProfileImage($profile);
 
         $this->profileRepository->updateProfile($profile);
 
@@ -125,6 +130,34 @@ class ProfileService
         }
 
         return $this->profileRepository->deleteProfileImage($profile);
+    }
+
+    public function generateProfileImage(Profile $profile)
+    {
+
+        $profile_image = $this->profileRepository->deleteProfileImage($profile);
+
+        $publicPath  = '/public/assets/profile_image.png';
+        $storagePath = $this->profileStorageDir. '/profile_image.png';
+//        print_r($storagePath);
+//        die();
+
+        $im = imagecreatetruecolor(ProfileImage::MIN_WIDTH, ProfileImage::MIN_HEIGHT);
+        $text_color = imagecolorallocate($im, 233, 14, 91);
+
+        $font = $this->fontPath;
+
+        $size = ProfileImage::MIN_HEIGHT*0.9;
+
+        $x = ProfileImage::MIN_HEIGHT-$size;
+        $y = $size;
+
+        imagettftext($im, $size, 0, $x,  $y, $text_color, $font, 'S' );
+        imagepng($im, $storagePath);
+
+//        imagedestroy($im);
+
+        $profile_image->setPublicPath($publicPath)->setStoragePath($storagePath);
     }
 
     public function nameFL(int $profileId, string $firstName, string $lastName) {

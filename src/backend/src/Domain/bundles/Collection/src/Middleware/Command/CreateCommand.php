@@ -3,19 +3,28 @@ namespace Domain\Collection\Middleware\Command;
 
 use Application\Exception\CommandNotFoundException;
 use Application\Exception\NotImplementedException;
+use Application\REST\Response\ResponseBuilder;
 use Domain\Collection\Entity\Collection;
 use Domain\Collection\Middleware\Request\CreateCollectionRequest;
 use Psr\Http\Message\ServerRequestInterface;
 
 class CreateCommand extends Command
 {
-    public function run(ServerRequestInterface $request)
+    public function run(ServerRequestInterface $request,ResponseBuilder $responseBuilder)
     {
-        $collection = $this->createCollection($request);
+        try{
+            $collection = $this->createCollection($request);
 
-        return [
-            'entity' => $collection->toJSON()
-        ];
+            return $responseBuilder->setStatusSuccess()
+                                   ->setJson([
+                                               'entity' => $collection->toJSON()
+                                             ]
+                                   )->build();
+        }catch (CommandNotFoundException $e){
+            return $responseBuilder->setStatusNotFound()
+                                   ->setError($e)
+                                   ->build();
+        }
     }
 
     private function createCollection(ServerRequestInterface $request): Collection

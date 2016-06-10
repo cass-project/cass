@@ -47,4 +47,16 @@ abstract class GenericBundle implements Bundle
     {
         return sprintf('%s/container.config.php', $this->getConfigDir());
     }
+
+    public function hasResources() {
+        return is_dir($this->getDir().'/../resources');
+    }
+
+    public function getResourcesDir(): string {
+        if(! $this->hasResources()) {
+            throw new \Exception('No resources available');
+        }
+
+        return $this->getDir().'/../resources';
+    }
 }

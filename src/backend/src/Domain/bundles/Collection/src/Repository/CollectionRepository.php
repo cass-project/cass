@@ -64,4 +64,12 @@ class CollectionRepository extends EntityRepository
 
         return $collection;
     }
+
+    public function saveCollection(Collection $collection):Collection
+    {
+        $em = $this->getEntityManager();
+        $em->persist($collection);
+        $em->flush([$collection]);
+        return $collection;
+    }
 }

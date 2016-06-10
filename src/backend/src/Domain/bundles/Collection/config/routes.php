@@ -28,4 +28,11 @@ return function(Application $app) {
         CollectionMiddleware::class,
         'collection-edit'
     );
+
+    $app->post(
+        '/protected/collection/{collectionId}/{command:image-upload}/crop-start/{x1}/{y1}/crop-end/{x2}/{y2}[/]',
+        CollectionMiddleware::class,
+        'collection-image-upload'
+    );
+
 };

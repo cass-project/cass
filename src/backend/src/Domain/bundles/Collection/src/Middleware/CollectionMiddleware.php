@@ -28,16 +28,6 @@ class CollectionMiddleware implements MiddlewareInterface
         $responseBuilder = new GenericResponseBuilder($response);
 
         $command = Command::factory($request, $this->collectionService);
-        $result = $command->run($request);
-
-        if($result === true) {
-            $result = [];
-        }
-
-        $responseBuilder
-            ->setStatusSuccess()
-            ->setJson($result);
-
-        return $responseBuilder->build();
+        return $command->run($request, $responseBuilder);
     }
 }

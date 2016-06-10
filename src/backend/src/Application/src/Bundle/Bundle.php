@@ -12,4 +12,5 @@ interface Bundle
     public function hasBundles();
     public function getBundlesDir(): string;
     public function getContainerConfig();
+    public function getResourcesDir();
 }
