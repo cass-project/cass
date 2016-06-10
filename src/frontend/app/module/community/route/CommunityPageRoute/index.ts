@@ -5,7 +5,6 @@ import {CommunityModel} from "./../../model";
 import {CommunityService} from "../../service/CommunityService";
 import {ModalComponent} from "../../../modal/component/index";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
-import {ProfileMenuComponent} from "../../../profile/component/ProfileMenu/index";
 import {LoadingLinearIndicator} from "../../../util/component/LoadingLinearIndicator/index";
 import {ModalControl} from "../../../util/classes/ModalControl";
 import {CommunityComponentService} from "../../service";
@@ -19,14 +18,13 @@ import {CommunityComponentService} from "../../service";
     directives: [
         ModalComponent,
         ModalBoxComponent,
-        ProfileMenuComponent,
         LoadingLinearIndicator
     ]
 })
 export class CommunityPage
 {
     public isLoading:boolean = false;
-
+    private community:CommunityModel;
     constructor(
         private routeParams: RouteParams,
         private service: CommunityService,
@@ -39,7 +37,6 @@ export class CommunityPage
             data => {
                 this.isLoading = false;
                 clearTimeout(timeout);
-                console.log(data);
             }
         );
     }

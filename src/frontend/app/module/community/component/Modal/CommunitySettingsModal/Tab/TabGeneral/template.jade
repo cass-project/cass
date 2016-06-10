@@ -6,7 +6,7 @@
       label.form-label
         span Название
         input.form-input(
-          [(ngModel)]="model.title",
+          [(ngModel)]="service.community.title",
           type="text",
           placeholder="Название, заголовок коммунити"
         )
@@ -14,7 +14,7 @@
       label.form-label
         span Описание
         input.form-input(
-          [(ngModel)]="model.description",
+          [(ngModel)]="service.community.description",
           type="text",
           placeholder="Подзаголовок коммунити"
         )
@@ -36,7 +36,6 @@
             input.form-switch-button-checkbox(
               type="checkbox", id="communitySettingsModalThemeEnabled", checked="", [(ngModel)]="isCommunitySettingsModalThemeEnabled",
               (ngModelChange)="communitySettingsModalThemeEnabledChange($event)"
-
             )
             label.form-switch-button-label(for="communitySettingsModalThemeEnabled")
       // Опция отображается, только если опция выше активирована
@@ -53,7 +52,7 @@
                 type="checkbox",
                 id="communitySettingsModalThemeEnablePublic",
                 checked="",
-                [(ngModel)]="isCommunitySettingsModalThemeEnablePublic"
+                [(ngModel)]="!!service.community.theme_id"
               )
               label.form-switch-button-label(for="communitySettingsModalThemeEnablePublic")
       // Опция отображается, только если обе опции выше активированы

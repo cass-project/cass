@@ -19,7 +19,7 @@ export class CommunityService {
             if(this.isCached(sid)) {
                 let communityResponse: CommunityResponseModel  = this.getFromCache(sid);
                 this.isAdmin = communityResponse.access.admin;
-                this.community = communityResponse.entity;
+                this.community = JSON.parse(JSON.stringify(communityResponse.entity));
                 observer.next(communityResponse);
                 observer.complete();
             } else {
@@ -27,9 +27,9 @@ export class CommunityService {
                     .map(data => data.json())
                     .subscribe(
                         communityResponse => {
+                            this.communityResponsesCache.push(JSON.parse(JSON.stringify(communityResponse)));
                             this.isAdmin = communityResponse.access.admin;
                             this.community = communityResponse.entity;
-                            this.communityResponsesCache.push(communityResponse);
                             observer.next(communityResponse);
                             observer.complete();
                         }
