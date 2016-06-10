@@ -39,12 +39,20 @@ import {CommunityResponseModel} from "../../../model";
 export class CommunitySettingsModal
 {
     @Output('close') closeEvent = new EventEmitter<CommunitySettingsModal>();
-    protected sid:string = "XtPvOgjf";
+    protected sid:string = "e4juVgpP";
 
     constructor(protected responseModel: CommunityResponseModel, protected service: CommunityService) {
     }
 
-    ngOnInit(){
+    ngOnInit() {
+        this.setDefaults();
+    }
+
+    reset() {
+        this.setDefaults()
+    }
+
+    setDefaults() {
         this.service.getBySid(this.sid).subscribe(
             data => {
                 this.responseModel.entity = data.entity;
@@ -60,6 +68,10 @@ export class CommunitySettingsModal
 
     canSave() {
         return true;
+    }
+
+    saveAllChanges(){
+        console.log(this.responseModel);
     }
 }
 
