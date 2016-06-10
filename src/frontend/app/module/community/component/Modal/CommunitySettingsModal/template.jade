@@ -23,16 +23,15 @@ cass-modal
                   [ngClass]="{'tab-link-active': screens.isOn('Image')}"
                 )
                   span Изображение
-
         .tab-content
           .tab-content-container
-            .tab-account(*ngIf="screens.isOn('General')")
+            .tab-general(*ngIf="screens.isOn('General')")
               cass-community-settings-modal-tab-general
           .tab-content-container
-            .tab-account(*ngIf="screens.isOn('Features')")
+            .tab-features(*ngIf="screens.isOn('Features')")
               cass-community-settings-modal-tab-features
           .tab-content-container
-            .tab-account(*ngIf="screens.isOn('Image')")
+            .tab-image(*ngIf="screens.isOn('Image')")
               cass-community-settings-modal-tab-image
           footer.tab-content-footer
             .left

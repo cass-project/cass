@@ -3,3 +3,68 @@ div.community-settings-modal-tab-general
 {
   padding: 20px;
 }
+
+
+header.tab-modal-header {
+  h1 {
+    margin-bottom: 20px;
+  }
+}
+
+ul.theme-options {
+  margin: 20px 0;
+
+  li {
+    margin-bottom: 20px;
+  }
+}
+
+.modal-list {
+  $ICON_SIZE: 32px;
+
+  .modal-list-icon-container {
+    display: inline-block;
+    background-color: material-color("grey", "200");
+    color: material-color("grey", "700");
+    width: $ICON_SIZE;
+    height: $ICON_SIZE;
+    text-align: center;
+    font-size: 14px;
+    line-height: $ICON_SIZE;
+    margin-right: 16px;
+    border-radius: 100%;
+  }
+
+  .modal-list-item {
+    display: flex;
+
+    .modal-list-info {
+      width: 100%;
+
+      h1 {
+        color: black;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.2em;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 14px;
+        font-weight: 400;
+        color: material-color("grey", "500");
+      }
+
+      p.sorry {
+        font-size: 12px;
+        color: material-color("orange", "500");
+        margin-top: 10px;
+      }
+    }
+
+    .modal-list-controls {
+      width: 70px;
+      text-align: right;
+    }
+  }
+}
