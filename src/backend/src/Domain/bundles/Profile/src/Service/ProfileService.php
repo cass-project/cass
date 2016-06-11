@@ -5,6 +5,8 @@ use Domain\Account\Entity\Account;
 use Application\Exception\PermissionsDeniedException;
 use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Repository\CollectionRepository;
+use Domain\Colors\Entity\Color;
+use Domain\Colors\Service\ColorsService;
 use PHPImageWorkshop\Core\ImageWorkshopLayer;
 use PHPImageWorkshop\ImageWorkshop;
 use Domain\Profile\Entity\Profile;
@@ -34,12 +36,15 @@ class ProfileService
     private $profileStorageDir;
 
     private $fontPath;
+    /** @var ColorsService */
+    private $colorsService;
 
-    public function __construct(ProfileRepository $profileRepository, string $profileStorageDir, CollectionRepository $collectionRepository, string $fontPath) {
+    public function __construct(ProfileRepository $profileRepository, string $profileStorageDir, CollectionRepository $collectionRepository, string $fontPath, ColorsService $colorsService) {
         $this->profileRepository = $profileRepository;
         $this->profileStorageDir = $profileStorageDir;
         $this->collectionRepository = $collectionRepository;
         $this->fontPath = $fontPath;
+        $this->colorsService = $colorsService;
     }
 
     public function getProfileById(int $profileId): Profile {
@@ -134,28 +139,30 @@ class ProfileService
 
     public function generateProfileImage(Profile $profile)
     {
-
         $profile_image = $this->profileRepository->deleteProfileImage($profile);
 
         $publicPath  = '/public/assets/profile_image.png';
         $storagePath = $this->profileStorageDir. '/profile_image.png';
-//        print_r($storagePath);
-//        die();
 
         $im = imagecreatetruecolor(ProfileImage::MIN_WIDTH, ProfileImage::MIN_HEIGHT);
-        $text_color = imagecolorallocate($im, 233, 14, 91);
 
-        $font = $this->fontPath;
+        $colors = array_filter($this->colorsService->getColors(),function(Color $color){
+            return preg_match('#.700$#',$color->getCode());
+        });
+        /** @var Color $color */
+        $color = $colors[array_rand($colors,1)];
+        $colorRGB = $color->toRGB();
+
+        $image_color = imagecolorallocatealpha($im,$colorRGB[0],$colorRGB[1],$colorRGB[2],0);
+        imagefill($im, 0,0,$image_color);
+        $text_color = imagecolorallocate($im,255,255,255);
 
         $size = ProfileImage::MIN_HEIGHT*0.9;
+        $x = (ProfileImage::MIN_HEIGHT-$size);
+        $y = ProfileImage::MIN_HEIGHT-5;
 
-        $x = ProfileImage::MIN_HEIGHT-$size;
-        $y = $size;
-
-        imagettftext($im, $size, 0, $x,  $y, $text_color, $font, 'S' );
+        imagettftext($im, $size, 0, $x,  $y, $text_color, $this->fontPath, 'S' );
         imagepng($im, $storagePath);
-
-//        imagedestroy($im);
 
         $profile_image->setPublicPath($publicPath)->setStoragePath($storagePath);
     }
