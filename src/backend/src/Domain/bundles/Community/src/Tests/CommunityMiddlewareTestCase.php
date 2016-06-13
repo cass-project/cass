@@ -55,4 +55,9 @@ abstract class CommunityMiddlewareTestCase extends MiddlewareTestCase
     {
         return $this->request('GET', sprintf('/protected/community/%d/feature/%s/is-activated', $communityId, $feature));
     }
+
+    protected function requestSetPublicOptions(int $communityId, array $json): RESTRequest
+    {
+        return $this->request('POST', sprintf('/community/%d/set-public-options', $communityId))->setParameters($json);
+    }
 }

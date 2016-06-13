@@ -5,13 +5,15 @@ import {ThemeSelect} from "../theme/component/ThemeSelect/index";
 import {ProfileComponentService} from "../profile/service";
 import {AuthService} from "../auth/service/AuthService";
 import {MessageBusService} from "../message/service/MessageBusService/index";
+import {ModalBoxComponent} from "../modal/component/box/index";
+import {ModalComponent} from "../modal/component/index";
 
 @Component({
     template: require('./template.html'),
     directives: [
         AuthComponent,
         ProfileSetup,
-        ThemeSelect,
+        ThemeSelect
     ],
 })
 export class LandingComponent

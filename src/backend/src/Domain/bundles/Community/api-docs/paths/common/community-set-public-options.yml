@@ -1,0 +1,34 @@
+"/protected/community/{communityId}/set-public-options":
+  post:
+    tags:
+      - community
+    description:
+      Установить опции для публичного каталога (discover-опции)
+    security:
+      - x_api_key: []
+    parameters:
+      - name: communityId
+        in: path
+        required: true
+        type: number:
+        description: ID коммунити
+      - name: body
+        in: body
+        required: true
+        description:
+        schema:
+          $ref: '#/definitions/Community_Request_SetPublicOptions'
+    responses:
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        schema:
+          $ref: '#/responses/NotFound'
+      409:
+        description: Коммунити не имеет тематики
+        schema:
+          $ref: '#/responses/error'
+      200:
+        schema:
+          $ref: '#/responses/success'

@@ -5,8 +5,10 @@ use Domain\Account\Entity\Account;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Community\ACL\CommunityACL;
 use Domain\Community\Entity\Community;
+use Domain\Community\Exception\CommunityHasNoThemeException;
 use Domain\Community\Parameters\CreateCommunityParameters;
 use Domain\Community\Parameters\EditCommunityParameters;
+use Domain\Community\Parameters\SetPublicOptionsParameters;
 use Domain\Community\Parameters\UploadImageParameters;
 use Domain\Community\Repository\CommunityRepository;
 use Domain\Community\Scripts\CommunityImageUploadScript;
@@ -49,7 +51,9 @@ class CommunityService
             $owner->getId(),
             $parameters->getTitle(),
             $parameters->getDescription(),
-            $this->themeRepository->getThemeById($parameters->getThemeId())
+            $parameters->hasThemeId()
+                ? $this->themeRepository->getThemeById($parameters->getThemeId())
+                : null
         );
 
         $this->communityRepository->createCommunity($entity);
@@ -61,7 +65,12 @@ class CommunityService
         $community = $this->communityRepository->getCommunityById($communityId);
         $community->setTitle($parameters->getTitle());
         $community->setDescription($parameters->getDescription());
-        $community->setTheme($this->themeRepository->getThemeById($parameters->getThemeId()));
+
+        if($parameters->hasThemeId()) {
+            $community->setTheme($this->themeRepository->getThemeById($parameters->getThemeId()));
+        }else{
+            $community->unsetTheme();
+        }
 
         $this->communityRepository->saveCommunity($community);
 
@@ -77,6 +86,22 @@ class CommunityService
             $params['path'],
             sprintf('%s/%d/%s', $this->publicPath, $params['id'], $params['file'])
         ));
+
+        $this->communityRepository->saveCommunity($community);
+
+        return $community;
+    }
+
+    public function setPublicOptions(int $communityId, SetPublicOptionsParameters $parameters): Community {
+        $community = $this->communityRepository->getCommunityById($communityId);
+
+        $parameters->isPublicEnabled()
+            ? $community->enablePublicDiscover()
+            : $community->disablePublicDiscover();
+
+        $parameters->isModerationContract()
+            ? $community->enableModerationContract()
+            : $community->disableModerationContract();
 
         $this->communityRepository->saveCommunity($community);
 

@@ -1,0 +1,66 @@
+@import "./../../../../styles/globals";
+
+$MIN_HEIGHT: 500px;
+
+article.component-community-settings-modal {
+  height: 100%;
+  min-height: $MIN_HEIGHT;
+
+  div.form-section {
+    margin-bottom: 20px;
+  }
+
+  .tab-content {
+    min-height: $MIN_HEIGHT;
+  }
+
+  form.tab-community {
+    header.tab-modal-header {
+      h1 {
+        margin-bottom: 20px;
+      }
+    }
+
+    ul.theme-options {
+      margin: 20px 0;
+
+      li {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  form.tab-image {
+    div.community-image-form {
+      text-align: center;
+
+      div.community-image-container {
+        display: inline-block;
+        margin-bottom: 20px;
+        max-width: 500px;
+        border: 3px solid white;
+        outline: 1px dotted material-color("grey", "400");
+        overflow: hidden;
+      }
+
+      div.community-image-controls {
+        text-align: center;
+      }
+    }
+  }
+
+  form.tab-features {
+    header.tab-modal-header {
+      margin-bottom: 32px;
+    }
+
+    ul.features {
+      li {
+        margin-bottom: 32px;
+      }
+    }
+  }
+
+  form.tab-collection {
+  }
+}

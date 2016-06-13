@@ -1,0 +1,17 @@
+@import "./../../../../../../../styles/globals";
+
+div.community-settings-modal-tab-features
+{
+  padding: 20px;
+
+  .label-text{font-size: 20px}
+  .label-description{
+    margin-left: 26px;
+    color: #666;
+    display: block;
+  }
+
+  .form-label.disabled *{
+    color:#999;
+  }
+}

@@ -21,6 +21,9 @@
             </div>
         </div>
     </div>
+    <div *ngIf="modalsService.modals.settings.isOpened()">
+        <cass-community-settings-modal (close)="modalsService.modals.settings.close()"></cass-community-settings-modal>
+    </div>
 </article>
 
 

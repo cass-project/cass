@@ -8,9 +8,11 @@ export class CommunityComponentService
         route: ModalControl,
         join: ModalControl,
         create: ModalControl
+        settings: ModalControl
     } = {
         route: new ModalControl(),
         join: new ModalControl(),
-        create: new ModalControl()
+        create: new ModalControl(),
+        settings: new ModalControl()
     };
 }

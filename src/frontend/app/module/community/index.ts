@@ -5,6 +5,7 @@ import {CommunityRouteModal} from "./component/Modal/CommunityRouteModal/index";
 import {CommunityCreateModal} from "./component/Modal/CommunityCreateModal/index";
 import {CommunityJoinModal} from "./component/Modal/CommunityJoinModal/index";
 import {CommunityComponentService} from "./service";
+import {CommunitySettingsModal} from "./component/Modal/CommunitySettingsModal/index";
 
 @Component({
     selector: 'cass-community',
@@ -13,6 +14,7 @@ import {CommunityComponentService} from "./service";
         CommunityRouteModal,
         CommunityCreateModal,
         CommunityJoinModal,
+        CommunitySettingsModal
     ]
 })
 export class CommunityComponent

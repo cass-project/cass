@@ -1,0 +1,100 @@
+.cass-padding-box-15
+  header.tab-modal-header
+    h1 Коммунити
+  .form-section
+    .input-group
+      label.form-label
+        span Название
+        input.form-input(
+          [(ngModel)]="service.community.title",
+          type="text",
+          placeholder="Название, заголовок коммунити"
+        )
+    .input-group
+      label.form-label
+        span Описание
+        input.form-input(
+          [(ngModel)]="service.community.description",
+          type="text",
+          placeholder="Подзаголовок коммунити"
+        )
+  .form-section.modal-list
+    header.tab-modal-header
+      h2 Тематика
+    ul.theme-options.modal-list-container
+      li.modal-list-item
+        .modal-list-icon
+          .modal-list-icon-container
+            i.fa.fa-bookmark
+        .modal-list-info
+          h1 Коммунити посвящено определенной тематике
+          p Если ваше коммунити посвященно определенной професиональной тематике, то вы можете получить больше посетителей и участников, если активируете эту опцию и укажите, какой именно тематике посвящено ваше коммунити
+          // Если опция не включена, то cass-theme-select не должен отображаться
+          cass-theme-select(*ngIf="isCommunitySettingsModalThemeEnabled")
+        .modal-list-controls
+          div.form-switch-button
+            input.form-switch-button-checkbox(
+              type="checkbox", id="communitySettingsModalThemeEnabled", checked="", [(ngModel)]="isCommunitySettingsModalThemeEnabled",
+              (ngModelChange)="communitySettingsModalThemeEnabledChange($event)"
+            )
+            label.form-switch-button-label(for="communitySettingsModalThemeEnabled")
+      // Опция отображается, только если опция выше активирована
+      li.modal-list-item(*ngIf="isCommunitySettingsModalThemeEnabled")
+        .modal-list-icon
+          .modal-list-icon-container
+            i.fa.fa-bullhorn
+        .modal-list-info
+          h1 Коммунити должно отображаться в паблике
+          p Паблик – это основной траффик. Именно оттуда случайные посетители этого сервиса смогут найти ваше коммунити.
+        .modal-list-controls
+            div.form-switch-button
+              input.form-switch-button-checkbox(
+                type="checkbox",
+                id="communitySettingsModalThemeEnablePublic",
+                checked="",
+                [(ngModel)]="!!service.community.theme_id"
+              )
+              label.form-switch-button-label(for="communitySettingsModalThemeEnablePublic")
+      // Опция отображается, только если обе опции выше активированы
+      li.modal-list-item(*ngIf="isCommunitySettingsModalThemeEnablePublic")
+        .modal-list-icon
+          .modal-list-icon-container
+            i.fa.fa-cab
+        .modal-list-info
+          h1.mark Я обязуюсь модерировать свое коммунити
+          p Если вы не собираетесь модерировать свое коммунити, то наши алгоритмы выборки будут считать ваше коммунити низкоприоритетным.
+        .modal-list-controls
+            div.form-switch-button
+              input.form-switch-button-checkbox(
+                type="checkbox",
+                id="communitySettingsModalThemeWillModerate",
+                checked="",
+                [(ngModel)]="isCommunitySettingsModalThemeWillModerate"
+              )
+              label.form-switch-button-label(for="communitySettingsModalThemeWillModerate")
+  .form-section
+    header.tab-modal-header
+      h2 Действия
+    .delete-community-form
+      div(*ngIf="! (deleteRequest.isRequested() || deleteRequest.isConfirmed())")
+        button.form-text-button(
+          (click)="deleteRequest.request()",
+          [disabled]="deleteRequest.isButtonDisabled()"
+        )
+          i.fa.fa-fw.fa-trash
+          span Я хочу удалить это коммунити
+      div(*ngIf="  deleteRequest.isRequested()")
+        button.form-button.form-button-red(
+          (click)="deleteRequest.confirm()"
+        )
+          i.fa.fa-fw.fa-trash
+          span Отправить запрос на удаление коммунити
+        button.form-button(
+          (click)="deleteRequest.cancel()"
+        )
+          span Отмена
+      div(*ngIf="deleteRequest.isConfirmed()")
+        p.request-sent Запрос на удаление коммунити отправлен.
+        button.form-text-button
+          i.fa.fa-fw.fa-ban
+          span Отозвать запрос

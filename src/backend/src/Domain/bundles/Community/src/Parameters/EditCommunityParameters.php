@@ -12,7 +12,7 @@ class EditCommunityParameters
     /** @var int */
     private $themeId;
 
-    public function __construct(string $title, string $description, int $themeId)
+    public function __construct(string $title, string $description, int $themeId = null)
     {
         $this->title = $title;
         $this->description = $description;
@@ -27,6 +27,11 @@ class EditCommunityParameters
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function hasThemeId(): bool
+    {
+        return $this->themeId !== null;
     }
 
     public function getThemeId(): int

@@ -1,0 +1,47 @@
+@import "./../../../../styles/globals";
+
+article.delete-me-im-demo {
+  margin-bottom: 10px;
+  padding: 30px;
+}
+
+div.progress-bar {
+  position: relative;
+  background: material-color("grey", "50");
+  border-radius: 2px;
+  overflow: hidden;
+
+  div.progress-bar-value {
+    height: 100%;
+  }
+}
+
+div.progress-bar-infinite {
+  div.progress-bar-value {
+    position: absolute;
+    background-color: material-color("light-blue", "400");
+
+    animation: loading 1.5s cubic-bezier(0.4, 0.0, 0.6, 1) infinite;
+
+    @keyframes loading {
+      from {left: 0; width: 0;}
+      50% {left: 0; width: 100%;}
+      to {left: 100%; width: 0;}
+    }
+  }
+}
+
+div.progress-bar-percent {
+  div.progress-bar-value {
+    background-color: material-color("green", "400");
+    transition: width 0.2s;
+  }
+}
+
+@each $color in $ALL_COLORS {
+  div.progress-bar-#{$color} {
+    div.progress-bar-value {
+      background-color: material-color($color, "400");
+    }
+  }
+}
