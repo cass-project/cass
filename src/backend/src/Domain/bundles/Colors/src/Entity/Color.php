@@ -56,4 +56,11 @@ class Color implements JSONSerializable
         $rgb = array($r, $g, $b);
         return $rgb;
     }
+
+    public function getName():string
+    {
+        preg_match("#([a-z-]*)\.#i", $this->code, $m);
+        return $m[1];
+    }
+
 }

@@ -8,12 +8,13 @@ use Domain\Profile\Middleware\Request\GreetingsFLRequest;
 use Domain\Profile\Middleware\Request\GreetingsLFMRequest;
 use Domain\Profile\Middleware\Request\GreetingsNRequest;
 use Domain\Profile\Service\ProfileService;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use React\Http\Response;
 
 class GreetingsAsCommand extends Command
 {
-    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): Response
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         $ps = $this->profileService;
         $profileId = $this->validateProfileId($request->getAttribute('profileId'));

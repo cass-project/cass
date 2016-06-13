@@ -88,7 +88,7 @@ class ProfileService
 
         $profile->getCollections()->attachChild($collection->getId());
 
-        $this->generateProfileImage($profile);
+        $this->generateProfileImage($profile->getId());
 
         $this->profileRepository->updateProfile($profile);
 
@@ -137,49 +137,22 @@ class ProfileService
         return $this->profileRepository->deleteProfileImage($profile);
     }
 
-    public function generateProfileImage(Profile $profile)
-    {
-        $profile_image = $this->profileRepository->deleteProfileImage($profile);
-
-        $publicPath  = '/public/assets/profile_image.png';
-        $storagePath = $this->profileStorageDir. '/profile_image.png';
-
-        $im = imagecreatetruecolor(ProfileImage::MIN_WIDTH, ProfileImage::MIN_HEIGHT);
-
-        $colors = array_filter($this->colorsService->getColors(),function(Color $color){
-            return preg_match('#.700$#',$color->getCode());
-        });
-        /** @var Color $color */
-        $color = $colors[array_rand($colors,1)];
-        $colorRGB = $color->toRGB();
-
-        $image_color = imagecolorallocatealpha($im,$colorRGB[0],$colorRGB[1],$colorRGB[2],0);
-        imagefill($im, 0,0,$image_color);
-        $text_color = imagecolorallocate($im,255,255,255);
-
-        $size = ProfileImage::MIN_HEIGHT*0.9;
-        $x = (ProfileImage::MIN_HEIGHT-$size);
-        $y = ProfileImage::MIN_HEIGHT-5;
-
-        imagettftext($im, $size, 0, $x,  $y, $text_color, $this->fontPath, 'S' );
-        imagepng($im, $storagePath);
-
-        $profile_image->setPublicPath($publicPath)->setStoragePath($storagePath);
-    }
-
     public function nameFL(int $profileId, string $firstName, string $lastName) {
         $this->profileRepository->nameFL($profileId, $firstName, $lastName);
         $this->profileRepository->setAsInitialized($profileId);
+        $this->generateProfileImage($profileId, $firstName[0]);
     }
 
     public function nameLFM(int $profileId, string $lastName, string $firstName, string $middleName) {
         $this->profileRepository->nameLFM($profileId, $lastName, $firstName, $middleName);
         $this->profileRepository->setAsInitialized($profileId);
+        $this->generateProfileImage($profileId, $lastName[0]);
     }
 
     public function nameN(int $profileId, string $nickName) {
         $this->profileRepository->nameN($profileId, $nickName);
         $this->profileRepository->setAsInitialized($profileId);
+        $this->generateProfileImage($profileId, $nickName[0]);
     }
 
     public function switchTo(Account $account, int $profileId): Profile {
@@ -288,5 +261,43 @@ class ProfileService
 
     public function setGenderFromStringCode(int $profileId, string $genderCode): Profile {
         return $this->profileRepository->setGenderFromStringCode($profileId, $genderCode);
+    }
+
+    public function generateProfileImage(int $profileId, string $char='T')
+    {
+        $char = strtoupper($char);
+        $profile = $this->profileRepository->getProfileById($profileId);
+        $profile_image = $this->profileRepository->deleteProfileImage($profile);
+
+        $storageDir = sprintf('%s/%s',$this->profileStorageDir, $profileId);
+
+        if(!is_dir($storageDir)) mkdir($storageDir);
+        $storagePath = sprintf('%s/%s',$storageDir ,'profile_image.png');
+        $im = imagecreatetruecolor(ProfileImage::MIN_WIDTH, ProfileImage::MIN_HEIGHT);
+
+        $colors = array_filter($this->colorsService->getColors(),function(Color $color){
+            return preg_match('#.700$#',$color->getCode());
+        });
+
+        /** @var Color $color */
+        $color = $colors[array_rand($colors, 1)];
+        $colorRGB = $color->toRGB();
+
+        /** @var Color $textColor */
+        $textColor = $this->colorsService->getColors()[sprintf("%s.100",$color->getName())];
+        $textColorRGB = $textColor->toRGB();
+
+        $image_color = imagecolorallocatealpha($im,$colorRGB[0],$colorRGB[1],$colorRGB[2],0);
+        imagefill($im, 0,0,$image_color);
+        $text_color = imagecolorallocate($im,$textColorRGB[0],$textColorRGB[1],$textColorRGB[2]);
+
+        $size = ProfileImage::MIN_HEIGHT*0.9;
+        $x = (ProfileImage::MIN_HEIGHT-$size);
+        $y = ProfileImage::MIN_HEIGHT-5;
+
+        imagettftext($im, $size, 0, $x,  $y, $text_color, $this->fontPath, $char );
+        imagepng($im, $storagePath);
+
+        $profile_image->setStoragePath($storagePath);
     }
 }
