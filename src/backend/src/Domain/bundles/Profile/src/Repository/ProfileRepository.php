@@ -135,8 +135,6 @@ class ProfileRepository extends EntityRepository
             }else{
                 $compare->setIsCurrent(false);
             }
-
-            $em->persist($compare);
         }
 
         $em->flush($profiles);
@@ -168,10 +166,9 @@ class ProfileRepository extends EntityRepository
         /** @var Profile $profile */
         $profile = $this->getProfileById($profileId);
 
-        // получаем темы по ids
-        $themes = $this->getEntityManager()->getRepository(Theme::class)->findBy(
-            ['id' => $expertInParameters->getThemeIds()]
-        );
+        $themes = $this->getEntityManager()->getRepository(Theme::class)->findBy([
+            'id' => $expertInParameters->getThemeIds()
+        ]);
 
         $profile->setExpertIn($themes)
             ->setExpertInIds($profile->getExpertIn());
@@ -306,9 +303,8 @@ class ProfileRepository extends EntityRepository
         return $profile;
     }
 
-    public function linkCollection(int $profileId, int $collectionId): Profile
+    public function linkCollection(Profile $profile, int $collectionId): Profile
     {
-        $profile = $this->getProfileById($profileId);
         $collections = $profile->getCollections();
 
         if(! $collections->hasCollection($collectionId)) {

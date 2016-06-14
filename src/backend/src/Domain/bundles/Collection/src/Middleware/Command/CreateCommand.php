@@ -35,7 +35,7 @@ class CreateCommand extends Command
                 $parameters
             );
         }else if($owner === 'profile') {
-            return $this->collectionService->createProfileCollection($parameters);
+            return $this->collectionService->createProfileCollection($this->currentAccountService->getCurrentProfile(), $parameters);
         }else{
             throw new BadCommandCallException('Unknown collection owner');
         }

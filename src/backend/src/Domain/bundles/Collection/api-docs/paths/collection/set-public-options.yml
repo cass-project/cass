@@ -1,0 +1,35 @@
+"/protected/collection/{collectionId}/set-public-options":
+  post:
+    tags:
+      - collection
+    description:
+      Установить опции индексации/приватности коллекции
+    parameters:
+      - name: collectionId
+        in: path
+        required: true
+        type: number
+        description:
+          ID коллекции
+      - name: body
+        in: body
+        required: true
+        description: JSON Request
+        schema:
+          schema:
+            $ref: '#/definitions/Collection_Request_SetPublicOptionsRequest'
+    responses:
+      200:
+        schema:
+          $ref: '#/responses/success'
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        schema:
+          $ref: '#/responses/NotFound'
+      409:
+        description:
+          Невалидный набор опций
+        schema:
+          $ref: '#/responses/error'

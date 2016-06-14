@@ -1,0 +1,15 @@
+Collection_Request_SetPublicOptionsRequest:
+  required:
+    - is_private
+    - public_enabled
+    - moderation_contract
+  properties:
+    is_private:
+      type: boolean
+      description: Коллекция является приватной
+    public_enabled:
+      type: boolean
+      description: Включить/выключить индексация в публичный каталог
+    moderation_enabled:
+      type: boolean
+      description: Обязательства по модерированию коллекции

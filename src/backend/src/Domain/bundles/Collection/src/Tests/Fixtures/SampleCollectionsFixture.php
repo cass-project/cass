@@ -18,23 +18,24 @@ class SampleCollectionsFixture implements Fixture
 
     public function up(Application $app, EntityManager $em)
     {
-        $authorProfileId = DemoProfileFixture::getProfile()->getId();
+        $profile = DemoProfileFixture::getProfile();
+        $authorProfileId = $profile->getId();
         $collectionService = $app->getContainer()->get(CollectionService::class); /** @var CollectionService $collectionService */
 
         self::$profileCollections = [
-            1 => $collectionService->createProfileCollection(
+            1 => $collectionService->createProfileCollection($profile,
                 new CreateCollectionParameters($authorProfileId, 'Profile Collection 1', 'My Profile Collection 1', SampleThemesFixture::getTheme(1)->getId())
             ),
-            2 => $collectionService->createProfileCollection(
+            2 => $collectionService->createProfileCollection($profile,
                 new CreateCollectionParameters($authorProfileId, 'Profile Collection 1', 'My Profile Collection 2', SampleThemesFixture::getTheme(2)->getId())
             ),
-            3 => $collectionService->createProfileCollection(
+            3 => $collectionService->createProfileCollection($profile,
                 new CreateCollectionParameters($authorProfileId, 'Profile Collection 1', 'My Profile Collection 3', SampleThemesFixture::getTheme(3)->getId())
             ),
-            4 => $collectionService->createProfileCollection(
+            4 => $collectionService->createProfileCollection($profile,
                 new CreateCollectionParameters($authorProfileId, 'Profile Collection 1', 'My Profile Collection 4', SampleThemesFixture::getTheme(4)->getId())
             ),
-            5 => $collectionService->createProfileCollection(
+            5 => $collectionService->createProfileCollection($profile,
                 new CreateCollectionParameters($authorProfileId, 'Profile Collection 1', 'My Profile Collection 5', SampleThemesFixture::getTheme(5)->getId())
             ),
         ];

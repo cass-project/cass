@@ -259,7 +259,27 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
     protected function expectAuthError(): self {
         return $this->expectJSONContentType()
             ->expectStatusCode(403)
-            ->expectJSONError();
+            ->expectJSONError()
+            ->expectJSONBody([
+                'success' => false,
+                'error' => $this->expectString()
+            ])
+        ;
+    }
+
+    /**
+     * Ожидается ошибка 404 Не найдено
+     * @return MiddlewareTestCase
+     */
+    protected function expectNotFoundError(): self {
+        return $this->expectJSONContentType()
+            ->expectStatusCode(404)
+            ->expectJSONError()
+            ->expectJSONBody([
+                'success' => false,
+                'error' => $this->expectString()
+            ])
+        ;
     }
 
     protected function expectJSONError(): self {
