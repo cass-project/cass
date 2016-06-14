@@ -8,7 +8,9 @@ import {ProfileSetup} from "./component/ProfileSetup/index";
 import {AuthService} from "../auth/service/AuthService";
 import {Profile} from "./entity/Profile";
 import {ModalBoxComponent} from "../modal/component/box/index";
-import {CreteCollectionMaster} from "../collection/component/CreateCollectionMaster/index";
+import {CollectionCreateMaster} from "../collection/component/CollectionCreateMaster/index";
+
+
 
 @Component({
     selector: 'cass-profile',
@@ -19,16 +21,18 @@ import {CreteCollectionMaster} from "../collection/component/CreateCollectionMas
         ProfileModal,
         ProfileSwitcher,
         ProfileSetup,
-        CreteCollectionMaster
+        CollectionCreateMaster
     ]
 })
 export class ProfileComponent
 {
     currentProfile;
+    for_id;
 
     constructor(private service: ProfileComponentService) {
         if(AuthService.isSignedIn()) {
             this.currentProfile = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity));
+            this.for_id = '123';
         }
     }
 }
