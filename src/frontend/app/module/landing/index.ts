@@ -7,13 +7,15 @@ import {AuthService} from "../auth/service/AuthService";
 import {MessageBusService} from "../message/service/MessageBusService/index";
 import {ModalBoxComponent} from "../modal/component/box/index";
 import {ModalComponent} from "../modal/component/index";
+import {CollectionCreateMaster} from "../collection/component/CollectionCreateMaster/index";
 
 @Component({
     template: require('./template.html'),
     directives: [
         AuthComponent,
         ProfileSetup,
-        ThemeSelect
+        ThemeSelect,
+        CollectionCreateMaster
     ],
 })
 export class LandingComponent
