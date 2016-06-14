@@ -1,7 +1,7 @@
 import {UploadProfileImageStrategy} from "../../util/UploadProfileImageStrategy";
 
-import {Injectable} from 'angular2/core';
-import {Http, URLSearchParams} from 'angular2/http';
+import {Injectable} from '../../../../node_modules/angular2/core.d';
+import {Http, URLSearchParams} from '../../../../node_modules/angular2/http.d';
 import {AuthService} from "../../../auth/service/AuthService";
 
 @Injectable()
