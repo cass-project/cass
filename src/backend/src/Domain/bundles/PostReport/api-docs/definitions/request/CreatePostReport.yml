@@ -1,0 +1,16 @@
+PUT_PostReport_Request:
+  type: object
+  required:
+    - profile_id
+    - report_type
+    - description
+  properties:
+    profile_id:
+      type: number
+      description: ID профиля создавшего репорт
+    report_type:
+      type: array
+      description: массив типов репортов
+    description:
+      type: string
+      description: Описание репорта
