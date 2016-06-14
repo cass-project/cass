@@ -5,7 +5,7 @@ import {UploadImageService} from "../../../../../util/component/UploadImage/serv
 import {ImageCropper} from "../../../../../util/component/ImageCropper/index";
 import {ScreenControls} from "../../../../../util/classes/ScreenControls";
 import {UploadImageCropModel} from "../../../../../util/component/UploadImage/strategy";
-import {ProfileRESTService} from "../../../ProfileService/ProfileRESTService";
+import {ProfileRESTService} from "../../../../service/ProfileRESTService";
 import {ProfileImage} from "../../../ProfileImage/index";
 import {AuthService} from "../../../../../auth/service/AuthService";
 import {UploadImageModal} from "../../../../../util/component/UploadImage/index";

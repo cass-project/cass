@@ -7,8 +7,8 @@ import {InterestsTab} from "./Tab/Interests/index";
 import {ProfilesTab} from "./Tab/Profiles/index";
 import {ImageTab} from "./Tab/Image/index";
 import {ProfileComponentService} from "../../service";
-import {ProfileRESTService} from "../ProfileService/ProfileRESTService";
-import {ProfileService} from "../ProfileService/ProfileService";
+import {ProfileRESTService} from "../../service/ProfileRESTService";
+import {ProfileService} from "../../service/ProfileService";
 import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
 import {ThemeService} from "../../../theme/service/ThemeService";
 

@@ -10,7 +10,7 @@ import {ProfileSetupScreenInterests} from "./Screen/ProfileSetupScreenInterests/
 import {ProfileSetupScreenExpertIn} from "./Screen/ProfileSetupScreenExpertIn/index";
 import {ComponentStages} from "../../../util/classes/ComponentStages";
 import {ScreenControls} from "../../../util/classes/ScreenControls";
-import {ProfileRESTService} from "../ProfileService/ProfileRESTService";
+import {ProfileRESTService} from "../../service/ProfileRESTService";
 import {FrontlineService} from "../../../frontline/service";
 import {ProfileComponentService} from "../../service";
 import {AuthService} from "../../../auth/service/AuthService";

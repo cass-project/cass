@@ -1,7 +1,7 @@
 import {Component} from "angular2/core";
 import {ThemeSelect} from "../../../../../theme/component/ThemeSelect/index";
 import {ThemeService} from "../../../../../theme/service/ThemeService";
-import {ProfileService} from "../../../ProfileService/ProfileService";
+import {ProfileService} from "../../../../service/ProfileService";
 import {ProfileModalModel} from "../../model";
 
 

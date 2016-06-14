@@ -3,7 +3,7 @@ import {RouteConfig, RouterOutlet, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RoutePar
 import {MessageBusService} from "../../../message/service/MessageBusService/index";
 import {AuthService} from "../../../auth/service/AuthService";
 import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
-import {ProfileRESTService} from "../../component/ProfileService/ProfileRESTService";
+import {ProfileRESTService} from "../../service/ProfileRESTService";
 
 
 @Component({
