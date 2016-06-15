@@ -49,16 +49,23 @@ export class CollectionCreateMaster
     }
 
     create(){
-        //console.log(this._for, this.for_id, this.collection);
         if(this._for === 'profile') {
             this.collectionRESTService.profileCreateCollection(this.for_id, this.collection).subscribe(data => {
                     this.complete.emit(data);
                 },
                 err => {
                     this.error.emit(err);
-                    console.log(err)
+                    console.log(err);
                 });
-        } else if(this._for === 'community'){}
+        } else if(this._for === 'community'){
+            this.collectionRESTService.communityCreateCollection(this.for_id, this.collection).subscribe(data => {
+                    this.complete.emit(data);
+                },
+                err => {
+                    this.error.emit(err);
+                    console.log(err);
+                });
+        }
     }
 
     private buttons = new Buttons(this.screens);
