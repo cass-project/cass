@@ -2,13 +2,13 @@ PUT_PostReport_Request:
   type: object
   required:
     - profile_id
-    - report_type
+    - report_types
     - description
   properties:
     profile_id:
       type: number
       description: ID профиля создавшего репорт
-    report_type:
+    report_types:
       type: array
       description: массив типов репортов
     description:

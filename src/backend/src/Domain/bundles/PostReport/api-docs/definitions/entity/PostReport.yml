@@ -3,8 +3,8 @@ PostReport_Entity_PostEntity:
   required:
     - id
     - profile_id
-    - created
-    - report_type
+    - created_at
+    - report_types
     - description
   properties:
     id:
@@ -16,7 +16,7 @@ PostReport_Entity_PostEntity:
     created:
       type: string
       description: дата создания
-    report_type:
+    report_types:
       type: array
       description: тип репорта
     description:
