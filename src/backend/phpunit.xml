@@ -22,7 +22,7 @@
             <directory>src/Domain/bundles/PostAttachment/src/Tests</directory>
         </testsuite>
         <testsuite name="domain_profile_im">
-            <directory>src/Domain/bundles/ProfileIM/src/Tests</directory>
+            <directory>src/Domain/bundles/ProfileIM/src/wTests</directory>
         </testsuite>
         <testsuite name="domain_theme">
             <directory>src/Domain/bundles/Theme/src/Tests</directory>

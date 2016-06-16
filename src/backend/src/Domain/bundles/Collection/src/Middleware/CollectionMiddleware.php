@@ -7,6 +7,7 @@ use Domain\Collection\Exception\CollectionNotFoundException;
 use Domain\Collection\Middleware\Command\CreateCommand;
 use Domain\Collection\Middleware\Command\DeleteCommand;
 use Domain\Collection\Middleware\Command\EditCommand;
+use Domain\Collection\Middleware\Command\SetPublicOptionsCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
@@ -30,6 +31,7 @@ class CollectionMiddleware implements MiddlewareInterface
                 ->attachDirect('create', CreateCommand::class)
                 ->attachDirect('delete', DeleteCommand::class)
                 ->attachDirect('edit', EditCommand::class)
+                ->attachDirect('set-public-options', SetPublicOptionsCommand::class)
                 ->resolve($request);
 
             return $resolver->run($request, $responseBuilder);

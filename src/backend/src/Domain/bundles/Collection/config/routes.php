@@ -28,4 +28,10 @@ return function(Application $app) {
         CollectionMiddleware::class,
         'collection-edit'
     );
+
+    $app->post(
+        '/protected/collection/{collectionId}/{command:set-public-options}[/]',
+        CollectionMiddleware::class,
+        'collection-set-public-options'
+    );
 };

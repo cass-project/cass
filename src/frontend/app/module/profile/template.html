@@ -23,7 +23,7 @@
   <div *ngIf="service.modals.createCollectionMaster.isActive()">
     <cass-modal>
       <cass-modal-box width="340px">
-        <cass-collection-create-master></cass-collection-create-master>
+        <cass-collection-create-master for="profile" [for_id]="currentProfile.id"></cass-collection-create-master>
       </cass-modal-box>
     </cass-modal>
   </div>

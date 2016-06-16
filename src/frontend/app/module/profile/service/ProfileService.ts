@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {AuthService} from "../../../auth/service/AuthService";
+import {AuthService} from "../../auth/service/AuthService";
 
 @Injectable()
 export class ProfileService {

@@ -5,7 +5,7 @@ import {ModalControl} from "../../../../../util/classes/ModalControl";
 import {UploadImageModal} from "../../../../../util/component/UploadImage/index";
 import {UploadImageService} from "../../../../../util/component/UploadImage/service";
 import {UploadProfileImageStrategy} from "../../../../util/UploadProfileImageStrategy";
-import {ProfileRESTService} from "../../../ProfileService/ProfileRESTService";
+import {ProfileRESTService} from "../../../../service/ProfileRESTService";
 import {FrontlineService} from "../../../../../frontline/service";
 import {AuthService} from "../../../../../auth/service/AuthService";
 

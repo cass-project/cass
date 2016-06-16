@@ -1,6 +1,6 @@
 import {Component, Injectable} from "angular2/core";
 import {AuthService} from "../../../auth/service/AuthService";
-import {ProfileRESTService} from "../ProfileService/ProfileRESTService";
+import {ProfileRESTService} from "../../service/ProfileRESTService";
 import {ProfileComponentService} from "../../service";
 
 @Injectable()

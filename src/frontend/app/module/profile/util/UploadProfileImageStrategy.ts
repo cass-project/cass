@@ -1,7 +1,7 @@
 import {UploadImageStrategy} from "../../util/component/UploadImage/strategy";
 import {UploadImageCropModel} from "../../util/component/UploadImage/strategy";
 import {UploadImageModal} from "../../util/component/UploadImage/index";
-import {ProfileRESTService} from "../component/ProfileService/ProfileRESTService";
+import {ProfileRESTService} from "../service/ProfileRESTService";
 
 export class UploadProfileImageStrategy implements UploadImageStrategy
 {

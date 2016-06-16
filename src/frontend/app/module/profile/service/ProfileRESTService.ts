@@ -1,8 +1,8 @@
-import {UploadProfileImageStrategy} from "../../util/UploadProfileImageStrategy";
+import {UploadProfileImageStrategy} from "../util/UploadProfileImageStrategy";
 
 import {Injectable} from 'angular2/core';
 import {Http, URLSearchParams} from 'angular2/http';
-import {AuthService} from "../../../auth/service/AuthService";
+import {AuthService} from "../../auth/service/AuthService";
 
 @Injectable()
 export class ProfileRESTService {

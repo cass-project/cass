@@ -17,13 +17,14 @@ import {LandingComponent} from "./module/landing/index";
 import {ProfileRoute} from "./module/profile/route/ProfileRoute/index";
 import {AuthService} from "./module/auth/service/AuthService";
 import {ProfileSwitcherService} from "./module/profile/component/ProfileSwitcher/service";
-import {ProfileRESTService} from "./module/profile/component/ProfileService/ProfileRESTService";
 import {ModalService} from "./module/modal/component/service";
 import {CommunityRoute} from "./module/community/route/CommunityRoute/index";
 import {MessageBusService} from "./module/message/service/MessageBusService/index";
 import {MessageBusNotifications} from "./module/message/component/MessageBusNotifications/index";
 import {HtmlComponent} from "./module/html/index";
 import {CommunityService} from "./module/community/service/CommunityService";
+import {CollectionRESTService} from "./module/collection/service/CollectionRESTService";
+import {ProfileRESTService} from "./module/profile/service/ProfileRESTService";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -39,7 +40,8 @@ import {CommunityService} from "./module/community/service/CommunityService";
         CommunityService,
         ThemeService,
         ProfileSwitcherService,
-        ProfileRESTService
+        ProfileRESTService,
+        CollectionRESTService
     ],
     directives: [
         ROUTER_DIRECTIVES,

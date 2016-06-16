@@ -3,7 +3,7 @@ namespace Domain\Collection\Entity;
 
 use Application\Util\IdTrait;
 use Application\Util\JSONSerializable;
-use Domain\Collection\Exception\CollectionIsPrivateException;
+use Domain\Collection\Exception\InvalidCollectionOptionsException;
 use Domain\Collection\Exception\PublicEnabledException;
 use Domain\Community\Entity\Community;
 use Domain\Definitions\ImageCollection\ImageCollection;
@@ -215,7 +215,7 @@ class Collection implements JSONSerializable
         $moderationContract = $options['moderation_contract'];
 
         if($isPrivate && $publicEnabled) {
-            throw new CollectionIsPrivateException(sprintf(
+            throw new InvalidCollectionOptionsException(sprintf(
                 'Collection %s cannot be both private and indexed by public catalog',
                 $this->isPersisted() ? $this->getId() : '#NEW_COLLECTION'
             ));

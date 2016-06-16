@@ -5,12 +5,13 @@ use Domain\Auth\Service\CurrentAccountService;
 use Domain\Collection\Entity\Collection;
 use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Parameters\EditCollectionParameters;
+use Domain\Collection\Parameters\SetPublicOptionsParameters;
 use Domain\Collection\Repository\CollectionRepository;
 use Domain\Community\Repository\CommunityRepository;
 use Domain\Definitions\ImageCollection\Image;
 use Domain\Definitions\ImageCollection\ImageCollection;
+use Domain\Profile\Entity\Profile;
 use Domain\Profile\Repository\ProfileRepository;
-use League\Flysystem\AdapterInterface;
 use League\Flysystem\FilesystemInterface;
 
 class CollectionService
@@ -61,19 +62,28 @@ class CollectionService
 
     public function createCommunityCollection(int $communityId, CreateCollectionParameters $parameters): Collection
     {
-        $collection = $this->collectionRepository->createCollection(sprintf('community:%d', $communityId), $this->getDefaultImages(), $parameters);
+        $collection = $this->collectionRepository->createCollection(
+            sprintf('community:%d', $communityId),
+            $this->getDefaultImages(),
+            $parameters
+        );
 
         $this->communityRepository->linkCollection($communityId, $collection->getId());
 
         return $collection;
     }
 
-    public function createProfileCollection(CreateCollectionParameters $parameters): Collection
+    public function createProfileCollection(Profile $profile, CreateCollectionParameters $parameters): Collection
     {
-        $profileId = $this->currentAccountService->getCurrentProfile()->getId();
+        $profileId = $profile->getId();
 
-        $collection = $this->collectionRepository->createCollection(sprintf('profile:%d', $profileId), $this->getDefaultImages(), $parameters);
-        $this->profileRepository->linkCollection($profileId, $collection->getId());
+        $collection = $this->collectionRepository->createCollection(
+            sprintf('profile:%d', $profileId),
+            $this->getDefaultImages(),
+            $parameters
+        );
+
+        $this->profileRepository->linkCollection($profile, $collection->getId());
 
         return $collection;
     }
@@ -120,6 +130,11 @@ class CollectionService
         return $this->collectionRepository->editCollection($collectionId, $parameters);
     }
 
+    public function setPublicOptions(int $collectionId, SetPublicOptionsParameters $parameters): Collection
+    {
+        return $this->collectionRepository->updatePublicOptions($collectionId, $parameters);
+    }
+
     private function getDefaultImages()
     {
         return (new ImageCollection())
@@ -132,5 +147,16 @@ class CollectionService
                 sprintf('%s/community-default.png', $this->assetsPath)
             ))
         ;
+    }
+
+    public function createDefaultCollectionForProfile(Profile $profile)
+    {
+        $collectionParameters = new CreateCollectionParameters(
+            $profile->getId(),
+            '$gt_collection_my-feed_title',
+            '$gt_collection_my-feed_description'
+        );
+
+        $this->createProfileCollection($profile, $collectionParameters);
     }
 }

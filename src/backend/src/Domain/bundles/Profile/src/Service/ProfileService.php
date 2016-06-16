@@ -5,6 +5,7 @@ use Domain\Account\Entity\Account;
 use Application\Exception\PermissionsDeniedException;
 use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Repository\CollectionRepository;
+use Domain\Collection\Service\CollectionService;
 use PHPImageWorkshop\Core\ImageWorkshopLayer;
 use PHPImageWorkshop\ImageWorkshop;
 use Domain\Profile\Entity\Profile;
@@ -27,16 +28,20 @@ class ProfileService
     /** @var ProfileRepository */
     private $profileRepository;
 
-    /** @var CollectionRepository */
-    private $collectionRepository;
+    /** @var CollectionService */
+    private $collectionService;
 
     /** @var string */
     private $profileStorageDir;
 
-    public function __construct(ProfileRepository $profileRepository, string $profileStorageDir, CollectionRepository $collectionRepository) {
+    public function __construct(
+        ProfileRepository $profileRepository,
+        CollectionService $collectionService,
+        string $profileStorageDir
+    ) {
         $this->profileRepository = $profileRepository;
+        $this->collectionService = $collectionService;
         $this->profileStorageDir = $profileStorageDir;
-        $this->collectionRepository = $collectionRepository;
     }
 
     public function getProfileById(int $profileId): Profile {
@@ -75,12 +80,7 @@ class ProfileService
         $this->profileRepository->createProfile($profile);
         $this->profileRepository->switchTo($account->getProfiles()->toArray(), $profile);
 
-        $collectionParameters = new CreateCollectionParameters($profile->getId(), '$gt_collection_my-feed_title', '$gt_collection_my-feed_description');
-        $collection = $this->collectionRepository->createCollection("profile:{$profile->getId()}", $collectionParameters);
-
-        $profile->getCollections()->attachChild($collection->getId());
-
-        $this->profileRepository->updateProfile($profile);
+        $this->collectionService->createDefaultCollectionForProfile($profile);
 
         return $profile;
     }
