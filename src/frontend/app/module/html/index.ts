@@ -6,6 +6,7 @@ import {ColorPickerDemo} from "./demo/ColorPickerDemo/index";
 import {CollectionCreateMasterDemo} from "./demo/CollectionCreateMasterDemo/index";
 import {ProgressBarDemo} from "./demo/ProgressBarDemo/index";
 import {CommunitySettingsModalDemo} from "./demo/CommunitySettingsModalDemo/index";
+import {CollectionSettingsDemo} from "./demo/CollectionSettingsDemo/index";
 
 @Component({
     template: require('./template.jade'),
@@ -39,6 +40,11 @@ import {CommunitySettingsModalDemo} from "./demo/CommunitySettingsModalDemo/inde
         name: 'CommunitySettingsModalDemo',
         path: '/community-settings-modal-demo',
         component: CommunitySettingsModalDemo
+    },
+    {
+        name: 'CollectionSettingsDemo',
+        path: '/collection-settings-demo',
+        component: CollectionSettingsDemo
     }
 ])
 export class HtmlComponent
