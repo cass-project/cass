@@ -47,7 +47,7 @@ class CommunityRepository extends EntityRepository
     }
 
     public function clearImage(Community $community) {
-        $community->clearImage();
+        $community->setupPlaceholderImage();
         $this->getEntityManager()->flush($community);
     }
 

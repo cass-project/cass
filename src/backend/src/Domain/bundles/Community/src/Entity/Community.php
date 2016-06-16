@@ -102,6 +102,8 @@ class Community
             $this->setTheme($theme);
             $this->enablePublicDiscover();
         }
+
+        $this->setupPlaceholderImage();
     }
 
     public function toJSON(): array {
@@ -195,7 +197,7 @@ class Community
         return $this;
     }
 
-    public function clearImage() {
+    public function setupPlaceholderImage() {
         $this->image = [
             'storage_path' => self::DEFAULT_IMAGE_STORAGE_DIR,
             'public_path' => self::DEFAULT_IMAGE_PUBLIC_PATH,

@@ -38,6 +38,9 @@ final class CreateCommunityTest extends CommunityMiddlewareTestCase
                         'has' => true,
                         'id' => $theme->getId()
                     ],
+                    'image' => [
+                        'public_path' => $this->expectString()
+                    ],
                     'public_options' => [
                         'public_enabled' => true,
                         'moderation_contract' => false

@@ -95,7 +95,7 @@ class CommunityService
     public function deleteCommunityImage(int $communityId): Community
     {
         $community = $this->communityRepository->getCommunityById($communityId);
-        $community->clearImage();
+        $community->setupPlaceholderImage();
 
         $this->communityRepository->saveCommunity($community);
 
