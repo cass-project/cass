@@ -35,7 +35,8 @@ export class CollectionCreateMaster
     });
 
     @Input ('for') _for: any;
-    @Input ('for_id') for_id: string;
+    @Input ('owner_profile_id') owner_profile_id: string;
+    @Input ('owner_community_id') owner_community_id: string;
     @Output('complete') complete = new EventEmitter();
     @Output('error') error = new EventEmitter();
 
@@ -50,7 +51,7 @@ export class CollectionCreateMaster
 
     create(){
         if(this._for === 'profile') {
-            this.collectionRESTService.profileCreateCollection(this.for_id, this.collection).subscribe(data => {
+            this.collectionRESTService.profileCreateCollection(this.owner_profile_id, this.collection).subscribe(data => {
                     this.complete.emit(data);
                 },
                 err => {
@@ -58,7 +59,7 @@ export class CollectionCreateMaster
                     console.log(err);
                 });
         } else if(this._for === 'community'){
-            this.collectionRESTService.communityCreateCollection(this.for_id, this.collection).subscribe(data => {
+            this.collectionRESTService.communityCreateCollection(this.owner_profile_id, this.owner_community_id, this.collection).subscribe(data => {
                     this.complete.emit(data);
                 },
                 err => {
