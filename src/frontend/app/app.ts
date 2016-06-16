@@ -79,7 +79,10 @@ import {ProfileRESTService} from "./module/profile/service/ProfileRESTService";
     }
 ])
 export class App {
-    constructor(private authService: AuthService) {
+    constructor(private authService: AuthService, private pService: ProfileComponentService) {
         // Do not(!) remove authService dependency.
+        /*if(!authService.getAuthToken().getCurrentProfile().entity.is_initialized){
+            this.pService.modals.setup.open();
+        }*/
     }
 }
