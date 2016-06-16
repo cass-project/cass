@@ -8,6 +8,7 @@ use Application\REST\Request\Params\SchemaParams;
 use Application\REST\Service\JSONSchema;
 use Domain\PostReport\Entity\PostReport;
 use Domain\PostReport\Parameters\CreatePostReportParameters;
+use Domain\PostReport\PostReportBundle;
 
 class CreatePostReportRequest extends SchemaParams
 {
@@ -28,7 +29,7 @@ class CreatePostReportRequest extends SchemaParams
 
   protected function getSchema(): JSONSchema
   {
-    return self::getSchemaService()->getSchema(PostReport::class, './definitions/request/CreatePostReportRequest.yml');
+    return self::getSchemaService()->getSchema(PostReportBundle::class, './definitions/request/CreatePostReportRequest.yml');
   }
 
 }

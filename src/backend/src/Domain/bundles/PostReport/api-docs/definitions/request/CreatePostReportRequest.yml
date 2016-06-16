@@ -7,10 +7,12 @@ PUT_PostReport_Request:
   properties:
     profile_id:
       type: number
-      description: ID профиля создавшего репорт
+      description: id профайла
     report_types:
       type: array
-      description: массив типов репортов
+      items:
+        type: number
+        description: report_id
     description:
       type: string
-      description: Описание репорта
+      description: описание репорта

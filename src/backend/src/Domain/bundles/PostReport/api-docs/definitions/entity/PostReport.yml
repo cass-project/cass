@@ -1,24 +1,21 @@
-PostReport_Entity_PostEntity:
+PostReport_Entity_PostReport:
   type: object
   required:
     - id
     - profile_id
-    - created_at
     - report_types
     - description
   properties:
     id:
-      type: number
-      description: ID
+      type: numeric
+      description: id
     profile_id:
-      type: number
-      description: id профиля
-    created:
-      type: string
-      description: дата создания
+      type: numeric
+      description: profileID
     report_types:
-      type: array
-      description: тип репорта
+      type: string
+      description: report_types
     description:
       type: string
-      description: сопроводительный текст
+      description: report text
+

@@ -1,0 +1,28 @@
+/protected/post-report/create:
+  put:
+    tags:
+      - post_report
+    description: создаёт репорт на пост
+    security:
+      - x_api_key: []
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/PUT_PostReport_Request'
+    responses:
+      200:
+        schema:
+          properties:
+            success:
+              type: boolean
+              default: true
+            entity:
+              $ref: '#/definitions/PostReport_Entity_PostReport'
+          required:
+            - success
+            - entity
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'

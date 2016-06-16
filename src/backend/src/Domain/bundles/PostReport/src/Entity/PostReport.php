@@ -1,10 +1,16 @@
 <?php
 namespace Domain\PostReport\Entity;
 
+use Application\Util\IdTrait;
 use Domain\Profile\Entity\Profile;
-
+/**
+ * @Entity(repositoryClass="Domain\PostReport\Repository\PostReportRepository")
+ * @Table(name="post_report")
+ */
 class PostReport
 {
+  use IdTrait;
+
   /** Нецензурная лексика */
   const TypeCensored = 1;
   /** Оскорбление, Дискриминация, некорректное поведение */
@@ -14,11 +20,6 @@ class PostReport
   /** Не относящийся к тематике контент */
   const POST_REPORT_TYPE_4 = 3;
 
-  /**
-   * @Column(type="integer")
-   * @var int
-   */
-  protected $id;
 
   /**
    * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
@@ -42,17 +43,6 @@ class PostReport
    */
   protected $description;
 
-  public function getId():int
-  {
-    return $this->id;
-  }
-
-  public function setId($id):self
-  {
-    $this->id = $id;
-    return $this;
-  }
-
   public function getProfile():Profile
   {
     return $this->profile;
@@ -74,14 +64,15 @@ class PostReport
     return $this;
   }
 
-  public function getReportTypes()
+  public function getReportTypes():array
   {
-    return $this->report_types;
+
+    return json_decode($this->report_types, true);
   }
 
-  public function setReportTypes($report_types):self
+  public function setReportTypes(array $report_types):self
   {
-    $this->report_types = $report_types;
+    $this->report_types = json_encode($report_types) ;
     return $this;
   }
 
