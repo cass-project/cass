@@ -18,7 +18,7 @@ class Account implements JSONSerializable
     use IdTrait;
 
     /**
-     * @OneToMany(targetEntity="Domain\Profile\Entity\Profile", mappedBy="account")
+     * @OneToMany(targetEntity="Domain\Profile\Entity\Profile", mappedBy="account", cascade={"persist", "remove"})
      * @var Collection
      */
     private $profiles;
@@ -73,7 +73,7 @@ class Account implements JSONSerializable
     public function toJSON(): array
     {
         return [
-            'id' => $this->getId(),
+            'id' => $this->isPersisted() ? $this->getId() : '#NEW_ACCOUNT',
             'email' => $this->getEmail(),
             'disabled' => [
                 'is_disabled' => $this->isDisabled(),

@@ -7,7 +7,7 @@ Collection_Entity_Collection:
     - title
     - description
     - theme
-    - imageы
+    - image
     - public_options
   properties:
     id:
@@ -35,20 +35,9 @@ Collection_Entity_Collection:
     description:
       type: string
       description: Описание коллекции
-    imageы:
-      type: object
-      description: Изображения
+    image:
       schema:
-        required:
-          - small
-          - full
-        properties:
-          small:
-            type: string
-            description: Изображение (размер 64x64)
-          full:
-            type: string
-            description: Изображение (полный размер)
+        $ref: '#/definitions/Domain_Definitions_ImageColection'
     public_options:
       type: object
       schema:

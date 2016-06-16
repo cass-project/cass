@@ -1,0 +1,11 @@
+Domain_Definitions_Image:
+  required:
+    - id
+    - public_path
+  properties:
+    id:
+      type: string
+      description: ID
+    public_path:
+      type: string
+      description: Путь к картинке (/www)

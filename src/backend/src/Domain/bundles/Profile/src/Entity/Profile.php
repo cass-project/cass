@@ -95,8 +95,11 @@ class Profile implements JSONSerializable
 
     public function toJSON(): array {
         $result = [
-            'id' => (int)$this->getId(),
-            'account_id' => (int)$this->getAccount()->getId(),
+            'id' =>  $this->isPersisted() ? $this->getId() : '#NEW_PROFILE',
+            'account_id' => $this->getAccount()->isPersisted()
+                ? $this->getAccount()->getId()
+                : '#NEW_ACCOUNT'
+            ,
             'is_current' => (bool)$this->isCurrent(),
             'is_initialized' => $this->isInitialized(),
             'greetings' => $this->getProfileGreetings()->toJSON(),
@@ -226,12 +229,7 @@ class Profile implements JSONSerializable
 
         return $this;
     }
-
-    public function setAccount(Account $account)
-    {
-        $this->account = $account;
-        return $this;
-    }
+    
     public function getAccount(): Account {
         return $this->account;
     }

@@ -1,0 +1,6 @@
+Domain_Definitions_ImageColection:
+  type: array
+  description: Изображения
+  items:
+    schema:
+      $ref: '#/definitions/Domain_Definitions_Image'
