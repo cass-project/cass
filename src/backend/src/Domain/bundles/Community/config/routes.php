@@ -24,6 +24,12 @@ return function(Application $app) {
         'community-image-upload'
     );
 
+    $app->delete(
+        '/protected/community/{communityId}/{command:image-delete}[/]',
+        CommunityMiddleware::class,
+        'community-delete-image'
+    );
+
     $app->get(
         '/community/{communityId}/{command:get}[/]',
         CommunityMiddleware::class,

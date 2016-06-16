@@ -92,6 +92,16 @@ class CommunityService
         return $community;
     }
 
+    public function deleteCommunityImage(int $communityId): Community
+    {
+        $community = $this->communityRepository->getCommunityById($communityId);
+        $community->clearImage();
+
+        $this->communityRepository->saveCommunity($community);
+
+        return $community;
+    }
+
     public function setPublicOptions(int $communityId, SetPublicOptionsParameters $parameters): Community {
         $community = $this->communityRepository->getCommunityById($communityId);
 

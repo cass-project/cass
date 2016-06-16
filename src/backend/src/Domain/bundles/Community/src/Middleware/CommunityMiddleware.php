@@ -4,6 +4,7 @@ namespace Domain\Community\Middleware;
 use Application\REST\Response\GenericResponseBuilder;
 use Application\Service\CommandService;
 use Domain\Community\Middleware\Command\CreateCommand;
+use Domain\Community\Middleware\Command\ImageDeleteCommand;
 use Domain\Community\Middleware\Command\EditCommand;
 use Domain\Community\Middleware\Command\GetByIdCommand;
 use Domain\Community\Middleware\Command\getBySIDCommand;
@@ -30,6 +31,7 @@ final class CommunityMiddleware implements MiddlewareInterface
             ->attachDirect('create', CreateCommand::class)
             ->attachDirect('edit', EditCommand::class)
             ->attachDirect('image-upload', ImageUploadCommand::class)
+            ->attachDirect('image-delete', ImageDeleteCommand::class)
             ->attachDirect('get', GetByIdCommand::class)
             ->attachDirect('get-by-sid', getBySIDCommand::class)
             ->attachDirect('set-public-options', SetPublicOptionsCommand::class)

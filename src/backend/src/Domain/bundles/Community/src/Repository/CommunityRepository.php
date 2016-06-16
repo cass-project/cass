@@ -24,7 +24,7 @@ class CommunityRepository extends EntityRepository
         $entity = $this->find($communityId);
 
         if($entity === null) {
-            throw new CommunityNotFoundException(sprintf('Community with ID `%s` not found', $entity));
+            throw new CommunityNotFoundException(sprintf('Community with ID `%s` not found', $communityId));
         }
 
         return $entity;

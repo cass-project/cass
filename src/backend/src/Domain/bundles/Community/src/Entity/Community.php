@@ -18,6 +18,9 @@ class Community
 {
     const SID_LENGTH = 8;
 
+    const DEFAULT_IMAGE_PUBLIC_PATH = '/dist/assets/community/community-default.png';
+    const DEFAULT_IMAGE_STORAGE_DIR = __DIR__.'/../../../../../../../www/app/dist/assets/community/community-default.png';
+
     use IdTrait;
     use CollectionOwnerTrait;
 
@@ -193,7 +196,10 @@ class Community
     }
 
     public function clearImage() {
-        $this->image = [];
+        $this->image = [
+            'storage_path' => self::DEFAULT_IMAGE_STORAGE_DIR,
+            'public_path' => self::DEFAULT_IMAGE_PUBLIC_PATH,
+        ];
     }
 
     public function setImage(CommunityImage $communityImage) {

@@ -26,13 +26,9 @@ export class TabModal
         if(this.tabs.length > 0) {
             this.selectTab(this.tabs.first);
         }
-
-        console.log(this.getBottomTabs(), this.getTopTabs());
     }
 
     public selectTab(tab: TabModalTab) {
-        console.log('select', tab);
-
         this.active = tab;
 
         this.tabs.forEach((tab: TabModalTab) => {
