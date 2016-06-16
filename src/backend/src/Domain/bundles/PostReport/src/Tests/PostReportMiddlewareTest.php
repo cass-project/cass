@@ -73,4 +73,13 @@ class PostReportMiddlewareTest extends MiddlewareTestCase
       ->setParameters($json);
   }
 
+
+  protected function requestGetPostRequest($type,$offset,$limit)
+  {
+    return $this->request('GET',
+                          sprintf('/protected/post-report/list/type/%s/offset/%s/limit/%s/',
+                                  $type, $offset, $limit
+                                  ));
+  }
+
 }

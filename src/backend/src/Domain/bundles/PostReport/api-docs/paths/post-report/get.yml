@@ -1,0 +1,33 @@
+'/protected/post-report/list/type/{type}/offset/{offset}/limit/{limit}':
+  get:
+    tags:
+      - post_report
+    description: создаёт репорт на пост
+    parameters:
+      - name: type
+        in: path
+        required: true
+      - name: offset
+        in: path
+        required: true
+      - name: limit
+        in: path
+        required: true
+    responses:
+      200:
+        schema:
+          properties:
+            success:
+              type: boolean
+              default: true
+            entities:
+              items:
+                type: array
+                description: report_id
+                $ref: '#/definitions/PostReport_Entity_PostReport'
+          required:
+            - success
+            - entity
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
