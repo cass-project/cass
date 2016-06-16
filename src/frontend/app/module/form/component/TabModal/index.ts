@@ -1,8 +1,10 @@
-import {Component, ContentChildren, QueryList} from "angular2/core";
+import {Component, ContentChildren, QueryList, Input} from "angular2/core";
 
 import {ModalComponent} from "../../../modal/component/index";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
 import {TabModalTab} from "./component/TabModalTab/index";
+import {TabModalHeader} from "./component/TabModalHeader/index";
+import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
 
 @Component({
     selector: 'cass-tab-modal',
@@ -14,17 +16,28 @@ import {TabModalTab} from "./component/TabModalTab/index";
         ModalComponent,
         ModalBoxComponent,
         TabModalTab,
+        ThemeSelect,
     ]
 })
 export class TabModal
 {
+    @Input('min-height') minHeight: string = '200';
+
     @ContentChildren(TabModalTab) tabs: QueryList<TabModalTab>;
     
     private active: TabModalTab;
 
     ngAfterContentInit() {
         if(this.tabs.length > 0) {
-            this.selectTab(this.tabs.first);
+            this.tabs.forEach((tab: TabModalTab) => {
+                if(tab.forceActive) {
+                    this.active = tab;
+                }
+            });
+
+            if(! this.active) {
+                this.selectTab(this.tabs.first);
+            }
         }
     }
 
@@ -68,4 +81,5 @@ export class TabModal
 export const TAB_MODAL_DIRECTIVES = [
     TabModal,
     TabModalTab,
+    TabModalHeader,
 ];

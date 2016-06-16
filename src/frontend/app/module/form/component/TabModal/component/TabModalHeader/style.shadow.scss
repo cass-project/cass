@@ -1,0 +1,25 @@
+@import "~sass-material-colors";
+
+:host {
+  h1.tab-header {
+    color: black;
+  }
+
+  h1.tab-header-1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  h1.tab-header-2 {
+    margin: 15px 0;
+    font-size: 18px;
+  }
+
+  span.info {
+    font-size: 11px;
+    color: material-color("grey", "400");
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+}

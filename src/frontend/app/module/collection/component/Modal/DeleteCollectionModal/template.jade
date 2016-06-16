@@ -1,0 +1,62 @@
+article.component.component-delete-collection-modal
+  cass-modal
+    cass-modal-box(width="500px")
+      .cass-padding-box-15
+        header.question
+          h1 Вы собираетесь удалить подборку
+          h2 Моя подборка
+          p Что нам делать с контентом, который вы уже в этой подборке разместили?
+        .modal-list
+          ul.answers
+            li
+              label(for="deleteCollectionModalChoiceA")
+                section.modal-list-item
+                  .modal-list-icon
+                    .modal-list-icon-container
+                      i.fa.fa-bookmark
+                  .modal-list-info
+                    h1 Безвозвратно удалить
+                    p Все, что вы в этой подборке собрали, будет удалено.
+                    cass-theme-select
+                  .modal-list-controls
+                    input(type="radio", id="deleteCollectionModalChoiceA", name="delete_request_answer")
+            li
+              label(for="deleteCollectionModalChoiceB")
+                section.modal-list-item
+                  .modal-list-icon
+                    .modal-list-icon-container
+                      i.fa.fa-bookmark
+                  .modal-list-info
+                    h1 Переместить в "Неотсортированные"
+                    p Мы создадим специальную приватную коллекцию, в которой будет перемещен весь контент удаляемой вами подборки.
+                    cass-theme-select
+                  .modal-list-controls
+                    input(type="radio", id="deleteCollectionModalChoiceB", name="delete_request_answer")
+            li
+              label(for="deleteCollectionModalChoiceC")
+                section.modal-list-item
+                  .modal-list-icon
+                    .modal-list-icon-container
+                      i.fa.fa-bookmark
+                  .modal-list-info
+                    h1 Переместить в другую подборку
+                    p Выберите подборку, в которую требуется переместить:
+                    cass-collection-select
+                  .modal-list-controls
+                    input(type="radio", id="deleteCollectionModalChoiceC", name="delete_request_answer")
+      footer.form-footer
+        .form-footer-section
+          .form-footer-item
+            .cass-padding-box-5
+              button.form-text-button(
+              type="button"
+              )
+                span Отмена
+        .form-footer-section
+          .form-footer-item
+            .cass-padding-box-5
+              button.form-button.form-button-red(
+                type="button"
+              )
+                i.fa.fa-fw.fa-trash
+                span Удалить

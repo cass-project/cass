@@ -1,13 +1,125 @@
 article.component.component-collection-settings-modal
   cass-modal
     cass-modal-box(width="700px")
-        cass-tab-modal
-          cass-tab-modal-tab(title="Коллекция")
-            header.form-header
-              h1 Коллекция
-          cass-tab-modal-tab(title="Тематика")
-            header.form-header
-              h1 Тематика
+        cass-tab-modal(min-height="600")
+          div(*ngIf="deleteModal.isOpened()")
+            cass-collection-delete-modal
+          cass-tab-modal-tab(title="Подборка")
+            form.form.tab-collection
+              .cass-padding-box-15
+                cass-tab-modal-header
+                  span Моя подборка
+                .form-section
+                  .input-group
+                    label.form-label
+                      span Название
+                      input.form-input(
+                        type="text",
+                        placeholder="Название, заголовок подборки"
+                      )
+                  .input-group
+                    label.form-label
+                      span Описание
+                      input.form-input(
+                        type="text",
+                        placeholder="Подзаголовок, одна строка про подборку"
+                      )
+                  .modal-list
+                    ul.collection-options-list
+                      li
+                        section.modal-list-item
+                          .modal-list-icon
+                            .modal-list-icon-container
+                              i.fa.fa-bookmark
+                          .modal-list-info
+                            h1 Подборка имеет тематику
+                            p Если вы укажите тематику у своей подборки, то другие люди смогут найти вас в поисках контента по выбранной вами тематике.
+                            cass-theme-select
+                          .modal-list-controls
+                            div.form-switch-button
+                              input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", checked)
+                              label.form-switch-button-label(for="collectionCreateMasterEnableTheme")
+                .form-section
+                  cass-tab-modal-header(level="2")
+                    span Цвет
+                    span.info Вы можете выбрать специальную расцветку для подборки
+                  div
+                    cass-color-picker
+                .form-section
+                  cass-tab-modal-header(level="2")
+                    span Действия
+                  .delete-collection-form
+                    button.form-button.form-button-remove(
+                      (click)="requestDeleteCollection()"
+                    )
+                      i.fa.fa-fw.fa-trash
+                      span Удалить подборку
+          cass-tab-modal-tab(title="Доступ")
+            form.form.tab-theme
+              .cass-padding-box-15
+                cass-tab-modal-header
+                  span Доступ
+                  span.info Если подборка имеет тематику и она модерируется, вы получите больше посетителей
+                .modal-list
+                  ul.collection-options-list
+                    li
+                      section.modal-list-item
+                        .modal-list-icon
+                          .modal-list-icon-container
+                            i.fa.fa-user-secret
+                        .modal-list-info
+                          h1 Это частная подборка
+                          p По умолчанию содержимое подборок публично и контент, который вы добавляете сюда, может быть доступен любому желающему
+                        .modal-list-controls
+                          div.form-switch-button
+                            input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterIsPrivate")
+                            label.form-switch-button-label(for="collectionCreateMasterIsPrivate")
+                    li
+                      section.modal-list-item
+                        .modal-list-icon
+                          .modal-list-icon-container
+                            i.fa.fa-bullhorn
+                        .modal-list-info
+                          h1 Подборка должна отображаться в паблике
+                          p Паблик – это основной траффик. Именно оттуда случайные посетители смогут найти вашу подборку
+                        .modal-list-controls
+                          div.form-switch-button
+                            input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterPublicEnabled", checked)
+                            label.form-switch-button-label(for="collectionCreateMasterPublicEnabled")
+                    li
+                      section.modal-list-item
+                        .modal-list-icon
+                          .modal-list-icon-container
+                            i.fa.fa-check-square-o
+                        .modal-list-info
+                          h1 Я обязуюсь добавлять в эту подборку только подходящий контент
+                          p Указав тематику и включив этот флаг, вы берете на себя обязательство постить только соответствующий указанной вами тематики контент. Взамен наши алгоритмы считают ваш контент более приоритетным для размещение в паблике.
+                        .modal-list-controls
+                          div.form-switch-button
+                            input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterModerationContact")
+                            label.form-switch-button-label(for="collectionCreateMasterModerationContact")
           cass-tab-modal-tab(title="Изображение")
-            header.form-header
-              h1 Изображение
+            form.form.form-image
+              .cass-padding-box-15
+                cass-tab-modal-header
+                  span Изображение
+                .collection-image-form
+                  .collection-image-container
+                    cass-collection-image(border="square", url="/dist/assets/profile-demo.png")
+                  .collection-image-controls
+                    button.form-text-button.form-button-text-remove
+                      i.fa.fa-fw.fa-trash
+                      span Удалить
+                    button.form-text-button.form-button-text-remove(disabled)
+                      i.fa.fa-spinner.fa-pulse.fa-fw
+                      span Удалить
+                    button.form-button.form-button-primary
+                      i.fa.fa-fw.fa-upload
+                      span Загрузить другое изображение
+          footer.tab-content-footer
+            .left
+              button.form-text-button
+                span Закрыть
+            .right
+              button.form-button.form-button-green
+                span Сохранить
