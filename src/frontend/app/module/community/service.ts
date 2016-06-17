@@ -1,4 +1,5 @@
 import {Injectable} from "angular2/core";
+
 import {ModalControl} from "../util/classes/ModalControl";
 
 @Injectable()

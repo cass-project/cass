@@ -1,9 +1,9 @@
 import {Component} from "angular2/core";
 
 import {Screen} from "../../screen";
-import {ImageCropperService, ImageCropper} from "../../../../../../util/component/ImageCropper/index";
+import {ImageCropperService, ImageCropper} from "../../../../../../util/component/ImageCropper";
 import {CommunityCreateModalModel} from "../../model";
-import {CommunityCreateModalForm} from "../../Form/index";
+import {CommunityCreateModalForm} from "../../Form";
 import {UploadImageCropModel} from "../../../../../../util/component/UploadImage/strategy";
 
 @Component({

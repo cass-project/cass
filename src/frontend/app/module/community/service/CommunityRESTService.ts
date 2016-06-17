@@ -3,7 +3,6 @@ import {Http, Response, ResponseType, ResponseOptions, Headers} from "angular2/h
 import {Observable} from "rxjs/Observable";
 import {getResponseURL} from "angular2/src/http/http_utils";
 
-import {UploadImageCropModel} from "../../util/component/UploadImage/strategy";
 import {CommunityCreateRequestModel} from "../model/CommunityCreateRequestModel";
 import {CommunityImageUploadRequestModel} from "../model/CommunityImageUploadRequestModel";
 import {CommunityControlFeatureRequestModel} from "../model/CommunityActivateFeatureModel";

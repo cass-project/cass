@@ -9,11 +9,10 @@ cass-community-create-modal-form((abort)="abort()", (next)="next()")
           h1 {{featuresService.getName(feature.code)}}
           p {{featuresService.getDescription(feature.code)}}
         .modal-list-controls
-          div.form-switch-button
+          #communityCreateModalFeature{{feature.code}}Checkbox.form-switch-button
             input.form-switch-button-checkbox(
               [(ngModel)]="feature.is_activated",
               type="checkbox",
-              id="communityCreateModalFeature{{feature.code}}Checkbox",
               [disabled]="feature.disabled",
             )
             label.form-switch-button-label(

@@ -1,10 +1,9 @@
 import {Component} from "angular2/core";
 
 import {Screen} from "../../screen";
-import {LoadingLinearIndicator} from "../../../../../../util/component/LoadingLinearIndicator/index";
+import {LoadingLinearIndicator} from "../../../../../../util/component/LoadingLinearIndicator";
 import {CommunityRESTService} from "../../../../../service/CommunityRESTService";
 import {CommunityCreateModalModel} from "../../model";
-import {COMMON_DIRECTIVES} from "angular2/common";
 import {CommunityCreateRequestModel} from "../../../../../model/CommunityCreateRequestModel";
 import {CommunityImageUploadRequestModel} from "../../../../../model/CommunityImageUploadRequestModel";
 import {CommunityControlFeatureRequestModel} from "../../../../../model/CommunityActivateFeatureModel";
@@ -24,9 +23,7 @@ export class ScreenProcessing extends Screen
         private service: CommunityRESTService
     ) {
         super();
-    }
 
-    ngOnInit() {
         let model = this.model;
 
         this.service.create(<CommunityCreateRequestModel>{

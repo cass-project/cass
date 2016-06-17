@@ -1,4 +1,5 @@
 import {Injectable} from "angular2/core";
+
 import {FrontlineService} from "../../frontline/service";
 import {FeaturesInfo} from "../enity/FeaturesInfo";
 

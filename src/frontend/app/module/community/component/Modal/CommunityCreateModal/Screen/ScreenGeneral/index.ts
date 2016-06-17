@@ -2,7 +2,7 @@ import {Component} from "angular2/core";
 
 import {CommunityCreateModalModel} from "../../model";
 import {Screen} from "../../screen";
-import {CommunityCreateModalForm} from "../../Form/index";
+import {CommunityCreateModalForm} from "../../Form";
 
 @Component({
     selector: 'cass-community-create-modal-screen-general',
