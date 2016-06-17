@@ -23,4 +23,9 @@ class PostReportService
   {
     return $this->postReportRepository->createPostReport($createPostReportParameters);
   }
+
+  public function getPostReports(int $type, int $offset, int $limit): array
+  {
+    return $this->postReportRepository->getPostReports($type, $offset, $limit);
+  }
 }

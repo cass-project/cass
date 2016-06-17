@@ -5,29 +5,37 @@ namespace Domain\PostReport\Middleware\Command;
 
 
 use Application\REST\Response\ResponseBuilder;
-use Domain\PostReport\Middleware\Request\CreatePostReportRequest;
-use Domain\Profile\Exception\ProfileNotFoundException;
+use Domain\PostReport\Entity\PostReport;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
-class CreateCommand extends Command
+class GetCommand extends Command
 {
+
   public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface{
     try {
-      $createPostReportParameters = (new CreatePostReportRequest($request))->getParameters();
-      $postReport = $this->postReportService->createPostReport($createPostReportParameters);
+
+      $type   = $request->getAttribute('type');
+      $offset = $request->getAttribute('offset');
+      $limit  = $request->getAttribute('limit');
+
+      $posts = $this->postReportService->getPostReports($type,$offset,$limit);
 
       return $responseBuilder
         ->setStatusSuccess()
         ->setJson([
-                    'entity' => $postReport->toJSON()
+                    'entities' => array_map(function(PostReport $postReport){
+                      return $postReport->toJSON();
+                    },$posts)
                   ])
         ->build();
-    }catch(ProfileNotFoundException $e){
+    }catch(Exception $e){
       return $responseBuilder
         ->setStatusNotFound()
         ->setError($e->getMessage())
         ->build();
     }
   }
+
 }

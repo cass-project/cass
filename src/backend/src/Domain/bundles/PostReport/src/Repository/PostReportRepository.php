@@ -34,4 +34,18 @@ class PostReportRepository extends EntityRepository
 
     return $postReport;
   }
+
+  public function getPostReports(int $type, $offset, $limit): array
+  {
+    $r = $this->getEntityManager()->getRepository(PostReport::class);
+    $result = $r->findBy([],null,$limit,$offset);
+
+    return array_filter($result, function(PostReport $postReport)use ($type){
+      return array_walk($postReport->getReportTypes(), function($report_type)use($type){
+        return $report_type == $type;
+      });
+    });
+
+
+  }
 }

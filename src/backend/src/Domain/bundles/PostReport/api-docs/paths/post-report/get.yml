@@ -4,15 +4,21 @@
       - post_report
     description: создаёт репорт на пост
     parameters:
-      - name: type
-        in: path
+      - in: path
+        name: type
+        type: number
         required: true
-      - name: offset
-        in: path
+        description: тип репорта
+      - in: path
+        name: offset
+        type: number
         required: true
-      - name: limit
-        in: path
+        description: тип репорта
+      - in: path
+        name: limit
+        type: number
         required: true
+        description: тип репорта
     responses:
       200:
         schema:
@@ -21,13 +27,12 @@
               type: boolean
               default: true
             entities:
+              type: array
+              description: репорты
               items:
-                type: array
-                description: report_id
                 $ref: '#/definitions/PostReport_Entity_PostReport'
           required:
             - success
-            - entity
       403:
         schema:
           $ref: '#/responses/Unauthorized'

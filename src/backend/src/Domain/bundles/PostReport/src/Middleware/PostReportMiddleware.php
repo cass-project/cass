@@ -7,6 +7,7 @@ namespace Domain\PostReport\Middleware;
 use Application\REST\Response\GenericResponseBuilder;
 use Application\Service\CommandService;
 use Domain\PostReport\Middleware\Command\CreateCommand;
+use Domain\PostReport\Middleware\Command\GetCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -25,6 +26,7 @@ class PostReportMiddleware implements MiddlewareInterface
     $responseBuilder = new GenericResponseBuilder($response);
     $resolver = $this->commandService->createResolverBuilder()
       ->attachDirect('create', CreateCommand::class)
+      ->attachDirect('list', GetCommand::class)
       ->resolve($request);
 
     try {

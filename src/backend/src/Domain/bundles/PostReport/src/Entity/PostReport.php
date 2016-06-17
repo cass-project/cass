@@ -66,7 +66,6 @@ class PostReport
 
   public function getReportTypes():array
   {
-
     return json_decode($this->report_types, true);
   }
 
