@@ -1,7 +1,4 @@
-import {Output} from "angular2/core";
-import {EventEmitter} from "angular2/core";
-
-import {CommunityCreateModalModel} from "./model";
+import {Output, EventEmitter} from "angular2/core";
 
 export class Screen
 {

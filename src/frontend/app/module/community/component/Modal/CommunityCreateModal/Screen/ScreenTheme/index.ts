@@ -1,9 +1,9 @@
 import {Component} from "angular2/core";
 
 import {Screen} from "../../screen";
-import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
+import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect";
 import {CommunityCreateModalModel} from "../../model";
-import {CommunityCreateModalForm} from "../../Form/index";
+import {CommunityCreateModalForm} from "../../Form";
 
 @Component({
     selector: 'cass-community-create-modal-screen-theme',

@@ -1,11 +1,10 @@
 import {Component} from "angular2/core";
 
-import {CommunityRESTService} from "./service/CommunityRESTService";
-import {CommunityRouteModal} from "./component/Modal/CommunityRouteModal/index";
-import {CommunityCreateModal} from "./component/Modal/CommunityCreateModal/index";
-import {CommunityJoinModal} from "./component/Modal/CommunityJoinModal/index";
+import {CommunityRouteModal} from "./component/Modal/CommunityRouteModal";
+import {CommunityCreateModal} from "./component/Modal/CommunityCreateModal";
+import {CommunityJoinModal} from "./component/Modal/CommunityJoinModal";
+import {CommunitySettingsModal} from "./component/Modal/CommunitySettingsModal";
 import {CommunityComponentService} from "./service";
-import {CommunitySettingsModal} from "./component/Modal/CommunitySettingsModal/index";
 
 @Component({
     selector: 'cass-community',

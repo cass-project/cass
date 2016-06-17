@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from "angular2/core";
+import {Component} from "angular2/core";
 import {Screen} from "../screen";
 
 @Component({

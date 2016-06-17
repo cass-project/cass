@@ -1,12 +1,11 @@
 import {Component} from "angular2/core";
-import {RouteParams, Router} from "angular2/router";
+import {RouteParams} from "angular2/router";
 
 import {CommunityEnity} from "./../../enity/Community";
 import {CommunityService} from "../../service/CommunityService";
-import {ModalComponent} from "../../../modal/component/index";
-import {ModalBoxComponent} from "../../../modal/component/box/index";
-import {LoadingLinearIndicator} from "../../../util/component/LoadingLinearIndicator/index";
-import {ModalControl} from "../../../util/classes/ModalControl";
+import {ModalComponent} from "../../../modal/component";
+import {ModalBoxComponent} from "../../../modal/component/box";
+import {LoadingLinearIndicator} from "../../../util/component/LoadingLinearIndicator";
 import {CommunityComponentService} from "../../service";
 
 @Component({

@@ -1,6 +1,5 @@
 import {Component} from "angular2/core";
 
-import {CommunityCreateModalModel} from "../../../CommunityCreateModal/model";
 import {CommunityFeaturesService} from "../../../../../service/CommunityFeaturesService";
 import {CommunityFeaturesModel} from "../../../CommunityCreateModal/model";
 import {CommunityEnity} from "../../../../../enity/Community";

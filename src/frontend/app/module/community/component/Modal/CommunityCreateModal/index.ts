@@ -2,15 +2,15 @@ import {Component, EventEmitter, Output} from "angular2/core";
 
 import {CommunityCreateModalModel} from "./model";
 
-import {ScreenGeneral} from "./Screen/ScreenGeneral/index";
-import {ScreenTheme} from "./Screen/ScreenTheme/index";
-import {ScreenImage} from "./Screen/ScreenImage/index";
-import {ScreenFeatures} from "./Screen/ScreenFeatures/index";
-import {ScreenProcessing} from "./Screen/ScreenProcessing/index";
-import {ScreenComplete} from "./Screen/ScreenComplete/index";
+import {ScreenGeneral} from "./Screen/ScreenGeneral";
+import {ScreenTheme} from "./Screen/ScreenTheme";
+import {ScreenImage} from "./Screen/ScreenImage";
+import {ScreenFeatures} from "./Screen/ScreenFeatures";
+import {ScreenProcessing} from "./Screen/ScreenProcessing";
+import {ScreenComplete} from "./Screen/ScreenComplete";
 
-import {ModalComponent} from "../../../../modal/component/index";
-import {ModalBoxComponent} from "../../../../modal/component/box/index";
+import {ModalComponent} from "../../../../modal/component";
+import {ModalBoxComponent} from "../../../../modal/component/box";
 import {ScreenControls} from "../../../../util/classes/ScreenControls";
 import {AuthService} from "../../../../auth/service/AuthService";
 

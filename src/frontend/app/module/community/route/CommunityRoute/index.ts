@@ -2,8 +2,8 @@ import {Component} from "angular2/core";
 import {RouterOutlet, RouteConfig} from "angular2/router";
 
 import {CommunityComponent} from "../../index";
-import {CommunityPage} from "../CommunityPageRoute/index";
-import {CommunityMenuComponent} from "../../component/Menu/index";
+import {CommunityPage} from "../CommunityPageRoute";
+import {CommunityMenuComponent} from "../../component/Menu";
 
 @Component({
     selector: "community-router",

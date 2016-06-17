@@ -1,11 +1,9 @@
 import {Component} from "angular2/core";
 
-import {CommunityCreateModalModel} from "../../model";
-import {FrontlineService} from "../../../../../../frontline/service";
+import {CommunityCreateModalModel, CommunityFeaturesModel} from "../../model";
 import {CommunityFeaturesService} from "../../../../../service/CommunityFeaturesService";
 import {Screen} from "../../screen";
-import {CommunityCreateModalForm} from "../../Form/index";
-import {CommunityFeaturesModel} from "../../model";
+import {CommunityCreateModalForm} from "../../Form";
 
 @Component({
     selector: 'cass-community-create-modal-screen-features',
