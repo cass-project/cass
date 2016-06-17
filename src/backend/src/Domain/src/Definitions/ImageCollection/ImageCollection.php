@@ -33,7 +33,7 @@ class ImageCollection implements JSONSerializable
         $result = [];
 
         foreach($this->images as $id => $image) {
-            $result[$id] = $image->toJSON();
+            $result[$id] = ['id' => $id] + $image->toJSON();
         }
 
         return $result;
@@ -63,4 +63,4 @@ class ImageCollection implements JSONSerializable
     {
         return isset($this->images[$id]);
     }
-}
+}   

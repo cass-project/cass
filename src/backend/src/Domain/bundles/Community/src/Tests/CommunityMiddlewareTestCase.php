@@ -4,10 +4,22 @@ namespace Domain\Community\Tests;
 use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Application\Util\Definitions\Point;
+use Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
+use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 use Zend\Diactoros\UploadedFile;
 
 abstract class CommunityMiddlewareTestCase extends MiddlewareTestCase
 {
+    protected function getFixtures(): array
+    {
+        return [
+            new DemoAccountFixture(),
+            new DemoProfileFixture(),
+            new SampleThemesFixture(),
+        ];
+    }
+
     protected function requestCreateCommunity(array $json): RESTRequest
     {
         return $this->request('PUT', '/protected/community/create')
@@ -29,6 +41,11 @@ abstract class CommunityMiddlewareTestCase extends MiddlewareTestCase
             ->setUploadedFiles([
                 'file' => new UploadedFile($fileName, filesize($fileName), 0)
             ]);
+    }
+
+    protected function requestDeleteImage(int $communityId): RESTRequest
+    {
+        return $this->request('DELETE', sprintf('/protected/community/%d/image-delete', $communityId));
     }
 
     protected function requestGetCommunityById(int $communityId): RESTRequest

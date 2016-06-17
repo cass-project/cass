@@ -1,0 +1,22 @@
+article.component.component-tab-modal
+  .tab-modal
+    .tab-panel
+      .top
+        ul.tab-list
+          li(*ngFor="#tab of getTopTabs()")
+            button.tab-link(
+              (click)="selectTab(tab)",
+              [ngClass]="{'tab-link-active': isActive(tab)}"
+            )
+              span {{tab.title}}
+      .bottom
+        ul.tab-list
+          li(*ngFor="#tab of getBottomTabs()")
+            button.tab-link(
+              (click)="selectTab(tab)",
+              [ngClass]="{'tab-link-active': isActive(tab)}"
+            )
+              span {{tab.title}}
+    .tab-content
+      .tab-content-container([style.min-height.px]="minHeight")
+        ng-content

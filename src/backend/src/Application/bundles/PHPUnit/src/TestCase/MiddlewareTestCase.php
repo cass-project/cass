@@ -131,7 +131,7 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
      * @param string $uri URI
      * @return RESTRequest
      */
-    protected function request(string $method, string $uri): RESTRequest
+    protected final function request(string $method, string $uri): RESTRequest
     {
         return new RESTRequest($this, $method, $uri);
     }

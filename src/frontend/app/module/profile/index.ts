@@ -27,12 +27,10 @@ import {CollectionCreateMaster} from "../collection/component/CollectionCreateMa
 export class ProfileComponent
 {
     currentProfile;
-    for_id;
 
     constructor(private service: ProfileComponentService) {
         if(AuthService.isSignedIn()) {
             this.currentProfile = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity));
-            this.for_id = '123';
         }
     }
 }

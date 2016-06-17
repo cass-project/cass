@@ -24,7 +24,7 @@ class CommunityRepository extends EntityRepository
         $entity = $this->find($communityId);
 
         if($entity === null) {
-            throw new CommunityNotFoundException(sprintf('Community with ID `%s` not found', $entity));
+            throw new CommunityNotFoundException(sprintf('Community with ID `%s` not found', $communityId));
         }
 
         return $entity;
@@ -47,7 +47,7 @@ class CommunityRepository extends EntityRepository
     }
 
     public function clearImage(Community $community) {
-        $community->clearImage();
+        $community->setupPlaceholderImage();
         $this->getEntityManager()->flush($community);
     }
 

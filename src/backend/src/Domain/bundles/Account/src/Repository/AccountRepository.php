@@ -46,15 +46,15 @@ class AccountRepository extends EntityRepository
         }
     }
 
-    public function saveAccount(Account $account, Profile $profile)
+    public function createAccount(Account $account, Profile $firstProfile)
     {
-        $em = $this->getEntityManager();
+        if(! $account->getProfiles()->contains($firstProfile)) {
+            $account->addProfile($firstProfile);
+        }
 
-        $account->addProfile($profile);
-        $profile->setAccount($account);
+        $em = $this->getEntityManager();
         $em->persist($account);
-        $em->persist($profile);
-        $em->flush([$account, $profile]);
+        $em->flush($account);
     }
 
     public function requestDelete(Account $account)

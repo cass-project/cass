@@ -1,0 +1,33 @@
+"/protected/collection/{collectionId}/image-delete":
+  delete:
+    tags:
+      - collection
+    description:
+      Удаляет изображение коллекции
+    security:
+      - x_api_key: []
+    parameters:
+      - name: collectionId
+        in: path
+        required: true
+        type: number:
+        description: ID коллекции
+    responses:
+      200:
+        schema:
+          required:
+            - success
+            - image
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            image:
+              schema:
+                $ref: '#/definitions/Domain_Definitions_ImageColection'
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        schema:
+          $ref: '#/responses/NotFound'

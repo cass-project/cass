@@ -56,7 +56,7 @@ class AccountService
             ->setProfileImage(new ProfileImage($profile))
         ;
 
-        $this->accountRepository->saveAccount($account, $profile);
+        $this->accountRepository->createAccount($account, $profile);
 
         return $account;
     }

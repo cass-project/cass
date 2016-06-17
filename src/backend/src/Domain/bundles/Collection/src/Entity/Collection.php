@@ -6,7 +6,7 @@ use Application\Util\JSONSerializable;
 use Domain\Collection\Exception\InvalidCollectionOptionsException;
 use Domain\Collection\Exception\PublicEnabledException;
 use Domain\Community\Entity\Community;
-use Domain\Definitions\ImageCollection\ImageCollection;
+use Domain\Definitions\ImageCollection\ImageEntityTrait;
 use Domain\Profile\Entity\Profile;
 use Domain\Theme\Entity\Theme;
 
@@ -17,6 +17,7 @@ use Domain\Theme\Entity\Theme;
 class Collection implements JSONSerializable
 {
     use IdTrait;
+    use ImageEntityTrait;
 
     /**
      * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
@@ -49,13 +50,7 @@ class Collection implements JSONSerializable
      * @var string
      */
     private $description;
-
-    /**
-     * @Column(type="json_array")
-     * @var array
-     */
-    private $image = [];
-
+    
     /**
      * @Column(type="boolean", name="is_private")
      * @var bool
@@ -88,7 +83,8 @@ class Collection implements JSONSerializable
         $this->description = $description;
     }
 
-    public function toJSON(): array {
+    public function toJSON(): array
+    {
         $result = [
             'id' => $this->getId(),
             'author_profile_id' => $this->getAuthorProfile()->getId(),
@@ -122,37 +118,45 @@ class Collection implements JSONSerializable
         return $this->ownerSID;
     }
 
-    public function getTheme(): Theme {
+    public function getTheme(): Theme
+    {
         return $this->theme;
     }
 
-    public function unsetTheme() {
+    public function unsetTheme()
+    {
         $this->theme = null;
     }
 
-    public function hasTheme(): bool {
+    public function hasTheme(): bool
+    {
         return $this->theme !== null;
     }
 
-    public function setTheme($theme): self {
+    public function setTheme($theme): self
+    {
         $this->theme = $theme;
         return $this;
     }
 
-    public function getTitle(): string {
+    public function getTitle(): string
+    {
         return $this->title;
     }
 
-    public function setTitle(string $title): self {
+    public function setTitle(string $title): self
+    {
         $this->title = $title;
         return $this;
     }
 
-    public function getDescription(): string {
+    public function getDescription(): string
+    {
         return $this->description;
     }
 
-    public function setDescription(string $description): self {
+    public function setDescription(string $description): self
+    {
         $this->description = $description;
         return $this;
     }
@@ -224,18 +228,6 @@ class Collection implements JSONSerializable
         $this->isPrivate = $isPrivate;
         $this->publicEnabled = $publicEnabled;
         $this->moderationContract = $moderationContract;
-
-        return $this;
-    }
-
-    public function fetchImages(): ImageCollection
-    {
-        return ImageCollection::createFromJSON($this->image);
-    }
-
-    public function exportImages(ImageCollection $images): self
-    {
-        $this->image = $images->toJSON();
 
         return $this;
     }

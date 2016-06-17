@@ -1,0 +1,11 @@
+div.collection-image {
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  div.collection-image-border-circle {
+    border-radius: 100%;
+    overflow: hidden;
+  }
+}

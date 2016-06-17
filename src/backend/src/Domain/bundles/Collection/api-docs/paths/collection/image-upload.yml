@@ -1,0 +1,74 @@
+"/protected/collection/{collectionId}/image-upload/crop-start/{x1}/{y1}/crop-end/{x2}/{y2}":
+  post:
+    tags:
+      - collection
+    description:
+      Загрузить и установить изображение коллекции
+    parameters:
+      - name: collectionId
+        in: path
+        required: true
+        type: number
+        description:
+          ID коллекции
+      - name: x1
+        type: number
+        in: path
+        required: true
+        description: Crop, Start.X
+      - name: y1
+        type: number
+        in: path
+        required: true
+        description: Crop, Start.Y
+      - name: x2
+        type: number
+        in: path
+        required: true
+        description: Crop, End.X
+      - name: y2
+        type: number
+        in: path
+        required: true
+        description: Crop, End.Y
+      - name: file
+        description: Файл
+        type: file
+        required: true
+        in: formData
+        allowMultiple: false
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        $ref: '#/responses/NotFound'
+      422:
+        description:
+          Ошибка обработки входного файла (слишком большой, неправильный аспект ратио и.т.д..)
+        schema:
+          required:
+            - success
+            - error
+          properties:
+            success:
+              type: boolean
+              description: '=false'
+            error:
+              type: string
+              description: Сообщение об ошибке
+      200:
+        schema:
+          required:
+            - success
+            - image
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            image:
+              type: array
+              description: Изображения
+              items:
+                type: object
+                schema:
+                  $ref: '#/definitions/Domain_Definitions_Image'
