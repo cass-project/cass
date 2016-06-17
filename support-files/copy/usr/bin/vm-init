@@ -111,6 +111,7 @@ sudo update-rc.d -f amqp-listner defaults
 # PIMP
 # ####
 
+sudo mkdir /opt/pimp
 cd /opt/pimp
 sudo git clone https://github.com/potsky/PimpMyLog.git
 sudo chown -R www-data /opt/pimp

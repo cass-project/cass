@@ -15,15 +15,21 @@ class CollectionTree implements JSONSerializable, \Serializable
         return $this->items;
     }
 
-    public function attachChild(int $collectionId)
+    public function attachChild(int $collectionId, int $position = null): CollectionItem
     {
         if($this->hasCollection($collectionId)) {
             throw new CollectionExistsException(sprintf('Child with collectionId `%d` already exists', $collectionId));
         }
 
-        $this->items[] = new CollectionItem($collectionId, count($this->items) + 1);
+        if($position === null) {
+            $position = count($this->items) + 1;
+        }
+
+        $this->items[] = ($item = new CollectionItem($collectionId, $position));
 
         $this->normalize();
+
+        return $item;
     }
 
     public function detachChild(int $collectionId)
@@ -94,7 +100,7 @@ class CollectionTree implements JSONSerializable, \Serializable
 
     public function unserialize($serialized)
     {
-        return CollectionTreeFactory::createFromJSON(json_decode($serialized, true));
+        CollectionTreeFactory::createFromJSON(json_decode($serialized, true), $this);
     }
 
     public function toJSON(): array

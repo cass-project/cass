@@ -14,13 +14,6 @@ use Domain\Theme\Entity\Theme;
 
 class ProfileRepository extends EntityRepository
 {
-    public function attachProfileToAccount(Profile $profile, Account $account): Profile
-    {
-        $this->getEntityManager()->persist($profile);
-
-        return $profile;
-    }
-
     public function createProfile(Profile $profile): Profile
     {
         $em = $this->getEntityManager();
@@ -157,8 +150,7 @@ class ProfileRepository extends EntityRepository
 
     public function updateProfile(Profile $profile)
     {
-        $this->getEntityManager()->persist($profile);
-        $this->getEntityManager()->flush();
+        $this->getEntityManager()->flush([$profile]);
     }
 
     public function setExpertsInParameters(int $profileId, ExpertInParameters $expertInParameters): Profile
@@ -180,15 +172,12 @@ class ProfileRepository extends EntityRepository
 
     public function mergeExpertsInParameters(int $profileId, ExpertInParameters $expertInParameters): Profile
     {
-        /** @var Profile $profile */
         $profile = $this->getProfileById($profileId);
-
-        // получаем темы по ids
+        
         $themes = $this->getEntityManager()->getRepository(Theme::class)->findBy(
             ['id' => $expertInParameters->getThemeIds()]
         );
-
-        // removing exist themes
+        
         foreach($themes as $k => $theme){
             /** @var $theme Theme */
             foreach($profile->getExpertIn()->toArray() as $profile_theme){
@@ -200,15 +189,16 @@ class ProfileRepository extends EntityRepository
             }
         }
 
-        if(count($themes)==0) throw new NoThemesToMerge("there is no new themes to add to expertIn");
+        if(count($themes)) {
+            foreach($themes as $theme){
+                $profile->getExpertIn()->add($theme);
+            }
 
-        foreach($themes as $theme){
-            $profile->getExpertIn()->add($theme);
+            $profile->setExpertInIds($profile->getExpertIn()->toArray());
+
+            $this->updateProfile($profile);
         }
 
-        $profile->setExpertInIds($profile->getExpertIn()->toArray());
-
-        $this->updateProfile($profile);
         return $profile;
     }
 
@@ -300,6 +290,7 @@ class ProfileRepository extends EntityRepository
 
         $profile->setInterestingInIds($profile->getInterestingIn()->toArray());
         $this->updateProfile($profile);
+
         return $profile;
     }
 
@@ -311,6 +302,8 @@ class ProfileRepository extends EntityRepository
             $collections->attachChild($collectionId);
         }
 
+        $profile->notifyUpdateCollections();
+        
         $this->getEntityManager()->flush($profile);
 
         return $profile;

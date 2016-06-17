@@ -17,7 +17,7 @@ use Domain\Theme\Entity\Theme;
 class Collection implements JSONSerializable
 {
     use IdTrait;
-    use \Domain\Avatar\Entity\ImageEntityTrait;
+    use ImageEntityTrait;
 
     /**
      * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")

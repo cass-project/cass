@@ -5,12 +5,6 @@
     description:
       Создает новую коллекцию для указанного профиля
     parameters:
-      - name: profileId
-        in: path
-        required: true
-        type: number
-        description:
-          ID профиля
       - name: body
         in: body
         required: true

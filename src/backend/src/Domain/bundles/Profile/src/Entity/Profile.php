@@ -114,7 +114,7 @@ class Profile implements JSONSerializable
             'interesting_in' => array_map(function (Theme $theme) {
                 return $theme->getId();
             }, $this->interesting_in->toArray()),
-            'collections' => $this->collections->toJSON(),
+            'collections' => $this->getCollections()->toJSON(),
         ];
 
         return $result;

@@ -3,8 +3,6 @@ namespace Domain\Profile\Service;
 
 use Domain\Account\Entity\Account;
 use Application\Exception\PermissionsDeniedException;
-use Domain\Collection\Parameters\CreateCollectionParameters;
-use Domain\Collection\Repository\CollectionRepository;
 use Domain\Collection\Service\CollectionService;
 use PHPImageWorkshop\Core\ImageWorkshopLayer;
 use PHPImageWorkshop\ImageWorkshop;
@@ -50,6 +48,7 @@ class ProfileService
 
     public function updatePersonalData(int $profileId, EditPersonalParameters $parameters) {
         $profile = $this->getProfileById($profileId);
+
         $profile->getProfileGreetings()
             ->setGreetingsMethod($parameters->getGreetingsType())
             ->setFirstName($parameters->getFirstName())

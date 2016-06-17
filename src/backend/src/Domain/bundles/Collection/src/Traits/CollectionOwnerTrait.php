@@ -2,7 +2,6 @@
 namespace Domain\Collection\Traits;
 
 use Domain\Collection\Collection\CollectionTree;
-use Domain\Collection\Entity\Collection;
 
 trait CollectionOwnerTrait
 {
@@ -10,7 +9,7 @@ trait CollectionOwnerTrait
      * @Column(type="object")
      * @var CollectionTree
      */
-    private $collections;
+    public $collections;
 
     public function getCollections(): CollectionTree
     {
@@ -20,8 +19,16 @@ trait CollectionOwnerTrait
     public function replaceCollections(CollectionTree $collectionTree): self
     {
         $this->collections = $collectionTree;
+
         return $this;
     }
 
+    public function notifyUpdateCollections(): self
+    {
+        // DOCTRINE2 Issue: Doctrine2 won't update collection value without this fix
 
+        $this->collections = clone $this->collections;
+
+        return $this;
+    }
 }

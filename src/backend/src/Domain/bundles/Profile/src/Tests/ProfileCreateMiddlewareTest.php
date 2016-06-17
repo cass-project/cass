@@ -27,8 +27,8 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
                 ]
             ])
           ->expect(function(array $result) {
-              $collecttions = $result['entity']['collections'];
-              $this->assertEquals(1, count($collecttions));
+              $collections = $result['entity']['collections'];
+              $this->assertEquals(1, count($collections));
           });
         ;
 
