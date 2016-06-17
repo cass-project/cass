@@ -1,5 +1,9 @@
 <div class="profile-menu">
   <div class="profile-menu-contents">
   </div>
-  <div class="backdrop"></div>
+  <div class="backdrop">
+    <ul class="profile-list" *ngFor="#collection of currentProfile.collections">
+      <li>{{collection.title}} <button type="button" (click)="pService.modals.collectionSettings.open()">}{</button></li>
+    </ul>
+  </div>
 </div>
