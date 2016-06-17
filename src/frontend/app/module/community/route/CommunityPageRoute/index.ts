@@ -11,7 +11,7 @@ import {CommunityComponentService} from "../../service";
 
 @Component({
     selector: "community-page",
-    template: require('./template.html'),
+    template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],

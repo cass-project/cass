@@ -4,37 +4,35 @@ import {Observable} from "rxjs/Observable";
 import {getResponseURL} from "angular2/src/http/http_utils";
 
 import {UploadImageCropModel} from "../../util/component/UploadImage/strategy";
+import {CommunityCreateRequestModel} from "../model/CommunityCreateRequestModel";
+import {CommunityImageUploadRequestModel} from "../model/CommunityImageUploadRequestModel";
+import {CommunityControlFeatureRequestModel} from "../model/CommunityActivateFeatureModel";
 
 @Injectable()
 export class CommunityRESTService
 {
     constructor(private http:Http) {}
 
-    public create(title: string, description: string, theme_id: number) {
-        let data = {
-            "title"       : title,
-            "description" : description,
-            "theme_id"    : theme_id
-        };
-        return this.http.put("/backend/api/protected/community/create", JSON.stringify(data));
+    public create(request:CommunityCreateRequestModel)
+    {
+        return this.http.put("/backend/api/protected/community/create", JSON.stringify(request));
     }
 
-    public getBySid(sid:string) {
+    public getBySid(sid:string)
+    {
         return this.http.get(`/backend/api/community/${sid}/get-by-sid`);
     }
 
     public progressBar:number;
 
-    public imageUpload(communityId:number, uploadImage: Blob, uploadImageCrop: UploadImageCropModel) : Observable<Response> {
+    public imageUpload(request:CommunityImageUploadRequestModel)
+    {
+
         return Observable.create(observer => {
-            let x1 = uploadImageCrop.x,
-                y1 = uploadImageCrop.y,
-                x2 = uploadImageCrop.width + uploadImageCrop.x,
-                y2 = uploadImageCrop.height + uploadImageCrop.y,
-                formData: FormData = new FormData(),
+            let formData: FormData = new FormData(),
                 xhr: XMLHttpRequest = new XMLHttpRequest();
 
-            formData.append("file", uploadImage);
+            formData.append("file", request.uploadImage);
 
             xhr.upload.onprogress = (e) => {
                 if (e.lengthComputable) {
@@ -59,17 +57,20 @@ export class CommunityRESTService
                     }
                 }
             };
-            xhr.open("POST", `/backend/api/protected/community/${communityId}/image-upload/crop-start/${x1}/${y1}/crop-end/${x2}/${y2}`);
 
+            xhr.open("POST", `/backend/api/protected/community/${request.communityId}/image-upload/`+
+                             `crop-start/${request.x1}/${request.y1}/crop-end/${request.x2}/${request.y2}`);
             xhr.send(formData);
         });
     }
 
-    public activateFeature(communityId: number, feature:string) : Observable<Response> {
-        return this.http.put(`/backend/api/protected/community/${communityId}/feature/${feature}/activate`, "{}");
+    public activateFeature(reqeust: CommunityControlFeatureRequestModel) : Observable<Response>
+    {
+        return this.http.put(`/backend/api/protected/community/${reqeust.communityId}/feature/${reqeust.feature}/activate`, "{}");
     };
 
-    public deactivateFeature(communityId: number, feature:string) {
-        return this.http.delete(`/backend/api/protected/community/${communityId}/feature/${feature}/deactivate`);
+    public deactivateFeature(reqeust: CommunityControlFeatureRequestModel)
+    {
+        return this.http.delete(`/backend/api/protected/community/${reqeust.communityId}/feature/${reqeust.feature}/deactivate`);
     };
 }

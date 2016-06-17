@@ -1,0 +1,12 @@
+form.form.screen.screen-general((ngSubmit)="next()")
+  .cass-padding-box-10
+    ng-content
+  footer.form-footer
+    .form-footer-section
+      .cass-padding-box-5
+        button.form-text-button(type="button", (click)="abort()")
+          span Отмена
+    .form-footer-section
+      .cass-padding-box-5
+        button.form-button.form-button-primary(type="submit")
+          span Далее

@@ -1,17 +1,20 @@
 import {Component, EventEmitter, Output} from "angular2/core";
 
-import {CommunityRESTService} from "../../../service/CommunityRESTService";
+//import {CommunityRESTService} from "../../../service/CommunityRESTService";
 import {ModalComponent} from "../../../../modal/component/index";
 import {ScreenGeneral} from "./Screen/ScreenGeneral/index";
 import {ScreenTheme} from "./Screen/ScreenTheme/index";
 import {ScreenImage} from "./Screen/ScreenImage/index";
 import {ScreenFeatures} from "./Screen/ScreenFeatures/index";
 import {ScreenProcessing} from "./Screen/ScreenProcessing/index";
-import {CommunityCreateModalModel} from "./model";
+import {ScreenComplete} from "./Screen/ScreenComplete/index";
 import {ScreenControls} from "../../../../util/classes/ScreenControls";
+
+import {CommunityCreateModalModel} from "./model";
 import {CommunityComponentService} from "../../../service";
 import {ModalBoxComponent} from "../../../../modal/component/box/index";
 import {AuthService} from "../../../../auth/service/AuthService";
+import {CommunityCreateModalForm} from "./Form/index";
 
 enum CreateStage {
     General = <any>"General",
@@ -24,21 +27,20 @@ enum CreateStage {
 
 @Component({
     selector: 'cass-community-create-modal',
-    template: require('./template.html'),
-    styles: [
-        require('./style.shadow.scss')
-    ],
+    template: require('./template.jade'),
     providers: [
         CommunityCreateModalModel
     ],
     directives: [
         ModalComponent,
         ModalBoxComponent,
+        CommunityCreateModalForm,
         ScreenGeneral,
         ScreenTheme,
         ScreenImage,
         ScreenFeatures,
         ScreenProcessing,
+        ScreenComplete
     ]
 })
 export class CommunityCreateModal
@@ -58,12 +60,10 @@ export class CommunityCreateModal
         return !~([CreateStage.Processing]).indexOf(this.screens.current);
     }
 
+
+
     next() {
         this.screens.next();
-    }
-
-    abort() {
-        this.close();
     }
 
     close() {

@@ -8,14 +8,11 @@ export class Screen
     @Output("abort") abortEvent = new EventEmitter<Screen>();
     @Output("next") nextEvent = new EventEmitter<Screen>();
 
-    constructor(protected model: CommunityCreateModalModel) {}
-
     next() {
         this.nextEvent.emit(this);
     }
 
-    abort($event) {
-        $event.preventDefault();
+    abort() {
         this.abortEvent.emit(this);
     }
 }

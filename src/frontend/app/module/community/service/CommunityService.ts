@@ -10,8 +10,7 @@ import {CommunityEnity} from "../enity/Community";
 export class CommunityService {
     public community:CommunityEnity;
     public communityResponsesCache:CommunityCreateResponseModel[] = [];
-
-    public isAdmin:boolean   = false;
+    public isAdmin:boolean = false;
 
     constructor(private communityRESTService:CommunityRESTService) {}
 

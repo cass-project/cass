@@ -8,16 +8,19 @@ export class CommunityFeaturesService
         {
             "code":"collections",
             "name": "Коллекции",
+            "icon": "fa-folder-open",
             "description":"Подключив фичу Коллекции, Вы сможете создавать посты товаров и объединять их в подборки. На главной странице комммунити будет отображаться блок с коллекциями."
         },
         {
             "code":"boards",
             "name": "Форум",
+            "icon": "fa-users",
             "description":"Находится в стадии разработки"
         },
         {
             "code":"chat",
             "name": "Чат",
+            "icon": "fa-comments-o",
             "description":"Находится в стадии разработки"}
     ];
     private features;
@@ -32,6 +35,10 @@ export class CommunityFeaturesService
 
     getName(code) : string {
         return this.getFeatureInfo(code).name;
+    }
+
+    getIcon(code) : string {
+        return this.getFeatureInfo(code).icon;
     }
 
     getDescription(code) : string {
@@ -59,5 +66,6 @@ class FeaturesInfo
 {
     code:string = "";
     name:string = "";
+    icon:string = "";
     description:string = "";
 }
