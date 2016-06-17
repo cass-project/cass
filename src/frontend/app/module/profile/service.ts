@@ -7,12 +7,14 @@ export class ProfileComponentService
         setup: SetupModal,
         settings: SettingsModal,
         switcher: SwitchProfileModal,
-        createCollectionMaster: CreateCollectionMaster
+        createCollectionMaster: CreateCollectionMaster,
+        collectionSettings: CollectionSettings
     } = {
         setup: new SetupModal(),
         settings: new SettingsModal(),
         switcher: new SwitchProfileModal(),
-        createCollectionMaster: new CreateCollectionMaster()
+        createCollectionMaster: new CreateCollectionMaster(),
+        collectionSettings: new CollectionSettings()
     };
 }
 
@@ -37,3 +39,4 @@ class SetupModal extends Modal {}
 class SettingsModal extends Modal {}
 class SwitchProfileModal extends Modal {}
 class CreateCollectionMaster extends Modal {}
+class CollectionSettings extends Modal {}
