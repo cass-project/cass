@@ -14,6 +14,7 @@ import {ModalControl} from "../../../util/classes/ModalControl";
     styles: [
         require('./style.shadow.scss')
     ],
+    selector: "cass-collection-settings",
     directives: [
         ModalComponent,
         ModalBoxComponent,
@@ -24,8 +25,9 @@ import {ModalControl} from "../../../util/classes/ModalControl";
         DeleteCollectionModal,
     ]
 })
-export class CollectionSettingsDemo
+export class CollectionSettings
 {
+
     private deleteModal: ModalControl = new ModalControl();
 
     requestDeleteCollection() {
