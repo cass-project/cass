@@ -103,6 +103,11 @@ class CollectionTree implements JSONSerializable, \Serializable
         CollectionTreeFactory::createFromJSON(json_decode($serialized, true), $this);
     }
 
+    public function size(): int
+    {
+        return count($this->items);
+    }
+
     public function toJSON(): array
     {
         return array_map(function(CollectionItem $item) {

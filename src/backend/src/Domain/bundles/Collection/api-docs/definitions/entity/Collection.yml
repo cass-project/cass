@@ -9,6 +9,7 @@ Collection_Entity_Collection:
     - theme
     - image
     - public_options
+    - children
   properties:
     id:
       type: number
@@ -57,3 +58,8 @@ Collection_Entity_Collection:
           moderation_contract:
             type: boolean
             description: Владелец обязуется модерировать содержимое коллекции
+    children:
+      type: array
+      items:
+        schema:
+          $ref: '#/definitions/Collection_Entity_Collection'

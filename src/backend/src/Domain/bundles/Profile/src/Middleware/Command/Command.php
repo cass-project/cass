@@ -4,6 +4,7 @@ namespace Domain\Profile\Middleware\Command;
 use Application\Command\Command as CommandInterface;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Formatter\ProfileExtendedFormatter;
 use Domain\Profile\Service\ProfileService;
 
 abstract class Command implements CommandInterface
@@ -14,10 +15,17 @@ abstract class Command implements CommandInterface
     /** @var ProfileService */
     protected $profileService;
 
-    public function __construct(CurrentAccountService $currentAccountService, ProfileService $profileService)
-    {
+    /** @var ProfileExtendedFormatter */
+    protected $profileExtendedFormatter;
+
+    public function __construct(
+        CurrentAccountService $currentAccountService,
+        ProfileService $profileService,
+        ProfileExtendedFormatter $profileExtendedFormatter
+    ) {
         $this->currentAccountService = $currentAccountService;
         $this->profileService = $profileService;
+        $this->profileExtendedFormatter = $profileExtendedFormatter;
     }
 
     protected function validateProfileId($input): int

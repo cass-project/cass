@@ -16,9 +16,7 @@ class GetCommand extends Command
 
             return $responseBuilder
                 ->setStatusSuccess()
-                ->setJson([
-                    'entity' => $profile->toJSON()
-                ])
+                ->setJson($this->profileExtendedFormatter->format($profile))
                 ->build();
         }catch(ProfileNotFoundException $e){
             return $responseBuilder

@@ -159,4 +159,14 @@ class CollectionService
 
         $this->createProfileCollection($profile, $collectionParameters);
     }
+    
+    public function getCollectionById(int $collectionId): Collection
+    {
+        return $this->collectionRepository->getCollectionById($collectionId);
+    }
+    
+    public function getCollectionsById(array $collectionIds): array
+    {
+        return $this->collectionRepository->getCollectionsById($collectionIds);
+    }
 }

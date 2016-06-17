@@ -1,4 +1,4 @@
-Profile_Entity_Profile:
+Profile_Entity_ProfileExtended:
   type: object
   required:
     - id
@@ -10,6 +10,7 @@ Profile_Entity_Profile:
     - image
     - expert_in
     - interesting_in
+    - collections
   properties:
     id:
       type: number
@@ -52,3 +53,8 @@ Profile_Entity_Profile:
       items:
         type: number
         description: ID тематики
+    collections:
+      type: array
+      items:
+        schema:
+          $ref: '#/definitions/Collection_Entity_Collection'

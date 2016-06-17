@@ -45,6 +45,11 @@ class CollectionRepository extends EntityRepository
         return $result;
     }
 
+    public function getCollectionsById(int $collectionIds): array
+    {
+        return $this->findBy(['id' => $collectionIds]);
+    }
+
     public function deleteCollection(int $collectionId) {
         $collection = $this->getCollectionById($collectionId);
 

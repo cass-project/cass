@@ -42,6 +42,11 @@ class CollectionItem implements SerialEntity, JSONSerializable
     {
         return $this->position;
     }
+    
+    public function hasChildren(): bool
+    {
+        return $this->sub()->size() > 0;
+    }
 
     public function sub(): CollectionTree
     {
