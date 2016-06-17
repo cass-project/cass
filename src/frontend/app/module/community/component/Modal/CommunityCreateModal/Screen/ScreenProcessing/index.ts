@@ -23,9 +23,7 @@ export class ScreenProcessing extends Screen
         private service: CommunityRESTService
     ) {
         super();
-    }
 
-    ngOnInit() {
         let model = this.model;
 
         this.service.create(<CommunityCreateRequestModel>{

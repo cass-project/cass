@@ -28,9 +28,7 @@ export class CommunityPage
         private routeParams: RouteParams,
         private service: CommunityService,
         private modalsService: CommunityComponentService
-    ){}
-
-    ngOnInit() {
+    ){
         let timeout = setTimeout(()=>{ this.isLoading=true;}, 1000);
         this.service.getBySid(this.routeParams.get('sid')).subscribe(
             data => {

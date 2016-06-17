@@ -65,8 +65,10 @@ export class CommunityCreateModal
         this.closeEvent.emit(this);
     }
 
-    ngOnInit() {
-       if(!AuthService.isSignedIn()) {
+    constructor() {
+        super();
+
+        if(!AuthService.isSignedIn()) {
             this.close();
         }
     }
