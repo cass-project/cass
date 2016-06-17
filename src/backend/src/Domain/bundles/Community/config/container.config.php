@@ -10,14 +10,17 @@ use Domain\Community\Entity\Community;
 use Domain\Community\Repository\CommunityRepository;
 use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Community\Service\CommunityService;
+use League\Flysystem\Adapter\Local;
+use League\Flysystem\Filesystem;
 
 return [
     'php-di' => [
         CommunityRepository::class => factory(new DoctrineRepositoryFactory(Community::class)),
         CommunityService::class => object()
-            ->constructorParameter('storageDir', factory(function(Container $container) {
-                    return sprintf('%s/community/community-image', $container->get('config.storage'));
-            }))
-            ->constructorParameter('publicPath', '/public/assets/storage/community/community-image'),
+            ->constructorParameter('imageFileSystem', factory(function(Container $container) {
+                $assetsDir = sprintf('%s/community', $container->get('config.paths.assets.dir'));
+
+                return new Filesystem(new Local($assetsDir));
+            })),
     ]
 ];

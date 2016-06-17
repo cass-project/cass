@@ -6,7 +6,7 @@ use Application\Util\JSONSerializable;
 use Domain\Collection\Exception\InvalidCollectionOptionsException;
 use Domain\Collection\Exception\PublicEnabledException;
 use Domain\Community\Entity\Community;
-use Domain\Definitions\ImageCollection\ImageEntityTrait;
+use Domain\Avatar\Entity\ImageEntityTrait;
 use Domain\Profile\Entity\Profile;
 use Domain\Theme\Entity\Theme;
 
@@ -17,7 +17,7 @@ use Domain\Theme\Entity\Theme;
 class Collection implements JSONSerializable
 {
     use IdTrait;
-    use ImageEntityTrait;
+    use \Domain\Avatar\Entity\ImageEntityTrait;
 
     /**
      * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")

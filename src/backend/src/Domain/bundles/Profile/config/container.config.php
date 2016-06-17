@@ -20,7 +20,6 @@ return [
         ProfileRepository::class => factory(new DoctrineRepositoryFactory(Profile::class)),
         ProfileImageRepository::class => factory(new DoctrineRepositoryFactory(ProfileImage::class)),
         ProfileGreetingsRepository::class => factory(new DoctrineRepositoryFactory(ProfileGreetings::class)),
-
         ProfileService::class => object()
             ->constructorParameter('profileStorageDir', factory(function (Container $container) {
                 return sprintf('%s/profile/profile-image', $container->get('config.storage'));

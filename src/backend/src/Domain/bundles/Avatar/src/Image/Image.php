@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Definitions\ImageCollection;
+namespace Domain\Avatar\Image;
 
 use Application\Util\JSONSerializable;
 

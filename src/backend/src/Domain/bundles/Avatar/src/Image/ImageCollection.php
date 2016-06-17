@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Definitions\ImageCollection;
+namespace Domain\Avatar\Image;
 
 use Application\Util\JSONSerializable;
 
@@ -63,4 +63,4 @@ class ImageCollection implements JSONSerializable
     {
         return isset($this->images[$id]);
     }
-}   
+}

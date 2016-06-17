@@ -18,7 +18,7 @@ return [
         CollectionRepository::class => factory(new DoctrineRepositoryFactory(Collection::class)),
         CollectionService::class => object()
             ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                $assetsDir = sprintf('%s/community', $container->get('config.paths.assets.dir'));
+                $assetsDir = sprintf('%s/collection', $container->get('config.paths.assets.dir'));
 
                 return new Filesystem(new Local($assetsDir));
             }))

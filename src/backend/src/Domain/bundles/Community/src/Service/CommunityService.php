@@ -3,17 +3,17 @@ namespace Domain\Community\Service;
 
 use Domain\Account\Entity\Account;
 use Domain\Auth\Service\CurrentAccountService;
+use Domain\Avatar\Service\AvatarService;
 use Domain\Community\ACL\CommunityACL;
 use Domain\Community\Entity\Community;
-use Domain\Community\Exception\CommunityHasNoThemeException;
+use Domain\Community\Image\CommunityImageStrategy;
 use Domain\Community\Parameters\CreateCommunityParameters;
 use Domain\Community\Parameters\EditCommunityParameters;
 use Domain\Community\Parameters\SetPublicOptionsParameters;
 use Domain\Community\Parameters\UploadImageParameters;
 use Domain\Community\Repository\CommunityRepository;
-use Domain\Community\Scripts\CommunityImageUploadScript;
-use Domain\Profile\Entity\Profile;
 use Domain\Theme\Repository\ThemeRepository;
+use League\Flysystem\Filesystem;
 
 class CommunityService
 {
@@ -26,23 +26,24 @@ class CommunityService
     /** @var ThemeRepository */
     private $themeRepository;
 
-    /** @var string */
-    private $storageDir = '';
-    
-    /** @var string */
-    private $publicPath = '';
+    /** @var AvatarService */
+    private $avatarService;
+
+    /** @var Filesystem */
+    private $imageFileSystem;
 
     public function __construct(
         CurrentAccountService $currentAccountService,
         CommunityRepository $communityRepository,
         ThemeRepository $themeRepository,
-        string $storageDir,
-        string $publicPath
+        AvatarService $avatarService,
+        Filesystem $imageFileSystem
     ) {
         $this->currentAccountService = $currentAccountService;
         $this->communityRepository = $communityRepository;
         $this->themeRepository = $themeRepository;
-        $this->storageDir = $storageDir;
+        $this->avatarService = $avatarService;
+        $this->imageFileSystem = $imageFileSystem;
     }
     
     public function createCommunity(CreateCommunityParameters $parameters): Community {
@@ -79,14 +80,9 @@ class CommunityService
 
     public function uploadCommunityImage(int $communityId, UploadImageParameters $parameters): Community {
         $community = $this->communityRepository->getCommunityById($communityId);
-        $uploadScript = new CommunityImageUploadScript($this->storageDir);
-        $params = $uploadScript->__invoke($communityId, $parameters->getTmpFile(), $parameters->getPointStart(), $parameters->getPointEnd());
+        $strategy = new CommunityImageStrategy($community, $this->imageFileSystem);
 
-        $community->setImage(new Community\CommunityImage(
-            $params['path'],
-            sprintf('%s/%d/%s', $this->publicPath, $params['id'], $params['file'])
-        ));
-
+        $this->avatarService->uploadImage($strategy, $parameters);
         $this->communityRepository->saveCommunity($community);
 
         return $community;
@@ -95,8 +91,9 @@ class CommunityService
     public function deleteCommunityImage(int $communityId): Community
     {
         $community = $this->communityRepository->getCommunityById($communityId);
-        $community->setupPlaceholderImage();
+        $strategy = new CommunityImageStrategy($community, $this->imageFileSystem);
 
+        $this->avatarService->defaultImage($strategy);
         $this->communityRepository->saveCommunity($community);
 
         return $community;

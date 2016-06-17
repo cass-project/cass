@@ -12,8 +12,7 @@ final class ImageUploadCommand extends Command
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
-            $uploadImageRequest = new UploadImageRequest($request);
-            $community = $this->communityService->uploadCommunityImage($request->getAttribute('communityId'), $uploadImageRequest->getParameters());
+            $community = $this->communityService->uploadCommunityImage($request->getAttribute('communityId'), (new UploadImageRequest($request))->getParameters());
 
             return $responseBuilder->setStatusSuccess()->setJson([
                 'image' => $community->getImage()->toJSON()

@@ -7,7 +7,7 @@ use Domain\Collection\Entity\Collection;
 use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Parameters\EditCollectionParameters;
 use Domain\Collection\Parameters\SetPublicOptionsParameters;
-use Domain\Definitions\ImageCollection\ImageCollection;
+use Domain\Avatar\Image\ImageCollection;
 use Domain\Profile\Entity\Profile;
 use Domain\Theme\Entity\Theme;
 

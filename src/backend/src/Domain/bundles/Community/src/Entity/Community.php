@@ -3,10 +3,10 @@ namespace Domain\Community\Entity;
 
 use Application\Util\GenerateRandomString;
 use Application\Util\IdTrait;
+use Domain\Avatar\Entity\ImageEntityTrait;
 use Domain\Collection\Collection\CollectionTree;
 use Domain\Collection\Traits\CollectionOwnerTrait;
 use Domain\Community\Entity\Community\CommunityFeatures;
-use Domain\Community\Entity\Community\CommunityImage;
 use Domain\Community\Exception\CommunityHasNoThemeException;
 use Domain\Theme\Entity\Theme;
 
@@ -18,11 +18,9 @@ class Community
 {
     const SID_LENGTH = 8;
 
-    const DEFAULT_IMAGE_PUBLIC_PATH = '/dist/assets/community/community-default.png';
-    const DEFAULT_IMAGE_STORAGE_DIR = __DIR__.'/../../../../../../../www/app/dist/assets/community/community-default.png';
-
     use IdTrait;
     use CollectionOwnerTrait;
+    use ImageEntityTrait;
 
     /**
      * @Column(type="string", name="sid")
@@ -102,8 +100,6 @@ class Community
             $this->setTheme($theme);
             $this->enablePublicDiscover();
         }
-
-        $this->setupPlaceholderImage();
     }
 
     public function toJSON(): array {
@@ -116,7 +112,6 @@ class Community
                 'has' => $this->hasTheme(),
             ],
             'description' => $this->getDescription(),
-            'has_image' => $this->hasImage(),
             'collections' => $this->collections->toJSON(),
             'public_options' => [
                 'public_enabled' => $this->isPublicEnabled(),
@@ -126,15 +121,6 @@ class Community
 
         if($this->hasTheme()) {
             $result['theme']['id'] = $this->getTheme()->getId();
-        }
-
-        if($result['has_image']) {
-            $image = $this->getImage();
-
-            $result['image'] = [
-                'community_id' => $this->getId(),
-                'public_path' => $image->getPublicPath()
-            ];
         }
 
         return $result;
@@ -195,34 +181,6 @@ class Community
     {
         $this->theme = $theme;
         return $this;
-    }
-
-    public function setupPlaceholderImage() {
-        $this->image = [
-            'storage_path' => self::DEFAULT_IMAGE_STORAGE_DIR,
-            'public_path' => self::DEFAULT_IMAGE_PUBLIC_PATH,
-        ];
-    }
-
-    public function setImage(CommunityImage $communityImage) {
-        $this->image = [
-            'storage_path' => $communityImage->getStoragePath(),
-            'public_path' => $communityImage->getPublicPath()
-        ];
-    }
-
-    public function getImage(): CommunityImage {
-        if($this->hasImage()) {
-            return new CommunityImage($this->image['storage_path'], $this->image['public_path']);
-        }else{
-            throw new \Exception(sprintf('No image available for community `%s`', ($this->isPersisted() ? $this->getId() : '#NEW_COMMUNITY')));
-        }
-    }
-
-    public function hasImage() {
-        return isset($this->image['storage_path'])
-            && is_string($this->image['storage_path'])
-            && file_exists($this->image['storage_path']);
     }
 
     public function getFeatures(): CommunityFeatures {

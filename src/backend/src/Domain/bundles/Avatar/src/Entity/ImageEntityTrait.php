@@ -1,5 +1,7 @@
 <?php
-namespace Domain\Definitions\ImageCollection;
+namespace Domain\Avatar\Entity;
+
+use Domain\Avatar\Image\ImageCollection;
 
 trait ImageEntityTrait
 {
