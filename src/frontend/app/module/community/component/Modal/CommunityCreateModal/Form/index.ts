@@ -6,7 +6,4 @@ import {Screen} from "../screen";
     template: require('./template.jade')
 })
 
-
-export class CommunityCreateModalForm extends Screen
-{
-}
+export class CommunityCreateModalForm extends Screen {}

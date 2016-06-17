@@ -14,7 +14,8 @@ export class CommunityService {
 
     constructor(private communityRESTService:CommunityRESTService) {}
 
-    public getBySid(sid:string) : Observable<CommunityCreateResponseModel> {
+    public getBySid(sid:string) : Observable<CommunityCreateResponseModel>
+    {
         return Observable.create(observer => {
             if(this.isCached(sid)) {
                 let communityResponse: CommunityCreateResponseModel  = this.getFromCache(sid);
@@ -38,14 +39,16 @@ export class CommunityService {
         });
     }
 
-    isCached(sid:string) {
+    isCached(sid:string)
+    {
         return this.communityResponsesCache.filter((input) => {
             return input.entity.sid === sid;
         }).length > 0;
     }
 
-    getFromCache(sid:string) : CommunityCreateResponseModel {
-        if(!this.isCached(sid)){
+    getFromCache(sid:string) : CommunityCreateResponseModel
+    {
+        if(!this.isCached(sid)) {
             throw new Error(`Community '${sid}' not cached yet.`);
         }
 

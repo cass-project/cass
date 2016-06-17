@@ -1,20 +1,18 @@
 import {Component, EventEmitter, Output} from "angular2/core";
 
-//import {CommunityRESTService} from "../../../service/CommunityRESTService";
-import {ModalComponent} from "../../../../modal/component/index";
+import {CommunityCreateModalModel} from "./model";
+
 import {ScreenGeneral} from "./Screen/ScreenGeneral/index";
 import {ScreenTheme} from "./Screen/ScreenTheme/index";
 import {ScreenImage} from "./Screen/ScreenImage/index";
 import {ScreenFeatures} from "./Screen/ScreenFeatures/index";
 import {ScreenProcessing} from "./Screen/ScreenProcessing/index";
 import {ScreenComplete} from "./Screen/ScreenComplete/index";
-import {ScreenControls} from "../../../../util/classes/ScreenControls";
 
-import {CommunityCreateModalModel} from "./model";
-import {CommunityComponentService} from "../../../service";
+import {ModalComponent} from "../../../../modal/component/index";
 import {ModalBoxComponent} from "../../../../modal/component/box/index";
+import {ScreenControls} from "../../../../util/classes/ScreenControls";
 import {AuthService} from "../../../../auth/service/AuthService";
-import {CommunityCreateModalForm} from "./Form/index";
 
 enum CreateStage {
     General = <any>"General",
@@ -34,7 +32,6 @@ enum CreateStage {
     directives: [
         ModalComponent,
         ModalBoxComponent,
-        CommunityCreateModalForm,
         ScreenGeneral,
         ScreenTheme,
         ScreenImage,
@@ -59,8 +56,6 @@ export class CommunityCreateModal
     isHeaderVisible() {
         return !~([CreateStage.Processing]).indexOf(this.screens.current);
     }
-
-
 
     next() {
         this.screens.next();

@@ -4,6 +4,7 @@ import {Screen} from "../../screen";
 import {ImageCropperService, ImageCropper} from "../../../../../../util/component/ImageCropper/index";
 import {CommunityCreateModalModel} from "../../model";
 import {CommunityCreateModalForm} from "../../Form/index";
+import {UploadImageCropModel} from "../../../../../../util/component/UploadImage/strategy";
 
 @Component({
     selector: 'cass-community-create-modal-screen-image',
@@ -19,21 +20,21 @@ import {CommunityCreateModalForm} from "../../Form/index";
 export class ScreenImage extends Screen
 {
 
-    constructor(public cropper: ImageCropperService, protected model: CommunityCreateModalModel) {
+    constructor(public model: CommunityCreateModalModel, private cropper: ImageCropperService) {
         super();
     }
 
     onFileChange($event) {
         this.cropper.reset();
-        setTimeout(()=>{
+        setTimeout(() => {
             this.model.uploadImage = $event.target.files[0];
             this.cropper.setFile(this.model.uploadImage);
-        },0)
+        }, 0)
     }
 
     next() {
         if(this.cropper.hasCropper()) {
-            this.model.uploadImageCrop = {
+            this.model.uploadImageCrop = <UploadImageCropModel>{
                 x: this.cropper.getX(),
                 y: this.cropper.getY(),
                 width: this.cropper.getWidth(),

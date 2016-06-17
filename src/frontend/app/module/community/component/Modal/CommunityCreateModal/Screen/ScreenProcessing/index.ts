@@ -20,8 +20,8 @@ export class ScreenProcessing extends Screen
 {
 
     constructor (
-        private service: CommunityRESTService,
-        protected model: CommunityCreateModalModel
+        public model: CommunityCreateModalModel,
+        private service: CommunityRESTService
     ) {
         super();
     }
@@ -38,6 +38,7 @@ export class ScreenProcessing extends Screen
             .subscribe(data => {
                 let communityId = data['entity'].id;
                 let requests:Promise<any>[] = [];
+                this.model.sid = data['entity'].sid;
 
                 for(let feature of this.model.features) {
                     if(feature.is_activated && !feature.disabled) {

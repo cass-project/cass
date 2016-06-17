@@ -13,18 +13,17 @@ import {CommunityCreateModalModel} from "../../model";
 })
 export class ScreenComplete
 {
-    @Output("close") abortEvent = new EventEmitter<ScreenComplete>();
+    @Output("close") closeEvent = new EventEmitter<ScreenComplete>();
 
-    constructor(private router: Router, protected model: CommunityCreateModalModel){
-    }
+    constructor(public model: CommunityCreateModalModel, private router: Router){}
 
     close() {
-        this.abortEvent.emit(this);
+        this.closeEvent.emit(this);
     }
 
     goToCommunity() {
-        console.log(this.model);
-        //this.router.navigateByUrl('/community/community-settings-modal-demo');
+        this.close();
+        this.router.navigateByUrl(`/community/id/${this.model.sid}`);
     }
 
 }

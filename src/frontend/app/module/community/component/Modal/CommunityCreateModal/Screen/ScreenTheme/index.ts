@@ -18,15 +18,11 @@ import {CommunityCreateModalForm} from "../../Form/index";
 })
 export class ScreenTheme extends Screen
 {
-    constructor(protected model: CommunityCreateModalModel) {
+    constructor(public model: CommunityCreateModalModel) {
         super();
     }
 
     updateThemeId(themeIds: number[]) {
         this.model.theme_id = themeIds[0];
     }
-
-/*    unsetTheme(){
-        delete this.model.theme_id;
-    }*/
 }

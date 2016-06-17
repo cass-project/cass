@@ -11,7 +11,7 @@ import {CommunityCreateModalForm} from "../../Form/index";
 })
 export class ScreenGeneral extends Screen
 {
-    constructor(protected model: CommunityCreateModalModel) {
+    constructor(public model: CommunityCreateModalModel) {
         super();
     }
 }
