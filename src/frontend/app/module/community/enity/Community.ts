@@ -1,12 +1,4 @@
-export class CommunityResponseModel {
-    access: {
-        admin: boolean
-    };
-    entity: CommunityModel;
-    success: boolean;
-}
-
-export class CommunityModel {
+export class CommunityEnity {
     id: number;
     sid: string;
     date_created_on: Date;

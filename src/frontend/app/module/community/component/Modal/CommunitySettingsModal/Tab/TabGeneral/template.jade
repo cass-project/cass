@@ -51,8 +51,7 @@
               input.form-switch-button-checkbox(
                 type="checkbox",
                 id="communitySettingsModalThemeEnablePublic",
-                checked="",
-                [(ngModel)]="!!service.community.theme_id"
+                [(ngModel)]="isCommunitySettingsModalThemeEnablePublic"
               )
               label.form-switch-button-label(for="communitySettingsModalThemeEnablePublic")
       // Опция отображается, только если обе опции выше активированы

@@ -1,7 +1,7 @@
 import {Component} from "angular2/core";
 import {RouteParams, Router} from "angular2/router";
 
-import {CommunityModel} from "./../../model";
+import {CommunityEnity} from "./../../enity/Community";
 import {CommunityService} from "../../service/CommunityService";
 import {ModalComponent} from "../../../modal/component/index";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
@@ -24,7 +24,7 @@ import {CommunityComponentService} from "../../service";
 export class CommunityPage
 {
     public isLoading:boolean = false;
-    private community:CommunityModel;
+    private community:CommunityEnity;
     constructor(
         private routeParams: RouteParams,
         private service: CommunityService,

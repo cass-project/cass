@@ -25,6 +25,7 @@ export class ScreenTheme extends Screen
     }
 
     unsetTheme(){
-        this.model.theme_id = null;
+        delete this.model.theme_id;
+        //this.model.theme_id = null;
     }
 }

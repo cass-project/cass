@@ -9,7 +9,7 @@ import {CommunitySettingsModal} from "./component/Modal/CommunitySettingsModal/i
 
 @Component({
     selector: 'cass-community',
-    template: require('./template.html'),
+    template: require('./template.jade'),
     directives: [
         CommunityRouteModal,
         CommunityCreateModal,

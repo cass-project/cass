@@ -2,7 +2,8 @@ import {Component} from "angular2/core";
 
 import {CommunityCreateModalModel} from "../../../CommunityCreateModal/model";
 import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
-import {CommunityResponseModel, CommunityModel} from "../../../../../model";
+import {CommunityCreateResponseModel} from "../../../../../model/CommunityCreateResponseModel";
+import {CommunityEnity} from "../../../../../enity/Community";
 import {CommunityService} from "../../../../../service/CommunityService";
 
 @Component({

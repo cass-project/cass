@@ -1,0 +1,6 @@
+div
+  .community-menu
+    .community-menu-contents
+    .backdrop
+      .community-settings(*ngIf="service.isAdmin")
+        i.fa.fa-cogs(aria-hidden="true", (click)="modalsService.modals.settings.open()")

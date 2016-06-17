@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Output} from "angular2/core";
 
-import {EventEmitter} from "angular2/core";
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
 import {ModalComponent} from "../../../../modal/component/index";
 import {ScreenGeneral} from "./Screen/ScreenGeneral/index";

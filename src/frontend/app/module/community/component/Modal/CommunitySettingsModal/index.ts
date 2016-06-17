@@ -5,14 +5,14 @@ import {ModalBoxComponent} from "../../../../modal/component/box/index";
 import {ModalComponent} from "../../../../modal/component/index";
 import {ScreenControls} from "../../../../util/classes/ScreenControls";
 
-import {CommunityModel} from "../../../model";
 import {CommunityService} from "../../../service/CommunityService";
 import {CommunityFeaturesService} from "../../../service/CommunityFeaturesService";
 
 import {FeaturesTab} from "./Tab/TabFeatures/index";
 import {GeneralTab} from "./Tab/TabGeneral/index";
 import {ImageTab} from "./Tab/TabImage/index";
-import {CommunityResponseModel} from "../../../model";
+import {CommunityCreateResponseModel} from "../../../model/CommunityCreateResponseModel";
+import {CommunityEnity} from "../../../enity/Community";
 
 
 
@@ -30,8 +30,7 @@ import {CommunityResponseModel} from "../../../model";
         FeaturesTab
     ],
     providers: [
-        CommunityModel,
-        CommunityResponseModel,
+        CommunityEnity,
         CommunityFeaturesService
     ]
 })
@@ -42,7 +41,7 @@ export class CommunitySettingsModal
 
     @Output('close') closeEvent = new EventEmitter<CommunitySettingsModal>();
     protected sid:string = "e4juVgpP";
-    private community: CommunityModel;
+    private community: CommunityEnity;
     constructor(public service: CommunityService) {
         service.getBySid(this.sid).subscribe(data => {
             this.community = data.entity;

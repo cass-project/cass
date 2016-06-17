@@ -5,7 +5,7 @@ import {CommunityComponentService} from "../../service";
 
 @Component({
     selector: 'cass-community-menu',
-    template: require('./template.html'),
+    template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]

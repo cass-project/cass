@@ -2,22 +2,23 @@ import {Injectable} from "angular2/core";
 import {Observable} from "rxjs/Observable";
 
 import {CommunityRESTService} from "./CommunityRESTService";
-import {CommunityModel, CommunityResponseModel} from "../model";
+import {CommunityCreateResponseModel} from "../model/CommunityCreateResponseModel";
+import {CommunityEnity} from "../enity/Community";
 
 
 @Injectable()
 export class CommunityService {
-    public community:CommunityModel;
-    public communityResponsesCache:CommunityResponseModel[] = [];
+    public community:CommunityEnity;
+    public communityResponsesCache:CommunityCreateResponseModel[] = [];
 
     public isAdmin:boolean   = false;
 
     constructor(private communityRESTService:CommunityRESTService) {}
 
-    public getBySid(sid:string) : Observable<CommunityResponseModel> {
+    public getBySid(sid:string) : Observable<CommunityCreateResponseModel> {
         return Observable.create(observer => {
             if(this.isCached(sid)) {
-                let communityResponse: CommunityResponseModel  = this.getFromCache(sid);
+                let communityResponse: CommunityCreateResponseModel  = this.getFromCache(sid);
                 this.isAdmin = communityResponse.access.admin;
                 this.community = JSON.parse(JSON.stringify(communityResponse.entity));
                 observer.next(communityResponse);
@@ -44,7 +45,7 @@ export class CommunityService {
         }).length > 0;
     }
 
-    getFromCache(sid:string) : CommunityResponseModel {
+    getFromCache(sid:string) : CommunityCreateResponseModel {
         if(!this.isCached(sid)){
             throw new Error(`Community '${sid}' not cached yet.`);
         }
