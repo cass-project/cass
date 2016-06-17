@@ -4,15 +4,24 @@ namespace Domain\Auth\Frontline;
 use Application\Frontline\FrontlineScript;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Formatter\ProfileExtendedFormatter;
 
 class AuthTokenScript implements FrontlineScript
 {
     /** @var CurrentAccountService */
     private $currentAccountService;
 
-    public function __construct(CurrentAccountService $currentAccountService) {
+    /** @var ProfileExtendedFormatter */
+    private $profileExtendedFormatter;
+
+    public function __construct(
+        CurrentAccountService $currentAccountService,
+        ProfileExtendedFormatter $profileExtendedFormatter
+    ) {
         $this->currentAccountService = $currentAccountService;
+        $this->profileExtendedFormatter = $profileExtendedFormatter;
     }
+
 
     public function tags(): array {
         return [
@@ -29,7 +38,7 @@ class AuthTokenScript implements FrontlineScript
                     'api_key' => $currentAccountService->getCurrentAccount()->getAPIKey(),
                     'account' => $currentAccountService->getCurrentAccount()->toJSON(),
                     'profiles' => array_map(function(Profile $profile) {
-                        return $profile->toJSON();
+                        return $this->profileExtendedFormatter->format($profile);
                     }, $currentAccountService->getCurrentAccount()->getProfiles()->toArray())
                 ]
             ];
