@@ -1,0 +1,21 @@
+cass-community-create-modal-form((abort)="abort()", (next)="next()")
+  .form-section.modal-list
+    ul.theme-options.modal-list-container
+      li.modal-list-item([ngClass]="{disabled: feature.disabled}", *ngFor="#feature of model.features; #i = index")
+        .modal-list-icon
+          .modal-list-icon-container
+            i.fa(class="{{featuresService.getIcon(feature.code)}}")
+        .modal-list-info
+          h1 {{featuresService.getName(feature.code)}}
+          p {{featuresService.getDescription(feature.code)}}
+        .modal-list-controls
+          div.form-switch-button
+            input.form-switch-button-checkbox(
+              [(ngModel)]="feature.is_activated",
+              type="checkbox",
+              id="communityCreateModalFeature{{feature.code}}Checkbox",
+              [disabled]="feature.disabled",
+            )
+            label.form-switch-button-label(
+              htmlFor="communityCreateModalFeature{{feature.code}}Checkbox"
+            )

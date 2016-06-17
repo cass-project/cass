@@ -5,13 +5,13 @@ import {LoadingLinearIndicator} from "../../../../../../util/component/LoadingLi
 import {CommunityRESTService} from "../../../../../service/CommunityRESTService";
 import {CommunityCreateModalModel} from "../../model";
 import {COMMON_DIRECTIVES} from "angular2/common";
+import {CommunityCreateRequestModel} from "../../../../../model/CommunityCreateRequestModel";
+import {CommunityImageUploadRequestModel} from "../../../../../model/CommunityImageUploadRequestModel";
+import {CommunityControlFeatureRequestModel} from "../../../../../model/CommunityActivateFeatureModel";
 
 @Component({
     selector: 'cass-community-create-modal-screen-processing',
-    template: require('./template.html'),
-    styles: [
-        require('./style.shadow.scss')
-    ],
+    template: require('./template.jade'),
     directives: [
         LoadingLinearIndicator
     ]
@@ -19,26 +19,35 @@ import {COMMON_DIRECTIVES} from "angular2/common";
 export class ScreenProcessing extends Screen
 {
 
-    constructor(
-        private communityRESTService: CommunityRESTService,
-        protected model: CommunityCreateModalModel
+    constructor (
+        public model: CommunityCreateModalModel,
+        private service: CommunityRESTService
     ) {
-        super(model);
+        super();
     }
 
     ngOnInit() {
         let model = this.model;
-        this.communityRESTService.create(model.title, model.description, model.theme_id)
+
+        this.service.create(<CommunityCreateRequestModel>{
+                "title"       : model.title,
+                "description" : model.description,
+                "theme_id"    : model.theme_id
+            })
             .map(data => data.json())
             .subscribe(data => {
                 let communityId = data['entity'].id;
                 let requests:Promise<any>[] = [];
+                this.model.sid = data['entity'].sid;
 
                 for(let feature of this.model.features) {
                     if(feature.is_activated && !feature.disabled) {
                         requests.push(
-                            this.communityRESTService
-                                .activateFeature(communityId, feature.code)
+                            this.service
+                                .activateFeature(<CommunityControlFeatureRequestModel>{
+                                    communityId: communityId,
+                                    feature: feature.code
+                                })
                                 .toPromise()
                         );
                     }
@@ -46,8 +55,14 @@ export class ScreenProcessing extends Screen
 
                 if(model.uploadImage && model.uploadImageCrop) {
                     requests.push(
-                        this.communityRESTService
-                            .imageUpload(communityId, model.uploadImage, model.uploadImageCrop)
+                        this.service.imageUpload(<CommunityImageUploadRequestModel>{
+                                communityId: communityId,
+                                uploadImage: model.uploadImage,
+                                x1: model.uploadImageCrop.x,
+                                y1: model.uploadImageCrop.y,
+                                x2: model.uploadImageCrop.width + model.uploadImageCrop.x,
+                                y2: model.uploadImageCrop.height + model.uploadImageCrop.y
+                            })
                             .toPromise()
                     );
                 }

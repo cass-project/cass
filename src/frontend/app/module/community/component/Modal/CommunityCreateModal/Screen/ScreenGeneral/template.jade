@@ -1,0 +1,23 @@
+cass-community-create-modal-form((abort)="abort()", (next)="next()")
+  .input-group
+    label.form-label
+      span.label-text Название
+      input.form-input(
+        type="text",
+        required="",
+        minlength="6",
+        maxlength="30",
+        placeholder="Название, заголовок коммунити",
+        [(ngModel)] = "model.title",
+        #ngControlTitle="ngForm"
+      )
+      .input-error([hidden]="ngControlTitle.valid || ngControlTitle.pristine")
+        | Вы должны обязательно задать название коммунити. В названии коммунити должно быть от шести до тридцати символов.
+  .input-group
+    label.form-label
+      span.label-text Описание
+      input.form-input(
+        type="text",
+        placeholder="(Опционально) В одну строку про коммунити",
+        [(ngModel)]="model.description"
+      )

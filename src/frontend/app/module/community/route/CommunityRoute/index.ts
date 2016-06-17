@@ -7,7 +7,7 @@ import {CommunityMenuComponent} from "../../component/Menu/index";
 
 @Component({
     selector: "community-router",
-    template: require('./template.html'),
+    template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
