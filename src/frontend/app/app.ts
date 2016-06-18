@@ -4,7 +4,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from "angular2/router";
 
 import {AuthComponentService} from "./module/auth/component/Auth/service";
 import {ProfileComponentService} from "./module/profile/service";
-import {CommunityComponentService} from "./module/community/service";
+import {CommunityModalService} from "./module/community/service/CommunityModalService";
 import {CommunityRESTService} from "./module/community/service/CommunityRESTService";
 import {ThemeService} from "./module/theme/service/ThemeService";
 import {AuthComponent} from "./module/auth/component/Auth/index";
@@ -25,6 +25,7 @@ import {HtmlComponent} from "./module/html/index";
 import {CommunityService} from "./module/community/service/CommunityService";
 import {CollectionRESTService} from "./module/collection/service/CollectionRESTService";
 import {ProfileRESTService} from "./module/profile/service/ProfileRESTService";
+import {CommunitySettingsModalModel} from "./module/community/component/Modal/CommunitySettingsModal/model";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -35,13 +36,14 @@ import {ProfileRESTService} from "./module/profile/service/ProfileRESTService";
         AuthService,
         AuthComponentService,
         ProfileComponentService,
-        CommunityComponentService,
+        CommunityModalService,
         CommunityRESTService,
         CommunityService,
         ThemeService,
         ProfileSwitcherService,
         ProfileRESTService,
-        CollectionRESTService
+        CollectionRESTService,
+        CommunitySettingsModalModel
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -53,7 +55,7 @@ import {ProfileRESTService} from "./module/profile/service/ProfileRESTService";
         SidebarComponent,
         CommunityComponent,
         RouterOutlet
-    ]
+]
 })
 @RouteConfig([
     {

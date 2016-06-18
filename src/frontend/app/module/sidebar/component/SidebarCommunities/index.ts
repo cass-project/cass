@@ -1,6 +1,6 @@
 import {Component} from "angular2/core";
 
-import {CommunityComponentService} from "../../../community/service";
+import {CommunityModalService} from "../../../community/service/CommunityModalService";
 
 @Component({
     selector: 'cass-sidebar-communities',
@@ -14,7 +14,7 @@ export class SidebarCommunities
     private isSwitchedCommunityBookmarks: boolean = true;
 
     constructor(
-        private communityModalService: CommunityComponentService
+        private communityModalService: CommunityModalService
     ) {}
 
     isSwitched() {

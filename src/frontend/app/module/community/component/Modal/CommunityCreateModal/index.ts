@@ -53,6 +53,12 @@ export class CommunityCreateModal
 
     @Output('close') closeEvent = new EventEmitter<CommunityCreateModal>();
 
+    constructor() {
+        if(!AuthService.isSignedIn()) {
+            this.close();
+        }
+    }
+
     isHeaderVisible() {
         return !~([CreateStage.Processing]).indexOf(this.screens.current);
     }
@@ -64,13 +70,4 @@ export class CommunityCreateModal
     close() {
         this.closeEvent.emit(this);
     }
-
-    constructor() {
-        super();
-
-        if(!AuthService.isSignedIn()) {
-            this.close();
-        }
-    }
-
 }

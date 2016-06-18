@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component, ViewChild, ElementRef} from "angular2/core";
 
 import {CommunityCreateModalModel} from "../../model";
 import {Screen} from "../../screen";
@@ -11,7 +11,15 @@ import {CommunityCreateModalForm} from "../../Form";
 })
 export class ScreenGeneral extends Screen
 {
-    constructor(public model: CommunityCreateModalModel) {
+    constructor(public model: CommunityCreateModalModel, private elementRef:ElementRef) {
         super();
+    }
+
+    abort() {
+        this.abortEvent.emit(this);
+    }
+
+    ngAfterViewInit() {
+        this.elementRef.nativeElement.getElementsByClassName('form-input')[0].focus();
     }
 }

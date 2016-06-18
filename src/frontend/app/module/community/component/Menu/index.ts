@@ -1,7 +1,7 @@
 import {Component} from "angular2/core";
 
 import {CommunityService} from "../../service/CommunityService";
-import {CommunityComponentService} from "../../service";
+import {CommunityModalService} from "../../service/CommunityModalService";
 
 @Component({
     selector: 'cass-community-menu',
@@ -12,5 +12,5 @@ import {CommunityComponentService} from "../../service";
 })
 export class CommunityMenuComponent
 {
-    constructor(private service: CommunityService, private modalsService: CommunityComponentService){}
+    constructor(private service: CommunityService, private modalsService: CommunityModalService){}
 }

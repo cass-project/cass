@@ -11,6 +11,7 @@ import {FeaturesTab} from "./Tab/TabFeatures";
 import {GeneralTab} from "./Tab/TabGeneral";
 import {ImageTab} from "./Tab/TabImage";
 import {CommunityEnity} from "../../../enity/Community";
+import {CommunitySettingsModalModel} from "./model";
 
 
 
@@ -38,16 +39,23 @@ export class CommunitySettingsModal
     public screens: ScreenControls<SettingsStage> = new ScreenControls<SettingsStage>(SettingsStage.General);
 
     @Output('close') closeEvent = new EventEmitter<CommunitySettingsModal>();
-    protected sid:string = "e4juVgpP";
-    private community: CommunityEnity;
-    constructor(public service: CommunityService) {
-        service.getBySid(this.sid).subscribe(data => {
-            this.community = data.entity;
+
+    constructor(
+        public model:CommunitySettingsModalModel,
+        public modelUnmodified:CommunitySettingsModalModel,
+        private service: CommunityService
+    ) {
+        service.getBySid(model.sid).subscribe(data => {
+            model.title = data.entity.title;
+            model.description = data.entity.description;
+            model.theme_id = data.entity.theme_id;
+            model.image.public_path = data.entity.image.public_path;
+            modelUnmodified = model;
         });
     }
 
     reset() {
-        this.service.community = JSON.parse(JSON.stringify(this.community))
+        this.model = JSON.parse(JSON.stringify(this.modelUnmodified));
     }
 
 
@@ -56,7 +64,7 @@ export class CommunitySettingsModal
     }
 
     canSave() {
-        return JSON.stringify( this.service.community ) !== JSON.stringify( this.community )
+        return JSON.stringify( this.modelUnmodified ) !== JSON.stringify(this.model)
     }
 
     saveAllChanges() {

@@ -4,12 +4,18 @@ import {UploadImageCropModel} from "../../../../util/component/UploadImage/strat
 @Injectable()
 export class CommunitySettingsModalModel
 {
+    sid: string;
     title: string;
     description: string;
     public_options: CommunityPublicOptionsModel;
     theme_id: number;
-    uploadImage: Blob;
-    uploadImageCrop: UploadImageCropModel;
+    image:{
+        public_path:string;
+        upload_new: {
+            uploadImage: Blob;
+            uploadImageCrop: UploadImageCropModel;
+        }
+    }
     features: CommunityFeaturesModel[];
 }
 

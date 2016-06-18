@@ -16,5 +16,3 @@ article.page.page-community
         pre.debug {{service.community| json}}
         button.form-button.form-button-primary((click)="reset()") reset()
         button.form-button.form-button-primary((click)="ngOnInit()") ngOnInit()
-  div(*ngIf="modalsService.modals.settings.isOpened()")
-    cass-community-settings-modal((close)="modalsService.modals.settings.close()")
