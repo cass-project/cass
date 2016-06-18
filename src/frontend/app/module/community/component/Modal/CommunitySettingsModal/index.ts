@@ -10,7 +10,6 @@ import {CommunityFeaturesService} from "../../../service/CommunityFeaturesServic
 import {FeaturesTab} from "./Tab/TabFeatures";
 import {GeneralTab} from "./Tab/TabGeneral";
 import {ImageTab} from "./Tab/TabImage";
-import {CommunityEnity} from "../../../enity/Community";
 import {CommunitySettingsModalModel} from "./model";
 
 
@@ -29,7 +28,6 @@ import {CommunitySettingsModalModel} from "./model";
         FeaturesTab
     ],
     providers: [
-        CommunityEnity,
         CommunityFeaturesService
     ]
 })
@@ -37,27 +35,31 @@ import {CommunitySettingsModalModel} from "./model";
 export class CommunitySettingsModal
 {
     public screens: ScreenControls<SettingsStage> = new ScreenControls<SettingsStage>(SettingsStage.General);
+    public modelUnmodified:CommunitySettingsModalModel;
 
     @Output('close') closeEvent = new EventEmitter<CommunitySettingsModal>();
 
     constructor(
         public model:CommunitySettingsModalModel,
-        public modelUnmodified:CommunitySettingsModalModel,
         private service: CommunityService
     ) {
         service.getBySid(model.sid).subscribe(data => {
             model.title = data.entity.title;
             model.description = data.entity.description;
             model.theme_id = data.entity.theme_id;
-            model.image.public_path = data.entity.image.public_path;
-            modelUnmodified = model;
+            model.public_options = {
+                moderation_contract: false, //data.entity.public_options.moderation_contract;
+                public_enabled: false //data.entity.public_options.public_enabled;
+            };
+            this.modelUnmodified = JSON.parse(JSON.stringify(model));
         });
     }
 
     reset() {
-        this.model = JSON.parse(JSON.stringify(this.modelUnmodified));
+        this.model.title = this.modelUnmodified.title;
+        this.model.description = this.modelUnmodified.description;
+        this.model.theme_id = this.modelUnmodified.theme_id;
     }
-
 
     close() {
         this.closeEvent.emit(this);
@@ -68,7 +70,7 @@ export class CommunitySettingsModal
     }
 
     saveAllChanges() {
-        console.log(this.service.community);
+        console.log(this.model);
     }
 }
 

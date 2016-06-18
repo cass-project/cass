@@ -40,6 +40,7 @@ enum CreateStage {
         ScreenComplete
     ]
 })
+
 export class CommunityCreateModal
 {
     public screens: ScreenControls<CreateStage> = new ScreenControls<CreateStage>(CreateStage.General, (sc: ScreenControls<CreateStage>) => {
@@ -53,9 +54,9 @@ export class CommunityCreateModal
 
     @Output('close') closeEvent = new EventEmitter<CommunityCreateModal>();
 
-    constructor() {
+    ngOnInit() {
         if(!AuthService.isSignedIn()) {
-            this.close();
+            this.closeEvent.emit(this);
         }
     }
 

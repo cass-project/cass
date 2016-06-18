@@ -28,7 +28,6 @@ export class CommunityFeaturesModel
 
 export class CommunityPublicOptionsModel
 {
-    code: string;
-    is_activated: boolean = false;
-    disabled: boolean = false;
+    "public_enabled": boolean;
+    "moderation_contract": boolean;
 }
