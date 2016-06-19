@@ -2,6 +2,7 @@ import {Component} from "angular2/core";
 
 import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect";
 import {CommunityService} from "../../../../../service/CommunityService";
+import {CommunitySettingsModalModel} from "../../model";
 
 @Component({
     selector: 'cass-community-settings-modal-tab-general',
@@ -18,16 +19,27 @@ export class GeneralTab {
 
     private deleteRequest: CommunityDeleteRequestControls = new CommunityDeleteRequestControls();
     private isCommunitySettingsModalThemeEnabled: boolean;
-    private isCommunitySettingsModalThemeEnablePublic: boolean;
-    private isCommunitySettingsModalThemeWillModerate: boolean;
 
-    constructor(public service: CommunityService) {}
+    constructor(public model: CommunitySettingsModalModel) {
+        this.isCommunitySettingsModalThemeEnabled = !!model.theme_id;
+    }
 
     communitySettingsModalThemeEnabledChange($event: boolean) {
         if($event===false) {
-            this.isCommunitySettingsModalThemeEnablePublic = false;
-            this.isCommunitySettingsModalThemeWillModerate = false;
+            this.model.public_options.public_enabled = false;
+            this.model.public_options.moderation_contract = false;
         }
+    }
+
+    communitySettingsModalThemeEnablePublicChange($event: boolean) {
+        if($event===false) {
+            this.model.public_options.moderation_contract = false;
+        }
+    }
+
+    updateThemeId(themeIds: number[]){
+        this.model.theme_id = themeIds[0];
+
     }
 }
 

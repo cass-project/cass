@@ -65,7 +65,6 @@ export class ScreenProcessing extends Screen
                 }
 
                 Promise.all(requests).then(responses => {
-                    console.log(responses);
                     this.next();
                 });
             });

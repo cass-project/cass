@@ -1,9 +1,9 @@
-import {Component} from "angular2/core";
+import {Component, ElementRef} from "angular2/core";
 
 import {Screen} from "../../screen";
-import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect";
+import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
 import {CommunityCreateModalModel} from "../../model";
-import {CommunityCreateModalForm} from "../../Form";
+import {CommunityCreateModalForm} from "../../Form/index";
 
 @Component({
     selector: 'cass-community-create-modal-screen-theme',
@@ -18,11 +18,15 @@ import {CommunityCreateModalForm} from "../../Form";
 })
 export class ScreenTheme extends Screen
 {
-    constructor(public model: CommunityCreateModalModel) {
+    constructor(public model: CommunityCreateModalModel, private elementRef:ElementRef) {
         super();
     }
 
     updateThemeId(themeIds: number[]) {
         this.model.theme_id = themeIds[0];
+    }
+
+    ngAfterViewInit() {
+        this.elementRef.nativeElement.getElementsByClassName('form-input')[0].focus();
     }
 }

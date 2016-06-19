@@ -40,6 +40,7 @@ enum CreateStage {
         ScreenComplete
     ]
 })
+
 export class CommunityCreateModal
 {
     public screens: ScreenControls<CreateStage> = new ScreenControls<CreateStage>(CreateStage.General, (sc: ScreenControls<CreateStage>) => {
@@ -53,6 +54,12 @@ export class CommunityCreateModal
 
     @Output('close') closeEvent = new EventEmitter<CommunityCreateModal>();
 
+    ngOnInit() {
+        if(!AuthService.isSignedIn()) {
+            this.closeEvent.emit(this);
+        }
+    }
+
     isHeaderVisible() {
         return !~([CreateStage.Processing]).indexOf(this.screens.current);
     }
@@ -64,13 +71,4 @@ export class CommunityCreateModal
     close() {
         this.closeEvent.emit(this);
     }
-
-    constructor() {
-        super();
-
-        if(!AuthService.isSignedIn()) {
-            this.close();
-        }
-    }
-
 }

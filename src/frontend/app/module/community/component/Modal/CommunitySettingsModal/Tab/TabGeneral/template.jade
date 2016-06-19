@@ -6,7 +6,7 @@
       label.form-label
         span Название
         input.form-input(
-          [(ngModel)]="service.community.title",
+          [(ngModel)]="model.title",
           type="text",
           placeholder="Название, заголовок коммунити"
         )
@@ -14,7 +14,7 @@
       label.form-label
         span Описание
         input.form-input(
-          [(ngModel)]="service.community.description",
+          [(ngModel)]="model.description",
           type="text",
           placeholder="Подзаголовок коммунити"
         )
@@ -30,7 +30,7 @@
           h1 Коммунити посвящено определенной тематике
           p Если ваше коммунити посвященно определенной професиональной тематике, то вы можете получить больше посетителей и участников, если активируете эту опцию и укажите, какой именно тематике посвящено ваше коммунити
           // Если опция не включена, то cass-theme-select не должен отображаться
-          cass-theme-select(*ngIf="isCommunitySettingsModalThemeEnabled")
+          cass-theme-select((change)="updateThemeId($event)", multiple="false", *ngIf="isCommunitySettingsModalThemeEnabled")
         .modal-list-controls
           div.form-switch-button
             input.form-switch-button-checkbox(
@@ -51,11 +51,12 @@
               input.form-switch-button-checkbox(
                 type="checkbox",
                 id="communitySettingsModalThemeEnablePublic",
-                [(ngModel)]="isCommunitySettingsModalThemeEnablePublic"
+                [(ngModel)]="model.public_options.public_enabled",
+                (ngModelChange)="communitySettingsModalThemeEnablePublicChange($event)"
               )
               label.form-switch-button-label(for="communitySettingsModalThemeEnablePublic")
       // Опция отображается, только если обе опции выше активированы
-      li.modal-list-item(*ngIf="isCommunitySettingsModalThemeEnablePublic")
+      li.modal-list-item(*ngIf="model.public_options.public_enabled")
         .modal-list-icon
           .modal-list-icon-container
             i.fa.fa-cab
@@ -67,8 +68,7 @@
               input.form-switch-button-checkbox(
                 type="checkbox",
                 id="communitySettingsModalThemeWillModerate",
-                checked="",
-                [(ngModel)]="isCommunitySettingsModalThemeWillModerate"
+                [(ngModel)]="model.public_options.moderation_contract"
               )
               label.form-switch-button-label(for="communitySettingsModalThemeWillModerate")
   .form-section

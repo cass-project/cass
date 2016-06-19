@@ -1,12 +1,11 @@
 import {Component} from "angular2/core";
 import {RouteParams} from "angular2/router";
 
-import {CommunityEnity} from "./../../enity/Community";
 import {CommunityService} from "../../service/CommunityService";
 import {ModalComponent} from "../../../modal/component";
 import {ModalBoxComponent} from "../../../modal/component/box";
 import {LoadingLinearIndicator} from "../../../util/component/LoadingLinearIndicator";
-import {CommunityComponentService} from "../../service";
+import {CommunitySettingsModalModel} from "../../component/Modal/CommunitySettingsModal/model";
 
 @Component({
     selector: "community-page",
@@ -23,14 +22,16 @@ import {CommunityComponentService} from "../../service";
 export class CommunityPage
 {
     public isLoading:boolean = false;
-    private community:CommunityEnity;
+
     constructor(
         private routeParams: RouteParams,
         private service: CommunityService,
-        private modalsService: CommunityComponentService
+        private model:CommunitySettingsModalModel
+
     ){
         let timeout = setTimeout(()=>{ this.isLoading=true;}, 1000);
-        this.service.getBySid(this.routeParams.get('sid')).subscribe(
+        model.sid = this.routeParams.get('sid');
+        this.service.getBySid(model.sid).subscribe(
             data => {
                 this.isLoading = false;
                 clearTimeout(timeout);

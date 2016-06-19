@@ -4,12 +4,18 @@ import {UploadImageCropModel} from "../../../../util/component/UploadImage/strat
 @Injectable()
 export class CommunitySettingsModalModel
 {
+    sid: string;
     title: string;
     description: string;
     public_options: CommunityPublicOptionsModel;
     theme_id: number;
-    uploadImage: Blob;
-    uploadImageCrop: UploadImageCropModel;
+    image:{
+        public_path:string;
+        upload_new: {
+            uploadImage: Blob;
+            uploadImageCrop: UploadImageCropModel;
+        }
+    }
     features: CommunityFeaturesModel[];
 }
 
@@ -22,7 +28,6 @@ export class CommunityFeaturesModel
 
 export class CommunityPublicOptionsModel
 {
-    code: string;
-    is_activated: boolean = false;
-    disabled: boolean = false;
+    "public_enabled": boolean;
+    "moderation_contract": boolean;
 }
