@@ -50,12 +50,22 @@ final class AvatarService
 
     public function defaultImage(AvatarStrategy $strategy)
     {
+        $oldCollectionUID = null;
+
+        if($strategy->getEntity()->hasImages()) {
+            $oldCollectionUID = $strategy->getEntity()->fetchImages()->getUID();
+        }
+
         $this->destroyImages($strategy);
 
         $source = $this->imageManager->make($strategy->getDefaultImage()->getStoragePath());
         $images = $this->makeImages($strategy, $source);
 
         $strategy->getEntity()->exportImages($images);
+
+        if($oldCollectionUID) {
+            $strategy->getFilesystem()->deleteDir(sprintf('%s/%s', $strategy->getEntityId(), $oldCollectionUID));
+        }
     }
 
     public function uploadImage(AvatarStrategy $strategy, UploadImageParameters $parameters)
@@ -75,6 +85,10 @@ final class AvatarService
         $source->crop($end->getX() - $start->getX(), $end->getY() - $start->getY(), $start->getX(), $start->getY());
 
         $strategy->getEntity()->exportImages($this->makeImages($strategy, $source));
+
+        if($oldCollectionUID) {
+            $strategy->getFilesystem()->deleteDir(sprintf('%s/%s', $strategy->getEntityId(), $oldCollectionUID));
+        }
     }
 
     public function destroyImages(AvatarStrategy $strategy)
