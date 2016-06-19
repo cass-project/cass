@@ -28,7 +28,6 @@ class PostReportRepository extends EntityRepository
       ->setProfile($authorProfile)
       ->setReportTypes($createPostReportParameters->getReportTypes());
 
-
     $em->persist($postReport);
     $em->flush([$postReport]);
 
@@ -41,11 +40,7 @@ class PostReportRepository extends EntityRepository
     $result = $r->findBy([],null,$limit,$offset);
 
     return array_filter($result, function(PostReport $postReport)use ($type){
-      return array_walk($postReport->getReportTypes(), function($report_type)use($type){
-        return $report_type == $type;
-      });
+      return array_search($type,$postReport->getReportTypes())=== false ? false : true;
     });
-
-
   }
 }

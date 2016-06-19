@@ -1,4 +1,4 @@
-'/protected/post-report/list/type/{type}/offset/{offset}/limit/{limit}':
+'/post-report/list/type/{type}/offset/{offset}/limit/{limit}':
   get:
     tags:
       - post_report

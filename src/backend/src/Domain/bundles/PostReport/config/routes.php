@@ -13,7 +13,7 @@ return function (Application $app) {
   );
 
   $app->get(
-    '/protected/post-report/{command:list}/type/{type}/offset/{offset}/limit/{limit}[/]',
+    '/post-report/{command:list}/type/{type}/offset/{offset}/limit/{limit}[/]',
     PostReportMiddleware::class,
     'post-report-list'
   );

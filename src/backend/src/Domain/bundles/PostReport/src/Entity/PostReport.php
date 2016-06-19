@@ -14,12 +14,13 @@ class PostReport
   /** Нецензурная лексика */
   const TypeCensored = 1;
   /** Оскорбление, Дискриминация, некорректное поведение */
-  const Type = 2;
+  const TypeBadBehavior = 2;
   /** Не относящийся к тематике контент */
-  const POST_OFFTOP = 3;
-  /** Не относящийся к тематике контент */
-  const POST_REPORT_TYPE_4 = 3;
-
+  const TypeOfftop = 3;
+  /** Запрещённый контент */
+  const TypeBanContent = 4;
+  /** Другое */
+  const TypeOther = 5;
 
   /**
    * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
@@ -54,11 +55,11 @@ class PostReport
     return $this;
   }
 
-  public function getCreatedAt(){
+  public function getCreatedAt():\DateTime{
     return $this->created_at;
   }
 
-  public function setCreatedAt($created_at):self
+  public function setCreatedAt(\DateTime $created_at):self
   {
     $this->created_at = $created_at;
     return $this;

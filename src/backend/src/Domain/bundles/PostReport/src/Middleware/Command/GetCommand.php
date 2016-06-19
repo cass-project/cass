@@ -22,6 +22,12 @@ class GetCommand extends Command
 
       $posts = $this->postReportService->getPostReports($type,$offset,$limit);
 
+      if (count($posts)===0){
+        return $responseBuilder
+          ->setStatusNotFound()
+          ->build();
+      }
+
       return $responseBuilder
         ->setStatusSuccess()
         ->setJson([
