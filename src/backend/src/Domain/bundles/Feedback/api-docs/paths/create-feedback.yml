@@ -1,0 +1,23 @@
+/feedback/create:
+  put:
+    tags:
+      - feedback
+    description: создать новый фидбек
+    parameters:
+      - name: profileId
+        type: number
+        in: body
+        required: false
+        description: Id профиля
+    responses:
+      200:
+        schema:
+          properties:
+            success:
+              type: boolean
+              default: true
+            entity:
+              $ref: '#/definitions/Feedback_Entity_Feedback'
+          required:
+            - success
+            - entity

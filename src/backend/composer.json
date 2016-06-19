@@ -24,7 +24,9 @@
       "Domain\\Community\\": "src/Domain/bundles/Community/src",
       "Domain\\ProfileCommunities\\": "src/Domain/bundles/ProfileCommunities/src",
       "Domain\\Colors\\": "src/Domain/bundles/Colors/src",
-      "Domain\\Avatar\\": "src/Domain/bundles/Avatar/src"
+      "Domain\\Avatar\\": "src/Domain/bundles/Avatar/src",
+      "Domain\\Feedback\\": "src/Domain/bundles/Feedback/src"
+
     }
   },
   "require": {
