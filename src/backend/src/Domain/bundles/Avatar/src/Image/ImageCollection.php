@@ -22,14 +22,16 @@ class ImageCollection implements JSONSerializable
         foreach($json as $id => $definition) {
             $id = (string) $id;
 
-            if(! (strlen($id) >= self::MIN_ID_LENGTH && strlen($id) <= self::MAX_ID_LENGTH)) {
-                throw new \InvalidArgumentException(sprintf('Invalid ID `%s`', $id));
-            }
+            if($id !== 'uid') {
+                if(! (strlen($id) >= self::MIN_ID_LENGTH && strlen($id) <= self::MAX_ID_LENGTH)) {
+                    throw new \InvalidArgumentException(sprintf('Invalid ID `%s`', $id));
+                }
 
-            $collection->attachImage($id, new Image(
-                $definition['storage_path'],
-                $definition['public_path']
-            ));
+                $collection->attachImage($id, new Image(
+                    $definition['storage_path'],
+                    $definition['public_path']
+                ));
+            }
         }
 
         return $collection;

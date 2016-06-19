@@ -1,4 +1,4 @@
 <?php
 namespace Domain\Avatar\Exception;
 
-class InvalidRatioException extends \Exception {}
+class InvalidRatioException extends ImageServiceException {}

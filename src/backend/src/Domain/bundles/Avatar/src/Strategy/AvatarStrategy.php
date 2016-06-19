@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Avatar\Service\Context;
+namespace Domain\Avatar\Strategy;
 
 use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Image\Image;
@@ -16,4 +16,5 @@ interface AvatarStrategy
     public function getDefaultSize(): int;
     public function getSizes(): array;
     public function getRatio(): string;
+    public function validate(\Intervention\Image\Image $origImage);
 }

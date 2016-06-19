@@ -2,13 +2,12 @@
 namespace Domain\Community\Image;
 
 use Domain\Avatar\Entity\ImageEntity;
-use Domain\Avatar\Entity\ImageEntityTrait;
 use Domain\Avatar\Image\Image;
-use Domain\Avatar\Service\Context\AvatarStrategy;
+use Domain\Avatar\Strategy\SquareAvatarStrategy;
 use Domain\Community\Entity\Community;
 use League\Flysystem\Filesystem;
 
-final class CommunityImageStrategy implements AvatarStrategy
+final class CommunityImageStrategy extends SquareAvatarStrategy
 {
     const DEFAULT_IMAGE_PUBLIC_PATH = '/dist/assets/community/community-default.png';
     const DEFAULT_IMAGE_STORAGE_DIR = __DIR__.'/../../../../../../../www/app/dist/assets/community/community-default.png';
@@ -56,24 +55,5 @@ final class CommunityImageStrategy implements AvatarStrategy
     public function getDefaultImage(): Image
     {
         return new Image(self::DEFAULT_IMAGE_STORAGE_DIR, self::DEFAULT_IMAGE_PUBLIC_PATH);
-    }
-
-    public function getDefaultSize(): int {
-        return 64;
-    }
-
-    public function getSizes(): array {
-        return [
-            512,
-            256,
-            128,
-            64,
-            32,
-            16
-        ];
-    }
-
-    public function getRatio(): string {
-        return "1:1";
     }
 }

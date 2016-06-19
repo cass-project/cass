@@ -7,7 +7,7 @@ use Domain\Avatar\Exception\InvalidRatioException;
 use Domain\Avatar\Image\Image;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;
-use Domain\Avatar\Service\Context\AvatarStrategy;
+use Domain\Avatar\Strategy\AvatarStrategy;
 use Intervention\Image\ImageManager;
 use League\Flysystem\Filesystem;
 use Intervention\Image\Image as ImageLayer;
@@ -37,12 +37,10 @@ final class AvatarService
             }
         }
 
-        $collection->attachImage('original', $this->createImage($strategy, $source, $collection->getUID(), $source->getWidth()));
-
         if($collection->hasImage($strategy->getDefaultSize())) {
             $collection->attachImage('default', clone $collection->getImage((string) $strategy->getDefaultSize()));
         }else{
-            $collection->attachImage('original', clone $collection->getImage('original'));
+            $collection->attachImage('original', clone $collection->getImage(min($sizes)));
         }
 
         return $collection;
@@ -61,6 +59,7 @@ final class AvatarService
         $source = $this->imageManager->make($strategy->getDefaultImage()->getStoragePath());
         $images = $this->makeImages($strategy, $source);
 
+        $strategy->validate($source);
         $strategy->getEntity()->exportImages($images);
 
         if($oldCollectionUID) {
@@ -84,6 +83,7 @@ final class AvatarService
         $source = $this->imageManager->make($parameters->getTmpFile());
         $source->crop($end->getX() - $start->getX(), $end->getY() - $start->getY(), $start->getX(), $start->getY());
 
+        $strategy->validate($source);
         $strategy->getEntity()->exportImages($this->makeImages($strategy, $source));
 
         if($oldCollectionUID) {
