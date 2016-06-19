@@ -12,15 +12,8 @@
     li.palette(*ngFor='#palette of palettes')
       button.palette-button(
         type='button',
-        [ngClass]="{'palette-button-inactive': true}",
+        [ngClass]="{'palette-button-inactive': palette !== pickedColor}",
         [style.background-color]='palette.background.hexCode',
-        [style.border-color]='palette.border.hexCode'
-      )
-    // Выбран цвет
-    li.palette
-      button.palette-button(
-        type='button',
-        [ngClass]="{'palette-button-inactive': false}",
-        [style.background-color]='palettes[0].background.hexCode',
-        [style.border-color]='palettes[0].border.hexCode'
+        [style.border-color]='palette.border.hexCode',
+        (click)='pickColor(palette)'
       )
