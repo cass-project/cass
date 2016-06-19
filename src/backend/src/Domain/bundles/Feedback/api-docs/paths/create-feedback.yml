@@ -4,11 +4,12 @@
       - feedback
     description: создать новый фидбек
     parameters:
-      - name: profileId
-        type: number
+      - name: body
         in: body
-        required: false
-        description: Id профиля
+        required: true
+        description:
+        schema:
+          $ref: '#/definitions/Feedback_Request_CreateFeedback'
     responses:
       200:
         schema:

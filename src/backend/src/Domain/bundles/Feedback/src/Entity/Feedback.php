@@ -17,9 +17,13 @@ class Feedback
   use IdTrait;
 
 
+  /**
+   * @Column(type="datetime")
+   * @var string
+   */
   private $created_at;
   /**
-   * @ManyToOne(targetEntity="Domain\Account\Entity\Profile")
+   * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
    * @JoinColumn(name="profile_id", referencedColumnName="id")
    */
   private $profile;
@@ -53,6 +57,11 @@ class Feedback
     return $this->profile;
   }
 
+  public function hasProfile()
+  {
+    return $this->getProfile() !== NULL;
+  }
+
   public function setProfile(Profile $profile = null):self
   {
     $this->profile = $profile;
@@ -78,6 +87,17 @@ class Feedback
   {
     $this->description = $description;
     return $this;
+  }
+
+  public function toJSON():array
+  {
+    return [
+      'id'          => $this->getId(),
+      'created_at'  => $this->created_at,
+      'description' => $this->description,
+      'profile_id'  => $this->hasProfile() ? $this->hasProfile()->getId() : NULL,
+      'type'        => $this->getType()
+    ];
   }
 
 }
