@@ -67,11 +67,6 @@ export class ProfileRESTService {
             default:
                 throw new Error('editPersonal in ProfileRESTService');
         }
-
-
-
-
-
         return this.http.post(url, JSON.stringify({
             gender: profile.gender.string,
             greetings_method: profile.greetings.greetings_method,

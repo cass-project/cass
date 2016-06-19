@@ -6,6 +6,7 @@ import {ColorPicker} from "../../../util/component/ColorPicker/index";
 import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
 import {ScreenControls} from "../../../util/classes/ScreenControls";
 import {CollectionRESTService} from "../../service/CollectionRESTService";
+import {Collection} from "../entity/Collection";
 
 enum CreateCollectionMasterStage
 {
@@ -37,37 +38,48 @@ export class CollectionCreateMaster
     @Input ('for') _for: any;
     @Input ('owner_profile_id') owner_profile_id: string;
     @Input ('owner_community_id') owner_community_id: string;
-    @Output('complete') complete = new EventEmitter();
+    @Output('complete') complete = new EventEmitter<Collection>();
     @Output('error') error = new EventEmitter();
 
-    collection = {title: '', description: '', haveTheme: false, theme_id: []};
+    collection : Collection = {
+        author_profile_id: this.owner_profile_id,
+        owner_community_id: this.owner_community_id,
+        title: '',
+        description: '',
+        theme_ids: [],
+        theme: {has: false},
+        image: {small: {public_path: '/dist/assets/community/community-default.png'}}
+    };
 
 
     checkFields(){
-        if(this.collection.haveTheme){
-            return this.collection.theme_id.length > 0;
+        if(this.collection.theme.has){
+            return this.collection.theme_ids.length > 0;
         } else return this.collection.title.length > 0;
-    }
+    };
 
     create(){
         if(this._for === 'profile') {
-            this.collectionRESTService.profileCreateCollection(this.owner_profile_id, this.collection).subscribe(data => {
-                    this.complete.emit(data);
+            this.collection.author_profile_id = this.owner_profile_id;
+            this.collectionRESTService.profileCreateCollection(this.collection).subscribe(data => {
+                    this.complete.emit(this.collection);
                 },
                 err => {
                     this.error.emit(err);
                     console.log(err);
                 });
         } else if(this._for === 'community'){
-            this.collectionRESTService.communityCreateCollection(this.owner_profile_id, this.owner_community_id, this.collection).subscribe(data => {
-                    this.complete.emit(data);
+            this.collection.author_profile_id = this.owner_profile_id;
+            this.collection.owner_community_id = this.owner_community_id;
+            this.collectionRESTService.communityCreateCollection(this.collection).subscribe(data => {
+                    this.complete.emit(this.collection);
                 },
                 err => {
                     this.error.emit(err);
                     console.log(err);
                 });
         }
-    }
+    };
 
     private buttons = new Buttons(this.screens);
 }
@@ -79,11 +91,11 @@ class Buttons {
         return this.screens.isIn([
             CreateCollectionMasterStage.Options
         ]);
-    }
+    };
 
     isFinish() {
         return this.screens.isIn([
             CreateCollectionMasterStage.Options
         ]);
-    }
+    };
 }
