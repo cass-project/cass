@@ -20,6 +20,10 @@ final class CommunityImageStrategy extends SquareAvatarStrategy
 
     public function __construct(Community $community, Filesystem $fileSystem)
     {
+        if(! $community->isPersisted()) {
+            throw new \Exception('Entity is not persisted yet');
+        }
+
         $this->community = $community;
         $this->fileSystem = $fileSystem;
     }

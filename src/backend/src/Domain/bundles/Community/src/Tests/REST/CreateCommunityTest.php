@@ -39,7 +39,14 @@ final class CreateCommunityTest extends CommunityMiddlewareTestCase
                         'id' => $theme->getId()
                     ],
                     'image' => [
-                        'public_path' => $this->expectString()
+                        'uid' => $this->expectString(),
+                        'variants' => [
+                            'default' => [
+                                'id' => 'default',
+                                'storage_path' => $this->expectString(),
+                                'public_path' => $this->expectString(),
+                            ]
+                        ]
                     ],
                     'public_options' => [
                         'public_enabled' => true,
@@ -75,6 +82,16 @@ final class CreateCommunityTest extends CommunityMiddlewareTestCase
                     'description' => 'My Community 1',
                     'theme' => [
                         'has' => false,
+                    ],
+                    'image' => [
+                        'uid' => $this->expectString(),
+                        'variants' => [
+                            'default' => [
+                                'id' => 'default',
+                                'storage_path' => $this->expectString(),
+                                'public_path' => $this->expectString(),
+                            ]
+                        ]
                     ],
                     'public_options' => [
                         'public_enabled' => false,

@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Avatar\Service;
 
-use Application\Exception\NotImplementedException;
 use Application\Util\GenerateRandomString;
+use Domain\Avatar\Exception\InvalidCropException;
 use Domain\Avatar\Exception\InvalidRatioException;
 use Domain\Avatar\Image\Image;
 use Domain\Avatar\Image\ImageCollection;
@@ -81,6 +81,25 @@ final class AvatarService
         $end = $parameters->getPointEnd();
 
         $source = $this->imageManager->make($parameters->getTmpFile());
+
+        if(($start->getX() > $end->getX()) || ($start->getY() > $end->getY())) {
+            throw new InvalidCropException(sprintf('Invalid start/end points, got Point(%d, %d) – Point(%d, %d)',
+                $start->getX(),
+                $start->getY(),
+                $end->getX(),
+                $end->getY()
+            ));
+        }
+
+        if(($source->getWidth() < $end->getX()) || ($source->getHeight() < $end->getY())) {
+            throw new InvalidCropException(sprintf('Unable to crop with Point(%d, %d) – Point(%d, %d)',
+                $start->getX(),
+                $start->getY(),
+                $end->getX(),
+                $end->getY()
+            ));
+        }
+
         $source->crop($end->getX() - $start->getX(), $end->getY() - $start->getY(), $start->getX(), $start->getY());
 
         $strategy->validate($source);
@@ -102,7 +121,7 @@ final class AvatarService
     }
 
     public function generateImage(AvatarStrategy $strategy) {
-        throw new NotImplementedException;
+        $this->defaultImage($strategy);
     }
 
     private function createImage(AvatarStrategy $strategy, ImageLayer $source, string $collectionUID, int $size): Image

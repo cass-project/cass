@@ -1,7 +1,0 @@
-Community_Entity_CommunityImage:
-  required:
-    - public_path
-  properties:
-    public_path:
-      type: string
-      description: Путь к картинке

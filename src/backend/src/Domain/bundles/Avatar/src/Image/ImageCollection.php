@@ -19,19 +19,17 @@ class ImageCollection implements JSONSerializable
     static public function createFromJSON(array $json): self {
         $collection = new self($json['uid'] ?? null);
 
-        foreach($json as $id => $definition) {
+        foreach($json['variants'] ?? [] as $id => $definition) {
             $id = (string) $id;
 
-            if($id !== 'uid') {
-                if(! (strlen($id) >= self::MIN_ID_LENGTH && strlen($id) <= self::MAX_ID_LENGTH)) {
-                    throw new \InvalidArgumentException(sprintf('Invalid ID `%s`', $id));
-                }
-
-                $collection->attachImage($id, new Image(
-                    $definition['storage_path'],
-                    $definition['public_path']
-                ));
+            if(! (strlen($id) >= self::MIN_ID_LENGTH && strlen($id) <= self::MAX_ID_LENGTH)) {
+                throw new \InvalidArgumentException(sprintf('Invalid ID `%s`', $id));
             }
+
+            $collection->attachImage($id, new Image(
+                $definition['storage_path'],
+                $definition['public_path']
+            ));
         }
 
         return $collection;
@@ -54,11 +52,12 @@ class ImageCollection implements JSONSerializable
     public function toJSON(): array
     {
         $result = [
-            'uid' => $this->getUID()
+            'uid' => $this->getUID(),
+            'variants' => []
         ];
 
         foreach($this->images as $id => $image) {
-            $result[$id] = ['id' => $id] + $image->toJSON();
+            $result['variants'][$id] = ['id' => $id] + $image->toJSON();
         }
 
         return $result;

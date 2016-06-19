@@ -59,6 +59,9 @@ class CommunityService
 
         $this->communityRepository->createCommunity($entity);
 
+        $strategy = new CommunityImageStrategy($entity, $this->imageFileSystem);
+        $this->avatarService->generateImage($strategy);
+
         return $entity;
     }
 

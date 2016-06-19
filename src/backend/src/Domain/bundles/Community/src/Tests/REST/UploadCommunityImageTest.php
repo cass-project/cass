@@ -26,7 +26,34 @@ final class UploadCommunityImageTest extends CommunityMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'image' => [
-                    'public_path' => $this->expectString()
+                    'uid' => $this->expectString(),
+                    'variants' => [
+                        '16' => [
+                            'id' => '16',
+                            'storage_path' => $this->expectString(),
+                            'public_path' => $this->expectString(),
+                        ],
+                        '32' => [
+                            'id' => '32',
+                            'storage_path' => $this->expectString(),
+                            'public_path' => $this->expectString(),
+                        ],
+                        '64' => [
+                            'id' => '64',
+                            'storage_path' => $this->expectString(),
+                            'public_path' => $this->expectString(),
+                        ],
+                        '128' => [
+                            'id' => '128',
+                            'storage_path' => $this->expectString(),
+                            'public_path' => $this->expectString(),
+                        ],
+                        'default' => [
+                            'id' => 'default',
+                            'storage_path' => $this->expectString(),
+                            'public_path' => $this->expectString(),
+                        ],
+                    ]
                 ]
             ]);
     }

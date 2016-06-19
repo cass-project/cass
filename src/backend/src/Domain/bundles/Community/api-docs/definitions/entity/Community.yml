@@ -7,13 +7,13 @@ Community_Entity_Community:
     - description
     - theme
     - public_options
-    - has_image
+    - image
     - collections
     - features
   properties:
     id:
       type: number
-      description: Domain\Community Id
+      description: Community Id
     sid:
       type: string
       description: ID (string)
@@ -49,11 +49,8 @@ Community_Entity_Community:
         moderation_contract:
           type: boolean
           description: Коммунити обязалось быть отмодерированным
-    has_image:
-      type: boolean
-      description: Флаг "Есть ли у коммунити изображение"
     image:
-      $ref: '#/definitions/Community_Entity_CommunityImage'
+      $ref: '#/definitions/Avatar_ImageCollection'
     collections:
       type: array
       items:

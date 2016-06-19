@@ -1,7 +1,8 @@
-Domain_Definitions_Image:
+Avatar_Image:
   required:
     - id
     - public_path
+    - storage_path
   properties:
     id:
       type: string
@@ -9,3 +10,6 @@ Domain_Definitions_Image:
     public_path:
       type: string
       description: Путь к картинке (/www)
+    storage_path:
+      type: string
+      description: Путь к картинке (local)

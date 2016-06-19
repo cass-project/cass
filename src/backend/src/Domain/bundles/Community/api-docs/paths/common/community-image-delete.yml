@@ -23,7 +23,7 @@
               type: boolean
               description: '=true'
             image:
-              $ref: '#/definitions/Community_Entity_CommunityImage'
+              $ref: '#/definitions/Avatar_ImageCollection'
       403:
         schema:
           $ref: '#/responses/Unauthorized'

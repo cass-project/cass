@@ -1,6 +1,36 @@
-Domain_Definitions_ImageColection:
-  type: array
-  description: Изображения
-  items:
-    schema:
-      $ref: '#/definitions/Domain_Definitions_Image'
+Avatar_ImageCollection:
+  type: object
+  required:
+    - uid
+    - variants
+  properties:
+    uid:
+      type: string
+      description: UID коллекции
+    variants:
+      type: object
+      schema:
+        required:
+          - default
+        properties:
+          default:
+            schema:
+              $ref: '#/definitions/Avatar_Image'
+          16:
+            schema:
+              $ref: '#/definitions/Avatar_Image'
+          32:
+            schema:
+              $ref: '#/definitions/Avatar_Image'
+          64:
+            schema:
+              $ref: '#/definitions/Avatar_Image'
+          128:
+            schema:
+              $ref: '#/definitions/Avatar_Image'
+          256:
+            schema:
+              $ref: '#/definitions/Avatar_Image'
+          512:
+            schema:
+              $ref: '#/definitions/Avatar_Image'

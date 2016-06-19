@@ -23,5 +23,5 @@ return [
             ->constructorParameter('imageFileSystem', factory(function(Container $container) {
                 return new Filesystem(new Local($container->get('config.paths.community.assets.dir')));
             })),
-    ]
+    ],
 ];

@@ -26,6 +26,13 @@ class ExpectString {
     }
 }
 
+class ExpectNotExists {
+    public function __toString(): string
+    {
+        return "{{NOT_EXISTS}}";
+    }
+}
+
 /**
  * @backupGlobals disabled
  */
@@ -236,6 +243,10 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         return new ExpectString();
     }
 
+    protected function expectNotExists(): ExpectNotExists {
+        return new ExpectNotExists();
+    }
+
     protected function expectJSONContentType(): self {
         $this->assertEquals('application/json', self::$currentResult->getHttpResponse()->getHeader('Content-Type')[0]);
 
@@ -312,19 +323,23 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
                 echo sprintf("\n%sASSERT: %s == %s", $level, $key, (string) $actual[$key]);
             }
 
-            $this->assertArrayHasKey($key, $actual);
-
-            if($value instanceof ExpectId) {
-                $this->assertTrue(is_int($actual[$key]));
-                $this->assertGreaterThan(0, $actual[$key]);
-            }else if($value instanceof ExpectString) {
-                $this->assertTrue(is_string($actual[$key]));
-            }else if(is_array($value)) {
-                $this->recursiveAssertEquals($value, $actual[$key], $level . '- ');
-            }else if(is_callable($value)) {
-                $value($actual[$key]);
+            if($value instanceof ExpectNotExists) {
+                $this->assertArrayNotHasKey($key, $actual);
             }else{
-                $this->assertEquals($expected[$key], $actual[$key]);
+                $this->assertArrayHasKey($key, $actual);
+
+                if($value instanceof ExpectId) {
+                    $this->assertTrue(is_int($actual[$key]));
+                    $this->assertGreaterThan(0, $actual[$key]);
+                }else if($value instanceof ExpectString) {
+                    $this->assertTrue(is_string($actual[$key]));
+                }else if(is_array($value)) {
+                    $this->recursiveAssertEquals($value, $actual[$key], $level . '- ');
+                }else if(is_callable($value)) {
+                    $value($actual[$key]);
+                }else{
+                    $this->assertEquals($expected[$key], $actual[$key]);
+                }
             }
         }
     }

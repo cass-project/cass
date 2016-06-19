@@ -14,7 +14,7 @@ final class ImageDeleteCommand extends Command
             $community = $this->communityService->deleteCommunityImage($request->getAttribute('communityId'));
 
             return $responseBuilder->setStatusSuccess()->setJson([
-                'image' => $community->getImage()->toJSON()
+                'image' => $community->fetchImages()->toJSON()
             ])->build();
         }catch(CommunityNotFoundException $e){
             $responseBuilder

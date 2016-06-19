@@ -55,12 +55,6 @@ class Community implements ImageEntity
     private $theme;
 
     /**
-     * @Column(type="json_array", name="image")
-     * @var array
-     */
-    private $image = [];
-
-    /**
      * @Column(type="json_array", name="features")
      * @var array
      */
@@ -112,6 +106,7 @@ class Community implements ImageEntity
             'theme' => [
                 'has' => $this->hasTheme(),
             ],
+            'image' => $this->image,
             'description' => $this->getDescription(),
             'collections' => $this->collections->toJSON(),
             'public_options' => [
