@@ -32,6 +32,5 @@ export class ProfileComponent
         if(AuthService.isSignedIn()) {
             this.service.currentProfile = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity));
         }
-        console.log(this.service.currentProfile.collections);
     }
 }
