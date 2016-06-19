@@ -1,4 +1,4 @@
-export class Theme
+export interface Theme
 {
     id: number;
     parent_id: number;
@@ -7,7 +7,7 @@ export class Theme
     show:boolean;
 }
 
-export class ThemeTree
+export interface ThemeTree
 {
     id: number;
     parent_id: number;
