@@ -15,14 +15,16 @@ article.component.component-collection-settings-modal
                       span Название
                       input.form-input(
                         type="text",
-                        placeholder="Название, заголовок подборки"
+                        placeholder="Название, заголовок подборки",
+                      [(ngModel)]='collection.title'
                       )
                   .input-group
                     label.form-label
                       span Описание
                       input.form-input(
                         type="text",
-                        placeholder="Подзаголовок, одна строка про подборку"
+                        placeholder="Подзаголовок, одна строка про подборку",
+                      [(ngModel)]='collection.description'
                       )
                   .modal-list
                     ul.collection-options-list
@@ -35,9 +37,10 @@ article.component.component-collection-settings-modal
                             h1 Подборка имеет тематику
                             p Если вы укажите тематику у своей подборки, то другие люди смогут найти вас в поисках контента по выбранной вами тематике.
                             cass-theme-select
+                          //([value]='collection.theme.id')
                           .modal-list-controls
                             div.form-switch-button
-                              input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", checked)
+                              input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", [checked]='collection.theme.has')
                               label.form-switch-button-label(for="collectionCreateMasterEnableTheme")
                 .form-section
                   cass-tab-modal-header(level="2")
@@ -105,7 +108,7 @@ article.component.component-collection-settings-modal
                   span Изображение
                 .collection-image-form
                   .collection-image-container
-                    cass-collection-image(border="square", url="/dist/assets/profile-demo.png")
+                    cass-collection-image(border="square", [url]="collection.image.small.public_path")
                   .collection-image-controls
                     button.form-text-button.form-button-text-remove
                       i.fa.fa-fw.fa-trash
@@ -118,7 +121,7 @@ article.component.component-collection-settings-modal
                       span Загрузить другое изображение
           footer.tab-content-footer
             .left
-              button.form-text-button
+              button.form-text-button((click)='pService.modals.collectionSettings.close()')
                 span Закрыть
             .right
               button.form-button.form-button-green
