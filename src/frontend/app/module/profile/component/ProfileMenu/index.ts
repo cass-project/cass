@@ -11,6 +11,9 @@ import {ProfileComponentService} from "../../service";
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
+    ],
+    providers: [
+        ProfileComponent
     ]
 })
 export class ProfileMenuComponent
@@ -18,14 +21,18 @@ export class ProfileMenuComponent
     @Input('profile') profile: any;
     @Output('create_collection') create_collection = new EventEmitter();
 
-    currentProfile;
+
+    openCollectionSettings(collection){
+        this.pService.currentCollection = collection;
+        console.log(this.pService.currentCollection);
 
 
-
+        this.pService.modals.collectionSettings.open();
+    }
 
     constructor(private profileRESTService: ProfileRESTService, private router: Router, private pService: ProfileComponentService){
-        if(AuthService.isSignedIn()) {
-            this.currentProfile = AuthService.getAuthToken().getCurrentProfile().entity;
-        } else this.router.navigate(['Landing']);
+        if(!AuthService.isSignedIn()) {
+            this.router.navigate(['Landing']);
+        }
     }
 }
