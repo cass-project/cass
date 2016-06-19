@@ -7,11 +7,13 @@ use Domain\Account\AccountBundle;
 
 class ChangePasswordRequest extends SchemaParams
 {
-    public function getParameters() {
+    public function getParameters()
+    {
         return $this->getData();
     }
 
-    protected function getSchema(): JSONSchema {
+    protected function getSchema(): JSONSchema
+    {
         return SchemaParams::getSchemaService()->getSchema(AccountBundle::class, './definitions/request/ChangePasswordRequest.yml');
     }
 }

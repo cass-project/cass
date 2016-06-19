@@ -5,7 +5,7 @@ use Domain\Avatar\Image\ImageCollection;
 
 interface ImageEntity
 {
-    public function fetchImages(): ImageCollection;
+    public function getImages(): ImageCollection;
     public function hasImages(): bool;
-    public function exportImages(ImageCollection $images);
+    public function setImages(ImageCollection $images);
 }

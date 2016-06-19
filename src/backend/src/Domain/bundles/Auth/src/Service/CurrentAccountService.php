@@ -33,14 +33,7 @@ class CurrentAccountService
 
     public function getCurrentProfile(): Profile
     {
-        foreach($this->getCurrentAccount()->getProfiles() as $profile) {
-            /** @var Profile $profile */
-            if($profile->isCurrent()) {
-                return $profile;
-            }
-        }
-
-        throw new \Exception('No current profile is available');
+        return $this->account->getCurrentProfile();
     }
 
     public function forceSignIn(Account $account) {

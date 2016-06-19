@@ -15,7 +15,7 @@ final class ImageUploadCommand extends Command
             $community = $this->communityService->uploadCommunityImage($request->getAttribute('communityId'), (new UploadImageRequest($request))->getParameters());
 
             return $responseBuilder->setStatusSuccess()->setJson([
-                'image' => $community->fetchImages()->toJSON()
+                'image' => $community->getImages()->toJSON()
             ])->build();
         }catch(ImageServiceException $e) {
             return $responseBuilder

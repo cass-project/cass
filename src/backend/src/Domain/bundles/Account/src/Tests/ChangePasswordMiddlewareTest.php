@@ -8,13 +8,15 @@ use Domain\Account\Tests\Fixtures\DemoAccountFixture;
  */
 class ChangePasswordMiddlewareTest extends AccountMiddlewareTestCase
 {
-    protected function getFixtures(): array {
+    protected function getFixtures(): array
+    {
         return [
             new DemoAccountFixture()
         ];
     }
 
-    public function testChangePassword403() {
+    public function testChangePassword403()
+    {
         $json = [
             'old_password' => DemoAccountFixture::ACCOUNT_PASSWORD,
             'new_password' => 'foobar'
@@ -25,7 +27,8 @@ class ChangePasswordMiddlewareTest extends AccountMiddlewareTestCase
             ->expectAuthError();
     }
 
-    public function testChangePassword200() {
+    public function testChangePassword200()
+    {
         $json = [
             'old_password' => DemoAccountFixture::ACCOUNT_PASSWORD,
             'new_password' => 'foobar'
@@ -42,10 +45,10 @@ class ChangePasswordMiddlewareTest extends AccountMiddlewareTestCase
             ]);
     }
 
-
-    public function testChangePassword409() {
+    public function testChangePassword409()
+    {
         $json = [
-            'old_password' => 'barfoo',
+            'old_password' => 'bar-and-foo',
             'new_password' => 'foobar'
         ];
 

@@ -2,7 +2,10 @@
 namespace Domain\Profile\Tests;
 
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Gender\GenderFemale;
+use Domain\Profile\Entity\Profile\Gender\GenderMale;
+use Domain\Profile\Entity\Profile\Gender\GenderNotSpecified;
+use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**
@@ -10,14 +13,16 @@ use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
  */
 class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
 {
-    protected function getFixtures(): array {
+    protected function getFixtures(): array
+    {
         return [
             new DemoAccountFixture(),
             new DemoProfileFixture()
         ];
     }
 
-    public function testSetGender() {
+    public function testSetGender()
+    {
         $profile = DemoProfileFixture::getProfile();
 
         $this->request('POST', sprintf('/protected/profile/%d/set-gender', $profile->getId()))
@@ -30,8 +35,7 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
             ->setParameters(['gender' => 'fEmale'])
             ->execute()
             ->expectStatusCode(200)
-            ->expectJSONContentType()
-        ;
+            ->expectJSONContentType();
 
         $this->requestGet($profile->getId())
             ->execute()
@@ -42,12 +46,11 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
                 'entity' => [
                     'id' => $profile->getId(),
                     'gender' => [
-                        'int' => Profile::GENDER_FEMALE,
-                        'string' => 'female'
+                        'int' => GenderFemale::INT_CODE,
+                        'string' => GenderFemale::STRING_CODE
                     ]
                 ]
-            ])
-        ;
+            ]);
 
         $this->request('POST', sprintf('/protected/profile/%d/set-gender', $profile->getId()))
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
@@ -57,9 +60,7 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
-
+            ]);
 
         $this->requestGet($profile->getId())
             ->execute()
@@ -70,12 +71,11 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
                 'entity' => [
                     'id' => $profile->getId(),
                     'gender' => [
-                        'string' => 'male',
-                        'int' => Profile::GENDER_MALE,
+                        'int' => GenderMale::INT_CODE,
+                        'string' => GenderMale::STRING_CODE,
                     ]
                 ]
-            ])
-        ;
+            ]);
 
     }
 
@@ -88,8 +88,7 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
             ->setParameters(['gender' => 'fEmale'])
             ->execute()
             ->expectStatusCode(200)
-            ->expectJSONContentType()
-        ;
+            ->expectJSONContentType();
 
         $this->requestGet($profile->getId())
             ->execute()
@@ -100,20 +99,18 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
                 'entity' => [
                     'id' => $profile->getId(),
                     'gender' => [
-                        'int' => Profile::GENDER_FEMALE,
-                        'string' => 'female'
+                        'int' => GenderFemale::INT_CODE,
+                        'string' => GenderFemale::STRING_CODE
                     ]
                 ]
-            ])
-        ;
+            ]);
 
         $this->request('POST', sprintf('/protected/profile/%d/set-gender', $profile->getId()))
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->setParameters(['gender' => 'none'])
             ->execute()
             ->expectStatusCode(200)
-            ->expectJSONContentType()
-        ;
+            ->expectJSONContentType();
 
         $this->requestGet($profile->getId())
             ->execute()
@@ -124,15 +121,15 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
                 'entity' => [
                     'id' => $profile->getId(),
                     'gender' => [
-                        'int' => Profile::GENDER_NONE,
-                        'string' => 'none'
+                        'int' => GenderNotSpecified::INT_CODE,
+                        'string' => GenderNotSpecified::STRING_CODE
                     ]
                 ]
-            ])
-        ;
+            ]);
     }
 
-    private function requestGet(int $profileId) {
+    private function requestGet(int $profileId)
+    {
         return $this->request('GET', sprintf('/profile/%d/get', $profileId));
     }
 }

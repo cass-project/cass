@@ -9,12 +9,14 @@ use Psr\Http\Message\ResponseInterface;
 
 class InterestingInPutCommand extends Command
 {
-    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface {
-        $profileId = (int) $request->getAttribute('profileId');
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
+    {
+        $profileId = (int)$request->getAttribute('profileId');
 
-        if(! $this->validateIsOwnProfile($profileId)) {
-            throw new NotOwnProfileException(sprintf('Profile with ID `%s` is not yours', $profileId));
-        }
+        $this->validation->validateIsProfileOwnedByAccount(
+            $this->currentAccountService->getCurrentAccount(),
+            $this->profileService->getProfileById($profileId)
+        );
 
         $parameters = (new InterestingInRequest($request))->getParameters();
 

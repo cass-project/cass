@@ -1,7 +1,6 @@
 <?php
 namespace Domain\Profile\Tests;
 
-use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 
@@ -10,14 +9,16 @@ use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
  */
 class ProfileGetMiddlewareTest extends ProfileMiddlewareTestCase
 {
-    protected function getFixtures(): array {
+    protected function getFixtures(): array
+    {
         return [
             new DemoAccountFixture(),
             new DemoProfileFixture()
         ];
     }
 
-    public function testGetProfile200() {
+    public function testGetProfile200()
+    {
         $profile = DemoProfileFixture::getProfile();
 
         $this->requestGetProfile($profile->getId())
@@ -29,15 +30,14 @@ class ProfileGetMiddlewareTest extends ProfileMiddlewareTestCase
                 'entity' => [
                     'id' => $profile->getId()
                 ]
-            ]);
-        ;
+            ]);;
     }
 
-    public function testGetProfile404() {
+    public function testGetProfile404()
+    {
         $this->requestGetProfile(99999)
             ->execute()
             ->expectStatusCode(404)
-            ->expectJSONContentType()
-        ;
+            ->expectJSONContentType();
     }
 }

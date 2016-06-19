@@ -10,17 +10,18 @@ class DeleteCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface {
         try {
-            $currentAccount = $this->currentAccountService->getCurrentAccount();
+            $profileId = $request->getAttribute('profileId');
             
-            $profileId = $this->validateProfileId($request->getAttribute('profileId'));
-            $currentAccountId = $currentAccount->getId();
+            $profile = $this->profileService->getProfileById($profileId);
+            $reSwitch = $profile->isCurrent();
 
-            $this->profileService->deleteProfile($profileId, $currentAccountId);
+            $this->validation->validateIsProfileOwnedByAccount($this->currentAccountService->getCurrentAccount(), $profile);
+            $this->profileService->deleteProfile($profileId);
 
             return $responseBuilder
                 ->setStatusSuccess()
                 ->setJson([
-                    'current_profile_id' => $currentAccount->getCurrentProfile()->getId()
+                    'current_profile_id' => $this->currentAccountService->getCurrentProfile()->getId()
                 ])
                 ->build();
         }catch(LastProfileException $e){

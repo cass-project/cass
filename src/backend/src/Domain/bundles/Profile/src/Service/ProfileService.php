@@ -2,250 +2,180 @@
 namespace Domain\Profile\Service;
 
 use Domain\Account\Entity\Account;
-use Application\Exception\PermissionsDeniedException;
+use Domain\Account\Service\AccountService;
+use Domain\Avatar\Image\ImageCollection;
+use Domain\Avatar\Parameters\UploadImageParameters;
+use Domain\Avatar\Service\AvatarService;
 use Domain\Collection\Service\CollectionService;
-use PHPImageWorkshop\Core\ImageWorkshopLayer;
-use PHPImageWorkshop\ImageWorkshop;
 use Domain\Profile\Entity\Profile;
-use Domain\Profile\Entity\ProfileGreetings;
-use Domain\Profile\Entity\ProfileImage;
-use Domain\Profile\Exception\ImageIsNotASquareException;
-use Domain\Profile\Exception\ImageTooSmallException;
+use Domain\Profile\Entity\Profile\Gender\Gender;
+use Domain\Profile\Entity\Profile\Greetings\Greetings;
 use Domain\Profile\Exception\LastProfileException;
 use Domain\Profile\Exception\MaxProfilesReachedException;
 use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
 use Domain\Profile\Middleware\Parameters\ExpertInParameters;
 use Domain\Profile\Middleware\Parameters\InterestingInParameters;
 use Domain\Profile\Repository\ProfileRepository;
-use Application\Util\GenerateRandomString;
+use Domain\Profile\Strategy\ProfileImageStrategy;
+use Domain\Profile\Validation\ProfileValidationService;
+use League\Flysystem\Filesystem;
 
 class ProfileService
 {
     const MAX_PROFILES_PER_ACCOUNT = 10;
 
+    /** @var ProfileValidationService */
+    private $validation;
+
     /** @var ProfileRepository */
     private $profileRepository;
+
+    /** @var AccountService */
+    private $accountService;
 
     /** @var CollectionService */
     private $collectionService;
 
-    /** @var string */
-    private $profileStorageDir;
+    /** @var Filesystem */
+    private $imagesFlySystem;
+
+    /** @var AvatarService */
+    private $avatarService;
 
     public function __construct(
+        ProfileValidationService $validationService,
         ProfileRepository $profileRepository,
         CollectionService $collectionService,
-        string $profileStorageDir
+        Filesystem $imagesFlySystem,
+        AvatarService $avatarService
     ) {
+        $this->validation = $validationService;
         $this->profileRepository = $profileRepository;
         $this->collectionService = $collectionService;
-        $this->profileStorageDir = $profileStorageDir;
+        $this->imagesFlySystem = $imagesFlySystem;
+        $this->avatarService = $avatarService;
     }
 
-    public function getProfileById(int $profileId): Profile {
+    public function worksWithAccountService(AccountService $accountService)
+    {
+        $this->accountService = $accountService;
+    }
+
+    public function getProfileById(int $profileId): Profile
+    {
         return $this->profileRepository->getProfileById($profileId);
     }
 
-    public function updatePersonalData(int $profileId, EditPersonalParameters $parameters) {
-        $profile = $this->getProfileById($profileId);
-
-        $profile->getProfileGreetings()
-            ->setGreetingsMethod($parameters->getGreetingsType())
-            ->setFirstName($parameters->getFirstName())
-            ->setLastName($parameters->getLastName())
-            ->setMiddleName($parameters->getMiddleName())
-            ->setNickName($parameters->getNickName());
-
-        if ($parameters->isGenderSpecified()) {
-            $profile->setGenderFromStringCode($parameters->getGender());
-        }
-
-        $this->profileRepository->updateProfile($profile);
-
-        return true;
+    public function getMaxProfilesPerAccount(): int
+    {
+        return self::MAX_PROFILES_PER_ACCOUNT;
     }
 
-    public function createProfileForAccount(Account $account): Profile {
+    public function createProfileForAccount(Account $account): Profile
+    {
         if ($account->getProfiles()->count() >= self::MAX_PROFILES_PER_ACCOUNT) {
             throw new MaxProfilesReachedException(sprintf('You can only have %d profiles per account', self::MAX_PROFILES_PER_ACCOUNT));
         }
 
-        $account->getProfiles()->add($profile = new Profile($account));
-
-        $profile
-            ->setProfileGreetings(new ProfileGreetings($profile))
-            ->setProfileImage(new ProfileImage($profile));
+        $account->getProfiles()->add(
+            $profile = new Profile($account)
+        );
 
         $this->profileRepository->createProfile($profile);
-        $this->profileRepository->switchTo($account->getProfiles()->toArray(), $profile);
-
         $this->collectionService->createDefaultCollectionForProfile($profile);
 
         return $profile;
     }
 
-    public function deleteProfile(int $profileId, int $currentAccountId) {
+    public function updatePersonalData(int $profileId, EditPersonalParameters $parameters): Profile
+    {
+        $profile = $this->getProfileById($profileId);
+        $profile->setGreetings(Greetings::createFromMethod($parameters->getMethod(), [
+            'first_name' => $parameters->getFirstName(),
+            'last_name' => $parameters->getLastName(),
+            'middle_name' => $parameters->getMiddleName(),
+            'nick_name' => $parameters->getNickName(),
+        ]));
+
+        if ($parameters->isGenderSpecified()) {
+            $profile->setGender(Gender::createFromStringCode($parameters->getGender()));
+        }
+
+        return $this->profileRepository->saveProfile($profile);
+    }
+
+    public function deleteProfile(int $profileId): Profile
+    {
         $profile = $this->getProfileById($profileId);
         $account = $profile->getAccount();
 
-        if ($account->getId() !== $currentAccountId) {
-            throw new PermissionsDeniedException("You're not an owner of this profile");
-        }
+        $this->validation
+            ->validateIsProfileOwnedByAccount($account, $profile)
+        ;
 
         if ($account->getProfiles()->count() === 1) {
             throw new LastProfileException('This is your last profile. Sorry you need at least one profile per account.');
         }
 
         $this->profileRepository->deleteProfile($profile);
-
         $account->getProfiles()->removeElement($profile);
 
         if ($profile->isCurrent()) {
-            $this->profileRepository->switchTo($account->getProfiles()->toArray(), $account->getProfiles()->first());
+            $this->accountService->switchToProfile($account, $account->getProfiles()->first());
         }
+
+        return $account->getCurrentProfile();
     }
 
-    public function deleteProfileImage(int $profileId, int $currentAccountId): ProfileImage {
+    public function setGreetings(int $profileId, Greetings $greetings): Profile
+    {
         $profile = $this->getProfileById($profileId);
-        $account = $profile->getAccount();
+        $profile->setGreetings($greetings);
 
-        if ($account->getId() !== $currentAccountId) {
-            throw new PermissionsDeniedException("You're not an owner of this profile");
-        }
-
-        $storagePath = $profile->getProfileImage()->getStoragePath();
-
-        if (file_exists($storagePath)) {
-            if (!is_writable($storagePath)) {
-                throw new \Exception('No permissions to delete profile avatar');
-            }
-
-            unlink($storagePath);
-        }
-
-        return $this->profileRepository->deleteProfileImage($profile);
-    }
-
-    public function nameFL(int $profileId, string $firstName, string $lastName) {
-        $this->profileRepository->nameFL($profileId, $firstName, $lastName);
-        $this->profileRepository->setAsInitialized($profileId);
-    }
-
-    public function nameLFM(int $profileId, string $lastName, string $firstName, string $middleName) {
-        $this->profileRepository->nameLFM($profileId, $lastName, $firstName, $middleName);
-        $this->profileRepository->setAsInitialized($profileId);
-    }
-
-    public function nameN(int $profileId, string $nickName) {
-        $this->profileRepository->nameN($profileId, $nickName);
-        $this->profileRepository->setAsInitialized($profileId);
-    }
-
-    public function switchTo(Account $account, int $profileId): Profile {
-        $profile = $this->getProfileById($profileId);
-
-        if (!$account->getProfiles()->contains($profile)) {
-            throw new PermissionsDeniedException("You're not an owner of this profile");
-        }
-
-        $this->profileRepository->switchTo($account->getProfiles()->toArray(), $profile);
+        $this->profileRepository->saveProfile($profile);
 
         return $profile;
     }
 
-    public function uploadImage(int $profileId, string $tmpFile, int $startX, int $startY, int $endX, int $endY): ProfileImage {
+    public function uploadImage(int $profileId, UploadImageParameters $parameters): ImageCollection
+    {
         $profile = $this->getProfileById($profileId);
+        $strategy = new ProfileImageStrategy($profile, $this->imagesFlySystem);
 
-        if (!$profile->isPersisted()) {
-            throw new \Exception('Unable to upload image for new non-persisted profile');
-        }
+        $this->avatarService->uploadImage($strategy, $parameters);
+        $this->profileRepository->saveProfile($profile);
 
-        $this->validateCropPoints($image = ImageWorkshop::initFromPath($tmpFile), $startX, $startY, $endX, $endY);
-
-        $image->crop(ImageWorkshopLayer::UNIT_PIXEL, $endX - $startX, $endY - $startY, $startX, $startY);
-
-        $currentImageWidth = $image->getWidth();
-        $currentImageHeight = $image->getWidth();
-
-        if ($currentImageWidth > ProfileImage::MIN_WIDTH) {
-            $scale = ProfileImage::MAX_WIDTH / $currentImageWidth;
-            $newWidth = $currentImageWidth * $scale;
-            $newHeight = $currentImageHeight * $scale;
-
-            $image->resize(ImageWorkshopLayer::UNIT_PIXEL, $newWidth, $newHeight, false);
-        }
-
-        $oldProfileImage = $profile->getProfileImage()->isDefaultImage()
-            ? false
-            : $profile->getProfileImage()->getStoragePath();
-
-        $imageFileName = sprintf('%s.png', GenerateRandomString::gen(12));
-        $targetDir = (string)$profile->getId();
-
-        $storagePath = sprintf('%s/%s/%s', $this->profileStorageDir, $targetDir, $imageFileName);
-        $publicPath = sprintf('/public/storage/profile/profile-image/%d/%s', $targetDir, $imageFileName);
-
-        $image->save(sprintf('%s/%s', $this->profileStorageDir, $targetDir), $imageFileName, true, 'ffffff');
-        $newProfileImage = $this->profileRepository->updateImage($profile->getId(), $storagePath, $publicPath);
-
-        if ($oldProfileImage && file_exists($oldProfileImage)) {
-            unlink($oldProfileImage);
-        }
-
-        return $newProfileImage;
+        return $profile->getImages();
     }
 
-    private function validateCropPoints(ImageWorkshopLayer $image, int $startX, int $startY, int $endX, int $endY) {
-        if ($startX < 0 || $startY < 0) {
-            throw new \OutOfBoundsException('startX/startY should be more than zero');
-        }
+    public function deleteProfileImage(int $profileId): ImageCollection
+    {
+        $profile = $this->getProfileById($profileId);
+        $strategy = new ProfileImageStrategy($profile, $this->imagesFlySystem);
 
-        if ($endX > $image->getWidth() || $endY > $image->getHeight()) {
-            throw new \OutOfBoundsException('endX/endY should be lest than image width/height');
-        }
+        $this->avatarService->generateImage($strategy);
+        $this->profileRepository->saveProfile($profile);
 
-        $resultWidth = ($endX - $startX);
-        $resultHeight = ($endY - $startY);
-
-        if ($resultWidth < ProfileImage::MIN_WIDTH) {
-            throw new ImageTooSmallException(sprintf('Image width should me more than %s pixels', ProfileImage::MIN_WIDTH));
-        }
-
-        if ($resultHeight < ProfileImage::MIN_HEIGHT) {
-            throw new ImageTooSmallException(sprintf('Image height should me more than %s pixels', ProfileImage::MIN_HEIGHT));
-        }
-
-        if ($resultWidth !== $resultHeight) {
-            throw new ImageIsNotASquareException('Image should be a square');
-        }
+        return $profile->getImages();
     }
 
-    public function setExpertsInParameters(int $profileId, ExpertInParameters $expertInParameters): Profile {
-        return $this->profileRepository->setExpertsInParameters($profileId, $expertInParameters);
+    public function setInterestingInThemes(int $profileId, InterestingInParameters $inParameters): Profile
+    {
+        $profile = $this->getProfileById($profileId);
+        $profile->setInterestingInIds($inParameters->getThemeIds());
+
+        $this->profileRepository->saveProfile($profile);
+
+        return $profile;
     }
 
-    public function mergeExpertsInParameters(int $profileId, ExpertInParameters $expertInParameters): Profile {
-        return $this->profileRepository->mergeExpertsInParameters($profileId, $expertInParameters);
-    }
+    public function setExpertsInThemes(int $profileId, ExpertInParameters $expertInParameters): Profile
+    {
+        $profile = $this->getProfileById($profileId);
+        $profile->setExpertInIds($expertInParameters->getThemeIds());
 
-    public function setInterestingInParameters(int $profileId, InterestingInParameters $inParameters): Profile {
-        return $this->profileRepository->setInterestingInParameters($profileId, $inParameters);
-    }
+        $this->profileRepository->saveProfile($profile);
 
-    public function mergeInterestingInParameters(int $profileId, InterestingInParameters $inParameters): Profile {
-        return $this->profileRepository->mergeInterestingInParameters($profileId, $inParameters);
-    }
-
-
-    public function deleteExpertsInParameters(int $profileId, array $expertInParameters): Profile {
-        return $this->profileRepository->deleteExpertsInParameters($profileId, $expertInParameters);
-    }
-
-    public function deleteInterestingInParameters(int $profileId, array $interestingInParameters) {
-        return $this->profileRepository->deleteInterestingInParameters($profileId, $interestingInParameters);
-    }
-
-    public function setGenderFromStringCode(int $profileId, string $genderCode): Profile {
-        return $this->profileRepository->setGenderFromStringCode($profileId, $genderCode);
+        return $profile;
     }
 }

@@ -53,7 +53,7 @@ final class CommunityImageStrategy extends SquareAvatarStrategy
 
     public function getPublicPath(): string
     {
-        return '/dist/assets/community';
+        return '/dist/assets/community/by-sid/avatar';
     }
 
     public function getDefaultImage(): Image

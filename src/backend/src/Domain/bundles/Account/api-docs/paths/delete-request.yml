@@ -8,7 +8,8 @@
       - x_api_key: []
     responses:
       403:
-        $ref: '#/responses/Unauthorized'
+        schema:
+          $ref: '#/responses/Unauthorized'
       409:
         description: Аккаунт уже имеет запрос на удаление
         schema:

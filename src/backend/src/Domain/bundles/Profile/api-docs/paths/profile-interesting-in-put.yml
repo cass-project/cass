@@ -23,3 +23,7 @@
       403:
         schema:
           $ref: '#/responses/Unauthorized'
+      404:
+        description: Profile not found
+        schema:
+          $ref: '#/responses/NotFound'

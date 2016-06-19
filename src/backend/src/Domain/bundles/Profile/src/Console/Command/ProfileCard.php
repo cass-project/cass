@@ -36,14 +36,14 @@ class ProfileCard extends Command
             $profile = $this->profileService->getProfileById($profileId);
 
             $output->writeln([
-                "Domain\Profile(#{$profile->getId()}): ",
+                "Profile(#{$profile->getId()}): ",
                 "-----",
                 "AccountID: {$profile->getAccount()->getId()}",
-                "Greetings: {$profile->getProfileGreetings()->getGreetings()}",
+                "Greetings: {$profile->getGreetings()->toJSON()}",
                 "-----",
             ]);
         }catch(ProfileNotFoundException $e) {
-            $output->writeln(sprintf("Domain\Profile with id `%d` not found", $profileId));
+            $output->writeln(sprintf("Profile with id `%d` not found", $profileId));
         }
     }
 }

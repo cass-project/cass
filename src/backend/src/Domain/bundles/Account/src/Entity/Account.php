@@ -1,25 +1,26 @@
 <?php
 namespace Domain\Account\Entity;
 
-use Application\Util\IdTrait;
+use Application\Util\Entity\IdEntity\IdEntity;
+use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\PersistentCollection;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Profile\Exception\NoCurrentProfileException;
 
 /**
  * @Entity(repositoryClass="Domain\Account\Repository\AccountRepository")
  * @Table(name="account")
  */
-class Account implements JSONSerializable
+class Account implements JSONSerializable, IdEntity
 {
     use IdTrait;
 
     /**
-     * @OneToMany(targetEntity="Domain\Profile\Entity\Profile", mappedBy="account", cascade={"persist", "remove"})
-     * @var Collection
+     * @OneToMany(targetEntity="Domain\Profile\Entity\Profile", mappedBy="account", cascade={"all"})
+     * @var ArrayCollection
      */
     private $profiles;
 
@@ -81,43 +82,31 @@ class Account implements JSONSerializable
             ],
             'delete_request' => [
                 'has' => $this->hasDeleteAccountRequest(),
-                'date' =>  $this->hasDeleteAccountRequest()
+                'date' => $this->hasDeleteAccountRequest()
                     ? $this->getDateAccountDeleteRequested()->format(\DateTime::RFC822)
                     : null
-            ]
+            ],
+            'profiles' => array_map(function(Profile $profile) {
+                return $profile->toJSON();
+            }, $this->getProfiles()->toArray())
         ];
-    }
-
-    public function addProfile(Profile $profile){
-        $this->profiles[] = $profile;
-        return $this;
     }
 
     public function getProfiles(): Collection
     {
         return $this->profiles;
     }
-    
+
     public function getCurrentProfile(): Profile
     {
-        foreach($this->getProfiles() as $profile) {
+        foreach ($this->getProfiles() as $profile) {
             /** @var Profile $profile */
-            if($profile->isCurrent()) {
+            if ($profile->isCurrent()) {
                 return $profile;
             }
         }
-        
+
         throw new NoCurrentProfileException(sprintf('No current profile available for account ID: %d', $this->isPersisted() ? $this->getId() : 'NEW_INSTANCE'));
-    }
-
-    public function isYoursProfile(Profile $profile)
-    {
-        return $this->profiles->contains($profile);
-    }
-
-    public function hasAnyProfile(): bool
-    {
-        return $this->profiles->count() > 0;
     }
 
     public function getPassword()
@@ -176,13 +165,12 @@ class Account implements JSONSerializable
 
     public function getDisabledReason(): string
     {
-        if(!$this->isDisabled()) {
+        if (!$this->isDisabled()) {
             throw new \Exception('Account is not disabled');
         }
 
         return $this->isDisabled;
     }
-
 
     public function requestAccountDelete()
     {

@@ -13,10 +13,13 @@ class SetGenderCommand extends Command
         $profileId = $request->getAttribute('profileId');
         $parameters = (new SetGenderRequest($request))->getParameters();
 
-        $this->profileService->setGenderFromStringCode($profileId, $parameters->getGenderStringCode());
+        $profile = $this->profileService->setGenderFromStringCode($profileId, $parameters->getGenderStringCode());
 
         return $responseBuilder
             ->setStatusSuccess()
+            ->setJson([
+                'gender' => $profile->getGender()->toJSON()
+            ])
             ->build();
     }
 }

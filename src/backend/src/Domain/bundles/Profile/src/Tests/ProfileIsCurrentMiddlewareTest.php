@@ -2,8 +2,6 @@
 namespace Domain\Profile\Tests;
 
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
-use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 
 /**
  * @backupGlobals disabled
@@ -27,10 +25,9 @@ class ProfileIsCurrentMiddlewareTest extends ProfileMiddlewareTestCase
                     'is_current' => true
                 ]
             ])
-            ->with(function(array $json) use(&$profileIds) {
+            ->with(function (array $json) use (&$profileIds) {
                 $profileIds[] = $json['entity']['id'];
-            })
-        ;
+            });
 
         $this->requestCreateProfile()
             ->auth($account->getAPIKey())
@@ -44,10 +41,9 @@ class ProfileIsCurrentMiddlewareTest extends ProfileMiddlewareTestCase
                     'is_current' => true
                 ]
             ])
-            ->with(function(array $json) use(&$profileIds) {
+            ->with(function (array $json) use (&$profileIds) {
                 $profileIds[] = $json['entity']['id'];
-            })
-        ;
+            });
 
         $this->requestCreateProfile()
             ->auth($account->getAPIKey())
@@ -61,10 +57,9 @@ class ProfileIsCurrentMiddlewareTest extends ProfileMiddlewareTestCase
                     'is_current' => true
                 ]
             ])
-            ->with(function(array $json) use(&$profileIds) {
+            ->with(function (array $json) use (&$profileIds) {
                 $profileIds[] = $json['entity']['id'];
-            })
-        ;
+            });
 
         $this->assertEquals(3, count($profileIds));
 

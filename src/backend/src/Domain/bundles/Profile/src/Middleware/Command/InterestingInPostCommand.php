@@ -2,19 +2,20 @@
 namespace Domain\Profile\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
-use Domain\Profile\Exception\NotOwnProfileException;
 use Domain\Profile\Middleware\Request\InterestingInRequest;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class InterestingInPostCommand extends Command
 {
-    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface {
-        $profileId = (int) $request->getAttribute('profileId');
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
+    {
+        $profileId = (int)$request->getAttribute('profileId');
 
-        if(! $this->validateIsOwnProfile($profileId)) {
-            throw new NotOwnProfileException(sprintf('Domain\Profile with ID `%s` is not yours', $profileId));
-        }
+        $this->validation->validateIsProfileOwnedByAccount(
+            $this->currentAccountService->getCurrentAccount(),
+            $this->profileService->getProfileById($profileId)
+        );
 
         $interestingInRequest = new InterestingInRequest($request);
         $interestingInParameters = $interestingInRequest->getParameters();

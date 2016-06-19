@@ -24,13 +24,7 @@ return function (Application $app) {
     );
 
     $app->post(
-        '/protected/profile/{profileId}/{command:switch}[/]',
-        ProfileMiddleware::class,
-        'profile-switch'
-    );
-
-    $app->post(
-        '/protected/profile/{profileId}/{command:greetings-as}/{greetingsMethod}/[/]',
+        '/protected/profile/{profileId}/{command:greetings-as}/{method}/[/]',
         ProfileMiddleware::class,
         'profile-greetings-as'
     );

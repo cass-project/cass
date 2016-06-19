@@ -23,14 +23,14 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
                 'success' => true,
                 'entity' => [
                     'id' => $this->expectId(),
+                    'sid' => $this->expectString(),
                     'is_current' => true
                 ]
             ])
-          ->expect(function(array $result) {
-              $collections = $result['entity']['collections'];
-              $this->assertEquals(1, count($collections));
-          });
-        ;
+            ->expect(function (array $result) {
+                $collections = $result['entity']['collections'];
+                $this->assertEquals(1, count($collections));
+            });;
 
         $this->requestGetProfile($profile->getId())
             ->execute()
@@ -40,6 +40,7 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
                 'success' => true,
                 'entity' => [
                     'id' => $profile->getId(),
+                    'sid' => $this->expectString(),
                     'is_current' => false
                 ]
             ]);
@@ -50,7 +51,6 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
         $this->requestCreateProfile()
             ->execute()
             ->expectStatusCode(403)
-            ->expectJSONContentType()
-        ;
+            ->expectJSONContentType();
     }
 }

@@ -33,6 +33,12 @@ class ExpectNotExists {
     }
 }
 
+class ExpectImageCollection {
+    public function __toString(): string {
+        return "{{IMAGE_COLLECTION}}";
+    }
+}
+
 /**
  * @backupGlobals disabled
  */
@@ -247,6 +253,10 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         return new ExpectNotExists();
     }
 
+    protected function expectImageCollection(): ExpectImageCollection {
+        return new ExpectImageCollection();
+    }
+
     protected function expectJSONContentType(): self {
         $this->assertEquals('application/json', self::$currentResult->getHttpResponse()->getHeader('Content-Type')[0]);
 
@@ -331,6 +341,17 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
                 if($value instanceof ExpectId) {
                     $this->assertTrue(is_int($actual[$key]));
                     $this->assertGreaterThan(0, $actual[$key]);
+                }else if($value instanceof ExpectImageCollection) {
+                    $this->recursiveAssertEquals([
+                        'uid' => $this->expectString(),
+                        'variants' => [
+                            'default' => [
+                                'id' => 'default',
+                                'public_path' => $this->expectString(),
+                                'storage_path' => $this->expectString(),
+                            ]
+                        ]
+                    ], $actual[$key], $level . '- ');
                 }else if($value instanceof ExpectString) {
                     $this->assertTrue(is_string($actual[$key]));
                 }else if(is_array($value)) {

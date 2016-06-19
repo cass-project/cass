@@ -1,16 +1,18 @@
 <?php
 namespace Domain\ProfileCommunities\Entity;
 
-use Application\Util\IdTrait;
+use Application\Util\Entity\IdEntity\IdEntity;
+use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
 use Domain\Community\Entity\Community;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Greetings;
 
 /**
  * @Entity(repositoryClass="Domain\ProfileCommunities\Repository\ProfileCommunitiesRepository")
  * @Table(name="profile_communities")
  */
-class ProfileCommunityEQ implements JSONSerializable
+class ProfileCommunityEQ implements JSONSerializable, IdEntity
 {
     use IdTrait;
 
@@ -21,7 +23,7 @@ class ProfileCommunityEQ implements JSONSerializable
     private $communitySID;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile\Greetings")
      * @JoinColumn(name="profile_id", referencedColumnName="id")
      * @var Profile
      */

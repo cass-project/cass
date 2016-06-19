@@ -24,7 +24,6 @@ class ProcessAccountDeleteRequestsCommand extends Command
             ->setDescription('Delete account which pending for deletions');
     }
 
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $script = $this->script;

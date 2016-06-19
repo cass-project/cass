@@ -32,7 +32,7 @@ class OAuthAccountRepository extends EntityRepository
         ]);
 
         if($result === null) {
-            throw new AccountNotFoundException(sprintf('Domain\Account `OAUTH2#%s@%s` not found', $providerAccountId, $provider));
+            throw new AccountNotFoundException(sprintf('Account `OAUTH2#%s@%s` not found', $providerAccountId, $provider));
         }
 
         return $result;

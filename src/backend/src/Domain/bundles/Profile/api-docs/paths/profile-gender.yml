@@ -19,7 +19,16 @@
     responses:
       200:
         schema:
-          $ref: '#/responses/success'
+          required:
+            - success
+            - gender
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            gender:
+              schema:
+                $ref: '#/responses/Profile_Entity_Gender'
       403:
         schema:
           $ref: '#/responses/Unauthorized'

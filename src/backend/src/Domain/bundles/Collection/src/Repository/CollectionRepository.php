@@ -8,7 +8,7 @@ use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Parameters\EditCollectionParameters;
 use Domain\Collection\Parameters\SetPublicOptionsParameters;
 use Domain\Avatar\Image\ImageCollection;
-use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Theme\Entity\Theme;
 
 class CollectionRepository extends EntityRepository
@@ -27,7 +27,7 @@ class CollectionRepository extends EntityRepository
             $parameters->hasThemeId() ? $em->getReference(Theme::class, $parameters->getThemeId()) : null
         );
 
-        $collection->exportImages($images);
+        $collection->setImages($images);
 
         $em->persist($collection);
         $em->flush($collection);

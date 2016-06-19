@@ -1,24 +1,18 @@
 <?php
 namespace Domain\PostAttachment\Entity;
 
-use Application\Util\IdTrait;
+use Application\Util\Entity\IdEntity\IdEntity;
+use Application\Util\Entity\IdEntity\IdTrait;
+use Application\Util\JSONSerializable;
 use Domain\Post\Entity\Post;
 
 /**
  * @Entity(repositoryClass="Domain\PostAttachment\Repository\PostAttachmentRepository")
  * @Table(name="post_attachment")
  */
-class PostAttachment
+class PostAttachment implements JSONSerializable, IdEntity
 {
     use IdTrait;
-
-    /**
-     * @Id
-     * @GeneratedValue
-     * @Column(type="integer")
-     * @var int
-     */
-    private $id;
 
     /**
      * @Column(type="datetime", name="date_created_on")
@@ -58,7 +52,7 @@ class PostAttachment
 
     public function toJSON() {
         return [
-            'id' => $this->getId(),
+            'id' => $this->isPersisted() ? $this->getId() : '#NEW_POST_ATTACHMENT',
             'date_created_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),
             'is_attached_to_post' => $this->isAttachedToPost(),
             'post_id' => $this->isAttachedToPost() ? $this->getPost()->getId() : null,

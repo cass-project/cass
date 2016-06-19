@@ -4,7 +4,7 @@ namespace Domain\ProfileCommunities\Repository;
 use Application\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Domain\Community\Entity\Community;
-use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Greetings;
 use Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
 use Domain\ProfileCommunities\Exception\BookmarkNotFoundException;
 

@@ -6,13 +6,15 @@ use Domain\Account\Scripts\ProcessAccountDeleteRequestsScript;
 
 class ConfigAccountFrontlineScript implements FrontlineScript
 {
-    public function tags(): array {
+    public function tags(): array
+    {
         return [
             FrontlineScript::TAG_GLOBAL
         ];
     }
 
-    public function __invoke(): array {
+    public function __invoke(): array
+    {
         return [
             'config' => [
                 'account' => [

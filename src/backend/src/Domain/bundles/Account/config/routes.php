@@ -22,4 +22,16 @@ return function (Application $app) {
         AccountMiddleware::class,
         'account-cancel-request-delete'
     );
+
+    $app->post(
+        '/protected/account/{command:switch}/to/profile/{profileId}',
+        AccountMiddleware::class,
+        'account-switch-to-profile'
+    );
+
+    $app->get(
+        '/protected/account/{command:current}',
+        AccountMiddleware::class,
+        'account-get-current'
+    );
 };

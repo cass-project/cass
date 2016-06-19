@@ -24,7 +24,7 @@
             image:
               type: object
               schema:
-                $ref: '#/definitions/Profile_Entity_ProfileImage'
+                $ref: '#/definitions/Avatar_ImageCollection'
       403:
         schema:
           $ref: '#/responses/Unauthorized'

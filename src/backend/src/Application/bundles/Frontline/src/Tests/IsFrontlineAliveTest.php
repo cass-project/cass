@@ -64,11 +64,7 @@ class IsFrontlineAliveTest extends MiddlewareTestCase
                                 'middle_name' => $profile->getProfileGreetings()->getMiddleName(),
                                 'nickname' => $profile->getProfileGreetings()->getNickName(),
                             ],
-                            'image' => [
-                                'id' => $profile->getProfileImage()->getId(),
-                                'profile_id' => $profile->getId(),
-                                'public_path' => $this->expectString(),
-                            ],
+                            'image' => $this->expectImageCollection(),
                             'expert_in' => function($input) use ($profile) {
                                 $this->assertTrue(is_array($input));
                                 $this->assertEquals($profile->getExpertIn()->toArray(), $input);

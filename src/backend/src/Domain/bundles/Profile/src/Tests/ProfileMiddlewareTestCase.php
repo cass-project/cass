@@ -13,35 +13,42 @@ use Zend\Diactoros\UploadedFile;
  */
 abstract class ProfileMiddlewareTestCase extends MiddlewareTestCase
 {
-    protected function getFixtures(): array {
+    protected function getFixtures(): array
+    {
         return [
             new DemoAccountFixture(),
             new DemoProfileFixture()
         ];
     }
 
-    protected function requestCreateProfile(): RESTRequest {
+    protected function requestCreateProfile(): RESTRequest
+    {
         return $this->request('PUT', sprintf('/protected/profile/create'));
     }
 
-    protected function requestGetProfile(int $profileId): RESTRequest {
+    protected function requestGetProfile(int $profileId): RESTRequest
+    {
         return $this->request('GET', sprintf('/profile/%d/get', $profileId));
     }
 
-    protected function requestDeleteProfile(int $profileId): RESTRequest {
+    protected function requestDeleteProfile(int $profileId): RESTRequest
+    {
         return $this->request('DELETE', sprintf('/protected/profile/%d/delete', $profileId));
     }
 
-    protected function requestEditPersonal(int $profileId, array $json): RESTRequest {
+    protected function requestEditPersonal(int $profileId, array $json): RESTRequest
+    {
         return $this->request('POST', sprintf('/protected/profile/%d/edit-personal', $profileId))
             ->setParameters($json);
     }
 
-    protected function requestSwitch(int $profileId): RESTRequest {
+    protected function requestSwitch(int $profileId): RESTRequest
+    {
         return $this->request('POST', sprintf('/protected/profile/%d/switch', $profileId));
     }
 
-    protected function requestUploadImage(int $profileId, Point $start, Point $end, string $localFile): RESTRequest {
+    protected function requestUploadImage(int $profileId, Point $start, Point $end, string $localFile): RESTRequest
+    {
         $uri = sprintf(
             '/protected/profile/%d/image-upload/crop-start/%d/%d/crop-end/%d/%d',
             $profileId,
@@ -59,35 +66,42 @@ abstract class ProfileMiddlewareTestCase extends MiddlewareTestCase
             ]);
     }
 
-    protected function requestDeleteImage(int $profileId): RESTRequest {
+    protected function requestDeleteImage(int $profileId): RESTRequest
+    {
         return $this->request('DELETE', sprintf('/protected/profile/%d/image-delete', $profileId));
     }
 
-    protected function requestInterestingInPUT(int $profileId, array $json): RESTRequest {
+    protected function requestInterestingInPUT(int $profileId, array $json): RESTRequest
+    {
         return $this->request('PUT', sprintf('/protected/profile/%d/interesting-in', $profileId))
             ->setParameters($json);
     }
 
-    protected function requestInterestingInPOST(int $profileId, array $json): RESTRequest {
+    protected function requestInterestingInPOST(int $profileId, array $json): RESTRequest
+    {
         return $this->request('POST', sprintf('/protected/profile/%d/interesting-in', $profileId))
             ->setParameters($json);
     }
 
-    protected function requestInterestingInDELETE(int $profileId, array $themeIds): RESTRequest {
+    protected function requestInterestingInDELETE(int $profileId, array $themeIds): RESTRequest
+    {
         return $this->request('DELETE', sprintf('/protected/profile/%d/interesting-in/%s', $profileId, join(',', $themeIds)));
     }
 
-    protected function requestExpertInPUT(int $profileId, array $json): RESTRequest {
+    protected function requestExpertInPUT(int $profileId, array $json): RESTRequest
+    {
         return $this->request('PUT', sprintf('/protected/profile/%d/expert-in', $profileId))
             ->setParameters($json);
     }
 
-    protected function requestExpertInPOST(int $profileId, array $json): RESTRequest {
+    protected function requestExpertInPOST(int $profileId, array $json): RESTRequest
+    {
         return $this->request('POST', sprintf('/protected/profile/%d/expert-in', $profileId))
             ->setParameters($json);
     }
 
-    protected function requestExpertInDELETE(int $profileId, array $themeIds): RESTRequest {
+    protected function requestExpertInDELETE(int $profileId, array $themeIds): RESTRequest
+    {
         return $this->request('DELETE', sprintf('/protected/profile/%d/expert-in/%s', $profileId, join(',', $themeIds)));
     }
 }

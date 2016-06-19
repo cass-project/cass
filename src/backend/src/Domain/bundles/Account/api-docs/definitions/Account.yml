@@ -5,6 +5,7 @@ Account_Entity_Account:
     - email
     - disabled
     - delete_request
+    - profiles
   properties:
     id:
       type: number
@@ -12,6 +13,11 @@ Account_Entity_Account:
     email:
       type: string
       description: E-mail
+    profiles:
+      type: array
+      items:
+        schema:
+          $ref: '#/definitions/Profile_Entity_Profile'
     disabled:
       type: object
       description: Информация о блокировке аккаунта

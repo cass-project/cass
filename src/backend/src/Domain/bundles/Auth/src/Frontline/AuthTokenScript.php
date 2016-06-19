@@ -3,7 +3,7 @@ namespace Domain\Auth\Frontline;
 
 use Application\Frontline\FrontlineScript;
 use Domain\Auth\Service\CurrentAccountService;
-use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Profile\Formatter\ProfileExtendedFormatter;
 
 class AuthTokenScript implements FrontlineScript

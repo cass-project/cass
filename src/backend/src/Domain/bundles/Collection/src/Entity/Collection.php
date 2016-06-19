@@ -1,26 +1,28 @@
 <?php
 namespace Domain\Collection\Entity;
 
-use Application\Util\IdTrait;
+use Application\Util\Entity\IdEntity\IdEntity;
+use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
 use Domain\Collection\Exception\InvalidCollectionOptionsException;
 use Domain\Collection\Exception\PublicEnabledException;
 use Domain\Community\Entity\Community;
 use Domain\Avatar\Entity\ImageEntityTrait;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Theme\Entity\Theme;
 
 /**
  * @Entity(repositoryClass="Domain\Collection\Repository\CollectionRepository")
  * @Table(name="collection")
  */
-class Collection implements JSONSerializable
+class Collection implements JSONSerializable, IdEntity
 {
     use IdTrait;
     use ImageEntityTrait;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile\Greetings")
      * @JoinColumn(name="author_profile_id", referencedColumnName="id")
      * @var Profile
      */
@@ -99,7 +101,7 @@ class Collection implements JSONSerializable
                 'public_enabled' => $this->isPublicEnabled(),
                 'moderation_contract' => $this->isModerationContractEnabled(),
             ],
-            'image' => $this->fetchImages()->toJSON()
+            'image' => $this->getImages()->toJSON()
         ];
 
         if($this->hasTheme()) {

@@ -1,7 +1,7 @@
-'/protected/profile/{profileId}/switch/':
+'/protected/account/switch/to/profile/{profileId}':
   post:
     tags:
-      - profile
+      - account
     description: Переключиться на указанный профиль
     security:
       - x_api_key: []
@@ -18,7 +18,7 @@
             - entity
             - success
           properties:
-            entity:
+            profile:
               $ref: '#/definitions/Profile_Entity_Profile'
             success:
               type: booleand
@@ -27,6 +27,6 @@
         schema:
           $ref: '#/responses/Unauthorized'
       404:
-        description: Domain\Profile not found
+        description: Profile not found
         schema:
           $ref: '#/responses/NotFound'

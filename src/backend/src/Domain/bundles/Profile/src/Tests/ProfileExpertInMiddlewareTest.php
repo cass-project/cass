@@ -10,7 +10,8 @@ use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
  */
 class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
 {
-    public function testPutExpertIn() {
+    public function testPutExpertIn()
+    {
         $this->upFixture(
             new SampleThemesFixture()
         );
@@ -26,8 +27,7 @@ class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
 
         $this->requestExpertInPUT($profile->getId(), ['theme_ids' => $themeIds])
             ->execute()
-            ->expectAuthError()
-        ;
+            ->expectAuthError();
 
         $this->requestExpertInPUT($profile->getId(), ['theme_ids' => $themeIds])
             ->auth($account->getAPIKey())
@@ -36,8 +36,7 @@ class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->expectExpertInIds($profile->getId(), $themeIds);
 
@@ -54,13 +53,13 @@ class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->expectExpertInIds($profile->getId(), $newThemeIds);
     }
 
-    public function testPostExpertIn() {
+    public function testPostExpertIn()
+    {
         $this->upFixture(
             new SampleThemesFixture()
         );
@@ -76,8 +75,7 @@ class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
 
         $this->requestExpertInPOST($profile->getId(), ['theme_ids' => $themeIds])
             ->execute()
-            ->expectAuthError()
-        ;
+            ->expectAuthError();
 
         $this->requestInterestingInPOST($profile->getId(), ['theme_ids' => $themeIds])
             ->auth($account->getAPIKey())
@@ -86,8 +84,7 @@ class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->expectExpertInIds($profile->getId(), $themeIds);
 
@@ -104,13 +101,13 @@ class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->expectExpertInIds($profile->getId(), array_merge($themeIds, $newThemeIds));
     }
 
-    public function testDeleteExpertIn() {
+    public function testDeleteExpertIn()
+    {
         $this->upFixture(
             new SampleThemesFixture()
         );
@@ -131,8 +128,7 @@ class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->expectExpertInIds($profile->getId(), $themeIds);
 
@@ -149,8 +145,7 @@ class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->expectExpertInIds($profile->getId(), [
             SampleThemesFixture::getTheme(2)->getId(),
@@ -158,7 +153,8 @@ class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
         ]);
     }
 
-    private function expectExpertInIds(int $profileId, array $ids) {
+    private function expectExpertInIds(int $profileId, array $ids)
+    {
         $result = $this->requestGetProfile($profileId)
             ->execute()
             ->expectStatusCode(200)
@@ -166,8 +162,7 @@ class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true
             ])
-            ->getParsedLastResult()
-        ;
+            ->getParsedLastResult();
 
         $compareIds = $result['entity']['expert_in'];
 

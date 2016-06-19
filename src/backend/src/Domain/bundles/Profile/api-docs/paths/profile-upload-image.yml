@@ -44,18 +44,14 @@
           type: object
           required:
             - success
-            - profile_id
-            - public_path
+            - image
           properties:
             success:
               type: boolean
-              default: true
-            profile_id:
-              type: number
-              description: ID профиля
-            public_path:
-              type: string
-              description: Путь (/public) к картинке
+              description: '=true'
+            image:
+              schema:
+                $ref: '#/definitions/Avatar_ImageCollection'
       403:
         schema:
           $ref: '#/responses/Unauthorized'

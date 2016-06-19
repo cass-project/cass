@@ -5,8 +5,7 @@ use Application\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Entity\Profile;
-use Domain\Profile\Entity\ProfileGreetings;
-use Domain\Profile\Entity\ProfileImage;
+use Domain\Profile\Entity\Profile\Greetings;
 use Zend\Expressive\Application;
 
 class DemoProfileFixture implements Fixture
@@ -15,14 +14,16 @@ class DemoProfileFixture implements Fixture
     private static $profile;
 
     const DEFAULTS = [
-        'gender' => Profile::GENDER_MALE
+        'gender' => Profile\Gender\GenderMale::STRING_CODE
     ];
-    
-    public function up(Application $app, EntityManager $em) {
+
+    public function up(Application $app, EntityManager $em)
+    {
         self::$profile = DemoAccountFixture::getAccount()->getProfiles()->first();
     }
 
-    public static function getProfile(): Profile {
+    public static function getProfile(): Profile
+    {
         return self::$profile;
     }
 }

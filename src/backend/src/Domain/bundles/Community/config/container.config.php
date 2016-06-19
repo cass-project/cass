@@ -15,13 +15,13 @@ use League\Flysystem\Filesystem;
 
 return [
     'php-di' => [
-        'config.paths.community.assets.dir' => factory(function(Container $container) {
+        'config.paths.community.avatar.dir' => factory(function(Container $container) {
             return sprintf('%s/community/by-sid/avatar/', $container->get('config.paths.assets.dir'));
         }),
         CommunityRepository::class => factory(new DoctrineRepositoryFactory(Community::class)),
         CommunityService::class => object()
             ->constructorParameter('imageFileSystem', factory(function(Container $container) {
-                return new Filesystem(new Local($container->get('config.paths.community.assets.dir')));
+                return new Filesystem(new Local($container->get('config.paths.community.avatar.dir')));
             })),
     ],
 ];

@@ -10,7 +10,8 @@ use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
  */
 class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
 {
-    public function testPutInterests() {
+    public function testPutInterests()
+    {
         $this->upFixture(
             new SampleThemesFixture()
         );
@@ -26,8 +27,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
 
         $this->requestInterestingInPUT($profile->getId(), ['theme_ids' => $themeIds])
             ->execute()
-            ->expectAuthError()
-        ;
+            ->expectAuthError();
 
         $this->requestInterestingInPUT($profile->getId(), ['theme_ids' => $themeIds])
             ->auth($account->getAPIKey())
@@ -36,8 +36,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->expectInterestingInIds($profile->getId(), $themeIds);
 
@@ -54,13 +53,13 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->expectInterestingInIds($profile->getId(), $newThemeIds);
     }
 
-    public function testPostInterests() {
+    public function testPostInterests()
+    {
         $this->upFixture(
             new SampleThemesFixture()
         );
@@ -76,8 +75,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
 
         $this->requestInterestingInPOST($profile->getId(), ['theme_ids' => $themeIds])
             ->execute()
-            ->expectAuthError()
-        ;
+            ->expectAuthError();
 
         $this->requestInterestingInPOST($profile->getId(), ['theme_ids' => $themeIds])
             ->auth($account->getAPIKey())
@@ -86,8 +84,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->expectInterestingInIds($profile->getId(), $themeIds);
 
@@ -104,13 +101,13 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->expectInterestingInIds($profile->getId(), array_merge($themeIds, $newThemeIds));
     }
 
-    public function testDeleteInterests() {
+    public function testDeleteInterests()
+    {
         $this->upFixture(
             new SampleThemesFixture()
         );
@@ -131,8 +128,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->expectInterestingInIds($profile->getId(), $themeIds);
 
@@ -149,8 +145,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->expectInterestingInIds($profile->getId(), [
             SampleThemesFixture::getTheme(2)->getId(),
@@ -158,7 +153,8 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
         ]);
     }
 
-    private function expectInterestingInIds(int $profileId, array $ids) {
+    private function expectInterestingInIds(int $profileId, array $ids)
+    {
         $result = $this->requestGetProfile($profileId)
             ->execute()
             ->expectStatusCode(200)
@@ -166,8 +162,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true
             ])
-            ->getParsedLastResult()
-        ;
+            ->getParsedLastResult();
 
         $compareIds = $result['entity']['interesting_in'];
 

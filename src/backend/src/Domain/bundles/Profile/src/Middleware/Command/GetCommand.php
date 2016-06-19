@@ -8,17 +8,24 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class GetCommand extends Command
 {
-    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface {
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
+    {
 
         try {
-            $profileId = $this->validateProfileId($request->getAttribute('profileId'));
+            $profileId = (int)$request->getAttribute('profileId');
+
+            $this->validation->validateIsProfileOwnedByAccount(
+                $this->currentAccountService->getCurrentAccount(),
+                $this->profileService->getProfileById($profileId)
+            );
+
             $profile = $this->profileService->getProfileById($profileId);
 
             return $responseBuilder
                 ->setStatusSuccess()
                 ->setJson($this->profileExtendedFormatter->format($profile))
                 ->build();
-        }catch(ProfileNotFoundException $e){
+        } catch (ProfileNotFoundException $e) {
             return $responseBuilder
                 ->setStatusNotFound()
                 ->build();

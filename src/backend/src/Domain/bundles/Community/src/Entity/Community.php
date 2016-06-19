@@ -1,10 +1,13 @@
 <?php
 namespace Domain\Community\Entity;
 
+use Application\Util\Entity\IdEntity\IdEntity;
+use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\GenerateRandomString;
-use Application\Util\IdTrait;
+use Application\Util\JSONSerializable;
 use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Entity\ImageEntityTrait;
+use Domain\Avatar\Image\ImageCollection;
 use Domain\Collection\Collection\CollectionTree;
 use Domain\Collection\Traits\CollectionOwnerTrait;
 use Domain\Community\Entity\Community\CommunityFeatures;
@@ -15,7 +18,7 @@ use Domain\Theme\Entity\Theme;
  * @Entity(repositoryClass="Domain\Community\Repository\CommunityRepository")
  * @Table(name="community")
  */
-class Community implements ImageEntity
+class Community implements IdEntity, JSONSerializable, ImageEntity
 {
     const SID_LENGTH = 8;
 
@@ -90,6 +93,7 @@ class Community implements ImageEntity
         $this->dateCreatedOn = new \DateTime();
         $this->collections = new CollectionTree();
         $this->setTitle($title)->setDescription($description);
+        $this->setImages(new ImageCollection());
 
         if($theme) {
             $this->setTheme($theme);

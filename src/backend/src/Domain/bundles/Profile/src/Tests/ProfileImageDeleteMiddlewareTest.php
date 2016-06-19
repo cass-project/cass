@@ -3,7 +3,6 @@ namespace Domain\Profile\Tests;
 
 use Application\Util\Definitions\Point;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Profile\Entity\ProfileImage;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**
@@ -18,9 +17,7 @@ class ProfileImageDeleteMiddlewareTest extends ProfileMiddlewareTestCase
 
         $p1 = new Point(0, 0);
         $p2 = new Point(150, 150);
-        $localFile = __DIR__.'/Resources/grid-example.png';
-
-        $wwwPath = $this->container()->get('paths')['www'];
+        $localFile = __DIR__ . '/Resources/grid-example.png';
 
         $this->requestUploadImage($profile->getId(), $p1, $p2, $localFile)
             ->execute()
@@ -33,15 +30,8 @@ class ProfileImageDeleteMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'profile_id' => $profile->getId(),
-                'public_path' => $this->expectString()
-            ])
-            ->expect(function(array $result) use ($wwwPath) {
-                $file = sprintf('%s/%s', $wwwPath, $result['public_path']);
-
-                $this->assertTrue(file_exists($file));
-            })
-        ;
+                'image' => $this->expectImageCollection()
+            ]);
 
         $this->requestDeleteImage($profile->getId())
             ->execute()
@@ -54,11 +44,7 @@ class ProfileImageDeleteMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'image' => [
-                    'id' => $this->expectId(),
-                    'profile_id' => $profile->getId(),
-                    'public_path' => ProfileImage::DEFAULT_PROFILE_IMAGE_PUBLIC
-                ]
+                'image' => $this->expectImageCollection()
             ]);
 
         $this->requestGetProfile($profile->getId())
@@ -67,13 +53,7 @@ class ProfileImageDeleteMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'entity' => [
-                    'image' => [
-                        'id' => $this->expectId(),
-                        'profile_id' => $profile->getId(),
-                        'public_path' => ProfileImage::DEFAULT_PROFILE_IMAGE_PUBLIC
-                    ]
-                ]
+                'image' => $this->expectImageCollection()
             ]);
     }
 }

@@ -1,28 +1,30 @@
 <?php
 namespace Domain\ProfileIM\Entity;
 
-use Application\Util\IdTrait;
+use Application\Util\Entity\IdEntity\IdEntity;
+use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Greetings;
 use Domain\ProfileIM\Exception\MessageIsNotReadException;
 
 /**
  * @Entity(repositoryClass="Domain\ProfileIM\Repository\ProfileMessageRepository")
  * @Table(name="profile_message")
  */
-class ProfileMessage implements JSONSerializable
+class ProfileMessage implements JSONSerializable, IdEntity
 {
     use IdTrait;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile\Greetings")
      * @JoinColumn(name="source_profile_id", referencedColumnName="id")
      * @var Profile
      */
     private $sourceProfile;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile\Greetings")
      * @JoinColumn(name="target_profile_id", referencedColumnName="id")
      * @var Profile
      */

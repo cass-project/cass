@@ -1,0 +1,13 @@
+Profile_Entity_Gender:
+  type: object
+  description: Пол
+  required:
+    - int
+    - string
+  properties:
+    int:
+      type: number
+      description: Пол (числовой код)
+    string:
+      type: string
+      description: Пол (строковой код)

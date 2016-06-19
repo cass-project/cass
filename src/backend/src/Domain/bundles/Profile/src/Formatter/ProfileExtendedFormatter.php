@@ -5,6 +5,7 @@ use Domain\Collection\Collection\CollectionItem;
 use Domain\Collection\Collection\CollectionTree;
 use Domain\Collection\Service\CollectionService;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Greetings;
 
 final class ProfileExtendedFormatter
 {
@@ -16,10 +17,10 @@ final class ProfileExtendedFormatter
     }
 
     public function format(Profile $profile): array {
-        $json = $profile->toJSON();
-        $json['collections'] = $this->formatCollections($profile->getCollections());
-
-        return $json;
+        return [
+            'profile' => $profile->toJSON(),
+            'collections' => $this->formatCollections($profile->getCollections())
+        ];
     }
 
     private function formatCollections(CollectionTree $tree): array {

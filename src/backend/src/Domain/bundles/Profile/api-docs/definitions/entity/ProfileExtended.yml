@@ -1,58 +1,13 @@
 Profile_Entity_ProfileExtended:
   type: object
   required:
-    - id
-    - account_id
-    - is_initialized
-    - is_current
-    - greetings
-    - gender
-    - image
-    - expert_in
-    - interesting_in
+    - profile
     - collections
   properties:
-    id:
-      type: number
-      description: ID
-    account_id:
-      type: number
-      description: ID аккаунта, которому принадлежит профиль
-    is_initialized:
-      type: boolean
-      description: Флаг, при значении FALSE значит, что профиль не проиницизилирован
-    is_current:
-      type: boolean
-      description: Флаг "данный профиль является текущим"
-    greetings:
+    profile:
       type: object
-      $ref: '#/definitions/Profile_Entity_ProfileGreetings'
-    image:
-      type: object
-      $ref: '#/definitions/Profile_Entity_ProfileImage'
-    gender:
-      type: object
-      description: Пол
-      required:
-        - int
-        - string
-      properties:
-        int:
-          type: number
-          description: Пол (числовой код)
-        string:
-          type: string
-          description: Пол (строковой код)
-    expert_in:
-      type: array
-      items:
-        type: number
-        description: ID тематики
-    interesting_in:
-      type: array
-      items:
-        type: number
-        description: ID тематики
+      schema:
+        $ref: '#/definitions/Profile_Entity_Profile'
     collections:
       type: array
       items:

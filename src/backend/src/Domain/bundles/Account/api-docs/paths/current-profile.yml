@@ -1,0 +1,25 @@
+"/protected/account/current/":
+  get:
+    tags:
+      - account
+    description:
+      Информация о текущем аккаунта
+    security:
+      - x_api_key: []
+    responses:
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      200:
+        schema:
+          required:
+            - success
+            - account
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            account:
+              type: object
+              schema:
+                $ref: '#/definitions/Account_Entity_Account'

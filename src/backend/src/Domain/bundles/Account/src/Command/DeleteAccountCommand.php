@@ -32,16 +32,14 @@ class DeleteAccountCommand extends Command
                 'id',
                 InputArgument::REQUIRED,
                 'Account ID'
-            )
-        ;
+            );
     }
-
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $accountId = $input->getArgument('id');
 
-        if(! is_numeric($accountId)) {
+        if (!is_numeric($accountId)) {
             throw new \InvalidArgumentException('Invalid id');
         }
 

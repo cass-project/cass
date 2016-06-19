@@ -11,7 +11,7 @@ trait ImageEntityTrait
      */
     private $image = [];
 
-    public function fetchImages(): ImageCollection
+    public function getImages(): ImageCollection
     {
         return ImageCollection::createFromJSON($this->image);
     }
@@ -21,7 +21,7 @@ trait ImageEntityTrait
         return count($this->image) > 0;
     }
 
-    public function exportImages(ImageCollection $images)
+    public function setImages(ImageCollection $images)
     {
         $this->image = $images->toJSON();
 

@@ -2,7 +2,7 @@
 namespace Domain\Auth\Formatter;
 
 use Domain\Account\Entity\Account;
-use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Greetings;
 
 class SignInFormatter
 {

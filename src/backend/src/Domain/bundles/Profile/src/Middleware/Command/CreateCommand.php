@@ -9,7 +9,8 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class CreateCommand extends Command
 {
-    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface {
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
+    {
         $account = $this->currentAccountService->getCurrentAccount();
 
         try {
@@ -21,7 +22,7 @@ final class CreateCommand extends Command
                     'entity' => $profile->toJSON()
                 ])
                 ->build();
-        }catch(MaxProfilesReachedException $e){
+        } catch (MaxProfilesReachedException $e) {
             throw new BadCommandCallException($e->getMessage());
         }
     }

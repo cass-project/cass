@@ -5,7 +5,7 @@ use Application\Exception\ValidationException;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Collection\Entity\Collection;
 use Domain\Community\Entity\Community;
-use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Greetings;
 
 class CollectionValidatorsService
 {

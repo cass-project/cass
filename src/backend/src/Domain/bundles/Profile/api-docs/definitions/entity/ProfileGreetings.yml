@@ -1,21 +1,17 @@
 Profile_Entity_ProfileGreetings:
   type: object
   required:
-    - id
-    - profile_id
-    - greetings_method
+    - method
     - greetings
+    - first_name
+    - last_name
+    - middle_name
+    - nick_name
   properties:
-    id:
-      type: number
-      description: ID
-    profile_id:
-      type: number
-      description: ID профиля
-    greetings_method:
+    method:
       type: string
       description: |
-        Способ, как называть владельца этого профиля. Возможные значения: "fl" (first name, last name), "lf" (last name, first name), "lfm" (last name, first name, middle name), "n" (nichname)
+        Способ, как называть владельца этого профиля. Возможные значения: "fl" (first name, last name), "lf" (last name, first name), "lfm" (last name, first name, middle name), "n" (nichname), "anonymous" (аноним), "fm" (first_name, last_name)
     greetings:
       type: string
       description: Приветствие (название) профиля

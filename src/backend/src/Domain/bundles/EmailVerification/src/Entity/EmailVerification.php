@@ -1,7 +1,8 @@
 <?php
 namespace Domain\EmailVerification\Entity;
 
-use Application\Util\IdTrait;
+use Application\Util\Entity\IdEntity\IdEntity;
+use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
 use Domain\Account\Entity\Account;
 
@@ -9,7 +10,7 @@ use Domain\Account\Entity\Account;
  * @Entity(repositoryClass="Domain\EmailVerification\Repository\EmailVerificationRepository")
  * @Table(name="email_verification")
  */
-class EmailVerification implements JSONSerializable
+class EmailVerification implements IdEntity, JSONSerializable
 {
     use IdTrait;
 

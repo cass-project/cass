@@ -9,7 +9,8 @@ use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
  */
 class ProfileDeleteMiddlewareTest extends ProfileMiddlewareTestCase
 {
-    public function testDeleteProfile200() {
+    public function testDeleteProfile200()
+    {
         $account = DemoAccountFixture::getAccount();
         $profile = DemoProfileFixture::getProfile();
 
@@ -24,15 +25,13 @@ class ProfileDeleteMiddlewareTest extends ProfileMiddlewareTestCase
                     'id' => $this->expectId()
                 ]
             ])
-            ->getParsedLastResult()
-        ;
+            ->getParsedLastResult();
 
         $newProfileId = $result['entity']['id'];
 
         $this->requestDeleteProfile($profile->getId())
             ->execute()
-            ->expectAuthError()
-        ;
+            ->expectAuthError();
 
         $this->requestDeleteProfile($profile->getId())
             ->auth($account->getAPIKey())
@@ -42,8 +41,7 @@ class ProfileDeleteMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'current_profile_id' => $newProfileId
-            ])
-        ;
+            ]);
 
         $this->requestGetProfile($newProfileId)
             ->execute()
@@ -65,8 +63,7 @@ class ProfileDeleteMiddlewareTest extends ProfileMiddlewareTestCase
             ->auth($account->getAPIKey())
             ->execute()
             ->expectStatusCode(409)
-            ->expectJSONContentType()
-        ;
+            ->expectJSONContentType();
     }
 
     public function testRemoveCurrentProfile()
@@ -86,8 +83,7 @@ class ProfileDeleteMiddlewareTest extends ProfileMiddlewareTestCase
                     'is_current' => true
                 ]
             ])
-            ->getParsedLastResult()
-        ;
+            ->getParsedLastResult();
 
         $newProfileId = $result['entity']['id'];
 
@@ -99,8 +95,7 @@ class ProfileDeleteMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'current_profile_id' => $profile->getId()
-            ])
-        ;
+            ]);
 
         $this->requestGetProfile($profile->getId())
             ->auth($account->getAPIKey())

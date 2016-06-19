@@ -11,6 +11,7 @@ use Domain\Community\Repository\CommunityRepository;
 use Domain\Avatar\Image\Image;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Profile\Repository\ProfileRepository;
 use League\Flysystem\FilesystemInterface;
 
@@ -76,14 +77,16 @@ class CollectionService
     public function createProfileCollection(Profile $profile, CreateCollectionParameters $parameters): Collection
     {
         $profileId = $profile->getId();
-
+        
         $collection = $this->collectionRepository->createCollection(
             sprintf('profile:%d', $profileId),
             $this->getDefaultImages(),
             $parameters
         );
 
-        $this->profileRepository->linkCollection($profile, $collection->getId());
+        $profile->getCollections()->attachChild($collection->getId());
+
+        $this->profileRepository->saveProfile($profile);
 
         return $collection;
     }

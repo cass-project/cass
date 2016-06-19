@@ -1,20 +1,23 @@
 <?php
 namespace Domain\Post\Entity;
 
-use Application\Util\IdTrait;
+use Application\Util\Entity\IdEntity\IdEntity;
+use Application\Util\Entity\IdEntity\IdTrait;
+use Application\Util\JSONSerializable;
 use Domain\Collection\Entity\Collection;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Greetings;
 
 /**
  * @Entity(repositoryClass="Domain\Post\Repository\PostRepository")
  * @Table(name="post")
  */
-class Post
+class Post implements IdEntity, JSONSerializable
 {
     use IdTrait;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile\Greetings")
      * @JoinColumn(name="author_profile_id", referencedColumnName="id")
      * @var Profile
      */

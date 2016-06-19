@@ -24,7 +24,7 @@ class ProcessAccountDeleteRequestsScript
     {
         $deleteScript = $this->deleteAccountScript;
 
-        return array_map(function(Account $account) use($deleteScript) {
+        return array_map(function (Account $account) use ($deleteScript) {
             return $deleteScript($account);
         }, $this->accountRepository->getPendingDeleteAccounts(self::DAYS_TO_ACCEPT_REQUEST));
     }

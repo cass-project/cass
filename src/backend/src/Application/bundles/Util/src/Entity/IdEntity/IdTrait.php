@@ -1,5 +1,5 @@
 <?php
-namespace Application\Util;
+namespace Application\Util\Entity\IdEntity;
 
 trait IdTrait
 {
@@ -11,11 +11,13 @@ trait IdTrait
      */
     private $id;
 
-    public final function isPersisted() {
+    public final function isPersisted(): bool
+    {
         return $this->id !== null;
     }
 
-    public final function getId(): int {
+    public final function getId(): int 
+    {
         return $this->id;
     }
 }

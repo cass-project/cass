@@ -17,9 +17,7 @@ class ProfileImageUploadMiddlewareTest extends ProfileMiddlewareTestCase
 
         $p1 = new Point(0, 0);
         $p2 = new Point(150, 150);
-        $localFile = __DIR__.'/Resources/grid-example.png';
-
-        $wwwPath = $this->container()->get('paths')['www'];
+        $localFile = __DIR__ . '/Resources/grid-example.png';
 
         $this->requestUploadImage($profile->getId(), $p1, $p2, $localFile)
             ->execute()
@@ -32,14 +30,7 @@ class ProfileImageUploadMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'profile_id' => $profile->getId(),
-                'public_path' => $this->expectString()
-            ])
-            ->expect(function(array $result) use ($wwwPath) {
-                $file = sprintf('%s/%s', $wwwPath, $result['public_path']);
-
-                $this->assertTrue(file_exists($file));
-            })
-        ;
+                'image' => $this->expectImageCollection()
+            ]);
     }
 }

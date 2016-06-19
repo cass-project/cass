@@ -2,7 +2,8 @@
 namespace Domain\Profile\Tests;
 
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Gender\GenderFemale;
+use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**
@@ -10,7 +11,8 @@ use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
  */
 class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
 {
-    public function testEditPersonal403() {
+    public function testEditPersonal403()
+    {
         $profile = DemoProfileFixture::getProfile();
 
         $json = [
@@ -23,11 +25,11 @@ class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
 
         $this->requestEditPersonal($profile->getId(), $json)
             ->execute()
-            ->expectAuthError()
-        ;
+            ->expectAuthError();
     }
 
-    public function testEditPersonal() {
+    public function testEditPersonal()
+    {
         $account = DemoAccountFixture::getAccount();
         $profile = DemoProfileFixture::getProfile();
 
@@ -53,11 +55,11 @@ class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
                         'middle_name' => $json['middle_name'],
                     ]
                 ]
-            ])
-        ;
+            ]);
     }
 
-    public function editPersonalWithGender() {
+    public function editPersonalWithGender()
+    {
         $account = DemoAccountFixture::getAccount();
         $profile = DemoProfileFixture::getProfile();
 
@@ -84,11 +86,10 @@ class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
                         'middle_name' => $json['middle_name'],
                     ],
                     'gender' => [
-                        'int' => Profile::GENDER_FEMALE,
-                        'string' => 'female'
+                        'int' => GenderFemale::INT_CODE,
+                        'string' => GenderFemale::STRING_CODE
                     ]
                 ]
-            ])
-        ;
+            ]);
     }
 }

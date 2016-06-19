@@ -1,16 +1,20 @@
 <?php
 namespace Domain\Profile\Middleware\Command;
 
-use Application\Command\Command as CommandInterface;
+use Domain\Account\Service\AccountService;
 use Domain\Auth\Service\CurrentAccountService;
-use Domain\Profile\Entity\Profile;
+use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Profile\Formatter\ProfileExtendedFormatter;
 use Domain\Profile\Service\ProfileService;
+use Domain\Profile\Validation\ProfileValidationService;
 
-abstract class Command implements CommandInterface
+abstract class Command implements \Application\Command\Command
 {
     /** @var CurrentAccountService */
     protected $currentAccountService;
+
+    /** @var AccountService */
+    protected $accountService;
 
     /** @var ProfileService */
     protected $profileService;
@@ -18,39 +22,20 @@ abstract class Command implements CommandInterface
     /** @var ProfileExtendedFormatter */
     protected $profileExtendedFormatter;
 
+    /** @var ProfileValidationService */
+    protected $validation;
+
     public function __construct(
         CurrentAccountService $currentAccountService,
+        AccountService $accountService,
         ProfileService $profileService,
-        ProfileExtendedFormatter $profileExtendedFormatter
+        ProfileExtendedFormatter $profileExtendedFormatter,
+        ProfileValidationService $validationService
     ) {
         $this->currentAccountService = $currentAccountService;
+        $this->accountService = $accountService;
         $this->profileService = $profileService;
         $this->profileExtendedFormatter = $profileExtendedFormatter;
-    }
-
-    protected function validateProfileId($input): int
-    {
-        $isInteger = filter_var($input, FILTER_VALIDATE_INT);
-        $isMoreThanZero = (int) $input > 0;
-
-        if(!($isInteger && $isMoreThanZero)) {
-            throw new \InvalidArgumentException('Invalid profileId');
-        }
-
-        return (int) $input;
-    }
-
-    protected function validateIsOwnProfile($profileId): bool
-    {
-        $profiles = $this->currentAccountService->getCurrentAccount()->getProfiles();
-
-
-        foreach($profiles as $profile){
-            if($profile instanceof Profile){
-                if ($profile->getId() == $profileId) return TRUE;
-            }
-        }
-
-        return false;
+        $this->validation = $validationService;
     }
 }

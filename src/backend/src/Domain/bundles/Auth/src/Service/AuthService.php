@@ -68,7 +68,7 @@ class AuthService
         $email = $parameters->getEmail();
         $password = $parameters->getPassword();
 
-        $account = $this->accountService->findByEmail($email);
+        $account = $this->accountService->getByEmail($email);
 
         if(! $this->verifyPassword($account, $password)) {
             throw new InvalidCredentialsException(sprintf('Fail to sign-in as `%s`', $email));

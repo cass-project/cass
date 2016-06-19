@@ -3,50 +3,57 @@ namespace Domain\Profile\Middleware\Parameters;
 
 class EditPersonalParameters
 {
+    /** @var string */
     private $gender;
-    private $greetingsType;
+
+    /** @var string */
+    private $method;
+
+    /** @var string */
     private $firstName;
+
+    /** @var string */
     private $lastName;
+
+    /** @var string */
     private $middleName;
+
+    /** @var string */
     private $nickName;
 
-    /**
-     * EditPersonalParameters constructor.
-     * @param $greetingsType
-     * @param $firstName
-     * @param $lastName
-     * @param $middleName
-     * @param $nickName
-     */
     public function __construct(
-        string $greetingsType,
+        string $method,
         string $firstName,
         string $lastName,
         string $middleName,
         string $nickName
-    ) {
-        $this->greetingsType = $greetingsType;
+    )
+    {
+        $this->method = $method;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->middleName = $middleName;
         $this->nickName = $nickName;
     }
 
-    public function specifyGender(string $gender) {
+    public function specifyGender(string $gender)
+    {
         $this->gender = $gender;
     }
 
-    public function isGenderSpecified(): bool {
+    public function isGenderSpecified(): bool
+    {
         return $this->gender !== null;
     }
 
-    public function getGender(): string {
+    public function getGender(): string
+    {
         return $this->gender;
     }
 
-    public function getGreetingsType(): string
+    public function getMethod(): string
     {
-        return $this->greetingsType;
+        return $this->method;
     }
 
     public function getFirstName(): string
