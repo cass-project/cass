@@ -23,7 +23,14 @@
   <div *ngIf="service.modals.collectionSettings.isActive()">
     <cass-modal>
       <cass-modal-box width="340px">
-        <cass-collection-settings></cass-collection-settings>
+        <cass-collection-settings [collection]="service.currentCollection"></cass-collection-settings>
+      </cass-modal-box>
+    </cass-modal>
+  </div>
+  <div *ngIf="service.modals.createCollectionMaster.isActive()">
+    <cass-modal>
+      <cass-modal-box width="340px">
+        <cass-collection-create-master for="profile" [owner_profile_id]="service.currentProfile.id" (complete)="service.updateCollections($event)"></cass-collection-create-master>
       </cass-modal-box>
     </cass-modal>
   </div>

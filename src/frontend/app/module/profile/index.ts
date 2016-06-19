@@ -1,5 +1,5 @@
 import {Component} from "angular2/core";
-
+import {Router} from "angular2/router";
 import {ProfileComponentService} from "./service";
 import {ProfileModal} from "./component/ProfileModal/index";
 import {ModalComponent} from "../modal/component/index";
@@ -28,11 +28,10 @@ import {CollectionSettings} from "../collection/component/CollectionSettings/ind
 })
 export class ProfileComponent
 {
-    currentProfile;
-
-    constructor(private service: ProfileComponentService) {
+    constructor(private service: ProfileComponentService, private router: Router) {
         if(AuthService.isSignedIn()) {
-            this.currentProfile = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity));
+            this.service.currentProfile = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity));
         }
+        console.log(this.service.currentProfile.collections);
     }
 }
