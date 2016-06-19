@@ -93,6 +93,7 @@ class Collection implements JSONSerializable
             'theme' => [
                 'has' => $this->hasTheme()
             ],
+            'theme_ids' => $this->getThemeIds(),
             'public_options' => [
                 'is_private' => $this->isPrivate(),
                 'public_enabled' => $this->isPublicEnabled(),
@@ -121,6 +122,15 @@ class Collection implements JSONSerializable
     public function getTheme(): Theme
     {
         return $this->theme;
+    }
+
+    public function getThemeIds(): array
+    {
+        if($this->hasTheme()) {
+            return [$this->getTheme()->getId()];
+        }else{
+            return [];
+        }
     }
 
     public function unsetTheme()

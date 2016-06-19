@@ -2,7 +2,6 @@
 namespace Domain\Avatar\Parameters;
 
 use Application\Util\Definitions\Point;
-use Domain\Package\UploadImage\string;
 
 abstract class UploadImageParameters
 {

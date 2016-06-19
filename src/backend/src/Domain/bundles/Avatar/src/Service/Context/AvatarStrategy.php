@@ -8,8 +8,12 @@ use League\Flysystem\Filesystem;
 interface AvatarStrategy
 {
     public function getEntity(): ImageEntityTrait;
+    public function getEntityId(): string;
     public function getLetter(): string;
     public function getFilesystem(): Filesystem;
     public function getPublicPath(): string;
     public function getDefaultImage(): Image;
+    public function getDefaultSize(): int;
+    public function getSizes(): array;
+    public function getRatio(): string;
 }

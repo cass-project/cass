@@ -29,6 +29,10 @@ final class CommunityImageStrategy implements AvatarStrategy
         return $this->community;
     }
 
+    public function getEntityId(): string {
+        return (string) $this->community->getId();
+    }
+
     public function getLetter(): string
     {
         if(! strlen($this->community->getTitle())) {
@@ -51,5 +55,24 @@ final class CommunityImageStrategy implements AvatarStrategy
     public function getDefaultImage(): Image
     {
         return new Image(self::DEFAULT_IMAGE_STORAGE_DIR, self::DEFAULT_IMAGE_PUBLIC_PATH);
+    }
+
+    public function getDefaultSize(): int {
+        return 64;
+    }
+
+    public function getSizes(): array {
+        return [
+            512,
+            256,
+            128,
+            64,
+            32,
+            16
+        ];
+    }
+
+    public function getRatio(): string {
+        return "1:1";
     }
 }

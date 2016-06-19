@@ -63,4 +63,9 @@ class ImageCollection implements JSONSerializable
     {
         return isset($this->images[$id]);
     }
+
+    public function getImage(string $id): Image
+    {
+        return $this->images[$id];
+    }
 }
