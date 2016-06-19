@@ -3,6 +3,7 @@ namespace Domain\Community\Entity;
 
 use Application\Util\GenerateRandomString;
 use Application\Util\IdTrait;
+use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Entity\ImageEntityTrait;
 use Domain\Collection\Collection\CollectionTree;
 use Domain\Collection\Traits\CollectionOwnerTrait;
@@ -14,7 +15,7 @@ use Domain\Theme\Entity\Theme;
  * @Entity(repositoryClass="Domain\Community\Repository\CommunityRepository")
  * @Table(name="community")
  */
-class Community
+class Community implements ImageEntity
 {
     const SID_LENGTH = 8;
 

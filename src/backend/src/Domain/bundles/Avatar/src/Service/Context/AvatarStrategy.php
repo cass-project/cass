@@ -1,13 +1,13 @@
 <?php
 namespace Domain\Avatar\Service\Context;
 
-use Domain\Avatar\Entity\ImageEntityTrait;
+use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Image\Image;
 use League\Flysystem\Filesystem;
 
 interface AvatarStrategy
 {
-    public function getEntity(): ImageEntityTrait;
+    public function getEntity(): ImageEntity;
     public function getEntityId(): string;
     public function getLetter(): string;
     public function getFilesystem(): Filesystem;

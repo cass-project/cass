@@ -8,15 +8,23 @@ use Domain\Avatar\Image\Image;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Avatar\Service\Context\AvatarStrategy;
+use Intervention\Image\ImageManager;
 use League\Flysystem\Filesystem;
-use PHPImageWorkshop\Core\ImageWorkshopLayer;
-use PHPImageWorkshop\ImageWorkshop;
+use Intervention\Image\Image as ImageLayer;
 
 final class AvatarService
 {
     const GENERATE_FILENAME_LENGTH = 8;
 
-    public function makeImages(AvatarStrategy $strategy, ImageWorkshopLayer $source): ImageCollection
+    /** @var ImageManager */
+    private $imageManager;
+
+    public function __construct(ImageManager $imageManager)
+    {
+        $this->imageManager = $imageManager;
+    }
+
+    public function makeImages(AvatarStrategy $strategy, ImageLayer $source): ImageCollection
     {
         $collection = new ImageCollection();
 
@@ -25,11 +33,11 @@ final class AvatarService
 
         foreach($sizes as $size) {
             if((! $collection->hasImage($size)) && ($source->getWidth() >= $size)) {
-                $collection->attachImage((string) $size, $this->createImage($strategy, $source, $size));
+                $collection->attachImage((string) $size, $this->createImage($strategy, $source, $collection->getUID(), $size));
             }
         }
 
-        $collection->attachImage('original', $this->createImage($strategy, $source, $source->getWidth()));
+        $collection->attachImage('original', $this->createImage($strategy, $source, $collection->getUID(), $source->getWidth()));
 
         if($collection->hasImage($strategy->getDefaultSize())) {
             $collection->attachImage('default', clone $collection->getImage((string) $strategy->getDefaultSize()));
@@ -44,18 +52,27 @@ final class AvatarService
     {
         $this->destroyImages($strategy);
 
-        $strategy->getEntity()->exportImages($this->makeImages($strategy, ImageWorkshop::initFromPath($strategy->getDefaultImage()->getStoragePath())));
+        $source = $this->imageManager->make($strategy->getDefaultImage()->getStoragePath());
+        $images = $this->makeImages($strategy, $source);
+
+        $strategy->getEntity()->exportImages($images);
     }
 
     public function uploadImage(AvatarStrategy $strategy, UploadImageParameters $parameters)
     {
-        $this->destroyImages($strategy);
+        $oldCollectionUID = null;
 
+        if($strategy->getEntity()->hasImages()) {
+            $oldCollectionUID = $strategy->getEntity()->fetchImages()->getUID();
+        }
+        
+        $this->destroyImages($strategy);
+        
         $start = $parameters->getPointStart();
         $end = $parameters->getPointEnd();
 
-        $source = ImageWorkshop::initFromPath($parameters->getTmpFile());
-        $source->crop(ImageWorkshopLayer::UNIT_PIXEL, $end->getX() - $start->getX(), $end->getY() - $start->getY(), $start->getX(), $start->getY());
+        $source = $this->imageManager->make($parameters->getTmpFile());
+        $source->crop($end->getX() - $start->getX(), $end->getY() - $start->getY(), $start->getX(), $start->getY());
 
         $strategy->getEntity()->exportImages($this->makeImages($strategy, $source));
     }
@@ -74,10 +91,10 @@ final class AvatarService
         throw new NotImplementedException;
     }
 
-    private function createImage(AvatarStrategy $strategy, ImageWorkshopLayer $source, int $size): Image
+    private function createImage(AvatarStrategy $strategy, ImageLayer $source, string $collectionUID, int $size): Image
     {
         $ratio = array_filter(explode(':', $strategy->getRatio()), function($input) {
-            return is_int($input);
+            return is_numeric($input);
         });
 
         if(count($ratio) !== 2) {
@@ -85,28 +102,25 @@ final class AvatarService
         }
 
         $width = $size;
-        $height = ($size / $ratio[0]) * $ratio[1];
+        $height = ($size / (int) $ratio[0]) * (int) $ratio[1];
 
         $image = clone $source;
-        $image->resize(ImageWorkshopLayer::UNIT_PIXEL, $width, $height);
-        $image->save(
-            $dir = $this->touchDir($strategy->getFilesystem(), $strategy->getEntityId(), $size),
-            $file = sprintf('%s.png', GenerateRandomString::gen(self::GENERATE_FILENAME_LENGTH))
-        );
+        $image->resize($width, $height);
+
+        $dir = $this->touchDir($strategy->getFilesystem(), $strategy->getEntityId(), $collectionUID, $size);
+        $file = sprintf('%s.png', GenerateRandomString::gen(self::GENERATE_FILENAME_LENGTH));
+
+        $strategy->getFilesystem()->write("{$dir}/{$file}", $image->encode('png'));
 
         return new Image(
             "{$dir}/{$file}",
-            sprintf("%s/%s/%s", $strategy->getPublicPath(), $strategy->getEntityId(), $size)
+            sprintf("%s/%s/%s/%s", $strategy->getPublicPath(), $strategy->getEntityId(), $size, $file)
         );
     }
 
-    private function touchDir(Filesystem $fs, $entityId, $imageId): string
+    private function touchDir(Filesystem $fs, string $entityId, string $collectionUID, string $imageId): string
     {
-        $resultPath = sprintf('%s/%s', $entityId, $imageId);
-
-        if(! $fs->has((string) $entityId)) {
-            $fs->createDir((string) $entityId);
-        }
+        $resultPath = sprintf('%s/%s/%s', $entityId, $collectionUID, $imageId);
 
         if(! $fs->has($resultPath)) {
             $fs->createDir($resultPath);

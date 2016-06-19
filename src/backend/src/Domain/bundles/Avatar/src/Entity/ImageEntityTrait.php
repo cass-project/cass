@@ -16,7 +16,12 @@ trait ImageEntityTrait
         return ImageCollection::createFromJSON($this->image);
     }
 
-    public function exportImages(ImageCollection $images): self
+    public function hasImages(): bool
+    {
+        return count($this->image) > 0;
+    }
+
+    public function exportImages(ImageCollection $images)
     {
         $this->image = $images->toJSON();
 

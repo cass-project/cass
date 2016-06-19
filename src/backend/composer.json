@@ -54,7 +54,8 @@
     "react/http": "^0.5@dev",
     "phly/react2psr7": "^0.1.1",
     "zendframework/zend-servicemanager": "^3.0",
-    "league/flysystem": "^1.0"
+    "league/flysystem": "^1.0",
+    "intervention/image": "^2.3"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.3"

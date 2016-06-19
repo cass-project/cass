@@ -1,21 +1,28 @@
 <?php
 namespace Domain\Avatar\Image;
 
+use Application\Util\GenerateRandomString;
 use Application\Util\JSONSerializable;
 
 class ImageCollection implements JSONSerializable
 {
-    const MIN_ID_LENGTH = 3;
+    const UID_LENGTH = 5;
+    const MIN_ID_LENGTH = 1;
     const MAX_ID_LENGTH = 32;
+
+    /** @var string */
+    private $uid;
 
     /** @var Image[] */
     private $images = [];
 
     static public function createFromJSON(array $json): self {
-        $collection = new self();
+        $collection = new self($json['uid'] ?? null);
 
         foreach($json as $id => $definition) {
-            if(! (is_string($id) && strlen($id) >= self::MIN_ID_LENGTH && strlen($id) <= self::MAX_ID_LENGTH)) {
+            $id = (string) $id;
+
+            if(! (strlen($id) >= self::MIN_ID_LENGTH && strlen($id) <= self::MAX_ID_LENGTH)) {
                 throw new \InvalidArgumentException(sprintf('Invalid ID `%s`', $id));
             }
 
@@ -28,9 +35,25 @@ class ImageCollection implements JSONSerializable
         return $collection;
     }
 
+    public function __construct(string $uid = null)
+    {
+        if(! $uid) {
+            $uid = GenerateRandomString::gen(self::UID_LENGTH);
+        }
+
+        $this->uid = $uid;
+    }
+
+    public function getUID(): string
+    {
+        return $this->uid;
+    }
+
     public function toJSON(): array
     {
-        $result = [];
+        $result = [
+            'uid' => $this->getUID()
+        ];
 
         foreach($this->images as $id => $image) {
             $result[$id] = ['id' => $id] + $image->toJSON();
@@ -41,7 +64,9 @@ class ImageCollection implements JSONSerializable
 
     public function attachImage(string $id, Image $image): self
     {
-        if(! (is_string($id) && strlen($id) >= self::MIN_ID_LENGTH && strlen($id) <= self::MAX_ID_LENGTH)) {
+        $id = (string) $id;
+
+        if(! (strlen($id) >= self::MIN_ID_LENGTH && strlen($id) <= self::MAX_ID_LENGTH)) {
             throw new \InvalidArgumentException(sprintf('Invalid ID `%s`', $id));
         }
 

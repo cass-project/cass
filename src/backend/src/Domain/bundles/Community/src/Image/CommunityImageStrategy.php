@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Community\Image;
 
+use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Entity\ImageEntityTrait;
 use Domain\Avatar\Image\Image;
 use Domain\Avatar\Service\Context\AvatarStrategy;
@@ -24,13 +25,13 @@ final class CommunityImageStrategy implements AvatarStrategy
         $this->fileSystem = $fileSystem;
     }
 
-    public function getEntity(): ImageEntityTrait
+    public function getEntity(): ImageEntity
     {
         return $this->community;
     }
 
     public function getEntityId(): string {
-        return (string) $this->community->getId();
+        return (string) $this->community->getSID();
     }
 
     public function getLetter(): string
