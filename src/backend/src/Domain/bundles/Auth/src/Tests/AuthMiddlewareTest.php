@@ -4,7 +4,6 @@ namespace Domain\Auth\Tests;
 use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Profile\Entity\ProfileGreetings;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**
@@ -44,11 +43,6 @@ class AuthMiddlewareTest extends MiddlewareTestCase
                         'account_id' => $this->expectId(),
                         'is_initialized' => false,
                         'is_current' => true,
-                        'greetings' => [
-                            'id' => $this->expectId(),
-                            'profile_id' => $this->expectId(),
-                            'greetings_method' => ProfileGreetings::DEFAULT_GREETINGS,
-                        ]
                     ]
                 ]
             ])
@@ -108,11 +102,6 @@ class AuthMiddlewareTest extends MiddlewareTestCase
                         'account_id' => $account->getId(),
                         'is_initialized' => false,
                         'is_current' => true,
-                        'greetings' => [
-                            'id' => $profile->getProfileGreetings()->getId(),
-                            'profile_id' => $profile->getId(),
-                            'greetings_method' => ProfileGreetings::DEFAULT_GREETINGS,
-                        ]
                     ]
                 ]
             ])
