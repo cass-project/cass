@@ -3,6 +3,7 @@ namespace Domain\Profile\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
 use Domain\Profile\Exception\NotOwnProfileException;
+use Domain\Profile\Exception\ProfileNotFoundException;
 use Domain\Profile\Middleware\Request\InterestingInRequest;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -11,19 +12,28 @@ class InterestingInPutCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $profileId = (int)$request->getAttribute('profileId');
+        try {
+            $profileId = (int) $request->getAttribute('profileId');
+            $profile = $this->profileService->getProfileById($profileId);
 
-        $this->validation->validateIsProfileOwnedByAccount(
-            $this->currentAccountService->getCurrentAccount(),
-            $this->profileService->getProfileById($profileId)
-        );
+            $this->validation->validateIsProfileOwnedByAccount(
+                $this->currentAccountService->getCurrentAccount(),
+                $this->profileService->getProfileById($profileId)
+            );
 
-        $parameters = (new InterestingInRequest($request))->getParameters();
+            $this->profileService->setInterestingInThemes($profileId, array_map('intval', (
+            new InterestingInRequest($request))->getParameters()->getThemeIds()
+            ));
 
-        $this->profileService->setInterestingInParameters($profileId, $parameters);
+            $responseBuilder->setStatusSuccess()->setJson([
+                'interesting_in_ids' => $profile->getInterestingInIds()
+            ]);
+        } catch (ProfileNotFoundException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
+        }
 
-        return $responseBuilder
-            ->setStatusSuccess()
-            ->build();
+        return $responseBuilder->build();
     }
 }

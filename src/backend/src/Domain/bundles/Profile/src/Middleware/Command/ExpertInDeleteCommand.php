@@ -2,6 +2,7 @@
 namespace Domain\Profile\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
+use Domain\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -9,19 +10,30 @@ class ExpertInDeleteCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $profileId = (int) $request->getAttribute('profileId');
+        try {
+            $profileId = (int) $request->getAttribute('profileId');
+            $profile = $this->profileService->getProfileById($profileId);
 
-        $this->validation->validateIsProfileOwnedByAccount(
-            $this->currentAccountService->getCurrentAccount(),
-            $this->profileService->getProfileById($profileId)
-        );
+            $this->validation->validateIsProfileOwnedByAccount(
+                $this->currentAccountService->getCurrentAccount(),
+                $this->profileService->getProfileById($profileId)
+            );
 
-        $expertInParameters = explode(',', $request->getAttribute('theme_ids'));
+            $themeIds = array_map('intval', explode(',', $request->getAttribute('theme_ids')));
 
-        $this->profileService->deleteExpertsInParameters($profileId, $expertInParameters);
+            $this->profileService->setExpertsInThemes($profileId, array_filter($profile->getExpertInIds(), function (int $themeId) use ($themeIds) {
+                return !in_array($themeId, $themeIds);
+            }));
 
-        return $responseBuilder
-            ->setStatusSuccess()
-            ->build();
+            $responseBuilder->setStatusSuccess()->setJson([
+                'expert_in_ids' => $profile->getExpertInIds()
+            ]);
+        } catch (ProfileNotFoundException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
+        }
+
+        return $responseBuilder->build();
     }
 }

@@ -48,7 +48,8 @@ class ProfileService
         CollectionService $collectionService,
         Filesystem $imagesFlySystem,
         AvatarService $avatarService
-    ) {
+    )
+    {
         $this->validation = $validationService;
         $this->profileRepository = $profileRepository;
         $this->collectionService = $collectionService;
@@ -110,8 +111,7 @@ class ProfileService
         $account = $profile->getAccount();
 
         $this->validation
-            ->validateIsProfileOwnedByAccount($account, $profile)
-        ;
+            ->validateIsProfileOwnedByAccount($account, $profile);
 
         if ($account->getProfiles()->count() === 1) {
             throw new LastProfileException('This is your last profile. Sorry you need at least one profile per account.');
@@ -159,20 +159,20 @@ class ProfileService
         return $profile->getImages();
     }
 
-    public function setInterestingInThemes(int $profileId, InterestingInParameters $inParameters): Profile
+    public function setInterestingInThemes(int $profileId, array $themeIds): Profile
     {
         $profile = $this->getProfileById($profileId);
-        $profile->setInterestingInIds($inParameters->getThemeIds());
+        $profile->setInterestingInIds($themeIds);
 
         $this->profileRepository->saveProfile($profile);
 
         return $profile;
     }
 
-    public function setExpertsInThemes(int $profileId, ExpertInParameters $expertInParameters): Profile
+    public function setExpertsInThemes(int $profileId, array $themeIds): Profile
     {
         $profile = $this->getProfileById($profileId);
-        $profile->setExpertInIds($expertInParameters->getThemeIds());
+        $profile->setExpertInIds($themeIds);
 
         $this->profileRepository->saveProfile($profile);
 

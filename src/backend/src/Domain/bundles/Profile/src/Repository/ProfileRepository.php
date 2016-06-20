@@ -12,7 +12,7 @@ class ProfileRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
 
-        if($profile->isPersisted()) {
+        if ($profile->isPersisted()) {
             throw new \Exception('Attempt to recreate profile entity');
         }
 
@@ -39,7 +39,7 @@ class ProfileRepository extends EntityRepository
     {
         $result = $this->find($profileId);
 
-        if($result === null) {
+        if ($result === null) {
             throw new ProfileNotFoundException("Entity with ID {$profileId} not found");
         }
 
@@ -50,7 +50,7 @@ class ProfileRepository extends EntityRepository
     {
         $profileIds = array_filter($profileIds, 'is_integer');
 
-        if(! count($profileIds)) {
+        if (!count($profileIds)) {
             throw new \Exception('No profile ids available');
         }
 

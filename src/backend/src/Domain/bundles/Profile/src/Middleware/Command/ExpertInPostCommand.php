@@ -2,6 +2,7 @@
 namespace Domain\Profile\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
+use Domain\Profile\Exception\ProfileNotFoundException;
 use Domain\Profile\Middleware\Request\ExpertInRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -10,20 +11,29 @@ class ExpertInPostCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $profileId = (int)$request->getAttribute('profileId');
+        try {
+            $profileId = (int) $request->getAttribute('profileId');
+            $profile = $this->profileService->getProfileById($profileId);
 
-        $this->validation->validateIsProfileOwnedByAccount(
-            $this->currentAccountService->getCurrentAccount(),
-            $this->profileService->getProfileById($profileId)
-        );
+            $this->validation->validateIsProfileOwnedByAccount(
+                $this->currentAccountService->getCurrentAccount(),
+                $this->profileService->getProfileById($profileId)
+            );
 
-        $expertInRequest = new ExpertInRequest($request);
-        $expertInParameters = $expertInRequest->getParameters();
+            $themeIds = array_map('intval', (new ExpertInRequest($request))->getParameters()->getThemeIds());
+            $this->profileService->setExpertsInThemes($profileId, array_unique(array_merge($profile->getExpertInIds(), $themeIds)));
 
-        $this->profileService->mergeExpertsInParameters($profileId, $expertInParameters);
+            $responseBuilder
+                ->setStatusSuccess()
+                ->setJson([
+                    'expert_in_ids' => $profile->getExpertInIds()
+                ]);
+        } catch (ProfileNotFoundException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
+        }
 
-        return $responseBuilder
-            ->setStatusSuccess()
-            ->build();
+        return $responseBuilder->build();
     }
 }

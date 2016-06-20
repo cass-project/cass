@@ -171,7 +171,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity
 
     public function setInterestingInIds(array $themeIds): array
     {
-        $this->interestingInIds = array_filter($themeIds, 'is_int');
+        $this->interestingInIds = array_unique(array_filter($themeIds, 'is_int'));
     }
 
     public function getExpertInIds(): array
@@ -181,6 +181,6 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity
 
     public function setExpertInIds(array $themeIds): array
     {
-        $this->expertInIds = array_filter($themeIds, 'is_int');
+        $this->expertInIds = array_unique(array_filter($themeIds, 'is_int'));
     }
 }
