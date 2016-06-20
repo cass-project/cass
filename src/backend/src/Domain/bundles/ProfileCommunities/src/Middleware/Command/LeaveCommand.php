@@ -1,16 +1,28 @@
 <?php
 namespace Domain\ProfileCommunities\Middleware\Command;
 
+use Application\REST\Response\ResponseBuilder;
+use Domain\ProfileCommunities\Exception\AlreadyLeavedException;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class LeaveCommand extends Command
 {
-    public function __invoke(ServerRequestInterface $request) 
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $communitySID = $request->getAttribute('communitySID');
+        try {
+            $communitySID = $request->getAttribute('communitySID');
 
-        $this->profileCommunitiesService->leaveCommunity($communitySID);
+            $this->profileCommunitiesService->leaveCommunity($communitySID);
 
-        return [];
+            $responseBuilder
+                ->setStatusSuccess();
+        }catch(AlreadyLeavedException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setStatusConflict();
+        }
+
+        return $responseBuilder->build();
     }
 }

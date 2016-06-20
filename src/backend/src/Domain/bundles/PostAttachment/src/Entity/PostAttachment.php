@@ -50,7 +50,7 @@ class PostAttachment implements JSONSerializable, IdEntity
         $this->dateCreatedOn = new \DateTime();
     }
 
-    public function toJSON() {
+    public function toJSON(): array {
         return [
             'id' => $this->isPersisted() ? $this->getId() : '#NEW_POST_ATTACHMENT',
             'date_created_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),

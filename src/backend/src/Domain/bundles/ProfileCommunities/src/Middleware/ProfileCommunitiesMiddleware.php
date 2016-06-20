@@ -2,43 +2,33 @@
 namespace Domain\ProfileCommunities\Middleware;
 
 use Application\REST\Response\GenericResponseBuilder;
-use Domain\ProfileCommunities\Exception\AlreadyJoinedException;
-use Domain\ProfileCommunities\Exception\AlreadyLeavedException;
-use Domain\ProfileCommunities\Middleware\Command\Command;
-use Domain\ProfileCommunities\Service\ProfileCommunitiesService;
+use Application\Service\CommandService;
+use Domain\ProfileCommunities\Middleware\Command\JoinCommand;
+use Domain\ProfileCommunities\Middleware\Command\LeaveCommand;
+use Domain\ProfileCommunities\Middleware\Command\ListCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
 
 class ProfileCommunitiesMiddleware implements MiddlewareInterface
 {
-    /** @var ProfileCommunitiesService */
-    private $profileCommunitiesService;
+    /** @var CommandService */
+    private $commandService;
 
-    public function __construct(ProfileCommunitiesService $profileCommunitiesService) {
-        $this->profileCommunitiesService = $profileCommunitiesService;
+    public function __construct(CommandService $commandService)
+    {
+        $this->commandService = $commandService;
     }
 
     public function __invoke(Request $request, Response $response, callable $out = null) {
         $responseBuilder = new GenericResponseBuilder($response);
 
-        try {
-            $command = Command::factory($request, $this->profileCommunitiesService);
-            $result = $command($request);
+        $resolver = $this->commandService->createResolverBuilder()
+            ->attachDirect('join', JoinCommand::class)
+            ->attachDirect('leave', LeaveCommand::class)
+            ->attachDirect('joined-communities', ListCommand::class)
+            ->resolve($request);
 
-            $responseBuilder
-                ->setStatusSuccess()
-                ->setJson($result);
-        }catch(AlreadyJoinedException $e) {
-            $responseBuilder
-                ->setStatus(409)
-                ->setError($e);
-        }catch(AlreadyLeavedException $e) {
-            $responseBuilder
-                ->setStatus(409)
-                ->setError($e);
-        }
-
-        return $responseBuilder->build();
+        return $resolver->run($request, $responseBuilder);
     }
 }

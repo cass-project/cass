@@ -29,11 +29,13 @@ class ProfileCommunitiesService
         $this->currentAccountService = $currentAccountService;
     }
 
-    private function getCurrentProfileId(): int {
+    private function getCurrentProfileId(): int
+    {
         return $this->currentAccountService->getCurrentProfile()->getId();
     }
 
-    public function joinToCommunity(string $communitySID): ProfileCommunityEQ {
+    public function joinToCommunity(string $communitySID): ProfileCommunityEQ
+    {
         $communityId = $this->communityRepository->getCommunityBySID($communitySID)->getId();
 
         if($this->hasBookmarks($communityId)) {
@@ -46,11 +48,12 @@ class ProfileCommunitiesService
         );
     }
 
-    public function leaveCommunity(string $communitySID) {
+    public function leaveCommunity(string $communitySID)
+    {
 
         $communityId = $this->communityRepository->getCommunityBySID($communitySID)->getId();
 
-        if(! $this->hasBookmarks($communityId)) {
+        if(!$this->hasBookmarks($communityId)) {
             throw new AlreadyLeavedException(sprintf('You are not joined to this community'));
         }
 
@@ -60,13 +63,15 @@ class ProfileCommunitiesService
         );
     }
 
-    public function getBookmarksOfCurrentProfile(): array {
+    public function getBookmarksOfCurrentProfile(): array
+    {
         return $this->profileCommunitiesRepository->getEntitiesByProfile(
             $this->getCurrentProfileId()
         );
     }
-    
-    public function hasBookmarks(int $communityID): bool {
+
+    public function hasBookmarks(int $communityID): bool
+    {
         return $this->profileCommunitiesRepository->hasBookmark($this->getCurrentProfileId(), $communityID);
     }
 }
