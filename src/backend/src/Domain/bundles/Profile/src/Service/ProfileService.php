@@ -13,8 +13,6 @@ use Domain\Profile\Entity\Profile\Greetings\Greetings;
 use Domain\Profile\Exception\LastProfileException;
 use Domain\Profile\Exception\MaxProfilesReachedException;
 use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
-use Domain\Profile\Middleware\Parameters\ExpertInParameters;
-use Domain\Profile\Middleware\Parameters\InterestingInParameters;
 use Domain\Profile\Repository\ProfileRepository;
 use Domain\Profile\Strategy\ProfileImageStrategy;
 use Domain\Profile\Validation\ProfileValidationService;
@@ -135,6 +133,16 @@ class ProfileService
         $this->profileRepository->saveProfile($profile);
 
         return $profile;
+    }
+
+    public function setGender(int $profileId, Gender $gender): Gender
+    {
+        $profile = $this->getProfileById($profileId);
+        $profile->setGender($gender);
+
+        $this->profileRepository->saveProfile($profile);
+
+        return $profile->getGender();
     }
 
     public function uploadImage(int $profileId, UploadImageParameters $parameters): ImageCollection

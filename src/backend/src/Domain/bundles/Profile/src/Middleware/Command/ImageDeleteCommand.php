@@ -18,7 +18,7 @@ class ImageDeleteCommand extends Command
                 ->setJson([
                     'image' => $image->toJSON()
                 ]);
-        }catch(ProfileNotFoundException $e) {
+        } catch (ProfileNotFoundException $e) {
             $responseBuilder
                 ->setError($e)
                 ->setStatusNotFound();

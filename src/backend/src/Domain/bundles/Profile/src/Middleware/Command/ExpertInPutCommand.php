@@ -26,7 +26,7 @@ class ExpertInPutCommand extends Command
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson([
-                    'expert_in_inds' => $profile->getExpertInIds()
+                    'expert_in_ids' => $profile->getExpertInIds()
                 ]);
         } catch (ProfileNotFoundException $e) {
             $responseBuilder

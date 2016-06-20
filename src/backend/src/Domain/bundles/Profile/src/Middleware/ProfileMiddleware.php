@@ -3,10 +3,7 @@ namespace Domain\Profile\Middleware;
 
 use Application\Service\CommandService;
 use Application\REST\Response\GenericResponseBuilder;
-use Domain\Profile\Exception\NoThemesToMerge;
 use Domain\Profile\Exception\ProfileNotFoundException;
-use Domain\Profile\Exception\UnknownGreetingsException;
-use Domain\Profile\Middleware\Command\Command;
 use Domain\Profile\Middleware\Command\CreateCommand;
 use Domain\Profile\Middleware\Command\DeleteCommand;
 use Domain\Profile\Middleware\Command\EditPersonalCommand;
@@ -21,7 +18,6 @@ use Domain\Profile\Middleware\Command\InterestingInDeleteCommand;
 use Domain\Profile\Middleware\Command\InterestingInPostCommand;
 use Domain\Profile\Middleware\Command\InterestingInPutCommand;
 use Domain\Profile\Middleware\Command\SetGenderCommand;
-use Domain\Profile\Middleware\Command\SwitchCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
@@ -47,7 +43,6 @@ class ProfileMiddleware implements MiddlewareInterface
             ->attachDirect("image-upload", ImageUploadCommand::class)
             ->attachDirect('image-delete', ImageDeleteCommand::class)
             ->attachDirect("edit-personal", EditPersonalCommand::class)
-            ->attachDirect("switch", SwitchCommand::class)
             ->attachDirect("expert-in", ExpertInPutCommand::class, 'put')
             ->attachDirect("expert-in", ExpertInPostCommand::class, 'post')
             ->attachDirect("expert-in", ExpertInDeleteCommand::class, 'delete')

@@ -9,7 +9,8 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class ImageUploadCommand extends Command
 {
-    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): Response {
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): Response
+    {
         try {
             $image = $this->profileService->uploadImage(
                 $request->getAttribute('profileId'),
@@ -21,7 +22,7 @@ class ImageUploadCommand extends Command
                 ->setJson([
                     'image' => $image->toJSON()
                 ]);
-        }catch (ProfileNotFoundException $e) {
+        } catch (ProfileNotFoundException $e) {
             $responseBuilder
                 ->setError($e)
                 ->setStatusNotFound();
