@@ -30,7 +30,7 @@ import {AuthService} from "../../../../../auth/service/AuthService";
 export class ImageTab
 {
     upload: UploadImageModalControl = new UploadImageModalControl();
-    deleteProcessVisible = false;
+    private deleteProcessVisible = false;
 
     constructor(private uploadImageService: UploadImageService, private profileRESTService: ProfileRESTService) {
         uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(profileRESTService));
