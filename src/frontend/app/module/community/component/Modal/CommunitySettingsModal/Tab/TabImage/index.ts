@@ -1,6 +1,9 @@
 import {Component} from "angular2/core";
 
 import {ImageCropper, ImageCropperService} from "../../../../../../util/component/ImageCropper";
+import {CommunitySettingsModalModel} from "../../model";
+import {CommunityImage} from "../../../../Elements/CommunityImage/index";
+import {UploadImageCropModel} from "../../../../../../util/component/UploadImage/strategy";
 
 @Component({
     selector: 'cass-community-settings-modal-tab-image',
@@ -12,23 +15,31 @@ import {ImageCropper, ImageCropperService} from "../../../../../../util/componen
         ImageCropperService
     ],
     directives: [
-        ImageCropper
+        ImageCropper,
+        CommunityImage
     ]
 })
 
 export class ImageTab {
 
-    private uploadImage;
-
-    constructor(public cropper: ImageCropperService) {
-    }
+    constructor(public model: CommunitySettingsModalModel, public cropper: ImageCropperService) {}
 
     onFileChange($event) {
         this.cropper.reset();
-        setTimeout(()=>{
-            this.uploadImage = $event.target.files[0];
-            this.cropper.setFile(this.uploadImage);
-        },0)
+        setTimeout(()=> {
+            this.cropper.setFile($event.target.files[0]);
+        }, 0);
     }
-
+    
+    onChange() {
+        this.model.new_image = {
+            uploadImage: this.cropper.getFile(),
+            uploadImageCrop:<UploadImageCropModel>{
+                x: this.cropper.getX(),
+                y: this.cropper.getY(),
+                width: this.cropper.getWidth(),
+                height: this.cropper.getHeight()
+            }
+        }
+    }
 }
