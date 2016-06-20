@@ -9,11 +9,13 @@ use Cocur\Chain\Chain;
 
 class ReadAppConfigScript implements BootstrapScript
 {
-    public function __invoke(AppBuilder $appBuilder) {
+    public function __invoke(AppBuilder $appBuilder)
+    {
         $configService = new ConfigService();
 
         $this->mergeBundleConfigs($configService, $appBuilder->getBundleService()->getBundles());
         $this->mergeProvideConfig($configService, $configService->get('php-di')['paths']['backend']);
+        $this->mergeEnvConfig($configService, $this->getEnv($configService, $appBuilder));
 
         $appBuilder->setConfigService($configService);
     }
@@ -25,13 +27,13 @@ class ReadAppConfigScript implements BootstrapScript
 
             if(is_dir($dir)) {
                 Chain::create(scandir($dir))
-                    ->filter(function ($input) use ($dir) {
+                    ->filter(function($input) use ($dir) {
                         return is_file($dir . '/' . $input) && preg_match('/\.config.php$/', $input);
                     })
-                    ->map(function ($input) use ($dir) {
+                    ->map(function($input) use ($dir) {
                         return require $dir . '/' . $input;
                     })
-                    ->map(function (array $config) use ($configService) {
+                    ->map(function(array $config) use ($configService) {
                         $configService->merge($config);
 
                         return null;
@@ -49,5 +51,40 @@ class ReadAppConfigScript implements BootstrapScript
 
             $configService->merge($provideConfig);
         }
+    }
+
+    private function mergeEnvConfig(ConfigService $configService, string $env)
+    {
+        if(!in_array($env, ['development', 'test', 'production'])) {
+            throw new \Exception(sprintf('Invalid environment `%s`', $env));
+        }
+
+        $configService->merge([
+            'ENVIRONMENT' => $env,
+            'php-di' => [
+                'config.env' => $env
+            ]
+        ]);
+
+        if($configService->has('env')) {
+            $envConfigs = $configService->get('env');
+
+            if(isset($envConfigs[$env]) && is_array($envConfigs[$env])) {
+                $configService->merge($envConfigs[$env]);
+            }
+        }
+    }
+
+    private function getEnv(ConfigService $configService, AppBuilder $appBuilder): string
+    {
+        $env = 'development';
+
+        if($appBuilder->isEnvSpecified()) {
+            $env = $appBuilder->getEnv();
+        } else if($configService->has('ENVIRONMENT')) {
+            $env = $configService->get('ENVIRONMENT');
+        }
+
+        return $env;
     }
 }

@@ -10,7 +10,7 @@ namespace PhpUnitBootstrap {
     $app = (new \Application\Bootstrap\AppBuilder([
         new \Application\ApplicationBundle(),
         new \Domain\DomainBundle()
-    ]))->disableSAPIEmitter()->build();
+    ]))->disableSAPIEmitter()->build('test');
 
     MiddlewareTestCase::$app = $app;
 }

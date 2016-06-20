@@ -3,11 +3,11 @@ namespace Domain\Collection\Image;
 
 use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Image\Image;
-use Domain\Avatar\Strategy\SquareAvatarStrategy;
+use Domain\Avatar\Strategy\SquareImageStrategy;
 use Domain\Collection\Entity\Collection;
 use League\Flysystem\FilesystemInterface;
 
-final class CollectionImageStrategy extends SquareAvatarStrategy
+final class CollectionImageStrategy extends SquareImageStrategy
 {
     const DEFAULT_IMAGE_PUBLIC_PATH = '/dist/assets/collection/collection-default-avatar.png';
     const DEFAULT_IMAGE_STORAGE_DIR = __DIR__.'/../../../../../../../www/app/dist/assets/collection/collection-default-avatar.png';

@@ -2,8 +2,9 @@
 namespace Application;
 
 return [
+    'ENVIRONMENT' => 'development',
+    
     'php-di' => [
-        'config.env' => 'development',
         'config.console' => [
             'title' => 'CASS Console',
             'version' => 'dev'

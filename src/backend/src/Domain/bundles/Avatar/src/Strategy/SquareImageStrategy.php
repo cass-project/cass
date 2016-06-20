@@ -5,7 +5,7 @@ use Domain\Avatar\Exception\ImageTooSmallException;
 use Domain\Avatar\Exception\InvalidRatioException;
 use Intervention\Image\Image;
 
-abstract class SquareAvatarStrategy implements AvatarStrategy
+abstract class SquareImageStrategy implements ImageStrategy
 {
     const MIN_SIZE = 64;
 

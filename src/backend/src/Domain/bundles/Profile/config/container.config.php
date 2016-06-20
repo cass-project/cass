@@ -13,6 +13,7 @@ use Domain\Profile\Repository\ProfileRepository;
 use Domain\Profile\Service\ProfileService;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
+use League\Flysystem\Memory\MemoryAdapter;
 
 return [
     'php-di' => [
@@ -20,9 +21,31 @@ return [
             return sprintf('%s/profile/by-sid/avatar/', $container->get('config.paths.assets.dir'));
         }),
         ProfileRepository::class => factory(new DoctrineRepositoryFactory(Profile::class)),
-        ProfileService::class => object()
-            ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                return new Filesystem(new Local($container->get('config.paths.profile.avatar.dir')));
-            })),
     ],
+    'env' => [
+        'development' => [
+            'php-di' => [
+                ProfileService::class => object()
+                    ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
+                        return new Filesystem(new Local($container->get('config.paths.profile.avatar.dir')));
+                    })),
+            ]
+        ],
+        'production' => [
+            'php-di' => [
+                ProfileService::class => object()
+                    ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
+                        return new Filesystem(new Local($container->get('config.paths.profile.avatar.dir')));
+                    })),
+            ]
+        ],
+        'test' => [
+            'php-di' => [
+                ProfileService::class => object()
+                    ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
+                        return new Filesystem(new MemoryAdapter($container->get('config.paths.profile.avatar.dir')));
+                    })),
+            ]
+        ]
+    ]
 ];

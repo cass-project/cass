@@ -1,6 +1,7 @@
 <?php
 namespace Application\Bootstrap;
 
+use DI\Container;
 use Application\Bootstrap\Scripts\AppInit\EventsSetupScript;
 use Application\Bootstrap\Scripts\AppInit\PipeMiddlewareScript;
 use Application\Bootstrap\Scripts\AppInit\RoutesSetupScript;
@@ -11,7 +12,6 @@ use Application\Bootstrap\Scripts\Bootstrap\ReadAppConfigScript;
 use Application\PHPUnit\PHPUnitEmitter;
 use Application\Service\BundleService;
 use Application\Service\ConfigService;
-use DI\Container;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Expressive\Application;
 use Zend\Expressive\Emitter\EmitterStack;
@@ -25,7 +25,7 @@ class AppBuilder
         BootstrapDIContainerScript::class,
         InjectSchemaServiceScript::class
     ];
-    
+
     const DEFAULT_INIT_APP = [
         RoutesSetupScript::class,
         EventsSetupScript::class,
@@ -57,16 +57,18 @@ class AppBuilder
     private $useSAPIEmitter = true;
 
     public function __construct(
-        array $rootBundles, 
-        array $initScripts = self::DEFAULT_INIT, 
+        array $rootBundles,
+        array $initScripts = self::DEFAULT_INIT,
         array $initAppScripts = self::DEFAULT_INIT_APP
-    ) {
+    )
+    {
         $this->rootBundles = $rootBundles;
         $this->initScripts = $initScripts;
         $this->initAppScripts = $initAppScripts;
     }
 
-    public function build($env = null): Application {
+    public function build($env = null): Application
+    {
         $this->env = $env;
 
         $router = new FastRouteRouter();
@@ -75,18 +77,18 @@ class AppBuilder
 
         if($this->useSAPIEmitter) {
             $emitter->push(new SapiEmitter());
-        }else{
+        } else {
             $emitter->push(new PHPUnitEmitter());
         }
 
-        foreach ($this->initScripts as $initScriptClassName) {
+        foreach($this->initScripts as $initScriptClassName) {
             $script = new $initScriptClassName;
             $script($this);
         }
-        
+
         $app = new Application($router, $this->container, $finalHandler, $emitter);
 
-        foreach ($this->initAppScripts as $initAppScriptClassName) {
+        foreach($this->initAppScripts as $initAppScriptClassName) {
             $script = new $initAppScriptClassName;
             $script($app);
         }
@@ -96,55 +98,66 @@ class AppBuilder
         return $app;
     }
 
-    public function isEnvSpecified(): bool {
+    public function isEnvSpecified(): bool
+    {
         return $this->env !== null;
     }
 
-    public function getEnv(): string {
+    public function getEnv(): string
+    {
         return $this->env;
     }
 
-    public function getRootBundles(): array {
+    public function getRootBundles(): array
+    {
         return $this->rootBundles;
     }
 
-    public function enableSAPIEmitter(): self {
+    public function enableSAPIEmitter(): self
+    {
         $this->useSAPIEmitter = true;
 
         return $this;
     }
 
-    public function disableSAPIEmitter(): self {
+    public function disableSAPIEmitter(): self
+    {
         $this->useSAPIEmitter = false;
 
         return $this;
     }
 
-    public function setBundleService(BundleService $bundleService): self {
+    public function setBundleService(BundleService $bundleService): self
+    {
         $this->bundleService = $bundleService;
 
         return $this;
     }
 
-    public function getBundleService(): BundleService {
+    public function getBundleService(): BundleService
+    {
         return $this->bundleService;
     }
 
-    public function getConfigService(): ConfigService {
+    public function getConfigService(): ConfigService
+    {
         return $this->configService;
     }
 
-    public function setConfigService(ConfigService $configService): self {
+    public function setConfigService(ConfigService $configService): self
+    {
         $this->configService = $configService;
 
         return $this;
     }
 
-    public function getContainer(): Container {
+    public function getContainer(): Container
+    {
         return $this->container;
     }
 
-    public function setContainer(Container $container): self {
+    public function setContainer(Container $container): self
+    {
         $this->container = $container;
 
         return $this;

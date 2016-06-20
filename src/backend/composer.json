@@ -55,7 +55,8 @@
     "zendframework/zend-servicemanager": "^3.0",
     "league/flysystem": "^1.0",
     "intervention/image": "^2.3",
-    "evenement/evenement": "^2.0"
+    "evenement/evenement": "^2.0",
+    "league/flysystem-memory": "^1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.3"

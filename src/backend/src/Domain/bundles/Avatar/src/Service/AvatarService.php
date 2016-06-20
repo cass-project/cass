@@ -7,7 +7,7 @@ use Domain\Avatar\Exception\InvalidRatioException;
 use Domain\Avatar\Image\Image;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;
-use Domain\Avatar\Strategy\AvatarStrategy;
+use Domain\Avatar\Strategy\ImageStrategy;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Image as ImageLayer;
 use League\Flysystem\FilesystemInterface;
@@ -25,7 +25,7 @@ final class AvatarService
         $this->imageManager = $imageManager;
     }
 
-    public function makeImages(AvatarStrategy $strategy, ImageLayer $source): ImageCollection
+    public function makeImages(ImageStrategy $strategy, ImageLayer $source): ImageCollection
     {
         $collection = new ImageCollection();
 
@@ -47,7 +47,7 @@ final class AvatarService
         return $collection;
     }
 
-    public function defaultImage(AvatarStrategy $strategy)
+    public function defaultImage(ImageStrategy $strategy)
     {
         $oldCollectionUID = null;
 
@@ -68,7 +68,7 @@ final class AvatarService
         }
     }
 
-    public function uploadImage(AvatarStrategy $strategy, UploadImageParameters $parameters)
+    public function uploadImage(ImageStrategy $strategy, UploadImageParameters $parameters)
     {
         $oldCollectionUID = null;
 
@@ -111,7 +111,7 @@ final class AvatarService
         }
     }
 
-    public function destroyImages(AvatarStrategy $strategy)
+    public function destroyImages(ImageStrategy $strategy)
     {
         $fs = $strategy->getFilesystem();
         $dir = (string) $strategy->getEntityId();
@@ -121,11 +121,11 @@ final class AvatarService
         }
     }
 
-    public function generateImage(AvatarStrategy $strategy) {
+    public function generateImage(ImageStrategy $strategy) {
         $this->defaultImage($strategy);
     }
 
-    private function createImage(AvatarStrategy $strategy, ImageLayer $source, string $collectionUID, int $size): Image
+    private function createImage(ImageStrategy $strategy, ImageLayer $source, string $collectionUID, int $size): Image
     {
         $ratio = array_filter(explode(':', $strategy->getRatio()), function($input) {
             return is_numeric($input);

@@ -12,6 +12,7 @@ use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Community\Service\CommunityService;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
+use League\Flysystem\Memory\MemoryAdapter;
 
 return [
     'php-di' => [
@@ -19,9 +20,31 @@ return [
             return sprintf('%s/community/by-sid/avatar/', $container->get('config.paths.assets.dir'));
         }),
         CommunityRepository::class => factory(new DoctrineRepositoryFactory(Community::class)),
-        CommunityService::class => object()
-            ->constructorParameter('imageFileSystem', factory(function(Container $container) {
-                return new Filesystem(new Local($container->get('config.paths.community.avatar.dir')));
-            })),
     ],
+    'env' => [
+        'production' => [
+            'php-di' => [
+                CommunityService::class => object()
+                    ->constructorParameter('imageFileSystem', factory(function(Container $container) {
+                        return new Filesystem(new Local($container->get('config.paths.community.avatar.dir')));
+                    })),
+            ]
+        ],
+        'development' => [
+            'php-di' => [
+                CommunityService::class => object()
+                    ->constructorParameter('imageFileSystem', factory(function(Container $container) {
+                        return new Filesystem(new Local($container->get('config.paths.community.avatar.dir')));
+                    })),
+            ]
+        ],
+        'test' => [
+            'php-di' => [
+                CommunityService::class => object()
+                    ->constructorParameter('imageFileSystem', factory(function(Container $container) {
+                        return new Filesystem(new MemoryAdapter($container->get('config.paths.community.avatar.dir')));
+                    })),
+            ]
+        ],
+    ]
 ];

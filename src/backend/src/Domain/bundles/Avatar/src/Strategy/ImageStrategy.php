@@ -5,7 +5,7 @@ use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Image\Image;
 use League\Flysystem\FilesystemInterface;
 
-interface AvatarStrategy
+interface ImageStrategy
 {
     public function getEntity(): ImageEntity;
     public function getEntityId(): string;

@@ -8,11 +8,18 @@ class ConfigService
      */
     private $config = [];
 
-    public function all() {
+    public function all()
+    {
         return $this->config;
     }
 
-    public function get($key) {
+    public function has($key)
+    {
+        return isset($this->config[$key]);
+    }
+
+    public function get($key)
+    {
         if(!(isset($this->config[$key]))) {
             throw new \OutOfBoundsException(sprintf('Config key `%s` not found', $key));
         }
@@ -20,7 +27,8 @@ class ConfigService
         return $this->config[$key];
     }
 
-    public function merge($config) {
+    public function merge($config)
+    {
 
         $this->config = array_merge_recursive($this->config, $config);
     }
