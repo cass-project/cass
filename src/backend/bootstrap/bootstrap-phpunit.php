@@ -11,12 +11,6 @@ namespace PhpUnitBootstrap {
         new \Application\ApplicationBundle(),
         new \Domain\DomainBundle()
     ]))->disableSAPIEmitter()->build();
-    
-    $app->getEmitter();
-    
-    /** @var \DI\Container $container */
-    $container = $app->getContainer();
-    $container->set('config.env', 'test');
 
     MiddlewareTestCase::$app = $app;
 }

@@ -9,8 +9,8 @@ use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Avatar\Strategy\AvatarStrategy;
 use Intervention\Image\ImageManager;
-use League\Flysystem\Filesystem;
 use Intervention\Image\Image as ImageLayer;
+use League\Flysystem\FilesystemInterface;
 
 final class AvatarService
 {
@@ -19,27 +19,18 @@ final class AvatarService
     /** @var ImageManager */
     private $imageManager;
 
-    /** @var string */
-    private $env;
-
     public function __construct(
-        ImageManager $imageManager,
-        string $env
+        ImageManager $imageManager
     ) {
         $this->imageManager = $imageManager;
-        $this->env = $env;
     }
 
     public function makeImages(AvatarStrategy $strategy, ImageLayer $source): ImageCollection
     {
         $collection = new ImageCollection();
 
-        if($this->env === 'test') {
-            $sizes = [64];
-        }else{
-            $sizes = $strategy->getSizes();
-            sort($sizes);
-        }
+        $sizes = $strategy->getSizes();
+        sort($sizes);
 
         foreach($sizes as $size) {
             if((! $collection->hasImage($size)) && ($source->getWidth() >= $size)) {
@@ -161,7 +152,7 @@ final class AvatarService
         );
     }
 
-    private function touchDir(Filesystem $fs, string $entityId, string $collectionUID, string $imageId): string
+    private function touchDir(FilesystemInterface $fs, string $entityId, string $collectionUID, string $imageId): string
     {
         $resultPath = sprintf('%s/%s/%s', $entityId, $collectionUID, $imageId);
 

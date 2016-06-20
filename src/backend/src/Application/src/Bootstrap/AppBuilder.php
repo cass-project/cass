@@ -32,6 +32,9 @@ class AppBuilder
         PipeMiddlewareScript::class,
     ];
 
+    /** @var string */
+    private $env;
+
     /** @var string[] */
     private $rootBundles;
 
@@ -53,10 +56,52 @@ class AppBuilder
     /** @var bool */
     private $useSAPIEmitter = true;
 
-    public function __construct(array $rootBundles, array $initScripts = self::DEFAULT_INIT, array $initAppScripts = self::DEFAULT_INIT_APP) {
+    public function __construct(
+        array $rootBundles, 
+        array $initScripts = self::DEFAULT_INIT, 
+        array $initAppScripts = self::DEFAULT_INIT_APP
+    ) {
         $this->rootBundles = $rootBundles;
         $this->initScripts = $initScripts;
         $this->initAppScripts = $initAppScripts;
+    }
+
+    public function build($env = null): Application {
+        $this->env = $env;
+
+        $router = new FastRouteRouter();
+        $finalHandler = new FinalHandler();
+        $emitter = new EmitterStack();
+
+        if($this->useSAPIEmitter) {
+            $emitter->push(new SapiEmitter());
+        }else{
+            $emitter->push(new PHPUnitEmitter());
+        }
+
+        foreach ($this->initScripts as $initScriptClassName) {
+            $script = new $initScriptClassName;
+            $script($this);
+        }
+        
+        $app = new Application($router, $this->container, $finalHandler, $emitter);
+
+        foreach ($this->initAppScripts as $initAppScriptClassName) {
+            $script = new $initAppScriptClassName;
+            $script($app);
+        }
+
+        $this->container->set(Application::class, $app);
+
+        return $app;
+    }
+
+    public function isEnvSpecified(): bool {
+        return $this->env !== null;
+    }
+
+    public function getEnv(): string {
+        return $this->env;
     }
 
     public function getRootBundles(): array {
@@ -103,33 +148,5 @@ class AppBuilder
         $this->container = $container;
 
         return $this;
-    }
-
-    public function build(): Application {
-        $router = new FastRouteRouter();
-        $finalHandler = new FinalHandler();
-        $emitter = new EmitterStack();
-
-        if($this->useSAPIEmitter) {
-            $emitter->push(new SapiEmitter());
-        }else{
-            $emitter->push(new PHPUnitEmitter());
-        }
-
-        foreach ($this->initScripts as $initScriptClassName) {
-            $script = new $initScriptClassName;
-            $script($this);
-        }
-        
-        $app = new Application($router, $this->container, $finalHandler, $emitter);
-
-        foreach ($this->initAppScripts as $initAppScriptClassName) {
-            $script = new $initAppScriptClassName;
-            $script($app);
-        }
-
-        $this->container->set(Application::class, $app);
-
-        return $app;
     }
 }
