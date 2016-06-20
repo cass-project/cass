@@ -1,6 +1,6 @@
 declare var Cropper;
 
-import {Injectable} from "angular2/core";
+import {Injectable, Output, EventEmitter, OnDestroy, OnInit} from "angular2/core";
 import {Component} from "angular2/core";
 import {ViewChild} from "angular2/core";
 import {ElementRef} from "angular2/core";
@@ -68,11 +68,15 @@ export class ImageCropperService
         require('./style.shadow.scss')
     ]
 })
-export class ImageCropper
+export class ImageCropper implements OnInit, OnDestroy
 {
     private fileReader: FileReader;
 
     @ViewChild('cropImage') cropImage: ElementRef;
+    @Output("cropInit") cropInit = new EventEmitter<ImageCropper>();
+    @Output("cropStart") cropStart = new EventEmitter<ImageCropper>();
+    @Output("cropEnd") cropEnd = new EventEmitter<ImageCropper>();
+    @Output("cropMove") cropMove = new EventEmitter<ImageCropper>();
 
     constructor(private service: ImageCropperService) {}
 
@@ -94,11 +98,16 @@ export class ImageCropper
     private initCropperJS() {
         this.cropImage.nativeElement.src = this.fileReader.result;
 
+        this.cropImage.nativeElement.addEventListener('cropstart', ()=> {this.cropStart.emit(this); });
+        this.cropImage.nativeElement.addEventListener('cropend', ()=> {this.cropEnd.emit(this); });
+        this.cropImage.nativeElement.addEventListener('cropmove', ()=> {this.cropMove.emit(this); });
+
         if (this.service.cropper) {
             this.destroyCropperJS();
         }
 
         this.service.cropper = new Cropper(this.cropImage.nativeElement, this.service.options);
+        this.cropInit.emit(this);
     }
 
     private destroyCropperJS() {
