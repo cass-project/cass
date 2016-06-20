@@ -9,14 +9,14 @@ class EditCollectionParameters
     /** @var string */
     private $description;
 
-    /** @var int|null */
-    private $themeId;
+    /** @var int[] */
+    private $themeIds = [];
 
-    public function __construct(string $title, string $description, int $themeId = null)
+    public function __construct(string $title, string $description, array $themeIds = [])
     {
         $this->title = $title;
         $this->description = $description;
-        $this->themeId = $themeId;
+        $this->themeIds = $themeIds;
     }
 
     public function getTitle(): string
@@ -29,13 +29,8 @@ class EditCollectionParameters
         return $this->description;
     }
 
-    public function getThemeId(): int
+    public function getThemeIds(): array
     {
-        return $this->themeId;
-    }
-
-    public function hasThemeId(): bool
-    {
-        return $this->themeId !== null;
+        return $this->themeIds;
     }
 }

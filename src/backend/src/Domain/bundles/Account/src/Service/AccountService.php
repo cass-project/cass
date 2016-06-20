@@ -50,7 +50,7 @@ class AccountService
         $account
             ->setEmail($email)
             ->setPassword($this->passwordVerifyService->generatePassword($password));
-
+        
         $this->accountRepository->createAccount($account);
         $this->profileService->createProfileForAccount($account);
         $this->accountRepository->saveAccount($account);

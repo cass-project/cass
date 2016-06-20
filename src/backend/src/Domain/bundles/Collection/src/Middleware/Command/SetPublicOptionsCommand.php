@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class SetPublicOptionsCommand extends Command
 {
-    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface 
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
             $this->collectionService->setPublicOptions(
@@ -19,11 +19,11 @@ final class SetPublicOptionsCommand extends Command
             );
 
             $responseBuilder->setStatusSuccess();
-        }catch(InvalidCollectionOptionsException $e) {
+        } catch(InvalidCollectionOptionsException $e) {
             $responseBuilder
                 ->setStatusConflict()
                 ->setError($e);
-        }catch(CollectionNotFoundException $e) {
+        } catch(CollectionNotFoundException $e) {
             $responseBuilder
                 ->setStatusNotFound()
                 ->setError($e);

@@ -14,14 +14,15 @@ final class ImageUploadCommand extends Command
         try {
             $image = $this->communityService->uploadCommunityImage($request->getAttribute('communityId'), (new UploadImageRequest($request))->getParameters());
 
-            return $responseBuilder->setStatusSuccess()->setJson([
+            $responseBuilder->setStatusSuccess()->setJson([
                 'image' => $image->toJSON()
-            ])->build();
+            ]);
         }catch(ImageServiceException $e) {
-            return $responseBuilder
+            $responseBuilder
                 ->setError($e)
-                ->setStatus(422)
-                ->build();
+                ->setStatusUnprocessable();
         }
+
+        return $responseBuilder->build();
     }
 }

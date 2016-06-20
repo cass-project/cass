@@ -4,88 +4,48 @@ namespace Domain\Collection\Repository;
 use Application\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Domain\Collection\Entity\Collection;
-use Domain\Collection\Parameters\CreateCollectionParameters;
-use Domain\Collection\Parameters\EditCollectionParameters;
-use Domain\Collection\Parameters\SetPublicOptionsParameters;
-use Domain\Avatar\Image\ImageCollection;
-use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
-use Domain\Theme\Entity\Theme;
 
 class CollectionRepository extends EntityRepository
 {
-    public function createCollection(string $ownerSID, ImageCollection $images, CreateCollectionParameters $parameters): Collection {
+    public function createCollection(Collection $collection): Collection
+    {
         $em = $this->getEntityManager();
-
-        $profile = $em->getReference(Profile::class, $parameters->getAuthorProfileId()); /** @var Profile $profile */
-
-        $collection = new Collection(
-            $profile,
-            $ownerSID,
-            $parameters->getTitle(),
-            $parameters->getDescription(),
-            $parameters->hasThemeId() ? $em->getReference(Theme::class, $parameters->getThemeId()) : null
-        );
-
-        $collection->setImages($images);
-
         $em->persist($collection);
         $em->flush($collection);
 
         return $collection;
     }
 
-    public function getCollectionById(int $collectionId): Collection {
-        $result = $this->find($collectionId);
-
-        if ($result === null) {
-            throw new EntityNotFoundException(sprintf('Collection with ID `%d` not found', $collectionId));
-        }
-
-        return $result;
-    }
-
-    public function getCollectionsById(int $collectionIds): array
+    public function saveCollection(Collection $collection): Collection
     {
-        return $this->findBy(['id' => $collectionIds]);
+        $em = $this->getEntityManager();
+        $em->flush($collection);
+
+        return $collection;
     }
 
-    public function deleteCollection(int $collectionId) {
+    public function deleteCollection(int $collectionId)
+    {
         $collection = $this->getCollectionById($collectionId);
 
         $this->getEntityManager()->remove($collection);
         $this->getEntityManager()->flush($collection);
     }
 
-    public function editCollection(int $collectionId, EditCollectionParameters $parameters): Collection {
-        $em = $this->getEntityManager();
+    public function getCollectionById(int $collectionId): Collection
+    {
+        $result = $this->find($collectionId);
 
-        $collection = $this->getCollectionById($collectionId);
-        $collection->setTitle($parameters->getTitle());
-        $collection->setDescription($parameters->getDescription());
-
-        if ($parameters->hasThemeId()) {
-            $collection->setTheme($em->getReference(Theme::class, $parameters->getThemeId()));
-        } else {
-            $collection->unsetTheme();
+        if($result === null) {
+            throw new EntityNotFoundException(sprintf('Collection with ID `%d` not found', $collectionId));
         }
 
-        $em->flush($collection);
-
-        return $collection;
+        return $result;
     }
 
-    public function updatePublicOptions(int $collectionId, SetPublicOptionsParameters $parameters): Collection
+    public function getCollectionsById(array $collectionIds): array
     {
-        $collection = $this->getCollectionById($collectionId);
-        $collection->setPublicOptions([
-            'is_private' => $parameters->isPrivate(),
-            'public_enabled' => $parameters->isPublicEnabled(),
-            'moderation_contract' => $parameters->isModerationContractEnabled()
-        ]);
-
-        $this->getEntityManager()->flush($collection);
-
-        return $collection;
+        return $this->findBy(['id' => $collectionIds]);
     }
 }

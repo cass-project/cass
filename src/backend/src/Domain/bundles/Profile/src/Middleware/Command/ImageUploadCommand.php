@@ -2,6 +2,7 @@
 namespace Domain\Profile\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
+use Domain\Avatar\Exception\ImageServiceException;
 use Domain\Avatar\Middleware\Request\UploadImageRequest;
 use Domain\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ServerRequestInterface;
@@ -22,6 +23,10 @@ class ImageUploadCommand extends Command
                 ->setJson([
                     'image' => $image->toJSON()
                 ]);
+        } catch (ImageServiceException $e) {
+            $responseBuilder
+                ->setStatusUnprocessable()
+                ->setError($e);
         } catch (ProfileNotFoundException $e) {
             $responseBuilder
                 ->setError($e)

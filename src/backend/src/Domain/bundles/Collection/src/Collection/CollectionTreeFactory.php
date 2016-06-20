@@ -1,12 +1,14 @@
 <?php
 namespace Domain\Collection\Collection;
 
+use Domain\Collection\Collection\CollectionTree\MutableCollectionTree;
+
 class CollectionTreeFactory
 {
-    public static function createFromJSON(array $json, CollectionTree $tree = null): CollectionTree
+    public static function createFromJSON(array $json, MutableCollectionTree $tree = null): MutableCollectionTree
     {
-        if(! $tree) {
-            $tree = new CollectionTree();
+        if(!$tree) {
+            $tree = new MutableCollectionTree();
         }
 
         foreach($json as $jsonItem) {

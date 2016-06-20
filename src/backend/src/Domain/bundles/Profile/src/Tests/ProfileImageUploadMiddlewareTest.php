@@ -10,7 +10,7 @@ use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
  */
 class ProfileImageUploadMiddlewareTest extends ProfileMiddlewareTestCase
 {
-    public function testUploadImage()
+    public function testUploadImage200()
     {
         $account = DemoAccountFixture::getAccount();
         $profile = DemoProfileFixture::getProfile();

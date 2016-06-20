@@ -5,7 +5,7 @@ use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Image\Image;
 use Domain\Avatar\Strategy\SquareAvatarStrategy;
 use Domain\Community\Entity\Community;
-use League\Flysystem\Filesystem;
+use League\Flysystem\FilesystemInterface;
 
 final class CommunityImageStrategy extends SquareAvatarStrategy
 {
@@ -15,10 +15,10 @@ final class CommunityImageStrategy extends SquareAvatarStrategy
     /** @var Community */
     private $community;
 
-    /** @var Filesystem */
+    /** @var FilesystemInterface */
     private $fileSystem;
 
-    public function __construct(Community $community, Filesystem $fileSystem)
+    public function __construct(Community $community, FilesystemInterface $fileSystem)
     {
         if(! $community->isPersisted()) {
             throw new \Exception('Entity is not persisted yet');
@@ -46,7 +46,7 @@ final class CommunityImageStrategy extends SquareAvatarStrategy
         return substr($this->community->getTitle(), 0, 1);
     }
 
-    public function getFilesystem(): Filesystem
+    public function getFilesystem(): FilesystemInterface
     {
         return $this->fileSystem;
     }

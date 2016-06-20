@@ -46,16 +46,6 @@ class CommunityRepository extends EntityRepository
         throw new \DomainException(sprintf('There is no way you can delete the community. Check out project documentations: %s', '/docs/stories/community/00-community-no-delete.md'));
     }
 
-    public function clearImage(Community $community) {
-        $community->setupPlaceholderImage();
-        $this->getEntityManager()->flush($community);
-    }
-
-    public function setImage(Community $community, Community\CommunityImage $communityImage) {
-        $community->setImage($communityImage);
-        $this->getEntityManager()->flush($community);
-    }
-
     public function linkCollection(int $communityId, int $collectionId): Community {
         $community = $this->getCommunityById($communityId);
         $collections = $community->getCollections();

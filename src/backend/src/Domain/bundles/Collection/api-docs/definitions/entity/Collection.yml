@@ -38,7 +38,7 @@ Collection_Entity_Collection:
       description: Описание коллекции
     image:
       schema:
-        $ref: '#/definitions/Domain_Definitions_ImageColection'
+        $ref: '#/definitions/Avatar_ImageCollection'
     public_options:
       type: object
       schema:

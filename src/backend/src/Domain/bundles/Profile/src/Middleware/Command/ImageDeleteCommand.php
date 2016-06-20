@@ -2,6 +2,7 @@
 namespace Domain\Profile\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
+use Domain\Avatar\Exception\ImageServiceException;
 use Domain\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -18,6 +19,10 @@ class ImageDeleteCommand extends Command
                 ->setJson([
                     'image' => $image->toJSON()
                 ]);
+        } catch (ImageServiceException $e) {
+            $responseBuilder
+                ->setStatusUnprocessable()
+                ->setError($e);
         } catch (ProfileNotFoundException $e) {
             $responseBuilder
                 ->setError($e)

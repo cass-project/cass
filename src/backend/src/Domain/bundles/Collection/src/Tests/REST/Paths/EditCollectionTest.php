@@ -19,7 +19,10 @@ final class EditCollectionTest extends CollectionRESTTestCase
         $json = [
             'title' => '* my edited title',
             'description' => '* my edited description',
-            'theme_id' => SampleThemesFixture::getTheme(5)->getId()
+            'theme_ids' => [
+                SampleThemesFixture::getTheme(3)->getId(),
+                SampleThemesFixture::getTheme(5)->getId()
+            ]
         ];
 
         $this->requestEditCollection($collection->getId(), $json)
@@ -32,13 +35,9 @@ final class EditCollectionTest extends CollectionRESTTestCase
                 'entity' => [
                     'title' => $json['title'],
                     'description' => $json['description'],
-                    'theme' => [
-                        'has' => true,
-                        'id' => SampleThemesFixture::getTheme(5)->getId()
-                    ]
+                    'theme_ids' => $json['theme_ids']
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function test200UnsetTheme()
@@ -49,7 +48,7 @@ final class EditCollectionTest extends CollectionRESTTestCase
         $json = [
             'title' => '* my edited title',
             'description' => '* my edited description',
-            'theme_id' => 0
+            'theme_ids' => []
         ];
 
         $this->requestEditCollection($collection->getId(), $json)
@@ -62,11 +61,8 @@ final class EditCollectionTest extends CollectionRESTTestCase
                 'entity' => [
                     'title' => $json['title'],
                     'description' => $json['description'],
-                    'theme' => [
-                        'has' => false
-                    ]
+                    'theme_ids' => $json['theme_ids']
                 ]
-            ])
-        ;
+            ]);
     }
 }

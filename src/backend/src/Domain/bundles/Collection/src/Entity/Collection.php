@@ -3,30 +3,28 @@ namespace Domain\Collection\Entity;
 
 use Application\Util\Entity\IdEntity\IdEntity;
 use Application\Util\Entity\IdEntity\IdTrait;
+use Application\Util\Entity\SIDEntity\SIDEntity;
+use Application\Util\Entity\SIDEntity\SIDEntityTrait;
 use Application\Util\JSONSerializable;
+use Domain\Avatar\Entity\ImageEntity;
 use Domain\Collection\Exception\InvalidCollectionOptionsException;
 use Domain\Collection\Exception\PublicEnabledException;
 use Domain\Community\Entity\Community;
 use Domain\Avatar\Entity\ImageEntityTrait;
-use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
-use Domain\Theme\Entity\Theme;
+use Domain\Theme\Strategy\ThemeIdsEntityAware;
+use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
 
 /**
  * @Entity(repositoryClass="Domain\Collection\Repository\CollectionRepository")
  * @Table(name="collection")
  */
-class Collection implements JSONSerializable, IdEntity
+class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, ThemeIdsEntityAware
 {
     use IdTrait;
+    use SIDEntityTrait;
     use ImageEntityTrait;
-
-    /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
-     * @JoinColumn(name="author_profile_id", referencedColumnName="id")
-     * @var Profile
-     */
-    private $authorProfile;
+    use ThemeIdsAwareEntityTrait;
 
     /**
      * @Column(type="string", name="owner_sid")
@@ -35,24 +33,17 @@ class Collection implements JSONSerializable, IdEntity
     private $ownerSID;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Theme\Entity\Theme")
-     * @JoinColumn(name="theme_id", referencedColumnName="id")
-     * @var Theme
+     * @Column(type="string")
+     * @var string
      */
-    private $theme;
+    private $title = '';
 
     /**
      * @Column(type="string")
      * @var string
      */
-    private $title;
+    private $description = '';
 
-    /**
-     * @Column(type="string")
-     * @var string
-     */
-    private $description;
-    
     /**
      * @Column(type="boolean", name="is_private")
      * @var bool
@@ -71,30 +62,18 @@ class Collection implements JSONSerializable, IdEntity
      */
     private $moderationContract = false;
 
-    public function __construct(
-        Profile $authorProfile,
-        string $ownerSID,
-        string $title,
-        string $description,
-        Theme $theme = null
-    ) {
-        $this->authorProfile = $authorProfile;
+    public function __construct(string $ownerSID)
+    {
         $this->ownerSID = $ownerSID;
-        $this->theme = $theme;
-        $this->title = $title;
-        $this->description = $description;
+        $this->regenerateSID();
     }
 
     public function toJSON(): array
     {
         $result = [
             'id' => $this->getId(),
-            'author_profile_id' => $this->getAuthorProfile()->getId(),
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
-            'theme' => [
-                'has' => $this->hasTheme()
-            ],
             'theme_ids' => $this->getThemeIds(),
             'public_options' => [
                 'is_private' => $this->isPrivate(),
@@ -103,17 +82,7 @@ class Collection implements JSONSerializable, IdEntity
             ],
             'image' => $this->getImages()->toJSON()
         ];
-
-        if($this->hasTheme()) {
-            $result['theme']['id'] = $this->hasTheme() ? $this->getTheme()->getId() : null;
-        }
-
         return $result;
-    }
-
-    public function getAuthorProfile(): Profile
-    {
-        return $this->authorProfile;
     }
 
     public function getOwnerSID(): string
@@ -121,34 +90,18 @@ class Collection implements JSONSerializable, IdEntity
         return $this->ownerSID;
     }
 
-    public function getTheme(): Theme
+    public function getOwnerType(): string
     {
-        return $this->theme;
+        list($type, ) = explode(':', $this->getOwnerSID());
+
+        return $type;
     }
 
-    public function getThemeIds(): array
+    public function getOwnerId(): string
     {
-        if($this->hasTheme()) {
-            return [$this->getTheme()->getId()];
-        }else{
-            return [];
-        }
-    }
+        list(, $id) = explode(':', $this->getOwnerSID());
 
-    public function unsetTheme()
-    {
-        $this->theme = null;
-    }
-
-    public function hasTheme(): bool
-    {
-        return $this->theme !== null;
-    }
-
-    public function setTheme($theme): self
-    {
-        $this->theme = $theme;
-        return $this;
+        return $id;
     }
 
     public function getTitle(): string
@@ -221,7 +174,7 @@ class Collection implements JSONSerializable, IdEntity
     public function setPublicOptions(array $options): self
     {
         foreach(['is_private', 'public_enabled', 'moderation_contract'] as $required) {
-            if(! (isset($options[$required]) && is_bool($options[$required]))) {
+            if(!(isset($options[$required]) && is_bool($options[$required]))) {
                 throw new \InvalidArgumentException('Invalid public options');
             }
         }

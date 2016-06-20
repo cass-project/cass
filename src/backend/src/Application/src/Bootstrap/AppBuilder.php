@@ -1,6 +1,7 @@
 <?php
 namespace Application\Bootstrap;
 
+use Application\Bootstrap\Scripts\AppInit\EventsSetupScript;
 use Application\Bootstrap\Scripts\AppInit\PipeMiddlewareScript;
 use Application\Bootstrap\Scripts\AppInit\RoutesSetupScript;
 use Application\Bootstrap\Scripts\Bootstrap\BundleServiceScript;
@@ -27,7 +28,8 @@ class AppBuilder
     
     const DEFAULT_INIT_APP = [
         RoutesSetupScript::class,
-        PipeMiddlewareScript::class
+        EventsSetupScript::class,
+        PipeMiddlewareScript::class,
     ];
 
     /** @var string[] */

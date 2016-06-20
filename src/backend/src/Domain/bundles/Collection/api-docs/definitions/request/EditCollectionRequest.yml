@@ -1,13 +1,15 @@
 Collection_Update_Request:
     type: object
     required:
-      - theme_id
+      - theme_ids
       - title
       - description
     properties:
-      theme_id:
-        type: number
-        description: ID тематики. Может содержать значение NULL.
+      theme_ids:
+         type: array
+         items:
+          description: ID тематики
+          type: number
       title:
         type: string
         description: Название коллекции

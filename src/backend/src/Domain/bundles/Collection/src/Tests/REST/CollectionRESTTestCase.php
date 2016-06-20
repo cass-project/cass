@@ -3,14 +3,17 @@ namespace Domain\Collection\Tests\REST;
 
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Application\PHPUnit\RESTRequest\RESTRequest;
+use Application\Util\Definitions\Point;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
+use Zend\Diactoros\UploadedFile;
 
 abstract class CollectionRESTTestCase extends MiddlewareTestCase
 {
-    protected function getFixtures(): array {
+    protected function getFixtures(): array
+    {
         return [
             new DemoAccountFixture(),
             new DemoProfileFixture(),
@@ -19,29 +22,29 @@ abstract class CollectionRESTTestCase extends MiddlewareTestCase
         ];
     }
 
-    protected function requestCreateCommunityCollection(int $communityId, array $json): RESTRequest {
-        return $this->request('PUT', sprintf('/protected/community/%d/collection/create', $communityId))
+    protected function requestCreateCollection(array $json): RESTRequest
+    {
+        return $this->request('PUT', '/protected/collection/create')
             ->setParameters($json);
     }
 
-    protected function requestCreateProfileCollection(array $json): RESTRequest {
-        return $this->request('PUT', '/protected/profile/collection/create')
-            ->setParameters($json);
-    }
-
-    protected function requestGetCommunity(int $communityId): RESTRequest {
+    protected function requestGetCommunity(int $communityId): RESTRequest
+    {
         return $this->request('GET', sprintf('/community/%d/get', $communityId));
     }
 
-    protected function requestGetProfile(int $profileId): RESTRequest {
+    protected function requestGetProfile(int $profileId): RESTRequest
+    {
         return $this->request('GET', sprintf('/profile/%d/get', $profileId));
     }
 
-    protected function requestDeleteCollection(int $collectionId): RESTRequest {
+    protected function requestDeleteCollection(int $collectionId): RESTRequest
+    {
         return $this->request('DELETE', sprintf('/protected/collection/%d/delete', $collectionId));
     }
 
-    protected function requestEditCollection(int $collectionId, array $json): RESTRequest {
+    protected function requestEditCollection(int $collectionId, array $json): RESTRequest
+    {
         return $this->request('POST', sprintf('/protected/collection/%d/edit', $collectionId))
             ->setParameters($json);
     }
@@ -50,5 +53,29 @@ abstract class CollectionRESTTestCase extends MiddlewareTestCase
     {
         return $this->request('POST', sprintf('/protected/collection/%d/set-public-options', $collectionId))
             ->setParameters($json);
+    }
+
+    protected function requestUploadImage(int $collectionId, Point $start, Point $end, string $localFile): RESTRequest
+    {
+        $uri = sprintf(
+            '/protected/collection/%d/image-upload/crop-start/%d/%d/crop-end/%d/%d',
+            $collectionId,
+            $start->getX(),
+            $start->getY(),
+            $end->getX(),
+            $end->getY()
+        );
+
+        $this->assertTrue(is_readable($localFile));
+
+        return $this->request('POST', $uri)
+            ->setUploadedFiles([
+                'file' => new UploadedFile($localFile, filesize($localFile), 0)
+            ]);
+    }
+
+    protected function requestDeleteImage(int $collectionId): RESTRequest
+    {
+        return $this->request('DELETE', sprintf('/protected/collection/%d/image-delete', $collectionId));
     }
 }

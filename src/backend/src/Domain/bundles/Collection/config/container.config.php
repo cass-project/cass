@@ -22,12 +22,6 @@ return [
 
                 return new Filesystem(new Local($assetsDir));
             }))
-            ->constructorParameter('assetsDir', factory(function(Container $container) {
-                return sprintf('%s/community', $container->get('config.paths.assets.dir'));
-            }))
-            ->constructorParameter('assetsPath', factory(function(Container $container) {
-                return sprintf('%s/community', $container->get('config.paths.assets.www'));
-            }))
         ,
     ]
 ];

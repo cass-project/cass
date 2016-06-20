@@ -10,10 +10,10 @@ class EditCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $collectionId = $request->getAttribute('collectionId');
-        $parameters = (new EditCollectionRequest($request))->getParameters();
-
-        $collection = $this->collectionService->editCollection($collectionId, $parameters);
+        $collection = $this->collectionService->editCollection(
+            $request->getAttribute('collectionId'),
+            (new EditCollectionRequest($request))->getParameters()
+        );
 
         return $responseBuilder
             ->setStatusSuccess()

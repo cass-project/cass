@@ -10,8 +10,10 @@ use Domain\Account\Entity\Account;
 use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Entity\ImageEntityTrait;
 use Domain\Avatar\Image\ImageCollection;
-use Domain\Collection\Collection\CollectionTree;
-use Domain\Collection\Traits\CollectionOwnerTrait;
+use Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
+use Domain\Collection\Collection\CollectionTree\MutableCollectionTree;
+use Domain\Collection\Strategy\CollectionAwareEntity;
+use Domain\Collection\Strategy\Traits\CollectionAwareEntityTrait;
 use Domain\Profile\Entity\Profile\Gender\Gender;
 use Domain\Profile\Entity\Profile\Gender\GenderNotSpecified;
 use Domain\Profile\Entity\Profile\Greetings\Greetings;
@@ -21,11 +23,11 @@ use Domain\Profile\Entity\Profile\Greetings\GreetingsAnonymous;
  * @Entity(repositoryClass="Domain\Profile\Repository\ProfileRepository")
  * @Table(name="profile")
  */
-class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity
+class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, CollectionAwareEntity
 {
     use IdTrait;
     use SIDEntityTrait;
-    use CollectionOwnerTrait;
+    use CollectionAwareEntityTrait;
     use ImageEntityTrait;
 
     /**
@@ -95,7 +97,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity
     public function __construct(Account $account)
     {
         $this->account = $account;
-        $this->collections = new CollectionTree();
+        $this->collections = new ImmutableCollectionTree();
         $this->greetings = new GreetingsAnonymous();
         $this->gender = (new GenderNotSpecified())->getIntCode();
 

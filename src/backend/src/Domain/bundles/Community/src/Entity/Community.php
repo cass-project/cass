@@ -8,8 +8,9 @@ use Application\Util\JSONSerializable;
 use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Entity\ImageEntityTrait;
 use Domain\Avatar\Image\ImageCollection;
-use Domain\Collection\Collection\CollectionTree;
-use Domain\Collection\Traits\CollectionOwnerTrait;
+use Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
+use Domain\Collection\Strategy\CollectionAwareEntity;
+use Domain\Collection\Strategy\Traits\CollectionAwareEntityTrait;
 use Domain\Community\Entity\Community\CommunityFeatures;
 use Domain\Community\Exception\CommunityHasNoThemeException;
 use Domain\Theme\Entity\Theme;
@@ -18,12 +19,12 @@ use Domain\Theme\Entity\Theme;
  * @Entity(repositoryClass="Domain\Community\Repository\CommunityRepository")
  * @Table(name="community")
  */
-class Community implements IdEntity, JSONSerializable, ImageEntity
+class Community implements IdEntity, JSONSerializable, ImageEntity, CollectionAwareEntity
 {
     const SID_LENGTH = 8;
 
     use IdTrait;
-    use CollectionOwnerTrait;
+    use CollectionAwareEntityTrait;
     use ImageEntityTrait;
 
     /**
@@ -91,7 +92,7 @@ class Community implements IdEntity, JSONSerializable, ImageEntity
         ];
         $this->sid = GenerateRandomString::gen(self::SID_LENGTH);
         $this->dateCreatedOn = new \DateTime();
-        $this->collections = new CollectionTree();
+        $this->collections = new ImmutableCollectionTree();
         $this->setTitle($title)->setDescription($description);
         $this->setImages(new ImageCollection());
 

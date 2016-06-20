@@ -71,4 +71,4 @@
               items:
                 type: object
                 schema:
-                  $ref: '#/definitions/Domain_Definitions_Image'
+                  $ref: '#/definitions/Avatar_ImageCollection'

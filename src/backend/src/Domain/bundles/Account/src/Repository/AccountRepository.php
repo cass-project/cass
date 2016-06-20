@@ -66,7 +66,7 @@ class AccountRepository extends EntityRepository
 
     public function hasAccountWithEmail($email) : bool
     {
-        return $this->findBy([
+        return $this->findOneBy([
             'email' => $email
         ]) !== null;
     }

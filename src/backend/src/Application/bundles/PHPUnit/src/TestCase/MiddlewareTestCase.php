@@ -178,7 +178,7 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
 
         $app = $this->app();
         $em = $this->container()->get(EntityManager::class);
-
+        
         array_map(function(Fixture $fixture) use ($app, $em) {
             $this->upFixture($fixture);
         }, $this->getFixtures());

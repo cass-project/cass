@@ -10,7 +10,8 @@ use Domain\Collection\Tests\REST\CollectionRESTTestCase;
  */
 final class DeleteProfileCollectionTest extends CollectionRESTTestCase
 {
-    public function test200() {
+    public function test200()
+    {
         $this->upFixture(new SampleCollectionsFixture());
 
         $collectionToDelete = SampleCollectionsFixture::getProfileCollection(1);
@@ -27,8 +28,7 @@ final class DeleteProfileCollectionTest extends CollectionRESTTestCase
                 }, $jsonResponse['entity']['collections']);
 
                 $this->assertTrue(in_array($collectionId, $collectionIds));
-            })
-        ;
+            });
 
         $this->requestDeleteCollection($collectionToDelete->getId())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
@@ -37,8 +37,7 @@ final class DeleteProfileCollectionTest extends CollectionRESTTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->requestGetProfile($profileId)
             ->execute()
@@ -50,7 +49,6 @@ final class DeleteProfileCollectionTest extends CollectionRESTTestCase
                 }, $jsonResponse['entity']['collections']);
 
                 $this->assertFalse(in_array($collectionId, $collectionIds));
-            })
-        ;
+            });
     }
 }

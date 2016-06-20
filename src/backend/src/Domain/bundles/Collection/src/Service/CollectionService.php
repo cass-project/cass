@@ -1,173 +1,159 @@
 <?php
 namespace Domain\Collection\Service;
 
-use Domain\Auth\Service\CurrentAccountService;
+use Domain\Avatar\Image\ImageCollection;
+use Domain\Avatar\Parameters\UploadImageParameters;
+use Domain\Avatar\Service\AvatarService;
 use Domain\Collection\Entity\Collection;
+use Domain\Collection\Image\CollectionImageStrategy;
 use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Parameters\EditCollectionParameters;
 use Domain\Collection\Parameters\SetPublicOptionsParameters;
 use Domain\Collection\Repository\CollectionRepository;
-use Domain\Community\Repository\CommunityRepository;
-use Domain\Avatar\Image\Image;
-use Domain\Avatar\Image\ImageCollection;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
-use Domain\Profile\Repository\ProfileRepository;
+use Evenement\EventEmitter;
+use Evenement\EventEmitterInterface;
 use League\Flysystem\FilesystemInterface;
 
 class CollectionService
 {
-    /** @var CurrentAccountService */
-    private $currentAccountService;
+    const EVENT_ACCESS = 'domain.collection.access';
+    const EVENT_CREATED = 'domain.collection.created';
+    const EVENT_EDITED = 'domain.collection.edited';
+    const EVENT_DELETE = 'domain.collection.delete';
+    const EVENT_DELETED = 'domain.collection.deleted';
+    const EVENT_OPTIONS = 'domain.collection.options';
+    const EVENT_IMAGE_UPLOADED = 'domain.collection.image.uploaded';
+    const EVENT_IMAGE_GENERATED = 'domain.collection.image.generated';
 
-    /** @var CollectionValidatorsService */
-    private $validationService;
+    /** @var EventEmitterInterface */
+    private $events;
 
     /** @var CollectionRepository */
     private $collectionRepository;
 
-    /** @var CommunityRepository */
-    private $communityRepository;
-
-    /** @var ProfileRepository */
-    private $profileRepository;
+    /** @var AvatarService */
+    private $avatarService;
 
     /** @var FilesystemInterface */
     private $images;
 
-    /** @var string */
-    private $assetsPath;
-
-    /** @var string */
-    private $assetsDir;
-
     public function __construct(
-        CollectionValidatorsService $collectionValidatorsService,
-        CurrentAccountService $currentAccountService,
         CollectionRepository $collectionRepository,
-        CommunityRepository $communityRepository,
-        ProfileRepository $profileRepository,
-        FilesystemInterface $imagesFlySystem,
-        string $assetsPath,
-        string $assetsDir
-    ) {
-        $this->validationService = $collectionValidatorsService;
-        $this->currentAccountService = $currentAccountService;
+        AvatarService $avatarService,
+        FilesystemInterface $imagesFlySystem)
+    {
+        $this->events = new EventEmitter();
         $this->collectionRepository = $collectionRepository;
-        $this->communityRepository = $communityRepository;
-        $this->profileRepository = $profileRepository;
-        $this->images = $profileRepository;
-        $this->assetsPath = $assetsPath;
-        $this->assetsDir = $assetsDir;
+        $this->avatarService = $avatarService;
+        $this->images = $imagesFlySystem;
     }
 
-    public function createCommunityCollection(int $communityId, CreateCollectionParameters $parameters): Collection
+    public function getEventEmitter(): EventEmitterInterface
     {
-        $collection = $this->collectionRepository->createCollection(
-            sprintf('community:%d', $communityId),
-            $this->getDefaultImages(),
-            $parameters
-        );
+        return $this->events;
+    }
 
-        $this->communityRepository->linkCollection($communityId, $collection->getId());
+    public function createCollection(CreateCollectionParameters $parameters, bool $disableAccess = false)
+    {
+        $collection = new Collection($parameters->getOwnerSID());
+
+        if(! $disableAccess) {
+            $this->events->emit(self::EVENT_ACCESS, [$collection]);
+        }
+
+        $collection
+            ->setTitle($parameters->getTitle())
+            ->setDescription($parameters->getDescription())
+            ->setThemeIds($parameters->getThemeIds());
+
+        $this->collectionRepository->createCollection($collection);
+        $this->avatarService->generateImage(new CollectionImageStrategy($collection, $this->images));
+        $this->collectionRepository->saveCollection($collection);
+
+        $this->events->emit(self::EVENT_CREATED, [$collection]);
 
         return $collection;
     }
 
-    public function createProfileCollection(Profile $profile, CreateCollectionParameters $parameters): Collection
+    public function editCollection(int $collectionId, EditCollectionParameters $parameters): Collection
     {
-        $profileId = $profile->getId();
-        
-        $collection = $this->collectionRepository->createCollection(
-            sprintf('profile:%d', $profileId),
-            $this->getDefaultImages(),
-            $parameters
-        );
+        $collection = $this->getCollectionById($collectionId);
 
-        $profile->getCollections()->attachChild($collection->getId());
+        $this->events->emit(self::EVENT_ACCESS, [$collection]);
 
-        $this->profileRepository->saveProfile($profile);
+        $collection
+            ->setTitle($parameters->getTitle())
+            ->setDescription($parameters->getDescription())
+            ->setThemeIds($parameters->getThemeIds());
+
+        $this->collectionRepository->saveCollection($collection);
+
+        $this->events->emit(self::EVENT_EDITED, [$collection]);
 
         return $collection;
     }
 
     public function deleteCollection(int $collectionId)
     {
-        $collection = $this->collectionRepository->getCollectionById($collectionId);
-        list($owner, $ownerId) = explode(':', $collection->getOwnerSID());
+        $collection = $this->getCollectionById($collectionId);
 
-        if($owner === 'profile') {
-            $profile = $this->profileRepository->getProfileById($ownerId);
-
-            $this->validationService->validateIsCollectionOwnedByProfile($collection, $profile);
-            $this->profileRepository->unlinkCollection($profile->getId(), $collectionId);
-        }else if($owner === 'community') {
-            $community = $this->communityRepository->getCommunityById($ownerId);
-
-            $this->validationService->validateIsCollectionOwnedByCommunity($collection, $community);
-            $this->communityRepository->unlinkCollection($community->getId(), $collectionId);
-        }else{
-            throw new \Exception('Unknown owner');
-        }
-
+        $this->events->emit(self::EVENT_ACCESS, [$collection]);
+        $this->events->emit(self::EVENT_DELETE, [$collection]);
         $this->collectionRepository->deleteCollection($collectionId);
-    }
+        $this->events->emit(self::EVENT_DELETED, [$collection]);
 
-    public function editCollection(int $collectionId, EditCollectionParameters $parameters): Collection
-    {
-        $collection = $this->collectionRepository->getCollectionById($collectionId);
-        list($owner, $ownerId) = explode(':', $collection->getOwnerSID());
-
-        if($owner === 'profile') {
-            $profile = $this->profileRepository->getProfileById($ownerId);
-
-            $this->validationService->validateIsCollectionOwnedByProfile($collection, $profile);
-        }else if($owner === 'community') {
-            $community = $this->communityRepository->getCommunityById($ownerId);
-
-            $this->validationService->validateIsCollectionOwnedByCommunity($collection, $community);
-        }else{
-            throw new \Exception('Unknown owner');
-        }
-
-        return $this->collectionRepository->editCollection($collectionId, $parameters);
+        return $collection;
     }
 
     public function setPublicOptions(int $collectionId, SetPublicOptionsParameters $parameters): Collection
     {
-        return $this->collectionRepository->updatePublicOptions($collectionId, $parameters);
+        $collection = $this->collectionRepository->getCollectionById($collectionId);
+
+        $this->events->emit(self::EVENT_ACCESS, [$collection]);
+
+        $collection->setPublicOptions([
+            'is_private' => $parameters->isPrivate(),
+            'public_enabled' => $parameters->isPublicEnabled(),
+            'moderation_contract' => $parameters->isModerationContractEnabled()
+        ]);
+
+        $this->collectionRepository->saveCollection($collection);
+        $this->events->emit(self::EVENT_OPTIONS, [$collection]);
+
+        return $collection;
     }
 
-    private function getDefaultImages()
+    public function uploadImage(int $collectionId, UploadImageParameters $parameters): ImageCollection
     {
-        return (new ImageCollection())
-            ->attachImage('small', new Image(
-                sprintf('%s/community-default.png', $this->assetsDir),
-                sprintf('%s/community-default.png', $this->assetsPath)
-            ))
-            ->attachImage('small', new Image(
-                sprintf('%s/community-default.png', $this->assetsDir),
-                sprintf('%s/community-default.png', $this->assetsPath)
-            ))
-        ;
+        $collection = $this->collectionRepository->getCollectionById($collectionId);
+
+        $this->events->emit(self::EVENT_ACCESS, [$collection]);
+        $this->avatarService->uploadImage(new CollectionImageStrategy($collection, $this->images), $parameters);
+        $this->collectionRepository->saveCollection($collection);
+        $this->events->emit(self::EVENT_IMAGE_UPLOADED, [$collection]);
+
+        return $collection->getImages();
     }
 
-    public function createDefaultCollectionForProfile(Profile $profile)
+    public function generateImage(int $collectionId): ImageCollection
     {
-        $collectionParameters = new CreateCollectionParameters(
-            $profile->getId(),
-            '$gt_collection_my-feed_title',
-            '$gt_collection_my-feed_description'
-        );
+        $collection = $this->collectionRepository->getCollectionById($collectionId);
 
-        $this->createProfileCollection($profile, $collectionParameters);
+        $this->events->emit(self::EVENT_ACCESS, [$collection]);
+        $this->avatarService->generateImage(new CollectionImageStrategy($collection, $this->images));
+        $this->collectionRepository->saveCollection($collection);
+        $this->events->emit(self::EVENT_IMAGE_GENERATED, [$collection]);
+
+        return $collection->getImages();
     }
-    
+
     public function getCollectionById(int $collectionId): Collection
     {
         return $this->collectionRepository->getCollectionById($collectionId);
     }
-    
+
     public function getCollectionsById(array $collectionIds): array
     {
         return $this->collectionRepository->getCollectionsById($collectionIds);

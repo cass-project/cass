@@ -15,7 +15,7 @@ class EditCollectionRequest extends SchemaParams
         return new EditCollectionParameters(
             $data->title,
             $data->description,
-            $data->theme_id ? $data->theme_id : null
+            $data->theme_ids ? $data->theme_ids : []
         );
     }
 

@@ -24,7 +24,7 @@
               description: '=true'
             image:
               schema:
-                $ref: '#/definitions/Domain_Definitions_ImageColection'
+                $ref: '#/definitions/Avatar_ImageCollection'
       403:
         schema:
           $ref: '#/responses/Unauthorized'

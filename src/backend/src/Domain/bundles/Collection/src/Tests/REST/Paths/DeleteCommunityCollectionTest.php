@@ -28,8 +28,7 @@ final class DeleteCommunityCollectionTest extends CollectionRESTTestCase
                 }, $jsonResponse['entity']['collections']);
 
                 $this->assertTrue(in_array($collectionId, $collectionIds));
-            })
-        ;
+            });
 
         $this->requestDeleteCollection($collectionToDelete->getId())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
@@ -38,8 +37,7 @@ final class DeleteCommunityCollectionTest extends CollectionRESTTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true
-            ])
-        ;
+            ]);
 
         $this->requestGetCommunity($communityId)
             ->execute()
@@ -51,7 +49,6 @@ final class DeleteCommunityCollectionTest extends CollectionRESTTestCase
                 }, $jsonResponse['entity']['collections']);
 
                 $this->assertFalse(in_array($collectionId, $collectionIds));
-            })
-        ;
+            });
     }
 }

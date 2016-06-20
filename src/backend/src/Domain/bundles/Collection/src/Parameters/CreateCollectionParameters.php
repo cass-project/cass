@@ -3,8 +3,8 @@ namespace Domain\Collection\Parameters;
 
 class CreateCollectionParameters
 {
-    /** @var int */
-    private $authorProfileId;
+    /** @var string */
+    private $ownerSID;
 
     /** @var string */
     private $title;
@@ -12,20 +12,20 @@ class CreateCollectionParameters
     /** @var string */
     private $description;
 
-    /** @var int|null */
-    private $themeId;
+    /** @var int[] */
+    private $themeIds = [];
 
-    public function __construct(int $authorProfileId, string $title, string $description, int $themeId = null)
+    public function __construct(string $ownerSID, string $title, string $description, array $themeIds = [])
     {
-        $this->authorProfileId = $authorProfileId;
+        $this->ownerSID = $ownerSID;
         $this->title = $title;
         $this->description = $description;
-        $this->themeId = $themeId;
+        $this->themeIds = $themeIds;
     }
 
-    public function getAuthorProfileId(): int
+    public function getOwnerSID(): string
     {
-        return $this->authorProfileId;
+        return $this->ownerSID;
     }
 
     public function getTitle(): string
@@ -37,14 +37,9 @@ class CreateCollectionParameters
     {
         return $this->description;
     }
-
-    public function getThemeId(): int
+    
+    public function getThemeIds(): array
     {
-        return $this->themeId;
-    }
-
-    public function hasThemeId(): bool
-    {
-        return $this->themeId !== null;
+        return $this->themeIds;
     }
 }

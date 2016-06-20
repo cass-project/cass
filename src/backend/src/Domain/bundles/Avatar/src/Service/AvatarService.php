@@ -19,17 +19,27 @@ final class AvatarService
     /** @var ImageManager */
     private $imageManager;
 
-    public function __construct(ImageManager $imageManager)
-    {
+    /** @var string */
+    private $env;
+
+    public function __construct(
+        ImageManager $imageManager,
+        string $env
+    ) {
         $this->imageManager = $imageManager;
+        $this->env = $env;
     }
 
     public function makeImages(AvatarStrategy $strategy, ImageLayer $source): ImageCollection
     {
         $collection = new ImageCollection();
 
-        $sizes = $strategy->getSizes();
-        sort($sizes);
+        if($this->env === 'test') {
+            $sizes = [64];
+        }else{
+            $sizes = $strategy->getSizes();
+            sort($sizes);
+        }
 
         foreach($sizes as $size) {
             if((! $collection->hasImage($size)) && ($source->getWidth() >= $size)) {

@@ -5,7 +5,7 @@ use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Image\Image;
 use Domain\Avatar\Strategy\SquareAvatarStrategy;
 use Domain\Profile\Entity\Profile;
-use League\Flysystem\Filesystem;
+use League\Flysystem\FilesystemInterface;
 
 final class ProfileImageStrategy extends SquareAvatarStrategy
 {
@@ -15,10 +15,10 @@ final class ProfileImageStrategy extends SquareAvatarStrategy
     /** @var Profile */
     private $profile;
 
-    /** @var Filesystem */
+    /** @var FilesystemInterface */
     private $fileSystem;
 
-    public function __construct(Profile $profile, Filesystem $fileSystem)
+    public function __construct(Profile $profile, FilesystemInterface $fileSystem)
     {
         $this->profile = $profile;
         $this->fileSystem = $fileSystem;
@@ -39,7 +39,7 @@ final class ProfileImageStrategy extends SquareAvatarStrategy
         return substr($this->profile->getGreetings()->__toString(), 0, 1);
     }
 
-    public function getFilesystem(): Filesystem
+    public function getFilesystem(): FilesystemInterface
     {
         return $this->fileSystem;
     }

@@ -35,7 +35,7 @@ class RoutesSetupScript implements AppInitScript
             $callback = require $routeConfigFile;
 
             if(!is_callable($callback)) {
-                throw new \Exception(sprintf('Config `%s` should returns a Callable with Application and prefix argument', $routeConfigFile));
+                throw new \Exception(sprintf('Config `%s` should returns a Callable with Application argument', $routeConfigFile));
             }
 
             $callback($app);

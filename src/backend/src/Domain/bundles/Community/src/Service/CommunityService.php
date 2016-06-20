@@ -6,6 +6,9 @@ use Domain\Auth\Service\CurrentAccountService;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Avatar\Service\AvatarService;
+use Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
+use Domain\Collection\Parameters\CreateCollectionParameters;
+use Domain\Collection\Service\CollectionService;
 use Domain\Community\ACL\CommunityACL;
 use Domain\Community\Entity\Community;
 use Domain\Community\Image\CommunityImageStrategy;
@@ -14,7 +17,7 @@ use Domain\Community\Parameters\EditCommunityParameters;
 use Domain\Community\Parameters\SetPublicOptionsParameters;
 use Domain\Community\Repository\CommunityRepository;
 use Domain\Theme\Repository\ThemeRepository;
-use League\Flysystem\Filesystem;
+use League\Flysystem\FilesystemInterface;
 
 class CommunityService
 {
@@ -27,21 +30,26 @@ class CommunityService
     /** @var ThemeRepository */
     private $themeRepository;
 
+    /** @var CollectionService */
+    private $collectionService;
+
     /** @var AvatarService */
     private $avatarService;
 
-    /** @var Filesystem */
+    /** @var FilesystemInterface */
     private $imageFileSystem;
 
     public function __construct(
         CurrentAccountService $currentAccountService,
         CommunityRepository $communityRepository,
+        CollectionService $collectionService,
         ThemeRepository $themeRepository,
         AvatarService $avatarService,
-        Filesystem $imageFileSystem
+        FilesystemInterface $imageFileSystem
     ) {
         $this->currentAccountService = $currentAccountService;
         $this->communityRepository = $communityRepository;
+        $this->collectionService = $collectionService;
         $this->themeRepository = $themeRepository;
         $this->avatarService = $avatarService;
         $this->imageFileSystem = $imageFileSystem;
@@ -61,6 +69,14 @@ class CommunityService
         $this->communityRepository->createCommunity($entity);
 
         $strategy = new CommunityImageStrategy($entity, $this->imageFileSystem);
+        $this->collectionService->createCollection(new CreateCollectionParameters(
+            sprintf('community:%s', $entity->getId()),
+            '$gt_community-feed_title',
+            '$gt_community-feed_description',
+            $entity->hasTheme()
+                ? [$entity->getTheme()->getId()]
+                : []
+        ));
         $this->avatarService->generateImage($strategy);
 
         return $entity;
@@ -92,7 +108,7 @@ class CommunityService
         return $community->getImages();
     }
 
-    public function deleteCommunityImage(int $communityId): ImageCollection
+    public function generateCommunityImage(int $communityId): ImageCollection
     {
         $community = $this->communityRepository->getCommunityById($communityId);
         $strategy = new CommunityImageStrategy($community, $this->imageFileSystem);
@@ -117,6 +133,38 @@ class CommunityService
         $this->communityRepository->saveCommunity($community);
 
         return $community;
+    }
+
+    public function linkCollection(int $communityId, int $collectionId): ImmutableCollectionTree
+    {
+        $community = $this->getCommunityById($communityId);
+
+        $collections = $community->getCollections()->createMutableInstance();
+
+        if(! $collections->hasCollection($collectionId)) {
+            $collections->attachChild($collectionId);
+        }
+
+        $community->replaceCollections($collections->createImmutableInstance());
+        $this->communityRepository->saveCommunity($community);
+
+        return $community->getCollections();
+    }
+
+    public function unlinkCollection(int $communityId, int $collectionId): ImmutableCollectionTree
+    {
+        $community = $this->getCommunityById($communityId);
+
+        $collections = $community->getCollections()->createMutableInstance();
+
+        if($collections->hasCollection($collectionId)) {
+            $collections->detachChild($collectionId);
+        }
+
+        $community->replaceCollections($collections->createImmutableInstance());
+        $this->communityRepository->saveCommunity($community);
+
+        return $community->getCollections();
     }
 
     public function getCommunityById(string $communityId): Community {

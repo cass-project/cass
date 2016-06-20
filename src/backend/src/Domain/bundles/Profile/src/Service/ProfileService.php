@@ -6,6 +6,8 @@ use Domain\Account\Service\AccountService;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Avatar\Service\AvatarService;
+use Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
+use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Service\CollectionService;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Gender\Gender;
@@ -16,7 +18,7 @@ use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
 use Domain\Profile\Repository\ProfileRepository;
 use Domain\Profile\Strategy\ProfileImageStrategy;
 use Domain\Profile\Validation\ProfileValidationService;
-use League\Flysystem\Filesystem;
+use League\Flysystem\FilesystemInterface;
 
 class ProfileService
 {
@@ -34,7 +36,7 @@ class ProfileService
     /** @var CollectionService */
     private $collectionService;
 
-    /** @var Filesystem */
+    /** @var FilesystemInterface */
     private $imagesFlySystem;
 
     /** @var AvatarService */
@@ -44,7 +46,7 @@ class ProfileService
         ProfileValidationService $validationService,
         ProfileRepository $profileRepository,
         CollectionService $collectionService,
-        Filesystem $imagesFlySystem,
+        FilesystemInterface $imagesFlySystem,
         AvatarService $avatarService
     )
     {
@@ -81,7 +83,11 @@ class ProfileService
         );
 
         $this->profileRepository->createProfile($profile);
-        $this->collectionService->createDefaultCollectionForProfile($profile);
+        $this->collectionService->createCollection(new CreateCollectionParameters(
+            sprintf('profile:%d', $profile->getId()),
+            '$gt_collection_my-feed_title',
+            '$gt_collection_my-feed_description'
+        ), true);
         $this->accountService->switchToProfile($account, $profile->getId());
 
         $this->generateProfileImage($profile->getId());
@@ -194,5 +200,39 @@ class ProfileService
         $this->profileRepository->saveProfile($profile);
 
         return $profile;
+    }
+
+    public function linkCollection(int $profileId, int $collectionId): ImmutableCollectionTree
+    {
+        $profile = $this->getProfileById($profileId);
+
+        $collections = $profile->getCollections()->createMutableInstance();
+
+        if(! $collections->hasCollection($collectionId)) {
+            $collections->attachChild($collectionId);
+        }
+
+        $profile->replaceCollections($collections->createImmutableInstance());
+
+        $this->profileRepository->saveProfile($profile);
+
+        return $profile->getCollections();
+    }
+
+    public function unlinkCollection(int $profileId, int $collectionId): ImmutableCollectionTree
+    {
+        $profile = $this->getProfileById($profileId);
+
+        $collections = $profile->getCollections()->createMutableInstance();
+
+        if($collections->hasCollection($collectionId)) {
+            $collections->detachChild($collectionId);
+        }
+
+        $profile->replaceCollections($collections->createImmutableInstance());
+
+        $this->profileRepository->saveProfile($profile);
+
+        return $profile->getCollections();
     }
 }

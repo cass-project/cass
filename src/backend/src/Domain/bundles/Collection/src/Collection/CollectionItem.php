@@ -3,6 +3,7 @@ namespace Domain\Collection\Collection;
 
 use Application\Util\JSONSerializable;
 use Application\Util\SerialManager\SerialEntity;
+use Domain\Collection\Collection\CollectionTree\MutableCollectionTree;
 
 class CollectionItem implements SerialEntity, JSONSerializable
 {
@@ -12,14 +13,14 @@ class CollectionItem implements SerialEntity, JSONSerializable
     /** @var int */
     private $position;
 
-    /** @var CollectionTree */
+    /** @var MutableCollectionTree */
     private $sub;
 
     public function __construct($collectionId, $position)
     {
         $this->collectionId = $collectionId;
         $this->position = $position;
-        $this->sub = new CollectionTree();
+        $this->sub = new MutableCollectionTree();
     }
 
     public function toJSON(): array
@@ -42,18 +43,18 @@ class CollectionItem implements SerialEntity, JSONSerializable
     {
         return $this->position;
     }
-    
+
     public function hasChildren(): bool
     {
         return $this->sub()->size() > 0;
     }
 
-    public function sub(): CollectionTree
+    public function sub(): MutableCollectionTree
     {
         return $this->sub;
     }
 
-    public function replaceSub(CollectionTree $tree)
+    public function replaceSub(MutableCollectionTree $tree)
     {
         $this->sub = $tree;
     }

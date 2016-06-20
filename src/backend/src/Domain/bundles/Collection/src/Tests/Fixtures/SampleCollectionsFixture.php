@@ -23,43 +23,88 @@ class SampleCollectionsFixture implements Fixture
         $collectionService = $app->getContainer()->get(CollectionService::class); /** @var CollectionService $collectionService */
 
         self::$profileCollections = [
-            1 => $collectionService->createProfileCollection($profile,
-                new CreateCollectionParameters($authorProfileId, 'Profile Collection 1', 'My Profile Collection 1', SampleThemesFixture::getTheme(1)->getId())
+            1 => $collectionService->createCollection(
+                new CreateCollectionParameters(
+                    sprintf('profile:%s', $profile->getId()),
+                    'Profile Collection 1',
+                    'My Profile Collection 1',
+                    [SampleThemesFixture::getTheme(1)->getId()]
+                )
             ),
-            2 => $collectionService->createProfileCollection($profile,
-                new CreateCollectionParameters($authorProfileId, 'Profile Collection 1', 'My Profile Collection 2', SampleThemesFixture::getTheme(2)->getId())
+            2 => $collectionService->createCollection(
+                new CreateCollectionParameters(
+                    sprintf('profile:%s', $profile->getId()),
+                    'Profile Collection 1',
+                    'My Profile Collection 2',
+                    [SampleThemesFixture::getTheme(2)->getId()]
+                )
             ),
-            3 => $collectionService->createProfileCollection($profile,
-                new CreateCollectionParameters($authorProfileId, 'Profile Collection 1', 'My Profile Collection 3', SampleThemesFixture::getTheme(3)->getId())
+            3 => $collectionService->createCollection(
+                new CreateCollectionParameters(
+                    sprintf('profile:%s', $profile->getId()),
+                    'Profile Collection 1',
+                    'My Profile Collection 3',
+                    [SampleThemesFixture::getTheme(3)->getId()]
+                )
             ),
-            4 => $collectionService->createProfileCollection($profile,
-                new CreateCollectionParameters($authorProfileId, 'Profile Collection 1', 'My Profile Collection 4', SampleThemesFixture::getTheme(4)->getId())
+            4 => $collectionService->createCollection(
+                new CreateCollectionParameters(
+                    sprintf('profile:%s', $profile->getId()),
+                    'Profile Collection 1',
+                    'My Profile Collection 4',
+                    [SampleThemesFixture::getTheme(4)->getId()]
+                )
             ),
-            5 => $collectionService->createProfileCollection($profile,
-                new CreateCollectionParameters($authorProfileId, 'Profile Collection 1', 'My Profile Collection 5', SampleThemesFixture::getTheme(5)->getId())
+            5 => $collectionService->createCollection(
+                new CreateCollectionParameters(
+                    sprintf('profile:%s', $profile->getId()),
+                    'Profile Collection 1',
+                    'My Profile Collection 5',
+                    [SampleThemesFixture::getTheme(5)->getId()]
+                )
             ),
         ];
 
         self::$communityCollections = [
-            1 => $collectionService->createCommunityCollection(
-                SampleCommunitiesFixture::getCommunity(1)->getId(),
-                new CreateCollectionParameters($authorProfileId, 'Community Collection 1', 'My Community Collection 1', SampleThemesFixture::getTheme(1)->getId())
+            1 => $collectionService->createCollection(
+                new CreateCollectionParameters(
+                    sprintf('community:%s', SampleCommunitiesFixture::getCommunity(1)->getId()),
+                    'Community Collection 1',
+                    'My Community Collection 1',
+                    [SampleThemesFixture::getTheme(1)->getId()]
+                )
             ),
-            2 => $collectionService->createCommunityCollection(
-                SampleCommunitiesFixture::getCommunity(2)->getId(),
-                new CreateCollectionParameters($authorProfileId, 'Community Collection 2', 'My Community Collection 2', SampleThemesFixture::getTheme(2)->getId())
+            2 => $collectionService->createCollection(
+                new CreateCollectionParameters(
+                    sprintf('community:%s', SampleCommunitiesFixture::getCommunity(2)->getId()),
+                    'Community Collection 2',
+                    'My Community Collection 2',
+                    [SampleThemesFixture::getTheme(2)->getId()]
+                )
             ),
-            3 => $collectionService->createCommunityCollection(
-                SampleCommunitiesFixture::getCommunity(3)->getId(),
-                new CreateCollectionParameters($authorProfileId, 'Community Collection 3', 'My Community Collection 3', SampleThemesFixture::getTheme(3)->getId())
+            3 => $collectionService->createCollection(
+                new CreateCollectionParameters(
+                    sprintf('community:%s', SampleCommunitiesFixture::getCommunity(3)->getId()),
+                    'Community Collection 3',
+                    'My Community Collection 3',
+                    [SampleThemesFixture::getTheme(3)->getId()]
+                )
             ),
-            4 => $collectionService->createCommunityCollection(
-                SampleCommunitiesFixture::getCommunity(4)->getId(),
-                new CreateCollectionParameters($authorProfileId, 'Community Collection 4', 'My Community Collection 4', SampleThemesFixture::getTheme(4)->getId())
+            4 => $collectionService->createCollection(
+                new CreateCollectionParameters(
+                    sprintf('community:%s', SampleCommunitiesFixture::getCommunity(4)->getId()),
+                    'Community Collection 4',
+                    'My Community Collection 4',
+                    [SampleThemesFixture::getTheme(4)->getId()]
+                )
             ),
-            5 => $collectionService->createCommunityCollection(
-                SampleCommunitiesFixture::getCommunity(5)->getId(),
-                new CreateCollectionParameters($authorProfileId, 'Community Collection 5', 'My Community Collection 5', SampleThemesFixture::getTheme(5)->getId())
+            5 => $collectionService->createCollection(
+                new CreateCollectionParameters(
+                    sprintf('community:%s', SampleCommunitiesFixture::getCommunity(5)->getId()),
+                    'Community Collection 5',
+                    'My Community Collection 5',
+                    [SampleThemesFixture::getTheme(5)->getId()]
+                )
             ),
         ];
     }

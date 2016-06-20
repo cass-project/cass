@@ -14,15 +14,19 @@ final class CreateProfileCollectionTest extends CollectionRESTTestCase
     public function test200()
     {
         $profile = DemoProfileFixture::getProfile();
-        $theme = SampleThemesFixture::getTheme(1);
+
         $json = [
-            'author_profile_id' => $profile->getId(),
-            'theme_id' => $theme->getId(),
-            'title' => 'Demo Community Collection',
-            'description' => 'Ny Demo Community Collection',
+            'owner_sid' => sprintf('profile:%s', $profile->getId()),
+            'title' => 'Demo Profile Collection',
+            'description' => 'My Demo Profile Collection',
+            'theme_ids' => [
+                SampleThemesFixture::getTheme(1)->getId(),
+                SampleThemesFixture::getTheme(2)->getId(),
+                SampleThemesFixture::getTheme(3)->getId(),
+            ],
         ];
 
-        $this->requestCreateProfileCollection($json)
+        $this->requestCreateCollection($json)
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
@@ -32,15 +36,10 @@ final class CreateProfileCollectionTest extends CollectionRESTTestCase
                 'entity' => [
                     'id' => $this->expectId(),
                     'title' => $json['title'],
-                    'author_profile_id' => DemoProfileFixture::getProfile()->getId(),
                     'description' => $json['description'],
-                    'theme' => [
-                        'has' => true,
-                        'id' => $theme->getId()
-                    ]
+                    'theme_ids' => $json['theme_ids']
                 ]
-            ])
-        ;
+            ]);
 
         $profileId = DemoProfileFixture::getProfile()->getId();
         $collectionId = self::$currentResult->getContent()['entity']['id'];
@@ -54,10 +53,9 @@ final class CreateProfileCollectionTest extends CollectionRESTTestCase
                 $collections = $jsonResponse['entity']['collections'];
 
                 $this->assertTrue(is_array($collections));
-                $this->assertEquals(1, count($collections));
-                $this->assertEquals($collectionId, $collections[0]['collection_id']);
-            })
-        ;
+                $this->assertEquals(2, count($collections));
+                $this->assertEquals($collectionId, $collections[1]['collection_id']);
+            });
     }
 
 }

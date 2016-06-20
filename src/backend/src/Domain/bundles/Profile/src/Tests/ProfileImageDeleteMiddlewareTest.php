@@ -10,7 +10,7 @@ use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
  */
 class ProfileImageDeleteMiddlewareTest extends ProfileMiddlewareTestCase
 {
-    public function testUploadImage()
+    public function testImageDelete()
     {
         $account = DemoAccountFixture::getAccount();
         $profile = DemoProfileFixture::getProfile();
