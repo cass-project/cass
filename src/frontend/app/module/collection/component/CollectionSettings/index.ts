@@ -9,6 +9,7 @@ import {CollectionImage} from "../../../collection/component/Elements/Collection
 import {DeleteCollectionModal} from "../../../collection/component/Modal/DeleteCollectionModal/index";
 import {ModalControl} from "../../../util/classes/ModalControl";
 import {ProfileComponentService} from "../../../profile/service";
+import {CollectionRESTService} from "../../service/CollectionRESTService";
 
 @Component({
     template: require('./template.jade'),
@@ -31,9 +32,20 @@ export class CollectionSettings
 
     @Input('collection') collection;
 
-    constructor(private pService: ProfileComponentService){
+    private deleteProcessVisible: boolean = false;
+
+    constructor(private pService: ProfileComponentService, private collectionRESTService: CollectionRESTService){
         console.log(this.collection);
     }
+
+    avatarDeletingProcess(){
+        this.deleteProcessVisible = true;
+        this.collectionRESTService.deleteAvatar(this.collection).subscribe(data => {
+            /*this.collection.image = TODO: set default image*/
+            this.deleteProcessVisible = false;
+        });
+    }
+
 
     private deleteModal: ModalControl = new ModalControl();
 

@@ -40,7 +40,7 @@ article.component.component-collection-settings-modal
                           //([value]='collection.theme.id')
                           .modal-list-controls
                             div.form-switch-button
-                              input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", [checked]='collection.theme.has')
+                              input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", [checked]='collection.theme.has', [(ngModel)]='collection.theme.has')
                               label.form-switch-button-label(for="collectionCreateMasterEnableTheme")
                 .form-section
                   cass-tab-modal-header(level="2")
@@ -75,7 +75,9 @@ article.component.component-collection-settings-modal
                           p По умолчанию содержимое подборок публично и контент, который вы добавляете сюда, может быть доступен любому желающему
                         .modal-list-controls
                           div.form-switch-button
-                            input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterIsPrivate")
+                            input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterIsPrivate",
+                            [checked]='collection.public_options.is_private',
+                            [(ngModel)]='collection.public_options.is_private')
                             label.form-switch-button-label(for="collectionCreateMasterIsPrivate")
                     li
                       section.modal-list-item
@@ -87,7 +89,9 @@ article.component.component-collection-settings-modal
                           p Паблик – это основной траффик. Именно оттуда случайные посетители смогут найти вашу подборку
                         .modal-list-controls
                           div.form-switch-button
-                            input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterPublicEnabled", checked)
+                            input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterPublicEnabled",
+                            [checked]='collection.public_options.public_enabled',
+                            [(ngModel)]='collection.public_options.public_enabled')
                             label.form-switch-button-label(for="collectionCreateMasterPublicEnabled")
                     li
                       section.modal-list-item
@@ -99,7 +103,9 @@ article.component.component-collection-settings-modal
                           p Указав тематику и включив этот флаг, вы берете на себя обязательство постить только соответствующий указанной вами тематики контент. Взамен наши алгоритмы считают ваш контент более приоритетным для размещение в паблике.
                         .modal-list-controls
                           div.form-switch-button
-                            input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterModerationContact")
+                            input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterModerationContact",
+                            [checked]='collection.public_options.moderation_contract',
+                            [(ngModel)]='collection.public_options.moderation_contract')
                             label.form-switch-button-label(for="collectionCreateMasterModerationContact")
           cass-tab-modal-tab(title="Изображение")
             form.form.form-image
@@ -108,12 +114,14 @@ article.component.component-collection-settings-modal
                   span Изображение
                 .collection-image-form
                   .collection-image-container
-                    cass-collection-image(border="square", [url]="collection.image.small.public_path")
+                    cass-collection-image(border="square")
+                    //[url]="collection.image.small.public_path")
                   .collection-image-controls
-                    button.form-text-button.form-button-text-remove
+                    button.form-text-button.form-button-text-remove(
+                    *ngIf="!deleteProcessVisible", (click)="avatarDeletingProcess()")
                       i.fa.fa-fw.fa-trash
                       span Удалить
-                    button.form-text-button.form-button-text-remove(disabled)
+                    button.form-text-button.form-button-text-remove(*ngIf="deleteProcessVisible", disabled)
                       i.fa.fa-spinner.fa-pulse.fa-fw
                       span Удалить
                     button.form-button.form-button-primary
