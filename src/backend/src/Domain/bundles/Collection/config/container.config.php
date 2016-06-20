@@ -1,11 +1,11 @@
 <?php
 namespace Domain\Collection;
 
-use DI\Container;
 use function DI\object;
 use function DI\factory;
 use function DI\get;
 
+use DI\Container;
 use Domain\Collection\Entity\Collection;
 use Domain\Collection\Repository\CollectionRepository;
 use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
@@ -17,13 +17,16 @@ use League\Flysystem\Memory\MemoryAdapter;
 return [
     'php-di' => [
         CollectionRepository::class => factory(new DoctrineRepositoryFactory(Collection::class)),
+        'config.paths.collection.avatar.dir' => factory(function(Container $container) {
+            return sprintf('%s/entity/collection/by-sid/avatar/', $container->get('config.paths.assets.dir'));
+        }),
     ],
     'env' => [
         'production' => [
             'php-di' => [
                 CollectionService::class => object()
                     ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                        $assetsDir = sprintf('%s/collection/by-sid/avatar', $container->get('config.paths.assets.dir'));
+                        $assetsDir = sprintf($container->get('config.paths.collection.avatar.dir'), $container->get('config.paths.assets.dir'));
 
                         return new Filesystem(new Local($assetsDir));
                     }))
@@ -33,7 +36,7 @@ return [
             'php-di' => [
                 CollectionService::class => object()
                     ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                        $assetsDir = sprintf('%s/collection/by-sid/avatar', $container->get('config.paths.assets.dir'));
+                        $assetsDir = sprintf($container->get('config.paths.collection.avatar.dir'), $container->get('config.paths.assets.dir'));
 
                         return new Filesystem(new Local($assetsDir));
                     }))
@@ -43,7 +46,7 @@ return [
             'php-di' => [
                 CollectionService::class => object()
                     ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                        $assetsDir = sprintf('%s/collection/by-sid/avatar', $container->get('config.paths.assets.dir'));
+                        $assetsDir = sprintf($container->get('config.paths.collection.avatar.dir'), $container->get('config.paths.assets.dir'));
 
                         return new Filesystem(new MemoryAdapter($assetsDir));
                     }))
