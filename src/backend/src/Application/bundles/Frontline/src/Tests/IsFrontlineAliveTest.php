@@ -13,7 +13,8 @@ use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
  */
 class IsFrontlineAliveTest extends MiddlewareTestCase
 {
-    protected function getFixtures(): array {
+    protected function getFixtures(): array
+    {
         return [
             new DemoAccountFixture(),
             new DemoProfileFixture(),
@@ -23,15 +24,16 @@ class IsFrontlineAliveTest extends MiddlewareTestCase
         ];
     }
 
-    public function testNoExceptionsPlease() {
+    public function testNoExceptionsPlease()
+    {
         $this->request('GET', '/frontline/*/')
             ->execute()
             ->expectStatusCode(200)
-            ->expectJSONContentType()
-        ;
+            ->expectJSONContentType();
     }
 
-    public function testAuthFrontline() {
+    public function testAuthFrontline()
+    {
         $account = DemoAccountFixture::getAccount();
         $profile = DemoProfileFixture::getProfile();
 
@@ -45,34 +47,41 @@ class IsFrontlineAliveTest extends MiddlewareTestCase
                     'api_key' => $account->getAPIKey(),
                     'account' => [
                         'id' => $account->getId(),
-                        'email' =>  $account->getEmail(),
+                        'email' => $account->getEmail(),
                         'disabled' => [
                             'is_disabled' => false
                         ]
                     ],
                     'profiles' => [
                         [
-                            'id' => $profile->getId(),
-                            'account_id' => $account->getId(),
-                            'is_initialized' => $profile->isInitialized(),
-                            'is_current' => $profile->isCurrent(),
-                            'greetings' => [
-                                'profile_id' => $profile->getId(),
-                                'greetings_method' => $profile->getProfileGreetings()->getGreetingsMethod(),
-                                'first_name' => $profile->getProfileGreetings()->getFirstName(),
-                                'last_name' => $profile->getProfileGreetings()->getLastName(),
-                                'middle_name' => $profile->getProfileGreetings()->getMiddleName(),
-                                'nickname' => $profile->getProfileGreetings()->getNickName(),
+                            'entity' => [
+                                'id' => $profile->getId(),
+                                'account_id' => $account->getId(),
+                                'is_initialized' => $profile->isInitialized(),
+                                'is_current' => $profile->isCurrent(),
+                                'greetings' => [
+                                    'method' => $profile->getGreetings()->getMethod(),
+                                    'first_name' => $profile->getGreetings()->getFirstName(),
+                                    'last_name' => $profile->getGreetings()->getLastName(),
+                                    'middle_name' => $profile->getGreetings()->getMiddleName(),
+                                    'nick_name' => $profile->getGreetings()->getNickName(),
+                                ],
+                                'image' => $this->expectImageCollection(),
+                                'expert_in_ids' => function($input) use ($profile) {
+                                    $this->assertTrue(is_array($input));
+                                    $this->assertEquals($profile->getExpertInIds(), $input);
+                                },
+                                'interesting_in_ids' => function($input) use ($profile) {
+                                    $this->assertTrue(is_array($input));
+                                    $this->assertEquals($profile->getInterestingInIds(), $input);
+                                },
                             ],
-                            'image' => $this->expectImageCollection(),
-                            'expert_in' => function($input) use ($profile) {
-                                $this->assertTrue(is_array($input));
-                                $this->assertEquals($profile->getExpertIn()->toArray(), $input);
-                            },
-                            'interesting_in' => function($input) use ($profile) {
-                                $this->assertTrue(is_array($input));
-                                $this->assertEquals($profile->getInterestingIn()->toArray(), $input);
-                            },
+                            'collections' => [
+                                [
+                                    'id' => $this->expectId(),
+                                    'sid' => $this->expectString(),
+                                ]
+                            ]
                         ]
                     ],
                 ],
@@ -89,21 +98,20 @@ class IsFrontlineAliveTest extends MiddlewareTestCase
                             $this->assertGreaterThan(0, $input);
                         }
                     ],
-                   'community' => [
-                       'features' => function($input) {
-                           $this->assertTrue(is_array($input));
+                    'community' => [
+                        'features' => function($input) {
+                            $this->assertTrue(is_array($input));
 
-                           foreach($input as $item) {
-                               $this->assertTrue(is_array($item));
-                               $this->assertTrue(isset($item['code']));
-                               $this->assertTrue(is_string($item['code']) && strlen($item['code']) > 0);
-                               $this->assertTrue(isset($item['is_development_ready']) && is_bool($item['is_development_ready']));
-                               $this->assertTrue(isset($item['is_production_ready']) && is_bool($item['is_production_ready']));
-                           }
-                       }
-                   ]
+                            foreach($input as $item) {
+                                $this->assertTrue(is_array($item));
+                                $this->assertTrue(isset($item['code']));
+                                $this->assertTrue(is_string($item['code']) && strlen($item['code']) > 0);
+                                $this->assertTrue(isset($item['is_development_ready']) && is_bool($item['is_development_ready']));
+                                $this->assertTrue(isset($item['is_production_ready']) && is_bool($item['is_production_ready']));
+                            }
+                        }
+                    ]
                 ]
-            ])
-        ;
+            ]);
     }
 }
