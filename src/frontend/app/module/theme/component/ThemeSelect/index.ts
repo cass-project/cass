@@ -57,9 +57,11 @@ export class ThemeSelect
             if(this.isMultiple()) {
                 this.value.push(themeId);
                 this.searchInput.nativeElement.value = '';
+                this.search.disable();
                 this.change.emit(this.value);
             }else{
                 this.value = [themeId];
+                this.search.disable();
                 this.change.emit(this.value);
             }
         }
