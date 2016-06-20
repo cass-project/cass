@@ -3,16 +3,31 @@ export class CommunityEnity {
     sid: string;
     date_created_on: Date;
     title: string;
-    description: string;
-    theme_id: number;
-    has_image: boolean;
-    image: {
-        public_path: string
+    theme: {
+        has:boolean,
+        id:number
     };
+    image: CommunityEnityImage;
+    description: string;
+
     collections: {
         collection_id: number;
         position: number;
         sub: {}
     }[];
-    features: string[]
+
+    public_options:{
+        public_enabled: boolean,
+        moderation_contract: boolean
+    }
+}
+
+export class CommunityEnityImage {
+    uid: string;
+    variants: {
+        "16": {id: number, storage_path: string, public_path: string},
+        "32": {id: number, storage_path: string, public_path: string},
+        "64": {id: number, storage_path: string, public_path: string},
+        "default": {id: number, storage_path: string, public_path: string}
+    }
 }

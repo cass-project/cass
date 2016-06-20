@@ -34,31 +34,48 @@ import {CommunitySettingsModalModel} from "./model";
 
 export class CommunitySettingsModal
 {
-    public screens: ScreenControls<SettingsStage> = new ScreenControls<SettingsStage>(SettingsStage.General);
+    public screens: ScreenControls<SettingsStage> = new ScreenControls<SettingsStage>(SettingsStage.Image);
     public modelUnmodified:CommunitySettingsModalModel;
 
     @Output('close') closeEvent = new EventEmitter<CommunitySettingsModal>();
 
+
     constructor(
         public model:CommunitySettingsModalModel,
-        private service: CommunityService
+        private service: CommunityService,
+        private featuresService: CommunityFeaturesService
     ) {
         service.getBySid(model.sid).subscribe(data => {
             model.title = data.entity.title;
             model.description = data.entity.description;
-            model.theme_id = data.entity.theme_id;
+            model.theme_id = data.entity.theme.id;
             model.public_options = {
-                moderation_contract: false, //data.entity.public_options.moderation_contract;
-                public_enabled: false //data.entity.public_options.public_enabled;
+                moderation_contract: data.entity.public_options.moderation_contract,
+                public_enabled: data.entity.public_options.public_enabled
             };
+            model.image = data.entity.image;
+            
+            this.model.features = [];
+            for(let feature of featuresService.getFeatures()) {
+                this.model.features.push({
+                    "code": feature.code,
+                    "is_activated": false,
+                    "disabled": featuresService.isDisabled(feature.code)
+                });
+            }
+
             this.modelUnmodified = JSON.parse(JSON.stringify(model));
         });
     }
 
     reset() {
-        this.model.title = this.modelUnmodified.title;
-        this.model.description = this.modelUnmodified.description;
-        this.model.theme_id = this.modelUnmodified.theme_id;
+        for(let property in this.model){
+            if(this.model.hasOwnProperty(property)){
+                if(this.modelUnmodified.hasOwnProperty(property))
+                    this.model[property] =  this.modelUnmodified[property];
+                else delete this.model[property];
+            }
+        }
     }
 
     close() {

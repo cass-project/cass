@@ -1,7 +1,6 @@
 import {Component} from "angular2/core";
 
 import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect";
-import {CommunityService} from "../../../../../service/CommunityService";
 import {CommunitySettingsModalModel} from "../../model";
 
 @Component({

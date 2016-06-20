@@ -1,13 +1,9 @@
 @import "./../../../../../../../styles/globals";
 
-div.profile-modal-tab-image
-{
-  div.profile-image-form {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  div.profile-image-container {
+div.community-image-form {
+  text-align: center;
+
+  div.community-image-container {
     display: inline-block;
     margin-bottom: 20px;
     max-width: 500px;
@@ -16,7 +12,10 @@ div.profile-modal-tab-image
     overflow: hidden;
   }
 
-  div.profile-image-controls {
+  div.community-image-controls {
     text-align: center;
+  }
+  .form-button.form-button-primary {
+    vertical-align: middle;
   }
 }

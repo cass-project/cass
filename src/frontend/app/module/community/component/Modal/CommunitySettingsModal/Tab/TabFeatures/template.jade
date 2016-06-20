@@ -1,7 +1,22 @@
 .community-settings-modal-tab-features
-  .input-group
-    label.form-label.cass-padding-box-10([ngClass]='{disabled: feature.disabled}', *ngFor='#feature of features;')
-      span.label-text
-        input([(ngModel)]='feature.is_activated', type='checkbox', [disabled]='feature.disabled')
-        span {{featuresService.getName(feature.code)}}
-      span.label-description {{featuresService.getDescription(feature.code)}}
+  .form-section.modal-list
+    ul.theme-options.modal-list-container
+      li.modal-list-item([ngClass]="{disabled: feature.disabled}", *ngFor="#feature of model.features")
+        .modal-list-icon
+          .modal-list-icon-container
+            i.fa(class="{{featuresService.getIcon(feature.code)}}")
+        .modal-list-info
+          h1 {{featuresService.getName(feature.code)}}
+          p {{featuresService.getDescription(feature.code)}}
+          p.sorry(*ngIf="feature.disabled") К сожалению, мы пока что еще не сделали этот раздел. Но он скоро будет!
+        .modal-list-controls
+          .form-switch-button
+            input.form-switch-button-checkbox(
+              [(ngModel)]="feature.is_activated",
+              type="checkbox",
+              id="communityCreateModalFeature{{feature.code}}Checkbox",
+              [disabled]="feature.disabled",
+            )
+            label.form-switch-button-label(
+              htmlFor="communityCreateModalFeature{{feature.code}}Checkbox"
+            )
