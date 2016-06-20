@@ -3,10 +3,11 @@ Collection_Entity_Collection:
   description: Коллекция.
   required:
     - id
-    - author_profile_id
+    - owner_sid
+    - owner
     - title
     - description
-    - theme
+    - theme_ids
     - image
     - public_options
     - children
@@ -17,19 +18,27 @@ Collection_Entity_Collection:
     author_profile_id:
       type: number
       description: ID профиля, создавшего коллекцию
-    theme:
+    theme_ids:
+      type: array
+      items:
+        type: number
+        description: ID тематик
+    owner_sid:
+      type: string
+      description: OwnerSID ("community:#ID", "profile:#ID")
+    owner:
       type: object
-      description: Тематика
       schema:
         required:
-          - has
+          - id
+          - type
         properties:
-          has:
-            type: boolean
-            description: Возвращает TRUE, если коллекция привязана к какой-либо тематике
           id:
-            type: number
-            description: Тематика, которой принадлежит данная коллекция. Может содержать значение NULL.
+            type: string
+            description: ID владельца
+          type:
+            type: string
+            description: Тип владельца ("community", "profile")
     title:
       type: string
       description: Название (заголовок) коллекции

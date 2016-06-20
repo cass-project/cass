@@ -1,0 +1,33 @@
+"/protected/collection/create":
+  put:
+    tags:
+      - collection
+    description:
+      Создать коллекцию
+    parameters:
+      - name: body
+        in: body
+        required: true
+        description: JSON Request
+        schema:
+          schema:
+            $ref: '#/definitions/Collection_Entity_Request'
+    responses:
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        schema:
+          $ref: '#/responses/NotFound'
+      200:
+        schema:
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              schema:
+                $ref: '#/definitions/Collection_Entity_Collection'

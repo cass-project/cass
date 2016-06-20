@@ -39,7 +39,12 @@ class ProfileGetMiddlewareTest extends ProfileMiddlewareTestCase
                 'collections' => [
                     0 => [
                         'id' => $this->expectId(),
-                        'author_profile_id' => $profile->getId(),
+                        'sid' => $this->expectString(),
+                        'owner_sid' => $this->expectString(),
+                        'owner' => [
+                            'id' => $this->expectString(),
+                            'type' => 'profile'
+                        ],
                         'title' => '$gt_collection_my-feed_title',
                         'description' => '$gt_collection_my-feed_description'
                     ]

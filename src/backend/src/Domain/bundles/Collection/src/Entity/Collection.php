@@ -72,6 +72,12 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
     {
         $result = [
             'id' => $this->getId(),
+            'sid' => $this->getSID(),
+            'owner_sid' => $this->getOwnerSID(),
+            'owner' => [
+                'id' => $this->getOwnerId(),
+                'type' => $this->getOwnerType(),
+            ],
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
             'theme_ids' => $this->getThemeIds(),

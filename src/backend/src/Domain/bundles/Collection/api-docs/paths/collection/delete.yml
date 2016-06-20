@@ -19,8 +19,11 @@
           ID коллекции
     responses:
       403:
-        $ref: '#/responses/Unauthorized'
+        schema:
+          $ref: '#/responses/Unauthorized'
       404:
-        $ref: '#/responses/NotFound'
+        schema:
+          $ref: '#/responses/NotFound'
       200:
-        $ref: '#/responses/success'
+        schema:
+          $ref: '#/responses/success'
