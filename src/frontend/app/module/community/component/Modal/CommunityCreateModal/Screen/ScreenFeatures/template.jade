@@ -1,13 +1,14 @@
 cass-community-create-modal-form((abort)="abort()", (next)="next()")
   .form-section.modal-list
     ul.theme-options.modal-list-container
-      li.modal-list-item([ngClass]="{disabled: feature.disabled}", *ngFor="#feature of model.features; #i = index")
+      li.modal-list-item([ngClass]="{disabled: feature.disabled}", *ngFor="#feature of model.features")
         .modal-list-icon
           .modal-list-icon-container
             i.fa(class="{{featuresService.getIcon(feature.code)}}")
         .modal-list-info
           h1 {{featuresService.getName(feature.code)}}
           p {{featuresService.getDescription(feature.code)}}
+          p.sorry(*ngIf="feature.disabled") К сожалению, мы пока что еще не сделали этот раздел. Но он скоро будет!
         .modal-list-controls
           .form-switch-button
             input.form-switch-button-checkbox(
