@@ -3,6 +3,8 @@ namespace Domain\Community\Service;
 
 use Domain\Account\Entity\Account;
 use Domain\Auth\Service\CurrentAccountService;
+use Domain\Avatar\Image\ImageCollection;
+use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Avatar\Service\AvatarService;
 use Domain\Community\ACL\CommunityACL;
 use Domain\Community\Entity\Community;
@@ -10,7 +12,6 @@ use Domain\Community\Image\CommunityImageStrategy;
 use Domain\Community\Parameters\CreateCommunityParameters;
 use Domain\Community\Parameters\EditCommunityParameters;
 use Domain\Community\Parameters\SetPublicOptionsParameters;
-use Domain\Community\Parameters\UploadImageParameters;
 use Domain\Community\Repository\CommunityRepository;
 use Domain\Theme\Repository\ThemeRepository;
 use League\Flysystem\Filesystem;
@@ -81,17 +82,17 @@ class CommunityService
         return $community;
     }
 
-    public function uploadCommunityImage(int $communityId, UploadImageParameters $parameters): Community {
+    public function uploadCommunityImage(int $communityId, UploadImageParameters $parameters): ImageCollection {
         $community = $this->communityRepository->getCommunityById($communityId);
         $strategy = new CommunityImageStrategy($community, $this->imageFileSystem);
 
         $this->avatarService->uploadImage($strategy, $parameters);
         $this->communityRepository->saveCommunity($community);
 
-        return $community;
+        return $community->getImages();
     }
 
-    public function deleteCommunityImage(int $communityId): Community
+    public function deleteCommunityImage(int $communityId): ImageCollection
     {
         $community = $this->communityRepository->getCommunityById($communityId);
         $strategy = new CommunityImageStrategy($community, $this->imageFileSystem);
@@ -99,7 +100,7 @@ class CommunityService
         $this->avatarService->defaultImage($strategy);
         $this->communityRepository->saveCommunity($community);
 
-        return $community;
+        return $community->getImages();
     }
 
     public function setPublicOptions(int $communityId, SetPublicOptionsParameters $parameters): Community {

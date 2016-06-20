@@ -3,7 +3,7 @@ namespace Domain\Avatar\Parameters;
 
 use Application\Util\Definitions\Point;
 
-abstract class UploadImageParameters
+class UploadImageParameters
 {
     /** @var string */
     private $tmpFile;

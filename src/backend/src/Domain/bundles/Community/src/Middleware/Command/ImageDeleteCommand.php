@@ -11,10 +11,10 @@ final class ImageDeleteCommand extends Command
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
-            $community = $this->communityService->deleteCommunityImage($request->getAttribute('communityId'));
+            $image = $this->communityService->deleteCommunityImage($request->getAttribute('communityId'));
 
             return $responseBuilder->setStatusSuccess()->setJson([
-                'image' => $community->getImages()->toJSON()
+                'image' => $image->toJSON()
             ])->build();
         }catch(CommunityNotFoundException $e){
             $responseBuilder

@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Community\Middleware\Request;
+namespace Domain\Avatar\Middleware\Request;
 
 use Application\Exception\FileNotUploadedException;
 use Application\REST\Request\Params\RequestParamsInterface;
 use Application\Util\Definitions\Point;
-use Domain\Community\Parameters\UploadImageParameters;
+use Domain\Avatar\Parameters\UploadImageParameters;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\UploadedFile;
 

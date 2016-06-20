@@ -10,21 +10,20 @@ class ImageDeleteCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $profileId = $this->validateProfileId($request->getAttribute('profileId'));
-
         try {
-            $newProfileImage = $this->profileService->deleteProfileImage($profileId, $this->currentAccountService->getCurrentAccount()->getId());
+            $image = $this->profileService->deleteProfileImage($request->getAttribute('profileId'));
 
-            $responseBuilder->setStatusSuccess()->setJson([
-                'image' => $newProfileImage->toJSON()
-            ]);
+            $responseBuilder
+                ->setStatusSuccess()
+                ->setJson([
+                    'image' => $image->toJSON()
+                ]);
         }catch(ProfileNotFoundException $e) {
             $responseBuilder
-                ->setStatusNotFound()
-                ->setError($e);
+                ->setError($e)
+                ->setStatusNotFound();
         }
 
-        return $responseBuilder
-            ->build();
+        return $responseBuilder->build();
     }
 }

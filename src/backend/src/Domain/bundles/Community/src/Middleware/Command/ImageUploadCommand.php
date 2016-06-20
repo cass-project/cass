@@ -3,7 +3,7 @@ namespace Domain\Community\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
 use Domain\Avatar\Exception\ImageServiceException;
-use Domain\Community\Middleware\Request\UploadImageRequest;
+use Domain\Avatar\Middleware\Request\UploadImageRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -12,10 +12,10 @@ final class ImageUploadCommand extends Command
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
-            $community = $this->communityService->uploadCommunityImage($request->getAttribute('communityId'), (new UploadImageRequest($request))->getParameters());
+            $image = $this->communityService->uploadCommunityImage($request->getAttribute('communityId'), (new UploadImageRequest($request))->getParameters());
 
             return $responseBuilder->setStatusSuccess()->setJson([
-                'image' => $community->getImages()->toJSON()
+                'image' => $image->toJSON()
             ])->build();
         }catch(ImageServiceException $e) {
             return $responseBuilder
