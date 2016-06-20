@@ -11,7 +11,7 @@ abstract class Gender implements JSONSerializable
 
     public static function createFromStringCode(string $code): Gender
     {
-        switch($code) {
+        switch(strtolower($code)) {
             default:
                 throw new UnknownGenderException(sprintf('Gender with string code `%s` is unknown', $code));
 

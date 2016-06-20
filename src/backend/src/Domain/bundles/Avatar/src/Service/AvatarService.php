@@ -51,7 +51,7 @@ final class AvatarService
         $oldCollectionUID = null;
 
         if($strategy->getEntity()->hasImages()) {
-            $oldCollectionUID = $strategy->getEntity()->fetchImages()->getUID();
+            $oldCollectionUID = $strategy->getEntity()->getImages()->getUID();
         }
 
         $this->destroyImages($strategy);
@@ -60,7 +60,7 @@ final class AvatarService
         $images = $this->makeImages($strategy, $source);
 
         $strategy->validate($source);
-        $strategy->getEntity()->exportImages($images);
+        $strategy->getEntity()->setImages($images);
 
         if($oldCollectionUID) {
             $strategy->getFilesystem()->deleteDir(sprintf('%s/%s', $strategy->getEntityId(), $oldCollectionUID));
@@ -72,7 +72,7 @@ final class AvatarService
         $oldCollectionUID = null;
 
         if($strategy->getEntity()->hasImages()) {
-            $oldCollectionUID = $strategy->getEntity()->fetchImages()->getUID();
+            $oldCollectionUID = $strategy->getEntity()->getImages()->getUID();
         }
         
         $this->destroyImages($strategy);
@@ -103,7 +103,7 @@ final class AvatarService
         $source->crop($end->getX() - $start->getX(), $end->getY() - $start->getY(), $start->getX(), $start->getY());
 
         $strategy->validate($source);
-        $strategy->getEntity()->exportImages($this->makeImages($strategy, $source));
+        $strategy->getEntity()->setImages($this->makeImages($strategy, $source));
 
         if($oldCollectionUID) {
             $strategy->getFilesystem()->deleteDir(sprintf('%s/%s', $strategy->getEntityId(), $oldCollectionUID));

@@ -82,6 +82,9 @@ class ProfileService
 
         $this->profileRepository->createProfile($profile);
         $this->collectionService->createDefaultCollectionForProfile($profile);
+        $this->accountService->switchToProfile($account, $profile->getId());
+
+        $this->generateProfileImage($profile->getId());
 
         return $profile;
     }
@@ -119,7 +122,8 @@ class ProfileService
         $account->getProfiles()->removeElement($profile);
 
         if ($profile->isCurrent()) {
-            $this->accountService->switchToProfile($account, $account->getProfiles()->first());
+            $firstProfile =  $account->getProfiles()->first(); /** @var Profile $firstProfile */
+            $this->accountService->switchToProfile($account, $firstProfile->getId());
         }
 
         return $account->getCurrentProfile();
@@ -157,6 +161,11 @@ class ProfileService
     }
 
     public function deleteProfileImage(int $profileId): ImageCollection
+    {
+        return $this->generateProfileImage($profileId);
+    }
+
+    public function generateProfileImage(int $profileId): ImageCollection
     {
         $profile = $this->getProfileById($profileId);
         $strategy = new ProfileImageStrategy($profile, $this->imagesFlySystem);

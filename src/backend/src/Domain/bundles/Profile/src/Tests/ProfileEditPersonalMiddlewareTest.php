@@ -16,11 +16,11 @@ class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
         $profile = DemoProfileFixture::getProfile();
 
         $json = [
-            'greetings_method' => 'fl',
+            'method' => 'fl',
             'first_name' => 'Annie',
             'middle_name' => 'the Best',
             'last_name' => 'Mage',
-            'nickname' => 'annie_bears'
+            'nick_name' => 'annie_bears'
         ];
 
         $this->requestEditPersonal($profile->getId(), $json)
@@ -34,11 +34,11 @@ class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
         $profile = DemoProfileFixture::getProfile();
 
         $json = [
-            'greetings_method' => 'fl',
+            'method' => 'fl',
             'first_name' => 'Annie',
             'middle_name' => 'the Best',
             'last_name' => 'Mage',
-            'nickname' => 'annie_bears'
+            'nick_name' => 'annie_bears'
         ];
 
         $this->requestEditPersonal($profile->getId(), $json)
@@ -49,7 +49,8 @@ class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
                 'entity' => [
                     'id' => $profile->getId(),
                     'greetings' => [
-                        'greetings_method' => $json['greetings_method'],
+                        'method' => $json['method'],
+                        'greetings' => sprintf('%s % s', $json['first_name'], $json['last_name']),
                         'first_name' => $json['first_name'],
                         'last_name' => $json['last_name'],
                         'middle_name' => $json['middle_name'],
@@ -64,11 +65,11 @@ class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
         $profile = DemoProfileFixture::getProfile();
 
         $json = [
-            'greetings_method' => 'fl',
+            'method' => 'fl',
             'first_name' => 'Annie',
             'middle_name' => 'the Best',
             'last_name' => 'Mage',
-            'nickname' => 'annie_bears',
+            'nick_name' => 'annie_bears',
             'gender' => 'female'
         ];
 
@@ -80,7 +81,8 @@ class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
                 'entity' => [
                     'id' => $profile->getId(),
                     'greetings' => [
-                        'greetings_method' => $json['greetings_method'],
+                        'method' => $json['greetings_method'],
+                        'greetings' => sprintf('%s % s', $json['first_name'], $json['last_name']),
                         'first_name' => $json['first_name'],
                         'last_name' => $json['last_name'],
                         'middle_name' => $json['middle_name'],

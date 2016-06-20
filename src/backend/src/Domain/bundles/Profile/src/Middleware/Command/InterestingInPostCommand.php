@@ -20,7 +20,7 @@ class InterestingInPostCommand extends Command
                 $this->profileService->getProfileById($profileId)
             );
 
-            $themeIds = array_map('intval', explode(',', (new InterestingInRequest($request))->getParameters()->getThemeIds()));
+            $themeIds = array_map('intval', (new InterestingInRequest($request))->getParameters()->getThemeIds());
 
             $this->profileService->setInterestingInThemes($profileId, array_unique(array_merge($profile->getInterestingInIds(), $themeIds)));
 
@@ -32,5 +32,7 @@ class InterestingInPostCommand extends Command
                 ->setError($e)
                 ->setStatusNotFound();
         }
+
+        return $responseBuilder->build();
     }
 }

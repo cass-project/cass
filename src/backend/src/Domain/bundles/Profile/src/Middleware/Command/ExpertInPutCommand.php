@@ -21,7 +21,7 @@ class ExpertInPutCommand extends Command
             );
 
             $themeIds = (new ExpertInRequest($request))->getParameters()->getThemeIds();
-            $this->profileService->setExpertsInThemes($profileId, array_unique(array_map('invtval', $themeIds)));
+            $this->profileService->setExpertsInThemes($profileId, array_unique(array_map('intval', $themeIds)));
 
             $responseBuilder
                 ->setStatusSuccess()

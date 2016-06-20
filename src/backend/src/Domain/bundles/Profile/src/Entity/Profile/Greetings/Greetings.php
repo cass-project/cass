@@ -3,39 +3,23 @@ namespace Domain\Profile\Entity\Profile\Greetings;
 
 use Application\Util\JSONSerializable;
 
-abstract class Greetings implements JSONSerializable
+abstract class Greetings implements JSONSerializable, \Serializable
 {
     /** @var string */
-    private $firstName;
+    private $firstName = '';
 
     /** @var string */
-    private $lastName;
+    private $lastName = '';
 
     /** @var string */
-    private $middleName;
+    private $middleName = '';
 
     /** @var string */
-    private $nickName;
-
-    public function __construct(array $names = []) {
-        $names = array_merge(/* defaults */ [
-            'firstName' => '',
-            'lastLame' => '',
-            'middleName' => '',
-            'nickName' => ''
-        ], $names);
-
-        foreach($names as $field => $name) {
-            $field = str_replace('_n', 'N', $field);
-            $name = trim($name);
-
-            $this->$field = $name;
-        }
-    }
+    private $nickName = '';
 
     public static function createFromMethod(string $method, array $names = []): Greetings
     {
-        switch(strtolower($method)) {
+        switch (strtolower($method)) {
             default:
                 throw new \OutOfBoundsException(sprintf('Unknown method `%s`', $method));
 
@@ -48,7 +32,41 @@ abstract class Greetings implements JSONSerializable
         }
     }
 
+    public function __construct(array $names = [])
+    {
+        $this->importNames($names);
+    }
+
+    public function serialize()
+    {
+        return json_encode($this->toJSON());
+    }
+
+    public function unserialize($serialized)
+    {
+        $this->importNames(json_decode($serialized, true));
+    }
+
+    private function importNames(array $names)
+    {
+        $names = array_merge(/* defaults */
+            [
+                'first_name' => '',
+                'last_lame' => '',
+                'middle_name' => '',
+                'nick_name' => ''
+            ], $names);
+
+        foreach ($names as $field => $name) {
+            $field = str_replace('_n', 'N', $field);
+            $name = trim($name);
+
+            $this->$field = (string) $name;
+        }
+    }
+
     abstract public function getMethod(): string;
+
     abstract public function __toString(): string;
 
     public function toJSON(): array

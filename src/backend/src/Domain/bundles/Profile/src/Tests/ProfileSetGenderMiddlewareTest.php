@@ -107,7 +107,7 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
 
         $this->request('POST', sprintf('/protected/profile/%d/set-gender', $profile->getId()))
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
-            ->setParameters(['gender' => 'none'])
+            ->setParameters(['gender' => 'not-specified'])
             ->execute()
             ->expectStatusCode(200)
             ->expectJSONContentType();

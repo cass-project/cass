@@ -330,7 +330,11 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
     private function recursiveAssertEquals(array $expected, array $actual, string $level = '- ') {
         foreach($expected as $key=>$value) {
             if(! (is_array($value) || is_callable($value) || is_object($value))) {
-                echo sprintf("\n%sASSERT: %s == %s", $level, $key, (string) $actual[$key]);
+                echo sprintf("\n%sASSERT: %s == %s", $level, $key, (string) (
+                    is_object($actual[$key])
+                        ? "#OBJECT"
+                        : var_export($actual[$key], true)
+                ));
             }
 
             if($value instanceof ExpectNotExists) {

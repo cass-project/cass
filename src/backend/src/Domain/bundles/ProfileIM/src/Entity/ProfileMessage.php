@@ -17,14 +17,14 @@ class ProfileMessage implements JSONSerializable, IdEntity
     use IdTrait;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile\Greetings")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
      * @JoinColumn(name="source_profile_id", referencedColumnName="id")
      * @var Profile
      */
     private $sourceProfile;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile\Greetings")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
      * @JoinColumn(name="target_profile_id", referencedColumnName="id")
      * @var Profile
      */

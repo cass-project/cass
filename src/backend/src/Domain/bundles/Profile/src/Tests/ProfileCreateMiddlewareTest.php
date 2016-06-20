@@ -24,7 +24,8 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
                 'entity' => [
                     'id' => $this->expectId(),
                     'sid' => $this->expectString(),
-                    'is_current' => true
+                    'is_current' => true,
+                    'image' => $this->expectImageCollection()
                 ]
             ])
             ->expect(function (array $result) {
@@ -41,7 +42,8 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
                 'entity' => [
                     'id' => $profile->getId(),
                     'sid' => $this->expectString(),
-                    'is_current' => false
+                    'is_current' => false,
+                    'image' => $this->expectImageCollection()
                 ]
             ]);
     }

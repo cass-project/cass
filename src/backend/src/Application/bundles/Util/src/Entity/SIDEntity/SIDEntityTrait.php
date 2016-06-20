@@ -19,5 +19,7 @@ trait SIDEntityTrait
     public function regenerateSID(): string
     {
         $this->sid = GenerateRandomString::gen(SIDEntity::SID_LENGTH);
+
+        return $this->sid;
     }
 }

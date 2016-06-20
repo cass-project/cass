@@ -22,7 +22,7 @@ class Collection implements JSONSerializable, IdEntity
     use ImageEntityTrait;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile\Greetings")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
      * @JoinColumn(name="author_profile_id", referencedColumnName="id")
      * @var Profile
      */

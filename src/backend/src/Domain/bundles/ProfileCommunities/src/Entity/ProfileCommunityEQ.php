@@ -23,7 +23,7 @@ class ProfileCommunityEQ implements JSONSerializable, IdEntity
     private $communitySID;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile\Greetings")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
      * @JoinColumn(name="profile_id", referencedColumnName="id")
      * @var Profile
      */

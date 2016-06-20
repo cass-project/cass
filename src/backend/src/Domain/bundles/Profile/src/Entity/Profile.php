@@ -83,7 +83,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity
             'is_initialized' => $this->isInitialized(),
             'greetings' => $this->getGreetings()->toJSON(),
             'gender' => $this->getGender()->toJSON(),
-            'image' => $this - $this->getImages()->toJSON(),
+            'image' => $this->getImages()->toJSON(),
             'expert_in_ids' => $this->expertInIds,
             'interesting_in_ids' => $this->interestingInIds,
             'collections' => $this->getCollections()->toJSON(),
@@ -97,7 +97,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity
         $this->account = $account;
         $this->collections = new CollectionTree();
         $this->greetings = new GreetingsAnonymous();
-        $this->gender = new GenderNotSpecified();
+        $this->gender = (new GenderNotSpecified())->getIntCode();
 
         $this->regenerateSID();
         $this->setImages(new ImageCollection());
@@ -169,9 +169,11 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity
         return $this->interestingInIds;
     }
 
-    public function setInterestingInIds(array $themeIds): array
+    public function setInterestingInIds(array $themeIds): self
     {
         $this->interestingInIds = array_unique(array_filter($themeIds, 'is_int'));
+
+        return $this;
     }
 
     public function getExpertInIds(): array
@@ -179,8 +181,10 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity
         return $this->expertInIds;
     }
 
-    public function setExpertInIds(array $themeIds): array
+    public function setExpertInIds(array $themeIds): self
     {
         $this->expertInIds = array_unique(array_filter($themeIds, 'is_int'));
+
+        return $this;
     }
 }

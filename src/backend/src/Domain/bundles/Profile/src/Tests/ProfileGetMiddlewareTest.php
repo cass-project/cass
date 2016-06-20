@@ -28,7 +28,21 @@ class ProfileGetMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
-                    'id' => $profile->getId()
+                    'id' => $profile->getId(),
+                    'collections' => [
+                        0 => [
+                            'collection_id' => $this->expectId(),
+                            'position' => 1,
+                        ]
+                    ]
+                ],
+                'collections' => [
+                    0 => [
+                        'id' => $this->expectId(),
+                        'author_profile_id' => $profile->getId(),
+                        'title' => '$gt_collection_my-feed_title',
+                        'description' => '$gt_collection_my-feed_description'
+                    ]
                 ]
             ]);;
     }

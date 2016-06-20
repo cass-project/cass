@@ -27,5 +27,7 @@ class SetGenderCommand extends Command
                 ->setError($e)
                 ->setStatusNotFound();
         }
+
+        return $responseBuilder->build();
     }
 }

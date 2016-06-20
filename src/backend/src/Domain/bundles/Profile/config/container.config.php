@@ -21,7 +21,7 @@ return [
         }),
         ProfileRepository::class => factory(new DoctrineRepositoryFactory(Profile::class)),
         ProfileService::class => object()
-            ->constructorParameter('imageFlySystem', factory(function(Container $container) {
+            ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
                 return new Filesystem(new Local($container->get('config.paths.profile.avatar.dir')));
             })),
     ],

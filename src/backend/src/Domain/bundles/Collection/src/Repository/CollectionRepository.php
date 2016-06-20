@@ -8,6 +8,7 @@ use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Parameters\EditCollectionParameters;
 use Domain\Collection\Parameters\SetPublicOptionsParameters;
 use Domain\Avatar\Image\ImageCollection;
+use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Theme\Entity\Theme;
 
@@ -16,8 +17,7 @@ class CollectionRepository extends EntityRepository
     public function createCollection(string $ownerSID, ImageCollection $images, CreateCollectionParameters $parameters): Collection {
         $em = $this->getEntityManager();
 
-        /** @var Profile $profile */
-        $profile = $em->getReference(Profile::class, $parameters->getAuthorProfileId());
+        $profile = $em->getReference(Profile::class, $parameters->getAuthorProfileId()); /** @var Profile $profile */
 
         $collection = new Collection(
             $profile,

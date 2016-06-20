@@ -17,7 +17,7 @@ class Post implements IdEntity, JSONSerializable
     use IdTrait;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile\Greetings")
+     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
      * @JoinColumn(name="author_profile_id", referencedColumnName="id")
      * @var Profile
      */

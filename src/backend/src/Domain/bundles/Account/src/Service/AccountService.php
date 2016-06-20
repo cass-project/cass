@@ -144,13 +144,13 @@ class AccountService
 
     public function switchToProfile(Account $account, int $switchToProfileId): Account
     {
-        if(! $account->getProfiles()->exists(function(Profile $profile) use ($switchToProfileId) {
+        if(! $account->getProfiles()->filter(function(Profile $profile) use ($switchToProfileId) {
             return $profile->getId() === $switchToProfileId;
-        })) {
+        })->count()) {
             throw new AccountNotContainsProfileException(sprintf('Profile (ID: %s) is not exists', $switchToProfileId));
         };
 
-        $account->getProfiles()->forAll(function(Profile $profile) use($switchToProfileId, &$found) {
+        $account->getProfiles()->map(function(Profile $profile) use($switchToProfileId, &$found) {
             $profile->getId() === $switchToProfileId
                 ? $profile->setAsCurrent()
                 : $profile->unsetAsCurrent();
