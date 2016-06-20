@@ -11,9 +11,9 @@ use Domain\Feedback\Middleware\Command\DeleteCommand;
 use Domain\Feedback\Middleware\Command\GetAllCommand;
 use Domain\Feedback\Middleware\Command\GetHasAnswerCommand;
 use Domain\Feedback\Middleware\Command\GetWithoutAnswerCommand;
+use Domain\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Zend\Stratigility\MiddlewareInterface;
 
 class FeedbackMiddleware implements MiddlewareInterface
@@ -41,9 +41,16 @@ class FeedbackMiddleware implements MiddlewareInterface
 
     try {
       return $resolver->run($request, $responseBuilder);
-    }catch(\Exception $e) {
+    }
+    catch(ProfileNotFoundException $e){
+      $responseBuilder
+        ->setStatusNotFound()
+        ->setError($e);
+    }
+    catch(\Exception $e) {
       return $responseBuilder
-        ->setError($e)
+        ->setStatusInternalError()
+        ->setError($e->getMessage())
         ->build();
     }
   }

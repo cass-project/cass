@@ -8,7 +8,7 @@ class FeedbackMigration extends AbstractMigration
     {
         $this->table('feedback')
              ->addColumn('created_at', 'datetime')
-             ->addColumn('profile_id', 'integer')
+             ->addColumn('profile_id', 'integer',['null'=> true ])
              ->addColumn('description', 'text')
              ->addColumn('type', 'string',['null' => true ])
              ->addForeignKey('profile_id', 'profile', 'id', [

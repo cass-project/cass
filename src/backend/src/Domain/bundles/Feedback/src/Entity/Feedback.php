@@ -92,11 +92,11 @@ class Feedback
   public function toJSON():array
   {
     return [
-      'id'          => $this->getId(),
+      'id'          => $this->id,
       'created_at'  => $this->created_at,
       'description' => $this->description,
       'profile_id'  => $this->hasProfile() ? $this->hasProfile()->getId() : NULL,
-      'type'        => $this->getType()
+      'type'        => $this->type
     ];
   }
 

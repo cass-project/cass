@@ -2,6 +2,7 @@
 namespace Domain\Feedback\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
+use Domain\Feedback\Entity\Feedback;
 use Domain\Feedback\Middleware\Request\CreateFeedbackRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -17,7 +18,9 @@ class CreateCommand extends Command
 
     return $responseBuilder
       ->setStatusSuccess()
-      ->setJson(['entity'=> $feedback->toJSON()])
+      ->setJson(
+        [
+         'entity'=> $feedback->toJSON()])
       ->build()
     ;
   }
