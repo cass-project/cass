@@ -5,6 +5,12 @@ import {Http} from 'angular2/http';
 export class CollectionRESTService {
     constructor(public http:Http) {}
 
+    deleteAvatar(collection){
+        let url = `/backend/api/protected/collection/${collection.id}/image-delete`;
+
+        return this.http.delete(url);
+    }
+
     profileCreateCollection(collection){
         let url = `/backend/api/protected/profile/collection/create`;
 
