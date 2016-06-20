@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Profile\Strategy;
+namespace Domain\Profile\Image;
 
 use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Image\Image;

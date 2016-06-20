@@ -1,87 +1,60 @@
 <?php
 namespace Domain\Avatar\Service;
 
-use Application\Util\GenerateRandomString;
 use Domain\Avatar\Exception\InvalidCropException;
-use Domain\Avatar\Exception\InvalidRatioException;
-use Domain\Avatar\Image\Image;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;
+use Domain\Avatar\Service\Strategy\AvatarServiceStrategy;
 use Domain\Avatar\Strategy\ImageStrategy;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Image as ImageLayer;
 use League\Flysystem\FilesystemInterface;
 
 final class AvatarService
 {
     const GENERATE_FILENAME_LENGTH = 8;
 
-    /** @var ImageManager */
-    private $imageManager;
+    /** @var AvatarServiceStrategy */
+    private $strategy;
 
-    public function __construct(
-        ImageManager $imageManager
-    ) {
-        $this->imageManager = $imageManager;
+    public function __construct(AvatarServiceStrategy $strategy)
+    {
+        $this->strategy = $strategy;
     }
 
-    public function makeImages(ImageStrategy $strategy, ImageLayer $source): ImageCollection
+    public function defaultImage(ImageStrategy $strategy): ImageCollection
     {
-        $collection = new ImageCollection();
-
-        $sizes = $strategy->getSizes();
-        sort($sizes);
-
-        foreach($sizes as $size) {
-            if((! $collection->hasImage($size)) && ($source->getWidth() >= $size)) {
-                $collection->attachImage((string) $size, $this->createImage($strategy, $source, $collection->getUID(), $size));
-            }
-        }
-
-        if($collection->hasImage($strategy->getDefaultSize())) {
-            $collection->attachImage('default', clone $collection->getImage((string) $strategy->getDefaultSize()));
-        }else{
-            $collection->attachImage('original', clone $collection->getImage(min($sizes)));
-        }
-
-        return $collection;
-    }
-
-    public function defaultImage(ImageStrategy $strategy)
-    {
-        $oldCollectionUID = null;
-
-        if($strategy->getEntity()->hasImages()) {
-            $oldCollectionUID = $strategy->getEntity()->getImages()->getUID();
-        }
-
         $this->destroyImages($strategy);
 
-        $source = $this->imageManager->make($strategy->getDefaultImage()->getStoragePath());
-        $images = $this->makeImages($strategy, $source);
+        $oldCollectionUID = $strategy->getEntity()->hasImages()
+            ? $oldCollectionUID = $strategy->getEntity()->getImages()->getUID()
+            : false
+        ;
 
-        $strategy->validate($source);
-        $strategy->getEntity()->setImages($images);
+        $this->setImages($strategy, $this->strategy->generateImagesFromPath(
+            $strategy,
+            $strategy->getDefaultImage()->getStoragePath()
+        ));
 
         if($oldCollectionUID) {
             $strategy->getFilesystem()->deleteDir(sprintf('%s/%s', $strategy->getEntityId(), $oldCollectionUID));
         }
+
+        return $strategy->getEntity()->getImages();
     }
 
-    public function uploadImage(ImageStrategy $strategy, UploadImageParameters $parameters)
+    public function uploadImage(ImageStrategy $strategy, UploadImageParameters $parameters): ImageCollection
     {
         $oldCollectionUID = null;
 
         if($strategy->getEntity()->hasImages()) {
             $oldCollectionUID = $strategy->getEntity()->getImages()->getUID();
         }
-        
+
         $this->destroyImages($strategy);
-        
+
         $start = $parameters->getPointStart();
         $end = $parameters->getPointEnd();
 
-        $source = $this->imageManager->make($parameters->getTmpFile());
+        $source = $this->strategy->getImageFromPath($parameters->getTmpFile());
 
         if(($start->getX() > $end->getX()) || ($start->getY() > $end->getY())) {
             throw new InvalidCropException(sprintf('Invalid start/end points, got Point(%d, %d) – Point(%d, %d)',
@@ -101,65 +74,47 @@ final class AvatarService
             ));
         }
 
-        $source->crop($end->getX() - $start->getX(), $end->getY() - $start->getY(), $start->getX(), $start->getY());
+        $source = $this->strategy->cropImage(
+            $source,
+            $end->getX() - $start->getX(),
+            $end->getY() - $start->getY(),
+            $start->getX(), 
+            $start->getY()
+        );
 
         $strategy->validate($source);
-        $strategy->getEntity()->setImages($this->makeImages($strategy, $source));
+        $this->setImages($strategy, $this->strategy->generateImagesFromSource($strategy, $source));
 
         if($oldCollectionUID) {
             $strategy->getFilesystem()->deleteDir(sprintf('%s/%s', $strategy->getEntityId(), $oldCollectionUID));
         }
+
+        return $strategy->getEntity()->getImages();
+    }
+
+    private function setImages(ImageStrategy $strategy, ImageCollection $collection)
+    {
+        if($collection->hasImage($strategy->getDefaultSize())) {
+            $collection->attachImage('default', clone $collection->getImage((string) $strategy->getDefaultSize()));
+        }else{
+            $collection->attachImage('original', clone $collection->getImage(min($sizes)));
+        }
+
+        $strategy->getEntity()->setImages($collection);
+    }
+
+    public function generateImage(ImageStrategy $strategy): ImageCollection
+    {
+        return $this->defaultImage($strategy);
     }
 
     public function destroyImages(ImageStrategy $strategy)
     {
         $fs = $strategy->getFilesystem();
-        $dir = (string) $strategy->getEntityId();
+        $dir = (string)$strategy->getEntityId();
 
         if($fs->has($dir)) {
             $fs->deleteDir($dir);
         }
-    }
-
-    public function generateImage(ImageStrategy $strategy) {
-        $this->defaultImage($strategy);
-    }
-
-    private function createImage(ImageStrategy $strategy, ImageLayer $source, string $collectionUID, int $size): Image
-    {
-        $ratio = array_filter(explode(':', $strategy->getRatio()), function($input) {
-            return is_numeric($input);
-        });
-
-        if(count($ratio) !== 2) {
-            throw new InvalidRatioException(sprintf('Invalid ratio `%s`', $strategy->getRatio()));
-        }
-
-        $width = $size;
-        $height = ($size / (int) $ratio[0]) * (int) $ratio[1];
-
-        $image = clone $source;
-        $image->resize($width, $height);
-
-        $dir = $this->touchDir($strategy->getFilesystem(), $strategy->getEntityId(), $collectionUID, $size);
-        $file = sprintf('%s.png', GenerateRandomString::gen(self::GENERATE_FILENAME_LENGTH));
-
-        $strategy->getFilesystem()->write("{$dir}/{$file}", $image->encode('png'));
-
-        return new Image(
-            "{$dir}/{$file}",
-            sprintf("%s/%s/%s/%s", $strategy->getPublicPath(), $strategy->getEntityId(), $size, $file)
-        );
-    }
-
-    private function touchDir(FilesystemInterface $fs, string $entityId, string $collectionUID, string $imageId): string
-    {
-        $resultPath = sprintf('%s/%s/%s', $entityId, $collectionUID, $imageId);
-
-        if(! $fs->has($resultPath)) {
-            $fs->createDir($resultPath);
-        }
-
-        return $resultPath;
     }
 }

@@ -16,7 +16,7 @@ use Domain\Profile\Exception\LastProfileException;
 use Domain\Profile\Exception\MaxProfilesReachedException;
 use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
 use Domain\Profile\Repository\ProfileRepository;
-use Domain\Profile\Strategy\ProfileImageStrategy;
+use Domain\Profile\Image\ProfileImageStrategy;
 use Domain\Profile\Validation\ProfileValidationService;
 use League\Flysystem\FilesystemInterface;
 
