@@ -1,12 +1,16 @@
 <?php
 namespace Domain\ProfileIM\Middleware;
 
+use Application\Service\CommandService;
 use Domain\Auth\Service\CurrentAccountService;
 use Application\REST\Response\GenericResponseBuilder;
 use Domain\Profile\Exception\ProfileNotFoundException;
 use Domain\ProfileIM\Exception\SameTargetAndSourceException;
 use Domain\ProfileIM\Middleware\Command\Command;
 use Domain\Profile\Service\ProfileService;
+use Domain\ProfileIM\Middleware\Command\MessagesCommand;
+use Domain\ProfileIM\Middleware\Command\SendCommand;
+use Domain\ProfileIM\Middleware\Command\UnreadCommand;
 use Domain\ProfileIM\Service\ProfileIMService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -14,44 +18,36 @@ use Zend\Stratigility\MiddlewareInterface;
 
 class ProfileIMMiddleware implements MiddlewareInterface
 {
-    /** @var CurrentAccountService */
-    private $currentAccountService;
+    /** @var CommandService */
+    private $commandService;
 
-    /** @var ProfileIMService */
-    private $profileIMService;
-
-    /** @var  ProfileService */
-    private $profileService;
-
-    public function __construct(CurrentAccountService $currentAccountService, ProfileIMService $profileIMService, ProfileService $profileService)
+    public function __construct(CommandService $commandService)
     {
-        $this->currentAccountService = $currentAccountService;
-        $this->profileIMService = $profileIMService;
-        $this->profileService = $profileService;
+        $this->commandService = $commandService;
     }
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
         $responseBuilder = new GenericResponseBuilder($response);
-        
-        try{
-            $command = Command::factory($request, $this->currentAccountService, $this->profileIMService, $this->profileService);
-            $result  = $command->run($request);
 
+        try {
+            $resolver = $this->commandService->createResolverBuilder()
+                ->attachDirect('send', SendCommand::class)
+                ->attachDirect('unread', UnreadCommand::class)
+                ->attachDirect('messages', MessagesCommand::class)
+                ->resolve($request);
+
+            return $resolver->run($request, $responseBuilder);
+        } catch(ProfileNotFoundException $e) {
             $responseBuilder
-              ->setStatusSuccess()
-              ->setJson($result);
-        }catch (ProfileNotFoundException $e){
+                ->setStatusNotFound()
+                ->setError($e);
+        } catch(SameTargetAndSourceException $e) {
             $responseBuilder
-              ->setStatusNotFound()
-              ->setError($e);
-        } catch(SameTargetAndSourceException $e){
-            $responseBuilder
-              ->setStatusBadRequest()
-              ->setError($e);
+                ->setStatusBadRequest()
+                ->setError($e);
         }
-
-
+        
         return $responseBuilder->build();
     }
 }

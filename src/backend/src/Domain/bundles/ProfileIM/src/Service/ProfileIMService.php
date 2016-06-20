@@ -20,7 +20,8 @@ class ProfileIMService
         $this->profileMessageRepository = $profileMessageRepository;
     }
 
-    public function getMessageById($id): ProfileMessage {
+    public function getMessageById($id): ProfileMessage
+    {
         return $this->profileMessageRepository->getMessageById($id);
     }
 
@@ -28,7 +29,7 @@ class ProfileIMService
     {
         return $this->profileMessageRepository->createMessage($message);
     }
-    
+
     public function getMessages(int $sourceProfileId, int $targetProfileId, Seek $seek): array
     {
         /** @var ProfileMessage[] $result */
@@ -39,7 +40,7 @@ class ProfileIMService
 
     public function markMessagesAsRead(array $messages)
     {
-        array_walk($messages, function(ProfileMessage $message){
+        array_walk($messages, function(ProfileMessage $message) {
             $message->setAsRead();
         });
 

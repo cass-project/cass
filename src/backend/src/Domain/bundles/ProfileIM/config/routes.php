@@ -4,8 +4,7 @@ namespace Domain\ProfileIM;
 use Domain\ProfileIM\Middleware\ProfileIMMiddleware;
 use Zend\Expressive\Application;
 
-return function (Application $app)
-{
+return function(Application $app) {
     $app->put(
         '/protected/profile-im/{command:send}/to/{targetProfileId}',
         ProfileIMMiddleware::class,
