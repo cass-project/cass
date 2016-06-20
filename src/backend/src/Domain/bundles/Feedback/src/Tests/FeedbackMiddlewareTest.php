@@ -27,7 +27,6 @@ class FeedbackMiddlewareTest extends MiddlewareTestCase
 
 
     return $this->requestFeedbackCreate($json)->execute()
-      ->dump()
       ->expectJSONContentType()
       ->expectStatusCode(200)
       ->expectJSONBody(['success' => true])
@@ -35,6 +34,20 @@ class FeedbackMiddlewareTest extends MiddlewareTestCase
         $this->assertEquals($json['type_feedback'], $result['entity']['type']);
         $this->assertEquals($json['description'], $result['entity']['description']);
       })
+      ;
+  }
+
+  public function testCreateUnknownProfile404(){
+    $json = [
+      "profile_id"    => 1,
+      "type_feedback" => 0,
+      "description"   => "string"
+    ];
+
+    return $this->requestFeedbackCreate($json)->execute()
+                ->expectJSONContentType()
+                ->expectStatusCode(404)
+                ->expectJSONBody(['success' => false])
       ;
   }
 

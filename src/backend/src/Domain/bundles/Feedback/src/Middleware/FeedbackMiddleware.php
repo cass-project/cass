@@ -43,9 +43,9 @@ class FeedbackMiddleware implements MiddlewareInterface
       return $resolver->run($request, $responseBuilder);
     }
     catch(ProfileNotFoundException $e){
-      $responseBuilder
+      return $responseBuilder
         ->setStatusNotFound()
-        ->setError($e);
+        ->setError($e)->build();
     }
     catch(\Exception $e) {
       return $responseBuilder
