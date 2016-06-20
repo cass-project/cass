@@ -12,13 +12,15 @@ use Zend\Diactoros\UploadedFile;
  */
 class PostAttachmentMiddlewareTest extends MiddlewareTestCase
 {
-    protected function getFixtures(): array {
+    protected function getFixtures(): array
+    {
         return [
             new DemoAccountFixture()
         ];
     }
 
-    public function testUpload200() {
+    public function testUpload200()
+    {
         $localFileName = __DIR__ . '/Resources/grid-example.png';
         $uploadFile = new UploadedFile($localFileName, filesize($localFileName), 0);
 
@@ -30,7 +32,8 @@ class PostAttachmentMiddlewareTest extends MiddlewareTestCase
             ->expectJSONBody(['success' => true]);
     }
 
-    public function testUploadBigFile409() {
+    public function testUploadBigFile409()
+    {
         $localFileName = __DIR__ . '/Resources/grid-example.png';
         $uploadFile = new UploadedFile($localFileName, ImageAttachmentType::MAX_FILE_SIZE_BYTES + 1000, 0);
 
@@ -42,7 +45,8 @@ class PostAttachmentMiddlewareTest extends MiddlewareTestCase
             ->expectJSONBody(['success' => false]);
     }
 
-    public function testUploadSmallFile409() {
+    public function testUploadSmallFile409()
+    {
         $localFileName = __DIR__ . '/Resources/grid-example.png';
         $uploadFile = new UploadedFile($localFileName, 0, 0);
 
@@ -54,22 +58,23 @@ class PostAttachmentMiddlewareTest extends MiddlewareTestCase
             ->expectJSONBody(['success' => false]);
     }
 
-    public function testUpload403() {
+    public function testUpload403()
+    {
         $localFileName = __DIR__ . '/Resources/grid-example.png';
         $uploadFile = new UploadedFile($localFileName, filesize($localFileName), 0);
 
         return $this
             ->requestUpload($uploadFile)
             ->execute()
-            ->expectAuthError()
-        ;
+            ->expectAuthError();
     }
 
-    protected function requestUpload(UploadedFile $localFile):RESTRequest {
+    protected function requestUpload(UploadedFile $localFile):RESTRequest
+    {
         return $this
             ->request('POST', '/protected/post-attachment/upload')
             ->setUploadedFiles([
                 'file' => $localFile
-        ]);
+            ]);
     }
 }
