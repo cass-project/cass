@@ -6,7 +6,6 @@ use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
 use Domain\Collection\Entity\Collection;
 use Domain\Profile\Entity\Profile;
-use Domain\Profile\Entity\Profile\Greetings;
 
 /**
  * @Entity(repositoryClass="Domain\Post\Repository\PostRepository")
@@ -42,14 +41,16 @@ class Post implements IdEntity, JSONSerializable
      */
     private $content;
 
-    public function __construct(Profile $authorProfile, Collection $collection, string $content) {
+    public function __construct(Profile $authorProfile, Collection $collection, string $content)
+    {
         $this->authorProfile = $authorProfile;
         $this->collection = $collection;
         $this->content = $content;
         $this->dateCreatedOn = new \DateTime();
     }
 
-    public function toJSON() {
+    public function toJSON(): array
+    {
         return [
             'id' => $this->getId(),
             'date_create_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),
@@ -59,29 +60,35 @@ class Post implements IdEntity, JSONSerializable
         ];
     }
 
-    public function getAuthorProfile(): Profile {
+    public function getAuthorProfile(): Profile
+    {
         return $this->authorProfile;
     }
 
-    public function getCollection(): Collection {
+    public function getCollection(): Collection
+    {
         return $this->collection;
     }
 
-    public function setCollection(Collection $collection): self {
+    public function setCollection(Collection $collection): self
+    {
         $this->collection = $collection;
 
         return $this;
     }
 
-    public function getContent(): string {
+    public function getContent(): string
+    {
         return $this->content;
     }
 
-    public function getDateCreatedOn(): \DateTime {
+    public function getDateCreatedOn(): \DateTime
+    {
         return $this->dateCreatedOn;
     }
 
-    public function setContent(string $content): self {
+    public function setContent(string $content): self
+    {
         $this->content = $content;
 
         return $this;

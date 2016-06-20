@@ -9,6 +9,7 @@ use Domain\Feed\Feed\Criteria\SeekCriteria;
 use Domain\Feed\Feed\CriteriaRequest;
 use Domain\Post\Entity\Post;
 use Domain\Post\Exception\PostNotFoundException;
+use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Profile\Exception\ProfileNotFoundException;
 

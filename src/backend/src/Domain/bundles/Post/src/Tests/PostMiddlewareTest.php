@@ -4,12 +4,11 @@ namespace Domain\Post\Tests;
 use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Collection\Entity\Collection;
-use Domain\Post\Entity\Post;
-use Domain\Post\Tests\Fixtures\DemoCollectionFixture;
-use Domain\Post\Tests\Fixtures\DemoCommunityFixture;
-use Domain\Post\Tests\Fixtures\DemoPostFixture;
-use Domain\Post\Tests\Fixtures\DemoThemeFixtures;
+use Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
+use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
+use Domain\Post\Tests\Fixtures\SamplePostsFixture;
+use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
+use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 
 /**
  * @backupGlobals disabled
@@ -19,10 +18,10 @@ class PostMiddlewareTest extends MiddlewareTestCase
     protected function getFixtures(): array {
         return [
             new DemoAccountFixture(),
-            new DemoThemeFixtures(),
-            new DemoCommunityFixture(),
-            new DemoCollectionFixture(),
-            new DemoPostFixture()
+            new DemoProfileFixture(),
+            new SampleThemesFixture(),
+            new SampleCommunitiesFixture(),
+            new SampleCollectionsFixture(),
         ];
     }
 
@@ -31,15 +30,19 @@ class PostMiddlewareTest extends MiddlewareTestCase
 
         $json = [
             "profile_id" => $account->getCurrentProfile()->getId(),
-            "collection_id" => DemoCollectionFixture::getCollection()->getId(),
+            "collection_id" => SampleCollectionsFixture::getProfileCollection(1)->getId(),
             "content" => "string",
             "attachments" => [],
         ];
 
-        return $this->requestPostCreatePut($json)->auth($account->getAPIKey())->execute()
+        $this->requestPostCreatePut($json)
+            ->auth($account->getAPIKey())
+            ->execute()
             ->expectJSONContentType()
             ->expectStatusCode(200)
-            ->expectJSONBody(['success' => TRUE]);
+            ->expectJSONBody([
+                'success' => true
+            ]);
     }
 
     public function testPostCreate403() {
@@ -49,25 +52,30 @@ class PostMiddlewareTest extends MiddlewareTestCase
             'content' => 'string',
         ];
 
-        return $this->requestPostCreatePut($json)->execute()->expectAuthError();
+        $this->requestPostCreatePut($json)
+            ->execute()
+            ->expectAuthError()
+        ;
     }
 
     public function testPostCreateProfile404() {
         $account = DemoAccountFixture::getAccount();
+
         $json = [
-            "profile_id" => 23111,
-            "collection_id" => DemoCollectionFixture::getCollection()->getId(),
+            "profile_id" => 99999999,
+            "collection_id" => SampleCollectionsFixture::getProfileCollection(1)->getId(),
             "content" => "string",
             "attachments" => [],
         ];
 
-        return $this->requestPostCreatePut($json)->auth($account->getAPIKey())->execute()
-            ->expectJSONContentType()
-            ->expectStatusCode(404)
-            ->expectJSONBody(['success' => FALSE]);
+        return $this->requestPostCreatePut($json)
+            ->auth($account->getAPIKey())
+            ->execute()
+            ->expectNotFoundError();
     }
 
-    public function testPostCreateCollection404() {
+    public function testPostCreateCollection404()
+    {
         $account = DemoAccountFixture::getAccount();
 
         $json = [
@@ -77,87 +85,126 @@ class PostMiddlewareTest extends MiddlewareTestCase
             "attachments" => [],
         ];
 
-        return $this->requestPostCreatePut($json)->auth($account->getAPIKey())->execute()
-            ->expectJSONContentType()
-            ->expectStatusCode(404)
-            ->expectJSONBody(['success' => FALSE]);
+        $this->requestPostCreatePut($json)
+            ->auth($account->getAPIKey())
+            ->execute()
+            ->expectNotFoundError();
     }
 
     public function testDeletePost200() {
-        $post = DemoPostFixture::getPost(); /** @var Post $post */
+        $this->upFixture(new SamplePostsFixture());
 
         $account = DemoAccountFixture::getAccount();
-        return $this->requestPostDelete($post->getId())->auth($account->getAPIKey())->execute()
+
+        $this->requestPostDelete(SamplePostsFixture::getPost(1)->getId())
+            ->auth($account->getAPIKey())
+            ->execute()
             ->expectJSONContentType()
             ->expectStatusCode(200)
-            ->expectJSONBody(['success' => TRUE]);
+            ->expectJSONBody([
+                'success' => true
+            ]);
     }
 
-    public function testDeletePost403() {
-        return $this->requestPostDelete(21)->execute()
+    public function testDeletePost403()
+    {
+        $this->upFixture(new SamplePostsFixture());
+
+        $this->requestPostDelete(SamplePostsFixture::getPost(1)->getId())
+            ->execute()
             ->expectAuthError();
     }
 
     public function testDeletePost404() {
 
         $account = DemoAccountFixture::getAccount();
-        return $this->requestPostDelete(99999999)->auth($account->getAPIKey())->execute()
+
+        $this->requestPostDelete(99999999)->auth($account->getAPIKey())->execute()
             ->expectJSONContentType()
             ->expectStatusCode(404)
             ->expectJSONBody(['success' => FALSE]);
     }
 
-    public function testPostEdit200() {
-        $account = DemoAccountFixture::getAccount();
-        $post = DemoPostFixture::getPost();
-        $collection = DemoCollectionFixture::getCollection();
+    public function testPostEdit200()
+    {
+        $this->upFixture(new SamplePostsFixture());
+
+        $post = SamplePostsFixture::getPost(1);
 
         $json = [
-            "collection_id" => $collection->getId(),
+            "collection_id" => SampleCollectionsFixture::getProfileCollection(1)->getId(),
             "content" => "string2",
             "attachments" => [],
         ];
 
-        $this->requestPostEditPost($post->getId(), $json)->auth($account->getAPIKey())->execute()
+        $this->requestPostEditPost($post->getId(), $json)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
             ->expectJSONContentType()
             ->expectStatusCode(200)
-            ->expectJSONBody(['success' => TRUE]);
+            ->expectJSONBody([
+                'success' => true
+            ]);
     }
 
-    public function testPostEdit403() {
-        $this->requestPostEditPost(3213, [])->execute()->expectAuthError();
-    }
+    public function testPostEdit403()
+    {
+        $this->upFixture(new SamplePostsFixture());
 
-    public function testPostEdit404() {
-        $account = DemoAccountFixture::getAccount();
-        $collection = DemoCollectionFixture::getCollection();
+        $post = SamplePostsFixture::getPost(1);
 
         $json = [
-            "collection_id" => $collection->getId(),
+            "collection_id" => SampleCollectionsFixture::getProfileCollection(1)->getId(),
             "content" => "string2",
             "attachments" => [],
         ];
 
-        $this->requestPostEditPost(999999999, $json)->auth($account->getAPIKey())->execute()
-            ->expectJSONContentType()
-            ->expectStatusCode(404)
-            ->expectJSONBody(['success' => false]);
+        $this->requestPostEditPost($post->getId(), $json)
+            ->execute()
+            ->expectAuthError();
     }
 
-    public function testGetPost200() {
-        $post = DemoPostFixture::getPost();
+    public function testPostEdit404()
+    {
+        $this->upFixture(new SamplePostsFixture());
 
-        return $this->requestPostGet($post->getId())->execute()
+        $json = [
+            "collection_id" => SampleCollectionsFixture::getProfileCollection(1)->getId(),
+            "content" => "string2",
+            "attachments" => [],
+        ];
+
+        $this->requestPostEditPost(999999999, $json)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectNotFoundError();
+    }
+
+    public function testGetPost200()
+    {
+        $this->upFixture(new SamplePostsFixture());
+
+        $post = SamplePostsFixture::getPost(1);
+
+        return $this->requestPostGet($post->getId())
+            ->execute()
             ->expectJSONContentType()
             ->expectStatusCode(200)
-            ->expectJSONBody(['success' => TRUE]);
+            ->expectJSONBody([
+                'success' => true
+            ]);
     }
 
     public function testGetPost404() {
-        return $this->requestPostGet(9898989898)->execute()
+        $this->upFixture(new SamplePostsFixture());
+
+        return $this->requestPostGet(999999999)
+            ->execute()
             ->expectJSONContentType()
             ->expectStatusCode(404)
-            ->expectJSONBody(['success' => FALSE]);
+            ->expectJSONBody([
+                'success' => false
+            ]);
     }
 
     protected function requestPostCreatePut(array $json): RESTRequest {
