@@ -52,30 +52,30 @@ server {
 
 }
 
-server {
-    listen 3002;
-    root /vagrant/www/app/;
-    server_name localhost;
-
-    location ~ "^/backend/.*$"
-    {
-        if (!-f $request_filename) {
-            proxy_pass http://react-php;
-            break;
-        }
-    }
-
-    location ~ "^/api-docs/.*$"
-    {
-        rewrite ^/api-docs/(.*)$ /../../../opt/swagger/swagger-ui/dist/$1 break;
-        index index.html;
-    }
-
-    location ~ "^/.*$"
-    {
-        try_files $uri /frontend.html /frontend.html =404;
-	}
-}
+#server {
+#    listen 3002;
+#    root /vagrant/www/app/;
+#    server_name localhost;
+#
+#    location ~ "^/backend/.*$"
+#    {
+#        if (!-f $request_filename) {
+#            proxy_pass http://react-php;
+#            break;
+#        }
+#    }
+#
+#    location ~ "^/api-docs/.*$"
+#    {
+#        rewrite ^/api-docs/(.*)$ /../../../opt/swagger/swagger-ui/dist/$1 break;
+#        index index.html;
+#    }
+#
+#    location ~ "^/.*$"
+#    {
+#        try_files $uri /frontend.html /frontend.html =404;
+#	}
+# }
 
 server {
     listen 3003;

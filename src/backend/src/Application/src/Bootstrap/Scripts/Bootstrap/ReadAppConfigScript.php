@@ -55,8 +55,8 @@ class ReadAppConfigScript implements BootstrapScript
 
     private function mergeEnvConfig(ConfigService $configService, string $env)
     {
-        if(!in_array($env, ['development', 'test', 'production'])) {
-            throw new \Exception(sprintf('Invalid environment `%s`', $env));
+        if(! strlen($env)) {
+            throw new \Exception('Empty environment');
         }
 
         $configService->merge([
