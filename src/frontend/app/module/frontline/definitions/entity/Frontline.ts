@@ -1,8 +1,8 @@
 import {Success200} from "../../../common/definitions/common";
 import {AccountEntity} from "../../../account/definitions/entity/Account";
-import {ProfileEntity} from "../../../profile/entity/Profile";
 import {Palette} from "../../../colors/definitions/entity/Palette";
 import {Theme} from "../../../theme/definitions/entity/Theme";
+import {ProfileEntity} from "../../../profile/definitions/entity/Profile";
 
 export interface FrontlineEntity extends Success200
 {
@@ -19,7 +19,7 @@ export interface FrontlineEntity extends Success200
         profile: {
             max_profiles: number
         },
-        colors: Palette[],
+        palettes: Palette[],
         community: {
             features: {
                 code: string;

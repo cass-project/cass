@@ -24,7 +24,7 @@ class ConfigColorsFrontlineScript implements FrontlineScript
     public function __invoke(): array {
         return [
             'config' => [
-                'colors' => array_map(function(Palette $palette) {
+                'palettes' => array_map(function(Palette $palette) {
                     return $palette->toJSON();
                 }, $this->colorService->getPalettes())
             ]
