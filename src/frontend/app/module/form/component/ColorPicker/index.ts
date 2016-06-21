@@ -1,6 +1,6 @@
 import {Component, Input} from "angular2/core";
 import {FrontlineService} from "../../../frontline/service";
-import {Palette} from "../../../util/definitions/palette";
+import {Palette} from "../../../colors/definitions/entity/Palette";
 
 
 @Component({
@@ -17,18 +17,16 @@ export class ColorPicker
 
     @Input('pickedColor') pickedColor;
 
-    pickColor(palette){
+    pickColor(palette: Palette){
         this.pickedColor = palette;
     }
 
     constructor(frontline: FrontlineService) {
-        let colors = frontline.session.config.colors;
+        let palettes = frontline.session.config.palettes;
 
 
-        for(let n in colors) {
-            if(colors.hasOwnProperty(n)) {
-                this.palettes.push(colors[n]);
-            }
+        for(let palette of palettes) {
+            this.palettes.push(palette);
         }
     }
 }
