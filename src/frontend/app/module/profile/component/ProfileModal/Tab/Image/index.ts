@@ -38,7 +38,7 @@ export class ImageTab
 
     getImageProfile(){
         if(AuthService.isSignedIn()){
-            return AuthService.getAuthToken().getCurrentProfile().entity.image["default"].public_path;
+            return AuthService.getAuthToken().getCurrentProfile().entity.image.variants['default'];
         }
     }
 
@@ -48,7 +48,8 @@ export class ImageTab
             AuthService.getAuthToken().getCurrentProfile().entity.image = {
                 "variants": {
                     "default": {
-                        public_path: '/public/assets/profile-default.png'
+                        "id": 'default',
+                        "public_path": '/public/assets/profile-default.png'
                     }
                 }
             };

@@ -16,8 +16,8 @@ export class ProfileModalModel
     changePasswordStn = {old_password: '', new_password: '', repeat_password: ''};
     profile = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity));
 
-    expertIn = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.expert_in));
-    interestingIn = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.interesting_in));
+    expertIn = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.expert_in_ids));
+    interestingIn = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.interesting_in_ids));
 
     loading: boolean = false;
     ApiKey;
