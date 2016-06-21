@@ -1,0 +1,24 @@
+/feedback-response/create:
+  put:
+    tags:
+      - feedback
+    description: создать новый ответ на feedback
+    parameters:
+      - name: body
+        in: body
+        required: true
+        description:
+        schema:
+          $ref: '#/definitions/Feedback_Request_CreateFeedbackResponse'
+    responses:
+      200:
+        schema:
+          properties:
+            success:
+              type: boolean
+              default: true
+            entity:
+              $ref: '#/definitions/Feedback_Entity_FeedbackResponse'
+          required:
+            - success
+            - entity

@@ -1,0 +1,12 @@
+Feedback_Request_CreateFeedbackResponse:
+  type: object
+  required:
+    - feedback_id
+    - description
+  properties:
+    feedback_id:
+      type: number
+      description: type feedback
+    description:
+      type: string
+      description: описание

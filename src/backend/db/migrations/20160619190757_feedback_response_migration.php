@@ -9,12 +9,8 @@ class FeedbackResponseMigration extends AbstractMigration
         $this->table('feedback_response')
              ->addColumn('created_at', 'datetime')
              ->addColumn('description', 'text')
-             ->addColumn('report_types', 'string',['null' => true ])
              ->addColumn('feedback_id', 'integer')
-             ->addForeignKey('feedback_id', 'feedback', 'id', [
-               'update' => 'cascade',
-               'delete' => 'restrict'
-             ])
+             ->addForeignKey('feedback_id', 'feedback', 'id')
              ->create();
     }
 }

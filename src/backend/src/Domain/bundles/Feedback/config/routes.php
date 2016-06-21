@@ -10,6 +10,11 @@ return function(Application $app){
     FeedbackMiddleware::class,
     'feedback-create'
   );
+  $app->put(
+    '/{command:feedback-response}/create',
+    FeedbackMiddleware::class,
+    'feedback-response-create'
+  );
 
   $app->delete(
     '/feedback/{feedbackId}/{command:cancel}',

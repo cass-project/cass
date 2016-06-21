@@ -7,6 +7,7 @@ namespace Domain\Feedback\Middleware;
 use Application\REST\Response\GenericResponseBuilder;
 use Application\Service\CommandService;
 use Domain\Feedback\Middleware\Command\CreateCommand;
+use Domain\Feedback\Middleware\Command\CreateFeedbackResponseCommand;
 use Domain\Feedback\Middleware\Command\DeleteCommand;
 use Domain\Feedback\Middleware\Command\GetAllCommand;
 use Domain\Feedback\Middleware\Command\GetHasAnswerCommand;
@@ -33,6 +34,7 @@ class FeedbackMiddleware implements MiddlewareInterface
 
     $resolver = $this->commandService->createResolverBuilder()
                                      ->attachDirect("create", CreateCommand::class)
+                                     ->attachDirect("feedback-response", CreateFeedbackResponseCommand::class)
                                      ->attachDirect("cancel", DeleteCommand::class)
                                      ->attachDirect("has-answer", GetHasAnswerCommand::class)
                                      ->attachDirect("without-answer", GetWithoutAnswerCommand::class)
