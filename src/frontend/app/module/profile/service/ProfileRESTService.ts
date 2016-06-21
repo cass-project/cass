@@ -44,16 +44,16 @@ export class ProfileRESTService {
         let entity = AuthService.getAuthToken().getCurrentProfile().entity;
         let greetings = entity.greetings;
 
-        greetings.greetings_method = profile.greetings.greetings_method;
+        greetings.greetings = profile.greetings.greetings_method;
         greetings.last_name = profile.greetings.last_name;
         greetings.first_name = profile.greetings.first_name;
         greetings.middle_name = profile.greetings.middle_name;
-        greetings.nickname = profile.greetings.nickname;
+        greetings.nick_name = profile.greetings.nickname;
         entity.gender = profile.gender;
 
-        switch (greetings.greetings_method){
+        switch (greetings.greetings){
             case 'n':
-                greetings.greetings = greetings.nickname;
+                greetings.greetings = greetings.nick_name;
                 break;
             case 'fl':
                 greetings.greetings = `${greetings.first_name} ${greetings.last_name}`;
@@ -80,7 +80,7 @@ export class ProfileRESTService {
     updateExpertThemes(expertIn) {
         let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/expert-in`;
 
-        AuthService.getAuthToken().getCurrentProfile().entity.expert_in = (JSON.parse(JSON.stringify(expertIn)));
+        AuthService.getAuthToken().getCurrentProfile().entity.expert_in_ids = (JSON.parse(JSON.stringify(expertIn)));
 
         return this.http.put(url, JSON.stringify({
             theme_ids: expertIn
@@ -90,7 +90,7 @@ export class ProfileRESTService {
     updateInterestThemes(interestingIn) {
         let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/interesting-in`;
 
-        AuthService.getAuthToken().getCurrentProfile().entity.interesting_in = (JSON.parse(JSON.stringify(interestingIn)));
+        AuthService.getAuthToken().getCurrentProfile().entity.interesting_in_ids = (JSON.parse(JSON.stringify(interestingIn)));
 
         return this.http.put(url, JSON.stringify({
             theme_ids: interestingIn
@@ -181,7 +181,11 @@ export class ProfileRESTService {
         this.xmlRequest.onreadystatechange = () => {
             if (this.xmlRequest.readyState === 4) {
                 if (this.xmlRequest.status === 200) {
-                    AuthService.getAuthToken().getCurrentProfile().entity.image.public_path = JSON.parse(this.xmlRequest.responseText).public_path;
+                    AuthService.getAuthToken().getCurrentProfile().entity.image = {
+                        "variants": { "default":
+                        JSON.parse(this.xmlRequest.responseText).public_path
+                        }
+                    };
                     modal.progress.complete();
                     if(modal.close){
                         modal.close();

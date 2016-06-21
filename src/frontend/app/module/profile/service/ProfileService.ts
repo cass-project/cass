@@ -6,17 +6,17 @@ export class ProfileService {
     constructor() {}
 
     interestCondReset(expertIn, interestingIn){
-        for (let key in AuthService.getAuthToken().getCurrentProfile().entity.expert_in) {
-            expertIn[key] = AuthService.getAuthToken().getCurrentProfile().entity.expert_in[key];
+        for (let key in AuthService.getAuthToken().getCurrentProfile().entity.expert_in_ids) {
+            expertIn[key] = AuthService.getAuthToken().getCurrentProfile().entity.expert_in_ids[key];
         }
         for (let key in AuthService.getAuthToken().getCurrentProfile().entity) {
-            interestingIn[key] = AuthService.getAuthToken().getCurrentProfile().entity.interesting_in[key];
+            interestingIn[key] = AuthService.getAuthToken().getCurrentProfile().entity.interesting_in_ids[key];
         }
     }
 
     interestCondToSave(expertIn, interestingIn){
-        if(JSON.stringify(expertIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.expert_in) ||
-                JSON.stringify(interestingIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.interesting_in)){
+        if(JSON.stringify(expertIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.expert_in_ids) ||
+                JSON.stringify(interestingIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.interesting_in_ids)){
                 return true;
         } else {
             return false;
@@ -56,11 +56,11 @@ export class ProfileService {
     }
 
     personalCondToSave(profile) {
-        if (profile.greetings.greetings_method != AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings_method ||
+        if (profile.greetings.greetings_method != AuthService.getAuthToken().getCurrentProfile().entity.greetings.greetings ||
             profile.greetings.first_name != AuthService.getAuthToken().getCurrentProfile().entity.greetings.first_name ||
             profile.greetings.last_name != AuthService.getAuthToken().getCurrentProfile().entity.greetings.last_name ||
             profile.greetings.middle_name != AuthService.getAuthToken().getCurrentProfile().entity.greetings.middle_name ||
-            profile.greetings.nickname != AuthService.getAuthToken().getCurrentProfile().entity.greetings.nickname ||
+            profile.greetings.nickname != AuthService.getAuthToken().getCurrentProfile().entity.greetings.nick_name ||
             profile.gender.string != AuthService.getAuthToken().getCurrentProfile().entity.gender.string){
             return true;
         }
