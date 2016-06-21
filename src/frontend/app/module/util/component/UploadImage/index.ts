@@ -2,12 +2,11 @@ import {Component} from "angular2/core";
 import {Output, Input} from "angular2/core";
 import {EventEmitter} from "angular2/core";
 import {ModalComponent} from "../../../modal/component/index";
-import {ImageCropperService} from "../../../util/component/ImageCropper/index";
-import {ImageCropper} from "../../../util/component/ImageCropper/index";
 import {ScreenControls} from "../../../util/classes/ScreenControls";
 import {UploadImageService} from "./service";
 import {UploadImageCropModel} from "./strategy";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
+import {ImageCropperService, ImageCropper} from "../../../form/component/ImageCropper/index";
 
 enum UploadImageScreen {
     File = <any>"File",

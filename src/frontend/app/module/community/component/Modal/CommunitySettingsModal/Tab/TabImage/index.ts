@@ -1,9 +1,9 @@
 import {Component} from "angular2/core";
 
-import {ImageCropper, ImageCropperService} from "../../../../../../util/component/ImageCropper";
 import {CommunitySettingsModalModel} from "../../model";
 import {CommunityImage} from "../../../../Elements/CommunityImage/index";
 import {UploadImageCropModel} from "../../../../../../util/component/UploadImage/strategy";
+import {ImageCropperService, ImageCropper} from "../../../../../../form/component/ImageCropper/index";
 
 @Component({
     selector: 'cass-community-settings-modal-tab-image',

@@ -1,10 +1,6 @@
 import {Component, Injectable} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
-import {ImageCropperService} from "../../../../../util/component/ImageCropper/index";
 import {UploadImageService} from "../../../../../util/component/UploadImage/service";
-import {ImageCropper} from "../../../../../util/component/ImageCropper/index";
-import {ScreenControls} from "../../../../../util/classes/ScreenControls";
-import {UploadImageCropModel} from "../../../../../util/component/UploadImage/strategy";
 import {ProfileRESTService} from "../../../../service/ProfileRESTService";
 import {ProfileImage} from "../../../ProfileImage/index";
 import {AuthService} from "../../../../../auth/service/AuthService";
@@ -48,14 +44,20 @@ export class ProfileSetupScreenImage
 
     getImageProfile(){
         if(AuthService.isSignedIn()){
-            return AuthService.getAuthToken().getCurrentProfile().entity.image.public_path;
+            return AuthService.getAuthToken().getCurrentProfile().entity.image['default'].public_path;
         }
     }
 
     avatarDeletingProcess(){
         this.deleteProcessVisible = true;
         this.profileRESTService.deleteAvatar().subscribe(data => {
-            AuthService.getAuthToken().getCurrentProfile().entity.image.public_path = '/public/assets/profile-default.png';
+            AuthService.getAuthToken().getCurrentProfile().entity.image = {
+                "variants": {
+                    "default": {
+                        public_path: '/public/assets/profile-default.png'
+                    }
+                }
+            };
             this.deleteProcessVisible = false;
         });
     }

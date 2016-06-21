@@ -1,6 +1,5 @@
 import {Injectable} from "angular2/core";
 
-import {ImageCropperService} from "../ImageCropper/index";
 import {UploadImageStrategy} from "./strategy";
 import {UploadImageCropModel} from "./strategy";
 import {UploadImageModal} from "./index";
