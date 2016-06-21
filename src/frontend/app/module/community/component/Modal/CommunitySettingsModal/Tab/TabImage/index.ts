@@ -24,7 +24,7 @@ export class ImageTab {
 
     constructor(public model: CommunitySettingsModalModel, public cropper: ImageCropperService) {}
 
-    onFileChange($event) {
+    onSelect($event) {
         this.cropper.reset();
         setTimeout(()=> {
             this.cropper.setFile($event.target.files[0]);

@@ -41,7 +41,7 @@ export class CommunityPage
             },
             error => {
                 error._body = JSON.parse(error._body);
-                if(error.status = 404) {
+                if(error.status === 404) {
                     this.messages.push(MessageBusNotificationsLevel.Critical, error._body.error)
                     this.router.navigateByUrl("/");
                 } else {
