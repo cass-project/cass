@@ -24,4 +24,9 @@ class FeedbackService
     return $this->feedbackRepository->createFeedback($createFeedbackParameters);
   }
 
+  public function deleteFeedback(int $feedbackId):bool
+  {
+    return $this->feedbackRepository->deleteFeedback($feedbackId);
+  }
+
 }

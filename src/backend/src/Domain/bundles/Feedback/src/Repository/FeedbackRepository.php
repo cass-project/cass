@@ -3,7 +3,9 @@ namespace Domain\Feedback\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Domain\Feedback\Entity\Feedback;
+use Domain\Feedback\Exception\FeedbackNotFoundException;
 use Domain\Feedback\Middleware\Parameters\CreateFeedbackParameters;
+use Domain\Profile\Entity\Profile;
 use Domain\Profile\Exception\ProfileNotFoundException;
 
 class FeedbackRepository extends EntityRepository
@@ -14,7 +16,7 @@ class FeedbackRepository extends EntityRepository
 
     $profile = null;
     if($createFeedbackParameters->hasProfile()){
-      $profile = $em->getRepository(Feedback::class)->find($createFeedbackParameters->getProfileId());
+      $profile = $em->getRepository(Profile::class)->find($createFeedbackParameters->getProfileId());
       if(is_null($profile)) throw new ProfileNotFoundException("Profile {$createFeedbackParameters->getProfileId()} not found ");
     }
 
@@ -27,5 +29,18 @@ class FeedbackRepository extends EntityRepository
     $em->persist($feedback);
     $em->flush();
     return $feedback;
+  }
+
+  public function deleteFeedback(int $feedbackId):bool
+  {
+    $em = $this->getEntityManager();
+    /** @var Feedback $feedback */
+    $feedback = $em->getRepository(Feedback::class)->find($feedbackId);
+    if(is_null($feedback)){
+      throw new FeedbackNotFoundException(sprintf("Feedback: %s not found",$feedbackId));
+    }
+    $em->remove($feedback);
+    $em->flush();
+    return true;
   }
 }
