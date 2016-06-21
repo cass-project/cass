@@ -4,10 +4,10 @@ import {RouteParams, Router} from "angular2/router";
 import {CommunityService} from "../../service/CommunityService";
 import {ModalComponent} from "../../../modal/component";
 import {ModalBoxComponent} from "../../../modal/component/box";
-import {LoadingLinearIndicator} from "../../../util/component/LoadingLinearIndicator";
 import {CommunitySettingsModalModel} from "../../component/Modal/CommunitySettingsModal/model";
 import {MessageBusService} from "../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
+import {LoadingLinearIndicator} from "../../../form/component/LoadingLinearIndicator/index";
 
 @Component({
     selector: "community-page",

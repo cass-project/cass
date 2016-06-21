@@ -1,7 +1,7 @@
 import {Component} from "angular2/core";
 
 import {Screen} from "../../screen";
-import {LoadingLinearIndicator} from "../../../../../../util/component/LoadingLinearIndicator/index";
+import {LoadingLinearIndicator} from "../../../../../../form/component/LoadingLinearIndicator/index";
 
 @Component({
     selector: 'cass-community-join-modal-screen-processing',

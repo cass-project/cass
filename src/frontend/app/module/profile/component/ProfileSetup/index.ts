@@ -2,7 +2,6 @@ import {Component, Input} from "angular2/core";
 
 import {ModalComponent} from "../../../modal/component/index";
 import {ProfileSetupModel} from "./model";
-import {LoadingLinearIndicator} from "../../../util/component/LoadingLinearIndicator/index";
 import {ProfileSetupScreenGreetings} from "./Screen/ProfileSetupScreenGreetings/index";
 import {ProfileSetupScreenGender} from "./Screen/ProfileSetupScreenGender/index";
 import {ProfileSetupScreenImage} from "./Screen/ProfileSetupScreenImage/index";
@@ -15,6 +14,7 @@ import {FrontlineService} from "../../../frontline/service";
 import {ProfileComponentService} from "../../service";
 import {AuthService} from "../../../auth/service/AuthService";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
+import {LoadingLinearIndicator} from "../../../form/component/LoadingLinearIndicator/index";
 
 enum ProfileSetupScreen {
     Welcome = <any>"Welcome",

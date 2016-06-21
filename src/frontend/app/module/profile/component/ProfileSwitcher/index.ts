@@ -2,10 +2,9 @@ import {Component} from "angular2/core";
 
 import {ProfileImage} from "../ProfileImage/index";
 import {ComponentStages} from "../../../util/classes/ComponentStages";
-import {LoadingLinearIndicator} from "../../../util/component/LoadingLinearIndicator/index";
 import {ProfileComponentService} from "../../service";
-import {AuthService} from "../../../auth/service/AuthService";
 import {ProfileSwitcherService} from "./service";
+import {LoadingLinearIndicator} from "../../../form/component/LoadingLinearIndicator/index";
 
 enum ProfileSwitcherStage
 {

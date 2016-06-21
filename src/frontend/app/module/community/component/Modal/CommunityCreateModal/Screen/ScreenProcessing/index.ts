@@ -1,12 +1,12 @@
 import {Component} from "angular2/core";
 
 import {Screen} from "../../screen";
-import {LoadingLinearIndicator} from "../../../../../../util/component/LoadingLinearIndicator";
 import {CommunityRESTService} from "../../../../../service/CommunityRESTService";
 import {CommunityCreateModalModel} from "../../model";
 import {CommunityCreateRequestModel} from "../../../../../model/CommunityCreateRequestModel";
 import {CommunityImageUploadRequestModel} from "../../../../../model/CommunityImageUploadRequestModel";
 import {CommunityControlFeatureRequestModel} from "../../../../../model/CommunityActivateFeatureModel";
+import {LoadingLinearIndicator} from "../../../../../../form/component/LoadingLinearIndicator/index";
 
 @Component({
     selector: 'cass-community-create-modal-screen-processing',
