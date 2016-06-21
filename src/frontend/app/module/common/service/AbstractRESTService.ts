@@ -1,11 +1,11 @@
 import {Http, Response} from "angular2/http";
 import {Observable} from "rxjs/Observable";
 
-import {MessageBus} from "angular2/src/web_workers/shared/message_bus";
+import {MessageBusNotifications} from "../../message/component/MessageBusNotifications/index";
 
 export abstract class AbstractRESTService
 {
-    constructor(protected http: Http, private messages: MessageBus) {}
+    constructor(protected http: Http, private messages: MessageBusNotifications) {}
 
     handle(request: Observable<Response>): Observable<Response> {
         request.map(res => res.json())
