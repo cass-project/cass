@@ -1,10 +1,10 @@
 import {Component, Output, EventEmitter} from "angular2/core";
 
-import {LoadingIndicator} from "../../../util/component/LoadingIndicator/index";
 import {OAuth2Component} from "../OAuth2/index";
 import {AuthService, SignUpModel, SignInResponse} from "../../service/AuthService";
 import {MessageBusService} from "../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
+import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
 
 @Component({
     selector: 'cass-auth-sign-up',
