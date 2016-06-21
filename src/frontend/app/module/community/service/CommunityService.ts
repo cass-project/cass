@@ -33,7 +33,8 @@ export class CommunityService {
                             this.community = communityResponse.entity;
                             observer.next(communityResponse);
                             observer.complete();
-                        }
+                        },
+                        error => {observer.error(error);}
                     );
             }
         });
