@@ -50,6 +50,7 @@ export class ThemeService
             parent_id: 0,
             position: 0,
             title: 'ROOT',
+            description: 'ROOT Dir',
             children: this.themes
         };
     }

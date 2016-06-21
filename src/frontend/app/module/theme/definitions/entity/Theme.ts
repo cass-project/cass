@@ -1,9 +1,9 @@
 export interface Theme
 {
-    id: string;
+    id: number;
     title: string;
     description: string;
-    parent_id: string;
+    parent_id: number;
     position: number;
     children?: Theme[];
 }
