@@ -26,9 +26,7 @@ return [
             'php-di' => [
                 CollectionService::class => object()
                     ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                        $assetsDir = sprintf($container->get('config.paths.collection.avatar.dir'), $container->get('config.paths.assets.dir'));
-
-                        return new Filesystem(new Local($assetsDir));
+                        return new Filesystem(new Local($container->get('config.paths.collection.avatar.dir')));
                     }))
             ]
         ],
@@ -36,9 +34,7 @@ return [
             'php-di' => [
                 CollectionService::class => object()
                     ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                        $assetsDir = sprintf($container->get('config.paths.collection.avatar.dir'), $container->get('config.paths.assets.dir'));
-
-                        return new Filesystem(new Local($assetsDir));
+                        return new Filesystem(new Local($container->get('config.paths.collection.avatar.dir')));
                     }))
             ]
         ],
@@ -46,9 +42,7 @@ return [
             'php-di' => [
                 CollectionService::class => object()
                     ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                        $assetsDir = sprintf($container->get('config.paths.collection.avatar.dir'), $container->get('config.paths.assets.dir'));
-
-                        return new Filesystem(new MemoryAdapter($assetsDir));
+                        return new MemoryAdapter(new Local($container->get('config.paths.collection.avatar.dir')));
                     }))
             ]
         ],

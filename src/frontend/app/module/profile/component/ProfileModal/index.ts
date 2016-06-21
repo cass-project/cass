@@ -19,7 +19,7 @@ enum ProfileModalTab
     Personal = <any>"Personal",
     Image = <any>"Image",
     Interests = <any>"Interests",
-    Profiles = <any>"Profiles",
+    Profiles = <any>"AccountProfiles",
     SignOut = <any>"SignOut"
 }
 
