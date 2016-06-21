@@ -2,7 +2,7 @@ import {Component, EventEmitter, Output, Input, ViewChild, ElementRef} from "ang
 import {ThemeService} from "../../service/ThemeService";
 import {Injectable} from 'angular2/core';
 import {ControlValueAccessor} from "angular2/common";
-import {ThemeTree} from "../../entity/Theme";
+import {Theme} from "../../definitions/entity/Theme";
 
 
 @Component({
@@ -73,7 +73,7 @@ class ThemeSelectSearch
     static MAX_RESULTS = 100;
 
     enabled: boolean = false;
-    results: ThemeTree[] = [];
+    results: Theme[] = [];
     lastInput: string;
 
     constructor(private themeSelect: ThemeSelect, private service: ThemeService) {}
@@ -85,7 +85,7 @@ class ThemeSelectSearch
     update(input: string) {
         this.lastInput = input;
 
-        this.results = this.fetch(input).filter((theme: ThemeTree) => {
+        this.results = this.fetch(input).filter((theme: Theme) => {
             return !this.themeSelect.has(theme.id);
         });
     }
@@ -102,7 +102,7 @@ class ThemeSelectSearch
         var results = [];
 
         if(input.replace(/\s/g, '').length > 0) {
-            this.service.each((theme: ThemeTree) => {
+            this.service.each((theme: Theme) => {
                 if(results.length <= ThemeSelectSearch.MAX_RESULTS) {
                     if(~theme.title.toLocaleLowerCase().indexOf(input.toLocaleLowerCase()) && !this.themeSelect.has(theme.id)) {
                         results.push(theme);
@@ -114,7 +114,7 @@ class ThemeSelectSearch
         return results;
     }
 
-    include(theme: ThemeTree) {
+    include(theme: Theme) {
         this.themeSelect.include(theme.id);
         this.themeSelect.searchInput.nativeElement.focus();
         this.update(this.lastInput);
@@ -124,14 +124,14 @@ class ThemeSelectSearch
 class ThemeSelectBrowser
 {
     public visible: boolean = false;
-    public columns: ThemeTree[] = [];
+    public columns: Theme[] = [];
     public scrolling: ElementRef;
 
     constructor(private themeSelect: ThemeSelect, private service: ThemeService) {
         this.columns.push(service.getRoot());
     }
 
-    isActive(compare: ThemeTree): boolean {
+    isActive(compare: Theme): boolean {
         for(let tree of this.columns) {
             if(tree.id === compare.id) {
                 return true;
@@ -141,7 +141,7 @@ class ThemeSelectBrowser
         return false;
     }
 
-    setColumn(level: number, tree: ThemeTree) {
+    setColumn(level: number, tree: Theme) {
         for(let n = this.columns.length; n > level; n--) {
             this.columns.pop();
         }
@@ -168,6 +168,6 @@ class ThemeSelectBrowser
 
 interface ThemeSelectBrowserColumn
 {
-    tree: ThemeTree;
+    tree: Theme;
     next?: ThemeSelectBrowserColumn;
 }
