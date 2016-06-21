@@ -2,8 +2,8 @@ import {Injectable} from 'angular2/core';
 import {Http, URLSearchParams, Response} from 'angular2/http';
 import {ResponseInterface} from "../../common/ResponseInterface";
 import {BackendError} from '../../common/BackendError';
-import {Profile} from './../../profile/entity/Profile';
-import {Account, AccountEntity} from './../../account/entity/Account';
+import {Profile} from './../../profile/definitions/entity/Profile';
+import {Account, AccountEntity} from './../../account/definitions/entity/Account';
 import {FrontlineService} from "../../frontline/service";
 import {Observable} from "rxjs/Observable";
 
