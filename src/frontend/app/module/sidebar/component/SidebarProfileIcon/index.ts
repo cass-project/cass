@@ -19,7 +19,7 @@ export class SidebarProfileIcon
 
     getImageProfile(){
         if(AuthService.isSignedIn()){
-            return AuthService.getAuthToken().getCurrentProfile().entity.image.public_path;
+            return AuthService.getAuthToken().getCurrentProfile().entity.image.variants['default'];
         }
     }
 

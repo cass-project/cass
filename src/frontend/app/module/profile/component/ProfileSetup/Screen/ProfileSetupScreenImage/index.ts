@@ -43,7 +43,7 @@ export class ProfileSetupScreenImage
 
     getImageProfile(){
         if(AuthService.isSignedIn()){
-            return AuthService.getAuthToken().getCurrentProfile().entity.image['default'].public_path;
+            return AuthService.getAuthToken().getCurrentProfile().entity.image.variants['default'];
         }
     }
 
@@ -53,6 +53,7 @@ export class ProfileSetupScreenImage
             AuthService.getAuthToken().getCurrentProfile().entity.image = {
                 "variants": {
                     "default": {
+                        "id": 'default',
                         public_path: '/public/assets/profile-default.png'
                     }
                 }
