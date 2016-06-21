@@ -6,7 +6,6 @@ import {ModalComponent} from "../modal/component/index";
 import {ProfileSwitcher} from "./component/ProfileSwitcher/index";
 import {ProfileSetup} from "./component/ProfileSetup/index";
 import {AuthService} from "../auth/service/AuthService";
-import {Profile} from "./entity/Profile";
 import {ModalBoxComponent} from "../modal/component/box/index";
 import {CollectionCreateMaster} from "../collection/component/CollectionCreateMaster/index";
 import {CollectionSettings} from "../collection/component/CollectionSettings/index";
