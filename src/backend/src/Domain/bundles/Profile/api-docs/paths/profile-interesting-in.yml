@@ -1,8 +1,8 @@
 '/protected/profile/{profileId}/interesting-in':
-  post:
+  put:
     tags:
       - profile
-    description: Добавить тематики в уже существующий список тематик, которым интересуется указанный профиль
+    description: Задать список тематик, которыми интересуется профиль
     security:
       - x_api_key: []
     parameters:

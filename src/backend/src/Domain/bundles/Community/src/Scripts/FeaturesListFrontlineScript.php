@@ -30,6 +30,7 @@ class FeaturesListFrontlineScript implements FrontlineScript
 
                         return [
                             'code' => $feature->getCode(),
+                            'fa_icon' => $feature->getFACode(),
                             'is_development_ready' => $feature->isDevelopmentReady(),
                             'is_production_ready' => $feature->isProductionReady(),
                         ];

@@ -27,6 +27,8 @@ import {CollectionRESTService} from "./module/collection/service/CollectionRESTS
 import {ProfileRESTService} from "./module/profile/service/ProfileRESTService";
 import {CommunitySettingsModalModel} from "./module/community/component/Modal/CommunitySettingsModal/model";
 
+declare namespace CASSDefinitions {}
+
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),

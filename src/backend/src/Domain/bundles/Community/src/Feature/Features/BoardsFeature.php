@@ -12,6 +12,11 @@ final class BoardsFeature extends AbstractFeature
         return self::FEATURE_CODE;
     }
 
+    static public function getFACode(): string
+    {
+        return 'fa-bookmark';
+    }
+
     public function isProductionReady(): bool
     {
         return false;

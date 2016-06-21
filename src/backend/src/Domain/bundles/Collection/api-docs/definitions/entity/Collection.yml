@@ -15,9 +15,6 @@ Collection_Entity_Collection:
     id:
       type: number
       description: ID
-    author_profile_id:
-      type: number
-      description: ID профиля, создавшего коллекцию
     theme_ids:
       type: array
       items:

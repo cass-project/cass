@@ -12,7 +12,11 @@
         schema:
           $ref: '#/definitions/Auth_SignIn_Request'
     responses:
-      '400':
-          $ref: '#/responses/error'
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        schema:
+          $ref: '#/responses/NotFound'
       '200':
         $ref: '#/responses/Auth_Response_SignInResponse'

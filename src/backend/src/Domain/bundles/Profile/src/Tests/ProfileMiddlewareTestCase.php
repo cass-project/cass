@@ -77,31 +77,9 @@ abstract class ProfileMiddlewareTestCase extends MiddlewareTestCase
             ->setParameters($json);
     }
 
-    protected function requestInterestingInPOST(int $profileId, array $json): RESTRequest
-    {
-        return $this->request('POST', sprintf('/protected/profile/%d/interesting-in', $profileId))
-            ->setParameters($json);
-    }
-
-    protected function requestInterestingInDELETE(int $profileId, array $themeIds): RESTRequest
-    {
-        return $this->request('DELETE', sprintf('/protected/profile/%d/interesting-in/%s', $profileId, join(',', $themeIds)));
-    }
-
     protected function requestExpertInPUT(int $profileId, array $json): RESTRequest
     {
         return $this->request('PUT', sprintf('/protected/profile/%d/expert-in', $profileId))
             ->setParameters($json);
-    }
-
-    protected function requestExpertInPOST(int $profileId, array $json): RESTRequest
-    {
-        return $this->request('POST', sprintf('/protected/profile/%d/expert-in', $profileId))
-            ->setParameters($json);
-    }
-
-    protected function requestExpertInDELETE(int $profileId, array $themeIds): RESTRequest
-    {
-        return $this->request('DELETE', sprintf('/protected/profile/%d/expert-in/%s', $profileId, join(',', $themeIds)));
     }
 }

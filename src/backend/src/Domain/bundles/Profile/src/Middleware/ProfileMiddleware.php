@@ -44,11 +44,7 @@ class ProfileMiddleware implements MiddlewareInterface
             ->attachDirect('image-delete', ImageDeleteCommand::class)
             ->attachDirect("edit-personal", EditPersonalCommand::class)
             ->attachDirect("expert-in", ExpertInPutCommand::class, 'put')
-            ->attachDirect("expert-in", ExpertInPostCommand::class, 'post')
-            ->attachDirect("expert-in", ExpertInDeleteCommand::class, 'delete')
             ->attachDirect('interesting-in', InterestingInPutCommand::class, 'put')
-            ->attachDirect('interesting-in', InterestingInPostCommand::class, 'post')
-            ->attachDirect('interesting-in', InterestingInDeleteCommand::class, 'delete')
             ->attachDirect('set-gender', SetGenderCommand::class)
             ->resolve($request);
         

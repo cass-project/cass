@@ -28,7 +28,7 @@
               description: '=true'
             gender:
               schema:
-                $ref: '#/responses/Profile_Entity_Gender'
+                $ref: '#/definitions/Profile_Entity_Gender'
       403:
         schema:
           $ref: '#/responses/Unauthorized'

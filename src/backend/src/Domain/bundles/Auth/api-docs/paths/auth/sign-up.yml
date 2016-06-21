@@ -12,12 +12,16 @@
         schema:
           $ref: '#/definitions/Auth_SignUp_Request'
     responses:
-      '400':
-        $ref: '#/responses/error'
-      '200':
+      200:
         $ref: '#/responses/Auth_Response_SignInResponse'
-      '409':
-        description:
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        schema:
+          $ref: '#/responses/NotFound'
+      409:
+        description: |
           Аккаунт с таким e-mail уже существует
         schema:
           $ref: '#/responses/error'

@@ -42,7 +42,7 @@ return [
             'php-di' => [
                 CollectionService::class => object()
                     ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                        return new MemoryAdapter(new Local($container->get('config.paths.collection.avatar.dir')));
+                        return new Filesystem(new MemoryAdapter($container->get('config.paths.collection.avatar.dir')));
                     }))
             ]
         ],

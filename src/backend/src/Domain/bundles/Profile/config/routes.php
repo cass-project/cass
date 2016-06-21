@@ -53,34 +53,10 @@ return function (Application $app) {
         'profile-expert-in-put'
     );
 
-    $app->post(
-        '/protected/profile/{profileId}/{command:expert-in}[/]',
-        ProfileMiddleware::class,
-        'profile-expert-in-post'
-    );
-
-    $app->delete(
-        '/protected/profile/{profileId}/{command:expert-in}/{theme_ids}',
-        ProfileMiddleware::class,
-        'profile-expert-in-delete'
-    );
-
     $app->put(
         '/protected/profile/{profileId}/{command:interesting-in}[/]',
         ProfileMiddleware::class,
         'profile-interesting-in-put'
-    );
-
-    $app->post(
-        '/protected/profile/{profileId}/{command:interesting-in}[/]',
-        ProfileMiddleware::class,
-        'profile-interesting-in-post'
-    );
-
-    $app->delete(
-        '/protected/profile/{profileId}/{command:interesting-in}/{theme_ids}[/]',
-        ProfileMiddleware::class,
-        'profile-interesting-in-delete'
     );
 
     $app->post(

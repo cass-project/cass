@@ -32,6 +32,11 @@ class CommunityFeatures
         }
     }
 
+    public function listFeatures(): array
+    {
+        return $this->features;
+    }
+
     public function __toString()
     {
         return implode(',', $this->features);

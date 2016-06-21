@@ -12,11 +12,11 @@ ProfileCommunities_Entity_ProfileCommunityEQEntity:
       type: number
       description: ID коммунити
     community_id:
-      type: string
+      type: number
       description: ID коммунити
     community_sid:
       type: string
-      description: ID коммунити (строка)
+      description: SID коммунити (строка)
     profile_id:
       type: number
       description: ID профиля

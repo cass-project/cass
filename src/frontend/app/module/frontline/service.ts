@@ -1,48 +1,17 @@
-import {Palette} from "../util/definitions/palette";
-var merge = require('merge');
+import {FrontlineResponse200} from "./definitions/paths/frontline";
 
-import {AccountEntity} from "../account/entity/Account";
-import {ProfileEntity} from "../profile/entity/Profile";
-import {ThemeTree} from "../theme/entity/Theme";
+var merge = require('merge');
 
 export class FrontlineService
 {
-    constructor(public session: FrontlineSessionData) {}
+    constructor(public session: FrontlineResponse200) {}
 
     merge(data) {
         merge(this.session, data);
-
-        console.log(this.session);
     }
 }
 
-export interface FrontlineSessionData
-{
-    auth?: {
-        api_key: string,
-        account: AccountEntity,
-        profiles: Array<ProfileEntity>,
-    },
-    themes: ThemeTree[];
-    config: {
-        account: {
-            delete_account_request_days: number
-        },
-        profile: {
-            max_profiles: number
-        },
-        colors: Palette[],
-        community: {
-            features: {
-                code: string;
-                is_development_ready: boolean,
-                is_production_ready: boolean,
-            }[]
-        }
-    }
-}
-
-export function frontline(callback: { (session: FrontlineSessionData) }) {
+export function frontline(callback: { (session: FrontlineResponse200) }) {
     let xhr = new XMLHttpRequest();
 
     xhr.open('GET', '/backend/api/frontline/*/', true);

@@ -31,7 +31,7 @@ class SignInCommand extends Command
                 ->setError($e);
         }catch(InvalidCredentialsException $e) {
             $responseBuilder
-                ->setStatusNotFound()
+                ->setStatusNotAllowed()
                 ->setError($e);
         }
 

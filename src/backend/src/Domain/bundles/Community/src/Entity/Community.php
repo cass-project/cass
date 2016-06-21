@@ -114,10 +114,11 @@ class Community implements IdEntity, JSONSerializable, ImageEntity, CollectionAw
             'image' => $this->image,
             'description' => $this->getDescription(),
             'collections' => $this->collections->toJSON(),
+            'features' => $this->getFeatures()->listFeatures(),
             'public_options' => [
                 'public_enabled' => $this->isPublicEnabled(),
                 'moderation_contract' => $this->isModerationContractEnabled(),
-            ]
+            ],
         ];
 
         if($this->hasTheme()) {

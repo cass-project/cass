@@ -6,6 +6,7 @@ use Domain\Community\Entity\Community;
 interface Feature
 {
     static public function getCode(): string;
+    static public function getFACode(): string;
 
     public function isProductionReady(): bool;
     public function isDevelopmentReady(): bool;

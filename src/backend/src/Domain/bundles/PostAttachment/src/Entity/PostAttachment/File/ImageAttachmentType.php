@@ -23,7 +23,7 @@ class ImageAttachmentType implements FileAttachmentType, AttachmentTypeDetector,
     }
 
     public function extend(PostAttachment $postAttachment): array {
-        $file = $postAttachment->getAttachment()['file']['storage'];
+        $file = $postAttachment->getAttachment()['file']['storage_path'];
         
         list($width, $height) = getimagesize($file);
 

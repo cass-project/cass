@@ -78,8 +78,8 @@ class PostAttachmentService
 
         $postAttachmentEntity->setAttachment([
             'file' => [
-                'public' => '/public/storage/post/attachment/'.$subDirectory.'/'.$desiredFileName,
-                'storage' => $resultDir.'/'.$desiredFileName
+                'public_path' => '/public/storage/post/attachment/'.$subDirectory.'/'.$desiredFileName,
+                'storage_path' => $resultDir.'/'.$desiredFileName
             ]
         ]);
 

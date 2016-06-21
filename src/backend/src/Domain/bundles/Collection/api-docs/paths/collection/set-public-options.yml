@@ -29,7 +29,7 @@
         schema:
           $ref: '#/responses/NotFound'
       409:
-        description:
+        description: |
           Невалидный набор опций
         schema:
           $ref: '#/responses/error'

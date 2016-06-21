@@ -53,7 +53,7 @@ class Post implements IdEntity, JSONSerializable
     {
         return [
             'id' => $this->getId(),
-            'date_create_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),
+            'date_created_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),
             'author_profile_id' => $this->getAuthorProfile()->getId(),
             'collection_id' => $this->getCollection()->getId(),
             'content' => $this->getContent()
