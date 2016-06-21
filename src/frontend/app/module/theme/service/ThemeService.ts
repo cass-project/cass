@@ -1,21 +1,21 @@
 import {Injectable} from 'angular2/core';
 
 import {FrontlineService} from "../../frontline/service";
-import {ThemeTree} from "../entity/Theme";
+import {Theme} from "../definitions/entity/Theme";
 import {ThemeSelect} from "../component/ThemeSelect/index";
 
 @Injectable()
 export class ThemeService
 {
-    root: ThemeTree;
-    themes: ThemeTree[];
+    root: Theme;
+    themes: Theme[];
     themesMap = {};
 
     
     constructor(public frontlineService: FrontlineService) {
         this.themes = frontlineService.session.themes;
 
-        var convertTreeToMap = (themes: Array<ThemeTree>) => {
+        var convertTreeToMap = (themes: Array<Theme>) => {
             for(let tree of themes) {
                 this.themesMap[tree.id.toString()] = tree;
 
@@ -28,7 +28,7 @@ export class ThemeService
         convertTreeToMap(this.themes);
     }
 
-    each(fn: { (theme: ThemeTree) }) {
+    each(fn: { (theme: Theme) }) {
         for(let n in this.themesMap) {
             if(this.themesMap.hasOwnProperty(n)) {
                 fn(this.themesMap[n]);
@@ -36,7 +36,7 @@ export class ThemeService
         }
     }
 
-    findById(themeId: number): ThemeTree {
+    findById(themeId: number): Theme {
         if(this.themesMap.hasOwnProperty(themeId.toString())) {
             return this.themesMap[themeId.toString()];
         }else{
@@ -44,7 +44,7 @@ export class ThemeService
         }
     }
 
-    getRoot(): ThemeTree {
+    getRoot(): Theme {
         return {
             id: 0,
             parent_id: 0,
@@ -54,7 +54,7 @@ export class ThemeService
         };
     }
 
-    getAll(): Array<ThemeTree> {
+    getAll(): Array<Theme> {
         return this.themes;
     }
 }
