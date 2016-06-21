@@ -1,13 +1,12 @@
 import {Component, Injectable} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
-import {UploadImageService} from "../../../../../util/component/UploadImage/service";
 import {ProfileRESTService} from "../../../../service/ProfileRESTService";
 import {ProfileImage} from "../../../ProfileImage/index";
 import {AuthService} from "../../../../../auth/service/AuthService";
-import {UploadImageModal} from "../../../../../util/component/UploadImage/index";
-import {UploadImageService} from "../../../../../util/component/UploadImage/service";
 import {ModalControl} from "../../../../../util/classes/ModalControl";
 import {UploadProfileImageStrategy} from "../../../../util/UploadProfileImageStrategy";
+import {UploadImageService} from "../../../../../form/component/UploadImage/service";
+import {UploadImageModal} from "../../../../../form/component/UploadImage/index";
 
 enum UploadImageScreen {
     File = <any>"File",

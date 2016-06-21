@@ -7,6 +7,8 @@ export interface ProfileEntity {
     account_id:number;
     is_current:boolean;
     is_initialized:boolean;
+    interesting_in_ids: Array<number>;
+    expert_in_ids: Array<number>;
     image:ImageCollection;
     greetings:ProfileGreetingsEntity;
     gender:ProfileGenderEntity;

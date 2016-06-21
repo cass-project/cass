@@ -7,10 +7,8 @@ import {ProfileSetupScreenGender} from "./Screen/ProfileSetupScreenGender/index"
 import {ProfileSetupScreenImage} from "./Screen/ProfileSetupScreenImage/index";
 import {ProfileSetupScreenInterests} from "./Screen/ProfileSetupScreenInterests/index";
 import {ProfileSetupScreenExpertIn} from "./Screen/ProfileSetupScreenExpertIn/index";
-import {ComponentStages} from "../../../util/classes/ComponentStages";
 import {ScreenControls} from "../../../util/classes/ScreenControls";
 import {ProfileRESTService} from "../../service/ProfileRESTService";
-import {FrontlineService} from "../../../frontline/service";
 import {ProfileComponentService} from "../../service";
 import {AuthService} from "../../../auth/service/AuthService";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
@@ -95,12 +93,12 @@ export class ProfileSetup
         }
         /*InterestsIn stage*/
         if (this.screens.isIn([ProfileSetupScreen.Interests]) &&
-            (JSON.stringify(this.model.interestingIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.interesting_in))){
+            (JSON.stringify(this.model.interestingIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.interesting_in_ids))){
             return true
         }
         /*ExpertIn stage*/
          if (this.screens.isIn([ProfileSetupScreen.ExpertIn]) &&
-             (JSON.stringify(this.model.expertIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.expert_in))){
+             (JSON.stringify(this.model.expertIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.expert_in_ids))){
             return true;
         }
 
