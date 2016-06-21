@@ -1,3 +1,6 @@
-/**
- * Created by NiiNii on 6/21/2016.
- */
+import {Injectable} from 'angular2/core';
+
+@Injectable()
+export class RESTService{
+
+}
