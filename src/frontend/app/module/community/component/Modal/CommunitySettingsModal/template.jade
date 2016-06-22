@@ -46,4 +46,6 @@ cass-modal
               button.form-button.form-button-green(
                 [disabled]='!canSave()',
                 (click) = 'saveAllChanges()'
-              ) Сохранить
+              )
+                i.fa.fa-spinner.fa-pulse.fa-fw(*ngIf="loading")
+                span Сохранить

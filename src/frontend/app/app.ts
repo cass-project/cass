@@ -26,6 +26,7 @@ import {CommunityService} from "./module/community/service/CommunityService";
 import {CollectionRESTService} from "./module/collection/service/CollectionRESTService";
 import {ProfileRESTService} from "./module/profile/service/ProfileRESTService";
 import {CommunitySettingsModalModel} from "./module/community/component/Modal/CommunitySettingsModal/model";
+import {AuthRESTService} from "./module/auth/service/AuthRESTService";
 
 declare namespace CASSDefinitions {}
 
@@ -36,6 +37,7 @@ declare namespace CASSDefinitions {}
         ModalService,
         MessageBusService,
         AuthService,
+        AuthRESTService,
         AuthComponentService,
         ProfileComponentService,
         CommunityModalService,

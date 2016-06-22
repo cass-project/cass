@@ -2,6 +2,7 @@ import {Http, Response} from "angular2/http";
 import {Observable} from "rxjs/Observable";
 
 import {MessageBusService} from "../../message/service/MessageBusService/index";
+import {AuthService} from "../../auth/service/AuthService";
 
 export abstract class AbstractRESTService
 {
@@ -12,6 +13,7 @@ export abstract class AbstractRESTService
             .subscribe(
                 success => {},
                 error => {
+                    console.log(error);
                 }
         );
 

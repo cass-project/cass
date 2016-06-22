@@ -51,7 +51,7 @@ export class ProfilesTabService
 
     getProfile(){
         for(let i = 0; i < AuthService.getAuthToken().account.profiles.profiles.length; i++){
-            if(this.pickedId === AuthService.getAuthToken().account.profiles.profiles[i].entity.id){
+            if(this.pickedId === AuthService.getAuthToken().account.profiles.profiles[i].entity.profile.id){
                 this.pickedElem = i;
                 return AuthService.getAuthToken().account.profiles.profiles[i].entity;
             }

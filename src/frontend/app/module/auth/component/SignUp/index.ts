@@ -1,10 +1,13 @@
 import {Component, Output, EventEmitter} from "angular2/core";
 
 import {OAuth2Component} from "../OAuth2/index";
-import {AuthService, SignUpModel, SignInResponse} from "../../service/AuthService";
+import {AuthService, SignInResponse} from "../../service/AuthService";
 import {MessageBusService} from "../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
+import {SignInRequest} from "../../definitions/paths/sign-in";
+import {SignUpRequest} from "../../definitions/paths/sign-up";
+import {AuthRESTService} from "../../service/AuthRESTService";
 
 @Component({
     selector: 'cass-auth-sign-up',
@@ -19,39 +22,36 @@ import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
 })
 export class SignUpComponent
 {
-    @Output('back') backEvent = new EventEmitter<SignUpModel>();
-    @Output('close') closeEvent = new EventEmitter<SignUpModel>();
-    @Output('success') successEvent = new EventEmitter<SignInResponse>();
+    @Output('back') backEvent = new EventEmitter<SignInRequest>();
+    @Output('close') closeEvent = new EventEmitter<SignUpRequest>();
+    @Output('success') successEvent = new EventEmitter();
     
     private status: SignUpStatus = {
         loading: false
     };
 
-    private model: SignUpModel = {
+    private model: SignUpRequest = {
         email: '',
         password: '',
         repeat: '',
     };
 
     constructor(
-        private authService: AuthService,
+        private authRESTService: AuthRESTService,
         private messages: MessageBusService
     ) {}
 
     submit() {
         this.status.loading = true;
 
-        this.authService.attemptSignUp(this.model)
-            .then(response => {
+        this.authRESTService.signUp(this.model).subscribe(
+            response =>{
                 this.successEvent.emit(response);
-            })
-            .catch(error => {
-                this.messages.push(MessageBusNotificationsLevel.Warning, error);
-            })
-            .then(() => {
                 this.status.loading = false;
-            })
-        ;
+            },
+            error => {this.messages.push(MessageBusNotificationsLevel.Warning, error);
+                this.status.loading = false;
+            });
     }
 
     close() {
