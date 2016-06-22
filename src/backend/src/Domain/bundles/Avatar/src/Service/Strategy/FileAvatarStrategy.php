@@ -65,7 +65,7 @@ final class FileAvatarStrategy implements AvatarServiceStrategy
 
             $collection->attachImage((string) $size, new Image(
                 "{$dir}/{$file}",
-                sprintf("%s/%s/%s/%s", $strategy->getPublicPath(), $strategy->getEntityId(), $size, $file)
+                sprintf("%s/%s/%s/%s/%s", $strategy->getPublicPath(), $strategy->getEntityId(), $collection->getUID(), $size, $file)
             ));
         }, $strategy->getSizes());
 
