@@ -7,7 +7,16 @@ export interface CommunityEntity
     date_created_on: string;
     title: string;
     description: string;
-    collections: CollectionEntity[];
+    image: CommunityEnityImage;
+    theme: {
+        has:boolean,
+        id?:number
+    };
+    collections: {
+        collection_id: number;
+        position: number;
+        sub: {}
+    }[];
     public_options: CommunityPublicOptionsEntity;
     features: string[];
 }
