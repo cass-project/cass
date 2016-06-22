@@ -17,10 +17,20 @@ use Domain\Community\Parameters\EditCommunityParameters;
 use Domain\Community\Parameters\SetPublicOptionsParameters;
 use Domain\Community\Repository\CommunityRepository;
 use Domain\Theme\Repository\ThemeRepository;
+use Evenement\EventEmitter;
+use Evenement\EventEmitterInterface;
 use League\Flysystem\FilesystemInterface;
 
 class CommunityService
 {
+    const EVENT_COMMUNITY_CREATED = 'domain.community.created';
+    const EVENT_COMMUNITY_UPDATED = 'domain.community.updated';
+    const EVENT_COMMUNITY_DELETE = 'domain.community.delete';
+    const EVENT_COMMUNITY_DELETED = 'domain.community.deleted';
+
+    /** @var EventEmitterInterface */
+    private $events;
+
     /** @var CurrentAccountService */
     private $currentAccountService;
 
@@ -47,12 +57,18 @@ class CommunityService
         AvatarService $avatarService,
         FilesystemInterface $imageFileSystem
     ) {
+        $this->events = new EventEmitter();
         $this->currentAccountService = $currentAccountService;
         $this->communityRepository = $communityRepository;
         $this->collectionService = $collectionService;
         $this->themeRepository = $themeRepository;
         $this->avatarService = $avatarService;
         $this->imageFileSystem = $imageFileSystem;
+    }
+
+    public function getEventEmitter(): EventEmitterInterface
+    {
+        return $this->events;
     }
     
     public function createCommunity(CreateCommunityParameters $parameters): Community {
@@ -79,6 +95,8 @@ class CommunityService
         ));
         $this->avatarService->generateImage($strategy);
 
+        $this->events->emit(self::EVENT_COMMUNITY_CREATED, [$entity]);
+
         return $entity;
     }
 
@@ -94,6 +112,7 @@ class CommunityService
         }
 
         $this->communityRepository->saveCommunity($community);
+        $this->events->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
 
         return $community;
     }
@@ -104,6 +123,7 @@ class CommunityService
 
         $this->avatarService->uploadImage($strategy, $parameters);
         $this->communityRepository->saveCommunity($community);
+        $this->events->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
 
         return $community->getImages();
     }
@@ -115,11 +135,13 @@ class CommunityService
 
         $this->avatarService->defaultImage($strategy);
         $this->communityRepository->saveCommunity($community);
+        $this->events->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
 
         return $community->getImages();
     }
 
-    public function setPublicOptions(int $communityId, SetPublicOptionsParameters $parameters): Community {
+    public function setPublicOptions(int $communityId, SetPublicOptionsParameters $parameters): Community
+    {
         $community = $this->communityRepository->getCommunityById($communityId);
 
         $parameters->isPublicEnabled()
@@ -131,6 +153,18 @@ class CommunityService
             : $community->disableModerationContract();
 
         $this->communityRepository->saveCommunity($community);
+        $this->events->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
+
+        return $community;
+    }
+
+    public function deleteCommunity(int $communityId): Community
+    {
+        $community = $this->getCommunityById($communityId);
+
+        $this->events->emit(self::EVENT_COMMUNITY_DELETE, [$community]);
+        $this->communityRepository->deleteCommunity($community);
+        $this->events->emit(self::EVENT_COMMUNITY_DELETED, [$community]);
 
         return $community;
     }
@@ -147,6 +181,7 @@ class CommunityService
 
         $community->replaceCollections($collections->createImmutableInstance());
         $this->communityRepository->saveCommunity($community);
+        $this->events->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
 
         return $community->getCollections();
     }
@@ -163,6 +198,7 @@ class CommunityService
 
         $community->replaceCollections($collections->createImmutableInstance());
         $this->communityRepository->saveCommunity($community);
+        $this->events->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
 
         return $community->getCollections();
     }

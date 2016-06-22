@@ -7,20 +7,23 @@ use Domain\Community\Exception\CommunityNotFoundException;
 
 class CommunityRepository extends EntityRepository
 {
-    public function createCommunity(Community $community): Community {
+    public function createCommunity(Community $community): Community
+    {
         $this->getEntityManager()->persist($community);
         $this->getEntityManager()->flush($community);
 
         return $community;
     }
 
-    public function saveCommunity(Community $community): Community {
+    public function saveCommunity(Community $community): Community
+    {
         $this->getEntityManager()->flush($community);
 
         return $community;
     }
 
-    public function getCommunityById(int $communityId): Community {
+    public function getCommunityById(int $communityId): Community
+    {
         $entity = $this->find($communityId);
 
         if($entity === null) {
@@ -30,7 +33,8 @@ class CommunityRepository extends EntityRepository
         return $entity;
     }
 
-    public function getCommunityBySID(string $communitySID): Community {
+    public function getCommunityBySID(string $communitySID): Community
+    {
         $entity = $this->findOneBy([
             'sid' => $communitySID
         ]);
@@ -42,22 +46,26 @@ class CommunityRepository extends EntityRepository
         return $entity;
     }
 
-    public function deleteCommunity(Community $community) {
-        throw new \DomainException(sprintf('There is no way you can delete the community. Check out project documentations: %s', '/docs/stories/community/00-community-no-delete.md'));
+    public function deleteCommunity(Community $community)
+    {
+        $this->getEntityManager()->remove($community);
+        $this->getEntityManager()->flush($community);
     }
 
-    public function linkCollection(int $communityId, int $collectionId): Community {
+    public function linkCollection(int $communityId, int $collectionId): Community
+    {
         $community = $this->getCommunityById($communityId);
         $collections = $community->getCollections();
 
-        if(! $collections->hasCollection($collectionId)) {
+        if(!$collections->hasCollection($collectionId)) {
             $community->getCollections()->attachChild($collectionId);
         }
 
         return $this->saveCommunity($community);
     }
 
-    public function unlinkCollection(int $communityId, int $collectionId): Community {
+    public function unlinkCollection(int $communityId, int $collectionId): Community
+    {
         $community = $this->getCommunityById($communityId);
         $collections = $community->getCollections();
 
@@ -68,12 +76,14 @@ class CommunityRepository extends EntityRepository
         return $this->saveCommunity($community);
     }
 
-    public function activateFeature(Community $community, string $featureCode) {
+    public function activateFeature(Community $community, string $featureCode)
+    {
         $community->getFeatures()->includeFeature($featureCode);
         $this->getEntityManager()->flush([$community]);
     }
 
-    public function deactivateFeature(Community $community, string $featureCode) {
+    public function deactivateFeature(Community $community, string $featureCode)
+    {
         $community->getFeatures()->excludeFeature($featureCode);
         $this->getEntityManager()->flush([$community]);
     }

@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Profile\Repository;
+namespace Domain\Collection\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Domain\Profile\Entity\ProfileExpertInEQ;
+use Domain\Collection\Entity\CollectionThemeEQEntity;
 
-class ProfileExpertInEQRepository extends EntityRepository
+final class CollectionThemeEQRepository extends EntityRepository
 {
     public function saveEQ(array $entities)
     {
@@ -15,24 +15,24 @@ class ProfileExpertInEQRepository extends EntityRepository
         $this->getEntityManager()->flush($entities);
     }
 
-    public function sync(int $profileId, array $themeIds)
+    public function sync(int $collectionId, array $themeIds)
     {
-        $this->deleteEQOfProfile($profileId);
-        $this->saveEQ(array_map(function(int $themeId) use ($profileId) {
-            return new ProfileExpertInEQ($profileId, $themeId);
+        $this->deleteEQOfCollection($collectionId);
+        $this->saveEQ(array_map(function(int $themeId) use ($collectionId) {
+            return new CollectionThemeEQEntity($collectionId, $themeId);
         }, $themeIds));
     }
 
-    public function deleteEQOfProfile(int $profileId)
+    public function deleteEQOfCollection(int $collectionId)
     {
         $em = $this->getEntityManager();
 
-        $em->flush(array_map(function(ProfileExpertInEQ $eq) use ($em) {
+        $em->flush(array_map(function(CollectionThemeEQEntity $eq) use ($em) {
             $em->remove($eq);
 
             return $eq;
         }, $this->findBy([
-            'profileId' => $profileId
+            'collectionId' => $collectionId
         ])));
     }
 
@@ -40,7 +40,7 @@ class ProfileExpertInEQRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
 
-        $em->flush(array_map(function(ProfileExpertInEQ $eq) use ($em) {
+        $em->flush(array_map(function(CollectionThemeEQEntity $eq) use ($em) {
             $em->remove($eq);
 
             return $eq;
@@ -49,9 +49,9 @@ class ProfileExpertInEQRepository extends EntityRepository
         ])));
     }
 
-    public function getProfilesByThemeId(int $themeId): array
+    public function getCollectionsByThemeId(int $themeId): array
     {
-        /** @var ProfileExpertInEQ[] $result */
+        /** @var CollectionThemeEQEntity[] $result */
         $result = $this->findBy([
             'themeId' => $themeId
         ]);

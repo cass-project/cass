@@ -36,7 +36,7 @@ final class LinkCollectionEvents
 
         $collectionEvents = $collectionService->getEventEmitter();
 
-        $collectionEvents->on(CollectionService::EVENT_ACCESS, function(Collection $collection) use ($currentAccountService, $collectionService, $communityService)
+        $collectionEvents->on(CollectionService::EVENT_COLLECTION_ACCESS, function(Collection $collection) use ($currentAccountService, $collectionService, $communityService)
         {
             if($collection->getOwnerType() === 'community') {
                 $community = $communityService->getCommunityById((int) $collection->getOwnerId());
@@ -47,14 +47,14 @@ final class LinkCollectionEvents
             }
         });
 
-        $collectionEvents->on(CollectionService::EVENT_CREATED, function(Collection $collection) use ($collectionService, $communityService)
+        $collectionEvents->on(CollectionService::EVENT_COLLECTION_CREATED, function(Collection $collection) use ($collectionService, $communityService)
         {
             if($collection->getOwnerType() === 'community') {
                 $communityService->linkCollection((int) $collection->getOwnerId(), $collection->getId());
             }
         });
 
-        $collectionEvents->on(CollectionService::EVENT_DELETE, function(Collection $collection) use ($collectionService, $communityService)
+        $collectionEvents->on(CollectionService::EVENT_COLLECTION_DELETE, function(Collection $collection) use ($collectionService, $communityService)
         {
             if($collection->getOwnerType() === 'community') {
                 $communityService->unlinkCollection((int) $collection->getOwnerId(), $collection->getId());

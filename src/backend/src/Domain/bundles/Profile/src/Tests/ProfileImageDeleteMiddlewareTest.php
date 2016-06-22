@@ -40,7 +40,6 @@ class ProfileImageDeleteMiddlewareTest extends ProfileMiddlewareTestCase
         $this->requestDeleteImage($profile->getId())
             ->auth($account->getAPIKey())
             ->execute()
-            ->dump()
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([
