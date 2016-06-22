@@ -46,7 +46,7 @@ final class CollectionImageStrategy extends SquareImageStrategy
 
     public function getPublicPath(): string
     {
-        return '/dist/assets/collection/by-sid/avatar';
+        return '/dist/assets/collection/entity/by-sid/avatar';
     }
 
     public function getDefaultImage(): Image
