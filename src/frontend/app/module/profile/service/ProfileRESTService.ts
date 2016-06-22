@@ -27,7 +27,7 @@ export class ProfileRESTService extends AbstractRESTService{
     }
 
     editPersonal(profile) {
-        let url = `/backend/api/protected/profile/${this.currentProfile.id}/edit-personal/`;
+        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.profile.id}/edit-personal/`;
         let entity = AuthService.getAuthToken().getCurrentProfile().entity;
         let greetings = entity.profile.greetings;
 
@@ -49,7 +49,7 @@ export class ProfileRESTService extends AbstractRESTService{
     }
 
     updateExpertThemes(expertIn) {
-        let url = `/backend/api/protected/profile/${this.currentProfile.id}/expert-in`;
+        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.profile.id}/expert-in`;
 
         AuthService.getAuthToken().getCurrentProfile().entity.profile.expert_in_ids = (JSON.parse(JSON.stringify(expertIn)));
 
@@ -59,7 +59,7 @@ export class ProfileRESTService extends AbstractRESTService{
     }
 
     updateInterestThemes(interestingIn) {
-        let url = `/backend/api/protected/profile/${this.currentProfile.id}/interesting-in`;
+        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.profile.id}/interesting-in`;
 
         AuthService.getAuthToken().getCurrentProfile().entity.profile.interesting_in_ids = (JSON.parse(JSON.stringify(interestingIn)));
 
@@ -103,7 +103,7 @@ export class ProfileRESTService extends AbstractRESTService{
     }
 
     deleteAvatar() {
-        let url = `/backend/api/protected/profile/${this.currentProfile.id}/image-delete`;
+        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.profile.id}/image-delete`;
 
         return this.handle(this.http.delete(url));
     }
@@ -126,7 +126,7 @@ export class ProfileRESTService extends AbstractRESTService{
         };
 
         this.tryNumber++;
-        let url = `/backend/api/protected/profile/${this.currentProfile.id}/image-upload/crop-start/${crop.start.x}/${crop.start.y}/crop-end/${crop.end.x}/${crop.end.y}`;
+        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.profile.id}/image-upload/crop-start/${crop.start.x}/${crop.start.y}/crop-end/${crop.end.x}/${crop.end.y}`;
         let formData = new FormData();
         formData.append("file", file);
 
@@ -143,7 +143,7 @@ export class ProfileRESTService extends AbstractRESTService{
         this.xmlRequest.onreadystatechange = () => {
             if (this.xmlRequest.readyState === 4) {
                 if (this.xmlRequest.status === 200) {
-                    this.currentProfile.image = JSON.parse(this.xmlRequest.responseText).image;
+                    AuthService.getAuthToken().getCurrentProfile().entity.profile.image = JSON.parse(this.xmlRequest.responseText).image;
                     }
                     modal.progress.complete();
                     if(modal.close){

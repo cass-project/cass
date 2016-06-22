@@ -7,6 +7,7 @@ import {MessageBusNotificationsLevel} from "../../../message/component/MessageBu
 import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
 import {SignInRequest} from "../../definitions/paths/sign-in";
 import {SignUpRequest} from "../../definitions/paths/sign-up";
+import {AuthRESTService} from "../../service/AuthRESTService";
 
 @Component({
     selector: 'cass-auth-sign-up',
@@ -23,7 +24,7 @@ export class SignUpComponent
 {
     @Output('back') backEvent = new EventEmitter<SignInRequest>();
     @Output('close') closeEvent = new EventEmitter<SignUpRequest>();
-    @Output('success') successEvent = new EventEmitter<SignInResponse>();
+    @Output('success') successEvent = new EventEmitter();
     
     private status: SignUpStatus = {
         loading: false
@@ -36,14 +37,14 @@ export class SignUpComponent
     };
 
     constructor(
-        private authService: AuthService,
+        private authRESTService: AuthRESTService,
         private messages: MessageBusService
     ) {}
 
     submit() {
         this.status.loading = true;
 
-        this.authService.attemptSignUp(this.model).subscribe(
+        this.authRESTService.signUp(this.model).subscribe(
             response =>{
                 this.successEvent.emit(response);
                 this.status.loading = false;

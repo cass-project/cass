@@ -15,7 +15,6 @@ export class AuthService
     public static token: AuthToken;
 
     constructor(
-        private authRESTService: AuthRESTService,
         private frontline: FrontlineService)
     {
         let hasAuth = frontline.session.auth && (typeof frontline.session.auth.api_key == "string") && (frontline.session.auth.api_key.length > 0);
@@ -37,30 +36,26 @@ export class AuthService
     }
 
     static getAuthToken() {
-        if(!this.isSignedIn()) {
-            throw new Error("You're not signed in.");
-        }
-
         return AuthService.token;
     }
 
-    public attemptSignIn(request: SignInRequest){
+    /*public attemptSignIn(request: SignInRequest){
         return this.signIn(this.authRESTService.signIn(request));
     }
 
-    /*public attemptProviderSignIn(provider: String): Promise<SignInResponse> {
+    public attemptProviderSignIn(provider: String): Promise<SignInResponse> {
         return this.signIn(this.http.get(`/backend/api/auth/sign-in/oauth/${provider}`));
-    }*/
+    }
 
     public attemptSignUp(request: SignUpRequest) {
         return this.signIn(this.authRESTService.signUp(request));
-    }
+    }*/
 
     public getAuthToken() {
         return AuthService.getAuthToken();
     }
 
-    private signIn(http){
+   /* private signIn(http){
             http.map(res => res.json())
                 .subscribe(
                     response => {
@@ -82,7 +77,7 @@ export class AuthService
                 }
             }
         );
-    }
+    }*/
 }
 
 class AuthToken

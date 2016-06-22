@@ -8,8 +8,6 @@ export abstract class AbstractRESTService
 {
     constructor(protected http: Http, private messages: MessageBusService) {}
 
-    public currentProfile = AuthService.getAuthToken().getCurrentProfile().entity.profile;
-
     handle(request: Observable<Response>): Observable<Response> {
         request.map(res => res.json())
             .subscribe(
