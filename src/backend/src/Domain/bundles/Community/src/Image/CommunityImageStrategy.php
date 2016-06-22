@@ -10,7 +10,7 @@ use League\Flysystem\FilesystemInterface;
 final class CommunityImageStrategy extends SquareImageStrategy
 {
     const DEFAULT_IMAGE_PUBLIC_PATH = '/dist/assets/community/community-default.png';
-    const DEFAULT_IMAGE_STORAGE_DIR = __DIR__.'/../../../../../../../www/app/dist/assets/community/community-default.png';
+    const DEFAULT_IMAGE_STORAGE_DIR = __DIR__.'/../../../../../../../www/app/dist/assets/entity/community/community-default.png';
 
     /** @var Community */
     private $community;
