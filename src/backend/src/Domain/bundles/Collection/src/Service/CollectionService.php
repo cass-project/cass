@@ -10,7 +10,6 @@ use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Parameters\EditCollectionParameters;
 use Domain\Collection\Parameters\SetPublicOptionsParameters;
 use Domain\Collection\Repository\CollectionRepository;
-use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
 use Evenement\EventEmitter;
 use Evenement\EventEmitterInterface;

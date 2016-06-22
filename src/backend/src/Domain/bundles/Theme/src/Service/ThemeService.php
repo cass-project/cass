@@ -5,9 +5,20 @@ use Domain\Auth\Service\CurrentAccountService;
 use Application\Util\SerialManager\SerialManager;
 use Domain\Theme\Entity\Theme;
 use Domain\Theme\Repository\ThemeRepository;
+use Evenement\EventEmitter;
+use Evenement\EventEmitterInterface;
 
 class ThemeService
 {
+    const EVENT_ACCESS = 'domain.theme.access';
+    const EVENT_CREATED = 'domain.theme.created';
+    const EVENT_UPDATED = 'domain.theme.updated';
+    const EVENT_DELETE = 'domain.theme.delete';
+    const EVENT_DELETED = 'domain.theme.deleted';
+
+    /** @var EventEmitterInterface */
+    private $events;
+
     /** @var CurrentAccountService */
     private $currentAccountService;
 
@@ -16,8 +27,14 @@ class ThemeService
 
     public function __construct(CurrentAccountService $currentAccountService, ThemeRepository $themeRepository)
     {
+        $this->events = new EventEmitter();
         $this->currentAccountService = $currentAccountService;
         $this->themeRepository = $themeRepository;
+    }
+
+    public function getEventEmitter(): EventEmitterInterface
+    {
+        return $this->events;
     }
 
     public function createTheme(string $title, string $description, int $parentId = null): Theme
