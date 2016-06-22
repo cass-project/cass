@@ -3,11 +3,11 @@ import {Injectable} from "angular2/core";
 @Injectable()
 export class ProfileComponentService
 {
-    currentProfile;
+    currentProfileCollections;
     currentCollection;
 
     updateCollections($event){
-        this.currentProfile.collections.push($event);
+        this.currentProfileCollections.push($event);
 
         this.modals.createCollectionMaster.close();
     }

@@ -37,20 +37,18 @@ export class SignInComponent
         private messages: MessageBusService
     ) {}
 
-    submit(){
+
+    submit() {
         this.status.loading = true;
 
-        this.authService.attemptSignIn(this.model)
-            .then(response => {
+        this.authService.attemptSignIn(this.model).subscribe(
+            response =>{
                 this.successEvent.emit(response);
-            })
-            .catch(error => {
-                this.messages.push(MessageBusNotificationsLevel.Warning, error)
-            })
-            .then(() => {
                 this.status.loading = false;
-            })
-        ;
+            },
+            error => {this.messages.push(MessageBusNotificationsLevel.Warning, error);
+                this.status.loading = false;
+            });
     }
 
     signUp(){

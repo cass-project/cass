@@ -15,11 +15,12 @@ export class SidebarProfileIcon
 {
     private isProfileMenuSwitched: boolean = false;
 
-    constructor(private service: ProfileComponentService, private frontlineService: FrontlineService ) {}
+    constructor(private service: ProfileComponentService, private frontlineService: FrontlineService, service: ProfileComponentService) {
+    }
 
     getImageProfile(){
         if(AuthService.isSignedIn()){
-            return AuthService.getAuthToken().getCurrentProfile().entity.image.variants['default'];
+            return AuthService.getAuthToken().getCurrentProfile().entity.profile.image.variants['default'].public_path;
         }
     }
 

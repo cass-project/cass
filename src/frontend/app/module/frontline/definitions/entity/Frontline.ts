@@ -1,6 +1,6 @@
 import {Success200} from "../../../common/definitions/common";
 import {AccountEntity} from "../../../account/definitions/entity/Account";
-import {ProfileEntity} from "../../../profile/definitions/entity/Profile";
+import {ProfileEntity, Entity} from "../../../profile/definitions/entity/Profile";
 import {Palette} from "../../../colors/definitions/entity/Palette";
 import {Theme} from "../../../theme/definitions/entity/Theme";
 
@@ -9,7 +9,7 @@ export interface FrontlineEntity extends Success200
     auth?: {
         api_key: string,
         account: AccountEntity,
-        profiles: Array<ProfileEntity>,
+        profiles: Array<Entity>,
     },
     themes: Theme[];
     config: {

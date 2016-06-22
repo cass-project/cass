@@ -1,4 +1,4 @@
-import {ProfileEntity, Profile} from "../../../profile/definitions/entity/Profile";
+import {ProfileEntity, Profile, Entity} from "../../../profile/definitions/entity/Profile";
 
 export interface AccountEntity {
     id: string;
@@ -20,7 +20,7 @@ export interface AccountDisabledEntity {
 export class Account {
     public profiles: AccountProfiles;
 
-    constructor(public entity: AccountEntity, profiles: Array<ProfileEntity>) {
+    constructor(public entity: AccountEntity, profiles: Array<Entity>) {
         this.profiles = new AccountProfiles(profiles.map(entity => {
             return new Profile(this, entity);
         }));
@@ -49,7 +49,7 @@ export class AccountProfiles {
         }
 
         for (let profile of this.profiles) {
-            if (profile.entity.id === profileId) { /* profile to set as current */
+            if (profile.entity.profile.id === profileId) { /* profile to set as current */
                 selectedProfile = profile.setAsCurrent();
             } else {
                 profile.unsetAsCurrent();
@@ -61,7 +61,7 @@ export class AccountProfiles {
 
     containsProfileWithId(profileId: number) {
         for (let profile of this.profiles) {
-            if (profile.entity.id === profileId) {
+            if (profile.entity.profile.id === profileId) {
                 return true;
             }
         }
@@ -71,7 +71,7 @@ export class AccountProfiles {
 
     containsProfile(search: Profile) {
         for (let profile of this.profiles) {
-            if (profile.entity.id === search.entity.id) {
+            if (profile.entity.profile.id === search.entity.profile.id) {
                 return true;
             }
         }

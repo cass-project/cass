@@ -38,14 +38,14 @@ export class ImageTab
 
     getImageProfile(){
         if(AuthService.isSignedIn()){
-            return AuthService.getAuthToken().getCurrentProfile().entity.image.variants['default'];
+            return AuthService.getAuthToken().getCurrentProfile().entity.profile.image.variants['default'].public_path;
         }
     }
 
     avatarDeletingProcess(){
         this.deleteProcessVisible = true;
         this.profileRESTService.deleteAvatar().subscribe(data => {
-            AuthService.getAuthToken().getCurrentProfile().entity.image = {
+            AuthService.getAuthToken().getCurrentProfile().entity.profile.image = {
                 "variants": {
                     "default": {
                         "id": 'default',

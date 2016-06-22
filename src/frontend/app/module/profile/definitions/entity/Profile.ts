@@ -1,5 +1,11 @@
 import {ImageCollection} from "../../../avatar/definitions/ImageCollection";
 import {Account} from "../../../account/definitions/entity/Account";
+import {CollectionEntity} from "../../../collection/definitions/entity/collection";
+
+export interface Entity {
+    collection: CollectionEntity;
+    profile: ProfileEntity;
+}
 
 export interface ProfileEntity {
     id:number;
@@ -41,31 +47,31 @@ export interface ProfileDisabledEntity {
 }
 
 export class Profile {
-    static AVATAR_DEFAULT = '/public/assets/profile-default.png';
+    static AVATAR_DEFAULT = '/dist/assets/profile-default.png';
 
-    constructor(public owner: Account, public entity:ProfileEntity) {
+    constructor(public owner: Account, public entity: Entity) {
     }
 
     getId():number {
-        return this.entity.id;
+        return this.entity.profile.id
     }
 
     greetings():string {
-        return this.entity.greetings.greetings;
+        return this.entity.profile.greetings.greetings;
     }
 
     public isCurrent():boolean {
-        return !!this.entity.is_current;
+        return !!this.entity.profile.is_current;
     }
 
     public setAsCurrent():Profile {
-        this.entity.is_current = true;
+        this.entity.profile.is_current = true;
 
         return this;
     }
 
     public unsetAsCurrent():Profile {
-        this.entity.is_current = false;
+        this.entity.profile.is_current = false;
 
         return this;
     }
