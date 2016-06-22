@@ -46,7 +46,7 @@ final class ProfileImageStrategy extends SquareImageStrategy
 
     public function getPublicPath(): string
     {
-        return '/dist/assets/profile/entity/by-sid/avatar';
+        return '/dist/assets/entity/profile/by-sid/avatar';
     }
 
     public function getDefaultImage(): Image
