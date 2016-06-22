@@ -4,6 +4,9 @@ import {CommunitySettingsModalModel} from "../../model";
 import {CommunityImage} from "../../../../Elements/CommunityImage/index";
 import {ImageCropperService, ImageCropper} from "../../../../../../form/component/ImageCropper/index";
 import {UploadImageCropModel} from "../../../../../../form/component/UploadImage/strategy";
+import {CommunityEnityImage} from "../../../../../definitions/entity/Community";
+import {CommunityRESTService} from "../../../../../service/CommunityRESTService";
+import {CommunityImageDeleteRequest} from "../../../../../definitions/paths/image-delete";
 
 @Component({
     selector: 'cass-community-settings-modal-tab-image',
@@ -22,13 +25,25 @@ import {UploadImageCropModel} from "../../../../../../form/component/UploadImage
 
 export class ImageTab {
 
-    constructor(public model: CommunitySettingsModalModel, public cropper: ImageCropperService) {}
+    private loading:boolean = false;
+
+    constructor(
+        public model: CommunitySettingsModalModel,
+        public cropper: ImageCropperService,
+        private service:CommunityRESTService
+    ) {
+        this.setImage();
+    }
+
+    setImage() {
+        if(this.model.new_image) {
+            this.cropper.options.data = JSON.parse(JSON.stringify(this.model.new_image.uploadImageCrop));
+            this.cropper.setFile(this.model.new_image.uploadImage);
+        }
+    }
 
     onSelect($event) {
-        this.cropper.reset();
-        setTimeout(()=> {
-            this.cropper.setFile($event.target.files[0]);
-        }, 0);
+        this.cropper.setFile($event.target.files[0]);
     }
     
     onChange() {
@@ -41,5 +56,25 @@ export class ImageTab {
                 height: this.cropper.getHeight()
             }
         }
+    }
+
+    cancel() {
+        delete this.model.new_image.uploadImage;
+        delete this.model.new_image.uploadImageCrop;
+        this.cropper.reset();
+    }
+
+    delete_image() {
+        this.loading = true;
+        this.service.imageDelete(<CommunityImageDeleteRequest>{communityId:this.model.id})
+            .map(data=>data.json())
+            .subscribe(
+                data => {
+                    this.loading = false;
+                    this.model.image = data.image;
+                    this.setImage();
+                    console.log(data);
+                }
+            )
     }
 }

@@ -5,6 +5,7 @@ import {CommunityEnityImage} from "../../../definitions/entity/Community";
 @Injectable()
 export class CommunitySettingsModalModel
 {
+    id: number;
     sid: string;
     title: string;
     description: string;

@@ -9,19 +9,16 @@ export class CommunityFeaturesService
         {
             "code":"collections",
             "name": "Коллекции",
-            "icon": "fa-bookmark",
             "description":"Активировав этот модуль, участники и/или модераторы этого коммунити могут создавать подборки контента, постить видео, ссылки, изображения и любые другие материалы."
         },
         {
             "code":"boards",
             "name": "Форум",
-            "icon": "fa-list-ul",
             "description":"Доска объявлений, система форумов для вашего коммунити."
         },
         {
             "code":"chat",
             "name": "Чат",
-            "icon": "fa-comments",
             "description":"Добавить коллективные чаты в ваше коммунити."}
     ];
     private features;
@@ -43,7 +40,11 @@ export class CommunityFeaturesService
 
     getIcon(code) : string
     {
-        return this.getFeatureInfo(code).icon;
+        for(let feature of this.features) {
+            if(feature.code===code) {
+                return feature.fa_icon;
+            }
+        }
     }
 
     getDescription(code) : string
@@ -70,10 +71,9 @@ export class CommunityFeaturesService
     }
 }
 
-export class FeaturesInfo
+export interface FeaturesInfo
 {
     code:string;
     name:string;
-    icon:string;
-    description:string;
+    description?:string;
 }

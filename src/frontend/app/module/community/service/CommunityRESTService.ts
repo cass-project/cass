@@ -6,15 +6,21 @@ import {getResponseURL} from "angular2/src/http/http_utils";
 import {CommunityCreateRequestModel} from "../model/CommunityCreateRequestModel";
 import {CommunityImageUploadRequestModel} from "../model/CommunityImageUploadRequestModel";
 import {CommunityControlFeatureRequestModel} from "../model/CommunityActivateFeatureModel";
+import {CommunityImageDeleteRequest} from "../definitions/paths/image-delete";
+import {EditCommunityRequest} from "../definitions/paths/edit";
 
 @Injectable()
 export class CommunityRESTService
 {
     constructor(private http:Http) {}
 
-    public create(request:CommunityCreateRequestModel)
+    public create(request: CommunityCreateRequestModel): Observable<Response>
     {
         return this.http.put("/backend/api/protected/community/create", JSON.stringify(request));
+    }
+
+    public edit(id:number, body: EditCommunityRequest) {
+        return this.http.post(`/backend/api/protected/community/${id}/edit`, JSON.stringify(body));
     }
 
     public getBySid(sid:string)
@@ -61,6 +67,11 @@ export class CommunityRESTService
                              `crop-start/${request.x1}/${request.y1}/crop-end/${request.x2}/${request.y2}`);
             xhr.send(formData);
         });
+    }
+
+    public imageDelete(request:CommunityImageDeleteRequest): Observable<Response>
+    {
+        return this.http.delete(`/backend/api/protected/community/${request.communityId}/image-delete`);
     }
 
     public activateFeature(reqeust: CommunityControlFeatureRequestModel) : Observable<Response>

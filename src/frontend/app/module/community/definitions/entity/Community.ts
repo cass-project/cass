@@ -1,5 +1,3 @@
-import {CollectionEntity} from "../../../collection/definitions/entity/collection";
-
 export interface CommunityEntity
 {
     id: number;
