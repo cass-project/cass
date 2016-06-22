@@ -1,5 +1,5 @@
 import {Injectable} from "angular2/core";
-import {UploadImageCropModel} from "../../../../util/component/UploadImage/strategy";
+import {UploadImageCropModel} from "../../../../form/component/UploadImage/strategy";
 
 @Injectable()
 export class CommunityCreateModalModel

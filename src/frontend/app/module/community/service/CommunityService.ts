@@ -3,12 +3,12 @@ import {Observable} from "rxjs/Observable";
 
 import {CommunityRESTService} from "./CommunityRESTService";
 import {CommunityCreateResponseModel} from "../model/CommunityCreateResponseModel";
-import {CommunityEnity} from "../enity/Community";
+import {CommunityEntity} from "../definitions/entity/Community";
 
 
 @Injectable()
 export class CommunityService {
-    public community:CommunityEnity;
+    public community:CommunityEntity;
     public communityResponsesCache:CommunityCreateResponseModel[] = [];
     public isAdmin:boolean = false;
 

@@ -1,10 +1,10 @@
-import {CommunityEnity} from "../enity/Community";
+import {CommunityEntity} from "../definitions/entity/Community";
 
 export class CommunityCreateResponseModel {
     access: {
         admin: boolean
     };
-    entity: CommunityEnity;
+    entity: CommunityEntity;
     success: boolean;
 }
 
