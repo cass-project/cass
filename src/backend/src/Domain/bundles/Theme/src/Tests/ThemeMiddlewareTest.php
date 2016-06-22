@@ -4,8 +4,8 @@ namespace Domain\Theme\Tests;
 use Application\PHPUnit\RESTRequest\RESTRequest;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
-use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
+use Application\PHPUnit\TestCase\MiddlewareTestCase;
 
 /**
  * @backupGlobals disabled
@@ -25,7 +25,7 @@ class ThemeMiddlewareTest extends MiddlewareTestCase
     {
         $json = [
             'title' => 'Theme 1',
-            'description' => 'My Demo Theme Descrition',
+            'description' => 'My Demo Theme Description',
             'parent_id' => 0
         ];
 
@@ -49,7 +49,7 @@ class ThemeMiddlewareTest extends MiddlewareTestCase
     {
         $json = [
             'title' => 'Theme 1',
-            'description' => 'My Demo Theme Descrition',
+            'description' => 'My Demo Theme Description',
             'parent_id' => 0
         ];
 
@@ -170,7 +170,7 @@ class ThemeMiddlewareTest extends MiddlewareTestCase
             ->execute()
             ->expectJSONContentType()
             ->expectStatusCode(200)
-            ->expectJSONBody(['success' => TRUE]);;
+            ->expectJSONBody(['success' => true]);
     }
 
     private function requestGetThemeTree():RESTRequest
@@ -184,7 +184,7 @@ class ThemeMiddlewareTest extends MiddlewareTestCase
 
         $json = [
             'title' => 'Theme 1',
-            'description' => 'My Demo Theme Descrition',
+            'description' => 'My Demo Theme Description',
             'parent_id' => 0
         ];
 
@@ -216,7 +216,7 @@ class ThemeMiddlewareTest extends MiddlewareTestCase
 
         $json = [
             'title' => 'Theme 1',
-            'description' => 'My Demo Theme Descrition',
+            'description' => 'My Demo Theme Description',
             'parent_id' => 0
         ];
 

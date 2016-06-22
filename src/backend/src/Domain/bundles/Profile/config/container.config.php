@@ -9,6 +9,10 @@ use DI\Container;
 use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
+use Domain\Profile\Entity\ProfileExpertInEQ;
+use Domain\Profile\Entity\ProfileInterestingInEQ;
+use Domain\Profile\Repository\ProfileExpertInEQRepository;
+use Domain\Profile\Repository\ProfileInterestingInEQRepository;
 use Domain\Profile\Repository\ProfileRepository;
 use Domain\Profile\Service\ProfileService;
 use League\Flysystem\Adapter\Local;
@@ -21,6 +25,8 @@ return [
             return sprintf('%s/entity/profile/by-sid/avatar/', $container->get('config.paths.assets.dir'));
         }),
         ProfileRepository::class => factory(new DoctrineRepositoryFactory(Profile::class)),
+        ProfileExpertInEQRepository::class => factory(new DoctrineRepositoryFactory(ProfileExpertInEQ::class)),
+        ProfileInterestingInEQRepository::class => factory(new DoctrineRepositoryFactory(ProfileInterestingInEQ::class)),
     ],
     'env' => [
         'development' => [

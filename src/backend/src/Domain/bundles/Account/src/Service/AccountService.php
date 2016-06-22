@@ -14,9 +14,16 @@ use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
 use Application\Util\GenerateRandomString;
 use Domain\Profile\Service\ProfileService;
+use Evenement\EventEmitter;
+use Evenement\EventEmitterInterface;
 
 class AccountService
 {
+    const EVENT_ACCOUNT_CREATED = 'domain.account.created';
+
+    /** @var EventEmitterInterface */
+    private $events;
+
     /** @var AccountRepository */
     private $accountRepository;
 
@@ -37,11 +44,17 @@ class AccountService
     )
     {
         $profileService->worksWithAccountService($this);
-        
+
+        $this->events = new EventEmitter();
         $this->accountRepository = $accountRepository;
         $this->profileService = $profileService;
         $this->oauthAccountRepository = $oauthAccountRepository;
         $this->passwordVerifyService = $passwordVerifyService;
+    }
+
+    public function getEventEmitter(): EventEmitterInterface
+    {
+        return $this->events;
     }
 
     public function createAccount($email, $password = null): Account
@@ -52,6 +65,8 @@ class AccountService
             ->setPassword($this->passwordVerifyService->generatePassword($password));
         
         $this->accountRepository->createAccount($account);
+        $this->events->emit(self::EVENT_ACCOUNT_CREATED, [$account]);
+        
         $this->profileService->createProfileForAccount($account);
         $this->accountRepository->saveAccount($account);
 
