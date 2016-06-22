@@ -54,7 +54,7 @@ class IsFrontlineAliveTest extends MiddlewareTestCase
                     ],
                     'profiles' => [
                         [
-                            'entity' => [
+                            'profile' => [
                                 'id' => $profile->getId(),
                                 'account_id' => $account->getId(),
                                 'is_initialized' => $profile->isInitialized(),

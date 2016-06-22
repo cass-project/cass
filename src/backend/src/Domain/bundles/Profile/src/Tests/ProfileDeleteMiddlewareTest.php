@@ -48,7 +48,7 @@ class ProfileDeleteMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([
-                'entity' => [
+                'profile' => [
                     'is_current' => true
                 ]
             ]);
@@ -104,7 +104,7 @@ class ProfileDeleteMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'entity' => [
+                'profile' => [
                     'is_current' => true
                 ]
             ]);

@@ -18,7 +18,7 @@ final class ProfileExtendedFormatter
 
     public function format(Profile $profile): array {
         return [
-            'entity' => $profile->toJSON(),
+            'profile' => $profile->toJSON(),
             'collections' => $this->formatCollections($profile->getCollections())
         ];
     }

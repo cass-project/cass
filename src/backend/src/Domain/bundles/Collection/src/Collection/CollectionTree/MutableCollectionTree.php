@@ -4,10 +4,11 @@ namespace Domain\Collection\Collection\CollectionTree;
 use Application\Util\JSONSerializable;
 use Application\Util\SerialManager\SerialManager;
 use Domain\Collection\Collection\CollectionItem;
+use Domain\Collection\Collection\CollectionTree;
 use Domain\Collection\Collection\CollectionTreeFactory;
 use Domain\Collection\Exception\CollectionExistsException;
 
-class MutableCollectionTree implements JSONSerializable, \Serializable
+class MutableCollectionTree implements JSONSerializable, \Serializable, CollectionTree
 {
     /** @var CollectionItem[] */
     private $items = [];

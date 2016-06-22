@@ -56,7 +56,7 @@ final class ImageDeleteCollectionTest extends CollectionRESTTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'entity' => [
+                'profile' => [
                     'image' => $this->expectImageCollection()
                 ]
             ]);

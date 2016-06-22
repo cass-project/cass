@@ -27,7 +27,7 @@ class ProfileGetMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'entity' => [
+                'profile' => [
                     'id' => $profile->getId(),
                     'collections' => [
                         0 => [

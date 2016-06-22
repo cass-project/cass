@@ -70,7 +70,7 @@ class ProfileIsCurrentMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'entity' => [
+                'profile' => [
                     'id' => $this->expectId(),
                     'is_current' => false
                 ]
@@ -83,7 +83,7 @@ class ProfileIsCurrentMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'entity' => [
+                'profile' => [
                     'id' => $this->expectId(),
                     'is_current' => false
                 ]
@@ -96,7 +96,7 @@ class ProfileIsCurrentMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'entity' => [
+                'profile' => [
                     'id' => $this->expectId(),
                     'is_current' => true
                 ]

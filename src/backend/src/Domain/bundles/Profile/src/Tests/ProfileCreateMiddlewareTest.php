@@ -39,7 +39,7 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'entity' => [
+                'profile' => [
                     'id' => $profile->getId(),
                     'sid' => $this->expectString(),
                     'is_current' => false,

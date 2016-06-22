@@ -69,7 +69,7 @@ class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
             ])
             ->getParsedLastResult();
 
-        $compareIds = $result['entity']['expert_in_ids'];
+        $compareIds = $result['profile']['expert_in_ids'];
 
         $this->assertEquals(sort($compareIds), sort($ids));
     }

@@ -43,7 +43,7 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectStatusCode(200)
             ->expectJSONBody([
                 'success' => true,
-                'entity' => [
+                'profile' => [
                     'id' => $profile->getId(),
                     'gender' => [
                         'int' => GenderFemale::INT_CODE,
@@ -68,7 +68,7 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectStatusCode(200)
             ->expectJSONBody([
                 'success' => true,
-                'entity' => [
+                'profile' => [
                     'id' => $profile->getId(),
                     'gender' => [
                         'int' => GenderMale::INT_CODE,
@@ -96,7 +96,7 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectStatusCode(200)
             ->expectJSONBody([
                 'success' => true,
-                'entity' => [
+                'profile' => [
                     'id' => $profile->getId(),
                     'gender' => [
                         'int' => GenderFemale::INT_CODE,
@@ -118,7 +118,7 @@ class ProfileSetGenderMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectStatusCode(200)
             ->expectJSONBody([
                 'success' => true,
-                'entity' => [
+                'profile' => [
                     'id' => $profile->getId(),
                     'gender' => [
                         'int' => GenderNotSpecified::INT_CODE,
