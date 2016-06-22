@@ -10,7 +10,7 @@ use League\Flysystem\FilesystemInterface;
 final class ProfileImageStrategy extends SquareImageStrategy
 {
     const DEFAULT_IMAGE_PUBLIC_PATH = '/dist/assets/profile/profile-default-avatar.png';
-    const DEFAULT_IMAGE_STORAGE_DIR = __DIR__.'/../../../../../../../www/app/dist/assets/profile/profile-default-avatar.png';
+    const DEFAULT_IMAGE_STORAGE_DIR = __DIR__.'/../../../../../../../www/app/dist/assets/entity/profile/profile-default-avatar.png';
 
     /** @var Profile */
     private $profile;
