@@ -26,3 +26,35 @@ export interface CollectionPublicOptionsEntity
     public_enabled: boolean;
     moderation_contract: boolean;
 }
+
+export class Collection implements CollectionEntity
+{
+    static OWNER_TYPES = ['community', 'profile'];
+
+    id: number;
+    sid: string;
+    owner_sid: string;
+    owner: CollectionOwnerEntity;
+    title: string;
+    description: string;
+    theme_ids: Array<number>;
+    public_options: CollectionPublicOptionsEntity;
+    image: ImageCollection;
+    children: CollectionEntity[] = [];
+
+    constructor(ownerType: string, ownerId: string) {
+        if(!~Collection.OWNER_TYPES.indexOf(ownerType)) {
+            throw new Error(`Unknown owner "${ownerType}"`)
+        }
+
+        this.owner_sid = `${ownerType}:${ownerId}`;
+        this.owner = {
+            id: ownerId,
+            type: ownerType
+        };
+    }
+
+    hasThemeIds(): boolean {
+        return this.theme_ids.length > 0;
+    }
+}
