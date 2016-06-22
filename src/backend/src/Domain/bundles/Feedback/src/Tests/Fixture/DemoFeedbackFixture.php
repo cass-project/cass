@@ -6,6 +6,7 @@ namespace Domain\Feedback\Tests\Fixture;
 
 use Application\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
+use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Feedback\Entity\Feedback;
 use Zend\Expressive\Application;
 
@@ -25,7 +26,14 @@ class DemoFeedbackFixture implements Fixture
     $feedbacks = [
       (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 1")->setType(1),
       (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 2")->setType(2),
-      (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 3")->setType(3),
+      (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 3")->setType(3)
+        ->setProfile(DemoAccountFixture::getAccount()->getProfiles()->first()),
+      (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 4")->setType(3)
+        ->setProfile(DemoAccountFixture::getAccount()->getProfiles()->first()),
+      (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 5")->setType(3)
+        ->setProfile(DemoAccountFixture::getAccount()->getProfiles()->first()),
+      (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 6")->setType(3)
+        ->setProfile(DemoAccountFixture::getAccount()->getProfiles()->first()),
 
     ];
 

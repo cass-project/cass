@@ -6,8 +6,10 @@ namespace Domain\Feedback\Tests;
 
 use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
+use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Feedback\Tests\Fixture\DemoFeedbackFixture;
 use Domain\Feedback\Tests\Fixture\DemoFeedbackResponseFixture;
+use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**
  * @backupGlobals disabled
@@ -16,6 +18,7 @@ class FeedbackMiddlewareTest extends MiddlewareTestCase
 {
   protected function getFixtures(): array{
     return [
+      new DemoAccountFixture,
       new DemoFeedbackFixture(),
       new DemoFeedbackResponseFixture()
     ];
@@ -97,7 +100,7 @@ class FeedbackMiddlewareTest extends MiddlewareTestCase
         ->expectStatusCode(200)
         ->expectJSONBody(['success' => true])
         ->expect(function($result){
-          $this->assertEquals(2, count( $result['entities']));
+          $this->assertEquals(5, count( $result['entities']));
         })
       ;
   }
@@ -110,6 +113,35 @@ class FeedbackMiddlewareTest extends MiddlewareTestCase
         ->expect(function($result){
           $this->assertNotEquals(6666, count( $result['entities']));
         })
+      ;
+  }
+
+  public function testGetAllFeedbacks200()
+  {
+    $limit = 2;
+    $offset = 0;
+
+    return $this->requestGetAllFeedbacks($limit, $offset)->auth(DemoAccountFixture::getAccount()->getAPIKey())
+      ->execute()
+      ->dump()
+//      ->expectJSONContentType()
+//      ->expectStatusCode(200)
+//      ->expectJSONBody(['success' => true])
+      /*->expect(function($result)use($limit){
+        $this->assertNotEquals($limit, count( $result['entities']));
+      })*/
+      ;
+  }
+  public function testGetAllFeedbacks403()
+  {
+    $limit = 2;
+    $offset = 0;
+
+    return $this->requestGetAllFeedbacks($limit, $offset)
+      ->execute()
+      ->expectJSONContentType()
+      ->expectStatusCode(403)
+      ->expectJSONBody(['success' => false])
       ;
   }
 
@@ -132,5 +164,11 @@ class FeedbackMiddlewareTest extends MiddlewareTestCase
   {
     return $this->request('GET', "/feedback/without-answer");
   }
+  protected function requestGetAllFeedbacks(int $limit,int $offset):RESTRequest
+  {
+    return $this->request('GET',sprintf("/protected/feedback/all/limit/%d/offset/%d", $limit, $offset));
+  }
+
+
 
 }

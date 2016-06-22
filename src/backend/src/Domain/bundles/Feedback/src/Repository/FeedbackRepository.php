@@ -30,6 +30,7 @@ class FeedbackRepository extends EntityRepository
 
     $em->persist($feedback);
     $em->flush();
+
     return $feedback;
   }
 
@@ -56,5 +57,13 @@ class FeedbackRepository extends EntityRepository
     $em->remove($feedback);
     $em->flush();
     return true;
+  }
+
+  public function getAllFeedbacks(int $profileId,int $limit, int $offset):array
+  {
+    $profile = $this->getEntityManager()->getRepository(Profile::class)->find($profileId);
+    if(is_null($profile)) throw new ProfileNotFoundException("Profile {$profileId} not found ");
+
+    return $this->findBy(['profile' => $profile], null, $limit, $offset);
   }
 }

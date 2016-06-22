@@ -100,17 +100,22 @@ class Feedback
     return $this;
   }
 
+  public function hasResponses():bool
+  {
+    return $this->responses !== null;
+  }
+
   public function toJSON():array
   {
     return [
       'id'          => $this->id,
       'created_at'  => $this->created_at,
       'description' => $this->description,
-      'profile_id'  => $this->hasProfile() ? $this->hasProfile()->getId() : NULL,
+      'profile_id'  => $this->hasProfile() ? $this->getProfile()->getId() : NULL,
       'type'        => $this->type,
-      'responses'   =>  array_map(function(FeedbackResponse $response){
+      'responses'   => $this->hasResponses() ? array_map(function(FeedbackResponse $response){
         return $response->toJSON();
-      },$this->responses->toArray())
+      },$this->responses->toArray()) : null
     ];
   }
 

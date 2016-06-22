@@ -47,4 +47,9 @@ class FeedbackService
     return $this->feedbackResponseRepository->getFeedbackResponses($feedbackId);
   }
 
+  public function getAllFeedbacks(int $profileId, int $limit, int $offset)
+  {
+    return $this->feedbackRepository->getAllFeedbacks($profileId, $limit, $offset);
+  }
+
 }

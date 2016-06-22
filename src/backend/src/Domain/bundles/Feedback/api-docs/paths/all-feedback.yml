@@ -1,0 +1,33 @@
+'/protected/feedback/all/offset/{offset}/limit/{limit}':
+  get:
+    tags:
+      - feedback
+    description: список всех фидбаков от пользователя
+    security:
+      - x_api_key: []
+    parameters:
+      - name: offset
+        type: numeric
+        in: path
+        required: true
+        description: offset
+      - name: limit
+        type: numeric
+        in: path
+        required: true
+        description: limit
+    responses:
+      200:
+        schema:
+          properties:
+            success:
+              type: boolean
+              default: true
+            entities:
+              type: array
+              items:
+                schema:
+                  $ref: '#/definitions/Feedback_Entity_Feedback'
+          required:
+            - success
+            - entities
