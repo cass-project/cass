@@ -1,6 +1,6 @@
 import {Injectable} from "angular2/core";
-import {UploadImageCropModel} from "../../../../util/component/UploadImage/strategy";
-import {CommunityEnityImage} from "../../../enity/Community";
+import {UploadImageCropModel} from "../../../../form/component/UploadImage/strategy";
+import {CommunityEnityImage} from "../../../definitions/entity/Community";
 
 @Injectable()
 export class CommunitySettingsModalModel

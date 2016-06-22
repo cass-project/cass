@@ -1,7 +1,6 @@
 import {Injectable} from "angular2/core";
 
 import {FrontlineService} from "../../frontline/service";
-import {FeaturesInfo} from "../enity/FeaturesInfo";
 
 @Injectable()
 export class CommunityFeaturesService
@@ -69,4 +68,12 @@ export class CommunityFeaturesService
             }
         }
     }
+}
+
+export class FeaturesInfo
+{
+    code:string;
+    name:string;
+    icon:string;
+    description:string;
 }

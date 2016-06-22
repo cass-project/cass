@@ -3,8 +3,8 @@ import {Component} from "angular2/core";
 import {Screen} from "../../screen";
 import {CommunityCreateModalModel} from "../../model";
 import {CommunityCreateModalForm} from "../../Form";
-import {UploadImageCropModel} from "../../../../../../util/component/UploadImage/strategy";
 import {ImageCropperService, ImageCropper} from "../../../../../../form/component/ImageCropper/index";
+import {UploadImageCropModel} from "../../../../../../form/component/UploadImage/strategy";
 
 @Component({
     selector: 'cass-community-create-modal-screen-image',
