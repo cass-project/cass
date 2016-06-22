@@ -22,7 +22,7 @@ cass-modal
                   type="text",
                   placeholder="Подзаголовок, пару строк о контенте"
                 )
-          p.options-info Мы настоятельно рекомендуем указать тематику вашей подборки, если вы собираетесь постить тематический, профессиональный контент
+          p.options-info Мы настоятельно рекомендуем указать тематику вашей подборки, если вы собираетесь постить тематический контент
           div.form-section.cass-padding-box-15
             .modal-list
               ul.collection-options-list
@@ -33,13 +33,13 @@ cass-modal
                         i.fa.fa-bookmark
                     .modal-list-info
                       h1 Подборка имеет тематику
-                      //div(*ngIf="!collection.haveTheme") ToDo: надо будет выровнить по кнопке, можно скрывать эту надпись
+                      div(*ngIf="!collection.haveTheme")
                       p  Если вы укажите тематику у своей подборки, то другие люди смогут найти вас в поисках контента по выбранной вами тематике.
-                      div(*ngIf="collection.haveTheme")
-                        cass-theme-select([value]='collection.theme_id')
+                      div(*ngIf="hasThemeIds")
+                        cass-theme-select([value]='collection.theme_ids')
                     .modal-list-controls
                       div.form-switch-button
-                        input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", [(ngModel)]= 'collection.haveTheme',  checked= 'collection.haveTheme')
+                        input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", [(ngModel)]='hasThemeIds',  [checked]='collection.hasThemeIds()')
                         label.form-switch-button-label(for="collectionCreateMasterEnableTheme")
         div.screen.screen-options(*ngIf="screens.isOn('Options')")
           p.options-info Опции ниже определяют, будет ли попадать добавленный в эту подборку контент в публичный доступ
