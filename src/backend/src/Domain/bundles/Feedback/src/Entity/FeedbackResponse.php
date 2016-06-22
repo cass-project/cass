@@ -11,7 +11,7 @@ class FeedbackResponse
   use IdTrait;
 
   /**
-   * @ManyToOne(targetEntity="Domain\Feedback\Entity\Feedback")
+   * @ManyToOne(targetEntity="Domain\Feedback\Entity\Feedback", inversedBy="responses")
    * @JoinColumn(name="feedback_id", referencedColumnName="id")
    */
   private $feedback;

@@ -37,6 +37,11 @@ class FeedbackService
     return $this->feedbackRepository->deleteFeedback($feedbackId);
   }
 
+  public function getFeedbacksWithoutResponses():array
+  {
+    return $this->feedbackRepository->getFeedbacksWithoutResponses();
+  }
+
   public function getFeedbackResponse(int $feedbackId):array
   {
     return $this->feedbackResponseRepository->getFeedbackResponses($feedbackId);

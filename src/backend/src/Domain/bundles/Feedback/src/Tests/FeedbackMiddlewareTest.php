@@ -90,19 +90,47 @@ class FeedbackMiddlewareTest extends MiddlewareTestCase
       ;
   }
 
+  public function testFeedbackWithoutAnswer200()
+  {
+    return $this->requestFeedbacksWithoutAnswer()->execute()
+      ->expectJSONContentType()
+        ->expectStatusCode(200)
+        ->expectJSONBody(['success' => true])
+        ->expect(function($result){
+          $this->assertEquals(2, count( $result['entities']));
+        })
+      ;
+  }
+  public function testFeedbackWithoutAnswerWrongResult200()
+  {
+    return $this->requestFeedbacksWithoutAnswer()->execute()
+      ->expectJSONContentType()
+        ->expectStatusCode(200)
+        ->expectJSONBody(['success' => true])
+        ->expect(function($result){
+          $this->assertNotEquals(6666, count( $result['entities']));
+        })
+      ;
+  }
+
   protected function requestFeedbackCreate(array $json):RESTRequest
   {
     return $this->request('PUT','/feedback/create')->setParameters($json);
   }
 
-  protected function requestFeedbackDelete(int $feedbackId)
+  protected function requestFeedbackDelete(int $feedbackId):RESTRequest
   {
     return $this->request('DELETE',sprintf("/feedback/%s/cancel",$feedbackId));
   }
 
-  protected function requestFeedbackHasAnswer(int $feedbackId)
+  protected function requestFeedbackHasAnswer(int $feedbackId):RESTRequest
   {
     return $this->request('GET', sprintf("/feedback/%s/has-answer",$feedbackId));
+  }
+
+  protected function requestFeedbacksWithoutAnswer():RESTRequest
+  {
+    return $this->request('GET', "/feedback/without-answer");
   }
 
 }

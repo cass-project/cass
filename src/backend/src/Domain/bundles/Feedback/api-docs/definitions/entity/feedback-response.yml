@@ -8,7 +8,7 @@ Feedback_Entity_FeedbackResponse:
       type: numeric
       description: feedback ID
     created_at:
-      type: string
+      type: object
       description: Дата создания
     description:
       type: string

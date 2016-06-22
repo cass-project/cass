@@ -21,3 +21,8 @@ Feedback_Entity_Feedback:
     description:
       type: string
       description: текст описание фидбека
+    responses:
+      type: array
+      items:
+        schema:
+          $ref: '#/definitions/Feedback_Entity_Feedback'

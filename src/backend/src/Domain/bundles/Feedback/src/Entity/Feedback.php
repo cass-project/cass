@@ -2,6 +2,8 @@
 
 namespace Domain\Feedback\Entity;
 use Application\Util\IdTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\OneToMany;
 use Domain\Profile\Entity\Profile;
 
 /**
@@ -29,6 +31,11 @@ class Feedback
   private $profile;
 
   /**
+   * @OneToMany(targetEntity="Domain\Feedback\Entity\FeedbackResponse", mappedBy="feedback")
+   */
+  private $responses;
+
+  /**
    * @Column(type="integer")
    * @var int
    */
@@ -39,6 +46,10 @@ class Feedback
    * @var string
    */
   private $description;
+
+  public function __construct() {
+    $this->responses = new ArrayCollection();
+  }
 
 
   public function getCreatedAt():\DateTime
@@ -96,7 +107,10 @@ class Feedback
       'created_at'  => $this->created_at,
       'description' => $this->description,
       'profile_id'  => $this->hasProfile() ? $this->hasProfile()->getId() : NULL,
-      'type'        => $this->type
+      'type'        => $this->type,
+      'responses'   =>  array_map(function(FeedbackResponse $response){
+        return $response->toJSON();
+      },$this->responses->toArray())
     ];
   }
 

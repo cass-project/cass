@@ -2,7 +2,9 @@
 namespace Domain\Feedback\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 use Domain\Feedback\Entity\Feedback;
+use Domain\Feedback\Entity\FeedbackResponse;
 use Domain\Feedback\Exception\FeedbackNotFoundException;
 use Domain\Feedback\Middleware\Parameters\CreateFeedbackParameters;
 use Domain\Profile\Entity\Profile;
@@ -29,6 +31,18 @@ class FeedbackRepository extends EntityRepository
     $em->persist($feedback);
     $em->flush();
     return $feedback;
+  }
+
+  public function getFeedbacksWithoutResponses()
+  {
+    $qb = $this->getEntityManager()->createQueryBuilder()
+               ->select('f','r')
+               ->from(Feedback::class, 'f')
+               ->leftJoin('f.responses ', 'r')
+      ->where('r.feedback IS NULL')
+    ;
+
+    return $qb->getQuery()->getResult();
   }
 
   public function deleteFeedback(int $feedbackId):bool

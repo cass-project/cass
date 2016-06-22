@@ -1,0 +1,20 @@
+'/feedback/without-answer':
+  get:
+    tags:
+      - feedback
+    description: получить ответы на фидбак
+    responses:
+      200:
+        schema:
+          properties:
+            success:
+              type: boolean
+              default: true
+            entities:
+              type: array
+              items:
+                schema:
+                  $ref: '#/definitions/Feedback_Entity_Feedback'
+          required:
+            - success
+            - entities
