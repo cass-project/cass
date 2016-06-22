@@ -93,12 +93,12 @@ export class ProfileSetup
         }
         /*InterestsIn stage*/
         if (this.screens.isIn([ProfileSetupScreen.Interests]) &&
-            (JSON.stringify(this.model.interestingIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.interesting_in_ids))){
+            (JSON.stringify(this.model.interestingIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.profile.interesting_in_ids))){
             return true
         }
         /*ExpertIn stage*/
          if (this.screens.isIn([ProfileSetupScreen.ExpertIn]) &&
-             (JSON.stringify(this.model.expertIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.expert_in_ids))){
+             (JSON.stringify(this.model.expertIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.profile.expert_in_ids))){
             return true;
         }
 

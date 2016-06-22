@@ -3,13 +3,10 @@ import {UploadProfileImageStrategy} from "../util/UploadProfileImageStrategy";
 import {Injectable} from 'angular2/core';
 import {Http, URLSearchParams} from 'angular2/http';
 import {AuthService} from "../../auth/service/AuthService";
+import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 
 @Injectable()
-export class ProfileRESTService {
-    constructor(public http:Http) {
-    }
-
-
+export class ProfileRESTService extends AbstractRESTService{
     private xmlRequest = new XMLHttpRequest();
 
     public tryNumber:number = 0;
@@ -19,131 +16,96 @@ export class ProfileRESTService {
     getProfileById(profileId){
         let url = `/backend/api/profile/${profileId}/get`;
 
-        return this.http.get(url);
+        return this.handle(this.http.get(url));
     }
 
     createNewProfile(){
         let url = `/backend/api/protected/profile/create`;
-
-        return this.http.put(url, JSON.stringify({}));
-    }
-
-    editSex(profile) {
-        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/set-gender`;
-
-        AuthService.getAuthToken().getCurrentProfile().entity.gender = profile.gender;
-
-        console.log(profile.gender.string);
-        return this.http.post(url, JSON.stringify({
-            gender: profile.gender.string
-        }))
+        return this.handle(this.http.put(url, JSON.stringify({
+            accountId: 'current'
+        })));
     }
 
     editPersonal(profile) {
-        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/edit-personal/`;
+        let url = `/backend/api/protected/profile/${this.currentProfile.id}/edit-personal/`;
         let entity = AuthService.getAuthToken().getCurrentProfile().entity;
-        let greetings = entity.greetings;
+        let greetings = entity.profile.greetings;
 
         greetings.greetings = profile.greetings.greetings_method;
         greetings.last_name = profile.greetings.last_name;
         greetings.first_name = profile.greetings.first_name;
         greetings.middle_name = profile.greetings.middle_name;
         greetings.nick_name = profile.greetings.nickname;
-        entity.gender = profile.gender;
+        entity.profile.gender = profile.gender;
 
-        switch (greetings.greetings){
-            case 'n':
-                greetings.greetings = greetings.nick_name;
-                break;
-            case 'fl':
-                greetings.greetings = `${greetings.first_name} ${greetings.last_name}`;
-                break;
-            case 'fm':
-                greetings.greetings = `${greetings.first_name} ${greetings.middle_name}`;
-                break;
-            case 'lfm':
-                greetings.greetings = `${greetings.last_name} ${greetings.first_name} ${greetings.middle_name}`;
-                break;
-            default:
-                throw new Error('editPersonal in ProfileRESTService');
-        }
-        return this.http.post(url, JSON.stringify({
+        return this.handle(this.http.post(url, JSON.stringify({
             gender: profile.gender.string,
             greetings_method: profile.greetings.greetings_method,
             last_name: profile.greetings.last_name,
             first_name: profile.greetings.first_name,
             middle_name: profile.greetings.middle_name,
             nickname: profile.greetings.nickname
-        }));
+        })));
     }
 
     updateExpertThemes(expertIn) {
-        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/expert-in`;
+        let url = `/backend/api/protected/profile/${this.currentProfile.id}/expert-in`;
 
-        AuthService.getAuthToken().getCurrentProfile().entity.expert_in_ids = (JSON.parse(JSON.stringify(expertIn)));
+        AuthService.getAuthToken().getCurrentProfile().entity.profile.expert_in_ids = (JSON.parse(JSON.stringify(expertIn)));
 
-        return this.http.put(url, JSON.stringify({
+        return this.handle(this.http.put(url, JSON.stringify({
             theme_ids: expertIn
-        }));
+        })));
     }
 
     updateInterestThemes(interestingIn) {
-        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/interesting-in`;
+        let url = `/backend/api/protected/profile/${this.currentProfile.id}/interesting-in`;
 
-        AuthService.getAuthToken().getCurrentProfile().entity.interesting_in_ids = (JSON.parse(JSON.stringify(interestingIn)));
+        AuthService.getAuthToken().getCurrentProfile().entity.profile.interesting_in_ids = (JSON.parse(JSON.stringify(interestingIn)));
 
-        return this.http.put(url, JSON.stringify({
+        return this.handle(this.http.put(url, JSON.stringify({
             theme_ids: interestingIn
-        }));
+        })));
     }
 
 
     switchProfile(profileId){
         let url = `/backend/api/protected/profile/${profileId}/switch/`;
 
-        return this.http.post(url, JSON.stringify(''));
+        return this.handle(this.http.post(url, JSON.stringify('')));
     }
 
     deleteProfile(profileId){
         let url = `/backend/api/protected/profile/${profileId}/delete`;
 
-        return this.http.delete(url);
+        return this.handle(this.http.delete(url));
     }
 
     requestAccountDeleteCancel() {
         let url = `/backend/api/protected/account/cancel-request-delete`;
 
-        return this.http.delete(url);
+        return this.handle(this.http.delete(url));
     }
 
     requestAccountDelete() {
         let url = `/backend/api/protected/account/request-delete`;
 
-        return this.http.put(url, JSON.stringify(''));
+        return this.handle(this.http.put(url, JSON.stringify('')));
     }
 
     changePassword(changePasswordStn) {
         let url = `/backend/api/protected/account/change-password`;
 
-        return this.http.post(url, JSON.stringify({
+        return this.handle(this.http.post(url, JSON.stringify({
             old_password: changePasswordStn.old_password,
             new_password: changePasswordStn.new_password
-        }));
-    }
-
-
-    signOut() {
-        let url = `/backend/api/auth/sign-out/`;
-        
-        return this.http.get(url).subscribe(data => {
-            window.location.reload()
-        });
+        })));
     }
 
     deleteAvatar() {
-        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/image-delete`;
+        let url = `/backend/api/protected/profile/${this.currentProfile.id}/image-delete`;
 
-        return this.http.delete(url);
+        return this.handle(this.http.delete(url));
     }
 
 
@@ -164,7 +126,7 @@ export class ProfileRESTService {
         };
 
         this.tryNumber++;
-        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.id}/image-upload/crop-start/${crop.start.x}/${crop.start.y}/crop-end/${crop.end.x}/${crop.end.y}`;
+        let url = `/backend/api/protected/profile/${this.currentProfile.id}/image-upload/crop-start/${crop.start.x}/${crop.start.y}/crop-end/${crop.end.x}/${crop.end.y}`;
         let formData = new FormData();
         formData.append("file", file);
 
@@ -181,11 +143,8 @@ export class ProfileRESTService {
         this.xmlRequest.onreadystatechange = () => {
             if (this.xmlRequest.readyState === 4) {
                 if (this.xmlRequest.status === 200) {
-                    AuthService.getAuthToken().getCurrentProfile().entity.image = {
-                        "variants": { "default":
-                        JSON.parse(this.xmlRequest.responseText).public_path
-                        }
-                    };
+                    this.currentProfile.image = JSON.parse(this.xmlRequest.responseText).image;
+                    }
                     modal.progress.complete();
                     if(modal.close){
                         modal.close();
@@ -198,5 +157,4 @@ export class ProfileRESTService {
                 /* ToDo: Сделать нормальный метод повтора загрузки с учетом "Отмены загрузки". */
             }
         }
-    }
 }

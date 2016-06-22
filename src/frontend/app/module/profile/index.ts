@@ -9,6 +9,7 @@ import {AuthService} from "../auth/service/AuthService";
 import {ModalBoxComponent} from "../modal/component/box/index";
 import {CollectionCreateMaster} from "../collection/component/CollectionCreateMaster/index";
 import {CollectionSettings} from "../collection/component/CollectionSettings/index";
+import {AbstractRESTService} from "../common/service/AbstractRESTService";
 
 
 
@@ -29,7 +30,7 @@ export class ProfileComponent
 {
     constructor(private service: ProfileComponentService, private router: Router) {
         if(AuthService.isSignedIn()) {
-            this.service.currentProfile = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity));
+            this.service.currentProfileCollections = JSON.parse(JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.collection));
         }
     }
 }
