@@ -29,7 +29,9 @@ enum CreateCollectionMasterStage
 })
 export class CollectionCreateMaster
 {
-    constructor(private collectionRESTService: CollectionRESTService){}
+    constructor(private collectionRESTService: CollectionRESTService) {
+        this.collection = new Collection(this.ownerType, this.ownerId);
+    }
 
     private screens: ScreenControls<CreateCollectionMasterStage> = new ScreenControls<CreateCollectionMasterStage>(CreateCollectionMasterStage.Common, (sc) => {
         sc.add({ from: CreateCollectionMasterStage.Common, to: CreateCollectionMasterStage.Options });
@@ -43,9 +45,7 @@ export class CollectionCreateMaster
     collection: Collection;
     hasThemeIds: boolean = true;
     
-    constructor() {
-        this.collection = new Collection(this.ownerType, this.ownerId);
-    }
+
 
     checkFields() {
         return this.collection.theme_ids.length;
