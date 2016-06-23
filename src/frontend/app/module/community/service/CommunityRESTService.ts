@@ -8,6 +8,7 @@ import {CommunityImageUploadRequestModel} from "../model/CommunityImageUploadReq
 import {CommunityControlFeatureRequestModel} from "../model/CommunityActivateFeatureModel";
 import {CommunityImageDeleteRequest} from "../definitions/paths/image-delete";
 import {EditCommunityRequest} from "../definitions/paths/edit";
+import {SetPublicOptionsCommunityRequest} from "../definitions/paths/set-public-options";
 
 @Injectable()
 export class CommunityRESTService
@@ -19,8 +20,9 @@ export class CommunityRESTService
         return this.http.put("/backend/api/protected/community/create", JSON.stringify(request));
     }
 
-    public edit(id:number, body: EditCommunityRequest) {
-        return this.http.post(`/backend/api/protected/community/${id}/edit`, JSON.stringify(body));
+    public edit(communityId:number, body: EditCommunityRequest): Observable<Response>
+    {
+        return this.http.post(`/backend/api/protected/community/${communityId}/edit`, JSON.stringify(body));
     }
 
     public getBySid(sid:string)
@@ -28,9 +30,14 @@ export class CommunityRESTService
         return this.http.get(`/backend/api/community/${sid}/get-by-sid`);
     }
 
+    public setPublicOptions(communityId:number, body: SetPublicOptionsCommunityRequest): Observable<Response>
+    {
+        return this.http.post(`/backend/api/protected/community/${communityId}/set-public-options`, JSON.stringify(body));
+    }
+
     public progressBar:number;
 
-    public imageUpload(request:CommunityImageUploadRequestModel)
+    public imageUpload(request:CommunityImageUploadRequestModel): Observable<Response>
     {
 
         return Observable.create(observer => {

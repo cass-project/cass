@@ -11,9 +11,14 @@ import {FeaturesTab} from "./Tab/TabFeatures";
 import {GeneralTab} from "./Tab/TabGeneral";
 import {ImageTab} from "./Tab/TabImage";
 import {CommunitySettingsModalModel} from "./model";
-import {CommunityRESTService} from "../../../service/CommunityRESTService";
 import {EditCommunityRequest} from "../../../definitions/paths/edit";
 import {CommunityControlFeatureRequestModel} from "../../../model/CommunityActivateFeatureModel";
+import {CommunityImageUploadRequestModel} from "../../../model/CommunityImageUploadRequestModel";
+import {ImageCropperService} from "../../../../form/component/ImageCropper/index";
+import {Observable} from "rxjs/Rx";
+import {Response} from "angular2/http";
+import {CommunityFeaturesModel} from "../CommunityCreateModal/model";
+import {SetPublicOptionsCommunityRequest} from "../../../definitions/paths/set-public-options";
 
 
 
@@ -31,14 +36,14 @@ import {CommunityControlFeatureRequestModel} from "../../../model/CommunityActiv
         FeaturesTab
     ],
     providers: [
-        CommunityFeaturesService
+        CommunityFeaturesService,
+        ImageCropperService
     ]
 })
 
 export class CommunitySettingsModal
 {
-    public screens: ScreenControls<SettingsStage> = new ScreenControls<SettingsStage>(SettingsStage.Image);
-    public modelUnmodified:CommunitySettingsModalModel;
+    public screens: ScreenControls<SettingsStage> = new ScreenControls<SettingsStage>(SettingsStage.General);
 
     @Output('close') closeEvent = new EventEmitter<CommunitySettingsModal>();
 
@@ -46,8 +51,9 @@ export class CommunitySettingsModal
 
     constructor(
         public model:CommunitySettingsModalModel,
+        public modelUnmodified:CommunitySettingsModalModel,
         private service: CommunityService,
-        private restService: CommunityRESTService,
+        private cropper: ImageCropperService,
         private featuresService: CommunityFeaturesService
     ) {
         service.getBySid(model.sid).subscribe(data => {
@@ -78,10 +84,11 @@ export class CommunitySettingsModal
         for(let property in this.model){
             if(this.model.hasOwnProperty(property)){
                 if(this.modelUnmodified.hasOwnProperty(property))
-                    this.model[property] =  this.modelUnmodified[property];
+                    this.model[property] = this.modelUnmodified[property];
                 else delete this.model[property];
             }
         }
+        this.cropper.reset();
     }
 
     close() {
@@ -94,42 +101,95 @@ export class CommunitySettingsModal
 
     saveAllChanges() {
         this.loading = true;
-        let requests:Promise<any>[] = [];
+        let requests:Promise<Response>[] = [];
 
-        if (
-            this.model.title!==this.modelUnmodified.title ||
-            this.model.description!==this.modelUnmodified.description ||
-            this.model.theme_id!==this.modelUnmodified.theme_id
-        ) {
-            requests.push(this.restService.edit(this.model.id, <EditCommunityRequest> {
-                title: this.model.title,
-                description: this.model.description,
-                theme_id: this.model.theme_id
-            }).toPromise());
+        if (this.isGeneralModified()) {
+            requests.push(this.attemptSaveGeneral());
         }
 
-        if(this.getModifiedFeatures().length > 0) {
+        if(this.isPublicOptionsModified()){
+            requests.push(this.attemptSavePublicOptions());
+        }
+
+        if(this.isFeaturesModified()) {
             for (let feature of this.getModifiedFeatures()) {
-                let communityFeatureRequest = <CommunityControlFeatureRequestModel> {
-                    communityId: this.model.id,
-                    feature: feature.code
-                };
-                if (feature.is_activated) {
-                    console.log(communityFeatureRequest);
-                    requests.push(this.restService.activateFeature(communityFeatureRequest).toPromise());
-                } else {
-                    requests.push(this.restService.deactivateFeature(communityFeatureRequest).toPromise());;
-                }
+                this.attemptSaveFeature(feature);
             }
         }
 
-        Promise.all(requests).then(responses => {
+        Promise.all(requests).then(() => {
             this.loading = false;
             this.modelUnmodified = JSON.parse(JSON.stringify(this.model));
-            alert("zaebis");
-            console.log(responses);
+
+            if(this.isImageModified()) {
+                this.attemptSaveImage()
+                    .map(response=>response.json())
+                    .subscribe(response => {
+                        this.model.image = response.image;
+                        this.model.new_image = undefined;
+                        this.cropper.reset();
+                        this.modelUnmodified = JSON.parse(JSON.stringify(this.model));
+                    });
+            }
         });
 
+    }
+
+    attemptSaveGeneral(): Promise<Response> {
+        return this.service.edit(this.model.id, <EditCommunityRequest> {
+            title: this.model.title,
+            description: this.model.description,
+            theme_id: this.model.theme_id
+        }).toPromise();
+    }
+
+    attemptSavePublicOptions(): Promise<Response> {
+        return this.service.setPublicOptions(this.model.id, <SetPublicOptionsCommunityRequest> {
+            public_enabled: this.model.public_options.public_enabled,
+            moderation_contract: this.model.public_options.moderation_contract
+        }).toPromise();
+    }
+
+    attemptSaveFeature(feature: CommunityFeaturesModel): Promise<Response> {
+        let communityFeatureRequest = <CommunityControlFeatureRequestModel> {
+            communityId: this.model.id,
+            feature: feature.code
+        };
+        if (feature.is_activated) {
+            return this.service.activateFeature(communityFeatureRequest).toPromise();
+        } else {
+            return this.service.deactivateFeature(communityFeatureRequest).toPromise();
+        }
+    }
+
+    attemptSaveImage(): Observable<Response> {
+        return this.service.imageUpload(<CommunityImageUploadRequestModel>{
+            communityId: this.model.id,
+            uploadImage: this.model.new_image.uploadImage,
+            x1: this.model.new_image.uploadImageCrop.x,
+            y1: this.model.new_image.uploadImageCrop.y,
+            x2: this.model.new_image.uploadImageCrop.width + this.model.new_image.uploadImageCrop.x,
+            y2: this.model.new_image.uploadImageCrop.height + this.model.new_image.uploadImageCrop.y
+        })
+    }
+
+    isImageModified(): boolean {
+        return !!this.model.new_image
+    }
+
+    isFeaturesModified(): boolean {
+        return this.getModifiedFeatures().length > 0;
+    }
+
+    isGeneralModified(): boolean {
+        return this.model.title !== this.modelUnmodified.title ||
+            this.model.description !== this.modelUnmodified.description ||
+            this.model.theme_id !== this.modelUnmodified.theme_id;
+    }
+
+    isPublicOptionsModified(): boolean {
+        return this.model.public_options.public_enabled !== this.modelUnmodified.public_options.public_enabled ||
+               this.model.public_options.moderation_contract !== this.modelUnmodified.public_options.moderation_contract;
     }
 
     getModifiedFeatures() {
