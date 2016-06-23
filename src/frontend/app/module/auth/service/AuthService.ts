@@ -39,45 +39,10 @@ export class AuthService
         return AuthService.token;
     }
 
-    /*public attemptSignIn(request: SignInRequest){
-        return this.signIn(this.authRESTService.signIn(request));
-    }
-
-    public attemptProviderSignIn(provider: String): Promise<SignInResponse> {
-        return this.signIn(this.http.get(`/backend/api/auth/sign-in/oauth/${provider}`));
-    }
-
-    public attemptSignUp(request: SignUpRequest) {
-        return this.signIn(this.authRESTService.signUp(request));
-    }*/
-
     public getAuthToken() {
         return AuthService.getAuthToken();
     }
 
-   /* private signIn(http){
-            http.map(res => res.json())
-                .subscribe(
-                    response => {
-                        AuthService.token = new AuthToken(response.api_key, new Account(response.account, response.profiles));
-                        this.frontline.merge(response.frontline);
-                    },
-                    error => {
-                        new BackendError(error).message;
-                    }
-                )
-        };
-
-    public signOut() {
-        return this.authRESTService.signOut().subscribe(
-            response => {
-                if(AuthService.token) {
-                    AuthService.token.clearAPIKey();
-                    AuthService.token = null;
-                }
-            }
-        );
-    }*/
 }
 
 class AuthToken
