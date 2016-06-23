@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Profile\Events;
 
+use Application\Events\EventsBootstrapInterface;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\ProfileInterestingInEQ;
 use Domain\Profile\Repository\ProfileInterestingInEQRepository;
@@ -8,8 +9,9 @@ use Domain\Profile\Repository\ProfileRepository;
 use Domain\Profile\Service\ProfileService;
 use Domain\Theme\Entity\Theme;
 use Domain\Theme\Service\ThemeService;
+use Evenement\EventEmitterInterface;
 
-final class ProfileInterestingInEQEvents
+final class ProfileInterestingInEQEvents implements EventsBootstrapInterface
 {
     /** @var ThemeService */
     private $themeService;
@@ -36,7 +38,7 @@ final class ProfileInterestingInEQEvents
         $this->eq = $eq;
     }
 
-    public function bindEvents()
+    public function up(EventEmitterInterface $globalEmitter)
     {
         $eq = $this->eq;
         $profileService = $this->profileService;

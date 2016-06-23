@@ -6,11 +6,10 @@ use Domain\Community\Events\DashboardCommunityCollectionEvents;
 use Domain\Community\Events\LinkCollectionEvents;
 use Evenement\EventEmitterInterface;
 
-return function(EventEmitterInterface $globalEmitter, Container $container)
+return function(EventEmitterInterface $globalEmitter): array
 {
-    $lce = $container->get(LinkCollectionEvents::class); /** @var LinkCollectionEvents $lce */
-    $lce->bindEvents();
-
-    $dcce = $container->get(DashboardCommunityCollectionEvents::class); /** @var DashboardCommunityCollectionEvents $dcce */
-    $dcce->bindEvents();
+    return [
+        LinkCollectionEvents::class,
+        DashboardCommunityCollectionEvents::class,
+    ];
 };

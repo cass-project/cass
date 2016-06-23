@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Collection\Events;
 
+use Application\Events\EventsBootstrapInterface;
 use Domain\Collection\Entity\Collection;
 use Domain\Collection\Entity\CollectionThemeEQEntity;
 use Domain\Collection\Repository\CollectionRepository;
@@ -8,8 +9,9 @@ use Domain\Collection\Repository\CollectionThemeEQRepository;
 use Domain\Collection\Service\CollectionService;
 use Domain\Theme\Entity\Theme;
 use Domain\Theme\Service\ThemeService;
+use Evenement\EventEmitterInterface;
 
-final class CollectionThemesEQEvents
+final class CollectionThemesEQEvents implements EventsBootstrapInterface
 {
     /** @var CollectionThemeEQRepository */
     private $eq;
@@ -35,7 +37,7 @@ final class CollectionThemesEQEvents
         $this->collectionRepository = $collectionRepository;
     }
 
-    public function bindEvents()
+    public function up(EventEmitterInterface $globalEmitter)
     {
         $eq = $this->eq;
         $collectionService = $this->collectionService;

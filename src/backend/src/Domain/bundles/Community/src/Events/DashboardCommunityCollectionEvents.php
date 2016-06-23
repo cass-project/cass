@@ -1,12 +1,14 @@
 <?php
 namespace Domain\Community\Events;
 
+use Application\Events\EventsBootstrapInterface;
 use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Service\CollectionService;
 use Domain\Community\Entity\Community;
 use Domain\Community\Service\CommunityService;
+use Evenement\EventEmitterInterface;
 
-final class DashboardCommunityCollectionEvents
+final class DashboardCommunityCollectionEvents implements EventsBootstrapInterface
 {
     /** @var CommunityService */
     private $communityService;
@@ -20,7 +22,7 @@ final class DashboardCommunityCollectionEvents
         $this->collectionService = $collectionService;
     }
 
-    public function bindEvents()
+    public function up(EventEmitterInterface $globalEmitter)
     {
         $communityService = $this->communityService;
         $collectionService = $this->collectionService;

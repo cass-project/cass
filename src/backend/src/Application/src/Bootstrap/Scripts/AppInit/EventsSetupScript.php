@@ -3,7 +3,9 @@ namespace Application\Bootstrap\Scripts\AppInit;
 
 use Application\Bootstrap\Scripts\AppInitScript;
 use Application\Bundle\Bundle;
+use Application\Events\EventsBootstrapInterface;
 use Application\Service\BundleService;
+use Cocur\Chain\Chain;
 use Evenement\EventEmitter;
 use Zend\Expressive\Application;
 
@@ -32,7 +34,17 @@ class EventsSetupScript implements AppInitScript
                 throw new \Exception(sprintf('Event config `%s` should returns a Callable with EventEmitter and Container argument', $eventConfigFile));
             }
 
-            $callback($emitter, $app->getContainer());
+            $result = $callback($emitter, $app->getContainer());
+
+            if(is_array($result) && count($result)) {
+                Chain::create($result)
+                    ->map(function(string $script) use ($app) {
+                        return $app->getContainer()->get($script);
+                    })
+                    ->map(function(EventsBootstrapInterface $script) use ($emitter) {
+                        $script->up($emitter);
+                    });
+            }
         }
     }
 }

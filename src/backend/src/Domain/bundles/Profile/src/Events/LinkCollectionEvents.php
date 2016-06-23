@@ -1,13 +1,15 @@
 <?php
 namespace Domain\Profile\Events;
 
+use Application\Events\EventsBootstrapInterface;
 use Application\Exception\PermissionsDeniedException;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Collection\Entity\Collection;
 use Domain\Collection\Service\CollectionService;
 use Domain\Profile\Service\ProfileService;
+use Evenement\EventEmitterInterface;
 
-final class LinkCollectionEvents
+final class LinkCollectionEvents implements EventsBootstrapInterface
 {
     /** @var CurrentAccountService */
     protected $currentAccountService;
@@ -28,7 +30,7 @@ final class LinkCollectionEvents
         $this->profileService = $profileService;
     }
 
-    public function bindEvents()
+    public function up(EventEmitterInterface $globalEmitter)
     {
         $currentAccountService = $this->currentAccountService;
         $profileService = $this->profileService;

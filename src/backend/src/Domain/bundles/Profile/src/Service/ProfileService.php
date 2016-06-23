@@ -96,11 +96,6 @@ class ProfileService
         );
 
         $this->profileRepository->createProfile($profile);
-        $this->collectionService->createCollection(new CreateCollectionParameters(
-            sprintf('profile:%d', $profile->getId()),
-            '$gt_collection_my-feed_title',
-            '$gt_collection_my-feed_description'
-        ), true);
         $this->accountService->switchToProfile($account, $profile->getId());
 
         $this->generateProfileImage($profile->getId());
