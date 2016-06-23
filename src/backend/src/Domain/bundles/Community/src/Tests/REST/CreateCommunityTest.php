@@ -96,9 +96,20 @@ final class CreateCommunityTest extends CommunityMiddlewareTestCase
                     'public_options' => [
                         'public_enabled' => false,
                         'moderation_contract' => false
+                    ],
+                    'collections' => [
+                        0 => [
+                            'collection_id' => $this->expectId(),
+                            'position' => 1
+                        ]
                     ]
-                ]
+                ],
             ])
+            ->expect(function(array $result) {
+                $collections = $result['entity']['collections'];
+
+                $this->assertEquals(1, count($collections));
+            })
             ->expect(function(array $result) {
                 $sid = $result['entity']['sid'];
 

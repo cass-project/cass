@@ -40,9 +40,6 @@ class CommunityService
     /** @var ThemeRepository */
     private $themeRepository;
 
-    /** @var CollectionService */
-    private $collectionService;
-
     /** @var AvatarService */
     private $avatarService;
 
@@ -52,7 +49,6 @@ class CommunityService
     public function __construct(
         CurrentAccountService $currentAccountService,
         CommunityRepository $communityRepository,
-        CollectionService $collectionService,
         ThemeRepository $themeRepository,
         AvatarService $avatarService,
         FilesystemInterface $imageFileSystem
@@ -60,7 +56,6 @@ class CommunityService
         $this->events = new EventEmitter();
         $this->currentAccountService = $currentAccountService;
         $this->communityRepository = $communityRepository;
-        $this->collectionService = $collectionService;
         $this->themeRepository = $themeRepository;
         $this->avatarService = $avatarService;
         $this->imageFileSystem = $imageFileSystem;
@@ -85,14 +80,6 @@ class CommunityService
         $this->communityRepository->createCommunity($entity);
 
         $strategy = new CommunityImageStrategy($entity, $this->imageFileSystem);
-        $this->collectionService->createCollection(new CreateCollectionParameters(
-            sprintf('community:%s', $entity->getId()),
-            '$gt_community-feed_title',
-            '$gt_community-feed_description',
-            $entity->hasTheme()
-                ? [$entity->getTheme()->getId()]
-                : []
-        ));
         $this->avatarService->generateImage($strategy);
 
         $this->events->emit(self::EVENT_COMMUNITY_CREATED, [$entity]);
