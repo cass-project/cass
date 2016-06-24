@@ -54,7 +54,7 @@ export class CommunityPage
     }
 
     reset() {
-        this.service.community = undefined;
+        delete this.service['community'];
         this.service.isAdmin = false;
     }
 }

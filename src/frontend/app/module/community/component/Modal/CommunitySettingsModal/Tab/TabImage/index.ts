@@ -59,7 +59,7 @@ export class ImageTab {
     }
 
     cancel() {
-        this.model.new_image = undefined;
+        delete this.model['new_image'];
         this.cropper.reset();
     }
 

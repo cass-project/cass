@@ -126,7 +126,7 @@ export class CommunitySettingsModal
                     .map(response=>response.json())
                     .subscribe(response => {
                         this.model.image = response.image;
-                        this.model.new_image = undefined;
+                        delete this.model['new_image'];
                         this.cropper.reset();
                         this.modelUnmodified = JSON.parse(JSON.stringify(this.model));
                     });
