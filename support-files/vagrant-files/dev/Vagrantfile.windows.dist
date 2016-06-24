@@ -2,20 +2,51 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "ubuntu/trusty64"
-  config.vm.provision :shell, path: "./support-files/provision.sh"
+  config.vm.define "dev" do |dev|
+    dev.vm.box = "ubuntu/trusty64"
 
-  config.vm.synced_folder "./src", "/opt/cass", type: "smb", owner: "www-data", group: "www-data"
-  config.vm.synced_folder "./support-files", "/support-files", type: "smb"
+    dev.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
-  config.vm.network "forwarded_port", guest: 3000, host: 8080 # www
-  config.vm.network "forwarded_port", guest: 3001, host: 8081 # mongo-express
-  config.vm.network "forwarded_port", guest: 3002, host: 8082 # react-php
-  config.vm.network "forwarded_port", guest: 3003, host: 8083 # pimp
-  config.vm.network "forwarded_port", guest: 27017, host: 27017 # mongo
+    dev.vm.provision :shell, :inline "sudo addgroup www-data"
+    dev.vm.provision :shell, :inline "sudo usermod -a -G www-data vagrant"
+    dev.vm.provision :shell, path: "./support-files/vagrant/env/dev/provision.sh"
 
-   config.vm.provider "virtualbox" do |vb|
-     vb.gui = false
-     vb.memory = "1024"
-   end
+    dev.vm.synced_folder "./src", "/opt/cass", type: "smb", owner: "www-data", group: "www-data"
+    dev.vm.synced_folder "./support-files", "/support-files", type: "smb"
+
+    dev.vm.network "forwarded_port", guest: 3000, host: 8080 # www
+    dev.vm.network "forwarded_port", guest: 3001, host: 8081 # mongo-express
+    dev.vm.network "forwarded_port", guest: 3002, host: 8082 # react-php
+    dev.vm.network "forwarded_port", guest: 3003, host: 8083 # pimp
+    dev.vm.network "forwarded_port", guest: 27017, host: 27017 # mongo
+
+    dev.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.memory = "1024"
+    end
+  end
+
+  config.vm.define "stage" do |stage|
+    stage.vm.box = "ubuntu/trusty64"
+
+    stage.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
+    stage.vm.provision :shell, :inline "sudo addgroup www-data"
+    stage.vm.provision :shell, :inline "sudo usermod -a -G www-data vagrant"
+    stage.vm.provision :shell, path: "./support-files/vagrant/stage/dev/provision.sh"
+
+    stage.vm.synced_folder "./src", "/opt/cass", type: "smb", owner: "www-data", group: "www-data"
+    stage.vm.synced_folder "./support-files", "/support-files", type: "smb"
+
+    stage.vm.network "forwarded_port", guest: 3000, host: 8080 # www
+    stage.vm.network "forwarded_port", guest: 3001, host: 8081 # mongo-express
+    stage.vm.network "forwarded_port", guest: 3002, host: 8082 # react-php
+    stage.vm.network "forwarded_port", guest: 3003, host: 8083 # pimp
+    stage.vm.network "forwarded_port", guest: 27017, host: 27017 # mongo
+
+    stage.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.memory = "1024"
+    end
+  end
 end
