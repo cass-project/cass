@@ -14,14 +14,11 @@ export class ProfileRESTService extends AbstractRESTService{
 
 
     getProfileById(profileId){
-        let url = `/backend/api/profile/${profileId}/get`;
-
-        return this.handle(this.http.get(url));
+        return this.handle(this.http.get(`/backend/api/profile/${profileId}/get`));
     }
 
     createNewProfile(){
-        let url = `/backend/api/protected/profile/create`;
-        return this.handle(this.http.put(url, JSON.stringify({
+        return this.handle(this.http.put(`/backend/api/protected/profile/create`, JSON.stringify({
             accountId: 'current'
         })));
     }
@@ -49,63 +46,48 @@ export class ProfileRESTService extends AbstractRESTService{
     }
 
     updateExpertThemes(expertIn) {
-        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.profile.id}/expert-in`;
-
         AuthService.getAuthToken().getCurrentProfile().entity.profile.expert_in_ids = (JSON.parse(JSON.stringify(expertIn)));
 
-        return this.handle(this.http.put(url, JSON.stringify({
+        return this.handle(this.http.put(`/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.profile.id}/expert-in`, JSON.stringify({
             theme_ids: expertIn
         })));
     }
 
     updateInterestThemes(interestingIn) {
-        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.profile.id}/interesting-in`;
-
         AuthService.getAuthToken().getCurrentProfile().entity.profile.interesting_in_ids = (JSON.parse(JSON.stringify(interestingIn)));
 
-        return this.handle(this.http.put(url, JSON.stringify({
+        return this.handle(this.http.put(`/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.profile.id}/interesting-in`, JSON.stringify({
             theme_ids: interestingIn
         })));
     }
 
 
     switchProfile(profileId){
-        let url = `/backend/api/protected/profile/${profileId}/switch/`;
-
-        return this.handle(this.http.post(url, JSON.stringify('')));
+        return this.handle(this.http.post(`/backend/api/protected/profile/${profileId}/switch/`, JSON.stringify('')));
     }
 
     deleteProfile(profileId){
-        let url = `/backend/api/protected/profile/${profileId}/delete`;
-
-        return this.handle(this.http.delete(url));
+        return this.handle(this.http.delete(`/backend/api/protected/profile/${profileId}/delete`));
     }
 
     requestAccountDeleteCancel() {
-        let url = `/backend/api/protected/account/cancel-request-delete`;
 
-        return this.handle(this.http.delete(url));
+        return this.handle(this.http.delete(`/backend/api/protected/account/cancel-request-delete`));
     }
 
     requestAccountDelete() {
-        let url = `/backend/api/protected/account/request-delete`;
-
-        return this.handle(this.http.put(url, JSON.stringify('')));
+        return this.handle(this.http.put(`/backend/api/protected/account/request-delete`, JSON.stringify('')));
     }
 
     changePassword(changePasswordStn) {
-        let url = `/backend/api/protected/account/change-password`;
-
-        return this.handle(this.http.post(url, JSON.stringify({
+        return this.handle(this.http.post(`/backend/api/protected/account/change-password`, JSON.stringify({
             old_password: changePasswordStn.old_password,
             new_password: changePasswordStn.new_password
         })));
     }
 
     deleteAvatar() {
-        let url = `/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.profile.id}/image-delete`;
-
-        return this.handle(this.http.delete(url));
+        return this.handle(this.http.delete(`/backend/api/protected/profile/${AuthService.getAuthToken().getCurrentProfile().entity.profile.id}/image-delete`));
     }
 
 

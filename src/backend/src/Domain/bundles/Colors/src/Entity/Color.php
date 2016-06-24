@@ -40,4 +40,10 @@ class Color implements JSONSerializable
     public function getHexCode(): string {
         return $this->hexCode;
     }
+
+    public function getName():string
+    {
+        preg_match('#([a-z-]*)\.#i', $this->code, $m);
+        return $m[1];
+    }
 }

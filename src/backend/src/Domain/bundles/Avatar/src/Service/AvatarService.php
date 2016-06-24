@@ -1,11 +1,15 @@
 <?php
 namespace Domain\Avatar\Service;
 
+use Application\Util\GenerateRandomString;
 use Domain\Avatar\Exception\InvalidCropException;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Avatar\Service\Strategy\AvatarServiceStrategy;
 use Domain\Avatar\Strategy\ImageStrategy;
+use Domain\Colors\Entity\Color;
+use Domain\Colors\Service\ColorsService;
+use Intervention\Image\ImageManagerStatic as Image;
 use League\Flysystem\FilesystemInterface;
 
 final class AvatarService
@@ -15,9 +19,15 @@ final class AvatarService
     /** @var AvatarServiceStrategy */
     private $strategy;
 
-    public function __construct(AvatarServiceStrategy $strategy)
+    private $colorsService;
+
+    private $fontPath;
+
+    public function __construct(AvatarServiceStrategy $strategy, ColorsService $colorsService,string $fontPath)
     {
         $this->strategy = $strategy;
+        $this->colorsService = $colorsService;
+        $this->fontPath = $fontPath;
     }
 
     public function defaultImage(ImageStrategy $strategy): ImageCollection
@@ -106,6 +116,32 @@ final class AvatarService
     public function generateImage(ImageStrategy $strategy): ImageCollection
     {
         return $this->defaultImage($strategy);
+        $path = sprintf('%S/%s.jpg',$strategy->getPublicPath(), GenerateRandomString::gen(8));
+
+        $colors = array_filter($this->colorsService->getColors(),function(Color $color){
+            return preg_match('#.700$#',$color->getCode());
+        });
+
+        /** @var Color $bgColor */
+        $bgColor = $colors[array_rand($colors, 1)];
+        /** @var Color $textColor */
+        $textColor = $this->colorsService->getColors()[sprintf("%s.100", $bgColor->getName())];
+
+        $img = Image::canvas(64, 64, $bgColor->getHexCode());
+        $char = strtoupper($strategy->getLetter());
+        $fontPath = $this->fontPath;
+
+        $img->text($char, 5, 5, function($font)use($textColor, $fontPath) {
+            $font->file($fontPath);
+            $font->size(24);
+            $font->color($textColor->getHexCode());
+            $font->align('center');
+            $font->valign('top');
+        });
+
+//        $img->save($path);
+        print_r($path);
+        die('>>>>>>>>>>>>');
     }
 
     public function destroyImages(ImageStrategy $strategy)

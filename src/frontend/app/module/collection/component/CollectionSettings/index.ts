@@ -40,7 +40,7 @@ export class CollectionSettings
 
     avatarDeletingProcess(){
         this.deleteProcessVisible = true;
-        this.collectionRESTService.deleteAvatar(this.collection).subscribe(data => {
+        this.collectionRESTService.deleteImageCollection(this.collection.id).subscribe(data => {
             /*this.collection.image = TODO: set default image*/
             this.deleteProcessVisible = false;
         });

@@ -1,10 +1,9 @@
-import {Component} from "angular2/core";
+import {Component, ViewChild} from "angular2/core";
 
 import {CommunitySettingsModalModel} from "../../model";
 import {CommunityImage} from "../../../../Elements/CommunityImage/index";
 import {ImageCropperService, ImageCropper} from "../../../../../../form/component/ImageCropper/index";
 import {UploadImageCropModel} from "../../../../../../form/component/UploadImage/strategy";
-import {CommunityEnityImage} from "../../../../../definitions/entity/Community";
 import {CommunityRESTService} from "../../../../../service/CommunityRESTService";
 import {CommunityImageDeleteRequest} from "../../../../../definitions/paths/image-delete";
 
@@ -14,9 +13,6 @@ import {CommunityImageDeleteRequest} from "../../../../../definitions/paths/imag
     styles: [
         require('./style.shadow.scss')
     ],
-    providers: [
-        ImageCropperService
-    ],
     directives: [
         ImageCropper,
         CommunityImage
@@ -24,12 +20,14 @@ import {CommunityImageDeleteRequest} from "../../../../../definitions/paths/imag
 })
 
 export class ImageTab {
+    @ViewChild('communityImageUploadInput') communityImageUploadInput;
 
     private loading:boolean = false;
 
     constructor(
         public model: CommunitySettingsModalModel,
         public cropper: ImageCropperService,
+        public modelUnmodified:CommunitySettingsModalModel,
         private service:CommunityRESTService
     ) {
         this.setImage();
@@ -43,7 +41,9 @@ export class ImageTab {
     }
 
     onSelect($event) {
+        delete this.cropper.options.data; // При выборе новой картинки стираем crop data от старой
         this.cropper.setFile($event.target.files[0]);
+        this.communityImageUploadInput.nativeElement.value=""; // Для корректной работы input onchange 
     }
     
     onChange() {
@@ -59,8 +59,7 @@ export class ImageTab {
     }
 
     cancel() {
-        delete this.model.new_image.uploadImage;
-        delete this.model.new_image.uploadImageCrop;
+        delete this.model['new_image'];
         this.cropper.reset();
     }
 
@@ -71,9 +70,9 @@ export class ImageTab {
             .subscribe(
                 data => {
                     this.loading = false;
-                    this.model.image = data.image;
+                    this.model.image = JSON.parse(JSON.stringify(data.image));
+                    this.modelUnmodified.image = JSON.parse(JSON.stringify(data.image));
                     this.setImage();
-                    console.log(data);
                 }
             )
     }

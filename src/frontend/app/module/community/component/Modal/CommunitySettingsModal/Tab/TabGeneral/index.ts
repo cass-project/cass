@@ -18,13 +18,17 @@ export class GeneralTab {
 
     private deleteRequest: CommunityDeleteRequestControls = new CommunityDeleteRequestControls();
     private isCommunitySettingsModalThemeEnabled: boolean;
+    private selectedThemeId:number[] = [];
 
     constructor(public model: CommunitySettingsModalModel) {
         this.isCommunitySettingsModalThemeEnabled = !!model.theme_id;
+        if(this.isCommunitySettingsModalThemeEnabled)
+            this.selectedThemeId.push(model.theme_id);
     }
 
     communitySettingsModalThemeEnabledChange($event: boolean) {
         if($event===false) {
+            delete this.model['theme_id'];
             this.model.public_options.public_enabled = false;
             this.model.public_options.moderation_contract = false;
         }
@@ -37,8 +41,11 @@ export class GeneralTab {
     }
 
     updateThemeId(themeIds: number[]){
-        this.model.theme_id = themeIds[0];
-
+        if(themeIds.length > 0) {
+            this.model.theme_id = themeIds[0];
+        } else {
+            delete this.model['theme_id'];
+        }
     }
 }
 

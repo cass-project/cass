@@ -1,5 +1,5 @@
 .cass-padding-box-15
-  input#CommunityImageUpload(style='display:none', type='file', (change)='onSelect($event)')
+  input#CommunityImageUpload(hidden, type='file', (change)='onSelect($event)', #communityImageUploadInput)
   header.tab-modal-header
     h1 Изображение
   .community-image-form(*ngIf='cropper.file')

@@ -30,7 +30,12 @@
           h1 Коммунити посвящено определенной тематике
           p Если ваше коммунити посвященно определенной професиональной тематике, то вы можете получить больше посетителей и участников, если активируете эту опцию и укажите, какой именно тематике посвящено ваше коммунити
           // Если опция не включена, то cass-theme-select не должен отображаться
-          cass-theme-select((change)="updateThemeId($event)", multiple="false", *ngIf="isCommunitySettingsModalThemeEnabled")
+          cass-theme-select(
+            (change)='updateThemeId($event)',
+            [value]='selectedThemeId',
+            multiple='false',
+            *ngIf='isCommunitySettingsModalThemeEnabled'
+          )
         .modal-list-controls
           div.form-switch-button
             input.form-switch-button-checkbox(
