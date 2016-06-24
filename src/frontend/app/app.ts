@@ -28,8 +28,6 @@ import {ProfileRESTService} from "./module/profile/service/ProfileRESTService";
 import {CommunitySettingsModalModel} from "./module/community/component/Modal/CommunitySettingsModal/model";
 import {AuthRESTService} from "./module/auth/service/AuthRESTService";
 
-declare namespace CASSDefinitions {}
-
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),
@@ -87,8 +85,11 @@ declare namespace CASSDefinitions {}
 export class App {
     constructor(private authService: AuthService, private pService: ProfileComponentService) {
         // Do not(!) remove authService dependency.
-        /*if(!authService.getAuthToken().getCurrentProfile().entity.is_initialized){
-            this.pService.modals.setup.open();
-        }*/
+    }
+
+    static version(): string {
+        return require('./../package.json').version;
     }
 }
+
+console.log(`CASS Frontend App: ver${App.version()}`);

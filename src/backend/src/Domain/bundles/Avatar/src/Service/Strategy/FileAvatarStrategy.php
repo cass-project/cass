@@ -6,9 +6,11 @@ use Domain\Avatar\Exception\InvalidRatioException;
 use Domain\Avatar\Image\Image;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Strategy\ImageStrategy;
+use Domain\Colors\Service\ColorsService;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Image as ImageLayer;
 use League\Flysystem\FilesystemInterface;
+use Intervention\Image\Gd\Font;
 
 final class FileAvatarStrategy implements AvatarServiceStrategy
 {
@@ -17,9 +19,20 @@ final class FileAvatarStrategy implements AvatarServiceStrategy
     /** @var ImageManager */
     private $imageManager;
 
-    public function __construct(ImageManager $imageManager)
-    {
+    /** @var ColorsService */
+    private $colorsService;
+
+    /** @var string */
+    private $fontPath;
+
+    public function __construct(
+        ImageManager $imageManager,
+        ColorsService $colorsService,
+        string $fontPath
+    ) {
         $this->imageManager = $imageManager;
+        $this->colorsService = $colorsService;
+        $this->fontPath = $fontPath;
     }
 
     public function getImageFromPath(string $path): ImageLayer
@@ -32,6 +45,30 @@ final class FileAvatarStrategy implements AvatarServiceStrategy
         $source->crop($width, $height, $startX, $startY);
 
         return $source;
+    }
+
+    public function generateImagesFromLetter(ImageStrategy $strategy, string $letter): ImageCollection
+    {
+        $palette = $this->colorsService->getRandomPalette();
+        $bgColor = $palette->getBackground();
+        $textColor = $palette->getForeground();
+
+        $size = max($strategy->getSizes());
+        $fontSize = $size - ($size/100)*80;
+
+        $img = $this->imageManager->canvas($size, $size, $bgColor->getHexCode());
+        $char = strtoupper($strategy->getLetter());
+        $fontPath = $this->fontPath;
+
+        $img->text($char, (int) $size/2, (int) $size/2, function(Font $font) use($fontSize, $textColor, $fontPath) {
+            $font->file($fontPath);
+            $font->size($fontSize);
+            $font->color($textColor->getHexCode());
+            $font->align('center');
+            $font->valign('center');
+        });
+
+        return $this->generateImagesFromSource($strategy, $img);
     }
 
     public function generateImagesFromPath(ImageStrategy $strategy, string $path): ImageCollection

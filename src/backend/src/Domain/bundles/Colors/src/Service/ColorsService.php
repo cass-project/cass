@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Colors\Service;
 
+use Domain\Colors\Entity\Palette;
 use Domain\Colors\Repository\ColorsRepository;
 use Domain\Colors\Repository\PaletteRepository;
 
@@ -12,16 +13,24 @@ class ColorsService
     /** @var PaletteRepository */
     private $paletteRepository;
 
-    public function __construct(ColorsRepository $colorRepository, PaletteRepository $paletteRepository) {
+    public function __construct(ColorsRepository $colorRepository, PaletteRepository $paletteRepository)
+    {
         $this->colorRepository = $colorRepository;
         $this->paletteRepository = $paletteRepository;
     }
 
-    public function getColors(): array {
+    public function getColors(): array
+    {
         return $this->colorRepository->getColors();
     }
 
-    public function getPalettes(): array {
+    public function getPalettes(): array
+    {
         return $this->paletteRepository->getPalettes();
+    }
+
+    public function getRandomPalette(): Palette
+    {
+        return array_rand($this->paletteRepository->getPalettes());
     }
 }

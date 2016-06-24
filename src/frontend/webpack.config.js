@@ -3,8 +3,7 @@ var webpack = require("webpack");
 function WebpackConfigBuilder() {
   this.publicPath = __dirname + '/../www/app/dist';
   this.wwwPath = '/dist';
-  this.assetsDir = 'assets';
-  this.bundlesDir = 'assets/bundles';
+  this.bundlesDir = 'bundles';
 }
 
 WebpackConfigBuilder.prototype = {

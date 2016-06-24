@@ -1,16 +1,11 @@
 <?php
 namespace Domain\Avatar\Service;
 
-use Application\Util\GenerateRandomString;
 use Domain\Avatar\Exception\InvalidCropException;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Avatar\Service\Strategy\AvatarServiceStrategy;
 use Domain\Avatar\Strategy\ImageStrategy;
-use Domain\Colors\Entity\Color;
-use Domain\Colors\Service\ColorsService;
-use Intervention\Image\ImageManagerStatic as Image;
-use League\Flysystem\FilesystemInterface;
 
 final class AvatarService
 {
@@ -19,15 +14,9 @@ final class AvatarService
     /** @var AvatarServiceStrategy */
     private $strategy;
 
-    private $colorsService;
-
-    private $fontPath;
-
-    public function __construct(AvatarServiceStrategy $strategy, ColorsService $colorsService,string $fontPath)
+    public function __construct(AvatarServiceStrategy $strategy)
     {
         $this->strategy = $strategy;
-        $this->colorsService = $colorsService;
-        $this->fontPath = $fontPath;
     }
 
     public function defaultImage(ImageStrategy $strategy): ImageCollection
@@ -107,7 +96,7 @@ final class AvatarService
         if($collection->hasImage($strategy->getDefaultSize())) {
             $collection->attachImage('default', clone $collection->getImage((string) $strategy->getDefaultSize()));
         }else{
-            $collection->attachImage('original', clone $collection->getImage(min($sizes)));
+            $collection->attachImage('default', clone $collection->getImage(max($strategy->getSizes())));
         }
 
         $strategy->getEntity()->setImages($collection);
@@ -115,33 +104,20 @@ final class AvatarService
 
     public function generateImage(ImageStrategy $strategy): ImageCollection
     {
-        return $this->defaultImage($strategy);
-        $path = sprintf('%S/%s.jpg',$strategy->getPublicPath(), GenerateRandomString::gen(8));
+        $this->destroyImages($strategy);
 
-        $colors = array_filter($this->colorsService->getColors(),function(Color $color){
-            return preg_match('#.700$#',$color->getCode());
-        });
+        $oldCollectionUID = $strategy->getEntity()->hasImages()
+            ? $oldCollectionUID = $strategy->getEntity()->getImages()->getUID()
+            : false
+        ;
 
-        /** @var Color $bgColor */
-        $bgColor = $colors[array_rand($colors, 1)];
-        /** @var Color $textColor */
-        $textColor = $this->colorsService->getColors()[sprintf("%s.100", $bgColor->getName())];
+        $this->setImages($strategy, $this->strategy->generateImagesFromLetter($strategy, $strategy->getLetter()));
 
-        $img = Image::canvas(64, 64, $bgColor->getHexCode());
-        $char = strtoupper($strategy->getLetter());
-        $fontPath = $this->fontPath;
+        if($oldCollectionUID) {
+            $strategy->getFilesystem()->deleteDir(sprintf('%s/%s', $strategy->getEntityId(), $oldCollectionUID));
+        }
 
-        $img->text($char, 5, 5, function($font)use($textColor, $fontPath) {
-            $font->file($fontPath);
-            $font->size(24);
-            $font->color($textColor->getHexCode());
-            $font->align('center');
-            $font->valign('top');
-        });
-
-//        $img->save($path);
-        print_r($path);
-        die('>>>>>>>>>>>>');
+        return $strategy->getEntity()->getImages();
     }
 
     public function destroyImages(ImageStrategy $strategy)

@@ -74,6 +74,11 @@ final class MockAvatarStrategy implements AvatarServiceStrategy
         return $collection;
     }
 
+    public function generateImagesFromLetter(ImageStrategy $strategy, string $letter): ImageCollection
+    {
+        return $this->createEmptyImages($strategy);
+    }
+
     private function touchDir(FilesystemInterface $fs, string $entityId, string $collectionUID, string $imageId): string
     {
         $resultPath = sprintf('%s/%s/%s', $entityId, $collectionUID, $imageId);

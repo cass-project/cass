@@ -1,0 +1,15 @@
+"/version":
+  get:
+    tags:
+      - version
+    description: Возвращает версию бэкенда
+    responses:
+      200:
+        schema:
+          type: object
+          required:
+            - version
+          properties:
+            version:
+              type: string
+              description: Версия (semver) бэкенда
