@@ -57,6 +57,12 @@ composer.phar install
 sudo touch /var/log/php-errors.log
 sudo chown -R www-data /var/log/php-errors.log
 
+# db
+cd /opt/cass/backend
+php /opt/cass/backend/vendor/bin/phinx migrate -e cass_development
+php /opt/cass/backend/vendor/bin/phinx migrate -e cass_testing
+php /opt/cass/backend/vendor/bin/phinx migrate -e cass_production
+
 # ########
 # Frontend
 # ########
