@@ -92,6 +92,15 @@ wget https://phar.phpunit.de/phpunit.phar
 chmod +x phpunit.phar
 sudo mv phpunit.phar /usr/local/bin/phpunit
 
+# ####
+# PIMP
+# ####
+
+sudo mkdir /opt/pimp
+cd /opt/pimp
+sudo git clone https://github.com/potsky/PimpMyLog.git
+sudo chown -R www-data /opt/pimp
+
 # #############
 # Update server
 # #############

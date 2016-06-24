@@ -1,0 +1,31 @@
+paths:
+    migrations: %%PHINX_CONFIG_DIR%%/db/migrations
+    seeds: %%PHINX_CONFIG_DIR%%/db/seeds
+
+environments:
+    default_migration_table: phinxlog
+    default_database: cass_development
+    cass_development:
+        adapter: mysql
+        host: localhost
+        name: cass_development
+        user: root
+        pass: 1234
+        port: 3306
+        charset: utf8
+    cass_production:
+        adapter: mysql
+        host: localhost
+        name: cass_development
+        user: root
+        pass: 1234
+        port: 3306
+        charset: utf8
+    cass_testing:
+        adapter: mysql
+        host: localhost
+        name: cass_testing
+        user: root
+        pass: 1234
+        port: 3306
+        charset: utf8

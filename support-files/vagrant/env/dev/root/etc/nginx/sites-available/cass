@@ -8,48 +8,30 @@ upstream react-php  {
 
 server {
     listen 3000;
-    root /opt/cass/www/app/;
-    index frontend.html;
-    server_name localhost;
 
-    location ~ "^/backend/.*$"
+    location /backend
     {
+        root /opt/cass/www/app/;
         try_files $uri /backend.php /backend.php =404;
-
-        fastcgi_pass	php-fpm;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass php-fpm;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
-        fastcgi_split_path_info			^(.+?\.php)(/.*)?$;
-        fastcgi_param	SCRIPT_FILENAME		$document_root$fastcgi_script_name;
-        fastcgi_param	PATH_TRANSLATED		$document_root$fastcgi_script_name;
-        set		$path_info		$fastcgi_path_info;
-        fastcgi_param	PATH_INFO		$path_info;
     }
 
-    location ~ "^/api-docs/.*$"
+    location /
     {
-        rewrite ^/api-docs/(.*)$ /../../../opt/swagger/swagger-ui/dist/$1 break;
-        index index.html;
-    }
-
-    location ~ "^/php-errors/.*$"
-    {
-        rewrite ^/php-errors/(.*)$ /../../../opt/ping/PimpMyLog/$1 break;
-        index index.php;
-
-        fastcgi_pass	php-fpm;
-        include fastcgi_params;
-        fastcgi_split_path_info			^(.+?\.php)(/.*)?$;
-        fastcgi_param	SCRIPT_FILENAME		$document_root$fastcgi_script_name;
-        fastcgi_param	PATH_TRANSLATED		$document_root$fastcgi_script_name;
-        set		$path_info		$fastcgi_path_info;
-        fastcgi_param	PATH_INFO		$path_info;
-    }
-
-    location ~ "^/.*$"
-    {
-        try_files $uri /frontend.html /frontend.html =404;
+        root /opt/cass/www/app/;
+        try_files $uri $uri/frontend.html;
 	}
 
+    location /api-docs
+    {
+        root /opt/swagger/swagger-ui/;
+        index index.html index.htm;
+        try_files $uri $uri/index.html index.html =404;
+    }
 }
 
 server {
@@ -88,12 +70,10 @@ server {
     }
 
     location ~ \.php$ {
-        fastcgi_pass	php-fpm;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass php-fpm;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
-        fastcgi_split_path_info			^(.+?\.php)(/.*)?$;
-        fastcgi_param	SCRIPT_FILENAME		$document_root$fastcgi_script_name;
-        fastcgi_param	PATH_TRANSLATED		$document_root$fastcgi_script_name;
-        set		$path_info		$fastcgi_path_info;
-        fastcgi_param	PATH_INFO		$path_info;
     }
 }
