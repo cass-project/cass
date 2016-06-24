@@ -1,0 +1,33 @@
+# !!!!!
+# Данная конфигурация не рекомендуется к использованию и является наименее производительной
+# С помощью этой конфигурации вы сможете развернуть проект, избежав проблем с NFS/SMB
+# !!!!!
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.define "dev" do |dev|
+    dev.vm.box = "ubuntu/trusty64"
+
+    dev.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
+    dev.vm.provision :shell, :inline "sudo addgroup www-data"
+    dev.vm.provision :shell, :inline "sudo usermod -a -G www-data vagrant"
+    dev.vm.provision :shell, path: "./support-files/vagrant/env/dev/provision.sh"
+
+    dev.vm.synced_folder "./src", "/opt/cass", owner: "www-data", group: "www-data"
+    dev.vm.synced_folder "./support-files", "/support-files"
+
+    dev.vm.network "forwarded_port", guest: 3000, host: 8080 # www
+    dev.vm.network "forwarded_port", guest: 3001, host: 8081 # mongo-express
+    dev.vm.network "forwarded_port", guest: 3002, host: 8082 # react-php
+    dev.vm.network "forwarded_port", guest: 3003, host: 8083 # pimp
+    dev.vm.network "forwarded_port", guest: 27017, host: 27017 # mongo
+
+    dev.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.memory = "1024"
+    end
+  end
+end

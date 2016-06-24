@@ -10,7 +10,7 @@ WebpackConfigBuilder.prototype = {
   build: function() {
     return {
       entry: [
-        './app/index.ts',
+        './src/index.ts',
       ],
       output: {
         filename: '[name].js',

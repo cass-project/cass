@@ -5,9 +5,9 @@
 2. Установите VirtualBox: [https://www.virtualbox.org/]()
 3. Перейдите в директорию $PROJECT_ROOT
 4. Скопируйте Vagrant-file:
-    - `cp Vagrantfile.unix.dist Vagrantfile` (для Linux/OSX)
-    - `cp Vagrantfile.windows.dist Vagrantfile` (для Windows)
-    - `cp Vagrantfile.sf.dist Vagrantfile` (вы хотите дождаться выхода HL3, пока у вас пересобирается фронтэнд)
+    - `cp ./support-files/vagrant-files/dev/Vagrantfile.unix.dist Vagrantfile` (для Linux/OSX)
+    - `cp ./support-files/vagrant-files/dev/Vagrantfile.windows.dist Vagrantfile` (для Windows)
+    - `cp ./support-files/vagrant-files/dev/Vagrantfile.sf.dist Vagrantfile` (вы хотите дождаться выхода HL3, пока у вас пересобирается фронтэнд)
 5. Выполните `vagrant up`
     - Если вы используете Windows и используете файл `Vagrantfile.windows.dist`, то необходимо запускать эту команду от администратора
 6. Зайдите на виртуальную машину: `vagrant ssh`
@@ -22,7 +22,7 @@
 
 Обновление проекта
 ------------------
-- При изменении конфигирации (`./src/support-files/copy`) для обновления VM используйте команду `vm-server-update`
+- При изменении конфигирации (`./src/support-files/env/$ENV/root`) для обновления VM используйте команду `vm-server-update`
 - Для пересборки/обновления проекта используйте команду `vm-project-update`
 
 При наличии проблем, связанных с использованием SMB-конфигурации:

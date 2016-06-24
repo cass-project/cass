@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-mysql  -uroot -p"1234" -e "DROP DATABASE cass_development"
-mysql  -uroot -p"1234" -e "CREATE DATABASE cass_development"
-cd /vagrant/backend
-composer update
-composer install
-./vendor/bin/phinx migrate -e cass_development
-./vendor/bin/phinx migrate -e cass_testing
