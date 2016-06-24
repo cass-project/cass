@@ -21,10 +21,12 @@ final class VersionMiddlewareTest extends MiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'version' => $this->expectString()
+                'version' => $this->expectString(),
             ])
             ->expect(function(array $json) {
                 $this->assertEquals(1, preg_match('/\d{1}\.\d{1,5}\.\d{1,5}/', $json['version']));
+                $this->assertTrue(isset($json['blacklist']));
+                $this->assertTrue(is_array($json['blacklist']));
             });
     }
 }

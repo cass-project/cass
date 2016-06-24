@@ -20,7 +20,8 @@ final class VersionMiddleware implements MiddlewareInterface
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
         return (new ResponseBuilder($response))->setStatusSuccess()->setJson([
-            'version' => $this->version->getCurrentVersion()
+            'version' => $this->version->getCurrentVersion(),
+            'blacklist' => $this->version->getBlacklistedFrontendSPAVersions(),
         ])->build();
     }
 }

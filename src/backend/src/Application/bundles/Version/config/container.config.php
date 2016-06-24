@@ -9,6 +9,8 @@ use Application\Version\Service\VersionService;
 
 return [
     'php-di' => [
-        VersionService::class => object()->constructorParameter('current', get('config.version.current')),
+        VersionService::class => object()
+            ->constructorParameter('current', get('config.version.current'))
+            ->constructorParameter('frontendSPABlacklist', get('config.version.blacklist')),
     ]
 ];

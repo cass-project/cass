@@ -9,7 +9,14 @@
           type: object
           required:
             - version
+            - blacklist
           properties:
             version:
               type: string
-              description: Версия (semver) бэкенда
+              description: Версия (semver) Backend REST API
+            version:
+              type: array
+              description: Версии (semver) Frontend SPA, которые были отозваны по причинам безопасности
+              items:
+                type: string
+                description: Версия (semver) Frontend SPA
