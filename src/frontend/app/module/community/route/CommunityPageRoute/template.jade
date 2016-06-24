@@ -1,18 +1,21 @@
-article.page.page-community
+.page.page-community
   .form.cass-padding-box-15
     .form-placeholder-text
       .community
-        .cass-padding-box-15(*ngIf="service.community")
+        .cass-padding-box-15(
+          *ngIf='service.community'
+        )
           h1 {{service.community.title}}
-          div(*ngIf='service.isAdmin') Вы администратор этого сообщества
+          p(
+            *ngIf="service.community.description"
+          ) {{service.community.description}}
           img(
-            *ngIf="service.community.has_image",
-            src="/public/storage/community/community-image{{service.community.image.public_path}}"
+            src="{{service.community.image.variants['default'].public_path}}"
           )
-        .loading(*ngIf="isLoading")
+        .loading(
+          *ngIf="isLoading"
+        )
           cass-modal
             i.fa.fa-cog.fa-spin.fa-3x.fa-fw
             span Получаем информацию о коммунити...
         pre.debug {{service.community| json}}
-        button.form-button.form-button-primary((click)="reset()") reset()
-        button.form-button.form-button-primary((click)="ngOnInit()") ngOnInit()
