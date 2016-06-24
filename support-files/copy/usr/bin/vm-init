@@ -17,7 +17,7 @@ sudo apt-get install -y git npm nginx nginx-extras sphinxsearch rabbitmq-server 
 # ##########
 sudo npm cache clean -f
 sudo npm install -g n
-sudo n stable
+sudo n 5.11.1
 
 # #####
 # MYSQL
@@ -40,9 +40,9 @@ sudo npm install -g mongo-express
 # MONGO-EXPRESS
 # #############
 sudo mkdir /opt/mongo-express
-sudo chown vagrant /opt/mongo-express
 cd /opt/mongo-express
 npm install mongo-express
+sudo chown -R www-data /opt/mongo-express
 
 # #######
 # Backend
@@ -64,7 +64,7 @@ vendor/bin/phinx migrate -e cass_testing
 
 # error log
 sudo touch /var/log/php-errors.log
-sudo chown www-data /var/log/php-errors.log
+sudo chown -R www-data /var/log/php-errors.log
 
 # ########
 # Frontend
@@ -84,13 +84,13 @@ webpack
 # SWAGGER
 # #######
 sudo mkdir /opt/swagger
-sudo chown vagrant /opt/swagger
 cd /opt/swagger
 sudo rm -rf swagger-ui/
 git clone https://github.com/swagger-api/swagger-ui.git
 cd swagger-ui
 npm install
 npm run build
+sudo chown -R www-data /opt/swagger
 
 #########
 # PHPUNIT
