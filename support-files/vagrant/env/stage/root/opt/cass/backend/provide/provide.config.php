@@ -2,7 +2,7 @@
 namespace Application;
 
 return [
-    'ENVIRONMENT' => 'development',
+    'ENVIRONMENT' => 'stage',
     
     'php-di' => [
         'config.console' => [
@@ -16,6 +16,15 @@ return [
         ],
         'config.doctrine2' => [
             'env.development' => [
+                'connection_options' => [
+                    'driver'   => 'pdo_mysql',
+                    'host'     => '127.0.0.1',
+                    'dbname'   => 'cass_development',
+                    'user'     => 'root',
+                    'password' => '1234',
+                ]
+            ],
+            'env.stage' => [
                 'connection_options' => [
                     'driver'   => 'pdo_mysql',
                     'host'     => '127.0.0.1',

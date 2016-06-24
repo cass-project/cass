@@ -12,8 +12,3 @@ chmod a+x /usr/bin/vm-init.sh
 chmod a+x /usr/bin/vm-project-update.sh
 chmod a+x /usr/bin/vm-db-test.sh
 chmod a+x /usr/bin/vm-db-recreate.sh
-
-sudo locale-gen UTF-8
-echo "LC_ALL=en_US.UTF-8" > /etc/envinroment
-echo "LANG=en_US.UTF-8" > /etc/envinroment
-

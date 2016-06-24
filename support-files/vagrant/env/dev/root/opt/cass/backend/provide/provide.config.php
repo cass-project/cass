@@ -24,6 +24,15 @@ return [
                     'password' => '1234',
                 ]
             ],
+            'env.stage' => [
+                'connection_options' => [
+                    'driver'   => 'pdo_mysql',
+                    'host'     => '127.0.0.1',
+                    'dbname'   => 'cass_development',
+                    'user'     => 'root',
+                    'password' => '1234',
+                ]
+            ],
             'env.test' => [
                 'connection_options' => [
                     'driver'   => 'pdo_mysql',
