@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-sudo cp -R /opt/cass/support-files/vagrant/env/prod/root/* /
+sudo cp -R /support-files/vagrant/env/prod/root/* /
 
 sudo sed -i 's/\r$//' /usr/bin/vm-init.sh
 sudo sed -i 's/\r$//' /usr/bin/vm-project-update.sh
