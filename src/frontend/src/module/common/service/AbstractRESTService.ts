@@ -10,15 +10,17 @@ export abstract class AbstractRESTService
 {
     constructor(protected  http: Http, protected messages: MessageBusService) {}
 
-    handle(request) {
-        request.publish().map(res => res.json())
+    handle(request: Observable<Response>) {
+        let fork = request.publish().refCount();
+
+        fork.map(res => res.json())
             .subscribe(
                 success => {},
                 error => {
                     console.log(error);
                 }
-        );
+            );
 
-        return request;
+        return fork;
     }
 }

@@ -5,6 +5,8 @@ import {MessageBusService} from "../../../message/service/MessageBusService/inde
 import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
 import {AuthRESTService} from "../../service/AuthRESTService";
+import {AuthService} from "../../service/AuthService";
+import {SignInRequest} from "../../definitions/paths/sign-in";
 
 @Component({
     template: require('./template.jade'),
@@ -33,16 +35,19 @@ export class SignInComponent
     @Output('sign-up') signUpEvent = new EventEmitter<SignInModel>();
 
     constructor(
-        private authRESTService: AuthRESTService,
+        private service: AuthService,
         private messages: MessageBusService
     ) {}
 
     submit() {
         this.status.loading = true;
 
-        this.authRESTService.signIn(this.model).subscribe(
+        this.service.signIn(this.model).map(res => res.json()).subscribe(
             response => {
-                this.successEvent.emit(response);
+                if(AuthService.isSignedIn()) {
+                    this.successEvent.emit(response);
+                }
+
                 this.status.loading = false;
             },
             error => {this.messages.push(MessageBusNotificationsLevel.Warning, error);
@@ -59,7 +64,7 @@ export class SignInComponent
     }
 }
 
-interface SignInModel
+interface SignInModel extends SignInRequest
 {
     email: string;
     password: string;

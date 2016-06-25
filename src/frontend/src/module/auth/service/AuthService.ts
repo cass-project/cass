@@ -2,7 +2,7 @@ import {Injectable} from 'angular2/core';
 
 import {Account} from './../../account/definitions/entity/Account';
 import {FrontlineService} from "../../frontline/service";
-import {SignInRequest} from "../definitions/paths/sign-in";
+import {SignInRequest, SignInResponse200} from "../definitions/paths/sign-in";
 import {AuthRESTService} from "./AuthRESTService";
 
 @Injectable()
@@ -34,13 +34,17 @@ export class AuthService
         return AuthService.token;
     }
 
-    public attemptSignIn(request: SignInRequest) {
-        this.api.signIn(request).subscribe(
-            response => {
+    public signIn(request: SignInRequest) {
+        let signInObservable = this.api.signIn(request);
+
+        signInObservable.map(res => res.json()).subscribe(
+            (response: SignInResponse200) => {
                 AuthService.token = new AuthToken(response.api_key, new Account(response.account, response.profiles));
                 this.frontline.merge(response.frontline);
             }
         );
+
+        return signInObservable;
     }
 
     public getAuthToken() {
