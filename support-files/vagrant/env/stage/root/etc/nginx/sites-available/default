@@ -7,7 +7,7 @@ upstream react-php  {
 }
 
 server {
-    listen 3000;
+    listen 80;
 
     location /backend
     {

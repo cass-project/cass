@@ -106,5 +106,4 @@ vm-server-update.sh
 # #####
 # NGINX
 # #####
-sudo ln -s /etc/nginx/sites-available/cass /etc/nginx/sites-enabled/cass
 sudo service nginx restart
