@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # backend
-cd /opt/cass/backend
+cd /opt/cass/src/backend
 
 composer update
 composer install

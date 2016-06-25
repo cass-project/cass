@@ -16,7 +16,7 @@ DESC="amqp-listner"
 LOGFILE=/var/log/$DESC.log
 NAME=php
 DAEMON=/usr/bin/$NAME
-DAEMON_ARGS="/opt/cass/backend/console.php amqp:sendMail"
+DAEMON_ARGS="/opt/cass/src/backend/console.php amqp:sendMail"
 PIDFILE=/var/run/$DESC.pid
 SCRIPTNAME=/etc/init.d/$DESC
 

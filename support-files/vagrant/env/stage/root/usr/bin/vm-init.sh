@@ -42,7 +42,7 @@ sudo chown -R www-data /opt/mongo-express
 # #######
 # Backend
 # #######
-cd /opt/cass/backend/
+cd /opt/cass/src/backend/
 
 # Install composer.phar
 curl -sS https://getcomposer.org/installer | php
@@ -58,10 +58,10 @@ sudo touch /var/log/php-errors.log
 sudo chown -R www-data /var/log/php-errors.log
 
 # db
-cd /opt/cass/backend
-php /opt/cass/backend/vendor/bin/phinx migrate -e cass_development
-php /opt/cass/backend/vendor/bin/phinx migrate -e cass_testing
-php /opt/cass/backend/vendor/bin/phinx migrate -e cass_production
+cd /opt/cass/src/backend
+php /opt/cass/src/backend/vendor/bin/phinx migrate -e cass_development
+php /opt/cass/src/backend/vendor/bin/phinx migrate -e cass_testing
+php /opt/cass/src/backend/vendor/bin/phinx migrate -e cass_production
 
 # ########
 # Frontend
@@ -93,7 +93,7 @@ sudo chown -R www-data /opt/swagger
 #########
 # PHPUNIT
 #########
-cd /opt/cass/backend
+cd /opt/cass/src/backend
 wget https://phar.phpunit.de/phpunit.phar
 chmod +x phpunit.phar
 sudo mv phpunit.phar /usr/local/bin/phpunit
