@@ -13,3 +13,7 @@ php ./vendor/robmorgan/phinx/bin/phinx migrate -e cass_testing
 cd /opt/cass/src/frontend
 npm install --no-bin-link
 webpack
+
+# chmod
+sudo chown -R www-data /opt/cass
+sudo chown -R www-data /opt/swagger
