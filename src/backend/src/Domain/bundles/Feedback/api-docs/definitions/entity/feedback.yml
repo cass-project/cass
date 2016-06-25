@@ -1,0 +1,28 @@
+Feedback_Entity_Feedback:
+  type: object
+  required:
+    - id
+    - created_at
+    - type_feedback
+    - description
+  properties:
+    id:
+      type: number
+      description: ID
+    profile_id:
+      type: number
+      description: ID профиля
+    created_at:
+      type: string
+      description: дата создания
+    type_feedback:
+      type: number
+      description: Тип фидбека
+    description:
+      type: string
+      description: текст описание фидбека
+    responses:
+      type: array
+      items:
+        schema:
+          $ref: '#/definitions/Feedback_Entity_Feedback'

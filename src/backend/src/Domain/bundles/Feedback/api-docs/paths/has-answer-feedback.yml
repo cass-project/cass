@@ -1,0 +1,26 @@
+'/feedback/{feedbackId}/has-answer':
+  get:
+    tags:
+      - feedback
+    description: получить ответы на фидбак
+    parameters:
+      - name: feedbackId
+        in: path
+        required: true
+        description: id feedback
+        type: numeric
+    responses:
+      200:
+        schema:
+          properties:
+            success:
+              type: boolean
+              default: true
+            entities:
+              type: array
+              items:
+                schema:
+                  $ref: '#/definitions/Feedback_Entity_FeedbackResponse'
+          required:
+            - success
+            - entities

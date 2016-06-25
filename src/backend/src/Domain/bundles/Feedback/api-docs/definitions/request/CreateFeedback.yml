@@ -1,0 +1,15 @@
+Feedback_Request_CreateFeedback:
+  type: object
+  required:
+    - type_feedback
+    - description
+  properties:
+    profile_id:
+      type: number
+      description: ID профиля
+    type_feedback:
+      type: number
+      description: type feedback
+    description:
+      type: string
+      description: описание

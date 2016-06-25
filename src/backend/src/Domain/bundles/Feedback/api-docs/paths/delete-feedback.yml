@@ -1,0 +1,20 @@
+'/feedback/{feedbackId}/cancel':
+  delete:
+    tags:
+      - feedback
+    description: удалить feedback
+    parameters:
+      - name: feedbackId
+        in: path
+        required: true
+        description: id feedback
+        type: numeric
+    responses:
+      200:
+        schema:
+          properties:
+            success:
+              type: boolean
+              default: true
+          required:
+            - success

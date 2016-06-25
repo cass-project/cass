@@ -1,0 +1,24 @@
+/feedback/create:
+  put:
+    tags:
+      - feedback
+    description: создать новый фидбек
+    parameters:
+      - name: body
+        in: body
+        required: true
+        description:
+        schema:
+          $ref: '#/definitions/Feedback_Request_CreateFeedback'
+    responses:
+      200:
+        schema:
+          properties:
+            success:
+              type: boolean
+              default: true
+            entity:
+              $ref: '#/definitions/Feedback_Entity_Feedback'
+          required:
+            - success
+            - entity
