@@ -1,16 +1,28 @@
 <?php
 namespace Domain\Colors;
 
-use Application\Service\BundleService;
-use DI\Container;
 use function DI\object;
 use function DI\factory;
 use function DI\get;
 
+use DI\Container;
+use Application\Service\BundleService;
 use Domain\Avatar\Service\AvatarService;
 use Domain\Avatar\Service\Strategy\FileAvatarStrategy;
 use Domain\Avatar\Service\Strategy\MockAvatarStrategy;
 use Domain\DomainBundle;
+
+$configDefault = [
+    'php-di' => [
+        AvatarService::class => object()->constructorParameter('strategy', get(FileAvatarStrategy::class))
+    ]
+];
+
+$configMock = [
+    'php-di' => [
+        AvatarService::class => object()->constructorParameter('strategy', get(MockAvatarStrategy::class))
+    ]
+];
 
 return [
     'php-di' => [
@@ -21,20 +33,9 @@ return [
         }))
     ],
     'env' => [
-        'development' => [
-            'php-di' => [
-                AvatarService::class => object()->constructorParameter('strategy', get(FileAvatarStrategy::class))
-            ]
-        ],
-        'production' => [
-            'php-di' => [
-                AvatarService::class => object()->constructorParameter('strategy', get(FileAvatarStrategy::class))
-            ]
-        ],
-        'test' => [
-            'php-di' => [
-                AvatarService::class => object()->constructorParameter('strategy', get(MockAvatarStrategy::class))
-            ]
-        ]
+        'development' => $configDefault,
+        'production' => $configDefault,
+        'stage' => $configDefault,
+        'test' => $configMock,
     ]
 ];

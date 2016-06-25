@@ -19,6 +19,23 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Memory\MemoryAdapter;
 
+$configDefault = [
+    'php-di' => [
+        ProfileService::class => object()
+            ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
+                return new Filesystem(new Local($container->get('config.paths.profile.avatar.dir')));
+            })),
+    ]
+];
+$configTest = [
+    'php-di' => [
+        ProfileService::class => object()
+            ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
+                return new Filesystem(new MemoryAdapter($container->get('config.paths.profile.avatar.dir')));
+            })),
+    ]
+];
+
 return [
     'php-di' => [
         'config.paths.profile.avatar.dir' => factory(function(Container $container) {
@@ -29,29 +46,9 @@ return [
         ProfileInterestingInEQRepository::class => factory(new DoctrineRepositoryFactory(ProfileInterestingInEQ::class)),
     ],
     'env' => [
-        'development' => [
-            'php-di' => [
-                ProfileService::class => object()
-                    ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                        return new Filesystem(new Local($container->get('config.paths.profile.avatar.dir')));
-                    })),
-            ]
-        ],
-        'production' => [
-            'php-di' => [
-                ProfileService::class => object()
-                    ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                        return new Filesystem(new Local($container->get('config.paths.profile.avatar.dir')));
-                    })),
-            ]
-        ],
-        'test' => [
-            'php-di' => [
-                ProfileService::class => object()
-                    ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                        return new Filesystem(new MemoryAdapter($container->get('config.paths.profile.avatar.dir')));
-                    })),
-            ]
-        ]
+        'development' => $configDefault,
+        'production' => $configDefault,
+        'stage' => $configDefault,
+        'test' => $configTest,
     ]
 ];

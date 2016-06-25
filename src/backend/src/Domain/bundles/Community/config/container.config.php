@@ -14,6 +14,23 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Memory\MemoryAdapter;
 
+$configDefault = [
+    'php-di' => [
+        CommunityService::class => object()
+            ->constructorParameter('imageFileSystem', factory(function(Container $container) {
+                return new Filesystem(new Local($container->get('config.paths.community.avatar.dir')));
+            })),
+    ]
+];
+$configMock = [
+    'php-di' => [
+        CommunityService::class => object()
+            ->constructorParameter('imageFileSystem', factory(function(Container $container) {
+                return new Filesystem(new MemoryAdapter($container->get('config.paths.community.avatar.dir')));
+            })),
+    ]
+];
+
 return [
     'php-di' => [
         'config.paths.community.avatar.dir' => factory(function(Container $container) {
@@ -22,29 +39,9 @@ return [
         CommunityRepository::class => factory(new DoctrineRepositoryFactory(Community::class)),
     ],
     'env' => [
-        'production' => [
-            'php-di' => [
-                CommunityService::class => object()
-                    ->constructorParameter('imageFileSystem', factory(function(Container $container) {
-                        return new Filesystem(new Local($container->get('config.paths.community.avatar.dir')));
-                    })),
-            ]
-        ],
-        'development' => [
-            'php-di' => [
-                CommunityService::class => object()
-                    ->constructorParameter('imageFileSystem', factory(function(Container $container) {
-                        return new Filesystem(new Local($container->get('config.paths.community.avatar.dir')));
-                    })),
-            ]
-        ],
-        'test' => [
-            'php-di' => [
-                CommunityService::class => object()
-                    ->constructorParameter('imageFileSystem', factory(function(Container $container) {
-                        return new Filesystem(new MemoryAdapter($container->get('config.paths.community.avatar.dir')));
-                    })),
-            ]
-        ],
+        'production' => $configDefault,
+        'development' => $configDefault,
+        'stage' => $configDefault,
+        'test' => $configMock,
     ]
 ];
