@@ -66,7 +66,7 @@ php /opt/cass/backend/vendor/bin/phinx migrate -e cass_production
 # ########
 # Frontend
 # ########
-cd /opt/cass/frontend
+cd /opt/cass/src/frontend
 
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 
