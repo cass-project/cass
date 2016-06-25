@@ -54,7 +54,7 @@ final class FileAvatarStrategy implements AvatarServiceStrategy
         $textColor = $palette->getForeground();
 
         $size = max($strategy->getSizes());
-        $fontSize = $size - ($size/100)*80;
+        $fontSize = (int) $size * 0.8;
 
         $img = $this->imageManager->canvas($size, $size, $bgColor->getHexCode());
         $char = strtoupper($strategy->getLetter());

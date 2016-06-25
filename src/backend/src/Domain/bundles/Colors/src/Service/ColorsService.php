@@ -31,6 +31,8 @@ class ColorsService
 
     public function getRandomPalette(): Palette
     {
-        return array_rand($this->paletteRepository->getPalettes());
+        $palettes = $this->paletteRepository->getPalettes();
+
+        return $palettes[array_rand($palettes)];
     }
 }
