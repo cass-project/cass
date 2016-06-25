@@ -1,26 +1,21 @@
 import {Injectable} from 'angular2/core';
-import {Http, URLSearchParams, Response} from 'angular2/http';
-import {ResponseInterface} from "../../common/ResponseInterface";
-import {BackendError} from '../../common/BackendError';
-import {Profile} from './../../profile/definitions/entity/Profile';
-import {Account, AccountEntity} from './../../account/definitions/entity/Account';
+
+import {Account} from './../../account/definitions/entity/Account';
 import {FrontlineService} from "../../frontline/service";
-import {AuthRESTService} from "./AuthRESTService";
 import {SignInRequest} from "../definitions/paths/sign-in";
-import {SignUpRequest} from "../definitions/paths/sign-up";
+import {AuthRESTService} from "./AuthRESTService";
 
 @Injectable()
 export class AuthService
 {
     public static token: AuthToken;
 
-    constructor(
-        private frontline: FrontlineService)
-    {
+    constructor(private frontline: FrontlineService, private api: AuthRESTService) {
         let hasAuth = frontline.session.auth && (typeof frontline.session.auth.api_key == "string") && (frontline.session.auth.api_key.length > 0);
 
         if(hasAuth) {
             let auth = frontline.session.auth;
+
             AuthService.token = new AuthToken(auth.api_key, new Account(auth.account, auth.profiles));
         }
     }
@@ -39,10 +34,18 @@ export class AuthService
         return AuthService.token;
     }
 
+    public attemptSignIn(request: SignInRequest) {
+        this.api.signIn(request).subscribe(
+            response => {
+                AuthService.token = new AuthToken(response.api_key, new Account(response.account, response.profiles));
+                this.frontline.merge(response.frontline);
+            }
+        );
+    }
+
     public getAuthToken() {
         return AuthService.getAuthToken();
     }
-
 }
 
 class AuthToken
@@ -58,12 +61,4 @@ class AuthToken
     clearAPIKey() {
         localStorage.removeItem('api_key');
     }
-}
-
-export interface SignInResponse extends ResponseInterface
-{
-    api_key: string;
-    account: AccountEntity;
-    profiles: Profile[];
-    frontline: any;
 }

@@ -23,7 +23,7 @@ class SignInCommand extends Command
 
             $responseBuilder
                 ->setStatusSuccess()
-                ->setJson((new SignInFormatter())->format($account, $frontline))
+                ->setJson($this->signInFormatter->format($account, $frontline))
             ;
         }catch(AccountNotFoundException $e) {
             $responseBuilder

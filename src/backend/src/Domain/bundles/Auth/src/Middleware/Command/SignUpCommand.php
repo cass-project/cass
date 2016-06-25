@@ -24,7 +24,7 @@ class SignUpCommand extends Command
 
             $responseBuilder
                 ->setStatusSuccess()
-                ->setJson((new SignInFormatter())->format($account, $frontline))
+                ->setJson($this->signInFormatter->format($account, $frontline))
             ;
         }catch(MissingRequiredFieldException $e) {
             $responseBuilder

@@ -13,6 +13,7 @@ export class FrontlineService
 
 export function frontline(callback: { (session: FrontlineResponse200) }) {
     let xhr = new XMLHttpRequest();
+    let apiKey = window.localStorage['api_key'];
 
     xhr.open('GET', '/backend/api/frontline/*/', true);
     xhr.addEventListener("load", (event: Event) => {

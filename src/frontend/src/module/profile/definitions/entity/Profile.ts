@@ -2,7 +2,7 @@ import {ImageCollection} from "../../../avatar/definitions/ImageCollection";
 import {Account} from "../../../account/definitions/entity/Account";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 
-export interface Entity {
+export interface ProfileExtendedEntity {
     collection: CollectionEntity;
     profile: ProfileEntity;
 }
@@ -49,7 +49,7 @@ export interface ProfileDisabledEntity {
 export class Profile {
     static AVATAR_DEFAULT = '/dist/assets/profile-default.png';
 
-    constructor(public owner: Account, public entity: Entity) {
+    constructor(public owner: Account, public entity: ProfileExtendedEntity) {
     }
 
     getId():number {

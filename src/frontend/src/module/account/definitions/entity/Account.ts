@@ -1,4 +1,4 @@
-import {ProfileEntity, Profile, Entity} from "../../../profile/definitions/entity/Profile";
+import {Profile, ProfileExtendedEntity} from "../../../profile/definitions/entity/Profile";
 
 export interface AccountEntity {
     id: string;
@@ -18,9 +18,11 @@ export interface AccountDisabledEntity {
 }
 
 export class Account {
+    public entity: AccountEntity;
     public profiles: AccountProfiles;
 
-    constructor(public entity: AccountEntity, profiles: Array<Entity>) {
+    constructor(public entity: AccountEntity, profiles: Array<ProfileExtendedEntity>) {
+        this.entity = entity;
         this.profiles = new AccountProfiles(profiles.map(entity => {
             return new Profile(this, entity);
         }));

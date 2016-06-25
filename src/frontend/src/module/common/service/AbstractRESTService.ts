@@ -10,8 +10,8 @@ export abstract class AbstractRESTService
 {
     constructor(protected  http: Http, protected messages: MessageBusService) {}
 
-    handle(request: Observable<Response>): Observable<Response> {
-        request.map(res => res.json())
+    handle(request) {
+        request.publish().map(res => res.json())
             .subscribe(
                 success => {},
                 error => {

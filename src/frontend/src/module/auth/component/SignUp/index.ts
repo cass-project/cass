@@ -1,7 +1,7 @@
 import {Component, Output, EventEmitter} from "angular2/core";
 
 import {OAuth2Component} from "../OAuth2/index";
-import {AuthService, SignInResponse} from "../../service/AuthService";
+import {AuthService} from "../../service/AuthService";
 import {MessageBusService} from "../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";

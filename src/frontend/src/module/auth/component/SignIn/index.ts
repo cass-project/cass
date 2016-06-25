@@ -1,7 +1,6 @@
 import {Component, Output, EventEmitter} from "angular2/core";
 
 import {OAuth2Component} from "../OAuth2/index";
-import {SignInResponse} from "../../service/AuthService";
 import {MessageBusService} from "../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
@@ -38,12 +37,11 @@ export class SignInComponent
         private messages: MessageBusService
     ) {}
 
-
     submit() {
         this.status.loading = true;
 
         this.authRESTService.signIn(this.model).subscribe(
-            response =>{
+            response => {
                 this.successEvent.emit(response);
                 this.status.loading = false;
             },
