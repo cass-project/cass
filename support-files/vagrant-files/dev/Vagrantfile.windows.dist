@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
     dev.vm.provision :shell, :inline "sudo usermod -a -G www-data vagrant"
     dev.vm.provision :shell, path: "./support-files/vagrant/env/dev/provision.sh"
 
-    dev.vm.synced_folder "./src", "/opt/cass", type: "smb", owner: "www-data", group: "www-data"
+    dev.vm.synced_folder "./", "/opt/cass", type: "smb", owner: "www-data", group: "www-data"
     dev.vm.synced_folder "./support-files", "/support-files", type: "smb"
 
     dev.vm.network "forwarded_port", guest: 3000, host: 8080 # www
@@ -35,7 +35,7 @@ Vagrant.configure(2) do |config|
     stage.vm.provision :shell, :inline "sudo usermod -a -G www-data vagrant"
     stage.vm.provision :shell, path: "./support-files/vagrant/stage/dev/provision.sh"
 
-    stage.vm.synced_folder "./src", "/opt/cass", type: "smb", owner: "www-data", group: "www-data"
+    stage.vm.synced_folder "./", "/opt/cass", type: "smb", owner: "www-data", group: "www-data"
     stage.vm.synced_folder "./support-files", "/support-files", type: "smb"
 
     stage.vm.network "forwarded_port", guest: 3000, host: 8080 # www

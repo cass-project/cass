@@ -11,7 +11,7 @@ server {
 
     location /backend
     {
-        root /opt/cass/www/app/;
+        root /opt/cass/src/www/app/;
         try_files $uri /backend.php /backend.php =404;
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_pass php-fpm;
@@ -22,7 +22,7 @@ server {
 
     location /
     {
-        root /opt/cass/www/app/;
+        root /opt/cass/src/www/app/;
         try_files $uri $uri/frontend.html;
 	}
 
@@ -36,7 +36,7 @@ server {
 
 server {
     listen 3002;
-    root /opt/cass/www/app/;
+    root /opt/cass/src/www/app/;
     server_name localhost;
 
     location ~ "^/backend/.*$"

@@ -16,7 +16,7 @@ DESC="react-php"
 LOGFILE=/var/log/$DESC.log
 NAME=php
 DAEMON=/usr/bin/$NAME
-DAEMON_ARGS="/opt/cass/www/app/react-application.php"
+DAEMON_ARGS="/opt/cass/src/www/app/react-application.php"
 PIDFILE=/var/run/$DESC.pid
 SCRIPTNAME=/etc/init.d/$DESC
 
