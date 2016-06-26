@@ -1,0 +1,13 @@
+article.component.component-profile
+  div(*ngIf="modals.setup.isActive()")
+    cass-modal
+      cass-modal-box(width="500px")
+        cass-profile-setup [profile]="currentProfile"
+  div(*ngIf="modals.settings.isActive()")
+    cass-modal
+      cass-modal-box(width="760px")
+        cass-profile-settings
+  div(*ngIf="modals.switcher.isActive()")
+    cass-modal
+      cass-modal-box(width="360px")
+        cass-profile-switcher

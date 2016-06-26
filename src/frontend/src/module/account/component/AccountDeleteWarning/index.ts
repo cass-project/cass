@@ -3,7 +3,7 @@ import {AuthService} from "../../../auth/service/AuthService";
 
 @Component({
     selector: 'cass-account-delete-warning',
-    template: require('./template.html'),
+    template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]

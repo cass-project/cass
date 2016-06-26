@@ -46,6 +46,19 @@ class ProfileRepository extends EntityRepository
         return $result;
     }
 
+    public function getProfileBySID(string $profileSID): Profile
+    {
+        $result = $this->findBy([
+            'sid' => $profileSID
+        ]);
+
+        if ($result === null) {
+            throw new ProfileNotFoundException("Entity with SID {$profileSID} not found");
+        }
+
+        return $result;
+    }
+
     public function getProfileByIds(array $profileIds): array
     {
         $profileIds = array_filter($profileIds, 'is_integer');

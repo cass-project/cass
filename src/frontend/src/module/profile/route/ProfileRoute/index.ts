@@ -11,8 +11,6 @@ import {ProfileCurrentRoute} from "../ProfileCurrentRoute/index";
 import {ProfileCurrentCollectionsRoute} from "../ProfileCurrentCollectionsRoute/index";
 import {ProfileIDRoute} from "../ProfileIDRoute/index";
 import {ProfileIDCollectionsRoute} from "../ProfileIDCollectionsRoute/index";
-import {FrontlineService} from "../../../frontline/service";
-import {AuthService} from "../../../auth/service/AuthService";
 
 @Component({
     template: require('./template.html'),
@@ -40,7 +38,7 @@ import {AuthService} from "../../../auth/service/AuthService";
         component: ProfileIDRoute,
     },
     {
-        name: 'ProfileColletions',
+        name: 'ProfileCollections',
         path: '/:sid/collections',
         component: ProfileIDCollectionsRoute,
     },

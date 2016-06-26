@@ -6,7 +6,6 @@ export class UploadProfileImageStrategy implements UploadImageStrategy
 {
     constructor(private profileRESTService: ProfileRESTService){}
 
-
     getCropperOptions() {
         return {
             aspectRatio: 1 /* 1/1 */,

@@ -3,6 +3,7 @@ namespace Domain\Profile\Middleware;
 
 use Application\Service\CommandService;
 use Application\REST\Response\GenericResponseBuilder;
+use Domain\Community\Middleware\Command\GetByIdCommand;
 use Domain\Profile\Exception\ProfileNotFoundException;
 use Domain\Profile\Middleware\Command\CreateCommand;
 use Domain\Profile\Middleware\Command\DeleteCommand;
@@ -35,6 +36,7 @@ class ProfileMiddleware implements MiddlewareInterface
             ->attachDirect("create", CreateCommand::class)
             ->attachDirect("delete", DeleteCommand::class)
             ->attachDirect("get", GetCommand::class)
+            ->attachDirect('get-by-sid', GetByIdCommand::class)
             ->attachDirect("greetings-as", GreetingsAsCommand::class)
             ->attachDirect("image-upload", ImageUploadCommand::class)
             ->attachDirect('image-delete', ImageDeleteCommand::class)

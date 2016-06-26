@@ -2,7 +2,7 @@ import {Component, Input} from "angular2/core";
 
 @Component({
     selector: 'cass-profile-image',
-    template: require('./template.html'),
+    template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
@@ -14,11 +14,11 @@ export class ProfileImage
 
     static allowedBorders = ['circle', 'square'];
 
-    getURL() {
+    getURL(): string {
         return this.url;
     }
 
-    getCSSClasses() {
+    getCSSClasses(): string {
         let border = this.border;
 
         if(!~ProfileImage.allowedBorders.indexOf(border)) {

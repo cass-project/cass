@@ -18,19 +18,17 @@ import {ROUTER_PROVIDERS} from "angular2/router";
 import {App} from "./app";
 import {frontline} from "./module/frontline/service";
 import {FrontlineService} from "./module/frontline/service";
-import {OAuthRequestOptions} from "./module/auth/OAuthRequestOptions";
+import {AuthRequestOptions} from "./module/auth/AuthRequestOptions";
 import {bootstrap} from "angular2/platform/browser";
 
 document.addEventListener('DOMContentLoaded', () => {
     frontline(session => {
-        document.getElementById('loading').remove();
-
         bootstrap(
             <any>App, [
                 provide(FrontlineService, {useValue: new FrontlineService(session)}),
                 ROUTER_PROVIDERS,
                 HTTP_PROVIDERS,
-                provide(RequestOptions, {useClass: OAuthRequestOptions}),
+                provide(RequestOptions, {useClass: AuthRequestOptions}),
                 provide(Window, {useValue: session})
             ]).then(() => {
                 setInterval(() => {
@@ -47,5 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(err.message);
             }
         );
+
+        document.getElementById('loading').remove();
     });
 });

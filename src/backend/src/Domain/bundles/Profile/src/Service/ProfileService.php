@@ -79,6 +79,11 @@ class ProfileService
     {
         return $this->profileRepository->getProfileById($profileId);
     }
+    
+    public function getProfileBySID(string $profileSid): Profile
+    {
+        return $this->profileRepository->getProfileBySID($profileSid);
+    }
 
     public function getMaxProfilesPerAccount(): int
     {

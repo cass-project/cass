@@ -13,8 +13,12 @@ export class ProfileRESTService extends AbstractRESTService{
     public progressBar:number = 0;
 
 
-    getProfileById(profileId){
+    getProfileById(profileId: number) {
         return this.handle(this.http.get(`/backend/api/profile/${profileId}/get`));
+    }
+
+    getProfileBySID(profileSID: string) {
+        return this.handle(this.http.get(`/backend/api/profile/by-sid/${profileSID}/get`));
     }
 
     createNewProfile(){

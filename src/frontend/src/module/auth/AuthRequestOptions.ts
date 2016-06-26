@@ -1,7 +1,7 @@
 import {BaseRequestOptions} from "angular2/http";
 import {AuthService} from "./service/AuthService";
 
-export class OAuthRequestOptions extends BaseRequestOptions {
+export class AuthRequestOptions extends BaseRequestOptions {
     constructor () {
         super();
 

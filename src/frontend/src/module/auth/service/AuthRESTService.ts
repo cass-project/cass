@@ -13,18 +13,15 @@ export class AuthRESTService extends AbstractRESTService
         super(http, messages);
     }
 
-    signIn(request: SignInRequest)
-    {
+    signIn(request: SignInRequest) {
         return this.handle(this.http.post("/backend/api/auth/sign-in", JSON.stringify(request)));
     }
 
-    signOut()
-    {
+    signOut() {
         return this.handle(this.http.get("/backend/api/auth/sign-out"));
     }
 
-    signUp(request: SignUpRequest)
-    {
+    signUp(request: SignUpRequest) {
         return this.handle(this.http.put("/backend/api/auth/sign-up", JSON.stringify(request)));
     }
 }

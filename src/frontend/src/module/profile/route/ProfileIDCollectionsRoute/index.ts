@@ -1,9 +1,8 @@
 import {Component} from "angular2/core";
-import {RouteConfig, RouterOutlet, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteParams} from "angular2/router";
-import {MessageBusService} from "../../../message/service/MessageBusService/index";
-import {AuthService} from "../../../auth/service/AuthService";
-import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
+import {RouteParams} from "angular2/router";
 
+import {MessageBusService} from "../../../message/service/MessageBusService/index";
+import {CurrentProfileService} from "../../service/CurrentProfileService";
 
 @Component({
     template: require('./template.html'),
@@ -13,10 +12,11 @@ import {MessageBusNotificationsLevel} from "../../../message/component/MessageBu
 })
 export class ProfileIDCollectionsRoute
 {
-    constructor(private messageBus: MessageBusService, params: RouteParams){
-        this.sid = params.get('sid');
-        console.log(this.sid);
+    constructor(
+        private messageBus: MessageBusService,
+        private current: CurrentProfileService,
+        params: RouteParams
+    ) {
+        this.current.loadProfileById(parseInt(params.get('id'), 10));
     }
-
-    sid: string;
 }

@@ -6,7 +6,7 @@ import {LoadingLinearIndicator} from "../../../form/component/LoadingLinearIndic
 
 @Component({
     selector: 'cass-auth-sign-out',
-    template: require('./template.html'),
+    template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],

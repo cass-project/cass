@@ -11,6 +11,12 @@ return function (Application $app) {
         'profile-get-by-id'
     );
 
+    $app->get(
+        '/profile/{command:by-sid}/{profileId}/get[/]',
+        ProfileMiddleware::class,
+        'profile-get-by-id'
+    );
+
     $app->put(
         '/protected/profile/{command:create}[/]',
         ProfileMiddleware::class,

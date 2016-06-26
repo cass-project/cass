@@ -2,9 +2,11 @@ import {Component} from "angular2/core";
 import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig, Location, Router} from 'angular2/router';
 
 @Component({
-    directives: [ROUTER_DIRECTIVES],
+    directives: [
+        ROUTER_DIRECTIVES,
+    ],
     selector: 'cass-auth-oauth2',
-    template: require('./template.html'),
+    template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
