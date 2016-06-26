@@ -2,12 +2,12 @@
   delete:
     tags:
       - feedback
-    description: удалить feedback
+    description: Удалить фидбэк
     parameters:
       - name: feedbackId
         in: path
         required: true
-        description: id feedback
+        description: ID фидбека
         type: numeric
     responses:
       200:

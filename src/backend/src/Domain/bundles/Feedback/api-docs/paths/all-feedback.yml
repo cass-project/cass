@@ -2,7 +2,7 @@
   get:
     tags:
       - feedback
-    description: список всех фидбаков от пользователя
+    description: Список всех фидбаков от пользователя
     security:
       - x_api_key: []
     parameters:

@@ -6,7 +6,7 @@ Feedback_Request_CreateFeedbackResponse:
   properties:
     feedback_id:
       type: number
-      description: type feedback
+      description: Тип фидбека
     description:
       type: string
-      description: описание
+      description: Описание

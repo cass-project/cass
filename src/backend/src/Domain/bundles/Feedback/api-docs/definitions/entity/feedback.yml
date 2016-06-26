@@ -14,13 +14,13 @@ Feedback_Entity_Feedback:
       description: ID профиля
     created_at:
       type: string
-      description: дата создания
+      description: Дата создания
     type_feedback:
       type: number
       description: Тип фидбека
     description:
       type: string
-      description: текст описание фидбека
+      description: Текст описание фидбека
     responses:
       type: array
       items:

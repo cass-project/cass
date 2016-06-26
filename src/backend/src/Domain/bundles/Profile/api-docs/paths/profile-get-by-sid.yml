@@ -1,0 +1,33 @@
+'/profile/by-sid/{sid}/get':
+  get:
+    tags:
+      - profile
+    description: Возвращает данные указанного профиля по Profile SID
+    parameters:
+      - name: sid
+        type: string
+        in: path
+        required: true
+        description: SID профиля
+    responses:
+      200:
+        schema:
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              default: true
+            entity:
+              $ref: '#/definitions/Profile_Entity_ProfileExtended'
+          required:
+            - success
+            - entity
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        description: Profile not found
+        schema:
+          $ref: '#/responses/NotFound'

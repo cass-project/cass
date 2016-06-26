@@ -12,7 +12,7 @@ Feedback_Entity_FeedbackResponse:
       description: Дата создания
     description:
       type: string
-      description: текст ответа
+      description: Текст ответа
   required:
     - id
     - feedback_id

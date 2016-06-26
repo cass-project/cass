@@ -2,7 +2,7 @@
   get:
     tags:
       - feedback
-    description: получить ответы на фидбак
+    description: Получить ответы на фидбэк
     parameters:
       - name: feedbackId
         in: path

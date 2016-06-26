@@ -2,7 +2,7 @@
   get:
     tags:
       - feedback
-    description: получить ответы на фидбак
+    description: Получить ответы на фидбак
     responses:
       200:
         schema:

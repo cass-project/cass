@@ -2,12 +2,11 @@
   put:
     tags:
       - feedback
-    description: создать новый фидбек
+    description: Создать новый фидбек
     parameters:
       - name: body
         in: body
         required: true
-        description:
         schema:
           $ref: '#/definitions/Feedback_Request_CreateFeedback'
     responses:

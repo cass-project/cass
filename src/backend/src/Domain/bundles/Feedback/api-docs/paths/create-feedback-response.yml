@@ -2,12 +2,11 @@
   put:
     tags:
       - feedback
-    description: создать новый ответ на feedback
+    description: Создать новый ответ на feedback
     parameters:
       - name: body
         in: body
         required: true
-        description:
         schema:
           $ref: '#/definitions/Feedback_Request_CreateFeedbackResponse'
     responses:

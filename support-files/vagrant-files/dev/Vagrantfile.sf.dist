@@ -11,6 +11,8 @@ Vagrant.configure(2) do |config|
     dev.vm.box = "ubuntu/trusty64"
 
     dev.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+    dev.ssh.username = "root"
+
     dev.vm.provision :shell, inline: "sudo usermod -a -G www-data vagrant"
     dev.vm.provision :shell, path: "./support-files/vagrant/env/dev/provision.sh"
 
@@ -33,6 +35,7 @@ Vagrant.configure(2) do |config|
     stage.vm.box = "ubuntu/trusty64"
 
     stage.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+    stage.ssh.username = "root"
 
     stage.vm.provision :shell, inline: "sudo usermod -a -G www-data vagrant"
     stage.vm.provision :shell, path: "./support-files/vagrant/stage/dev/provision.sh"

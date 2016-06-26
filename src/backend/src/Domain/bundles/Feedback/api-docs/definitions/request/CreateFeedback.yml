@@ -9,7 +9,7 @@ Feedback_Request_CreateFeedback:
       description: ID профиля
     type_feedback:
       type: number
-      description: type feedback
+      description: Тип фидбэка
     description:
       type: string
-      description: описание
+      description: Описание

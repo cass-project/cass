@@ -31,6 +31,12 @@ abstract class ProfileMiddlewareTestCase extends MiddlewareTestCase
         return $this->request('GET', sprintf('/profile/%d/get', $profileId));
     }
 
+    protected function requestGetProfileBySID(string $profileSID): RESTRequest
+    {
+        return $this->request('GET', sprintf('/profile/by-sid/%s/get', $profileSID));
+    }
+
+
     protected function requestDeleteProfile(int $profileId): RESTRequest
     {
         return $this->request('DELETE', sprintf('/protected/profile/%d/delete', $profileId));
