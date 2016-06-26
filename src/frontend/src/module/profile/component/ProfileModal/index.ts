@@ -9,9 +9,8 @@ import {ImageTab} from "./Tab/Image/index";
 import {ProfileComponentService} from "../../service";
 import {ProfileRESTService} from "../../service/ProfileRESTService";
 import {ProfileService} from "../../service/ProfileService";
-import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
 import {ThemeService} from "../../../theme/service/ThemeService";
-
+import {AuthService} from "../../../auth/service/AuthService";
 
 enum ProfileModalTab
 {
@@ -49,14 +48,22 @@ export class ProfileModal
 {
     tabs: TabControls = new TabControls();
 
-    constructor(public model: ProfileModalModel, private modals: ProfileComponentService){}
-
-
+    constructor(
+        public model: ProfileModalModel, 
+        private modals: ProfileComponentService,
+        private authService: AuthService
+    ) {}
+    
     close() {
         this.modals.modals.settings.close();
     }
-}
 
+    signOut() {
+        this.authService.signOut().subscribe(() => {
+            this.close();
+        });
+    }
+}
 
 class TabControls
 {

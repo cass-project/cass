@@ -7,8 +7,7 @@ Vagrant.configure(2) do |config|
 
     dev.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
-    dev.vm.provision :shell, :inline "sudo addgroup www-data"
-    dev.vm.provision :shell, :inline "sudo usermod -a -G www-data vagrant"
+    dev.vm.provision :shell, inline: "sudo usermod -a -G www-data vagrant"
     dev.vm.provision :shell, path: "./support-files/vagrant/env/dev/provision.sh"
 
     dev.vm.synced_folder "./", "/opt/cass", type: "smb", owner: "www-data", group: "www-data"
@@ -31,9 +30,8 @@ Vagrant.configure(2) do |config|
 
     stage.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
-    stage.vm.provision :shell, :inline "sudo addgroup www-data"
-    stage.vm.provision :shell, :inline "sudo usermod -a -G www-data vagrant"
-    stage.vm.provision :shell, path: "./support-files/vagrant/stage/dev/provision.sh"
+    stage.vm.provision :shell, inline: "sudo usermod -a -G www-data vagrant"
+    stage.vm.provision :shell, path: "./support-files/vagrant/env/stage/provision.sh"
 
     stage.vm.synced_folder "./", "/opt/cass", type: "smb", owner: "www-data", group: "www-data"
     stage.vm.synced_folder "./support-files", "/support-files", type: "smb"

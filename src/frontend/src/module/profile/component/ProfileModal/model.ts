@@ -24,10 +24,6 @@ export class ProfileModalModel
     loading: boolean = false;
     ApiKey;
 
-    signOut(){
-        this.authRESTService.signOut();
-    }
-
     reset(){
         this.profileService.accountCondReset(this.changePasswordStn);
         this.profileService.personalCondReset(this.profile);

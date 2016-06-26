@@ -4,6 +4,7 @@ import {Account} from './../../account/definitions/entity/Account';
 import {FrontlineService} from "../../frontline/service";
 import {SignInRequest, SignInResponse200} from "../definitions/paths/sign-in";
 import {AuthRESTService} from "./AuthRESTService";
+import {SignOutResponse200} from "../definitions/paths/sign-out";
 
 @Injectable()
 export class AuthService
@@ -34,6 +35,10 @@ export class AuthService
         return AuthService.token;
     }
 
+    public getAuthToken() {
+        return AuthService.getAuthToken();
+    }
+
     public signIn(request: SignInRequest) {
         let signInObservable = this.api.signIn(request);
 
@@ -47,8 +52,17 @@ export class AuthService
         return signInObservable;
     }
 
-    public getAuthToken() {
-        return AuthService.getAuthToken();
+    public signOut() {
+        let request = this.api.signOut();
+    
+        request.subscribe(
+            () => {
+                AuthService.getAuthToken().clearAPIKey();
+                delete AuthService['token'];
+            }
+        );
+        
+        return request;
     }
 }
 
