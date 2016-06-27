@@ -10,4 +10,11 @@ return function (Application $app) {
         FeedMiddleware::class,
         'feed-collection'
     );
+
+
+    $app->get(
+        '/feed/community/{id}/{command:dashboard}[/]',
+        FeedMiddleware::class,
+        'community-dashboard'
+    );
 };
