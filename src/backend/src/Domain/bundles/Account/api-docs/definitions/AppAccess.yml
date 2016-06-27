@@ -1,0 +1,26 @@
+Account_Entity_AppAccess:
+  type: object
+  required:
+    - apps
+    - account
+  properties:
+    apps:
+      type: object
+      required:
+        - admin
+        - feedback
+        - reports
+      properties:
+        admin:
+          type: boolean
+          description: Доступ к CASS.Admin
+        feedback:
+          type: boolean
+          description: Доступ к CASS.Feedback
+        reports:
+          type: boolean
+          description: Доступ к CASS.Reports
+    account:
+      type: object
+      schema:
+        $ref: '#/definitions/Account_Entity_Account'

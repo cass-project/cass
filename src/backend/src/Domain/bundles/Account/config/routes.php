@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Post;
 
+use Domain\Account\Middleware\AccountAppAccessMiddleware;
 use Domain\Account\Middleware\AccountMiddleware;
 use Zend\Expressive\Application;
 
@@ -33,5 +34,11 @@ return function (Application $app) {
         '/protected/account/{command:current}',
         AccountMiddleware::class,
         'account-get-current'
+    );
+
+    $app->get(
+        '/protected/account/app-access',
+        AccountAppAccessMiddleware::class,
+        'account-app-access-get'
     );
 };

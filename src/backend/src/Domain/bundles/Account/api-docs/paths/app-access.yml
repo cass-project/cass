@@ -1,0 +1,23 @@
+"/protected/account/app-access":
+  get:
+    tags:
+      - account
+    description:
+      Возвращает параметры доступа аккаунта к сервисным приложениям. Да, это наши админки, можете ломать.
+    security:
+      - x_api_key: []
+    responses:
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      200:
+        schema:
+          required:
+            - success
+            - access
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            access:
+              $ref: '#/definitions/Account_Entity_AppAccess'

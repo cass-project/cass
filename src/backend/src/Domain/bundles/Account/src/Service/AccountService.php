@@ -17,7 +17,7 @@ use Domain\Profile\Service\ProfileService;
 use Evenement\EventEmitter;
 use Evenement\EventEmitterInterface;
 
-class AccountService
+final class AccountService
 {
     const EVENT_ACCOUNT_CREATED = 'domain.account.created';
 

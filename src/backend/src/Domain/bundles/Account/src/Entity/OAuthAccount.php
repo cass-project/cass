@@ -15,6 +15,7 @@ class OAuthAccount implements IdEntity
     /**
      * @ManyToOne(targetEntity="Domain\Account\Entity\Account",cascade={"persist"})
      * @JoinColumn(name="account_id", referencedColumnName="id")
+     * @var Account
      */
     private $account;
 
