@@ -13,7 +13,9 @@ final class GetBySIDCommand extends Command
         try {
             $responseBuilder
                 ->setJson([
-                    'entity' => $this->profileService->getProfileBySID($request->getAttribute('sid'))
+                    'entity' => $this->profileExtendedFormatter->format(
+                        $this->profileService->getProfileBySID($request->getAttribute('sid'))
+                    )
                 ])
                 ->setStatusSuccess();
         }catch(ProfileNotFoundException $e) {

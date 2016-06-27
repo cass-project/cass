@@ -48,7 +48,7 @@ class ProfileRepository extends EntityRepository
 
     public function getProfileBySID(string $profileSID): Profile
     {
-        $result = $this->findBy([
+        $result = $this->findOneBy([
             'sid' => $profileSID
         ]);
 

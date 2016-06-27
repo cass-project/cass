@@ -3,15 +3,26 @@ Feedback_Entity_Feedback:
   required:
     - id
     - created_at
+    - profile
     - type_feedback
     - description
   properties:
     id:
       type: number
       description: ID
-    profile_id:
-      type: number
-      description: ID профиля
+    profile:
+      type: object
+      description: Информация об авторе фидбэка
+      schema:
+        required:
+          - has
+          - entity
+        properties:
+          has:
+            type: boolean
+            description: Если FALSE, то фидбэк анонимный
+          entity:
+            $ref: '#/definitions/Profile_Entity_Profile'
     created_at:
       type: string
       description: Дата создания

@@ -24,7 +24,7 @@ return [
         'config.version.current' => factory(function(Container $container) {
             return $container->get('composer.json')['version'];
         }),
-        'config.storage' => sprintf('%s/../../../../www/app/public/storage', __DIR__),
+        'config.storage' => sprintf('%s/../../../../www/app/dist/storage', __DIR__),
         'config.paths.assets.dir' => sprintf('%s/../../../../www/app/dist/assets', __DIR__),
         'config.paths.assets.www' => '/dist/assets',
         ImageManager::class => factory(function(Container $container) {

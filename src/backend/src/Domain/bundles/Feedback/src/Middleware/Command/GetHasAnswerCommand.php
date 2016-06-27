@@ -16,7 +16,7 @@ class GetHasAnswerCommand extends Command
 
             $feedbackResponses = $this->feedbackService->getFeedbackResponse($feedbackId);
 
-            return $responseBuilder
+            $responseBuilder
                 ->setStatusSuccess()
                 ->setJson([
                     'entities' => array_map(function(FeedbackResponse $feedbackResponse) {
@@ -24,7 +24,7 @@ class GetHasAnswerCommand extends Command
                     }, $feedbackResponses)
                 ]);
         } catch(FeedbackNotFoundException $e) {
-            return $responseBuilder
+            $responseBuilder
                 ->setStatusNotFound()
                 ->setError($e->getMessage());
         }

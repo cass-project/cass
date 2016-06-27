@@ -16,19 +16,13 @@ class GetAllCommand extends Command
             $offset = $request->getAttribute('offset');
             $profileId = $this->currentAccountService->getCurrentProfile()->getId();
 
-            $feedbacks = $this->feedbackService->getAllFeedbacks($profileId, $limit, $offset);
-
-            if(count($feedbacks) === 0) {
-                return $responseBuilder
-                    ->setStatusNotFound()
-                    ->build();
-            }
-
+            $feedbackEntities = $this->feedbackService->getAllFeedbackEntities($profileId, $limit, $offset);
+            
             return $responseBuilder
                 ->setStatusSuccess()
                 ->setJson(['entities' => array_map(function(Feedback $feedback) {
                     return $feedback->toJSON();
-                }, $feedbacks)]);
+                }, $feedbackEntities)]);
         } catch(ProfileNotFoundException $e) {
             $responseBuilder
                 ->setStatusNotFound()

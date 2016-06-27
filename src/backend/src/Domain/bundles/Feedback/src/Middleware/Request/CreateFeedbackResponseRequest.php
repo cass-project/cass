@@ -10,15 +10,11 @@ class CreateFeedbackResponseRequest extends SchemaParams
 {
     public function getParameters()
     {
-        if($this->getRequest()->getParsedBody()) {
-            $data = (array)($this->getRequest()->getParsedBody());
-        } else {
-            $data = json_decode($this->getRequest()->getBody(), TRUE);
-        }
+        $data = $this->getData();
 
         return new CreateFeedbackResponseParameters(
-            $data['description'],
-            $data['feedback_id']
+            $data->description,
+            $data->feedback_id
         );
     }
 

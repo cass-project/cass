@@ -12,12 +12,16 @@
     responses:
       200:
         schema:
+          required:
+            - success
+            - entity
           properties:
             success:
               type: boolean
               default: true
             entity:
               $ref: '#/definitions/Feedback_Entity_Feedback'
-          required:
-            - success
-            - entity
+      404:
+        description: Профиль не найден
+        schema:
+          $ref: '#/definitions/NotFound'

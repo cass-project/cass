@@ -25,17 +25,16 @@ class DemoFeedbackFixture implements Fixture
     public function up(Application $app, EntityManager $em)
     {
         $feedbacks = [
-            (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 1")->setType(1),
-            (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 2")->setType(2),
-            (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 3")->setType(3)
+            (new Feedback())->setDescription("string 1")->setType(1),
+            (new Feedback())->setDescription("string 2")->setType(2),
+            (new Feedback())->setDescription("string 3")->setType(3)
                 ->setProfile(DemoAccountFixture::getAccount()->getProfiles()->first()),
-            (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 4")->setType(3)
+            (new Feedback())->setDescription("string 4")->setType(3)
                 ->setProfile(DemoAccountFixture::getAccount()->getProfiles()->first()),
-            (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 5")->setType(3)
+            (new Feedback())->setDescription("string 5")->setType(3)
                 ->setProfile(DemoAccountFixture::getAccount()->getProfiles()->first()),
-            (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 6")->setType(3)
+            (new Feedback())->setDescription("string 6")->setType(3)
                 ->setProfile(DemoAccountFixture::getAccount()->getProfiles()->first()),
-
         ];
 
         foreach($feedbacks as $feedback) {

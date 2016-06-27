@@ -12,9 +12,9 @@ return function (Application $app) {
     );
 
     $app->get(
-        '/profile/{command:by-sid}/{profileId}/get[/]',
+        '/profile/{command:by-sid}/{sid}/get[/]',
         ProfileMiddleware::class,
-        'profile-get-by-id'
+        'profile-get-by-sid'
     );
 
     $app->put(

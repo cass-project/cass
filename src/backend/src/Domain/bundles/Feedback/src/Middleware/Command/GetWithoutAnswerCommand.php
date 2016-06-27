@@ -10,14 +10,14 @@ class GetWithoutAnswerCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $feedbacks = $this->feedbackService->getFeedbacksWithoutResponses();
+        $feedbackEntities = $this->feedbackService->getFeedbackEntitiesWithoutResponses();
 
         return $responseBuilder
             ->setStatusSuccess()
             ->setJson([
                 'entities' => array_map(function(Feedback $feedback) {
                     return $feedback->toJSON();
-                }, $feedbacks)
+                }, $feedbackEntities)
             ])
             ->build();
     }

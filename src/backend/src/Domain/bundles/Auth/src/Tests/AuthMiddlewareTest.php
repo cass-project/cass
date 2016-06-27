@@ -38,11 +38,21 @@ class AuthMiddlewareTest extends MiddlewareTestCase
                     ]
                 ],
                 'profiles' => [
-                    [
-                        'id' => $this->expectId(),
-                        'account_id' => $this->expectId(),
-                        'is_initialized' => false,
-                        'is_current' => true,
+                    0 => [
+                        'profile' => [
+                            'id' => $this->expectId(),
+                            'account_id' => $this->expectId(),
+                            'is_initialized' => false,
+                            'is_current' => true,
+                        ],
+                        'collections' => [
+                            0 => [
+                                'id' => $this->expectId(),
+                                'sid' => $this->expectString(),
+                                'title' => '$gt_collection_my-feed_title',
+                                'description' => '$gt_collection_my-feed_description',
+                            ]
+                        ]
                     ]
                 ]
             ])
@@ -97,11 +107,21 @@ class AuthMiddlewareTest extends MiddlewareTestCase
                     ]
                 ],
                 'profiles' => [
-                    [
-                        'id' => $profile->getId(),
-                        'account_id' => $account->getId(),
-                        'is_initialized' => false,
-                        'is_current' => true,
+                    0 => [
+                        'profile' => [
+                            'id' => $profile->getId(),
+                            'account_id' => $account->getId(),
+                            'is_initialized' => false,
+                            'is_current' => true,
+                        ],
+                        'collections' => [
+                            0 => [
+                                'id' => $this->expectId(),
+                                'sid' => $this->expectString(),
+                                'title' => '$gt_collection_my-feed_title',
+                                'description' => '$gt_collection_my-feed_description',
+                            ]
+                        ]
                     ]
                 ]
             ])

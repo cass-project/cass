@@ -1,5 +1,4 @@
 <?php
-
 namespace Domain\Feedback\Middleware;
 
 use Application\REST\Response\GenericResponseBuilder;
@@ -17,7 +16,6 @@ use Zend\Stratigility\MiddlewareInterface;
 
 class FeedbackMiddleware implements MiddlewareInterface
 {
-
     /** @var CommandService $commandService */
     private $commandService;
 

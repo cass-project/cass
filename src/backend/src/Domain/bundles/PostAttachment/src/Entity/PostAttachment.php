@@ -3,6 +3,8 @@ namespace Domain\PostAttachment\Entity;
 
 use Application\Util\Entity\IdEntity\IdEntity;
 use Application\Util\Entity\IdEntity\IdTrait;
+use Application\Util\Entity\SIDEntity\SIDEntity;
+use Application\Util\Entity\SIDEntity\SIDEntityTrait;
 use Application\Util\JSONSerializable;
 use Domain\Post\Entity\Post;
 
@@ -10,9 +12,10 @@ use Domain\Post\Entity\Post;
  * @Entity(repositoryClass="Domain\PostAttachment\Repository\PostAttachmentRepository")
  * @Table(name="post_attachment")
  */
-class PostAttachment implements JSONSerializable, IdEntity
+class PostAttachment implements JSONSerializable, IdEntity, SIDEntity
 {
     use IdTrait;
+    use SIDEntityTrait;
 
     /**
      * @Column(type="datetime", name="date_created_on")
@@ -46,6 +49,7 @@ class PostAttachment implements JSONSerializable, IdEntity
     private $attachment = [];
 
     public function __construct(string $attachmentType) {
+        $this->regenerateSID();
         $this->attachmentType = $attachmentType;
         $this->dateCreatedOn = new \DateTime();
     }
@@ -53,6 +57,7 @@ class PostAttachment implements JSONSerializable, IdEntity
     public function toJSON(): array {
         return [
             'id' => $this->isPersisted() ? $this->getId() : '#NEW_POST_ATTACHMENT',
+            'sid' => $this->getSID(),
             'date_created_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),
             'is_attached_to_post' => $this->isAttachedToPost(),
             'post_id' => $this->isAttachedToPost() ? $this->getPost()->getId() : null,

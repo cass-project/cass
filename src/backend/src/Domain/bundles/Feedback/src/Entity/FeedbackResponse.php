@@ -45,9 +45,9 @@ class FeedbackResponse implements IdEntity, JSONSerializable
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTime $created_at): self
+    public function setCreatedAt(\DateTime $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->created_at = $createdAt;
         return $this;
     }
 

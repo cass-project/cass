@@ -13,22 +13,22 @@ use Domain\PostAttachment\Entity\PostAttachment\Link\GenericLinkAttachmentType;
 use Domain\PostAttachment\Exception\FileTooBigException;
 use Domain\PostAttachment\Exception\FileTooSmallException;
 use Domain\PostAttachment\Repository\PostAttachmentRepository;
+use League\Flysystem\FilesystemInterface;
 
 class PostAttachmentService
 {
-    /** @var string */
-    private $uploadDir;
+    /** @var FilesystemInterface */
+    private $fileSystem;
 
     /** @var PostAttachmentRepository */
     private $postAttachmentRepository;
 
-
     public function __construct(
-        string $storageDir,
-        string $uploadDir,
+        FilesystemInterface $fileSystem,
         PostAttachmentRepository $postAttachmentRepository
-    ) {
-        $this->uploadDir = $storageDir.'/'.$uploadDir;
+    )
+    {
+        $this->fileSystem = $fileSystem;
         $this->postAttachmentRepository = $postAttachmentRepository;
     }
 
@@ -60,26 +60,17 @@ class PostAttachmentService
 
         $postAttachmentEntity = $this->postAttachmentRepository->makePostAttachmentEntity($attachmentType->getCode());
 
-        $directory = $this->uploadDir;
         $subDirectory = $postAttachmentEntity->getId();
-        $resultDir = $directory.'/'.$subDirectory;
+        $storagePath = $subDirectory . '/' . $desiredFileName;
 
-        if(! file_exists($directory)) {
-            if(mkdir($resultDir) === false) {
-                throw new \Exception('Failed to create subdirectory');
-            }
-        }else if (!is_dir($directory)) {
-            throw new \Exception(sprintf('Path `%s` is not a directory', $directory));
-        }
-
-        if(copy($tmpFile, $resultDir.'/'.$desiredFileName) === false) {
+        if($this->fileSystem->write($storagePath, file_get_contents($tmpFile)) === false) {
             throw new \Exception('Failed to copy uploaded file');
         }
 
         $postAttachmentEntity->setAttachment([
             'file' => [
-                'public_path' => '/public/storage/post/attachment/'.$subDirectory.'/'.$desiredFileName,
-                'storage_path' => $resultDir.'/'.$desiredFileName
+                'public_path' => '/dist/storage/post/attachment/' . $subDirectory . '/' . $desiredFileName,
+                'storage_path' => $storagePath
             ]
         ]);
 
@@ -91,32 +82,36 @@ class PostAttachmentService
 
         return $postAttachmentEntity;
     }
-    
-    public function setAttachments(Post $post, array $attachmentIds) {
+
+    public function setAttachments(Post $post, array $attachmentIds)
+    {
         $this->postAttachmentRepository->assignAttachmentsToPost($post, $attachmentIds);
     }
 
-    private function factoryFileAttachmentType(string $tmpFile): AttachmentType {
+    private function factoryFileAttachmentType(string $tmpFile): AttachmentType
+    {
         if(ImageAttachmentType::detect($tmpFile)) {
             return new ImageAttachmentType();
-        }else if(WebmAttachmentType::detect($tmpFile)) {
+        } else if(WebmAttachmentType::detect($tmpFile)) {
             return new WebmAttachmentType();
-        }else{
+        } else {
             return new GenericFileAttachmentType();
         }
     }
 
-    private function factoryLinkAttachmentType(string $url, array $metadata): AttachmentType {
+    private function factoryLinkAttachmentType(string $url, array $metadata): AttachmentType
+    {
         // TODO:: validate link
         return new GenericLinkAttachmentType();
     }
 
-    private function validateFileSize(string $tmpFile, FileAttachmentType $attachmentType) {
+    private function validateFileSize(string $tmpFile, FileAttachmentType $attachmentType)
+    {
         $fileSize = filesize($tmpFile);
 
         if($fileSize > $attachmentType->getMaxFileSizeBytes()) {
             throw new FileTooBigException(sprintf('File should be less than %d bytes', $attachmentType->getMaxFileSizeBytes()));
-        }else if ($fileSize < $attachmentType->getMinFileSizeBytes()){
+        } else if($fileSize < $attachmentType->getMinFileSizeBytes()) {
             throw new FileTooSmallException(sprintf('File should be more than %d bytes', $attachmentType->getMinFileSizeBytes()));
         }
     }
