@@ -11,8 +11,7 @@ class DeleteCommand extends Command
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
-            $feedbackId = $request->getAttribute('feedbackId');
-            $this->feedbackService->deleteFeedback($feedbackId);
+            $this->feedbackService->deleteFeedback($request->getAttribute('feedbackId'));
 
             $responseBuilder
                 ->setStatusSuccess();

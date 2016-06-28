@@ -15,7 +15,7 @@ Auth_Response_SignInResponse:
       profiles:
         type: array
         items:
-          $ref: "#/definitions/Profile_Entity_Profile"
+          $ref: "#/definitions/Profile_Entity_ProfileExtended"
       success:
         type: boolean
         default: true

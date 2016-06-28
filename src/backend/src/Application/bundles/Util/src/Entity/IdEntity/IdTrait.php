@@ -20,4 +20,11 @@ trait IdTrait
     {
         return $this->id;
     }
+
+    public final function getIdNoFall(): string
+    {
+        return $this->id === null
+            ? '#NEW_ENTITY'
+            : (string) $this->id;
+    }
 }

@@ -24,15 +24,15 @@ class UploadCommand extends Command
                 throw new FileNotUploadedException('Failed to upload file');
             }
 
-            $imageMaxFilesize = (new ImageAttachmentType())->getMaxFileSizeBytes();
-            $imageMinFilesize = (new ImageAttachmentType())->getMinFileSizeBytes();
+            $imageMaxFileSize = (new ImageAttachmentType())->getMaxFileSizeBytes();
+            $imageMinFileSize = (new ImageAttachmentType())->getMinFileSizeBytes();
 
-            if($file->getSize() > $imageMaxFilesize){
-                throw new FileTooBigException(sprintf("filesize to big %d > %",$file->getSize(),$imageMaxFilesize));
+            if($file->getSize() > $imageMaxFileSize){
+                throw new FileTooBigException(sprintf("filesize to big %d > %",$file->getSize(),$imageMaxFileSize));
             }
 
-            if($file->getSize() < $imageMinFilesize){
-                throw new FileTooSmallException(sprintf("filesize to small %d > %",$file->getSize(),$imageMinFilesize));
+            if($file->getSize() < $imageMinFileSize){
+                throw new FileTooSmallException(sprintf("filesize to small %d > %",$file->getSize(),$imageMinFileSize));
             }
 
             $imageFileName = sprintf('%s.png', GenerateRandomString::gen(12));

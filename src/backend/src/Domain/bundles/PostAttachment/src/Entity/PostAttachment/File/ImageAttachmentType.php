@@ -5,39 +5,40 @@ use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\PostAttachment\Entity\PostAttachment\FileAttachmentType;
 use Domain\PostAttachment\Service\AttachmentTypeDetector;
 use Domain\PostAttachment\Service\AttachmentTypeExtension;
+use League\Flysystem\FilesystemInterface;
 
 class ImageAttachmentType implements FileAttachmentType, AttachmentTypeDetector, AttachmentTypeExtension
 {
-    const MAX_FILE_SIZE_BYTES = 1024 * 1024 * 32 /* mb */;
+    const MAX_FILE_SIZE_BYTES = 1024 * 1024 * 32; /* mb */
 
-    public function getCode() {
+
+    public function setFileSystem(FilesystemInterface $fileSystem)
+    {
+        $this->fileSystem = $fileSystem;
+    }
+
+    public function getCode()
+    {
         return 'image';
     }
 
-    public function getMinFileSizeBytes() {
+    public function getMinFileSizeBytes()
+    {
         return 1;
     }
 
-    public function getMaxFileSizeBytes() {
+    public function getMaxFileSizeBytes()
+    {
         return self::MAX_FILE_SIZE_BYTES;
     }
 
-    public function extend(PostAttachment $postAttachment): array {
-        $file = $postAttachment->getAttachment()['file']['storage_path'];
-        
-        list($width, $height) = getimagesize($file);
-
-        return [
-            'image' => [
-                'size' => [
-                    'width' => $width,
-                    'height' => $height
-                ]
-            ]
-        ];
+    public function extend(PostAttachment $postAttachment): array
+    {
+        return [];
     }
 
-    public static function detect(string $tmpFile) {
+    public static function detect(string $tmpFile)
+    {
         $image = getimagesize($tmpFile);
 
         return $image !== false;

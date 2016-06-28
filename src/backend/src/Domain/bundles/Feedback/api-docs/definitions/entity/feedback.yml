@@ -3,26 +3,60 @@ Feedback_Entity_Feedback:
   required:
     - id
     - created_at
+    - profile
     - type_feedback
     - description
+    - answer
+    - read
+    - email
   properties:
     id:
       type: number
       description: ID
-    profile_id:
-      type: number
-      description: ID профиля
+    profile:
+      type: object
+      description: Информация об авторе отзыва (опционально)
+      schema:
+        required:
+          - has
+        properties:
+          has:
+            type: boolean
+            description: Если FALSE, то отзыв анонимный
+          entity:
+            $ref: '#/definitions/Profile_Entity_Profile'
     created_at:
       type: string
       description: Дата создания
     type_feedback:
       type: number
-      description: Тип фидбека
+      description: Тип отзыва
     description:
       type: string
-      description: Текст описание фидбека
-    responses:
-      type: array
-      items:
-        schema:
-          $ref: '#/definitions/Feedback_Entity_Feedback'
+      description: Текст описание отзыва
+    read:
+      type: boolean
+      description: Ответ на отзыв прочтен
+    email:
+      type: object
+      description: E-mail (опционально)
+      required:
+       - has
+      properties:
+        has:
+          type: boolean
+          description: Если TRUE, то email указан
+        mail:
+          type: string
+          description: Указанный email (при значении true)
+    answer:
+      type: object
+      description: Ответ на отзыв (опционально)
+      required:
+       - has
+      properties:
+        has:
+          type: boolean
+          description: Если TRUE, то на отзыв дан ответ
+        entity:
+          $ref: '#/definitions/Feedback_Entity_FeedbackResponse'

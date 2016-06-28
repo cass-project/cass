@@ -1,12 +1,13 @@
 <?php
-namespace Domain\Account\Tests;
+namespace Domain\Account\Tests\REST\Paths;
 
+use Domain\Account\Tests\AccountMiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 
 /**
  * @backupGlobals disabled
  */
-class ChangePasswordMiddlewareTest extends AccountMiddlewareTestCase
+final class DeleteAccountMiddlewareTest extends AccountMiddlewareTestCase
 {
     protected function getFixtures(): array
     {
@@ -15,44 +16,33 @@ class ChangePasswordMiddlewareTest extends AccountMiddlewareTestCase
         ];
     }
 
-    public function testChangePassword403()
+    public function testDeleteRequest403()
     {
-        $json = [
-            'old_password' => DemoAccountFixture::ACCOUNT_PASSWORD,
-            'new_password' => 'foobar'
-        ];
-
-        $this->requestChangePassword($json)
+        $this->requestDeleteRequest()
             ->execute()
             ->expectAuthError();
     }
 
-    public function testChangePassword200()
+    public function testDeleteRequest200()
     {
-        $json = [
-            'old_password' => DemoAccountFixture::ACCOUNT_PASSWORD,
-            'new_password' => 'foobar'
-        ];
-
-        $this->requestChangePassword($json)
+        $this->requestDeleteRequest()
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'apiKey' => $this->expectString()
+                'date_account_delete_request' => $this->expectString()
             ]);
     }
 
-    public function testChangePassword409()
+    public function testDeleteRequest409()
     {
-        $json = [
-            'old_password' => 'bar-and-foo',
-            'new_password' => 'foobar'
-        ];
+        $this->requestDeleteRequest()
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute();
 
-        $this->requestChangePassword($json)
+        $this->requestDeleteRequest()
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(409)

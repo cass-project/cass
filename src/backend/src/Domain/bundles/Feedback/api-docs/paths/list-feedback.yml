@@ -1,8 +1,8 @@
-'/protected/feedback/all/offset/{offset}/limit/{limit}':
+'/protected/feedback/list/offset/{offset}/limit/{limit}':
   get:
     tags:
       - feedback
-    description: Список всех фидбаков от пользователя
+    description: Список всех отзывов от пользователя
     security:
       - x_api_key: []
     parameters:
@@ -16,6 +16,14 @@
         in: path
         required: true
         description: limit
+      - name: read
+        type: boolean
+        in: query
+        description: Если установлен, то получить только прочитанные/непрочитанные отзывы
+      - name: answer
+        type: boolean
+        in: query
+        description: Если установлен, то получить только отзывы, на которые дан ответ
     responses:
       200:
         schema:

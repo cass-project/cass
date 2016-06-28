@@ -5,4 +5,5 @@ interface IdEntity
 {
     public function isPersisted(): bool;
     public function getId(): int;
+    public function getIdNoFall(): string;
 }

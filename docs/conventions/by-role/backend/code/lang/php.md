@@ -34,6 +34,12 @@ Null coalesce operator
 - Используйте Null Coalesce Operator: `$arr['foo'] ?? null`
 - [http://php.net/manual/ru/migration70.new-features.php#migration70.new-features.null-coalesce-op](http://php.net/manual/ru/migration70.new-features.php#migration70.new-features.null-coalesce-op)
 - [http://www.lornajane.net/posts/2015/new-in-php-7-null-coalesce-operator](http://www.lornajane.net/posts/2015/new-in-php-7-null-coalesce-operator)
+
+Аккуратность
+------------
+
+- Не допускайте появления "желтого" кода, т.е. кода, подсвеченного желтым цветом в PhpStorm. В идеале, инструмент `Code > Inspect Code` не должен выявлять проблем в вашем коде.
+- Не расставляйте лишние пробелы, переводы строк, держите код в прибранном и аккуратном виде.
     
 Doctrine2
 ---------

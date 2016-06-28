@@ -1,5 +1,4 @@
 <?php
-
 namespace Domain\Feedback\Middleware\Request;
 
 use Application\REST\Request\Params\SchemaParams;
@@ -11,16 +10,13 @@ class CreateFeedbackRequest extends SchemaParams
 {
     public function getParameters()
     {
-        if($this->getRequest()->getParsedBody()) {
-            $data = (array)($this->getRequest()->getParsedBody());
-        } else {
-            $data = json_decode($this->getRequest()->getBody(), true);
-        }
+        $data = $this->getData();
 
         return new CreateFeedbackParameters(
-            $data['type_feedback'],
-            $data['description'],
-            $data['profile_id']
+            $data->type_feedback,
+            $data->description,
+            $data->profile_id ?? null,
+            $data->email ?? null
         );
     }
 

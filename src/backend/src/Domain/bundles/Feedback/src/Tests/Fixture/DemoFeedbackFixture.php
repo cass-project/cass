@@ -6,6 +6,7 @@ use Application\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Feedback\Entity\Feedback;
+use Domain\Feedback\FeedbackType\Types\FTCommonQuestion;
 use Zend\Expressive\Application;
 
 class DemoFeedbackFixture implements Fixture
@@ -24,25 +25,20 @@ class DemoFeedbackFixture implements Fixture
 
     public function up(Application $app, EntityManager $em)
     {
-        $feedbacks = [
-            (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 1")->setType(1),
-            (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 2")->setType(2),
-            (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 3")->setType(3)
-                ->setProfile(DemoAccountFixture::getAccount()->getProfiles()->first()),
-            (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 4")->setType(3)
-                ->setProfile(DemoAccountFixture::getAccount()->getProfiles()->first()),
-            (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 5")->setType(3)
-                ->setProfile(DemoAccountFixture::getAccount()->getProfiles()->first()),
-            (new Feedback())->setCreatedAt(new \DateTime())->setDescription("string 6")->setType(3)
-                ->setProfile(DemoAccountFixture::getAccount()->getProfiles()->first()),
+        $profile = DemoAccountFixture::getAccount()->getProfiles()->first();
 
-        ];
+        $feedbackEntities = [];
+        $feedbackEntities[] = (new Feedback(new FTCommonQuestion(), 'Demo Feedback 1'));
+        $feedbackEntities[] = (new Feedback(new FTCommonQuestion(), 'Demo Feedback 2'));
+        $feedbackEntities[] = (new Feedback(new FTCommonQuestion(), 'Demo Feedback 3', $profile));
+        $feedbackEntities[] = (new Feedback(new FTCommonQuestion(), 'Demo Feedback 4', $profile));
+        $feedbackEntities[] = (new Feedback(new FTCommonQuestion(), 'Demo Feedback 5', $profile));
 
-        foreach($feedbacks as $feedback) {
+        foreach($feedbackEntities as $feedback) {
             $em->persist($feedback);
+            $em->flush($feedback);
         }
-        $em->flush();
 
-        self::$fixtures = $feedbacks;
+        self::$fixtures = $feedbackEntities;
     }
 }

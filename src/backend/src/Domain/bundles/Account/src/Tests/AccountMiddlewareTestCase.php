@@ -24,4 +24,9 @@ abstract class AccountMiddlewareTestCase extends MiddlewareTestCase
         return $this->request('POST', '/protected/account/change-password')
             ->setParameters($json);
     }
+
+    protected function requestAppAccess(): RESTRequest
+    {
+        return $this->request('GET', '/protected/account/app-access');
+    }
 }
