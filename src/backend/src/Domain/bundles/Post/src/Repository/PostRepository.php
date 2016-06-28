@@ -78,6 +78,18 @@ class PostRepository extends EntityRepository
         return $this->findBy($qbCriteria, ['id' => 'desc'], $limit, $offset);
     }
 
+    public function getCommunityFeed(int $communityId, CriteriaRequest $criteriaRequest) {
+        $qbCriteria = [
+            'community' => $communityId
+        ];
+
+        list($limit, $offset) = $criteriaRequest->doWith(SeekCriteria::class, function(SeekCriteria $seekCriteria) {
+            return [$seekCriteria->getLimit(), $seekCriteria->getOffset()];
+        });
+
+        return $this->findBy($qbCriteria, ['id' => 'desc'], $limit, $offset);
+    }
+
     public function getFeedTotal(int $collectionId, CriteriaRequest $criteriaRequest): int {
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder()
@@ -85,6 +97,18 @@ class PostRepository extends EntityRepository
             ->from(Post::class, 'p')
             ->where('p.collection=:collectionId')
             ->setParameter('collectionId', $collectionId)
+        ;
+
+        return (int) $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+    }
+    
+    public function getCommunityFeedTotal(int $communityId, CriteriaRequest $criteriaRequest): int {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder()
+            ->select('count(p.id) as cnt')
+            ->from(Post::class, 'p')
+            ->where('p.community=:communityId')
+            ->setParameter('communityId', $communityId)
         ;
 
         return (int) $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);

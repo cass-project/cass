@@ -13,8 +13,8 @@ return function (Application $app) {
 
 
     $app->get(
-        '/feed/community/{id}/{command:dashboard}[/]',
+        '/feed/{source:community}/{id}/dashboard[/]',
         FeedMiddleware::class,
-        'community-dashboard'
+        'feed-community'
     );
 };
