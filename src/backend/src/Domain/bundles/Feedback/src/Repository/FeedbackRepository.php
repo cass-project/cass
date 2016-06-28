@@ -80,5 +80,20 @@ class FeedbackRepository extends EntityRepository
                 'answer' => null
             ]
         ], $options);
+
+        $qb = $this->createQueryBuilder('f')
+            ->where(['f.profile' => $profileId]);
+
+        if($options['filter']['read'] !== null) {
+            $qb->where(['f.read' => $options['filter']['read']]);
+        }
+
+        if($options['filter']['answer'] === true) {
+            $qb->where('f.response IS NOT NULL');
+        }else{
+            $qb->where('f.response IS NULL');
+        }
+
+        return $qb->getQuery()->execute();
     }
 }

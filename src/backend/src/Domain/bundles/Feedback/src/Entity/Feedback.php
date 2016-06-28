@@ -4,7 +4,6 @@ namespace Domain\Feedback\Entity;
 use Application\Util\Entity\IdEntity\IdEntity;
 use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
-use Doctrine\Common\Collections\ArrayCollection;
 use Domain\Feedback\Exception\EmptyDescriptionException;
 use Domain\Feedback\FeedbackType\FeedbackType;
 use Domain\Profile\Entity\Profile;
@@ -35,9 +34,10 @@ class Feedback implements JSONSerializable, IdEntity
     private $profile;
 
     /**
-     * @OneToMany(targetEntity="Domain\Feedback\Entity\FeedbackResponse", mappedBy="feedback")
+     * @OneToOne(targetEntity="Domain\Feedback\Entity\FeedbackResponse", mappedBy="feedback")
+     * @var FeedbackResponse
      */
-    private $responses;
+    private $response;
 
     /**
      * @Column(type="integer")
@@ -63,12 +63,12 @@ class Feedback implements JSONSerializable, IdEntity
      */
     private $email;
 
-    public function __construct(FeedbackType $feedbackType, string $description)
+    public function __construct(FeedbackType $feedbackType, string $description, Profile $profile = null)
     {
         $this->type = $feedbackType->getIntCode();
-        $this->setDescription($description);
-        $this->responses = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->profile = $profile;
+        $this->setDescription($description);
     }
 
     public function toJSON(): array
@@ -85,10 +85,9 @@ class Feedback implements JSONSerializable, IdEntity
             ],
             'type' => $this->type,
             'read' => $this->read,
-            'answer' => $this->hasResponses(),
-            'responses' => $this->hasResponses() ? array_map(function(FeedbackResponse $response) {
-                return $response->toJSON();
-            }, $this->responses->toArray()) : null
+            'answer' => [
+                'has' => $this->hasResponse()
+            ]
         ];
 
         if($this->hasProfile()) {
@@ -97,6 +96,10 @@ class Feedback implements JSONSerializable, IdEntity
 
         if($this->hasEmail()) {
             $json['email']['contact'] = $this->getEmail();
+        }
+
+        if($this->hasResponse()) {
+            $json['answer']['entity'] = $this->getResponse()->toJSON();
         }
 
         return $json;
@@ -145,11 +148,6 @@ class Feedback implements JSONSerializable, IdEntity
         return $this;
     }
 
-    public function hasResponses(): bool
-    {
-        return $this->responses !== null;
-    }
-
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -165,6 +163,16 @@ class Feedback implements JSONSerializable, IdEntity
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function hasResponse(): bool
+    {
+        return $this->response !== null;
+    }
+
+    public function getResponse(): FeedbackResponse
+    {
+        return $this->response;
     }
 
     public function markAsRead(): self

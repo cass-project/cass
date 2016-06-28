@@ -37,22 +37,26 @@ Feedback_Entity_Feedback:
     read:
       type: boolean
       description: Ответ на отзыв прочтен
-    answer:
-      type: boolean
-      description: Есть ответы на отзыв
     email:
+      type: object
       description: E-mail (опционально)
       required:
        - has
       properties:
         has:
           type: boolean
-          description: Если FALSE, то отзыв анонимный
+          description: Если TRUE, то email указан
         mail:
           type: string
           description: Указанный email (при значении true)
-    responses:
-      type: array
-      items:
-        schema:
-          $ref: '#/definitions/Feedback_Entity_Feedback'
+    answer:
+      type: object
+      description: Ответ на отзыв (опционально)
+      required:
+       - has
+      properties:
+        has:
+          type: boolean
+          description: Если TRUE, то на отзыв дан ответ
+        entity:
+          $ref: '#/definitions/Feedback_Entity_FeedbackResponse'

@@ -38,13 +38,13 @@ class FeedbackService
     {
         $feedback = new Feedback(
             $this->feedbackTypeFactory->createFromIntCode($createFeedbackParameters->getType()),
-            $createFeedbackParameters->getDescription()
+            $createFeedbackParameters->getDescription(),
+            $createFeedbackParameters->hasProfile()
+                ? $this->profileService->getProfileById($createFeedbackParameters->getProfileId())
+                : null
         );
 
-        if($createFeedbackParameters->hasProfile()) {
-            $profile = $this->profileService->getProfileById($createFeedbackParameters->getProfileId());
-            $feedback->setProfile($profile);
-        }else{
+        if(! $createFeedbackParameters->hasProfile()) {
             if($createFeedbackParameters->hasEmail()) {
                 $feedback->setEmail($createFeedbackParameters->getEmail());
             }
@@ -64,7 +64,7 @@ class FeedbackService
 
     public function getFeedbackEntities(int $profileId, array $options): array
     {
-        return $this->feedbackRepository->getAllFeedbackEntities($profileId, $options);
+        return $this->feedbackRepository->getFeedbackEntities($profileId, $options);
     }
     
     public function getFeedbackResponse(int $feedbackId): array

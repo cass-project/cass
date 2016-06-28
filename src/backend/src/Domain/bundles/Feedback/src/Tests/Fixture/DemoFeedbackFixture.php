@@ -30,9 +30,9 @@ class DemoFeedbackFixture implements Fixture
         $feedbackEntities = [];
         $feedbackEntities[] = (new Feedback(new FTCommonQuestion(), 'Demo Feedback 1'));
         $feedbackEntities[] = (new Feedback(new FTCommonQuestion(), 'Demo Feedback 2'));
-        $feedbackEntities[] = (new Feedback(new FTCommonQuestion(), 'Demo Feedback 3'))->setProfile($profile);
-        $feedbackEntities[] = (new Feedback(new FTCommonQuestion(), 'Demo Feedback 4'))->setProfile($profile);
-        $feedbackEntities[] = (new Feedback(new FTCommonQuestion(), 'Demo Feedback 5'))->setProfile($profile);
+        $feedbackEntities[] = (new Feedback(new FTCommonQuestion(), 'Demo Feedback 3', $profile));
+        $feedbackEntities[] = (new Feedback(new FTCommonQuestion(), 'Demo Feedback 4', $profile));
+        $feedbackEntities[] = (new Feedback(new FTCommonQuestion(), 'Demo Feedback 5', $profile));
 
         foreach($feedbackEntities as $feedback) {
             $em->persist($feedback);

@@ -6,7 +6,7 @@ use Domain\Feedback\Tests\FeedbackMiddlewareTest;
 /**
  * @backupGlobals disabled
  */
-class FeedbackWithoutAnswerMiddlewareTest extends FeedbackMiddlewareTest
+class FeedbackListEntitiesMiddlewareTest extends FeedbackMiddlewareTest
 {
-    public function testGetWithoutAnswer200() {}
+    public function testGetAllEntities200() {}
 }
