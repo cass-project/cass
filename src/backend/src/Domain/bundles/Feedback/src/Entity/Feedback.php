@@ -6,7 +6,7 @@ use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Domain\Feedback\Exception\EmptyDescriptionException;
-use Domain\Feedback\Exception\InvalidFeedbackTypeException;
+use Domain\Feedback\FeedbackType\FeedbackType;
 use Domain\Profile\Entity\Profile;
 
 /**
@@ -51,8 +51,22 @@ class Feedback implements JSONSerializable, IdEntity
      */
     private $description;
 
-    public function __construct()
+    /**
+     * @Column(type="boolean", name="feedback_read")
+     * @var bool
+     */
+    private $read = false;
+
+    /**
+     * @Column(type="string")
+     * @var string
+     */
+    private $email;
+
+    public function __construct(FeedbackType $feedbackType, string $description)
     {
+        $this->type = $feedbackType->getIntCode();
+        $this->setDescription($description);
         $this->responses = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
@@ -66,7 +80,12 @@ class Feedback implements JSONSerializable, IdEntity
             'profile' => [
                 'has' => $this->hasProfile()
             ],
+            'email' => [
+                'has' => $this->hasEmail()
+            ],
             'type' => $this->type,
+            'read' => $this->read,
+            'answer' => $this->hasResponses(),
             'responses' => $this->hasResponses() ? array_map(function(FeedbackResponse $response) {
                 return $response->toJSON();
             }, $this->responses->toArray()) : null
@@ -76,18 +95,16 @@ class Feedback implements JSONSerializable, IdEntity
             $json['profile']['entity'] = $this->getProfile()->toJSON();
         }
 
+        if($this->hasEmail()) {
+            $json['email']['contact'] = $this->getEmail();
+        }
+
         return $json;
     }
 
     public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTime $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-        return $this;
     }
 
     public function getProfile(): Profile
@@ -111,20 +128,6 @@ class Feedback implements JSONSerializable, IdEntity
         return $this->type;
     }
 
-    public function setType(int $type): self
-    {
-        if(! in_array($type, [
-            self::TYPE_COMMON_QUESTIONS,
-            self::TYPE_REQUEST_ADD_THEMATIC,
-            self::TYPE_SUGGESTIONS
-        ])) {
-            throw new InvalidFeedbackTypeException(sprintf('Invalid feedback type `%s`', $type));
-        }
-        
-        $this->type = $type;
-        return $this;
-    }
-
     public function getDescription(): string
     {
         return $this->description;
@@ -145,5 +148,36 @@ class Feedback implements JSONSerializable, IdEntity
     public function hasResponses(): bool
     {
         return $this->responses !== null;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function hasEmail(): bool
+    {
+        return $this->email !== null;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function markAsRead(): self
+    {
+        $this->read = true;
+
+        return $this;
+    }
+
+    public function unmarkAsRead(): self
+    {
+        $this->read = false;
+
+        return $this;
     }
 }

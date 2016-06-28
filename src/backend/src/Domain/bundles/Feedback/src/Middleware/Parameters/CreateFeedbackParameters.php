@@ -11,12 +11,20 @@ class CreateFeedbackParameters
 
     /** @var string */
     private $description;
-
-    public function __construct(string $type, string $description, int $profileId = null)
-    {
+    
+    /** @var string */
+    private $email;
+    
+    public function __construct(
+        string $type,
+        string $description,
+        int $profileId = null,
+        string $email = null
+    ) {
         $this->type = $type;
-        $this->profileId = $profileId;
         $this->description = $description;
+        $this->profileId = $profileId;
+        $this->email = $email;
     }
 
     public function getProfileId(): int
@@ -27,6 +35,16 @@ class CreateFeedbackParameters
     public function hasProfile(): bool
     {
         return $this->profileId != null;
+    }
+
+    public function hasEmail(): bool
+    {
+        return $this->email !== null;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
     }
 
     public function getType(): int

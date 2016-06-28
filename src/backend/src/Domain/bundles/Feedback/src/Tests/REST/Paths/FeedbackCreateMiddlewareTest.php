@@ -2,6 +2,7 @@
 namespace Domain\Feedback\Tests\REST\Paths;
 
 use Domain\Feedback\Entity\Feedback;
+use Domain\Feedback\FeedbackType\Types\FTCommonQuestion;
 use Domain\Feedback\Tests\FeedbackMiddlewareTest;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 
@@ -16,7 +17,7 @@ class FeedbackCreateMiddlewareTest extends FeedbackMiddlewareTest
 
         $json = [
             "profile_id" => $profile->getId(),
-            "type_feedback" => Feedback::TYPE_COMMON_QUESTIONS,
+            "type_feedback" => FTCommonQuestion::INT_CODE,
             "description" => ""
         ];
 
@@ -52,7 +53,7 @@ class FeedbackCreateMiddlewareTest extends FeedbackMiddlewareTest
     {
         $json = [
             "profile_id" => 9999999,
-            "type_feedback" => Feedback::TYPE_COMMON_QUESTIONS,
+            "type_feedback" => FTCommonQuestion::INT_CODE,
             "description" => "string"
         ];
 
@@ -67,7 +68,7 @@ class FeedbackCreateMiddlewareTest extends FeedbackMiddlewareTest
 
         $json = [
             "profile_id" => $profile->getId(),
-            "type_feedback" => Feedback::TYPE_COMMON_QUESTIONS,
+            "type_feedback" => FTCommonQuestion::INT_CODE,
             "description" => "Demo Feedback"
         ];
 
@@ -94,7 +95,7 @@ class FeedbackCreateMiddlewareTest extends FeedbackMiddlewareTest
 
         $json = [
             "profile_id" => $profile->getId(),
-            "type_feedback" => Feedback::TYPE_COMMON_QUESTIONS,
+            "type_feedback" => FTCommonQuestion::INT_CODE,
             "description" => "Demo Feedback"
         ];
 

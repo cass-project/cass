@@ -6,9 +6,7 @@ use Application\Service\CommandService;
 use Domain\Feedback\Middleware\Command\CreateCommand;
 use Domain\Feedback\Middleware\Command\CreateFeedbackResponseCommand;
 use Domain\Feedback\Middleware\Command\DeleteCommand;
-use Domain\Feedback\Middleware\Command\GetAllCommand;
-use Domain\Feedback\Middleware\Command\GetHasAnswerCommand;
-use Domain\Feedback\Middleware\Command\GetWithoutAnswerCommand;
+use Domain\Feedback\Middleware\Command\ListCommand;
 use Domain\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -28,16 +26,14 @@ class FeedbackMiddleware implements MiddlewareInterface
     {
         $responseBuilder = new GenericResponseBuilder($response);
 
-        $resolver = $this->commandService->createResolverBuilder()
-            ->attachDirect("create", CreateCommand::class)
-            ->attachDirect("feedback-response", CreateFeedbackResponseCommand::class)
-            ->attachDirect("cancel", DeleteCommand::class)
-            ->attachDirect("has-answer", GetHasAnswerCommand::class)
-            ->attachDirect("without-answer", GetWithoutAnswerCommand::class)
-            ->attachDirect("all", GetAllCommand::class)
-            ->resolve($request);
-
         try {
+            $resolver = $this->commandService->createResolverBuilder()
+                ->attachDirect("create", CreateCommand::class)
+                ->attachDirect("feedback-response", CreateFeedbackResponseCommand::class)
+                ->attachDirect("cancel", DeleteCommand::class)
+                ->attachDirect("list", ListCommand::class)
+                ->resolve($request);
+
             return $resolver->run($request, $responseBuilder);
         } catch(ProfileNotFoundException $e) {
             return $responseBuilder

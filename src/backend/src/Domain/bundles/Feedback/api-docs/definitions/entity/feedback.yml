@@ -6,21 +6,23 @@ Feedback_Entity_Feedback:
     - profile
     - type_feedback
     - description
+    - answer
+    - read
+    - email
   properties:
     id:
       type: number
       description: ID
     profile:
       type: object
-      description: Информация об авторе фидбэка
+      description: Информация об авторе отзыва (опционально)
       schema:
         required:
           - has
-          - entity
         properties:
           has:
             type: boolean
-            description: Если FALSE, то фидбэк анонимный
+            description: Если FALSE, то отзыв анонимный
           entity:
             $ref: '#/definitions/Profile_Entity_Profile'
     created_at:
@@ -28,10 +30,27 @@ Feedback_Entity_Feedback:
       description: Дата создания
     type_feedback:
       type: number
-      description: Тип фидбека
+      description: Тип отзыва
     description:
       type: string
-      description: Текст описание фидбека
+      description: Текст описание отзыва
+    read:
+      type: boolean
+      description: Ответ на отзыв прочтен
+    answer:
+      type: boolean
+      description: Есть ответы на отзыв
+    email:
+      description: E-mail (опционально)
+      required:
+       - has
+      properties:
+        has:
+          type: boolean
+          description: Если FALSE, то отзыв анонимный
+        mail:
+          type: string
+          description: Указанный email (при значении true)
     responses:
       type: array
       items:

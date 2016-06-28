@@ -10,6 +10,9 @@ use Domain\Profile\Exception\ProfileNotFoundException;
 
 class FeedbackRepository extends EntityRepository
 {
+    const DEFAULT_LIMIT = 50;
+    const MAX_LIMIT = 200;
+
     public function createFeedback(Feedback $feedback)
     {
         $em = $this->getEntityManager();
@@ -63,5 +66,19 @@ class FeedbackRepository extends EntityRepository
         return $this->findBy([
             'profile' => $profile
         ], null, $limit, $offset);
+    }
+
+    public function getFeedbackEntities(int $profileId, array $options): array
+    {
+        $options = array_merge([
+            'seek' => [
+                'offset' => 0,
+                'limit' => self::DEFAULT_LIMIT
+            ],
+            'filter' => [
+                'read' => null,
+                'answer' => null
+            ]
+        ], $options);
     }
 }

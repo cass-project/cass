@@ -15,7 +15,8 @@ class CreateFeedbackRequest extends SchemaParams
         return new CreateFeedbackParameters(
             $data->type_feedback,
             $data->description,
-            $data->profile_id
+            $data->profile_id ?? null,
+            $data->email ?? null
         );
     }
 

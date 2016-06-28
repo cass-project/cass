@@ -2,6 +2,7 @@
 namespace Domain\Feedback\Service;
 
 use Domain\Feedback\Entity\Feedback;
+use Domain\Feedback\FeedbackType\FeedbackTypeFactory;
 use Domain\Feedback\Middleware\Parameters\CreateFeedbackParameters;
 use Domain\Feedback\Repository\FeedbackRepository;
 use Domain\Feedback\Repository\FeedbackResponseRepository;
@@ -18,26 +19,35 @@ class FeedbackService
     /** @var FeedbackResponseRepository $feedbackResponseRepository */
     private $feedbackResponseRepository;
 
+    /** @var FeedbackTypeFactory */
+    private $feedbackTypeFactory;
+
     public function __construct(
         ProfileService $profileService,
         FeedbackRepository $feedbackRepository,
-        FeedbackResponseRepository $feedbackResponseRepository
+        FeedbackResponseRepository $feedbackResponseRepository,
+        FeedbackTypeFactory $feedbackTypeFactory
     ) {
         $this->profileService = $profileService;
         $this->feedbackRepository = $feedbackRepository;
         $this->feedbackResponseRepository = $feedbackResponseRepository;
+        $this->feedbackTypeFactory = $feedbackTypeFactory;
     }
 
     public function createFeedback(CreateFeedbackParameters $createFeedbackParameters): Feedback
     {
-        $feedback = new Feedback();
-        $feedback
-            ->setDescription($createFeedbackParameters->getDescription())
-            ->setType($createFeedbackParameters->getType());
-        ;
+        $feedback = new Feedback(
+            $this->feedbackTypeFactory->createFromIntCode($createFeedbackParameters->getType()),
+            $createFeedbackParameters->getDescription()
+        );
 
         if($createFeedbackParameters->hasProfile()) {
-            $feedback->setProfile($this->profileService->getProfileById($createFeedbackParameters->getProfileId()));
+            $profile = $this->profileService->getProfileById($createFeedbackParameters->getProfileId());
+            $feedback->setProfile($profile);
+        }else{
+            if($createFeedbackParameters->hasEmail()) {
+                $feedback->setEmail($createFeedbackParameters->getEmail());
+            }
         }
 
         $this->feedbackRepository->createFeedback($feedback);
@@ -52,18 +62,13 @@ class FeedbackService
         );
     }
 
-    public function getFeedbackEntitiesWithoutResponses(): array
+    public function getFeedbackEntities(int $profileId, array $options): array
     {
-        return $this->feedbackRepository->getFeedbackEntitiesWithoutResponses();
+        return $this->feedbackRepository->getAllFeedbackEntities($profileId, $options);
     }
-
+    
     public function getFeedbackResponse(int $feedbackId): array
     {
         return $this->feedbackResponseRepository->getFeedbackResponses($feedbackId);
-    }
-
-    public function getAllFeedbackEntities(int $profileId, int $limit, int $offset): array
-    {
-        return $this->feedbackRepository->getAllFeedbackEntities($profileId, $limit, $offset);
     }
 }

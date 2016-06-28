@@ -23,20 +23,8 @@ return function(Application $app) {
     );
 
     $app->get(
-        '/feedback/{feedbackId}/{command:has-answer}',
+        '/protected/feedback/{command:list}/offset/{offset}/limit/{limit}',
         FeedbackMiddleware::class,
-        'feedback-has-answer'
-    );
-
-    $app->get(
-        '/feedback/{command:without-answer}',
-        FeedbackMiddleware::class,
-        'feedback-without-answer'
-    );
-
-    $app->get(
-        '/protected/feedback/{command:all}/offset/{offset}/limit/{limit}',
-        FeedbackMiddleware::class,
-        'feedback-all-from-user'
+        'feedback-list'
     );
 };
