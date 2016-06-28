@@ -4,27 +4,28 @@ import {Account} from './../../account/definitions/entity/Account';
 import {FrontlineService} from "../../frontline/service";
 import {SignInRequest, SignInResponse200} from "../definitions/paths/sign-in";
 import {AuthRESTService} from "./AuthRESTService";
-import {SignOutResponse200} from "../definitions/paths/sign-out";
+import {MessageBusService} from "../../message/service/MessageBusService/index";
+import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
 
 @Injectable()
 export class AuthService
 {
     public static token: AuthToken;
 
-    constructor(private frontline: FrontlineService, private api: AuthRESTService) {
-        let hasAuth = frontline.session.auth && (typeof frontline.session.auth.api_key == "string") && (frontline.session.auth.api_key.length > 0);
+    constructor(
+        private frontline: FrontlineService,
+        private api: AuthRESTService,
+        private messages: MessageBusService
+    ) {
+        let hasAuth = frontline.session.auth
+            && (typeof frontline.session.auth.api_key == "string")
+            && (frontline.session.auth.api_key.length > 0);
 
         if(hasAuth) {
             let auth = frontline.session.auth;
 
             AuthService.token = new AuthToken(auth.api_key, new Account(auth.account, auth.profiles));
         }
-    }
-
-    static getGreetings() {
-        return AuthService.isSignedIn()
-            ? AuthService.getAuthToken().getCurrentProfile().greetings
-            : 'Anonymous'
     }
 
     static isSignedIn() {
@@ -46,6 +47,9 @@ export class AuthService
             (response: SignInResponse200) => {
                 AuthService.token = new AuthToken(response.api_key, new Account(response.account, response.profiles));
                 this.frontline.merge(response.frontline);
+            },
+            error => {
+                console.log(error);
             }
         );
 

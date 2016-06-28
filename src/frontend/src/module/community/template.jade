@@ -1,7 +1,4 @@
 div
-  button((click)='service.modals.create.open()')
-    span Open
-
   div(*ngIf="service.modals.route.isOpened()")
     cass-community-route-modal(
       (close)="service.modals.route.close()",
@@ -17,4 +14,3 @@ div
 
   div(*ngIf="service.modals.settings.isOpened()")
     cass-community-settings-modal((close)="service.modals.settings.close()")
-

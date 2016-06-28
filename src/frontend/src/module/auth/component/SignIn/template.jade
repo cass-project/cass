@@ -1,4 +1,5 @@
 form.form.form-auth-sign-in((ngSubmit)='submit()', (keyup.escape)='close()')
+  cass-form-progress-lock(*ngIf="status.loading")
   header.form-header
     h1 Авторизация
   .cass-padding-box-10
@@ -10,6 +11,7 @@ form.form.form-auth-sign-in((ngSubmit)='submit()', (keyup.escape)='close()')
       label.form-label
         span.label-text Либо используйте аккаунт нашего сервиса:
         input.form.form-input(
+          #emailInput
           type='email',
           required='',
           placeholder='Адрес электронного ящика, указанного при регистрации',

@@ -1,19 +1,42 @@
 form.form.form-auth-sign-in((ngSubmit)='submit()', (keyup.escape)='close()')
+  cass-form-progress-lock(*ngIf="status.loading")
   header.form-header
     h1 Регистрация
   .cass-padding-box-10
     .input-group
       label.form-label
         span.label-text E-mail: 
-        input.form.form-input(type='email', placeholder='Адрес электронного ящика', autocomplete='off', autofocus='autofocus', tabindex='1', [(ngModel)]='model.email', [disabled]="status.loading")
+        input.form.form-input(
+          type='email',
+          placeholder='Адрес электронного ящика',
+          autocomplete='off', autofocus='autofocus',
+          tabindex='1',
+          [(ngModel)]='model.email',
+          [disabled]="status.loading",
+          #emailInput
+        )
     .input-group
       label.form-label
         span.label-text Пароль
-        input.form.form-input(type='password', placeholder='**********', autocomplete='off', tabindex='2', [(ngModel)]='model.password', [disabled]="status.loading")
+        input.form.form-input(
+          type='password',
+          placeholder='**********',
+          autocomplete='off',
+          tabindex='2',
+          [(ngModel)]='model.password',
+          [disabled]="status.loading"
+        )
     .input-group
       label.form-label
         span.label-text Повторите пароль
-        input.form.form-input(type='password', placeholder='**********', autocomplete='off', tabindex='2', [(ngModel)]='model.repeat', [disabled]="status.loading")
+        input.form.form-input(
+          type='password',
+          placeholder='**********',
+          autocomplete='off',
+          tabindex='2',
+          [(ngModel)]='model.repeat',
+          [disabled]="status.loading"
+        )
   footer.form-footer
     .form-footer-section
       .cass-padding-box-5

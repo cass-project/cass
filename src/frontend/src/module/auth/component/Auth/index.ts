@@ -24,14 +24,4 @@ import {ModalBoxComponent} from "../../../modal/component/box/index";
 export class AuthComponent
 {
     constructor(private service: AuthComponentService) {}
-
-    signIn() {
-        this.service.modals.closeModals();
-        this.service.modals.openSignInModal();
-    }
-
-    signUp() {
-        this.service.modals.closeModals();
-        this.service.modals.openSignUpModal();
-    }
 }
