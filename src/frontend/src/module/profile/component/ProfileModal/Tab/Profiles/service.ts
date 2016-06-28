@@ -1,14 +1,12 @@
 import {Injectable} from "angular2/core";
 import {ThemeService} from "../../../../../theme/service/ThemeService";
 import {ProfileRESTService} from "../../../../service/ProfileRESTService";
-import {ProfileComponentService} from "../../../../service";
 import {AuthService} from "../../../../../auth/service/AuthService";
 
 @Injectable()
 export class ProfilesTabService
 {
-    constructor(private profileRESTService: ProfileRESTService, private pService: ProfileComponentService){
-    }
+    constructor(private profileRESTService: ProfileRESTService) {}
 
     private createNewProfileButton: boolean = true;
     private modalSwitchActive: boolean = false;

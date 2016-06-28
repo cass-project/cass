@@ -5,7 +5,7 @@ import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
 
 @Component({
     selector: 'cass-profile-menu',
-    template: require('./template.html'),
+    template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],

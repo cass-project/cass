@@ -5,7 +5,6 @@ use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Feedback\Tests\Fixture\DemoFeedbackFixture;
-use Domain\Feedback\Tests\Fixture\DemoFeedbackResponseFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**
@@ -19,7 +18,6 @@ abstract class FeedbackMiddlewareTest extends MiddlewareTestCase
             new DemoAccountFixture(),
             new DemoProfileFixture(),
             new DemoFeedbackFixture(),
-            new DemoFeedbackResponseFixture()
         ];
     }
 
@@ -46,5 +44,21 @@ abstract class FeedbackMiddlewareTest extends MiddlewareTestCase
     protected function requestGetAllFeedbackEntities(int $limit, int $offset): RESTRequest
     {
         return $this->request('GET', sprintf("/protected/feedback/all/limit/%d/offset/%d", $limit, $offset));
+    }
+
+    protected function requestMarkAsRead(int $feedbackId): RESTRequest
+    {
+        return $this->request('POST', sprintf('/protected/feedback/%d/mark-as-read', $feedbackId));
+    }
+
+    protected function requestGetById(int $feedbackId): RESTRequest
+    {
+        return $this->request('GET', sprintf('/protected/feedback/%d/get', $feedbackId));
+    }
+
+    protected function requestCreateFeedbackResponse(array $json): RESTRequest
+    {
+        return $this->request('PUT', '/protected/feedback-response/create')
+            ->setParameters($json);
     }
 }

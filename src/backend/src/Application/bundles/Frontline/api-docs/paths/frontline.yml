@@ -34,9 +34,9 @@
                     type: object
                     schema:
                       required:
-                        - api_key
                         - account
                         - profile
+                        - feedback
                       properties:
                         account:
                           type: object
@@ -47,6 +47,17 @@
                               delete_account_request_days:
                                 type: number
                                 description: Количество дней, после которых удовлетворяется запрос на удаление аккаунта
+                        feedback:
+                          type: object
+                          schema:
+                            required:
+                              - types
+                            properties:
+                              types:
+                                type: array
+                                items:
+                                  schema:
+                                    $ref: '#/definitions/Feedback_Entity_FeedbackType'
                         profile:
                           type: object
                           schema:

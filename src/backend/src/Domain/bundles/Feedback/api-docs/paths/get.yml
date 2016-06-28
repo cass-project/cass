@@ -1,0 +1,23 @@
+'/protecterd/feedback/{feedbackId}/get':
+  get:
+    tags:
+      - feedback
+    description: Возвращает данные о отзыве
+    parameters:
+      - name: feedbackId
+        in: path
+        required: true
+        description: ID фидбека
+        type: numeric
+    responses:
+      200:
+        schema:
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              default: true
+            entity:
+              $ref: '#/definitions/Feedback_Entity_Feedback'

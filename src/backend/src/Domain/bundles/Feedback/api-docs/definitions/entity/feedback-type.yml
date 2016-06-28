@@ -1,0 +1,25 @@
+Feedback_Entity_FeedbackType:
+  type: object
+  required:
+    - code
+    - title
+    - description
+  properties:
+    code:
+      type: object
+      required:
+        - int
+        - string
+      properties:
+        int:
+          type: number
+          description: Код типа (INT)
+        string:
+          type: string
+          description: Код типа (STRING)
+    title:
+      type: string
+      description: Название типа
+    description:
+      type: string
+      description: Описание типа

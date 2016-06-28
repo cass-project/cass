@@ -9,7 +9,6 @@ import {ProfileSetupScreenInterests} from "./Screen/ProfileSetupScreenInterests/
 import {ProfileSetupScreenExpertIn} from "./Screen/ProfileSetupScreenExpertIn/index";
 import {ScreenControls} from "../../../util/classes/ScreenControls";
 import {ProfileRESTService} from "../../service/ProfileRESTService";
-import {ProfileComponentService} from "../../service";
 import {AuthService} from "../../../auth/service/AuthService";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
 import {LoadingLinearIndicator} from "../../../form/component/LoadingLinearIndicator/index";
@@ -61,7 +60,7 @@ export class ProfileSetup
           .add({ from: ProfileSetupScreen.Saving, to: ProfileSetupScreen.Finish });
     });
 
-    constructor(public model: ProfileSetupModel, private profileRESTService: ProfileRESTService, private modals: ProfileComponentService) {}
+    constructor(public model: ProfileSetupModel, private profileRESTService: ProfileRESTService) {}
 
     changeGender(event){
         if (!~['male', 'female'].indexOf(event)) {
@@ -125,7 +124,6 @@ export class ProfileSetup
     }
 
     close(){
-        this.modals.modals.setup.close();
     }
 
     ngSubmit() {

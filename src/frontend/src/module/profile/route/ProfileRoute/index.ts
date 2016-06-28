@@ -1,16 +1,11 @@
 import {Component} from "angular2/core";
 
-import {RouterOutlet, RouteConfig, Router} from "angular2/router";
+import {RouterOutlet, RouteConfig} from "angular2/router";
 import {ModalComponent} from "../../../modal/component/index";
 import {ProfileMenuComponent} from "../../component/ProfileMenu/index";
 import {ProfileModal} from "../../component/ProfileModal/index";
-import {ProfileDashboardRoute} from "../ProfileDashboardRoute/index";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
-import {ProfileNotFound} from "../ProfileNotFound/index";
-import {ProfileCurrentRoute} from "../ProfileCurrentRoute/index";
-import {ProfileCurrentCollectionsRoute} from "../ProfileCurrentCollectionsRoute/index";
-import {ProfileIDRoute} from "../ProfileIDRoute/index";
-import {ProfileIDCollectionsRoute} from "../ProfileIDCollectionsRoute/index";
+import {Nothing} from "../../../util/component/Nothing/index";
 
 @Component({
     template: require('./template.html'),
@@ -29,43 +24,8 @@ import {ProfileIDCollectionsRoute} from "../ProfileIDCollectionsRoute/index";
     {
         name: 'Dashboard',
         path: '/',
-        component: ProfileDashboardRoute,
+        component: Nothing,
         useAsDefault: true
-    },
-    {
-        name: 'ProfileIDRoute',
-        path: '/:sid',
-        component: ProfileIDRoute,
-    },
-    {
-        name: 'ProfileCollections',
-        path: '/:sid/collections',
-        component: ProfileIDCollectionsRoute,
-    },
-    {
-        name: 'ProfileColletionsById',
-        path: '/:sid/collections/:sid',
-        component: ProfileIDCollectionsRoute,
-    },
-    {
-        name: 'ProfileNotFound',
-        path: '/not-found',
-        component: ProfileNotFound
-    },
-    {
-        name: 'ProfileCurrentRoute',
-        path: '/current',
-        component: ProfileCurrentRoute
-    },
-    {
-        name: 'ProfileCurrentCollectionsRoute',
-        path: '/current/collections',
-        component: ProfileCurrentCollectionsRoute
-    },
-    {
-        name: 'ProfileCurrentCollectionsRouteSid',
-        path: '/current/collections/:sid',
-        component: ProfileCurrentCollectionsRoute
     }
 ])
 export class ProfileRoute

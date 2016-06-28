@@ -1,4 +1,4 @@
-/feedback-response/create:
+/protected/feedback-response/create:
   put:
     tags:
       - feedback
