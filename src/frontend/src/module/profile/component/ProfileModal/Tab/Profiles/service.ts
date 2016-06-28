@@ -6,7 +6,10 @@ import {AuthService} from "../../../../../auth/service/AuthService";
 @Injectable()
 export class ProfilesTabService
 {
-    constructor(private profileRESTService: ProfileRESTService) {}
+    constructor(
+        private profileRESTService: ProfileRESTService,
+        private authService: AuthService
+    ) {}
 
     private createNewProfileButton: boolean = true;
     private modalSwitchActive: boolean = false;
@@ -40,24 +43,24 @@ export class ProfilesTabService
     requestDeleteProfile(profileId){
         this.buttonActivate = true;
         this.profileRESTService.deleteProfile(profileId).subscribe(data => {
-            AuthService.getAuthToken().account.profiles.profiles.splice(this.pickedElem, 1);
-            console.log(AuthService.getAuthToken().account.profiles.profiles, this.pickedElem);
+            this.authService.getAuthToken().account.profiles.profiles.splice(this.pickedElem, 1);
+
             this.closeModalDeleteProfile();
             this.buttonActivate = false;
         });
     }
 
     getProfile(){
-        for(let i = 0; i < AuthService.getAuthToken().account.profiles.profiles.length; i++){
-            if(this.pickedId === AuthService.getAuthToken().account.profiles.profiles[i].entity.profile.id){
+        for(let i = 0; i < this.authService.getAuthToken().account.profiles.profiles.length; i++){
+            if(this.pickedId === this.authService.getAuthToken().account.profiles.profiles[i].entity.profile.id){
                 this.pickedElem = i;
-                return AuthService.getAuthToken().account.profiles.profiles[i].entity;
+                return this.authService.getAuthToken().account.profiles.profiles[i].entity;
             }
         }
     }
 
     getProfiles(){
-        return AuthService.getAuthToken().account.profiles.profiles;
+        return this.authService.getAuthToken().account.profiles.profiles;
     }
 
     closeModalDeleteProfile(){

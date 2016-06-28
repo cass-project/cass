@@ -25,8 +25,8 @@ article.component.component-auth-sign-up
             autocomplete='off',
             tabindex='2',
             required,
-            [attr.minlength]='PASSWORD_MIN_LENGTH',
-            [attr.maxlength]='PASSWORD_MAX_LENGTH',
+            minlength='6',
+            maxlength='32',
             [(ngModel)]='model.password',
             [disabled]="status.loading"
           )
@@ -39,8 +39,8 @@ article.component.component-auth-sign-up
             autocomplete='off',
             tabindex='3',
             required,
-            [attr.minlength]='PASSWORD_MIN_LENGTH',
-            [attr.maxlength]='PASSWORD_MAX_LENGTH',
+            minlength='6',
+            maxlength='32',
             [(ngModel)]='model.repeat',
             [disabled]="status.loading"
           )

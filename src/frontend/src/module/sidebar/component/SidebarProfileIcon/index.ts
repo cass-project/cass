@@ -12,10 +12,12 @@ import {AuthService} from "../../../auth/service/AuthService";
 export class SidebarProfileIcon
 {
     private isProfileMenuSwitched: boolean = false;
+    
+    constructor(private authService: AuthService) {}
 
     getImageProfile(){
-        if(AuthService.isSignedIn()){
-            return AuthService.getAuthToken().getCurrentProfile().entity.profile.image.variants['default'].public_path;
+        if(this.authService.isSignedIn()){
+            return this.authService.getAuthToken().getCurrentProfile().entity.profile.image.variants['default'].public_path;
         }
     }
 

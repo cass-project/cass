@@ -43,7 +43,7 @@ export class SignInComponent
 
         this.service.signIn(this.model).map(res => res.json()).subscribe(
             (response: SignInResponse200) => {
-                if (AuthService.isSignedIn()) {
+                if (this.service.isSignedIn()) {
                     this.successEvent.emit(response);
                 }
 

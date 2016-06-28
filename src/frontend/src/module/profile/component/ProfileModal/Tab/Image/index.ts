@@ -20,8 +20,8 @@ import {UploadImageService} from "../../../../../form/component/UploadImage/serv
         UploadImageModal,
     ],
     providers: [
-        CORE_DIRECTIVES,
-        UploadImageService
+        UploadImageService,
+        UploadProfileImageStrategy
     ]
 })
 
@@ -31,21 +31,28 @@ export class ImageTab
     upload: UploadImageModalControl = new UploadImageModalControl();
     private deleteProcessVisible = false;
 
-    constructor(private uploadImageService: UploadImageService, private profileRESTService: ProfileRESTService) {
-        uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(profileRESTService));
+    constructor(
+        private uploadImageService: UploadImageService, 
+        private profileRESTService: ProfileRESTService,
+        private uploadProfileImageStrategy: UploadProfileImageStrategy,
+        private authService: AuthService
+    ) {
+        uploadImageService.setUploadStrategy(uploadProfileImageStrategy);
     }
 
 
     getImageProfile(){
-        if(AuthService.isSignedIn()){
-            return AuthService.getAuthToken().getCurrentProfile().entity.profile.image.variants['default'].public_path;
+        if(this.authService.isSignedIn()){
+            return this.authService.getAuthToken().getCurrentProfile().entity.profile.image.variants['default'].public_path;
         }
     }
 
     avatarDeletingProcess(){
         this.deleteProcessVisible = true;
-        this.profileRESTService.deleteAvatar().subscribe(data => {
-            AuthService.getAuthToken().getCurrentProfile().entity.profile.image = {
+        let profileId = this.authService.getAuthToken().getCurrentProfile().entity.profile.id;
+        
+        this.profileRESTService.deleteAvatar(profileId).subscribe(data => {
+            this.authService.getAuthToken().getCurrentProfile().entity.profile.image = {
                 "variants": {
                     "default": {
                         "id": 'default',

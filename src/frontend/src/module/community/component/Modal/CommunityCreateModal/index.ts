@@ -53,9 +53,11 @@ export class CommunityCreateModal
     });
 
     @Output('close') closeEvent = new EventEmitter<CommunityCreateModal>();
+    
+    constructor(private authService: AuthService) {}
 
     ngOnInit() {
-        if(!AuthService.isSignedIn()) {
+        if(! this.authService.isSignedIn()) {
             this.closeEvent.emit(this);
         }
     }

@@ -12,14 +12,17 @@ require('./../node_modules/reset.css/reset.css');
 require('./styles/index.head.scss');
 
 import {provide} from "angular2/core";
-import {RequestOptions, HTTP_PROVIDERS} from "angular2/http";
+import {HTTP_PROVIDERS, RequestOptions} from "angular2/http";
 import {ROUTER_PROVIDERS} from "angular2/router";
 
 import {App} from "./app";
 import {frontline} from "./module/frontline/service";
 import {FrontlineService} from "./module/frontline/service";
-import {AuthRequestOptions} from "./module/auth/AuthRequestOptions";
 import {bootstrap} from "angular2/platform/browser";
+import {enableProdMode} from 'angular2/core';
+import {AuthRequestOptions} from "./module/auth/AuthRequestOptions";
+
+enableProdMode();
 
 document.addEventListener('DOMContentLoaded', () => {
     frontline(session => {
@@ -28,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 provide(FrontlineService, {useValue: new FrontlineService(session)}),
                 ROUTER_PROVIDERS,
                 HTTP_PROVIDERS,
+                provide(Window, {useValue: session}),
                 provide(RequestOptions, {useClass: AuthRequestOptions}),
-                provide(Window, {useValue: session})
             ]).then(() => {
                 setInterval(() => {
                     let cassModalClass = 'cass-has-modals';

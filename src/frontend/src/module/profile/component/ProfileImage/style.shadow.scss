@@ -3,9 +3,9 @@ div.profile-image {
     display: block;
     width: 100%;
   }
+}
 
-  div.profile-image-border-circle {
-    border-radius: 99999px;
-    overflow: hidden;
-  }
+div.profile-image-border-circle {
+  border-radius: 100%;
+  overflow: hidden;
 }

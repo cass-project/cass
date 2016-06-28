@@ -60,70 +60,13 @@ export class ProfileSetup
           .add({ from: ProfileSetupScreen.Saving, to: ProfileSetupScreen.Finish });
     });
 
-    constructor(public model: ProfileSetupModel, private profileRESTService: ProfileRESTService) {}
+    constructor(
+        public model: ProfileSetupModel, 
+        private profileRESTService: ProfileRESTService,
+        private authService: AuthService
+    ) {}
 
-    changeGender(event){
-        if (!~['male', 'female'].indexOf(event)) {
-            throw new Error('MMM WHUT IS THIS U FILTHY CASUL?');
-        }
-
-        this.model.gender = event;
-        this.ngSubmit();
-    }
-
-    verifyStage() {
-
-        /*Greetings stage*/
-        if (this.screens.isIn([ProfileSetupScreen.Greetings]) &&
-            this.model.greetings.greetings_method !== '') {
-            if (this.model.greetings.greetings_method === 'fl' &&
-                this.model.greetings.first_name.length > 0 && this.model.greetings.last_name.length > 0) {
-                return true;
-            } else if (this.model.greetings.greetings_method === 'n' &&
-                this.model.greetings.nickname.length > 0) {
-                return true;
-            } else if (this.model.greetings.greetings_method === 'fm' &&
-                this.model.greetings.first_name.length > 0 && this.model.greetings.middle_name.length > 0) {
-                return true;
-            } else if (this.model.greetings.greetings_method === 'lfm' &&
-                this.model.greetings.first_name.length > 0 && this.model.greetings.last_name.length > 0 && this.model.greetings.middle_name.length > 0) {
-                return true;
-            }
-        }
-        /*InterestsIn stage*/
-        if (this.screens.isIn([ProfileSetupScreen.Interests]) &&
-            (JSON.stringify(this.model.interestingIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.profile.interesting_in_ids))){
-            return true
-        }
-        /*ExpertIn stage*/
-         if (this.screens.isIn([ProfileSetupScreen.ExpertIn]) &&
-             (JSON.stringify(this.model.expertIn) != JSON.stringify(AuthService.getAuthToken().getCurrentProfile().entity.profile.expert_in_ids))){
-            return true;
-        }
-
-        if(this.screens.isIn([ProfileSetupScreen.Image])){
-            return true;
-        }
-    }
-
-
-    SaveSetupChanges(){
-        this.profile.interesting_in = this.model.interestingIn;
-        this.profile.expert_in = this.model.expertIn;
-        this.profile.greetings = JSON.parse(JSON.stringify(this.model.greetings));
-        this.profile.gender = this.model.gender;
-
-        this.nextStage();
-            this.profileRESTService.editPersonal(this.profile).subscribe(data => {
-                this.profileRESTService.updateInterestThemes(this.profile.interesting_in).subscribe(data => {
-                    this.profileRESTService.updateExpertThemes(this.profile.expert_in).subscribe(data => {
-                        this.nextStage();
-                    });
-                });
-            });
-    }
-
-    close(){
+    close() {
     }
 
     ngSubmit() {
