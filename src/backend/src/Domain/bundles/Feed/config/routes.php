@@ -12,8 +12,8 @@ return function (Application $app) {
     );
 
 
-    $app->get(
-        '/feed/{source:community}/{id}/dashboard[/]',
+    $app->post(
+        '/feed/{source:community}/{communityId}/dashboard[/]',
         FeedMiddleware::class,
         'feed-community'
     );

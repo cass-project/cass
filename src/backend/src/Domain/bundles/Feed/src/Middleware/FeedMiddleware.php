@@ -49,7 +49,7 @@ class FeedMiddleware implements MiddlewareInterface
     
     private function sourceFactory(ServerRequestInterface $request): Source {
         $source = $request->getAttribute('source');
-        
+
         switch($source) {
             default:
                 throw new NotFoundException(sprintf('Unknown source `%s`', $source));

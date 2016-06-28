@@ -1,10 +1,9 @@
 <?php
 
 
-namespace Domain\Feed\Feed\Comminity;
+namespace Domain\Feed\Feed\Source\Community;
 
 
-use Domain\Feed\Feed\Community\CommunityQuery;
 use Domain\Feed\Feed\CriteriaRequest;
 use Domain\Feed\Feed\Query;
 use Domain\Feed\Feed\Source;
@@ -15,7 +14,7 @@ final class CommunitySource implements Source
     protected $communityId;
     protected $postRepository;
 
-    public function __construct(int $communityId,PostRepository $postRepository)
+    public function __construct(int $communityId, PostRepository $postRepository)
     {
         $this->communityId = $communityId;
         $this->postRepository = $postRepository;

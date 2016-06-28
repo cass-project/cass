@@ -5,6 +5,7 @@ use Domain\Collection\Entity\Collection;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Domain\Collection\Exception\CollectionNotFoundException;
+use Domain\Community\Entity\Community;
 use Domain\Feed\Feed\Criteria\SeekCriteria;
 use Domain\Feed\Feed\CriteriaRequest;
 use Domain\Post\Entity\Post;
@@ -86,6 +87,18 @@ class PostRepository extends EntityRepository
         list($limit, $offset) = $criteriaRequest->doWith(SeekCriteria::class, function(SeekCriteria $seekCriteria) {
             return [$seekCriteria->getLimit(), $seekCriteria->getOffset()];
         });
+        /** @var Community $community */
+        $community = $this->getEntityManager()->getRepository(Community::class)->find($communityId);
+        $collectionIds = [];
+
+
+        foreach($community->getCollections()->getItems() as $collection){
+            /** @var Community  $collection */
+
+
+            print_r($community->getCollections()->getItems());
+
+        }
 
         return $this->findBy($qbCriteria, ['id' => 'desc'], $limit, $offset);
     }

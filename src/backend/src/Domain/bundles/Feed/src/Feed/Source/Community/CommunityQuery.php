@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Domain\Feed\Feed\Community;
+namespace Domain\Feed\Feed\Source\Community;
 
 
 use Domain\Feed\Feed\CriteriaRequest;
@@ -15,7 +15,7 @@ class CommunityQuery implements Query
     private $criteriaRequest;
     private $postRepository;
 
-    public function __construct(int $communityId,CriteriaRequest $criterisRequest, PostRepository $postRepository)
+    public function __construct(int $communityId, CriteriaRequest $criterisRequest, PostRepository $postRepository)
     {
         $this->communityId = $communityId;
         $this->criteriaRequest = $criterisRequest;
@@ -25,7 +25,7 @@ class CommunityQuery implements Query
     public function execute():ResultSet /* ResultSet || array ! */
     {
         return new ResultSet(
-            $this->postRepository->getCommunityFeed($this->communityId),
+            $this->postRepository->getCommunityFeed($this->communityId,$this->criteriaRequest),
             $this->postRepository->getCommunityFeedTotal($this->communityId, $this->criteriaRequest)
         );
     }
