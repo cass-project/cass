@@ -1,13 +1,13 @@
 article.component.component-profile
-  div(*ngIf="modals.setup.isActive()")
+  div(*ngIf="modals.setup.isOpened()")
     cass-modal
       cass-modal-box(width="500px")
         cass-profile-setup [profile]="currentProfile"
-  div(*ngIf="modals.settings.isActive()")
+  div(*ngIf="modals.settings.isOpened()")
     cass-modal
       cass-modal-box(width="760px")
         cass-profile-settings
-  div(*ngIf="modals.switcher.isActive()")
+  div(*ngIf="modals.switcher.isOpened()")
     cass-modal
       cass-modal-box(width="360px")
         cass-profile-switcher
