@@ -19,6 +19,10 @@ export class CurrentProfileService
         this.observable = <any>this.api.getProfileBySID(sid);
     }
 
+    public loadCurrentProfile() {
+        throw new Error('Not implemented');
+    }
+
     public getProfileObservable() {
         return this.observable;
     }

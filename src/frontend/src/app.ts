@@ -3,7 +3,6 @@ import {CORE_DIRECTIVES} from "angular2/common";
 import {RouteConfig, ROUTER_DIRECTIVES} from "angular2/router";
 
 import {AuthComponentService} from "./module/auth/component/Auth/service";
-import {ProfileComponentService} from "./module/profile/service";
 import {CommunityModalService} from "./module/community/service/CommunityModalService";
 import {CommunityRESTService} from "./module/community/service/CommunityRESTService";
 import {ThemeService} from "./module/theme/service/ThemeService";
@@ -37,7 +36,6 @@ import {AuthRESTService} from "./module/auth/service/AuthRESTService";
         AuthService,
         AuthRESTService,
         AuthComponentService,
-        ProfileComponentService,
         CommunityModalService,
         CommunityRESTService,
         CommunityService,
@@ -83,7 +81,7 @@ import {AuthRESTService} from "./module/auth/service/AuthRESTService";
     }
 ])
 export class App {
-    constructor(private authService: AuthService, private pService: ProfileComponentService) {
+    constructor(private authService: AuthService) {
         // Do not(!) remove authService dependency.
     }
 

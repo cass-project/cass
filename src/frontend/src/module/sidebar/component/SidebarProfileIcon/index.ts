@@ -1,7 +1,5 @@
 import {Component} from "angular2/core";
 
-import {ProfileComponentService} from "../../../profile/service";
-import {FrontlineService} from "../../../frontline/service";
 import {AuthService} from "../../../auth/service/AuthService";
 
 @Component({
@@ -14,9 +12,6 @@ import {AuthService} from "../../../auth/service/AuthService";
 export class SidebarProfileIcon
 {
     private isProfileMenuSwitched: boolean = false;
-
-    constructor(private service: ProfileComponentService, private frontlineService: FrontlineService, service: ProfileComponentService) {
-    }
 
     getImageProfile(){
         if(AuthService.isSignedIn()){
@@ -31,6 +26,4 @@ export class SidebarProfileIcon
     isSwitched() {
         return this.isProfileMenuSwitched;
     }
-
-
 }

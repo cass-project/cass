@@ -17,24 +17,14 @@ export class PersonalTab
 
 
     getActiveSex(value){
-        if(value === this.model.profile.gender.string){
-            return true;
-        } else if(value === 'none'){
-            return true;
-        }
     }
 
     chooseSex(sex){
-        this.model.profile.gender.string = sex;
     }
 
     getActiveGreetings(value){
-        if(value === this.model.profile.greetings.greetings_method){
-            return true;
-        }
     }
 
     chooseGreetings(greetMethod){
-        this.model.profile.greetings.greetings_method = greetMethod;
     }
 }
