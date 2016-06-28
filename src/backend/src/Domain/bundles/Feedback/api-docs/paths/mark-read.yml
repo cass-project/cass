@@ -12,9 +12,9 @@
     responses:
       200:
         schema:
-          properties:
           required:
             - success
+          properties:
             success:
               type: boolean
-              default: true
+              description: '=true'

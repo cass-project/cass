@@ -1,9 +1,7 @@
 <?php
 namespace Domain\Feedback\FeedbackType\Types;
 
-use Domain\Feedback\FeedbackType\FeedbackType;
-
-final class FTThemeRequest implements FeedbackType
+final class FTThemeRequest extends AbstractFeedbackType
 {
     const INT_CODE = 2;
     const STRING_CODE = 'theme-request';
@@ -16,5 +14,15 @@ final class FTThemeRequest implements FeedbackType
     public function getStringCode(): string
     {
         return self::STRING_CODE;
+    }
+
+    public function getTitle(): string
+    {
+        return 'Тематики';
+    }
+
+    public function getDescription(): string
+    {
+        return 'Отправляйте сюда запросы на добавление и/или реструктиризацию дерева тематик';
     }
 }

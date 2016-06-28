@@ -19,4 +19,13 @@ final class FeedbackTypeFactory
             case FTThemeRequest::INT_CODE: return new FTThemeRequest();
         }
     }
+
+    public function listCodes(): array
+    {
+        return [
+            FTCommonQuestion::INT_CODE,
+            FTSuggestion::INT_CODE,
+            FTThemeRequest::INT_CODE,
+        ];
+    }
 }

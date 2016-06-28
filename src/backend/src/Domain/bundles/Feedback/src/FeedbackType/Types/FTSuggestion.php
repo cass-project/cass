@@ -1,9 +1,7 @@
 <?php
 namespace Domain\Feedback\FeedbackType\Types;
 
-use Domain\Feedback\FeedbackType\FeedbackType;
-
-final class FTSuggestion implements FeedbackType
+final class FTSuggestion extends AbstractFeedbackType
 {
     const INT_CODE = 3;
     const STRING_CODE = 'suggestion';
@@ -16,5 +14,15 @@ final class FTSuggestion implements FeedbackType
     public function getStringCode(): string
     {
         return self::STRING_CODE;
+    }
+
+    public function getTitle(): string
+    {
+        return 'Предложения';
+    }
+
+    public function getDescription(): string
+    {
+        return 'Ваши пожелания и предложения';
     }
 }

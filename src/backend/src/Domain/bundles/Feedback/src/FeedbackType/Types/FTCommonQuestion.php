@@ -1,9 +1,7 @@
 <?php
 namespace Domain\Feedback\FeedbackType\Types;
 
-use Domain\Feedback\FeedbackType\FeedbackType;
-
-final class FTCommonQuestion implements FeedbackType
+final class FTCommonQuestion extends AbstractFeedbackType
 {
     const INT_CODE = 1;
     const STRING_CODE = 'common-question';
@@ -16,5 +14,15 @@ final class FTCommonQuestion implements FeedbackType
     public function getStringCode(): string
     {
         return self::STRING_CODE;
+    }
+
+    public function getTitle(): string
+    {
+        return 'Общие вопросы';
+    }
+
+    public function getDescription(): string
+    {
+        return 'Если вы не нашли в списке подходящую категорию или вам просто лень искать, то выберите эту категорию';
     }
 }
