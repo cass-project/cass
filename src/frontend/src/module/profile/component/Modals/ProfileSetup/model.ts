@@ -9,9 +9,10 @@ export class ProfileSetupModel
     static DEFAULT_GREETINGS_METHOD = 'fl';
 
     private profile: ProfileEntity;
-    private gender: ProfileGender = PROFILE_GENDER_LIST[0];
-    private interestingIn: Array<number> = [];
-    private expertIn: Array<number> = [];
+    
+    public gender: ProfileGender = PROFILE_GENDER_LIST[0];
+    public interestingIn: Array<number> = [];
+    public expertIn: Array<number> = [];
 
     greetings: {
         method: string,

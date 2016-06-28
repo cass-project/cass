@@ -1,8 +1,8 @@
-import {ProfileGenderEntity} from "../entity/Profile";
+import {ProfileGenderEntity, ProfileGender} from "../entity/Profile";
 
 export interface SetGenderRequest
 {
-    gender: string;
+    gender: ProfileGender;
 }
 
 export interface SetGenderResponse200

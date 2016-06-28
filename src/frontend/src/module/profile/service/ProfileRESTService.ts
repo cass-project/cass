@@ -1,6 +1,8 @@
 import {Injectable} from 'angular2/core';
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {EditPersonalRequest} from "../definitions/paths/edit-personal";
+import {SetGenderRequest} from "../definitions/paths/set-gender";
+import {ExpertInRequest} from "../definitions/paths/expert-in-ids";
 
 @Injectable()
 export class ProfileRESTService extends AbstractRESTService
@@ -15,6 +17,18 @@ export class ProfileRESTService extends AbstractRESTService
 
     createNewProfile() {
         return this.handle(this.http.put(`/backend/api/protected/profile/create`, ''));
+    }
+
+    setGender(profileId: number, request: SetGenderRequest) {
+        return this.handle(this.http.post(`/backend/api/protected/profile/${profileId}/set-gender/`, JSON.stringify(request)));
+    }
+
+    setInterestingIn(profileId: number, request: ExpertInRequest) {
+        return this.handle(this.http.put(`/backend/api/protected/profile/${profileId}/interesting-in/`, JSON.stringify(request)));
+    }
+
+    setExpertIn(profileId: number, request: ExpertInRequest) {
+        return this.handle(this.http.put(`/backend/api/protected/profile/${profileId}/expert-in/`, JSON.stringify(request)));
     }
 
     editPersonal(profileId: number, request: EditPersonalRequest) {

@@ -6,7 +6,7 @@
           <div class="container">
             <h1>Вы создали новый профиль!</h1>
             <p>Но перед тем, как начать пользоваться нашим сервисом, нам нужно задать вам парочку вопросов.</p>
-            <button *ngIf="isSubmitButtonVisible()" (click)="nextScreen()" type="submit" class="form-button form-button-primary">Продолжить</button>
+            <button (click)="nextScreen()" type="submit" class="form-button form-button-primary">Продолжить</button>
           </div>
         </div>
         <div class="stage-gender" *ngIf="screens.isOn('Gender')">

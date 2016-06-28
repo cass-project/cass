@@ -12,6 +12,9 @@ import {ProfileRESTService} from "../../../service/ProfileRESTService";
 import {ModalBoxComponent} from "../../../../modal/component/box/index";
 import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
 import {ProfileEntity} from "../../../definitions/entity/Profile";
+import {Observable} from "rxjs/Observable";
+import {MessageBusService} from "../../../../message/service/MessageBusService/index";
+import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
 
 enum ProfileSetupScreen {
     Welcome = <any>"Welcome",
@@ -63,7 +66,11 @@ export class ProfileSetup
           .add({ from: ProfileSetupScreen.Saving, to: ProfileSetupScreen.Finish });
     });
 
-    constructor(public model: ProfileSetupModel) {}
+    constructor(
+        private model: ProfileSetupModel,
+        private service: ProfileRESTService,
+        private messages: MessageBusService
+    ) {}
 
     ngAfterViewInit() {
         this.model.specifyProfile(this.profile);
@@ -75,40 +82,38 @@ export class ProfileSetup
 
     nextScreen() {
         this.screens.next();
+
+        if(this.screens.isOn(ProfileSetupScreen.Saving)) {
+            this.performSaveChanges();
+        }
     }
 
     prevScreen() {
         this.screens.previous();
     }
 
-    isPreviousButtonVisible() {
-        return this.screens.notIn([
-            ProfileSetupScreen.Finish,
-            ProfileSetupScreen.Welcome,
-            ProfileSetupScreen.Gender
-        ]);
-    }
+    performSaveChanges() {
+        let profileId = this.model.getProfile().id;
 
-    isSubmitButtonVisible() {
-        return this.screens.notIn([
-            ProfileSetupScreen.Finish,
-            ProfileSetupScreen.Gender,
-            ProfileSetupScreen.ExpertIn
-        ]);
-    }
-
-    isSkipButtonVisible() {
-        return this.screens.isIn([
-            ProfileSetupScreen.Interests,
-            ProfileSetupScreen.Gender
-        ]);
-    }
-
-    isFooterVisible() {
-        return this.screens.notIn([
-            ProfileSetupScreen.Welcome,
-            ProfileSetupScreen.Saving,
-            ProfileSetupScreen.Finish,
-        ]);
+        Observable.forkJoin([
+            this.service.setGender(profileId, {
+                gender: this.model.gender
+            }),
+            this.service.setInterestingIn(profileId, {
+                theme_ids: this.model.expertIn
+            }),
+            this.service.setExpertIn(profileId, {
+                theme_ids: this.model.expertIn
+            })
+        ]).subscribe(
+            success => {
+                this.messages.push(MessageBusNotificationsLevel.Info, 'Ваши данные сохранены');
+                this.close();
+            },
+            error => {
+                this.screens.goto(ProfileSetupScreen.ExpertIn);
+                this.messages.push(MessageBusNotificationsLevel.Warning, 'Ваши данные не были сохранены')
+            }
+        )
     }
 }
