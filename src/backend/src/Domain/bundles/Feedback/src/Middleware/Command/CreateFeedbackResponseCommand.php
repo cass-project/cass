@@ -11,7 +11,7 @@ class CreateFeedbackResponseCommand extends Command
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         $feedbackResponseParams = (new CreateFeedbackResponseRequest($request))->getParameters();
-        $feedbackResponse = $this->feedbackResponseService->createFeedbackResponse($feedbackResponseParams);
+        $feedbackResponse = $this->feedbackService->answer($feedbackResponseParams);
 
         return $responseBuilder
             ->setStatusSuccess()

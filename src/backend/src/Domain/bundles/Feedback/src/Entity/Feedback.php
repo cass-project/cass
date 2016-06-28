@@ -34,7 +34,8 @@ class Feedback implements JSONSerializable, IdEntity
     private $profile;
 
     /**
-     * @OneToOne(targetEntity="Domain\Feedback\Entity\FeedbackResponse", mappedBy="feedback")
+     * @OneToOne(targetEntity="Domain\Feedback\Entity\FeedbackResponse", cascade={"all"})
+     * @JoinColumn(name="answer_id", referencedColumnName="id")
      * @var FeedbackResponse
      */
     private $response;
@@ -167,12 +168,23 @@ class Feedback implements JSONSerializable, IdEntity
 
     public function hasResponse(): bool
     {
-        return $this->response !== null;
+        return ($this->response instanceof FeedbackResponse);
     }
 
     public function getResponse(): FeedbackResponse
     {
         return $this->response;
+    }
+
+    public function specifyResponse(FeedbackResponse $answer): self
+    {
+        if($this->hasResponse()) {
+            throw new \Exception('Feedback already has an answer');
+        }
+
+        $this->response = $answer;
+
+        return $this;
     }
 
     public function markAsRead(): self

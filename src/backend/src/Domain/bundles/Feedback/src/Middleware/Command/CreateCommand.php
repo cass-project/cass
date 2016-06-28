@@ -5,6 +5,7 @@ use Application\REST\Response\ResponseBuilder;
 use Domain\Feedback\Exception\EmptyDescriptionException;
 use Domain\Feedback\Exception\InvalidFeedbackTypeException;
 use Domain\Feedback\Middleware\Request\CreateFeedbackRequest;
+use Domain\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -30,6 +31,10 @@ class CreateCommand extends Command
             $responseBuilder
                 ->setError($e)
                 ->setStatusBadRequest();
+        }catch(ProfileNotFoundException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         }
 
         return $responseBuilder->build();

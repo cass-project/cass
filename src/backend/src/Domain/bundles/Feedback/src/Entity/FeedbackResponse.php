@@ -1,5 +1,6 @@
 <?php
 namespace Domain\Feedback\Entity;
+
 use Application\Util\Entity\IdEntity\IdEntity;
 use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
@@ -13,16 +14,17 @@ class FeedbackResponse implements IdEntity, JSONSerializable
     use IdTrait;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Feedback\Entity\Feedback", inversedBy="responses")
+     * @OneToOne(targetEntity="Domain\Feedback\Entity\Feedback")
      * @JoinColumn(name="feedback_id", referencedColumnName="id")
+     * @var Feedback
      */
     private $feedback;
 
     /**
-     * @Column(type="datetime")
+     * @Column(type="datetime", name="created_at")
      * @var string
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @Column(type="string")
@@ -30,25 +32,25 @@ class FeedbackResponse implements IdEntity, JSONSerializable
      */
     private $description;
 
+    public function __construct(Feedback $feedback)
+    {
+        $this->feedback = $feedback;
+        $this->createdAt = new \DateTime();
+    }
+
     public function toJSON(): array
     {
         return [
             'id' => $this->getId(),
             'feedback_id' => $this->getFeedback()->getId(),
-            'created_at' => $this->getCreatedAt(),
+            'created_at' => $this->getCreatedAt()->format(\DateTime::RFC2822),
             'description' => $this->getDescription()
         ];
     }
 
     public function getCreatedAt(): \DateTime
     {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTime $createdAt): self
-    {
-        $this->created_at = $createdAt;
-        return $this;
+        return $this->createdAt;
     }
 
     public function getDescription(): string
@@ -65,11 +67,5 @@ class FeedbackResponse implements IdEntity, JSONSerializable
     public function getFeedback(): Feedback
     {
         return $this->feedback;
-    }
-
-    public function setFeedback(Feedback $feedback): self
-    {
-        $this->feedback = $feedback;
-        return $this;
     }
 }

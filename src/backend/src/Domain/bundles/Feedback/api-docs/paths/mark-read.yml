@@ -1,0 +1,20 @@
+'/feedback/{feedbackId}/mark-as-read':
+  post:
+    tags:
+      - feedback
+    description: Отмечает отзыв как уже прочтенный. Прочитать можно только отзыв, на который дан ответ.
+    parameters:
+      - name: feedbackId
+        in: path
+        required: true
+        description: ID фидбека
+        type: numeric
+    responses:
+      200:
+        schema:
+          properties:
+          required:
+            - success
+            success:
+              type: boolean
+              default: true
