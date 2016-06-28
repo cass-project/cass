@@ -1,8 +1,6 @@
-@import "./../../../../../../styles/globals";
+@import "./../../../../../../../styles/globals";
 
 .component-profile-setup-greetings {
-  @include disable-text-select;
-
   header.component-header {
     color: material-color("grey", "900");
     font-size: 24px;
@@ -13,6 +11,11 @@
     >li {
       border-radius: 3px;
       margin: 5px;
+
+      input.greetings-radio {
+        margin-right: 10px;
+        vertical-align: text-bottom;
+      }
 
       label.greetings-radio-view {
         border: 1px solid white;
@@ -28,14 +31,13 @@
         }
 
         span.greetings-label {
-          font-weight: bold;
+          font-size: 16px;
         }
       }
 
       div.greetings-subform {
         margin: 10px 0;
       }
-
     }
   }
 }

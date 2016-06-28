@@ -121,7 +121,7 @@ article.component.component-collection-settings-modal
                     *ngIf="!deleteProcessVisible", (click)="avatarDeletingProcess()")
                       i.fa.fa-fw.fa-trash
                       span Удалить
-                    button.form-text-button.form-button-text-remove(*ngIf="deleteProcessVisible", disabled)
+                    button.form-text-button.form-button-text-remove(*ngIf="isDeleting", disabled)
                       i.fa.fa-spinner.fa-pulse.fa-fw
                       span Удалить
                     button.form-button.form-button-primary

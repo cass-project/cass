@@ -21,7 +21,6 @@ import {UploadImageService} from "../../../../../form/component/UploadImage/serv
     ],
     providers: [
         UploadImageService,
-        UploadProfileImageStrategy
     ]
 })
 
@@ -34,10 +33,11 @@ export class ImageTab
     constructor(
         private uploadImageService: UploadImageService, 
         private profileRESTService: ProfileRESTService,
-        private uploadProfileImageStrategy: UploadProfileImageStrategy,
         private authService: AuthService
     ) {
-        uploadImageService.setUploadStrategy(uploadProfileImageStrategy);
+        uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(
+            authService.getAuthToken().getCurrentProfile().entity.profile.id
+        ));
     }
 
 

@@ -1,17 +1,17 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input, EventEmitter, Output} from "angular2/core";
 
-import {ModalComponent} from "../../../modal/component/index";
+import {ModalComponent} from "../../../../modal/component/index";
 import {ProfileSetupModel} from "./model";
 import {ProfileSetupScreenGreetings} from "./Screen/ProfileSetupScreenGreetings/index";
 import {ProfileSetupScreenGender} from "./Screen/ProfileSetupScreenGender/index";
 import {ProfileSetupScreenImage} from "./Screen/ProfileSetupScreenImage/index";
 import {ProfileSetupScreenInterests} from "./Screen/ProfileSetupScreenInterests/index";
 import {ProfileSetupScreenExpertIn} from "./Screen/ProfileSetupScreenExpertIn/index";
-import {ScreenControls} from "../../../util/classes/ScreenControls";
-import {ProfileRESTService} from "../../service/ProfileRESTService";
-import {AuthService} from "../../../auth/service/AuthService";
-import {ModalBoxComponent} from "../../../modal/component/box/index";
-import {LoadingLinearIndicator} from "../../../form/component/LoadingLinearIndicator/index";
+import {ScreenControls} from "../../../../util/classes/ScreenControls";
+import {ProfileRESTService} from "../../../service/ProfileRESTService";
+import {ModalBoxComponent} from "../../../../modal/component/box/index";
+import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
+import {ProfileEntity} from "../../../definitions/entity/Profile";
 
 enum ProfileSetupScreen {
     Welcome = <any>"Welcome",
@@ -48,7 +48,10 @@ enum ProfileSetupScreen {
 
 export class ProfileSetup
 {
-    @Input('profile') profile;
+    @Input('profile') profile: ProfileEntity;
+
+    @Output('success') successEvent = new EventEmitter<ProfileEntity>();
+    @Output('close') closeEvent = new EventEmitter<ProfileEntity>();
 
     public screens: ScreenControls<ProfileSetupScreen> = new ScreenControls<ProfileSetupScreen>(ProfileSetupScreen.Welcome, (sc: ScreenControls<ProfileSetupScreen>) => {
         sc.add({ from: ProfileSetupScreen.Welcome, to: ProfileSetupScreen.Gender })
@@ -60,24 +63,21 @@ export class ProfileSetup
           .add({ from: ProfileSetupScreen.Saving, to: ProfileSetupScreen.Finish });
     });
 
-    constructor(
-        public model: ProfileSetupModel, 
-        private profileRESTService: ProfileRESTService,
-        private authService: AuthService
-    ) {}
+    constructor(public model: ProfileSetupModel) {}
+
+    ngAfterViewInit() {
+        this.model.specifyProfile(this.profile);
+    }
 
     close() {
+        this.closeEvent.emit(this.profile);
     }
 
-    ngSubmit() {
-        this.nextStage();
-    }
-
-    nextStage() {
+    nextScreen() {
         this.screens.next();
     }
 
-    prevStage() {
+    prevScreen() {
         this.screens.previous();
     }
 

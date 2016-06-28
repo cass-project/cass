@@ -6,26 +6,26 @@
           <div class="container">
             <h1>Вы создали новый профиль!</h1>
             <p>Но перед тем, как начать пользоваться нашим сервисом, нам нужно задать вам парочку вопросов.</p>
-            <button *ngIf="isSubmitButtonVisible()" (click)="ngSubmit()" type="submit" class="form-button form-button-primary">Продолжить</button>
+            <button *ngIf="isSubmitButtonVisible()" (click)="nextScreen()" type="submit" class="form-button form-button-primary">Продолжить</button>
           </div>
         </div>
         <div class="stage-gender" *ngIf="screens.isOn('Gender')">
           <header class="stage-header">
             <h1>Укажите ваш пол</h1>
           </header>
-          <cass-profile-setup-screen-gender (choice)="changeGender($event)"></cass-profile-setup-screen-gender>
+          <cass-profile-setup-screen-gender (next)="nextScreen()"></cass-profile-setup-screen-gender>
         </div>
         <div class="stage-greetings" *ngIf="screens.isOn('Greetings')">
           <header class="stage-header">
             <h1>Как вас называть?</h1>
           </header>
-          <cass-profile-setup-screen-greetings></cass-profile-setup-screen-greetings>
+          <cass-profile-setup-screen-greetings (back)="prevScreen()" (next)="nextScreen()"></cass-profile-setup-screen-greetings>
         </div>
         <div class="stage-image" *ngIf="screens.isOn('Image')">
           <header class="stage-header">
             <h1>Изображение профиля</h1>
           </header>
-          <cass-profile-setup-screen-image></cass-profile-setup-screen-image>
+          <cass-profile-setup-screen-image (next)="nextScreen()"></cass-profile-setup-screen-image>
         </div>
         <div class="stage-interests" *ngIf="screens.isOn('Interests')">
           <header class="stage-header">
@@ -34,7 +34,7 @@
           <p class="why">Мы не собираемся слать вам таргетированный спам. Укажите свои интересы,
             чтобы вас могли найти другие пользователи нашего сервиса, а мы могли
             сразу предложить вам подходящий контент.</p>
-          <cass-profile-setup-screen-interests></cass-profile-setup-screen-interests>
+          <cass-profile-setup-screen-interests (next)="nextScreen()"></cass-profile-setup-screen-interests>
         </div>
         <div class="stage-expert-in" *ngIf="screens.isOn('ExpertIn')">
           <header class="stage-header">
@@ -42,7 +42,7 @@
           </header>
           <p class="why">Люди иногда ищут не просто тех, кто интересуется чем либо, но и тех,
           кто действительно <em>разбирается</em> в указанной области.</p>
-          <cass-profile-setup-screen-expert-in></cass-profile-setup-screen-expert-in>
+          <cass-profile-setup-screen-expert-in (next)="nextScreen()"></cass-profile-setup-screen-expert-in>
         </div>
         <div class="stage-saving" *ngIf="screens.isOn('Saving')">
           <header class="stage-header">
@@ -67,21 +67,5 @@
         </div>
       </div>
     </div>
-    <footer class="form-footer" *ngIf="isFooterVisible()">
-      <div class="form-footer-section">
-        <div class="cass-padding-box-5">
-          <button *ngIf="isPreviousButtonVisible()" (click)="prevStage()" type="button" class="form-text-button">Назад</button>
-        </div>
-      </div>
-      <div class="form-footer-section">
-        <div class="form-footer-item">
-          <div class="cass-padding-box-5">
-            <button *ngIf="isSkipButtonVisible()" (click)="nextStage()" type="submit" class="form-text-button">Пропустить</button>
-            <button *ngIf="isSubmitButtonVisible()" [disabled]="!verifyStage()" (click)="nextStage()" type="submit" class="form-button form-button-primary">Следующий шаг</button>
-            <button *ngIf="screens.isOn('ExpertIn')" (click)="SaveSetupChanges()" type="submit" class="form-button form-button-primary">Завершить создание</button>
-          </div>
-        </div>
-      </div>
-    </footer>
   </form>
 </article>

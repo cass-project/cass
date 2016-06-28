@@ -2,7 +2,7 @@ article.component.component-profile
   div(*ngIf="isSetupRequired()")
     cass-modal
       cass-modal-box(width="550px")
-        cass-profile-setup [profile]="getCurrentProfile()"
+        cass-profile-setup([profile]="getCurrentProfile()")
   div(*ngIf="modals.settings.isOpened()")
     cass-modal
       cass-modal-box(width="760px")
