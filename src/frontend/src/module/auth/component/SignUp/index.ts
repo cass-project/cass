@@ -1,20 +1,17 @@
 import {Component, Output, EventEmitter, ElementRef, ViewChild} from "angular2/core";
 
 import {OAuth2Component} from "../OAuth2/index";
-import {MessageBusService} from "../../../message/service/MessageBusService/index";
-import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
 import {SignInRequest} from "../../definitions/paths/sign-in";
 import {SignUpRequest} from "../../definitions/paths/sign-up";
 import {AuthRESTService} from "../../service/AuthRESTService";
 import {ProgressLock} from "../../../form/component/ProgressLock/index";
+import {NgForm} from "angular2/common";
+import {AuthService} from "../../service/AuthService";
 
 @Component({
     selector: 'cass-auth-sign-up',
     template: require('./template.jade'),
-    styles: [
-        require('./style.shadow.scss')
-    ],
     directives: [
         LoadingIndicator,
         OAuth2Component,
@@ -23,12 +20,16 @@ import {ProgressLock} from "../../../form/component/ProgressLock/index";
 })
 export class SignUpComponent
 {
+    @ViewChild('form') form: NgForm;
     @ViewChild('emailInput') emailInput: ElementRef;
     
     @Output('back') backEvent = new EventEmitter<SignInRequest>();
     @Output('close') closeEvent = new EventEmitter<SignUpRequest>();
     @Output('success') successEvent = new EventEmitter();
-    
+
+    private PASSWORD_MIN_LENGTH = 6;
+    private PASSWORD_MAX_LENGTH = 32;
+
     private status: SignUpStatus = {
         loading: false
     };
@@ -39,10 +40,7 @@ export class SignUpComponent
         repeat: '',
     };
 
-    constructor(
-        private authRESTService: AuthRESTService,
-        private messages: MessageBusService
-    ) {}
+    constructor(private authService: AuthService) {}
 
     ngAfterViewInit() {
         this.emailInput.nativeElement.focus();
@@ -51,14 +49,23 @@ export class SignUpComponent
     submit() {
         this.status.loading = true;
 
-        this.authRESTService.signUp(this.model).subscribe(
+        this.authService.signUp(this.model).subscribe(
             response =>{
                 this.successEvent.emit(response);
                 this.status.loading = false;
             },
-            error => {this.messages.push(MessageBusNotificationsLevel.Warning, error);
+            () => {
                 this.status.loading = false;
             });
+    }
+
+    isSubmitAvailable(): boolean {
+        let testHasEmail = this.model.email.length > 0;
+        let testHasPassword = this.model.password.length > 0;
+        let testPasswordMatches = this.model.password === this.model.repeat;
+        let testNotIsLoading = this.status.loading === false;
+
+        return !! (testNotIsLoading && testHasEmail && testHasPassword && testPasswordMatches);
     }
 
     close() {

@@ -1,8 +1,6 @@
 import {Component, Output, EventEmitter, ViewChild, ElementRef} from "angular2/core";
 
 import {OAuth2Component} from "../OAuth2/index";
-import {MessageBusService} from "../../../message/service/MessageBusService/index";
-import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
 import {AuthService} from "../../service/AuthService";
 import {SignInRequest, SignInResponse200} from "../../definitions/paths/sign-in";
@@ -11,9 +9,6 @@ import {ProgressLock} from "../../../form/component/ProgressLock/index";
 @Component({
     template: require('./template.jade'),
     selector: 'cass-auth-sign-in',
-    styles: [
-        require('./style.shadow.scss')
-    ],
     directives: [
         OAuth2Component,
         LoadingIndicator,

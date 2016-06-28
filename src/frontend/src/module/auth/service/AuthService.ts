@@ -6,6 +6,7 @@ import {SignInRequest, SignInResponse200} from "../definitions/paths/sign-in";
 import {AuthRESTService} from "./AuthRESTService";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
+import {SignUpRequest, SignUpResponse200} from "../definitions/paths/sign-up";
 
 @Injectable()
 export class AuthService
@@ -38,6 +39,22 @@ export class AuthService
 
     public getAuthToken() {
         return AuthService.getAuthToken();
+    }
+    
+    public signUp(request: SignUpRequest) {
+        let signUpObservable = this.api.signUp(request);
+
+        signUpObservable.map(res => res.json()).subscribe(
+            (response: SignUpResponse200) => {
+                AuthService.token = new AuthToken(response.api_key, new Account(response.account, response.profiles));
+                this.frontline.merge(response.frontline);
+            },
+            error => {
+                console.log(error);
+            }
+        );
+
+        return signUpObservable;
     }
 
     public signIn(request: SignInRequest) {
