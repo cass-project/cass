@@ -1,4 +1,5 @@
 article.component.component-profile-setup-greetings
+  cass-form-progress-lock(*ngIf="saving")
   form.form((ngSubmit)="submit()", #setupForm="ngForm")
     ul.greetings-method
       li([ngClass]="{'active': model.isGreetingsChecked('fl')}")

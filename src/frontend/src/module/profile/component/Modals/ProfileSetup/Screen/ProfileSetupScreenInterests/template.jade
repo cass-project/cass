@@ -1,7 +1,7 @@
 article.component.component-profile-setup-screen-interests
   form.form
     .theme-select
-      cass-theme-select((change)="model.setInterestingIn(themeIds)")
+      cass-theme-select([value]='model.interestingIn', (change)="model.setInterestingIn(themeIds)")
     footer.form-footer
       .form-footer-section
         .form-footer-item

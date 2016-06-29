@@ -26,6 +26,7 @@ import {CollectionRESTService} from "./module/collection/service/CollectionRESTS
 import {ProfileRESTService} from "./module/profile/service/ProfileRESTService";
 import {CommunitySettingsModalModel} from "./module/community/component/Modal/CommunitySettingsModal/model";
 import {AuthRESTService} from "./module/auth/service/AuthRESTService";
+import {CurrentAccountService} from "./module/auth/service/CurrentAccountService";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -36,6 +37,7 @@ import {AuthRESTService} from "./module/auth/service/AuthRESTService";
         AuthService,
         AuthRESTService,
         AuthComponentService,
+        CurrentAccountService,
         CommunityModalService,
         CommunityRESTService,
         CommunityService,

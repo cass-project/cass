@@ -81,7 +81,7 @@ export class AuthService
     }
 }
 
-class AuthToken
+export class AuthToken
 {
     constructor(public apiKey: string, public account: Account) {
         localStorage.setItem('api_key', apiKey);

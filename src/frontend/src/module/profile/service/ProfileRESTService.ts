@@ -19,6 +19,10 @@ export class ProfileRESTService extends AbstractRESTService
         return this.handle(this.http.put(`/backend/api/protected/profile/create`, ''));
     }
 
+    greetings() {
+        
+    }
+
     setGender(profileId: number, request: SetGenderRequest) {
         return this.handle(this.http.post(`/backend/api/protected/profile/${profileId}/set-gender/`, JSON.stringify(request)));
     }

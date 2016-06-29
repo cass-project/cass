@@ -76,6 +76,14 @@ export class Profile {
         return !!this.entity.profile.is_current;
     }
 
+    public replaceAvatar(image: ImageCollection) {
+        this.entity.profile.image = image;
+    }
+
+    public getAvatar(): ImageCollection {
+        return this.entity.profile.image;
+    }
+
     public setAsCurrent(): Profile {
         this.entity.profile.is_current = true;
 

@@ -11,6 +11,9 @@ Profile_EditPersonal_Request:
       type: string
       description: |
         Пол. Возможные значения: male, female, null
+    avatar:
+      type: boolean
+      description: Если TRUE, то аватарка пользователя будет заменена на автосгенерированную.
     method:
       type: string
       default: "fl"
