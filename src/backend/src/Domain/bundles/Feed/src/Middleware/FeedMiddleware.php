@@ -15,6 +15,7 @@ class FeedMiddleware implements MiddlewareInterface
 {
     const SOURCE_COLLECTION = 'collection';
     const SOURCE_COMMUNITY = 'community';
+    const SOURCE_PROFILE = 'profile';
     
     /** @var FeedSourcesService */
     private $feedSourcesService;
@@ -61,6 +62,11 @@ class FeedMiddleware implements MiddlewareInterface
             case self::SOURCE_COMMUNITY:
                 return $this->feedSourcesService->getCommunitySourcePrototype(
                     (int) $request->getAttribute('communityId')
+                );
+
+            case self::SOURCE_PROFILE:
+                return $this->feedSourcesService->getProfileSourcePrototype(
+                    (int) $request->getAttribute('profileId')
                 );
         }
     }

@@ -3,6 +3,7 @@ namespace Domain\Feed\Service;
 
 use Domain\Feed\Feed\Source\Collection\CollectionSource;
 use Domain\Feed\Feed\Source\Community\CommunitySource;
+use Domain\Feed\Feed\Source\Profile\ProfileSource;
 use Domain\Feed\Formatter\ResultSetFormatter;
 use Domain\Post\Repository\PostRepository;
 use Domain\Profile\Repository\ProfileRepository;
@@ -11,7 +12,8 @@ class FeedSourcesService /* PrototypeFactory */
 {
     private $sources = [
         'collections' => [],
-        'communities' => []
+        'communities' => [],
+        'profiles'    => []
     ];
 
     /** @var PostRepository */
@@ -40,6 +42,14 @@ class FeedSourcesService /* PrototypeFactory */
             $this->sources['communities'][$communityId] = new CommunitySource($communityId, $this->postRepository);
         }
         return $this->sources['communities'][$communityId];
+    }
+
+    public function getProfileSourcePrototype(int $profileId)
+    {
+        if( !isset($this->sources['profiles'][$profileId])){
+            $this->sources['profiles'][$profileId] = new ProfileSource($profileId, $this->postRepository);
+        }
+        return $this->sources['profiles'][$profileId];
     }
     
     public function getResultSetFormatter() {

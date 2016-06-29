@@ -1,0 +1,22 @@
+"/feed/profile/{profileId}/dashboard":
+  post:
+    tags:
+      - feed
+    description:
+      список последних постов из коллекций указанного профиля
+    parameters:
+      - name: profileId
+        in: path
+        required: true
+        type: number
+        description: ID profile
+      - name: body
+        in: body
+        required: true
+        description:
+        schema:
+          $ref: '#/definitions/Feed_Criteria_Request'
+    responses:
+      200:
+        schema:
+          $ref: '#/definitions/Feed_ResultSet'

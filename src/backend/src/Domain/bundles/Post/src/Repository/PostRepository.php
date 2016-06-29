@@ -103,6 +103,11 @@ class PostRepository extends EntityRepository
         return $this->findBy($qbCriteria, ['id' => 'desc'], $limit, $offset);
     }
 
+    public function getProfileFeed(int $profileId, CriteriaRequest $criteriaRequest)
+    {
+
+    }
+
     public function getFeedTotal(int $collectionId, CriteriaRequest $criteriaRequest): int {
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder()
@@ -125,5 +130,10 @@ class PostRepository extends EntityRepository
         ;
 
         return (int) $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+    }
+
+    public function getProfileFeedTotal(int $communityId, CriteriaRequest $criteriaRequest)
+    {
+
     }
 }

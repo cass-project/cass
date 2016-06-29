@@ -11,10 +11,15 @@ return function (Application $app) {
         'feed-collection'
     );
 
-
     $app->post(
         '/feed/{source:community}/{communityId}/dashboard[/]',
         FeedMiddleware::class,
         'feed-community'
+    );
+
+    $app->post(
+        '/feed/{source:profile}/{profileId}/dashboard[/]',
+        FeedMiddleware::class,
+        'profile-feed-collection'
     );
 };
