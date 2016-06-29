@@ -185,14 +185,20 @@ class PostMiddlewareTest extends MiddlewareTestCase
         $this->upFixture(new SamplePostsFixture());
 
         $post = SamplePostsFixture::getPost(1);
+        $postId = $post->getId();
 
-        return $this->requestPostGet($post->getId())
+
+        return $this->requestPostGet($postId)
             ->execute()
             ->expectJSONContentType()
             ->expectStatusCode(200)
             ->expectJSONBody([
                 'success' => true
-            ]);
+            ])
+            ->expect(function($result)use ($postId){
+                $this->assertEquals($postId, $result['entity']['id']);
+
+            });
     }
 
     public function testGetPost404() {

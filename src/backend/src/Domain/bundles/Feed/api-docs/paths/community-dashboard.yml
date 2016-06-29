@@ -1,0 +1,22 @@
+"/feed/community/{communityId}/dashboard":
+  post:
+    tags:
+      - feed
+    description:
+      Получить список последних сообщений в коммунити
+    parameters:
+      - name: communityId
+        in: path
+        required: true
+        type: number
+        description: ID коллекции
+      - name: body
+        in: body
+        required: true
+        description:
+        schema:
+          $ref: '#/definitions/Feed_Criteria_Request'
+    responses:
+      200:
+        schema:
+          $ref: '#/definitions/Feed_ResultSet'

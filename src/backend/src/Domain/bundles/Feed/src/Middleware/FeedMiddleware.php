@@ -14,6 +14,7 @@ use Zend\Stratigility\MiddlewareInterface;
 class FeedMiddleware implements MiddlewareInterface
 {
     const SOURCE_COLLECTION = 'collection';
+    const SOURCE_COMMUNITY = 'community';
     
     /** @var FeedSourcesService */
     private $feedSourcesService;
@@ -48,13 +49,18 @@ class FeedMiddleware implements MiddlewareInterface
     
     private function sourceFactory(ServerRequestInterface $request): Source {
         $source = $request->getAttribute('source');
-        
+
         switch($source) {
             default:
                 throw new NotFoundException(sprintf('Unknown source `%s`', $source));
             case self::SOURCE_COLLECTION:
                 return $this->feedSourcesService->getCollectionSourcePrototype(
                     (int) $request->getAttribute('collectionId')
+                );
+
+            case self::SOURCE_COMMUNITY:
+                return $this->feedSourcesService->getCommunitySourcePrototype(
+                    (int) $request->getAttribute('communityId')
                 );
         }
     }
