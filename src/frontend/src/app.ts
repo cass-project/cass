@@ -27,6 +27,8 @@ import {ProfileRESTService} from "./module/profile/service/ProfileRESTService";
 import {CommunitySettingsModalModel} from "./module/community/component/Modal/CommunitySettingsModal/model";
 import {AuthRESTService} from "./module/auth/service/AuthRESTService";
 import {CurrentAccountService} from "./module/auth/service/CurrentAccountService";
+import {FeedbackRoute} from "./module/feedback/route/FeedbackRoute/index";
+import {FeedbackCreateButton} from "./module/feedback/component/Elements/FeedbackCreateButton/index";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -56,6 +58,7 @@ import {CurrentAccountService} from "./module/auth/service/CurrentAccountService
         ProfileComponent,
         SidebarComponent,
         CommunityComponent,
+        FeedbackCreateButton,
         RouterOutlet
 ]
 })
@@ -80,6 +83,11 @@ import {CurrentAccountService} from "./module/auth/service/CurrentAccountService
         name: 'Community',
         path: '/community/...',
         component: CommunityRoute
+    },
+    {
+        name: 'Feedback',
+        path: '/feedback/...',
+        component: FeedbackRoute
     }
 ])
 export class App {
