@@ -1,1 +1,0 @@
-Source: https://www.iconfinder.com/iconsets/capsocial-square-flat-3

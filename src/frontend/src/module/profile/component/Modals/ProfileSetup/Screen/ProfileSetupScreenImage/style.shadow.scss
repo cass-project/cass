@@ -1,0 +1,24 @@
+@import "./../../../../../../../styles/globals";
+
+$PROGRESS_HEIGHT: 18px;
+$PREVIEW_SIZE: 500px;
+$FOOTER_HEIGHT: 50px;
+
+div.profile-modal-tab-image
+{
+  text-align: center;
+  padding: 20px;
+
+  div.profile-image-container {
+    display: inline-block;
+    margin-bottom: 20px;
+    max-width: 500px;
+    border: 3px solid white;
+    outline: 1px dotted material-color("grey", "400");
+    overflow: hidden;
+  }
+
+  div.profile-image-controls {
+    text-align: center;
+  }
+}

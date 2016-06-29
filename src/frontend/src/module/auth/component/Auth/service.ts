@@ -1,38 +1,29 @@
 import {Injectable} from "angular2/core";
+import {ModalControl} from "../../../util/classes/ModalControl";
 
 @Injectable()
 export class AuthComponentService
 {
-    public modals: ModalControls = new ModalControls();
-}
+    private modals: {
+        signIn: ModalControl,
+        signUp: ModalControl
+    } = {
+        signIn: new ModalControl(),
+        signUp: new ModalControl()
+    };
 
-class ModalControls
-{
-    currentModal: Modals = Modals.None;
-
-    openSignInModal() {
-        this.currentModal = Modals.SignIn;
+    signUp() {
+        this.closeAllModals();
+        this.modals.signUp.open();
     }
 
-    isSignInModalOpened() {
-        return this.currentModal === Modals.SignIn;
+    signIn() {
+        this.closeAllModals();
+        this.modals.signIn.open();
     }
 
-    openSignUpModal() {
-        this.currentModal = Modals.SignUp;
+    closeAllModals() {
+        this.modals.signIn.close();
+        this.modals.signUp.close();
     }
-
-    isSignUpModalOpened() {
-        return this.currentModal === Modals.SignUp;
-    }
-
-    closeModals() {
-        this.currentModal = Modals.None;
-    }
-}
-
-enum Modals {
-    None,
-    SignIn,
-    SignUp
 }

@@ -11,4 +11,8 @@ import {AuthComponentService} from "../../../auth/component/Auth/service";
 export class SidebarSignInButton
 {
     constructor(private service: AuthComponentService) {}
+    
+    click() {
+        this.service.signIn();
+    }
 }

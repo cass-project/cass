@@ -30,8 +30,7 @@ export class Account {
 }
 
 export class AccountProfiles {
-    constructor(public profiles: Array<Profile>) {
-    }
+    constructor(public profiles: Array<Profile>) {}
 
     getCurrent(): Profile {
         for (let profile of this.profiles) {

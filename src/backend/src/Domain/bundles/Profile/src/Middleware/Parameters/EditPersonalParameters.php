@@ -6,6 +6,9 @@ class EditPersonalParameters
     /** @var string */
     private $gender;
 
+    /** @var bool */
+    private $avatar;
+
     /** @var string */
     private $method;
 
@@ -23,6 +26,7 @@ class EditPersonalParameters
 
     public function __construct(
         string $method,
+        bool $avatar,
         string $firstName,
         string $lastName,
         string $middleName,
@@ -30,6 +34,7 @@ class EditPersonalParameters
     )
     {
         $this->method = $method;
+        $this->avatar = $avatar;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->middleName = $middleName;
@@ -44,6 +49,11 @@ class EditPersonalParameters
     public function isGenderSpecified(): bool
     {
         return $this->gender !== null;
+    }
+
+    public function isAvatarRegenetateRequested(): bool
+    {
+        return $this->avatar;
     }
 
     public function getGender(): string

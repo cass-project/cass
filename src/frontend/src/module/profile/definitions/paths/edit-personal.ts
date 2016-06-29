@@ -3,7 +3,8 @@ import {ProfileEntity} from "../entity/Profile";
 
 export interface EditPersonalRequest
 {
-    gender: string;
+    gender?: string;
+    avatar?: boolean;
     method: string;
     last_name: string;
     first_name: string;

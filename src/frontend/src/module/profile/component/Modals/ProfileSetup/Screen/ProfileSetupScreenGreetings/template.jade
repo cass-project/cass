@@ -1,0 +1,143 @@
+article.component.component-profile-setup-greetings
+  cass-form-progress-lock(*ngIf="saving")
+  form.form((ngSubmit)="submit()", #setupForm="ngForm")
+    ul.greetings-method
+      li([ngClass]="{'active': model.isGreetingsChecked('fl')}")
+        label.greetings-radio-view
+          input#profileSettingsGreetingsRadioFL.greetings-radio(
+            (click)="model.setGreetingsMethod('fl')",
+            [checked]="model.isGreetingsChecked('fl')",
+            type='radio',
+            name='profileGreetingsMethod',
+            required,
+            minlength="1",
+            maxlength="30",
+            value='fl'
+          )
+          span.greetings-label
+            | По имени и фамилии
+        .greetings-subform(*ngIf="model.isGreetingsChecked('fl')")
+          .input-group
+            label
+              span.form-label Имя
+              object
+                input.form-input(type='text', [(ngModel)]='model.greetings.firstName')
+          .input-group
+            label
+              span.form-label Фамилия
+              object
+                input.form-input(type='text', [(ngModel)]='model.greetings.lastName')
+
+      li([ngClass]="{'active': model.isGreetingsChecked('n')}")
+        label.greetings-radio-view
+          input#profileSettingsGreetingsRadioN.greetings-radio(
+            (click)="model.setGreetingsMethod('n')",
+            [checked]="model.isGreetingsChecked('n')",
+            type='radio',
+            name='profileGreetingsMethod',
+            value='n',
+            required,
+            minlength="3",
+            maxlength="30",
+          )
+          span.greetings-label
+            | По никнейму
+        .greetings-subform(*ngIf="model.isGreetingsChecked('n')")
+          .input-group
+            label
+              span.form-label Никнейм
+              object
+                input.form-input(type='text', [(ngModel)]='model.greetings.nickName')
+
+      li([ngClass]="{'active': model.isGreetingsChecked('fm')}")
+        label.greetings-radio-view
+          input#profileSettingsGreetingsRadioFM.greetings-radio(
+            (click)="model.setGreetingsMethod('fm')",
+            [checked]="model.isGreetingsChecked('fm')",
+            type='radio',
+            name='profileGreetingsMethod',
+            value='fm'
+          )
+          span.greetings-label
+            | По имени и отчеству
+        .greetings-subform(*ngIf="model.isGreetingsChecked('fm')")
+          .input-group
+            label
+              span.form-label Имя
+              object
+                input.form-input(
+                  type='text',
+                  [(ngModel)]='model.greetings.firstName',
+                  required,
+                  minlength="1",
+                  maxlength="30",
+                )
+          .input-group
+            label
+              span.form-label Отчество
+              object
+                input.form-input(
+                  type='text',
+                  [(ngModel)]='model.greetings.middleName',
+                  required,
+                  minlength="1",
+                  maxlength="30",
+                )
+
+      li([ngClass]="{'active': model.isGreetingsChecked('lfm')}")
+        label.greetings-radio-view
+          input#profileSettingsGreetingsRadioLFM.greetings-radio(
+            (click)="model.setGreetingsMethod('lfm')",
+            [checked]="model.isGreetingsChecked('lfm')",
+            type='radio',
+            name='profileGreetingsMethod',
+            value='lfm'
+          )
+          span.greetings-label
+            | По ФИО
+        .greetings-subform(*ngIf="model.isGreetingsChecked('lfm')")
+          .input-group
+            label
+              span.form-label Фамилия
+              object
+                input.form-input(
+                  type='text',
+                  [(ngModel)]='model.greetings.lastName',
+                  required,
+                  minlength="1",
+                  maxlength="30",
+                )
+          .input-group
+            label
+              span.form-label Имя
+              object
+                input.form-input(
+                  type='text',
+                  [(ngModel)]='model.greetings.firstName',
+                  required,
+                  minlength="1",
+                  maxlength="30",
+                )
+          .input-group
+            label
+              span.form-label Отчество
+              object
+                input.form-input(
+                  type='text',
+                  [(ngModel)]='model.greetings.middleName',
+                  required,
+                  minlength="1",
+                  maxlength="30",
+                )
+    footer.form-footer
+      .form-footer-section
+        .form-footer-item
+          button.form-text-button(type="button", (click)="back()")
+            span Назад
+      .form-footer-section
+        .form-footer-item
+          button.form-button.form-button-primary(
+            type="submit",
+            [disabled]="! setupForm.form.valid"
+          )
+            span Следующий шаг

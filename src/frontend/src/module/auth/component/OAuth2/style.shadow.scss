@@ -1,6 +1,6 @@
 @import "./../../../../styles/globals";
 
-$ICON_SIZE: 32px;
+$ICON_SIZE: 40px;
 
 button.oauth2-button {
   @include card(1);
@@ -35,4 +35,11 @@ button.oauth2-button {
 a.oauth2-link-button {
   display: inline-block;
   text-decoration: none;
+}
+
+ul.oauth2-services-list {
+  li {
+    display: inline-block;
+    margin-right: 5px;
+  }
 }

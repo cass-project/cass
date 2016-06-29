@@ -1,0 +1,53 @@
+@import "~sass-material-colors";
+
+article.component-form-progress-lock {
+  position: absolute;
+  top: 0; height: 100%;
+  left: 0; width: 100%;
+  z-index: 500;
+
+  div.progress-lock-progress-bar {
+    z-index: 502;
+    height: 4px;
+    width: 100%;
+    position: relative;
+  }
+
+  div.progress-lock-backdrop {
+    z-index: 501;
+    position: absolute;
+    top: 0; height: 100%;
+    left: 0; width: 100%;
+    background-color: #fff;
+    opacity: 0.4;
+  }
+
+  div.progress-lock-bar {
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 0;
+    left: 50%;
+    text-align: center;
+    animation: loading-form-progress-lock-bar 1.5s cubic-bezier(0.4, 0.0, 0.6, 1) infinite;
+    background-color: material-color("light-blue", "300");
+  }
+
+  @keyframes loading-form-progress-lock-bar {
+    from {
+      left: 0;
+      width: 0;
+      background-color: material-color("blue", "300");
+    }
+    50% {
+      left: 0;
+      width: 100%;
+      background-color: material-color("blue", "700");
+    }
+    to {
+      left: 100%;
+      width: 0;
+      background-color: material-color("blue", "300");
+    }
+  }
+}

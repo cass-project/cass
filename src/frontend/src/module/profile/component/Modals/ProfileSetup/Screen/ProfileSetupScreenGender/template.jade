@@ -1,0 +1,22 @@
+article.component.cass-profile-setup-screen-gender
+  .gender-select
+    .gender-option.gender-option-male((click)="useGender('male')")
+      span.icon
+        i.fa.fa-male
+      button.form-text-button(type="button")
+        span Мужской
+    .gender-option.gender-option-female((click)="useGender('female')")
+        span.icon
+          i.fa.fa-female
+        button.form-text-button(type="button")
+          span Женский
+  footer.form-footer
+    .form-footer-section
+      .form-footer-item
+    .form-footer-section
+      .form-footer-item
+        button.form-text-button(
+          type="button",
+          (click)="skip()"
+        )
+          span Пропустить

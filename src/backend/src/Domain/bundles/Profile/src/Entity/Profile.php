@@ -149,6 +149,7 @@ final class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntit
 
     public function setGreetings(Greetings $greetings): self
     {
+        $this->isInitialized = true;
         $this->greetings = $greetings;
 
         return $this;

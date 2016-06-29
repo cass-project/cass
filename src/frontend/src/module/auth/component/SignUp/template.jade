@@ -1,28 +1,62 @@
-form.form.form-auth-sign-in((ngSubmit)='submit()', (keyup.escape)='close()')
-  header.form-header
-    h1 Регистрация
-  .cass-padding-box-10
-    .input-group
-      label.form-label
-        span.label-text E-mail: 
-        input.form.form-input(type='email', placeholder='Адрес электронного ящика', autocomplete='off', autofocus='autofocus', tabindex='1', [(ngModel)]='model.email', [disabled]="status.loading")
-    .input-group
-      label.form-label
-        span.label-text Пароль
-        input.form.form-input(type='password', placeholder='**********', autocomplete='off', tabindex='2', [(ngModel)]='model.password', [disabled]="status.loading")
-    .input-group
-      label.form-label
-        span.label-text Повторите пароль
-        input.form.form-input(type='password', placeholder='**********', autocomplete='off', tabindex='2', [(ngModel)]='model.repeat', [disabled]="status.loading")
-  footer.form-footer
-    .form-footer-section
-      .cass-padding-box-5
-        button.form-text-button(type='button', tabindex='4', (click)='back()', [disabled]="status.loading")
-          span Назад
-    .form-footer-section
-      .form-footer-item
+article.component.component-auth-sign-up
+  form.form((ngSubmit)='submit()', (keyup.escape)='close()', #form="ngForm")
+    cass-form-progress-lock(*ngIf="status.loading")
+    header.form-header
+      h1 Регистрация
+    .cass-padding-box-10
+      .input-group
+        label.form-label
+          span.label-text E-mail:
+          input.form-input(
+            type='email',
+            placeholder='Адрес электронного ящика',
+            autocomplete='off', autofocus='autofocus',
+            tabindex='1',
+            [(ngModel)]='model.email',
+            [disabled]="status.loading",
+            #emailInput
+          )
+      .input-group
+        label.form-label
+          span.label-text Пароль
+          input.form-input(
+            type='password',
+            placeholder='**********',
+            autocomplete='off',
+            tabindex='2',
+            required,
+            minlength='6',
+            maxlength='32',
+            [(ngModel)]='model.password',
+            [disabled]="status.loading"
+          )
+      .input-group
+        label.form-label
+          span.label-text Повторите пароль
+          input.form-input(
+            type='password',
+            placeholder='**********',
+            autocomplete='off',
+            tabindex='3',
+            required,
+            minlength='6',
+            maxlength='32',
+            [(ngModel)]='model.repeat',
+            [disabled]="status.loading"
+          )
+    footer.form-footer
+      .form-footer-section
         .cass-padding-box-5
-          button.form-text-button(type='button', tabindex='5', (click)='close()', [disabled]="status.loading")
-            span Закрыть
-          button.form-button.form-button-primary(type='submit', tabindex='3', [disabled]="status.loading")
-            span Войти
+          button.form-text-button(type='button', tabindex='4', (click)='back()', [disabled]="status.loading")
+            span Назад
+      .form-footer-section
+        .form-footer-item
+          .cass-padding-box-5
+            button.form-text-button(type='button', tabindex='5', (click)='close()', [disabled]="status.loading")
+              span Закрыть
+            button.form-button.form-button-primary(
+                type='submit',
+                tabindex='3',
+                [disabled]="! (isSubmitAvailable() && form.form.valid)"
+            )
+              span Зарегистрироваться

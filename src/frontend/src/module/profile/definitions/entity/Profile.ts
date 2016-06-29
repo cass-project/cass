@@ -2,48 +2,60 @@ import {ImageCollection} from "../../../avatar/definitions/ImageCollection";
 import {Account} from "../../../account/definitions/entity/Account";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 
+export enum ProfileGender {
+    None = <any> "none",
+    Male = <any> "male",
+    Female = <any> "female"
+}
+
+export const PROFILE_GENDER_LIST = [
+    ProfileGender.None,
+    ProfileGender.Male,
+    ProfileGender.Female
+];
+
 export interface ProfileExtendedEntity {
     collection: CollectionEntity;
     profile: ProfileEntity;
 }
 
 export interface ProfileEntity {
-    id:number;
-    sid:string;
-    account_id:number;
-    is_current:boolean;
-    is_initialized:boolean;
+    id: number;
+    sid: string;
+    account_id: number;
+    is_current: boolean;
+    is_initialized: boolean;
     interesting_in_ids: Array<number>;
     expert_in_ids: Array<number>;
-    image:ImageCollection;
-    greetings:ProfileGreetingsEntity;
-    gender:ProfileGenderEntity;
-    disabled:ProfileDisabledEntity;
+    image: ImageCollection;
+    greetings: ProfileGreetingsEntity;
+    gender: ProfileGenderEntity;
+    disabled: ProfileDisabledEntity;
 }
 
 export interface ProfileGreetingsEntity {
-    method:string;
-    greetings:string;
-    first_name:string;
-    last_name:string;
-    middle_name:string;
-    nick_name:string;
+    method: string;
+    greetings: string;
+    first_name: string;
+    last_name: string;
+    middle_name: string;
+    nick_name: string;
 }
 
 export interface ProfileGenderEntity {
-    int:number;
-    string:string;
+    int: number;
+    string: string;
 }
 
 export interface ProfileGenderEntity {
-    id:string;
-    profile_id:number;
-    public_path:string;
+    id: string;
+    profile_id: number;
+    public_path: string;
 }
 
 export interface ProfileDisabledEntity {
-    is_disabled:boolean;
-    reason:string;
+    is_disabled: boolean;
+    reason: string;
 }
 
 export class Profile {
@@ -52,25 +64,33 @@ export class Profile {
     constructor(public owner: Account, public entity: ProfileExtendedEntity) {
     }
 
-    getId():number {
+    getId(): number {
         return this.entity.profile.id
     }
 
-    greetings():string {
+    greetings(): string {
         return this.entity.profile.greetings.greetings;
     }
 
-    public isCurrent():boolean {
+    public isCurrent(): boolean {
         return !!this.entity.profile.is_current;
     }
 
-    public setAsCurrent():Profile {
+    public replaceAvatar(image: ImageCollection) {
+        this.entity.profile.image = image;
+    }
+
+    public getAvatar(): ImageCollection {
+        return this.entity.profile.image;
+    }
+
+    public setAsCurrent(): Profile {
         this.entity.profile.is_current = true;
 
         return this;
     }
 
-    public unsetAsCurrent():Profile {
+    public unsetAsCurrent(): Profile {
         this.entity.profile.is_current = false;
 
         return this;

@@ -124,6 +124,10 @@ class ProfileService
             $profile->setGender(Gender::createFromStringCode($parameters->getGender()));
         }
 
+        if($parameters->isAvatarRegenetateRequested()) {
+            $this->avatarService->generateImage(new ProfileImageStrategy($profile, $this->imagesFlySystem));
+        }
+
         $this->profileRepository->saveProfile($profile);
         $this->events->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
 

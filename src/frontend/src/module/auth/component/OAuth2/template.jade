@@ -1,8 +1,8 @@
 article.component.component-auth-oauth2
   ul.oauth2-services-list
     li
-      button.oauth2-button((click)="oAuthGo('google')")
-        img.service-brand(src="/dist/assets/icons-social-networks/google.png", title="G+")
+      button.oauth2-button(type="button", (click)="oAuthGo('google')")
+        img.service-brand(src="/dist/assets/social-icons/google.png", title="G+")
     li
-      button.oauth2-button((click)="oAuthGo('facebook')")
-        img.service-brand(src="/dist/assets/icons-social-networks/facebook.png", title="Facebook")
+      button.oauth2-button(type="button", (click)="oAuthGo('facebook')")
+        img.service-brand(src="/dist/assets/social-icons/facebook.png", title="Facebook")

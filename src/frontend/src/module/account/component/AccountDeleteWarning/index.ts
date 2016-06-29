@@ -14,8 +14,8 @@ export class AccountDeleteWarning
     private date: string = 'NONE';
     
     constructor(private authService: AuthService) {
-        if(AuthService.isSignedIn()) {
-            let token = AuthService.getAuthToken();
+        if(authService.isSignedIn()) {
+            let token = authService.getAuthToken();
             let request = token.account.entity.delete_request;
             
             if(request.has) {

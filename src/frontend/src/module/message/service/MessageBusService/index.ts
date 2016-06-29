@@ -7,7 +7,7 @@ import {MessageBusNotificationsStates} from "../../component/MessageBusNotificat
 
 @Injectable()
 export class MessageBusService implements MessageBusInterface
-{
+{   
     public notifications:MessageBusNotificationsModel[] = [];
 
     private autoIncrementIndex:number = 0;

@@ -1,0 +1,16 @@
+article.component.component-profile-setup-screen-expert-in
+  form.form
+    .theme-select
+      cass-theme-select([value]='model.expertIn', (change)="model.setExpertIn(themeIds)")
+    footer.form-footer
+      .form-footer-section
+        .form-footer-item
+          button.form-text-button(type="button", (click)="back()")
+            span Назад
+      .form-footer-section
+        .form-footer-item
+          button.form-text-button(type="button", (click)="skip()")
+            span Пропустить
+        .form-footer-item
+          button.form-button.form-button-primary(type="button", (click)="next()")
+            span Следующий шаг

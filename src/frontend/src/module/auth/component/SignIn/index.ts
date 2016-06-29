@@ -1,26 +1,28 @@
-import {Component, Output, EventEmitter} from "angular2/core";
+import {Component, Output, EventEmitter, ViewChild, ElementRef} from "angular2/core";
 
 import {OAuth2Component} from "../OAuth2/index";
-import {MessageBusService} from "../../../message/service/MessageBusService/index";
-import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
-import {AuthRESTService} from "../../service/AuthRESTService";
 import {AuthService} from "../../service/AuthService";
-import {SignInRequest} from "../../definitions/paths/sign-in";
+import {SignInRequest, SignInResponse200} from "../../definitions/paths/sign-in";
+import {ProgressLock} from "../../../form/component/ProgressLock/index";
 
 @Component({
     template: require('./template.jade'),
     selector: 'cass-auth-sign-in',
-    styles: [
-        require('./style.shadow.scss')
-    ],
     directives: [
         OAuth2Component,
-        LoadingIndicator
+        LoadingIndicator,
+        ProgressLock
     ]
 })
 export class SignInComponent
 {
+    @ViewChild('emailInput') emailInput: ElementRef;
+
+    @Output('success') successEvent = new EventEmitter();
+    @Output('close') closeEvent = new EventEmitter<SignInModel>();
+    @Output('sign-up') signUpEvent = new EventEmitter<SignInModel>();
+
     private status: SignInStatus = {
         loading: false
     };
@@ -30,32 +32,29 @@ export class SignInComponent
         password: ''
     };
 
-    @Output('success') successEvent = new EventEmitter();
-    @Output('close') closeEvent = new EventEmitter<SignInModel>();
-    @Output('sign-up') signUpEvent = new EventEmitter<SignInModel>();
+    constructor(private service: AuthService) {}
 
-    constructor(
-        private service: AuthService,
-        private messages: MessageBusService
-    ) {}
+    ngAfterViewInit() {
+        this.emailInput.nativeElement.focus();
+    }
 
     submit() {
         this.status.loading = true;
 
         this.service.signIn(this.model).map(res => res.json()).subscribe(
-            response => {
-                if(AuthService.isSignedIn()) {
+            (response: SignInResponse200) => {
+                if (this.service.isSignedIn()) {
                     this.successEvent.emit(response);
                 }
 
                 this.status.loading = false;
             },
-            error => {this.messages.push(MessageBusNotificationsLevel.Warning, error);
+            error => {
                 this.status.loading = false;
             });
     }
 
-    signUp(){
+    signUp() {
         this.signUpEvent.emit(this.model);
     }
 
@@ -64,13 +63,11 @@ export class SignInComponent
     }
 }
 
-interface SignInModel extends SignInRequest
-{
+interface SignInModel extends SignInRequest {
     email: string;
     password: string;
 }
 
-interface SignInStatus
-{
+interface SignInStatus {
     loading: boolean;
 }

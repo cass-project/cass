@@ -1,0 +1,55 @@
+@import "./../../../../../styles/globals";
+
+form.form-profile-setup {
+  header.stage-header {
+    h1 {
+      font-size: 20px;
+      color: material-color("grey", "900");
+      margin: 20px;
+      text-align: center;
+    }
+  }
+
+  p.why {
+    font-size: $FONT_SIZE_SMALL;
+    margin: 30px 5px;
+    color: material-color("grey", "700");
+    text-align: center;
+
+    em {
+      font-style: italic;
+    }
+  }
+
+  div.stage {
+    @include disable-text-select;
+
+    >div.container {
+      padding: 20px;
+      text-align: center;
+
+      h1 {
+        font-size: 20px;
+        color: material-color("grey", "900");
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 14px;
+        color: material-color("grey", "700");
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  div.stage-saving {
+    text-align: center;
+    margin: 80px 0;
+
+    div.loading-indicator-box {
+      display: inline-block;
+      width: 70%;
+      margin-bottom: 20px;
+    }
+  }
+}

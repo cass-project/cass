@@ -7,8 +7,11 @@ export class AuthRequestOptions extends BaseRequestOptions {
 
         this.headers.append('Content-type', 'application/json');
 
-        if(AuthService.isSignedIn()) {
-            this.headers.set('X-Api-Key', AuthService.getAuthToken().apiKey);
+        let token = AuthService.token;
+
+        if(token) {
+            console.log('Do you even try?', token.apiKey);
+            this.headers.set('X-Api-Key', token.apiKey);
         }
     }
 }
