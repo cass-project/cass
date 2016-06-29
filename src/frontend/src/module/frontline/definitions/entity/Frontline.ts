@@ -26,6 +26,16 @@ export interface FrontlineEntity extends Success200
                 is_development_ready: boolean,
                 is_production_ready: boolean,
             }[]
+        },
+        feedback: {
+            types: {
+                code: {
+                    int:number,
+                    string:string
+                },
+                title:string,
+                description:string
+            }[]
         }
     }
 }
