@@ -2,6 +2,9 @@ import {Component} from "angular2/core";
 import {RouterOutlet, RouteConfig} from "angular2/router";
 
 import {FeedbackCreateRoute} from "../FeedbackCreateRoute/index";
+import {FeedbackCreateModalModel} from "../../component/Modal/FeedbackCreateModal/model";
+import {FeedbackService} from "../../service/FeedbackService";
+import {FeedbackRESTService} from "../../service/FeedbackRESTService";
 
 @Component({
     selector: "feedback-router",
@@ -11,6 +14,11 @@ import {FeedbackCreateRoute} from "../FeedbackCreateRoute/index";
     ],
     directives: [
         RouterOutlet
+    ],
+    providers:[
+        FeedbackCreateModalModel,
+        FeedbackService,
+        FeedbackRESTService
     ]
 })
 
