@@ -50,7 +50,7 @@ export class FeedbackCreateModal
             description: this.model.description
         }).subscribe(
             data => {
-                this.messages.push(MessageBusNotificationsLevel.Info, "Отзыв успешно отправлен!");
+                this.messages.push(MessageBusNotificationsLevel.Success, "Отзыв успешно отправлен!");
                 this.router.navigateByUrl("/");
                 this.isLoading = false;
             },
