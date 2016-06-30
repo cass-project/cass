@@ -16,9 +16,11 @@ cass-modal
             )
               // Если юзать [value] или value, то охуеваем от того, как ангуляр превращает number в string
               option(
-                *ngFor="#feedback of feedbackTypes",
+                *ngFor="#feedback of feedbackTypesService.getFeedbackTypes()",
                 [ngValue]="feedback.code.int"  
               ) {{feedback.title}}
+        .input-group
+          p.form-text {{feedbackTypesService.getFeedbackType(model.type_feedback)?.description}}
         .input-group
           label.form-label
             span.label-text Ваше сообщение      

@@ -1,9 +1,8 @@
 import {Component} from "angular2/core";
-import {Location, Router} from 'angular2/router';
+import {Router} from 'angular2/router';
 
 import {ModalComponent} from "../../../../modal/component/index";
 import {ModalBoxComponent} from "../../../../modal/component/box/index";
-import {FrontlineService} from "../../../../frontline/service";
 import {FeedbackCreateModalModel} from "./model";
 import {FeedbackService} from "../../../service/FeedbackService";
 import {CreateFeedbackRequest} from "../../../definitions/paths/create";
@@ -11,6 +10,7 @@ import {CurrentAccountService} from "../../../../auth/service/CurrentAccountServ
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
+import {FeedbackTypesService} from "../../../service/FeedbackTypesService";
 
 @Component({
     selector: 'cass-feedback-create-modal',
@@ -27,18 +27,16 @@ import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 
 export class FeedbackCreateModal
 {
-    private feedbackTypes:any[] = [];
     private isLoading:boolean = false;
     constructor(
         public model: FeedbackCreateModalModel,
         private router: Router,
-        private frontline: FrontlineService,
+        private feedbackTypesService: FeedbackTypesService,
         private service: FeedbackService,
         private messages: MessageBusService,
         private accountService: CurrentAccountService
 )
     {
-        this.feedbackTypes = frontline.session.config.feedback.types;
     }
     
     abort() {
@@ -52,7 +50,7 @@ export class FeedbackCreateModal
             description: this.model.description
         }).subscribe(
             data => {
-                this.messages.push(MessageBusNotificationsLevel.Info, "Отзыв успешно отправлен!");
+                this.messages.push(MessageBusNotificationsLevel.Success, "Отзыв успешно отправлен!");
                 this.router.navigateByUrl("/");
                 this.isLoading = false;
             },

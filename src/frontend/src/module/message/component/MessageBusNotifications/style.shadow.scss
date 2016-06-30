@@ -73,5 +73,10 @@
       color: material-color('grey', '900');
       background: material-color('grey', '50');
     }
+    
+    &.success {
+      color: material-color('light-green', '900');
+      background: material-color('light-green', '50');
+    }
   }
 }
