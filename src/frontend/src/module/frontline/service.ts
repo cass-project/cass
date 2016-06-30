@@ -16,7 +16,7 @@ export function frontline(callback: { (session: FrontlineResponse200) }) {
     let apiKey = window.localStorage['api_key'];
 
     xhr.open('GET', '/backend/api/frontline/*/', true);
-    xhr.setRequestHeader('X-Api-Key', apiKey);
+    xhr.setRequestHeader('Authorization', apiKey);
     xhr.addEventListener("load", (event: Event) => {
         callback(JSON.parse(xhr.responseText));
     });

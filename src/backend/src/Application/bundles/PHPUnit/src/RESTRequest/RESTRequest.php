@@ -47,7 +47,7 @@ class RESTRequest
     private $addedHeaders;
 
     /**
-     * Если не NULL, то к запросу добавляется хидер X-Api-Key
+     * Если не NULL, то к запросу добавляется хидер Authorization
      * @var string|null
      */
     private $xApiKey;
@@ -82,7 +82,7 @@ class RESTRequest
         }
 
         if($this->xApiKey) {
-            $request = $request->withHeader('X-Api-Key', $this->xApiKey);
+            $request = $request->withHeader('Authorization', $this->xApiKey);
         }
 
         ob_start();
