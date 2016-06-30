@@ -5,6 +5,7 @@ import {FeedbackCreateRoute} from "../FeedbackCreateRoute/index";
 import {FeedbackCreateModalModel} from "../../component/Modal/FeedbackCreateModal/model";
 import {FeedbackService} from "../../service/FeedbackService";
 import {FeedbackRESTService} from "../../service/FeedbackRESTService";
+import {FeedbackTypesService} from "../../service/FeedbackTypesService";
 
 @Component({
     selector: "feedback-router",
@@ -18,7 +19,8 @@ import {FeedbackRESTService} from "../../service/FeedbackRESTService";
     providers:[
         FeedbackCreateModalModel,
         FeedbackService,
-        FeedbackRESTService
+        FeedbackRESTService,
+        FeedbackTypesService
     ]
 })
 
