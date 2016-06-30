@@ -1,0 +1,39 @@
+@import "./../../../../../styles/globals";
+
+textarea.form-input{
+  height: 4em;
+  resize:vertical;
+}
+
+.select-wrap {
+  position: relative;
+  display: block;
+
+  i.fa {
+    font-size: $FONT_SIZE_NORMAL;
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 30px;
+    pointer-events: none;
+
+  }
+  select.form-input {
+    border: #bbb 1px solid;
+    padding-left: 6px;
+    padding-right: 6px;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+  }
+  &:hover {
+    i.fa {
+      color: material-color('light-blue', '900');
+    }
+    select.form-input {
+      border-color: material-color('light-blue', '400');
+    }
+  }
+}

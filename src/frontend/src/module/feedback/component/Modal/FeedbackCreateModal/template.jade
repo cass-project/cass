@@ -1,6 +1,39 @@
 cass-modal
   cass-modal-box(width="800px")
-    header.form-header
-      h1 Оставить отзыв
-    .cass-padding-box-10
-      p FooBar
+    form.form.screen.screen-general((ngSubmit)="submit()")
+      cass-form-progress-lock(*ngIf="isLoading")
+      header.form-header
+        h1 Оставить отзыв
+      .cass-padding-box-10
+        .input-group
+          label.form-label
+            span.label-text Тема обращения
+          label.select-wrap
+            span.label-text
+            i.fa.fa-caret-down.fa-fw(aria-hidden="true")
+            select.form-input(
+              [(ngModel)]="model.type_feedback"
+            )
+              // Если юзать [value] или value, то охуеваем от того, как ангуляр превращает number в string
+              option(
+                *ngFor="#feedback of feedbackTypes",
+                [ngValue]="feedback.code.int"  
+              ) {{feedback.title}}
+        .input-group
+          label.form-label
+            span.label-text Ваше сообщение      
+          textarea.form-input(
+            [(ngModel)]="model.description"
+          )
+  
+          
+      footer.form-footer
+        .form-footer-section
+          .cass-padding-box-5
+            button.form-text-button(type="button", (click)="abort()")
+              span Отмена
+        .form-footer-section
+          .cass-padding-box-5
+            button.form-button.form-button-primary(type="submit")
+              span Отправить
+          
