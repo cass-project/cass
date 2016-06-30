@@ -1,6 +1,8 @@
 <?php
 namespace Domain\Profile\Service;
 
+use Application\Service\EventEmitterAware\EventEmitterAwareService;
+use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
 use Domain\Account\Entity\Account;
 use Domain\Account\Service\AccountService;
 use Domain\Auth\Service\CurrentAccountService;
@@ -8,7 +10,6 @@ use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Avatar\Service\AvatarService;
 use Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
-use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Service\CollectionService;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Gender\Gender;
@@ -18,12 +19,12 @@ use Domain\Profile\Exception\MaxProfilesReachedException;
 use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
 use Domain\Profile\Repository\ProfileRepository;
 use Domain\Profile\Image\ProfileImageStrategy;
-use Evenement\EventEmitter;
-use Evenement\EventEmitterInterface;
 use League\Flysystem\FilesystemInterface;
 
-class ProfileService
+class ProfileService implements EventEmitterAwareService
 {
+    use EventEmitterAwareTrait;
+
     const EVENT_PROFILE_ACCESS = 'domain.profile.access';
     const EVENT_PROFILE_CREATED = 'domain.profile.create';
     const EVENT_PROFILE_UPDATED = 'domain.profile.update';
@@ -31,9 +32,6 @@ class ProfileService
     const EVENT_PROFILE_DELETED = 'domain.profile.deleted';
 
     const MAX_PROFILES_PER_ACCOUNT = 10;
-
-    /** @var EventEmitterInterface */
-    private $events;
 
     /** @var ProfileRepository */
     private $profileRepository;
@@ -58,16 +56,10 @@ class ProfileService
         AvatarService $avatarService
     )
     {
-        $this->events = new EventEmitter();
         $this->profileRepository = $profileRepository;
         $this->collectionService = $collectionService;
         $this->imagesFlySystem = $imagesFlySystem;
         $this->avatarService = $avatarService;
-    }
-
-    public function getEventEmitter(): EventEmitterInterface
-    {
-        return $this->events;
     }
 
     public function worksWithAccountService(AccountService $accountService)
@@ -104,7 +96,7 @@ class ProfileService
         $this->accountService->switchToProfile($account, $profile->getId());
 
         $this->generateProfileImage($profile->getId());
-        $this->events->emit(self::EVENT_PROFILE_CREATED, [$profile]);
+        $this->getEventEmitter()->emit(self::EVENT_PROFILE_CREATED, [$profile]);
 
         return $profile;
     }
@@ -129,7 +121,7 @@ class ProfileService
         }
 
         $this->profileRepository->saveProfile($profile);
-        $this->events->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
+        $this->getEventEmitter()->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
 
         return $profile;
     }
@@ -143,7 +135,7 @@ class ProfileService
             throw new LastProfileException('This is your last profile. Sorry you need at least one profile per account.');
         }
 
-        $this->events->emit(self::EVENT_PROFILE_DELETE, [$profile]);
+        $this->getEventEmitter()->emit(self::EVENT_PROFILE_DELETE, [$profile]);
         $this->profileRepository->deleteProfile($profile);
         $account->getProfiles()->removeElement($profile);
 
@@ -152,7 +144,7 @@ class ProfileService
             $this->accountService->switchToProfile($account, $firstProfile->getId());
         }
 
-        $this->events->emit(self::EVENT_PROFILE_DELETED, [$profile]);
+        $this->getEventEmitter()->emit(self::EVENT_PROFILE_DELETED, [$profile]);
 
         return $account->getCurrentProfile();
     }
@@ -163,7 +155,7 @@ class ProfileService
         $profile->setGreetings($greetings);
 
         $this->profileRepository->saveProfile($profile);
-        $this->events->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
+        $this->getEventEmitter()->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
 
         return $profile;
     }
@@ -174,7 +166,7 @@ class ProfileService
         $profile->setGender($gender);
 
         $this->profileRepository->saveProfile($profile);
-        $this->events->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
+        $this->getEventEmitter()->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
 
         return $profile->getGender();
     }
@@ -186,7 +178,7 @@ class ProfileService
 
         $this->avatarService->uploadImage($strategy, $parameters);
         $this->profileRepository->saveProfile($profile);
-        $this->events->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
+        $this->getEventEmitter()->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
 
         return $profile->getImages();
     }
@@ -196,7 +188,7 @@ class ProfileService
         $profile = $this->getProfileById($profileId);
 
         $this->generateProfileImage($profileId);
-        $this->events->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
+        $this->getEventEmitter()->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
 
         return $profile->getImages();
     }
@@ -218,7 +210,7 @@ class ProfileService
         $profile->setInterestingInIds($themeIds);
 
         $this->profileRepository->saveProfile($profile);
-        $this->events->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
+        $this->getEventEmitter()->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
 
         return $profile;
     }
@@ -229,7 +221,7 @@ class ProfileService
         $profile->setExpertInIds($themeIds);
 
         $this->profileRepository->saveProfile($profile);
-        $this->events->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
+        $this->getEventEmitter()->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
 
         return $profile;
     }
@@ -247,7 +239,7 @@ class ProfileService
         $profile->replaceCollections($collections->createImmutableInstance());
 
         $this->profileRepository->saveProfile($profile);
-        $this->events->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
+        $this->getEventEmitter()->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
 
         return $profile->getCollections();
     }
@@ -265,7 +257,7 @@ class ProfileService
         $profile->replaceCollections($collections->createImmutableInstance());
 
         $this->profileRepository->saveProfile($profile);
-        $this->events->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
+        $this->getEventEmitter()->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
 
         return $profile->getCollections();
     }
