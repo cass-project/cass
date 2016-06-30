@@ -29,6 +29,8 @@ import {AuthRESTService} from "./module/auth/service/AuthRESTService";
 import {CurrentAccountService} from "./module/auth/service/CurrentAccountService";
 import {FeedbackRoute} from "./module/feedback/route/FeedbackRoute/index";
 import {FeedbackCreateButton} from "./module/feedback/component/Elements/FeedbackCreateButton/index";
+import {PostRESTService} from "./module/post/service/PostRESTService";
+import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAttachmentRESTService";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -47,7 +49,9 @@ import {FeedbackCreateButton} from "./module/feedback/component/Elements/Feedbac
         ProfileSwitcherService,
         ProfileRESTService,
         CollectionRESTService,
-        CommunitySettingsModalModel
+        CommunitySettingsModalModel,
+        PostRESTService,
+        PostAttachmentRESTService
     ],
     directives: [
         ROUTER_DIRECTIVES,
