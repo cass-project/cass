@@ -11,6 +11,7 @@ export enum MessageBusNotificationsLevel {
     Warning = <any>"warning",
     Info = <any>"info",
     Debug = <any>"debug",
+    Success = <any>"success",
 }
 
 export enum MessageBusNotificationsStates {
