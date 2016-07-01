@@ -10,9 +10,6 @@ import {FeedbackTypesService} from "../../service/FeedbackTypesService";
 @Component({
     selector: "feedback-router",
     template: require('./template.jade'),
-    styles: [
-        require('./style.shadow.scss')
-    ],
     directives: [
         RouterOutlet
     ],

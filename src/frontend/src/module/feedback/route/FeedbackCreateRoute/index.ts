@@ -7,9 +7,6 @@ import {FeedbackTypeEntity} from "../../definitions/entity/FeedbackType";
 
 @Component({
     template: require('./template.jade'),
-    styles: [
-        require('./style.shadow.scss')
-    ],
     directives: [
         FeedbackCreateModal
     ]
