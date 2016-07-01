@@ -3,12 +3,16 @@ import {Http, URLSearchParams} from "angular2/http"
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {Account} from "../../account/definitions/entity/Account";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
+import {AuthService} from "../../auth/service/AuthService";
 
 @Injectable()
-export class ProfileIMRESTService extends AbstractRESTService {
-    constructor(protected  http:Http, protected messages:MessageBusService) {
-        super(http, messages);
-    }
+export class ProfileIMRESTService extends AbstractRESTService
+{
+    constructor(
+        protected http: Http,
+        protected auth: AuthService,
+        protected messages: MessageBusService
+    ) { super(http, auth, messages) }
 
     getUnreadMessages(){
         return this.handle(this.http.get(`/backend/api/protected/profile-im/unread`));

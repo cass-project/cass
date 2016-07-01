@@ -4,11 +4,16 @@ import {Observable} from "rxjs/Observable";
 
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
+import {AuthService} from "../../auth/service/AuthService";
 
 @Injectable()
 export abstract class AbstractRESTService {
 
-    constructor(protected  http: Http, protected messages: MessageBusService) {}
+    constructor(
+        protected http: Http,
+        protected auth: AuthService,
+        protected messages: MessageBusService
+    ) {}
 
     handle(request: Observable<Response>) {
         let fork = request.publish().refCount();

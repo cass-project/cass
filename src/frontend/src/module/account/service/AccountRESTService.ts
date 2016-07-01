@@ -3,13 +3,16 @@ import {Http} from "angular2/http"
 
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
+import {AuthService} from "../../auth/service/AuthService";
 
 @Injectable()
 export class AccountRESTService extends AbstractRESTService
 {
-    constructor(protected  http: Http, protected messages: MessageBusService) {
-        super(http, messages);
-    }
+    constructor(
+        protected http: Http,
+        protected auth: AuthService,
+        protected messages: MessageBusService
+    ) { super(http, auth, messages) }
 
     appAccess() {
         return this.handle(this.http.get('/backend/api/protected/account/app-access'));
