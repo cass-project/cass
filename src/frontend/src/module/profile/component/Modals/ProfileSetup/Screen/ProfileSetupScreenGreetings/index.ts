@@ -16,6 +16,7 @@ import {EditPersonalResponse200} from "../../../../../definitions/paths/edit-per
         ProgressLock
     ]
 })
+
 export class ProfileSetupScreenGreetings
 {
     private saving: boolean = false;
