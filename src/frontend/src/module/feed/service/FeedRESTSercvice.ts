@@ -4,14 +4,16 @@ import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {Account} from "../../account/definitions/entity/Account";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {AuthService} from "../../auth/service/AuthService";
+import {AuthToken} from "../../auth/service/AuthToken";
 
 @Injectable()
-export class FeedRESTSercvice extends AbstractRESTService {
+export class FeedRESTSercvice extends AbstractRESTService
+{
     constructor(
         protected http: Http,
-        protected auth: AuthService,
+        protected token: AuthToken,
         protected messages: MessageBusService
-    ) { super(http, auth, messages) }
+    ) { super(http, token, messages); }
 
     getFeed(collectionId: number, criteria)
     {

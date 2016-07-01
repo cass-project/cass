@@ -17,7 +17,7 @@ export class SidebarProfileIcon
 
     getImageProfile(){
         if(this.authService.isSignedIn()){
-            return this.authService.getAuthToken().getCurrentProfile().entity.profile.image.variants['default'].public_path;
+            return this.authService.getCurrentAccount().getCurrentProfile().entity.profile.image.variants['default'].public_path;
         }
     }
 

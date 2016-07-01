@@ -1,7 +1,9 @@
 import {FrontlineResponse200} from "./definitions/paths/frontline";
+import {Injectable} from "angular2/core";
 
 var merge = require('merge');
 
+@Injectable()
 export class FrontlineService
 {
     constructor(public session: FrontlineResponse200) {}

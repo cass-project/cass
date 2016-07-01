@@ -31,18 +31,18 @@ export class ProfileComponent
         settings: new ModalControl(),
         switcher: new ModalControl(),
     };
-    
+
     constructor(private authService: AuthService) {}
 
     isSetupRequired() {
         if(this.authService.isSignedIn()) {
-            return ! this.authService.getAuthToken().getCurrentProfile().entity.profile.is_initialized;
+            return ! this.authService.getCurrentAccount().getCurrentProfile().entity.profile.is_initialized;
         }else{
             return false;
         }
     }
-    
+
     getCurrentProfile(): ProfileEntity {
-        return this.authService.getAuthToken().getCurrentProfile().entity.profile;
+        return this.authService.getCurrentAccount().getCurrentProfile().entity.profile;
     }
 }

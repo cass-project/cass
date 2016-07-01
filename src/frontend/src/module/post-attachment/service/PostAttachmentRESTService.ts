@@ -4,9 +4,11 @@ import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {Account} from "../../account/definitions/entity/Account";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {AuthService} from "../../auth/service/AuthService";
+import {AuthToken} from "../../auth/service/AuthToken";
 
 @Injectable()
-export class PostAttachmentRESTService extends AbstractRESTService {
+export class PostAttachmentRESTService extends AbstractRESTService
+{
     private xmlRequest = new XMLHttpRequest();
 
     public tryNumber:number = 0;
@@ -14,9 +16,9 @@ export class PostAttachmentRESTService extends AbstractRESTService {
 
     constructor(
         protected http: Http,
-        protected auth: AuthService,
+        protected token: AuthToken,
         protected messages: MessageBusService
-    ) { super(http, auth, messages) }
+    ) { super(http, token, messages); }
 
     attachFile(collectionId: number, file, modal)
     {

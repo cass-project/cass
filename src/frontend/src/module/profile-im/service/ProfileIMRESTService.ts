@@ -4,15 +4,16 @@ import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {Account} from "../../account/definitions/entity/Account";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {AuthService} from "../../auth/service/AuthService";
+import {AuthToken} from "../../auth/service/AuthToken";
 
 @Injectable()
 export class ProfileIMRESTService extends AbstractRESTService
 {
     constructor(
         protected http: Http,
-        protected auth: AuthService,
+        protected token: AuthToken,
         protected messages: MessageBusService
-    ) { super(http, auth, messages) }
+    ) { super(http, token, messages); }
 
     getUnreadMessages(){
         return this.handle(this.http.get(`/backend/api/protected/profile-im/unread`));

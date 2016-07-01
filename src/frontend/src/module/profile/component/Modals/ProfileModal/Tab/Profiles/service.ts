@@ -44,7 +44,7 @@ export class ProfilesTabService
     requestDeleteProfile(profileId){
         this.buttonActivate = true;
         this.profileRESTService.deleteProfile(profileId).subscribe(data => {
-            this.authService.getAuthToken().account.profiles.profiles.splice(this.pickedElem, 1);
+            this.authService.getCurrentAccount().profiles.profiles.splice(this.pickedElem, 1);
 
             this.closeModalDeleteProfile();
             this.buttonActivate = false;
@@ -52,16 +52,16 @@ export class ProfilesTabService
     }
 
     getProfile(){
-        for(let i = 0; i < this.authService.getAuthToken().account.profiles.profiles.length; i++){
-            if(this.pickedId === this.authService.getAuthToken().account.profiles.profiles[i].entity.profile.id){
+        for(let i = 0; i < this.authService.getCurrentAccount().profiles.profiles.length; i++){
+            if(this.pickedId === this.authService.getCurrentAccount().profiles.profiles[i].entity.profile.id){
                 this.pickedElem = i;
-                return this.authService.getAuthToken().account.profiles.profiles[i].entity;
+                return this.authService.getCurrentAccount().profiles.profiles[i].entity;
             }
         }
     }
 
     getProfiles(){
-        return this.authService.getAuthToken().account.profiles.profiles;
+        return this.authService.getCurrentAccount().profiles.profiles;
     }
 
     closeModalDeleteProfile(){

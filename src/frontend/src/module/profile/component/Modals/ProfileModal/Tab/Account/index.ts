@@ -1,8 +1,8 @@
-import {Component} from "angular2/core";
+import {Component, Input} from "angular2/core";
 
-import {ProfileService} from "../../../../../service/ProfileService";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {ProfileModalModel} from "../../model";
+import {AccountEntity} from "../../../../../../account/definitions/entity/Account";
 
 @Component({
     selector: 'cass-profile-modal-tab-account',
@@ -13,38 +13,35 @@ import {ProfileModalModel} from "../../model";
 })
 export class AccountTab
 {
-    constructor(public profileService: ProfileService,
-                public profileRESTService: ProfileRESTService,
-                public model: ProfileModalModel
-    ){}
+    @Input('account') account: AccountEntity;
 
+    private requestButtonDisabled: boolean = false;
+    private flagAccountIsDeleted: boolean = false;
 
+    constructor(private profileRESTService:ProfileRESTService) {
+        this.flagAccountIsDeleted = this.account.delete_request.has;
+    }
 
-    requestButtonDisabled: boolean =false;
-    flagDeleteAccount: boolean = false;
-
-
-    deleteAccount(){
+    deleteAccount() {
         this.profileRESTService.requestAccountDelete().subscribe();
-        this.flagDeleteAccount = false;
+        this.flagAccountIsDeleted = false;
     }
 
     requestDeleteAccount() {
         this.requestButtonDisabled = true;
 
         setTimeout(() => {
-            this.flagDeleteAccount = true;
+            this.flagAccountIsDeleted = true;
             this.requestButtonDisabled = false;
         }, 1000);
     }
 
     cancelDeleteAccountRequest() {
-        //ToDo: I think its temporary;
         this.profileRESTService.requestAccountDeleteCancel().subscribe();
-        this.flagDeleteAccount = false;
+        this.flagAccountIsDeleted = false;
     }
 
-    isDeleteAccountRequested(): boolean {
-        return this.flagDeleteAccount;
+    isDeleteAccountRequested():boolean {
+        return this.flagAccountIsDeleted;
     }
 }

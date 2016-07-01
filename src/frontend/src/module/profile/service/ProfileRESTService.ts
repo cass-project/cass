@@ -6,15 +6,16 @@ import {EditPersonalRequest} from "../definitions/paths/edit-personal";
 import {SetGenderRequest} from "../definitions/paths/set-gender";
 import {ExpertInRequest} from "../definitions/paths/expert-in-ids";
 import {AuthService} from "../../auth/service/AuthService";
+import {AuthToken} from "../../auth/service/AuthToken";
 
 @Injectable()
 export class ProfileRESTService extends AbstractRESTService
 {
     constructor(
         protected http: Http,
-        protected auth: AuthService,
+        protected token: AuthToken,
         protected messages: MessageBusService
-    ) { super(http, auth, messages) }
+    ) { super(http, token, messages); }
 
     getProfileById(profileId: number) {
         return this.handle(this.http.get(`/backend/api/profile/${profileId}/get`));

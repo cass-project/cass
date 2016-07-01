@@ -36,23 +36,23 @@ export class ImageTab
         private authService: AuthService
     ) {
         uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(
-            authService.getAuthToken().getCurrentProfile().entity.profile.id
+            authService.getCurrentAccount().getCurrentProfile().entity.profile.id
         ));
     }
 
 
     getImageProfile(){
         if(this.authService.isSignedIn()){
-            return this.authService.getAuthToken().getCurrentProfile().entity.profile.image.variants['default'].public_path;
+            return this.authService.getCurrentAccount().getCurrentProfile().entity.profile.image.variants['default'].public_path;
         }
     }
 
     avatarDeletingProcess(){
         this.deleteProcessVisible = true;
-        let profileId = this.authService.getAuthToken().getCurrentProfile().entity.profile.id;
+        let profileId = this.authService.getCurrentAccount().getCurrentProfile().entity.profile.id;
         
         this.profileRESTService.deleteAvatar(profileId).subscribe(data => {
-            this.authService.getAuthToken().getCurrentProfile().entity.profile.image = {
+            this.authService.getCurrentAccount().getCurrentProfile().entity.profile.image = {
                 "variants": {
                     "default": {
                         "id": 'default',

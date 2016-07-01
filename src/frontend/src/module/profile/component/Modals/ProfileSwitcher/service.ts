@@ -8,7 +8,7 @@ import {AuthRESTService} from "../../../../auth/service/AuthRESTService";
 export class ProfileSwitcherService
 {
     constructor(
-        private profileRESTService: ProfileRESTService, 
+        private profileRESTService: ProfileRESTService,
         private authRESTService: AuthRESTService,
         private authService: AuthService
     ) {}
@@ -16,14 +16,14 @@ export class ProfileSwitcherService
     disableClick = false;
 
     switchProfile(profileId){
-        if(!this.disableClick && this.authService.getAuthToken().getCurrentProfile().getId() !== profileId){
+        if(!this.disableClick && this.authService.getCurrentAccount().getCurrentProfile().getId() !== profileId){
             this.disableClick = true;
 
-            this.authService.getAuthToken().getCurrentProfile().entity.profile.is_current = false;
+            this.authService.getCurrentAccount().getCurrentProfile().entity.profile.is_current = false;
 
-            for(let i = 0; i < this.authService.getAuthToken().account.profiles.profiles.length; i++){
-                if(profileId === this.authService.getAuthToken().account.profiles.profiles[i].entity.profile.id){
-                    this.authService.getAuthToken().account.profiles.profiles[i].entity.profile.is_current = true;
+            for(let i = 0; i < this.authService.getCurrentAccount().profiles.profiles.length; i++){
+                if(profileId === this.authService.getCurrentAccount().profiles.profiles[i].entity.profile.id){
+                    this.authService.getCurrentAccount().profiles.profiles[i].entity.profile.is_current = true;
                 }
             }
 
@@ -39,6 +39,6 @@ export class ProfileSwitcherService
     }
 
     getProfiles(){
-        return this.authService.getAuthToken().account.profiles.profiles;
+        return this.authService.getCurrentAccount().profiles.profiles;
     }
 }

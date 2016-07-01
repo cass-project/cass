@@ -20,31 +20,46 @@ import {frontline} from "./module/frontline/service";
 import {FrontlineService} from "./module/frontline/service";
 import {bootstrap} from "angular2/platform/browser";
 import {enableProdMode} from 'angular2/core';
-import {AuthRequestOptions} from "./module/auth/AuthRequestOptions";
+
+import {AuthToken} from "./module/auth/service/AuthToken";
 
 enableProdMode();
 
 document.addEventListener('DOMContentLoaded', () => {
     frontline(session => {
+        var frontline = new FrontlineService(session);
+
         bootstrap(
             <any>App, [
-                provide(FrontlineService, {useValue: new FrontlineService(session)}),
+                provide(FrontlineService, {useValue: frontline}),
                 ROUTER_PROVIDERS,
                 HTTP_PROVIDERS,
                 provide(Window, {useValue: session}),
-                provide(RequestOptions, {useClass: AuthRequestOptions}),
-            ]).then(() => {
-                setInterval(() => {
-                    let cassModalClass = 'cass-has-modals';
-                    let classList = document.body.classList;
+                provide(AuthToken, {useFactory: () => {
+                    let token = new AuthToken();
+                    let hasAuth = frontline.session.auth
+                        && (typeof frontline.session.auth.api_key == "string")
+                        && (frontline.session.auth.api_key.length > 0);
 
-                    if(document.getElementsByClassName('cass-modal').length > 0) {
-                        classList.add(cassModalClass);
-                    }else if(classList.contains(cassModalClass)) {
-                        classList.remove(cassModalClass);
+                    if(hasAuth) {
+                        let auth = frontline.session.auth;
+                        token.setToken(frontline.session.auth.api_key);
                     }
-                }, 100);
-            }).catch((err) => {
+
+                    return token;
+                }})
+            ]).then(() => {
+            setInterval(() => {
+                let cassModalClass = 'cass-has-modals';
+                let classList = document.body.classList;
+
+                if(document.getElementsByClassName('cass-modal').length > 0) {
+                    classList.add(cassModalClass);
+                }else if(classList.contains(cassModalClass)) {
+                    classList.remove(cassModalClass);
+                }
+            }, 100);
+        }).catch((err) => {
                 console.log(err.message);
             }
         );

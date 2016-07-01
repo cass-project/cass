@@ -1,7 +1,6 @@
 import {Component, Input} from "angular2/core";
 import {Router} from 'angular2/router';
 
-import {CurrentAccountService} from "../../../../auth/service/CurrentAccountService";
 import {FeedbackCreateModalModel} from "./model";
 import {FeedbackService} from "../../../service/FeedbackService";
 import {FeedbackTypesService} from "../../../service/FeedbackTypesService";
@@ -12,6 +11,7 @@ import {MessageBusNotificationsLevel} from "../../../../message/component/Messag
 import {ModalComponent} from "../../../../modal/component/index";
 import {ModalBoxComponent} from "../../../../modal/component/box/index";
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
+import {AuthService} from "../../../../auth/service/AuthService";
 
 @Component({
     selector: 'cass-feedback-create-modal',
@@ -30,33 +30,33 @@ export class FeedbackCreateModal
 {
     private isLoading:boolean = false;
     @Input('feedbackType') feedbackType: FeedbackTypeEntity;
-    
+
     constructor(
         public model: FeedbackCreateModalModel,
         private router: Router,
         private service: FeedbackService,
         private messages: MessageBusService,
         private feedbackTypesService: FeedbackTypesService,
-        private currentAccountService: CurrentAccountService
+        private authService: AuthService
     ) {}
-    
+
     ngOnInit() {
         if(this.feedbackType) {
             this.model.type_feedback = this.feedbackType.code.int;
         } else {
             this.model.type_feedback = 1;
         }
-        
+
         try {
-            this.model.profile_id = this.currentAccountService.getCurrentProfile().getId();
+            this.model.profile_id = this.authService.getCurrentAccount().getCurrentProfile().getId();
         } catch (Error) {}
     }
-    
+
     abort() {
         this.router.navigateByUrl("/");
     }
 
-    
+
     submit() {
         this.isLoading = true;
         this.service.create(<FeedbackCreateRequest>this.model).subscribe(
@@ -71,7 +71,7 @@ export class FeedbackCreateModal
             }
         );
     }
-    
+
     isModelValid(): boolean {
         return !!(this.model.type_feedback && this.model.description && (this.model.profile_id || this.model.email));
     }
