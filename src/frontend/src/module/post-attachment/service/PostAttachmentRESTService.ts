@@ -1,9 +1,7 @@
 import {Injectable} from "angular2/core";
 import {Http} from "angular2/http"
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
-import {Account} from "../../account/definitions/entity/Account";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
-import {AuthService} from "../../auth/service/AuthService";
 import {AuthToken} from "../../auth/service/AuthToken";
 
 @Injectable()
@@ -30,13 +28,14 @@ export class PostAttachmentRESTService extends AbstractRESTService
         formData.append("file", file);
 
         this.xmlRequest.open("POST", url);
+        this.xmlRequest.setRequestHeader('Authorization', this.token.apiKey);
         this.xmlRequest.upload.onprogress = (e) => {
             if (e.lengthComputable) {
                 this.progressBar = Math.floor((e.loaded / e.total) * 100);
                 modal.progress.update(this.progressBar);
             }
         };
-
+        
         this.xmlRequest.send(formData);
 
         this.xmlRequest.onreadystatechange = () => {
