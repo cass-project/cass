@@ -1,7 +1,7 @@
 import {Component, Input} from "angular2/core";
 
-import {ProfileComponent} from "../../index";
-import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
+import {ProfileComponent} from "../../../index";
+import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
 
 @Component({
     selector: 'cass-profile-menu',

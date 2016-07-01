@@ -1,8 +1,8 @@
 import {Component} from "angular2/core";
-import {ProfileService} from "../../../../service/ProfileService";
-import {ProfileRESTService} from "../../../../service/ProfileRESTService";
-import {ProfileModalModel} from "../../model";
 
+import {ProfileService} from "../../../../../service/ProfileService";
+import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
+import {ProfileModalModel} from "../../model";
 
 @Component({
     selector: 'cass-profile-modal-tab-account',

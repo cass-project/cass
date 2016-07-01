@@ -1,7 +1,8 @@
 import {Component, Injectable} from "angular2/core";
-import {AuthService} from "../../../auth/service/AuthService";
-import {ProfileRESTService} from "../../service/ProfileRESTService";
-import {AuthRESTService} from "../../../auth/service/AuthRESTService";
+
+import {AuthService} from "../../../../auth/service/AuthService";
+import {ProfileRESTService} from "../../../service/ProfileRESTService";
+import {AuthRESTService} from "../../../../auth/service/AuthRESTService";
 
 @Injectable()
 export class ProfileSwitcherService

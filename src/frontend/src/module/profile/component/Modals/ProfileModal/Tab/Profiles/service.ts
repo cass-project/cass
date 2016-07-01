@@ -1,7 +1,8 @@
 import {Injectable} from "angular2/core";
-import {ThemeService} from "../../../../../theme/service/ThemeService";
-import {ProfileRESTService} from "../../../../service/ProfileRESTService";
-import {AuthService} from "../../../../../auth/service/AuthService";
+
+import {ThemeService} from "../../../../../../theme/service/ThemeService";
+import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
+import {AuthService} from "../../../../../../auth/service/AuthService";
 
 @Injectable()
 export class ProfilesTabService

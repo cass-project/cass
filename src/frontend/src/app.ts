@@ -15,7 +15,7 @@ import {RouterOutlet} from "angular2/router";
 import {LandingComponent} from "./module/landing/index";
 import {ProfileRoute} from "./module/profile/route/ProfileRoute/index";
 import {AuthService} from "./module/auth/service/AuthService";
-import {ProfileSwitcherService} from "./module/profile/component/ProfileSwitcher/service";
+import {ProfileSwitcherService} from "./module/profile/component/Modals/ProfileSwitcher/service";
 import {ModalService} from "./module/modal/component/service";
 import {CommunityRoute} from "./module/community/route/CommunityRoute/index";
 import {MessageBusService} from "./module/message/service/MessageBusService/index";

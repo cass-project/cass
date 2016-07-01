@@ -2,8 +2,8 @@ import {Component} from "angular2/core";
 
 import {RouterOutlet, RouteConfig} from "angular2/router";
 import {ModalComponent} from "../../../modal/component/index";
-import {ProfileMenuComponent} from "../../component/ProfileMenu/index";
-import {ProfileModal} from "../../component/ProfileModal/index";
+import {ProfileMenuComponent} from "../../component/Elements/ProfileMenu/index";
+import {ProfileModal} from "../../component/Modals/ProfileModal/index";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
 import {Nothing} from "../../../util/component/Nothing/index";
 

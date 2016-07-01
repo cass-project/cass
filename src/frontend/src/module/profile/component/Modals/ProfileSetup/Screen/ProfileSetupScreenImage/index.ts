@@ -2,7 +2,7 @@ import {Component, Injectable, Output, EventEmitter} from "angular2/core";
 
 import {UploadImageService} from "../../../../../../form/component/UploadImage/service";
 import {UploadProfileImageStrategy} from "../../../../../util/UploadProfileImageStrategy";
-import {ProfileImage} from "../../../../ProfileImage/index";
+import {ProfileImage} from "../../../../Elements/ProfileImage/index";
 import {UploadImageModal} from "../../../../../../form/component/UploadImage/index";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {ModalControl} from "../../../../../../util/classes/ModalControl";

@@ -1,9 +1,9 @@
 import {Component} from "angular2/core";
-import {ProfileImage} from "../../../ProfileImage/index";
-import {ModalComponent} from "../../../../../modal/component/index";
+import {ProfileImage} from "../../../../Elements/ProfileImage/index";
+import {ModalComponent} from "../../../../../../modal/component/index";
 import {ProfilesTabService} from "./service";
-import {ThemeService} from "../../../../../theme/service/ThemeService";
-import {ModalBoxComponent} from "../../../../../modal/component/box/index";
+import {ThemeService} from "../../../../../../theme/service/ThemeService";
+import {ModalBoxComponent} from "../../../../../../modal/component/box/index";
 
 @Component({
     selector: 'cass-profile-modal-tab-profiles',

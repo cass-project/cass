@@ -6,10 +6,10 @@ import {PersonalTab} from "./Tab/Personal/index";
 import {InterestsTab} from "./Tab/Interests/index";
 import {ProfilesTab} from "./Tab/Profiles/index";
 import {ImageTab} from "./Tab/Image/index";
-import {ProfileRESTService} from "../../service/ProfileRESTService";
-import {ProfileService} from "../../service/ProfileService";
-import {ThemeService} from "../../../theme/service/ThemeService";
-import {AuthService} from "../../../auth/service/AuthService";
+import {ProfileRESTService} from "../../../service/ProfileRESTService";
+import {ProfileService} from "../../../service/ProfileService";
+import {ThemeService} from "../../../../theme/service/ThemeService";
+import {AuthService} from "../../../../auth/service/AuthService";
 
 enum ProfileModalTab
 {

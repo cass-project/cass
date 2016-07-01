@@ -1,7 +1,8 @@
 import {Component} from "angular2/core";
-import {FrontlineService} from "../../../../../frontline/service";
-import {ProfileRESTService} from "../../../../service/ProfileRESTService";
-import {ProfileService} from "../../../../service/ProfileService";
+
+import {FrontlineService} from "../../../../../../frontline/service";
+import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
+import {ProfileService} from "../../../../../service/ProfileService";
 import {ProfileModalModel} from "../../model";
 
 @Component({

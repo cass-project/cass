@@ -1,8 +1,8 @@
 import {Component} from "angular2/core";
 
-import {ProfileModal} from "./component/ProfileModal/index";
+import {ProfileModal} from "./component/Modals/ProfileModal/index";
 import {ModalComponent} from "../modal/component/index";
-import {ProfileSwitcher} from "./component/ProfileSwitcher/index";
+import {ProfileSwitcher} from "./component/Modals/ProfileSwitcher/index";
 import {ProfileSetup} from "./component/Modals/ProfileSetup/index";
 import {ModalBoxComponent} from "../modal/component/box/index";
 import {ModalControl} from "../util/classes/ModalControl";
