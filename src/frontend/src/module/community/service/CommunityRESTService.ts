@@ -9,30 +9,57 @@ import {CommunityControlFeatureRequestModel} from "../model/CommunityActivateFea
 import {CommunityImageDeleteRequest} from "../definitions/paths/image-delete";
 import {EditCommunityRequest} from "../definitions/paths/edit";
 import {SetPublicOptionsCommunityRequest} from "../definitions/paths/set-public-options";
+import {AbstractRESTService} from "../../common/service/AbstractRESTService";
+import {AuthToken} from "../../auth/service/AuthToken";
+import {MessageBusService} from "../../message/service/MessageBusService/index";
 
 @Injectable()
-export class CommunityRESTService
+export class CommunityRESTService extends AbstractRESTService
 {
-    constructor(private http:Http) {}
+    constructor(
+        protected http: Http,
+        protected token: AuthToken,
+        protected messages: MessageBusService
+    ) {super(http, token, messages);}
 
     public create(request: CommunityCreateRequestModel): Observable<Response>
     {
-        return this.http.put("/backend/api/protected/community/create", JSON.stringify(request));
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
+        return this.handle(this.http.put("/backend/api/protected/community/create", JSON.stringify(request), {headers: authHeader}));
     }
 
     public edit(communityId:number, body: EditCommunityRequest): Observable<Response>
     {
-        return this.http.post(`/backend/api/protected/community/${communityId}/edit`, JSON.stringify(body));
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
+        return this.handle(this.http.post(`/backend/api/protected/community/${communityId}/edit`, JSON.stringify(body), {headers: authHeader}));
     }
 
     public getBySid(sid:string)
     {
-        return this.http.get(`/backend/api/community/${sid}/get-by-sid`);
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
+        return this.handle(this.http.get(`/backend/api/community/${sid}/get-by-sid`, {headers: authHeader}));
     }
 
     public setPublicOptions(communityId:number, body: SetPublicOptionsCommunityRequest): Observable<Response>
     {
-        return this.http.post(`/backend/api/protected/community/${communityId}/set-public-options`, JSON.stringify(body));
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
+        return this.handle(this.http.post(`/backend/api/protected/community/${communityId}/set-public-options`, JSON.stringify(body), {headers: authHeader}));
     }
 
     public progressBar:number;
@@ -72,22 +99,38 @@ export class CommunityRESTService
 
             xhr.open("POST", `/backend/api/protected/community/${request.communityId}/image-upload/`+
                              `crop-start/${request.x1}/${request.y1}/crop-end/${request.x2}/${request.y2}`);
+            xhr.setRequestHeader('Authorization', this.token.apiKey);
             xhr.send(formData);
         });
     }
 
     public imageDelete(request:CommunityImageDeleteRequest): Observable<Response>
     {
-        return this.http.delete(`/backend/api/protected/community/${request.communityId}/image-delete`);
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
+        return this.handle(this.http.delete(`/backend/api/protected/community/${request.communityId}/image-delete`, {headers: authHeader}));
     }
 
     public activateFeature(reqeust: CommunityControlFeatureRequestModel) : Observable<Response>
     {
-        return this.http.put(`/backend/api/protected/community/${reqeust.communityId}/feature/${reqeust.feature}/activate`, "{}");
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
+        return this.http.put(`/backend/api/protected/community/${reqeust.communityId}/feature/${reqeust.feature}/activate`, "{}", {headers: authHeader});
     };
 
     public deactivateFeature(reqeust: CommunityControlFeatureRequestModel)
     {
-        return this.http.delete(`/backend/api/protected/community/${reqeust.communityId}/feature/${reqeust.feature}/deactivate`);
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
+        return this.http.delete(`/backend/api/protected/community/${reqeust.communityId}/feature/${reqeust.feature}/deactivate`, {headers: authHeader});
     };
 }
