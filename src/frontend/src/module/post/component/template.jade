@@ -1,7 +1,9 @@
 div
-  textarea(placeholder="text and URL's")
+  textarea(placeholder="text and URL's", [(ngModel)]='text')
 
 
-input(type='file')
+button(type='button', (click)='openAttachModal()') Прикрепить файл
 button(type='button') Отмена
 button(type='button') Создать
+
+div(*ngIf='attachFile')
