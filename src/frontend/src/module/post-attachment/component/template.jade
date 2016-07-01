@@ -1,9 +1,0 @@
-div
-  textarea(placeholder="text and URL's", [(*ngModel)]='postEntity.content')
-
-
-button(type='button', (click)='openAttachModal()') Прикрепить файл
-button(type='button') Отмена
-button(type='button') Создать
-
-div(*ngIf='attachFile')
