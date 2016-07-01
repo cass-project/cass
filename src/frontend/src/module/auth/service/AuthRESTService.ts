@@ -4,7 +4,6 @@ import {Http} from "angular2/http"
 import {SignInRequest} from "../definitions/paths/sign-in";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {SignUpRequest} from "../definitions/paths/sign-up";
-import {AuthService} from "./AuthService";
 import {AuthToken} from "./AuthToken";
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 

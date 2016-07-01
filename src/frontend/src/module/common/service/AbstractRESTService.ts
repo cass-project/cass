@@ -4,7 +4,6 @@ import {Observable} from "rxjs/Observable";
 
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
-import {AuthService} from "../../auth/service/AuthService";
 import {AuthToken} from "../../auth/service/AuthToken";
 
 @Injectable()
