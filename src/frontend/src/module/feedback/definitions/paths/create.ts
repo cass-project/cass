@@ -3,7 +3,7 @@ import {FeedbackEntity} from "../entity/Feedback";
 
 export interface FeedbackCreateRequest
 {
-    profile_id: number;
+    profile_id?: number;
     email?: string;
     type_feedback: number;
     description: string;
