@@ -1,6 +1,8 @@
 <?php
 namespace Domain\Collection\Service;
 
+use Application\Service\EventEmitterAware\EventEmitterAwareService;
+use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Avatar\Service\AvatarService;
@@ -11,12 +13,12 @@ use Domain\Collection\Parameters\EditCollectionParameters;
 use Domain\Collection\Parameters\SetPublicOptionsParameters;
 use Domain\Collection\Repository\CollectionRepository;
 use Domain\Profile\Entity\Profile\Greetings;
-use Evenement\EventEmitter;
-use Evenement\EventEmitterInterface;
 use League\Flysystem\FilesystemInterface;
 
-class CollectionService
+class CollectionService implements EventEmitterAwareService
 {
+    use EventEmitterAwareTrait;
+
     const EVENT_COLLECTION_ACCESS = 'domain.collection.access';
     const EVENT_COLLECTION_CREATED = 'domain.collection.created';
     const EVENT_COLLECTION_EDITED = 'domain.collection.edited';
@@ -25,9 +27,6 @@ class CollectionService
     const EVENT_COLLECTION_OPTIONS = 'domain.collection.options';
     const EVENT_COLLECTION_IMAGE_UPLOADED = 'domain.collection.image.uploaded';
     const EVENT_COLLECTION_IMAGE_GENERATED = 'domain.collection.image.generated';
-
-    /** @var EventEmitterInterface */
-    private $events;
 
     /** @var CollectionRepository */
     private $collectionRepository;
@@ -43,15 +42,9 @@ class CollectionService
         AvatarService $avatarService,
         FilesystemInterface $imagesFlySystem)
     {
-        $this->events = new EventEmitter();
         $this->collectionRepository = $collectionRepository;
         $this->avatarService = $avatarService;
         $this->images = $imagesFlySystem;
-    }
-
-    public function getEventEmitter(): EventEmitterInterface
-    {
-        return $this->events;
     }
 
     public function createCollection(CreateCollectionParameters $parameters, bool $disableAccess = false)
@@ -59,7 +52,7 @@ class CollectionService
         $collection = new Collection($parameters->getOwnerSID());
 
         if(! $disableAccess) {
-            $this->events->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
+            $this->getEventEmitter()->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
         }
 
         $collection
@@ -71,7 +64,7 @@ class CollectionService
         $this->avatarService->generateImage(new CollectionImageStrategy($collection, $this->images));
         $this->collectionRepository->saveCollection($collection);
 
-        $this->events->emit(self::EVENT_COLLECTION_CREATED, [$collection]);
+        $this->getEventEmitter()->emit(self::EVENT_COLLECTION_CREATED, [$collection]);
 
         return $collection;
     }
@@ -80,7 +73,7 @@ class CollectionService
     {
         $collection = $this->getCollectionById($collectionId);
 
-        $this->events->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
+        $this->getEventEmitter()->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
 
         $collection
             ->setTitle($parameters->getTitle())
@@ -89,7 +82,7 @@ class CollectionService
 
         $this->collectionRepository->saveCollection($collection);
 
-        $this->events->emit(self::EVENT_COLLECTION_EDITED, [$collection]);
+        $this->getEventEmitter()->emit(self::EVENT_COLLECTION_EDITED, [$collection]);
 
         return $collection;
     }
@@ -98,10 +91,10 @@ class CollectionService
     {
         $collection = $this->getCollectionById($collectionId);
 
-        $this->events->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
-        $this->events->emit(self::EVENT_COLLECTION_DELETE, [$collection]);
+        $this->getEventEmitter()->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
+        $this->getEventEmitter()->emit(self::EVENT_COLLECTION_DELETE, [$collection]);
         $this->collectionRepository->deleteCollection($collectionId);
-        $this->events->emit(self::EVENT_COLLECTION_DELETED, [$collection]);
+        $this->getEventEmitter()->emit(self::EVENT_COLLECTION_DELETED, [$collection]);
 
         return $collection;
     }
@@ -110,7 +103,7 @@ class CollectionService
     {
         $collection = $this->collectionRepository->getCollectionById($collectionId);
 
-        $this->events->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
+        $this->getEventEmitter()->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
 
         $collection->setPublicOptions([
             'is_private' => $parameters->isPrivate(),
@@ -119,7 +112,7 @@ class CollectionService
         ]);
 
         $this->collectionRepository->saveCollection($collection);
-        $this->events->emit(self::EVENT_COLLECTION_OPTIONS, [$collection]);
+        $this->getEventEmitter()->emit(self::EVENT_COLLECTION_OPTIONS, [$collection]);
 
         return $collection;
     }
@@ -128,10 +121,10 @@ class CollectionService
     {
         $collection = $this->collectionRepository->getCollectionById($collectionId);
 
-        $this->events->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
+        $this->getEventEmitter()->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
         $this->avatarService->uploadImage(new CollectionImageStrategy($collection, $this->images), $parameters);
         $this->collectionRepository->saveCollection($collection);
-        $this->events->emit(self::EVENT_COLLECTION_IMAGE_UPLOADED, [$collection]);
+        $this->getEventEmitter()->emit(self::EVENT_COLLECTION_IMAGE_UPLOADED, [$collection]);
 
         return $collection->getImages();
     }
@@ -140,10 +133,10 @@ class CollectionService
     {
         $collection = $this->collectionRepository->getCollectionById($collectionId);
 
-        $this->events->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
+        $this->getEventEmitter()->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
         $this->avatarService->generateImage(new CollectionImageStrategy($collection, $this->images));
         $this->collectionRepository->saveCollection($collection);
-        $this->events->emit(self::EVENT_COLLECTION_IMAGE_GENERATED, [$collection]);
+        $this->getEventEmitter()->emit(self::EVENT_COLLECTION_IMAGE_GENERATED, [$collection]);
 
         return $collection->getImages();
     }

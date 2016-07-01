@@ -1,0 +1,59 @@
+cass-modal
+  cass-modal-box(width="800px")
+    form.form.screen.screen-general((ngSubmit)="submit()", novalidate="")
+      cass-form-progress-lock(*ngIf="isLoading")
+      header.form-header
+        h1 Оставить отзыв
+      .cass-padding-box-10
+        .input-group
+          label.form-label
+            span.label-text Тема обращения
+          p.form-text.input-description
+            i.fa.fa-fw.fa-info-circle(aria-hidden="true")
+            | {{feedbackTypesService.getFeedbackType(model.type_feedback)?.description}}
+          label.select-wrap
+            span.label-text
+            i.fa.fa-caret-down.fa-fw(aria-hidden="true")
+            select.form-input(
+              [(ngModel)]="model.type_feedback",
+              (ngModelChange)="onFeedbackTypeChange($event)"
+            )
+              // Если юзать [value] или value, то охуеваем от того, как ангуляр превращает number в string
+              option(
+                *ngFor="#feedback of feedbackTypesService.getFeedbackTypes()",
+                [ngValue]="feedback.code.int"  
+              ) {{feedback.title}}
+        .input-group(*ngIf="!model.profile_id")
+          label.form-label
+            span.label-text E-mail      
+          input.form-input(
+            required,
+            type="email",
+            [(ngModel)]="model.email",
+            #ngControlEmail="ngForm"
+          )
+          .input-error([hidden]="ngControlEmail.valid || ngControlEmail.pristine")
+            i.fa.fa-fw.fa-exclamation-triangle(aria-hidden="true")  
+            | Вы должны обязательно оставить свой email, если вы не авторизованы в системе.
+
+        .input-group
+          label.form-label
+            span.label-text Ваше сообщение      
+          textarea.form-input(
+            required,
+            [(ngModel)]="model.description",
+            #ngControlDescription="ngForm"
+          )
+          .input-error([hidden]="ngControlDescription.valid || ngControlDescription.pristine")
+            i.fa.fa-fw.fa-exclamation-triangle(aria-hidden="true")
+            | Данное поле обязательно для заполнения.
+
+      footer.form-footer
+        .form-footer-section
+          .cass-padding-box-5
+            button.form-text-button(type="button", (click)="abort()")
+              span Отмена
+        .form-footer-section
+          .cass-padding-box-5
+            button.form-button.form-button-primary(type="submit", [disabled]="!isModelValid()")
+              span Отправить

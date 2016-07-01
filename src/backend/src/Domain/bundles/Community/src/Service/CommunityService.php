@@ -1,6 +1,8 @@
 <?php
 namespace Domain\Community\Service;
 
+use Application\Service\EventEmitterAware\EventEmitterAwareService;
+use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
 use Domain\Account\Entity\Account;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Avatar\Image\ImageCollection;
@@ -17,19 +19,16 @@ use Domain\Community\Parameters\EditCommunityParameters;
 use Domain\Community\Parameters\SetPublicOptionsParameters;
 use Domain\Community\Repository\CommunityRepository;
 use Domain\Theme\Repository\ThemeRepository;
-use Evenement\EventEmitter;
-use Evenement\EventEmitterInterface;
 use League\Flysystem\FilesystemInterface;
 
-class CommunityService
+class CommunityService implements EventEmitterAwareService
 {
+    use EventEmitterAwareTrait;
+
     const EVENT_COMMUNITY_CREATED = 'domain.community.created';
     const EVENT_COMMUNITY_UPDATED = 'domain.community.updated';
     const EVENT_COMMUNITY_DELETE = 'domain.community.delete';
     const EVENT_COMMUNITY_DELETED = 'domain.community.deleted';
-
-    /** @var EventEmitterInterface */
-    private $events;
 
     /** @var CurrentAccountService */
     private $currentAccountService;
@@ -53,17 +52,11 @@ class CommunityService
         AvatarService $avatarService,
         FilesystemInterface $imageFileSystem
     ) {
-        $this->events = new EventEmitter();
         $this->currentAccountService = $currentAccountService;
         $this->communityRepository = $communityRepository;
         $this->themeRepository = $themeRepository;
         $this->avatarService = $avatarService;
         $this->imageFileSystem = $imageFileSystem;
-    }
-
-    public function getEventEmitter(): EventEmitterInterface
-    {
-        return $this->events;
     }
     
     public function createCommunity(CreateCommunityParameters $parameters): Community {
@@ -82,7 +75,7 @@ class CommunityService
         $strategy = new CommunityImageStrategy($entity, $this->imageFileSystem);
         $this->avatarService->generateImage($strategy);
 
-        $this->events->emit(self::EVENT_COMMUNITY_CREATED, [$entity]);
+        $this->getEventEmitter()->emit(self::EVENT_COMMUNITY_CREATED, [$entity]);
 
         return $entity;
     }
@@ -99,7 +92,7 @@ class CommunityService
         }
 
         $this->communityRepository->saveCommunity($community);
-        $this->events->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
+        $this->getEventEmitter()->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
 
         return $community;
     }
@@ -110,7 +103,7 @@ class CommunityService
 
         $this->avatarService->uploadImage($strategy, $parameters);
         $this->communityRepository->saveCommunity($community);
-        $this->events->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
+        $this->getEventEmitter()->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
 
         return $community->getImages();
     }
@@ -122,7 +115,7 @@ class CommunityService
 
         $this->avatarService->defaultImage($strategy);
         $this->communityRepository->saveCommunity($community);
-        $this->events->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
+        $this->getEventEmitter()->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
 
         return $community->getImages();
     }
@@ -140,7 +133,7 @@ class CommunityService
             : $community->disableModerationContract();
 
         $this->communityRepository->saveCommunity($community);
-        $this->events->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
+        $this->getEventEmitter()->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
 
         return $community;
     }
@@ -149,9 +142,9 @@ class CommunityService
     {
         $community = $this->getCommunityById($communityId);
 
-        $this->events->emit(self::EVENT_COMMUNITY_DELETE, [$community]);
+        $this->getEventEmitter()->emit(self::EVENT_COMMUNITY_DELETE, [$community]);
         $this->communityRepository->deleteCommunity($community);
-        $this->events->emit(self::EVENT_COMMUNITY_DELETED, [$community]);
+        $this->getEventEmitter()->emit(self::EVENT_COMMUNITY_DELETED, [$community]);
 
         return $community;
     }
@@ -168,7 +161,7 @@ class CommunityService
 
         $community->replaceCollections($collections->createImmutableInstance());
         $this->communityRepository->saveCommunity($community);
-        $this->events->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
+        $this->getEventEmitter()->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
 
         return $community->getCollections();
     }
@@ -185,7 +178,7 @@ class CommunityService
 
         $community->replaceCollections($collections->createImmutableInstance());
         $this->communityRepository->saveCommunity($community);
-        $this->events->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
+        $this->getEventEmitter()->emit(self::EVENT_COMMUNITY_UPDATED, [$community]);
 
         return $community->getCollections();
     }

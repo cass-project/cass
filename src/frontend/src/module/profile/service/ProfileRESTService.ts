@@ -1,4 +1,6 @@
 import {Injectable} from 'angular2/core';
+import {Http} from "angular2/http"
+import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {EditPersonalRequest} from "../definitions/paths/edit-personal";
 import {SetGenderRequest} from "../definitions/paths/set-gender";
@@ -7,6 +9,10 @@ import {ExpertInRequest} from "../definitions/paths/expert-in-ids";
 @Injectable()
 export class ProfileRESTService extends AbstractRESTService
 {
+    constructor(protected  http: Http, protected messages: MessageBusService) {
+        super(http, messages);
+    }
+
     getProfileById(profileId: number) {
         return this.handle(this.http.get(`/backend/api/profile/${profileId}/get`));
     }

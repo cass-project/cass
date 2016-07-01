@@ -17,8 +17,8 @@ import {Theme} from "../../definitions/entity/Theme";
         require('./style.shadow.scss')
     ]
 })
-@Injectable()
 
+@Injectable()
 export class ThemeSelect
 {
     private browser: ThemeSelectBrowser = new ThemeSelectBrowser(this, this.service);

@@ -1,0 +1,11 @@
+div(
+  *ngIf="isVisible"
+)
+  button.form-button.form-button-primary(
+    (click)="goToCreateFeedback()"
+  )
+    i.fa.fw.fa-comment(aria-hidden="true")
+    |  
+    | Оставить отзыв
+  i.beta-icon [beta]
+

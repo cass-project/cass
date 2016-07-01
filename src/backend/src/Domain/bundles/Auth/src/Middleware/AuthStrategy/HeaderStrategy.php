@@ -5,7 +5,7 @@ use Application\Auth\Exception\APIKeyIsNotAvailableException;
 
 class HeaderStrategy extends Strategy
 {
-    const HEADER_API_KEY = 'X-Api-Key';
+    const HEADER_API_KEY = 'Authorization';
 
     public function isAPIKeyAvailable(): bool
     {

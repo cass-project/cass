@@ -11,7 +11,7 @@ export class AuthRequestOptions extends BaseRequestOptions {
 
         if(token) {
             console.log('Do you even try?', token.apiKey);
-            this.headers.set('X-Api-Key', token.apiKey);
+            this.headers.set('Authorization', token.apiKey);
         }
     }
 }

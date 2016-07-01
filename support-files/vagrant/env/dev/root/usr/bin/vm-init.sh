@@ -59,9 +59,9 @@ sudo chown -R www-data /var/log/php-errors.log
 
 # db
 cd /opt/cass/src/backend
-php /opt/cass/src/backend/vendor/bin/phinx migrate -e cass_development
-php /opt/cass/src/backend/vendor/bin/phinx migrate -e cass_testing
-php /opt/cass/src/backend/vendor/bin/phinx migrate -e cass_production
+vendor/bin/phinx migrate -e cass_development
+vendor/bin/phinx migrate -e cass_testing
+vendor/bin/phinx migrate -e cass_production
 
 # ########
 # Frontend

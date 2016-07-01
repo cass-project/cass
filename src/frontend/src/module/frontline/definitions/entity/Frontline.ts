@@ -3,6 +3,7 @@ import {AccountEntity} from "../../../account/definitions/entity/Account";
 import {ProfileExtendedEntity} from "../../../profile/definitions/entity/Profile";
 import {Palette} from "../../../colors/definitions/entity/Palette";
 import {Theme} from "../../../theme/definitions/entity/Theme";
+import {FeedbackTypeEntity} from "../../../feedback/definitions/entity/FeedbackType";
 
 export interface FrontlineEntity extends Success200
 {
@@ -26,6 +27,9 @@ export interface FrontlineEntity extends Success200
                 is_development_ready: boolean,
                 is_production_ready: boolean,
             }[]
+        },
+        feedback: {
+            types: FeedbackTypeEntity[]
         }
     }
 }

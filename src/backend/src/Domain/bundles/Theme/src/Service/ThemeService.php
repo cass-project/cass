@@ -1,6 +1,8 @@
 <?php
 namespace Domain\Theme\Service;
 
+use Application\Service\EventEmitterAware\EventEmitterAwareService;
+use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
 use Domain\Auth\Service\CurrentAccountService;
 use Application\Util\SerialManager\SerialManager;
 use Domain\Theme\Entity\Theme;
@@ -8,34 +10,27 @@ use Domain\Theme\Repository\ThemeRepository;
 use Evenement\EventEmitter;
 use Evenement\EventEmitterInterface;
 
-class ThemeService
+class ThemeService implements EventEmitterAwareService
 {
+    use EventEmitterAwareTrait;
+
     const EVENT_CREATED = 'domain.theme.created';
     const EVENT_UPDATED = 'domain.theme.updated';
     const EVENT_DELETE = 'domain.theme.delete';
     const EVENT_DELETED = 'domain.theme.deleted';
-
-    /** @var EventEmitterInterface */
-    private $events;
 
     /** @var ThemeRepository */
     private $themeRepository;
 
     public function __construct(ThemeRepository $themeRepository)
     {
-        $this->events = new EventEmitter();
         $this->themeRepository = $themeRepository;
-    }
-
-    public function getEventEmitter(): EventEmitterInterface
-    {
-        return $this->events;
     }
 
     public function createTheme(string $title, string $description, int $parentId = null): Theme
     {
         $theme = $this->themeRepository->createTheme($title, $description, $parentId);
-        $this->events->emit(self::EVENT_CREATED, [$theme]);
+        $this->getEventEmitter()->emit(self::EVENT_CREATED, [$theme]);
 
         return $theme;
     }
@@ -64,7 +59,7 @@ class ThemeService
     public function moveTheme(int $themeId, int $newParentThemeId = null, int $position = SerialManager::POSITION_LAST): Theme
     {
         $theme = $this->themeRepository->moveTheme($themeId, $newParentThemeId, $position);
-        $this->events->emit(self::EVENT_UPDATED, [$theme]);
+        $this->getEventEmitter()->emit(self::EVENT_UPDATED, [$theme]);
 
         return $theme;
     }
@@ -72,7 +67,7 @@ class ThemeService
     public function updateTheme(int $themeId, string $title, string $description = ''): Theme
     {
         $theme = $this->themeRepository->updateTheme($themeId, $title, $description);
-        $this->events->emit(self::EVENT_UPDATED, [$theme]);
+        $this->getEventEmitter()->emit(self::EVENT_UPDATED, [$theme]);
 
         return $theme;
     }
@@ -81,9 +76,9 @@ class ThemeService
     {
         $theme = $this->themeRepository->getThemeById($themeId);
 
-        $this->events->emit(self::EVENT_DELETE, [$theme]);
+        $this->getEventEmitter()->emit(self::EVENT_DELETE, [$theme]);
         $this->themeRepository->deleteTheme($themeId);
-        $this->events->emit(self::EVENT_DELETED, [$theme]);
+        $this->getEventEmitter()->emit(self::EVENT_DELETED, [$theme]);
 
         return $theme;
     }
