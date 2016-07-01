@@ -15,8 +15,7 @@ cass-modal
             span.label-text
             i.fa.fa-caret-down.fa-fw(aria-hidden="true")
             select.form-input(
-              [(ngModel)]="model.type_feedback",
-              (ngModelChange)="onFeedbackTypeChange($event)"
+              [(ngModel)]="model.type_feedback"
             )
               // Если юзать [value] или value, то охуеваем от того, как ангуляр превращает number в string
               option(

@@ -26,10 +26,9 @@ import {CollectionRESTService} from "./module/collection/service/CollectionRESTS
 import {ProfileRESTService} from "./module/profile/service/ProfileRESTService";
 import {CommunitySettingsModalModel} from "./module/community/component/Modal/CommunitySettingsModal/model";
 import {AuthRESTService} from "./module/auth/service/AuthRESTService";
-import {FeedbackRoute} from "./module/feedback/route/FeedbackRoute/index";
+import {FeedbackComponent} from "./module/feedback/index";
 import {PostRESTService} from "./module/post/service/PostRESTService";
 import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAttachmentRESTService";
-import {FeedbackComponent} from "./module/feedback/index";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -85,11 +84,6 @@ import {FeedbackComponent} from "./module/feedback/index";
         name: 'Community',
         path: '/community/...',
         component: CommunityRoute
-    },
-    {
-        name: 'Feedback',
-        path: '/feedback/...',
-        component: FeedbackRoute
     }
 ])
 export class App {

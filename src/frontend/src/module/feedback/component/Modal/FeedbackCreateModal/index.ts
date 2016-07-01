@@ -1,5 +1,4 @@
 import {Component, Input, Output, EventEmitter} from "angular2/core";
-import {Router} from 'angular2/router';
 
 import {FeedbackCreateModalModel} from "./model";
 import {FeedbackService} from "../../../service/FeedbackService";
@@ -34,7 +33,6 @@ export class FeedbackCreateModal
 
     constructor(
         public model: FeedbackCreateModalModel,
-        private router: Router,
         private service: FeedbackService,
         private messages: MessageBusService,
         private feedbackTypesService: FeedbackTypesService,
@@ -63,7 +61,7 @@ export class FeedbackCreateModal
         this.service.create(<FeedbackCreateRequest>this.model).subscribe(
             data => {
                 this.messages.push(MessageBusNotificationsLevel.Success, "Отзыв успешно отправлен!");
-                this.router.navigateByUrl("/");
+                this.closeEvent.emit(this);
                 this.isLoading = false;
             },
             error => {
@@ -75,14 +73,5 @@ export class FeedbackCreateModal
 
     isModelValid(): boolean {
         return !!(this.model.type_feedback && this.model.description && (this.model.profile_id || this.model.email));
-    }
-
-
-    onFeedbackTypeChange($event) {
-        this.router.navigate([
-            'FeedbackCreateType', {
-                type: this.feedbackTypesService.getFeedbackType($event).code.string
-            }
-        ]);
     }
 }
