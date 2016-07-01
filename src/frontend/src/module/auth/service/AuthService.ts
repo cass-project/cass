@@ -16,7 +16,14 @@ export class AuthService
         private token: AuthToken,
         private frontline: FrontlineService,
         private api: AuthRESTService
-    ) {}
+    ) {
+        if(token.hasToken()) {
+            this.current = new Account(
+                this.frontline.session.auth.account,
+                this.frontline.session.auth.profiles
+            );
+        }
+    }
 
     public getCurrentAccount(): Account
     {
