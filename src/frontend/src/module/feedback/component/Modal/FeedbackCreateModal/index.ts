@@ -66,7 +66,7 @@ export class FeedbackCreateModal
                 this.isLoading = false;
             },
             error => {
-                this.messages.push(MessageBusNotificationsLevel.Critical, JSON.parse(error._body))
+                this.messages.push(MessageBusNotificationsLevel.Critical, JSON.parse(error._body).error);
                 this.isLoading = false;
             }
         );
