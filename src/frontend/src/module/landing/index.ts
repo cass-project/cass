@@ -10,5 +10,6 @@ import {PostForm} from "../post/component/index";
 })
 export class LandingComponent
 {
-
+    constructor(){}
+    event;
 }
