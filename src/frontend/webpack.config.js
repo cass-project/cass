@@ -9,9 +9,10 @@ function WebpackConfigBuilder() {
 WebpackConfigBuilder.prototype = {
   build: function() {
     return {
-      entry: [
-        './src/index.ts',
-      ],
+      entry: {
+        main: './src/index.ts',
+        feedback: './src/app/feedback-app/index.ts'
+      },
       output: {
         filename: '[name].js',
         path: this.publicPath + '/' + this.bundlesDir,
