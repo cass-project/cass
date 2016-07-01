@@ -1,7 +1,8 @@
-div
+div(
+  *ngIf="isVisible"
+)
   button.form-button.form-button-primary(
-    *ngIf="isVisible",
-    (click)="createFeedback()"
+    (click)="goToCreateFeedback()"
   )
     i.fa.fw.fa-comment(aria-hidden="true")
     |  

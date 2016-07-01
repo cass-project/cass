@@ -1,14 +1,15 @@
 import {Injectable} from "angular2/core";
-import {FeedbackRESTService} from "./FeedbackRESTService";
 import {Observable} from "rxjs/Rx";
-import {CreateFeedbackRequest, CreateCommunityResponse404, CreateCommunityResponse200} from "../definitions/paths/create";
+
+import {FeedbackRESTService} from "./FeedbackRESTService";
+import {FeedbackCreateRequest, FeedbackCreateResponse200} from "../definitions/paths/create";
 
 @Injectable()
 export class FeedbackService
 {
     constructor(private rest: FeedbackRESTService) {}
 
-    public create(request: CreateFeedbackRequest) : Observable<CreateCommunityResponse200>
+    public create(request: FeedbackCreateRequest) : Observable<FeedbackCreateResponse200>
     {
         return Observable.create(observer => {
             this.rest.create(request).map(data => data.json()).subscribe(
@@ -16,7 +17,7 @@ export class FeedbackService
                     observer.next(data);
                     observer.complete();
                 },
-                error =>{
+                error => {
                     observer.error(error);
                 }
             )

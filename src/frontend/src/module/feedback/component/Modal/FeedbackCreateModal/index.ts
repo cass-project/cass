@@ -1,17 +1,17 @@
 import {Component, Input} from "angular2/core";
 import {Router} from 'angular2/router';
 
-import {ModalComponent} from "../../../../modal/component/index";
-import {ModalBoxComponent} from "../../../../modal/component/box/index";
+import {CurrentAccountService} from "../../../../auth/service/CurrentAccountService";
 import {FeedbackCreateModalModel} from "./model";
 import {FeedbackService} from "../../../service/FeedbackService";
-import {CreateFeedbackRequest} from "../../../definitions/paths/create";
-import {CurrentAccountService} from "../../../../auth/service/CurrentAccountService";
+import {FeedbackTypesService} from "../../../service/FeedbackTypesService";
+import {FeedbackCreateRequest} from "../../../definitions/paths/create";
+import {FeedbackTypeEntity} from "../../../definitions/entity/FeedbackType";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
+import {ModalComponent} from "../../../../modal/component/index";
+import {ModalBoxComponent} from "../../../../modal/component/box/index";
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
-import {FeedbackTypesService} from "../../../service/FeedbackTypesService";
-import {FeedbackTypeEntity} from "../../../definitions/entity/FeedbackType";
 
 @Component({
     selector: 'cass-feedback-create-modal',
@@ -41,7 +41,7 @@ export class FeedbackCreateModal
     ) {}
     
     ngOnInit() {
-        if(this.feedbackType){
+        if(this.feedbackType) {
             this.model.type_feedback = this.feedbackType.code.int;
         } else {
             this.model.type_feedback = 1;
@@ -59,11 +59,7 @@ export class FeedbackCreateModal
     
     submit() {
         this.isLoading = true;
-        this.service.create(<CreateFeedbackRequest>{
-            profile_id: this.model.profile_id,
-            type_feedback: this.model.type_feedback,
-            description: this.model.description
-        }).subscribe(
+        this.service.create(<FeedbackCreateRequest>this.model).subscribe(
             data => {
                 this.messages.push(MessageBusNotificationsLevel.Success, "Отзыв успешно отправлен!");
                 this.router.navigateByUrl("/");
@@ -82,6 +78,10 @@ export class FeedbackCreateModal
 
 
     onFeedbackTypeChange($event) {
-        this.router.navigate(['FeedbackCreateType', { type: this.feedbackTypesService.getFeedbackType($event).code.string}]);
+        this.router.navigate([
+            'FeedbackCreateType', {
+                type: this.feedbackTypesService.getFeedbackType($event).code.string
+            }
+        ]);
     }
 }

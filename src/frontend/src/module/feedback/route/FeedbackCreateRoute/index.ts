@@ -1,5 +1,6 @@
 import {Component} from "angular2/core";
 import {RouteParams} from "angular2/router";
+
 import {FeedbackCreateModal} from "../../component/Modal/FeedbackCreateModal/index";
 import {FeedbackTypesService} from "../../service/FeedbackTypesService";
 import {FeedbackTypeEntity} from "../../definitions/entity/FeedbackType";

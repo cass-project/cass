@@ -13,17 +13,17 @@ export class FeedbackCreateButton
 {
     private isVisible:boolean = true;
 
-    constructor(private router: Router){
+    constructor(private router: Router) {
         this.router.subscribe(() => {
             this.isVisible = !this.isRouteFeedbackCreateActive();
         });
     }
 
     isRouteFeedbackCreateActive() {
-        return this.router.isRouteActive(this.router.generate(['/Feedback','FeedbackCreate']));
+        return this.router.isRouteActive(this.router.generate(['/Feedback', 'FeedbackCreate']));
     }
 
-    createFeedback() {
+    goToCreateFeedback() {
         this.router.navigateByUrl("/feedback/create");
     }
 }

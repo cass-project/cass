@@ -38,6 +38,4 @@ import {FeedbackTypesService} from "../../service/FeedbackTypesService";
     },
 ])
 
-export class FeedbackRoute
-{
-}
+export class FeedbackRoute {}

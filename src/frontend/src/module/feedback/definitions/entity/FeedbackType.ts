@@ -1,9 +1,9 @@
 export interface FeedbackTypeEntity
 {
     code: {
-        int:number,
-        string:string
+        int: number,
+        string: string
     };
-    title:string;
-    description:string;
+    title: string;
+    description: string;
 }

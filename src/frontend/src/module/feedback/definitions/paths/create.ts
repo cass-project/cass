@@ -1,18 +1,14 @@
-import {Success200, NotFound404} from "../../../common/definitions/common";
+import {Success200} from "../../../common/definitions/common";
 import {FeedbackEntity} from "../entity/Feedback";
 
-export interface CreateFeedbackRequest
+export interface FeedbackCreateRequest
 {
     profile_id: number;
     type_feedback: number;
     description: string;
 }
 
-export interface CreateCommunityResponse200 extends Success200
+export interface FeedbackCreateResponse200 extends Success200
 {
     entity: FeedbackEntity;
-}
-
-export interface CreateCommunityResponse404 extends NotFound404
-{
 }
