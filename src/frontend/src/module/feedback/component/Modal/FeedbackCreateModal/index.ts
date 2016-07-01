@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component, Input} from "angular2/core";
 import {Router} from 'angular2/router';
 
 import {ModalComponent} from "../../../../modal/component/index";
@@ -11,6 +11,7 @@ import {MessageBusService} from "../../../../message/service/MessageBusService/i
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {FeedbackTypesService} from "../../../service/FeedbackTypesService";
+import {FeedbackTypeEntity} from "../../../definitions/entity/FeedbackType";
 
 @Component({
     selector: 'cass-feedback-create-modal',
@@ -28,24 +29,38 @@ import {FeedbackTypesService} from "../../../service/FeedbackTypesService";
 export class FeedbackCreateModal
 {
     private isLoading:boolean = false;
+    @Input('feedbackType') feedbackType: FeedbackTypeEntity;
+    
     constructor(
         public model: FeedbackCreateModalModel,
         private router: Router,
-        private feedbackTypesService: FeedbackTypesService,
         private service: FeedbackService,
         private messages: MessageBusService,
-        private accountService: CurrentAccountService
-)
-    {
+        private feedbackTypesService: FeedbackTypesService,
+        private currentAccountService: CurrentAccountService
+    ) {}
+    
+    ngOnInit() {
+        if(this.feedbackType){
+            this.model.type_feedback = this.feedbackType.code.int;
+        } else {
+            this.model.type_feedback = 1;
+        }
+        
+        try {
+            this.model.profile_id = this.currentAccountService.getCurrentProfile().getId();
+        } catch (Error) {}
     }
     
     abort() {
+        this.router.navigateByUrl("/");
     }
+
     
     submit() {
         this.isLoading = true;
         this.service.create(<CreateFeedbackRequest>{
-            profile_id: this.accountService.getCurrentProfile().getId(),
+            profile_id: this.model.profile_id,
             type_feedback: this.model.type_feedback,
             description: this.model.description
         }).subscribe(
@@ -55,14 +70,18 @@ export class FeedbackCreateModal
                 this.isLoading = false;
             },
             error => {
-                error._body = JSON.parse(error._body);
-                if(error.status === 404) {
-                    this.messages.push(MessageBusNotificationsLevel.Critical, error._body.error)
-                } else {
-                    console.log(error);
-                }
+                this.messages.push(MessageBusNotificationsLevel.Critical, JSON.parse(error._body))
                 this.isLoading = false;
             }
         );
+    }
+    
+    isModelValid(): boolean {
+        return !!(this.model.type_feedback && this.model.description && (this.model.profile_id || this.model.email));
+    }
+
+
+    onFeedbackTypeChange($event) {
+        this.router.navigate(['FeedbackCreateType', { type: this.feedbackTypesService.getFeedbackType($event).code.string}]);
     }
 }

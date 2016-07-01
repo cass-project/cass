@@ -30,7 +30,7 @@ import {FeedbackTypesService} from "../../service/FeedbackTypesService";
         path: '/create',
         component: FeedbackCreateRoute,
         useAsDefault: true
-   },
+    },
     {
         name: 'FeedbackCreateType',
         path: '/create/:type',
