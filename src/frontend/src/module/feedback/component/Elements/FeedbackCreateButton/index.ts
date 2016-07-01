@@ -13,12 +13,10 @@ import {FeedbackTypesService} from "../../../service/FeedbackTypesService";
 export class FeedbackCreateButton
 {
     @Output('open') openEvent = new EventEmitter<FeedbackTypeEntity>();
-    public feedbackType:FeedbackTypeEntity;
-
+    
     constructor (private feedbackTypesService: FeedbackTypesService){}
 
     openFeedbackModal() {
-        this.feedbackType = this.feedbackTypesService.getFeedbackType(2);
-        this.openEvent.emit(this.feedbackType);
+        this.openEvent.emit(this.feedbackTypesService.getDefaultFeedbackType());
     }
 }
