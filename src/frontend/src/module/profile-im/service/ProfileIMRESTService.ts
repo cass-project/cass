@@ -1,9 +1,7 @@
 import {Injectable} from "angular2/core";
-import {Http, URLSearchParams} from "angular2/http"
+import {Http, URLSearchParams, Headers} from "angular2/http"
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
-import {Account} from "../../account/definitions/entity/Account";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
-import {AuthService} from "../../auth/service/AuthService";
 import {AuthToken} from "../../auth/service/AuthToken";
 
 @Injectable()
@@ -16,7 +14,12 @@ export class ProfileIMRESTService extends AbstractRESTService
     ) { super(http, token, messages); }
 
     getUnreadMessages(){
-        return this.handle(this.http.get(`/backend/api/protected/profile-im/unread`));
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+        
+        return this.handle(this.http.get(`/backend/api/protected/profile-im/unread`, {headers: authHeader}));
     }
 
     getMessageFrom(sourceProfileId: number, offset: number, limit: number, markAsRead: boolean)
@@ -31,8 +34,13 @@ export class ProfileIMRESTService extends AbstractRESTService
 
     sendMessageTo(targetProfileId: number, content: string)
     {
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+        
         return this.handle(this.http.put(`/backend/api/protected/profile-im/send/to/${targetProfileId}`, JSON.stringify({
             content: content
-        })));
+        }), {headers: authHeader}));
     }
 }
