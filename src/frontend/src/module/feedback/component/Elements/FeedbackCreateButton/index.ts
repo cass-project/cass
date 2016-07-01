@@ -1,5 +1,6 @@
-import {Component} from "angular2/core";
-import {Router} from "angular2/router";
+import {Component, Output, EventEmitter} from "angular2/core";
+import {FeedbackTypeEntity} from "../../../definitions/entity/FeedbackType";
+import {FeedbackTypesService} from "../../../service/FeedbackTypesService";
 
 @Component({
     selector: 'cass-feedback-create-button',
@@ -11,19 +12,13 @@ import {Router} from "angular2/router";
 
 export class FeedbackCreateButton
 {
-    private isVisible:boolean = true;
+    @Output('open') openEvent = new EventEmitter<FeedbackTypeEntity>();
+    public feedbackType:FeedbackTypeEntity;
 
-    constructor(private router: Router) {
-        this.router.subscribe(() => {
-            this.isVisible = !this.isRouteFeedbackCreateActive();
-        });
-    }
+    constructor (private feedbackTypesService: FeedbackTypesService){}
 
-    isRouteFeedbackCreateActive() {
-        return this.router.isRouteActive(this.router.generate(['/Feedback', 'FeedbackCreate']));
-    }
-
-    goToCreateFeedback() {
-        this.router.navigateByUrl("/feedback/create");
+    openFeedbackModal() {
+        this.feedbackType = this.feedbackTypesService.getFeedbackType(2);
+        this.openEvent.emit(this.feedbackType);
     }
 }

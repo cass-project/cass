@@ -27,9 +27,9 @@ import {ProfileRESTService} from "./module/profile/service/ProfileRESTService";
 import {CommunitySettingsModalModel} from "./module/community/component/Modal/CommunitySettingsModal/model";
 import {AuthRESTService} from "./module/auth/service/AuthRESTService";
 import {FeedbackRoute} from "./module/feedback/route/FeedbackRoute/index";
-import {FeedbackCreateButton} from "./module/feedback/component/Elements/FeedbackCreateButton/index";
 import {PostRESTService} from "./module/post/service/PostRESTService";
 import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAttachmentRESTService";
+import {FeedbackComponent} from "./module/feedback/index";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -60,7 +60,7 @@ import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAt
         ProfileComponent,
         SidebarComponent,
         CommunityComponent,
-        FeedbackCreateButton,
+        FeedbackComponent,
         RouterOutlet
 ]
 })

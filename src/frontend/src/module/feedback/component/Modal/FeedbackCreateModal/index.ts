@@ -1,4 +1,4 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input, Output, EventEmitter} from "angular2/core";
 import {Router} from 'angular2/router';
 
 import {FeedbackCreateModalModel} from "./model";
@@ -29,7 +29,8 @@ import {AuthService} from "../../../../auth/service/AuthService";
 export class FeedbackCreateModal
 {
     private isLoading:boolean = false;
-    @Input('feedbackType') feedbackType: FeedbackTypeEntity;
+    @Input('feedback-type') feedbackType: FeedbackTypeEntity;
+    @Output('close') closeEvent = new EventEmitter<FeedbackCreateModal>();
 
     constructor(
         public model: FeedbackCreateModalModel,
@@ -53,7 +54,7 @@ export class FeedbackCreateModal
     }
 
     abort() {
-        this.router.navigateByUrl("/");
+        this.closeEvent.emit(this);
     }
 
 

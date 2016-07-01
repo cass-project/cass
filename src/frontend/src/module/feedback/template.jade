@@ -1,0 +1,10 @@
+div
+  cass-feedback-create-modal(
+    *ngIf="isModalOpen",
+    [feedback-type]="feedbackType",
+    (close)="close()"
+  )
+  cass-feedback-create-button(
+    *ngIf="!isModalOpen",
+    (open)="open($event)"
+  )
