@@ -87,7 +87,15 @@ WebpackConfigBuilder.prototype = {
             loaders: ['raw-loader', 'jade-html']
           }
         ]
-      }
+      },
+      plugins: [
+        new webpack.ProvidePlugin({
+          $: "jquery",
+          jQuery: "jquery",
+          "window.jQuery": "jquery",
+          "window.Tether": 'tether'
+        })
+      ]      
     }
   }
 };

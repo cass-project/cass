@@ -7,17 +7,23 @@ import 'reflect-metadata';
 import 'rxjs/Rx';
 
 require('zone.js');
+require('../../styles/feedback.head.scss');
+require('bootstrap/dist/css/bootstrap.css');
+require('bootstrap/dist/js/bootstrap.js');
 
-require('../../../node_modules/reset.css/reset.css');
-
-import {bootstrap} from "angular2/platform/browser";
 import {provide} from "angular2/core";
 import {HTTP_PROVIDERS} from "angular2/http";
 import {ROUTER_PROVIDERS} from "angular2/router";
 
 import {App} from "./app";
-import {FrontlineService, frontline} from "../../module/frontline/service";
+import {frontline} from "../../module/frontline/service";
+import {FrontlineService} from "../../module/frontline/service";
+import {bootstrap} from "angular2/platform/browser";
+import {enableProdMode} from 'angular2/core';
+
 import {AuthToken} from "../../module/auth/service/AuthToken";
+
+enableProdMode();
 
 document.addEventListener('DOMContentLoaded', () => {
     frontline(session => {
@@ -43,11 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     return token;
                 }})
             ]).then(() => {
-            setInterval(() => {
-                let cassModalClass = 'cass-has-modals';
-                let classList = document.body.classList;
-
-                if(document.getElementsByClassName('cass-modal').length > 0) {
+                setInterval(() => {
+                    let cassModalClass = 'cass-has-modals';
+                    let classList = document.body.classList;
+    
+                    if(document.getElementsByClassName('cass-modal').length > 0) {
                     classList.add(cassModalClass);
                 }else if(classList.contains(cassModalClass)) {
                     classList.remove(cassModalClass);
