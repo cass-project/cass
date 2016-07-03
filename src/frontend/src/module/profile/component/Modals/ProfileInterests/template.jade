@@ -5,19 +5,19 @@ article.comonent.component-profile-interests-modal([ngClass]="{'.component-profi
       .theme-section.theme-section-expert-in
         h1 В чем вы являетесь экспертом или профессионалом?
         p Укажите ваши профессиональные навыки, знания или интересы – темы, в которых ваше мнение имеет вес.
-        cass-theme-select
+        cass-theme-select([value]='expertList.theme_ids')
       .theme-section.theme-section-expert-in
         h1 А чем вы просто интересуетесь?
         p Вы не являетесь экспертом в данных тематиках, но вас интересует контент на данные темы
-        cass-theme-select
+        cass-theme-select([value]='interestList.theme_ids')
     footer.form-footer
       .form-footer-section
         .form-footer-item
           .cass-padding-box-5
-            button.form-text-button
+            button.form-text-button((click)='closeModal()')
               span Отмена
       .form-footer-section
         .form-footer-item
           .cass-padding-box-5
-            button.form-button.form-button-primary
+            button.form-button.form-button-primary([disabled]='!canSaveStatement()', (click)='saveChanges()')
               span Сохранить выбор
