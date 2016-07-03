@@ -54,7 +54,6 @@ export class ProfileSetup
     @Input('profile') profile: ProfileEntity;
 
     @Output('success') successEvent = new EventEmitter<ProfileEntity>();
-    @Output('close') closeEvent = new EventEmitter<ProfileEntity>();
 
     public screens: ScreenControls<ProfileSetupScreen> = new ScreenControls<ProfileSetupScreen>(ProfileSetupScreen.Welcome, (sc: ScreenControls<ProfileSetupScreen>) => {
         sc.add({ from: ProfileSetupScreen.Welcome, to: ProfileSetupScreen.Gender })
@@ -75,11 +74,7 @@ export class ProfileSetup
     ngAfterViewInit() {
         this.model.specifyProfile(this.profile);
     }
-
-    close() {
-        this.closeEvent.emit(this.profile);
-    }
-
+    
     nextScreen() {
         this.screens.next();
 
@@ -94,21 +89,48 @@ export class ProfileSetup
 
     performSaveChanges() {
         let profileId = this.model.getProfile().id;
-
-        Observable.forkJoin([
-            this.service.setGender(profileId, {
+        
+        let requests = {
+            gender: this.service.setGender(profileId, {
                 gender: this.model.gender
             }),
-            this.service.setInterestingIn(profileId, {
+            interestingIn: this.service.setInterestingIn(profileId, {
                 theme_ids: this.model.expertIn
             }),
-            this.service.setExpertIn(profileId, {
+            expertIn: this.service.setExpertIn(profileId, {
                 theme_ids: this.model.expertIn
             })
+        };
+        
+        requests.gender.subscribe(
+            response => {
+                this.profile.gender = response.gender;
+            },
+            error => {}
+        );
+
+        requests.interestingIn.subscribe(
+            response => {
+                this.profile.interesting_in_ids = this.model.interestingIn;
+            },
+            error => {}
+        );
+
+        requests.expertIn.subscribe(
+            response => {
+                this.profile.expert_in_ids = this.model.expertIn;
+            },
+            error => {}
+        );
+
+        Observable.forkJoin([
+            requests.gender,
+            requests.interestingIn,
+            requests.expertIn,
         ]).subscribe(
             success => {
+                this.profile.is_initialized = true;
                 this.messages.push(MessageBusNotificationsLevel.Info, 'Ваши данные сохранены');
-                this.close();
             },
             error => {
                 this.screens.goto(ProfileSetupScreen.ExpertIn);

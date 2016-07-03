@@ -65,11 +65,11 @@ class ProfileExpertInMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([
-                'success' => true
+                'success' => true,
             ])
             ->getParsedLastResult();
 
-        $compareIds = $result['profile']['expert_in_ids'];
+        $compareIds = $result['entity']['profile']['expert_in_ids'];
 
         $this->assertEquals(sort($compareIds), sort($ids));
     }

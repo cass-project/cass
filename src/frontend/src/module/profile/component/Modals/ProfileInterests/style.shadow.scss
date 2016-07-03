@@ -1,0 +1,28 @@
+@import "./../../../../../styles/globals";
+
+article.component-profile-interests-modal {
+  .theme-section {
+    margin-bottom: 20px;
+
+    h1 {
+      font-family: $FONT_FAMILY;
+      font-size: 24px;
+      font-weight: 400;
+      color: material-color("grey", "900");
+      line-height: 30px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-family: $FONT_FAMILY;
+      font-size: 16px;
+      font-weight: 400;
+      color: material-color("grey", "700");
+      line-height: 20px;
+    }
+  }
+}
+
+article.component-profile-interests-modal_has-header {
+  border-top: 3px solid material-color("cyan", "500");
+}

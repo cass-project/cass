@@ -23,11 +23,14 @@ class GetCommand extends Command
 
             return $responseBuilder
                 ->setStatusSuccess()
-                ->setJson($this->profileExtendedFormatter->format($profile))
+                ->setJson([
+                    'entity' => $this->profileExtendedFormatter->format($profile)
+                ])
                 ->build();
         } catch (ProfileNotFoundException $e) {
             return $responseBuilder
                 ->setStatusNotFound()
+                ->setError($e)
                 ->build();
         }
     }

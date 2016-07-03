@@ -53,8 +53,10 @@ class ProfileImageDeleteMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'profile' => [
-                    'image' => $this->expectImageCollection()
+                'entity' => [
+                    'profile' => [
+                        'image' => $this->expectImageCollection()
+                    ]
                 ]
             ]);
     }

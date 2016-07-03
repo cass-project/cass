@@ -1,18 +1,18 @@
  <div class="sidebar-profile-icon">
    <div class="profile-image">
-     <a href="#" class="sidebar-button sidebar-profile-icon">
+     <div (click)="goToProfile()" class="sidebar-button sidebar-profile-icon">
        <img class="sidebar-icon" [src]="getImageProfile()"/>
-     </a>
+     </div>
    </div>
    <div class="profile-menu-container" *ngIf="isSwitched()">
      <ul class="profile-menu">
        <li>
-         <div class="profile-menu-item" title="Настройки" (click)="service.modals.settings.open();">
+         <div class="profile-menu-item" title="Настройки" (click)="openProfileSettings();">
            <i class="fa fa-cog"></i>
          </div>
        </li>
        <li>
-         <div class="profile-menu-item" title="Переключиться на другой профиль" (click)="service.modals.switcher.open();">
+         <div class="profile-menu-item" title="Переключиться на другой профиль" (click)="openProfileSwitcher();">
            <i class="fa fa-exchange"></i>
          </div>
        </li>

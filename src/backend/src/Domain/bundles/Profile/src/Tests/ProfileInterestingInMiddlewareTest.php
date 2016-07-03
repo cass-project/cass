@@ -69,7 +69,7 @@ class ProfileInterestingInMiddlewareTest extends ProfileMiddlewareTestCase
             ])
             ->getParsedLastResult();
 
-        $compareIds = $result['profile']['interesting_in_ids'];
+        $compareIds = $result['entity']['profile']['interesting_in_ids'];
 
         $this->assertEquals(sort($compareIds), sort($ids));
     }

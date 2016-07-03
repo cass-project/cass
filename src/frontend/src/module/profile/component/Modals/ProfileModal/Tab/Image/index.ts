@@ -8,6 +8,7 @@ import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {AuthService} from "../../../../../../auth/service/AuthService";
 import {UploadImageModal} from "../../../../../../form/component/UploadImage/index";
 import {UploadImageService} from "../../../../../../form/component/UploadImage/service";
+import {AuthToken} from "../../../../../../auth/service/AuthToken";
 
 @Component({
     selector: 'cass-profile-modal-tab-image',
@@ -33,10 +34,12 @@ export class ImageTab
     constructor(
         private uploadImageService: UploadImageService, 
         private profileRESTService: ProfileRESTService,
-        private authService: AuthService
+        private authService: AuthService,
+        private authToken: AuthToken
     ) {
         uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(
-            authService.getCurrentAccount().getCurrentProfile().entity.profile.id
+            authService.getCurrentAccount().getCurrentProfile().entity.profile,
+            authToken.getAPIKey()
         ));
     }
 

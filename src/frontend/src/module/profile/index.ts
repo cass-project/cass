@@ -5,9 +5,10 @@ import {ModalComponent} from "../modal/component/index";
 import {ProfileSwitcher} from "./component/Modals/ProfileSwitcher/index";
 import {ProfileSetup} from "./component/Modals/ProfileSetup/index";
 import {ModalBoxComponent} from "../modal/component/box/index";
-import {ModalControl} from "../util/classes/ModalControl";
 import {AuthService} from "../auth/service/AuthService";
-import {Profile, ProfileEntity} from "./definitions/entity/Profile";
+import {ProfileEntity} from "./definitions/entity/Profile";
+import {ProfileModals} from "./modals";
+import {ProfileInterestsModal} from "./component/Modals/ProfileInterests/index";
 
 @Component({
     selector: 'cass-profile',
@@ -17,26 +18,20 @@ import {Profile, ProfileEntity} from "./definitions/entity/Profile";
         ModalBoxComponent,
         ProfileModal,
         ProfileSwitcher,
+        ProfileInterestsModal,
         ProfileSetup
     ]
 })
 export class ProfileComponent
 {
-    public modals: {
-        setup: ModalControl,
-        settings: ModalControl,
-        switcher: ModalControl,
-    } = {
-        setup: new ModalControl(),
-        settings: new ModalControl(),
-        switcher: new ModalControl(),
-    };
-
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private modals: ProfileModals) {}
 
     isSetupRequired() {
         if(this.authService.isSignedIn()) {
-            return ! this.authService.getCurrentAccount().getCurrentProfile().entity.profile.is_initialized;
+            let testProfileIsInitialized = ! this.authService.getCurrentAccount().getCurrentProfile().entity.profile.is_initialized;
+            let testIsOpened = this.modals.setup.isOpened();
+
+            return testProfileIsInitialized || testIsOpened;
         }else{
             return false;
         }
