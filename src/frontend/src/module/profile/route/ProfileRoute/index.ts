@@ -7,13 +7,15 @@ import {ProfileCachedIdentityMap} from "../../service/ProfileCachedIdentityMap";
 import {ProgressLock} from "../../../form/component/ProgressLock/index";
 import {AuthService} from "../../../auth/service/AuthService";
 import {ProfileHeader} from "../../component/Elements/ProfileHeader/index";
+import {ProfileCardsList} from "../../component/Elements/ProfileCardsList/index";
 
 @Component({
     template: require('./template.jade'),
     directives: [
+        ROUTER_DIRECTIVES,
         ProgressLock,
         ProfileHeader,
-        ROUTER_DIRECTIVES,
+        ProfileCardsList,
     ]
 })
 export class ProfileRoute
@@ -32,7 +34,7 @@ export class ProfileRoute
 
         if(id === 'current') {
             this.observable = new Observable(observer => {
-                observer.next(auth.getCurrentAccount().getCurrentProfile());
+                observer.next(auth.getCurrentAccount().getCurrentProfile().entity);
                 observer.complete();
             });
         }else if(id.match(/^(\d+)$/)) {
@@ -46,6 +48,8 @@ export class ProfileRoute
             (profile) => { 
                 this.loading = false;
                 this.profile = profile;
+
+                console.log(this.profile);
             },
             () => {
                 router.navigate(['/Profile/NotFound'])
