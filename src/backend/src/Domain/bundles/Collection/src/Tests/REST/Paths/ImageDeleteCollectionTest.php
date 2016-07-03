@@ -49,16 +49,5 @@ final class ImageDeleteCollectionTest extends CollectionRESTTestCase
                 'success' => true,
                 'image' => $this->expectImageCollection()
             ]);
-
-        $this->requestGetProfile((int) $collection->getOwnerId())
-            ->execute()
-            ->expectStatusCode(200)
-            ->expectJSONContentType()
-            ->expectJSONBody([
-                'success' => true,
-                'profile' => [
-                    'image' => $this->expectImageCollection()
-                ]
-            ]);
     }
 }

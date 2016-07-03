@@ -25,7 +25,7 @@ final class DeleteProfileCollectionTest extends CollectionRESTTestCase
             ->expect(function(array $jsonResponse) use ($collectionId) {
                 $collectionIds = array_map(function(array $input) {
                     return $input['collection_id'];
-                }, $jsonResponse['profile']['collections']);
+                }, $jsonResponse['entity']['profile']['collections']);
 
                 $this->assertTrue(in_array($collectionId, $collectionIds));
             });
@@ -46,7 +46,7 @@ final class DeleteProfileCollectionTest extends CollectionRESTTestCase
             ->expect(function(array $jsonResponse) use ($collectionId) {
                 $collectionIds = array_map(function(array $input) {
                     return $input['collection_id'];
-                }, $jsonResponse['profile']['collections']);
+                }, $jsonResponse['entity']['profile']['collections']);
 
                 $this->assertFalse(in_array($collectionId, $collectionIds));
             });
