@@ -9,6 +9,7 @@
   "dependencies": {
     "angular-new-router": "github:angular/router",
     "angular2": "2.0.0-beta.15",
+    "bootstrap": "^3.3.6",
     "cropperjs": "^0.7.0",
     "css-loader": "0.23.1",
     "es6-promise": "3.0.2",
@@ -19,6 +20,7 @@
     "jade": "^1.11.0",
     "jade-html-loader": "0.0.3",
     "jade-loader": "^0.8.0",
+    "jquery": "^3.0.0",
     "json-loader": "^0.5.4",
     "merge": "^1.2.0",
     "ng2-bootstrap": "1.0.5",

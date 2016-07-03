@@ -28,6 +28,7 @@ class GetCommand extends Command
         } catch (ProfileNotFoundException $e) {
             return $responseBuilder
                 ->setStatusNotFound()
+                ->setError($e)
                 ->build();
         }
     }

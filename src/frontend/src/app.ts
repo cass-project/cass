@@ -13,7 +13,7 @@ import {SidebarComponent} from "./module/sidebar/index";
 import {CommunityComponent} from "./module/community/index";
 import {RouterOutlet} from "angular2/router";
 import {LandingComponent} from "./module/landing/index";
-import {ProfileRoute} from "./module/profile/route/ProfileRoute/index";
+import {RootRoute as ProfileRootRoute} from "./module/profile/route/RootRoute";
 import {AuthService} from "./module/auth/service/AuthService";
 import {ProfileSwitcherService} from "./module/profile/component/Modals/ProfileSwitcher/service";
 import {ModalService} from "./module/modal/component/service";
@@ -29,6 +29,7 @@ import {AuthRESTService} from "./module/auth/service/AuthRESTService";
 import {FeedbackComponent} from "./module/feedback/index";
 import {PostRESTService} from "./module/post/service/PostRESTService";
 import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAttachmentRESTService";
+import {ProfileCachedIdentityMap} from "./module/profile/service/ProfileCachedIdentityMap";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -48,7 +49,8 @@ import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAt
         CollectionRESTService,
         CommunitySettingsModalModel,
         PostRESTService,
-        PostAttachmentRESTService
+        PostAttachmentRESTService,
+        ProfileCachedIdentityMap,
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -78,7 +80,7 @@ import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAt
     {
         name: 'Profile',
         path: '/profile/...',
-        component: ProfileRoute
+        component: ProfileRootRoute
     },
     {
         name: 'Community',

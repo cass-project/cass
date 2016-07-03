@@ -12,7 +12,7 @@ require('./../node_modules/reset.css/reset.css');
 require('./styles/index.head.scss');
 
 import {provide} from "angular2/core";
-import {HTTP_PROVIDERS, RequestOptions} from "angular2/http";
+import {HTTP_PROVIDERS} from "angular2/http";
 import {ROUTER_PROVIDERS} from "angular2/router";
 
 import {App} from "./app";

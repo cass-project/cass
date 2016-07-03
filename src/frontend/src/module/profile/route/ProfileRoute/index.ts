@@ -1,33 +1,57 @@
 import {Component} from "angular2/core";
 
-import {RouterOutlet, RouteConfig} from "angular2/router";
-import {ModalComponent} from "../../../modal/component/index";
-import {ProfileMenuComponent} from "../../component/Elements/ProfileMenu/index";
-import {ProfileModal} from "../../component/Modals/ProfileModal/index";
-import {ModalBoxComponent} from "../../../modal/component/box/index";
-import {Nothing} from "../../../util/component/Nothing/index";
+import {RouteParams, Router, ROUTER_DIRECTIVES} from "angular2/router";
+import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
+import {Observable} from "rxjs/Observable";
+import {ProfileCachedIdentityMap} from "../../service/ProfileCachedIdentityMap";
+import {ProgressLock} from "../../../form/component/ProgressLock/index";
+import {AuthService} from "../../../auth/service/AuthService";
+import {ProfileHeader} from "../../component/Elements/ProfileHeader/index";
 
 @Component({
-    template: require('./template.html'),
-    styles: [
-        require('./style.shadow.scss')
-    ],
+    template: require('./template.jade'),
     directives: [
-        RouterOutlet,
-        ModalComponent,
-        ModalBoxComponent,
-        ProfileMenuComponent,
-        ProfileModal,
+        ProgressLock,
+        ProfileHeader,
+        ROUTER_DIRECTIVES,
     ]
 })
-@RouteConfig([
-    {
-        name: 'Dashboard',
-        path: '/',
-        component: Nothing,
-        useAsDefault: true
-    }
-])
 export class ProfileRoute
 {
+    private loading: boolean = true;
+    private observable: Observable<ProfileExtendedEntity>;
+    private profile: ProfileExtendedEntity;
+
+    constructor(
+        params: RouteParams,
+        auth: AuthService,
+        entities: ProfileCachedIdentityMap,
+        router: Router
+    ) {
+        let id = params.get('id');
+        
+        if(id === 'current') {
+            this.observable = new Observable(observer => {
+                observer.next(auth.getCurrentAccount().getCurrentProfile());
+                observer.complete();
+            });
+        }else if(id.match(/^(\d+)$/)) {
+            this.observable = entities.getProfileById(parseInt(id, 10));
+        }else {
+            router.navigate(['/Profile/NotFound']);
+            return;
+        }
+
+        this.observable.subscribe(
+            (response) => { 
+                this.loading = false;
+                this.profile = response;
+
+                console.log(this.profile);
+            },
+            () => {
+                router.navigate(['/Profile/NotFound'])
+            }
+         )
+    }
 }
