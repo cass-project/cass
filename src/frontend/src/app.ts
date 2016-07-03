@@ -31,11 +31,13 @@ import {PostRESTService} from "./module/post/service/PostRESTService";
 import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAttachmentRESTService";
 import {ProfileCachedIdentityMap} from "./module/profile/service/ProfileCachedIdentityMap";
 import {ProfileModals} from "./module/profile/modals";
+import {TranslateService} from "./module/translate/service";
 
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),
     providers: [
+        TranslateService,
         ModalService,
         MessageBusService,
         AuthService,

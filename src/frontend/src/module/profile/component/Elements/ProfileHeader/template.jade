@@ -1,1 +1,25 @@
 article.component-profile-header
+  .profile-header-section
+    .profile-brand-container
+      .profile-image-container
+        cass-profile-image([url]="getProfileURL()", border = "circle")
+      .profile-greetings
+        span {{ getProfileGreetings() }}
+    .collection-list-container
+        ul.collection-links
+          li
+            a(href="#", class="collection-link")
+              span Профиль
+          li(*ngFor="#collection of entity.collections")
+            a(href="#", class="collection-link", title="{{ collection.description }}")
+              span {{ translate.translate('collection', collection.title) }}
+          li
+            a(href="#", class="collection-link collection-link-icon")
+              i.fa.fa-plus-circle
+  .profile-header-section
+    .profile-buttons-container
+      ul.profile-buttons
+        li
+          a.profile-button(href="javascript:void()", title="Создать новую подборку")
+            i.fa.fa-fw.fa-cog
+            span Настройки

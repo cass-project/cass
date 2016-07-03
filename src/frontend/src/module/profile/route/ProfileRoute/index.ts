@@ -8,9 +8,16 @@ import {ProgressLock} from "../../../form/component/ProgressLock/index";
 import {AuthService} from "../../../auth/service/AuthService";
 import {ProfileHeader} from "../../component/Elements/ProfileHeader/index";
 import {ProfileCardsList} from "../../component/Elements/ProfileCardsList/index";
+import {ProfileCollectionsService} from "../../service/ProfileCollectionsService";
 
 @Component({
     template: require('./template.jade'),
+    styles: [
+        require('./style.shadow.scss')
+    ],
+    providers: [
+        ProfileCollectionsService
+    ],
     directives: [
         ROUTER_DIRECTIVES,
         ProgressLock,

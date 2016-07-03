@@ -12,7 +12,7 @@ article.component.component-profile-card
           li(*ngFor="#theme of expertIn")
             a(href="javascript.void(0)")
               span {{ theme.title }}
-        .profile-interesting-in(*ngIf="!hasAnyExperts() && hasAnyInterests()")
+      .profile-interesting-in(*ngIf="!hasAnyExperts() && hasAnyInterests()")
         .profile-interesting-in-title Интересуется
         ul.themes
           li(*ngFor="#theme of expertIn")
