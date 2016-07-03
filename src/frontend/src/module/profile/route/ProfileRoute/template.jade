@@ -1,5 +1,5 @@
 article.component.component-profile-route
   cass-form-progress-lock(*ngIf="loading")
-
-  cass-profile-header(*ngIf="! loading", profile="profile")
+  div(*ngIf="profile")
+    cass-profile-header([profile]="profile")
   router-outlet

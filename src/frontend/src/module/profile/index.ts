@@ -36,7 +36,10 @@ export class ProfileComponent
 
     isSetupRequired() {
         if(this.authService.isSignedIn()) {
-            return ! this.authService.getCurrentAccount().getCurrentProfile().entity.profile.is_initialized;
+            let testProfileIsInitialized = ! this.authService.getCurrentAccount().getCurrentProfile().entity.profile.is_initialized;
+            let testIsOpened = this.modals.setup.isOpened();
+
+            return testProfileIsInitialized || testIsOpened;
         }else{
             return false;
         }

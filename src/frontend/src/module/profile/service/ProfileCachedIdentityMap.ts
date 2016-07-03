@@ -1,9 +1,8 @@
-import {ProfileExtendedEntity} from "../definitions/entity/Profile";
-import {ProfileRESTService} from "./ProfileRESTService";
 import {Observable} from "rxjs/Observable";
 import {Injectable} from "angular2/core";
-import {GetProfileByIdResponse200} from "../definitions/paths/get-by-id";
-import {Response} from "angular2/http";
+
+import {ProfileExtendedEntity} from "../definitions/entity/Profile";
+import {ProfileRESTService} from "./ProfileRESTService";
 
 @Injectable()
 export class ProfileCachedIdentityMap
@@ -15,8 +14,8 @@ export class ProfileCachedIdentityMap
     getProfileById(id: number): Observable<ProfileExtendedEntity> {
         if(! this.entities[id]) {
             this.entities[id] = new Observable(observer => {
-                this.service.getProfileById(id).subscribe(
-                    (response: GetProfileByIdResponse200) => {
+                this.service.getProfileById(id).map(res => res.json()).subscribe(
+                    (response) => {
                         observer.next(response.entity);
                         observer.complete();
                     },

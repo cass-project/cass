@@ -15,7 +15,7 @@ export abstract class AbstractRESTService
         protected messages: MessageBusService
     ) {}
 
-    handle(request: Observable<Response>) {
+    handle(request) {
         let fork = request.publish().refCount();
 
         fork.catch(error => {
@@ -49,16 +49,7 @@ export abstract class AbstractRESTService
             }
 
             return Observable.throw(response);
-        }).subscribe(
-            response => {
-                try {
-                    response.json();
-                } catch (error) {
-                    this.jsonParseError();
-                }
-            },
-            error => {}
-        );
+        });
 
         return fork;
     }

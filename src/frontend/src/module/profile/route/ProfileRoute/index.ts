@@ -29,7 +29,7 @@ export class ProfileRoute
         router: Router
     ) {
         let id = params.get('id');
-        
+
         if(id === 'current') {
             this.observable = new Observable(observer => {
                 observer.next(auth.getCurrentAccount().getCurrentProfile());
@@ -43,11 +43,9 @@ export class ProfileRoute
         }
 
         this.observable.subscribe(
-            (response) => { 
+            (profile) => { 
                 this.loading = false;
-                this.profile = response;
-
-                console.log(this.profile);
+                this.profile = profile;
             },
             () => {
                 router.navigate(['/Profile/NotFound'])

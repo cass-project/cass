@@ -1,1 +1,9 @@
 article.component-profile-header
+  header
+    .profile-image
+      cass-profile-image([url]="getProfileURL()", border="circle")
+    .profile-about
+      h1.profile-greetings
+        span {{ getGreetings() }}
+      p
+        span {{ getBanner() }}
