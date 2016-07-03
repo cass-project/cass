@@ -1,235 +1,16 @@
-nav.navbar.navbar-fixed-top.navbar-dark.bg-primary
-  button.navbar-toggler.hidden-sm-up.pull-right(type='button', data-toggle='collapse', data-target='#collapsingNavbar')
-    | ☰
-  a.navbar-brand(href='#') CASS
-  #collapsingNavbar.collapse.navbar-toggleable-xs
-    ul.nav.navbar-nav.pull-right
-      li.nav-item.active
-        a.nav-link(href='#') Home 
-      li.nav-item
-        a.nav-link(href='#features') Features
-      li.nav-item
-        a.nav-link(href='#myAlert', data-toggle='collapse') Wow
-      li.nav-item
-        a.nav-link(href='', data-target='#myModal', data-toggle='modal') About
-
-#main.container-fluid
+.container-fluid
   .row.row-offcanvas.row-offcanvas-left
-    #sidebar.col-md-3.col-lg-2.sidebar-offcanvas(role='navigation')
-      ul.nav.nav-pills.nav-stacked
-        li.nav-item
-          a.nav-link(href='#') Overview
-        li.nav-item
-          a.nav-link(href='#') Reports
-        li.nav-item
-          a.nav-link(href='#') Analytics
-        li.nav-item
-          a.nav-link(href='#') Export
-        li.nav-item
-          a.nav-link(href='') Nav item
-        li.nav-item
-          a.nav-link(href='') Nav item
-        li.nav-item
-          a.nav-link(href='') Another
-        li.nav-item
-          a.nav-link(href='') Nav item
-        li.nav-item
-          a.nav-link(href='') One more
-    // /col
+    .col-md-3.col-lg-2.sidebar-offcanvas.p-l-0(role='navigation')
+      cass-feedback-landing-sidebar
     .col-md-9.col-lg-10.main
-      // toggle sidebar button
-      p.hidden-md-up
-        button.btn.btn-primary-outline.btn-sm(type='button', data-toggle='offcanvas')
-          i.fa.fa-chevron-left
-          |  Menu
-      h1.display-1.hidden-xs-down
-        | Bootstrap 4 Dashboard
-      p.lead (with off-canvas sidebar, based on BS v4 alpha)
-      #myAlert.alert.alert-warning.fade.collapse(role='alert')
-        button.close(type='button', data-dismiss='alert', aria-label='Close')
-          span(aria-hidden='true') ×
-          span.sr-only Close
-        strong Holy guacamole!
-        |  It's free.. this is an example theme.
-      .row
-        .col-lg-3.col-md-6
-          .card.card-inverse.card-success
-            .card-block.bg-success
-              .rotate
-                i.fa.fa-user.fa-5x
-              h6.text-uppercase Users
-              h1.display-1 134
-        .col-lg-3.col-md-6
-          .card.card-inverse.card-danger
-            .card-block.bg-danger
-              .rotate
-                i.fa.fa-list.fa-4x
-              h6.text-uppercase Posts
-              h1.display-1 87
-        .col-lg-3.col-md-6
-          .card.card-inverse.card-info
-            .card-block.bg-info
-              .rotate
-                i.fa.fa-twitter.fa-5x
-              h6.text-uppercase Tweets
-              h1.display-1 125
-        .col-lg-3.col-md-6
-          .card.card-inverse.card-warning
-            .card-block.bg-warning
-              .rotate
-                i.fa.fa-share.fa-5x
-              h6.text-uppercase Shares
-              h1.display-1 36
-      // /row
-      hr
-      .row.placeholders
-        .col-xs-6.col-sm-3.placeholder.text-xs-center
-          img.center-block.img-responsive.img-circle(src='//placehold.it/200/dddddd/fff?text=1', alt='Generic placeholder thumbnail')
-          h4 Responsive
-          span.text-muted Device agnostic
-        .col-xs-6.col-sm-3.placeholder.text-xs-center
-          img.center-block.img-responsive.img-circle(src='//placehold.it/200/e4e4e4/fff?text=2', alt='Generic placeholder thumbnail')
-          h4 Frontend
-          span.text-muted UI / UX oriented
-        .col-xs-6.col-sm-3.placeholder.text-xs-center
-          img.center-block.img-responsive.img-circle(src='//placehold.it/200/d6d6d6/fff?text=3', alt='Generic placeholder thumbnail')
-          h4 HTML5
-          span.text-muted Standards-based
-        .col-xs-6.col-sm-3.placeholder.text-xs-center
-          img.center-block.img-responsive.img-circle(src='//placehold.it/200/e0e0e0/fff?text=4', alt='Generic placeholder thumbnail')
-          h4 Framework
-          span.text-muted CSS and JavaScript
-      a#features
-      hr
-      p.lead
-        | Are you ready for Bootstap 4? It's the 4th generation of this popular responsive framework. Bootstrap 4 will include some interesting new features such as 5 grid sizes (now including xl), cards, `em` sizing, CSS normalization (reboot) and larger font
-        | sizes.
-      hr
-      .row
-        .col-lg-3.col-md-4
-          .card
-            img.card-img-top.img-responsive(src='//placehold.it/740x180/bbb/fff?text=...', alt='Card image cap')
-            .card-block
-              h4.card-title Card title
-              p.card-text
-                | Some quick example text to build on the card title and make up the bulk of the card's content.
-              a.btn.btn-primary(href='#') Button
-          .card.card-inverse(style='background-color: #333; border-color: #333;')
-            .card-block
-              h3.card-title Dark background
-              p.card-text With supporting text below as a natural lead-in to additional content.
-              a.btn.btn-secondary-outline(href='#') Outline
-        .col-lg-9.col-md-8
-          .table-responsive
-            table.table.table-striped
-              thead.thead-inverse
-                tr
-                  th #
-                  th Label
-                  th Header
-                  th Column
-                  th Data
-              tbody
-                tr
-                  td 1,001
-                  td responsive
-                  td bootstrap
-                  td cards
-                  td grid
-                tr
-                  td 1,002
-                  td rwd
-                  td web designers
-                  td theme
-                  td responsive
-                tr
-                  td 1,003
-                  td free
-                  td open-source
-                  td download
-                  td template
-                tr
-                  td 1,003
-                  td frontend
-                  td developer
-                  td coding
-                  td card panel
-                tr
-                  td 1,004
-                  td migration
-                  td bootstrap 4
-                  td mobile-first
-                  td design
-                tr
-                  td 1,005
-                  td navbar
-                  td sticky
-                  td jumbtron
-                  td header
-                tr
-                  td 1,006
-                  td collapse
-                  td affix
-                  td submenu
-                  td footer
-                tr
-                  td 1,007
-                  td layout
-                  td examples
-                  td themes
-                  td grid
-                tr
-                  td 1,008
-                  td migration
-                  td bootstrap 4
-                  td flexbox
-                  td design
-      // /row
-      a#more
-      hr
-      h2.sub-header Use card decks for equal height rows of cards
-      .card-deck-wrapper
-        .card-deck
-          .card.card-inverse.card-success.text-center
-            .card-block
-              blockquote.card-blockquote
-                p
-                  | It's really good news that the new Bootstrap 4 now has support for CSS 3 flexbox.
-                footer
-                  | Makes flexible layouts 
-                  cite(title='Source Title') Faster
-          .card.card-inverse.card-danger.text-center
-            .card-block
-              blockquote.card-blockquote
-                p
-                  | The Bootstrap 3.x element that was called "Panel" before, is now called a "Card".
-                footer
-                  | All of this makes more 
-                  cite(title='Source Title') Sense
-          .card.card-inverse.card-warning.text-center
-            .card-block
-              blockquote.card-blockquote
-                p There are also some interesting new text classes for uppercase and capitalize.
-                footer
-                  | These handy utilities make it 
-                  cite(title='Source Title') Easy
-          .card.card-inverse.card-info.text-center
-            .card-block
-              blockquote.card-blockquote
-                p
-                  | If you want to use cool icons in Bootstrap 4, you'll have to find your own such as Font Awesome or Ionicons.
-                footer
-                  | The Glyphicons are not 
-                  cite(title='Source Title') Included
-      // /row
-      a#flexbox
-      hr
-      h2 Masonry-style grid columns
-      h6 with Bootstrap 4 flexbox
+      cass-feedback-landing-sidebar-toggler
+
       .card-columns
-        .card
-          img.card-img-top.img-responsive(src='//placehold.it/600x200/444/fff?text=...', alt='Card image cap')
-          .card-block
+        cass-feedback-card(
+          *ngFor="#feedback of feedbacks",
+          [data]="feedback"
+        )
+        .card.card-block
             h4.card-title Card title that wraps to a new line
             p.card-text
               | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
@@ -240,9 +21,7 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-primary
               small.text-muted
                 | Someone famous like 
                 cite(title='Source Title') Mark Otto
-        .card
-          img.card-img-top.img-responsive(src='//placehold.it/600x200/bbb/fff?text=...', alt='Card image cap')
-          .card-block
+        .card.card-block
             h4.card-title Card title
             p.card-text This card has supporting text below as a natural lead-in to additional content.
             p.card-text
@@ -259,9 +38,7 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-primary
           p.card-text This card has supporting text below as a natural lead-in to additional content.
           p.card-text
             small.text-muted Last updated 5 mins ago
-        .card
-          img.card-img.img-responsive(src='//placehold.it/600x200/777/fff?text=...', alt='Card image')
-        .card.card-block.text-right
+        .card.card.card-block.text-right
           blockquote.card-blockquote
             p There are also some interesting new text classes to uppercase or capitalize.
             footer
@@ -274,8 +51,7 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-primary
             | This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.
           p.card-text
             small.text-muted Last updated 3 mins ago
-        .card
-          .card-block
+        .card.card-block
             ul.list-unstyled
               li.text-capitalize
                 code.text-lowercase text-capitalize

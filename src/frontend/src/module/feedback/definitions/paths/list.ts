@@ -1,5 +1,6 @@
 import {Success200} from "../../../common/definitions/common";
 import {FeedbackEntity} from "../entity/Feedback";
+
 export interface ListFeedbackQueryParams
 {
     profileId?: number;
