@@ -7,6 +7,7 @@ import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {AuthToken} from "../../auth/service/AuthToken";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {ListFeedbackQueryParams} from "../definitions/paths/list";
+import {FeedbackCreateResponseRequest} from "../definitions/paths/create-response";
 
 @Injectable()
 export class FeedbackRESTService extends AbstractRESTService {
@@ -26,7 +27,7 @@ export class FeedbackRESTService extends AbstractRESTService {
         return this.handle(this.http.put("/backend/api/feedback/create", JSON.stringify(request), {headers: authHeader}));
     }
 
-    public createResponse(request: FeedbackCreateRequest) {
+    public createResponse(request: FeedbackCreateResponseRequest ) {
         let authHeader = new Headers();
 
         if (this.token.hasToken()) {
