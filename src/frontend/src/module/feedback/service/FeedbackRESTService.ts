@@ -1,5 +1,5 @@
 import {Injectable} from "angular2/core";
-import {Http, Response, Headers} from "angular2/http";
+import {Http, Response, Headers, URLSearchParams} from "angular2/http";
 import {Observable} from "rxjs/Rx";
 
 import {FeedbackCreateRequest} from "../definitions/paths/create";
@@ -22,5 +22,23 @@ export class FeedbackRESTService extends AbstractRESTService
         }
 
         return this.handle(this.http.put("/backend/api/feedback/create", JSON.stringify(request), {headers: authHeader}));
+    }
+    
+    public list(offset:number, limit:number, read?:boolean, answer?: boolean) : Observable<Response>
+    {
+        let authHeader = new Headers();
+        if(this.token.hasToken()) {
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+        
+        let params = new URLSearchParams();
+        if(read!==undefined) {
+            params.set('read', String(read));
+        }
+        if(answer!==undefined) {
+            params.set('answer', String(answer));
+        }
+        
+        return this.handle(this.http.get(`/backend/api/feedback/list/offset/${offset}/limit/${limit}`, {headers: authHeader, search: params}));
     }
 }
