@@ -1,0 +1,16 @@
+.card {
+    img{
+        width:64px;
+        padding:.5em;
+    }
+    .controls {
+        display: none;
+        a {
+            cursor: pointer
+        }
+    }
+    &:hover .controls {
+        display: block;
+    }
+}
+

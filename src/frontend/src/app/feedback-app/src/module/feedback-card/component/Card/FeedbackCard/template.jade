@@ -1,0 +1,28 @@
+.card
+  .card-block
+    p.card-text
+      img.img-circle.pull-left(
+        src="/dist/assets/entity/profile/profile-default-avatar.png"
+      )
+      i.fa.fa-fw.fa-quote-right.p-r-1(aria-hidden="true")
+      | {{card.description}}
+    .controls.pull-right
+      a.card-link(
+        (click)="reply()"
+      )
+        i.fa.fa-fw.fa-reply(aria-hidden="true")
+        | Reply
+
+      a.card-link.text-warning(
+        (click)="archive()"
+      )
+        i.fa.fa-fw.fa-archive(aria-hidden="true")
+        | Archive
+
+      a.card-link.text-danger(
+        (click)="ban()"
+      )
+        i.fa.fa-fw.fa-ban(aria-hidden="true")
+        | Ban user
+    .clearfix
+  .card-footer.text-muted {{card.created_at}}

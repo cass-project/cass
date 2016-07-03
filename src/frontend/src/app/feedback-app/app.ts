@@ -2,12 +2,14 @@ import {Component} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {RouteConfig, ROUTER_DIRECTIVES, RouterOutlet} from "angular2/router";
 
-import {LandindComponent} from "./src/module/landing";
+import {LandingComponent} from "./src/module/landing";
 import {AuthService} from "../../module/auth/service/AuthService";
 import {AuthRESTService} from "../../module/auth/service/AuthRESTService";
 import {MessageBusService} from "../../module/message/service/MessageBusService/index";
 import {AccountService} from "../../module/account/service/AccountService";
 import {AccountRESTService} from "../../module/account/service/AccountRESTService";
+import {Title} from "angular2/src/platform/browser/title";
+import {HeadMenuComponent} from "./src/module/head-menu/index";
 
 @Component({
     selector: 'cass-feedback-bootstrap',
@@ -22,7 +24,8 @@ import {AccountRESTService} from "../../module/account/service/AccountRESTServic
     directives: [
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,
-        RouterOutlet
+        RouterOutlet,
+        HeadMenuComponent
     ]
 })
 
@@ -30,7 +33,7 @@ import {AccountRESTService} from "../../module/account/service/AccountRESTServic
     {
         name: 'Landing',
         path: '/feedback-admin',
-        component: LandindComponent,
+        component: LandingComponent,
         useAsDefault: true
     }
 ])
@@ -40,11 +43,13 @@ export class App {
     private isAdmin:boolean;
     constructor(
         private authService: AuthService,
-        private accountService: AccountService
+        private accountService: AccountService,
+        private titleService: Title 
     ) {
         // Do not(!) remove authService dependency.
         accountService.appAccess().subscribe( data => {
             this.isAdmin = data.access.apps.feedback;
+            this.titleService.setTitle("Feedback Dashboard");
         })
     }
 }
