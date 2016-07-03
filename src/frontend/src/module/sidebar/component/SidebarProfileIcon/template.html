@@ -7,12 +7,12 @@
    <div class="profile-menu-container" *ngIf="isSwitched()">
      <ul class="profile-menu">
        <li>
-         <div class="profile-menu-item" title="Настройки" (click)="service.modals.settings.open();">
+         <div class="profile-menu-item" title="Настройки" (click)="modals.settings.open();">
            <i class="fa fa-cog"></i>
          </div>
        </li>
        <li>
-         <div class="profile-menu-item" title="Переключиться на другой профиль" (click)="service.modals.switcher.open();">
+         <div class="profile-menu-item" title="Переключиться на другой профиль" (click)="modals.switcher.open();">
            <i class="fa fa-exchange"></i>
          </div>
        </li>

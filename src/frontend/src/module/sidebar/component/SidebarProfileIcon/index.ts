@@ -1,6 +1,7 @@
 import {Component} from "angular2/core";
 
 import {AuthService} from "../../../auth/service/AuthService";
+import {ProfileModals} from "../../../profile/modals";
 
 @Component({
     selector: 'cass-sidebar-profile-icon',
@@ -13,7 +14,7 @@ export class SidebarProfileIcon
 {
     private isProfileMenuSwitched: boolean = false;
     
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private modals: ProfileModals) {}
 
     getImageProfile(){
         if(this.authService.isSignedIn()){

@@ -30,6 +30,7 @@ import {FeedbackComponent} from "./module/feedback/index";
 import {PostRESTService} from "./module/post/service/PostRESTService";
 import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAttachmentRESTService";
 import {ProfileCachedIdentityMap} from "./module/profile/service/ProfileCachedIdentityMap";
+import {ProfileModals} from "./module/profile/modals";
 
 @Component({
     selector: 'cass-bootstrap',
@@ -51,6 +52,7 @@ import {ProfileCachedIdentityMap} from "./module/profile/service/ProfileCachedId
         PostRESTService,
         PostAttachmentRESTService,
         ProfileCachedIdentityMap,
+        ProfileModals,
     ],
     directives: [
         ROUTER_DIRECTIVES,
