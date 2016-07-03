@@ -69,7 +69,7 @@ class FeedbackService
     {
         $feedback = $this->feedbackRepository->getFeedbackById($feedbackId);
 
-        if($feedback->hasResponse()) {
+        if(! $feedback->hasResponse()) {
             throw new FeedbackHasNoAnswerException(sprintf('Feedback (ID: %s) has no response', $feedbackId));
         }
 
@@ -98,9 +98,9 @@ class FeedbackService
         return $this->feedbackRepository->getFeedbackById($feedbackId);
     }
 
-    public function getFeedbackEntities(int $profileId, array $options): array
+    public function getFeedbackEntities(array $options): array
     {
-        return $this->feedbackRepository->getFeedbackEntities($profileId, $options);
+        return $this->feedbackRepository->getFeedbackEntities($options);
     }
     
     public function getFeedbackResponse(int $feedbackId): array

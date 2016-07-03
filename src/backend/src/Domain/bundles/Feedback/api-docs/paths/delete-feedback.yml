@@ -1,7 +1,9 @@
-'/feedback/{feedbackId}/cancel':
+'/protected/feedback/{feedbackId}/cancel':
   delete:
     tags:
       - feedback
+    security:
+      - x_api_key: []
     description: Удалить фидбэк
     parameters:
       - name: feedbackId
@@ -18,3 +20,6 @@
               default: true
           required:
             - success
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'

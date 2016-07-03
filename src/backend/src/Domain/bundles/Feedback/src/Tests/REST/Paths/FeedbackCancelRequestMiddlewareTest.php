@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Feedback\Tests\REST\Paths;
 
+use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Feedback\Tests\FeedbackMiddlewareTest;
 use Domain\Feedback\Tests\Fixture\DemoFeedbackFixture;
 
@@ -9,9 +10,20 @@ use Domain\Feedback\Tests\Fixture\DemoFeedbackFixture;
  */
 class FeedbackCancelRequestMiddlewareTest extends FeedbackMiddlewareTest
 {
+    public function testFeedbackCancel403()
+    {
+        $feedbackId = DemoFeedbackFixture::getFeedback(1)->getId();
+
+        $this->requestFeedbackDelete($feedbackId)
+            ->execute()
+            ->expectAuthError();
+    }
+
+
     public function testFeedbackCancel404()
     {
         $this->requestFeedbackDelete(9999999)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectJSONContentType()
             ->expectNotFoundError();
@@ -22,6 +34,7 @@ class FeedbackCancelRequestMiddlewareTest extends FeedbackMiddlewareTest
         $feedbackId = DemoFeedbackFixture::getFeedback(1)->getId();
 
         $this->requestFeedbackDelete($feedbackId)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectJSONContentType()
             ->expectStatusCode(200)

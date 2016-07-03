@@ -14,10 +14,9 @@ class ListCommand extends Command
     {
         try {
             $qp = $request->getQueryParams();
-            
-            $profileId = $this->currentAccountService->getCurrentProfile()->getId();
 
             $options = [
+                'profileId' => null,
                 'seek' => [
                     'limit' => $request->getAttribute('limit'),
                     'offset' => $request->getAttribute('offset')
@@ -25,15 +24,21 @@ class ListCommand extends Command
                 'filter' => []
             ];
 
-            if($qp['read']) {
+            if(isset($qp['profileId'])) {
+                $options['profileId'] = (int) $qp['profileId'];
+            }else{
+                $options['profileId'] = $this->currentAccountService->getCurrentProfile()->getId();
+            }
+
+            if(isset($qp['read'])) {
                 $options['filter']['read'] = QueryBoolean::extract($qp['read']);
             }
 
-            if($qp['answer']) {
+            if(isset($qp['answer'])) {
                 $options['filter']['answer'] = QueryBoolean::extract($qp['answer']);
             }
 
-            $feedbackEntities = $this->feedbackService->getFeedbackEntities($profileId, $options);
+            $feedbackEntities = $this->feedbackService->getFeedbackEntities($options);
             
             $responseBuilder
                 ->setStatusSuccess()

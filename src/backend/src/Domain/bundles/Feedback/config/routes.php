@@ -17,7 +17,7 @@ return function(Application $app) {
     );
 
     $app->delete(
-        '/feedback/{feedbackId}/{command:cancel}[/]',
+        '/protected/feedback/{feedbackId}/{command:cancel}[/]',
         FeedbackMiddleware::class,
         'feedback-delete'
     );

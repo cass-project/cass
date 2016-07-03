@@ -1,7 +1,9 @@
-'/protecterd/feedback/{feedbackId}/get':
+'/protected/feedback/{feedbackId}/get':
   get:
     tags:
       - feedback
+    security:
+      - x_api_key: []
     description: Возвращает данные о отзыве
     parameters:
       - name: feedbackId
@@ -21,3 +23,6 @@
               default: true
             entity:
               $ref: '#/definitions/Feedback_Entity_Feedback'
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'

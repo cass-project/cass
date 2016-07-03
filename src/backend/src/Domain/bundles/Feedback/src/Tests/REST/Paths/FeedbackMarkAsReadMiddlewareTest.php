@@ -57,7 +57,7 @@ class FeedbackMarkAsReadMiddlewareTest extends FeedbackMiddlewareTest
             ]);
     }
 
-    private function createFeedbackWithResponse(): int
+    private function createFeedbackWithoutResponse(): int
     {
         $profile = DemoProfileFixture::getProfile();
 
@@ -85,7 +85,7 @@ class FeedbackMarkAsReadMiddlewareTest extends FeedbackMiddlewareTest
         return (int) self::$currentResult->getContent()['entity']['id'];
     }
     
-    private function createFeedbackWithoutResponse(): int
+    private function createFeedbackWithResponse(): int
     {
         $profile = DemoProfileFixture::getProfile();
 
@@ -117,7 +117,6 @@ class FeedbackMarkAsReadMiddlewareTest extends FeedbackMiddlewareTest
         ])
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
-            ->dump()
             ->expectStatusCode(200)
             ->expectJSONBody([
                 'success' => true,
