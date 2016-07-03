@@ -5,10 +5,31 @@
     .col-md-9.col-lg-10.main
       cass-feedback-landing-sidebar-toggler
 
+      nav
+        ul.pagination
+          li.page-item
+            a.page-link(href='#', aria-label='Previous')
+              span(aria-hidden='true') «
+              span.sr-only Previous
+          li.page-item
+            a.page-link(href='#') 1
+          li.page-item
+            a.page-link(href='#') 2
+          li.page-item
+            a.page-link(href='#') 3
+          li.page-item
+            a.page-link(href='#') 4
+          li.page-item
+            a.page-link(href='#') 5
+          li.page-item
+            a.page-link(href='#', aria-label='Next')
+              span(aria-hidden='true') »
+              span.sr-only Next
+      
       .card-columns
         cass-feedback-card(
           *ngFor="#feedback of feedbacks",
-          [data]="feedback"
+          [feedback]="feedback"
         )
         .card.card-block
             h4.card-title Card title that wraps to a new line
@@ -83,6 +104,14 @@
             | So now that you've seen some of what Bootstrap 4 has to offer, are you going to give it a try?
           p.card-text
             small.text-muted Last updated 12 mins ago
+
+
+
+
+
+
+
+
       // /card-columns
       a#layouts
       hr
@@ -214,17 +243,3 @@
       // /row
     // /main col
 
-#myModal.modal.fade(tabindex='-1', role='dialog')
-  .modal-dialog(role='document')
-    .modal-content
-      .modal-header
-        button.close(type='button', data-dismiss='modal', aria-label='Close')
-          span(aria-hidden='true') ×
-          span.sr-only Close
-        h4#myModalLabel.modal-title Large Modal
-      .modal-body
-        | This is a dashboard layout for Bootstrap 4. This is an example of the Modal component which you can use to show content. Any content can be placed inside the modal and it can use the Bootstrap grid classes.
-      .modal-footer
-        button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-        button.btn.btn-primary-outline(type='button', data-dismiss='modal') OK
-    

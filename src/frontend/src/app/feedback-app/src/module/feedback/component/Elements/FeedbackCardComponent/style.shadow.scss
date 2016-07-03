@@ -1,13 +1,13 @@
 .card {
     img{
         width:64px;
-        padding:.5em;
+        margin:0 .5em .5em 0;
     }
     .controls {
         display: none;
-        a {
-            cursor: pointer
-        }
+    }
+    a {
+        cursor: pointer;
     }
     &:hover .controls {
         display: block;

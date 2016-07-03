@@ -1,0 +1,30 @@
+.modal.fade(tabindex='-1', role='dialog' #feedbackModal)
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true') ×
+          span.sr-only Close
+        h4#myModalLabel.modal-title Large Modal
+      .modal-body
+        blockquote.blockquote
+          img.img-thumbnail.pull-left(
+            src="{{feedback.profile.entity.image.variants['32'].public_path}}"
+          )
+          small.text-muted{{feedback.description}}
+          footer.blockquote-footer 
+            i {{feedback.profile.entity.greetings.greetings}}
+        textarea.form-control(
+          rows="3",
+          [(ngModel)]="description"
+        )
+      .modal-footer
+        button.btn.btn-secondary(
+          type='button',
+          data-dismiss='modal'
+        ) Close
+        button.btn.btn-primary-outline(
+          type='button',
+          (click)="reply()"
+        ) OK
+    
