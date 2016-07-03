@@ -27,13 +27,13 @@ export class ThemeSelect
     @ViewChild('searchInput') searchInput: ElementRef;
     @ViewChild('scrolling') scrolling: ElementRef;
 
-    @Input('value') value = [];
+    @Input('value') value;
     @Input('multiple') multiple = "true";
-    @Output('change') change = new EventEmitter<Array<number>>();
 
     constructor(private service: ThemeService) {
         this.browser.scrolling = this.scrolling;
     }
+    
 
     isMultiple(): boolean {
         return this.multiple === "1" || this.multiple === "true";
@@ -48,7 +48,6 @@ export class ThemeSelect
 
         if(~index) {
             this.value.splice(index, 1);
-            this.change.emit(this.value);
         }
     }
 
@@ -58,11 +57,9 @@ export class ThemeSelect
                 this.value.push(themeId);
                 this.searchInput.nativeElement.value = '';
                 this.search.disable();
-                this.change.emit(this.value);
             }else{
                 this.value = [themeId];
                 this.search.disable();
-                this.change.emit(this.value);
             }
         }
     }

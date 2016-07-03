@@ -9,6 +9,8 @@ import {AuthService} from "../auth/service/AuthService";
 import {ProfileEntity} from "./definitions/entity/Profile";
 import {ProfileModals} from "./modals";
 import {ProfileInterestsModal} from "./component/Modals/ProfileInterests/index";
+import {MessageBusService} from "../message/service/MessageBusService/index";
+import {MessageBusNotificationsLevel} from "../message/component/MessageBusNotifications/model";
 
 @Component({
     selector: 'cass-profile',
@@ -24,8 +26,21 @@ import {ProfileInterestsModal} from "./component/Modals/ProfileInterests/index";
 })
 export class ProfileComponent
 {
-    constructor(private authService: AuthService, private modals: ProfileModals) {}
+    constructor(private authService: AuthService, private modals: ProfileModals, protected messages: MessageBusService) {}
 
+    closeModalInterests($event){
+        if($event){
+            this.modals.interests.close(); 
+        }
+    }
+    
+    successModalInteresrs($event){
+        if($event) {
+            this.messages.push(MessageBusNotificationsLevel.Info, 'Мы сохранили информацию о ваших интересах');
+            this.modals.interests.close();
+        }
+    }
+    
     isSetupRequired() {
         if(this.authService.isSignedIn()) {
             let testProfileIsInitialized = ! this.authService.getCurrentAccount().getCurrentProfile().entity.profile.is_initialized;
