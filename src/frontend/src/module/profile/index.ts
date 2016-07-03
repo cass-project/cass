@@ -8,6 +8,7 @@ import {ModalBoxComponent} from "../modal/component/box/index";
 import {AuthService} from "../auth/service/AuthService";
 import {ProfileEntity} from "./definitions/entity/Profile";
 import {ProfileModals} from "./modals";
+import {ProfileInterestsModal} from "./component/Modals/ProfileInterests/index";
 
 @Component({
     selector: 'cass-profile',
@@ -17,6 +18,7 @@ import {ProfileModals} from "./modals";
         ModalBoxComponent,
         ProfileModal,
         ProfileSwitcher,
+        ProfileInterestsModal,
         ProfileSetup
     ]
 })

@@ -12,7 +12,7 @@ export class ProfileInterestsCard
 {
     constructor(private modals: ProfileModals) {}
 
-    openProfileSettings() {
-        this.modals.settings.open();
+    opeInterestsModal() {
+        this.modals.interests.open();
     }
 }

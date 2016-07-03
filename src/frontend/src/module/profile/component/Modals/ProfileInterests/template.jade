@@ -1,0 +1,23 @@
+article.comonent.component-profile-interests-modal([ngClass]="{'.component-profile-interests-modal_has-header': !loading}")
+  form.form
+    cass-form-progress-lock(*ngIf="loading")
+    .cass-padding-box-15
+      .theme-section.theme-section-expert-in
+        h1 В чем вы являетесь экспертом или профессионалом?
+        p Укажите ваши профессиональные навыки, знания или интересы – темы, в которых ваше мнение имеет вес.
+        cass-theme-select
+      .theme-section.theme-section-expert-in
+        h1 А чем вы просто интересуетесь?
+        p Вы не являетесь экспертом в данных тематиках, но вас интересует контент на данные темы
+        cass-theme-select
+    footer.form-footer
+      .form-footer-section
+        .form-footer-item
+          .cass-padding-box-5
+            button.form-text-button
+              span Отмена
+      .form-footer-section
+        .form-footer-item
+          .cass-padding-box-5
+            button.form-button.form-button-primary
+              span Сохранить выбор
