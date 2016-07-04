@@ -5,12 +5,7 @@ import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {EditPersonalRequest} from "../definitions/paths/edit-personal";
 import {SetGenderRequest, SetGenderResponse200} from "../definitions/paths/set-gender";
 import {ExpertInRequest, ExpertInResponse200} from "../definitions/paths/expert-in-ids";
-import {AuthService} from "../../auth/service/AuthService";
 import {AuthToken} from "../../auth/service/AuthToken";
-import {Observable} from "rxjs/Observable";
-import {GetProfileByIdResponse200} from "../definitions/paths/get-by-id";
-import {InterestingInResponse200} from "../definitions/paths/interesting-in-ids";
-import {EditCollectionResponse200} from "../../collection/definitions/paths/edit";
 
 @Injectable()
 export class ProfileRESTService extends AbstractRESTService
@@ -42,7 +37,7 @@ export class ProfileRESTService extends AbstractRESTService
     }
 
     createNewProfile() {
-        let authHeader = new Headers()
+        let authHeader = new Headers();
         
         if(this.token.hasToken()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
@@ -100,11 +95,11 @@ export class ProfileRESTService extends AbstractRESTService
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
-        return this.handle(this.http.post(`/backend/api/protected/profile/${profileId}/switch/`, '', {headers: authHeader}));
+        return this.handle(this.http.post(`/backend/api/protected/account/switch/to/profile/${profileId}`, '', {headers: authHeader}));
     }
 
     deleteProfile(profileId) {
-        let authHeader = new Headers()
+        let authHeader = new Headers();
 
         if(this.token.hasToken()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
