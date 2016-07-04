@@ -1,19 +1,22 @@
 import {Injectable} from "angular2/core";
 import {Http} from "angular2/http"
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
-import {Account} from "../../account/definitions/entity/Account";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
+import {AuthToken} from "../../auth/service/AuthToken";
 
 @Injectable()
-export class PostAttachmentRESTService extends AbstractRESTService {
-    constructor(protected  http:Http, protected messages:MessageBusService) {
-        super(http, messages);
-    }
+export class PostAttachmentRESTService extends AbstractRESTService
+{
     private xmlRequest = new XMLHttpRequest();
 
     public tryNumber:number = 0;
     public progressBar:number = 0;
 
+    constructor(
+        protected http: Http,
+        protected token: AuthToken,
+        protected messages: MessageBusService
+    ) { super(http, token, messages); }
 
     attachFile(collectionId: number, file, modal)
     {
@@ -25,13 +28,14 @@ export class PostAttachmentRESTService extends AbstractRESTService {
         formData.append("file", file);
 
         this.xmlRequest.open("POST", url);
+        this.xmlRequest.setRequestHeader('Authorization', this.token.apiKey);
         this.xmlRequest.upload.onprogress = (e) => {
             if (e.lengthComputable) {
                 this.progressBar = Math.floor((e.loaded / e.total) * 100);
                 modal.progress.update(this.progressBar);
             }
         };
-
+        
         this.xmlRequest.send(formData);
 
         this.xmlRequest.onreadystatechange = () => {

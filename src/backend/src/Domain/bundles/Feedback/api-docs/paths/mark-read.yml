@@ -1,8 +1,10 @@
-'/feedback/{feedbackId}/mark-as-read':
+'/protected/feedback/{feedbackId}/mark-as-read':
   post:
     tags:
       - feedback
     description: Отмечает отзыв как уже прочтенный. Прочитать можно только отзыв, на который дан ответ.
+    security:
+      - x_api_key: []
     parameters:
       - name: feedbackId
         in: path
@@ -18,3 +20,6 @@
             success:
               type: boolean
               description: '=true'
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'

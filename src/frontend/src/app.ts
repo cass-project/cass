@@ -13,9 +13,9 @@ import {SidebarComponent} from "./module/sidebar/index";
 import {CommunityComponent} from "./module/community/index";
 import {RouterOutlet} from "angular2/router";
 import {LandingComponent} from "./module/landing/index";
-import {ProfileRoute} from "./module/profile/route/ProfileRoute/index";
+import {RootRoute as ProfileRootRoute} from "./module/profile/route/RootRoute";
 import {AuthService} from "./module/auth/service/AuthService";
-import {ProfileSwitcherService} from "./module/profile/component/ProfileSwitcher/service";
+import {ProfileSwitcherService} from "./module/profile/component/Modals/ProfileSwitcher/service";
 import {ModalService} from "./module/modal/component/service";
 import {CommunityRoute} from "./module/community/route/CommunityRoute/index";
 import {MessageBusService} from "./module/message/service/MessageBusService/index";
@@ -26,22 +26,23 @@ import {CollectionRESTService} from "./module/collection/service/CollectionRESTS
 import {ProfileRESTService} from "./module/profile/service/ProfileRESTService";
 import {CommunitySettingsModalModel} from "./module/community/component/Modal/CommunitySettingsModal/model";
 import {AuthRESTService} from "./module/auth/service/AuthRESTService";
-import {CurrentAccountService} from "./module/auth/service/CurrentAccountService";
-import {FeedbackRoute} from "./module/feedback/route/FeedbackRoute/index";
-import {FeedbackCreateButton} from "./module/feedback/component/Elements/FeedbackCreateButton/index";
+import {FeedbackComponent} from "./module/feedback/index";
 import {PostRESTService} from "./module/post/service/PostRESTService";
 import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAttachmentRESTService";
+import {ProfileCachedIdentityMap} from "./module/profile/service/ProfileCachedIdentityMap";
+import {ProfileModals} from "./module/profile/modals";
+import {TranslateService} from "./module/translate/service";
 
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),
     providers: [
+        TranslateService,
         ModalService,
         MessageBusService,
         AuthService,
         AuthRESTService,
         AuthComponentService,
-        CurrentAccountService,
         CommunityModalService,
         CommunityRESTService,
         CommunityService,
@@ -51,7 +52,9 @@ import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAt
         CollectionRESTService,
         CommunitySettingsModalModel,
         PostRESTService,
-        PostAttachmentRESTService
+        PostAttachmentRESTService,
+        ProfileCachedIdentityMap,
+        ProfileModals,
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -62,7 +65,7 @@ import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAt
         ProfileComponent,
         SidebarComponent,
         CommunityComponent,
-        FeedbackCreateButton,
+        FeedbackComponent,
         RouterOutlet
 ]
 })
@@ -81,17 +84,12 @@ import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAt
     {
         name: 'Profile',
         path: '/profile/...',
-        component: ProfileRoute
+        component: ProfileRootRoute
     },
     {
         name: 'Community',
         path: '/community/...',
         component: CommunityRoute
-    },
-    {
-        name: 'Feedback',
-        path: '/feedback/...',
-        component: FeedbackRoute
     }
 ])
 export class App {

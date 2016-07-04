@@ -4,7 +4,8 @@ import {Image} from "../definitions/Image";
 export enum QueryTarget {
     Biggest,
     Smallest,
-    Avatar
+    Avatar,
+    Card
 }
 
 export function queryImage(target: QueryTarget, images: ImageCollection): Image {
@@ -14,6 +15,8 @@ export function queryImage(target: QueryTarget, images: ImageCollection): Image 
         sizes.reverse();
     }else if(target === QueryTarget.Avatar) {
         sizes = ['32', '64'];
+    }else if(target === QueryTarget.Card) {
+        sizes = ['256', '128', '64'];
     }
 
     for(let size of sizes) {

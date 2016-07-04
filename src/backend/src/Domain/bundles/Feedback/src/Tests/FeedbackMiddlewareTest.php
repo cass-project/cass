@@ -28,7 +28,7 @@ abstract class FeedbackMiddlewareTest extends MiddlewareTestCase
 
     protected function requestFeedbackDelete(int $feedbackId): RESTRequest
     {
-        return $this->request('DELETE', sprintf("/feedback/%s/cancel", $feedbackId));
+        return $this->request('DELETE', sprintf("/protected/feedback/%s/cancel", $feedbackId));
     }
 
     protected function requestFeedbackHasAnswer(int $feedbackId): RESTRequest
@@ -41,9 +41,9 @@ abstract class FeedbackMiddlewareTest extends MiddlewareTestCase
         return $this->request('GET', "/feedback/without-answer");
     }
 
-    protected function requestGetAllFeedbackEntities(int $limit, int $offset): RESTRequest
+    protected function requestGetAllFeedbackEntities(int $limit, int $offset, array $queryParams = null): RESTRequest
     {
-        return $this->request('GET', sprintf("/protected/feedback/all/limit/%d/offset/%d", $limit, $offset));
+        return $this->request('GET', sprintf("/protected/feedback/list/offset/%d/limit/%d", $offset, $limit), $queryParams);
     }
 
     protected function requestMarkAsRead(int $feedbackId): RESTRequest

@@ -1,6 +1,8 @@
 import {Component} from "angular2/core";
 
 import {AuthService} from "../../../auth/service/AuthService";
+import {ProfileModals} from "../../../profile/modals";
+import {Router} from "angular2/router";
 
 @Component({
     selector: 'cass-sidebar-profile-icon',
@@ -13,11 +15,27 @@ export class SidebarProfileIcon
 {
     private isProfileMenuSwitched: boolean = false;
     
-    constructor(private authService: AuthService) {}
+    constructor(
+        private authService: AuthService,
+        private modals: ProfileModals,
+        private router: Router
+    ) {}
+
+    goToProfile() {
+        this.router.navigate(['/Profile/Profile', { 'id': 'current' }]);
+    }
+
+    openProfileSettings() {
+        this.modals.settings.open();
+    }
+
+    openProfileSwitcher() {
+        this.modals.switcher.open();
+    }
 
     getImageProfile(){
         if(this.authService.isSignedIn()){
-            return this.authService.getAuthToken().getCurrentProfile().entity.profile.image.variants['default'].public_path;
+            return this.authService.getCurrentAccount().getCurrentProfile().entity.profile.image.variants['default'].public_path;
         }
     }
 

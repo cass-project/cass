@@ -34,6 +34,12 @@ class RESTRequest
     private $parameters;
 
     /**
+     * Параметры (QueryParams) запроса
+     * @var array|null
+     */
+    private $queryParams;
+
+    /**
      * Загружаемые/прикрепляемые файлы
      * Содержат массив из [name] => new UploadedFile(..)
      * @var array|null
@@ -52,11 +58,12 @@ class RESTRequest
      */
     private $xApiKey;
 
-    public function __construct(MiddlewareTestCase $unitTest, string $method, string $uri)
+    public function __construct(MiddlewareTestCase $unitTest, string $method, string $uri, array $queryParams = null)
     {
         $this->unitTest = $unitTest;
         $this->method = $method;
         $this->uri = $uri;
+        $this->queryParams = $queryParams;
     }
 
     public function execute(): MiddlewareTestCase
@@ -79,6 +86,10 @@ class RESTRequest
             foreach($this->addedHeaders as $header => $value) {
                 $request = $request->withHeader($header, $value);
             }
+        }
+
+        if($this->queryParams) {
+            $request = $request->withQueryParams($this->queryParams);
         }
 
         if($this->xApiKey) {

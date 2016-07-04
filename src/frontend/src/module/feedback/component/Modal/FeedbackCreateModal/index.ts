@@ -1,7 +1,5 @@
-import {Component, Input} from "angular2/core";
-import {Router} from 'angular2/router';
+import {Component, Input, Output, EventEmitter} from "angular2/core";
 
-import {CurrentAccountService} from "../../../../auth/service/CurrentAccountService";
 import {FeedbackCreateModalModel} from "./model";
 import {FeedbackService} from "../../../service/FeedbackService";
 import {FeedbackTypesService} from "../../../service/FeedbackTypesService";
@@ -12,6 +10,7 @@ import {MessageBusNotificationsLevel} from "../../../../message/component/Messag
 import {ModalComponent} from "../../../../modal/component/index";
 import {ModalBoxComponent} from "../../../../modal/component/box/index";
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
+import {AuthService} from "../../../../auth/service/AuthService";
 
 @Component({
     selector: 'cass-feedback-create-modal',
@@ -29,40 +28,40 @@ import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 export class FeedbackCreateModal
 {
     private isLoading:boolean = false;
-    @Input('feedbackType') feedbackType: FeedbackTypeEntity;
-    
+    @Input('feedback-type') feedbackType: FeedbackTypeEntity;
+    @Output('close') closeEvent = new EventEmitter<FeedbackCreateModal>();
+
     constructor(
         public model: FeedbackCreateModalModel,
-        private router: Router,
         private service: FeedbackService,
         private messages: MessageBusService,
         private feedbackTypesService: FeedbackTypesService,
-        private currentAccountService: CurrentAccountService
+        private authService: AuthService
     ) {}
-    
+
     ngOnInit() {
         if(this.feedbackType) {
             this.model.type_feedback = this.feedbackType.code.int;
         } else {
             this.model.type_feedback = 1;
         }
-        
+
         try {
-            this.model.profile_id = this.currentAccountService.getCurrentProfile().getId();
+            this.model.profile_id = this.authService.getCurrentAccount().getCurrentProfile().getId();
         } catch (Error) {}
     }
-    
+
     abort() {
-        this.router.navigateByUrl("/");
+        this.closeEvent.emit(this);
     }
 
-    
+
     submit() {
         this.isLoading = true;
         this.service.create(<FeedbackCreateRequest>this.model).subscribe(
             data => {
                 this.messages.push(MessageBusNotificationsLevel.Success, "Отзыв успешно отправлен!");
-                this.router.navigateByUrl("/");
+                this.closeEvent.emit(this);
                 this.isLoading = false;
             },
             error => {
@@ -71,17 +70,8 @@ export class FeedbackCreateModal
             }
         );
     }
-    
+
     isModelValid(): boolean {
         return !!(this.model.type_feedback && this.model.description && (this.model.profile_id || this.model.email));
-    }
-
-
-    onFeedbackTypeChange($event) {
-        this.router.navigate([
-            'FeedbackCreateType', {
-                type: this.feedbackTypesService.getFeedbackType($event).code.string
-            }
-        ]);
     }
 }

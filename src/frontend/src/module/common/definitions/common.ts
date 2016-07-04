@@ -1,4 +1,6 @@
-export interface Success200 {
+import {Response} from "angular2/http";
+
+export interface Success200 extends Response {
     success: boolean;
 }
 

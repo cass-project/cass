@@ -1,0 +1,12 @@
+ul.nav.nav-pills.nav-stacked
+  li.nav-item
+    a.nav-link(
+      [routerLink]="['Feedback',{answer:'false'}]"
+    )
+      span.label.label-default.label-pill.pull-xs-right 14
+      | New
+    
+    a.nav-link(
+      [routerLink]="['Feedback',{answer:'true'}]"
+    )
+      | Responsed

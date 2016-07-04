@@ -27,6 +27,10 @@ export class Account {
             return new Profile(this, entity);
         }));
     }
+
+    getCurrentProfile(): Profile {
+        return this.profiles.getCurrent();
+    }
 }
 
 export class AccountProfiles {

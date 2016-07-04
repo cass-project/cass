@@ -26,6 +26,12 @@ server {
         try_files $uri /frontend.html =404;
 	}
 
+    location ~ "^/feedback-admin.*$"
+    {
+        root /opt/cass/src/www/app/;
+        try_files /feedback.html ``=404;
+	}
+	
     location /api-docs
     {
         root /opt/swagger/swagger-ui/;

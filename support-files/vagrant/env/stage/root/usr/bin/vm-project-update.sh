@@ -4,7 +4,7 @@
 cd /opt/cass/src/backend
 
 composer update
-composer install
+composer dump-autoload
 
 php ./vendor/robmorgan/phinx/bin/phinx migrate -e cass_development
 php ./vendor/robmorgan/phinx/bin/phinx migrate -e cass_testing

@@ -3,8 +3,8 @@ import {Component, Output, EventEmitter} from "angular2/core";
 import {ProfileSetupModel} from "../../model";
 import {ProgressLock} from "../../../../../../form/component/ProgressLock/index";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
-import {CurrentAccountService} from "../../../../../../auth/service/CurrentAccountService";
 import {EditPersonalResponse200} from "../../../../../definitions/paths/edit-personal";
+import {AuthService} from "../../../../../../auth/service/AuthService";
 
 @Component({
     selector: 'cass-profile-setup-screen-greetings',
@@ -27,7 +27,7 @@ export class ProfileSetupScreenGreetings
     constructor(
         private model: ProfileSetupModel,
         private profileRESTService: ProfileRESTService,
-        private currentAccountService: CurrentAccountService
+        private authService: AuthService
     ) {}
 
     back() {
@@ -47,7 +47,7 @@ export class ProfileSetupScreenGreetings
             nick_name: this.model.greetings.nickName,
         }).map(res => res.json()).subscribe(
             (response: EditPersonalResponse200) => {
-                this.currentAccountService.getCurrentProfile().replaceAvatar(response.entity.image);
+                this.authService.getCurrentAccount().getCurrentProfile().replaceAvatar(response.entity.image);
                 this.nextEvent.emit(this.model);
             },
             (error) => {

@@ -1,14 +1,18 @@
 import {Injectable} from "angular2/core";
-import {Http} from "angular2/http"
+import {Http, Headers} from "angular2/http"
+
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
-import {Account} from "../../account/definitions/entity/Account";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
+import {AuthToken} from "../../auth/service/AuthToken";
 
 @Injectable()
-export class CollectionRESTService extends AbstractRESTService {
-    constructor(protected  http:Http, protected messages:MessageBusService) {
-        super(http, messages);
-    }
+export class CollectionRESTService extends AbstractRESTService
+{
+    constructor(
+        protected http: Http,
+        protected token: AuthToken,
+        protected messages: MessageBusService
+    ) { super(http, token, messages); }
 
     private xmlRequest = new XMLHttpRequest();
 
@@ -17,40 +21,65 @@ export class CollectionRESTService extends AbstractRESTService {
 
     createCollection(owner_sid: string, theme_ids: Array<number>, title: string, description: string)
     {
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
         return this.handle(this.http.post('/backend/api/protected/collection/create', JSON.stringify({
             owner_sid: owner_sid,
             theme_ids: theme_ids,
             title: title,
             description: description
-        })));
+        }), {headers: authHeader}));
     }
 
     deleteCollection(collectionId: number)
     {
-        return this.handle(this.http.delete(`/backend/api/protected/collection/${collectionId}/delete`));
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
+        return this.handle(this.http.delete(`/backend/api/protected/collection/${collectionId}/delete`, {headers: authHeader}));
     }
 
     editCollection(collectionId: number, theme_ids: Array<number>, title: string, description: string)
     {
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
         return this.handle(this.http.post(`/backend/api/protected/collection/${collectionId}/edit`, JSON.stringify({
             theme_ids: theme_ids,
             title: title,
             description: description
-        })));
+        }), {headers: authHeader}));
     }
 
     deleteImageCollection(collectionId: number)
     {
-        return this.handle(this.http.delete(`/backend/api/protected/collection/${collectionId}/image-delete`));
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
+        return this.handle(this.http.delete(`/backend/api/protected/collection/${collectionId}/image-delete`, {headers: authHeader}));
     }
 
     setPublicOptionsCollection(collectionId: number, is_private: boolean, public_enabled: boolean, moderation_enabled: boolean)
     {
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
         return this.handle(this.http.post(`/backend/api/protected/collection/${collectionId}/set-public-options`, JSON.stringify({
             is_private: is_private,
             public_enabled: public_enabled,
             moderation_enabled: moderation_enabled
-        })));
+        }), {headers: authHeader}));
     }
 
     setImageCollection(collectionId: number ,file, model, modal)
@@ -72,7 +101,9 @@ export class CollectionRESTService extends AbstractRESTService {
         let formData = new FormData();
         formData.append("file", file);
 
+
         this.xmlRequest.open("POST", url);
+        this.xmlRequest.setRequestHeader('Authorization', this.token.apiKey);
         this.xmlRequest.upload.onprogress = (e) => {
             if (e.lengthComputable) {
                 this.progressBar = Math.floor((e.loaded / e.total) * 100);
@@ -96,7 +127,6 @@ export class CollectionRESTService extends AbstractRESTService {
                 this.progressBar = 0;
                 this.tryNumber = 0;
             }
-            /* TODO: Сделать нормальный метод повтора загрузки с учетом "Отмены загрузки". */
         }
     }
 }

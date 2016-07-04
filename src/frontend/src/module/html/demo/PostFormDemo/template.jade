@@ -1,0 +1,19 @@
+.demo-post-form
+  article.component.component-post-form([ngClass]="{'component-post-form_expanded': isExpanded()}")
+    form.form
+      .content-container
+        textarea.content([(ngModel)]="model.content")
+        .attachment-window
+
+      .attachment-controls
+        .attachment-controls-select
+
+        ul
+          li
+            button.attachment-control-button.component-post-form_attachment-control-button
+              i.fa.fa-fw.fa-upload
+              span Прикрепить файл
+          li
+            button.attachment-control-button.component-post-form_attachment-control-button
+              i.fa.fa-fw.fa-link
+              span Ссылка на ресурс

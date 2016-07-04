@@ -1,17 +1,20 @@
 import {Injectable} from "angular2/core";
 import {Http} from "angular2/http"
 
-import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {SignInRequest} from "../definitions/paths/sign-in";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {SignUpRequest} from "../definitions/paths/sign-up";
+import {AuthToken} from "./AuthToken";
+import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 
 @Injectable()
 export class AuthRESTService extends AbstractRESTService
 {
-    constructor(protected  http: Http, protected messages: MessageBusService) {
-        super(http, messages);
-    }
+    constructor(
+        protected http: Http,
+        protected token: AuthToken,
+        protected messages: MessageBusService
+    ) { super(http, token, messages); }
 
     signIn(request: SignInRequest) {
         return this.handle(this.http.post("/backend/api/auth/sign-in", JSON.stringify(request)));

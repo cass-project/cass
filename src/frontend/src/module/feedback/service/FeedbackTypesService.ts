@@ -8,6 +8,7 @@ import {FeedbackTypeEntity} from "../definitions/entity/FeedbackType";
 export class FeedbackTypesService
 {
     private frontline: FrontlineEntity;
+    public feedbackType:FeedbackTypeEntity;
     
     constructor(private frontlineService: FrontlineService)
     {
@@ -17,6 +18,14 @@ export class FeedbackTypesService
     getFeedbackTypes() : FeedbackTypeEntity[]
     {
         return this.frontline.config.feedback.types;
+    }
+    
+    getDefaultFeedbackType(): FeedbackTypeEntity {
+        return this.feedbackType;
+    }
+    
+    setDefaultFeedbackType(code:string|number) {
+        this.feedbackType = this.getFeedbackType(code);
     }
     
     getFeedbackType(code:string|number): FeedbackTypeEntity {

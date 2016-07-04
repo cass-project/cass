@@ -1,0 +1,41 @@
+@import "./../../../../../../../styles/globals";
+
+div.profile-modal-tab-interests
+{
+  padding: 20px;
+
+  div.form {
+    margin-bottom: 20px;
+  }
+
+  span.screen-selector {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    .separator {
+      color: material-color("grey", "400");
+    }
+
+    .tab {
+      color: material-color("grey", "400");
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: 500;
+
+      &:hover {
+        color: material-color("blue", "500");
+      }
+    }
+
+    .tab-active, .tab-active:hover {
+      color: material-color("blue", "500");
+    }
+  }
+
+  header.tab-modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}

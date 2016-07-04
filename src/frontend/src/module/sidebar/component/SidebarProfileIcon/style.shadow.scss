@@ -1,6 +1,8 @@
 @import "./../../../../styles/globals";
 
 div.sidebar-profile-icon {
+  cursor: pointer;
+
   div.profile-image {
     width: 60px;
     overflow: hidden;

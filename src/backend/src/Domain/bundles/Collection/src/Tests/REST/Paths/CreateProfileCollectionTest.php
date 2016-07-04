@@ -50,7 +50,7 @@ final class CreateProfileCollectionTest extends CollectionRESTTestCase
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expect(function(array $jsonResponse) use ($collectionId) {
-                $collections = $jsonResponse['profile']['collections'];
+                $collections = $jsonResponse['entity']['profile']['collections'];
 
                 $this->assertTrue(is_array($collections));
                 $this->assertEquals(2, count($collections));
