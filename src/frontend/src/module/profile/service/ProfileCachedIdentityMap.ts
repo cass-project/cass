@@ -14,7 +14,7 @@ export class ProfileCachedIdentityMap
 
     getProfileById(id: number): Observable<GetProfileByIdResponse200> {
         if(! this.entities[id]) {
-            this.entities[id] = this.service.getProfileById(id).map(res => res.json());
+            this.entities[id] = this.service.getProfileById(id);
         }
 
         return this.entities[id];

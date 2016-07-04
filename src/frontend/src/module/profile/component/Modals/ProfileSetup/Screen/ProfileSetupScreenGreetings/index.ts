@@ -45,7 +45,7 @@ export class ProfileSetupScreenGreetings
             last_name: this.model.greetings.lastName,
             middle_name: this.model.greetings.middleName,
             nick_name: this.model.greetings.nickName,
-        }).map(res => res.json()).subscribe(
+        }).subscribe(
             (response: EditPersonalResponse200) => {
                 this.authService.getCurrentAccount().getCurrentProfile().replaceAvatar(response.entity.image);
                 this.nextEvent.emit(this.model);
