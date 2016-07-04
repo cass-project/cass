@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Post\Repository;
 
+use Domain\Collection\Collection\CollectionItem;
 use Domain\Collection\Entity\Collection;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
@@ -80,25 +81,22 @@ class PostRepository extends EntityRepository
     }
 
     public function getCommunityFeed(int $communityId, CriteriaRequest $criteriaRequest) {
-        $qbCriteria = [
-            'community' => $communityId
-        ];
 
         list($limit, $offset) = $criteriaRequest->doWith(SeekCriteria::class, function(SeekCriteria $seekCriteria) {
             return [$seekCriteria->getLimit(), $seekCriteria->getOffset()];
         });
+
         /** @var Community $community */
         $community = $this->getEntityManager()->getRepository(Community::class)->find($communityId);
+
         $collectionIds = [];
-
-
         foreach($community->getCollections()->getItems() as $collection){
-            /** @var Community  $collection */
-
-
-            print_r($community->getCollections()->getItems());
-
+            /** @var CollectionItem $collection */
+            $collectionIds[] = $collection->getCollectionId();
         }
+        $qbCriteria = [
+            'collection' => $collectionIds
+        ];
 
         return $this->findBy($qbCriteria, ['id' => 'desc'], $limit, $offset);
     }
@@ -116,14 +114,6 @@ class PostRepository extends EntityRepository
     }
     
     public function getCommunityFeedTotal(int $communityId, CriteriaRequest $criteriaRequest): int {
-        $em = $this->getEntityManager();
-        $qb = $em->createQueryBuilder()
-            ->select('count(p.id) as cnt')
-            ->from(Post::class, 'p')
-            ->where('p.community=:communityId')
-            ->setParameter('communityId', $communityId)
-        ;
-
-        return (int) $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+        return count($this->getCommunityFeed($communityId,$criteriaRequest)) ;
     }
 }
