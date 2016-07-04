@@ -8,7 +8,6 @@ import 'rxjs/Rx';
 
 require('zone.js');
 require('../../styles/feedback.head.scss');
-require('../../styles/index.head.scss');
 require('bootstrap/dist/css/bootstrap.css');
 require('bootstrap/dist/js/bootstrap.js');
 require('font-awesome/css/font-awesome.css');
@@ -44,6 +43,17 @@ function initBootstrap(session) {
             jQuery('#loading').fadeOut(300, function () {
                 this.remove();
             });
+            setInterval(() => {
+                let cassModalClass = 'cass-has-modals';
+                let classList = document.body.classList;
+    
+                if(document.getElementsByClassName('cass-modal').length > 0) {
+                    classList.add(cassModalClass);
+                }else if(classList.contains(cassModalClass)) {
+                    classList.remove(cassModalClass);
+                }
+            }, 100);
+
         }).catch((err) => {
             console.log(err.message);
         }
