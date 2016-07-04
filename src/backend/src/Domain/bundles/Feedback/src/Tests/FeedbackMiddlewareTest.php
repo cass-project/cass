@@ -41,9 +41,9 @@ abstract class FeedbackMiddlewareTest extends MiddlewareTestCase
         return $this->request('GET', "/feedback/without-answer");
     }
 
-    protected function requestGetAllFeedbackEntities(int $limit, int $offset): RESTRequest
+    protected function requestGetAllFeedbackEntities(int $limit, int $offset, array $queryParams = null): RESTRequest
     {
-        return $this->request('GET', sprintf("/protected/feedback/list/offset/%d/limit/%d", $offset, $limit));
+        return $this->request('GET', sprintf("/protected/feedback/list/offset/%d/limit/%d", $offset, $limit), $queryParams);
     }
 
     protected function requestMarkAsRead(int $feedbackId): RESTRequest

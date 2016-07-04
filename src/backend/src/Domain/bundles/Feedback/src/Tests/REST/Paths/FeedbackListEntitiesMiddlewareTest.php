@@ -36,6 +36,134 @@ class FeedbackListEntitiesMiddlewareTest extends FeedbackMiddlewareTest
             ->expectStatusCode(200)
             ->expectJSONContentType();
     }
+
+    public function testGetNotReadEntities200() {
+        $this->upFixture(new FeedbackEntitiesFixture(self::$app->getContainer()->get(FeedbackService::class)));
+
+        $this->requestGetAllFeedbackEntities(0, 100, ['read' => 'false'])
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true,
+                'entities' => function(array $json) {
+                    foreach($json as $entity) {
+                        $this->assertTrue(isset($entity['read']));
+                        $this->assertEquals(false, $entity['read']);
+                    }
+                }
+            ])
+        ;
+    }
+
+    public function testGetIsReadEntities200() {
+        $this->upFixture(new FeedbackEntitiesFixture(self::$app->getContainer()->get(FeedbackService::class)));
+
+        $this->requestGetAllFeedbackEntities(0, 100, ['read' => 'true'])
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true,
+                'entities' => function(array $json) {
+                    foreach($json as $entity) {
+                        $this->assertTrue(isset($entity['read']));
+                        $this->assertEquals(true, $entity['read']);
+                    }
+                }
+            ])
+        ;
+    }
+
+    public function testGetNotAnsweredEntities200() {
+        $this->upFixture(new FeedbackEntitiesFixture(self::$app->getContainer()->get(FeedbackService::class)));
+
+        $this->requestGetAllFeedbackEntities(0, 100, ['answer' => 'false'])
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true,
+                'entities' => function(array $json) {
+                    foreach($json as $entity) {
+                        $this->assertTrue(isset($entity['answer']));
+                        $this->assertTrue(isset($entity['answer']['has']));
+                        $this->assertEquals(false, $entity['answer']['has']);
+                    }
+                }
+            ])
+        ;
+    }
+
+    public function testGetIsAnsweredEntities200() {
+        $this->upFixture(new FeedbackEntitiesFixture(self::$app->getContainer()->get(FeedbackService::class)));
+
+        $this->requestGetAllFeedbackEntities(0, 100, ['answer' => 'true'])
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true,
+                'entities' => function(array $json) {
+                    foreach($json as $entity) {
+                        $this->assertTrue(isset($entity['answer']));
+                        $this->assertTrue(isset($entity['answer']['has']));
+                        $this->assertEquals(true, $entity['answer']['has']);
+                    }
+                }
+            ])
+        ;
+    }
+
+    public function testGetBotNoAnswerAndReadEntities200() {
+        $this->upFixture(new FeedbackEntitiesFixture(self::$app->getContainer()->get(FeedbackService::class)));
+
+        $this->requestGetAllFeedbackEntities(0, 100, ['read' => 'false', 'answer' => 'false'])
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true,
+                'entities' => function(array $json) {
+                    foreach($json as $entity) {
+                        $this->assertTrue(isset($entity['answer']));
+                        $this->assertTrue(isset($entity['answer']['has']));
+                        $this->assertEquals(false, $entity['answer']['has']);
+                        $this->assertTrue(isset($entity['read']));
+                        $this->assertEquals(false, $entity['read']);
+                    }
+                }
+            ])
+        ;
+    }
+
+    public function testGetBotAnswerAndReadEntities200() {
+        $this->upFixture(new FeedbackEntitiesFixture(self::$app->getContainer()->get(FeedbackService::class)));
+
+        $this->requestGetAllFeedbackEntities(0, 100, ['read' => 'true', 'answer' => 'true'])
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true,
+                'entities' => function(array $json) {
+                    foreach($json as $entity) {
+                        $this->assertTrue(isset($entity['answer']));
+                        $this->assertTrue(isset($entity['answer']['has']));
+                        $this->assertEquals(true, $entity['answer']['has']);
+                        $this->assertTrue(isset($entity['read']));
+                        $this->assertEquals(true, $entity['read']);
+                    }
+                }
+            ])
+        ;
+    }
 }
 
 
