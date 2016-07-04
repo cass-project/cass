@@ -18,7 +18,8 @@ export class ProfileRouteService
     private observable: Observable<Response>;
 
     constructor(
-        private api: ProfileRESTService, 
+        private api: ProfileRESTService,
+        private cache: ProfileCachedIdentityMap,
         private current: CurrentProfileService
     ) {}
     
@@ -66,6 +67,7 @@ export class ProfileRouteService
         this.observable = observable;
         this.observable.subscribe(
             (response: GetProfileByIdResponse200) => {
+                console.log(response, '???');
                 this.profile = response.entity;
                 this.loading = false;
             },
