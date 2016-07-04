@@ -1,9 +1,9 @@
-@import "./../../../../styles/globals";
+@import "../../../styles/globals";
 
-$HEIGHT_DEFAULT: 150px;
-$HEIGHT_EXPANDED: 300px;
+$HEIGHT_DEFAULT: 40px;
+$HEIGHT_EXPANDED: 160px;
 
-.demo-post-form {
+.post-form {
   width: 450px;
   margin: 20px;
 }
