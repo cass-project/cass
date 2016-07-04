@@ -65,9 +65,9 @@ export class FeedbackRESTService extends AbstractRESTService {
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
-        if (qp.profileId !== undefined) params.set('answer', qp.profileId.toString());
-        if (qp.read !== undefined) params.set('answer', qp.answer ? '1' : '0');
-        if (qp.answer !== undefined) params.set('answer', qp.answer ? '1' : '0');
+        if (qp.profileId !== undefined) params.set('profileId', qp.profileId.toString());
+        if (qp.read !== undefined) params.set('read', String(qp.read));
+        if (qp.answer !== undefined) params.set('answer', String(qp.answer));
 
         return this.handle(this.http.get(`/backend/api/protected/feedback/list/offset/${offset}/limit/${limit}`, {
             headers: authHeader,

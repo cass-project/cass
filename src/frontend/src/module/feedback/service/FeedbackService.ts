@@ -3,7 +3,7 @@ import {Observable} from "rxjs/Rx";
 
 import {FeedbackRESTService} from "./FeedbackRESTService";
 import {FeedbackCreateRequest, FeedbackCreateResponse200} from "../definitions/paths/create";
-import {ListFeedbackResponse200} from "../definitions/paths/list";
+import {ListFeedbackResponse200, ListFeedbackQueryParams} from "../definitions/paths/list";
 import {FeedbackCreateResponseRequest} from "../definitions/paths/create-response";
 
 @Injectable()
@@ -26,10 +26,10 @@ export class FeedbackService
         })
     }
 
-    public list(offset:number,limit:number) : Observable<ListFeedbackResponse200>
+    public list(offset:number,limit:number, qp?: ListFeedbackQueryParams) : Observable<ListFeedbackResponse200>
     {
         return Observable.create(observer => {
-            this.rest.listFeedbackEntities(offset,limit, {}).map(data => data.json()).subscribe(
+            this.rest.listFeedbackEntities(offset, limit, qp||{}).map(data => data.json()).subscribe(
                 data => {
                     observer.next(data);
                     observer.complete();

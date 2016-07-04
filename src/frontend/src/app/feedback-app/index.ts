@@ -8,22 +8,21 @@ import 'rxjs/Rx';
 
 require('zone.js');
 require('../../styles/feedback.head.scss');
+require('../../styles/index.head.scss');
 require('bootstrap/dist/css/bootstrap.css');
 require('bootstrap/dist/js/bootstrap.js');
 require('font-awesome/css/font-awesome.css');
 
-import {provide} from "angular2/core";
-import {HTTP_PROVIDERS} from "angular2/http";
+import {provide, enableProdMode} from "angular2/core";
+import {HTTP_PROVIDERS}   from "angular2/http";
 import {ROUTER_PROVIDERS} from "angular2/router";
+import {Title}            from "angular2/src/platform/browser/title";
+import {bootstrap}        from "angular2/platform/browser";
 
-import {App} from "./app";
-import {frontline} from "../../module/frontline/service";
+import {AuthToken}        from "../../module/auth/service/AuthToken";
+import {frontline}        from "../../module/frontline/service";
 import {FrontlineService} from "../../module/frontline/service";
-import {bootstrap} from "angular2/platform/browser";
-import {enableProdMode} from 'angular2/core';
-import {Title} from "angular2/src/platform/browser/title";
-
-import {AuthToken} from "../../module/auth/service/AuthToken";
+import {App}              from "./app";
 
 enableProdMode();
 

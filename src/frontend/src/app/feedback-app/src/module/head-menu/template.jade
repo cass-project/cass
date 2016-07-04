@@ -6,7 +6,19 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-primary
     | CASS Feedback
   #collapsingNavbar.collapse.navbar-toggleable-xs
     ul.nav.navbar-nav.pull-right
-      li.nav-item.active
-        a.nav-link(href='#')
+      li.nav-item.active(
+        *ngIf="authService.isSignedIn()"
+      )
+        a.nav-link(
+          (click)="signOut()"
+        )
           i.fa.fa-sign-out.fa-fw(aria-hidden="true")
           | Sign Out
+      li.nav-item.active(
+        *ngIf="!authService.isSignedIn()"
+      )
+        a.nav-link(
+          (click)="authComponentService.signIn()"
+        )
+          i.fa.fa-sign-in.fa-fw(aria-hidden="true")
+          | Sign In

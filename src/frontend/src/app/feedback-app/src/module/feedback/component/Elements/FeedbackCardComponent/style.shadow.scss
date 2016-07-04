@@ -3,12 +3,11 @@
         width:64px;
         margin:0 .5em .5em 0;
     }
+    
     .controls {
         display: none;
     }
-    a {
-        cursor: pointer;
-    }
+    
     &:hover .controls {
         display: block;
     }

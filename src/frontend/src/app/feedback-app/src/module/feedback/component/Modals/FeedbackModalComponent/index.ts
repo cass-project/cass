@@ -1,8 +1,7 @@
-import {Component, Input, ViewChild} from "angular2/core";
-import {FeedbackEntity} from "../../../../../../../../module/feedback/definitions/entity/Feedback";
-import {ElementRef_} from "angular2/src/core/linker/element_ref";
-import {FeedbackService} from "../../../../../../../../module/feedback/service/FeedbackService";
-import {FeedbackRESTService} from "../../../../../../../../module/feedback/service/FeedbackRESTService";
+import {Component, Input, ViewChild, ElementRef} from "angular2/core";
+
+import {FeedbackService}               from "../../../../../../../../module/feedback/service/FeedbackService";
+import {FeedbackEntity}                from "../../../../../../../../module/feedback/definitions/entity/Feedback";
 import {FeedbackCreateResponseRequest} from "../../../../../../../../module/feedback/definitions/paths/create-response";
 
 @Component({
@@ -10,15 +9,11 @@ import {FeedbackCreateResponseRequest} from "../../../../../../../../module/feed
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    providers:[
-        FeedbackService,
-        FeedbackRESTService
     ]
 })
 export class FeedbackModalComponent {
     @Input('feedback') feedback:FeedbackEntity;
-    @ViewChild('feedbackModal') feedbackModal:ElementRef_;
+    @ViewChild('feedbackModal') feedbackModal:ElementRef;
     private description:string;
         
     constructor(private service:FeedbackService){}

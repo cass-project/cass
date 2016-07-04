@@ -31,3 +31,6 @@
           *ngFor="#feedback of feedbacks",
           [feedback]="feedback"
         )
+.screen-loading(
+  *ngIf="isLoading"
+)
