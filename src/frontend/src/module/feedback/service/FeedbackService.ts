@@ -26,10 +26,10 @@ export class FeedbackService
         })
     }
 
-    public list(offset:number,limit:number, qp?: ListFeedbackQueryParams) : Observable<ListFeedbackResponse200>
+    public list(request:ListFeedbackQueryParams) : Observable<ListFeedbackResponse200>
     {
         return Observable.create(observer => {
-            this.rest.listFeedbackEntities(offset, limit, qp||{}).map(data => data.json()).subscribe(
+            this.rest.listFeedbackEntities(request).map(data => data.json()).subscribe(
                 data => {
                     observer.next(data);
                     observer.complete();

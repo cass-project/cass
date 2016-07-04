@@ -8,7 +8,7 @@ export interface FeedbackEntity
         entity: ProfileEntity
     };
     created_at: string;
-    type_feedback: number;
+    type: number;
     description: string;
     read: boolean;
     email: {

@@ -1,6 +1,9 @@
 import {Component, Input, ViewChild} from "angular2/core";
+import {ROUTER_DIRECTIVES} from "angular2/router";
+
+import {FeedbackEntity}         from "../../../../../../../../module/feedback/definitions/entity/Feedback";
+import {FeedbackTypesService}   from "../../../../../../../../module/feedback/service/FeedbackTypesService";
 import {FeedbackModalComponent} from "../../Modals/FeedbackModalComponent/index";
-import {FeedbackEntity} from "../../../../../../../../module/feedback/definitions/entity/Feedback";
 declare var jQuery;
 
 @Component({
@@ -9,25 +12,31 @@ declare var jQuery;
     styles: [
         require('./style.shadow.scss')
     ],
-    directives:[
+    directives: [
+        ROUTER_DIRECTIVES,
         FeedbackModalComponent
+    ],
+    providers: [
+        FeedbackTypesService
     ]
 })
 export class FeedbackCardComponent{
     @Input('feedback') feedback:FeedbackEntity;
     @ViewChild('feedbackModal') feedbackModalComponent;
     
-    showModal(){
+    constructor(private feedbackTypesService:FeedbackTypesService) {}
+    
+    showModal() {
         let feedbackModal = this.feedbackModalComponent.feedbackModal.nativeElement;
         jQuery(feedbackModal).modal('show', {backdrop: 'static'});
     }
 
-
-
-
+    getFeedbackType(code:string|number) :string {
+        return this.feedbackTypesService.getFeedbackType(code).code.string;
+    }
 
     /**
-     * Usage in template see at \node_modules\angular2\src\common\pipes\date_pipe.d.ts 
+     * Usage Date in template see at \node_modules\angular2\src\common\pipes\date_pipe.d.ts 
      */
     stringToDate(date:string) {
         return new Date(date);

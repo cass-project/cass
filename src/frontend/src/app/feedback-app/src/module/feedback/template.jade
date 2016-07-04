@@ -5,24 +5,20 @@
     .col-md-9.col-lg-10.main
       cass-feedback-landing-sidebar-toggler
 
-      nav
+      nav(*ngIf="getPages().length>1")
         ul.pagination
-          li.page-item
-            a.page-link(href='#', aria-label='Previous')
+          li.page-item(*ngIf="curPage>1")
+            a.page-link(aria-label='Previous', [routerLink] = "['FeedbackPage',{page:curPage-1}]")
               span(aria-hidden='true') «
               span.sr-only Previous
-          li.page-item
-            a.page-link(href='#') 1
-          li.page-item
-            a.page-link(href='#') 2
-          li.page-item
-            a.page-link(href='#') 3
-          li.page-item
-            a.page-link(href='#') 4
-          li.page-item
-            a.page-link(href='#') 5
-          li.page-item
-            a.page-link(href='#', aria-label='Next')
+          li.page-item(
+            *ngFor="#page of getPages()",
+            [ngClass]="{'active': page.index==curPage}"
+          )
+            a.page-link([routerLink]="['FeedbackPage',{page:page.index}]")
+              | {{page.index}}
+          li.page-item(*ngIf="curPage<getPages().length")
+            a.page-link(aria-label='Next', [routerLink] = "['FeedbackPage',{page:curPage+1}]")
               span(aria-hidden='true') »
               span.sr-only Next
       
