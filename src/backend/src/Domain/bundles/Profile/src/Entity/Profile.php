@@ -23,7 +23,7 @@ use Domain\Profile\Entity\Profile\Greetings\GreetingsAnonymous;
  * @Entity(repositoryClass="Domain\Profile\Repository\ProfileRepository")
  * @Table(name="profile")
  */
-final class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, CollectionAwareEntity
+class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, CollectionAwareEntity
 {
     use IdTrait;
     use SIDEntityTrait;
