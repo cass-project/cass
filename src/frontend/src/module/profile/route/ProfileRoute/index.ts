@@ -1,13 +1,11 @@
 import {Component} from "angular2/core";
 
-import {RouteParams, Router, ROUTER_DIRECTIVES} from "angular2/router";
-import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
-import {Observable} from "rxjs/Observable";
-import {ProfileCachedIdentityMap} from "../../service/ProfileCachedIdentityMap";
+import {RouteParams, Router, ROUTER_DIRECTIVES, RouteConfig} from "angular2/router";
 import {ProgressLock} from "../../../form/component/ProgressLock/index";
-import {AuthService} from "../../../auth/service/AuthService";
+import {ProfileCollectionsRoute} from "../ProfileCollectionsRoute/index";
+import {ProfileRouteService} from "./service";
+import {ProfileDashboardRoute} from "../ProfileDashboardRoute/index";
 import {ProfileHeader} from "../../component/Elements/ProfileHeader/index";
-import {ProfileCardsList} from "../../component/Elements/ProfileCardsList/index";
 
 @Component({
     template: require('./template.jade'),
@@ -18,45 +16,55 @@ import {ProfileCardsList} from "../../component/Elements/ProfileCardsList/index"
         ROUTER_DIRECTIVES,
         ProgressLock,
         ProfileHeader,
-        ProfileCardsList,
+    ],
+    providers: [
+        ProfileRouteService,
     ]
 })
+@RouteConfig([
+    {
+        path: '/',
+        name: 'Dashboard',
+        component: ProfileDashboardRoute,
+        useAsDefault: true
+    },
+    {
+        path: '/collections/...',
+        name: 'Collections',
+        component: ProfileCollectionsRoute
+    },
+])
 export class ProfileRoute
 {
-    private loading: boolean = true;
-    private observable: Observable<ProfileExtendedEntity>;
-    private profile: ProfileExtendedEntity;
-
     constructor(
-        params: RouteParams,
-        auth: AuthService,
-        entities: ProfileCachedIdentityMap,
-        router: Router
+        private params: RouteParams,
+        private router: Router,
+        private service: ProfileRouteService
     ) {
         let id = params.get('id');
 
         if(id === 'current') {
-            this.observable = new Observable(observer => {
-                observer.next(auth.getCurrentAccount().getCurrentProfile().entity);
-                observer.complete();
-            });
+            service.loadCurrentProfile();
         }else if(id.match(/^(\d+)$/)) {
-            this.observable = entities.getProfileById(parseInt(id, 10));
+            service.loadProfileById(parseInt(id, 10));
         }else {
             router.navigate(['/Profile/NotFound']);
             return;
         }
 
-        this.observable.subscribe(
-            (profile) => { 
-                this.loading = false;
-                this.profile = profile;
-
-                console.log(this.profile);
-            },
-            () => {
-                router.navigate(['/Profile/NotFound'])
+        service.getObservable().subscribe(
+            (response) => {},
+            (error) => {
+                router.navigate(['/Profile/NotFound']);
             }
-         )
+        )
+    }
+    
+    goDashboard() {
+        console.log('go dashboard');
+    }
+    
+    goCollection(sid: string) {
+        console.log('go collection', sid);
     }
 }

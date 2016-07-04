@@ -32,11 +32,15 @@ import {PostAttachmentRESTService} from "./module/post-attachment/service/PostAt
 import {ProfileCachedIdentityMap} from "./module/profile/service/ProfileCachedIdentityMap";
 import {ProfileModals} from "./module/profile/modals";
 import {TranslateService} from "./module/translate/service";
+import {CurrentAccountService} from "./module/account/service/CurrentAccountService";
+import {CurrentProfileService} from "./module/profile/service/CurrentProfileService";
 
 @Component({
     selector: 'cass-bootstrap',
     template: require('./template.html'),
     providers: [
+        CurrentAccountService,
+        CurrentProfileService,
         TranslateService,
         ModalService,
         MessageBusService,

@@ -1,0 +1,3 @@
+article.component.component-profile-dashboard-route
+  div(*ngIf="service.isProfileLoaded()")
+    cass-profile-cards-list([profile]="service.getProfile()")

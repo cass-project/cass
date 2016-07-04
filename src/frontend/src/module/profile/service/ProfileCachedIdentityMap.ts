@@ -3,6 +3,7 @@ import {Injectable} from "angular2/core";
 
 import {ProfileExtendedEntity} from "../definitions/entity/Profile";
 import {ProfileRESTService} from "./ProfileRESTService";
+import {GetProfileByIdResponse200} from "../definitions/paths/get-by-id";
 
 @Injectable()
 export class ProfileCachedIdentityMap
@@ -11,7 +12,7 @@ export class ProfileCachedIdentityMap
 
     constructor(private service: ProfileRESTService) {}
 
-    getProfileById(id: number): Observable<ProfileExtendedEntity> {
+    getProfileById(id: number): Observable<GetProfileByIdResponse200> {
         if(! this.entities[id]) {
             this.entities[id] = new Observable(observer => {
                 this.service.getProfileById(id).map(res => res.json()).subscribe(
@@ -32,5 +33,5 @@ export class ProfileCachedIdentityMap
 
 interface ProfileCachedIdentityMapDict
 {
-    [id: number]: Observable<ProfileExtendedEntity>;
+    [id: number]: Observable<GetProfileByIdResponse200>;
 }

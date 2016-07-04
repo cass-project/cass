@@ -12,8 +12,6 @@ export class TranslateService
             throw new Error(`Unknown context '${context.toString()}'`)
         }
 
-        console.log(context, key, this.gt[context][key]);
-
         return this.gt[context][key] === undefined
             ? key
             : this.gt[context][key];
