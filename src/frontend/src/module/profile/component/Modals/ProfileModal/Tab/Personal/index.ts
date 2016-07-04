@@ -14,7 +14,7 @@ import {ProfileModalModel} from "../../model";
 })
 export class PersonalTab
 {
-    constructor(private model: ProfileModalModel){console.log(this.model.profile)}
+    constructor(private model: ProfileModalModel){}
 
 
     getActiveSex(value){

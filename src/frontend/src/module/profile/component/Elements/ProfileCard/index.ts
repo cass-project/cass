@@ -1,4 +1,4 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input, Output, EventEmitter} from "angular2/core";
 
 import {ProfileEntity} from "../../../definitions/entity/Profile";
 import {Theme} from "../../../../theme/definitions/entity/Theme";
@@ -19,7 +19,7 @@ import {ProfileImage} from "../ProfileImage/index";
 export class ProfileCard
 {
     @Input('profile') entity: ProfileEntity;
-    @Input('admin') admin: boolean = false;
+    @Output('click') clickEvent = new EventEmitter<number>();
 
     private expertIn: Theme[] = [];
     private interestingIn: Theme[] = [];
@@ -34,6 +34,10 @@ export class ProfileCard
         this.interestingIn = this.entity.interesting_in_ids.map((id: number) => {
             return this.themes.findById(id);
         });
+    }
+    
+    click() {
+        this.clickEvent.emit(this.entity.id);
     }
 
     getGreetings(): string {

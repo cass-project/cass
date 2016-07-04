@@ -67,7 +67,6 @@ export class ProfileRouteService
         this.observable = observable;
         this.observable.subscribe(
             (response: GetProfileByIdResponse200) => {
-                console.log(response, '???');
                 this.profile = response.entity;
                 this.loading = false;
             },

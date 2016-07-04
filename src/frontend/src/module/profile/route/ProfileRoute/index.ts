@@ -59,12 +59,4 @@ export class ProfileRoute
             }
         )
     }
-    
-    goDashboard() {
-        console.log('go dashboard');
-    }
-    
-    goCollection(sid: string) {
-        console.log('go collection', sid);
-    }
 }
