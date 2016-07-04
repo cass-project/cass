@@ -11,7 +11,7 @@
         <div class="cass-padding-box-15">
           <div class="profile-info">
             <div class="profile-image-container">
-              <cass-profile-image border="circle" [url]="service.getProfile().image.public_path"></cass-profile-image>
+              <cass-profile-image border="circle" [url]="service.getProfile().image.variants.default.public_path"></cass-profile-image>
             </div>
             <div class="profile-about">
               <div class="profile-greetings"><h1>{{service.getProfile().greetings.greetings}}</h1></div>
@@ -80,18 +80,18 @@
       <section class="profile-control">
         <div class="profile-info">
           <div class="profile-image-container">
-            <cass-profile-image border="circle" [url]="profile.entity.image.public_path"></cass-profile-image>
+            <cass-profile-image border="circle" [url]="profile.entity.profile.image.variants.default.public_path"></cass-profile-image>
           </div>
           <div class="profile-about">
-            <div class="profile-greetings"><h1>{{profile.entity.greetings.greetings}}</h1></div>
-            <div class="profile-is-current" *ngIf="profile.entity.is_current">Вы сейчас пользуетесь этим профилем</div>
+            <div class="profile-greetings"><h1>{{profile.entity.profile.greetings.greetings}}</h1></div>
+            <div class="profile-is-current" *ngIf="profile.entity.profile.is_current">Вы сейчас пользуетесь этим профилем</div>
             <div class="profile-about-more" >
-              <div *ngIf="profile.entity.expert_in.length < 0">
+              <div *ngIf="profile.entity.profile.expert_in_ids.length < 0">
               <p class="no-expert">У этого профиля не указано, по каким темам стоит обращаться к нему.</p>
               <span class="title">Эксперт в:</span>
               </div>
               <div >
-              <ul class="expert-in-list" *ngFor="#themeId of profile.entity.expert_in">
+              <ul class="expert-in-list" *ngFor="#themeId of profile.entity.profile.expert_in">
                 <li><div class="expert-in">{{themeService.findById(themeId).title}}</div></li>
               </ul>
               </div>
@@ -99,11 +99,11 @@
           </div>
         </div>
         <footer class="profile-controls">
-          <button *ngIf="service.getProfiles().length > 1" class="form-text-button form-button-text-remove" (click)="service.openModalDeleteProfile(profile.entity.id)">
+          <button *ngIf="service.getProfiles().length > 1" class="form-text-button form-button-text-remove" (click)="service.openModalDeleteProfile(profile.entity.profile.id)">
             <i class="fa fa-fw fa-remove"></i>
             <span>Удалить профиль</span>
           </button>
-          <button *ngIf="!profile.entity.is_current" class="form-text-button" (click)="service.switchProfile(profile.entity.id)">
+          <button *ngIf="!profile.entity.profile.is_current" class="form-text-button" (click)="service.switchProfile(profile.entity.profile.id)">
             <i class="fa fa-fw fa-exchange"></i>
             <span>Перейти в профиль</span>
           </button>

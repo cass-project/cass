@@ -41,8 +41,4 @@ export class AccountRESTService extends AbstractRESTService
     cancelRequestDelete() {
         return this.handle(this.http.delete(`/backend/api/protected/account/cancel-request-delete`));
     }
-
-    switchProfile(profileId: number) {
-        return this.handle(this.http.post(`/backend/api/protected/account/switch/to/profile/${profileId}`, ''));
-    }
 }

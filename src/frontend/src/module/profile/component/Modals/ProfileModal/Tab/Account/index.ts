@@ -1,8 +1,8 @@
 import {Component, Input} from "angular2/core";
 
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
-import {ProfileModalModel} from "../../model";
 import {AccountEntity} from "../../../../../../account/definitions/entity/Account";
+import {ProfileModalModel} from "../../model";
 
 @Component({
     selector: 'cass-profile-modal-tab-account',
@@ -13,18 +13,15 @@ import {AccountEntity} from "../../../../../../account/definitions/entity/Accoun
 })
 export class AccountTab
 {
-    @Input('account') account: AccountEntity;
-
     private requestButtonDisabled: boolean = false;
     private flagAccountIsDeleted: boolean = false;
 
-    constructor(private profileRESTService:ProfileRESTService) {
-        this.flagAccountIsDeleted = this.account.delete_request.has;
-    }
+    constructor(private profileRESTService:ProfileRESTService, private model: ProfileModalModel) {}
 
     deleteAccount() {
-        this.profileRESTService.requestAccountDelete().subscribe();
-        this.flagAccountIsDeleted = false;
+        this.profileRESTService.requestAccountDelete().subscribe(data => {
+            this.flagAccountIsDeleted = false
+        });
     }
 
     requestDeleteAccount() {

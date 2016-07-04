@@ -28,6 +28,12 @@ export class ProfileComponent
 {
     constructor(private authService: AuthService, private modals: ProfileModals, protected messages: MessageBusService) {}
 
+    closeModalSettings($event){
+        if($event){
+            this.modals.settings.close();
+        }
+    }
+    
     closeModalInterests($event){
         if($event){
             this.modals.interests.close(); 
