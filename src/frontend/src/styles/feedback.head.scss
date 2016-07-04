@@ -127,3 +127,12 @@ body.modal-open {
 }
 
 a{cursor: pointer;}
+
+.cass-no-conflict {
+  @import 'index.head';
+  
+  .cass-modal.modal {
+    display: block;
+  }
+}
+

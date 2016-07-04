@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ContentChild, AfterContentChecked, AfterContentInit} from "angular2/core";
+import {Component, Input, ViewChild} from "angular2/core";
 import {FeedbackModalComponent} from "../../Modals/FeedbackModalComponent/index";
 import {FeedbackEntity} from "../../../../../../../../module/feedback/definitions/entity/Feedback";
 declare var jQuery;

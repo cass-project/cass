@@ -11,7 +11,7 @@ import {MessageBusService}  from "../../module/message/service/MessageBusService
 import {HeadMenuComponent}  from "./src/module/head-menu/index";
 import {FeedbackRoute}      from "./src/module/feedback/route/FeedbackRoute/index";
 import {AuthComponentService} from "../../module/auth/component/Auth/service";
-import {ModalService} from "../../module/modal/component/service";
+import {ModalService}       from "../../module/modal/component/service";
 
 @Component({
     selector: 'cass-feedback-bootstrap',

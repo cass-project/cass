@@ -1,7 +1,9 @@
 nav.navbar.navbar-fixed-top.navbar-dark.bg-primary
   button.navbar-toggler.hidden-sm-up.pull-right(type='button', data-toggle='collapse', data-target='#collapsingNavbar')
     | ☰
-  a.navbar-brand(href='#')
+  a.navbar-brand(
+    [routerLink]="['/FeedbackRoute']"
+  )
     i.fa.fa-user-secret.fa-fw(aria-hidden="true")
     | CASS Feedback
   #collapsingNavbar.collapse.navbar-toggleable-xs
@@ -14,11 +16,3 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-primary
         )
           i.fa.fa-sign-out.fa-fw(aria-hidden="true")
           | Sign Out
-      li.nav-item.active(
-        *ngIf="!authService.isSignedIn()"
-      )
-        a.nav-link(
-          (click)="authComponentService.signIn()"
-        )
-          i.fa.fa-sign-in.fa-fw(aria-hidden="true")
-          | Sign In
