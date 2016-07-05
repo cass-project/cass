@@ -12,7 +12,7 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
     public function testCreateProfile()
     {
         $account = DemoAccountFixture::getAccount();
-        $profile = DemoProfileFixture::getProfile();
+        $profile = DemoAccountFixture::getAccount()->getCurrentProfile();
 
         $this->requestCreateProfile()
             ->auth($account->getAPIKey())
