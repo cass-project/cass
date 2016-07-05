@@ -14,7 +14,7 @@ export class FeedbackService
     public create(request: FeedbackCreateRequest) : Observable<FeedbackCreateResponse200>
     {
         return Observable.create(observer => {
-            this.rest.create(request).map(data => data.json()).subscribe(
+            this.rest.create(request).subscribe(
                 data => {
                     observer.next(data);
                     observer.complete();
@@ -29,7 +29,7 @@ export class FeedbackService
     public list(request:ListFeedbackQueryParams) : Observable<ListFeedbackResponse200>
     {
         return Observable.create(observer => {
-            this.rest.listFeedbackEntities(request).map(data => data.json()).subscribe(
+            this.rest.listFeedbackEntities(request).subscribe(
                 data => {
                     observer.next(data);
                     observer.complete();
@@ -43,7 +43,7 @@ export class FeedbackService
     
     public response(request: FeedbackCreateResponseRequest) {
         return Observable.create(observer => {
-            this.rest.createResponse(request).map(data => data.json()).subscribe(
+            this.rest.createResponse(request).subscribe(
                 data => {
                     observer.next(data);
                     observer.complete();
