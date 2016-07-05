@@ -31,7 +31,6 @@ export class ScreenProcessing extends Screen
                 "description" : model.description,
                 "theme_id"    : model.theme_id
             })
-            .map(data => data.json())
             .subscribe(data => {
                 let communityId = data['entity'].id;
                 let requests:Promise<any>[] = [];
