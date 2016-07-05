@@ -8,7 +8,7 @@ import 'rxjs/Rx';
 
 require('zone.js');
 require('../../styles/feedback.head.scss');
-require('bootstrap/dist/css/bootstrap.css');
+require('bootstrap/scss/bootstrap-flex.scss');
 require('bootstrap/dist/js/bootstrap.js');
 require('font-awesome/css/font-awesome.css');
 

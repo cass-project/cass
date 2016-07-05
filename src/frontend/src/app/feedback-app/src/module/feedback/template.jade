@@ -5,28 +5,27 @@
     .col-md-9.col-lg-10.main
       cass-feedback-landing-sidebar-toggler
 
-      nav(*ngIf="getPages().length>1")
-        ul.pagination
-          li.page-item(*ngIf="curPage>1")
-            a.page-link(aria-label='Previous', [routerLink] = "['FeedbackPage',{page:curPage-1}]")
-              span(aria-hidden='true') «
-              span.sr-only Previous
-          li.page-item(
-            *ngFor="#page of getPages()",
-            [ngClass]="{'active': page.index==curPage}"
-          )
-            a.page-link([routerLink]="['FeedbackPage',{page:page.index}]")
-              | {{page.index}}
-          li.page-item(*ngIf="curPage<getPages().length")
-            a.page-link(aria-label='Next', [routerLink] = "['FeedbackPage',{page:curPage+1}]")
-              span(aria-hidden='true') »
-              span.sr-only Next
-      
-      .card-columns
-        cass-feedback-card(
-          *ngFor="#feedback of feedbacks",
-          [feedback]="feedback"
+      .pull-right.m-t-1.m-b-1
+        a.btn.btn-secondary((click)="layout = 'grid'", *ngIf="layout == 'list'")
+          i.fa.fa-fw.fa-th-large(aria-hidden="true")
+          | Table layout
+        a.btn.btn-secondary((click)="layout = 'list'", *ngIf="layout == 'grid'")
+          i.fa.fa-fw.fa-bars(aria-hidden="true")
+          | List layout
+      nav
+        cass-feedback-pagination(
+          [current]="params['page']",
+          [total]="totalPages",
+          *ngIf="totalPages>1"
         )
-.screen-loading(
-  *ngIf="isLoading"
-)
+      div(
+        infinite-scroll, 
+        (onScrolled)="appendFeedbacks()",
+        [isInfineScrollActive]="isInfineScrollActive && !isLoading",
+        [ngClass]="{'card-columns': layout == 'grid'}"
+      )
+      
+        cass-feedback-card(
+          [feedback]="feedback",
+          *ngFor="#feedback of feedbacks"
+        )

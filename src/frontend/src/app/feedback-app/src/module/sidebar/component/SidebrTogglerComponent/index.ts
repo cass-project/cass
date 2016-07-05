@@ -5,7 +5,7 @@ declare var jQuery;
     selector: 'cass-feedback-landing-sidebar-toggler',
     template: require('./template.jade'),
 })
-export class LandingSidebarTogglerComponent {
+export class SidebarTogglerComponent {
 
     toggleMenu() {
         jQuery('.row-offcanvas').toggleClass('active');

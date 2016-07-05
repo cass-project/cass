@@ -8,4 +8,4 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
         ROUTER_DIRECTIVES
     ]
 })
-export class LandingSidebarComponent {}
+export class SidebarComponent {}
