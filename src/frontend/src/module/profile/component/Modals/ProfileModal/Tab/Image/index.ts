@@ -74,7 +74,6 @@ export class ImageTab
     }
 
     closeUploadProfileImageModal() {
-        console.log('close???');
         this.upload.close();
     }
 }

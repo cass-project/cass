@@ -69,7 +69,6 @@ export class ProfileSetupScreenImage
         
         this.profileRESTService
             .deleteAvatar(this.model.getProfile().id)
-            .map(res => res.json())
             .subscribe(
                 (response: DeleteProfileImageResponse200) => {
                     this.isDeleting = false;

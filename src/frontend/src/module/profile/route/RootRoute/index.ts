@@ -23,7 +23,7 @@ import {ProfileNotFoundRoute} from "../ProfileNotFoundRoute/index";
     },
     {
         name: 'Profile',
-        path: '/:id',
+        path: '/:id/...',
         component: ProfileRoute
     },
     {
