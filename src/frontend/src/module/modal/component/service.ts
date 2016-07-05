@@ -1,5 +1,8 @@
 import {ModalComponent} from "./index";
 
+import {Injectable} from "angular2/core";
+
+@Injectable()
 export class ModalService
 {
     private count = 0;

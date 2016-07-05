@@ -1,8 +1,5 @@
 @import "./../../styles/globals";
 
-$CASS_SIDEBAR_WIDTH: 80px;
-$CASS_ICON_SIZE: 60px;
-
 div.cass-sidebar {
   position: relative;;
 
@@ -46,8 +43,8 @@ div.cass-sidebar {
 
   .sidebar-button {
     display: block;
-    width: $CASS_ICON_SIZE;
-    height: $CASS_ICON_SIZE;
+    width: $CASS_SIDEBAR_ICON_SIZE;
+    height: $CASS_SIDEBAR_ICON_SIZE;
     border: 1px solid material-color("blue-grey", "900");
     outline: 2px solid black;
     outline-offset: -3px;
@@ -88,11 +85,11 @@ div.cass-sidebar {
   .sidebar-fa-button {
     display: block;
     cursor: pointer;
-    width: $CASS_ICON_SIZE;
-    height: $CASS_ICON_SIZE;
+    width: $CASS_SIDEBAR_ICON_SIZE;
+    height: $CASS_SIDEBAR_ICON_SIZE;
     outline-offset: -3px;
     box-sizing: border-box;
-    line-height: $CASS_ICON_SIZE;
+    line-height: $CASS_SIDEBAR_ICON_SIZE;
     font-size: 25px;
     color: material-color("grey", "400");
     background-color: material-color("grey", "900");
