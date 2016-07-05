@@ -47,7 +47,17 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
                         'image' => $this->expectImageCollection()
                     ]
                 ]
-            ]);
+            ])
+            ->expectJSONBody([
+                'entity' => [
+                    'profile' => [
+                        'image' => [
+                            'is_auto_generated' => true
+                        ]
+                    ]
+                ]
+            ])
+        ;
     }
 
     public function testCreateProfile403()

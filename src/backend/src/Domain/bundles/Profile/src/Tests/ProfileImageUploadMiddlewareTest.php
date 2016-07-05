@@ -31,6 +31,12 @@ class ProfileImageUploadMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'image' => $this->expectImageCollection()
-            ]);
+            ])
+            ->expectJSONBody([
+                'image' => [
+                    'is_auto_generated' => false
+                ]
+            ])
+        ;
     }
 }
