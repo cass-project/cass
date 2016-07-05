@@ -67,6 +67,7 @@ export class ProfileModalModel
         if(this.checkPersonalChanges()){
             let request = {
                 gender: this.profile.gender.string,
+                avatar: false,
                 method: this.profile.greetings.method,
                 last_name: this.profile.greetings.last_name,
                 first_name: this.profile.greetings.first_name,
@@ -74,9 +75,16 @@ export class ProfileModalModel
                 nick_name: this.profile.greetings.nick_name
             };
 
+            if(this.profile.greetings.method !== this.getProfileOriginal().greetings.method){
+                request.avatar = true;
+            }
+
             this.profileRESTService.editPersonal(this.getProfileOriginal().id, request).subscribe(data => {
                 this.getProfileOriginal().greetings = JSON.parse(JSON.stringify(this.profile.greetings));
                 this.getProfileOriginal().gender.string = this.profile.gender.string;
+                if(request.avatar){
+                    this.getProfileOriginal().image = JSON.parse(JSON.stringify(data.entity.image));
+                }
                 this.loading = false;
             })
         }
