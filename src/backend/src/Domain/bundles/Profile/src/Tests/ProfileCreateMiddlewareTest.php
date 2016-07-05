@@ -12,7 +12,7 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
     public function testCreateProfile()
     {
         $account = DemoAccountFixture::getAccount();
-        $profile = DemoProfileFixture::getProfile();
+        $profile = DemoAccountFixture::getAccount()->getCurrentProfile();
 
         $this->requestCreateProfile()
             ->auth($account->getAPIKey())
@@ -47,7 +47,17 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
                         'image' => $this->expectImageCollection()
                     ]
                 ]
-            ]);
+            ])
+            ->expectJSONBody([
+                'entity' => [
+                    'profile' => [
+                        'image' => [
+                            'is_auto_generated' => true
+                        ]
+                    ]
+                ]
+            ])
+        ;
     }
 
     public function testCreateProfile403()

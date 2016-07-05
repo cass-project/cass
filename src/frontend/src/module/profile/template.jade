@@ -14,4 +14,4 @@ article.component.component-profile
   div(*ngIf="modals.interests.isOpened()")
     cass-modal
       cass-modal-box(width="550px")
-        cass-profile-interests-modal([profile]="getCurrentProfile()", (close)='closeModalInterests($event)', (success)='successModalInteresrs($event)')
+        cass-profile-interests-modal((close)='closeModalInterests($event)', (success)='successModalInteresrs($event)')

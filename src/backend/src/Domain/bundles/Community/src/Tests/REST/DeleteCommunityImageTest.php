@@ -41,16 +41,13 @@ final class DeleteCommunityImageTest extends CommunityMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
+                'image' => $this->expectImageCollection()
+            ])
+            ->expectJSONBody([
                 'image' => [
-                    'uid' => $this->expectString(),
-                    'variants' => [
-                        'default' => [
-                            'id' => 'default',
-                            'storage_path' => $this->expectString(),
-                            'public_path' => $this->expectString(),
-                        ]
-                    ]
+                    'is_auto_generated' => true
                 ]
-            ]);
+            ])
+        ;
     }
 }

@@ -349,6 +349,9 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
                 }else if($value instanceof ExpectImageCollection) {
                     $this->recursiveAssertEquals([
                         'uid' => $this->expectString(),
+                        'is_auto_generated' => function($input) {
+                            $this->assertTrue(is_bool($input));
+                        },
                         'variants' => [
                             'default' => [
                                 'id' => 'default',

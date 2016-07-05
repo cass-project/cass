@@ -55,11 +55,6 @@ export class ProfileSetupScreenImage
         this.nextEvent.emit(this.model);
     }
 
-    complete() {
-        this.upload.close();
-        this.next();
-    }
-
     getProfileImage(): string {
         return this.model.getProfileImage().public_path;
     }
