@@ -1,0 +1,23 @@
+@import "./../../styles/globals";
+
+main.component.component-frontend-app {
+  position: absolute;
+  top: 0; height: 100%;
+  left: 0; width: 100%;
+  overflow: hidden;
+
+  >.sidebar {
+    display: block;
+    position: absolute;
+    top: 0; height: 100%;
+    left: 0; width: $CASS_SIDEBAR_ICON_SIZE;
+  }
+
+  >.content {
+    display: block;
+    position: absolute;
+    top: 0; height: 100%;
+    left: $CASS_SIDEBAR_ICON_SIZE; right: 0;
+    overflow: auto;
+  }
+}

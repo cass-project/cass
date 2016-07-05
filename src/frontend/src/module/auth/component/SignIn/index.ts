@@ -41,7 +41,7 @@ export class SignInComponent
     submit() {
         this.status.loading = true;
 
-        this.service.signIn(this.model).map(res => res.json()).subscribe(
+        this.service.signIn(this.model).subscribe(
             (response: SignInResponse200) => {
                 if (this.service.isSignedIn()) {
                     this.successEvent.emit(response);

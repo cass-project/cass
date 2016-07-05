@@ -5,6 +5,7 @@ import {ProfileInterestsCard} from "../ProfileInterestsCard/index";
 import {ProfileCreateCollectionCard} from "../ProfileCreateCollectionCard/index";
 import {ProfileSettingsCard} from "../ProfileSettingsCard/index";
 import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
+import {Router} from "angular2/router";
 
 @Component({
     selector: 'cass-profile-cards-list',
@@ -22,4 +23,10 @@ import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
 export class ProfileCardsList
 {
     @Input('profile') entity: ProfileExtendedEntity;
+
+    constructor(private router: Router) {}
+
+    goDashboard() {
+        this.router.navigate(['/Profile', 'Profile', { id: this.entity.profile.id.toString() }, 'Dashboard']);
+    }
 }

@@ -8,10 +8,10 @@ article.component-profile-header
     .collection-list-container
         ul.collection-links
           li
-            a(href="#", class="collection-link")
+            a([routerLink]="['./Dashboard']", href="#", class="collection-link")
               span Профиль
           li(*ngFor="#collection of entity.collections")
-            a(href="#", class="collection-link", title="{{ collection.description }}")
+            a([routerLink]="['./Collections/View', { sid: collection.sid }]", class="collection-link", title="{{ collection.description }}")
               span {{ translate.translate('collection', collection.title) }}
           li
             a(href="#", class="collection-link collection-link-icon")

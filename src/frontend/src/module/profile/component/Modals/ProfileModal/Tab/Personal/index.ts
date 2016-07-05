@@ -1,9 +1,9 @@
 import {Component} from "angular2/core";
 
-import {FrontlineService} from "../../../../../../frontline/service";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {ProfileService} from "../../../../../service/ProfileService";
 import {ProfileModalModel} from "../../model";
+
 
 @Component({
     selector: 'cass-profile-modal-tab-personal',
@@ -14,18 +14,22 @@ import {ProfileModalModel} from "../../model";
 })
 export class PersonalTab
 {
-    constructor(public frontlineService: FrontlineService, private profileRESTService: ProfileRESTService, private profileService: ProfileService, private model: ProfileModalModel){}
+    constructor(private model: ProfileModalModel){}
 
 
     getActiveSex(value){
+        return (value === this.model.profile.gender.string)
     }
 
-    chooseSex(sex){
+    chooseGender(value){
+        this.model.profile.gender.string = value;
     }
 
     getActiveGreetings(value){
+        return (value === this.model.profile.greetings.method);
     }
 
     chooseGreetings(greetMethod){
+        this.model.profile.greetings.method = greetMethod;
     }
 }

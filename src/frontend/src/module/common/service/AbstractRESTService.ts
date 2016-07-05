@@ -51,7 +51,7 @@ export abstract class AbstractRESTService
             return Observable.throw(response);
         });
 
-        return fork;
+        return fork.map(res => res.json());
     }
 
     private unknownError() {

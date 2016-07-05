@@ -13,7 +13,7 @@ article.component.component-profile-setup-screen-image
             i.fa.fa-fw.fa-upload
             span Загрузить другое изображение
       div(*ngIf='upload.isOpened()')
-        cass-upload-image-modal((close)='upload.close()', (complete)='complete()')
+        cass-upload-image-modal((close)='upload.close()', (complete)='upload.close()')
     footer.form-footer
       .form-footer-section
         .form-footer-item

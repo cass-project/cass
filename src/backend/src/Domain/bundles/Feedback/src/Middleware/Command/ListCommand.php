@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Feedback\Middleware\Command;
 
+use Application\Exception\SeekException;
 use Application\REST\Response\ResponseBuilder;
 use Application\Util\QueryBoolean;
 use Domain\Feedback\Entity\Feedback;
@@ -50,11 +51,11 @@ class ListCommand extends Command
         } catch(ProfileNotFoundException $e) {
             $responseBuilder
                 ->setStatusNotFound()
-                ->setError($e->getMessage());
-        } catch(\Exception $e) {
+                ->setError($e);
+        } catch(SeekException $e) {
             $responseBuilder
-                ->setStatusNotFound()
-                ->setError($e->getMessage());
+                ->setStatusBadRequest()
+                ->setError($e);
         }
 
         return $responseBuilder->build();

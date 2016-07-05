@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Feedback\Repository;
 
+use Application\Util\Seek;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Domain\Feedback\Entity\Feedback;
@@ -82,7 +83,11 @@ class FeedbackRepository extends EntityRepository
             ]
         ], $options);
 
+        $seek = new Seek(self::MAX_LIMIT, $options['seek']['offset'], $options['seek']['limit']);
+
         $qb = $this->createQueryBuilder('f');
+        $qb->setFirstResult($seek->getOffset());
+        $qb->setMaxResults($seek->getLimit());
 
         if($options['profileId']) {
             $qb->andWhere($qb->expr()->eq('f.profile', (int) $options['profileId']));
