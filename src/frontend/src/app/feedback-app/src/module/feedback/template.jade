@@ -18,6 +18,7 @@
           [total]="totalPages",
           *ngIf="totalPages>1"
         )
+      .clearfix
       div(
         infinite-scroll, 
         (onScrolled)="appendFeedbacks()",
