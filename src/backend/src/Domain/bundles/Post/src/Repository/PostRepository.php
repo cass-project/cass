@@ -7,6 +7,7 @@ use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Domain\Collection\Exception\CollectionNotFoundException;
 use Domain\Community\Entity\Community;
+use Domain\Community\Exception\CommunityNotFoundException;
 use Domain\Feed\Feed\Criteria\SeekCriteria;
 use Domain\Feed\Feed\CriteriaRequest;
 use Domain\Post\Entity\Post;
@@ -88,6 +89,7 @@ class PostRepository extends EntityRepository
 
         /** @var Community $community */
         $community = $this->getEntityManager()->getRepository(Community::class)->find($communityId);
+        if(is_null($community)) throw new CommunityNotFoundException(sprintf("Community: %s not found",$communityId));
 
         $collectionIds = [];
         foreach($community->getCollections()->getItems() as $collection){

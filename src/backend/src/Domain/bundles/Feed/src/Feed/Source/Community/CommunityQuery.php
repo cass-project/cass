@@ -24,11 +24,9 @@ class CommunityQuery implements Query
 
     public function execute():ResultSet /* ResultSet || array ! */
     {
-        $posts = $this->postRepository->getCommunityFeed($this->communityId, $this->criteriaRequest);
-
         return new ResultSet(
-            $posts,
-            count($posts)
+            $this->postRepository->getCommunityFeed($this->communityId, $this->criteriaRequest),
+            $this->postRepository->getCommunityFeedTotal($this->communityId,$this->criteriaRequest)
         );
     }
 

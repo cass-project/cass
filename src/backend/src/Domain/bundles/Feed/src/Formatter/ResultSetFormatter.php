@@ -3,6 +3,7 @@ namespace Domain\Feed\Formatter;
 
 use Domain\Feed\Feed\ResultSet;
 use Domain\Post\Entity\Post;
+use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Profile\Repository\ProfileRepository;
 
@@ -18,7 +19,6 @@ class ResultSetFormatter
     public function toJSON(ResultSet $resultSet)
     {
         $cachedProfiles = $this->profileRepository->getProfileByIds($this->getProfileIdsToCache($resultSet));
-
         return [
             'total' => $resultSet->getTotal(),
             'posts' => array_map(function(Post $post) {
