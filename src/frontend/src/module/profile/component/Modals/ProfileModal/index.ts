@@ -10,6 +10,7 @@ import {ProfileRESTService} from "../../../service/ProfileRESTService";
 import {ProfileService} from "../../../service/ProfileService";
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {AuthService} from "../../../../auth/service/AuthService";
+import {AccountRESTService} from "../../../../account/service/AccountRESTService";
 
 enum ProfileModalTab
 {
@@ -36,6 +37,7 @@ enum ProfileModalTab
 
     ],
     providers: [
+        AccountRESTService,
         ProfileModalModel,
         ProfileRESTService,
         ProfileService,
@@ -47,7 +49,7 @@ export class ProfileModal
 {
     tabs: TabControls = new TabControls();
 
-    @Output("close") closeEvent = new EventEmitter();
+    @Output("close") closeEvent = new EventEmitter<Boolean>();
 
     constructor(
         public model: ProfileModalModel,
@@ -55,7 +57,7 @@ export class ProfileModal
     ) {}
 
     close() {
-        this.closeEvent.emit("closed");
+        this.closeEvent.emit(true);
     }
 
     signOut() {
