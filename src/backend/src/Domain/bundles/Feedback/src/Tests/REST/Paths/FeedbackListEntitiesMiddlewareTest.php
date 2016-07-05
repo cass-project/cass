@@ -164,6 +164,38 @@ class FeedbackListEntitiesMiddlewareTest extends FeedbackMiddlewareTest
             ])
         ;
     }
+
+    public function testLimit200() {
+        $this->upFixture(new FeedbackEntitiesFixture(self::$app->getContainer()->get(FeedbackService::class)));
+
+        $this->requestGetAllFeedbackEntities(5, 0)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => true,
+                'entities' => function(array $input) {
+                    $this->assertEquals(5, count($input));
+                }
+            ])
+        ;
+    }
+
+    public function testLimit400() {
+        $this->upFixture(new FeedbackEntitiesFixture(self::$app->getContainer()->get(FeedbackService::class)));
+
+        $this->requestGetAllFeedbackEntities(9999, 0)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(400)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => false,
+                'error' => $this->expectString()
+            ])
+        ;
+    }
 }
 
 
