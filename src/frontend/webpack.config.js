@@ -10,7 +10,7 @@ WebpackConfigBuilder.prototype = {
   build: function() {
     return {
       entry: {
-        main: './src/app/frontend-app/index.ts',
+        main: './src/app/frontend-app/app.ts',
         feedback: './src/app/feedback-app/index.ts'
       },
       output: {

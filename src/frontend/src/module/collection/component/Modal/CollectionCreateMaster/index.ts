@@ -1,12 +1,12 @@
 import {Component, Input, Output, EventEmitter} from "angular2/core";
 
-import {ModalComponent} from "../../../modal/component/index";
-import {ModalBoxComponent} from "../../../modal/component/box/index";
-import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
-import {ScreenControls} from "../../../util/classes/ScreenControls";
-import {CollectionRESTService} from "../../service/CollectionRESTService";
-import {ColorPicker} from "../../../form/component/ColorPicker/index";
-import {CollectionEntity, Collection} from "../../definitions/entity/collection";
+import {ModalComponent} from "../../../../modal/component/index";
+import {ThemeSelect} from "../../../../theme/component/ThemeSelect/index";
+import {CollectionRESTService} from "../../../service/CollectionRESTService";
+import {CollectionEntity, Collection} from "../../../definitions/entity/collection";
+import {ModalBoxComponent} from "../../../../modal/component/box/index";
+import {ColorPicker} from "../../../../form/component/ColorPicker/index";
+import {ScreenControls} from "../../../../util/classes/ScreenControls";
 
 enum CreateCollectionMasterStage
 {
