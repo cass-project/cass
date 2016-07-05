@@ -76,9 +76,18 @@ final class CreateCommunityCollectionTest extends CollectionRESTTestCase
                     'id' => $this->expectId(),
                     'title' => $json['title'],
                     'description' => $json['description'],
-                    'theme_ids' => $json['theme_ids']
+                    'theme_ids' => $json['theme_ids'],
+                    'image' => $this->expectImageCollection()
                 ]
-            ]);
+            ])
+            ->expectJSONBody([
+                'entity' => [
+                    'image' => [
+                        'is_auto_generated' => true
+                    ]
+                ]
+            ])
+        ;
 
         $collectionId = self::$currentResult->getContent()['entity']['id'];
 

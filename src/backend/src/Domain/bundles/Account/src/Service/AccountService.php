@@ -15,6 +15,7 @@ use Domain\Auth\Service\PasswordVerifyService;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
 use Application\Util\GenerateRandomString;
+use Domain\Profile\Repository\ProfileRepository;
 use Domain\Profile\Service\ProfileService;
 
 final class AccountService implements EventEmitterAwareService
@@ -25,6 +26,9 @@ final class AccountService implements EventEmitterAwareService
 
     /** @var AccountRepository */
     private $accountRepository;
+
+    /** @var ProfileRepository */
+    private $profileRepository;
 
     /** @var ProfileService */
     private $profileService;
@@ -37,6 +41,7 @@ final class AccountService implements EventEmitterAwareService
 
     public function __construct(
         AccountRepository $accountRepository,
+        ProfileRepository $profileRepository,
         ProfileService $profileService,
         OAuthAccountRepository $oauthAccountRepository,
         PasswordVerifyService $passwordVerifyService
@@ -45,6 +50,7 @@ final class AccountService implements EventEmitterAwareService
         $profileService->worksWithAccountService($this);
 
         $this->accountRepository = $accountRepository;
+        $this->profileRepository = $profileRepository;
         $this->profileService = $profileService;
         $this->oauthAccountRepository = $oauthAccountRepository;
         $this->passwordVerifyService = $passwordVerifyService;
@@ -81,27 +87,6 @@ final class AccountService implements EventEmitterAwareService
         $this->accountRepository->createOAuth2Account($oauthAccount);
 
         return $account;
-    }
-
-    public function switchTo(Account $account, Profile $switchToProfile): Profile
-    {
-        if (!$account->getProfiles()->contains($switchToProfile)) {
-            throw new AccountNotContainsProfileException(sprintf(
-                'Account (ID: %s) does\'nt contains profile (ID: %s)',
-                $account->isPersisted() ? $account->getId() : '#NEW_ACCOUNT',
-                $switchToProfile->isPersisted() ? $switchToProfile->getId() : '#NEW_PROFILE'
-            ));
-        }
-
-        $account->getProfiles()->forAll(function (Profile $profile) use ($switchToProfile) {
-            $profile === $switchToProfile
-                ? $profile->setAsCurrent()
-                : $profile->unsetAsCurrent();
-        });
-
-        $this->accountRepository->saveAccount($account);
-
-        return $switchToProfile;
     }
 
     public function requestDelete(Account $account): Account
@@ -165,6 +150,12 @@ final class AccountService implements EventEmitterAwareService
         });
 
         $this->accountRepository->saveAccount($account);
+
+        array_map(function(Profile $profile) {
+            $this->profileRepository->saveProfile($profile);
+            var_dump($profile->isCurrent());
+        }, $account->getProfiles()->toArray());
+
 
         return $account;
     }

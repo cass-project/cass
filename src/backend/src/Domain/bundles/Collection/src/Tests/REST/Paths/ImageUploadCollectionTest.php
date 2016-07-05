@@ -81,6 +81,12 @@ final class ImageUploadCollectionTest extends CollectionRESTTestCase
             ->expectJSONBody([
                 'success' => true,
                 'image' => $this->expectImageCollection()
-            ]);
+            ])
+            ->expectJSONBody([
+                'image' => [
+                    'is_auto_generated' => false
+                ]
+            ])
+        ;
     }
 }

@@ -54,6 +54,13 @@ final class CreateCommunityTest extends CommunityMiddlewareTestCase
                     ]
                 ]
             ])
+            ->expectJSONBody([
+                'entity' => [
+                    'image' => [
+                        'is_auto_generated' => true
+                    ]
+                ]
+            ])
             ->expect(function(array $result) {
                 $sid = $result['entity']['sid'];
 
