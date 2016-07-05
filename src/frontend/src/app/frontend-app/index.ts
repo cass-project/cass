@@ -1,5 +1,5 @@
-/// <reference path="./../typings/main/index.d.ts" />
-/// <reference path="./../node_modules/angular2/typings/browser.d.ts" />
+/// <reference path="./../../../typings/main/index.d.ts" />
+/// <reference path="./../../../node_modules/angular2/typings/browser.d.ts" />
 
 import 'es6-shim';
 import 'es6-promise';
@@ -8,20 +8,18 @@ import 'rxjs/Rx';
 
 require('zone.js');
 
-require('./../node_modules/reset.css/reset.css');
-require('./styles/index.head.scss');
+require('./../../../node_modules/reset.css/reset.css');
+require('./../../styles/index.head.scss');
 
 import {provide} from "angular2/core";
+import {bootstrap} from "angular2/platform/browser";
+import {enableProdMode} from 'angular2/core';
 import {HTTP_PROVIDERS} from "angular2/http";
 import {ROUTER_PROVIDERS} from "angular2/router";
 
 import {App} from "./app";
-import {frontline} from "./module/frontline/service";
-import {FrontlineService} from "./module/frontline/service";
-import {bootstrap} from "angular2/platform/browser";
-import {enableProdMode} from 'angular2/core';
-
-import {AuthToken} from "./module/auth/service/AuthToken";
+import {FrontlineService, frontline} from "../../module/frontline/service";
+import {AuthToken} from "../../module/auth/service/AuthToken";
 
 enableProdMode();
 
