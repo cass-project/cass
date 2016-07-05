@@ -4,6 +4,9 @@ namespace Domain\Post\Parameters;
 class CreatePostParameters
 {
     /** @var int */
+    private $postTypeCode;
+
+    /** @var int */
     private $profileId;
 
     /** @var int */
@@ -18,7 +21,15 @@ class CreatePostParameters
     /** @var int[] */
     private $attachmentIds;
 
-    public function __construct(int $profileId, int $collectionId, string $content, array $links, array $attachmentIds) {
+    public function __construct(
+        int $postTypeCode,
+        int $profileId,
+        int $collectionId,
+        string $content,
+        array $links,
+        array $attachmentIds
+    ) {
+        $this->postTypeCode = $postTypeCode;
         $this->profileId = $profileId;
         $this->collectionId = $collectionId;
         $this->content = $content;
@@ -26,6 +37,11 @@ class CreatePostParameters
         $this->attachmentIds = $attachmentIds;
     }
 
+    public function getPostTypeCode(): int
+    {
+        return $this->postTypeCode;
+    }
+    
     public function getProfileId(): int {
         return $this->profileId;
     }

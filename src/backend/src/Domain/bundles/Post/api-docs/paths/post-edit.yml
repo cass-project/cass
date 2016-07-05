@@ -19,7 +19,12 @@
           $ref: '#/definitions/Post_Request_EditPost'
     responses:
       403:
-        $ref: '#/responses/Unauthorized'
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        description: Колекция не найдена
+        schema:
+          $ref: '#/responses/Unauthorized'
       200:
         schema:
           required:
