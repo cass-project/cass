@@ -43,10 +43,9 @@ export class ImageTab
         ));
     }
 
-
     getImageProfile(){
         if(this.authService.isSignedIn()){
-            return this.authService.getCurrentAccount().getCurrentProfile().entity.profile.image.variants['default'].public_path;
+            return this.authService.getCurrentAccount().getCurrentProfile().entity.profile.image.variants['512'].public_path;
         }
     }
 
