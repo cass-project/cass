@@ -88,10 +88,10 @@
             <div class="profile-about-more" >
               <div *ngIf="profile.entity.profile.expert_in_ids.length < 0">
               <p class="no-expert">У этого профиля не указано, по каким темам стоит обращаться к нему.</p>
-              <span class="title">Эксперт в:</span>
               </div>
-              <div >
-              <ul class="expert-in-list" *ngFor="#themeId of profile.entity.profile.expert_in">
+              <div *ngIf="profile.entity.profile.expert_in_ids.length > 0">
+                <span class="title">Эксперт в:</span>
+              <ul class="expert-in-list" *ngFor="#themeId of profile.entity.profile.expert_in_ids">
                 <li><div class="expert-in">{{themeService.findById(themeId).title}}</div></li>
               </ul>
               </div>

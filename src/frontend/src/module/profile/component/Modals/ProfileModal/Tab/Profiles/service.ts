@@ -36,9 +36,7 @@ export class ProfilesTabService
     createNewProfile() {
         this.createNewProfileButton = false;
         this.profileRESTService.createNewProfile().subscribe(data => {
-            this.newProfileId = data;
-            this.newProfileId = JSON.parse(this.newProfileId._body).entity.id;
-            this.switchProfile(this.newProfileId);
+            window.location.reload();
         });
     }
 
@@ -60,7 +58,7 @@ export class ProfilesTabService
             }
         }
     }
-
+    
     getProfiles(){
         return this.authService.getCurrentAccount().profiles.profiles;
     }
