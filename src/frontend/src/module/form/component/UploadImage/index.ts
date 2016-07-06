@@ -42,7 +42,6 @@ export class UploadImageModal
     @Output('crop') cropEvent   = new EventEmitter<UploadImageModal>();
     @Output('processing') processingEvent = new EventEmitter<UploadImageModal>();
     @Output('abort') abortEvent = new EventEmitter<UploadImageModal>();
-    @Output('complete') completeEvent = new EventEmitter<UploadImageModal>();
 
     constructor(
         public cropper: ImageCropperService,
@@ -53,10 +52,6 @@ export class UploadImageModal
         this.cropper.setFile($event.target.files[0]);
         this.screen.goto(UploadImageScreen.Crop);
         this.cropEvent.emit(this);
-    }
-
-    complete(){
-        this.completeEvent.emit(this)
     }
 
     process() {
