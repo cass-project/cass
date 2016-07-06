@@ -1,0 +1,39 @@
+@import "./../../../../styles/globals";
+
+article.component-profile-search-route {
+  display: flex;
+  position: absolute;
+  top: 0; height: 100%;
+  left: 0; width: 100%;
+
+  .theme-panel {
+    width: 300px;
+    background-color: material-color("grey", "800");
+  }
+
+  .content-area {
+    padding: 20px 30px;
+    width: 100%;
+    overflow: auto;
+  }
+
+  .theme-criteria-container {
+
+  }
+
+  .general-criteria {
+    .query-string-criteria-container {
+      margin-bottom: 10px;
+    }
+
+    .feed-criteria-container {
+      margin-bottom: 10px;
+    }
+  }
+
+  .search-results {
+    .seek-criteria-conteiner {
+
+    }
+  }
+}

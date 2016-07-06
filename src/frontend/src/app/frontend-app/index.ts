@@ -35,6 +35,8 @@ import {LandingComponent} from "../../module/landing/index";
 import {HtmlComponent} from "../../module/html/index";
 import {RootRoute as ProfileRootRoute} from "../../module/profile/route/RootRoute/index";
 import {CommunityRoute} from "../../module/community/route/CommunityRoute/index";
+import {PublicService} from "../../module/public/service";
+import {PublicComponent} from "../../module/public/index";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -64,6 +66,7 @@ import {CommunityRoute} from "../../module/community/route/CommunityRoute/index"
         ProfileCachedIdentityMap,
         ProfileModals,
         CollectionModals,
+        PublicService,
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -80,12 +83,6 @@ import {CommunityRoute} from "../../module/community/route/CommunityRoute/index"
 })
 @RouteConfig([
     {
-        name: 'Landing',
-        path: '/',
-        component: LandingComponent,
-        useAsDefault: true
-    },
-    {
         name: 'Html',
         path: '/html/...',
         component: HtmlComponent,
@@ -99,6 +96,12 @@ import {CommunityRoute} from "../../module/community/route/CommunityRoute/index"
         name: 'Community',
         path: '/community/...',
         component: CommunityRoute
+    },
+    {
+        name: 'Public',
+        path: '/public/...',
+        component: PublicComponent,
+        useAsDefault: true
     }
 ])
 export class App {
