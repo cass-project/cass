@@ -24,11 +24,7 @@ export class ProfileSetupScreenExpertIn
         this.backEvent.emit(this.model);
     }
 
-    next() {
-        this.nextEvent.emit(this.model);
-    }
-
-    skip() {
+    finish() {
         this.nextEvent.emit(this.model);
     }
 }
