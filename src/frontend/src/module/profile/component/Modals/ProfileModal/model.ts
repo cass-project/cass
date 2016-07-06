@@ -2,12 +2,19 @@ import {Injectable} from "angular2/core";
 import {AuthService} from "../../../../auth/service/AuthService";
 import {ProfileRESTService} from "../../../service/ProfileRESTService";
 import {AccountRESTService} from "../../../../account/service/AccountRESTService";
-import {ProfileModals} from "../../../modals";
+import {AuthToken} from "../../../../auth/service/AuthToken";
+import {MessageBusService} from "../../../../message/service/MessageBusService/index";
+import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class ProfileModalModel
 {
-    constructor(public authService: AuthService, private profileRESTService: ProfileRESTService, private accountRESTService: AccountRESTService, private profileModals: ProfileModals){}
+    constructor(public authService: AuthService,
+                private profileRESTService: ProfileRESTService,
+                private accountRESTService: AccountRESTService,
+                protected messages: MessageBusService,
+                protected authToken: AuthToken){}
     
     profile = JSON.parse(JSON.stringify(this.authService.getCurrentAccount().getCurrentProfile().entity.profile));
     account = JSON.parse(JSON.stringify(this.authService.getCurrentAccount().entity));
@@ -30,42 +37,59 @@ export class ProfileModalModel
 
     reset(){
         this.profile = JSON.parse(JSON.stringify(this.authService.getCurrentAccount().getCurrentProfile().entity.profile));
+        this.password = {
+            old: '',
+            new: '',
+            repeat: ''
+        };
     }
 
     canSave(){
        return (this.checkAccountChanges() || this.checkExpertListChanges() || this.checkInterestListChanges() || this.checkPersonalChanges());
     }
 
-    saveAllChanges(){
+    performSaveChanges(){
         this.loading = true;
 
-        if(this.checkAccountChanges()){
-            this.accountRESTService.changePassword(this.password.old, this.password.new).subscribe(data => {
-                this.loading = false;
-            });
-        }
-        if(this.checkInterestListChanges()){
-            let request = {
-                theme_ids: this.profile.interesting_in_ids
-            };
+        let observableRequest = [];
 
-            this.profileRESTService.setInterestingIn(this.getProfileOriginal().id, request).subscribe(data => {
-                this.getProfileOriginal().interesting_in_ids = this.profile.interesting_in_ids.splice(0);
-                this.loading = false;
-            })
+        if(this.checkAccountChanges()){
+            observableRequest.push(this.accountRESTService.changePassword(this.password.old, this.password.new));
+
+            this.accountRESTService.changePassword(this.password.old, this.password.new).subscribe(data => {
+                this.password = {
+                    old: '',
+                    new: '',
+                    repeat: ''
+                }}, error => {});
         }
+
         if(this.checkExpertListChanges()){
-            let request = {
+            let expertRequest = {
                 theme_ids: this.profile.expert_in_ids
             };
 
-            this.profileRESTService.setExpertIn(this.getProfileOriginal().id, request).subscribe(data => {
+            observableRequest.push(this.profileRESTService.setExpertIn(this.getProfileOriginal().id, expertRequest));
+
+            this.profileRESTService.setExpertIn(this.getProfileOriginal().id, expertRequest).subscribe(data => {
                 this.getProfileOriginal().expert_in_ids = this.profile.expert_in_ids.splice(0);
-                this.loading = false;
-            })
+            }, error => {});
         }
+
+        if(this.checkInterestListChanges()){
+            let interestingRequest = {
+                theme_ids: this.profile.interesting_in_ids
+            };
+
+            observableRequest.push(this.profileRESTService.setInterestingIn(this.getProfileOriginal().id, interestingRequest));
+
+            this.profileRESTService.setInterestingIn(this.getProfileOriginal().id, interestingRequest).subscribe(data => {
+                this.getProfileOriginal().interesting_in_ids = this.profile.interesting_in_ids.splice(0);
+            }, error => {});
+        }
+
         if(this.checkPersonalChanges()){
-            let request = {
+            let personalRequest = {
                 gender: this.profile.gender.string,
                 avatar: false,
                 method: this.profile.greetings.method,
@@ -75,29 +99,36 @@ export class ProfileModalModel
                 nick_name: this.profile.greetings.nick_name
             };
 
+            observableRequest.push(this.profileRESTService.editPersonal(this.getProfileOriginal().id, personalRequest));
+
             if(this.profile.greetings.method !== this.getProfileOriginal().greetings.method){
-                request.avatar = true;
+                personalRequest.avatar = true;
             }
 
-            this.profileRESTService.editPersonal(this.getProfileOriginal().id, request).subscribe(data => {
+            this.profileRESTService.editPersonal(this.getProfileOriginal().id, personalRequest).subscribe(data => {
                 this.getProfileOriginal().greetings = JSON.parse(JSON.stringify(this.profile.greetings));
                 this.getProfileOriginal().gender.string = this.profile.gender.string;
-                if(request.avatar){
+                if(personalRequest.avatar){
                     this.getProfileOriginal().image = JSON.parse(JSON.stringify(data.entity.image));
                 }
-                this.loading = false;
-            })
-        }
-    }
+            }, error => {});
 
-    hasChanges(): boolean {
-        return false;
+        }
+
+        Observable.forkJoin(observableRequest).subscribe(
+            success => {
+                this.loading = false;
+                this.messages.push(MessageBusNotificationsLevel.Info, 'Ваши данные сохранены');
+            },
+            error => {
+                this.messages.push(MessageBusNotificationsLevel.Warning, 'Ваши данные не были сохранены')
+            }
+        )
     }
 
     checkAccountChanges(): boolean {
         return (this.password.old.length > 5 && this.password.new.length > 5 && this.password.repeat.length > 5 && this.password.new === this.password.repeat);
     }
-
 
     checkExpertListChanges(): boolean {
         return (this.profile.expert_in_ids.sort().toString() !== this.getProfileOriginal().expert_in_ids.sort().toString());
@@ -106,7 +137,6 @@ export class ProfileModalModel
     checkInterestListChanges(): boolean {
         return (this.profile.interesting_in_ids.sort().toString() !== this.getProfileOriginal().interesting_in_ids.sort().toString());
     }
-
 
     checkPersonalChanges(): boolean {
         if(this.profile.gender.string  !== this.getProfileOriginal().gender.string){
