@@ -53,15 +53,8 @@ export class ImageTab
         this.deleteProcessVisible = true;
         let profileId = this.authService.getCurrentAccount().getCurrentProfile().entity.profile.id;
         
-        this.profileRESTService.deleteAvatar(profileId).subscribe(data => {
-            this.authService.getCurrentAccount().getCurrentProfile().entity.profile.image = {
-                "variants": {
-                    "default": {
-                        "id": 'default',
-                        "public_path": '/public/assets/profile-default.png'
-                    }
-                }
-            };
+        this.profileRESTService.deleteAvatar(profileId).subscribe(response => {
+            this.authService.getCurrentAccount().getCurrentProfile().entity.profile.image = response.image;
             this.deleteProcessVisible = false;
         });
     }

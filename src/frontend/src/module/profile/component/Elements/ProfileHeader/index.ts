@@ -3,7 +3,6 @@ import {Component, Input, EventEmitter, Output} from "angular2/core";
 import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {ProfileImage} from "../ProfileImage/index";
-import {TranslateService} from "../../../../translate/service";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 
 @Component({
@@ -23,8 +22,6 @@ export class ProfileHeader
     @Output('go-collection') goCollectionEvent: EventEmitter<string> = new EventEmitter<string>();
 
     @Input('profile') entity: ProfileExtendedEntity;
-    
-    constructor(private translate: TranslateService) {}
 
     getProfileGreetings(): string {
         return this.entity.profile.greetings.greetings;
@@ -40,5 +37,9 @@ export class ProfileHeader
     
     goCollection(sid: string) {
         this.goCollectionEvent.emit(sid);
+    }
+
+    isOwnProfile(): boolean {
+        return this.entity.is_own;
     }
 }

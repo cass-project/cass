@@ -1,0 +1,7 @@
+article.component.component-collection-card
+  .card
+    .collection-image
+      .image-container([ngStyle]="{'background-image': getImageURL() }")
+    .collection-about
+      h1 {{ entity.title }}
+      p {{ entity.description }}

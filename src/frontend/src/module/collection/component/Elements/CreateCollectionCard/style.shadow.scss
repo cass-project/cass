@@ -1,0 +1,51 @@
+@import "./../../../../../styles/globals";
+
+article.component-create-collection-card {
+  display: inline-block;
+  vertical-align: top;
+
+  .card {
+    width: 256px;
+    height: 430px;
+    border: 1px dashed material-color("grey", "500");
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color 0.1s;
+    position: relative;
+
+    .plus-container {
+      height: 100%;
+      text-align: center;
+      color: material-color("grey", "500");
+      line-height: 450px;
+      font-size: 40px;
+      width: 100%;
+      transition: color 0.1s;
+    }
+
+    .title-container {
+      position: absolute;
+      left: 0; right: 0;
+      top: 250px;
+      font-family: $FONT_FAMILY;
+      font-size: 16px;
+      font-weight: 500;
+      color: material-color("grey", "500");
+      text-align: center;
+      text-transform: uppercase;
+      transition: color 0.1s;
+    }
+
+    &:hover {
+      border: 1px dashed material-color("grey", "600");
+
+      .plus-container {
+        color: material-color("grey", "600");
+      }
+
+      .title-container {
+        color: material-color("grey", "600");
+      }
+    }
+  }
+}

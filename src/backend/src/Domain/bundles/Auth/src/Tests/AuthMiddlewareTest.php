@@ -49,8 +49,8 @@ class AuthMiddlewareTest extends MiddlewareTestCase
                             0 => [
                                 'id' => $this->expectId(),
                                 'sid' => $this->expectString(),
-                                'title' => '$gt_collection_my-feed_title',
-                                'description' => '$gt_collection_my-feed_description',
+                                'title' => 'Моя лента',
+                                'description' => $this->expectString()
                             ]
                         ]
                     ]
@@ -118,8 +118,8 @@ class AuthMiddlewareTest extends MiddlewareTestCase
                             0 => [
                                 'id' => $this->expectId(),
                                 'sid' => $this->expectString(),
-                                'title' => '$gt_collection_my-feed_title',
-                                'description' => '$gt_collection_my-feed_description',
+                                'title' => 'Моя лента',
+                                'description' => $this->expectString(),
                             ]
                         ]
                     ]

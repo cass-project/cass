@@ -1,3 +1,14 @@
 article.component.component-collections-list {
+  .collection-cards-container {
+    .list-items {
+      text-align: center;
 
+      .collection-card-item {
+        vertical-align: top;
+        display: inline-block;
+        text-align: left;
+        margin: 15px 10px;
+      }
+    }
+  }
 }

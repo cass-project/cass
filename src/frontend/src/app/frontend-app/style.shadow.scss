@@ -17,7 +17,7 @@ main.component.component-frontend-app {
     display: block;
     position: absolute;
     top: 0; height: 100%;
-    left: $CASS_SIDEBAR_ICON_SIZE; right: 0;
+    left: $CASS_SIDEBAR_ICON_SIZE + 20px; right: 0;
     overflow: auto;
   }
 }

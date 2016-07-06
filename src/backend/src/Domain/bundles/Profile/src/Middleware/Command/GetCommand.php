@@ -13,12 +13,6 @@ class GetCommand extends Command
 
         try {
             $profileId = (int) $request->getAttribute('profileId');
-
-            $this->validation->validateIsProfileOwnedByAccount(
-                $this->currentAccountService->getCurrentAccount(),
-                $this->profileService->getProfileById($profileId)
-            );
-
             $profile = $this->profileService->getProfileById($profileId);
 
             return $responseBuilder

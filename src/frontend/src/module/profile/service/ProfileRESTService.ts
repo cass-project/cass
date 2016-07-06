@@ -6,6 +6,8 @@ import {EditPersonalRequest} from "../definitions/paths/edit-personal";
 import {SetGenderRequest, SetGenderResponse200} from "../definitions/paths/set-gender";
 import {ExpertInRequest, ExpertInResponse200} from "../definitions/paths/expert-in-ids";
 import {AuthToken} from "../../auth/service/AuthToken";
+import {Observable} from "rxjs/Observable";
+import {DeleteProfileImageResponse200} from "../definitions/paths/image-delete";
 
 @Injectable()
 export class ProfileRESTService extends AbstractRESTService
@@ -128,7 +130,7 @@ export class ProfileRESTService extends AbstractRESTService
         return this.handle(this.http.put(`/backend/api/protected/account/request-delete`, '', {headers: authHeader}));
     }
 
-    deleteAvatar(profileId: number) {
+    deleteAvatar(profileId: number): Observable<DeleteProfileImageResponse200> {
         let authHeader = new Headers();
 
         if(this.token.hasToken()){

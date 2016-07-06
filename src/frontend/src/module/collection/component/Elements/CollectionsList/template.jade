@@ -1,3 +1,7 @@
 article.component.component-collections-list
-  header
-    h1 Подборки
+  .collection-cards-container
+    .list-items
+      .collection-card-item(*ngFor="#collection of collections")
+        cass-collection-card([entity]="collection")
+      .collection-card-item(*ngIf="isOwn")
+        cass-create-collection-card
