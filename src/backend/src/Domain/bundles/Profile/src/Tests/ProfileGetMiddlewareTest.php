@@ -46,8 +46,8 @@ class ProfileGetMiddlewareTest extends ProfileMiddlewareTestCase
                                 'id' => $this->expectString(),
                                 'type' => 'profile'
                             ],
-                            'title' => '$gt_collection_my-feed_title',
-                            'description' => '$gt_collection_my-feed_description'
+                            'title' => 'Моя лента',
+                            'description' => $this->expectString()
                         ]
                     ]
                 ]

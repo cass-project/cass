@@ -3,6 +3,7 @@ Profile_Entity_ProfileExtended:
   required:
     - profile
     - collections
+    - is_own
   properties:
     profile:
       type: object
@@ -13,3 +14,6 @@ Profile_Entity_ProfileExtended:
       items:
         schema:
           $ref: '#/definitions/Collection_Entity_Collection'
+    is_own:
+      type: boolean
+      description: TRUE, если является профилем текущего аутентифицированного аккаунта

@@ -1,7 +1,5 @@
 import {Injectable} from "angular2/core";
 
-import {Account} from "../../account/definitions/entity/Account";
-
 @Injectable()
 export class AuthToken
 {

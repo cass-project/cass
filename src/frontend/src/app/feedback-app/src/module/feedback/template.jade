@@ -7,29 +7,32 @@
       )
     .col-md-9.col-lg-10.main
       cass-feedback-landing-sidebar-toggler
-
-      .pull-right.m-t-1.m-b-1
-        a.btn.btn-secondary((click)="layout = 'grid'", *ngIf="layout == 'list'")
-          i.fa.fa-fw.fa-th-large(aria-hidden="true")
-          | Table layout
-        a.btn.btn-secondary((click)="layout = 'list'", *ngIf="layout == 'grid'")
-          i.fa.fa-fw.fa-bars(aria-hidden="true")
-          | List layout
-      nav
-        cass-feedback-pagination(
-          [current]="params['page']",
-          [total]="totalPages",
-          *ngIf="totalPages>1"
-        )
-      .clearfix
-      div(
-        infinite-scroll, 
-        (onScrolled)="appendFeedbacks()",
-        [isInfineScrollActive]="isInfineScrollActive && !isLoading",
-        [ngClass]="{'card-columns': layout == 'grid'}"
-      )
       
-        cass-feedback-card(
-          [feedback]="feedback",
-          *ngFor="#feedback of feedbacks"
+      div(*ngIf="feedbacks.length>0")
+        .pull-right.m-t-1.m-b-1
+          a.btn.btn-secondary((click)="layout = 'grid'", *ngIf="layout == 'list'")
+            i.fa.fa-fw.fa-th-large(aria-hidden="true")
+            | Table layout
+          a.btn.btn-secondary((click)="layout = 'list'", *ngIf="layout == 'grid'")
+            i.fa.fa-fw.fa-bars(aria-hidden="true")
+            | List layout
+        nav
+          cass-feedback-pagination(
+            [current]="params['page']",
+            [total]="totalPages",
+            *ngIf="totalPages>1"
+          )
+        .clearfix
+        div(
+          infinite-scroll, 
+          (onScrolled)="appendFeedbacks()",
+          [isInfineScrollActive]="isInfineScrollActive && !isLoading",
+          [ngClass]="{'card-columns': layout == 'grid'}"
         )
+          cass-feedback-card([feedback]="feedback", *ngFor="#feedback of feedbacks")
+      .jumbotron(*ngIf="feedbacks.length==0 && !isLoading")
+        h1.display-3
+          i.fa.fa-fw.fa-info-circle(aria-hidden="true")
+          | Nothing to show!
+        hr
+        p.lead Unfortunately, our server did not find any record of your request. Try to simplify the filter criteria.

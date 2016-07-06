@@ -71,7 +71,7 @@
 
           <!-- Кнопка задизеблена, если нет изменений в модели. -->
           <!-- После сохранения окно должно закрываться -->
-          <button class="form-button form-button-green" [disabled]="!model.canSave()" (click)="model.saveAllChanges()">Сохранить</button>
+          <button class="form-button form-button-green" [disabled]="!model.canSave()" (click)="model.performSaveChanges()">Сохранить</button>
         </div>
       </footer>
     </div>

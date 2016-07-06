@@ -87,7 +87,8 @@ article.component-profile-header {
   .profile-buttons-container {
     ul.profile-buttons {
       li {
-        display: block;
+        display: inline-block;
+        margin-left: 5px;
 
         a.profile-button {
           display: inline-block;

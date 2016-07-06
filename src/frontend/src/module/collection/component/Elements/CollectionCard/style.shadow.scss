@@ -1,0 +1,49 @@
+@import "./../../../../../styles/globals";
+
+article.component-collection-card {
+  .card {
+    @include card(1);
+    width: 256px;
+    height: 430px;
+    display: inline-block;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.1s;
+
+    &:hover {
+      .collection-image {
+        filter: brightness(110%);
+        -webkit-filter: brightness(110%);
+      }
+    }
+  }
+
+  .collection-image {
+    height: 256px;
+
+    .image-container {
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+  }
+
+  .collection-about {
+    padding: 20px 13px;
+    height: 140px;
+    overflow: hidden;
+
+    h1 {
+      font-family: $FONT_FAMILY;
+      font-size: 20px;
+      font-weight: 400;
+      color: black;
+      margin-bottom: 10px;
+    }
+
+    p {
+      display: block;
+      color: material-color("grey", "700");
+    }
+  }
+}

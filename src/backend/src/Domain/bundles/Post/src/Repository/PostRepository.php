@@ -12,50 +12,23 @@ use Domain\Feed\Feed\Criteria\SeekCriteria;
 use Domain\Feed\Feed\CriteriaRequest;
 use Domain\Post\Entity\Post;
 use Domain\Post\Exception\PostNotFoundException;
-use Domain\Post\PostType\Types\DefaultPostType;
-use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
-use Domain\Profile\Exception\ProfileNotFoundException;
 
 class PostRepository extends EntityRepository
 {
-    // TODO: Validation: Domain\Collection is owned by profile
-    // TODO: Validation: Content
-    public function createPost(int $profileId, int $collectionId, string $content): Post {
-        $em = $this->getEntityManager();
-
-        $authorProfile = $em->getRepository(Profile::class)->find($profileId);/** @var Profile $authorProfile */
-        if(is_null($authorProfile)) throw new ProfileNotFoundException("Profile {$profileId} not found ");
-
-        $collection = $em->getRepository(Collection::class)->find($collectionId);/** @var Collection $collection */
-        if(is_null($collection)) throw new CollectionNotFoundException("Collection {$collectionId} not found");
-
-        $post = new Post(new DefaultPostType(), $authorProfile, $collection, $content);
-
-        $em->persist($post);
-        $em->flush($post);
-
-        return $post;
+    public function createPost(Post $post)
+    {
+        $this->getEntityManager()->persist($post);
+        $this->getEntityManager()->flush($post);
     }
 
-    public function editPost(int $postId, int $collectionId, string $content): Post {
-        $em = $this->getEntityManager();
-
-        $post = $this->getPost($postId);
-        $collection = $em->getReference(Collection::class, $collectionId); /** @var Collection $collection */
-
-        $post
-            ->setCollection($collection)
-            ->setContent($content);
-
-        $em->flush($post);
-
-        return $post;
+    public function savePost(Post $post)
+    {
+        $this->getEntityManager()->flush($post);
     }
 
-    public function deletePost(int $postId) {
-        $post = $this->getPost($postId);
-
+    public function deletePost(Post $post)
+    {
         $this->getEntityManager()->remove($post);
         $this->getEntityManager()->flush($post);
     }
@@ -64,7 +37,7 @@ class PostRepository extends EntityRepository
         $post = $this->find($postId);
 
         if($post === null) {
-            throw new PostNotFoundException(sprintf('Domain\Post with id `%d` not found', $postId));
+            throw new PostNotFoundException(sprintf('Post (ID: `%d`) not found', $postId));
         }
 
         return $post;

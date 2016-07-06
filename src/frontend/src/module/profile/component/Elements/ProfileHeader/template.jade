@@ -12,14 +12,18 @@ article.component-profile-header
               span Профиль
           li(*ngFor="#collection of entity.collections")
             a([routerLink]="['./Collections/View', { sid: collection.sid }]", class="collection-link", title="{{ collection.description }}")
-              span {{ translate.translate('collection', collection.title) }}
+              span {{ collection.title }}
           li
-            a(href="#", class="collection-link collection-link-icon")
+            a(*ngIf="isOwnProfile()", href="#", class="collection-link collection-link-icon")
               i.fa.fa-plus-circle
   .profile-header-section
     .profile-buttons-container
       ul.profile-buttons
         li
-          a.profile-button(href="javascript:void()", title="Создать новую подборку")
+          a.profile-button(href="javascript:void()")
+            i.fa.fa-fw.fa-bookmark
+            span Подборки
+        li(*ngIf="isOwnProfile()")
+          a.profile-button(href="javascript:void()")
             i.fa.fa-fw.fa-cog
             span Настройки
