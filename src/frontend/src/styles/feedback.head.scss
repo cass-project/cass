@@ -11,6 +11,7 @@ body.modal-open {
   padding-right:0 !important;
 }
 
+a{cursor: pointer;}
 
 #sidebar {
   padding-left:0;
@@ -126,12 +127,13 @@ body.modal-open {
   100% { transform: rotate(360deg); }
 }
 
-a{cursor: pointer;}
-
 .cass-no-conflict {
+  @import '/../../src/app/feedback-app/node_modules/reset-css/reset';
   @import 'index.head';
-  
-  .cass-modal.modal {
-    display: block;
-  }
+  line-height: 1;
+  font-family: $FONT_FAMILY;
+
+  label { display: inline; }
+  .input-group { position: static; display: block; }
+  .modal { display: block; }
 }
