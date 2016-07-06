@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Profile\Formatter;
 
+use Domain\Auth\Service\CurrentAccountService;
 use Domain\Collection\Collection\CollectionItem;
 use Domain\Collection\Collection\CollectionTree;
 use Domain\Collection\Service\CollectionService;
@@ -12,14 +13,24 @@ final class ProfileExtendedFormatter
     /** @var CollectionService */
     private $collectionService;
 
-    public function __construct(CollectionService $collectionService) {
+    /** @var CurrentAccountService */
+    private $currentAccountService;
+
+    public function __construct(
+        CollectionService $collectionService,
+        CurrentAccountService $currentAccountService
+    ) {
         $this->collectionService = $collectionService;
+        $this->currentAccountService = $currentAccountService;
     }
 
     public function format(Profile $profile): array {
         return [
             'profile' => $profile->toJSON(),
-            'collections' => $this->formatCollections($profile->getCollections())
+            'collections' => $this->formatCollections($profile->getCollections()),
+            'is_own' => $this->currentAccountService->isAvailable()
+                ? $this->currentAccountService->getCurrentAccount()->getProfiles()->contains($profile)
+                : false
         ];
     }
 

@@ -1,3 +1,13 @@
-article.component.component-profile-collections-list-route {
+@import "./../../../../styles/globals";
 
+article.component.component-profile-collections-list-route {
+  h1 {
+    font-family: $FONT_FAMILY;
+    text-align: center;
+    line-height: 60px;
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: material-color("grey", "900");
+  }
 }

@@ -26,6 +26,10 @@ export class ProfileCardsList
 
     constructor(private router: Router) {}
 
+    isOwnProfile(): boolean {
+        return this.entity.is_own;
+    }
+
     goDashboard() {
         this.router.navigate(['/Profile', 'Profile', { id: this.entity.profile.id.toString() }, 'Dashboard']);
     }

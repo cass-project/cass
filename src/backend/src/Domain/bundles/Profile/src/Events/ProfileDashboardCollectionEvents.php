@@ -27,8 +27,8 @@ final class ProfileDashboardCollectionEvents implements EventsBootstrapInterface
         $this->profileService->getEventEmitter()->on(ProfileService::EVENT_PROFILE_CREATED, function(Profile $profile) {
             $this->collectionService->createCollection(new CreateCollectionParameters(
                 sprintf('profile:%d', $profile->getId()),
-                '$gt_collection_my-feed_title',
-                '$gt_collection_my-feed_description'
+                'Моя лента',
+                ''
             ), true);
         });
     }

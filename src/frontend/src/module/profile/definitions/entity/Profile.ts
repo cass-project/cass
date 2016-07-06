@@ -17,6 +17,7 @@ export const PROFILE_GENDER_LIST = [
 export interface ProfileExtendedEntity {
     collections: CollectionEntity[];
     profile: ProfileEntity;
+    is_own: boolean;
 }
 
 export interface ProfileEntity {
@@ -61,8 +62,7 @@ export interface ProfileDisabledEntity {
 export class Profile {
     static AVATAR_DEFAULT = '/dist/assets/profile-default.png';
 
-    constructor(public owner: Account, public entity: ProfileExtendedEntity) {
-    }
+    constructor(public owner: Account, public entity: ProfileExtendedEntity) {}
 
     getId(): number {
         return this.entity.profile.id
