@@ -1,0 +1,99 @@
+<div class="profile-modal-tab-personal">
+  <div class="form">
+    <header class="tab-modal-header">
+      <h1>Как вас называть?</h1>
+    </header>
+    <ul class="greetings-options">
+      <li>
+        <label class="greeting-option">
+          <input type="radio" [readonly]="model.loading" [checked]="getActiveGreetings('fl')" name="greetings_type" (click)="chooseGreetings('fl')">
+          <span class="text">По имени и фамилии</span>
+        </label>
+      </li>
+      <li>
+        <label class="greeting-option">
+          <input type="radio" [readonly]="model.loading" [checked]="getActiveGreetings('n')" name="greetings_type" (click)="chooseGreetings('n')">
+          <span class="text">По нику</span>
+        </label>
+      </li>
+      <li>
+        <label class="greeting-option">
+          <input type="radio" [readonly]="model.loading" [checked]="getActiveGreetings('fm')" name="greetings_type" (click)="chooseGreetings('fm')">
+          <span class="text">По отчеству и имени</span>
+        </label>
+      </li>
+      <li>
+        <label class="greeting-option">
+          <input type="radio" [readonly]="model.loading" [checked]="getActiveGreetings('lfm')" name="greetings_type" (click)="chooseGreetings('lfm')">
+          <span class="text">По фамилии, имени и отчеству</span>
+        </label>
+      </li>
+    </ul>
+  </div>
+  <div class="form">
+    <header class="tab-modal-header">
+      <h2>Ник</h2>
+    </header>
+    <div class="input-group">
+      <label class="form-label">
+        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.profile.greetings.nick_name" type="text" placeholder="Любое имя, из латинских, русских букв, цифр или знака `_`">
+      </label>
+    </div>
+  </div>
+  <div class="form">
+    <header class="tab-modal-header">
+      <h2>ФИО</h2>
+    </header>
+    <div class="input-group">
+      <label class="form-label">
+        <!-- Нужны ли эти плейсхолдеры? -->
+        <!-- По идеи минимизируем ошибки пользователей, а с другой стороны - какого х*я я Иванова Елена Ивановна? -->
+        <!--
+             >какого х*я я Иванова Елена Ивановна?
+             Ты забыл одну важную вещь -- В интернете тян нет.
+        -->
+        <span class="label-text">Фамилия</span>
+        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.profile.greetings.last_name" type="text" placeholder="Иванов|Иванова">
+      </label>
+    </div>
+    <div class="input-group">
+      <label class="form-label">
+        <span class="label-text">Имя</span>
+        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.profile.greetings.first_name" type="text" placeholder="Иван|Елена">
+      </label>
+    </div>
+    <div class="input-group">
+      <label class="form-label">
+        <span class="label-text">Отчество</span>
+        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.profile.greetings.middle_name" type="text" placeholder="Ивановыч|Ивановна">
+      </label>
+    </div>
+  </div>
+  <div class="form">
+    <header class="tab-modal-header">
+      <h2>Пол</h2>
+    </header>
+    <ul class="gender-options">
+      <li>
+        <label class="gender-option">
+          <input type="radio" [disabled]="model.loading" [checked]="getActiveSex('not-specified')" (click)="chooseGender('not-specified')" name="gender">
+          <span class="text">Оставить в тайне</span>
+        </label>
+      </li>
+      <li>
+        <label class="gender-option gender-option-active">
+          <input type="radio" [disabled]="model.loading" [checked]="getActiveSex('male')" (click)="chooseGender('male')" name="gender">
+          <i class="fa fa-fw fa-male"></i>
+          <span class="text">Мужской</span>
+        </label>
+      </li>
+      <li>
+        <label class="gender-option">
+          <input type="radio" [disabled]="model.loading" [checked]="getActiveSex('female')" (click)="chooseGender('female')" name="gender">
+          <i class="fa fa-fw fa-female"></i>
+          <span class="text">Женский</span>
+        </label>
+      </li>
+    </ul>
+  </div>
+</div>

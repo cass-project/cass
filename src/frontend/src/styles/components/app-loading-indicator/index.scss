@@ -1,6 +1,6 @@
 @import "./../../mixins/disable-text-select";
 
-body>div#loading
+body>div#loading, body>div#CASSAppFrontendLoadingStatus
 {
   @include disable-text-select;
 

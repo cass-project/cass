@@ -1,6 +1,5 @@
 @import "./globals";
 @import "./components/app-loading-indicator/index";
-@import "./components/app-container/index";
 @import "./components/padding-box/index";
 @import "./components/forms/index";
 @import "./components/tab-modal/index";
@@ -11,17 +10,9 @@ html {
   @include disable-text-select;
 
   font-family: $FONT_FAMILY;
-  font-size: 13px;
+  font-size: $FONT_SIZE_NORMAL;
 }
 
 body {
   background-color: $MATERIAL_BACKGROUND;
-}
-
-body.cass-has-modals {
-  overflow: hidden;
-}
-
-p {
-  font-size: $FONT_SIZE_NORMAL;
 }

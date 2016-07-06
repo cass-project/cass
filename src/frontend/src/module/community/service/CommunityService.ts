@@ -31,7 +31,6 @@ export class CommunityService {
                 observer.complete();
             } else {
                 this.communityRESTService.getBySid(sid)
-                    .map(data => data.json())
                     .subscribe(
                         communityResponse => {
                             this.communityResponsesCache.push(JSON.parse(JSON.stringify(communityResponse)));

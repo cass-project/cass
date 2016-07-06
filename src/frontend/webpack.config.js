@@ -9,13 +9,14 @@ function WebpackConfigBuilder() {
 WebpackConfigBuilder.prototype = {
   build: function() {
     return {
-      entry: [
-        './src/index.ts',
-      ],
+      entry: {
+        main: './src/app/frontend-app/app.ts',
+        feedback: './src/app/feedback-app/index.ts'
+      },
       output: {
         filename: '[name].js',
         path: this.publicPath + '/' + this.bundlesDir,
-        publicPath: this.wwwPath + '/' + this.bundlesDir
+        publicPath: this.wwwPath + '/' + this.bundlesDir + '/'
       },
       resolve: {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
@@ -85,8 +86,17 @@ WebpackConfigBuilder.prototype = {
             test: /\.jade$/,
             loaders: ['raw-loader', 'jade-html']
           }
-        ]
-      }
+        ] 
+      },
+      plugins: [
+        new webpack.ProvidePlugin({
+          $: "jquery",
+          jQuery: "jquery",
+          "window.jQuery": "jquery",
+          Tether: 'tether',
+          "window.Tether": 'tether'
+        })
+      ]      
     }
   }
 };

@@ -5,12 +5,6 @@
     description: Создать новый профиль для текущего аккаунта
     security:
       - x_api_key: []
-    parameters:
-      - name: accountId
-        type: number
-        in: path
-        required: true
-        description: ID аккаунта. При значении "current" создает новый профиль для текущего аккаунта.
     responses:
       200:
         schema:

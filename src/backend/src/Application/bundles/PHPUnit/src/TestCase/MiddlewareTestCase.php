@@ -142,11 +142,12 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
      *      ;
      * @param string $method HTTP-метод
      * @param string $uri URI
+     * @param array $queryParams
      * @return RESTRequest
      */
-    protected final function request(string $method, string $uri): RESTRequest
+    protected final function request(string $method, string $uri, array $queryParams = null): RESTRequest
     {
-        return new RESTRequest($this, $method, $uri);
+        return new RESTRequest($this, $method, $uri, $queryParams);
     }
 
     /**
@@ -348,6 +349,9 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
                 }else if($value instanceof ExpectImageCollection) {
                     $this->recursiveAssertEquals([
                         'uid' => $this->expectString(),
+                        'is_auto_generated' => function($input) {
+                            $this->assertTrue(is_bool($input));
+                        },
                         'variants' => [
                             'default' => [
                                 'id' => 'default',

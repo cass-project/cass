@@ -1,0 +1,30 @@
+.card
+  .card-block
+    p.card-text
+      img.img-thumbnail.pull-left(
+        data-ssrc="/dist/assets/entity/profile/profile-default-avatar.png",
+        src="{{feedback.profile.entity.image.variants['64'].public_path}}"
+      )
+      i.fa.fa-fw.fa-quote-right.p-r-1(aria-hidden="true")
+      span {{feedback.description}}
+    p.card-text
+      //[routerLink]="['Feedback',{type: feedback.type}]"
+      a.label.label-default
+        | \#{{getFeedbackType(feedback.type)}}
+  .card-footer.text-muted
+    .controls.pull-right
+      a.card-link.text-muted(data-id="{{feedback.id}}",(click)="showModal()")
+        i.fa.fa-fw.fa-reply(aria-hidden="true")
+        span Reply
+      //a.card-link.text-warning.disabled((click)="archive()")
+        i.fa.fa-fw.fa-archive(aria-hidden="true")
+        span Archive
+      //a.card-link.text-danger.disabled((click)="ban()")
+        i.fa.fa-fw.fa-ban(aria-hidden="true")
+        span Ban user
+      .clearfix
+    i.fa.fa-fw.fa-calendar-o(aria-hidden="true")
+    small &nbsp;
+      | {{stringToDate(feedback.created_at) | date:"y"}}-{{stringToDate(feedback.created_at) | date:"MM"}}-{{stringToDate(feedback.created_at) | date:"dd"}},
+      | {{stringToDate(feedback.created_at) | date:"HH:mm:ss"}}
+  cass-feedback-modal([feedback]="feedback" #feedbackModal)

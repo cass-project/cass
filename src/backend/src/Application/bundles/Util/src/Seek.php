@@ -1,6 +1,8 @@
 <?php
 namespace Application\Util;
 
+use Application\Exception\SeekException;
+
 class Seek
 {
     /** @var int */
@@ -15,11 +17,11 @@ class Seek
     public function __construct(int $maxLimit, int $offset, int $limit)
     {
         if($limit > $maxLimit) {
-            throw new \OutOfBoundsException(sprintf('Max limit exceed, limit: %d, maxLimit: %d', $limit, $maxLimit));
+            throw new SeekException(sprintf('Max limit exceed, limit: %d, maxLimit: %d', $limit, $maxLimit));
         }
 
         if($offset < 0) {
-            throw new \Exception('Offset should me more than zero');
+            throw new SeekException('Offset should me more than zero');
         }
 
         $this->maxLimit = $maxLimit;

@@ -6,6 +6,7 @@ import {CollectionCreateMasterDemo} from "./demo/CollectionCreateMasterDemo/inde
 import {ProgressBarDemo} from "./demo/ProgressBarDemo/index";
 import {CommunitySettingsModalDemo} from "./demo/CommunitySettingsModalDemo/index";
 import {CollectionSettingsDemo} from "./demo/CollectionSettingsDemo/index";
+import {PostFormDemo} from "./demo/PostFormDemo/index";
 
 @Component({
     template: require('./template.jade'),
@@ -39,6 +40,11 @@ import {CollectionSettingsDemo} from "./demo/CollectionSettingsDemo/index";
         name: 'CollectionSettingsDemo',
         path: '/collection-settings-demo',
         component: CollectionSettingsDemo
+    },
+    {
+        name: 'PostFormDemo',
+        path: '/post-form-demo',
+        component: PostFormDemo
     }
 ])
 export class HtmlComponent

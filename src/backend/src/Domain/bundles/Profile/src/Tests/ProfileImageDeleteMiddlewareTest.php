@@ -31,7 +31,13 @@ class ProfileImageDeleteMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'image' => $this->expectImageCollection()
-            ]);
+            ])
+            ->expectJSONBody([
+                'image' => [
+                    'is_auto_generated' => false
+                ]
+            ])
+        ;
 
         $this->requestDeleteImage($profile->getId())
             ->execute()
@@ -53,9 +59,21 @@ class ProfileImageDeleteMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'profile' => [
-                    'image' => $this->expectImageCollection()
+                'entity' => [
+                    'profile' => [
+                        'image' => $this->expectImageCollection()
+                    ]
                 ]
-            ]);
+            ])
+            ->expectJSONBody([
+                'entity' => [
+                    'profile' => [
+                        'image' => [
+                            'is_auto_generated' => true
+                        ]
+                    ]
+                ]
+            ])
+        ;
     }
 }

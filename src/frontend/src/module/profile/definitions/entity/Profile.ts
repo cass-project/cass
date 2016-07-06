@@ -15,7 +15,7 @@ export const PROFILE_GENDER_LIST = [
 ];
 
 export interface ProfileExtendedEntity {
-    collection: CollectionEntity;
+    collections: CollectionEntity[];
     profile: ProfileEntity;
 }
 

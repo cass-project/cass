@@ -1,0 +1,113 @@
+@import "./../../../../../styles/globals";
+
+$HEADER_HEIGHT: 64px;
+
+article.component-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .profile-header-section {
+    display: flex;
+    align-items: center;
+  }
+
+  .profile-brand-container {
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+
+    .profile-image-container {
+      width: 48px;
+      height: 48px;
+    }
+
+    .profile-greetings {
+      font-family: $FONT_FAMILY;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: $HEADER_HEIGHT;
+      color: material-color("grey", "900");
+      margin-left: 15px;
+    }
+  }
+
+  .collection-list-container {
+    margin-left: 50px;
+
+    ul.collection-links {
+      border-radius: 7px;
+      overflow: hidden;
+      border: 1px solid material-color("grey", "400");
+
+      li {
+        display: inline-block;
+
+        a.collection-link {
+          display: inline-block;
+          font-family: $FONT_FAMILY;
+          font-size: 14px;
+          font-weight: 400;
+          color: material-color("grey", "900");
+          background-color: material-color("grey", "50");
+          border-right: 1px solid material-color("grey", "300");
+          text-decoration: none;
+          line-height: 30px;
+          padding: 0 10px;
+          transition: background-color 0.1s;
+
+          &:hover {
+            background-color: material-color("blue-grey", "50");
+          }
+        }
+
+        a.collection-link-icon {
+          background-color: material-color("blue-grey", "50");
+
+          &:hover {
+            background-color: material-color("blue-grey", "100");
+          }
+        }
+
+        a.collection-link-active {
+          color: material-color("blue-grey", "50");
+          background-color: material-color("blue-grey", "500");
+          border-right: 1px solid material-color("blue-grey", "500");
+        }
+
+        &:last-child {
+          a.collection-link {
+            border-right: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .profile-buttons-container {
+    ul.profile-buttons {
+      li {
+        display: block;
+
+        a.profile-button {
+          display: inline-block;
+          font-family: $FONT_FAMILY;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: $HEADER_HEIGHT;
+          color: material-color("grey", "600");
+          text-decoration: none;
+          transition: color 0.2s;
+
+          &:hover {
+            color: material-color("grey", "800");
+          }
+
+          span {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+}

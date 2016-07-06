@@ -1,0 +1,20 @@
+article.component.component-profile-card((click)="click()")
+  .card-content
+    .profile-image
+      .profile-image-container
+          cass-profile-image([url]="getProfileURL()", border = "circle")
+    .profile-about
+      h1.profile-greetings
+        span {{ getGreetings() }}
+      .profile-expert-in(*ngIf="hasAnyExperts()")
+        .profile-expert-in-title Эксперт в
+        ul.themes
+          li(*ngFor="#theme of expertIn")
+            a(href="javascript.void(0)")
+              span {{ theme.title }}
+      .profile-interesting-in(*ngIf="!hasAnyExperts() && hasAnyInterests()")
+        .profile-interesting-in-title Интересуется
+        ul.themes
+          li(*ngFor="#theme of expertIn")
+            a(href="javascript.void(0)")
+              span {{ theme.title }}

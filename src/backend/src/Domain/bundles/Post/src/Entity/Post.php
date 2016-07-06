@@ -5,6 +5,7 @@ use Application\Util\Entity\IdEntity\IdEntity;
 use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
 use Domain\Collection\Entity\Collection;
+use Domain\Post\PostType\PostType;
 use Domain\Profile\Entity\Profile;
 
 /**
@@ -14,6 +15,12 @@ use Domain\Profile\Entity\Profile;
 class Post implements IdEntity, JSONSerializable
 {
     use IdTrait;
+
+    /**
+     * @Column(type="integer", name="post_type")
+     * @var int
+     */
+    private $postTypeCode;
 
     /**
      * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
@@ -41,8 +48,9 @@ class Post implements IdEntity, JSONSerializable
      */
     private $content;
 
-    public function __construct(Profile $authorProfile, Collection $collection, string $content)
+    public function __construct(PostType $postType, Profile $authorProfile, Collection $collection, string $content)
     {
+        $this->postTypeCode = $postType->getIntCode();
         $this->authorProfile = $authorProfile;
         $this->collection = $collection;
         $this->content = $content;
@@ -53,11 +61,17 @@ class Post implements IdEntity, JSONSerializable
     {
         return [
             'id' => $this->getId(),
+            'post_type' => $this->postTypeCode,
             'date_created_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),
-            'author_profile_id' => $this->getAuthorProfile()->getId(),
+            'profile_id' => $this->getAuthorProfile()->getId(),
             'collection_id' => $this->getCollection()->getId(),
-            'content' => $this->getContent()
+            'content' => $this->getContent(),
         ];
+    }
+
+    public function getPostTypeCode(): int
+    {
+        return $this->postTypeCode;
     }
 
     public function getAuthorProfile(): Profile

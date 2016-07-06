@@ -1,5 +1,7 @@
-import {Component} from "angular2/core";
+import {Component, Injectable} from "angular2/core";
+
 import {ModalService} from "./service";
+import {AuthService} from "../../auth/service/AuthService";
 
 @Component({
     selector: 'cass-modal',
@@ -12,15 +14,10 @@ export class ModalComponent
 {
     private id = Math.random().toString(36).substring(7);
 
-    constructor(private service: ModalService) {
-    }
-
     ngOnInit() {
-        this.service.attach(this);
     }
 
     ngOnDestroy() {
-        this.service.detach(this);
     }
 
     public getId(): string {

@@ -6,5 +6,5 @@ info:
 securityDefinitions:
   x_api_key:
     type: apiKey
-    name: X-Api-Key
+    name: Authorization
     in: header

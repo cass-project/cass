@@ -4,13 +4,18 @@ import {Observable} from "rxjs/Observable";
 
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
+import {AuthToken} from "../../auth/service/AuthToken";
 
 @Injectable()
-export abstract class AbstractRESTService {
+export abstract class AbstractRESTService
+{
+    constructor(
+        protected http: Http,
+        protected token: AuthToken,
+        protected messages: MessageBusService
+    ) {}
 
-    constructor(protected  http: Http, protected messages: MessageBusService) {}
-
-    handle(request: Observable<Response>) {
+    handle(request) {
         let fork = request.publish().refCount();
 
         fork.catch(error => {
@@ -44,18 +49,9 @@ export abstract class AbstractRESTService {
             }
 
             return Observable.throw(response);
-        }).subscribe(
-            response => {
-                try {
-                    response.json();
-                } catch (error) {
-                    this.jsonParseError();
-                }
-            },
-            error => {}
-        );
+        });
 
-        return fork;
+        return fork.map(res => res.json());
     }
 
     private unknownError() {

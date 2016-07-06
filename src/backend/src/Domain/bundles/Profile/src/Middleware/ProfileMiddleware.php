@@ -51,6 +51,7 @@ class ProfileMiddleware implements MiddlewareInterface
         }catch(ProfileNotFoundException $e) {
             return $responseBuilder
                 ->setStatusNotFound()
+                ->setError($e)
                 ->build();
         }
     }

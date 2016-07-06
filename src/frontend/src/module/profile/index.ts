@@ -1,13 +1,16 @@
 import {Component} from "angular2/core";
 
-import {ProfileModal} from "./component/ProfileModal/index";
+import {ProfileModal} from "./component/Modals/ProfileModal/index";
 import {ModalComponent} from "../modal/component/index";
-import {ProfileSwitcher} from "./component/ProfileSwitcher/index";
+import {ProfileSwitcher} from "./component/Modals/ProfileSwitcher/index";
 import {ProfileSetup} from "./component/Modals/ProfileSetup/index";
 import {ModalBoxComponent} from "../modal/component/box/index";
-import {ModalControl} from "../util/classes/ModalControl";
 import {AuthService} from "../auth/service/AuthService";
-import {Profile, ProfileEntity} from "./definitions/entity/Profile";
+import {ProfileEntity} from "./definitions/entity/Profile";
+import {ProfileModals} from "./modals";
+import {ProfileInterestsModal} from "./component/Modals/ProfileInterests/index";
+import {MessageBusService} from "../message/service/MessageBusService/index";
+import {MessageBusNotificationsLevel} from "../message/component/MessageBusNotifications/model";
 
 @Component({
     selector: 'cass-profile',
@@ -17,32 +20,45 @@ import {Profile, ProfileEntity} from "./definitions/entity/Profile";
         ModalBoxComponent,
         ProfileModal,
         ProfileSwitcher,
+        ProfileInterestsModal,
         ProfileSetup
     ]
 })
 export class ProfileComponent
 {
-    public modals: {
-        setup: ModalControl,
-        settings: ModalControl,
-        switcher: ModalControl,
-    } = {
-        setup: new ModalControl(),
-        settings: new ModalControl(),
-        switcher: new ModalControl(),
-    };
-    
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private modals: ProfileModals, protected messages: MessageBusService) {}
 
+    closeModalSettings($event){
+        if($event){
+            this.modals.settings.close();
+        }
+    }
+    
+    closeModalInterests($event){
+        if($event){
+            this.modals.interests.close(); 
+        }
+    }
+    
+    successModalInteresrs($event){
+        if($event) {
+            this.messages.push(MessageBusNotificationsLevel.Info, 'Мы сохранили информацию о ваших интересах');
+            this.modals.interests.close();
+        }
+    }
+    
     isSetupRequired() {
         if(this.authService.isSignedIn()) {
-            return ! this.authService.getAuthToken().getCurrentProfile().entity.profile.is_initialized;
+            let testProfileIsInitialized = ! this.authService.getCurrentAccount().getCurrentProfile().entity.profile.is_initialized;
+            let testIsOpened = this.modals.setup.isOpened();
+
+            return testProfileIsInitialized || testIsOpened;
         }else{
             return false;
         }
     }
-    
+
     getCurrentProfile(): ProfileEntity {
-        return this.authService.getAuthToken().getCurrentProfile().entity.profile;
+        return this.authService.getCurrentAccount().getCurrentProfile().entity.profile;
     }
 }

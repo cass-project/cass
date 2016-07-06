@@ -9,13 +9,11 @@ class GetCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $postId = (int) $request->getAttribute('postId');
+        $post = $this->postService->getPostById($request->getAttribute('postId'));
 
         return $responseBuilder
             ->setStatusSuccess()
-            ->setJson([
-                'entity' => $this->postService->getPostById($postId)->toJSON()
-            ])
+            ->setJson($this->postFormatter->format($post))
             ->build();
     }
 }

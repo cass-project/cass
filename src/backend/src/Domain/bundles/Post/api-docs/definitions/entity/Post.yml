@@ -1,23 +1,37 @@
 Post_Entity_Post:
   required:
     - id
-    - author_profile_id
+    - post_type
+    - profile_id
     - date_created_on
     - collection_id
     - content
   properties:
     id:
       type: number
-      description: ID соообщения
-    author_profile_id:
+      description: ID поста
+    post_type:
+      type: object
+      description: Тип поста
+      schema:
+        required:
+          - int
+          - string
+        int:
+          type: number
+          description: Код (int)
+        string:
+          type: string
+          description: Код (string)
+    profile_id:
       type: number
-      description: ID профиля, создавшего сообщение
+      description: ID профиля, создавшего пост
     date_created_on:
       type: string
-      description: Дата создания сообщения
+      description: Дата создания поста
     collection_id:
       type: number
       description: ID коллекции, к которому относится пост
     content:
       type: string
-      description: Содержание сообщения
+      description: Содержание поста

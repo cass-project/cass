@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Feedback\Repository;
 
+use Application\Util\Seek;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Domain\Feedback\Entity\Feedback;
@@ -68,9 +69,10 @@ class FeedbackRepository extends EntityRepository
         ], null, $limit, $offset);
     }
 
-    public function getFeedbackEntities(int $profileId, array $options): array
+    public function getFeedbackEntities(array $options): array
     {
         $options = array_merge([
+            'profileId' => null,
             'seek' => [
                 'offset' => 0,
                 'limit' => self::DEFAULT_LIMIT
@@ -81,17 +83,26 @@ class FeedbackRepository extends EntityRepository
             ]
         ], $options);
 
-        $qb = $this->createQueryBuilder('f')
-            ->where(['f.profile' => $profileId]);
+        $seek = new Seek(self::MAX_LIMIT, $options['seek']['offset'], $options['seek']['limit']);
 
-        if($options['filter']['read'] !== null) {
-            $qb->where(['f.read' => $options['filter']['read']]);
+        $qb = $this->createQueryBuilder('f');
+        $qb->setFirstResult($seek->getOffset());
+        $qb->setMaxResults($seek->getLimit());
+
+        if($options['profileId']) {
+            $qb->andWhere($qb->expr()->eq('f.profile', (int) $options['profileId']));
         }
 
-        if($options['filter']['answer'] === true) {
-            $qb->where('f.response IS NOT NULL');
-        }else{
-            $qb->where('f.response IS NULL');
+        if(isset($options['filter']['read'])) {
+            $qb->andWhere($qb->expr()->eq('f.read', (int) $options['filter']['read']));
+        }
+
+        if(isset($options['filter']['answer'])) {
+            if($options['filter']['answer']) {
+                $qb->andWhere('f.response IS NOT NULL');
+            }else{
+                $qb->andWhere('f.response IS NULL');
+            }
         }
 
         return $qb->getQuery()->execute();

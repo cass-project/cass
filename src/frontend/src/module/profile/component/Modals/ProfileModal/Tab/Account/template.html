@@ -1,0 +1,55 @@
+<div class="profile-modal-tab-account form">
+  <header class="tab-modal-header">
+    <h1>Аккаунт</h1>
+  </header>
+  <div class="account-email">
+    <input type="email" disabled [value]="model.account.email" class="form-input account-email-input">
+    <ul class="email-info">
+      <li>К этому почтовому ящику привязан ваш аккаунт.</li>
+      <li>Вы можете сделать запрос на то, чтобы <a href="javascript:void(0);">привязать аккаунт к другому почтовому ящику</a>.</li>
+      <!--
+        Могли бы. Но мы это еще не реализовали.
+        Потому что мы стартап, а разработчиков всего две целых и примерно 0.25 сотых.
+      -->
+    </ul>
+  </div>
+  <div class="account-change-password">
+    <header class="tab-modal-header">
+      <h2>Сменить пароль</h2>
+    </header>
+    <div class="input-group">
+      <label class="form-label">
+        <span class="label-text">Текущий пароль</span>
+        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.password.old" type="password" placeholder="Пароль, который вы используете сейчас">
+      </label>
+    </div>
+    <div class="input-group">
+      <label class="form-label">
+        <span class="label-text">Новый пароль</span>
+        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.password.new" type="password" placeholder="*********">
+      </label>
+    </div>
+    <div class="input-group">
+      <label class="form-label">
+        <span class="label-text">Повторите пароль</span>
+        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.password.repeat" type="password" placeholder="Введите то же самое – мы защищаем вас от ошибок!">
+      </label>
+    </div>
+  </div>
+  <div class="account-managment">
+    <header class="tab-modal-header">
+      <h2>Действия</h2>
+    </header>
+    <button class="form-text-button" *ngIf="!isDeleteAccountRequested()" [disabled]="requestButtonDisabled" (click)="requestDeleteAccount()">
+      <i class="fa fa-fw fa-trash"></i>
+      <span>Я хочу удалить этот аккаунт</span>
+    </button>
+    <div *ngIf="isDeleteAccountRequested()">
+      <button class="form-button form-button-red" (click)="deleteAccount()">
+        <i class="fa fa-fw fa-trash"></i>
+        <span>Удалить мой аккаунт через 7 дней</span>
+      </button>
+      <button class="form-text-button" (click)="cancelDeleteAccountRequest()">Отмена</button>
+    </div>
+  </div>
+</div>

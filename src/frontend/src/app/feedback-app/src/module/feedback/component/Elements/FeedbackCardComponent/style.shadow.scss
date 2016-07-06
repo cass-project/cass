@@ -1,0 +1,32 @@
+.card {
+    img{
+        margin:0 .5em .5em 0;
+    }
+    
+    .controls {
+        display: none;
+    }
+    
+    &:hover .controls {
+        display: block;
+    }
+}
+
+.card-block {
+    animation: fadein 600ms;
+}
+
+
+.card{
+    animation: marginTop 300ms;
+}
+
+@keyframes fadein {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+@keyframes marginTop {
+    from {top:15px}
+    to {top:0}
+}

@@ -6,8 +6,12 @@ article.component.component-profile
   div(*ngIf="modals.settings.isOpened()")
     cass-modal
       cass-modal-box(width="760px")
-        cass-profile-settings
+        cass-profile-settings((close)='closeModalSettings($event)')
   div(*ngIf="modals.switcher.isOpened()")
     cass-modal
       cass-modal-box(width="360px")
         cass-profile-switcher
+  div(*ngIf="modals.interests.isOpened()")
+    cass-modal
+      cass-modal-box(width="550px")
+        cass-profile-interests-modal((close)='closeModalInterests($event)', (success)='successModalInteresrs($event)')

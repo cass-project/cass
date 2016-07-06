@@ -1,11 +1,15 @@
 Post_Request_CreatePost:
   type: object
   required:
+    - post_type
     - profile_id
     - collection_id
     - content
     - attachments
   properties:
+    post_type:
+      type: number
+      description: Тип поста
     profile_id:
       type: number
       description: ID профиля

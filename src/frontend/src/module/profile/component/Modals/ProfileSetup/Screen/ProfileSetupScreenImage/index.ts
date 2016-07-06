@@ -2,12 +2,13 @@ import {Component, Injectable, Output, EventEmitter} from "angular2/core";
 
 import {UploadImageService} from "../../../../../../form/component/UploadImage/service";
 import {UploadProfileImageStrategy} from "../../../../../util/UploadProfileImageStrategy";
-import {ProfileImage} from "../../../../ProfileImage/index";
+import {ProfileImage} from "../../../../Elements/ProfileImage/index";
 import {UploadImageModal} from "../../../../../../form/component/UploadImage/index";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {ModalControl} from "../../../../../../util/classes/ModalControl";
 import {ProfileSetupModel} from "../../model";
 import {DeleteProfileImageResponse200} from "../../../../../definitions/paths/image-delete";
+import {AuthToken} from "../../../../../../auth/service/AuthToken";
 
 @Component({
     selector: 'cass-profile-setup-screen-image',
@@ -36,9 +37,10 @@ export class ProfileSetupScreenImage
     constructor(
         private model: ProfileSetupModel,
         private uploadImageService: UploadImageService, 
-        private profileRESTService: ProfileRESTService
+        private profileRESTService: ProfileRESTService,
+        private authToken: AuthToken
     ) {
-        uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(model.getProfile().id));
+        uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(model.getProfile(), authToken.getAPIKey()));
     }
 
     next() {
@@ -62,7 +64,6 @@ export class ProfileSetupScreenImage
         
         this.profileRESTService
             .deleteAvatar(this.model.getProfile().id)
-            .map(res => res.json())
             .subscribe(
                 (response: DeleteProfileImageResponse200) => {
                     this.isDeleting = false;

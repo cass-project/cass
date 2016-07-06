@@ -45,12 +45,14 @@ sudo chown -R www-data /opt/mongo-express
 cd /opt/cass/src/backend/
 
 # Install composer.phar
-curl -sS https://getcomposer.org/installer | php
+cd /tmp
+sudo curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/bin/
 sudo chmod a+x /usr/bin/composer.phar
 sudo ln -s /usr/bin/composer.phar /usr/bin/composer
 
 # Install composer dependencies
+cd /opt/cass/src/backend/
 composer.phar install
 
 # error log

@@ -1,6 +1,9 @@
 @import "./../../globals";
 
-input.form-input {
+input.form-input, 
+textarea.form-input,
+select.form-input
+{
   color: #000;
   font-family: $FONT_FAMILY;
   font-size: $FONT_SIZE_NORMAL;
@@ -9,7 +12,9 @@ input.form-input {
 
 input[type="text"].form-input,
 input[type="password"].form-input,
-input[type="email"].form-input
+input[type="email"].form-input,
+textarea.form-input,
+select.form-input
 {
   display: block;
   width: 100%;
@@ -19,13 +24,16 @@ input[type="email"].form-input
   line-height: 26px;
   height: 30px;
   box-sizing: border-box;
-
-  &:focus {
-    border-bottom-color: material-color('light-blue', '400');
+  
+  &input:focus {
     border-width: 0 0 2px;
     padding-bottom: 0;
   }
-
+  
+  &:focus {
+    border-bottom-color: material-color('light-blue', '400');
+  }
+  
   &:disabled {
     color: material-color('grey', '400');
   }

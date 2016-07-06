@@ -2,6 +2,8 @@
   put:
     tags:
       - feedback
+    security:
+      - x_api_key: []
     description: Создать новый ответ на feedback
     parameters:
       - name: body
@@ -20,4 +22,7 @@
               type: boolean
               default: true
             entity:
-              $ref: '#/definitions/Feedback_Entity_FeedbackResponse'
+              $ref: '#/definitions/Feedback_Entity_Feedbackesponse'
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'

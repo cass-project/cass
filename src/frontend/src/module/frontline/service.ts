@@ -1,7 +1,9 @@
 import {FrontlineResponse200} from "./definitions/paths/frontline";
+import {Injectable} from "angular2/core";
 
 var merge = require('merge');
 
+@Injectable()
 export class FrontlineService
 {
     constructor(public session: FrontlineResponse200) {}
@@ -16,7 +18,7 @@ export function frontline(callback: { (session: FrontlineResponse200) }) {
     let apiKey = window.localStorage['api_key'];
 
     xhr.open('GET', '/backend/api/frontline/*/', true);
-    xhr.setRequestHeader('X-Api-Key', apiKey);
+    xhr.setRequestHeader('Authorization', apiKey);
     xhr.addEventListener("load", (event: Event) => {
         callback(JSON.parse(xhr.responseText));
     });

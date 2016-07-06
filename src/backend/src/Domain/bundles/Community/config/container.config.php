@@ -14,22 +14,6 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Memory\MemoryAdapter;
 
-$configDefault = [
-    'php-di' => [
-        CommunityService::class => object()
-            ->constructorParameter('imageFileSystem', factory(function(Container $container) {
-                return new Filesystem(new Local($container->get('config.paths.community.avatar.dir')));
-            })),
-    ]
-];
-$configMock = [
-    'php-di' => [
-        CommunityService::class => object()
-            ->constructorParameter('imageFileSystem', factory(function(Container $container) {
-                return new Filesystem(new MemoryAdapter($container->get('config.paths.community.avatar.dir')));
-            })),
-    ]
-];
 
 return [
     'php-di' => [
@@ -37,11 +21,15 @@ return [
             return sprintf('%s/entity/community/by-sid/avatar/', $container->get('config.paths.assets.dir'));
         }),
         CommunityRepository::class => factory(new DoctrineRepositoryFactory(Community::class)),
+        CommunityService::class => object()
+            ->constructorParameter('imageFileSystem', factory(function(Container $container) {
+                $env = $container->get('config.env');
+
+                if($env === 'test') {
+                    return new Filesystem(new MemoryAdapter($container->get('config.paths.community.avatar.dir')));
+                }else{
+                    return new Filesystem(new Local($container->get('config.paths.community.avatar.dir')));
+                }
+            })),
     ],
-    'env' => [
-        'production' => $configDefault,
-        'development' => $configDefault,
-        'stage' => $configDefault,
-        'test' => $configMock,
-    ]
 ];

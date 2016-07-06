@@ -2,6 +2,7 @@
 namespace Domain\Feed\Middleware;
 
 use Application\REST\Response\GenericResponseBuilder;
+use Domain\Community\Exception\CommunityNotFoundException;
 use Domain\Feed\Feed\ResultSet;
 use Domain\Feed\Feed\Source;
 use Domain\Feed\Service\FeedSourcesService;
@@ -25,27 +26,36 @@ class FeedMiddleware implements MiddlewareInterface
     }
 
     public function __invoke(Request $request, Response $response, callable $out = null) {
-        $responseBuilder = new GenericResponseBuilder($response);
 
-        $feedRequest = new FeedRequest($request);
+        try{
+            $responseBuilder = new GenericResponseBuilder($response);
 
-        $criteria = $feedRequest->getCriteriaRequest();
-        $source = $this->sourceFactory($request);
-        $query = $source->createQuery($criteria);
-        $result = $query->execute();
+            $feedRequest = new FeedRequest($request);
 
-        if($result instanceof ResultSet) {
-            $formatter = $this->feedSourcesService->getResultSetFormatter();
-            $responseBuilder->setJson($formatter->toJSON($result));
-        }else if(is_array($result)) {
-            $responseBuilder->setJson($result);
-        }else{
-            throw new \Exception('Unknown result format');
+            $criteria = $feedRequest->getCriteriaRequest();
+            $source = $this->sourceFactory($request);
+            $query = $source->createQuery($criteria);
+            $result = $query->execute();
+
+            if($result instanceof ResultSet) {
+                $formatter = $this->feedSourcesService->getResultSetFormatter();
+
+                $responseBuilder->setJson($formatter->toJSON($result));
+
+            }else if(is_array($result)) {
+                $responseBuilder->setJson($result);
+            }else{
+                throw new \Exception('Unknown result format');
+            }
+
+            $responseBuilder->setStatusSuccess();
+            return $responseBuilder->build();
+        }catch (CommunityNotFoundException $e){
+            $responseBuilder
+                ->setStatusNotFound()
+                ->setError($e->getMessage());
+            return $responseBuilder->build();
         }
-
-        $responseBuilder->setStatusSuccess();
-
-        return $responseBuilder->build();
     }
     
     private function sourceFactory(ServerRequestInterface $request): Source {

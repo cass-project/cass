@@ -34,6 +34,12 @@ class RESTRequest
     private $parameters;
 
     /**
+     * Параметры (QueryParams) запроса
+     * @var array|null
+     */
+    private $queryParams;
+
+    /**
      * Загружаемые/прикрепляемые файлы
      * Содержат массив из [name] => new UploadedFile(..)
      * @var array|null
@@ -47,16 +53,17 @@ class RESTRequest
     private $addedHeaders;
 
     /**
-     * Если не NULL, то к запросу добавляется хидер X-Api-Key
+     * Если не NULL, то к запросу добавляется хидер Authorization
      * @var string|null
      */
     private $xApiKey;
 
-    public function __construct(MiddlewareTestCase $unitTest, string $method, string $uri)
+    public function __construct(MiddlewareTestCase $unitTest, string $method, string $uri, array $queryParams = null)
     {
         $this->unitTest = $unitTest;
         $this->method = $method;
         $this->uri = $uri;
+        $this->queryParams = $queryParams;
     }
 
     public function execute(): MiddlewareTestCase
@@ -81,8 +88,12 @@ class RESTRequest
             }
         }
 
+        if($this->queryParams) {
+            $request = $request->withQueryParams($this->queryParams);
+        }
+
         if($this->xApiKey) {
-            $request = $request->withHeader('X-Api-Key', $this->xApiKey);
+            $request = $request->withHeader('Authorization', $this->xApiKey);
         }
 
         ob_start();

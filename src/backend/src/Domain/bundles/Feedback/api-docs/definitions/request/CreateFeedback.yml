@@ -7,6 +7,9 @@ Feedback_Request_CreateFeedback:
     profile_id:
       type: number
       description: ID профиля
+    email:
+      type: string
+      description: EMail. Указывается в случае анонимных фидбэков.
     type_feedback:
       type: number
       description: Тип фидбэка

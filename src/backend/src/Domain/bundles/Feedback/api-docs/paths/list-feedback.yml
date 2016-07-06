@@ -16,6 +16,10 @@
         in: path
         required: true
         description: limit
+      - name: profileId
+        type: number
+        in: query
+        description: ID профиля, чьи фидбеки получать.
       - name: read
         type: boolean
         in: query
@@ -39,3 +43,6 @@
           required:
             - success
             - entities
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'

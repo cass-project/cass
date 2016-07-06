@@ -1,6 +1,8 @@
 <?php
 namespace Domain\Account\Service;
 
+use Application\Service\EventEmitterAware\EventEmitterAwareService;
+use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
 use Domain\Account\Entity\Account;
 use Domain\Account\Entity\OAuthAccount;
 use Domain\Account\Exception\AccountHasDeleteRequestException;
@@ -13,19 +15,20 @@ use Domain\Auth\Service\PasswordVerifyService;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
 use Application\Util\GenerateRandomString;
+use Domain\Profile\Repository\ProfileRepository;
 use Domain\Profile\Service\ProfileService;
-use Evenement\EventEmitter;
-use Evenement\EventEmitterInterface;
 
-final class AccountService
+final class AccountService implements EventEmitterAwareService
 {
     const EVENT_ACCOUNT_CREATED = 'domain.account.created';
 
-    /** @var EventEmitterInterface */
-    private $events;
+    use EventEmitterAwareTrait;
 
     /** @var AccountRepository */
     private $accountRepository;
+
+    /** @var ProfileRepository */
+    private $profileRepository;
 
     /** @var ProfileService */
     private $profileService;
@@ -38,6 +41,7 @@ final class AccountService
 
     public function __construct(
         AccountRepository $accountRepository,
+        ProfileRepository $profileRepository,
         ProfileService $profileService,
         OAuthAccountRepository $oauthAccountRepository,
         PasswordVerifyService $passwordVerifyService
@@ -45,16 +49,11 @@ final class AccountService
     {
         $profileService->worksWithAccountService($this);
 
-        $this->events = new EventEmitter();
         $this->accountRepository = $accountRepository;
+        $this->profileRepository = $profileRepository;
         $this->profileService = $profileService;
         $this->oauthAccountRepository = $oauthAccountRepository;
         $this->passwordVerifyService = $passwordVerifyService;
-    }
-
-    public function getEventEmitter(): EventEmitterInterface
-    {
-        return $this->events;
     }
 
     public function createAccount($email, $password = null): Account
@@ -65,7 +64,7 @@ final class AccountService
             ->setPassword($this->passwordVerifyService->generatePassword($password));
         
         $this->accountRepository->createAccount($account);
-        $this->events->emit(self::EVENT_ACCOUNT_CREATED, [$account]);
+        $this->getEventEmitter()->emit(self::EVENT_ACCOUNT_CREATED, [$account]);
         
         $this->profileService->createProfileForAccount($account);
         $this->accountRepository->saveAccount($account);
@@ -88,27 +87,6 @@ final class AccountService
         $this->accountRepository->createOAuth2Account($oauthAccount);
 
         return $account;
-    }
-
-    public function switchTo(Account $account, Profile $switchToProfile): Profile
-    {
-        if (!$account->getProfiles()->contains($switchToProfile)) {
-            throw new AccountNotContainsProfileException(sprintf(
-                'Account (ID: %s) does\'nt contains profile (ID: %s)',
-                $account->isPersisted() ? $account->getId() : '#NEW_ACCOUNT',
-                $switchToProfile->isPersisted() ? $switchToProfile->getId() : '#NEW_PROFILE'
-            ));
-        }
-
-        $account->getProfiles()->forAll(function (Profile $profile) use ($switchToProfile) {
-            $profile === $switchToProfile
-                ? $profile->setAsCurrent()
-                : $profile->unsetAsCurrent();
-        });
-
-        $this->accountRepository->saveAccount($account);
-
-        return $switchToProfile;
     }
 
     public function requestDelete(Account $account): Account
@@ -172,6 +150,11 @@ final class AccountService
         });
 
         $this->accountRepository->saveAccount($account);
+
+        array_map(function(Profile $profile) {
+            $this->profileRepository->saveProfile($profile);
+        }, $account->getProfiles()->toArray());
+
 
         return $account;
     }
