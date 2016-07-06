@@ -20,7 +20,7 @@ div.component-upload-image-modal {
       text-align: center;
       border: 1px dashed material-color("grey", "400");
       border-radius: 3px;
-      line-height: $PREVIEW_SIZE + $FOOTER_HEIGHT - 20px;
+      line-height: $PREVIEW_SIZE - 20px;
       margin: 10px;
       box-sizing: border-box;
 

@@ -1,5 +1,3 @@
-import {Injectable} from "angular2/core";
-
 import {UploadImageStrategy, UploadImageCropModel} from "../../form/component/UploadImage/strategy";
 import {UploadImageModal} from "../../form/component/UploadImage/index";
 import {ProfileEntity} from "../definitions/entity/Profile";
@@ -72,7 +70,7 @@ export class UploadProfileImageStrategy implements UploadImageStrategy
         this.xhrRequest.onreadystatechange = () => {
             if (this.xhrRequest.readyState === 4) {
                 modal.progress.complete();
-                modal.complete();
+                modal.close();
                 let response: UploadProfileImageResponse200 = JSON.parse(this.xhrRequest.responseText);
                 this.profile.image = response.image;
             }
