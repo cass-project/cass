@@ -56,7 +56,7 @@ export class ProfileRESTService extends AbstractRESTService
         return this.handle(this.http.post(`/backend/api/protected/profile/${profileId}/set-gender/`, JSON.stringify(request), {headers: authHeader}));
     }
 
-    setInterestingIn(profileId: number, request: ExpertInRequest) {
+    setInterestingIn(profileId: number, request) {
         let authHeader = new Headers();
 
         if(this.token.hasToken()){
@@ -66,7 +66,7 @@ export class ProfileRESTService extends AbstractRESTService
         return this.handle(this.http.put(`/backend/api/protected/profile/${profileId}/interesting-in/`, JSON.stringify(request), {headers: authHeader}));
     }
 
-    setExpertIn(profileId: number, request: ExpertInRequest) {
+    setExpertIn(profileId: number, request) {
         let authHeader = new Headers();
 
         if(this.token.hasToken()){
