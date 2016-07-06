@@ -19,6 +19,6 @@
     </div>
   </div>
   <div *ngIf="upload.isOpened()">
-    <cass-upload-image-modal (close)='upload.close()' (complete)='upload.close()'></cass-upload-image-modal>
+    <cass-upload-image-modal (close)='upload.close()' (keyup.esc)="upload.close()"></cass-upload-image-modal>
   </div>
 </div>
