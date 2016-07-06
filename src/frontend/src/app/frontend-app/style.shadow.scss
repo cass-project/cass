@@ -10,14 +10,17 @@ main.component.component-frontend-app {
     display: block;
     position: absolute;
     top: 0; height: 100%;
-    left: 0; width: $CASS_SIDEBAR_ICON_SIZE;
+    left: 0; width: $CASS_SIDEBAR_WIDTH;
+    z-index: 300;
+    @include card(3);
   }
 
   >.content {
     display: block;
     position: absolute;
     top: 0; height: 100%;
-    left: $CASS_SIDEBAR_ICON_SIZE + 20px; right: 0;
+    left: $CASS_SIDEBAR_WIDTH; right: 0;
+    z-index: 299;
     overflow: auto;
   }
 }
