@@ -1,7 +1,10 @@
 .container-fluid
   .row.row-offcanvas.row-offcanvas-left
     .col-md-3.col-lg-2.sidebar-offcanvas.p-l-0(role='navigation')
-      cass-feedback-landing-sidebar
+      cass-feedback-landing-sidebar(
+        [loading]="isLoading", 
+        (onfilter)="filter()"
+      )
     .col-md-9.col-lg-10.main
       cass-feedback-landing-sidebar-toggler
 
