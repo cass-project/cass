@@ -5,6 +5,7 @@ import {CollectionsList} from "../../../collection/component/Elements/Collection
 import {ProfileRouteService} from "../ProfileRoute/service";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
+import {PostForm} from "../../../post/component/Forms/PostForm/index";
 
 @Component({
     template: require('./template.jade'),
@@ -14,6 +15,7 @@ import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
     directives: [
         ROUTER_DIRECTIVES,
         CollectionsList,
+        PostForm
     ]
 })
 export class ProfileCollectionRoute
