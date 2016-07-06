@@ -15,7 +15,12 @@
           $ref: '#/definitions/Post_Request_CreatePost'
     responses:
       403:
-        $ref: '#/responses/Unauthorized'
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        description: Профиль/коллекция не найдены
+        schema:
+          $ref: '#/responses/Unauthorized'
       200:
         schema:
           required:

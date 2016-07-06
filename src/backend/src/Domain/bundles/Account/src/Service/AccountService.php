@@ -153,7 +153,6 @@ final class AccountService implements EventEmitterAwareService
 
         array_map(function(Profile $profile) {
             $this->profileRepository->saveProfile($profile);
-            var_dump($profile->isCurrent());
         }, $account->getProfiles()->toArray());
 
 

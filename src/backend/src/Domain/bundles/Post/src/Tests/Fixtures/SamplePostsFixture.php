@@ -3,9 +3,11 @@ namespace Domain\Post\Tests\Fixtures;
 
 use Application\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
+use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
 use Domain\Post\Entity\Post;
 use Domain\Post\Parameters\CreatePostParameters;
+use Domain\Post\PostType\Types\DefaultPostType;
 use Domain\Post\Service\PostService;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Zend\Expressive\Application;
@@ -22,14 +24,14 @@ class SamplePostsFixture implements Fixture
 
     public function up(Application $app, EntityManager $em)
     {
-        $postService = $app->getContainer()->get(PostService::class);
+        $postService = $app->getContainer()->get(PostService::class); /** @var PostService $postService */
 
-        for($i = 0; $i < 10; $i++)
-        {
+        for($i = 0; $i < 10; $i++) {
             self::$posts[$i] = $postService->createPost(new CreatePostParameters(
-                DemoProfileFixture::getProfile()->getId(),
+                DefaultPostType::CODE_INT,
+                DemoAccountFixture::getAccount()->getCurrentProfile()->getId(),
                 SampleCollectionsFixture::getProfileCollection(1)->getId(),
-                'Demo post content',
+                'Demo Post Content',
                 [],
                 []
             ));

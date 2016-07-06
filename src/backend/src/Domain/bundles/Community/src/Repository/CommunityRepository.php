@@ -51,31 +51,7 @@ class CommunityRepository extends EntityRepository
         $this->getEntityManager()->remove($community);
         $this->getEntityManager()->flush($community);
     }
-
-    public function linkCollection(int $communityId, int $collectionId): Community
-    {
-        $community = $this->getCommunityById($communityId);
-        $collections = $community->getCollections();
-
-        if(!$collections->hasCollection($collectionId)) {
-            $community->getCollections()->attachChild($collectionId);
-        }
-
-        return $this->saveCommunity($community);
-    }
-
-    public function unlinkCollection(int $communityId, int $collectionId): Community
-    {
-        $community = $this->getCommunityById($communityId);
-        $collections = $community->getCollections();
-
-        if($collections->hasCollection($collectionId)) {
-            $collections->detachChild($collectionId);
-        }
-
-        return $this->saveCommunity($community);
-    }
-
+    
     public function activateFeature(Community $community, string $featureCode)
     {
         $community->getFeatures()->includeFeature($featureCode);

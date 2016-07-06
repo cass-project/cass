@@ -9,6 +9,7 @@ use Domain\Feed\Feed\Criteria\SeekCriteria;
 use Domain\Feed\Feed\CriteriaRequest;
 use Domain\Post\Entity\Post;
 use Domain\Post\Exception\PostNotFoundException;
+use Domain\Post\PostType\Types\DefaultPostType;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Profile\Exception\ProfileNotFoundException;
@@ -26,7 +27,7 @@ class PostRepository extends EntityRepository
         $collection = $em->getRepository(Collection::class)->find($collectionId);/** @var Collection $collection */
         if(is_null($collection)) throw new CollectionNotFoundException("Collection {$collectionId} not found");
 
-        $post = new Post($authorProfile, $collection, $content);
+        $post = new Post(new DefaultPostType(), $authorProfile, $collection, $content);
 
         $em->persist($post);
         $em->flush($post);

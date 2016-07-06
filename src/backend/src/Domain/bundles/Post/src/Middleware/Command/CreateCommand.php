@@ -17,7 +17,7 @@ class CreateCommand extends Command
         return $responseBuilder
             ->setStatusSuccess()
             ->setJson([
-                'entity' => $post->toJSON()
+                'entity' => $this->postFormatter->format($post),
             ])
             ->build();
     }
