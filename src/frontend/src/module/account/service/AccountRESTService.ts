@@ -24,10 +24,15 @@ export class AccountRESTService extends AbstractRESTService
     }
 
     changePassword(old_password: string, new_password: string) {
+        let authHeader = new Headers();
+        if(this.token.hasToken()) {
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
         return this.handle(this.http.post('/backend/api/protected/account/change-password', JSON.stringify({
             old_password: old_password,
             new_password: new_password
-        })));
+        }), {headers: authHeader}));
     }
 
     getCurrentAccount() {
