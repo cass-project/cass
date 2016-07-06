@@ -7,14 +7,17 @@ use Application\Util\JSONSerializable;
 use Domain\Collection\Entity\Collection;
 use Domain\Post\PostType\PostType;
 use Domain\Profile\Entity\Profile;
+use Domain\Theme\Strategy\ThemeIdsEntityAware;
+use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
 
 /**
  * @Entity(repositoryClass="Domain\Post\Repository\PostRepository")
  * @Table(name="post")
  */
-class Post implements IdEntity, JSONSerializable
+class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware
 {
     use IdTrait;
+    use ThemeIdsAwareEntityTrait;
 
     /**
      * @Column(type="integer", name="post_type")
@@ -66,6 +69,7 @@ class Post implements IdEntity, JSONSerializable
             'profile_id' => $this->getAuthorProfile()->getId(),
             'collection_id' => $this->getCollection()->getId(),
             'content' => $this->getContent(),
+            'theme_ids' => $this->getThemeIds()
         ];
     }
 

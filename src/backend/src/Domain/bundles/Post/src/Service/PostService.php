@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Post\Service;
 
+use Application\Exception\NotImplementedException;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Post\Entity\Post;
 use Domain\Post\Parameters\CreatePostParameters;
@@ -29,38 +30,23 @@ class PostService
         $this->postRepository = $postRepository;
     }
 
-
-    public function createPost(CreatePostParameters $createPostParameters): Post {
-        $attachmentIds = $createPostParameters->getAttachmentIds();
-
-        $post = $this->postRepository->createPost(
-            $createPostParameters->getProfileId(),
-            $createPostParameters->getCollectionId(),
-            $createPostParameters->getContent()
-        );
-        
-        foreach($createPostParameters->getLinks() as $link) {
-            $attachmentIds[] = $this->postAttachmentService->createLinkAttachment($post, $link->getUrl(), $link->getMetadata())->getId();
-        }
-
-        $this->postAttachmentService->setAttachments($post, $attachmentIds);
-        
-        return $post;
+    public function createPost(CreatePostParameters $createPostParameters): Post
+    {
+        throw new NotImplementedException;
     }
 
-    public function editPost(EditPostParameters $editPostParameters): Post {
-        return $this->postRepository->editPost(
-            $editPostParameters->getPostId(),
-            $editPostParameters->getCollectionId(),
-            $editPostParameters->getContent()
-        );
+    public function editPost(EditPostParameters $editPostParameters): Post
+    {
+        throw new NotImplementedException;
     }
 
-    public function deletePost(int $postId) {
-        $this->postRepository->deletePost($postId);
+    public function deletePost(int $postId)
+    {
+        throw new NotImplementedException;
     }
 
-    public function getPostById(int $postId): Post {
+    public function getPostById(int $postId): Post
+    {
         return $this->postRepository->getPost($postId);
     }
 }
