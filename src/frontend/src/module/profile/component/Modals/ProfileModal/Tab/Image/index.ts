@@ -54,14 +54,16 @@ export class ImageTab
         let profileId = this.authService.getCurrentAccount().getCurrentProfile().entity.profile.id;
         
         this.profileRESTService.deleteAvatar(profileId).subscribe(data => {
-            this.authService.getCurrentAccount().getCurrentProfile().entity.profile.image = {
+            console.log(data);
+            /*this.authService.getCurrentAccount().getCurrentProfile().entity.profile.image = {
+                "is_auto_generated": true,
                 "variants": {
                     "default": {
                         "id": 'default',
                         "public_path": '/public/assets/profile-default.png'
                     }
                 }
-            };
+            };*/
             this.deleteProcessVisible = false;
         });
     }
