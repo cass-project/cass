@@ -9,7 +9,6 @@ article.component-public-criteria-query-string {
     }
 
     .flex-container-section-submit {
-
     }
   }
 
@@ -26,4 +25,9 @@ article.component-public-criteria-query-string {
     outline: 0;
   }
 
+  .search-submit-button {
+    i.fa {
+      margin-right: 5px;
+    }
+  }
 }

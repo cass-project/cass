@@ -13,6 +13,7 @@ select.form-input
 input[type="text"].form-input,
 input[type="password"].form-input,
 input[type="email"].form-input,
+input[type="search"].form-input,
 textarea.form-input,
 select.form-input
 {
@@ -42,6 +43,9 @@ select.form-input
 input[type="text"],
 input[type="password"],
 input[type="email"]
+input[type="search"].form-input,
+textarea.form-input,
+select.form-input
 {
   &.ng-invalid + &.ng-touched {
     border-bottom-color: material-color('red', 'a700')!important;

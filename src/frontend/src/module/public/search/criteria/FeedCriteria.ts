@@ -3,14 +3,15 @@ import {Criteria} from "../Criteria";
 export enum FeedCriteriaValue {
     people = <any>"people",
     expert = <any>"expert",
-    post = <any>"post",
+    content = <any>"content",
+    discussion = <any>"discussion",
     collection = <any>"collection",
     community = <any>"community"
 }
 
 export class FeedCriteria implements Criteria
 {
-    static DEFAULT_VALUE = FeedCriteriaValue.post;
+    static DEFAULT_VALUE = FeedCriteriaValue.content;
 
     private feed: FeedCriteriaValue = FeedCriteria.DEFAULT_VALUE;
     

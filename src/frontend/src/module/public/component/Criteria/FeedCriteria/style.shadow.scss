@@ -47,8 +47,9 @@ article.component.component-public-feed-criteria {
 
     .feed-type-people { @include feed-type-button-active("green", "50", "500", "600"); }
     .feed-type-expert { @include feed-type-button-active("teal", "50", "500", "600"); }
-    .feed-type-post { @include feed-type-button-active("deep-orange", "50", "500", "600"); }
-    .feed-type-collection { @include feed-type-button-active("light-blue", "50", "500", "600"); }
+    .feed-type-content { @include feed-type-button-active("light-blue", "50", "500", "600"); }
+    .feed-type-discussion { @include feed-type-button-active("blue", "50", "500", "600"); }
+    .feed-type-collection { @include feed-type-button-active("amber", "50", "500", "600"); }
     .feed-type-community { @include feed-type-button-active("red", "50", "500", "600"); }
   }
 }

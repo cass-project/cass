@@ -1,1 +1,26 @@
 article.component.component-public-criteria-theme
+  .flex-section.flex-section-themes
+    header.theme-root
+      .back-button-container
+        button.back-button(*ngIf="hasBack()", (click)="back()")
+          i.fa.fa-angle-left
+      h1.theme-root {{ getTitle() }}
+    ul.theme-lists
+      li(*ngFor="#theme of getRoot().children")
+        a.theme-link(
+          href="javascript:void(0)",
+          (click)="selectRoot(theme)",
+          [ngClass]="{'theme-link-active': isSelected(theme.id)}"
+        )
+          span.title {{ theme.title }}
+  .flex-section
+    footer.search-box
+      .search-box-flex-container
+        .search-box-section-input
+          input.form-input(
+            type="search",
+            placeholder="Найти тематику..."
+          )
+        .search-box-section-icon
+          button.search-button(type="submit")
+            i.fa.fa-search

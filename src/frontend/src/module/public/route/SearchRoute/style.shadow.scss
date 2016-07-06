@@ -7,8 +7,9 @@ article.component-profile-search-route {
   left: 0; width: 100%;
 
   .theme-panel {
-    width: 300px;
-    background-color: material-color("grey", "800");
+    position: relative;
+    width: 250px;
+    min-width: 250px;
   }
 
   .content-area {
@@ -18,7 +19,9 @@ article.component-profile-search-route {
   }
 
   .theme-criteria-container {
-
+    position: absolute;
+    top: 0; height: 100%;
+    left: 0; width: 100%;
   }
 
   .general-criteria {
@@ -33,7 +36,6 @@ article.component-profile-search-route {
 
   .search-results {
     .seek-criteria-conteiner {
-
     }
   }
 }
