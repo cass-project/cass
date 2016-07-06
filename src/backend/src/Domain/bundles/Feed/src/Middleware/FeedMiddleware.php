@@ -6,6 +6,7 @@ use Domain\Community\Exception\CommunityNotFoundException;
 use Domain\Feed\Feed\ResultSet;
 use Domain\Feed\Feed\Source;
 use Domain\Feed\Service\FeedSourcesService;
+use Domain\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ServerRequestInterface;
@@ -51,6 +52,11 @@ class FeedMiddleware implements MiddlewareInterface
             $responseBuilder->setStatusSuccess();
             return $responseBuilder->build();
         }catch (CommunityNotFoundException $e){
+            $responseBuilder
+                ->setStatusNotFound()
+                ->setError($e->getMessage());
+            return $responseBuilder->build();
+        }catch (ProfileNotFoundException $e){
             $responseBuilder
                 ->setStatusNotFound()
                 ->setError($e->getMessage());

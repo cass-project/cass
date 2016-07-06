@@ -106,7 +106,15 @@ class PostRepository extends EntityRepository
 
     public function getProfileFeed(int $profileId, CriteriaRequest $criteriaRequest)
     {
+        $profile = $this->getEntityManager()->getRepository(Profile::class)->find($profileId);
+        if(is_null($profile)) throw new ProfileNotFoundException();
 
+        list($limit, $offset) = $criteriaRequest->doWith(SeekCriteria::class, function(SeekCriteria $seekCriteria) {
+            return [$seekCriteria->getLimit(), $seekCriteria->getOffset()];
+        });
+
+        $qbCriteria = [ 'authorProfile' => $profileId ];
+        return $this->findBy($qbCriteria, ['id'=>'desc'], $limit, $offset);
     }
 
     public function getFeedTotal(int $collectionId, CriteriaRequest $criteriaRequest): int {
@@ -125,8 +133,19 @@ class PostRepository extends EntityRepository
         return count($this->getCommunityFeed($communityId,$criteriaRequest)) ;
     }
 
-    public function getProfileFeedTotal(int $communityId, CriteriaRequest $criteriaRequest)
+    public function getProfileFeedTotal(int $profileId, CriteriaRequest $criteriaRequest)
     {
+        $profile = $this->getEntityManager()->getRepository(Profile::class)->find($profileId);
+        if(is_null($profile)) throw new ProfileNotFoundException();
 
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder()
+                 ->select('count(p.id) as cnt')
+                 ->from(Post::class, 'p')
+                 ->where('p.authorProfile=:profileId')
+                 ->setParameter('profileId', $profileId)
+        ;
+
+        return (int) $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
     }
 }

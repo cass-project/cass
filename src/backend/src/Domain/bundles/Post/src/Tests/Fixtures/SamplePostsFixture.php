@@ -26,7 +26,7 @@ class SamplePostsFixture implements Fixture
     {
         $postService = $app->getContainer()->get(PostService::class); /** @var PostService $postService */
 
-        for($i = 0; $i < 10; $i++) {
+        for($i = 0; $i < 20; $i++) {
             self::$posts[$i] = $postService->createPost(new CreatePostParameters(
                 DefaultPostType::CODE_INT,
                 DemoAccountFixture::getAccount()->getCurrentProfile()->getId(),
