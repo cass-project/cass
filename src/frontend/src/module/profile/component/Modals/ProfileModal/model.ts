@@ -51,29 +51,12 @@ export class ProfileModalModel
     performSaveChanges(){
         this.loading = true;
 
-        let personalRequest = {
-            gender: this.profile.gender.string,
-            avatar: false,
-            method: this.profile.greetings.method,
-            last_name: this.profile.greetings.last_name,
-            first_name: this.profile.greetings.first_name,
-            middle_name: this.profile.greetings.middle_name,
-            nick_name: this.profile.greetings.nick_name
-        };
-
-        let requests = {
-            account: this.accountRESTService.changePassword(this.password.old, this.password.new),
-            expert_in:  this.profileRESTService.setExpertIn(this.getProfileOriginal().id, this.profile.expert_in_ids),
-            interests_in: this.profileRESTService.setInterestingIn(this.getProfileOriginal().id, this.profile.interesting_in_ids),
-            personal: this.profileRESTService.editPersonal(this.getProfileOriginal().id, personalRequest)
-        };
-
         let observableRequest = [];
 
         if(this.checkAccountChanges()){
-            observableRequest.push(requests.account);
+            observableRequest.push(this.accountRESTService.changePassword(this.password.old, this.password.new));
 
-            requests.account.subscribe(data => {
+            this.accountRESTService.changePassword(this.password.old, this.password.new).subscribe(data => {
                 this.password = {
                     old: '',
                     new: '',
@@ -82,29 +65,47 @@ export class ProfileModalModel
         }
 
         if(this.checkExpertListChanges()){
-            observableRequest.push(requests.expert_in);
+            let expertRequest = {
+                theme_ids: this.profile.expert_in_ids
+            };
 
-            requests.expert_in.subscribe(data => {
+            observableRequest.push(this.profileRESTService.setExpertIn(this.getProfileOriginal().id, expertRequest));
+
+            this.profileRESTService.setExpertIn(this.getProfileOriginal().id, expertRequest).subscribe(data => {
                 this.getProfileOriginal().expert_in_ids = this.profile.expert_in_ids.splice(0);
             }, error => {});
         }
 
         if(this.checkInterestListChanges()){
-            observableRequest.push(requests.interests_in);
+            let interestingRequest = {
+                theme_ids: this.profile.interesting_in_ids
+            };
 
-            requests.interests_in.subscribe(data => {
+            observableRequest.push(this.profileRESTService.setInterestingIn(this.getProfileOriginal().id, interestingRequest));
+
+            this.profileRESTService.setInterestingIn(this.getProfileOriginal().id, interestingRequest).subscribe(data => {
                 this.getProfileOriginal().interesting_in_ids = this.profile.interesting_in_ids.splice(0);
             }, error => {});
         }
 
         if(this.checkPersonalChanges()){
-            observableRequest.push(requests.personal);
+            let personalRequest = {
+                gender: this.profile.gender.string,
+                avatar: false,
+                method: this.profile.greetings.method,
+                last_name: this.profile.greetings.last_name,
+                first_name: this.profile.greetings.first_name,
+                middle_name: this.profile.greetings.middle_name,
+                nick_name: this.profile.greetings.nick_name
+            };
+
+            observableRequest.push(this.profileRESTService.editPersonal(this.getProfileOriginal().id, personalRequest));
 
             if(this.profile.greetings.method !== this.getProfileOriginal().greetings.method){
                 personalRequest.avatar = true;
             }
 
-            requests.personal.subscribe(data => {
+            this.profileRESTService.editPersonal(this.getProfileOriginal().id, personalRequest).subscribe(data => {
                 this.getProfileOriginal().greetings = JSON.parse(JSON.stringify(this.profile.greetings));
                 this.getProfileOriginal().gender.string = this.profile.gender.string;
                 if(personalRequest.avatar){
