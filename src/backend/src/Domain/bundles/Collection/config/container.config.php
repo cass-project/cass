@@ -16,25 +16,6 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Memory\MemoryAdapter;
 
-
-$configDefault = [
-    'php-di' => [
-        CollectionService::class => object()
-            ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                return new Filesystem(new Local($container->get('config.paths.collection.avatar.dir')));
-            }))
-    ]
-];
-$configTest = [
-    'php-di' => [
-        CollectionService::class => object()
-            ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
-                return new Filesystem(new MemoryAdapter($container->get('config.paths.collection.avatar.dir')));
-            }))
-    ]
-];
-    
-
 return [
     'php-di' => [
         CollectionRepository::class => factory(new DoctrineRepositoryFactory(Collection::class)),
@@ -42,11 +23,15 @@ return [
         'config.paths.collection.avatar.dir' => factory(function(Container $container) {
             return sprintf('%s/entity/collection/by-sid/avatar/', $container->get('config.paths.assets.dir'));
         }),
+        CollectionService::class => object()
+            ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
+                $env = $container->get('config.env');
+
+                if($env === 'test') {
+                    return new Filesystem(new MemoryAdapter($container->get('config.paths.collection.avatar.dir')));
+                }else{
+                    return new Filesystem(new Local($container->get('config.paths.collection.avatar.dir')));
+                }
+            }))
     ],
-    'env' => [
-        'production' => $configDefault,
-        'development' => $configDefault,
-        'stage' => $configDefault,
-        'test' => $configTest,
-    ]
 ];

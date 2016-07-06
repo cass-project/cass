@@ -37,7 +37,7 @@ export class AuthService
     public signUp(request: SignUpRequest) {
         let signUpObservable = this.api.signUp(request);
 
-        signUpObservable.map(res => res.json()).subscribe(
+        signUpObservable.subscribe(
             (response: SignUpResponse200) => {
                 this.current = new Account(response.account, response.profiles);
                 this.token.setToken(response.api_key);
@@ -52,7 +52,7 @@ export class AuthService
     public signIn(request: SignInRequest) {
         let signInObservable = this.api.signIn(request);
 
-        signInObservable.map(res => res.json()).subscribe(
+        signInObservable.subscribe(
             (response: SignInResponse200) => {
                 this.current = new Account(response.account, response.profiles);
                 this.token.setToken(response.api_key);

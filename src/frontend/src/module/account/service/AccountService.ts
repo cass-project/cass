@@ -12,7 +12,7 @@ export class AccountService
     public appAccess() : Observable<AppAccessResponse200>
     {
         return Observable.create(observer => {
-            this.rest.appAccess().map(data => data.json()).subscribe(
+            this.rest.appAccess().subscribe(
                 data => {
                     observer.next(data);
                     observer.complete();

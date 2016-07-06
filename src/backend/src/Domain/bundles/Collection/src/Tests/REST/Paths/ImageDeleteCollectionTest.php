@@ -34,7 +34,13 @@ final class ImageDeleteCollectionTest extends CollectionRESTTestCase
             ->expectJSONBody([
                 'success' => true,
                 'image' => $this->expectImageCollection()
-            ]);
+            ])
+            ->expectJSONBody([
+                'image' => [
+                    'is_auto_generated' => false
+                ]
+            ])
+        ;
 
         $this->requestDeleteImage($collection->getId())
             ->execute()
@@ -48,6 +54,12 @@ final class ImageDeleteCollectionTest extends CollectionRESTTestCase
             ->expectJSONBody([
                 'success' => true,
                 'image' => $this->expectImageCollection()
-            ]);
+            ])
+            ->expectJSONBody([
+                'image' => [
+                    'is_auto_generated' => true
+                ]
+            ])
+        ;
     }
 }

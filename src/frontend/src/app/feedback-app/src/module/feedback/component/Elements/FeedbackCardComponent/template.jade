@@ -8,23 +8,18 @@
       i.fa.fa-fw.fa-quote-right.p-r-1(aria-hidden="true")
       span {{feedback.description}}
     p.card-text
-      span.label.label-default #common-question
+      //[routerLink]="['Feedback',{type: feedback.type}]"
+      a.label.label-default
+        | \#{{getFeedbackType(feedback.type)}}
   .card-footer.text-muted
     .controls.pull-right
-      a.card-link.text-muted(
-      data-id="{{feedback.id}}",
-      (click)="showModal()"
-      )
+      a.card-link.text-muted(data-id="{{feedback.id}}",(click)="showModal()")
         i.fa.fa-fw.fa-reply(aria-hidden="true")
         span Reply
-      a.card-link.text-warning(
-        (click)="archive()"
-      )
+      //a.card-link.text-warning.disabled((click)="archive()")
         i.fa.fa-fw.fa-archive(aria-hidden="true")
         span Archive
-      a.card-link.text-danger(
-        (click)="ban()"
-      )
+      //a.card-link.text-danger.disabled((click)="ban()")
         i.fa.fa-fw.fa-ban(aria-hidden="true")
         span Ban user
       .clearfix

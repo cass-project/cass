@@ -3,7 +3,7 @@
     <h1>Аккаунт</h1>
   </header>
   <div class="account-email">
-    <input type="email" disabled [value]="profileService.getAccountEmail()" class="form-input account-email-input">
+    <input type="email" disabled [value]="model.account.email" class="form-input account-email-input">
     <ul class="email-info">
       <li>К этому почтовому ящику привязан ваш аккаунт.</li>
       <li>Вы можете сделать запрос на то, чтобы <a href="javascript:void(0);">привязать аккаунт к другому почтовому ящику</a>.</li>
@@ -20,19 +20,19 @@
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Текущий пароль</span>
-        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.changePasswordStn.old_password" type="password" placeholder="Пароль, который вы используете сейчас">
+        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.password.old" type="password" placeholder="Пароль, который вы используете сейчас">
       </label>
     </div>
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Новый пароль</span>
-        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.changePasswordStn.new_password" type="password" placeholder="*********">
+        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.password.new" type="password" placeholder="*********">
       </label>
     </div>
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Повторите пароль</span>
-        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.changePasswordStn.repeat_password" type="password" placeholder="Введите то же самое – мы защищаем вас от ошибок!">
+        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.password.repeat" type="password" placeholder="Введите то же самое – мы защищаем вас от ошибок!">
       </label>
     </div>
   </div>
@@ -40,7 +40,7 @@
     <header class="tab-modal-header">
       <h2>Действия</h2>
     </header>
-    <button class="form-text-button" *ngIf="! isDeleteAccountRequested()" [disabled]="requestButtonDisabled" (click)="requestDeleteAccount()">
+    <button class="form-text-button" *ngIf="!isDeleteAccountRequested()" [disabled]="requestButtonDisabled" (click)="requestDeleteAccount()">
       <i class="fa fa-fw fa-trash"></i>
       <span>Я хочу удалить этот аккаунт</span>
     </button>

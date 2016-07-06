@@ -10,7 +10,7 @@ WebpackConfigBuilder.prototype = {
   build: function() {
     return {
       entry: {
-        main: './src/index.ts',
+        main: './src/app/frontend-app/app.ts',
         feedback: './src/app/feedback-app/index.ts'
       },
       output: {
@@ -93,6 +93,7 @@ WebpackConfigBuilder.prototype = {
           $: "jquery",
           jQuery: "jquery",
           "window.jQuery": "jquery",
+          Tether: 'tether',
           "window.Tether": 'tether'
         })
       ]      

@@ -1,0 +1,66 @@
+form([ngFormModel]="form", (submit)="filter()")
+  ul.nav.nav-pills.nav-stacked
+    li.nav-item
+      span.nav-link 
+        big
+          i.fa.fa-filter.fa-fw(aria-hidden="true")
+          | &nbsp;Filter options
+      span.nav-link
+        i.fa.fa-question-circle.fa-fw(
+          aria-hidden="true",
+          data-toggle="tooltip", data-placement="right", title="Show only those items for which there is an answer"
+        )
+        | &nbsp;Has Answer
+        .cass-no-conflict.pull-right
+            div.form-switch-button
+              input.form-switch-button-checkbox(
+                type="checkbox", id="AnsweredCheckbox", 
+                [ngFormControl]="form.controls.answer"
+              )
+              label.form-switch-button-label(for="AnsweredCheckbox")
+              
+      span.nav-link
+        i.fa.fa-question-circle.fa-fw(
+          aria-hidden="true",
+          data-toggle="tooltip", data-placement="right", title="Show only those items for which there is no answer"
+        )
+        | &nbsp;No Answer
+        .cass-no-conflict.pull-right
+            div.form-switch-button
+              input.form-switch-button-checkbox(
+                type="checkbox", id="NotAnsweredCheckbox", [ngFormControl]="form.controls.not_answer"
+              )
+              label.form-switch-button-label(for="NotAnsweredCheckbox")
+      hr
+      span.nav-link
+        i.fa.fa-question-circle.fa-fw(
+          aria-hidden="true",
+          data-toggle="tooltip", data-placement="right", title="Show items from read answer"
+        )
+        | &nbsp;Readed
+        .cass-no-conflict.pull-right
+            div.form-switch-button
+              input.form-switch-button-checkbox(
+                type="checkbox", id="ReadedCheckbox", [ngFormControl]="form.controls.read"
+              )
+              label.form-switch-button-label(for="ReadedCheckbox")
+      
+      span.nav-link
+        i.fa.fa-question-circle.fa-fw(
+          aria-hidden="true",
+          data-toggle="tooltip", data-placement="right", title="Show items with unread replies"
+        ) 
+        | &nbsp;Unreaded
+        .cass-no-conflict.pull-right
+            div.form-switch-button
+              input.form-switch-button-checkbox(
+                type="checkbox", id="NotReadedCheckbox", [ngFormControl]="form.controls.not_read"
+              )
+              label.form-switch-button-label(for="NotReadedCheckbox")
+      hr
+      span.nav-link
+        button.btn.btn-primary.pull-right([disabled]="isLoading")
+          i.fa.fa-cog.fa-fw.fa-spin(aria-hidden="true", *ngIf="isLoading")
+          | {{isLoading?'&nbsp;Loading...':'Show'}}
+        a.btn.btn-link.pull-right((click)="reset()", type="button", *ngIf="form.dirty")
+          | Reset

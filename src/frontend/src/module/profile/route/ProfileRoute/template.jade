@@ -1,6 +1,9 @@
 article.component.component-profile-route
-  cass-form-progress-lock(*ngIf="loading")
-  div(*ngIf="profile").profile-page
-    cass-profile-header([profile]="profile")
-    cass-profile-cards-list([profile]="profile")
+  cass-form-progress-lock(*ngIf="service.isLoading()")
+  div(*ngIf="service.isProfileLoaded()").profile-page
+    cass-profile-header(
+      [profile]="service.getProfile()",
+      (go-profile)="goDashboard()",
+      (go-collection)="goCollection"
+    )
   router-outlet

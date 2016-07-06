@@ -36,7 +36,7 @@
     </header>
     <div class="input-group">
       <label class="form-label">
-        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.profile.greetings.nickname" type="text" placeholder="Любое имя, из латинских, русских букв, цифр или знака `_`">
+        <input class="form-input" [readonly]="model.loading" [(ngModel)]="model.profile.greetings.nick_name" type="text" placeholder="Любое имя, из латинских, русских букв, цифр или знака `_`">
       </label>
     </div>
   </div>
@@ -76,20 +76,20 @@
     <ul class="gender-options">
       <li>
         <label class="gender-option">
-          <input type="radio" [disabled]="model.loading" [checked]="getActiveSex('none')" (click)="chooseSex('none')" name="gender">
+          <input type="radio" [disabled]="model.loading" [checked]="getActiveSex('not-specified')" (click)="chooseGender('not-specified')" name="gender">
           <span class="text">Оставить в тайне</span>
         </label>
       </li>
       <li>
         <label class="gender-option gender-option-active">
-          <input type="radio" [disabled]="model.loading" [checked]="getActiveSex('male')" (click)="chooseSex('male')" name="gender">
+          <input type="radio" [disabled]="model.loading" [checked]="getActiveSex('male')" (click)="chooseGender('male')" name="gender">
           <i class="fa fa-fw fa-male"></i>
           <span class="text">Мужской</span>
         </label>
       </li>
       <li>
         <label class="gender-option">
-          <input type="radio" [disabled]="model.loading" [checked]="getActiveSex('female')" (click)="chooseSex('female')" name="gender">
+          <input type="radio" [disabled]="model.loading" [checked]="getActiveSex('female')" (click)="chooseGender('female')" name="gender">
           <i class="fa fa-fw fa-female"></i>
           <span class="text">Женский</span>
         </label>

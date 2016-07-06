@@ -3,6 +3,7 @@ import {Injectable} from "angular2/core";
 import {ThemeService} from "../../../../../../theme/service/ThemeService";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {AuthService} from "../../../../../../auth/service/AuthService";
+import {AccountRESTService} from "../../../../../../account/service/AccountRESTService";
 
 @Injectable()
 export class ProfilesTabService
@@ -37,7 +38,7 @@ export class ProfilesTabService
         this.profileRESTService.createNewProfile().subscribe(data => {
             this.newProfileId = data;
             this.newProfileId = JSON.parse(this.newProfileId._body).entity.id;
-            window.location.reload();
+            this.switchProfile(this.newProfileId);
         });
     }
 
@@ -55,7 +56,7 @@ export class ProfilesTabService
         for(let i = 0; i < this.authService.getCurrentAccount().profiles.profiles.length; i++){
             if(this.pickedId === this.authService.getCurrentAccount().profiles.profiles[i].entity.profile.id){
                 this.pickedElem = i;
-                return this.authService.getCurrentAccount().profiles.profiles[i].entity;
+                return this.authService.getCurrentAccount().profiles.profiles[i].entity.profile;
             }
         }
     }

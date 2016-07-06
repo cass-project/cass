@@ -1,0 +1,15 @@
+ul.pagination
+  li.page-item(*ngIf="current>1")
+    a.page-link(aria-label='Previous', [routerLink] = "['FeedbackPage',{page: current - 1}]")
+      span(aria-hidden='true') «
+      span.sr-only Previous
+  li.page-item(
+    *ngFor="#page of pages(); #i = index",
+    [ngClass]="{'active': i+1 == current}"
+  )
+    a.page-link([routerLink]="['FeedbackPage',{page:i+1}]")
+      | {{i+1}}
+  li.page-item(*ngIf="current < total")
+    a.page-link(aria-label='Next', [routerLink] = "['FeedbackPage',{page: current + 1}]")
+      span(aria-hidden='true') »
+      span.sr-only Next

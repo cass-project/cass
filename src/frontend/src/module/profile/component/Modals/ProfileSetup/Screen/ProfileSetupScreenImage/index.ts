@@ -55,11 +55,6 @@ export class ProfileSetupScreenImage
         this.nextEvent.emit(this.model);
     }
 
-    complete() {
-        this.upload.close();
-        this.next();
-    }
-
     getProfileImage(): string {
         return this.model.getProfileImage().public_path;
     }
@@ -69,7 +64,6 @@ export class ProfileSetupScreenImage
         
         this.profileRESTService
             .deleteAvatar(this.model.getProfile().id)
-            .map(res => res.json())
             .subscribe(
                 (response: DeleteProfileImageResponse200) => {
                     this.isDeleting = false;

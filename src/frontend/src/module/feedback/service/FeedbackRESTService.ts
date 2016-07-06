@@ -57,7 +57,7 @@ export class FeedbackRESTService extends AbstractRESTService {
         return this.handle(this.http.get(`/backend/api/protected/feedback/${feedbackId}/get`, {headers: authHeader}));
     }
 
-    public listFeedbackEntities(offset: number, limit: number, qp: ListFeedbackQueryParams) {
+    public listFeedbackEntities(request: ListFeedbackQueryParams) {
         let params = new URLSearchParams();
         let authHeader = new Headers();
 
@@ -65,11 +65,11 @@ export class FeedbackRESTService extends AbstractRESTService {
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
-        if (qp.profileId !== undefined) params.set('profileId', qp.profileId.toString());
-        if (qp.read !== undefined) params.set('read', String(qp.read));
-        if (qp.answer !== undefined) params.set('answer', String(qp.answer));
+        if (request.profileId !== undefined) params.set('profileId', request.profileId.toString());
+        if (request.read !== undefined) params.set('read', String(request.read));
+        if (request.answer !== undefined) params.set('answer', String(request.answer));
 
-        return this.handle(this.http.get(`/backend/api/protected/feedback/list/offset/${offset}/limit/${limit}`, {
+        return this.handle(this.http.get(`/backend/api/protected/feedback/list/offset/${request.offset}/limit/${request.limit}`, {
             headers: authHeader,
             search: params
         }));
