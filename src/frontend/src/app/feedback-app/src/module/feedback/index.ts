@@ -71,7 +71,7 @@ export class FeedbackComponent {
     }
 
     
-    initFeedbacks(){
+    initFeedbacks() {
         this.getFeedbacks((data)=>{
             this.feedbacks = data.entities;
             this.totalPages = Math.ceil(this.feedbacks.length / this.model.limit);
@@ -120,9 +120,14 @@ export class FeedbackComponent {
     }
 
     toGridLayout(){
-            this.layout = 'grid';
+        this.layout = 'grid';
     }
+    
     toListLayout(){
         this.layout = 'list';
+    }
+    
+    filter() {
+        this.initFeedbacks();
     }
 }

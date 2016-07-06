@@ -7,10 +7,10 @@ import 'reflect-metadata';
 import 'rxjs/Rx';
 
 require('zone.js');
-require('../../styles/feedback.head.scss');
 require('bootstrap/scss/bootstrap-flex.scss');
 require('bootstrap/dist/js/bootstrap.js');
 require('font-awesome/css/font-awesome.css');
+require('../../styles/feedback.head.scss');
 
 import {provide, enableProdMode} from "angular2/core";
 import {HTTP_PROVIDERS}   from "angular2/http";
