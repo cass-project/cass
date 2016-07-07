@@ -12,16 +12,13 @@
       a.label.label-default
         | \#{{getFeedbackType(feedback.type)}}
   .card-footer.text-muted
+    span.pull-right.card-link.text-muted(*ngIf="feedback.answer.has")
+      i.fa.fa-fw.fa-check(aria-hidden="true")
+      | Answered
     .controls.pull-right
-      a.card-link.text-muted(data-id="{{feedback.id}}",(click)="showModal()")
+      a.card-link.text-muted(data-id="{{feedback.id}}",(click)="showModal()", *ngIf="!feedback.answer.has")
         i.fa.fa-fw.fa-reply(aria-hidden="true")
         span Reply
-      //a.card-link.text-warning.disabled((click)="archive()")
-        i.fa.fa-fw.fa-archive(aria-hidden="true")
-        span Archive
-      //a.card-link.text-danger.disabled((click)="ban()")
-        i.fa.fa-fw.fa-ban(aria-hidden="true")
-        span Ban user
       .clearfix
     i.fa.fa-fw.fa-calendar-o(aria-hidden="true")
     small &nbsp;
