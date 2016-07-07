@@ -9,4 +9,5 @@ export class ProfileModals
     settings: ModalControl = new ModalControl();
     switcher: ModalControl = new ModalControl();
     interests: ModalControl = new ModalControl();
+    createCollection: ModalControl = new ModalControl();
 }

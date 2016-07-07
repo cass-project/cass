@@ -2,7 +2,7 @@ article.component.component-profile
   div(*ngIf="isSetupRequired()")
     cass-modal
       cass-modal-box(width="550px")
-        cass-profile-setup([profile]="getCurrentProfile()")
+        cass-profile-setup([profile]="currentProfileService.get().entity.profile")
   div(*ngIf="modals.settings.isOpened()")
     cass-modal
       cass-modal-box(width="760px")
@@ -15,3 +15,7 @@ article.component.component-profile
     cass-modal
       cass-modal-box(width="550px")
         cass-profile-interests-modal((close)='closeModalInterests($event)', (success)='successModalInteresrs($event)')
+  div(*ngIf="modals.createCollection.isOpened()")
+    cass-modal
+      cass-modal-box(width="550px")
+        cass-collection-create-master([for]='"profile"', [for_id]='currentProfileService.get().getId()', (close)='closeModalCollectionCreateMaster($event)')
