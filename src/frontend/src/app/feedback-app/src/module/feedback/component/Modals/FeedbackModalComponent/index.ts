@@ -23,12 +23,17 @@ export class FeedbackModalComponent {
     constructor(private service:FeedbackService, private message:MessageBusService){}
     reply() {
         jQuery(this.feedbackModal.nativeElement).modal('hide');
+        this.message.push(MessageBusNotificationsLevel.Info, "Sending...");
         this.service.response(<FeedbackCreateResponseRequest>{
             feedback_id: this.feedback.id,
             description: this.description
-        }).subscribe(data => {
-            this.message.replaceLast(MessageBusNotificationsLevel.Success, "Success!");
-        })
+        }).subscribe(
+            () => {
+                this.message.replaceLast(MessageBusNotificationsLevel.Success, "Success!");
+            },
+            error => {
+                this.message.replaceLast(MessageBusNotificationsLevel.Critical, JSON.parse(error._body).error);
+            }
+        )
     }
-
 }
