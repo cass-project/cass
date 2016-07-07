@@ -3,6 +3,8 @@ namespace Domain\Account\Entity;
 
 use Application\Util\Entity\IdEntity\IdEntity;
 use Application\Util\Entity\IdEntity\IdTrait;
+use Application\Util\Entity\JSONMetadata\JSONMetadataEntity;
+use Application\Util\Entity\JSONMetadata\JSONMetadataEntityTrait;
 use Application\Util\JSONSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,9 +16,10 @@ use Domain\Profile\Exception\NoCurrentProfileException;
  * @Entity(repositoryClass="Domain\Account\Repository\AccountRepository")
  * @Table(name="account")
  */
-class Account implements JSONSerializable, IdEntity
+class Account implements JSONSerializable, IdEntity, JSONMetadataEntity
 {
     use IdTrait;
+    use JSONMetadataEntityTrait;
 
     /**
      * @OneToMany(targetEntity="Domain\Profile\Entity\Profile", mappedBy="account", cascade={"all"})
@@ -88,7 +91,8 @@ class Account implements JSONSerializable, IdEntity
             ],
             'profiles' => array_map(function(Profile $profile) {
                 return $profile->toJSON();
-            }, $this->getProfiles()->toArray())
+            }, $this->getProfiles()->toArray()),
+            'metadata' => $this->getMetadata()
         ];
     }
 

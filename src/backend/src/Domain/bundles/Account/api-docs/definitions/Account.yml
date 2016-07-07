@@ -6,6 +6,7 @@ Account_Entity_Account:
     - disabled
     - delete_request
     - profiles
+    - metadata
   properties:
     id:
       type: number
@@ -43,3 +44,6 @@ Account_Entity_Account:
         date:
           type: string
           description: К какой дате будет удален запрос. Содержит NULL в случае отсутствия запроса.
+    metadata:
+      type: object
+      description: Метаданные аккаунта
