@@ -1,0 +1,16 @@
+article.component-public-criteria-query-string
+  form(ngSubmit="ngSubmit()")
+    .flex-container
+      .flex-container-section-input
+        input.query-string-input(
+          type="search",
+          [(ngModel)]="queryString",
+          (change)="updateCriteria()"
+        )
+      .flex-container-section-submit
+        button.form-text-button.search-submit-button(
+          type="submit",
+          [disabled]="isSearchButtonDisabled()"
+        )
+          i.fa.fa-fw.fa-search
+          span Найти

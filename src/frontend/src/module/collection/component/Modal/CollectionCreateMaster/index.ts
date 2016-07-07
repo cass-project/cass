@@ -29,22 +29,30 @@ enum CreateCollectionMasterStage
 })
 export class CollectionCreateMaster
 {
-    constructor(private collectionRESTService: CollectionRESTService) {
-        this.collection = new Collection(this.ownerType, this.ownerId);
-    }
+    constructor(private collectionRESTService: CollectionRESTService) {}
 
     private screens: ScreenControls<CreateCollectionMasterStage> = new ScreenControls<CreateCollectionMasterStage>(CreateCollectionMasterStage.Common, (sc) => {
         sc.add({ from: CreateCollectionMasterStage.Common, to: CreateCollectionMasterStage.Options });
     });
 
-    @Input ('for') ownerType: any;
+    @Input ('for') ownerType: string;
     @Input ('for_id') ownerId: string;
     @Output('complete') complete = new EventEmitter<CollectionEntity>();
+    @Output('close') close = new EventEmitter<boolean>();
     @Output('error') error = new EventEmitter();
     
     collection: Collection;
     hasThemeIds: boolean = true;
-    
+
+
+
+    cancel(){
+        this.close.emit(true);
+    }
+
+    ngOnInit(){
+        this.collection = new Collection(this.ownerType, this.ownerId);
+    }
 
 
     checkFields() {

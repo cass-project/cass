@@ -1,16 +1,17 @@
 import {Injectable} from "angular2/core";
 
-import {ThemeService} from "../../../../../../theme/service/ThemeService";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {AuthService} from "../../../../../../auth/service/AuthService";
-import {AccountRESTService} from "../../../../../../account/service/AccountRESTService";
+import {CurrentAccountService} from "../../../../../../account/service/CurrentAccountService";
+
 
 @Injectable()
 export class ProfilesTabService
 {
     constructor(
         private profileRESTService: ProfileRESTService,
-        private authService: AuthService
+        private authService: AuthService,
+        private currentAccountService: CurrentAccountService
     ) {}
 
     private createNewProfileButton: boolean = true;
@@ -36,16 +37,14 @@ export class ProfilesTabService
     createNewProfile() {
         this.createNewProfileButton = false;
         this.profileRESTService.createNewProfile().subscribe(data => {
-            this.newProfileId = data;
-            this.newProfileId = JSON.parse(this.newProfileId._body).entity.id;
-            this.switchProfile(this.newProfileId);
+            window.location.reload();
         });
     }
 
     requestDeleteProfile(profileId){
         this.buttonActivate = true;
         this.profileRESTService.deleteProfile(profileId).subscribe(data => {
-            this.authService.getCurrentAccount().profiles.profiles.splice(this.pickedElem, 1);
+            this.currentAccountService.get().profiles.profiles.splice(this.pickedElem, 1);
 
             this.closeModalDeleteProfile();
             this.buttonActivate = false;
@@ -60,7 +59,7 @@ export class ProfilesTabService
             }
         }
     }
-
+    
     getProfiles(){
         return this.authService.getCurrentAccount().profiles.profiles;
     }

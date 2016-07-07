@@ -35,6 +35,10 @@ import {LandingComponent} from "../../module/landing/index";
 import {HtmlComponent} from "../../module/html/index";
 import {RootRoute as ProfileRootRoute} from "../../module/profile/route/RootRoute/index";
 import {CommunityRoute} from "../../module/community/route/CommunityRoute/index";
+import {PublicService} from "../../module/public/service";
+import {PublicComponent} from "../../module/public/index";
+import {ProfileModalModel} from "../../module/profile/component/Modals/ProfileModal/model";
+import {AccountRESTService} from "../../module/account/service/AccountRESTService";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -51,6 +55,7 @@ import {CommunityRoute} from "../../module/community/route/CommunityRoute/index"
         AuthService,
         AuthRESTService,
         AuthComponentService,
+        AccountRESTService,
         CommunityModalService,
         CommunityRESTService,
         CommunityService,
@@ -64,6 +69,8 @@ import {CommunityRoute} from "../../module/community/route/CommunityRoute/index"
         ProfileCachedIdentityMap,
         ProfileModals,
         CollectionModals,
+        PublicService,
+        ProfileModalModel
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -80,12 +87,6 @@ import {CommunityRoute} from "../../module/community/route/CommunityRoute/index"
 })
 @RouteConfig([
     {
-        name: 'Landing',
-        path: '/',
-        component: LandingComponent,
-        useAsDefault: true
-    },
-    {
         name: 'Html',
         path: '/html/...',
         component: HtmlComponent,
@@ -99,6 +100,12 @@ import {CommunityRoute} from "../../module/community/route/CommunityRoute/index"
         name: 'Community',
         path: '/community/...',
         component: CommunityRoute
+    },
+    {
+        name: 'Public',
+        path: '/public/...',
+        component: PublicComponent,
+        useAsDefault: true
     }
 ])
 export class App {

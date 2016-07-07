@@ -11,4 +11,13 @@ article.component.component-profile-collection
     text-transform: uppercase;
     color: material-color("grey", "900");
   }
+
+  .post-form {
+    display: flex;
+
+    .post-form-container {
+      width: 550px;
+      margin: 0 auto;
+    }
+  }
 }

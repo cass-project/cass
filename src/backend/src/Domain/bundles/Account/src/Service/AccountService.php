@@ -132,7 +132,7 @@ final class AccountService implements EventEmitterAwareService
 
         $this->accountRepository->saveAccount($account);
 
-        return $newPassword;
+        return $account->getAPIKey();
     }
 
     public function switchToProfile(Account $account, int $switchToProfileId): Account

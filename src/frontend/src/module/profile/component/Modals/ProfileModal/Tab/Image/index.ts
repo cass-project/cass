@@ -9,6 +9,7 @@ import {AuthService} from "../../../../../../auth/service/AuthService";
 import {UploadImageModal} from "../../../../../../form/component/UploadImage/index";
 import {UploadImageService} from "../../../../../../form/component/UploadImage/service";
 import {AuthToken} from "../../../../../../auth/service/AuthToken";
+import {CurrentProfileService} from "../../../../../service/CurrentProfileService";
 
 @Component({
     selector: 'cass-profile-modal-tab-image',
@@ -35,26 +36,27 @@ export class ImageTab
         private uploadImageService: UploadImageService, 
         private profileRESTService: ProfileRESTService,
         private authService: AuthService,
-        private authToken: AuthToken
+        private authToken: AuthToken,
+        private currentProfileService: CurrentProfileService
     ) {
         uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(
-            authService.getCurrentAccount().getCurrentProfile().entity.profile,
+            currentProfileService.get().entity.profile,
             authToken.getAPIKey()
         ));
     }
 
     getImageProfile(){
         if(this.authService.isSignedIn()){
-            return this.authService.getCurrentAccount().getCurrentProfile().entity.profile.image.variants['512'].public_path;
+            return this.currentProfileService.get().entity.profile.image.variants['512'].public_path;
         }
     }
 
     avatarDeletingProcess(){
         this.deleteProcessVisible = true;
-        let profileId = this.authService.getCurrentAccount().getCurrentProfile().entity.profile.id;
+        let profileId = this.currentProfileService.get().entity.profile.id;
         
         this.profileRESTService.deleteAvatar(profileId).subscribe(response => {
-            this.authService.getCurrentAccount().getCurrentProfile().entity.profile.image = response.image;
+            this.currentProfileService.get().entity.profile.image = response.image;
             this.deleteProcessVisible = false;
         });
     }

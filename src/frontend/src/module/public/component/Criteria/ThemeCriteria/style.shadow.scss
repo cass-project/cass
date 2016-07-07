@@ -1,0 +1,131 @@
+@import "./../../../../../styles/globals";
+
+article.component-public-criteria-theme {
+  position: absolute;
+  top: 0; height: 100%;
+  left: 0; width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 10px;
+  box-sizing: border-box;
+
+  .flex-section-themes {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+  }
+
+  header.theme-root {
+    margin-bottom: 10px;
+
+    h1, .back-button-container {
+      display: inline-block;
+      vertical-align: bottom;
+    }
+
+    .back-button-container {
+      width: 25px;
+
+      button.back-button {
+        border: 0;
+        background-color: transparent;
+        line-height: 26px;
+        font-size: 18px;
+        width: 25px;
+        outline: 0;
+        cursor: pointer;
+
+        &:hover {
+          color: material-color("light-blue", "500");
+        }
+      }
+    }
+
+    h1.theme-root {
+      font-family: $FONT_FAMILY;
+      font-size: 24px;
+      line-height: 32px;
+      font-weight: 400;
+      color: material-color("grey", "600");
+    }
+  }
+
+  ul.theme-lists {
+    overflow: auto;
+
+    li {
+      a.theme-link {
+        display: block;
+        text-decoration: none;
+
+        span.title {
+          display: block;
+          line-height: 25px;
+          padding-left: 5px;
+          font-family: $FONT_FAMILY;
+          font-size: 16px;
+          font-weight: 500;
+          color: material-color("grey", "900");
+          margin-bottom: 10px;
+          border-left: 5px solid transparent;
+          transition: border-color 0.1s, color 0.1s;
+        }
+
+        &:hover {
+          span.title {
+            border-color: material-color("light-blue", "500");
+            color: material-color("light-blue", "500");
+          }
+        }
+      }
+
+      a.theme-link-active {
+        span.title {
+          border-color: material-color("blue-grey", "500");
+          color: material-color("blue-grey", "500");
+        }
+
+        &:hover {
+          span.title {
+            border-color: material-color("blue-grey", "700");
+            color: material-color("blue-grey", "700");
+          }
+        }
+      }
+    }
+  }
+
+  footer.search-box {
+    .search-box-flex-container {
+      display: flex;
+
+      .search-box-section-input {
+        width: 100%;
+
+        input.form-input {
+          background-color: transparent;
+        }
+      }
+
+      .search-box-section-icon {
+        button.search-button {
+          border: 0;
+          background-color: transparent;
+          outline: 0;
+          line-height: 28px;
+          font-size: 14px;
+          color: material-color("grey", "600");
+          width: 28px;
+          cursor: pointer;
+
+          &:hover {
+            color: material-color("light-blue", "500");
+          }
+        }
+      }
+    }
+  }
+}

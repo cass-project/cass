@@ -52,6 +52,7 @@ export class Collection implements CollectionEntity
             id: ownerId,
             type: ownerType
         };
+        this.theme_ids = [];
     }
 
     hasThemeIds(): boolean {

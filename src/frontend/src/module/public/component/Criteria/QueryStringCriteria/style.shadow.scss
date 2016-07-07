@@ -1,0 +1,33 @@
+@import "./../../../../../styles/globals";
+
+article.component-public-criteria-query-string {
+  .flex-container {
+    display: flex;
+
+    .flex-container-section-input {
+      width: 100%;
+    }
+
+    .flex-container-section-submit {
+    }
+  }
+
+  input.query-string-input {
+    @include card(2);
+    border: 0;
+    padding: 5px;
+    line-height: 28px;
+    font-family: $FONT_FAMILY;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    width: 100%;
+    outline: 0;
+  }
+
+  .search-submit-button {
+    i.fa {
+      margin-right: 5px;
+    }
+  }
+}

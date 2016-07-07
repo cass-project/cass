@@ -1,0 +1,26 @@
+article.component.component-public-feed-criteria
+  ul.feed-types
+    li.feed-type-people
+      button.feed-type-button((click)="setFeedType('people')", [ngClass]="{ 'active': isOn('people') }")
+        i.fa.fa-fw.fa-user
+        span Люди
+    li.feed-type-expert
+      button.feed-type-button((click)="setFeedType('expert')", [ngClass]="{ 'active': isOn('expert') }")
+        i.fa.fa-fw.fa-user-plus
+        span Эксперты
+    li.feed-type-community
+      button.feed-type-button((click)="setFeedType('community')", [ngClass] = "{ 'active': isOn('community') }")
+        i.fa.fa-fw.fa-users
+        span Сообщества
+    li.feed-type-content
+      button.feed-type-button((click)="setFeedType('content')", [ngClass]="{ 'active': isOn('content') }")
+        i.fa.fa-fw.fa-edit
+        span Контент
+    li.feed-type-discussion
+      button.feed-type-button((click)="setFeedType('discussion')", [ngClass] = "{ 'active': isOn('discussion') }")
+        i.fa.fa-fw.fa-comments
+        span Обсуждения
+    li.feed-type-collection
+      button.feed-type-button((click)="setFeedType('collection')", [ngClass]="{ 'active': isOn('collection') }")
+        i.fa.fa-fw.fa-star
+        span Подборки
