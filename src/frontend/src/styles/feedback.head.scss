@@ -128,7 +128,7 @@ a{cursor: pointer;}
 }
 
 .cass-no-conflict {
-  @import './../../node_modules/reset.css/reset.css';
+  @import './../../src/app/feedback-app/node_modules/reset-css/reset';
   @import 'index.head';
   line-height: 1;
   font-family: $FONT_FAMILY;
