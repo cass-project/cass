@@ -7,13 +7,14 @@ use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use Domain\Post\Tests\Fixtures\SamplePostsFixture;
+use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
+use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 
 /**
  * @backupGlobals disabled
  */
 class FeedMiddlewareTest extends MiddlewareTestCase
 {
-
     private $criteria_json = [
         'criteria' => [
             'seek' => [
@@ -26,6 +27,13 @@ class FeedMiddlewareTest extends MiddlewareTestCase
 
     protected function getFixtures(): array{
         return [
+            new DemoAccountFixture(),
+            new DemoProfileFixture(),
+            new SampleThemesFixture(),
+
+            new SampleCommunitiesFixture(),
+            new SampleCollectionsFixture(),
+            new SamplePostsFixture()
         ];
     }
 
@@ -35,6 +43,16 @@ class FeedMiddlewareTest extends MiddlewareTestCase
             ->expectJSONContentType()
              ->expectStatusCode(404)
             ;
+    }
+
+
+    public function testFeedProfile200()
+    {
+        $profileId = DemoAccountFixture::getAccount()->getCurrentProfile()->getId();
+
+        return $this->requestFeedProfile($profileId, $this->criteria_json)->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(200);
     }
 
     public function testFeedProfile404()
