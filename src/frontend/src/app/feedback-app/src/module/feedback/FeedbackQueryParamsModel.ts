@@ -8,5 +8,5 @@ export class FeedbackQueryModel implements ListFeedbackQueryParams {
     offset: number = 0;
     profileId: number = undefined;
     read: boolean = undefined;
-    answer: boolean = undefined;
+    answer: boolean = false;
 }
