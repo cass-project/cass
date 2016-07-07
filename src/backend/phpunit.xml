@@ -21,9 +21,6 @@
         <testsuite name="domain_profile">
             <directory>src/Domain/bundles/Profile/src/Tests</directory>
         </testsuite>
-        <testsuite name="domain_post">
-            <directory>src/Domain/bundles/Post/src/Tests</directory>
-        </testsuite>
         <testsuite name="domain_post_attachment">
             <directory>src/Domain/bundles/PostAttachment/src/Tests</directory>
         </testsuite>
