@@ -7,6 +7,7 @@ use function DI\get;
 
 use DI\Container;
 use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
+use Domain\PostAttachment\Console\Command\PostAttachmentCleanup;
 use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\PostAttachment\Repository\PostAttachmentRepository;
 use Domain\PostAttachment\Service\PostAttachmentService;
@@ -28,6 +29,9 @@ return [
                         sprintf('%s/post/attachment', $container->get('config.storage'))
                     ));
                 }
-            }))
+            })),
+        PostAttachmentCleanup::class => object()->constructorParameter('config', factory(function(Container $container){
+            return $container->get('config.post-attachment');
+        }))
     ],
 ];
