@@ -21,6 +21,7 @@ export class FeedbackModalComponent {
     private description:string;
         
     constructor(private service:FeedbackService, private message:MessageBusService){}
+    
     reply() {
         jQuery(this.feedbackModal.nativeElement).modal('hide');
         this.message.push(MessageBusNotificationsLevel.Info, "Sending...");
@@ -35,5 +36,9 @@ export class FeedbackModalComponent {
                 this.message.replaceLast(MessageBusNotificationsLevel.Critical, JSON.parse(error._body).error);
             }
         )
+    }
+    
+    isValid() {
+        return this.feedback.id && this.description;
     }
 }
