@@ -6,18 +6,21 @@ import {AuthToken} from "../../../../auth/service/AuthToken";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
 import {Observable} from "rxjs/Observable";
+import {CurrentProfileService} from "../../../service/CurrentProfileService";
+import {CurrentAccountService} from "../../../../account/service/CurrentAccountService";
 
 @Injectable()
 export class ProfileModalModel
 {
-    constructor(public authService: AuthService,
-                private profileRESTService: ProfileRESTService,
+    constructor(private profileRESTService: ProfileRESTService,
                 private accountRESTService: AccountRESTService,
+                private currentProfileService: CurrentProfileService,
+                private currentAccountService: CurrentAccountService,
                 protected messages: MessageBusService,
                 protected authToken: AuthToken){}
     
-    profile = JSON.parse(JSON.stringify(this.authService.getCurrentAccount().getCurrentProfile().entity.profile));
-    account = JSON.parse(JSON.stringify(this.authService.getCurrentAccount().entity));
+    profile = JSON.parse(JSON.stringify(this.currentProfileService.get().entity.profile));
+    account = JSON.parse(JSON.stringify(this.currentAccountService.get().entity));
     
     loading: boolean = false;
 
@@ -28,15 +31,15 @@ export class ProfileModalModel
     };
     
     getAccountOriginal(){
-        return this.authService.getCurrentAccount().entity;
+        return this.currentAccountService.get().entity;
     }
     
     getProfileOriginal(){
-        return this.authService.getCurrentAccount().getCurrentProfile().entity.profile;
+        return this.currentProfileService.get().entity.profile;
     }
 
     reset(){
-        this.profile = JSON.parse(JSON.stringify(this.authService.getCurrentAccount().getCurrentProfile().entity.profile));
+        this.profile = JSON.parse(JSON.stringify(this.currentProfileService.get().entity.profile));
         this.password = {
             old: '',
             new: '',
