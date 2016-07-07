@@ -75,7 +75,7 @@ export class ProfileModalModel
             observableRequest.push(this.profileRESTService.setExpertIn(this.getProfileOriginal().id, expertRequest));
 
             this.profileRESTService.setExpertIn(this.getProfileOriginal().id, expertRequest).subscribe(data => {
-                this.getProfileOriginal().expert_in_ids = this.profile.expert_in_ids.splice(0);
+                this.getProfileOriginal().expert_in_ids = JSON.parse(JSON.stringify(this.profile.expert_in_ids));
             }, error => {});
         }
 
@@ -87,7 +87,7 @@ export class ProfileModalModel
             observableRequest.push(this.profileRESTService.setInterestingIn(this.getProfileOriginal().id, interestingRequest));
 
             this.profileRESTService.setInterestingIn(this.getProfileOriginal().id, interestingRequest).subscribe(data => {
-                this.getProfileOriginal().interesting_in_ids = this.profile.interesting_in_ids.splice(0);
+                this.getProfileOriginal().interesting_in_ids = JSON.parse(JSON.stringify(this.profile.interesting_in_ids));
             }, error => {});
         }
 
