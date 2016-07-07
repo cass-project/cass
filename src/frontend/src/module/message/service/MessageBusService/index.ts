@@ -36,8 +36,10 @@ export class MessageBusService implements MessageBusInterface
     }
 
     replaceLast(level: MessageBusNotificationsLevel, message: string) {
-        let lastNotification:MessageBusNotificationsModel = this.notifications[this.notifications.length-1];
-        this.remove(lastNotification);
+        if(this.notifications.length>0) {
+            let lastNotification:MessageBusNotificationsModel = this.notifications[this.notifications.length - 1];
+            this.remove(lastNotification);
+        }
         this.push(level, message);
     }
     
