@@ -37,6 +37,8 @@ import {RootRoute as ProfileRootRoute} from "../../module/profile/route/RootRout
 import {CommunityRoute} from "../../module/community/route/CommunityRoute/index";
 import {PublicService} from "../../module/public/service";
 import {PublicComponent} from "../../module/public/index";
+import {ProfileModalModel} from "../../module/profile/component/Modals/ProfileModal/model";
+import {AccountRESTService} from "../../module/account/service/AccountRESTService";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -53,6 +55,7 @@ import {PublicComponent} from "../../module/public/index";
         AuthService,
         AuthRESTService,
         AuthComponentService,
+        AccountRESTService,
         CommunityModalService,
         CommunityRESTService,
         CommunityService,
@@ -67,6 +70,7 @@ import {PublicComponent} from "../../module/public/index";
         ProfileModals,
         CollectionModals,
         PublicService,
+        ProfileModalModel
     ],
     directives: [
         ROUTER_DIRECTIVES,
