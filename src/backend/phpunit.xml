@@ -36,6 +36,9 @@
         <testsuite name="domain_collection">
             <directory>src/Domain/bundles/Collection/src/Tests</directory>
         </testsuite>
+        <testsuite name="domain_post">
+            <directory>src/Domain/bundles/Post/src/Tests</directory>
+        </testsuite>
         <testsuite name="domain_profile_communities">
             <directory>src/Domain/bundles/ProfileCommunities/src/Tests</directory>
         </testsuite>
