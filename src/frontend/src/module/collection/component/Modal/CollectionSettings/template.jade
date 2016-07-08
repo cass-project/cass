@@ -36,8 +36,7 @@ article.component.component-collection-settings-modal
                           .modal-list-info
                             h1 Подборка имеет тематику
                             p Если вы укажите тематику у своей подборки, то другие люди смогут найти вас в поисках контента по выбранной вами тематике.
-                            cass-theme-select
-                          //([value]='collection.theme.id')
+                            cass-theme-select([value]='collection.theme_ids')
                           .modal-list-controls
                             div.form-switch-button
                               input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", [checked]='collection.theme.has', [(ngModel)]='collection.theme.has')
