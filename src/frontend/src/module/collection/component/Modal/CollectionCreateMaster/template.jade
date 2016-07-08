@@ -33,55 +33,14 @@ cass-modal
                         i.fa.fa-bookmark
                     .modal-list-info
                       h1 Подборка имеет тематику
-                      div(*ngIf="!collection.haveTheme")
-                      p  Если вы укажите тематику у своей подборки, то другие люди смогут найти вас в поисках контента по выбранной вами тематике.
-                      div(*ngIf="hasThemeIds")
+                      div(*ngIf="!haveThemesSwitcher")
+                        p  Если вы укажите тематику у своей подборки, то другие люди смогут найти вас в поисках контента по выбранной вами тематике.
+                      div(*ngIf="haveThemesSwitcher")
                         cass-theme-select([value]='collection.theme_ids')
                     .modal-list-controls
                       div.form-switch-button
-                        input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", [(ngModel)]='hasThemeIds',  [checked]='collection.hasThemeIds()')
+                        input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", [(ngModel)]='haveThemesSwitcher',  [checked]='collection.hasThemeIds()')
                         label.form-switch-button-label(for="collectionCreateMasterEnableTheme")
-        div.screen.screen-options(*ngIf="screens.isOn('Options')")
-          p.options-info Опции ниже определяют, будет ли попадать добавленный в эту подборку контент в публичный доступ
-          div.form-section.cass-padding-box-15
-            .modal-list
-              ul.collection-options-list
-                li
-                  section.modal-list-item
-                    .modal-list-icon
-                      .modal-list-icon-container
-                        i.fa.fa-user-secret
-                    .modal-list-info
-                      h1 Это частная подборка
-                      p По умолчанию содержимое подборок публично и контент, который вы добавляете сюда, может быть доступен любому желающему
-                    .modal-list-controls
-                      div.form-switch-button
-                        input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterIsPrivate")
-                        label.form-switch-button-label(for="collectionCreateMasterIsPrivate")
-                li
-                  section.modal-list-item
-                    .modal-list-icon
-                      .modal-list-icon-container
-                        i.fa.fa-bullhorn
-                    .modal-list-info
-                      h1 Подборка должна отображаться в паблике
-                      p Паблик – это основной траффик. Именно оттуда случайные посетители смогут найти вашу подборку
-                    .modal-list-controls
-                      div.form-switch-button
-                        input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterPublicEnabled", checked)
-                        label.form-switch-button-label(for="collectionCreateMasterPublicEnabled")
-                li
-                  section.modal-list-item
-                    .modal-list-icon
-                      .modal-list-icon-container
-                        i.fa.fa-check-square-o
-                    .modal-list-info
-                      h1 Я обязуюсь добавлять в эту подборку только подходящий контент
-                      p Указав тематику и включив этот флаг, вы берете на себя обязательство постить только соответствующий указанной вами тематики контент. Взамен наши алгоритмы считают ваш контент более приоритетным для размещение в паблике.
-                    .modal-list-controls
-                      div.form-switch-button
-                        input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterModerationContact")
-                        label.form-switch-button-label(for="collectionCreateMasterModerationContact")
         footer.form-footer
           .form-footer-section
             .form-footer-item
