@@ -4,6 +4,7 @@ import {Http, Headers} from "angular2/http"
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {AuthToken} from "../../auth/service/AuthToken";
+import {Collection} from "../definitions/entity/collection";
 
 @Injectable()
 export class CollectionRESTService extends AbstractRESTService
@@ -19,18 +20,20 @@ export class CollectionRESTService extends AbstractRESTService
     public tryNumber:number = 0;
     public progressBar:number = 0;
 
-    createCollection(owner_sid: string, theme_ids: Array<number>, title: string, description: string)
+    createCollection(collection: Collection)
     {
+        
+        
         let authHeader = new Headers();
         if(this.token.hasToken()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
-        return this.handle(this.http.post('/backend/api/protected/collection/create', JSON.stringify({
-            owner_sid: owner_sid,
-            theme_ids: theme_ids,
-            title: title,
-            description: description
+        return this.handle(this.http.put('/backend/api/protected/collection/create', JSON.stringify({
+            owner_sid: collection.owner_sid,
+            theme_ids: collection.theme_ids,
+            title: collection.title,
+            description: collection.description
         }), {headers: authHeader}));
     }
 
