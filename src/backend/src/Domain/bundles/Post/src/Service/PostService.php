@@ -4,13 +4,15 @@ namespace Domain\Post\Service;
 use Application\Exception\NotImplementedException;
 use Application\Service\EventEmitterAware\EventEmitterAwareService;
 use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
-use Domain\Auth\Service\CurrentAccountService;
 use Domain\Collection\Service\CollectionService;
 use Domain\Post\Entity\Post;
 use Domain\Post\Parameters\CreatePostParameters;
 use Domain\Post\Parameters\EditPostParameters;
+use Domain\Post\Parameters\LinkParameters;
 use Domain\Post\PostType\PostTypeFactory;
 use Domain\Post\Repository\PostRepository;
+use Domain\PostAttachment\Entity\PostAttachment;
+use Domain\PostAttachment\Entity\PostAttachment\LinkAttachmentType;
 use Domain\PostAttachment\Service\PostAttachmentService;
 use Domain\Profile\Service\ProfileService;
 
@@ -54,13 +56,13 @@ class PostService implements EventEmitterAwareService
 
     public function createPost(CreatePostParameters $createPostParameters): Post
     {
-        $postType = $this->postTypeFactory->createPostTypeByIntCode($createPostParameters->getPostTypeCode());
-        $collection = $this->collectionService->getCollectionById($createPostParameters->getCollectionId());
-        $profile = $this->profileService->getProfileById($createPostParameters->getProfileId());
-        
-        $post = new Post($postType, $profile, $collection, $createPostParameters->getContent());
+        $post = $this->createPostFromParameters($createPostParameters);
+        $links = $this->createPostAttachmentLinksFromArray($post, $createPostParameters->getLinks());
 
-        $this->postRepository->createPost($post);
+        
+
+        $this->postRepository->savePost($post);
+
         $this->getEventEmitter()->emit(self::EVENT_CREATE, [$post]);
 
         return $post;
@@ -79,5 +81,38 @@ class PostService implements EventEmitterAwareService
     public function getPostById(int $postId): Post
     {
         return $this->postRepository->getPost($postId);
+    }
+    
+    private function createPostFromParameters(CreatePostParameters $createPostParameters): Post
+    {
+        $postType = $this->postTypeFactory->createPostTypeByIntCode($createPostParameters->getPostTypeCode());
+        $collection = $this->collectionService->getCollectionById($createPostParameters->getCollectionId());
+        $profile = $this->profileService->getProfileById($createPostParameters->getProfileId());
+
+        $post = new Post($postType, $profile, $collection, $createPostParameters->getContent());
+
+        $this->postRepository->createPost($post);
+
+        array_map(function(int $postAttachmentId) use ($post) {
+            $this->postAttachmentService->addAttachment(
+                $post,
+                $this->postAttachmentService->getPostAttachmentById($postAttachmentId)
+            );
+        }, $createPostParameters->getAttachmentIds());
+
+        return $post;
+    }
+
+    private function createPostAttachmentLinksFromArray(Post $post, array $links): array
+    {
+        /** @var LinkAttachmentType[] $result */
+        $result = array_map(function(LinkParameters $linkParameters) use ($post) {
+            $this->postAttachmentService->addAttachment(
+                $post,
+                $this->postAttachmentService->createLinkAttachment($post, $linkParameters->getUrl(), $linkParameters->getMetadata())
+            );
+        }, $links);
+
+        return $result;
     }
 }

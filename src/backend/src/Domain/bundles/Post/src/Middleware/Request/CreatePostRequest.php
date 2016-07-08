@@ -11,7 +11,7 @@ class CreatePostRequest extends SchemaParams
 {
     public function getParameters(): CreatePostParameters {
 
-        $data = (array) $this->getData();
+        $data = json_decode(json_encode($this->getData()), true);
 
         if(isset($data['links'])) {
             $links = array_map(function(array $params) {

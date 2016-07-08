@@ -1,0 +1,11 @@
+PostAttachment_PostAttachment_Link:
+  required:
+    - url
+    - metadata
+  properties:
+    url:
+      type: string
+      description: URL
+    metadata:
+      type: object
+      description: Метаданные

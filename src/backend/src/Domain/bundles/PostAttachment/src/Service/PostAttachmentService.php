@@ -43,7 +43,7 @@ class PostAttachmentService
             'metadata' => $metadata
         ]);
 
-        $this->postAttachmentRepository->savePostAttachment($postAttachment);
+        $this->postAttachmentRepository->createPostAttachment($postAttachment);
 
         return $postAttachment;
     }
@@ -86,6 +86,30 @@ class PostAttachmentService
     public function setAttachments(Post $post, array $attachmentIds)
     {
         $this->postAttachmentRepository->assignAttachmentsToPost($post, $attachmentIds);
+    }
+
+    public function addAttachment(Post $post, PostAttachment $attachment): PostAttachment
+    {
+        $attachment->attachToPost($post);
+
+        $post->getAttachments()->add($attachment);
+
+        $this->postAttachmentRepository->savePostAttachment($attachment);
+
+        return $attachment;
+    }
+
+    public function getPostAttachmentById(int $postAttachmentId)
+    {
+        return $this->postAttachmentRepository->getPostAttachmentById($postAttachmentId);
+    }
+
+    public function getAttachmentsOfPost(int $postId): array
+    {
+        /** @var PostAttachment[] $result */
+        $result = $this->postAttachmentRepository->getAttachmentsOfPost($postId);
+
+        return $result;
     }
 
     private function factoryFileAttachmentType(string $tmpFile): AttachmentType
