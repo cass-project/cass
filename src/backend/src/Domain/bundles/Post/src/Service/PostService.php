@@ -21,7 +21,7 @@ class PostService implements EventEmitterAwareService
     use EventEmitterAwareTrait;
 
     const EVENT_CREATE = 'domain.post.create';
-    const EVENT_EDIT = 'domain.post.edit';
+    const EVENT_UPDATE = 'domain.post.update';
     const EVENT_DELETE = 'domain.post.delete';
     const EVENT_DELETED = 'domain.post.deleted';
 
@@ -57,9 +57,7 @@ class PostService implements EventEmitterAwareService
     public function createPost(CreatePostParameters $createPostParameters): Post
     {
         $post = $this->createPostFromParameters($createPostParameters);
-        $links = $this->createPostAttachmentLinksFromArray($post, $createPostParameters->getLinks());
-
-        
+        $this->createPostAttachmentLinksFromArray($post, $createPostParameters->getLinks());
 
         $this->postRepository->savePost($post);
 
@@ -70,12 +68,20 @@ class PostService implements EventEmitterAwareService
 
     public function editPost(EditPostParameters $editPostParameters): Post
     {
-        throw new NotImplementedException;
+        $post = $this->getPostById($editPostParameters->getPostId());
+        $post->setContent($editPostParameters->getContent());
+
+        $this->postRepository->savePost($post);
+        $this->getEventEmitter()->emit(self::EVENT_UPDATE, [$post]);
+
+        return $post;
     }
 
     public function deletePost(int $postId)
     {
-        throw new NotImplementedException;
+        $this->postRepository->deletePost(
+            $this->getPostById($postId)
+        );
     }
 
     public function getPostById(int $postId): Post
