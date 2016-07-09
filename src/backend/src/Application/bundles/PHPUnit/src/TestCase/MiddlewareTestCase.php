@@ -7,6 +7,7 @@ use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\REST\Request\Params\SchemaParams;
 use Application\REST\Service\SchemaService;
 use Doctrine\ORM\EntityManager;
+use MongoDB\Database;
 use phpDocumentor\Reflection\Types\Callable_;
 use PHPUnit_Framework_TestCase;
 use Zend\Diactoros\Response;
@@ -189,13 +190,17 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * После завершения каждого юнит-теста происходит роллбак транзакции
+     * После завершения каждого юнит-теста происходит роллбак транзакции и удаляются MongoDB-записи
      *
      * @throws \DI\NotFoundException
      */
     protected function tearDown() {
         $transactionService = $this->container()->get(TransactionService::class); /** @var TransactionService $transactionService */
         $transactionService->rollback();
+
+        /** @var Database $mongoDB */
+        $mongoDB = $this->container()->get(Database::class);
+        $mongoDB->drop();
     }
 
     /* =============== */

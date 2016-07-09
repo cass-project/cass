@@ -2,19 +2,20 @@
 namespace Domain\Feed\Service;
 
 use Domain\Feed\Source\Source;
+use MongoDB\Collection;
+use MongoDB\Database;
 
 final class FeedService
 {
-    /** @var \MongoDB */
+    /** @var Database */
     private $mongoDB;
     
-    public function __construct(\MongoDB $mongoDB, array $sources)
+    public function __construct(Database $mongoDB)
     {
         $this->mongoDB = $mongoDB;
-        $this->sources = $sources;
     }
     
-    public function getCollection(Source $source): \MongoCollection
+    public function getCollection(Source $source): Collection
     {
         return $this->mongoDB->selectCollection($source->getMongoDBCollection());
     }

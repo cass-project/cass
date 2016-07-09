@@ -6,8 +6,8 @@ use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection as DoctrineCollection;
-use Doctrine\ORM\PersistentCollection;
 use Domain\Collection\Entity\Collection;
+use Domain\Feed\Service\Entity;
 use Domain\Post\PostType\PostType;
 use Domain\Profile\Entity\Profile;
 use Domain\Theme\Strategy\ThemeIdsEntityAware;
@@ -17,7 +17,7 @@ use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  * @Entity(repositoryClass="Domain\Post\Repository\PostRepository")
  * @Table(name="post")
  */
-class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware
+class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
 {
     use IdTrait;
     use ThemeIdsAwareEntityTrait;

@@ -15,11 +15,27 @@ final class EntityRouterService
         $this->feedService = $feedService;
     }
 
+    public function upsert(Entity $entity, array $sources)
+    {
+        $this->doWith($entity, $sources, function(Source $source) use ($entity) {
+            $collection = $this->feedService->getCollection($source);
+            $collection->updateOne([
+                'update' => [
+                    'id' => $entity->getId()
+                ]
+            ], ['$set' => $entity->toJSON()], ['upsert' => true]);
+        });
+    }
+
     public function create(Entity $entity, array $sources)
     {
         $this->doWith($entity, $sources, function(Source $source) use ($entity) {
             $collection = $this->feedService->getCollection($source);
-            $collection->insert($entity->toJSON());
+            $collection->insertOne([
+                'update' => [
+                    'id' => $entity->getId()
+                ]
+            ], $entity->toJSON());
         });
     }
 
@@ -27,9 +43,11 @@ final class EntityRouterService
     {
         $this->doWith($entity, $sources, function(Source $source) use ($entity) {
             $collection = $this->feedService->getCollection($source);
-            $collection->update([
-                'id' => $entity->getId()
-            ], $entity->toJSON());
+            $collection->updateOne([
+                'update' => [
+                    'id' => $entity->getId()
+                ]
+            ], ['$set' => $entity->toJSON()], ['upsert' => false]);
         });
     }
 
@@ -37,7 +55,7 @@ final class EntityRouterService
     {
         $this->doWith($entity, $sources, function(Source $source) use ($entity) {
             $collection = $this->feedService->getCollection($source);
-            $collection->remove([
+            $collection->deleteMany([
                 'id' => $entity->getId()
             ]);
         });
