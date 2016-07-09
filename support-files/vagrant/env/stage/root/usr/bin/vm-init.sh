@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+7#!/usr/bin/env bash
 
 # Locale issues
 sudo apt-get install language-pack-en language-pack-en-base -y
@@ -114,4 +114,3 @@ sudo service nginx restart
 # PHP7.0-MONGODB
 # ##############
 sudo pecl install php7.0-mongodb
-sudo apt-get install
