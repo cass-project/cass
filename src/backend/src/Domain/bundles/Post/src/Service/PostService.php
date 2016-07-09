@@ -1,7 +1,6 @@
 <?php
 namespace Domain\Post\Service;
 
-use Application\Exception\NotImplementedException;
 use Application\Service\EventEmitterAware\EventEmitterAwareService;
 use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
 use Domain\Collection\Service\CollectionService;

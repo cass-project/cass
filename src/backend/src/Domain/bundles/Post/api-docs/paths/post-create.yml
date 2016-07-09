@@ -31,4 +31,6 @@
               type: boolean
               description: '=true'
             entity:
-              $ref: '#/definitions/Post_Entity_Post'
+              type: object
+              schema:
+                $ref: '#/definitions/Post_Entity_Post'

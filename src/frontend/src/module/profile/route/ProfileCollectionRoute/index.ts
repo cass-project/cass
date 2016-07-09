@@ -6,6 +6,8 @@ import {ProfileRouteService} from "../ProfileRoute/service";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
 import {PostForm} from "../../../post/component/Forms/PostForm/index";
+import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
+import {PostTypeService} from "../../../post/service/PostTypeService";
 
 @Component({
     template: require('./template.jade'),
@@ -21,12 +23,16 @@ import {PostForm} from "../../../post/component/Forms/PostForm/index";
 export class ProfileCollectionRoute
 {
     collection: CollectionEntity;
+    postType: PostTypeEntity;
 
     constructor(
         private router: Router,
         private params: RouteParams,
-        private service: ProfileRouteService
+        private service: ProfileRouteService,
+        private types: PostTypeService
     ) {
+        this.postType = types.getTypeByStringCode('default');
+
         service.getObservable().subscribe(
             (response: GetProfileByIdResponse200) => {
                 let sid = params.get('sid');

@@ -4,4 +4,3 @@ export class LinkAttachment implements AttachmentInterface
 {
     
 }
-    

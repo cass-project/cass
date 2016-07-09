@@ -79,3 +79,24 @@
                           items:
                             type: string
                             description: Фича (строковой код
+                  post:
+                    type: object
+                    schema:
+                      required:
+                        - types
+                      properties:
+                        types:
+                          type: array
+                          description: Типы постов
+                          items:
+                            type: object
+                            schema:
+                              required:
+                                - int
+                                - string
+                              int:
+                                description: Код (int)
+                                type: number
+                              string:
+                                type: string
+                                description: Код (string)

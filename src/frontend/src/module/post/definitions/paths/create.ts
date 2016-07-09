@@ -4,6 +4,7 @@ import {PostEntity} from "../entity/Post";
 
 export interface CreatePostRequest
 {
+    post_type: number;
     profile_id: number;
     collection_id: number;
     content: string;

@@ -1,9 +1,11 @@
 article.component.component-post-form
-  form.form.card
+  cass-form-progress-lock(*ngIf="isLoading()")
+  form.form.card((ngSubmit)="submit()")
     .post-form-section
       .post-content-container
         textarea.content(
-          placeholder="Новый пост…"
+          placeholder="Новый пост…",
+          [(ngModel)]="model.content"
         )
     .post-form-section
       footer.post-form-footer
@@ -11,35 +13,10 @@ article.component.component-post-form
           button(type="button").form-text-button
             span Отмена
         .form-section
-          button(type="submit").form-button.form-button-green
+          button(type="submit", [disabled]="! model.isValid()").form-button.form-button-green
             span Разместить
     .post-form-section
       .attachment
-        .attachment-link.attachment-link-with-image
-          .link-image
-            .max-image-container
-              .image
-                img(src="/dist/demo.png")
-          .link-about
-            h1 Link Title
-            h2 http://some.com/url/here
-            p A lond description goes here
-        .attachment-link.attachment-link-without-image
-          .link-image
-            .max-image-container
-              .image
-                img(src="/dist/demo.png")
-          .link-about
-            h1 Link Title
-            h2 http://some.com/url/here
-            p A lond description goes here
-        .attachment-image
-          .max-image-container
-            .image
-              img(src="/dist/demo.png")
-        .attachment-webm
-        .attachment-file
-        .attachment-youtube
       .attachment-actions
         .attachment-actions-section
         .attachment-actions-section
