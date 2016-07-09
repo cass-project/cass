@@ -22,12 +22,14 @@ article.component.component-post-form
         .attachment-actions-section
           button(type="button").form-text-button
             span Удалить приложение
-  .attachment-controls
+  .attachment-controls(*ngIf="! hasAttachments()")
     .attach-control.attach-link
-      button.attach-button
+      div.attach-button
         i.fa.fa-link
         span.title Прикрепить ссылку
     .attach-control.attach-file
-      button.attach-button
-        i.fa.fa-cloud-upload
-        span.title Прикрепить файл
+      label(for="componentPostFormFileInput")
+        input#componentPostFormFileInput.file(type="file", (change)="onFileChange($event)")
+        div.attach-button
+          i.fa.fa-cloud-upload
+          span.title Прикрепить файл

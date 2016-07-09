@@ -3,6 +3,10 @@
 article.component.component-post-form {
   position: relative;
 
+  input#componentPostFormFileInput {
+    display: none;
+  }
+
   .card {
     @include card(1);
     background-color: white;
@@ -49,7 +53,7 @@ article.component.component-post-form {
       width: 100%;
     }
 
-    button.attach-button {
+    div.attach-button {
       text-align: center;
       width: 100%;
       background-color: transparent;
@@ -64,6 +68,7 @@ article.component.component-post-form {
       color: material-color("grey", "700");
       transition: color 0.1s;
       text-transform: uppercase;
+      text-decoration: none;
 
       i.fa {
         margin-right: 6px;

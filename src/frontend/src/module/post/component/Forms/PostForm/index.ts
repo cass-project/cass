@@ -6,6 +6,9 @@ import {CollectionEntity} from "../../../../collection/definitions/entity/collec
 import {PostRESTService} from "../../../service/PostRESTService";
 import {CreatePostRequest} from "../../../definitions/paths/create";
 import {PostTypeEntity} from "../../../definitions/entity/PostType";
+import {FileAttachment} from "../../../../post-attachment/attachment/FileAttachment";
+import {LinkAttachment} from "../../../../post-attachment/attachment/LinkAttachment";
+import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
 
 @Component({
     selector: 'cass-post-form',
@@ -29,7 +32,8 @@ export class PostForm
 
     constructor(
         private profile: CurrentProfileService,
-        private service: PostRESTService
+        private service: PostRESTService,
+        private attachments: PostAttachmentRESTService
     ) {}
 
     ngOnInit() {
@@ -38,6 +42,27 @@ export class PostForm
             this.profile.get().getId(),
             this.collection.id
         );
+    }
+
+    onFileChange($event) {
+        let files: FileList = $event.target.files;
+
+        if(files.length > 0) {
+            let file = files[0];
+            let status = new LoadingStatus();
+
+            this.status.push(status);
+            
+            this.attachments.upload(file).subscribe(
+                (response) => {
+                    this.model.attachments.push(response.entity);
+                    status.loading = false;
+                },
+                (error) => {
+                    status.loading = false;
+                }
+            );
+        }
     }
 
     isLoading() {
@@ -64,11 +89,18 @@ export class PostForm
     reset() {
         this.model.reset();
     }
+
+    hasAttachments(): boolean {
+        return this.model.attachments.length > 0
+            || this.model.links.length > 0;
+    }
 }
 
 class PostFormModel
 {
     public content: string = '';
+    public attachments: FileAttachment[] = [];
+    public links: LinkAttachment[] = [];
 
     constructor(
         public postType: number,
@@ -79,11 +111,13 @@ class PostFormModel
     reset() {
         this.content = '';
     }
-    
+
     isValid(): boolean {
         let testHasContent = this.content.length > 0;
+        let testHasLinks = this.links.length > 0;
+        let testHasAttachments = this.attachments.length > 0;
         
-        return testHasContent;
+        return testHasContent || testHasLinks || testHasAttachments;
     }
 
     createRequest(): CreatePostRequest {

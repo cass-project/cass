@@ -8,17 +8,17 @@
     - `cp ./support-files/vagrant-files/dev/Vagrantfile.unix.dist Vagrantfile` (для Linux/OSX)
     - `cp ./support-files/vagrant-files/dev/Vagrantfile.windows.dist Vagrantfile` (для Windows)
     - `cp ./support-files/vagrant-files/dev/Vagrantfile.sf.dist Vagrantfile` (вы хотите дождаться выхода HL3, пока у вас пересобирается фронтэнд)
-5. Выполните `vagrant up`
+5. Выполните `vagrant up dev`
     - Если вы используете Windows и используете файл `Vagrantfile.windows.dist`, то необходимо запускать эту команду от администратора
-6. Зайдите на виртуальную машину: `vagrant ssh`
-8. Выполните команду: `vm-init`
+6. Зайдите на виртуальную машину: `vagrant ssh dev`
+8. Выполните команду: `vm-init.sh`
 9. После выполнения проверьте работоспособность, открыв в браузере:
  - Проект: [http://127.0.0.1:8080/]()
  - Backend-документацию: [http://127.0.0.1:8080/api-docs/]()
 
 `chown ERR`
 -----------
-Не выполняйте команды `vm-init`, `vm-server-update`, `vm-project-update` с администраторсками правами! (`sudo`)
+Не выполняйте команды `vm-init.sh`, `vm-server-update.sh`, `vm-project-update.sh` с администраторсками правами! (`sudo`)
 
 Обновление проекта
 ------------------
