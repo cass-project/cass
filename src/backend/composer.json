@@ -13,6 +13,7 @@
       "Application\\Swagger\\": "src/Application/bundles/Swagger/src",
       "Application\\Util\\": "src/Application/bundles/Util/src",
       "Application\\PHPUnit\\": "src/Application/bundles/PHPUnit/src",
+      "Application\\MongoDB\\": "src/Application/bundles/MongoDB/src",
       "Application\\Version\\": "src/Application/bundles/Version/src",
       "Domain\\Account\\": "src/Domain/bundles/Account/src",
       "Domain\\Auth\\": "src/Domain/bundles/Auth/src",

@@ -14,7 +14,7 @@ sudo apt-get update
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password 1234'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 1234'
 
-sudo apt-get install -y php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server mongodb
+sudo apt-get install -y php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server mongodb php-pear php7.0-dev pkg-config libssl-dev libsslcommon2-dev
 
 # ##########
 # UPDATE NPM
@@ -110,3 +110,9 @@ vm-server-update.sh
 # #####
 sudo ln -s /etc/nginx/sites-available/cass /etc/nginx/sites-enabled/cass
 sudo service nginx restart
+
+# ##############
+# PHP7.0-MONGODB
+# ##############
+sudo pecl install php7.0-mongodb
+sudo apt-get install
