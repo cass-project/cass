@@ -1,26 +1,43 @@
-article.component.component-post-form
+article.component.component-post-form([ngClass]="{ 'component-post-form--extended': isExtended(), 'component-post-form--not-extended': !isExtended() }")
   cass-form-progress-lock(*ngIf="isLoading()")
   form.form.card((ngSubmit)="submit()")
     .post-form-section
       .post-content-container
         textarea.content(
+          #contentTextArea,
           placeholder="Новый пост…",
-          [(ngModel)]="model.content"
+          [(ngModel)]="model.content",
+          (focus)="focus()",
+          (blur)="blur()"
         )
     .post-form-section
+      .link-form
+        .link-box
+          .link-input-container
+            input.link-input(
+            type="text",
+            placeholder="Вставьте сюда ссылку"
+            )
+          .link-cancel-button
+            button.link-button(title="Отмена", type="button")
+              i.fa.fa-times
+          .link-add-button
+            button.link-button(title="Обновить", type="button")
+              i.fa.fa-check
+    .post-form-section(*ngIf="isExtended()")
       footer.post-form-footer
         .form-section
-          button(type="button").form-text-button
+          button(type="button", (click)="cancel()").form-text-button
             span Отмена
         .form-section
           button(type="submit", [disabled]="! model.isValid()").form-button.form-button-green
             span Разместить
-    .post-form-section
+    .post-form-section(*ngIf="hasAttachments()")
       .attachment
       .attachment-actions
         .attachment-actions-section
         .attachment-actions-section
-          button(type="button").form-text-button
+          button(type="button", (click)="deleteAttachments()").form-text-button
             span Удалить приложение
   .attachment-controls(*ngIf="! hasAttachments()")
     .attach-control.attach-link

@@ -1,4 +1,4 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input, ViewChild, ElementRef} from "angular2/core";
 
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {CurrentProfileService} from "../../../../profile/service/CurrentProfileService";
@@ -9,6 +9,7 @@ import {PostTypeEntity} from "../../../definitions/entity/PostType";
 import {FileAttachment} from "../../../../post-attachment/attachment/FileAttachment";
 import {LinkAttachment} from "../../../../post-attachment/attachment/LinkAttachment";
 import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
+import {PostAttachmentEntity} from "../../../../post-attachment/definitions/entity/PostAttachment";
 
 @Component({
     selector: 'cass-post-form',
@@ -27,8 +28,11 @@ export class PostForm
     @Input('post-type') postType: PostTypeEntity;
     @Input('collection') collection: CollectionEntity;
 
+    @ViewChild('contentTextArea') contentTextArea: ElementRef;
+
     private status: LoadingStatus[] = [];
     private model: PostFormModel;
+    private focused: boolean = false;
 
     constructor(
         private profile: CurrentProfileService,
@@ -56,6 +60,9 @@ export class PostForm
             this.attachments.upload(file).subscribe(
                 (response) => {
                     this.model.attachments.push(response.entity);
+                    this.contentTextArea.nativeElement.focus();
+                    this.focused = true;
+
                     status.loading = false;
                 },
                 (error) => {
@@ -65,10 +72,32 @@ export class PostForm
         }
     }
 
-    isLoading() {
+    isLoading(): boolean {
         return this.status.filter((input: LoadingStatus) => {
             return input.loading === true;
         }).length > 0;
+    }
+
+    isExtended(): boolean {
+        let testIsModelEmpty = this.model.isEmpty();
+        let testIsFocused = this.focused;
+        let testIsLoading = this.isLoading();
+
+        return !testIsModelEmpty || testIsFocused || testIsLoading;
+    }
+
+    cancel() {
+        this.model.reset();
+        this.focused = false;
+        this.contentTextArea.nativeElement.blur();
+    }
+
+    focus() {
+        this.focused = true;
+    }
+
+    blur() {
+        this.focused = false;
     }
 
     submit() {
@@ -89,6 +118,14 @@ export class PostForm
     reset() {
         this.model.reset();
     }
+    
+    deleteAttachments() {
+        this.model.deleteAttachments();
+        
+        if(this.model.isEmpty()) {
+            this.cancel();
+        }
+    }
 
     hasAttachments(): boolean {
         return this.model.attachments.length > 0
@@ -99,7 +136,7 @@ export class PostForm
 class PostFormModel
 {
     public content: string = '';
-    public attachments: FileAttachment[] = [];
+    public attachments: PostAttachmentEntity<FileAttachment>[] = [];
     public links: LinkAttachment[] = [];
 
     constructor(
@@ -108,18 +145,6 @@ class PostFormModel
         public collectionId: number
     ) {}
 
-    reset() {
-        this.content = '';
-    }
-
-    isValid(): boolean {
-        let testHasContent = this.content.length > 0;
-        let testHasLinks = this.links.length > 0;
-        let testHasAttachments = this.attachments.length > 0;
-        
-        return testHasContent || testHasLinks || testHasAttachments;
-    }
-
     createRequest(): CreatePostRequest {
         // ...
         return {
@@ -127,9 +152,33 @@ class PostFormModel
             profile_id: this.profileId,
             collection_id: this.collectionId,
             content: this.content,
-            attachments: [],
+            attachments: this.attachments.map((attachment) => {
+                return attachment.id;
+            }),
             links: []
         }
+    }
+
+    reset() {
+        this.content = '';
+        this.deleteAttachments();
+    }
+
+    isEmpty(): boolean {
+        let testHasContent = this.content.length > 0;
+        let testHasLinks = this.links.length > 0;
+        let testHasAttachments = this.attachments.length > 0;
+
+        return ! (testHasContent || testHasLinks || testHasAttachments);
+    }
+
+    isValid(): boolean {
+        return ! this.isEmpty();
+    }
+
+    deleteAttachments() {
+        this.attachments = [];
+        this.links = [];
     }
 }
 

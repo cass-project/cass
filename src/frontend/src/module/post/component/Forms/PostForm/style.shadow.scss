@@ -3,6 +3,10 @@
 article.component.component-post-form {
   position: relative;
 
+  form.form {
+    cursor: pointer;
+  }
+
   input#componentPostFormFileInput {
     display: none;
   }
@@ -21,7 +25,7 @@ article.component.component-post-form {
   }
 
   .post-content-container {
-    height: 150px;
+    transition: height 0.1s;
 
     textarea.content {
       font-family: $FONT_FAMILY;
@@ -84,5 +88,70 @@ article.component.component-post-form {
     display: flex;
     justify-content: space-between;
     padding: 5px;
+  }
+
+  .link-form {
+    .link-box {
+      display: flex;
+      background-color: white;
+
+      .link-input-container {
+        width: 100%;
+
+        input.link-input {
+          font-family: $FONT_FAMILY;
+          font-size: 16px;
+          font-weight: 400;
+          color: black;
+          line-height: 38px;
+          border: 0;
+          width: 100%;
+          padding: 0 10px;
+          box-sizing: border-box;
+          outline: 0;
+        }
+      }
+
+      .link-add-button, .link-cancel-button {
+        width: 30px;
+      }
+
+      button.link-button {
+        cursor: pointer;
+        background-color: white;
+        color: material-color("grey", "800");
+        border: 0;
+        padding: 0;
+        width: 30px;
+        line-height: 38px;
+        outline: 0;
+        transition: color 0.1s, background-color 0.1s;
+
+        &:hover {
+          color: material-color("grey", "900");
+          background-color: material-color("grey", "100");
+        }
+
+        &:disabled {
+          color: material-color("grey", "400");
+        }
+      }
+    }
+  }
+}
+
+article.component.component-post-form--not-extended {
+  form.form, textarea {
+    cursor: pointer;
+  }
+
+  .post-content-container {
+    height: 70px;
+  }
+}
+
+article.component.component-post-form--extended {
+  .post-content-container {
+    height: 200px;
   }
 }

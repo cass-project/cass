@@ -1,6 +1,6 @@
 import {AttachmentInterface} from "./AttachmentInterface";
 
-export class LinkAttachment implements AttachmentInterface
+export interface LinkAttachment extends AttachmentInterface
 {
     
 }
