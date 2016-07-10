@@ -5,6 +5,7 @@ import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
 import {PostAttachmentLinkYouTube} from "../PostAttachmentLinkYouTube/index";
 import {PostAttachmentLinkImage} from "../PostAttachmentLinkImage/index";
 import {PostAttachmentLinkPage} from "../PostAttachmentLinkPage/index";
+import {PostAttachmentLinkUnknown} from "../PostAttachmentLinkUnknown/index";
 
 @Component({
     selector: 'cass-post-attachment-link',
@@ -16,6 +17,7 @@ import {PostAttachmentLinkPage} from "../PostAttachmentLinkPage/index";
         PostAttachmentLinkYouTube,
         PostAttachmentLinkImage,
         PostAttachmentLinkPage,
+        PostAttachmentLinkUnknown,
     ]
 })
 export class PostAttachmentLink
