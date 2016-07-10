@@ -5,6 +5,7 @@ use Domain\OpenGraph\Parser\OpenGraphParser;
 use Domain\PostAttachment\LinkMetadata\Types\ImageLinkMetadata;
 use Domain\PostAttachment\LinkMetadata\Types\PageLinkMetadata;
 use Domain\PostAttachment\LinkMetadata\Types\UnknownLinkMetadata;
+use Domain\PostAttachment\LinkMetadata\Types\WebmLinkMetadata;
 use Domain\PostAttachment\LinkMetadata\Types\YoutubeLinkMetadata;
 
 final class LinkMetadataFactory
@@ -34,6 +35,9 @@ final class LinkMetadataFactory
             case ImageLinkMetadata::RESOURCE_TYPE:
                 return new ImageLinkMetadata($origURL);
 
+            case WebmLinkMetadata::RESOURCE_TYPE:
+                return new WebmLinkMetadata($origURL, $contentType);
+
             case UnknownLinkMetadata::RESOURCE_TYPE:
                 return new UnknownLinkMetadata($origURL);
         }
@@ -47,6 +51,8 @@ final class LinkMetadataFactory
             return PageLinkMetadata::RESOURCE_TYPE;
         } else if($this->test(['image/jpg', 'image/jpeg', 'image/gif', 'image/png', 'image/bmp'], $contentType)) {
             return ImageLinkMetadata::RESOURCE_TYPE;
+        } else if($this->test(['video/webm', 'audio/webm'], $contentType)) {
+            return WebmLinkMetadata::RESOURCE_TYPE;
         } else {
             return UnknownLinkMetadata::RESOURCE_TYPE;
         }
@@ -63,7 +69,7 @@ final class LinkMetadataFactory
     private function test(array $contentTypes, string $orig)
     {
         foreach($contentTypes as $contentType) {
-            if(strpos($orig, $contentType) !== false) {
+            if(strpos($orig, $contentType) === 0) {
                 return true;
             }
         }

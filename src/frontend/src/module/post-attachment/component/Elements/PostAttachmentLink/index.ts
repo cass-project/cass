@@ -6,6 +6,7 @@ import {PostAttachmentLinkYouTube} from "../PostAttachmentLinkYouTube/index";
 import {PostAttachmentLinkImage} from "../PostAttachmentLinkImage/index";
 import {PostAttachmentLinkPage} from "../PostAttachmentLinkPage/index";
 import {PostAttachmentLinkUnknown} from "../PostAttachmentLinkUnknown/index";
+import {PostAttachmentLinkWebm} from "../PostAttachmentLinkWebm/index";
 
 @Component({
     selector: 'cass-post-attachment-link',
@@ -17,6 +18,7 @@ import {PostAttachmentLinkUnknown} from "../PostAttachmentLinkUnknown/index";
         PostAttachmentLinkYouTube,
         PostAttachmentLinkImage,
         PostAttachmentLinkPage,
+        PostAttachmentLinkWebm,
         PostAttachmentLinkUnknown,
     ]
 })
