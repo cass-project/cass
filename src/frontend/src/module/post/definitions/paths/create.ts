@@ -11,7 +11,6 @@ export interface CreatePostRequest
     collection_id: number;
     content: string;
     attachments: Array<number>;
-    links: PostAttachmentEntity<LinkAttachment|YouTubeLinkAttachment>[];
 }
 
 export interface CreatePostResponse200 extends Success200

@@ -1,6 +1,3 @@
 article.component.component-post-attachment-file
-  cass-post-attachment-file(*ngIf="is('file')")
-  cass-post-attachment-link(*ngIf="is('link')")
-  cass-post-attachment-image(*ngIf="is('image')")
-  cass-post-attachment-webm(*ngIf="is('webm')")
-  cass-post-attachment-youtube(*ngIf="is('youtube')")
+  cass-post-attachment-file(*ngIf="is('file')", [attachment]="attachment")
+  cass-post-attachment-link(*ngIf="is('link')", [attachment]="attachment")

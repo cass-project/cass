@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Output} from "angular2/core";
+import {Component, EventEmitter, Output, ViewChild, ElementRef} from "angular2/core";
+
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
-import {OpenGraphRESTService} from "../../../../opengraph/service/OpenGraphRESTService";
 import {OpenGraphEntity} from "../../../../opengraph/definitions/entity/og";
-import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
+import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
+import {PostAttachmentEntity} from "../../../../post-attachment/definitions/entity/PostAttachment";
 
 var validUrl = require('valid-url');
 
@@ -19,18 +20,24 @@ var validUrl = require('valid-url');
 export class PostFormLinkInput
 {
     static FADEOUT_TIME_SEC = 5;
-    
+
+    @ViewChild('urlInput') urlInput: ElementRef;
+
     @Output('cancel') cancelEvent = new EventEmitter<string>();
     @Output('detach-link') detachEvent = new EventEmitter<string>();
-    @Output('attach-link') attachEvent: EventEmitter<PostAttachment> = new EventEmitter<PostAttachment>();
+    @Output('attach-link') attachEvent: EventEmitter<PostAttachmentEntity<any>> = new EventEmitter<PostAttachmentEntity<any>>();
 
     private loading: boolean = false;
     private url: string = '';
     private error: string;
     private interval;
-    private current: PostAttachment;
+    private current: PostAttachmentEntity<any>;
 
-    constructor(private service: OpenGraphRESTService) {}
+    constructor(private service: PostAttachmentRESTService) {}
+
+    ngAfterViewInit() {
+        this.urlInput.nativeElement.focus();
+    }
 
     private fetch() {
         if(this.loading) return;
@@ -43,9 +50,9 @@ export class PostFormLinkInput
             if (validUrl.isUri(this.url)) {
                 this.loading = true;
 
-                this.service.getOpenGraph(this.url).subscribe(
+                this.service.link(this.url).subscribe(
                     (response) => {
-                        this.attach(this.url, response.entity);
+                        this.attach(response.entity);
                         this.loading = false;
                     },
                     (error) => {
@@ -66,21 +73,8 @@ export class PostFormLinkInput
         }
     }
 
-    private attach(origURL: string, og: OpenGraphEntity) {
-        this.current = {
-            id: -1,
-            is_attached_to_post: true,
-            attachment_type: 'link',
-            date_created_on: (new Date()).toDateString(),
-            post_id: -1,
-            sid: 'tmp-link',
-            attachment: {
-                url: origURL,
-                metadata: {
-                    og: og
-                }
-            }
-        };
+    private attach(attachment: PostAttachmentEntity<any>) {
+        this.current = attachment;
 
         this.attachEvent.emit(this.current);
     }

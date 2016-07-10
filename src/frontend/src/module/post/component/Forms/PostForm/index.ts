@@ -8,11 +8,8 @@ import {CreatePostRequest} from "../../../definitions/paths/create";
 import {PostTypeEntity} from "../../../definitions/entity/PostType";
 import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
 import {PostAttachmentEntity} from "../../../../post-attachment/definitions/entity/PostAttachment";
-import {OpenGraphRESTService} from "../../../../opengraph/service/OpenGraphRESTService";
 import {PostFormLinkInput} from "../PostFormLinkInputComponent/index";
-import {FileAttachment} from "../../../../post-attachment/definitions/entity/attachment/FileAttachment";
-import {LinkAttachment} from "../../../../post-attachment/definitions/entity/attachment/LinkAttachment";
-import {YouTubeLinkAttachment} from "../../../../post-attachment/definitions/entity/attachment/YouTubeLinkAttachment";
+import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
 
 @Component({
     selector: 'cass-post-form',
@@ -23,6 +20,7 @@ import {YouTubeLinkAttachment} from "../../../../post-attachment/definitions/ent
     directives: [
         ProgressLock,
         PostFormLinkInput,
+        PostAttachment,
     ]
 })
 export class PostForm
@@ -37,12 +35,12 @@ export class PostForm
     private status: LoadingStatus[] = [];
     private model: PostFormModel;
     private focused: boolean = false;
+    private linkRequested: boolean = false;
 
     constructor(
         private profile: CurrentProfileService,
         private service: PostRESTService,
-        private attachments: PostAttachmentRESTService,
-        private og: OpenGraphRESTService
+        private attachments: PostAttachmentRESTService
     ) {}
 
     ngOnInit() {
@@ -91,9 +89,18 @@ export class PostForm
         return !testIsModelEmpty || testIsFocused || testIsLoading;
     }
 
+    requestLinkBox() {
+        this.linkRequested = true;
+    }
+
+    isLinkBoxRequested(): boolean {
+        return this.linkRequested && ! this.hasAttachments();
+    }
+
     cancel() {
         this.model.reset();
         this.focused = false;
+        this.linkRequested = false;
         this.contentTextArea.nativeElement.blur();
     }
 
@@ -125,12 +132,12 @@ export class PostForm
     }
 
     hasAttachments(): boolean {
-        return this.model.attachments.length > 0
-            || this.model.links.length > 0;
+        return this.model.attachments.length > 0;
     }
 
     deleteAttachments() {
         this.model.deleteAttachments();
+        this.linkRequested = false;
 
         if(this.model.isEmpty()) {
             this.cancel();
@@ -141,8 +148,7 @@ export class PostForm
 class PostFormModel
 {
     public content: string = '';
-    public attachments: PostAttachmentEntity<FileAttachment>[] = [];
-    public links: PostAttachmentEntity<LinkAttachment|YouTubeLinkAttachment>[] = [];
+    public attachments: PostAttachmentEntity<any>[] = [];
 
     constructor(
         public postType: number,
@@ -160,7 +166,6 @@ class PostFormModel
             attachments: this.attachments.map((attachment) => {
                 return attachment.id;
             }),
-            links: []
         }
     }
 
@@ -171,10 +176,9 @@ class PostFormModel
 
     isEmpty(): boolean {
         let testHasContent = this.content.length > 0;
-        let testHasLinks = this.links.length > 0;
         let testHasAttachments = this.attachments.length > 0;
 
-        return ! (testHasContent || testHasLinks || testHasAttachments);
+        return ! (testHasContent || testHasAttachments);
     }
 
     isValid(): boolean {
@@ -183,34 +187,26 @@ class PostFormModel
 
     hasAttachments(): boolean
     {
-        return this.links.length > 0 || this.attachments.length > 0;
+        return this.attachments.length > 0;
     }
 
     getAllAttachments(): PostAttachmentEntity<any>[]
     {
-        if(this.links.length) {
-            return this.links;
-        }else if(this.attachments.length) {
-            return this.attachments;
-        }else{
-            return [];
-        }
+        return this.attachments;
     }
 
-    attachLink(link: PostAttachmentEntity<LinkAttachment | YouTubeLinkAttachment>) {
-        console.log('attached', link);
-
-        this.links = [];
-        this.links.push(link);
+    getAttachment(): PostAttachmentEntity<any>
+    {
+        return this.attachments[0];
     }
-
-    detachLink() {
-        this.links = [];
+    
+    addAttachment(attachment: PostAttachmentEntity<any>) {
+        this.attachments = [];
+        this.attachments.push(attachment);
     }
-
+    
     deleteAttachments() {
         this.attachments = [];
-        this.links = [];
     }
 }
 

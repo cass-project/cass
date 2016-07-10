@@ -10,10 +10,10 @@ article.component.component-post-form([ngClass]="{ 'component-post-form--extende
           (focus)="focus()",
           (blur)="blur()"
         )
-    .post-form-section
+    .post-form-section(*ngIf="isLinkBoxRequested()")
       cass-post-form-link-input(
-        (attach-link)="model.attachLink($event)",
-        (detach-link)="model.detachLink()"
+        (attach-link)="model.addAttachment($event)",
+        (detach-link)="deleteAttachments()"
       )
     .post-form-section(*ngIf="isExtended()")
       footer.post-form-footer
@@ -24,8 +24,8 @@ article.component.component-post-form([ngClass]="{ 'component-post-form--extende
           button(type="submit", [disabled]="! model.isValid()").form-button.form-button-green
             span Разместить
     .post-form-section(*ngIf="hasAttachments()")
-      .attachment
-        cass-post-attachment([attachments]="model.getAllAttachments()")
+      .attachment(*ngIf="model.getAttachment()")
+        cass-post-attachment([attachment]="model.getAttachment()")
       .attachment-actions
         .attachment-actions-section
         .attachment-actions-section
@@ -33,7 +33,7 @@ article.component.component-post-form([ngClass]="{ 'component-post-form--extende
             span Удалить приложение
   .attachment-controls(*ngIf="! hasAttachments()")
     .attach-control.attach-link
-      div.attach-button
+      button.attach-button((click)="requestLinkBox()")
         i.fa.fa-link
         span.title Прикрепить ссылку
     .attach-control.attach-file

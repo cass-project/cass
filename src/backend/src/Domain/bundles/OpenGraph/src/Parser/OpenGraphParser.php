@@ -209,8 +209,10 @@ final class OpenGraphParser
         for($index = 0; $index < $this->metaTags->length; $index++) {
             $node = $this->metaTags->item($index);
 
-            if($node->attributes->getNamedItem($attrName)->textContent === $property) {
-                $result[] = $node;
+            if($attrNode = $node->attributes->getNamedItem($attrName)) {
+                if($attrNode->textContent === $property) {
+                    $result[] = $node;
+                }
             }
         }
 

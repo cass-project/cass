@@ -3,7 +3,8 @@ article.component.component-post-form-link-input
   .link-form
     .link-box
       .link-input-container
-          input.link-input(
+        input.link-input(
+          #urlInput,
           type="text",
           placeholder="Вставьте сюда ссылку",
           [(ngModel)]="url",

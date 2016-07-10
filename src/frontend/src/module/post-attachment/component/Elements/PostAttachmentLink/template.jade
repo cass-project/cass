@@ -1,10 +1,2 @@
 article.component.component-post-attachment-link
-  .attachment-link
-    .link-image
-      .max-image-container
-        .image
-          img(src="/dist/demo.png")
-    .link-about
-      h1 Link Title
-      h2 http://some.com/url/here
-      p A lond description goes here
+  cass-post-attachment-link-youtube(*ngIf="is('youtube')", [attachment]="link")

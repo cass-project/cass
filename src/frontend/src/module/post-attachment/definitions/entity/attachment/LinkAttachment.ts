@@ -1,9 +1,6 @@
-import {OpenGraphEntity} from "../../../../opengraph/definitions/entity/og";
-
-export interface LinkAttachment
+export interface LinkAttachment<T>
 {
     url: string;
-    metadata: {
-        og: OpenGraphEntity
-    };
+    resource: string;
+    metadata: T;
 }
