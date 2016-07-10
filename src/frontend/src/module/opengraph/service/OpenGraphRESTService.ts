@@ -16,7 +16,7 @@ export class OpenGraphRESTService extends AbstractRESTService
         super(http, token, messages);
     }
 
-    private getOpenGraph(url: string): Observable<GetOpenGraphResponse200> {
+    public getOpenGraph(url: string): Observable<GetOpenGraphResponse200> {
         let params: URLSearchParams = new URLSearchParams();
         params.set('url', url);
 

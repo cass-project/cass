@@ -11,19 +11,10 @@ article.component.component-post-form([ngClass]="{ 'component-post-form--extende
           (blur)="blur()"
         )
     .post-form-section
-      .link-form
-        .link-box
-          .link-input-container
-            input.link-input(
-            type="text",
-            placeholder="Вставьте сюда ссылку"
-            )
-          .link-cancel-button
-            button.link-button(title="Отмена", type="button")
-              i.fa.fa-times
-          .link-add-button
-            button.link-button(title="Обновить", type="button")
-              i.fa.fa-check
+      cass-post-form-link-input(
+        (attach-link)="model.attachLink($event)",
+        (detach-link)="model.detachLink()"
+      )
     .post-form-section(*ngIf="isExtended()")
       footer.post-form-footer
         .form-section
@@ -34,6 +25,7 @@ article.component.component-post-form([ngClass]="{ 'component-post-form--extende
             span Разместить
     .post-form-section(*ngIf="hasAttachments()")
       .attachment
+        cass-post-attachment([attachments]="model.getAllAttachments()")
       .attachment-actions
         .attachment-actions-section
         .attachment-actions-section

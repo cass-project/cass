@@ -14,9 +14,6 @@ class CreatePostParameters
 
     /** @var string */
     private $content;
-    
-    /** @var LinkParameters[] */
-    private $links;
 
     /** @var int[] */
     private $attachmentIds;
@@ -26,14 +23,12 @@ class CreatePostParameters
         int $profileId,
         int $collectionId,
         string $content,
-        array $links,
         array $attachmentIds
     ) {
         $this->postTypeCode = $postTypeCode;
         $this->profileId = $profileId;
         $this->collectionId = $collectionId;
         $this->content = $content;
-        $this->links = $links;
         $this->attachmentIds = $attachmentIds;
     }
 
@@ -52,11 +47,6 @@ class CreatePostParameters
 
     public function getContent(): string {
         return $this->content;
-    }
-
-    /** @return LinkParameters[] */
-    public function getLinks(): array {
-        return $this->links;
     }
 
     public function getAttachmentIds(): array {

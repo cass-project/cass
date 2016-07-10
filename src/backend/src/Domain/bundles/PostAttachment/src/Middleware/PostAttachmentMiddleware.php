@@ -3,6 +3,7 @@ namespace Domain\PostAttachment\Middleware;
 
 use Application\Service\CommandService;
 use Application\REST\Response\GenericResponseBuilder;
+use Domain\PostAttachment\Middleware\Command\LinkCommand;
 use Domain\PostAttachment\Middleware\Command\UploadCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -24,6 +25,7 @@ class PostAttachmentMiddleware implements MiddlewareInterface
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect('upload', UploadCommand::class)
+            ->attachDirect('link', LinkCommand::class)
             ->resolve($request);
 
         return $resolver->run($request, $responseBuilder);

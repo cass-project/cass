@@ -6,11 +6,13 @@ import {CollectionEntity} from "../../../../collection/definitions/entity/collec
 import {PostRESTService} from "../../../service/PostRESTService";
 import {CreatePostRequest} from "../../../definitions/paths/create";
 import {PostTypeEntity} from "../../../definitions/entity/PostType";
-import {FileAttachment} from "../../../../post-attachment/attachment/FileAttachment";
-import {LinkAttachment} from "../../../../post-attachment/attachment/LinkAttachment";
 import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
 import {PostAttachmentEntity} from "../../../../post-attachment/definitions/entity/PostAttachment";
-import {OpenGraphService} from "../../../../opengraph/service/OpenGraphService";
+import {OpenGraphRESTService} from "../../../../opengraph/service/OpenGraphRESTService";
+import {PostFormLinkInput} from "../PostFormLinkInputComponent/index";
+import {FileAttachment} from "../../../../post-attachment/definitions/entity/attachment/FileAttachment";
+import {LinkAttachment} from "../../../../post-attachment/definitions/entity/attachment/LinkAttachment";
+import {YouTubeLinkAttachment} from "../../../../post-attachment/definitions/entity/attachment/YouTubeLinkAttachment";
 
 @Component({
     selector: 'cass-post-form',
@@ -18,11 +20,9 @@ import {OpenGraphService} from "../../../../opengraph/service/OpenGraphService";
     styles: [
         require('./style.shadow.scss')
     ],
-    providers: [
-        OpenGraphService
-    ],
     directives: [
         ProgressLock,
+        PostFormLinkInput,
     ]
 })
 export class PostForm
@@ -42,10 +42,8 @@ export class PostForm
         private profile: CurrentProfileService,
         private service: PostRESTService,
         private attachments: PostAttachmentRESTService,
-        private opg: OpenGraphService
-    ) {
-        this.opg.fetch('http://2ch.hk/po/');
-    }
+        private og: OpenGraphRESTService
+    ) {}
 
     ngOnInit() {
         this.model = new PostFormModel(
@@ -125,18 +123,18 @@ export class PostForm
     reset() {
         this.model.reset();
     }
-    
-    deleteAttachments() {
-        this.model.deleteAttachments();
-        
-        if(this.model.isEmpty()) {
-            this.cancel();
-        }
-    }
 
     hasAttachments(): boolean {
         return this.model.attachments.length > 0
             || this.model.links.length > 0;
+    }
+
+    deleteAttachments() {
+        this.model.deleteAttachments();
+
+        if(this.model.isEmpty()) {
+            this.cancel();
+        }
     }
 }
 
@@ -144,7 +142,7 @@ class PostFormModel
 {
     public content: string = '';
     public attachments: PostAttachmentEntity<FileAttachment>[] = [];
-    public links: LinkAttachment[] = [];
+    public links: PostAttachmentEntity<LinkAttachment|YouTubeLinkAttachment>[] = [];
 
     constructor(
         public postType: number,
@@ -181,6 +179,33 @@ class PostFormModel
 
     isValid(): boolean {
         return ! this.isEmpty();
+    }
+
+    hasAttachments(): boolean
+    {
+        return this.links.length > 0 || this.attachments.length > 0;
+    }
+
+    getAllAttachments(): PostAttachmentEntity<any>[]
+    {
+        if(this.links.length) {
+            return this.links;
+        }else if(this.attachments.length) {
+            return this.attachments;
+        }else{
+            return [];
+        }
+    }
+
+    attachLink(link: PostAttachmentEntity<LinkAttachment | YouTubeLinkAttachment>) {
+        console.log('attached', link);
+
+        this.links = [];
+        this.links.push(link);
+    }
+
+    detachLink() {
+        this.links = [];
     }
 
     deleteAttachments() {

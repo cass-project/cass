@@ -24,18 +24,3 @@ Post_Request_CreatePost:
       items:
         type: number
         description: ID аттачмента
-    links:
-      type: array
-      items:
-        type: object
-        schema:
-          required:
-            - url
-            - metadata
-          properties:
-            url:
-              type: string
-              description: URL
-            metadata:
-              type: object
-              description: Метаданные. Могут содержать метатеги, title, путь к изображению и.т.д..

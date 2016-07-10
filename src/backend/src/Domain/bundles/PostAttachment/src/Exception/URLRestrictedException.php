@@ -1,4 +1,4 @@
 <?php
-namespace Domain\OpenGraph\Exception;
+namespace Domain\PostAttachment\Exception;
 
 class URLRestrictedException extends InvalidURLException {}

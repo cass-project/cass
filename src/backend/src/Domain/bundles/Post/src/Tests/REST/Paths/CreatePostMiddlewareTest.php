@@ -136,59 +136,6 @@ class CreatePostMiddlewareTest extends PostMiddlewareTest
             ]);
     }
 
-    public function testPostCreateWithLinkAttachment200() {
-        $account = DemoAccountFixture::getAccount();
-
-        $jsonLink = [
-            'url' => 'http://google.com/',
-            'metadata' => [
-                'foo' => 'bar'
-            ]
-        ];
-        $json = [
-            "post_type" => DiscussionPostType::CODE_INT,
-            "profile_id" => $account->getCurrentProfile()->getId(),
-            "collection_id" => SampleCollectionsFixture::getProfileCollection(1)->getId(),
-            "content" => "Demo Post Content",
-            "attachments" => [],
-            "links" => [
-                $jsonLink
-            ]
-        ];
-
-        $this->requestPostCreatePut($json)
-            ->auth($account->getAPIKey())
-            ->execute()
-            ->expectJSONContentType()
-            ->expectStatusCode(200)
-            ->expectJSONBody([
-                'success' => true,
-                'entity' => [
-                    'id' => $this->expectId(),
-                    'post_type' => [
-                        'int' => DiscussionPostType::CODE_INT,
-                        'string' => DiscussionPostType::CODE_STRING
-                    ],
-                    'profile_id' => $json['profile_id'],
-                    'collection_id' => $json['collection_id'],
-                    'content' => $json['content'],
-                    'attachments' => [
-                        0 => [
-                            'entity' => [
-                                'id' => $this->expectId(),
-                                'sid' => $this->expectString(),
-                                'date_created_on' => $this->expectString(),
-                                'is_attached_to_post' => 1,
-                                'post_id' => $this->expectId(),
-                                'attachment_type' => 'link',
-                                'attachment' => $jsonLink
-                            ]
-                        ]
-                    ]
-                ]
-            ]);
-    }
-
     public function testPostCreateWithFileAttachment200()
     {
         $account = DemoAccountFixture::getAccount();

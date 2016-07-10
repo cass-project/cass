@@ -1,30 +1,26 @@
 <?php
-namespace Domain\OpenGraph\Service;
+namespace Domain\PostAttachment\Service;
 
-use Domain\OpenGraph\Exception\EmptyURLException;
-use Domain\OpenGraph\Exception\InvalidURLException;
-use Domain\OpenGraph\Exception\URLRestrictedException;
-use Domain\OpenGraph\Parser\OpenGraphParser;
+use Domain\PostAttachment\Exception\EmptyURLException;
+use Domain\PostAttachment\Exception\InvalidURLException;
+use Domain\PostAttachment\Exception\NotFoundException;
+use Domain\PostAttachment\Exception\URLRestrictedException;
+use Domain\PostAttachment\Service\FetchResource\Result;
 
-final class OpenGraphService
+class FetchResourceService
 {
-    /** @var OpenGraphParser */
-    private $openGraphParser;
-
-    public function __construct(OpenGraphParser $openGraphParser)
+    public function fetchResource(string $url): Result
     {
-        $this->openGraphParser = $openGraphParser;
-    }
+        list($ch, $result) = $this->curl($url);
 
-    public function getOPG(string $url): array
-    {
-        libxml_use_internal_errors(true);
+        if($result === false) {
+            throw new NotFoundException('Page not found');
+        }
 
-        $source = $this->curl($url);
-        $document = new \DOMDocument();
-        $document->loadHTML($source);
+        $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+        $body = substr($result, $header_size);
 
-        return $this->openGraphParser->parse($url, $document);
+        return new Result($url, $body, curl_getinfo($ch, CURLINFO_CONTENT_TYPE));
     }
 
     private function curl($url)
@@ -34,16 +30,18 @@ final class OpenGraphService
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SAFE_UPLOAD, true);
         curl_setopt($ch, CURLOPT_UPLOAD, false);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
-        return curl_exec($ch);
+        $result = curl_exec($ch);
+
+        return [$ch, $result];
     }
 
     private function validateURL($url)

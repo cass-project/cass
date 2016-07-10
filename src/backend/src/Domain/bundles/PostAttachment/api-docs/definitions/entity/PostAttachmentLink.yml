@@ -1,0 +1,28 @@
+PostAttachment_Entity_PostAttachmentLinkEntity:
+  required:
+    - id
+    - date_created_on
+    - post_id
+    - is_attached_to_post
+    - attachment_type
+    - attachment
+  properties:
+    id:
+      type: number
+      description: ID аттачмента
+    date_created_on:
+      type: string
+      description: Дата создания аттачмента
+    post_id:
+      type: number
+      description: ID поста, к которому принадлежит аттачмент. Может содержать значение NULL.
+    is_attached_to_post:
+      type: boolean
+      description: Флаг "аттачмент прикреплен к посту"
+    attachment_type:
+      type: string
+      description: Тип аттачмента
+    attachment:
+      type: object
+      schema:
+        $ref: '#/definitions/PostAttachment_PostAttachment_Link'
