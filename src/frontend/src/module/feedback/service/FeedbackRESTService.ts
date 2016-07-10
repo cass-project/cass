@@ -34,7 +34,7 @@ export class FeedbackRESTService extends AbstractRESTService {
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
-        return this.handle(this.http.put("/backend/api/feedback-response/create", JSON.stringify(request), {headers: authHeader}));
+        return this.handle(this.http.put("/backend/api/protected/feedback-response/create", JSON.stringify(request), {headers: authHeader}));
     }
 
     public cancel(feedbackId: number) {

@@ -8,6 +8,6 @@ return function (Application $app) {
     $app->post(
         '/protected/post-attachment/{command:upload}[/]',
         PostAttachmentMiddleware::class,
-        'post-attachment-upload'
+        'post-attachment-upload-what'
     );
 };

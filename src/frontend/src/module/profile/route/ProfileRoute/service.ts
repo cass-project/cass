@@ -36,7 +36,7 @@ export class ProfileRouteService
     }
 
     public getProfile(): ProfileExtendedEntity {
-        if(! this.profile) {
+        if(!this.profile) {
             throw new Error('Profile is not loaded');
         }
 

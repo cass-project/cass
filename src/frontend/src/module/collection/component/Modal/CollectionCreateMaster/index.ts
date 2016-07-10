@@ -7,6 +7,9 @@ import {CollectionEntity, Collection} from "../../../definitions/entity/collecti
 import {ModalBoxComponent} from "../../../../modal/component/box/index";
 import {ColorPicker} from "../../../../form/component/ColorPicker/index";
 import {ScreenControls} from "../../../../util/classes/ScreenControls";
+import {MessageBusService} from "../../../../message/service/MessageBusService/index";
+import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
+import {CurrentProfileService} from "../../../../profile/service/CurrentProfileService";
 
 enum CreateCollectionMasterStage
 {
@@ -29,7 +32,9 @@ enum CreateCollectionMasterStage
 })
 export class CollectionCreateMaster
 {
-    constructor(private collectionRESTService: CollectionRESTService) {}
+    constructor(private collectionRESTService: CollectionRESTService,
+                private currentProfileService: CurrentProfileService,
+                protected messages: MessageBusService) {}
 
     private screens: ScreenControls<CreateCollectionMasterStage> = new ScreenControls<CreateCollectionMasterStage>(CreateCollectionMasterStage.Common, (sc) => {
         sc.add({ from: CreateCollectionMasterStage.Common, to: CreateCollectionMasterStage.Options });
@@ -42,7 +47,7 @@ export class CollectionCreateMaster
     @Output('error') error = new EventEmitter();
     
     collection: Collection;
-    hasThemeIds: boolean = true;
+    haveThemesSwitcher: boolean = false;
 
 
 
@@ -56,11 +61,15 @@ export class CollectionCreateMaster
 
 
     checkFields() {
-        return this.collection.theme_ids.length;
+        return (this.collection.title.length > 3 && this.collection.description.length > 3);
     };
 
     create(){
-        // TODO: this.collectionRESTService.create(this.collection);
+        this.collectionRESTService.createCollection(this.collection).subscribe(data => {
+            this.currentProfileService.get().entity.collections.push(data.entity);
+            this.close.emit(true);
+            this.messages.push(MessageBusNotificationsLevel.Info, 'Новая коллекция создана');
+        });
     };
 
     private buttons = new Buttons(this.screens);

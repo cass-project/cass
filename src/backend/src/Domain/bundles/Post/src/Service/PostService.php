@@ -1,18 +1,28 @@
 <?php
 namespace Domain\Post\Service;
 
-use Application\Exception\NotImplementedException;
-use Domain\Auth\Service\CurrentAccountService;
+use Application\Service\EventEmitterAware\EventEmitterAwareService;
+use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
+use Domain\Collection\Service\CollectionService;
 use Domain\Post\Entity\Post;
 use Domain\Post\Parameters\CreatePostParameters;
 use Domain\Post\Parameters\EditPostParameters;
+use Domain\Post\Parameters\LinkParameters;
+use Domain\Post\PostType\PostTypeFactory;
 use Domain\Post\Repository\PostRepository;
+use Domain\PostAttachment\Entity\PostAttachment;
+use Domain\PostAttachment\Entity\PostAttachment\LinkAttachmentType;
 use Domain\PostAttachment\Service\PostAttachmentService;
+use Domain\Profile\Service\ProfileService;
 
-class PostService
+class PostService implements EventEmitterAwareService
 {
-    /** @var CurrentAccountService */
-    private $currentAccountService;
+    use EventEmitterAwareTrait;
+
+    const EVENT_CREATE = 'domain.post.create';
+    const EVENT_UPDATE = 'domain.post.update';
+    const EVENT_DELETE = 'domain.post.delete';
+    const EVENT_DELETED = 'domain.post.deleted';
 
     /** @var PostAttachmentService */
     private $postAttachmentService;
@@ -20,33 +30,94 @@ class PostService
     /** @var PostRepository */
     private $postRepository;
 
+    /** @var PostTypeFactory */
+    private $postTypeFactory;
+    
+    /** @var ProfileService */
+    private $profileService;
+    
+    /** @var CollectionService */
+    private $collectionService;
+
     public function __construct(
-        CurrentAccountService $currentAccountService,
         PostAttachmentService $postAttachmentService,
-        PostRepository $postRepository
+        PostRepository $postRepository,
+        PostTypeFactory $postTypeFactory,
+        ProfileService $profileService,
+        CollectionService $collectionService
     ) {
-        $this->currentAccountService = $currentAccountService;
         $this->postAttachmentService = $postAttachmentService;
         $this->postRepository = $postRepository;
+        $this->postTypeFactory = $postTypeFactory;
+        $this->profileService = $profileService;
+        $this->collectionService = $collectionService;
     }
 
     public function createPost(CreatePostParameters $createPostParameters): Post
     {
-        throw new NotImplementedException;
+        $post = $this->createPostFromParameters($createPostParameters);
+        $this->createPostAttachmentLinksFromArray($post, $createPostParameters->getLinks());
+
+        $this->postRepository->savePost($post);
+
+        $this->getEventEmitter()->emit(self::EVENT_CREATE, [$post]);
+
+        return $post;
     }
 
     public function editPost(EditPostParameters $editPostParameters): Post
     {
-        throw new NotImplementedException;
+        $post = $this->getPostById($editPostParameters->getPostId());
+        $post->setContent($editPostParameters->getContent());
+
+        $this->postRepository->savePost($post);
+        $this->getEventEmitter()->emit(self::EVENT_UPDATE, [$post]);
+
+        return $post;
     }
 
     public function deletePost(int $postId)
     {
-        throw new NotImplementedException;
+        $this->postRepository->deletePost(
+            $this->getPostById($postId)
+        );
     }
 
     public function getPostById(int $postId): Post
     {
         return $this->postRepository->getPost($postId);
+    }
+    
+    private function createPostFromParameters(CreatePostParameters $createPostParameters): Post
+    {
+        $postType = $this->postTypeFactory->createPostTypeByIntCode($createPostParameters->getPostTypeCode());
+        $collection = $this->collectionService->getCollectionById($createPostParameters->getCollectionId());
+        $profile = $this->profileService->getProfileById($createPostParameters->getProfileId());
+
+        $post = new Post($postType, $profile, $collection, $createPostParameters->getContent());
+
+        $this->postRepository->createPost($post);
+
+        array_map(function(int $postAttachmentId) use ($post) {
+            $this->postAttachmentService->addAttachment(
+                $post,
+                $this->postAttachmentService->getPostAttachmentById($postAttachmentId)
+            );
+        }, $createPostParameters->getAttachmentIds());
+
+        return $post;
+    }
+
+    private function createPostAttachmentLinksFromArray(Post $post, array $links): array
+    {
+        /** @var LinkAttachmentType[] $result */
+        $result = array_map(function(LinkParameters $linkParameters) use ($post) {
+            $this->postAttachmentService->addAttachment(
+                $post,
+                $this->postAttachmentService->createLinkAttachment($post, $linkParameters->getUrl(), $linkParameters->getMetadata())
+            );
+        }, $links);
+
+        return $result;
     }
 }

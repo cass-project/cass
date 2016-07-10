@@ -41,7 +41,7 @@ Front-end
 - Check tab-index
 - ParseInt без основания
 
-Application\Swagger
+Swagger
 -------
 
 - Прописан ключ security

@@ -4,7 +4,10 @@ namespace Domain\Post\Entity;
 use Application\Util\Entity\IdEntity\IdEntity;
 use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection as DoctrineCollection;
 use Domain\Collection\Entity\Collection;
+use Domain\Feed\Service\Entity;
 use Domain\Post\PostType\PostType;
 use Domain\Profile\Entity\Profile;
 use Domain\Theme\Strategy\ThemeIdsEntityAware;
@@ -14,7 +17,7 @@ use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  * @Entity(repositoryClass="Domain\Post\Repository\PostRepository")
  * @Table(name="post")
  */
-class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware
+class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
 {
     use IdTrait;
     use ThemeIdsAwareEntityTrait;
@@ -51,13 +54,24 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware
      */
     private $content;
 
-    public function __construct(PostType $postType, Profile $authorProfile, Collection $collection, string $content)
-    {
+    /**
+     * @OneToMany(targetEntity="Domain\PostAttachment\Entity\PostAttachment", mappedBy="post", cascade={"all"})
+     * @var DoctrineCollection
+     */
+    private $attachments;
+
+    public function __construct(
+        PostType $postType,
+        Profile $authorProfile,
+        Collection $collection,
+        string $content
+    ) {
         $this->postTypeCode = $postType->getIntCode();
         $this->authorProfile = $authorProfile;
         $this->collection = $collection;
         $this->content = $content;
         $this->dateCreatedOn = new \DateTime();
+        $this->attachments = new ArrayCollection();
     }
 
     public function toJSON(): array
@@ -69,7 +83,7 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware
             'profile_id' => $this->getAuthorProfile()->getId(),
             'collection_id' => $this->getCollection()->getId(),
             'content' => $this->getContent(),
-            'theme_ids' => $this->getThemeIds()
+            'theme_ids' => $this->getThemeIds(),
         ];
     }
 
@@ -110,5 +124,10 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware
         $this->content = $content;
 
         return $this;
+    }
+
+    public function getAttachments(): DoctrineCollection
+    {
+        return $this->attachments;
     }
 }

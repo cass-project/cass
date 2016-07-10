@@ -16,3 +16,7 @@ html {
 body {
   background-color: $MATERIAL_BACKGROUND;
 }
+
+a, button {
+  outline: 0;
+}

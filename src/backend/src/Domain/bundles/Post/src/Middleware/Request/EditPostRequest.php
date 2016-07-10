@@ -14,7 +14,6 @@ class EditPostRequest extends SchemaParams
 
         return new EditPostParameters(
             (int) $request->getAttribute('postId'),
-            (int) $data->collection_id,
             (string) $data->content
         );
     }

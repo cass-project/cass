@@ -7,6 +7,20 @@ use Domain\Post\PostType\Types\DiscussionPostType;
 
 final class PostTypeFactory
 {
+    public function getPostTypeDefinitions(): array
+    {
+        return [
+            [
+                'int' => DefaultPostType::CODE_INT,
+                'string' => DefaultPostType::CODE_STRING,
+            ],
+            [
+                'int' => DiscussionPostType::CODE_INT,
+                'string' => DiscussionPostType::CODE_STRING,
+            ]
+        ];
+    }
+
     public function createPostTypeByIntCode(int $intCode): PostType
     {
         switch($intCode) {

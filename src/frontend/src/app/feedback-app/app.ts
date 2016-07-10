@@ -12,6 +12,7 @@ import {ModalService}         from "../../module/modal/component/service";
 import {HeadMenuComponent}    from "./src/module/head-menu/index";
 import {FeedbackRoute}        from "./src/module/feedback/route/FeedbackRoute/index";
 import {MessageBusService} from "../../module/message/service/MessageBusService/index";
+import {MessageBusNotifications} from "../../module/message/component/MessageBusNotifications/index";
 
 @Component({
     selector: 'cass-feedback-bootstrap',
@@ -30,6 +31,7 @@ import {MessageBusService} from "../../module/message/service/MessageBusService/
         CORE_DIRECTIVES,
         RouterOutlet,
         HeadMenuComponent,
+        MessageBusNotifications,
         AuthComponent
     ]
 })

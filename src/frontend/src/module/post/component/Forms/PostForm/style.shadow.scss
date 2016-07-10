@@ -1,6 +1,16 @@
 @import "./../../../../../styles/globals";
 
 article.component.component-post-form {
+  position: relative;
+
+  form.form {
+    cursor: pointer;
+  }
+
+  input#componentPostFormFileInput {
+    display: none;
+  }
+
   .card {
     @include card(1);
     background-color: white;
@@ -15,7 +25,7 @@ article.component.component-post-form {
   }
 
   .post-content-container {
-    height: 150px;
+    transition: height 0.1s;
 
     textarea.content {
       font-family: $FONT_FAMILY;
@@ -33,20 +43,6 @@ article.component.component-post-form {
     }
   }
 
-  .attachment {
-    .max-image-container {
-      .image {
-        overflow: hidden;
-        text-align: center;
-
-        img {
-          max-width: 100%;
-          max-height: 400px;
-        }
-      }
-    }
-  }
-
   .attachment-actions {
     display: flex;
     justify-content: space-between;
@@ -61,7 +57,7 @@ article.component.component-post-form {
       width: 100%;
     }
 
-    button.attach-button {
+    div.attach-button {
       text-align: center;
       width: 100%;
       background-color: transparent;
@@ -76,6 +72,7 @@ article.component.component-post-form {
       color: material-color("grey", "700");
       transition: color 0.1s;
       text-transform: uppercase;
+      text-decoration: none;
 
       i.fa {
         margin-right: 6px;
@@ -91,5 +88,70 @@ article.component.component-post-form {
     display: flex;
     justify-content: space-between;
     padding: 5px;
+  }
+
+  .link-form {
+    .link-box {
+      display: flex;
+      background-color: white;
+
+      .link-input-container {
+        width: 100%;
+
+        input.link-input {
+          font-family: $FONT_FAMILY;
+          font-size: 16px;
+          font-weight: 400;
+          color: black;
+          line-height: 38px;
+          border: 0;
+          width: 100%;
+          padding: 0 10px;
+          box-sizing: border-box;
+          outline: 0;
+        }
+      }
+
+      .link-add-button, .link-cancel-button {
+        width: 30px;
+      }
+
+      button.link-button {
+        cursor: pointer;
+        background-color: white;
+        color: material-color("grey", "800");
+        border: 0;
+        padding: 0;
+        width: 30px;
+        line-height: 38px;
+        outline: 0;
+        transition: color 0.1s, background-color 0.1s;
+
+        &:hover {
+          color: material-color("grey", "900");
+          background-color: material-color("grey", "100");
+        }
+
+        &:disabled {
+          color: material-color("grey", "400");
+        }
+      }
+    }
+  }
+}
+
+article.component.component-post-form--not-extended {
+  form.form, textarea {
+    cursor: pointer;
+  }
+
+  .post-content-container {
+    height: 70px;
+  }
+}
+
+article.component.component-post-form--extended {
+  .post-content-container {
+    height: 200px;
   }
 }

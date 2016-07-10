@@ -33,7 +33,7 @@ class UploadImageRequest implements RequestParamsInterface
         );
 
         if(! isset($request->getUploadedFiles()['file'])) {
-            throw new FileNotUploadedException('File not uplaoded');
+            throw new FileNotUploadedException('File not is not uploaded');
         }
 
         /** @var UploadedFile $file */

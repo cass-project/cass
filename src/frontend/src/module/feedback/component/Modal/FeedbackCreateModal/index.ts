@@ -40,10 +40,11 @@ export class FeedbackCreateModal
     ) {}
 
     ngOnInit() {
+        this.model.description="";
+        this.model.type_feedback = 1;
+        
         if(this.feedbackType) {
             this.model.type_feedback = this.feedbackType.code.int;
-        } else {
-            this.model.type_feedback = 1;
         }
 
         try {

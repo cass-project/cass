@@ -4,6 +4,7 @@ div {
   position: fixed;
   right: 10px;
   bottom: 10px;
+  z-index: 100;
  .beta-icon {
    opacity: .7;
     background: material-color("blue-grey", "900");

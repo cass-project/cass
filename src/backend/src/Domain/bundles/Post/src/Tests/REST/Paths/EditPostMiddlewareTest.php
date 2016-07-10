@@ -10,27 +10,25 @@ use Domain\Post\Tests\PostMiddlewareTest;
  * @backupGlobals disabled
  */
 class EditPostMiddlewareTest extends PostMiddlewareTest
-{    public function testPostEdit200()
-{
-    $this->upFixture(new SamplePostsFixture());
+{    
+    public function testPostEdit200() {
+        $this->upFixture(new SamplePostsFixture());
 
-    $post = SamplePostsFixture::getPost(1);
+        $post = SamplePostsFixture::getPost(1);
 
-    $json = [
-        "collection_id" => SampleCollectionsFixture::getProfileCollection(1)->getId(),
-        "content" => "Demo Post Content",
-        "attachments" => [],
-    ];
+        $json = [
+            "content" => "* Demo Post Content",
+        ];
 
-    $this->requestPostEditPost($post->getId(), $json)
-        ->auth(DemoAccountFixture::getAccount()->getAPIKey())
-        ->execute()
-        ->expectJSONContentType()
-        ->expectStatusCode(200)
-        ->expectJSONBody([
-            'success' => true
-        ]);
-}
+        $this->requestPostEditPost($post->getId(), $json)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(200)
+            ->expectJSONBody([
+                'success' => true
+            ]);
+    }
 
     public function testPostEdit403()
     {
@@ -39,9 +37,7 @@ class EditPostMiddlewareTest extends PostMiddlewareTest
         $post = SamplePostsFixture::getPost(1);
 
         $json = [
-            "collection_id" => SampleCollectionsFixture::getProfileCollection(1)->getId(),
-            "content" => "Demo Post Content",
-            "attachments" => [],
+            "content" => "* Demo Post Content",
         ];
 
         $this->requestPostEditPost($post->getId(), $json)
@@ -54,9 +50,7 @@ class EditPostMiddlewareTest extends PostMiddlewareTest
         $this->upFixture(new SamplePostsFixture());
 
         $json = [
-            "collection_id" => SampleCollectionsFixture::getProfileCollection(1)->getId(),
-            "content" => "Demo Post Content",
-            "attachments" => [],
+            "content" => "* Demo Post Content",
         ];
 
         $this->requestPostEditPost(999999999, $json)

@@ -5,6 +5,7 @@ use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Domain\Post\Entity\Post;
 use Domain\PostAttachment\Entity\PostAttachment;
+use Domain\PostAttachment\Exception\PostAttachmentFactoryException;
 
 class PostAttachmentRepository extends EntityRepository
 {
@@ -17,8 +18,12 @@ class PostAttachmentRepository extends EntityRepository
         return $postAttachment;
     }
 
-    public function savePostAttachment(PostAttachment $postAttachment) {
+    public function createPostAttachment(PostAttachment $postAttachment) {
         $this->getEntityManager()->persist($postAttachment);
+        $this->getEntityManager()->flush($postAttachment);
+    }
+
+    public function savePostAttachment(PostAttachment $postAttachment) {
         $this->getEntityManager()->flush($postAttachment);
     }
 
@@ -56,5 +61,23 @@ class PostAttachmentRepository extends EntityRepository
                 ->setParameter("timeInterval", $timeInterval)
         ;
         return $queryBuilder->getQuery()->getResult();
+    }
+    
+    public function getPostAttachmentById(int $postAttachmentId): PostAttachment
+    {
+        $result = $this->find($postAttachmentId);
+        
+        if($result === null) {
+            throw new PostAttachmentFactoryException(sprintf('Post attachment with ID `%s` not found', $postAttachmentId));
+        }
+
+        return $result;
+    }
+
+    public function getAttachmentsOfPost(int $postId): array
+    {
+        return $this->findBy([
+            'post' => $postId
+        ]);
     }
 }

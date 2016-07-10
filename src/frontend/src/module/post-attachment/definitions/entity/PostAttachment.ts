@@ -12,7 +12,7 @@ export interface PostAttachmentEntity<T extends PostAttachmentType>
 
 export interface PostAttachmentType
 {
-    code: string;
+    attachment_type: string;
 }
 
 export interface PostLinkEntity extends PostAttachmentType
