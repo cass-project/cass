@@ -39,6 +39,8 @@ final class PostEvents implements EventsBootstrapInterface
             $er->upsert($post, [
                 $sc->getProfileSource($post->getAuthorProfile()->getId()),
                 $sc->getCollectionSource($post->getCollection()->getId()),
+                $sc->getPublicDiscussionsSource(),
+                $sc->getPublicContentSource(),
             ]);
         });
 
@@ -46,13 +48,17 @@ final class PostEvents implements EventsBootstrapInterface
             $er->upsert($post, [
                 $sc->getProfileSource($post->getAuthorProfile()->getId()),
                 $sc->getCollectionSource($post->getCollection()->getId()),
+                $sc->getPublicDiscussionsSource(),
+                $sc->getPublicContentSource(),
             ]);
         });
 
-        $ps->getEventEmitter()->on(PostService::EVENT_DELETED, function(Post $post) use ($er, $ps, $sc) {
+        $ps->getEventEmitter()->on(PostService::EVENT_DELETE, function(Post $post) use ($er, $ps, $sc) {
             $er->delete($post, [
                 $sc->getProfileSource($post->getAuthorProfile()->getId()),
                 $sc->getCollectionSource($post->getCollection()->getId()),
+                $sc->getPublicDiscussionsSource(),
+                $sc->getPublicContentSource(),
             ]);
         });
     }

@@ -60,6 +60,8 @@ class FetchResourceService
             '127.0.0.1',
             '0.0.0.0',
             '255.255.255.0',
+            '255.255.255.252',
+            'localhost',
             $_SERVER['SERVER_NAME']
         ];
 

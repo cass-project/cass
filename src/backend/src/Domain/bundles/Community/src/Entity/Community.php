@@ -13,13 +13,14 @@ use Domain\Collection\Strategy\CollectionAwareEntity;
 use Domain\Collection\Strategy\Traits\CollectionAwareEntityTrait;
 use Domain\Community\Entity\Community\CommunityFeatures;
 use Domain\Community\Exception\CommunityHasNoThemeException;
+use Domain\Feed\Service\Entity;
 use Domain\Theme\Entity\Theme;
 
 /**
  * @Entity(repositoryClass="Domain\Community\Repository\CommunityRepository")
  * @Table(name="community")
  */
-class Community implements IdEntity, JSONSerializable, ImageEntity, CollectionAwareEntity
+class Community implements IdEntity, JSONSerializable, ImageEntity, CollectionAwareEntity, Entity
 {
     const SID_LENGTH = 8;
 
@@ -126,6 +127,11 @@ class Community implements IdEntity, JSONSerializable, ImageEntity, CollectionAw
         }
 
         return $result;
+    }
+
+    public function toIndexedJSON(): array
+    {
+        return $this->toJSON();
     }
 
     public function getSID(): string

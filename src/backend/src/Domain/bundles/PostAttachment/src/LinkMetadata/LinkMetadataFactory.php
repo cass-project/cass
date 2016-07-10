@@ -60,7 +60,7 @@ final class LinkMetadataFactory
 
     private function testIsYouTube(string $origURL)
     {
-        return in_array(parse_url($origURL)['host'], [
+        return in_array(parse_url($origURL)['host'] ?? 'localhost', [
             'youtube.com',
             'www.youtube.com'
         ]);

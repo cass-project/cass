@@ -87,6 +87,11 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
         ];
     }
 
+    public function toIndexedJSON(): array
+    {
+        return $this->toJSON();
+    }
+
     public function getPostTypeCode(): int
     {
         return $this->postTypeCode;

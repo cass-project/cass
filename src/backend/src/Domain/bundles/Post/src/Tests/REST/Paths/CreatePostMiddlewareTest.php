@@ -193,9 +193,9 @@ class CreatePostMiddlewareTest extends PostMiddlewareTest
                                 'date_created_on' => $this->expectString(),
                                 'is_attached_to_post' => 1,
                                 'post_id' => $this->expectId(),
-                                'attachment_type' => 'image',
                                 'attachment' => [
-                                    'file' => [
+                                    'source' => [
+                                        'source' => 'local',
                                         'public_path' => $this->expectString(),
                                         'storage_path' => $this->expectString(),
                                     ]

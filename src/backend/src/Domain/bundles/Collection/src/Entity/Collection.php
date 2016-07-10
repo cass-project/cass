@@ -11,6 +11,7 @@ use Domain\Collection\Exception\InvalidCollectionOptionsException;
 use Domain\Collection\Exception\PublicEnabledException;
 use Domain\Community\Entity\Community;
 use Domain\Avatar\Entity\ImageEntityTrait;
+use Domain\Feed\Service\Entity;
 use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Theme\Strategy\ThemeIdsEntityAware;
 use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
@@ -19,7 +20,7 @@ use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  * @Entity(repositoryClass="Domain\Collection\Repository\CollectionRepository")
  * @Table(name="collection")
  */
-class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, ThemeIdsEntityAware
+class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, ThemeIdsEntityAware, Entity
 {
     use IdTrait;
     use SIDEntityTrait;
@@ -89,6 +90,11 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
             'image' => $this->getImages()->toJSON()
         ];
         return $result;
+    }
+
+    public function toIndexedJSON(): array
+    {
+        return $this->toJSON();
     }
 
     public function getOwnerSID(): string

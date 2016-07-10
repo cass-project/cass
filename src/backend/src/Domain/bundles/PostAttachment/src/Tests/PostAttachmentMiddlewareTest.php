@@ -32,32 +32,6 @@ class PostAttachmentMiddlewareTest extends MiddlewareTestCase
             ->expectJSONBody(['success' => true]);
     }
 
-    public function testUploadBigFile409()
-    {
-        $localFileName = __DIR__ . '/Resources/grid-example.png';
-        $uploadFile = new UploadedFile($localFileName, ImageAttachmentType::MAX_FILE_SIZE_BYTES + 1000, 0);
-
-        return $this->requestUpload($uploadFile)
-            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
-            ->execute()
-            ->expectStatusCode(409)
-            ->expectJSONContentType()
-            ->expectJSONBody(['success' => false]);
-    }
-
-    public function testUploadSmallFile409()
-    {
-        $localFileName = __DIR__ . '/Resources/grid-example.png';
-        $uploadFile = new UploadedFile($localFileName, 0, 0);
-
-        return $this->requestUpload($uploadFile)
-            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
-            ->execute()
-            ->expectStatusCode(409)
-            ->expectJSONContentType()
-            ->expectJSONBody(['success' => false]);
-    }
-
     public function testUpload403()
     {
         $localFileName = __DIR__ . '/Resources/grid-example.png';
