@@ -10,12 +10,16 @@ import {FileAttachment} from "../../../../post-attachment/attachment/FileAttachm
 import {LinkAttachment} from "../../../../post-attachment/attachment/LinkAttachment";
 import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
 import {PostAttachmentEntity} from "../../../../post-attachment/definitions/entity/PostAttachment";
+import {OpenGraphService} from "../../../../opengraph/service/OpenGraphService";
 
 @Component({
     selector: 'cass-post-form',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
+    ],
+    providers: [
+        OpenGraphService
     ],
     directives: [
         ProgressLock,
@@ -37,8 +41,11 @@ export class PostForm
     constructor(
         private profile: CurrentProfileService,
         private service: PostRESTService,
-        private attachments: PostAttachmentRESTService
-    ) {}
+        private attachments: PostAttachmentRESTService,
+        private opg: OpenGraphService
+    ) {
+        this.opg.fetch('http://2ch.hk/po/');
+    }
 
     ngOnInit() {
         this.model = new PostFormModel(

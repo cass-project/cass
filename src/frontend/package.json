@@ -26,6 +26,7 @@
     "ng2-bootstrap": "1.0.5",
     "ng2-cookies": "^0.1.4",
     "node-sass": "^3.4.2",
+    "open-graph-scraper": "^2.1.0",
     "pug": "^2.0.0-beta2",
     "pug-load": "^2.0.0",
     "raw-loader": "0.5.1",

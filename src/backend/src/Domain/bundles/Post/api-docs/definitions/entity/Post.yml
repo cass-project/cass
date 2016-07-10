@@ -38,9 +38,5 @@ Post_Entity_Post:
       description: Содержание поста
     attachments:
       type: array
-      schema:
-        properties:
-          links:
-            type: array
-            items:
-              $ref: '#/definitions/PostAttachment_PostAttachment_Link'
+      items:
+        type: object
