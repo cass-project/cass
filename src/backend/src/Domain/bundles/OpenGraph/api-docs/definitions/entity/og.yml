@@ -1,4 +1,4 @@
-OpenGraph_Entity_OPG:
+OpenGraph_Entity_OG:
   required:
     - basic
     - opg
@@ -83,25 +83,29 @@ OpenGraph_Entity_OPG:
               type: object
               schema:
                 required:
-                  - url
-                  - secure_url
-                  - type
-                  - width
-                  - height
+                  - "og:image"
+                  - "og:image:url"
+                  - "og:image:secure_url"
+                  - "og:image:type"
+                  - "og:image:width"
+                  - "og:image:height"
                 properties:
-                  url:
+                  "og:image":
                     type: string
                     description: URL
-                  secure_url:
+                  "og:image:url":
+                    type: string
+                    description: URL
+                  "og:image:secure_url":
                     type: string
                     description: An alternate url to use if the webpage requires HTTPS.
-                  type:
+                  "og:image:type":
                     type: string
                     description: A MIME type
-                  width:
+                  "og:image:width":
                     type: string
                     description: The number of pixels wide.
-                  height:
+                  "og:image:height":
                     type: string
                     description: The number of pixels high.
           videos:
@@ -110,25 +114,29 @@ OpenGraph_Entity_OPG:
               type: object
               schema:
                 required:
-                  - url
-                  - secure_url
-                  - type
-                  - width
-                  - height
+                  - "og:video"
+                  - "og:video:url"
+                  - "og:video:secure_url"
+                  - "og:video:type"
+                  - "og:video:width"
+                  - "og:video:height"
                 properties:
-                  url:
+                  "og:video":
                     type: string
                     description: URL
-                  secure_url:
+                  "og:video:url":
+                    type: string
+                    description: URL
+                  "og:video:secure_url":
                     type: string
                     description: An alternate url to use if the webpage requires HTTPS.
-                  type:
+                  "og:video:type":
                     type: string
                     description: A MIME type
-                  width:
+                  "og:video:width":
                     type: string
                     description: The number of pixels wide.
-                  height:
+                  "og:video:height":
                     type: string
                     description: The number of pixels high.
           audios:
@@ -137,16 +145,20 @@ OpenGraph_Entity_OPG:
               type: object
               schema:
                 required:
-                  - url
-                  - secure_url
-                  - type
+                  - "og:audio"
+                  - "og:audio:url"
+                  - "og:audio:secure_url"
+                  - "og:audio:type"
                 properties:
-                  url:
+                  "og:audio":
                     type: string
                     description: URL
-                  secure_url:
+                  "og:audio:url":
+                    type: string
+                    description: URL
+                  "og:audio:secure_url":
                     type: string
                     description: An alternate url to use if the webpage requires HTTPS.
-                  type:
+                  "og:audio:type":
                     type: string
                     description: A MIME type

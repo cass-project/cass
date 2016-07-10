@@ -15,6 +15,7 @@ export class ProfileIMRESTService extends AbstractRESTService
 
     getUnreadMessages(){
         let authHeader = new Headers();
+        
         if(this.token.hasToken()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }

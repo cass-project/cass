@@ -1,4 +1,4 @@
-'/opg/get-opg/':
+'/og/get-og/':
   get:
     tags:
       - opengraph
@@ -25,4 +25,4 @@
             entity:
               type: object
               schema:
-                $ref: '#/definitions/OpenGraph_Entity_OPG'
+                $ref: '#/definitions/OpenGraph_Entity_OG'

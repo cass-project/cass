@@ -6,8 +6,8 @@ use Zend\Expressive\Application;
 
 return function (Application $app) {
   $app->get(
-        '/opg/get-opg[/]',
+        '/og/get-og[/]',
         OpenGraphMiddleware::class,
-        'opg-get-opg'
+        'og-get-og'
     );
 };
