@@ -37,10 +37,11 @@ class PostAttachment implements JSONSerializable, IdEntity, SIDEntity
     private $isAttachedToPost = false;
 
     /**
+     * @deprecated
      * @Column(type="string", name="attachment_type")
      * @var string
      */
-    private $attachmentType;
+    private $attachmentType = 'link';
 
     /**
      * @Column(type="json_array")
@@ -48,9 +49,8 @@ class PostAttachment implements JSONSerializable, IdEntity, SIDEntity
      */
     private $attachment = [];
 
-    public function __construct(string $attachmentType) {
+    public function __construct() {
         $this->regenerateSID();
-        $this->attachmentType = $attachmentType;
         $this->dateCreatedOn = new \DateTime();
     }
 

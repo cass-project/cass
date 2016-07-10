@@ -3,6 +3,7 @@ PostAttachment_PostAttachment_Link:
     - url
     - resource
     - metadata
+    - source
   properties:
     url:
       type: string
@@ -14,3 +15,6 @@ PostAttachment_PostAttachment_Link:
     metadata:
       type: object
       description: Метаданные
+    source:
+      type: object
+      description: Источник

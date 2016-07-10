@@ -47,7 +47,7 @@ final class LinkMetadataFactory
     {
         if($this->testIsYouTube($origURL) && strlen($this->getYouTubeId($origURL))) {
             return YoutubeLinkMetadata::RESOURCE_TYPE;
-        } else if($this->test(['html', 'xhtml'], $contentType)) {
+        } else if($this->test(['text/html', 'application/xml', 'application/xhtml'], $contentType)) {
             return PageLinkMetadata::RESOURCE_TYPE;
         } else if($this->test(['image/jpg', 'image/jpeg', 'image/gif', 'image/png', 'image/bmp'], $contentType)) {
             return ImageLinkMetadata::RESOURCE_TYPE;
