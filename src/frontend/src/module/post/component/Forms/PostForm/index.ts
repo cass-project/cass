@@ -98,10 +98,7 @@ export class PostForm
     }
 
     cancel() {
-        this.model.reset();
-        this.focused = false;
-        this.linkRequested = false;
-        this.contentTextArea.nativeElement.blur();
+        this.reset();
     }
 
     focus() {
@@ -129,6 +126,9 @@ export class PostForm
 
     reset() {
         this.model.reset();
+        this.focused = false;
+        this.linkRequested = false;
+        this.contentTextArea.nativeElement.blur();
     }
 
     hasAttachments(): boolean {
