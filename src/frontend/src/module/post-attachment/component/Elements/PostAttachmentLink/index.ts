@@ -4,6 +4,7 @@ import {LinkAttachment} from "../../../definitions/entity/attachment/LinkAttachm
 import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
 import {PostAttachmentLinkYouTube} from "../PostAttachmentLinkYouTube/index";
 import {PostAttachmentLinkImage} from "../PostAttachmentLinkImage/index";
+import {PostAttachmentLinkPage} from "../PostAttachmentLinkPage/index";
 
 @Component({
     selector: 'cass-post-attachment-link',
@@ -14,6 +15,7 @@ import {PostAttachmentLinkImage} from "../PostAttachmentLinkImage/index";
     directives: [
         PostAttachmentLinkYouTube,
         PostAttachmentLinkImage,
+        PostAttachmentLinkPage,
     ]
 })
 export class PostAttachmentLink
@@ -21,7 +23,6 @@ export class PostAttachmentLink
     @Input('attachment') link: PostAttachmentEntity<LinkAttachment<any>>;
     
     is(resource: string) {
-        console.log(resource, this.link.attachment.resource === resource, this.link.attachment.resource);
         return this.link.attachment.resource === resource;
     }
 }

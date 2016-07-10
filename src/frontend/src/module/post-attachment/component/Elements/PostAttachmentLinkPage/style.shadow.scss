@@ -1,0 +1,57 @@
+@import "./../../../../../styles/globals";
+
+article.component.component-post-attachment-link-page {
+  .image-container {
+    text-align: center;
+    background-color: material-color("grey", "100");
+
+    a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 700px;
+    }
+  }
+
+  .link-description {
+    padding: 20px 15px;
+
+    h1 {
+      margin-bottom: 10px;
+
+      a {
+        display: block;
+        font-family: $FONT_FAMILY;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 400;
+        color: black;
+        text-decoration: none;
+        transition: color 0.1s;
+
+        &:hover {
+          color: material-color("indigo", "700");
+          text-decoration: underline;
+        }
+      }
+    }
+
+    div.url {
+      font-family: $FONT_FAMILY;
+      font-size: 16px;
+      font-weight: 400;
+      color: material-color("grey", "500");
+      margin-bottom: 15px;
+    }
+
+    p.description {
+      font-family: $FONT_FAMILY;
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 400;
+      color: material-color("grey", "700");
+    }
+  }
+}
