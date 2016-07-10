@@ -131,7 +131,9 @@ class Community implements IdEntity, JSONSerializable, ImageEntity, CollectionAw
 
     public function toIndexedJSON(): array
     {
-        return $this->toJSON();
+        return array_merge($this->toJSON(), [
+            'date_created_on' => $this->getDateCreatedOn()
+        ]);
     }
 
     public function getSID(): string

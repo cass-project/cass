@@ -46,9 +46,7 @@ abstract class AbstractCommand implements \Application\Command\Command
         $responseBuilder
             ->setStatusSuccess()
             ->setJson([
-                'entities' => array_map(function(Entity $entity) {
-                    return $entity->toIndexedJSON();
-                }, $entities)
+                'entities' => $entities
             ]);
 
         return $responseBuilder->build();
