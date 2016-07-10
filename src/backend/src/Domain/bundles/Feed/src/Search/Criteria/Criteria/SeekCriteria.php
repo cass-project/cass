@@ -10,6 +10,11 @@ final class SeekCriteria implements Criteria
     private $cursor;
     private $limit;
 
+    public function getCode(): string
+    {
+        return self::CODE_STRING;
+    }
+
     public function unpack(array $criteria)
     {
         $this->limit = $criteria['limit'] ?? null;
