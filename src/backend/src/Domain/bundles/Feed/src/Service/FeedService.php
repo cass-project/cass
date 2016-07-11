@@ -33,14 +33,7 @@ final class FeedService
     {
         $collection = $this->mongoDB->selectCollection($source->getMongoDBCollection());
         $stream = $this->streamFactory->getStreamForSource($source);
-        
-        return array_map(function(BSONDocument $document) {
-            /** @var ObjectID $id */
-            $id = $document['_id'];
 
-            return array_merge((array) $document->bsonSerialize(), [
-                '_id' => (string) $id
-            ]);
-        }, $stream->fetch($feedRequest->getCriteria(), $collection));
+        return $stream->fetch($feedRequest->getCriteria(), $collection);
     }
 }

@@ -87,6 +87,11 @@ class PostService implements EventEmitterAwareService
         return $this->postRepository->getPost($postId);
     }
     
+    public function getPostsByIds(array $postIds): array 
+    {
+        return $this->postRepository->getPostsByIds($postIds);
+    }
+    
     private function createPostFromParameters(CreatePostParameters $createPostParameters): Post
     {
         $postType = $this->postTypeFactory->createPostTypeByIntCode($createPostParameters->getPostTypeCode());

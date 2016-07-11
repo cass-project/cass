@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef} from "angular2/core";
+import {Component, Input, ViewChild, ElementRef, EventEmitter, Output} from "angular2/core";
 
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {CurrentProfileService} from "../../../../profile/service/CurrentProfileService";
@@ -10,6 +10,7 @@ import {PostAttachmentRESTService} from "../../../../post-attachment/service/Pos
 import {PostAttachmentEntity} from "../../../../post-attachment/definitions/entity/PostAttachment";
 import {PostFormLinkInput} from "../PostFormLinkInputComponent/index";
 import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
+import {PostEntity} from "../../../definitions/entity/Post";
 
 @Component({
     selector: 'cass-post-form',
@@ -29,6 +30,8 @@ export class PostForm
 
     @Input('post-type') postType: PostTypeEntity;
     @Input('collection') collection: CollectionEntity;
+    
+    @Output('success') successEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
     @ViewChild('contentTextArea') contentTextArea: ElementRef;
 
@@ -116,6 +119,7 @@ export class PostForm
         this.service.createPost(this.model.createRequest()).subscribe(
             (response) => {
                 status.loading = false;
+                this.successEvent.emit(response.entity);
                 this.reset();
             },
             (error) => {

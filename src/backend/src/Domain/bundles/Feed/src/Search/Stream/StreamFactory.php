@@ -10,10 +10,26 @@ use Domain\Feed\Source\PublicCatalog\PublicContentSource;
 use Domain\Feed\Source\PublicCatalog\PublicDiscussionsSource;
 use Domain\Feed\Source\PublicCatalog\PublicProfilesSource;
 use Domain\Feed\Source\Source;
+use Domain\Post\Formatter\PostFormatter;
+use Domain\Post\Service\PostService;
 use Zend\I18n\Exception\OutOfBoundsException;
 
 final class StreamFactory
 {
+    /** @var PostFormatter */
+    private $postFormatter;
+
+    /** @var PostService */
+    private $postService;
+
+    public function __construct(
+        PostFormatter $postFormatter,
+        PostService $postService
+    ) {
+        $this->postFormatter = $postFormatter;
+        $this->postService = $postService;
+    }
+
     public function getStreamForSource(Source $source) {
         $sourceName = get_class($source);
 
@@ -28,11 +44,17 @@ final class StreamFactory
             ProfileSource::class,
             CollectionSource::class,
         ])) {
-            return new PostStream($source);
+            $stream = new PostStream($source);
+            $stream->setPostFormatter($this->postFormatter);
+            $stream->setPostService($this->postService);
+
+            return $stream;
         }else if(in_array($sourceName, [
             PublicCollectionsSource::class
         ])) {
-            return new CollectionStream($source);
+            $stream = new CollectionStream($source);
+
+            return $stream;
         }else if(in_array($sourceName, [
             PublicCommunitiesSource::class
         ])) {

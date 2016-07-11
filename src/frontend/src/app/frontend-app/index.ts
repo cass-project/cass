@@ -38,6 +38,7 @@ import {PublicComponent} from "../../module/public/index";
 import {ProfileModalModel} from "../../module/profile/component/Modals/ProfileModal/model";
 import {AccountRESTService} from "../../module/account/service/AccountRESTService";
 import {PostTypeService} from "../../module/post/service/PostTypeService";
+import {FeedRESTService} from "../../module/feed/service/FeedRESTService";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -71,6 +72,7 @@ import {PostTypeService} from "../../module/post/service/PostTypeService";
         PublicService,
         ProfileModalModel,
         PostTypeService,
+        FeedRESTService,
     ],
     directives: [
         ROUTER_DIRECTIVES,

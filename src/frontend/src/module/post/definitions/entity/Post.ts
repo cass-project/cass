@@ -1,3 +1,5 @@
+import {PostAttachmentEntity} from "../../../post-attachment/definitions/entity/PostAttachment";
+
 export interface PostEntity
 {
     id: number;
@@ -5,4 +7,5 @@ export interface PostEntity
     author_profile_id: number;
     collection_id: number;
     content: string;
+    attachments: PostAttachmentEntity<any>[];
 }

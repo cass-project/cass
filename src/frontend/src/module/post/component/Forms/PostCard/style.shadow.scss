@@ -1,3 +1,20 @@
-article.component.component-post-card {
+@import "./../../../../../styles/globals";
 
+article.component.component-post-card {
+  .card {
+    @include card(1);
+    background-color: white;
+  }
+
+  .content-container {
+    padding: 20px 13px;
+
+    p {
+      font-family: $FONT_FAMILY;
+      font-size: 16px;
+      font-weight: 400;
+      color: black;
+      line-height: 20px;
+    }
+  }
 }
