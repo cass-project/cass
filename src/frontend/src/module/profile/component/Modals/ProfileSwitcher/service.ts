@@ -19,16 +19,16 @@ export class ProfileSwitcherService
     disableClick = false;
 
     switchProfile(profileId){
-        if(!this.disableClick && this.currentProfileService.get().getId() !== profileId){
+        if(!this.disableClick && this.currentProfileService.get().getId() !== profileId) {
             this.disableClick = true;
 
-            this.currentProfileService.get().entity.profile.is_current = false;
+           /* this.currentProfileService.get().entity.profile.is_current = false;
 
-            for(let i = 0; i < this.currentAccountService.get().profiles.profiles.length; i++){
-                if(profileId === this.currentAccountService.get().profiles.profiles[i].entity.profile.id){
+            for (let i = 0; i < this.currentAccountService.get().profiles.profiles.length; i++) {
+                if (profileId === this.currentAccountService.get().profiles.profiles[i].entity.profile.id) {
                     this.currentAccountService.get().profiles.profiles[i].entity.profile.is_current = true;
                 }
-            }
+            }*/
 
             this.profileRESTService.switchProfile(profileId).subscribe(data => {
                 window.location.reload();
