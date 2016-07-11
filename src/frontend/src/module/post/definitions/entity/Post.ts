@@ -1,4 +1,5 @@
 import {PostAttachmentEntity} from "../../../post-attachment/definitions/entity/PostAttachment";
+import {ProfileEntity} from "../../../profile/definitions/entity/Profile";
 
 export interface PostEntity
 {
@@ -8,4 +9,5 @@ export interface PostEntity
     collection_id: number;
     content: string;
     attachments: PostAttachmentEntity<any>[];
+    profile: ProfileEntity;
 }

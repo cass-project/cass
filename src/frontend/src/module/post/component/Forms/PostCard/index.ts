@@ -2,6 +2,8 @@ import {Component, Input} from "angular2/core";
 
 import {PostEntity} from "../../../definitions/entity/Post";
 import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
+import {ProfileCardHeader} from "../../../../profile/component/Elements/ProfileCardHeader/index";
+import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
 
 @Component({
     selector: 'cass-post-card',
@@ -10,12 +12,29 @@ import {PostAttachment} from "../../../../post-attachment/component/Elements/Pos
         require('./style.shadow.scss')
     ],
     directives: [
-        PostAttachment
+        PostAttachment,
+        ProfileCardHeader,
     ]
 })
 export class PostCard
 {
     @Input('post') post: PostEntity;
+
+    private dateCreatedOn: Date;
+
+    getProfile(): ProfileEntity
+    {
+        return this.post.profile;
+    }
+
+    getPostDateCreatedOn(): Date
+    {
+        if(! this.dateCreatedOn) {
+            this.dateCreatedOn = new Date(this.post.date_created_on);
+        }
+
+        return this.dateCreatedOn;
+    }
 
     getContent(): string {
         return this.post.content;

@@ -6,9 +6,13 @@ use Domain\Post\PostType\PostTypeFactory;
 use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\PostAttachment\Formatter\PostAttachmentFormatter;
 use Domain\PostAttachment\Service\PostAttachmentService;
+use Domain\Profile\Service\ProfileService;
 
 final class PostFormatter
 {
+    /** @var ProfileService */
+    private $profileService;
+
     /** @var PostTypeFactory */
     private $postTypeFactory;
 
@@ -19,10 +23,12 @@ final class PostFormatter
     private $postAttachmentFormatter;
 
     public function __construct(
+        ProfileService $profileService,
         PostTypeFactory $postTypeFactory,
         PostAttachmentService $postAttachmentService,
-        PostAttachmentFormatter $postAttachmentFormatter)
-    {
+        PostAttachmentFormatter $postAttachmentFormatter
+    ) {
+        $this->profileService = $profileService;
         $this->postTypeFactory = $postTypeFactory;
         $this->postAttachmentService = $postAttachmentService;
         $this->postAttachmentFormatter = $postAttachmentFormatter;
@@ -34,6 +40,7 @@ final class PostFormatter
 
         return array_merge_recursive($post->toJSON(), [
             'post_type' => $postTypeObject->toJSON(),
+            'profile' => $this->profileService->getProfileById($post->getAuthorProfile()->getId())->toJSON(),
             'attachments' => $this->formatAttachments($post)
         ]);
     }

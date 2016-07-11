@@ -1,0 +1,12 @@
+article.component.component-profile-card-header
+  .profile-image
+    .profile-image-container
+      cass-profile-image(border="circle", [url]="getImageURL()")
+  .profile-about
+      .profile-name
+        h1 {{ getProfileName() }}
+      .profile-settings
+        a.profile-link.profile-about-link([href]="getProfileLink()", (click)="goProfile()")
+          span Профиль
+        time(*ngIf="hasTime()")
+          span {{ getTime() }}

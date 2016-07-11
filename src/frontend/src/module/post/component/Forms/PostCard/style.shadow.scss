@@ -3,7 +3,14 @@
 article.component.component-post-card {
   .card {
     @include card(1);
+    border-radius: 3px;
+    overflow: hidden;
     background-color: white;
+  }
+
+  .card-header {
+    margin-top: 8px;
+    margin-bottom: 15px;
   }
 
   .content-container {

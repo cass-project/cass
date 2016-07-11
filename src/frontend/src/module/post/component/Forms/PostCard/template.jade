@@ -1,5 +1,7 @@
 article.component.component-post-card
   .card
+    .card-header
+      cass-profile-card-header([profile]="getProfile()", [time]="getPostDateCreatedOn()")
     .card-content
       .content-container(*ngIf="hasContent()")
         p {{ getContent() }}

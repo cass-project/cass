@@ -1,9 +1,13 @@
 article.component.component-profile-collection-feed {
+  text-align: center;
+
   .entities {
     .post-card-container {
       width: 550px;
-      float: left;
+      display: inline-block;
       margin: 10px;
+      text-align: left;
+      vertical-align: top;
     }
   }
 

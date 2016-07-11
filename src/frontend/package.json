@@ -23,6 +23,8 @@
     "jquery": "^3.0.0",
     "json-loader": "^0.5.4",
     "merge": "^1.2.0",
+    "moment": "^2.14.1",
+    "momentjs": "^1.1.10",
     "ng2-bootstrap": "1.0.5",
     "ng2-cookies": "^0.1.4",
     "node-sass": "^3.4.2",
