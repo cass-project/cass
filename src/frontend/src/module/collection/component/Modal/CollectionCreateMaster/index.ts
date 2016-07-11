@@ -5,7 +5,6 @@ import {ThemeSelect} from "../../../../theme/component/ThemeSelect/index";
 import {CollectionRESTService} from "../../../service/CollectionRESTService";
 import {CollectionEntity, Collection} from "../../../definitions/entity/collection";
 import {ModalBoxComponent} from "../../../../modal/component/box/index";
-import {ColorPicker} from "../../../../form/component/ColorPicker/index";
 import {ScreenControls} from "../../../../util/classes/ScreenControls";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
@@ -28,9 +27,8 @@ enum CreateCollectionMasterStage
     directives: [
         ModalComponent,
         ModalBoxComponent,
-        ColorPicker,
         ThemeSelect,
-        ProgressLock,
+        ProgressLock
     ]
 })
 export class CollectionCreateMaster
@@ -67,16 +65,36 @@ export class CollectionCreateMaster
 
     checkFields() {
         return (this.collection.title.length > 0);
-    };
+    }
 
-    create() {
+
+    create(){
+        if(this.ownerType === 'profile'){
+            this.createForProfile();
+        } else if(this.ownerType === 'community'){
+            this.createForCommunity();
+        }
+    }
+
+    createForCommunity(){
+        //TODO: When community frontend will be completed, implement this method
+    }
+
+    createForProfile() {
         this.loading = true;
 
         this.collectionRESTService.createCollection(this.collection).subscribe(
             (data) => {
+                let profileId;
+                if(data.entity.owner.id === this.currentProfileService.get().getId().toString()){
+                    profileId = 'current';
+                } else {
+                    profileId = data.entity.owner.id;
+                }
                 this.loading = false;
                 this.currentProfileService.get().entity.collections.push(data.entity);
-                this.messages.push(MessageBusNotificationsLevel.Info, `Создана коллекция "${data.entity}"`);
+                this.messages.push(MessageBusNotificationsLevel.Info, `Создана коллекция "${data.entity.title}"`);
+                this.router.navigate(['Profile/Profile', {id: profileId}, 'Collections/View', { sid: data.entity.sid }]);
                 this.close.emit(true);
             },
             (error) => {
