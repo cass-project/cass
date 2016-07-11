@@ -34,13 +34,13 @@ cass-modal
                     .modal-list-info
                       h1 Подборка имеет тематику
                       div(*ngIf="!haveThemesSwitcher")
-                        p  Если вы укажите тематику у своей подборки, то другие люди смогут найти вас в поисках контента по выбранной вами тематике.
-                      div(*ngIf="haveThemesSwitcher")
-                        cass-theme-select([value]='collection.theme_ids')
+                        p  Если вы укажите тематику у своей подборки, то другие люди смогут найти вас в поисках контента по выбранной вами тематике
                     .modal-list-controls
                       div.form-switch-button
                         input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", [(ngModel)]='haveThemesSwitcher',  [checked]='collection.hasThemeIds()')
                         label.form-switch-button-label(for="collectionCreateMasterEnableTheme")
+            div.theme-select-container(*ngIf="haveThemesSwitcher")
+              cass-theme-select([value]='collection.theme_ids')
         footer.form-footer
           .form-footer-section
             .form-footer-item
