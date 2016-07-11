@@ -1039,16 +1039,6 @@
   "gender": "0"
  },
  {
-  "id": 226,
-  "profile_id": 221,
-  "email": "olinum@mail.ru",
-  "avatar": "55e95efa73473.jpeg",
-  "nickname": "Сильвер",
-  "patronymic": null,
-  "surname": null,
-  "gender": "0"
- },
- {
   "id": 227,
   "profile_id": 216,
   "email": "vikocenter@gmail.com",
@@ -1149,16 +1139,6 @@
   "gender": "1"
  },
  {
-  "id": 236,
-  "profile_id": 232,
-  "email": "VRUD@MAIL.RU",
-  "avatar": "115203462193523.jpq",
-  "nickname": "Moiseeva Jenia",
-  "patronymic": "Максимовна",
-  "surname": "Евгения",
-  "gender": "1"
- },
- {
   "id": 237,
   "profile_id": 233,
   "email": "FFFFF@NNN.COM",
@@ -1217,16 +1197,6 @@
   "patronymic": null,
   "surname": null,
   "gender": null
- },
- {
-  "id": 242,
-  "profile_id": 239,
-  "email": "sms@dimke.ru",
-  "avatar": null,
-  "nickname": "Dimka_ru",
-  "patronymic": null,
-  "surname": null,
-  "gender": "0"
  },
  {
   "id": 243,

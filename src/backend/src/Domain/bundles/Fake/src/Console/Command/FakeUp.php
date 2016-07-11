@@ -35,21 +35,34 @@ class FakeUp extends Command
     {
 
         try {
-            for($var=0;$var < 10; $var++){
-                $uVar = uniqid($var);
-                $account = $this->accountService->createAccount("{$uVar}coffee@mail.ru",'1234');
+            $profilesJsonFile = sprintf("%s/../../Resources/Data/JSON/profiles.json",__DIR__);
+            if(!file_exists($profilesJsonFile)) $output->writeln(['Файл не сущестуует']);
 
+            $profilesJson = json_decode( file_get_contents($profilesJsonFile) );
+
+            foreach($profilesJson as $profileJson){
+
+                $avatarPath = sprintf("%s/../../Resources/Data/Images/avatars/%s", __DIR__, $profileJson->avatar);
+
+                $account = $this->accountService->createAccount($profileJson->email,'1234');
                 /** @var Profile $profile */
                 $profile = $account->getCurrentProfile();
-                $profile->setGender(Profile\Gender\Gender::createFromIntCode());
-
-                $parameters = new EditPersonalParameters('n',FALSE,"first_name{$uVar}");
+                $profile->setGender(Profile\Gender\Gender::createFromIntCode((int)$profileJson->gender));
+                $parameters = new EditPersonalParameters(
+                    'n', file_exists($avatarPath)? $avatarPath: FALSE,
+                    $profileJson->nickname == NULL ? '' : $profileJson->nickname,
+                    $profileJson->surname == NULL ? '' : $profileJson->surname,
+                    $profileJson->patronymic == NULL ? '' : $profileJson->patronymic,
+                    $profileJson->nickname == NULL ? '' : $profileJson->nickname
+                );
                 $this->profileService->updatePersonalData($profile->getId(), $parameters);
 
-            $output->writeln([
-                                 "Account ID:{$account->getId()}",
-                                 "Account email:{$account->getEmail()}",
-                             ]);
+                $output->writeln([
+                                     "Account ID:{$account->getId()}",
+                                     "Account email:{$account->getEmail()}",
+                                 ]);
+
+
             }
 
         }catch(\Exception $e) {
