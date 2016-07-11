@@ -13,7 +13,7 @@ import {ProfileService} from "../../../service/ProfileService";
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {AuthService} from "../../../../auth/service/AuthService";
 import {AccountRESTService} from "../../../../account/service/AccountRESTService";
-import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
+import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 
 enum ProfileModalTab
 {
@@ -37,8 +37,7 @@ enum ProfileModalTab
         ImageTab,
         InterestsTab,
         ProfilesTab,
-        LoadingLinearIndicator
-
+        ProgressLock
     ],
     providers: [
         AccountRESTService,

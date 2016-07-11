@@ -1,9 +1,5 @@
 <div class="component component-profile-modal">
-  <div class="form" *ngIf="model.loading">
-    <div class="loading-indicator-box">
-      <cass-loading-linear-indicator></cass-loading-linear-indicator>
-    </div>
-  </div>
+    <cass-form-progress-lock *ngIf="model.loading"></cass-form-progress-lock>
   <div class="tab-modal">
     <div class="tab-panel">
       <div class="top">
