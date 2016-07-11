@@ -32,7 +32,6 @@ class SamplePostsFixture implements Fixture
                 DemoAccountFixture::getAccount()->getCurrentProfile()->getId(),
                 SampleCollectionsFixture::getProfileCollection(1)->getId(),
                 'Demo Post Content',
-                [],
                 []
             ));
         }

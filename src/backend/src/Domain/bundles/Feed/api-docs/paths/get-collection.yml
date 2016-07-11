@@ -1,0 +1,32 @@
+"/feed/get/collection/{collectionId}":
+  post:
+    tags:
+      - feed
+    description: |
+      Возвращает ленту сообщений указанной коллекции
+    parameters:
+      - name: collectionId
+        in: path
+        required: true
+        description: ID коллекции
+        type: number
+      - name: body
+        in: body
+        required: true
+        description: JSON Body
+        schema:
+          $ref: '#/definitions/Feed_Request_FeedRequest'
+    responses:
+      200:
+        schema:
+          required:
+            - success
+            - entities
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entities:
+              type: array
+              items:
+                $ref: '#/definitions/Post_Entity_Post'

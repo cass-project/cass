@@ -1,11 +1,12 @@
 import {Injectable} from "angular2/core";
-import {Http} from "angular2/http"
+import {Http, URLSearchParams, Headers} from "angular2/http"
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {AuthToken} from "../../auth/service/AuthToken";
 import {Observable} from "rxjs/Observable";
 import {UploadPostAttachmentResponse200} from "../definitions/paths/upload";
 import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
+import {LinkPostAttachmentResponse200} from "../definitions/paths/link";
 
 @Injectable()
 export class PostAttachmentRESTService extends AbstractRESTService
@@ -16,6 +17,22 @@ export class PostAttachmentRESTService extends AbstractRESTService
         protected messages: MessageBusService
     ) { super(http, token, messages); }
 
+    public link(url: string): Observable<LinkPostAttachmentResponse200> {
+        let params = new URLSearchParams();
+        params.set('url', url);
+
+        let headers = new Headers();
+
+        if(this.token.hasToken()){
+            headers.append('Authorization', `${this.token.apiKey}`);
+        }
+
+        return this.handle(this.http.put('/backend/api/protected/post-attachment/link/', '', {
+            search: params,
+            headers: headers
+        }));
+    }
+    
     public upload(file: Blob): Observable<UploadPostAttachmentResponse200> {
         let observable = new Observable((observer) => {
             let url = '/backend/api/protected/post-attachment/upload/';

@@ -114,4 +114,4 @@ sudo service nginx restart
 # ##############
 # PHP7.0-MONGODB
 # ##############
-sudo pecl install php7.0-mongodb
+sudo pecl install mongodb

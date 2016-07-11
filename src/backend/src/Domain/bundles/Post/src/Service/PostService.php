@@ -56,7 +56,6 @@ class PostService implements EventEmitterAwareService
     public function createPost(CreatePostParameters $createPostParameters): Post
     {
         $post = $this->createPostFromParameters($createPostParameters);
-        $this->createPostAttachmentLinksFromArray($post, $createPostParameters->getLinks());
 
         $this->postRepository->savePost($post);
 
@@ -88,6 +87,11 @@ class PostService implements EventEmitterAwareService
         return $this->postRepository->getPost($postId);
     }
     
+    public function getPostsByIds(array $postIds): array 
+    {
+        return $this->postRepository->getPostsByIds($postIds);
+    }
+    
     private function createPostFromParameters(CreatePostParameters $createPostParameters): Post
     {
         $postType = $this->postTypeFactory->createPostTypeByIntCode($createPostParameters->getPostTypeCode());
@@ -106,18 +110,5 @@ class PostService implements EventEmitterAwareService
         }, $createPostParameters->getAttachmentIds());
 
         return $post;
-    }
-
-    private function createPostAttachmentLinksFromArray(Post $post, array $links): array
-    {
-        /** @var LinkAttachmentType[] $result */
-        $result = array_map(function(LinkParameters $linkParameters) use ($post) {
-            $this->postAttachmentService->addAttachment(
-                $post,
-                $this->postAttachmentService->createLinkAttachment($post, $linkParameters->getUrl(), $linkParameters->getMetadata())
-            );
-        }, $links);
-
-        return $result;
     }
 }

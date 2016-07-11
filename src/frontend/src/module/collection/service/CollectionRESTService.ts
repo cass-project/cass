@@ -5,6 +5,8 @@ import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {AuthToken} from "../../auth/service/AuthToken";
 import {Collection} from "../definitions/entity/collection";
+import {Observable} from "rxjs/Observable";
+import {CreateCollectionResponse200} from "../definitions/paths/create";
 
 @Injectable()
 export class CollectionRESTService extends AbstractRESTService
@@ -20,11 +22,10 @@ export class CollectionRESTService extends AbstractRESTService
     public tryNumber:number = 0;
     public progressBar:number = 0;
 
-    createCollection(collection: Collection)
+    createCollection(collection: Collection): Observable<CreateCollectionResponse200>
     {
-        
-        
         let authHeader = new Headers();
+        
         if(this.token.hasToken()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }

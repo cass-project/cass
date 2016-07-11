@@ -1,0 +1,36 @@
+@import "./../../../../../styles/globals";
+
+article.component.component-post-attachment-link-unknown {
+  .link-container {
+    background-color: material-color("grey", "200");
+    display: flex;
+
+    .icon {
+      width: 50px;
+      font-size: 16px;
+      color: material-color("grey", "900");
+      line-height: 45px;
+
+      i {
+        width: 50px;
+        text-align: center;
+      }
+    }
+
+    .url {
+      margin-top: 12px;
+
+      a {
+        font-family: $FONT_FAMILY;
+        font-size: 13px;
+        font-weight: 400;
+        color: material-color("light-blue", "700");
+        vertical-align: middle;
+
+        &:hover {
+          color: material-color("light-blue", "500");
+        }
+      }
+    }
+  }
+}

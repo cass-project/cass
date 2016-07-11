@@ -1,0 +1,22 @@
+article.component.component-post-form-link-input
+  cass-form-progress-lock(*ngIf="loading")
+  .link-form
+    .link-box
+      .link-input-container
+        input.link-input(
+          #urlInput,
+          type="text",
+          placeholder="Вставьте сюда ссылку",
+          [(ngModel)]="url",
+          (change)="fetch()",
+          (paste)="fetch()",
+          [disabled]="loading"
+        )
+      .link-cancel-button
+        button.link-button(title="Отмена", type="button", (click)="cancel()")
+          i.fa.fa-times
+      .link-add-button
+        button.link-button(title="Обновить", type="button", (click)="fetch()")
+          i.fa.fa-check
+  .error-container(*ngIf="error")
+    span {{ error }}

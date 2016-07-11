@@ -2,6 +2,8 @@
 namespace Domain\PostAttachment\Service;
 
 use Application\Util\FileNameFilter;
+use Application\Util\GenerateRandomString;
+use Domain\OpenGraph\Parser\OpenGraphParser;
 use Domain\Post\Entity\Post;
 use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\PostAttachment\Entity\PostAttachment\AttachmentType;
@@ -12,7 +14,11 @@ use Domain\PostAttachment\Entity\PostAttachment\FileAttachmentType;
 use Domain\PostAttachment\Entity\PostAttachment\Link\GenericLinkAttachmentType;
 use Domain\PostAttachment\Exception\FileTooBigException;
 use Domain\PostAttachment\Exception\FileTooSmallException;
+use Domain\PostAttachment\LinkMetadata\LinkMetadataFactory;
 use Domain\PostAttachment\Repository\PostAttachmentRepository;
+use Domain\PostAttachment\Service\FetchResource\Result;
+use Domain\PostAttachment\Source\LocalSource;
+use Domain\PostAttachment\Source\Source;
 use League\Flysystem\FilesystemInterface;
 
 class PostAttachmentService
@@ -23,25 +29,59 @@ class PostAttachmentService
     /** @var PostAttachmentRepository */
     private $postAttachmentRepository;
 
+    /** @var FetchResourceService */
+    private $fetchResourceService;
+    
+    /** @var LinkMetadataFactory */
+    private $linkMetadataFactory;
+
+    /**
+     * PostAttachmentService constructor.
+     * @param FilesystemInterface $fileSystem
+     * @param PostAttachmentRepository $postAttachmentRepository
+     * @param FetchResourceService $fetchResourceService
+     * @param LinkMetadataFactory $linkMetadataFactory
+     */
     public function __construct(
         FilesystemInterface $fileSystem,
-        PostAttachmentRepository $postAttachmentRepository
-    )
-    {
+        PostAttachmentRepository $postAttachmentRepository,
+        FetchResourceService $fetchResourceService,
+        LinkMetadataFactory $linkMetadataFactory
+    ) {
         $this->fileSystem = $fileSystem;
         $this->postAttachmentRepository = $postAttachmentRepository;
+        $this->fetchResourceService = $fetchResourceService;
+        $this->linkMetadataFactory = $linkMetadataFactory;
     }
 
-    public function createLinkAttachment(Post $post, string $url, array $metadata): PostAttachment
+    public function createLinkAttachment(Post $post, string $url, string $resource, array $metadata): PostAttachment
     {
-        $attachmentType = $this->factoryLinkAttachmentType($url, $metadata);
-
-        $postAttachment = new PostAttachment($attachmentType->getCode());
+        $postAttachment = new PostAttachment();
         $postAttachment->attachToPost($post);
         $postAttachment->setAttachment([
             'url' => $url,
+            'resource' => $resource,
             'metadata' => $metadata
         ]);
+
+        $this->postAttachmentRepository->createPostAttachment($postAttachment);
+
+        return $postAttachment;
+    }
+    
+    public function linkAttachment(string $url, Result $result, Source $source): PostAttachment
+    {
+        $linkMetadata = $this->linkMetadataFactory->createLinkMetadata($url, $result->getContentType(), $result->getContent());
+
+        $metadata = [
+            'url' => $linkMetadata->getURL(),
+            'resource' => $linkMetadata->getResourceType(),
+            'metadata' => $linkMetadata->toJSON(),
+            'source' => array_merge(['source' => $source->getCode()], $source->toJSON())
+        ];
+
+        $postAttachment = new PostAttachment();
+        $postAttachment->setAttachment($metadata);
 
         $this->postAttachmentRepository->createPostAttachment($postAttachment);
 
@@ -58,29 +98,22 @@ class PostAttachmentService
             $this->validateFileSize($tmpFile, $attachmentType);
         }
 
-        $postAttachmentEntity = $this->postAttachmentRepository->makePostAttachmentEntity($attachmentType->getCode());
-
-        $subDirectory = $postAttachmentEntity->getId();
+        $subDirectory = GenerateRandomString::gen(12);
         $storagePath = $subDirectory . '/' . $desiredFileName;
+        $publicPath = '/dist/storage/post/attachment/' . $subDirectory . '/' . $desiredFileName;
 
-        if($this->fileSystem->write($storagePath, file_get_contents($tmpFile)) === false) {
+        $finfo = new \finfo(FILEINFO_MIME);
+        $content = file_get_contents($tmpFile);
+        $contentType = $finfo->buffer($content);
+
+        if($this->fileSystem->write($storagePath, $content) === false) {
             throw new \Exception('Failed to copy uploaded file');
         }
+        
+        $result = new Result($publicPath, $content, $contentType);
+        $source = new LocalSource($publicPath, $storagePath);
 
-        $postAttachmentEntity->setAttachment([
-            'file' => [
-                'public_path' => '/dist/storage/post/attachment/' . $subDirectory . '/' . $desiredFileName,
-                'storage_path' => $storagePath
-            ]
-        ]);
-
-        if($attachmentType instanceof AttachmentTypeExtension) {
-            $postAttachmentEntity->mergeAttachment($attachmentType->extend($postAttachmentEntity));
-        }
-
-        $this->postAttachmentRepository->savePostAttachment($postAttachmentEntity);
-
-        return $postAttachmentEntity;
+        return $this->linkAttachment($publicPath, $result, $source);
     }
 
     public function setAttachments(Post $post, array $attachmentIds)
@@ -125,7 +158,6 @@ class PostAttachmentService
 
     private function factoryLinkAttachmentType(string $url, array $metadata): AttachmentType
     {
-        // TODO:: validate link
         return new GenericLinkAttachmentType();
     }
 

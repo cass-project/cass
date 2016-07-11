@@ -1,6 +1,6 @@
-article.component.component-post-attachment-file
-  cass-post-attachment-file(*ngIf="is('file')")
-  cass-post-attachment-link(*ngIf="is('link')")
-  cass-post-attachment-image(*ngIf="is('image')")
-  cass-post-attachment-webm(*ngIf="is('webm')")
-  cass-post-attachment-youtube(*ngIf="is('youtube')")
+article.component.component-post-attachment
+  cass-post-attachment-link-youtube(*ngIf="is('youtube')", [attachment]="link")
+  cass-post-attachment-link-image(*ngIf="is('image')", [attachment]="link")
+  cass-post-attachment-link-page(*ngIf="is('page')", [attachment]="link")
+  cass-post-attachment-link-webm(*ngIf="is('webm')", [attachment]="link")
+  cass-post-attachment-link-unknown(*ngIf="is('unknown')", [attachment]="link")

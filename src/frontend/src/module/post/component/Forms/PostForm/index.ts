@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef} from "angular2/core";
+import {Component, Input, ViewChild, ElementRef, EventEmitter, Output} from "angular2/core";
 
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {CurrentProfileService} from "../../../../profile/service/CurrentProfileService";
@@ -6,10 +6,11 @@ import {CollectionEntity} from "../../../../collection/definitions/entity/collec
 import {PostRESTService} from "../../../service/PostRESTService";
 import {CreatePostRequest} from "../../../definitions/paths/create";
 import {PostTypeEntity} from "../../../definitions/entity/PostType";
-import {FileAttachment} from "../../../../post-attachment/attachment/FileAttachment";
-import {LinkAttachment} from "../../../../post-attachment/attachment/LinkAttachment";
 import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
 import {PostAttachmentEntity} from "../../../../post-attachment/definitions/entity/PostAttachment";
+import {PostFormLinkInput} from "../PostFormLinkInputComponent/index";
+import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
+import {PostEntity} from "../../../definitions/entity/Post";
 
 @Component({
     selector: 'cass-post-form',
@@ -19,6 +20,8 @@ import {PostAttachmentEntity} from "../../../../post-attachment/definitions/enti
     ],
     directives: [
         ProgressLock,
+        PostFormLinkInput,
+        PostAttachment,
     ]
 })
 export class PostForm
@@ -27,12 +30,15 @@ export class PostForm
 
     @Input('post-type') postType: PostTypeEntity;
     @Input('collection') collection: CollectionEntity;
+    
+    @Output('success') successEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
     @ViewChild('contentTextArea') contentTextArea: ElementRef;
 
     private status: LoadingStatus[] = [];
     private model: PostFormModel;
     private focused: boolean = false;
+    private linkRequested: boolean = false;
 
     constructor(
         private profile: CurrentProfileService,
@@ -86,10 +92,16 @@ export class PostForm
         return !testIsModelEmpty || testIsFocused || testIsLoading;
     }
 
+    requestLinkBox() {
+        this.linkRequested = true;
+    }
+
+    isLinkBoxRequested(): boolean {
+        return this.linkRequested && ! this.hasAttachments();
+    }
+
     cancel() {
-        this.model.reset();
-        this.focused = false;
-        this.contentTextArea.nativeElement.blur();
+        this.reset();
     }
 
     focus() {
@@ -107,6 +119,7 @@ export class PostForm
         this.service.createPost(this.model.createRequest()).subscribe(
             (response) => {
                 status.loading = false;
+                this.successEvent.emit(response.entity);
                 this.reset();
             },
             (error) => {
@@ -117,27 +130,29 @@ export class PostForm
 
     reset() {
         this.model.reset();
-    }
-    
-    deleteAttachments() {
-        this.model.deleteAttachments();
-        
-        if(this.model.isEmpty()) {
-            this.cancel();
-        }
+        this.focused = false;
+        this.linkRequested = false;
+        this.contentTextArea.nativeElement.blur();
     }
 
     hasAttachments(): boolean {
-        return this.model.attachments.length > 0
-            || this.model.links.length > 0;
+        return this.model.attachments.length > 0;
+    }
+
+    deleteAttachments() {
+        this.model.deleteAttachments();
+        this.linkRequested = false;
+
+        if(this.model.isEmpty()) {
+            this.cancel();
+        }
     }
 }
 
 class PostFormModel
 {
     public content: string = '';
-    public attachments: PostAttachmentEntity<FileAttachment>[] = [];
-    public links: LinkAttachment[] = [];
+    public attachments: PostAttachmentEntity<any>[] = [];
 
     constructor(
         public postType: number,
@@ -155,7 +170,6 @@ class PostFormModel
             attachments: this.attachments.map((attachment) => {
                 return attachment.id;
             }),
-            links: []
         }
     }
 
@@ -166,19 +180,37 @@ class PostFormModel
 
     isEmpty(): boolean {
         let testHasContent = this.content.length > 0;
-        let testHasLinks = this.links.length > 0;
         let testHasAttachments = this.attachments.length > 0;
 
-        return ! (testHasContent || testHasLinks || testHasAttachments);
+        return ! (testHasContent || testHasAttachments);
     }
 
     isValid(): boolean {
         return ! this.isEmpty();
     }
 
+    hasAttachments(): boolean
+    {
+        return this.attachments.length > 0;
+    }
+
+    getAllAttachments(): PostAttachmentEntity<any>[]
+    {
+        return this.attachments;
+    }
+
+    getAttachment(): PostAttachmentEntity<any>
+    {
+        return this.attachments[0];
+    }
+    
+    addAttachment(attachment: PostAttachmentEntity<any>) {
+        this.attachments = [];
+        this.attachments.push(attachment);
+    }
+    
     deleteAttachments() {
         this.attachments = [];
-        this.links = [];
     }
 }
 

@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component, Output, EventEmitter} from "angular2/core";
 
 import {ProfileImage} from "../../Elements/ProfileImage/index";
 import {ComponentStages} from "../../../../util/classes/ComponentStages";
@@ -25,10 +25,13 @@ enum ProfileSwitcherStage
 
 export class ProfileSwitcher
 {
+    
+    @Output('close') close = new EventEmitter<boolean>();
     stage: ComponentStages<ProfileSwitcherStage> = new ComponentStages<ProfileSwitcherStage>(ProfileSwitcherStage.Choice);
 
     constructor(private service: ProfileSwitcherService) {}
 
-    close() {
+    closeProfileSwitcher() {
+       this.close.emit(true); 
     }
 }

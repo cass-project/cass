@@ -87,6 +87,13 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
         ];
     }
 
+    public function toIndexedJSON(): array
+    {
+        return array_merge($this->toJSON(), [
+            'date_created_on' => $this->getDateCreatedOn()
+        ]);
+    }
+
     public function getPostTypeCode(): int
     {
         return $this->postTypeCode;

@@ -3,7 +3,8 @@ article.component.component-profile-collection
     header.collection-header
       h1 {{ collection.title }}
       h2 {{ collection.description }}
-
   .post-form
     .post-form-container
-      cass-post-form([collection]="collection", [post-type]="postType")
+      cass-post-form([collection]="collection", [post-type]="postType", (success)="unshiftEntity($event)")
+  .posts
+    cass-profile-collection-feed([collection-id]="collection.id")

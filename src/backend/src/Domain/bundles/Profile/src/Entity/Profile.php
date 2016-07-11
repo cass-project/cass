@@ -11,9 +11,9 @@ use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Entity\ImageEntityTrait;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
-use Domain\Collection\Collection\CollectionTree\MutableCollectionTree;
 use Domain\Collection\Strategy\CollectionAwareEntity;
 use Domain\Collection\Strategy\Traits\CollectionAwareEntityTrait;
+use Domain\Feed\Service\Entity;
 use Domain\Profile\Entity\Profile\Gender\Gender;
 use Domain\Profile\Entity\Profile\Gender\GenderNotSpecified;
 use Domain\Profile\Entity\Profile\Greetings\Greetings;
@@ -23,7 +23,7 @@ use Domain\Profile\Entity\Profile\Greetings\GreetingsAnonymous;
  * @Entity(repositoryClass="Domain\Profile\Repository\ProfileRepository")
  * @Table(name="profile")
  */
-class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, CollectionAwareEntity
+class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, CollectionAwareEntity, Entity
 {
     use IdTrait;
     use SIDEntityTrait;
@@ -92,6 +92,11 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
         ];
 
         return $result;
+    }
+
+    public function toIndexedJSON(): array
+    {
+        return $this->toJSON();
     }
 
     public function __construct(Account $account)

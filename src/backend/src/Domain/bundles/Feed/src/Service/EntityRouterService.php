@@ -23,7 +23,7 @@ final class EntityRouterService
                 'update' => [
                     'id' => $entity->getId()
                 ]
-            ], ['$set' => $entity->toJSON()], ['upsert' => true]);
+            ], ['$set' => $entity->toIndexedJSON()], ['upsert' => true]);
         });
     }
 
@@ -35,7 +35,7 @@ final class EntityRouterService
                 'update' => [
                     'id' => $entity->getId()
                 ]
-            ], $entity->toJSON());
+            ], $entity->toIndexedJSON());
         });
     }
 
@@ -47,7 +47,7 @@ final class EntityRouterService
                 'update' => [
                     'id' => $entity->getId()
                 ]
-            ], ['$set' => $entity->toJSON()], ['upsert' => false]);
+            ], ['$set' => $entity->toIndexedJSON()], ['upsert' => false]);
         });
     }
 

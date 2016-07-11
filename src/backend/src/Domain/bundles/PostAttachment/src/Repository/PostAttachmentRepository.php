@@ -1,7 +1,6 @@
 <?php
 namespace Domain\PostAttachment\Repository;
 
-use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Domain\Post\Entity\Post;
 use Domain\PostAttachment\Entity\PostAttachment;
@@ -9,8 +8,8 @@ use Domain\PostAttachment\Exception\PostAttachmentFactoryException;
 
 class PostAttachmentRepository extends EntityRepository
 {
-    public function makePostAttachmentEntity(string $attachmentType): PostAttachment {
-        $postAttachment = new PostAttachment($attachmentType);
+    public function makePostAttachmentEntity(): PostAttachment {
+        $postAttachment = new PostAttachment();
 
         $this->getEntityManager()->persist($postAttachment);
         $this->getEntityManager()->flush($postAttachment);

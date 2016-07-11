@@ -14,6 +14,18 @@ export abstract class AbstractRESTService
         protected token: AuthToken,
         protected messages: MessageBusService
     ) {}
+    
+    public parseError(error): string {
+        if(typeof error === "object") {
+            if(error.error && typeof error.error === 'string') {
+                return error.error;
+            }else{
+                return 'Unknown error';
+            }
+        }else{
+            return 'Failed to parse JSON';
+        }
+    }
 
     handle(request) {
         let fork = request.publish().refCount();

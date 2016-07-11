@@ -7,8 +7,6 @@ final class PostAttachmentFormatter
 {
     public function format(PostAttachment $postAttachment)
     {
-        return [
-            'entity' => $postAttachment->toJSON()
-        ];
+        return $postAttachment->toJSON();
     }
 }
