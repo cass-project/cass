@@ -7,7 +7,7 @@ final class SeekCriteria implements Criteria
 {
     const CODE_STRING = 'seek';
 
-    private $cursor;
+    private $lastId;
     private $limit;
 
     public function getCode(): string
@@ -18,5 +18,16 @@ final class SeekCriteria implements Criteria
     public function unpack(array $criteria)
     {
         $this->limit = $criteria['limit'] ?? null;
+        $this->lastId = $criteria['last_id'] ?? '';
+    }
+
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function getLastId(): string
+    {
+        return $this->lastId;
     }
 }

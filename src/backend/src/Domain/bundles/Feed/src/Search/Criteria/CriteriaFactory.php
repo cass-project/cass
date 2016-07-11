@@ -3,6 +3,7 @@ namespace Domain\Feed\Search\Criteria;
 
 use Domain\Feed\Exception\UnknownCriteriaException;
 use Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
+use Domain\Feed\Search\Criteria\Criteria\SortCriteria;
 
 final class CriteriaFactory
 {
@@ -18,6 +19,9 @@ final class CriteriaFactory
 
             case SeekCriteria::CODE_STRING:
                 return new SeekCriteria();
+            
+            case SortCriteria::CODE_STRING:
+                return new SortCriteria();
         }
     }
 }
