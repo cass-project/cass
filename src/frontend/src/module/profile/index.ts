@@ -31,6 +31,12 @@ export class ProfileComponent
 {
     constructor(private authService: AuthService, private currentProfileService: CurrentProfileService, private modals: ProfileModals, protected messages: MessageBusService) {}
 
+    closeModalProfileSwitcher($event){
+        if($event){
+            this.modals.switcher.close();
+        }
+    }
+    
     closeModalCollectionCreateMaster($event){
         if($event){
             this.modals.createCollection.close();
