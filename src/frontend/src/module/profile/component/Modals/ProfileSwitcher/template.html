@@ -1,6 +1,6 @@
 <div class="component component-profile-switcher">
   <div class="form" *ngIf="service.disableClick">
-    <div class="processing-container">
+    <div class="loading-indicator-box">
       <cass-loading-linear-indicator></cass-loading-linear-indicator>
     </div>
   </div>
@@ -21,7 +21,7 @@
     <footer class="form-footer">
       <div class="form-footer-section">
         <div class="cass-padding-box-5">
-          <button class="form-text-button" (click)="service.signOut()">
+          <button class="form-text-button" (click)="signOut()">
             <i class="fa fa-fw fa-sign-out"></i>
             <span>Выход из сервиса</span>
           </button>
