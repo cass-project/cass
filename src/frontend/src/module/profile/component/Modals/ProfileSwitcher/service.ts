@@ -1,4 +1,5 @@
 import {Injectable} from "angular2/core";
+import {Router} from "angular2/router";
 
 import {ProfileRESTService} from "../../../service/ProfileRESTService";
 import {CurrentProfileService} from "../../../service/CurrentProfileService";
@@ -10,7 +11,8 @@ export class ProfileSwitcherService
     constructor(
         private profileRESTService: ProfileRESTService,
         private currentProfileService: CurrentProfileService,
-        private currentAccountService: CurrentAccountService
+        private currentAccountService: CurrentAccountService,
+        private router: Router
     ) {}
 
     disableClick = false;
@@ -28,6 +30,7 @@ export class ProfileSwitcherService
             }
 
             this.profileRESTService.switchProfile(profileId).subscribe(data => {
+                this.router.navigate(['Profile/Profile', {id: 'current'}]);
                 window.location.reload();
             });
         }

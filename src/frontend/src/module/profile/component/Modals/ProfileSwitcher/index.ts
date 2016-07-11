@@ -4,8 +4,8 @@ import {Router} from "angular2/router";
 import {ProfileImage} from "../../Elements/ProfileImage/index";
 import {ComponentStages} from "../../../../util/classes/ComponentStages";
 import {ProfileSwitcherService} from "./service";
-import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
 import {AuthService} from "../../../../auth/service/AuthService";
+import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 
 enum ProfileSwitcherStage
 {
@@ -21,7 +21,7 @@ enum ProfileSwitcherStage
     ],
     directives: [
         ProfileImage,
-        LoadingLinearIndicator
+        ProgressLock
     ]
 })
 

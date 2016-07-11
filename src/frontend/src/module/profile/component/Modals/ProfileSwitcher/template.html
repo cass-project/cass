@@ -1,10 +1,7 @@
 <div class="component component-profile-switcher">
-  <div class="form" *ngIf="service.disableClick">
-    <div class="loading-indicator-box">
-      <cass-loading-linear-indicator></cass-loading-linear-indicator>
-    </div>
-  </div>
   <div class="form" *ngIf="stage.isOn('Choice')">
+    <cass-form-progress-lock *ngIf="service.disableClick">
+    </cass-form-progress-lock>
     <header class="profile-switcher-header form-header">
       <h1>Смена профиля</h1>
     </header>
