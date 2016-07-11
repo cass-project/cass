@@ -46,7 +46,7 @@ export class ProfileCollectionRoute
         this.postType = types.getTypeByStringCode('default');
 
         service.getObservable().subscribe(
-            (response: GetProfileByIdResponse200) => {
+            (response) => {
                 let sid = params.get('sid');
                 let collections = response.entity.collections.filter((entity: CollectionEntity) => {
                     return entity.sid === sid;
@@ -59,7 +59,7 @@ export class ProfileCollectionRoute
                 this.collection = collections[0];
 
                 feedSource.collectionId = this.collection.id;
-                feed.provide(feedSource, new Stream<PostEntity>())
+                feed.provide(feedSource, new Stream<PostEntity>());
                 feed.update();
             },
             (error) => {}

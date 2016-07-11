@@ -31,7 +31,7 @@ export class ProfileRouteService
         return this.loading;
     }
     
-    public getObservable(): Observable<Response> {
+    public getObservable(): Observable<GetProfileByIdResponse200> {
         return this.observable;
     }
 
