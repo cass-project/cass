@@ -2,6 +2,7 @@
 namespace Domain\Fake\Console\Command;
 
 use Domain\Account\Service\AccountService;
+use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
 use Domain\Profile\Service\ProfileService;
@@ -56,6 +57,8 @@ class FakeUp extends Command
                     $profileJson->nickname == NULL ? '' : $profileJson->nickname
                 );
                 $this->profileService->updatePersonalData($profile->getId(), $parameters);
+
+                $this->profileService->uploadImage($profile->getId(), new UploadImageParameters($avatarPath));
 
                 $output->writeln([
                                      "Account ID:{$account->getId()}",
