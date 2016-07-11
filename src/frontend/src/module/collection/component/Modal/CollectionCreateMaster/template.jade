@@ -2,6 +2,7 @@ cass-modal
   cass-modal-box(width="500px")
     article.component.component-collection-create-master
       form.form
+        cass-form-progress-lock(*ngIf="loading")
         header.form-header
           h1 Новая подборка контента
         div.screen.screen-common(*ngIf="screens.isOn('Common')")

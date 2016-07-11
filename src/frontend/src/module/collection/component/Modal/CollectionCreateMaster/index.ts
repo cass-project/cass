@@ -10,6 +10,8 @@ import {ScreenControls} from "../../../../util/classes/ScreenControls";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
 import {CurrentProfileService} from "../../../../profile/service/CurrentProfileService";
+import {ProgressLock} from "../../../../form/component/ProgressLock/index";
+import {Router} from "angular2/router";
 
 enum CreateCollectionMasterStage
 {
@@ -28,13 +30,17 @@ enum CreateCollectionMasterStage
         ModalBoxComponent,
         ColorPicker,
         ThemeSelect,
+        ProgressLock,
     ]
 })
 export class CollectionCreateMaster
 {
-    constructor(private collectionRESTService: CollectionRESTService,
-                private currentProfileService: CurrentProfileService,
-                protected messages: MessageBusService) {}
+    constructor(
+        private collectionRESTService: CollectionRESTService,
+        private currentProfileService: CurrentProfileService,
+        private messages: MessageBusService,
+        private router: Router
+    ) {}
 
     private screens: ScreenControls<CreateCollectionMasterStage> = new ScreenControls<CreateCollectionMasterStage>(CreateCollectionMasterStage.Common, (sc) => {
         sc.add({ from: CreateCollectionMasterStage.Common, to: CreateCollectionMasterStage.Options });
@@ -46,10 +52,9 @@ export class CollectionCreateMaster
     @Output('close') close = new EventEmitter<boolean>();
     @Output('error') error = new EventEmitter();
     
-    collection: Collection;
-    haveThemesSwitcher: boolean = false;
-
-
+    private collection: Collection;
+    private haveThemesSwitcher: boolean = false;
+    private loading: boolean;
 
     cancel(){
         this.close.emit(true);
@@ -61,15 +66,23 @@ export class CollectionCreateMaster
 
 
     checkFields() {
-        return (this.collection.title.length > 3 && this.collection.description.length > 3);
+        return (this.collection.title.length > 0);
     };
 
-    create(){
-        this.collectionRESTService.createCollection(this.collection).subscribe(data => {
-            this.currentProfileService.get().entity.collections.push(data.entity);
-            this.close.emit(true);
-            this.messages.push(MessageBusNotificationsLevel.Info, 'Новая коллекция создана');
-        });
+    create() {
+        this.loading = true;
+
+        this.collectionRESTService.createCollection(this.collection).subscribe(
+            (data) => {
+                this.loading = false;
+                this.currentProfileService.get().entity.collections.push(data.entity);
+                this.messages.push(MessageBusNotificationsLevel.Info, `Создана коллекция "${data.entity}"`);
+                this.close.emit(true);
+            },
+            (error) => {
+                this.loading = false;
+            }
+        );
     };
 
     private buttons = new Buttons(this.screens);
