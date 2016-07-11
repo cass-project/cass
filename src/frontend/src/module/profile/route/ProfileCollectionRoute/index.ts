@@ -8,10 +8,11 @@ import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
 import {PostForm} from "../../../post/component/Forms/PostForm/index";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
 import {PostTypeService} from "../../../post/service/PostTypeService";
-import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
-import {ProfileCollectionFeed} from "../../component/Elements/ProfileCollectionFeed/index";
-import {FeedEntitiesService} from "./service";
 import {PostEntity} from "../../../post/definitions/entity/Post";
+import {FeedService} from "../../../feed/service/FeedService/index";
+import {Stream} from "../../../feed/service/FeedService/stream";
+import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
+import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/index";
 
 @Component({
     template: require('./template.jade'),
@@ -19,14 +20,14 @@ import {PostEntity} from "../../../post/definitions/entity/Post";
         require('./style.shadow.scss')
     ],
     providers: [
-        FeedCriteriaService,
-        FeedEntitiesService,
+        FeedService,
+        CollectionSource,
     ],
     directives: [
         ROUTER_DIRECTIVES,
         CollectionsList,
         PostForm,
-        ProfileCollectionFeed,
+        FeedPostStream,
     ]
 })
 export class ProfileCollectionRoute
@@ -39,7 +40,8 @@ export class ProfileCollectionRoute
         private params: RouteParams,
         private service: ProfileRouteService,
         private types: PostTypeService,
-        private entities: FeedEntitiesService
+        private feed: FeedService<PostEntity>,
+        private feedSource: CollectionSource
     ) {
         this.postType = types.getTypeByStringCode('default');
 
@@ -55,13 +57,17 @@ export class ProfileCollectionRoute
                 }
                 
                 this.collection = collections[0];
+
+                feedSource.collectionId = this.collection.id;
+                feed.provide(feedSource, new Stream<PostEntity>())
+                feed.update();
             },
             (error) => {}
         );
     }
 
     unshiftEntity(entity: PostEntity) {
-        this.entities.unshift(entity);
+        this.feed.stream.insertBefore(entity);
     }
     
     isLoaded(): boolean {

@@ -1,7 +1,8 @@
 import {PostAttachmentEntity} from "../../../post-attachment/definitions/entity/PostAttachment";
 import {ProfileEntity} from "../../../profile/definitions/entity/Profile";
+import {FeedEntity} from "../../../feed/service/FeedService/entity";
 
-export interface PostEntity
+export interface PostEntity extends FeedEntity
 {
     id: number;
     date_created_on: string;
