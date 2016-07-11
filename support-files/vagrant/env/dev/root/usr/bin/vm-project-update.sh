@@ -6,7 +6,7 @@ cd /opt/cass/src/backend
 composer update
 composer dump-autoload
 
-php ./vendor/robmorgan/phinx/bin/phinx migrate -e cass_development
+php ./vendor/robmorgan/phinx/bin/phinx migrate -e cass
 php ./vendor/robmorgan/phinx/bin/phinx migrate -e cass_testing
 
 # frontend
