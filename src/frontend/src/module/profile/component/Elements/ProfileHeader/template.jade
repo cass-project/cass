@@ -8,7 +8,7 @@ article.component-profile-header
     .collection-list-container
         ul.collection-links
           li
-            a([routerLink]="['./Dashboard']", href="#", class="collection-link")
+            a([routerLink]="['./Dashboard']", class="collection-link")
               span Профиль
           li(*ngFor="#collection of entity.collections")
             a([routerLink]="['./Collections/View', { sid: collection.sid }]", class="collection-link", title="{{ collection.description }}")
