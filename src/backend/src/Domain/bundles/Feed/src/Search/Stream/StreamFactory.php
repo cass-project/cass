@@ -3,7 +3,6 @@ namespace Domain\Feed\Search\Stream;
 
 use Domain\Collection\Service\CollectionService;
 use Domain\Community\Service\CommunityService;
-use Domain\Feed\Middleware\Command\PublicExpertsCommand;
 use Domain\Feed\Source\CollectionSource;
 use Domain\Feed\Source\ProfileSource;
 use Domain\Feed\Source\PublicCatalog\PublicCollectionsSource;
@@ -11,6 +10,7 @@ use Domain\Feed\Source\PublicCatalog\PublicCommunitiesSource;
 use Domain\Feed\Source\PublicCatalog\PublicContentSource;
 use Domain\Feed\Source\PublicCatalog\PublicDiscussionsSource;
 use Domain\Feed\Source\PublicCatalog\PublicProfilesSource;
+use Domain\Feed\Source\PublicCatalog\PublicExpertsSource;
 use Domain\Feed\Source\Source;
 use Domain\Post\Formatter\PostFormatter;
 use Domain\Post\Service\PostService;
@@ -53,7 +53,7 @@ final class StreamFactory
 
         if(in_array($sourceName, [
             PublicProfilesSource::class,
-            PublicExpertsCommand::class,
+            PublicExpertsSource::class,
         ])) {
             $stream = new ProfileStream($source);
             $stream->setProfileService($this->profileService);
