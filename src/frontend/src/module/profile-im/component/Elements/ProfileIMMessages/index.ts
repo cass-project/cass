@@ -1,5 +1,6 @@
 import {Component} from "angular2/core";
-import {Autosize} from "angular2-autosize/angular2-autosize";
+
+import {ProfileIMTextarea} from "../ProfileIMTextarea/index";
 
 
 @Component({
@@ -8,7 +9,9 @@ import {Autosize} from "angular2-autosize/angular2-autosize";
     styles: [
         require('./style.shadow.scss')
     ],
-    directives: [Autosize]
+    directives: [
+        ProfileIMTextarea
+    ]
 })
 
 export class ProfileIMMessages
