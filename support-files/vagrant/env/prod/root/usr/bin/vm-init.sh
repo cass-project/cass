@@ -51,7 +51,7 @@ composer.phar install
 
 # error log
 sudo touch /var/log/php-errors.log
-sudo chown -R www-data /var/log/php-errors.log
+sudo chown -R www-data:www-data /var/log/php-errors.log
 
 # db
 cd /opt/cass/src/backend
@@ -83,7 +83,7 @@ cd swagger-ui
 sudo npm install
 sudo npm run build
 sudo mv dist api-docs
-sudo chown -R www-data /opt/swagger
+sudo chown -R www-data:www-data /opt/swagger
 
 #########
 # PHPUNIT

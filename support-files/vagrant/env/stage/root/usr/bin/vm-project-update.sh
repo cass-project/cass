@@ -15,5 +15,5 @@ npm install --no-bin-link
 webpack
 
 # chmod
-sudo chown -R www-data /opt/cass
-sudo chown -R www-data /opt/swagger
+sudo chown -R www-data:www-data /opt/cass
+sudo chown -R www-data:www-data /opt/swagger
