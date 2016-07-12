@@ -41,6 +41,7 @@ import {PostTypeService} from "../../module/post/service/PostTypeService";
 import {FeedRESTService} from "../../module/feed/service/FeedRESTService";
 import {ProfileIMService} from "../../module/profile-im/service/ProfileIMService";
 import {ProfileIMRESTService} from "../../module/profile-im/service/ProfileIMRESTService";
+import {ProfileIMRoute} from "../../module/profile-im/route/ProfileIMRoute/index";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -101,6 +102,11 @@ import {ProfileIMRESTService} from "../../module/profile-im/service/ProfileIMRES
         name: 'Profile',
         path: '/profile/...',
         component: ProfileRootRoute
+    },
+    {
+        name: 'ProfileIM',
+        path: '/im/...',
+        component: ProfileIMRoute
     },
     {
         name: 'Community',
