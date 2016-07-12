@@ -1,4 +1,5 @@
 import {Component, Input, EventEmitter, Output} from "angular2/core";
+import {Router} from "angular2/router";
 
 import {ModalComponent} from "../../../../modal/component/index";
 import {ProfileSetupModel} from "./model";
@@ -68,7 +69,8 @@ export class ProfileSetup
     constructor(
         private model: ProfileSetupModel,
         private service: ProfileRESTService,
-        private messages: MessageBusService
+        private messages: MessageBusService,
+        private router: Router
     ) {}
 
     ngAfterViewInit() {
@@ -131,6 +133,7 @@ export class ProfileSetup
             success => {
                 this.profile.is_initialized = true;
                 this.messages.push(MessageBusNotificationsLevel.Info, 'Ваши данные сохранены');
+                this.router.navigate(['Profile/Profile', {id: 'current'}]);
             },
             error => {
                 this.screens.goto(ProfileSetupScreen.ExpertIn);

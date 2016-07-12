@@ -72,6 +72,11 @@ class ProfileService implements EventEmitterAwareService
         return $this->profileRepository->getProfileById($profileId);
     }
     
+    public function getProfilesByIds(array $profileIds): array
+    {
+        return $this->profileRepository->getProfileByIds($profileIds);
+    }
+    
     public function getProfileBySID(string $profileSid): Profile
     {
         return $this->profileRepository->getProfileBySID($profileSid);

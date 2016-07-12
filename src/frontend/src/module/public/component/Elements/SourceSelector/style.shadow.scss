@@ -1,0 +1,57 @@
+@import "./../../../../../styles/globals";
+
+article.component.component-public-feed-criteria {
+  text-align: center;
+
+  ul.feed-types {
+    display: inline-block;
+
+    li {
+      display: inline-block;
+      margin: 0 5px;
+
+      .feed-type-button {
+        display: inline-block;
+        border: 0;
+        color: material-color("grey", "700");
+        background-color: material-color("grey", "200");
+        font-size: 16px;
+        font-weight: 500;
+        font-family: $FONT_FAMILY;
+        line-height: 28px;
+        outline: 0;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        text-decoration: none;
+
+        i.fa {
+          margin-right: 5px;
+        }
+
+        &:hover {
+          background-color: material-color("grey", "50");
+        }
+      }
+    }
+
+    @mixin feed-type-button-active($color, $depth0, $depth1, $depth2) {
+      .active {
+        background-color: material-color($color, $depth1);
+        color: material-color($color, $depth0);
+
+        &:hover {
+          background-color: material-color($color, $depth2);
+          color: material-color($color, $depth0);
+        }
+      }
+    }
+
+    .feed-type-profiles { @include feed-type-button-active("green", "50", "500", "600"); }
+    .feed-type-expert { @include feed-type-button-active("teal", "50", "500", "600"); }
+    .feed-type-content { @include feed-type-button-active("light-blue", "50", "500", "600"); }
+    .feed-type-discussion { @include feed-type-button-active("blue", "50", "500", "600"); }
+    .feed-type-collection { @include feed-type-button-active("amber", "50", "500", "600"); }
+    .feed-type-community { @include feed-type-button-active("red", "50", "500", "600"); }
+  }
+}

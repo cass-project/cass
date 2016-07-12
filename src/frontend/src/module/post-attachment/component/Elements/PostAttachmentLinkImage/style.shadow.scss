@@ -2,6 +2,11 @@
 
 article.component.component-post-attachment-link-image {
   .image-container {
+    a {
+      display: block;
+      line-height: 0;
+    }
+
     text-align: center;
     background-color: material-color("grey", "100");
 

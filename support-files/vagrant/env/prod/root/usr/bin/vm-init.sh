@@ -14,7 +14,7 @@ sudo apt-get update
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password 1234'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 1234'
 
-sudo apt-get install -y php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server mongodb php-pear php7.0-dev pkg-config libssl-dev libsslcommon2-dev
+sudo apt-get install -y curl php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server mongodb php-pear php7.0-dev pkg-config libssl-dev libsslcommon2-dev
 
 # ##########
 # UPDATE NPM
@@ -25,19 +25,13 @@ sudo n 5.11.1
 # #####
 # MYSQL
 # #####
-mysql -uroot -p"1234" -e "CREATE DATABASE cass_production"
-mysql -uroot -p"1234" -e "CREATE DATABASE cass_stage"
-mysql -uroot -p"1234" -e "CREATE DATABASE cass_development"
+mysql -uroot -p"1234" -e "CREATE DATABASE cass"
 mysql -uroot -p"1234" -e "CREATE DATABASE cass_testing"
 
-# #############
-# MONGO-EXPRESS
-# #############
-sudo mkdir /opt/mongo-express
-cd /opt/mongo-express
-sudo npm install -g mongo-express
-sudo npm install mongo-express
-sudo chown -R www-data /opt/mongo-express
+# ##############
+# PHP7.0-MONGODB
+# ##############
+sudo pecl install mongodb
 
 # #######
 # Backend
@@ -61,8 +55,7 @@ sudo chown -R www-data /var/log/php-errors.log
 
 # db
 cd /opt/cass/src/backend
-vendor/bin/phinx migrate -e cass_development
-vendor/bin/phinx migrate -e cass_testing
+vendor/bin/phinx migrate -e cass
 vendor/bin/phinx migrate -e cass_production
 
 # ########
@@ -110,8 +103,3 @@ vm-server-update.sh
 # #####
 sudo ln -s /etc/nginx/sites-available/cass /etc/nginx/sites-enabled/cass
 sudo service nginx restart
-
-# ##############
-# PHP7.0-MONGODB
-# ##############
-sudo pecl install mongodb

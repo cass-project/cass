@@ -90,7 +90,8 @@ article.component-profile-header {
         display: inline-block;
         margin-left: 5px;
 
-        a.profile-button {
+        .profile-button {
+          cursor: pointer;
           display: inline-block;
           font-family: $FONT_FAMILY;
           font-size: 14px;

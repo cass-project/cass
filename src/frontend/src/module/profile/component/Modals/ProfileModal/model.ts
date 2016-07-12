@@ -104,7 +104,7 @@ export class ProfileModalModel
 
             observableRequest.push(this.profileRESTService.editPersonal(this.getProfileOriginal().id, personalRequest));
 
-            if(this.profile.greetings.method !== this.getProfileOriginal().greetings.method){
+            if(this.profile.greetings.method !== this.getProfileOriginal().greetings.method && this.getProfileOriginal().image.is_auto_generated){
                 personalRequest.avatar = true;
             }
 

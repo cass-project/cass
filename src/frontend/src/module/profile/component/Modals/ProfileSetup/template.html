@@ -25,7 +25,7 @@
           <header class="stage-header">
             <h1>Изображение профиля</h1>
           </header>
-          <cass-profile-setup-screen-image (next)="nextScreen()"></cass-profile-setup-screen-image>
+          <cass-profile-setup-screen-image (back)="prevScreen()" (next)="nextScreen()"></cass-profile-setup-screen-image>
         </div>
         <div class="stage-interests" *ngIf="screens.isOn('Interests')">
           <header class="stage-header">
@@ -34,7 +34,7 @@
           <p class="why">Мы не собираемся слать вам таргетированный спам. Укажите свои интересы,
             чтобы вас могли найти другие пользователи нашего сервиса, а мы могли
             сразу предложить вам подходящий контент.</p>
-          <cass-profile-setup-screen-interests (next)="nextScreen()"></cass-profile-setup-screen-interests>
+          <cass-profile-setup-screen-interests (back)="prevScreen()" (next)="nextScreen()"></cass-profile-setup-screen-interests>
         </div>
         <div class="stage-expert-in" *ngIf="screens.isOn('ExpertIn')">
           <header class="stage-header">
@@ -42,7 +42,7 @@
           </header>
           <p class="why">Люди иногда ищут не просто тех, кто интересуется чем либо, но и тех,
           кто действительно <em>разбирается</em> в указанной области.</p>
-          <cass-profile-setup-screen-expert-in (next)="nextScreen()"></cass-profile-setup-screen-expert-in>
+          <cass-profile-setup-screen-expert-in (back)="prevScreen()" (next)="nextScreen()"></cass-profile-setup-screen-expert-in>
         </div>
         <div class="stage-saving" *ngIf="screens.isOn('Saving')">
           <header class="stage-header">

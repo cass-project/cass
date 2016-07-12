@@ -7,4 +7,4 @@ article.component.component-profile-collection
     .post-form-container
       cass-post-form([collection]="collection", [post-type]="postType", (success)="unshiftEntity($event)")
   .posts
-    cass-profile-collection-feed([collection-id]="collection.id")
+    cass-feed-post-stream
