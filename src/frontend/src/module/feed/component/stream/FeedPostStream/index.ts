@@ -19,4 +19,8 @@ import {PostEntity} from "../../../../post/definitions/entity/Post";
 export class FeedPostStream
 {
     constructor(private feed: FeedService<PostEntity>) {}
+
+    hasStream() {
+        return typeof this.feed.stream === "object";
+    }
 }

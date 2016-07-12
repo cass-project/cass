@@ -19,4 +19,8 @@ import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
 export class FeedProfileStream
 {
     constructor(private feed: FeedService<ProfileEntity>) {}
+
+    hasStream() {
+        return typeof this.feed.stream === "object";
+    }
 }
