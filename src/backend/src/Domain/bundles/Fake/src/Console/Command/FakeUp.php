@@ -30,7 +30,6 @@ class FakeUp extends Command
     {
         $this->setName('fake:up')
             ->setDescription('add fixture profiles')
-//            ->addArgument()
         ;
     }
 
