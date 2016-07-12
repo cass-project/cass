@@ -8,6 +8,7 @@ use Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
+use Zend\Diactoros\UploadedFile;
 
 /**
  * @backupGlobals disabled
@@ -39,5 +40,15 @@ abstract class PostMiddlewareTest extends MiddlewareTestCase
 
     protected function requestPostGet(int $postId): RESTRequest {
         return $this->request('GET', sprintf('/post/%d/get', $postId));
+    }
+
+
+    protected function requestUploadPostAttachment(UploadedFile $localFile):RESTRequest
+    {
+        return $this
+            ->request('POST', '/protected/post-attachment/upload')
+            ->setUploadedFiles([
+                'file' => $localFile
+            ]);
     }
 }

@@ -23,7 +23,13 @@ server {
     location /
     {
         root /opt/cass/src/www/app/;
-        try_files $uri $uri/frontend.html;
+        try_files $uri /frontend.html =404;
+	}
+
+    location ~ "^/feedback-admin.*$"
+    {
+        root /opt/cass/src/www/app/;
+        try_files /feedback.html ``=404;
 	}
 
     location /api-docs

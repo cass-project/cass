@@ -1,6 +1,5 @@
 import {Component, Output, EventEmitter} from "angular2/core";
-
-import {SearchCriteriaService} from "../../../search/SearchCriteriaService";
+import {PublicService} from "../../../service";
 
 @Component({
     selector: 'cass-public-search-criteria-query-string',
@@ -15,15 +14,13 @@ export class QueryStringCriteria
 
     @Output('change') changeEvent = new EventEmitter<string>();
 
-    constructor(private service: SearchCriteriaService) {}
+    constructor(private service: PublicService) {}
 
     ngSubmit() {
         this.updateCriteria();
-        this.service.update();
     }
 
     updateCriteria() {
-        this.service.criteria.queryString.setQueryString(this.queryString);
     }
 
     isSearchButtonDisabled() {

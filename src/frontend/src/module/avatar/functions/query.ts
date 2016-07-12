@@ -14,7 +14,7 @@ export function queryImage(target: QueryTarget, images: ImageCollection): Image 
     if(target === QueryTarget.Biggest) {
         sizes.reverse();
     }else if(target === QueryTarget.Avatar) {
-        sizes = ['32', '64'];
+        sizes = ['64', '32'];
     }else if(target === QueryTarget.Card) {
         sizes = ['256', '128', '64'];
     }

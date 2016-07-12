@@ -2,6 +2,6 @@ article.component.component-collections-list
   .collection-cards-container
     .list-items
       .collection-card-item(*ngFor="#collection of collections")
-        cass-collection-card([entity]="collection")
+        cass-collection-card([entity]="collection", (click)="go($event)")
       .collection-card-item(*ngIf="isOwn")
         cass-create-collection-card

@@ -27,7 +27,8 @@
           | &nbsp; Cancel
         button.btn.btn-primary-outline(
           type='button',
-          (click)="reply()"
+          (click)="reply()",
+          [disabled]="!isValid()"
         )
           i.fa.fa-fw.fa-envelope(aria-hidden="true")
           | &nbsp; Send

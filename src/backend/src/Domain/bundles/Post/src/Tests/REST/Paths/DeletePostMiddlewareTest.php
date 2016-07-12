@@ -41,6 +41,6 @@ class DeletePostMiddlewareTest extends PostMiddlewareTest
         $this->requestPostDelete(99999999)->auth($account->getAPIKey())->execute()
             ->expectJSONContentType()
             ->expectStatusCode(404)
-            ->expectJSONBody(['success' => FALSE]);
+            ->expectJSONBody(['success' => false]);
     }
 }

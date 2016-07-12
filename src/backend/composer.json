@@ -13,6 +13,7 @@
       "Application\\Swagger\\": "src/Application/bundles/Swagger/src",
       "Application\\Util\\": "src/Application/bundles/Util/src",
       "Application\\PHPUnit\\": "src/Application/bundles/PHPUnit/src",
+      "Application\\MongoDB\\": "src/Application/bundles/MongoDB/src",
       "Application\\Version\\": "src/Application/bundles/Version/src",
       "Domain\\Account\\": "src/Domain/bundles/Account/src",
       "Domain\\Auth\\": "src/Domain/bundles/Auth/src",
@@ -28,8 +29,8 @@
       "Domain\\ProfileCommunities\\": "src/Domain/bundles/ProfileCommunities/src",
       "Domain\\Colors\\": "src/Domain/bundles/Colors/src",
       "Domain\\Avatar\\": "src/Domain/bundles/Avatar/src",
-      "Domain\\Feedback\\": "src/Domain/bundles/Feedback/src"
-
+      "Domain\\Feedback\\": "src/Domain/bundles/Feedback/src",
+      "Domain\\OpenGraph\\": "src/Domain/bundles/OpenGraph/src"
     }
   },
   "require": {
@@ -55,13 +56,12 @@
     "php-amqplib/php-amqplib": "2.5.*",
     "symfony/console": "^3.0",
     "symfony/validator": "^3.0",
-    "react/http": "^0.5@dev",
-    "phly/react2psr7": "^0.1.1",
     "zendframework/zend-servicemanager": "^3.0",
     "league/flysystem": "^1.0",
     "intervention/image": "^2.3",
     "evenement/evenement": "^2.0",
-    "league/flysystem-memory": "^1.0"
+    "league/flysystem-memory": "^1.0",
+    "mongodb/mongodb": "^1.0.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.3"

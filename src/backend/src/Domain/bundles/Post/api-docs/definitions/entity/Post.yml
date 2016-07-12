@@ -6,6 +6,7 @@ Post_Entity_Post:
     - date_created_on
     - collection_id
     - content
+    - attachments
   properties:
     id:
       type: number
@@ -35,3 +36,7 @@ Post_Entity_Post:
     content:
       type: string
       description: Содержание поста
+    attachments:
+      type: array
+      items:
+        type: object

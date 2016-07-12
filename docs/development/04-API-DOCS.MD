@@ -28,6 +28,6 @@
 
 - OpenAPI Specification: [https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md)
 
-- Application\Swagger Editor: [http://editor.swagger.io/#/](http://editor.swagger.io/#/)
+- Swagger Editor: [http://editor.swagger.io/#/](http://editor.swagger.io/#/)
 
-- Application\Swagger Editor, Paste JSON: [http://127.0.0.1:8080/backend/api/debug/api-docs/api-docs.json](http://127.0.0.1:8080/backend/api/debug/api-docs/api-docs.json)
+- Swagger Editor, Paste JSON: [http://127.0.0.1:8080/backend/api/debug/api-docs/api-docs.json](http://127.0.0.1:8080/backend/api/debug/api-docs/api-docs.json)

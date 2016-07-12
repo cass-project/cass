@@ -4,6 +4,7 @@ import {ProfileExtendedEntity} from "../../../profile/definitions/entity/Profile
 import {Palette} from "../../../colors/definitions/entity/Palette";
 import {Theme} from "../../../theme/definitions/entity/Theme";
 import {FeedbackTypeEntity} from "../../../feedback/definitions/entity/FeedbackType";
+import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
 
 export interface FrontlineEntity extends Success200
 {
@@ -30,6 +31,9 @@ export interface FrontlineEntity extends Success200
         },
         feedback: {
             types: FeedbackTypeEntity[]
+        },
+        post: {
+            types: PostTypeEntity[]
         }
     }
 }

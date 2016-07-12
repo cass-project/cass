@@ -1,4 +1,5 @@
 <div class="component component-profile-modal">
+    <cass-form-progress-lock *ngIf="model.loading"></cass-form-progress-lock>
   <div class="tab-modal">
     <div class="tab-panel">
       <div class="top">
@@ -63,7 +64,7 @@
       </div>
       <footer class="tab-content-footer">
         <div class="left">
-          <button (click)="close()" class="form-text-button">Закрыть</button>
+          <button (click)="closeProfileModal()" class="form-text-button">Закрыть</button>
         </div>
         <div class="right">
           <!-- Кнопка отображается в тот момент, когда были сделаны изменения в модели -->

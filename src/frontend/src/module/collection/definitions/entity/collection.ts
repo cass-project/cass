@@ -47,6 +47,8 @@ export class Collection implements CollectionEntity
             throw new Error(`Unknown owner "${ownerType}"`)
         }
 
+        this.title = '';
+        this.description = '';
         this.owner_sid = `${ownerType}:${ownerId}`;
         this.owner = {
             id: ownerId,

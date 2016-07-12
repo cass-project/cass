@@ -1,0 +1,20 @@
+PostAttachment_PostAttachment_Link:
+  required:
+    - url
+    - resource
+    - metadata
+    - source
+  properties:
+    url:
+      type: string
+      description: URL
+    resource:
+      type: string
+      description: |
+        Тип ресурса. Значения: "link", "youtube", "image"
+    metadata:
+      type: object
+      description: Метаданные
+    source:
+      type: object
+      description: Источник

@@ -5,8 +5,12 @@ import {ThemeSelect} from "../../../../theme/component/ThemeSelect/index";
 import {CollectionRESTService} from "../../../service/CollectionRESTService";
 import {CollectionEntity, Collection} from "../../../definitions/entity/collection";
 import {ModalBoxComponent} from "../../../../modal/component/box/index";
-import {ColorPicker} from "../../../../form/component/ColorPicker/index";
 import {ScreenControls} from "../../../../util/classes/ScreenControls";
+import {MessageBusService} from "../../../../message/service/MessageBusService/index";
+import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
+import {CurrentProfileService} from "../../../../profile/service/CurrentProfileService";
+import {ProgressLock} from "../../../../form/component/ProgressLock/index";
+import {Router} from "angular2/router";
 
 enum CreateCollectionMasterStage
 {
@@ -23,13 +27,18 @@ enum CreateCollectionMasterStage
     directives: [
         ModalComponent,
         ModalBoxComponent,
-        ColorPicker,
         ThemeSelect,
+        ProgressLock
     ]
 })
 export class CollectionCreateMaster
 {
-    constructor(private collectionRESTService: CollectionRESTService) {}
+    constructor(
+        private collectionRESTService: CollectionRESTService,
+        private currentProfileService: CurrentProfileService,
+        private messages: MessageBusService,
+        private router: Router
+    ) {}
 
     private screens: ScreenControls<CreateCollectionMasterStage> = new ScreenControls<CreateCollectionMasterStage>(CreateCollectionMasterStage.Common, (sc) => {
         sc.add({ from: CreateCollectionMasterStage.Common, to: CreateCollectionMasterStage.Options });
@@ -41,10 +50,9 @@ export class CollectionCreateMaster
     @Output('close') close = new EventEmitter<boolean>();
     @Output('error') error = new EventEmitter();
     
-    collection: Collection;
-    hasThemeIds: boolean = true;
-
-
+    private collection: Collection;
+    private haveThemesSwitcher: boolean = false;
+    private loading: boolean;
 
     cancel(){
         this.close.emit(true);
@@ -56,11 +64,43 @@ export class CollectionCreateMaster
 
 
     checkFields() {
-        return this.collection.theme_ids.length;
-    };
+        return (this.collection.title.length > 0);
+    }
+
 
     create(){
-        // TODO: this.collectionRESTService.create(this.collection);
+        if(this.ownerType === 'profile'){
+            this.createForProfile();
+        } else if(this.ownerType === 'community'){
+            this.createForCommunity();
+        }
+    }
+
+    createForCommunity(){
+        //TODO: When community frontend will be completed, implement this method
+    }
+
+    createForProfile() {
+        this.loading = true;
+
+        this.collectionRESTService.createCollection(this.collection).subscribe(
+            (data) => {
+                let profileId;
+                if(data.entity.owner.id === this.currentProfileService.get().getId().toString()){
+                    profileId = 'current';
+                } else {
+                    profileId = data.entity.owner.id;
+                }
+                this.loading = false;
+                this.currentProfileService.get().entity.collections.push(data.entity);
+                this.messages.push(MessageBusNotificationsLevel.Info, `Создана коллекция "${data.entity.title}"`);
+                this.router.navigate(['Profile/Profile', {id: profileId}, 'Collections/View', { sid: data.entity.sid }]);
+                this.close.emit(true);
+            },
+            (error) => {
+                this.loading = false;
+            }
+        );
     };
 
     private buttons = new Buttons(this.screens);

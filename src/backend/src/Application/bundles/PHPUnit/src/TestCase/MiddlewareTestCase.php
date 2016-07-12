@@ -7,6 +7,8 @@ use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\REST\Request\Params\SchemaParams;
 use Application\REST\Service\SchemaService;
 use Doctrine\ORM\EntityManager;
+use MongoDB\Database;
+use phpDocumentor\Reflection\Types\Callable_;
 use PHPUnit_Framework_TestCase;
 use Zend\Diactoros\Response;
 use Application\PHPUnit\RESTRequest\Result;
@@ -188,13 +190,17 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * После завершения каждого юнит-теста происходит роллбак транзакции
+     * После завершения каждого юнит-теста происходит роллбак транзакции и удаляются MongoDB-записи
      *
      * @throws \DI\NotFoundException
      */
     protected function tearDown() {
         $transactionService = $this->container()->get(TransactionService::class); /** @var TransactionService $transactionService */
         $transactionService->rollback();
+
+        /** @var Database $mongoDB */
+        $mongoDB = $this->container()->get(Database::class);
+        $mongoDB->drop();
     }
 
     /* =============== */
@@ -328,6 +334,11 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         return $this;
     }
 
+    protected function fetch(Callable $callback)
+    {
+        return $callback(self::$currentResult->getContent());
+    }
+
     private function recursiveAssertEquals(array $expected, array $actual, string $level = '- ') {
         foreach($expected as $key=>$value) {
             if(! (is_array($value) || is_callable($value) || is_object($value))) {
@@ -364,7 +375,7 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
                     $this->assertTrue(is_string($actual[$key]));
                 }else if(is_array($value)) {
                     $this->recursiveAssertEquals($value, $actual[$key], $level . '- ');
-                }else if(is_callable($value)) {
+                }else if(is_object($value) && ($value instanceof \Closure)) {
                     $value($actual[$key]);
                 }else{
                     $this->assertEquals($expected[$key], $actual[$key]);

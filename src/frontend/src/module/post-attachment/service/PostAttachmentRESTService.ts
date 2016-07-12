@@ -1,58 +1,86 @@
 import {Injectable} from "angular2/core";
-import {Http} from "angular2/http"
+import {Http, URLSearchParams, Headers} from "angular2/http"
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {AuthToken} from "../../auth/service/AuthToken";
+import {Observable} from "rxjs/Observable";
+import {UploadPostAttachmentResponse200} from "../definitions/paths/upload";
+import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
+import {LinkPostAttachmentResponse200} from "../definitions/paths/link";
 
 @Injectable()
 export class PostAttachmentRESTService extends AbstractRESTService
 {
-    private xmlRequest = new XMLHttpRequest();
-
-    public tryNumber:number = 0;
-    public progressBar:number = 0;
-
     constructor(
         protected http: Http,
         protected token: AuthToken,
         protected messages: MessageBusService
     ) { super(http, token, messages); }
 
-    attachFile(collectionId: number, file, modal)
-    {
-        this.tryNumber++;
+    public link(url: string): Observable<LinkPostAttachmentResponse200> {
+        let params = new URLSearchParams();
+        params.set('url', url);
 
+        let headers = new Headers();
 
-        let url = `/backend/api/protected/post-attachment/upload`;
-        let formData = new FormData();
-        formData.append("file", file);
-
-        this.xmlRequest.open("POST", url);
-        this.xmlRequest.setRequestHeader('Authorization', this.token.apiKey);
-        this.xmlRequest.upload.onprogress = (e) => {
-            if (e.lengthComputable) {
-                this.progressBar = Math.floor((e.loaded / e.total) * 100);
-                modal.progress.update(this.progressBar);
-            }
-        };
-        
-        this.xmlRequest.send(formData);
-
-        this.xmlRequest.onreadystatechange = () => {
-            if (this.xmlRequest.readyState === 4) {
-                if (this.xmlRequest.status === 200) {
-                    /* TODO: Добавить локальное обновление превью файла". */
-                }
-                modal.progress.complete();
-                if(modal.close){
-                    modal.close();
-                } else {
-                    modal.screen.next();
-                }
-                this.progressBar = 0;
-                this.tryNumber = 0;
-            }
-            /* TODO: Сделать нормальный метод повтора загрузки с учетом "Отмены загрузки". */
+        if(this.token.hasToken()){
+            headers.append('Authorization', `${this.token.apiKey}`);
         }
+
+        return this.handle(this.http.put('/backend/api/protected/post-attachment/link/', '', {
+            search: params,
+            headers: headers
+        }));
+    }
+    
+    public upload(file: Blob): Observable<UploadPostAttachmentResponse200> {
+        let observable = new Observable((observer) => {
+            let url = '/backend/api/protected/post-attachment/upload/';
+            let xhr = new XMLHttpRequest();
+
+            let formData = new FormData();
+            formData.append("file", file);
+
+            xhr.open("POST", url);
+            xhr.setRequestHeader('Authorization', this.token.getAPIKey());
+            xhr.send(formData);
+
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    try {
+                        let response = JSON.parse(xhr.responseText);
+
+                        if(xhr.status === 200) {
+                            observer.next(response);
+                            observer.complete();
+                        }else{
+                            observer.error(response.error);
+                        }
+                    }catch(error) {
+                        observer.error({
+                            success: false,
+                            error: 'Failed to parse JSON'
+                        });
+                    }
+                }
+            }
+        });
+
+        let fork = observable.publish().refCount();
+
+        fork.subscribe(
+            (success) => {},
+            (error) => {
+                if((typeof error === 'object') && (typeof error.error === "string")) {
+                    this.messages.push(MessageBusNotificationsLevel.Warning, error.error)
+                }else if(typeof error == "string") {
+                    this.messages.push(MessageBusNotificationsLevel.Warning, error)
+                }else{
+                    this.messages.push(MessageBusNotificationsLevel.Critical, 'Неизвестная ошибка. Проверьте ваше подключение к Интернету.')
+                }
+            }
+        );
+
+        return fork;
     }
 }

@@ -1,27 +1,24 @@
 <div class="component component-profile-switcher">
-  <div class="form" *ngIf="stage.isOn('Processing')">
-    <div class="processing-container">
-      <cass-loading-linear-indicator></cass-loading-linear-indicator>
-    </div>
-  </div>
   <div class="form" *ngIf="stage.isOn('Choice')">
+    <cass-form-progress-lock *ngIf="service.disableClick">
+    </cass-form-progress-lock>
     <header class="profile-switcher-header form-header">
       <h1>Смена профиля</h1>
     </header>
     <ul class="profiles-list" *ngFor="#profile of service.getProfiles()">
-      <li [style.cursor]="default" [class.current-profile]="profile.entity.is_current" (click)="service.switchProfile(profile.entity.id)">
+      <li [style.cursor]="default" [class.current-profile]="profile.entity.profile.is_current" (click)="service.switchProfile(profile.entity.profile.id)">
         <section class="profile-option">
           <div class="profile-image-container">
-            <cass-profile-image border="circle" [url]="profile.entity.image.public_path"></cass-profile-image>
+            <cass-profile-image border="circle" [url]="profile.entity.profile.image.variants.default.public_path"></cass-profile-image>
           </div>
-          <div class="greetings">{{profile.entity.greetings.greetings}}</div>
+          <div class="greetings">{{profile.entity.profile.greetings.greetings}}</div>
         </section>
       </li>
     </ul>
     <footer class="form-footer">
       <div class="form-footer-section">
         <div class="cass-padding-box-5">
-          <button class="form-text-button" (click)="service.signOut()">
+          <button class="form-text-button" (click)="signOut()">
             <i class="fa fa-fw fa-sign-out"></i>
             <span>Выход из сервиса</span>
           </button>
@@ -29,7 +26,7 @@
       </div>
       <div class="form-footer-section">
         <div class="cass-padding-box-5">
-          <button class="form-text-button" (click)="close()">
+          <button class="form-text-button" (click)="closeProfileSwitcher()">
             <span>Отмена</span>
           </button>
         </div>

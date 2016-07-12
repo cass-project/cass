@@ -9,7 +9,7 @@
       cass-feedback-landing-sidebar-toggler
       
       div(*ngIf="feedbacks.length>0")
-        .pull-right.m-t-1.m-b-1
+        .pull-md-right.m-t-1.m-b-1
           a.btn.btn-secondary((click)="layout = 'grid'", *ngIf="layout == 'list'")
             i.fa.fa-fw.fa-th-large(aria-hidden="true")
             | Table layout

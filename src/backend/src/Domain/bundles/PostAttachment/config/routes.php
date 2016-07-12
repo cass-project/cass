@@ -10,4 +10,10 @@ return function (Application $app) {
         PostAttachmentMiddleware::class,
         'post-attachment-upload'
     );
+
+    $app->put(
+        '/protected/post-attachment/{command:link}[/]',
+        PostAttachmentMiddleware::class,
+        'post-attachment-link'
+    );
 };

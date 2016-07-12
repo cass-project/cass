@@ -1,0 +1,10 @@
+@import "./../../../../../styles/globals";
+
+article.component.component-post-attachment-link-webm {
+  .video-container {
+    video {
+      width: 100% !important;
+      height: auto !important;
+    }
+  }
+}

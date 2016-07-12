@@ -68,6 +68,10 @@ export class Profile {
         return this.entity.profile.id
     }
 
+    changeGreetings(greetings){
+        this.entity.profile.greetings = JSON.parse(JSON.stringify(greetings));
+    }
+
     greetings(): string {
         return this.entity.profile.greetings.greetings;
     }

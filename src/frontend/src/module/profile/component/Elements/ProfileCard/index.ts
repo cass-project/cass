@@ -5,6 +5,7 @@ import {Theme} from "../../../../theme/definitions/entity/Theme";
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
 import {ProfileImage} from "../ProfileImage/index";
+import {PostCard} from "../../../../post/component/Forms/PostCard/index";
 
 @Component({
     selector: 'cass-profile-card',
@@ -14,6 +15,7 @@ import {ProfileImage} from "../ProfileImage/index";
     ],
     directives: [
         ProfileImage,
+        PostCard,
     ]
 })
 export class ProfileCard

@@ -2,18 +2,33 @@
 
 article.component.component-profile-collection
 {
+  header.collection-header {
+    margin-bottom: 40px;
+  }
+
   h1 {
     font-family: $FONT_FAMILY;
     text-align: center;
-    line-height: 60px;
+    line-height: 30px;
     font-size: 20px;
     font-weight: 400;
     text-transform: uppercase;
     color: material-color("grey", "900");
   }
 
+  h2 {
+    font-family: $FONT_FAMILY;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: material-color("grey", "700");
+  }
+
   .post-form {
     display: flex;
+    margin-bottom: 40px;
 
     .post-form-container {
       width: 550px;

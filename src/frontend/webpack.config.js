@@ -39,7 +39,7 @@ WebpackConfigBuilder.prototype = {
                 'emitDecoratorMetadata': true,
                 'experimentalDecorators': true,
                 'sourceMap': true,
-                'target': 'es5'
+                'target': 'es5',
               },
               'ignoreDiagnostics': [
                 2403, // 2403 -> Subsequent variable declarations

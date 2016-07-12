@@ -13,7 +13,7 @@ $config = [
 ];
 
 foreach (AuthMiddleware::OAUTH2_PROVIDERS as $provider => $commandClassName) {
-    $config['php-di'][$commandClassName] = object()->constructorParameter('oauth2Config', get(sprintf('oauth2.%s', $provider)));
+    $config['php-di'][$commandClassName] = object()->constructorParameter('oauth2Config', get(sprintf('config.oauth2.%s', $provider)));
 }
 
 return $config;

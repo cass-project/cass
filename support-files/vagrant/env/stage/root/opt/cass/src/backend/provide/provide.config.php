@@ -19,7 +19,7 @@ return [
                 'connection_options' => [
                     'driver'   => 'pdo_mysql',
                     'host'     => '127.0.0.1',
-                    'dbname'   => 'cass_development',
+                    'dbname'   => 'cass',
                     'user'     => 'root',
                     'password' => '1234',
                 ]
@@ -28,7 +28,7 @@ return [
                 'connection_options' => [
                     'driver'   => 'pdo_mysql',
                     'host'     => '127.0.0.1',
-                    'dbname'   => 'cass_development',
+                    'dbname'   => 'cass',
                     'user'     => 'root',
                     'password' => '1234',
                 ]

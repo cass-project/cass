@@ -2,60 +2,54 @@
 namespace Domain\Feed\Middleware;
 
 use Application\REST\Response\GenericResponseBuilder;
-use Domain\Feed\Feed\ResultSet;
-use Domain\Feed\Feed\Source;
-use Domain\Feed\Service\FeedSourcesService;
+use Application\Service\CommandService;
+use Domain\Feed\Exception\AbstractFeedException;
+use Domain\Feed\Middleware\Command\CollectionCommand;
+use Domain\Feed\Middleware\Command\ProfileCommand;
+use Domain\Feed\Middleware\Command\PublicContentCommand;
+use Domain\Feed\Middleware\Command\PublicExpertsCommand;
+use Domain\Feed\Middleware\Command\PublicProfilesCommand;
+use Domain\Feed\Source\PublicCatalog\PublicCollectionsSource;
+use Domain\Feed\Source\PublicCatalog\PublicCommunitiesSource;
+use Domain\Feed\Source\PublicCatalog\PublicDiscussionsSource;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ServerRequestInterface;
-use Zend\Expressive\Container\Exception\NotFoundException;
 use Zend\Stratigility\MiddlewareInterface;
 
-class FeedMiddleware implements MiddlewareInterface
+final class FeedMiddleware implements MiddlewareInterface
 {
-    const SOURCE_COLLECTION = 'collection';
-    
-    /** @var FeedSourcesService */
-    private $feedSourcesService;
-    
-    public function __construct(FeedSourcesService $feedSourcesService) {
-        $this->feedSourcesService = $feedSourcesService;
+    /** @var CommandService */
+    private $commandService;
+
+    public function __construct(CommandService $commandService)
+    {
+        $this->commandService = $commandService;
     }
 
-    public function __invoke(Request $request, Response $response, callable $out = null) {
+    public function __invoke(Request $request, Response $response, callable $out = null): ResponseInterface
+    {
         $responseBuilder = new GenericResponseBuilder($response);
 
-        $feedRequest = new FeedRequest($request);
+        try {
+            $resolver = $this->commandService->createResolverBuilder()
+                ->attachDirect('profile', ProfileCommand::class)
+                ->attachDirect('collection', CollectionCommand::class)
+                ->attachDirect('public-profiles', PublicProfilesCommand::class)
+                ->attachDirect('public-experts', PublicExpertsCommand::class)
+                ->attachDirect('public-content', PublicContentCommand::class)
+                ->attachDirect('public-discussions', PublicDiscussionsSource::class)
+                ->attachDirect('public-communities', PublicCommunitiesSource::class)
+                ->attachDirect('public-collections', PublicCollectionsSource::class)
+                ->resolve($request)
+            ;
 
-        $criteria = $feedRequest->getCriteriaRequest();
-        $source = $this->sourceFactory($request);
-        $query = $source->createQuery($criteria);
-        $result = $query->execute();
-
-        if($result instanceof ResultSet) {
-            $formatter = $this->feedSourcesService->getResultSetFormatter();
-            $responseBuilder->setJson($formatter->toJSON($result));
-        }else if(is_array($result)) {
-            $responseBuilder->setJson($result);
-        }else{
-            throw new \Exception('Unknown result format');
-        }
-
-        $responseBuilder->setStatusSuccess();
-
-        return $responseBuilder->build();
-    }
-    
-    private function sourceFactory(ServerRequestInterface $request): Source {
-        $source = $request->getAttribute('source');
-        
-        switch($source) {
-            default:
-                throw new NotFoundException(sprintf('Unknown source `%s`', $source));
-            case self::SOURCE_COLLECTION:
-                return $this->feedSourcesService->getCollectionSourcePrototype(
-                    (int) $request->getAttribute('collectionId')
-                );
+            return $resolver->run($request, $responseBuilder);
+        }catch(AbstractFeedException $e) {
+            return $responseBuilder
+                ->setError($e)
+                ->setStatusBadRequest()
+                ->build();
         }
     }
 }

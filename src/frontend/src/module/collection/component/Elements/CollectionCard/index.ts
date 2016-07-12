@@ -1,4 +1,4 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input, EventEmitter, Output} from "angular2/core";
 import {CollectionEntity} from "../../../definitions/entity/collection";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 
@@ -12,10 +12,15 @@ import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 export class CollectionCard
 {
     @Input('entity') entity: CollectionEntity;
+    @Output('click') clickEvent: EventEmitter<CollectionEntity> = new EventEmitter<CollectionEntity>();
 
     getImageURL(): string {
         let image = queryImage(QueryTarget.Card, this.entity.image).public_path;
 
         return `url('${image}')`;
+    }
+
+    click() {
+        this.clickEvent.emit(this.entity);
     }
 }

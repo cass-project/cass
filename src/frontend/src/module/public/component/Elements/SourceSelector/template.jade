@@ -1,0 +1,22 @@
+article.component.component-public-feed-criteria
+  ul.feed-types
+    li.feed-type-profiles
+      a.feed-type-button([routerLink]="['/Public/Profiles']", [ngClass]="{ 'active': isOn('profiles') }")
+        i.fa.fa-fw.fa-user
+        span Люди
+    li.feed-type-expert
+      a.feed-type-button([routerLink]="['/Public/Experts']", [ngClass]="{ 'active': isOn('experts') }")
+        i.fa.fa-fw.fa-user-plus
+        span Эксперты
+    li.feed-type-community
+      a.feed-type-button([routerLink]="['/Public/Communities']", [ngClass] = "{ 'active': isOn('communities') }")
+        i.fa.fa-fw.fa-users
+        span Сообщества
+    li.feed-type-content
+      a.feed-type-button([routerLink]="['/Public/Content']", [ngClass] = "{ 'active': isOn('content') }")
+        i.fa.fa-fw.fa-edit
+        span Контент
+    li.feed-type-collection
+      a.feed-type-button([routerLink]="['/Public/Collections']", [ngClass]="{ 'active': isOn('collections') }")
+        i.fa.fa-fw.fa-star
+        span Подборки

@@ -30,8 +30,6 @@ import {ProfileComponent} from "../../module/profile/index";
 import {SidebarComponent} from "../../module/sidebar/index";
 import {CommunityComponent} from "../../module/community/index";
 import {FeedbackComponent} from "../../module/feedback/index";
-
-import {LandingComponent} from "../../module/landing/index";
 import {HtmlComponent} from "../../module/html/index";
 import {RootRoute as ProfileRootRoute} from "../../module/profile/route/RootRoute/index";
 import {CommunityRoute} from "../../module/community/route/CommunityRoute/index";
@@ -39,6 +37,8 @@ import {PublicService} from "../../module/public/service";
 import {PublicComponent} from "../../module/public/index";
 import {ProfileModalModel} from "../../module/profile/component/Modals/ProfileModal/model";
 import {AccountRESTService} from "../../module/account/service/AccountRESTService";
+import {PostTypeService} from "../../module/post/service/PostTypeService";
+import {FeedRESTService} from "../../module/feed/service/FeedRESTService";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -70,7 +70,9 @@ import {AccountRESTService} from "../../module/account/service/AccountRESTServic
         ProfileModals,
         CollectionModals,
         PublicService,
-        ProfileModalModel
+        ProfileModalModel,
+        PostTypeService,
+        FeedRESTService,
     ],
     directives: [
         ROUTER_DIRECTIVES,
