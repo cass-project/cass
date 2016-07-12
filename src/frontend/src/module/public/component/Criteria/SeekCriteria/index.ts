@@ -1,5 +1,6 @@
 import {Component} from "angular2/core";
-import {SearchCriteriaService} from "../../../search/SearchCriteriaService";
+
+import {PublicService} from "../../../service";
 
 @Component({
     selector: 'cass-public-search-criteria-seek',
@@ -10,5 +11,5 @@ import {SearchCriteriaService} from "../../../search/SearchCriteriaService";
 })
 export class SeekCriteria
 {
-    constructor(private service: SearchCriteriaService) {}
+    constructor(private service: PublicService) {}
 }

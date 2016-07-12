@@ -1,8 +1,9 @@
 import {Injectable} from "angular2/core";
-import {Http, URLSearchParams, Headers} from "angular2/http"
+import {Http, URLSearchParams, Headers, Response} from "angular2/http"
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {AuthToken} from "../../auth/service/AuthToken";
+import {Observable} from "rxjs/Rx";
 
 @Injectable()
 export class ProfileIMRESTService extends AbstractRESTService
@@ -13,7 +14,8 @@ export class ProfileIMRESTService extends AbstractRESTService
         protected messages: MessageBusService
     ) { super(http, token, messages); }
 
-    getUnreadMessages(){
+    getUnreadMessages() : Observable<Response>
+    {
         let authHeader = new Headers();
         
         if(this.token.hasToken()){

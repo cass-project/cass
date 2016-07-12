@@ -1,7 +1,8 @@
 import {Component} from "angular2/core";
-import {SearchCriteriaService} from "../../../search/SearchCriteriaService";
+
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {Theme} from "../../../../theme/definitions/entity/Theme";
+import {PublicService} from "../../../service";
 
 @Component({
     selector: 'cass-public-search-criteria-theme',
@@ -16,7 +17,7 @@ export class ThemeCriteria
     private history: Theme[] = [];
 
     constructor(
-        private service: SearchCriteriaService,
+        private service: PublicService,
         private themes: ThemeService
     ) {
         this.root = themes.getRoot();
@@ -49,7 +50,9 @@ export class ThemeCriteria
     }
 
     selectRoot(root: Theme) {
-        this.service.criteria.theme.setThemeId(root.id);
+        this.service.criteria.doWith('theme', criteria => {
+            criteria.params['theme_id'] = root.id;
+        });
 
         if(root.children.length > 0) {
             this.root = root;
@@ -58,6 +61,6 @@ export class ThemeCriteria
     }
 
     isSelected(id: number) {
-        return this.service.criteria.theme.getThemeId() === id;
+        return this.root.id === id;
     }
 }

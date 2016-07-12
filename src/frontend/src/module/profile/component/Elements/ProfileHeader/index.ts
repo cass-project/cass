@@ -5,6 +5,7 @@ import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {ProfileImage} from "../ProfileImage/index";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {ProfileModals} from "../../../modals";
+import {ProfileRouteService} from "../../../route/ProfileRoute/service";
 
 @Component({
     selector: 'cass-profile-header',
@@ -24,7 +25,7 @@ export class ProfileHeader
 
     @Input('profile') entity: ProfileExtendedEntity;
 
-    constructor(private modals: ProfileModals){}
+    constructor(private modals: ProfileModals, private service: ProfileRouteService) {}
     
     getProfileGreetings(): string {
         return this.entity.profile.greetings.greetings;

@@ -8,7 +8,7 @@ article.component-profile-header
     .collection-list-container
         ul.collection-links
           li
-            a([routerLink]="['./Dashboard']", href="#", class="collection-link")
+            a([routerLink]="['./Dashboard']", class="collection-link")
               span Профиль
           li(*ngFor="#collection of entity.collections")
             a([routerLink]="['./Collections/View', { sid: collection.sid }]", class="collection-link", title="{{ collection.description }}")
@@ -20,10 +20,10 @@ article.component-profile-header
     .profile-buttons-container
       ul.profile-buttons
         li
-          a.profile-button(href="javascript:void()")
+          a.profile-button([routerLink]="['./Collections']")
             i.fa.fa-fw.fa-bookmark
             span Подборки
         li(*ngIf="isOwnProfile()")
-          a.profile-button((click)='modals.settings.open()')
+          .profile-button((click)='modals.settings.open()')
             i.fa.fa-fw.fa-cog
             span Настройки

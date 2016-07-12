@@ -1,14 +1,12 @@
 import {Injectable} from "angular2/core";
-import {Http, Headers} from "angular2/http"
+import {Http} from "angular2/http"
+
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
-import {Account} from "../../account/definitions/entity/Account";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
-import {AuthService} from "../../auth/service/AuthService";
 import {AuthToken} from "../../auth/service/AuthToken";
 import {Observable} from "rxjs/Observable";
-import {GetProfileFeedSuccess200} from "../definitions/paths/get-profile";
 import {FeedRequest} from "../definitions/request/FeedRequest";
-import {GetCollectionSuccess200} from "../definitions/paths/get-collection";
+import {FeedResponse} from "./FeedService/source";
 
 @Injectable()
 export class FeedRESTService extends AbstractRESTService
@@ -19,14 +17,50 @@ export class FeedRESTService extends AbstractRESTService
         protected messages: MessageBusService
     ) { super(http, token, messages); }
 
-    getProfileFeed(profileId: number, request: FeedRequest): Observable<GetProfileFeedSuccess200> {
+    getProfileFeed(profileId: number, request: FeedRequest): Observable<FeedResponse> {
         let url = `/backend/api/feed/get/profile/${profileId}`;
 
         return this.handle(this.http.post(url, JSON.stringify(request)));
     }
 
-    getCollectionFeed(collectionId: number, request: FeedRequest): Observable<GetCollectionSuccess200> {
+    getCollectionFeed(collectionId: number, request: FeedRequest): Observable<FeedResponse> {
         let url = `/backend/api/feed/get/collection/${collectionId}`;
+
+        return this.handle(this.http.post(url, JSON.stringify(request)));
+    }
+
+    getPublicCollectionsFeed(request: FeedRequest): Observable<FeedResponse> {
+        let url = `/backend/api/feed/get/public-collections/`;
+
+        return this.handle(this.http.post(url, JSON.stringify(request)));
+    }
+
+    getPublicCommunitiesFeed(request: FeedRequest): Observable<FeedResponse> {
+        let url = `/backend/api/feed/get/public-communities/`;
+
+        return this.handle(this.http.post(url, JSON.stringify(request)));
+    }
+
+    getPublicContentFeed(request: FeedRequest): Observable<FeedResponse> {
+        let url = `/backend/api/feed/get/public-content/`;
+
+        return this.handle(this.http.post(url, JSON.stringify(request)));
+    }
+
+    getPublicDiscussionsFeed(request: FeedRequest): Observable<FeedResponse> {
+        let url = `/backend/api/feed/get/public-discussions/`;
+
+        return this.handle(this.http.post(url, JSON.stringify(request)));
+    }
+
+    getPublicExpertsFeed(request: FeedRequest): Observable<FeedResponse> {
+        let url = `/backend/api/feed/get/public-experts/`;
+
+        return this.handle(this.http.post(url, JSON.stringify(request)));
+    }
+
+    getPublicProfilesFeed(request: FeedRequest): Observable<FeedResponse> {
+        let url = `/backend/api/feed/get/public-profiles/`;
 
         return this.handle(this.http.post(url, JSON.stringify(request)));
     }

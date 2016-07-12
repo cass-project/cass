@@ -49,6 +49,7 @@ export class ProfileSetupScreenGreetings
         }).subscribe(
             (response: EditPersonalResponse200) => {
                 this.currentProfileService.get().replaceAvatar(response.entity.image);
+                this.currentProfileService.get().changeGreetings(response.entity.greetings);
                 this.nextEvent.emit(this.model);
             },
             (error) => {

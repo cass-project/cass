@@ -11,7 +11,6 @@ Vagrant.configure(2) do |config|
     dev.vm.box = "ubuntu/trusty64"
 
     dev.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
-    dev.ssh.username = "root"
 
     dev.vm.provision :shell, inline: "sudo usermod -a -G www-data vagrant"
     dev.vm.provision :shell, path: "./support-files/vagrant/env/dev/provision.sh"
@@ -23,6 +22,7 @@ Vagrant.configure(2) do |config|
     dev.vm.network "forwarded_port", guest: 3001, host: 8081 # mongo-express
     dev.vm.network "forwarded_port", guest: 3002, host: 8082 # react-php
     dev.vm.network "forwarded_port", guest: 3003, host: 8083 # pimp
+    dev.vm.network "forwarded_port", guest: 3004, host: 3306 # mysql
     dev.vm.network "forwarded_port", guest: 27017, host: 27017 # mongo
 
     dev.vm.provider "virtualbox" do |vb|

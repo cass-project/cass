@@ -3,7 +3,7 @@
 -- Date: 2016-04-14 01:03
 */
 /*!40000 ALTER TABLE `theme` DISABLE KEYS */;
-INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (1,NULL,'Каналы Yoofee.ru',0);
+INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (1,NULL,'Тематики',0);
 INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (2,1,'Легковые автомобили',0);
 INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (3,2,'Новости',0);
 INSERT INTO `theme` (`id`,`parent_id`,`title`,`position`) VALUES (4,2,'Марки автомобилей',0);

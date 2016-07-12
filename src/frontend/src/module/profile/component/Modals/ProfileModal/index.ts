@@ -1,4 +1,6 @@
 import {Component, Output, EventEmitter} from "angular2/core";
+import {Router} from "angular2/router";
+
 
 import {ProfileModalModel} from "./model";
 import {AccountTab} from "./Tab/Account/index";
@@ -11,6 +13,7 @@ import {ProfileService} from "../../../service/ProfileService";
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {AuthService} from "../../../../auth/service/AuthService";
 import {AccountRESTService} from "../../../../account/service/AccountRESTService";
+import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 
 enum ProfileModalTab
 {
@@ -34,7 +37,7 @@ enum ProfileModalTab
         ImageTab,
         InterestsTab,
         ProfilesTab,
-
+        ProgressLock
     ],
     providers: [
         AccountRESTService,
@@ -53,16 +56,18 @@ export class ProfileModal
 
     constructor(
         public model: ProfileModalModel,
-        private authService: AuthService
+        private authService: AuthService,
+        private router: Router
     ) {}
 
-    close() {
+    closeProfileModal() {
         this.closeEvent.emit(true);
     }
 
     signOut() {
         this.authService.signOut().subscribe(() => {
-            this.close();
+            this.closeProfileModal();
+            this.router.navigate(['Public']);
         });
     }
 }

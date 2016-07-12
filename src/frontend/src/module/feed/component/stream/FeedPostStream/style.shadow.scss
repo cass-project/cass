@@ -1,0 +1,18 @@
+article.component.component-feed-post-stream {
+  text-align: center;
+
+  .entities {
+    .post-card-container {
+      width: 550px;
+      display: inline-block;
+      margin: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+  }
+
+  .loading-indicator {
+    margin: 20px 0;
+    text-align: center;
+  }
+}
