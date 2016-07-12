@@ -40,6 +40,7 @@ import {AccountRESTService} from "../../module/account/service/AccountRESTServic
 import {PostTypeService} from "../../module/post/service/PostTypeService";
 import {FeedRESTService} from "../../module/feed/service/FeedRESTService";
 import {ProfileIMService} from "../../module/profile-im/service/ProfileIMService";
+import {ProfileIMRESTService} from "../../module/profile-im/service/ProfileIMRESTService";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -74,7 +75,7 @@ import {ProfileIMService} from "../../module/profile-im/service/ProfileIMService
         ProfileModalModel,
         PostTypeService,
         FeedRESTService,
-        ProfileRESTService,
+        ProfileIMRESTService,
         ProfileIMService,
     ],
     directives: [
