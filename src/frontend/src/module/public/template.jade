@@ -1,2 +1,15 @@
 article.component.component-public
-  router-outlet
+  .theme-panel
+    .theme-criteria-container
+      cass-public-search-criteria-theme
+  .content-area
+    .general-criteria
+      .query-string-criteria-container
+        cass-public-search-criteria-query-string
+      .source-selector-container
+        cass-public-feed-source-selector
+    .search-results
+      .search-entities
+        router-outlet
+      .seek-criteria-container
+        cass-public-search-criteria-seek

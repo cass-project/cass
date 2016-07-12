@@ -11,6 +11,7 @@ import {ProfileCachedIdentityMap} from "../../service/ProfileCachedIdentityMap";
 @Injectable()
 export class ProfileRouteService
 {
+    private request: string;
     private cache: ProfileCachedIdentityMap;
 
     private profile: ProfileExtendedEntity;
@@ -43,7 +44,13 @@ export class ProfileRouteService
         return this.profile;
     }
 
+    public getProfileRouteComponents() {
+        return ['/', 'Profile', 'Profile', { 'id': this.request }];
+    }
+
     public loadCurrentProfile() {
+        this.request = 'current';
+
         this.loadProfile(new Observable(observer => {
             observer.next({
                 success: true,
@@ -54,10 +61,14 @@ export class ProfileRouteService
     }
 
     public loadProfileById(id: number) {
+        this.request = id.toString();
+
         this.loadProfile(this.cache.getProfileById(id));
     }
 
     public loadProfileBySID(sid: string) {
+        this.request = sid;
+
         this.loadProfile(<any>this.api.getProfileBySID(sid));
     }
     

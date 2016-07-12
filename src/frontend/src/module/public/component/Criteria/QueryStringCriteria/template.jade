@@ -5,7 +5,8 @@ article.component-public-criteria-query-string
         input.query-string-input(
           type="search",
           [(ngModel)]="queryString",
-          (change)="updateCriteria()"
+          (change)="updateCriteria()",
+          placeholder="Поиск"
         )
       .flex-container-section-submit
         button.form-text-button.search-submit-button(

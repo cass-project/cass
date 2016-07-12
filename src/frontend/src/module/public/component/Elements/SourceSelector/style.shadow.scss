@@ -10,7 +10,8 @@ article.component.component-public-feed-criteria {
       display: inline-block;
       margin: 0 5px;
 
-      button.feed-type-button {
+      .feed-type-button {
+        display: inline-block;
         border: 0;
         color: material-color("grey", "700");
         background-color: material-color("grey", "200");
@@ -22,6 +23,7 @@ article.component.component-public-feed-criteria {
         border-radius: 5px;
         padding: 5px 10px;
         cursor: pointer;
+        text-decoration: none;
 
         i.fa {
           margin-right: 5px;
@@ -34,7 +36,7 @@ article.component.component-public-feed-criteria {
     }
 
     @mixin feed-type-button-active($color, $depth0, $depth1, $depth2) {
-      button.active {
+      .active {
         background-color: material-color($color, $depth1);
         color: material-color($color, $depth0);
 
@@ -45,7 +47,7 @@ article.component.component-public-feed-criteria {
       }
     }
 
-    .feed-type-people { @include feed-type-button-active("green", "50", "500", "600"); }
+    .feed-type-profiles { @include feed-type-button-active("green", "50", "500", "600"); }
     .feed-type-expert { @include feed-type-button-active("teal", "50", "500", "600"); }
     .feed-type-content { @include feed-type-button-active("light-blue", "50", "500", "600"); }
     .feed-type-discussion { @include feed-type-button-active("blue", "50", "500", "600"); }
