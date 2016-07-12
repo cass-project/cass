@@ -1,11 +1,13 @@
 <?php
 namespace Domain\Fake\Console\Command;
 
+use Application\Util\Definitions\Point;
 use Domain\Account\Service\AccountService;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
 use Domain\Profile\Service\ProfileService;
+use Intervention\Image\Facades\Image;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -43,28 +45,36 @@ class FakeUp extends Command
 
             foreach($profilesJson as $profileJson){
 
-                $avatarPath = sprintf("%s/../../Resources/Data/Images/avatars/%s", __DIR__, $profileJson->avatar);
-
                 $account = $this->accountService->createAccount($profileJson->email,'1234');
                 /** @var Profile $profile */
                 $profile = $account->getCurrentProfile();
                 $profile->setGender(Profile\Gender\Gender::createFromIntCode((int)$profileJson->gender));
                 $parameters = new EditPersonalParameters(
-                    'n', file_exists($avatarPath)? $avatarPath: FALSE,
-                    $profileJson->nickname == NULL ? '' : $profileJson->nickname,
+                    'n', FALSE,
+                    $profileJson->username == NULL ? '' : $profileJson->username,
                     $profileJson->surname == NULL ? '' : $profileJson->surname,
                     $profileJson->patronymic == NULL ? '' : $profileJson->patronymic,
                     $profileJson->nickname == NULL ? '' : $profileJson->nickname
                 );
+
                 $this->profileService->updatePersonalData($profile->getId(), $parameters);
 
-                $this->profileService->uploadImage($profile->getId(), new UploadImageParameters($avatarPath));
+                $avatarPath = sprintf("%s/../../Resources/Data/Images/avatars/%s", __DIR__, $profileJson->avatar);
+
+                if(file_exists($avatarPath)){
+                    list($width, $height) = getimagesize($avatarPath);
+
+                    if(!is_null($width)&&!is_null($height)){
+                        $maxSize = $width <= $height ? $width : $height ;
+                        $this->profileService->uploadImage($profile->getId(), new UploadImageParameters($avatarPath, new Point(0,0), new Point($maxSize,$maxSize)));
+                    }
+
+                }
 
                 $output->writeln([
                                      "Account ID:{$account->getId()}",
                                      "Account email:{$account->getEmail()}",
                                  ]);
-
 
             }
 
