@@ -1,43 +1,12 @@
 .profile-im-messages
-  ul.chatlog 
-    li
-      img.avatar(src="/dist/assets/profile-default.png")
+  ul.chatlog(#chatlog) 
+    li(*ngFor="#message of imModel.history", [ngClass]="{'sending': !message.isSended, 'error': message.hasError}")
+      img.avatar(
+        src="{{message.source_profile.profile.image.variants['64'].public_path}}"
+      )
       .message
-        .from hck
-        .text я еще на работе...
-        .text я еще на работе...
-        .text я еще на работе...
-    li
-      img.avatar(src="/dist/assets/profile-default.png")
-      .message
-        .from hck
-        .text я еще на работе...
-    li
-      img.avatar(src="/dist/assets/profile-default.png")
-      .message
-        .from hck
-        .text я еще на работе...
-    li
-      img.avatar(src="/dist/assets/profile-default.png")
-      .message
-        .from hck
-        .text я еще на работе...
-    li
-      img.avatar(src="/dist/assets/profile-default.png")
-      .message
-        .from hck
-        .text я еще на работе...
-    li
-      img.avatar(src="/dist/assets/profile-default.png")
-      .message
-        .from hck
-        .text я еще на работе...
-    li
-      img.avatar(src="/dist/assets/profile-default.png")
-      .message
-        .from hck
-        .text я еще на работе...
-
+        .from {{message.source_profile.profile.greetings.greetings}}
+        .text {{message.content}}
   footer
     .cass-padding-box-15
-      cass-profile-im-textarea
+      cass-profile-im-textarea((send)="send($event)")
