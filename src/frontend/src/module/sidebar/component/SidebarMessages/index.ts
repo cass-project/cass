@@ -15,15 +15,6 @@ import {AuthService} from "../../../auth/service/AuthService";
 })
 export class SidebarMessages
 {
-    constructor(im:ProfileIMService, authService:AuthService){
-        if(authService.isSignedIn()) {
-            im.getUnreadMessages().subscribe(
-                data => {
-                    console.log(data);
-                }
-            )
-        }
-    }
     private isSwitchedMessages: boolean = true;
 
     isSwitched() {
