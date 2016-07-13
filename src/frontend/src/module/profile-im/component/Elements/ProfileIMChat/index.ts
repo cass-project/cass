@@ -1,5 +1,5 @@
 import {Component, ViewChild, ElementRef} from "angular2/core";
-import {RouteParams} from "angular2/router";
+import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
 
 import {AuthService}               from "../../../../auth/service/AuthService";
 import {SendProfileMessageRequest} from "../../../definitions/paths/send";
@@ -15,6 +15,7 @@ import {ProfileIMMessagesModel}    from "./model";
         require('./style.shadow.scss')
     ],
     directives: [
+        ROUTER_DIRECTIVES,
         ProfileIMTextarea,
         ProfileIMChatHistory
     ]
@@ -37,17 +38,18 @@ export class ProfileIMChat
                         source_profile: this.authService.getCurrentAccount().getCurrentProfile().entity,
                         target_profile_id: message.target_profile_id,
                         content: message.content,
+                        date: new Date(message.date_created_on),
                         is_sended: true,
                         has_error: false,
                     });
-                    setTimeout(() => this.scroll(), 0); // ngFor срабатывает позже расчетов, по этому обернуто в setTimeout
+                    this.scroll();
                 });
             }
         );
 
         imService.createStream().subscribe(message => {
             imModel.history.push(message);
-            setTimeout(() => this.scroll(), 0); // ngFor срабатывает позже расчетов, по этому обернуто в setTimeout
+            this.scroll();
             imService.sendMessageTo(message.target_profile_id, <SendProfileMessageRequest>{content: message.content})
                 .subscribe(
                     () => message.is_sended = true,
@@ -57,6 +59,8 @@ export class ProfileIMChat
     }
 
     scroll() {
-        this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+        setTimeout(() => {// ngFor срабатывает позже this.scroll() (почему-то), по этому обернуто в setTimeout
+            this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+        },0)
     }
 }

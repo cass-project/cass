@@ -12,6 +12,7 @@ export class ProfileIMMessageModel {
     source_profile:ProfileExtendedEntity;
     target_profile_id:number;
     content:string;
+    date:Date;
     is_sended:boolean;
     has_error:boolean;
 }

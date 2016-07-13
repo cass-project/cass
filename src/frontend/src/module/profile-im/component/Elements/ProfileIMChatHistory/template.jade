@@ -5,4 +5,8 @@ ul.chatlog
     )
     .message
       .from {{message.source_profile.profile.greetings.greetings}}
+        small &nbsp;
+          | {{message.date | date:"y"}}-{{message.date | date:"MM"}}-{{message.date | date:"dd"}}
+          | {{message.date | date:"HH:mm:ss"}}
+        
       .text {{message.content}}

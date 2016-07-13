@@ -35,12 +35,18 @@ ul.chatlog {
     
     .message {
       font-size: 14px;
+      line-height: normal;
       color: material-color("grey", "700");
       
       .from {
-        color: material-color("grey", "900")
+        color: material-color("grey", "900");
+        
+        small {
+          color: material-color("grey", "400");
+          font-size:13px;
+        }
+        
       }
-      
     }
   }
 }

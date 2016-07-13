@@ -5,6 +5,30 @@
   height:100%;
   overflow: hidden;
 
+  header,
+  footer {
+    background: $MATERIAL_BACKGROUND;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  header {
+    position: relative;
+    z-index: 1;
+    
+    h1{
+      font-size: $FONT_SIZE_LARGE;
+      a {
+        display: inline-block;
+        color: material-color("blue-grey", "800");
+        text-decoration: none;
+        &:hover{
+          background: linear-gradient(to right, material-color("grey", "50"), $MATERIAL_BACKGROUND 80%);
+        }
+      }
+      
+    }
+  }
+
   .content{
     height:100%;
     overflow: auto;
@@ -16,7 +40,5 @@
     position: absolute;
     left:0;
     bottom:0;
-    background: $MATERIAL_BACKGROUND;
-    border-top:1px material-color("grey", "300") solid;
  }
 }
