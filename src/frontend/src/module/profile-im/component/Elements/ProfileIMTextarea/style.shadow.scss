@@ -1,3 +1,6 @@
+@import "./../../../../../styles/globals";
+
 textarea{
-  word-wrap: break-word;
+  font-size:$FONT_SIZE_NORMAL;
+  padding: 5px;
 }
