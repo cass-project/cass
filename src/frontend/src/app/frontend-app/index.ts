@@ -42,6 +42,7 @@ import {FeedRESTService} from "../../module/feed/service/FeedRESTService";
 import {ProfileIMService} from "../../module/profile-im/service/ProfileIMService";
 import {ProfileIMRESTService} from "../../module/profile-im/service/ProfileIMRESTService";
 import {ProfileIMRoute} from "../../module/profile-im/route/ProfileIMRoute/index";
+import {ContactRESTService} from "../../module/contact/service/ContactRESTService";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -78,6 +79,7 @@ import {ProfileIMRoute} from "../../module/profile-im/route/ProfileIMRoute/index
         FeedRESTService,
         ProfileIMRESTService,
         ProfileIMService,
+        ContactRESTService,
     ],
     directives: [
         ROUTER_DIRECTIVES,

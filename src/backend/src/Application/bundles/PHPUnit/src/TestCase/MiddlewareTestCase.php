@@ -46,6 +46,8 @@ class ExpectImageCollection {
  */
 abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
 {
+    const NOT_FOUND_ID = 9999999;
+
     /** @var Application */
     public static $app;
 

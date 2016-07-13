@@ -7,6 +7,7 @@ sudo sed -i 's/\r$//' /usr/bin/vm-server-update.sh
 sudo sed -i 's/\r$//' /usr/bin/cass-console.sh
 sudo sed -i 's/\r$//' /usr/bin/vm-db-recreate.sh
 sudo sed -i 's/\r$//' /usr/bin/vm-db-test.sh
+sudo sed -i 's/\r$//' /usr/bin/vm-backend-test.sh
 
 sudo service mysql restart
 sudo service mongodb restart

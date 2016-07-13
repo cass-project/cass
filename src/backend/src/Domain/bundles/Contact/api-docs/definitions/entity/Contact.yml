@@ -1,0 +1,65 @@
+Contact_Entity_Contact:
+  required:
+    - id
+    - sid
+    - date_created_on
+    - source_profile
+    - target_profile
+    - permanent
+    - last_message
+  properties:
+    id:
+      type: number
+      description: ID
+    sid:
+      type: string
+      description: SID
+    date_created_on:
+      type: string
+      description: |
+        Дата создания контакта
+    source_profile:
+      description: |
+        Источник (в чьем контакт-листы находится контакт)
+      type: object
+      schema:
+        $ref: '#/definitions/Profile_Entity_Profile'
+    target_profile:
+      description: Цель
+      type: object
+      schema:
+        $ref: '#/definitions/Profile_Entity_Profile'
+    permanent:
+      type: object
+      description: Информация о том, является ли контакт перманентным, т.е. контакт был добавлен, а не просто автодобавился при сообщении профилю
+      schema:
+        required:
+          - is
+        properties:
+          date:
+            type: string
+            description: |
+              Дата подтверждения добавления в контакт-лист
+          is:
+            type: boolean
+            description: |
+              Флаг "контакт является перманентным". Неперманентным контактом считается автодобавленный контакт, который написал сообщение цели, но не был этой целью вручную добавлен в контакт-лист.
+    last_message:
+      type: object
+      description: |
+        Информация о последнем сообщении от контакта
+      schema:
+        required:
+          - has
+        properties:
+          has:
+            type: boolean
+            description: |
+              Есть ли последнее сообщение от контакта?
+          date:
+            type: string
+            description: |
+              Дата последнего сообщения от контакта
+          message:
+            type: string
+            description: Последнее сообщение от контакта

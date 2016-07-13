@@ -7,6 +7,7 @@ use Domain\Account\Entity\Account;
 use Domain\Account\Exception\AccountNotFoundException;
 use Domain\Account\Repository\AccountRepository;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Exception\ProfileNotFoundException;
 
 class CurrentAccountService
 {
@@ -34,6 +35,18 @@ class CurrentAccountService
     public function getCurrentProfile(): Profile
     {
         return $this->account->getCurrentProfile();
+    }
+
+    public function getProfileWithId(int $profileId): Profile
+    {
+        /** @var Profile $profile */
+        foreach($this->account->getProfiles() as $profile) {
+            if($profile->getId() === $profileId) {
+                return $profile;
+            }
+        }
+
+        throw new ProfileNotFoundException(sprintf('Profile with ID `%s` not found', $profile->getIdNoFall()));
     }
 
     public function forceSignIn(Account $account) {
