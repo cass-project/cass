@@ -1,4 +1,5 @@
 import {Injectable} from "angular2/core";
+
 import {ProfileExtendedEntity} from "../../../../profile/definitions/entity/Profile";
 
 @Injectable()
@@ -11,6 +12,6 @@ export class ProfileIMMessageModel {
     source_profile:ProfileExtendedEntity;
     target_profile_id:number;
     content:string;
-    isSended:boolean;
-    hasError:boolean;
+    is_sended:boolean;
+    has_error:boolean;
 }
