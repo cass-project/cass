@@ -1,6 +1,6 @@
 textarea.form-input(
   placeholder="Введите ваше сообщение для @username",
   (input)="adjust(textarea.value)",
-  (keydown.enter)="send($event)",
+  (keydown.enter)="submit($event)",
   #textarea
 )
