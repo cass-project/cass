@@ -45,14 +45,18 @@ export class ThemeService
     }
 
     getRoot(): Theme {
-        return {
-            id: 0,
-            parent_id: 0,
-            position: 0,
-            title: 'ROOT',
-            description: 'ROOT Dir',
-            children: this.themes
-        };
+        if(this.themes.length > 0) {
+            return this.themes[0];
+        }else{
+            return {
+                id: 1,
+                title: 'ROOT',
+                description: 'Root',
+                parent_id: null,
+                position: 1,
+                children: []
+            }
+        }
     }
 
     getAll(): Array<Theme> {
