@@ -1,0 +1,8 @@
+ul.chatlog
+  li(*ngFor="#message of history", [ngClass]="{'sending': !message.is_sended, 'error': message.has_error}")
+    img.avatar(
+      src="{{message.source_profile.profile.image.variants['64'].public_path}}"
+    )
+    .message
+      .from {{message.source_profile.profile.greetings.greetings}}
+      .text {{message.content}}

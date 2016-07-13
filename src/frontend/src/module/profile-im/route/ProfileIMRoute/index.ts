@@ -1,9 +1,9 @@
 import {Component} from "angular2/core";
 import {RouterOutlet, RouteConfig} from "angular2/router";
 
-import {ProfileIMMessages} from "../../component/Elements/ProfileIMMessages/index";
-import {ProfileIMContacts} from "../../component/Elements/ProfileIMContacts/index";
-import {ProfileIMSidebar} from "../../component/Elements/ProfileIMSidebar/index";
+import {ProfileIMChat}     from "../../component/Elements/ProfileIMChat";
+import {ProfileIMContacts} from "../../component/Elements/ProfileIMContacts";
+import {ProfileIMSidebar}  from "../../component/Elements/ProfileIMSidebar";
 
 @Component({
     selector:'profile-im-route',
@@ -16,6 +16,7 @@ import {ProfileIMSidebar} from "../../component/Elements/ProfileIMSidebar/index"
         ProfileIMSidebar
     ]
 })
+
 @RouteConfig([
     {
         name: 'Contacts',
@@ -26,7 +27,7 @@ import {ProfileIMSidebar} from "../../component/Elements/ProfileIMSidebar/index"
     {
         name: 'Messages',
         path: '/messages/:id',
-        component: ProfileIMMessages
+        component: ProfileIMChat
     }
 ])
 

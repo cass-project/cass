@@ -1,0 +1,46 @@
+@import "./../../../../../styles/globals";
+$AVATAR-SIZE: 32px;
+
+ul.chatlog {
+  padding-bottom:62px;
+
+  li{
+    overflow: hidden;
+    border-bottom: 1px material-color("grey", "300") solid;
+    padding: 15px 0;
+    display: flex;
+    transition: opacity 400ms;
+    position: relative;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &.sending {
+      opacity: 0.1;
+    }
+
+    &.error {
+      opacity: 1;
+      background-color: material-color("red", "100");
+      border-bottom-color: material-color("red", "300");
+    }
+
+    .avatar {
+      margin: 0 15px;
+      width: $AVATAR-SIZE;
+      height: $AVATAR-SIZE;
+      border-radius: 50%;
+    }
+    
+    .message {
+      font-size: 14px;
+      color: material-color("grey", "700");
+      
+      .from {
+        color: material-color("grey", "900")
+      }
+      
+    }
+  }
+}

@@ -1,4 +1,9 @@
-import {Component, ElementRef, ViewChild, Output, EventEmitter} from "angular2/core";
+import {Component, ElementRef, ViewChild} from "angular2/core";
+import {RouteParams} from "angular2/router";
+
+import {ProfileIMMessageModel}  from "../ProfileIMChat/model";
+import {ProfileIMService}       from "../../../service/ProfileIMService";
+import {AuthService}            from "../../../../auth/service/AuthService";
 
 @Component({
     selector: 'cass-profile-im-textarea',
@@ -8,9 +13,14 @@ import {Component, ElementRef, ViewChild, Output, EventEmitter} from "angular2/c
 export class ProfileIMTextarea
 {
     @ViewChild('textarea') textarea:ElementRef;
-    @Output('send') sendEvent = new EventEmitter<string>();
     private hiddenDiv:HTMLDivElement = document.createElement('div');
-
+    private content:string = "";
+    constructor(
+        private params: RouteParams,
+        private imService:ProfileIMService,
+        private authService:AuthService
+    ){}
+    
     ngAfterViewInit() {
          this.hiddenDiv.style.cssText = window.getComputedStyle(this.textarea.nativeElement, null).cssText;
          this.hiddenDiv.style.width = this.hiddenDiv.style.height = "auto";
@@ -22,8 +32,16 @@ export class ProfileIMTextarea
     
     submit(e: Event) {
         e.preventDefault();
-        this.sendEvent.emit(this.textarea.nativeElement.value);
-        this.textarea.nativeElement.value = "";
+        if(this.content!=="") {
+            this.imService.stream.next(<ProfileIMMessageModel>{
+                source_profile: this.authService.getCurrentAccount().getCurrentProfile().entity,
+                target_profile_id: parseInt(this.params.get('id')),
+                content: this.content,
+                is_sended: false,
+                has_error: false,
+            });
+            this.content = "";
+        }
     }
 
     adjust(value: string) {
