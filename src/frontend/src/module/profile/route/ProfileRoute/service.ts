@@ -9,7 +9,7 @@ import {CurrentProfileService} from "../../service/CurrentProfileService";
 import {ProfileCachedIdentityMap} from "../../service/ProfileCachedIdentityMap";
 
 @Injectable()
-export class ProfileRouteService
+export class  ProfileRouteService
 {
     private request: string;
     private cache: ProfileCachedIdentityMap;
