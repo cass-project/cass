@@ -197,8 +197,15 @@ final class FakeFixture
 
             case 2: // youtube
                 $url = $json['url'];
-                $params = [];
-                parse_str(parse_url($url)['query'], $params);
+                $parsedURL = parse_url($url);
+
+                if(! isset($parsedURL['query'])) {
+                    $v = str_replace('/', '', $parsedURL['path']);
+                }else{
+                    $params = [];
+                    parse_str(parse_url($url)['query'] ?? '', $params);
+                    $v = $params['v'];
+                }
 
                 $linkAttachment = new PostAttachment();
                 $linkAttachment->setAttachment([
@@ -247,7 +254,7 @@ final class FakeFixture
                                 ]]
                             ]
                         ],
-                        'youtubeId' => $params['v'] ?? '',
+                        'youtubeId' => $v,
                     ]
                 ]);
 
