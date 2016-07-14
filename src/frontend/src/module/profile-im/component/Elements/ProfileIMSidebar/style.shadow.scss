@@ -1,0 +1,81 @@
+@import "./../../../../../styles/globals";
+$AVATAR-SIZE: 32px;
+
+.profile-im-sidebar {
+  background-color: material-color("grey", "800");
+  position: fixed;
+  height: 100%;
+  width:250px;
+  color: material-color("grey", "50");
+  overflow: auto;
+
+  h1 {
+    font-family: $FONT_FAMILY;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 400;
+  }
+
+  .contact-list {
+    li {
+      padding:10px;
+      overflow: hidden; font-size: 14px; line-height:16px;
+      cursor: pointer;
+      transition:background 300ms;
+      border-left: 3px transparent solid;
+      position:relative;
+
+      &:hover {
+        border-left-color: #2e4356;
+        background-color: #323232
+      }
+
+      &.active{
+        border-left-color: material-color("blue", '600');
+        background-color: material-color("grey", "900");
+      }
+
+      .last-message{
+        line-height:16px;
+        height: 16px; 
+        overflow: hidden;
+        color: material-color("grey", "500");
+      }
+      
+      .avatar {
+        width: $AVATAR-SIZE;
+        height: $AVATAR-SIZE;
+        margin-right: 5px;
+        border-radius: 50%;
+        vertical-align: top;
+        float: left
+      }
+      i.status {
+        position:absolute;
+        width: 10px; 
+        height: 10px;
+        border-radius: 50%;
+        top: $AVATAR-SIZE;
+        left: $AVATAR-SIZE;
+        border: 2px material-color("grey", "800") solid;
+        display:none;
+        
+        &.online {
+          display:block;
+          background-color: material-color("lime", "600");
+        }
+      }
+    }
+  }
+  
+  .footer {
+    width: 100%;
+    position: absolute; 
+    bottom: 0;
+    
+    input {
+      background-color: material-color("grey", "700");
+      color: material-color("grey", "50");
+    }
+  }
+}

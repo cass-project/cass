@@ -1,0 +1,22 @@
+@import "./../../../../../styles/globals";
+
+.profile-im-messages {
+  position: relative;
+  height:100%;
+  overflow: hidden;
+
+  .content{
+    height:100%;
+    overflow: auto;
+  
+  }
+  
+  footer {
+    width:100%;
+    position: absolute;
+    left:0;
+    bottom:0;
+    background: $MATERIAL_BACKGROUND;
+    border-top:1px material-color("grey", "300") solid;
+ }
+}

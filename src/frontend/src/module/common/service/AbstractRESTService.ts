@@ -1,5 +1,5 @@
 import {Injectable} from "angular2/core"
-import {Http, Response} from "angular2/http";
+import {Http, Response, Headers} from "angular2/http";
 import {Observable} from "rxjs/Observable";
 
 import {MessageBusService} from "../../message/service/MessageBusService/index";
@@ -25,6 +25,16 @@ export abstract class AbstractRESTService
         }else{
             return 'Failed to parse JSON';
         }
+    }
+
+    protected getAuthHeaders(): Headers {
+        let authHeader = new Headers();
+
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
+        return authHeader;
     }
 
     handle(request) {

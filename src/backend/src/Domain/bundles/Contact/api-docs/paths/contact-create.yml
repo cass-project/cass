@@ -1,0 +1,45 @@
+"/protected/profile/{profileId}/contact/create":
+  put:
+    tags:
+      - contact
+    description:
+      Создать (с подтверждением) новый контакт
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        in: path
+        required: true
+        description: ID профиля
+        type: number
+      - name: body
+        in: body
+        required: true
+        description:
+        schema:
+          $ref: '#/definitions/Contact_Request_CreateContact'
+    responses:
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        description: Профиль не найден
+        schema:
+          $ref: '#/responses/NotFound'
+      409:
+        description: Контакт уже существует
+        schema:
+          $ref: '#/responses/Error'
+      200:
+        schema:
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              type: object
+              schema:
+                $ref: '#/definitions/Contact_Entity_Contact'

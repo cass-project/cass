@@ -1,0 +1,30 @@
+"/protected/profile/{profileId}/contact/{contactId}/delete/":
+  delete:
+    tags:
+      - contact
+    description:
+      Удалить контакт
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        in: path
+        required: true
+        description: ID профиля
+        type: number
+      - name: contactId
+        in: path
+        required: true
+        type: number
+        description: ID контакта
+    responses:
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        description: Контакт не найден
+        schema:
+          $ref: '#/responses/NotFound'
+      200:
+        schema:
+          $ref: '#/responses/success'

@@ -3,20 +3,20 @@
   ul.sidebar-items
     li
       div
-        a.sidebar-fa-button(href='#')
+        a.sidebar-fa-button([routerLink]="['/ProfileIM']")
           i.fa.fa-envelope
-    li
-      .switcher
-        .sidebar-switch-button((click)='switchMessages()')
-          i.fa.fa-chevron-up(*ngIf='isSwitched()')
-          i.fa.fa-chevron-down(*ngIf='!isSwitched()')
-    li(*ngIf='isSwitched()')
-      .message
-        a.sidebar-button.sidebar-community-icon(href='#')
-          img.sidebar-icon(src='/dist/assets/icons-demo/gangplank.png')
-          .counter.counter-red 45
-    li(*ngIf='isSwitched()')
-      .message
-        a.sidebar-button.sidebar-community-icon(href='#')
-          img.sidebar-icon(src='/dist/assets/icons-demo/xerath.png')
-          .counter.counter-red 1
+    //li
+    //  .switcher
+    //    .sidebar-switch-button((click)='switchMessages()')
+    //      i.fa.fa-chevron-up(*ngIf='isSwitched()')
+    //      i.fa.fa-chevron-down(*ngIf='!isSwitched()')
+    //li(*ngIf='isSwitched()')
+    //  .message
+    //    a.sidebar-button.sidebar-community-icon(href='#')
+    //      img.sidebar-icon(src='/dist/assets/icons-demo/gangplank.png')
+    //      .counter.counter-red 45
+    //li(*ngIf='isSwitched()')
+    //  .message
+    //    a.sidebar-button.sidebar-community-icon(href='#')
+    //      img.sidebar-icon(src='/dist/assets/icons-demo/xerath.png')
+    //      .counter.counter-red 1

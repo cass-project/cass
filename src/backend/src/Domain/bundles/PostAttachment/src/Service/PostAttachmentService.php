@@ -53,21 +53,6 @@ class PostAttachmentService
         $this->fetchResourceService = $fetchResourceService;
         $this->linkMetadataFactory = $linkMetadataFactory;
     }
-
-    public function createLinkAttachment(Post $post, string $url, string $resource, array $metadata): PostAttachment
-    {
-        $postAttachment = new PostAttachment();
-        $postAttachment->attachToPost($post);
-        $postAttachment->setAttachment([
-            'url' => $url,
-            'resource' => $resource,
-            'metadata' => $metadata
-        ]);
-
-        $this->postAttachmentRepository->createPostAttachment($postAttachment);
-
-        return $postAttachment;
-    }
     
     public function linkAttachment(string $url, Result $result, Source $source): PostAttachment
     {

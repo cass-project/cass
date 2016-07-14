@@ -13,6 +13,10 @@
         required: true
         description: ID поста
     responses:
+      404:
+        description: Пост не найден
+        schema:
+          $ref: '#/responses/NotFound'
       200:
         schema:
           required:

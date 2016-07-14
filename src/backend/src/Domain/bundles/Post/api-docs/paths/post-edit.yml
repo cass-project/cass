@@ -24,7 +24,7 @@
       404:
         description: Колекция не найдена
         schema:
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/NotFound'
       200:
         schema:
           required:

@@ -1,0 +1,13 @@
+.sidebar-communities
+  .sidebar-separator
+  ul.sidebar-items
+    li
+      .community-bookmark
+        a.sidebar-fa-button([routerLink]="['/Public']")
+          .fa.fa-fw.fa-search
+    li
+      .switcher
+        .sidebar-switch-button((click)="switchCommunityBookmarks()")
+    li.add-button(*ngIf="isSwitched()", (click)="openCommunityModal()")
+      .community-plus
+        i.fa.fa-plus

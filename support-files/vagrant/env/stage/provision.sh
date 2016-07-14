@@ -12,3 +12,4 @@ chmod a+x /usr/bin/vm-init.sh
 chmod a+x /usr/bin/vm-project-update.sh
 chmod a+x /usr/bin/vm-db-test.sh
 chmod a+x /usr/bin/vm-db-recreate.sh
+chmod a+x /usr/bin/vm-backend-test.sh

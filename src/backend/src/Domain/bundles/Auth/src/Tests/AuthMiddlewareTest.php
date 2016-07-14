@@ -39,6 +39,7 @@ class AuthMiddlewareTest extends MiddlewareTestCase
                 ],
                 'profiles' => [
                     0 => [
+                        'is_own' => true,
                         'profile' => [
                             'id' => $this->expectId(),
                             'account_id' => $this->expectId(),

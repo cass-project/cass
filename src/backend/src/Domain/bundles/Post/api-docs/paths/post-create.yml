@@ -20,7 +20,7 @@
       404:
         description: Профиль/коллекция не найдены
         schema:
-          $ref: '#/responses/Unauthorized'
+          $ref: '#/responses/NotFound'
       200:
         schema:
           required:
