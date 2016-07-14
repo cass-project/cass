@@ -1,5 +1,7 @@
 import {Component, Input} from "angular2/core";
-import {ProfileIMMessageModel} from "../ProfileIMChat/model";
+import {DateFormatter} from 'angular2/src/facade/intl';
+
+import {ProfileMessageExtendedEntity} from "../../../definitions/entity/ProfileMessage";
 
 @Component({
     selector: 'cass-profile-im-chat-history',
@@ -11,5 +13,9 @@ import {ProfileIMMessageModel} from "../ProfileIMChat/model";
 
 export class ProfileIMChatHistory
 {
-    @Input('history') history:ProfileIMMessageModel[];
+    @Input('history') history:ProfileMessageExtendedEntity[];
+
+    dateFormat(date:string, format:string) {
+        return DateFormatter.format(new Date(date), 'pt', format);
+    }
 }

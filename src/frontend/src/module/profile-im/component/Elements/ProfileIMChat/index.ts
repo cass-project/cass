@@ -1,12 +1,9 @@
 import {Component, ViewChild, ElementRef} from "angular2/core";
 import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
 
-import {AuthService}               from "../../../../auth/service/AuthService";
-import {SendProfileMessageRequest} from "../../../definitions/paths/send";
 import {ProfileIMService}          from "../../../service/ProfileIMService";
 import {ProfileIMChatHistory}      from "../ProfileIMChatHistory/index";
 import {ProfileIMTextarea}         from "../ProfileIMTextarea/index";
-import {ProfileIMMessagesModel}    from "./model";
 
 @Component({
     selector: 'cass-profile-im-messages',
@@ -24,43 +21,22 @@ import {ProfileIMMessagesModel}    from "./model";
 export class ProfileIMChat
 {
     @ViewChild('content') content:ElementRef;
+    isNeedScroll = false;
 
-    constructor(
-        private params: RouteParams,
-        private imModel:ProfileIMMessagesModel,
-        private imService:ProfileIMService,
-        private authService:AuthService
-    ) {
-        imService.getMessageFrom(parseInt(params.get('id')), 0, 10, false).subscribe(
-            data => {
-                data.messages.forEach((message)=>{
-                    imModel.history.push({
-                        source_profile: this.authService.getCurrentAccount().getCurrentProfile().entity,
-                        target_profile_id: message.target_profile_id,
-                        content: message.content,
-                        date: new Date(message.date_created_on),
-                        is_sended: true,
-                        has_error: false,
-                    });
-                    this.scroll();
-                });
-            }
-        );
-
-        imService.createStream().subscribe(message => {
-            imModel.history.push(message);
-            this.scroll();
-            imService.sendMessageTo(message.target_profile_id, <SendProfileMessageRequest>{content: message.content})
-                .subscribe(
-                    () => message.is_sended = true,
-                    () => message.has_error = true
-                );
-        });
+    constructor(private params: RouteParams, private im:ProfileIMService) {
+        im.getMessageFrom(parseInt(params.get('id')), 0, 10, false)
+            .subscribe(() => this.isNeedScroll = true);
+        
+        im.createStream()
+            .subscribe(() => this.isNeedScroll = true);
     }
-
+    
+    ngAfterContentChecked() {
+        if(this.isNeedScroll) scroll();
+    }
+    
     scroll() {
-        setTimeout(() => {// ngFor срабатывает позже this.scroll() (почему-то), по этому обернуто в setTimeout
-            this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
-        },0)
+        this.isNeedScroll = false;
+        this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
     }
 }

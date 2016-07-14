@@ -1,10 +1,11 @@
 import {Component, ElementRef, ViewChild} from "angular2/core";
 import {RouteParams} from "angular2/router";
 
-import {ProfileIMMessageModel}  from "../ProfileIMChat/model";
-import {ProfileIMService}       from "../../../service/ProfileIMService";
-import {AuthService}            from "../../../../auth/service/AuthService";
-import {MessageBusService} from "../../../../message/service/MessageBusService/index";
+import {ProfileIMFeedSendStatus}      from "../../../definitions/entity/ProfileMessage";
+import {ProfileMessageExtendedEntity} from "../../../definitions/entity/ProfileMessage";
+import {ProfileIMService}             from "../../../service/ProfileIMService";
+import {AuthService}                  from "../../../../auth/service/AuthService";
+import {MessageBusService}            from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
 
 @Component({
@@ -22,7 +23,7 @@ export class ProfileIMTextarea
     private content:string = "";
     constructor(
         private params: RouteParams,
-        private imService:ProfileIMService,
+        private im:ProfileIMService,
         private authService:AuthService,
         private messageBus: MessageBusService
     ){}
@@ -51,13 +52,12 @@ export class ProfileIMTextarea
             return false;
         }
         
-        this.imService.stream.next(<ProfileIMMessageModel>{
-            source_profile: this.authService.getCurrentAccount().getCurrentProfile().entity,
+        this.im.stream.next(<ProfileMessageExtendedEntity>{
+            date_created_on: new Date().toString(),
+            source_profile_id: this.authService.getCurrentAccount().getCurrentProfile().getId(),
             target_profile_id: parseInt(this.params.get('id')),
-            date: new Date(),
             content: this.content,
-            is_sended: false,
-            has_error: false,
+            send_status:{status:ProfileIMFeedSendStatus.Processing}
         });
         this.content = "";
         this.adjust("");

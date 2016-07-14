@@ -2,7 +2,7 @@
 $AVATAR-SIZE: 32px;
 
 ul.chatlog {
-  padding-bottom:62px;
+  padding-bottom:116px;
 
   li{
     overflow: hidden;
@@ -16,14 +16,17 @@ ul.chatlog {
       border-bottom: none;
     }
 
-    &.sending {
+    &.processing {
       opacity: 0.1;
     }
-
-    &.error {
+    
+    &.complete,
+    &.fail {
       opacity: 1;
-      background-color: material-color("red", "100");
-      border-bottom-color: material-color("red", "300");
+      &.fail {
+        background-color: material-color("red", "100");
+        border-bottom-color: material-color("red", "300");
+      }
     }
 
     .avatar {
