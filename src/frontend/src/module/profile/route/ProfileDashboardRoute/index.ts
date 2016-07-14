@@ -29,13 +29,16 @@ export class ProfileDashboardRoute
         private feed: FeedService<PostEntity>,
         private feedSource: ProfileSource
     ) {
-        service.getObservable().subscribe(
-            (response) => {
-                feedSource.profileId = response.entity.profile.id;
-                feed.provide(feedSource, new Stream<PostEntity>());
-                feed.update();
-            },
-            (error) => {}
-        );
+        if (service.getObservable() !== undefined) {
+            service.getObservable().subscribe(
+                (response) => {
+                    feedSource.profileId = response.entity.profile.id;
+                    feed.provide(feedSource, new Stream<PostEntity>());
+                    feed.update();
+                },
+                (error) => {
+                }
+            );
+        }
     }
 }
