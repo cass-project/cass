@@ -1,5 +1,4 @@
 import {Injectable} from "angular2/core";
-import {Response} from "angular2/http";
 import {Observable, Observer} from "rxjs/Rx";
 
 import {ProfileIMRESTService}             from "./ProfileIMRESTService";
@@ -18,7 +17,7 @@ export class ProfileIMService
 
     getUnreadMessages() : Observable<UnreadProfileMessagesResponse200> 
     {
-        return Observable.create((observer: Observer<Response>) => {
+        return Observable.create((observer: Observer<UnreadProfileMessagesResponse200>) => {
             this.rest.getUnreadMessages().subscribe(
                 data => {
                     observer.next(data);
@@ -33,7 +32,7 @@ export class ProfileIMService
     
     getMessageFrom(sourceProfileId: number, offset: number, limit: number, markAsRead: boolean) : Observable<ProfileMessagesResponse200>
     {
-        return Observable.create((observer: Observer<Response>) => {
+        return Observable.create((observer: Observer<ProfileMessagesResponse200>) => {
             this.rest.getMessageFrom(sourceProfileId, offset, limit, markAsRead).subscribe(
                 data => {
                     observer.next(data);
@@ -48,7 +47,7 @@ export class ProfileIMService
     
     sendMessageTo(targetProfileId: number, body:SendProfileMessageRequest) : Observable<SendProfileMessageResponse200>
     {
-        return Observable.create((observer: Observer<Response>) => {
+        return Observable.create((observer: Observer<SendProfileMessageResponse200>) => {
             this.rest.sendMessageTo(targetProfileId, body).subscribe(
                 data => {
                     observer.next(data);

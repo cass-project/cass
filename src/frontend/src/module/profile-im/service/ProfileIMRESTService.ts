@@ -1,11 +1,14 @@
 import {Injectable} from "angular2/core";
-import {Http, URLSearchParams, Headers, Response} from "angular2/http"
+import {Http, URLSearchParams, Headers} from "angular2/http"
 import {Observable} from "rxjs/Rx";
 
-import {SendProfileMessageRequest} from "../definitions/paths/send";
-import {AuthToken}                 from "../../auth/service/AuthToken";
-import {AbstractRESTService}       from "../../common/service/AbstractRESTService";
-import {MessageBusService}         from "../../message/service/MessageBusService";
+import {SendProfileMessageResponse200}    from "../definitions/paths/send";
+import {SendProfileMessageRequest}        from "../definitions/paths/send";
+import {ProfileMessagesResponse200}       from "../definitions/paths/messages";
+import {UnreadProfileMessagesResponse200} from "../definitions/paths/unread";
+import {AuthToken}                        from "../../auth/service/AuthToken";
+import {AbstractRESTService}              from "../../common/service/AbstractRESTService";
+import {MessageBusService}                from "../../message/service/MessageBusService";
 
 @Injectable()
 export class ProfileIMRESTService extends AbstractRESTService
@@ -16,7 +19,7 @@ export class ProfileIMRESTService extends AbstractRESTService
         protected messages: MessageBusService
     ) { super(http, token, messages); }
 
-    getUnreadMessages() : Observable<Response>
+    getUnreadMessages() : Observable<UnreadProfileMessagesResponse200>
     {
         let authHeader = new Headers();
         
@@ -27,7 +30,7 @@ export class ProfileIMRESTService extends AbstractRESTService
         return this.handle(this.http.get(`/backend/api/protected/profile-im/unread`, {headers: authHeader}));
     }
     
-    getMessageFrom(sourceProfileId: number, offset: number, limit: number, markAsRead: boolean) : Observable<Response>
+    getMessageFrom(sourceProfileId: number, offset: number, limit: number, markAsRead: boolean) : Observable<ProfileMessagesResponse200>
     {
         let authHeader = new Headers();
         let params: URLSearchParams = new URLSearchParams();
@@ -44,7 +47,7 @@ export class ProfileIMRESTService extends AbstractRESTService
         }));
     }
 
-    sendMessageTo(targetProfileId: number, body:SendProfileMessageRequest) : Observable<Response>
+    sendMessageTo(targetProfileId: number, body:SendProfileMessageRequest) : Observable<SendProfileMessageResponse200>
     {
         
         let authHeader = new Headers();
