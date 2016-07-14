@@ -32,7 +32,7 @@ export class ProfileIMChat
     }
     
     ngAfterContentChecked() {
-        if(this.isNeedScroll) scroll();
+        if(this.isNeedScroll) this.scroll();
     }
     
     scroll() {
