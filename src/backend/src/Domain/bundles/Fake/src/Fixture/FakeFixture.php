@@ -199,11 +199,12 @@ final class FakeFixture
                 $url = $json['url'];
                 $parsedURL = parse_url($url);
 
-                if(! isset($parsedURL['query'])) {
+                if((strtolower($parsedURL['host']) === 'youtu.be') || (! isset($parsedURL['query']))) {
                     $v = str_replace('/', '', $parsedURL['path']);
                 }else{
                     $params = [];
                     parse_str(parse_url($url)['query'] ?? '', $params);
+                    
                     $v = $params['v'];
                 }
 
