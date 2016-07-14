@@ -31,6 +31,10 @@ export class ProfileCardsList
     }
 
     goDashboard() {
-        this.router.navigate(['/Profile', 'Profile', { id: this.entity.profile.id.toString() }, 'Dashboard']);
+        if(this.isOwnProfile()){
+            this.router.navigate(['/Profile', 'Profile', { id: 'current' }, 'Dashboard']);
+        } else {
+            this.router.navigate(['/Profile', 'Profile', {id: this.entity.profile.id.toString()}, 'Dashboard']);
+        }
     }
 }
