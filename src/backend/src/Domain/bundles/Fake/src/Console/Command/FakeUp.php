@@ -5,6 +5,7 @@ use Application\Util\Definitions\Point;
 use Domain\Account\Service\AccountService;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Fake\Console\Command\DataHandler\ProfilesHandler;
+use Domain\Post\Service\PostService;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
 use Domain\Profile\Service\ProfileService;
@@ -19,11 +20,15 @@ class FakeUp extends Command
     /** @var AccountService $accountService */
     private $accountService;
     private $profileService;
+    private $postService;
 
-    public function __construct(AccountService $accountService, ProfileService $profileService)
+
+
+    public function __construct(AccountService $accountService, ProfileService $profileService, PostService $postService)
     {
         $this->profileService = $profileService;
         $this->accountService = $accountService;
+        $this->postService = $postService;
         parent::__construct();
     }
 
@@ -37,7 +42,7 @@ class FakeUp extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
-            $dataHandler = new ProfilesHandler($this->accountService, $this->profileService, $output);
+            $dataHandler = new ProfilesHandler($this->accountService, $this->profileService,$this->postService, $output);
             $dataHandler->readData(__DIR__ . "/../../Resources/Data/JSON/profiles.json")
             ->saveData();
 

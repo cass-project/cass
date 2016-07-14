@@ -4,6 +4,7 @@ namespace Domain\Fake\Console\Command;
 
 
 use Domain\Account\Service\AccountService;
+use Domain\Post\Service\PostService;
 use Domain\Profile\Service\ProfileService;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -14,15 +15,17 @@ abstract class DataHandler
     protected $accountService;
     /** @var ProfileService  */
     protected $profileService;
+    protected $postService;
     /** @var OutputInterface  */
     protected $output;
 
     protected $dataFilePath;
     protected $data;
 
-    public function __construct(AccountService $accountService, ProfileService $profileService, OutputInterface $output){
+    public function __construct(AccountService $accountService, ProfileService $profileService, PostService $postService, OutputInterface $output){
         $this->accountService = $accountService;
         $this->profileService = $profileService;
+        $this->postService = $postService;
         $this->output = $output;
     }
 

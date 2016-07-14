@@ -4,6 +4,7 @@ namespace Domain\Fake\Console\Command\DataHandler;
 
 
 use Domain\Account\Service\AccountService;
+use Domain\Collection\Collection\CollectionItem;
 use Domain\Fake\Console\Command\DataHandler;
 use Domain\Post\Parameters\CreatePostParameters;
 use Domain\Post\PostType\Types\DefaultPostType;
@@ -18,18 +19,9 @@ class ProfilesMessagesHandler extends DataHandler
     /** @var  Profile */
     private $profile;
 
-    /** @var PostService $postService */
-    private $postService;
-
-    public function __construct(AccountService  $accountService,
-                                ProfileService $profileService,
-                                OutputInterface $output, PostService $postService)
-    {
-        parent::__construct($accountService,$profileService,$output );
-        $this->postService = $postService;
+    public function __construct(AccountService $accountService, ProfileService $profileService, PostService $postService, OutputInterface $output){
+        parent::__construct($accountService,$profileService,$postService,$output );
     }
-
-
 
     public function setProfile(Profile $profile){
         $this->profile = $profile;
@@ -54,12 +46,16 @@ class ProfilesMessagesHandler extends DataHandler
 
     public function saveProfileMessage(\stdClass $message)
     {
-        $profileId = (int)$this->profile->getCollections()->getItems()[0]->getId();
+        /** @var CollectionItem $collectionItem */
+        $collectionItem =$this->profile->getCollections()->getItems()[0];
+        $collectionId = $collectionItem->getCollectionId();
+
         $postType = new DefaultPostType();
         $postParameters = new CreatePostParameters($postType->getIntCode(),
                                                    $this->profile->getId(),
-                                                   $profileId,
-
+                                                   $collectionId,
+            '',
+                                                   []
         );
 
         $this->postService->createPost($postParameters);

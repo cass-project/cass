@@ -14,7 +14,7 @@ class ProfilesHandler extends DataHandler
     const AVATARS_DIR = __DIR__."/../../Resources/Data/Images/avatars/";
 
     public function saveData(){
-        $profilesMessagesHandler = new ProfilesMessagesHandler($this->accountService, $this->profileService,$this->output);
+        $profilesMessagesHandler = new ProfilesMessagesHandler($this->accountService, $this->profileService,$this->postService,$this->output);
         $profilesMessagesHandler->readData(__DIR__ . "/../../../Resources/Data/JSON/feed.json");
 
 
