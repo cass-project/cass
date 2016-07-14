@@ -9,6 +9,8 @@ use MongoDB\Model\BSONDocument;
 
 abstract class Stream
 {
+    const DEFAULT_LIMIT = 100;
+    
     /** @var Source */
     protected $source;
 

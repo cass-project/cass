@@ -11,6 +11,7 @@ export interface OpenGraphEntity
             "og:type": string,
             "og:description": string,
             "og:determiner": string,
+            "og:url": string,
             "og:locale": string,
             "og:locale:alternate": string,
             "og:site_name": string,

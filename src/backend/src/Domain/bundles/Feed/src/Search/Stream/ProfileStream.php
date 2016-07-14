@@ -20,7 +20,9 @@ final class ProfileStream extends Stream
     public function fetch(CriteriaManager $criteriaManager, Collection $collection): array
     {
         $filter = [];
-        $options = [];
+        $options = [
+            'limit' => self::DEFAULT_LIMIT,
+        ];
 
         $cursor = $collection->find($filter, $options);
 
