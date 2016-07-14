@@ -6,6 +6,7 @@ import {ProfileCollectionsRoute} from "../ProfileCollectionsRoute/index";
 import {ProfileRouteService} from "./service";
 import {ProfileDashboardRoute} from "../ProfileDashboardRoute/index";
 import {ProfileHeader} from "../../component/Elements/ProfileHeader/index";
+import {CurrentProfileService} from "../../service/CurrentProfileService";
 
 @Component({
     template: require('./template.jade'),
@@ -39,14 +40,15 @@ export class ProfileRoute
     constructor(
         private params: RouteParams,
         private router: Router,
-        private service: ProfileRouteService
+        private service: ProfileRouteService,
+        private currentProfileService: CurrentProfileService
     ) {
         let id = params.get('id');
 
-        if(id === 'current') {
+        if(id === 'current' || id === this.currentProfileService.get().getId().toString()) {
             service.loadCurrentProfile();
         }else if(id.match(/^(\d+)$/)) {
-            service.loadProfileById(parseInt(id, 10));
+            service.loadProfileById(Number(id));
         }else {
             router.navigate(['/Profile/NotFound']);
             return;
