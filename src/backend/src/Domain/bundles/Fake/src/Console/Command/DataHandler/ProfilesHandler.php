@@ -11,21 +11,21 @@ use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
 
 class ProfilesHandler extends DataHandler
 {
-    const AVATARS_DIR = __DIR__."/../../Resources/Data/Images/avatars/";
+    const AVATARS_DIR = __DIR__."/../../../Resources/Data/Images/avatars/";
 
     public function saveData(){
-        $profilesMessagesHandler = new ProfilesMessagesHandler($this->accountService, $this->profileService,$this->postService,$this->output);
+        $profilesMessagesHandler = new ProfilesMessagesHandler($this->accountService, $this->profileService,$this->postService, $this->postAttachmentService,$this->output);
         $profilesMessagesHandler->readData(__DIR__ . "/../../../Resources/Data/JSON/feed.json");
-
 
         foreach($this->data as $profileJson){
             $profile = $this->saveProfile($profileJson);
             $profilesMessagesHandler
                 ->setProfile($profile)
                 ->readProfileMessages((int)$profileJson->id)
-                ->saveProfileMessages();
-            die();
+                ->saveProfileMessages()
+            ;
         }
+        return $this;
     }
 
     protected function saveProfile(\stdClass $profileJson){
@@ -49,8 +49,8 @@ class ProfilesHandler extends DataHandler
             list($width, $height) = getimagesize($avatarPath);
 
             if(!is_null($width)&&!is_null($height)){
-                $maxSize = $width <= $height ? $width : $height ;
-                $this->profileService->uploadImage($profile->getId(), new UploadImageParameters($avatarPath, new Point(0,0), new Point($maxSize,$maxSize)));
+                $minSize = min($width,$height);
+                $this->profileService->uploadImage($profile->getId(), new UploadImageParameters($avatarPath, new Point(0,0), new Point($minSize,$minSize)));
             }
         }
 
@@ -59,11 +59,5 @@ class ProfilesHandler extends DataHandler
                                    "Account email:{$account->getEmail()}",
                                ]);
         return $profile;
-    }
-
-    public function readData($file){
-        return $this->setDataFilePath($file)
-             ->readDataFromJson()
-        ;
     }
 }

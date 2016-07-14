@@ -19,10 +19,6 @@ class ProfilesMessagesHandler extends DataHandler
     /** @var  Profile */
     private $profile;
 
-    public function __construct(AccountService $accountService, ProfileService $profileService, PostService $postService, OutputInterface $output){
-        parent::__construct($accountService,$profileService,$postService,$output );
-    }
-
     public function setProfile(Profile $profile){
         $this->profile = $profile;
         return $this;
@@ -33,6 +29,7 @@ class ProfilesMessagesHandler extends DataHandler
         $this->profileMessages = array_filter($this->data, function(\stdClass $message) use($jsonProfileId){
             return ((int)$message->author_id) === $jsonProfileId;
         });
+
         return $this;
     }
 
@@ -47,18 +44,14 @@ class ProfilesMessagesHandler extends DataHandler
     public function saveProfileMessage(\stdClass $message)
     {
         /** @var CollectionItem $collectionItem */
-        $collectionItem =$this->profile->getCollections()->getItems()[0];
+        $collectionItem = $this->profile->getCollections()->getItems()[0];
         $collectionId = $collectionItem->getCollectionId();
 
         $postType = new DefaultPostType();
-        $postParameters = new CreatePostParameters($postType->getIntCode(),
-                                                   $this->profile->getId(),
-                                                   $collectionId,
-            '',
-                                                   []
-        );
+        $postParameters = new CreatePostParameters($postType->getIntCode(), $this->profile->getId(), $collectionId, $message->description, []);
+        $post = $this->postService->createPost($postParameters);
 
-        $this->postService->createPost($postParameters);
+        $this->postAttachmentService->createLinkAttachment($post, $message->url, 'youtube',[]);
     }
 
 }

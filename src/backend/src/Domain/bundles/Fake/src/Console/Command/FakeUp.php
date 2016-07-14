@@ -6,6 +6,7 @@ use Domain\Account\Service\AccountService;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Fake\Console\Command\DataHandler\ProfilesHandler;
 use Domain\Post\Service\PostService;
+use Domain\PostAttachment\Service\PostAttachmentService;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
 use Domain\Profile\Service\ProfileService;
@@ -16,19 +17,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FakeUp extends Command
 {
-
     /** @var AccountService $accountService */
     private $accountService;
     private $profileService;
     private $postService;
+    private $postAttachmentService;
 
-
-
-    public function __construct(AccountService $accountService, ProfileService $profileService, PostService $postService)
+    public function __construct(AccountService $accountService, ProfileService $profileService, PostService $postService, PostAttachmentService $attachmentService)
     {
-        $this->profileService = $profileService;
-        $this->accountService = $accountService;
-        $this->postService = $postService;
+        $this->profileService        = $profileService;
+        $this->accountService        = $accountService;
+        $this->postService           = $postService;
+        $this->postAttachmentService = $attachmentService;
         parent::__construct();
     }
 
@@ -42,7 +42,7 @@ class FakeUp extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
-            $dataHandler = new ProfilesHandler($this->accountService, $this->profileService,$this->postService, $output);
+            $dataHandler = new ProfilesHandler($this->accountService, $this->profileService, $this->postService, $this->postAttachmentService, $output);
             $dataHandler->readData(__DIR__ . "/../../Resources/Data/JSON/profiles.json")
             ->saveData();
 
