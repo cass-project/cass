@@ -22,7 +22,7 @@ export class ContactRESTService extends AbstractRESTService
 
     public createContact(profileId: number, request: ContactCreateRequest): Observable<ContactCreateResponse200>
     {
-        let url = `'/backend/api/protected/profile/${profileId}/contact/create'`;
+        let url = `/backend/api/protected/profile/${profileId}/contact/create`;
         
         return this.handle(
             this.http.put(url, JSON.stringify(request), {
@@ -33,7 +33,7 @@ export class ContactRESTService extends AbstractRESTService
 
     public deleteContact(profileId: number, contactId: number): Observable<ContactDeleteResponse200>
     {
-        let url = `'/backend/api/protected/profile/${profileId}/contact/${contactId}/delete'`;
+        let url = `/backend/api/protected/profile/${profileId}/contact/${contactId}/delete`;
 
         return this.handle(
             this.http.delete(url, {
@@ -44,7 +44,7 @@ export class ContactRESTService extends AbstractRESTService
 
     public getContact(profileId: number, contactId: number): Observable<ContactGetResponse200>
     {
-        let url = `'/backend/api/protected/profile/${profileId}/contact/${contactId}/get'`;
+        let url = `/backend/api/protected/profile/${profileId}/contact/${contactId}/get`;
 
         return this.handle(
             this.http.get(url, {
@@ -55,7 +55,7 @@ export class ContactRESTService extends AbstractRESTService
 
     public listContacts(profileId: number): Observable<ContactListResponse200>
     {
-        let url = `'/backend/api/protected/profile/${profileId}/contact/list'`;
+        let url = `/backend/api/protected/profile/${profileId}/contact/list`;
 
         return this.handle(
             this.http.get(url, {
@@ -66,8 +66,8 @@ export class ContactRESTService extends AbstractRESTService
 
     public setContactPermanent(profileId: number, contactId: number): Observable<ContactSetPermanentResponse200>
     {
-        let url = `'/backend/api/protected/profile/${profileId}/contact/${contactId}/get'`;
-
+        let url = `/backend/api/protected/profile/${profileId}/contact/${contactId}/get`;
+        
         return this.handle(
             this.http.post(url, '', {
                 headers: this.getAuthHeaders()
