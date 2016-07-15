@@ -1,5 +1,5 @@
 import {Component} from "angular2/core";
-import {ProfileModals} from "../../../modals";
+import {CommunityModals} from "../../../modals";
 
 @Component({
     selector: 'cass-profile-settings-card',
@@ -10,7 +10,7 @@ import {ProfileModals} from "../../../modals";
 })
 export class ProfileSettingsCard
 {
-    constructor(private modals: ProfileModals) {}
+    constructor(private modals: CommunityModals) {}
 
     openProfileSettings() {
         this.modals.settings.open();

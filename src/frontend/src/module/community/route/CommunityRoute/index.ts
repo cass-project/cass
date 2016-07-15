@@ -6,7 +6,6 @@ import {CommunityCollectionsRoute} from "../CommunityCollectionsRoute/index";
 import {CommunityRouteService} from "./service";
 import {CommunityDashboardRoute} from "../CommunityDashboardRoute/index";
 import {ProfileHeader} from "../../component/Elements/CommunityHeader/index";
-import {CurrentProfileService} from "../../service/CurrentProfileService";
 import {AuthService} from "../../../auth/service/AuthService";
 
 @Component({
@@ -42,17 +41,12 @@ export class CommunityRoute
         private params: RouteParams,
         private router: Router,
         private service: CommunityRouteService,
-        private currentProfileService: CurrentProfileService,
         private authService: AuthService
     ) {
         let id = params.get('id');
-
-        if (id === 'current' || id === this.currentProfileService.get().getId().toString()) {
-            if (authService.isSignedIn()) {
-                service.loadCurrentProfile();
-            } 
-        } else if (id.match(/^(\d+)$/)) {
-            service.loadProfileById(Number(id));
+        
+        if (id.match(/^(\d+)$/)) {
+            service.loadCommunityBySID(id);
         } else {
             router.navigate(['/Profile/NotFound']);
             return;
@@ -63,11 +57,11 @@ export class CommunityRoute
                 (response) => {
                 },
                 (error) => {
-                    router.navigate(['/Profile/NotFound']);
+                    router.navigate(['/Community/NotFound']);
                 }
             )
         } else {
-            router.navigate(['/Public']);
+            router.navigate(['/Community/NotFound']);
         }
     }
 }

@@ -6,6 +6,7 @@ import {CommunityCreateCollectionCard} from "../CommunityCreateCollectionCard/in
 import {ProfileSettingsCard} from "../CommunitySettingsCard/index";
 
 import {Router} from "angular2/router";
+import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
 
 @Component({
     selector: 'cass-profile-cards-list',
@@ -22,19 +23,19 @@ import {Router} from "angular2/router";
 })
 export class CommunityCardsList
 {
-    @Input('community') entity: CommunityExtendedEntity;
+    @Input('community') entity: CommunityExtendedEntity
 
     constructor(private router: Router) {}
 
-    isOwnProfile(): boolean {
+    isOwnCommunity(): boolean {
         return this.entity.is_own;
     }
 
     goDashboard() {
-        if(this.isOwnProfile()){
-            this.router.navigate(['/Community', 'Profile', { id: 'current' }, 'Dashboard']);
+        if(this.isOwnCommunity()){
+            this.router.navigate(['/Community', { id: 'current' }, 'Dashboard']);
         } else {
-            this.router.navigate(['/Profile', 'Profile', {id: this.entity.profile.id.toString()}, 'Dashboard']);
+            this.router.navigate(['/Community', {id: this.entity.community.id.toString()}, 'Dashboard']);
         }
     }
 }

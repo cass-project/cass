@@ -22,8 +22,8 @@ import {CommunityNotFoundRoute} from "../CommunityNotFoundRoute/index";
         useAsDefault: true
     },
     {
-        name: 'Profile',
-        path: '/:id/...',
+        name: 'Community',
+        path: '/:sid/...',
         component: CommunityRoute
     },
     {

@@ -30,7 +30,7 @@ export class CommunityService {
                 observer.next(communityResponse);
                 observer.complete();
             } else {
-                this.communityRESTService.getBySid(sid)
+                this.communityRESTService.getCommunityBySid(sid)
                     .subscribe(
                         communityResponse => {
                             this.communityResponsesCache.push(JSON.parse(JSON.stringify(communityResponse)));

@@ -1,6 +1,6 @@
 import {Injectable} from "angular2/core";
 import {UploadImageCropModel} from "../../../../form/component/UploadImage/strategy";
-import {CommunityEnityImage} from "../../../definitions/entity/Community";
+import {ImageCollection} from "../../../../avatar/definitions/ImageCollection";
 
 @Injectable()
 export class CommunitySettingsModalModel
@@ -11,7 +11,7 @@ export class CommunitySettingsModalModel
     description: string;
     public_options: CommunityPublicOptionsModel;
     theme_id: number;
-    image: CommunityEnityImage;
+    image: ImageCollection;
     new_image: {
         uploadImage: Blob;
         uploadImageCrop: UploadImageCropModel;

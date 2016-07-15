@@ -1,84 +1,53 @@
 import {Injectable} from "angular2/core";
 import {Observable} from "rxjs/Observable";
 
-import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
+import {CommunityExtendedEntity} from "../../definitions/entity/Community";
 import {Response} from "angular2/http";
-import {ProfileRESTService} from "../../service/ProfileRESTService";
-import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
-import {CurrentProfileService} from "../../service/CurrentProfileService";
-import {ProfileCachedIdentityMap} from "../../service/ProfileCachedIdentityMap";
+import {GetCommunityBySIDResponse200} from "../../definitions/paths/get-by-sid";
+import {CommunityRESTService} from "../../service/CommunityRESTService";
 
 @Injectable()
 export class  CommunityRouteService
 {
     private request: string;
-    private cache: ProfileCachedIdentityMap;
 
-    private profile: ProfileExtendedEntity;
+    private community: CommunityExtendedEntity;
     private loading: boolean = false;
     private observable: Observable<Response>;
 
     constructor(
-        private api: ProfileRESTService,
-        private cache: ProfileCachedIdentityMap,
-        private current: CurrentProfileService
+        private api: CommunityRESTService
     ) {}
     
-    public isProfileLoaded(): boolean {
-        return typeof this.profile == "object";
+    public isCommunityLoaded(): boolean {
+        return typeof this.community == "object";
     }
     
     public isLoading(): boolean {
         return this.loading;
     }
     
-    public getObservable(): Observable<GetProfileByIdResponse200> {
+    public getObservable(): Observable<GetCommunityBySIDResponse200> {
         return this.observable;
     }
 
-    public getProfile(): ProfileExtendedEntity {
-        if(!this.profile) {
-            throw new Error('Profile is not loaded');
-        }
-
-        return this.profile;
+    public getCommunityRouteComponents() {
+        return ['/', 'Community', { 'sid': this.request }];
     }
 
-    public getProfileRouteComponents() {
-        return ['/', 'Profile', 'Profile', { 'id': this.request }];
-    }
-
-    public loadCurrentProfile() {
-        this.request = 'current';
-
-        this.loadProfile(new Observable(observer => {
-            observer.next({
-                success: true,
-                entity: this.current.get().entity
-            });
-            observer.complete();
-        }));
-    }
-
-    public loadProfileById(id: number) {
-        this.request = id.toString();
-
-        this.loadProfile(this.cache.getProfileById(id));
-    }
-
-    public loadProfileBySID(sid: string) {
+    public loadCommunityBySID(sid: string) {
         this.request = sid;
 
-        this.loadProfile(<any>this.api.getProfileBySID(sid));
+        this.loadProfile(<any>this.api.getCommunityBySid(sid));
     }
     
-    private loadProfile(observable: Observable<GetProfileByIdResponse200>) {
-        this.profile = undefined;
+    private loadProfile(observable: Observable<GetCommunityBySIDResponse200>) {
+        this.community = undefined;
         this.loading = true;
         this.observable = observable;
         this.observable.subscribe(
-            (response: GetProfileByIdResponse200) => {
-                this.profile = response.entity;
+            (response: GetCommunityBySIDResponse200) => {
+                this.community = response.entity;
                 this.loading = false;
             },
             (error) => {
@@ -87,7 +56,7 @@ export class  CommunityRouteService
         )
     }
 
-    public getProfileObservable() {
+    public getCommunityObservable() {
         return this.observable;
     }
 }

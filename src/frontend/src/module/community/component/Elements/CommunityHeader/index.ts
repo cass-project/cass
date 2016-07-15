@@ -1,12 +1,12 @@
 import {Component, Input, EventEmitter, Output} from "angular2/core";
 
-import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {CommunityImage} from "../CommunityImage/index";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {CommunityRouteService} from "../../../route/CommunityRoute/service";
 import {CommunityModals} from "../../../modals";
 import {CommunityRouteService} from "../../../route/CommunityRoute/service";
+import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
 
 @Component({
     selector: 'cass-profile-header',
@@ -24,16 +24,16 @@ export class ProfileHeader
     @Output('go-profile') goProfileEvent: EventEmitter<string> = new EventEmitter<string>();
     @Output('go-collection') goCollectionEvent: EventEmitter<string> = new EventEmitter<string>();
 
-    @Input('profile') entity: ProfileExtendedEntity;
+    @Input('community') entity: CommunityExtendedEntity;
 
     constructor(private modals: CommunityModals, private service: CommunityRouteService) {}
     
-    getProfileGreetings(): string {
-        return this.entity.profile.greetings.greetings;
+    getCommunityTitle(): string {
+        return this.entity.community.title;
     }
 
     getProfileURL(): string {
-        return queryImage(QueryTarget.Avatar, this.entity.profile.image).public_path;
+        return queryImage(QueryTarget.Avatar, this.entity.community.image).public_path;
     }
     
     goProfile() {

@@ -32,7 +32,7 @@ export class CommunityDashboardRoute
         if (service.getObservable() !== undefined) {
             service.getObservable().subscribe(
                 (response) => {
-                    feedSource.profileId = response.entity.profile.id;
+                    feedSource.profileId = response.entity.community.id;
                     feed.provide(feedSource, new Stream<PostEntity>());
                     feed.update();
                 },
