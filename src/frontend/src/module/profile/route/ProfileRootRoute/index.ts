@@ -32,6 +32,6 @@ import {ProfileNotFoundRoute} from "../ProfileNotFoundRoute/index";
         component: ProfileNotFoundRoute
     },
 ])
-export class RootRoute
+export class ProfileRootRoute
 {
 }
