@@ -5,7 +5,8 @@ use Application\Bundle\GenericBundle;
 
 class FakeBundle extends GenericBundle
 {
-    public function getDir() {
+    public function getDir()
+    {
         return __DIR__;
     }
 }

@@ -29,7 +29,7 @@ export class ScreenProcessing extends Screen
         this.service.create(<CommunityCreateRequestModel>{
                 "title"       : model.title,
                 "description" : model.description,
-                "theme_id"    : model.theme_id
+                "theme_ids"   : model.theme_ids
             })
             .subscribe(data => {
                 let communityId = data['entity'].id;

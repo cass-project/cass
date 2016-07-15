@@ -37,7 +37,8 @@ enum ProfileSetupScreen {
     ],
     providers: [
         ProfileSetupModel,
-        ProfileRESTService
+        ProfileRESTService,
+        ProfileRouteService
     ],
     directives: [
         ModalComponent,

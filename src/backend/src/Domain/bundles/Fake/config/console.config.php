@@ -7,9 +7,9 @@ return [
         'config.console' => [
             'commands' => [
                 'fake' => [
-                    FakeUp::class
-                ]
-            ]
-        ]
-    ]
+                    FakeUp::class,
+                ],
+            ],
+        ],
+    ],
 ];
