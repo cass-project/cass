@@ -2,7 +2,7 @@ import {Component} from "angular2/core";
 import {ROUTER_DIRECTIVES, Router, RouteParams} from "angular2/router";
 
 import {CollectionsList} from "../../../collection/component/Elements/CollectionsList/index";
-import {ProfileRouteService} from "../ProfileRoute/service";
+import {CommunityRouteService} from "../CommunityRoute/service";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
 import {PostForm} from "../../../post/component/Forms/PostForm/index";
@@ -30,7 +30,7 @@ import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/inde
         FeedPostStream,
     ]
 })
-export class ProfileCollectionRoute
+export class CommunityCollectionRoute
 {
     collection: CollectionEntity;
     postType: PostTypeEntity;
@@ -38,7 +38,7 @@ export class ProfileCollectionRoute
     constructor(
         private router: Router,
         private params: RouteParams,
-        private service: ProfileRouteService,
+        private service: CommunityRouteService,
         private types: PostTypeService,
         private feed: FeedService<PostEntity>,
         private feedSource: CollectionSource

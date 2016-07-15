@@ -2,7 +2,7 @@ import {Component} from "angular2/core";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 
 import {CollectionsList} from "../../../collection/component/Elements/CollectionsList/index";
-import {ProfileRouteService} from "../ProfileRoute/service";
+import {CommunityRouteService} from "../CommunityRoute/service";
 
 @Component({
     template: require('./template.jade'),
@@ -14,7 +14,7 @@ import {ProfileRouteService} from "../ProfileRoute/service";
         CollectionsList,
     ]
 })
-export class ProfileCollectionsListRoute
+export class CommunityCollectionsListRoute
 {
-    constructor(private service: ProfileRouteService) {}
+    constructor(private service: CommunityRouteService) {}
 }

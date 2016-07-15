@@ -1,7 +1,7 @@
 import {Component} from "angular2/core";
 
-import {ProfileCardsList} from "../../component/Elements/ProfileCardsList/index";
-import {ProfileRouteService} from "../ProfileRoute/service";
+import {CommunityCardsList} from "../../component/Elements/CommunityCardsList/index";
+import {CommunityRouteService} from "../CommunityRoute/service";
 import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/index";
 import {ProfileSource} from "../../../feed/service/FeedService/source/ProfileSource";
 import {FeedService} from "../../../feed/service/FeedService/index";
@@ -18,14 +18,14 @@ import {Stream} from "../../../feed/service/FeedService/stream";
         ProfileSource,
     ],
     directives: [
-        ProfileCardsList,
+        CommunityCardsList,
         FeedPostStream,
     ]
 })
-export class ProfileDashboardRoute
+export class CommunityDashboardRoute
 {
     constructor(
-        private service: ProfileRouteService,
+        private service: CommunityRouteService,
         private feed: FeedService<PostEntity>,
         private feedSource: ProfileSource
     ) {

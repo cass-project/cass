@@ -6,6 +6,6 @@ import {Component} from "angular2/core";
         require('./style.shadow.scss')
     ]
 })
-export class ProfileCollectionNotFoundRoute
+export class CommunityCollectionNotFoundRoute
 {
 }

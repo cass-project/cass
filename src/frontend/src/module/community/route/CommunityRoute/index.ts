@@ -2,10 +2,10 @@ import {Component} from "angular2/core";
 
 import {RouteParams, Router, ROUTER_DIRECTIVES, RouteConfig} from "angular2/router";
 import {ProgressLock} from "../../../form/component/ProgressLock/index";
-import {ProfileCollectionsRoute} from "../CommunityCollectionsRoute/index";
-import {ProfileRouteService} from "./service";
-import {ProfileDashboardRoute} from "../CommunityDashboardRoute/index";
-import {ProfileHeader} from "../../component/Elements/ProfileHeader/index";
+import {CommunityCollectionsRoute} from "../CommunityCollectionsRoute/index";
+import {CommunityRouteService} from "./service";
+import {CommunityDashboardRoute} from "../CommunityDashboardRoute/index";
+import {ProfileHeader} from "../../component/Elements/CommunityHeader/index";
 import {CurrentProfileService} from "../../service/CurrentProfileService";
 import {AuthService} from "../../../auth/service/AuthService";
 
@@ -20,28 +20,28 @@ import {AuthService} from "../../../auth/service/AuthService";
         ProfileHeader,
     ],
     providers: [
-        ProfileRouteService,
+        CommunityRouteService,
     ]
 })
 @RouteConfig([
     {
         path: '/',
         name: 'Dashboard',
-        component: ProfileDashboardRoute,
+        component: CommunityDashboardRoute,
         useAsDefault: true
     },
     {
         path: '/collections/...',
         name: 'Collections',
-        component: ProfileCollectionsRoute
+        component: CommunityCollectionsRoute
     },
 ])
-export class ProfileRoute
+export class CommunityRoute
 {
     constructor(
         private params: RouteParams,
         private router: Router,
-        private service: ProfileRouteService,
+        private service: CommunityRouteService,
         private currentProfileService: CurrentProfileService,
         private authService: AuthService
     ) {
