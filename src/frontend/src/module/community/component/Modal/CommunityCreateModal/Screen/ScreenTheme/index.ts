@@ -22,8 +22,8 @@ export class ScreenTheme extends Screen
         super();
     }
 
-    updateThemeId(themeIds: number[]) {
-        this.model.theme_id = themeIds[0];
+    updateThemeId(themeIds: Array<number>) {
+        this.model.theme_ids = themeIds;
     }
 
     ngAfterViewInit() {
