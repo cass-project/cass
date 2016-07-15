@@ -1,0 +1,10 @@
+article.component.component-profile-cards-list
+  ul.profile-cards
+    li
+      cass-profile-card([profile]="entity.profile", (click)="goDashboard()")
+    li(*ngIf="isOwnProfile()")
+      cass-profile-interests-card
+    li(*ngIf="isOwnProfile()")
+      cass-profile-create-collection-card
+    li(*ngIf="isOwnProfile()")
+      cass-profile-settings-card

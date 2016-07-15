@@ -1,0 +1,7 @@
+article.component.component-profile-collections-list-route
+  div(*ngIf="service.isProfileLoaded()")
+    h1 Подборки
+    cass-collections-list(
+      [collections]="service.getProfile().collections",
+      [is-own]="service.getProfile().is_own"
+    )
