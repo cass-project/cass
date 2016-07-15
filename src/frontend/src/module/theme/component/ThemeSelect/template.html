@@ -23,7 +23,7 @@
       <div class="auto-complete" *ngIf="search.isResultsAvailable()">
         <div class="auto-complete-scroll-box">
           <ul class="auto-complete-list">
-            <li *ngFor="#result of search.results" (click)="search.include(result)">
+            <li *ngFor="#result of search.results" (click)="include(result.id)">
               <span class="title">{{ result.title }}</span>
             </li>
           </ul>
