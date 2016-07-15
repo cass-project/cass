@@ -1,5 +1,17 @@
-.cass-padding-box-15
-  h1
-    i.fa.fa-frown-o.fa-3x.fa-fw(aria-hidden="true")
-    br
-    | Модуль находится в стадии разработки
+div
+  header
+    h1.cass-padding-box-15 Список контактов
+  ul.contact-list
+    li.contact-list-header
+      .avatar
+      .greetings 
+        strong Имя
+      .greetings
+        strong Последнее сообщение
+
+    li(*ngFor="#contact of contacts", [routerLink]=" ['Messages', { id: contact.target_profile.id }]")
+      cass-profile-image.avatar([url]='contact.target_profile.image.variants["64"].public_path')
+      //img.avatar(src="/dist/assets/profile-default.png")
+      .greetings {{contact.target_profile.greetings.greetings}}
+      .last-message заходи) но я не уверен что к этому времени освобожусь
+        .date {{contact.last_message.date}}
