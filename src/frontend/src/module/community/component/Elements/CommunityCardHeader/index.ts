@@ -1,9 +1,9 @@
 import {Component, Input, EventEmitter, Output} from "angular2/core";
 
-import {ProfileImage} from "../ProfileImage/index";
-import {ProfileEntity} from "../../../definitions/entity/Profile";
+import {CommunityImage} from "../CommunityImage/index";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {Router} from "angular2/router";
+import {CommunityEntity} from "../../../definitions/entity/Community";
 
 var moment = require('moment');
 
@@ -14,12 +14,12 @@ var moment = require('moment');
         require('./style.shadow.scss')
     ],
     directives: [
-        ProfileImage,
+        CommunityImage,
     ]
 })
-export class ProfileCardHeader
+export class CommunityCardHeader
 {
-    @Input('profile') profile: ProfileEntity;
+    @Input('community') entity: CommunityEntity;
     @Input('time') time: Date;
     
     constructor(private router: Router) {}
@@ -32,19 +32,19 @@ export class ProfileCardHeader
         return this.time instanceof Date;
     }
 
-    getProfileName(): string {
-        return this.profile.greetings.greetings;
+    getCommunityTitle(): string {
+        return this.entity.title;
     }
 
     getImageURL(): string {
-        return queryImage(QueryTarget.Avatar, this.profile.image).public_path;
+        return queryImage(QueryTarget.Avatar, this.entity.image).public_path;
     }
 
-    getProfileLink(): string {
-        return this.router.generate(['/Profile', 'Profile', { 'id': this.profile.id }]).toLinkUrl();
+    getCommunityLink(): string {
+        return this.router.generate(['/Profile', 'Profile', { 'id': this.entity.id }]).toLinkUrl();
     }
 
-    goProfile() {
-        this.router.navigate(['/Profile', 'Profile', { 'id': this.profile.id }]);
+    goCommunity() {
+        this.router.navigate(['/Profile', 'Profile', { 'id': this.entity.id }]);
     }
 }

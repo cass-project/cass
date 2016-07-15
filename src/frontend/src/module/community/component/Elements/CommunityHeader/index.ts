@@ -2,10 +2,11 @@ import {Component, Input, EventEmitter, Output} from "angular2/core";
 
 import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
-import {ProfileImage} from "../ProfileImage/index";
+import {CommunityImage} from "../CommunityImage/index";
 import {ROUTER_DIRECTIVES} from "angular2/router";
-import {ProfileModals} from "../../../modals";
-import {ProfileRouteService} from "../../../route/ProfileRoute/service";
+import {CommunityRouteService} from "../../../route/CommunityRoute/service";
+import {CommunityModals} from "../../../modals";
+import {CommunityRouteService} from "../../../route/CommunityRoute/service";
 
 @Component({
     selector: 'cass-profile-header',
@@ -14,7 +15,7 @@ import {ProfileRouteService} from "../../../route/ProfileRoute/service";
         require('./style.shadow.scss')
     ],
     directives: [
-        ProfileImage,
+        CommunityImage,
         ROUTER_DIRECTIVES,
     ]
 })
@@ -25,7 +26,7 @@ export class ProfileHeader
 
     @Input('profile') entity: ProfileExtendedEntity;
 
-    constructor(private modals: ProfileModals, private service: ProfileRouteService) {}
+    constructor(private modals: CommunityModals, private service: CommunityRouteService) {}
     
     getProfileGreetings(): string {
         return this.entity.profile.greetings.greetings;

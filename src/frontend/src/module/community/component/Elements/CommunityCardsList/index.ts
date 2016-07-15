@@ -1,10 +1,10 @@
 import {Component, Input} from "angular2/core";
 
-import {ProfileCard} from "../CommunityCard/index";
-import {ProfileInterestsCard} from "../ProfileInterestsCard/index";
-import {ProfileCreateCollectionCard} from "../ProfileCreateCollectionCard/index";
-import {ProfileSettingsCard} from "../ProfileSettingsCard/index";
-import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
+import {CommunityCard} from "../CommunityCard/index";
+import {CommunityInterestsCard} from "../CommunityInterestsCard/index";
+import {CommunityCreateCollectionCard} from "../CommunityCreateCollectionCard/index";
+import {ProfileSettingsCard} from "../CommunitySettingsCard/index";
+
 import {Router} from "angular2/router";
 
 @Component({
@@ -14,15 +14,15 @@ import {Router} from "angular2/router";
         require('./style.shadow.scss')
     ],
     directives: [
-        ProfileCard,
-        ProfileInterestsCard,
-        ProfileCreateCollectionCard,
+        CommunityCard,
+        CommunityInterestsCard,
+        CommunityCreateCollectionCard,
         ProfileSettingsCard,
     ]
 })
-export class ProfileCardsList
+export class CommunityCardsList
 {
-    @Input('profile') entity: ProfileExtendedEntity;
+    @Input('community') entity: CommunityExtendedEntity;
 
     constructor(private router: Router) {}
 
@@ -32,7 +32,7 @@ export class ProfileCardsList
 
     goDashboard() {
         if(this.isOwnProfile()){
-            this.router.navigate(['/Profile', 'Profile', { id: 'current' }, 'Dashboard']);
+            this.router.navigate(['/Community', 'Profile', { id: 'current' }, 'Dashboard']);
         } else {
             this.router.navigate(['/Profile', 'Profile', {id: this.entity.profile.id.toString()}, 'Dashboard']);
         }

@@ -7,7 +7,7 @@ import {Component, Input} from "angular2/core";
         require('./style.shadow.scss')
     ]
 })
-export class ProfileImage
+export class CommunityImage
 {
     @Input('url') url: string;
     @Input('border') border: string = 'circle';
@@ -21,7 +21,7 @@ export class ProfileImage
     getCSSClasses(): string {
         let border = this.border;
 
-        if(!~ProfileImage.allowedBorders.indexOf(border)) {
+        if(!~CommunityImage.allowedBorders.indexOf(border)) {
             throw new Error(`Invalid border ${border}`);
         }
 

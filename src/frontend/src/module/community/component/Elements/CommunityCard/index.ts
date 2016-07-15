@@ -1,11 +1,10 @@
 import {Component, Input, Output, EventEmitter} from "angular2/core";
 
-import {ProfileEntity} from "../../../definitions/entity/Profile";
-import {Theme} from "../../../../theme/definitions/entity/Theme";
-import {ThemeService} from "../../../../theme/service/ThemeService";
 import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
-import {ProfileImage} from "../ProfileImage/index";
+import {CommunityImage} from "../CommunityImage/index";
 import {PostCard} from "../../../../post/component/Forms/PostCard/index";
+import {CommunityEntity} from "../../../definitions/entity/Community";
+import {ThemeService} from "../../../../theme/service/ThemeService";
 
 @Component({
     selector: 'cass-profile-card',
@@ -14,47 +13,34 @@ import {PostCard} from "../../../../post/component/Forms/PostCard/index";
         require('./style.shadow.scss')
     ],
     directives: [
-        ProfileImage,
+        CommunityImage,
         PostCard,
     ]
 })
-export class ProfileCard
+export class CommunityCard
 {
-    @Input('profile') entity: ProfileEntity;
+    @Input('community') entity: CommunityEntity;
     @Output('click') clickEvent = new EventEmitter<number>();
 
-    private expertIn: Theme[] = [];
-    private interestingIn: Theme[] = [];
-
-    constructor(private themes: ThemeService) {}
-
-    ngOnInit() {
-        this.expertIn = this.entity.expert_in_ids.map((id: number) => {
-            return this.themes.findById(id);
-        });
-
-        this.interestingIn = this.entity.interesting_in_ids.map((id: number) => {
-            return this.themes.findById(id);
-        });
+    constructor(private themeService: ThemeService) {}
+    
+    getTheme(){
+       return this.themeService.findById(this.entity.theme.id);
     }
     
     click() {
         this.clickEvent.emit(this.entity.id);
     }
 
-    getGreetings(): string {
-        return this.entity.greetings.greetings;
+    getCommunityTitle(): string {
+        return this.entity.title;
     }
 
-    getProfileURL(): string {
+    getImageURL(): string {
         return queryImage(QueryTarget.Card, this.entity.image).public_path;
     }
 
-    hasAnyExperts() {
-        return this.expertIn.length > 0;
-    }
-
-    hasAnyInterests() {
-        return this.interestingIn.length > 0;
+    hasTheme() {
+        return this.entity.theme.has;
     }
 }

@@ -4,7 +4,7 @@ article.component.component-profile-card-header
       cass-profile-image(border="circle", [url]="getImageURL()")
   .profile-about
       .profile-name
-        h1 {{ getProfileName() }}
+        h1 {{ getCommunityTitle() }}
       .profile-settings
         time(*ngIf="hasTime()")
           span {{ getTime() }}

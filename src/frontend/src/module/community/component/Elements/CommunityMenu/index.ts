@@ -1,6 +1,6 @@
 import {Component, Input} from "angular2/core";
 
-import {ProfileComponent} from "../../../index";
+import {CommunityComponent} from "../../../index";
 import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
 
 @Component({
@@ -10,10 +10,10 @@ import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
         require('./style.shadow.scss')
     ],
     providers: [
-        ProfileComponent
+        CommunityComponent
     ]
 })
 export class ProfileMenuComponent
 {
-    @Input('profile') profile: ProfileExtendedEntity;
+    @Input('community') community: ProfileExtendedEntity;
 }

@@ -1,5 +1,5 @@
 import {Component} from "angular2/core";
-import {ProfileModals} from "../../../modals";
+import {CommunityModals} from "../../../modals";
 
 @Component({
     selector: 'cass-profile-create-collection-card',
@@ -8,9 +8,9 @@ import {ProfileModals} from "../../../modals";
         require('./style.shadow.scss')
     ]
 })
-export class ProfileCreateCollectionCard
+export class CommunityCreateCollectionCard
 {
-    constructor(private modals: ProfileModals) {}
+    constructor(private modals: CommunityModals) {}
 
     openCreateCollectionMaster() {
         this.modals.createCollection.open();
