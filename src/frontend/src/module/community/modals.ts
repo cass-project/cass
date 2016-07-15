@@ -3,11 +3,9 @@ import {Injectable} from "angular2/core";
 import {ModalControl} from "../util/classes/ModalControl";
 
 @Injectable()
-export class ProfileModals
+export class CommunityModals
 {
-    setup: ModalControl = new ModalControl();
     settings: ModalControl = new ModalControl();
-    switcher: ModalControl = new ModalControl();
     interests: ModalControl = new ModalControl();
     createCollection: ModalControl = new ModalControl();
 }
