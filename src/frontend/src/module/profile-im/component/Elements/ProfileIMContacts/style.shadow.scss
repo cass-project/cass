@@ -8,11 +8,36 @@ header
   position: relative;
   background: $MATERIAL_BACKGROUND;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items:center;
+  justify-content:space-between;
   z-index: 1;
-  h1{
+  
+  h1 {
     font-size: $FONT_SIZE_LARGE;
     line-height: normal;
   }
+  
+  ul {
+    display: flex;
+    
+    li {
+      color:white;
+      border-radius: 4px;
+      margin-right:10px;
+      padding:4px 10px;
+      background: material-color("blue-grey", "300");
+
+      &:hover {
+        background: material-color("blue-grey", "600");
+      }
+
+      &.active {
+        background: material-color("blue-grey", "800");
+      }
+    }
+  }
+  
 }
 
 .contact-list {
