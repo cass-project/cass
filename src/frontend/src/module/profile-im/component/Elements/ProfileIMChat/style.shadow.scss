@@ -17,6 +17,7 @@
     
     h1{
       font-size: $FONT_SIZE_LARGE;
+      line-height: normal;
       a {
         display: inline-block;
         color: material-color("blue-grey", "800");

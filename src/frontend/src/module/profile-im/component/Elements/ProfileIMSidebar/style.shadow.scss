@@ -11,16 +11,17 @@ $AVATAR-SIZE: 32px;
   overflow: auto;
   z-index: 1;
 
-  h1 {
-    font-family: $FONT_FAMILY;
-    font-size: 24px;
-    line-height: 32px;
-    font-weight: 400;
+  header {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    h1 {
+      font-size: $FONT_SIZE_LARGE;
+      line-height: normal;
+    }
   }
 
   .contact-list {
     li {
-      padding:10px;
+      padding:15px;
       overflow: hidden; font-size: 14px; line-height:16px;
       cursor: pointer;
       transition:background 300ms;
