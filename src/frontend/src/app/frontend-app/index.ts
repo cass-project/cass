@@ -42,6 +42,7 @@ import {FeedRESTService} from "../../module/feed/service/FeedRESTService";
 import {ProfileIMService} from "../../module/profile-im/service/ProfileIMService";
 import {ProfileIMRESTService} from "../../module/profile-im/service/ProfileIMRESTService";
 import {ProfileIMRoute} from "../../module/profile-im/route/ProfileIMRoute/index";
+import {ContactService} from "../../module/contact/service/ContactService";
 import {ContactRESTService} from "../../module/contact/service/ContactRESTService";
 
 @Component({
@@ -80,6 +81,7 @@ import {ContactRESTService} from "../../module/contact/service/ContactRESTServic
         ProfileIMRESTService,
         ProfileIMService,
         ContactRESTService,
+        ContactService
     ],
     directives: [
         ROUTER_DIRECTIVES,
