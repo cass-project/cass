@@ -32,7 +32,6 @@ import {CommunityComponent} from "../../module/community/index";
 import {FeedbackComponent} from "../../module/feedback/index";
 import {HtmlComponent} from "../../module/html/index";
 import {ProfileRootRoute as ProfileRootRoute} from "../../module/profile/route/ProfileRootRoute/index";
-import {CommunityRoute} from "../../module/community/route/CommunityRoute/index";
 import {PublicService} from "../../module/public/service";
 import {PublicComponent} from "../../module/public/index";
 import {ProfileModalModel} from "../../module/profile/component/Modals/ProfileModal/model";
@@ -43,6 +42,8 @@ import {ProfileIMService} from "../../module/profile-im/service/ProfileIMService
 import {ProfileIMRESTService} from "../../module/profile-im/service/ProfileIMRESTService";
 import {ProfileIMRoute} from "../../module/profile-im/route/ProfileIMRoute/index";
 import {ContactRESTService} from "../../module/contact/service/ContactRESTService";
+import {CommunityRootRoute} from "../../module/community/route/CommunityRootRoute/index";
+import {CommunityModals} from "../../module/community/modals";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -80,6 +81,7 @@ import {ContactRESTService} from "../../module/contact/service/ContactRESTServic
         ProfileIMRESTService,
         ProfileIMService,
         ContactRESTService,
+        CommunityModals
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -113,7 +115,7 @@ import {ContactRESTService} from "../../module/contact/service/ContactRESTServic
     {
         name: 'Community',
         path: '/community/...',
-        component: CommunityRoute
+        component: CommunityRootRoute
     },
     {
         name: 'Public',
