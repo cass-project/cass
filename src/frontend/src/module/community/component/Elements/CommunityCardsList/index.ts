@@ -9,7 +9,7 @@ import {Router} from "angular2/router";
 import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
 
 @Component({
-    selector: 'cass-profile-cards-list',
+    selector: 'cass-community-cards-list',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
@@ -23,9 +23,13 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
 })
 export class CommunityCardsList
 {
-    @Input('community') entity: CommunityExtendedEntity
+    @Input('community') entity: CommunityExtendedEntity;
 
     constructor(private router: Router) {}
+
+    ngOnInit(){
+        console.log(this.entity);
+    }
 
     isOwnCommunity(): boolean {
         return this.entity.is_own;
