@@ -1,7 +1,7 @@
 import {Component, Input} from "angular2/core";
 
 @Component({
-    selector: 'cass-profile-image',
+    selector: 'cass-community-image',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
