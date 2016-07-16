@@ -9,7 +9,7 @@ import {CommunityRouteService} from "../../../route/CommunityRoute/service";
 import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
 
 @Component({
-    selector: 'cass-profile-header',
+    selector: 'cass-community-header',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
@@ -19,9 +19,9 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
         ROUTER_DIRECTIVES,
     ]
 })
-export class ProfileHeader
+export class CommunityHeader
 {
-    @Output('go-profile') goProfileEvent: EventEmitter<string> = new EventEmitter<string>();
+    @Output('go-community') goCommunityEvent: EventEmitter<string> = new EventEmitter<string>();
     @Output('go-collection') goCollectionEvent: EventEmitter<string> = new EventEmitter<string>();
 
     @Input('community') entity: CommunityExtendedEntity;
@@ -36,15 +36,15 @@ export class ProfileHeader
         return queryImage(QueryTarget.Avatar, this.entity.community.image).public_path;
     }
     
-    goProfile() {
-        this.goProfileEvent.emit('go-profile');
+    goCommunity() {
+        this.goCommunityEvent.emit('go-community');
     }
     
     goCollection(sid: string) {
         this.goCollectionEvent.emit(sid);
     }
 
-    isOwnProfile(): boolean {
+    isOwnCommunity(): boolean {
         return this.entity.is_own;
     }
 }
