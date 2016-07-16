@@ -5,7 +5,8 @@
         i.fa.fa-chevron-left.fa-fw(aria-hidden="true")
         | &nbsp;@username
   .content(#content)
-    cass-profile-im-chat-history([history]="im.history")
-  footer
-    .cass-padding-box-15
-      cass-profile-im-textarea
+    cass-loading-linear-indicator(*ngIf="isLoading")
+    cass-profile-im-chat-history([history]="im.history", *ngIf="!isLoading")
+    footer
+      .cass-padding-box-15
+        cass-profile-im-textarea([disabled]="isLoading")

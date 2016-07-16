@@ -4,6 +4,7 @@ import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
 import {ProfileIMService}          from "../../../service/ProfileIMService";
 import {ProfileIMChatHistory}      from "../ProfileIMChatHistory/index";
 import {ProfileIMTextarea}         from "../ProfileIMTextarea/index";
+import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
 
 @Component({
     selector: 'cass-profile-im-messages',
@@ -14,7 +15,8 @@ import {ProfileIMTextarea}         from "../ProfileIMTextarea/index";
     directives: [
         ROUTER_DIRECTIVES,
         ProfileIMTextarea,
-        ProfileIMChatHistory
+        ProfileIMChatHistory,
+        LoadingLinearIndicator
     ]
 })
 
@@ -22,10 +24,14 @@ export class ProfileIMChat
 {
     @ViewChild('content') content:ElementRef;
     isNeedScroll = false;
+    isLoading = true;
 
     constructor(private params: RouteParams, private im:ProfileIMService) {
         im.loadHistory(parseInt(params.get('id')), 0, 10, false)
-            .subscribe(() => this.isNeedScroll = true);
+            .subscribe(() => {
+                this.isNeedScroll = true;
+                this.isLoading = false;
+            });
         
         im.createStream()
             .subscribe(() => this.isNeedScroll = true);
