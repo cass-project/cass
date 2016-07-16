@@ -2,7 +2,7 @@
 namespace Domain\IM\Query\Options;
 
 use Domain\IM\Exception\Query\DuplicateOptionException;
-use Domain\IM\Exception\Query\Options\Option;
+use Domain\IM\Query\Options\Option;
 use Domain\IM\Exception\Query\UnknownOptionException;
 
 final class OptionsManager

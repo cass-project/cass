@@ -1,5 +1,5 @@
 <?php
-namespace Domain\IM\Tests\REST\Paths;
+namespace Domain\IM\Tests\REST\Paths\ProfileSource;
 
 use Domain\IM\Tests\Fixtures\ProfilesFixture;
 use Domain\IM\Tests\IMMiddlewareTest;
@@ -28,7 +28,7 @@ final class SendMessageMiddlewareTest extends IMMiddlewareTest
             ->expectAuthError();
     }
 
-    public function testSendmessageProfileToProfile403ProfileNotFound()
+    public function testSendMessageProfileToProfile403ProfileNotFound()
     {
         $fixture = new ProfilesFixture();
 

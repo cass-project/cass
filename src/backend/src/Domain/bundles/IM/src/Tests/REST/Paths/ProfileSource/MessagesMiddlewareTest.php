@@ -1,5 +1,5 @@
 <?php
-namespace Domain\IM\Tests\REST\Paths;
+namespace Domain\IM\Tests\REST\Paths\ProfileSource;
 
 use Domain\IM\Tests\Fixtures\ProfilesFixture;
 use Domain\IM\Tests\IMMiddlewareTest;
@@ -30,7 +30,15 @@ final class MessagesMiddlewareTest extends IMMiddlewareTest
             3 => [
                 'message' => 'Demo IM Message #3',
                 'attachment_ids' => []
-            ]
+            ],
+            4 => [
+                'message' => 'Demo IM Message #4',
+                'attachment_ids' => []
+            ],
+            5 => [
+                'message' => 'Demo IM Message #5',
+                'attachment_ids' => []
+            ],
         ];
 
         $messageJSON_1 = $this->requestSend($profile_source->getId(), 'profile', $profile_target->getId(), $json[1])
@@ -57,7 +65,7 @@ final class MessagesMiddlewareTest extends IMMiddlewareTest
                 return $input['message'];
             });
 
-        $messageJSON_4 = $this->requestSend($profile_source->getId(), 'profile', $profile_target->getId(), $json[3])
+        $messageJSON_4 = $this->requestSend($profile_source->getId(), 'profile', $profile_target->getId(), $json[4])
             ->auth($fixture->getAccount(1)->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
@@ -65,7 +73,7 @@ final class MessagesMiddlewareTest extends IMMiddlewareTest
                 return $input['message'];
             });
 
-        $messageJSON_5 = $this->requestSend($profile_source->getId(), 'profile', $profile_target->getId(), $json[3])
+        $messageJSON_5 = $this->requestSend($profile_source->getId(), 'profile', $profile_target->getId(), $json[5])
             ->auth($fixture->getAccount(1)->getAPIKey())
             ->execute()
             ->expectStatusCode(200)

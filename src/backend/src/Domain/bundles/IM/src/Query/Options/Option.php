@@ -1,5 +1,6 @@
 <?php
-namespace Domain\IM\Exception\Query\Options;
+namespace Domain\IM\Query\Options;
+
 
 interface Option
 {

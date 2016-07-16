@@ -26,7 +26,7 @@ final class SourceEntityLookupService
     public function getEntityForSource(Source $source): JSONSerializable
     {
         if($source instanceof ProfileSource) {
-            return $this->profileService->getProfileById($source->getSourceId());
+            return $this->profileService->getProfileById($source->getTargetProfileId());
         }else if($source instanceof CommunitySource) {
             return $this->communityService->getCommunityById($source->getSourceId());
         }else{

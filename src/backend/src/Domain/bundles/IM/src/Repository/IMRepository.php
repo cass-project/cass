@@ -2,13 +2,14 @@
 namespace Domain\IM\Repository;
 
 use Domain\IM\Entity\Message;
-use Domain\IM\Exception\Query\Options\MarkAsReadOption\MarkAsReadOption;
+use Domain\IM\Query\Options\MarkAsReadOption\MarkAsReadOption;
 use Domain\IM\Query\Criteria\CursorCriteria\CursorCriteria;
 use Domain\IM\Query\Criteria\SeekCriteria\SeekCriteria;
 use Domain\IM\Query\Criteria\SortCriteria\SortCriteria;
 use Domain\IM\Query\Query;
 use Domain\IM\Query\Source\Source;
 use MongoDB\BSON\ObjectID;
+use MongoDB\Driver\Cursor;
 
 class IMRepository
 {
@@ -32,7 +33,7 @@ class IMRepository
         return $insertedId;
     }
 
-    public function getMessages(Query $query, int $targetId)
+    public function getMessages(Query $query)
     {
         $source = $query->getSource();
 
@@ -68,8 +69,8 @@ class IMRepository
             }
         });
 
-        $query->getOptions()->doWith(MarkAsReadOption::class, function(MarkAsReadOption $option) use ($source, $targetId) {
-            $this->cleanNotifications($source->getSourceId(), $targetId, $option->getMessageIds());
+        $query->getOptions()->doWith(MarkAsReadOption::class, function(MarkAsReadOption $option) use ($source) {
+            $this->cleanNotifications($source->getSourceId(), $option->getMessageIds());
         });
 
         $cursor = $collection->find($criteria, $options);
@@ -77,28 +78,31 @@ class IMRepository
         return $cursor->toArray();
     }
 
-    public function cleanNotifications(int $sourceId, int $targetId, array $messageIds)
+    public function cleanNotifications(int $targetId, array $messageIds)
     {
         $collection = $this->mongoDB->selectCollection(sprintf(self::NOTIFY_MONGO_DB_COLLECTION, $targetId));
         $collection->deleteMany([
-            'id' => ['$in' => $messageIds],
-            'source' => $sourceId,
+            'message_id' => ['$in' => $messageIds],
         ]);
     }
 
-    public function getNotifications(int $targetId): array
+    public function getNotifications(int $targetId): Cursor
     {
         $collection = $this->mongoDB->selectCollection(sprintf(self::NOTIFY_MONGO_DB_COLLECTION, $targetId));
 
-        return $collection->find([], [])->toArray();
+        return $collection->find([], [
+            'limit' => 1000,
+            'skip' => 0
+        ]);
     }
 
     public function pushNotification(Source $source, int $targetId, ObjectID $messageId)
     {
         $collection = $this->mongoDB->selectCollection(sprintf(self::NOTIFY_MONGO_DB_COLLECTION, $targetId));
         $collection->insertOne([
-            'source' => $source->getSourceId(),
-            'message' => (string) $messageId
+            'source' => $source->getCode(),
+            'source_id' => $source->getSourceId(),
+            'message_id' => (string) $messageId
         ]);
     }
 }

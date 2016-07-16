@@ -7,7 +7,9 @@ use Domain\IM\Query\Query;
 use Domain\IM\Query\Source\CommunitySource\CommunitySource;
 use Domain\IM\Query\Source\ProfileSource\ProfileSource;
 use Domain\IM\Query\Source\Source;
+use Domain\IM\Query\Source\SourceFactory;
 use Domain\IM\Repository\IMRepository;
+use Domain\IM\Service\IMService\UnreadResult;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Service\ProfileService;
 use MongoDB\BSON\ObjectID;
@@ -18,14 +20,24 @@ final class IMService
     /** @var IMRepository */
     private $imRepository;
 
+    /** @var SourceEntityLookupService */
+    private $sourceEntityLookupService;
+
+    /** @var SourceFactory */
+    private $sourceFactory;
+
     /** @var ProfileService */
     private $profileService;
 
     public function __construct(
         IMRepository $imRepository,
+        SourceEntityLookupService $sourceEntityLookupService,
+        SourceFactory $sourceFactory,
         ProfileService $profileService
     ) {
         $this->imRepository = $imRepository;
+        $this->sourceEntityLookupService = $sourceEntityLookupService;
+        $this->sourceFactory = $sourceFactory;
         $this->profileService = $profileService;
     }
 
@@ -42,16 +54,34 @@ final class IMService
         return $insertedId;
     }
 
-    public function getMessages(Query $query, Profile $target)
+    public function getMessages(Query $query)
     {
         return array_map(function(BSONDocument $document) {
             return $this->convertBSONToEntity($document);
-        }, $this->imRepository->getMessages($query, $target->getId()));
+        }, $this->imRepository->getMessages($query));
     }
 
-    public function unreadMessages(int $targetId)
+    public function unreadMessages(int $targetId): array
     {
-        return $this->imRepository->getNotifications($targetId);
+        $map = [];
+        
+        array_map(function(BSONDocument $document) use (&$map, $targetId) {
+            $source = (string) $document['source'];
+            $sourceId = (int) $document['source_id'];
+            $key = sprintf('%s_%s', $source, $sourceId);
+
+            if(! isset($map[$key])) {
+                $map[$key] = new UnreadResult($source, $sourceId, $this->sourceEntityLookupService->getEntityForSource(
+                    $this->sourceFactory->createSource($source, $sourceId, $targetId)
+                ), 0);
+            }
+
+            /** @var UnreadResult $result */
+            $result = $map[$key];
+            $result->incrementCounter();
+        }, $this->imRepository->getNotifications($targetId)->toArray());
+
+        return array_values($map);
     }
 
     public function convertBSONToEntity(BSONDocument $document): Message

@@ -1,7 +1,7 @@
 <?php
-namespace Domain\IM\Exception\Query\Options\MarkAsReadOption;
+namespace Domain\IM\Query\Options\MarkAsReadOption;
 
-use Domain\IM\Exception\Query\Options\Option;
+use Domain\IM\Query\Options\Option;
 
 final class MarkAsReadOption implements Option
 {
@@ -23,13 +23,6 @@ final class MarkAsReadOption implements Option
     public static function createOptionFromParams(array $params): Option
     {
         return new self($params['message_ids'] ?? []);
-    }
-
-    public function unpack(array $params)
-    {
-        $this->messageIds = array_filter($params, function($input) {
-            return is_int($input);
-        });
     }
 
     public function getMessageIds(): array

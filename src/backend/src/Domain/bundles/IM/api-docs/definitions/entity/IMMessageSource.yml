@@ -3,8 +3,12 @@ IM_Definitions_MessageSource:
   type: object
   schema:
     required:
+      - id
       - code
       - entity
+    id:
+      type: number
+      description: ID источника
     code:
       type: string
       description: Код источника("profile", "community")

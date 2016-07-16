@@ -5,6 +5,7 @@ use Application\REST\Response\ResponseBuilder;
 use Domain\IM\Entity\Message;
 use Domain\IM\Exception\Query\QueryException;
 use Domain\IM\Middleware\Request\MessagesRequest;
+use Domain\Profile\Exception\ProfileNotFoundException;
 use MongoDB\Model\BSONDocument;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -23,7 +24,7 @@ class MessagesCommand extends Command
 
             $query = $this->queryFactory->createQueryFromJSON($source, (new MessagesRequest($request))->getParameters());
 
-            $messages = $this->imService->getMessages($query, $profile);
+            $messages = $this->imService->getMessages($query);
             
             $responseBuilder
                 ->setStatusSuccess()
@@ -39,6 +40,10 @@ class MessagesCommand extends Command
         }catch(QueryException $e) {
             $responseBuilder
                 ->setStatusBadRequest()
+                ->setError($e);
+        }catch(ProfileNotFoundException $e) {
+            $responseBuilder
+                ->setStatusNotAllowed()
                 ->setError($e);
         }
 

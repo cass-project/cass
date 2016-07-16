@@ -14,7 +14,7 @@ final class SourceFactory
                 throw new UnknownSourceException(sprintf('Unknown source `%s`', $code));
 
             case ProfileSource::getCode():
-                return new ProfileSource($sourceId, $targetId);
+                return new ProfileSource($targetId, $sourceId);
 
             case CommunitySource::getCode():
                 return new CommunitySource($sourceId);
