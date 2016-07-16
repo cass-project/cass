@@ -1,7 +1,7 @@
 article.component.component-profile-collections-list-route
-  div(*ngIf="service.isProfileLoaded()")
+  div(*ngIf="service.isCommunityLoaded()")
     h1 Подборки
     cass-collections-list(
-      [collections]="service.getProfile().collections",
-      [is-own]="service.getProfile().is_own"
+      [collections]="service.getCommunity().collections",
+      [is-own]="service.getCommunity().is_own"
     )
