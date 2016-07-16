@@ -2,7 +2,7 @@ import {Component} from "angular2/core";
 import {CommunityModals} from "../../../modals";
 
 @Component({
-    selector: 'cass-profile-settings-card',
+    selector: 'cass-community-settings-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
