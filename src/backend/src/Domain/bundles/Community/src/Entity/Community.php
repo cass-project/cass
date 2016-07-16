@@ -3,8 +3,10 @@ namespace Domain\Community\Entity;
 
 use Application\Util\Entity\IdEntity\IdEntity;
 use Application\Util\Entity\IdEntity\IdTrait;
-use Application\Util\GenerateRandomString;
+use Application\Util\Entity\SIDEntity\SIDEntity;
+use Application\Util\Entity\SIDEntity\SIDEntityTrait;
 use Application\Util\JSONSerializable;
+use Domain\Account\Entity\Account;
 use Domain\Avatar\Entity\ImageEntity;
 use Domain\Avatar\Entity\ImageEntityTrait;
 use Domain\Avatar\Image\ImageCollection;
@@ -20,13 +22,19 @@ use Domain\Theme\Entity\Theme;
  * @Entity(repositoryClass="Domain\Community\Repository\CommunityRepository")
  * @Table(name="community")
  */
-class Community implements IdEntity, JSONSerializable, ImageEntity, CollectionAwareEntity, Entity
+class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, CollectionAwareEntity, Entity
 {
-    const SID_LENGTH = 8;
-
     use IdTrait;
+    use SIDEntityTrait;
     use CollectionAwareEntityTrait;
     use ImageEntityTrait;
+
+    /**
+     * @OneToOne(targetEntity="Domain\Account\Entity\Account")
+     * @JoinColumn(name="owner_id", referencedColumnName="id")
+     * @var Account
+     */
+    private $owner;
 
     /**
      * @Column(type="string", name="sid")
@@ -86,12 +94,11 @@ class Community implements IdEntity, JSONSerializable, ImageEntity, CollectionAw
      */
     private $publicModerationContract = false;
 
-    public function __construct(int $creatorAccountId, string $title, string $description, Theme $theme = null)
+    public function __construct(Account $owner, string $title, string $description, Theme $theme = null)
     {
-        $this->metadata = [
-            'creatorAccountId' => $creatorAccountId
-        ];
-        $this->sid = GenerateRandomString::gen(self::SID_LENGTH);
+        $this->regenerateSID();
+
+        $this->owner = $owner;
         $this->dateCreatedOn = new \DateTime();
         $this->collections = new ImmutableCollectionTree();
         $this->setTitle($title)->setDescription($description);
@@ -107,6 +114,7 @@ class Community implements IdEntity, JSONSerializable, ImageEntity, CollectionAw
         $result = [
             'id' => $this->getId(),
             'sid' => $this->getSID(),
+            /* [RESTRICTED!!! Ask your manager why it's restricted.] 'owner_id' => $this->getOwner()->getId(), */
             'date_created_on' => $this->dateCreatedOn->format(\DateTime::RFC2822),
             'title' => $this->getTitle(),
             'theme' => [
@@ -134,6 +142,11 @@ class Community implements IdEntity, JSONSerializable, ImageEntity, CollectionAw
         return array_merge($this->toJSON(), [
             'date_created_on' => $this->getDateCreatedOn()
         ]);
+    }
+
+    public function getOwner(): Account
+    {
+        return $this->owner;
     }
 
     public function getSID(): string

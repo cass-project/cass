@@ -43,7 +43,7 @@ final class LinkCollectionEvents implements EventsBootstrapInterface
             if($collection->getOwnerType() === 'community') {
                 $community = $communityService->getCommunityById((int) $collection->getOwnerId());
 
-                if($community->getMetadata()['creatorAccountId'] !== $currentAccountService->getCurrentAccount()->getId()) {
+                if(! $currentAccountService->getCurrentAccount()->equals($community->getOwner())) {
                     throw new PermissionsDeniedException('You\'re not a community owner');
                 }
             }

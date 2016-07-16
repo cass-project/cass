@@ -74,6 +74,11 @@ class Account implements JSONSerializable, IdEntity, JSONMetadataEntity
         $this->profiles = new ArrayCollection();
     }
 
+    public function equals(Account $compare): bool 
+    {
+        return $compare->getId() === $this->getId();
+    }
+
     public function toJSON(): array
     {
         return [

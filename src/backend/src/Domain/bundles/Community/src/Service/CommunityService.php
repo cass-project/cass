@@ -62,7 +62,7 @@ class CommunityService implements EventEmitterAwareService
     public function createCommunity(CreateCommunityParameters $parameters): Community {
         $owner = $this->currentAccountService->getCurrentAccount();
         $entity = new Community(
-            $owner->getId(),
+            $owner,
             $parameters->getTitle(),
             $parameters->getDescription(),
             $parameters->hasThemeId()
@@ -189,12 +189,5 @@ class CommunityService implements EventEmitterAwareService
 
     public function getCommunityBySID(string $communitySID): Community {
         return $this->communityRepository->getCommunityBySID($communitySID);
-    }
-
-    public function getCommunityAccess(Account $account, Community $community): CommunityACL
-    {
-        $hasAdminAccess = $community->getMetadata()['creatorAccountId'] === $account->getId();
-
-        return new CommunityACL($hasAdminAccess);
     }
 }
