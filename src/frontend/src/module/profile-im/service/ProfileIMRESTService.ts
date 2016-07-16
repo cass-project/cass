@@ -3,9 +3,9 @@ import {Http, URLSearchParams, Headers, Response} from "angular2/http"
 import {Observable} from "rxjs/Rx";
 
 import {SendProfileMessageRequest} from "../definitions/paths/send";
-import {AuthToken}                 from "../../auth/service/AuthToken";
-import {AbstractRESTService}       from "../../common/service/AbstractRESTService";
-import {MessageBusService}         from "../../message/service/MessageBusService";
+import {AuthToken} from "../../auth/service/AuthToken";
+import {AbstractRESTService} from "../../common/service/AbstractRESTService";
+import {MessageBusService} from "../../message/service/MessageBusService";
 
 @Injectable()
 export class ProfileIMRESTService extends AbstractRESTService

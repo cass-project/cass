@@ -1,3 +1,3 @@
 tags:
-  - name: profile_im
-    description: Profile IM API
+  - name: im
+    description: IM (Instant Messaging) API

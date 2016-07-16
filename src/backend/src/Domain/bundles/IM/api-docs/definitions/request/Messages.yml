@@ -1,4 +1,4 @@
-ProfileIM_Request_Messages:
+IM_Request_Messages:
   description: Дополнительные критерии и опции выборки сообщений
   required:
     - criteria

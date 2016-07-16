@@ -1,0 +1,42 @@
+"/protected/with-profile/{targetProfileId}/im/unread":
+  get:
+    tags:
+      - im
+    description:
+      Возвращает информацию о непрочитанных сообщениях текущего профиля
+    security:
+      - x_api_key: []
+    parameters:
+      - name: targetProfileId
+        in: path
+        required: true
+        description: ID профиля
+        type: number
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        description: |
+          Список непрочитанных сообщение + кэш всех профилей, которые участвуют в данных переписках.
+        schema:
+          required:
+            - unread
+          properties:
+            unread:
+              type: array
+              description: Непрочитанные сообщения
+              items:
+                type: object
+                description: Информация о непрочитанных сообщениях с источника
+                required:
+                  - source
+                  - count
+                properties:
+                  source:
+                    description: Источник сообщений
+                    type: object
+                    schema:
+                      $ref: '#/definitions/IM_Definitions_MessageSource'
+                  count:
+                    type: number
+                    description: Количество непрочитанных сообщений от указанного профиля. Значение всегда больше нуля.

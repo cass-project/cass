@@ -2,27 +2,28 @@
 namespace Domain\IM\Middleware\Command;
 
 use Domain\Auth\Service\CurrentAccountService;
-use Domain\Profile\Service\ProfileService;
-use Domain\IM\Service\ProfileIMService;
+use Domain\IM\Query\QueryFactory;
+use Domain\ProfileIM\Service\IMService;
 
 abstract class Command implements \Application\Command\Command
 {
     /** @var CurrentAccountService */
     protected $currentAccountService;
-    /** @var ProfileIMService */
+    
+    /** @var QueryFactory */
+    protected $queryFactory;
 
-    protected $profileIMService;
+    /** @var IMService */
+    protected $imService;
 
-    /** @var  ProfileService */
-    protected $profileService;
 
     public function __construct(
         CurrentAccountService $currentAccountService,
-        ProfileIMService $profileIMService,
-        ProfileService $profileService
+        QueryFactory $queryFactory,
+        IMService $imService
     ) {
         $this->currentAccountService = $currentAccountService;
-        $this->profileIMService = $profileIMService;
-        $this->profileService = $profileService;
+        $this->queryFactory = $queryFactory;
+        $this->imService = $imService;
     }
 }

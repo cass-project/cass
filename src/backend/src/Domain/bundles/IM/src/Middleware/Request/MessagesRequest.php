@@ -9,7 +9,7 @@ class MessagesRequest extends SchemaParams
 {
     public function getParameters()
     {
-        throw new \Exception('Not implemented');
+        return $this->getData();
     }
 
     protected function getSchema(): JSONSchema
