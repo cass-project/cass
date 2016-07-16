@@ -23,12 +23,29 @@ final class GetCommunityByIdTest extends CommunityMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
-                    'title' => $sampleCommunity->getTitle(),
-                    'description' => $sampleCommunity->getDescription(),
-                    'theme' => [
-                        'has' => true,
-                        'id' => $sampleCommunity->getTheme()->getId()
-                    ]
+                    'is_own' => true,
+                    'collections' => [
+                        0 => [
+                            'id' => $this->expectId(),
+                            'sid' => $this->expectString(),
+                            'owner_sid' => $this->expectString(),
+                            'owner' => [
+                                'id' => $this->expectString(),
+                                'type' => 'community'
+                            ],
+                            'title' => $this->expectString(),
+                            'description' => $this->expectString()
+                        ]
+                    ],
+                    'community' => [
+                        'title' => $sampleCommunity->getTitle(),
+                        'description' => $sampleCommunity->getDescription(),
+                        'theme' => [
+                            'has' => true,
+                            'id' => $sampleCommunity->getTheme()->getId()
+                        ],
+                        'image' => $this->expectImageCollection(),
+                    ],
                 ]
             ]);
     }
