@@ -22,17 +22,22 @@ class Message implements JSONSerializable
     /** @var int[] */
     private $attachmentIds = [];
 
-    public function __construct(Profile $author, string $content, array $attachmentIds)
+    public function __construct(Profile $author, string $content, array $attachmentIds, \DateTime $dateCreated = null)
     {
+        if(! $dateCreated) {
+            $dateCreated = new \DateTime();
+        }
+
         $this->author = $author;
         $this->content = $content;
         $this->attachmentIds = $attachmentIds;
-        $this->dateCreated = new \DateTime();
+        $this->dateCreated = $dateCreated;
     }
 
     public function toJSON(): array
     {
         $result = $this->toMongoBSON();
+        unset($result['date_created_obj']);
 
         if($this->hasId()) {
             $result['_id'] = (string) $this->getId();

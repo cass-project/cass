@@ -2,7 +2,6 @@ IM_Request_Messages:
   description: Дополнительные критерии и опции выборки сообщений
   required:
     - criteria
-    - options
   properties:
     criteria:
       description: Критерии выборки сообщений
@@ -15,6 +14,9 @@ IM_Request_Messages:
             description: Ограничения по выборке
             type: object
             schema:
+              required:
+                - offset
+                - limit
               properties:
                 offset:
                   type: number
@@ -34,7 +36,6 @@ IM_Request_Messages:
                   description: ID сообщения, с которого начать выборку.
     options:
       description: Опции выборки сообщений
-      type: object
       schema:
         properties:
           markAsRead:

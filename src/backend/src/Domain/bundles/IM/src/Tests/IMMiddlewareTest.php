@@ -31,7 +31,7 @@ abstract class IMMiddlewareTest extends MiddlewareTestCase
 
     protected function requestMessages(int $targetProfileId, string $source, int $sourceId, array $json)
     {
-        return $this->request('POST', sprintf('/protected/with-profile/%s/im/mesages/%s/%s', $targetProfileId, $source, $sourceId))
+        return $this->request('POST', sprintf('/protected/with-profile/%s/im/messages/%s/%s', $targetProfileId, $source, $sourceId))
             ->setParameters($json);
     }
 

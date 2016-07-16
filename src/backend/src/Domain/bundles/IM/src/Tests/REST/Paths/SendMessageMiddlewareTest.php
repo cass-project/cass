@@ -65,7 +65,6 @@ final class SendMessageMiddlewareTest extends IMMiddlewareTest
         $this->requestSend($profile_source->getId(), 'profile', $profile_target->getId(), $json)
             ->auth($fixture->getAccount(1)->getAPIKey())
             ->execute()
-            ->dump()
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([

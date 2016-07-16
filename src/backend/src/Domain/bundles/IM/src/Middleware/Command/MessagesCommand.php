@@ -2,8 +2,10 @@
 namespace Domain\IM\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
+use Domain\IM\Entity\Message;
 use Domain\IM\Exception\Query\QueryException;
 use Domain\IM\Middleware\Request\MessagesRequest;
+use MongoDB\Model\BSONDocument;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -30,8 +32,8 @@ class MessagesCommand extends Command
                         'code' => $source->getCode(),
                         'entity' => $this->sourceEntityLookupService->getEntityForSource($source)->toJSON()
                     ],
-                    'messages' => array_map(function(array $messageBSON) {
-                        return $this->messageFormatter->format($messageBSON);
+                    'messages' => array_map(function(Message $message) {
+                        return $this->messageFormatter->format($message->toJSON());
                     }, $messages)
                 ]);
         }catch(QueryException $e) {
