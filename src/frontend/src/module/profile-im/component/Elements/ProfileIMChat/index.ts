@@ -24,14 +24,14 @@ export class ProfileIMChat
     isNeedScroll = false;
 
     constructor(private params: RouteParams, private im:ProfileIMService) {
-        im.getMessageFrom(parseInt(params.get('id')), 0, 10, false)
+        im.loadHistory(parseInt(params.get('id')), 0, 10, false)
             .subscribe(() => this.isNeedScroll = true);
         
         im.createStream()
             .subscribe(() => this.isNeedScroll = true);
     }
     
-    ngAfterContentChecked() {
+    ngAfterViewChecked() {
         if(this.isNeedScroll) this.scroll();
     }
     

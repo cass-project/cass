@@ -7,12 +7,14 @@ import {ProfileMessagesResponse200}       from "../definitions/paths/messages";
 import {SendProfileMessageResponse200}    from "../definitions/paths/send";
 import {SendProfileMessageRequest}        from "../definitions/paths/send";
 import {ProfileIMFeedSendStatus}          from "../definitions/entity/ProfileMessage";
+import {ProfileMessageEntity}             from "../definitions/entity/ProfileMessage";
 import {ProfileMessageExtendedEntity}     from "../definitions/entity/ProfileMessage";
 
 @Injectable()
 export class ProfileIMService 
 {
     public history: ProfileMessageExtendedEntity[] = [];
+    private getMessageFromCache: ProfileMessagesResponse200[] = [];
     public stream: Observer<ProfileMessageExtendedEntity>;
     
     constructor(private rest:ProfileIMRESTService) {}
@@ -32,27 +34,34 @@ export class ProfileIMService
         });
     }
     
-    getMessageFrom(sourceProfileId: number, offset: number, limit: number, markAsRead: boolean) : Observable<ProfileMessagesResponse200>
+    loadHistory (
+        sourceProfileId: number,
+        offset: number,
+        limit: number,
+        markAsRead:boolean,
+        nocache?:boolean) : Observable<ProfileMessagesResponse200>
     {
+        let stringifyArguments = JSON.stringify(arguments);
+        this.clearHistory();
+        
         return Observable.create((observer: Observer<ProfileMessagesResponse200>) => {
-            this.rest.getMessageFrom(sourceProfileId, offset, limit, markAsRead).subscribe(
-                data => {
-                    data.messages.forEach((message)=>{
-                        this.history.push(<ProfileMessageExtendedEntity>{
-                            date_created_on: new Date().toString(),
-                            source_profile_id: message.source_profile_id,
-                            target_profile_id: message.target_profile_id,
-                            content: message.content,
-                            send_status:{status:ProfileIMFeedSendStatus.Complete}
-                        });
-                    });
-                    observer.next(data);
-                    observer.complete();
-                },
-                error => {
-                    observer.error(error);
-                }
-            );
+            if(this.getMessageFromCache[stringifyArguments]===undefined || nocache) {
+                this.rest.getMessageFrom(sourceProfileId, offset, limit, markAsRead).subscribe(
+                    data => {
+                        this.setHistory(data.messages);
+                        this.getMessageFromCache[stringifyArguments] = data;
+                        observer.next(data);
+                        observer.complete();
+                    },
+                    error => {
+                        observer.error(error);
+                    }
+                );
+            } else {
+                this.setHistory(this.getMessageFromCache[stringifyArguments].messages);
+                observer.next(this.getMessageFromCache[stringifyArguments]);
+                observer.complete();
+            }
         });
     }
     
@@ -90,5 +99,22 @@ export class ProfileIMService
         });
         
         return fork;
+    }
+    
+    clearHistory() {
+        this.history = [];
+    }
+    
+    setHistory(messages:ProfileMessageEntity[])
+    {
+        this.clearHistory();
+        messages.forEach((message) => {
+            let messageExtented:ProfileMessageExtendedEntity = (<any>Object).assign(message, {
+                send_status: {
+                    status: ProfileIMFeedSendStatus.Complete
+                }
+            });
+            this.history.push(messageExtented);
+        });
     }
 }
