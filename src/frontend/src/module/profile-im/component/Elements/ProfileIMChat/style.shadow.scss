@@ -41,5 +41,13 @@
     position: absolute;
     left:0;
     bottom:0;
+    
+    .cass-padding-box-15{
+      display: flex;
+      
+      .profile-im-textarea {
+        width:100%
+      }
+    }
  }
 }

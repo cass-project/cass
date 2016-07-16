@@ -4,7 +4,8 @@ import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
 import {ProfileIMService}          from "../../../service/ProfileIMService";
 import {ProfileIMChatHistory}      from "../ProfileIMChatHistory/index";
 import {ProfileIMTextarea}         from "../ProfileIMTextarea/index";
-import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
+import {LoadingLinearIndicator}    from "../../../../form/component/LoadingLinearIndicator/index";
+import {ProfileIMAttachments}      from "../ProfileIMAttachments/index";
 
 @Component({
     selector: 'cass-profile-im-messages',
@@ -16,6 +17,7 @@ import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIn
         ROUTER_DIRECTIVES,
         ProfileIMTextarea,
         ProfileIMChatHistory,
+        ProfileIMAttachments,
         LoadingLinearIndicator
     ]
 })

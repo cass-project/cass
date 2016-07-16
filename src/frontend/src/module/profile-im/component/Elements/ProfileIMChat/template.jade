@@ -9,4 +9,5 @@
     cass-profile-im-chat-history([history]="im.history", *ngIf="!isLoading")
     footer
       .cass-padding-box-15
-        cass-profile-im-textarea([disabled]="isLoading")
+        cass-profile-im-attachments([disabled]="isLoading", (attach)="attach()", detach="detach()")
+        cass-profile-im-textarea.profile-im-textarea([disabled]="isLoading")            
