@@ -18,6 +18,14 @@ export class  CommunityRouteService
     constructor(
         private api: CommunityRESTService
     ) {}
+
+    public getCommunity(): CommunityExtendedEntity {
+        if(!this.community) {
+            throw new Error('Community is not loaded');
+        }
+
+        return this.community;
+    }
     
     public isCommunityLoaded(): boolean {
         return typeof this.community == "object";
@@ -38,10 +46,10 @@ export class  CommunityRouteService
     public loadCommunityBySID(sid: string) {
         this.request = sid;
 
-        this.loadProfile(<any>this.api.getCommunityBySid(sid));
+        this.loadCommunity(<any>this.api.getCommunityBySid(sid));
     }
     
-    private loadProfile(observable: Observable<GetCommunityBySIDResponse200>) {
+    private loadCommunity(observable: Observable<GetCommunityBySIDResponse200>) {
         this.community = undefined;
         this.loading = true;
         this.observable = observable;

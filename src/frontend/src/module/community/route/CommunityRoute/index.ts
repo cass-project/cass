@@ -5,7 +5,7 @@ import {ProgressLock} from "../../../form/component/ProgressLock/index";
 import {CommunityCollectionsRoute} from "../CommunityCollectionsRoute/index";
 import {CommunityRouteService} from "./service";
 import {CommunityDashboardRoute} from "../CommunityDashboardRoute/index";
-import {ProfileHeader} from "../../component/Elements/CommunityHeader/index";
+import {CommunityHeader} from "../../component/Elements/CommunityHeader/index";
 import {AuthService} from "../../../auth/service/AuthService";
 
 @Component({
@@ -16,7 +16,7 @@ import {AuthService} from "../../../auth/service/AuthService";
     directives: [
         ROUTER_DIRECTIVES,
         ProgressLock,
-        ProfileHeader,
+        CommunityHeader,
     ],
     providers: [
         CommunityRouteService,
@@ -43,12 +43,12 @@ export class CommunityRoute
         private service: CommunityRouteService,
         private authService: AuthService
     ) {
-        let id = params.get('id');
+        let sid = params.get('sid');
         
-        if (id.match(/^(\d+)$/)) {
-            service.loadCommunityBySID(id);
+        if (sid){
+            service.loadCommunityBySID(sid);
         } else {
-            router.navigate(['/Profile/NotFound']);
+            router.navigate(['/Community/NotFound']);
             return;
         }
 

@@ -1,9 +1,9 @@
 article.component.component-profile-route
   cass-form-progress-lock(*ngIf="service.isLoading()")
-  div(*ngIf="service.isProfileLoaded()").profile-page
-    cass-profile-header(
-      [profile]="service.getProfile()",
-      (go-profile)="goDashboard()",
+  div(*ngIf="service.isCommunityLoaded()").profile-page
+    cass-community-header(
+      [community]="service.getCommunity()",
+      (go-community)="goDashboard()",
       (go-collection)="goCollection($event)"
     )
   .profile-page
