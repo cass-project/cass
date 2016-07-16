@@ -1,12 +1,11 @@
 IM_Entity_IMMessage:
   type: object
   description:
-    Сообщение, переданное с помощью Domain\IM
+    Сообщение, переданное с помощью IM
   required:
     - id
     - author
     - date_created
-    - read_status
     - content
     - attachments
   properties:
@@ -20,13 +19,13 @@ IM_Entity_IMMessage:
     date_created:
       type: string
       description: Дата создания сообщения
-    read_status:
-      $ref: '#/definitions/IM_Definitions_MessageReadStatus'
     content:
       type: string
-      description: Текст сообщения
+      description: |
+        Текст сообщения
     attachments:
-      description: Приложение (аттачменты) к сообщению
+      description: |
+        Приложение (аттачменты) к сообщению
       type: array
-        items:
-          type: object
+      items:
+        type: object

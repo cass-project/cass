@@ -19,13 +19,13 @@ final class MessageFormatter
         $this->attachmentService = $attachmentService;
     }
 
-    public function format(array $messageBSON)
+    public function format(array $mongoJSON)
     {
-        return array_merge($messageBSON, [
-            'author' => $this->profileService->getProfileById($messageBSON['author_id'])->toJSON(),
+        return array_merge($mongoJSON, [
+            'author' => $this->profileService->getProfileById($mongoJSON['author_id'])->toJSON(),
             'attachments' => array_map(function(PostAttachment $attachment) {
                 return $attachment->toJSON();
-            }, $this->attachmentService->getAttachmentsByIds($messageBSON['attachment_ids'])),
+            }, $this->attachmentService->getAttachmentsByIds($mongoJSON['attachment_ids'])),
         ]);
     }
 }

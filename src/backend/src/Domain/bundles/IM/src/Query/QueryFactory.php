@@ -1,7 +1,7 @@
 <?php
 namespace Domain\IM\Query;
 
-use Domain\IM\Exception\Query\Options\OptionsFactory;
+use Domain\IM\Query\Options\OptionsFactory;
 use Domain\IM\Query\Criteria\CriteriaFactory;
 use Domain\IM\Query\Criteria\CriteriaManager;
 use Domain\IM\Query\Options\OptionsManager;

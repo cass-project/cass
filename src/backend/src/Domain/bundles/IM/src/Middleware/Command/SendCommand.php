@@ -14,7 +14,7 @@ class SendCommand extends Command
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
-            $author = $this->withProfileService->getProfile();
+            $author = $this->currentAccountService->getProfileWithId($request->getAttribute('sourceProfileId'));
             $source = $this->sourceFactory->createSource(
                 $request->getAttribute('source'),
                 (int) $request->getAttribute('sourceId'),
@@ -34,12 +34,12 @@ class SendCommand extends Command
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson([
-                    'entity' => $this->messageFormatter->format($message->toMongoBSON())
+                    'message' => $this->messageFormatter->format($message->toJSON())
                 ]);
         }catch(ProfileNotFoundException $e) {
             $responseBuilder
                 ->setError($e)
-                ->setStatusNotFound();
+                ->setStatusNotAllowed();
         }catch(CommunityNotFoundException $e) {
             $responseBuilder
                 ->setError($e)

@@ -19,9 +19,6 @@ class Message implements JSONSerializable
     /** @var string */
     private $content;
 
-    /** @var MessageReadStatus */
-    private $readStatus;
-
     /** @var int[] */
     private $attachmentIds = [];
 
@@ -39,6 +36,7 @@ class Message implements JSONSerializable
 
         if($this->hasId()) {
             $result['_id'] = (string) $this->getId();
+            $result['id'] = (string) $this->getId();
         }
 
         return $result;
@@ -49,7 +47,6 @@ class Message implements JSONSerializable
         return [
             'author_id' => $this->author->getId(),
             'content' => $this->content,
-            'read_status' => $this->readStatus->toMongoBSON(),
             'attachment_ids' => $this->attachmentIds,
             'date_created' => $this->dateCreated->format(\DateTime::RFC2822),
             'date_created_obj' => $this->dateCreated,
@@ -78,11 +75,6 @@ class Message implements JSONSerializable
         }
 
         $this->id = $id;
-    }
-
-    public function getReadStatus(): MessageReadStatus
-    {
-        return $this->readStatus;
     }
 
     public function getDateCreated(): \DateTime

@@ -13,7 +13,7 @@ final class WithProfileMiddleware implements MiddlewareInterface
     /** @var WithProfileService */
     private $withProfileService;
 
-    public function __construct(WithProfileMiddleware $withProfileService)
+    public function __construct(WithProfileService $withProfileService)
     {
         $this->withProfileService = $withProfileService;
     }

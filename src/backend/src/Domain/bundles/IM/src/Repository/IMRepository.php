@@ -2,14 +2,12 @@
 namespace Domain\IM\Repository;
 
 use Domain\IM\Entity\Message;
-use Domain\IM\Entity\MessageReadStatus;
 use Domain\IM\Exception\Query\Options\MarkAsReadOption\MarkAsReadOption;
 use Domain\IM\Query\Criteria\CursorCriteria\CursorCriteria;
 use Domain\IM\Query\Criteria\SeekCriteria\SeekCriteria;
 use Domain\IM\Query\Criteria\SortCriteria\SortCriteria;
 use Domain\IM\Query\Query;
 use Domain\IM\Query\Source\Source;
-use Domain\Profile\Entity\Profile;
 use MongoDB\BSON\ObjectID;
 
 class IMRepository
@@ -68,20 +66,6 @@ class IMRepository
         $cursor = $collection->find($criteria, $options);
 
         return $cursor->toArray();
-    }
-
-    public function markAsRead(Source $source, array $messageIds)
-    {
-        $collection = $this->mongoDB->selectCollection($source->getMongoDBCollectionName());
-        $collection->updateMany([
-            '_id' => array_map(function(int $messageId) {
-                return new ObjectId($messageId);
-            }, $messageIds)
-        ], [
-            '$set' => [
-                'read_status' => (new MessageReadStatus(true, new \DateTime()))->toMongoBSON()
-            ]
-        ]);
     }
 
     public function cleanNotifications(int $sourceId, int $targetId, array $messageIds)

@@ -1,7 +1,6 @@
 <?php
 namespace Domain\IM\Query\Source\CommunitySource;
 
-use Domain\IM\Exception\Query\InvalidSourceParamsException;
 use Domain\IM\Query\Source\Source;
 
 final class CommunitySource implements Source

@@ -17,10 +17,8 @@ final class SourceEntityLookupService
     /** @var CommunityService */
     private $communityService;
 
-    public function __construct(
-        ProfileSource $profileService,
-        CommunityService $communityService
-    ) {
+    public function __construct(ProfileService $profileService, CommunityService $communityService)
+    {
         $this->profileService = $profileService;
         $this->communityService = $communityService;
     }

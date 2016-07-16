@@ -1,5 +1,5 @@
 <?php
-namespace Domain\ProfileIM\Service;
+namespace Domain\IM\Service;
 
 use Domain\IM\Entity\Message;
 use Domain\IM\Exception\Query\UnknownSourceException;

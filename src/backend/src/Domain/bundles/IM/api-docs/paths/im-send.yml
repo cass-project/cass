@@ -1,4 +1,4 @@
-"/protected/with-profile/{sourceProfileId}/im/messages/send/to/{source}/{sourceId}":
+"/protected/with-profile/{sourceProfileId}/im/send/to/{source}/{sourceId}":
   put:
     tags:
       - im
@@ -44,4 +44,7 @@
             success:
               type: boolean
             message:
-              $ref: '#/definitions/ProfileIM_Entity_ProfileMessage'
+              type: object
+              description: Отправленное сообщение
+              schema:
+                $ref: '#/definitions/IM_Entity_IMMessage'

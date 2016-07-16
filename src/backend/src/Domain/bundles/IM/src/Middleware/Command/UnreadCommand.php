@@ -9,7 +9,7 @@ class UnreadCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $profile = $this->withProfileService->getProfile();
+        $profile = $this->currentAccountService->getProfileWithId($request->getAttribute('targetProfileId'));
         $result = $this->imService->unreadMessages($profile->getId());
 
         $responseBuilder

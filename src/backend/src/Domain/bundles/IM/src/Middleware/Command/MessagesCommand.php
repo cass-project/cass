@@ -12,7 +12,7 @@ class MessagesCommand extends Command
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
-            $profile = $this->withProfileService->getProfile();
+            $profile = $this->currentAccountService->getProfileWithId($request->getAttribute('targetProfileId'));
             $source = $this->sourceFactory->createSource(
                 $request->getAttribute('source'),
                 (int) $request->getAttribute('sourceId'),
