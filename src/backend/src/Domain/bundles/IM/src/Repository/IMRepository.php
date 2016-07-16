@@ -34,8 +34,10 @@ class IMRepository
         return $insertedId;
     }
 
-    public function getMessages(Source $source, Query $query, int $targetId)
+    public function getMessages(Query $query, int $targetId)
     {
+        $source = $query->getSource();
+        
         $criteria = [];
         $options = [];
 

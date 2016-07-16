@@ -5,14 +5,12 @@ use Domain\Auth\Service\CurrentAccountService;
 use Domain\IM\Formatter\MessageFormatter;
 use Domain\IM\Query\QueryFactory;
 use Domain\IM\Query\Source\SourceFactory;
+use Domain\IM\Service\SourceEntityLookupService;
 use Domain\Profile\Service\WithProfileService;
 use Domain\ProfileIM\Service\IMService;
 
 abstract class Command implements \Application\Command\Command
 {
-    /** @var CurrentAccountService */
-    protected $currentAccountService;
-    
     /** @var QueryFactory */
     protected $queryFactory;
 
@@ -25,18 +23,25 @@ abstract class Command implements \Application\Command\Command
     /** @var SourceFactory */
     protected $sourceFactory;
 
+    /** @var SourceEntityLookupService */
+    protected $sourceEntityLookupService;
+
     /** @var WithProfileService */
     protected $withProfileService;
 
     public function __construct(
-        CurrentAccountService $currentAccountService,
         QueryFactory $queryFactory,
         IMService $imService,
-        MessageFormatter $messageFormatter
+        MessageFormatter $messageFormatter,
+        SourceFactory $sourceFactory,
+        SourceEntityLookupService $sourceEntityLookupService,
+        WithProfileService $withProfileService
     ) {
-        $this->currentAccountService = $currentAccountService;
         $this->queryFactory = $queryFactory;
         $this->imService = $imService;
         $this->messageFormatter = $messageFormatter;
+        $this->sourceFactory = $sourceFactory;
+        $this->sourceEntityLookupService = $sourceEntityLookupService;
+        $this->withProfileService = $withProfileService;
     }
 }

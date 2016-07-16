@@ -2,6 +2,8 @@
 namespace Domain\IM\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
+use Domain\IM\Exception\Query\QueryException;
+use Domain\IM\Middleware\Request\MessagesRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -9,5 +11,35 @@ class MessagesCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
+        try {
+            $profile = $this->withProfileService->getProfile();
+            $source = $this->sourceFactory->createSource(
+                $request->getAttribute('source'),
+                (int) $request->getAttribute('sourceId'),
+                $profile->getId()
+            );
+
+            $query = $this->queryFactory->createQueryFromJSON($source, (new MessagesRequest($request))->getParameters());
+
+            $messages = $this->imService->getMessages($query, $profile);
+            
+            $responseBuilder
+                ->setStatusSuccess()
+                ->setJson([
+                    'source' => [
+                        'code' => $source->getCode(),
+                        'entity' => $this->sourceEntityLookupService->getEntityForSource($source)->toJSON()
+                    ],
+                    'messages' => array_map(function(array $messageBSON) {
+                        return $this->messageFormatter->format($messageBSON);
+                    }, $messages)
+                ]);
+        }catch(QueryException $e) {
+            $responseBuilder
+                ->setStatusBadRequest()
+                ->setError($e);
+        }
+
+        return $responseBuilder->build();
     }
 }

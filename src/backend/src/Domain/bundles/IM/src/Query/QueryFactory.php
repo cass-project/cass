@@ -5,13 +5,10 @@ use Domain\IM\Exception\Query\Options\OptionsFactory;
 use Domain\IM\Query\Criteria\CriteriaFactory;
 use Domain\IM\Query\Criteria\CriteriaManager;
 use Domain\IM\Query\Options\OptionsManager;
-use Domain\IM\Query\Source\SourceFactory;
+use Domain\IM\Query\Source\Source;
 
 final class QueryFactory
 {
-    /** @var SourceFactory */
-    private $sourceFactory;
-
     /** @var CriteriaFactory */
     private $criteriaFactory;
 
@@ -19,21 +16,18 @@ final class QueryFactory
     private $optionFactory;
 
     public function __construct(
-        SourceFactory $sourceFactory,
         CriteriaFactory $criteriaFactory,
         OptionsFactory $optionFactory
     )
     {
-        $this->sourceFactory = $sourceFactory;
         $this->criteriaFactory = $criteriaFactory;
         $this->optionFactory = $optionFactory;
     }
 
-    public function createQueryFromJSON(array $json): Query
+    public function createQueryFromJSON(Source $source, array $json): Query
     {
         $criteria = [];
         $options = [];
-        $source = $this->sourceFactory->createSource($json['source']['code'], $json['source']['params']);
 
         foreach($json['criteria'] as $code => $params) {
             $criteria[] = $this->criteriaFactory->createCriteriaFromStringCode($code, $params);

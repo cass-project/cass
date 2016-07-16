@@ -34,9 +34,9 @@ final class IMService
         return $insertedId;
     }
 
-    public function getMessages(Source $source, Query $query, Profile $target)
+    public function getMessages(Query $query, Profile $target)
     {
-        return $this->imRepository->getMessages($source, $query, $target->getId());
+        return $this->imRepository->getMessages($query, $target->getId());
     }
 
     public function unreadMessages(int $targetId)
