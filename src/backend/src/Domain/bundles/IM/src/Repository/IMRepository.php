@@ -35,7 +35,8 @@ class IMRepository
     public function getMessages(Query $query, int $targetId)
     {
         $source = $query->getSource();
-        
+
+        $order = 1;
         $criteria = [];
         $options = [];
 
@@ -46,17 +47,25 @@ class IMRepository
             $options['skip'] = $seekCriteria->getOffset();
         });
 
-        $query->getCriteria()->doWith(CursorCriteria::class, function(CursorCriteria $cursorCriteria) use (&$filter) {
-            $lastId = new ObjectID($cursorCriteria->getId());
+        $query->getCriteria()->doWith(SortCriteria::class, function(SortCriteria $sortCriteria) use (&$options, &$order) {
+            $order = strtolower($sortCriteria->getOrder()) === 'asc' ? 1 : -1;
 
-            $filter['_id'] = [
-                '$gt' => $lastId
-            ];
+            $options['sort'] = [];
+            $options['sort'][$sortCriteria->getField()] = $order;
         });
 
-        $query->getCriteria()->doWith(SortCriteria::class, function(SortCriteria $sortCriteria) use ($options) {
-            $options['sort'] = [];
-            $options['sort'][$sortCriteria->getField()] = strtolower($sortCriteria->getOrder()) === 'asc' ? 1 : -1;
+        $query->getCriteria()->doWith(CursorCriteria::class, function(CursorCriteria $cursorCriteria) use (&$criteria, $order) {
+            $lastId = new ObjectID($cursorCriteria->getId());
+
+            if($order === 1) {
+                $criteria['_id'] = [
+                    '$gt' => $lastId
+                ];
+            }else{
+                $criteria['_id'] = [
+                    '$lt' => $lastId
+                ];
+            }
         });
 
         $query->getOptions()->doWith(MarkAsReadOption::class, function(MarkAsReadOption $option) use ($source, $targetId) {

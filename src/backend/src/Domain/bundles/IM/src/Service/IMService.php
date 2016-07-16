@@ -65,7 +65,7 @@ final class IMService
             $document['attachment_ids']->getArrayCopy(),
             \DateTime::createFromFormat(\DateTime::RFC2822, $document['date_created'])
         );
-        
+
         $message->specifyId($id);
 
         return $message;

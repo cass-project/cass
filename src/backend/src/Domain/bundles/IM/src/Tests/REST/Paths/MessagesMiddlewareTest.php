@@ -57,7 +57,23 @@ final class MessagesMiddlewareTest extends IMMiddlewareTest
                 return $input['message'];
             });
 
-        $jsonRequest = [
+        $messageJSON_4 = $this->requestSend($profile_source->getId(), 'profile', $profile_target->getId(), $json[3])
+            ->auth($fixture->getAccount(1)->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->fetch(function(array $input) {
+                return $input['message'];
+            });
+
+        $messageJSON_5 = $this->requestSend($profile_source->getId(), 'profile', $profile_target->getId(), $json[3])
+            ->auth($fixture->getAccount(1)->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->fetch(function(array $input) {
+                return $input['message'];
+            });
+
+        $this->requestMessages($profile_target->getId(), 'profile', $profile_source->getId(), [
             'criteria' => [
                 'seek' => [
                     'offset' => 0,
@@ -65,18 +81,15 @@ final class MessagesMiddlewareTest extends IMMiddlewareTest
                 ]
             ],
             'options' => []
-        ];
-
-        $this->requestMessages($profile_target->getId(), 'profile', $profile_source->getId(), $jsonRequest)
+        ])
             ->auth($fixture->getAccount(2)->getAPIKey())
             ->execute()
-            ->dump()
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([
                 'messages' => function(array $json) {
                     $this->assertTrue(is_array($json));
-                    $this->assertEquals(3, count($json));
+                    $this->assertEquals(5, count($json));
                 }
             ])
             ->expectJSONBody([
@@ -89,11 +102,176 @@ final class MessagesMiddlewareTest extends IMMiddlewareTest
                     $messageJSON_1,
                     $messageJSON_2,
                     $messageJSON_3,
+                    $messageJSON_4,
+                    $messageJSON_5,
                 ]
             ])
         ;
 
-        $this->requestMessages($profile_source->getId(), 'profile', $profile_target->getId(), $jsonRequest)
+        $this->requestMessages($profile_source->getId(), 'profile', $profile_target->getId(), [
+            'criteria' => [
+                'seek' => [
+                    'offset' => 0,
+                    'limit' => 100
+                ]
+            ],
+            'options' => []
+        ])
+            ->auth($fixture->getAccount(1)->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'messages' => function(array $json) {
+                    $this->assertTrue(is_array($json));
+                    $this->assertEquals(5, count($json));
+                }
+            ])
+            ->expectJSONBody([
+                'success' => true,
+                'source' => [
+                    'code' => 'profile',
+                    'entity' => $profile_target->toJSON()
+                ],
+                'messages' => [
+                    $messageJSON_1,
+                    $messageJSON_2,
+                    $messageJSON_3,
+                    $messageJSON_4,
+                    $messageJSON_5,
+                ]
+            ])
+        ;
+
+        $this->requestMessages($profile_source->getId(), 'profile', $profile_target->getId(), [
+            'criteria' => [
+                'seek' => [
+                    'offset' => 0,
+                    'limit' => 100
+                ],
+                'sort' => [
+                    'field' => '_id',
+                    'order' => 'desc'
+                ]
+            ],
+            'options' => []
+        ])
+            ->auth($fixture->getAccount(1)->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'messages' => function(array $json) {
+                    $this->assertTrue(is_array($json));
+                    $this->assertEquals(5, count($json));
+                }
+            ])
+            ->expectJSONBody([
+                'success' => true,
+                'source' => [
+                    'code' => 'profile',
+                    'entity' => $profile_target->toJSON()
+                ],
+                'messages' => [
+                    $messageJSON_5,
+                    $messageJSON_4,
+                    $messageJSON_3,
+                    $messageJSON_2,
+                    $messageJSON_1,
+                ]
+            ])
+        ;
+
+        $this->requestMessages($profile_source->getId(), 'profile', $profile_target->getId(), [
+            'criteria' => [
+                'seek' => [
+                    'offset' => 1,
+                    'limit' => 100
+                ],
+                'sort' => [
+                    'field' => '_id',
+                    'order' => 'desc'
+                ]
+            ],
+            'options' => []
+        ])
+            ->auth($fixture->getAccount(1)->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'messages' => function(array $json) {
+                    $this->assertTrue(is_array($json));
+                    $this->assertEquals(4, count($json));
+                }
+            ])
+            ->expectJSONBody([
+                'success' => true,
+                'source' => [
+                    'code' => 'profile',
+                    'entity' => $profile_target->toJSON()
+                ],
+                'messages' => [
+                    $messageJSON_4,
+                    $messageJSON_3,
+                    $messageJSON_2,
+                    $messageJSON_1,
+                ]
+            ])
+        ;
+
+        $this->requestMessages($profile_source->getId(), 'profile', $profile_target->getId(), [
+            'criteria' => [
+                'seek' => [
+                    'offset' => 1,
+                    'limit' => 2
+                ],
+                'sort' => [
+                    'field' => '_id',
+                    'order' => 'desc'
+                ]
+            ],
+            'options' => []
+        ])
+            ->auth($fixture->getAccount(1)->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'messages' => function(array $json) {
+                    $this->assertTrue(is_array($json));
+                    $this->assertEquals(2, count($json));
+                }
+            ])
+            ->expectJSONBody([
+                'success' => true,
+                'source' => [
+                    'code' => 'profile',
+                    'entity' => $profile_target->toJSON()
+                ],
+                'messages' => [
+                    $messageJSON_4,
+                    $messageJSON_3,
+                ]
+            ])
+        ;
+
+        $this->requestMessages($profile_source->getId(), 'profile', $profile_target->getId(), [
+            'criteria' => [
+                'seek' => [
+                    'offset' => 0,
+                    'limit' => 100
+                ],
+                'cursor' => [
+                    'id' => $messageJSON_4['id'],
+                ],
+                'sort' => [
+                    'field' => '_id',
+                    'order' => 'desc'
+                ]
+            ],
+            'options' => []
+        ])
             ->auth($fixture->getAccount(1)->getAPIKey())
             ->execute()
             ->dump()
@@ -112,9 +290,48 @@ final class MessagesMiddlewareTest extends IMMiddlewareTest
                     'entity' => $profile_target->toJSON()
                 ],
                 'messages' => [
-                    $messageJSON_1,
-                    $messageJSON_2,
                     $messageJSON_3,
+                    $messageJSON_2,
+                    $messageJSON_1,
+                ]
+            ])
+        ;
+
+        $this->requestMessages($profile_source->getId(), 'profile', $profile_target->getId(), [
+            'criteria' => [
+                'seek' => [
+                    'offset' => 0,
+                    'limit' => 100
+                ],
+                'cursor' => [
+                    'id' => $messageJSON_4['id'],
+                ],
+                'sort' => [
+                    'field' => '_id',
+                    'order' => 'asc'
+                ]
+            ],
+            'options' => []
+        ])
+            ->auth($fixture->getAccount(1)->getAPIKey())
+            ->execute()
+            ->dump()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'messages' => function(array $json) {
+                    $this->assertTrue(is_array($json));
+                    $this->assertEquals(1, count($json));
+                }
+            ])
+            ->expectJSONBody([
+                'success' => true,
+                'source' => [
+                    'code' => 'profile',
+                    'entity' => $profile_target->toJSON()
+                ],
+                'messages' => [
+                    $messageJSON_5,
                 ]
             ])
         ;
