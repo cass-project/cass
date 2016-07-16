@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from "angular2/core";
+import {Component, ElementRef, ViewChild, Input} from "angular2/core";
 import {RouteParams} from "angular2/router";
 
 import {ProfileIMFeedSendStatus}      from "../../../definitions/entity/ProfileMessage";
@@ -19,6 +19,7 @@ export class ProfileIMTextarea
 {
     private maxLength = 2000;
     @ViewChild('textarea') textarea:ElementRef;
+    @Input('disabled') disabled:boolean;
     private hiddenDiv:HTMLDivElement = document.createElement('div');
     private content:string = "";
     constructor(

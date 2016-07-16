@@ -4,4 +4,8 @@ textarea {
   font-size: $FONT_SIZE_NORMAL;
   padding: 5px;
   resize: none;
+  background: #fff;
+  &:disabled{
+    opacity: 0.5;
+  }
 }
