@@ -7,7 +7,7 @@ import {CommunityEntity} from "../../../definitions/entity/Community";
 import {ThemeService} from "../../../../theme/service/ThemeService";
 
 @Component({
-    selector: 'cass-profile-card',
+    selector: 'cass-community-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
