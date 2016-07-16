@@ -13,10 +13,10 @@ class CreateCollectionRequest extends SchemaParams
         $data = $this->getData();
 
         return new CreateCollectionParameters(
-            $data->owner_sid,
-            $data->title,
-            $data->description,
-            $data->theme_ids ? $data->theme_ids : []
+            $data['owner_sid'],
+            $data['title'],
+            $data['description'],
+            $data['theme_ids'] ?? []
         );
     }
 

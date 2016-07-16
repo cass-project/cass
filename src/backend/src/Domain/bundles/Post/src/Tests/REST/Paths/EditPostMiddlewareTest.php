@@ -2,7 +2,6 @@
 namespace Domain\Post\Tests\REST\Paths;
 
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
 use Domain\Post\Tests\Fixtures\SamplePostsFixture;
 use Domain\Post\Tests\PostMiddlewareTest;
 

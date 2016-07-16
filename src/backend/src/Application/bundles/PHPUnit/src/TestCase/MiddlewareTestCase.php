@@ -7,6 +7,7 @@ use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\REST\Request\Params\SchemaParams;
 use Application\REST\Service\SchemaService;
 use Doctrine\ORM\EntityManager;
+use Domain\Auth\Service\CurrentAccountService;
 use MongoDB\Database;
 use phpDocumentor\Reflection\Types\Callable_;
 use PHPUnit_Framework_TestCase;
@@ -203,6 +204,10 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         /** @var Database $mongoDB */
         $mongoDB = $this->container()->get(Database::class);
         $mongoDB->drop();
+
+        /** @var CurrentAccountService $currentAccountService */
+        $currentAccountService = $this->container()->get(CurrentAccountService::class);
+        $currentAccountService->emptyToken();
     }
 
     /* =============== */

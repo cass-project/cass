@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection as DoctrineCollection;
 use Domain\Collection\Entity\Collection;
 use Domain\Feed\Service\Entity;
 use Domain\Post\PostType\PostType;
+use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\Profile\Entity\Profile;
 use Domain\Theme\Strategy\ThemeIdsEntityAware;
 use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
@@ -84,6 +85,9 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
             'collection_id' => $this->getCollection()->getId(),
             'content' => $this->getContent(),
             'theme_ids' => $this->getThemeIds(),
+            'attachment_ids' => array_map(function(PostAttachment $attachment) {
+                return $attachment->getId();
+            }, $this->attachments->toArray())
         ];
     }
 
@@ -136,5 +140,12 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
     public function getAttachments(): DoctrineCollection
     {
         return $this->attachments;
+    }
+
+    public function getAttachmentIds(): array
+    {
+        return array_map(function(PostAttachment $postAttachment) {
+            return $postAttachment->getId();
+        }, $this->getAttachments()->toArray());
     }
 }

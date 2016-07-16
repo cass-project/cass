@@ -50,7 +50,7 @@ class AuthMiddlewareTest extends MiddlewareTestCase
                             0 => [
                                 'id' => $this->expectId(),
                                 'sid' => $this->expectString(),
-                                'title' => 'Моя лента',
+                                'title' => $this->expectString(),
                                 'description' => $this->expectString()
                             ]
                         ]
@@ -119,7 +119,7 @@ class AuthMiddlewareTest extends MiddlewareTestCase
                             0 => [
                                 'id' => $this->expectId(),
                                 'sid' => $this->expectString(),
-                                'title' => 'Моя лента',
+                                'title' => $this->expectString(),
                                 'description' => $this->expectString(),
                             ]
                         ]

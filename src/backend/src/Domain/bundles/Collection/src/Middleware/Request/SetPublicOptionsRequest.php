@@ -13,9 +13,9 @@ final class SetPublicOptionsRequest extends SchemaParams
         $data = $this->getData();
 
         return new SetPublicOptionsParameters(
-            (bool) $data->is_private,
-            (bool) $data->public_enabled,
-            (bool) $data->moderation_contract
+            (bool) ($data['is_private'] ?? false),
+            (bool) ($data['public_enabled'] ?? false),
+            (bool) ($data['moderation_contract'] ?? false)
         );
     }
 

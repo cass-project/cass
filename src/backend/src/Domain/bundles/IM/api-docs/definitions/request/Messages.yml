@@ -1,0 +1,65 @@
+ProfileIM_Request_Messages:
+  description: Дополнительные критерии и опции выборки сообщений
+  required:
+    - criteria
+    - options
+  properties:
+    criteria:
+      description: Критерии выборки сообщений
+      type: object
+      schema:
+        required:
+          - seek
+        properties:
+          seek:
+            description: Ограничения по выборке
+            type: object
+            schema:
+              properties:
+                offset:
+                  type: number
+                  description: Offset
+                limit:
+                  type: number
+                  description: Limit
+          cursor:
+            description: Курсор, т.е. с какого ID начинать выборку. Корректно работает в связке с seek-критерием.
+            type: object
+            schema:
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  description: ID сообщения, с которого начать выборку.
+    options:
+      description: Опции выборки сообщений
+      type: object
+      schema:
+        properties:
+          includeTargetMessages:
+            type: object
+            description: Включить в ответ сообщения от получателя
+            schema:
+              required:
+                - enabled
+              properties:
+                enabled:
+                  description: Enabled?
+                  type: boolean
+          explicitDirection:
+            type: object
+            description: Включить в ответе в каждую MesasageEntity свойство "direction" со значениями "from", "to"
+            schema:
+              required:
+                - enabled
+              properties:
+                enabled:
+                  description: Enabled?
+                  type: boolean
+          markAsRead:
+            type: array
+            description: Отметить указанные ID сообщений как прочитанные
+            items:
+              type: number
+              description: ID сообщения, которое надо отметить как прочитанное

@@ -1,0 +1,60 @@
+"/protected/with-profile/{targetProfileId}/profile-im/messages/from/{sourceProfileId}/":
+  post:
+    tags:
+      - profile_im
+    description:
+      Получить сообщение от указанного источника, предзнаначенные для текущего аккаунта
+    parameters:
+      - in: path
+        name: targetProfileId
+        type: number
+        required: true
+        description: ID профиля-получателя сообщений
+      - in: path
+        name: sourceProfileId
+        type: number
+        required: true
+        description: ID профиля-источника сообщений
+      - name: body
+        in: body
+        required: true
+        description: JSON Body
+        schema:
+          $ref: '#/definitions/Profile_Request_Messages'
+    responses:
+      400:
+        description: Неправильный формат критериев и/или опций
+        schema:
+          $ref: '#/responses/error'
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      404:
+        description: Профиль не найден
+        schema:
+          $ref: '#/responses/NotFound'
+      200:
+        description: Сообщения
+        schema:
+          required:
+            - source_profile
+            - target_profile
+            - messages
+          properties:
+            source_profile:
+              description: Источник сообщений
+              schema:
+                $ref: '#/definitions/Profile_Entity_Profile'
+            target_profile:
+              description: Получатель сообщений
+              schema:
+                $ref: '#/definitions/Profile_Entity_Profile'
+            messages:
+              type: array
+              description: Сообщения
+              items:
+                type: object
+                description: |
+                  Сообщение, переданное с помощью ProfileIM
+                schema:
+                  $ref: '#/definitions/ProfileIM_Entity_ProfileMessage'

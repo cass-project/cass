@@ -158,7 +158,7 @@ class CreatePostMiddlewareTest extends PostMiddlewareTest
                 return $json['entity']['id'];
             })
         ;
-
+        
         $json = [
             "post_type" => DefaultPostType::CODE_INT,
             "profile_id" => $account->getCurrentProfile()->getId(),
@@ -187,18 +187,16 @@ class CreatePostMiddlewareTest extends PostMiddlewareTest
                     'content' => $json['content'],
                     'attachments' => [
                         0 => [
-                            'entity' => [
-                                'id' => $this->expectId(),
-                                'sid' => $this->expectString(),
-                                'date_created_on' => $this->expectString(),
-                                'is_attached_to_post' => 1,
-                                'post_id' => $this->expectId(),
-                                'attachment' => [
-                                    'source' => [
-                                        'source' => 'local',
-                                        'public_path' => $this->expectString(),
-                                        'storage_path' => $this->expectString(),
-                                    ]
+                            'id' => $this->expectId(),
+                            'sid' => $this->expectString(),
+                            'date_created_on' => $this->expectString(),
+                            'is_attached_to_post' => 1,
+                            'post_id' => $this->expectId(),
+                            'attachment' => [
+                                'source' => [
+                                    'source' => 'local',
+                                    'public_path' => $this->expectString(),
+                                    'storage_path' => $this->expectString(),
                                 ]
                             ]
                         ]

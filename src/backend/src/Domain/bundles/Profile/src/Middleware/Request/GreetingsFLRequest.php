@@ -9,7 +9,7 @@ class GreetingsFLRequest extends SchemaParams
 {
     public function getParameters()
     {
-        return (array) $this->getData();
+        return $this->getData();
     }
 
     protected function getSchema(): JSONSchema
