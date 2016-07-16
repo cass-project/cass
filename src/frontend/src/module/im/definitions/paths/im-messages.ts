@@ -14,12 +14,6 @@ export interface IMMessagesRequest
         }
     };
     options: {
-        includeTargetMessages?: {
-            enabled: boolean;
-        },
-        explicitDirection?: {
-            enabled: boolean;
-        },
         markAsRead?: number[];
     };
 }

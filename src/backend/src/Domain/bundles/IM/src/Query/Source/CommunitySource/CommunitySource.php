@@ -37,7 +37,7 @@ final class CommunitySource implements Source
         return sprintf('im_community_%s', $this->communityId);
     }
 
-    public function getCommunityId(): int
+    public function getSourceId(): int
     {
         return $this->communityId;
     }

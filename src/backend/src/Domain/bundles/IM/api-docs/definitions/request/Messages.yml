@@ -37,26 +37,6 @@ IM_Request_Messages:
       type: object
       schema:
         properties:
-          includeTargetMessages:
-            type: object
-            description: Включить в ответ сообщения от получателя
-            schema:
-              required:
-                - enabled
-              properties:
-                enabled:
-                  description: Enabled?
-                  type: boolean
-          explicitDirection:
-            type: object
-            description: Включить в ответе в каждую MesasageEntity свойство "direction" со значениями "from", "to"
-            schema:
-              required:
-                - enabled
-              properties:
-                enabled:
-                  description: Enabled?
-                  type: boolean
           markAsRead:
             type: array
             description: Отметить указанные ID сообщений как прочитанные

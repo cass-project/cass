@@ -2,6 +2,7 @@
 namespace Domain\IM\Query\Source\ProfileSource;
 
 use Domain\IM\Exception\Query\InvalidSourceParamsException;
+use Domain\IM\Query\Source\int;
 use Domain\IM\Query\Source\Source;
 
 final class ProfileSource implements Source
@@ -23,6 +24,11 @@ final class ProfileSource implements Source
     public static function getCode(): string
     {
         return self::SOURCE_CODE;
+    }
+
+    public function getSourceId(): integer
+    {
+        return $this->sourceProfileId;
     }
 
     public static function createFromParams(array $params): Source
