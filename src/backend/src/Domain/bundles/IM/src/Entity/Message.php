@@ -35,12 +35,13 @@ class Message implements JSONSerializable
 
     public function toJSON(): array
     {
-        return [
-            'author' => $this->author->toJSON(),
-            'content' => $this->content,
-            'attachment_ids' => $this->attachmentIds,
-            'date_created' => $this->dateCreated->format(\DateTime::RFC2822),
-        ];
+        $result = $this->toMongoBSON();
+
+        if($this->hasId()) {
+            $result['_id'] = (string) $this->getId();
+        }
+
+        return $result;
     }
 
     public function toMongoBSON(): array

@@ -17,6 +17,10 @@ final class ProfileSource implements Source
 
     public function __construct(int $sourceProfileId, int $targetProfileId)
     {
+        if($sourceProfileId <= 0 || $targetProfileId <= 0) {
+            throw new InvalidSourceParamsException('Invalid source/targer profile Id');
+        }
+
         $this->sourceProfileId = $sourceProfileId;
         $this->targetProfileId = $targetProfileId;
     }
@@ -30,19 +34,7 @@ final class ProfileSource implements Source
     {
         return $this->sourceProfileId;
     }
-
-    public static function createFromParams(array $params): Source
-    {
-        $sourceProfileId = $params['source_profile_id'] ?? 0;
-        $targetProfileId = $params['target_profile_id'] ?? 0;
-
-        if($sourceProfileId <= 0 || $targetProfileId <= 0) {
-            throw new InvalidSourceParamsException('Invalid source/targer profile Id');
-        }
-
-        return new self($sourceProfileId, $targetProfileId);
-    }
-
+    
     public function getMongoDBCollectionName(): string
     {
         return sprintf(

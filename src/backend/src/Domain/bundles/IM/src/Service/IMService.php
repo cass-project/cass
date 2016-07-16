@@ -2,7 +2,10 @@
 namespace Domain\ProfileIM\Service;
 
 use Domain\IM\Entity\Message;
+use Domain\IM\Exception\Query\UnknownSourceException;
 use Domain\IM\Query\Query;
+use Domain\IM\Query\Source\CommunitySource\CommunitySource;
+use Domain\IM\Query\Source\ProfileSource\ProfileSource;
 use Domain\IM\Query\Source\Source;
 use Domain\IM\Repository\IMRepository;
 use Domain\Profile\Entity\Profile;
@@ -18,13 +21,15 @@ final class IMService
         $this->imRepository = $imRepository;
     }
 
-    public function sendMessage(Source $source, Message $message, int $notificationTargetId): ObjectID
+    public function sendMessage(Source $source, Message $message): ObjectID
     {
         $insertedId = $this->imRepository->createMessage($source, $message);
 
-        if($this->shouldWeSendNotification($source, $notificationTargetId, $insertedId)) {
-            $this->imRepository->pushNotification($source, $notificationTargetId, $insertedId);
-        }
+        $message->specifyId($insertedId);
+
+        array_map(function(int $targetId) use ($source, $insertedId) {
+            $this->imRepository->pushNotification($source, $targetId, $insertedId);
+        }, $this->getNotificationTargetIds($source));
 
         return $insertedId;
     }
@@ -34,13 +39,19 @@ final class IMService
         return $this->imRepository->getMessages($source, $query, $target->getId());
     }
 
-    private function shouldWeSendNotification(Source $source, int $notificationTargetId, ObjectID $objectID): bool
-    {
-        return true;
-    }
-
     public function unreadMessages(int $targetId)
     {
         return $this->imRepository->getNotifications($targetId);
+    }
+
+    private function getNotificationTargetIds(Source $source): array
+    {
+        if($source instanceof ProfileSource) {
+            return [$source->getTargetProfileId()];
+        }else if($source instanceof CommunitySource) {
+            return [];
+        }else{
+            throw new UnknownSourceException(sprintf('No idea how to send notification for source `%s`', get_class($source)));
+        }
     }
 }

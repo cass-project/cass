@@ -21,17 +21,6 @@ final class CommunitySource implements Source
         return self::SOURCE_CODE;
     }
 
-    public static function createFromParams(array $params): Source
-    {
-        $communityId = $params['community_id'] ?? 0;
-
-        if($communityId <= 0) {
-            throw new InvalidSourceParamsException('Invaid community id');
-        }
-
-        return new self($communityId);
-    }
-
     public function getMongoDBCollectionName(): string
     {
         return sprintf('im_community_%s', $this->communityId);

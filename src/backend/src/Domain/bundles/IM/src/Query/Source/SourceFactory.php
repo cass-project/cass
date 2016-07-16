@@ -7,17 +7,17 @@ use Domain\IM\Query\Source\ProfileSource\ProfileSource;
 
 final class SourceFactory
 {
-    public function createSource(string $code, array $params): Source
+    public function createSource(string $code, int $sourceId, int $targetId): Source
     {
         switch($code) {
             default:
                 throw new UnknownSourceException(sprintf('Unknown source `%s`', $code));
 
             case ProfileSource::getCode():
-                return ProfileSource::createFromParams($params);
+                return new ProfileSource($sourceId, $targetId);
 
             case CommunitySource::getCode():
-                return CommunitySource::createFromParams($params);
+                return new CommunitySource($sourceId);
         }
     }
 }

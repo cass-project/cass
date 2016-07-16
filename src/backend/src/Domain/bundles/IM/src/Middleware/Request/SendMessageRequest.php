@@ -4,12 +4,15 @@ namespace Domain\IM\Middleware\Request;
 use Application\REST\Service\JSONSchema;
 use Application\REST\Request\Params\SchemaParams;
 use Domain\IM\IMBundle;
+use Domain\IM\Parameters\SendMessageParameters;
 
 class SendMessageRequest extends SchemaParams
 {
-    public function getParameters()
+    public function getParameters(): SendMessageParameters
     {
-        throw new \Exception('Not implemented');
+        $data = $this->getData();
+
+        return new SendMessageParameters($data['message'], $data['attachment_ids']);
     }
 
     protected function getSchema(): JSONSchema

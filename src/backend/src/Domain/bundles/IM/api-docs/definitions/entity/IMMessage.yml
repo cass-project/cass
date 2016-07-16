@@ -8,6 +8,7 @@ IM_Entity_IMMessage:
     - date_created
     - read_status
     - content
+    - attachments
   properties:
     id:
       type: number
@@ -24,3 +25,8 @@ IM_Entity_IMMessage:
     content:
       type: string
       description: Текст сообщения
+    attachments:
+      description: Приложение (аттачменты) к сообщению
+      type: array
+        items:
+          type: object
