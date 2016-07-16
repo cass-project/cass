@@ -2,10 +2,11 @@
 
 textarea {
   font-size: $FONT_SIZE_NORMAL;
-  padding: 5px;
+  padding: 6px;
   resize: none;
   background: #fff;
-  &:disabled{
+  
+  &:disabled {
     opacity: 0.5;
   }
 }
