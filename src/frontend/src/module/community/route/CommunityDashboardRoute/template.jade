@@ -1,6 +1,6 @@
 article.component.component-profile-dashboard-route
-  div(*ngIf="service.isProfileLoaded()")
+  div(*ngIf="service.isCommunityLoaded()")
     .welcome-cards
-      cass-profile-cards-list([profile]="service.getProfile()")
+      cass-community-cards-list([community]="service.getCommunity()")
     .posts
       cass-feed-post-stream
