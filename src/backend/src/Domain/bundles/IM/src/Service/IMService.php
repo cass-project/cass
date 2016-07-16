@@ -1,24 +1,46 @@
 <?php
 namespace Domain\ProfileIM\Service;
 
-use Application\Exception\NotImplementedException;
-use Domain\IM\Parameters\MessagesParameters;
-use Domain\IM\Parameters\SendMessageParameters;
+use Domain\IM\Entity\Message;
+use Domain\IM\Query\Query;
+use Domain\IM\Query\Source\Source;
+use Domain\IM\Repository\IMRepository;
+use Domain\Profile\Entity\Profile;
+use MongoDB\BSON\ObjectID;
 
 final class IMService
 {
-    public function sendMessage(SendMessageParameters $parameters)
+    /** @var IMRepository */
+    private $imRepository;
+
+    public function __construct(IMRepository $imRepository)
     {
-        throw new NotImplementedException;
+        $this->imRepository = $imRepository;
     }
 
-    public function getMessages(MessagesParameters $parameters)
+    public function sendMessage(Source $source, Message $message, int $notificationTargetId): ObjectID
     {
-        throw new NotImplementedException;
+        $insertedId = $this->imRepository->createMessage($source, $message);
+
+        if($this->shouldWeSendNotification($source, $notificationTargetId, $insertedId)) {
+            $this->imRepository->pushNotification($source, $notificationTargetId, $insertedId);
+        }
+
+        return $insertedId;
     }
 
-    public function unreadMessages(MessagesParameters $parameters)
+    public function getMessages(Source $source, Query $query, Profile $target)
     {
-        throw new NotImplementedException;
+        return $this->imRepository->getMessages($source, $query, $target->getId());
+    }
+
+    private function shouldWeSendNotification(Source $source, int $notificationTargetId, ObjectID $objectID): bool
+    {
+        return true;
+    }
+
+    public function unreadMessages(int $targetId)
+    {
+        return $this->imRepository->getNotifications($targetId);
     }
 }

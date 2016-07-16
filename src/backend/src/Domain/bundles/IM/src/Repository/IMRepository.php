@@ -3,11 +3,13 @@ namespace Domain\IM\Repository;
 
 use Domain\IM\Entity\Message;
 use Domain\IM\Entity\MessageReadStatus;
+use Domain\IM\Exception\Query\Options\MarkAsReadOption\MarkAsReadOption;
 use Domain\IM\Query\Criteria\CursorCriteria\CursorCriteria;
 use Domain\IM\Query\Criteria\SeekCriteria\SeekCriteria;
 use Domain\IM\Query\Criteria\SortCriteria\SortCriteria;
 use Domain\IM\Query\Query;
 use Domain\IM\Query\Source\Source;
+use Domain\Profile\Entity\Profile;
 use MongoDB\BSON\ObjectID;
 
 class IMRepository
@@ -32,7 +34,7 @@ class IMRepository
         return $insertedId;
     }
 
-    public function getMessages(Source $source, Query $query)
+    public function getMessages(Source $source, Query $query, int $targetId)
     {
         $criteria = [];
         $options = [];
@@ -55,6 +57,10 @@ class IMRepository
         $query->getCriteria()->doWith(SortCriteria::class, function(SortCriteria $sortCriteria) use ($options) {
             $options['sort'] = [];
             $options['sort'][$sortCriteria->getField()] = strtolower($sortCriteria->getOrder()) === 'asc' ? 1 : -1;
+        });
+
+        $query->getOptions()->doWith(MarkAsReadOption::class, function(MarkAsReadOption $option) use ($source, $targetId) {
+            $this->cleanNotifications($source->getSourceId(), $targetId, $option->getMessageIds());
         });
 
         $cursor = $collection->find($criteria, $options);
