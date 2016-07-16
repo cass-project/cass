@@ -8,7 +8,7 @@ import {CommunityEntity} from "../../../definitions/entity/Community";
 var moment = require('moment');
 
 @Component({
-    selector: 'cass-profile-card-header',
+    selector: 'cass-community-card-header',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
