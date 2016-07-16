@@ -1,10 +1,10 @@
 import {Component, Input} from "angular2/core";
 
 import {CommunityComponent} from "../../../index";
-import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
+import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
 
 @Component({
-    selector: 'cass-profile-menu',
+    selector: 'cass-community-menu',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
@@ -15,5 +15,5 @@ import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
 })
 export class ProfileMenuComponent
 {
-    @Input('community') community: ProfileExtendedEntity;
+    @Input('community') community: CommunityExtendedEntity;
 }
