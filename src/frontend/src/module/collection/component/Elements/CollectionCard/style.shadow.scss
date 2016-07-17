@@ -5,10 +5,16 @@ article.component-collection-card {
     @include card(1);
     width: 256px;
     height: 430px;
-    display: inline-block;
     background-color: white;
     cursor: pointer;
     transition: all 0.1s;
+
+    .flex-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
 
     &:hover {
       .collection-image {
@@ -30,7 +36,7 @@ article.component-collection-card {
 
   .collection-about {
     padding: 20px 13px;
-    height: 140px;
+    height: 80px;
     overflow: hidden;
 
     h1 {
@@ -44,6 +50,17 @@ article.component-collection-card {
     p {
       display: block;
       color: material-color("grey", "700");
+    }
+  }
+
+  footer.theme {
+    padding: 15px;
+
+    span.theme {
+      font-family: $FONT_FAMILY;
+      font-size: 14px;
+      font-weight: 400;
+      color: material-color("grey", "500");
     }
   }
 }

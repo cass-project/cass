@@ -78,7 +78,7 @@ final class PostStream extends Stream
 
         $result = $collection->find($filter, $options)->toArray();
         
-        $this->postService->getPostsByIds(array_map(function(BSONDocument $document) {
+        $this->postService->loadPostsByIds(array_map(function(BSONDocument $document) {
             return (int) $document['id'];
         }, $result));
 

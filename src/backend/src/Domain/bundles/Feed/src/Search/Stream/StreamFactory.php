@@ -78,6 +78,7 @@ final class StreamFactory
             PublicCollectionsSource::class
         ])) {
             $stream = new CollectionStream($source);
+            $stream->setCollectionService($this->collectionService);
 
             return $stream;
         }else if(in_array($sourceName, [

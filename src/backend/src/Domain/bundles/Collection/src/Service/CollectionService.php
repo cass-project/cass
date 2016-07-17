@@ -150,4 +150,9 @@ class CollectionService implements EventEmitterAwareService
     {
         return $this->collectionRepository->getCollectionsById($collectionIds);
     }
+
+    public function loadCollectionsByIds(array $collectionIds)
+    {
+        $this->collectionRepository->getCollectionsById($collectionIds);
+    }
 }

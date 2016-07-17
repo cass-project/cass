@@ -1,7 +1,12 @@
 article.component.component-collection-card
   .card((click)="click()")
-    .collection-image
-      .image-container([ngStyle]="{'background-image': getImageURL() }")
-    .collection-about
-      h1 {{ entity.title }}
-      p {{ entity.description }}
+    .flex-container
+      .top-section
+        .collection-image
+          .image-container([ngStyle]="{'background-image': getImageURL() }")
+        .collection-about
+          h1 {{ entity.title }}
+          p {{ entity.description }}
+      .bottom-section
+        footer.theme(*ngIf="hasTheme()")
+          span.theme {{ getThemeTitle() }}
