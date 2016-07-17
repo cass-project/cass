@@ -1,6 +1,8 @@
 @import "./../../../../../styles/globals";
 
 article.component.component-post-attachment-link-page {
+  word-break: break-all;
+
   .image-container {
     text-align: center;
     background-color: material-color("grey", "100");

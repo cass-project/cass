@@ -7,11 +7,31 @@ import {Stream} from "./stream";
 @Injectable()
 export class FeedService<T>
 {
+    static DEFAULT_PAGE_SIZE = 30;
+
     private status: LoadingStatus[] = [];
 
     public source: Source;
-    public criteria: CriteriaManager = new CriteriaManager();
+    public criteria: CriteriaManager;
     public stream: Stream<T>;
+
+    constructor() {
+        this.criteria = new CriteriaManager();
+        this.criteria.attach({
+            code: 'sort',
+            params: {
+                'field': '_id',
+                'order': 'desc'
+            }
+        });
+
+        this.criteria.attach({
+            code: 'seek',
+            params: {
+                'limit': FeedService.DEFAULT_PAGE_SIZE
+            }
+        });
+    }
 
     public provide(source: Source, stream: Stream<T>) {
         this.source = source;

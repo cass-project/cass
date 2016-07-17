@@ -99,6 +99,11 @@ class PostService implements EventEmitterAwareService
     {
         return $this->postRepository->getPostsByIds($postIds);
     }
+
+    public function loadPostsByIds(array $postIds)
+    {
+        $this->postRepository->getPostsByIds($postIds);
+    }
     
     private function createPostFromParameters(CreatePostParameters $createPostParameters): Post
     {

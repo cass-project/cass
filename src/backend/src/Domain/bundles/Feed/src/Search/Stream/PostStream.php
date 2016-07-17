@@ -31,35 +31,48 @@ final class PostStream extends Stream
 
     public function fetch(CriteriaManager $criteriaManager, Collection $collection): array
     {
+        $order = 1;
         $filter = [];
         $options = [
             'limit' => self::DEFAULT_LIMIT,
         ];
 
-        $criteriaManager->doWith(SeekCriteria::class, function(SeekCriteria $criteria) use (&$options) {
+        $criteriaManager->doWith(SortCriteria::class, function(SortCriteria $criteria) use (&$options, &$order) {
+            $order = strtolower($criteria->getOrder()) === 'asc' ? 1 : -1;
+
+            $options['sort'] = [];
+            $options['sort'][$criteria->getField()] = $order;
+        });
+
+        $criteriaManager->doWith(SeekCriteria::class, function(SeekCriteria $criteria) use (&$options, &$filter, $order) {
             $options['limit'] = $criteria->getLimit();
+            $options['skip'] = 0;
 
             if($criteria->getLastId()) {
                 $lastId = new ObjectID($criteria->getLastId());
-                $filter['_id'] = [
-                    '$gt' => $lastId
-                ];
+
+                if($order === 1) {
+                    $filter['_id'] = [
+                        '$gt' => $lastId
+                    ];
+                }else{
+                    $filter['_id'] = [
+                        '$lt' => $lastId
+                    ];
+                }
             }
         });
 
-        $criteriaManager->doWith(SortCriteria::class, function(SortCriteria $criteria) use (&$options) {
-            $options['sort'] = [];
-            $options['sort'][$criteria->getField()] = strtolower($criteria->getOrder()) === 'asc' ? 1 : -1;
-        });
-
-        $cursor = $collection->find($filter, $options);
+        $result = $collection->find($filter, $options)->toArray();
         
-        $postEntities = $this->postService->getPostsByIds(array_map(function(BSONDocument $document) {
+        $this->postService->getPostsByIds(array_map(function(BSONDocument $document) {
             return (int) $document['id'];
-        }, $cursor->toArray()));
+        }, $result));
 
-        return array_map(function(Post $post) {
-            return $this->postFormatter->format($post);
-        }, $postEntities);
+        return  array_map(function(BSONDocument $document) {
+            return $this->postFormatter->format(
+                $this->postService->getPostById((int) $document['id'])
+            );
+        }, $result);
     }
 }
