@@ -4,7 +4,6 @@
 @import "./components/forms/index";
 @import "./components/tab-modal/index";
 @import "./components/global-warning/index";
-@import "./components/dev-stages/index";
 
 html {
   @include disable-text-select;

@@ -1,8 +1,19 @@
+/* @ MOBILE-FIRST */
+
+@import "./../../styles/globals";
+
 article.component.component-public {
-  display: flex;
-  position: absolute;
-  top: 0; height: 100%;
-  left: 0; width: 100%;
+  padding: 15px;
+}
+
+@include mt-desktop {
+  article.component.component-public {
+    padding: 0;
+    display: flex;
+    position: absolute;
+    top: 0; height: 100%;
+    left: 0; width: 100%;
+  }
 
   .theme-panel {
     position: relative;

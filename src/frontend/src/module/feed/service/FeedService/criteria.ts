@@ -17,6 +17,12 @@ export class CriteriaManager
             delete this.criteria[criteria.code];
         }
     }
+    
+    detachByCode(code: string) {
+        if(this.has(code)) {
+            delete this.criteria[code];
+        }
+    }
 
     getByCode(code: string): Criteria<any> {
         if(this.criteria[code]) {
