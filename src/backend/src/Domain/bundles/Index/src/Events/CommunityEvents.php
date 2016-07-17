@@ -14,6 +14,12 @@ final class CommunityEvents implements EventsBootstrapInterface
 
     /** @var CommunityService */
     private $communityService;
+    
+    public function __construct(IndexService $indexService, CommunityService $communityService)
+    {
+        $this->indexService = $indexService;
+        $this->communityService = $communityService;
+    }
 
     public function up(EventEmitterInterface $globalEmitter)
     {
