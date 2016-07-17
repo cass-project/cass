@@ -78,18 +78,6 @@ class PostService implements EventEmitterAwareService
         return $post;
     }
 
-    public function attachToPost(Post $post, PostAttachment $attachment)
-    {
-        $post->getAttachments()->add($attachment);
-        $this->postRepository->savePost($post);
-    }
-
-    public function detachToPost(Post $post, PostAttachment $attachment)
-    {
-        $post->getAttachments()->removeElement($attachment);
-        $this->postRepository->savePost($post);
-    }
-
     public function getPostById(int $postId): Post
     {
         return $this->postRepository->getPost($postId);
@@ -112,6 +100,7 @@ class PostService implements EventEmitterAwareService
         $profile = $this->profileService->getProfileById($createPostParameters->getProfileId());
 
         $post = new Post($postType, $profile, $collection, $createPostParameters->getContent());
+        $post->setAttachmentIds($createPostParameters->getAttachmentIds());
         $post->setThemeIds($collection->getThemeIds());
 
         $this->postRepository->createPost($post);

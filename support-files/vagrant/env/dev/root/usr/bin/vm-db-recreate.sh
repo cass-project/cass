@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-mongo cass --eval "db.dropDatabase()"
+mongo cass_development --eval "db.dropDatabase()"
 mongo cass_testing --eval "db.dropDatabase()"
 
 mysql  -uroot -p"1234" -e "DROP DATABASE cass"

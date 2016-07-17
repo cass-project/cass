@@ -16,6 +16,11 @@ final class ContentTypeIdentifier
     /** @var PostAttachmentService */
     private $attachmentService;
 
+    public function __construct(PostAttachmentService $attachmentService)
+    {
+        $this->attachmentService = $attachmentService;
+    }
+
     public function detectContentType(ContentTypeIdentifierEntity $entity): string
     {
         return $entity->getContentType();
@@ -25,8 +30,8 @@ final class ContentTypeIdentifier
     {
         if(count($post->getAttachmentIds())) {
             $attachment = $this->attachmentService->getPostAttachmentById($post->getAttachmentIds()[0]);
-
-            switch($resource = $attachment['resource']) {
+            
+            switch($resource = $attachment->getAttachment()['resource']) {
                 default:
                     throw new \Exception(sprintf('Unknown resource `%s`', $resource));
 

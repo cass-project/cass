@@ -28,21 +28,23 @@ final class PostEvents implements EventsBootstrapInterface
         $ps = $this->postService;
         $as = $this->attachmentService;
 
-        $ps->getEventEmitter()->on(PostService::EVENT_CREATE, function(Post $post, CreatePostParameters $parameters) use ($as, $ps) {
-            array_map(function(int $postAttachmentId) use ($post, $as, $ps) {
-                $postAttachment = $as->attach(
-                    $post,
-                    $as->getPostAttachmentById($postAttachmentId)
-                );
-
-                $ps->attachToPost($post, $postAttachment);
-            }, $parameters->getAttachmentIds());
+        $ps->getEventEmitter()->on(PostService::EVENT_CREATE, function(Post $post) use ($as, $ps) {
+            if($post->hasAttachments()) {
+                array_map(function(int $postAttachmentId) use ($post, $as, $ps) {
+                    $as->attach(
+                        $post,
+                        $as->getPostAttachmentById($postAttachmentId)
+                    );
+                }, $post->getAttachmentIds());
+            }
         });
         
         $ps->getEventEmitter()->on(PostService::EVENT_DELETE, function(Post $post) use ($as) {
-            array_map(function(PostAttachment $postAttachment) use ($as) {
-                $as->destroy($postAttachment);
-            }, $post->getAttachments()->toArray());
+            if($post->hasAttachments()) {
+                array_map(function(PostAttachment $postAttachment) use ($as) {
+                    $as->destroy($postAttachment);
+                }, $this->attachmentService->getAttachmentsByIds($post->getAttachmentIds()));
+            }
         });
     }
 }

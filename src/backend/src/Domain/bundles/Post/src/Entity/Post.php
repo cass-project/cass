@@ -4,10 +4,7 @@ namespace Domain\Post\Entity;
 use Application\Util\Entity\IdEntity\IdEntity;
 use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection as DoctrineCollection;
 use Domain\Collection\Entity\Collection;
-use Domain\IM\Service\ContentTypeIdentifier\ContentTypeIdentifierEntity;
 use Domain\Index\Entity\IndexedEntity;
 use Domain\Index\Service\ThemeWeightCalculator\ThemeWeightEntity;
 use Domain\Post\PostType\PostType;
@@ -58,10 +55,10 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEn
     private $content;
 
     /**
-     * @OneToMany(targetEntity="Domain\PostAttachment\Entity\PostAttachment", mappedBy="post", cascade={"all"})
-     * @var DoctrineCollection
+     * @Column(name="attachment_ids", type="json_array")
+     * @var int[]
      */
-    private $attachments;
+    private $attachmentIds = [];
 
     public function __construct(
         PostType $postType,
@@ -74,7 +71,6 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEn
         $this->collection = $collection;
         $this->content = $content;
         $this->dateCreatedOn = new \DateTime();
-        $this->attachments = new ArrayCollection();
     }
 
     public function toJSON(): array
@@ -87,9 +83,7 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEn
             'collection_id' => $this->getCollection()->getId(),
             'content' => $this->getContent(),
             'theme_ids' => $this->getThemeIds(),
-            'attachment_ids' => array_map(function(PostAttachment $attachment) {
-                return $attachment->getId();
-            }, $this->attachments->toArray())
+            'attachment_ids' => $this->getAttachmentIds(),
         ];
     }
 
@@ -139,15 +133,22 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEn
         return $this;
     }
 
-    public function getAttachments(): DoctrineCollection
+    public function hasAttachments(): bool
     {
-        return $this->attachments;
+        return count($this->attachmentIds) > 0;
     }
 
     public function getAttachmentIds(): array
     {
-        return array_map(function(PostAttachment $postAttachment) {
-            return $postAttachment->getId();
-        }, $this->getAttachments()->toArray());
+        return $this->attachmentIds;
+    }
+
+    public function setAttachmentIds(array $attachmentIds): self
+    {
+        $this->attachmentIds = array_filter($attachmentIds, function($input) {
+            return is_int($input);
+        });
+
+        return $this;
     }
 }
