@@ -106,20 +106,28 @@ class PostAttachmentService
         $this->postAttachmentRepository->assignAttachmentsToPost($post, $attachmentIds);
     }
 
-    public function addAttachment(Post $post, PostAttachment $attachment): PostAttachment
+    public function attach(Post $post, PostAttachment $attachment): PostAttachment
     {
         $attachment->attachToPost($post);
-
-        $post->getAttachments()->add($attachment);
 
         $this->postAttachmentRepository->savePostAttachment($attachment);
 
         return $attachment;
     }
 
-    public function getPostAttachmentById(int $postAttachmentId)
+    public function destroy(PostAttachment $postAttachment)
+    {
+        $this->postAttachmentRepository->deletePostAttachments([$postAttachment]);
+    }
+
+    public function getPostAttachmentById(int $postAttachmentId): PostAttachment
     {
         return $this->postAttachmentRepository->getPostAttachmentById($postAttachmentId);
+    }
+    
+    public function getAttachmentsByIds(array $attachmentIds): array
+    {
+        return $this->postAttachmentRepository->getAttachmentByIds($attachmentIds);
     }
 
     public function getAttachmentsOfPost(int $postId): array
@@ -139,11 +147,6 @@ class PostAttachmentService
         } else {
             return new GenericFileAttachmentType();
         }
-    }
-
-    private function factoryLinkAttachmentType(string $url, array $metadata): AttachmentType
-    {
-        return new GenericLinkAttachmentType();
     }
 
     private function validateFileSize(string $tmpFile, FileAttachmentType $attachmentType)

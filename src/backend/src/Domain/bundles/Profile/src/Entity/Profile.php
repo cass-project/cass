@@ -12,8 +12,8 @@ use Domain\Avatar\Entity\ImageEntityTrait;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
 use Domain\Collection\Strategy\CollectionAwareEntity;
-use Domain\Collection\Strategy\Traits\CollectionAwareEntityTrait;
-use Domain\Feed\Service\Entity;
+use Domain\Collection\Strategy\Traits\CollectionAwareEntityTrait;;
+use Domain\Index\Entity\IndexedEntity;
 use Domain\Profile\Entity\Profile\Gender\Gender;
 use Domain\Profile\Entity\Profile\Gender\GenderNotSpecified;
 use Domain\Profile\Entity\Profile\Greetings\Greetings;
@@ -23,7 +23,7 @@ use Domain\Profile\Entity\Profile\Greetings\GreetingsAnonymous;
  * @Entity(repositoryClass="Domain\Profile\Repository\ProfileRepository")
  * @Table(name="profile")
  */
-class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, CollectionAwareEntity, Entity
+class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, CollectionAwareEntity, IndexedEntity
 {
     use IdTrait;
     use SIDEntityTrait;
@@ -35,6 +35,12 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
      * @JoinColumn(name="account_id", referencedColumnName="id")
      */
     private $account;
+
+    /**
+     * @Column(type="datetime", name="date_created_on")
+     * @var \DateTime
+     */
+    private $dateCreatedOn;
 
     /**
      * @Column(type="boolean", name="is_initialized")
@@ -81,6 +87,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
                 ? $this->getAccount()->getId()
                 : '#NEW_ACCOUNT'
             ,
+            'date_created_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),
             'is_current' => (bool)$this->isCurrent(),
             'is_initialized' => $this->isInitialized(),
             'greetings' => $this->getGreetings()->toJSON(),
@@ -94,9 +101,11 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
         return $result;
     }
 
-    public function toIndexedJSON(): array
+    public function toIndexedEntityJSON(): array
     {
-        return $this->toJSON();
+        return array_merge($this->toJSON(), [
+            'date_created_on' => $this->getDateCreatedOn(),
+        ]);
     }
 
     public function __construct(Account $account)
@@ -105,11 +114,16 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
         $this->collections = new ImmutableCollectionTree();
         $this->greetings = new GreetingsAnonymous();
         $this->gender = (new GenderNotSpecified())->getIntCode();
+        $this->dateCreatedOn = new \DateTime();
 
         $this->regenerateSID();
         $this->setImages(new ImageCollection());
     }
 
+    public function getDateCreatedOn(): \DateTime
+    {
+        return $this->dateCreatedOn;
+    }
 
     public function getAccount(): Account
     {

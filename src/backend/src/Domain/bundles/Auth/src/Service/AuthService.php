@@ -60,7 +60,11 @@ class AuthService
             new HasSameAccount($this->accountService)
         ]);
 
-        return $this->accountService->createAccount($email, $password);
+        $account = $this->accountService->createAccount($email, $password);
+
+        $this->auth($account);
+
+        return $account;
     }
 
     public function signIn(SignInParameters $parameters) : Account

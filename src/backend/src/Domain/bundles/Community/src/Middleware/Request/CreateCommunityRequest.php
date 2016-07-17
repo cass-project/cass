@@ -13,9 +13,9 @@ class CreateCommunityRequest extends SchemaParams
         $data = $this->getData();
 
         return new CreateCommunityParameters(
-            $data->title,
-            $data->description,
-            isset($data->theme_id) ? (int) $data->theme_id : null
+            $data['title'],
+            $data['description'],
+            $data['theme_id'] ?? null
         );
     }
 

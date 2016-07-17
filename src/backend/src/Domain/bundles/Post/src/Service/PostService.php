@@ -7,12 +7,9 @@ use Domain\Collection\Service\CollectionService;
 use Domain\Post\Entity\Post;
 use Domain\Post\Parameters\CreatePostParameters;
 use Domain\Post\Parameters\EditPostParameters;
-use Domain\Post\Parameters\LinkParameters;
 use Domain\Post\PostType\PostTypeFactory;
 use Domain\Post\Repository\PostRepository;
 use Domain\PostAttachment\Entity\PostAttachment;
-use Domain\PostAttachment\Entity\PostAttachment\LinkAttachmentType;
-use Domain\PostAttachment\Service\PostAttachmentService;
 use Domain\Profile\Service\ProfileService;
 
 class PostService implements EventEmitterAwareService
@@ -23,9 +20,6 @@ class PostService implements EventEmitterAwareService
     const EVENT_UPDATE = 'domain.post.update';
     const EVENT_DELETE = 'domain.post.delete';
     const EVENT_DELETED = 'domain.post.deleted';
-
-    /** @var PostAttachmentService */
-    private $postAttachmentService;
 
     /** @var PostRepository */
     private $postRepository;
@@ -40,13 +34,11 @@ class PostService implements EventEmitterAwareService
     private $collectionService;
 
     public function __construct(
-        PostAttachmentService $postAttachmentService,
         PostRepository $postRepository,
         PostTypeFactory $postTypeFactory,
         ProfileService $profileService,
         CollectionService $collectionService
     ) {
-        $this->postAttachmentService = $postAttachmentService;
         $this->postRepository = $postRepository;
         $this->postTypeFactory = $postTypeFactory;
         $this->profileService = $profileService;
@@ -57,9 +49,7 @@ class PostService implements EventEmitterAwareService
     {
         $post = $this->createPostFromParameters($createPostParameters);
 
-        $this->postRepository->savePost($post);
-
-        $this->getEventEmitter()->emit(self::EVENT_CREATE, [$post]);
+        $this->getEventEmitter()->emit(self::EVENT_CREATE, [$post, $createPostParameters]);
 
         return $post;
     }
@@ -75,11 +65,29 @@ class PostService implements EventEmitterAwareService
         return $post;
     }
 
-    public function deletePost(int $postId)
+    public function deletePost(int $postId): Post
     {
+        $post = $this->getPostById($postId);
+
+        $this->getEventEmitter()->emit(self::EVENT_DELETE, [$post]);
         $this->postRepository->deletePost(
             $this->getPostById($postId)
         );
+        $this->getEventEmitter()->emit(self::EVENT_DELETED, [$post]);
+
+        return $post;
+    }
+
+    public function attachToPost(Post $post, PostAttachment $attachment)
+    {
+        $post->getAttachments()->add($attachment);
+        $this->postRepository->savePost($post);
+    }
+
+    public function detachToPost(Post $post, PostAttachment $attachment)
+    {
+        $post->getAttachments()->removeElement($attachment);
+        $this->postRepository->savePost($post);
     }
 
     public function getPostById(int $postId): Post
@@ -101,13 +109,6 @@ class PostService implements EventEmitterAwareService
         $post = new Post($postType, $profile, $collection, $createPostParameters->getContent());
 
         $this->postRepository->createPost($post);
-
-        array_map(function(int $postAttachmentId) use ($post) {
-            $this->postAttachmentService->addAttachment(
-                $post,
-                $this->postAttachmentService->getPostAttachmentById($postAttachmentId)
-            );
-        }, $createPostParameters->getAttachmentIds());
 
         return $post;
     }

@@ -26,6 +26,4 @@
               type: boolean
               description: '=true'
             entity:
-              $ref: '#/definitions/Community_Entity_Community'
-            access:
-              $ref: '#/definitions/Community_Definitions_CommunityAccess'
+              $ref: '#/definitions/Community_Entity_CommunityExtended'

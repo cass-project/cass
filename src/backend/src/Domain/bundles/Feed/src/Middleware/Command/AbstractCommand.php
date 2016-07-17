@@ -6,7 +6,6 @@ use Domain\Feed\Factory\FeedSourceFactory;
 use Domain\Feed\Middleware\Request\FeedMiddlewareRequest;
 use Domain\Feed\Request\FeedRequest;
 use Domain\Feed\Search\Criteria\CriteriaFactory;
-use Domain\Feed\Service\Entity;
 use Domain\Feed\Service\FeedService;
 use Domain\Feed\Source\Source;
 use Psr\Http\Message\ServerRequestInterface;

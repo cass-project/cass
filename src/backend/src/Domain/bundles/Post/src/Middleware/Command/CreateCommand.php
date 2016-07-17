@@ -17,7 +17,7 @@ class CreateCommand extends Command
             $createPostParameters = (new CreatePostRequest($request))->getParameters();
 
             $post = $this->postService->createPost($createPostParameters);
-            
+
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson([

@@ -5,6 +5,7 @@ use Doctrine\ORM\EntityRepository;
 use Domain\Post\Entity\Post;
 use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\PostAttachment\Exception\PostAttachmentFactoryException;
+use Domain\PostAttachment\Exception\PostAttachmentNotFoundException;
 
 class PostAttachmentRepository extends EntityRepository
 {
@@ -68,6 +69,20 @@ class PostAttachmentRepository extends EntityRepository
         
         if($result === null) {
             throw new PostAttachmentFactoryException(sprintf('Post attachment with ID `%s` not found', $postAttachmentId));
+        }
+
+        return $result;
+    }
+
+    public function getAttachmentByIds(array $ids): array
+    {
+        /** @var PostAttachment[] $result */
+        $result = $this->findBy(['id' => array_filter($ids, function($input) {
+            return is_int($input);
+        })]);
+
+        if(count($result) !== count($ids)) {
+            throw new PostAttachmentNotFoundException(sprintf('Some of PostAttachment(ids: `%s`) not found', json_encode($ids)));
         }
 
         return $result;

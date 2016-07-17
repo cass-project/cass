@@ -5,6 +5,7 @@ Collection_Entity_Collection:
     - id
     - owner_sid
     - owner
+    - date_created_on
     - title
     - description
     - theme_ids
@@ -36,6 +37,9 @@ Collection_Entity_Collection:
           type:
             type: string
             description: Тип владельца ("community", "profile")
+    date_created_on:
+      type: string
+      description: Дата создания коллекции
     title:
       type: string
       description: Название (заголовок) коллекции

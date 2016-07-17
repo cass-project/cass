@@ -7,8 +7,11 @@ use Application\Util\JSONSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection as DoctrineCollection;
 use Domain\Collection\Entity\Collection;
-use Domain\Feed\Service\Entity;
+use Domain\IM\Service\ContentTypeIdentifier\ContentTypeIdentifierEntity;
+use Domain\Index\Entity\IndexedEntity;
+use Domain\Index\Service\ThemeWeightCalculator\ThemeWeightEntity;
 use Domain\Post\PostType\PostType;
+use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\Profile\Entity\Profile;
 use Domain\Theme\Strategy\ThemeIdsEntityAware;
 use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
@@ -17,7 +20,7 @@ use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  * @Entity(repositoryClass="Domain\Post\Repository\PostRepository")
  * @Table(name="post")
  */
-class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
+class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEntity, ThemeWeightEntity
 {
     use IdTrait;
     use ThemeIdsAwareEntityTrait;
@@ -84,10 +87,13 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
             'collection_id' => $this->getCollection()->getId(),
             'content' => $this->getContent(),
             'theme_ids' => $this->getThemeIds(),
+            'attachment_ids' => array_map(function(PostAttachment $attachment) {
+                return $attachment->getId();
+            }, $this->attachments->toArray())
         ];
     }
 
-    public function toIndexedJSON(): array
+    public function toIndexedEntityJSON(): array
     {
         return array_merge($this->toJSON(), [
             'date_created_on' => $this->getDateCreatedOn()
@@ -136,5 +142,12 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
     public function getAttachments(): DoctrineCollection
     {
         return $this->attachments;
+    }
+
+    public function getAttachmentIds(): array
+    {
+        return array_map(function(PostAttachment $postAttachment) {
+            return $postAttachment->getId();
+        }, $this->getAttachments()->toArray());
     }
 }

@@ -14,7 +14,7 @@ final class EditCommand extends Command
         $community = $this->communityService->editCommunity($request->getAttribute('communityId'), $editCommunityRequest->getParameters());
 
         return $responseBuilder->setStatusSuccess()->setJson([
-            'entity' => $community->toJSON()
+            'entity' => $this->communityFormatter->format($community),
         ])->build();
     }
 }

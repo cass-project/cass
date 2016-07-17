@@ -16,7 +16,7 @@ final class DeleteCommunityCollectionTest extends CollectionRESTTestCase
 
         $collectionToDelete = SampleCollectionsFixture::getCommunityCollection(1);
         $collectionId = $collectionToDelete->getId();
-        list($owner, $communityId) = explode(':', $collectionToDelete->getOwnerSID());
+        list(, $communityId) = explode(':', $collectionToDelete->getOwnerSID());
 
         $this->requestGetCommunity($communityId)
             ->execute()
@@ -25,7 +25,7 @@ final class DeleteCommunityCollectionTest extends CollectionRESTTestCase
             ->expect(function(array $jsonResponse) use ($collectionId) {
                 $collectionIds = array_map(function(array $input) {
                     return $input['collection_id'];
-                }, $jsonResponse['entity']['collections']);
+                }, $jsonResponse['entity']['community']['collections']);
 
                 $this->assertTrue(in_array($collectionId, $collectionIds));
             });
@@ -46,7 +46,7 @@ final class DeleteCommunityCollectionTest extends CollectionRESTTestCase
             ->expect(function(array $jsonResponse) use ($collectionId) {
                 $collectionIds = array_map(function(array $input) {
                     return $input['collection_id'];
-                }, $jsonResponse['entity']['collections']);
+                }, $jsonResponse['entity']['community']['collections']);
 
                 $this->assertFalse(in_array($collectionId, $collectionIds));
             });

@@ -49,6 +49,6 @@ final class PostFormatter
     {
         return array_map(function(PostAttachment $postAttachment) {
             return $this->postAttachmentFormatter->format($postAttachment);
-        }, $this->postAttachmentService->getAttachmentsOfPost($post->getId()));
+        }, $this->postAttachmentService->getAttachmentsByIds($post->getAttachmentIds()));
     }
 }

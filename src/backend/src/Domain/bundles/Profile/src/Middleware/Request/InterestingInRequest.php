@@ -10,7 +10,7 @@ class InterestingInRequest extends SchemaParams
 {
     public function getParameters()
     {
-        return new InterestingInParameters($this->getData()->theme_ids);
+        return new InterestingInParameters($this->getData()['theme_ids'] ?? []);
     }
 
     protected function getSchema(): JSONSchema

@@ -6,6 +6,7 @@ export interface CollectionEntity
     sid: string;
     owner_sid: string;
     owner: CollectionOwnerEntity;
+    date_created_on: string;
     title: string;
     description: string;
     theme_ids: Array<number>;

@@ -1,0 +1,50 @@
+"/protected/with-profile/{sourceProfileId}/im/send/to/{source}/{sourceId}":
+  put:
+    tags:
+      - im
+    description:
+      Отправить сообщение
+    security:
+      - x_api_key: []
+    parameters:
+      - name: sourceProfileId
+        in: path
+        required: true
+        description: ID профиля
+        type: number
+      - name: source
+        in: path
+        required: true
+        description: |
+          Источник. Значения: "profile", "community"
+        type: string
+      - name: sourceId
+        in: path
+        required: true
+        description: ID источника (ID профиля или коммунити)
+        type: number
+      - name: body
+        in: body
+        required: true
+        description:
+        schema:
+          $ref: '#/definitions/Profile_Request_SendRequest'
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        $ref: '#responses/ProfileIM_Response_404_ProfileNotFound'
+      200:
+        description: Сообщение успешно отправлено. В ответе отсылается отправленное сообщение.
+        schema:
+          required:
+            - success
+            - message
+          properties:
+            success:
+              type: boolean
+            message:
+              type: object
+              description: Отправленное сообщение
+              schema:
+                $ref: '#/definitions/IM_Entity_IMMessage'

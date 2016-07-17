@@ -11,9 +11,9 @@ class CreateThemeRequest extends SchemaParams
         $data = $this->getData();
 
         return [
-            'title' => $data->title,
-            'description' => $data->description,
-            'parent_id' => (string) $data->parent_id === "0" ? null : (int) $data->parent_id
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'parent_id' => (string) $data['parent_id'] === "0" ? null : (int) $data['parent_id']
         ];
     }
 

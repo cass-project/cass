@@ -10,5 +10,6 @@ export interface PostEntity extends FeedEntity
     collection_id: number;
     content: string;
     attachments: PostAttachmentEntity<any>[];
+    attachment_ids: number[];
     profile: ProfileEntity;
 }

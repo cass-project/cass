@@ -29,12 +29,28 @@ final class EditCommunityTest extends CommunityMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
-                    'title' => '* title_edited',
-                    'description' => '* description_edited',
-                    'theme' => [
-                        'has' => true,
-                        'id' => $moveToTheme->getId()
-                    ]
+                    'is_own' => true,
+                    'collections' => [
+                        0 => [
+                            'id' => $this->expectId(),
+                            'sid' => $this->expectString(),
+                            'owner_sid' => $this->expectString(),
+                            'owner' => [
+                                'id' => $this->expectString(),
+                                'type' => 'community'
+                            ],
+                            'title' => $this->expectString(),
+                            'description' => $this->expectString()
+                        ]
+                    ],
+                    'community' => [
+                        'title' => '* title_edited',
+                        'description' => '* description_edited',
+                        'theme' => [
+                            'has' => true,
+                            'id' => $moveToTheme->getId()
+                        ]
+                    ],
                 ]
             ]);
     }
@@ -55,11 +71,27 @@ final class EditCommunityTest extends CommunityMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
-                    'title' => '* title_edited',
-                    'description' => '* description_edited',
-                    'theme' => [
-                        'has' => false,
-                    ]
+                    'is_own' => true,
+                    'collections' => [
+                        0 => [
+                            'id' => $this->expectId(),
+                            'sid' => $this->expectString(),
+                            'owner_sid' => $this->expectString(),
+                            'owner' => [
+                                'id' => $this->expectString(),
+                                'type' => 'community'
+                            ],
+                            'title' => $this->expectString(),
+                            'description' => $this->expectString()
+                        ]
+                    ],
+                    'community' => [
+                        'title' => '* title_edited',
+                        'description' => '* description_edited',
+                        'theme' => [
+                            'has' => false,
+                        ]
+                    ],
                 ]
             ]);
     }
@@ -88,12 +120,28 @@ final class EditCommunityTest extends CommunityMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
-                    'title' => '* title_edited',
-                    'description' => '* description_edited',
-                    'theme' => [
-                        'has' => true,
-                        'id' => $moveToTheme->getId()
-                    ]
+                    'is_own' => true,
+                    'collections' => [
+                        0 => [
+                            'id' => $this->expectId(),
+                            'sid' => $this->expectString(),
+                            'owner_sid' => $this->expectString(),
+                            'owner' => [
+                                'id' => $this->expectString(),
+                                'type' => 'community'
+                            ],
+                            'title' => $this->expectString(),
+                            'description' => $this->expectString()
+                        ]
+                    ],
+                    'community' => [
+                        'title' => '* title_edited',
+                        'description' => '* description_edited',
+                        'theme' => [
+                            'has' => true,
+                            'id' => $moveToTheme->getId()
+                        ]
+                    ],
                 ]
             ]);
     }

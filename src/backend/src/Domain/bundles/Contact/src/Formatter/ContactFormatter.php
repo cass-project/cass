@@ -2,7 +2,7 @@
 namespace Domain\Contact\Formatter;
 
 use Domain\Contact\Entity\Contact;
-use Domain\ProfileIM\Service\LastMessageService;
+use Domain\IM\Service\LastMessageService;
 
 final class ContactFormatter
 {

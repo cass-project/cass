@@ -15,7 +15,7 @@ final class CreateCommand extends Command
         $community = $this->communityService->createCommunity($createCommunityRequest->getParameters());
 
         return $responseBuilder->setStatusSuccess()->setJson([
-            'entity' => $community->toJSON()
+            'entity' => $this->communityFormatter->format($community),
         ])->build();
     }
 }

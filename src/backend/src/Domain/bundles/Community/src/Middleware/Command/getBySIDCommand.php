@@ -12,8 +12,7 @@ final class getBySIDCommand extends Command
         $community = $this->communityService->getCommunityBySID($request->getAttribute('communityId'));
 
         return $responseBuilder->setStatusSuccess()->setJson([
-            'entity' => $community->toJSON(),
-            'access' => $this->communityService->getCommunityAccess($this->currentAccountService->getCurrentAccount(), $community)->toJSON()
+            'entity' => $this->communityFormatter->format($community),
         ])->build();
     }
 }
