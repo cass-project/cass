@@ -358,19 +358,6 @@ final class FakeFixture
 
     private function upVideosFixture() {
 
-        /*$this->accountsMap =[
-            $this->accountService->getById(2),
-            $this->accountService->getById(11),
-            $this->accountService->getById(3),
-            $this->accountService->getById(4),
-            $this->accountService->getById(5),
-            $this->accountService->getById(6),
-            $this->accountService->getById(7),
-            $this->accountService->getById(8),
-            $this->accountService->getById(9),
-            $this->accountService->getById(10),
-        ];*/
-
         $averageVideos = ceil(count($this->jsonVideos)/count($this->accountsMap));
 
         $videoIdx = 1;
@@ -381,8 +368,6 @@ final class FakeFixture
                 $account = $this->accountsMap[array_rand($this->accountsMap )] ;
             }
 
-
-//            $collectionItem = $account->getCurrentProfile()->getCollections()->getItems()[0];
             /** @var Profile $profile */
             $profile = $account->getProfiles()->first();
 
