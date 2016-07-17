@@ -8,6 +8,7 @@ use Domain\Account\Service\AccountService;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Collection\Collection\CollectionItem;
 use Domain\Collection\Entity\Collection;
+use Domain\Collection\Parameters\EditCollectionParameters;
 use Domain\Collection\Service\CollectionService;
 use Domain\Post\Entity\Post;
 use Domain\Post\Parameters\CreatePostParameters;
@@ -81,7 +82,7 @@ final class FakeFixture
         $this->output = $output;
 
         $this->fetchJSONSources();
-//        $this->upAccountsFixture();
+        $this->upAccountsFixture();
         $this->upVideosFixture();
     }
 
@@ -357,9 +358,9 @@ final class FakeFixture
 
     private function upVideosFixture() {
 
-        $this->accountsMap =[
-            $this->accountService->getById(1),
+        /*$this->accountsMap =[
             $this->accountService->getById(2),
+            $this->accountService->getById(11),
             $this->accountService->getById(3),
             $this->accountService->getById(4),
             $this->accountService->getById(5),
@@ -368,15 +369,38 @@ final class FakeFixture
             $this->accountService->getById(8),
             $this->accountService->getById(9),
             $this->accountService->getById(10),
-        ];
+        ];*/
 
         $averageVideos = ceil(count($this->jsonVideos)/count($this->accountsMap));
 
-        print_r($averageVideos );
-
+        $videoIdx = 1;
+        $account = $this->accountsMap[array_rand($this->accountsMap )] ;
         foreach($this->jsonVideos as $video){
-            $account = $this->accountsMap[array_rand($this->accountsMap )] ;
-            $account->getCurrentProfile()->getCollections();
+
+            if(0 === ($videoIdx % $averageVideos)) {
+                $account = $this->accountsMap[array_rand($this->accountsMap )] ;
+            }
+
+
+//            $collectionItem = $account->getCurrentProfile()->getCollections()->getItems()[0];
+            /** @var Profile $profile */
+            $profile = $account->getProfiles()->first();
+
+            /** @var CollectionItem  $collectionItem */
+            $collectionItem = $profile->getCollections()->getItems()[0];
+            $collection = $this->collectionService->getCollectionById($collectionItem->getCollectionId());
+
+            $collectionParams = new EditCollectionParameters($collection->getTitle(),$collection->getDescription(),array_merge($collection->getThemeIds(), [$video['category_id']]));
+
+            $collection = $this->collectionService->editCollection($collection->getId(), $collectionParams);
+
+            $video['id']          = $videoIdx;
+            $video['typeId']      = 2;
+            $video['description'] = $video['name'];
+
+            $post = $this->createPost($account->getCurrentProfile(), $collection, $video);
+
+            $videoIdx++;
         }
     }
 }
