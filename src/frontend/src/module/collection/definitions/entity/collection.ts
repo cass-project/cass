@@ -28,6 +28,8 @@ export interface CollectionPublicOptionsEntity
     moderation_contract: boolean;
 }
 
+// ?
+
 export class Collection implements CollectionEntity
 {
     static OWNER_TYPES = ['community', 'profile'];
@@ -35,6 +37,7 @@ export class Collection implements CollectionEntity
     id: number;
     sid: string;
     owner_sid: string;
+    date_created_on: string;
     owner: CollectionOwnerEntity;
     title: string;
     description: string;

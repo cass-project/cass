@@ -3,7 +3,7 @@ namespace Domain\Feed\Search\Stream;
 
 use Domain\Feed\Search\Criteria\CriteriaManager;
 
-use Domain\Feed\Source\Source;
+use Domain\Index\Source\Source;
 use MongoDB\Collection;
 use MongoDB\Model\BSONDocument;
 

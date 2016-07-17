@@ -24,14 +24,18 @@ final class ProfileStream extends Stream
             'limit' => self::DEFAULT_LIMIT,
         ];
 
-        $cursor = $collection->find($filter, $options);
+        $cursor = $collection->find($filter, $options)->toArray();
 
-        $profileEntities = $this->profileService->getProfilesByIds(array_map(function(BSONDocument $document) {
-            return (int) $document['id'];
-        }, $cursor->toArray()));
+        if(count($cursor)) {
+            $profileEntities = $this->profileService->getProfilesByIds(array_map(function(BSONDocument $document) {
+                return (int) $document['id'];
+            }, $cursor));
 
-        return array_map(function(Profile $profile) {
-            return $profile->toJSON();
-        }, $profileEntities);
+            return array_map(function(Profile $profile) {
+                return $profile->toJSON();
+            }, $profileEntities);
+        }else{
+            return [];
+        }
     }
 }

@@ -29,7 +29,7 @@ export class IMRESTService extends AbstractRESTService
         );
     }
 
-    messages(targetProfileId: number, source: string, sourceId: number, request: IMMessagesRequest): Observable<IMMessagesResponse200> {
+    messages(targetProfileId: number, source: string, sourceId: number, request: IMMessagesRequest): Observable<IMMessagesResponse200<any>> {
         let url = `/backend/api/protected/with-profile/${targetProfileId}/im/messages/${source}/${sourceId}`;
         let auth = this.getAuthHeaders();
 
