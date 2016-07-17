@@ -112,6 +112,7 @@ class PostService implements EventEmitterAwareService
         $profile = $this->profileService->getProfileById($createPostParameters->getProfileId());
 
         $post = new Post($postType, $profile, $collection, $createPostParameters->getContent());
+        $post->setThemeIds($collection->getThemeIds());
 
         $this->postRepository->createPost($post);
 

@@ -32,7 +32,16 @@ export class ThemeCriteria
     }
 
     getRoot(): Theme {
+        if(! this.service.criteria.has('theme_id')) {
+            this.reset();
+        }
+
         return this.root;
+    }
+
+    reset() {
+        this.history = [];
+        this.root = this.themes.getRoot();
     }
     
     back() {
@@ -50,14 +59,25 @@ export class ThemeCriteria
     }
 
     selectRoot(root: Theme) {
-        this.service.criteria.doWith('theme', criteria => {
-            criteria.params['theme_id'] = root.id;
-        });
+        if(this.service.criteria.has('theme_id')) {
+            this.service.criteria.doWith('theme_id', criteria => {
+                criteria.params['id'] = root.id;
+            });
+        }else{
+            this.service.criteria.attach({
+                code: 'theme_id',
+                params: {
+                    'id': root.id
+                }
+            });
+        }
 
         if(root.children.length > 0) {
             this.root = root;
             this.history.push(root);
         }
+
+        this.service.update();
     }
 
     isSelected(id: number) {
