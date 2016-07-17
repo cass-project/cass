@@ -2,13 +2,13 @@ import {Injectable} from "angular2/core";
 import {Http, URLSearchParams, Headers} from "angular2/http"
 import {Observable} from "rxjs/Rx";
 
-import {SendProfileMessageResponse200}    from "../definitions/paths/send";
-import {SendProfileMessageRequest}        from "../definitions/paths/send";
-import {ProfileMessagesResponse200}       from "../definitions/paths/messages";
+import {SendProfileMessageResponse200} from "../definitions/paths/send";
+import {SendProfileMessageRequest} from "../definitions/paths/send";
+import {ProfileMessagesResponse200} from "../definitions/paths/messages";
 import {UnreadProfileMessagesResponse200} from "../definitions/paths/unread";
-import {AuthToken}                        from "../../auth/service/AuthToken";
-import {AbstractRESTService}              from "../../common/service/AbstractRESTService";
-import {MessageBusService}                from "../../message/service/MessageBusService";
+import {AuthToken} from "../../auth/service/AuthToken";
+import {AbstractRESTService} from "../../common/service/AbstractRESTService";
+import {MessageBusService} from "../../message/service/MessageBusService";
 
 @Injectable()
 export class ProfileIMRESTService extends AbstractRESTService

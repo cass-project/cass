@@ -1,11 +1,11 @@
 import {Component, ElementRef, ViewChild, Input} from "angular2/core";
 import {RouteParams} from "angular2/router";
 
-import {ProfileIMFeedSendStatus}      from "../../../definitions/entity/ProfileMessage";
+import {ProfileIMFeedSendStatus} from "../../../definitions/entity/ProfileMessage";
 import {ProfileMessageExtendedEntity} from "../../../definitions/entity/ProfileMessage";
-import {ProfileIMService}             from "../../../service/ProfileIMService";
-import {AuthService}                  from "../../../../auth/service/AuthService";
-import {MessageBusService}            from "../../../../message/service/MessageBusService/index";
+import {ProfileIMService} from "../../../service/ProfileIMService";
+import {AuthService} from "../../../../auth/service/AuthService";
+import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
 
 @Component({

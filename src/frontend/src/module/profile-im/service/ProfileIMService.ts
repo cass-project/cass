@@ -1,14 +1,14 @@
 import {Injectable} from "angular2/core";
 import {Observable, Observer} from "rxjs/Rx";
 
-import {ProfileIMRESTService}             from "./ProfileIMRESTService";
+import {ProfileIMRESTService} from "./ProfileIMRESTService";
 import {UnreadProfileMessagesResponse200} from "../definitions/paths/unread";
-import {ProfileMessagesResponse200}       from "../definitions/paths/messages";
-import {SendProfileMessageResponse200}    from "../definitions/paths/send";
-import {SendProfileMessageRequest}        from "../definitions/paths/send";
-import {ProfileIMFeedSendStatus}          from "../definitions/entity/ProfileMessage";
-import {ProfileMessageEntity}             from "../definitions/entity/ProfileMessage";
-import {ProfileMessageExtendedEntity}     from "../definitions/entity/ProfileMessage";
+import {ProfileMessagesResponse200} from "../definitions/paths/messages";
+import {SendProfileMessageResponse200} from "../definitions/paths/send";
+import {SendProfileMessageRequest} from "../definitions/paths/send";
+import {ProfileIMFeedSendStatus} from "../definitions/entity/ProfileMessage";
+import {ProfileMessageEntity} from "../definitions/entity/ProfileMessage";
+import {ProfileMessageExtendedEntity} from "../definitions/entity/ProfileMessage";
 
 @Injectable()
 export class ProfileIMService 

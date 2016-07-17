@@ -1,9 +1,9 @@
 import {Component} from "angular2/core";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 
-import {ContactEntity}          from "../../../../contact/definitions/entity/Contact";
-import {ContactService}         from "../../../../contact/service/ContactService";
-import {ProfileImage}           from "../../../../profile/component/Elements/ProfileImage/index";
+import {ContactEntity} from "../../../../contact/definitions/entity/Contact";
+import {ContactService} from "../../../../contact/service/ContactService";
+import {ProfileImage} from "../../../../profile/component/Elements/ProfileImage/index";
 import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
 
 @Component({

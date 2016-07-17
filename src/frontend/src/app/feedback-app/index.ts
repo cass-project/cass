@@ -13,15 +13,15 @@ require('font-awesome/css/font-awesome.css');
 require('../../styles/feedback.head.scss');
 
 import {provide, enableProdMode} from "angular2/core";
-import {HTTP_PROVIDERS}   from "angular2/http";
+import {HTTP_PROVIDERS} from "angular2/http";
 import {ROUTER_PROVIDERS} from "angular2/router";
-import {Title}            from "angular2/src/platform/browser/title";
-import {bootstrap}        from "angular2/platform/browser";
+import {Title} from "angular2/src/platform/browser/title";
+import {bootstrap} from "angular2/platform/browser";
 
-import {AuthToken}        from "../../module/auth/service/AuthToken";
-import {frontline}        from "../../module/frontline/service";
+import {AuthToken} from "../../module/auth/service/AuthToken";
+import {frontline} from "../../module/frontline/service";
 import {FrontlineService} from "../../module/frontline/service";
-import {App}              from "./app";
+import {App} from "./app";
 
 enableProdMode();
 
