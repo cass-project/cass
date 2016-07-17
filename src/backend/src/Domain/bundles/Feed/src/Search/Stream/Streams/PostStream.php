@@ -1,10 +1,12 @@
 <?php
-namespace Domain\Feed\Search\Stream;
+namespace Domain\Feed\Search\Stream\Streams;
 
+use Domain\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SortCriteria;
 use Domain\Feed\Search\Criteria\CriteriaManager;
 use Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
+use Domain\Feed\Search\Stream\Stream;
 use Domain\Post\Entity\Post;
 use Domain\Post\Formatter\PostFormatter;
 use Domain\Post\Service\PostService;
@@ -68,6 +70,10 @@ final class PostStream extends Stream
             $filter[sprintf('theme_ids.%s', (string) $criteria->getThemeId())] = [
                 '$exists' => true
             ];
+        });
+        
+        $criteriaManager->doWith(ContentTypeCriteria::class, function(ContentTypeCriteria $criteria) use (&$filter) {
+            $filter['content_type'] = $criteria->getContentType();
         });
 
         $result = $collection->find($filter, $options)->toArray();

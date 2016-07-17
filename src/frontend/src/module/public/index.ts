@@ -11,6 +11,8 @@ import {CollectionsRoute} from "./route/CollectionsRoute/index";
 import {CommunitiesRoute} from "./route/CommunitiesRoute/index";
 import {ExpertsRoute} from "./route/ExpertsRoute/index";
 import {ProfilesRoute} from "./route/ProfilesRoute/index";
+import {OptionView} from "./component/Options/ViewOption/index";
+import {ContentTypeCriteria} from "./component/Criteria/ContentTypeCriteria/index";
 
 @Component({
     selector: 'cass-public',
@@ -26,7 +28,9 @@ import {ProfilesRoute} from "./route/ProfilesRoute/index";
         ThemeCriteria,
         QueryStringCriteria,
         SeekCriteria,
+        ContentTypeCriteria,
         SourceSelector,
+        OptionView,
     ]
 })
 @RouteConfig([
@@ -59,4 +63,12 @@ import {ProfilesRoute} from "./route/ProfilesRoute/index";
 ])
 export class PublicComponent
 {
+    constructor(private service: PublicService) {}
+    
+    isPostCriteriaAvailable() {
+        return ~[
+            "content",
+            "",
+        ].indexOf(this.service.source);
+    }
 }

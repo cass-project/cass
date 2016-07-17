@@ -2,6 +2,7 @@
 namespace Domain\Feed\Search\Criteria;
 
 use Domain\Feed\Exception\UnknownCriteriaException;
+use Domain\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SortCriteria;
 use Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
@@ -26,6 +27,9 @@ final class CriteriaFactory
 
             case ThemeIdCriteria::CODE_STRING:
                 return new ThemeIdCriteria();
+
+            case ContentTypeCriteria::CRITERIA_CODE:
+                return new ContentTypeCriteria();
         }
     }
 }

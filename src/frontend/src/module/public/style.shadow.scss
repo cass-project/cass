@@ -4,6 +4,23 @@
 
 article.component.component-public {
   padding: 15px;
+
+  .general-criteria {
+    .source-selector-container {
+      margin: 10px 0;
+    }
+  }
+
+  .content-and-view-options-container {
+    margin: 10px 0;
+  }
+}
+
+@include mt-tablet-and-desktop {
+  .content-and-view-options-container {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 @include mt-desktop {
@@ -35,10 +52,6 @@ article.component.component-public {
 
   .general-criteria {
     .query-string-criteria-container {
-      margin-bottom: 10px;
-    }
-
-    .source-selector-container {
       margin-bottom: 10px;
     }
   }

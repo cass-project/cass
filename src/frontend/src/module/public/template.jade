@@ -8,6 +8,11 @@ article.component.component-public
         cass-public-search-criteria-query-string
       .source-selector-container
         cass-public-feed-source-selector
+      .content-and-view-options-container
+        .content-type-container
+          cass-public-criteria-content-type(*ngIf="isPostCriteriaAvailable()")
+        .view-option-container
+          cass-public-option-view
     .search-results
       .search-entities
         router-outlet
