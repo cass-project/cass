@@ -13,6 +13,7 @@ use Domain\Index\Processor\Processors\PublicCatalog\PublicCollectionsProcessor;
 use Domain\Index\Processor\Processors\PublicCatalog\PublicCommunitiesProcessor;
 use Domain\Index\Processor\Processors\PublicCatalog\PublicContentProcessor;
 use Domain\Index\Processor\Processors\PublicCatalog\PublicDiscussionsProcessor;
+use Domain\Index\Processor\Processors\PublicCatalog\PublicExpertsProcessor;
 use Domain\Index\Processor\Processors\PublicCatalog\PublicProfilesProcessor;
 use Domain\Post\Entity\Post;
 use Domain\Profile\Entity\Profile;
@@ -36,6 +37,7 @@ final class ProcessorFactory
             case Profile::class:
                 return [
                     $this->container->get(PublicProfilesProcessor::class),
+                    $this->container->get(PublicExpertsProcessor::class),
                 ];
 
             case Collection::class:

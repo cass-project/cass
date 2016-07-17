@@ -24,13 +24,6 @@ abstract class AbstractPostProcessor implements Processor
     /** @var ContentTypeIdentifier */
     protected $contentTypeIdentifier;
 
-    /**
-     * ProfileProcessor constructor.
-     * @param Database $mongoDB
-     * @param FeedSourceFactory $sourceFactory
-     * @param ThemeWeightCalculator $themeWeightCalculator
-     * @param ContentTypeIdentifier $contentTypeIdentifier
-     */
     public function __construct(
         Database $mongoDB,
         FeedSourceFactory $sourceFactory,
@@ -55,10 +48,11 @@ abstract class AbstractPostProcessor implements Processor
                 'content_type' => $this->getContentType($entity),
             ]);
 
-            $collection->replaceOne([
+            $collection->updateOne(
                 ['id' => $entity->getId()],
-                $indexed,
-            ], ['upsert' => true]);
+                ['$set' => $indexed],
+                ['upsert' => true]
+            );
         }
     }
 

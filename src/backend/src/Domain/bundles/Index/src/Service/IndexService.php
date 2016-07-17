@@ -10,6 +10,11 @@ final class IndexService
     /** @var ProcessorFactory */
     private $processorsFactory;
 
+    public function __construct(ProcessorFactory $processorsFactory)
+    {
+        $this->processorsFactory = $processorsFactory;
+    }
+
     public function indexEntity(IndexedEntity $entity)
     {
         array_map(function(Processor $processor) use ($entity) {

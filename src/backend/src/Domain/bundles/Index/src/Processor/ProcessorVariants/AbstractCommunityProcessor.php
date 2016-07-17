@@ -42,10 +42,11 @@ abstract class AbstractCommunityProcessor implements Processor
                 'theme_ids' => $this->getThemeIdsWeight($entity),
             ]);
 
-            $collection->replaceOne([
+            $collection->updateOne(
                 ['id' => $entity->getId()],
-                $indexed,
-            ], ['upsert' => true]);
+                ['$set' => $indexed],
+                ['upsert' => true]
+            );
         }
     }
 
