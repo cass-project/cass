@@ -10,7 +10,7 @@ final class ThemeWeightCalculator
     public function calculate(ThemeWeightEntity $entity): array
     {
         $result = [];
-        $weight = self::BASE_WEIGHT / count($entity->getThemeIds());
+        $weight = self::BASE_WEIGHT /(count($entity->getThemeIds())<=0?1:count($entity->getThemeIds())) ;
 
         foreach($entity->getThemeIds() as $themeId) {
             $result[$themeId] = $weight;
