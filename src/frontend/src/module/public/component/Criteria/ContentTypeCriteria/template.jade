@@ -1,19 +1,22 @@
 article.component.component-public-criteria-content-type
   .content-types-container
     ul.content-types
-      li
-        button.choice
+      li([ngClass]="{'active': is('video')}")
+        button.choice((click)="setContentType('video')")
           i.fa.fa-video-camera
           span.title Видео
-      li
-        button.choice
+      li([ngClass]="{'active': is('image')}")
+        button.choice((click)="setContentType('image')")
           i.fa.fa-image
           span.title Картинки и фото
-      li
-        button.choice
+      li([ngClass]="{'active': is('link')}")
+        button.choice((click)="setContentType('link')")
           i.fa.fa-link
           span.title Ссылки
-      li
-        button.choice
+      li([ngClass]="{'active': is('text')}")
+        button.choice((click)="setContentType('text')")
           i.fa.fa-file-text
           span.title Текст
+      li(*ngIf="isEnabled()")
+        button.choice((click)="reset()")
+          i.fa.fa-times

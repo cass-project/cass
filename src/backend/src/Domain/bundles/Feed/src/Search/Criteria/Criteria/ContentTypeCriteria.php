@@ -12,6 +12,9 @@ final class ContentTypeCriteria implements Criteria
     const CONTENT_TYPE_AUDIO = 'audio';
     const CONTENT_TYPE_IMAGE = 'image';
     const CONTENT_TYPE_LINK = 'link';
+    
+    /** @var string */
+    private $contentType;
 
     public function getCode(): string
     {
@@ -20,6 +23,11 @@ final class ContentTypeCriteria implements Criteria
 
     public function unpack(array $criteria)
     {
-        return $criteria['type'];
+        $this->contentType = $criteria['type'];
+    }
+
+    public function getContentType(): string
+    {
+        return $this->contentType;
     }
 }
