@@ -1,19 +1,18 @@
 <?php
-namespace Domain\Feed;
+namespace Domain\Index;
 
-use Domain\Feed\Events\CollectionEvents;
-use Domain\Feed\Events\CommunityEvents;
-use Domain\Feed\Events\PostEvents;
-use Domain\Feed\Events\ProfileEvents;
-
+use Domain\Index\Events\CollectionEvents;
+use Domain\Index\Events\CommunityEvents;
+use Domain\Index\Events\PostEvents;
+use Domain\Index\Events\ProfileEvents;
 use Evenement\EventEmitterInterface;
 
 return function(EventEmitterInterface $globalEmitter): array
 {
     return [
-        ProfileEvents::class,
         CollectionEvents::class,
         CommunityEvents::class,
+        ProfileEvents::class,
         PostEvents::class,
     ];
 };

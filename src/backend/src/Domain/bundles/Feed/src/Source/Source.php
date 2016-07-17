@@ -1,10 +1,6 @@
 <?php
 namespace Domain\Feed\Source;
 
-use Domain\Feed\Service\Entity;
-
-interface Source
+interface Source extends \Domain\Index\Source\Source
 {
-    public function getMongoDBCollection(): string;
-    public function test(Entity $entity);
 }

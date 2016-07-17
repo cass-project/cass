@@ -32,7 +32,8 @@
       "Domain\\Feedback\\": "src/Domain/bundles/Feedback/src",
       "Domain\\OpenGraph\\": "src/Domain/bundles/OpenGraph/src",
       "Domain\\Contact\\": "src/Domain/bundles/Contact/src",
-      "Domain\\Fake\\": "src/Domain/bundles/Fake/src"
+      "Domain\\Fake\\": "src/Domain/bundles/Fake/src",
+      "Domain\\Index\\": "src/Domain/bundles/Index/src"
     }
   },
   "require": {

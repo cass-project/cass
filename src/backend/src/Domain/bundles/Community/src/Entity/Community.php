@@ -15,14 +15,14 @@ use Domain\Collection\Strategy\CollectionAwareEntity;
 use Domain\Collection\Strategy\Traits\CollectionAwareEntityTrait;
 use Domain\Community\Entity\Community\CommunityFeatures;
 use Domain\Community\Exception\CommunityHasNoThemeException;
-use Domain\Feed\Service\Entity;
+use Domain\Index\Entity\IndexedEntity;
 use Domain\Theme\Entity\Theme;
 
 /**
  * @Entity(repositoryClass="Domain\Community\Repository\CommunityRepository")
  * @Table(name="community")
  */
-class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, CollectionAwareEntity, Entity
+class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, CollectionAwareEntity, IndexedEntity
 {
     use IdTrait;
     use SIDEntityTrait;
@@ -137,7 +137,7 @@ class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, C
         return $result;
     }
 
-    public function toIndexedJSON(): array
+    public function toIndexedEntityJSON(): array
     {
         return array_merge($this->toJSON(), [
             'date_created_on' => $this->getDateCreatedOn()
