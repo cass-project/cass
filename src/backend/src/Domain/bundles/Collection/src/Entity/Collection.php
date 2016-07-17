@@ -12,6 +12,7 @@ use Domain\Collection\Exception\PublicEnabledException;
 use Domain\Community\Entity\Community;
 use Domain\Avatar\Entity\ImageEntityTrait;
 use Domain\Index\Entity\IndexedEntity;
+use Domain\Index\Service\ThemeWeightCalculator\ThemeWeightEntity;
 use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Theme\Strategy\ThemeIdsEntityAware;
 use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
@@ -20,7 +21,7 @@ use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  * @Entity(repositoryClass="Domain\Collection\Repository\CollectionRepository")
  * @Table(name="collection")
  */
-class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, ThemeIdsEntityAware, IndexedEntity
+class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, ThemeIdsEntityAware, IndexedEntity, ThemeWeightEntity
 {
     use IdTrait;
     use SIDEntityTrait;
@@ -129,6 +130,16 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
         list(, $id) = explode(':', $this->getOwnerSID());
 
         return $id;
+    }
+
+    public function isProfileCollection(): bool
+    {
+        return $this->getOwnerType() === 'profile';
+    }
+
+    public function isCommunityCollection(): bool
+    {
+        return $this->getOwnerType() === 'collection';
     }
 
     public function getTitle(): string

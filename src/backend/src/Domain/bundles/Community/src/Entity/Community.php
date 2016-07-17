@@ -16,13 +16,14 @@ use Domain\Collection\Strategy\Traits\CollectionAwareEntityTrait;
 use Domain\Community\Entity\Community\CommunityFeatures;
 use Domain\Community\Exception\CommunityHasNoThemeException;
 use Domain\Index\Entity\IndexedEntity;
+use Domain\Index\Service\ThemeWeightCalculator\ThemeWeightEntity;
 use Domain\Theme\Entity\Theme;
 
 /**
  * @Entity(repositoryClass="Domain\Community\Repository\CommunityRepository")
  * @Table(name="community")
  */
-class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, CollectionAwareEntity, IndexedEntity
+class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, CollectionAwareEntity, IndexedEntity, ThemeWeightEntity
 {
     use IdTrait;
     use SIDEntityTrait;
@@ -258,5 +259,12 @@ class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, C
 
     public function &getMetadata(): array {
         return $this->metadata;
+    }
+
+    public function getThemeIds(): array
+    {
+        return $this->hasTheme()
+            ? [$this->getTheme()->getId()]
+            : [];
     }
 }

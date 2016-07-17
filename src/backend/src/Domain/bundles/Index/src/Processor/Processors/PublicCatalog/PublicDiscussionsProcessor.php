@@ -1,16 +1,20 @@
 <?php
 namespace Domain\Index\Processor\Processors\PublicCatalog;
 
-use Domain\Feed\Source\Source;
-use Domain\Index\Entity\IndexedEntity;
-use Domain\Index\Processor\Processor;
+use Domain\Index\Source\Source;
+use Domain\Index\Processor\ProcessorVariants\AbstractPostProcessor;
 use Domain\Post\Entity\Post;
-use MongoDB\Collection;
+use Domain\Post\PostType\Types\DiscussionPostType;
 
-final class PublicDiscussionsProcessor implements Processor
+final class PublicDiscussionsProcessor extends AbstractPostProcessor
 {
-    public function process(IndexedEntity $entity)
+    protected function getSource(Post $entity): Source
     {
-        /** @var Post $entity */
+        return $this->sourceFactory->getPublicDiscussionsSource();
+    }
+
+    protected function isIndexable(Post $entity): bool
+    {
+        return $entity->getPostTypeCode() === DiscussionPostType::CODE_INT;
     }
 }

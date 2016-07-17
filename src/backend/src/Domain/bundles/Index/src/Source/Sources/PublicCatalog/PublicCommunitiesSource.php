@@ -2,7 +2,7 @@
 namespace Domain\Index\Source\Sources\PublicCatalog;
 
 use Domain\Community\Entity\Community;
-use Domain\Feed\Source\Source;
+use Domain\Index\Source\Source;
 
 final class PublicCommunitiesSource implements Source
 {

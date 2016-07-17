@@ -1,16 +1,19 @@
 <?php
 namespace Domain\Index\Processor\Processors;
 
-use Domain\Community\Entity\Community;
-use Domain\Feed\Source\Source;
-use Domain\Index\Entity\IndexedEntity;
-use Domain\Index\Processor\Processor;
-use MongoDB\Collection;
+use Domain\Index\Processor\ProcessorVariants\AbstractPostProcessor;
+use Domain\Index\Source\Source;
+use Domain\Post\Entity\Post;
 
-final class CommunityProcessor implements Processor
+final class CommunityProcessor extends AbstractPostProcessor
 {
-    public function process(IndexedEntity $entity)
+    protected function getSource(Post $entity): Source
     {
-        /** @var Community $entity */
+        return $source = $this->sourceFactory->getCommunitySource($entity->getCollection()->getOwnerId());
+    }
+
+    protected function isIndexable(Post $entity): bool
+    {
+        return $entity->getCollection()->isCommunityCollection();
     }
 }

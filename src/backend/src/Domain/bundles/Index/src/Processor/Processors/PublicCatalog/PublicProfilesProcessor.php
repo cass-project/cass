@@ -1,16 +1,19 @@
 <?php
 namespace Domain\Index\Processor\Processors\PublicCatalog;
 
-use Domain\Feed\Source\Source;
-use Domain\Index\Entity\IndexedEntity;
-use Domain\Index\Processor\Processor;
+use Domain\Index\Source\Source;
+use Domain\Index\Processor\ProcessorVariants\AbstractProfileProcessor;
 use Domain\Profile\Entity\Profile;
-use MongoDB\Collection;
 
-final class PublicProfilesProcessor implements Processor
+final class PublicProfilesProcessor extends AbstractProfileProcessor
 {
-    public function process(IndexedEntity $entity)
+    protected function getSource(Profile $entity): Source
     {
-        /** @var Profile $entity */
+        return $this->sourceFactory->getPublicProfilesSource();
+    }
+
+    protected function isIndexable(Profile $entity): bool
+    {
+        return true;
     }
 }

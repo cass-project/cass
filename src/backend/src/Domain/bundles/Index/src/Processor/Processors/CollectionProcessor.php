@@ -1,15 +1,19 @@
 <?php
 namespace Domain\Index\Processor\Processors;
 
-use Domain\Collection\Entity\Collection;
-use Domain\Feed\Source\Source;
-use Domain\Index\Entity\IndexedEntity;
-use Domain\Index\Processor\Processor;
+use Domain\Index\Processor\ProcessorVariants\AbstractPostProcessor;
+use Domain\Index\Source\Source;
+use Domain\Post\Entity\Post;
 
-final class CollectionProcessor implements Processor
+final class CollectionProcessor extends AbstractPostProcessor
 {
-    public function process(IndexedEntity $entity)
+    protected function getSource(Post $entity): Source
     {
-        /** @var Collection $entity */
+        return $source = $this->sourceFactory->getCollectionSource($entity->getCollection()->getId());
+    }
+
+    protected function isIndexable(Post $entity): bool
+    {
+        return true;
     }
 }

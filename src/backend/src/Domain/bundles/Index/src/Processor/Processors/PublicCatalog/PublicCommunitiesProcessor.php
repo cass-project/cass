@@ -2,15 +2,18 @@
 namespace Domain\Index\Processor\Processors\PublicCatalog;
 
 use Domain\Community\Entity\Community;
-use Domain\Feed\Source\Source;
-use Domain\Index\Entity\IndexedEntity;
-use Domain\Index\Processor\Processor;
-use MongoDB\Collection;
+use Domain\Index\Processor\ProcessorVariants\AbstractCommunityProcessor;
+use Domain\Index\Source\Source;
 
-final class PublicCommunitiesProcessor implements Processor
+final class PublicCommunitiesProcessor extends AbstractCommunityProcessor
 {
-    public function process(IndexedEntity $entity)
+    protected function getSource(Community $entity): Source
     {
-        /** @var Community $entity */
+        return $this->sourceFactory->getPublicCommunitiesSource();
+    }
+
+    protected function isIndexable(Community $entity): bool
+    {
+        return true;
     }
 }

@@ -2,6 +2,7 @@
 namespace Domain\Feed\Factory;
 
 use Domain\Index\Source\Sources\CollectionSource;
+use Domain\Index\Source\Sources\CommunitySource;
 use Domain\Index\Source\Sources\ProfileSource;
 use Domain\Index\Source\Sources\PublicCatalog\PublicCollectionsSource;
 use Domain\Index\Source\Sources\PublicCatalog\PublicCommunitiesSource;
@@ -20,6 +21,11 @@ final class FeedSourceFactory
     public function getCollectionSource(int $collectionId): CollectionSource
     {
         return new CollectionSource($collectionId);
+    }
+    
+    public function getCommunitySource(int $communityId): CommunitySource
+    {
+        return new CommunitySource($communityId);
     }
 
     public function getPublicCollectionsSource(): PublicCollectionsSource

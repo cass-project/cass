@@ -1,16 +1,20 @@
 <?php
 namespace Domain\Index\Processor\Processors\PublicCatalog;
 
-use Domain\Feed\Source\Source;
-use Domain\Index\Entity\IndexedEntity;
-use Domain\Index\Processor\Processor;
+use Domain\Index\Source\Source;
+use Domain\Index\Processor\ProcessorVariants\AbstractExpertProcessor;
 use Domain\Profile\Entity\Profile;
-use MongoDB\Collection;
 
-final class PublicExpertsProcessor implements Processor
+final class PublicExpertsProcessor extends AbstractExpertProcessor
 {
-    public function process(IndexedEntity $entity)
+    protected function getSource(Profile $entity): Source
     {
-        /** @var Profile $entity */
+        return $this->sourceFactory->getPublicExpertsSource();
     }
+
+    protected function isIndexable(Profile $entity): bool
+    {
+        return true;
+    }
+
 }

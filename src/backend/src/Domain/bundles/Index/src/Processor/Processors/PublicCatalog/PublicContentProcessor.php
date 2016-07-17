@@ -1,16 +1,20 @@
 <?php
 namespace Domain\Index\Processor\Processors\PublicCatalog;
 
-use Domain\Feed\Source\Source;
-use Domain\Index\Entity\IndexedEntity;
-use Domain\Index\Processor\Processor;
+use Domain\Index\Processor\ProcessorVariants\AbstractPostProcessor;
+use Domain\Index\Source\Source;
 use Domain\Post\Entity\Post;
-use MongoDB\Collection;
+use Domain\Post\PostType\Types\DefaultPostType;
 
-final class PublicContentProcessor implements Processor
+final class PublicContentProcessor extends AbstractPostProcessor
 {
-    public function process(IndexedEntity $entity)
+    protected function getSource(Post $entity): Source
     {
-        /** @var Post $entity */
+        return $this->sourceFactory->getPublicContentSource();
+    }
+
+    protected function isIndexable(Post $entity): bool
+    {
+        return $entity->getPostTypeCode() === DefaultPostType::CODE_INT;
     }
 }

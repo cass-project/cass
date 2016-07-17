@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Index\Source\Sources;
 
-use Domain\Feed\Source\Source;
+use Domain\Index\Source\Source;
 
 final class CollectionSource implements Source
 {

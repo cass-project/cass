@@ -7,7 +7,9 @@ use Application\Util\JSONSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection as DoctrineCollection;
 use Domain\Collection\Entity\Collection;
+use Domain\IM\Service\ContentTypeIdentifier\ContentTypeIdentifierEntity;
 use Domain\Index\Entity\IndexedEntity;
+use Domain\Index\Service\ThemeWeightCalculator\ThemeWeightEntity;
 use Domain\Post\PostType\PostType;
 use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\Profile\Entity\Profile;
@@ -18,7 +20,7 @@ use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  * @Entity(repositoryClass="Domain\Post\Repository\PostRepository")
  * @Table(name="post")
  */
-class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEntity
+class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEntity, ThemeWeightEntity
 {
     use IdTrait;
     use ThemeIdsAwareEntityTrait;
