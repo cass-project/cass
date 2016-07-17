@@ -1,35 +1,27 @@
 <?php
-namespace Domain\Feed\Search\Stream;
+namespace Domain\Feed\Search\Stream\Streams;
 
 use Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SortCriteria;
-use Domain\Feed\Search\Criteria\CriteriaManager;
 use Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
-use Domain\Post\Entity\Post;
-use Domain\Post\Formatter\PostFormatter;
-use Domain\Post\Service\PostService;
+use Domain\Feed\Search\Criteria\CriteriaManager;
+use Domain\Feed\Search\Stream\Stream;
+use Domain\Profile\Entity\Profile;
+use Domain\Profile\Service\ProfileService;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
 use MongoDB\Model\BSONDocument;
 
-final class PostStream extends Stream
+final class ProfileStream extends Stream
 {
-    /** @var PostFormatter */
-    private $postFormatter;
-
-    /** @var PostService */
-    private $postService;
-
-    public function setPostFormatter(PostFormatter $postFormatter)
+    /** @var ProfileService */
+    private $profileService;
+    
+    public function setProfileService(ProfileService $profileService)
     {
-        $this->postFormatter = $postFormatter;
+        $this->profileService = $profileService;
     }
-
-    public function setPostService(PostService $postService)
-    {
-        $this->postService = $postService;
-    }
-
+    
     public function fetch(CriteriaManager $criteriaManager, Collection $collection): array
     {
         $order = 1;
@@ -63,23 +55,25 @@ final class PostStream extends Stream
                 }
             }
         });
-        
+
         $criteriaManager->doWith(ThemeIdCriteria::class, function(ThemeIdCriteria $criteria) use (&$filter) {
             $filter[sprintf('theme_ids.%s', (string) $criteria->getThemeId())] = [
                 '$exists' => true
             ];
         });
 
-        $result = $collection->find($filter, $options)->toArray();
-        
-        $this->postService->getPostsByIds(array_map(function(BSONDocument $document) {
-            return (int) $document['id'];
-        }, $result));
+        $cursor = $collection->find($filter, $options)->toArray();
 
-        return  array_map(function(BSONDocument $document) {
-            return $this->postFormatter->format(
-                $this->postService->getPostById((int) $document['id'])
-            );
-        }, $result);
+        if(count($cursor)) {
+            $profileEntities = $this->profileService->getProfilesByIds(array_map(function(BSONDocument $document) {
+                return (int) $document['id'];
+            }, $cursor));
+
+            return array_map(function(Profile $profile) {
+                return $profile->toJSON();
+            }, $profileEntities);
+        }else{
+            return [];
+        }
     }
 }

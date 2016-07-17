@@ -3,6 +3,10 @@ namespace Domain\Feed\Search\Stream;
 
 use Domain\Collection\Service\CollectionService;
 use Domain\Community\Service\CommunityService;
+use Domain\Feed\Search\Stream\Streams\CollectionStream;
+use Domain\Feed\Search\Stream\Streams\CommunityStream;
+use Domain\Feed\Search\Stream\Streams\PostStream;
+use Domain\Feed\Search\Stream\Streams\ProfileStream;
 use Domain\Index\Source\Source;
 use Domain\Index\Source\Sources\CollectionSource;
 use Domain\Index\Source\Sources\ProfileSource;
