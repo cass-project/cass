@@ -19,6 +19,16 @@ abstract class AbstractCollectionProcessor implements Processor
 
     /** @var ThemeWeightCalculator */
     protected $themeWeightCalculator;
+    
+    public function __construct(
+        Database $mongoDB,
+        FeedSourceFactory $sourceFactory,
+        ThemeWeightCalculator $themeWeightCalculator
+    ) {
+        $this->mongoDB = $mongoDB;
+        $this->sourceFactory = $sourceFactory;
+        $this->themeWeightCalculator = $themeWeightCalculator;
+    }
 
     public function process(IndexedEntity $entity)
     {
@@ -29,11 +39,12 @@ abstract class AbstractCollectionProcessor implements Processor
         $indexed = array_merge($entity->toIndexedEntityJSON(), [
             'theme_ids' => $this->getThemeIdsWeight($entity),
         ]);
-
-        $collection->replaceOne([
+        
+        $collection->updateOne(
             ['id' => $entity->getId()],
-            $indexed,
-        ], ['upsert' => true]);
+            ['$set' => $indexed],
+            ['upsert' => true]
+        );
     }
 
 

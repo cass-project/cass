@@ -3,6 +3,7 @@ namespace Domain\Feed\Search\Stream;
 
 use Domain\Collection\Service\CollectionService;
 use Domain\Community\Service\CommunityService;
+use Domain\Index\Source\Source;
 use Domain\Index\Source\Sources\CollectionSource;
 use Domain\Index\Source\Sources\ProfileSource;
 use Domain\Index\Source\Sources\PublicCatalog\PublicCollectionsSource;
@@ -11,7 +12,6 @@ use Domain\Index\Source\Sources\PublicCatalog\PublicContentSource;
 use Domain\Index\Source\Sources\PublicCatalog\PublicDiscussionsSource;
 use Domain\Index\Source\Sources\PublicCatalog\PublicProfilesSource;
 use Domain\Index\Source\Sources\PublicCatalog\PublicExpertsSource;
-use Domain\Feed\Source\Source;
 use Domain\Post\Formatter\PostFormatter;
 use Domain\Post\Service\PostService;
 use Domain\Profile\Service\ProfileService;
