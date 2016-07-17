@@ -99,6 +99,11 @@ class PostService implements EventEmitterAwareService
     {
         return $this->postRepository->getPostsByIds($postIds);
     }
+
+    public function loadPostsByIds(array $postIds)
+    {
+        $this->postRepository->getPostsByIds($postIds);
+    }
     
     private function createPostFromParameters(CreatePostParameters $createPostParameters): Post
     {
@@ -107,6 +112,7 @@ class PostService implements EventEmitterAwareService
         $profile = $this->profileService->getProfileById($createPostParameters->getProfileId());
 
         $post = new Post($postType, $profile, $collection, $createPostParameters->getContent());
+        $post->setThemeIds($collection->getThemeIds());
 
         $this->postRepository->createPost($post);
 

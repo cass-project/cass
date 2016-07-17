@@ -8,6 +8,7 @@ import {PostEntity} from "../../../post/definitions/entity/Post";
 import {PublicService} from "../../service";
 import {FeedProfileStream} from "../../../feed/component/stream/FeedProfileStream/index";
 import {PublicProfilesSource} from "../../../feed/service/FeedService/source/public/PublicProfilesSource";
+import {NothingFound} from "../../component/Elements/NothingFound/index";
 
 @Component({
     template: require('./template.jade'),
@@ -20,6 +21,7 @@ import {PublicProfilesSource} from "../../../feed/service/FeedService/source/pub
     ],
     directives: [
         FeedProfileStream,
+        NothingFound,
     ]
 })
 export class ProfilesRoute
@@ -30,6 +32,7 @@ export class ProfilesRoute
         private source: PublicProfilesSource
     ) {
         catalog.source = 'profiles';
+        catalog.injectFeedService(service);
         
         service.provide(source, new Stream<PostEntity>());
         service.criteria = catalog.criteria;

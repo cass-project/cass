@@ -6,6 +6,7 @@ import {PublicContentSource} from "../../../feed/service/FeedService/source/publ
 import {Stream} from "../../../feed/service/FeedService/stream";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 import {PublicService} from "../../service";
+import {NothingFound} from "../../component/Elements/NothingFound/index";
 
 @Component({
     template: require('./template.jade'),
@@ -18,6 +19,7 @@ import {PublicService} from "../../service";
     ],
     directives: [
         FeedPostStream,
+        NothingFound,
     ]
 })
 export class ContentRoute
@@ -28,6 +30,7 @@ export class ContentRoute
         private source: PublicContentSource
     ) {
         catalog.source = 'content';
+        catalog.injectFeedService(service);
         
         service.provide(source, new Stream<PostEntity>());
         service.criteria = catalog.criteria;
