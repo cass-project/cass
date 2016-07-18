@@ -6,7 +6,6 @@ use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
 use Domain\Collection\Entity\Collection;
 use Domain\Index\Entity\IndexedEntity;
-use Domain\Index\Service\ThemeWeightCalculator\ThemeWeightEntity;
 use Domain\Post\PostType\PostType;
 use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\Profile\Entity\Profile;
@@ -17,7 +16,7 @@ use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  * @Entity(repositoryClass="Domain\Post\Repository\PostRepository")
  * @Table(name="post")
  */
-class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEntity, ThemeWeightEntity
+class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEntity
 {
     use IdTrait;
     use ThemeIdsAwareEntityTrait;

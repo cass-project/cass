@@ -9,6 +9,7 @@ use Domain\Feed\Search\Stream\Streams\PostStream;
 use Domain\Feed\Search\Stream\Streams\ProfileStream;
 use Domain\Index\Source\Source;
 use Domain\Index\Source\Sources\CollectionSource;
+use Domain\Index\Source\Sources\CommunitySource;
 use Domain\Index\Source\Sources\ProfileSource;
 use Domain\Index\Source\Sources\PublicCatalog\PublicCollectionsSource;
 use Domain\Index\Source\Sources\PublicCatalog\PublicCommunitiesSource;
@@ -82,7 +83,8 @@ final class StreamFactory
 
             return $stream;
         }else if(in_array($sourceName, [
-            PublicCommunitiesSource::class
+            PublicCommunitiesSource::class,
+            CommunitySource::class,
         ])) {
             return new CommunityStream($source);
         }else{

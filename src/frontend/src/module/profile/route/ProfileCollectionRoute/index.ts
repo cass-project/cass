@@ -4,7 +4,6 @@ import {ROUTER_DIRECTIVES, Router, RouteParams} from "angular2/router";
 import {CollectionsList} from "../../../collection/component/Elements/CollectionsList/index";
 import {ProfileRouteService} from "../ProfileRoute/service";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
-import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
 import {PostForm} from "../../../post/component/Forms/PostForm/index";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
 import {PostTypeService} from "../../../post/service/PostTypeService";

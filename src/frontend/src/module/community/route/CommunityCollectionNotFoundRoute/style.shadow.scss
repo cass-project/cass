@@ -1,0 +1,19 @@
+@import "./../../../../styles/globals";
+
+article.component.component-community-collection-not-found-route {
+  padding: 20px;
+
+  h1 {
+    font-family: $FONT_FAMILY;
+    font-size: 24px;
+    color: material-color("grey", "500");
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-family: $FONT_FAMILY;
+    font-size: 18px;
+    color: material-color("grey", "900");
+    margin-bottom: 10px;
+  }
+}

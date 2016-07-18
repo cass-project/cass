@@ -41,7 +41,9 @@ final class CreateCommunityTest extends CommunityMiddlewareTestCase
                                 'type' => 'community'
                             ],
                             'title' => $this->expectString(),
-                            'description' => $this->expectString()
+                            'description' => $this->expectString(),
+                            'is_main' => true,
+                            'is_protected' => true,
                         ]
                     ],
                     'community' => [

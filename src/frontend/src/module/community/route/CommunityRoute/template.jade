@@ -1,3 +1,10 @@
-article.component.component-community
-  cass-community-menu
-  router-outlet
+article.component.component-community-route
+  cass-form-progress-lock(*ngIf="service.isLoading()")
+  div(*ngIf="service.isCommunityLoaded()").community-page
+    cass-community-header(
+      [community]="service.getCommunity()",
+      (go-community)="goDashboard()",
+      (go-collection)="goCollection($event)"
+    )
+  .community-page
+    router-outlet

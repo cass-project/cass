@@ -61,7 +61,7 @@ abstract class AbstractCollectionProcessor implements Processor
 
     protected function getThemeIdsWeight(Collection $entity): array
     {
-        return $this->themeWeightCalculator->calculate($entity);
+        return $this->themeWeightCalculator->calculateWeights($entity->getThemeIds());
     }
 
     abstract protected function getSource(Collection $entity): Source;

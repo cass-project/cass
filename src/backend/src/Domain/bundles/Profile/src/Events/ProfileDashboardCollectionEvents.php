@@ -25,11 +25,13 @@ final class ProfileDashboardCollectionEvents implements EventsBootstrapInterface
     public function up(EventEmitterInterface $globalEmitter)
     {
         $this->profileService->getEventEmitter()->on(ProfileService::EVENT_PROFILE_CREATED, function(Profile $profile) {
-            $this->collectionService->createCollection(new CreateCollectionParameters(
+            $collection = $this->collectionService->createCollection(new CreateCollectionParameters(
                 sprintf('profile:%d', $profile->getId()),
-                'Моя лента',
+                'Профиль',
                 ''
             ), true);
+
+            $this->collectionService->mainCollection($collection->getId());
         });
     }
 }

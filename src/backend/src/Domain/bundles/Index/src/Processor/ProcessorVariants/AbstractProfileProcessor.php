@@ -64,7 +64,7 @@ abstract class AbstractProfileProcessor implements Processor
 
     protected function getThemeIdsWeight(Profile $entity): array
     {
-        return $this->themeWeightCalculator->calculateProfileInterestsWeight($entity);
+        return $this->themeWeightCalculator->calculateWeights($entity->getInterestingInIds());
     }
 
     abstract protected function getSource(Profile $entity): Source;

@@ -21,6 +21,10 @@
       403:
         schema:
           $ref: '#/responses/Unauthorized'
+      409:
+        description: Попытка удалить защищенную от удаления коллекцию
+        schema:
+          $ref: '#/responses/error'
       404:
         schema:
           $ref: '#/responses/NotFound'

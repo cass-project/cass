@@ -12,7 +12,6 @@ use Domain\Collection\Exception\PublicEnabledException;
 use Domain\Community\Entity\Community;
 use Domain\Avatar\Entity\ImageEntityTrait;
 use Domain\Index\Entity\IndexedEntity;
-use Domain\Index\Service\ThemeWeightCalculator\ThemeWeightEntity;
 use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Theme\Strategy\ThemeIdsEntityAware;
 use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
@@ -21,7 +20,7 @@ use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  * @Entity(repositoryClass="Domain\Collection\Repository\CollectionRepository")
  * @Table(name="collection")
  */
-class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, ThemeIdsEntityAware, IndexedEntity, ThemeWeightEntity
+class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, ThemeIdsEntityAware, IndexedEntity
 {
     use IdTrait;
     use SIDEntityTrait;
@@ -70,6 +69,18 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
      */
     private $moderationContract = false;
 
+    /**
+     * @Column(type="boolean", name="is_protected")
+     * @var bool
+     */
+    private $isProtected = false;
+
+    /**
+     * @Column(type="boolean", name="is_main")
+     * @var bool
+     */
+    private $isMain = false;
+
     public function __construct(string $ownerSID)
     {
         $this->ownerSID = $ownerSID;
@@ -96,7 +107,9 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
                 'public_enabled' => $this->isPublicEnabled(),
                 'moderation_contract' => $this->isModerationContractEnabled(),
             ],
-            'image' => $this->getImages()->toJSON()
+            'image' => $this->getImages()->toJSON(),
+            'is_protected' => $this->isProtected(),
+            'is_main' => $this->isMain(),
         ];
         return $result;
     }
@@ -233,5 +246,30 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
         $this->moderationContract = $moderationContract;
 
         return $this;
+    }
+
+    public function isProtected(): bool
+    {
+        return $this->isProtected;
+    }
+
+    public function enableProtection(): self
+    {
+        $this->isProtected = true;
+
+        return $this;
+    }
+
+    public function defineAsMain(): self
+    {
+        $this->isMain = true;
+        $this->enableProtection();
+
+        return $this;
+    }
+
+    public function isMain(): bool
+    {
+        return $this->isMain;
     }
 }

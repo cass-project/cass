@@ -14,11 +14,11 @@ export class CommunityImage
 
     static allowedBorders = ['circle', 'square'];
 
-    getURL() {
+    getURL(): string {
         return this.url;
     }
 
-    getCSSClasses() {
+    getCSSClasses(): string {
         let border = this.border;
 
         if(!~CommunityImage.allowedBorders.indexOf(border)) {

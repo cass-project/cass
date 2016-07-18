@@ -23,6 +23,12 @@ export class FeedRESTService extends AbstractRESTService
         return this.handle(this.http.post(url, JSON.stringify(request)));
     }
 
+    getCommunityFeed(communityId: number, request: FeedRequest): Observable<FeedResponse> {
+        let url = `/backend/api/feed/get/community/${communityId}`;
+
+        return this.handle(this.http.post(url, JSON.stringify(request)));
+    }
+
     getCollectionFeed(collectionId: number, request: FeedRequest): Observable<FeedResponse> {
         let url = `/backend/api/feed/get/collection/${collectionId}`;
 

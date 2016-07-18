@@ -1,0 +1,68 @@
+@import "./../../../../../styles/globals";
+
+article.component-community-settings-card {
+  display: inline-block;
+
+  width: 250px;
+
+  .card-content {
+    @include card(1);
+    background-color: white;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid white;
+    cursor: pointer;
+    transition: background-color 0.1s;
+
+    &:hover {
+      background-color: material-color("grey", "100");
+    }
+
+    .settings-icon-container {
+      .settings-icon {
+        width: 128px;
+        background-color: material-color("grey", "300");
+        color: material-color("grey", "700");
+        border-radius: 100%;
+        overflow: hidden;
+        line-height: 128px;
+        font-size: 64px;
+        text-align: center;
+      }
+    }
+
+    .card-about {
+      text-align: center;
+      margin: 25px 0;
+
+      h1 {
+        font-family: $FONT_FAMILY;
+        font-size: 25px;
+        font-weight: 400;
+        line-height: 40px;
+        color: material-color("grey", "700");
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-family: $FONT_FAMILY;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        color: material-color("grey", "700");
+        margin-bottom: 10px;
+      }
+
+
+      a {
+        font-family: $FONT_FAMILY;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 500;
+        color: material-color("light-blue", "700");
+      }
+    }
+  }
+}

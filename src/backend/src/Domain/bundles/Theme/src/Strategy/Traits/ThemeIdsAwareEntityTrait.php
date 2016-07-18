@@ -11,14 +11,14 @@ trait ThemeIdsAwareEntityTrait
 
     public function getThemeIds(): array
     {
-        return array_unique(array_filter($this->themeIds, function($input) {
+        return array_unique(array_filter((array) $this->themeIds, function($input) {
             return is_numeric($input);
         }));
     }
 
     public function setThemeIds(array $themeIds): array
     {
-        $this->themeIds = array_unique(array_filter($themeIds, function($input) {
+        $this->themeIds = array_unique(array_filter((array) $themeIds, function($input) {
             return is_numeric($input);
         }));
 

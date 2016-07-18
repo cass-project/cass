@@ -9,6 +9,11 @@ sudo sed -i 's/\r$//' /usr/bin/vm-db-recreate.sh
 sudo sed -i 's/\r$//' /usr/bin/vm-db-test.sh
 sudo sed -i 's/\r$//' /usr/bin/vm-backend-test.sh
 
+sudo chmod a+x /usr/bin/vm-*
+sudo chmod a+x /usr/bin/cass-*
+
+sudo chown -R www-data:www-data /opt/cass
+
 sudo service mysql restart
 sudo service mongodb restart
 sudo service php7.0-fpm restart

@@ -1,0 +1,21 @@
+@import "./../../../../../styles/globals";
+
+$CASS_COMMUNITY_MENU_WIDTH: 230px;
+
+div.community-menu {
+  position: relative;
+  background-color: white;
+  width: $CASS_COMMUNITY_MENU_WIDTH;
+
+  >div.backdrop {
+    position: fixed;
+    top: 0; height: 100%;
+    width: $CASS_COMMUNITY_MENU_WIDTH;
+    background-color: white;
+    z-index: 100;
+  }
+
+  >div.community-menu-contents {
+    z-index: 101;
+  }
+}

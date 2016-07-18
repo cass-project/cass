@@ -43,7 +43,7 @@ final class ProfileSIDMiddlewareTest extends ProfileMiddlewareTestCase
                                 'id' => $this->expectString(),
                                 'type' => 'profile'
                             ],
-                            'title' => 'Моя лента',
+                            'title' => $this->expectString(),
                             'description' => $this->expectString()
                         ]
                     ]

@@ -31,8 +31,7 @@ import {SidebarComponent} from "../../module/sidebar/index";
 import {CommunityComponent} from "../../module/community/index";
 import {FeedbackComponent} from "../../module/feedback/index";
 import {HtmlComponent} from "../../module/html/index";
-import {RootRoute as ProfileRootRoute} from "../../module/profile/route/RootRoute/index";
-import {CommunityRoute} from "../../module/community/route/CommunityRoute/index";
+import {ProfileRootRoute as ProfileRootRoute} from "../../module/profile/route/ProfileRootRoute/index";
 import {PublicService} from "../../module/public/service";
 import {PublicComponent} from "../../module/public/index";
 import {ProfileModalModel} from "../../module/profile/component/Modals/ProfileModal/model";
@@ -45,6 +44,8 @@ import {ProfileIMRoute} from "../../module/profile-im/route/ProfileIMRoute/index
 import {ContactService} from "../../module/contact/service/ContactService";
 import {ContactRESTService} from "../../module/contact/service/ContactRESTService";
 import {IMRESTService} from "../../module/im/service/IMRESTService";
+import {CommunityRootRoute} from "../../module/community/route/CommunityRootRoute/index";
+import {CommunityModals} from "../../module/community/modals";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -83,6 +84,7 @@ import {IMRESTService} from "../../module/im/service/IMRESTService";
         ProfileIMService,
         ContactRESTService,
         ContactService,
+        CommunityModals,
         IMRESTService
     ],
     directives: [
@@ -117,7 +119,7 @@ import {IMRESTService} from "../../module/im/service/IMRESTService";
     {
         name: 'Community',
         path: '/community/...',
-        component: CommunityRoute
+        component: CommunityRootRoute
     },
     {
         name: 'Public',

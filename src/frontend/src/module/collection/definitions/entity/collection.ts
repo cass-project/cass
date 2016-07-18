@@ -12,6 +12,8 @@ export interface CollectionEntity
     theme_ids: Array<number>;
     public_options: CollectionPublicOptionsEntity;
     image: ImageCollection;
+    is_protected: boolean;
+    is_main: boolean;
     children?: CollectionEntity[];
 }
 
@@ -41,6 +43,8 @@ export class Collection implements CollectionEntity
     owner: CollectionOwnerEntity;
     title: string;
     description: string;
+    is_protected: boolean;
+    is_main: boolean;
     theme_ids: Array<number>;
     public_options: CollectionPublicOptionsEntity;
     image: ImageCollection;

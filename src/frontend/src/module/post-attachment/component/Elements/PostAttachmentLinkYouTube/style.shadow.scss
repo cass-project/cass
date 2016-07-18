@@ -1,10 +1,48 @@
+@import "./../../../../../styles/globals";
+
 article.component.component-post-attachment-link-youtube {
   .youtube-container {
+    .preview-image-container {
+      position: relative;
+      cursor: pointer;
+
+      .play-button-container {
+        font-size: 78px;
+        color: material-color("grey", "100");
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        left: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        opacity: 0.8;
+        justify-content: center;
+        text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
+
+        &:hover {
+          color: white;
+          opacity: 0.9;
+        }
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .youtube-container-with-video {
     position:relative;
-    padding-bottom:56.25%;
-    padding-top:30px;
+    padding-top: 30px;
+    padding-bottom: 56.25%;
     height:0;
     overflow:hidden;
+
+    .preview-image-container {
+      display: none;
+    }
 
     iframe, object, embed {
       position: absolute;

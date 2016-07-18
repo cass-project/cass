@@ -66,6 +66,6 @@ abstract class AbstractCommunityProcessor implements Processor
 
     protected function getThemeIdsWeight(Community $entity): array
     {
-        return $this->themeWeightCalculator->calculate($entity);
+        return $this->themeWeightCalculator->calculateWeights($entity->getThemeIds());
     }
 }

@@ -72,7 +72,7 @@ abstract class AbstractPostProcessor implements Processor
 
     protected function getThemeIdsWeight(Post $entity): array
     {
-        return $this->themeWeightCalculator->calculate($entity);
+        return $this->themeWeightCalculator->calculateWeights($entity->getThemeIds());
     }
 
     protected function getContentType(Post $entity): string

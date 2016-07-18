@@ -1,3 +1,12 @@
+import {ImageCollection} from "../../../avatar/definitions/ImageCollection";
+import {CollectionEntity} from "../../../collection/definitions/entity/collection";
+
+export interface CommunityExtendedEntity {
+    collections: CollectionEntity[];
+    community: CommunityEntity;
+    is_own: boolean;
+}
+
 export interface CommunityEntity
 {
     id: number;
@@ -5,7 +14,7 @@ export interface CommunityEntity
     date_created_on: string;
     title: string;
     description: string;
-    image: CommunityEnityImage;
+    image: ImageCollection;
     theme: {
         has:boolean,
         id?:number
@@ -23,14 +32,4 @@ export interface CommunityPublicOptionsEntity
 {
     public_enabled: boolean;
     moderation_contract: boolean;
-}
-
-export class CommunityEnityImage {
-    uid: string;
-    variants: {
-        "16": {id: number, storage_path: string, public_path: string},
-        "32": {id: number, storage_path: string, public_path: string},
-        "64": {id: number, storage_path: string, public_path: string},
-        "default": {id: number, storage_path: string, public_path: string}
-    }
 }
