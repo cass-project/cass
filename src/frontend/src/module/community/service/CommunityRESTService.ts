@@ -42,6 +42,16 @@ export class CommunityRESTService extends AbstractRESTService
         return this.handle(this.http.post(`/backend/api/protected/community/${communityId}/edit`, JSON.stringify(body), {headers: authHeader}));
     }
 
+    public getCommunityById(id:string)
+    {
+        let authHeader = new Headers();
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+
+        return this.handle(this.http.get(`/backend/api/community/${id}/get-by-id`, {headers: authHeader}));
+    }
+    
     public getCommunityBySid(sid:string)
     {
         let authHeader = new Headers();
