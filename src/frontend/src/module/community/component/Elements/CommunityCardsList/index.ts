@@ -27,10 +27,6 @@ export class CommunityCardsList
 
     constructor(private router: Router) {}
 
-    ngOnInit(){
-        console.log(this.entity);
-    }
-
     isOwnCommunity(): boolean {
         return this.entity.is_own;
     }

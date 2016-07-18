@@ -10,7 +10,7 @@ div
     cass-community-join-modal((close)="service.modals.join.close()")
 
   div(*ngIf="service.modals.create.isOpened()")
-    cass-community-create-modal((close)="service.modals.create.close()")
+    cass-community-create-modal((close)="service.modals.create.close()", (success)="goCommunity($event)")
 
   div(*ngIf="service.modals.settings.isOpened()")
     cass-community-settings-modal((close)="service.modals.settings.close()")

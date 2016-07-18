@@ -27,8 +27,8 @@ export class ImageTab {
     constructor(
         public model: CommunitySettingsModalModel,
         public cropper: ImageCropperService,
-        public modelUnmodified:CommunitySettingsModalModel,
-        private service:CommunityRESTService
+        public modelUnmodified: CommunitySettingsModalModel,
+        private service: CommunityRESTService
     ) {
         this.setImage();
     }

@@ -5,7 +5,9 @@ use Application\REST\Response\GenericResponseBuilder;
 use Application\Service\CommandService;
 use Domain\Feed\Exception\AbstractFeedException;
 use Domain\Feed\Middleware\Command\CollectionCommand;
+use Domain\Feed\Middleware\Command\CommunityCommand;
 use Domain\Feed\Middleware\Command\ProfileCommand;
+use Domain\Feed\Middleware\Command\PublicCommunitiesCommand;
 use Domain\Feed\Middleware\Command\PublicContentCommand;
 use Domain\Feed\Middleware\Command\PublicExpertsCommand;
 use Domain\Feed\Middleware\Command\PublicProfilesCommand;
@@ -34,6 +36,7 @@ final class FeedMiddleware implements MiddlewareInterface
             $resolver = $this->commandService->createResolverBuilder()
                 ->attachDirect('profile', ProfileCommand::class)
                 ->attachDirect('collection', CollectionCommand::class)
+                ->attachDirect('community', CommunityCommand::class)
                 ->attachDirect('public-profiles', PublicProfilesCommand::class)
                 ->attachDirect('public-experts', PublicExpertsCommand::class)
                 ->attachDirect('public-content', PublicContentCommand::class)

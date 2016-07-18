@@ -5,7 +5,7 @@ use Application\REST\Response\ResponseBuilder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class PublicCollectionsCommand extends AbstractCommand
+final class PublicCommunitiesCommand extends AbstractCommand
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {

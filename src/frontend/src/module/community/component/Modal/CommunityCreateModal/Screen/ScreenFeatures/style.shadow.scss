@@ -1,21 +1,50 @@
-form.screen-features {
-  .label-text{font-size: 20px}
-  .label-description{
-    margin-left: 26px;
-    color: #666;
-    display: block;
+/* @ MOBILE FIRST */
+
+@import "./../../../../../../../styles/globals";
+
+article.component.component-screen-features {
+  .banner {
+    margin: 15px 0;
+
+    .about {
+      text-align: center;
+
+      h1 {
+        font-family: $FONT_FAMILY;
+        font-size: 18px;
+        color: black;
+        font-weight: 400;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-family: $FONT_FAMILY;
+        font-size: 14px;
+        color: material-color("grey", "500");
+        font-weight: 400;
+      }
+    }
   }
 
-  .form-label.disabled *{
-    color:#999;
+  form.screen-features {
+    .label-text{font-size: 20px}
+    .label-description{
+      margin-left: 26px;
+      color: #666;
+      display: block;
+    }
+
+    .form-label.disabled *{
+      color:#999;
+    }
   }
-}
 
 
-ul.theme-options {
-  margin: 20px 0;
+  ul.theme-options {
+    margin: 20px 0;
 
-  li {
-    margin-bottom: 20px;
+    li {
+      margin-bottom: 20px;
+    }
   }
 }

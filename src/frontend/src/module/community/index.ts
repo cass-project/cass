@@ -5,6 +5,8 @@ import {CommunityCreateModal} from "./component/Modal/CommunityCreateModal";
 import {CommunityJoinModal} from "./component/Modal/CommunityJoinModal";
 import {CommunitySettingsModal} from "./component/Modal/CommunitySettingsModal";
 import {CommunityModalService} from "./service/CommunityModalService";
+import {CommunityExtendedEntity} from "./definitions/entity/CommunityExtended";
+import {Router} from "angular2/router";
 
 @Component({
     selector: 'cass-community',
@@ -18,5 +20,12 @@ import {CommunityModalService} from "./service/CommunityModalService";
 })
 export class CommunityComponent
 {
-    constructor(private service: CommunityModalService) {}
+    constructor(
+        private service: CommunityModalService,
+        private router: Router
+    ) {}
+
+    goCommunity(entity: CommunityExtendedEntity) {
+        this.router.navigate(['Community', 'Community', { sid: entity.community.sid }]);
+    }
 }

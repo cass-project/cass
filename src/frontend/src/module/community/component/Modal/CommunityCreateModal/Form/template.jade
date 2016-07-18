@@ -1,12 +1,10 @@
-form.form.screen.screen-general((ngSubmit)="next()")
-  .cass-padding-box-10
+article.component.component-community-create-modal-form
+  form.form.screen.screen-general((ngSubmit)="next()")
     ng-content
-  footer.form-footer
-    .form-footer-section
-      .cass-padding-box-5
+    footer.form-footer
+      .form-footer-section
         button.form-text-button(type="button", (click)="abort()")
           span Отмена
-    .form-footer-section
-      .cass-padding-box-5
+      .form-footer-section
         button.form-button.form-button-primary(type="submit")
           span Далее
