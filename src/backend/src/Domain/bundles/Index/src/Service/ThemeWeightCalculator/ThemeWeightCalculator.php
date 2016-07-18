@@ -2,48 +2,73 @@
 namespace Domain\Index\Service\ThemeWeightCalculator;
 
 use Domain\Profile\Entity\Profile;
+use Domain\Theme\Entity\Theme;
+use Domain\Theme\Service\ThemeService;
 
 final class ThemeWeightCalculator
 {
     const BASE_WEIGHT = 1000;
 
-    public function calculate(ThemeWeightEntity $entity): array
+    /** @var ThemeService */
+    private $themeService;
+
+    public function __construct(ThemeService $themeService)
     {
-        $result = [];
-        $weight = self::BASE_WEIGHT /(count($entity->getThemeIds())<=0?1:count($entity->getThemeIds())) ;
-
-        foreach($entity->getThemeIds() as $themeId) {
-            $result[$themeId] = $weight;
-        }
-
-        return $result;
+        $this->themeService = $themeService;
     }
 
-    public function calculateProfileExpertWeight(Profile $profile): array
+    public function calculateWeights(array $themeIds): array
     {
-        $ids = $profile->getExpertInIds();
+        if(count($themeIds) > 0) {
+            $results = [];
+            $baseWeight = self::BASE_WEIGHT / count($themeIds);
 
-        $result = [];
-        $weight = self::BASE_WEIGHT / count($ids);
+            foreach($themeIds as $rootThemeId) {
+                /** @var Theme $theme */
+                foreach($this->iterateTheme($rootThemeId) as $theme) {
+                    $results[] = new ThemeWeightResult($theme->getId(), $baseWeight);
+                    $baseWeight = (int) ($baseWeight / 2);
+                }
+            }
 
-        foreach($ids as $themeId) {
-            $result[$themeId] = $weight;
+            return $this->resultsToMap($results);
+        }else{
+            return [];
         }
-
-        return $result;
     }
 
-    public function calculateProfileInterestsWeight(Profile $profile): array
+    private function iterateTheme(int $rootThemeId)
     {
-        $ids = $profile->getInterestingInIds();
+        do {
+            $theme = $this->themeService->getThemeById($rootThemeId);
 
-        $result = [];
-        $weight = self::BASE_WEIGHT / count($ids);
+            if($theme->hasParent()) {
+                $rootThemeId = $theme->getParent()->getId();
+            }
 
-        foreach($ids as $themeId) {
-            $result[$themeId] = $weight;
+            yield $theme;
+        } while($theme->hasParent());
+    }
+
+    private function lookupThemeTree(int $themeId, int $baseWeight): array
+    {
+        $merge = [(string) $themeId => $baseWeight];
+        $theme = $this->themeService->getThemeById($themeId);
+
+        if($theme->hasParent()) {
+            $merge = array_merge($merge, $this->lookupThemeTree($theme->getParentId(), (int) ($baseWeight / 2)));
         }
 
-        return $result;
+        return $merge;
+    }
+
+    private function resultsToMap(array $results) {
+        $map = [];
+
+        array_map(function(ThemeWeightResult $result) use (&$map) {
+            $map[$result->getThemeId()] = $result->getWeight();
+        }, $results);
+
+        return $map;
     }
 }

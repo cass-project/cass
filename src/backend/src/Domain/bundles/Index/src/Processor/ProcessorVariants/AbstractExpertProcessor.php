@@ -64,7 +64,7 @@ abstract class AbstractExpertProcessor implements Processor
 
     protected function getThemeIdsWeight(Profile $entity): array
     {
-        return $this->themeWeightCalculator->calculateProfileExpertWeight($entity);
+        return $this->themeWeightCalculator->calculateWeights($entity->getExpertInIds());
     }
 
     abstract protected function getSource(Profile $entity): Source;
