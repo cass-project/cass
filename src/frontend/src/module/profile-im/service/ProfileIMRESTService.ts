@@ -28,22 +28,6 @@ export class ProfileIMRESTService extends AbstractRESTService
         
         return this.handle(this.http.get(`/backend/api/protected/profile-im/unread`, {headers: authHeader}));
     }
-    
-    getMessageFrom(sourceProfileId: number, offset: number, limit: number, markAsRead: boolean) : Observable<ProfileMessagesResponse200>
-    {
-        let authHeader = new Headers();
-        let params: URLSearchParams = new URLSearchParams();
-
-        params.set('markAsRead', markAsRead.toString());
-        
-        if(this.token.hasToken()){
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-        return this.handle(this.http.get(`/backend/api/protected/profile-im/messages/from/${sourceProfileId}/offset/${offset}/limit/${limit}`, {
-            search: params,
-            headers: authHeader
-        }));
-    }
 
     getMessages(targetProfileId:number, source:MessagesSourceType, sourceId:number, body:ProfileMessagesRequest)
     {
