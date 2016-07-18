@@ -5,6 +5,7 @@ use Application\Util\Definitions\Point;
 use Application\Util\GenerateRandomString;
 use Domain\Account\Entity\Account;
 use Domain\Account\Service\AccountService;
+use Domain\Auth\Service\CurrentAccountService;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Collection\Collection\CollectionItem;
 use Domain\Collection\Entity\Collection;
@@ -46,6 +47,9 @@ final class FakeFixture
     /** @var PostAttachmentRepository */
     protected $postAttachmentRepository;
 
+    /** @var CurrentAccountService */
+    private $currentAccountService;
+
     /** @var array */
     private $jsonProfiles;
 
@@ -63,6 +67,7 @@ final class FakeFixture
 
     public function __construct(
         AccountService $accountService,
+        CurrentAccountService $currentAccountService,
         ProfileService $profileService,
         CollectionService $collectionService,
         PostService $postService,
@@ -70,6 +75,7 @@ final class FakeFixture
         PostAttachmentRepository $postAttachmentRepository
     ) {
         $this->accountService = $accountService;
+        $this->currentAccountService = $currentAccountService;
         $this->profileService = $profileService;
         $this->collectionService = $collectionService;
         $this->postService = $postService;
@@ -367,6 +373,8 @@ final class FakeFixture
             if(0 === ($videoIdx % $averageVideos)) {
                 $account = $this->accountsMap[array_rand($this->accountsMap )] ;
             }
+
+            $this->currentAccountService->forceSignIn($account);
 
             /** @var Profile $profile */
             $profile = $account->getProfiles()->first();
