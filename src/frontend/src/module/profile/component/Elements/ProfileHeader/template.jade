@@ -11,7 +11,7 @@ article.component-profile-header
             a([routerLink]="['./Dashboard']", class="collection-link")
               span Профиль
           li(*ngFor="#collection of entity.collections")
-            a([routerLink]="['./Collections/View', { sid: collection.sid }]", class="collection-link", title="{{ collection.description }}")
+            a([routerLink]="['./Collections/View', { sid: collection.sid }]", class="collection-link", title="{{ collection.description }}", *ngIf='!collection.is_main')
               span {{ collection.title }}
           li((click)='modals.createCollection.open()')
             a(*ngIf="isOwnProfile()", class="collection-link collection-link-icon")

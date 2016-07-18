@@ -41,6 +41,7 @@ import {FeedRESTService} from "../../module/feed/service/FeedRESTService";
 import {ProfileIMService} from "../../module/profile-im/service/ProfileIMService";
 import {ProfileIMRESTService} from "../../module/profile-im/service/ProfileIMRESTService";
 import {ProfileIMRoute} from "../../module/profile-im/route/ProfileIMRoute/index";
+import {ContactService} from "../../module/contact/service/ContactService";
 import {ContactRESTService} from "../../module/contact/service/ContactRESTService";
 import {IMRESTService} from "../../module/im/service/IMRESTService";
 import {CommunityRootRoute} from "../../module/community/route/CommunityRootRoute/index";
@@ -86,10 +87,12 @@ import {Session} from "../../module/session/Session";
         ProfileIMRESTService,
         ProfileIMService,
         ContactRESTService,
+        ContactService,
         CommunityModals,
         IMRESTService,
         ProfileCommunityBookmarksService,
         CommunityCreateModalNotifier,
+        IMRESTService,
     ],
     directives: [
         ROUTER_DIRECTIVES,

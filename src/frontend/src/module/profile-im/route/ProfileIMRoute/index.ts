@@ -1,9 +1,9 @@
 import {Component} from "angular2/core";
 import {RouterOutlet, RouteConfig} from "angular2/router";
 
-import {ProfileIMChat}     from "../../component/Elements/ProfileIMChat";
+import {ProfileIMChat} from "../../component/Elements/ProfileIMChat";
 import {ProfileIMContacts} from "../../component/Elements/ProfileIMContacts";
-import {ProfileIMSidebar}  from "../../component/Elements/ProfileIMSidebar";
+import {ProfileIMSidebar} from "../../component/Elements/ProfileIMSidebar";
 
 @Component({
     selector:'profile-im-route',

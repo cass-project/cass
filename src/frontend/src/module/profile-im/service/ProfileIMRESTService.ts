@@ -1,8 +1,10 @@
 import {Injectable} from "angular2/core";
-import {Http, URLSearchParams, Headers, Response} from "angular2/http"
+import {Http, Headers} from "angular2/http"
 import {Observable} from "rxjs/Rx";
 
-import {SendProfileMessageRequest} from "../definitions/paths/send";
+import {SendProfileMessageResponse200, SendProfileMessageRequest} from "../definitions/paths/send";
+import {ProfileMessagesResponse200, MessagesSourceType, ProfileMessagesRequest} from "../definitions/paths/messages";
+import {UnreadProfileMessagesResponse200} from "../definitions/paths/unread";
 import {AuthToken} from "../../auth/service/AuthToken";
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {MessageBusService} from "../../message/service/MessageBusService";
@@ -16,7 +18,7 @@ export class ProfileIMRESTService extends AbstractRESTService
         protected messages: MessageBusService
     ) { super(http, token, messages); }
 
-    getUnreadMessages() : Observable<Response>
+    getUnread(targetProfileId:number) : Observable<UnreadProfileMessagesResponse200>
     {
         let authHeader = new Headers();
         
@@ -24,27 +26,32 @@ export class ProfileIMRESTService extends AbstractRESTService
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
         
-        return this.handle(this.http.get(`/backend/api/protected/profile-im/unread`, {headers: authHeader}));
+        return this.handle(this.http.get(`/backend/api/protected/with-profile/${targetProfileId}/im/unread`, {headers: authHeader}));
+    }
+
+    read(
+        targetProfileId:number,
+        source:MessagesSourceType,
+        sourceId:number,
+        body:ProfileMessagesRequest
+    ) : Observable<ProfileMessagesResponse200>
+    {
+        let authHeader = new Headers();
+
+        if(this.token.hasToken()){
+            authHeader.append('Authorization', `${this.token.apiKey}`);
+        }
+        return this.handle(this.http.post(
+            `backend/api/protected/with-profile/${targetProfileId}/im/messages/${source}/${sourceId}`, JSON.stringify(body), {headers: authHeader}
+        ));
     }
     
-    getMessageFrom(sourceProfileId: number, offset: number, limit: number, markAsRead: boolean) : Observable<Response>
-    {
-        let authHeader = new Headers();
-        let params: URLSearchParams = new URLSearchParams();
-
-        params.set('markAsRead', markAsRead.toString());
-        
-        if(this.token.hasToken()){
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-
-        return this.handle(this.http.get(`/backend/api/protected/profile-im/messages/from/${sourceProfileId}/offset/${offset}/limit/${limit}`, {
-            search: params,
-            headers: authHeader
-        }));
-    }
-
-    sendMessageTo(targetProfileId: number, body:SendProfileMessageRequest) : Observable<Response>
+    send(
+        sourceProfileId:number,
+        source: MessagesSourceType,
+        targetProfileId: number,
+        body:SendProfileMessageRequest
+    ) : Observable<SendProfileMessageResponse200>
     {
         
         let authHeader = new Headers();
@@ -53,7 +60,9 @@ export class ProfileIMRESTService extends AbstractRESTService
         }
         
         return this.handle(this.http.put(
-            `/backend/api/protected/profile-im/send/to/${targetProfileId}`, JSON.stringify(body), {headers: authHeader}
+            `/backend/api/protected/with-profile/${sourceProfileId}/im/send/to/${source}/${targetProfileId}`,
+            JSON.stringify(body), {headers: authHeader}
         ));
     }
 }
+

@@ -3,5 +3,6 @@ textarea.form-input(
   (input)="adjust(textarea.value)",
   (keydown.enter)="submit($event)",
   [(ngModel)]="content",
+  [disabled]="disabled",
   #textarea
 )

@@ -1,8 +1,8 @@
 import {Component} from "angular2/core";
 import {RouterOutlet, RouteConfig} from "angular2/router";
 
-import {FeedbackComponent}      from "../../index";
-import {AccessDeniedComponent}  from "../../../access-denied/index";
+import {FeedbackComponent} from "../../index";
+import {AccessDeniedComponent} from "../../../access-denied/index";
 
 @Component({
     template: require('./template.jade'),
