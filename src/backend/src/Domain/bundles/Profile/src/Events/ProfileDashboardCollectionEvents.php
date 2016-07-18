@@ -31,7 +31,7 @@ final class ProfileDashboardCollectionEvents implements EventsBootstrapInterface
                 ''
             ), true);
 
-            $this->collectionService->protectCollection($collection->getId());
+            $this->collectionService->mainCollection($collection->getId());
         });
     }
 }

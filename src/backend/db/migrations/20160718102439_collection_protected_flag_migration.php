@@ -8,6 +8,7 @@ class CollectionProtectedFlagMigration extends AbstractMigration
     {
         $this->table('collection')
             ->addColumn('is_protected', 'boolean')
+            ->addColumn('is_main', 'boolean')
         ->save();
     }
 }

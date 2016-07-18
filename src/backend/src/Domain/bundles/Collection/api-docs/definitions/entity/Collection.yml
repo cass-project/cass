@@ -72,6 +72,9 @@ Collection_Entity_Collection:
     is_protected:
       type: boolean
       description: Коллекция является защищенной от удаления, т.е. главной лентой профиля / коммунити
+    is_main:
+      type: boolean
+      description: Коллекция является главной для указанного сообщества / профиля
     children:
       type: array
       items:

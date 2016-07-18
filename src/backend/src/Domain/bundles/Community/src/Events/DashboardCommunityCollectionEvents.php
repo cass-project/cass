@@ -37,7 +37,7 @@ final class DashboardCommunityCollectionEvents implements EventsBootstrapInterfa
                     : []
             ));
 
-            $collectionService->protectCollection($collection->getId());
+            $collectionService->mainCollection($collection->getId());
         });
     }
 }

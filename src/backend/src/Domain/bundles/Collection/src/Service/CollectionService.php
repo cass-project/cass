@@ -144,6 +144,16 @@ class CollectionService implements EventEmitterAwareService
         return $collection;
     }
 
+    public function mainCollection(int $collectionId): Collection
+    {
+        $collection = $this->collectionRepository->getCollectionById($collectionId);
+        $collection->defineAsMain();
+
+        $this->collectionRepository->saveCollection($collection);
+
+        return $collection;
+    }
+
     public function generateImage(int $collectionId): ImageCollection
     {
         $collection = $this->collectionRepository->getCollectionById($collectionId);

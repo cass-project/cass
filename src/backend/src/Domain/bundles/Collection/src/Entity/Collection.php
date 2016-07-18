@@ -76,6 +76,12 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
      */
     private $isProtected = false;
 
+    /**
+     * @Column(type="boolean", name="is_main")
+     * @var bool
+     */
+    private $isMain = false;
+
     public function __construct(string $ownerSID)
     {
         $this->ownerSID = $ownerSID;
@@ -104,6 +110,7 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
             ],
             'image' => $this->getImages()->toJSON(),
             'is_protected' => $this->isProtected(),
+            'is_main' => $this->isMain(),
         ];
         return $result;
     }
@@ -252,5 +259,18 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
         $this->isProtected = true;
 
         return $this;
+    }
+
+    public function defineAsMain(): self
+    {
+        $this->isMain = true;
+        $this->enableProtection();
+
+        return $this;
+    }
+
+    public function isMain(): bool
+    {
+        return $this->isMain;
     }
 }
