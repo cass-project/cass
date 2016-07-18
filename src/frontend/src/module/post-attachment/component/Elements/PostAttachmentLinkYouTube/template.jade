@@ -1,7 +1,13 @@
 article.component.component-post-attachment-link-youtube
   div.youtube-container
-    iframe(
-      [attr.src]="getURL()",
-      frameborder="0",
-      allowfullscreen
-    )
+    .preview-image-container((click)="disablePreview()")
+      .play-button-container
+        i.fa.fa-play-circle-o
+      .image-container
+        img([src]="getPreviewImageURL()")
+    .iframe-container(*ngIf="! preview")
+      iframe(
+        [attr.src]="getURL()",
+        frameborder="0",
+        allowfullscreen
+      )
