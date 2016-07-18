@@ -6,6 +6,8 @@ import {ProfileIMChatHistory} from "../ProfileIMChatHistory/index";
 import {ProfileIMTextarea} from "../ProfileIMTextarea/index";
 import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
 import {ProfileIMAttachments} from "../ProfileIMAttachments/index";
+import {AuthService} from "../../../../auth/service/AuthService";
+import {MessagesSourceType} from "../../../definitions/paths/messages";
 
 @Component({
     selector: 'cass-profile-im-messages',
@@ -28,8 +30,17 @@ export class ProfileIMChat
     isNeedScroll = false;
     isLoading = true;
 
-    constructor(private params: RouteParams, private im:ProfileIMService) {
-        im.loadHistory(parseInt(params.get('id')), 0, 10, false)
+    constructor(private params: RouteParams, private im:ProfileIMService, authService:AuthService) {
+        im.loadHistory(
+            authService.getCurrentAccount().getCurrentProfile().getId(),
+            
+            MessagesSourceType.Profile,
+            parseInt(params.get('id')),
+            {criteria: {seek: {
+                offset: 0,
+                limit: 10
+            }}}
+        )
             .subscribe(() => {
                 this.isNeedScroll = true;
                 this.isLoading = false;

@@ -1,3 +1,4 @@
+import {ProfileEntity} from "../../../profile/definitions/entity/Profile";
 export interface ProfileMessageExtendedEntity extends ProfileMessageEntity
 {
     send_status: {
@@ -8,15 +9,11 @@ export interface ProfileMessageExtendedEntity extends ProfileMessageEntity
 
 export interface ProfileMessageEntity
 {
-    id: number;
-    date_created_on: string;
-    source_profile_id: number;
-    target_profile_id: number;
-    read_status: {
-        is_read: boolean,
-        date_read: string
-    };
+    id?: number;
+    author:ProfileEntity,
+    date_created: string;
     content: string;
+    attachments: {}[];
 }
 
 export enum ProfileIMFeedSendStatus {

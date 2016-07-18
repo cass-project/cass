@@ -3,7 +3,7 @@ import {Observable, Observer} from "rxjs/Rx";
 
 import {ProfileIMRESTService} from "./ProfileIMRESTService";
 import {UnreadProfileMessagesResponse200} from "../definitions/paths/unread";
-import {ProfileMessagesResponse200} from "../definitions/paths/messages";
+import {ProfileMessagesResponse200, MessagesSourceType, ProfileMessagesRequest} from "../definitions/paths/messages";
 import {SendProfileMessageResponse200} from "../definitions/paths/send";
 import {SendProfileMessageRequest} from "../definitions/paths/send";
 import {ProfileIMFeedSendStatus} from "../definitions/entity/ProfileMessage";
@@ -33,20 +33,21 @@ export class ProfileIMService
             );
         });
     }
-    
+
     loadHistory (
-        sourceProfileId: number,
-        offset: number,
-        limit: number,
-        markAsRead:boolean,
-        nocache?:boolean) : Observable<ProfileMessagesResponse200>
+        targetProfileId:number,
+        source:MessagesSourceType,
+        sourceId:number, 
+        body:ProfileMessagesRequest,
+        nocache?:boolean
+    ) : Observable<ProfileMessagesResponse200>
     {
         let stringifyArguments = JSON.stringify(arguments);
         this.clearHistory();
         
         return Observable.create((observer: Observer<ProfileMessagesResponse200>) => {
             if(this.getMessageFromCache[stringifyArguments]===undefined || nocache) {
-                this.rest.getMessageFrom(sourceProfileId, offset, limit, markAsRead).subscribe(
+                this.rest.getMessages(targetProfileId, source, sourceId, body).subscribe(
                     data => {
                         this.setHistory(data.messages);
                         this.getMessageFromCache[stringifyArguments] = data;

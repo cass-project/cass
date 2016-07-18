@@ -3,10 +3,8 @@ ul.chatlog
     *ngFor="#message of history",
     class="{{message.send_status.status}}"
   )
-    //img.avatar(src="{{message.source_profile.profile.image.variants['64'].public_path}}")
-    img.avatar(src="/dist/assets/profile-demo.png")
+    img.avatar(src="{{message.author.image.variants['64'].public_path}}")
     .message
-      //.from {{message.source_profile.profile.greetings.greetings}}
-      .from @username
-        small &nbsp;{{dateFormat(message.date_created_on, "dd.MM\yyyy, в HH:mm:ss") }}
+      .from {{message.author.greetings.greetings}}
+        small &nbsp;{{dateFormat(message.date_created, "dd.MM\yyyy, в HH:mm:ss") }}
       .text {{message.content}}

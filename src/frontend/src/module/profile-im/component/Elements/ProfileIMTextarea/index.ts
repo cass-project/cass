@@ -54,9 +54,8 @@ export class ProfileIMTextarea
         }
         
         this.im.stream.next(<ProfileMessageExtendedEntity>{
-            date_created_on: new Date().toString(),
-            source_profile_id: this.authService.getCurrentAccount().getCurrentProfile().getId(),
-            target_profile_id: parseInt(this.params.get('id')),
+            author: this.authService.getCurrentAccount().getCurrentProfile().entity.profile,
+            date_created: new Date().toString(),
             content: this.content,
             send_status:{status:ProfileIMFeedSendStatus.Processing}
         });
