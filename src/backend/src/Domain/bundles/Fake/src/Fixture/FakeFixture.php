@@ -383,7 +383,11 @@ final class FakeFixture
             $collectionItem = $profile->getCollections()->getItems()[0];
             $collection = $this->collectionService->getCollectionById($collectionItem->getCollectionId());
 
-            $collectionParams = new EditCollectionParameters($collection->getTitle(),$collection->getDescription(),array_merge($collection->getThemeIds(), [$video['category_id']]));
+            $collectionParams = new EditCollectionParameters(
+                $collection->getTitle(),
+                $collection->getDescription(),
+                [$video['category_id']]
+            );
 
             $collection = $this->collectionService->editCollection($collection->getId(), $collectionParams);
 
