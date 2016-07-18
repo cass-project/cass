@@ -24,7 +24,7 @@ export class ScreenComplete
     goToCommunity() {
         console.log(this.model.sid);
         this.close();
-        this.router.navigate([`/Community`, this.model.sid]);
+        this.router.navigate(['/Community', 'Community', {sid: this.model.sid}]);
     }
 
 }
