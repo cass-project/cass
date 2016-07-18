@@ -4,10 +4,13 @@
     li
       .community-bookmark
         a.sidebar-fa-button([routerLink]="['/Public']")
-          .fa.fa-fw.fa-search
-    li
-      .switcher
-        .sidebar-switch-button((click)="switchCommunityBookmarks()")
-    li.add-button(*ngIf="isSwitched()", (click)="openCommunityModal()")
+          i.fa.fa-fw.fa-search
+  ul.sidebar-items(*ngIf="isSwitched()")
+    li(*ngFor="#bookmark of getCommunityBookmarks()")
+      .bookmark
+        a.sidebar-button.sidebar-community-icon([routerLink]="getCommunityLinkParams(bookmark.community_sid)")
+          img.sidebar-icon([src]="getCommunityImage(bookmark)")
+  ul.sidebar-items(*ngIf="isSwitched()")
+    li.add-button((click)="openCommunityModal()")
       .community-plus
         i.fa.fa-plus

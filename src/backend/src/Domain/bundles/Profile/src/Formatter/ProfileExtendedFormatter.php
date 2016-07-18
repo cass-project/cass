@@ -7,6 +7,8 @@ use Domain\Collection\Collection\CollectionTree;
 use Domain\Collection\Service\CollectionService;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
+use Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
+use Domain\ProfileCommunities\Service\ProfileCommunitiesService;
 
 final class ProfileExtendedFormatter
 {
@@ -16,18 +18,26 @@ final class ProfileExtendedFormatter
     /** @var CurrentAccountService */
     private $currentAccountService;
 
+    /** @var ProfileCommunitiesService */
+    private $communityBookmarksService;
+
     public function __construct(
         CollectionService $collectionService,
-        CurrentAccountService $currentAccountService
+        CurrentAccountService $currentAccountService,
+        ProfileCommunitiesService $communityBookmarksService
     ) {
         $this->collectionService = $collectionService;
         $this->currentAccountService = $currentAccountService;
+        $this->communityBookmarksService = $communityBookmarksService;
     }
 
     public function format(Profile $profile): array {
         return [
             'profile' => $profile->toJSON(),
             'collections' => $this->formatCollections($profile->getCollections()),
+            'bookmarks' => array_map(function(ProfileCommunityEQ $eq) {
+                return $eq->toJSON();
+            }, $this->communityBookmarksService->getBookmarksOfProfile($profile->getId())),
             'is_own' => $this->currentAccountService->isAvailable()
                 ? $this->currentAccountService->getCurrentAccount()->getProfiles()->contains($profile)
                 : false

@@ -2,6 +2,10 @@ import {Component} from "angular2/core";
 
 import {CommunityModalService} from "../../../community/service/CommunityModalService";
 import {Router, ROUTER_DIRECTIVES} from "angular2/router";
+import {ProfileCommunityBookmarkEntity} from "../../../profile-communities/definitions/ProfileCommunityBookmark";
+import {Session} from "../../../session/Session";
+import {queryImage, QueryTarget} from "../../../avatar/functions/query";
+import {ProfileCommunityBookmarksService} from "../../../profile-communities/service/ProfileCommunityBookmarksService";
 
 @Component({
     selector: 'cass-sidebar-communities',
@@ -18,12 +22,24 @@ export class SidebarCommunities
     private isSwitchedCommunityBookmarks: boolean = true;
 
     constructor(
-        private router: Router,
-        private communityModalService: CommunityModalService
+        private communityModalService: CommunityModalService,
+        private bookmarks: ProfileCommunityBookmarksService
     ) {}
 
     isSwitched() {
         return this.isSwitchedCommunityBookmarks;
+    }
+    
+    getCommunityBookmarks(): ProfileCommunityBookmarkEntity[] {
+        return this.bookmarks.getBookmarks();
+    }
+
+    getCommunityLinkParams(communitySID: string) {
+        return ['/Community', 'Community', { sid: communitySID }];
+    }
+    
+    getCommunityImage(bookmark: ProfileCommunityBookmarkEntity): string {
+        return queryImage(QueryTarget.Avatar, bookmark.community.image).public_path;
     }
 
     switchCommunityBookmarks() {

@@ -11,9 +11,13 @@ class LeaveCommand extends Command
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
+            $profileId = $request->getAttribute('profileId');
             $communitySID = $request->getAttribute('communitySID');
 
-            $this->profileCommunitiesService->leaveCommunity($communitySID);
+            $this->profileCommunitiesService->leaveCommunity(
+                $this->currentAccountService->getProfileWithId($profileId)->getId(),
+                $communitySID
+            );
 
             $responseBuilder
                 ->setStatusSuccess();

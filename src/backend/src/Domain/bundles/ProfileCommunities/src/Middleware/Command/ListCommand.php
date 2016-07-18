@@ -10,11 +10,15 @@ class ListCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
+        $profileId = $this->currentAccountService->getProfileWithId(
+            $request->getAttribute('profileId')
+        )->getId();
+
         $responseBuilder
             ->setJson([
                 'bookmarks' => array_map(function(ProfileCommunityEQ $entity) {
                     return $entity->toJSON();
-                }, $this->profileCommunitiesService->getBookmarksOfCurrentProfile())
+                }, $this->profileCommunitiesService->getBookmarksOfProfile($profileId))
             ])
             ->setStatusSuccess();
 

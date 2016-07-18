@@ -1,6 +1,7 @@
 import {ImageCollection} from "../../../avatar/definitions/ImageCollection";
 import {Account} from "../../../account/definitions/entity/Account";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
+import {ProfileCommunityBookmarkEntity} from "../../../profile-communities/definitions/ProfileCommunityBookmark";
 
 export enum ProfileGender {
     None = <any> "none",
@@ -17,6 +18,7 @@ export const PROFILE_GENDER_LIST = [
 export interface ProfileExtendedEntity {
     collections: CollectionEntity[];
     profile: ProfileEntity;
+    bookmarks: ProfileCommunityBookmarkEntity[];
     is_own: boolean;
 }
 
