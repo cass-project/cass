@@ -6,12 +6,9 @@ article.component-community-card {
   .card-content {
     width: 230px;
     @include card(1);
-    padding: 20px;
     background-color: white;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border: 3px solid white;
     cursor: pointer;
     transition: background-color 0.1s;
 
@@ -21,20 +18,30 @@ article.component-community-card {
 
     .community-image {
       .community-image-container {
-        width: 180px;
+        img {
+          width: 100%;
+        }
       }
     }
 
     .community-about {
-      margin: 25px 0;
-      text-align: center;
+      margin: 24px 15px;
+      text-align: left;
 
-      h1.community-greetings {
+      h1.community-title {
         font-family: $FONT_FAMILY;
-        font-size: 25px;
+        font-size: 24px;
         font-weight: 400;
         line-height: 40px;
-        color: material-color("grey", "700");
+        color: black;
+      }
+
+      h2.community-description {
+        font-family: $FONT_FAMILY;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 40px;
+        color: material-color("grey", "500");
         margin-bottom: 10px;
       }
 

@@ -2,10 +2,12 @@ article.component.component-community-card((click)="click()")
   .card-content
     .community-image
       .community-image-container
-          cass-community-image([url]="getImageURL()", border = "circle")
+          cass-community-image([url]="getImageURL()", border="square")
     .community-about
-      h1.community-greetings
+      h1.community-title
         span {{ getCommunityTitle() }}
+      h2.community-description
+        span {{ getCommunityDescription() }}
       .community-expert-in(*ngIf="hasTheme()")
         .community-expert-in-title Сообщество специализируется на
         ul.themes
