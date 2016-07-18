@@ -7,7 +7,7 @@ import {ProfileIMTextarea} from "../ProfileIMTextarea/index";
 import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
 import {ProfileIMAttachments} from "../ProfileIMAttachments/index";
 import {AuthService} from "../../../../auth/service/AuthService";
-import {MessagesSourceType} from "../../../definitions/paths/messages";
+import {MessagesSourceType, ProfileMessagesRequest} from "../../../definitions/paths/messages";
 
 @Component({
     selector: 'cass-profile-im-messages',
@@ -29,24 +29,13 @@ export class ProfileIMChat
     @ViewChild('content') content:ElementRef;
     isNeedScroll = false;
     isLoading = true;
-
+    listerInterval = 5000/*ms*/;
     constructor(private params: RouteParams, private im:ProfileIMService, authService:AuthService) {
-        im.loadHistory(
-            authService.getCurrentAccount().getCurrentProfile().getId(),
-            
-            MessagesSourceType.Profile,
-            parseInt(params.get('id')),
-            {criteria: {seek: {
-                offset: 0,
-                limit: 10
-            }}}
-        )
-            .subscribe(() => {
-                this.isNeedScroll = true;
-                this.isLoading = false;
-            });
+        let profileId = authService.getCurrentAccount().getCurrentProfile().getId();
+
+        this.listen(profileId);
         
-        im.createStream()
+        im.createStream(MessagesSourceType.Profile, parseInt(params.get('id')))
             .subscribe(() => this.isNeedScroll = true);
     }
     
@@ -57,5 +46,32 @@ export class ProfileIMChat
     scroll() {
         this.isNeedScroll = false;
         this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+    }
+    
+    listen(profileId:number) {
+        let loadHistoryBody:ProfileMessagesRequest = {criteria: {seek: {
+            offset: 0,
+            limit: 10
+        }}};
+        
+        let history = this.im.getHistory(parseInt(this.params.get('id')));
+        console.log(history.length);
+        if(history.length>0) {
+            loadHistoryBody.criteria.cursor = {id: history[history.length-1].id.toString()}
+        }
+        
+        this.im.read(
+            profileId,
+            MessagesSourceType.Profile,
+            parseInt(this.params.get('id')),
+            loadHistoryBody
+        ).subscribe(() => {
+            setTimeout(()=>{
+                this.listen(profileId);
+            }, this.listerInterval);
+            
+            this.isNeedScroll = true;
+            this.isLoading = false;
+        });
     }
 }

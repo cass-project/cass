@@ -22,8 +22,8 @@ export class ProfileIMTextarea
     @Input('disabled') disabled:boolean;
     private hiddenDiv:HTMLDivElement = document.createElement('div');
     private content:string = "";
+    private attachments:number[] = [];
     constructor(
-        private params: RouteParams,
         private im:ProfileIMService,
         private authService:AuthService,
         private messageBus: MessageBusService
@@ -53,10 +53,11 @@ export class ProfileIMTextarea
             return false;
         }
         
-        this.im.stream.next(<ProfileMessageExtendedEntity>{
+        this.im.stream.next({
             author: this.authService.getCurrentAccount().getCurrentProfile().entity.profile,
             date_created: new Date().toString(),
             content: this.content,
+            attachments:this.attachments,
             send_status:{status:ProfileIMFeedSendStatus.Processing}
         });
         this.content = "";

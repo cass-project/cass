@@ -13,16 +13,15 @@ import {ProfileMessageExtendedEntity} from "../definitions/entity/ProfileMessage
 @Injectable()
 export class ProfileIMService 
 {
-    public history: ProfileMessageExtendedEntity[] = [];
-    private getMessageFromCache: ProfileMessagesResponse200[] = [];
+    public history: {[key: string]: ProfileMessageExtendedEntity[]} = <any>[];
     public stream: Observer<ProfileMessageExtendedEntity>;
     
     constructor(private rest:ProfileIMRESTService) {}
 
-    getUnreadMessages() : Observable<UnreadProfileMessagesResponse200> 
+    getUnread(targetProfileId:number) : Observable<UnreadProfileMessagesResponse200> 
     {
         return Observable.create((observer: Observer<UnreadProfileMessagesResponse200>) => {
-            this.rest.getUnreadMessages().subscribe(
+            this.rest.getUnread(targetProfileId).subscribe(
                 data => {
                     observer.next(data);
                     observer.complete();
@@ -34,42 +33,36 @@ export class ProfileIMService
         });
     }
 
-    loadHistory (
+    read(
         targetProfileId:number,
         source:MessagesSourceType,
         sourceId:number, 
-        body:ProfileMessagesRequest,
-        nocache?:boolean
+        body:ProfileMessagesRequest
     ) : Observable<ProfileMessagesResponse200>
     {
-        let stringifyArguments = JSON.stringify(arguments);
-        this.clearHistory();
-        
         return Observable.create((observer: Observer<ProfileMessagesResponse200>) => {
-            if(this.getMessageFromCache[stringifyArguments]===undefined || nocache) {
-                this.rest.getMessages(targetProfileId, source, sourceId, body).subscribe(
-                    data => {
-                        this.setHistory(data.messages);
-                        this.getMessageFromCache[stringifyArguments] = data;
-                        observer.next(data);
-                        observer.complete();
-                    },
-                    error => {
-                        observer.error(error);
-                    }
-                );
-            } else {
-                this.setHistory(this.getMessageFromCache[stringifyArguments].messages);
-                observer.next(this.getMessageFromCache[stringifyArguments]);
-                observer.complete();
-            }
+            this.rest.read(targetProfileId, source, sourceId, body).subscribe(
+                data => {
+                    this.setHistory(data.messages);
+                    observer.next(data);
+                    observer.complete();
+                },
+                error => {
+                    observer.error(error);
+                }
+            );
         });
     }
     
-    sendMessageTo(targetProfileId: number, body:SendProfileMessageRequest) : Observable<SendProfileMessageResponse200>
+    sendMessageTo(
+        sourceProfileId:number,
+        source: MessagesSourceType,
+        targetProfileId: number,
+        body:SendProfileMessageRequest
+    ) : Observable<SendProfileMessageResponse200>
     {
         return Observable.create((observer: Observer<SendProfileMessageResponse200>) => {
-            this.rest.sendMessageTo(targetProfileId, body).subscribe(
+            this.rest.send(sourceProfileId, source, targetProfileId, body).subscribe(
                 data => {
                     observer.next(data);
                     observer.complete();
@@ -81,15 +74,23 @@ export class ProfileIMService
         });
     }
 
-    createStream() : Observable<ProfileMessageExtendedEntity>
+    createStream(source: MessagesSourceType, targetProfileId:number) : Observable<ProfileMessageExtendedEntity>
     {
         let fork = Observable.create((observer: Observer<ProfileMessageExtendedEntity>)  => {
             this.stream = observer;
         }).publish().refCount();
         
         fork.subscribe(message => {
-            this.history.push(message);
-            this.sendMessageTo(message.target_profile_id, <SendProfileMessageRequest>{content: message.content})
+            this.push(targetProfileId, message);
+            this.sendMessageTo(
+                message.author.id,
+                source,
+                targetProfileId,
+                <SendProfileMessageRequest>{
+                    message: message.content,
+                    attachment_ids: message.attachments
+                }
+            )
                 .subscribe(
                     () => message.send_status.status = ProfileIMFeedSendStatus.Complete,
                     error => {
@@ -102,20 +103,29 @@ export class ProfileIMService
         return fork;
     }
     
-    clearHistory() {
-        this.history = [];
+    clearHistory(targetProfileId) {
+        this.history[targetProfileId] = [];
     }
     
     setHistory(messages:ProfileMessageEntity[])
     {
-        this.clearHistory();
-        messages.forEach((message) => {
-            let messageExtented:ProfileMessageExtendedEntity = (<any>Object).assign(message, {
+        messages.forEach(
+            message => this.push(message.author.id, (<any>Object).assign(message, {
                 send_status: {
                     status: ProfileIMFeedSendStatus.Complete
                 }
-            });
-            this.history.push(messageExtented);
-        });
+            }))
+        );
+    }
+    
+    getHistory(targetProfileId:number) : ProfileMessageExtendedEntity[] {
+        return this.history[targetProfileId] || []; 
+    }
+    
+    push(targetProfileId:number, message:ProfileMessageExtendedEntity) {
+        if(!this.history[targetProfileId]) {
+            this.history[targetProfileId] = [];
+        }
+        this.history[targetProfileId].push(message);
     }
 }

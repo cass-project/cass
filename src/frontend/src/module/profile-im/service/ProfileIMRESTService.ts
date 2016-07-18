@@ -1,5 +1,5 @@
 import {Injectable} from "angular2/core";
-import {Http, URLSearchParams, Headers} from "angular2/http"
+import {Http, Headers} from "angular2/http"
 import {Observable} from "rxjs/Rx";
 
 import {SendProfileMessageResponse200, SendProfileMessageRequest} from "../definitions/paths/send";
@@ -18,7 +18,7 @@ export class ProfileIMRESTService extends AbstractRESTService
         protected messages: MessageBusService
     ) { super(http, token, messages); }
 
-    getUnreadMessages() : Observable<UnreadProfileMessagesResponse200>
+    getUnread(targetProfileId:number) : Observable<UnreadProfileMessagesResponse200>
     {
         let authHeader = new Headers();
         
@@ -26,10 +26,15 @@ export class ProfileIMRESTService extends AbstractRESTService
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
         
-        return this.handle(this.http.get(`/backend/api/protected/profile-im/unread`, {headers: authHeader}));
+        return this.handle(this.http.get(`/backend/api/protected/with-profile/${targetProfileId}/im/unread`, {headers: authHeader}));
     }
 
-    getMessages(targetProfileId:number, source:MessagesSourceType, sourceId:number, body:ProfileMessagesRequest)
+    read(
+        targetProfileId:number,
+        source:MessagesSourceType,
+        sourceId:number,
+        body:ProfileMessagesRequest
+    ) : Observable<ProfileMessagesResponse200>
     {
         let authHeader = new Headers();
 
@@ -41,7 +46,12 @@ export class ProfileIMRESTService extends AbstractRESTService
         ));
     }
     
-    sendMessageTo(targetProfileId: number, body:SendProfileMessageRequest) : Observable<SendProfileMessageResponse200>
+    send(
+        sourceProfileId:number,
+        source: MessagesSourceType,
+        targetProfileId: number,
+        body:SendProfileMessageRequest
+    ) : Observable<SendProfileMessageResponse200>
     {
         
         let authHeader = new Headers();
@@ -50,7 +60,8 @@ export class ProfileIMRESTService extends AbstractRESTService
         }
         
         return this.handle(this.http.put(
-            `/backend/api/protected/profile-im/send/to/${targetProfileId}`, JSON.stringify(body), {headers: authHeader}
+            `/backend/api/protected/with-profile/${sourceProfileId}/im/send/to/${source}/${targetProfileId}`,
+            JSON.stringify(body), {headers: authHeader}
         ));
     }
 }
