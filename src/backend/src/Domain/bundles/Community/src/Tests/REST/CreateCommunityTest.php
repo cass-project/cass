@@ -30,41 +30,41 @@ final class CreateCommunityTest extends CommunityMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
-                    'id' => $this->expectId(),
-                    'sid' => $this->expectString(),
-                    'title' => 'Community 1',
-                    'description' => 'My Community 1',
-                    'theme' => [
-                        'has' => true,
-                        'id' => $theme->getId()
-                    ],
-                    'image' => [
-                        'uid' => $this->expectString(),
-                        'variants' => [
-                            'default' => [
-                                'id' => 'default',
-                                'storage_path' => $this->expectString(),
-                                'public_path' => $this->expectString(),
-                            ]
+                    'is_own' => true,
+                    'collections' => [
+                        0 => [
+                            'id' => $this->expectId(),
+                            'sid' => $this->expectString(),
+                            'owner_sid' => $this->expectString(),
+                            'owner' => [
+                                'id' => $this->expectString(),
+                                'type' => 'community'
+                            ],
+                            'title' => $this->expectString(),
+                            'description' => $this->expectString()
                         ]
                     ],
-                    'public_options' => [
-                        'public_enabled' => true,
-                        'moderation_contract' => false
-                    ]
-                ]
-            ])
-            ->expectJSONBody([
-                'entity' => [
-                    'image' => [
-                        'is_auto_generated' => true
-                    ]
+                    'community' => [
+                        'id' => $this->expectId(),
+                        'sid' => $this->expectString(),
+                        'title' => 'Community 1',
+                        'description' => 'My Community 1',
+                        'theme' => [
+                            'has' => true,
+                            'id' => $theme->getId()
+                        ],
+                        'image' => $this->expectImageCollection(),
+                        'public_options' => [
+                            'public_enabled' => true,
+                            'moderation_contract' => false
+                        ]
+                    ],
                 ]
             ])
             ->expect(function(array $result) {
-                $sid = $result['entity']['sid'];
+                $collections = $result['entity']['community']['collections'];
 
-                $this->assertEquals(Community::SID_LENGTH, strlen($sid));
+                $this->assertEquals(1, count($collections));
             });
     }
 
@@ -83,44 +83,46 @@ final class CreateCommunityTest extends CommunityMiddlewareTestCase
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
-                    'id' => $this->expectId(),
-                    'sid' => $this->expectString(),
-                    'title' => 'Community 1',
-                    'description' => 'My Community 1',
-                    'theme' => [
-                        'has' => false,
+                    'is_own' => true,
+                    'collections' => [
+                        0 => [
+                            'id' => $this->expectId(),
+                            'sid' => $this->expectString(),
+                            'owner_sid' => $this->expectString(),
+                            'owner' => [
+                                'id' => $this->expectString(),
+                                'type' => 'community'
+                            ],
+                            'title' => $this->expectString(),
+                            'description' => $this->expectString()
+                        ]
                     ],
-                    'image' => [
-                        'uid' => $this->expectString(),
-                        'variants' => [
-                            'default' => [
-                                'id' => 'default',
-                                'storage_path' => $this->expectString(),
-                                'public_path' => $this->expectString(),
+                    'community' => [
+                        'id' => $this->expectId(),
+                        'sid' => $this->expectString(),
+                        'title' => 'Community 1',
+                        'description' => 'My Community 1',
+                        'theme' => [
+                            'has' => false,
+                        ],
+                        'image' => $this->expectImageCollection(),
+                        'public_options' => [
+                            'public_enabled' => false,
+                            'moderation_contract' => false
+                        ],
+                        'collections' => [
+                            0 => [
+                                'collection_id' => $this->expectId(),
+                                'position' => 1
                             ]
                         ]
                     ],
-                    'public_options' => [
-                        'public_enabled' => false,
-                        'moderation_contract' => false
-                    ],
-                    'collections' => [
-                        0 => [
-                            'collection_id' => $this->expectId(),
-                            'position' => 1
-                        ]
-                    ]
                 ],
             ])
             ->expect(function(array $result) {
-                $collections = $result['entity']['collections'];
+                $collections = $result['entity']['community']['collections'];
 
                 $this->assertEquals(1, count($collections));
-            })
-            ->expect(function(array $result) {
-                $sid = $result['entity']['sid'];
-
-                $this->assertEquals(Community::SID_LENGTH, strlen($sid));
             });
     }
 

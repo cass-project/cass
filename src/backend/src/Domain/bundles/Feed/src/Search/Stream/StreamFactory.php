@@ -3,15 +3,19 @@ namespace Domain\Feed\Search\Stream;
 
 use Domain\Collection\Service\CollectionService;
 use Domain\Community\Service\CommunityService;
-use Domain\Feed\Source\CollectionSource;
-use Domain\Feed\Source\ProfileSource;
-use Domain\Feed\Source\PublicCatalog\PublicCollectionsSource;
-use Domain\Feed\Source\PublicCatalog\PublicCommunitiesSource;
-use Domain\Feed\Source\PublicCatalog\PublicContentSource;
-use Domain\Feed\Source\PublicCatalog\PublicDiscussionsSource;
-use Domain\Feed\Source\PublicCatalog\PublicProfilesSource;
-use Domain\Feed\Source\PublicCatalog\PublicExpertsSource;
-use Domain\Feed\Source\Source;
+use Domain\Feed\Search\Stream\Streams\CollectionStream;
+use Domain\Feed\Search\Stream\Streams\CommunityStream;
+use Domain\Feed\Search\Stream\Streams\PostStream;
+use Domain\Feed\Search\Stream\Streams\ProfileStream;
+use Domain\Index\Source\Source;
+use Domain\Index\Source\Sources\CollectionSource;
+use Domain\Index\Source\Sources\ProfileSource;
+use Domain\Index\Source\Sources\PublicCatalog\PublicCollectionsSource;
+use Domain\Index\Source\Sources\PublicCatalog\PublicCommunitiesSource;
+use Domain\Index\Source\Sources\PublicCatalog\PublicContentSource;
+use Domain\Index\Source\Sources\PublicCatalog\PublicDiscussionsSource;
+use Domain\Index\Source\Sources\PublicCatalog\PublicProfilesSource;
+use Domain\Index\Source\Sources\PublicCatalog\PublicExpertsSource;
 use Domain\Post\Formatter\PostFormatter;
 use Domain\Post\Service\PostService;
 use Domain\Profile\Service\ProfileService;
@@ -74,6 +78,7 @@ final class StreamFactory
             PublicCollectionsSource::class
         ])) {
             $stream = new CollectionStream($source);
+            $stream->setCollectionService($this->collectionService);
 
             return $stream;
         }else if(in_array($sourceName, [

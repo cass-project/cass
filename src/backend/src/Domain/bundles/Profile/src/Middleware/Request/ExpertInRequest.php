@@ -10,7 +10,7 @@ class ExpertInRequest extends SchemaParams
 {
     public function getParameters()
     {
-        return new ExpertInParameters($this->getData()->theme_ids);
+        return new ExpertInParameters($this->getData()['theme_ids'] ?? []);
     }
 
     protected function getSchema(): JSONSchema

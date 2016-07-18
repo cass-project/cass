@@ -10,7 +10,7 @@ class SetGenderRequest extends SchemaParams
 {
     public function getParameters(): SetGenderParameters
     {
-        return new SetGenderParameters($this->getData()->gender);
+        return new SetGenderParameters($this->getData()['gender']);
     }
 
     protected function getSchema(): JSONSchema

@@ -44,6 +44,7 @@ import {ProfileIMRESTService} from "../../module/profile-im/service/ProfileIMRES
 import {ProfileIMRoute} from "../../module/profile-im/route/ProfileIMRoute/index";
 import {ContactService} from "../../module/contact/service/ContactService";
 import {ContactRESTService} from "../../module/contact/service/ContactRESTService";
+import {IMRESTService} from "../../module/im/service/IMRESTService";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -81,7 +82,8 @@ import {ContactRESTService} from "../../module/contact/service/ContactRESTServic
         ProfileIMRESTService,
         ProfileIMService,
         ContactRESTService,
-        ContactService
+        ContactService,
+        IMRESTService
     ],
     directives: [
         ROUTER_DIRECTIVES,

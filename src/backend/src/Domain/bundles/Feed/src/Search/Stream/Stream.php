@@ -2,13 +2,15 @@
 namespace Domain\Feed\Search\Stream;
 
 use Domain\Feed\Search\Criteria\CriteriaManager;
-use Domain\Feed\Service\Entity;
-use Domain\Feed\Source\Source;
+
+use Domain\Index\Source\Source;
 use MongoDB\Collection;
 use MongoDB\Model\BSONDocument;
 
 abstract class Stream
 {
+    const DEFAULT_LIMIT = 100;
+    
     /** @var Source */
     protected $source;
 

@@ -1,14 +1,15 @@
 <?php
 namespace Domain\Feed\Factory;
 
-use Domain\Feed\Source\CollectionSource;
-use Domain\Feed\Source\ProfileSource;
-use Domain\Feed\Source\PublicCatalog\PublicCollectionsSource;
-use Domain\Feed\Source\PublicCatalog\PublicCommunitiesSource;
-use Domain\Feed\Source\PublicCatalog\PublicContentSource;
-use Domain\Feed\Source\PublicCatalog\PublicDiscussionsSource;
-use Domain\Feed\Source\PublicCatalog\PublicExpertsSource;
-use Domain\Feed\Source\PublicCatalog\PublicProfilesSource;
+use Domain\Index\Source\Sources\CollectionSource;
+use Domain\Index\Source\Sources\CommunitySource;
+use Domain\Index\Source\Sources\ProfileSource;
+use Domain\Index\Source\Sources\PublicCatalog\PublicCollectionsSource;
+use Domain\Index\Source\Sources\PublicCatalog\PublicCommunitiesSource;
+use Domain\Index\Source\Sources\PublicCatalog\PublicContentSource;
+use Domain\Index\Source\Sources\PublicCatalog\PublicDiscussionsSource;
+use Domain\Index\Source\Sources\PublicCatalog\PublicExpertsSource;
+use Domain\Index\Source\Sources\PublicCatalog\PublicProfilesSource;
 
 final class FeedSourceFactory
 {
@@ -20,6 +21,11 @@ final class FeedSourceFactory
     public function getCollectionSource(int $collectionId): CollectionSource
     {
         return new CollectionSource($collectionId);
+    }
+    
+    public function getCommunitySource(int $communityId): CommunitySource
+    {
+        return new CommunitySource($communityId);
     }
 
     public function getPublicCollectionsSource(): PublicCollectionsSource

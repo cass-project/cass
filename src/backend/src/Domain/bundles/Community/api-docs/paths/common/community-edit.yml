@@ -35,4 +35,4 @@
               type: boolean
               description: '=true'
             entity:
-              $ref: '#/definitions/Community_Entity_Community'
+              $ref: '#/definitions/Community_Entity_CommunityExtended'

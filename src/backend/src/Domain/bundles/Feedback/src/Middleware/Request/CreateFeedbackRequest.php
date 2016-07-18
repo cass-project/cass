@@ -13,10 +13,10 @@ class CreateFeedbackRequest extends SchemaParams
         $data = $this->getData();
 
         return new CreateFeedbackParameters(
-            $data->type_feedback,
-            $data->description,
-            $data->profile_id ?? null,
-            $data->email ?? null
+            $data['type_feedback'],
+            $data['description'],
+            $data['profile_id'] ?? null,
+            $data['email'] ?? null
         );
     }
 

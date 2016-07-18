@@ -73,7 +73,8 @@ class ThemeSelectSearch
     results: Theme[] = [];
     lastInput: string;
 
-    constructor(private themeSelect: ThemeSelect, private service: ThemeService) {}
+    constructor(private themeSelect: ThemeSelect, private service: ThemeService) {
+    }
 
     isResultsAvailable(): boolean {
         return this.enabled && (this.results.length > 0);
@@ -93,6 +94,7 @@ class ThemeSelectSearch
 
     disable() {
         this.enabled = false;
+        this.results = [];
     }
 
     fetch(input: string) {
@@ -109,12 +111,6 @@ class ThemeSelectSearch
         }
 
         return results;
-    }
-
-    include(theme: Theme) {
-        this.themeSelect.include(theme.id);
-        this.themeSelect.searchInput.nativeElement.focus();
-        this.update(this.lastInput);
     }
 }
 

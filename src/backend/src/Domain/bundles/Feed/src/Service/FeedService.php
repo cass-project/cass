@@ -4,7 +4,7 @@ namespace Domain\Feed\Service;
 use Application\Exception\NotImplementedException;
 use Domain\Feed\Request\FeedRequest;
 use Domain\Feed\Search\Stream\StreamFactory;
-use Domain\Feed\Source\Source;
+use Domain\Index\Source\Source;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
 use MongoDB\Database;

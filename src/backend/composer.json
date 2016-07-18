@@ -23,7 +23,7 @@
       "Domain\\Post\\": "src/Domain/bundles/Post/src",
       "Domain\\PostAttachment\\": "src/Domain/bundles/PostAttachment/src",
       "Domain\\Profile\\": "src/Domain/bundles/Profile/src",
-      "Domain\\ProfileIM\\": "src/Domain/bundles/ProfileIM/src",
+      "Domain\\IM\\": "src/Domain/bundles/IM/src",
       "Domain\\Theme\\": "src/Domain/bundles/Theme/src",
       "Domain\\Community\\": "src/Domain/bundles/Community/src",
       "Domain\\ProfileCommunities\\": "src/Domain/bundles/ProfileCommunities/src",
@@ -31,7 +31,9 @@
       "Domain\\Avatar\\": "src/Domain/bundles/Avatar/src",
       "Domain\\Feedback\\": "src/Domain/bundles/Feedback/src",
       "Domain\\OpenGraph\\": "src/Domain/bundles/OpenGraph/src",
-      "Domain\\Contact\\": "src/Domain/bundles/Contact/src"
+      "Domain\\Contact\\": "src/Domain/bundles/Contact/src",
+      "Domain\\Fake\\": "src/Domain/bundles/Fake/src",
+      "Domain\\Index\\": "src/Domain/bundles/Index/src"
     }
   },
   "require": {

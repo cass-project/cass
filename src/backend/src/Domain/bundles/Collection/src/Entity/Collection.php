@@ -11,7 +11,8 @@ use Domain\Collection\Exception\InvalidCollectionOptionsException;
 use Domain\Collection\Exception\PublicEnabledException;
 use Domain\Community\Entity\Community;
 use Domain\Avatar\Entity\ImageEntityTrait;
-use Domain\Feed\Service\Entity;
+use Domain\Index\Entity\IndexedEntity;
+use Domain\Index\Service\ThemeWeightCalculator\ThemeWeightEntity;
 use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Theme\Strategy\ThemeIdsEntityAware;
 use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
@@ -20,12 +21,18 @@ use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  * @Entity(repositoryClass="Domain\Collection\Repository\CollectionRepository")
  * @Table(name="collection")
  */
-class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, ThemeIdsEntityAware, Entity
+class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, ThemeIdsEntityAware, IndexedEntity, ThemeWeightEntity
 {
     use IdTrait;
     use SIDEntityTrait;
     use ImageEntityTrait;
     use ThemeIdsAwareEntityTrait;
+
+    /**
+     * @Column(type="datetime", name="date_created_on")
+     * @var \DateTime
+     */
+    private $dateCreatedOn;
 
     /**
      * @Column(type="string", name="owner_sid")
@@ -66,6 +73,7 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
     public function __construct(string $ownerSID)
     {
         $this->ownerSID = $ownerSID;
+        $this->dateCreatedOn = new \DateTime();
         $this->regenerateSID();
     }
 
@@ -75,6 +83,7 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
             'id' => $this->getId(),
             'sid' => $this->getSID(),
             'owner_sid' => $this->getOwnerSID(),
+            'date_created_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),
             'owner' => [
                 'id' => $this->getOwnerId(),
                 'type' => $this->getOwnerType(),
@@ -92,9 +101,16 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
         return $result;
     }
 
-    public function toIndexedJSON(): array
+    public function toIndexedEntityJSON(): array
     {
-        return $this->toJSON();
+        return array_merge($this->toJSON(), [
+            'date_created_on' => $this->getDateCreatedOn()
+        ]);
+    }
+
+    public function getDateCreatedOn(): \DateTime
+    {
+        return $this->dateCreatedOn;
     }
 
     public function getOwnerSID(): string
@@ -114,6 +130,16 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
         list(, $id) = explode(':', $this->getOwnerSID());
 
         return $id;
+    }
+
+    public function isProfileCollection(): bool
+    {
+        return $this->getOwnerType() === 'profile';
+    }
+
+    public function isCommunityCollection(): bool
+    {
+        return $this->getOwnerType() === 'collection';
     }
 
     public function getTitle(): string

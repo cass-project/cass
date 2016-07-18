@@ -10,7 +10,7 @@ final class FeedMiddlewareRequest extends SchemaParams
 {
     public function getParameters(): array
     {
-        return json_decode(json_encode($this->getData()), true);
+        return $this->getData();
     }
 
     protected function getSchema(): JSONSchema

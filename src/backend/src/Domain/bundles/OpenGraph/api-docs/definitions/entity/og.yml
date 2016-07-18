@@ -33,6 +33,7 @@ OpenGraph_Entity_OG:
             type: object
             schema:
               required:
+                - "og:url"
                 - "og:title"
                 - "og:type"
                 - "og:description"
@@ -44,6 +45,9 @@ OpenGraph_Entity_OG:
                 - "og:video"
                 - "og:audio"
               properties:
+                "og:url":
+                  type: string
+                  description: The canonical URL of your object that will be used as its permanent ID in the graph, e.g., "http://www.imdb.com/title/tt0117500/".
                 "og:title":
                   type: string
                   description: The title of your object as it should appear within the graph, e.g., "The Rock".

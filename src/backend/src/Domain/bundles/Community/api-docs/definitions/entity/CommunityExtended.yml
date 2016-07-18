@@ -1,0 +1,19 @@
+Community_Entity_CommunityExtended:
+  type: object
+  required:
+    - community
+    - collections
+    - is_own
+  properties:
+    community:
+      type: object
+      schema:
+        $ref: '#/definitions/Community_Entity_Community'
+    collections:
+      type: array
+      items:
+        schema:
+          $ref: '#/definitions/Collection_Entity_Collection'
+    is_own:
+      type: boolean
+      description: TRUE, если является коммунити принадлежит текущему аккаунту

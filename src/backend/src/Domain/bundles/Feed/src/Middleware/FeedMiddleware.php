@@ -9,9 +9,8 @@ use Domain\Feed\Middleware\Command\ProfileCommand;
 use Domain\Feed\Middleware\Command\PublicContentCommand;
 use Domain\Feed\Middleware\Command\PublicExpertsCommand;
 use Domain\Feed\Middleware\Command\PublicProfilesCommand;
-use Domain\Feed\Source\PublicCatalog\PublicCollectionsSource;
-use Domain\Feed\Source\PublicCatalog\PublicCommunitiesSource;
-use Domain\Feed\Source\PublicCatalog\PublicDiscussionsSource;
+use Domain\Feed\Middleware\Command\PublicDiscussionsCommand;
+use Domain\Feed\Middleware\Command\PublicCollectionsCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -38,9 +37,9 @@ final class FeedMiddleware implements MiddlewareInterface
                 ->attachDirect('public-profiles', PublicProfilesCommand::class)
                 ->attachDirect('public-experts', PublicExpertsCommand::class)
                 ->attachDirect('public-content', PublicContentCommand::class)
-                ->attachDirect('public-discussions', PublicDiscussionsSource::class)
-                ->attachDirect('public-communities', PublicCommunitiesSource::class)
-                ->attachDirect('public-collections', PublicCollectionsSource::class)
+                ->attachDirect('public-discussions', PublicDiscussionsCommand::class)
+                ->attachDirect('public-communities', PublicCommunitiesCommand::class)
+                ->attachDirect('public-collections', PublicCollectionsCommand::class)
                 ->resolve($request)
             ;
 

@@ -24,22 +24,23 @@ final class SetPublicOptionsTest extends CommunityMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'entity' => [
-                    'id' => $sampleCommunity->getId(),
-                    'public_options' => [
-                        'public_enabled' => true,
-                        'moderation_contract' => false
-                    ]
-                ]
+                    'community' => [
+                        'id' => $sampleCommunity->getId(),
+                        'public_options' => [
+                            'public_enabled' => true,
+                            'moderation_contract' => false,
+                        ],
+                    ],
+                ],
             ]);
 
         $this->requestSetPublicOptions($sampleCommunity->getId(), [
             'public_enabled' => true,
-            'moderation_contract' => true
+            'moderation_contract' => true,
         ])->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
-            ->expectJSONContentType()
-        ;
+            ->expectJSONContentType();
 
         $this->requestGetCommunityById($sampleCommunity->getId())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
@@ -48,22 +49,23 @@ final class SetPublicOptionsTest extends CommunityMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'entity' => [
-                    'id' => $sampleCommunity->getId(),
-                    'public_options' => [
-                        'public_enabled' => true,
-                        'moderation_contract' => true
-                    ]
-                ]
+                    'community' => [
+                        'id' => $sampleCommunity->getId(),
+                        'public_options' => [
+                            'public_enabled' => true,
+                            'moderation_contract' => true,
+                        ],
+                    ],
+                ],
             ]);
 
         $this->requestSetPublicOptions($sampleCommunity->getId(), [
             'public_enabled' => false,
-            'moderation_contract' => false
+            'moderation_contract' => false,
         ])->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
-            ->expectJSONContentType()
-        ;
+            ->expectJSONContentType();
 
         $this->requestGetCommunityById($sampleCommunity->getId())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
@@ -72,63 +74,58 @@ final class SetPublicOptionsTest extends CommunityMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'entity' => [
-                    'id' => $sampleCommunity->getId(),
-                    'public_options' => [
-                        'public_enabled' => false,
-                        'moderation_contract' => false
-                    ]
-                ]
+                    'community' => [
+                        'id' => $sampleCommunity->getId(),
+                        'public_options' => [
+                            'public_enabled' => false,
+                            'moderation_contract' => false,
+                        ],
+                    ],
+                ],
             ]);
     }
 
     public function testSetPublicOptions409()
     {
-        $id = null;
         $json = [
             'title' => 'Community 1',
-            'description' => 'My Community 1'
+            'description' => 'My Community 1',
         ];
 
-        $this->requestCreateCommunity($json)
+        $id = $this->requestCreateCommunity($json)
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectJSONContentType()
             ->expectStatusCode(200)
-            ->with(function(array $result) use (&$id) {
-                $id = (int) $result['entity']['id'];
-            })
-        ;
+            ->fetch(function(array $result) use (&$id) {
+                return (int) $result['entity']['community']['id'];
+            });
 
         $this->assertTrue($id > 0);
 
-
         $this->requestSetPublicOptions($id, [
             'public_enabled' => false,
-            'moderation_contract' => false
+            'moderation_contract' => false,
         ])->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
-            ->expectJSONContentType()
-        ;
-
+            ->expectJSONContentType();
 
         $this->requestSetPublicOptions($id, [
             'public_enabled' => false,
-            'moderation_contract' => true
+            'moderation_contract' => true,
         ])->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
-            ->expectJSONContentType()
-        ;
+            ->expectJSONContentType();
 
         $this->requestSetPublicOptions($id, [
             'public_enabled' => true,
-            'moderation_contract' => false
+            'moderation_contract' => false,
         ])->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(409)
-            ->expectJSONContentType()
-        ;
+            ->expectJSONContentType();
     }
 
     public function testDoNotResetModerationContract()
@@ -139,20 +136,18 @@ final class SetPublicOptionsTest extends CommunityMiddlewareTestCase
 
         $this->requestSetPublicOptions($sampleCommunity->getId(), [
             'public_enabled' => true,
-            'moderation_contract' => true
+            'moderation_contract' => true,
         ])->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
-            ->expectJSONContentType()
-        ;
+            ->expectJSONContentType();
 
         $this->requestEditCommunity($sampleCommunity->getId(), [
             'title' => '* title_edited',
             'description' => '* description_edited',
         ])->auth(DemoAccountFixture::getAccount()->getAPIKey())->execute()
             ->expectJSONContentType()
-            ->expectStatusCode(200);
-        ;
+            ->expectStatusCode(200);;
 
         $this->requestGetCommunityById($sampleCommunity->getId())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
@@ -161,12 +156,14 @@ final class SetPublicOptionsTest extends CommunityMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'entity' => [
-                    'id' => $sampleCommunity->getId(),
-                    'public_options' => [
-                        'public_enabled' => false,
-                        'moderation_contract' => true
-                    ]
-                ]
+                    'community' => [
+                        'id' => $sampleCommunity->getId(),
+                        'public_options' => [
+                            'public_enabled' => false,
+                            'moderation_contract' => true,
+                        ],
+                    ],
+                ],
             ]);
     }
 }

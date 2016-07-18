@@ -1,5 +1,5 @@
 import {Success200} from "../../../common/definitions/common";
-import {CommunityEntity} from "../entity/Community";
+import {CommunityExtendedEntity} from "../entity/CommunityExtended";
 
 export interface EditCommunityRequest
 {
@@ -10,5 +10,5 @@ export interface EditCommunityRequest
 
 export interface EditCommunityResponse200 extends Success200
 {
-    entity: CommunityEntity;
+    entity: CommunityExtendedEntity;
 }

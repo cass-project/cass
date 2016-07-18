@@ -39,6 +39,7 @@ class AuthMiddlewareTest extends MiddlewareTestCase
                 ],
                 'profiles' => [
                     0 => [
+                        'is_own' => true,
                         'profile' => [
                             'id' => $this->expectId(),
                             'account_id' => $this->expectId(),
@@ -49,7 +50,7 @@ class AuthMiddlewareTest extends MiddlewareTestCase
                             0 => [
                                 'id' => $this->expectId(),
                                 'sid' => $this->expectString(),
-                                'title' => 'Моя лента',
+                                'title' => $this->expectString(),
                                 'description' => $this->expectString()
                             ]
                         ]
@@ -118,7 +119,7 @@ class AuthMiddlewareTest extends MiddlewareTestCase
                             0 => [
                                 'id' => $this->expectId(),
                                 'sid' => $this->expectString(),
-                                'title' => 'Моя лента',
+                                'title' => $this->expectString(),
                                 'description' => $this->expectString(),
                             ]
                         ]

@@ -12,12 +12,12 @@ class EditPersonalRequest extends SchemaParams
     {
         $data = $this->getData();
         $parameters = new EditPersonalParameters(
-            $data->method,
-            $data->avatar ?? false,
-            $data->first_name,
-            $data->last_name,
-            $data->middle_name,
-            $data->nick_name
+            $data['method'],
+            $data['avatar'] ?? false,
+            $data['first_name'],
+            $data['last_name'],
+            $data['middle_name'],
+            $data['nick_name']
         );
 
         if(isset($data->gender) && is_string($data->gender)) {

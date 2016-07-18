@@ -40,40 +40,49 @@ export abstract class AbstractRESTService
     handle(request) {
         let fork = request.publish().refCount();
 
-        fork.catch(error => {
-            let response = {
-                success: false,
-                status: 500,
-                error: 'Unknown error'
-            };
+        fork
+          .catch(error => {
+              return Observable.throw(this.handleError(error));
+          })
+          .subscribe(() => {}, error => {
+              this.handleError(error);
+        });
 
-            if (typeof error === "string") {
-                this.genericError(error);
-            } else if (typeof error === null) {
-                this.unknownError();
-            } else if (typeof error === "object") {
-                if (error instanceof Response) {
-                    try {
-                        let parsed = error.json();
+        return fork.map(res => res.json());
+    }
 
-                        this.httpError(parsed.error);
+    private handleError(error)
+    {
+        let response = {
+            success: false,
+            status: 500,
+            error: 'Unknown error'
+        };
 
-                        response.error = parsed.error;
-                        response.status = error.status;
-                    } catch (error) {
-                        this.jsonParseError();
-                    }
-                } else {
-                    this.unknownError();
+        if (typeof error === "string") {
+            this.genericError(error);
+        } else if (typeof error === null) {
+            this.unknownError();
+        } else if (typeof error === "object") {
+            if (error instanceof Response) {
+                try {
+                    let parsed = error.json();
+
+                    this.httpError(parsed.error);
+
+                    response.error = parsed.error;
+                    response.status = error.status;
+                } catch (error) {
+                    this.jsonParseError();
                 }
             } else {
                 this.unknownError();
             }
+        } else {
+            this.unknownError();
+        }
 
-            return Observable.throw(response);
-        });
-
-        return fork.map(res => res.json());
+        return response;
     }
 
     private unknownError() {

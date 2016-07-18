@@ -1,3 +1,3 @@
 cass-community-create-modal-form((abort)="abort()", (next)="next()")
   p.theme-description Укажите тематику вашего коммунити
-  cass-theme-select((change)="updateThemeId($event)", multiple="false")
+  cass-theme-select([value]='model.theme_ids')

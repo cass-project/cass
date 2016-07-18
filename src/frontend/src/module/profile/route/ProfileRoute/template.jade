@@ -4,7 +4,7 @@ article.component.component-profile-route
     cass-profile-header(
       [profile]="service.getProfile()",
       (go-profile)="goDashboard()",
-      (go-collection)="goCollection"
+      (go-collection)="goCollection($event)"
     )
   .profile-page
     router-outlet

@@ -5,7 +5,7 @@ import {Router, ROUTER_DIRECTIVES} from "angular2/router";
 
 @Component({
     selector: 'cass-sidebar-communities',
-    template: require('./template.html'),
+    template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],

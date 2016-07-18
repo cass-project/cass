@@ -12,7 +12,7 @@ final class CreateContactRequest extends SchemaParams
     {
         $data = $this->getData();
 
-        return new CreateContactParameters((int) $data->profile_id);
+        return new CreateContactParameters((int) $data['profile_id']);
     }
 
     protected function getSchema(): JSONSchema

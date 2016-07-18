@@ -97,7 +97,7 @@ final class CreateCommunityCollectionTest extends CollectionRESTTestCase
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expect(function(array $jsonResponse) use ($collectionId) {
-                $collections = $jsonResponse['entity']['collections'];
+                $collections = $jsonResponse['entity']['community']['collections'];
 
                 $this->assertTrue(is_array($collections));
                 $this->assertEquals(2, count($collections));
