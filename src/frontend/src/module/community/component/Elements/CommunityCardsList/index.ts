@@ -36,10 +36,6 @@ export class CommunityCardsList
     }
 
     goDashboard() {
-        if(this.isOwnCommunity()){
-            this.router.navigate(['/Community', { id: 'current' }, 'Dashboard']);
-        } else {
-            this.router.navigate(['/Community', {id: this.entity.community.id.toString()}, 'Dashboard']);
-        }
+        this.router.navigate(['/Community', 'Community', {sid: this.entity.community.sid}, 'Dashboard']);
     }
 }
