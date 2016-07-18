@@ -17,11 +17,13 @@ article.component.component-post-attachment-link-youtube {
         height: 100%;
         display: flex;
         align-items: center;
+        opacity: 0.8;
         justify-content: center;
         text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
 
         &:hover {
           color: white;
+          opacity: 0.9;
         }
       }
 
@@ -33,8 +35,8 @@ article.component.component-post-attachment-link-youtube {
 
   .youtube-container-with-video {
     position:relative;
-    padding-top: 25px;
-    padding-bottom: 67.5%;
+    padding-top: 30px;
+    padding-bottom: 56.25%;
     height:0;
     overflow:hidden;
 
