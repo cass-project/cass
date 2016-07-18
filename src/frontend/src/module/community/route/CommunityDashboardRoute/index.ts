@@ -1,12 +1,13 @@
 import {Component} from "angular2/core";
 
 import {CommunityCardsList} from "../../component/Elements/CommunityCardsList/index";
-import {CommunityRouteService} from "../CommunityRoute/service";
 import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/index";
-import {ProfileSource} from "../../../feed/service/FeedService/source/ProfileSource";
+import {CommunitySource} from "../../../feed/service/FeedService/source/CommunitySource";
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 import {Stream} from "../../../feed/service/FeedService/stream";
+import {ProfileRouteService} from "../../../profile/route/ProfileRoute/service";
+import {CommunityRouteService} from "../CommunityRoute/service";
 
 @Component({
     template: require('./template.jade'),
@@ -15,7 +16,7 @@ import {Stream} from "../../../feed/service/FeedService/stream";
     ],
     providers: [
         FeedService,
-        ProfileSource,
+        CommunitySource,
     ],
     directives: [
         CommunityCardsList,
@@ -27,12 +28,12 @@ export class CommunityDashboardRoute
     constructor(
         private service: CommunityRouteService,
         private feed: FeedService<PostEntity>,
-        private feedSource: ProfileSource
+        private feedSource: CommunitySource
     ) {
         if (service.getObservable() !== undefined) {
             service.getObservable().subscribe(
                 (response) => {
-                    feedSource.profileId = response.entity.community.id;
+                    feedSource.communityId = response.entity.community.id;
                     feed.provide(feedSource, new Stream<PostEntity>());
                     feed.update();
                 },

@@ -1,9 +1,9 @@
-article.component-profile-header
-  .profile-header-section
-    .profile-brand-container
-      .profile-image-container
-        cass-profile-image([url]="getImageURL()", border = "circle")
-      .profile-greetings
+article.component-community-header
+  .community-header-section
+    .community-brand-container
+      .community-image-container
+        cass-community-image([url]="getImageURL()", border = "circle")
+      .community-greetings
         span {{ getCommunityTitle() }}
     .collection-list-container
         ul.collection-links
@@ -16,14 +16,14 @@ article.component-profile-header
           li((click)='modals.createCollection.open()')
             a(*ngIf="isOwnCommunity()", class="collection-link collection-link-icon")
               i.fa.fa-plus-circle
-  .profile-header-section
-    .profile-buttons-container
-      ul.profile-buttons
+  .community-header-section
+    .community-buttons-container
+      ul.community-buttons
         li
-          a.profile-button([routerLink]="['./Collections']")
+          a.community-button([routerLink]="['./Collections']")
             i.fa.fa-fw.fa-bookmark
             span Подборки
         li(*ngIf="isOwnCommunity()")
-          .profile-button((click)='modals.settings.open()')
+          .community-button((click)='modals.settings.open()')
             i.fa.fa-fw.fa-cog
             span Настройки

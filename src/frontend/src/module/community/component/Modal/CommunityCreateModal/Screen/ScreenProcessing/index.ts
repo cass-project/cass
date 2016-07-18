@@ -32,9 +32,10 @@ export class ScreenProcessing extends Screen
                 "theme_ids"   : model.theme_ids
             })
             .subscribe(data => {
-                let communityId = data['entity'].id;
+                console.log(data);
+                let communityId = data['entity'].community.id;
                 let requests:Promise<any>[] = [];
-                this.model.sid = data['entity'].sid;
+                this.model.sid = data['entity'].community.sid;
 
                 for(let feature of this.model.features) {
                     if(feature.is_activated && !feature.disabled) {

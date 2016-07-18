@@ -1,6 +1,6 @@
 @import "./../../../../../styles/globals";
 
-article.component-profile-card {
+article.component-community-card {
   display: inline-block;
 
   .card-content {
@@ -19,17 +19,17 @@ article.component-profile-card {
       background-color: material-color("grey", "100");
     }
 
-    .profile-image {
-      .profile-image-container {
+    .community-image {
+      .community-image-container {
         width: 180px;
       }
     }
 
-    .profile-about {
+    .community-about {
       margin: 25px 0;
       text-align: center;
 
-      h1.profile-greetings {
+      h1.community-greetings {
         font-family: $FONT_FAMILY;
         font-size: 25px;
         font-weight: 400;
@@ -38,7 +38,7 @@ article.component-profile-card {
         margin-bottom: 10px;
       }
 
-      .profile-expert-in-title, .profile-interesting-in-title {
+      .community-expert-in-title, .community-interesting-in-title {
         font-family: $FONT_FAMILY;
         font-size: 14px;
         line-height: 20px;

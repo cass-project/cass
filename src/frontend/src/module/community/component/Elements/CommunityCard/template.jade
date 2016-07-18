@@ -1,13 +1,13 @@
-article.component.component-profile-card((click)="click()")
+article.component.component-community-card((click)="click()")
   .card-content
-    .profile-image
-      .profile-image-container
-          cass-profile-image([url]="getImageURL()", border = "circle")
-    .profile-about
-      h1.profile-greetings
+    .community-image
+      .community-image-container
+          cass-community-image([url]="getImageURL()", border = "circle")
+    .community-about
+      h1.community-greetings
         span {{ getCommunityTitle() }}
-      .profile-expert-in(*ngIf="hasTheme()")
-        .profile-expert-in-title Сообщество специализируется на
+      .community-expert-in(*ngIf="hasTheme()")
+        .community-expert-in-title Сообщество специализируется на
         ul.themes
           li()
             a(href="javascript.void(0)")

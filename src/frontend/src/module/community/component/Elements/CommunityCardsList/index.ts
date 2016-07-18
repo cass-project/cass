@@ -3,7 +3,7 @@ import {Component, Input} from "angular2/core";
 import {CommunityCard} from "../CommunityCard/index";
 import {CommunityInterestsCard} from "../CommunityInterestsCard/index";
 import {CommunityCreateCollectionCard} from "../CommunityCreateCollectionCard/index";
-import {ProfileSettingsCard} from "../CommunitySettingsCard/index";
+import {CommunitySettingsCard} from "../CommunitySettingsCard/index";
 
 import {Router} from "angular2/router";
 import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
@@ -18,7 +18,7 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
         CommunityCard,
         CommunityInterestsCard,
         CommunityCreateCollectionCard,
-        ProfileSettingsCard,
+        CommunitySettingsCard,
     ]
 })
 export class CommunityCardsList

@@ -2,27 +2,27 @@
 
 $HEADER_HEIGHT: 64px;
 
-article.component-profile-header {
+article.component-community-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  .profile-header-section {
+  .community-header-section {
     display: flex;
     align-items: center;
   }
 
-  .profile-brand-container {
+  .community-brand-container {
     display: flex;
     align-items: center;
     max-width: 300px;
 
-    .profile-image-container {
+    .community-image-container {
       width: 48px;
       height: 48px;
     }
 
-    .profile-greetings {
+    .community-greetings {
       font-family: $FONT_FAMILY;
       font-size: 20px;
       font-weight: 400;
@@ -84,13 +84,13 @@ article.component-profile-header {
     }
   }
 
-  .profile-buttons-container {
-    ul.profile-buttons {
+  .community-buttons-container {
+    ul.community-buttons {
       li {
         display: inline-block;
         margin-left: 5px;
 
-        .profile-button {
+        .community-button {
           cursor: pointer;
           display: inline-block;
           font-family: $FONT_FAMILY;

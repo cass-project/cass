@@ -8,11 +8,11 @@ import {CommunityModals} from "../../../modals";
         require('./style.shadow.scss')
     ]
 })
-export class ProfileSettingsCard
+export class CommunitySettingsCard
 {
     constructor(private modals: CommunityModals) {}
 
-    openProfileSettings() {
+    openCommunitySettings() {
         this.modals.settings.open();
     }
 }

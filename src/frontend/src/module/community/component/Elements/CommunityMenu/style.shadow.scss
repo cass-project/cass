@@ -1,21 +1,21 @@
 @import "./../../../../../styles/globals";
 
-$CASS_PROFILE_MENU_WIDTH: 230px;
+$CASS_COMMUNITY_MENU_WIDTH: 230px;
 
-div.profile-menu {
+div.community-menu {
   position: relative;
   background-color: white;
-  width: $CASS_PROFILE_MENU_WIDTH;
+  width: $CASS_COMMUNITY_MENU_WIDTH;
 
   >div.backdrop {
     position: fixed;
     top: 0; height: 100%;
-    width: $CASS_PROFILE_MENU_WIDTH;
+    width: $CASS_COMMUNITY_MENU_WIDTH;
     background-color: white;
     z-index: 100;
   }
 
-  >div.profile-menu-contents {
+  >div.community-menu-contents {
     z-index: 101;
   }
 }
