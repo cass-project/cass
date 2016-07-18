@@ -1,0 +1,57 @@
+@import "./../../../../../styles/globals";
+
+article.component-profile-card-header {
+  display: flex;
+  padding: 0 10px;
+
+  .profile-image {
+    width: 70px;
+
+    .profile-image-container {
+      margin-top: 8px;
+      margin-left: 7px;
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  .profile-about {
+    padding-top: 13px;
+
+    h1 {
+      font-family: $FONT_FAMILY;
+      font-size: 17px;
+      font-weight: 400;
+      color: black;
+      line-height: 15px;
+    }
+
+    .profile-name {
+      margin-bottom: 5px;
+    }
+
+    .profile-settings {
+      font-family: $FONT_FAMILY;
+      font-size: 12px;
+      font-weight: 400;
+      color: material-color("grey", "600");
+      line-height: 20px;
+
+      a {
+        font-family: $FONT_FAMILY;
+        font-size: 12px;
+        font-weight: 400;
+        color: material-color("grey", "600");
+        line-height: 20px;
+        text-transform: uppercase;
+
+        &:hover {
+          color: material-color("blue", "500");
+        }
+      }
+
+      time {
+      }
+    }
+  }
+}

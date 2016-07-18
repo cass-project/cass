@@ -14,17 +14,17 @@ export class CommunityImage
 
     static allowedBorders = ['circle', 'square'];
 
-    getURL() {
+    getURL(): string {
         return this.url;
     }
 
-    getCSSClasses() {
+    getCSSClasses(): string {
         let border = this.border;
 
         if(!~CommunityImage.allowedBorders.indexOf(border)) {
             throw new Error(`Invalid border ${border}`);
         }
 
-        return `community-image-border community-image-border-${border}`;
+        return `profile-image-border profile-image-border-${border}`;
     }
 }

@@ -46,7 +46,7 @@ export class ProfileCard
         return this.entity.greetings.greetings;
     }
 
-    getProfileURL(): string {
+    getImageURL(): string {
         return queryImage(QueryTarget.Card, this.entity.image).public_path;
     }
 

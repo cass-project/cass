@@ -1,36 +1,67 @@
 import {Component} from "angular2/core";
-import {RouterOutlet, RouteConfig} from "angular2/router";
 
-import {CommunityComponent} from "../../index";
-import {CommunityPage} from "../CommunityPageRoute";
-import {CommunityMenuComponent} from "../../component/Menu";
+import {RouteParams, Router, ROUTER_DIRECTIVES, RouteConfig} from "angular2/router";
+import {ProgressLock} from "../../../form/component/ProgressLock/index";
+import {CommunityCollectionsRoute} from "../CommunityCollectionsRoute/index";
+import {CommunityRouteService} from "./service";
+import {CommunityDashboardRoute} from "../CommunityDashboardRoute/index";
+import {CommunityHeader} from "../../component/Elements/CommunityHeader/index";
+import {AuthService} from "../../../auth/service/AuthService";
 
 @Component({
-    selector: "community-router",
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
     directives: [
-        RouterOutlet,
-        CommunityMenuComponent
+        ROUTER_DIRECTIVES,
+        ProgressLock,
+        CommunityHeader,
+    ],
+    providers: [
+        CommunityRouteService,
     ]
 })
-
 @RouteConfig([
     {
-        name: 'CommunityLanding',
         path: '/',
-        component: CommunityComponent,
+        name: 'Dashboard',
+        component: CommunityDashboardRoute,
         useAsDefault: true
     },
     {
-        name: 'CommunityPage',
-        path: '/id/:sid',
-        component: CommunityPage,
-    }
+        path: '/collections/...',
+        name: 'Collections',
+        component: CommunityCollectionsRoute
+    },
 ])
-
 export class CommunityRoute
 {
+    constructor(
+        private params: RouteParams,
+        private router: Router,
+        private service: CommunityRouteService,
+        private authService: AuthService
+    ) {
+        let sid = params.get('sid');
+        
+        if (sid){
+            service.loadCommunityBySID(sid);
+        } else {
+            router.navigate(['/Community/NotFound']);
+            return;
+        }
+
+        if (service.getObservable() !== undefined) {
+            service.getObservable().subscribe(
+                (response) => {
+                },
+                (error) => {
+                    router.navigate(['/Community/NotFound']);
+                }
+            )
+        } else {
+            router.navigate(['/Community/NotFound']);
+        }
+    }
 }

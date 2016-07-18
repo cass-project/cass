@@ -1,0 +1,14 @@
+article.component.component-profile-card((click)="click()")
+  .card-content
+    .profile-image
+      .profile-image-container
+          cass-profile-image([url]="getImageURL()", border = "circle")
+    .profile-about
+      h1.profile-greetings
+        span {{ getCommunityTitle() }}
+      .profile-expert-in(*ngIf="hasTheme()")
+        .profile-expert-in-title Сообщество специализируется на
+        ul.themes
+          li()
+            a(href="javascript.void(0)")
+              span {{ getTheme().title }}

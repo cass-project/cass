@@ -1,5 +1,5 @@
 import {Component, Output, EventEmitter} from "angular2/core";
-import {RouteConfig, RouterOutlet, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteParams, Router} from "angular2/router";
+import {Router} from "angular2/router";
 
 import {Screen} from "../../screen";
 import {CommunityCreateModalModel} from "../../model";
@@ -23,7 +23,7 @@ export class ScreenComplete
 
     goToCommunity() {
         this.close();
-        this.router.navigateByUrl(`/community/id/${this.model.sid}`);
+        this.router.navigate([`/Community`, this.model.sid]);
     }
 
 }

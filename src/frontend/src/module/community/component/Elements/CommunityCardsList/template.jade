@@ -1,0 +1,10 @@
+article.component.component-profile-cards-list
+  ul.profile-cards
+    li
+      cass-community-card([community]="entity.community", (click)="goDashboard()")
+    li(*ngIf="isOwnCommunity()")
+      cass-community-interests-card
+    li(*ngIf="isOwnCommunity()")
+      cass-community-create-collection-card
+    li(*ngIf="isOwnCommunity()")
+      cass-community-settings-card

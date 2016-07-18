@@ -1,11 +1,11 @@
-div.community-image {
+div.profile-image {
   img {
     display: block;
     width: 100%;
   }
+}
 
-  div.community-image-border-circle {
-    border-radius: 100%;
-    overflow: hidden;
-  }
+div.profile-image-border-circle {
+  border-radius: 100%;
+  overflow: hidden;
 }

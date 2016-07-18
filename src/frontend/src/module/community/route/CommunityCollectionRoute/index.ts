@@ -2,7 +2,7 @@ import {Component} from "angular2/core";
 import {ROUTER_DIRECTIVES, Router, RouteParams} from "angular2/router";
 
 import {CollectionsList} from "../../../collection/component/Elements/CollectionsList/index";
-import {ProfileRouteService} from "../ProfileRoute/service";
+import {CommunityRouteService} from "../CommunityRoute/service";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {PostForm} from "../../../post/component/Forms/PostForm/index";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
@@ -29,7 +29,7 @@ import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/inde
         FeedPostStream,
     ]
 })
-export class ProfileCollectionRoute
+export class CommunityCollectionRoute
 {
     collection: CollectionEntity;
     postType: PostTypeEntity;
@@ -37,7 +37,7 @@ export class ProfileCollectionRoute
     constructor(
         private router: Router,
         private params: RouteParams,
-        private service: ProfileRouteService,
+        private service: CommunityRouteService,
         private types: PostTypeService,
         private feed: FeedService<PostEntity>,
         private feedSource: CollectionSource
@@ -50,11 +50,11 @@ export class ProfileCollectionRoute
                 let collections = response.entity.collections.filter((entity: CollectionEntity) => {
                     return entity.sid === sid;
                 });
-                
+
                 if(! collections.length) {
                     router.navigate(['NotFound']);
                 }
-                
+
                 this.collection = collections[0];
 
                 feedSource.collectionId = this.collection.id;
@@ -68,7 +68,7 @@ export class ProfileCollectionRoute
     unshiftEntity(entity: PostEntity) {
         this.feed.stream.insertBefore(entity);
     }
-    
+
     isLoaded(): boolean {
         return typeof this.collection === "object";
     }

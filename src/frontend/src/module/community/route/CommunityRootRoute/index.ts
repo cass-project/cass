@@ -2,8 +2,8 @@ import {Component} from "angular2/core";
 
 import {RouterOutlet, RouteConfig, Router} from "angular2/router";
 import {Nothing} from "../../../util/component/Nothing/index";
-import {ProfileRoute} from "../ProfileRoute/index";
-import {ProfileNotFoundRoute} from "../ProfileNotFoundRoute/index";
+import {CommunityRoute} from "../CommunityRoute/index";
+import {CommunityNotFoundRoute} from "../CommunityNotFoundRoute/index";
 
 @Component({
     template: require('./template.jade'),
@@ -22,16 +22,16 @@ import {ProfileNotFoundRoute} from "../ProfileNotFoundRoute/index";
         useAsDefault: true
     },
     {
-        name: 'Profile',
-        path: '/:id/...',
-        component: ProfileRoute
+        name: 'Community',
+        path: '/:sid/...',
+        component: CommunityRoute
     },
     {
         name: 'NotFound',
         path: '/not-found',
-        component: ProfileNotFoundRoute
+        component: CommunityNotFoundRoute
     },
 ])
-export class RootRoute
+export class CommunityRootRoute
 {
 }
