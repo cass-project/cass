@@ -78,10 +78,14 @@ export class PostAttachmentLinkYouTube
 
     getPreviewImageURL(): string {
         if(this.link.attachment.metadata.og.og.images.length > 0) {
-            return this.link.attachment.metadata.og.og.images[0]['og:image:url'];
-        }else{
-            return `http://img.youtube.com/vi/${this.link.attachment.metadata.youtubeId}/hqdefault.jpg`;
+            let imageURL = this.link.attachment.metadata.og.og.images[0]['og:image:url'];
+
+            if(imageURL.length) {
+                return imageURL;
+            }
         }
+
+        return `http://img.youtube.com/vi/${this.link.attachment.metadata.youtubeId}/hqdefault.jpg`;
     }
     
     disablePreview() {
