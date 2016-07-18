@@ -1,7 +1,6 @@
 import {Component, Input} from "angular2/core";
 
 import {CommunityCard} from "../CommunityCard/index";
-import {CommunityInterestsCard} from "../CommunityInterestsCard/index";
 import {CommunityCreateCollectionCard} from "../CommunityCreateCollectionCard/index";
 import {CommunitySettingsCard} from "../CommunitySettingsCard/index";
 
@@ -16,7 +15,6 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
     ],
     directives: [
         CommunityCard,
-        CommunityInterestsCard,
         CommunityCreateCollectionCard,
         CommunitySettingsCard,
     ]
