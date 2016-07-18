@@ -11,6 +11,7 @@ Collection_Entity_Collection:
     - theme_ids
     - image
     - public_options
+    - is_protected
     - children
   properties:
     id:
@@ -68,6 +69,9 @@ Collection_Entity_Collection:
           moderation_contract:
             type: boolean
             description: Владелец обязуется модерировать содержимое коллекции
+    is_protected:
+      type: boolean
+      description: Коллекция является защищенной от удаления, т.е. главной лентой профиля / коммунити
     children:
       type: array
       items:

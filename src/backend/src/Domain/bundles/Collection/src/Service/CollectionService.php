@@ -7,6 +7,7 @@ use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Avatar\Service\AvatarService;
 use Domain\Collection\Entity\Collection;
+use Domain\Collection\Exception\CollectionIsProtectedException;
 use Domain\Collection\Image\CollectionImageStrategy;
 use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Parameters\EditCollectionParameters;
@@ -91,6 +92,10 @@ class CollectionService implements EventEmitterAwareService
     {
         $collection = $this->getCollectionById($collectionId);
 
+        if($collection->isProtected()) {
+            throw new CollectionIsProtectedException(sprintf('Collection(id: `%s`) is protected', $collectionId));
+        }
+
         $this->getEventEmitter()->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
         $this->getEventEmitter()->emit(self::EVENT_COLLECTION_DELETE, [$collection]);
         $this->collectionRepository->deleteCollection($collectionId);
@@ -127,6 +132,16 @@ class CollectionService implements EventEmitterAwareService
         $this->getEventEmitter()->emit(self::EVENT_COLLECTION_IMAGE_UPLOADED, [$collection]);
 
         return $collection->getImages();
+    }
+
+    public function protectCollection(int $collectionId): Collection
+    {
+        $collection = $this->collectionRepository->getCollectionById($collectionId);
+        $collection->enableProtection();
+
+        $this->collectionRepository->saveCollection($collection);
+
+        return $collection;
     }
 
     public function generateImage(int $collectionId): ImageCollection

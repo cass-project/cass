@@ -70,6 +70,12 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
      */
     private $moderationContract = false;
 
+    /**
+     * @Column(type="boolean", name="is_protected")
+     * @var bool
+     */
+    private $isProtected = false;
+
     public function __construct(string $ownerSID)
     {
         $this->ownerSID = $ownerSID;
@@ -96,7 +102,8 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
                 'public_enabled' => $this->isPublicEnabled(),
                 'moderation_contract' => $this->isModerationContractEnabled(),
             ],
-            'image' => $this->getImages()->toJSON()
+            'image' => $this->getImages()->toJSON(),
+            'is_protected' => $this->isProtected(),
         ];
         return $result;
     }
@@ -231,6 +238,18 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
         $this->isPrivate = $isPrivate;
         $this->publicEnabled = $publicEnabled;
         $this->moderationContract = $moderationContract;
+
+        return $this;
+    }
+
+    public function isProtected(): bool
+    {
+        return $this->isProtected;
+    }
+
+    public function enableProtection(): self
+    {
+        $this->isProtected = true;
 
         return $this;
     }
