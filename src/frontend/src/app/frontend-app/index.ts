@@ -82,7 +82,7 @@ import {CommunityModals} from "../../module/community/modals";
         ProfileIMRESTService,
         ProfileIMService,
         ContactRESTService,
-        CommunityModals
+        CommunityModals,
         IMRESTService,
     ],
     directives: [
