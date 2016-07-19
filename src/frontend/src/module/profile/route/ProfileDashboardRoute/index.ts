@@ -11,6 +11,9 @@ import {PostForm} from "../../../post/component/Forms/PostForm/index";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
 import {PostTypeService} from "../../../post/service/PostTypeService";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
+import {ProfileEntity} from "../../definitions/entity/Profile";
+import {CurrentProfileService} from "../../service/CurrentProfileService";
+import {AuthService} from "../../../auth/service/AuthService";
 
 @Component({
     template: require('./template.jade'),
@@ -29,10 +32,13 @@ import {CollectionSource} from "../../../feed/service/FeedService/source/Collect
 })
 export class ProfileDashboardRoute
 {
+
     main_collection: CollectionEntity;
     postType: PostTypeEntity;
 
     constructor(
+        private authService: AuthService,
+        private currentProfileService: CurrentProfileService,
         private service: ProfileRouteService,
         private feed: FeedService<PostEntity>,
         private feedSource: CollectionSource,
@@ -56,6 +62,14 @@ export class ProfileDashboardRoute
                 (error) => {
                 }
             );
+        }
+    }
+
+    canPost(): boolean{
+        if(this.authService.isSignedIn()) {
+            return this.service.getProfile().is_own && this.service.getProfile().profile.id === this.currentProfileService.get().getId();
+        } else {
+            return false
         }
     }
 
