@@ -1,3 +1,11 @@
 article.component.component-profile-dashboard-route {
+  .post-form {
+    display: flex;
+    margin-bottom: 40px;
 
+    .post-form-container {
+      width: 550px;
+      margin: 0 auto;
+    }
+  }
 }

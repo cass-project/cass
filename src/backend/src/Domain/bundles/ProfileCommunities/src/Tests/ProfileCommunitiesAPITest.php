@@ -24,18 +24,20 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
     }
 
     public function testJoinCommunity() {
+        $profile = DemoAccountFixture::getSecondAccount()->getCurrentProfile();
         $community = SampleCommunitiesFixture::getCommunity(1);
 
-        $this->requestJoin($community->getSID())
-            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+        $this->requestJoin($profile->getId(),$community->getSID())
+            ->auth(DemoAccountFixture::getSecondAccount()->getAPIKey())
             ->execute()
+            ->dump()
             ->expectJSONContentType()
             ->expectStatusCode(200)
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
                     'id' => $this->expectId(),
-                    'profile_id' => DemoProfileFixture::getProfile()->getId(),
+                    'profile_id' => $profile->getId(),
                     'community' => $community->toJSON()
                 ]
             ])
@@ -43,23 +45,36 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
     }
 
     public function testJoinCommunity403() {
+        $profile = DemoAccountFixture::getSecondAccount()->getCurrentProfile();
         $community = SampleCommunitiesFixture::getCommunity(1);
 
-        $this->requestJoin($community->getSID())
+        $this->requestJoin($profile->getId(), $community->getSID())
+            ->execute()
+            ->expectAuthError()
+        ;
+    }
+
+    public function testJoinCommunity403NotOwner() {
+        $profile = DemoAccountFixture::getSecondAccount()->getCurrentProfile();
+        $community = SampleCommunitiesFixture::getCommunity(1);
+
+        $this->requestJoin($profile->getId(), $community->getSID())
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectAuthError()
         ;
     }
 
     public function testJoinCommunity409() {
+        $profile = DemoAccountFixture::getSecondAccount()->getCurrentProfile();
         $community = SampleCommunitiesFixture::getCommunity(1);
 
-        $this->requestJoin($community->getSID())
-            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+        $this->requestJoin($profile->getId(), $community->getSID())
+            ->auth(DemoAccountFixture::getSecondAccount()->getAPIKey())
             ->execute();
 
-        $this->requestJoin($community->getSID())
-            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+        $this->requestJoin($profile->getId(), $community->getSID())
+            ->auth(DemoAccountFixture::getSecondAccount()->getAPIKey())
             ->execute()
             ->expectJSONContentType()
             ->expectStatusCode(409)
@@ -70,10 +85,11 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
     public function testLeaveCommunity() {
         $this->upFixture(new SamplePCBookmarksFixture());
 
+        $profile = DemoAccountFixture::getSecondAccount()->getCurrentProfile();
         $community = SampleCommunitiesFixture::getCommunity(2);
 
-        $this->requestLeave($community->getSID())
-            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+        $this->requestLeave($profile->getId(), $community->getSID())
+            ->auth(DemoAccountFixture::getSecondAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
             ->expectJSONContentType()
@@ -86,9 +102,10 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
     public function testLeaveCommunity403() {
         $this->upFixture(new SamplePCBookmarksFixture());
 
+        $profile = DemoAccountFixture::getSecondAccount()->getCurrentProfile();
         $community = SampleCommunitiesFixture::getCommunity(2);
 
-        $this->requestLeave($community->getSID())
+        $this->requestLeave($profile->getId(), $community->getSID())
             ->execute()
             ->expectAuthError()
         ;
@@ -97,15 +114,16 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
     public function testLeaveCommunity409() {
         $this->upFixture(new SamplePCBookmarksFixture());
 
+        $profile = DemoAccountFixture::getSecondAccount()->getCurrentProfile();
         $community = SampleCommunitiesFixture::getCommunity(2);
 
-        $this->requestLeave($community->getSID())
-            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+        $this->requestLeave($profile->getId(), $community->getSID())
+            ->auth(DemoAccountFixture::getSecondAccount()->getAPIKey())
             ->execute()
         ;
 
-        $this->requestLeave($community->getSID())
-            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+        $this->requestLeave($profile->getId(), $community->getSID())
+            ->auth(DemoAccountFixture::getSecondAccount()->getAPIKey())
             ->execute()
             ->expectJSONContentType()
             ->expectStatusCode(409)
@@ -114,10 +132,12 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
     }
 
     public function testListCommunities() {
+        $profile = DemoAccountFixture::getSecondAccount()->getCurrentProfile();
+
         $this->upFixture(new SamplePCBookmarksFixture());
 
-        $this->requestList()
-            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+        $this->requestList($profile->getId())
+            ->auth(DemoAccountFixture::getSecondAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
             ->expectJSONContentType()
@@ -137,21 +157,23 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
     public function testListCommunities403() {
         $this->upFixture(new SamplePCBookmarksFixture());
 
-        $this->requestList()
+        $profile = DemoAccountFixture::getSecondAccount()->getCurrentProfile();
+
+        $this->requestList($profile->getId())
             ->execute()
             ->expectAuthError()
         ;
     }
 
-    private function requestJoin(string $communitySID): RESTRequest {
-        return $this->request('PUT', sprintf('/protected/community/%s/join', $communitySID));
+    private function requestJoin(int $profileId, string $communitySID): RESTRequest {
+        return $this->request('PUT', sprintf('/protected/with-profile/%s/community/%s/join', $profileId, $communitySID));
     }
 
-    private function requestLeave(string $communitySID): RESTRequest {
-        return $this->request('DELETE', sprintf('/protected/community/%s/leave', $communitySID));
+    private function requestLeave(int $profileId, string $communitySID): RESTRequest {
+        return $this->request('DELETE', sprintf('/protected/with-profile/%s/community/%s/leave', $profileId, $communitySID));
     }
 
-    private function requestList(): RESTRequest {
-        return $this->request('GET', '/protected/profile/current/joined-communities');
+    private function requestList(int $profileId): RESTRequest {
+        return $this->request('GET', sprintf('/protected/with-profile/%s/community/list/joined-communities', $profileId));
     }
 }

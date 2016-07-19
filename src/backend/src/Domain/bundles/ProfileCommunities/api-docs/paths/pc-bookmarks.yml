@@ -1,4 +1,4 @@
-"/protected/profile/current/joined-communities":
+"/protected/with-profile/{profileId}/community/list/joined-communities":
   get:
     tags:
       - profile_communities

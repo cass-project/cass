@@ -1,4 +1,4 @@
-"/protected/community/{communitySID}/join":
+"/protected/with-profile/{profileId}/community/{communitySID}/join":
   put:
     tags:
       - profile_communities

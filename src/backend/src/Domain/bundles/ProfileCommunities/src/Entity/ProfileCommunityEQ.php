@@ -48,7 +48,7 @@ class ProfileCommunityEQ implements JSONSerializable, IdEntity
             'id' => $this->getId(),
             'profile_id' => $this->getProfile()->getId(),
             'community' => $this->getCommunity()->toJSON(),
-            'community_id' => $this->getProfile()->getId(),
+            'community_id' => $this->getCommunity()->getId(),
             'community_sid' => $this->getCommunitySID(),
         ];
     }

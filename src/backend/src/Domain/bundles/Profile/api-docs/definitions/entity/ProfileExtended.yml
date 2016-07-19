@@ -14,6 +14,11 @@ Profile_Entity_ProfileExtended:
       items:
         schema:
           $ref: '#/definitions/Collection_Entity_Collection'
+    bookmarks:
+      type: array
+      items:
+        schema:
+          $ref: '#/definitions/ProfileCommunities_Entity_ProfileCommunityEQEntity'
     is_own:
       type: boolean
       description: TRUE, если является профилем текущего аутентифицированного аккаунта

@@ -3,6 +3,7 @@ namespace Domain\Feed\Search\Criteria;
 
 use Domain\Feed\Exception\UnknownCriteriaException;
 use Domain\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
+use Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SortCriteria;
 use Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
@@ -30,6 +31,9 @@ final class CriteriaFactory
 
             case ContentTypeCriteria::CRITERIA_CODE:
                 return new ContentTypeCriteria();
+
+            case QueryStringCriteria::CODE_STRING:
+                return new QueryStringCriteria();
         }
     }
 }

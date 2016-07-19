@@ -2,6 +2,8 @@
 namespace Domain\Index\Source\Sources;
 
 use Domain\Index\Source\Source;
+use MongoDB\Collection;
+use MongoDB\Database;
 
 final class CollectionSource implements Source
 {
@@ -16,5 +18,10 @@ final class CollectionSource implements Source
     public function getMongoDBCollection(): string
     {
         return sprintf('collection_feed_%d', $this->collectionId);
+    }
+
+    public function ensureIndexes(Database $database, Collection $collection)
+    {
+        $collection->createIndex(['title' => 'text']);
     }
 }

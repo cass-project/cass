@@ -2,6 +2,7 @@
 namespace Domain\Feed\Search\Stream\Streams;
 
 use Domain\Collection\Service\CollectionService;
+use Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SortCriteria;
 use Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
@@ -59,6 +60,14 @@ final class CollectionStream extends Stream
             $filter[sprintf('theme_ids.%s', (string) $criteria->getThemeId())] = [
                 '$exists' => true
             ];
+        });
+
+        $criteriaManager->doWith(QueryStringCriteria::class, function(QueryStringCriteria $criteria) use (&$filter) {
+            if($criteria->isAvailable()) {
+                $filter['$text'] = [
+                    '$search' => $criteria->getQuery()
+                ];
+            }
         });
         
         $result = $collection->find($filter, $options)->toArray();

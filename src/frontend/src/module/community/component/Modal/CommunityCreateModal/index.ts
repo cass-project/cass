@@ -14,6 +14,7 @@ import {CommunityRESTService} from "../../../service/CommunityRESTService";
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {LoadingManager} from "../../../../util/classes/LoadingStatus";
 import {Observable} from "rxjs/Observable";
+import {CommunityCreateModalNotifier} from "./notify";
 
 enum CreateStage {
     General = <any>"General",
@@ -52,7 +53,8 @@ export class CommunityCreateModal
     constructor(
         private model: CommunityCreateModalModel,
         private authService: AuthService,
-        private communityRESTService: CommunityRESTService
+        private communityRESTService: CommunityRESTService,
+        private notifier: CommunityCreateModalNotifier
     ) {}
 
     ngOnInit() {
@@ -96,7 +98,9 @@ export class CommunityCreateModal
                         this.success(response.entity);
                         status.is = false;
                     }
-                )
+                );
+
+                this.notifier.publish(response.entity);
             },
             error => {}
         );

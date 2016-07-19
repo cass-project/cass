@@ -1,7 +1,6 @@
 <?php
 namespace Domain\ProfileCommunities\Service;
 
-use Domain\Auth\Service\CurrentAccountService;
 use Domain\Community\Repository\CommunityRepository;
 use Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
 use Domain\ProfileCommunities\Exception\AlreadyJoinedException;
@@ -16,62 +15,47 @@ class ProfileCommunitiesService
     /** @var ProfileCommunitiesRepository */
     private $profileCommunitiesRepository;
 
-    /** @var CurrentAccountService */
-    private $currentAccountService;
-
     public function __construct(
         CommunityRepository $communityRepository,
-        ProfileCommunitiesRepository $profileCommunitiesRepository,
-        CurrentAccountService $currentAccountService
+        ProfileCommunitiesRepository $profileCommunitiesRepository
     ) {
         $this->communityRepository = $communityRepository;
         $this->profileCommunitiesRepository = $profileCommunitiesRepository;
-        $this->currentAccountService = $currentAccountService;
     }
 
-    private function getCurrentProfileId(): int
-    {
-        return $this->currentAccountService->getCurrentProfile()->getId();
-    }
-
-    public function joinToCommunity(string $communitySID): ProfileCommunityEQ
+    public function joinToCommunity(int $profileId, string $communitySID): ProfileCommunityEQ
     {
         $communityId = $this->communityRepository->getCommunityBySID($communitySID)->getId();
 
-        if($this->hasBookmarks($communityId)) {
+        if($this->hasBookmarks($profileId, $communityId)) {
             throw new AlreadyJoinedException(sprintf('You are already joined to this community'));
         }
 
         return $this->profileCommunitiesRepository->joinToCommunity(
-            $this->getCurrentProfileId(),
+            $profileId,
             $communityId
         );
     }
 
-    public function leaveCommunity(string $communitySID)
+    public function leaveCommunity(int $profileId, string $communitySID)
     {
 
         $communityId = $this->communityRepository->getCommunityBySID($communitySID)->getId();
 
-        if(!$this->hasBookmarks($communityId)) {
+        if(!$this->hasBookmarks($profileId, $communityId)) {
             throw new AlreadyLeavedException(sprintf('You are not joined to this community'));
         }
 
-        return $this->profileCommunitiesRepository->leaveCommunity(
-            $this->getCurrentProfileId(),
-            $communityId
-        );
+        $this->profileCommunitiesRepository->leaveCommunity($profileId, $communityId);
     }
 
-    public function getBookmarksOfCurrentProfile(): array
+    public function getBookmarksOfProfile(int $profileId): array
     {
-        return $this->profileCommunitiesRepository->getEntitiesByProfile(
-            $this->getCurrentProfileId()
-        );
+        return $this->profileCommunitiesRepository->getEntitiesByProfile($profileId);
     }
 
-    public function hasBookmarks(int $communityID): bool
+    public function hasBookmarks(int $profileId, int $communityID): bool
     {
-        return $this->profileCommunitiesRepository->hasBookmark($this->getCurrentProfileId(), $communityID);
+        return $this->profileCommunitiesRepository->hasBookmark($profileId, $communityID);
     }
 }

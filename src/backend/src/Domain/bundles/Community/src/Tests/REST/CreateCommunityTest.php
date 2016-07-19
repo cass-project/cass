@@ -22,7 +22,7 @@ final class CreateCommunityTest extends CommunityMiddlewareTestCase
             'theme_id' => $theme->getId()
         ];
 
-        $this->requestCreateCommunity($json)
+        $communityId = $this->requestCreateCommunity($json)
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectJSONContentType()
@@ -67,7 +67,25 @@ final class CreateCommunityTest extends CommunityMiddlewareTestCase
                 $collections = $result['entity']['community']['collections'];
 
                 $this->assertEquals(1, count($collections));
+            })
+            ->fetch(function(array $json) {
+                return $json['entity']['community']['id'];
             });
+
+        $this->requestGetProfile(DemoAccountFixture::getAccount()->getCurrentProfile()->getId())
+            ->execute()
+            ->expectJSONContentType()
+            ->expectStatusCode(200)
+            ->expectJSONBody([
+                'entity' => [
+                    'bookmarks' => [
+                        0 => [
+                            'id' => $this->expectId(),
+                            'community_id' => $communityId
+                        ]
+                    ]
+                ]
+            ]);
     }
 
     public function testCreateCommunityWithoutTheme()

@@ -2,12 +2,16 @@ import {Component} from "angular2/core";
 
 import {CommunityCardsList} from "../../component/Elements/CommunityCardsList/index";
 import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/index";
-import {CommunitySource} from "../../../feed/service/FeedService/source/CommunitySource";
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 import {Stream} from "../../../feed/service/FeedService/stream";
-import {ProfileRouteService} from "../../../profile/route/ProfileRoute/service";
 import {CommunityRouteService} from "../CommunityRoute/service";
+import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
+import {CollectionEntity} from "../../../collection/definitions/entity/collection";
+import {PostTypeService} from "../../../post/service/PostTypeService";
+import {PostForm} from "../../../post/component/Forms/PostForm/index";
+import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
+import {AuthService} from "../../../auth/service/AuthService";
 
 @Component({
     template: require('./template.jade'),
@@ -16,24 +20,39 @@ import {CommunityRouteService} from "../CommunityRoute/service";
     ],
     providers: [
         FeedService,
-        CommunitySource,
+        CollectionSource
     ],
     directives: [
         CommunityCardsList,
         FeedPostStream,
+        PostForm
     ]
 })
 export class CommunityDashboardRoute
 {
+    main_collection: CollectionEntity;
+    postType: PostTypeEntity;
+    
     constructor(
+        private authService: AuthService,
         private service: CommunityRouteService,
         private feed: FeedService<PostEntity>,
-        private feedSource: CommunitySource
+        private feedSource: CollectionSource,
+        private types: PostTypeService
+        
     ) {
+        this.postType = types.getTypeByStringCode('default');
+
         if (service.getObservable() !== undefined) {
             service.getObservable().subscribe(
                 (response) => {
-                    feedSource.communityId = response.entity.community.id;
+                    for(let collection of response.entity.collections){
+                        if(collection.is_main){
+                            this.main_collection = collection;
+                        }
+                    }
+                    
+                    feedSource.collectionId = this.main_collection.id;
                     feed.provide(feedSource, new Stream<PostEntity>());
                     feed.update();
                 },
@@ -41,5 +60,14 @@ export class CommunityDashboardRoute
                 }
             );
         }
+    }
+
+
+    canPost(): boolean{
+       return this.authService.isSignedIn();
+    }
+    
+    unshiftEntity(entity: PostEntity) {
+        this.feed.stream.insertBefore(entity);
     }
 }

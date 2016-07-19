@@ -2,6 +2,8 @@
 namespace Domain\Index\Source\Sources\PublicCatalog;
 
 use Domain\Index\Source\Source;
+use MongoDB\Collection;
+use MongoDB\Database;
 
 final class PublicContentSource implements Source
 {
@@ -9,4 +11,10 @@ final class PublicContentSource implements Source
     {
         return 'public_content';
     }
+
+    public function ensureIndexes(Database $database, Collection $collection)
+    {
+        $collection->createIndex(['content' => 'text']);
+    }
+
 }

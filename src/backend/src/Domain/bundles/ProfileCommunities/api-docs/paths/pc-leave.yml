@@ -1,4 +1,4 @@
-"/protected/community/{communitySID}/leave":
+"/protected/with-profile/{profileId}/community/{communitySID}/leave":
   delete:
     tags:
       - profile_communities

@@ -36,6 +36,10 @@ export class CommunityCard
         return this.entity.title;
     }
 
+    getCommunityDescription(): string {
+        return this.entity.description;
+    }
+
     getImageURL(): string {
         return queryImage(QueryTarget.Card, this.entity.image).public_path;
     }
