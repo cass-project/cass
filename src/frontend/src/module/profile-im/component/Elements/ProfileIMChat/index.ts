@@ -2,12 +2,12 @@ import {Component, ViewChild, ElementRef} from "angular2/core";
 import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
 
 import {ProfileIMService} from "../../../service/ProfileIMService";
-import {ProfileIMChatHistory} from "../ProfileIMChatHistory/index";
-import {ProfileIMTextarea} from "../ProfileIMTextarea/index";
 import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
 import {ProfileIMAttachments} from "../ProfileIMAttachments/index";
 import {AuthService} from "../../../../auth/service/AuthService";
-import {MessagesSourceType, ProfileMessagesRequest} from "../../../definitions/paths/messages";
+import {IMChat} from "../../../../im/component/IMChat/index";
+import {IMTextarea} from "../../../../im/component/IMTextarea/index";
+import {IMMessagesBodyRequest} from "../../../../im/definitions/paths/im-messages";
 
 @Component({
     selector: 'cass-profile-im-messages',
@@ -17,9 +17,9 @@ import {MessagesSourceType, ProfileMessagesRequest} from "../../../definitions/p
     ],
     directives: [
         ROUTER_DIRECTIVES,
-        ProfileIMTextarea,
-        ProfileIMChatHistory,
         ProfileIMAttachments,
+        IMChat,
+        IMTextarea,
         LoadingLinearIndicator
     ]
 })
@@ -30,12 +30,12 @@ export class ProfileIMChat
     isNeedScroll = false;
     isLoading = true;
     listerInterval = 5000/*ms*/;
-    constructor(private params: RouteParams, private im:ProfileIMService, authService:AuthService) {
+    constructor(private params: RouteParams, private im:ProfileIMService, private authService:AuthService) {
         let profileId = authService.getCurrentAccount().getCurrentProfile().getId();
 
         this.listen(profileId);
         
-        im.createStream(MessagesSourceType.Profile, parseInt(params.get('id')))
+        im.createStream("profile", parseInt(params.get('id')))
             .subscribe(() => this.isNeedScroll = true);
     }
     
@@ -49,29 +49,40 @@ export class ProfileIMChat
     }
     
     listen(profileId:number) {
-        let loadHistoryBody:ProfileMessagesRequest = {criteria: {seek: {
-            offset: 0,
-            limit: 10
+        let loadHistoryBody:IMMessagesBodyRequest = {criteria: {seek: {
+            limit: 100
         }}};
         
         let history = this.im.getHistory(parseInt(this.params.get('id')));
-        console.log(history.length);
-        if(history.length>0) {
-            loadHistoryBody.criteria.cursor = {id: history[history.length-1].id.toString()}
+
+        if(history.length > 0) {
+            history = history.filter(message => {
+                return message.id!==undefined
+            });
+            loadHistoryBody.criteria.cursor = {id: history[history.length-1].id}
         }
         
         this.im.read(
             profileId,
-            MessagesSourceType.Profile,
+            "profile",
             parseInt(this.params.get('id')),
             loadHistoryBody
         ).subscribe(() => {
-            setTimeout(()=>{
-                this.listen(profileId);
-            }, this.listerInterval);
+               setTimeout(() => {
+                   this.listen(profileId);
+               }, this.listerInterval);
             
             this.isNeedScroll = true;
             this.isLoading = false;
+        });
+    }
+    
+    onSend($event) {
+        this.im.stream.next({
+            author: this.authService.getCurrentAccount().getCurrentProfile().entity.profile,
+            content: $event.content,
+            attachments: $event.attachments,
+            send_status: {code: "processing"}
         });
     }
 }
