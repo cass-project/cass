@@ -11,6 +11,7 @@ import {CollectionEntity} from "../../../collection/definitions/entity/collectio
 import {PostTypeService} from "../../../post/service/PostTypeService";
 import {PostForm} from "../../../post/component/Forms/PostForm/index";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
+import {AuthService} from "../../../auth/service/AuthService";
 
 @Component({
     template: require('./template.jade'),
@@ -33,6 +34,7 @@ export class CommunityDashboardRoute
     postType: PostTypeEntity;
     
     constructor(
+        private authService: AuthService,
         private service: CommunityRouteService,
         private feed: FeedService<PostEntity>,
         private feedSource: CollectionSource,
@@ -60,6 +62,11 @@ export class CommunityDashboardRoute
         }
     }
 
+
+    canPost(): boolean{
+       return this.authService.isSignedIn();
+    }
+    
     unshiftEntity(entity: PostEntity) {
         this.feed.stream.insertBefore(entity);
     }
