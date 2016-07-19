@@ -3,11 +3,11 @@ import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
 
 import {ProfileIMService} from "../../../service/ProfileIMService";
 import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
-import {AuthService} from "../../../../auth/service/AuthService";
 import {IMChat} from "../../../../im/component/IMChat/index";
 import {IMTextarea} from "../../../../im/component/IMTextarea/index";
 import {IMMessagesBodyRequest} from "../../../../im/definitions/paths/im-messages";
 import {IMAttachments} from "../../../../im/component/IMAttachments/index";
+import {Session} from "../../../../session/Session";
 
 @Component({
     selector: 'cass-profile-im-messages',
@@ -31,12 +31,16 @@ export class ProfileIMChat
     private isLoading = true;
     private listerInterval = 5000/*ms*/;
     
-    constructor(private params: RouteParams, private im:ProfileIMService, private authService:AuthService) {
-        let profileId = authService.getCurrentAccount().getCurrentProfile().getId();
+    constructor(
+        private params: RouteParams, 
+        private service: ProfileIMService, 
+        private session: Session
+    ) {
+        let profileId = session.getCurrentProfile().getId();
 
         this.listen(profileId);
-        
-        im.createStream("profile", parseInt(params.get('id')))
+
+        service.createStream("profile", parseInt(params.get('id')))
             .subscribe(() => this.isNeedScroll = true);
     }
     
@@ -54,7 +58,7 @@ export class ProfileIMChat
             limit: 0
         }}};
         
-        let history = this.im.getHistory(parseInt(this.params.get('id')));
+        let history = this.service.getHistory(parseInt(this.params.get('id')));
 
         if(history.length > 0) {
             history = history.filter(message => {
@@ -63,7 +67,7 @@ export class ProfileIMChat
             loadHistoryBody.criteria.cursor = {id: history[history.length-1].id}
         }
         
-        this.im.read(
+        this.service.read(
             profileId,
             "profile",
             parseInt(this.params.get('id')),
@@ -77,8 +81,8 @@ export class ProfileIMChat
     }
     
     onSend($event) {
-        this.im.stream.next({
-            author: this.authService.getCurrentAccount().getCurrentProfile().entity.profile,
+        this.service.stream.next({
+            author: this.session.getCurrentProfile().entity.profile,
             content: $event.content,
             attachments: $event.attachments,
             send_status: {code: "processing"}

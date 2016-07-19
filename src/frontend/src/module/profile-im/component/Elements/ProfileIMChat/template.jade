@@ -6,7 +6,7 @@
         | &nbsp;@username
   .content(#content)
     cass-loading-linear-indicator(*ngIf="isLoading")
-    cass-im-chat([messages]="im.getHistory(params.get('id'))", *ngIf="!isLoading")
+    cass-im-chat([messages]="service.getHistory(params.get('id'))", *ngIf="!isLoading")
     footer
       .cass-padding-box-15
         cass-im-attachments([disabled]="isLoading", (attach)="attach()", detach="detach()")

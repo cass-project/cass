@@ -18,7 +18,7 @@ export class IMChat
     dateFormat(date:string, format:string) {
         if(date) {
             return DateFormatter.format(new Date(date), 'pt', format);
-        }else {
+        } else {
             return "";
         }
     }

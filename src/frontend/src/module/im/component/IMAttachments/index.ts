@@ -6,8 +6,6 @@ import {Component, Input} from "angular2/core";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
     ]
 })
 
