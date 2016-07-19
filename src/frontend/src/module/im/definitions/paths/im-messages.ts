@@ -11,6 +11,10 @@ export interface IMMessagesBodyRequest
         },
         cursor?: {
             id: string
+        },
+        sort?: {
+            field: string,
+            order: string
         }
     },
     options?: {
