@@ -8,3 +8,11 @@ export interface IMMessageEntity
     content: string,
     attachments: number[]
 }
+
+export interface IMMessageExtendedEntity extends IMMessageEntity
+{
+    send_status: {
+        code: ("complete" | "processing" | "fail"),
+        error_text?: string
+    };
+}
