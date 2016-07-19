@@ -1,6 +1,6 @@
 article.component.component-profile-dashboard-route
   div(*ngIf="service.isProfileLoaded()")
-    .post-form
+    .post-form(*ngIf='canPost()')
       .post-form-container
         cass-post-form([collection]="main_collection", [post-type] = "postType", (success) = "unshiftEntity($event)")
     .welcome-cards
