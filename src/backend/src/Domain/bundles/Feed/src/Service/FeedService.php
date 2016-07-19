@@ -32,6 +32,7 @@ final class FeedService
     public function getFeed(Source $source, FeedRequest $feedRequest): array 
     {
         $collection = $this->mongoDB->selectCollection($source->getMongoDBCollection());
+        $source->ensureIndexes($this->mongoDB, $collection);
         $stream = $this->streamFactory->getStreamForSource($source);
 
         return $stream->fetch($feedRequest->getCriteria(), $collection);

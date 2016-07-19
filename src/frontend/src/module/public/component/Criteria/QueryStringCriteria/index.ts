@@ -21,15 +21,35 @@ export class QueryStringCriteria
         private themes: ThemeService
     ) {}
 
-    ngSubmit() {
+    submit() {
         this.updateCriteria();
     }
 
+    isCriteriaAvailable(): boolean {
+        return this.queryString.length >= 3;
+    }
+
     updateCriteria() {
+        if(this.isCriteriaAvailable()) {
+            if(this.service.criteria.has('query_string')) {
+                this.service.criteria.doWith('query_string', criteria => {
+                    criteria.params.query_string = this.queryString;
+                });
+            }else{
+                this.service.criteria.attach({
+                    code: 'query_string',
+                    params: {
+                        query: this.queryString
+                    }
+                });
+            }
+        }
+        
+        this.service.update();
     }
 
     isSearchButtonDisabled() {
-        return this.queryString.length === 0;
+        return ! this.isCriteriaAvailable();
     }
 
     isThemeCriteriaAvailable(): boolean {

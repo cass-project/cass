@@ -19,10 +19,5 @@ abstract class Stream
         $this->source = $source;
     }
 
-    /**
-     * @param CriteriaManager $criteriaManager
-     * @param Collection $collection
-     * @return BSONDocument[]
-     */
     abstract public function fetch(CriteriaManager $criteriaManager, Collection $collection): array;
 }

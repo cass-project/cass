@@ -2,6 +2,7 @@
 namespace Domain\Feed\Search\Stream\Streams;
 
 use Domain\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
+use Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SortCriteria;
 use Domain\Feed\Search\Criteria\CriteriaManager;
@@ -74,6 +75,14 @@ final class PostStream extends Stream
         
         $criteriaManager->doWith(ContentTypeCriteria::class, function(ContentTypeCriteria $criteria) use (&$filter) {
             $filter['content_type'] = $criteria->getContentType();
+        });
+
+        $criteriaManager->doWith(QueryStringCriteria::class, function(QueryStringCriteria $criteria) use (&$filter) {
+            if($criteria->isAvailable()) {
+                $filter['$text'] = [
+                    '$search' => $criteria->getQuery()
+                ];
+            }
         });
 
         $result = $collection->find($filter, $options)->toArray();

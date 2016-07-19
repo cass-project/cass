@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Feed\Search\Stream\Streams;
 
+use Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SortCriteria;
 use Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
@@ -47,8 +48,16 @@ final class CommunityStream extends Stream
 
         $criteriaManager->doWith(ThemeIdCriteria::class, function(ThemeIdCriteria $criteria) use (&$filter) {
             $filter['theme_id'] = [
-                '$eq' => $criteria->getThemeId()
+                $criteria->getThemeId()
             ];
+        });
+
+        $criteriaManager->doWith(QueryStringCriteria::class, function(QueryStringCriteria $criteria) use (&$filter) {
+            if($criteria->isAvailable()) {
+                $filter['$text'] = [
+                    '$search' => $criteria->getQuery()
+                ];
+            }
         });
 
         return $collection->find($filter, $options)->toArray();

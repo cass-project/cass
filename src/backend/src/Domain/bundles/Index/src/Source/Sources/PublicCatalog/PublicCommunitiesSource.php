@@ -3,6 +3,8 @@ namespace Domain\Index\Source\Sources\PublicCatalog;
 
 use Domain\Community\Entity\Community;
 use Domain\Index\Source\Source;
+use MongoDB\Collection;
+use MongoDB\Database;
 
 final class PublicCommunitiesSource implements Source
 {
@@ -10,4 +12,10 @@ final class PublicCommunitiesSource implements Source
     {
         return 'public_communities';
     }
+
+    public function ensureIndexes(Database $database, Collection $collection)
+    {
+        $collection->createIndex(['title' => 'text']);
+    }
+
 }
