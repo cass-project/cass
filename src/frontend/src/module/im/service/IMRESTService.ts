@@ -26,7 +26,7 @@ export class IMRESTService extends AbstractRESTService
         body: IMSendBodyRequest
     ): Observable<IMSendResponse200> 
     {
-        let url = `/backend/api/protected/with-profile/${sourceProfileId}/im/send/${source}/${sourceId}`;
+        let url = `/backend/api/protected/with-profile/${sourceProfileId}/im/send/to/${source}/${sourceId}`;
 
         return this.handle(
             this.http.put(url, JSON.stringify(body), {
@@ -60,22 +60,5 @@ export class IMRESTService extends AbstractRESTService
                 headers: auth
             })
         );
-    }
-    
-    test(){
-        
-        this.read(1,"profile",1,{
-            "criteria": {
-                "seek": {
-                },
-                "cursor": {
-                    "id": "578d64300640fd4f9d58cfa1"
-                }
-            }
-        }).subscribe(
-            data=>{
-                console.log(data.source.entity.image)
-            }
-        )
     }
 }
