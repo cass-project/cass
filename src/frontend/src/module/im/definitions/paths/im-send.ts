@@ -1,7 +1,7 @@
 import {Success200} from "../../../common/definitions/common";
 import {IMMessageEntity} from "../entity/IMMessage";
 
-export interface IMSendRequest
+export interface IMSendBodyRequest
 {
     message: string;
     attachment_ids: number[];
