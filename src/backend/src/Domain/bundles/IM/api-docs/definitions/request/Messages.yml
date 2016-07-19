@@ -47,7 +47,8 @@ IM_Request_Messages:
                   description: Поле для поиска
                 order:
                   type: string
-                  description: Порядок сортировки. Значения: "desc", "asc"
+                  description: |
+                    Порядок сортировки. Значения: "desc", "asc"
     options:
       description: Опции выборки сообщений
       schema:
