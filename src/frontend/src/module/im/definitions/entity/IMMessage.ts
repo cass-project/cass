@@ -2,9 +2,9 @@ import {ProfileEntity} from "../../../profile/definitions/entity/Profile";
 
 export interface IMMessageEntity
 {
-    id: string,
+    id?: string,
     author: ProfileEntity,
-    date_created: string,
+    date_created?: string,
     content: string,
     attachments: number[]
 }
@@ -12,7 +12,9 @@ export interface IMMessageEntity
 export interface IMMessageExtendedEntity extends IMMessageEntity
 {
     send_status: {
-        code: ("complete" | "processing" | "fail"),
+        code: IMMessageStatusEntity,
         error_text?: string
     };
 }
+
+export type IMMessageStatusEntity = "complete" | "processing" | "fail";
