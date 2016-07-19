@@ -24,7 +24,9 @@ export class ProfileCommunityBookmarksService
     }
 
     getBookmarks(): ProfileCommunityBookmarkEntity[] {
-        return this.session.getCurrentProfile().entity.bookmarks;
+        if(this.session.isSignedIn()){
+            return this.session.getCurrentProfile().entity.bookmarks;
+        } 
     }
 
     attachBookmark(community: CommunityEntity): ProfileCommunityBookmarkEntity {

@@ -22,6 +22,7 @@ export class SidebarCommunities
     private isSwitchedCommunityBookmarks: boolean = true;
 
     constructor(
+        private session: Session,
         private communityModalService: CommunityModalService,
         private bookmarks: ProfileCommunityBookmarksService
     ) {}
@@ -31,7 +32,9 @@ export class SidebarCommunities
     }
     
     getCommunityBookmarks(): ProfileCommunityBookmarkEntity[] {
-        return this.bookmarks.getBookmarks();
+        if(this.session.isSignedIn()){
+            return this.bookmarks.getBookmarks();
+        }
     }
 
     getCommunityLinkParams(communitySID: string) {
