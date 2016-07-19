@@ -1,7 +1,7 @@
 ul.chatlog
   li(
-    *ngFor="#message of history",
-    class="{{message.send_status.status}}"
+    *ngFor="#message of messages",
+    class="{{message.send_status.code}}"
   )
     img.avatar(src="{{message.author.image.variants['64'].public_path}}")
     .message
