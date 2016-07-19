@@ -9,5 +9,5 @@
     cass-im-chat([messages]="im.getHistory(params.get('id'))", *ngIf="!isLoading")
     footer
       .cass-padding-box-15
-        cass-profile-im-attachments([disabled]="isLoading", (attach)="attach()", detach="detach()")
+        cass-im-attachments([disabled]="isLoading", (attach)="attach()", detach="detach()")
         cass-im-textarea.profile-im-textarea([disabled]="isLoading", (send)="onSend($event)")            

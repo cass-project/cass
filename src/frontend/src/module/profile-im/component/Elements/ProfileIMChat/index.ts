@@ -3,11 +3,11 @@ import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
 
 import {ProfileIMService} from "../../../service/ProfileIMService";
 import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
-import {ProfileIMAttachments} from "../ProfileIMAttachments/index";
 import {AuthService} from "../../../../auth/service/AuthService";
 import {IMChat} from "../../../../im/component/IMChat/index";
 import {IMTextarea} from "../../../../im/component/IMTextarea/index";
 import {IMMessagesBodyRequest} from "../../../../im/definitions/paths/im-messages";
+import {IMAttachments} from "../../../../im/component/IMAttachments/index";
 
 @Component({
     selector: 'cass-profile-im-messages',
@@ -17,7 +17,7 @@ import {IMMessagesBodyRequest} from "../../../../im/definitions/paths/im-message
     ],
     directives: [
         ROUTER_DIRECTIVES,
-        ProfileIMAttachments,
+        IMAttachments,
         IMChat,
         IMTextarea,
         LoadingLinearIndicator

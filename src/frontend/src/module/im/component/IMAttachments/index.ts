@@ -2,7 +2,7 @@ import {Component, Input} from "angular2/core";
 
 
 @Component({
-    selector: 'cass-profile-im-attachments',
+    selector: 'cass-im-attachments',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
@@ -11,7 +11,7 @@ import {Component, Input} from "angular2/core";
     ]
 })
 
-export class ProfileIMAttachments
+export class IMAttachments
 {
     @Input('disabled') disabled:boolean;
 }
