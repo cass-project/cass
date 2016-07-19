@@ -36,15 +36,19 @@ abstract class AbstractCollectionProcessor implements Processor
         $source = $this->getSource($entity);
         $collection = $this->mongoDB->selectCollection($source->getMongoDBCollection());
 
-        $indexed = array_merge($entity->toIndexedEntityJSON(), [
-            'theme_ids' => $this->getThemeIdsWeight($entity),
-        ]);
-        
-        $collection->updateOne(
-            ['id' => $entity->getId()],
-            ['$set' => $indexed],
-            ['upsert' => true]
-        );
+        if(count($entity->getThemeIds()) > 0) {
+            $indexed = array_merge($entity->toIndexedEntityJSON(), [
+                'theme_ids' => $this->getThemeIdsWeight($entity),
+            ]);
+
+            $collection->updateOne(
+                ['id' => $entity->getId()],
+                ['$set' => $indexed],
+                ['upsert' => true]
+            );
+        }else{
+            $this->exclude($entity);
+        }
     }
 
 

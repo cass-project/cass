@@ -38,15 +38,19 @@ abstract class AbstractCommunityProcessor implements Processor
             $source = $this->getSource($entity);
             $collection = $this->mongoDB->selectCollection($source->getMongoDBCollection());
 
-            $indexed = array_merge($entity->toIndexedEntityJSON(), [
-                'theme_ids' => $this->getThemeIdsWeight($entity),
-            ]);
+            if($entity->hasTheme()) {
+                $this->exclude($entity);
+            }else{
+                $indexed = array_merge($entity->toIndexedEntityJSON(), [
+                    'theme_ids' => $this->getThemeIdsWeight($entity),
+                ]);
 
-            $collection->updateOne(
-                ['id' => $entity->getId()],
-                ['$set' => $indexed],
-                ['upsert' => true]
-            );
+                $collection->updateOne(
+                    ['id' => $entity->getId()],
+                    ['$set' => $indexed],
+                    ['upsert' => true]
+                );
+            }
         }
     }
 

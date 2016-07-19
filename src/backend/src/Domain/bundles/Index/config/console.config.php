@@ -1,14 +1,14 @@
 <?php
 namespace Domain\Fake;
 
-use Domain\Fake\Console\Command\FakeUp;
+use Domain\Index\Scripts\UpdateIndexScript\UpdateIndexScript;
 
 return [
     'php-di' => [
         'config.console' => [
             'commands' => [
-                'fake' => [
-                    FakeUp::class,
+                'index' => [
+                    UpdateIndexScript::class
                 ],
             ],
         ],
