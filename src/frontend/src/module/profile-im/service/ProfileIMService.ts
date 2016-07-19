@@ -92,7 +92,7 @@ export class ProfileIMService
                 data => {
                     message.id = data.message.id;
                     message.date_created = data.message.date_created;
-                    message.send_status.code = "complete"
+                    message.send_status.code = "complete";
                 },
                 error => {
                     message.send_status.code = "fail";

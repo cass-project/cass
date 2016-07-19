@@ -1,4 +1,4 @@
-import {Component, ViewChild, ElementRef} from "angular2/core";
+import {Component, ViewChild, ElementRef, EventEmitter} from "angular2/core";
 import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
 
 import {ProfileIMService} from "../../../service/ProfileIMService";
@@ -27,9 +27,9 @@ import {Session} from "../../../../session/Session";
 export class ProfileIMChat
 {
     @ViewChild('content') content:ElementRef;
-    private isNeedScroll = false;
     private isLoading = true;
     private listerInterval = 5000/*ms*/;
+    private scroll = new EventEmitter<boolean>();
     
     constructor(
         private params: RouteParams, 
@@ -41,16 +41,14 @@ export class ProfileIMChat
         this.listen(profileId);
 
         service.createStream("profile", parseInt(params.get('id')))
-            .subscribe(() => this.isNeedScroll = true);
-    }
-    
-    ngAfterViewChecked() {
-        if(this.isNeedScroll) this.scroll();
-    }
-    
-    scroll() {
-        this.isNeedScroll = false;
-        this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+            .subscribe(() => this.scroll.emit(true));
+        
+        this.scroll.subscribe(force => {
+            let offsetBottom = this.content.nativeElement.scrollHeight - this.content.nativeElement.scrollTop - this.content.nativeElement.clientHeight;
+            if(offsetBottom < 300 || force) {
+                this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+            }
+        })
     }
     
     listen(profileId:number) {
@@ -73,9 +71,11 @@ export class ProfileIMChat
             parseInt(this.params.get('id')),
             loadHistoryBody
         ).subscribe(() => {
-               setTimeout(() => {
-                   this.listen(profileId);
-               }, this.listerInterval);
+            setTimeout(() => {
+               this.listen(profileId);
+            }, this.listerInterval);
+            
+            this.scroll.emit(this.isLoading);
             this.isLoading = false;
         });
     }
@@ -89,3 +89,4 @@ export class ProfileIMChat
         });
     }
 }
+
