@@ -27,9 +27,10 @@ import {IMAttachments} from "../../../../im/component/IMAttachments/index";
 export class ProfileIMChat
 {
     @ViewChild('content') content:ElementRef;
-    isNeedScroll = false;
-    isLoading = true;
-    listerInterval = 5000/*ms*/;
+    private isNeedScroll = false;
+    private isLoading = true;
+    private listerInterval = 5000/*ms*/;
+    
     constructor(private params: RouteParams, private im:ProfileIMService, private authService:AuthService) {
         let profileId = authService.getCurrentAccount().getCurrentProfile().getId();
 
@@ -50,7 +51,7 @@ export class ProfileIMChat
     
     listen(profileId:number) {
         let loadHistoryBody:IMMessagesBodyRequest = {criteria: {seek: {
-            limit: 100
+            limit: 0
         }}};
         
         let history = this.im.getHistory(parseInt(this.params.get('id')));
@@ -71,8 +72,6 @@ export class ProfileIMChat
                setTimeout(() => {
                    this.listen(profileId);
                }, this.listerInterval);
-            
-            this.isNeedScroll = true;
             this.isLoading = false;
         });
     }
