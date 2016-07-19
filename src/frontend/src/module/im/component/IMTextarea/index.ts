@@ -1,33 +1,30 @@
-import {Component, ElementRef, ViewChild, Input} from "angular2/core";
-import {RouteParams} from "angular2/router";
+import {Component, ElementRef, ViewChild, Input, EventEmitter, Output} from "angular2/core";
 
-import {ProfileIMFeedSendStatus} from "../../../definitions/entity/ProfileMessage";
-import {ProfileMessageExtendedEntity} from "../../../definitions/entity/ProfileMessage";
-import {ProfileIMService} from "../../../service/ProfileIMService";
-import {AuthService} from "../../../../auth/service/AuthService";
-import {MessageBusService} from "../../../../message/service/MessageBusService/index";
-import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
+import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
+import {MessageBusService} from "../../../message/service/MessageBusService/index";
 
 @Component({
-    selector: 'cass-profile-im-textarea',
+    selector: 'cass-im-textarea',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]})
 
-export class ProfileIMTextarea
+export class IMTextarea
 {
-    private maxLength = 2000;
     @ViewChild('textarea') textarea:ElementRef;
+    @Input('max-length') maxLength:number = 2000;
     @Input('disabled') disabled:boolean;
+    @Output('send') onSendEvent = new EventEmitter<IMTextareaModel>();
+
     private hiddenDiv:HTMLDivElement = document.createElement('div');
-    private content:string = "";
-    private attachments:number[] = [];
-    constructor(
-        private im:ProfileIMService,
-        private authService:AuthService,
-        private messageBus: MessageBusService
-    ){}
+    
+    public model:IMTextareaModel = {
+        content:"",
+        attachments:[]
+    };
+
+    constructor(private messageBus: MessageBusService){}
     
     ngAfterViewInit() {
         this.hiddenDiv.style.cssText = window.getComputedStyle(this.textarea.nativeElement, null).cssText;
@@ -40,11 +37,11 @@ export class ProfileIMTextarea
     
     submit(e: Event) : boolean {
         e.preventDefault();
-        if(this.content.length===0) {
+        if(this.model.content.length===0) {
             return false;
         }
         
-        if(this.content.length > this.maxLength) {
+        if(this.model.content.length > this.maxLength) {
             this.messageBus.push(
                 MessageBusNotificationsLevel.Warning,
                 `Пожалуйста, сократите ваше сообщение.
@@ -52,16 +49,8 @@ export class ProfileIMTextarea
             );
             return false;
         }
-        
-        this.im.stream.next({
-            author: this.authService.getCurrentAccount().getCurrentProfile().entity.profile,
-            date_created: new Date().toString(),
-            content: this.content,
-            attachments:this.attachments,
-            send_status:{status:ProfileIMFeedSendStatus.Processing}
-        });
-        this.content = "";
-        this.adjust("");
+        this.onSendEvent.emit(this.model);
+        this.reset();
         return true;
     }
 
@@ -73,5 +62,17 @@ export class ProfileIMTextarea
 
         this.textarea.nativeElement.style.height = Math.min(maxHeight, height) + 'px';
     }
-
+    
+    reset() {
+        this.model = {
+            content: "",
+            attachments: []
+        };
+        this.adjust("");
+    }
 }
+
+interface IMTextareaModel {
+    content:string,
+    attachments:number[]
+} 

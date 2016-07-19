@@ -2,7 +2,7 @@
 $AVATAR-SIZE: 32px;
 
 ul.chatlog {
-  padding-bottom:116px;
+  padding-bottom:123px;
 
   li{
     overflow: hidden;
@@ -17,7 +17,7 @@ ul.chatlog {
     }
 
     &.processing {
-      opacity: 0.1;
+      opacity: 0.91;
     }
     
     &.complete,

@@ -16,6 +16,10 @@ export class IMChat
     @Input('messages') messages:IMMessageExtendedEntity[];
 
     dateFormat(date:string, format:string) {
-        return DateFormatter.format(new Date(date), 'pt', format);
+        if(date) {
+            return DateFormatter.format(new Date(date), 'pt', format);
+        }else {
+            return "";
+        }
     }
 }
