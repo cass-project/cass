@@ -1,9 +1,9 @@
 @import "./../../../../../styles/globals";
 
 .profile-im-messages {
-  position: relative;
   height:100%;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   header,
   footer {
@@ -37,11 +37,6 @@
   }
   
   footer {
-    width:100%;
-    position: absolute;
-    left:0;
-    bottom:0;
-    
     .cass-padding-box-15{
       display: flex;
       
