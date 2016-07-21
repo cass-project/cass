@@ -1,7 +1,7 @@
 article.component.component-community-cards-list
   ul.community-cards
     li
-      cass-community-card([community]="entity.community", (click)="goDashboard()")
+      cass-community-card([community]="entity.community")
     li(*ngIf="isOwnCommunity()")
       cass-community-create-collection-card
     li(*ngIf="isOwnCommunity()")
