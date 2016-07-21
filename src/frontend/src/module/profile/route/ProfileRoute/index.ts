@@ -49,7 +49,7 @@ export class ProfileRoute
 
         if (authService.isSignedIn() && (id === 'current' || id === this.currentProfileService.get().getId().toString())) {
                 service.loadCurrentProfile();
-        } else if (id.match(/^(\d+)$/)) {
+        } else if (Number(id)) {
             service.loadProfileById(Number(id));
         } else {
             router.navigate(['/Profile/NotFound']);
