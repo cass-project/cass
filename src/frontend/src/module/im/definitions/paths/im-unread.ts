@@ -5,6 +5,6 @@ export interface IMUnread extends Success200
 {
     unread: {
         source: IMMessageSourceEntity<IMMessageSourceEntityType>;
-        count: number;
+        counter: number;
     }[];
 }
