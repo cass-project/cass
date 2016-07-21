@@ -1,4 +1,4 @@
-article.component.component-profile-card
+article.component.component-profile-card((click)='goProfile()')
   .card-content
     .profile-image
       .profile-image-container
@@ -15,7 +15,7 @@ article.component.component-profile-card
       .profile-interesting-in(*ngIf="!hasAnyExperts() && hasAnyInterests()")
         .profile-interesting-in-title Интересуется
         ul.themes
-          li(*ngFor="#theme of expertIn")
+          li(*ngFor="#theme of interestingIn")
             a(href="javascript.void(0)")
               span {{ theme.title }}
       .profile-open-chat(*ngIf="!isOwn")

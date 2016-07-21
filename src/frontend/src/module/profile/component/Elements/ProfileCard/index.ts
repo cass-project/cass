@@ -58,4 +58,8 @@ export class ProfileCard
     hasAnyInterests() {
         return this.interestingIn.length > 0;
     }
+
+    goProfile() {
+        this.router.navigate(['/Profile', 'Profile', { 'id': this.entity.id }]);
+    }
 }
