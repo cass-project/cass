@@ -1,5 +1,5 @@
 textarea.form-input(
-  placeholder="Введите ваше сообщение для @username",
+  placeholder="Введите ваше сообщение для {{greetings||'пользователя'}}",
   (input)="adjust(textarea.value)",
   (keydown.enter)="submit($event)",
   [(ngModel)]="model.content",

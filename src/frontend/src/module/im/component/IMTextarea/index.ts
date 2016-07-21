@@ -2,6 +2,7 @@ import {Component, ElementRef, ViewChild, Input, EventEmitter, Output} from "ang
 
 import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 import {MessageBusService} from "../../../message/service/MessageBusService/index";
+import {IMMessageSourceEntityType} from "../../definitions/entity/IMMessageSource";
 
 @Component({
     selector: 'cass-im-textarea',
@@ -15,6 +16,7 @@ export class IMTextarea
     @ViewChild('textarea') textarea:ElementRef;
     @Input('max-length') maxLength:number = 2000;
     @Input('disabled') disabled:boolean;
+    @Input('greetings') greetings:string;
     @Output('send') onSendEvent = new EventEmitter<IMTextareaModel>();
 
     private hiddenDiv:HTMLDivElement = document.createElement('div');
@@ -29,6 +31,7 @@ export class IMTextarea
     ngAfterViewInit() {
         this.hiddenDiv.style.cssText = window.getComputedStyle(this.textarea.nativeElement, null).cssText;
         this.hiddenDiv.style.height = "auto";
+        this.hiddenDiv.style.width = "auto"; // fix horisontal scroll on resize window
         this.hiddenDiv.style.visibility = "hidden";
         this.hiddenDiv.style.position = "absolute";
         this.textarea.nativeElement.parentElement.insertBefore(this.hiddenDiv, this.textarea.nativeElement);
