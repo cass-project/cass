@@ -1,18 +1,15 @@
 @import "./../../../../styles/globals";
 
-.button-wrap {
-  padding: 6px;
-  background: white;
-  border-bottom: 1px solid #bbb;
-  &.disabled {
-      opacity: 0.5;
-  }
-  button {
-    font-size: $FONT_SIZE_LARGE;
-    background: none;
-    border: none;
-    color:material-color("grey", "600");
-    border-right: 1px material-color("grey", "300") solid;
-    padding:1px 12px 1px 6px;
+button {
+  font-size: $FONT_SIZE_LARGE;
+  background: none;
+  border: none;
+  color:material-color("grey", "600");
+  margin-right:15px;
+  cursor: pointer;
+  
+  &:disabled {
+    color:material-color("grey", "400");
+    cursor: default;
   }
 }
