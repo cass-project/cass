@@ -8,6 +8,7 @@ import {IMTextarea} from "../../../../im/component/IMTextarea/index";
 import {IMMessagesBodyRequest} from "../../../../im/definitions/paths/im-messages";
 import {IMAttachments} from "../../../../im/component/IMAttachments/index";
 import {Session} from "../../../../session/Session";
+import {IMMessageSourceEntityType} from "../../../../im/definitions/entity/IMMessageSource";
 
 @Component({
     selector: 'cass-profile-im-messages',
@@ -30,6 +31,7 @@ export class ProfileIMChat
     private isLoading = true;
     private listerInterval = 5000/*ms*/;
     private scroll = new EventEmitter<boolean>();
+    private source:IMMessageSourceEntityType;
     
     constructor(
         private params: RouteParams, 
@@ -70,7 +72,9 @@ export class ProfileIMChat
             "profile",
             parseInt(this.params.get('id')),
             loadHistoryBody
-        ).subscribe(() => {
+        ).subscribe(data => {
+            this.source = data.source.entity;
+            
             setTimeout(() => {
                this.listen(profileId);
             }, this.listerInterval);

@@ -1,13 +1,17 @@
 .profile-im-messages
   header
     h1 
-      a.cass-padding-box-15([routerLink]="['Contacts']")
-        i.fa.fa-chevron-left.fa-fw(aria-hidden="true")
-        | &nbsp;@username
+      a.cass-padding-box-15.source([routerLink]="['/Profile','Profile', {id:source.id.toString()}]", *ngIf="source")
+        span &nbsp;{{source.greetings.greetings}}
+        span.last-seen
+          i.fa.fa-fw.fa-circle(aria-hidden="true")
+          span &nbsp;Был в сети 10 минут назад.
+        i.fa.fa-chevron-right.fa-fw(aria-hidden="true")
+      .cass-padding-box-15.source(*ngIf="!source") Загрузка...
   .content(#content)
     cass-loading-linear-indicator(*ngIf="isLoading")
     cass-im-chat([messages]="service.getHistory(params.get('id'))", *ngIf="!isLoading")
   footer
     .cass-padding-box-15
       cass-im-attachments([disabled]="isLoading", (attach)="attach()", detach="detach()")
-      cass-im-textarea.profile-im-textarea([disabled]="isLoading", (send)="onSend($event)")            
+      cass-im-textarea.profile-im-textarea([disabled]="isLoading", (send)="onSend($event)", [greetings]="source?.greetings?.greetings")            
