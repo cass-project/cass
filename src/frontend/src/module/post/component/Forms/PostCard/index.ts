@@ -35,7 +35,6 @@ export class PostCard
 
     isOwnPost(): boolean{
         if(this.auth.isSignedIn()){
-            console.log(this.post.profile_id, this.profile.get().getId());
             return (this.post.profile_id === this.profile.get().getId());
         } else {
             return false
