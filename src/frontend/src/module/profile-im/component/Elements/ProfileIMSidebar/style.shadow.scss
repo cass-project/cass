@@ -1,50 +1,73 @@
 @import "./../../../../../styles/globals";
+
 $AVATAR-SIZE: 32px;
+$AVATAR-SIZE-SMALL: 24px;
 
 .profile-im-sidebar {
   background-color: material-color("grey", "800");
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   position: fixed;
   height: 100%;
-  width:250px;
+  width: 300px;
   color: material-color("grey", "50");
-  overflow: auto;
-  z-index: 1;
+  z-index: 2;
+  transition: width 300ms;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 
   header {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     h1 {
+      padding: 15px;
       font-size: $FONT_SIZE_LARGE;
       line-height: normal;
+
+      .mobile-menu {
+        display: none;
+      }
     }
   }
 
   .contact-list {
+    overflow: auto;
+    height: 100%;
+
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: material-color("blue", '600');
+    }
+
     li {
-      padding:15px;
-      overflow: hidden; font-size: 14px; line-height:16px;
+      padding: 15px;
+      overflow: hidden;
+      font-size: 14px;
+      line-height: 16px;
       cursor: pointer;
-      transition:background 300ms;
+      transition: background 300ms;
       border-left: 3px transparent solid;
-      position:relative;
+      position: relative;
 
       &:hover {
         border-left-color: #2e4356;
         background-color: #323232
       }
 
-      &.active{
+      &.router-link-active {
         border-left-color: material-color("blue", '600');
         background-color: material-color("grey", "900");
       }
 
-      .last-message{
-        line-height:16px;
-        height: 16px; 
+      .last-message {
+        line-height: 16px;
+        height: 16px;
         overflow: hidden;
         color: material-color("grey", "500");
       }
-      
+
       .avatar {
         width: $AVATAR-SIZE;
         height: $AVATAR-SIZE;
@@ -54,31 +77,61 @@ $AVATAR-SIZE: 32px;
         float: left
       }
       i.status {
-        position:absolute;
-        width: 10px; 
+        position: absolute;
+        width: 10px;
         height: 10px;
         border-radius: 50%;
         top: $AVATAR-SIZE;
         left: $AVATAR-SIZE;
         border: 2px material-color("grey", "800") solid;
-        display:none;
-        
+        display: none;
+
         &.online {
-          display:block;
+          display: block;
           background-color: material-color("lime", "600");
         }
       }
     }
   }
-  
-  .footer {
+
+  footer {
     width: 100%;
-    position: absolute; 
-    bottom: 0;
-    
     input {
       background-color: material-color("grey", "700");
       color: material-color("grey", "50");
+    }
+  }
+
+  @include isMobile() {
+    white-space: nowrap;
+
+    header h1 i.mobile-menu {
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    &.visible .mobile-menu {
+      margin-right: 15px;
+    }
+
+    &:not(.visible) {
+      width: 65px;
+      
+      header h1 {
+        text-align: center;
+      }
+      
+      header h1 span,
+      .greetings,
+      .last-message,
+      footer {
+        display: none
+      }
+
+      li .avatar {
+        width: $AVATAR-SIZE-SMALL;
+        height: $AVATAR-SIZE-SMALL;
+      }
     }
   }
 }
