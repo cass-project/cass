@@ -7,7 +7,7 @@ import {AuthToken} from "../../auth/service/AuthToken";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {IMSendBodyRequest, IMSendResponse200} from "../definitions/paths/im-send";
 import {IMMessagesResponse200, IMMessagesBodyRequest} from "../definitions/paths/im-messages";
-import {IMUnread} from "../definitions/paths/im-unread";
+import {IMUnreadResponse200} from "../definitions/paths/im-unread";
 import {IMMessageSourceEntityTypeCode, IMMessageSourceEntityType} from "../definitions/entity/IMMessageSource";
 
 @Injectable()
@@ -51,7 +51,7 @@ export class IMRESTService extends AbstractRESTService
         );
     }
 
-    unreadInfo(targetProfileId: number): Observable<IMUnread> {
+    unreadInfo(targetProfileId: number): Observable<IMUnreadResponse200> {
         let url = `/backend/api/protected/with-profile/${targetProfileId}/im/unread`;
         let auth = this.getAuthHeaders();
 

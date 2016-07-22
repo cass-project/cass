@@ -2,7 +2,7 @@ import {Injectable} from "angular2/core";
 import {Observable, Observer} from "rxjs/Rx";
 
 import {IMMessageExtendedEntity, IMMessageEntity} from "../../im/definitions/entity/IMMessage";
-import {IMUnread} from "../../im/definitions/paths/im-unread";
+import {IMUnreadResponse200} from "../../im/definitions/paths/im-unread";
 import {IMRESTService} from "../../im/service/IMRESTService";
 import {IMMessageSourceEntityTypeCode, IMMessageSourceEntityType} from "../../im/definitions/entity/IMMessageSource";
 import {IMMessagesBodyRequest, IMMessagesResponse200} from "../../im/definitions/paths/im-messages";
@@ -57,9 +57,9 @@ export class ProfileIMService
         });
     }
 
-    unreadInfo(targetProfileId:number) : Observable<IMUnread>
+    unreadInfo(targetProfileId:number) : Observable<IMUnreadResponse200>
     {
-        return Observable.create((observer: Observer<IMUnread>) => {
+        return Observable.create((observer: Observer<IMUnreadResponse200>) => {
             this.rest.unreadInfo(targetProfileId).subscribe(
                 data => {
                     observer.next(data);

@@ -1,10 +1,13 @@
 import {Success200} from "../../../common/definitions/common";
 import {IMMessageSourceEntity, IMMessageSourceEntityType} from "../entity/IMMessageSource";
 
-export interface IMUnread extends Success200
+export interface IMUnreadResponse200 extends Success200
 {
-    unread: {
-        source: IMMessageSourceEntity<IMMessageSourceEntityType>;
-        counter: number;
-    }[];
+    unread: IMUnreadResponseEntity[];
+}
+
+export interface IMUnreadResponseEntity
+{
+    source: IMMessageSourceEntity<IMMessageSourceEntityType>;
+    counter: number;
 }
