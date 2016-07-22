@@ -22,8 +22,8 @@ export interface IMMessagesBodyRequest
     }
 }
 
-export interface IMMessagesResponse200<T extends IMMessageSourceEntityType> extends Success200
+export interface IMMessagesResponse200 extends Success200
 {
-    source: IMMessageSourceEntity<T>,
+    source: IMMessageSourceEntity<IMMessageSourceEntityType>,
     messages: IMMessageEntity[]
 }
