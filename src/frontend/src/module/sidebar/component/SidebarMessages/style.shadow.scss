@@ -4,9 +4,16 @@
 div.sidebar-unreaded-messages
 {
   ul.sidebar-items {
-    li {
+    >li {
       margin-left: 15px;
       margin-bottom: 5px;
+      >ul{
+        margin-top: 5px;
+        >li {
+          cursor: pointer;
+          margin-bottom: 5px;
+        }
+      }
     }
   }
 }
