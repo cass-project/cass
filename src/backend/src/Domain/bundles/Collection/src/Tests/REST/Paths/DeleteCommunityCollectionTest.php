@@ -2,8 +2,10 @@
 namespace Domain\Collection\Tests\REST\Paths;
 
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use Domain\Collection\Collection\CollectionItem;
 use Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
 use Domain\Collection\Tests\REST\CollectionRESTTestCase;
+use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 
 /**
  * @backupGlobals disabled
@@ -16,7 +18,7 @@ final class DeleteCommunityCollectionTest extends CollectionRESTTestCase
 
         $collectionToDelete = SampleCollectionsFixture::getCommunityCollection(1);
         $collectionId = $collectionToDelete->getId();
-        list($owner, $communityId) = explode(':', $collectionToDelete->getOwnerSID());
+        list(, $communityId) = explode(':', $collectionToDelete->getOwnerSID());
 
         $this->requestGetCommunity($communityId)
             ->execute()
@@ -25,7 +27,7 @@ final class DeleteCommunityCollectionTest extends CollectionRESTTestCase
             ->expect(function(array $jsonResponse) use ($collectionId) {
                 $collectionIds = array_map(function(array $input) {
                     return $input['collection_id'];
-                }, $jsonResponse['entity']['collections']);
+                }, $jsonResponse['entity']['community']['collections']);
 
                 $this->assertTrue(in_array($collectionId, $collectionIds));
             });
@@ -46,9 +48,29 @@ final class DeleteCommunityCollectionTest extends CollectionRESTTestCase
             ->expect(function(array $jsonResponse) use ($collectionId) {
                 $collectionIds = array_map(function(array $input) {
                     return $input['collection_id'];
-                }, $jsonResponse['entity']['collections']);
+                }, $jsonResponse['entity']['community']['collections']);
 
                 $this->assertFalse(in_array($collectionId, $collectionIds));
             });
+    }
+
+    public function test409()
+    {
+        $this->upFixture(new SampleCollectionsFixture());
+
+        $community = SampleCommunitiesFixture::getCommunity(1);
+        $collectionId = array_map(function(CollectionItem $item) {
+            return $item->getCollectionId();
+        }, $community->getCollections()->getItems())[0];
+
+        $this->requestDeleteCollection($collectionId)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(409)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'error' => $this->expectString(),
+                'success' => false
+            ]);
     }
 }

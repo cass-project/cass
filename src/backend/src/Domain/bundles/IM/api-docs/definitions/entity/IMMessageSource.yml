@@ -1,0 +1,17 @@
+IM_Definitions_MessageSource:
+  description: Источник
+  type: object
+  schema:
+    required:
+      - id
+      - code
+      - entity
+    id:
+      type: number
+      description: ID источника
+    code:
+      type: string
+      description: Код источника("profile", "community")
+    entity:
+      type: object
+      description:  Источник

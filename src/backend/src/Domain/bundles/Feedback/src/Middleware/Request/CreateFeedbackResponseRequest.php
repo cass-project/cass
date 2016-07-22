@@ -13,8 +13,8 @@ class CreateFeedbackResponseRequest extends SchemaParams
         $data = $this->getData();
 
         return new CreateFeedbackResponseParameters(
-            $data->description,
-            $data->feedback_id
+            $data['description'],
+            $data['feedback_id']
         );
     }
 

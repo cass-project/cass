@@ -4,6 +4,10 @@ import {PostEntity} from "../../../definitions/entity/Post";
 import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
 import {ProfileCardHeader} from "../../../../profile/component/Elements/ProfileCardHeader/index";
 import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
+import {PostRESTService} from "../../../service/PostRESTService";
+import {CurrentProfileService} from "../../../../profile/service/CurrentProfileService";
+import {FeedService} from "../../../../feed/service/FeedService/index";
+import {AuthService} from "../../../../auth/service/AuthService";
 
 @Component({
     selector: 'cass-post-card',
@@ -20,8 +24,35 @@ export class PostCard
 {
     @Input('post') post: PostEntity;
 
+    deleteProcessing: boolean = false;
+
+    constructor(private service: PostRESTService,
+                private profile: CurrentProfileService,
+                private feed: FeedService<PostEntity>,
+                private auth: AuthService){}
+
     private dateCreatedOn: Date;
 
+    isOwnPost(): boolean{
+        if(this.auth.isSignedIn()){
+            return (this.post.profile_id === this.profile.get().getId());
+        } else {
+            return false
+        }
+    }
+
+    deletePost(){
+        this.deleteProcessing = true;
+        this.service.deletePost(this.post.id).subscribe(success => {
+            for(let index = 0; index < this.feed.stream.all().length; index++){
+                if(this.feed.stream.all()[index].id = this.post.id){
+                    this.feed.stream.all().splice(index, 1);
+                    this.deleteProcessing = false;
+                }
+            }
+        });
+    }
+    
     getProfile(): ProfileEntity
     {
         return this.post.profile;

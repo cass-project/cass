@@ -1,10 +1,10 @@
-article.component.component-profile-card-header
-  .profile-image
-    .profile-image-container
-      cass-profile-image(border="circle", [url]="getImageURL()")
-  .profile-about
-      .profile-name
+article.component.component-community-card-header
+  .community-image
+    .community-image-container
+      cass-community-image(border="circle", [url]="getImageURL()")
+  .community-about
+      .community-name
         h1 {{ getCommunityTitle() }}
-      .profile-settings
+      .community-settings
         time(*ngIf="hasTime()")
           span {{ getTime() }}

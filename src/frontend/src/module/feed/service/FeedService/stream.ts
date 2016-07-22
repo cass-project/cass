@@ -8,6 +8,10 @@ export class Stream<T>
         return this.entities;
     }
 
+    empty() {
+        this.entities = [];
+    }
+
     replace(entities: T[]) {
         this.entities = entities;
     }
@@ -20,5 +24,9 @@ export class Stream<T>
 
     insertBefore(entity: T) {
         this.entities.unshift(entity);
+    }
+    
+    size(): number {
+        return this.entities.length;
     }
 }

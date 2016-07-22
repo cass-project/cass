@@ -77,4 +77,9 @@ abstract class CommunityMiddlewareTestCase extends MiddlewareTestCase
     {
         return $this->request('POST', sprintf('/community/%d/set-public-options', $communityId))->setParameters($json);
     }
+
+    protected function requestGetProfile(int $profileId): RESTRequest
+    {
+        return $this->request('GET', sprintf('/profile/%d/get', $profileId));
+    }
 }

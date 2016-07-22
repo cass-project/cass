@@ -11,8 +11,8 @@ class UpdateThemeRequest extends SchemaParams
         $data = $this->getData();
 
         return [
-            'title' => $data->title,
-            'description' => $data->description
+            'title' => $data['title'],
+            'description' => $data['description']
         ];
     }
 

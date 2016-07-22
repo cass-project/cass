@@ -1,11 +1,12 @@
 import {Component} from "angular2/core";
 
 import {FeedService} from "../../../feed/service/FeedService/index";
-import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/index";
-import {PublicContentSource} from "../../../feed/service/FeedService/source/public/PublicContentSource";
 import {Stream} from "../../../feed/service/FeedService/stream";
-import {PostEntity} from "../../../post/definitions/entity/Post";
 import {PublicService} from "../../service";
+import {NothingFound} from "../../component/Elements/NothingFound/index";
+import {FeedCommunityStream} from "../../../feed/component/stream/FeedCommunityStream/index";
+import {CommunityEntity} from "../../../community/definitions/entity/Community";
+import {PublicCommunitiesSource} from "../../../feed/service/FeedService/source/public/PublicCommunitiesSource";
 
 @Component({
     template: require('./template.jade'),
@@ -14,22 +15,24 @@ import {PublicService} from "../../service";
     ],
     providers: [
         FeedService,
-        PublicContentSource,
+        PublicCommunitiesSource,
     ],
     directives: [
-        FeedPostStream,
+        FeedCommunityStream,
+        NothingFound,
     ]
 })
 export class CommunitiesRoute
 {
     constructor(
         private catalog: PublicService,
-        private service: FeedService<PostEntity>,
-        private source: PublicContentSource
+        private service: FeedService<CommunityEntity>,
+        private source: PublicCommunitiesSource
     ) {
         catalog.source = 'communities';
+        catalog.injectFeedService(service);
         
-        service.provide(source, new Stream<PostEntity>());
+        service.provide(source, new Stream<CommunityEntity>());
         service.criteria = catalog.criteria;
         service.update();
     }

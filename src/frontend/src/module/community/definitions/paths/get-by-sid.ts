@@ -1,5 +1,5 @@
 import {Success200} from "../../../common/definitions/common";
-import {CommunityExtendedEntity} from "../entity/Community";
+import {CommunityExtendedEntity} from "../entity/CommunityExtended";
 
 export interface GetCommunityBySIDResponse200 extends Success200
 {

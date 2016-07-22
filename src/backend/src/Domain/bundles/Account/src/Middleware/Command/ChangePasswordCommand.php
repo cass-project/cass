@@ -15,7 +15,7 @@ final class ChangePasswordCommand extends AbstractCommand
             $account = $this->currentAccountService->getCurrentAccount();
             $parameters = (new ChangePasswordRequest($request))->getParameters();
 
-            $newAPIKey = $this->accountService->changePassword($account, $parameters->old_password, $parameters->new_password);
+            $newAPIKey = $this->accountService->changePassword($account, $parameters['old_password'], $parameters['new_password']);
 
             $this->authService->auth($account);
 

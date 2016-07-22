@@ -6,11 +6,14 @@ export interface CollectionEntity
     sid: string;
     owner_sid: string;
     owner: CollectionOwnerEntity;
+    date_created_on: string;
     title: string;
     description: string;
     theme_ids: Array<number>;
     public_options: CollectionPublicOptionsEntity;
     image: ImageCollection;
+    is_protected: boolean;
+    is_main: boolean;
     children?: CollectionEntity[];
 }
 
@@ -27,6 +30,8 @@ export interface CollectionPublicOptionsEntity
     moderation_contract: boolean;
 }
 
+// ?
+
 export class Collection implements CollectionEntity
 {
     static OWNER_TYPES = ['community', 'profile'];
@@ -34,9 +39,12 @@ export class Collection implements CollectionEntity
     id: number;
     sid: string;
     owner_sid: string;
+    date_created_on: string;
     owner: CollectionOwnerEntity;
     title: string;
     description: string;
+    is_protected: boolean;
+    is_main: boolean;
     theme_ids: Array<number>;
     public_options: CollectionPublicOptionsEntity;
     image: ImageCollection;

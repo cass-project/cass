@@ -1,6 +1,7 @@
 <?php
+namespace Domain\Fake;
 
-use \Domain\Fake\Console\Command\FakeUp;
+use Domain\Fake\Console\Command\FakeUp;
 
 return [
     'php-di' => [

@@ -12,7 +12,7 @@ class SignInRequest extends SchemaParams
     {
         $data = $this->getData();
 
-        return new SignInParameters($data->email, $data->password);
+        return new SignInParameters($data['email'], $data['password']);
     }
 
     protected function getSchema(): JSONSchema

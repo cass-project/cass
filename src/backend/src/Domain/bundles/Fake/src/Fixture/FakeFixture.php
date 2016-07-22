@@ -5,9 +5,11 @@ use Application\Util\Definitions\Point;
 use Application\Util\GenerateRandomString;
 use Domain\Account\Entity\Account;
 use Domain\Account\Service\AccountService;
+use Domain\Auth\Service\CurrentAccountService;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Collection\Collection\CollectionItem;
 use Domain\Collection\Entity\Collection;
+use Domain\Collection\Parameters\EditCollectionParameters;
 use Domain\Collection\Service\CollectionService;
 use Domain\Post\Entity\Post;
 use Domain\Post\Parameters\CreatePostParameters;
@@ -45,11 +47,17 @@ final class FakeFixture
     /** @var PostAttachmentRepository */
     protected $postAttachmentRepository;
 
+    /** @var CurrentAccountService */
+    private $currentAccountService;
+
     /** @var array */
     private $jsonProfiles;
 
     /** @var array */
     private $jsonFeed;
+
+    /** @var  @var array */
+    private $jsonVideos;
 
     /** @var OutputInterface */
     private $output;
@@ -58,14 +66,16 @@ final class FakeFixture
     private $accountsMap;
 
     public function __construct(
-        AccountService $accountService, 
-        ProfileService $profileService, 
-        CollectionService $collectionService, 
-        PostService $postService, 
+        AccountService $accountService,
+        CurrentAccountService $currentAccountService,
+        ProfileService $profileService,
+        CollectionService $collectionService,
+        PostService $postService,
         PostAttachmentService $postAttachmentService,
         PostAttachmentRepository $postAttachmentRepository
     ) {
         $this->accountService = $accountService;
+        $this->currentAccountService = $currentAccountService;
         $this->profileService = $profileService;
         $this->collectionService = $collectionService;
         $this->postService = $postService;
@@ -122,6 +132,7 @@ final class FakeFixture
     {
         $this->jsonProfiles = $this->fetchJSON(self::JSON_DIR.'/profiles.json');
         $this->jsonFeed = $this->fetchJSON(self::JSON_DIR.'/feed.json');
+        $this->jsonVideos = $this->fetchJSON(self::JSON_DIR.'/video.json');
     }
 
     private function fetchJSON(string $path): array
@@ -204,60 +215,60 @@ final class FakeFixture
                 }else{
                     $params = [];
                     parse_str(parse_url($url)['query'] ?? '', $params);
-                    
+
                     $v = $params['v'];
                 }
 
                 $linkAttachment = new PostAttachment();
                 $linkAttachment->setAttachment([
-                    'url' => $url,
-                    'resource' => 'youtube',
-                    'source' => [
-                        'source' => 'external',
-                        'origURL' => $url,
-                    ],
-                    'metadata' => [
-                        'og' => [
-                            'basic' => [
-                                'description' => '',
-                                'title' => '',
-                                'url' => $url,
-                            ],
-                            'og' => [
-                                'basic' => [
-                                    'og:url' => $url,
-                                    'og:title' => '',
-                                    'og:type' => '',
-                                    'og:description' => '',
-                                    'og:determiner' => '',
-                                    'og:locale' => '',
-                                    'og:locale:alternate' => '',
-                                    'og:site_name' => '',
-                                ],
-                                'images' => [[
-                                    'og:image' => '',
-                                    'og:image:url' => '',
-                                    'og:image:type' => '',
-                                    'og:image:width' => '',
-                                    'og:image:height' => '',
-                                ]],
-                                'videos' => [[
-                                    'og:video' => '',
-                                    'og:video:url' => '',
-                                    'og:video:type' => '',
-                                    'og:video:width' => '',
-                                    'og:video:height' => '',
-                                ]],
-                                'audios' => [[
-                                    'og:video' => '',
-                                    'og:video:url' => '',
-                                    'og:video:type' => '',
-                                ]]
-                            ]
-                        ],
-                        'youtubeId' => $v,
-                    ]
-                ]);
+                                                   'url' => $url,
+                                                   'resource' => 'youtube',
+                                                   'source' => [
+                                                       'source' => 'external',
+                                                       'origURL' => $url,
+                                                   ],
+                                                   'metadata' => [
+                                                       'og' => [
+                                                           'basic' => [
+                                                               'description' => '',
+                                                               'title' => '',
+                                                               'url' => $url,
+                                                           ],
+                                                           'og' => [
+                                                               'basic' => [
+                                                                   'og:url' => $url,
+                                                                   'og:title' => '',
+                                                                   'og:type' => '',
+                                                                   'og:description' => '',
+                                                                   'og:determiner' => '',
+                                                                   'og:locale' => '',
+                                                                   'og:locale:alternate' => '',
+                                                                   'og:site_name' => '',
+                                                               ],
+                                                               'images' => [[
+                                                                                'og:image' => '',
+                                                                                'og:image:url' => '',
+                                                                                'og:image:type' => '',
+                                                                                'og:image:width' => '',
+                                                                                'og:image:height' => '',
+                                                                            ]],
+                                                               'videos' => [[
+                                                                                'og:video' => '',
+                                                                                'og:video:url' => '',
+                                                                                'og:video:type' => '',
+                                                                                'og:video:width' => '',
+                                                                                'og:video:height' => '',
+                                                                            ]],
+                                                               'audios' => [[
+                                                                                'og:video' => '',
+                                                                                'og:video:url' => '',
+                                                                                'og:video:type' => '',
+                                                                            ]]
+                                                           ]
+                                                       ],
+                                                       'youtubeId' => $v,
+                                                   ]
+                                               ]);
 
                 $this->postAttachmentRepository->createPostAttachment($linkAttachment);
 
@@ -281,63 +292,63 @@ final class FakeFixture
 
                 $images = strlen($image)
                     ? [[
-                        'og:image' => $image,
-                        'og:image:url' => $image,
-                    ]]
+                           'og:image' => $image,
+                           'og:image:url' => $image,
+                       ]]
                     : [[
-                        'og:image' => '',
-                        'og:image:url' => '',
-                    ]];
+                           'og:image' => '',
+                           'og:image:url' => '',
+                       ]];
 
                 $linkAttachment = new PostAttachment();
                 $linkAttachment->setAttachment([
-                    'url' => $url,
-                    'resource' => 'page',
-                    'source' => [
-                        'source' => 'external',
-                        'origURL' => $url,
-                    ],
-                    'metadata' => [
-                        'og' => [
-                            'basic' => [
-                                'description' => $description,
-                                'title' => $title,
-                                'url' => $url,
-                            ],
-                            'og' => [
-                                'basic' => [
-                                    'og:url' => $url,
-                                    'og:title' => $title,
-                                    'og:type' => '',
-                                    'og:description' => $description,
-                                    'og:determiner' => '',
-                                    'og:locale' => '',
-                                    'og:locale:alternate' => '',
-                                    'og:site_name' => '',
-                                ],
-                                'images' => [[
-                                    'og:image' => '',
-                                    'og:image:url' => '',
-                                    'og:image:type' => '',
-                                    'og:image:width' => '',
-                                    'og:image:height' => '',
-                                ]],
-                                'videos' => [[
-                                    'og:video' => '',
-                                    'og:video:url' => '',
-                                    'og:video:type' => '',
-                                    'og:video:width' => '',
-                                    'og:video:height' => '',
-                                ]],
-                                'audios' => [[
-                                    'og:video' => '',
-                                    'og:video:url' => '',
-                                    'og:video:type' => '',
-                                ]]
-                            ]
-                        ],
-                    ]
-                ]);
+                                                   'url' => $url,
+                                                   'resource' => 'page',
+                                                   'source' => [
+                                                       'source' => 'external',
+                                                       'origURL' => $url,
+                                                   ],
+                                                   'metadata' => [
+                                                       'og' => [
+                                                           'basic' => [
+                                                               'description' => $description,
+                                                               'title' => $title,
+                                                               'url' => $url,
+                                                           ],
+                                                           'og' => [
+                                                               'basic' => [
+                                                                   'og:url' => $url,
+                                                                   'og:title' => $title,
+                                                                   'og:type' => '',
+                                                                   'og:description' => $description,
+                                                                   'og:determiner' => '',
+                                                                   'og:locale' => '',
+                                                                   'og:locale:alternate' => '',
+                                                                   'og:site_name' => '',
+                                                               ],
+                                                               'images' => [[
+                                                                                'og:image' => '',
+                                                                                'og:image:url' => '',
+                                                                                'og:image:type' => '',
+                                                                                'og:image:width' => '',
+                                                                                'og:image:height' => '',
+                                                                            ]],
+                                                               'videos' => [[
+                                                                                'og:video' => '',
+                                                                                'og:video:url' => '',
+                                                                                'og:video:type' => '',
+                                                                                'og:video:width' => '',
+                                                                                'og:video:height' => '',
+                                                                            ]],
+                                                               'audios' => [[
+                                                                                'og:video' => '',
+                                                                                'og:video:url' => '',
+                                                                                'og:video:type' => '',
+                                                                            ]]
+                                                           ]
+                                                       ],
+                                                   ]
+                                               ]);
 
                 $this->postAttachmentRepository->createPostAttachment($linkAttachment);
 
@@ -352,6 +363,41 @@ final class FakeFixture
     }
 
     private function upVideosFixture() {
-        // TODO:: implement
+
+        $averageVideos = ceil(count($this->jsonVideos)/count($this->accountsMap));
+
+        $videoIdx = 1;
+        $account = $this->accountsMap[array_rand($this->accountsMap )] ;
+        foreach($this->jsonVideos as $video){
+
+            if(0 === ($videoIdx % $averageVideos)) {
+                $account = $this->accountsMap[array_rand($this->accountsMap )] ;
+            }
+
+            $this->currentAccountService->forceSignIn($account);
+
+            /** @var Profile $profile */
+            $profile = $account->getProfiles()->first();
+
+            /** @var CollectionItem  $collectionItem */
+            $collectionItem = $profile->getCollections()->getItems()[0];
+            $collection = $this->collectionService->getCollectionById($collectionItem->getCollectionId());
+
+            $collectionParams = new EditCollectionParameters(
+                $collection->getTitle(),
+                $collection->getDescription(),
+                [$video['category_id']]
+            );
+
+            $collection = $this->collectionService->editCollection($collection->getId(), $collectionParams);
+
+            $video['id']          = $videoIdx;
+            $video['typeId']      = 2;
+            $video['description'] = $video['name'];
+
+            $post = $this->createPost($account->getCurrentProfile(), $collection, $video);
+
+            $videoIdx++;
+        }
     }
 }

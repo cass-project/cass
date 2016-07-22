@@ -12,7 +12,7 @@ abstract class SchemaParams implements RequestParamsInterface
     /** @var SchemaService */
     private static $schemaService;
 
-    /** @var object */
+    /** @var array */
     private $data;
 
     /** @var ServerRequestInterface */
@@ -23,9 +23,9 @@ abstract class SchemaParams implements RequestParamsInterface
         $this->request = $request;
 
         if($request->getParsedBody()) {
-            $this->data = $request->getParsedBody();
+            $this->data = json_decode(json_encode($request->getParsedBody()), true);
         }else{
-            $this->data = json_decode($request->getBody());
+            $this->data = json_decode($request->getBody(), true);
         }
 
         $this->validateSchema();
@@ -33,10 +33,10 @@ abstract class SchemaParams implements RequestParamsInterface
 
     private function validateSchema()
     {
-        $data = $this->data;
+        $data = $this->getData();
 
         $schema = $this->getSchema();
-        $validator = $schema->validate($data);
+        $validator = $schema->validate(json_decode(json_encode($data)));
 
         if (!($validator->isValid())) {
             throw new InvalidJSONSchema('Invalid JSON');

@@ -2,8 +2,8 @@
 namespace Domain\Feed\Search\Stream;
 
 use Domain\Feed\Search\Criteria\CriteriaManager;
-use Domain\Feed\Service\Entity;
-use Domain\Feed\Source\Source;
+
+use Domain\Index\Source\Source;
 use MongoDB\Collection;
 use MongoDB\Model\BSONDocument;
 
@@ -19,10 +19,5 @@ abstract class Stream
         $this->source = $source;
     }
 
-    /**
-     * @param CriteriaManager $criteriaManager
-     * @param Collection $collection
-     * @return BSONDocument[]
-     */
     abstract public function fetch(CriteriaManager $criteriaManager, Collection $collection): array;
 }

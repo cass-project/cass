@@ -21,7 +21,6 @@ import {CommunityFeaturesModel} from "../CommunityCreateModal/model";
 import {SetPublicOptionsCommunityRequest} from "../../../definitions/paths/set-public-options";
 
 
-
 @Component({
     selector: 'cass-community-settings-modal',
     template: require('./template.jade'),

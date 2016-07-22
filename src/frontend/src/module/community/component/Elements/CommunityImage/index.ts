@@ -25,6 +25,6 @@ export class CommunityImage
             throw new Error(`Invalid border ${border}`);
         }
 
-        return `profile-image-border profile-image-border-${border}`;
+        return `community-image-border community-image-border-${border}`;
     }
 }

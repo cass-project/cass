@@ -4,11 +4,10 @@ namespace Domain\Post\Entity;
 use Application\Util\Entity\IdEntity\IdEntity;
 use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\JSONSerializable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection as DoctrineCollection;
 use Domain\Collection\Entity\Collection;
-use Domain\Feed\Service\Entity;
+use Domain\Index\Entity\IndexedEntity;
 use Domain\Post\PostType\PostType;
+use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\Profile\Entity\Profile;
 use Domain\Theme\Strategy\ThemeIdsEntityAware;
 use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
@@ -17,7 +16,7 @@ use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  * @Entity(repositoryClass="Domain\Post\Repository\PostRepository")
  * @Table(name="post")
  */
-class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
+class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEntity
 {
     use IdTrait;
     use ThemeIdsAwareEntityTrait;
@@ -55,10 +54,10 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
     private $content;
 
     /**
-     * @OneToMany(targetEntity="Domain\PostAttachment\Entity\PostAttachment", mappedBy="post", cascade={"all"})
-     * @var DoctrineCollection
+     * @Column(name="attachment_ids", type="json_array")
+     * @var int[]
      */
-    private $attachments;
+    private $attachmentIds = [];
 
     public function __construct(
         PostType $postType,
@@ -71,7 +70,6 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
         $this->collection = $collection;
         $this->content = $content;
         $this->dateCreatedOn = new \DateTime();
-        $this->attachments = new ArrayCollection();
     }
 
     public function toJSON(): array
@@ -84,10 +82,11 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
             'collection_id' => $this->getCollection()->getId(),
             'content' => $this->getContent(),
             'theme_ids' => $this->getThemeIds(),
+            'attachment_ids' => $this->getAttachmentIds(),
         ];
     }
 
-    public function toIndexedJSON(): array
+    public function toIndexedEntityJSON(): array
     {
         return array_merge($this->toJSON(), [
             'date_created_on' => $this->getDateCreatedOn()
@@ -133,8 +132,22 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, Entity
         return $this;
     }
 
-    public function getAttachments(): DoctrineCollection
+    public function hasAttachments(): bool
     {
-        return $this->attachments;
+        return count($this->attachmentIds) > 0;
+    }
+
+    public function getAttachmentIds(): array
+    {
+        return $this->attachmentIds;
+    }
+
+    public function setAttachmentIds(array $attachmentIds): self
+    {
+        $this->attachmentIds = array_filter($attachmentIds, function($input) {
+            return is_int($input);
+        });
+
+        return $this;
     }
 }

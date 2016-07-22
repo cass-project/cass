@@ -5,11 +5,13 @@ Collection_Entity_Collection:
     - id
     - owner_sid
     - owner
+    - date_created_on
     - title
     - description
     - theme_ids
     - image
     - public_options
+    - is_protected
     - children
   properties:
     id:
@@ -36,6 +38,9 @@ Collection_Entity_Collection:
           type:
             type: string
             description: Тип владельца ("community", "profile")
+    date_created_on:
+      type: string
+      description: Дата создания коллекции
     title:
       type: string
       description: Название (заголовок) коллекции
@@ -64,6 +69,12 @@ Collection_Entity_Collection:
           moderation_contract:
             type: boolean
             description: Владелец обязуется модерировать содержимое коллекции
+    is_protected:
+      type: boolean
+      description: Коллекция является защищенной от удаления, т.е. главной лентой профиля / коммунити
+    is_main:
+      type: boolean
+      description: Коллекция является главной для указанного сообщества / профиля
     children:
       type: array
       items:

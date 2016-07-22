@@ -1,4 +1,5 @@
-import {Component, Input, Output, EventEmitter} from "angular2/core";
+import {Component, Input} from "angular2/core";
+import {Router} from "angular2/router";
 
 import {ProfileEntity} from "../../../definitions/entity/Profile";
 import {Theme} from "../../../../theme/definitions/entity/Theme";
@@ -21,12 +22,12 @@ import {PostCard} from "../../../../post/component/Forms/PostCard/index";
 export class ProfileCard
 {
     @Input('profile') entity: ProfileEntity;
-    @Output('click') clickEvent = new EventEmitter<number>();
+    @Input('is-own') isOwn: boolean;
 
     private expertIn: Theme[] = [];
     private interestingIn: Theme[] = [];
 
-    constructor(private themes: ThemeService) {}
+    constructor(private router:Router, private themes: ThemeService) {}
 
     ngOnInit() {
         this.expertIn = this.entity.expert_in_ids.map((id: number) => {
@@ -38,8 +39,8 @@ export class ProfileCard
         });
     }
     
-    click() {
-        this.clickEvent.emit(this.entity.id);
+    goChat() {
+        this.router.navigate(['/ProfileIM', 'Messages', { id: this.entity.id.toString() }]);
     }
 
     getGreetings(): string {
@@ -56,5 +57,9 @@ export class ProfileCard
 
     hasAnyInterests() {
         return this.interestingIn.length > 0;
+    }
+
+    goProfile() {
+        this.router.navigate(['/Profile', 'Profile', { 'id': this.entity.id }]);
     }
 }

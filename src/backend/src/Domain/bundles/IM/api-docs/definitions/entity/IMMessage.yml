@@ -1,0 +1,31 @@
+IM_Entity_IMMessage:
+  type: object
+  description:
+    Сообщение, переданное с помощью IM
+  required:
+    - id
+    - author
+    - date_created
+    - content
+    - attachments
+  properties:
+    id:
+      type: number
+      description: ID сообщения
+    author:
+      description: Профиль, автор сообщения
+      schema:
+        $ref: '#/definitions/Profile_Entity_Profile'
+    date_created:
+      type: string
+      description: Дата создания сообщения
+    content:
+      type: string
+      description: |
+        Текст сообщения
+    attachments:
+      description: |
+        Приложение (аттачменты) к сообщению
+      type: array
+      items:
+        type: object

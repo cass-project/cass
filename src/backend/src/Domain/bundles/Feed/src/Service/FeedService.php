@@ -4,7 +4,7 @@ namespace Domain\Feed\Service;
 use Application\Exception\NotImplementedException;
 use Domain\Feed\Request\FeedRequest;
 use Domain\Feed\Search\Stream\StreamFactory;
-use Domain\Feed\Source\Source;
+use Domain\Index\Source\Source;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
 use MongoDB\Database;
@@ -32,6 +32,7 @@ final class FeedService
     public function getFeed(Source $source, FeedRequest $feedRequest): array 
     {
         $collection = $this->mongoDB->selectCollection($source->getMongoDBCollection());
+        $source->ensureIndexes($this->mongoDB, $collection);
         $stream = $this->streamFactory->getStreamForSource($source);
 
         return $stream->fetch($feedRequest->getCriteria(), $collection);

@@ -41,10 +41,10 @@ export class CommunityCardHeader
     }
 
     getCommunityLink(): string {
-        return this.router.generate(['/Profile', 'Profile', { 'id': this.entity.id }]).toLinkUrl();
+        return this.router.generate(['/Community', 'Community', { 'id': this.entity.id }]).toLinkUrl();
     }
 
     goCommunity() {
-        this.router.navigate(['/Profile', 'Profile', { 'id': this.entity.id }]);
+        this.router.navigate(['/Community', 'Community', { 'id': this.entity.id }]);
     }
 }

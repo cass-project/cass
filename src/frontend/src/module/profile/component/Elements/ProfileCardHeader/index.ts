@@ -25,7 +25,7 @@ export class ProfileCardHeader
     constructor(private router: Router) {}
 
     getTime(): string {
-        return moment().format('MMMM Do YYYY, h:mm:ss a');
+        return (`${this.time.toLocaleDateString()} at ${this.time.getHours()}:${this.time.getMinutes()}`);
     }
 
     hasTime(): boolean {

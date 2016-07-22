@@ -3,8 +3,8 @@ declare var jQuery;
 import {Component, Input, ViewChild} from "angular2/core";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 
-import {FeedbackEntity}         from "../../../../../../../../module/feedback/definitions/entity/Feedback";
-import {FeedbackTypesService}   from "../../../../../../../../module/feedback/service/FeedbackTypesService";
+import {FeedbackEntity} from "../../../../../../../../module/feedback/definitions/entity/Feedback";
+import {FeedbackTypesService} from "../../../../../../../../module/feedback/service/FeedbackTypesService";
 import {FeedbackModalComponent} from "../../Modals/FeedbackModalComponent/index";
 
 @Component({

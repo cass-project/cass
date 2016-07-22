@@ -1,0 +1,28 @@
+/* @ MOBILE-FIRST */
+
+@import "./../../../../../styles/globals";
+
+article.component-public-nothing-found  {
+  margin: 20px 0;
+  text-align: center;
+
+  h1 {
+    font-size: 18px;
+    font-weight: 400;
+    color: material-color("grey", "700");
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 15px;
+    font-weight: 400;
+    color: material-color("grey", "500");
+    margin-bottom: 10px;
+  }
+}
+
+@include mt-tablet-and-desktop {
+  article.component-public-nothing-found  {
+    margin: 50px 0;
+  }
+}

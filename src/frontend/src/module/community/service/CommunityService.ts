@@ -34,8 +34,8 @@ export class CommunityService {
                     .subscribe(
                         communityResponse => {
                             this.communityResponsesCache.push(JSON.parse(JSON.stringify(communityResponse)));
-                            this.isAdmin = communityResponse.access.admin;
-                            this.community = communityResponse.entity;
+                            this.isAdmin = communityResponse.entity.is_own;
+                            this.community = communityResponse.entity.community;
                             observer.next(communityResponse);
                             observer.complete();
                         },

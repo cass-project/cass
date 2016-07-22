@@ -47,11 +47,9 @@ export class ProfileRoute
     ) {
         let id = params.get('id');
 
-        if (id === 'current' || id === this.currentProfileService.get().getId().toString()) {
-            if (authService.isSignedIn()) {
+        if (authService.isSignedIn() && (id === 'current' || id === this.currentProfileService.get().getId().toString())) {
                 service.loadCurrentProfile();
-            } 
-        } else if (id.match(/^(\d+)$/)) {
+        } else if (Number(id)) {
             service.loadProfileById(Number(id));
         } else {
             router.navigate(['/Profile/NotFound']);

@@ -1,23 +1,26 @@
 cass-community-create-modal-form((abort)="abort()", (next)="next()")
-  .input-group
-    label.form-label
-      span.label-text Название
-      input.form-input(
-        type="text",
-        required="",
-        minlength="3",
-        maxlength="30",
-        placeholder="Название, заголовок коммунити",
-        [(ngModel)] = "model.title",
-        #ngControlTitle="ngForm"
-      )
-      .input-error([hidden]="ngControlTitle.valid || ngControlTitle.pristine")
-        | Вы должны обязательно задать название коммунити. В названии коммунити должно быть от трех до тридцати символов.
-  .input-group
-    label.form-label
-      span.label-text Описание
-      input.form-input(
-        type="text",
-        placeholder="(Опционально) В одну строку про коммунити",
-        [(ngModel)]="model.description"
-      )
+  .form
+    .input-group
+      label.form-label
+        span.label-text Название
+        input.form-input(
+          type="text",
+          required="",
+          minlength="3",
+          maxlength="30",
+          placeholder="Название, заголовок сообщества",
+          [(ngModel)] = "model.title",
+          #ngControlTitle="ngForm"
+        )
+    .input-group
+      label.form-label
+        span.label-text Описание
+        input.form-input(
+          type="text",
+          placeholder="(Опционально) В одну строку про сообщество",
+          [(ngModel)]="model.description"
+        )
+    .input-group
+      label.form-label
+        span.label-text Тематика
+          cass-theme-select([value]='model.theme_ids', multiple="false")

@@ -41,9 +41,14 @@ import {FeedRESTService} from "../../module/feed/service/FeedRESTService";
 import {ProfileIMService} from "../../module/profile-im/service/ProfileIMService";
 import {ProfileIMRESTService} from "../../module/profile-im/service/ProfileIMRESTService";
 import {ProfileIMRoute} from "../../module/profile-im/route/ProfileIMRoute/index";
+import {ContactService} from "../../module/contact/service/ContactService";
 import {ContactRESTService} from "../../module/contact/service/ContactRESTService";
+import {IMRESTService} from "../../module/im/service/IMRESTService";
 import {CommunityRootRoute} from "../../module/community/route/CommunityRootRoute/index";
 import {CommunityModals} from "../../module/community/modals";
+import {ProfileCommunityBookmarksService} from "../../module/profile-communities/service/ProfileCommunityBookmarksService";
+import {CommunityCreateModalNotifier} from "../../module/community/component/Modal/CommunityCreateModal/notify";
+import {Session} from "../../module/session/Session";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -52,6 +57,7 @@ import {CommunityModals} from "../../module/community/modals";
         require('./style.shadow.scss')
     ],
     providers: [
+        Session,
         ModalService,
         CurrentAccountService,
         CurrentProfileService,
@@ -81,7 +87,12 @@ import {CommunityModals} from "../../module/community/modals";
         ProfileIMRESTService,
         ProfileIMService,
         ContactRESTService,
-        CommunityModals
+        ContactService,
+        CommunityModals,
+        IMRESTService,
+        ProfileCommunityBookmarksService,
+        CommunityCreateModalNotifier,
+        IMRESTService,
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -127,6 +138,15 @@ import {CommunityModals} from "../../module/community/modals";
 export class App {
     static version(): string {
         return require('./../../../package.json').version;
+    }
+    onScroll() {
+        let elem = document.getElementById('content');
+        let elemSize = elem.scrollHeight;
+        let scrolled = elem.scrollTop;
+
+        if(scrolled/elemSize > 0.79){
+            console.log('update');
+        }
     }
 }
 

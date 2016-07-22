@@ -1,8 +1,36 @@
+/* @ MOBILE-FIRST */
+
+@import "./../../styles/globals";
+
 article.component.component-public {
-  display: flex;
-  position: absolute;
-  top: 0; height: 100%;
-  left: 0; width: 100%;
+  padding: 15px;
+
+  .general-criteria {
+    .source-selector-container {
+      margin: 10px 0;
+    }
+  }
+
+  .content-and-view-options-container {
+    margin: 10px 0;
+  }
+}
+
+@include mt-tablet-and-desktop {
+  .content-and-view-options-container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@include mt-desktop {
+  article.component.component-public {
+    padding: 0;
+    display: flex;
+    position: absolute;
+    top: 0; height: 100%;
+    left: 0; width: 100%;
+  }
 
   .theme-panel {
     position: relative;
@@ -24,10 +52,6 @@ article.component.component-public {
 
   .general-criteria {
     .query-string-criteria-container {
-      margin-bottom: 10px;
-    }
-
-    .source-selector-container {
       margin-bottom: 10px;
     }
   }

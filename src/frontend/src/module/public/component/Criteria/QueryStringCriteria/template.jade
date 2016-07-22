@@ -1,17 +1,29 @@
 article.component-public-criteria-query-string
-  form(ngSubmit="ngSubmit()")
+  form((ngSubmit)="submit()")
     .flex-container
       .flex-container-section-input
-        input.query-string-input(
-          type="search",
-          [(ngModel)]="queryString",
-          (change)="updateCriteria()",
-          placeholder="Поиск"
-        )
+        .query-string-input-container
+          input.query-string-input(
+            type="search",
+            [(ngModel)]="queryString",
+            (change)="updateCriteria()",
+            placeholder="Поиск"
+          )
       .flex-container-section-submit
         button.form-text-button.search-submit-button(
           type="submit",
           [disabled]="isSearchButtonDisabled()"
         )
           i.fa.fa-fw.fa-search
-          span Найти
+          span.title Найти
+    .criteria-container
+      .indicator(*ngIf="isThemeCriteriaAvailable()")
+        .theme-id-criteria-container
+          .badge.badge-light-blue
+            .badge-flex-container
+              .badge-section.badge-section-title
+                i.fa.fa-bookmark
+                span.title {{ getThemeTitle() }}
+              .badge-section.badge-section-close
+                button.close((click)="removeThemeCriteria()", title="Щелкните, чтобы убрать этот фильтр")
+                  i.fa.fa-times

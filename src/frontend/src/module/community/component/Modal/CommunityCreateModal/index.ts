@@ -3,58 +3,59 @@ import {Component, EventEmitter, Output} from "angular2/core";
 import {CommunityCreateModalModel} from "./model";
 
 import {ScreenGeneral} from "./Screen/ScreenGeneral";
-import {ScreenTheme} from "./Screen/ScreenTheme";
-import {ScreenImage} from "./Screen/ScreenImage";
 import {ScreenFeatures} from "./Screen/ScreenFeatures";
-import {ScreenProcessing} from "./Screen/ScreenProcessing";
-import {ScreenComplete} from "./Screen/ScreenComplete";
 
 import {ModalComponent} from "../../../../modal/component";
 import {ModalBoxComponent} from "../../../../modal/component/box";
 import {ScreenControls} from "../../../../util/classes/ScreenControls";
 import {AuthService} from "../../../../auth/service/AuthService";
+import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
+import {CommunityRESTService} from "../../../service/CommunityRESTService";
+import {ProgressLock} from "../../../../form/component/ProgressLock/index";
+import {LoadingManager} from "../../../../util/classes/LoadingStatus";
+import {Observable} from "rxjs/Observable";
+import {CommunityCreateModalNotifier} from "./notify";
 
 enum CreateStage {
     General = <any>"General",
-    Theme = <any>"Theme",
-    Image = <any>"Image",
     Features = <any>"Features",
-    Processing = <any>"Processing",
-    Complete = <any>"Complete"
 }
 
 @Component({
     selector: 'cass-community-create-modal',
     template: require('./template.jade'),
+    styles: [
+        require('./style.shadow.scss')
+    ],
     providers: [
-        CommunityCreateModalModel
+        CommunityCreateModalModel,
     ],
     directives: [
         ModalComponent,
         ModalBoxComponent,
         ScreenGeneral,
-        ScreenTheme,
-        ScreenImage,
         ScreenFeatures,
-        ScreenProcessing,
-        ScreenComplete
+        ProgressLock,
     ]
 })
 
 export class CommunityCreateModal
 {
+    private loading: LoadingManager = new LoadingManager();
+    
     public screens: ScreenControls<CreateStage> = new ScreenControls<CreateStage>(CreateStage.General, (sc: ScreenControls<CreateStage>) => {
-        sc.add({ from: CreateStage.General, to: CreateStage.Theme })
-          .add({ from: CreateStage.Theme, to: CreateStage.Features })
-          .add({ from: CreateStage.Features, to: CreateStage.Image })
-          .add({ from: CreateStage.Image, to: CreateStage.Processing })
-          .add({ from: CreateStage.Processing, to: CreateStage.Complete })
-        ;
+        sc.add({ from: CreateStage.General, to: CreateStage.Features });
     });
 
+    @Output('success') successEvent = new EventEmitter<CommunityExtendedEntity>();
     @Output('close') closeEvent = new EventEmitter<CommunityCreateModal>();
     
-    constructor(private authService: AuthService) {}
+    constructor(
+        private model: CommunityCreateModalModel,
+        private authService: AuthService,
+        private communityRESTService: CommunityRESTService,
+        private notifier: CommunityCreateModalNotifier
+    ) {}
 
     ngOnInit() {
         if(! this.authService.isSignedIn()) {
@@ -63,14 +64,72 @@ export class CommunityCreateModal
     }
 
     isHeaderVisible() {
-        return !~([CreateStage.Processing]).indexOf(this.screens.current);
+        return true;
     }
 
     next() {
-        this.screens.next();
+        if(this.screens.current === CreateStage.Features) {
+            this.submit();
+        }else{
+            this.screens.next();
+        }
+    }
+    
+    submit() {
+        this.submitCreateCommunity().subscribe(
+            response => {
+                let status = this.loading.addLoading();
+                let communityId = response.entity.community.id;
+                let observables = [];
+
+                for(let feature of this.model.features.filter(feature => feature.is_activated)) {
+                    observables.push(this.communityRESTService.activateFeature({
+                        communityId: communityId,
+                        feature: feature.code
+                    }));
+                }
+
+                Observable.forkJoin(observables).subscribe(
+                    (success) => {
+                        this.success(response.entity);
+                        status.is = false;
+                    } ,
+                    (error) => {
+                        this.success(response.entity);
+                        status.is = false;
+                    }
+                );
+
+                this.notifier.publish(response.entity);
+            },
+            error => {}
+        );
+    }
+    
+    private submitCreateCommunity() {
+        let status = this.loading.addLoading();
+        let observable = this.communityRESTService.create(this.model.createRequest());
+        
+        observable.subscribe(
+            response => {
+                status.is = false;
+            },
+            error => {
+                status.is = false;
+            }
+        );
+        
+        return observable;
+    }
+
+    success(entity: CommunityExtendedEntity) {
+        this.successEvent.emit(entity);
+        this.close();
     }
 
     close() {
         this.closeEvent.emit(this);
     }
 }
+
+interface LoadingStatus { is: boolean; }

@@ -1,17 +1,14 @@
 @import "./../../../../../styles/globals";
 
-article.component-profile-card {
+article.component-community-card {
   display: inline-block;
 
   .card-content {
     width: 230px;
     @include card(1);
-    padding: 20px;
     background-color: white;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border: 3px solid white;
     cursor: pointer;
     transition: background-color 0.1s;
 
@@ -19,26 +16,36 @@ article.component-profile-card {
       background-color: material-color("grey", "100");
     }
 
-    .profile-image {
-      .profile-image-container {
-        width: 180px;
+    .community-image {
+      .community-image-container {
+        img {
+          width: 100%;
+        }
       }
     }
 
-    .profile-about {
-      margin: 25px 0;
-      text-align: center;
+    .community-about {
+      margin: 24px 15px;
+      text-align: left;
 
-      h1.profile-greetings {
+      h1.community-title {
         font-family: $FONT_FAMILY;
-        font-size: 25px;
+        font-size: 24px;
         font-weight: 400;
         line-height: 40px;
-        color: material-color("grey", "700");
+        color: black;
+      }
+
+      h2.community-description {
+        font-family: $FONT_FAMILY;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        color: material-color("grey", "500");
         margin-bottom: 10px;
       }
 
-      .profile-expert-in-title, .profile-interesting-in-title {
+      .community-expert-in-title, .community-interesting-in-title {
         font-family: $FONT_FAMILY;
         font-size: 14px;
         line-height: 20px;

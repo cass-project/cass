@@ -1,5 +1,6 @@
 import {Injectable} from "angular2/core";
 import {UploadImageCropModel} from "../../../../form/component/UploadImage/strategy";
+import {CommunityCreateRequestModel} from "../../../model/CommunityCreateRequestModel";
 
 @Injectable()
 export class CommunityCreateModalModel
@@ -8,14 +9,20 @@ export class CommunityCreateModalModel
     sid: string;
     description: string = "";
     theme_ids: Array<number> = [];
-    uploadImage: Blob;
-    uploadImageCrop: UploadImageCropModel;
     features: CommunityFeaturesModel[] = [];
+    
+    createRequest(): CommunityCreateRequestModel {
+        return {
+            title: this.title,
+            description: this.description,
+            theme_id: this.theme_ids[0]
+        };
+    }
 }
 
-export class CommunityFeaturesModel
+export interface CommunityFeaturesModel
 {
     code: string;
-    is_activated: boolean = false;
-    disabled: boolean = false;
+    is_activated: boolean;
+    disabled: boolean;
 }

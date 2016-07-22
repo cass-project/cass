@@ -13,7 +13,7 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
         CommunityComponent
     ]
 })
-export class ProfileMenuComponent
+export class communityMenuComponent
 {
     @Input('community') community: CommunityExtendedEntity;
 }

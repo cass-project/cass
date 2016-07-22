@@ -1,43 +1,50 @@
 import {Injectable} from "angular2/core";
-import {Http, Headers} from "angular2/http"
+import {Http} from "angular2/http"
+
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {AuthToken} from "../../auth/service/AuthToken";
+import {Observable} from "rxjs/Observable";
+import {JoinCommunityResponse200} from "../entity/join";
+import {JoinedCommunitiesResponse200} from "../entity/joined-communities";
+import {LeaveCommunityResponse200} from "../entity/leave";
 
 @Injectable()
 export class ProfileCommunitiesRESTService extends AbstractRESTService
 {
-    constructor(
-        protected http: Http,
-        protected token: AuthToken,
-        protected messages: MessageBusService
-    ) { super(http, token, messages); }
-
-    getJoinedCommunities()
-    {
-        let authHeader = new Headers();
-        if(this.token.hasToken()){
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-        
-        return this.handle(this.http.get(`/backend/api/protected/profile/current/joined-communities`, {headers: authHeader}));
+    constructor(protected http: Http,
+                protected token: AuthToken,
+                protected messages: MessageBusService) {
+        super(http, token, messages);
     }
 
-    joinCommunity(communitySID){
-        let authHeader = new Headers();
-        if(this.token.hasToken()){
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-        
-        return this.handle(this.http.put(`/backend/api/protected/community/${communitySID}/join`, '', {headers: authHeader}));
+    getJoinedCommunities(profileId: number): Observable<JoinedCommunitiesResponse200> {
+        let url = `/backend/api/protected/with-profile/${profileId}/community/list/joined-communities`;
+
+        return this.handle(
+            this.http.get(url, {
+                headers: this.getAuthHeaders()
+            })
+        );
     }
 
-    leaveCommunity(communitySID){
-        let authHeader = new Headers();
-        if(this.token.hasToken()){
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-        
-        return this.handle(this.http.put(`/backend/api/protected/community/${communitySID}/leave`, '', {headers: authHeader}));
+    joinCommunity(profileId: number, communitySID: string): Observable<JoinCommunityResponse200> {
+        let url = `/backend/api/protected/with-profile/${profileId}/community/${communitySID}/{command:leave}`;
+
+        return this.handle(
+            this.http.put(url, '', {
+                headers: this.getAuthHeaders()
+            })
+        );
+    }
+
+    leaveCommunity(profileId: number, communitySID: string): Observable<LeaveCommunityResponse200> {
+        let url = `/backend/api/protected/with-profile/${profileId}/community/${communitySID}/{command:join}`;
+
+        return this.handle(
+            this.http.put(url, '', {
+                headers: this.getAuthHeaders()
+            })
+        );
     }
 }

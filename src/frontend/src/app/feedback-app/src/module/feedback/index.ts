@@ -2,17 +2,17 @@ import {Component} from "angular2/core";
     import {ROUTER_DIRECTIVES, RouteParams, Router} from "angular2/router";
 import {Title} from "angular2/src/platform/browser/title";
 
-import {AccountService}          from "../../../../../module/account/service/AccountService";
-import {AuthService}             from "../../../../../module/auth/service/AuthService";
-import {FeedbackService}         from "../../../../../module/feedback/service/FeedbackService";
-import {FeedbackRESTService}     from "../../../../../module/feedback/service/FeedbackRESTService";
-import {FeedbackEntity}          from "../../../../../module/feedback/definitions/entity/Feedback";
+import {AccountService} from "../../../../../module/account/service/AccountService";
+import {AuthService} from "../../../../../module/auth/service/AuthService";
+import {FeedbackService} from "../../../../../module/feedback/service/FeedbackService";
+import {FeedbackRESTService} from "../../../../../module/feedback/service/FeedbackRESTService";
+import {FeedbackEntity} from "../../../../../module/feedback/definitions/entity/Feedback";
 
-import {SidebarComponent}        from "../sidebar/component/SidebarComponent/index";
+import {SidebarComponent} from "../sidebar/component/SidebarComponent/index";
 import {SidebarTogglerComponent} from "../sidebar/component/SidebrTogglerComponent/index";
-import {FeedbackCardComponent}   from "./component/Elements/FeedbackCardComponent/index";
-import {FeedbackQueryModel}      from "./FeedbackQueryParamsModel";
-import {PaginationComponent}     from "../pagination/index";
+import {FeedbackCardComponent} from "./component/Elements/FeedbackCardComponent/index";
+import {FeedbackQueryModel} from "./FeedbackQueryParamsModel";
+import {PaginationComponent} from "../pagination/index";
 import {InfiniteScrollDirective} from "../infine-scroll/directive/index";
 
 

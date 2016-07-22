@@ -3,7 +3,8 @@ import {ProfileMessageEntity} from "../entity/ProfileMessage";
 
 export interface SendProfileMessageRequest
 {
-    content: string;
+    message: string,
+    attachment_ids: number[]
 }
 
 export interface SendProfileMessageResponse200 extends Success200

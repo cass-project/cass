@@ -28,14 +28,16 @@ final class DashboardCommunityCollectionEvents implements EventsBootstrapInterfa
         $collectionService = $this->collectionService;
 
         $communityService->getEventEmitter()->on(CommunityService::EVENT_COMMUNITY_CREATED, function(Community $community) use ($collectionService) {
-            $collectionService->createCollection(new CreateCollectionParameters(
+            $collection = $collectionService->createCollection(new CreateCollectionParameters(
                 sprintf('community:%s', $community->getId()),
-                '$gt_community-feed_title',
-                '$gt_community-feed_description',
+                'Сообщество',
+                'Лента сообщества',
                 $community->hasTheme()
                     ? [$community->getTheme()->getId()]
                     : []
             ));
+
+            $collectionService->mainCollection($collection->getId());
         });
     }
 }

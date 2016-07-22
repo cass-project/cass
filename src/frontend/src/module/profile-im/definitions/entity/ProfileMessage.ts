@@ -1,15 +1,23 @@
-export interface ProfileMessageEntity
+import {ProfileEntity} from "../../../profile/definitions/entity/Profile";
+export interface ProfileMessageExtendedEntity extends ProfileMessageEntity
 {
-    id: number;
-    date_created_on: string;
-    source_profile_id: number;
-    target_profile_id: number;
-    read_status: ProfileMessageReadStatusEntity;
-    content: string;
+    send_status: {
+        status: ProfileIMFeedSendStatus,
+        error_text?: string
+    };
 }
 
-export interface ProfileMessageReadStatusEntity
+export interface ProfileMessageEntity
 {
-    is_read: boolean;
-    date_read: string;
+    id?: number;
+    author:ProfileEntity,
+    date_created: string;
+    content: string;
+    attachments: {}[];
+}
+
+export enum ProfileIMFeedSendStatus {
+    Complete = <any>"complete",
+    Processing = <any>"processing",
+    Fail = <any>"fail",
 }

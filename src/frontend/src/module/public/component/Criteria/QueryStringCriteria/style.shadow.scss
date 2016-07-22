@@ -1,6 +1,10 @@
+/* @ MOBILE-FIRST */
+
 @import "./../../../../../styles/globals";
 
 article.component-public-criteria-query-string {
+  position: relative;
+
   .flex-container {
     display: flex;
 
@@ -13,10 +17,9 @@ article.component-public-criteria-query-string {
   }
 
   input.query-string-input {
-    @include card(2);
     border: 0;
     padding: 5px;
-    line-height: 28px;
+    line-height: 32px;
     font-family: $FONT_FAMILY;
     font-size: 16px;
     font-weight: 500;
@@ -27,7 +30,117 @@ article.component-public-criteria-query-string {
 
   .search-submit-button {
     i.fa {
+      display: none;
       margin-right: 5px;
+    }
+  }
+
+  .indicator {
+    margin: 8px 0;
+  }
+
+  .badge {
+    .badge-flex-container {
+      display: flex;
+      overflow: hidden;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @include card(1);
+
+    .badge-section-title, .badge-section-close, button.close {
+      line-height: 35px;
+      font-size: 14px;
+    }
+
+    .badge-section-title {
+      width: 100%;
+      color: white;
+      font-family: $FONT_FAMILY;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+      padding: 0 10px;
+
+      span.title {
+        overflow: hidden;
+      }
+
+      i.fa {
+        margin-right: 5px;
+      }
+    }
+
+    button.close {
+      border: 0;
+      cursor: pointer;
+      color: white;
+      padding: 0 12px;
+    }
+  }
+
+  $BADGE_COLORS: "red", "light-blue", "orange";
+
+  @each $color in $BADGE_COLORS {
+    .badge-#{$color} {
+      color: material-color($color, "50");
+      background-color: material-color($color, "500");
+
+      button.close {
+        background-color: material-color($color, "700");
+
+        &:hover {
+          background-color: material-color($color, "800");
+        }
+
+        &:active {
+          background-color: material-color($color, "900");
+        }
+      }
+    }
+  }
+}
+
+@include mt-mobile {
+  .flex-container {
+    @include card(2);
+  }
+}
+
+@include mt-tablet-and-desktop {
+  article.component-public-criteria-query-string {
+    .query-string-input-container {
+      @include card(2);
+    }
+
+    .indicator {
+      margin: 0;
+      margin-left: 5px;
+      display: inline-block;
+    }
+
+    .criteria-container {
+      position: absolute;
+      top: 5px;
+      right: 115px;
+
+      .badge {
+        max-width: 260px;
+
+        .badge-section-title, .badge-section-close, button.close {
+          line-height: 31px;
+        }
+      }
+    }
+
+    .search-submit-button {
+      width: 100px;
+
+      i.fa {
+        display: inline-block;
+      }
     }
   }
 }

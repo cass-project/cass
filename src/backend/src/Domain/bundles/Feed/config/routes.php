@@ -17,6 +17,12 @@ return function(Application $app) {
         'feed-get-collection'
     );
 
+    $app->post(
+        '/feed/get/{command:community}/{communityId}[/]',
+        FeedMiddleware::class,
+        'feed-get-community'
+    );
+
     array_map(function(string $source) use ($app) {
         $app->post(
             sprintf('/feed/get/{command:%s}[/]', $source),

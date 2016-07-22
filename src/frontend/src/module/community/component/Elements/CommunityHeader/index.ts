@@ -32,7 +32,7 @@ export class CommunityHeader
         return this.entity.community.title;
     }
 
-    getProfileURL(): string {
+    getImageURL(): string {
         return queryImage(QueryTarget.Avatar, this.entity.community.image).public_path;
     }
     

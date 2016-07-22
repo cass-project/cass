@@ -75,7 +75,7 @@ class RESTRequest
         ;
 
         if($this->parameters) {
-            $request = $request->withParsedBody(json_decode(json_encode($this->parameters)));
+            $request = $request->withParsedBody(json_decode(json_encode($this->parameters), true));
         }
 
         if($this->uploadedFiles) {

@@ -2,6 +2,7 @@
 namespace Domain\Collection\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
+use Domain\Collection\Exception\CollectionIsProtectedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -11,10 +12,16 @@ class DeleteCommand extends Command
     {
         $collectionId = $request->getAttribute('collectionId');
 
-        $this->collectionService->deleteCollection($collectionId);
+        try {
+            $this->collectionService->deleteCollection($collectionId);
 
-        return $responseBuilder
-            ->setStatusSuccess()
-            ->build();
+            $responseBuilder->setStatusSuccess();
+        }catch(CollectionIsProtectedException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setStatusConflict();
+        }
+
+        return $responseBuilder->build();
     }
 }

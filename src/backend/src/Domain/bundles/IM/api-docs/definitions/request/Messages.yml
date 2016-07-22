@@ -1,0 +1,61 @@
+IM_Request_Messages:
+  description: Дополнительные критерии и опции выборки сообщений
+  required:
+    - criteria
+  properties:
+    criteria:
+      description: Критерии выборки сообщений
+      type: object
+      schema:
+        required:
+          - seek
+        properties:
+          seek:
+            description: Ограничения по выборке
+            type: object
+            schema:
+              required:
+                - offset
+                - limit
+              properties:
+                offset:
+                  type: number
+                  description: Offset
+                limit:
+                  type: number
+                  description: Limit
+          cursor:
+            description: Курсор, т.е. с какого ID начинать выборку. Корректно работает в связке с seek-критерием.
+            type: object
+            schema:
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  description: ID сообщения, с которого начать выборку.
+          sort:
+            description: Сортировка
+            type: object
+            schema:
+              required:
+                - field
+                - order
+              properties:
+                field:
+                  type: string
+                  description: Поле для поиска
+                order:
+                  type: string
+                  description: |
+                    Порядок сортировки. Значения: "desc", "asc"
+    options:
+      description: Опции выборки сообщений
+      schema:
+        properties:
+          markAsRead:
+            type: array
+            description: Отметить указанные ID сообщений как прочитанные
+            items:
+              type: number
+              description: ID сообщения, которое надо отметить как прочитанное

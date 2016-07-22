@@ -12,7 +12,7 @@ final class GetByIdCommand extends Command
         $community = $this->communityService->getCommunityById($request->getAttribute('communityId'));
 
         return $responseBuilder->setStatusSuccess()->setJson([
-            'entity' => $community->toJSON()
+            'entity' => $this->communityFormatter->format($community),
         ])->build();
     }
 }

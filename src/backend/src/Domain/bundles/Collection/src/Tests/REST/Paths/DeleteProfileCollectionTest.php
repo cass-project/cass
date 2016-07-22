@@ -2,8 +2,10 @@
 namespace Domain\Collection\Tests\REST\Paths;
 
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use Domain\Collection\Collection\CollectionItem;
 use Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
 use Domain\Collection\Tests\REST\CollectionRESTTestCase;
+use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**
  * @backupGlobals disabled
@@ -50,5 +52,25 @@ final class DeleteProfileCollectionTest extends CollectionRESTTestCase
 
                 $this->assertFalse(in_array($collectionId, $collectionIds));
             });
+    }
+
+    public function test409()
+    {
+        $this->upFixture(new SampleCollectionsFixture());
+
+        $community = DemoProfileFixture::getProfile();
+        $collectionId = array_map(function(CollectionItem $item) {
+            return $item->getCollectionId();
+        }, $community->getCollections()->getItems())[0];
+
+        $this->requestDeleteCollection($collectionId)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(409)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'error' => $this->expectString(),
+                'success' => false
+            ]);
     }
 }

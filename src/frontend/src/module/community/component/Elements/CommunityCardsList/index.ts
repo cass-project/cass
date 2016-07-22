@@ -1,9 +1,8 @@
 import {Component, Input} from "angular2/core";
 
 import {CommunityCard} from "../CommunityCard/index";
-import {CommunityInterestsCard} from "../CommunityInterestsCard/index";
 import {CommunityCreateCollectionCard} from "../CommunityCreateCollectionCard/index";
-import {ProfileSettingsCard} from "../CommunitySettingsCard/index";
+import {CommunitySettingsCard} from "../CommunitySettingsCard/index";
 
 import {Router} from "angular2/router";
 import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
@@ -16,9 +15,8 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
     ],
     directives: [
         CommunityCard,
-        CommunityInterestsCard,
         CommunityCreateCollectionCard,
-        ProfileSettingsCard,
+        CommunitySettingsCard,
     ]
 })
 export class CommunityCardsList
@@ -27,19 +25,7 @@ export class CommunityCardsList
 
     constructor(private router: Router) {}
 
-    ngOnInit(){
-        console.log(this.entity);
-    }
-
     isOwnCommunity(): boolean {
         return this.entity.is_own;
-    }
-
-    goDashboard() {
-        if(this.isOwnCommunity()){
-            this.router.navigate(['/Community', { id: 'current' }, 'Dashboard']);
-        } else {
-            this.router.navigate(['/Community', {id: this.entity.community.id.toString()}, 'Dashboard']);
-        }
     }
 }
