@@ -139,6 +139,15 @@ export class App {
     static version(): string {
         return require('./../../../package.json').version;
     }
+    onScroll() {
+        let elem = document.getElementById('content');
+        let elemSize = elem.scrollHeight;
+        let scrolled = elem.scrollTop;
+
+        if(scrolled/elemSize > 0.79){
+            console.log('update');
+        }
+    }
 }
 
 console.log(`CASS Frontend App: ver${App.version()}`);
