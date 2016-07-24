@@ -1,4 +1,4 @@
-export interface SortCriteria
+export interface SortCriteriaParams
 {
     field: string;
     order: string;

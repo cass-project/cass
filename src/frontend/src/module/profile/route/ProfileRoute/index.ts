@@ -8,6 +8,8 @@ import {ProfileDashboardRoute} from "../ProfileDashboardRoute/index";
 import {ProfileHeader} from "../../component/Elements/ProfileHeader/index";
 import {CurrentProfileService} from "../../service/CurrentProfileService";
 import {AuthService} from "../../../auth/service/AuthService";
+import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
+import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 
 @Component({
     template: require('./template.jade'),
@@ -21,6 +23,8 @@ import {AuthService} from "../../../auth/service/AuthService";
     ],
     providers: [
         ProfileRouteService,
+        FeedCriteriaService,
+        FeedOptionsService,
     ]
 })
 @RouteConfig([

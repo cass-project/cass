@@ -13,6 +13,8 @@ import {ExpertsRoute} from "./route/ExpertsRoute/index";
 import {ProfilesRoute} from "./route/ProfilesRoute/index";
 import {OptionView} from "./component/Options/ViewOption/index";
 import {ContentTypeCriteria} from "./component/Criteria/ContentTypeCriteria/index";
+import {FeedCriteriaService} from "../feed/service/FeedCriteriaService";
+import {FeedOptionsService} from "../feed/service/FeedOptionsService";
 
 @Component({
     selector: 'cass-public',
@@ -22,6 +24,8 @@ import {ContentTypeCriteria} from "./component/Criteria/ContentTypeCriteria/inde
     ],
     providers: [
         PublicService,
+        FeedCriteriaService,
+        FeedOptionsService,
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -68,7 +72,6 @@ export class PublicComponent
     isPostCriteriaAvailable() {
         return ~[
             "content",
-            "",
         ].indexOf(this.service.source);
     }
 }

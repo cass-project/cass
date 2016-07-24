@@ -7,6 +7,7 @@ import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
 import {PostRESTService} from "../../../service/PostRESTService";
 import {LoadingManager} from "../../../../common/classes/LoadingStatus";
 import {Session} from "../../../../session/Session";
+import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
 
 @Component({
     selector: 'cass-post-card',
@@ -22,18 +23,18 @@ import {Session} from "../../../../session/Session";
 export class PostCard
 {
     @Input('post') post: PostEntity;
+    @Input('view-option') viewOption: ViewOptionValue = ViewOptionValue.Feed;
 
     @Output('attachment') attachmentEvent: EventEmitter<PostAttachment> = new EventEmitter<PostAttachment>();
     @Output('delete') deleteEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
+    private dateCreatedOn: Date;
     private status: LoadingManager = new LoadingManager();
 
     constructor(
         private service: PostRESTService,
         private session: Session
     ) {}
-
-    private dateCreatedOn: Date;
 
     isOwnPost(): boolean{
         if(this.session.isSignedIn()) {

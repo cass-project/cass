@@ -1,27 +1,43 @@
+/* @ MOBILE FIRST */
+
 @import "./../../../../../styles/globals";
 
 article.component.component-post-card {
-  .card {
-    @include card(1);
-    border-radius: 3px;
-    overflow: hidden;
-    background-color: white;
+  .card-controls {
+    display: none;
   }
 
-  .card-header {
-    margin-top: 8px;
-    margin-bottom: 15px;
-  }
-
-  .content-container {
-    padding: 20px 13px;
-
-    p {
-      font-family: $FONT_FAMILY;
-      font-size: 16px;
-      font-weight: 400;
-      color: black;
-      line-height: 20px;
+  .card-view-option-feed {
+    .card {
+      @include card(1);
+      border-radius: 3px;
+      overflow: hidden;
+      background-color: white;
     }
+
+    .card-header {
+      margin-top: 8px;
+      margin-bottom: 15px;
+    }
+
+    .content-container {
+      padding: 20px 13px;
+
+      p {
+        font-family: $FONT_FAMILY;
+        font-size: 16px;
+        font-weight: 400;
+        color: black;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .card-view-option-grid {
+
+  }
+
+  .card-view-option-table {
+
   }
 }

@@ -12,6 +12,8 @@ import {FeedService} from "../../../feed/service/FeedService/index";
 import {Stream} from "../../../feed/service/FeedService/stream";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
 import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/index";
+import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
+import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 
 @Component({
     template: require('./template.jade'),
@@ -21,6 +23,8 @@ import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/inde
     providers: [
         FeedService,
         CollectionSource,
+        FeedCriteriaService,
+        FeedOptionsService,
     ],
     directives: [
         ROUTER_DIRECTIVES,

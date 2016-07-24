@@ -33,7 +33,6 @@ export class CommunitiesRoute
         catalog.injectFeedService(service);
         
         service.provide(source, new Stream<CommunityEntity>());
-        service.criteria = catalog.criteria;
         service.update();
     }
 }

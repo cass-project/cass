@@ -1,8 +1,6 @@
 import {Component} from "angular2/core";
 
 import {FeedService} from "../../../feed/service/FeedService/index";
-import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/index";
-import {PublicContentSource} from "../../../feed/service/FeedService/source/public/PublicContentSource";
 import {Stream} from "../../../feed/service/FeedService/stream";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 import {PublicService} from "../../service";
@@ -35,7 +33,6 @@ export class ProfilesRoute
         catalog.injectFeedService(service);
         
         service.provide(source, new Stream<PostEntity>());
-        service.criteria = catalog.criteria;
         service.update();
     }
 }

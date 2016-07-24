@@ -1,12 +1,10 @@
-import {Component, Output, EventEmitter} from "angular2/core";
-import {PublicService} from "../../../service";
+import {Component} from "angular2/core";
 
-export enum ViewOption
-{
-    Feed = <any>"feed",
-    Grid = <any>"grid",
-    Table = <any>"table"
-}
+import {ViewOption, ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
+import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
+import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
+import {Criteria} from "../../../../feed/definitions/request/Criteria";
+import {ContentTypeCriteriaParams, ContentType} from "../../../../feed/definitions/request/criteria/ContentTypeCriteriaParams";
 
 @Component({
     selector: 'cass-public-option-view',
@@ -17,23 +15,30 @@ export enum ViewOption
 })
 export class OptionView
 {
-    current: ViewOption = ViewOption.Feed;
-    
-    constructor(private service: PublicService) {}
-    
-    isOn(compare: ViewOption) {
-        return this.current === compare;
+    private option: ViewOption;
+    private contentType: Criteria<ContentTypeCriteriaParams>;
+
+    constructor(
+        private options: FeedOptionsService,
+        private criteria: FeedCriteriaService
+    ) {
+        this.option = options.view;
+        this.contentType = criteria.criteria.contentType;
     }
     
-    setAsCurrent(option: ViewOption) {
-        this.current = option;
+    current() {
+        return this.option.current;
+    }
+    
+    isOn(compare: ViewOptionValue) {
+        return this.option.isOn(compare);
+    }
+    
+    setAsCurrent(value: ViewOptionValue) {
+        this.option.setAsCurrent(value);
     }
 
     isVideoPlayerAvailable(): boolean {
-        if(this.service.criteria.has('content_type')) {
-            return this.service.criteria.getByCode('content_type').params.type === 'video';
-        }else{
-            return false;
-        }
+        return this.contentType.params.type === ContentType.Video;
     }
 }

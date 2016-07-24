@@ -33,7 +33,6 @@ export class CollectionsRoute
         catalog.injectFeedService(service);
         
         service.provide(source, new Stream<PostEntity>());
-        service.criteria = catalog.criteria;
         service.update();
     }
 }

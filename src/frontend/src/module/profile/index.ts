@@ -16,6 +16,7 @@ import {CurrentProfileService} from "./service/CurrentProfileService";
 @Component({
     selector: 'cass-profile',
     template: require('./template.jade'),
+    providers: [],
     directives: [
         ModalComponent,
         ModalBoxComponent,

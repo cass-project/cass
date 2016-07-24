@@ -1,50 +1,103 @@
 import {Injectable} from "angular2/core";
 
-import {FeedRequest} from "../definitions/request/FeedRequest";
 import {Criteria} from "../definitions/request/Criteria";
+import {SeekCriteriaParams} from "../definitions/request/criteria/SeekCriteriaParams";
+import {SortCriteriaParams} from "../definitions/request/criteria/SortCriteriaParams";
+import {ThemeIdCriteriaParams} from "../definitions/request/criteria/ThemeIdCriteriaParams";
+import {QueryStringCriteriaParams} from "../definitions/request/criteria/QueryStringCriteriaParams";
+import {ContentTypeCriteriaParams, ContentType} from "../definitions/request/criteria/ContentTypeCriteriaParams";
 
 @Injectable()
 export class FeedCriteriaService
 {
-    private criteria: { [code: string]: Criteria<any> } = {};
+    static DEFAULT_LIMIT = 30;
 
-    attach(criteria: Criteria<any>) {
-        if(this.has(criteria)) {
-            throw new Error(`Criteria ${criteria.code} is already attached`);
+    public criteria: FeedCriteriaList = {
+        seek: {
+            code: 'seek',
+            enabled: true,
+            params: {
+                limit: FeedCriteriaService.DEFAULT_LIMIT
+            }
+        },
+        sort: {
+            code: 'sort',
+            enabled: true,
+            params: {
+                field: '_id',
+                order: 'desc'
+            }
+        },
+        theme: {
+            code: 'theme',
+            enabled: false,
+            params: {
+                id: -1
+            }
+        },
+        query: {
+            code: 'query_string',
+            enabled: false,
+            params: {
+                query: ''
+            }
+        },
+        contentType: {
+            code: 'content_type',
+            enabled: false,
+            params: {
+                type: ContentType.Text
+            }
+        }
+    };
+
+    public enable(code: string) {
+        if(! this.hasCriteria(code)) {
+            throw new Error(`Unknown criteria with code '${code}'`);
         }
 
-        this.criteria[criteria.code] = criteria;
+        this.criteria[code].enabled = true;
     }
 
-    detach(criteria: Criteria<any>) {
-        if(this.has(criteria)) {
-            delete this.criteria[criteria.code];
+    public isEnabled(code: string): boolean {
+        if(! this.hasCriteria(code)) {
+            throw new Error(`Unknown criteria with code '${code}'`);
         }
+
+        return this.criteria[code].enabled;
     }
 
-    getByCode(code: string): Criteria<any> {
-        if(this.criteria[code]) {
-            return this.criteria[code];
-        }else{
-            throw new Error(`Criteria ${code} does not exists`);
+    public disable(code: string) {
+        if(! this.hasCriteria(code)) {
+            throw new Error(`Unknown criteria with code '${code}'`);
         }
+
+        this.criteria[code].enabled = false;
     }
 
-    has(criteria: Criteria<any>) {
-        return !!this.criteria[criteria.code];
+    public hasCriteria(code: string) {
+        return this.criteria.hasOwnProperty(code);
     }
 
-    createFeedRequest(): FeedRequest {
+    createFeedCriteriaRequest(): Criteria<any>[] {
         let criteria = [];
 
         for(var n in this.criteria) {
             if(this.criteria.hasOwnProperty(n)) {
-                criteria.push(this.criteria[n]);
+                if(this.criteria[n].enabled) {
+                    criteria.push(this.criteria[n]);
+                }
             }
         }
 
-        return {
-            criteria: criteria
-        };
+        return criteria;
     }
+}
+
+interface FeedCriteriaList {
+    seek: Criteria<SeekCriteriaParams>;
+    sort: Criteria<SortCriteriaParams>;
+    theme: Criteria<ThemeIdCriteriaParams>;
+    query: Criteria<QueryStringCriteriaParams>;
+    contentType: Criteria<ContentTypeCriteriaParams>;
 }
