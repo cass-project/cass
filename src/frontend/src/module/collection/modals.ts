@@ -1,4 +1,4 @@
-import {ModalControl} from "../util/classes/ModalControl";
+import {ModalControl} from "../common/classes/ModalControl";
 
 export class CollectionModals
 {

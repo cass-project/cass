@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Output, ViewChild, ElementRef} from "angular2/core";
 
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
-import {OpenGraphEntity} from "../../../../opengraph/definitions/entity/og";
 import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
 import {PostAttachmentEntity} from "../../../../post-attachment/definitions/entity/PostAttachment";
 

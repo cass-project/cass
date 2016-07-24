@@ -15,6 +15,10 @@ export class Stream<T>
     replace(entities: T[]) {
         this.entities = entities;
     }
+    
+    filter(callback) {
+        this.entities = this.entities.filter(callback);
+    }
 
     push(entities: T[]) {
         entities.forEach(entity => {

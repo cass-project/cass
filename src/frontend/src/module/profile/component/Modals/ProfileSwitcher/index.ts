@@ -2,7 +2,7 @@ import {Component, Output, EventEmitter} from "angular2/core";
 import {Router} from "angular2/router";
 
 import {ProfileImage} from "../../Elements/ProfileImage/index";
-import {ComponentStages} from "../../../../util/classes/ComponentStages";
+import {ComponentStages} from "../../../../common/classes/ComponentStages";
 import {ProfileSwitcherService} from "./service";
 import {AuthService} from "../../../../auth/service/AuthService";
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";

@@ -6,7 +6,7 @@ import {TAB_MODAL_DIRECTIVES} from "../../../../form/component/TabModal/index";
 import {ThemeSelect} from "../../../../theme/component/ThemeSelect/index";
 import {CollectionImage} from "../../../../collection/component/Elements/CollectionImage/index";
 import {DeleteCollectionModal} from "../../../../collection/component/Modal/DeleteCollectionModal/index";
-import {ModalControl} from "../../../../util/classes/ModalControl";
+import {ModalControl} from "../../../../common/classes/ModalControl";
 import {CollectionRESTService} from "../../../service/CollectionRESTService";
 import {ColorPicker} from "../../../../form/component/ColorPicker/index";
 

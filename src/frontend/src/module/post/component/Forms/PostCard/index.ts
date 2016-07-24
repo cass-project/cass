@@ -1,13 +1,12 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input, EventEmitter, Output} from "angular2/core";
 
 import {PostEntity} from "../../../definitions/entity/Post";
 import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
 import {ProfileCardHeader} from "../../../../profile/component/Elements/ProfileCardHeader/index";
 import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
 import {PostRESTService} from "../../../service/PostRESTService";
-import {CurrentProfileService} from "../../../../profile/service/CurrentProfileService";
-import {FeedService} from "../../../../feed/service/FeedService/index";
-import {AuthService} from "../../../../auth/service/AuthService";
+import {LoadingManager} from "../../../../common/classes/LoadingStatus";
+import {Session} from "../../../../session/Session";
 
 @Component({
     selector: 'cass-post-card',
@@ -24,33 +23,39 @@ export class PostCard
 {
     @Input('post') post: PostEntity;
 
-    deleteProcessing: boolean = false;
+    @Output('attachment') attachmentEvent: EventEmitter<PostAttachment> = new EventEmitter<PostAttachment>();
+    @Output('delete') deleteEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
-    constructor(private service: PostRESTService,
-                private profile: CurrentProfileService,
-                private feed: FeedService<PostEntity>,
-                private auth: AuthService){}
+    private status: LoadingManager = new LoadingManager();
+
+    constructor(
+        private service: PostRESTService,
+        private session: Session
+    ) {}
 
     private dateCreatedOn: Date;
 
     isOwnPost(): boolean{
-        if(this.auth.isSignedIn()){
-            return (this.post.profile_id === this.profile.get().getId());
-        } else {
-            return false
+        if(this.session.isSignedIn()) {
+            return this.post.profile_id === this.session.getCurrentProfile().getId();
+        }else{
+            return false;
         }
     }
 
     deletePost(){
-        this.deleteProcessing = true;
-        this.service.deletePost(this.post.id).subscribe(success => {
-            for(let index = 0; index < this.feed.stream.all().length; index++){
-                if(this.feed.stream.all()[index].id = this.post.id){
-                    this.feed.stream.all().splice(index, 1);
-                    this.deleteProcessing = false;
-                }
+        let loading = this.status.addLoading();
+
+        this.service.deletePost(this.post.id).subscribe(
+            response => {
+                loading.is = false;
+
+                this.deleteEvent.emit(this.post);
+            },
+            error => {
+                loading.is = false;
             }
-        });
+        );
     }
     
     getProfile(): ProfileEntity

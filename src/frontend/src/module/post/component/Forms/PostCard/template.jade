@@ -4,9 +4,9 @@ article.component.component-post-card
       div(*ngIf='isOwnPost()')
         button(class="form-button form-button-remove")
           i(class='fa fa-pencil', aria-hidden='true')
-        button(*ngIf="!deleteProcessing" class="form-button form-button-remove", (click)='deletePost()')
+        button(*ngIf="status.notLoading()" class="form-button form-button-remove", (click)='deletePost()')
           i(class='fa fa-times', aria-hidden='true')
-        button(*ngIf="deleteProcessing" class="form-button form-button-remove" disabled)
+        button(*ngIf="status" class="form-button form-button-remove" disabled)
           i(class="fa fa-spinner fa-pulse fa-fw", aria-hidden='true')
       cass-profile-card-header([profile]="getProfile()", [time]="getPostDateCreatedOn()")
     .card-content

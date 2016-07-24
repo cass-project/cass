@@ -7,12 +7,12 @@ import {ScreenFeatures} from "./Screen/ScreenFeatures";
 
 import {ModalComponent} from "../../../../modal/component";
 import {ModalBoxComponent} from "../../../../modal/component/box";
-import {ScreenControls} from "../../../../util/classes/ScreenControls";
+import {ScreenControls} from "../../../../common/classes/ScreenControls";
 import {AuthService} from "../../../../auth/service/AuthService";
 import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
-import {LoadingManager} from "../../../../util/classes/LoadingStatus";
+import {LoadingManager} from "../../../../common/classes/LoadingStatus";
 import {Observable} from "rxjs/Observable";
 import {CommunityCreateModalNotifier} from "./notify";
 
