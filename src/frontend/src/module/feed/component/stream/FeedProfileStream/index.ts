@@ -4,6 +4,7 @@ import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/inde
 import {FeedService} from "../../../service/FeedService/index";
 import {ProfileCard} from "../../../../profile/component/Elements/ProfileCard/index";
 import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
+import {FeedOptionsService} from "../../../service/FeedOptionsService";
 
 @Component({
     selector: 'cass-feed-profile-stream',
@@ -18,7 +19,14 @@ import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
 })
 export class FeedProfileStream
 {
-    constructor(private feed: FeedService<ProfileEntity>) {}
+    constructor(
+        private feed: FeedService<ProfileEntity>,
+        private options: FeedOptionsService
+    ) {}
+
+    getViewOption() {
+        return this.options.view.current;
+    }
 
     hasStream() {
         return typeof this.feed.stream === "object";

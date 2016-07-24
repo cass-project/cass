@@ -4,6 +4,7 @@ import {CollectionCard} from "../../../../collection/component/Elements/Collecti
 import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
 import {CollectionEntity} from "../../../../collection/definitions/entity/collection";
 import {FeedService} from "../../../service/FeedService/index";
+import {FeedOptionsService} from "../../../service/FeedOptionsService";
 
 @Component({
     selector: 'cass-feed-collection-stream',
@@ -18,7 +19,14 @@ import {FeedService} from "../../../service/FeedService/index";
 })
 export class FeedCollectionStream
 {
-    constructor(private feed: FeedService<CollectionEntity>) {}
+    constructor(
+        private feed: FeedService<CollectionEntity>,
+        private options: FeedOptionsService
+    ) {}
+
+    getViewOption() {
+        return this.options.view.current;
+    }
 
     hasStream() {
         return typeof this.feed.stream === "object";

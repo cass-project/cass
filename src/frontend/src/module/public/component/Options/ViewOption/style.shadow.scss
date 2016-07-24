@@ -27,6 +27,10 @@ article.component-public-option-view {
           overflow: hidden;
           transition: background-color 0.1s;
 
+          span.title {
+            margin-left: 5px;
+          }
+
           &:hover {
             color: material-color("grey", "700");
             background-color: material-color("grey", "300");

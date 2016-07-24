@@ -4,6 +4,7 @@ import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/inde
 import {FeedService} from "../../../service/FeedService/index";
 import {CommunityCard} from "../../../../community/component/Elements/CommunityCard/index";
 import {CommunityEntity} from "../../../../community/definitions/entity/Community";
+import {FeedOptionsService} from "../../../service/FeedOptionsService";
 
 @Component({
     selector: 'cass-feed-community-stream',
@@ -18,7 +19,14 @@ import {CommunityEntity} from "../../../../community/definitions/entity/Communit
 })
 export class FeedCommunityStream
 {
-    constructor(private feed: FeedService<CommunityEntity>) {}
+    constructor(
+        private feed: FeedService<CommunityEntity>,
+        private options: FeedOptionsService
+    ) {}
+
+    getViewOption() {
+        return this.options.view.current;
+    }
 
     hasStream() {
         return typeof this.feed.stream === "object";

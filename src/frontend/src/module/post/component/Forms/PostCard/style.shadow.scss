@@ -8,12 +8,10 @@ article.component.component-post-card {
   }
 
   .card-view-option-feed {
-    .card {
-      @include card(1);
-      border-radius: 3px;
-      overflow: hidden;
-      background-color: white;
-    }
+    @include card(1);
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: white;
 
     .card-header {
       margin-top: 8px;
