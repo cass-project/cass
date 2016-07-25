@@ -111,6 +111,11 @@ class ProfileService implements EventEmitterAwareService
         return $profile;
     }
 
+    public function saveProfile(Profile $profile):Profile
+    {
+        return $this->profileRepository->saveProfile($profile);
+    }
+
     public function updatePersonalData(int $profileId, EditPersonalParameters $parameters): Profile
     {
         $profile = $this->getProfileById($profileId);

@@ -14,6 +14,9 @@ export class FeedService<T>
 {
     static DEFAULT_PAGE_SIZE = 30;
 
+    private postHelperIndex: number;
+    public shudLoad: boolean = true;
+
     private status: LoadingManager = new LoadingManager();
     private subscription: Subscription;
 
@@ -57,7 +60,17 @@ export class FeedService<T>
         
         this.subscription = this.source.fetch(this.createFeedRequest()).subscribe(
             (response) => {
+                if(response.entities.length > 30){
+                    response.entities.splice(30, 1);
+                    console.log(response.entities);
+                    this.shudLoad = true;
+                } else {
+                    this.shudLoad = false;
+                }
+
                 this.stream.replace(<any>response.entities);
+                this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
+                this.postHelperIndex = this.stream.all().length - 1;
                 status.is = false;
             },
             (error) => {
@@ -75,7 +88,16 @@ export class FeedService<T>
 
         this.subscription = this.source.fetch(this.createFeedRequest()).subscribe(
             (response) => {
+                if(response.entities.length > 30){
+                    response.entities.splice(30, 1);
+                    this.shudLoad = true;
+                } else {
+                    this.shudLoad = false;
+                }
+
                 this.stream.push(<any>response.entities);
+                this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
+                this.postHelperIndex = this.stream.all().length - 1;
                 status.is = false;
             },
             (error) => {

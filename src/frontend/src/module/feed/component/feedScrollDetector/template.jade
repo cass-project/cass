@@ -1,0 +1,4 @@
+button(#feedUpdateButton, class="form-button form-button-remove", *ngIf='feed.shudLoad')
+    i(class="fa fa-retweet", aria-hidden="true")
+button(*ngIf='!feed.shudLoad')
+    i(class='fa fa-check', aria-hidden="true")

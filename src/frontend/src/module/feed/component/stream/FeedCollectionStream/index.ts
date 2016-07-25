@@ -1,10 +1,11 @@
-import {Component} from "angular2/core";
+import {Component, ViewChild, ElementRef} from "angular2/core";
 
 import {CollectionCard} from "../../../../collection/component/Elements/CollectionCard/index";
 import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
 import {CollectionEntity} from "../../../../collection/definitions/entity/collection";
 import {FeedService} from "../../../service/FeedService/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
+import {FeedScrollDetector} from "../../FeedScrollDetector/index";
 
 @Component({
     selector: 'cass-feed-collection-stream',
@@ -15,6 +16,7 @@ import {FeedOptionsService} from "../../../service/FeedOptionsService";
     directives: [
         CollectionCard,
         LoadingIndicator,
+        FeedScrollDetector
     ]
 })
 export class FeedCollectionStream
