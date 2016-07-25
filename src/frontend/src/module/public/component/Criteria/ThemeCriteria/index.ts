@@ -65,6 +65,7 @@ export class ThemeCriteria
     }
 
     selectRoot(root: Theme) {
+        this.criteria.enabled = true;
         this.criteria.params.id = root.id;
 
         if(root.children.length > 0) {
