@@ -30,7 +30,7 @@ export class FeedScrollDetector
 
 
     detectElem(html) {
-        if(this.feed.shouldLoad){
+        if(this.feed.shudLoad){
             let elem = this.feedUpdateButton.nativeElement;
 
             if(elem && !this.appService.feedIsLoading){
