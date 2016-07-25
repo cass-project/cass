@@ -1,5 +1,7 @@
 /* @ MOBILE FIRST */
 
+$CARD_GRID_SIZE: 300px;
+
 @import "./../../../../../styles/globals";
 
 article.component.component-post-card {
@@ -12,10 +14,15 @@ article.component.component-post-card {
     border-radius: 3px;
     overflow: hidden;
     background-color: white;
+    width: 550px;
 
     .card-header {
       margin-top: 8px;
       margin-bottom: 15px;
+    }
+
+    .card-backdrop {
+      display: none;
     }
 
     .content-container {
@@ -32,10 +39,36 @@ article.component.component-post-card {
   }
 
   .card-view-option-grid {
+    background-color: white;
+    border: 1px solid material-color("grey", "400");
+    position: relative;
+    width: $CARD_GRID_SIZE;
+    height: $CARD_GRID_SIZE;
+    overflow: hidden;
+    cursor: pointer;
 
-  }
+    .card-header, .card-backdrop {
+      position: absolute;
+      left: 0; width: 100%;
+      top: -100px;
+      transition: top 0.1s;
+      padding-bottom: 3px;
+    }
 
-  .card-view-option-table {
+    .card-backdrop {
+      background-color: white;
+      opacity: 0.85;
+      height: 60px;
+    }
 
+    .content-container {
+      padding: 5px;
+    }
+
+    &:hover {
+      .card-header, .card-backdrop {
+        top: 0;
+      }
+    }
   }
 }

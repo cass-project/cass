@@ -1,5 +1,6 @@
 article.component.component-post-card
   .card(class="card-view-option-{{ viewOption }}")
+    .card-backdrop
     .card-header
       cass-profile-card-header([profile]="getProfile()", [time]="getPostDateCreatedOn()")
       .card-controls(*ngIf='isOwnPost()')
