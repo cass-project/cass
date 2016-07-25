@@ -92,9 +92,11 @@ final class PostStream extends Stream
         }, $result));
 
         return  array_map(function(BSONDocument $document) {
-            return $this->postFormatter->format(
+            return array_merge([
+                '_id' => (string) $document['_id']
+            ], $this->postFormatter->format(
                 $this->postService->getPostById((int) $document['id'])
-            );
+            ));
         }, $result);
     }
 }
