@@ -46,6 +46,13 @@ class CommunityRepository extends EntityRepository
         return $entity;
     }
 
+    public function loadCommunitiesByIds(array $communityIds)
+    {
+        $this->findBy([
+            'id' => $communityIds
+        ]);
+    }
+
     public function deleteCommunity(Community $community)
     {
         $this->getEntityManager()->remove($community);

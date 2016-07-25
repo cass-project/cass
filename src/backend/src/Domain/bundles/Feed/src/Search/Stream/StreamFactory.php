@@ -86,7 +86,10 @@ final class StreamFactory
             PublicCommunitiesSource::class,
             CommunitySource::class,
         ])) {
-            return new CommunityStream($source);
+            $stream = new CommunityStream($source);
+            $stream->setCommunityService($this->communityService);
+
+            return $stream;
         }else{
             throw new OutOfBoundsException(sprintf('Cannot create stream for source `%s`', $sourceName));
         }

@@ -1,6 +1,9 @@
 <?php
 namespace Domain\Feed\Search\Stream\Streams;
 
+use Domain\Community\Exception\CommunityNotFoundException;
+use Domain\Community\Formatter\CommunityExtendedFormatter;
+use Domain\Community\Service\CommunityService;
 use Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SortCriteria;
@@ -9,9 +12,18 @@ use Domain\Feed\Search\Criteria\CriteriaManager;
 use Domain\Feed\Search\Stream\Stream;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
+use MongoDB\Model\BSONDocument;
 
 final class CommunityStream extends Stream
 {
+    /** @var CommunityService */
+    private $communityService;
+    
+    public function setCommunityService(CommunityService $communityService)
+    {
+        $this->communityService = $communityService;
+    }
+
     public function fetch(CriteriaManager $criteriaManager, Collection $collection): array
     {
         $order = 1;
@@ -60,6 +72,20 @@ final class CommunityStream extends Stream
             }
         });
 
-        return $collection->find($filter, $options)->toArray();
+        $result = $collection->find($filter, $options)->toArray();
+        
+        $this->communityService->loadCommunitiesByIds(array_map(function(BSONDocument $document) {
+            return (int) $document['id'];
+        }, $result));
+
+        return $this->cleanResults(array_map(function(BSONDocument $document) {
+            try {
+                return array_merge([
+                    '_id' => (string) $document['_id']
+                ], $this->communityService->getCommunityById((int) $document['id'])->toJSON());
+            }catch(CommunityNotFoundException $e) {
+                return null;
+            }
+        }, $result));
     }
 }

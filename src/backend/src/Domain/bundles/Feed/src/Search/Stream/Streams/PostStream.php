@@ -9,6 +9,7 @@ use Domain\Feed\Search\Criteria\CriteriaManager;
 use Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
 use Domain\Feed\Search\Stream\Stream;
 use Domain\Post\Entity\Post;
+use Domain\Post\Exception\PostNotFoundException;
 use Domain\Post\Formatter\PostFormatter;
 use Domain\Post\Service\PostService;
 use MongoDB\BSON\ObjectID;
@@ -91,12 +92,16 @@ final class PostStream extends Stream
             return (int) $document['id'];
         }, $result));
 
-        return  array_map(function(BSONDocument $document) {
-            return array_merge([
-                '_id' => (string) $document['_id']
-            ], $this->postFormatter->format(
-                $this->postService->getPostById((int) $document['id'])
-            ));
-        }, $result);
+        return $this->cleanResults(array_map(function(BSONDocument $document) {
+            try {
+                return array_merge([
+                    '_id' => (string) $document['_id']
+                ], $this->postFormatter->format(
+                    $this->postService->getPostById((int) $document['id'])
+                ));
+            }catch(PostNotFoundException $e) {
+                return null;
+            }
+        }, $result));
     }
 }
