@@ -29,7 +29,7 @@ export class FeedCriteriaService
             }
         },
         theme: {
-            code: 'theme',
+            code: 'theme_id',
             enabled: false,
             params: {
                 id: -1
