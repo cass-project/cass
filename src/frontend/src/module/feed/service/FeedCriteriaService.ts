@@ -46,7 +46,7 @@ export class FeedCriteriaService
             code: 'content_type',
             enabled: false,
             params: {
-                type: ContentType.Text
+                type: undefined
             }
         }
     };

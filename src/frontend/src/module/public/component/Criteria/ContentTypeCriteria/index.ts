@@ -48,6 +48,6 @@ export class ContentTypeCriteria
     }
 
     isEnabled() {
-        return !!this.criteria.enabled;
+        return this.criteria.enabled && this.criteria.params.type !== undefined;
     }
 }
