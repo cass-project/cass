@@ -1,7 +1,7 @@
 main#cassAppContainer.cass-app-container.component.component-frontend-app
   .sidebar
     cass-sidebar
-  .content((scroll)='detectElem()')
+  .content(#content, (scroll)='appService.onScroll($event)')
     cass-message-bus-notifications
     cass-auth
     cass-account

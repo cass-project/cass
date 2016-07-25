@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component, ViewChild, ElementRef} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {RouteConfig, ROUTER_DIRECTIVES, RouterOutlet, RouteDefinition} from "angular2/router";
 import {Module} from "../../module/common/classes/Module";
@@ -59,25 +59,12 @@ export class App
         return require('./../../../package.json').version;
     }
 
+    @ViewChild('content') content: ElementRef;
+    
     constructor(private appService: AppService){}
 
-    detectElem() {
-        let html = document.documentElement;
-        let elem = document.getElementById('FeedUpdateButton');
-
-        if(elem && !this.appService.feedIsLoading){
-            let rect = elem.getBoundingClientRect();
-
-            if(!!rect
-                && rect.bottom >= 0
-                && rect.right >= 0
-                && rect.top <= html.clientHeight
-                && rect.left <= html.clientWidth ){
-                console.log('detect')
-            }
-        } else if(!this.appService.feedIsLoading){
-            throw new Error("Cant find Elem");
-        }
+    ngAfterViewInit(){
+        this.appService.content = this.content;
     }
 }
 
