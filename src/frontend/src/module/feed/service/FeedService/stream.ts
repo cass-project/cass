@@ -1,6 +1,6 @@
 import {FeedEntity} from "./entity";
 
-export class Stream<T>
+export class Stream<T extends FeedEntity>
 {
     private entities: T[] = [];
 

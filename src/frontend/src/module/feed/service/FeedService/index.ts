@@ -15,7 +15,7 @@ export class FeedService<T>
     static DEFAULT_PAGE_SIZE = 30;
 
     private postHelperIndex: number;
-    public shudLoad: boolean = true;
+    public shouldLoad: boolean = true;
 
     private status: LoadingManager = new LoadingManager();
     private subscription: Subscription;
@@ -62,10 +62,9 @@ export class FeedService<T>
             (response) => {
                 if(response.entities.length > 30){
                     response.entities.splice(30, 1);
-                    console.log(response.entities);
-                    this.shudLoad = true;
+                    this.shouldLoad = true;
                 } else {
-                    this.shudLoad = false;
+                    this.shouldLoad = false;
                 }
 
                 this.stream.replace(<any>response.entities);
@@ -90,9 +89,9 @@ export class FeedService<T>
             (response) => {
                 if(response.entities.length > 30){
                     response.entities.splice(30, 1);
-                    this.shudLoad = true;
+                    this.shouldLoad = true;
                 } else {
-                    this.shudLoad = false;
+                    this.shouldLoad = false;
                 }
 
                 this.stream.push(<any>response.entities);
