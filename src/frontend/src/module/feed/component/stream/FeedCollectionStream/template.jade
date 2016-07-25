@@ -6,5 +6,4 @@ article.component.component-feed-collection-stream
     .loading-indicator
       cass-loading-indicator(*ngIf="feed.isLoading()")
   div(*ngIf="!feed.isLoading()")
-   button(class="form-button form-button-remove", id='FeedUpdateButton')
-    span '...'
+    cass-feed-scroll-detector
