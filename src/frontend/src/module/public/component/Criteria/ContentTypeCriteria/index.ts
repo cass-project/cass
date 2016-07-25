@@ -23,10 +23,6 @@ export class ContentTypeCriteria
         this.criteria = criteria.criteria.contentType;
     }
 
-    ngOnInit() {
-        this.criteria.enabled = true;
-    }
-
     ngOnDestroy() {
         this.criteria.enabled = false;
     }
