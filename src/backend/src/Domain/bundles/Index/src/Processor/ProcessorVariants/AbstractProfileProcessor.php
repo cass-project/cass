@@ -36,19 +36,15 @@ abstract class AbstractProfileProcessor implements Processor
         $source = $this->getSource($entity);
         $collection = $this->mongoDB->selectCollection($source->getMongoDBCollection());
 
-        if(count($entity->getInterestingInIds()) === 0) {
-            $this->exclude($entity);
-        }else{
-            $indexed = array_merge($entity->toIndexedEntityJSON(), [
-                'theme_ids' => $this->getThemeIdsWeight($entity),
-            ]);
+        $indexed = array_merge($entity->toIndexedEntityJSON(), [
+            'theme_ids' => $this->getThemeIdsWeight($entity),
+        ]);
 
-            $collection->updateOne(
-                ['id' => $entity->getId()],
-                ['$set' => $indexed],
-                ['upsert' => true]
-            );
-        }
+        $collection->updateOne(
+            ['id' => $entity->getId()],
+            ['$set' => $indexed],
+            ['upsert' => true]
+        );
     }
 
     public function exclude(IndexedEntity $entity)
