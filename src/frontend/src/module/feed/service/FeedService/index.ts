@@ -7,6 +7,7 @@ import {LoadingManager} from "../../../common/classes/LoadingStatus";
 import {FeedRequest} from "../../definitions/request/FeedRequest";
 import {FeedCriteriaService} from "../FeedCriteriaService";
 import {FeedOptionsService} from "../FeedOptionsService";
+import {AppService} from "../../../../app/frontend-app/service";
 
 @Injectable()
 export class FeedService<T>
@@ -21,7 +22,8 @@ export class FeedService<T>
     
     constructor(
         private criteria: FeedCriteriaService,
-        private options: FeedOptionsService
+        private options: FeedOptionsService,
+        private appService: AppService
     ) {}
 
     public provide(source: Source, stream: Stream<T>) {
@@ -30,6 +32,7 @@ export class FeedService<T>
     }
 
     public isLoading(): boolean {
+        this.appService.feedIsLoading = this.status.isLoading();
         return this.status.isLoading();
     }
 

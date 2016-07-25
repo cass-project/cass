@@ -2,6 +2,7 @@ import {Component} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {RouteConfig, ROUTER_DIRECTIVES, RouterOutlet, RouteDefinition} from "angular2/router";
 import {Module} from "../../module/common/classes/Module";
+import {AppService} from "./service";
 
 let routeDefinitions: RouteDefinition[] = [];
 let appDefinition = {
@@ -10,7 +11,7 @@ let appDefinition = {
     styles: [
         require('./style.shadow.scss')
     ],
-    providers: [],
+    providers: [AppService],
     directives: [
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,
@@ -58,14 +59,24 @@ export class App
         return require('./../../../package.json').version;
     }
 
-    onScroll() {
-        let elem = document.getElementById('content');
-        let elemSize = elem.scrollHeight;
-        let scrolled = elem.scrollTop;
+    constructor(private appService: AppService){}
 
-        if(scrolled/elemSize > 0.79){
-            // Фил, вместо магического числа попробуй лучше, чтобы ивент срабатывал от появляения элемента:
-            // http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport/7557433#7557433
+    detectElem() {
+        let html = document.documentElement;
+        let elem = document.getElementById('FeedUpdateButton');
+
+        if(elem && !this.appService.feedIsLoading){
+            let rect = elem.getBoundingClientRect();
+
+            if(!!rect
+                && rect.bottom >= 0
+                && rect.right >= 0
+                && rect.top <= html.clientHeight
+                && rect.left <= html.clientWidth ){
+                console.log('detect')
+            }
+        } else if(!this.appService.feedIsLoading){
+            throw new Error("Cant find Elem");
         }
     }
 }
