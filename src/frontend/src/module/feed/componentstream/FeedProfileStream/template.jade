@@ -1,7 +1,0 @@
-article.component.component-feed-profile-stream
-  div(*ngIf="hasStream()")
-    .entities
-      .profile-card-container(*ngFor="#profile of feed.stream.all()")
-        cass-profile-card([profile]="profile", [view-option]="getViewOption()")
-      .loading-indicator
-        cass-loading-indicator(*ngIf="feed.isLoading()")

@@ -36,7 +36,6 @@ export class FeedService<T extends FeedEntity>
     }
 
     public isLoading(): boolean {
-        this.appService.feedIsLoading = this.status.isLoading();
         return this.status.isLoading();
     }
 
@@ -52,17 +51,17 @@ export class FeedService<T extends FeedEntity>
 
     public update() {
         this.stream.empty();
+        delete this.criteria.criteria.seek.params.last_id;
 
+        let limit = this.criteria.criteria.seek.params.limit - 1;
         let status = this.status.addLoading();
 
         if(this.subscription) {
             this.subscription.unsubscribe();
         }
-        
+
         this.subscription = this.source.fetch(this.createFeedRequest()).subscribe(
             (response) => {
-                let limit = this.criteria.criteria.seek.params.limit;
-
                 if(response.entities.length > limit){
                     response.entities.splice(limit, 1);
                     this.shouldLoad = true;
@@ -71,8 +70,11 @@ export class FeedService<T extends FeedEntity>
                 }
 
                 this.stream.replace(<any>response.entities);
-                this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
-                this.postHelperIndex = this.stream.all().length - 1;
+                if(response.entities.length > 1){
+                    this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
+                    this.postHelperIndex = this.stream.all().length - 1;
+                }
+
                 status.is = false;
             },
             (error) => {
@@ -83,6 +85,7 @@ export class FeedService<T extends FeedEntity>
 
     public next() {
         let status = this.status.addLoading();
+        let limit = this.criteria.criteria.seek.params.limit - 1;
 
         if(this.subscription) {
             this.subscription.unsubscribe();
@@ -90,16 +93,20 @@ export class FeedService<T extends FeedEntity>
 
         this.subscription = this.source.fetch(this.createFeedRequest()).subscribe(
             (response) => {
-                if(response.entities.length > 30){
-                    response.entities.splice(30, 1);
+                if(response.entities.length > limit){
+                    response.entities.splice(limit, 1);
                     this.shouldLoad = true;
                 } else {
                     this.shouldLoad = false;
                 }
 
                 this.stream.push(<any>response.entities);
-                this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
-                this.postHelperIndex = this.stream.all().length - 1;
+
+                if(response.entities.length > 1) {
+                    this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
+                    this.postHelperIndex = this.stream.all().length - 1;
+                }
+
                 status.is = false;
             },
             (error) => {

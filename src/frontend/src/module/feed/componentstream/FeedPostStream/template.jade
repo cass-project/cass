@@ -1,7 +1,0 @@
-article.component.component-feed-post-stream
-  div(*ngIf="hasStream()")
-    .entities
-      .post-card-container(*ngFor="#post of feed.stream.all()")
-        cass-post-card([post]="post", [view-option]="getViewOption()")
-      .loading-indicator
-        cass-loading-indicator(*ngIf="feed.isLoading()")

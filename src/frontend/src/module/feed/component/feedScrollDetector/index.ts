@@ -33,7 +33,7 @@ export class FeedScrollDetector
         if(this.feed.shouldLoad){
             let elem = this.feedUpdateButton.nativeElement;
 
-            if(elem && !this.appService.feedIsLoading){
+            if(elem && !this.feed.isLoading()){
                 let rect = elem.getBoundingClientRect();
 
                 if(!!rect
@@ -43,7 +43,7 @@ export class FeedScrollDetector
                     && rect.left <= html.clientWidth ){
                     return true;
                 }
-            } else if(!this.appService.feedIsLoading){
+            } else if(!this.feed.isLoading()){
                 throw new Error("Cant find Elem");
             }
         }

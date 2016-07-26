@@ -4,8 +4,6 @@ import {Observer} from "rxjs/Observer";
 
 @Injectable()
 export class AppService {
-    feedIsLoading: boolean = false;
-    
     content: ElementRef;
     
     public scrollObservable: Observable<ContainerScrollEvent>;

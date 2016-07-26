@@ -19,7 +19,7 @@ export = new Module({
         CommunityModalService,
         CommunitySettingsModalModel,
         CommunityModals,
-        CommunityCreateModalNotifier,
+        CommunityCreateModalNotifier
     ],
     directives: [
         CommunityComponent,

@@ -15,6 +15,7 @@ import {OptionView} from "./component/Options/ViewOption/index";
 import {ContentTypeCriteria} from "./component/Criteria/ContentTypeCriteria/index";
 import {FeedCriteriaService} from "../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../feed/service/FeedOptionsService";
+import {AppService} from "../../app/frontend-app/service";
 
 @Component({
     selector: 'cass-public',
@@ -67,7 +68,12 @@ import {FeedOptionsService} from "../feed/service/FeedOptionsService";
 ])
 export class PublicComponent
 {
-    constructor(private service: PublicService) {}
+    constructor(private service: PublicService,
+                private appService: AppService) {}
+    
+    onScroll($event){
+        this.appService.onScroll($event)
+    }
     
     isPostCriteriaAvailable() {
         return ~[
