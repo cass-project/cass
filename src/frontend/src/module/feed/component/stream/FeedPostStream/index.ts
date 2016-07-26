@@ -1,11 +1,11 @@
-import {Component, ViewChild, ElementRef} from "angular2/core";
+import {Component} from "angular2/core";
 
 import {PostCard} from "../../../../post/component/Forms/PostCard/index";
 import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
 import {FeedService} from "../../../service/FeedService/index";
-import {PostEntity} from "../../../../post/definitions/entity/Post";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
 import {FeedScrollDetector} from "../../FeedScrollDetector/index";
+import {PostIndexedEntity} from "../../../../post/definitions/entity/Post";
 
 @Component({
     selector: 'cass-feed-post-stream',
@@ -22,7 +22,7 @@ import {FeedScrollDetector} from "../../FeedScrollDetector/index";
 export class FeedPostStream
 {
     constructor(
-        private feed: FeedService<PostEntity>,
+        private feed: FeedService<PostIndexedEntity>,
         private options: FeedOptionsService
     ) {}
     

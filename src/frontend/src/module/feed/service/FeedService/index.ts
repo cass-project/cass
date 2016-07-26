@@ -8,9 +8,10 @@ import {FeedRequest} from "../../definitions/request/FeedRequest";
 import {FeedCriteriaService} from "../FeedCriteriaService";
 import {FeedOptionsService} from "../FeedOptionsService";
 import {AppService} from "../../../../app/frontend-app/service";
+import {FeedEntity} from "./entity";
 
 @Injectable()
-export class FeedService<T>
+export class FeedService<T extends FeedEntity>
 {
     static DEFAULT_PAGE_SIZE = 30;
 
@@ -60,8 +61,10 @@ export class FeedService<T>
         
         this.subscription = this.source.fetch(this.createFeedRequest()).subscribe(
             (response) => {
-                if(response.entities.length > 30){
-                    response.entities.splice(30, 1);
+                let limit = this.criteria.criteria.seek.params.limit;
+
+                if(response.entities.length > limit){
+                    response.entities.splice(limit, 1);
                     this.shouldLoad = true;
                 } else {
                     this.shouldLoad = false;

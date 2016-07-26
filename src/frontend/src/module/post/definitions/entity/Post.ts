@@ -13,3 +13,8 @@ export interface PostEntity extends FeedEntity
     attachment_ids: number[];
     profile: ProfileEntity;
 }
+
+export interface PostIndexedEntity extends PostEntity
+{
+    _id: string;
+}

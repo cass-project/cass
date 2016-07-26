@@ -1,11 +1,11 @@
-import {Component, ViewChild, ElementRef} from "angular2/core";
+import {Component} from "angular2/core";
 
 import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
 import {FeedService} from "../../../service/FeedService/index";
 import {ProfileCard} from "../../../../profile/component/Elements/ProfileCard/index";
-import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
 import {FeedScrollDetector} from "../../FeedScrollDetector/index";
+import {ProfileIndexedEntity} from "../../../../profile/definitions/entity/Profile";
 
 @Component({
     selector: 'cass-feed-profile-stream',
@@ -22,7 +22,7 @@ import {FeedScrollDetector} from "../../FeedScrollDetector/index";
 export class FeedProfileStream
 {
     constructor(
-        private feed: FeedService<ProfileEntity>,
+        private feed: FeedService<ProfileIndexedEntity>,
         private options: FeedOptionsService
     ) {}
 

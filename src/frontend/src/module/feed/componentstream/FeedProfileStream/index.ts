@@ -1,28 +1,26 @@
 import {Component} from "angular2/core";
 
-import {CollectionCard} from "../../../../collection/component/Elements/CollectionCard/index";
 import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
-import {CollectionIndexEntity} from "../../../../collection/definitions/entity/collection";
 import {FeedService} from "../../../service/FeedService/index";
+import {ProfileCard} from "../../../../profile/component/Elements/ProfileCard/index";
+import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
-import {FeedScrollDetector} from "../../FeedScrollDetector/index";
 
 @Component({
-    selector: 'cass-feed-collection-stream',
+    selector: 'cass-feed-profile-stream',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
     directives: [
-        CollectionCard,
+        ProfileCard,
         LoadingIndicator,
-        FeedScrollDetector
     ]
 })
-export class FeedCollectionStream
+export class FeedProfileStream
 {
     constructor(
-        private feed: FeedService<CollectionIndexEntity>,
+        private feed: FeedService<ProfileEntity>,
         private options: FeedOptionsService
     ) {}
 

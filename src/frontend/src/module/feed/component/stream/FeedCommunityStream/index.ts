@@ -3,9 +3,9 @@ import {Component, ViewChild, ElementRef} from "angular2/core";
 import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
 import {FeedService} from "../../../service/FeedService/index";
 import {CommunityCard} from "../../../../community/component/Elements/CommunityCard/index";
-import {CommunityEntity} from "../../../../community/definitions/entity/Community";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
 import {FeedScrollDetector} from "../../FeedScrollDetector/index";
+import {CommunityIndexedEntity} from "../../../../community/definitions/entity/Community";
 
 @Component({
     selector: 'cass-feed-community-stream',
@@ -22,7 +22,7 @@ import {FeedScrollDetector} from "../../FeedScrollDetector/index";
 export class FeedCommunityStream
 {
     constructor(
-        private feed: FeedService<CommunityEntity>,
+        private feed: FeedService<CommunityIndexedEntity>,
         private options: FeedOptionsService
     ) {}
 
