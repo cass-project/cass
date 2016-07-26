@@ -27,11 +27,17 @@ return [
         'config.storage' => sprintf('%s/../../../../www/app/dist/storage', __DIR__),
         'config.paths.assets.dir' => sprintf('%s/../../../../www/app/dist/assets', __DIR__),
         'config.paths.assets.www' => '/dist/assets',
+        'config.routes_group' => [
+            'auth',
+            'with-profile',
+            'common',
+            'final'
+        ],
         ImageManager::class => factory(function(Container $container) {
             return new ImageManager([
                 'driver' => 'gd'
             ]);
         }),
-        EventEmitter::class => object()
+        EventEmitter::class => object(),
     ]
 ];

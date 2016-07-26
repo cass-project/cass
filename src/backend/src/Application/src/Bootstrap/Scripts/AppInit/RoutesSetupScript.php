@@ -15,17 +15,11 @@ class RoutesSetupScript implements AppInitScript
             return $bundle->getConfigDir();
         }, $bundleService->getBundles());
 
-        foreach($configDirs as $configDir) {
-            $this->setupRoutes($app, $configDir, 'routes.before.php');
-        }
+        $definitions = [];
 
-        foreach($configDirs as $configDir) {
-            $this->setupRoutes($app, $configDir, 'routes.php');
-        }
 
-        foreach($configDirs as $configDir) {
-            $this->setupRoutes($app, $configDir, 'routes.after.php');
-        }
+
+
     }
 
     private function setupRoutes(Application $app, string $configDir, string $routeFile) {
@@ -40,5 +34,54 @@ class RoutesSetupScript implements AppInitScript
 
             $callback($app);
         }
+    }
+
+    private function getDefinitions( array $configDirs) : array {
+
+        $definitions = [];
+        foreach($configDirs as $configDir) {
+            $this->setupRoutes($app, $configDir, 'routes.before.php');
+            $this->setupRoutes($app, $configDir, 'routes.php');
+            $this->setupRoutes($app, $configDir, 'routes.after.php');
+        }
+
+        foreach($configDirs as $configDir) {
+            $routeConfigFile = sprintf('%s/%s', $configDir, 'routes.before.php');
+            if(file_exists($routeConfigFile)) {
+                $definitions[] = array_merge_recursive($definitions, require $routeConfigFile)   ;
+            }
+
+            $routeConfigFile = sprintf('%s/%s', $configDir, 'routes.php');
+            if(file_exists($routeConfigFile)) {
+                $definitions[] = array_merge_recursive($definitions, require $routeConfigFile)   ;
+            }
+
+            $routeConfigFile = sprintf('%s/%s', $configDir, 'routes.after.php');
+            if(file_exists($routeConfigFile)) {
+                $definitions[] = array_merge_recursive($definitions, require $routeConfigFile)   ;
+            }
+        }
+
+        return $definitions;
+    }
+
+    private function createRouteFromDefinition(Application $app, array $definition){
+        if(empty($definition['method'])||
+           $definition['url'] ||
+           $definition['middleware'] ||
+           $definition['name']
+        ) throw new \Exception("missing required definition option");
+
+        $method     = $definition['method'];
+        $url        = $definition['url'];
+        $middleware = $definition['middleware'];
+        $name       = $definition['name'];
+
+
+        $app->{$method}( $url, $middleware, $name );
+    }
+    private function createPipeFromDefinition(Application $app,array $definition){
+
+        $app->pipe($definition['middleware']);
     }
 }
