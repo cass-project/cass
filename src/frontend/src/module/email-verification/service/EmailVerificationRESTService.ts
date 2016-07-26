@@ -1,10 +1,12 @@
 import {Injectable} from "angular2/core";
 import {Http} from "angular2/http"
+import {Observable} from "rxjs/Observable";
+
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
-import {Account} from "../../account/definitions/entity/Account";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
-import {AuthService} from "../../auth/service/AuthService";
 import {AuthToken} from "../../auth/service/AuthToken";
+import {EmailVerificationRequestResponse200} from "../definitions/paths/request";
+import {EmailVerificationConfirmResponse200} from "../definitions/paths/confirm";
 
 @Injectable()
 export class EmailVerificationRESTService extends AbstractRESTService
@@ -15,13 +17,15 @@ export class EmailVerificationRESTService extends AbstractRESTService
         protected messages: MessageBusService
     ) { super(http, token, messages); }
 
-    emailVerification(token: string)
-    {
-        return this.handle(this.http.get(`/backend/api/email-verification/confirm/${token}`));
+    requestEmailVerification(newEmail: string): Observable<EmailVerificationRequestResponse200> {
+        return this.handle(
+            this.http.get(`/backend/api/email-verification/request/${newEmail}`)
+        );
     }
 
-    RequestEmailVerification(newEmail: string)
-    {
-        return this.handle(this.http.get(`/backend/api/email-verification/request/${newEmail}`));
+    confirmEmailVerification(token: string): Observable<EmailVerificationConfirmResponse200> {
+        return this.handle(
+            this.http.get(`/backend/api/email-verification/confirm/${token}`)
+        );
     }
 }

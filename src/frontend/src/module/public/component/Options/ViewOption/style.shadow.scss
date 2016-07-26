@@ -27,13 +27,13 @@ article.component-public-option-view {
           overflow: hidden;
           transition: background-color 0.1s;
 
+          span.title {
+            margin-left: 5px;
+          }
+
           &:hover {
             color: material-color("grey", "700");
             background-color: material-color("grey", "300");
-          }
-
-          i.fa {
-            margin-right: 6px;
           }
         }
 
@@ -42,7 +42,7 @@ article.component-public-option-view {
             color: material-color("grey", "900");
 
             &:hover {
-              color: material-color("grey", "600");
+              color: material-color("grey", "900");
             }
           }
         }

@@ -1,9 +1,13 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input, EventEmitter, Output} from "angular2/core";
 
 import {PostEntity} from "../../../definitions/entity/Post";
 import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
 import {ProfileCardHeader} from "../../../../profile/component/Elements/ProfileCardHeader/index";
 import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
+import {PostRESTService} from "../../../service/PostRESTService";
+import {LoadingManager} from "../../../../common/classes/LoadingStatus";
+import {Session} from "../../../../session/Session";
+import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
 
 @Component({
     selector: 'cass-post-card',
@@ -19,9 +23,42 @@ import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
 export class PostCard
 {
     @Input('post') post: PostEntity;
+    @Input('view-option') viewOption: ViewOptionValue = ViewOptionValue.Feed;
+
+    @Output('attachment') attachmentEvent: EventEmitter<PostAttachment> = new EventEmitter<PostAttachment>();
+    @Output('delete') deleteEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
     private dateCreatedOn: Date;
+    private status: LoadingManager = new LoadingManager();
 
+    constructor(
+        private service: PostRESTService,
+        private session: Session
+    ) {}
+
+    isOwnPost(): boolean{
+        if(this.session.isSignedIn()) {
+            return this.post.profile_id === this.session.getCurrentProfile().getId();
+        }else{
+            return false;
+        }
+    }
+
+    deletePost(){
+        let loading = this.status.addLoading();
+
+        this.service.deletePost(this.post.id).subscribe(
+            response => {
+                loading.is = false;
+
+                this.deleteEvent.emit(this.post);
+            },
+            error => {
+                loading.is = false;
+            }
+        );
+    }
+    
     getProfile(): ProfileEntity
     {
         return this.post.profile;

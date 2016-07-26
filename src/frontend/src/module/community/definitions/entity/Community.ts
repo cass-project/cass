@@ -28,6 +28,11 @@ export interface CommunityEntity
     features: string[];
 }
 
+export interface CommunityIndexedEntity extends CommunityEntity
+{
+    _id: string;
+}
+
 export interface CommunityPublicOptionsEntity
 {
     public_enabled: boolean;

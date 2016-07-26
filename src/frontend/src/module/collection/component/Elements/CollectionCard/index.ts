@@ -2,6 +2,7 @@ import {Component, Input, EventEmitter, Output} from "angular2/core";
 import {CollectionEntity} from "../../../definitions/entity/collection";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {ThemeService} from "../../../../theme/service/ThemeService";
+import {Router} from "angular2/router";
 
 @Component({
     selector: 'cass-collection-card',
@@ -13,9 +14,9 @@ import {ThemeService} from "../../../../theme/service/ThemeService";
 export class CollectionCard
 {
     @Input('entity') entity: CollectionEntity;
-    @Output('click') clickEvent: EventEmitter<CollectionEntity> = new EventEmitter<CollectionEntity>();
 
-    constructor(private theme: ThemeService) {}
+    constructor(private theme: ThemeService,
+                private router: Router) {}
 
     getImageURL(): string {
         let image = queryImage(QueryTarget.Card, this.entity.image).public_path;
@@ -23,8 +24,13 @@ export class CollectionCard
         return `url('${image}')`;
     }
 
-    click() {
-        this.clickEvent.emit(this.entity);
+    goCollection() {
+        if(this.entity.owner.type === 'community'){
+            this.router.navigate(['/Community', 'Community', {sid: this.entity.owner_sid}, 'Collections', 'View', { sid: this.entity.sid }]);
+        } else if(this.entity.owner.type === 'profile'){
+            this.router.navigate(['/Profile', 'Profile', {id: this.entity.owner.id}, 'Collections', 'View', { sid: this.entity.sid }]);
+        }
+
     }
 
     hasTheme(): boolean {

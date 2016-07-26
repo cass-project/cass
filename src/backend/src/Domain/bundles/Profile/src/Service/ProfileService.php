@@ -77,6 +77,11 @@ class ProfileService implements EventEmitterAwareService
         return $this->profileRepository->getProfileByIds($profileIds);
     }
     
+    public function loadProfilesByIds(array $profileIds)
+    {
+        $this->profileRepository->loadProfilesByIds($profileIds);
+    }
+    
     public function getProfileBySID(string $profileSid): Profile
     {
         return $this->profileRepository->getProfileBySID($profileSid);
@@ -104,6 +109,11 @@ class ProfileService implements EventEmitterAwareService
         $this->getEventEmitter()->emit(self::EVENT_PROFILE_CREATED, [$profile]);
 
         return $profile;
+    }
+
+    public function saveProfile(Profile $profile):Profile
+    {
+        return $this->profileRepository->saveProfile($profile);
     }
 
     public function updatePersonalData(int $profileId, EditPersonalParameters $parameters): Profile

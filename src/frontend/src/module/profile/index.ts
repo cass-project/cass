@@ -6,7 +6,6 @@ import {ProfileSwitcher} from "./component/Modals/ProfileSwitcher/index";
 import {ProfileSetup} from "./component/Modals/ProfileSetup/index";
 import {ModalBoxComponent} from "../modal/component/box/index";
 import {AuthService} from "../auth/service/AuthService";
-import {ProfileEntity} from "./definitions/entity/Profile";
 import {ProfileModals} from "./modals";
 import {ProfileInterestsModal} from "./component/Modals/ProfileInterests/index";
 import {MessageBusService} from "../message/service/MessageBusService/index";
@@ -17,6 +16,7 @@ import {CurrentProfileService} from "./service/CurrentProfileService";
 @Component({
     selector: 'cass-profile',
     template: require('./template.jade'),
+    providers: [],
     directives: [
         ModalComponent,
         ModalBoxComponent,

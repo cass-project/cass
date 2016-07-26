@@ -5,9 +5,9 @@ article.component.component-public-option-view
         button.choice(title="Открыть видеоплеер")
           i.fa.fa-television
           span.title Открыть видеоплеер
-      li
-        button.choice(title="Расположить контент в виде ленты")
+      li([ngClass]="{ 'active': isOn('feed') }")
+        button.choice(title="Расположить контент в виде ленты", (click)="setAsCurrent('feed')")
+          i.fa.fa-square
+      li([ngClass]="{ 'active': isOn('grid') }")
+        button.choice(title="Расположить контент в виде сетки", (click)="setAsCurrent('grid')")
           i.fa.fa-th-large
-      li
-        button.choice(title="Расположить контент в виде списка")
-          i.fa.fa-bars

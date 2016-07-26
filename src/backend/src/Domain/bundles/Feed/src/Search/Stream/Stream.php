@@ -20,4 +20,11 @@ abstract class Stream
     }
 
     abstract public function fetch(CriteriaManager $criteriaManager, Collection $collection): array;
+
+    protected function cleanResults(array $results)
+    {
+        return array_filter($results, function($input) {
+            return $input !== null;
+        });
+    }
 }

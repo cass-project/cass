@@ -1,5 +1,5 @@
 import {Injectable} from "angular2/core";
-import {ModalControl} from "../../../util/classes/ModalControl";
+import {ModalControl} from "../../../common/classes/ModalControl";
 
 @Injectable()
 export class AuthComponentService

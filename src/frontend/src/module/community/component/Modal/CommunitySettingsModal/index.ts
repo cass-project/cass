@@ -2,7 +2,7 @@ import {Component, EventEmitter, Output} from "angular2/core";
 
 import {ModalBoxComponent} from "../../../../modal/component/box";
 import {ModalComponent} from "../../../../modal/component";
-import {ScreenControls} from "../../../../util/classes/ScreenControls";
+import {ScreenControls} from "../../../../common/classes/ScreenControls";
 
 import {CommunityService} from "../../../service/CommunityService";
 import {CommunityFeaturesService} from "../../../service/CommunityFeaturesService";

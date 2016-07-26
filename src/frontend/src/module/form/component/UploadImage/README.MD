@@ -7,11 +7,11 @@ UPLOAD IMAGE
 #### 1. Создайте стратегию аплоада картинки:
 
 ```typescript
-// app/module/profile/util/UploadProfileImageStrategy.ts
+// app/module/profile/common/UploadProfileImageStrategy.ts
 
-import {UploadImageStrategy} from "../../util/component/UploadImage/strategy";
-import {UploadImageCropModel} from "../../util/component/UploadImage/strategy";
-import {UploadImageModal} from "../../util/component/UploadImage/index";
+import {UploadImageStrategy} from "../../common/component/UploadImage/strategy";
+import {UploadImageCropModel} from "../../common/component/UploadImage/strategy";
+import {UploadImageModal} from "../../common/component/UploadImage/index";
 
 export class UploadProfileImageStrategy implements UploadImageStrategy
 {

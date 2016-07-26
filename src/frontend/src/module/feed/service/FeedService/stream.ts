@@ -1,6 +1,6 @@
 import {FeedEntity} from "./entity";
 
-export class Stream<T>
+export class Stream<T extends FeedEntity>
 {
     private entities: T[] = [];
 
@@ -14,6 +14,10 @@ export class Stream<T>
 
     replace(entities: T[]) {
         this.entities = entities;
+    }
+    
+    filter(callback) {
+        this.entities = this.entities.filter(callback);
     }
 
     push(entities: T[]) {

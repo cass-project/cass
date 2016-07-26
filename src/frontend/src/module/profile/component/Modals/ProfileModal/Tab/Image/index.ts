@@ -2,8 +2,8 @@ import {Component, Injectable} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
 
 import {ProfileImage} from "../../../../Elements/ProfileImage/index";
-import {ModalControl} from "../../../../../../util/classes/ModalControl";
-import {UploadProfileImageStrategy} from "../../../../../util/UploadProfileImageStrategy";
+import {ModalControl} from "../../../../../../common/classes/ModalControl";
+import {UploadProfileImageStrategy} from "../../../../../common/UploadProfileImageStrategy";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {AuthService} from "../../../../../../auth/service/AuthService";
 import {UploadImageModal} from "../../../../../../form/component/UploadImage/index";

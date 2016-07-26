@@ -1,4 +1,5 @@
 import {Component} from "angular2/core";
+
 import {FeedbackCreateModal} from "./component/Modal/FeedbackCreateModal/index";
 import {FeedbackCreateButton} from "./component/Elements/FeedbackCreateButton/index";
 import {FeedbackTypeEntity} from "./definitions/entity/FeedbackType";

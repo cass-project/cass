@@ -1,7 +1,10 @@
 import {Component, Output, EventEmitter} from "angular2/core";
+
 import {PublicService} from "../../../service";
 import {ThemeService} from "../../../../theme/service/ThemeService";
-import {FeedService} from "../../../../feed/service/FeedService/index";
+import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
+import {Criteria} from "../../../../feed/definitions/request/Criteria";
+import {QueryStringCriteriaParams} from "../../../../feed/definitions/request/criteria/QueryStringCriteriaParams";
 
 @Component({
     selector: 'cass-public-search-criteria-query-string',
@@ -13,13 +16,17 @@ import {FeedService} from "../../../../feed/service/FeedService/index";
 export class QueryStringCriteria
 {
     private queryString: string = '';
+    private query: Criteria<QueryStringCriteriaParams>;
 
     @Output('change') changeEvent = new EventEmitter<string>();
 
     constructor(
         private service: PublicService,
-        private themes: ThemeService
-    ) {}
+        private themes: ThemeService,
+        private criteria: FeedCriteriaService
+    ) {
+        this.query = criteria.criteria.query;
+    }
 
     submit() {
         this.updateCriteria();
@@ -30,22 +37,12 @@ export class QueryStringCriteria
     }
 
     updateCriteria() {
-        if(this.isCriteriaAvailable()) {
-            if(this.service.criteria.has('query_string')) {
-                this.service.criteria.doWith('query_string', criteria => {
-                    criteria.params.query_string = this.queryString;
-                });
-            }else{
-                this.service.criteria.attach({
-                    code: 'query_string',
-                    params: {
-                        query: this.queryString
-                    }
-                });
-            }
+        this.query.enabled = this.isCriteriaAvailable();
+
+        if(this.query.enabled) {
+            this.query.params.query = this.queryString;
+            this.service.update();
         }
-        
-        this.service.update();
     }
 
     isSearchButtonDisabled() {
@@ -53,20 +50,20 @@ export class QueryStringCriteria
     }
 
     isThemeCriteriaAvailable(): boolean {
-        return this.service.criteria.has('theme_id')
-            && Number(this.service.criteria.getByCode('theme_id').params.id) > 0;
+        return this.criteria.criteria.theme.enabled
+            && Number(this.criteria.criteria.theme.params.id) > 0;
     }
 
     getThemeTitle(): string {
         if(this.isThemeCriteriaAvailable()) {
-            return this.themes.findById(Number(this.service.criteria.getByCode('theme_id').params.id)).title;
+            return this.themes.findById(Number(this.criteria.criteria.theme.params.id)).title;
         }else{
             throw 'Theme is not available!';
         }
     }
 
     removeThemeCriteria() {
-        this.service.criteria.detachByCode('theme_id');
+        this.criteria.criteria.theme.enabled = false;
         this.service.update();
     }
 }

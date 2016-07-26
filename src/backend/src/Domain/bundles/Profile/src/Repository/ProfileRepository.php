@@ -74,4 +74,11 @@ class ProfileRepository extends EntityRepository
 
         return $result;
     }
+
+    public function loadProfilesByIds(array $profileIds)
+    {
+        $this->findBy([
+            'id' => $profileIds
+        ]);
+    }
 }

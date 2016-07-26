@@ -1,16 +1,16 @@
 import {Component, Input, ViewChild, ElementRef, EventEmitter, Output} from "angular2/core";
 
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
-import {CurrentProfileService} from "../../../../profile/service/CurrentProfileService";
 import {CollectionEntity} from "../../../../collection/definitions/entity/collection";
 import {PostRESTService} from "../../../service/PostRESTService";
-import {CreatePostRequest} from "../../../definitions/paths/create";
 import {PostTypeEntity} from "../../../definitions/entity/PostType";
 import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
-import {PostAttachmentEntity} from "../../../../post-attachment/definitions/entity/PostAttachment";
 import {PostFormLinkInput} from "../PostFormLinkInputComponent/index";
 import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
 import {PostEntity} from "../../../definitions/entity/Post";
+import {Session} from "../../../../session/Session";
+import {LoadingManager} from "../../../../common/classes/LoadingStatus";
+import {PostFormModel} from "./model";
 
 @Component({
     selector: 'cass-post-form',
@@ -35,13 +35,13 @@ export class PostForm
 
     @ViewChild('contentTextArea') contentTextArea: ElementRef;
 
-    private status: LoadingStatus[] = [];
+    private status: LoadingManager = new LoadingManager();
     private model: PostFormModel;
     private focused: boolean = false;
     private linkRequested: boolean = false;
 
     constructor(
-        private profile: CurrentProfileService,
+        private session: Session,
         private service: PostRESTService,
         private attachments: PostAttachmentRESTService
     ) {}
@@ -49,7 +49,7 @@ export class PostForm
     ngOnInit() {
         this.model = new PostFormModel(
             this.postType.int,
-            this.profile.get().getId(),
+            this.session.getCurrentProfile().getId(),
             this.collection.id
         );
     }
@@ -59,9 +59,7 @@ export class PostForm
 
         if(files.length > 0) {
             let file = files[0];
-            let status = new LoadingStatus();
-
-            this.status.push(status);
+            let status = this.status.addLoading();
             
             this.attachments.upload(file).subscribe(
                 (response) => {
@@ -69,19 +67,17 @@ export class PostForm
                     this.contentTextArea.nativeElement.focus();
                     this.focused = true;
 
-                    status.loading = false;
+                    status.is = false;
                 },
                 (error) => {
-                    status.loading = false;
+                    status.is = false;
                 }
             );
         }
     }
 
     isLoading(): boolean {
-        return this.status.filter((input: LoadingStatus) => {
-            return input.loading === true;
-        }).length > 0;
+        return this.status.isLoading();
     }
 
     isExtended(): boolean {
@@ -113,17 +109,16 @@ export class PostForm
     }
 
     submit() {
-        var status = new LoadingStatus();
-
-        this.status.push(status);
+        var status = this.status.addLoading();
+        
         this.service.createPost(this.model.createRequest()).subscribe(
             (response) => {
-                status.loading = false;
+                status.is = false;
                 this.successEvent.emit(response.entity);
                 this.reset();
             },
             (error) => {
-                status.loading = false;
+                status.is = false;
             }
         )
     }
@@ -147,74 +142,4 @@ export class PostForm
             this.cancel();
         }
     }
-}
-
-class PostFormModel
-{
-    public content: string = '';
-    public attachments: PostAttachmentEntity<any>[] = [];
-
-    constructor(
-        public postType: number,
-        public profileId: number,
-        public collectionId: number
-    ) {}
-
-    createRequest(): CreatePostRequest {
-        // ...
-        return {
-            post_type: this.postType,
-            profile_id: this.profileId,
-            collection_id: this.collectionId,
-            content: this.content,
-            attachments: this.attachments.map((attachment) => {
-                return attachment.id;
-            }),
-        }
-    }
-
-    reset() {
-        this.content = '';
-        this.deleteAttachments();
-    }
-
-    isEmpty(): boolean {
-        let testHasContent = this.content.length > 0;
-        let testHasAttachments = this.attachments.length > 0;
-
-        return ! (testHasContent || testHasAttachments);
-    }
-
-    isValid(): boolean {
-        return ! this.isEmpty();
-    }
-
-    hasAttachments(): boolean
-    {
-        return this.attachments.length > 0;
-    }
-
-    getAllAttachments(): PostAttachmentEntity<any>[]
-    {
-        return this.attachments;
-    }
-
-    getAttachment(): PostAttachmentEntity<any>
-    {
-        return this.attachments[0];
-    }
-    
-    addAttachment(attachment: PostAttachmentEntity<any>) {
-        this.attachments = [];
-        this.attachments.push(attachment);
-    }
-    
-    deleteAttachments() {
-        this.attachments = [];
-    }
-}
-
-class LoadingStatus
-{
-    public loading: boolean = true;
 }

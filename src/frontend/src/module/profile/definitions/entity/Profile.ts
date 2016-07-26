@@ -36,6 +36,10 @@ export interface ProfileEntity {
     disabled: ProfileDisabledEntity;
 }
 
+export interface ProfileIndexedEntity extends ProfileEntity {
+    _id: string;
+}
+
 export interface ProfileGreetingsEntity {
     method: string;
     greetings: string;
@@ -64,13 +68,14 @@ export interface ProfileDisabledEntity {
 export class Profile {
     static AVATAR_DEFAULT = '/dist/assets/profile-default.png';
 
-    constructor(public owner: Account, public entity: ProfileExtendedEntity) {}
+    constructor(public owner: Account, public entity: ProfileExtendedEntity) {
+    }
 
     getId(): number {
         return this.entity.profile.id
     }
 
-    changeGreetings(greetings){
+    changeGreetings(greetings) {
         this.entity.profile.greetings = JSON.parse(JSON.stringify(greetings));
     }
 

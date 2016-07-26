@@ -1,39 +1,34 @@
 import {Injectable} from "angular2/core";
-
-import {Source} from "./source";
-import {CriteriaManager} from "./criteria";
-import {Stream} from "./stream";
 import {Subscription} from "rxjs/Subscription";
 
+import {Source} from "./source";
+import {Stream} from "./stream";
+import {LoadingManager} from "../../../common/classes/LoadingStatus";
+import {FeedRequest} from "../../definitions/request/FeedRequest";
+import {FeedCriteriaService} from "../FeedCriteriaService";
+import {FeedOptionsService} from "../FeedOptionsService";
+import {AppService} from "../../../../app/frontend-app/service";
+import {FeedEntity} from "./entity";
+
 @Injectable()
-export class FeedService<T>
+export class FeedService<T extends FeedEntity>
 {
     static DEFAULT_PAGE_SIZE = 30;
 
-    private status: LoadingStatus[] = [];
+    private postHelperIndex: number;
+    public shouldLoad: boolean = true;
+
+    private status: LoadingManager = new LoadingManager();
     private subscription: Subscription;
 
-    public source: Source;
-    public criteria: CriteriaManager;
     public stream: Stream<T>;
-
-    constructor() {
-        this.criteria = new CriteriaManager();
-        this.criteria.attach({
-            code: 'sort',
-            params: {
-                'field': '_id',
-                'order': 'desc'
-            }
-        });
-
-        this.criteria.attach({
-            code: 'seek',
-            params: {
-                'limit': FeedService.DEFAULT_PAGE_SIZE
-            }
-        });
-    }
+    public source: Source;
+    
+    constructor(
+        private criteria: FeedCriteriaService,
+        private options: FeedOptionsService,
+        private appService: AppService
+    ) {}
 
     public provide(source: Source, stream: Stream<T>) {
         this.source = source;
@@ -41,27 +36,45 @@ export class FeedService<T>
     }
 
     public isLoading(): boolean {
-        return this.status.filter(input => input.is).length > 0;
+        return this.status.isLoading();
     }
 
     isNothingFound(): boolean {
         return !this.isLoading() && (this.stream.size() === 0);
     }
 
-    public update() {
-        let status = { is: true };
+    private createFeedRequest(): FeedRequest {
+        return {
+            criteria: this.criteria.createFeedCriteriaRequest()
+        };
+    };
 
-        this.status = [];
-        this.status.push(status);
+    public update() {
         this.stream.empty();
+        delete this.criteria.criteria.seek.params.last_id;
+
+        let limit = this.criteria.criteria.seek.params.limit - 1;
+        let status = this.status.addLoading();
 
         if(this.subscription) {
             this.subscription.unsubscribe();
         }
-        
-        this.subscription = this.source.fetch(this.criteria.createFeedRequest()).subscribe(
+
+        this.subscription = this.source.fetch(this.createFeedRequest()).subscribe(
             (response) => {
+                if(response.entities.length > limit){
+                    response.entities.splice(limit, 1);
+                    this.shouldLoad = true;
+                } else {
+                    this.shouldLoad = false;
+                }
+
                 this.stream.replace(<any>response.entities);
+                if(response.entities.length > 1){
+                    this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
+                    this.postHelperIndex = this.stream.all().length - 1;
+                }
+
                 status.is = false;
             },
             (error) => {
@@ -71,12 +84,29 @@ export class FeedService<T>
     }
 
     public next() {
-        let status = { is: true };
+        let status = this.status.addLoading();
+        let limit = this.criteria.criteria.seek.params.limit - 1;
 
-        this.status.push(status);
-        this.source.fetch(this.criteria.createFeedRequest()).subscribe(
+        if(this.subscription) {
+            this.subscription.unsubscribe();
+        }
+
+        this.subscription = this.source.fetch(this.createFeedRequest()).subscribe(
             (response) => {
+                if(response.entities.length > limit){
+                    response.entities.splice(limit, 1);
+                    this.shouldLoad = true;
+                } else {
+                    this.shouldLoad = false;
+                }
+
                 this.stream.push(<any>response.entities);
+
+                if(response.entities.length > 1) {
+                    this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
+                    this.postHelperIndex = this.stream.all().length - 1;
+                }
+
                 status.is = false;
             },
             (error) => {
@@ -84,9 +114,4 @@ export class FeedService<T>
             }
         )
     }
-}
-
-interface LoadingStatus
-{
-    is: boolean;
 }

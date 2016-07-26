@@ -7,6 +7,8 @@ import {CommunityRouteService} from "./service";
 import {CommunityDashboardRoute} from "../CommunityDashboardRoute/index";
 import {CommunityHeader} from "../../component/Elements/CommunityHeader/index";
 import {AuthService} from "../../../auth/service/AuthService";
+import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
+import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 
 @Component({
     template: require('./template.jade'),
@@ -20,6 +22,8 @@ import {AuthService} from "../../../auth/service/AuthService";
     ],
     providers: [
         CommunityRouteService,
+        FeedCriteriaService,
+        FeedOptionsService,
     ]
 })
 @RouteConfig([

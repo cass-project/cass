@@ -1,6 +1,6 @@
 import {Component} from "angular2/core";
 
-import {Router, ROUTER_DIRECTIVES} from "angular2/router";
+import {ROUTER_DIRECTIVES} from "angular2/router";
 import {PublicService} from "../../../service";
 
 @Component({
@@ -15,7 +15,7 @@ import {PublicService} from "../../../service";
 })
 export class SourceSelector
 {
-    constructor(private router: Router, private catalog: PublicService) {}
+    constructor(private catalog: PublicService) {}
 
     isOn(source: string) {
         return this.catalog.source === source;

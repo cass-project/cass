@@ -124,6 +124,10 @@ final class FakeFixture
             $collectionItem = $account->getCurrentProfile()->getCollections()->getItems()[0];
             $collection = $this->collectionService->getCollectionById($collectionItem->getCollectionId());
 
+            $profile = $account->getCurrentProfile();
+            $profile->setInterestingInIds(array_merge($profile->getInterestingInIds(),[$jsonPost['category_id']]));
+            $this->profileService->saveProfile($profile);
+
             $post = $this->createPost($account->getCurrentProfile(), $collection, $jsonPost);
         }, $posts);
     }
@@ -394,6 +398,9 @@ final class FakeFixture
             $video['id']          = $videoIdx;
             $video['typeId']      = 2;
             $video['description'] = $video['name'];
+
+            $profile->setInterestingInIds(array_merge($profile->getInterestingInIds(),[$video['category_id']]));
+            $this->profileService->saveProfile($profile);
 
             $post = $this->createPost($account->getCurrentProfile(), $collection, $video);
 

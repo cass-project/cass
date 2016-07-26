@@ -13,6 +13,9 @@ import {ExpertsRoute} from "./route/ExpertsRoute/index";
 import {ProfilesRoute} from "./route/ProfilesRoute/index";
 import {OptionView} from "./component/Options/ViewOption/index";
 import {ContentTypeCriteria} from "./component/Criteria/ContentTypeCriteria/index";
+import {FeedCriteriaService} from "../feed/service/FeedCriteriaService";
+import {FeedOptionsService} from "../feed/service/FeedOptionsService";
+import {AppService} from "../../app/frontend-app/service";
 
 @Component({
     selector: 'cass-public',
@@ -22,6 +25,8 @@ import {ContentTypeCriteria} from "./component/Criteria/ContentTypeCriteria/inde
     ],
     providers: [
         PublicService,
+        FeedCriteriaService,
+        FeedOptionsService,
     ],
     directives: [
         ROUTER_DIRECTIVES,
@@ -63,12 +68,16 @@ import {ContentTypeCriteria} from "./component/Criteria/ContentTypeCriteria/inde
 ])
 export class PublicComponent
 {
-    constructor(private service: PublicService) {}
+    constructor(private service: PublicService,
+                private appService: AppService) {}
+    
+    onScroll($event){
+        this.appService.onScroll($event)
+    }
     
     isPostCriteriaAvailable() {
         return ~[
             "content",
-            "",
         ].indexOf(this.service.source);
     }
 }

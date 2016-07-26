@@ -5,6 +5,7 @@ import {CommunityImage} from "../CommunityImage/index";
 import {PostCard} from "../../../../post/component/Forms/PostCard/index";
 import {CommunityEntity} from "../../../definitions/entity/Community";
 import {ThemeService} from "../../../../theme/service/ThemeService";
+import {Router} from "angular2/router";
 
 @Component({
     selector: 'cass-community-card',
@@ -20,16 +21,12 @@ import {ThemeService} from "../../../../theme/service/ThemeService";
 export class CommunityCard
 {
     @Input('community') entity: CommunityEntity;
-    @Output('click') clickEvent = new EventEmitter<number>();
 
-    constructor(private themeService: ThemeService) {}
+    constructor(private themeService: ThemeService,
+                private router: Router) {}
     
     getTheme(){
        return this.themeService.findById(this.entity.theme.id);
-    }
-    
-    click() {
-        this.clickEvent.emit(this.entity.id);
     }
 
     getCommunityTitle(): string {
@@ -46,5 +43,9 @@ export class CommunityCard
 
     hasTheme() {
         return this.entity.theme.has;
+    }
+
+    goCommunity() {
+        this.router.navigate(['/Community', 'Community', { 'sid': this.entity.sid }]);
     }
 }

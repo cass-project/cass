@@ -3,6 +3,9 @@ import {Component} from "angular2/core";
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {Theme} from "../../../../theme/definitions/entity/Theme";
 import {PublicService} from "../../../service";
+import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
+import {Criteria} from "../../../../feed/definitions/request/Criteria";
+import {ThemeIdCriteriaParams} from "../../../../feed/definitions/request/criteria/ThemeIdCriteriaParams";
 
 @Component({
     selector: 'cass-public-search-criteria-theme',
@@ -15,12 +18,15 @@ export class ThemeCriteria
 {
     private root: Theme;
     private history: Theme[] = [];
+    private criteria: Criteria<ThemeIdCriteriaParams>;
 
     constructor(
         private service: PublicService,
-        private themes: ThemeService
+        private themes: ThemeService,
+        private criteria: FeedCriteriaService
     ) {
         this.root = themes.getRoot();
+        this.criteria = criteria.criteria.theme;
     }
 
     getTitle() {
@@ -32,7 +38,7 @@ export class ThemeCriteria
     }
 
     getRoot(): Theme {
-        if(! this.service.criteria.has('theme_id')) {
+        if(! this.criteria.enabled) {
             this.reset();
         }
 
@@ -59,18 +65,8 @@ export class ThemeCriteria
     }
 
     selectRoot(root: Theme) {
-        if(this.service.criteria.has('theme_id')) {
-            this.service.criteria.doWith('theme_id', criteria => {
-                criteria.params['id'] = root.id;
-            });
-        }else{
-            this.service.criteria.attach({
-                code: 'theme_id',
-                params: {
-                    'id': root.id
-                }
-            });
-        }
+        this.criteria.enabled = true;
+        this.criteria.params.id = root.id;
 
         if(root.children.length > 0) {
             this.root = root;

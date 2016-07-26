@@ -1,5 +1,8 @@
 import {Component} from "angular2/core";
-import {Criteria} from "../../../../feed/service/FeedService/criteria";
+
+import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
+import {Criteria} from "../../../../feed/definitions/request/Criteria";
+import {ContentTypeCriteriaParams, ContentType} from "../../../../feed/definitions/request/criteria/ContentTypeCriteriaParams";
 import {PublicService} from "../../../service";
 
 @Component({
@@ -11,40 +14,36 @@ import {PublicService} from "../../../service";
 })
 export class ContentTypeCriteria
 {
-    private contentType: string;
+    private criteria: Criteria<ContentTypeCriteriaParams>;
 
-    constructor(private service: PublicService) {}
+    constructor(
+        private criteria: FeedCriteriaService,
+        private service: PublicService
+    ) {
+        this.criteria = criteria.criteria.contentType;
+    }
 
-    setContentType(contentType: string) {
-        this.contentType = contentType;
+    ngOnDestroy() {
+        this.criteria.enabled = false;
+    }
 
-        if(this.service.criteria.has('content_type')) {
-            this.service.criteria.doWith('content_type', (criteria: Criteria<any>) => {
-                criteria.params.type = this.contentType;
-            });
-        }else{
-            this.service.criteria.attach({
-                code: 'content_type',
-                params: {
-                    type: this.contentType
-                }
-            })
-        }
-
+    setContentType(contentType: ContentType) {
+        this.criteria.enabled = true;
+        this.criteria.params.type = contentType;
         this.service.update();
     }
 
     reset() {
-        this.contentType = null;
-        this.service.criteria.detachByCode('conttent_type');
+        this.criteria.enabled = false;
+        this.criteria.params.type = undefined;
         this.service.update();
     }
 
-    is(contentType: string) {
-        return this.contentType === contentType;
+    is(contentType: ContentType) {
+        return this.criteria.enabled && (this.criteria.params.type === contentType);
     }
 
     isEnabled() {
-        return !!this.contentType;
+        return this.criteria.enabled && this.criteria.params.type !== undefined;
     }
 }

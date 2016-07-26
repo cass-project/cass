@@ -1,5 +1,10 @@
-import {Component, Output, EventEmitter} from "angular2/core";
-import {PublicService} from "../../../service";
+import {Component} from "angular2/core";
+
+import {ViewOption, ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
+import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
+import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
+import {Criteria} from "../../../../feed/definitions/request/Criteria";
+import {ContentTypeCriteriaParams, ContentType} from "../../../../feed/definitions/request/criteria/ContentTypeCriteriaParams";
 
 @Component({
     selector: 'cass-public-option-view',
@@ -10,13 +15,30 @@ import {PublicService} from "../../../service";
 })
 export class OptionView
 {
-    constructor(private service: PublicService) {}
+    private option: ViewOption;
+    private contentType: Criteria<ContentTypeCriteriaParams>;
+
+    constructor(
+        private options: FeedOptionsService,
+        private criteria: FeedCriteriaService
+    ) {
+        this.option = options.view;
+        this.contentType = criteria.criteria.contentType;
+    }
+    
+    current() {
+        return this.option.current;
+    }
+    
+    isOn(compare: ViewOptionValue) {
+        return this.option.isOn(compare);
+    }
+    
+    setAsCurrent(value: ViewOptionValue) {
+        this.option.setAsCurrent(value);
+    }
 
     isVideoPlayerAvailable(): boolean {
-        if(this.service.criteria.has('content_type')) {
-            return this.service.criteria.getByCode('content_type').params.type === 'video';
-        }else{
-            return false;
-        }
+        return this.contentType.params.type === ContentType.Video;
     }
 }

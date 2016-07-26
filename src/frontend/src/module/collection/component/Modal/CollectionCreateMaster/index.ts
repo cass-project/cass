@@ -5,7 +5,7 @@ import {ThemeSelect} from "../../../../theme/component/ThemeSelect/index";
 import {CollectionRESTService} from "../../../service/CollectionRESTService";
 import {CollectionEntity, Collection} from "../../../definitions/entity/collection";
 import {ModalBoxComponent} from "../../../../modal/component/box/index";
-import {ScreenControls} from "../../../../util/classes/ScreenControls";
+import {ScreenControls} from "../../../../common/classes/ScreenControls";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
 import {CurrentProfileService} from "../../../../profile/service/CurrentProfileService";

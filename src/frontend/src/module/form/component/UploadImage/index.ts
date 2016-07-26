@@ -2,7 +2,7 @@ import {Component} from "angular2/core";
 import {Output, Input} from "angular2/core";
 import {EventEmitter} from "angular2/core";
 import {ModalComponent} from "../../../modal/component/index";
-import {ScreenControls} from "../../../util/classes/ScreenControls";
+import {ScreenControls} from "../../../common/classes/ScreenControls";
 import {UploadImageService} from "./service";
 import {UploadImageCropModel} from "./strategy";
 import {ModalBoxComponent} from "../../../modal/component/box/index";

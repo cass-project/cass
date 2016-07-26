@@ -2,6 +2,8 @@ article.component.component-feed-community-stream
   div(*ngIf="hasStream()")
     .entities
       .community-card-container(*ngFor="#community of feed.stream.all()")
-        cass-community-card([community]="community")
+        cass-community-card([community]="community", [view-option]="getViewOption()")
       .loading-indicator
         cass-loading-indicator(*ngIf="feed.isLoading()")
+  div(*ngIf="!feed.isLoading()")
+    cass-feed-scroll-detector

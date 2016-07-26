@@ -8,6 +8,7 @@ use Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
 use Domain\Feed\Search\Criteria\CriteriaManager;
 use Domain\Feed\Search\Stream\Stream;
 use Domain\Profile\Entity\Profile;
+use Domain\Profile\Exception\ProfileNotFoundException;
 use Domain\Profile\Service\ProfileService;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
@@ -74,13 +75,21 @@ final class ProfileStream extends Stream
         $cursor = $collection->find($filter, $options)->toArray();
 
         if(count($cursor)) {
-            $profileEntities = $this->profileService->getProfilesByIds(array_map(function(BSONDocument $document) {
+            $this->profileService->loadProfilesByIds(array_map(function(BSONDocument $document) {
                 return (int) $document['id'];
             }, $cursor));
 
-            return array_map(function(Profile $profile) {
-                return $profile->toJSON();
-            }, $profileEntities);
+            return $this->cleanResults(array_map(function(BSONDocument $document) {
+                try {
+                    $profile = $this->profileService->getProfileById((int) $document['id']);
+
+                    return array_merge([
+                        '_id' => (string) $document['_id']
+                    ], $profile->toJSON());
+                }catch(ProfileNotFoundException $e) {
+                    return null;
+                }
+            }, $cursor));
         }else{
             return [];
         }

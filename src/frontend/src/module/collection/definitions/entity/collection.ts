@@ -17,6 +17,11 @@ export interface CollectionEntity
     children?: CollectionEntity[];
 }
 
+export interface CollectionIndexEntity extends CollectionEntity
+{
+    _id: string;
+}
+
 export interface CollectionOwnerEntity
 {
     id: string;

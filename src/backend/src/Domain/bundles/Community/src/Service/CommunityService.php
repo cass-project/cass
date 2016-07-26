@@ -182,6 +182,20 @@ class CommunityService implements EventEmitterAwareService
 
         return $community->getCollections();
     }
+    
+    public function getCommunitiesByIds(array $communityIds): array
+    {
+        $this->communityRepository->loadCommunitiesByIds($communityIds);
+
+        return array_map(function(int $communityId) {
+            return $this->getCommunityById($communityId);
+        }, $communityIds);
+    }
+
+    public function loadCommunitiesByIds(array $communityIds)
+    {
+        $this->communityRepository->loadCommunitiesByIds($communityIds);
+    }
 
     public function getCommunityById(string $communityId): Community {
         return $this->communityRepository->getCommunityById($communityId);

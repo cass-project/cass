@@ -1,6 +1,7 @@
 <?php
 namespace Domain\Feed\Search\Stream\Streams;
 
+use Domain\Collection\Exception\CollectionNotFoundException;
 use Domain\Collection\Service\CollectionService;
 use Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
 use Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
@@ -76,8 +77,14 @@ final class CollectionStream extends Stream
             return (int) $document['id'];
         }, $result));
 
-        return array_map(function(BSONDocument $document) {
-            return $this->collectionService->getCollectionById((int) $document['id'])->toJSON();
-        }, $result);
+        return $this->cleanResults(array_map(function(BSONDocument $document) {
+            try {
+                return array_merge([
+                    '_id' => (string) $document['_id']
+                ], $this->collectionService->getCollectionById((int) $document['id'])->toJSON());
+            }catch(CollectionNotFoundException $e) {
+                return null;
+            }
+        }, $result));
     }
 }
