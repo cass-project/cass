@@ -15,50 +15,50 @@ class RoutesSetupScript implements AppInitScript
             return $bundle->getConfigDir();
         }, $bundleService->getBundles());
 
-        $definitions = [];
+        $definitions = $this->getDefinitions($configDirs );
 
 
+        uksort($definitions,function($a,$b){
+
+        });
+
+        print_r($definitions);
+        die();
 
 
     }
 
     private function setupRoutes(Application $app, string $configDir, string $routeFile) {
-        $routeConfigFile = sprintf('%s/%s', $configDir, $routeFile);
 
-        if(file_exists($routeConfigFile)) {
-            $callback = require $routeConfigFile;
 
-            if(!is_callable($callback)) {
-                throw new \Exception(sprintf('Config `%s` should returns a Callable with Application argument', $routeConfigFile));
-            }
-
-            $callback($app);
-        }
     }
 
     private function getDefinitions( array $configDirs) : array {
 
         $definitions = [];
         foreach($configDirs as $configDir) {
-            $this->setupRoutes($app, $configDir, 'routes.before.php');
-            $this->setupRoutes($app, $configDir, 'routes.php');
-            $this->setupRoutes($app, $configDir, 'routes.after.php');
-        }
-
-        foreach($configDirs as $configDir) {
             $routeConfigFile = sprintf('%s/%s', $configDir, 'routes.before.php');
             if(file_exists($routeConfigFile)) {
-                $definitions[] = array_merge_recursive($definitions, require $routeConfigFile)   ;
+                $routes = require $routeConfigFile;
+                if(is_array($routes)){
+                    $definitions = array_merge_recursive($definitions, $routes);
+                }
             }
 
             $routeConfigFile = sprintf('%s/%s', $configDir, 'routes.php');
             if(file_exists($routeConfigFile)) {
-                $definitions[] = array_merge_recursive($definitions, require $routeConfigFile)   ;
+                $routes = require $routeConfigFile;
+                if(is_array($routes)){
+                    $definitions = array_merge_recursive($definitions, $routes);
+                }
             }
 
             $routeConfigFile = sprintf('%s/%s', $configDir, 'routes.after.php');
             if(file_exists($routeConfigFile)) {
-                $definitions[] = array_merge_recursive($definitions, require $routeConfigFile)   ;
+                $routes = require $routeConfigFile;
+                if(is_array($routes)){
+                    $definitions = array_merge_recursive($definitions, $routes);
+                }
             }
         }
 
