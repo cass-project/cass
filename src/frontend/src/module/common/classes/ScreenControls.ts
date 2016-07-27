@@ -29,7 +29,7 @@ export class ScreenControls<T>
         if(this.map.hasOwnProperty(<any>this.current)) {
             for(let key in this.map){
                 if(this.current === this.map[key]){
-                    this.current = key;
+                    this.current = <any>key;
                 }
             }
         }

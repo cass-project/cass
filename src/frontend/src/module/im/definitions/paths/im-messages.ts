@@ -1,25 +1,29 @@
 import {Success200} from "../../../common/definitions/common";
-import {IMMessageSource} from "../entity/IMMessageSource";
+import {IMMessageSourceEntity, IMMessageSourceEntityType} from "../entity/IMMessageSource";
 import {IMMessageEntity} from "../entity/IMMessage";
 
-export interface IMMessagesRequest
+export interface IMMessagesBodyRequest
 {
     criteria: {
         seek: {
-            offset: number;
-            limit: number;
+            offset?: number,
+            limit?: number
         },
         cursor?: {
-            id: string;
+            id: string
+        },
+        sort?: {
+            field: string,
+            order: string
         }
-    };
-    options: {
-        markAsRead?: number[];
-    };
+    },
+    options?: {
+        markAsRead?: number[]
+    }
 }
 
-export interface IMMessagesResponse200<T> extends Success200
+export interface IMMessagesResponse200 extends Success200
 {
-    source: IMMessageSource<T>;
-    messages: IMMessageEntity[];
+    source: IMMessageSourceEntity<IMMessageSourceEntityType>,
+    messages: IMMessageEntity[]
 }

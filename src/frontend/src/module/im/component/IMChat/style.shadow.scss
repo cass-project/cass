@@ -1,9 +1,7 @@
-@import "./../../../../../styles/globals";
+@import "./../../../../styles/globals";
 $AVATAR-SIZE: 32px;
 
 ul.chatlog {
-  padding-bottom:116px;
-
   li{
     overflow: hidden;
     border-bottom: 1px material-color("grey", "300") solid;
@@ -17,7 +15,7 @@ ul.chatlog {
     }
 
     &.processing {
-      opacity: 0.1;
+      opacity: 0.91;
     }
     
     &.complete,
