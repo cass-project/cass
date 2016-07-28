@@ -7,6 +7,7 @@ import {CommunityRouteService} from "../../../route/CommunityRoute/service";
 import {CommunityModals} from "../../../modals";
 import {CommunityRouteService} from "../../../route/CommunityRoute/service";
 import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
+import {CommunityModalService} from "../../../service/CommunityModalService";
 
 @Component({
     selector: 'cass-community-header',
@@ -26,7 +27,9 @@ export class CommunityHeader
 
     @Input('community') entity: CommunityExtendedEntity;
 
-    constructor(private modals: CommunityModals, private service: CommunityRouteService) {}
+    constructor(
+        private modalsService:CommunityModalService,
+        private modals: CommunityModals, private service: CommunityRouteService) {}
     
     getCommunityTitle(): string {
         return this.entity.community.title;

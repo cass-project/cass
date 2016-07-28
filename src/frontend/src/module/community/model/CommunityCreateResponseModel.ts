@@ -1,10 +1,12 @@
 import {CommunityEntity} from "../definitions/entity/Community";
+import {CollectionEntity} from "../../collection/definitions/entity/collection";
 
 export class CommunityCreateResponseModel {
-    access: {
-        admin: boolean
+    entity: {
+        community: CommunityEntity,
+        collections: CollectionEntity,
+        is_own: boolean
     };
-    entity: CommunityEntity;
     success: boolean;
 }
 

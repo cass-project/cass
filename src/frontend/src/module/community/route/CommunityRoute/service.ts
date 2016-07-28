@@ -5,6 +5,7 @@ import {CommunityExtendedEntity} from "../../definitions/entity/Community";
 import {Response} from "angular2/http";
 import {GetCommunityBySIDResponse200} from "../../definitions/paths/get-by-sid";
 import {CommunityRESTService} from "../../service/CommunityRESTService";
+import {CommunitySettingsModalModel} from "../../component/Modal/CommunitySettingsModal/model";
 
 @Injectable()
 export class  CommunityRouteService
@@ -16,7 +17,8 @@ export class  CommunityRouteService
     private observable: Observable<Response>;
 
     constructor(
-        private api: CommunityRESTService
+        private api: CommunityRESTService,
+        private model: CommunitySettingsModalModel
     ) {}
 
     public getCommunity(): CommunityExtendedEntity {
@@ -45,6 +47,7 @@ export class  CommunityRouteService
 
     public loadCommunityBySID(sid: string) {
         this.request = sid;
+        this.model.sid = sid;
 
         this.loadCommunity(<any>this.api.getCommunityBySid(sid));
     }

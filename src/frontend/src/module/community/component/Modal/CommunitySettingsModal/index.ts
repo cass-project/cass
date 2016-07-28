@@ -55,16 +55,18 @@ export class CommunitySettingsModal
         private cropper: ImageCropperService,
         private featuresService: CommunityFeaturesService
     ) {
+        model.public_options = {public_enabled: false, moderation_contract:false};
+
         service.getBySid(model.sid).subscribe(data => {
-            model.id = data.entity.id;
-            model.title = data.entity.title;
-            model.description = data.entity.description;
-            model.theme_id = data.entity.theme.id;
+            model.id = data.entity.community.id;
+            model.title = data.entity.community.title;
+            model.description = data.entity.community.description;
+            model.theme_id = data.entity.community.theme.has? data.entity.community.theme.id : undefined;
             model.public_options = {
-                moderation_contract: data.entity.public_options.moderation_contract,
-                public_enabled: data.entity.public_options.public_enabled
+                moderation_contract: data.entity.community.public_options.moderation_contract,
+                public_enabled: data.entity.community.public_options.public_enabled
             };
-            model.image = data.entity.image;
+            model.image = data.entity.community.image;
             
             this.model.features = [];
             for(let feature of featuresService.getFeatures()) {

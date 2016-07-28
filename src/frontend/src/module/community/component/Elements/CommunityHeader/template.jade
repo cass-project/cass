@@ -24,6 +24,6 @@ article.component-community-header
             i.fa.fa-fw.fa-bookmark
             span Подборки
         li(*ngIf="isOwnCommunity()")
-          .community-button((click)='modals.settings.open()')
+          .community-button((click)='modalsService.modals.settings.open()')
             i.fa.fa-fw.fa-cog
             span Настройки

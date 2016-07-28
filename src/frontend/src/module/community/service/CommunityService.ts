@@ -3,30 +3,30 @@ import {Response} from "angular2/http";
 import {Observable} from "rxjs/Observable";
 
 import {CommunityRESTService} from "./CommunityRESTService";
-import {CommunityCreateResponseModel} from "../model/CommunityCreateResponseModel";
 import {CommunityEntity} from "../definitions/entity/Community";
 import {CommunityImageUploadRequestModel} from "../model/CommunityImageUploadRequestModel";
 import {CommunityControlFeatureRequestModel} from "../model/CommunityActivateFeatureModel";
 import {CommunityImageDeleteRequest} from "../definitions/paths/image-delete";
 import {SetPublicOptionsCommunityRequest} from "../definitions/paths/set-public-options";
 import {EditCommunityRequest} from "../definitions/paths/edit";
+import {GetCommunityBySIDResponse200} from "../definitions/paths/get-by-sid";
 
 
 @Injectable()
 export class CommunityService {
     public community:CommunityEntity;
-    public communityResponsesCache:CommunityCreateResponseModel[] = [];
+    public communityResponsesCache:GetCommunityBySIDResponse200[] = [];
     public isAdmin:boolean = false;
 
     constructor(private communityRESTService:CommunityRESTService) {}
 
-    public getBySid(sid:string) : Observable<CommunityCreateResponseModel>
+    public getBySid(sid:string) : Observable<GetCommunityBySIDResponse200>
     {
         return Observable.create(observer => {
             if(this.isCached(sid)) {
-                let communityResponse: CommunityCreateResponseModel  = this.getFromCache(sid);
-                this.isAdmin = communityResponse.access.admin;
-                this.community = JSON.parse(JSON.stringify(communityResponse.entity));
+                let communityResponse: GetCommunityBySIDResponse200  = this.getFromCache(sid);
+                this.isAdmin = communityResponse.entity.is_own;
+                this.community = JSON.parse(JSON.stringify(communityResponse.entity.community));
                 observer.next(communityResponse);
                 observer.complete();
             } else {
@@ -58,18 +58,18 @@ export class CommunityService {
     isCached(sid:string)
     {
         return this.communityResponsesCache.filter((input) => {
-            return input.entity.sid === sid;
+            return input.entity.community.sid === sid;
         }).length > 0;
     }
 
-    getFromCache(sid:string) : CommunityCreateResponseModel
+    getFromCache(sid:string) : GetCommunityBySIDResponse200
     {
         if(!this.isCached(sid)) {
             throw new Error(`Community '${sid}' not cached yet.`);
         }
 
         return this.communityResponsesCache.filter(
-            (input) => { return input.entity.sid === sid; }
+            (input) => { return input.entity.community.sid === sid; }
         )[0];
     }
 
