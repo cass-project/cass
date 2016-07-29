@@ -3,6 +3,9 @@ namespace Application\Bootstrap\Scripts\AppInit;
 
 use Application\Bootstrap\Scripts\AppInitScript;
 use Application\Bundle\Bundle;
+use Application\Exception\InvalidRouteDefinition;
+use Application\Exception\UnknownRouteGroupException;
+use Application\Exception\UnknownRouteTypeException;
 use Application\Service\BundleService;
 use Zend\Expressive\Application;
 
@@ -10,9 +13,12 @@ class RoutesSetupScript implements AppInitScript
 {
     /** @var  Application $app */
     private $app;
+    /** @var  array $routesGroup */
+    private $routesGroup;
 
     public function __invoke(Application $app) {
         $this->app = $app;
+        $this->routesGroup = $this->app->getContainer()->get("config.routes_group");
         $bundleService = $app->getContainer()->get(BundleService::class); /** @var BundleService $bundleService */
 
         $configDirs = array_map(function(Bundle $bundle) {
@@ -26,19 +32,21 @@ class RoutesSetupScript implements AppInitScript
 
     private function setupRoutes(array $definitions) {
 
-        array_walk($definitions,function(array $group){
+        foreach($definitions as $groupName => $group){
+
+            if(!in_array($groupName, $this->routesGroup)) throw new UnknownRouteGroupException(sprintf("unknow route group: %s", $groupName));
             foreach($group as $definition){
                 switch($definition['type']){
-                    default: throw new \Exception(sprintf('unknoown type of definition: %s',$definition['type']) );
+                    default: throw new UnknownRouteTypeException(sprintf('unknoown type of definition: %s',$definition['type']) );
                     case 'route':
                         $this->setupRouteFromDefinition($definition);
-                    break;
+                        break;
                     case 'pipe':
                         $this->setupPipeFromDefinition($definition);
-                    break;
+                        break;
                 }
             }
-        });
+        }
     }
 
     private function getDefinitions( array $configDirs) : array {
@@ -59,10 +67,10 @@ class RoutesSetupScript implements AppInitScript
 
     private function sortByGroups(array $definitions):array
     {
-        $routesGroup = $this->app->getContainer()->get("config.routes_group");
+        $routesGroups = $this->routesGroup;
 
-        uksort($definitions,function($a,$b)use($routesGroup){
-            return array_search($a,$routesGroup) > array_search($b, $routesGroup);
+        uksort($definitions,function($a,$b)use($routesGroups){
+            return array_search($a,$routesGroups) > array_search($b, $routesGroups);
         });
 
         return $definitions;
@@ -70,16 +78,16 @@ class RoutesSetupScript implements AppInitScript
 
     private function setupRouteFromDefinition(array $definition){
         if(empty($definition['method'])){
-            throw new \Exception("missing required definition option - method");
+            throw new InvalidRouteDefinition("missing required definition option - method");
         }
         if(empty($definition['url'])){
-            throw new \Exception("missing required definition option - url");
+            throw new InvalidRouteDefinition("missing required definition option - url");
         }
         if(empty($definition['middleware'])){
-            throw new \Exception("missing required definition option - middleware");
+            throw new InvalidRouteDefinition("missing required definition option - middleware");
         }
         if(empty($definition['name'])){
-            throw new \Exception("missing required definition option - name");
+            throw new InvalidRouteDefinition("missing required definition option - name");
         }
 
         $method     = $definition['method'];
