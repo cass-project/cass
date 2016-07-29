@@ -2,36 +2,43 @@
 namespace Domain\Contact;
 
 use Domain\Contact\Middleware\ContactMiddleware;
-use Zend\Expressive\Application;
 
-return function(Application $app) {
-    $app->put(
-        '/protected/profile/{profileId}/contact/{command:create}[/]',
-        ContactMiddleware::class,
-        'contact-create'
-    );
-
-    $app->delete(
-        '/protected/profile/{profileId}/contact/{contactId}/{command:delete}[/]',
-        ContactMiddleware::class,
-        'contact-delete'
-    );
-
-    $app->get(
-        '/protected/profile/{profileId}/contact/{contactId}/{command:get}[/]',
-        ContactMiddleware::class,
-        'contact-get'
-    );
-
-    $app->get(
-        '/protected/profile/{profileId}/contact/{command:list}[/]',
-        ContactMiddleware::class,
-        'contact-list'
-    );
-
-    $app->post(
-        '/protected/profile/{profileId}/contact/{contactId}/{command:set-permanent}[/]',
-        ContactMiddleware::class,
-        'contact-set-permanent'
-    );
-};
+return [
+    'common' => [
+        [
+            'type'       => 'route',
+            'method'     => 'put',
+            'url'        => '/protected/profile/{profileId}/contact/{command:create}[/]',
+            'middleware' => ContactMiddleware::class,
+            'name'       => 'contact-create'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'delete',
+            'url'        => '/protected/profile/{profileId}/contact/{contactId}/{command:delete}[/]',
+            'middleware' => ContactMiddleware::class,
+            'name'       => 'contact-delete'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'get',
+            'url'        => '/protected/profile/{profileId}/contact/{contactId}/{command:get}[/]',
+            'middleware' => ContactMiddleware::class,
+            'name'       => 'contact-get'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'get',
+            'url'        => '/protected/profile/{profileId}/contact/{command:list}[/]',
+            'middleware' => ContactMiddleware::class,
+            'name'       => 'contact-list'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/protected/profile/{profileId}/contact/{contactId}/{command:set-permanent}[/]',
+            'middleware' => ContactMiddleware::class,
+            'name'       => 'contact-set-permanent'
+        ],
+    ]
+];

@@ -4,37 +4,82 @@ namespace Domain\Feed;
 use Domain\Feed\Middleware\FeedMiddleware;
 use Zend\Expressive\Application;
 
-return function(Application $app) {
-    $app->post(
-        '/feed/get/{command:profile}/{profileId}[/]',
-        FeedMiddleware::class,
-        'feed-get-profile'
-    );
+$sources = [
+    '',
+    '',
+    '',
+    '',
+    '',
+    ''
+];
 
-    $app->post(
-        '/feed/get/{command:collection}/{collectionId}[/]',
-        FeedMiddleware::class,
-        'feed-get-collection'
-    );
+return [
+    'common' => [
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/feed/get/{command:profile}/{profileId}[/]',
+            'middleware' => FeedMiddleware::class,
+            'name'       => 'feed-get-profile'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/feed/get/{command:collection}/{collectionId}[/]',
+            'middleware' => FeedMiddleware::class,
+            'name'       => 'feed-get-collection'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/feed/get/{command:community}/{communityId}[/]',
+            'middleware' => FeedMiddleware::class,
+            'name'       => 'feed-get-community'
+        ],
 
-    $app->post(
-        '/feed/get/{command:community}/{communityId}[/]',
-        FeedMiddleware::class,
-        'feed-get-community'
-    );
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/feed/get/{command:public-profiles}[/]',
+            'middleware' => FeedMiddleware::class,
+            'name'       => 'feed-get-public-profiles'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/feed/get/{command:public-experts}[/]',
+            'middleware' => FeedMiddleware::class,
+            'name'       => 'feed-get-public-experts'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/feed/get/{command:public-content}[/]',
+            'middleware' => FeedMiddleware::class,
+            'name'       => 'feed-get-public-content'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/feed/get/{command:public-discussions}[/]',
+            'middleware' => FeedMiddleware::class,
+            'name'       => 'feed-get-public-discussions'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/feed/get/{command:public-communities}[/]',
+            'middleware' => FeedMiddleware::class,
+            'name'       => 'feed-get-public-communities'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/feed/get/{command:public-collections}[/]',
+            'middleware' => FeedMiddleware::class,
+            'name'       => 'feed-get-public-collections'
+        ],
 
-    array_map(function(string $source) use ($app) {
-        $app->post(
-            sprintf('/feed/get/{command:%s}[/]', $source),
-            FeedMiddleware::class,
-            sprintf('feed-get-%s', $source)
-        );
-    }, [
-        'public-profiles',
-        'public-experts',
-        'public-content',
-        'public-discussions',
-        'public-communities',
-        'public-collections'
-    ]);
-};
+    ]
+];
+

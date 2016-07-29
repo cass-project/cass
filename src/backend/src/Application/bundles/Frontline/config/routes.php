@@ -4,6 +4,14 @@ namespace Application\Frontline;
 use Application\Frontline\Middleware\FrontlineMiddleware;
 use Zend\Expressive\Application;
 
-return function (Application $app) {
-    $app->get('/frontline/{tags}[/]', FrontlineMiddleware::class, 'frontline');
-};
+return [
+    'common' => [
+        [
+            'type'       => 'route',
+            'method'     => 'get',
+            'url'        => '/frontline/{tags}[/]',
+            'middleware' => FrontlineMiddleware::class,
+            'name'       => 'frontline'
+        ],
+    ]
+];

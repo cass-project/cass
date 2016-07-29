@@ -2,19 +2,22 @@
 namespace Domain\EmailVerification;
 
 use Domain\EmailVerification\Middleware\EmailVerificationMiddleware;
-use Zend\Expressive\Application;
 
-return function (Application $app)
-{
-    $app->get(
-        '/protected/email-verification/{command:request}/{newEmail}[/]',
-        EmailVerificationMiddleware::class,
-        'email-verification-request'
-    );
-
-    $app->get(
-        '/email-verification/{command: confirm}/{token}[/]',
-        EmailVerificationMiddleware::class,
-        'email-verification-confirm'
-    );
-};
+return [
+    'common' => [
+        [
+            'type'       => 'route',
+            'method'     => 'get',
+            'url'        => '/protected/email-verification/{command:request}/{newEmail}[/]',
+            'middleware' => EmailVerificationMiddleware::class,
+            'name'       => 'email-verification-request'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'get',
+            'url'        => '/email-verification/{command: confirm}/{token}[/]',
+            'middleware' => EmailVerificationMiddleware::class,
+            'name'       => 'email-verification-confirm'
+        ],
+    ]
+];

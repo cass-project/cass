@@ -2,41 +2,50 @@
 namespace Domain\Feedback;
 
 use Domain\Feedback\Middleware\FeedbackMiddleware;
-use Zend\Expressive\Application;
 
-return function(Application $app) {
-    $app->put(
-        '/feedback/{command:create}[/]',
-        FeedbackMiddleware::class,
-        'feedback-create'
-    );
-    $app->put(
-        '/protected/{command:feedback-response}/create[/]',
-        FeedbackMiddleware::class,
-        'feedback-response-create'
-    );
-
-    $app->delete(
-        '/protected/feedback/{feedbackId}/{command:cancel}[/]',
-        FeedbackMiddleware::class,
-        'feedback-delete'
-    );
-
-    $app->get(
-        '/protected/feedback/{feedbackId}/{command:get}[/]',
-        FeedbackMiddleware::class,
-        'feedback-get'
-    );
-
-    $app->get(
-        '/protected/feedback/{command:list}/offset/{offset}/limit/{limit}[/]',
-        FeedbackMiddleware::class,
-        'feedback-list'
-    );
-    
-    $app->post(
-        '/protected/feedback/{feedbackId}/{command:mark-as-read}[/]',
-        FeedbackMiddleware::class,
-        'feedback-mark-as-read'
-    );
-};
+return [
+    'common' => [
+        [
+            'type'       => 'route',
+            'method'     => 'put',
+            'url'        => '/feedback/{command:create}[/]',
+            'middleware' => FeedbackMiddleware::class,
+            'name'       => 'feedback-create'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'put',
+            'url'        => '/protected/{command:feedback-response}/create[/]',
+            'middleware' => FeedbackMiddleware::class,
+            'name'       => 'feedback-response-create'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'delete',
+            'url'        => '/protected/feedback/{feedbackId}/{command:cancel}[/]',
+            'middleware' => FeedbackMiddleware::class,
+            'name'       => 'feedback-delete'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'get',
+            'url'        => '/protected/feedback/{feedbackId}/{command:get}[/]',
+            'middleware' => FeedbackMiddleware::class,
+            'name'       => 'feedback-get'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'get',
+            'url'        => '/protected/feedback/{command:list}/offset/{offset}/limit/{limit}[/]',
+            'middleware' => FeedbackMiddleware::class,
+            'name'       => 'feedback-list'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'get',
+            'url'        => '/protected/feedback/{feedbackId}/{command:mark-as-read}[/]',
+            'middleware' => FeedbackMiddleware::class,
+            'name'       => 'feedback-mark-as-read'
+        ],
+    ]
+];

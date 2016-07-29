@@ -2,30 +2,36 @@
 namespace Domain\Post;
 
 use Domain\Post\Middleware\PostMiddleware;
-use Zend\Expressive\Application;
 
-return function (Application $app) {
-    $app->put(
-        "/protected/post/{command:create}",
-        PostMiddleware::class,
-        'post-create'
-    );
-
-    $app->delete(
-        "/protected/post/{postId}/{command:delete}",
-        PostMiddleware::class,
-        'post-delete'
-    );
-
-    $app->post(
-        "/protected/post/{postId}/{command:edit}",
-        PostMiddleware::class,
-        'post-edit'
-    );
-
-    $app->get(
-        "/post/{postId}/{command:get}",
-        PostMiddleware::class,
-        'post-get'
-    );
-};
+return [
+    'common' => [
+        [
+            'type'       => 'route',
+            'method'     => 'put',
+            'url'        => '/protected/post/{command:create}',
+            'middleware' => PostMiddleware::class,
+            'name'       => 'post-create'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'delete',
+            'url'        => '/protected/post/{postId}/{command:delete}',
+            'middleware' => PostMiddleware::class,
+            'name'       => 'post-delete'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/protected/post/{postId}/{command:edit}',
+            'middleware' => PostMiddleware::class,
+            'name'       => 'post-edit'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'get',
+            'url'        => '/post/{postId}/{command:get}',
+            'middleware' => PostMiddleware::class,
+            'name'       => 'post-get'
+        ],
+    ]
+];

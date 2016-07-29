@@ -2,30 +2,42 @@
 namespace Domain\Auth;
 
 use Domain\Auth\Middleware\AuthMiddleware;
-use Zend\Expressive\Application;
+use Domain\Auth\Middleware\ProtectedMiddleware;
 
-return function(Application $app) {
-    $app->put(
-        '/auth/{command:sign-up}[/]',
-        AuthMiddleware::class,
-        'auth-sign-up'
-    );
-
-    $app->post(
-        '/auth/{command:sign-in}[/]',
-        AuthMiddleware::class,
-        'auth-sign-in'
-    );
-
-    $app->get(
-        '/auth/{command:oauth}/{provider}[/]',
-        AuthMiddleware::class,
-        'auth-oauth'
-    );
-
-    $app->get(
-        '/auth/{command:sign-out}[/]',
-        AuthMiddleware::class,
-        'auth-sign-out'
-    );
-};
+return [
+   'common' => [
+       [
+           'type'       => 'pipe',
+           'url'        => '/auth/{command:sign-up}[/]',
+           'middleware' => ProtectedMiddleware::class,
+       ],
+       [
+           'type'       => 'route',
+           'method'     => 'put',
+           'url'        => '/auth/{command:sign-up}[/]',
+           'middleware' => AuthMiddleware::class,
+           'name'       => 'auth-sign-up'
+       ],
+       [
+           'type'       => 'route',
+           'method'     => 'post',
+           'url'        => '/auth/{command:sign-in}[/]',
+           'middleware' => AuthMiddleware::class,
+           'name'       => 'auth-sign-in'
+       ],
+       [
+           'type'       => 'route',
+           'method'     => 'get',
+           'url'        => '/auth/{command:oauth}/{provider}[/]',
+           'middleware' => AuthMiddleware::class,
+           'name'       => 'auth-oauth'
+       ],
+       [
+           'type'       => 'route',
+           'method'     => 'get',
+           'url'        => '/auth/{command:sign-out}[/]',
+           'middleware' => AuthMiddleware::class,
+           'name'       => 'auth-sign-out'
+       ],
+   ]
+];
