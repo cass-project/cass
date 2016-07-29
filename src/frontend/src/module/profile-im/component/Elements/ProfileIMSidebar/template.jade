@@ -1,34 +1,21 @@
-.profile-im-sidebar
+.profile-im-sidebar([ngClass]="{visible:isVisible}")
   header
-    .cass-padding-box-15
-      h1 Открытые диалоги
+    h1
+      i.mobile-menu.fa.fa-lg.fa-bars(aria-hidden="true",(click)="toggleState()")
+      span Контакты
+
   ul.contact-list
-    li
-      img.avatar(src="/dist/assets/profile-default.png")
+    li(
+      *ngFor="#contact of contacts", 
+      [routerLink]="['Messages', { id: contact.target_profile.id }]"
+    )
+      cass-profile-image.avatar([url]='contact.target_profile.image.variants["64"].public_path')
       i.status
-      .name hck
+      .greetings {{contact.target_profile.greetings.greetings}}
       .last-message заходи) но я не уверен что к этому времени освобожусь
-    li.active
-      img.avatar(src="/dist/assets/profile-default.png")
-      i.status.online
-      .name hck
-      .last-message заходи) но я не уверен что к этому времени освобожусь
-    li
-      img.avatar(src="/dist/assets/profile-default.png")
-      i.status.online
-      .name hck
-      .last-message заходи) но я не уверен что к этому времени освобожусь
-    li
-      img.avatar(src="/dist/assets/profile-default.png")
-      i.status
-      .name hck
-      .last-message заходи) но я не уверен что к этому времени освобожусь
-    li
-      img.avatar(src="/dist/assets/profile-default.png")
-      i.status
-      .name hck
-      .last-message заходи) но я не уверен что к этому времени освобожусь
-  .footer
+        .date {{contact.last_message.date}}
+
+  footer
     .cass-padding-box-15
       input.form-input( type="text", placeholder="Введите имя контакта" )
     

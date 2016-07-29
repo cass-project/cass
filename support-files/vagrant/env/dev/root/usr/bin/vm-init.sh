@@ -121,3 +121,9 @@ echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | 
 sudo apt-get update
 sudo apt-get install -y mongodb-org
 sudo service mongodb restart
+
+# ######
+# XDEBUG
+# ######
+
+sudo pecl install xdebug

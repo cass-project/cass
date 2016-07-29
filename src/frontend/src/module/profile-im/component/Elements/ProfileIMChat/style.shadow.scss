@@ -1,9 +1,10 @@
 @import "./../../../../../styles/globals";
 
 .profile-im-messages {
-  position: relative;
   height:100%;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-left: 300px;
 
   header,
   footer {
@@ -18,15 +19,29 @@
     h1{
       font-size: $FONT_SIZE_LARGE;
       line-height: normal;
-      a {
-        display: inline-block;
+
+      .source {
+        display: flex;
+        align-items:center;
+        justify-content:space-between;
+        color: material-color("blue-grey", "200");
+      }
+      a.source{
         color: material-color("blue-grey", "800");
         text-decoration: none;
         &:hover{
           background: linear-gradient(to right, material-color("grey", "50"), $MATERIAL_BACKGROUND 80%);
         }
+        .last-seen{
+          font-size: $FONT_SIZE_SMALL;
+          color: material-color("blue-grey", "200");
+          display: flex;
+          align-items: center;
+          i.fa{
+            font-size: 0.7em;
+          }
+        }
       }
-      
     }
   }
 
@@ -37,17 +52,18 @@
   }
   
   footer {
-    width:100%;
-    position: absolute;
-    left:0;
-    bottom:0;
-    
     .cass-padding-box-15{
       display: flex;
+      align-items: center;
       
       .profile-im-textarea {
         width:100%
       }
     }
  }
+
+  @include isMobile() {
+    margin-left: 65px;
+  }
+  
 }
