@@ -8,8 +8,6 @@ export class AppService {
     
     public scrollObservable: Observable<ContainerScrollEvent>;
     private scrollObserver: Observer<ContainerScrollEvent>;
-
-    content: ElementRef;
     
     constructor(){
         this.scrollObservable = Observable.create(observer => {

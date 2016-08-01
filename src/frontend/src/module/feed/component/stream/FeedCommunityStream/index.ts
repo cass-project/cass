@@ -6,6 +6,7 @@ import {CommunityCard} from "../../../../community/component/Elements/CommunityC
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
 import {FeedScrollDetector} from "../../FeedScrollDetector/index";
 import {CommunityIndexedEntity} from "../../../../community/definitions/entity/Community";
+import {AppService} from "../../../../../app/frontend-app/service";
 
 @Component({
     selector: 'cass-feed-community-stream',
@@ -23,7 +24,8 @@ export class FeedCommunityStream
 {
     constructor(
         private feed: FeedService<CommunityIndexedEntity>,
-        private options: FeedOptionsService
+        private options: FeedOptionsService,
+        private appService: AppService
     ) {}
 
     getViewOption() {
@@ -31,6 +33,9 @@ export class FeedCommunityStream
     }
 
     hasStream() {
+        if(!this.feed.isLoading()){
+            this.appService.onScroll(true);
+        }
         return typeof this.feed.stream === "object";
     }
 }
