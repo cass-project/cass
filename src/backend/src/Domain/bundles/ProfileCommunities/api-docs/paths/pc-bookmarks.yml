@@ -6,6 +6,12 @@
       Список коммунити, к которым текущий профиль заджойнился
     security:
       - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
     responses:
       403:
         $ref: '#/responses/Unauthorized'

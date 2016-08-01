@@ -27,7 +27,7 @@ class ProfileCommunitiesAPITest extends MiddlewareTestCase
         $profile = DemoAccountFixture::getSecondAccount()->getCurrentProfile();
         $community = SampleCommunitiesFixture::getCommunity(1);
 
-        $this->requestJoin($profile->getId(),$community->getSID())
+        $this->requestJoin($profile->getId(), $community->getSID())
             ->auth(DemoAccountFixture::getSecondAccount()->getAPIKey())
             ->execute()
             ->dump()
