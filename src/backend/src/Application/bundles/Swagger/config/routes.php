@@ -4,6 +4,14 @@ namespace Application\Swagger;
 use Application\Swagger\Middleware\APIDocsMiddleware;
 use Zend\Expressive\Application;
 
-return function (Application $app) {
-    $app->get('/api-docs.json', APIDocsMiddleware::class);
-};
+return [
+    'common' => [
+        [
+            'type'       => 'route',
+            'method'     => 'get',
+            'url'        => '/api-docs.json',
+            'middleware' => APIDocsMiddleware::class,
+            'name'       => 'api-docs'
+        ],
+    ]
+];

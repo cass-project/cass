@@ -3,66 +3,78 @@ namespace Domain\Community;
 
 use Domain\Community\Middleware\CommunityFeaturesMiddleware;
 use Domain\Community\Middleware\CommunityMiddleware;
-use Zend\Expressive\Application;
 
-return function(Application $app) {
-    $app->put(
-        '/protected/community/{command:create}[/]',
-        CommunityMiddleware::class,
-        'community-create'
-    );
-
-    $app->post(
-        '/protected/community/{communityId}/{command:edit}[/]',
-        CommunityMiddleware::class,
-        'community-edit'
-    );
-
-    $app->post(
-        '/protected/community/{communityId}/{command:image-upload}/crop-start/{x1}/{y1}/crop-end/{x2}/{y2}[/]',
-        CommunityMiddleware::class,
-        'community-image-upload'
-    );
-
-    $app->delete(
-        '/protected/community/{communityId}/{command:image-delete}[/]',
-        CommunityMiddleware::class,
-        'community-delete-image'
-    );
-
-    $app->get(
-        '/community/{communityId}/{command:get}[/]',
-        CommunityMiddleware::class,
-        'community-get-by-id'
-    );
-
-    $app->get(
-        '/community/{communityId}/{command:get-by-sid}[/]',
-        CommunityMiddleware::class,
-        'community-get-by-sid'
-    );
-
-    $app->post(
-        '/community/{communityId}/{command:set-public-options}[/]',
-        CommunityMiddleware::class,
-        'community-set-public-options'
-    );
-
-    $app->put(
-        '/protected/community/{communityId}/feature/{feature}/{command:activate}[/]',
-        CommunityFeaturesMiddleware::class,
-        'community-feature-activate'
-    );
-
-    $app->delete(
-        '/protected/community/{communityId}/feature/{feature}/{command:deactivate}[/]',
-        CommunityFeaturesMiddleware::class,
-        'community-feature-deactivate'
-    );
-
-    $app->get(
-        '/protected/community/{communityId}/feature/{feature}/{command:is-activated}[/]',
-        CommunityFeaturesMiddleware::class,
-        'community-feature-is-activated'
-    );
-};
+return [
+    'common' => [
+        [
+            'type'       => 'route',
+            'method'     => 'put',
+            'url'        => '/protected/community/{command:create}[/]',
+            'middleware' => CommunityMiddleware::class,
+            'name'       => 'community-create'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/protected/community/{communityId}/{command:edit}[/]',
+            'middleware' => CommunityMiddleware::class,
+            'name'       => 'community-edit'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/protected/community/{communityId}/{command:image-upload}/crop-start/{x1}/{y1}/crop-end/{x2}/{y2}[/]',
+            'middleware' => CommunityMiddleware::class,
+            'name'       => 'community-image-upload'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'delete',
+            'url'        => '/protected/community/{communityId}/{command:image-delete}[/]',
+            'middleware' => CommunityMiddleware::class,
+            'name'       => 'community-delete-image'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'get',
+            'url'        => '/community/{communityId}/{command:get}[/]',
+            'middleware' => CommunityMiddleware::class,
+            'name'       => 'community-get-by-id'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'get',
+            'url'        => '/community/{communityId}/{command:get-by-sid}[/]',
+            'middleware' => CommunityMiddleware::class,
+            'name'       => 'community-get-by-sid'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/community/{communityId}/{command:set-public-options}[/]',
+            'middleware' => CommunityMiddleware::class,
+            'name'       => 'community-set-public-options'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'put',
+            'url'        => '/protected/community/{communityId}/feature/{feature}/{command:activate}[/]',
+            'middleware' => CommunityFeaturesMiddleware::class,
+            'name'       => 'community-feature-activate'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'delete',
+            'url'        => '/protected/community/{communityId}/feature/{feature}/{command:deactivate}[/]',
+            'middleware' => CommunityFeaturesMiddleware::class,
+            'name'       => 'community-feature-deactivate'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'get',
+            'url'        => '/protected/community/{communityId}/feature/{feature}/{command:is-activated}[/]',
+            'middleware' => CommunityFeaturesMiddleware::class,
+            'name'       => 'community-feature-is-activated'
+        ],
+    ]
+];
