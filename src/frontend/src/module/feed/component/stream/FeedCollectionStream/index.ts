@@ -6,6 +6,7 @@ import {CollectionIndexEntity} from "../../../../collection/definitions/entity/c
 import {FeedService} from "../../../service/FeedService/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
 import {FeedScrollDetector} from "../../FeedScrollDetector/index";
+import {AppService} from "../../../../../app/frontend-app/service";
 
 @Component({
     selector: 'cass-feed-collection-stream',
@@ -23,7 +24,8 @@ export class FeedCollectionStream
 {
     constructor(
         private feed: FeedService<CollectionIndexEntity>,
-        private options: FeedOptionsService
+        private options: FeedOptionsService,
+        private appService: AppService
     ) {}
 
     getViewOption() {
@@ -31,6 +33,9 @@ export class FeedCollectionStream
     }
 
     hasStream() {
+        if(!this.feed.isLoading()){
+            this.appService.onScroll(true);
+        }
         return typeof this.feed.stream === "object";
     }
 }

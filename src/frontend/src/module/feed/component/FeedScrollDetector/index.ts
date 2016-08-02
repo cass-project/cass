@@ -10,19 +10,15 @@ import {PostEntity} from "../../../post/definitions/entity/Post";
 
 export class FeedScrollDetector
 {
-
-    constructor(private appService: AppService, 
+    constructor(private appService: AppService,
                 private feed: FeedService<PostEntity>){}
 
 
     @ViewChild('feedUpdateButton') feedUpdateButton: ElementRef;
 
-    statusUpdateButton: boolean = true;
-
     ngOnInit(){
         this.appService.scrollObservable.subscribe((scrollEvent) => {
-            if(this.detectElem(scrollEvent.html) && this.statusUpdateButton){
-                this.statusUpdateButton = false;
+            if(this.detectElem(scrollEvent.html)){
                 this.feed.next();
             }
         })

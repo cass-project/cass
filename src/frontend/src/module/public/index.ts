@@ -70,7 +70,7 @@ export class PublicComponent
 {
     constructor(private service: PublicService,
                 private appService: AppService) {}
-    
+
     onScroll($event){
         this.appService.onScroll($event)
     }

@@ -6,6 +6,7 @@ import {ProfileCard} from "../../../../profile/component/Elements/ProfileCard/in
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
 import {FeedScrollDetector} from "../../FeedScrollDetector/index";
 import {ProfileIndexedEntity} from "../../../../profile/definitions/entity/Profile";
+import {AppService} from "../../../../../app/frontend-app/service";
 
 @Component({
     selector: 'cass-feed-profile-stream',
@@ -23,7 +24,8 @@ export class FeedProfileStream
 {
     constructor(
         private feed: FeedService<ProfileIndexedEntity>,
-        private options: FeedOptionsService
+        private options: FeedOptionsService,
+        private appService: AppService
     ) {}
 
     getViewOption() {
@@ -31,6 +33,9 @@ export class FeedProfileStream
     }
 
     hasStream() {
+        if(!this.feed.isLoading()){
+            this.appService.onScroll(true);
+        }
         return typeof this.feed.stream === "object";
     }
 }
