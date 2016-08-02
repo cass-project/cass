@@ -7,15 +7,14 @@ import {LoadingManager} from "../../../common/classes/LoadingStatus";
 import {FeedRequest} from "../../definitions/request/FeedRequest";
 import {FeedCriteriaService} from "../FeedCriteriaService";
 import {FeedOptionsService} from "../FeedOptionsService";
-import {AppService} from "../../../../app/frontend-app/service";
 import {FeedEntity} from "./entity";
+import {AppService} from "../../../../app/frontend-app/service";
 
 @Injectable()
 export class FeedService<T extends FeedEntity>
 {
     static DEFAULT_PAGE_SIZE = 30;
 
-    private postHelperIndex: number;
     public shouldLoad: boolean = true;
 
     private status: LoadingManager = new LoadingManager();
@@ -72,7 +71,7 @@ export class FeedService<T extends FeedEntity>
                 this.stream.replace(<any>response.entities);
                 if(response.entities.length > 1){
                     this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
-                    this.postHelperIndex = this.stream.all().length - 1;
+                    this.appService.onScroll();
                 }
 
                 status.is = false;
@@ -104,7 +103,7 @@ export class FeedService<T extends FeedEntity>
 
                 if(response.entities.length > 1) {
                     this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
-                    this.postHelperIndex = this.stream.all().length - 1;
+                    this.appService.onScroll();
                 }
 
                 status.is = false;

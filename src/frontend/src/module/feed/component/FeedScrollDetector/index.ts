@@ -18,14 +18,14 @@ export class FeedScrollDetector
 
     ngOnInit(){
         this.appService.scrollObservable.subscribe((scrollEvent) => {
-            if(this.detectElem(scrollEvent.html)){
+            if(this.detectElem()){
                 this.feed.next();
             }
         })
     }
 
 
-    detectElem(html) {
+    detectElem() {
         if(this.feed.shouldLoad){
             let elem = this.feedUpdateButton.nativeElement;
 
@@ -35,8 +35,8 @@ export class FeedScrollDetector
                 if(!!rect
                     && rect.bottom >= 0
                     && rect.right >= 0
-                    && rect.top <= html.clientHeight
-                    && rect.left <= html.clientWidth ){
+                    && rect.top <= this.appService.content.nativeElement.clientHeight
+                    && rect.left <= this.appService.content.nativeElement.clientWidth ){
                     return true;
                 }
             } else if(!this.feed.isLoading()){

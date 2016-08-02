@@ -23,7 +23,7 @@ export class Stream<T extends FeedEntity>
     push(entities: T[]) {
         entities.forEach(entity => {
             this.entities.push(entity);
-        })
+        });
     }
 
     insertBefore(entity: T) {

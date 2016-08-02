@@ -14,8 +14,8 @@ export class AppService {
             this.scrollObserver = observer;
         })
     }
-
-    onScroll($event){
+    
+    onScroll(){
         if(this.content && this.scrollObserver) {
             this.scrollObserver.next({
                 html: this.content.nativeElement

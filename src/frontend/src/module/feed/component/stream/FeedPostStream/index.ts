@@ -6,7 +6,6 @@ import {FeedService} from "../../../service/FeedService/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
 import {FeedScrollDetector} from "../../FeedScrollDetector/index";
 import {PostIndexedEntity} from "../../../../post/definitions/entity/Post";
-import {AppService} from "../../../../../app/frontend-app/service";
 
 @Component({
     selector: 'cass-feed-post-stream',
@@ -24,8 +23,7 @@ export class FeedPostStream
 {
     constructor(
         private feed: FeedService<PostIndexedEntity>,
-        private options: FeedOptionsService,
-        private appService: AppService
+        private options: FeedOptionsService
     ) {}
     
     getViewOption() {
@@ -33,9 +31,6 @@ export class FeedPostStream
     } 
 
     hasStream() {
-        if(!this.feed.isLoading()){
-            this.appService.onScroll(true);
-        }
         return typeof this.feed.stream === "object";
     }
 }
