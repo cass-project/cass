@@ -64,8 +64,8 @@ export class App
     @ViewChild('content') content: ElementRef;
     
     constructor(private appService: AppService, elementRef: ElementRef, renderer: Renderer){
-        this.globalListenFunc = renderer.listenGlobal('document', 'keyup', (event) => {
-            if(event.altKey && event.key === 'm'){
+        this.globalListenFunc = renderer.listenGlobal('document', 'keyup', (event: KeyboardEvent) => {
+            if(event.shiftKey && event.altKey && event.keyCode === 77){
                 this.appService.authDevModal(true);
             }
         });
