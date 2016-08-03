@@ -33,7 +33,8 @@
       "Domain\\Feedback\\": "src/Domain/bundles/Feedback/src",
       "Domain\\OpenGraph\\": "src/Domain/bundles/OpenGraph/src",
       "Domain\\Contact\\": "src/Domain/bundles/Contact/src",
-      "Domain\\Index\\": "src/Domain/bundles/Index/src"
+      "Domain\\Index\\": "src/Domain/bundles/Index/src",
+      "Domain\\Youtube\\": "src/Domain/bundles/Youtube/src"
     }
   },
   "require": {
