@@ -31,6 +31,7 @@
       "Domain\\Colors\\": "src/Domain/bundles/Colors/src",
       "Domain\\Avatar\\": "src/Domain/bundles/Avatar/src",
       "Domain\\Feedback\\": "src/Domain/bundles/Feedback/src",
+      "Domain\\Feed\\": "src/Domain/bundles/Feed/src",
       "Domain\\OpenGraph\\": "src/Domain/bundles/OpenGraph/src",
       "Domain\\Contact\\": "src/Domain/bundles/Contact/src",
       "Domain\\Index\\": "src/Domain/bundles/Index/src",

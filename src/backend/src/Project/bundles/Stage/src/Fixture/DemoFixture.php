@@ -24,7 +24,7 @@ use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
 use Domain\Profile\Service\ProfileService;
 use Symfony\Component\Console\Output\OutputInterface;
 
-final class FakeFixture
+final class DemoFixture
 {
     const JSON_DIR = __DIR__.'/../Resources/Data/JSON';
     const AVATAR_DIR = __DIR__ . "/../Resources/Data/Images/avatars/";
