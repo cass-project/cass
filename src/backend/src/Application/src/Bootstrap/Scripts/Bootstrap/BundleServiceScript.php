@@ -34,7 +34,11 @@ class BundleServiceScript implements BootstrapScript
                     $bundleClassName = "{$rootNamespace}\\{$dir}\\{$dir}Bundle";
 
                     if (!class_exists($bundleClassName)) {
-                        throw new \Exception(sprintf('No Bundle available for bundle `%s`', $bundleClassName));
+                        $bundleClassName =  "{$rootNamespace}\\Bundles\\{$dir}\\{$dir}Bundle";
+
+                        if (!class_exists($bundleClassName)) {
+                            throw new \Exception(sprintf('No Bundle available for bundle `%s`', $bundleClassName));
+                        }
                     }
 
                     if (!is_subclass_of($bundleClassName, Bundle::class)) {

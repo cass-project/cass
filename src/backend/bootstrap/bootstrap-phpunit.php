@@ -3,13 +3,18 @@ namespace {
     require __DIR__ . '/../vendor/autoload.php';
 }
 
-namespace PhpUnitBootstrap {
-
+namespace PhpUnitBootstrap
+{
+    use Application\ApplicationBundle;
+    use Application\Bootstrap\AppBuilder;
     use Application\PHPUnit\TestCase\MiddlewareTestCase;
+    use CASS\Project\ProjectBundle;
+    use Domain\DomainBundle;
 
-    $app = (new \Application\Bootstrap\AppBuilder([
-        new \Application\ApplicationBundle(),
-        new \Domain\DomainBundle()
+    $app = (new AppBuilder([
+        new ApplicationBundle(),
+        new DomainBundle(),
+        new ProjectBundle(),
     ]))->disableSAPIEmitter()->build('test');
 
     MiddlewareTestCase::$app = $app;
