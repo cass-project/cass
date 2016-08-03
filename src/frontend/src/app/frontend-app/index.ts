@@ -65,7 +65,6 @@ export class App
     
     constructor(private appService: AppService, elementRef: ElementRef, renderer: Renderer){
         this.globalListenFunc = renderer.listenGlobal('document', 'keyup', (event) => {
-            console.log(event);
             if(event.altKey && event.key === 'm'){
                 this.appService.authDevModal(true);
             }
