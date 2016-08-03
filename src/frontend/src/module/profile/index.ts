@@ -12,6 +12,7 @@ import {MessageBusService} from "../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../message/component/MessageBusNotifications/model";
 import {CollectionCreateMaster} from "../collection/component/Modal/CollectionCreateMaster/index";
 import {CurrentProfileService} from "./service/CurrentProfileService";
+import {AuthDev} from "../auth-dev/component/index";
 
 @Component({
     selector: 'cass-profile',
@@ -24,13 +25,20 @@ import {CurrentProfileService} from "./service/CurrentProfileService";
         ProfileSwitcher,
         ProfileInterestsModal,
         ProfileSetup,
-        CollectionCreateMaster
+        CollectionCreateMaster,
+        AuthDev
     ]
 })
 export class ProfileComponent
 {
     constructor(private authService: AuthService, private currentProfileService: CurrentProfileService, private modals: ProfileModals, protected messages: MessageBusService) {}
 
+    closeModalAuthDev($event){
+        if($event){
+            this.modals.authDev.close();
+        }
+    }
+    
     closeModalProfileSwitcher($event){
         if($event){
             this.modals.switcher.close();
