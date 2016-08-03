@@ -12,8 +12,7 @@ class ThemeRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
 
-        $themeEntity = new Theme();
-        $themeEntity->setTitle($title);
+        $themeEntity = new Theme($title);
         $themeEntity->setDescription($description);
 
         if ($parentId) {

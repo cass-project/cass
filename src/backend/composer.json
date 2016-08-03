@@ -5,6 +5,7 @@
     "psr-4": {
       "Application\\": "src/Application/src",
       "Domain\\": "src/Domain/src",
+      "CASS\\Project\\": "src/Project/src",
       "Application\\AMQP\\": "src/Application/bundles/AMQP/src",
       "Application\\Console\\": "src/Application/bundles/Console/src",
       "Application\\Doctrine2\\": "src/Application/bundles/Doctrine2/src",
@@ -19,7 +20,6 @@
       "Domain\\Auth\\": "src/Domain/bundles/Auth/src",
       "Domain\\Collection\\": "src/Domain/bundles/Collection/src",
       "Domain\\EmailVerification\\": "src/Domain/bundles/EmailVerification/src",
-      "Domain\\Feed\\": "src/Domain/bundles/Feed/src",
       "Domain\\Fake\\": "src/Domain/bundles/Fake/src",
       "Domain\\Post\\": "src/Domain/bundles/Post/src",
       "Domain\\PostAttachment\\": "src/Domain/bundles/PostAttachment/src",
@@ -33,7 +33,8 @@
       "Domain\\Feedback\\": "src/Domain/bundles/Feedback/src",
       "Domain\\OpenGraph\\": "src/Domain/bundles/OpenGraph/src",
       "Domain\\Contact\\": "src/Domain/bundles/Contact/src",
-      "Domain\\Index\\": "src/Domain/bundles/Index/src"
+      "Domain\\Index\\": "src/Domain/bundles/Index/src",
+      "CASS\\Project\\Bundles\\Stage\\": "src/Project/bundles/Stage/src"
     }
   },
   "require": {

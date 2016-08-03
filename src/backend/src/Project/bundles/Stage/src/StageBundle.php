@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Fake;
+namespace CASS\Project\Bundles\Stage;
 
 use Application\Bundle\GenericBundle;
 
-class FakeBundle extends GenericBundle
+final class StageBundle extends GenericBundle
 {
     public function getDir()
     {

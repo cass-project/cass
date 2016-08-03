@@ -14,6 +14,8 @@ use Doctrine\ORM\PersistentCollection;
  */
 class Theme implements JSONSerializable, IdEntity, SerialEntity
 {
+    const DEFAULT_PREVIEW = '';
+
     use IdTrait;
 
     /**
@@ -45,14 +47,33 @@ class Theme implements JSONSerializable, IdEntity, SerialEntity
      */
     private $description = '';
 
+    /**
+     * @Column(type="string")
+     * @var string
+     */
+    private $url;
+
+    /**
+     * @Column(type="string")
+     * @var string
+     */
+    private $preview;
+
     public function toJSON(): array {
         return [
             'id' => $this->getId(),
             'title' => $this->getTitle(),
+            'url' => $this->getURL(),
             'description' => $this->getDescription(),
             'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null,
-            'position' => $this->getPosition()
+            'position' => $this->getPosition(),
+            'preview' => $this->getPreview(),
         ];
+    }
+
+    public function __construct(string $title)
+    {
+        $this->setTitle($title);
     }
 
     public function getTitle(): string {
@@ -61,6 +82,21 @@ class Theme implements JSONSerializable, IdEntity, SerialEntity
 
     public function setTitle(string $title): self {
         $this->title = $title;
+        $this->url = transliterator_transliterate('Any-Latin;Latin-ASCII;', $title);
+
+        return $this;
+    }
+
+    public function getURL(): string {
+        if(! strlen($this->url)) {
+            return transliterator_transliterate('Any-Latin;Latin-ASCII;', $this->getTitle());
+        }else{
+            return $this->url;
+        }
+    }
+
+    public function setURL(string $url): self {
+        $this->url = preg_replace('/[^a-zA-Z]/', '_', $url);
 
         return $this;
     }
@@ -73,6 +109,16 @@ class Theme implements JSONSerializable, IdEntity, SerialEntity
         $this->description = $description;
 
         return $this;
+    }
+
+    public function setPreview(string $preview): self {
+        $this->preview = $preview;
+
+        return $this;
+    }
+
+    public function getPreview(): string {
+        return $this->preview;
     }
 
     public function hasParent(): bool {

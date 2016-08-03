@@ -1,12 +1,11 @@
 <?php
-namespace Domain\Fake\Console\Command;
+namespace CASS\Project\Bundles\Stage\Command;
 
-use Domain\Fake\Fixture\FakeFixture;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-final class FakeUp extends Command
+final class StageUpCommand extends Command
 {
     /** @var FakeFixture */
     private $fakeFixture;
@@ -20,8 +19,8 @@ final class FakeUp extends Command
     protected function configure()
     {
         $this
-            ->setName('fake:up')
-            ->setDescription('add fixture profiles');
+            ->setName('stage:fake')
+            ->setDescription('Stage fake data');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
