@@ -1,4 +1,9 @@
 article.component.component-profile
+  div(*ngIf="modals.authDev.isOpened()")
+    cass-modal
+      cass-modal-box(width="550px")
+        cass-auth-dev((close)='closeModalAuthDev($event)')
+
   div(*ngIf="isSetupRequired()")
     cass-modal
       cass-modal-box(width="550px")

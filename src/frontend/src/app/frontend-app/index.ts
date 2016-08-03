@@ -1,4 +1,4 @@
-import {Component, ViewChild, ElementRef} from "angular2/core";
+import {Component, ViewChild, ElementRef, Renderer} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {RouteConfig, ROUTER_DIRECTIVES, RouterOutlet, RouteDefinition} from "angular2/router";
 import {Module} from "../../module/common/classes/Module";
@@ -59,10 +59,20 @@ export class App
         return require('./../../../package.json').version;
     }
 
+    globalListenFunc: Function;
+
     @ViewChild('content') content: ElementRef;
     
-    constructor(private appService: AppService){}
+    constructor(private appService: AppService, elementRef: ElementRef, renderer: Renderer){
+        this.globalListenFunc = renderer.listenGlobal('document', 'keyup', (event) => {
+            console.log(event);
+            if(event.altKey && event.key === 'm'){
+                this.appService.authDevModal(true);
+            }
+        });
+    }
 
+    
     ngAfterViewInit(){
         this.appService.content = this.content;
     }
