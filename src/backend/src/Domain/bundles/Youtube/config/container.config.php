@@ -10,14 +10,8 @@ use Domain\Youtube\Console\Command\YoutubeGetMetadata;
 
 return [
     'php-di' => [
-        'config.console' => [
-            'commands' => [
-                'youtube' => [
-                    YoutubeGetMetadata ::class => object()->constructorParameter('configOauth2Google',factory(function(Container $container){
-                        return $container->get('config.oauth2.google');
-                    }))
-                ]
-            ]
-        ]
+        YoutubeGetMetadata::class => object()->constructorParameter('configOauth2Google',factory(function(Container $container){
+            return $container->get('config.oauth2.google');
+        })),
     ]
 ];

@@ -11,8 +11,9 @@ class YoutubeGetMetadata extends Command
 {
     private $configOauth2Google;
 
-    public function __constructor(array $configOauth2Google){
+    public function __construct(array $configOauth2Google){
         $this->configOauth2Google = $configOauth2Google;
+        parent::__construct();
     }
 
     public function configure()
@@ -24,6 +25,9 @@ class YoutubeGetMetadata extends Command
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln( $this->configOauth2Google ) ;
+
     }
+
+
+
 }
