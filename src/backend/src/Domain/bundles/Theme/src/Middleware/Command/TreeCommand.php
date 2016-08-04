@@ -1,15 +1,22 @@
 <?php
 namespace Domain\Theme\Middleware\Command;
 
+use Application\REST\Response\ResponseBuilder;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Domain\Theme\Entity\Theme;
 
 final class TreeCommand extends Command
 {
-    public function run(ServerRequestInterface $request) {
-        return [
-            'entities' => $this->buildJSON($this->themeService->getThemesAsTree())
-        ];
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
+    {
+        $responseBuilder
+            ->setJson([
+                'entities' => $this->buildJSON($this->themeService->getThemesAsTree())
+            ])
+            ->setStatusSuccess();
+
+        return $responseBuilder->build();
     }
 
     private function buildJSON(array $themes) {

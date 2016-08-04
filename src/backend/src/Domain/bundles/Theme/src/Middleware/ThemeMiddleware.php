@@ -1,43 +1,42 @@
 <?php
 namespace Domain\Theme\Middleware;
 
-use Domain\Auth\Service\CurrentAccountService;
+use Application\Service\CommandService;
 use Application\REST\Response\GenericResponseBuilder;
+use Domain\Theme\Middleware\Command\CreateCommand;
+use Domain\Theme\Middleware\Command\DeleteCommand;
+use Domain\Theme\Middleware\Command\GetCommand;
+use Domain\Theme\Middleware\Command\ListAllCommand;
+use Domain\Theme\Middleware\Command\MoveCommand;
+use Domain\Theme\Middleware\Command\TreeCommand;
+use Domain\Theme\Middleware\Command\UpdateCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Domain\Theme\Middleware\Command\Command;
-use Domain\Theme\Service\ThemeService;
 use Zend\Stratigility\MiddlewareInterface;
 
 class ThemeMiddleware implements MiddlewareInterface
 {
-    /** @var CurrentAccountService */
-    private $currentAccountService;
+    /** @var CommandService */
+    private $commandService;
 
-    /** @var ThemeService */
-    private $themeService;
-
-    public function __construct(CurrentAccountService $currentAccountService, ThemeService $themeService)
+    public function __construct(CommandService $commandService)
     {
-        $this->currentAccountService = $currentAccountService;
-        $this->themeService = $themeService;
+        $this->commandService = $commandService;
     }
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
         $responseBuilder = new GenericResponseBuilder($response);
 
-        $command = Command::factory($request, $this->currentAccountService, $this->themeService);
-        $result = $command->run($request);
+        $resolver = $this->commandService->createResolverBuilder()
+            ->attachDirect('create', CreateCommand::class)
+            ->attachDirect('delete', DeleteCommand::class)
+            ->attachDirect('get', GetCommand::class)
+            ->attachDirect('list-all', ListAllCommand::class)
+            ->attachDirect('move', MoveCommand::class)
+            ->attachDirect('tree', TreeCommand::class)
+            ->attachDirect('update', UpdateCommand::class);
 
-        if($result === true) {
-            $result = [];
-        }
-
-        $responseBuilder
-            ->setStatusSuccess()
-            ->setJson($result);
-
-        return $responseBuilder->build();
+        return $resolver->resolve($request)->run($request, $responseBuilder);
     }
 }

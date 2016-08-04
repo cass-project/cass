@@ -10,3 +10,9 @@ Update_Theme_Request:
     description:
       type: string
       description: Описание тематики
+    preview:
+      type: string
+      description: Название файла с картинкой. По умолчанию "default.png"
+    url:
+      type: string
+      description: Указать специфический URL для данной тематики

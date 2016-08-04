@@ -3,18 +3,25 @@ namespace Domain\Theme\Middleware\Request;
 
 use Application\REST\Service\JSONSchema;
 use Application\REST\Request\Params\SchemaParams;
+use Domain\Theme\Entity\Theme;
+use Domain\Theme\Parameters\CreateThemeParameters;
 use Domain\Theme\ThemeBundle;
 
 class CreateThemeRequest extends SchemaParams
 {
-    public function getParameters() {
+    public function getParameters(): CreateThemeParameters {
         $data = $this->getData();
 
-        return [
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'parent_id' => (string) $data['parent_id'] === "0" ? null : (int) $data['parent_id']
-        ];
+        $parentId = $data['parent_id'] ?? null;
+
+        return new CreateThemeParameters(
+            $data['title'],
+            $data['description'],
+            $data['preview'] ?? Theme::DEFAULT_PREVIEW,
+            $parentId,
+            $data['force_id'] ?? null,
+            $data['url'] ?? null
+        );
     }
 
     protected function getSchema(): JSONSchema {

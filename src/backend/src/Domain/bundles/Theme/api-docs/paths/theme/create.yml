@@ -11,9 +11,14 @@
         schema:
           $ref: '#/definitions/PUT_Theme_Request'
     responses:
-      '403':
-        $ref: '#/responses/Unauthorized'
-      '200':
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      409:
+        description: Дубликат тематики с указанным ID
+        schema:
+          $ref: '#/responses/error'
+      200:
         description: |
           Successfull response
         schema:

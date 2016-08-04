@@ -1,70 +1,28 @@
 <?php
 namespace Domain\Theme\Middleware\Command;
 
+use Domain\Account\Service\AccountAppAccessService;
 use Domain\Auth\Service\CurrentAccountService;
-use Application\Exception\CommandNotFoundException;
-use Psr\Http\Message\ServerRequestInterface;
 use Domain\Theme\Service\ThemeService;
 
-abstract class Command
+abstract class Command implements \Application\Command\Command
 {
-    const COMMAND_CREATE = 'create';
-    const COMMAND_DELETE = 'delete';
-    const COMMAND_GET = 'get';
-    const COMMAND_LIST_ALL = 'list-all';
-    const COMMAND_MOVE = 'move';
-    const COMMAND_TREE = 'tree';
-    const COMMAND_UPDATE = 'update';
+    /** @var ThemeService */
+    protected $themeService;
+
+    /** @var AccountAppAccessService */
+    protected $accountAppAccessService;
 
     /** @var CurrentAccountService */
     protected $currentAccountService;
 
-    /** @var ThemeService */
-    protected $themeService;
-
-    public function setCurrentAccountService(CurrentAccountService $currentAccountService): self {
-        $this->currentAccountService = $currentAccountService;
-        return $this;
-    }
-
-    public function setThemeService(ThemeService $themeService): self {
+    public function __construct(
+        ThemeService $themeService,
+        AccountAppAccessService $accountAppAccessService,
+        CurrentAccountService $currentAccountService
+    ) {
         $this->themeService = $themeService;
-        return $this;
+        $this->accountAppAccessService = $accountAppAccessService;
+        $this->currentAccountService = $currentAccountService;
     }
-
-    static public function factory(
-        ServerRequestInterface $request,
-        CurrentAccountService $currentAccountService,
-        ThemeService $themeService)
-    {
-        $command = self::factoryCommand($request->getAttribute('command'));
-
-        return $command
-            ->setCurrentAccountService($currentAccountService)
-            ->setThemeService($themeService);
-    }
-    
-    private static function factoryCommand(string $command): Command
-    {
-        switch($command) {
-            default:
-                throw new CommandNotFoundException(sprintf("Command %s::%s not found", self::class, $command));
-            case self::COMMAND_CREATE:
-                return new CreateCommand();
-            case self::COMMAND_DELETE:
-                return new DeleteCommand();
-            case self::COMMAND_GET:
-                return new GetCommand();
-            case self::COMMAND_LIST_ALL:
-                return new ListAllCommand();
-            case self::COMMAND_MOVE:
-                return new MoveCommand();
-            case self::COMMAND_TREE:
-                return new TreeCommand();
-            case self::COMMAND_UPDATE:
-                return new UpdateCommand();
-        }
-    }
-
-    abstract public function run(ServerRequestInterface $request);
 }

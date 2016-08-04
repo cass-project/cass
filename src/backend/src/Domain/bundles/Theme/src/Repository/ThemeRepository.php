@@ -1,19 +1,41 @@
 <?php
 namespace Domain\Theme\Repository;
 
-use Application\Exception\EntityNotFoundException;
 use Application\Util\SerialManager\SerialManager;
 use Doctrine\ORM\EntityRepository;
 use Domain\Theme\Entity\Theme;
+use Domain\Theme\Exception\ThemeNotFoundException;
+use Domain\Theme\Exception\ThemeWithThisIdExistsException;
+use Domain\Theme\Parameters\CreateThemeParameters;
+use Domain\Theme\Parameters\UpdateThemeParameters;
 
 class ThemeRepository extends EntityRepository
 {
-    public function createTheme(string $title, string $description, int $parentId = null, int $forceId = null): Theme
+    public function createTheme(CreateThemeParameters $parameters): Theme
     {
         $em = $this->getEntityManager();
 
-        $themeEntity = new Theme($title, $forceId);
-        $themeEntity->setDescription($description);
+        if($parameters->hasForcedId()) {
+            $forceId = $parameters->getForceId();
+
+            if($this->hasThemeWithId($forceId)) {
+                throw new ThemeWithThisIdExistsException(sprintf('Theme with ID `%s` already exists', $forceId));
+            }
+
+            $themeEntity = new Theme($parameters->getTitle(), $forceId);
+        }else{
+            $themeEntity = new Theme($parameters->getTitle());
+        }
+
+        $themeEntity->setDescription($parameters->getDescription());
+
+        if($parameters->hasSpecifiedURL()) {
+            $themeEntity->setURL($parameters->getSpecifiedURL());
+        }
+
+        $parentId = $parameters->hasParent()
+            ? $parameters->getParentId()
+            : null;
 
         if ($parentId) {
             $themeEntity->setParent($em->getReference(Theme::class, $parentId));
@@ -67,12 +89,25 @@ class ThemeRepository extends EntityRepository
         return $theme;
     }
 
-    public function updateTheme(int $themeId, string $title, string $description = ''): Theme
+    public function hasThemeWithId(int $themeId): bool
+    {
+        return $this->find($themeId) instanceof Theme;
+    }
+
+    public function updateTheme(int $themeId, UpdateThemeParameters $parameters): Theme
     {
         $theme = $this->getThemeById($themeId);
-        $theme
-            ->setTitle($title)
-            ->setDescription($description);
+
+        $theme->setTitle($parameters->getTitle());
+        $theme->setDescription($parameters->getDescription());
+
+        if($parameters->hasSpecifiedURL()) {
+            $theme->setURL($parameters->getSpecifiedURL());
+        }
+
+        if($parameters->hasChangedPreview()) {
+            $theme->setPreview($parameters->getPreview());
+        }
 
         $this->getEntityManager()->flush($theme);
 
@@ -108,7 +143,7 @@ class ThemeRepository extends EntityRepository
         $result = $this->find($themeId);
 
         if($result === null) {
-            throw new EntityNotFoundException(sprintf('Theme with ID `%s` not found', $themeId));
+            throw new ThemeNotFoundException(sprintf('Theme with ID `%s` not found', $themeId));
         }
 
         return $result;

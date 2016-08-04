@@ -3,12 +3,12 @@ namespace Domain\Theme\Service;
 
 use Application\Service\EventEmitterAware\EventEmitterAwareService;
 use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
-use Domain\Auth\Service\CurrentAccountService;
 use Application\Util\SerialManager\SerialManager;
 use Domain\Theme\Entity\Theme;
+use Domain\Theme\Exception\ThemeNotFoundException;
+use Domain\Theme\Parameters\CreateThemeParameters;
+use Domain\Theme\Parameters\UpdateThemeParameters;
 use Domain\Theme\Repository\ThemeRepository;
-use Evenement\EventEmitter;
-use Evenement\EventEmitterInterface;
 
 class ThemeService implements EventEmitterAwareService
 {
@@ -27,9 +27,9 @@ class ThemeService implements EventEmitterAwareService
         $this->themeRepository = $themeRepository;
     }
 
-    public function createTheme(string $title, string $description, int $parentId = null, int $forceId = null): Theme
+    public function createTheme(CreateThemeParameters $parameters): Theme
     {
-        $theme = $this->themeRepository->createTheme($title, $description, $parentId, $forceId);
+        $theme = $this->themeRepository->createTheme($parameters);
         $this->getEventEmitter()->emit(self::EVENT_CREATED, [$theme]);
 
         return $theme;
@@ -38,6 +38,17 @@ class ThemeService implements EventEmitterAwareService
     public function getThemeById(int $themeId)
     {
         return $this->themeRepository->getThemeById($themeId);
+    }
+
+    public function hasThemeWithId(int $themeId): bool
+    {
+        try {
+            $this->themeRepository->getThemeById($themeId);
+
+            return true;
+        }catch(ThemeNotFoundException $e) {
+            return false;
+        }
     }
 
     /** @return Theme[] */
@@ -64,9 +75,9 @@ class ThemeService implements EventEmitterAwareService
         return $theme;
     }
 
-    public function updateTheme(int $themeId, string $title, string $description = ''): Theme
+    public function updateTheme(int $themeId, UpdateThemeParameters $parameters): Theme
     {
-        $theme = $this->themeRepository->updateTheme($themeId, $title, $description);
+        $theme = $this->themeRepository->updateTheme($themeId, $parameters);
         $this->getEventEmitter()->emit(self::EVENT_UPDATED, [$theme]);
 
         return $theme;

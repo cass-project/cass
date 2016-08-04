@@ -1,16 +1,25 @@
 PUT_Theme_Request:
   type: object
   required:
-    - parent_id
     - title
     - description
+    - parent_id
   properties:
-    parent_id:
-      type: number
-      description: ID родительской тематики. Может содержать значение NULL.
     title:
       type: string
       description: Название тематики
     description:
       type: string
       description: Описание тематики
+    parent_id:
+      type: number
+      description: ID родительской тематики. Может содержать значение NULL.
+    preview:
+      type: string
+      description: Название файла с картинкой. По умолчанию "default.png"
+    url:
+      type: string
+      description: Указать специфический URL для данной тематики
+    force_id:
+      type: number
+      description: Указать специфический ID для данной тематики.

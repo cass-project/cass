@@ -3,6 +3,7 @@ namespace Domain\Collection\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
 use Domain\Avatar\Exception\ImageServiceException;
+use Domain\Collection\Exception\CollectionNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -20,6 +21,10 @@ final class ImageDeleteCommand extends Command
             $responseBuilder
                 ->setError($e)
                 ->setStatusConflict();
+        }catch(CollectionNotFoundException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         }
 
         return $responseBuilder->build();

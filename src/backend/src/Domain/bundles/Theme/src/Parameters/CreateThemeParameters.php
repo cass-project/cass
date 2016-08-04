@@ -1,6 +1,8 @@
 <?php
 namespace Domain\Theme\Parameters;
 
+use Domain\Theme\Entity\Theme;
+
 final class CreateThemeParameters
 {
     /** @var string */
@@ -24,7 +26,7 @@ final class CreateThemeParameters
     public function __construct(
         string $title,
         string $description,
-        string $preview,
+        string $preview = Theme::DEFAULT_PREVIEW,
         int $parentId = null,
         int $forceId = null,
         string $specifyURL = null
@@ -77,7 +79,7 @@ final class CreateThemeParameters
         return $this->specifyURL !== null;
     }
 
-    public function getSpecifyURL(): int
+    public function getSpecifiedURL(): int
     {
         return $this->specifyURL;
     }

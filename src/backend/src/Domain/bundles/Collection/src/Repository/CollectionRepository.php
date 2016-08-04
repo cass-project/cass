@@ -1,9 +1,9 @@
 <?php
 namespace Domain\Collection\Repository;
 
-use Application\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Domain\Collection\Entity\Collection;
+use Domain\Collection\Exception\CollectionNotFoundException;
 use Domain\Profile\Entity\Profile\Greetings;
 
 class CollectionRepository extends EntityRepository
@@ -38,7 +38,7 @@ class CollectionRepository extends EntityRepository
         $result = $this->find($collectionId);
 
         if($result === null) {
-            throw new EntityNotFoundException(sprintf('Collection with ID `%d` not found', $collectionId));
+            throw new CollectionNotFoundException(sprintf('Collection with ID `%d` not found', $collectionId));
         }
 
         return $result;

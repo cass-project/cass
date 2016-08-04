@@ -1,9 +1,9 @@
 <?php
 namespace Domain\ProfileCommunities\Repository;
 
-use Application\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Domain\Community\Entity\Community;
+use Domain\Community\Exception\CommunityNotFoundException;
 use Domain\Profile\Entity\Profile;
 use Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
 use Domain\ProfileCommunities\Exception\BookmarkNotFoundException;
@@ -18,7 +18,7 @@ class ProfileCommunitiesRepository extends EntityRepository
         $community = $em->getReference(Community::class, $communityId);
 
         if(!(($profile instanceof Profile) && ($community instanceof Community))) {
-            throw new EntityNotFoundException('Profile or/and community not found');
+            throw new CommunityNotFoundException('Profile or/and community not found');
         }
 
         $entity = new ProfileCommunityEQ($profile, $community);

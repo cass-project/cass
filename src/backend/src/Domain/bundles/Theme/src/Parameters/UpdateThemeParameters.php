@@ -9,7 +9,7 @@ final class UpdateThemeParameters
     /** @var string */
     private $description;
 
-    /** @var string */
+    /** @var string|null */
     private $preview;
 
     /** @var string|null */
@@ -18,7 +18,7 @@ final class UpdateThemeParameters
     public function __construct(
         string $title,
         string $description,
-        string $preview,
+        string $preview = null,
         string $specifyURL = null
     ) {
         $this->title = $title;
@@ -37,6 +37,11 @@ final class UpdateThemeParameters
         return $this->description;
     }
 
+    public function hasChangedPreview(): bool
+    {
+        return $this->preview !== null;
+    }
+
     public function getPreview(): string
     {
         return $this->preview;
@@ -47,7 +52,7 @@ final class UpdateThemeParameters
         return $this->specifyURL !== null;
     }
 
-    public function getSpecifyURL(): string
+    public function getSpecifiedURL(): string
     {
         return $this->specifyURL;
     }

@@ -4,6 +4,7 @@ namespace Domain\Collection\Middleware\Command;
 use Application\REST\Response\ResponseBuilder;
 use Domain\Avatar\Exception\ImageServiceException;
 use Domain\Avatar\Middleware\Request\UploadImageRequest;
+use Domain\Collection\Exception\CollectionNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -21,6 +22,10 @@ final class ImageUploadCommand extends Command
             $responseBuilder
                 ->setError($e)
                 ->setStatusUnprocessable();
+        }catch(CollectionNotFoundException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         }
 
         return $responseBuilder->build();
