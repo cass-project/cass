@@ -8,11 +8,11 @@ use Domain\Theme\Entity\Theme;
 
 class ThemeRepository extends EntityRepository
 {
-    public function createTheme(string $title, string $description, int $parentId = null): Theme
+    public function createTheme(string $title, string $description, int $parentId = null, int $forceId = null): Theme
     {
         $em = $this->getEntityManager();
 
-        $themeEntity = new Theme($title);
+        $themeEntity = new Theme($title, $forceId);
         $themeEntity->setDescription($description);
 
         if ($parentId) {

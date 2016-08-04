@@ -1,19 +1,19 @@
 <?php
 namespace CASS\Project\Bundles\Stage\Command;
 
-use CASS\Project\Bundles\Stage\Fixture\DemoFixture;
+use CASS\Project\Bundles\Stage\Fixture\ThemeFixture;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 final class StageThemesCommand extends Command
 {
-    /** @var DemoFixture */
-    private $fakeFixture;
+    /** @var ThemeFixture */
+    private $themeFixture;
 
-    public function __construct(DemoFixture $demoFixture)
+    public function __construct(ThemeFixture $themeFixture)
     {
-        $this->fakeFixture = $demoFixture;
+        $this->themeFixture = $themeFixture;
         parent::__construct();
     }
 
@@ -21,11 +21,11 @@ final class StageThemesCommand extends Command
     {
         $this
             ->setName('stage:demo')
-            ->setDescription('Stage demo profiles, collections and posts');
+            ->setDescription('Stage&Production themes');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->fakeFixture->up($output);
+        $this->themeFixture->up($output);
     }
 }

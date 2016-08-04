@@ -6,6 +6,8 @@ Theme_Entity_Theme:
     - position
     - title
     - description
+    - url
+    - preview
   properties:
     id:
       type: number
@@ -22,3 +24,9 @@ Theme_Entity_Theme:
     description:
       type: string
       description: Описание тематики
+    url:
+      type: string
+      description: URL-cовместимое название тематики
+    preview:
+      type: string
+      description: Изображение

@@ -27,9 +27,9 @@ class ThemeService implements EventEmitterAwareService
         $this->themeRepository = $themeRepository;
     }
 
-    public function createTheme(string $title, string $description, int $parentId = null): Theme
+    public function createTheme(string $title, string $description, int $parentId = null, int $forceId = null): Theme
     {
-        $theme = $this->themeRepository->createTheme($title, $description, $parentId);
+        $theme = $this->themeRepository->createTheme($title, $description, $parentId, $forceId);
         $this->getEventEmitter()->emit(self::EVENT_CREATED, [$theme]);
 
         return $theme;

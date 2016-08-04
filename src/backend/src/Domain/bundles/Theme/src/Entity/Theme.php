@@ -14,7 +14,7 @@ use Doctrine\ORM\PersistentCollection;
  */
 class Theme implements JSONSerializable, IdEntity, SerialEntity
 {
-    const DEFAULT_PREVIEW = '';
+    const DEFAULT_PREVIEW = 'default.png';
 
     use IdTrait;
 
@@ -31,33 +31,33 @@ class Theme implements JSONSerializable, IdEntity, SerialEntity
     private $parent;
 
     /**
-     * @Column(type="integer")
+     * @Column(type="integer", name="position")
      */
     private $position = SerialManager::POSITION_LAST;
 
     /**
-     * @Column(type="string")
+     * @Column(type="string", name="title")
      * @var string
      */
     private $title;
 
     /**
-     * @Column(type="text")
+     * @Column(type="text", name="description")
      * @var string
      */
     private $description = '';
 
     /**
-     * @Column(type="string")
+     * @Column(type="string", name="url")
      * @var string
      */
     private $url;
 
     /**
-     * @Column(type="string")
+     * @Column(type="string", name="preview")
      * @var string
      */
-    private $preview;
+    private $preview = self::DEFAULT_PREVIEW;
 
     public function toJSON(): array {
         return [
@@ -71,8 +71,12 @@ class Theme implements JSONSerializable, IdEntity, SerialEntity
         ];
     }
 
-    public function __construct(string $title)
+    public function __construct(string $title, int $forceId = null)
     {
+        if($forceId) {
+            $this->id = $forceId;
+        }
+
         $this->setTitle($title);
     }
 
@@ -82,17 +86,39 @@ class Theme implements JSONSerializable, IdEntity, SerialEntity
 
     public function setTitle(string $title): self {
         $this->title = $title;
-        $this->url = transliterator_transliterate('Any-Latin;Latin-ASCII;', $title);
+        $this->url = $this->generateURL();
 
         return $this;
     }
 
-    public function getURL(): string {
+    public function getURL(): string
+    {
         if(! strlen($this->url)) {
-            return transliterator_transliterate('Any-Latin;Latin-ASCII;', $this->getTitle());
-        }else{
-            return $this->url;
+            $this->url = $this->generateURL();
         }
+
+        return $this->url;
+    }
+
+    private function generateURL(): string
+    {
+        $nonLatinRegex = '/[^a-zA-Z\_]/';
+
+        $title = mb_strtolower($this->getTitle());
+        $result = transliterator_transliterate('Russian-Latin/BGN;', $title);
+        $result = str_replace(' ', '_', $result);
+
+        if(preg_match($nonLatinRegex, $result)) {
+            $result = transliterator_transliterate('Any-Latin;Latin-ASCII;', $result);
+        }
+
+        $result = preg_replace($nonLatinRegex, '_', $result);
+
+        while(strpos($result, '__') !== false) {
+            $result = str_replace('__', '_', $result);
+        }
+
+        return $result;
     }
 
     public function setURL(string $url): self {
