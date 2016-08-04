@@ -59,17 +59,9 @@ export class App
         return require('./../../../package.json').version;
     }
 
-    globalListenFunc: Function;
-
     @ViewChild('content') content: ElementRef;
     
-    constructor(private appService: AppService, elementRef: ElementRef, renderer: Renderer){
-        this.globalListenFunc = renderer.listenGlobal('document', 'keyup', (event: KeyboardEvent) => {
-            if(event.shiftKey && event.altKey && event.keyCode === 77){
-                this.appService.authDevModal(true);
-            }
-        });
-    }
+    constructor(private appService: AppService){}
 
     
     ngAfterViewInit(){

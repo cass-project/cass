@@ -1,3 +1,7 @@
+div(*ngIf="service.modals.authDev.isOpened()")
+  cass-modal
+    cass-modal-box(width="550px")
+      cass-auth-dev((close)='service.closeAllModals()')
 div
   .sign-in-modal(*ngIf='service.modals.signIn.isOpened()')
     cass-modal

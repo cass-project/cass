@@ -10,17 +10,12 @@ export class AppService {
     public scrollObservable: Observable<ContainerScrollEvent>;
     private scrollObserver: Observer<ContainerScrollEvent>;
     
-    constructor(private modals: ProfileModals){
+    constructor(){
         this.scrollObservable = Observable.create(observer => {
             this.scrollObserver = observer;
         })
     }
     
-
-    authDevModal($event){
-        console.log($event);
-        this.modals.authDev.open();
-    }
     
     onScroll($event){
         if(this.content && this.scrollObserver) {

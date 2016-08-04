@@ -25,19 +25,12 @@ import {AuthDev} from "../auth-dev/component/index";
         ProfileSwitcher,
         ProfileInterestsModal,
         ProfileSetup,
-        CollectionCreateMaster,
-        AuthDev
+        CollectionCreateMaster
     ]
 })
 export class ProfileComponent
 {
     constructor(private authService: AuthService, private currentProfileService: CurrentProfileService, private modals: ProfileModals, protected messages: MessageBusService) {}
-
-    closeModalAuthDev($event){
-        if($event){
-            this.modals.authDev.close();
-        }
-    }
     
     closeModalProfileSwitcher($event){
         if($event){

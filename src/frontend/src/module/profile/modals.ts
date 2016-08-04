@@ -5,7 +5,6 @@ import {ModalControl} from "../common/classes/ModalControl";
 @Injectable()
 export class ProfileModals
 {
-    authDev: ModalControl = new ModalControl();
     setup: ModalControl = new ModalControl();
     settings: ModalControl = new ModalControl();
     switcher: ModalControl = new ModalControl();

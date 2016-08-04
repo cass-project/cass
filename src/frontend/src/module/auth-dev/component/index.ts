@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from "angular2/core";
+import {Component, Output, EventEmitter, ElementRef, Renderer} from "angular2/core";
 import {Router} from "angular2/router";
 import {ModalComponent} from "../../modal/component/index";
 import {ModalBoxComponent} from "../../modal/component/box/index";
@@ -29,7 +29,7 @@ export class AuthDev
     @Output('error') error = new EventEmitter();
     
     private loading: boolean;
-
+    
     cancel(){
         this.close.emit(true);
     }
