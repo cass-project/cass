@@ -20,7 +20,7 @@ final class StageThemesCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('stage:themes')
+            ->setName('stage:themes:migrate')
             ->setDescription('Stage&Production themes');
     }
 

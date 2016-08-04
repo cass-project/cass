@@ -1,8 +1,6 @@
 <?php
 namespace Domain\Theme\Parameters;
 
-use Domain\Theme\Entity\Theme;
-
 final class CreateThemeParameters
 {
     /** @var string */
@@ -11,7 +9,7 @@ final class CreateThemeParameters
     /** @var string */
     private $description;
 
-    /** @var string */
+    /** @var string|null */
     private $preview;
 
     /** @var int|null */
@@ -26,7 +24,7 @@ final class CreateThemeParameters
     public function __construct(
         string $title,
         string $description,
-        string $preview = Theme::DEFAULT_PREVIEW,
+        string $preview = null,
         int $parentId = null,
         int $forceId = null,
         string $specifyURL = null
@@ -47,6 +45,11 @@ final class CreateThemeParameters
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function hasPreview(): bool
+    {
+        return $this->preview !== null;
     }
 
     public function getPreview(): string

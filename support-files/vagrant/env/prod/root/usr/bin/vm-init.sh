@@ -14,7 +14,21 @@ sudo apt-get update
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password 1234'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 1234'
 
-sudo apt-get install -y curl php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server mongodb php-pear php7.0-dev pkg-config libssl-dev libsslcommon2-dev php7.0-intl
+sudo apt-get install -y curl php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server php-pear php7.0-dev pkg-config libssl-dev libsslcommon2-dev php7.0-intl
+
+# #####
+# MONGO
+# #####
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo service mongodb restart
+
+# ##############
+# PHP7.0-MONGODB
+# ##############
+sudo pecl install mongodb
 
 # ##########
 # UPDATE NPM
@@ -27,11 +41,6 @@ sudo n 5.11.1
 # #####
 mysql -uroot -p"1234" -e "CREATE DATABASE cass"
 mysql -uroot -p"1234" -e "CREATE DATABASE cass_testing"
-
-# ##############
-# PHP7.0-MONGODB
-# ##############
-sudo pecl install mongodb
 
 # #######
 # Backend
@@ -93,22 +102,13 @@ wget https://phar.phpunit.de/phpunit.phar
 chmod +x phpunit.phar
 sudo mv phpunit.phar /usr/local/bin/phpunit
 
-# #############
-# Update server
-# #############
-vm-server-update.sh
-
 # #####
 # NGINX
 # #####
 sudo ln -s /etc/nginx/sites-available/cass /etc/nginx/sites-enabled/cass
 sudo service nginx restart
 
-# #####
-# MONGO
-# #####
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
-sudo apt-get update
-sudo apt-get install -y mongodb-org
-sudo service mongodb restart
+# #######
+# MIGRATE
+# #######
+vm-migrate.sh

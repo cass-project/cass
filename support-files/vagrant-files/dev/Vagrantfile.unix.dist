@@ -10,7 +10,7 @@ Vagrant.configure(2) do |config|
     dev.vm.provision :shell, inline: "sudo usermod -a -G www-data vagrant"
     dev.vm.provision :shell, path: "./support-files/vagrant/env/dev/provision.sh"
 
-    dev.vm.synced_folder "./", "/opt/cass", type: "nfs", owner: "www-data", group: "www-data"
+    dev.vm.synced_folder "./", "/opt/cass", type: "nfs"
     dev.vm.synced_folder "./support-files", "/support-files", type: "nfs"
 
     dev.vm.network "forwarded_port", guest: 3000, host: 8080 # www

@@ -42,13 +42,7 @@ class ThemeService implements EventEmitterAwareService
 
     public function hasThemeWithId(int $themeId): bool
     {
-        try {
-            $this->themeRepository->getThemeById($themeId);
-
-            return true;
-        }catch(ThemeNotFoundException $e) {
-            return false;
-        }
+        return $this->themeRepository->hasThemeWithId($themeId);
     }
 
     /** @return Theme[] */

@@ -33,6 +33,10 @@ class ThemeRepository extends EntityRepository
             $themeEntity->setURL($parameters->getSpecifiedURL());
         }
 
+        if($parameters->hasPreview()) {
+            $themeEntity->setPreview($parameters->getPreview());
+        }
+
         $parentId = $parameters->hasParent()
             ? $parameters->getParentId()
             : null;
@@ -91,7 +95,10 @@ class ThemeRepository extends EntityRepository
 
     public function hasThemeWithId(int $themeId): bool
     {
-        return $this->find($themeId) instanceof Theme;
+        $result = $this->find($themeId);
+
+        return ($result instanceof Theme)
+            && $this->getEntityManager()->contains($result);
     }
 
     public function updateTheme(int $themeId, UpdateThemeParameters $parameters): Theme

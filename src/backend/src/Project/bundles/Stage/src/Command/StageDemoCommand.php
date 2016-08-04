@@ -20,8 +20,8 @@ final class StageDemoCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('stage:fake')
-            ->setDescription('Stage fake data');
+            ->setName('stage:demo:migrate')
+            ->setDescription('Stage demo data');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

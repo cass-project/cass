@@ -19,6 +19,9 @@ final class ThemeFixture
     /** @var ThemeService */
     private $themeService;
 
+    /** @var int */
+    private $counter = 0;
+
     public function __construct(ThemeService $themeService)
     {
         $this->themeService = $themeService;
@@ -36,6 +39,15 @@ final class ThemeFixture
         ]);
 
         $this->lookupTree($this->json);
+        $this->lookupTree($this->json); // Yes we're doing it again.
+
+        if($this->counter == 0) {
+            $this->output->writeln([
+                '',
+                'Everything is up to date',
+                ''
+            ]);
+        }
     }
 
     private function fetchJSON(string $path): array
@@ -55,7 +67,7 @@ final class ThemeFixture
             return $input['parent_id'] === $currentParentId;
         });
 
-        if(count($themes)) {
+        if(count($themes) > 0) {
             foreach($themes as $themeJSON) {
                 $this->createTheme($themeJSON);
                 $this->lookupTree($json, $themeJSON['id']);
@@ -65,21 +77,26 @@ final class ThemeFixture
 
     private function createTheme(array $themeJSON)
     {
-        $this->output->writeln(sprintf(
-            ' * [#NEW THEME] id: %d, title: %s, parent_id: %s',
-            $themeJSON['id'],
-            $themeJSON['title'],
-            $themeJSON['parent_id']
-        ));
-
         if(! $this->themeService->hasThemeWithId($themeJSON['id'])) {
+            ++$this->counter;
+
+            $this->output->writeln(sprintf(
+                ' * [#NEW THEME] id: %d, title: %s, parent_id: %s, preview: %s',
+                $themeJSON['id'],
+                $themeJSON['title'],
+                $themeJSON['parent_id'],
+                $themeJSON['image'] ?? '<NONE>'
+            ));
+
             $parameters = new CreateThemeParameters(
                 $themeJSON['title'],
-                $themeJSON['description'],
+                $themeJSON['description'] ?? '',
                 $themeJSON['image'],
                 $themeJSON['parent_id'],
                 $themeJSON['id']
             );
+
+            $this->themeService->createTheme($parameters);
         }
     }
 }
