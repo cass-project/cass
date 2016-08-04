@@ -96,7 +96,11 @@ final class ThemeFixture
                 $themeJSON['id']
             );
 
-            $this->themeService->createTheme($parameters);
+            $theme = $this->themeService->createTheme($parameters);
+
+            if($themeJSON['image']) {
+                $this->themeService->uploadImagePreview($theme->getId(), sprintf('%s/%s', self::THEMES_PREVIEW_DIR, $themeJSON['image']));
+            }
         }
     }
 }

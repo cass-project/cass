@@ -135,6 +135,11 @@ class ThemeRepository extends EntityRepository
         $this->getEntityManager()->flush($sameLevelThemes + [$theme]);
     }
 
+    public function saveTheme(Theme $theme)
+    {
+        $this->getEntityManager()->persist($theme);
+    }
+
     private function normalizeTree(int $parentId = null)
     {
         $themes = $this->getThemesByParentId($parentId);

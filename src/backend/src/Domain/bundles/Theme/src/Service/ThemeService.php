@@ -3,16 +3,19 @@ namespace Domain\Theme\Service;
 
 use Application\Service\EventEmitterAware\EventEmitterAwareService;
 use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
+use Application\Util\GenerateRandomString;
 use Application\Util\SerialManager\SerialManager;
 use Domain\Theme\Entity\Theme;
-use Domain\Theme\Exception\ThemeNotFoundException;
 use Domain\Theme\Parameters\CreateThemeParameters;
 use Domain\Theme\Parameters\UpdateThemeParameters;
 use Domain\Theme\Repository\ThemeRepository;
+use League\Flysystem\FilesystemInterface;
 
 class ThemeService implements EventEmitterAwareService
 {
     use EventEmitterAwareTrait;
+
+    const GENERATE_FILENAME_LENGTH = 5;
 
     const EVENT_CREATED = 'domain.theme.created';
     const EVENT_UPDATED = 'domain.theme.updated';
@@ -22,9 +25,13 @@ class ThemeService implements EventEmitterAwareService
     /** @var ThemeRepository */
     private $themeRepository;
 
-    public function __construct(ThemeRepository $themeRepository)
+    /** @var FilesystemInterface */
+    private $fileSystem;
+
+    public function __construct(ThemeRepository $themeRepository, FilesystemInterface $fileSystem)
     {
         $this->themeRepository = $themeRepository;
+        $this->fileSystem = $fileSystem;
     }
 
     public function createTheme(CreateThemeParameters $parameters): Theme
@@ -86,5 +93,26 @@ class ThemeService implements EventEmitterAwareService
         $this->getEventEmitter()->emit(self::EVENT_DELETED, [$theme]);
 
         return $theme;
+    }
+
+    public function uploadImagePreview(int $themeId, string $path): string
+    {
+        $theme = $this->getThemeById($themeId);
+
+        $dir = $theme->getId();
+        $name = sprintf('%d.png', GenerateRandomString::gen(self::GENERATE_FILENAME_LENGTH));
+        $newPath = sprintf('%s/%s', $dir, $name);
+
+        if($this->fileSystem->has($dir)) {
+            $this->fileSystem->deleteDir($dir);
+        }
+
+        $this->fileSystem->write($newPath, file_get_contents($path));
+
+        $theme->setPreview($newPath);
+
+        $this->themeRepository->saveTheme($theme);
+
+        return $theme->getPreview();
     }
 }
