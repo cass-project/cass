@@ -4,7 +4,7 @@ import {ModalControl} from "../../../common/classes/ModalControl";
 @Injectable()
 export class AuthComponentService
 {
-    private modals: {
+    public modals: {
         signIn: ModalControl,
         signUp: ModalControl,
         authDev: ModalControl
@@ -34,6 +34,5 @@ export class AuthComponentService
         this.modals.signIn.close();
         this.modals.signUp.close();
         this.modals.authDev.close();
-        
     }
 }

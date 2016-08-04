@@ -25,12 +25,14 @@ import {AuthDev} from "../../../auth-dev/component/index";
 })
 export class AuthComponent
 {
-    private globalListenFunc: Function;
-
     constructor(private service: AuthComponentService, renderer: Renderer) {
-        this.globalListenFunc = renderer.listenGlobal('document', 'keyup', (event: KeyboardEvent) => {
-            if(event.shiftKey && event.altKey && event.keyCode === 77 /* M */){
-                this.service.authDev();
+        renderer.listenGlobal('document', 'keyup', (event:KeyboardEvent) => {
+            if (event.shiftKey && event.altKey && event.keyCode === 77 /* M */) {
+                if (this.service.modals.authDev.isOpened()) {
+                    this.service.closeAllModals();
+                } else {
+                    this.service.authDev();
+                }
             }
         })
     }
