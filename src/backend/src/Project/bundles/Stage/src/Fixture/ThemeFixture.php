@@ -91,7 +91,7 @@ final class ThemeFixture
             $parameters = new CreateThemeParameters(
                 $themeJSON['title'],
                 $themeJSON['description'] ?? '',
-                $themeJSON['image'],
+                null,
                 $themeJSON['parent_id'],
                 $themeJSON['id']
             );

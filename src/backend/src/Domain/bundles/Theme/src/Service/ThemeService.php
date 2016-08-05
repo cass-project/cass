@@ -100,7 +100,7 @@ class ThemeService implements EventEmitterAwareService
         $theme = $this->getThemeById($themeId);
 
         $dir = $theme->getId();
-        $name = sprintf('%d.png', GenerateRandomString::gen(self::GENERATE_FILENAME_LENGTH));
+        $name = sprintf('%s.png', GenerateRandomString::gen(self::GENERATE_FILENAME_LENGTH));
         $newPath = sprintf('%s/%s', $dir, $name);
 
         if($this->fileSystem->has($dir)) {
