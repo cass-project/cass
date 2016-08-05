@@ -36,7 +36,6 @@ abstract class ProfileMiddlewareTestCase extends MiddlewareTestCase
         return $this->request('GET', sprintf('/profile/by-sid/%s/get', $profileSID));
     }
 
-
     protected function requestDeleteProfile(int $profileId): RESTRequest
     {
         return $this->request('DELETE', sprintf('/protected/profile/%d/delete', $profileId));
@@ -87,5 +86,29 @@ abstract class ProfileMiddlewareTestCase extends MiddlewareTestCase
     {
         return $this->request('PUT', sprintf('/protected/profile/%d/expert-in', $profileId))
             ->setParameters($json);
+    }
+
+    protected function requestSetBirthday(int $profileId, array $json): RESTRequest
+    {
+        return $this->request('POST', sprintf('/protected/profile/%d/birthday', $profileId))
+            ->setParameters($json);
+    }
+
+    protected function requestUnsetBirthday(int $profileId): RESTRequest
+    {
+        return $this->request('DELETE', sprintf('/protected/profile/%d/birthday', $profileId));
+    }
+
+    protected function fromNow(int $years): \DateTime
+    {
+        if($years > 0) {
+            return (new \DateTime())->add(
+                new \DateInterval(sprintf('P%dY', abs($years)))
+            );
+        }else{
+            return (new \DateTime())->sub(
+                new \DateInterval(sprintf('P%dY', abs($years)))
+            );
+        }
     }
 }

@@ -29,10 +29,10 @@ class ExpectString {
     }
 }
 
-class ExpectNotExists {
+class ExpectUndefined {
     public function __toString(): string
     {
-        return "{{NOT_EXISTS}}";
+        return "{{UNDEFINED}}";
     }
 }
 
@@ -41,6 +41,7 @@ class ExpectImageCollection {
         return "{{IMAGE_COLLECTION}}";
     }
 }
+
 
 /**
  * @backupGlobals disabled
@@ -263,8 +264,8 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         return new ExpectString();
     }
 
-    protected function expectNotExists(): ExpectNotExists {
-        return new ExpectNotExists();
+    protected function expectUndefined(): ExpectUndefined {
+        return new ExpectUndefined();
     }
 
     protected function expectImageCollection(): ExpectImageCollection {
@@ -356,7 +357,7 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
                 ));
             }
 
-            if($value instanceof ExpectNotExists) {
+            if($value instanceof ExpectUndefined) {
                 $this->assertArrayNotHasKey($key, $actual);
             }else{
                 $this->assertArrayHasKey($key, $actual);

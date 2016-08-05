@@ -1,0 +1,38 @@
+"/protected/profile/{profileId}/birthday/":
+  post:
+    tags:
+      - profile
+    description: Задать дату рождения
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Profile_SetBirthday_Request'
+    responses:
+      200:
+        schema:
+          required:
+            - success
+          properties:
+            success:
+              type: boolean
+              default: true
+      404:
+        description: Профиль не найден
+        schema:
+            $ref: '#/responses/NotFound'
+      403:
+        schema:
+          $ref: '#/responses/Unauthorized'
+      409:
+        description: Переданная дата не является валидной
+        schema:
+          $ref: '#/responses/error'

@@ -91,7 +91,7 @@ class Account implements JSONSerializable, IdEntity, JSONMetadataEntity
             'delete_request' => [
                 'has' => $this->hasDeleteAccountRequest(),
                 'date' => $this->hasDeleteAccountRequest()
-                    ? $this->getDateAccountDeleteRequested()->format(\DateTime::RFC822)
+                    ? $this->getDateAccountDeleteRequested()->format(\DateTime::RFC2822)
                     : null
             ],
             'profiles' => array_map(function(Profile $profile) {

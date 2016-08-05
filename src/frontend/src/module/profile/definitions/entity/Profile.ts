@@ -28,6 +28,7 @@ export interface ProfileEntity {
     account_id: number;
     is_current: boolean;
     is_initialized: boolean;
+    birthday?: string;
     interesting_in_ids: Array<number>;
     expert_in_ids: Array<number>;
     image: ImageCollection;
@@ -66,8 +67,6 @@ export interface ProfileDisabledEntity {
 }
 
 export class Profile {
-    static AVATAR_DEFAULT = '/dist/assets/profile-default.png';
-
     constructor(public owner: Account, public entity: ProfileExtendedEntity) {
     }
 

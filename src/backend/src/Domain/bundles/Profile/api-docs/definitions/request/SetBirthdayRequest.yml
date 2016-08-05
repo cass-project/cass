@@ -1,0 +1,7 @@
+Profile_SetBirthday_Request:
+  required:
+    - date
+  properties:
+    date:
+      type: string
+      description: Дата рождения

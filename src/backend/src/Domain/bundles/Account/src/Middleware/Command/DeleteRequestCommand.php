@@ -18,7 +18,7 @@ final class DeleteRequestCommand extends AbstractCommand
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson([
-                    'date_account_delete_request' => $account->getDateAccountDeleteRequested()->format(\DateTime::RFC822)
+                    'date_account_delete_request' => $account->getDateAccountDeleteRequested()->format(\DateTime::RFC2822)
                 ]);
         } catch (AccountHasDeleteRequestException $e) {
             $responseBuilder

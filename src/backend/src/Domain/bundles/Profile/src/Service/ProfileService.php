@@ -16,7 +16,7 @@ use Domain\Profile\Entity\Profile\Gender\Gender;
 use Domain\Profile\Entity\Profile\Greetings\Greetings;
 use Domain\Profile\Exception\LastProfileException;
 use Domain\Profile\Exception\MaxProfilesReachedException;
-use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
+use Domain\Profile\Parameters\EditPersonalParameters;
 use Domain\Profile\Repository\ProfileRepository;
 use Domain\Profile\Image\ProfileImageStrategy;
 use League\Flysystem\FilesystemInterface;
@@ -184,6 +184,22 @@ class ProfileService implements EventEmitterAwareService
         $this->getEventEmitter()->emit(self::EVENT_PROFILE_UPDATED, [$profile]);
 
         return $profile->getGender();
+    }
+
+    public function setBirthday(int $profileId, \DateTime $birthday)
+    {
+        $profile = $this->getProfileById($profileId);
+        $profile->setBirthday($birthday);
+
+        $this->profileRepository->saveProfile($profile);
+    }
+
+    public function unsetBirthday(int $profileId)
+    {
+        $profile = $this->getProfileById($profileId);
+        $profile->unsetBirthday();
+
+        $this->profileRepository->saveProfile($profile);
     }
 
     public function uploadImage(int $profileId, UploadImageParameters $parameters): ImageCollection

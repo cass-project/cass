@@ -3,7 +3,7 @@ namespace Domain\Profile\Middleware\Request;
 
 use Application\REST\Service\JSONSchema;
 use Application\REST\Request\Params\SchemaParams;
-use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
+use Domain\Profile\Parameters\EditPersonalParameters;
 use Domain\Profile\ProfileBundle;
 
 class EditPersonalRequest extends SchemaParams

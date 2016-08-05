@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Profile\Middleware\Parameters;
+namespace Domain\Profile\Parameters;
 
 class SetGenderParameters
 {

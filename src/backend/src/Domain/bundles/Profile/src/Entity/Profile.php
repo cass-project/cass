@@ -18,6 +18,8 @@ use Domain\Profile\Entity\Profile\Gender\Gender;
 use Domain\Profile\Entity\Profile\Gender\GenderNotSpecified;
 use Domain\Profile\Entity\Profile\Greetings\Greetings;
 use Domain\Profile\Entity\Profile\Greetings\GreetingsAnonymous;
+use Domain\Profile\Exception\InvalidBirthdayException;
+use Domain\Profile\Exception\InvalidBirthdayGuestFromTheFutureException;
 
 /**
  * @Entity(repositoryClass="Domain\Profile\Repository\ProfileRepository")
@@ -25,6 +27,13 @@ use Domain\Profile\Entity\Profile\Greetings\GreetingsAnonymous;
  */
 class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, CollectionAwareEntity, IndexedEntity
 {
+    const MIN_AGE = 3;
+    const MAX_AGE = 130;
+
+    const EXCEPTION_GUEST_FUTURE = "Hello stranger, does nuclear war happen?";
+    const EXCEPTION_YOUNG = "You're too young, where are your parents?";
+    const EXCEPTION_OLD = "You're too old, where is your grave?";
+
     use IdTrait;
     use SIDEntityTrait;
     use CollectionAwareEntityTrait;
@@ -67,6 +76,12 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
     private $gender;
 
     /**
+     * @Column(type="datetime", name="birthday")
+     * @var \DateTime|null
+     */
+    private $birthday;
+
+    /**
      * @Column(type="json_array", name="interesting_in_ids")
      * @var int[]
      */
@@ -97,6 +112,10 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
             'interesting_in_ids' => $this->interestingInIds,
             'collections' => $this->getCollections()->toJSON(),
         ];
+
+        if($this->isBirthdaySpecified()) {
+            $result['birthday'] = $this->getBirthday()->format(\DateTime::RFC2822);
+        }
 
         return $result;
     }
@@ -182,6 +201,47 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
     public function setGender(Gender $gender): self
     {
         $this->gender = $gender->getIntCode();
+
+        return $this;
+    }
+
+    public function isBirthdaySpecified(): bool
+    {
+        return $this->birthday !== null;
+    }
+
+    public function getBirthday(): \DateTime
+    {
+        return $this->birthday;
+    }
+
+    public function setBirthday(\DateTime $birthday): self
+    {
+        $now = new \DateTime();
+
+        if($now < $birthday) {
+            throw new InvalidBirthdayGuestFromTheFutureException(self::EXCEPTION_GUEST_FUTURE);
+        }
+
+        $diff = $birthday->diff(new \DateTime());
+        $years = $diff->y;
+
+        if($years < self::MIN_AGE) {
+            throw new InvalidBirthdayException(self::EXCEPTION_YOUNG);
+        }
+
+        if($years > self::MAX_AGE) {
+            throw new InvalidBirthdayException(self::EXCEPTION_OLD);
+        }
+
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    public function unsetBirthday(): self
+    {
+        $this->birthday = null;
 
         return $this;
     }

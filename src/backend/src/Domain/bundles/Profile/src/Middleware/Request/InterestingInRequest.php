@@ -3,7 +3,7 @@ namespace Domain\Profile\Middleware\Request;
 
 use Application\REST\Request\Params\SchemaParams;
 use Application\REST\Service\JSONSchema;
-use Domain\Profile\Middleware\Parameters\InterestingInParameters;
+use Domain\Profile\Parameters\InterestingInParameters;
 use Domain\Profile\ProfileBundle;
 
 class InterestingInRequest extends SchemaParams

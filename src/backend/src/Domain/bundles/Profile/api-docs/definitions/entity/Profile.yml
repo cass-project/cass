@@ -26,6 +26,9 @@ Profile_Entity_Profile:
     greetings:
       schema:
         $ref: '#/definitions/Profile_Entity_ProfileGreetings'
+    birthday:
+      type: string
+      description: Дата рождения. Может отсутствовать.
     image:
       schema:
         $ref: '#/definitions/Avatar_ImageCollection'

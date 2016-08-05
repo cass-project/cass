@@ -20,7 +20,7 @@ use Domain\PostAttachment\Repository\PostAttachmentRepository;
 use Domain\PostAttachment\Service\PostAttachmentService;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Gender\Gender;
-use Domain\Profile\Middleware\Parameters\EditPersonalParameters;
+use Domain\Profile\Parameters\EditPersonalParameters;
 use Domain\Profile\Service\ProfileService;
 use Symfony\Component\Console\Output\OutputInterface;
 

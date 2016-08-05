@@ -3,7 +3,6 @@ namespace Domain\Profile\Middleware;
 
 use Application\Service\CommandService;
 use Application\REST\Response\GenericResponseBuilder;
-use Domain\Profile\Exception\ProfileNotFoundException;
 use Domain\Profile\Middleware\Command\CreateCommand;
 use Domain\Profile\Middleware\Command\DeleteCommand;
 use Domain\Profile\Middleware\Command\EditPersonalCommand;
@@ -14,7 +13,9 @@ use Domain\Profile\Middleware\Command\GreetingsAsCommand;
 use Domain\Profile\Middleware\Command\ImageDeleteCommand;
 use Domain\Profile\Middleware\Command\ImageUploadCommand;
 use Domain\Profile\Middleware\Command\InterestingInPutCommand;
+use Domain\Profile\Middleware\Command\SetBirthdayCommand;
 use Domain\Profile\Middleware\Command\SetGenderCommand;
+use Domain\Profile\Middleware\Command\UnsetBirthdayCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
@@ -41,18 +42,13 @@ class ProfileMiddleware implements MiddlewareInterface
             ->attachDirect("image-upload", ImageUploadCommand::class)
             ->attachDirect('image-delete', ImageDeleteCommand::class)
             ->attachDirect("edit-personal", EditPersonalCommand::class)
-            ->attachDirect("expert-in", ExpertInPutCommand::class, 'put')
-            ->attachDirect('interesting-in', InterestingInPutCommand::class, 'put')
+            ->attachDirect("expert-in", ExpertInPutCommand::class, 'PUT')
+            ->attachDirect('interesting-in', InterestingInPutCommand::class, 'PUT')
             ->attachDirect('set-gender', SetGenderCommand::class)
+            ->attachDirect('birthday', SetBirthdayCommand::class, 'POST')
+            ->attachDirect('birthday', UnsetBirthdayCommand::class, 'DELETE')
             ->resolve($request);
-        
-        try {
-            return $resolver->run($request, $responseBuilder);
-        }catch(ProfileNotFoundException $e) {
-            return $responseBuilder
-                ->setStatusNotFound()
-                ->setError($e)
-                ->build();
-        }
+
+        return $resolver->run($request, $responseBuilder);
     }
 }

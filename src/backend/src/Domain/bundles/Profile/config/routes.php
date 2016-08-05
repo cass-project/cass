@@ -82,5 +82,19 @@ return [
             'middleware' => ProfileMiddleware::class,
             'name'       => 'profile-set-gender'
         ],
+        [
+            'type'       => 'route',
+            'method'     => 'post',
+            'url'        => '/protected/profile/{profileId}/{command:birthday}[/]',
+            'middleware' => ProfileMiddleware::class,
+            'name'       => 'profile-set-birthday'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'delete',
+            'url'        => '/protected/profile/{profileId}/{command:birthday}[/]',
+            'middleware' => ProfileMiddleware::class,
+            'name'       => 'profile-unset-birthday'
+        ],
     ]
 ];
