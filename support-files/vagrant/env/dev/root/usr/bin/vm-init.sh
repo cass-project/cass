@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Locale issues
+sudo apt-get update
 sudo apt-get install language-pack-en language-pack-en-base -y
 sudo locale-gen en_US.UTF-8
 export LC_ALL="en_US.UTF-8"
