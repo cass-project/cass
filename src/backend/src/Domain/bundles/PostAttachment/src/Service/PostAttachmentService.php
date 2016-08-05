@@ -3,6 +3,7 @@ namespace Domain\PostAttachment\Service;
 
 use Application\Util\FileNameFilter;
 use Application\Util\GenerateRandomString;
+use Application\Util\Seek;
 use Domain\OpenGraph\Parser\OpenGraphParser;
 use Domain\Post\Entity\Post;
 use Domain\PostAttachment\Entity\PostAttachment;
@@ -128,6 +129,16 @@ class PostAttachmentService
     public function getAttachmentsByIds(array $attachmentIds): array
     {
         return $this->postAttachmentRepository->getAttachmentByIds($attachmentIds);
+    }
+
+    public function getAttachmentsByCriteria(array $types, Seek $seek): array
+    {
+        return $this->postAttachmentRepository->findBy(['attachmentType' => $types], NULL, $seek->getLimit(), $seek->getOffset());
+    }
+
+    public function getTotalCountAttachments(array $types): int
+    {
+
     }
 
     public function getAttachmentsOfPost(int $postId): array
