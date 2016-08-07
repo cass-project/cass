@@ -17,7 +17,5 @@ export class CommunityCreateModalNotifier
         this.observable = Observable.create(observer => {
             this.observer = observer;
         }).publish().refCount();
-
-        this.observable.subscribe(response => console.log('do we even bind?', this.observer));
     }
 }

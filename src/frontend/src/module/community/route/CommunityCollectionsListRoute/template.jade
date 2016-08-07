@@ -3,5 +3,6 @@ article.component.component-community-collections-list-route
     h1 Подборки
     cass-collections-list(
       [collections]="service.getCommunity().collections",
-      [is-own]="service.getCommunity().is_own"
+      [is-own]="service.getCommunity().is_own",
+      (create)="openCreateCollectionModal($event)"
     )

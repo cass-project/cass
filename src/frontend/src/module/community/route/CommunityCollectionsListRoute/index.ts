@@ -17,4 +17,8 @@ import {CommunityRouteService} from "../CommunityRoute/service";
 export class CommunityCollectionsListRoute
 {
     constructor(private service: CommunityRouteService) {}
+
+    openCreateCollectionModal($event) {
+        this.service.modals.createCollection.open();
+    }
 }

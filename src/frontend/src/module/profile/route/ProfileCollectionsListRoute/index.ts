@@ -17,4 +17,8 @@ import {ProfileRouteService} from "../ProfileRoute/service";
 export class ProfileCollectionsListRoute
 {
     constructor(private service: ProfileRouteService) {}
+    
+    openCreateCollectionModal() {
+        this.service.modals.createCollection.open();
+    }
 }

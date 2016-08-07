@@ -1,4 +1,6 @@
-import {Component} from "angular2/core";
+import {Component, EventEmitter, Output} from "angular2/core";
+
+import {CollectionModals} from "../../../modals";
 
 @Component({
     selector: 'cass-create-collection-card',
@@ -9,5 +11,11 @@ import {Component} from "angular2/core";
 })
 export class CreateCollectionCard
 {
+    @Output('click') clickEvent = new EventEmitter<Event>();
     
+    constructor(private modals: CollectionModals) {}
+
+    private click($event) {
+        this.clickEvent.emit($event);
+    }
 }

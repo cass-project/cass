@@ -63,6 +63,11 @@ export class AuthService
 
         return signInObservable;
     }
+    
+    public signInWithAPIKey(apiKey: string) {
+        this.token.setToken(apiKey);
+        localStorage.setItem('api_key', apiKey);
+    }
 
     public signOut() {
         let request = this.api.signOut();

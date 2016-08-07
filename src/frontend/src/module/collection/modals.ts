@@ -1,7 +1,10 @@
+import {Injectable} from "angular2/core";
+
 import {ModalControl} from "../common/classes/ModalControl";
 
+@Injectable()
 export class CollectionModals
 {
-    private create: ModalControl;
-    private settings: ModalControl;
+    public create: ModalControl;
+    public settings: ModalControl;
 }

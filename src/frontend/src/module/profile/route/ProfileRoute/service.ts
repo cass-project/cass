@@ -7,6 +7,7 @@ import {ProfileRESTService} from "../../service/ProfileRESTService";
 import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
 import {CurrentProfileService} from "../../service/CurrentProfileService";
 import {ProfileCachedIdentityMap} from "../../service/ProfileCachedIdentityMap";
+import {ProfileModals} from "../../modals";
 
 @Injectable()
 export class  ProfileRouteService
@@ -21,7 +22,8 @@ export class  ProfileRouteService
     constructor(
         private api: ProfileRESTService,
         private cache: ProfileCachedIdentityMap,
-        private current: CurrentProfileService
+        private current: CurrentProfileService,
+        public modals: ProfileModals
     ) {}
     
     public isProfileLoaded(): boolean {

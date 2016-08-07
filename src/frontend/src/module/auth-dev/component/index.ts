@@ -1,10 +1,9 @@
-import {Component, Output, EventEmitter, ElementRef, Renderer} from "angular2/core";
-import {Router} from "angular2/router";
+import {Component, Output, EventEmitter} from "angular2/core";
+
 import {ModalComponent} from "../../modal/component/index";
 import {ModalBoxComponent} from "../../modal/component/box/index";
 import {ProgressLock} from "../../form/component/ProgressLock/index";
-import {MessageBusService} from "../../message/service/MessageBusService/index";
-import {AuthToken} from "../../auth/service/AuthToken";
+import {AuthService} from "../../auth/service/AuthService";
 
 @Component({
     template: require('./template.jade'),
@@ -18,9 +17,7 @@ import {AuthToken} from "../../auth/service/AuthToken";
 export class AuthDev
 {
     constructor(
-        private messages: MessageBusService,
-        private router: Router,
-        private token: AuthToken
+        private auth: AuthService
     ) {}
     
     apiKey: string = '';
@@ -35,9 +32,9 @@ export class AuthDev
     }
 
     enter(){
-        this.token.setToken(this.apiKey);
-        localStorage.setItem('api_key', this.apiKey);
-        this.router.navigate(['Profile/Profile', {id: 'current'}]);
+        this.auth.signInWithAPIKey(this.apiKey);
+        
+        window.location.href = '/';
         window.location.reload();
     }
     
