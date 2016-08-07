@@ -74,7 +74,7 @@ class AccountRepository extends EntityRepository
     public function findByAPIKey(string $apiKey): Account
     {
         $account = $this->findOneBy([
-            'password' => $apiKey
+            'apiKey' => $apiKey
         ]);
 
         if ($account === null) {

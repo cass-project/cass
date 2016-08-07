@@ -42,7 +42,7 @@ return [
         ],
         [
             'type'       => 'route',
-            'method'     => 'get',
+            'method'     => 'post',
             'url'        => '/protected/feedback/{feedbackId}/{command:mark-as-read}[/]',
             'middleware' => FeedbackMiddleware::class,
             'name'       => 'feedback-mark-as-read'

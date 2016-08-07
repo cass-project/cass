@@ -28,7 +28,7 @@ class ListCommand extends Command
             if(isset($qp['profileId'])) {
                 $options['profileId'] = (int) $qp['profileId'];
             }else{
-                $options['profileId'] = $this->currentAccountService->getCurrentProfile()->getId();
+                $options['profileId'] = $this->currentAccountService->getCurrentAccount()->getCurrentProfile()->getId();
             }
 
             if(isset($qp['read'])) {

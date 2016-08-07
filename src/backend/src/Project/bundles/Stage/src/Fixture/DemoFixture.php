@@ -378,7 +378,7 @@ final class DemoFixture
                 $account = $this->accountsMap[array_rand($this->accountsMap )] ;
             }
 
-            $this->currentAccountService->forceSignIn($account);
+            $this->currentAccountService->signInWithAccount($account);
 
             /** @var Profile $profile */
             $profile = $account->getProfiles()->first();

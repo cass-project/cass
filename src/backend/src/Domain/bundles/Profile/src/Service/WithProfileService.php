@@ -19,7 +19,7 @@ final class WithProfileService
 
     public function specifyProfile(int $profileId)
     {
-         $this->currentProfile = $this->currentAccountService->getProfileWithId($profileId);
+         $this->currentProfile = $this->currentAccountService->getCurrentAccount()->getProfileWithId($profileId);
     }
 
     public function getProfile(): Profile

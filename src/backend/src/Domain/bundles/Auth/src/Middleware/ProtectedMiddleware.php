@@ -26,7 +26,7 @@ class ProtectedMiddleware implements MiddlewareInterface
         $isURLProtected = strpos($request->getUri()->getPath(), "/protected/") === 0;
 
         try {
-            $this->currentAccountService->attempt([
+            $this->currentAccountService->signInWithStrategies([
                 new HeaderStrategy($request),
                 new JSONBodyStrategy($request),
                 new SessionStrategy($request)

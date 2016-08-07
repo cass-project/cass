@@ -3,6 +3,8 @@ namespace Domain\Collection\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
 use Domain\Collection\Middleware\Request\CreateCollectionRequest;
+use Domain\Community\Exception\CommunityNotFoundException;
+use Domain\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -10,13 +12,24 @@ class CreateCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $collection = $this->collectionService->createCollection((new CreateCollectionRequest($request))->getParameters());
+        try {
+            $collection = $this->collectionService->createCollection((new CreateCollectionRequest($request))->getParameters());
 
-        return $responseBuilder
-            ->setStatusSuccess()
-            ->setJson([
-                'entity' => $collection->toJSON()
-            ])
-            ->build();
+            $responseBuilder
+                ->setStatusSuccess()
+                ->setJson([
+                    'entity' => $collection->toJSON()
+                ]);
+        }catch(CommunityNotFoundException $e){
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
+        }catch(ProfileNotFoundException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
+        }
+
+        return $responseBuilder->build();
     }
 }

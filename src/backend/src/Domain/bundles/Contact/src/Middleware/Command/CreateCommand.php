@@ -17,7 +17,7 @@ final class CreateCommand extends Command
         
         try {
             $entity = $this->contactService->createContact(
-                $this->currentAccountService->getProfileWithId($profileId),
+                $this->currentAccountService->getCurrentAccount()->getProfileWithId($profileId),
                 $parameters
             );
 

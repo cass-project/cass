@@ -10,7 +10,7 @@ class ListCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $profileId = $this->currentAccountService->getProfileWithId(
+        $profileId = $this->currentAccountService->getCurrentAccount()->getProfileWithId(
             $request->getAttribute('profileId')
         )->getId();
 

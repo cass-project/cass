@@ -14,7 +14,7 @@ class SendCommand extends Command
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
-            $author = $this->currentAccountService->getProfileWithId($request->getAttribute('sourceProfileId'));
+            $author = $this->currentAccountService->getCurrentAccount()->getProfileWithId($request->getAttribute('sourceProfileId'));
             $source = $this->sourceFactory->createSource(
                 $request->getAttribute('source'),
                 (int) $request->getAttribute('sourceId'),

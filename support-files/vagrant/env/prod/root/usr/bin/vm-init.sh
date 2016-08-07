@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 
+sudo -i
+
 # Locale issues
 sudo apt-get update
 sudo apt-get install language-pack-en language-pack-en-base -y
 sudo locale-gen en_US.UTF-8
 export LC_ALL="en_US.UTF-8"
+
+# MongoDb
+sudo mkdir -p /data/db/
+sudo chown `id -u` /data/db
 
 # ###############
 # APT-GET SECTION
@@ -15,7 +21,7 @@ sudo apt-get update
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password 1234'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 1234'
 
-sudo apt-get install -y curl php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server php-pear php7.0-dev pkg-config libssl-dev libsslcommon2-dev php7.0-intl mongodb
+sudo apt-get install -y curl php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server php-pear php7.0-dev pkg-config libssl-dev libsslcommon2-dev php7.0-intl
 
 # #####
 # MONGO
@@ -24,7 +30,7 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
 sudo apt-get update
 sudo apt-get install -y mongodb-org
-sudo service mongodb restart
+sudo service mongod restart
 
 # ##############
 # PHP7.0-MONGODB
@@ -42,6 +48,13 @@ sudo n 5.11.1
 # #####
 mysql -uroot -p"1234" -e "CREATE DATABASE cass"
 mysql -uroot -p"1234" -e "CREATE DATABASE cass_testing"
+
+# #####
+# CLONE
+# #####
+cd /opt/cass
+git pull && git submodule init && git submodule update && git submodule status
+sudo cp -R /support-files/vagrant/env/prod/root/* /
 
 # #######
 # Backend

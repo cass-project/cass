@@ -27,7 +27,7 @@ class DemoAccountFixture implements Fixture
 
         $account = $accountService->createAccount(self::ACCOUNT_EMAIL, self::ACCOUNT_PASSWORD);
         $accountSecond = $accountService->createAccount(self::ACCOUNT_EMAIL_SECOND, self::ACCOUNT_PASSWORD);
-        $currentAccountService->forceSignIn($account);
+        $currentAccountService->signInWithAccount($account);
 
         self::$account = $account;
         self::$secondAccount = $accountSecond;

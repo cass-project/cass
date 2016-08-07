@@ -15,7 +15,7 @@ class MessagesCommand extends Command
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
-            $profile = $this->currentAccountService->getProfileWithId($request->getAttribute('targetProfileId'));
+            $profile = $this->currentAccountService->getCurrentAccount()->getProfileWithId($request->getAttribute('targetProfileId'));
             $source = $this->sourceFactory->createSource(
                 $request->getAttribute('source'),
                 (int) $request->getAttribute('sourceId'),

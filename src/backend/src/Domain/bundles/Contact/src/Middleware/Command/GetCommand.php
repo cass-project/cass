@@ -15,7 +15,7 @@ final class GetCommand extends Command
         $contactId = $request->getAttribute('contactId');
 
         try {
-            $this->currentAccountService->getProfileWithId($profileId);
+            $this->currentAccountService->getCurrentAccount()->getProfileWithId($profileId);
 
             $responseBuilder
                 ->setJson([

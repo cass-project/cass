@@ -21,7 +21,7 @@ class DeleteCommand extends Command
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson([
-                    'current_profile_id' => $this->currentAccountService->getCurrentProfile()->getId()
+                    'current_profile_id' => $this->currentAccountService->getCurrentAccount()->getCurrentProfile()->getId()
                 ]);
         } catch (LastProfileException $e) {
             $responseBuilder

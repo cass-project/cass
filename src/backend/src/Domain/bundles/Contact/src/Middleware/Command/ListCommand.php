@@ -14,7 +14,7 @@ final class ListCommand extends Command
 
         try {
             $entities = $this->contactService->listContacts(
-                $this->currentAccountService->getProfileWithId($profileId)
+                $this->currentAccountService->getCurrentAccount()->getProfileWithId($profileId)
             );
 
             $responseBuilder

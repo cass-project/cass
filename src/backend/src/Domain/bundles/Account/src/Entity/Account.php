@@ -5,25 +5,36 @@ use Application\Util\Entity\IdEntity\IdEntity;
 use Application\Util\Entity\IdEntity\IdTrait;
 use Application\Util\Entity\JSONMetadata\JSONMetadataEntity;
 use Application\Util\Entity\JSONMetadata\JSONMetadataEntityTrait;
+use Application\Util\Entity\SIDEntity\SIDEntity;
+use Application\Util\Entity\SIDEntity\SIDEntityTrait;
+use Application\Util\GenerateRandomString;
 use Application\Util\JSONSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Profile\Exception\NoCurrentProfileException;
+use Domain\Profile\Exception\ProfileNotFoundException;
 
 /**
  * @Entity(repositoryClass="Domain\Account\Repository\AccountRepository")
  * @Table(name="account")
  */
-class Account implements JSONSerializable, IdEntity, JSONMetadataEntity
+class Account implements JSONSerializable, IdEntity, SIDEntity, JSONMetadataEntity
 {
     use IdTrait;
+    use SIDEntityTrait;
     use JSONMetadataEntityTrait;
 
     /**
+     * @Column(type="string", name="api_key")
+     * @var string
+     */
+    private $apiKey;
+
+    /**
      * @OneToMany(targetEntity="Domain\Profile\Entity\Profile", mappedBy="account", cascade={"all"})
-     * @var ArrayCollection
+     * @var Collection
      */
     private $profiles;
 
@@ -72,6 +83,15 @@ class Account implements JSONSerializable, IdEntity, JSONMetadataEntity
     public function __construct()
     {
         $this->profiles = new ArrayCollection();
+        $this->regenerateAPIKey();
+        $this->regenerateSID();
+    }
+
+    public function regenerateAPIKey(): string
+    {
+        $this->apiKey = GenerateRandomString::gen(12);
+
+        return $this->apiKey;
     }
 
     public function equals(Account $compare): bool 
@@ -118,6 +138,18 @@ class Account implements JSONSerializable, IdEntity, JSONMetadataEntity
         throw new NoCurrentProfileException(sprintf('No current profile available for account ID: %d', $this->isPersisted() ? $this->getId() : 'NEW_INSTANCE'));
     }
 
+    public function getProfileWithId(int $profileId): Profile
+    {
+        /** @var Profile $profile */
+        foreach($this->getProfiles() as $profile) {
+            if($profile->getId() === $profileId) {
+                return $profile;
+            }
+        }
+
+        throw new ProfileNotFoundException(sprintf('Profile with ID `%s` not found', $profile->getIdNoFall()));
+    }
+
     public function getPassword()
     {
         return $this->password;
@@ -142,7 +174,7 @@ class Account implements JSONSerializable, IdEntity, JSONMetadataEntity
 
     public function getAPIKey()
     {
-        return $this->password;
+        return $this->apiKey;
     }
 
     public function disableAccount(string $reason)

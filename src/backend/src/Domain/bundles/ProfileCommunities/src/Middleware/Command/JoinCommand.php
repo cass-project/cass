@@ -16,7 +16,7 @@ class JoinCommand extends Command
             $communitySID = $request->getAttribute('communitySID');
 
             $eq = $this->profileCommunitiesService->joinToCommunity(
-                $this->currentAccountService->getProfileWithId($profileId)->getId(),
+                $this->currentAccountService->getCurrentAccount()->getProfileWithId($profileId)->getId(),
                 $communitySID
             );
 

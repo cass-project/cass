@@ -16,7 +16,7 @@ sudo chmod a+x /usr/bin/vm-*
 sudo chmod a+x /usr/bin/cass-*
 
 sudo service mysql restart
-sudo service mongodb restart
+sudo service mongod restart
 sudo service php7.0-fpm restart
 sudo service nginx restart
 

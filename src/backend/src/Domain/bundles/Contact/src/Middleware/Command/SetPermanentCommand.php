@@ -15,7 +15,7 @@ final class SetPermanentCommand extends Command
         $contactId = $request->getAttribute('contactId');
 
         try {
-            $this->currentAccountService->getProfileWithId($profileId);
+            $this->currentAccountService->getCurrentAccount()->getProfileWithId($profileId);
 
             $contact = $this->contactService->setPermanentContact($contactId);
 

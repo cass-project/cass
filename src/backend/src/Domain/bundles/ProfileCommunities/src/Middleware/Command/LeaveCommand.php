@@ -15,7 +15,7 @@ class LeaveCommand extends Command
             $communitySID = $request->getAttribute('communitySID');
 
             $this->profileCommunitiesService->leaveCommunity(
-                $this->currentAccountService->getProfileWithId($profileId)->getId(),
+                $this->currentAccountService->getCurrentAccount()->getProfileWithId($profileId)->getId(),
                 $communitySID
             );
 

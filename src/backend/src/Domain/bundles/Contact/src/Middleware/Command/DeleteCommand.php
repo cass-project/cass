@@ -15,7 +15,7 @@ final class DeleteCommand extends Command
         $contactId = $request->getAttribute('contactId');
 
         try {
-            $this->currentAccountService->getProfileWithId($profileId);
+            $this->currentAccountService->getCurrentAccount()->getProfileWithId($profileId);
             $this->contactService->deleteContact($contactId);
 
             $responseBuilder->setStatusSuccess();

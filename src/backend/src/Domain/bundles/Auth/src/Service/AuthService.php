@@ -41,7 +41,7 @@ class AuthService
     {
         $_SESSION[SessionStrategy::SESSION_API_KEY] = $account->getAPIKey();
 
-        $this->currentAccountService->forceSignIn($account);
+        $this->currentAccountService->signInWithAccount($account);
 
         return $account;
     }
