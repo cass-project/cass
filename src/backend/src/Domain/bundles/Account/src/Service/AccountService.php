@@ -62,6 +62,10 @@ final class AccountService implements EventEmitterAwareService
         $account
             ->setEmail($email)
             ->setPassword($this->passwordVerifyService->generatePassword($password));
+
+        while($this->checkAPIKeyCollision($account->getAPIKey())) {
+            $account->regenerateAPIKey();
+        }
         
         $this->accountRepository->createAccount($account);
         $this->getEventEmitter()->emit(self::EVENT_ACCOUNT_CREATED, [$account]);
@@ -157,6 +161,24 @@ final class AccountService implements EventEmitterAwareService
 
 
         return $account;
+    }
+
+    public function checkAPIKeyCollision(string $apiKey): bool
+    {
+        return $this->accountRepository->hasAccountWithAPIKey($apiKey);
+    }
+
+    public function regenerateAPIKey(int $accountId): string
+    {
+        $account = $this->getById($accountId);
+
+        do {
+            $account->regenerateAPIKey();
+        } while($this->checkAPIKeyCollision($account->getAPIKey()));
+
+        $this->accountRepository->saveAccount($account);
+
+        return $account->getAPIKey();
     }
 
     public function getById(int $accountId): Account

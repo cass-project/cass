@@ -83,6 +83,13 @@ class AccountRepository extends EntityRepository
 
         return $account;
     }
+    
+    public function hasAccountWithAPIKey(string $apiKey): bool 
+    {
+        return $this->findOneBy([
+            'apiKey' => $apiKey
+        ]) !== null;
+    }
 
     public function getPendingDeleteAccounts(int $days): array
     {
