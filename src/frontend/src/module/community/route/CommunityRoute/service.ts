@@ -1,8 +1,7 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 
 import {CommunityExtendedEntity} from "../../definitions/entity/Community";
-import {Response} from "angular2/http";
 import {GetCommunityBySIDResponse200} from "../../definitions/paths/get-by-sid";
 import {CommunityRESTService} from "../../service/CommunityRESTService";
 import {CommunityModals} from "../../modals";
@@ -14,7 +13,7 @@ export class  CommunityRouteService
 
     private community: CommunityExtendedEntity;
     private loading: boolean = false;
-    private observable: Observable<Response>;
+    private observable: Observable<GetCommunityBySIDResponse200>;
 
     constructor(
         private api: CommunityRESTService,

@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 
 import {ProfileModal} from "./component/Modals/ProfileModal/index";
 import {ModalComponent} from "../modal/component/index";

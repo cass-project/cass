@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 
 import {FeedbackCreateModal} from "./component/Modal/FeedbackCreateModal/index";
 import {FeedbackCreateButton} from "./component/Elements/FeedbackCreateButton/index";

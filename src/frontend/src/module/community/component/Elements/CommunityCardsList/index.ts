@@ -1,10 +1,10 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input} from "@angular/core";
 
 import {CommunityCard} from "../CommunityCard/index";
 import {CommunityCreateCollectionCard} from "../CommunityCreateCollectionCard/index";
 import {CommunitySettingsCard} from "../CommunitySettingsCard/index";
 
-import {Router} from "angular2/router";
+import {Router} from '@angular/router-deprecated';
 import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
 
 @Component({

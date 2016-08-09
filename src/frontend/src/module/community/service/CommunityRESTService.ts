@@ -1,7 +1,6 @@
-import {Injectable} from "angular2/core";
-import {Http, Response, ResponseType, ResponseOptions, Headers} from "angular2/http";
+import {Injectable} from "@angular/core";
+import {Http, Response, ResponseType, ResponseOptions, Headers} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {getResponseURL} from "angular2/src/http/http_utils";
 
 import {CommunityCreateRequestModel} from "../model/CommunityCreateRequestModel";
 import {CommunityImageUploadRequestModel} from "../model/CommunityImageUploadRequestModel";
@@ -121,8 +120,7 @@ export class CommunityRESTService extends AbstractRESTService
                             headers: Headers.fromResponseHeaderString(xhr.getAllResponseHeaders()),
                             status: xhr.status,
                             statusText: xhr.statusText,
-                            type: ResponseType.Default,
-                            url: getResponseURL(xhr)
+                            type: ResponseType.Default
                         })));
                         observer.complete();
                     } else {

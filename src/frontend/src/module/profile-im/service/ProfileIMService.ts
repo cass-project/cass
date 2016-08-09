@@ -1,4 +1,4 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {Observable, Observer} from "rxjs/Rx";
 
 import {IMMessageExtendedEntity, IMMessageEntity} from "../../im/definitions/entity/IMMessage";

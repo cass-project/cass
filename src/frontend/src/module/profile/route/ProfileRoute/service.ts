@@ -1,8 +1,7 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 
 import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
-import {Response} from "angular2/http";
 import {ProfileRESTService} from "../../service/ProfileRESTService";
 import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
 import {CurrentProfileService} from "../../service/CurrentProfileService";
@@ -17,7 +16,7 @@ export class  ProfileRouteService
 
     private profile: ProfileExtendedEntity;
     private loading: boolean = false;
-    private observable: Observable<Response>;
+    private observable: Observable<GetProfileByIdResponse200>;
 
     constructor(
         private api: ProfileRESTService,
@@ -53,7 +52,7 @@ export class  ProfileRouteService
     public loadCurrentProfile() {
         this.request = 'current';
 
-        this.loadProfile(new Observable(observer => {
+        this.loadProfile(new Observable<GetProfileByIdResponse200>(observer => {
             observer.next({
                 success: true,
                 entity: this.current.get().entity

@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 
 import {Screen} from "../../screen";
 import {LoadingLinearIndicator} from "../../../../../../form/component/LoadingLinearIndicator/index";

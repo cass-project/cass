@@ -1,4 +1,4 @@
-import {Component, Input, EventEmitter, Output} from "angular2/core";
+import {Component, Input, EventEmitter, Output} from "@angular/core";
 
 import {ProfileEntity} from "../../../definitions/entity/Profile";
 import {ThemeSelect} from "../../../../theme/component/ThemeSelect/index";

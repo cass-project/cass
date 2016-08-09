@@ -1,9 +1,9 @@
 declare var Cropper;
 
-import {Injectable, Output, EventEmitter, OnDestroy, OnInit} from "angular2/core";
-import {Component} from "angular2/core";
-import {ViewChild} from "angular2/core";
-import {ElementRef} from "angular2/core";
+import {Injectable, Output, EventEmitter, OnDestroy, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
+import {ViewChild} from "@angular/core";
+import {ElementRef} from "@angular/core";
 
 @Injectable()
 export class ImageCropperService

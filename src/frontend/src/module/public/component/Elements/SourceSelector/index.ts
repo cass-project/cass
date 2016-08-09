@@ -1,6 +1,6 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {PublicService} from "../../../service";
 
 @Component({

@@ -1,11 +1,11 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input} from "@angular/core";
 
 import {ProfileCard} from "../ProfileCard/index";
 import {ProfileInterestsCard} from "../ProfileInterestsCard/index";
 import {ProfileCreateCollectionCard} from "../ProfileCreateCollectionCard/index";
 import {ProfileSettingsCard} from "../ProfileSettingsCard/index";
 import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
-import {Router} from "angular2/router";
+import {Router} from '@angular/router-deprecated';
 
 @Component({
     selector: 'cass-profile-cards-list',

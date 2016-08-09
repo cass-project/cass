@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from "angular2/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 
 import {ModalBoxComponent} from "../../../../modal/component/box";
 import {ModalComponent} from "../../../../modal/component";
@@ -16,7 +16,7 @@ import {CommunityControlFeatureRequestModel} from "../../../model/CommunityActiv
 import {CommunityImageUploadRequestModel} from "../../../model/CommunityImageUploadRequestModel";
 import {ImageCropperService} from "../../../../form/component/ImageCropper/index";
 import {Observable} from "rxjs/Rx";
-import {Response} from "angular2/http";
+import {Response} from "@angular/http";
 import {CommunityFeaturesModel} from "../CommunityCreateModal/model";
 import {SetPublicOptionsCommunityRequest} from "../../../definitions/paths/set-public-options";
 

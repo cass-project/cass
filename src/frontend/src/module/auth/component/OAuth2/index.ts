@@ -1,5 +1,5 @@
-import {Component} from "angular2/core";
-import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig, Location, Router} from 'angular2/router';
+import {Component} from "@angular/core";
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
 @Component({
     directives: [
@@ -23,7 +23,7 @@ export class OAuth2Component
     }
 
     oAuthGo(provider: string){
-        /*ToDo: Make angular2 great again!*/
+        /*ToDo: Make @angular great again!*/
         return window.location.href = this.getOAuth2Url(provider);
     }
 }

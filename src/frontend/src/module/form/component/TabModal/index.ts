@@ -1,4 +1,4 @@
-import {Component, ContentChildren, QueryList, Input} from "angular2/core";
+import {Component, ContentChildren, QueryList, Input} from "@angular/core";
 
 import {ModalComponent} from "../../../modal/component/index";
 import {ModalBoxComponent} from "../../../modal/component/box/index";

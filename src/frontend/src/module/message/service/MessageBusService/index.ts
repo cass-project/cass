@@ -1,4 +1,4 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 
 import {MessageBusNotificationsModel} from "../../component/MessageBusNotifications/model";
 import {MessageBusInterface} from "./interface";

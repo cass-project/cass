@@ -1,4 +1,4 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 
 import {ProfileCommunityBookmarkEntity} from "../definitions/ProfileCommunityBookmark";
 import {CommunityEntity} from "../../community/definitions/entity/Community";

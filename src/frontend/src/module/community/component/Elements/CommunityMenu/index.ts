@@ -1,4 +1,4 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input} from "@angular/core";
 
 import {CommunityComponent} from "../../../index";
 import {CommunityExtendedEntity} from "../../../definitions/entity/Community";

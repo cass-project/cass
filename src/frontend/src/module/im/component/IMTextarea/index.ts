@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild, Input, EventEmitter, Output} from "angular2/core";
+import {Component, ElementRef, ViewChild, Input, EventEmitter, Output} from "@angular/core";
 
 import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 import {MessageBusService} from "../../../message/service/MessageBusService/index";

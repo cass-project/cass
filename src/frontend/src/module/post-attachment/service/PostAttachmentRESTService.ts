@@ -1,5 +1,5 @@
-import {Injectable} from "angular2/core";
-import {Http, URLSearchParams, Headers} from "angular2/http"
+import {Injectable} from "@angular/core";
+import {Http, URLSearchParams, Headers} from "@angular/http"
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {AuthToken} from "../../auth/service/AuthToken";
@@ -7,6 +7,7 @@ import {Observable} from "rxjs/Observable";
 import {UploadPostAttachmentResponse200} from "../definitions/paths/upload";
 import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
 import {LinkPostAttachmentResponse200} from "../definitions/paths/link";
+
 
 @Injectable()
 export class PostAttachmentRESTService extends AbstractRESTService
@@ -81,6 +82,6 @@ export class PostAttachmentRESTService extends AbstractRESTService
             }
         );
 
-        return fork;
+        return <any>fork;
     }
 }

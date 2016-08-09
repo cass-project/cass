@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from "angular2/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 
 import {Collection} from "../../../definitions/entity/collection";
 import {CollectionCard} from "../CollectionCard/index";

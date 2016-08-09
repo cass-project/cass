@@ -6,5 +6,5 @@ ul.chatlog
     img.avatar(src="{{message.author.image.variants['64'].public_path}}")
     .message
       .from {{message.author.greetings.greetings}}
-        small &nbsp;{{dateFormat(message.date_created, "dd.MM\yyyy, в HH:mm:ss") }}
+        small &nbsp;{{getDate(message.date_created) }}
       .text {{message.content}}

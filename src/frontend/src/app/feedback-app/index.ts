@@ -1,5 +1,5 @@
 /// <reference path="./../../../typings/main/index.d.ts" />
-/// <reference path="./../../../node_modules/angular2/typings/browser.d.ts" />
+/// <reference path="./../../../typings/browser.d.ts" />
 
 import 'es6-shim';
 import 'es6-promise';
@@ -12,11 +12,11 @@ require('bootstrap/dist/js/bootstrap.js');
 require('font-awesome/css/font-awesome.css');
 require('../../styles/feedback.head.scss');
 
-import {provide, enableProdMode} from "angular2/core";
-import {HTTP_PROVIDERS} from "angular2/http";
-import {ROUTER_PROVIDERS} from "angular2/router";
-import {Title} from "angular2/src/platform/browser/title";
-import {bootstrap} from "angular2/platform/browser";
+import {provide, enableProdMode} from "@angular/core";
+import {HTTP_PROVIDERS} from "@angular/http";
+import {ROUTER_PROVIDERS} from "@angular/router-deprecated";
+import {Title} from '@angular/platform-browser'
+import {bootstrap} from '@angular/platform-browser-dynamic'
 
 import {AuthToken} from "../../module/auth/service/AuthToken";
 import {frontline} from "../../module/frontline/service";

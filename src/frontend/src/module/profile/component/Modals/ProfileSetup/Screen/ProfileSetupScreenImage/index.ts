@@ -1,4 +1,4 @@
-import {Component, Injectable, Output, EventEmitter} from "angular2/core";
+import {Component, Injectable, Output, EventEmitter} from "@angular/core";
 
 import {UploadImageService} from "../../../../../../form/component/UploadImage/service";
 import {UploadProfileImageStrategy} from "../../../../../common/UploadProfileImageStrategy";

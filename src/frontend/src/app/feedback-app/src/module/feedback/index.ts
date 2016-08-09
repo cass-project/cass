@@ -1,6 +1,8 @@
-import {Component} from "angular2/core";
-    import {ROUTER_DIRECTIVES, RouteParams, Router} from "angular2/router";
-import {Title} from "angular2/src/platform/browser/title";
+import {Component} from "@angular/core";
+import {ROUTER_DIRECTIVES, Router} from '@angular/router-deprecated';
+import {RouteParams} from '@angular/router-deprecated'
+
+import {Title} from '@angular/platform-browser'
 
 import {AccountService} from "../../../../../module/account/service/AccountService";
 import {AuthService} from "../../../../../module/auth/service/AuthService";

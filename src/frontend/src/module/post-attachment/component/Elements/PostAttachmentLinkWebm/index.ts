@@ -1,4 +1,4 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input} from "@angular/core";
 
 import {LinkAttachment} from "../../../definitions/entity/attachment/LinkAttachment";
 import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";

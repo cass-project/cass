@@ -1,7 +1,7 @@
-import {Component, Input, EventEmitter, Output} from "angular2/core";
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {FeedbackQueryModel} from "../../../feedback/FeedbackQueryParamsModel";
-import {FormBuilder, ControlGroup} from "angular2/common";
+import {FormBuilder, ControlGroup} from "@angular/common";
 import {FeedbackFilterModel} from "./model";
 
 declare var jQuery;

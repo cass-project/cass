@@ -1,8 +1,8 @@
-import {Component, Input, EventEmitter, Output} from "angular2/core";
+import {Component, Input} from "@angular/core";
 import {CollectionEntity} from "../../../definitions/entity/collection";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {ThemeService} from "../../../../theme/service/ThemeService";
-import {Router} from "angular2/router";
+import {Router} from '@angular/router-deprecated';
 
 @Component({
     selector: 'cass-collection-card',

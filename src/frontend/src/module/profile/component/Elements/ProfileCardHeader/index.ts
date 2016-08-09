@@ -1,9 +1,9 @@
-import {Component, Input, EventEmitter, Output} from "angular2/core";
+import {Component, Input, EventEmitter, Output} from "@angular/core";
 
 import {ProfileImage} from "../ProfileImage/index";
 import {ProfileEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
-import {Router} from "angular2/router";
+import {Router} from '@angular/router-deprecated';
 
 var moment = require('moment');
 
@@ -39,11 +39,7 @@ export class ProfileCardHeader
     getImageURL(): string {
         return queryImage(QueryTarget.Avatar, this.profile.image).public_path;
     }
-
-    getProfileLink(): string {
-        return this.router.generate(['/Profile', 'Profile', { 'id': this.profile.id }]).toLinkUrl();
-    }
-
+    
     goProfile() {
         this.router.navigate(['/Profile', 'Profile', { 'id': this.profile.id }]);
     }

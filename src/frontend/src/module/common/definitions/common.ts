@@ -1,4 +1,4 @@
-import {Response} from "angular2/http";
+import {Response} from "@angular/http";
 
 export interface Success200 extends Response {
     success: boolean;

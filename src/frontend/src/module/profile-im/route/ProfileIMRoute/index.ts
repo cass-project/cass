@@ -1,5 +1,6 @@
-import {Component} from "angular2/core";
-import {RouterOutlet, RouteConfig} from "angular2/router";
+import {Component} from "@angular/core";
+import {RouterOutlet} from '@angular/router-deprecated';
+import {RouteConfig} from "@angular/router-deprecated";
 
 import {ProfileIMChat} from "../../component/Elements/ProfileIMChat";
 import {ProfileIMContacts} from "../../component/Elements/ProfileIMContacts";
