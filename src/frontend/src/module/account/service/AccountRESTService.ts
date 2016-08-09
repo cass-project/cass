@@ -1,9 +1,8 @@
-import {Injectable} from "angular2/core";
-import {Http, Headers} from "angular2/http"
+import {Injectable} from "@angular/core";
+import {Http, Headers} from "@angular/http"
 
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
-import {AuthService} from "../../auth/service/AuthService";
 import {AuthToken} from "../../auth/service/AuthToken";
 
 @Injectable()

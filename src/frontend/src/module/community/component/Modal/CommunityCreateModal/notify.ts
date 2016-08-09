@@ -1,7 +1,7 @@
 import {Observable} from "rxjs/Observable";
 import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
 import {Observer} from "rxjs/Observer";
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 
 @Injectable()
 export class CommunityCreateModalNotifier

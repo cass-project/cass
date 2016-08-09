@@ -1,5 +1,5 @@
-import {Component} from "angular2/core";
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {Component} from "@angular/core";
+import {ROUTER_DIRECTIVES} from "@angular/router";
 import {Session} from "../../../session/Session";
 import {IMRESTService} from "../../../im/service/IMRESTService";
 import {ProfileImage} from "../../../profile/component/Elements/ProfileImage/index";

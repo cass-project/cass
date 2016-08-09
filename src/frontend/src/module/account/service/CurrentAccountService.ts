@@ -1,4 +1,4 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 
 import {Account} from "../definitions/entity/Account";
 import {AuthService} from "../../auth/service/AuthService";

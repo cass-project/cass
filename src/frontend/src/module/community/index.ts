@@ -1,5 +1,5 @@
-import {Component} from "angular2/core";
-import {Router} from "angular2/router";
+import {Component} from "@angular/core";
+import {Router} from "@angular/router";
 
 import {CommunityRouteModal} from "./component/Modal/CommunityRouteModal";
 import {CommunityCreateModal} from "./component/Modal/CommunityCreateModal";

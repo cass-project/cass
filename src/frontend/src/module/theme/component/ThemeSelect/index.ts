@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Output, Input, ViewChild, ElementRef} from "angular2/core";
+import {Component, EventEmitter, Output, Input, ViewChild, ElementRef} from "@angular/core";
 import {ThemeService} from "../../service/ThemeService";
-import {Injectable} from 'angular2/core';
-import {ControlValueAccessor} from "angular2/common";
+import {Injectable} from '@angular/core';
+import {ControlValueAccessor} from "@angular/common";
 import {Theme} from "../../definitions/entity/Theme";
 
 

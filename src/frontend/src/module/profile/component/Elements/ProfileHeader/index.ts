@@ -1,9 +1,9 @@
-import {Component, Input, EventEmitter, Output} from "angular2/core";
+import {Component, Input, EventEmitter, Output} from "@angular/core";
 
 import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {ProfileImage} from "../ProfileImage/index";
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {ROUTER_DIRECTIVES} from "@angular/router";
 import {ProfileModals} from "../../../modals";
 import {ProfileRouteService} from "../../../route/ProfileRoute/service";
 

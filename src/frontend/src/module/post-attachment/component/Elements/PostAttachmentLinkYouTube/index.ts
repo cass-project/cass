@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef} from "angular2/core";
+import {Component, Input, ViewChild, ElementRef} from "@angular/core";
 import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
 import {LinkAttachment} from "../../../definitions/entity/attachment/LinkAttachment";
 import {YouTubeLinkMetadata} from "../../../definitions/entity/attachment/link/YouTubeLinkMetadata";

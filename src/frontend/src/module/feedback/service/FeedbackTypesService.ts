@@ -1,4 +1,4 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 
 import {FrontlineService} from "../../frontline/service";
 import {FrontlineEntity} from "../../frontline/definitions/entity/Frontline";

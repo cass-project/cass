@@ -1,6 +1,6 @@
-import {Component} from "angular2/core";
-import {Output, Input} from "angular2/core";
-import {EventEmitter} from "angular2/core";
+import {Component} from "@angular/core";
+import {Output, Input} from "@angular/core";
+import {EventEmitter} from "@angular/core";
 import {ModalComponent} from "../../../modal/component/index";
 import {ScreenControls} from "../../../common/classes/ScreenControls";
 import {UploadImageService} from "./service";

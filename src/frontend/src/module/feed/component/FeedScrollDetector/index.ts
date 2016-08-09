@@ -1,4 +1,4 @@
-import {Component, ViewChild, ElementRef} from "angular2/core";
+import {Component, ViewChild, ElementRef} from "@angular/core";
 import {AppService} from "../../../../app/frontend-app/service";
 import {FeedService} from "../../service/FeedService/index";
 import {PostEntity} from "../../../post/definitions/entity/Post";

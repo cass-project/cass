@@ -1,4 +1,4 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input} from "@angular/core";
 import {FrontlineService} from "../../../frontline/service";
 import {Palette} from "../../../colors/definitions/entity/Palette";
 

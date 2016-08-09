@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef, EventEmitter, Output} from "angular2/core";
+import {Component, Input, ViewChild, ElementRef, EventEmitter, Output} from "@angular/core";
 
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {CollectionEntity} from "../../../../collection/definitions/entity/collection";

@@ -1,4 +1,4 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {PROFILE_GENDER_LIST, ProfileGender, ProfileEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {Image} from "../../../../avatar/definitions/Image";

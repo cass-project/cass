@@ -1,4 +1,4 @@
-import {Component, ViewChild} from "angular2/core";
+import {Component, ViewChild} from "@angular/core";
 
 import {CommunitySettingsModalModel} from "../../model";
 import {CommunityImage} from "../../../../Elements/CommunityImage/index";

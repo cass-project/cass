@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 
 import {PostCard} from "../../../../post/component/Forms/PostCard/index";
 import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";

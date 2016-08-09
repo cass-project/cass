@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 
 import {ProfileCardsList} from "../../component/Elements/ProfileCardsList/index";
 import {ProfileRouteService} from "../ProfileRoute/service";

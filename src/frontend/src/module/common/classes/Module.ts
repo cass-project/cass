@@ -1,6 +1,6 @@
 // Daily reminder: https://docs.google.com/document/d/13-LUm1QvOff2631tHz6C4goIHuMzma2_1_PFiLryoIs/edit
 
-import {RouteDefinition} from "angular2/router";
+import {RouteDefinition} from "@angular/router-deprecated";
 
 export class Module
 {

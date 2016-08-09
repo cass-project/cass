@@ -1,7 +1,7 @@
 declare var jQuery;
 
-import {Component, Input, ViewChild} from "angular2/core";
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {Component, Input, ViewChild} from "@angular/core";
+import {ROUTER_DIRECTIVES} from "@angular/router";
 
 import {FeedbackEntity} from "../../../../../../../../module/feedback/definitions/entity/Feedback";
 import {FeedbackTypesService} from "../../../../../../../../module/feedback/service/FeedbackTypesService";
@@ -37,7 +37,7 @@ export class FeedbackCardComponent{
     }
 
     /**
-     * Usage Date in template see at \node_modules\angular2\src\common\pipes\date_pipe.d.ts 
+     * Usage Date in template see at \node_modules\@angular\src\common\pipes\date_pipe.d.ts 
      */
     stringToDate(date:string) {
         return new Date(date);

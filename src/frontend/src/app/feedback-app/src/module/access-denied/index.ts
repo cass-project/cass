@@ -1,5 +1,5 @@
-import {Component} from "angular2/core";
-import {Title} from "angular2/src/platform/browser/title";
+import {Component} from "@angular/core";
+import {Title} from '@angular/platform-browser'
 
 import {AuthService} from "../../../../../module/auth/service/AuthService";
 import {AuthComponentService} from "../../../../../module/auth/component/Auth/service";

@@ -1,5 +1,5 @@
-import {Component} from "angular2/core";
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {Component} from "@angular/core";
+import {ROUTER_DIRECTIVES} from "@angular/router";
 
 import {CollectionsList} from "../../../collection/component/Elements/CollectionsList/index";
 import {CommunityRouteService} from "../CommunityRoute/service";

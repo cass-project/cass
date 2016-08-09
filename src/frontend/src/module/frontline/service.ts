@@ -1,5 +1,5 @@
 import {FrontlineResponse200} from "./definitions/paths/frontline";
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 
 var merge = require('merge');
 

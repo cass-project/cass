@@ -1,4 +1,4 @@
-import {Component, Injectable} from "angular2/core";
+import {Component, Injectable} from "@angular/core";
 
 import {ModalService} from "./service";
 import {AuthService} from "../../auth/service/AuthService";

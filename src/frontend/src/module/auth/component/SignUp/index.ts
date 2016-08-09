@@ -1,11 +1,11 @@
-import {Component, Output, EventEmitter, ElementRef, ViewChild} from "angular2/core";
+import {Component, Output, EventEmitter, ElementRef, ViewChild} from "@angular/core";
 
 import {OAuth2Component} from "../OAuth2/index";
 import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
 import {SignInRequest} from "../../definitions/paths/sign-in";
 import {SignUpRequest} from "../../definitions/paths/sign-up";
 import {ProgressLock} from "../../../form/component/ProgressLock/index";
-import {NgForm} from "angular2/common";
+import {NgForm} from "@angular/common";
 import {AuthService} from "../../service/AuthService";
 
 @Component({

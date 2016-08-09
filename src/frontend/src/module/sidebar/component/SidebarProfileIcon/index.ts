@@ -1,8 +1,8 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 
 import {AuthService} from "../../../auth/service/AuthService";
 import {ProfileModals} from "../../../profile/modals";
-import {Router} from "angular2/router";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'cass-sidebar-profile-icon',

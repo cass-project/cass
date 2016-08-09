@@ -1,4 +1,4 @@
-import {Component, Input, EventEmitter, Output} from "angular2/core";
+import {Component, Input, EventEmitter, Output} from "@angular/core";
 
 import {PostEntity} from "../../../definitions/entity/Post";
 import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";

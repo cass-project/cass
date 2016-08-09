@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 
 import {SidebarSignInButton} from "./component/SidebarSignInButton/index";
 import {SidebarProfileIcon} from "./component/SidebarProfileIcon/index";

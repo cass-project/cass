@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {Stream} from "../../../feed/service/FeedService/stream";

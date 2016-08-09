@@ -1,5 +1,6 @@
-import {Component, ViewChild, ElementRef, EventEmitter} from "angular2/core";
-import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
+import {Component, ViewChild, ElementRef, EventEmitter} from "@angular/core";
+import {ROUTER_DIRECTIVES} from "@angular/router";
+import {RouteParams} from "@angular/router-deprecated";
 
 import {ProfileIMService} from "../../../service/ProfileIMService";
 import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from "angular2/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
 import {ModalComponent} from "../../../../modal/component/index";

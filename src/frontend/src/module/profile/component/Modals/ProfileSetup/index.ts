@@ -1,5 +1,5 @@
-import {Component, Input, EventEmitter, Output} from "angular2/core";
-import {Router} from "angular2/router";
+import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Router} from "@angular/router";
 
 import {ModalComponent} from "../../../../modal/component/index";
 import {ProfileSetupModel} from "./model";

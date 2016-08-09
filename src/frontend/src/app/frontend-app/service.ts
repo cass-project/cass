@@ -1,4 +1,4 @@
-import {Injectable, ElementRef} from "angular2/core";
+import {Injectable, ElementRef} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {Observer} from "rxjs/Observer";
 import {ProfileModals} from "../../module/profile/modals";

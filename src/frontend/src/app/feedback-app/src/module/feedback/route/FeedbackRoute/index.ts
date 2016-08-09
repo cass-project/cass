@@ -1,5 +1,6 @@
-import {Component} from "angular2/core";
-import {RouterOutlet, RouteConfig} from "angular2/router";
+import {Component} from "@angular/core";
+import {RouterOutlet} from "@angular/router";
+import {RouteConfig} from '@angular/router-deprecated'
 
 import {FeedbackComponent} from "../../index";
 import {AccessDeniedComponent} from "../../../access-denied/index";

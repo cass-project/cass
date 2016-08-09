@@ -1,4 +1,4 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input} from "@angular/core";
 
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {AccountEntity} from "../../../../../../account/definitions/entity/Account";

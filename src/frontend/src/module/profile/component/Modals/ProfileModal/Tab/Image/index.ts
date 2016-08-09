@@ -1,5 +1,5 @@
-import {Component, Injectable} from "angular2/core";
-import {CORE_DIRECTIVES} from "angular2/common";
+import {Component, Injectable} from "@angular/core";
+import {CORE_DIRECTIVES} from "@angular/common";
 
 import {ProfileImage} from "../../../../Elements/ProfileImage/index";
 import {ModalControl} from "../../../../../../common/classes/ModalControl";

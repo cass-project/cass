@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 
 import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
 import {FeedService} from "../../../service/FeedService/index";

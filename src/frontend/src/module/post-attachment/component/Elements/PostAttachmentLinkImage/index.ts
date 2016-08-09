@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef} from "angular2/core";
+import {Component, Input, ViewChild, ElementRef} from "@angular/core";
 
 import {LinkAttachment} from "../../../definitions/entity/attachment/LinkAttachment";
 import {ImageLinkMetaData} from "../../../definitions/entity/attachment/link/ImageLinkMetaData";

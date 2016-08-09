@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from "angular2/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 
 import {ProfileSetupModel} from "../../model";
 import {ProfileGender} from "../../../../../definitions/entity/Profile";

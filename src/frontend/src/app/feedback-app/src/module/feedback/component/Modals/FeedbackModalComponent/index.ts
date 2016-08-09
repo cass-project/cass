@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef} from "angular2/core";
+import {Component, Input, ViewChild, ElementRef} from "@angular/core";
 
 import {FeedbackService} from "../../../../../../../../module/feedback/service/FeedbackService";
 import {MessageBusService} from "../../../../../../../../module/message/service/MessageBusService/index";

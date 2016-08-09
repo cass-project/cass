@@ -1,4 +1,4 @@
-import {Component, ViewChild, ElementRef} from "angular2/core";
+import {Component, ViewChild, ElementRef} from "@angular/core";
 
 import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
 import {FeedService} from "../../../service/FeedService/index";

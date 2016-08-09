@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter, ViewChild, ElementRef} from "angular2/core";
+import {Component, Output, EventEmitter, ViewChild, ElementRef} from "@angular/core";
 
 import {OAuth2Component} from "../OAuth2/index";
 import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
