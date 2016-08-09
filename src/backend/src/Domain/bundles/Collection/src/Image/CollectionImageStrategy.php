@@ -17,11 +17,15 @@ final class CollectionImageStrategy extends SquareImageStrategy
 
     /** @var FilesystemInterface */
     private $fileSystem;
+    
+    /** @var string */
+    private $wwwDir;
 
-    public function __construct(Collection $collection, FilesystemInterface $fileSystem)
+    public function __construct(Collection $collection, FilesystemInterface $fileSystem, string $wwwDir)
     {
         $this->collection = $collection;
         $this->fileSystem = $fileSystem;
+        $this->wwwDir = $wwwDir;
     }
 
     public function getEntity(): ImageEntity
@@ -46,7 +50,7 @@ final class CollectionImageStrategy extends SquareImageStrategy
 
     public function getPublicPath(): string
     {
-        return '/dist/assets/entity/collection/by-sid/avatar';
+        return $this->wwwDir;
     }
 
     public function getDefaultImage(): Image

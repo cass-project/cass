@@ -22,6 +22,9 @@ use League\Flysystem\Memory\MemoryAdapter;
 $configDefault = [
     'php-di' => [
         ProfileService::class => object()
+            ->constructorParameter('wwwImagesDir', factory(function(Container $container) {
+                return $container->get('config.paths.profile.avatar.www');
+            }))
             ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
                 return new Filesystem(new Local($container->get('config.paths.profile.avatar.dir')));
             })),
@@ -30,6 +33,9 @@ $configDefault = [
 $configTest = [
     'php-di' => [
         ProfileService::class => object()
+            ->constructorParameter('wwwImagesDir', factory(function(Container $container) {
+                return $container->get('config.paths.profile.avatar.www');
+            }))
             ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
                 return new Filesystem(new MemoryAdapter($container->get('config.paths.profile.avatar.dir')));
             })),
@@ -40,6 +46,9 @@ return [
     'php-di' => [
         'config.paths.profile.avatar.dir' => factory(function(Container $container) {
             return sprintf('%s/entity/profile/by-sid/avatar/', $container->get('config.storage.dir'));
+        }),
+        'config.paths.profile.avatar.www' => factory(function(Container $container) {
+            return sprintf('%s/entity/profile/by-sid/avatar/', $container->get('config.storage.www'));
         }),
         ProfileRepository::class => factory(new DoctrineRepositoryFactory(Profile::class)),
         ProfileExpertInEQRepository::class => factory(new DoctrineRepositoryFactory(ProfileExpertInEQ::class)),

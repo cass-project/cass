@@ -17,6 +17,9 @@ use League\Flysystem\Memory\MemoryAdapter;
 
 return [
     'php-di' => [
+        'config.paths.community.avatar.www' => factory(function(Container $container) {
+            return sprintf('%s/entity/community/by-sid/avatar/', $container->get('config.storage.www'));
+        }),
         'config.paths.community.avatar.dir' => factory(function(Container $container) {
             return sprintf('%s/entity/community/by-sid/avatar/', $container->get('config.storage.dir'));
         }),
@@ -30,6 +33,10 @@ return [
                 }else{
                     return new Filesystem(new Local($container->get('config.paths.community.avatar.dir')));
                 }
-            })),
+            }))
+            ->constructorParameter('wwwImageDir', factory(function(Container $container) {
+                return $container->get('config.paths.community.avatar.www');
+            }))
+        ,
     ],
 ];

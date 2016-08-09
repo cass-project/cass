@@ -44,6 +44,9 @@ class ProfileService implements EventEmitterAwareService
 
     /** @var FilesystemInterface */
     private $imagesFlySystem;
+    
+    /** @var string */
+    private $wwwImagesDir;
 
     /** @var AvatarService */
     private $avatarService;
@@ -52,14 +55,16 @@ class ProfileService implements EventEmitterAwareService
         CurrentAccountService $currentAccountService,
         ProfileRepository $profileRepository,
         CollectionService $collectionService,
+        AvatarService $avatarService,
         FilesystemInterface $imagesFlySystem,
-        AvatarService $avatarService
+        string $wwwImagesDir
     )
     {
         $this->profileRepository = $profileRepository;
         $this->collectionService = $collectionService;
-        $this->imagesFlySystem = $imagesFlySystem;
         $this->avatarService = $avatarService;
+        $this->imagesFlySystem = $imagesFlySystem;
+        $this->wwwImagesDir = $wwwImagesDir;
     }
 
     public function worksWithAccountService(AccountService $accountService)
@@ -132,7 +137,7 @@ class ProfileService implements EventEmitterAwareService
         }
 
         if($parameters->isAvatarRegenetateRequested()) {
-            $this->avatarService->generateImage(new ProfileImageStrategy($profile, $this->imagesFlySystem));
+            $this->avatarService->generateImage(new ProfileImageStrategy($profile, $this->imagesFlySystem, $this->wwwImagesDir));
         }
 
         $this->profileRepository->saveProfile($profile);
@@ -205,7 +210,7 @@ class ProfileService implements EventEmitterAwareService
     public function uploadImage(int $profileId, UploadImageParameters $parameters): ImageCollection
     {
         $profile = $this->getProfileById($profileId);
-        $strategy = new ProfileImageStrategy($profile, $this->imagesFlySystem);
+        $strategy = new ProfileImageStrategy($profile, $this->imagesFlySystem, $this->wwwImagesDir);
 
         $this->avatarService->uploadImage($strategy, $parameters);
         $this->profileRepository->saveProfile($profile);
@@ -227,7 +232,7 @@ class ProfileService implements EventEmitterAwareService
     private function generateProfileImage(int $profileId): ImageCollection
     {
         $profile = $this->getProfileById($profileId);
-        $strategy = new ProfileImageStrategy($profile, $this->imagesFlySystem);
+        $strategy = new ProfileImageStrategy($profile, $this->imagesFlySystem, $this->wwwImagesDir);
 
         $this->avatarService->generateImage($strategy);
         $this->profileRepository->saveProfile($profile);

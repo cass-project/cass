@@ -8,6 +8,7 @@ use function DI\get;
 
 use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Theme\Entity\Theme;
+use Domain\Theme\Frontline\ThemeScript;
 use Domain\Theme\Repository\ThemeRepository;
 use Domain\Theme\Service\ThemeService;
 use League\Flysystem\Adapter\Local;
@@ -16,9 +17,15 @@ use League\Flysystem\Memory\MemoryAdapter;
 
 return [
     'php-di' => [
+        'config.paths.theme.preview.www' => factory(function(Container $container) {
+            return sprintf('%s/entity/themes/preview', $container->get('config.storage.www'));
+        }),
         'config.paths.theme.preview.dir' => factory(function(Container $container) {
             return sprintf('%s/entity/themes/preview/', $container->get('config.storage.dir'));
         }),
+        ThemeScript::class => object()->constructorParameter('wwwStorage', factory(function(Container $container) {
+            return $container->get('config.paths.theme.preview.www');
+        })),
         ThemeRepository::class => factory(new DoctrineRepositoryFactory(Theme::class)),
         ThemeService::class => object()->constructorParameter('fileSystem', factory(function(Container $container) {
             $env = $container->get('config.env');

@@ -23,7 +23,7 @@ return [
             return $container->get('composer.json')['version'];
         }),
         'config.storage.dir' => '/data/storage',
-        'config.storage.www' => '/dist/storage',
+        'config.storage.www' => '/storage',
         'config.routes_group' => [
             'auth',
             'with-profile',

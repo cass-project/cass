@@ -9,14 +9,23 @@ class ThemeScript implements FrontlineScript
 {
     /** @var ThemeService */
     private $themeService;
+    
+    /** @var string */
+    private $wwwStorage;
 
-    public function __construct(ThemeService $themeService) {
+    public function __construct(ThemeService $themeService, string $wwwStorage) {
         $this->themeService = $themeService;
+        $this->wwwStorage = $wwwStorage;
     }
 
     public function __invoke(): array {
         return [
-            'themes' => $this->buildJSON($this->themeService->getThemesAsTree())
+            'themes' => $this->buildJSON($this->themeService->getThemesAsTree()),
+            'config' => [
+                'themes' => [
+                    'www' => $this->wwwStorage,
+                ]
+            ]
         ];
     }
 

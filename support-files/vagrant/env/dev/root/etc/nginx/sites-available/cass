@@ -20,9 +20,9 @@ server {
         include fastcgi_params;
     }
 
-    location /dist/storage
+    location /storage
     {
-        root /data/storage
+        root /data;
         try_files $uri =404;
     }
 

@@ -17,8 +17,11 @@ final class CommunityImageStrategy extends SquareImageStrategy
 
     /** @var FilesystemInterface */
     private $fileSystem;
+    
+    /** @var string */
+    private $wwwPath;
 
-    public function __construct(Community $community, FilesystemInterface $fileSystem)
+    public function __construct(Community $community, FilesystemInterface $fileSystem, string $wwwPath)
     {
         if(! $community->isPersisted()) {
             throw new \Exception('Entity is not persisted yet');
@@ -26,6 +29,7 @@ final class CommunityImageStrategy extends SquareImageStrategy
 
         $this->community = $community;
         $this->fileSystem = $fileSystem;
+        $this->wwwPath = $wwwPath;
     }
 
     public function getEntity(): ImageEntity
@@ -53,7 +57,7 @@ final class CommunityImageStrategy extends SquareImageStrategy
 
     public function getPublicPath(): string
     {
-        return '/dist/assets/entity/community/by-sid/avatar';
+        return $this->wwwPath;
     }
 
     public function getDefaultImage(): Image

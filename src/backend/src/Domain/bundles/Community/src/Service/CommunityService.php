@@ -3,15 +3,11 @@ namespace Domain\Community\Service;
 
 use Application\Service\EventEmitterAware\EventEmitterAwareService;
 use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
-use Domain\Account\Entity\Account;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Avatar\Service\AvatarService;
 use Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
-use Domain\Collection\Parameters\CreateCollectionParameters;
-use Domain\Collection\Service\CollectionService;
-use Domain\Community\ACL\CommunityACL;
 use Domain\Community\Entity\Community;
 use Domain\Community\Image\CommunityImageStrategy;
 use Domain\Community\Parameters\CreateCommunityParameters;
@@ -45,18 +41,23 @@ class CommunityService implements EventEmitterAwareService
     /** @var FilesystemInterface */
     private $imageFileSystem;
 
+    /** @var string */
+    private $wwwImageDir;
+
     public function __construct(
         CurrentAccountService $currentAccountService,
         CommunityRepository $communityRepository,
         ThemeRepository $themeRepository,
         AvatarService $avatarService,
-        FilesystemInterface $imageFileSystem
+        FilesystemInterface $imageFileSystem,
+        string $wwwImageDir
     ) {
         $this->currentAccountService = $currentAccountService;
         $this->communityRepository = $communityRepository;
         $this->themeRepository = $themeRepository;
         $this->avatarService = $avatarService;
         $this->imageFileSystem = $imageFileSystem;
+        $this->wwwImageDir = $wwwImageDir;
     }
     
     public function createCommunity(CreateCommunityParameters $parameters): Community {
@@ -72,7 +73,7 @@ class CommunityService implements EventEmitterAwareService
 
         $this->communityRepository->createCommunity($entity);
 
-        $strategy = new CommunityImageStrategy($entity, $this->imageFileSystem);
+        $strategy = new CommunityImageStrategy($entity, $this->imageFileSystem, $this->wwwImageDir);
         $this->avatarService->generateImage($strategy);
 
         $this->getEventEmitter()->emit(self::EVENT_COMMUNITY_CREATED, [$entity]);
@@ -99,7 +100,7 @@ class CommunityService implements EventEmitterAwareService
 
     public function uploadCommunityImage(int $communityId, UploadImageParameters $parameters): ImageCollection {
         $community = $this->communityRepository->getCommunityById($communityId);
-        $strategy = new CommunityImageStrategy($community, $this->imageFileSystem);
+        $strategy = new CommunityImageStrategy($community, $this->imageFileSystem, $this->wwwImageDir);
 
         $this->avatarService->uploadImage($strategy, $parameters);
         $this->communityRepository->saveCommunity($community);
@@ -111,7 +112,7 @@ class CommunityService implements EventEmitterAwareService
     public function generateCommunityImage(int $communityId): ImageCollection
     {
         $community = $this->communityRepository->getCommunityById($communityId);
-        $strategy = new CommunityImageStrategy($community, $this->imageFileSystem);
+        $strategy = new CommunityImageStrategy($community, $this->imageFileSystem, $this->wwwImageDir);
 
         $this->avatarService->defaultImage($strategy);
         $this->communityRepository->saveCommunity($community);

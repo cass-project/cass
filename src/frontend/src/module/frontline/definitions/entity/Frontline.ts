@@ -21,6 +21,9 @@ export interface FrontlineEntity extends Success200
         profile: {
             max_profiles: number
         },
+        themes: {
+            www: string;
+        },
         palettes: Palette[],
         community: {
             features: {

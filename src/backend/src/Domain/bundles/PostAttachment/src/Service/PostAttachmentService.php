@@ -3,7 +3,6 @@ namespace Domain\PostAttachment\Service;
 
 use Application\Util\FileNameFilter;
 use Application\Util\GenerateRandomString;
-use Domain\OpenGraph\Parser\OpenGraphParser;
 use Domain\Post\Entity\Post;
 use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\PostAttachment\Entity\PostAttachment\AttachmentType;
@@ -11,7 +10,6 @@ use Domain\PostAttachment\Entity\PostAttachment\File\GenericFileAttachmentType;
 use Domain\PostAttachment\Entity\PostAttachment\File\ImageAttachmentType;
 use Domain\PostAttachment\Entity\PostAttachment\File\WebmAttachmentType;
 use Domain\PostAttachment\Entity\PostAttachment\FileAttachmentType;
-use Domain\PostAttachment\Entity\PostAttachment\Link\GenericLinkAttachmentType;
 use Domain\PostAttachment\Exception\FileTooBigException;
 use Domain\PostAttachment\Exception\FileTooSmallException;
 use Domain\PostAttachment\LinkMetadata\LinkMetadataFactory;
@@ -35,23 +33,21 @@ class PostAttachmentService
     /** @var LinkMetadataFactory */
     private $linkMetadataFactory;
 
-    /**
-     * PostAttachmentService constructor.
-     * @param FilesystemInterface $fileSystem
-     * @param PostAttachmentRepository $postAttachmentRepository
-     * @param FetchResourceService $fetchResourceService
-     * @param LinkMetadataFactory $linkMetadataFactory
-     */
+    /** @var string */
+    private $wwwDir;
+
     public function __construct(
         FilesystemInterface $fileSystem,
         PostAttachmentRepository $postAttachmentRepository,
         FetchResourceService $fetchResourceService,
-        LinkMetadataFactory $linkMetadataFactory
+        LinkMetadataFactory $linkMetadataFactory,
+        string $wwwDir
     ) {
         $this->fileSystem = $fileSystem;
         $this->postAttachmentRepository = $postAttachmentRepository;
         $this->fetchResourceService = $fetchResourceService;
         $this->linkMetadataFactory = $linkMetadataFactory;
+        $this->wwwDir = $wwwDir;
     }
     
     public function linkAttachment(string $url, Result $result, Source $source): PostAttachment
@@ -83,9 +79,9 @@ class PostAttachmentService
             $this->validateFileSize($tmpFile, $attachmentType);
         }
 
-        $subDirectory = GenerateRandomString::gen(12);
+        $subDirectory = join('/', str_split(GenerateRandomString::gen(12), 2));
         $storagePath = $subDirectory . '/' . $desiredFileName;
-        $publicPath = '/dist/storage/post/attachment/' . $subDirectory . '/' . $desiredFileName;
+        $publicPath = sprintf('%s/%s/%s', $this->wwwDir, $subDirectory, $desiredFileName);
 
         $finfo = new \finfo(FILEINFO_MIME);
         $content = file_get_contents($tmpFile);

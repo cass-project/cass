@@ -18,12 +18,18 @@ use League\Flysystem\Memory\MemoryAdapter;
 
 return [
     'php-di' => [
-        CollectionRepository::class => factory(new DoctrineRepositoryFactory(Collection::class)),
-        CollectionThemeEQRepository::class => factory(new DoctrineRepositoryFactory(CollectionThemeEQEntity::class)),
         'config.paths.collection.avatar.dir' => factory(function(Container $container) {
             return sprintf('%s/entity/collection/by-sid/avatar/', $container->get('config.storage.dir'));
         }),
+        'config.paths.collection.avatar.www' => factory(function(Container $container) {
+            return sprintf('%s/entity/collection/by-sid/avatar/', $container->get('config.storage.www'));
+        }),
+        CollectionRepository::class => factory(new DoctrineRepositoryFactory(Collection::class)),
+        CollectionThemeEQRepository::class => factory(new DoctrineRepositoryFactory(CollectionThemeEQEntity::class)),
         CollectionService::class => object()
+            ->constructorParameter('wwwImagesDir', factory(function(Container $container) {
+                return $container->get('config.paths.collection.avatar.www');
+            }))
             ->constructorParameter('imagesFlySystem', factory(function(Container $container) {
                 $env = $container->get('config.env');
 

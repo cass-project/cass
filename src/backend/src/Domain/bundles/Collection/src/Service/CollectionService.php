@@ -38,14 +38,19 @@ class CollectionService implements EventEmitterAwareService
     /** @var FilesystemInterface */
     private $images;
 
+    /** @var string */
+    private $wwwImagesDir;
+
     public function __construct(
         CollectionRepository $collectionRepository,
         AvatarService $avatarService,
-        FilesystemInterface $imagesFlySystem)
-    {
+        FilesystemInterface $imagesFlySystem,
+        string $wwwImagesDir
+    ) {
         $this->collectionRepository = $collectionRepository;
         $this->avatarService = $avatarService;
         $this->images = $imagesFlySystem;
+        $this->wwwImagesDir = $wwwImagesDir;
     }
 
     public function createCollection(CreateCollectionParameters $parameters, bool $disableAccess = false)
@@ -62,7 +67,7 @@ class CollectionService implements EventEmitterAwareService
             ->setThemeIds($parameters->getThemeIds());
 
         $this->collectionRepository->createCollection($collection);
-        $this->avatarService->generateImage(new CollectionImageStrategy($collection, $this->images));
+        $this->avatarService->generateImage(new CollectionImageStrategy($collection, $this->images, $this->wwwImagesDir));
         $this->collectionRepository->saveCollection($collection);
 
         $this->getEventEmitter()->emit(self::EVENT_COLLECTION_CREATED, [$collection]);
@@ -138,7 +143,7 @@ class CollectionService implements EventEmitterAwareService
         $collection = $this->collectionRepository->getCollectionById($collectionId);
 
         $this->getEventEmitter()->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
-        $this->avatarService->uploadImage(new CollectionImageStrategy($collection, $this->images), $parameters);
+        $this->avatarService->uploadImage(new CollectionImageStrategy($collection, $this->images, $this->wwwImagesDir), $parameters);
         $this->collectionRepository->saveCollection($collection);
         $this->getEventEmitter()->emit(self::EVENT_COLLECTION_IMAGE_UPLOADED, [$collection]);
 
@@ -170,7 +175,7 @@ class CollectionService implements EventEmitterAwareService
         $collection = $this->collectionRepository->getCollectionById($collectionId);
 
         $this->getEventEmitter()->emit(self::EVENT_COLLECTION_ACCESS, [$collection]);
-        $this->avatarService->generateImage(new CollectionImageStrategy($collection, $this->images));
+        $this->avatarService->generateImage(new CollectionImageStrategy($collection, $this->images, $this->wwwImagesDir));
         $this->collectionRepository->saveCollection($collection);
         $this->getEventEmitter()->emit(self::EVENT_COLLECTION_IMAGE_GENERATED, [$collection]);
 

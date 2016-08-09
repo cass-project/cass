@@ -17,11 +17,15 @@ final class ProfileImageStrategy extends SquareImageStrategy
 
     /** @var FilesystemInterface */
     private $fileSystem;
+    
+    /** @var string */
+    private $wwwDir;
 
-    public function __construct(Profile $profile, FilesystemInterface $fileSystem)
+    public function __construct(Profile $profile, FilesystemInterface $fileSystem, string $wwwDir)
     {
         $this->profile = $profile;
         $this->fileSystem = $fileSystem;
+        $this->wwwDir = $wwwDir;
     }
 
     public function getEntity(): ImageEntity
@@ -46,7 +50,7 @@ final class ProfileImageStrategy extends SquareImageStrategy
 
     public function getPublicPath(): string
     {
-        return '/dist/assets/entity/profile/by-sid/avatar';
+        return $this->wwwDir;
     }
 
     public function getDefaultImage(): Image
