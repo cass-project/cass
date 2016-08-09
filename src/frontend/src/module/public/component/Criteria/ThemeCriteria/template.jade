@@ -6,7 +6,7 @@ article.component.component-public-criteria-theme
           i.fa.fa-angle-left
       h1.theme-root {{ getTitle() }}
     ul.theme-lists
-      li(*ngFor="#theme of getRoot().children")
+      li(*ngFor="let theme of getRoot().children")
         a.theme-link(
           href="javascript:void(0)",
           (click)="selectRoot(theme)",

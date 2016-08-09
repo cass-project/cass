@@ -10,7 +10,7 @@ article.component-community-header
           li
             a([routerLink]="['./Dashboard']", class="collection-link")
               span Сообщество
-          li(*ngFor="#collection of entity.collections")
+          li(*ngFor="let collection of entity.collections")
             a([routerLink]="['./Collections/View', { sid: collection.sid }]", class="collection-link", title="{{ collection.description }}", *ngIf='!collection.is_main')
               span {{ collection.title }}
           li((click)='modals.createCollection.open()')

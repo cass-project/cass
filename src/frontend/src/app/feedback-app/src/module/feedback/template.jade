@@ -29,7 +29,7 @@
           [isInfineScrollActive]="isInfineScrollActive && !isLoading",
           [ngClass]="{'card-columns': layout == 'grid'}"
         )
-          cass-feedback-card([feedback]="feedback", *ngFor="#feedback of feedbacks")
+          cass-feedback-card([feedback]="feedback", *ngFor="let feedback of feedbacks")
       .jumbotron(*ngIf="feedbacks.length==0 && !isLoading")
         h1.display-3
           i.fa.fa-fw.fa-info-circle(aria-hidden="true")

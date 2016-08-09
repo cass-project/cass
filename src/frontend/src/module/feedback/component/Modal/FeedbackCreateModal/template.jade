@@ -17,9 +17,8 @@ cass-modal
             select.form-input(
               [(ngModel)]="model.type_feedback"
             )
-              // Если юзать [value] или value, то охуеваем от того, как ангуляр превращает number в string
               option(
-                *ngFor="#feedback of feedbackTypesService.getFeedbackTypes()",
+                *ngFor="let feedback of feedbackTypesService.getFeedbackTypes()",
                 [ngValue]="feedback.code.int"  
               ) {{feedback.title}}
         .input-group(*ngIf="!model.profile_id")

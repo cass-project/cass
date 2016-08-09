@@ -6,7 +6,7 @@
 
   ul.contact-list
     li(
-      *ngFor="#contact of contacts", 
+      *ngFor="let contact of contacts",
       [routerLink]="['Messages', { id: contact.target_profile.id }]"
     )
       cass-profile-image.avatar([url]='contact.target_profile.image.variants["64"].public_path')

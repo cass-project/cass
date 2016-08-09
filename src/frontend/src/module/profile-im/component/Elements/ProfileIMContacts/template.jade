@@ -12,8 +12,7 @@
         strong Имя
       .greetings
         strong Последнее сообщение
-
-    li(*ngFor="#contact of contacts", [routerLink]="['Messages', { id: contact.target_profile.id }]")
+    li(*ngFor="let contact of contacts", [routerLink]="['Messages', { id: contact.target_profile.id }]")
       cass-profile-image.avatar([url]='contact.target_profile.image.variants["64"].public_path')
       .greetings {{contact.target_profile.greetings.greetings}}
       .last-message заходи) но я не уверен что к этому времени освобожусь

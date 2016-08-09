@@ -75,7 +75,7 @@
     <h1>Управление профилями</h1>
   </header>
 
-  <ul class="profile-list" *ngFor="#profile of service.getProfiles()">
+  <ul class="profile-list" *ngFor="let profile of service.getProfiles()">
     <li>
       <section class="profile-control">
         <div class="profile-info">
@@ -91,7 +91,7 @@
               </div>
               <div *ngIf="profile.entity.profile.expert_in_ids.length > 0">
                 <span class="title">Эксперт в:</span>
-              <ul class="expert-in-list" *ngFor="#themeId of profile.entity.profile.expert_in_ids">
+              <ul class="expert-in-list" *ngFor="let themeId of profile.entity.profile.expert_in_ids">
                 <li><div class="expert-in">{{themeService.findById(themeId).title}}</div></li>
               </ul>
               </div>

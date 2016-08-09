@@ -3,7 +3,7 @@ article.component.component-tab-modal
     .tab-panel
       .top
         ul.tab-list
-          li(*ngFor="#tab of getTopTabs()")
+          li(*ngFor="let tab of getTopTabs()")
             button.tab-link(
               (click)="selectTab(tab)",
               [ngClass]="{'tab-link-active': isActive(tab)}"
@@ -11,7 +11,7 @@ article.component.component-tab-modal
               span {{tab.title}}
       .bottom
         ul.tab-list
-          li(*ngFor="#tab of getBottomTabs()")
+          li(*ngFor="let tab of getBottomTabs()")
             button.tab-link(
               (click)="selectTab(tab)",
               [ngClass]="{'tab-link-active': isActive(tab)}"

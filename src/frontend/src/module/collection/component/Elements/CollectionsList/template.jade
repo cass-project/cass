@@ -1,7 +1,7 @@
 article.component.component-collections-list
   .collection-cards-container
     .list-items
-      .collection-card-item(*ngFor="#collection of collections")
+      .collection-card-item(*ngFor="let collection of collections")
         div(*ngIf="! collection.is_main")
           cass-collection-card([entity]="collection")
       .collection-card-item(*ngIf="isOwn")

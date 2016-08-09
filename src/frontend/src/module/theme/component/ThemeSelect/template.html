@@ -2,7 +2,7 @@
   <div class="component component-theme-select">
     <div class="form">
       <div class="values">
-        <div class="value" *ngFor="#themeId of value">
+        <div class="value" *ngFor="let themeId of value">
           <span class="title">{{service.findById(themeId).title}}</span>
           <span class="close" (click)="exclude(themeId)"><i class="fa fa-times" aria-hidden="true"></i></span>
         </div>
@@ -23,7 +23,7 @@
       <div class="auto-complete" *ngIf="search.isResultsAvailable()">
         <div class="auto-complete-scroll-box">
           <ul class="auto-complete-list">
-            <li *ngFor="#result of search.results" (click)="include(result.id)">
+            <li *ngFor="let result of search.results" (click)="include(result.id)">
               <span class="title">{{ result.title }}</span>
             </li>
           </ul>
@@ -31,10 +31,10 @@
       </div>
       <div class="browser" *ngIf="browser.visible">
         <div class="view" #scrolling>
-          <div class="column" *ngFor="#tree of browser.columns; #level = index">
+          <div class="column" *ngFor="let tree of browser.columns; let level = index">
             <ul class="theme-list">
               <li
-                      *ngFor="#theme of tree.children"
+                      *ngFor="let theme of tree.children"
                       [class.active]="browser.isActive(theme)"
                       (click)="browser.setColumn(level + 1, theme)"
                       (dblclick)="include(theme.id)">

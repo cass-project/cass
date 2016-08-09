@@ -4,7 +4,7 @@ ul.pagination
       span(aria-hidden='true') «
       span.sr-only Previous
   li.page-item(
-    *ngFor="#page of pages(); #i = index",
+    *ngFor="let page of pages(); #i = index",
     [ngClass]="{'active': i+1 == current}"
   )
     a.page-link([routerLink]="['FeedbackPage',{page:i+1}]")

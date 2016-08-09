@@ -12,7 +12,7 @@
             [ngClass]="{'fa-chevron-up':barVisiblityState, 'fa-chevron-down':!barVisiblityState}"
           )
       ul(*ngIf='isBarVisible()')
-        li(*ngFor="#item of unread")
+        li(*ngFor="let item of unread")
           .message
             a.sidebar-button.sidebar-community-icon([routerLink]="['/ProfileIM', 'Messages', { id: item.source.entity.id }]")
               cass-profile-image([url]="item.source.entity.image.variants['64'].public_path", border="square")

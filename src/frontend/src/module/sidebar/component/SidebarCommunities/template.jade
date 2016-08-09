@@ -6,7 +6,7 @@
         a.sidebar-fa-button([routerLink]="['/Public']")
           i.fa.fa-fw.fa-search
   ul.sidebar-items(*ngIf="isSwitched()")
-    li(*ngFor="#bookmark of getCommunityBookmarks()")
+    li(*ngFor="let bookmark of getCommunityBookmarks()")
       .bookmark
         a.sidebar-button.sidebar-community-icon([routerLink]="getCommunityLinkParams(bookmark.community_sid)")
           img.sidebar-icon([src]="getCommunityImage(bookmark)")
