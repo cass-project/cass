@@ -1,0 +1,22 @@
+@import "./../../../../../styles/globals";
+
+article.component-attachment-error {
+  .error-container {
+    height: 200px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  i {
+    font-size: 48px;
+    color: material-color("grey", "500");
+  }
+
+  span {
+    font-size: 12px;
+    color: material-color("grey", "500");
+    padding: 20px;
+  }
+}

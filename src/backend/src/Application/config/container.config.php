@@ -18,15 +18,12 @@ return [
             'backend' => sprintf('%s/../../../', __DIR__),
             'frontend' => sprintf('%s/../../../../frontend', __DIR__),
             'www' => sprintf('%s/../../../../www/app', __DIR__),
-            'wwwPrefix' => '/public',
-            'assetsDir' => sprintf('%s/../../../../www/app/dist/assets', __DIR__),
         ],
         'config.version.current' => factory(function(Container $container) {
             return $container->get('composer.json')['version'];
         }),
-        'config.storage' => sprintf('%s/../../../../www/app/dist/storage', __DIR__),
-        'config.paths.assets.dir' => sprintf('%s/../../../../www/app/dist/assets', __DIR__),
-        'config.paths.assets.www' => '/dist/assets',
+        'config.storage.dir' => '/data/storage',
+        'config.storage.www' => '/dist/storage',
         'config.routes_group' => [
             'auth',
             'with-profile',

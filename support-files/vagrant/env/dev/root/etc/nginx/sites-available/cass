@@ -20,6 +20,12 @@ server {
         include fastcgi_params;
     }
 
+    location /dist/storage
+    {
+        root /data/storage
+        try_files $uri =404;
+    }
+
     location /
     {
         root /opt/cass/src/www/app/;

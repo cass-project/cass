@@ -7,6 +7,7 @@ use Domain\Theme\Service\ThemeService;
 
 final class ThemeWeightCalculator
 {
+    const MAX_THEMES = 10;
     const BASE_WEIGHT = 1000;
 
     /** @var ThemeService */
@@ -24,8 +25,14 @@ final class ThemeWeightCalculator
             $baseWeight = self::BASE_WEIGHT / count($themeIds);
 
             foreach($themeIds as $rootThemeId) {
+                $counter = 0;
+
                 /** @var Theme $theme */
                 foreach($this->iterateTheme($rootThemeId) as $theme) {
+                    if(++$counter > self::MAX_THEMES) {
+                        break;
+                    }
+
                     $results[] = new ThemeWeightResult($theme->getId(), $baseWeight);
                     $baseWeight = (int) ($baseWeight / 2);
                 }

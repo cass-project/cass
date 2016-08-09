@@ -21,7 +21,7 @@ return [
         CollectionRepository::class => factory(new DoctrineRepositoryFactory(Collection::class)),
         CollectionThemeEQRepository::class => factory(new DoctrineRepositoryFactory(CollectionThemeEQEntity::class)),
         'config.paths.collection.avatar.dir' => factory(function(Container $container) {
-            return sprintf('%s/entity/collection/by-sid/avatar/', $container->get('config.paths.assets.dir'));
+            return sprintf('%s/entity/collection/by-sid/avatar/', $container->get('config.storage.dir'));
         }),
         CollectionService::class => object()
             ->constructorParameter('imagesFlySystem', factory(function(Container $container) {

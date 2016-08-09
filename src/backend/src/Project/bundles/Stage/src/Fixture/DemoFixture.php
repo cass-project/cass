@@ -62,8 +62,8 @@ final class DemoFixture
     /** @var OutputInterface */
     private $output;
 
-    /** @var Account[] */
-    private $accountsMap;
+    /** @var Profile[] */
+    private $profilesMap = [];
 
     public function __construct(
         AccountService $accountService,
@@ -88,11 +88,15 @@ final class DemoFixture
         $this->output = $output;
 
         $this->fetchJSONSources();
+
         $this->upAccountsFixture();
+        $this->upFeedFixture();
     }
 
     private function upAccountsFixture()
     {
+        $this->output->writeln(['', '[ACCOUNT/PROFILE FIXTURE]', '']);
+
         $counter = 0;
 
         foreach($this->jsonProfiles as $json) {
@@ -103,28 +107,33 @@ final class DemoFixture
 
             $progress = round((100/count($this->jsonProfiles)) * $counter);
 
-            $this->output->writeln(sprintf('[%s%%] Account: [ID: %d, origID: %d]', $progress, $account->getId(), $json['id']));
-            $this->output->writeln(sprintf(' [*] Profile: [ID: %d] %s', $profile->getId(), $profile->getGreetings()->__toString()));
+            $this->output->writeln(sprintf(' [*] [%s%%] Account: [ID: %d, origID: %d]', $progress, $account->getId(), $json['id']));
+            $this->output->writeln(sprintf('            Profile: [ID: %d] %s', $profile->getId(), $profile->getGreetings()->__toString()));
 
-            $this->upFeedFixture((int) $json['profile_id'], $account);
+            $this->profilesMap[(int) $json['profile_id']] = $profile;
         }
     }
 
-    private function upFeedFixture(int $fakeProfileId, Account $account)
+    private function upFeedFixture()
     {
-        $this->output->writeln(' [*] Post fixtures');
+        $this->output->writeln(['', '[FEED FIXTURE]', '']);
 
-        $posts = array_filter($this->jsonFeed, function($input) use ($fakeProfileId) {
-            return ((int) $input['author_id']) === $fakeProfileId;
+        usort($this->jsonFeed, function($a, $b) {
+            return \DateTime::createFromFormat('Y-m-d H:i:s', $a['createdOn']) > \DateTime::createFromFormat('Y-m-d H:i:s', $b['createdOn']);
         });
 
-        array_map(function(array $jsonPost) use ($account) {
-            /** @var CollectionItem $collectionItem */
-            $collectionItem = $account->getCurrentProfile()->getCollections()->getItems()[0];
-            $collection = $this->collectionService->getCollectionById($collectionItem->getCollectionId());
+        foreach($this->jsonFeed as $json) {
+            $profile = $this->profilesMap[$json['author_id']] ?? false;
 
-            return $this->createPost($account->getCurrentProfile(), $collection, $jsonPost);
-        }, $posts);
+            if($profile) {
+                $this->output->writeln(sprintf(' [*] Post (date: %s, origID: %d)', $json['createdOn'], $json['id']));
+
+                $item = $profile->getCollections()->getItems()[0]; /** @var CollectionItem $item */
+                $collection = $this->collectionService->getCollectionById($item->getCollectionId());
+
+                $this->createPost($profile, $collection, $json);
+            }
+        }
     }
 
     private function fetchJSONSources()
@@ -157,43 +166,45 @@ final class DemoFixture
 
     private function createAccountFromJSON(array $json): Account
     {
-        $account = $this->accountService->createAccount($json['email'], GenerateRandomString::gen(12));
-        $profile = $account->getCurrentProfile();
+        if($this->accountService->hasAccountWithEmail($json['email'])) {
+            return $this->accountService->getByEmail($json['email']);
+        }else{
+            $account = $this->accountService->createAccount($json['email'], GenerateRandomString::gen(12));
+            $profile = $account->getCurrentProfile();
 
-        $profile->setGender(Gender::createFromIntCode((int) $json['gender']));
+            $profile->setGender(Gender::createFromIntCode((int) $json['gender']));
 
-        $parameters = new EditPersonalParameters(
-            'fl',
-            false,
-            $json['username'] ?? '',
-            $json['surname'] ?? '',
-            $json['patronymic'] ?? '',
-            $json['nickname'] ?? ''
-        );
+            $parameters = new EditPersonalParameters(
+                'fl',
+                false,
+                $json['username'] ?? '',
+                $json['surname'] ?? '',
+                $json['patronymic'] ?? '',
+                $json['nickname'] ?? ''
+            );
 
-        $this->profileService->updatePersonalData($profile->getId(), $parameters);
-        $this->profileService->setInterestingInThemes($profile->getId(), $json['interests']);
-        
-        if($json['birthday']) {
-            $this->profileService->setBirthday($profile->getId(), \DateTime::createFromFormat('Y-m-d', $json['birthday']));
-        }
+            $this->profileService->updatePersonalData($profile->getId(), $parameters);
+            $this->profileService->setInterestingInThemes($profile->getId(), $json['interests']);
 
-        $avatarPath = sprintf("%s/%s", self::AVATAR_DIR, $json['avatar']);
-
-        if(file_exists($avatarPath)) {
-            list($width, $height) = getimagesize($avatarPath);
-
-            if(! is_null($width) && ! is_null($height)) {
-                $size = min($width, $height);
-                $parameters = new UploadImageParameters($avatarPath, new Point(0, 0), new Point($size, $size));
-
-                $this->profileService->uploadImage($profile->getId(), $parameters);
+            if($json['birthday']) {
+                $this->profileService->setBirthday($profile->getId(), \DateTime::createFromFormat('Y-m-d', $json['birthday']));
             }
+
+            $avatarPath = sprintf("%s/%s", self::AVATAR_DIR, $json['avatar']);
+
+            if(file_exists($avatarPath)) {
+                list($width, $height) = getimagesize($avatarPath);
+
+                if(! is_null($width) && ! is_null($height)) {
+                    $size = min($width, $height);
+                    $parameters = new UploadImageParameters($avatarPath, new Point(0, 0), new Point($size, $size));
+
+                    $this->profileService->uploadImage($profile->getId(), $parameters);
+                }
+            }
+
+            return $account;
         }
-
-        $this->accountsMap[(int) $json['profile_id']] = $account;
-
-        return $account;
     }
 
     private function createPost(Profile $profile, Collection $collection, array $json): Post
@@ -304,14 +315,16 @@ final class DemoFixture
                 );
 
             case 3: // link
-                $url = $json['url'];
+                $options = json_decode($json['options'], true);
+
+                $url =  $options['url'];
                 $params = [];
 
                 parse_str(parse_url($url)['query'] ?? '', $params);
 
-                $title = $json['options']['title'] ?? '';
-                $description = $json['options']['description'] ?? '';
-                $image = $json['options']['image'] ?? '';
+                $title = $options['title'] ?? '';
+                $description =  $options['description'] ?? '';
+                $image = $options['image'] ?? '';
 
                 $linkAttachment = new PostAttachment();
                 $linkAttachment->setAttachment([
@@ -372,48 +385,6 @@ final class DemoFixture
                     $json['description'] ?? '',
                     [$linkAttachment->getId()]
                 );
-        }
-    }
-
-    private function upVideosFixture() {
-
-        $averageVideos = ceil(count($this->jsonVideos)/count($this->accountsMap));
-
-        $videoIdx = 1;
-        $account = $this->accountsMap[array_rand($this->accountsMap )];
-
-        foreach($this->jsonVideos as $video){
-            if(0 === ($videoIdx % $averageVideos)) {
-                $account = $this->accountsMap[array_rand($this->accountsMap )] ;
-            }
-
-            $this->currentAccountService->signInWithAccount($account);
-
-            /** @var Profile $profile */
-            $profile = $account->getProfiles()->first();
-
-            /** @var CollectionItem  $collectionItem */
-            $collectionItem = $profile->getCollections()->getItems()[0];
-            $collection = $this->collectionService->getCollectionById($collectionItem->getCollectionId());
-
-            $collectionParams = new EditCollectionParameters(
-                $collection->getTitle(),
-                $collection->getDescription(),
-                [$video['category_id']]
-            );
-
-            $collection = $this->collectionService->editCollection($collection->getId(), $collectionParams);
-
-            $video['id']          = $videoIdx;
-            $video['typeId']      = 2;
-            $video['description'] = $video['name'];
-
-            $profile->setInterestingInIds(array_merge($profile->getInterestingInIds(),[$video['category_id']]));
-            $this->profileService->saveProfile($profile);
-
-            $post = $this->createPost($account->getCurrentProfile(), $collection, $video);
-
-            $videoIdx++;
         }
     }
 }

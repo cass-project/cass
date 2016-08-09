@@ -5,12 +5,12 @@ import {SeekCriteriaParams} from "../definitions/request/criteria/SeekCriteriaPa
 import {SortCriteriaParams} from "../definitions/request/criteria/SortCriteriaParams";
 import {ThemeIdCriteriaParams} from "../definitions/request/criteria/ThemeIdCriteriaParams";
 import {QueryStringCriteriaParams} from "../definitions/request/criteria/QueryStringCriteriaParams";
-import {ContentTypeCriteriaParams, ContentType} from "../definitions/request/criteria/ContentTypeCriteriaParams";
+import {ContentTypeCriteriaParams,} from "../definitions/request/criteria/ContentTypeCriteriaParams";
 
 @Injectable()
 export class FeedCriteriaService
 {
-    static DEFAULT_LIMIT = 6;
+    static DEFAULT_LIMIT = 31;
 
     public criteria: FeedCriteriaList = {
         seek: {

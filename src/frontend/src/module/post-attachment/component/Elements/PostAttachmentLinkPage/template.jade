@@ -1,13 +1,16 @@
 article.component.component-post-attachment-link-page
-  .image-container(*ngIf="hasImage()")
-    a(target="__top", [href]="getURL()")
-      img([src]="getImageURL()")
-  .link-description
-    h1
+  div(*ngIf="! isValid()")
+    cass-attachment-error
+  div(*ngIf=" isValid()")
+    .image-container(*ngIf="hasImage()")
       a(target="__top", [href]="getURL()")
-        span.title {{ getTitle() }}
-    div.url
-      i.fa.fa-link
-      span {{ getURL() }}
-    p.description(*ngIf="hasDescription()")
-      span {{ getDescription() }}
+        img([src]="getImageURL()")
+    .link-description
+      h1
+        a(target="__top", [href]="getURL()")
+          span.title {{ getTitle() }}
+      div.url
+        i.fa.fa-link
+        span {{ getURL() }}
+      p.description(*ngIf="hasDescription()")
+        span {{ getDescription() }}

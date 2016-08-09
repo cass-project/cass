@@ -17,7 +17,7 @@ use League\Flysystem\Memory\MemoryAdapter;
 return [
     'php-di' => [
         'config.paths.theme.preview.dir' => factory(function(Container $container) {
-            return sprintf('%s/entity/themes/preview/', $container->get('config.paths.assets.dir'));
+            return sprintf('%s/entity/themes/preview/', $container->get('config.storage.dir'));
         }),
         ThemeRepository::class => factory(new DoctrineRepositoryFactory(Theme::class)),
         ThemeService::class => object()->constructorParameter('fileSystem', factory(function(Container $container) {

@@ -8,9 +8,11 @@ sudo apt-get install language-pack-en language-pack-en-base -y
 sudo locale-gen en_US.UTF-8
 export LC_ALL="en_US.UTF-8"
 
-# MongoDb
+# /data/
 sudo mkdir -p /data/db/
+sudo mkdir -p /data/storage/
 sudo chown `id -u` /data/db
+sudo chown www-data /data/storage
 
 # ###############
 # APT-GET SECTION
@@ -54,6 +56,7 @@ mysql -uroot -p"1234" -e "CREATE DATABASE cass_testing"
 # #####
 cd /opt/cass
 git pull && git submodule init && git submodule update && git submodule status
+sudo cp -R /support-files/vagrant/env/all/root/* /
 sudo cp -R /support-files/vagrant/env/prod/root/* /
 
 # #######

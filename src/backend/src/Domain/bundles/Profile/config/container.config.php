@@ -39,7 +39,7 @@ $configTest = [
 return [
     'php-di' => [
         'config.paths.profile.avatar.dir' => factory(function(Container $container) {
-            return sprintf('%s/entity/profile/by-sid/avatar/', $container->get('config.paths.assets.dir'));
+            return sprintf('%s/entity/profile/by-sid/avatar/', $container->get('config.storage.dir'));
         }),
         ProfileRepository::class => factory(new DoctrineRepositoryFactory(Profile::class)),
         ProfileExpertInEQRepository::class => factory(new DoctrineRepositoryFactory(ProfileExpertInEQ::class)),
