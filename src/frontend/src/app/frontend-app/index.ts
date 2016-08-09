@@ -1,6 +1,6 @@
 import {Component, ViewChild, ElementRef, Renderer} from "@angular/core";
 import {CORE_DIRECTIVES} from "@angular/common";
-import {ROUTER_DIRECTIVES, RouterOutlet} from "@angular/router";
+import {ROUTER_DIRECTIVES, RouterOutlet} from '@angular/router-deprecated';
 import {RouteConfig, RouteDefinition} from "@angular/router-deprecated";
 import {Module} from "../../module/common/classes/Module";
 import {AppService} from "./service";

@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {ROUTER_DIRECTIVES} from "@angular/router";
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
 @Component({
     selector: 'cass-feedback-pagination',

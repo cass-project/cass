@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from "@angular/router";
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {RouteConfig} from '@angular/router-deprecated'
 import {CommunityCollectionsListRoute} from "../CommunityCollectionsListRoute/index";
 import {CommunityCollectionRoute} from "../CommunityCollectionRoute/index";

@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 
-import {RouterOutlet} from "@angular/router";
+import {RouterOutlet} from '@angular/router-deprecated';
 import {RouteConfig} from "@angular/router-deprecated";
 import {Nothing} from "../../../common/component/Nothing/index";
 import {ProfileRoute} from "../ProfileRoute/index";

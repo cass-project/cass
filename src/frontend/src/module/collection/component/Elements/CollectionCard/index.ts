@@ -2,7 +2,7 @@ import {Component, Input} from "@angular/core";
 import {CollectionEntity} from "../../../definitions/entity/collection";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {ThemeService} from "../../../../theme/service/ThemeService";
-import {Router} from "@angular/router";
+import {Router} from '@angular/router-deprecated';
 
 @Component({
     selector: 'cass-collection-card',

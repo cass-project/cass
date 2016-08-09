@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 
 import {CommunityModalService} from "../../../community/service/CommunityModalService";
-import {Router, ROUTER_DIRECTIVES} from "@angular/router";
+import {Router, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {ProfileCommunityBookmarkEntity} from "../../../profile-communities/definitions/ProfileCommunityBookmark";
 import {Session} from "../../../session/Session";
 import {queryImage, QueryTarget} from "../../../avatar/functions/query";

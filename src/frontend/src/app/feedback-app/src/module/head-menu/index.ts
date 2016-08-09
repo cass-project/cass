@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from "@angular/router";
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
 import {AuthService} from "../../../../../module/auth/service/AuthService";
-import {Router} from "@angular/router";
+import {Router} from '@angular/router-deprecated';
 
 @Component({
     selector: 'cass-feedback-landing-menu',

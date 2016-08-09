@@ -5,7 +5,7 @@ import {ProfileInterestsCard} from "../ProfileInterestsCard/index";
 import {ProfileCreateCollectionCard} from "../ProfileCreateCollectionCard/index";
 import {ProfileSettingsCard} from "../ProfileSettingsCard/index";
 import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
-import {Router} from "@angular/router";
+import {Router} from '@angular/router-deprecated';
 
 @Component({
     selector: 'cass-profile-cards-list',

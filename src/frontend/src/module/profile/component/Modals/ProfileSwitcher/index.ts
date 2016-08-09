@@ -1,5 +1,5 @@
 import {Component, Output, EventEmitter} from "@angular/core";
-import {Router} from "@angular/router";
+import {Router} from '@angular/router-deprecated';
 
 import {ProfileImage} from "../../Elements/ProfileImage/index";
 import {ComponentStages} from "../../../../common/classes/ComponentStages";

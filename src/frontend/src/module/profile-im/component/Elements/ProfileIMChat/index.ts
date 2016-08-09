@@ -1,5 +1,5 @@
 import {Component, ViewChild, ElementRef, EventEmitter} from "@angular/core";
-import {ROUTER_DIRECTIVES} from "@angular/router";
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {RouteParams} from "@angular/router-deprecated";
 
 import {ProfileIMService} from "../../../service/ProfileIMService";

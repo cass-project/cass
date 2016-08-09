@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from "@angular/router";
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {Session} from "../../../session/Session";
 import {IMRESTService} from "../../../im/service/IMRESTService";
 import {ProfileImage} from "../../../profile/component/Elements/ProfileImage/index";

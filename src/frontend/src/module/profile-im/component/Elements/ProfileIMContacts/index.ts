@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from "@angular/router";
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
 import {ContactEntity} from "../../../../contact/definitions/entity/Contact";
 import {ContactService} from "../../../../contact/service/ContactService";

@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES, Router} from "@angular/router";
+import {ROUTER_DIRECTIVES, Router} from '@angular/router-deprecated';
 import {RouteParams} from "@angular/router-deprecated";
 
 import {CollectionsList} from "../../../collection/component/Elements/CollectionsList/index";

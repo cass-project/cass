@@ -10,7 +10,7 @@ import {MessageBusService} from "../../../../message/service/MessageBusService/i
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
 import {CurrentProfileService} from "../../../../profile/service/CurrentProfileService";
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
-import {Router} from "@angular/router";
+import {Router} from '@angular/router-deprecated';
 
 enum CreateCollectionMasterStage
 {

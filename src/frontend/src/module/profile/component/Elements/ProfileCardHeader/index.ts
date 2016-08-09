@@ -3,7 +3,7 @@ import {Component, Input, EventEmitter, Output} from "@angular/core";
 import {ProfileImage} from "../ProfileImage/index";
 import {ProfileEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
-import {Router} from "@angular/router";
+import {Router} from '@angular/router-deprecated';
 
 var moment = require('moment');
 
