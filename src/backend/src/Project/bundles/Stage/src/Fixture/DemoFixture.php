@@ -89,7 +89,6 @@ final class DemoFixture
 
         $this->fetchJSONSources();
         $this->upAccountsFixture();
-        $this->upVideosFixture();
     }
 
     private function upAccountsFixture()
@@ -104,14 +103,14 @@ final class DemoFixture
 
             $progress = round((100/count($this->jsonProfiles)) * $counter);
 
-            $this->output->writeln(sprintf('[%s%%] Account: [ID: %d]', $progress, $account->getId()));
+            $this->output->writeln(sprintf('[%s%%] Account: [ID: %d, origID: %d]', $progress, $account->getId(), $json['id']));
             $this->output->writeln(sprintf(' [*] Profile: [ID: %d] %s', $profile->getId(), $profile->getGreetings()->__toString()));
 
-            $this->upProfileFeedFixture((int) $json['profile_id'], $account);
+            $this->upFeedFixture((int) $json['profile_id'], $account);
         }
     }
 
-    private function upProfileFeedFixture(int $fakeProfileId, Account $account)
+    private function upFeedFixture(int $fakeProfileId, Account $account)
     {
         $this->output->writeln(' [*] Post fixtures');
 
@@ -124,17 +123,13 @@ final class DemoFixture
             $collectionItem = $account->getCurrentProfile()->getCollections()->getItems()[0];
             $collection = $this->collectionService->getCollectionById($collectionItem->getCollectionId());
 
-            $profile = $account->getCurrentProfile();
-            $profile->setInterestingInIds(array_merge($profile->getInterestingInIds(),[$jsonPost['category_id']]));
-            $this->profileService->saveProfile($profile);
-
-            $post = $this->createPost($account->getCurrentProfile(), $collection, $jsonPost);
+            return $this->createPost($account->getCurrentProfile(), $collection, $jsonPost);
         }, $posts);
     }
 
     private function fetchJSONSources()
     {
-        $this->jsonProfiles = $this->fetchJSON(self::JSON_DIR.'/profiles.json');
+        $this->jsonProfiles = $this->fetchJSON(self::JSON_DIR.'/profile.json');
         $this->jsonFeed = $this->fetchJSON(self::JSON_DIR.'/feed.json');
         $this->jsonVideos = $this->fetchJSON(self::JSON_DIR.'/video.json');
     }
@@ -147,7 +142,17 @@ final class DemoFixture
             throw new \Exception(sprintf('Failed to read JSON file `%s`', $path));
         }
 
-        return json_decode($source, true);
+        if (0 === strpos(bin2hex($source), 'efbbbf')) {
+            $source = substr($source, 3);
+        }
+
+        $result = json_decode($source, true);
+
+        if($result === null) {
+            throw new \Exception(sprintf('Failed to parse JSON(%s) : %s', $path, json_last_error_msg()));
+        }
+
+        return $result;
     }
 
     private function createAccountFromJSON(array $json): Account
@@ -167,6 +172,11 @@ final class DemoFixture
         );
 
         $this->profileService->updatePersonalData($profile->getId(), $parameters);
+        $this->profileService->setInterestingInThemes($profile->getId(), $json['interests']);
+        
+        if($json['birthday']) {
+            $this->profileService->setBirthday($profile->getId(), \DateTime::createFromFormat('Y-m-d', $json['birthday']));
+        }
 
         $avatarPath = sprintf("%s/%s", self::AVATAR_DIR, $json['avatar']);
 
@@ -192,7 +202,11 @@ final class DemoFixture
 
         $parameters = $this->createPostParameters($profile, $collection, $json);
 
-        return $this->postService->createPost($parameters);
+        $this->collectionService->editThemeIds($collection->getId(), $json['themeIds']);
+        $post = $this->postService->createPost($parameters);
+        $this->collectionService->editThemeIds($collection->getId(), []);
+
+        return $post;
     }
 
     private function createPostParameters(Profile $profile, Collection $collection, array $json): CreatePostParameters
@@ -214,13 +228,18 @@ final class DemoFixture
                 $url = $json['url'];
                 $parsedURL = parse_url($url);
 
-                if((strtolower($parsedURL['host']) === 'youtu.be') || (! isset($parsedURL['query']))) {
-                    $v = str_replace('/', '', $parsedURL['path']);
+                if(! isset($parsedURL['host'])) {
+                    $url = 'https://www.youtube.com/watch?v=yKBLCcQObdQ';
+                    $v = 'yKBLCcQObdQ';
                 }else{
-                    $params = [];
-                    parse_str(parse_url($url)['query'] ?? '', $params);
+                    if((strtolower($parsedURL['host']) === 'youtu.be') || (! isset($parsedURL['query']))) {
+                        $v = str_replace('/', '', $parsedURL['path']);
+                    }else{
+                        $params = [];
+                        parse_str(parse_url($url)['query'] ?? '', $params);
 
-                    $v = $params['v'];
+                        $v = $params['v'];
+                    }
                 }
 
                 $linkAttachment = new PostAttachment();
@@ -294,16 +313,6 @@ final class DemoFixture
                 $description = $json['options']['description'] ?? '';
                 $image = $json['options']['image'] ?? '';
 
-                $images = strlen($image)
-                    ? [[
-                           'og:image' => $image,
-                           'og:image:url' => $image,
-                       ]]
-                    : [[
-                           'og:image' => '',
-                           'og:image:url' => '',
-                       ]];
-
                 $linkAttachment = new PostAttachment();
                 $linkAttachment->setAttachment([
                    'url' => $url,
@@ -331,8 +340,8 @@ final class DemoFixture
                                    'og:site_name' => '',
                                ],
                                'images' => [[
-                                                'og:image' => '',
-                                                'og:image:url' => '',
+                                                'og:image' => $image,
+                                                'og:image:url' => $image,
                                                 'og:image:type' => '',
                                                 'og:image:width' => '',
                                                 'og:image:height' => '',

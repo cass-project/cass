@@ -88,6 +88,17 @@ class CollectionService implements EventEmitterAwareService
         return $collection;
     }
 
+    public function editThemeIds(int $collectionId, array $themeIds): Collection
+    {
+        $collection = $this->getCollectionById($collectionId);
+        $collection->setThemeIds($themeIds);
+
+        $this->collectionRepository->saveCollection($collection);
+        $this->getEventEmitter()->emit(self::EVENT_COLLECTION_EDITED, [$collection]);
+
+        return $collection;
+    }
+
     public function deleteCollection(int $collectionId)
     {
         $collection = $this->getCollectionById($collectionId);
