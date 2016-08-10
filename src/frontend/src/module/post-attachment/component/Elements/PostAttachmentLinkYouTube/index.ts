@@ -1,8 +1,8 @@
 import {Component, Input, ViewChild, ElementRef} from "@angular/core";
+
 import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
 import {LinkAttachment} from "../../../definitions/entity/attachment/LinkAttachment";
 import {YouTubeLinkMetadata} from "../../../definitions/entity/attachment/link/YouTubeLinkMetadata";
-import {DomSanitizationService, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
     selector: 'cass-post-attachment-link-youtube',
@@ -23,8 +23,6 @@ export class PostAttachmentLinkYouTube
 
     @Input('attachment') link: PostAttachmentEntity<LinkAttachment<YouTubeLinkMetadata>>;
     @ViewChild('container') container: ElementRef;
-
-    constructor(private sanitationService: DomSanitizationService) {}
 
     getURL(): string {
         let ogMetadata = this.link.attachment.metadata.og.og.videos;
@@ -48,10 +46,7 @@ export class PostAttachmentLinkYouTube
             }
         }
 
-
-        return this.sanitationService.bypassSecurityTrustResourceUrl(
-            `http://youtube.com/embed/${this.link.attachment.metadata.youtubeId}?&autoplay=1`
-        );
+        return `http://youtube.com/embed/${this.link.attachment.metadata.youtubeId}?&autoplay=1`;
     }
 
     getOrigWidth(): number {
