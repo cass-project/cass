@@ -11,6 +11,7 @@ import {MessageBusNotificationsLevel} from "../../../../message/component/Messag
 import {CurrentProfileService} from "../../../../profile/service/CurrentProfileService";
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {Router} from '@angular/router-deprecated';
+import {CommunityService} from "../../../../community/service/CommunityService";
 
 enum CreateCollectionMasterStage
 {
@@ -35,6 +36,7 @@ export class CollectionCreateMaster
 {
     constructor(
         private collectionRESTService: CollectionRESTService,
+        private communityService: CommunityService,
         private currentProfileService: CurrentProfileService,
         private messages: MessageBusService,
         private router: Router
@@ -77,7 +79,19 @@ export class CollectionCreateMaster
     }
 
     createForCommunity(){
-        //TODO: When community frontend will be completed, implement this method
+        this.loading = true;
+
+        this.collectionRESTService.createCollection(this.collection).subscribe(
+            (data) => {
+                this.loading = false;
+                this.messages.push(MessageBusNotificationsLevel.Info, `Создана коллекция "${data.entity.title}"`);
+                this.communityService.community.collections.push(data.entity);
+                this.close.emit(true);
+            },
+            (error) => {
+                this.loading = false;
+            }
+        );
     }
 
     createForProfile() {
