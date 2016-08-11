@@ -1,5 +1,4 @@
 /// <reference path="./../../../typings/main/index.d.ts" />
-/// <reference path="./../../../typings/browser.d.ts" />
 
 import 'es6-shim';
 import 'es6-promise';
