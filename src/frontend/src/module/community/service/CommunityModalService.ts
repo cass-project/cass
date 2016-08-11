@@ -5,10 +5,9 @@ import {ModalControl} from "../../common/classes/ModalControl";
 @Injectable()
 export class CommunityModalService
 {
-    public modals = {
-        route: new ModalControl(),
-        join: new ModalControl(),
-        create: new ModalControl(),
-        settings: new ModalControl()
-    };
+    route: ModalControl = new ModalControl();
+    join: ModalControl = new ModalControl();
+    create: ModalControl = new ModalControl();
+    settings: ModalControl = new ModalControl();
+    createCollection: ModalControl = new ModalControl();
 }

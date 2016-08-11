@@ -1,16 +1,17 @@
-div
-  div(*ngIf="service.modals.route.isOpened()")
+.component.component-community
+  div(*ngIf="modals.route.isOpened()")
     cass-community-route-modal(
-      (close)="service.modals.route.close()",
-      (join)="service.modals.route.close(); service.modals.join.open()",
-      (create)="service.modals.route.close(); service.modals.create.open()"
+      (close)="modals.route.close()",
+      (join)="modals.route.close(); modals.join.open()",
+      (create)="modals.route.close(); modals.create.open()"
     )
 
-  div(*ngIf="service.modals.join.isOpened()")
-    cass-community-join-modal((close)="service.modals.join.close()")
+  div(*ngIf="modals.join.isOpened()")
+    cass-community-join-modal((close)="modals.join.close()")
 
-  div(*ngIf="service.modals.create.isOpened()")
-    cass-community-create-modal((close)="service.modals.create.close()", (success)="goCommunity($event)")
+  div(*ngIf="modals.create.isOpened()")
+    cass-community-create-modal((close)="modals.create.close()", (success)="goCommunity($event)")
 
-  div(*ngIf="service.modals.settings.isOpened()")
-    cass-community-settings-modal((close)="service.modals.settings.close()")
+  div(*ngIf="modals.settings.isOpened()")
+    cass-community-settings-modal((close)="modals.settings.close()")
+
