@@ -1,95 +1,71 @@
 import {Injectable} from "@angular/core";
-import {Response} from "@angular/http";
-import {Observable} from "rxjs/Observable";
+import {Http} from "@angular/http";
 
 import {CommunityRESTService} from "./CommunityRESTService";
-import {CommunityCreateResponseModel} from "../model/CommunityCreateResponseModel";
-import {CommunityEntity} from "../definitions/entity/Community";
-import {CommunityImageUploadRequestModel} from "../model/CommunityImageUploadRequestModel";
-import {CommunityControlFeatureRequestModel} from "../model/CommunityActivateFeatureModel";
-import {CommunityImageDeleteRequest} from "../definitions/paths/image-delete";
-import {SetPublicOptionsCommunityRequest} from "../definitions/paths/set-public-options";
-import {EditCommunityRequest} from "../definitions/paths/edit";
+import {AuthToken} from "../../auth/service/AuthToken";
+import {MessageBusService} from "../../message/service/MessageBusService/index";
+import {Observable} from "rxjs/Rx";
+import {GetCommunityBySIDResponse200} from "../definitions/paths/get-by-sid";
+import {LoadingManager} from "../../common/classes/LoadingStatus";
+import {CommunityExtendedEntity} from "../definitions/entity/CommunityExtended";
 
 
 @Injectable()
-export class CommunityService {
-    public community:CommunityEntity;
-    public communityResponsesCache:CommunityCreateResponseModel[] = [];
-    public isAdmin:boolean = false;
+export class CommunityService extends CommunityRESTService
+{
+    public communityResponsesCache: GetCommunityBySIDResponse200[] = [];
+    public communityObservable:Observable<GetCommunityBySIDResponse200>;
+    public community:CommunityExtendedEntity;
+    public loading: LoadingManager = new LoadingManager();
+    public communityLoading = this.loading.addLoading();
 
-    constructor(private communityRESTService:CommunityRESTService) {}
+    constructor(protected http: Http,
+                protected token: AuthToken,
+                protected messages: MessageBusService,
+                protected rest: CommunityRESTService) {
+        super(http, token, messages);
+    }
 
-    public getBySid(sid:string) : Observable<CommunityCreateResponseModel>
+    public isCommunityLoaded() : boolean {
+        return !this.communityLoading.is;
+    }
+    
+    public getCommunityBySid(sid:string) : Observable<GetCommunityBySIDResponse200>
     {
-        return Observable.create(observer => {
-            if(this.isCached(sid)) {
-                let communityResponse: CommunityCreateResponseModel  = this.getFromCache(sid);
-                this.isAdmin = communityResponse.access.admin;
+        this.communityObservable = Observable.create(observer => {
+            try {
+                let communityResponse  = this.tryGetCommunityBySidFromCache(sid);
                 this.community = JSON.parse(JSON.stringify(communityResponse.entity));
                 observer.next(communityResponse);
                 observer.complete();
-            } else {
-                this.communityRESTService.getCommunityBySid(sid)
-                    .subscribe(
-                        communityResponse => {
-                            this.communityResponsesCache.push(JSON.parse(JSON.stringify(communityResponse)));
-                            this.isAdmin = communityResponse.entity.is_own;
-                            this.community = communityResponse.entity.community;
-                            observer.next(communityResponse);
-                            observer.complete();
-                        },
-                        error => {observer.error(error);}
-                    );
+                this.communityLoading.is = false;
+            } catch (error) {
+                this.rest.getCommunityBySid(sid).subscribe(
+                    communityResponse => {
+                        this.communityResponsesCache.push(JSON.parse(JSON.stringify(communityResponse)));
+                        this.community = communityResponse.entity;
+                        observer.next(communityResponse);
+                        observer.complete();
+                        this.communityLoading.is = false;
+                    },
+                    error => observer.error(error)
+                );
             }
         });
+        return this.communityObservable;
     }
 
-    public edit(id:number, body: EditCommunityRequest): Observable<Response>
+    tryGetCommunityBySidFromCache(sid:string) : GetCommunityBySIDResponse200
     {
-        return this.communityRESTService.edit(id, body);
-    }
-
-    public imageUpload(request:CommunityImageUploadRequestModel): Observable<Response>
-    {
-        return this.communityRESTService.imageUpload(request);
-    }
-
-    isCached(sid:string)
-    {
-        return this.communityResponsesCache.filter((input) => {
-            return input.entity.sid === sid;
-        }).length > 0;
-    }
-
-    getFromCache(sid:string) : CommunityCreateResponseModel
-    {
-        if(!this.isCached(sid)) {
-            throw new Error(`Community '${sid}' not cached yet.`);
+        let communityResponseCache = this.communityResponsesCache.filter(
+            reponse => { return reponse.entity.community.sid === sid; }
+        );
+        
+        if(communityResponseCache.length > 0) {
+            return communityResponseCache[0];
+        } else {
+            throw new Error(`Community '${sid}' not cached.`);
         }
-
-        return this.communityResponsesCache.filter(
-            (input) => { return input.entity.sid === sid; }
-        )[0];
     }
-
-    public imageDelete(request:CommunityImageDeleteRequest): Observable<Response>
-    {
-        return this.communityRESTService.imageDelete(request);
-    }
-
-    public activateFeature(reqeust: CommunityControlFeatureRequestModel) : Observable<Response>
-    {
-        return this.communityRESTService.activateFeature(reqeust);
-    };
-
-    public deactivateFeature(reqeust: CommunityControlFeatureRequestModel)
-    {
-        return this.communityRESTService.deactivateFeature(reqeust);
-    };
-
-    public setPublicOptions(communityId:number, body: SetPublicOptionsCommunityRequest): Observable<Response>
-    {
-        return this.communityRESTService.setPublicOptions(communityId, body);
-    }
+    
 }
