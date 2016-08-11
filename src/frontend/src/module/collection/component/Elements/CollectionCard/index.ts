@@ -26,7 +26,9 @@ export class CollectionCard
 
     goCollection() {
         if(this.entity.owner.type === 'community'){
-            this.router.navigate(['/Community', 'Community', {sid: this.entity.owner_sid}, 'Collections', 'View', { sid: this.entity.sid }]);
+            // @DOTO: make access to community sid!!! 
+            // now this.entity.owner.sid is not sid. (community:7)
+            this.router.navigate(['/CommunityRoot', 'Community', {sid: "ehe3pnpnyuar"}, 'Collections', 'View', { sid: this.entity.sid }]);
         } else if(this.entity.owner.type === 'profile'){
             this.router.navigate(['/Profile', 'Profile', {id: this.entity.owner.id}, 'Collections', 'View', { sid: this.entity.sid }]);
         }
