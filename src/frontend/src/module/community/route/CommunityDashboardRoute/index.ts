@@ -5,13 +5,14 @@ import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/inde
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 import {Stream} from "../../../feed/service/FeedService/stream";
-import {CommunityRouteService} from "../CommunityRoute/service";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {PostTypeService} from "../../../post/service/PostTypeService";
 import {PostForm} from "../../../post/component/Forms/PostForm/index";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
-import {AuthService} from "../../../auth/service/AuthService";
+import {CommunityService} from "../../service/CommunityService";
+import {Session} from "../../../session/Session";
+import {LoadingManager} from "../../../common/classes/LoadingStatus";
 
 @Component({
     template: require('./template.jade'),
@@ -30,41 +31,34 @@ import {AuthService} from "../../../auth/service/AuthService";
 })
 export class CommunityDashboardRoute
 {
-    main_collection: CollectionEntity;
-    postType: PostTypeEntity;
+    public mainCollection: CollectionEntity;
+    public postType: PostTypeEntity;
+    public loading: LoadingManager = new LoadingManager();
+    public communityLoading = this.loading.addLoading();
     
     constructor(
-        private authService: AuthService,
-        private service: CommunityRouteService,
+        private session: Session,
+        private communityService: CommunityService,
         private feed: FeedService<PostEntity>,
         private feedSource: CollectionSource,
         private types: PostTypeService
         
     ) {
         this.postType = types.getTypeByStringCode('default');
-
-        if (service.getObservable() !== undefined) {
-            service.getObservable().subscribe(
-                (response) => {
-                    for(let collection of response.entity.collections){
-                        if(collection.is_main){
-                            this.main_collection = collection;
-                        }
-                    }
-                    
-                    feedSource.collectionId = this.main_collection.id;
-                    feed.provide(feedSource, new Stream<PostEntity>());
-                    feed.update();
-                },
-                (error) => {
-                }
-            );
-        }
+        communityService.communityObservable.subscribe(data => {
+            this.communityLoading.is = false;
+            this.mainCollection = data.entity.collections.filter(
+                collection => collection.is_main
+            )[0];
+            feedSource.collectionId = this.mainCollection.id;
+            feed.provide(feedSource, new Stream<PostEntity>());
+            feed.update();
+        });
     }
 
 
-    canPost(): boolean{
-       return this.authService.isSignedIn();
+    canPost(): boolean {
+        return this.session.isSignedIn();
     }
     
     unshiftEntity(entity: PostEntity) {

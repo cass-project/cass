@@ -1,15 +1,17 @@
 import {Component} from "@angular/core";
 
-import {RouteParams, RouteConfig} from "@angular/router-deprecated";
-import {Router, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
+import {Router, ROUTER_DIRECTIVES, RouteParams, RouteConfig} from "@angular/router-deprecated";
 import {ProgressLock} from "../../../form/component/ProgressLock/index";
 import {CommunityCollectionsRoute} from "../CommunityCollectionsRoute/index";
-import {CommunityRouteService} from "./service";
 import {CommunityDashboardRoute} from "../CommunityDashboardRoute/index";
 import {CommunityHeader} from "../../component/Elements/CommunityHeader/index";
-import {AuthService} from "../../../auth/service/AuthService";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
+import {CommunityService} from "../../service/CommunityService";
+import {CommunityModalService} from "../../service/CommunityModalService";
+import {ModalBoxComponent} from "../../../modal/component/box/index";
+import {ModalComponent} from "../../../modal/component/index";
+import {CollectionCreateMaster} from "../../../collection/component/Modal/CollectionCreateMaster/index";
 
 @Component({
     template: require('./template.jade'),
@@ -20,9 +22,11 @@ import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
         ROUTER_DIRECTIVES,
         ProgressLock,
         CommunityHeader,
+        ModalComponent,
+        ModalBoxComponent,
+        CollectionCreateMaster
     ],
     providers: [
-        CommunityRouteService,
         FeedCriteriaService,
         FeedOptionsService,
     ]
@@ -45,28 +49,17 @@ export class CommunityRoute
     constructor(
         private params: RouteParams,
         private router: Router,
-        private service: CommunityRouteService,
-        private authService: AuthService
+        private modals: CommunityModalService,
+        private communityService: CommunityService
     ) {
         let sid = params.get('sid');
-        
         if (sid){
-            service.loadCommunityBySID(sid);
+            communityService.getCommunityBySid(sid).subscribe(
+                () => {},
+                () => router.navigate(['/CommunityRoot/NotFound'])
+            );
         } else {
-            router.navigate(['/Community/NotFound']);
-            return;
-        }
-
-        if (service.getObservable() !== undefined) {
-            service.getObservable().subscribe(
-                (response) => {
-                },
-                (error) => {
-                    router.navigate(['/Community/NotFound']);
-                }
-            )
-        } else {
-            router.navigate(['/Community/NotFound']);
+            router.navigate(['/CommunityRoot/NotFound']);
         }
     }
 }

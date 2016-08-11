@@ -1,8 +1,8 @@
 article.component.component-community-collections-list-route
-  div(*ngIf="service.isCommunityLoaded()")
+  div(*ngIf="communityService.isCommunityLoaded()")
     h1 Подборки
     cass-collections-list(
-      [collections]="service.getCommunity().collections",
-      [is-own]="service.getCommunity().is_own",
+      [collections]="communityService.community.collections",
+      [is-own]="communityService.community.is_own",
       (create)="openCreateCollectionModal($event)"
     )

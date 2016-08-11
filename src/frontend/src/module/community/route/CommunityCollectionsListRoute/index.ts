@@ -1,8 +1,9 @@
 import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
+import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 
 import {CollectionsList} from "../../../collection/component/Elements/CollectionsList/index";
-import {CommunityRouteService} from "../CommunityRoute/service";
+import {CommunityService} from "../../service/CommunityService";
+import {CommunityModalService} from "../../service/CommunityModalService";
 
 @Component({
     template: require('./template.jade'),
@@ -16,9 +17,10 @@ import {CommunityRouteService} from "../CommunityRoute/service";
 })
 export class CommunityCollectionsListRoute
 {
-    constructor(private service: CommunityRouteService) {}
+    constructor(private communityService: CommunityService, private communityModalService: CommunityModalService) {
+    }
 
-    openCreateCollectionModal($event) {
-        this.service.modals.createCollection.open();
+    openCreateCollectionModal() {
+        this.communityModalService.createCollection.open();
     }
 }

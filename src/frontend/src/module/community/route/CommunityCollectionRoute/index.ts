@@ -1,9 +1,7 @@
 import {Component} from "@angular/core";
-import {RouteParams, RouteConfig} from "@angular/router-deprecated";
-import {ROUTER_DIRECTIVES, Router} from '@angular/router-deprecated';
+import {ROUTER_DIRECTIVES, Router, RouteParams} from "@angular/router-deprecated";
 
 import {CollectionsList} from "../../../collection/component/Elements/CollectionsList/index";
-import {CommunityRouteService} from "../CommunityRoute/service";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {PostForm} from "../../../post/component/Forms/PostForm/index";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
@@ -15,6 +13,7 @@ import {CollectionSource} from "../../../feed/service/FeedService/source/Collect
 import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/index";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
+import {CommunityService} from "../../service/CommunityService";
 
 @Component({
     template: require('./template.jade'),
@@ -42,14 +41,14 @@ export class CommunityCollectionRoute
     constructor(
         private router: Router,
         private params: RouteParams,
-        private service: CommunityRouteService,
+        private communityService: CommunityService,
         private types: PostTypeService,
         private feed: FeedService<PostEntity>,
         private feedSource: CollectionSource
     ) {
         this.postType = types.getTypeByStringCode('default');
 
-        service.getObservable().subscribe(
+        communityService.communityObservable.subscribe(
             (response) => {
                 let sid = params.get('sid');
                 let collections = response.entity.collections.filter((entity: CollectionEntity) => {
