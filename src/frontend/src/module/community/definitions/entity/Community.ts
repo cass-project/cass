@@ -1,11 +1,5 @@
 import {ImageCollection} from "../../../avatar/definitions/ImageCollection";
-import {CollectionEntity} from "../../../collection/definitions/entity/collection";
-
-export interface CommunityExtendedEntity {
-    collections: CollectionEntity[];
-    community: CommunityEntity;
-    is_own: boolean;
-}
+import {CommunityPublicOptionsEntity} from "./CommunityPublicOptions";
 
 export interface CommunityEntity
 {
@@ -26,15 +20,4 @@ export interface CommunityEntity
     }[];
     public_options: CommunityPublicOptionsEntity;
     features: string[];
-}
-
-export interface CommunityIndexedEntity extends CommunityEntity
-{
-    _id: string;
-}
-
-export interface CommunityPublicOptionsEntity
-{
-    public_enabled: boolean;
-    moderation_contract: boolean;
 }
