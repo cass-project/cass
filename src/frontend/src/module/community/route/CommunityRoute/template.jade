@@ -1,10 +1,19 @@
 article.component.component-community-route
-  cass-form-progress-lock(*ngIf="service.isLoading()")
-  div(*ngIf="service.isCommunityLoaded()").community-page
+  cass-form-progress-lock(*ngIf="communityService.loading.isLoading()")
+  .community-page(*ngIf="communityService.isCommunityLoaded()")
     cass-community-header(
-      [community]="service.getCommunity()",
+      [community]="communityService.community",
       (go-community)="goDashboard()",
       (go-collection)="goCollection($event)"
     )
   .community-page
     router-outlet
+    
+  div(*ngIf="modals.createCollection.isOpened() && communityService.community")
+    cass-modal
+      cass-modal-box(width="550px")
+        cass-collection-create-master(
+          [for]='"community"',
+          [for_id] = 'communityService.community.community.id',
+          (close) = 'modals.createCollection.close()'
+        )              
