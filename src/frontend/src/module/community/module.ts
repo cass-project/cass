@@ -1,32 +1,31 @@
 import {Module} from "../common/classes/Module";
-
+import {CommunityRootRoute} from "./route/CommunityRootRoute";
+import {CommunityService} from "./service/CommunityService";
 import {CommunityModalService} from "./service/CommunityModalService";
 import {CommunityRESTService} from "./service/CommunityRESTService";
-import {CommunityService} from "./service/CommunityService";
-import {CommunitySettingsModalModel} from "./component/Modal/CommunitySettingsModal/model";
 import {CommunityComponent} from "./index";
-import {CommunityRootRoute} from "./route/CommunityRootRoute/index";
-import {CommunityModals} from "./modals";
 import {CommunityCreateModalNotifier} from "./component/Modal/CommunityCreateModal/notify";
+import {CommunityJoinModalNotifier} from "./component/Modal/CommunityJoinModal/notify";
+import {CommunitySettingsModalModel} from "./component/Modal/CommunitySettingsModal/model";
 
-export = new Module({ 
-    name: 'community',
+export = new Module({
+    name: 'community1',
     RESTServices: [
         CommunityRESTService,
     ],
     providers: [
         CommunityService,
         CommunityModalService,
+        CommunityCreateModalNotifier,
         CommunitySettingsModalModel,
-        CommunityModals,
-        CommunityCreateModalNotifier
+        CommunityJoinModalNotifier
     ],
     directives: [
         CommunityComponent,
     ],
     routes: [
         {
-            name: 'Community',
+            name: 'CommunityRoot',
             path: '/community/...',
             component: CommunityRootRoute
         },

@@ -1,9 +1,9 @@
 import {Component} from "@angular/core";
-import {Router} from '@angular/router-deprecated';
+import {Router} from "@angular/router-deprecated";
 
 import {CommunityRouteModal} from "./component/Modal/CommunityRouteModal";
-import {CommunityCreateModal} from "./component/Modal/CommunityCreateModal";
 import {CommunityJoinModal} from "./component/Modal/CommunityJoinModal";
+import {CommunityCreateModal} from "./component/Modal/CommunityCreateModal";
 import {CommunitySettingsModal} from "./component/Modal/CommunitySettingsModal";
 import {CommunityModalService} from "./service/CommunityModalService";
 import {CommunityExtendedEntity} from "./definitions/entity/CommunityExtended";
@@ -13,19 +13,19 @@ import {CommunityExtendedEntity} from "./definitions/entity/CommunityExtended";
     template: require('./template.jade'),
     directives: [
         CommunityRouteModal,
-        CommunityCreateModal,
         CommunityJoinModal,
+        CommunityCreateModal,
         CommunitySettingsModal
     ]
 })
 export class CommunityComponent
 {
     constructor(
-        private service: CommunityModalService,
+        private modals: CommunityModalService,
         private router: Router
     ) {}
 
     goCommunity(entity: CommunityExtendedEntity) {
-        this.router.navigate(['Community', 'Community', { sid: entity.community.sid }]);
+        this.router.navigate(['CommunityRoot', 'Community', { sid: entity.community.sid }]);
     }
 }
