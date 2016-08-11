@@ -1,7 +1,5 @@
-import {Success200} from "../../../common/definitions/common";
-import {CommunityExtendedEntity} from "../entity/CommunityExtended";
+import {CommunityResponse200} from "./response";
 
-export interface GetCommunityResponse200 extends Success200
+export interface GetCommunityResponse200 extends CommunityResponse200
 {
-    entity: CommunityExtendedEntity;
 }

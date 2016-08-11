@@ -1,14 +1,12 @@
-import {Success200} from "../../../common/definitions/common";
-import {CommunityExtendedEntity} from "../entity/CommunityExtended";
+import {CommunityResponse200} from "./response";
 
 export interface EditCommunityRequest
 {
     title: string;
     description: string;
-    theme_id: number;
+    theme_id?: number;
 }
 
-export interface EditCommunityResponse200 extends Success200
+export interface EditCommunityResponse200 extends CommunityResponse200
 {
-    entity: CommunityExtendedEntity;
 }
