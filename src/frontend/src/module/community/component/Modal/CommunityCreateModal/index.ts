@@ -131,5 +131,3 @@ export class CommunityCreateModal
         this.closeEvent.emit(this);
     }
 }
-
-interface LoadingStatus { is: boolean; }

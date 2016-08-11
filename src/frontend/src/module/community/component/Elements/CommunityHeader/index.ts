@@ -1,12 +1,10 @@
 import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {CommunityImage} from "../CommunityImage/index";
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
-import {CommunityRouteService} from "../../../route/CommunityRoute/service";
-import {CommunityModals} from "../../../modals";
-import {CommunityRouteService} from "../../../route/CommunityRoute/service";
-import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
+import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
+import {CommunityModalService} from "../../../service/CommunityModalService";
 
 @Component({
     selector: 'cass-community-header',
@@ -26,7 +24,7 @@ export class CommunityHeader
 
     @Input('community') entity: CommunityExtendedEntity;
 
-    constructor(private modals: CommunityModals, private service: CommunityRouteService) {}
+    constructor(private modals: CommunityModalService) {}
     
     getCommunityTitle(): string {
         return this.entity.community.title;

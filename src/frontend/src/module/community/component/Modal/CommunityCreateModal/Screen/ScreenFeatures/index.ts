@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
 
-import {CommunityCreateModalModel, CommunityFeaturesModel} from "../../model";
-import {CommunityFeaturesService} from "../../../../../service/CommunityFeaturesService";
-import {Screen} from "../../screen";
+import {CommunityCreateModalModel} from "../../model";
+import {Screen} from "../screen";
+import {CommunityFeaturesService} from "../../../../../../community-features/service/CommunityFeaturesService";
 import {CommunityCreateModalForm} from "../../Form";
 
 @Component({
@@ -11,18 +11,14 @@ import {CommunityCreateModalForm} from "../../Form";
     styles: [
         require('./style.shadow.scss')
     ],
-    providers: [CommunityFeaturesService],
     directives: [CommunityCreateModalForm]
 })
 export class ScreenFeatures extends Screen
 {
-    private features: CommunityFeaturesModel[] = [];
-
     constructor(public model: CommunityCreateModalModel, private featuresService: CommunityFeaturesService) {
         super();
-        this.features = featuresService.getFeatures();
-
-        for(let feature of this.features) {
+        
+        for(let feature of featuresService.getFeatures()) {
             this.model.features.push({
                 code : feature.code,
                 is_activated: false,

@@ -1,7 +1,7 @@
 import {Component, Input} from "@angular/core";
 
 import {CommunityComponent} from "../../../index";
-import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
+import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
 
 @Component({
     selector: 'cass-community-menu',

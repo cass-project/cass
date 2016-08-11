@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {Screen} from "../screen";
+import {Screen} from "../Screen/screen";
 
 @Component({
     selector: 'cass-community-create-modal-form',

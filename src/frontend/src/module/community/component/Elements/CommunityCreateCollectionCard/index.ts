@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {CommunityModals} from "../../../modals";
+import {CommunityModalService} from "../../../service/CommunityModalService";
 
 @Component({
     selector: 'cass-community-create-collection-card',
@@ -10,7 +10,7 @@ import {CommunityModals} from "../../../modals";
 })
 export class CommunityCreateCollectionCard
 {
-    constructor(private modals: CommunityModals) {}
+    constructor(private modals: CommunityModalService) {}
 
     openCreateCollectionMaster() {
         this.modals.createCollection.open();

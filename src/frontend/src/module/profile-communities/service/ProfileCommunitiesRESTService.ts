@@ -29,7 +29,7 @@ export class ProfileCommunitiesRESTService extends AbstractRESTService
     }
 
     joinCommunity(profileId: number, communitySID: string): Observable<JoinCommunityResponse200> {
-        let url = `/backend/api/protected/with-profile/${profileId}/community/${communitySID}/{command:leave}`;
+        let url = `/backend/api/protected/with-profile/${profileId}/community/${communitySID}/join`;
 
         return this.handle(
             this.http.put(url, '', {
@@ -39,7 +39,7 @@ export class ProfileCommunitiesRESTService extends AbstractRESTService
     }
 
     leaveCommunity(profileId: number, communitySID: string): Observable<LeaveCommunityResponse200> {
-        let url = `/backend/api/protected/with-profile/${profileId}/community/${communitySID}/{command:join}`;
+        let url = `/backend/api/protected/with-profile/${profileId}/community/${communitySID}/leave`;
 
         return this.handle(
             this.http.put(url, '', {

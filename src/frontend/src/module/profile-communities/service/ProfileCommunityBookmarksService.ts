@@ -4,17 +4,24 @@ import {ProfileCommunityBookmarkEntity} from "../definitions/ProfileCommunityBoo
 import {CommunityEntity} from "../../community/definitions/entity/Community";
 import {Session} from "../../session/Session";
 import {CommunityCreateModalNotifier} from "../../community/component/Modal/CommunityCreateModal/notify";
+import {CommunityJoinModalNotifier} from "../../community/component/Modal/CommunityJoinModal/notify";
 
 @Injectable()
 export class ProfileCommunityBookmarksService
 {
     constructor(
         private session: Session,
-        private communities: CommunityCreateModalNotifier
+        private communityCreateModalNotifier: CommunityCreateModalNotifier,
+        private communityJoinModalNotifier: CommunityJoinModalNotifier
     ) {
-        communities.observable.subscribe(entity => {
+        communityCreateModalNotifier.observable.subscribe(entity => {
             if(session.isSignedIn()) {
                 this.attachBookmark(entity.community);
+            }
+        });
+        communityJoinModalNotifier.observable.subscribe(community => {
+            if(session.isSignedIn()) {
+                this.attachBookmark(community);
             }
         });
     }

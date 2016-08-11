@@ -1,7 +1,7 @@
 import {Component, ElementRef} from "@angular/core";
 
 import {CommunityCreateModalModel} from "../../model";
-import {Screen} from "../../screen";
+import {Screen} from "../screen";
 import {CommunityCreateModalForm} from "../../Form";
 import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
 

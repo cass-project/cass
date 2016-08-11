@@ -6,14 +6,18 @@ article.component.component-screen-features
         p Вы можете включить сколько угодно разделов на своем сообществе, но, возможно, некоторые из них вам не потребуются.
     .form-section.modal-list
       ul.theme-options.modal-list-container
-        li.modal-list-item([ngClass]="{disabled: feature.disabled}", *ngFor="let feature of model.features")
+        li.modal-list-item(
+          [ngClass]="{disabled: feature.disabled}", 
+          *ngFor="let feature of model.features"
+        )
           .modal-list-icon
             .modal-list-icon-container
               i.fa(class="{{featuresService.getIcon(feature.code)}}")
           .modal-list-info
             h1 {{featuresService.getName(feature.code)}}
             p {{featuresService.getDescription(feature.code)}}
-            p.sorry(*ngIf="feature.disabled") К сожалению, мы пока что еще не сделали этот раздел. Но он скоро будет!
+            p.sorry(*ngIf="feature.disabled")
+              | К сожалению, мы пока что еще не сделали этот раздел. Но он скоро будет!
           .modal-list-controls
             .form-switch-button
               input.form-switch-button-checkbox(

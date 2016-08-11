@@ -4,8 +4,8 @@ import {CommunityCard} from "../CommunityCard/index";
 import {CommunityCreateCollectionCard} from "../CommunityCreateCollectionCard/index";
 import {CommunitySettingsCard} from "../CommunitySettingsCard/index";
 
-import {Router} from '@angular/router-deprecated';
-import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
+import {Router} from "@angular/router-deprecated";
+import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
 
 @Component({
     selector: 'cass-community-cards-list',
