@@ -1,25 +1,28 @@
-import {Component, EventEmitter, Output} from "@angular/core";
-
-import {ModalBoxComponent} from "../../../../modal/component/box";
-import {ModalComponent} from "../../../../modal/component";
-import {ScreenControls} from "../../../../common/classes/ScreenControls";
-
-import {CommunityService} from "../../../service/CommunityService";
-import {CommunityFeaturesService} from "../../../service/CommunityFeaturesService";
-
-import {FeaturesTab} from "./Tab/TabFeatures";
-import {GeneralTab} from "./Tab/TabGeneral";
-import {ImageTab} from "./Tab/TabImage";
-import {CommunitySettingsModalModel} from "./model";
-import {EditCommunityRequest} from "../../../definitions/paths/edit";
-import {CommunityControlFeatureRequestModel} from "../../../model/CommunityActivateFeatureModel";
-import {CommunityImageUploadRequestModel} from "../../../model/CommunityImageUploadRequestModel";
-import {ImageCropperService} from "../../../../form/component/ImageCropper/index";
+import {Component, Output, EventEmitter} from "@angular/core";
 import {Observable} from "rxjs/Rx";
-import {Response} from "@angular/http";
-import {CommunityFeaturesModel} from "../CommunityCreateModal/model";
-import {SetPublicOptionsCommunityRequest} from "../../../definitions/paths/set-public-options";
 
+import {ScreenControls} from "../../../../common/classes/ScreenControls";
+import {ModalComponent} from "../../../../modal/component/index";
+import {ModalBoxComponent} from "../../../../modal/component/box/index";
+import {ImageCropperService} from "../../../../form/component/ImageCropper/index";
+import {CommunityFeaturesService} from "../../../../community-features/service/CommunityFeaturesService";
+import {CommunityService} from "../../../service/CommunityService";
+import {CommunitySettingsModalModel} from "./model";
+import {EditCommunityResponse200} from "../../../definitions/paths/edit";
+import {SetPublicOptionsCommunityResponse200} from "../../../definitions/paths/set-public-options";
+import {CommunityActivateFeatureResponse200} from "../../../../community-features/definitions/paths/activate";
+import {UploadCommunityImageResponse200} from "../../../definitions/paths/image-upload";
+import {CommunityFeatureEntity} from "../../../../community-features/definitions/entity/CommunityFeature";
+import {LoadingManager} from "../../../../common/classes/LoadingStatus";
+import {FeaturesTab} from "./Tab/TabFeatures/index";
+import {ImageTab} from "./Tab/TabImage/index";
+import {GeneralTab} from "./Tab/TabGeneral/index";
+
+enum SettingsStage {
+    General = <any>"General",
+    Features = <any>"Features",
+    Image = <any>"Image"
+}
 
 @Component({
     selector: 'cass-community-settings-modal',
@@ -27,50 +30,47 @@ import {SetPublicOptionsCommunityRequest} from "../../../definitions/paths/set-p
     styles: [
         require('./style.shadow.scss')
     ],
+    providers: [
+        ImageCropperService
+    ],
     directives: [
-        ModalComponent,
-        ModalBoxComponent,
         GeneralTab,
         ImageTab,
-        FeaturesTab
-    ],
-    providers: [
-        CommunityFeaturesService,
-        ImageCropperService
+        FeaturesTab,
+        ModalComponent,
+        ModalBoxComponent
     ]
 })
 
 export class CommunitySettingsModal
 {
     public screens: ScreenControls<SettingsStage> = new ScreenControls<SettingsStage>(SettingsStage.General);
-
+    public modelUnmodified: CommunitySettingsModalModel;
+    private loading: LoadingManager = new LoadingManager();
     @Output('close') closeEvent = new EventEmitter<CommunitySettingsModal>();
-
-    private loading = false;
-
+    
     constructor(
-        public model:CommunitySettingsModalModel,
-        public modelUnmodified:CommunitySettingsModalModel,
-        private service: CommunityService,
+        private model: CommunitySettingsModalModel,
+        private communityService: CommunityService,
         private cropper: ImageCropperService,
         private featuresService: CommunityFeaturesService
     ) {
-        service.getBySid(model.sid).subscribe(data => {
-            model.id = data.entity.id;
-            model.title = data.entity.title;
-            model.description = data.entity.description;
-            model.theme_id = data.entity.theme.id;
+        communityService.communityObservable.subscribe(data=>{
+            model.id = data.entity.community.id;
+            model.title = data.entity.community.title;
+            model.description = data.entity.community.description;
+            model.theme_id = data.entity.community.theme.id;
             model.public_options = {
-                moderation_contract: data.entity.public_options.moderation_contract,
-                public_enabled: data.entity.public_options.public_enabled
+                moderation_contract: data.entity.community.public_options.moderation_contract,
+                public_enabled: data.entity.community.public_options.public_enabled
             };
-            model.image = data.entity.image;
-            
+            model.image = data.entity.community.image;
             this.model.features = [];
+            
             for(let feature of featuresService.getFeatures()) {
                 this.model.features.push({
                     "code": feature.code,
-                    "is_activated": false,
+                    "is_activated": data.entity.community.features.filter(featureCode => featureCode === feature.code).length > 0,
                     "disabled": featuresService.isDisabled(feature.code)
                 });
             }
@@ -89,18 +89,18 @@ export class CommunitySettingsModal
         }
         this.cropper.reset();
     }
-
+    
     close() {
         this.closeEvent.emit(this);
     }
 
     canSave() {
-        return JSON.stringify( this.modelUnmodified ) !== JSON.stringify(this.model) && this.loading===false
+        return JSON.stringify( this.modelUnmodified ) !== JSON.stringify(this.model)&& !this.loading.isLoading()
     }
 
     saveAllChanges() {
-        this.loading = true;
-        let requests:Promise<Response>[] = [];
+        let saveLoadingStatus = this.loading.addLoading();
+        let requests:Observable<any>[] = [];
 
         if (this.isGeneralModified()) {
             requests.push(this.attemptSaveGeneral());
@@ -112,64 +112,64 @@ export class CommunitySettingsModal
 
         if(this.isFeaturesModified()) {
             for (let feature of this.getModifiedFeatures()) {
-                this.attemptSaveFeature(feature);
+                requests.push(this.attemptSaveFeature(feature));
             }
         }
 
-        Promise.all(requests).then(() => {
-            this.loading = false;
-            this.modelUnmodified = JSON.parse(JSON.stringify(this.model));
+        if(this.isImageModified()) {
+            requests.push(this.attemptSaveImage());
+        }
 
-            if(this.isImageModified()) {
-                this.attemptSaveImage()
-                    .map(response=>response.json())
-                    .subscribe(response => {
+        Observable.forkJoin(requests).subscribe(
+            responses => {
+                for(let response of responses) {
+                    if(response.image) {
                         this.model.image = response.image;
                         delete this.model['new_image'];
                         this.cropper.reset();
-                        this.modelUnmodified = JSON.parse(JSON.stringify(this.model));
-                    });
+                    }
+                }
+                
+                saveLoadingStatus.is = false;
+                this.modelUnmodified = JSON.parse(JSON.stringify(this.model));
+                
+                this.communityService.community.community.title = this.model.title;
+                this.communityService.community.community.description = this.model.description;
+                this.communityService.community.community.public_options = JSON.parse(JSON.stringify(this.model.public_options));
+                this.communityService.community.community.features = this.model.features.map(feature => feature.code);
+                this.communityService.community.community.image = JSON.parse(JSON.stringify(this.model.image));
+            },
+            error => {
+                console.log(error);
             }
-        });
-
+        );
     }
 
-    attemptSaveGeneral(): Promise<Response> {
-        return this.service.edit(this.model.id, <EditCommunityRequest> {
-            title: this.model.title,
-            description: this.model.description,
-            theme_id: this.model.theme_id
-        }).toPromise();
+    attemptSaveGeneral(): Observable<EditCommunityResponse200> {
+        return this.communityService.edit(this.model.id, this.model.editCommunityRequest());
     }
 
-    attemptSavePublicOptions(): Promise<Response> {
-        return this.service.setPublicOptions(this.model.id, <SetPublicOptionsCommunityRequest> {
-            public_enabled: this.model.public_options.public_enabled,
-            moderation_contract: this.model.public_options.moderation_contract
-        }).toPromise();
+    attemptSavePublicOptions(): Observable<SetPublicOptionsCommunityResponse200> {
+        return this.communityService.setPublicOptions(this.model.id, this.model.setPublicOptionsCommunityRequest());
     }
 
-    attemptSaveFeature(feature: CommunityFeaturesModel): Promise<Response> {
-        let communityFeatureRequest = <CommunityControlFeatureRequestModel> {
-            communityId: this.model.id,
-            feature: feature.code
-        };
+    attemptSaveFeature(feature: CommunityFeatureEntity): Observable<CommunityActivateFeatureResponse200> {
         if (feature.is_activated) {
-            return this.service.activateFeature(communityFeatureRequest).toPromise();
+            return this.communityService.activateFeature(this.model.communityActivateFeatureRequest(feature));
         } else {
-            return this.service.deactivateFeature(communityFeatureRequest).toPromise();
+            return this.communityService.deactivateFeature(this.model.communityActivateFeatureRequest(feature));
         }
     }
 
-    attemptSaveImage(): Observable<Response> {
-        return this.service.imageUpload(<CommunityImageUploadRequestModel>{
-            communityId: this.model.id,
-            uploadImage: this.model.new_image.uploadImage,
-            x1: this.model.new_image.uploadImageCrop.x,
-            y1: this.model.new_image.uploadImageCrop.y,
-            x2: this.model.new_image.uploadImageCrop.width + this.model.new_image.uploadImageCrop.x,
-            y2: this.model.new_image.uploadImageCrop.height + this.model.new_image.uploadImageCrop.y
-        })
+    attemptSaveImage(): Observable<UploadCommunityImageResponse200> {
+        return this.communityService.imageUpload(
+            this.model.id,
+            this.model.new_image.uploadImage,
+            this.model.new_image.uploadImageCrop.x,
+            this.model.new_image.uploadImageCrop.y,
+            this.model.new_image.uploadImageCrop.width + this.model.new_image.uploadImageCrop.x,
+            this.model.new_image.uploadImageCrop.height + this.model.new_image.uploadImageCrop.y
+        );
     }
 
     isImageModified(): boolean {
@@ -188,7 +188,7 @@ export class CommunitySettingsModal
 
     isPublicOptionsModified(): boolean {
         return this.model.public_options.public_enabled !== this.modelUnmodified.public_options.public_enabled ||
-               this.model.public_options.moderation_contract !== this.modelUnmodified.public_options.moderation_contract;
+            this.model.public_options.moderation_contract !== this.modelUnmodified.public_options.moderation_contract;
     }
 
     getModifiedFeatures() {
@@ -199,10 +199,5 @@ export class CommunitySettingsModal
             return featuresUnmodified.is_activated != feature.is_activated;
         });
     }
-}
-
-enum SettingsStage {
-    General = <any>"General",
-    Features = <any>"Features",
-    Image = <any>"Image"
+    
 }

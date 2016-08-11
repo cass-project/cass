@@ -47,5 +47,5 @@ cass-modal
                 [disabled]='!canSave()',
                 (click) = 'saveAllChanges()'
               )
-                i.fa.fa-spinner.fa-pulse.fa-fw(*ngIf="loading")
+                i.fa.fa-spinner.fa-pulse.fa-fw(*ngIf="loading.isLoading()")
                 span Сохранить
