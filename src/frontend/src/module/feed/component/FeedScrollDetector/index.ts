@@ -33,10 +33,12 @@ export class FeedScrollDetector
                 let rect = elem.getBoundingClientRect();
 
                 if(!!rect
-                    && rect.bottom >= 0
-                    && rect.right >= 0
-                    && rect.top <= html.clientHeight
-                    && rect.left <= html.clientWidth ){
+                    && rect.bottom > 0
+                    && rect.right > 0
+                    && rect.top > 0
+                    && rect.left > 0
+                    && rect.top < html.clientHeight
+                    && rect.left < html.clientWidth){
                     return true;
                 }
             } else if(!this.feed.isLoading()){

@@ -14,8 +14,7 @@ import {FeedEntity} from "./entity";
 export class FeedService<T extends FeedEntity>
 {
     static DEFAULT_PAGE_SIZE = 30;
-
-    private postHelperIndex: number;
+    
     public shouldLoad: boolean = true;
 
     private status: LoadingManager = new LoadingManager();
@@ -72,7 +71,6 @@ export class FeedService<T extends FeedEntity>
                 this.stream.replace(<any>response.entities);
                 if(response.entities.length > 1){
                     this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
-                    this.postHelperIndex = this.stream.all().length - 1;
                 }
 
                 status.is = false;
@@ -104,7 +102,6 @@ export class FeedService<T extends FeedEntity>
 
                 if(response.entities.length > 1) {
                     this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
-                    this.postHelperIndex = this.stream.all().length - 1;
                 }
 
                 status.is = false;
