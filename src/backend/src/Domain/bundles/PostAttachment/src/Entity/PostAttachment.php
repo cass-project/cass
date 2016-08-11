@@ -86,6 +86,10 @@ class PostAttachment implements JSONSerializable, IdEntity, SIDEntity
     public function getAttachmentType(): string {
         return $this->attachmentType;
     }
+    public function setAttachmentType($type): self {
+        $this->attachmentType = $type;
+        return $this;
+    }
 
     public function getAttachment(): array {
         return $this->attachment;

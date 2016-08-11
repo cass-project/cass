@@ -212,18 +212,21 @@ final class FakeFixture
 
             case 2: // youtube
                 $url = $json['url'];
-                $parsedURL = parse_url($url);
 
-                if((strtolower($parsedURL['host']) === 'youtu.be') || (! isset($parsedURL['query']))) {
-                    $v = str_replace('/', '', $parsedURL['path']);
-                }else{
-                    $params = [];
-                    parse_str(parse_url($url)['query'] ?? '', $params);
+                // TODO сделать получение id youtube id
+                $youtubeId = '';
 
-                    $v = $params['v'];
-                }
+                $re = "#^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$#i";
+                preg_match($re, $url, $m);
 
                 $linkAttachment = new PostAttachment();
+
+                if(!empty($m)){
+                    $linkAttachment->setAttachmentType('youtube');
+                } else {
+                    //throw new \Exception(sprintf("bad url: %s", $url));
+                }
+
                 $linkAttachment->setAttachment([
                                                    'url' => $url,
                                                    'resource' => 'youtube',
@@ -270,7 +273,7 @@ final class FakeFixture
                                                                             ]]
                                                            ]
                                                        ],
-                                                       'youtubeId' => $v,
+                                                       'youtubeId' => $youtubeId,
                                                    ]
                                                ]);
 
