@@ -6,7 +6,7 @@ import {ModalBoxComponent} from "../../../../modal/component/box/index";
 
 @Component({
     selector: 'cass-community-route-modal',
-    template: require('./template.html'),
+    template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],

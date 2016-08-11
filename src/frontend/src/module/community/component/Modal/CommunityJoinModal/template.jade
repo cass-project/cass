@@ -1,0 +1,26 @@
+.component.component-community-join-modal
+  cass-modal
+    cass-modal-box(width="450px")
+      cass-form-progress-lock(*ngIf="loading.isLoading()")
+      header.form-header
+        h1 Присоединиться к коммунити
+      .form.community-modal.community-modal-join
+        form.form.screen.screen-sid((ngSubmit)='submit()')
+          .cass-padding-box-10
+            .input-group
+              label.form-label
+                span.label-text Код приглашения (SID)
+                // TODO: Цифра 8 должна экспортироваться во фронтлайн, а после подставляться сюда
+                // @see: Domain\Community\Entity\Community::SID_LENGTH
+                input.form-input(type='text', required='', minlength='8', maxlength='8', [(ngModel)]='communitySID', placeholder='XXXXXXXX')
+          footer.form-footer
+            .form-footer-section
+              .cass-padding-box-5
+                button(type="button").form-text-button((click)="close()")
+                  | Отмена
+            .form-footer-section
+              .cass-padding-box-5
+                // [disabled]
+                button.form-button.form-button-primary(type='submit')
+                  span Войти в коммунити
+              

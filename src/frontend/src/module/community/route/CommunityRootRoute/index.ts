@@ -1,7 +1,6 @@
 import {Component} from "@angular/core";
 
-import {RouteConfig} from "@angular/router-deprecated";
-import {RouterOutlet} from '@angular/router-deprecated';
+import {RouterOutlet, RouteConfig} from "@angular/router-deprecated";
 import {Nothing} from "../../../common/component/Nothing/index";
 import {CommunityRoute} from "../CommunityRoute/index";
 import {CommunityNotFoundRoute} from "../CommunityNotFoundRoute/index";

@@ -1,0 +1,21 @@
+﻿.component.component-community-route-modal
+  cass-modal
+    cass-modal-box(width='630px')
+      .form.community-modal.community-modal-route
+        .choices
+          .choice.choice-create((click)='goCreate()')
+            .info
+              h1 Create
+              p Создайте новое коммунити и пригласите своих друзей!
+            .buttons
+              button#communityRouteModalCreateButton.form-button.form-button-green Создать коммунити
+          .choice.choice-join((click)='goJoin()')
+            .info
+              h1 Join
+              p Присоединитесь к существующему коммунити, введя специальный код приглашения.
+            .buttons
+              button#communityRouteModalJoinButton.form-button.form-button-light-blue Присоединиться к коммунити
+        footer.form-footer
+          .form-footer-section
+            button.form-text-button((click)='closeModal()') 
+              | Закрыть

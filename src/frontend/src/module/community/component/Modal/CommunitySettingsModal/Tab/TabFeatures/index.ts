@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 
-import {CommunityFeaturesService} from "../../../../../service/CommunityFeaturesService";
+import {CommunityFeaturesService} from "../../../../../../community-features/service/CommunityFeaturesService";
 import {CommunitySettingsModalModel} from "../../model";
 
 @Component({
