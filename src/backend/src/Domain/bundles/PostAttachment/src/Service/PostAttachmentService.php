@@ -138,7 +138,7 @@ class PostAttachmentService
 
     public function getTotalCountAttachments(array $types): int
     {
-
+        return $this->postAttachmentRepository->getTotalCountAttachments($types);
     }
 
     public function getAttachmentsOfPost(int $postId): array
@@ -158,6 +158,10 @@ class PostAttachmentService
         } else {
             return new GenericFileAttachmentType();
         }
+    }
+
+    public function updatePostAttachment(PostAttachment $postAttachment){
+        return $this->postAttachmentRepository->savePostAttachment($postAttachment);
     }
 
     private function validateFileSize(string $tmpFile, FileAttachmentType $attachmentType)

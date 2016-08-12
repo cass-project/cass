@@ -88,6 +88,16 @@ class PostAttachmentRepository extends EntityRepository
         return $result;
     }
 
+    public function getTotalCountAttachments(array $types):int
+    {
+        return $this->createQueryBuilder('a')
+                    ->select('count(a.id)')
+                    ->where('a.attachmentType IN (:types)')
+                    ->setParameter('types', $types)
+                    ->getQuery()
+                    ->getSingleScalarResult();
+    }
+
     public function getAttachmentsOfPost(int $postId): array
     {
         return $this->findBy([

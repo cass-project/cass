@@ -213,7 +213,6 @@ final class FakeFixture
             case 2: // youtube
                 $url = $json['url'];
 
-                // TODO сделать получение id youtube id
                 $youtubeId = '';
 
                 $re = "#^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$#i";
@@ -223,6 +222,8 @@ final class FakeFixture
 
                 if(!empty($m)){
                     $linkAttachment->setAttachmentType('youtube');
+                    preg_match("#([\/|\?|&]vi?[\/|=]|youtu\.be\/|embed\/)([A-Za-z0-9_-]+)#", $url, $matches);
+                    $youtubeId = end($matches);
                 } else {
                     //throw new \Exception(sprintf("bad url: %s", $url));
                 }

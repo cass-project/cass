@@ -4,6 +4,7 @@ namespace Domain\Youtube\Console\Command;
 
 
 use Application\Util\Seek;
+use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\PostAttachment\LinkMetadata\Types\YoutubeLinkMetadata;
 use Domain\PostAttachment\Service\AttachmentTypeDetector;
 use Domain\PostAttachment\Service\PostAttachmentService;
@@ -20,8 +21,6 @@ class YoutubeGetMetadata extends Command
     private $youtubeService;
 
     private $configOauth2Google;
-
-
 
     public function __construct(array $configOauth2Google, YoutubeService $youtubeService, PostAttachmentService $attachmentService){
         $this->attachmentService = $attachmentService;
@@ -40,18 +39,41 @@ class YoutubeGetMetadata extends Command
     public function execute(InputInterface $input, OutputInterface $output)
     {
 
-        $seek = new Seek(100, 0, 100);
+        $total = $this->attachmentService->getTotalCountAttachments([YoutubeLinkMetadata::RESOURCE_TYPE]);
 
-        $videos = $this->attachmentService->getAttachmentsByCriteria([YoutubeLinkMetadata::RESOURCE_TYPE], $seek);
+        $perPage = 10;
+        $pages = ceil($total/$perPage);
 
-        print_r(count($videos));
+        if($pages < 0) throw new \Exception('Нет страниц') ;
 
-//        $response = $this->youtubeService->getMetadataForVideos(['EQbF-4G7X9E', 'LbaDJ0PBzeI']);
+        for($page = 0; $page < $pages; $page++){
 
-//        print_r($response['items'][0]);
+            $output->writeln( sprintf("Страница %s из %s", $page, $pages) );
+            $seek = new Seek($perPage, $page*$perPage, $perPage);
+            $videos = [];
+            $videos = $this->attachmentService->getAttachmentsByCriteria([YoutubeLinkMetadata::RESOURCE_TYPE], $seek);
 
+            $youtubeIds = [];
+            foreach($videos as $postAttachmetn){
+                /** @var PostAttachment $postAttachmetn */
+                $youtubeIds[] = $postAttachmetn->getAttachment()['metadata']['youtubeId'];
+            }
+
+            $response = [];
+            $response = $this->youtubeService->getMetadataForVideos($youtubeIds);
+
+            foreach($videos as $postAttachmetn){
+                $output->writeln(sprintf("наполняем видео: %s = %s",$postAttachmetn->getId(), $postAttachmetn->getAttachment()['metadata']['youtubeId']));
+
+                /** @var PostAttachment $postAttachmetn */
+                array_walk($response['items'],function(array $item)use ($postAttachmetn){
+                    $youtubeId = $postAttachmetn->getAttachment()['metadata']['youtubeId'];
+                    if($youtubeId == $item['id']) {
+                        $postAttachmetn->mergeAttachment($item['snippet']);
+                        $this->attachmentService->updatePostAttachment($postAttachmetn);
+                    }
+                });
+            }
+        }
     }
-
-
-
 }
