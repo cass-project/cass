@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 
 import {FrontlineService} from "../../frontline/service";
-import {FrontlineCommunityFeaturesEntity} from "../../frontline/definitions/entity/Frontline";
+import {FrontlineCommunityFeaturesEntity} from "../definitions/entity/CommunityFeature";
 
 @Injectable()
 export class CommunityFeaturesService

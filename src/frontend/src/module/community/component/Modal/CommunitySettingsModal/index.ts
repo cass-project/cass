@@ -124,7 +124,7 @@ export class CommunitySettingsModal
         Observable.forkJoin(requests).subscribe(
             responses => {
                 for(let response of responses) {
-                    if(response.image) {
+                    if(response.hasOwnProperty('image')) {
                         this.model.image = response.image;
                         delete this.model['new_image'];
                         this.cropper.reset();
