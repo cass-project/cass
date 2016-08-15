@@ -1,9 +1,9 @@
 import {Component} from "@angular/core";
-
 import {RouterOutlet, RouteConfig} from "@angular/router-deprecated";
-import {Nothing} from "../../../common/component/Nothing/index";
-import {CommunityRoute} from "../CommunityRoute/index";
+
 import {CommunityNotFoundRoute} from "../CommunityNotFoundRoute/index";
+import {CommunityRoute} from "../CommunityRoute/index";
+import {Nothing} from "../../../common/component/Nothing/index";
 
 @Component({
     template: require('./template.jade'),

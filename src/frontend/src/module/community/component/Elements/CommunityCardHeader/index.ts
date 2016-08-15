@@ -1,4 +1,4 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, Input} from "@angular/core";
 
 import {CommunityImage} from "../CommunityImage/index";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";

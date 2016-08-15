@@ -5,7 +5,7 @@ import {FeedService} from "../../../service/FeedService/index";
 import {CommunityCard} from "../../../../community/component/Elements/CommunityCard/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
 import {FeedScrollDetector} from "../../FeedScrollDetector/index";
-import {CommunityIndexedEntity} from "../../../../community/definitions/entity/Community";
+import {CommunityIndexedEntity} from "../../../../community/definitions/entity/CommunityIndexed";
 import {AppService} from "../../../../../app/frontend-app/service";
 
 @Component({

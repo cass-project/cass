@@ -1,17 +1,17 @@
 import {Component} from "@angular/core";
-
 import {Router, ROUTER_DIRECTIVES, RouteParams, RouteConfig} from "@angular/router-deprecated";
-import {ProgressLock} from "../../../form/component/ProgressLock/index";
+
+import {CollectionCreateMaster} from "../../../collection/component/Modal/CollectionCreateMaster/index";
 import {CommunityCollectionsRoute} from "../CommunityCollectionsRoute/index";
 import {CommunityDashboardRoute} from "../CommunityDashboardRoute/index";
 import {CommunityHeader} from "../../component/Elements/CommunityHeader/index";
+import {CommunityModalService} from "../../service/CommunityModalService";
+import {CommunityService} from "../../service/CommunityService";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
-import {CommunityService} from "../../service/CommunityService";
-import {CommunityModalService} from "../../service/CommunityModalService";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
 import {ModalComponent} from "../../../modal/component/index";
-import {CollectionCreateMaster} from "../../../collection/component/Modal/CollectionCreateMaster/index";
+import {ProgressLock} from "../../../form/component/ProgressLock/index";
 
 @Component({
     template: require('./template.jade'),

@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http, Response, Headers} from "@angular/http";
+import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
@@ -24,7 +24,8 @@ export class CommunityRESTService extends AbstractRESTService
         super(http, token, messages);
     }
 
-    public create(request: CreateCommunityRequest): Observable<CreateCommunityResponse200> {
+    public create(request: CreateCommunityRequest): Observable<CreateCommunityResponse200>
+    {
         let url = "/backend/api/protected/community/create";
 
         return this.handle(
@@ -34,7 +35,8 @@ export class CommunityRESTService extends AbstractRESTService
         );
     }
 
-    public edit(communityId: number, body: EditCommunityRequest): Observable<EditCommunityResponse200> {
+    public edit(communityId: number, body: EditCommunityRequest): Observable<EditCommunityResponse200>
+    {
         let url = `/backend/api/protected/community/${communityId}/edit`;
 
         return this.handle(
@@ -44,7 +46,8 @@ export class CommunityRESTService extends AbstractRESTService
         );
     }
 
-    public getCommunityById(id: string): Observable<GetCommunityResponse200> {
+    public getCommunityById(id: string): Observable<GetCommunityResponse200>
+    {
         let url = `/backend/api/community/${id}/get-by-id`;
 
         return this.handle(
@@ -54,7 +57,8 @@ export class CommunityRESTService extends AbstractRESTService
         );
     }
 
-    public getCommunityBySid(sid: string): Observable<GetCommunityBySIDResponse200> {
+    public getCommunityBySid(sid: string): Observable<GetCommunityBySIDResponse200>
+    {
         let url = `/backend/api/community/${sid}/get-by-sid`;
 
         return this.handle(
@@ -64,7 +68,8 @@ export class CommunityRESTService extends AbstractRESTService
         );
     }
 
-    public setPublicOptions(communityId: number, body: SetPublicOptionsCommunityRequest): Observable<SetPublicOptionsCommunityResponse200> {
+    public setPublicOptions(communityId: number, body: SetPublicOptionsCommunityRequest): Observable<SetPublicOptionsCommunityResponse200>
+    {
         let url = `/backend/api/protected/community/${communityId}/set-public-options`;
 
         return this.handle(
@@ -74,7 +79,8 @@ export class CommunityRESTService extends AbstractRESTService
         );
     }
 
-    public activateFeature(request: CommunityActivateFeatureRequest): Observable<CommunityActivateFeatureResponse200> {
+    public activateFeature(request: CommunityActivateFeatureRequest): Observable<CommunityActivateFeatureResponse200>
+    {
         let url = `/backend/api/protected/community/${request.communityId}/feature/${request.feature}/activate`;
 
         return this.handle(
@@ -84,7 +90,8 @@ export class CommunityRESTService extends AbstractRESTService
         );
     };
 
-    public deactivateFeature(request: CommunityDeactivateFeatureRequest): Observable<CommunityDectivateFeatureResponse200> {
+    public deactivateFeature(request: CommunityDeactivateFeatureRequest): Observable<CommunityDectivateFeatureResponse200>
+    {
         let url = `/backend/api/protected/community/${request.communityId}/feature/${request.feature}/deactivate`;
 
         return this.handle(
@@ -94,8 +101,10 @@ export class CommunityRESTService extends AbstractRESTService
         );
     };
 
-    public imageUpload(communityId: number, uploadImage: Blob, x1:number, y1:number, x2:number, y2:number): Observable<UploadCommunityImageResponse200> {
+    public imageUpload(communityId: number, uploadImage: Blob, x1:number, y1:number, x2:number, y2:number): Observable<UploadCommunityImageResponse200>
+    {
         return Observable.create(observer => {
+            let url = `/backend/api/protected/community/${communityId}/image-upload/crop-start/${x1}/${y1}/crop-end/${x2}/${y2}`;
             let formData: FormData = new FormData(),
                 xhr: XMLHttpRequest = new XMLHttpRequest();
 
@@ -112,14 +121,14 @@ export class CommunityRESTService extends AbstractRESTService
                 }
             };
 
-            xhr.open("POST", `/backend/api/protected/community/${communityId}/image-upload/` +
-                `crop-start/${x1}/${y1}/crop-end/${x2}/${y2}`);
+            xhr.open("POST", url);
             xhr.setRequestHeader('Authorization', this.token.apiKey);
             xhr.send(formData);
         });
     }
 
-    public imageDelete(request: CommunityImageDeleteRequest): Observable<DeleteCommunityImageResponse200> {
+    public imageDelete(request: CommunityImageDeleteRequest): Observable<DeleteCommunityImageResponse200>
+    {
         let url = `/backend/api/protected/community/${request.communityId}/image-delete`;
 
         return this.handle(

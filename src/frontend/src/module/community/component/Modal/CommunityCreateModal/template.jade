@@ -2,7 +2,7 @@ article.component.component-community-create-modal
   cass-modal
     cass-modal-box(width="600px")
       cass-form-progress-lock(*ngIf="loading.isLoading()")
-      header.form-header(*ngIf="isHeaderVisible()")
+      header.form-header
         h1 Новое сообщество
       .form.community-modal.community-modal-create
         cass-community-create-modal-screen-general(*ngIf='screens.isOn("General")', (abort)="close()", (next)="next()")

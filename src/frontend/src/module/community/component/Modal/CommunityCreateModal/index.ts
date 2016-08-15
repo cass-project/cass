@@ -63,10 +63,6 @@ export class CommunityCreateModal
         }
     }
 
-    isHeaderVisible() {
-        return true;
-    }
-
     next() {
         if(this.screens.current === CreateStage.Features) {
             this.submit();

@@ -14,6 +14,7 @@ import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/inde
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 import {CommunityService} from "../../service/CommunityService";
+import {LoadingManager} from "../../../common/classes/LoadingStatus";
 
 @Component({
     template: require('./template.jade'),
@@ -35,8 +36,10 @@ import {CommunityService} from "../../service/CommunityService";
 })
 export class CommunityCollectionRoute
 {
-    collection: CollectionEntity;
-    postType: PostTypeEntity;
+    public collection: CollectionEntity;
+    public postType: PostTypeEntity;
+    public loadingManager: LoadingManager = new LoadingManager();
+    public loading = this.loadingManager.addLoading();
 
     constructor(
         private router: Router,
@@ -46,34 +49,24 @@ export class CommunityCollectionRoute
         private feed: FeedService<PostEntity>,
         private feedSource: CollectionSource
     ) {
+        let sid = params.get('sid');
         this.postType = types.getTypeByStringCode('default');
 
-        communityService.communityObservable.subscribe(
-            (response) => {
-                let sid = params.get('sid');
-                let collections = response.entity.collections.filter((entity: CollectionEntity) => {
-                    return entity.sid === sid;
-                });
+        communityService.communityObservable.subscribe((data) => {
+            let collections = data.entity.collections.filter((entity: CollectionEntity) => {
+                return entity.sid === sid;
+            });
 
-                if(! collections.length) {
-                    router.navigate(['NotFound']);
-                }
+            if(! collections.length) {
+                router.navigate(['NotFound']);
+            }
 
-                this.collection = collections[0];
+            this.collection = collections[0];
 
-                feedSource.collectionId = this.collection.id;
-                feed.provide(feedSource, new Stream<PostEntity>());
-                feed.update();
-            },
-            (error) => {}
-        );
-    }
-
-    unshiftEntity(entity: PostEntity) {
-        this.feed.stream.insertBefore(entity);
-    }
-
-    isLoaded(): boolean {
-        return typeof this.collection === "object";
+            feedSource.collectionId = this.collection.id;
+            feed.provide(feedSource, new Stream<PostEntity>());
+            feed.update();
+            this.loading.is = false;
+        });
     }
 }

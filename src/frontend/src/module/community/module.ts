@@ -6,10 +6,9 @@ import {CommunityRESTService} from "./service/CommunityRESTService";
 import {CommunityComponent} from "./index";
 import {CommunityCreateModalNotifier} from "./component/Modal/CommunityCreateModal/notify";
 import {CommunityJoinModalNotifier} from "./component/Modal/CommunityJoinModal/notify";
-import {CommunitySettingsModalModel} from "./component/Modal/CommunitySettingsModal/model";
 
 export = new Module({
-    name: 'community1',
+    name: 'community',
     RESTServices: [
         CommunityRESTService,
     ],
@@ -17,7 +16,6 @@ export = new Module({
         CommunityService,
         CommunityModalService,
         CommunityCreateModalNotifier,
-        CommunitySettingsModalModel,
         CommunityJoinModalNotifier
     ],
     directives: [

@@ -1,13 +1,13 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
-
-import {CommunityRESTService} from "./CommunityRESTService";
-import {AuthToken} from "../../auth/service/AuthToken";
-import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {Observable} from "rxjs/Rx";
+
+import {AuthToken} from "../../auth/service/AuthToken";
+import {CommunityRESTService} from "./CommunityRESTService";
+import {CommunityExtendedEntity} from "../definitions/entity/CommunityExtended";
 import {GetCommunityBySIDResponse200} from "../definitions/paths/get-by-sid";
 import {LoadingManager} from "../../common/classes/LoadingStatus";
-import {CommunityExtendedEntity} from "../definitions/entity/CommunityExtended";
+import {MessageBusService} from "../../message/service/MessageBusService/index";
 
 
 @Injectable()
@@ -26,7 +26,8 @@ export class CommunityService extends CommunityRESTService
         super(http, token, messages);
     }
 
-    public isCommunityLoaded() : boolean {
+    public isCommunityLoaded() : boolean
+    {
         return !this.communityLoading.is;
     }
     

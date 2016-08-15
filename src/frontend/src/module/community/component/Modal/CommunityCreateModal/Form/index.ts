@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+
 import {Screen} from "../Screen/screen";
 
 @Component({

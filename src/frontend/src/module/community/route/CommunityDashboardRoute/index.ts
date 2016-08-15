@@ -33,8 +33,8 @@ export class CommunityDashboardRoute
 {
     public mainCollection: CollectionEntity;
     public postType: PostTypeEntity;
-    public loading: LoadingManager = new LoadingManager();
-    public communityLoading = this.loading.addLoading();
+    public loadingManager: LoadingManager = new LoadingManager();
+    public loading = this.loadingManager.addLoading();
     
     constructor(
         private session: Session,
@@ -45,8 +45,9 @@ export class CommunityDashboardRoute
         
     ) {
         this.postType = types.getTypeByStringCode('default');
+        
         communityService.communityObservable.subscribe(data => {
-            this.communityLoading.is = false;
+            this.loading.is = false;
             this.mainCollection = data.entity.collections.filter(
                 collection => collection.is_main
             )[0];

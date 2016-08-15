@@ -31,6 +31,7 @@ enum SettingsStage {
         require('./style.shadow.scss')
     ],
     providers: [
+        CommunitySettingsModalModel,
         ImageCropperService
     ],
     directives: [
@@ -191,7 +192,7 @@ export class CommunitySettingsModal
             this.model.public_options.moderation_contract !== this.modelUnmodified.public_options.moderation_contract;
     }
 
-    getModifiedFeatures() {
+    getModifiedFeatures() : CommunityFeatureEntity[] {
         return this.model.features.filter((feature) => {
             let featuresUnmodified = this.modelUnmodified.features.filter((unmodifiedFeature) => {
                 return unmodifiedFeature.code == feature.code;

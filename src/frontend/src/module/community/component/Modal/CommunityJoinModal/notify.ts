@@ -1,6 +1,6 @@
-import {Observable} from "rxjs/Observable";
-import {Observer} from "rxjs/Observer";
 import {Injectable} from "@angular/core";
+import {Observer, Observable} from "rxjs/Rx";
+
 import {CommunityEntity} from "../../../definitions/entity/Community";
 
 @Injectable()

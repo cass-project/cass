@@ -1,5 +1,5 @@
 article.component.component-community-collection
-  div(*ngIf="isLoaded()")
+  div(*ngIf="!loadingManager.isLoading()")
     header.collection-header
       h1 {{ collection.title }}
       h2 {{ collection.description }}
