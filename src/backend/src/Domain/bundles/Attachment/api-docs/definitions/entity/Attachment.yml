@@ -1,0 +1,58 @@
+Attachment_Entity_AttachmentEntity:
+  required:
+    - id
+    - sid
+    - date_created_on
+    - is_attached
+    - metadata
+  properties:
+    id:
+      type: number
+      description: ID аттачмента
+    sid:
+      type: string
+      description: SID аттачмента
+    date_created_on:
+      type: string
+      description: Дата создания аттачмент
+    date_attached_on:
+      type: string
+      description: Дата прикрепления аттачмента
+    is_attached:
+      type: boolean
+      description: Аттачмент имеет владельца?
+    owner:
+      type: object
+      description: Информация о владельце
+      required:
+        - id
+        - code
+      properties:
+        id:
+          type: number
+          description: ID владельца
+        code:
+          type: string
+          description: Код(Тип) владельца
+    metadata:
+      type: object
+      description: JSON-метаданные
+      required:
+        - url
+        - resource
+        - metadata
+        - source
+      properties:
+        url:
+          type: string
+          description: URL
+        resource:
+          type: string
+          description: |
+            Тип ресурса. Значения: "link", "youtube", "image" и.т.д..
+        metadata:
+          type: object
+          description: Метаданные
+        source:
+          type: object
+          description: Источник
