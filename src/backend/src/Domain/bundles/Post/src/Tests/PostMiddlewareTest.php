@@ -43,10 +43,10 @@ abstract class PostMiddlewareTest extends MiddlewareTestCase
     }
 
 
-    protected function requestUploadPostAttachment(UploadedFile $localFile):RESTRequest
+    protected function requestUploadAttachment(UploadedFile $localFile):RESTRequest
     {
         return $this
-            ->request('POST', '/protected/post-attachment/upload')
+            ->request('POST', '/protected/attachment/upload')
             ->setUploadedFiles([
                 'file' => $localFile
             ]);

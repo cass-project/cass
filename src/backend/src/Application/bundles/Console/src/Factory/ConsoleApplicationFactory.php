@@ -26,5 +26,4 @@ class ConsoleApplicationFactory implements DIFactoryInterface
             }
         }
     }
-
 }

@@ -7,7 +7,7 @@ use Application\Util\JSONSerializable;
 use Domain\Collection\Entity\Collection;
 use Domain\Index\Entity\IndexedEntity;
 use Domain\Post\PostType\PostType;
-use Domain\PostAttachment\Entity\PostAttachment;
+use Domain\Attachment\Entity\Attachment;
 use Domain\Profile\Entity\Profile;
 use Domain\Theme\Strategy\ThemeIdsEntityAware;
 use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;

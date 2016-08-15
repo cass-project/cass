@@ -1,11 +1,11 @@
 <?php
 namespace Domain\Post\Formatter;
 
+use Domain\Attachment\Entity\Attachment;
+use Domain\Attachment\Formatter\AttachmentFormatter;
+use Domain\Attachment\Service\AttachmentService;
 use Domain\Post\Entity\Post;
 use Domain\Post\PostType\PostTypeFactory;
-use Domain\PostAttachment\Entity\PostAttachment;
-use Domain\PostAttachment\Formatter\PostAttachmentFormatter;
-use Domain\PostAttachment\Service\PostAttachmentService;
 use Domain\Profile\Service\ProfileService;
 
 final class PostFormatter
@@ -16,22 +16,22 @@ final class PostFormatter
     /** @var PostTypeFactory */
     private $postTypeFactory;
 
-    /** @var PostAttachmentService */
-    private $postAttachmentService;
+    /** @var AttachmentService */
+    private $attachmentService;
 
-    /** @var PostAttachmentFormatter */
-    private $postAttachmentFormatter;
+    /** @var AttachmentFormatter */
+    private $attachmentFormatter;
 
     public function __construct(
-        ProfileService $profileService,
-        PostTypeFactory $postTypeFactory,
-        PostAttachmentService $postAttachmentService,
-        PostAttachmentFormatter $postAttachmentFormatter
+        ProfileService $profileService, 
+        PostTypeFactory $postTypeFactory, 
+        AttachmentService $attachmentService, 
+        AttachmentFormatter $attachmentFormatter
     ) {
         $this->profileService = $profileService;
         $this->postTypeFactory = $postTypeFactory;
-        $this->postAttachmentService = $postAttachmentService;
-        $this->postAttachmentFormatter = $postAttachmentFormatter;
+        $this->attachmentService = $attachmentService;
+        $this->attachmentFormatter = $attachmentFormatter;
     }
 
     public function format(Post $post): array
@@ -47,8 +47,8 @@ final class PostFormatter
 
     private function formatAttachments(Post $post): array
     {
-        return array_map(function(PostAttachment $postAttachment) {
-            return $this->postAttachmentFormatter->format($postAttachment);
-        }, $this->postAttachmentService->getAttachmentsByIds($post->getAttachmentIds()));
+        return array_map(function(Attachment $attachment) {
+            return $this->attachmentFormatter->format($attachment);
+        }, $this->attachmentService->getManyByIds($post->getAttachmentIds()));
     }
 }

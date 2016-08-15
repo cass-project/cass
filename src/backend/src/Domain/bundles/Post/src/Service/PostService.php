@@ -9,7 +9,6 @@ use Domain\Post\Parameters\CreatePostParameters;
 use Domain\Post\Parameters\EditPostParameters;
 use Domain\Post\PostType\PostTypeFactory;
 use Domain\Post\Repository\PostRepository;
-use Domain\PostAttachment\Entity\PostAttachment;
 use Domain\Profile\Service\ProfileService;
 
 class PostService implements EventEmitterAwareService

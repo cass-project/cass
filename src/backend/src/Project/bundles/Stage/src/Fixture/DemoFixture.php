@@ -5,19 +5,18 @@ use Application\Util\Definitions\Point;
 use Application\Util\GenerateRandomString;
 use Domain\Account\Entity\Account;
 use Domain\Account\Service\AccountService;
+use Domain\Attachment\Entity\Attachment;
+use Domain\Attachment\Repository\AttachmentRepository;
+use Domain\Attachment\Service\AttachmentService;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Domain\Collection\Collection\CollectionItem;
 use Domain\Collection\Entity\Collection;
-use Domain\Collection\Parameters\EditCollectionParameters;
 use Domain\Collection\Service\CollectionService;
 use Domain\Post\Entity\Post;
 use Domain\Post\Parameters\CreatePostParameters;
 use Domain\Post\PostType\Types\DefaultPostType;
 use Domain\Post\Service\PostService;
-use Domain\PostAttachment\Entity\PostAttachment;
-use Domain\PostAttachment\Repository\PostAttachmentRepository;
-use Domain\PostAttachment\Service\PostAttachmentService;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Gender\Gender;
 use Domain\Profile\Parameters\EditPersonalParameters;
@@ -41,11 +40,11 @@ final class DemoFixture
     /** @var PostService */
     protected $postService;
 
-    /** @var PostAttachmentService */
-    protected $postAttachmentService;
+    /** @var AttachmentService */
+    protected $attachmentService;
 
-    /** @var PostAttachmentRepository */
-    protected $postAttachmentRepository;
+    /** @var AttachmentRepository */
+    protected $attachmentRepository;
 
     /** @var CurrentAccountService */
     private $currentAccountService;
@@ -71,16 +70,16 @@ final class DemoFixture
         ProfileService $profileService,
         CollectionService $collectionService,
         PostService $postService,
-        PostAttachmentService $postAttachmentService,
-        PostAttachmentRepository $postAttachmentRepository
+        AttachmentService $attachmentService,
+        AttachmentRepository $attachmentRepository
     ) {
         $this->accountService = $accountService;
         $this->currentAccountService = $currentAccountService;
         $this->profileService = $profileService;
         $this->collectionService = $collectionService;
         $this->postService = $postService;
-        $this->postAttachmentService = $postAttachmentService;
-        $this->postAttachmentRepository = $postAttachmentRepository;
+        $this->attachmentService = $attachmentService;
+        $this->attachmentRepository = $attachmentRepository;
     }
 
     public function up(OutputInterface $output)
@@ -253,8 +252,8 @@ final class DemoFixture
                     }
                 }
 
-                $linkAttachment = new PostAttachment();
-                $linkAttachment->setAttachment([
+                $linkAttachment = new Attachment();
+                $linkAttachment->setMetadata([
                    'url' => $url,
                    'resource' => 'youtube',
                    'source' => [
@@ -304,7 +303,7 @@ final class DemoFixture
                    ]
                ]);
 
-                $this->postAttachmentRepository->createPostAttachment($linkAttachment);
+                $this->attachmentRepository->createAttachment($linkAttachment);
 
                 return new CreatePostParameters(
                     DefaultPostType::CODE_INT,
@@ -326,8 +325,8 @@ final class DemoFixture
                 $description =  $options['description'] ?? '';
                 $image = $options['image'] ?? '';
 
-                $linkAttachment = new PostAttachment();
-                $linkAttachment->setAttachment([
+                $linkAttachment = new Attachment();
+                $linkAttachment->setMetadata([
                    'url' => $url,
                    'resource' => 'page',
                    'source' => [
@@ -376,7 +375,7 @@ final class DemoFixture
                    ]
                ]);
 
-                $this->postAttachmentRepository->createPostAttachment($linkAttachment);
+                $this->attachmentRepository->createAttachment($linkAttachment);
 
                 return new CreatePostParameters(
                     DefaultPostType::CODE_INT,

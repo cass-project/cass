@@ -4,19 +4,19 @@ namespace Domain\Index\Service\ContentTypeIdentifier;
 use Domain\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
 use Domain\IM\Service\ContentTypeIdentifier\ContentTypeIdentifierEntity;
 use Domain\Post\Entity\Post;
-use Domain\PostAttachment\LinkMetadata\Types\ImageLinkMetadata;
-use Domain\PostAttachment\LinkMetadata\Types\PageLinkMetadata;
-use Domain\PostAttachment\LinkMetadata\Types\UnknownLinkMetadata;
-use Domain\PostAttachment\LinkMetadata\Types\WebmLinkMetadata;
-use Domain\PostAttachment\LinkMetadata\Types\YoutubeLinkMetadata;
-use Domain\PostAttachment\Service\PostAttachmentService;
+use Domain\Attachment\LinkMetadata\Types\ImageLinkMetadata;
+use Domain\Attachment\LinkMetadata\Types\PageLinkMetadata;
+use Domain\Attachment\LinkMetadata\Types\UnknownLinkMetadata;
+use Domain\Attachment\LinkMetadata\Types\WebmLinkMetadata;
+use Domain\Attachment\LinkMetadata\Types\YoutubeLinkMetadata;
+use Domain\Attachment\Service\AttachmentService;
 
 final class ContentTypeIdentifier
 {
-    /** @var PostAttachmentService */
+    /** @var AttachmentService */
     private $attachmentService;
 
-    public function __construct(PostAttachmentService $attachmentService)
+    public function __construct(AttachmentService $attachmentService)
     {
         $this->attachmentService = $attachmentService;
     }
@@ -29,9 +29,9 @@ final class ContentTypeIdentifier
     public function detectContentTypeOfPost(Post $post): string
     {
         if(count($post->getAttachmentIds())) {
-            $attachment = $this->attachmentService->getPostAttachmentById($post->getAttachmentIds()[0]);
+            $attachment = $this->attachmentService->getById($post->getAttachmentIds()[0]);
             
-            switch($resource = $attachment->getAttachment()['resource']) {
+            switch($resource = $attachment->getMetadata()['resource']) {
                 default:
                     throw new \Exception(sprintf('Unknown resource `%s`', $resource));
 

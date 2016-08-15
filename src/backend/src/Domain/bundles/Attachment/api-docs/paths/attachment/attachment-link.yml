@@ -1,0 +1,27 @@
+"/protected/attachment/link":
+  put:
+    tags:
+      - attachment
+    description: Создает и возвращает Attachment (ссылка)
+    parameters:
+      - name: url
+        description: URL
+        type: string
+        required: true
+        in: query
+    security:
+      - x_api_key: []
+    responses:
+      403:
+        $ref: '#/responses/Unauthorized'
+      200:
+        schema:
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Attachment_Attachment_Link'
