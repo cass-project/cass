@@ -4,8 +4,7 @@ import {ProfileSetupModel} from "../../model";
 import {ProgressLock} from "../../../../../../form/component/ProgressLock/index";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {EditPersonalResponse200} from "../../../../../definitions/paths/edit-personal";
-import {AuthService} from "../../../../../../auth/service/AuthService";
-import {CurrentProfileService} from "../../../../../service/CurrentProfileService";
+import {Session} from "../../../../../../session/Session";
 
 @Component({
     selector: 'cass-profile-setup-screen-greetings',
@@ -28,7 +27,7 @@ export class ProfileSetupScreenGreetings
     constructor(
         private model: ProfileSetupModel,
         private profileRESTService: ProfileRESTService,
-        private currentProfileService: CurrentProfileService
+        private session: Session
     ) {}
 
     back() {
@@ -48,8 +47,8 @@ export class ProfileSetupScreenGreetings
             nick_name: this.model.greetings.nickName,
         }).subscribe(
             (response: EditPersonalResponse200) => {
-                this.currentProfileService.get().replaceAvatar(response.entity.image);
-                this.currentProfileService.get().changeGreetings(response.entity.greetings);
+                this.session.getCurrentProfile().replaceAvatar(response.entity.image);
+                this.session.getCurrentProfile().changeGreetings(response.entity.greetings);
                 this.nextEvent.emit(this.model);
             },
             (error) => {

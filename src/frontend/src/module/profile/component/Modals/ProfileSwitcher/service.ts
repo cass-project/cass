@@ -2,30 +2,28 @@ import {Injectable} from "@angular/core";
 import {Router} from '@angular/router-deprecated';
 
 import {ProfileRESTService} from "../../../service/ProfileRESTService";
-import {CurrentProfileService} from "../../../service/CurrentProfileService";
-import {CurrentAccountService} from "../../../../account/service/CurrentAccountService";
+import {Session} from "../../../../session/Session";
 
 @Injectable()
 export class ProfileSwitcherService
 {
     constructor(
         private profileRESTService: ProfileRESTService,
-        private currentProfileService: CurrentProfileService,
-        private currentAccountService: CurrentAccountService,
+        private session: Session,
         private router: Router
     ) {}
 
     disableClick = false;
 
     switchProfile(profileId){
-        if(!this.disableClick && this.currentProfileService.get().getId() !== profileId) {
+        if(!this.disableClick && this.session.getCurrentProfile().getId() !== profileId) {
             this.disableClick = true;
 
-            this.currentProfileService.get().entity.profile.is_current = false;
+            this.session.getCurrentProfile().entity.profile.is_current = false;
 
-            for (let i = 0; i < this.currentAccountService.get().profiles.profiles.length; i++) {
-                if (profileId === this.currentAccountService.get().profiles.profiles[i].entity.profile.id) {
-                    this.currentAccountService.get().profiles.profiles[i].entity.profile.is_current = true;
+            for (let i = 0; i < this.session.getCurrentAccount().profiles.profiles.length; i++) {
+                if (profileId === this.session.getCurrentAccount().profiles.profiles[i].entity.profile.id) {
+                    this.session.getCurrentAccount().profiles.profiles[i].entity.profile.is_current = true;
                 }
             }
 
@@ -37,6 +35,6 @@ export class ProfileSwitcherService
     }
 
     getProfiles(){
-        return this.currentAccountService.get().profiles.profiles;
+        return this.session.getCurrentAccount().profiles.profiles;
     }
 }

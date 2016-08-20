@@ -4,9 +4,9 @@ import {Observable} from "rxjs/Observable";
 import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
 import {ProfileRESTService} from "../../service/ProfileRESTService";
 import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
-import {CurrentProfileService} from "../../service/CurrentProfileService";
 import {ProfileCachedIdentityMap} from "../../service/ProfileCachedIdentityMap";
 import {ProfileModals} from "../../modals";
+import {Session} from "../../../session/Session";
 
 @Injectable()
 export class  ProfileRouteService
@@ -21,7 +21,7 @@ export class  ProfileRouteService
     constructor(
         private api: ProfileRESTService,
         private cache: ProfileCachedIdentityMap,
-        private current: CurrentProfileService,
+        private session: Session,
         public modals: ProfileModals
     ) {}
     
@@ -55,7 +55,7 @@ export class  ProfileRouteService
         this.loadProfile(new Observable<GetProfileByIdResponse200>(observer => {
             observer.next({
                 success: true,
-                entity: this.current.get().entity
+                entity: this.session.getCurrentProfile().entity
             });
             observer.complete();
         }));

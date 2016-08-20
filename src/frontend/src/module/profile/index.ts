@@ -11,8 +11,7 @@ import {ProfileInterestsModal} from "./component/Modals/ProfileInterests/index";
 import {MessageBusService} from "../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../message/component/MessageBusNotifications/model";
 import {CollectionCreateMaster} from "../collection/component/Modal/CollectionCreateMaster/index";
-import {CurrentProfileService} from "./service/CurrentProfileService";
-import {AuthDev} from "../auth-dev/component/index";
+import {Session} from "../session/Session";
 
 @Component({
     selector: 'cass-profile',
@@ -30,7 +29,7 @@ import {AuthDev} from "../auth-dev/component/index";
 })
 export class ProfileComponent
 {
-    constructor(private authService: AuthService, private currentProfileService: CurrentProfileService, private modals: ProfileModals, protected messages: MessageBusService) {}
+    constructor(private authService: AuthService, private session: Session, private modals: ProfileModals, protected messages: MessageBusService) {}
     
     closeModalProfileSwitcher($event){
         if($event){
@@ -65,7 +64,7 @@ export class ProfileComponent
     
     isSetupRequired() {
         if(this.authService.isSignedIn()) {
-            let testProfileIsInitialized = ! this.currentProfileService.get().entity.profile.is_initialized;
+            let testProfileIsInitialized = ! this.session.getCurrentProfile().entity.profile.is_initialized;
             let testIsOpened = this.modals.setup.isOpened();
 
             return testProfileIsInitialized || testIsOpened;
