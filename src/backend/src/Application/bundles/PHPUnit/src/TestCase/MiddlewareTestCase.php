@@ -2,6 +2,7 @@
 namespace Application\PHPUnit\TestCase;
 
 use Application\Doctrine2\Service\TransactionService;
+use Application\PHPUnit\Expectations\Traits\AllExpectationsTrait;
 use Application\PHPUnit\Fixture;
 use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\REST\Request\Params\SchemaParams;
@@ -9,45 +10,19 @@ use Application\REST\Service\SchemaService;
 use Doctrine\ORM\EntityManager;
 use Domain\Auth\Service\CurrentAccountService;
 use MongoDB\Database;
-use phpDocumentor\Reflection\Types\Callable_;
 use PHPUnit_Framework_TestCase;
 use Zend\Diactoros\Response;
 use Application\PHPUnit\RESTRequest\Result;
 use Zend\Expressive\Application;
 use DI\Container;
 
-class ExpectId {
-    public function __toString(): string
-    {
-        return "{{ID}}";
-    }
-}
-class ExpectString {
-    public function __toString(): string
-    {
-        return "{{STRING}}";
-    }
-}
-
-class ExpectUndefined {
-    public function __toString(): string
-    {
-        return "{{UNDEFINED}}";
-    }
-}
-
-class ExpectImageCollection {
-    public function __toString(): string {
-        return "{{IMAGE_COLLECTION}}";
-    }
-}
-
-
 /**
  * @backupGlobals disabled
  */
 abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
 {
+    use AllExpectationsTrait;
+
     const NOT_FOUND_ID = 9999999;
 
     /** @var Application */
@@ -254,23 +229,8 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
 
     /**
      * Используйте в качестве плейсхолдера для автогенерируемых значение в эталонных массивах (для expectJSONBody)
-     * @return ExpectId
+     * @return \Application\PHPUnit\TestCase\Expectations\ExpectId
      */
-    protected function expectId(): ExpectId {
-        return new ExpectId();
-    }
-
-    protected function expectString(): ExpectString {
-        return new ExpectString();
-    }
-
-    protected function expectUndefined(): ExpectUndefined {
-        return new ExpectUndefined();
-    }
-
-    protected function expectImageCollection(): ExpectImageCollection {
-        return new ExpectImageCollection();
-    }
 
     protected function expectJSONContentType(): self {
         $this->assertEquals('application/json', self::$currentResult->getHttpResponse()->getHeader('Content-Type')[0]);
@@ -357,15 +317,15 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
                 ));
             }
 
-            if($value instanceof ExpectUndefined) {
+            if($value instanceof Expectations\ExpectUndefined) {
                 $this->assertArrayNotHasKey($key, $actual);
             }else{
                 $this->assertArrayHasKey($key, $actual);
 
-                if($value instanceof ExpectId) {
+                if($value instanceof Expectations\ExpectId) {
                     $this->assertTrue(is_int($actual[$key]));
                     $this->assertGreaterThan(0, $actual[$key]);
-                }else if($value instanceof ExpectImageCollection) {
+                }else if($value instanceof Expectations\ExpectImageCollection) {
                     $this->recursiveAssertEquals([
                         'uid' => $this->expectString(),
                         'is_auto_generated' => function($input) {
@@ -379,7 +339,7 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
                             ]
                         ]
                     ], $actual[$key], $level . '- ');
-                }else if($value instanceof ExpectString) {
+                }else if($value instanceof Expectations\ExpectString) {
                     $this->assertTrue(is_string($actual[$key]));
                 }else if(is_array($value)) {
                     $this->recursiveAssertEquals($value, $actual[$key], $level . '- ');

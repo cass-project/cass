@@ -6,8 +6,8 @@
       "Application\\": "src/Application/src",
       "Domain\\": "src/Domain/src",
       "CASS\\Project\\": "src/Project/src",
-      "Application\\AMQP\\": "src/Application/bundles/AMQP/src",
-      "Application\\Console\\": "src/Application/bundles/Console/src",
+      "CASS\\Util\\": "src/Util/src",
+      "ZEA2\\Backend\\": "src/Util/src",
       "Application\\Doctrine2\\": "src/Application/bundles/Doctrine2/src",
       "Application\\Frontline\\": "src/Application/bundles/Frontline/src",
       "Application\\REST\\": "src/Application/bundles/REST/src",
@@ -35,6 +35,7 @@
       "Domain\\OpenGraph\\": "src/Domain/bundles/OpenGraph/src",
       "Domain\\Contact\\": "src/Domain/bundles/Contact/src",
       "Domain\\Index\\": "src/Domain/bundles/Index/src",
+      "CASS\\Project\\Bundles\\Console\\": "src/Project/bundles/Console/src",
       "CASS\\Project\\Bundles\\Stage\\": "src/Project/bundles/Stage/src"
     }
   },

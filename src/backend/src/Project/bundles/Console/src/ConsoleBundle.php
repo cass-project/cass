@@ -1,9 +1,9 @@
 <?php
-namespace Application\AMQP;
+namespace CASS\Project\Bundles\Console;
 
 use Application\Bundle\GenericBundle;
 
-class AMQPBundle extends GenericBundle
+final class ConsoleBundle extends GenericBundle
 {
     public function getDir()
     {
