@@ -1,8 +1,7 @@
 import {Module} from "../common/classes/Module";
-
-import {CurrentAccountService} from "./service/CurrentAccountService";
 import {AccountComponent} from "./index";
 import {AccountRESTService} from "./service/AccountRESTService";
+import {Session} from "../session/Session";
 
 export = new Module({
     name: 'account',
@@ -10,7 +9,7 @@ export = new Module({
         AccountRESTService,
     ],
     providers: [
-        CurrentAccountService,
+        Session,
     ],
     directives: [
         AccountComponent,

@@ -1,6 +1,5 @@
 import {Module} from "../common/classes/Module";
 
-import {CurrentProfileService} from "./service/CurrentProfileService";
 import {ProfileSwitcherService} from "./component/Modals/ProfileSwitcher/service";
 import {ProfileRESTService} from "./service/ProfileRESTService";
 import {ProfileCachedIdentityMap} from "./service/ProfileCachedIdentityMap";
@@ -8,6 +7,7 @@ import {ProfileModals} from "./modals";
 import {ProfileComponent} from "./index";
 import {ProfileRootRoute} from "./route/ProfileRootRoute/index";
 import {ProfileModalModel} from "./component/Modals/ProfileModal/model";
+import {Session} from "../session/Session";
 
 export = new Module({ 
     name: 'profile',
@@ -15,7 +15,7 @@ export = new Module({
         ProfileRESTService,
     ],
     providers: [
-        CurrentProfileService,
+        Session,
         ProfileSwitcherService,
         ProfileCachedIdentityMap,
         ProfileModals,

@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {AuthService} from "../../../../../../auth/service/AuthService";
-import {CurrentAccountService} from "../../../../../../account/service/CurrentAccountService";
+import {Session} from "../../../../../../session/Session";
 
 
 @Injectable()
@@ -11,7 +11,7 @@ export class ProfilesTabService
     constructor(
         private profileRESTService: ProfileRESTService,
         private authService: AuthService,
-        private currentAccountService: CurrentAccountService
+        private session: Session
     ) {}
 
     private createNewProfileButton: boolean = true;
@@ -44,7 +44,7 @@ export class ProfilesTabService
     requestDeleteProfile(profileId){
         this.buttonActivate = true;
         this.profileRESTService.deleteProfile(profileId).subscribe(data => {
-            this.currentAccountService.get().profiles.profiles.splice(this.pickedElem, 1);
+            this.session.getCurrentAccount().profiles.profiles.splice(this.pickedElem, 1);
 
             this.closeModalDeleteProfile();
             this.buttonActivate = false;

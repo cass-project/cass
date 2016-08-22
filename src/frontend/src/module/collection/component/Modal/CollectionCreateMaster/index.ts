@@ -8,9 +8,9 @@ import {ModalBoxComponent} from "../../../../modal/component/box/index";
 import {ScreenControls} from "../../../../common/classes/ScreenControls";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
-import {CurrentProfileService} from "../../../../profile/service/CurrentProfileService";
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {Router} from '@angular/router-deprecated';
+import {Session} from "../../../../session/Session";
 
 enum CreateCollectionMasterStage
 {
@@ -35,7 +35,7 @@ export class CollectionCreateMaster
 {
     constructor(
         private collectionRESTService: CollectionRESTService,
-        private currentProfileService: CurrentProfileService,
+        private session: Session,
         private messages: MessageBusService,
         private router: Router
     ) {}
@@ -86,13 +86,13 @@ export class CollectionCreateMaster
         this.collectionRESTService.createCollection(this.collection).subscribe(
             (data) => {
                 let profileId;
-                if(data.entity.owner.id === this.currentProfileService.get().getId().toString()){
+                if(data.entity.owner.id === this.session.getCurrentProfile().getId().toString()){
                     profileId = 'current';
                 } else {
                     profileId = data.entity.owner.id;
                 }
                 this.loading = false;
-                this.currentProfileService.get().entity.collections.push(data.entity);
+                this.session.getCurrentProfile().entity.collections.push(data.entity);
                 this.messages.push(MessageBusNotificationsLevel.Info, `Создана коллекция "${data.entity.title}"`);
                 this.router.navigate(['Profile/Profile', {id: profileId}, 'Collections/View', { sid: data.entity.sid }]);
                 this.close.emit(true);

@@ -1,27 +1,24 @@
 import {Injectable} from "@angular/core";
-import {AuthService} from "../../../../auth/service/AuthService";
 import {ProfileRESTService} from "../../../service/ProfileRESTService";
 import {AccountRESTService} from "../../../../account/service/AccountRESTService";
 import {AuthToken} from "../../../../auth/service/AuthToken";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
 import {Observable} from "rxjs/Observable";
-import {CurrentProfileService} from "../../../service/CurrentProfileService";
-import {CurrentAccountService} from "../../../../account/service/CurrentAccountService";
+import {Session} from "../../../../session/Session";
 
 @Injectable()
 export class ProfileModalModel
 {
     constructor(private profileRESTService: ProfileRESTService,
                 private accountRESTService: AccountRESTService,
-                private currentProfileService: CurrentProfileService,
-                private currentAccountService: CurrentAccountService,
+                private session: Session,
                 protected messages: MessageBusService,
                 protected authToken: AuthToken){}
-    
-    profile = JSON.parse(JSON.stringify(this.currentProfileService.get().entity.profile));
-    account = JSON.parse(JSON.stringify(this.currentAccountService.get().entity));
-    
+
+    profile = JSON.parse(JSON.stringify(this.session.getCurrentProfile().entity.profile));
+    account = JSON.parse(JSON.stringify(this.session.getCurrentAccount().entity));
+
     loading: boolean = false;
 
     password = {
@@ -29,17 +26,17 @@ export class ProfileModalModel
         new: '',
         repeat: ''
     };
-    
+
     getAccountOriginal(){
-        return this.currentAccountService.get().entity;
+        return this.session.getCurrentAccount().entity;
     }
-    
+
     getProfileOriginal(){
-        return this.currentProfileService.get().entity.profile;
+        return this.session.getCurrentProfile().entity.profile;
     }
 
     reset(){
-        this.profile = JSON.parse(JSON.stringify(this.currentProfileService.get().entity.profile));
+        this.profile = JSON.parse(JSON.stringify(this.session.getCurrentProfile().entity.profile));
         this.password = {
             old: '',
             new: '',
@@ -48,7 +45,7 @@ export class ProfileModalModel
     }
 
     canSave(){
-       return (this.checkAccountChanges() || this.checkExpertListChanges() || this.checkInterestListChanges() || this.checkPersonalChanges());
+        return (this.checkAccountChanges() || this.checkExpertListChanges() || this.checkInterestListChanges() || this.checkPersonalChanges());
     }
 
     performSaveChanges(){
@@ -147,9 +144,9 @@ export class ProfileModalModel
         }
 
         for(let prop in this.getProfileOriginal().greetings){
-           if(this.getProfileOriginal().greetings[prop] !== this.profile.greetings[prop]){
-               return true;
-           }
+            if(this.getProfileOriginal().greetings[prop] !== this.profile.greetings[prop]){
+                return true;
+            }
         }
     }
 }

@@ -8,10 +8,10 @@ import {ProfileCollectionsRoute} from "../ProfileCollectionsRoute/index";
 import {ProfileRouteService} from "./service";
 import {ProfileDashboardRoute} from "../ProfileDashboardRoute/index";
 import {ProfileHeader} from "../../component/Elements/ProfileHeader/index";
-import {CurrentProfileService} from "../../service/CurrentProfileService";
 import {AuthService} from "../../../auth/service/AuthService";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
+import {Session} from "../../../session/Session";
 
 @Component({
     template: require('./template.jade'),
@@ -48,12 +48,12 @@ export class ProfileRoute
         private params: RouteParams,
         private router: Router,
         private service: ProfileRouteService,
-        private currentProfileService: CurrentProfileService,
+        private session: Session,
         private authService: AuthService
     ) {
         let id = params.get('id');
 
-        if (authService.isSignedIn() && (id === 'current' || id === this.currentProfileService.get().getId().toString())) {
+        if (authService.isSignedIn() && (id === 'current' || id === this.session.getCurrentProfile().getId().toString())) {
                 service.loadCurrentProfile();
         } else if (Number(id)) {
             service.loadProfileById(Number(id));
