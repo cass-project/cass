@@ -3,7 +3,7 @@ namespace Domain\Avatar\Middleware\Request;
 
 use Application\Exception\FileNotUploadedException;
 use Application\REST\Request\Params\RequestParamsInterface;
-use Application\Util\Definitions\Point;
+use CASS\Util\Definitions\Point;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\UploadedFile;

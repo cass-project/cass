@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Feedback\FeedbackType;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 
 interface FeedbackType extends JSONSerializable
 {

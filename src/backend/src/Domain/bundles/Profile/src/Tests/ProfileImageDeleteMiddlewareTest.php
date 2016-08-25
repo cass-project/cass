@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Profile\Tests;
 
-use Application\Util\Definitions\Point;
+use CASS\Util\Definitions\Point;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 

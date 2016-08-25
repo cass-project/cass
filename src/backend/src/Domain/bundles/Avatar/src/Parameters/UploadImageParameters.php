@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Avatar\Parameters;
 
-use Application\Util\Definitions\Point;
+use CASS\Util\Definitions\Point;
 
 class UploadImageParameters
 {

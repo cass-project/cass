@@ -1,7 +1,7 @@
 <?php
 namespace Domain\IM\Service\LastMessageService;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 
 final class LastMessageServiceResult implements JSONSerializable
 {

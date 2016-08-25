@@ -1,5 +1,5 @@
 <?php
-namespace Application\Util;
+namespace CASS\Util;
 
 use Application\Exception\SeekException;
 

@@ -1,9 +1,9 @@
 <?php
 namespace Domain\Post\Entity;
 
-use Application\Util\Entity\IdEntity\IdEntity;
-use Application\Util\Entity\IdEntity\IdTrait;
-use Application\Util\JSONSerializable;
+use CASS\Util\Entity\IdEntity\IdEntity;
+use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\JSONSerializable;
 use Domain\Collection\Entity\Collection;
 use Domain\Index\Entity\IndexedEntity;
 use Domain\Post\PostType\PostType;

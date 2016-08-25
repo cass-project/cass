@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Community\ACL;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 
 class CommunityACL implements JSONSerializable
 {

@@ -1,9 +1,9 @@
 <?php
 namespace Domain\ProfileCommunities\Entity;
 
-use Application\Util\Entity\IdEntity\IdEntity;
-use Application\Util\Entity\IdEntity\IdTrait;
-use Application\Util\JSONSerializable;
+use CASS\Util\Entity\IdEntity\IdEntity;
+use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\JSONSerializable;
 use Domain\Community\Entity\Community;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;

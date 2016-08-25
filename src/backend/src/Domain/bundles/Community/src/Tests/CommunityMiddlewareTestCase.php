@@ -3,7 +3,7 @@ namespace Domain\Community\Tests;
 
 use Application\PHPUnit\RESTRequest\RESTRequest;
 use Application\PHPUnit\TestCase\MiddlewareTestCase;
-use Application\Util\Definitions\Point;
+use CASS\Util\Definitions\Point;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Domain\Theme\Tests\Fixtures\SampleThemesFixture;

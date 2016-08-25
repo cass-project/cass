@@ -1,8 +1,5 @@
 <phpunit bootstrap="bootstrap/bootstrap-phpunit.php">
     <testsuites>
-        <testsuite name="application">
-            <directory>src/Application/src/Tests</directory>
-        </testsuite>
         <testsuite name="application_version">
             <directory>src/Application/bundles/Version/src/Tests</directory>
         </testsuite>

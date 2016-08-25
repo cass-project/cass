@@ -1,5 +1,5 @@
 <?php
-namespace Application\Util\Entity\SIDEntity;
+namespace CASS\Util\Entity\SIDEntity;
 
 interface SIDEntity
 {

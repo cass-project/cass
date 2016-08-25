@@ -1,5 +1,5 @@
 <?php
-namespace Application\Util\Entity\JSONMetadata;
+namespace CASS\Util\Entity\JSONMetadata;
 
 trait JSONMetadataEntityTrait
 {

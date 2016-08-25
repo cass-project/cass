@@ -1,5 +1,5 @@
 <?php
-namespace Application\Util\SerialManager;
+namespace CASS\Util\SerialManager;
 
 class SerialManager
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Avatar\Service\Strategy;
 
-use Application\Util\GenerateRandomString;
+use CASS\Util\GenerateRandomString;
 use Domain\Avatar\Exception\InvalidRatioException;
 use Domain\Avatar\Image\Image;
 use Domain\Avatar\Image\ImageCollection;

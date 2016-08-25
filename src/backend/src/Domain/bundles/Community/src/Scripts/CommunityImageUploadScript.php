@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Community\Scripts;
 
-use Application\Util\Scripts\AvatarUploadScript;
+use CASS\Util\Scripts\AvatarUploadScript;
 
 class CommunityImageUploadScript extends AvatarUploadScript
 {

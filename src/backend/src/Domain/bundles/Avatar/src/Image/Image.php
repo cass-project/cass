@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Avatar\Image;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 
 class Image implements JSONSerializable
 {

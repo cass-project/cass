@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Community\Tests\REST;
 
-use Application\Util\Definitions\Point;
+use CASS\Util\Definitions\Point;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Community\Entity\Community;
 use Domain\Community\Tests\CommunityMiddlewareTestCase;

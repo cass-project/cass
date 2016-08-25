@@ -2,7 +2,7 @@
 namespace Domain\IM\Tests\Fixtures;
 
 use Application\PHPUnit\Fixture;
-use Application\Util\GenerateRandomString;
+use CASS\Util\GenerateRandomString;
 use Doctrine\ORM\EntityManager;
 use Domain\Account\Entity\Account;
 use Domain\Account\Service\AccountService;

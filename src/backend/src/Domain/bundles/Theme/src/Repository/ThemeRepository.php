@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Theme\Repository;
 
-use Application\Util\SerialManager\SerialManager;
+use CASS\Util\SerialManager\SerialManager;
 use Doctrine\ORM\EntityRepository;
 use Domain\Theme\Entity\Theme;
 use Domain\Theme\Exception\ThemeNotFoundException;

@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Attachment\Service;
 
-use Application\Util\FileNameFilter;
-use Application\Util\GenerateRandomString;
+use CASS\Util\FileNameFilter;
+use CASS\Util\GenerateRandomString;
 use Domain\Attachment\Entity\AttachmentOwner;
 use Domain\Attachment\Entity\Attachment;
 use Domain\Attachment\Entity\Metadata\AttachmentType;

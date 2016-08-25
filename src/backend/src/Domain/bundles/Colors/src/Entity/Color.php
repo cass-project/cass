@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Colors\Entity;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 
 class Color implements JSONSerializable
 {

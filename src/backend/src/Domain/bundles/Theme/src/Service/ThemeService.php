@@ -3,8 +3,8 @@ namespace Domain\Theme\Service;
 
 use Application\Service\EventEmitterAware\EventEmitterAwareService;
 use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
-use Application\Util\GenerateRandomString;
-use Application\Util\SerialManager\SerialManager;
+use CASS\Util\GenerateRandomString;
+use CASS\Util\SerialManager\SerialManager;
 use Domain\Theme\Entity\Theme;
 use Domain\Theme\Parameters\CreateThemeParameters;
 use Domain\Theme\Parameters\UpdateThemeParameters;

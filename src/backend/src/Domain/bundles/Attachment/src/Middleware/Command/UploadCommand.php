@@ -3,7 +3,7 @@ namespace Domain\Attachment\Middleware\Command;
 
 use Application\Exception\FileNotUploadedException;
 use Application\REST\Response\ResponseBuilder;
-use Application\Util\GenerateRandomString;
+use CASS\Util\GenerateRandomString;
 use Domain\Attachment\Exception\FileTooBigException;
 use Domain\Attachment\Exception\FileTooSmallException;
 use Domain\Attachment\Exception\AttachmentFactoryException;

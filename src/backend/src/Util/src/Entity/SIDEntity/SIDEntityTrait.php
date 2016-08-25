@@ -1,7 +1,7 @@
 <?php
-namespace Application\Util\Entity\SIDEntity;
+namespace CASS\Util\Entity\SIDEntity;
 
-use Application\Util\GenerateRandomString;
+use CASS\Util\GenerateRandomString;
 
 trait SIDEntityTrait
 {

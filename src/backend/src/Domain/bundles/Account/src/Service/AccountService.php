@@ -14,7 +14,7 @@ use Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
 use Domain\Auth\Service\PasswordVerifyService;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
-use Application\Util\GenerateRandomString;
+use CASS\Util\GenerateRandomString;
 use Domain\Profile\Repository\ProfileRepository;
 use Domain\Profile\Service\ProfileService;
 

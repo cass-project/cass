@@ -1,9 +1,9 @@
 <?php
 namespace Domain\Account\Entity;
 
-use Application\Util\Entity\IdEntity\IdEntity;
-use Application\Util\Entity\IdEntity\IdTrait;
-use Application\Util\JSONSerializable;
+use CASS\Util\Entity\IdEntity\IdEntity;
+use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\JSONSerializable;
 
 /**
  * @Entity(repositoryClass="Domain\Account\Repository\AccountAppAccessRepository")

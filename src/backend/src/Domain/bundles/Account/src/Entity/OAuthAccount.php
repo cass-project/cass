@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Account\Entity;
 
-use Application\Util\Entity\IdEntity\IdEntity;
-use Application\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\IdEntity\IdEntity;
+use CASS\Util\Entity\IdEntity\IdTrait;
 
 /**
  * @Entity(repositoryClass="Domain\Account\Repository\OAuthAccountRepository")

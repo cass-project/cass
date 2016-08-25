@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Attachment\Source;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 
 interface Source extends JSONSerializable
 {

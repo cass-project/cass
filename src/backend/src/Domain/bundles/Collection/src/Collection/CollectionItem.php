@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Collection\Collection;
 
-use Application\Util\JSONSerializable;
-use Application\Util\SerialManager\SerialEntity;
+use CASS\Util\JSONSerializable;
+use CASS\Util\SerialManager\SerialEntity;
 use Domain\Collection\Collection\CollectionTree\MutableCollectionTree;
 
 class CollectionItem implements SerialEntity, JSONSerializable

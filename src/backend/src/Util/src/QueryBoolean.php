@@ -1,5 +1,5 @@
 <?php
-namespace Application\Util;
+namespace CASS\Util;
 
 final class QueryBoolean
 {

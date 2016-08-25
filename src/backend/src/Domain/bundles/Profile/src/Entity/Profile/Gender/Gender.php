@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Profile\Entity\Profile\Gender;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 use Domain\Profile\Exception\UnknownGenderException;
 
 abstract class Gender implements JSONSerializable

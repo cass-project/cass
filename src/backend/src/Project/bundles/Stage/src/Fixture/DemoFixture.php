@@ -1,8 +1,8 @@
 <?php
 namespace CASS\Project\Bundles\Stage\Fixture;
 
-use Application\Util\Definitions\Point;
-use Application\Util\GenerateRandomString;
+use CASS\Util\Definitions\Point;
+use CASS\Util\GenerateRandomString;
 use Domain\Account\Entity\Account;
 use Domain\Account\Service\AccountService;
 use Domain\Attachment\Entity\Attachment;

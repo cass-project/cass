@@ -1,7 +1,7 @@
 <?php
 namespace Domain\IM\Service;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 use Domain\Community\Service\CommunityService;
 use Domain\IM\Exception\Query\UnknownSourceException;
 use Domain\IM\Query\Source\CommunitySource\CommunitySource;

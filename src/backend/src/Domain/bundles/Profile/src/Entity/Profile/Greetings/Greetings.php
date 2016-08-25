@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Profile\Entity\Profile\Greetings;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 
 abstract class Greetings implements JSONSerializable, \Serializable
 {

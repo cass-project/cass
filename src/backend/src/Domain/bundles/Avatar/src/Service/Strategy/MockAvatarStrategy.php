@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Avatar\Service\Strategy;
 
-use Application\Util\GenerateRandomString;
+use CASS\Util\GenerateRandomString;
 use Domain\Avatar\Image\Image as ImageCollectionItem;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Strategy\ImageStrategy;

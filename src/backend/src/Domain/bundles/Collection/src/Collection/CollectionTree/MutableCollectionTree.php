@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Collection\Collection\CollectionTree;
 
-use Application\Util\JSONSerializable;
-use Application\Util\SerialManager\SerialManager;
+use CASS\Util\JSONSerializable;
+use CASS\Util\SerialManager\SerialManager;
 use Domain\Collection\Collection\CollectionItem;
 use Domain\Collection\Collection\CollectionTree;
 use Domain\Collection\Collection\CollectionTreeFactory;

@@ -1,5 +1,5 @@
 <?php
-namespace Application\Util\Entity\IdEntity;
+namespace CASS\Util\Entity\IdEntity;
 
 trait IdTrait
 {

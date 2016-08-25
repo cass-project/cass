@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Collection\Strategy;
 
-use Application\Util\Entity\IdEntity\IdEntity;
+use CASS\Util\Entity\IdEntity\IdEntity;
 use Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
 
 interface CollectionAwareEntity extends IdEntity

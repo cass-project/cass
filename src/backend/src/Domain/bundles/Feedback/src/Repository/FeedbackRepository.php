@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Feedback\Repository;
 
-use Application\Util\Seek;
+use CASS\Util\Seek;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Domain\Feedback\Entity\Feedback;

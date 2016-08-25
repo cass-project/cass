@@ -1,14 +1,14 @@
 <?php
 namespace Domain\Account\Entity;
 
-use Application\Util\Entity\IdEntity\IdEntity;
-use Application\Util\Entity\IdEntity\IdTrait;
-use Application\Util\Entity\JSONMetadata\JSONMetadataEntity;
-use Application\Util\Entity\JSONMetadata\JSONMetadataEntityTrait;
-use Application\Util\Entity\SIDEntity\SIDEntity;
-use Application\Util\Entity\SIDEntity\SIDEntityTrait;
-use Application\Util\GenerateRandomString;
-use Application\Util\JSONSerializable;
+use CASS\Util\Entity\IdEntity\IdEntity;
+use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\JSONMetadata\JSONMetadataEntity;
+use CASS\Util\Entity\JSONMetadata\JSONMetadataEntityTrait;
+use CASS\Util\Entity\SIDEntity\SIDEntity;
+use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
+use CASS\Util\GenerateRandomString;
+use CASS\Util\JSONSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Domain\Profile\Entity\Profile;

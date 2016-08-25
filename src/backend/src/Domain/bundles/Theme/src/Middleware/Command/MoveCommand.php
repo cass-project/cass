@@ -2,7 +2,7 @@
 namespace Domain\Theme\Middleware\Command;
 
 use Application\REST\Response\ResponseBuilder;
-use Application\Util\SerialManager\SerialManager;
+use CASS\Util\SerialManager\SerialManager;
 use Domain\Theme\Exception\ThemeNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Community\Entity\Community;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 
 class CommunityImage implements JSONSerializable
 {

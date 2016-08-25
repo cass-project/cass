@@ -1,11 +1,11 @@
 <?php
 namespace Domain\Theme\Entity;
 
-use Application\Util\Entity\IdEntity\IdEntity;
-use Application\Util\Entity\IdEntity\IdTrait;
-use Application\Util\JSONSerializable;
-use Application\Util\SerialManager\SerialEntity;
-use Application\Util\SerialManager\SerialManager;
+use CASS\Util\Entity\IdEntity\IdEntity;
+use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\JSONSerializable;
+use CASS\Util\SerialManager\SerialEntity;
+use CASS\Util\SerialManager\SerialManager;
 use Doctrine\ORM\PersistentCollection;
 
 /**

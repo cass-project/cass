@@ -1,7 +1,7 @@
 <?php
-namespace Application\Util\Definitions;
+namespace CASS\Util\Definitions;
 
-use Common\Util\Definitions\InvalidCoordException;
+use CASS\Util\Exception\InvalidCoordException;
 
 class Point
 {

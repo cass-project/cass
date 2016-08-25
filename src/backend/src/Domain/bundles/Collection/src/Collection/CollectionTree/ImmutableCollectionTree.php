@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Collection\Collection\CollectionTree;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 use Domain\Collection\Collection\CollectionItem;
 use Domain\Collection\Collection\CollectionTree;
 

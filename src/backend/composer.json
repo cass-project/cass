@@ -12,7 +12,6 @@
       "Application\\Frontline\\": "src/Application/bundles/Frontline/src",
       "Application\\REST\\": "src/Application/bundles/REST/src",
       "Application\\Swagger\\": "src/Application/bundles/Swagger/src",
-      "Application\\Util\\": "src/Application/bundles/Util/src",
       "Application\\PHPUnit\\": "src/Application/bundles/PHPUnit/src",
       "Application\\MongoDB\\": "src/Application/bundles/MongoDB/src",
       "Application\\Version\\": "src/Application/bundles/Version/src",
@@ -36,7 +35,8 @@
       "Domain\\Contact\\": "src/Domain/bundles/Contact/src",
       "Domain\\Index\\": "src/Domain/bundles/Index/src",
       "CASS\\Project\\Bundles\\Console\\": "src/Project/bundles/Console/src",
-      "CASS\\Project\\Bundles\\Stage\\": "src/Project/bundles/Stage/src"
+      "CASS\\Project\\Bundles\\Stage\\": "src/Project/bundles/Stage/src",
+      "CASS\\Project\\Bundles\\PHPUnit\\": "src/Project/bundles/PHPUnit/src"
     }
   },
   "require": {

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\IM\Service\IMService;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 
 final class UnreadResult implements JSONSerializable
 {

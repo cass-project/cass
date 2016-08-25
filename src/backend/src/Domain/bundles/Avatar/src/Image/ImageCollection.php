@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Avatar\Image;
 
-use Application\Util\GenerateRandomString;
-use Application\Util\JSONSerializable;
+use CASS\Util\GenerateRandomString;
+use CASS\Util\JSONSerializable;
 
 class ImageCollection implements JSONSerializable
 {

@@ -3,7 +3,7 @@ namespace Domain\Feedback\Middleware\Command;
 
 use Application\Exception\SeekException;
 use Application\REST\Response\ResponseBuilder;
-use Application\Util\QueryBoolean;
+use CASS\Util\QueryBoolean;
 use Domain\Feedback\Entity\Feedback;
 use Domain\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;

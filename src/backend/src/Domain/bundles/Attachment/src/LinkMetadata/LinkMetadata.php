@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Attachment\LinkMetadata;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 
 interface LinkMetadata extends JSONSerializable
 {

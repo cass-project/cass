@@ -1,7 +1,7 @@
 <?php
 namespace Domain\IM\Entity;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 use Domain\Profile\Entity\Profile;
 use MongoDB\BSON\ObjectID;
 

@@ -1,11 +1,11 @@
 <?php
 namespace Domain\Contact\Entity;
 
-use Application\Util\Entity\IdEntity\IdEntity;
-use Application\Util\Entity\IdEntity\IdTrait;
-use Application\Util\Entity\SIDEntity\SIDEntity;
-use Application\Util\Entity\SIDEntity\SIDEntityTrait;
-use Application\Util\JSONSerializable;
+use CASS\Util\Entity\IdEntity\IdEntity;
+use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\SIDEntity\SIDEntity;
+use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
+use CASS\Util\JSONSerializable;
 use Domain\Contact\Exception\ContactIsNotPermanentException;
 use Domain\Profile\Entity\Profile;
 

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Post\PostType;
 
-use Application\Util\JSONSerializable;
+use CASS\Util\JSONSerializable;
 
 interface PostType extends JSONSerializable
 {
