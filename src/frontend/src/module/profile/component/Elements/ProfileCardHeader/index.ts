@@ -25,7 +25,11 @@ export class ProfileCardHeader
     constructor(private router: Router) {}
 
     getTime(): string {
-        return (`${this.time.toLocaleDateString()} at ${this.time.getHours()}:${this.time.getMinutes()}`);
+        if(this.time.getMinutes() < 10){
+            return (`${this.time.toLocaleDateString()} at ${this.time.getHours()}:0${this.time.getMinutes()}`);
+        } else {
+            return (`${this.time.toLocaleDateString()} at ${this.time.getHours()}:${this.time.getMinutes()}`);
+        }
     }
 
     hasTime(): boolean {
