@@ -2,7 +2,7 @@
 namespace Domain\Theme\Middleware;
 
 use CASS\Application\Service\CommandService;
-use CASS\Application\REST\Response\GenericResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use Domain\Theme\Middleware\Command\CreateCommand;
 use Domain\Theme\Middleware\Command\DeleteCommand;
 use Domain\Theme\Middleware\Command\GetCommand;

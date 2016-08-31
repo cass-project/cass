@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Application\Version\Middleware;
 
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use CASS\Application\Version\Service\VersionService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;

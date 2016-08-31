@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Application\REST\Response;
+namespace ZEA2\Platform\Bundles\REST\Response;
 
 use Psr\Http\Message\ResponseInterface;
 

@@ -2,7 +2,7 @@
 namespace Domain\Auth\Middleware\Command\OAuth;
 
 use CASS\Application\Command\Command;
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\Account\Exception\AccountNotFoundException;
 use Domain\Auth\Service\AuthService;
 use Domain\Auth\Service\AuthService\Exceptions\InvalidCredentialsException;

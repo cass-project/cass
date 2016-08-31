@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Application\Swagger\Middleware;
 
-use CASS\Application\REST\Response\GenericResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use CASS\Application\Swagger\Service\APIDocsService;

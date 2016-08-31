@@ -1,7 +1,7 @@
 <?php
 namespace Domain\IM\Middleware\Command;
 
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\IM\Service\IMService\UnreadResult;
 use Domain\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;

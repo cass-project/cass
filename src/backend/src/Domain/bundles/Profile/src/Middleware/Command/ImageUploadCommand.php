@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Profile\Middleware\Command;
 
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\Avatar\Exception\ImageServiceException;
 use Domain\Avatar\Middleware\Request\UploadImageRequest;
 use Domain\Profile\Exception\ProfileNotFoundException;

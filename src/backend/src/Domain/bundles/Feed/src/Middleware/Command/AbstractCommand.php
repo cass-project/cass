@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Feed\Middleware\Command;
 
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\Feed\Factory\FeedSourceFactory;
 use Domain\Feed\Middleware\Request\FeedMiddlewareRequest;
 use Domain\Feed\Request\FeedRequest;

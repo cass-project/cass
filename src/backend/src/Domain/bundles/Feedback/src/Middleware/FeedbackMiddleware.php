@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Feedback\Middleware;
 
-use CASS\Application\REST\Response\GenericResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Service\CommandService;
 use Domain\Feedback\Middleware\Command\CreateCommand;
 use Domain\Feedback\Middleware\Command\CreateFeedbackResponseCommand;

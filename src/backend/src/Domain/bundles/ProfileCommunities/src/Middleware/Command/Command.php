@@ -2,7 +2,7 @@
 namespace Domain\ProfileCommunities\Middleware\Command;
 
 use CASS\Application\Exception\CommandNotFoundException;
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\ProfileCommunities\Service\ProfileCommunitiesService;
 use Psr\Http\Message\ServerRequestInterface;

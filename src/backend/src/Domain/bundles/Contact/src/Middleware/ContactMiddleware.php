@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Contact\Middleware;
 
-use CASS\Application\REST\Response\GenericResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Service\CommandService;
 use Domain\Contact\Middleware\Command\CreateCommand;
 use Domain\Contact\Middleware\Command\DeleteCommand;

@@ -2,7 +2,7 @@
 namespace Domain\Colors\Middleware\Command;
 
 use CASS\Application\Command\Command;
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\Colors\Entity\Color;
 use Domain\Colors\Service\ColorsService;
 use Psr\Http\Message\ResponseInterface;

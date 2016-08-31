@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Application\REST\Service;
+namespace ZEA2\Platform\Bundles\REST\Service;
 
-use CASS\Application\REST\Request\Params\SchemaParams;
+use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
 use CASS\Application\Service\BundleService;
 use Symfony\Component\Yaml\Yaml;
 use JsonSchema\Validator;
@@ -56,7 +56,7 @@ class SchemaService
     private $bundleService;
 
     /**
-     * CASS\Application\REST\Service\SchemaService constructor.
+     * ZEA2\Platform\Bundles\REST\Service\SchemaService constructor.
      * @param BundleService $bundleService
      */
     public function __construct(BundleService $bundleService) {

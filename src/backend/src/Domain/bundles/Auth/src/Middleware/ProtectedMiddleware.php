@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Auth\Middleware;
 
-use CASS\Application\REST\Response\GenericResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use Domain\Auth\Middleware\AuthStrategy\HeaderStrategy;
 use Domain\Auth\Middleware\AuthStrategy\JSONBodyStrategy;
 use Domain\Auth\Middleware\AuthStrategy\SessionStrategy;

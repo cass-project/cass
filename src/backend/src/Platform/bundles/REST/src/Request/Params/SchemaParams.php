@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Application\REST\Request\Params;
+namespace ZEA2\Platform\Bundles\REST\Request\Params;
 
-use CASS\Application\REST\Service\JSONSchema;
+use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
 use Psr\Http\Message\ServerRequestInterface;
-use CASS\Application\REST\Service\SchemaService;
+use ZEA2\Platform\Bundles\REST\Service\SchemaService;
 
 class InvalidJSONSchema extends \Exception {}
 

@@ -3,7 +3,7 @@ namespace Domain\Post\Middleware;
 
 use CASS\Application\Service\CommandService;
 use Domain\Auth\Service\CurrentAccountService;
-use CASS\Application\REST\Response\GenericResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use Domain\Collection\Exception\CollectionNotFoundException;
 use Domain\Post\Exception\PostNotFoundException;
 use Domain\Post\Middleware\Command\Command;

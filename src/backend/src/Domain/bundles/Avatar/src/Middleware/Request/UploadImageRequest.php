@@ -2,7 +2,7 @@
 namespace Domain\Avatar\Middleware\Request;
 
 use CASS\Application\Exception\FileNotUploadedException;
-use CASS\Application\REST\Request\Params\RequestParamsInterface;
+use ZEA2\Platform\Bundles\REST\Request\Params\RequestParamsInterface;
 use CASS\Util\Definitions\Point;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Psr\Http\Message\ServerRequestInterface;

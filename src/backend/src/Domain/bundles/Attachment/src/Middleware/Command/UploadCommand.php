@@ -2,7 +2,7 @@
 namespace Domain\Attachment\Middleware\Command;
 
 use CASS\Application\Exception\FileNotUploadedException;
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use CASS\Util\GenerateRandomString;
 use Domain\Attachment\Exception\FileTooBigException;
 use Domain\Attachment\Exception\FileTooSmallException;

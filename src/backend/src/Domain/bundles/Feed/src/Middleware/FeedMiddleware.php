@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Feed\Middleware;
 
-use CASS\Application\REST\Response\GenericResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Service\CommandService;
 use Domain\Feed\Exception\AbstractFeedException;
 use Domain\Feed\Middleware\Command\CollectionCommand;

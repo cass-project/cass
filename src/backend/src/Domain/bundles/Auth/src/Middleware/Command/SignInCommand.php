@@ -3,7 +3,7 @@ namespace Domain\Auth\Middleware\Command;
 
 use CASS\Application\Bundles\Frontline\FrontlineScript;
 use CASS\Application\Bundles\Frontline\Service\FrontlineService\IncludeFilter;
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\Auth\Formatter\SignInFormatter;
 use Domain\Auth\Middleware\Request\SignInRequest;
 use Domain\Auth\Exception\InvalidCredentialsException;

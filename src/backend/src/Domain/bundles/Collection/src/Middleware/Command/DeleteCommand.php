@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Collection\Middleware\Command;
 
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\Collection\Exception\CollectionIsProtectedException;
 use Domain\Collection\Exception\CollectionNotFoundException;
 use Psr\Http\Message\ResponseInterface;

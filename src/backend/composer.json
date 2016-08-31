@@ -5,6 +5,7 @@
     "psr-4": {
       "ZEA2\\Platform\\": "src/Platform/src",
       "ZEA2\\Platform\\Bundles\\PHPUnit\\": "src/Platform/bundles/PHPUnit/src",
+      "ZEA2\\Platform\\Bundles\\REST\\": "src/Platform/bundles/REST/src",
       "CASS\\Application\\": "src/Application/src",
       "Domain\\": "src/Domain/src",
       "CASS\\Project\\": "src/Project/src",

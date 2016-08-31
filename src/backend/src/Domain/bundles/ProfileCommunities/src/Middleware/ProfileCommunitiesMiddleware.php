@@ -1,7 +1,7 @@
 <?php
 namespace Domain\ProfileCommunities\Middleware;
 
-use CASS\Application\REST\Response\GenericResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Service\CommandService;
 use Domain\ProfileCommunities\Middleware\Command\JoinCommand;
 use Domain\ProfileCommunities\Middleware\Command\LeaveCommand;

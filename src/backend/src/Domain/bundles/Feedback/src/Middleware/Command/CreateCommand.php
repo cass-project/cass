@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Feedback\Middleware\Command;
 
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\Feedback\Exception\EmptyDescriptionException;
 use Domain\Feedback\Exception\InvalidFeedbackTypeException;
 use Domain\Feedback\Middleware\Request\CreateFeedbackRequest;

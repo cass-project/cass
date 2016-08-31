@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Application\REST\Request\Params;
+namespace ZEA2\Platform\Bundles\REST\Request\Params;
 
 class ParamIsRequiredException extends \Exception {}
 

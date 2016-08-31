@@ -2,7 +2,7 @@
 namespace Domain\Profile\Middleware;
 
 use CASS\Application\Service\CommandService;
-use CASS\Application\REST\Response\GenericResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use Domain\Profile\Middleware\Command\CreateCommand;
 use Domain\Profile\Middleware\Command\DeleteCommand;
 use Domain\Profile\Middleware\Command\EditPersonalCommand;

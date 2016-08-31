@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Community\Middleware\Request;
 
-use CASS\Application\REST\Request\Params\SchemaParams;
-use CASS\Application\REST\Service\JSONSchema;
+use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
+use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
 use Domain\Community\CommunityBundle;
 use Domain\Community\Parameters\CreateCommunityParameters;
 

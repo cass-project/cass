@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Community\Middleware\Command\Feature;
 
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\Community\Exception\CommunityNotFoundException;
 use Domain\Community\Exception\FeatureIsActivatedException;
 use Psr\Http\Message\ResponseInterface;

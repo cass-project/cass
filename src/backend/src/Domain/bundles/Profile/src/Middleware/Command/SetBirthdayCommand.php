@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Profile\Middleware\Command;
 
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\Profile\Exception\InvalidBirthdayException;
 use Domain\Profile\Exception\ProfileNotFoundException;
 use Domain\Profile\Middleware\Request\SetBirthdayRequest;

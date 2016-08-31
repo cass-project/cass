@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Colors\Middleware;
 
-use CASS\Application\REST\Response\GenericResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Service\CommandService;
 use Domain\Colors\Middleware\Command\GetColorsCommand;
 use Domain\Colors\Middleware\Command\GetPalettesCommand;

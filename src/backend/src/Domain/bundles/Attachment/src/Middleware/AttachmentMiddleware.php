@@ -2,7 +2,7 @@
 namespace Domain\Attachment\Middleware;
 
 use CASS\Application\Service\CommandService;
-use CASS\Application\REST\Response\GenericResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use Domain\Attachment\Middleware\Command\LinkCommand;
 use Domain\Attachment\Middleware\Command\UploadCommand;
 use Psr\Http\Message\ResponseInterface as Response;

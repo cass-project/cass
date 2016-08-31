@@ -2,7 +2,7 @@
 namespace Domain\IM\Middleware;
 
 use CASS\Application\Service\CommandService;
-use CASS\Application\REST\Response\GenericResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use Domain\IM\Middleware\Command\MessagesCommand;
 use Domain\IM\Middleware\Command\SendCommand;
 use Domain\IM\Middleware\Command\UnreadCommand;

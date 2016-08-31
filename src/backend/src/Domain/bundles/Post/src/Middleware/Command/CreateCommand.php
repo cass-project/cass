@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Post\Middleware\Command;
 
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\Collection\Exception\CollectionNotFoundException;
 use Domain\Post\Exception\UnknownPostTypeException;
 use Domain\Post\Middleware\Request\CreatePostRequest;

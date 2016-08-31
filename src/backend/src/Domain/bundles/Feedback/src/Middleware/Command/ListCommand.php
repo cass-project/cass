@@ -2,7 +2,7 @@
 namespace Domain\Feedback\Middleware\Command;
 
 use CASS\Application\Exception\SeekException;
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use CASS\Util\QueryBoolean;
 use Domain\Feedback\Entity\Feedback;
 use Domain\Profile\Exception\ProfileNotFoundException;

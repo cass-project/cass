@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Community\Middleware\Command;
 
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\Avatar\Exception\ImageServiceException;
 use Domain\Community\Exception\CommunityNotFoundException;
 use Psr\Http\Message\ResponseInterface;

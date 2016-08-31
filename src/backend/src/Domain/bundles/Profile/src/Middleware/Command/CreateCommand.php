@@ -2,7 +2,7 @@
 namespace Domain\Profile\Middleware\Command;
 
 use CASS\Application\Exception\BadCommandCallException;
-use CASS\Application\REST\Response\ResponseBuilder;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Domain\Profile\Exception\MaxProfilesReachedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
