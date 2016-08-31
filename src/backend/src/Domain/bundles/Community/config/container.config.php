@@ -8,7 +8,7 @@ use function DI\get;
 use DI\Container;
 use Domain\Community\Entity\Community;
 use Domain\Community\Repository\CommunityRepository;
-use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
+use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Community\Service\CommunityService;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;

@@ -6,7 +6,7 @@ use function DI\object;
 use function DI\factory;
 use function DI\get;
 
-use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
+use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Theme\Entity\Theme;
 use Domain\Theme\Frontline\ThemeScript;
 use Domain\Theme\Repository\ThemeRepository;

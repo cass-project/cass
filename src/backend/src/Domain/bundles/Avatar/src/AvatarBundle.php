@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Avatar;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 final class AvatarBundle extends GenericBundle
 {

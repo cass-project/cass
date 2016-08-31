@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Account;
 
-use Application\Bundle\GenericBundle;
-use Application\Frontline\FrontlineBundleInjectable;
+use CASS\Application\Bundle\GenericBundle;
+use CASS\Application\Frontline\FrontlineBundleInjectable;
 use Domain\Account\Frontline\ConfigAccountFrontlineScript;
 
 class AccountBundle extends GenericBundle implements FrontlineBundleInjectable

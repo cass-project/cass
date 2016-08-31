@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Feedback\Middleware\Command;
 
-use Application\Exception\SeekException;
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\Exception\SeekException;
+use CASS\Application\REST\Response\ResponseBuilder;
 use CASS\Util\QueryBoolean;
 use Domain\Feedback\Entity\Feedback;
 use Domain\Profile\Exception\ProfileNotFoundException;

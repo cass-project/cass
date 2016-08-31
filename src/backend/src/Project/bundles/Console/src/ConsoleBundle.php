@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Project\Bundles\Console;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 final class ConsoleBundle extends GenericBundle
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Theme\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use CASS\Util\SerialManager\SerialManager;
 use Domain\Theme\Exception\ThemeNotFoundException;
 use Psr\Http\Message\ResponseInterface;

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Profile\Middleware;
 
-use Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\Response\GenericResponseBuilder;
 use Domain\Profile\Exception\ProfileNotFoundException;
 use Domain\Profile\Service\WithProfileService;
 use Psr\Http\Message\ResponseInterface as Response;

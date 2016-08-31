@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Index\Events;
 
-use Application\Events\EventsBootstrapInterface;
+use CASS\Application\Events\EventsBootstrapInterface;
 use Domain\Index\Service\IndexService;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Service\ProfileService;

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Index\Events;
 
-use Application\Events\EventsBootstrapInterface;
+use CASS\Application\Events\EventsBootstrapInterface;
 use Domain\Index\Service\IndexService;
 use Domain\Post\Entity\Post;
 use Domain\Post\Service\PostService;

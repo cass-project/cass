@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Util;
 
-use Application\Exception\SeekException;
+use CASS\Application\Exception\SeekException;
 
 class Seek
 {

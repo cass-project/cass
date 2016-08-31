@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Theme\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Theme\Exception\ThemeNotFoundException;
 use Domain\Theme\Middleware\Request\UpdateThemeRequest;
 use Psr\Http\Message\ResponseInterface;

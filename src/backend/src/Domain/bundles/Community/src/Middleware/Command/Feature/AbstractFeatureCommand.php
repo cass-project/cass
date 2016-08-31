@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Community\Middleware\Command\Feature;
 
-use Application\Command\Command;
+use CASS\Application\Command\Command;
 use Domain\Community\Service\CommunityFeaturesService;
 use Domain\Community\Service\CommunityService;
 

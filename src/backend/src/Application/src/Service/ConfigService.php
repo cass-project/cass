@@ -1,5 +1,5 @@
 <?php
-namespace Application\Service;
+namespace CASS\Application\Service;
 
 class ConfigService
 {

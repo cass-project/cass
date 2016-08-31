@@ -1,7 +1,7 @@
 <?php
-namespace Application\Swagger;
+namespace CASS\Application\Swagger;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 class SwaggerBundle extends GenericBundle
 {

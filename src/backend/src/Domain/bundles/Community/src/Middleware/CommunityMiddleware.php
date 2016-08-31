@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Community\Middleware;
 
-use Application\REST\Response\GenericResponseBuilder;
-use Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Service\CommandService;
 use Domain\Community\Middleware\Command\CreateCommand;
 use Domain\Community\Middleware\Command\ImageDeleteCommand;
 use Domain\Community\Middleware\Command\EditCommand;

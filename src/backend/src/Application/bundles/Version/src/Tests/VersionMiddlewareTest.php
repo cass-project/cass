@@ -1,7 +1,7 @@
 <?php
-namespace Application\Version\Tests;
+namespace CASS\Application\Version\Tests;
 
-use Application\PHPUnit\TestCase\MiddlewareTestCase;
+use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
 
 /**
  * @backupGlobals disabled

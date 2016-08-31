@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Feedback\Middleware\Request;
 
-use Application\REST\Request\Params\SchemaParams;
-use Application\REST\Service\JSONSchema;
+use CASS\Application\REST\Request\Params\SchemaParams;
+use CASS\Application\REST\Service\JSONSchema;
 use Domain\Feedback\FeedbackBundle;
 use Domain\Feedback\Middleware\Parameters\CreateFeedbackParameters;
 

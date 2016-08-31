@@ -1,16 +1,16 @@
 <?php
-namespace Application\Swagger\Middleware;
+namespace CASS\Application\Swagger\Middleware;
 
-use Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\Response\GenericResponseBuilder;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Application\Swagger\Service\APIDocsService;
+use CASS\Application\Swagger\Service\APIDocsService;
 use Zend\Stratigility\MiddlewareInterface;
 
 class APIDocsMiddleware implements MiddlewareInterface
 {
     /**
-     * @var \Application\Swagger\Service\APIDocsService
+     * @var \CASS\Application\Swagger\Service\APIDocsService
      */
     private $apiDocsService;
 

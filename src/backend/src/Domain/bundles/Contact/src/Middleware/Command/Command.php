@@ -5,7 +5,7 @@ use Domain\Auth\Service\CurrentAccountService;
 use Domain\Contact\Formatter\ContactFormatter;
 use Domain\Contact\Service\ContactService;
 
-abstract class Command implements \Application\Command\Command
+abstract class Command implements \CASS\Application\Command\Command
 {
     /** @var ContactService */
     protected $contactService;

@@ -1,12 +1,12 @@
 <?php
-namespace Application\Bootstrap;
+namespace CASS\Application\Bootstrap;
 
-use Application\Exception\EntityNotFoundException;
-use Application\Exception\BadCommandCallException;
-use Application\Exception\CommandNotFoundException;
-use Application\Exception\PermissionsDeniedException;
-use Application\REST\Response\GenericResponseBuilder;
-use Application\REST\Request\Params\InvalidJSONSchema;
+use CASS\Application\Exception\EntityNotFoundException;
+use CASS\Application\Exception\BadCommandCallException;
+use CASS\Application\Exception\CommandNotFoundException;
+use CASS\Application\Exception\PermissionsDeniedException;
+use CASS\Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\Request\Params\InvalidJSONSchema;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Expressive\Container\Exception\NotFoundException;

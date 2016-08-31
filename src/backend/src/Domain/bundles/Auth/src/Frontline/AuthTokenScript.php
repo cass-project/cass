@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Auth\Frontline;
 
-use Application\Frontline\FrontlineScript;
+use CASS\Application\Frontline\FrontlineScript;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Formatter\ProfileExtendedFormatter;

@@ -1,7 +1,7 @@
 <?php
-namespace Application\Swagger;
+namespace CASS\Application\Swagger;
 
-use Application\Swagger\Middleware\APIDocsMiddleware;
+use CASS\Application\Swagger\Middleware\APIDocsMiddleware;
 use Zend\Expressive\Application;
 
 return [

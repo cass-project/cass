@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Auth\Middleware\Command\OAuth;
 
-use Application\Command\Command;
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\Command\Command;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Account\Exception\AccountNotFoundException;
 use Domain\Auth\Service\AuthService;
 use Domain\Auth\Service\AuthService\Exceptions\InvalidCredentialsException;

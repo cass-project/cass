@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Community\Service;
 
-use Application\Service\EventEmitterAware\EventEmitterAwareService;
-use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
+use CASS\Application\Service\EventEmitterAware\EventEmitterAwareService;
+use CASS\Application\Service\EventEmitterAware\EventEmitterAwareTrait;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Avatar\Image\ImageCollection;
 use Domain\Avatar\Parameters\UploadImageParameters;

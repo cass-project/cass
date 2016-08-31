@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Theme\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Theme\Exception\ThemeWithThisIdExistsException;
 use Domain\Theme\Middleware\Request\CreateThemeRequest;
 use Psr\Http\Message\ResponseInterface;

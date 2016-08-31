@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Attachment\Middleware;
 
-use Application\Service\CommandService;
-use Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
 use Domain\Attachment\Middleware\Command\LinkCommand;
 use Domain\Attachment\Middleware\Command\UploadCommand;
 use Psr\Http\Message\ResponseInterface as Response;

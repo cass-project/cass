@@ -1,8 +1,8 @@
 <?php
 namespace Domain\IM\Middleware;
 
-use Application\Service\CommandService;
-use Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
 use Domain\IM\Middleware\Command\MessagesCommand;
 use Domain\IM\Middleware\Command\SendCommand;
 use Domain\IM\Middleware\Command\UnreadCommand;

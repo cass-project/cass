@@ -1,11 +1,11 @@
 <?php
-namespace Application\Doctrine2;
+namespace CASS\Application\Doctrine2;
 
 use function DI\object;
 use function DI\factory;
 use function DI\get;
 
-use Application\Doctrine2\Factory\DoctrineEntityManagerFactory;
+use CASS\Application\Bundles\Doctrine2\Factory\DoctrineEntityManagerFactory;
 use Doctrine\ORM\EntityManager;
 
 return [

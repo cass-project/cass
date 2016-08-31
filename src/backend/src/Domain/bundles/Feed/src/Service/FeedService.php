@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Feed\Service;
 
-use Application\Exception\NotImplementedException;
+use CASS\Application\Exception\NotImplementedException;
 use Domain\Feed\Request\FeedRequest;
 use Domain\Feed\Search\Stream\StreamFactory;
 use Domain\Index\Source\Source;

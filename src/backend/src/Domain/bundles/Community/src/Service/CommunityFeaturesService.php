@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Community\Service;
 
-use Application\Exception\NotImplementedException;
+use CASS\Application\Exception\NotImplementedException;
 use Domain\Community\Entity\Community;
 use Domain\Community\Exception\FeatureIsActivatedException;
 use Domain\Community\Exception\FeatureIsNotActivatedException;

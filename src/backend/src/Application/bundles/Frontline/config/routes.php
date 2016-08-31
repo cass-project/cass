@@ -1,7 +1,7 @@
 <?php
-namespace Application\Frontline;
+namespace CASS\Application\Frontline;
 
-use Application\Frontline\Middleware\FrontlineMiddleware;
+use CASS\Application\Frontline\Middleware\FrontlineMiddleware;
 use Zend\Expressive\Application;
 
 return [

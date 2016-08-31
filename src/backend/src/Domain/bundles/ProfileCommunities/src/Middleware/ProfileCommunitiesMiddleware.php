@@ -1,8 +1,8 @@
 <?php
 namespace Domain\ProfileCommunities\Middleware;
 
-use Application\REST\Response\GenericResponseBuilder;
-use Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Service\CommandService;
 use Domain\ProfileCommunities\Middleware\Command\JoinCommand;
 use Domain\ProfileCommunities\Middleware\Command\LeaveCommand;
 use Domain\ProfileCommunities\Middleware\Command\ListCommand;

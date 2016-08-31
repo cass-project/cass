@@ -6,7 +6,7 @@ use function DI\factory;
 use function DI\get;
 
 use DI\Container;
-use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
+use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\Profile\Greetings;
 use Domain\Profile\Entity\ProfileExpertInEQ;

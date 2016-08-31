@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Colors\Tests;
 
-use Application\PHPUnit\TestCase\MiddlewareTestCase;
+use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Colors\Entity\Color;
 
 /**

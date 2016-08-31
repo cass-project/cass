@@ -1,9 +1,9 @@
 <?php
 namespace Domain\Post\Middleware;
 
-use Application\Service\CommandService;
+use CASS\Application\Service\CommandService;
 use Domain\Auth\Service\CurrentAccountService;
-use Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\Response\GenericResponseBuilder;
 use Domain\Collection\Exception\CollectionNotFoundException;
 use Domain\Post\Exception\PostNotFoundException;
 use Domain\Post\Middleware\Command\Command;

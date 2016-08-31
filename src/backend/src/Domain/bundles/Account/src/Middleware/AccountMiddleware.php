@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Account\Middleware;
 
-use Application\REST\Response\GenericResponseBuilder;
-use Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Service\CommandService;
 use Domain\Account\Exception\AccountNotFoundException;
 use Domain\Account\Middleware\Command\CancelDeleteRequestCommand;
 use Domain\Account\Middleware\Command\ChangePasswordCommand;

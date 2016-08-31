@@ -1,6 +1,6 @@
 <?php
 namespace Domain\Profile\Validation;
-use Application\Exception\PermissionsDeniedException;
+use CASS\Application\Exception\PermissionsDeniedException;
 use Domain\Account\Entity\Account;
 use Domain\Profile\Entity\Profile;
 

@@ -1,5 +1,5 @@
 <?php
-namespace Application\REST\Response;
+namespace CASS\Application\REST\Response;
 
 use Psr\Http\Message\ResponseInterface;
 

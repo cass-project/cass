@@ -1,10 +1,10 @@
 <?php
-namespace Application\Command\Resolve;
+namespace CASS\Application\Command\Resolve;
 
-use Application\Command\Command;
-use Application\Command\Resolve\Resolvers\CallbackCommandResolver;
-use Application\Command\Resolve\Resolvers\CompositionCommandResolver;
-use Application\Command\Resolve\Resolvers\DirectCommandResolver;
+use CASS\Application\Command\Command;
+use CASS\Application\Command\Resolve\Resolvers\CallbackCommandResolver;
+use CASS\Application\Command\Resolve\Resolvers\CompositionCommandResolver;
+use CASS\Application\Command\Resolve\Resolvers\DirectCommandResolver;
 use DI\Container;
 use Psr\Http\Message\ServerRequestInterface;
 

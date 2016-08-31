@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Community\Middleware\Request;
 
-use Application\REST\Request\Params\SchemaParams;
-use Application\REST\Service\JSONSchema;
+use CASS\Application\REST\Request\Params\SchemaParams;
+use CASS\Application\REST\Service\JSONSchema;
 use Domain\Community\CommunityBundle;
 use Domain\Community\Parameters\CreateCommunityParameters;
 

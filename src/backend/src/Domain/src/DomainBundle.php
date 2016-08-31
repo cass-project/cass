@@ -1,7 +1,7 @@
 <?php
 namespace Domain;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 class DomainBundle extends GenericBundle
 {

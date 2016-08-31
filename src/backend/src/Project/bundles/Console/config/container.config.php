@@ -1,5 +1,5 @@
 <?php
-namespace Application\Console;
+namespace CASS\Application\Console;
 
 use function DI\object;
 use function DI\factory;

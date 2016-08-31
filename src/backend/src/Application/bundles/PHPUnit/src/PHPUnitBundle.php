@@ -1,7 +1,7 @@
 <?php
-namespace Application\PHPUnit;
+namespace CASS\Application\PHPUnit;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 class PHPUnitBundle extends GenericBundle
 {

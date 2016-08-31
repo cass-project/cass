@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Collection\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Collection\Exception\CollectionNotFoundException;
 use Domain\Collection\Exception\InvalidCollectionOptionsException;
 use Domain\Collection\Middleware\Request\SetPublicOptionsRequest;

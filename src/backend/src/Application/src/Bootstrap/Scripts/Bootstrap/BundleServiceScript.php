@@ -1,10 +1,10 @@
 <?php
-namespace Application\Bootstrap\Scripts\Bootstrap;
+namespace CASS\Application\Bootstrap\Scripts\Bootstrap;
 
-use Application\Bootstrap\AppBuilder;
-use Application\Bootstrap\Scripts\BootstrapScript;
-use Application\Bundle\Bundle;
-use Application\Service\BundleService;
+use CASS\Application\Bootstrap\AppBuilder;
+use CASS\Application\Bootstrap\Scripts\BootstrapScript;
+use CASS\Application\Bundle\Bundle;
+use CASS\Application\Service\BundleService;
 use Cocur\Chain\Chain;
 
 class BundleServiceScript implements BootstrapScript

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Feed;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 final class FeedBundle extends GenericBundle
 {

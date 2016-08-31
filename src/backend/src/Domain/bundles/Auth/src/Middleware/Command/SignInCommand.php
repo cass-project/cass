@@ -1,9 +1,9 @@
 <?php
 namespace Domain\Auth\Middleware\Command;
 
-use Application\Frontline\FrontlineScript;
-use Application\Frontline\Service\FrontlineService\IncludeFilter;
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\Frontline\FrontlineScript;
+use CASS\Application\Frontline\Service\FrontlineService\IncludeFilter;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Auth\Formatter\SignInFormatter;
 use Domain\Auth\Middleware\Request\SignInRequest;
 use Domain\Auth\Exception\InvalidCredentialsException;

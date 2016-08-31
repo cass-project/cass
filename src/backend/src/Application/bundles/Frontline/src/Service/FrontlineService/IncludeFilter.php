@@ -1,7 +1,7 @@
 <?php
-namespace Application\Frontline\Service\FrontlineService;
+namespace CASS\Application\Frontline\Service\FrontlineService;
 
-use Application\Frontline\FrontlineScript;
+use CASS\Application\Frontline\FrontlineScript;
 
 class IncludeFilter implements Filter
 {

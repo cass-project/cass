@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Theme\Middleware;
 
-use Application\Service\CommandService;
-use Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
 use Domain\Theme\Middleware\Command\CreateCommand;
 use Domain\Theme\Middleware\Command\DeleteCommand;
 use Domain\Theme\Middleware\Command\GetCommand;

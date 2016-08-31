@@ -3,8 +3,8 @@ define('APP_TIMER_START', microtime(true));
 
 require __DIR__ . '/../vendor/autoload.php';
 
-return (new \Application\Bootstrap\AppBuilder([
-    new \Application\ApplicationBundle(),
+return (new \CASS\Application\Bootstrap\AppBuilder([
+    new \CASS\Application\ApplicationBundle(),
     new \Domain\DomainBundle(),
     new \CASS\Project\ProjectBundle(),
 ]))->build();

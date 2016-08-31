@@ -1,5 +1,5 @@
 <?php
-namespace Application\PHPUnit\TestCase\Expectations;
+namespace CASS\Application\PHPUnit\TestCase\Expectations;
 
 class ExpectString
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Application\Command\Resolve;
+namespace CASS\Application\Command\Resolve;
 
-use Application\Command\Command;
+use CASS\Application\Command\Command;
 use DI\Container;
 use Psr\Http\Message\ServerRequestInterface;
 

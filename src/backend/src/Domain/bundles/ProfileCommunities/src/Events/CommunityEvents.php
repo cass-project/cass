@@ -1,7 +1,7 @@
 <?php
 namespace Domain\ProfileCommunities\Events;
 
-use Application\Events\EventsBootstrapInterface;
+use CASS\Application\Events\EventsBootstrapInterface;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Community\Entity\Community;
 use Domain\Community\Service\CommunityService;

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Feed\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Feed\Factory\FeedSourceFactory;
 use Domain\Feed\Middleware\Request\FeedMiddlewareRequest;
 use Domain\Feed\Request\FeedRequest;
@@ -11,7 +11,7 @@ use Domain\Index\Source\Source;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class AbstractCommand implements \Application\Command\Command
+abstract class AbstractCommand implements \CASS\Application\Command\Command
 {
     /** @var FeedService */
     protected $feedService;

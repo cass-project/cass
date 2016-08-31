@@ -1,5 +1,5 @@
 <?php
-namespace Application;
+namespace CASS\Application;
 
 return [
     'php-di' => [

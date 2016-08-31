@@ -1,5 +1,5 @@
 <?php
-namespace Application\Frontline\Service\FrontlineService;
+namespace CASS\Application\Frontline\Service\FrontlineService;
 
 class NoneFilter implements Filter
 {

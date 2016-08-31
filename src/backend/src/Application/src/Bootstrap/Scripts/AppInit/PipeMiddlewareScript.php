@@ -1,7 +1,7 @@
 <?php
-namespace Application\Bootstrap\Scripts\AppInit;
+namespace CASS\Application\Bootstrap\Scripts\AppInit;
 
-use Application\Bootstrap\Scripts\AppInitScript;
+use CASS\Application\Bootstrap\Scripts\AppInitScript;
 use Zend\Expressive\Application;
 
 class PipeMiddlewareScript implements AppInitScript

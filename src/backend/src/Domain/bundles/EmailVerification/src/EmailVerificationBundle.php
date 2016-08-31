@@ -1,7 +1,7 @@
 <?php
 namespace Domain\EmailVerification;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 class EmailVerificationBundle extends GenericBundle
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Profile\Middleware\Command;
 
-use Application\REST\Request\Params\SchemaParams;
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Request\Params\SchemaParams;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Profile\Entity\Profile\Greetings\Greetings;
 use Domain\Profile\Exception\ProfileNotFoundException;
 use Domain\Profile\Middleware\Request\GreetingsFLRequest;

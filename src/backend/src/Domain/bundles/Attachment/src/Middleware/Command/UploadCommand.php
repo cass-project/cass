@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Attachment\Middleware\Command;
 
-use Application\Exception\FileNotUploadedException;
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\Exception\FileNotUploadedException;
+use CASS\Application\REST\Response\ResponseBuilder;
 use CASS\Util\GenerateRandomString;
 use Domain\Attachment\Exception\FileTooBigException;
 use Domain\Attachment\Exception\FileTooSmallException;

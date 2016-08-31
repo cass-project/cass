@@ -2,8 +2,8 @@
 namespace Domain\Auth;
 
 use Domain\Auth\Frontline\AuthTokenScript;
-use Application\Frontline\FrontlineBundleInjectable;
-use Application\Bundle\GenericBundle;
+use CASS\Application\Frontline\FrontlineBundleInjectable;
+use CASS\Application\Bundle\GenericBundle;
 
 class AuthBundle extends GenericBundle implements FrontlineBundleInjectable
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Application\Service;
+namespace CASS\Application\Service;
 
-use Application\Command\Resolve\CommandResolverBuilder;
+use CASS\Application\Command\Resolve\CommandResolverBuilder;
 use DI\Container;
 
 class CommandService

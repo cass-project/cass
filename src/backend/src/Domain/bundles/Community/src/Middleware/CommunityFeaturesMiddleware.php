@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Community\Middleware;
 
-use Application\REST\Response\GenericResponseBuilder;
-use Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Service\CommandService;
 use Domain\Community\Middleware\Command\Feature\ActivateFeatureCommand;
 use Domain\Community\Middleware\Command\Feature\DeactivateFeatureCommand;
 use Domain\Community\Middleware\Command\Feature\IsFeatureActivatedCommand;

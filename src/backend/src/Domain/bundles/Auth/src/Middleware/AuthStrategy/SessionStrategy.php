@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Auth\Middleware\AuthStrategy;
 
-use Application\Auth\Exception\APIKeyIsNotAvailableException;
+use CASS\Application\Auth\Exception\APIKeyIsNotAvailableException;
 
 class SessionStrategy extends Strategy
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Post\Events;
 
-use Application\Events\EventsBootstrapInterface;
+use CASS\Application\Events\EventsBootstrapInterface;
 use Domain\Attachment\Entity\Attachment;
 use Domain\Attachment\Service\AttachmentService;
 use Domain\Post\Entity\Post;

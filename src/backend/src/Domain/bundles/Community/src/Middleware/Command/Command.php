@@ -5,7 +5,7 @@ use Domain\Auth\Service\CurrentAccountService;
 use Domain\Community\Formatter\CommunityExtendedFormatter;
 use Domain\Community\Service\CommunityService;
 
-abstract class Command implements \Application\Command\Command
+abstract class Command implements \CASS\Application\Command\Command
 {
     /** @var CurrentAccountService */
     protected $currentAccountService;

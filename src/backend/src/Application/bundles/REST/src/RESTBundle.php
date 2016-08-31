@@ -1,7 +1,7 @@
 <?php
-namespace Application\REST;
+namespace CASS\Application\REST;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 class RESTBundle extends GenericBundle
 {

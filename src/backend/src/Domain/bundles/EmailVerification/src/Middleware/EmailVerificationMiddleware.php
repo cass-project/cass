@@ -2,7 +2,7 @@
 namespace Domain\EmailVerification\Middleware;
 
 use Domain\Auth\Service\CurrentAccountService;
-use Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\Response\GenericResponseBuilder;
 use Domain\EmailVerification\Middleware\Command\Command;
 use Domain\EmailVerification\Service\EmailVerificationService;
 use Psr\Http\Message\ResponseInterface as Response;

@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Project\Bundles\Stage;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 final class StageBundle extends GenericBundle
 {

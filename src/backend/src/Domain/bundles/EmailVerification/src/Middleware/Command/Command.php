@@ -2,7 +2,7 @@
 namespace Domain\EmailVerification\Middleware\Command;
 
 use Domain\Auth\Service\CurrentAccountService;
-use Application\Exception\CommandNotFoundException;
+use CASS\Application\Exception\CommandNotFoundException;
 use Domain\EmailVerification\Service\EmailVerificationService;
 use Psr\Http\Message\ServerRequestInterface;
 

@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Contact\Tests;
 
-use Application\PHPUnit\RESTRequest\RESTRequest;
-use Application\PHPUnit\TestCase\MiddlewareTestCase;
+use CASS\Application\PHPUnit\RESTRequest\RESTRequest;
+use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Contact\Tests\Fixture\DemoContactFixture;
 
 /**

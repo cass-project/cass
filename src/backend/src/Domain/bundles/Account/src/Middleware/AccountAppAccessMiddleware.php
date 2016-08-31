@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Account\Middleware;
 
-use Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\Response\GenericResponseBuilder;
 use Domain\Account\Service\AccountAppAccessService;
 use Domain\Auth\Service\CurrentAccountService;
 use Psr\Http\Message\ResponseInterface as Response;

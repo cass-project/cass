@@ -1,7 +1,7 @@
 <?php
 namespace Domain\IM\Tests\Fixtures;
 
-use Application\PHPUnit\Fixture;
+use CASS\Application\PHPUnit\Fixture;
 use CASS\Util\GenerateRandomString;
 use Doctrine\ORM\EntityManager;
 use Domain\Account\Entity\Account;

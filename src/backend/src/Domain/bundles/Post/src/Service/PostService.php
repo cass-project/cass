@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Post\Service;
 
-use Application\Service\EventEmitterAware\EventEmitterAwareService;
-use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
+use CASS\Application\Service\EventEmitterAware\EventEmitterAwareService;
+use CASS\Application\Service\EventEmitterAware\EventEmitterAwareTrait;
 use Domain\Collection\Service\CollectionService;
 use Domain\Post\Entity\Post;
 use Domain\Post\Parameters\CreatePostParameters;

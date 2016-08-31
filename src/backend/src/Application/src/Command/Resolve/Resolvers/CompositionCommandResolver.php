@@ -1,9 +1,9 @@
 <?php
-namespace Application\Command\Resolve\Resolvers;
+namespace CASS\Application\Command\Resolve\Resolvers;
 
-use Application\Command\Command;
-use Application\Command\Exception\UnresolvableCommandException;
-use Application\Command\Resolve\CommandResolver;
+use CASS\Application\Command\Command;
+use CASS\Application\Command\Exception\UnresolvableCommandException;
+use CASS\Application\Command\Resolve\CommandResolver;
 use DI\Container;
 use Psr\Http\Message\ServerRequestInterface;
 

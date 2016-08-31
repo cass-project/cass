@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Theme\Frontline;
 
-use Application\Frontline\FrontlineScript;
+use CASS\Application\Frontline\FrontlineScript;
 use Domain\Theme\Entity\Theme;
 use Domain\Theme\Service\ThemeService;
 

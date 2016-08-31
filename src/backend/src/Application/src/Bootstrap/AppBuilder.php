@@ -1,17 +1,17 @@
 <?php
-namespace Application\Bootstrap;
+namespace CASS\Application\Bootstrap;
 
 use DI\Container;
-use Application\Bootstrap\Scripts\AppInit\EventsSetupScript;
-use Application\Bootstrap\Scripts\AppInit\PipeMiddlewareScript;
-use Application\Bootstrap\Scripts\AppInit\RoutesSetupScript;
-use Application\Bootstrap\Scripts\Bootstrap\BundleServiceScript;
-use Application\Bootstrap\Scripts\Bootstrap\BootstrapDIContainerScript;
-use Application\Bootstrap\Scripts\Bootstrap\InjectSchemaServiceScript;
-use Application\Bootstrap\Scripts\Bootstrap\ReadAppConfigScript;
-use Application\PHPUnit\PHPUnitEmitter;
-use Application\Service\BundleService;
-use Application\Service\ConfigService;
+use CASS\Application\Bootstrap\Scripts\AppInit\EventsSetupScript;
+use CASS\Application\Bootstrap\Scripts\AppInit\PipeMiddlewareScript;
+use CASS\Application\Bootstrap\Scripts\AppInit\RoutesSetupScript;
+use CASS\Application\Bootstrap\Scripts\Bootstrap\BundleServiceScript;
+use CASS\Application\Bootstrap\Scripts\Bootstrap\BootstrapDIContainerScript;
+use CASS\Application\Bootstrap\Scripts\Bootstrap\InjectSchemaServiceScript;
+use CASS\Application\Bootstrap\Scripts\Bootstrap\ReadAppConfigScript;
+use CASS\Application\PHPUnit\PHPUnitEmitter;
+use CASS\Application\Service\BundleService;
+use CASS\Application\Service\ConfigService;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Expressive\Application;
 use Zend\Expressive\Emitter\EmitterStack;

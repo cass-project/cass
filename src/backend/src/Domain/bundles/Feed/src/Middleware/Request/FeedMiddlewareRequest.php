@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Feed\Middleware\Request;
 
-use Application\REST\Request\Params\SchemaParams;
-use Application\REST\Service\JSONSchema;
+use CASS\Application\REST\Request\Params\SchemaParams;
+use CASS\Application\REST\Service\JSONSchema;
 use Domain\Feed\FeedBundle;
 use Domain\Feed\Request\FeedRequest;
 

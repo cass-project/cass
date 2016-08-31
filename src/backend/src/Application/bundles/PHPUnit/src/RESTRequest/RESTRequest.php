@@ -1,7 +1,7 @@
 <?php
-namespace Application\PHPUnit\RESTRequest;
+namespace CASS\Application\PHPUnit\RESTRequest;
 
-use Application\PHPUnit\TestCase\MiddlewareTestCase;
+use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Uri;

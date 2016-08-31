@@ -1,4 +1,4 @@
 <?php
-namespace Application\Auth\Exception;
+namespace CASS\Application\Auth\Exception;
 
 class APIKeyIsNotAvailableException extends \Exception {}

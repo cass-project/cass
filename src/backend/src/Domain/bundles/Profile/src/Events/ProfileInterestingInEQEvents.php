@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Profile\Events;
 
-use Application\Events\EventsBootstrapInterface;
+use CASS\Application\Events\EventsBootstrapInterface;
 use Domain\Profile\Entity\Profile;
 use Domain\Profile\Entity\ProfileInterestingInEQ;
 use Domain\Profile\Repository\ProfileInterestingInEQRepository;

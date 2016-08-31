@@ -1,5 +1,5 @@
 <?php
-namespace Application\REST;
+namespace CASS\Application\REST;
 
 use function DI\object;
 use function DI\factory;

@@ -6,7 +6,7 @@ use function DI\factory;
 use function DI\get;
 
 use Domain\Auth\Middleware\AuthMiddleware;
-use Application\Frontline\Service\FrontlineService;
+use CASS\Application\Frontline\Service\FrontlineService;
 
 $config = [
     'php-di' => []

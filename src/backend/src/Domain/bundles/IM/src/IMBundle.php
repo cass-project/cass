@@ -1,7 +1,7 @@
 <?php
 namespace Domain\IM;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 class IMBundle extends GenericBundle
 {

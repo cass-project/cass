@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Account\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Account\Exception\InvalidOldPasswordException;
 use Domain\Account\Middleware\Request\ChangePasswordRequest;
 use Psr\Http\Message\ResponseInterface;

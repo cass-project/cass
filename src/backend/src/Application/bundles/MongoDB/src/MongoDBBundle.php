@@ -1,7 +1,7 @@
 <?php
-namespace Application\MongoDB;
+namespace CASS\Application\MongoDB;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 final class MongoDBBundle extends GenericBundle
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Application\PHPUnit\RESTRequest;
+namespace CASS\Application\PHPUnit\RESTRequest;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Stratigility\Http\Response;

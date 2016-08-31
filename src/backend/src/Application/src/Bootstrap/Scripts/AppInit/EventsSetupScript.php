@@ -1,10 +1,10 @@
 <?php
-namespace Application\Bootstrap\Scripts\AppInit;
+namespace CASS\Application\Bootstrap\Scripts\AppInit;
 
-use Application\Bootstrap\Scripts\AppInitScript;
-use Application\Bundle\Bundle;
-use Application\Events\EventsBootstrapInterface;
-use Application\Service\BundleService;
+use CASS\Application\Bootstrap\Scripts\AppInitScript;
+use CASS\Application\Bundle\Bundle;
+use CASS\Application\Events\EventsBootstrapInterface;
+use CASS\Application\Service\BundleService;
 use Cocur\Chain\Chain;
 use Evenement\EventEmitter;
 use Zend\Expressive\Application;

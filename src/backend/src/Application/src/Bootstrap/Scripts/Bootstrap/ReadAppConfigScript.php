@@ -1,10 +1,10 @@
 <?php
-namespace Application\Bootstrap\Scripts\Bootstrap;
+namespace CASS\Application\Bootstrap\Scripts\Bootstrap;
 
-use Application\Bootstrap\AppBuilder;
-use Application\Bootstrap\Scripts\BootstrapScript;
-use Application\Bundle\Bundle;
-use Application\Service\ConfigService;
+use CASS\Application\Bootstrap\AppBuilder;
+use CASS\Application\Bootstrap\Scripts\BootstrapScript;
+use CASS\Application\Bundle\Bundle;
+use CASS\Application\Service\ConfigService;
 use Cocur\Chain\Chain;
 
 class ReadAppConfigScript implements BootstrapScript

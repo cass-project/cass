@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Collection\Middleware\Request;
 
-use Application\REST\Request\Params\SchemaParams;
-use Application\REST\Service\JSONSchema;
+use CASS\Application\REST\Request\Params\SchemaParams;
+use CASS\Application\REST\Service\JSONSchema;
 use Domain\Collection\CollectionBundle;
 use Domain\Collection\Parameters\SetPublicOptionsParameters;
 

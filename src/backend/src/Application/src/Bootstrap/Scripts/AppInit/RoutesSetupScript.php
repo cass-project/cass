@@ -1,12 +1,12 @@
 <?php
-namespace Application\Bootstrap\Scripts\AppInit;
+namespace CASS\Application\Bootstrap\Scripts\AppInit;
 
-use Application\Bootstrap\Scripts\AppInitScript;
-use Application\Bundle\Bundle;
-use Application\Exception\InvalidRouteDefinition;
-use Application\Exception\UnknownRouteGroupException;
-use Application\Exception\UnknownRouteTypeException;
-use Application\Service\BundleService;
+use CASS\Application\Bootstrap\Scripts\AppInitScript;
+use CASS\Application\Bundle\Bundle;
+use CASS\Application\Exception\InvalidRouteDefinition;
+use CASS\Application\Exception\UnknownRouteGroupException;
+use CASS\Application\Exception\UnknownRouteTypeException;
+use CASS\Application\Service\BundleService;
 use Zend\Expressive\Application;
 
 class RoutesSetupScript implements AppInitScript

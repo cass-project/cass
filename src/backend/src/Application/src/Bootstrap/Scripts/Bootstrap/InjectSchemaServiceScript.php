@@ -1,10 +1,10 @@
 <?php
-namespace Application\Bootstrap\Scripts\Bootstrap;
+namespace CASS\Application\Bootstrap\Scripts\Bootstrap;
 
-use Application\Bootstrap\AppBuilder;
-use Application\Bootstrap\Scripts\BootstrapScript;
-use Application\REST\Request\Params\SchemaParams;
-use Application\REST\Service\SchemaService;
+use CASS\Application\Bootstrap\AppBuilder;
+use CASS\Application\Bootstrap\Scripts\BootstrapScript;
+use CASS\Application\REST\Request\Params\SchemaParams;
+use CASS\Application\REST\Service\SchemaService;
 
 class InjectSchemaServiceScript implements BootstrapScript
 {

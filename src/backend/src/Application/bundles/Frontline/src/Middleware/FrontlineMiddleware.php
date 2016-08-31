@@ -1,7 +1,7 @@
 <?php
-namespace Application\Frontline\Middleware;
+namespace CASS\Application\Frontline\Middleware;
 
-use Application\Frontline\Service\FrontlineService;
+use CASS\Application\Frontline\Service\FrontlineService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

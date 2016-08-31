@@ -9,7 +9,7 @@ use DI\Container;
 use Domain\Collection\Entity\Collection;
 use Domain\Collection\Entity\CollectionThemeEQEntity;
 use Domain\Collection\Repository\CollectionRepository;
-use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
+use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
 use Domain\Collection\Repository\CollectionThemeEQRepository;
 use Domain\Collection\Service\CollectionService;
 use League\Flysystem\Adapter\Local;

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Profile\Events;
 
-use Application\Events\EventsBootstrapInterface;
+use CASS\Application\Events\EventsBootstrapInterface;
 use Domain\Collection\Parameters\CreateCollectionParameters;
 use Domain\Collection\Service\CollectionService;
 use Domain\Profile\Entity\Profile;

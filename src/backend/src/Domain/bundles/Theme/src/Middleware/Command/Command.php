@@ -5,7 +5,7 @@ use Domain\Account\Service\AccountAppAccessService;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Theme\Service\ThemeService;
 
-abstract class Command implements \Application\Command\Command
+abstract class Command implements \CASS\Application\Command\Command
 {
     /** @var ThemeService */
     protected $themeService;

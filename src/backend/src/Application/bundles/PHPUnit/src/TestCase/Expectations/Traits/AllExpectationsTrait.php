@@ -1,10 +1,10 @@
 <?php
-namespace Application\PHPUnit\TestCase\Expectations\Traits;
+namespace CASS\Application\PHPUnit\TestCase\Expectations\Traits;
 
-use Application\PHPUnit\TestCase\Expectations\ExpectId;
-use Application\PHPUnit\TestCase\Expectations\ExpectImageCollection;
-use Application\PHPUnit\TestCase\Expectations\ExpectString;
-use Application\PHPUnit\TestCase\Expectations\ExpectUndefined;
+use CASS\Application\PHPUnit\TestCase\Expectations\ExpectId;
+use CASS\Application\PHPUnit\TestCase\Expectations\ExpectImageCollection;
+use CASS\Application\PHPUnit\TestCase\Expectations\ExpectString;
+use CASS\Application\PHPUnit\TestCase\Expectations\ExpectUndefined;
 
 trait AllExpectationsTrait
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\IM\Tests;
 
-use Application\PHPUnit\TestCase\MiddlewareTestCase;
+use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use Domain\IM\Tests\Fixtures\ProfilesFixture;

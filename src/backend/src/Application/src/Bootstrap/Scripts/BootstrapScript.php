@@ -1,7 +1,7 @@
 <?php
-namespace Application\Bootstrap\Scripts;
+namespace CASS\Application\Bootstrap\Scripts;
 
-use Application\Bootstrap\AppBuilder;
+use CASS\Application\Bootstrap\AppBuilder;
 
 interface BootstrapScript
 {

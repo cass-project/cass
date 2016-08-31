@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Theme;
 
-use Application\Frontline\FrontlineBundleInjectable;
-use Application\Bundle\GenericBundle;
+use CASS\Application\Frontline\FrontlineBundleInjectable;
+use CASS\Application\Bundle\GenericBundle;
 use Domain\Theme\Frontline\ThemeScript;
 
 class ThemeBundle extends GenericBundle implements FrontlineBundleInjectable

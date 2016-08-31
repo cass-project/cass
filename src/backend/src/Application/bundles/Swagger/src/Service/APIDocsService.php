@@ -1,14 +1,14 @@
 <?php
-namespace Application\Swagger\Service;
+namespace CASS\Application\Swagger\Service;
 
-use Application\Service\BundleService;
-use Application\Swagger\APIDocs\APIDocsBuilder;
-use Application\Swagger\APIDocs\APIDocsBuilderRequest;
+use CASS\Application\Service\BundleService;
+use CASS\Application\Swagger\APIDocs\APIDocsBuilder;
+use CASS\Application\Swagger\APIDocs\APIDocsBuilderRequest;
 
 class APIDocsService
 {
     /**
-     * @var \Application\Service\BundleService
+     * @var \CASS\Application\Service\BundleService
      */
     private $bundlesService;
 

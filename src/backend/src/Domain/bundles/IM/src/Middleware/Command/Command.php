@@ -8,7 +8,7 @@ use Domain\IM\Query\Source\SourceFactory;
 use Domain\IM\Service\SourceEntityLookupService;
 use Domain\IM\Service\IMService;
 
-abstract class Command implements \Application\Command\Command
+abstract class Command implements \CASS\Application\Command\Command
 {
     /** @var CurrentAccountService */
     protected $currentAccountService;

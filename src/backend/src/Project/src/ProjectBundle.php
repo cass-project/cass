@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Project;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 final class ProjectBundle extends GenericBundle
 {

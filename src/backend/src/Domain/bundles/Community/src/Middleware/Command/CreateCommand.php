@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Community\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Community\Middleware\Request\CreateCommunityRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

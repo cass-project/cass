@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Attachment;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 class AttachmentBundle extends GenericBundle
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Application\PHPUnit;
+namespace CASS\Application\PHPUnit;
 
 use Doctrine\ORM\EntityManager;
 use Zend\Expressive\Application;

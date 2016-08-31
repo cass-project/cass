@@ -5,7 +5,7 @@ use Domain\Auth\Service\CurrentAccountService;
 use Domain\Attachment\Service\FetchResourceService;
 use Domain\Attachment\Service\AttachmentService;
 
-abstract class Command implements \Application\Command\Command
+abstract class Command implements \CASS\Application\Command\Command
 {
     /** @var CurrentAccountService */
     protected $currentAccountService;

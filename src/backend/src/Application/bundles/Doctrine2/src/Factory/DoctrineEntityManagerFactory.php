@@ -1,7 +1,7 @@
 <?php
-namespace Application\Doctrine2\Factory;
+namespace CASS\Application\Bundles\Doctrine2\Factory;
 
-use Application\Service\BundleService;
+use CASS\Application\Service\BundleService;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
@@ -10,7 +10,7 @@ class DoctrineEntityManagerFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $bundleService =  $container->get(BundleService::class); /** @var \Application\Service\BundleService $bundleService */
+        $bundleService =  $container->get(BundleService::class); /** @var \CASS\Application\Service\BundleService $bundleService */
         $entitySourceDirs = [];
 
         foreach($bundleService->getBundles() as $bundle ){

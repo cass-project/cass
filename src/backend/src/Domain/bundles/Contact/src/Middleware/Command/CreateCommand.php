@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Contact\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Contact\Exception\DuplicateContactException;
 use Domain\Contact\Middleware\Request\CreateContactRequest;
 use Domain\Profile\Exception\ProfileNotFoundException;

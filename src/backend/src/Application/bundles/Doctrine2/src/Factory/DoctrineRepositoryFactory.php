@@ -1,5 +1,5 @@
 <?php
-namespace Application\Doctrine2\Factory;
+namespace CASS\Application\Bundles\Doctrine2\Factory;
 
 use DI\Container;
 use Doctrine\ORM\EntityManager;

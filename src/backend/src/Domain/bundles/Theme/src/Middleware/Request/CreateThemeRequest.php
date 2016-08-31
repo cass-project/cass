@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Theme\Middleware\Request;
 
-use Application\REST\Service\JSONSchema;
-use Application\REST\Request\Params\SchemaParams;
+use CASS\Application\REST\Service\JSONSchema;
+use CASS\Application\REST\Request\Params\SchemaParams;
 use Domain\Theme\Entity\Theme;
 use Domain\Theme\Parameters\CreateThemeParameters;
 use Domain\Theme\ThemeBundle;

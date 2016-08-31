@@ -1,5 +1,5 @@
 <?php
-namespace Application\Swagger\APIDocs;
+namespace CASS\Application\Swagger\APIDocs;
 
 use Cocur\Chain\Chain;
 

@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Project\Bundles\Console\Factory;
 
-use Application\DIFactoryInterface;
+use CASS\Application\DIFactoryInterface;
 use Interop\Container\ContainerInterface;
 use Symfony\Component\Console\Application as ConsoleApplication;
 

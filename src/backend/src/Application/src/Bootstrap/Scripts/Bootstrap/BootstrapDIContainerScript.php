@@ -1,12 +1,12 @@
 <?php
-namespace Application\Bootstrap\Scripts\Bootstrap;
+namespace CASS\Application\Bootstrap\Scripts\Bootstrap;
 
 use DI\Container;
 use DI\ContainerBuilder;
-use Application\Bootstrap\AppBuilder;
-use Application\Bootstrap\Scripts\BootstrapScript;
-use Application\Service\BundleService;
-use Application\Service\ConfigService;
+use CASS\Application\Bootstrap\AppBuilder;
+use CASS\Application\Bootstrap\Scripts\BootstrapScript;
+use CASS\Application\Service\BundleService;
+use CASS\Application\Service\ConfigService;
 
 class BootstrapDIContainerScript implements BootstrapScript
 {

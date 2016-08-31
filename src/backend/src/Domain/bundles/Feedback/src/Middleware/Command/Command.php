@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Feedback\Middleware\Command;
 
-use Application\Command\Command as CommandInterface;
+use CASS\Application\Command\Command as CommandInterface;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Feedback\Service\FeedbackService;
 

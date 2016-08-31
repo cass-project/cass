@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Colors\Middleware;
 
-use Application\REST\Response\GenericResponseBuilder;
-use Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Service\CommandService;
 use Domain\Colors\Middleware\Command\GetColorsCommand;
 use Domain\Colors\Middleware\Command\GetPalettesCommand;
 use Psr\Http\Message\ResponseInterface as Response;

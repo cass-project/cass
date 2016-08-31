@@ -1,8 +1,8 @@
 <?php
-namespace Application\Version\Frontline;
+namespace CASS\Application\Version\Frontline;
 
-use Application\Frontline\FrontlineScript;
-use Application\Version\Service\VersionService;
+use CASS\Application\Frontline\FrontlineScript;
+use CASS\Application\Version\Service\VersionService;
 
 final class VersionFrontlineScript implements FrontlineScript
 {

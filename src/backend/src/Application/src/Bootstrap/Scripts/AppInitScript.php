@@ -1,5 +1,5 @@
 <?php
-namespace Application\Bootstrap\Scripts;
+namespace CASS\Application\Bootstrap\Scripts;
 
 use Zend\Expressive\Application;
 

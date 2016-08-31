@@ -1,7 +1,7 @@
 <?php
-namespace Application\Frontline;
+namespace CASS\Application\Frontline;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 class FrontlineBundle extends GenericBundle
 {

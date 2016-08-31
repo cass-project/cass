@@ -1,7 +1,7 @@
 <?php
-namespace Application\Version;
+namespace CASS\Application\Version;
 
-use Application\Version\Middleware\VersionMiddleware;
+use CASS\Application\Version\Middleware\VersionMiddleware;
 use Zend\Expressive\Application;
 
 return [

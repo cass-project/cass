@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Collection\Middleware;
 
-use Application\REST\Response\GenericResponseBuilder;
-use Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Service\CommandService;
 use Domain\Collection\Exception\CollectionNotFoundException;
 use Domain\Collection\Middleware\Command\CreateCommand;
 use Domain\Collection\Middleware\Command\DeleteCommand;

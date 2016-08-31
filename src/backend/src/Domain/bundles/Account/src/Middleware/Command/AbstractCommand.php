@@ -5,7 +5,7 @@ use Domain\Account\Service\AccountService;
 use Domain\Auth\Service\AuthService;
 use Domain\Auth\Service\CurrentAccountService;
 
-abstract class AbstractCommand implements \Application\Command\Command
+abstract class AbstractCommand implements \CASS\Application\Command\Command
 {
     /** @var AccountService */
     protected $accountService;

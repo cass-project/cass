@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Profile\Service;
 
-use Application\Service\EventEmitterAware\EventEmitterAwareService;
-use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
+use CASS\Application\Service\EventEmitterAware\EventEmitterAwareService;
+use CASS\Application\Service\EventEmitterAware\EventEmitterAwareTrait;
 use Domain\Account\Entity\Account;
 use Domain\Account\Service\AccountService;
 use Domain\Auth\Service\CurrentAccountService;

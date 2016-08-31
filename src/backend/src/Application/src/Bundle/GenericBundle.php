@@ -1,5 +1,5 @@
 <?php
-namespace Application\Bundle;
+namespace CASS\Application\Bundle;
 
 abstract class GenericBundle implements Bundle
 {

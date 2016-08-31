@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Post\Middleware\Command;
  
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Post\Middleware\Request\EditPostRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

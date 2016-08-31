@@ -1,5 +1,5 @@
 <?php
-namespace Application\PHPUnit;
+namespace CASS\Application\PHPUnit;
 
 use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response\SapiEmitter;

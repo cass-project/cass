@@ -1,7 +1,7 @@
 <?php
-namespace Application\Command;
+namespace CASS\Application\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

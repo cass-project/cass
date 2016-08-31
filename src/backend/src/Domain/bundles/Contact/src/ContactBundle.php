@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Contact;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 final class ContactBundle extends GenericBundle
 {

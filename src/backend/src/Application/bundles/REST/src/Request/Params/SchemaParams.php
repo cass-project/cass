@@ -1,9 +1,9 @@
 <?php
-namespace Application\REST\Request\Params;
+namespace CASS\Application\REST\Request\Params;
 
-use Application\REST\Service\JSONSchema;
+use CASS\Application\REST\Service\JSONSchema;
 use Psr\Http\Message\ServerRequestInterface;
-use Application\REST\Service\SchemaService;
+use CASS\Application\REST\Service\SchemaService;
 
 class InvalidJSONSchema extends \Exception {}
 

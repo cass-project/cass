@@ -1,5 +1,5 @@
 <?php
-namespace Application;
+namespace CASS\Application;
 
 return [
     'ENVIRONMENT' => 'development',

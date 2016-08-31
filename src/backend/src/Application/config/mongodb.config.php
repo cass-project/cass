@@ -1,5 +1,5 @@
 <?php
-namespace Application\MongoDB;
+namespace CASS\Application\MongoDB;
 
 use function DI\object;
 use function DI\factory;

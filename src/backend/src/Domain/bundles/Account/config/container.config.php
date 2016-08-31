@@ -11,7 +11,7 @@ use Domain\Account\Entity\OAuthAccount;
 use Domain\Account\Repository\AccountAppAccessRepository;
 use Domain\Account\Repository\AccountRepository;
 use Domain\Account\Repository\OAuthAccountRepository;
-use Application\Doctrine2\Factory\DoctrineRepositoryFactory;
+use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
 
 return [
     'php-di' => [

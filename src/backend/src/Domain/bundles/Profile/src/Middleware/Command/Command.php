@@ -8,7 +8,7 @@ use Domain\Profile\Formatter\ProfileExtendedFormatter;
 use Domain\Profile\Service\ProfileService;
 use Domain\Profile\Validation\ProfileValidationService;
 
-abstract class Command implements \Application\Command\Command
+abstract class Command implements \CASS\Application\Command\Command
 {
     /** @var CurrentAccountService */
     protected $currentAccountService;

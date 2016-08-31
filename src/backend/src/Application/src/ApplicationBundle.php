@@ -1,7 +1,7 @@
 <?php
-namespace Application;
+namespace CASS\Application;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 class ApplicationBundle extends GenericBundle
 {

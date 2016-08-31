@@ -1,8 +1,8 @@
 <?php
-namespace Application\Version\Middleware;
+namespace CASS\Application\Version\Middleware;
 
-use Application\REST\Response\ResponseBuilder;
-use Application\Version\Service\VersionService;
+use CASS\Application\REST\Response\ResponseBuilder;
+use CASS\Application\Version\Service\VersionService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

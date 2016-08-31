@@ -12,7 +12,7 @@ $router    = new FastRouteRouter();
 $emitter   = new EmitterStack();
 $emitter->push(new SapiEmitter());
 
-$RESTApiApplication = new \Zend\Expressive\Application($router, $container, new \Application\Bootstrap\FinalHandler(), $emitter);
+$RESTApiApplication = new \Zend\Expressive\Application($router, $container, new \CASS\Application\Bootstrap\FinalHandler(), $emitter);
 $RESTApiApplication->pipe('/backend/api', $application);
 $RESTApiApplication->pipeRoutingMiddleware();
 $RESTApiApplication->pipeDispatchMiddleware();

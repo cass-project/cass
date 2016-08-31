@@ -1,4 +1,4 @@
 <?php
-namespace Application\Exception;
+namespace CASS\Application\Exception;
 
 class BadCommandCallException extends \Exception {}

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\IM\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Community\Exception\CommunityNotFoundException;
 use Domain\IM\Entity\Message;
 use Domain\IM\Middleware\Request\SendMessageRequest;

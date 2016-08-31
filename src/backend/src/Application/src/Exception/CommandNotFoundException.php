@@ -1,5 +1,5 @@
 <?php
-namespace Application\Exception;
+namespace CASS\Application\Exception;
 
 /** @deprecated */
 class CommandNotFoundException extends \Exception {}

@@ -1,13 +1,13 @@
 <?php
 namespace Domain\ProfileCommunities\Middleware\Command;
 
-use Application\Exception\CommandNotFoundException;
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\Exception\CommandNotFoundException;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\ProfileCommunities\Service\ProfileCommunitiesService;
 use Psr\Http\Message\ServerRequestInterface;
 
-abstract class Command implements \Application\Command\Command
+abstract class Command implements \CASS\Application\Command\Command
 {
     /** @var ProfileCommunitiesService */
     protected $profileCommunitiesService;

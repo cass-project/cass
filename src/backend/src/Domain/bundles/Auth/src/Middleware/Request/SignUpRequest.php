@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Auth\Middleware\Request;
 
-use Application\REST\Request\Params\SchemaParams;
-use Application\REST\Service\JSONSchema;
+use CASS\Application\REST\Request\Params\SchemaParams;
+use CASS\Application\REST\Service\JSONSchema;
 use Domain\Auth\AuthBundle;
 use Domain\Auth\Parameters\SignUpParameters;
 

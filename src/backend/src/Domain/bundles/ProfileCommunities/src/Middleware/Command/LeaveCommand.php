@@ -1,7 +1,7 @@
 <?php
 namespace Domain\ProfileCommunities\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\ProfileCommunities\Exception\AlreadyLeavedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

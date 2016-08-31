@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Feed\Middleware;
 
-use Application\REST\Response\GenericResponseBuilder;
-use Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Service\CommandService;
 use Domain\Feed\Exception\AbstractFeedException;
 use Domain\Feed\Middleware\Command\CollectionCommand;
 use Domain\Feed\Middleware\Command\CommunityCommand;

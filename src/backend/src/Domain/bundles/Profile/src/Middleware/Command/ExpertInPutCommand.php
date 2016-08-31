@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Profile\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Profile\Exception\ProfileNotFoundException;
 use Domain\Profile\Middleware\Request\ExpertInRequest;
 use Psr\Http\Message\ResponseInterface;

@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Feedback\Middleware;
 
-use Application\REST\Response\GenericResponseBuilder;
-use Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Service\CommandService;
 use Domain\Feedback\Middleware\Command\CreateCommand;
 use Domain\Feedback\Middleware\Command\CreateFeedbackResponseCommand;
 use Domain\Feedback\Middleware\Command\DeleteCommand;

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Collection\Events;
 
-use Application\Events\EventsBootstrapInterface;
+use CASS\Application\Events\EventsBootstrapInterface;
 use Domain\Collection\Entity\Collection;
 use Domain\Collection\Entity\CollectionThemeEQEntity;
 use Domain\Collection\Repository\CollectionRepository;

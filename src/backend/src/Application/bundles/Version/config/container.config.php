@@ -1,11 +1,11 @@
 <?php
-namespace Application\Version;
+namespace CASS\Application\Version;
 
 use function DI\object;
 use function DI\factory;
 use function DI\get;
 
-use Application\Version\Service\VersionService;
+use CASS\Application\Version\Service\VersionService;
 
 return [
     'php-di' => [

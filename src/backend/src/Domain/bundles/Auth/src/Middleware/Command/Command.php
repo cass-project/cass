@@ -1,10 +1,10 @@
 <?php
 namespace Domain\Auth\Middleware\Command;
 
-use Application\Command\Command as CommandInterface;
+use CASS\Application\Command\Command as CommandInterface;
 use Domain\Auth\Formatter\SignInFormatter;
 use Domain\Auth\Service\AuthService;
-use Application\Frontline\Service\FrontlineService;
+use CASS\Application\Frontline\Service\FrontlineService;
 
 abstract class Command implements CommandInterface
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\OpenGraph;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 final class OpenGraphBundle extends GenericBundle
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Theme\Service;
 
-use Application\Service\EventEmitterAware\EventEmitterAwareService;
-use Application\Service\EventEmitterAware\EventEmitterAwareTrait;
+use CASS\Application\Service\EventEmitterAware\EventEmitterAwareService;
+use CASS\Application\Service\EventEmitterAware\EventEmitterAwareTrait;
 use CASS\Util\GenerateRandomString;
 use CASS\Util\SerialManager\SerialManager;
 use Domain\Theme\Entity\Theme;

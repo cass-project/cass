@@ -1,11 +1,11 @@
 <?php
 namespace Domain\Theme\Tests;
 
-use Application\PHPUnit\RESTRequest\RESTRequest;
+use CASS\Application\PHPUnit\RESTRequest\RESTRequest;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
-use Application\PHPUnit\TestCase\MiddlewareTestCase;
+use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
 
 /**
  * @backupGlobals disabled

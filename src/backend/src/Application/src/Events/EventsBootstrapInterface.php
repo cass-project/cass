@@ -1,5 +1,5 @@
 <?php
-namespace Application\Events;
+namespace CASS\Application\Events;
 
 use Evenement\EventEmitterInterface;
 

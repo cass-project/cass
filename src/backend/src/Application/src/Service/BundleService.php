@@ -1,7 +1,7 @@
 <?php
-namespace Application\Service;
+namespace CASS\Application\Service;
 
-use Application\Bundle\Bundle;
+use CASS\Application\Bundle\Bundle;
 
 class BundleService
 {

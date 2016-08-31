@@ -1,7 +1,7 @@
 <?php
 namespace Domain\ProfileCommunities\Tests\Fixtures;
 
-use Application\PHPUnit\Fixture;
+use CASS\Application\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;

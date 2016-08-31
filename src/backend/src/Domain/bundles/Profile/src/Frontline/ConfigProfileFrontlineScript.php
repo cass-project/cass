@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Profile\Frontline;
 
-use Application\Frontline\FrontlineScript;
+use CASS\Application\Frontline\FrontlineScript;
 use Domain\Profile\Service\ProfileService;
 
 class ConfigProfileFrontlineScript implements FrontlineScript

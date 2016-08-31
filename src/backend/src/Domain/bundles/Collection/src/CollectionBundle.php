@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Collection;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 class CollectionBundle extends GenericBundle
 {

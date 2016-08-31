@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Feedback\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Feedback\Middleware\Request\CreateFeedbackResponseRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

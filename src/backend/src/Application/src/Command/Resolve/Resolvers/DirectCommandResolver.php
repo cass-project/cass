@@ -1,10 +1,10 @@
 <?php
-namespace Application\Command\Resolve\Resolvers;
+namespace CASS\Application\Command\Resolve\Resolvers;
 
-use Application\Command\Command;
+use CASS\Application\Command\Command;
 use DI\Container;
-use Application\Command\Exception\UnresolvableCommandException;
-use Application\Command\Resolve\CommandResolver;
+use CASS\Application\Command\Exception\UnresolvableCommandException;
+use CASS\Application\Command\Resolve\CommandResolver;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class DirectCommandResolver implements CommandResolver

@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Profile\Events;
 
-use Application\Events\EventsBootstrapInterface;
-use Application\Exception\PermissionsDeniedException;
+use CASS\Application\Events\EventsBootstrapInterface;
+use CASS\Application\Exception\PermissionsDeniedException;
 use Domain\Auth\Service\CurrentAccountService;
 use Domain\Collection\Entity\Collection;
 use Domain\Collection\Service\CollectionService;

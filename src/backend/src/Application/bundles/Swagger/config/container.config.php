@@ -1,5 +1,5 @@
 <?php
-namespace Application\Swagger;
+namespace CASS\Application\Swagger;
 
 use function DI\object;
 use function DI\factory;

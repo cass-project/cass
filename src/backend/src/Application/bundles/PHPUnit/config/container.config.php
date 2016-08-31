@@ -1,5 +1,5 @@
 <?php
-namespace Application\PHPUnit;
+namespace CASS\Application\PHPUnit;
 
 use function DI\object;
 use function DI\factory;

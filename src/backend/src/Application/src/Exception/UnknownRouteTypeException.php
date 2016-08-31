@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Exception;
+namespace CASS\Application\Exception;
 
 
 class UnknownRouteTypeException extends \Exception

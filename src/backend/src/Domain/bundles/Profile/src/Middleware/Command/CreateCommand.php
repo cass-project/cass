@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Profile\Middleware\Command;
 
-use Application\Exception\BadCommandCallException;
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\Exception\BadCommandCallException;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Profile\Exception\MaxProfilesReachedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

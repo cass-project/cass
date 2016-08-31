@@ -1,9 +1,9 @@
 <?php
 namespace Domain\Auth\Middleware;
 
-use Application\REST\Response\GenericResponseBuilder;
-use Application\Frontline\Service\FrontlineService;
-use Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Frontline\Service\FrontlineService;
+use CASS\Application\Service\CommandService;
 use Domain\Account\Exception\AccountNotFoundException;
 use Domain\Auth\Middleware\Command\OAuth\BattleNetCommand;
 use Domain\Auth\Middleware\Command\OAuth\FacebookCommand;

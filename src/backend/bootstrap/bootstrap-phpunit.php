@@ -5,9 +5,9 @@ namespace {
 
 namespace PhpUnitBootstrap
 {
-    use Application\ApplicationBundle;
-    use Application\Bootstrap\AppBuilder;
-    use Application\PHPUnit\TestCase\MiddlewareTestCase;
+    use CASS\Application\ApplicationBundle;
+    use CASS\Application\Bootstrap\AppBuilder;
+    use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
     use CASS\Project\ProjectBundle;
     use Domain\DomainBundle;
 

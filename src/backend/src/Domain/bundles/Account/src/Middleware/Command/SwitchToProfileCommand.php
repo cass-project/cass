@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Account\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Account\Exception\AccountNotContainsProfileException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

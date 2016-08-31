@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Collection\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Collection\Middleware\Request\CreateCollectionRequest;
 use Domain\Community\Exception\CommunityNotFoundException;
 use Domain\Profile\Exception\ProfileNotFoundException;

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\ProfileCommunities;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 class ProfileCommunitiesBundle extends GenericBundle
 {

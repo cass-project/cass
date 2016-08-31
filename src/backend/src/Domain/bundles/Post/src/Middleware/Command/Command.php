@@ -5,7 +5,7 @@ use Domain\Auth\Service\CurrentAccountService;
 use Domain\Post\Formatter\PostFormatter;
 use Domain\Post\Service\PostService;
 
-abstract class Command implements \Application\Command\Command
+abstract class Command implements \CASS\Application\Command\Command
 {
     /** @var PostService */
     protected $postService;

@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Contact\Middleware;
 
-use Application\REST\Response\GenericResponseBuilder;
-use Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Service\CommandService;
 use Domain\Contact\Middleware\Command\CreateCommand;
 use Domain\Contact\Middleware\Command\DeleteCommand;
 use Domain\Contact\Middleware\Command\GetCommand;

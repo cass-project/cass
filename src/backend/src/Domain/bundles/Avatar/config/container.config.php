@@ -6,7 +6,7 @@ use function DI\factory;
 use function DI\get;
 
 use DI\Container;
-use Application\Service\BundleService;
+use CASS\Application\Service\BundleService;
 use Domain\Avatar\Service\AvatarService;
 use Domain\Avatar\Service\Strategy\FileAvatarStrategy;
 use Domain\Avatar\Service\Strategy\MockAvatarStrategy;

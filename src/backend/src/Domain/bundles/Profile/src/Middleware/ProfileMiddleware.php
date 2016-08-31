@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Profile\Middleware;
 
-use Application\Service\CommandService;
-use Application\REST\Response\GenericResponseBuilder;
+use CASS\Application\Service\CommandService;
+use CASS\Application\REST\Response\GenericResponseBuilder;
 use Domain\Profile\Middleware\Command\CreateCommand;
 use Domain\Profile\Middleware\Command\DeleteCommand;
 use Domain\Profile\Middleware\Command\EditPersonalCommand;

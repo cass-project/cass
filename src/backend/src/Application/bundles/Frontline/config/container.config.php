@@ -1,11 +1,11 @@
 <?php
-namespace Application\Frontline;
+namespace CASS\Application\Frontline;
 
 use function DI\object;
 use function DI\factory;
 use function DI\get;
 
-use Application\Frontline\Service\FrontlineService;
+use CASS\Application\Frontline\Service\FrontlineService;
 
 return [
     'php-di' => [

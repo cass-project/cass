@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Community\Middleware\Command;
 
-use Application\REST\Response\ResponseBuilder;
+use CASS\Application\REST\Response\ResponseBuilder;
 use Domain\Avatar\Exception\ImageServiceException;
 use Domain\Avatar\Middleware\Request\UploadImageRequest;
 use Domain\Community\Exception\CommunityNotFoundException;

@@ -1,5 +1,5 @@
 <?php
-namespace Application\Doctrine2\Service;
+namespace CASS\Application\Bundles\Doctrine2\Service;
 
 use Doctrine\ORM\EntityManager;
 

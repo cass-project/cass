@@ -1,7 +1,7 @@
 <?php
-namespace Application\Doctrine2;
+namespace CASS\Application\Bundles\Doctrine2;
 
-use Application\Bundle\GenericBundle;
+use CASS\Application\Bundle\GenericBundle;
 
 class Doctrine2Bundle extends GenericBundle
 {

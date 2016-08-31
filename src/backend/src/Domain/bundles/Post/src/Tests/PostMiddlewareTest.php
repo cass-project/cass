@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Post\Tests;
 
-use Application\PHPUnit\RESTRequest\RESTRequest;
-use Application\PHPUnit\TestCase\MiddlewareTestCase;
+use CASS\Application\PHPUnit\RESTRequest\RESTRequest;
+use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;

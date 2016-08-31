@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Avatar\Middleware\Request;
 
-use Application\Exception\FileNotUploadedException;
-use Application\REST\Request\Params\RequestParamsInterface;
+use CASS\Application\Exception\FileNotUploadedException;
+use CASS\Application\REST\Request\Params\RequestParamsInterface;
 use CASS\Util\Definitions\Point;
 use Domain\Avatar\Parameters\UploadImageParameters;
 use Psr\Http\Message\ServerRequestInterface;
