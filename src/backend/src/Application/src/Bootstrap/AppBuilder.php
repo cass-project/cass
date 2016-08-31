@@ -9,7 +9,7 @@ use CASS\Application\Bootstrap\Scripts\Bootstrap\BundleServiceScript;
 use CASS\Application\Bootstrap\Scripts\Bootstrap\BootstrapDIContainerScript;
 use CASS\Application\Bootstrap\Scripts\Bootstrap\InjectSchemaServiceScript;
 use CASS\Application\Bootstrap\Scripts\Bootstrap\ReadAppConfigScript;
-use CASS\Application\PHPUnit\PHPUnitEmitter;
+use ZEA2\Platform\Bundles\PHPUnit\PHPUnitEmitter;
 use CASS\Application\Service\BundleService;
 use CASS\Application\Service\ConfigService;
 use Zend\Diactoros\Response\SapiEmitter;

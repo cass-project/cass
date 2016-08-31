@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Colors\Tests;
 
-use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Colors\Entity\Color;
+use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
 
 /**
  * @backupGlobals disabled

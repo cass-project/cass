@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Theme\Tests\Fixtures;
 
-use CASS\Application\PHPUnit\Fixture;
+use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
 use Domain\Theme\Entity\Theme;
 use Domain\Theme\Parameters\CreateThemeParameters;

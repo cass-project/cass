@@ -1,11 +1,11 @@
 <?php
 namespace Domain\Theme\Tests;
 
-use CASS\Application\PHPUnit\RESTRequest\RESTRequest;
+use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
-use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
+use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
 
 /**
  * @backupGlobals disabled

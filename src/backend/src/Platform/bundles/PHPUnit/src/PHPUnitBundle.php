@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Application\PHPUnit;
+namespace ZEA2\Platform\Bundles\PHPUnit;
 
 use CASS\Application\Bundle\GenericBundle;
 

@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Community\Tests\Fixtures;
 
-use CASS\Application\PHPUnit\Fixture;
+use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
 use Domain\Community\Entity\Community;
 use Domain\Community\Parameters\CreateCommunityParameters;

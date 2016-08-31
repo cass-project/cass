@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Post\Tests\Fixtures;
 
-use CASS\Application\PHPUnit\Fixture;
+use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;

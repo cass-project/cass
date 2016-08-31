@@ -2,7 +2,7 @@
 
 namespace Domain\Feedback\Tests\Fixture;
 
-use CASS\Application\PHPUnit\Fixture;
+use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Feedback\Entity\Feedback;

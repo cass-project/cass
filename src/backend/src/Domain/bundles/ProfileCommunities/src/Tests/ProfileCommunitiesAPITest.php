@@ -1,8 +1,8 @@
 <?php
 namespace Domain\ProfileCommunities\Tests;
 
-use CASS\Application\PHPUnit\RESTRequest\RESTRequest;
-use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
+use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;
+use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;

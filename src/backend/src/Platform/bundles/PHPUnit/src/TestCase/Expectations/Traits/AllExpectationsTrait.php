@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Application\PHPUnit\TestCase\Expectations\Traits;
+namespace ZEA2\Platform\Bundles\PHPUnit\TestCase\Expectations\Traits;
 
-use CASS\Application\PHPUnit\TestCase\Expectations\ExpectId;
-use CASS\Application\PHPUnit\TestCase\Expectations\ExpectImageCollection;
-use CASS\Application\PHPUnit\TestCase\Expectations\ExpectString;
-use CASS\Application\PHPUnit\TestCase\Expectations\ExpectUndefined;
+use ZEA2\Platform\Bundles\PHPUnit\TestCase\Expectations\ExpectId;
+use ZEA2\Platform\Bundles\PHPUnit\TestCase\Expectations\ExpectImageCollection;
+use ZEA2\Platform\Bundles\PHPUnit\TestCase\Expectations\ExpectString;
+use ZEA2\Platform\Bundles\PHPUnit\TestCase\Expectations\ExpectUndefined;
 
 trait AllExpectationsTrait
 {

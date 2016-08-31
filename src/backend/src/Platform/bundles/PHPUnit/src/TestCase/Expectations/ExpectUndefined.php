@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Application\PHPUnit\TestCase\Expectations;
+namespace ZEA2\Platform\Bundles\PHPUnit\TestCase\Expectations;
 
 class ExpectUndefined
 {

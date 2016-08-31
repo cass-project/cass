@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Application\PHPUnit\RESTRequest;
+namespace ZEA2\Platform\Bundles\PHPUnit\RESTRequest;
 
-use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
+use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Uri;

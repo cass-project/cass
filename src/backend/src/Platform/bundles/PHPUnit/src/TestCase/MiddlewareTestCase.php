@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Application\PHPUnit\TestCase;
+namespace ZEA2\Platform\Bundles\PHPUnit\TestCase;
 
 use CASS\Application\Bundles\Doctrine2\Service\TransactionService;
-use CASS\Application\PHPUnit\Fixture;
-use CASS\Application\PHPUnit\RESTRequest\RESTRequest;
-use CASS\Application\PHPUnit\TestCase\Expectations\Traits\AllExpectationsTrait;
+use ZEA2\Platform\Bundles\PHPUnit\Fixture;
+use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;
+use ZEA2\Platform\Bundles\PHPUnit\TestCase\Expectations\Traits\AllExpectationsTrait;
 use CASS\Application\REST\Request\Params\SchemaParams;
 use CASS\Application\REST\Service\SchemaService;
 use Doctrine\ORM\EntityManager;
@@ -12,7 +12,7 @@ use Domain\Auth\Service\CurrentAccountService;
 use MongoDB\Database;
 use PHPUnit_Framework_TestCase;
 use Zend\Diactoros\Response;
-use CASS\Application\PHPUnit\RESTRequest\Result;
+use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\Result;
 use Zend\Expressive\Application;
 use DI\Container;
 
@@ -53,7 +53,7 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
      * Возвращает массив фикстур, которые применяются к каждому юнит-тесту
      *
      * Массив должен быть пустым, либо содержать набор объектов классов,
-     *  имплементирующие интерфейс CASS\Application\PHPUnit\Fixture
+     *  имплементирующие интерфейс ZEA2\Platform\Bundles\PHPUnit\Fixture
      *
      * Каждая фикстура содержит в себе статическую переменную, в которой хранятся объект/записи, созданные ей
      *
@@ -229,7 +229,7 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
 
     /**
      * Используйте в качестве плейсхолдера для автогенерируемых значение в эталонных массивах (для expectJSONBody)
-     * @return \CASS\Application\PHPUnit\TestCase\Expectations\ExpectId
+     * @return \ZEA2\Platform\Bundles\PHPUnit\TestCase\Expectations\ExpectId
      */
 
     protected function expectJSONContentType(): self {

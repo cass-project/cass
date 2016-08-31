@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Application\Version\Tests;
 
-use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
+use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
 
 /**
  * @backupGlobals disabled

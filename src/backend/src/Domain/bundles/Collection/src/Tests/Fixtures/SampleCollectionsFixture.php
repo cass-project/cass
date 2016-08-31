@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Collection\Tests\Fixtures;
 
-use CASS\Application\PHPUnit\Fixture;
+use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
 use Domain\Collection\Entity\Collection;
 use Domain\Collection\Parameters\CreateCollectionParameters;
