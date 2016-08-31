@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Application\Swagger\Service;
+namespace ZEA2\Platform\Bundles\Swagger\Service;
 
 use CASS\Application\Service\BundleService;
-use CASS\Application\Swagger\APIDocs\APIDocsBuilder;
-use CASS\Application\Swagger\APIDocs\APIDocsBuilderRequest;
+use ZEA2\Platform\Bundles\Swagger\APIDocs\APIDocsBuilder;
+use ZEA2\Platform\Bundles\Swagger\APIDocs\APIDocsBuilderRequest;
 
 class APIDocsService
 {

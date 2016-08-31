@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Application\Swagger\APIDocs;
+namespace ZEA2\Platform\Bundles\Swagger\APIDocs;
 
 use Cocur\Chain\Chain;
 use Symfony\Component\Yaml\Yaml;

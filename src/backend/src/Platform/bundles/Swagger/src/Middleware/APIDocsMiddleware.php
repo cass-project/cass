@@ -1,16 +1,16 @@
 <?php
-namespace CASS\Application\Swagger\Middleware;
+namespace ZEA2\Platform\Bundles\Swagger\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use CASS\Application\Swagger\Service\APIDocsService;
+use ZEA2\Platform\Bundles\Swagger\Service\APIDocsService;
 use Zend\Stratigility\MiddlewareInterface;
 
 class APIDocsMiddleware implements MiddlewareInterface
 {
     /**
-     * @var \CASS\Application\Swagger\Service\APIDocsService
+     * @var \ZEA2\Platform\Bundles\Swagger\Service\APIDocsService
      */
     private $apiDocsService;
 
