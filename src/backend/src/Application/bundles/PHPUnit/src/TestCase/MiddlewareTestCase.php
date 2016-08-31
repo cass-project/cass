@@ -2,9 +2,9 @@
 namespace Application\PHPUnit\TestCase;
 
 use Application\Doctrine2\Service\TransactionService;
-use Application\PHPUnit\Expectations\Traits\AllExpectationsTrait;
 use Application\PHPUnit\Fixture;
 use Application\PHPUnit\RESTRequest\RESTRequest;
+use Application\PHPUnit\TestCase\Expectations\Traits\AllExpectationsTrait;
 use Application\REST\Request\Params\SchemaParams;
 use Application\REST\Service\SchemaService;
 use Doctrine\ORM\EntityManager;

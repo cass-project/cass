@@ -1,5 +1,5 @@
 <?php
-namespace Application\PHPUnit\Expectations\Traits;
+namespace Application\PHPUnit\TestCase\Expectations\Traits;
 
 use Application\PHPUnit\TestCase\Expectations\ExpectId;
 use Application\PHPUnit\TestCase\Expectations\ExpectImageCollection;
