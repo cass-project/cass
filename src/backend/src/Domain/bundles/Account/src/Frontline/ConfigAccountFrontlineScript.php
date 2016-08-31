@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Account\Frontline;
 
-use CASS\Application\Frontline\FrontlineScript;
+use CASS\Application\Bundles\Frontline\FrontlineScript;
 use Domain\Account\Scripts\ProcessAccountDeleteRequestsScript;
 
 class ConfigAccountFrontlineScript implements FrontlineScript

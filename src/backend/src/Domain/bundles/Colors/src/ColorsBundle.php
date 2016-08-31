@@ -2,7 +2,7 @@
 namespace Domain\Colors;
 
 use CASS\Application\Bundle\GenericBundle;
-use CASS\Application\Frontline\FrontlineBundleInjectable;
+use CASS\Application\Bundles\Frontline\FrontlineBundleInjectable;
 use Domain\Colors\Frontline\ConfigColorsFrontlineScript;
 
 final class ColorsBundle extends GenericBundle implements FrontlineBundleInjectable

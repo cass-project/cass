@@ -2,7 +2,7 @@
 namespace Domain\Profile;
 
 use CASS\Application\Bundle\GenericBundle;
-use CASS\Application\Frontline\FrontlineBundleInjectable;
+use CASS\Application\Bundles\Frontline\FrontlineBundleInjectable;
 use Domain\Profile\Frontline\ConfigProfileFrontlineScript;
 
 class ProfileBundle extends GenericBundle implements FrontlineBundleInjectable

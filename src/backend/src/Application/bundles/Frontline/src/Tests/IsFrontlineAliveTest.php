@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Application\Frontline\Tests;
+namespace CASS\Application\Bundles\Frontline\Tests;
 
 use CASS\Application\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;

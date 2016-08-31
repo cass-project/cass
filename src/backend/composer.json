@@ -8,7 +8,7 @@
       "CASS\\Project\\": "src/Project/src",
       "CASS\\Util\\": "src/Util/src",
       "CASS\\Application\\Bundles\\Doctrine2\\": "src/Application/bundles/Doctrine2/src",
-      "CASS\\Application\\Frontline\\": "src/Application/bundles/Frontline/src",
+      "CASS\\Application\\Bundles\\Frontline\\": "src/Application/bundles/Frontline/src",
       "CASS\\Application\\REST\\": "src/Application/bundles/REST/src",
       "CASS\\Application\\Swagger\\": "src/Application/bundles/Swagger/src",
       "CASS\\Application\\PHPUnit\\": "src/Application/bundles/PHPUnit/src",

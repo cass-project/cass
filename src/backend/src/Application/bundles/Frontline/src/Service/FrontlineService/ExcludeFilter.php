@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Application\Frontline\Service\FrontlineService;
+namespace CASS\Application\Bundles\Frontline\Service\FrontlineService;
 
-use CASS\Application\Frontline\FrontlineScript;
+use CASS\Application\Bundles\Frontline\FrontlineScript;
 
 class ExcludeFilter implements Filter
 {

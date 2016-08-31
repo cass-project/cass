@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Colors\Frontline;
 
-use CASS\Application\Frontline\FrontlineScript;
+use CASS\Application\Bundles\Frontline\FrontlineScript;
 use Domain\Colors\Entity\Palette;
 use Domain\Colors\Service\ColorsService;
 

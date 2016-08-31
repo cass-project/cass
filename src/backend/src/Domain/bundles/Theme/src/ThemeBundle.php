@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Theme;
 
-use CASS\Application\Frontline\FrontlineBundleInjectable;
+use CASS\Application\Bundles\Frontline\FrontlineBundleInjectable;
 use CASS\Application\Bundle\GenericBundle;
 use Domain\Theme\Frontline\ThemeScript;
 

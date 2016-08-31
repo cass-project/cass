@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Post\Frontline;
 
-use CASS\Application\Frontline\FrontlineScript;
+use CASS\Application\Bundles\Frontline\FrontlineScript;
 use Domain\Post\PostType\PostTypeFactory;
 
 final class PostTypeFrontlineScript implements FrontlineScript

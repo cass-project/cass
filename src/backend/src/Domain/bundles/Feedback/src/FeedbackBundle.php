@@ -2,7 +2,7 @@
 namespace Domain\Feedback;
 
 use CASS\Application\Bundle\GenericBundle;
-use CASS\Application\Frontline\FrontlineBundleInjectable;
+use CASS\Application\Bundles\Frontline\FrontlineBundleInjectable;
 use Domain\Feedback\Frontline\FeedbackTypesFrontlineScript;
 
 class FeedbackBundle extends GenericBundle implements FrontlineBundleInjectable

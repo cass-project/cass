@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Application\Frontline;
+namespace CASS\Application\Bundles\Frontline;
 
 interface FrontlineBundleInjectable
 {

@@ -2,7 +2,7 @@
 namespace Domain\Auth\Middleware;
 
 use CASS\Application\REST\Response\GenericResponseBuilder;
-use CASS\Application\Frontline\Service\FrontlineService;
+use CASS\Application\Bundles\Frontline\Service\FrontlineService;
 use CASS\Application\Service\CommandService;
 use Domain\Account\Exception\AccountNotFoundException;
 use Domain\Auth\Middleware\Command\OAuth\BattleNetCommand;

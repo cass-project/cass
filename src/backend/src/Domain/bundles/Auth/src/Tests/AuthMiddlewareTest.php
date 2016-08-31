@@ -25,6 +25,7 @@ class AuthMiddlewareTest extends MiddlewareTestCase
 
         $this->requestSignUp($json)
             ->execute()
+            ->dump()
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([

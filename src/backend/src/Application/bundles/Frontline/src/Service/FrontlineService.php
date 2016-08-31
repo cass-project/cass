@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Application\Frontline\Service;
+namespace CASS\Application\Bundles\Frontline\Service;
 
 use CASS\Application\Bundle\Bundle;
-use CASS\Application\Frontline\FrontlineBundleInjectable;
-use CASS\Application\Frontline\FrontlineScript;
-use CASS\Application\Frontline\Service\FrontlineService\Filter;
+use CASS\Application\Bundles\Frontline\FrontlineBundleInjectable;
+use CASS\Application\Bundles\Frontline\FrontlineScript;
+use CASS\Application\Bundles\Frontline\Service\FrontlineService\Filter;
 use CASS\Application\Service\BundleService;
 use Cocur\Chain\Chain;
 use DI\Container;

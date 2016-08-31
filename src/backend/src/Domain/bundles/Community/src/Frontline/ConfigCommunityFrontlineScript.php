@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Community\Frontline;
 
-use CASS\Application\Frontline\FrontlineScript;
+use CASS\Application\Bundles\Frontline\FrontlineScript;
 use Domain\Community\Scripts\FeaturesListFrontlineScript;
 
 class ConfigCommunityFrontlineScript implements FrontlineScript

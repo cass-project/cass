@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Application\Frontline;
+namespace CASS\Application\Bundles\Frontline;
 
 use CASS\Application\Bundle\GenericBundle;
 

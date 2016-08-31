@@ -5,7 +5,7 @@ General
 =======
 
 - Использование сторонних ресурсов (иконки, фото и.т.д..) без указания того, откуда это было взято.
-- CASS\Application\Frontline: добавленные во CASS\Application\Frontline данные описаны в swagger-документации
+- CASS\Application\Bundles\Frontline: добавленные во CASS\Application\Bundles\Frontline данные описаны в swagger-документации
 
 Instant reject:
 ---------------
