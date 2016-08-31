@@ -12,7 +12,7 @@
       "CASS\\Application\\REST\\": "src/Application/bundles/REST/src",
       "CASS\\Application\\Swagger\\": "src/Application/bundles/Swagger/src",
       "CASS\\Application\\PHPUnit\\": "src/Application/bundles/PHPUnit/src",
-      "CASS\\Application\\MongoDB\\": "src/Application/bundles/MongoDB/src",
+      "CASS\\Application\\Bundles\\MongoDB\\": "src/Application/bundles/MongoDB/src",
       "CASS\\Application\\Version\\": "src/Application/bundles/Version/src",
       "Domain\\Account\\": "src/Domain/bundles/Account/src",
       "Domain\\Auth\\": "src/Domain/bundles/Auth/src",

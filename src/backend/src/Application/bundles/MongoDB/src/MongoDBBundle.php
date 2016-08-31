@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Application\MongoDB;
+namespace CASS\Application\Bundles\MongoDB;
 
 use CASS\Application\Bundle\GenericBundle;
 
