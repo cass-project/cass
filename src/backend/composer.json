@@ -7,7 +7,6 @@
       "Domain\\": "src/Domain/src",
       "CASS\\Project\\": "src/Project/src",
       "CASS\\Util\\": "src/Util/src",
-      "ZEA2\\Backend\\": "src/Util/src",
       "Application\\Doctrine2\\": "src/Application/bundles/Doctrine2/src",
       "Application\\Frontline\\": "src/Application/bundles/Frontline/src",
       "Application\\REST\\": "src/Application/bundles/REST/src",
