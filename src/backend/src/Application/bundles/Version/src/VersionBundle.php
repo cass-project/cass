@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Application\Version;
+namespace CASS\Application\Bundles\Version;
 
 use CASS\Application\Bundle\GenericBundle;
 use CASS\Application\Bundles\Frontline\FrontlineBundleInjectable;
-use CASS\Application\Version\Frontline\VersionFrontlineScript;
+use CASS\Application\Bundles\Version\Frontline\VersionFrontlineScript;
 
 final class VersionBundle extends GenericBundle implements FrontlineBundleInjectable
 {

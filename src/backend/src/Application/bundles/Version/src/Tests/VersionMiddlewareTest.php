@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Application\Version\Tests;
+namespace CASS\Application\Bundles\Version\Tests;
 
 use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
 

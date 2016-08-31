@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Application\Version\Middleware;
+namespace CASS\Application\Bundles\Version\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Application\Version\Service\VersionService;
+use CASS\Application\Bundles\Version\Service\VersionService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Application\Version\Service;
+namespace CASS\Application\Bundles\Version\Service;
 
 final class VersionService
 {
