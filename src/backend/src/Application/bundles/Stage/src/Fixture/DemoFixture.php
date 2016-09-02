@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Project\Bundles\Stage\Fixture;
+namespace CASS\Application\Bundles\Stage\Fixture;
 
 use CASS\Util\Definitions\Point;
 use CASS\Util\GenerateRandomString;

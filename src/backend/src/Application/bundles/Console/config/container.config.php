@@ -5,7 +5,7 @@ use function DI\object;
 use function DI\factory;
 use function DI\get;
 
-use CASS\Project\Bundles\Console\Factory\ConsoleApplicationFactory;
+use CASS\Application\Bundles\Console\Factory\ConsoleApplicationFactory;
 use Symfony\Component\Console\Application;
 
 return [

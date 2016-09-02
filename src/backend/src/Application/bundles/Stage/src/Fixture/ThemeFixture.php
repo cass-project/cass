@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Project\Bundles\Stage\Fixture;
+namespace CASS\Application\Bundles\Stage\Fixture;
 
 use Domain\Theme\Parameters\CreateThemeParameters;
 use Domain\Theme\Service\ThemeService;

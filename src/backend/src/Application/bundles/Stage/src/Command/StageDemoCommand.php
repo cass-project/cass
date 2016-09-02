@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Project\Bundles\Stage\Command;
+namespace CASS\Application\Bundles\Stage\Command;
 
-use CASS\Project\Bundles\Stage\Fixture\DemoFixture;
+use CASS\Application\Bundles\Stage\Fixture\DemoFixture;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

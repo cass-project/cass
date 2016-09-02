@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Project\Bundles\PHPUnit;
+namespace CASS\Application\Bundles\Console;
 
 use CASS\Application\Bundle\GenericBundle;
 
-final class PHPUnitBundle extends GenericBundle
+final class ConsoleBundle extends GenericBundle
 {
     public function getDir()
     {

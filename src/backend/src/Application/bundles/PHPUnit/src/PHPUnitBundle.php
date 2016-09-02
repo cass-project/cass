@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Project\Bundles\Stage;
+namespace CASS\Application\Bundles\PHPUnit;
 
 use CASS\Application\Bundle\GenericBundle;
 
-final class StageBundle extends GenericBundle
+final class PHPUnitBundle extends GenericBundle
 {
     public function getDir()
     {

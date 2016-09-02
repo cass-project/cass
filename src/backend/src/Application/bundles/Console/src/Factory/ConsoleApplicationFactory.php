@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Project\Bundles\Console\Factory;
+namespace CASS\Application\Bundles\Console\Factory;
 
 use CASS\Application\DIFactoryInterface;
 use Interop\Container\ContainerInterface;
