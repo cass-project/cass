@@ -6,7 +6,7 @@ use CASS\Domain\Bundles\IM\Entity\Message;
 use CASS\Domain\Bundles\IM\Exception\Query\QueryException;
 use CASS\Domain\Bundles\IM\Middleware\Request\MessagesRequest;
 use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
-use MongoDB\Model\BSONDocument;
+
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

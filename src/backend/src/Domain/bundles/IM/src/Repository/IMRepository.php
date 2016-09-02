@@ -9,16 +9,17 @@ use CASS\Domain\Bundles\IM\Query\Criteria\SortCriteria\SortCriteria;
 use CASS\Domain\Bundles\IM\Query\Query;
 use CASS\Domain\Bundles\IM\Query\Source\Source;
 use MongoDB\BSON\ObjectID;
+use MongoDB\Database;
 use MongoDB\Driver\Cursor;
 
 class IMRepository
 {
-    /** @var \MongoDB\Database */
+    /** @var Database */
     private $mongoDB;
 
     const NOTIFY_MONGO_DB_COLLECTION = 'im_push_%d';
 
-    public function __construct(\MongoDB\Database $mongoDB)
+    public function __construct(Database $mongoDB)
     {
         $this->mongoDB = $mongoDB;
     }

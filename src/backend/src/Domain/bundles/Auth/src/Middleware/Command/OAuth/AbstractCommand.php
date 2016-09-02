@@ -2,10 +2,10 @@
 namespace CASS\Domain\Bundles\Auth\Middleware\Command\OAuth;
 
 use CASS\Application\Command\Command;
+use CASS\Domain\Bundles\Auth\Exception\InvalidCredentialsException;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use CASS\Domain\Bundles\Account\Exception\AccountNotFoundException;
 use CASS\Domain\Bundles\Auth\Service\AuthService;
-use CASS\Domain\Bundles\Auth\Service\AuthService\Exceptions\InvalidCredentialsException;
 use CASS\Domain\Bundles\Auth\Service\AuthService\OAuth2\RegistrationRequest;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;

@@ -20,7 +20,6 @@
       "CASS\\Domain\\Bundles\\Account\\": "src/Domain/bundles/Account/src",
       "CASS\\Domain\\Bundles\\Auth\\": "src/Domain/bundles/Auth/src",
       "CASS\\Domain\\Bundles\\Collection\\": "src/Domain/bundles/Collection/src",
-      "CASS\\Domain\\Bundles\\EmailVerification\\": "src/Domain/bundles/EmailVerification/src",
       "CASS\\Domain\\Bundles\\Fake\\": "src/Domain/bundles/Fake/src",
       "CASS\\Domain\\Bundles\\Post\\": "src/Domain/bundles/Post/src",
       "CASS\\Domain\\Bundles\\Attachment\\": "src/Domain/bundles/Attachment/src",

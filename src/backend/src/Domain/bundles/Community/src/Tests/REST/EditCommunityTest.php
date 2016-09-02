@@ -60,7 +60,6 @@ final class EditCommunityTest extends CommunityMiddlewareTestCase
         $this->upFixture(new SampleCommunitiesFixture());
 
         $sampleCommunity = SampleCommunitiesFixture::getCommunity(2);
-        $moveToTheme = SampleThemesFixture::getTheme(5);
 
         $this->requestEditCommunity($sampleCommunity->getId(), [
             'title' => '* title_edited',

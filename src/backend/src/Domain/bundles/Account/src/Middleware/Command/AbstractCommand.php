@@ -1,11 +1,12 @@
 <?php
 namespace CASS\Domain\Bundles\Account\Middleware\Command;
 
+use CASS\Application\Command\Command;
 use CASS\Domain\Bundles\Account\Service\AccountService;
 use CASS\Domain\Bundles\Auth\Service\AuthService;
 use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
 
-abstract class AbstractCommand implements \CASS\Application\Command\Command
+abstract class AbstractCommand implements Command
 {
     /** @var AccountService */
     protected $accountService;

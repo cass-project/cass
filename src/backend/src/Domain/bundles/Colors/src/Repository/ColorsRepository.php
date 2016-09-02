@@ -2,7 +2,6 @@
 namespace CASS\Domain\Bundles\Colors\Repository;
 
 use CASS\Domain\Bundles\Colors\Entity\Color;
-use CASS\Domain\Bundles\Colors\Entity\Palette;
 
 class ColorsRepository
 {

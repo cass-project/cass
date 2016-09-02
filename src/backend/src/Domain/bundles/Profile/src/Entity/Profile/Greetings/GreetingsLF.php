@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Profile\Entity\Profile\Greetings;
+namespace CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
 
 final class GreetingsLF extends Greetings
 {

@@ -19,7 +19,7 @@ use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicProfilesSource;
 use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicExpertsSource;
 use CASS\Domain\Bundles\Post\Formatter\PostFormatter;
 use CASS\Domain\Bundles\Post\Service\PostService;
-use CASS\Domain\Profile\Service\ProfileService;
+use CASS\Domain\Bundles\Profile\Service\ProfileService;
 use Zend\I18n\Exception\OutOfBoundsException;
 
 final class StreamFactory

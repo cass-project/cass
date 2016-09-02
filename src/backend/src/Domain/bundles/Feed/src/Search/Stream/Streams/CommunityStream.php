@@ -2,7 +2,7 @@
 namespace CASS\Domain\Bundles\Feed\Search\Stream\Streams;
 
 use CASS\Domain\Bundles\Community\Exception\CommunityNotFoundException;
-use CASS\Domain\Bundles\Community\Formatter\CommunityExtendedFormatter;
+
 use CASS\Domain\Bundles\Community\Service\CommunityService;
 use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\QueryStringCriteria;
 use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SeekCriteria;

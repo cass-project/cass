@@ -1,6 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Feed\Middleware\Command;
 
+use CASS\Application\Command\Command;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use CASS\Domain\Bundles\Feed\Factory\FeedSourceFactory;
 use CASS\Domain\Bundles\Feed\Middleware\Request\FeedMiddlewareRequest;
@@ -11,7 +12,7 @@ use CASS\Domain\Bundles\Index\Source\Source;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class AbstractCommand implements \CASS\Application\Command\Command
+abstract class AbstractCommand implements Command
 {
     /** @var FeedService */
     protected $feedService;

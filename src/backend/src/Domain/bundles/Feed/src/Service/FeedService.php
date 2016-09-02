@@ -1,14 +1,13 @@
 <?php
 namespace CASS\Domain\Bundles\Feed\Service;
 
-use CASS\Application\Exception\NotImplementedException;
+
 use CASS\Domain\Bundles\Feed\Request\FeedRequest;
 use CASS\Domain\Bundles\Feed\Search\Stream\StreamFactory;
 use CASS\Domain\Bundles\Index\Source\Source;
-use MongoDB\BSON\ObjectID;
+
 use MongoDB\Collection;
 use MongoDB\Database;
-use MongoDB\Model\BSONDocument;
 
 final class FeedService
 {

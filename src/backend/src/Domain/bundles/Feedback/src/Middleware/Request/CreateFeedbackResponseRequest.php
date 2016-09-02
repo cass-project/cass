@@ -14,7 +14,7 @@ class CreateFeedbackResponseRequest extends SchemaParams
 
         return new CreateFeedbackResponseParameters(
             $data['description'],
-            $data['feedback_id']
+            (int) $data['feedback_id']
         );
     }
 

@@ -2,7 +2,7 @@
 namespace CASS\Domain\Bundles\IM\Query\Options;
 
 use CASS\Domain\Bundles\IM\Exception\Query\DuplicateOptionException;
-use CASS\Domain\Bundles\IM\Query\Options\Option;
+
 use CASS\Domain\Bundles\IM\Exception\Query\UnknownOptionException;
 
 final class OptionsManager

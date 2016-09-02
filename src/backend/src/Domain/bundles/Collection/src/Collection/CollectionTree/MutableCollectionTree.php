@@ -1,12 +1,12 @@
 <?php
 namespace CASS\Domain\Bundles\Collection\Collection\CollectionTree;
 
+use CASS\Domain\Bundles\Collection\Exception\CollectionExistsException;
 use CASS\Util\JSONSerializable;
 use CASS\Util\SerialManager\SerialManager;
 use CASS\Domain\Bundles\Collection\Collection\CollectionItem;
 use CASS\Domain\Bundles\Collection\Collection\CollectionTree;
 use CASS\Domain\Bundles\Collection\Collection\CollectionTreeFactory;
-use Domain\Collection\Exception\CollectionExistsException;
 
 class MutableCollectionTree implements JSONSerializable, \Serializable, CollectionTree
 {

@@ -18,7 +18,7 @@ final class DeleteProfileCollectionTest extends CollectionRESTTestCase
 
         $collectionToDelete = SampleCollectionsFixture::getProfileCollection(1);
         $collectionId = $collectionToDelete->getId();
-        list($owner, $profileId) = explode(':', $collectionToDelete->getOwnerSID());
+        list(, $profileId) = explode(':', $collectionToDelete->getOwnerSID());
 
         $this->requestGetProfile($profileId)
             ->execute()

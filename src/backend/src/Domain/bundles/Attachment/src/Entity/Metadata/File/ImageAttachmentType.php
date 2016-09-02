@@ -11,6 +11,9 @@ class ImageAttachmentType implements FileAttachmentType, AttachmentTypeDetector,
 {
     const MAX_FILE_SIZE_BYTES = 1024*1024*32; /* mb */
 
+    /** @var FilesystemInterface */
+    private $fileSystem;
+
     public function setFileSystem(FilesystemInterface $fileSystem)
     {
         $this->fileSystem = $fileSystem;

@@ -3,7 +3,6 @@ namespace CASS\Domain\Bundles\Profile\Tests;
 
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 use CASS\Domain\Bundles\Profile\Entity\Profile\Gender\GenderFemale;
-use Domain\Profile\Entity\Profile\Greetings;
 use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**

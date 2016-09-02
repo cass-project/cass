@@ -9,7 +9,7 @@ use CASS\Domain\Bundles\Post\Entity\Post;
 use CASS\Domain\Bundles\Post\Parameters\CreatePostParameters;
 use CASS\Domain\Bundles\Post\PostType\Types\DefaultPostType;
 use CASS\Domain\Bundles\Post\Service\PostService;
-use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
+
 use Zend\Expressive\Application;
 
 class SamplePostsFixture implements Fixture

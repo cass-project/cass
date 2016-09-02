@@ -4,7 +4,7 @@ namespace CASS\Domain\Bundles\Community\Middleware\Request;
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
 use CASS\Domain\Bundles\Community\CommunityBundle;
-use CASS\Domain\Bundles\Community\Parameters\EditCommunityParameters;
+
 use CASS\Domain\Bundles\Community\Parameters\SetPublicOptionsParameters;
 
 class SetPublicOptionsRequest extends SchemaParams

@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Feedback\Tests\REST\Paths;
 
-use CASS\Domain\Bundles\Feedback\Entity\Feedback;
+
 use CASS\Domain\Bundles\Feedback\FeedbackType\Types\FTCommonQuestion;
 use CASS\Domain\Bundles\Feedback\Tests\FeedbackMiddlewareTest;
 use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;

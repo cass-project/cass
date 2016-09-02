@@ -7,7 +7,7 @@ use CASS\Util\JSONSerializable;
 use CASS\Domain\Bundles\Collection\Entity\Collection;
 use CASS\Domain\Bundles\Index\Entity\IndexedEntity;
 use CASS\Domain\Bundles\Post\PostType\PostType;
-use CASS\Domain\Bundles\Attachment\Entity\Attachment;
+
 use CASS\Domain\Bundles\Profile\Entity\Profile;
 use CASS\Domain\Bundles\Theme\Strategy\ThemeIdsEntityAware;
 use CASS\Domain\Bundles\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;

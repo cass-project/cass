@@ -7,7 +7,7 @@ use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SortCriteria;
 use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
 use CASS\Domain\Bundles\Feed\Search\Criteria\CriteriaManager;
 use CASS\Domain\Bundles\Feed\Search\Stream\Stream;
-use CASS\Domain\Bundles\Profile\Entity\Profile;
+
 use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use CASS\Domain\Bundles\Profile\Service\ProfileService;
 use MongoDB\BSON\ObjectID;

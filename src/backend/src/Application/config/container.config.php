@@ -12,7 +12,8 @@ use Intervention\Image\ImageManager;
 return [
     'php-di' => [
         'composer.json' => factory(function(Container $container) {
-            return json_decode(file_get_contents(sprintf('%s/composer.json', $container->get('paths')['backend'])), true);
+            return json_decode(file_get_contents(sprintf('%s/composer.json', $container->get('paths')['backend'])),
+                true);
         }),
         'paths' => [
             'backend' => sprintf('%s/../../../', __DIR__),
@@ -28,13 +29,13 @@ return [
             'auth',
             'with-profile',
             'common',
-            'final'
+            'final',
         ],
         ImageManager::class => factory(function(Container $container) {
             return new ImageManager([
-                'driver' => 'gd'
+                'driver' => 'gd',
             ]);
         }),
         EventEmitter::class => object(),
-    ]
+    ],
 ];

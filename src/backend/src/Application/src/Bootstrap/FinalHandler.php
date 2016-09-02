@@ -3,7 +3,6 @@ namespace CASS\Application\Bootstrap;
 
 use CASS\Application\Exception\EntityNotFoundException;
 use CASS\Application\Exception\BadCommandCallException;
-use CASS\Application\Exception\CommandNotFoundException;
 use CASS\Application\Exception\PermissionsDeniedException;
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use ZEA2\Platform\Bundles\REST\Request\Params\InvalidJSONSchema;
@@ -37,8 +36,6 @@ class FinalHandler
                 $responseBuilder->setStatusNotFound();
             } catch (InvalidJSONSchema $e) {
                 $responseBuilder->setStatusBadRequest();
-            } catch (CommandNotFoundException $e) {
-                $responseBuilder->setStatusNotFound();
             } catch (BadCommandCallException $e) {
                 $responseBuilder->setStatusBadRequest();
             } catch (NotFoundException $e) {

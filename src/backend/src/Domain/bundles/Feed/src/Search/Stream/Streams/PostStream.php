@@ -8,7 +8,7 @@ use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SortCriteria;
 use CASS\Domain\Bundles\Feed\Search\Criteria\CriteriaManager;
 use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
 use CASS\Domain\Bundles\Feed\Search\Stream\Stream;
-use CASS\Domain\Bundles\Post\Entity\Post;
+
 use CASS\Domain\Bundles\Post\Exception\PostNotFoundException;
 use CASS\Domain\Bundles\Post\Formatter\PostFormatter;
 use CASS\Domain\Bundles\Post\Service\PostService;

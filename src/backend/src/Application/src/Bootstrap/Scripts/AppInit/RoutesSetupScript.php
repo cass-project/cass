@@ -34,10 +34,10 @@ class RoutesSetupScript implements AppInitScript
 
         foreach($definitions as $groupName => $group){
 
-            if(!in_array($groupName, $this->routesGroup)) throw new UnknownRouteGroupException(sprintf("unknow route group: %s", $groupName));
+            if(!in_array($groupName, $this->routesGroup)) throw new UnknownRouteGroupException(sprintf("unknown route group: %s", $groupName));
             foreach($group as $definition){
                 switch($definition['type']){
-                    default: throw new UnknownRouteTypeException(sprintf('unknoown type of definition: %s',$definition['type']) );
+                    default: throw new UnknownRouteTypeException(sprintf('unknown type of definition: %s',$definition['type']) );
                     case 'route':
                         $this->setupRouteFromDefinition($definition);
                         break;

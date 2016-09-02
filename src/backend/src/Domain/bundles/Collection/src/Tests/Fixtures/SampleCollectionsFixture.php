@@ -19,7 +19,6 @@ class SampleCollectionsFixture implements Fixture
     public function up(Application $app, EntityManager $em)
     {
         $profile = DemoProfileFixture::getProfile();
-        $authorProfileId = $profile->getId();
         $collectionService = $app->getContainer()->get(CollectionService::class); /** @var CollectionService $collectionService */
 
         self::$profileCollections = [

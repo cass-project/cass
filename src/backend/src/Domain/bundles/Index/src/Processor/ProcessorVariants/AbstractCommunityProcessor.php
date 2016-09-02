@@ -7,7 +7,7 @@ use CASS\Domain\Bundles\Index\Entity\IndexedEntity;
 use CASS\Domain\Bundles\Index\Processor\Processor;
 use CASS\Domain\Bundles\Index\Service\ThemeWeightCalculator\ThemeWeightCalculator;
 use CASS\Domain\Bundles\Index\Source\Source;
-use CASS\Domain\Bundles\Post\Entity\Post;
+
 use MongoDB\Database;
 
 abstract class AbstractCommunityProcessor implements Processor

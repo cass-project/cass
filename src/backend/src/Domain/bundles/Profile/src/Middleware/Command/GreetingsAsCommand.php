@@ -1,6 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Profile\Middleware\Command;
 
+use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings\Greetings;
@@ -8,12 +9,11 @@ use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use CASS\Domain\Bundles\Profile\Middleware\Request\GreetingsFLRequest;
 use CASS\Domain\Bundles\Profile\Middleware\Request\GreetingsLFMRequest;
 use CASS\Domain\Bundles\Profile\Middleware\Request\GreetingsNRequest;
-use Psr\Http\Message\ServerRequestInterface;
-use React\Http\Response;
+use Psr\Http\Message\ResponseInterface;
 
 class GreetingsAsCommand extends Command
 {
-    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): Response
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
             $profileId = (int) $request->getAttribute('profileId');

@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Index\Service\ThemeWeightCalculator;
 
-use CASS\Domain\Bundles\Profile\Entity\Profile;
+
 use CASS\Domain\Bundles\Theme\Entity\Theme;
 use CASS\Domain\Bundles\Theme\Service\ThemeService;
 

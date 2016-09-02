@@ -8,7 +8,7 @@ final class LastMessageService
 {
     public function getLastMessage(LastMessageServiceQuery $query)
     {
-        return new LastMessageServiceResult(true, new \DateTime(), "Last message <NOT_IMPLEMENTED>");
+        return new LastMessageServiceResult(true, new \DateTime(), "Last message (NOT_IMPLEMENTED)");
     }
 
     public function getLastMessages(array $definitions)

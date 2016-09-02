@@ -5,7 +5,6 @@ use CASS\Domain\Bundles\Feed\Search\Criteria\CriteriaManager;
 
 use CASS\Domain\Bundles\Index\Source\Source;
 use MongoDB\Collection;
-use MongoDB\Model\BSONDocument;
 
 abstract class Stream
 {

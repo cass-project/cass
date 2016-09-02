@@ -10,7 +10,7 @@ use CASS\Domain\Bundles\IM\Query\Source\Source;
 use CASS\Domain\Bundles\IM\Query\Source\SourceFactory;
 use CASS\Domain\Bundles\IM\Repository\IMRepository;
 use CASS\Domain\Bundles\IM\Service\IMService\UnreadResult;
-use CASS\Domain\Bundles\Profile\Entity\Profile;
+
 use CASS\Domain\Bundles\Profile\Service\ProfileService;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Model\BSONDocument;

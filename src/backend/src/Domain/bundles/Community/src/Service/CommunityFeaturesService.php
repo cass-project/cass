@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Community\Service;
 
-use CASS\Application\Exception\NotImplementedException;
+
 use CASS\Domain\Bundles\Community\Entity\Community;
 use CASS\Domain\Bundles\Community\Exception\FeatureIsActivatedException;
 use CASS\Domain\Bundles\Community\Exception\FeatureIsNotActivatedException;
