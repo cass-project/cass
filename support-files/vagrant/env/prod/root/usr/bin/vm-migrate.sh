@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-# git pull
 cd /opt/cass
-git pull && git submodule init && git submodule update && git submodule status
 
 # server software
 sudo cp -R /support-files/vagrant/env/all/root/* /
