@@ -1,4 +1,4 @@
 <?php
-namespace CASS\Domain\Community\Exception;
+namespace CASS\Domain\Bundles\Community\Exception;
 
 class CommunityHasNoThemeException extends \Exception {}

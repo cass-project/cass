@@ -2,11 +2,11 @@
 namespace CASS\Application\Bundles\Frontline\Tests;
 
 use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
-use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use CASS\Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
-use CASS\Domain\Profile\Tests\Fixtures\DemoProfileFixture;
-use CASS\Domain\ProfileCommunities\Tests\Fixtures\SamplePCBookmarksFixture;
-use CASS\Domain\Theme\Tests\Fixtures\SampleThemesFixture;
+use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Bundles\Community\Tests\Fixtures\SampleCommunitiesFixture;
+use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
+use CASS\Domain\Bundles\ProfileCommunities\Tests\Fixtures\SamplePCBookmarksFixture;
+use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
 
 /**
  * @backupGlobals disabled

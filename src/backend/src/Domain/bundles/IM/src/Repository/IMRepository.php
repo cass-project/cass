@@ -1,13 +1,13 @@
 <?php
-namespace CASS\Domain\IM\Repository;
+namespace CASS\Domain\Bundles\IM\Repository;
 
-use CASS\Domain\IM\Entity\Message;
-use CASS\Domain\IM\Query\Options\MarkAsReadOption\MarkAsReadOption;
-use CASS\Domain\IM\Query\Criteria\CursorCriteria\CursorCriteria;
-use CASS\Domain\IM\Query\Criteria\SeekCriteria\SeekCriteria;
-use CASS\Domain\IM\Query\Criteria\SortCriteria\SortCriteria;
-use CASS\Domain\IM\Query\Query;
-use CASS\Domain\IM\Query\Source\Source;
+use CASS\Domain\Bundles\IM\Entity\Message;
+use CASS\Domain\Bundles\IM\Query\Options\MarkAsReadOption\MarkAsReadOption;
+use CASS\Domain\Bundles\IM\Query\Criteria\CursorCriteria\CursorCriteria;
+use CASS\Domain\Bundles\IM\Query\Criteria\SeekCriteria\SeekCriteria;
+use CASS\Domain\Bundles\IM\Query\Criteria\SortCriteria\SortCriteria;
+use CASS\Domain\Bundles\IM\Query\Query;
+use CASS\Domain\Bundles\IM\Query\Source\Source;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Driver\Cursor;
 

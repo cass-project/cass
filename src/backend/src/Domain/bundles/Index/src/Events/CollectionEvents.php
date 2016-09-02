@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Index\Events;
+namespace CASS\Domain\Bundles\Index\Events;
 
 use CASS\Application\Events\EventsBootstrapInterface;
-use CASS\Domain\Collection\Entity\Collection;
-use CASS\Domain\Collection\Service\CollectionService;
-use CASS\Domain\Index\Service\IndexService;
+use CASS\Domain\Bundles\Collection\Entity\Collection;
+use CASS\Domain\Bundles\Collection\Service\CollectionService;
+use CASS\Domain\Bundles\Index\Service\IndexService;
 use Evenement\EventEmitterInterface;
 
 final class CollectionEvents implements EventsBootstrapInterface

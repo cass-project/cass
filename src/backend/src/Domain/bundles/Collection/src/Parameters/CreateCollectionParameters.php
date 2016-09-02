@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Collection\Parameters;
+namespace CASS\Domain\Bundles\Collection\Parameters;
 
 class CreateCollectionParameters
 {

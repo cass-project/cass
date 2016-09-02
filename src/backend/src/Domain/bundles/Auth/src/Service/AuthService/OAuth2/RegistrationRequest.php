@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Auth\Service\AuthService\OAuth2;
+namespace CASS\Domain\Bundles\Auth\Service\AuthService\OAuth2;
 
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 

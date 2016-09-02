@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Avatar\Service\Strategy;
+namespace CASS\Domain\Bundles\Avatar\Service\Strategy;
 
 use CASS\Util\GenerateRandomString;
-use CASS\Domain\Avatar\Image\Image as ImageCollectionItem;
-use CASS\Domain\Avatar\Image\ImageCollection;
-use CASS\Domain\Avatar\Strategy\ImageStrategy;
+use CASS\Domain\Bundles\Avatar\Image\Image as ImageCollectionItem;
+use CASS\Domain\Bundles\Avatar\Image\ImageCollection;
+use CASS\Domain\Bundles\Avatar\Strategy\ImageStrategy;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Image;
 use League\Flysystem\FilesystemInterface;

@@ -1,13 +1,13 @@
 <?php
-namespace CASS\Domain\Auth\Middleware\Command;
+namespace CASS\Domain\Bundles\Auth\Middleware\Command;
 
 use CASS\Application\Bundles\Frontline\FrontlineScript;
 use CASS\Application\Bundles\Frontline\Service\FrontlineService\IncludeFilter;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Auth\Formatter\SignInFormatter;
-use CASS\Domain\Auth\Middleware\Request\SignInRequest;
-use CASS\Domain\Auth\Exception\InvalidCredentialsException;
-use CASS\Domain\Account\Exception\AccountNotFoundException;
+use CASS\Domain\Bundles\Auth\Formatter\SignInFormatter;
+use CASS\Domain\Bundles\Auth\Middleware\Request\SignInRequest;
+use CASS\Domain\Bundles\Auth\Exception\InvalidCredentialsException;
+use CASS\Domain\Bundles\Account\Exception\AccountNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

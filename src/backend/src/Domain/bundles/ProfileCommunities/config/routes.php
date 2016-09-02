@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\ProfileCommunities;
+namespace CASS\Domain\Bundles\ProfileCommunities;
 
-use CASS\Domain\ProfileCommunities\Middleware\ProfileCommunitiesMiddleware;
+use CASS\Domain\Bundles\ProfileCommunities\Middleware\ProfileCommunitiesMiddleware;
 
 return [
     'common' => [

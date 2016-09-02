@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Auth\Service\AuthService\SignUpValidation;
+namespace CASS\Domain\Bundles\Auth\Service\AuthService\SignUpValidation;
 
-use CASS\Domain\Auth\Parameters\SignUpParameters;
-use CASS\Domain\Auth\Exception\MissingRequiredFieldException;
+use CASS\Domain\Bundles\Auth\Parameters\SignUpParameters;
+use CASS\Domain\Bundles\Auth\Exception\MissingRequiredFieldException;
 
 class HasAllRequiredFields implements Validator
 {

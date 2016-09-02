@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Feed;
+namespace CASS\Domain\Bundles\Feed;
 
 use function DI\object;
 use function DI\factory;

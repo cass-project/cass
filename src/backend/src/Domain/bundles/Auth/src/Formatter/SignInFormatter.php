@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Auth\Formatter;
+namespace CASS\Domain\Bundles\Auth\Formatter;
 
-use CASS\Domain\Account\Entity\Account;
-use CASS\Domain\Profile\Entity\Profile;
-use CASS\Domain\Profile\Entity\Profile\Greetings;
-use CASS\Domain\Profile\Formatter\ProfileExtendedFormatter;
+use CASS\Domain\Bundles\Account\Entity\Account;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Bundles\Profile\Formatter\ProfileExtendedFormatter;
 
 class SignInFormatter
 {

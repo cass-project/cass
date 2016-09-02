@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Collection\Repository;
+namespace CASS\Domain\Bundles\Collection\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use CASS\Domain\Collection\Entity\Collection;
-use CASS\Domain\Collection\Exception\CollectionNotFoundException;
-use CASS\Domain\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Bundles\Collection\Entity\Collection;
+use CASS\Domain\Bundles\Collection\Exception\CollectionNotFoundException;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
 
 class CollectionRepository extends EntityRepository
 {

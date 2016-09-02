@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Profile\Service;
+namespace CASS\Domain\Bundles\Profile\Service;
 
-use CASS\Domain\Auth\Service\CurrentAccountService;
-use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
 
 final class WithProfileService
 {

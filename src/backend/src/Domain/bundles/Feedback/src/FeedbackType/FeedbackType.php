@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Feedback\FeedbackType;
+namespace CASS\Domain\Bundles\Feedback\FeedbackType;
 
 use CASS\Util\JSONSerializable;
 

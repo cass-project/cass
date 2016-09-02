@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Community\Feature;
+namespace CASS\Domain\Bundles\Community\Feature;
 
-use CASS\Domain\Community\Entity\Community;
+use CASS\Domain\Bundles\Community\Entity\Community;
 
 interface Feature
 {

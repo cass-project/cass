@@ -1,15 +1,15 @@
 <?php
-namespace CASS\Domain\Feed\Search\Stream\Streams;
+namespace CASS\Domain\Bundles\Feed\Search\Stream\Streams;
 
-use CASS\Domain\Community\Exception\CommunityNotFoundException;
-use CASS\Domain\Community\Formatter\CommunityExtendedFormatter;
-use CASS\Domain\Community\Service\CommunityService;
-use CASS\Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\SortCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
-use CASS\Domain\Feed\Search\Criteria\CriteriaManager;
-use CASS\Domain\Feed\Search\Stream\Stream;
+use CASS\Domain\Bundles\Community\Exception\CommunityNotFoundException;
+use CASS\Domain\Bundles\Community\Formatter\CommunityExtendedFormatter;
+use CASS\Domain\Bundles\Community\Service\CommunityService;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\QueryStringCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SeekCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SortCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\CriteriaManager;
+use CASS\Domain\Bundles\Feed\Search\Stream\Stream;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
 use MongoDB\Model\BSONDocument;

@@ -1,12 +1,12 @@
 <?php
-namespace CASS\Domain\Community\Tests\Fixtures;
+namespace CASS\Domain\Bundles\Community\Tests\Fixtures;
 
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
-use CASS\Domain\Community\Entity\Community;
-use CASS\Domain\Community\Parameters\CreateCommunityParameters;
-use CASS\Domain\Community\Service\CommunityService;
-use CASS\Domain\Theme\Tests\Fixtures\SampleThemesFixture;
+use CASS\Domain\Bundles\Community\Entity\Community;
+use CASS\Domain\Bundles\Community\Parameters\CreateCommunityParameters;
+use CASS\Domain\Bundles\Community\Service\CommunityService;
+use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
 use Zend\Expressive\Application;
 
 class SampleCommunitiesFixture implements Fixture

@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Colors\Middleware\Command;
+namespace CASS\Domain\Bundles\Colors\Middleware\Command;
 
 use CASS\Application\Command\Command;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Colors\Entity\Color;
-use CASS\Domain\Colors\Service\ColorsService;
+use CASS\Domain\Bundles\Colors\Entity\Color;
+use CASS\Domain\Bundles\Colors\Service\ColorsService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

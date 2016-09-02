@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\IM;
+namespace CASS\Domain\Bundles\IM;
 
 use function DI\object;
 use function DI\factory;

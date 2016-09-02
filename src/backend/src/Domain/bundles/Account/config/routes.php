@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Post;
+namespace CASS\Domain\Bundles\Post;
 
-use CASS\Domain\Account\Middleware\AccountAppAccessMiddleware;
-use CASS\Domain\Account\Middleware\AccountMiddleware;
+use CASS\Domain\Bundles\Account\Middleware\AccountAppAccessMiddleware;
+use CASS\Domain\Bundles\Account\Middleware\AccountMiddleware;
 
 return [
     'auth' => [

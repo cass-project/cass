@@ -1,11 +1,11 @@
 <?php
-namespace CASS\Domain\IM\Middleware\Command;
+namespace CASS\Domain\Bundles\IM\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Community\Exception\CommunityNotFoundException;
-use CASS\Domain\IM\Entity\Message;
-use CASS\Domain\IM\Middleware\Request\SendMessageRequest;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Community\Exception\CommunityNotFoundException;
+use CASS\Domain\Bundles\IM\Entity\Message;
+use CASS\Domain\Bundles\IM\Middleware\Request\SendMessageRequest;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

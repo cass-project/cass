@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Theme\Strategy;
+namespace CASS\Domain\Bundles\Theme\Strategy;
 
 interface ThemeIdsEntityAware
 {

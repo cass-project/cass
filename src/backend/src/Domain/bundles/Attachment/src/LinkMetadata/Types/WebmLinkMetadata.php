@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Attachment\LinkMetadata\Types;
+namespace CASS\Domain\Bundles\Attachment\LinkMetadata\Types;
 
-use CASS\Domain\Attachment\LinkMetadata\LinkMetadata;
+use CASS\Domain\Bundles\Attachment\LinkMetadata\LinkMetadata;
 
 final class WebmLinkMetadata implements LinkMetadata
 {

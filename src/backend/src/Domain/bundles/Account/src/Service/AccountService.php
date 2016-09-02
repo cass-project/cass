@@ -1,22 +1,22 @@
 <?php
-namespace CASS\Domain\Account\Service;
+namespace CASS\Domain\Bundles\Account\Service;
 
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareService;
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareTrait;
-use CASS\Domain\Account\Entity\Account;
-use CASS\Domain\Account\Entity\OAuthAccount;
-use CASS\Domain\Account\Exception\AccountHasDeleteRequestException;
-use CASS\Domain\Account\Exception\AccountNotContainsProfileException;
-use CASS\Domain\Account\Exception\InvalidOldPasswordException;
-use CASS\Domain\Account\Repository\AccountRepository;
-use CASS\Domain\Account\Repository\OAuthAccountRepository;
-use CASS\Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
-use CASS\Domain\Auth\Service\PasswordVerifyService;
-use CASS\Domain\Profile\Entity\Profile;
-use CASS\Domain\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Bundles\Account\Entity\Account;
+use CASS\Domain\Bundles\Account\Entity\OAuthAccount;
+use CASS\Domain\Bundles\Account\Exception\AccountHasDeleteRequestException;
+use CASS\Domain\Bundles\Account\Exception\AccountNotContainsProfileException;
+use CASS\Domain\Bundles\Account\Exception\InvalidOldPasswordException;
+use CASS\Domain\Bundles\Account\Repository\AccountRepository;
+use CASS\Domain\Bundles\Account\Repository\OAuthAccountRepository;
+use CASS\Domain\Bundles\Auth\Service\AuthService\OAuth2\RegistrationRequest;
+use CASS\Domain\Bundles\Auth\Service\PasswordVerifyService;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
 use CASS\Util\GenerateRandomString;
-use CASS\Domain\Profile\Repository\ProfileRepository;
-use CASS\Domain\Profile\Service\ProfileService;
+use CASS\Domain\Bundles\Profile\Repository\ProfileRepository;
+use CASS\Domain\Bundles\Profile\Service\ProfileService;
 
 final class AccountService implements EventEmitterAwareService
 {

@@ -1,16 +1,16 @@
 <?php
-namespace CASS\Domain\Contact\Entity;
+namespace CASS\Domain\Bundles\Contact\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
 use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
 use CASS\Util\JSONSerializable;
-use CASS\Domain\Contact\Exception\ContactIsNotPermanentException;
-use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Contact\Exception\ContactIsNotPermanentException;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
 
 /**
- * @Entity(repositoryClass="CASS\Domain\Contact\Repository\ContactRepository")
+ * @Entity(repositoryClass="CASS\Domain\Bundles\Contact\Repository\ContactRepository")
  * @Table(name="contact")
  */
 class Contact implements IdEntity, SIDEntity, JSONSerializable
@@ -30,14 +30,14 @@ class Contact implements IdEntity, SIDEntity, JSONSerializable
     private $datePermanentOn;
 
     /**
-     * @ManyToOne(targetEntity="CASS\Domain\Profile\Entity\Profile")
+     * @ManyToOne(targetEntity="CASS\Domain\Bundles\Profile\Entity\Profile")
      * @JoinColumn(name="source_profile_id", referencedColumnName="id")
      * @var Profile
      */
     private $sourceProfile;
 
     /**
-     * @ManyToOne(targetEntity="CASS\Domain\Profile\Entity\Profile")
+     * @ManyToOne(targetEntity="CASS\Domain\Bundles\Profile\Entity\Profile")
      * @JoinColumn(name="target_profile_id", referencedColumnName="id")
      * @var Profile
      */

@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Colors;
+namespace CASS\Domain\Bundles\Colors;
 
 use function DI\object;
 use function DI\factory;
@@ -7,9 +7,9 @@ use function DI\get;
 
 use DI\Container;
 use CASS\Application\Service\BundleService;
-use CASS\Domain\Avatar\Service\AvatarService;
-use CASS\Domain\Avatar\Service\Strategy\FileAvatarStrategy;
-use CASS\Domain\Avatar\Service\Strategy\MockAvatarStrategy;
+use CASS\Domain\Bundles\Avatar\Service\AvatarService;
+use CASS\Domain\Bundles\Avatar\Service\Strategy\FileAvatarStrategy;
+use CASS\Domain\Bundles\Avatar\Service\Strategy\MockAvatarStrategy;
 use CASS\Domain\DomainBundle;
 
 $configDefault = [

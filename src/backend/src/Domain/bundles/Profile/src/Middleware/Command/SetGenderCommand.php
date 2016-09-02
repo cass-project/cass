@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Profile\Middleware\Command;
+namespace CASS\Domain\Bundles\Profile\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Profile\Entity\Profile\Gender\Gender;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
-use CASS\Domain\Profile\Middleware\Request\SetGenderRequest;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Gender\Gender;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Profile\Middleware\Request\SetGenderRequest;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 

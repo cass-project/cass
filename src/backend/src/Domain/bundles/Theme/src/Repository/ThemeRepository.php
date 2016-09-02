@@ -1,13 +1,13 @@
 <?php
-namespace CASS\Domain\Theme\Repository;
+namespace CASS\Domain\Bundles\Theme\Repository;
 
 use CASS\Util\SerialManager\SerialManager;
 use Doctrine\ORM\EntityRepository;
-use CASS\Domain\Theme\Entity\Theme;
-use CASS\Domain\Theme\Exception\ThemeNotFoundException;
-use CASS\Domain\Theme\Exception\ThemeWithThisIdExistsException;
-use CASS\Domain\Theme\Parameters\CreateThemeParameters;
-use CASS\Domain\Theme\Parameters\UpdateThemeParameters;
+use CASS\Domain\Bundles\Theme\Entity\Theme;
+use CASS\Domain\Bundles\Theme\Exception\ThemeNotFoundException;
+use CASS\Domain\Bundles\Theme\Exception\ThemeWithThisIdExistsException;
+use CASS\Domain\Bundles\Theme\Parameters\CreateThemeParameters;
+use CASS\Domain\Bundles\Theme\Parameters\UpdateThemeParameters;
 
 class ThemeRepository extends EntityRepository
 {

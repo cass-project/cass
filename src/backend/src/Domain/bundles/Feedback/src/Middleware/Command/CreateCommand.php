@@ -1,11 +1,11 @@
 <?php
-namespace CASS\Domain\Feedback\Middleware\Command;
+namespace CASS\Domain\Bundles\Feedback\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Feedback\Exception\EmptyDescriptionException;
-use CASS\Domain\Feedback\Exception\InvalidFeedbackTypeException;
-use CASS\Domain\Feedback\Middleware\Request\CreateFeedbackRequest;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Feedback\Exception\EmptyDescriptionException;
+use CASS\Domain\Bundles\Feedback\Exception\InvalidFeedbackTypeException;
+use CASS\Domain\Bundles\Feedback\Middleware\Request\CreateFeedbackRequest;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

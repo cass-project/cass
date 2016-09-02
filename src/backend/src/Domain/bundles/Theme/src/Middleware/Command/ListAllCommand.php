@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Theme\Middleware\Command;
+namespace CASS\Domain\Bundles\Theme\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Theme\Entity\Theme;
+use CASS\Domain\Bundles\Theme\Entity\Theme;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

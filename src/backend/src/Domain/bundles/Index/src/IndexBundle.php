@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Index;
+namespace CASS\Domain\Bundles\Index;
 
 use CASS\Application\Bundle\GenericBundle;
 

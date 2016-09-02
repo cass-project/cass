@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Post\PostType;
+namespace CASS\Domain\Bundles\Post\PostType;
 
-use CASS\Domain\Post\Exception\UnknownPostTypeException;
-use CASS\Domain\Post\PostType\Types\DefaultPostType;
-use CASS\Domain\Post\PostType\Types\DiscussionPostType;
+use CASS\Domain\Bundles\Post\Exception\UnknownPostTypeException;
+use CASS\Domain\Bundles\Post\PostType\Types\DefaultPostType;
+use CASS\Domain\Bundles\Post\PostType\Types\DiscussionPostType;
 
 final class PostTypeFactory
 {

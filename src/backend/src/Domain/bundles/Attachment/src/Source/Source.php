@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Attachment\Source;
+namespace CASS\Domain\Bundles\Attachment\Source;
 
 use CASS\Util\JSONSerializable;
 

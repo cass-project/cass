@@ -1,14 +1,14 @@
 <?php
-namespace CASS\Domain\Community\Tests;
+namespace CASS\Domain\Bundles\Community\Tests;
 
-use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use CASS\Domain\Community\Feature\Features\BoardsFeature;
-use CASS\Domain\Community\Feature\Features\ChatFeature;
-use CASS\Domain\Community\Feature\Features\CollectionsFeature;
-use CASS\Domain\Community\Feature\FeaturesFactory;
-use CASS\Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
-use CASS\Domain\Profile\Tests\Fixtures\DemoProfileFixture;
-use CASS\Domain\Theme\Tests\Fixtures\SampleThemesFixture;
+use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Bundles\Community\Feature\Features\BoardsFeature;
+use CASS\Domain\Bundles\Community\Feature\Features\ChatFeature;
+use CASS\Domain\Bundles\Community\Feature\Features\CollectionsFeature;
+use CASS\Domain\Bundles\Community\Feature\FeaturesFactory;
+use CASS\Domain\Bundles\Community\Tests\Fixtures\SampleCommunitiesFixture;
+use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
+use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
 
 /**
  * @backupGlobals disabled

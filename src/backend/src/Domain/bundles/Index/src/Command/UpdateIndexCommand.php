@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Index;
+namespace CASS\Domain\Bundles\Index;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

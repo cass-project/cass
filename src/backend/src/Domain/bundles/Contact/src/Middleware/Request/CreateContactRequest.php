@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Contact\Middleware\Request;
+namespace CASS\Domain\Bundles\Contact\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
-use CASS\Domain\Contact\ContactBundle;
-use CASS\Domain\Contact\Parameters\CreateContactParameters;
+use CASS\Domain\Bundles\Contact\ContactBundle;
+use CASS\Domain\Bundles\Contact\Parameters\CreateContactParameters;
 
 final class CreateContactRequest extends SchemaParams
 {

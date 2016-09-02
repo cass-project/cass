@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\IM\Middleware\Request;
+namespace CASS\Domain\Bundles\IM\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
-use CASS\Domain\IM\IMBundle;
+use CASS\Domain\Bundles\IM\IMBundle;
 
 class MessagesRequest extends SchemaParams
 {

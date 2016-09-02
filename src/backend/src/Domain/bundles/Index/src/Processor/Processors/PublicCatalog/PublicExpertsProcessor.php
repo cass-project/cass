@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Index\Processor\Processors\PublicCatalog;
+namespace CASS\Domain\Bundles\Index\Processor\Processors\PublicCatalog;
 
-use CASS\Domain\Index\Source\Source;
-use CASS\Domain\Index\Processor\ProcessorVariants\AbstractExpertProcessor;
-use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Index\Source\Source;
+use CASS\Domain\Bundles\Index\Processor\ProcessorVariants\AbstractExpertProcessor;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
 
 final class PublicExpertsProcessor extends AbstractExpertProcessor
 {

@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Avatar\Service\Strategy;
+namespace CASS\Domain\Bundles\Avatar\Service\Strategy;
 
-use CASS\Domain\Avatar\Image\ImageCollection;
+use CASS\Domain\Bundles\Avatar\Image\ImageCollection;
 
-use CASS\Domain\Avatar\Strategy\ImageStrategy;
+use CASS\Domain\Bundles\Avatar\Strategy\ImageStrategy;
 use Intervention\Image\Image;
 
 interface AvatarServiceStrategy

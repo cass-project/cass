@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Collection;
+namespace CASS\Domain\Bundles\Collection;
 
 use CASS\Application\Bundle\GenericBundle;
 

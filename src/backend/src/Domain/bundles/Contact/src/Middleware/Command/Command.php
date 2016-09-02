@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Contact\Middleware\Command;
+namespace CASS\Domain\Bundles\Contact\Middleware\Command;
 
-use CASS\Domain\Auth\Service\CurrentAccountService;
-use CASS\Domain\Contact\Formatter\ContactFormatter;
-use CASS\Domain\Contact\Service\ContactService;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Contact\Formatter\ContactFormatter;
+use CASS\Domain\Bundles\Contact\Service\ContactService;
 
 abstract class Command implements \CASS\Application\Command\Command
 {

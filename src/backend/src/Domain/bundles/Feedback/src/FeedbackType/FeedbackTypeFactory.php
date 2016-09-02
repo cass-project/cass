@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Feedback\FeedbackType;
+namespace CASS\Domain\Bundles\Feedback\FeedbackType;
 
-use CASS\Domain\Feedback\Exception\InvalidFeedbackTypeException;
-use CASS\Domain\Feedback\FeedbackType\Types\FTCommonQuestion;
-use CASS\Domain\Feedback\FeedbackType\Types\FTSuggestion;
-use CASS\Domain\Feedback\FeedbackType\Types\FTThemeRequest;
+use CASS\Domain\Bundles\Feedback\Exception\InvalidFeedbackTypeException;
+use CASS\Domain\Bundles\Feedback\FeedbackType\Types\FTCommonQuestion;
+use CASS\Domain\Bundles\Feedback\FeedbackType\Types\FTSuggestion;
+use CASS\Domain\Bundles\Feedback\FeedbackType\Types\FTThemeRequest;
 
 final class FeedbackTypeFactory
 {

@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Theme\Tests\REST\Paths;
+namespace CASS\Domain\Bundles\Theme\Tests\REST\Paths;
 
-use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use CASS\Domain\Theme\Entity\Theme;
-use CASS\Domain\Theme\Tests\ThemeMiddlewareTest;
+use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Bundles\Theme\Entity\Theme;
+use CASS\Domain\Bundles\Theme\Tests\ThemeMiddlewareTest;
 
 /**
  * @backupGlobals disabled

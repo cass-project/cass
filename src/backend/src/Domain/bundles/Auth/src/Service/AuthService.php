@@ -1,18 +1,18 @@
 <?php
-namespace CASS\Domain\Auth\Service;
+namespace CASS\Domain\Bundles\Auth\Service;
 
-use CASS\Domain\Account\Service\AccountService;
-use CASS\Domain\Auth\Middleware\AuthStrategy\SessionStrategy;
-use CASS\Domain\Auth\Parameters\SignInParameters;
-use CASS\Domain\Auth\Parameters\SignUpParameters;
-use CASS\Domain\Auth\Exception\InvalidCredentialsException;
-use CASS\Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
-use CASS\Domain\Auth\Service\AuthService\SignUpValidation\HasAllRequiredFields;
-use CASS\Domain\Auth\Service\AuthService\SignUpValidation\HasSameAccount;
-use CASS\Domain\Auth\Service\AuthService\SignUpValidation\IsEmailValid;
-use CASS\Domain\Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
-use CASS\Domain\Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
-use CASS\Domain\Account\Entity\Account;
+use CASS\Domain\Bundles\Account\Service\AccountService;
+use CASS\Domain\Bundles\Auth\Middleware\AuthStrategy\SessionStrategy;
+use CASS\Domain\Bundles\Auth\Parameters\SignInParameters;
+use CASS\Domain\Bundles\Auth\Parameters\SignUpParameters;
+use CASS\Domain\Bundles\Auth\Exception\InvalidCredentialsException;
+use CASS\Domain\Bundles\Auth\Service\AuthService\OAuth2\RegistrationRequest;
+use CASS\Domain\Bundles\Auth\Service\AuthService\SignUpValidation\HasAllRequiredFields;
+use CASS\Domain\Bundles\Auth\Service\AuthService\SignUpValidation\HasSameAccount;
+use CASS\Domain\Bundles\Auth\Service\AuthService\SignUpValidation\IsEmailValid;
+use CASS\Domain\Bundles\Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
+use CASS\Domain\Bundles\Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
+use CASS\Domain\Bundles\Account\Entity\Account;
 
 class AuthService
 {

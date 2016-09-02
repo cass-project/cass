@@ -1,12 +1,12 @@
 <?php
-namespace CASS\Domain\Post\Tests\REST\Paths;
+namespace CASS\Domain\Bundles\Post\Tests\REST\Paths;
 
-use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use CASS\Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
-use CASS\Domain\Post\Entity\PostAttachmentOwner;
-use CASS\Domain\Post\PostType\Types\DefaultPostType;
-use CASS\Domain\Post\PostType\Types\DiscussionPostType;
-use CASS\Domain\Post\Tests\PostMiddlewareTest;
+use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Bundles\Collection\Tests\Fixtures\SampleCollectionsFixture;
+use CASS\Domain\Bundles\Post\Entity\PostAttachmentOwner;
+use CASS\Domain\Bundles\Post\PostType\Types\DefaultPostType;
+use CASS\Domain\Bundles\Post\PostType\Types\DiscussionPostType;
+use CASS\Domain\Bundles\Post\Tests\PostMiddlewareTest;
 use Zend\Diactoros\UploadedFile;
 
 /**

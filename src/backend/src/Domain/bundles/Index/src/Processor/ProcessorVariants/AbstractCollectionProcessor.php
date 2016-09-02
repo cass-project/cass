@@ -1,12 +1,12 @@
 <?php
-namespace CASS\Domain\Index\Processor\ProcessorVariants;
+namespace CASS\Domain\Bundles\Index\Processor\ProcessorVariants;
 
-use CASS\Domain\Collection\Entity\Collection;
-use CASS\Domain\Feed\Factory\FeedSourceFactory;
-use CASS\Domain\Index\Entity\IndexedEntity;
-use CASS\Domain\Index\Processor\Processor;
-use CASS\Domain\Index\Service\ThemeWeightCalculator\ThemeWeightCalculator;
-use CASS\Domain\Index\Source\Source;
+use CASS\Domain\Bundles\Collection\Entity\Collection;
+use CASS\Domain\Bundles\Feed\Factory\FeedSourceFactory;
+use CASS\Domain\Bundles\Index\Entity\IndexedEntity;
+use CASS\Domain\Bundles\Index\Processor\Processor;
+use CASS\Domain\Bundles\Index\Service\ThemeWeightCalculator\ThemeWeightCalculator;
+use CASS\Domain\Bundles\Index\Source\Source;
 use MongoDB\Database;
 
 abstract class AbstractCollectionProcessor implements Processor
@@ -32,7 +32,7 @@ abstract class AbstractCollectionProcessor implements Processor
 
     public function process(IndexedEntity $entity)
     {
-        /** @var \CASS\Domain\Collection\Entity\Collection $entity */
+        /** @var \CASS\Domain\Bundles\Collection\Entity\Collection $entity */
         $source = $this->getSource($entity);
         $collection = $this->mongoDB->selectCollection($source->getMongoDBCollection());
 
@@ -54,7 +54,7 @@ abstract class AbstractCollectionProcessor implements Processor
 
     public function exclude(IndexedEntity $entity)
     {
-        /** @var \CASS\Domain\Collection\Entity\Collection $entity */
+        /** @var \CASS\Domain\Bundles\Collection\Entity\Collection $entity */
         if($this->isIndexable($entity)) {
             $source = $this->getSource($entity);
             $collection = $this->mongoDB->selectCollection($source->getMongoDBCollection());

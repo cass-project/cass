@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\OpenGraph;
+namespace CASS\Domain\Bundles\OpenGraph;
 
 use CASS\Application\Bundle\GenericBundle;
 

@@ -1,13 +1,13 @@
 <?php
-namespace CASS\Domain\Profile\Middleware\Command;
+namespace CASS\Domain\Bundles\Profile\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Profile\Entity\Profile\Greetings\Greetings;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
-use CASS\Domain\Profile\Middleware\Request\GreetingsFLRequest;
-use CASS\Domain\Profile\Middleware\Request\GreetingsLFMRequest;
-use CASS\Domain\Profile\Middleware\Request\GreetingsNRequest;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings\Greetings;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Profile\Middleware\Request\GreetingsFLRequest;
+use CASS\Domain\Bundles\Profile\Middleware\Request\GreetingsLFMRequest;
+use CASS\Domain\Bundles\Profile\Middleware\Request\GreetingsNRequest;
 use Psr\Http\Message\ServerRequestInterface;
 use React\Http\Response;
 

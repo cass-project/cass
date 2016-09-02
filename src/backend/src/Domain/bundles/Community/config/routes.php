@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Community;
+namespace CASS\Domain\Bundles\Community;
 
-use CASS\Domain\Community\Middleware\CommunityFeaturesMiddleware;
-use CASS\Domain\Community\Middleware\CommunityMiddleware;
+use CASS\Domain\Bundles\Community\Middleware\CommunityFeaturesMiddleware;
+use CASS\Domain\Bundles\Community\Middleware\CommunityMiddleware;
 
 return [
     'common' => [

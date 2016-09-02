@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\IM\Service\ContentTypeIdentifier;
+namespace CASS\Domain\Bundles\IM\Service\ContentTypeIdentifier;
 
 interface ContentTypeIdentifierEntity
 {

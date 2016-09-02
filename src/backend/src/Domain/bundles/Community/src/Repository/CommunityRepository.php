@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Community\Repository;
+namespace CASS\Domain\Bundles\Community\Repository;
 
-use CASS\Domain\Community\Entity\Community;
+use CASS\Domain\Bundles\Community\Entity\Community;
 use Doctrine\ORM\EntityRepository;
-use CASS\Domain\Community\Exception\CommunityNotFoundException;
+use CASS\Domain\Bundles\Community\Exception\CommunityNotFoundException;
 
 class CommunityRepository extends EntityRepository
 {

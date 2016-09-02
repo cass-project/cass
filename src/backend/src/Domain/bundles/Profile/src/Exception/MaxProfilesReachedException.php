@@ -1,4 +1,4 @@
 <?php
-namespace CASS\Domain\Profile\Exception;
+namespace CASS\Domain\Bundles\Profile\Exception;
 
 class MaxProfilesReachedException extends \Exception {}

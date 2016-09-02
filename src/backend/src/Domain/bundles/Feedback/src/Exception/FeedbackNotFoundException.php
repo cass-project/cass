@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Feedback\Exception;
+namespace CASS\Domain\Bundles\Feedback\Exception;
 
 class FeedbackNotFoundException extends \Exception
 {

@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Attachment\Exception;
+namespace CASS\Domain\Bundles\Attachment\Exception;
 
 class AttachmentNotFoundException extends \Exception
 {

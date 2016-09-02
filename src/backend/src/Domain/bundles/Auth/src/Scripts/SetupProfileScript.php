@@ -1,9 +1,9 @@
 <?php
 
 
-namespace CASS\Domain\Auth\Scripts;
+namespace CASS\Domain\Bundles\Auth\Scripts;
 
-use CASS\Domain\Profile\Entity\ProfileGreetings;
+use CASS\Domain\Bundles\Profile\Entity\ProfileGreetings;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
 class SetupProfileScript

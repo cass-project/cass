@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Contact\Repository;
+namespace CASS\Domain\Bundles\Contact\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use CASS\Domain\Contact\Entity\Contact;
-use CASS\Domain\Contact\Exception\ContactNotFoundException;
+use CASS\Domain\Bundles\Contact\Entity\Contact;
+use CASS\Domain\Bundles\Contact\Exception\ContactNotFoundException;
 
 final class ContactRepository extends EntityRepository
 {

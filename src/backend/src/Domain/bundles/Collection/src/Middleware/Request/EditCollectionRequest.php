@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Collection\Middleware\Request;
+namespace CASS\Domain\Bundles\Collection\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
-use CASS\Domain\Collection\CollectionBundle;
-use CASS\Domain\Collection\Parameters\EditCollectionParameters;
+use CASS\Domain\Bundles\Collection\CollectionBundle;
+use CASS\Domain\Bundles\Collection\Parameters\EditCollectionParameters;
 
 class EditCollectionRequest extends SchemaParams
 {

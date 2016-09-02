@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Feedback\Middleware\Parameters;
+namespace CASS\Domain\Bundles\Feedback\Middleware\Parameters;
 
 class CreateFeedbackResponseParameters
 {

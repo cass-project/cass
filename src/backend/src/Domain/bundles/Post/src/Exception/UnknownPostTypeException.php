@@ -1,4 +1,4 @@
 <?php
-namespace CASS\Domain\Post\Exception;
+namespace CASS\Domain\Bundles\Post\Exception;
 
 class UnknownPostTypeException extends \Exception {}

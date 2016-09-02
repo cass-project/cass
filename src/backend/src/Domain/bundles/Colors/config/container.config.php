@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Colors;
+namespace CASS\Domain\Bundles\Colors;
 
 use function DI\object;
 use function DI\factory;

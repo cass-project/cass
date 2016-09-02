@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Post\Entity;
+namespace CASS\Domain\Bundles\Post\Entity;
 
-use CASS\Domain\Attachment\Entity\AttachmentOwner;
+use CASS\Domain\Bundles\Attachment\Entity\AttachmentOwner;
 
 final class PostAttachmentOwner implements AttachmentOwner
 {

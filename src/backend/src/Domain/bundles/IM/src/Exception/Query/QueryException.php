@@ -1,4 +1,4 @@
 <?php
-namespace CASS\Domain\IM\Exception\Query;
+namespace CASS\Domain\Bundles\IM\Exception\Query;
 
 abstract class QueryException extends \Exception {}

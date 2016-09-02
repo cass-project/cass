@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Colors;
+namespace CASS\Domain\Bundles\Colors;
 
-use CASS\Domain\Colors\Middleware\ColorsMiddleware;
+use CASS\Domain\Bundles\Colors\Middleware\ColorsMiddleware;
 
 return [
     'common' => [

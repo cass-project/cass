@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\IM\Query\Criteria\CursorCriteria;
+namespace CASS\Domain\Bundles\IM\Query\Criteria\CursorCriteria;
 
-use CASS\Domain\IM\Exception\Query\InvalidCriteriaParamsException;
-use CASS\Domain\IM\Query\Criteria\Criteria;
+use CASS\Domain\Bundles\IM\Exception\Query\InvalidCriteriaParamsException;
+use CASS\Domain\Bundles\IM\Query\Criteria\Criteria;
 
 final class CursorCriteria implements Criteria
 {

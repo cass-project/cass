@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\IM\Query\Options\MarkAsReadOption;
+namespace CASS\Domain\Bundles\IM\Query\Options\MarkAsReadOption;
 
-use CASS\Domain\IM\Query\Options\Option;
+use CASS\Domain\Bundles\IM\Query\Options\Option;
 
 final class MarkAsReadOption implements Option
 {

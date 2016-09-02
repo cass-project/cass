@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\IM\Query\Source\ProfileSource;
+namespace CASS\Domain\Bundles\IM\Query\Source\ProfileSource;
 
-use CASS\Domain\IM\Exception\Query\InvalidSourceParamsException;
-use CASS\Domain\IM\Query\Source\Source;
+use CASS\Domain\Bundles\IM\Exception\Query\InvalidSourceParamsException;
+use CASS\Domain\Bundles\IM\Query\Source\Source;
 
 final class ProfileSource implements Source
 {

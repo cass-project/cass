@@ -1,23 +1,23 @@
 <?php
-namespace CASS\Domain\Collection\Entity;
+namespace CASS\Domain\Bundles\Collection\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
 use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
 use CASS\Util\JSONSerializable;
-use CASS\Domain\Avatar\Entity\ImageEntity;
-use CASS\Domain\Collection\Exception\InvalidCollectionOptionsException;
-use CASS\Domain\Collection\Exception\PublicEnabledException;
-use CASS\Domain\Community\Entity\Community;
-use CASS\Domain\Avatar\Entity\ImageEntityTrait;
-use CASS\Domain\Index\Entity\IndexedEntity;
-use CASS\Domain\Profile\Entity\Profile\Greetings;
-use CASS\Domain\Theme\Strategy\ThemeIdsEntityAware;
-use CASS\Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
+use CASS\Domain\Bundles\Avatar\Entity\ImageEntity;
+use CASS\Domain\Bundles\Collection\Exception\InvalidCollectionOptionsException;
+use CASS\Domain\Bundles\Collection\Exception\PublicEnabledException;
+use CASS\Domain\Bundles\Community\Entity\Community;
+use CASS\Domain\Bundles\Avatar\Entity\ImageEntityTrait;
+use CASS\Domain\Bundles\Index\Entity\IndexedEntity;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Bundles\Theme\Strategy\ThemeIdsEntityAware;
+use CASS\Domain\Bundles\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
 
 /**
- * @Entity(repositoryClass="CASS\Domain\Collection\Repository\CollectionRepository")
+ * @Entity(repositoryClass="CASS\Domain\Bundles\Collection\Repository\CollectionRepository")
  * @Table(name="collection")
  */
 class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, ThemeIdsEntityAware, IndexedEntity

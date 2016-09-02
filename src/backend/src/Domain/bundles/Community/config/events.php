@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Community;
+namespace CASS\Domain\Bundles\Community;
 
 use DI\Container;
-use CASS\Domain\Community\Events\DashboardCommunityCollectionEvents;
-use CASS\Domain\Community\Events\LinkCollectionEvents;
+use CASS\Domain\Bundles\Community\Events\DashboardCommunityCollectionEvents;
+use CASS\Domain\Bundles\Community\Events\LinkCollectionEvents;
 use Evenement\EventEmitterInterface;
 
 return function(EventEmitterInterface $globalEmitter): array

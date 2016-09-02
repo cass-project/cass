@@ -1,20 +1,20 @@
 <?php
-namespace CASS\Domain\Community\Service;
+namespace CASS\Domain\Bundles\Community\Service;
 
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareService;
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareTrait;
-use CASS\Domain\Auth\Service\CurrentAccountService;
-use CASS\Domain\Avatar\Image\ImageCollection;
-use CASS\Domain\Avatar\Parameters\UploadImageParameters;
-use CASS\Domain\Avatar\Service\AvatarService;
-use CASS\Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
-use CASS\Domain\Community\Entity\Community;
-use CASS\Domain\Community\Image\CommunityImageStrategy;
-use CASS\Domain\Community\Parameters\CreateCommunityParameters;
-use CASS\Domain\Community\Parameters\EditCommunityParameters;
-use CASS\Domain\Community\Parameters\SetPublicOptionsParameters;
-use CASS\Domain\Community\Repository\CommunityRepository;
-use CASS\Domain\Theme\Repository\ThemeRepository;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Avatar\Image\ImageCollection;
+use CASS\Domain\Bundles\Avatar\Parameters\UploadImageParameters;
+use CASS\Domain\Bundles\Avatar\Service\AvatarService;
+use CASS\Domain\Bundles\Collection\Collection\CollectionTree\ImmutableCollectionTree;
+use CASS\Domain\Bundles\Community\Entity\Community;
+use CASS\Domain\Bundles\Community\Image\CommunityImageStrategy;
+use CASS\Domain\Bundles\Community\Parameters\CreateCommunityParameters;
+use CASS\Domain\Bundles\Community\Parameters\EditCommunityParameters;
+use CASS\Domain\Bundles\Community\Parameters\SetPublicOptionsParameters;
+use CASS\Domain\Bundles\Community\Repository\CommunityRepository;
+use CASS\Domain\Bundles\Theme\Repository\ThemeRepository;
 use League\Flysystem\FilesystemInterface;
 
 class CommunityService implements EventEmitterAwareService

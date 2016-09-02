@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Profile\Parameters;
+namespace CASS\Domain\Bundles\Profile\Parameters;
 
 class ExpertInParameters
 {

@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Account\Tests\REST\Paths;
+namespace CASS\Domain\Bundles\Account\Tests\REST\Paths;
 
-use CASS\Domain\Account\Tests\AccountMiddlewareTestCase;
-use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Bundles\Account\Tests\AccountMiddlewareTestCase;
+use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 
 /**
  * @backupGlobals disabled

@@ -1,11 +1,11 @@
 <?php
-namespace CASS\Domain\Account\Repository;
+namespace CASS\Domain\Bundles\Account\Repository;
 
-use CASS\Domain\Account\Entity\Account;
-use CASS\Domain\Account\Entity\OAuthAccount;
-use CASS\Domain\Account\Exception\AccountNotFoundException;
+use CASS\Domain\Bundles\Account\Entity\Account;
+use CASS\Domain\Bundles\Account\Entity\OAuthAccount;
+use CASS\Domain\Bundles\Account\Exception\AccountNotFoundException;
 use Doctrine\ORM\EntityRepository;
-use CASS\Domain\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
 
 class AccountRepository extends EntityRepository
 {
@@ -78,7 +78,7 @@ class AccountRepository extends EntityRepository
         ]);
 
         if ($account === null) {
-            throw new AccountNotFoundException(sprintf('CASS\Domain\Account with api_key `%s` not found', $apiKey));
+            throw new AccountNotFoundException(sprintf('CASS\Domain\Bundles\Account with api_key `%s` not found', $apiKey));
         }
 
         return $account;

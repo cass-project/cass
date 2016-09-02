@@ -5,10 +5,10 @@
 
 ```php
 <?php
-namespace CASS\Domain\Profile\Console\Command;
+namespace CASS\Domain\Bundles\Profile\Console\Command;
 
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
-use CASS\Domain\Profile\Service\ProfileService;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Profile\Service\ProfileService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,7 +31,7 @@ class ProfileCard extends Command
         $this
             ->setName('profile:card')
             ->setDescription('ProfleBundle: show profile card')
-            ->addArgument('id', InputArgument::REQUIRED, 'CASS\Domain\Profile ID');
+            ->addArgument('id', InputArgument::REQUIRED, 'CASS\Domain\Bundles\Profile ID');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -42,14 +42,14 @@ class ProfileCard extends Command
             $profile = $this->profileService->getProfileById($profileId);
 
             $output->writeln([
-                "CASS\Domain\Profile(#{$profile->getId()}): ",
+                "CASS\Domain\Bundles\Profile(#{$profile->getId()}): ",
                 "-----",
                 "AccountID: {$profile->getAccount()->getId()}",
                 "Greetings: {$profile->getProfileGreetings()->getGreetings()}",
                 "-----",
             ]);
         }catch(ProfileNotFoundException $e) {
-            $output->writeln(sprintf("CASS\Domain\Profile with id `%d` not found", $profileId));
+            $output->writeln(sprintf("CASS\Domain\Bundles\Profile with id `%d` not found", $profileId));
         }
     }
 }
@@ -59,7 +59,7 @@ class ProfileCard extends Command
 
 ```php
 <?php
-use CASS\Domain\Profile\Console\Command\ProfileCard;
+use CASS\Domain\Bundles\Profile\Console\Command\ProfileCard;
 
 use function DI\object;
 use function DI\factory;
@@ -79,7 +79,7 @@ return [
 
 ```
 <?php
-use CASS\Domain\Profile\Console\Command\ProfileCard;
+use CASS\Domain\Bundles\Profile\Console\Command\ProfileCard;
 
 return [
     'console' => [

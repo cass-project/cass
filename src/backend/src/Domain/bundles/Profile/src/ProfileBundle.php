@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Profile;
+namespace CASS\Domain\Bundles\Profile;
 
 use CASS\Application\Bundle\GenericBundle;
 use CASS\Application\Bundles\Frontline\FrontlineBundleInjectable;
-use CASS\Domain\Profile\Frontline\ConfigProfileFrontlineScript;
+use CASS\Domain\Bundles\Profile\Frontline\ConfigProfileFrontlineScript;
 
 class ProfileBundle extends GenericBundle implements FrontlineBundleInjectable
 {

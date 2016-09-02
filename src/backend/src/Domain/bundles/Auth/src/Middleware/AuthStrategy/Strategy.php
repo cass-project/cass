@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Auth\Middleware\AuthStrategy;
+namespace CASS\Domain\Bundles\Auth\Middleware\AuthStrategy;
 
 use Psr\Http\Message\ServerRequestInterface;
 

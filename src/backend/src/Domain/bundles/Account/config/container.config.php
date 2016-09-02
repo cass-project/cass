@@ -1,16 +1,16 @@
 <?php
-namespace CASS\Domain\Account;
+namespace CASS\Domain\Bundles\Account;
 
 use function DI\object;
 use function DI\factory;
 use function DI\get;
 
-use CASS\Domain\Account\Entity\Account;
-use CASS\Domain\Account\Entity\AccountAppAccess;
-use CASS\Domain\Account\Entity\OAuthAccount;
-use CASS\Domain\Account\Repository\AccountAppAccessRepository;
-use CASS\Domain\Account\Repository\AccountRepository;
-use CASS\Domain\Account\Repository\OAuthAccountRepository;
+use CASS\Domain\Bundles\Account\Entity\Account;
+use CASS\Domain\Bundles\Account\Entity\AccountAppAccess;
+use CASS\Domain\Bundles\Account\Entity\OAuthAccount;
+use CASS\Domain\Bundles\Account\Repository\AccountAppAccessRepository;
+use CASS\Domain\Bundles\Account\Repository\AccountRepository;
+use CASS\Domain\Bundles\Account\Repository\OAuthAccountRepository;
 use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
 
 return [

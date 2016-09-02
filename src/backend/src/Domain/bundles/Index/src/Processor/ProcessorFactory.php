@@ -1,22 +1,22 @@
 <?php
-namespace CASS\Domain\Index\Processor;
+namespace CASS\Domain\Bundles\Index\Processor;
 
 use DI\Container;
-use CASS\Domain\Collection\Entity\Collection;
-use CASS\Domain\Community\Entity\Community;
-use CASS\Domain\Index\Entity\IndexedEntity;
-use CASS\Domain\Index\Exception\NoProcessorForEntityException;
-use CASS\Domain\Index\Processor\Processors\CollectionProcessor;
-use CASS\Domain\Index\Processor\Processors\CommunityProcessor;
-use CASS\Domain\Index\Processor\Processors\ProfileProcessor;
-use CASS\Domain\Index\Processor\Processors\PublicCatalog\PublicCollectionsProcessor;
-use CASS\Domain\Index\Processor\Processors\PublicCatalog\PublicCommunitiesProcessor;
-use CASS\Domain\Index\Processor\Processors\PublicCatalog\PublicContentProcessor;
-use CASS\Domain\Index\Processor\Processors\PublicCatalog\PublicDiscussionsProcessor;
-use CASS\Domain\Index\Processor\Processors\PublicCatalog\PublicExpertsProcessor;
-use CASS\Domain\Index\Processor\Processors\PublicCatalog\PublicProfilesProcessor;
-use CASS\Domain\Post\Entity\Post;
-use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Collection\Entity\Collection;
+use CASS\Domain\Bundles\Community\Entity\Community;
+use CASS\Domain\Bundles\Index\Entity\IndexedEntity;
+use CASS\Domain\Bundles\Index\Exception\NoProcessorForEntityException;
+use CASS\Domain\Bundles\Index\Processor\Processors\CollectionProcessor;
+use CASS\Domain\Bundles\Index\Processor\Processors\CommunityProcessor;
+use CASS\Domain\Bundles\Index\Processor\Processors\ProfileProcessor;
+use CASS\Domain\Bundles\Index\Processor\Processors\PublicCatalog\PublicCollectionsProcessor;
+use CASS\Domain\Bundles\Index\Processor\Processors\PublicCatalog\PublicCommunitiesProcessor;
+use CASS\Domain\Bundles\Index\Processor\Processors\PublicCatalog\PublicContentProcessor;
+use CASS\Domain\Bundles\Index\Processor\Processors\PublicCatalog\PublicDiscussionsProcessor;
+use CASS\Domain\Bundles\Index\Processor\Processors\PublicCatalog\PublicExpertsProcessor;
+use CASS\Domain\Bundles\Index\Processor\Processors\PublicCatalog\PublicProfilesProcessor;
+use CASS\Domain\Bundles\Post\Entity\Post;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
 
 final class ProcessorFactory
 {

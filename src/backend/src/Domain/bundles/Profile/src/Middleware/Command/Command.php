@@ -1,12 +1,12 @@
 <?php
-namespace CASS\Domain\Profile\Middleware\Command;
+namespace CASS\Domain\Bundles\Profile\Middleware\Command;
 
-use CASS\Domain\Account\Service\AccountService;
-use CASS\Domain\Auth\Service\CurrentAccountService;
-use CASS\Domain\Profile\Entity\Profile\Greetings;
-use CASS\Domain\Profile\Formatter\ProfileExtendedFormatter;
-use CASS\Domain\Profile\Service\ProfileService;
-use CASS\Domain\Profile\Validation\ProfileValidationService;
+use CASS\Domain\Bundles\Account\Service\AccountService;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Bundles\Profile\Formatter\ProfileExtendedFormatter;
+use CASS\Domain\Bundles\Profile\Service\ProfileService;
+use CASS\Domain\Bundles\Profile\Validation\ProfileValidationService;
 
 abstract class Command implements \CASS\Application\Command\Command
 {

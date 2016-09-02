@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Attachment\Service\FetchResource;
+namespace CASS\Domain\Bundles\Attachment\Service\FetchResource;
 
 final class Result
 {

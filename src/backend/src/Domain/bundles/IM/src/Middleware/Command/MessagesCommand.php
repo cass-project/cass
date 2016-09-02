@@ -1,11 +1,11 @@
 <?php
-namespace CASS\Domain\IM\Middleware\Command;
+namespace CASS\Domain\Bundles\IM\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\IM\Entity\Message;
-use CASS\Domain\IM\Exception\Query\QueryException;
-use CASS\Domain\IM\Middleware\Request\MessagesRequest;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\IM\Entity\Message;
+use CASS\Domain\Bundles\IM\Exception\Query\QueryException;
+use CASS\Domain\Bundles\IM\Middleware\Request\MessagesRequest;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use MongoDB\Model\BSONDocument;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

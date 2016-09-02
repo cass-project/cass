@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Collection;
+namespace CASS\Domain\Bundles\Collection;
 
-use CASS\Domain\Collection\Middleware\CollectionMiddleware;
+use CASS\Domain\Bundles\Collection\Middleware\CollectionMiddleware;
 return [
     'common' => [
         [

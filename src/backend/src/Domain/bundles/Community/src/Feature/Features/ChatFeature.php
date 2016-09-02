@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Community\Feature\Features;
+namespace CASS\Domain\Bundles\Community\Feature\Features;
 
-use CASS\Domain\Community\Entity\Community;
+use CASS\Domain\Bundles\Community\Entity\Community;
 
 final class ChatFeature extends AbstractFeature
 {

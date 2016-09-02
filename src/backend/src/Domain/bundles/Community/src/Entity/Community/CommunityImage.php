@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Community\Entity\Community;
+namespace CASS\Domain\Bundles\Community\Entity\Community;
 
 use CASS\Util\JSONSerializable;
 

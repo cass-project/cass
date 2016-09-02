@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Profile\Console\Command;
+namespace CASS\Domain\Bundles\Profile\Console\Command;
 
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
-use CASS\Domain\Profile\Service\ProfileService;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Profile\Service\ProfileService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,7 +25,7 @@ class ProfileCard extends Command
         $this
             ->setName('profile:card')
             ->setDescription('ProfileBundle: show profile card')
-            ->addArgument('id', InputArgument::REQUIRED, 'CASS\Domain\Profile ID');
+            ->addArgument('id', InputArgument::REQUIRED, 'CASS\Domain\Bundles\Profile ID');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

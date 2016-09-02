@@ -1,13 +1,13 @@
 <?php
-namespace CASS\Domain\ProfileCommunities;
+namespace CASS\Domain\Bundles\ProfileCommunities;
 
 use function DI\object;
 use function DI\factory;
 use function DI\get;
 
 use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
-use CASS\Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
-use CASS\Domain\ProfileCommunities\Repository\ProfileCommunitiesRepository;
+use CASS\Domain\Bundles\ProfileCommunities\Entity\ProfileCommunityEQ;
+use CASS\Domain\Bundles\ProfileCommunities\Repository\ProfileCommunitiesRepository;
 
 return [
     'php-di' => [

@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Account\Repository;
+namespace CASS\Domain\Bundles\Account\Repository;
 
-use CASS\Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
-use CASS\Domain\Account\Entity\OAuthAccount;
-use CASS\Domain\Account\Exception\AccountNotFoundException;
+use CASS\Domain\Bundles\Auth\Service\AuthService\OAuth2\RegistrationRequest;
+use CASS\Domain\Bundles\Account\Entity\OAuthAccount;
+use CASS\Domain\Bundles\Account\Exception\AccountNotFoundException;
 use Doctrine\ORM\EntityRepository;
 
 class OAuthAccountRepository extends EntityRepository

@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Profile\Entity\Profile\Gender;
+namespace CASS\Domain\Bundles\Profile\Entity\Profile\Gender;
 
 use CASS\Util\JSONSerializable;
-use CASS\Domain\Profile\Exception\UnknownGenderException;
+use CASS\Domain\Bundles\Profile\Exception\UnknownGenderException;
 
 abstract class Gender implements JSONSerializable
 {

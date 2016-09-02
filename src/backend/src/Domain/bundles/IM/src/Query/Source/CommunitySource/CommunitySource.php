@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\IM\Query\Source\CommunitySource;
+namespace CASS\Domain\Bundles\IM\Query\Source\CommunitySource;
 
-use CASS\Domain\IM\Query\Source\Source;
+use CASS\Domain\Bundles\IM\Query\Source\Source;
 
 final class CommunitySource implements Source
 {

@@ -1,12 +1,12 @@
 <?php
-namespace CASS\Domain\Avatar\Service\Strategy;
+namespace CASS\Domain\Bundles\Avatar\Service\Strategy;
 
 use CASS\Util\GenerateRandomString;
-use CASS\Domain\Avatar\Exception\InvalidRatioException;
-use CASS\Domain\Avatar\Image\Image;
-use CASS\Domain\Avatar\Image\ImageCollection;
-use CASS\Domain\Avatar\Strategy\ImageStrategy;
-use CASS\Domain\Colors\Service\ColorsService;
+use CASS\Domain\Bundles\Avatar\Exception\InvalidRatioException;
+use CASS\Domain\Bundles\Avatar\Image\Image;
+use CASS\Domain\Bundles\Avatar\Image\ImageCollection;
+use CASS\Domain\Bundles\Avatar\Strategy\ImageStrategy;
+use CASS\Domain\Bundles\Colors\Service\ColorsService;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Image as ImageLayer;
 use League\Flysystem\FilesystemInterface;

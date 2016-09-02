@@ -1,20 +1,20 @@
 <?php
-namespace CASS\Domain\Auth\Middleware;
+namespace CASS\Domain\Bundles\Auth\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Bundles\Frontline\Service\FrontlineService;
 use CASS\Application\Service\CommandService;
-use CASS\Domain\Account\Exception\AccountNotFoundException;
-use CASS\Domain\Auth\Middleware\Command\OAuth\BattleNetCommand;
-use CASS\Domain\Auth\Middleware\Command\OAuth\FacebookCommand;
-use CASS\Domain\Auth\Middleware\Command\OAuth\GoogleCommand;
-use CASS\Domain\Auth\Middleware\Command\OAuth\MailruCommand;
-use CASS\Domain\Auth\Middleware\Command\OAuth\OdnoklassnikiCommand;
-use CASS\Domain\Auth\Middleware\Command\OAuth\VkCommand;
-use CASS\Domain\Auth\Middleware\Command\OAuth\YandexCommand;
-use CASS\Domain\Auth\Middleware\Command\SignInCommand;
-use CASS\Domain\Auth\Middleware\Command\SignOutCommand;
-use CASS\Domain\Auth\Middleware\Command\SignUpCommand;
+use CASS\Domain\Bundles\Account\Exception\AccountNotFoundException;
+use CASS\Domain\Bundles\Auth\Middleware\Command\OAuth\BattleNetCommand;
+use CASS\Domain\Bundles\Auth\Middleware\Command\OAuth\FacebookCommand;
+use CASS\Domain\Bundles\Auth\Middleware\Command\OAuth\GoogleCommand;
+use CASS\Domain\Bundles\Auth\Middleware\Command\OAuth\MailruCommand;
+use CASS\Domain\Bundles\Auth\Middleware\Command\OAuth\OdnoklassnikiCommand;
+use CASS\Domain\Bundles\Auth\Middleware\Command\OAuth\VkCommand;
+use CASS\Domain\Bundles\Auth\Middleware\Command\OAuth\YandexCommand;
+use CASS\Domain\Bundles\Auth\Middleware\Command\SignInCommand;
+use CASS\Domain\Bundles\Auth\Middleware\Command\SignOutCommand;
+use CASS\Domain\Bundles\Auth\Middleware\Command\SignUpCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

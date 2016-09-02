@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\EmailVerification;
+namespace CASS\Domain\Bundles\EmailVerification;
 
-use CASS\Domain\EmailVerification\Console\Command\AMQPSendMail;
+use CASS\Domain\Bundles\EmailVerification\Console\Command\AMQPSendMail;
 
 return [
     'php-di' => [

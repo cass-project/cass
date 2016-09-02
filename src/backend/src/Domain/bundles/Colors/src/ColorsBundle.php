@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Colors;
+namespace CASS\Domain\Bundles\Colors;
 
 use CASS\Application\Bundle\GenericBundle;
 use CASS\Application\Bundles\Frontline\FrontlineBundleInjectable;
-use CASS\Domain\Colors\Frontline\ConfigColorsFrontlineScript;
+use CASS\Domain\Bundles\Colors\Frontline\ConfigColorsFrontlineScript;
 
 final class ColorsBundle extends GenericBundle implements FrontlineBundleInjectable
 {
