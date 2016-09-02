@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-sudo -i
-
 # Locale issues
 sudo apt-get update
 sudo apt-get install language-pack-en language-pack-en-base -y

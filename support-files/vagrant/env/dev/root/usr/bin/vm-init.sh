@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-sudo -i
-
 # Locale issues
 sudo apt-get update
 sudo apt-get install language-pack-en language-pack-en-base -y
@@ -55,15 +53,6 @@ sudo n 5.11.1
 mysql -uroot -p"1234" -e "CREATE DATABASE cass"
 mysql -uroot -p"1234" -e "CREATE DATABASE cass_testing"
 
-# #############
-# MONGO-EXPRESS
-# #############
-sudo mkdir /opt/mongo-express
-cd /opt/mongo-express
-sudo npm install -g mongo-express
-sudo npm install mongo-express
-sudo chown -R www-data:www-data /opt/mongo-express
-
 # #####
 # CLONE
 # #####
@@ -86,7 +75,7 @@ sudo ln -s /usr/bin/composer.phar /usr/bin/composer
 
 # Install composer dependencies
 cd /opt/cass/src/backend/
-composer.phar install
+sudo composer.phar install
 
 # error log
 sudo touch /var/log/php-errors.log
