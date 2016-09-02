@@ -1,15 +1,15 @@
 <?php
-namespace CASS\Domain\Feedback\Entity;
+namespace CASS\Domain\Bundles\Feedback\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\JSONSerializable;
-use CASS\Domain\Feedback\Exception\EmptyDescriptionException;
-use CASS\Domain\Feedback\FeedbackType\FeedbackType;
-use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Feedback\Exception\EmptyDescriptionException;
+use CASS\Domain\Bundles\Feedback\FeedbackType\FeedbackType;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
 
 /**
- * @Entity(repositoryClass="CASS\Domain\Feedback\Repository\FeedbackRepository")
+ * @Entity(repositoryClass="CASS\Domain\Bundles\Feedback\Repository\FeedbackRepository")
  * @Table(name="feedback")
  */
 class Feedback implements JSONSerializable, IdEntity
@@ -27,14 +27,14 @@ class Feedback implements JSONSerializable, IdEntity
     private $createdAt;
 
     /**
-     * @ManyToOne(targetEntity="CASS\Domain\Profile\Entity\Profile")
+     * @ManyToOne(targetEntity="CASS\Domain\Bundles\Profile\Entity\Profile")
      * @JoinColumn(name="profile_id", referencedColumnName="id")
      * @var Profile
      */
     private $profile;
 
     /**
-     * @OneToOne(targetEntity="CASS\Domain\Feedback\Entity\FeedbackResponse", cascade={"all"})
+     * @OneToOne(targetEntity="CASS\Domain\Bundles\Feedback\Entity\FeedbackResponse", cascade={"all"})
      * @JoinColumn(name="answer_id", referencedColumnName="id")
      * @var FeedbackResponse
      */

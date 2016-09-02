@@ -1,12 +1,12 @@
 <?php
-namespace CASS\Domain\Feed\Search\Criteria;
+namespace CASS\Domain\Bundles\Feed\Search\Criteria;
 
-use CASS\Domain\Feed\Exception\UnknownCriteriaException;
-use CASS\Domain\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\SortCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
+use CASS\Domain\Bundles\Feed\Exception\UnknownCriteriaException;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\QueryStringCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SeekCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SortCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
 
 final class CriteriaFactory
 {

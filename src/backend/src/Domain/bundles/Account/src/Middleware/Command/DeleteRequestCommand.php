@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Account\Middleware\Command;
+namespace CASS\Domain\Bundles\Account\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Account\Exception\AccountHasDeleteRequestException;
+use CASS\Domain\Bundles\Account\Exception\AccountHasDeleteRequestException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

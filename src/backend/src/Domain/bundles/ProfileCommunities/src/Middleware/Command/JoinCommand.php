@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\ProfileCommunities\Middleware\Command;
+namespace CASS\Domain\Bundles\ProfileCommunities\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
-use CASS\Domain\ProfileCommunities\Exception\AlreadyJoinedException;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\ProfileCommunities\Exception\AlreadyJoinedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

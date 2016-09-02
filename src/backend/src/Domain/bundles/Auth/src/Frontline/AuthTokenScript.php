@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Auth\Frontline;
+namespace CASS\Domain\Bundles\Auth\Frontline;
 
 use CASS\Application\Bundles\Frontline\FrontlineScript;
-use CASS\Domain\Auth\Service\CurrentAccountService;
-use CASS\Domain\Profile\Entity\Profile;
-use CASS\Domain\Profile\Formatter\ProfileExtendedFormatter;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Profile\Formatter\ProfileExtendedFormatter;
 
 class AuthTokenScript implements FrontlineScript
 {

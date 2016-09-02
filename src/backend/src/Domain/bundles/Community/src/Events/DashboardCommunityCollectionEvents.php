@@ -1,11 +1,11 @@
 <?php
-namespace CASS\Domain\Community\Events;
+namespace CASS\Domain\Bundles\Community\Events;
 
 use CASS\Application\Events\EventsBootstrapInterface;
-use CASS\Domain\Collection\Parameters\CreateCollectionParameters;
-use CASS\Domain\Collection\Service\CollectionService;
-use CASS\Domain\Community\Entity\Community;
-use CASS\Domain\Community\Service\CommunityService;
+use CASS\Domain\Bundles\Collection\Parameters\CreateCollectionParameters;
+use CASS\Domain\Bundles\Collection\Service\CollectionService;
+use CASS\Domain\Bundles\Community\Entity\Community;
+use CASS\Domain\Bundles\Community\Service\CommunityService;
 use Evenement\EventEmitterInterface;
 
 final class DashboardCommunityCollectionEvents implements EventsBootstrapInterface

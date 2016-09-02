@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Avatar;
+namespace CASS\Domain\Bundles\Avatar;
 
 use CASS\Application\Bundle\GenericBundle;
 

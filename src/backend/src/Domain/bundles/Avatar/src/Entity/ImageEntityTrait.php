@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Avatar\Entity;
+namespace CASS\Domain\Bundles\Avatar\Entity;
 
-use CASS\Domain\Avatar\Image\ImageCollection;
+use CASS\Domain\Bundles\Avatar\Image\ImageCollection;
 
 trait ImageEntityTrait
 {

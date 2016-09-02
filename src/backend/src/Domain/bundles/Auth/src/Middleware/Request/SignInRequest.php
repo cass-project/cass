@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Auth\Middleware\Request;
+namespace CASS\Domain\Bundles\Auth\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
-use CASS\Domain\Auth\AuthBundle;
-use CASS\Domain\Auth\Parameters\SignInParameters;
+use CASS\Domain\Bundles\Auth\AuthBundle;
+use CASS\Domain\Bundles\Auth\Parameters\SignInParameters;
 
 class SignInRequest extends SchemaParams
 {

@@ -1,15 +1,15 @@
 <?php
-namespace CASS\Domain\Feed\Factory;
+namespace CASS\Domain\Bundles\Feed\Factory;
 
-use CASS\Domain\Index\Source\Sources\CollectionSource;
-use CASS\Domain\Index\Source\Sources\CommunitySource;
-use CASS\Domain\Index\Source\Sources\ProfileSource;
-use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicCollectionsSource;
-use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicCommunitiesSource;
-use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicContentSource;
-use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicDiscussionsSource;
-use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicExpertsSource;
-use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicProfilesSource;
+use CASS\Domain\Bundles\Index\Source\Sources\CollectionSource;
+use CASS\Domain\Bundles\Index\Source\Sources\CommunitySource;
+use CASS\Domain\Bundles\Index\Source\Sources\ProfileSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicCollectionsSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicCommunitiesSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicContentSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicDiscussionsSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicExpertsSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicProfilesSource;
 
 final class FeedSourceFactory
 {

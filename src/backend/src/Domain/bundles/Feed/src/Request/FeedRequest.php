@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Feed\Request;
+namespace CASS\Domain\Bundles\Feed\Request;
 
-use CASS\Domain\Feed\Exception\InvalidJSONParamsException;
-use CASS\Domain\Feed\Search\Criteria\Criteria;
-use CASS\Domain\Feed\Search\Criteria\CriteriaFactory;
-use CASS\Domain\Feed\Search\Criteria\CriteriaManager;
+use CASS\Domain\Bundles\Feed\Exception\InvalidJSONParamsException;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\CriteriaFactory;
+use CASS\Domain\Bundles\Feed\Search\Criteria\CriteriaManager;
 
 final class FeedRequest
 {

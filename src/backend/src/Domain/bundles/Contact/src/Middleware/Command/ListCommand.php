@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Contact\Middleware\Command;
+namespace CASS\Domain\Bundles\Contact\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

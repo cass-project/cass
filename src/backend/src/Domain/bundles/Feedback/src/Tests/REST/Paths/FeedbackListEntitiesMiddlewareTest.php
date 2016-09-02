@@ -1,17 +1,17 @@
 <?php
-namespace CASS\Domain\Feedback\Tests\REST\Paths;
+namespace CASS\Domain\Bundles\Feedback\Tests\REST\Paths;
 
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
-use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use CASS\Domain\Feedback\FeedbackType\Types\FTCommonQuestion;
-use CASS\Domain\Feedback\FeedbackType\Types\FTSuggestion;
-use CASS\Domain\Feedback\FeedbackType\Types\FTThemeRequest;
-use CASS\Domain\Feedback\Middleware\Parameters\CreateFeedbackParameters;
-use CASS\Domain\Feedback\Middleware\Parameters\CreateFeedbackResponseParameters;
-use CASS\Domain\Feedback\Service\FeedbackService;
-use CASS\Domain\Feedback\Tests\FeedbackMiddlewareTest;
-use CASS\Domain\Profile\Tests\Fixtures\DemoProfileFixture;
+use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Bundles\Feedback\FeedbackType\Types\FTCommonQuestion;
+use CASS\Domain\Bundles\Feedback\FeedbackType\Types\FTSuggestion;
+use CASS\Domain\Bundles\Feedback\FeedbackType\Types\FTThemeRequest;
+use CASS\Domain\Bundles\Feedback\Middleware\Parameters\CreateFeedbackParameters;
+use CASS\Domain\Bundles\Feedback\Middleware\Parameters\CreateFeedbackResponseParameters;
+use CASS\Domain\Bundles\Feedback\Service\FeedbackService;
+use CASS\Domain\Bundles\Feedback\Tests\FeedbackMiddlewareTest;
+use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
 use Zend\Expressive\Application;
 
 /**

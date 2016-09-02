@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Colors\Tests;
+namespace CASS\Domain\Bundles\Colors\Tests;
 
 use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
-use CASS\Domain\Colors\Entity\Color;
+use CASS\Domain\Bundles\Colors\Entity\Color;
 
 /**
  * @backupGlobals disabled

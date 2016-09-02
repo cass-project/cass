@@ -1,15 +1,15 @@
 <?php
-namespace CASS\Domain\Feedback\Service;
+namespace CASS\Domain\Bundles\Feedback\Service;
 
-use CASS\Domain\Feedback\Entity\Feedback;
-use CASS\Domain\Feedback\Entity\FeedbackResponse;
-use CASS\Domain\Feedback\Exception\FeedbackHasNoAnswerException;
-use CASS\Domain\Feedback\FeedbackType\FeedbackTypeFactory;
-use CASS\Domain\Feedback\Middleware\Parameters\CreateFeedbackParameters;
-use CASS\Domain\Feedback\Middleware\Parameters\CreateFeedbackResponseParameters;
-use CASS\Domain\Feedback\Repository\FeedbackRepository;
-use CASS\Domain\Feedback\Repository\FeedbackResponseRepository;
-use CASS\Domain\Profile\Service\ProfileService;
+use CASS\Domain\Bundles\Feedback\Entity\Feedback;
+use CASS\Domain\Bundles\Feedback\Entity\FeedbackResponse;
+use CASS\Domain\Bundles\Feedback\Exception\FeedbackHasNoAnswerException;
+use CASS\Domain\Bundles\Feedback\FeedbackType\FeedbackTypeFactory;
+use CASS\Domain\Bundles\Feedback\Middleware\Parameters\CreateFeedbackParameters;
+use CASS\Domain\Bundles\Feedback\Middleware\Parameters\CreateFeedbackResponseParameters;
+use CASS\Domain\Bundles\Feedback\Repository\FeedbackRepository;
+use CASS\Domain\Bundles\Feedback\Repository\FeedbackResponseRepository;
+use CASS\Domain\Bundles\Profile\Service\ProfileService;
 
 class FeedbackService
 {

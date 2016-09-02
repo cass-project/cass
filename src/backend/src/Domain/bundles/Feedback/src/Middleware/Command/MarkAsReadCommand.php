@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Feedback\Middleware\Command;
+namespace CASS\Domain\Bundles\Feedback\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Feedback\Exception\FeedbackHasNoAnswerException;
-use CASS\Domain\Feedback\Exception\FeedbackNotFoundException;
+use CASS\Domain\Bundles\Feedback\Exception\FeedbackHasNoAnswerException;
+use CASS\Domain\Bundles\Feedback\Exception\FeedbackNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

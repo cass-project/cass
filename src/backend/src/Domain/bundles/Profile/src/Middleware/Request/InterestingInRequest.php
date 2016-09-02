@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Profile\Middleware\Request;
+namespace CASS\Domain\Bundles\Profile\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
-use CASS\Domain\Profile\Parameters\InterestingInParameters;
-use CASS\Domain\Profile\ProfileBundle;
+use CASS\Domain\Bundles\Profile\Parameters\InterestingInParameters;
+use CASS\Domain\Bundles\Profile\ProfileBundle;
 
 class InterestingInRequest extends SchemaParams
 {

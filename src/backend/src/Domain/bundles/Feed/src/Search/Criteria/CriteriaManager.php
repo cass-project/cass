@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Feed\Search\Criteria;
+namespace CASS\Domain\Bundles\Feed\Search\Criteria;
 
-use CASS\Domain\Feed\Exception\CriteriaAlreadyExistsException;
-use CASS\Domain\Feed\Exception\CriteriaNotFoundException;
+use CASS\Domain\Bundles\Feed\Exception\CriteriaAlreadyExistsException;
+use CASS\Domain\Bundles\Feed\Exception\CriteriaNotFoundException;
 
 final class CriteriaManager
 {

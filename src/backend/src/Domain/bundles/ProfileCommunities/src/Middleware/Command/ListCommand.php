@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\ProfileCommunities\Middleware\Command;
+namespace CASS\Domain\Bundles\ProfileCommunities\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
+use CASS\Domain\Bundles\ProfileCommunities\Entity\ProfileCommunityEQ;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

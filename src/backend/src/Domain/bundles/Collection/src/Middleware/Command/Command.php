@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Collection\Middleware\Command;
+namespace CASS\Domain\Bundles\Collection\Middleware\Command;
 
-use CASS\Domain\Auth\Service\CurrentAccountService;
-use CASS\Domain\Collection\Service\CollectionService;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Collection\Service\CollectionService;
 
 abstract class Command implements \CASS\Application\Command\Command
 {

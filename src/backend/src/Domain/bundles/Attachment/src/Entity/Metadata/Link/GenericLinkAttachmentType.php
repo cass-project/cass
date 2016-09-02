@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Attachment\Entity\Metadata\Link;
+namespace CASS\Domain\Bundles\Attachment\Entity\Metadata\Link;
 
-use CASS\Domain\Attachment\Entity\Metadata\LinkAttachmentType;
+use CASS\Domain\Bundles\Attachment\Entity\Metadata\LinkAttachmentType;
 
 class GenericLinkAttachmentType implements LinkAttachmentType
 {

@@ -1,18 +1,18 @@
 <?php
-namespace CASS\Domain\Post\Middleware;
+namespace CASS\Domain\Bundles\Post\Middleware;
 
 use CASS\Application\Service\CommandService;
-use CASS\Domain\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
-use CASS\Domain\Collection\Exception\CollectionNotFoundException;
-use CASS\Domain\Post\Exception\PostNotFoundException;
-use CASS\Domain\Post\Middleware\Command\Command;
-use CASS\Domain\Post\Middleware\Command\CreateCommand;
-use CASS\Domain\Post\Middleware\Command\DeleteCommand;
-use CASS\Domain\Post\Middleware\Command\EditCommand;
-use CASS\Domain\Post\Middleware\Command\GetCommand;
-use CASS\Domain\Post\Service\PostService;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Collection\Exception\CollectionNotFoundException;
+use CASS\Domain\Bundles\Post\Exception\PostNotFoundException;
+use CASS\Domain\Bundles\Post\Middleware\Command\Command;
+use CASS\Domain\Bundles\Post\Middleware\Command\CreateCommand;
+use CASS\Domain\Bundles\Post\Middleware\Command\DeleteCommand;
+use CASS\Domain\Bundles\Post\Middleware\Command\EditCommand;
+use CASS\Domain\Bundles\Post\Middleware\Command\GetCommand;
+use CASS\Domain\Bundles\Post\Service\PostService;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

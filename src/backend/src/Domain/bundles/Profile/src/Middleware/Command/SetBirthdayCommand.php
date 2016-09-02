@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Profile\Middleware\Command;
+namespace CASS\Domain\Bundles\Profile\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Profile\Exception\InvalidBirthdayException;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
-use CASS\Domain\Profile\Middleware\Request\SetBirthdayRequest;
+use CASS\Domain\Bundles\Profile\Exception\InvalidBirthdayException;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Profile\Middleware\Request\SetBirthdayRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

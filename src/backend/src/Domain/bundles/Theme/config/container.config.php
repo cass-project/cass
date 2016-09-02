@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Theme;
+namespace CASS\Domain\Bundles\Theme;
 
 use DI\Container;
 use function DI\object;
@@ -7,10 +7,10 @@ use function DI\factory;
 use function DI\get;
 
 use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
-use CASS\Domain\Theme\Entity\Theme;
-use CASS\Domain\Theme\Frontline\ThemeScript;
-use CASS\Domain\Theme\Repository\ThemeRepository;
-use CASS\Domain\Theme\Service\ThemeService;
+use CASS\Domain\Bundles\Theme\Entity\Theme;
+use CASS\Domain\Bundles\Theme\Frontline\ThemeScript;
+use CASS\Domain\Bundles\Theme\Repository\ThemeRepository;
+use CASS\Domain\Bundles\Theme\Service\ThemeService;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Memory\MemoryAdapter;

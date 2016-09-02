@@ -1,13 +1,13 @@
 <?php
-namespace CASS\Domain\Index\Processor\ProcessorVariants;
+namespace CASS\Domain\Bundles\Index\Processor\ProcessorVariants;
 
-use CASS\Domain\Feed\Factory\FeedSourceFactory;
-use CASS\Domain\Index\Entity\IndexedEntity;
-use CASS\Domain\Index\Processor\Processor;
-use CASS\Domain\Index\Service\ContentTypeIdentifier\ContentTypeIdentifier;
-use CASS\Domain\Index\Service\ThemeWeightCalculator\ThemeWeightCalculator;
-use CASS\Domain\Index\Source\Source;
-use CASS\Domain\Post\Entity\Post;
+use CASS\Domain\Bundles\Feed\Factory\FeedSourceFactory;
+use CASS\Domain\Bundles\Index\Entity\IndexedEntity;
+use CASS\Domain\Bundles\Index\Processor\Processor;
+use CASS\Domain\Bundles\Index\Service\ContentTypeIdentifier\ContentTypeIdentifier;
+use CASS\Domain\Bundles\Index\Service\ThemeWeightCalculator\ThemeWeightCalculator;
+use CASS\Domain\Bundles\Index\Source\Source;
+use CASS\Domain\Bundles\Post\Entity\Post;
 use MongoDB\Database;
 
 abstract class AbstractPostProcessor implements Processor

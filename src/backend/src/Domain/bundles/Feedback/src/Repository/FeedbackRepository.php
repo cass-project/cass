@@ -1,13 +1,13 @@
 <?php
-namespace CASS\Domain\Feedback\Repository;
+namespace CASS\Domain\Bundles\Feedback\Repository;
 
 use CASS\Util\Seek;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
-use CASS\Domain\Feedback\Entity\Feedback;
-use CASS\Domain\Feedback\Exception\FeedbackNotFoundException;
-use CASS\Domain\Profile\Entity\Profile;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Feedback\Entity\Feedback;
+use CASS\Domain\Bundles\Feedback\Exception\FeedbackNotFoundException;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 
 class FeedbackRepository extends EntityRepository
 {

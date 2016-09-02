@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\EmailVerification\Console\Command;
+namespace CASS\Domain\Bundles\EmailVerification\Console\Command;
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;

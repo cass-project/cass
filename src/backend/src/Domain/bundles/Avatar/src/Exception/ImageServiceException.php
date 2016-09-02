@@ -1,4 +1,4 @@
 <?php
-namespace CASS\Domain\Avatar\Exception;
+namespace CASS\Domain\Bundles\Avatar\Exception;
 
 abstract class ImageServiceException extends \Exception {}

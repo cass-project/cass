@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Attachment\Middleware\Command;
+namespace CASS\Domain\Bundles\Attachment\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Attachment\Exception\InvalidURLException;
-use CASS\Domain\Attachment\Exception\NotFoundException;
-use CASS\Domain\Attachment\Source\ExternalSource;
+use CASS\Domain\Bundles\Attachment\Exception\InvalidURLException;
+use CASS\Domain\Bundles\Attachment\Exception\NotFoundException;
+use CASS\Domain\Bundles\Attachment\Source\ExternalSource;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

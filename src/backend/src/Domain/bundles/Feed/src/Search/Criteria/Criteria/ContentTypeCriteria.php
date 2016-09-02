@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Feed\Search\Criteria\Criteria;
+namespace CASS\Domain\Bundles\Feed\Search\Criteria\Criteria;
 
-use CASS\Domain\Feed\Search\Criteria\Criteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria;
 
 final class ContentTypeCriteria implements Criteria
 {

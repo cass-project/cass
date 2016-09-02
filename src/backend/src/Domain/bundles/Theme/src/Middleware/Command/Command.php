@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Theme\Middleware\Command;
+namespace CASS\Domain\Bundles\Theme\Middleware\Command;
 
-use CASS\Domain\Account\Service\AccountAppAccessService;
-use CASS\Domain\Auth\Service\CurrentAccountService;
-use CASS\Domain\Theme\Service\ThemeService;
+use CASS\Domain\Bundles\Account\Service\AccountAppAccessService;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Theme\Service\ThemeService;
 
 abstract class Command implements \CASS\Application\Command\Command
 {

@@ -1,11 +1,11 @@
 <?php
-namespace CASS\Domain\Account\Entity;
+namespace CASS\Domain\Bundles\Account\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 
 /**
- * @Entity(repositoryClass="CASS\Domain\Account\Repository\OAuthAccountRepository")
+ * @Entity(repositoryClass="CASS\Domain\Bundles\Account\Repository\OAuthAccountRepository")
  * @Table(name="oauth_account")
  */
 class OAuthAccount implements IdEntity
@@ -13,7 +13,7 @@ class OAuthAccount implements IdEntity
     use IdTrait;
 
     /**
-     * @ManyToOne(targetEntity="CASS\Domain\Account\Entity\Account",cascade={"persist"})
+     * @ManyToOne(targetEntity="CASS\Domain\Bundles\Account\Entity\Account",cascade={"persist"})
      * @JoinColumn(name="account_id", referencedColumnName="id")
      * @var Account
      */

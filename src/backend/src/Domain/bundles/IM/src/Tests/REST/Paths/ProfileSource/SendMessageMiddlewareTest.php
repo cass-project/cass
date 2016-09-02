@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\IM\Tests\REST\Paths\ProfileSource;
+namespace CASS\Domain\Bundles\IM\Tests\REST\Paths\ProfileSource;
 
-use CASS\Domain\IM\Tests\Fixtures\ProfilesFixture;
-use CASS\Domain\IM\Tests\IMMiddlewareTest;
+use CASS\Domain\Bundles\IM\Tests\Fixtures\ProfilesFixture;
+use CASS\Domain\Bundles\IM\Tests\IMMiddlewareTest;
 
 /**
  * @backupGlobals disabled

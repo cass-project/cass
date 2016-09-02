@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Feedback\Middleware\Command;
+namespace CASS\Domain\Bundles\Feedback\Middleware\Command;
 
 use CASS\Application\Command\Command as CommandInterface;
-use CASS\Domain\Auth\Service\CurrentAccountService;
-use CASS\Domain\Feedback\Service\FeedbackService;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Feedback\Service\FeedbackService;
 
 abstract class Command implements CommandInterface
 {

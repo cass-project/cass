@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Feedback;
+namespace CASS\Domain\Bundles\Feedback;
 
 use CASS\Application\Bundle\GenericBundle;
 use CASS\Application\Bundles\Frontline\FrontlineBundleInjectable;
-use CASS\Domain\Feedback\Frontline\FeedbackTypesFrontlineScript;
+use CASS\Domain\Bundles\Feedback\Frontline\FeedbackTypesFrontlineScript;
 
 class FeedbackBundle extends GenericBundle implements FrontlineBundleInjectable
 {

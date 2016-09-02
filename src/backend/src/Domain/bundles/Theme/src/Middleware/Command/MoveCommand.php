@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Theme\Middleware\Command;
+namespace CASS\Domain\Bundles\Theme\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use CASS\Util\SerialManager\SerialManager;
-use CASS\Domain\Theme\Exception\ThemeNotFoundException;
+use CASS\Domain\Bundles\Theme\Exception\ThemeNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

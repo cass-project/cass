@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Account\Entity;
+namespace CASS\Domain\Bundles\Account\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
@@ -11,13 +11,13 @@ use CASS\Util\GenerateRandomString;
 use CASS\Util\JSONSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use CASS\Domain\Profile\Entity\Profile;
-use CASS\Domain\Profile\Entity\Profile\Greetings;
-use CASS\Domain\Profile\Exception\NoCurrentProfileException;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Bundles\Profile\Exception\NoCurrentProfileException;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 
 /**
- * @Entity(repositoryClass="CASS\Domain\Account\Repository\AccountRepository")
+ * @Entity(repositoryClass="CASS\Domain\Bundles\Account\Repository\AccountRepository")
  * @Table(name="account")
  */
 class Account implements JSONSerializable, IdEntity, SIDEntity, JSONMetadataEntity
@@ -33,7 +33,7 @@ class Account implements JSONSerializable, IdEntity, SIDEntity, JSONMetadataEnti
     private $apiKey;
 
     /**
-     * @OneToMany(targetEntity="CASS\Domain\Profile\Entity\Profile", mappedBy="account", cascade={"all"})
+     * @OneToMany(targetEntity="CASS\Domain\Bundles\Profile\Entity\Profile", mappedBy="account", cascade={"all"})
      * @var Collection
      */
     private $profiles;

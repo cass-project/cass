@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Collection\Collection\CollectionTree;
+namespace CASS\Domain\Bundles\Collection\Collection\CollectionTree;
 
 use CASS\Util\JSONSerializable;
-use CASS\Domain\Collection\Collection\CollectionItem;
-use CASS\Domain\Collection\Collection\CollectionTree;
+use CASS\Domain\Bundles\Collection\Collection\CollectionItem;
+use CASS\Domain\Bundles\Collection\Collection\CollectionTree;
 
 final class ImmutableCollectionTree implements CollectionTree, JSONSerializable
 {

@@ -1,14 +1,14 @@
 <?php
-namespace CASS\Domain\Auth\Middleware\Command;
+namespace CASS\Domain\Bundles\Auth\Middleware\Command;
 
 use CASS\Application\Bundles\Frontline\FrontlineScript;
 use CASS\Application\Bundles\Frontline\Service\FrontlineService\IncludeFilter;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Auth\Formatter\SignInFormatter;
-use CASS\Domain\Auth\Middleware\Request\SignUpRequest;
-use CASS\Domain\Auth\Exception\DuplicateAccountException;
-use CASS\Domain\Auth\Exception\MissingRequiredFieldException;
-use CASS\Domain\Auth\Exception\ValidationException;
+use CASS\Domain\Bundles\Auth\Formatter\SignInFormatter;
+use CASS\Domain\Bundles\Auth\Middleware\Request\SignUpRequest;
+use CASS\Domain\Bundles\Auth\Exception\DuplicateAccountException;
+use CASS\Domain\Bundles\Auth\Exception\MissingRequiredFieldException;
+use CASS\Domain\Bundles\Auth\Exception\ValidationException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

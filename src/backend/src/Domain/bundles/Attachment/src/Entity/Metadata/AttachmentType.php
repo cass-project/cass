@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Attachment\Entity\Metadata;
+namespace CASS\Domain\Bundles\Attachment\Entity\Metadata;
 
 interface AttachmentType
 {

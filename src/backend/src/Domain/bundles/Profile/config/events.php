@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Community;
+namespace CASS\Domain\Bundles\Community;
 
-use CASS\Domain\Profile\Events\LinkCollectionEvents;
-use CASS\Domain\Profile\Events\ProfileDashboardCollectionEvents;
-use CASS\Domain\Profile\Events\ProfileExpertInEQEvents;
-use CASS\Domain\Profile\Events\ProfileInterestingInEQEvents;
+use CASS\Domain\Bundles\Profile\Events\LinkCollectionEvents;
+use CASS\Domain\Bundles\Profile\Events\ProfileDashboardCollectionEvents;
+use CASS\Domain\Bundles\Profile\Events\ProfileExpertInEQEvents;
+use CASS\Domain\Bundles\Profile\Events\ProfileInterestingInEQEvents;
 use Evenement\EventEmitterInterface;
 
 return function(EventEmitterInterface $globalEmitter): array

@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\IM\Service\IMService;
+namespace CASS\Domain\Bundles\IM\Service\IMService;
 
 use CASS\Util\JSONSerializable;
 

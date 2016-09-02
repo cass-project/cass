@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Theme\Middleware\Request;
+namespace CASS\Domain\Bundles\Theme\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
-use CASS\Domain\Theme\Parameters\UpdateThemeParameters;
-use CASS\Domain\Theme\ThemeBundle;
+use CASS\Domain\Bundles\Theme\Parameters\UpdateThemeParameters;
+use CASS\Domain\Bundles\Theme\ThemeBundle;
 
 class UpdateThemeRequest extends SchemaParams
 {

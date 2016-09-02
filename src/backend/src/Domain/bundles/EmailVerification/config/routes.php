@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\EmailVerification;
+namespace CASS\Domain\Bundles\EmailVerification;
 
-use CASS\Domain\EmailVerification\Middleware\EmailVerificationMiddleware;
+use CASS\Domain\Bundles\EmailVerification\Middleware\EmailVerificationMiddleware;
 
 return [
     'common' => [

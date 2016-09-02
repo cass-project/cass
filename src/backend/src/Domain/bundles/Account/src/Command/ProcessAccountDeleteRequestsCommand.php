@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Account\Command;
+namespace CASS\Domain\Bundles\Account\Command;
 
-use CASS\Domain\Account\Scripts\ProcessAccountDeleteRequestsScript;
+use CASS\Domain\Bundles\Account\Scripts\ProcessAccountDeleteRequestsScript;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

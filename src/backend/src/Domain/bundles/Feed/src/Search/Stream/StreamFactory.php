@@ -1,24 +1,24 @@
 <?php
-namespace CASS\Domain\Feed\Search\Stream;
+namespace CASS\Domain\Bundles\Feed\Search\Stream;
 
-use CASS\Domain\Collection\Service\CollectionService;
-use CASS\Domain\Community\Service\CommunityService;
-use CASS\Domain\Feed\Search\Stream\Streams\CollectionStream;
-use CASS\Domain\Feed\Search\Stream\Streams\CommunityStream;
-use CASS\Domain\Feed\Search\Stream\Streams\PostStream;
-use CASS\Domain\Feed\Search\Stream\Streams\ProfileStream;
-use CASS\Domain\Index\Source\Source;
-use CASS\Domain\Index\Source\Sources\CollectionSource;
-use CASS\Domain\Index\Source\Sources\CommunitySource;
-use CASS\Domain\Index\Source\Sources\ProfileSource;
-use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicCollectionsSource;
-use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicCommunitiesSource;
-use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicContentSource;
-use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicDiscussionsSource;
-use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicProfilesSource;
-use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicExpertsSource;
-use CASS\Domain\Post\Formatter\PostFormatter;
-use CASS\Domain\Post\Service\PostService;
+use CASS\Domain\Bundles\Collection\Service\CollectionService;
+use CASS\Domain\Bundles\Community\Service\CommunityService;
+use CASS\Domain\Bundles\Feed\Search\Stream\Streams\CollectionStream;
+use CASS\Domain\Bundles\Feed\Search\Stream\Streams\CommunityStream;
+use CASS\Domain\Bundles\Feed\Search\Stream\Streams\PostStream;
+use CASS\Domain\Bundles\Feed\Search\Stream\Streams\ProfileStream;
+use CASS\Domain\Bundles\Index\Source\Source;
+use CASS\Domain\Bundles\Index\Source\Sources\CollectionSource;
+use CASS\Domain\Bundles\Index\Source\Sources\CommunitySource;
+use CASS\Domain\Bundles\Index\Source\Sources\ProfileSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicCollectionsSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicCommunitiesSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicContentSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicDiscussionsSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicProfilesSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicExpertsSource;
+use CASS\Domain\Bundles\Post\Formatter\PostFormatter;
+use CASS\Domain\Bundles\Post\Service\PostService;
 use CASS\Domain\Profile\Service\ProfileService;
 use Zend\I18n\Exception\OutOfBoundsException;
 

@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Feedback\Tests\REST\Paths;
+namespace CASS\Domain\Bundles\Feedback\Tests\REST\Paths;
 
-use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use CASS\Domain\Feedback\Tests\FeedbackMiddlewareTest;
-use CASS\Domain\Feedback\Tests\Fixture\DemoFeedbackFixture;
+use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Bundles\Feedback\Tests\FeedbackMiddlewareTest;
+use CASS\Domain\Bundles\Feedback\Tests\Fixture\DemoFeedbackFixture;
 
 /**
  * @backupGlobals disabled

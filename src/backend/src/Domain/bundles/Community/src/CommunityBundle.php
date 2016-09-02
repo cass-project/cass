@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Community;
+namespace CASS\Domain\Bundles\Community;
 
 use CASS\Application\Bundle\GenericBundle;
 use CASS\Application\Bundles\Frontline\FrontlineBundleInjectable;
-use CASS\Domain\Community\Scripts\FeaturesListFrontlineScript;
+use CASS\Domain\Bundles\Community\Scripts\FeaturesListFrontlineScript;
 
 final class CommunityBundle extends GenericBundle implements FrontlineBundleInjectable
 {

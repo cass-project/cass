@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Collection\Collection;
+namespace CASS\Domain\Bundles\Collection\Collection;
 
 use CASS\Util\JSONSerializable;
 use CASS\Util\SerialManager\SerialEntity;
-use CASS\Domain\Collection\Collection\CollectionTree\MutableCollectionTree;
+use CASS\Domain\Bundles\Collection\Collection\CollectionTree\MutableCollectionTree;
 
 class CollectionItem implements SerialEntity, JSONSerializable
 {

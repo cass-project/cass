@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Colors\Frontline;
+namespace CASS\Domain\Bundles\Colors\Frontline;
 
 use CASS\Application\Bundles\Frontline\FrontlineScript;
-use CASS\Domain\Colors\Entity\Palette;
-use CASS\Domain\Colors\Service\ColorsService;
+use CASS\Domain\Bundles\Colors\Entity\Palette;
+use CASS\Domain\Bundles\Colors\Service\ColorsService;
 
 class ConfigColorsFrontlineScript implements FrontlineScript
 {

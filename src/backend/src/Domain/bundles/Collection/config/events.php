@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Community;
+namespace CASS\Domain\Bundles\Community;
 
-use CASS\Domain\Collection\Events\CollectionThemesEQEvents;
+use CASS\Domain\Bundles\Collection\Events\CollectionThemesEQEvents;
 use Evenement\EventEmitterInterface;
 
 return function(EventEmitterInterface $globalEmitter): array

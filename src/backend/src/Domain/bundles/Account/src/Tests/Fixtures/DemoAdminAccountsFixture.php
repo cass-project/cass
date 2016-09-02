@@ -1,12 +1,12 @@
 <?php
-namespace CASS\Domain\Account\Tests\Fixtures;
+namespace CASS\Domain\Bundles\Account\Tests\Fixtures;
 
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
-use CASS\Domain\Account\Entity\Account;
-use CASS\Domain\Account\Entity\AccountAppAccess;
-use CASS\Domain\Account\Service\AccountAppAccessService;
-use CASS\Domain\Account\Service\AccountService;
+use CASS\Domain\Bundles\Account\Entity\Account;
+use CASS\Domain\Bundles\Account\Entity\AccountAppAccess;
+use CASS\Domain\Bundles\Account\Service\AccountAppAccessService;
+use CASS\Domain\Bundles\Account\Service\AccountService;
 use Zend\Expressive\Application;
 
 final class DemoAdminAccountsFixture implements Fixture

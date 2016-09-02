@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Colors\Repository;
+namespace CASS\Domain\Bundles\Colors\Repository;
 
-use CASS\Domain\Colors\Entity\Color;
-use CASS\Domain\Colors\Entity\Palette;
+use CASS\Domain\Bundles\Colors\Entity\Color;
+use CASS\Domain\Bundles\Colors\Entity\Palette;
 
 class ColorsRepository
 {

@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Feedback\Tests\REST\Paths;
+namespace CASS\Domain\Bundles\Feedback\Tests\REST\Paths;
 
-use CASS\Domain\Feedback\Entity\Feedback;
-use CASS\Domain\Feedback\FeedbackType\Types\FTCommonQuestion;
-use CASS\Domain\Feedback\Tests\FeedbackMiddlewareTest;
-use CASS\Domain\Profile\Tests\Fixtures\DemoProfileFixture;
+use CASS\Domain\Bundles\Feedback\Entity\Feedback;
+use CASS\Domain\Bundles\Feedback\FeedbackType\Types\FTCommonQuestion;
+use CASS\Domain\Bundles\Feedback\Tests\FeedbackMiddlewareTest;
+use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**
  * @backupGlobals disabled

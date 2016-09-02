@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Index\Source\Sources\PublicCatalog;
+namespace CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog;
 
-use CASS\Domain\Index\Source\Source;
+use CASS\Domain\Bundles\Index\Source\Source;
 use MongoDB\Collection;
 use MongoDB\Database;
 

@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Collection\Strategy\Traits;
+namespace CASS\Domain\Bundles\Collection\Strategy\Traits;
 
-use CASS\Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
+use CASS\Domain\Bundles\Collection\Collection\CollectionTree\ImmutableCollectionTree;
 
 trait CollectionAwareEntityTrait
 {

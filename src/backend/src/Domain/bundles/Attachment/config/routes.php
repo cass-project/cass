@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Attachment;
+namespace CASS\Domain\Bundles\Attachment;
 
-use CASS\Domain\Attachment\Middleware\AttachmentMiddleware;
+use CASS\Domain\Bundles\Attachment\Middleware\AttachmentMiddleware;
 
 return [
     'common' => [

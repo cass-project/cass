@@ -1,4 +1,4 @@
 <?php
-namespace CASS\Domain\Account\Exception;
+namespace CASS\Domain\Bundles\Account\Exception;
 
 class AccountNotFoundException extends \Exception {}

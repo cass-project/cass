@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\EmailVerification\Middleware;
+namespace CASS\Domain\Bundles\EmailVerification\Middleware;
 
-use CASS\Domain\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
-use CASS\Domain\EmailVerification\Middleware\Command\Command;
-use CASS\Domain\EmailVerification\Service\EmailVerificationService;
+use CASS\Domain\Bundles\EmailVerification\Middleware\Command\Command;
+use CASS\Domain\Bundles\EmailVerification\Service\EmailVerificationService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

@@ -1,15 +1,15 @@
 <?php
-namespace CASS\Domain\ProfileCommunities\Entity;
+namespace CASS\Domain\Bundles\ProfileCommunities\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\JSONSerializable;
-use CASS\Domain\Community\Entity\Community;
-use CASS\Domain\Profile\Entity\Profile;
-use CASS\Domain\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Bundles\Community\Entity\Community;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
 
 /**
- * @Entity(repositoryClass="CASS\Domain\ProfileCommunities\Repository\ProfileCommunitiesRepository")
+ * @Entity(repositoryClass="CASS\Domain\Bundles\ProfileCommunities\Repository\ProfileCommunitiesRepository")
  * @Table(name="profile_communities")
  */
 class ProfileCommunityEQ implements JSONSerializable, IdEntity
@@ -23,14 +23,14 @@ class ProfileCommunityEQ implements JSONSerializable, IdEntity
     private $communitySID;
 
     /**
-     * @ManyToOne(targetEntity="CASS\Domain\Profile\Entity\Profile")
+     * @ManyToOne(targetEntity="CASS\Domain\Bundles\Profile\Entity\Profile")
      * @JoinColumn(name="profile_id", referencedColumnName="id")
      * @var Profile
      */
     private $profile;
 
     /**
-     * @ManyToOne(targetEntity="CASS\Domain\Community\Entity\Community")
+     * @ManyToOne(targetEntity="CASS\Domain\Bundles\Community\Entity\Community")
      * @JoinColumn(name="community_id", referencedColumnName="id")
      * @var Community
      */

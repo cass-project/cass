@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Auth\Parameters;
+namespace CASS\Domain\Bundles\Auth\Parameters;
 
 class SignInParameters
 {

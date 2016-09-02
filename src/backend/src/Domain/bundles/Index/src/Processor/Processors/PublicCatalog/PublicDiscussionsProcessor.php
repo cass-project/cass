@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Index\Processor\Processors\PublicCatalog;
+namespace CASS\Domain\Bundles\Index\Processor\Processors\PublicCatalog;
 
-use CASS\Domain\Index\Source\Source;
-use CASS\Domain\Index\Processor\ProcessorVariants\AbstractPostProcessor;
-use CASS\Domain\Post\Entity\Post;
-use CASS\Domain\Post\PostType\Types\DiscussionPostType;
+use CASS\Domain\Bundles\Index\Source\Source;
+use CASS\Domain\Bundles\Index\Processor\ProcessorVariants\AbstractPostProcessor;
+use CASS\Domain\Bundles\Post\Entity\Post;
+use CASS\Domain\Bundles\Post\PostType\Types\DiscussionPostType;
 
 final class PublicDiscussionsProcessor extends AbstractPostProcessor
 {

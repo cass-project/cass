@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Contact\Parameters;
+namespace CASS\Domain\Bundles\Contact\Parameters;
 
 final class CreateContactParameters
 {

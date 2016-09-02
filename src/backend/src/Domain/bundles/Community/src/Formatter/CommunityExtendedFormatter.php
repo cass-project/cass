@@ -1,11 +1,11 @@
 <?php
-namespace CASS\Domain\Community\Formatter;
+namespace CASS\Domain\Bundles\Community\Formatter;
 
-use CASS\Domain\Auth\Service\CurrentAccountService;
-use CASS\Domain\Collection\Collection\CollectionItem;
-use CASS\Domain\Collection\Collection\CollectionTree;
-use CASS\Domain\Collection\Service\CollectionService;
-use CASS\Domain\Community\Entity\Community;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Collection\Collection\CollectionItem;
+use CASS\Domain\Bundles\Collection\Collection\CollectionTree;
+use CASS\Domain\Bundles\Collection\Service\CollectionService;
+use CASS\Domain\Bundles\Community\Entity\Community;
 
 final class CommunityExtendedFormatter
 {

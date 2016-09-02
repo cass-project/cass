@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Auth\Middleware\Command;
+namespace CASS\Domain\Bundles\Auth\Middleware\Command;
 
 use CASS\Application\Bundles\Frontline\Service\FrontlineService;
 use CASS\Application\Command\Command as CommandInterface;
-use CASS\Domain\Auth\Formatter\SignInFormatter;
-use CASS\Domain\Auth\Service\AuthService;
+use CASS\Domain\Bundles\Auth\Formatter\SignInFormatter;
+use CASS\Domain\Bundles\Auth\Service\AuthService;
 
 abstract class Command implements CommandInterface
 {

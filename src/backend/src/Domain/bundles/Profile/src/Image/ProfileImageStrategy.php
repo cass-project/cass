@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Profile\Image;
+namespace CASS\Domain\Bundles\Profile\Image;
 
-use CASS\Domain\Avatar\Entity\ImageEntity;
-use CASS\Domain\Avatar\Image\Image;
-use CASS\Domain\Avatar\Strategy\SquareImageStrategy;
-use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Avatar\Entity\ImageEntity;
+use CASS\Domain\Bundles\Avatar\Image\Image;
+use CASS\Domain\Bundles\Avatar\Strategy\SquareImageStrategy;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
 use League\Flysystem\FilesystemInterface;
 
 final class ProfileImageStrategy extends SquareImageStrategy

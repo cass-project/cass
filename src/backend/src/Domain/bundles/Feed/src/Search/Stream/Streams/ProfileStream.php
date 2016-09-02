@@ -1,15 +1,15 @@
 <?php
-namespace CASS\Domain\Feed\Search\Stream\Streams;
+namespace CASS\Domain\Bundles\Feed\Search\Stream\Streams;
 
-use CASS\Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\SortCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
-use CASS\Domain\Feed\Search\Criteria\CriteriaManager;
-use CASS\Domain\Feed\Search\Stream\Stream;
-use CASS\Domain\Profile\Entity\Profile;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
-use CASS\Domain\Profile\Service\ProfileService;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\QueryStringCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SeekCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SortCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\CriteriaManager;
+use CASS\Domain\Bundles\Feed\Search\Stream\Stream;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Profile\Service\ProfileService;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
 use MongoDB\Model\BSONDocument;

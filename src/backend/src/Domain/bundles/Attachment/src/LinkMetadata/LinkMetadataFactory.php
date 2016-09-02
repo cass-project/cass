@@ -1,12 +1,12 @@
 <?php
-namespace CASS\Domain\Attachment\LinkMetadata;
+namespace CASS\Domain\Bundles\Attachment\LinkMetadata;
 
-use CASS\Domain\OpenGraph\Parser\OpenGraphParser;
-use CASS\Domain\Attachment\LinkMetadata\Types\ImageLinkMetadata;
-use CASS\Domain\Attachment\LinkMetadata\Types\PageLinkMetadata;
-use CASS\Domain\Attachment\LinkMetadata\Types\UnknownLinkMetadata;
-use CASS\Domain\Attachment\LinkMetadata\Types\WebmLinkMetadata;
-use CASS\Domain\Attachment\LinkMetadata\Types\YoutubeLinkMetadata;
+use CASS\Domain\Bundles\OpenGraph\Parser\OpenGraphParser;
+use CASS\Domain\Bundles\Attachment\LinkMetadata\Types\ImageLinkMetadata;
+use CASS\Domain\Bundles\Attachment\LinkMetadata\Types\PageLinkMetadata;
+use CASS\Domain\Bundles\Attachment\LinkMetadata\Types\UnknownLinkMetadata;
+use CASS\Domain\Bundles\Attachment\LinkMetadata\Types\WebmLinkMetadata;
+use CASS\Domain\Bundles\Attachment\LinkMetadata\Types\YoutubeLinkMetadata;
 
 final class LinkMetadataFactory
 {

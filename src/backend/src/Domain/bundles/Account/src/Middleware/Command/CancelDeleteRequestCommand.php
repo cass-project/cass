@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Account\Middleware\Command;
+namespace CASS\Domain\Bundles\Account\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use Psr\Http\Message\ResponseInterface;

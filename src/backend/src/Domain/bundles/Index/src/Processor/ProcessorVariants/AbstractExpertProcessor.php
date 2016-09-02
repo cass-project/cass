@@ -1,12 +1,12 @@
 <?php
-namespace CASS\Domain\Index\Processor\ProcessorVariants;
+namespace CASS\Domain\Bundles\Index\Processor\ProcessorVariants;
 
-use CASS\Domain\Feed\Factory\FeedSourceFactory;
-use CASS\Domain\Index\Entity\IndexedEntity;
-use CASS\Domain\Index\Processor\Processor;
-use CASS\Domain\Index\Service\ThemeWeightCalculator\ThemeWeightCalculator;
-use CASS\Domain\Index\Source\Source;
-use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Feed\Factory\FeedSourceFactory;
+use CASS\Domain\Bundles\Index\Entity\IndexedEntity;
+use CASS\Domain\Bundles\Index\Processor\Processor;
+use CASS\Domain\Bundles\Index\Service\ThemeWeightCalculator\ThemeWeightCalculator;
+use CASS\Domain\Bundles\Index\Source\Source;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
 use MongoDB\Database;
 
 abstract class AbstractExpertProcessor implements Processor

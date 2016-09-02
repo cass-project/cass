@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Theme;
+namespace CASS\Domain\Bundles\Theme;
 
 use CASS\Application\Bundles\Frontline\FrontlineBundleInjectable;
 use CASS\Application\Bundle\GenericBundle;
-use CASS\Domain\Theme\Frontline\ThemeScript;
+use CASS\Domain\Bundles\Theme\Frontline\ThemeScript;
 
 class ThemeBundle extends GenericBundle implements FrontlineBundleInjectable
 {

@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Profile\Entity\Profile\Gender;
+namespace CASS\Domain\Bundles\Profile\Entity\Profile\Gender;
 
 final class GenderNotSpecified extends Gender
 {

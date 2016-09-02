@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Index\Service\ThemeWeightCalculator;
+namespace CASS\Domain\Bundles\Index\Service\ThemeWeightCalculator;
 
 final class ThemeWeightResult
 {

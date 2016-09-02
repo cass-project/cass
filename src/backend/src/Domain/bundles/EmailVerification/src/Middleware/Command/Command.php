@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\EmailVerification\Middleware\Command;
+namespace CASS\Domain\Bundles\EmailVerification\Middleware\Command;
 
-use CASS\Domain\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
 use CASS\Application\Exception\CommandNotFoundException;
-use CASS\Domain\EmailVerification\Service\EmailVerificationService;
+use CASS\Domain\Bundles\EmailVerification\Service\EmailVerificationService;
 use Psr\Http\Message\ServerRequestInterface;
 
 abstract class Command

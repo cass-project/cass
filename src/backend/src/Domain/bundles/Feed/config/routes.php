@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Feed;
+namespace CASS\Domain\Bundles\Feed;
 
-use CASS\Domain\Feed\Middleware\FeedMiddleware;
+use CASS\Domain\Bundles\Feed\Middleware\FeedMiddleware;
 use Zend\Expressive\Application;
 
 $sources = [

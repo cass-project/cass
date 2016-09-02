@@ -1,15 +1,15 @@
 <?php
-namespace CASS\Domain\Theme\Middleware;
+namespace CASS\Domain\Bundles\Theme\Middleware;
 
 use CASS\Application\Service\CommandService;
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
-use CASS\Domain\Theme\Middleware\Command\CreateCommand;
-use CASS\Domain\Theme\Middleware\Command\DeleteCommand;
-use CASS\Domain\Theme\Middleware\Command\GetCommand;
-use CASS\Domain\Theme\Middleware\Command\ListAllCommand;
-use CASS\Domain\Theme\Middleware\Command\MoveCommand;
-use CASS\Domain\Theme\Middleware\Command\TreeCommand;
-use CASS\Domain\Theme\Middleware\Command\UpdateCommand;
+use CASS\Domain\Bundles\Theme\Middleware\Command\CreateCommand;
+use CASS\Domain\Bundles\Theme\Middleware\Command\DeleteCommand;
+use CASS\Domain\Bundles\Theme\Middleware\Command\GetCommand;
+use CASS\Domain\Bundles\Theme\Middleware\Command\ListAllCommand;
+use CASS\Domain\Bundles\Theme\Middleware\Command\MoveCommand;
+use CASS\Domain\Bundles\Theme\Middleware\Command\TreeCommand;
+use CASS\Domain\Bundles\Theme\Middleware\Command\UpdateCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

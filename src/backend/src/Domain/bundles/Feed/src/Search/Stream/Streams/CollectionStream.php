@@ -1,14 +1,14 @@
 <?php
-namespace CASS\Domain\Feed\Search\Stream\Streams;
+namespace CASS\Domain\Bundles\Feed\Search\Stream\Streams;
 
-use CASS\Domain\Collection\Exception\CollectionNotFoundException;
-use CASS\Domain\Collection\Service\CollectionService;
-use CASS\Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\SortCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
-use CASS\Domain\Feed\Search\Criteria\CriteriaManager;
-use CASS\Domain\Feed\Search\Stream\Stream;
+use CASS\Domain\Bundles\Collection\Exception\CollectionNotFoundException;
+use CASS\Domain\Bundles\Collection\Service\CollectionService;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\QueryStringCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SeekCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SortCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\CriteriaManager;
+use CASS\Domain\Bundles\Feed\Search\Stream\Stream;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
 use MongoDB\Model\BSONDocument;

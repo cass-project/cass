@@ -1,24 +1,24 @@
 <?php
-namespace CASS\Domain\Profile\Service;
+namespace CASS\Domain\Bundles\Profile\Service;
 
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareService;
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareTrait;
-use CASS\Domain\Account\Entity\Account;
-use CASS\Domain\Account\Service\AccountService;
-use CASS\Domain\Auth\Service\CurrentAccountService;
-use CASS\Domain\Avatar\Image\ImageCollection;
-use CASS\Domain\Avatar\Parameters\UploadImageParameters;
-use CASS\Domain\Avatar\Service\AvatarService;
-use CASS\Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
-use CASS\Domain\Collection\Service\CollectionService;
-use CASS\Domain\Profile\Entity\Profile;
-use CASS\Domain\Profile\Entity\Profile\Gender\Gender;
-use CASS\Domain\Profile\Entity\Profile\Greetings\Greetings;
-use CASS\Domain\Profile\Exception\LastProfileException;
-use CASS\Domain\Profile\Exception\MaxProfilesReachedException;
-use CASS\Domain\Profile\Parameters\EditPersonalParameters;
-use CASS\Domain\Profile\Repository\ProfileRepository;
-use CASS\Domain\Profile\Image\ProfileImageStrategy;
+use CASS\Domain\Bundles\Account\Entity\Account;
+use CASS\Domain\Bundles\Account\Service\AccountService;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Avatar\Image\ImageCollection;
+use CASS\Domain\Bundles\Avatar\Parameters\UploadImageParameters;
+use CASS\Domain\Bundles\Avatar\Service\AvatarService;
+use CASS\Domain\Bundles\Collection\Collection\CollectionTree\ImmutableCollectionTree;
+use CASS\Domain\Bundles\Collection\Service\CollectionService;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Gender\Gender;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings\Greetings;
+use CASS\Domain\Bundles\Profile\Exception\LastProfileException;
+use CASS\Domain\Bundles\Profile\Exception\MaxProfilesReachedException;
+use CASS\Domain\Bundles\Profile\Parameters\EditPersonalParameters;
+use CASS\Domain\Bundles\Profile\Repository\ProfileRepository;
+use CASS\Domain\Bundles\Profile\Image\ProfileImageStrategy;
 use League\Flysystem\FilesystemInterface;
 
 class ProfileService implements EventEmitterAwareService

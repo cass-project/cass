@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Collection\Collection;
+namespace CASS\Domain\Bundles\Collection\Collection;
 
 interface CollectionTree
 {

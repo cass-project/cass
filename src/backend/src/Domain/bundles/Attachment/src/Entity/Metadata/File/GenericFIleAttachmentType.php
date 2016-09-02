@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Attachment\Entity\Metadata\File;
+namespace CASS\Domain\Bundles\Attachment\Entity\Metadata\File;
 
-use CASS\Domain\Attachment\Entity\Metadata\FileAttachmentType;
+use CASS\Domain\Bundles\Attachment\Entity\Metadata\FileAttachmentType;
 
 class GenericFileAttachmentType implements FileAttachmentType
 {

@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\IM\Parameters;
+namespace CASS\Domain\Bundles\IM\Parameters;
 
 final class SendMessageParameters
 {

@@ -1,28 +1,28 @@
 <?php
-namespace CASS\Domain\Profile\Entity;
+namespace CASS\Domain\Bundles\Profile\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
 use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
 use CASS\Util\JSONSerializable;
-use CASS\Domain\Account\Entity\Account;
-use CASS\Domain\Avatar\Entity\ImageEntity;
-use CASS\Domain\Avatar\Entity\ImageEntityTrait;
-use CASS\Domain\Avatar\Image\ImageCollection;
-use CASS\Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
-use CASS\Domain\Collection\Strategy\CollectionAwareEntity;
-use CASS\Domain\Collection\Strategy\Traits\CollectionAwareEntityTrait;;
-use CASS\Domain\Index\Entity\IndexedEntity;
-use CASS\Domain\Profile\Entity\Profile\Gender\Gender;
-use CASS\Domain\Profile\Entity\Profile\Gender\GenderNotSpecified;
-use CASS\Domain\Profile\Entity\Profile\Greetings\Greetings;
-use CASS\Domain\Profile\Entity\Profile\Greetings\GreetingsAnonymous;
-use CASS\Domain\Profile\Exception\InvalidBirthdayException;
-use CASS\Domain\Profile\Exception\InvalidBirthdayGuestFromTheFutureException;
+use CASS\Domain\Bundles\Account\Entity\Account;
+use CASS\Domain\Bundles\Avatar\Entity\ImageEntity;
+use CASS\Domain\Bundles\Avatar\Entity\ImageEntityTrait;
+use CASS\Domain\Bundles\Avatar\Image\ImageCollection;
+use CASS\Domain\Bundles\Collection\Collection\CollectionTree\ImmutableCollectionTree;
+use CASS\Domain\Bundles\Collection\Strategy\CollectionAwareEntity;
+use CASS\Domain\Bundles\Collection\Strategy\Traits\CollectionAwareEntityTrait;;
+use CASS\Domain\Bundles\Index\Entity\IndexedEntity;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Gender\Gender;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Gender\GenderNotSpecified;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings\Greetings;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings\GreetingsAnonymous;
+use CASS\Domain\Bundles\Profile\Exception\InvalidBirthdayException;
+use CASS\Domain\Bundles\Profile\Exception\InvalidBirthdayGuestFromTheFutureException;
 
 /**
- * @Entity(repositoryClass="CASS\Domain\Profile\Repository\ProfileRepository")
+ * @Entity(repositoryClass="CASS\Domain\Bundles\Profile\Repository\ProfileRepository")
  * @Table(name="profile")
  */
 class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, CollectionAwareEntity, IndexedEntity
@@ -40,7 +40,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
     use ImageEntityTrait;
 
     /**
-     * @ManyToOne(targetEntity="CASS\Domain\Account\Entity\Account")
+     * @ManyToOne(targetEntity="CASS\Domain\Bundles\Account\Entity\Account")
      * @JoinColumn(name="account_id", referencedColumnName="id")
      */
     private $account;

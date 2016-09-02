@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\IM\Service\LastMessageService;
+namespace CASS\Domain\Bundles\IM\Service\LastMessageService;
 
 use CASS\Util\JSONSerializable;
 

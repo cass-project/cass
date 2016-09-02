@@ -1,22 +1,22 @@
 <?php
-namespace CASS\Domain\Attachment\Service;
+namespace CASS\Domain\Bundles\Attachment\Service;
 
 use CASS\Util\FileNameFilter;
 use CASS\Util\GenerateRandomString;
-use CASS\Domain\Attachment\Entity\AttachmentOwner;
-use CASS\Domain\Attachment\Entity\Attachment;
-use CASS\Domain\Attachment\Entity\Metadata\AttachmentType;
-use CASS\Domain\Attachment\Entity\Metadata\File\GenericFileAttachmentType;
-use CASS\Domain\Attachment\Entity\Metadata\File\ImageAttachmentType;
-use CASS\Domain\Attachment\Entity\Metadata\File\WebmAttachmentType;
-use CASS\Domain\Attachment\Entity\Metadata\FileAttachmentType;
-use CASS\Domain\Attachment\Exception\FileTooBigException;
-use CASS\Domain\Attachment\Exception\FileTooSmallException;
-use CASS\Domain\Attachment\LinkMetadata\LinkMetadataFactory;
-use CASS\Domain\Attachment\Repository\AttachmentRepository;
-use CASS\Domain\Attachment\Service\FetchResource\Result;
-use CASS\Domain\Attachment\Source\LocalSource;
-use CASS\Domain\Attachment\Source\Source;
+use CASS\Domain\Bundles\Attachment\Entity\AttachmentOwner;
+use CASS\Domain\Bundles\Attachment\Entity\Attachment;
+use CASS\Domain\Bundles\Attachment\Entity\Metadata\AttachmentType;
+use CASS\Domain\Bundles\Attachment\Entity\Metadata\File\GenericFileAttachmentType;
+use CASS\Domain\Bundles\Attachment\Entity\Metadata\File\ImageAttachmentType;
+use CASS\Domain\Bundles\Attachment\Entity\Metadata\File\WebmAttachmentType;
+use CASS\Domain\Bundles\Attachment\Entity\Metadata\FileAttachmentType;
+use CASS\Domain\Bundles\Attachment\Exception\FileTooBigException;
+use CASS\Domain\Bundles\Attachment\Exception\FileTooSmallException;
+use CASS\Domain\Bundles\Attachment\LinkMetadata\LinkMetadataFactory;
+use CASS\Domain\Bundles\Attachment\Repository\AttachmentRepository;
+use CASS\Domain\Bundles\Attachment\Service\FetchResource\Result;
+use CASS\Domain\Bundles\Attachment\Source\LocalSource;
+use CASS\Domain\Bundles\Attachment\Source\Source;
 use League\Flysystem\FilesystemInterface;
 
 class AttachmentService

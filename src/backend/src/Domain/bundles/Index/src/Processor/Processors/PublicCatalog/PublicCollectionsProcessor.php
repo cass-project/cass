@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Index\Processor\Processors\PublicCatalog;
+namespace CASS\Domain\Bundles\Index\Processor\Processors\PublicCatalog;
 
-use CASS\Domain\Collection\Entity\Collection;
-use CASS\Domain\Index\Processor\ProcessorVariants\AbstractCollectionProcessor;
-use CASS\Domain\Index\Source\Source;
+use CASS\Domain\Bundles\Collection\Entity\Collection;
+use CASS\Domain\Bundles\Index\Processor\ProcessorVariants\AbstractCollectionProcessor;
+use CASS\Domain\Bundles\Index\Source\Source;
 
 final class PublicCollectionsProcessor extends AbstractCollectionProcessor
 {

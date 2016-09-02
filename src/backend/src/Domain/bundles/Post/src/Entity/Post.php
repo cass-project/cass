@@ -1,19 +1,19 @@
 <?php
-namespace CASS\Domain\Post\Entity;
+namespace CASS\Domain\Bundles\Post\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\JSONSerializable;
-use CASS\Domain\Collection\Entity\Collection;
-use CASS\Domain\Index\Entity\IndexedEntity;
-use CASS\Domain\Post\PostType\PostType;
-use CASS\Domain\Attachment\Entity\Attachment;
-use CASS\Domain\Profile\Entity\Profile;
-use CASS\Domain\Theme\Strategy\ThemeIdsEntityAware;
-use CASS\Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
+use CASS\Domain\Bundles\Collection\Entity\Collection;
+use CASS\Domain\Bundles\Index\Entity\IndexedEntity;
+use CASS\Domain\Bundles\Post\PostType\PostType;
+use CASS\Domain\Bundles\Attachment\Entity\Attachment;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Theme\Strategy\ThemeIdsEntityAware;
+use CASS\Domain\Bundles\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
 
 /**
- * @Entity(repositoryClass="CASS\Domain\Post\Repository\PostRepository")
+ * @Entity(repositoryClass="CASS\Domain\Bundles\Post\Repository\PostRepository")
  * @Table(name="post")
  */
 class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEntity
@@ -28,7 +28,7 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEn
     private $postTypeCode;
 
     /**
-     * @ManyToOne(targetEntity="CASS\Domain\Profile\Entity\Profile")
+     * @ManyToOne(targetEntity="CASS\Domain\Bundles\Profile\Entity\Profile")
      * @JoinColumn(name="author_profile_id", referencedColumnName="id")
      * @var Profile
      */
@@ -41,7 +41,7 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEn
     private $dateCreatedOn;
 
     /**
-     * @ManyToOne(targetEntity="CASS\Domain\Collection\Entity\Collection")
+     * @ManyToOne(targetEntity="CASS\Domain\Bundles\Collection\Entity\Collection")
      * @JoinColumn(name="collection_id", referencedColumnName="id")
      * @var Collection
      */

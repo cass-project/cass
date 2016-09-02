@@ -1,12 +1,12 @@
 <?php
-namespace CASS\Domain\Theme\Strategy\Traits;
+namespace CASS\Domain\Bundles\Theme\Strategy\Traits;
 
-use CASS\Domain\Theme\Entity\Theme;
+use CASS\Domain\Bundles\Theme\Entity\Theme;
 
 trait ThemeAwareEntityTrait
 {
     /**
-     * @ManyToOne(targetEntity="CASS\Domain\Theme\Entity\Theme")
+     * @ManyToOne(targetEntity="CASS\Domain\Bundles\Theme\Entity\Theme")
      * @JoinColumn(name="theme_id", referencedColumnName="id")
      * @var Theme
      */

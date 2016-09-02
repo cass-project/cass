@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Collection\Middleware\Command;
+namespace CASS\Domain\Bundles\Collection\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Avatar\Exception\ImageServiceException;
-use CASS\Domain\Collection\Exception\CollectionNotFoundException;
+use CASS\Domain\Bundles\Avatar\Exception\ImageServiceException;
+use CASS\Domain\Bundles\Collection\Exception\CollectionNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

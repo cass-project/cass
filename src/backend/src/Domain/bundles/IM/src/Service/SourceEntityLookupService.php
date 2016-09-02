@@ -1,13 +1,13 @@
 <?php
-namespace CASS\Domain\IM\Service;
+namespace CASS\Domain\Bundles\IM\Service;
 
 use CASS\Util\JSONSerializable;
-use CASS\Domain\Community\Service\CommunityService;
-use CASS\Domain\IM\Exception\Query\UnknownSourceException;
-use CASS\Domain\IM\Query\Source\CommunitySource\CommunitySource;
-use CASS\Domain\IM\Query\Source\ProfileSource\ProfileSource;
-use CASS\Domain\IM\Query\Source\Source;
-use CASS\Domain\Profile\Service\ProfileService;
+use CASS\Domain\Bundles\Community\Service\CommunityService;
+use CASS\Domain\Bundles\IM\Exception\Query\UnknownSourceException;
+use CASS\Domain\Bundles\IM\Query\Source\CommunitySource\CommunitySource;
+use CASS\Domain\Bundles\IM\Query\Source\ProfileSource\ProfileSource;
+use CASS\Domain\Bundles\IM\Query\Source\Source;
+use CASS\Domain\Bundles\Profile\Service\ProfileService;
 
 final class SourceEntityLookupService
 {

@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Profile\Repository;
+namespace CASS\Domain\Bundles\Profile\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use CASS\Domain\Profile\Entity\Profile;
-use CASS\Domain\Profile\Entity\Profile\Greetings;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 
 class ProfileRepository extends EntityRepository
 {

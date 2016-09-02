@@ -1,15 +1,15 @@
 <?php
-namespace CASS\Domain\Index\Service\ContentTypeIdentifier;
+namespace CASS\Domain\Bundles\Index\Service\ContentTypeIdentifier;
 
-use CASS\Domain\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
-use CASS\Domain\IM\Service\ContentTypeIdentifier\ContentTypeIdentifierEntity;
-use CASS\Domain\Post\Entity\Post;
-use CASS\Domain\Attachment\LinkMetadata\Types\ImageLinkMetadata;
-use CASS\Domain\Attachment\LinkMetadata\Types\PageLinkMetadata;
-use CASS\Domain\Attachment\LinkMetadata\Types\UnknownLinkMetadata;
-use CASS\Domain\Attachment\LinkMetadata\Types\WebmLinkMetadata;
-use CASS\Domain\Attachment\LinkMetadata\Types\YoutubeLinkMetadata;
-use CASS\Domain\Attachment\Service\AttachmentService;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
+use CASS\Domain\Bundles\IM\Service\ContentTypeIdentifier\ContentTypeIdentifierEntity;
+use CASS\Domain\Bundles\Post\Entity\Post;
+use CASS\Domain\Bundles\Attachment\LinkMetadata\Types\ImageLinkMetadata;
+use CASS\Domain\Bundles\Attachment\LinkMetadata\Types\PageLinkMetadata;
+use CASS\Domain\Bundles\Attachment\LinkMetadata\Types\UnknownLinkMetadata;
+use CASS\Domain\Bundles\Attachment\LinkMetadata\Types\WebmLinkMetadata;
+use CASS\Domain\Bundles\Attachment\LinkMetadata\Types\YoutubeLinkMetadata;
+use CASS\Domain\Bundles\Attachment\Service\AttachmentService;
 
 final class ContentTypeIdentifier
 {

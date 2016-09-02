@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Post\Parameters;
+namespace CASS\Domain\Bundles\Post\Parameters;
 
 class CreatePostParameters
 {

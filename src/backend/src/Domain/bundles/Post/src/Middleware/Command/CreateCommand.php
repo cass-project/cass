@@ -1,11 +1,11 @@
 <?php
-namespace CASS\Domain\Post\Middleware\Command;
+namespace CASS\Domain\Bundles\Post\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Collection\Exception\CollectionNotFoundException;
-use CASS\Domain\Post\Exception\UnknownPostTypeException;
-use CASS\Domain\Post\Middleware\Request\CreatePostRequest;
-use CASS\Domain\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Collection\Exception\CollectionNotFoundException;
+use CASS\Domain\Bundles\Post\Exception\UnknownPostTypeException;
+use CASS\Domain\Bundles\Post\Middleware\Request\CreatePostRequest;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

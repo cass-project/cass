@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Index\Events;
+namespace CASS\Domain\Bundles\Index\Events;
 
 use CASS\Application\Events\EventsBootstrapInterface;
-use CASS\Domain\Index\Service\IndexService;
-use CASS\Domain\Post\Entity\Post;
-use CASS\Domain\Post\Service\PostService;
+use CASS\Domain\Bundles\Index\Service\IndexService;
+use CASS\Domain\Bundles\Post\Entity\Post;
+use CASS\Domain\Bundles\Post\Service\PostService;
 use Evenement\EventEmitterInterface;
 
 final class PostEvents implements EventsBootstrapInterface

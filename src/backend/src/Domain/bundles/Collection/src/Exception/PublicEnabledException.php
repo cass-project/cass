@@ -1,4 +1,4 @@
 <?php
-namespace CASS\Domain\Collection\Exception;
+namespace CASS\Domain\Bundles\Collection\Exception;
 
 class PublicEnabledException extends \Exception {}

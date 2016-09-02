@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\EmailVerification;
+namespace CASS\Domain\Bundles\EmailVerification;
 
 use CASS\Application\Bundle\GenericBundle;
 

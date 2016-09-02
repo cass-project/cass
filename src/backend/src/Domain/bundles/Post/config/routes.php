@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Post;
+namespace CASS\Domain\Bundles\Post;
 
-use CASS\Domain\Post\Middleware\PostMiddleware;
+use CASS\Domain\Bundles\Post\Middleware\PostMiddleware;
 
 return [
     'common' => [

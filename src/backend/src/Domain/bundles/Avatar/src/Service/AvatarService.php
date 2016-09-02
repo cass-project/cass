@@ -1,11 +1,11 @@
 <?php
-namespace CASS\Domain\Avatar\Service;
+namespace CASS\Domain\Bundles\Avatar\Service;
 
-use CASS\Domain\Avatar\Exception\InvalidCropException;
-use CASS\Domain\Avatar\Image\ImageCollection;
-use CASS\Domain\Avatar\Parameters\UploadImageParameters;
-use CASS\Domain\Avatar\Service\Strategy\AvatarServiceStrategy;
-use CASS\Domain\Avatar\Strategy\ImageStrategy;
+use CASS\Domain\Bundles\Avatar\Exception\InvalidCropException;
+use CASS\Domain\Bundles\Avatar\Image\ImageCollection;
+use CASS\Domain\Bundles\Avatar\Parameters\UploadImageParameters;
+use CASS\Domain\Bundles\Avatar\Service\Strategy\AvatarServiceStrategy;
+use CASS\Domain\Bundles\Avatar\Strategy\ImageStrategy;
 
 final class AvatarService
 {

@@ -1,17 +1,17 @@
 <?php
-namespace CASS\Domain\Collection;
+namespace CASS\Domain\Bundles\Collection;
 
 use function DI\object;
 use function DI\factory;
 use function DI\get;
 
 use DI\Container;
-use CASS\Domain\Collection\Entity\Collection;
-use CASS\Domain\Collection\Entity\CollectionThemeEQEntity;
-use CASS\Domain\Collection\Repository\CollectionRepository;
+use CASS\Domain\Bundles\Collection\Entity\Collection;
+use CASS\Domain\Bundles\Collection\Entity\CollectionThemeEQEntity;
+use CASS\Domain\Bundles\Collection\Repository\CollectionRepository;
 use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
-use CASS\Domain\Collection\Repository\CollectionThemeEQRepository;
-use CASS\Domain\Collection\Service\CollectionService;
+use CASS\Domain\Bundles\Collection\Repository\CollectionThemeEQRepository;
+use CASS\Domain\Bundles\Collection\Service\CollectionService;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Memory\MemoryAdapter;

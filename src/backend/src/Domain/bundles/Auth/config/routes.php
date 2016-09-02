@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Auth;
+namespace CASS\Domain\Bundles\Auth;
 
-use CASS\Domain\Auth\Middleware\AuthMiddleware;
-use CASS\Domain\Auth\Middleware\ProtectedMiddleware;
+use CASS\Domain\Bundles\Auth\Middleware\AuthMiddleware;
+use CASS\Domain\Bundles\Auth\Middleware\ProtectedMiddleware;
 
 return [
    'common' => [

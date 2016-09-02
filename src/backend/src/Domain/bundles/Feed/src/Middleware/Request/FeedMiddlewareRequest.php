@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Feed\Middleware\Request;
+namespace CASS\Domain\Bundles\Feed\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
-use CASS\Domain\Feed\FeedBundle;
-use CASS\Domain\Feed\Request\FeedRequest;
+use CASS\Domain\Bundles\Feed\FeedBundle;
+use CASS\Domain\Bundles\Feed\Request\FeedRequest;
 
 final class FeedMiddlewareRequest extends SchemaParams
 {

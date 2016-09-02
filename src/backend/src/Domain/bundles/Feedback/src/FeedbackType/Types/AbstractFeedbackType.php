@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Feedback\FeedbackType\Types;
+namespace CASS\Domain\Bundles\Feedback\FeedbackType\Types;
 
-use CASS\Domain\Feedback\FeedbackType\FeedbackType;
+use CASS\Domain\Bundles\Feedback\FeedbackType\FeedbackType;
 
 abstract class AbstractFeedbackType implements FeedbackType
 {

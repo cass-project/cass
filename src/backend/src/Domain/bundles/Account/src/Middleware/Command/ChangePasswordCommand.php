@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Account\Middleware\Command;
+namespace CASS\Domain\Bundles\Account\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Account\Exception\InvalidOldPasswordException;
-use CASS\Domain\Account\Middleware\Request\ChangePasswordRequest;
+use CASS\Domain\Bundles\Account\Exception\InvalidOldPasswordException;
+use CASS\Domain\Bundles\Account\Middleware\Request\ChangePasswordRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

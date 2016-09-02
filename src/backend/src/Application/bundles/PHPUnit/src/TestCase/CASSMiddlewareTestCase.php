@@ -4,7 +4,7 @@ namespace CASS\Application\Bundles\PHPUnit\TestCase;
 use CASS\Application\Bundles\Doctrine2\Service\TransactionService;
 use CASS\Application\Bundles\PHPUnit\TestCase\Expectations\ExpectImageCollection;
 use Doctrine\ORM\EntityManager;
-use CASS\Domain\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
 use MongoDB\Database;
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
@@ -23,9 +23,9 @@ abstract class CASSMiddlewareTestCase extends MiddlewareTestCase
      * Каждая фикстура содержит в себе статическую переменную, в которой хранятся объект/записи, созданные ей
      *
      * Примеры фикстур:
-     *     - CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture - тестовый аккаунт
-     *      - CASS\Domain\Profile\Tests\Fixtures\DemoProfileFixture - тестовый профиль аккаунта
-     *     - CASS\Domain\Theme\Tests\Fixtures\SampleThemesFixture - тестовые тематики
+     *     - CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture - тестовый аккаунт
+     *      - CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture - тестовый профиль аккаунта
+     *     - CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture - тестовые тематики
      *
      * @return array
      */

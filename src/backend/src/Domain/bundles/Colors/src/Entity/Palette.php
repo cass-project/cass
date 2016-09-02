@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Colors\Entity;
+namespace CASS\Domain\Bundles\Colors\Entity;
 
 use CASS\Util\JSONSerializable;
 

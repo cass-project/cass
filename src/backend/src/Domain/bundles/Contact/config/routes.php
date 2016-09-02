@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Contact;
+namespace CASS\Domain\Bundles\Contact;
 
-use CASS\Domain\Contact\Middleware\ContactMiddleware;
+use CASS\Domain\Bundles\Contact\Middleware\ContactMiddleware;
 
 return [
     'common' => [

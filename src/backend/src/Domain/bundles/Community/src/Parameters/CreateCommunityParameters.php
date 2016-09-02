@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Community\Parameters;
+namespace CASS\Domain\Bundles\Community\Parameters;
 
 class CreateCommunityParameters
 {

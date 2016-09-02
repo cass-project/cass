@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Feedback\Repository;
+namespace CASS\Domain\Bundles\Feedback\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use CASS\Domain\Feedback\Entity\Feedback;
-use CASS\Domain\Feedback\Entity\FeedbackResponse;
-use CASS\Domain\Feedback\Exception\FeedbackNotFoundException;
+use CASS\Domain\Bundles\Feedback\Entity\Feedback;
+use CASS\Domain\Bundles\Feedback\Entity\FeedbackResponse;
+use CASS\Domain\Bundles\Feedback\Exception\FeedbackNotFoundException;
 
 class FeedbackResponseRepository extends EntityRepository
 {

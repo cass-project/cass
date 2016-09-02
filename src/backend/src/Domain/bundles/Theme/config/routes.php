@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Theme;
+namespace CASS\Domain\Bundles\Theme;
 
-use CASS\Domain\Theme\Middleware\ThemeMiddleware;
+use CASS\Domain\Bundles\Theme\Middleware\ThemeMiddleware;
 
 return [
     'common' => [

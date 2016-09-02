@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\Index\Scripts\UpdateIndexScript;
+namespace CASS\Domain\Bundles\Index\Scripts\UpdateIndexScript;
 
-use CASS\Domain\Collection\Service\CollectionService;
-use CASS\Domain\Community\Service\CommunityService;
-use CASS\Domain\Profile\Service\ProfileService;
+use CASS\Domain\Bundles\Collection\Service\CollectionService;
+use CASS\Domain\Bundles\Community\Service\CommunityService;
+use CASS\Domain\Bundles\Profile\Service\ProfileService;
 
 final class UpdateIndexScript
 {

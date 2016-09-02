@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Attachment;
+namespace CASS\Domain\Bundles\Attachment;
 
 use function DI\object;
 use function DI\factory;
@@ -7,9 +7,9 @@ use function DI\get;
 
 use DI\Container;
 use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
-use CASS\Domain\Attachment\Entity\Attachment;
-use CASS\Domain\Attachment\Repository\AttachmentRepository;
-use CASS\Domain\Attachment\Service\AttachmentService;
+use CASS\Domain\Bundles\Attachment\Entity\Attachment;
+use CASS\Domain\Bundles\Attachment\Repository\AttachmentRepository;
+use CASS\Domain\Bundles\Attachment\Service\AttachmentService;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Memory\MemoryAdapter;

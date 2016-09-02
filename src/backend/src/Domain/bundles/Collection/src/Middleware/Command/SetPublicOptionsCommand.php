@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Collection\Middleware\Command;
+namespace CASS\Domain\Bundles\Collection\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use CASS\Domain\Collection\Exception\CollectionNotFoundException;
-use CASS\Domain\Collection\Exception\InvalidCollectionOptionsException;
-use CASS\Domain\Collection\Middleware\Request\SetPublicOptionsRequest;
+use CASS\Domain\Bundles\Collection\Exception\CollectionNotFoundException;
+use CASS\Domain\Bundles\Collection\Exception\InvalidCollectionOptionsException;
+use CASS\Domain\Bundles\Collection\Middleware\Request\SetPublicOptionsRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

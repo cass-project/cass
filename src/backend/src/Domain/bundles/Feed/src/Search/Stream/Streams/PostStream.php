@@ -1,17 +1,17 @@
 <?php
-namespace CASS\Domain\Feed\Search\Stream\Streams;
+namespace CASS\Domain\Bundles\Feed\Search\Stream\Streams;
 
-use CASS\Domain\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
-use CASS\Domain\Feed\Search\Criteria\Criteria\SortCriteria;
-use CASS\Domain\Feed\Search\Criteria\CriteriaManager;
-use CASS\Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
-use CASS\Domain\Feed\Search\Stream\Stream;
-use CASS\Domain\Post\Entity\Post;
-use CASS\Domain\Post\Exception\PostNotFoundException;
-use CASS\Domain\Post\Formatter\PostFormatter;
-use CASS\Domain\Post\Service\PostService;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\QueryStringCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SeekCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SortCriteria;
+use CASS\Domain\Bundles\Feed\Search\Criteria\CriteriaManager;
+use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
+use CASS\Domain\Bundles\Feed\Search\Stream\Stream;
+use CASS\Domain\Bundles\Post\Entity\Post;
+use CASS\Domain\Bundles\Post\Exception\PostNotFoundException;
+use CASS\Domain\Bundles\Post\Formatter\PostFormatter;
+use CASS\Domain\Bundles\Post\Service\PostService;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
 use MongoDB\Model\BSONDocument;

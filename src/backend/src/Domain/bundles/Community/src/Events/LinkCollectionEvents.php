@@ -1,12 +1,12 @@
 <?php
-namespace CASS\Domain\Community\Events;
+namespace CASS\Domain\Bundles\Community\Events;
 
 use CASS\Application\Events\EventsBootstrapInterface;
 use CASS\Application\Exception\PermissionsDeniedException;
-use CASS\Domain\Auth\Service\CurrentAccountService;
-use CASS\Domain\Collection\Entity\Collection;
-use CASS\Domain\Collection\Service\CollectionService;
-use CASS\Domain\Community\Service\CommunityService;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Collection\Entity\Collection;
+use CASS\Domain\Bundles\Collection\Service\CollectionService;
+use CASS\Domain\Bundles\Community\Service\CommunityService;
 use Evenement\EventEmitterInterface;
 
 final class LinkCollectionEvents implements EventsBootstrapInterface

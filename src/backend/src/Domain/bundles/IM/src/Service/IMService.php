@@ -1,17 +1,17 @@
 <?php
-namespace CASS\Domain\IM\Service;
+namespace CASS\Domain\Bundles\IM\Service;
 
-use CASS\Domain\IM\Entity\Message;
-use CASS\Domain\IM\Exception\Query\UnknownSourceException;
-use CASS\Domain\IM\Query\Query;
-use CASS\Domain\IM\Query\Source\CommunitySource\CommunitySource;
-use CASS\Domain\IM\Query\Source\ProfileSource\ProfileSource;
-use CASS\Domain\IM\Query\Source\Source;
-use CASS\Domain\IM\Query\Source\SourceFactory;
-use CASS\Domain\IM\Repository\IMRepository;
-use CASS\Domain\IM\Service\IMService\UnreadResult;
-use CASS\Domain\Profile\Entity\Profile;
-use CASS\Domain\Profile\Service\ProfileService;
+use CASS\Domain\Bundles\IM\Entity\Message;
+use CASS\Domain\Bundles\IM\Exception\Query\UnknownSourceException;
+use CASS\Domain\Bundles\IM\Query\Query;
+use CASS\Domain\Bundles\IM\Query\Source\CommunitySource\CommunitySource;
+use CASS\Domain\Bundles\IM\Query\Source\ProfileSource\ProfileSource;
+use CASS\Domain\Bundles\IM\Query\Source\Source;
+use CASS\Domain\Bundles\IM\Query\Source\SourceFactory;
+use CASS\Domain\Bundles\IM\Repository\IMRepository;
+use CASS\Domain\Bundles\IM\Service\IMService\UnreadResult;
+use CASS\Domain\Bundles\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Profile\Service\ProfileService;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Model\BSONDocument;
 

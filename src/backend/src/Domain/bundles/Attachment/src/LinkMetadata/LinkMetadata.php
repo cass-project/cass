@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Attachment\LinkMetadata;
+namespace CASS\Domain\Bundles\Attachment\LinkMetadata;
 
 use CASS\Util\JSONSerializable;
 

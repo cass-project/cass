@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Attachment\Repository;
+namespace CASS\Domain\Bundles\Attachment\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use CASS\Domain\Attachment\Entity\Attachment;
-use CASS\Domain\Attachment\Exception\AttachmentFactoryException;
-use CASS\Domain\Attachment\Exception\AttachmentNotFoundException;
+use CASS\Domain\Bundles\Attachment\Entity\Attachment;
+use CASS\Domain\Bundles\Attachment\Exception\AttachmentFactoryException;
+use CASS\Domain\Bundles\Attachment\Exception\AttachmentNotFoundException;
 
 class AttachmentRepository extends EntityRepository
 {

@@ -1,10 +1,10 @@
 <?php
-namespace CASS\Domain\Colors\Middleware;
+namespace CASS\Domain\Bundles\Colors\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Service\CommandService;
-use CASS\Domain\Colors\Middleware\Command\GetColorsCommand;
-use CASS\Domain\Colors\Middleware\Command\GetPalettesCommand;
+use CASS\Domain\Bundles\Colors\Middleware\Command\GetColorsCommand;
+use CASS\Domain\Bundles\Colors\Middleware\Command\GetPalettesCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

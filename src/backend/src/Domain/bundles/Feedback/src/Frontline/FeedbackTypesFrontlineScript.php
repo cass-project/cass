@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Feedback\Frontline;
+namespace CASS\Domain\Bundles\Feedback\Frontline;
 
 use CASS\Application\Bundles\Frontline\FrontlineScript;
-use CASS\Domain\Feedback\FeedbackType\FeedbackTypeFactory;
+use CASS\Domain\Bundles\Feedback\FeedbackType\FeedbackTypeFactory;
 
 final class FeedbackTypesFrontlineScript implements FrontlineScript
 {

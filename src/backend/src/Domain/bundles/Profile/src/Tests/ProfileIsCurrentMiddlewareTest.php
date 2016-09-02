@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Domain\Profile\Tests;
+namespace CASS\Domain\Bundles\Profile\Tests;
 
-use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 
 /**
  * @backupGlobals disabled

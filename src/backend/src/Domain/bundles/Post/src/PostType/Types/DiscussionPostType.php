@@ -1,5 +1,5 @@
 <?php
-namespace CASS\Domain\Post\PostType\Types;
+namespace CASS\Domain\Bundles\Post\PostType\Types;
 
 final class DiscussionPostType extends AbstractPostType
 {

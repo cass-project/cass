@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Contact\Formatter;
+namespace CASS\Domain\Bundles\Contact\Formatter;
 
-use CASS\Domain\Contact\Entity\Contact;
-use CASS\Domain\IM\Service\LastMessageService;
+use CASS\Domain\Bundles\Contact\Entity\Contact;
+use CASS\Domain\Bundles\IM\Service\LastMessageService;
 
 final class ContactFormatter
 {

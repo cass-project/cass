@@ -1,8 +1,8 @@
 <?php
-namespace CASS\Domain\Avatar\Strategy;
+namespace CASS\Domain\Bundles\Avatar\Strategy;
 
-use CASS\Domain\Avatar\Entity\ImageEntity;
-use CASS\Domain\Avatar\Image\Image;
+use CASS\Domain\Bundles\Avatar\Entity\ImageEntity;
+use CASS\Domain\Bundles\Avatar\Image\Image;
 use League\Flysystem\FilesystemInterface;
 
 interface ImageStrategy

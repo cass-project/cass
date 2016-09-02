@@ -1,9 +1,9 @@
 <?php
-namespace CASS\Domain\IM\Formatter;
+namespace CASS\Domain\Bundles\IM\Formatter;
 
-use CASS\Domain\Attachment\Entity\Attachment;
-use CASS\Domain\Attachment\Service\AttachmentService;
-use CASS\Domain\Profile\Service\ProfileService;
+use CASS\Domain\Bundles\Attachment\Entity\Attachment;
+use CASS\Domain\Bundles\Attachment\Service\AttachmentService;
+use CASS\Domain\Bundles\Profile\Service\ProfileService;
 
 final class MessageFormatter
 {
