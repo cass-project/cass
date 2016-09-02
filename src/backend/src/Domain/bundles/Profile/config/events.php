@@ -7,7 +7,7 @@ use CASS\Domain\Bundles\Profile\Events\ProfileExpertInEQEvents;
 use CASS\Domain\Bundles\Profile\Events\ProfileInterestingInEQEvents;
 use Evenement\EventEmitterInterface;
 
-return function(EventEmitterInterface $globalEmitter): array
+return function(): array
 {
     return [
         LinkCollectionEvents::class,

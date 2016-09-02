@@ -148,11 +148,6 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         return $this;
     }
 
-    /**
-     * Используйте в качестве плейсхолдера для автогенерируемых значение в эталонных массивах (для expectJSONBody)
-     * @return \ZEA2\Platform\Bundles\PHPUnit\TestCase\Expectations\ExpectId
-     */
-
     protected function expectJSONContentType(): self
     {
         $this->assertEquals('application/json', self::$currentResult->getHttpResponse()->getHeader('Content-Type')[0]);

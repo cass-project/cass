@@ -7,7 +7,7 @@ use CASS\Domain\Bundles\Index\Events\PostEvents;
 use CASS\Domain\Bundles\Index\Events\ProfileEvents;
 use Evenement\EventEmitterInterface;
 
-return function(EventEmitterInterface $globalEmitter): array
+return function(): array
 {
     return [
         CollectionEvents::class,

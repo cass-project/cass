@@ -6,7 +6,7 @@ use CASS\Domain\Bundles\IM\Service\LastMessageService\LastMessageServiceResult;
 
 final class LastMessageService
 {
-    public function getLastMessage(LastMessageServiceQuery $query)
+    public function getLastMessage()
     {
         return new LastMessageServiceResult(true, new \DateTime(), "Last message (NOT_IMPLEMENTED)");
     }

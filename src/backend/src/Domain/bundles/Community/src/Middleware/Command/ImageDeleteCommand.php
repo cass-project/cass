@@ -24,7 +24,7 @@ final class ImageDeleteCommand extends Command
         }catch(ImageServiceException $e) {
             $responseBuilder
                 ->setError($e)
-                ->setStatusUnprocessable();
+                ->setStatusNotProcessable();
         }
 
         return $responseBuilder->build();

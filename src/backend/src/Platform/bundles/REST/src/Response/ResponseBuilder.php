@@ -10,7 +10,7 @@ class ResponseBuilder
     const CODE_NOT_FOUND = 404;
     const CODE_NOT_ALLOWED = 403;
     const CODE_CONFLICT = 409;
-    const CODE_UNPROCESSABLE = 422;
+    const CODE_UN_PROCESSABLE = 422;
     const CODE_INTERNAL_ERROR = 500;
 
     /** @var ResponseInterface */
@@ -54,8 +54,8 @@ class ResponseBuilder
         return $this;
     }
 
-    public function setStatusUnprocessable(): self {
-        $this->setStatus(self::CODE_UNPROCESSABLE);
+    public function setStatusNotProcessable(): self {
+        $this->setStatus(self::CODE_UN_PROCESSABLE);
 
         return $this;
     }

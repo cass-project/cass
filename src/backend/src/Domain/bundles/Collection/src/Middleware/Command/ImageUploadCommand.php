@@ -21,7 +21,7 @@ final class ImageUploadCommand extends Command
         }catch(ImageServiceException $e) {
             $responseBuilder
                 ->setError($e)
-                ->setStatusUnprocessable();
+                ->setStatusNotProcessable();
         }catch(CollectionNotFoundException $e) {
             $responseBuilder
                 ->setError($e)

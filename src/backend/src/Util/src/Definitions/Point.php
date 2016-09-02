@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Util\Definitions;
 
-use CASS\Util\Exception\InvalidCoordException;
+use CASS\Util\Exception\InvalidCoordinatesException;
 
 class Point
 {
@@ -13,11 +13,11 @@ class Point
 
     public function __construct(int $x, int $y) {
         if ($x < 0 || is_double($x)) {
-            throw new InvalidCoordException(sprintf('Invalid X: `%s`', $x));
+            throw new InvalidCoordinatesException(sprintf('Invalid X: `%s`', $x));
         }
 
         if ($y < 0 || is_double($y)) {
-            throw new InvalidCoordException(sprintf('Invalid Y: `%s`', $y));
+            throw new InvalidCoordinatesException(sprintf('Invalid Y: `%s`', $y));
         }
 
         $this->x = $x;

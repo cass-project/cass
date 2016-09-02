@@ -50,7 +50,7 @@ final class OpenGraphParser
         return $result;
     }
 
-    private function fetchOGBasic(\DOMDocument $document)
+    private function fetchOGBasic()
     {
         $attributes = [
             'og:title' => '',
@@ -77,7 +77,7 @@ final class OpenGraphParser
         return $attributes;
     }
 
-    private function fetchOGImages(\DOMDocument $document)
+    private function fetchOGImages()
     {
         $result = [];
         $attributes = [
@@ -118,7 +118,7 @@ final class OpenGraphParser
         return $result;
     }
 
-    private function fetchOGVideos(\DOMDocument $document)
+    private function fetchOGVideos()
     {
         $result = [];
         $attributes = [
@@ -159,7 +159,7 @@ final class OpenGraphParser
         return $result;
     }
 
-    private function fetchOGAudios(\DOMDocument $document)
+    private function fetchOGAudios()
     {
         $result = [];
         $attributes = [

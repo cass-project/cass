@@ -21,7 +21,7 @@ class ImageDeleteCommand extends Command
                 ]);
         } catch (ImageServiceException $e) {
             $responseBuilder
-                ->setStatusUnprocessable()
+                ->setStatusNotProcessable()
                 ->setError($e);
         } catch (ProfileNotFoundException $e) {
             $responseBuilder

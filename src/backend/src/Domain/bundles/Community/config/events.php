@@ -6,7 +6,7 @@ use CASS\Domain\Bundles\Community\Events\DashboardCommunityCollectionEvents;
 use CASS\Domain\Bundles\Community\Events\LinkCollectionEvents;
 use Evenement\EventEmitterInterface;
 
-return function(EventEmitterInterface $globalEmitter): array
+return function(): array
 {
     return [
         LinkCollectionEvents::class,
