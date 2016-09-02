@@ -1,0 +1,3 @@
+[submodule "src/backend/src/Application/bundles/Stage/src/Resources"]
+	path = src/backend/src/Application/bundles/Stage/src/Resources
+	url = https://github.com/cass-project/cass-stage-data
