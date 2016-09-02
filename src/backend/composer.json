@@ -7,14 +7,16 @@
       "ZEA2\\Platform\\Bundles\\PHPUnit\\": "src/Platform/bundles/PHPUnit/src",
       "ZEA2\\Platform\\Bundles\\REST\\": "src/Platform/bundles/REST/src",
       "ZEA2\\Platform\\Bundles\\Swagger\\": "src/Platform/bundles/Swagger/src",
-      "CASS\\Application\\": "src/Application/src",
-      "Domain\\": "src/Domain/src",
-      "CASS\\Project\\": "src/Project/src",
       "CASS\\Util\\": "src/Util/src",
+      "CASS\\Application\\": "src/Application/src",
       "CASS\\Application\\Bundles\\Doctrine2\\": "src/Application/bundles/Doctrine2/src",
       "CASS\\Application\\Bundles\\Frontline\\": "src/Application/bundles/Frontline/src",
       "CASS\\Application\\Bundles\\MongoDB\\": "src/Application/bundles/MongoDB/src",
       "CASS\\Application\\Bundles\\Version\\": "src/Application/bundles/Version/src",
+      "CASS\\Application\\Bundles\\Console\\": "src/Application/bundles/Console/src",
+      "CASS\\Application\\Bundles\\Stage\\": "src/Application/bundles/Stage/src",
+      "CASS\\Application\\Bundles\\PHPUnit\\": "src/Application/bundles/PHPUnit/src",
+      "Domain\\": "src/Domain/src",
       "Domain\\Account\\": "src/Domain/bundles/Account/src",
       "Domain\\Auth\\": "src/Domain/bundles/Auth/src",
       "Domain\\Collection\\": "src/Domain/bundles/Collection/src",
@@ -33,10 +35,7 @@
       "Domain\\Feed\\": "src/Domain/bundles/Feed/src",
       "Domain\\OpenGraph\\": "src/Domain/bundles/OpenGraph/src",
       "Domain\\Contact\\": "src/Domain/bundles/Contact/src",
-      "Domain\\Index\\": "src/Domain/bundles/Index/src",
-      "CASS\\Project\\Bundles\\Console\\": "src/Project/bundles/Console/src",
-      "CASS\\Project\\Bundles\\Stage\\": "src/Project/bundles/Stage/src",
-      "CASS\\Project\\Bundles\\PHPUnit\\": "src/Project/bundles/PHPUnit/src"
+      "Domain\\Index\\": "src/Domain/bundles/Index/src"
     }
   },
   "require": {
