@@ -1,8 +1,8 @@
 <?php
 namespace Domain\Profile\Tests;
 
+use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;
-use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
 use CASS\Util\Definitions\Point;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
@@ -11,7 +11,7 @@ use Zend\Diactoros\UploadedFile;
 /**
  * @backupGlobals disabled
  */
-abstract class ProfileMiddlewareTestCase extends MiddlewareTestCase
+abstract class ProfileMiddlewareTestCase extends CASSMiddlewareTestCase
 {
     protected function getFixtures(): array
     {

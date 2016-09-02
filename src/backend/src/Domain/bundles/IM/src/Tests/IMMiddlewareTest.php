@@ -1,17 +1,16 @@
 <?php
 namespace Domain\IM\Tests;
 
-use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
+use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
-use Domain\IM\Tests\Fixtures\ProfilesFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 
 /**
  * @backupGlobals disabled
  */
-abstract class IMMiddlewareTest extends MiddlewareTestCase
+abstract class IMMiddlewareTest extends CASSMiddlewareTestCase
 {
     protected function getFixtures(): array
     {

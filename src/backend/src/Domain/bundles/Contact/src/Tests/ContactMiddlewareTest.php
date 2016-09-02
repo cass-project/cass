@@ -1,14 +1,14 @@
 <?php
 namespace Domain\Contact\Tests;
 
+use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;
-use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Contact\Tests\Fixture\DemoContactFixture;
 
 /**
  * @backupGlobals disabled
  */
-abstract class ContactMiddlewareTest extends MiddlewareTestCase
+abstract class ContactMiddlewareTest extends CASSMiddlewareTestCase
 {
     /** @var DemoContactFixture */
     private $fixture;

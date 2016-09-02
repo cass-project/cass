@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Application\Bundles\Frontline\Tests;
 
-use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
+use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
@@ -11,7 +11,7 @@ use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 /**
  * @backupGlobals disabled
  */
-class IsFrontlineAliveTest extends MiddlewareTestCase
+class IsFrontlineAliveTest extends CASSMiddlewareTestCase
 {
     protected function getFixtures(): array
     {

@@ -1,8 +1,8 @@
 <?php
 namespace Domain\ProfileCommunities\Tests;
 
+use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;
-use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
@@ -12,7 +12,7 @@ use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 /**
  * @backupGlobals disabled
  */
-class ProfileCommunitiesAPITest extends MiddlewareTestCase
+class ProfileCommunitiesAPITest extends CASSMiddlewareTestCase
 {
     protected function getFixtures(): array {
         return [

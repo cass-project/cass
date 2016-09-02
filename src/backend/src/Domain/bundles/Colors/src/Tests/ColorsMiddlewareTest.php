@@ -1,13 +1,13 @@
 <?php
 namespace Domain\Colors\Tests;
 
+use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use Domain\Colors\Entity\Color;
-use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
 
 /**
  * @backupGlobals disabled
  */
-class ColorsMiddlewareTest extends MiddlewareTestCase
+class ColorsMiddlewareTest extends CASSMiddlewareTestCase
 {
     protected function getFixtures(): array {
         return [];

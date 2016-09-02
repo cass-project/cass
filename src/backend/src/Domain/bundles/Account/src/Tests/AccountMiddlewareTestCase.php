@@ -1,13 +1,13 @@
 <?php
 namespace Domain\Account\Tests;
 
+use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;
-use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
 
 /**
  * @backupGlobals disabled
  */
-abstract class AccountMiddlewareTestCase extends MiddlewareTestCase
+abstract class AccountMiddlewareTestCase extends CASSMiddlewareTestCase
 {
     protected function requestDeleteRequest(): RESTRequest
     {

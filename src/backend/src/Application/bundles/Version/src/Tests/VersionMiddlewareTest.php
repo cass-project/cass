@@ -1,12 +1,11 @@
 <?php
 namespace CASS\Application\Bundles\Version\Tests;
-
-use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
+use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 
 /**
  * @backupGlobals disabled
  */
-final class VersionMiddlewareTest extends MiddlewareTestCase
+final class VersionMiddlewareTest extends CASSMiddlewareTestCase
 {
     protected function getFixtures(): array
     {

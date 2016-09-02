@@ -1,15 +1,10 @@
 <?php
 namespace ZEA2\Platform\Bundles\PHPUnit\TestCase;
 
-use CASS\Application\Bundles\Doctrine2\Service\TransactionService;
-use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;
+use ZEA2\Platform\Bundles\PHPUnit\TestCase\Expectations\Expectation;
+use ZEA2\Platform\Bundles\PHPUnit\TestCase\Expectations\ExpectationParams;
 use ZEA2\Platform\Bundles\PHPUnit\TestCase\Expectations\Traits\AllExpectationsTrait;
-use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
-use ZEA2\Platform\Bundles\REST\Service\SchemaService;
-use Doctrine\ORM\EntityManager;
-use Domain\Auth\Service\CurrentAccountService;
-use MongoDB\Database;
 use PHPUnit_Framework_TestCase;
 use Zend\Diactoros\Response;
 use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\Result;
@@ -35,7 +30,8 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
      * Возвращает ссылку на текущее приложение
      * @return Application
      */
-    protected function app(): Application {
+    protected function app(): Application
+    {
         return self::$app;
     }
 
@@ -44,47 +40,9 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
      * Используйте для получение сервисов/репозиторие/etc
      * @return Container
      */
-    protected function container(): Container {
+    protected function container(): Container
+    {
         return self::$app->getContainer();
-    }
-
-    /**
-     * Фикстуры
-     * Возвращает массив фикстур, которые применяются к каждому юнит-тесту
-     *
-     * Массив должен быть пустым, либо содержать набор объектов классов,
-     *  имплементирующие интерфейс ZEA2\Platform\Bundles\PHPUnit\Fixture
-     *
-     * Каждая фикстура содержит в себе статическую переменную, в которой хранятся объект/записи, созданные ей
-     *
-     * Примеры фикстур:
-     *     - Domain\Account\Tests\Fixtures\DemoAccountFixture - тестовый аккаунт
-     *      - Domain\Profile\Tests\Fixtures\DemoProfileFixture - тестовый профиль аккаунта
-     *     - Domain\Theme\Tests\Fixtures\SampleThemesFixture - тестовые тематики
-     *
-     * @return array
-     */
-    protected abstract function getFixtures(): array;
-
-    /**
-     * Поднимает указанную фикстуру
-     * @param Fixture $fixture
-     * @return MiddlewareTestCase
-     */
-    protected function upFixture(Fixture $fixture): self {
-        $app = $this->app();
-        $em = $this->container()->get(EntityManager::class);
-        $fixture->up($app, $em);
-
-        return $this;
-    }
-
-    protected function upFixtures(array $fixtures): self {
-        foreach($fixtures as $fixture) {
-            $this->upFixture($fixture);
-        }
-
-        return $this;
     }
 
     /**
@@ -133,7 +91,7 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
 
     /**
      * Возвращает последний возвращенный результат
-     * @return array
+     * @return Result
      */
     protected function getLastResult(): Result
     {
@@ -145,53 +103,14 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         return self::$currentResult->getContent();
     }
 
-    /**
-     * При выполнении каждого юнит-теста происходят следующие действия:
-     *
-     *  1. Стартует транзакция
-     *  2. Применяются фикстуры
-     *  3. Инжектится SchemaService в SchemaParams
-     *
-     * @throws \DI\NotFoundException
-     */
-    protected function setUp() {
-        $transactionService = $this->container()->get(TransactionService::class); /** @var TransactionService $transactionService */
-        $transactionService->beginTransaction();
-
-        $app = $this->app();
-        $em = $this->container()->get(EntityManager::class);
-        
-        array_map(function(Fixture $fixture) use ($app, $em) {
-            $this->upFixture($fixture);
-        }, $this->getFixtures());
-
-        SchemaParams::injectSchemaService($app->getContainer()->get(SchemaService::class));
-    }
-
-    /**
-     * После завершения каждого юнит-теста происходит роллбак транзакции и удаляются MongoDB-записи
-     *
-     * @throws \DI\NotFoundException
-     */
-    protected function tearDown() {
-        $transactionService = $this->container()->get(TransactionService::class); /** @var TransactionService $transactionService */
-        $transactionService->rollback();
-
-        /** @var Database $mongoDB */
-        $mongoDB = $this->container()->get(Database::class);
-        $mongoDB->drop();
-
-        /** @var CurrentAccountService $currentAccountService */
-        $currentAccountService = $this->container()->get(CurrentAccountService::class);
-        $currentAccountService->emptyToken();
-    }
 
     /* =============== */
 
     /**
      * Выводит в консоль содержимое текущего ответа
      */
-    protected function dump(): self {
+    protected function dump(): self
+    {
         var_dump("");
         var_dump("===== DUMP START =====");
         var_dump(sprintf('STATUS CODE: %s', self::$currentResult->getHttpResponse()->getStatusCode()));
@@ -202,7 +121,8 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         return $this;
     }
 
-    protected function dumpError(): self {
+    protected function dumpError(): self
+    {
         $result = self::$currentResult->getContent();
 
         if(isset($result['error'])) {
@@ -221,7 +141,8 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
      * @param int $statusCode
      * @return MiddlewareTestCase
      */
-    protected function expectStatusCode(int $statusCode): self {
+    protected function expectStatusCode(int $statusCode): self
+    {
         $this->assertEquals($statusCode, self::$currentResult->getHttpResponse()->getStatusCode());
 
         return $this;
@@ -232,19 +153,22 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
      * @return \ZEA2\Platform\Bundles\PHPUnit\TestCase\Expectations\ExpectId
      */
 
-    protected function expectJSONContentType(): self {
+    protected function expectJSONContentType(): self
+    {
         $this->assertEquals('application/json', self::$currentResult->getHttpResponse()->getHeader('Content-Type')[0]);
 
         return $this;
     }
 
-    protected function expect(Callable $callback): self {
+    protected function expect(Callable $callback): self
+    {
         $callback(self::$currentResult->getContent());
 
         return $this;
     }
 
-    protected function with(Callable $callback): self { /* alias */
+    protected function with(Callable $callback): self
+    { /* alias */
         return $this->expect($callback);
     }
 
@@ -252,33 +176,34 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
      * Ожидается ошибка 403 Не авторизован
      * @return MiddlewareTestCase
      */
-    protected function expectAuthError(): self {
+    protected function expectAuthError(): self
+    {
         return $this->expectJSONContentType()
             ->expectStatusCode(403)
             ->expectJSONError()
             ->expectJSONBody([
                 'success' => false,
-                'error' => $this->expectString()
-            ])
-        ;
+                'error' => $this->expectString(),
+            ]);
     }
 
     /**
      * Ожидается ошибка 404 Не найдено
      * @return MiddlewareTestCase
      */
-    protected function expectNotFoundError(): self {
+    protected function expectNotFoundError(): self
+    {
         return $this->expectJSONContentType()
             ->expectStatusCode(404)
             ->expectJSONError()
             ->expectJSONBody([
                 'success' => false,
-                'error' => $this->expectString()
-            ])
-        ;
+                'error' => $this->expectString(),
+            ]);
     }
 
-    protected function expectJSONError(): self {
+    protected function expectJSONError(): self
+    {
         $result = self::$currentResult->getContent();
 
         $this->assertTrue(is_array($result));
@@ -296,7 +221,8 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
      * @param array $expectedJSONBody
      * @return MiddlewareTestCase
      */
-    protected function expectJSONBody(array $expectedJSONBody): self {
+    protected function expectJSONBody(array $expectedJSONBody): self
+    {
         $this->recursiveAssertEquals($expectedJSONBody, self::$currentResult->getContent());
 
         return $this;
@@ -307,47 +233,32 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
         return $callback(self::$currentResult->getContent());
     }
 
-    private function recursiveAssertEquals(array $expected, array $actual, string $level = '- ') {
-        foreach($expected as $key=>$value) {
-            if(! (is_array($value) || is_callable($value) || is_object($value))) {
+    public function recursiveAssertEquals(array $expected, array $actual, string $level = '- ')
+    {
+        foreach($expected as $key => $value) {
+            if(is_string($value) || is_int($value) || is_bool($value)) {
                 echo sprintf("\n%sASSERT: %s == %s", $level, $key, (string) (
-                    is_object($actual[$key])
-                        ? "#OBJECT"
-                        : var_export($actual[$key], true)
+                is_object($actual[$key])
+                    ? "#OBJECT"
+                    : var_export($actual[$key], true)
                 ));
             }
 
-            if($value instanceof Expectations\ExpectUndefined) {
-                $this->assertArrayNotHasKey($key, $actual);
+            if($value instanceof Expectation) {
+                $value->expect(new ExpectationParams(
+                    $this,
+                    $level,
+                    $actual,
+                    $expected,
+                    $key,
+                    $value
+                ));
+            }else if(is_array($value)) {
+                $this->recursiveAssertEquals($value, $actual[$key], $level . '- ');
+            }else if(is_object($value) && ($value instanceof \Closure)) {
+                $value($actual[$key]);
             }else{
-                $this->assertArrayHasKey($key, $actual);
-
-                if($value instanceof Expectations\ExpectId) {
-                    $this->assertTrue(is_int($actual[$key]));
-                    $this->assertGreaterThan(0, $actual[$key]);
-                }else if($value instanceof Expectations\ExpectImageCollection) {
-                    $this->recursiveAssertEquals([
-                        'uid' => $this->expectString(),
-                        'is_auto_generated' => function($input) {
-                            $this->assertTrue(is_bool($input));
-                        },
-                        'variants' => [
-                            'default' => [
-                                'id' => 'default',
-                                'public_path' => $this->expectString(),
-                                'storage_path' => $this->expectString(),
-                            ]
-                        ]
-                    ], $actual[$key], $level . '- ');
-                }else if($value instanceof Expectations\ExpectString) {
-                    $this->assertTrue(is_string($actual[$key]));
-                }else if(is_array($value)) {
-                    $this->recursiveAssertEquals($value, $actual[$key], $level . '- ');
-                }else if(is_object($value) && ($value instanceof \Closure)) {
-                    $value($actual[$key]);
-                }else{
-                    $this->assertEquals($expected[$key], $actual[$key]);
-                }
+                $this->assertEquals($expected[$key], $actual[$key]);
             }
         }
     }

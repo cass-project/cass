@@ -1,7 +1,7 @@
 <?php
 namespace Domain\Collection\Tests\REST;
 
-use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
+use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;
 use CASS\Util\Definitions\Point;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
@@ -10,7 +10,7 @@ use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 use Zend\Diactoros\UploadedFile;
 
-abstract class CollectionRESTTestCase extends MiddlewareTestCase
+abstract class CollectionRESTTestCase extends CASSMiddlewareTestCase
 {
     protected function getFixtures(): array
     {

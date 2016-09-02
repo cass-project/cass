@@ -1,15 +1,15 @@
 <?php
 namespace Domain\Attachment\Tests;
 
+use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;
-use ZEA2\Platform\Bundles\PHPUnit\TestCase\MiddlewareTestCase;
 use Domain\Account\Tests\Fixtures\DemoAccountFixture;
 use Zend\Diactoros\UploadedFile;
 
 /**
  * @backupGlobals disabled
  */
-class AttachmentMiddlewareTest extends MiddlewareTestCase
+class AttachmentMiddlewareTest extends CASSMiddlewareTestCase
 {
     protected function getFixtures(): array
     {
