@@ -1,12 +1,12 @@
 <?php
-namespace Domain\Index\Processor\ProcessorVariants;
+namespace CASS\Domain\Index\Processor\ProcessorVariants;
 
-use Domain\Feed\Factory\FeedSourceFactory;
-use Domain\Index\Entity\IndexedEntity;
-use Domain\Index\Processor\Processor;
-use Domain\Index\Service\ThemeWeightCalculator\ThemeWeightCalculator;
-use Domain\Index\Source\Source;
-use Domain\Profile\Entity\Profile;
+use CASS\Domain\Feed\Factory\FeedSourceFactory;
+use CASS\Domain\Index\Entity\IndexedEntity;
+use CASS\Domain\Index\Processor\Processor;
+use CASS\Domain\Index\Service\ThemeWeightCalculator\ThemeWeightCalculator;
+use CASS\Domain\Index\Source\Source;
+use CASS\Domain\Profile\Entity\Profile;
 use MongoDB\Database;
 
 abstract class AbstractProfileProcessor implements Processor

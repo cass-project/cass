@@ -1,5 +1,5 @@
 <?php
-namespace Domain\IM\Query\Options;
+namespace CASS\Domain\IM\Query\Options;
 
 
 interface Option

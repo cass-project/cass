@@ -1,13 +1,13 @@
 <?php
-namespace Domain\Collection\Tests\REST;
+namespace CASS\Domain\Collection\Tests\REST;
 
 use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;
 use CASS\Util\Definitions\Point;
-use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
-use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
-use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
+use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
+use CASS\Domain\Profile\Tests\Fixtures\DemoProfileFixture;
+use CASS\Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 use Zend\Diactoros\UploadedFile;
 
 abstract class CollectionRESTTestCase extends CASSMiddlewareTestCase

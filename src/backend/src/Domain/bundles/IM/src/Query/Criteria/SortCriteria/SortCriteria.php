@@ -1,8 +1,8 @@
 <?php
-namespace Domain\IM\Query\Criteria\SortCriteria;
+namespace CASS\Domain\IM\Query\Criteria\SortCriteria;
 
-use Domain\IM\Exception\Query\InvalidCriteriaParamsException;
-use Domain\IM\Query\Criteria\Criteria;
+use CASS\Domain\IM\Exception\Query\InvalidCriteriaParamsException;
+use CASS\Domain\IM\Query\Criteria\Criteria;
 
 final class SortCriteria implements Criteria
 {

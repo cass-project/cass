@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Account\Middleware\Command;
+namespace CASS\Domain\Account\Middleware\Command;
 
-use Domain\Account\Service\AccountService;
-use Domain\Auth\Service\AuthService;
-use Domain\Auth\Service\CurrentAccountService;
+use CASS\Domain\Account\Service\AccountService;
+use CASS\Domain\Auth\Service\AuthService;
+use CASS\Domain\Auth\Service\CurrentAccountService;
 
 abstract class AbstractCommand implements \CASS\Application\Command\Command
 {

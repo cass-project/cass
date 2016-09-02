@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Collection\Middleware\Command;
+namespace CASS\Domain\Collection\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Collection\Middleware\Request\CreateCollectionRequest;
-use Domain\Community\Exception\CommunityNotFoundException;
-use Domain\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Collection\Middleware\Request\CreateCollectionRequest;
+use CASS\Domain\Community\Exception\CommunityNotFoundException;
+use CASS\Domain\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

@@ -1,13 +1,13 @@
 <?php
-namespace Domain\Contact\Middleware;
+namespace CASS\Domain\Contact\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Service\CommandService;
-use Domain\Contact\Middleware\Command\CreateCommand;
-use Domain\Contact\Middleware\Command\DeleteCommand;
-use Domain\Contact\Middleware\Command\GetCommand;
-use Domain\Contact\Middleware\Command\ListCommand;
-use Domain\Contact\Middleware\Command\SetPermanentCommand;
+use CASS\Domain\Contact\Middleware\Command\CreateCommand;
+use CASS\Domain\Contact\Middleware\Command\DeleteCommand;
+use CASS\Domain\Contact\Middleware\Command\GetCommand;
+use CASS\Domain\Contact\Middleware\Command\ListCommand;
+use CASS\Domain\Contact\Middleware\Command\SetPermanentCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

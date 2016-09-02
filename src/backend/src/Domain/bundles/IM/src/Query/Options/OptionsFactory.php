@@ -1,8 +1,8 @@
 <?php
-namespace Domain\IM\Query\Options;
+namespace CASS\Domain\IM\Query\Options;
 
-use Domain\IM\Query\Options\MarkAsReadOption\MarkAsReadOption;
-use Domain\IM\Exception\Query\UnknownOptionException;
+use CASS\Domain\IM\Query\Options\MarkAsReadOption\MarkAsReadOption;
+use CASS\Domain\IM\Exception\Query\UnknownOptionException;
 
 final class OptionsFactory
 {

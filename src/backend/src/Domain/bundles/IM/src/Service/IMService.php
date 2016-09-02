@@ -1,17 +1,17 @@
 <?php
-namespace Domain\IM\Service;
+namespace CASS\Domain\IM\Service;
 
-use Domain\IM\Entity\Message;
-use Domain\IM\Exception\Query\UnknownSourceException;
-use Domain\IM\Query\Query;
-use Domain\IM\Query\Source\CommunitySource\CommunitySource;
-use Domain\IM\Query\Source\ProfileSource\ProfileSource;
-use Domain\IM\Query\Source\Source;
-use Domain\IM\Query\Source\SourceFactory;
-use Domain\IM\Repository\IMRepository;
-use Domain\IM\Service\IMService\UnreadResult;
-use Domain\Profile\Entity\Profile;
-use Domain\Profile\Service\ProfileService;
+use CASS\Domain\IM\Entity\Message;
+use CASS\Domain\IM\Exception\Query\UnknownSourceException;
+use CASS\Domain\IM\Query\Query;
+use CASS\Domain\IM\Query\Source\CommunitySource\CommunitySource;
+use CASS\Domain\IM\Query\Source\ProfileSource\ProfileSource;
+use CASS\Domain\IM\Query\Source\Source;
+use CASS\Domain\IM\Query\Source\SourceFactory;
+use CASS\Domain\IM\Repository\IMRepository;
+use CASS\Domain\IM\Service\IMService\UnreadResult;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Profile\Service\ProfileService;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Model\BSONDocument;
 

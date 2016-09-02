@@ -1,12 +1,12 @@
 <?php
-namespace Domain\Account\Entity;
+namespace CASS\Domain\Account\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\JSONSerializable;
 
 /**
- * @Entity(repositoryClass="Domain\Account\Repository\AccountAppAccessRepository")
+ * @Entity(repositoryClass="CASS\Domain\Account\Repository\AccountAppAccessRepository")
  * @Table(name="account_app_access")
  */
 final class AccountAppAccess implements IdEntity, JSONSerializable
@@ -14,7 +14,7 @@ final class AccountAppAccess implements IdEntity, JSONSerializable
     use IdTrait;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Account\Entity\Account",cascade={"persist"})
+     * @ManyToOne(targetEntity="CASS\Domain\Account\Entity\Account",cascade={"persist"})
      * @JoinColumn(name="account_id", referencedColumnName="id")
      * @var Account
      */

@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Feedback\Tests\REST\Paths;
+namespace CASS\Domain\Feedback\Tests\REST\Paths;
 
-use Domain\Feedback\Tests\FeedbackMiddlewareTest;
+use CASS\Domain\Feedback\Tests\FeedbackMiddlewareTest;
 
 /**
  * @backupGlobals disabled

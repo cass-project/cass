@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Attachment;
+namespace CASS\Domain\Attachment;
 
 return [
     'php-di' => [

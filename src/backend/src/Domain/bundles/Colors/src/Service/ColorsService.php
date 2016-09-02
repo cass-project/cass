@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Colors\Service;
+namespace CASS\Domain\Colors\Service;
 
-use Domain\Colors\Entity\Palette;
-use Domain\Colors\Repository\ColorsRepository;
-use Domain\Colors\Repository\PaletteRepository;
+use CASS\Domain\Colors\Entity\Palette;
+use CASS\Domain\Colors\Repository\ColorsRepository;
+use CASS\Domain\Colors\Repository\PaletteRepository;
 
 class ColorsService
 {

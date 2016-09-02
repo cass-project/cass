@@ -1,15 +1,15 @@
 <?php
-namespace Domain\Community\Middleware;
+namespace CASS\Domain\Community\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Service\CommandService;
-use Domain\Community\Middleware\Command\CreateCommand;
-use Domain\Community\Middleware\Command\ImageDeleteCommand;
-use Domain\Community\Middleware\Command\EditCommand;
-use Domain\Community\Middleware\Command\GetByIdCommand;
-use Domain\Community\Middleware\Command\getBySIDCommand;
-use Domain\Community\Middleware\Command\ImageUploadCommand;
-use Domain\Community\Middleware\Command\SetPublicOptionsCommand;
+use CASS\Domain\Community\Middleware\Command\CreateCommand;
+use CASS\Domain\Community\Middleware\Command\ImageDeleteCommand;
+use CASS\Domain\Community\Middleware\Command\EditCommand;
+use CASS\Domain\Community\Middleware\Command\GetByIdCommand;
+use CASS\Domain\Community\Middleware\Command\getBySIDCommand;
+use CASS\Domain\Community\Middleware\Command\ImageUploadCommand;
+use CASS\Domain\Community\Middleware\Command\SetPublicOptionsCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

@@ -1,4 +1,4 @@
 <?php
-namespace Domain\IM\Exception;
+namespace CASS\Domain\IM\Exception;
 
 class MessageIsNotReadException extends \Exception {}

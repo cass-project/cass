@@ -1,14 +1,14 @@
 <?php
-namespace Domain\Collection\Tests\Fixtures;
+namespace CASS\Domain\Collection\Tests\Fixtures;
 
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
-use Domain\Collection\Entity\Collection;
-use Domain\Collection\Parameters\CreateCollectionParameters;
-use Domain\Collection\Service\CollectionService;
-use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
-use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
-use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
+use CASS\Domain\Collection\Entity\Collection;
+use CASS\Domain\Collection\Parameters\CreateCollectionParameters;
+use CASS\Domain\Collection\Service\CollectionService;
+use CASS\Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
+use CASS\Domain\Profile\Tests\Fixtures\DemoProfileFixture;
+use CASS\Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 use Zend\Expressive\Application;
 
 class SampleCollectionsFixture implements Fixture

@@ -1,4 +1,4 @@
 <?php
-namespace Domain\Feedback\Exception;
+namespace CASS\Domain\Feedback\Exception;
 
 final class EmptyDescriptionException extends \Exception {}

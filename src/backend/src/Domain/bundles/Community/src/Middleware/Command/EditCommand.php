@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Community\Middleware\Command;
+namespace CASS\Domain\Community\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Community\Exception\CommunityNotFoundException;
-use Domain\Community\Middleware\Request\EditCommunityRequest;
+use CASS\Domain\Community\Exception\CommunityNotFoundException;
+use CASS\Domain\Community\Middleware\Request\EditCommunityRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

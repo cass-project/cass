@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Feed\Search\Criteria;
+namespace CASS\Domain\Feed\Search\Criteria;
 
 interface Criteria
 {

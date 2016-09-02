@@ -1,7 +1,7 @@
 <?php
-namespace Domain\IM;
+namespace CASS\Domain\IM;
 
-use Domain\IM\Middleware\ProfileIMMiddleware;
+use CASS\Domain\IM\Middleware\ProfileIMMiddleware;
 
 return [
   'common' => [

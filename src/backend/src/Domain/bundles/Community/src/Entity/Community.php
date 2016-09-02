@@ -1,25 +1,25 @@
 <?php
-namespace Domain\Community\Entity;
+namespace CASS\Domain\Community\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
 use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
 use CASS\Util\JSONSerializable;
-use Domain\Account\Entity\Account;
-use Domain\Avatar\Entity\ImageEntity;
-use Domain\Avatar\Entity\ImageEntityTrait;
-use Domain\Avatar\Image\ImageCollection;
-use Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
-use Domain\Collection\Strategy\CollectionAwareEntity;
-use Domain\Collection\Strategy\Traits\CollectionAwareEntityTrait;
-use Domain\Community\Entity\Community\CommunityFeatures;
-use Domain\Community\Exception\CommunityHasNoThemeException;
-use Domain\Index\Entity\IndexedEntity;
-use Domain\Theme\Entity\Theme;
+use CASS\Domain\Account\Entity\Account;
+use CASS\Domain\Avatar\Entity\ImageEntity;
+use CASS\Domain\Avatar\Entity\ImageEntityTrait;
+use CASS\Domain\Avatar\Image\ImageCollection;
+use CASS\Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
+use CASS\Domain\Collection\Strategy\CollectionAwareEntity;
+use CASS\Domain\Collection\Strategy\Traits\CollectionAwareEntityTrait;
+use CASS\Domain\Community\Entity\Community\CommunityFeatures;
+use CASS\Domain\Community\Exception\CommunityHasNoThemeException;
+use CASS\Domain\Index\Entity\IndexedEntity;
+use CASS\Domain\Theme\Entity\Theme;
 
 /**
- * @Entity(repositoryClass="Domain\Community\Repository\CommunityRepository")
+ * @Entity(repositoryClass="CASS\Domain\Community\Repository\CommunityRepository")
  * @Table(name="community")
  */
 class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, CollectionAwareEntity, IndexedEntity
@@ -30,7 +30,7 @@ class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, C
     use ImageEntityTrait;
 
     /**
-     * @OneToOne(targetEntity="Domain\Account\Entity\Account")
+     * @OneToOne(targetEntity="CASS\Domain\Account\Entity\Account")
      * @JoinColumn(name="owner_id", referencedColumnName="id")
      * @var Account
      */
@@ -61,7 +61,7 @@ class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, C
     private $description;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Theme\Entity\Theme")
+     * @ManyToOne(targetEntity="CASS\Domain\Theme\Entity\Theme")
      * @JoinColumn(name="theme_id", referencedColumnName="id")
      * @var Theme|null
      */

@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Theme\Entity;
+namespace CASS\Domain\Theme\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
@@ -9,7 +9,7 @@ use CASS\Util\SerialManager\SerialManager;
 use Doctrine\ORM\PersistentCollection;
 
 /**
- * @Entity(repositoryClass="Domain\Theme\Repository\ThemeRepository")
+ * @Entity(repositoryClass="CASS\Domain\Theme\Repository\ThemeRepository")
  * @Table(name="theme")
  */
 class Theme implements JSONSerializable, IdEntity, SerialEntity
@@ -19,12 +19,12 @@ class Theme implements JSONSerializable, IdEntity, SerialEntity
     use IdTrait;
 
     /**
-     * @OneToMany(targetEntity="Domain\Theme\Entity\Theme", mappedBy="parent")
+     * @OneToMany(targetEntity="CASS\Domain\Theme\Entity\Theme", mappedBy="parent")
      */
     private $children = [];
 
     /**
-     * @ManyToOne(targetEntity="Domain\Theme\Entity\Theme", inversedBy="children")
+     * @ManyToOne(targetEntity="CASS\Domain\Theme\Entity\Theme", inversedBy="children")
      * @JoinColumn(name="parent_id", referencedColumnName="id")
      * @var Theme|null
      */

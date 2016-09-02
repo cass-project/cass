@@ -4,7 +4,7 @@
       <label class="form-label">
         <span class="label-text">Код приглашения (SID)</span>
         <!-- TODO: Цифра 8 должна экспортироваться во фронтлайн, а после подставляться сюда -->
-        <!-- @see: Domain\Community\Entity\Community::SID_LENGTH -->
+        <!-- @see: CASS\Domain\Community\Entity\Community::SID_LENGTH -->
         <input class="form-input" type="text" required minlength="8" maxlength="8" [(ngModel)]="themeSID" placeholder="XXXXXXXX"/>
       </label>
     </div>

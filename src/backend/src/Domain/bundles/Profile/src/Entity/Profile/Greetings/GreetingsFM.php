@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Profile\Entity\Profile\Greetings;
+namespace CASS\Domain\Profile\Entity\Profile\Greetings;
 
 final class GreetingsFM extends Greetings
 {

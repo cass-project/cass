@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Auth\Service\AuthService\SignUpValidation;
+namespace CASS\Domain\Auth\Service\AuthService\SignUpValidation;
 
-use Domain\Auth\Parameters\SignUpParameters;
+use CASS\Domain\Auth\Parameters\SignUpParameters;
 
 interface Validator
 {

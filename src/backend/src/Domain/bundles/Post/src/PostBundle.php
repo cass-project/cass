@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Post;
+namespace CASS\Domain\Post;
 
 use CASS\Application\Bundle\GenericBundle;
 use CASS\Application\Bundles\Frontline\FrontlineBundleInjectable;
-use Domain\Post\Frontline\PostTypeFrontlineScript;
+use CASS\Domain\Post\Frontline\PostTypeFrontlineScript;
 
 class PostBundle extends GenericBundle implements FrontlineBundleInjectable
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Theme\Parameters;
+namespace CASS\Domain\Theme\Parameters;
 
 final class CreateThemeParameters
 {

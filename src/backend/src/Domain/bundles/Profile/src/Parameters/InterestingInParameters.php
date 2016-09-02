@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Profile\Parameters;
+namespace CASS\Domain\Profile\Parameters;
 
 class InterestingInParameters
 {

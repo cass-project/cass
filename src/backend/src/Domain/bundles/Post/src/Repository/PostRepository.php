@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Post\Repository;
+namespace CASS\Domain\Post\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Domain\Post\Entity\Post;
-use Domain\Post\Exception\PostNotFoundException;
-use Domain\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Post\Entity\Post;
+use CASS\Domain\Post\Exception\PostNotFoundException;
+use CASS\Domain\Profile\Entity\Profile\Greetings;
 
 class PostRepository extends EntityRepository
 {

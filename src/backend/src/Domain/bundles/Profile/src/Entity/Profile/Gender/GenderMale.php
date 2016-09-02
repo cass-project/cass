@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Profile\Entity\Profile\Gender;
+namespace CASS\Domain\Profile\Entity\Profile\Gender;
 
 final class GenderMale extends Gender
 {

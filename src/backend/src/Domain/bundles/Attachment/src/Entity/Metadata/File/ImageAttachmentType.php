@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Attachment\Entity\Metadata\File;
+namespace CASS\Domain\Attachment\Entity\Metadata\File;
 
-use Domain\Attachment\Entity\Attachment;
-use Domain\Attachment\Entity\Metadata\FileAttachmentType;
-use Domain\Attachment\Service\AttachmentTypeDetector;
-use Domain\Attachment\Service\AttachmentTypeExtension;
+use CASS\Domain\Attachment\Entity\Attachment;
+use CASS\Domain\Attachment\Entity\Metadata\FileAttachmentType;
+use CASS\Domain\Attachment\Service\AttachmentTypeDetector;
+use CASS\Domain\Attachment\Service\AttachmentTypeExtension;
 use League\Flysystem\FilesystemInterface;
 
 class ImageAttachmentType implements FileAttachmentType, AttachmentTypeDetector, AttachmentTypeExtension

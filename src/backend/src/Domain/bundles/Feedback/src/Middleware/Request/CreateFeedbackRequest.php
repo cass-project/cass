@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Feedback\Middleware\Request;
+namespace CASS\Domain\Feedback\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
-use Domain\Feedback\FeedbackBundle;
-use Domain\Feedback\Middleware\Parameters\CreateFeedbackParameters;
+use CASS\Domain\Feedback\FeedbackBundle;
+use CASS\Domain\Feedback\Middleware\Parameters\CreateFeedbackParameters;
 
 class CreateFeedbackRequest extends SchemaParams
 {

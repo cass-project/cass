@@ -1,12 +1,12 @@
 <?php
-namespace Domain\IM\Middleware\Command;
+namespace CASS\Domain\IM\Middleware\Command;
 
-use Domain\Auth\Service\CurrentAccountService;
-use Domain\IM\Formatter\MessageFormatter;
-use Domain\IM\Query\QueryFactory;
-use Domain\IM\Query\Source\SourceFactory;
-use Domain\IM\Service\SourceEntityLookupService;
-use Domain\IM\Service\IMService;
+use CASS\Domain\Auth\Service\CurrentAccountService;
+use CASS\Domain\IM\Formatter\MessageFormatter;
+use CASS\Domain\IM\Query\QueryFactory;
+use CASS\Domain\IM\Query\Source\SourceFactory;
+use CASS\Domain\IM\Service\SourceEntityLookupService;
+use CASS\Domain\IM\Service\IMService;
 
 abstract class Command implements \CASS\Application\Command\Command
 {

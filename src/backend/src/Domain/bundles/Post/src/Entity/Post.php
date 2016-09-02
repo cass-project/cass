@@ -1,19 +1,19 @@
 <?php
-namespace Domain\Post\Entity;
+namespace CASS\Domain\Post\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\JSONSerializable;
-use Domain\Collection\Entity\Collection;
-use Domain\Index\Entity\IndexedEntity;
-use Domain\Post\PostType\PostType;
-use Domain\Attachment\Entity\Attachment;
-use Domain\Profile\Entity\Profile;
-use Domain\Theme\Strategy\ThemeIdsEntityAware;
-use Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
+use CASS\Domain\Collection\Entity\Collection;
+use CASS\Domain\Index\Entity\IndexedEntity;
+use CASS\Domain\Post\PostType\PostType;
+use CASS\Domain\Attachment\Entity\Attachment;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Theme\Strategy\ThemeIdsEntityAware;
+use CASS\Domain\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
 
 /**
- * @Entity(repositoryClass="Domain\Post\Repository\PostRepository")
+ * @Entity(repositoryClass="CASS\Domain\Post\Repository\PostRepository")
  * @Table(name="post")
  */
 class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEntity
@@ -28,7 +28,7 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEn
     private $postTypeCode;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Profile\Entity\Profile")
+     * @ManyToOne(targetEntity="CASS\Domain\Profile\Entity\Profile")
      * @JoinColumn(name="author_profile_id", referencedColumnName="id")
      * @var Profile
      */
@@ -41,7 +41,7 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEn
     private $dateCreatedOn;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Collection\Entity\Collection")
+     * @ManyToOne(targetEntity="CASS\Domain\Collection\Entity\Collection")
      * @JoinColumn(name="collection_id", referencedColumnName="id")
      * @var Collection
      */

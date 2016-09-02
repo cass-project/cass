@@ -1,14 +1,14 @@
 <?php
-namespace Domain\Theme\Service;
+namespace CASS\Domain\Theme\Service;
 
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareService;
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareTrait;
 use CASS\Util\GenerateRandomString;
 use CASS\Util\SerialManager\SerialManager;
-use Domain\Theme\Entity\Theme;
-use Domain\Theme\Parameters\CreateThemeParameters;
-use Domain\Theme\Parameters\UpdateThemeParameters;
-use Domain\Theme\Repository\ThemeRepository;
+use CASS\Domain\Theme\Entity\Theme;
+use CASS\Domain\Theme\Parameters\CreateThemeParameters;
+use CASS\Domain\Theme\Parameters\UpdateThemeParameters;
+use CASS\Domain\Theme\Repository\ThemeRepository;
 use League\Flysystem\FilesystemInterface;
 
 class ThemeService implements EventEmitterAwareService

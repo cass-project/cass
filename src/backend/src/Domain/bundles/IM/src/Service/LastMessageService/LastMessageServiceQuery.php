@@ -1,7 +1,7 @@
 <?php
-namespace Domain\IM\Service\LastMessageService;
+namespace CASS\Domain\IM\Service\LastMessageService;
 
-use Domain\Profile\Entity\Profile;
+use CASS\Domain\Profile\Entity\Profile;
 
 final class LastMessageServiceQuery
 {

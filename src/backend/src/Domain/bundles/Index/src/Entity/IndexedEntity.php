@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Index\Entity;
+namespace CASS\Domain\Index\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 

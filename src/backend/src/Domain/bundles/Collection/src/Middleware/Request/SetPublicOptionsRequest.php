@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Collection\Middleware\Request;
+namespace CASS\Domain\Collection\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
-use Domain\Collection\CollectionBundle;
-use Domain\Collection\Parameters\SetPublicOptionsParameters;
+use CASS\Domain\Collection\CollectionBundle;
+use CASS\Domain\Collection\Parameters\SetPublicOptionsParameters;
 
 final class SetPublicOptionsRequest extends SchemaParams
 {

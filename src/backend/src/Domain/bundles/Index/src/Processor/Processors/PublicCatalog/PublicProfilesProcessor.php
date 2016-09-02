@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Index\Processor\Processors\PublicCatalog;
+namespace CASS\Domain\Index\Processor\Processors\PublicCatalog;
 
-use Domain\Index\Source\Source;
-use Domain\Index\Processor\ProcessorVariants\AbstractProfileProcessor;
-use Domain\Profile\Entity\Profile;
+use CASS\Domain\Index\Source\Source;
+use CASS\Domain\Index\Processor\ProcessorVariants\AbstractProfileProcessor;
+use CASS\Domain\Profile\Entity\Profile;
 
 final class PublicProfilesProcessor extends AbstractProfileProcessor
 {

@@ -1,4 +1,4 @@
 <?php
-namespace Domain\Contact\Exception;
+namespace CASS\Domain\Contact\Exception;
 
 final class ContactIsNotPermanentException extends \Exception {}

@@ -1,11 +1,11 @@
 <?php
-namespace Domain\ProfileCommunities\Service;
+namespace CASS\Domain\ProfileCommunities\Service;
 
-use Domain\Community\Repository\CommunityRepository;
-use Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
-use Domain\ProfileCommunities\Exception\AlreadyJoinedException;
-use Domain\ProfileCommunities\Exception\AlreadyLeavedException;
-use Domain\ProfileCommunities\Repository\ProfileCommunitiesRepository;
+use CASS\Domain\Community\Repository\CommunityRepository;
+use CASS\Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
+use CASS\Domain\ProfileCommunities\Exception\AlreadyJoinedException;
+use CASS\Domain\ProfileCommunities\Exception\AlreadyLeavedException;
+use CASS\Domain\ProfileCommunities\Repository\ProfileCommunitiesRepository;
 
 class ProfileCommunitiesService
 {

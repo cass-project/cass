@@ -1,17 +1,17 @@
 <?php
-namespace Domain\Feed\Search\Stream\Streams;
+namespace CASS\Domain\Feed\Search\Stream\Streams;
 
-use Domain\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
-use Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
-use Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
-use Domain\Feed\Search\Criteria\Criteria\SortCriteria;
-use Domain\Feed\Search\Criteria\CriteriaManager;
-use Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
-use Domain\Feed\Search\Stream\Stream;
-use Domain\Post\Entity\Post;
-use Domain\Post\Exception\PostNotFoundException;
-use Domain\Post\Formatter\PostFormatter;
-use Domain\Post\Service\PostService;
+use CASS\Domain\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
+use CASS\Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
+use CASS\Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
+use CASS\Domain\Feed\Search\Criteria\Criteria\SortCriteria;
+use CASS\Domain\Feed\Search\Criteria\CriteriaManager;
+use CASS\Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
+use CASS\Domain\Feed\Search\Stream\Stream;
+use CASS\Domain\Post\Entity\Post;
+use CASS\Domain\Post\Exception\PostNotFoundException;
+use CASS\Domain\Post\Formatter\PostFormatter;
+use CASS\Domain\Post\Service\PostService;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
 use MongoDB\Model\BSONDocument;

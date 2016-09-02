@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Index\Processor\Processors\PublicCatalog;
+namespace CASS\Domain\Index\Processor\Processors\PublicCatalog;
 
-use Domain\Index\Processor\ProcessorVariants\AbstractPostProcessor;
-use Domain\Index\Source\Source;
-use Domain\Post\Entity\Post;
-use Domain\Post\PostType\Types\DefaultPostType;
+use CASS\Domain\Index\Processor\ProcessorVariants\AbstractPostProcessor;
+use CASS\Domain\Index\Source\Source;
+use CASS\Domain\Post\Entity\Post;
+use CASS\Domain\Post\PostType\Types\DefaultPostType;
 
 final class PublicContentProcessor extends AbstractPostProcessor
 {

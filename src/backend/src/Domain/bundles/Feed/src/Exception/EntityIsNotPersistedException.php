@@ -1,4 +1,4 @@
 <?php
-namespace Domain\Feed\Exception;
+namespace CASS\Domain\Feed\Exception;
 
 class EntityIsNotPersistedException extends AbstractFeedException {}

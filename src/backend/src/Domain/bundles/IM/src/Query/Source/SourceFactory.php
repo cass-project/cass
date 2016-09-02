@@ -1,9 +1,9 @@
 <?php
-namespace Domain\IM\Query\Source;
+namespace CASS\Domain\IM\Query\Source;
 
-use Domain\IM\Exception\Query\UnknownSourceException;
-use Domain\IM\Query\Source\CommunitySource\CommunitySource;
-use Domain\IM\Query\Source\ProfileSource\ProfileSource;
+use CASS\Domain\IM\Exception\Query\UnknownSourceException;
+use CASS\Domain\IM\Query\Source\CommunitySource\CommunitySource;
+use CASS\Domain\IM\Query\Source\ProfileSource\ProfileSource;
 
 final class SourceFactory
 {

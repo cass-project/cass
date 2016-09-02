@@ -1,12 +1,12 @@
 <?php
-namespace Domain\ProfileCommunities\Repository;
+namespace CASS\Domain\ProfileCommunities\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Domain\Community\Entity\Community;
-use Domain\Community\Exception\CommunityNotFoundException;
-use Domain\Profile\Entity\Profile;
-use Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
-use Domain\ProfileCommunities\Exception\BookmarkNotFoundException;
+use CASS\Domain\Community\Entity\Community;
+use CASS\Domain\Community\Exception\CommunityNotFoundException;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
+use CASS\Domain\ProfileCommunities\Exception\BookmarkNotFoundException;
 
 class ProfileCommunitiesRepository extends EntityRepository
 {

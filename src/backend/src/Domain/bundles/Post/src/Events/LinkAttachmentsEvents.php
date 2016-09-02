@@ -1,12 +1,12 @@
 <?php
-namespace Domain\Post\Events;
+namespace CASS\Domain\Post\Events;
 
 use CASS\Application\Events\EventsBootstrapInterface;
-use Domain\Attachment\Entity\Attachment;
-use Domain\Attachment\Service\AttachmentService;
-use Domain\Post\Entity\Post;
-use Domain\Post\Entity\PostAttachmentOwner;
-use Domain\Post\Service\PostService;
+use CASS\Domain\Attachment\Entity\Attachment;
+use CASS\Domain\Attachment\Service\AttachmentService;
+use CASS\Domain\Post\Entity\Post;
+use CASS\Domain\Post\Entity\PostAttachmentOwner;
+use CASS\Domain\Post\Service\PostService;
 use Evenement\EventEmitterInterface;
 
 final class LinkAttachmentsEvents implements EventsBootstrapInterface

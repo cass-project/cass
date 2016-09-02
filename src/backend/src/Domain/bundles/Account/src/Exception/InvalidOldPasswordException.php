@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Account\Exception;
+namespace CASS\Domain\Account\Exception;
 
 class InvalidOldPasswordException extends \Exception
 {

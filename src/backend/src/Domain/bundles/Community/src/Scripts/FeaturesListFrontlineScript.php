@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Community\Scripts;
+namespace CASS\Domain\Community\Scripts;
 
 use CASS\Application\Bundles\Frontline\FrontlineScript;
-use Domain\Community\Feature\FeaturesFactory;
+use CASS\Domain\Community\Feature\FeaturesFactory;
 
 class FeaturesListFrontlineScript implements FrontlineScript
 {

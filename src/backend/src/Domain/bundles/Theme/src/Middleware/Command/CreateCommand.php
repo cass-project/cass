@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Theme\Middleware\Command;
+namespace CASS\Domain\Theme\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Theme\Exception\ThemeWithThisIdExistsException;
-use Domain\Theme\Middleware\Request\CreateThemeRequest;
+use CASS\Domain\Theme\Exception\ThemeWithThisIdExistsException;
+use CASS\Domain\Theme\Middleware\Request\CreateThemeRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

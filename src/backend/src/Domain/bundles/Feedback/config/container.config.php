@@ -1,15 +1,15 @@
 <?php
-namespace Domain\Feedback;
+namespace CASS\Domain\Feedback;
 
 use function DI\object;
 use function DI\factory;
 use function DI\get;
 
 use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
-use Domain\Feedback\Entity\Feedback;
-use Domain\Feedback\Entity\FeedbackResponse;
-use Domain\Feedback\Repository\FeedbackRepository;
-use Domain\Feedback\Repository\FeedbackResponseRepository;
+use CASS\Domain\Feedback\Entity\Feedback;
+use CASS\Domain\Feedback\Entity\FeedbackResponse;
+use CASS\Domain\Feedback\Repository\FeedbackRepository;
+use CASS\Domain\Feedback\Repository\FeedbackResponseRepository;
 
 return [
     'php-di' => [

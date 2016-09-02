@@ -1,14 +1,14 @@
 <?php
-namespace Domain\Account\Middleware;
+namespace CASS\Domain\Account\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Service\CommandService;
-use Domain\Account\Exception\AccountNotFoundException;
-use Domain\Account\Middleware\Command\CancelDeleteRequestCommand;
-use Domain\Account\Middleware\Command\ChangePasswordCommand;
-use Domain\Account\Middleware\Command\DeleteRequestCommand;
-use Domain\Account\Middleware\Command\GetCurrentAccountCommand;
-use Domain\Account\Middleware\Command\SwitchToProfileCommand;
+use CASS\Domain\Account\Exception\AccountNotFoundException;
+use CASS\Domain\Account\Middleware\Command\CancelDeleteRequestCommand;
+use CASS\Domain\Account\Middleware\Command\ChangePasswordCommand;
+use CASS\Domain\Account\Middleware\Command\DeleteRequestCommand;
+use CASS\Domain\Account\Middleware\Command\GetCurrentAccountCommand;
+use CASS\Domain\Account\Middleware\Command\SwitchToProfileCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

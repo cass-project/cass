@@ -1,11 +1,11 @@
 <?php
-namespace Domain\ProfileCommunities\Middleware;
+namespace CASS\Domain\ProfileCommunities\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Service\CommandService;
-use Domain\ProfileCommunities\Middleware\Command\JoinCommand;
-use Domain\ProfileCommunities\Middleware\Command\LeaveCommand;
-use Domain\ProfileCommunities\Middleware\Command\ListCommand;
+use CASS\Domain\ProfileCommunities\Middleware\Command\JoinCommand;
+use CASS\Domain\ProfileCommunities\Middleware\Command\LeaveCommand;
+use CASS\Domain\ProfileCommunities\Middleware\Command\ListCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

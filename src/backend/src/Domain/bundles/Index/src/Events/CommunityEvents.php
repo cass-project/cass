@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Index\Events;
+namespace CASS\Domain\Index\Events;
 
 use CASS\Application\Events\EventsBootstrapInterface;
-use Domain\Community\Entity\Community;
-use Domain\Community\Service\CommunityService;
-use Domain\Index\Service\IndexService;
+use CASS\Domain\Community\Entity\Community;
+use CASS\Domain\Community\Service\CommunityService;
+use CASS\Domain\Index\Service\IndexService;
 use Evenement\EventEmitterInterface;
 
 final class CommunityEvents implements EventsBootstrapInterface

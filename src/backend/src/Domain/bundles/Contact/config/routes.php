@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Contact;
+namespace CASS\Domain\Contact;
 
-use Domain\Contact\Middleware\ContactMiddleware;
+use CASS\Domain\Contact\Middleware\ContactMiddleware;
 
 return [
     'common' => [

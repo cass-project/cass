@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Auth\Middleware\Command\OAuth;
+namespace CASS\Domain\Auth\Middleware\Command\OAuth;
 
-use Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
+use CASS\Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Google;
 use League\OAuth2\Client\Provider\GoogleUser;

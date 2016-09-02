@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Post;
+namespace CASS\Domain\Post;
 
-use Domain\Post\Middleware\PostMiddleware;
+use CASS\Domain\Post\Middleware\PostMiddleware;
 
 return [
     'common' => [

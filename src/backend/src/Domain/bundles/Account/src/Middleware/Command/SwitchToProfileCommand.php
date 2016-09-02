@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Account\Middleware\Command;
+namespace CASS\Domain\Account\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Account\Exception\AccountNotContainsProfileException;
+use CASS\Domain\Account\Exception\AccountNotContainsProfileException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

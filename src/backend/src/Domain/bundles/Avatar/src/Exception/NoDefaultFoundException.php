@@ -1,4 +1,4 @@
 <?php
-namespace Domain\Avatar\Exception;
+namespace CASS\Domain\Avatar\Exception;
 
 class NoDefaultFoundException extends ImageServiceException {}

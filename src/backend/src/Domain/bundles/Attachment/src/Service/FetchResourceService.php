@@ -1,11 +1,11 @@
 <?php
-namespace Domain\Attachment\Service;
+namespace CASS\Domain\Attachment\Service;
 
-use Domain\Attachment\Exception\EmptyURLException;
-use Domain\Attachment\Exception\InvalidURLException;
-use Domain\Attachment\Exception\NotFoundException;
-use Domain\Attachment\Exception\URLRestrictedException;
-use Domain\Attachment\Service\FetchResource\Result;
+use CASS\Domain\Attachment\Exception\EmptyURLException;
+use CASS\Domain\Attachment\Exception\InvalidURLException;
+use CASS\Domain\Attachment\Exception\NotFoundException;
+use CASS\Domain\Attachment\Exception\URLRestrictedException;
+use CASS\Domain\Attachment\Service\FetchResource\Result;
 
 class FetchResourceService
 {

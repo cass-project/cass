@@ -1,9 +1,9 @@
 <?php
-namespace Domain\IM\Query\Options;
+namespace CASS\Domain\IM\Query\Options;
 
-use Domain\IM\Exception\Query\DuplicateOptionException;
-use Domain\IM\Query\Options\Option;
-use Domain\IM\Exception\Query\UnknownOptionException;
+use CASS\Domain\IM\Exception\Query\DuplicateOptionException;
+use CASS\Domain\IM\Query\Options\Option;
+use CASS\Domain\IM\Exception\Query\UnknownOptionException;
 
 final class OptionsManager
 {

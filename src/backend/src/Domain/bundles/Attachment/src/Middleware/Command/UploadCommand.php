@@ -1,12 +1,12 @@
 <?php
-namespace Domain\Attachment\Middleware\Command;
+namespace CASS\Domain\Attachment\Middleware\Command;
 
 use CASS\Application\Exception\FileNotUploadedException;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use CASS\Util\GenerateRandomString;
-use Domain\Attachment\Exception\FileTooBigException;
-use Domain\Attachment\Exception\FileTooSmallException;
-use Domain\Attachment\Exception\AttachmentFactoryException;
+use CASS\Domain\Attachment\Exception\FileTooBigException;
+use CASS\Domain\Attachment\Exception\FileTooSmallException;
+use CASS\Domain\Attachment\Exception\AttachmentFactoryException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\UploadedFile;

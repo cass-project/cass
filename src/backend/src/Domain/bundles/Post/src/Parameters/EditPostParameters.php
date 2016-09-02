@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Post\Parameters;
+namespace CASS\Domain\Post\Parameters;
 
 class EditPostParameters
 {

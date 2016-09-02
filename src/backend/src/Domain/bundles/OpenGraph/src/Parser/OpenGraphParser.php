@@ -1,5 +1,5 @@
 <?php
-namespace Domain\OpenGraph\Parser;
+namespace CASS\Domain\OpenGraph\Parser;
 
 final class OpenGraphParser
 {

@@ -1,14 +1,14 @@
 <?php
-namespace Domain\Feedback\Middleware;
+namespace CASS\Domain\Feedback\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Service\CommandService;
-use Domain\Feedback\Middleware\Command\CreateCommand;
-use Domain\Feedback\Middleware\Command\CreateFeedbackResponseCommand;
-use Domain\Feedback\Middleware\Command\DeleteCommand;
-use Domain\Feedback\Middleware\Command\GetCommand;
-use Domain\Feedback\Middleware\Command\ListCommand;
-use Domain\Feedback\Middleware\Command\MarkAsReadCommand;
+use CASS\Domain\Feedback\Middleware\Command\CreateCommand;
+use CASS\Domain\Feedback\Middleware\Command\CreateFeedbackResponseCommand;
+use CASS\Domain\Feedback\Middleware\Command\DeleteCommand;
+use CASS\Domain\Feedback\Middleware\Command\GetCommand;
+use CASS\Domain\Feedback\Middleware\Command\ListCommand;
+use CASS\Domain\Feedback\Middleware\Command\MarkAsReadCommand;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;

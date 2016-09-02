@@ -1,8 +1,8 @@
 <?php
-namespace Domain\IM\Entity;
+namespace CASS\Domain\IM\Entity;
 
 use CASS\Util\JSONSerializable;
-use Domain\Profile\Entity\Profile;
+use CASS\Domain\Profile\Entity\Profile;
 use MongoDB\BSON\ObjectID;
 
 class Message implements JSONSerializable

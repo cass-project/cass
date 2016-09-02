@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Avatar\Middleware\Request;
+namespace CASS\Domain\Avatar\Middleware\Request;
 
 use CASS\Application\Exception\FileNotUploadedException;
 use ZEA2\Platform\Bundles\REST\Request\Params\RequestParamsInterface;
 use CASS\Util\Definitions\Point;
-use Domain\Avatar\Parameters\UploadImageParameters;
+use CASS\Domain\Avatar\Parameters\UploadImageParameters;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\UploadedFile;
 

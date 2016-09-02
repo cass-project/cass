@@ -1,11 +1,11 @@
 <?php
-namespace Domain\Theme\Middleware\Request;
+namespace CASS\Domain\Theme\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
-use Domain\Theme\Entity\Theme;
-use Domain\Theme\Parameters\CreateThemeParameters;
-use Domain\Theme\ThemeBundle;
+use CASS\Domain\Theme\Entity\Theme;
+use CASS\Domain\Theme\Parameters\CreateThemeParameters;
+use CASS\Domain\Theme\ThemeBundle;
 
 class CreateThemeRequest extends SchemaParams
 {

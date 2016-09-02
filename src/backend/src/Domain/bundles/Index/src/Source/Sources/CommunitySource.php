@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Index\Source\Sources;
+namespace CASS\Domain\Index\Source\Sources;
 
-use Domain\Index\Source\Source;
+use CASS\Domain\Index\Source\Source;
 use MongoDB\Collection;
 use MongoDB\Database;
 

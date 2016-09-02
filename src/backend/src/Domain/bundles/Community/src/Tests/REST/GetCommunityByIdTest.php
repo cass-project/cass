@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Community\Tests\REST;
+namespace CASS\Domain\Community\Tests\REST;
 
-use Domain\Community\Entity\Community;
-use Domain\Community\Tests\CommunityMiddlewareTestCase;
-use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
+use CASS\Domain\Community\Entity\Community;
+use CASS\Domain\Community\Tests\CommunityMiddlewareTestCase;
+use CASS\Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
 
 /**
  * @backupGlobals disabled

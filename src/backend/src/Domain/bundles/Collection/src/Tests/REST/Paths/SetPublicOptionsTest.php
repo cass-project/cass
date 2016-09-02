@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Collection\Tests\REST\Paths;
+namespace CASS\Domain\Collection\Tests\REST\Paths;
 
-use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
-use Domain\Collection\Tests\REST\CollectionRESTTestCase;
+use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
+use CASS\Domain\Collection\Tests\REST\CollectionRESTTestCase;
 
 /**
  * @backupGlobals disabled

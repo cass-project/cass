@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Theme\Strategy;
+namespace CASS\Domain\Theme\Strategy;
 
-use Domain\Theme\Entity\Theme;
+use CASS\Domain\Theme\Entity\Theme;
 
 interface ThemeEntityAware
 {

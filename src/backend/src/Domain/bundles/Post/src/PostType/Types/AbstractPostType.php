@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Post\PostType\Types;
+namespace CASS\Domain\Post\PostType\Types;
 
-use Domain\Post\PostType\PostType;
+use CASS\Domain\Post\PostType\PostType;
 
 abstract class AbstractPostType implements PostType
 {

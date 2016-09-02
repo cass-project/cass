@@ -1,12 +1,12 @@
 <?php
-namespace Domain\Contact\Service;
+namespace CASS\Domain\Contact\Service;
 
-use Domain\Contact\Entity\Contact;
-use Domain\Contact\Exception\DuplicateContactException;
-use Domain\Contact\Parameters\CreateContactParameters;
-use Domain\Contact\Repository\ContactRepository;
-use Domain\Profile\Entity\Profile;
-use Domain\Profile\Service\ProfileService;
+use CASS\Domain\Contact\Entity\Contact;
+use CASS\Domain\Contact\Exception\DuplicateContactException;
+use CASS\Domain\Contact\Parameters\CreateContactParameters;
+use CASS\Domain\Contact\Repository\ContactRepository;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Profile\Service\ProfileService;
 
 final class ContactService
 {

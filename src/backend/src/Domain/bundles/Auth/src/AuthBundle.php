@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Auth;
+namespace CASS\Domain\Auth;
 
-use Domain\Auth\Frontline\AuthTokenScript;
+use CASS\Domain\Auth\Frontline\AuthTokenScript;
 use CASS\Application\Bundles\Frontline\FrontlineBundleInjectable;
 use CASS\Application\Bundle\GenericBundle;
 

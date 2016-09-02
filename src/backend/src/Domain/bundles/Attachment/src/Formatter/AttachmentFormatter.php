@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Attachment\Formatter;
+namespace CASS\Domain\Attachment\Formatter;
 
-use Domain\Attachment\Entity\Attachment;
+use CASS\Domain\Attachment\Entity\Attachment;
 
 final class AttachmentFormatter
 {

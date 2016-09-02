@@ -1,10 +1,10 @@
 <?php
-namespace Domain\IM\Query\Criteria;
+namespace CASS\Domain\IM\Query\Criteria;
 
-use Domain\IM\Exception\Query\UnknownCriteriaException;
-use Domain\IM\Query\Criteria\CursorCriteria\CursorCriteria;
-use Domain\IM\Query\Criteria\SeekCriteria\SeekCriteria;
-use Domain\IM\Query\Criteria\SortCriteria\SortCriteria;
+use CASS\Domain\IM\Exception\Query\UnknownCriteriaException;
+use CASS\Domain\IM\Query\Criteria\CursorCriteria\CursorCriteria;
+use CASS\Domain\IM\Query\Criteria\SeekCriteria\SeekCriteria;
+use CASS\Domain\IM\Query\Criteria\SortCriteria\SortCriteria;
 
 final class CriteriaFactory
 {

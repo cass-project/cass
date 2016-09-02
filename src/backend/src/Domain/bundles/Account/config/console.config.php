@@ -1,8 +1,8 @@
 <?php
-namespace Domain\EmailVerification;
+namespace CASS\Domain\EmailVerification;
 
-use Domain\Account\Command\DeleteAccountCommand;
-use Domain\Account\Command\ProcessAccountDeleteRequestsCommand;
+use CASS\Domain\Account\Command\DeleteAccountCommand;
+use CASS\Domain\Account\Command\ProcessAccountDeleteRequestsCommand;
 
 return [
     'php-di' => [

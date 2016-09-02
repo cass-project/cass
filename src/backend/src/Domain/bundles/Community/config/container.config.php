@@ -1,15 +1,15 @@
 <?php
-namespace Domain\Community;
+namespace CASS\Domain\Community;
 
 use function DI\object;
 use function DI\factory;
 use function DI\get;
 
 use DI\Container;
-use Domain\Community\Entity\Community;
-use Domain\Community\Repository\CommunityRepository;
+use CASS\Domain\Community\Entity\Community;
+use CASS\Domain\Community\Repository\CommunityRepository;
 use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
-use Domain\Community\Service\CommunityService;
+use CASS\Domain\Community\Service\CommunityService;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Memory\MemoryAdapter;

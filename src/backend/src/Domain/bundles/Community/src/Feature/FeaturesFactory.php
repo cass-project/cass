@@ -1,11 +1,11 @@
 <?php
-namespace Domain\Community\Feature;
+namespace CASS\Domain\Community\Feature;
 
 use DI\Container;
-use Domain\Community\Exception\UnknownFeatureException;
-use Domain\Community\Feature\Features\BoardsFeature;
-use Domain\Community\Feature\Features\ChatFeature;
-use Domain\Community\Feature\Features\CollectionsFeature;
+use CASS\Domain\Community\Exception\UnknownFeatureException;
+use CASS\Domain\Community\Feature\Features\BoardsFeature;
+use CASS\Domain\Community\Feature\Features\ChatFeature;
+use CASS\Domain\Community\Feature\Features\CollectionsFeature;
 
 class FeaturesFactory
 {

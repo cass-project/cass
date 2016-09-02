@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Collection\Middleware\Command;
+namespace CASS\Domain\Collection\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Collection\Exception\CollectionNotFoundException;
-use Domain\Collection\Middleware\Request\EditCollectionRequest;
+use CASS\Domain\Collection\Exception\CollectionNotFoundException;
+use CASS\Domain\Collection\Middleware\Request\EditCollectionRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

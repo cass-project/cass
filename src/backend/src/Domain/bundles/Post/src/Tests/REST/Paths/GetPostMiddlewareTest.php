@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Post\Tests\REST\Paths;
+namespace CASS\Domain\Post\Tests\REST\Paths;
 
-use Domain\Post\Tests\Fixtures\SamplePostsFixture;
-use Domain\Post\Tests\PostMiddlewareTest;
+use CASS\Domain\Post\Tests\Fixtures\SamplePostsFixture;
+use CASS\Domain\Post\Tests\PostMiddlewareTest;
 
 /**
  * @backupGlobals disabled

@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Community\Feature\Features;
+namespace CASS\Domain\Community\Feature\Features;
 
-use Domain\Community\Entity\Community;
-use Domain\Community\Feature\Feature;
+use CASS\Domain\Community\Entity\Community;
+use CASS\Domain\Community\Feature\Feature;
 
 abstract class AbstractFeature implements Feature
 {

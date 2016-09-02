@@ -1,5 +1,5 @@
 <?php
-namespace Domain\IM\Query\Source;
+namespace CASS\Domain\IM\Query\Source;
 
 interface Source
 {

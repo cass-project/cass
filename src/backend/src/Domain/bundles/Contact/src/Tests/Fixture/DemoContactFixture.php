@@ -1,15 +1,15 @@
 <?php
-namespace Domain\Contact\Tests\Fixture;
+namespace CASS\Domain\Contact\Tests\Fixture;
 
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
-use Domain\Account\Entity\Account;
-use Domain\Account\Service\AccountService;
-use Domain\Contact\Entity\Contact;
-use Domain\Contact\Parameters\CreateContactParameters;
-use Domain\Contact\Service\ContactService;
-use Domain\Profile\Entity\Profile;
-use Domain\Profile\Service\ProfileService;
+use CASS\Domain\Account\Entity\Account;
+use CASS\Domain\Account\Service\AccountService;
+use CASS\Domain\Contact\Entity\Contact;
+use CASS\Domain\Contact\Parameters\CreateContactParameters;
+use CASS\Domain\Contact\Service\ContactService;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Profile\Service\ProfileService;
 use Zend\Expressive\Application;
 
 final class DemoContactFixture implements Fixture

@@ -1,13 +1,13 @@
 <?php
-namespace Domain\EmailVerification;
+namespace CASS\Domain\EmailVerification;
 
 use function DI\object;
 use function DI\factory;
 use function DI\get;
 
 use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
-use Domain\EmailVerification\Entity\EmailVerification;
-use Domain\EmailVerification\Repository\EmailVerificationRepository;
+use CASS\Domain\EmailVerification\Entity\EmailVerification;
+use CASS\Domain\EmailVerification\Repository\EmailVerificationRepository;
 
 return [
     'php-di' => [

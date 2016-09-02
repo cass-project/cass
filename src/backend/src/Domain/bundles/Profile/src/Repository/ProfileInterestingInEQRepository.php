@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Profile\Repository;
+namespace CASS\Domain\Profile\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Domain\Profile\Entity\ProfileInterestingInEQ;
+use CASS\Domain\Profile\Entity\ProfileInterestingInEQ;
 
 class ProfileInterestingInEQRepository extends EntityRepository
 {

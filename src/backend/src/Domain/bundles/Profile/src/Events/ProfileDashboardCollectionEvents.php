@@ -1,11 +1,11 @@
 <?php
-namespace Domain\Profile\Events;
+namespace CASS\Domain\Profile\Events;
 
 use CASS\Application\Events\EventsBootstrapInterface;
-use Domain\Collection\Parameters\CreateCollectionParameters;
-use Domain\Collection\Service\CollectionService;
-use Domain\Profile\Entity\Profile;
-use Domain\Profile\Service\ProfileService;
+use CASS\Domain\Collection\Parameters\CreateCollectionParameters;
+use CASS\Domain\Collection\Service\CollectionService;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Profile\Service\ProfileService;
 use Evenement\EventEmitterInterface;
 
 final class ProfileDashboardCollectionEvents implements EventsBootstrapInterface

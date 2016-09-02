@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Feedback\Tests\REST\Paths;
+namespace CASS\Domain\Feedback\Tests\REST\Paths;
 
-use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Feedback\FeedbackType\Types\FTCommonQuestion;
-use Domain\Feedback\Tests\FeedbackMiddlewareTest;
-use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
+use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Feedback\FeedbackType\Types\FTCommonQuestion;
+use CASS\Domain\Feedback\Tests\FeedbackMiddlewareTest;
+use CASS\Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**
  * @backupGlobals disabled

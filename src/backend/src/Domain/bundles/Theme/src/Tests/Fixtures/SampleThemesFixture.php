@@ -1,11 +1,11 @@
 <?php
-namespace Domain\Theme\Tests\Fixtures;
+namespace CASS\Domain\Theme\Tests\Fixtures;
 
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
-use Domain\Theme\Entity\Theme;
-use Domain\Theme\Parameters\CreateThemeParameters;
-use Domain\Theme\Service\ThemeService;
+use CASS\Domain\Theme\Entity\Theme;
+use CASS\Domain\Theme\Parameters\CreateThemeParameters;
+use CASS\Domain\Theme\Service\ThemeService;
 use Zend\Expressive\Application;
 
 class SampleThemesFixture implements Fixture

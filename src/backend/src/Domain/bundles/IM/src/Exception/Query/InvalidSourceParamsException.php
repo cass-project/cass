@@ -1,4 +1,4 @@
 <?php
-namespace Domain\IM\Exception\Query;
+namespace CASS\Domain\IM\Exception\Query;
 
 class InvalidSourceParamsException extends \Exception {}

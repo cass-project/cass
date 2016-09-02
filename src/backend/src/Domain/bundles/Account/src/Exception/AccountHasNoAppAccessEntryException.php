@@ -1,4 +1,4 @@
 <?php
-namespace Domain\Account\Exception;
+namespace CASS\Domain\Account\Exception;
 
 final class AccountHasNoAppAccessEntryException extends \Exception {}

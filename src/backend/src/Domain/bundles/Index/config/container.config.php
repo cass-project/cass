@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Index;
+namespace CASS\Domain\Index;
 
 use function DI\object;
 use function DI\factory;

@@ -1,12 +1,12 @@
 <?php
-namespace Domain\Auth\Middleware;
+namespace CASS\Domain\Auth\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
-use Domain\Auth\Middleware\AuthStrategy\HeaderStrategy;
-use Domain\Auth\Middleware\AuthStrategy\JSONBodyStrategy;
-use Domain\Auth\Middleware\AuthStrategy\SessionStrategy;
-use Domain\Auth\Service\CurrentAccountService;
-use Domain\Auth\Exception\NotAuthenticatedException;
+use CASS\Domain\Auth\Middleware\AuthStrategy\HeaderStrategy;
+use CASS\Domain\Auth\Middleware\AuthStrategy\JSONBodyStrategy;
+use CASS\Domain\Auth\Middleware\AuthStrategy\SessionStrategy;
+use CASS\Domain\Auth\Service\CurrentAccountService;
+use CASS\Domain\Auth\Exception\NotAuthenticatedException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

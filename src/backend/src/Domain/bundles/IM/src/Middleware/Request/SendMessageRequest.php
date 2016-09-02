@@ -1,10 +1,10 @@
 <?php
-namespace Domain\IM\Middleware\Request;
+namespace CASS\Domain\IM\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
-use Domain\IM\IMBundle;
-use Domain\IM\Parameters\SendMessageParameters;
+use CASS\Domain\IM\IMBundle;
+use CASS\Domain\IM\Parameters\SendMessageParameters;
 
 class SendMessageRequest extends SchemaParams
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Index\Source;
+namespace CASS\Domain\Index\Source;
 
 use MongoDB\Collection;
 use MongoDB\Database;

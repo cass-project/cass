@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Attachment\Middleware\Command;
+namespace CASS\Domain\Attachment\Middleware\Command;
 
-use Domain\Auth\Service\CurrentAccountService;
-use Domain\Attachment\Service\FetchResourceService;
-use Domain\Attachment\Service\AttachmentService;
+use CASS\Domain\Auth\Service\CurrentAccountService;
+use CASS\Domain\Attachment\Service\FetchResourceService;
+use CASS\Domain\Attachment\Service\AttachmentService;
 
 abstract class Command implements \CASS\Application\Command\Command
 {

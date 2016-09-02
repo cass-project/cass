@@ -1,22 +1,22 @@
 <?php
-namespace Domain\Index\Processor;
+namespace CASS\Domain\Index\Processor;
 
 use DI\Container;
-use Domain\Collection\Entity\Collection;
-use Domain\Community\Entity\Community;
-use Domain\Index\Entity\IndexedEntity;
-use Domain\Index\Exception\NoProcessorForEntityException;
-use Domain\Index\Processor\Processors\CollectionProcessor;
-use Domain\Index\Processor\Processors\CommunityProcessor;
-use Domain\Index\Processor\Processors\ProfileProcessor;
-use Domain\Index\Processor\Processors\PublicCatalog\PublicCollectionsProcessor;
-use Domain\Index\Processor\Processors\PublicCatalog\PublicCommunitiesProcessor;
-use Domain\Index\Processor\Processors\PublicCatalog\PublicContentProcessor;
-use Domain\Index\Processor\Processors\PublicCatalog\PublicDiscussionsProcessor;
-use Domain\Index\Processor\Processors\PublicCatalog\PublicExpertsProcessor;
-use Domain\Index\Processor\Processors\PublicCatalog\PublicProfilesProcessor;
-use Domain\Post\Entity\Post;
-use Domain\Profile\Entity\Profile;
+use CASS\Domain\Collection\Entity\Collection;
+use CASS\Domain\Community\Entity\Community;
+use CASS\Domain\Index\Entity\IndexedEntity;
+use CASS\Domain\Index\Exception\NoProcessorForEntityException;
+use CASS\Domain\Index\Processor\Processors\CollectionProcessor;
+use CASS\Domain\Index\Processor\Processors\CommunityProcessor;
+use CASS\Domain\Index\Processor\Processors\ProfileProcessor;
+use CASS\Domain\Index\Processor\Processors\PublicCatalog\PublicCollectionsProcessor;
+use CASS\Domain\Index\Processor\Processors\PublicCatalog\PublicCommunitiesProcessor;
+use CASS\Domain\Index\Processor\Processors\PublicCatalog\PublicContentProcessor;
+use CASS\Domain\Index\Processor\Processors\PublicCatalog\PublicDiscussionsProcessor;
+use CASS\Domain\Index\Processor\Processors\PublicCatalog\PublicExpertsProcessor;
+use CASS\Domain\Index\Processor\Processors\PublicCatalog\PublicProfilesProcessor;
+use CASS\Domain\Post\Entity\Post;
+use CASS\Domain\Profile\Entity\Profile;
 
 final class ProcessorFactory
 {

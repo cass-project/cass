@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Community\ACL;
+namespace CASS\Domain\Community\ACL;
 
 use CASS\Util\JSONSerializable;
 

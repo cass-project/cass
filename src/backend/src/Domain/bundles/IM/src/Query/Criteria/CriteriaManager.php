@@ -1,8 +1,8 @@
 <?php
-namespace Domain\IM\Query\Criteria;
+namespace CASS\Domain\IM\Query\Criteria;
 
-use Domain\IM\Exception\Query\DuplicateCriteriaException;
-use Domain\IM\Exception\Query\UnknownCriteriaException;
+use CASS\Domain\IM\Exception\Query\DuplicateCriteriaException;
+use CASS\Domain\IM\Exception\Query\UnknownCriteriaException;
 
 final class CriteriaManager
 {

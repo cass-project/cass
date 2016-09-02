@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Attachment\Entity\Metadata\File;
+namespace CASS\Domain\Attachment\Entity\Metadata\File;
 
-use Domain\Attachment\Entity\Metadata\FileAttachmentType;
-use Domain\Attachment\Service\AttachmentTypeDetector;
+use CASS\Domain\Attachment\Entity\Metadata\FileAttachmentType;
+use CASS\Domain\Attachment\Service\AttachmentTypeDetector;
 
 class WebmAttachmentType implements FileAttachmentType, AttachmentTypeDetector
 {

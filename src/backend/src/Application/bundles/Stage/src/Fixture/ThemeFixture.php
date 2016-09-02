@@ -1,8 +1,8 @@
 <?php
 namespace CASS\Application\Bundles\Stage\Fixture;
 
-use Domain\Theme\Parameters\CreateThemeParameters;
-use Domain\Theme\Service\ThemeService;
+use CASS\Domain\Theme\Parameters\CreateThemeParameters;
+use CASS\Domain\Theme\Service\ThemeService;
 use Symfony\Component\Console\Output\OutputInterface;
 
 final class ThemeFixture

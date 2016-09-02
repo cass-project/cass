@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Feed;
+namespace CASS\Domain\Feed;
 
 use CASS\Application\Bundle\GenericBundle;
 

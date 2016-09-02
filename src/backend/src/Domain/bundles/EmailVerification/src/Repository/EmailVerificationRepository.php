@@ -1,9 +1,9 @@
 <?php
-namespace Domain\EmailVerification\Repository;
+namespace CASS\Domain\EmailVerification\Repository;
 
-use Domain\Account\Entity\Account;
+use CASS\Domain\Account\Entity\Account;
 use Doctrine\ORM\EntityRepository;
-use Domain\EmailVerification\Entity\EmailVerification;
+use CASS\Domain\EmailVerification\Entity\EmailVerification;
 
 class EmailVerificationRepository extends EntityRepository
 {

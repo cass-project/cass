@@ -1,22 +1,22 @@
 <?php
-namespace Domain\Account\Service;
+namespace CASS\Domain\Account\Service;
 
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareService;
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareTrait;
-use Domain\Account\Entity\Account;
-use Domain\Account\Entity\OAuthAccount;
-use Domain\Account\Exception\AccountHasDeleteRequestException;
-use Domain\Account\Exception\AccountNotContainsProfileException;
-use Domain\Account\Exception\InvalidOldPasswordException;
-use Domain\Account\Repository\AccountRepository;
-use Domain\Account\Repository\OAuthAccountRepository;
-use Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
-use Domain\Auth\Service\PasswordVerifyService;
-use Domain\Profile\Entity\Profile;
-use Domain\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Account\Entity\Account;
+use CASS\Domain\Account\Entity\OAuthAccount;
+use CASS\Domain\Account\Exception\AccountHasDeleteRequestException;
+use CASS\Domain\Account\Exception\AccountNotContainsProfileException;
+use CASS\Domain\Account\Exception\InvalidOldPasswordException;
+use CASS\Domain\Account\Repository\AccountRepository;
+use CASS\Domain\Account\Repository\OAuthAccountRepository;
+use CASS\Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
+use CASS\Domain\Auth\Service\PasswordVerifyService;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Profile\Entity\Profile\Greetings;
 use CASS\Util\GenerateRandomString;
-use Domain\Profile\Repository\ProfileRepository;
-use Domain\Profile\Service\ProfileService;
+use CASS\Domain\Profile\Repository\ProfileRepository;
+use CASS\Domain\Profile\Service\ProfileService;
 
 final class AccountService implements EventEmitterAwareService
 {

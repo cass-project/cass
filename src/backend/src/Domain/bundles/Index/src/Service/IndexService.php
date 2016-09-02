@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Index\Service;
+namespace CASS\Domain\Index\Service;
 
-use Domain\Index\Entity\IndexedEntity;
-use Domain\Index\Processor\Processor;
-use Domain\Index\Processor\ProcessorFactory;
+use CASS\Domain\Index\Entity\IndexedEntity;
+use CASS\Domain\Index\Processor\Processor;
+use CASS\Domain\Index\Processor\ProcessorFactory;
 
 final class IndexService
 {

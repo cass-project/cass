@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Profile\Middleware;
+namespace CASS\Domain\Profile\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
-use Domain\Profile\Exception\ProfileNotFoundException;
-use Domain\Profile\Service\WithProfileService;
+use CASS\Domain\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Profile\Service\WithProfileService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

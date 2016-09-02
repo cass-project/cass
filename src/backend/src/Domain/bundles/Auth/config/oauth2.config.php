@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Auth;
+namespace CASS\Domain\Auth;
 
 return [
     'php-di' => [

@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Contact;
+namespace CASS\Domain\Contact;
 
 use CASS\Application\Bundle\GenericBundle;
 

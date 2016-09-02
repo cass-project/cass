@@ -1,4 +1,4 @@
 <?php
-namespace Domain\Index\Exception;
+namespace CASS\Domain\Index\Exception;
 
 class NoProcessorForEntityException extends \Exception {}

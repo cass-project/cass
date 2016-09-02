@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Feed;
+namespace CASS\Domain\Feed;
 
 use function DI\object;
 use function DI\factory;

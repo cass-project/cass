@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Theme\Tests\REST\Paths;
+namespace CASS\Domain\Theme\Tests\REST\Paths;
 
-use Domain\Theme\Tests\ThemeMiddlewareTest;
+use CASS\Domain\Theme\Tests\ThemeMiddlewareTest;
 
 /**
  * @backupGlobals disabled

@@ -1,5 +1,5 @@
 <?php
-namespace Domain\ProfileCommunities;
+namespace CASS\Domain\ProfileCommunities;
 
 use CASS\Application\Bundle\GenericBundle;
 

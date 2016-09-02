@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Account\Service;
+namespace CASS\Domain\Account\Service;
 
-use Domain\Account\Entity\Account;
-use Domain\Account\Entity\AccountAppAccess;
-use Domain\Account\Repository\AccountAppAccessRepository;
+use CASS\Domain\Account\Entity\Account;
+use CASS\Domain\Account\Entity\AccountAppAccess;
+use CASS\Domain\Account\Repository\AccountAppAccessRepository;
 
 final class AccountAppAccessService
 {

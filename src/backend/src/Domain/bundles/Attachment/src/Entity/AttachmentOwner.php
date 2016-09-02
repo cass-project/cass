@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Attachment\Entity;
+namespace CASS\Domain\Attachment\Entity;
 
 interface AttachmentOwner
 {

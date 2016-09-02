@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Avatar\Parameters;
+namespace CASS\Domain\Avatar\Parameters;
 
 use CASS\Util\Definitions\Point;
 

@@ -1,4 +1,4 @@
 <?php
-namespace Domain\Post\Exception;
+namespace CASS\Domain\Post\Exception;
 
 class InvalidLinkParamsException extends \Exception {}

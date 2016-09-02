@@ -1,5 +1,5 @@
 <?php
-namespace Domain\IM\Query\Criteria;
+namespace CASS\Domain\IM\Query\Criteria;
 
 interface Criteria
 {

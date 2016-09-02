@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Colors\Repository;
+namespace CASS\Domain\Colors\Repository;
 
-use Domain\Colors\Entity\Palette;
+use CASS\Domain\Colors\Entity\Palette;
 
 class PaletteRepository
 {

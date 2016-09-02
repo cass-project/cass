@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Community\Middleware\Command;
+namespace CASS\Domain\Community\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Community\Middleware\Request\CreateCommunityRequest;
+use CASS\Domain\Community\Middleware\Request\CreateCommunityRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

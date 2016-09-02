@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Account\Middleware;
+namespace CASS\Domain\Account\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
-use Domain\Account\Service\AccountAppAccessService;
-use Domain\Auth\Service\CurrentAccountService;
+use CASS\Domain\Account\Service\AccountAppAccessService;
+use CASS\Domain\Auth\Service\CurrentAccountService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

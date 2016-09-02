@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Account\Scripts;
+namespace CASS\Domain\Account\Scripts;
 
-use Domain\Account\Entity\Account;
-use Domain\Account\Repository\AccountRepository;
+use CASS\Domain\Account\Entity\Account;
+use CASS\Domain\Account\Repository\AccountRepository;
 
 class DeleteAccountScript
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Index\Processor;
+namespace CASS\Domain\Index\Processor;
 
-use Domain\Index\Entity\IndexedEntity;
+use CASS\Domain\Index\Entity\IndexedEntity;
 
 interface Processor
 {

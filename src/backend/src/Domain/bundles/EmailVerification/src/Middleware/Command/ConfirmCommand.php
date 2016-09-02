@@ -1,5 +1,5 @@
 <?php
-namespace Domain\EmailVerification\Middleware\Command;
+namespace CASS\Domain\EmailVerification\Middleware\Command;
 
 use Psr\Http\Message\ServerRequestInterface;
 

@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Feedback\Middleware\Command;
+namespace CASS\Domain\Feedback\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Feedback\Exception\FeedbackNotFoundException;
+use CASS\Domain\Feedback\Exception\FeedbackNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

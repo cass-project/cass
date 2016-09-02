@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Community\Scripts;
+namespace CASS\Domain\Community\Scripts;
 
 use CASS\Util\Scripts\AvatarUploadScript;
 

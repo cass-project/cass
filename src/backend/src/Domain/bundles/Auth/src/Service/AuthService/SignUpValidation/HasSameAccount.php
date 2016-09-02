@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Auth\Service\AuthService\SignUpValidation;
+namespace CASS\Domain\Auth\Service\AuthService\SignUpValidation;
 
-use Domain\Account\Service\AccountService;
-use Domain\Auth\Parameters\SignUpParameters;
-use Domain\Auth\Exception\DuplicateAccountException;
+use CASS\Domain\Account\Service\AccountService;
+use CASS\Domain\Auth\Parameters\SignUpParameters;
+use CASS\Domain\Auth\Exception\DuplicateAccountException;
 
 class HasSameAccount implements Validator
 {

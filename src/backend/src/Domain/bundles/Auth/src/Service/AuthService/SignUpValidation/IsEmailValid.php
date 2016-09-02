@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Auth\Service\AuthService\SignUpValidation;
+namespace CASS\Domain\Auth\Service\AuthService\SignUpValidation;
 
-use Domain\Auth\Parameters\SignUpParameters;
-use Domain\Auth\Exception\ValidationException;
+use CASS\Domain\Auth\Parameters\SignUpParameters;
+use CASS\Domain\Auth\Exception\ValidationException;
 
 class IsEmailValid implements Validator
 {

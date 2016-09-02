@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Index\Events;
+namespace CASS\Domain\Index\Events;
 
 use CASS\Application\Events\EventsBootstrapInterface;
-use Domain\Index\Service\IndexService;
-use Domain\Profile\Entity\Profile;
-use Domain\Profile\Service\ProfileService;
+use CASS\Domain\Index\Service\IndexService;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Profile\Service\ProfileService;
 use Evenement\EventEmitterInterface;
 
 final class ProfileEvents implements EventsBootstrapInterface

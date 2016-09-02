@@ -1,14 +1,14 @@
 <?php
-namespace Domain\Profile\Formatter;
+namespace CASS\Domain\Profile\Formatter;
 
-use Domain\Auth\Service\CurrentAccountService;
-use Domain\Collection\Collection\CollectionItem;
-use Domain\Collection\Collection\CollectionTree;
-use Domain\Collection\Service\CollectionService;
-use Domain\Profile\Entity\Profile;
-use Domain\Profile\Entity\Profile\Greetings;
-use Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
-use Domain\ProfileCommunities\Service\ProfileCommunitiesService;
+use CASS\Domain\Auth\Service\CurrentAccountService;
+use CASS\Domain\Collection\Collection\CollectionItem;
+use CASS\Domain\Collection\Collection\CollectionTree;
+use CASS\Domain\Collection\Service\CollectionService;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Profile\Entity\Profile\Greetings;
+use CASS\Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
+use CASS\Domain\ProfileCommunities\Service\ProfileCommunitiesService;
 
 final class ProfileExtendedFormatter
 {

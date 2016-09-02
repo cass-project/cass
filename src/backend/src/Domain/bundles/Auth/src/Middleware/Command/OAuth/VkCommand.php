@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Auth\Middleware\Command\OAuth;
+namespace CASS\Domain\Auth\Middleware\Command\OAuth;
 
 use CASS\Application\Exception\NotImplementedException;
-use Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
+use CASS\Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
 

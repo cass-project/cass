@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Community\Middleware\Command\Feature;
+namespace CASS\Domain\Community\Middleware\Command\Feature;
 
 use CASS\Application\Command\Command;
-use Domain\Community\Service\CommunityFeaturesService;
-use Domain\Community\Service\CommunityService;
+use CASS\Domain\Community\Service\CommunityFeaturesService;
+use CASS\Domain\Community\Service\CommunityService;
 
 abstract class AbstractFeatureCommand implements Command
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Collection\Parameters;
+namespace CASS\Domain\Collection\Parameters;
 
 class SetPublicOptionsParameters
 {

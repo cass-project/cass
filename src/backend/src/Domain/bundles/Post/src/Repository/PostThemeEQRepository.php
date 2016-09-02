@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Post\Repository;
+namespace CASS\Domain\Post\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Domain\Post\Entity\PostThemeEQ;
+use CASS\Domain\Post\Entity\PostThemeEQ;
 
 final class PostThemeEQRepository extends EntityRepository
 {

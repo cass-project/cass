@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Feedback;
+namespace CASS\Domain\Feedback;
 
-use Domain\Feedback\Middleware\FeedbackMiddleware;
+use CASS\Domain\Feedback\Middleware\FeedbackMiddleware;
 
 return [
     'common' => [

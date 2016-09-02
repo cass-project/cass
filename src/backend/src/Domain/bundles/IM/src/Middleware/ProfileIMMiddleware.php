@@ -1,11 +1,11 @@
 <?php
-namespace Domain\IM\Middleware;
+namespace CASS\Domain\IM\Middleware;
 
 use CASS\Application\Service\CommandService;
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
-use Domain\IM\Middleware\Command\MessagesCommand;
-use Domain\IM\Middleware\Command\SendCommand;
-use Domain\IM\Middleware\Command\UnreadCommand;
+use CASS\Domain\IM\Middleware\Command\MessagesCommand;
+use CASS\Domain\IM\Middleware\Command\SendCommand;
+use CASS\Domain\IM\Middleware\Command\UnreadCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

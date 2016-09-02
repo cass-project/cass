@@ -1,13 +1,13 @@
 <?php
-namespace Domain\EmailVerification\Entity;
+namespace CASS\Domain\EmailVerification\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\JSONSerializable;
-use Domain\Account\Entity\Account;
+use CASS\Domain\Account\Entity\Account;
 
 /**
- * @Entity(repositoryClass="Domain\EmailVerification\Repository\EmailVerificationRepository")
+ * @Entity(repositoryClass="CASS\Domain\EmailVerification\Repository\EmailVerificationRepository")
  * @Table(name="email_verification")
  */
 class EmailVerification implements IdEntity, JSONSerializable
@@ -15,7 +15,7 @@ class EmailVerification implements IdEntity, JSONSerializable
     use IdTrait;
 
     /**
-     * @ManyToOne(targetEntity="Domain\Account\Entity\Domain\Account")
+     * @ManyToOne(targetEntity="CASS\Domain\Account\Entity\CASS\Domain\Account")
      * @JoinColumn(name="for_account_id", referencedColumnName="id")
      * @var Account
      */

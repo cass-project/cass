@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Profile\Tests;
+namespace CASS\Domain\Profile\Tests;
 
-use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
-use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
+use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Profile\Tests\Fixtures\DemoProfileFixture;
+use CASS\Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 
 /**
  * @backupGlobals disabled

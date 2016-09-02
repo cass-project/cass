@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Account\Repository;
+namespace CASS\Domain\Account\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Domain\Account\Entity\Account;
-use Domain\Account\Entity\AccountAppAccess;
-use Domain\Account\Exception\AccountHasNoAppAccessEntryException;
+use CASS\Domain\Account\Entity\Account;
+use CASS\Domain\Account\Entity\AccountAppAccess;
+use CASS\Domain\Account\Exception\AccountHasNoAppAccessEntryException;
 
 final class AccountAppAccessRepository extends EntityRepository
 {

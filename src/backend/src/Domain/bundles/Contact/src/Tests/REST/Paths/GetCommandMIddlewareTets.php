@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Contact\Tests\REST\Paths;
+namespace CASS\Domain\Contact\Tests\REST\Paths;
 
-use Domain\Contact\Tests\ContactMiddlewareTest;
+use CASS\Domain\Contact\Tests\ContactMiddlewareTest;
 
 /**
  * @backupGlobals disabled

@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Profile\Validation;
+namespace CASS\Domain\Profile\Validation;
 use CASS\Application\Exception\PermissionsDeniedException;
-use Domain\Account\Entity\Account;
-use Domain\Profile\Entity\Profile;
+use CASS\Domain\Account\Entity\Account;
+use CASS\Domain\Profile\Entity\Profile;
 
 final class ProfileValidationService
 {

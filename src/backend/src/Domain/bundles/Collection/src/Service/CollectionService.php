@@ -1,19 +1,19 @@
 <?php
-namespace Domain\Collection\Service;
+namespace CASS\Domain\Collection\Service;
 
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareService;
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareTrait;
-use Domain\Avatar\Image\ImageCollection;
-use Domain\Avatar\Parameters\UploadImageParameters;
-use Domain\Avatar\Service\AvatarService;
-use Domain\Collection\Entity\Collection;
-use Domain\Collection\Exception\CollectionIsProtectedException;
-use Domain\Collection\Image\CollectionImageStrategy;
-use Domain\Collection\Parameters\CreateCollectionParameters;
-use Domain\Collection\Parameters\EditCollectionParameters;
-use Domain\Collection\Parameters\SetPublicOptionsParameters;
-use Domain\Collection\Repository\CollectionRepository;
-use Domain\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Avatar\Image\ImageCollection;
+use CASS\Domain\Avatar\Parameters\UploadImageParameters;
+use CASS\Domain\Avatar\Service\AvatarService;
+use CASS\Domain\Collection\Entity\Collection;
+use CASS\Domain\Collection\Exception\CollectionIsProtectedException;
+use CASS\Domain\Collection\Image\CollectionImageStrategy;
+use CASS\Domain\Collection\Parameters\CreateCollectionParameters;
+use CASS\Domain\Collection\Parameters\EditCollectionParameters;
+use CASS\Domain\Collection\Parameters\SetPublicOptionsParameters;
+use CASS\Domain\Collection\Repository\CollectionRepository;
+use CASS\Domain\Profile\Entity\Profile\Greetings;
 use League\Flysystem\FilesystemInterface;
 
 class CollectionService implements EventEmitterAwareService

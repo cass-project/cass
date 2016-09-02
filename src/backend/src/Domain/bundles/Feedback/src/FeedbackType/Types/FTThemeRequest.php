@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Feedback\FeedbackType\Types;
+namespace CASS\Domain\Feedback\FeedbackType\Types;
 
 final class FTThemeRequest extends AbstractFeedbackType
 {

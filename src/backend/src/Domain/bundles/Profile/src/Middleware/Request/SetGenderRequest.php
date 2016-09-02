@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Profile\Middleware\Request;
+namespace CASS\Domain\Profile\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
-use Domain\Profile\Parameters\SetGenderParameters;
-use Domain\Profile\ProfileBundle;
+use CASS\Domain\Profile\Parameters\SetGenderParameters;
+use CASS\Domain\Profile\ProfileBundle;
 
 class SetGenderRequest extends SchemaParams
 {

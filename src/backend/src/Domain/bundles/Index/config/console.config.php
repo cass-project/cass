@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Fake;
+namespace CASS\Domain\Fake;
 
 return [
     'php-di' => [

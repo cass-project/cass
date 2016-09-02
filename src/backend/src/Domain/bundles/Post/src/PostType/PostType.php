@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Post\PostType;
+namespace CASS\Domain\Post\PostType;
 
 use CASS\Util\JSONSerializable;
 

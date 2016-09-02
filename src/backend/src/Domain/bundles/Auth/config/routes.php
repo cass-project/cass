@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Auth;
+namespace CASS\Domain\Auth;
 
-use Domain\Auth\Middleware\AuthMiddleware;
-use Domain\Auth\Middleware\ProtectedMiddleware;
+use CASS\Domain\Auth\Middleware\AuthMiddleware;
+use CASS\Domain\Auth\Middleware\ProtectedMiddleware;
 
 return [
    'common' => [

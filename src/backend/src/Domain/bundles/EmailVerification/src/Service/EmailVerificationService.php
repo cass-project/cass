@@ -1,9 +1,9 @@
 <?php
-namespace Domain\EmailVerification\Service;
+namespace CASS\Domain\EmailVerification\Service;
 
-use Domain\Account\Entity\Account;
-use Domain\Auth\Service\CurrentAccountService;
-use Domain\EmailVerification\Repository\EmailVerificationRepository;
+use CASS\Domain\Account\Entity\Account;
+use CASS\Domain\Auth\Service\CurrentAccountService;
+use CASS\Domain\EmailVerification\Repository\EmailVerificationRepository;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 

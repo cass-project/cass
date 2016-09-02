@@ -1,11 +1,11 @@
 <?php
-namespace Domain\Auth;
+namespace CASS\Domain\Auth;
 
 use function DI\object;
 use function DI\factory;
 use function DI\get;
 
-use Domain\Auth\Middleware\AuthMiddleware;
+use CASS\Domain\Auth\Middleware\AuthMiddleware;
 use CASS\Application\Bundles\Frontline\Service\FrontlineService;
 
 $config = [

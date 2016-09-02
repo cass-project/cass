@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Profile\Middleware\Command;
+namespace CASS\Domain\Profile\Middleware\Command;
 
 use CASS\Application\Exception\BadCommandCallException;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Profile\Exception\MaxProfilesReachedException;
+use CASS\Domain\Profile\Exception\MaxProfilesReachedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Profile\Middleware\Command;
+namespace CASS\Domain\Profile\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Profile\Exception\ProfileNotFoundException;
-use Domain\Profile\Middleware\Request\InterestingInRequest;
+use CASS\Domain\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Profile\Middleware\Request\InterestingInRequest;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

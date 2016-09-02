@@ -1,25 +1,25 @@
 <?php
-namespace Domain\Feed\Search\Stream;
+namespace CASS\Domain\Feed\Search\Stream;
 
-use Domain\Collection\Service\CollectionService;
-use Domain\Community\Service\CommunityService;
-use Domain\Feed\Search\Stream\Streams\CollectionStream;
-use Domain\Feed\Search\Stream\Streams\CommunityStream;
-use Domain\Feed\Search\Stream\Streams\PostStream;
-use Domain\Feed\Search\Stream\Streams\ProfileStream;
-use Domain\Index\Source\Source;
-use Domain\Index\Source\Sources\CollectionSource;
-use Domain\Index\Source\Sources\CommunitySource;
-use Domain\Index\Source\Sources\ProfileSource;
-use Domain\Index\Source\Sources\PublicCatalog\PublicCollectionsSource;
-use Domain\Index\Source\Sources\PublicCatalog\PublicCommunitiesSource;
-use Domain\Index\Source\Sources\PublicCatalog\PublicContentSource;
-use Domain\Index\Source\Sources\PublicCatalog\PublicDiscussionsSource;
-use Domain\Index\Source\Sources\PublicCatalog\PublicProfilesSource;
-use Domain\Index\Source\Sources\PublicCatalog\PublicExpertsSource;
-use Domain\Post\Formatter\PostFormatter;
-use Domain\Post\Service\PostService;
-use Domain\Profile\Service\ProfileService;
+use CASS\Domain\Collection\Service\CollectionService;
+use CASS\Domain\Community\Service\CommunityService;
+use CASS\Domain\Feed\Search\Stream\Streams\CollectionStream;
+use CASS\Domain\Feed\Search\Stream\Streams\CommunityStream;
+use CASS\Domain\Feed\Search\Stream\Streams\PostStream;
+use CASS\Domain\Feed\Search\Stream\Streams\ProfileStream;
+use CASS\Domain\Index\Source\Source;
+use CASS\Domain\Index\Source\Sources\CollectionSource;
+use CASS\Domain\Index\Source\Sources\CommunitySource;
+use CASS\Domain\Index\Source\Sources\ProfileSource;
+use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicCollectionsSource;
+use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicCommunitiesSource;
+use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicContentSource;
+use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicDiscussionsSource;
+use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicProfilesSource;
+use CASS\Domain\Index\Source\Sources\PublicCatalog\PublicExpertsSource;
+use CASS\Domain\Post\Formatter\PostFormatter;
+use CASS\Domain\Post\Service\PostService;
+use CASS\Domain\Profile\Service\ProfileService;
 use Zend\I18n\Exception\OutOfBoundsException;
 
 final class StreamFactory

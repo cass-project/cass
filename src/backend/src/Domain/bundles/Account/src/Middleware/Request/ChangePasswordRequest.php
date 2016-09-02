@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Account\Middleware\Request;
+namespace CASS\Domain\Account\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
-use Domain\Account\AccountBundle;
+use CASS\Domain\Account\AccountBundle;
 
 class ChangePasswordRequest extends SchemaParams
 {

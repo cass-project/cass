@@ -1,11 +1,11 @@
 <?php
-namespace Domain\Profile\Tests\Fixtures;
+namespace CASS\Domain\Profile\Tests\Fixtures;
 
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
-use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Profile\Entity\Profile;
-use Domain\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Profile\Entity\Profile\Greetings;
 use Zend\Expressive\Application;
 
 class DemoProfileFixture implements Fixture

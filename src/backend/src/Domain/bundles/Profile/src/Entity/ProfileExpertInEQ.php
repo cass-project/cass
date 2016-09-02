@@ -1,12 +1,12 @@
 <?php
-namespace Domain\Profile\Entity;
+namespace CASS\Domain\Profile\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\JSONSerializable;
 
 /**
- * @Entity(repositoryClass="Domain\Profile\Repository\ProfileExpertInEQRepository")
+ * @Entity(repositoryClass="CASS\Domain\Profile\Repository\ProfileExpertInEQRepository")
  * @Table(name="profile_expert_in_theme_ids")
  */
 final class ProfileExpertInEQ implements JSONSerializable, IdEntity

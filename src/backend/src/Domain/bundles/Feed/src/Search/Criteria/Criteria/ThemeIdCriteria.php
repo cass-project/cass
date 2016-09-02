@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Feed\Search\Criteria\Criteria;
+namespace CASS\Domain\Feed\Search\Criteria\Criteria;
 
-use Domain\Feed\Search\Criteria\Criteria;
+use CASS\Domain\Feed\Search\Criteria\Criteria;
 
 final class ThemeIdCriteria implements Criteria
 {

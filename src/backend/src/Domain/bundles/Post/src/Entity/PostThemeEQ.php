@@ -1,12 +1,12 @@
 <?php
-namespace Domain\Post\Entity;
+namespace CASS\Domain\Post\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\JSONSerializable;
 
 /**
- * @Entity(repositoryClass="Domain\Post\Repository\PostThemeEQRepository")
+ * @Entity(repositoryClass="CASS\Domain\Post\Repository\PostThemeEQRepository")
  * @Table(name="post_theme_ids")
  */
 class PostThemeEQ implements IdEntity, JSONSerializable

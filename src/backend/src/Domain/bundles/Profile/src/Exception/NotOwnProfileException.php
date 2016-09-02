@@ -1,4 +1,4 @@
 <?php
-namespace Domain\Profile\Exception;
+namespace CASS\Domain\Profile\Exception;
 
 class NotOwnProfileException extends \Exception {}

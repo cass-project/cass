@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Index\Service\ThemeWeightCalculator;
+namespace CASS\Domain\Index\Service\ThemeWeightCalculator;
 
-use Domain\Profile\Entity\Profile;
-use Domain\Theme\Entity\Theme;
-use Domain\Theme\Service\ThemeService;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Theme\Entity\Theme;
+use CASS\Domain\Theme\Service\ThemeService;
 
 final class ThemeWeightCalculator
 {

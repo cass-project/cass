@@ -1,8 +1,8 @@
 <?php
-namespace Domain\ProfileCommunities\Middleware\Command;
+namespace CASS\Domain\ProfileCommunities\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\ProfileCommunities\Exception\AlreadyLeavedException;
+use CASS\Domain\ProfileCommunities\Exception\AlreadyLeavedException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Attachment\Middleware;
+namespace CASS\Domain\Attachment\Middleware;
 
 use CASS\Application\Service\CommandService;
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
-use Domain\Attachment\Middleware\Command\LinkCommand;
-use Domain\Attachment\Middleware\Command\UploadCommand;
+use CASS\Domain\Attachment\Middleware\Command\LinkCommand;
+use CASS\Domain\Attachment\Middleware\Command\UploadCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

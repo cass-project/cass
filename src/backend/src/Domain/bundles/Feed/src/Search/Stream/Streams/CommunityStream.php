@@ -1,15 +1,15 @@
 <?php
-namespace Domain\Feed\Search\Stream\Streams;
+namespace CASS\Domain\Feed\Search\Stream\Streams;
 
-use Domain\Community\Exception\CommunityNotFoundException;
-use Domain\Community\Formatter\CommunityExtendedFormatter;
-use Domain\Community\Service\CommunityService;
-use Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
-use Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
-use Domain\Feed\Search\Criteria\Criteria\SortCriteria;
-use Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
-use Domain\Feed\Search\Criteria\CriteriaManager;
-use Domain\Feed\Search\Stream\Stream;
+use CASS\Domain\Community\Exception\CommunityNotFoundException;
+use CASS\Domain\Community\Formatter\CommunityExtendedFormatter;
+use CASS\Domain\Community\Service\CommunityService;
+use CASS\Domain\Feed\Search\Criteria\Criteria\QueryStringCriteria;
+use CASS\Domain\Feed\Search\Criteria\Criteria\SeekCriteria;
+use CASS\Domain\Feed\Search\Criteria\Criteria\SortCriteria;
+use CASS\Domain\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
+use CASS\Domain\Feed\Search\Criteria\CriteriaManager;
+use CASS\Domain\Feed\Search\Stream\Stream;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
 use MongoDB\Model\BSONDocument;

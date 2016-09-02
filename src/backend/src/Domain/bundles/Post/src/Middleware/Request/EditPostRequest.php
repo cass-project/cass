@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Post\Middleware\Request;
+namespace CASS\Domain\Post\Middleware\Request;
 
 use ZEA2\Platform\Bundles\REST\Service\JSONSchema;
 use ZEA2\Platform\Bundles\REST\Request\Params\SchemaParams;
-use Domain\Post\Parameters\EditPostParameters;
-use Domain\Post\PostBundle;
+use CASS\Domain\Post\Parameters\EditPostParameters;
+use CASS\Domain\Post\PostBundle;
 
 class EditPostRequest extends SchemaParams
 {

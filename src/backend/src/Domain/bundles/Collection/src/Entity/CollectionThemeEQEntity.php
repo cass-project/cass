@@ -1,12 +1,12 @@
 <?php
-namespace Domain\Collection\Entity;
+namespace CASS\Domain\Collection\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\JSONSerializable;
 
 /**
- * @Entity(repositoryClass="Domain\Collection\Repository\CollectionThemeEQRepository")
+ * @Entity(repositoryClass="CASS\Domain\Collection\Repository\CollectionThemeEQRepository")
  * @Table(name="collection_theme_ids")
  */
 final class CollectionThemeEQEntity implements IdEntity, JSONSerializable

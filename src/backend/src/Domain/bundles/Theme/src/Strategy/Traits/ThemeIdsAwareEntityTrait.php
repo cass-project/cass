@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Theme\Strategy\Traits;
+namespace CASS\Domain\Theme\Strategy\Traits;
 
 trait ThemeIdsAwareEntityTrait
 {

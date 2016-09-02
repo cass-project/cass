@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Community\Parameters;
+namespace CASS\Domain\Community\Parameters;
 
 class EditCommunityParameters
 {

@@ -1,11 +1,11 @@
 <?php
-namespace Domain\Community\Tests\REST;
+namespace CASS\Domain\Community\Tests\REST;
 
-use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Community\Entity\Community;
-use Domain\Community\Tests\CommunityMiddlewareTestCase;
-use Domain\Theme\Entity\Theme;
-use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
+use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Community\Entity\Community;
+use CASS\Domain\Community\Tests\CommunityMiddlewareTestCase;
+use CASS\Domain\Theme\Entity\Theme;
+use CASS\Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 
 /**
  * @backupGlobals disabled

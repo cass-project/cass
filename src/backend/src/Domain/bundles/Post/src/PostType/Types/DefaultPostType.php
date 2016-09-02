@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Post\PostType\Types;
+namespace CASS\Domain\Post\PostType\Types;
 
 final class DefaultPostType extends AbstractPostType
 {

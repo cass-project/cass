@@ -9,7 +9,7 @@ namespace PhpUnitBootstrap
     use CASS\Application\Bootstrap\AppBuilder;
     use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
     use CASS\Util\UtilBundle;
-    use Domain\DomainBundle;
+    use CASS\Domain\DomainBundle;
 
     $app = (new AppBuilder([
         new ApplicationBundle(),

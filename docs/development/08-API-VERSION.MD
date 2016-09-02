@@ -19,7 +19,7 @@ Blacklist
 - `Backend REST API` возвращает список версий `Frontend SPA`, которые по тем или иным причинам (не по причине устаревания)
 запрещены в использованию. В основном это касается минорных версий.
 - Список blacklist-версий возвращается от Version API: `GET /backend/api/version` 
-- Список blacklist-версий хранится в `src/backend/src/Domain/config/blacklist.config.php`
+- Список blacklist-версий хранится в `src/backend/src/CASS\Domain/config/blacklist.config.php`
 
 Backend REST API
 ----------------

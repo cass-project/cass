@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Profile;
+namespace CASS\Domain\Profile;
 
-use Domain\Profile\Console\Command\ProfileCard;
+use CASS\Domain\Profile\Console\Command\ProfileCard;
 
 return [
     'php-di' => [

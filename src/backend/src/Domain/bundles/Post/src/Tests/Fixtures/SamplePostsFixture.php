@@ -1,15 +1,15 @@
 <?php
-namespace Domain\Post\Tests\Fixtures;
+namespace CASS\Domain\Post\Tests\Fixtures;
 
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
-use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
-use Domain\Post\Entity\Post;
-use Domain\Post\Parameters\CreatePostParameters;
-use Domain\Post\PostType\Types\DefaultPostType;
-use Domain\Post\Service\PostService;
-use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
+use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Collection\Tests\Fixtures\SampleCollectionsFixture;
+use CASS\Domain\Post\Entity\Post;
+use CASS\Domain\Post\Parameters\CreatePostParameters;
+use CASS\Domain\Post\PostType\Types\DefaultPostType;
+use CASS\Domain\Post\Service\PostService;
+use CASS\Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 use Zend\Expressive\Application;
 
 class SamplePostsFixture implements Fixture

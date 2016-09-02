@@ -1,14 +1,14 @@
 <?php
-namespace Domain\Collection\Events;
+namespace CASS\Domain\Collection\Events;
 
 use CASS\Application\Events\EventsBootstrapInterface;
-use Domain\Collection\Entity\Collection;
-use Domain\Collection\Entity\CollectionThemeEQEntity;
-use Domain\Collection\Repository\CollectionRepository;
-use Domain\Collection\Repository\CollectionThemeEQRepository;
-use Domain\Collection\Service\CollectionService;
-use Domain\Theme\Entity\Theme;
-use Domain\Theme\Service\ThemeService;
+use CASS\Domain\Collection\Entity\Collection;
+use CASS\Domain\Collection\Entity\CollectionThemeEQEntity;
+use CASS\Domain\Collection\Repository\CollectionRepository;
+use CASS\Domain\Collection\Repository\CollectionThemeEQRepository;
+use CASS\Domain\Collection\Service\CollectionService;
+use CASS\Domain\Theme\Entity\Theme;
+use CASS\Domain\Theme\Service\ThemeService;
 use Evenement\EventEmitterInterface;
 
 final class CollectionThemesEQEvents implements EventsBootstrapInterface

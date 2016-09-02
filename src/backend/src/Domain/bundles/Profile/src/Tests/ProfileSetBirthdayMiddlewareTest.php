@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Profile\Tests;
+namespace CASS\Domain\Profile\Tests;
 
-use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Profile\Entity\Profile;
+use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Profile\Entity\Profile;
 
 /**
  * @backupGlobals disabled

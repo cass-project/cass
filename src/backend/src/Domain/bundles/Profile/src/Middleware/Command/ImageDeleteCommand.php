@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Profile\Middleware\Command;
+namespace CASS\Domain\Profile\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Avatar\Exception\ImageServiceException;
-use Domain\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Avatar\Exception\ImageServiceException;
+use CASS\Domain\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

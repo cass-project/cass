@@ -1,13 +1,13 @@
 <?php
-namespace Domain\Feed\Middleware\Command;
+namespace CASS\Domain\Feed\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Feed\Factory\FeedSourceFactory;
-use Domain\Feed\Middleware\Request\FeedMiddlewareRequest;
-use Domain\Feed\Request\FeedRequest;
-use Domain\Feed\Search\Criteria\CriteriaFactory;
-use Domain\Feed\Service\FeedService;
-use Domain\Index\Source\Source;
+use CASS\Domain\Feed\Factory\FeedSourceFactory;
+use CASS\Domain\Feed\Middleware\Request\FeedMiddlewareRequest;
+use CASS\Domain\Feed\Request\FeedRequest;
+use CASS\Domain\Feed\Search\Criteria\CriteriaFactory;
+use CASS\Domain\Feed\Service\FeedService;
+use CASS\Domain\Index\Source\Source;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

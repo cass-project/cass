@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Index;
+namespace CASS\Domain\Index;
 
-use Domain\Index\Events\CollectionEvents;
-use Domain\Index\Events\CommunityEvents;
-use Domain\Index\Events\PostEvents;
-use Domain\Index\Events\ProfileEvents;
+use CASS\Domain\Index\Events\CollectionEvents;
+use CASS\Domain\Index\Events\CommunityEvents;
+use CASS\Domain\Index\Events\PostEvents;
+use CASS\Domain\Index\Events\ProfileEvents;
 use Evenement\EventEmitterInterface;
 
 return function(EventEmitterInterface $globalEmitter): array

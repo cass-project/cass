@@ -1,21 +1,21 @@
 <?php
-namespace Domain\Profile\Middleware;
+namespace CASS\Domain\Profile\Middleware;
 
 use CASS\Application\Service\CommandService;
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
-use Domain\Profile\Middleware\Command\CreateCommand;
-use Domain\Profile\Middleware\Command\DeleteCommand;
-use Domain\Profile\Middleware\Command\EditPersonalCommand;
-use Domain\Profile\Middleware\Command\ExpertInPutCommand;
-use Domain\Profile\Middleware\Command\GetBySIDCommand;
-use Domain\Profile\Middleware\Command\GetCommand;
-use Domain\Profile\Middleware\Command\GreetingsAsCommand;
-use Domain\Profile\Middleware\Command\ImageDeleteCommand;
-use Domain\Profile\Middleware\Command\ImageUploadCommand;
-use Domain\Profile\Middleware\Command\InterestingInPutCommand;
-use Domain\Profile\Middleware\Command\SetBirthdayCommand;
-use Domain\Profile\Middleware\Command\SetGenderCommand;
-use Domain\Profile\Middleware\Command\UnsetBirthdayCommand;
+use CASS\Domain\Profile\Middleware\Command\CreateCommand;
+use CASS\Domain\Profile\Middleware\Command\DeleteCommand;
+use CASS\Domain\Profile\Middleware\Command\EditPersonalCommand;
+use CASS\Domain\Profile\Middleware\Command\ExpertInPutCommand;
+use CASS\Domain\Profile\Middleware\Command\GetBySIDCommand;
+use CASS\Domain\Profile\Middleware\Command\GetCommand;
+use CASS\Domain\Profile\Middleware\Command\GreetingsAsCommand;
+use CASS\Domain\Profile\Middleware\Command\ImageDeleteCommand;
+use CASS\Domain\Profile\Middleware\Command\ImageUploadCommand;
+use CASS\Domain\Profile\Middleware\Command\InterestingInPutCommand;
+use CASS\Domain\Profile\Middleware\Command\SetBirthdayCommand;
+use CASS\Domain\Profile\Middleware\Command\SetGenderCommand;
+use CASS\Domain\Profile\Middleware\Command\UnsetBirthdayCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

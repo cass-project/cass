@@ -1,4 +1,4 @@
 <?php
-namespace Domain\Feed\Exception;
+namespace CASS\Domain\Feed\Exception;
 
 final class InvalidJSONParamsException extends AbstractFeedException {}

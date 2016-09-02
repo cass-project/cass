@@ -1,4 +1,4 @@
 <?php
-namespace Domain\ProfileCommunities\Exception;
+namespace CASS\Domain\ProfileCommunities\Exception;
 
 class BookmarkNotFoundException extends \Exception {}

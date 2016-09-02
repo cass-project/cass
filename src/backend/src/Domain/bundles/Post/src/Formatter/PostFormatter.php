@@ -1,12 +1,12 @@
 <?php
-namespace Domain\Post\Formatter;
+namespace CASS\Domain\Post\Formatter;
 
-use Domain\Attachment\Entity\Attachment;
-use Domain\Attachment\Formatter\AttachmentFormatter;
-use Domain\Attachment\Service\AttachmentService;
-use Domain\Post\Entity\Post;
-use Domain\Post\PostType\PostTypeFactory;
-use Domain\Profile\Service\ProfileService;
+use CASS\Domain\Attachment\Entity\Attachment;
+use CASS\Domain\Attachment\Formatter\AttachmentFormatter;
+use CASS\Domain\Attachment\Service\AttachmentService;
+use CASS\Domain\Post\Entity\Post;
+use CASS\Domain\Post\PostType\PostTypeFactory;
+use CASS\Domain\Profile\Service\ProfileService;
 
 final class PostFormatter
 {

@@ -1,18 +1,18 @@
 <?php
-namespace Domain\Auth\Service;
+namespace CASS\Domain\Auth\Service;
 
-use Domain\Account\Service\AccountService;
-use Domain\Auth\Middleware\AuthStrategy\SessionStrategy;
-use Domain\Auth\Parameters\SignInParameters;
-use Domain\Auth\Parameters\SignUpParameters;
-use Domain\Auth\Exception\InvalidCredentialsException;
-use Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
-use Domain\Auth\Service\AuthService\SignUpValidation\HasAllRequiredFields;
-use Domain\Auth\Service\AuthService\SignUpValidation\HasSameAccount;
-use Domain\Auth\Service\AuthService\SignUpValidation\IsEmailValid;
-use Domain\Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
-use Domain\Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
-use Domain\Account\Entity\Account;
+use CASS\Domain\Account\Service\AccountService;
+use CASS\Domain\Auth\Middleware\AuthStrategy\SessionStrategy;
+use CASS\Domain\Auth\Parameters\SignInParameters;
+use CASS\Domain\Auth\Parameters\SignUpParameters;
+use CASS\Domain\Auth\Exception\InvalidCredentialsException;
+use CASS\Domain\Auth\Service\AuthService\OAuth2\RegistrationRequest;
+use CASS\Domain\Auth\Service\AuthService\SignUpValidation\HasAllRequiredFields;
+use CASS\Domain\Auth\Service\AuthService\SignUpValidation\HasSameAccount;
+use CASS\Domain\Auth\Service\AuthService\SignUpValidation\IsEmailValid;
+use CASS\Domain\Auth\Service\AuthService\SignUpValidation\PasswordHasRequiredLength;
+use CASS\Domain\Auth\Service\AuthService\SignUpValidation\Validator as SignUpValidator;
+use CASS\Domain\Account\Entity\Account;
 
 class AuthService
 {

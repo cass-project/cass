@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Account\Tests;
+namespace CASS\Domain\Account\Tests;
 
 use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;

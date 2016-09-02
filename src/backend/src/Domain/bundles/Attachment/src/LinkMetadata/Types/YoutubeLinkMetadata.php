@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Attachment\LinkMetadata\Types;
+namespace CASS\Domain\Attachment\LinkMetadata\Types;
 
-use Domain\Attachment\LinkMetadata\LinkMetadata;
+use CASS\Domain\Attachment\LinkMetadata\LinkMetadata;
 
 final class YoutubeLinkMetadata implements LinkMetadata
 {

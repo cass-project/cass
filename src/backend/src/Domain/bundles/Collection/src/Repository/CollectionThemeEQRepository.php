@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Collection\Repository;
+namespace CASS\Domain\Collection\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Domain\Collection\Entity\CollectionThemeEQEntity;
+use CASS\Domain\Collection\Entity\CollectionThemeEQEntity;
 
 final class CollectionThemeEQRepository extends EntityRepository
 {

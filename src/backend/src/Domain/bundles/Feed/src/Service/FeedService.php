@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Feed\Service;
+namespace CASS\Domain\Feed\Service;
 
 use CASS\Application\Exception\NotImplementedException;
-use Domain\Feed\Request\FeedRequest;
-use Domain\Feed\Search\Stream\StreamFactory;
-use Domain\Index\Source\Source;
+use CASS\Domain\Feed\Request\FeedRequest;
+use CASS\Domain\Feed\Search\Stream\StreamFactory;
+use CASS\Domain\Index\Source\Source;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
 use MongoDB\Database;

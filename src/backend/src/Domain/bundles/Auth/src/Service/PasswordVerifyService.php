@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Auth\Service;
+namespace CASS\Domain\Auth\Service;
 
-use Domain\Account\Entity\Account;
+use CASS\Domain\Account\Entity\Account;
 
 class PasswordVerifyService
 {

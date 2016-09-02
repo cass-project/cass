@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Avatar\Image;
+namespace CASS\Domain\Avatar\Image;
 
 use CASS\Util\GenerateRandomString;
 use CASS\Util\JSONSerializable;

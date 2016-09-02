@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Auth\Exception;
+namespace CASS\Domain\Auth\Exception;
 
 class InvalidCredentialsException extends \Exception
 {

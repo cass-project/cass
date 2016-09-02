@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Account\Command;
+namespace CASS\Domain\Account\Command;
 
-use Domain\Account\Scripts\DeleteAccountScript;
-use Domain\Account\Service\AccountService;
+use CASS\Domain\Account\Scripts\DeleteAccountScript;
+use CASS\Domain\Account\Service\AccountService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

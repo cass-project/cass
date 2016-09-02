@@ -1,8 +1,8 @@
 <?php
-namespace Domain\IM\Query\Criteria\SeekCriteria;
+namespace CASS\Domain\IM\Query\Criteria\SeekCriteria;
 
-use Domain\IM\Exception\Query\InvalidCriteriaParamsException;
-use Domain\IM\Query\Criteria\Criteria;
+use CASS\Domain\IM\Exception\Query\InvalidCriteriaParamsException;
+use CASS\Domain\IM\Query\Criteria\Criteria;
 
 final class SeekCriteria implements Criteria
 {

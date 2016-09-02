@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Avatar\Strategy;
+namespace CASS\Domain\Avatar\Strategy;
 
-use Domain\Avatar\Exception\ImageTooSmallException;
-use Domain\Avatar\Exception\InvalidRatioException;
+use CASS\Domain\Avatar\Exception\ImageTooSmallException;
+use CASS\Domain\Avatar\Exception\InvalidRatioException;
 use Intervention\Image\Image;
 
 abstract class SquareImageStrategy implements ImageStrategy

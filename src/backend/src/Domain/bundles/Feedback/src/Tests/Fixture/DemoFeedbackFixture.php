@@ -1,12 +1,12 @@
 <?php
 
-namespace Domain\Feedback\Tests\Fixture;
+namespace CASS\Domain\Feedback\Tests\Fixture;
 
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
-use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Feedback\Entity\Feedback;
-use Domain\Feedback\FeedbackType\Types\FTCommonQuestion;
+use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Feedback\Entity\Feedback;
+use CASS\Domain\Feedback\FeedbackType\Types\FTCommonQuestion;
 use Zend\Expressive\Application;
 
 class DemoFeedbackFixture implements Fixture

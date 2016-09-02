@@ -1,7 +1,7 @@
 <?php
-namespace Domain\IM\Query\Options\MarkAsReadOption;
+namespace CASS\Domain\IM\Query\Options\MarkAsReadOption;
 
-use Domain\IM\Query\Options\Option;
+use CASS\Domain\IM\Query\Options\Option;
 
 final class MarkAsReadOption implements Option
 {

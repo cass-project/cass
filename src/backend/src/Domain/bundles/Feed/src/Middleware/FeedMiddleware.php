@@ -1,18 +1,18 @@
 <?php
-namespace Domain\Feed\Middleware;
+namespace CASS\Domain\Feed\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Service\CommandService;
-use Domain\Feed\Exception\AbstractFeedException;
-use Domain\Feed\Middleware\Command\CollectionCommand;
-use Domain\Feed\Middleware\Command\CommunityCommand;
-use Domain\Feed\Middleware\Command\ProfileCommand;
-use Domain\Feed\Middleware\Command\PublicCommunitiesCommand;
-use Domain\Feed\Middleware\Command\PublicContentCommand;
-use Domain\Feed\Middleware\Command\PublicExpertsCommand;
-use Domain\Feed\Middleware\Command\PublicProfilesCommand;
-use Domain\Feed\Middleware\Command\PublicDiscussionsCommand;
-use Domain\Feed\Middleware\Command\PublicCollectionsCommand;
+use CASS\Domain\Feed\Exception\AbstractFeedException;
+use CASS\Domain\Feed\Middleware\Command\CollectionCommand;
+use CASS\Domain\Feed\Middleware\Command\CommunityCommand;
+use CASS\Domain\Feed\Middleware\Command\ProfileCommand;
+use CASS\Domain\Feed\Middleware\Command\PublicCommunitiesCommand;
+use CASS\Domain\Feed\Middleware\Command\PublicContentCommand;
+use CASS\Domain\Feed\Middleware\Command\PublicExpertsCommand;
+use CASS\Domain\Feed\Middleware\Command\PublicProfilesCommand;
+use CASS\Domain\Feed\Middleware\Command\PublicDiscussionsCommand;
+use CASS\Domain\Feed\Middleware\Command\PublicCollectionsCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;

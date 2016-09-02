@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Post;
+namespace CASS\Domain\Post;
 
-use Domain\Account\Middleware\AccountAppAccessMiddleware;
-use Domain\Account\Middleware\AccountMiddleware;
+use CASS\Domain\Account\Middleware\AccountAppAccessMiddleware;
+use CASS\Domain\Account\Middleware\AccountMiddleware;
 
 return [
     'auth' => [

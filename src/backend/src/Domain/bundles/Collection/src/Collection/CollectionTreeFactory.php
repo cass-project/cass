@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Collection\Collection;
+namespace CASS\Domain\Collection\Collection;
 
-use Domain\Collection\Collection\CollectionTree\MutableCollectionTree;
+use CASS\Domain\Collection\Collection\CollectionTree\MutableCollectionTree;
 
 class CollectionTreeFactory
 {

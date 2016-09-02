@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Attachment\Exception;
+namespace CASS\Domain\Attachment\Exception;
 
 class URLRestrictedException extends InvalidURLException
 {

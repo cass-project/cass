@@ -1,15 +1,15 @@
 <?php
-namespace Domain\Auth\Service;
+namespace CASS\Domain\Auth\Service;
 
-use Domain\Auth\Exception\NotAuthenticatedException;
-use Domain\Auth\Middleware\AuthStrategy\Strategy;
-use Domain\Account\Entity\Account;
-use Domain\Account\Exception\AccountNotFoundException;
-use Domain\Account\Repository\AccountRepository;
+use CASS\Domain\Auth\Exception\NotAuthenticatedException;
+use CASS\Domain\Auth\Middleware\AuthStrategy\Strategy;
+use CASS\Domain\Account\Entity\Account;
+use CASS\Domain\Account\Exception\AccountNotFoundException;
+use CASS\Domain\Account\Repository\AccountRepository;
 
 class CurrentAccountService
 {
-    /** @var \Domain\Account\Entity\Account */
+    /** @var \CASS\Domain\Account\Entity\Account */
     private $account;
 
     /** @var AccountRepository */

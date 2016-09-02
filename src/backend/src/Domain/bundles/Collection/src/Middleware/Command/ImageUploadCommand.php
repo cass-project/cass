@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Collection\Middleware\Command;
+namespace CASS\Domain\Collection\Middleware\Command;
 
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Avatar\Exception\ImageServiceException;
-use Domain\Avatar\Middleware\Request\UploadImageRequest;
-use Domain\Collection\Exception\CollectionNotFoundException;
+use CASS\Domain\Avatar\Exception\ImageServiceException;
+use CASS\Domain\Avatar\Middleware\Request\UploadImageRequest;
+use CASS\Domain\Collection\Exception\CollectionNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Community\Feature\Features;
+namespace CASS\Domain\Community\Feature\Features;
 
-use Domain\Community\Entity\Community;
+use CASS\Domain\Community\Entity\Community;
 
 final class CollectionsFeature extends AbstractFeature
 {

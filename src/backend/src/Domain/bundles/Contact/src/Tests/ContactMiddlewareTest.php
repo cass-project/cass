@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Contact\Tests;
+namespace CASS\Domain\Contact\Tests;
 
 use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;
-use Domain\Contact\Tests\Fixture\DemoContactFixture;
+use CASS\Domain\Contact\Tests\Fixture\DemoContactFixture;
 
 /**
  * @backupGlobals disabled

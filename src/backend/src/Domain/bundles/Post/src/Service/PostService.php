@@ -1,15 +1,15 @@
 <?php
-namespace Domain\Post\Service;
+namespace CASS\Domain\Post\Service;
 
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareService;
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareTrait;
-use Domain\Collection\Service\CollectionService;
-use Domain\Post\Entity\Post;
-use Domain\Post\Parameters\CreatePostParameters;
-use Domain\Post\Parameters\EditPostParameters;
-use Domain\Post\PostType\PostTypeFactory;
-use Domain\Post\Repository\PostRepository;
-use Domain\Profile\Service\ProfileService;
+use CASS\Domain\Collection\Service\CollectionService;
+use CASS\Domain\Post\Entity\Post;
+use CASS\Domain\Post\Parameters\CreatePostParameters;
+use CASS\Domain\Post\Parameters\EditPostParameters;
+use CASS\Domain\Post\PostType\PostTypeFactory;
+use CASS\Domain\Post\Repository\PostRepository;
+use CASS\Domain\Profile\Service\ProfileService;
 
 class PostService implements EventEmitterAwareService
 {

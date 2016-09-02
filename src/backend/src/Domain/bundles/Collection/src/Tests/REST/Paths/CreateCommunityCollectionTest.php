@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Collection\Tests\REST\Paths;
+namespace CASS\Domain\Collection\Tests\REST\Paths;
 
-use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Collection\Tests\REST\CollectionRESTTestCase;
-use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
-use Domain\Theme\Tests\Fixtures\SampleThemesFixture;
+use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Collection\Tests\REST\CollectionRESTTestCase;
+use CASS\Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
+use CASS\Domain\Theme\Tests\Fixtures\SampleThemesFixture;
 
 /**
  * @backupGlobals disabled

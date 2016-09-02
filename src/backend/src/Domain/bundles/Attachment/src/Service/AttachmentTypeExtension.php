@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Attachment\Service;
+namespace CASS\Domain\Attachment\Service;
 
-use Domain\Attachment\Entity\Attachment;
+use CASS\Domain\Attachment\Entity\Attachment;
 
 interface AttachmentTypeExtension
 {

@@ -1,12 +1,12 @@
 <?php
-namespace Domain\Feedback\Entity;
+namespace CASS\Domain\Feedback\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\JSONSerializable;
 
 /**
- * @Entity(repositoryClass="Domain\Feedback\Repository\FeedbackResponseRepository")
+ * @Entity(repositoryClass="CASS\Domain\Feedback\Repository\FeedbackResponseRepository")
  * @Table(name="feedback_response")
  */
 class FeedbackResponse implements IdEntity, JSONSerializable
@@ -14,7 +14,7 @@ class FeedbackResponse implements IdEntity, JSONSerializable
     use IdTrait;
 
     /**
-     * @OneToOne(targetEntity="Domain\Feedback\Entity\Feedback")
+     * @OneToOne(targetEntity="CASS\Domain\Feedback\Entity\Feedback")
      * @JoinColumn(name="feedback_id", referencedColumnName="id")
      * @var Feedback
      */

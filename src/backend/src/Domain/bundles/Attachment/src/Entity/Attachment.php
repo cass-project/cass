@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Attachment\Entity;
+namespace CASS\Domain\Attachment\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
@@ -8,7 +8,7 @@ use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
 use CASS\Util\JSONSerializable;
 
 /**
- * @Entity(repositoryClass="Domain\Attachment\Repository\AttachmentRepository")
+ * @Entity(repositoryClass="CASS\Domain\Attachment\Repository\AttachmentRepository")
  * @Table(name="attachment")
  */
 class Attachment implements JSONSerializable, IdEntity, SIDEntity

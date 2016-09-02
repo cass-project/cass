@@ -1,8 +1,8 @@
 <?php
-namespace Domain\IM\Service;
+namespace CASS\Domain\IM\Service;
 
-use Domain\IM\Service\LastMessageService\LastMessageServiceQuery;
-use Domain\IM\Service\LastMessageService\LastMessageServiceResult;
+use CASS\Domain\IM\Service\LastMessageService\LastMessageServiceQuery;
+use CASS\Domain\IM\Service\LastMessageService\LastMessageServiceResult;
 
 final class LastMessageService
 {

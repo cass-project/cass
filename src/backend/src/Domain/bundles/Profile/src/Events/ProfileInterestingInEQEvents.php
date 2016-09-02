@@ -1,14 +1,14 @@
 <?php
-namespace Domain\Profile\Events;
+namespace CASS\Domain\Profile\Events;
 
 use CASS\Application\Events\EventsBootstrapInterface;
-use Domain\Profile\Entity\Profile;
-use Domain\Profile\Entity\ProfileInterestingInEQ;
-use Domain\Profile\Repository\ProfileInterestingInEQRepository;
-use Domain\Profile\Repository\ProfileRepository;
-use Domain\Profile\Service\ProfileService;
-use Domain\Theme\Entity\Theme;
-use Domain\Theme\Service\ThemeService;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Profile\Entity\ProfileInterestingInEQ;
+use CASS\Domain\Profile\Repository\ProfileInterestingInEQRepository;
+use CASS\Domain\Profile\Repository\ProfileRepository;
+use CASS\Domain\Profile\Service\ProfileService;
+use CASS\Domain\Theme\Entity\Theme;
+use CASS\Domain\Theme\Service\ThemeService;
 use Evenement\EventEmitterInterface;
 
 final class ProfileInterestingInEQEvents implements EventsBootstrapInterface

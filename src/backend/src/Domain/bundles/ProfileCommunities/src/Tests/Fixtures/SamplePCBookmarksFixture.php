@@ -1,12 +1,12 @@
 <?php
-namespace Domain\ProfileCommunities\Tests\Fixtures;
+namespace CASS\Domain\ProfileCommunities\Tests\Fixtures;
 
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
-use Domain\Account\Tests\Fixtures\DemoAccountFixture;
-use Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
-use Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
-use Domain\ProfileCommunities\Service\ProfileCommunitiesService;
+use CASS\Domain\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Community\Tests\Fixtures\SampleCommunitiesFixture;
+use CASS\Domain\ProfileCommunities\Entity\ProfileCommunityEQ;
+use CASS\Domain\ProfileCommunities\Service\ProfileCommunitiesService;
 use Zend\Expressive\Application;
 
 class SamplePCBookmarksFixture implements Fixture

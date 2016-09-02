@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Theme\Frontline;
+namespace CASS\Domain\Theme\Frontline;
 
 use CASS\Application\Bundles\Frontline\FrontlineScript;
-use Domain\Theme\Entity\Theme;
-use Domain\Theme\Service\ThemeService;
+use CASS\Domain\Theme\Entity\Theme;
+use CASS\Domain\Theme\Service\ThemeService;
 
 class ThemeScript implements FrontlineScript
 {

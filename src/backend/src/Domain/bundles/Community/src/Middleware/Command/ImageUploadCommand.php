@@ -1,10 +1,10 @@
 <?php
-namespace Domain\Community\Middleware\Command;
+namespace CASS\Domain\Community\Middleware\Command;
 
+use CASS\Domain\Avatar\Exception\ImageServiceException;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Avatar\Exception\ImageServiceException;
-use Domain\Avatar\Middleware\Request\UploadImageRequest;
-use Domain\Community\Exception\CommunityNotFoundException;
+use CASS\Domain\Avatar\Middleware\Request\UploadImageRequest;
+use CASS\Domain\Community\Exception\CommunityNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

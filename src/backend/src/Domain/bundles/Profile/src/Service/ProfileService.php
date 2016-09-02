@@ -1,24 +1,24 @@
 <?php
-namespace Domain\Profile\Service;
+namespace CASS\Domain\Profile\Service;
 
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareService;
 use CASS\Application\Service\EventEmitterAware\EventEmitterAwareTrait;
-use Domain\Account\Entity\Account;
-use Domain\Account\Service\AccountService;
-use Domain\Auth\Service\CurrentAccountService;
-use Domain\Avatar\Image\ImageCollection;
-use Domain\Avatar\Parameters\UploadImageParameters;
-use Domain\Avatar\Service\AvatarService;
-use Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
-use Domain\Collection\Service\CollectionService;
-use Domain\Profile\Entity\Profile;
-use Domain\Profile\Entity\Profile\Gender\Gender;
-use Domain\Profile\Entity\Profile\Greetings\Greetings;
-use Domain\Profile\Exception\LastProfileException;
-use Domain\Profile\Exception\MaxProfilesReachedException;
-use Domain\Profile\Parameters\EditPersonalParameters;
-use Domain\Profile\Repository\ProfileRepository;
-use Domain\Profile\Image\ProfileImageStrategy;
+use CASS\Domain\Account\Entity\Account;
+use CASS\Domain\Account\Service\AccountService;
+use CASS\Domain\Auth\Service\CurrentAccountService;
+use CASS\Domain\Avatar\Image\ImageCollection;
+use CASS\Domain\Avatar\Parameters\UploadImageParameters;
+use CASS\Domain\Avatar\Service\AvatarService;
+use CASS\Domain\Collection\Collection\CollectionTree\ImmutableCollectionTree;
+use CASS\Domain\Collection\Service\CollectionService;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Profile\Entity\Profile\Gender\Gender;
+use CASS\Domain\Profile\Entity\Profile\Greetings\Greetings;
+use CASS\Domain\Profile\Exception\LastProfileException;
+use CASS\Domain\Profile\Exception\MaxProfilesReachedException;
+use CASS\Domain\Profile\Parameters\EditPersonalParameters;
+use CASS\Domain\Profile\Repository\ProfileRepository;
+use CASS\Domain\Profile\Image\ProfileImageStrategy;
 use League\Flysystem\FilesystemInterface;
 
 class ProfileService implements EventEmitterAwareService

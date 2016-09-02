@@ -1,6 +1,6 @@
 <?php
-namespace Domain\Profile\Tests;
-use Domain\Profile\Tests\Fixtures\DemoProfileFixture;
+namespace CASS\Domain\Profile\Tests;
+use CASS\Domain\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**
  * @backupGlobals disabled

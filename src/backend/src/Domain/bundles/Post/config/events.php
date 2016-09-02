@@ -1,7 +1,7 @@
 <?php
-namespace Domain\Post;
+namespace CASS\Domain\Post;
 
-use Domain\Post\Events\LinkAttachmentsEvents;
+use CASS\Domain\Post\Events\LinkAttachmentsEvents;
 use Evenement\EventEmitterInterface;
 
 return function(EventEmitterInterface $globalEmitter): array {

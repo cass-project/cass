@@ -1,7 +1,7 @@
 <?php
-namespace Domain\ProfileCommunities;
+namespace CASS\Domain\ProfileCommunities;
 
-use Domain\ProfileCommunities\Events\CommunityEvents;
+use CASS\Domain\ProfileCommunities\Events\CommunityEvents;
 use Evenement\EventEmitterInterface;
 
 return function(EventEmitterInterface $globalEmitter): array

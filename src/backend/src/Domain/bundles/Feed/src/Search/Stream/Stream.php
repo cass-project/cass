@@ -1,9 +1,9 @@
 <?php
-namespace Domain\Feed\Search\Stream;
+namespace CASS\Domain\Feed\Search\Stream;
 
-use Domain\Feed\Search\Criteria\CriteriaManager;
+use CASS\Domain\Feed\Search\Criteria\CriteriaManager;
 
-use Domain\Index\Source\Source;
+use CASS\Domain\Index\Source\Source;
 use MongoDB\Collection;
 use MongoDB\Model\BSONDocument;
 

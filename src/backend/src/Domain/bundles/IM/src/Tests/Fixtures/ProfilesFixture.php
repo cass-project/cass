@@ -1,11 +1,11 @@
 <?php
-namespace Domain\IM\Tests\Fixtures;
+namespace CASS\Domain\IM\Tests\Fixtures;
 
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use CASS\Util\GenerateRandomString;
 use Doctrine\ORM\EntityManager;
-use Domain\Account\Entity\Account;
-use Domain\Account\Service\AccountService;
+use CASS\Domain\Account\Entity\Account;
+use CASS\Domain\Account\Service\AccountService;
 use Zend\Expressive\Application;
 
 final class ProfilesFixture implements Fixture

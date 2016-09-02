@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Attachment\Service;
+namespace CASS\Domain\Attachment\Service;
 
 interface AttachmentTypeDetector
 {

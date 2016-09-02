@@ -1,11 +1,11 @@
 <?php
-namespace Domain\Profile\Entity;
+namespace CASS\Domain\Profile\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\JSONSerializable;
 /**
- * @Entity(repositoryClass="Domain\Profile\Repository\ProfileInterestingInEQRepository")
+ * @Entity(repositoryClass="CASS\Domain\Profile\Repository\ProfileInterestingInEQRepository")
  * @Table(name="profile_interesting_in_theme_ids")
  */
 

@@ -1,5 +1,5 @@
 <?php
-namespace Domain\Profile;
+namespace CASS\Domain\Profile;
 
 use function DI\object;
 use function DI\factory;
@@ -7,14 +7,14 @@ use function DI\get;
 
 use DI\Container;
 use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
-use Domain\Profile\Entity\Profile;
-use Domain\Profile\Entity\Profile\Greetings;
-use Domain\Profile\Entity\ProfileExpertInEQ;
-use Domain\Profile\Entity\ProfileInterestingInEQ;
-use Domain\Profile\Repository\ProfileExpertInEQRepository;
-use Domain\Profile\Repository\ProfileInterestingInEQRepository;
-use Domain\Profile\Repository\ProfileRepository;
-use Domain\Profile\Service\ProfileService;
+use CASS\Domain\Profile\Entity\Profile;
+use CASS\Domain\Profile\Entity\Profile\Greetings;
+use CASS\Domain\Profile\Entity\ProfileExpertInEQ;
+use CASS\Domain\Profile\Entity\ProfileInterestingInEQ;
+use CASS\Domain\Profile\Repository\ProfileExpertInEQRepository;
+use CASS\Domain\Profile\Repository\ProfileInterestingInEQRepository;
+use CASS\Domain\Profile\Repository\ProfileRepository;
+use CASS\Domain\Profile\Service\ProfileService;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Memory\MemoryAdapter;

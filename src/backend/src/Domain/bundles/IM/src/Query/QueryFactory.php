@@ -1,11 +1,11 @@
 <?php
-namespace Domain\IM\Query;
+namespace CASS\Domain\IM\Query;
 
-use Domain\IM\Query\Options\OptionsFactory;
-use Domain\IM\Query\Criteria\CriteriaFactory;
-use Domain\IM\Query\Criteria\CriteriaManager;
-use Domain\IM\Query\Options\OptionsManager;
-use Domain\IM\Query\Source\Source;
+use CASS\Domain\IM\Query\Options\OptionsFactory;
+use CASS\Domain\IM\Query\Criteria\CriteriaFactory;
+use CASS\Domain\IM\Query\Criteria\CriteriaManager;
+use CASS\Domain\IM\Query\Options\OptionsManager;
+use CASS\Domain\IM\Query\Source\Source;
 
 final class QueryFactory
 {

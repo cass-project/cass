@@ -1,15 +1,15 @@
 <?php
-namespace Domain\Index\Service\ContentTypeIdentifier;
+namespace CASS\Domain\Index\Service\ContentTypeIdentifier;
 
-use Domain\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
-use Domain\IM\Service\ContentTypeIdentifier\ContentTypeIdentifierEntity;
-use Domain\Post\Entity\Post;
-use Domain\Attachment\LinkMetadata\Types\ImageLinkMetadata;
-use Domain\Attachment\LinkMetadata\Types\PageLinkMetadata;
-use Domain\Attachment\LinkMetadata\Types\UnknownLinkMetadata;
-use Domain\Attachment\LinkMetadata\Types\WebmLinkMetadata;
-use Domain\Attachment\LinkMetadata\Types\YoutubeLinkMetadata;
-use Domain\Attachment\Service\AttachmentService;
+use CASS\Domain\Feed\Search\Criteria\Criteria\ContentTypeCriteria;
+use CASS\Domain\IM\Service\ContentTypeIdentifier\ContentTypeIdentifierEntity;
+use CASS\Domain\Post\Entity\Post;
+use CASS\Domain\Attachment\LinkMetadata\Types\ImageLinkMetadata;
+use CASS\Domain\Attachment\LinkMetadata\Types\PageLinkMetadata;
+use CASS\Domain\Attachment\LinkMetadata\Types\UnknownLinkMetadata;
+use CASS\Domain\Attachment\LinkMetadata\Types\WebmLinkMetadata;
+use CASS\Domain\Attachment\LinkMetadata\Types\YoutubeLinkMetadata;
+use CASS\Domain\Attachment\Service\AttachmentService;
 
 final class ContentTypeIdentifier
 {

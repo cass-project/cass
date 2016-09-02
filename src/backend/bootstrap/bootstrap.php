@@ -5,6 +5,6 @@ require __DIR__ . '/../vendor/autoload.php';
 
 return (new \CASS\Application\Bootstrap\AppBuilder([
     new \CASS\Application\ApplicationBundle(),
-    new \Domain\DomainBundle(),
+    new \CASS\Domain\DomainBundle(),
     new \CASS\Util\UtilBundle(),
 ]))->build();

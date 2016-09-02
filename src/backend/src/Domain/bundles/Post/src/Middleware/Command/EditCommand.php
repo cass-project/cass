@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Post\Middleware\Command;
+namespace CASS\Domain\Post\Middleware\Command;
  
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
-use Domain\Post\Middleware\Request\EditPostRequest;
+use CASS\Domain\Post\Middleware\Request\EditPostRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

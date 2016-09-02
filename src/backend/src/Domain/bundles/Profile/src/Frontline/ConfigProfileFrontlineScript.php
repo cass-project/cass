@@ -1,8 +1,8 @@
 <?php
-namespace Domain\Profile\Frontline;
+namespace CASS\Domain\Profile\Frontline;
 
 use CASS\Application\Bundles\Frontline\FrontlineScript;
-use Domain\Profile\Service\ProfileService;
+use CASS\Domain\Profile\Service\ProfileService;
 
 class ConfigProfileFrontlineScript implements FrontlineScript
 {

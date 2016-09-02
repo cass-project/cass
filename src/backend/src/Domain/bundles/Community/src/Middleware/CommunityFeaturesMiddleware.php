@@ -1,11 +1,11 @@
 <?php
-namespace Domain\Community\Middleware;
+namespace CASS\Domain\Community\Middleware;
 
 use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Application\Service\CommandService;
-use Domain\Community\Middleware\Command\Feature\ActivateFeatureCommand;
-use Domain\Community\Middleware\Command\Feature\DeactivateFeatureCommand;
-use Domain\Community\Middleware\Command\Feature\IsFeatureActivatedCommand;
+use CASS\Domain\Community\Middleware\Command\Feature\ActivateFeatureCommand;
+use CASS\Domain\Community\Middleware\Command\Feature\DeactivateFeatureCommand;
+use CASS\Domain\Community\Middleware\Command\Feature\IsFeatureActivatedCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;

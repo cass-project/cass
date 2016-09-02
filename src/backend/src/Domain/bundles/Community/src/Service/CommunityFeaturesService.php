@@ -1,12 +1,12 @@
 <?php
-namespace Domain\Community\Service;
+namespace CASS\Domain\Community\Service;
 
 use CASS\Application\Exception\NotImplementedException;
-use Domain\Community\Entity\Community;
-use Domain\Community\Exception\FeatureIsActivatedException;
-use Domain\Community\Exception\FeatureIsNotActivatedException;
-use Domain\Community\Feature\FeaturesFactory;
-use Domain\Community\Repository\CommunityRepository;
+use CASS\Domain\Community\Entity\Community;
+use CASS\Domain\Community\Exception\FeatureIsActivatedException;
+use CASS\Domain\Community\Exception\FeatureIsNotActivatedException;
+use CASS\Domain\Community\Feature\FeaturesFactory;
+use CASS\Domain\Community\Repository\CommunityRepository;
 
 class CommunityFeaturesService
 {

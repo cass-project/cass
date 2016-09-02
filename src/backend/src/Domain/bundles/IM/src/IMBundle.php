@@ -1,5 +1,5 @@
 <?php
-namespace Domain\IM;
+namespace CASS\Domain\IM;
 
 use CASS\Application\Bundle\GenericBundle;
 
