@@ -77,6 +77,16 @@ class PostService implements EventEmitterAwareService
         return $post;
     }
 
+    public function replaceDateCreatedOn(int $postId, \DateTime $newDate): Post
+    {
+        $post = $this->getPostById($postId);
+        $post->replaceDateCreatedOn($newDate);
+
+        $this->postRepository->savePost($post);
+
+        return $post;
+    }
+
     public function getPostById(int $postId): Post
     {
         return $this->postRepository->getPost($postId);

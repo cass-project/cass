@@ -125,6 +125,13 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEn
         return $this->dateCreatedOn;
     }
 
+    public function replaceDateCreatedOn(\DateTime $newDate): self
+    {
+        $this->dateCreatedOn = $newDate;
+
+        return $this;
+    }
+
     public function setContent(string $content): self
     {
         $this->content = $content;

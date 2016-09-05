@@ -214,6 +214,7 @@ final class DemoFixture
 
         $this->collectionService->editThemeIds($collection->getId(), $json['themeIds']);
         $post = $this->postService->createPost($parameters);
+        $post = $this->postService->replaceDateCreatedOn($post->getId());
         $this->collectionService->editThemeIds($collection->getId(), []);
 
         return $post;
@@ -221,6 +222,8 @@ final class DemoFixture
 
     private function createPostParameters(Profile $profile, Collection $collection, array $json): CreatePostParameters
     {
+        $dateCreatedOn = \DateTime::createFromFormat('Y-m-d H:i:s', $json['createdOn']);
+
         switch((int) $json['typeId']) {
             default:
                 throw new \Exception(sprintf('Unknown type_id `%s`', $json['type_id']));
@@ -230,6 +233,7 @@ final class DemoFixture
                     DefaultPostType::CODE_INT,
                     $profile->getId(),
                     $collection->getId(),
+                    $dateCreatedOn,
                     $json['description'],
                     []
                 );
@@ -309,6 +313,7 @@ final class DemoFixture
                     DefaultPostType::CODE_INT,
                     $profile->getId(),
                     $collection->getId(),
+                    $dateCreatedOn,
                     $json['description'] ?? '',
                     [$linkAttachment->getId()]
                 );
@@ -381,6 +386,7 @@ final class DemoFixture
                     DefaultPostType::CODE_INT,
                     $profile->getId(),
                     $collection->getId(),
+                    $dateCreatedOn,
                     $json['description'] ?? '',
                     [$linkAttachment->getId()]
                 );
