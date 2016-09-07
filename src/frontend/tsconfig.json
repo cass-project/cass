@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "target": "es5"
+  },
+  "ignoreDiagnostics": [
+    2403,
+    2300,
+    2374,
+    2375
+  ]
+}

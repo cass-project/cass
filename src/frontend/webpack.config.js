@@ -11,7 +11,7 @@ WebpackConfigBuilder.prototype = {
     return {
       entry: {
         main: './src/app/frontend-app/app.ts',
-        feedback: './src/app/feedback-app/index.ts'
+        // feedback: './src/app/feedback-app/index.ts'
       },
       output: {
         filename: '[name].js',
@@ -33,21 +33,6 @@ WebpackConfigBuilder.prototype = {
           {
             test: /\.ts$/,
             loader: 'ts-loader',
-            query: {
-              'compilerOptions': {
-                'module': 'commonjs',
-                'emitDecoratorMetadata': true,
-                'experimentalDecorators': true,
-                'sourceMap': true,
-                'target': 'es5',
-              },
-              'ignoreDiagnostics': [
-                2403, // 2403 -> Subsequent variable declarations
-                2300, // 2300 -> Duplicate identifier
-                2374, // 2374 -> Duplicate number index signature
-                2375, // 2375 -> Duplicate string index signature
-              ]
-            },
             exclude: [
               /\.(spec|e2e)\.ts$/,
               /node_modules\/(?!(ng2-.+))/

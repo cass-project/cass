@@ -41,7 +41,7 @@ sudo pecl install mongodb
 # UPDATE NPM
 # ##########
 sudo npm install -g n
-sudo n 5.11.1
+sudo n latest
 
 # #####
 # MYSQL
