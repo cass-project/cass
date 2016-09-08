@@ -1,6 +1,4 @@
 import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router';
-
 import {ProfileImage} from "../../../../profile/component/Elements/ProfileImage/index";
 import {ContactEntity} from "../../../../contact/definitions/entity/Contact";
 import {ContactService} from "../../../../contact/service/ContactService";
@@ -12,7 +10,6 @@ import {ContactService} from "../../../../contact/service/ContactService";
         require('./style.shadow.scss')
     ],
     directives:[
-        ROUTER_DIRECTIVES,
         ProfileImage
     ]
 })

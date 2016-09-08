@@ -1,6 +1,5 @@
 // Daily reminder: https://docs.google.com/document/d/13-LUm1QvOff2631tHz6C4goIHuMzma2_1_PFiLryoIs/edit
 
-import {RouteDefinition} from "@angular/router";
 
 export class Module
 {
@@ -10,7 +9,7 @@ export class Module
         this.definition = definition;
     }
 
-    decorate(appComponent: ComponentDefinition, routeDefinitions: RouteDefinition[]) {
+    decorate(appComponent: ComponentDefinition) {
         if(! appComponent.providers) {
             appComponent.providers = [];
         }
@@ -22,12 +21,6 @@ export class Module
         appComponent.providers.push(this.getRESTServices());
         appComponent.providers.push(this.getProviders());
         appComponent.directives.push(this.getDirectives());
-        
-        if(this.getRoutes().length) {
-            for(let route of this.getRoutes()) {
-                routeDefinitions.push(route);
-            }
-        }
     }
 
     getProviders(): Array<any> {
@@ -42,9 +35,6 @@ export class Module
         return this.definition.directives || [];
     }
 
-    getRoutes(): RouteDefinition[] {
-        return this.definition.routes || [];
-    }
 }
 
 interface ModuleDefinition {
@@ -52,7 +42,6 @@ interface ModuleDefinition {
     RESTServices?: Array<any>;
     providers?: Array<any>;
     directives?: Array<any>;
-    routes?:  RouteDefinition[];
 }
 
 interface ComponentDefinition {

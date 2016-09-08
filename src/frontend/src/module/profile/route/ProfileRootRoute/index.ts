@@ -1,7 +1,5 @@
-import {Component} from "@angular/core";
-
-import {RouterOutlet} from '@angular/router';
-import {RouteConfig} from "@angular/router";
+import {Component, ModuleWithProviders} from "@angular/core";
+import {Routes, RouterModule, RouterOutlet} from '@angular/router';
 import {Nothing} from "../../../common/component/Nothing/index";
 import {ProfileRoute} from "../ProfileRoute/index";
 import {ProfileNotFoundRoute} from "../ProfileNotFoundRoute/index";
@@ -15,7 +13,7 @@ import {ProfileNotFoundRoute} from "../ProfileNotFoundRoute/index";
         RouterOutlet,
     ],
 })
-@RouteConfig([
+const profileRootRoutes: Routes = [
     {
         name: 'Root',
         path: '/',
@@ -32,7 +30,10 @@ import {ProfileNotFoundRoute} from "../ProfileNotFoundRoute/index";
         path: '/not-found',
         component: ProfileNotFoundRoute
     },
-])
+];
+
+export const profileRootRouting: ModuleWithProviders = RouterModule.forChild(profileRootRoutes);
+
 export class ProfileRootRoute
 {
 }

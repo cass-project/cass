@@ -12,7 +12,6 @@ require('./../../styles/index.head.scss');
 
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
 import {HttpModule} from "@angular/http";
-import {ROUTER_PROVIDERS} from "@angular/router";
 import {Injectable, enableProdMode, SecurityContext} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 

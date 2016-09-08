@@ -3,7 +3,6 @@ import {RouterOutlet} from '@angular/router';
 import {Module} from "../../module/common/classes/Module";
 import {AppService} from "./service";
 
-let routeDefinitions: RouteDefinition[] = [];
 let appDefinition = {
     selector: 'cass-frontend-app',
     template: require('./template.jade'),
@@ -45,7 +44,7 @@ let appDefinition = {
     require("./../../module/sidebar/module.ts"),
     require("./../../module/theme/module.ts"),
 ].forEach((module: Module) => {
-    module.decorate(appDefinition, routeDefinitions);
+    module.decorate(appDefinition);
 });
 
 @Component(appDefinition)

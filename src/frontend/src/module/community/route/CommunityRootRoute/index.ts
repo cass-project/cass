@@ -1,7 +1,5 @@
-import {Component} from "@angular/core";
-
-import {RouteConfig} from "@angular/router";
-import {RouterOutlet} from '@angular/router';
+import {Component, ModuleWithProviders} from "@angular/core";
+import {Routes, RouterModule, RouterOutlet} from '@angular/router';
 import {Nothing} from "../../../common/component/Nothing/index";
 import {CommunityRoute} from "../CommunityRoute/index";
 import {CommunityNotFoundRoute} from "../CommunityNotFoundRoute/index";
@@ -15,7 +13,7 @@ import {CommunityNotFoundRoute} from "../CommunityNotFoundRoute/index";
         RouterOutlet,
     ],
 })
-@RouteConfig([
+const communityRootRoutes: Routes =[
     {
         name: 'Root',
         path: '/',
@@ -32,7 +30,10 @@ import {CommunityNotFoundRoute} from "../CommunityNotFoundRoute/index";
         path: '/not-found',
         component: CommunityNotFoundRoute
     },
-])
+];
+
+export const communityRootRouting: ModuleWithProviders = RouterModule.forChild(communityRootRoutes);
+
 export class CommunityRootRoute
 {
 }

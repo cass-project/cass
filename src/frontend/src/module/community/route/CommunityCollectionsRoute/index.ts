@@ -1,6 +1,5 @@
-import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router';
-import {RouteConfig} from '@angular/router'
+import {Component, ModuleWithProviders} from "@angular/core";
+import {Routes, RouterModule, RouterOutlet} from '@angular/router';
 import {CommunityCollectionsListRoute} from "../CommunityCollectionsListRoute/index";
 import {CommunityCollectionRoute} from "../CommunityCollectionRoute/index";
 import {CommunityCollectionNotFoundRoute} from "../CommunityCollectionNotFoundRoute/index";
@@ -11,10 +10,10 @@ import {CommunityCollectionNotFoundRoute} from "../CommunityCollectionNotFoundRo
         require('./style.shadow.scss')
     ],
     directives: [
-        ROUTER_DIRECTIVES,
+        RouterOutlet
     ]
 })
-@RouteConfig([
+const communityCollectionsRoutes: Routes = [
     {
         path: '/',
         name: 'List',
@@ -31,8 +30,11 @@ import {CommunityCollectionNotFoundRoute} from "../CommunityCollectionNotFoundRo
         name: 'View',
         component: CommunityCollectionRoute
     },
-])
+];
+
+export const communityCollectionsRouting: ModuleWithProviders = RouterModule.forChild(communityCollectionsRoutes);
+
 export class CommunityCollectionsRoute
 {
-
+    
 }

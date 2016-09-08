@@ -1,6 +1,5 @@
-import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router';
-import {RouteConfig} from "@angular/router";
+import {Component, ModuleWithProviders} from "@angular/core";
+import {Routes, RouterModule} from "@angular/router";
 
 import {ContentRoute} from "./route/ContentRoute/index";
 import {PublicService} from "./service";
@@ -30,7 +29,6 @@ import {AppService} from "../../app/frontend-app/service";
         FeedOptionsService,
     ],
     directives: [
-        ROUTER_DIRECTIVES,
         ThemeCriteria,
         QueryStringCriteria,
         SeekCriteria,
@@ -39,7 +37,7 @@ import {AppService} from "../../app/frontend-app/service";
         OptionView,
     ]
 })
-@RouteConfig([
+const publicRoutes: Routes = [
     {
         path: '/content',
         name: 'Content',
@@ -66,7 +64,10 @@ import {AppService} from "../../app/frontend-app/service";
         name: 'Profiles',
         component: ProfilesRoute
     },
-])
+];
+
+export const publicRouting: ModuleWithProviders = RouterModule.forChild(publicRoutes);
+
 export class PublicComponent
 {
     constructor(private service: PublicService,

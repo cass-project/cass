@@ -1,6 +1,5 @@
-import {Component} from "@angular/core";
-import {RouterOutlet} from '@angular/router';
-import {RouteConfig} from "@angular/router";
+import {Component, ModuleWithProviders} from "@angular/core";
+import {Routes, RouterModule, RouterOutlet} from '@angular/router';
 
 import {ProfileIMChat} from "../../component/Elements/ProfileIMChat";
 import {ProfileIMContacts} from "../../component/Elements/ProfileIMContacts";
@@ -18,7 +17,7 @@ import {ProfileIMSidebar} from "../../component/Elements/ProfileIMSidebar";
     ]
 })
 
-@RouteConfig([
+const profileIMRoutes: Routes = [
     {
         name: 'Contacts',
         path: '/contacts',
@@ -30,7 +29,9 @@ import {ProfileIMSidebar} from "../../component/Elements/ProfileIMSidebar";
         path: '/messages/:id',
         component: ProfileIMChat
     }
-])
+];
+
+export const profileIMRouting: ModuleWithProviders = RouterModule.forChild(profileIMRoutes);
 
 export class ProfileIMRoute
 {

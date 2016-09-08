@@ -1,21 +1,24 @@
-import { Routes, RouterModule } from '@angular/router';
+import {ModuleWithProviders} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {ProfileRoute} from "../../module/profile/route/ProfileRoute/index";
+import {CommunityRoute} from "../../module/community/route/CommunityRoute/index";
+import {PublicComponent} from "../../module/public/index";
 
 const appRoutes: Routes = [
-    { path: 'crisis-center', component: CrisisCenterComponent },
     {
-        path: 'heroes',
-        component: HeroListComponent,
-        data: {
-            title: 'Heroes List'
-        }
+        path: 'profile/:id',
+        component: ProfileRoute
     },
-    { path: 'profile/:id', component: ProfileRoute },
-    { path: '**', component: PageNotFoundComponent }
+    {
+        path: 'community/:sid',
+        component: CommunityRoute
+    },
+    {
+        path: 'public/',
+        component: PublicComponent
+    },
 ];
 
-export const appRoutingProviders: any[] = [
-
-];
+export const appRoutingProviders: any[] = [];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

@@ -2,7 +2,6 @@ import {Component, Input, EventEmitter, Output} from "@angular/core";
 
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {CommunityImage} from "../CommunityImage/index";
-import {ROUTER_DIRECTIVES} from '@angular/router';
 import {CommunityRouteService} from "../../../route/CommunityRoute/service";
 import {CommunityModals} from "../../../modals";
 import {CommunityRouteService} from "../../../route/CommunityRoute/service";
@@ -15,8 +14,7 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
         require('./style.shadow.scss')
     ],
     directives: [
-        CommunityImage,
-        ROUTER_DIRECTIVES,
+        CommunityImage
     ]
 })
 export class CommunityHeader

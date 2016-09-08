@@ -1,6 +1,5 @@
-import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router';
-import {RouteConfig} from "@angular/router";
+import {Component, ModuleWithProviders} from "@angular/core";
+import {Routes, RouterModule, RouterOutlet} from '@angular/router';
 
 import {ProfileCollectionsListRoute} from "../ProfileCollectionsListRoute/index";
 import {ProfileCollectionRoute} from "../ProfileCollectionRoute/index";
@@ -11,11 +10,9 @@ import {ProfileCollectionNotFoundRoute} from "../ProfileCollectionNotFoundRoute/
     styles: [
         require('./style.shadow.scss')
     ],
-    directives: [
-        ROUTER_DIRECTIVES,
-    ]
+    directives: [RouterOutlet]
 })
-@RouteConfig([
+const profileCollectionRoutes: Routes = [
     {
         path: '/',
         name: 'List',
@@ -32,7 +29,10 @@ import {ProfileCollectionNotFoundRoute} from "../ProfileCollectionNotFoundRoute/
         name: 'View',
         component: ProfileCollectionRoute
     },
-])
+];
+
+export const profileCollectionRouting: ModuleWithProviders = RouterModule.forChild(profileCollectionRoutes);
+
 export class ProfileCollectionsRoute
 {
 
