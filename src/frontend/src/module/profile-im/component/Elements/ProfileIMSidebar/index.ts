@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
 import {ProfileImage} from "../../../../profile/component/Elements/ProfileImage/index";
 import {ContactEntity} from "../../../../contact/definitions/entity/Contact";

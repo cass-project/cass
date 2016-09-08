@@ -1,5 +1,5 @@
 import {Component, Input, EventEmitter, Output} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 import {FeedbackQueryModel} from "../../../feedback/FeedbackQueryParamsModel";
 import {FormBuilder, ControlGroup} from "@angular/common";
 import {FeedbackFilterModel} from "./model";

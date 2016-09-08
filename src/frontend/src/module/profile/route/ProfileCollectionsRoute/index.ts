@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
-import {RouteConfig} from "@angular/router-deprecated";
+import {ROUTER_DIRECTIVES} from '@angular/router';
+import {RouteConfig} from "@angular/router";
 
 import {ProfileCollectionsListRoute} from "../ProfileCollectionsListRoute/index";
 import {ProfileCollectionRoute} from "../ProfileCollectionRoute/index";

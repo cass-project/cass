@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 
-import {Router, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
-import {RouteConfig, RouteParams} from "@angular/router-deprecated";
+import {Router, ROUTER_DIRECTIVES} from '@angular/router';
+import {RouteConfig, RouteParams} from "@angular/router";
 
 import {ProgressLock} from "../../../form/component/ProgressLock/index";
 import {ProfileCollectionsRoute} from "../ProfileCollectionsRoute/index";

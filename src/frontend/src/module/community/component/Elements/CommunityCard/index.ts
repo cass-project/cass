@@ -5,7 +5,7 @@ import {CommunityImage} from "../CommunityImage/index";
 import {PostCard} from "../../../../post/component/Forms/PostCard/index";
 import {CommunityEntity} from "../../../definitions/entity/Community";
 import {ThemeService} from "../../../../theme/service/ThemeService";
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'cass-community-card',

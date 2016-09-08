@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 
 import {CommunityRouteModal} from "./component/Modal/CommunityRouteModal";
 import {CommunityCreateModal} from "./component/Modal/CommunityCreateModal";

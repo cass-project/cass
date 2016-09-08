@@ -14,7 +14,7 @@ require('../../styles/feedback.head.scss');
 
 import {provide, enableProdMode} from "@angular/core";
 import {HTTP_PROVIDERS} from "@angular/http";
-import {ROUTER_PROVIDERS} from "@angular/router-deprecated";
+import {ROUTER_PROVIDERS} from "@angular/router";
 import {Title} from '@angular/platform-browser'
 import {bootstrap} from '@angular/platform-browser-dynamic'
 

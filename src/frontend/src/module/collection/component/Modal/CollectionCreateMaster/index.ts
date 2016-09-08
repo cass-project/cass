@@ -9,7 +9,7 @@ import {ScreenControls} from "../../../../common/classes/ScreenControls";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 import {Session} from "../../../../session/Session";
 
 enum CreateCollectionMasterStage

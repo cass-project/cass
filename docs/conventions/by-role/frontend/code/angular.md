@@ -10,7 +10,7 @@
 Для чего это сделано:
 
 ```
-// Сработает как в случае одного файла: MyComponent.ts, так и в случае, если компонент в результате разработки раздробился: MyComponent/index.ts
+// Сработает как в случае одного файла: MyComponent.ts, так и в случае, если компонент в результате разработки раздробился: MyComponent/app.component.ts
 import {MyComponent} from "my/some/MyComponent"
 ```
 
@@ -30,7 +30,7 @@ import {MyComponent} from "my/some/MyComponent"
         square/
             /component
                 /SquareCalculate
-                    index.ts <<< Исходный код
+                    app.component.ts <<< Исходный код
                     template.html
                     style.shadow.scsss
 ```
@@ -44,15 +44,15 @@ import {MyComponent} from "my/some/MyComponent"
                 component/
                     Tab/
                         SquareSizeTab/
-                            index.ts
+                            app.component.ts
                             template.html
                             style.shadow.scss
                         SquareColorTab/
-                            index.ts
+                            app.component.ts
                             template.html
                             style.shadow.scss
                     SquareOptions
-                        index.ts
+                        app.component.ts
                         service.ts <<< !
                         template.html
                         style.shadow.scss
@@ -64,7 +64,7 @@ import {MyComponent} from "my/some/MyComponent"
     module/
         square/
             ...
-            index.ts
+            app.component.ts
             template.html
             style.shadow.scss
 ```
@@ -79,7 +79,7 @@ import {MyComponent} from "my/some/MyComponent"
 Постфикс Component запрещен
 ---------------------------
 - Его использование избыточно
-- Исключение: корневой элемент модуля (app/module/profile/index.ts, ProfileComponent)
+- Исключение: корневой элемент модуля (app/module/profile/app.component.ts, ProfileComponent)
 
 Селекторы
 ---------

@@ -11,7 +11,7 @@ WebpackConfigBuilder.prototype = {
     return {
       entry: {
         main: './src/app/frontend-app/app.ts',
-        // feedback: './src/app/feedback-app/index.ts'
+        // feedback: './src/app/feedback-app/app.component.ts'
       },
       output: {
         filename: '[name].js',

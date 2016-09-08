@@ -4,7 +4,7 @@ import {CommunityCard} from "../CommunityCard/index";
 import {CommunityCreateCollectionCard} from "../CommunityCreateCollectionCard/index";
 import {CommunitySettingsCard} from "../CommunitySettingsCard/index";
 
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
 
 @Component({

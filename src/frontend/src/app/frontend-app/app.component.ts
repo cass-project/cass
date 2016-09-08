@@ -1,7 +1,5 @@
 import {Component, ViewChild, ElementRef, Renderer} from "@angular/core";
-import {CORE_DIRECTIVES} from "@angular/common";
-import {ROUTER_DIRECTIVES, RouterOutlet} from '@angular/router-deprecated';
-import {RouteConfig, RouteDefinition} from "@angular/router-deprecated";
+import {RouterOutlet} from '@angular/router';
 import {Module} from "../../module/common/classes/Module";
 import {AppService} from "./service";
 
@@ -14,8 +12,6 @@ let appDefinition = {
     ],
     providers: [AppService],
     directives: [
-        ROUTER_DIRECTIVES,
-        CORE_DIRECTIVES,
         RouterOutlet
     ]
 };
@@ -53,7 +49,6 @@ let appDefinition = {
 });
 
 @Component(appDefinition)
-@RouteConfig(routeDefinitions)
 export class App
 {
     static version(): string {

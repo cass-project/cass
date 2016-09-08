@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {CORE_DIRECTIVES} from "@angular/common";
-import {ROUTER_DIRECTIVES, RouterOutlet} from '@angular/router-deprecated';
-import {RouteConfig} from '@angular/router-deprecated'
+import {ROUTER_DIRECTIVES, RouterOutlet} from '@angular/router';
+import {RouteConfig} from '@angular/router'
 
 import {AuthComponent} from "../../module/auth/component/Auth/index";
 import {AuthComponentService} from "../../module/auth/component/Auth/service";

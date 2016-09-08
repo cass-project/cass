@@ -1,5 +1,5 @@
 import {Component, Output, EventEmitter} from "@angular/core";
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 
 
 import {ProfileModalModel} from "./model";

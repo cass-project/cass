@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 
 import {ProfileEntity} from "../../../definitions/entity/Profile";
 import {Theme} from "../../../../theme/definitions/entity/Theme";
