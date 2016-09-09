@@ -12,14 +12,10 @@ import {CommunityImageDeleteRequest} from "../../../../../definitions/paths/imag
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ImageCropper,
-        CommunityImage
     ]
 })
 
-export class ImageTab {
+export class CommunityImageTab {
     @ViewChild('communityImageUploadInput') communityImageUploadInput;
 
     private loading:boolean = false;

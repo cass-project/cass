@@ -9,7 +9,6 @@ export = new Module({
     providers: [
         PublicService,
     ],
-    directives: [],
     routes: [
         {
             name: 'Public',

@@ -1,18 +1,10 @@
-import {Component} from "@angular/core";
-import {RouterOutlet} from '@angular/router';
-import {RouteConfig} from '@angular/router'
+import {Component, ModuleWithProviders} from "@angular/core";
+import {Router, Routes, RouterModule, ActivatedRoute} from '@angular/router';
 
 import {FeedbackComponent} from "../../index";
 import {AccessDeniedComponent} from "../../../access-denied/index";
 
-@Component({
-    template: require('./template.jade'),
-    directives: [
-        RouterOutlet
-    ]
-})
-
-@RouteConfig([
+const feedbackRoutes: Routes = [
     {
         name: 'Feedback',
         path: '/',
@@ -29,6 +21,12 @@ import {AccessDeniedComponent} from "../../../access-denied/index";
         path: '/access-denied',
         component: AccessDeniedComponent,
     },
-])
+];
+
+export const feedbackRouting: ModuleWithProviders = RouterModule.forChild(feedbackRoutes);
+
+@Component({
+    template: require('./template.jade')
+})
 
 export class FeedbackRoute {}

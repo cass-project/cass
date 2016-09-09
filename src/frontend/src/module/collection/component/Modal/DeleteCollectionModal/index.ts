@@ -8,11 +8,6 @@ import {CollectionSelect} from "../../Elements/CollectionSelect/index";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        CollectionSelect,
     ]
 })
 export class DeleteCollectionModal

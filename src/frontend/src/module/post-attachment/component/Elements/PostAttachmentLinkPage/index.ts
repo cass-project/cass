@@ -15,9 +15,6 @@ import {AttachmentError} from "../Error/index";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        AttachmentError,
     ]
 })
 export class PostAttachmentLinkPage

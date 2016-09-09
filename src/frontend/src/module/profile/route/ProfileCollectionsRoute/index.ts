@@ -5,13 +5,6 @@ import {ProfileCollectionsListRoute} from "../ProfileCollectionsListRoute/index"
 import {ProfileCollectionRoute} from "../ProfileCollectionRoute/index";
 import {ProfileCollectionNotFoundRoute} from "../ProfileCollectionNotFoundRoute/index";
 
-@Component({
-    template: require('./template.jade'),
-    styles: [
-        require('./style.shadow.scss')
-    ],
-    directives: [RouterOutlet]
-})
 const profileCollectionRoutes: Routes = [
     {
         path: '/',
@@ -32,6 +25,13 @@ const profileCollectionRoutes: Routes = [
 ];
 
 export const profileCollectionRouting: ModuleWithProviders = RouterModule.forChild(profileCollectionRoutes);
+
+@Component({
+    template: require('./template.jade'),
+    styles: [
+        require('./style.shadow.scss')
+    ]
+})
 
 export class ProfileCollectionsRoute
 {

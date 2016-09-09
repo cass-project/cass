@@ -9,22 +9,7 @@ import {CommunityHeader} from "../../component/Elements/CommunityHeader/index";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 
-@Component({
-    template: require('./template.jade'),
-    styles: [
-        require('./style.shadow.scss')
-    ],
-    directives: [
-        ProgressLock,
-        CommunityHeader,
-    ],
-    providers: [
-        CommunityRouteService,
-        FeedCriteriaService,
-        FeedOptionsService,
-    ]
-})
-const commutinyRoutes: Routes = [
+const communityRoutes: Routes = [
     {
         path: '/',
         name: 'Dashboard',
@@ -38,8 +23,19 @@ const commutinyRoutes: Routes = [
     },
 ];
 
-export const publicRouting: ModuleWithProviders = RouterModule.forChild(commutinyRoutes);
+export const publicRouting: ModuleWithProviders = RouterModule.forChild(communityRoutes);
 
+@Component({
+    template: require('./template.jade'),
+    styles: [
+        require('./style.shadow.scss')
+    ],
+    providers: [
+        CommunityRouteService,
+        FeedCriteriaService,
+        FeedOptionsService,
+    ]
+})
 
 export class CommunityRoute implements OnInit, OnDestroy
 {

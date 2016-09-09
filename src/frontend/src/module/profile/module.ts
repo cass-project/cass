@@ -21,9 +21,6 @@ export = new Module({
         ProfileModals,
         ProfileModalModel, // @deprecated
     ],
-    directives: [
-        ProfileComponent,
-    ],
     routes: [
         {
             name: 'Profile',

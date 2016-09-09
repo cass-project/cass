@@ -1,4 +1,4 @@
-import {Component, ModuleWithProviders, OnInit, OnDestroy} from "@angular/core";
+import {ModuleWithProviders, OnInit, OnDestroy, NgModule} from "@angular/core";
 import {Router, Routes, RouterModule, ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -16,7 +16,7 @@ import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/inde
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 
-@Component({
+@NgModule({
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
@@ -26,11 +26,6 @@ import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
         CollectionSource,
         FeedCriteriaService,
         FeedOptionsService,
-    ],
-    directives: [
-        CollectionsList,
-        PostForm,
-        FeedPostStream,
     ]
 })
 export class CommunityCollectionRoute implements OnInit, OnDestroy

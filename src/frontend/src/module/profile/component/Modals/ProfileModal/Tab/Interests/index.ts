@@ -16,9 +16,6 @@ enum InterestsTabScreen
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ThemeSelect
     ]
 })
 export class InterestsTab

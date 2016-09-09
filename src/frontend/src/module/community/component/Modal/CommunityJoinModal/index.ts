@@ -21,12 +21,6 @@ enum CommunityJoinScreen
     styles: [
         require('./style.shadow.scss')
     ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ScreenProcessing,
-        ScreenSID,
-    ],
     providers: [
         CommunityJoinModalModel
     ]

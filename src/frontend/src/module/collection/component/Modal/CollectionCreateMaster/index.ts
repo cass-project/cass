@@ -23,13 +23,7 @@ enum CreateCollectionMasterStage
     styles: [
         require('./style.shadow.scss')
     ],
-    selector: "cass-collection-create-master",
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ThemeSelect,
-        ProgressLock
-    ]
+    selector: "cass-collection-create-master"
 })
 export class CollectionCreateMaster
 {

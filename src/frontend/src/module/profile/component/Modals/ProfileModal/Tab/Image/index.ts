@@ -16,10 +16,6 @@ import {Session} from "../../../../../../session/Session";
     styles: [
         require('./style.shadow.scss')
     ],
-    directives: [
-        ProfileImage,
-        UploadImageModal,
-    ],
     providers: [
         UploadImageService,
     ]

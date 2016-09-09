@@ -7,12 +7,7 @@ import {AuthService} from "../../auth/service/AuthService";
 
 @Component({
     template: require('./template.jade'),
-    selector: "cass-auth-dev",
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ProgressLock
-    ]
+    selector: "cass-auth-dev"
 })
 export class AuthDev
 {

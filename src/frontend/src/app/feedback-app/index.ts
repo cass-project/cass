@@ -1,3 +1,4 @@
+/*
 /// <reference path="./../../../typings/main/index.d.ts" />
 /// <reference path="./../../../typings/browser.d.ts" />
 
@@ -72,4 +73,4 @@ export function AuthTokenFactory(frontline: FrontlineService) {
     }
 
     return token;
-}
+}*/

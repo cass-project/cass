@@ -17,26 +17,6 @@ import {FeedCriteriaService} from "../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../feed/service/FeedOptionsService";
 import {AppService} from "../../app/frontend-app/service";
 
-@Component({
-    selector: 'cass-public',
-    template: require('./template.jade'),
-    styles: [
-        require('./style.shadow.scss')
-    ],
-    providers: [
-        PublicService,
-        FeedCriteriaService,
-        FeedOptionsService,
-    ],
-    directives: [
-        ThemeCriteria,
-        QueryStringCriteria,
-        SeekCriteria,
-        ContentTypeCriteria,
-        SourceSelector,
-        OptionView,
-    ]
-})
 const publicRoutes: Routes = [
     {
         path: '/content',
@@ -68,6 +48,20 @@ const publicRoutes: Routes = [
 
 export const publicRouting: ModuleWithProviders = RouterModule.forChild(publicRoutes);
 
+
+@Component({
+    selector: 'cass-public',
+    template: require('./template.jade'),
+    styles: [
+        require('./style.shadow.scss')
+    ],
+    providers: [
+        PublicService,
+        FeedCriteriaService,
+        FeedOptionsService,
+    ]
+})
+
 export class PublicComponent
 {
     constructor(private service: PublicService,
@@ -76,7 +70,7 @@ export class PublicComponent
     onScroll($event){
         this.appService.onScroll($event)
     }
-    
+
     isPostCriteriaAvailable() {
         return ~[
             "content",

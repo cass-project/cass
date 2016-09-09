@@ -11,9 +11,6 @@ var validUrl = require('valid-url');
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ProgressLock,
     ]
 })
 export class PostFormLinkInput

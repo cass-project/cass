@@ -17,11 +17,6 @@ import {PostFormModel} from "./model";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ProgressLock,
-        PostFormLinkInput,
-        PostAttachment,
     ]
 })
 export class PostForm

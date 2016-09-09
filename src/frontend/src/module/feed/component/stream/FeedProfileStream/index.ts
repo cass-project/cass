@@ -13,11 +13,6 @@ import {AppService} from "../../../../../app/frontend-app/service";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ProfileCard,
-        LoadingIndicator,
-        FeedScrollDetector
     ]
 })
 export class FeedProfileStream

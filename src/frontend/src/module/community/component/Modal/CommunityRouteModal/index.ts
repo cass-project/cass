@@ -9,10 +9,6 @@ import {ModalBoxComponent} from "../../../../modal/component/box/index";
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
     ]
 })
 export class CommunityRouteModal

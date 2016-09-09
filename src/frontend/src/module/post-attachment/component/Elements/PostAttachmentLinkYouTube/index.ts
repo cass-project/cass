@@ -9,9 +9,6 @@ import {YouTubeLinkMetadata} from "../../../definitions/entity/attachment/link/Y
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        PostAttachmentLinkYouTube,
     ]
 })
 export class PostAttachmentLinkYouTube

@@ -12,9 +12,6 @@ var moment = require('moment');
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ProfileImage,
     ]
 })
 export class ProfileCardHeader

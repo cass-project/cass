@@ -22,11 +22,6 @@ enum UploadImageScreen {
     ],
     providers: [
         ImageCropperService,
-    ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ImageCropper,
     ]
 })
 export class UploadImageModal

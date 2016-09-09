@@ -1,9 +1,6 @@
-import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES, Router} from '@angular/router';
-import {RouteParams} from '@angular/router'
-
+import {Component, OnInit} from "@angular/core";
+import {Router, ActivatedRoute} from '@angular/router';
 import {Title} from '@angular/platform-browser'
-
 import {AccountService} from "../../../../../module/account/service/AccountService";
 import {AuthService} from "../../../../../module/auth/service/AuthService";
 import {FeedbackService} from "../../../../../module/feedback/service/FeedbackService";
@@ -21,14 +18,6 @@ import {InfiniteScrollDirective} from "../infine-scroll/directive/index";
 @Component({
     selector: 'cass-feedback-landing',
     template: require('./template.jade'),
-    directives:[
-        ROUTER_DIRECTIVES,
-        SidebarComponent,
-        FeedbackCardComponent,
-        SidebarTogglerComponent,
-        PaginationComponent,
-        InfiniteScrollDirective
-    ],
     providers:[
         FeedbackService,
         FeedbackRESTService,
@@ -36,7 +25,7 @@ import {InfiniteScrollDirective} from "../infine-scroll/directive/index";
     ]
 })
 
-export class FeedbackComponent {
+export class FeedbackComponent implements OnInit {
     private feedbacks:FeedbackEntity[] = [];
     private isInfineScrollActive:boolean = true;
     private isLoading:boolean = false;
@@ -45,18 +34,20 @@ export class FeedbackComponent {
     private layout:string = 'list';
     constructor(
         private service: FeedbackService,
-        private routeParams: RouteParams,
+        private route: ActivatedRoute,
         private router:Router,
         private authService: AuthService,
         private accountService: AccountService,
         private titleService: Title,
         private model: FeedbackQueryModel
-    ) {
-        if(authService.isSignedIn()) {
-            accountService.appAccess().subscribe(
+    ) {}
+
+    ngOnInit(){
+        if(this.authService.isSignedIn()) {
+            this.accountService.appAccess().subscribe(
                 data => {
                     if (data.access.apps.feedback) {
-                        this.params = routeParams.params;
+                        this.params = this.route.params;
                         this.params['page'] = this.params['page']||"1";
                         this.initFeedbacks();
                     } else {

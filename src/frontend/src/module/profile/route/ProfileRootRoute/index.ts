@@ -4,15 +4,6 @@ import {Nothing} from "../../../common/component/Nothing/index";
 import {ProfileRoute} from "../ProfileRoute/index";
 import {ProfileNotFoundRoute} from "../ProfileNotFoundRoute/index";
 
-@Component({
-    template: require('./template.jade'),
-    styles: [
-        require('./style.shadow.scss')
-    ],
-    directives: [
-        RouterOutlet,
-    ],
-})
 const profileRootRoutes: Routes = [
     {
         name: 'Root',
@@ -33,6 +24,13 @@ const profileRootRoutes: Routes = [
 ];
 
 export const profileRootRouting: ModuleWithProviders = RouterModule.forChild(profileRootRoutes);
+
+@Component({
+    template: require('./template.jade'),
+    styles: [
+        require('./style.shadow.scss')
+    ]
+})
 
 export class ProfileRootRoute
 {

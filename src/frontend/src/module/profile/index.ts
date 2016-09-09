@@ -16,16 +16,7 @@ import {Session} from "../session/Session";
 @Component({
     selector: 'cass-profile',
     template: require('./template.jade'),
-    providers: [],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ProfileModal,
-        ProfileSwitcher,
-        ProfileInterestsModal,
-        ProfileSetup,
-        CollectionCreateMaster
-    ]
+    providers: []
 })
 export class ProfileComponent
 {

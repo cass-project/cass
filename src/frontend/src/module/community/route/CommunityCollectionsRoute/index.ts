@@ -8,9 +8,6 @@ import {CommunityCollectionNotFoundRoute} from "../CommunityCollectionNotFoundRo
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        RouterOutlet
     ]
 })
 const communityCollectionsRoutes: Routes = [

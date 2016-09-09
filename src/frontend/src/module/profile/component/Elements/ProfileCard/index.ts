@@ -13,10 +13,6 @@ import {PostCard} from "../../../../post/component/Forms/PostCard/index";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ProfileImage,
-        PostCard,
     ]
 })
 export class ProfileCard

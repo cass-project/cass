@@ -18,10 +18,6 @@ enum ProfileSwitcherStage
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ProfileImage,
-        ProgressLock
     ]
 })
 

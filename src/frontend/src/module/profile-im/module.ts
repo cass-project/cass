@@ -8,7 +8,6 @@ export = new Module({
     providers: [
         ProfileIMService,
     ],
-    directives: [],
     routes: [
         {
             name: 'ProfileIM',

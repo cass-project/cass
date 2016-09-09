@@ -11,9 +11,6 @@ import {Session} from "../../../../../../session/Session";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ProgressLock
     ]
 })
 

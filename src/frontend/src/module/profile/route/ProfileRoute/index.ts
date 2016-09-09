@@ -11,21 +11,6 @@ import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 import {Session} from "../../../session/Session";
 
-@Component({
-    template: require('./template.jade'),
-    styles: [
-        require('./style.shadow.scss')
-    ],
-    directives: [
-        ProgressLock,
-        ProfileHeader,
-    ],
-    providers: [
-        ProfileRouteService,
-        FeedCriteriaService,
-        FeedOptionsService,
-    ]
-})
 const profileRoutes: Routes = [
     {
         path: '/',
@@ -41,6 +26,18 @@ const profileRoutes: Routes = [
 ];
 
 export const profileRouting: ModuleWithProviders = RouterModule.forChild(profileRoutes);
+
+@Component({
+    template: require('./template.jade'),
+    styles: [
+        require('./style.shadow.scss')
+    ],
+    providers: [
+        ProfileRouteService,
+        FeedCriteriaService,
+        FeedOptionsService,
+    ]
+})
 
 export class ProfileRoute implements OnInit, OnDestroy
 {

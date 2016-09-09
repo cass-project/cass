@@ -12,9 +12,6 @@ var moment = require('moment');
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        CommunityImage,
     ]
 })
 export class CommunityCardHeader
@@ -39,10 +36,7 @@ export class CommunityCardHeader
     getImageURL(): string {
         return queryImage(QueryTarget.Avatar, this.entity.image).public_path;
     }
-
-    getCommunityLink(): string {
-        return this.router.generate(['/Community', 'Community', { 'id': this.entity.id }]).toLinkUrl();
-    }
+    
 
     goCommunity() {
         this.router.navigate(['/Community', 'Community', { 'id': this.entity.id }]);

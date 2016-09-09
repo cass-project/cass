@@ -12,12 +12,6 @@ import {Router} from '@angular/router';
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ProfileCard,
-        ProfileInterestsCard,
-        ProfileCreateCollectionCard,
-        ProfileSettingsCard,
     ]
 })
 export class ProfileCardsList

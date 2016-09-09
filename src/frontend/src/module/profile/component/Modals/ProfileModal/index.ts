@@ -3,17 +3,11 @@ import {Router} from '@angular/router';
 
 
 import {ProfileModalModel} from "./model";
-import {AccountTab} from "./Tab/Account/index";
-import {PersonalTab} from "./Tab/Personal/index";
-import {InterestsTab} from "./Tab/Interests/index";
-import {ProfilesTab} from "./Tab/Profiles/index";
-import {ImageTab} from "./Tab/Image/index";
 import {ProfileRESTService} from "../../../service/ProfileRESTService";
 import {ProfileService} from "../../../service/ProfileService";
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {AuthService} from "../../../../auth/service/AuthService";
 import {AccountRESTService} from "../../../../account/service/AccountRESTService";
-import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 
 enum ProfileModalTab
 {
@@ -30,14 +24,6 @@ enum ProfileModalTab
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        AccountTab,
-        PersonalTab,
-        ImageTab,
-        InterestsTab,
-        ProfilesTab,
-        ProgressLock
     ],
     providers: [
         AccountRESTService,

@@ -8,9 +8,6 @@ import {CommunitySettingsModalModel} from "../../model";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives:[
-        ThemeSelect
     ]
 })
 

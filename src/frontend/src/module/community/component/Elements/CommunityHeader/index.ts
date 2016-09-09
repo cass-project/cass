@@ -12,9 +12,6 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        CommunityImage
     ]
 })
 export class CommunityHeader

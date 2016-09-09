@@ -1,6 +1,5 @@
 import {Component} from "@angular/core";
 
-import {ROUTER_DIRECTIVES} from '@angular/router';
 import {PublicService} from "../../../service";
 
 @Component({
@@ -8,9 +7,6 @@ import {PublicService} from "../../../service";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ROUTER_DIRECTIVES,
     ]
 })
 export class SourceSelector

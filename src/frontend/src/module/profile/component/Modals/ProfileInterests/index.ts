@@ -11,10 +11,6 @@ import {ProfileModalModel} from "../ProfileModal/model";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ThemeSelect,
-        ProgressLock,
     ]
 })
 export class ProfileInterestsModal {

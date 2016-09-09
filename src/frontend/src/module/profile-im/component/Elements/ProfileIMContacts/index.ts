@@ -1,5 +1,4 @@
 import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router';
 
 import {ContactEntity} from "../../../../contact/definitions/entity/Contact";
 import {ContactService} from "../../../../contact/service/ContactService";
@@ -11,11 +10,6 @@ import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIn
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives:[
-        ROUTER_DIRECTIVES,
-        ProfileImage,
-        LoadingLinearIndicator
     ]
 })
 

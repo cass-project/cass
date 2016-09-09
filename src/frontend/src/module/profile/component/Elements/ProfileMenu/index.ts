@@ -8,9 +8,6 @@ import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    providers: [
-        ProfileComponent
     ]
 })
 export class ProfileMenuComponent

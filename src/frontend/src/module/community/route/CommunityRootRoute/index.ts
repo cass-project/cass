@@ -4,15 +4,6 @@ import {Nothing} from "../../../common/component/Nothing/index";
 import {CommunityRoute} from "../CommunityRoute/index";
 import {CommunityNotFoundRoute} from "../CommunityNotFoundRoute/index";
 
-@Component({
-    template: require('./template.jade'),
-    styles: [
-        require('./style.shadow.scss')
-    ],
-    directives: [
-        RouterOutlet,
-    ],
-})
 const communityRootRoutes: Routes =[
     {
         name: 'Root',
@@ -33,6 +24,14 @@ const communityRootRoutes: Routes =[
 ];
 
 export const communityRootRouting: ModuleWithProviders = RouterModule.forChild(communityRootRoutes);
+
+
+@Component({
+    template: require('./template.jade'),
+    styles: [
+        require('./style.shadow.scss')
+    ]
+})
 
 export class CommunityRootRoute
 {

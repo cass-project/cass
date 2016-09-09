@@ -14,12 +14,7 @@ import {ProfileModalModel} from "../../model";
     ],
     providers: [
         ProfilesTabService
-    ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ProfileImage
-    ],
+    ]
 })
 export class ProfilesTab
 {

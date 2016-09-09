@@ -15,16 +15,7 @@ import {ColorPicker} from "../../../../form/component/ColorPicker/index";
     styles: [
         require('./style.shadow.scss')
     ],
-    selector: "cass-collection-settings",
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        TAB_MODAL_DIRECTIVES,
-        ColorPicker,
-        ThemeSelect,
-        CollectionImage,
-        DeleteCollectionModal,
-    ]
+    selector: "cass-collection-settings"
 })
 export class CollectionSettings
 {

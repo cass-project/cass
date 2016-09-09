@@ -13,11 +13,6 @@ import {AppService} from "../../../../../app/frontend-app/service";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        CommunityCard,
-        LoadingIndicator,
-        FeedScrollDetector
     ]
 })
 export class FeedCommunityStream

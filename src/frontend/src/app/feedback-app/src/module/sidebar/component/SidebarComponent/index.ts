@@ -1,24 +1,20 @@
 import {Component, Input, EventEmitter, Output} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router';
 import {FeedbackQueryModel} from "../../../feedback/FeedbackQueryParamsModel";
-import {FormBuilder, ControlGroup} from "@angular/common";
+import {FormBuilder, FormGroup } from "@angular/forms";
 import {FeedbackFilterModel} from "./model";
 
 declare var jQuery;
 
 @Component({
     selector: 'cass-feedback-landing-sidebar',
-    template: require('./template.jade'),
-    directives:[
-        ROUTER_DIRECTIVES
-    ]
+    template: require('./template.jade')
 })
 export class SidebarComponent {
 
     @Input('loading') isLoading:boolean = false;
     @Output('onfilter') filterEvent = new EventEmitter<FeedbackQueryModel>();
 
-    private form:ControlGroup;
+    private form:FormGroup;
     private hasChanged:boolean = false;
     
     constructor(

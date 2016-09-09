@@ -16,10 +16,6 @@ import {FeedbackRESTService} from "./service/FeedbackRESTService";
         FeedbackService,
         FeedbackRESTService,
         FeedbackTypesService
-    ],
-    directives: [
-        FeedbackCreateModal,
-        FeedbackCreateButton
     ]
 })
 

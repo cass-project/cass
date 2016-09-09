@@ -2,7 +2,6 @@ import {Component, Input, EventEmitter, Output} from "@angular/core";
 
 import {PostEntity} from "../../../definitions/entity/Post";
 import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
-import {ProfileCardHeader} from "../../../../profile/component/Elements/ProfileCardHeader/index";
 import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
 import {PostRESTService} from "../../../service/PostRESTService";
 import {LoadingManager} from "../../../../common/classes/LoadingStatus";
@@ -14,10 +13,6 @@ import {ViewOptionValue} from "../../../../feed/service/FeedService/options/View
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        PostAttachment,
-        ProfileCardHeader,
     ]
 })
 export class PostCard

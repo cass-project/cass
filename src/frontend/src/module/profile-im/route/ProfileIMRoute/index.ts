@@ -5,18 +5,6 @@ import {ProfileIMChat} from "../../component/Elements/ProfileIMChat";
 import {ProfileIMContacts} from "../../component/Elements/ProfileIMContacts";
 import {ProfileIMSidebar} from "../../component/Elements/ProfileIMSidebar";
 
-@Component({
-    selector:'profile-im-route',
-    template: require('./template.jade'),
-    styles: [
-    require('./style.shadow.scss')
-    ],
-    directives: [
-        RouterOutlet,
-        ProfileIMSidebar
-    ]
-})
-
 const profileIMRoutes: Routes = [
     {
         name: 'Contacts',
@@ -32,6 +20,14 @@ const profileIMRoutes: Routes = [
 ];
 
 export const profileIMRouting: ModuleWithProviders = RouterModule.forChild(profileIMRoutes);
+
+@Component({
+    selector:'profile-im-route',
+    template: require('./template.jade'),
+    styles: [
+    require('./style.shadow.scss')
+    ]
+})
 
 export class ProfileIMRoute
 {

@@ -8,9 +8,6 @@ import {LoadingLinearIndicator} from "../../../../../../form/component/LoadingLi
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        LoadingLinearIndicator
     ]
 })
 export class ScreenSID extends Screen

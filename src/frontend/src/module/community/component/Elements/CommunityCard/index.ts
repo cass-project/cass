@@ -12,10 +12,6 @@ import {Router} from '@angular/router';
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        CommunityImage,
-        PostCard,
     ]
 })
 export class CommunityCard

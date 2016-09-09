@@ -11,8 +11,7 @@ import {CommunityCreateModalForm} from "../../Form";
     styles: [
         require('./style.shadow.scss')
     ],
-    providers: [CommunityFeaturesService],
-    directives: [CommunityCreateModalForm]
+    providers: [CommunityFeaturesService]
 })
 export class ScreenFeatures extends Screen
 {

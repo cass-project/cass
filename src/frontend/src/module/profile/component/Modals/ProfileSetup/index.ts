@@ -39,16 +39,6 @@ enum ProfileSetupScreen {
         ProfileSetupModel,
         ProfileRESTService,
         ProfileRouteService
-    ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        LoadingLinearIndicator,
-        ProfileSetupScreenGreetings,
-        ProfileSetupScreenGender,
-        ProfileSetupScreenImage,
-        ProfileSetupScreenInterests,
-        ProfileSetupScreenExpertIn
     ]
 })
 

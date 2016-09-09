@@ -21,11 +21,6 @@ import {AuthService} from "../../../auth/service/AuthService";
     providers: [
         FeedService,
         CollectionSource
-    ],
-    directives: [
-        CommunityCardsList,
-        FeedPostStream,
-        PostForm
     ]
 })
 export class CommunityDashboardRoute

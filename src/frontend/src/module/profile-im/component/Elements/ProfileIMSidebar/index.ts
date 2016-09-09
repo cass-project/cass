@@ -8,9 +8,6 @@ import {ContactService} from "../../../../contact/service/ContactService";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives:[
-        ProfileImage
     ]
 })
 

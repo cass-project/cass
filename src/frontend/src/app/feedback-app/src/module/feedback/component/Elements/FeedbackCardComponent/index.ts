@@ -1,7 +1,6 @@
 declare var jQuery;
 
 import {Component, Input, ViewChild} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router';
 
 import {FeedbackEntity} from "../../../../../../../../module/feedback/definitions/entity/Feedback";
 import {FeedbackTypesService} from "../../../../../../../../module/feedback/service/FeedbackTypesService";
@@ -12,10 +11,6 @@ import {FeedbackModalComponent} from "../../Modals/FeedbackModalComponent/index"
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ROUTER_DIRECTIVES,
-        FeedbackModalComponent
     ],
     providers: [
         FeedbackTypesService

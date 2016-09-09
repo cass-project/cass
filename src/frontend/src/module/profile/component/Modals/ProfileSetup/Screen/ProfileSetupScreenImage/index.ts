@@ -18,10 +18,6 @@ import {AuthToken} from "../../../../../../auth/service/AuthToken";
     ],
     providers: [
         UploadImageService,
-    ],
-    directives: [
-        ProfileImage,
-        UploadImageModal,
     ]
 })
 

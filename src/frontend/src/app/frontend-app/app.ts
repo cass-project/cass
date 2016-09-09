@@ -11,14 +11,12 @@ require('./../../../node_modules/reset.css/reset.css');
 require('./../../styles/index.head.scss');
 
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
-import {HttpModule} from "@angular/http";
 import {Injectable, enableProdMode, SecurityContext} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 
 import {FrontlineService, frontline} from "../../module/frontline/service";
 import {AuthToken} from "../../module/auth/service/AuthToken";
 import {AppModule} from "./app.module";
-import {appRoutingProviders} from "./app.routing";
 
 enableProdMode();
 

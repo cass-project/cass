@@ -7,11 +7,7 @@ import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
 
 @Component({
     selector: 'cass-community-create-modal-screen-general',
-    template: require('./template.jade'),
-    directives:[
-        CommunityCreateModalForm,
-        ThemeSelect,
-    ]
+    template: require('./template.jade')
 })
 export class ScreenGeneral extends Screen
 {

@@ -21,9 +21,6 @@ export = new Module({
         CommunityModals,
         CommunityCreateModalNotifier
     ],
-    directives: [
-        CommunityComponent,
-    ],
     routes: [
         {
             name: 'Community',

@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Output, Input, ViewChild, ElementRef} from "@angular/core";
+import {Component, Input, ViewChild, ElementRef} from "@angular/core";
 import {ThemeService} from "../../service/ThemeService";
 import {Injectable} from '@angular/core';
-import {ControlValueAccessor} from "@angular/common";
+import {ControlValueAccessor} from "@angular/forms";
 import {Theme} from "../../definitions/entity/Theme";
 
 
@@ -10,8 +10,6 @@ import {Theme} from "../../definitions/entity/Theme";
     template: require('./template.html'),
     providers: [
         ThemeService
-    ],
-    directives: [
     ],
     styles: [
         require('./style.shadow.scss')

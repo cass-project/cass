@@ -29,13 +29,6 @@ enum CreateStage {
     ],
     providers: [
         CommunityCreateModalModel,
-    ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ScreenGeneral,
-        ScreenFeatures,
-        ProgressLock,
     ]
 })
 

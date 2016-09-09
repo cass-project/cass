@@ -9,7 +9,7 @@ import {CommunityFeaturesService} from "../../../service/CommunityFeaturesServic
 
 import {FeaturesTab} from "./Tab/TabFeatures";
 import {GeneralTab} from "./Tab/TabGeneral";
-import {ImageTab} from "./Tab/TabImage";
+import {CommunityImageTab} from "./Tab/TabImage";
 import {CommunitySettingsModalModel} from "./model";
 import {EditCommunityRequest} from "../../../definitions/paths/edit";
 import {CommunityControlFeatureRequestModel} from "../../../model/CommunityActivateFeatureModel";
@@ -26,13 +26,6 @@ import {SetPublicOptionsCommunityRequest} from "../../../definitions/paths/set-p
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        GeneralTab,
-        ImageTab,
-        FeaturesTab
     ],
     providers: [
         CommunityFeaturesService,

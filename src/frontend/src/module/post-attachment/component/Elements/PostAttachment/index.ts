@@ -13,13 +13,6 @@ import {PostAttachmentLinkWebm} from "../PostAttachmentLinkWebm/index";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        PostAttachmentLinkYouTube,
-        PostAttachmentLinkImage,
-        PostAttachmentLinkPage,
-        PostAttachmentLinkWebm,
-        PostAttachmentLinkUnknown,
     ]
 })
 export class PostAttachment
