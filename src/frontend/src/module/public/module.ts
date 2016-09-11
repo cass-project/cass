@@ -8,7 +8,7 @@ export = new Module({
     RESTServices: [],
     providers: [
         PublicService,
-    ],
+    ]/*,
     routes: [
         {
             name: 'Public',
@@ -16,5 +16,5 @@ export = new Module({
             component: PublicComponent,
             useAsDefault: true
         }
-    ]
+    ]*/
 });

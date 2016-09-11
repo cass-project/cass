@@ -139,7 +139,6 @@ import {FeedbackModalComponent} from "../feedback-app/src/module/feedback/compon
         ContentTypeCriteria,
         SourceSelector,
         OptionView,
-        RouterOutlet,
         ProfileCardsList,
         PostForm,
         CollectionsList,

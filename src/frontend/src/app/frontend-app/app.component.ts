@@ -9,10 +9,7 @@ let appDefinition = {
     styles: [
         require('./style.shadow.scss')
     ],
-    providers: [AppService],
-    directives: [
-        RouterOutlet
-    ]
+    providers: [AppService]
 };
 
 [
