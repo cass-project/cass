@@ -38,7 +38,7 @@ export class Module
 }
 
 interface ModuleDefinition {
-    name: string;
+    name?: string;
     RESTServices?: Array<any>;
     providers?: Array<any>;
     directives?: Array<any>;

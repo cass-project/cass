@@ -4,12 +4,6 @@ import {CommunityCollectionsListRoute} from "../CommunityCollectionsListRoute/in
 import {CommunityCollectionRoute} from "../CommunityCollectionRoute/index";
 import {CommunityCollectionNotFoundRoute} from "../CommunityCollectionNotFoundRoute/index";
 
-@Component({
-    template: require('./template.jade'),
-    styles: [
-        require('./style.shadow.scss')
-    ]
-})
 const communityCollectionsRoutes: Routes = [
     // TODO:: USE AS DEFAULT
     {
@@ -28,7 +22,12 @@ const communityCollectionsRoutes: Routes = [
 
 export const communityCollectionsRouting: ModuleWithProviders = RouterModule.forChild(communityCollectionsRoutes);
 
+@Component({
+    template: require('./template.jade'),
+    styles: [
+        require('./style.shadow.scss')
+    ]
+})
 export class CommunityCollectionsRoute
 {
-    
 }

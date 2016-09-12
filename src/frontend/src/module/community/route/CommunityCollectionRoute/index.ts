@@ -1,22 +1,19 @@
-import {ModuleWithProviders, OnInit, OnDestroy, NgModule} from "@angular/core";
-import {Router, Routes, RouterModule, ActivatedRoute} from '@angular/router';
+import {OnInit, OnDestroy, Component} from "@angular/core";
+import {Router, ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
-import {CollectionsList} from "../../../collection/component/Elements/CollectionsList/index";
 import {CommunityRouteService} from "../CommunityRoute/service";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
-import {PostForm} from "../../../post/component/Forms/PostForm/index";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
 import {PostTypeService} from "../../../post/service/PostTypeService";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {Stream} from "../../../feed/service/FeedService/stream";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
-import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/index";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 
-@NgModule({
+@Component({
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
@@ -65,8 +62,7 @@ export class CommunityCollectionRoute implements OnInit, OnDestroy
                     this.feed.provide(this.feedSource, new Stream<PostEntity>());
                     this.feed.update();
                 },
-                (error) => {
-                }
+                (error) => {}
             );
         });
     }

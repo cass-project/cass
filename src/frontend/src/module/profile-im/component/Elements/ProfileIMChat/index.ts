@@ -39,7 +39,7 @@ export class ProfileIMChat implements OnInit
 
         this.listen(profileId);
 
-        let sub: Observable<string> = this.route.params.map(params => {
+        this.route.params.map(params => {
             this.sidChat = parseInt(params['id']);
         });
 

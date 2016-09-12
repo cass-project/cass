@@ -47,7 +47,7 @@ class AttachmentMiddlewareTest extends CASSMiddlewareTestCase
                     'id' => $this->expectId(),
                     'sid' => $this->expectString(),
                     'date_created_on' => $this->expectString(),
-                    'metadata' => [
+                    'link' => [
                         'url' => $this->expectString(),
                         'resource' => $this->expectString(),
                         'source' => [

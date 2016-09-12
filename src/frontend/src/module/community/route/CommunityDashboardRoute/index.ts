@@ -1,7 +1,5 @@
 import {Component} from "@angular/core";
 
-import {CommunityCardsList} from "../../component/Elements/CommunityCardsList/index";
-import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/index";
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 import {Stream} from "../../../feed/service/FeedService/stream";
@@ -9,7 +7,6 @@ import {CommunityRouteService} from "../CommunityRoute/service";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {PostTypeService} from "../../../post/service/PostTypeService";
-import {PostForm} from "../../../post/component/Forms/PostForm/index";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
 import {AuthService} from "../../../auth/service/AuthService";
 

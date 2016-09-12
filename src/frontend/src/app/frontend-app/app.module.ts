@@ -1,11 +1,9 @@
 import {NgModule} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from "@angular/http";
 import {App}   from './app.component';
 import {routing, appRoutingProviders} from "./app.routing";
-import {HeadMenuComponent} from "../feedback-app/src/module/head-menu/index";
 import {MessageBusNotifications} from "../../module/message/component/MessageBusNotifications/index";
 import {AuthComponent} from "../../module/auth/component/Auth/index";
 import {ProgressLock} from "../../module/form/component/ProgressLock/index";
@@ -106,18 +104,11 @@ import {AuthDev} from "../../module/auth-dev/component/index";
 import {OAuth2Component} from "../../module/auth/component/OAuth2/index";
 import {AccountDeleteWarning} from "../../module/account/component/AccountDeleteWarning/index";
 import {AccountComponent} from "../../module/account/index";
-import {FeedbackCardComponent} from "../feedback-app/src/module/feedback/component/Elements/FeedbackCardComponent/index";
-import {SidebarTogglerComponent} from "../feedback-app/src/module/sidebar/component/SidebrTogglerComponent/index";
-import {PaginationComponent} from "../feedback-app/src/module/pagination/index";
-import {InfiniteScrollDirective} from "../feedback-app/src/module/infine-scroll/directive/index";
-import {SidebarComponent} from "../feedback-app/src/module/sidebar/component/SidebarComponent/index";
-import {FeedbackModalComponent} from "../feedback-app/src/module/feedback/component/Modals/FeedbackModalComponent/index";
 
 
 @NgModule({
     declarations: [
         App,
-        HeadMenuComponent,
         MessageBusNotifications,
         AuthComponent,
         ProgressLock,
@@ -219,12 +210,6 @@ import {FeedbackModalComponent} from "../feedback-app/src/module/feedback/compon
         OAuth2Component,
         AccountDeleteWarning,
         AccountComponent,
-        SidebarComponent,
-        FeedbackCardComponent,
-        SidebarTogglerComponent,
-        PaginationComponent,
-        InfiniteScrollDirective,
-        FeedbackModalComponent
 
     ],
     imports: [

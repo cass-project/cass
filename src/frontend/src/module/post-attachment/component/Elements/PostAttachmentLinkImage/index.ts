@@ -1,8 +1,7 @@
 import {Component, Input, ViewChild, ElementRef} from "@angular/core";
 
-import {LinkAttachment} from "../../../definitions/entity/attachment/LinkAttachment";
-import {ImageLinkMetaData} from "../../../definitions/entity/attachment/link/ImageLinkMetaData";
 import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
+import {ImageAttachmentMetadata} from "../../../definitions/entity/metadata/ImageAttachmentMetadata";
 
 @Component({
     selector: 'cass-post-attachment-link-image',
@@ -13,9 +12,9 @@ import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
 })
 export class PostAttachmentLinkImage
 {
-    @Input('attachment') link: PostAttachmentEntity<LinkAttachment<ImageLinkMetaData>>;
+    @Input('attachment') attachment: PostAttachmentEntity<ImageAttachmentMetadata>;
 
     getImageURL(): string {
-        return this.link.attachment.url;
+        return this.attachment.link.url;
     }
 }

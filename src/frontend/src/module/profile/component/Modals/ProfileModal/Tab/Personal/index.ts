@@ -1,7 +1,5 @@
 import {Component} from "@angular/core";
 
-import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
-import {ProfileService} from "../../../../../service/ProfileService";
 import {ProfileModalModel} from "../../model";
 
 

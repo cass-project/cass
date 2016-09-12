@@ -1,8 +1,7 @@
 import {Component, Input, ViewChild, ElementRef} from "@angular/core";
 
 import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
-import {LinkAttachment} from "../../../definitions/entity/attachment/LinkAttachment";
-import {YouTubeLinkMetadata} from "../../../definitions/entity/attachment/link/YouTubeLinkMetadata";
+import {YoutubeAttachmentMetadata} from "../../../definitions/entity/metadata/YoutubeAttachmentMetadata";
 
 @Component({
     selector: 'cass-post-attachment-link-youtube',
@@ -18,11 +17,11 @@ export class PostAttachmentLinkYouTube
     static DEFAULT_ORIG_WIDTH = 1280;
     static DEFAULT_ORIG_HEIGHT = 720;
 
-    @Input('attachment') link: PostAttachmentEntity<LinkAttachment<YouTubeLinkMetadata>>;
+    @Input('attachment') attachment: PostAttachmentEntity<YoutubeAttachmentMetadata>;
     @ViewChild('container') container: ElementRef;
 
     getURL(): string {
-        let ogMetadata = this.link.attachment.metadata.og.og.videos;
+        let ogMetadata = this.attachment.link.metadata.og.og.videos;
 
         if(ogMetadata.length) {
             let ogURL = ogMetadata[0]['og:video:url'];
@@ -43,11 +42,11 @@ export class PostAttachmentLinkYouTube
             }
         }
 
-        return `http://youtube.com/embed/${this.link.attachment.metadata.youtubeId}?&autoplay=1`;
+        return `http://youtube.com/embed/${this.attachment.link.metadata.youtubeId}?&autoplay=1`;
     }
 
     getOrigWidth(): number {
-        let ogMetadata = this.link.attachment.metadata.og.og.videos;
+        let ogMetadata = this.attachment.link.metadata.og.og.videos;
 
         if(ogMetadata.length) {
             let ogWidth = parseInt(ogMetadata[0]['og:width'], 10);
@@ -61,7 +60,7 @@ export class PostAttachmentLinkYouTube
     }
 
     getOrigHeight(): number {
-        let ogMetadata = this.link.attachment.metadata.og.og.videos;
+        let ogMetadata = this.attachment.link.metadata.og.og.videos;
 
         if(ogMetadata.length) {
             let ogHeight = parseInt(ogMetadata[0]['og:height'], 10);
@@ -75,15 +74,15 @@ export class PostAttachmentLinkYouTube
     }
 
     getPreviewImageURL(): string {
-        if(this.link.attachment.metadata.og.og.images.length > 0) {
-            let imageURL = this.link.attachment.metadata.og.og.images[0]['og:image:url'];
+        if(this.attachment.link.metadata.og.og.images.length > 0) {
+            let imageURL = this.attachment.link.metadata.og.og.images[0]['og:image:url'];
 
             if(imageURL.length) {
                 return imageURL;
             }
         }
 
-        return `http://img.youtube.com/vi/${this.link.attachment.metadata.youtubeId}/hqdefault.jpg`;
+        return `http://img.youtube.com/vi/${this.attachment.link.metadata.youtubeId}/hqdefault.jpg`;
     }
     
     disablePreview() {

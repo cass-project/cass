@@ -4,7 +4,7 @@ Attachment_Entity_AttachmentEntity:
     - sid
     - date_created_on
     - is_attached
-    - metadata
+    - link
   properties:
     id:
       type: number
@@ -34,9 +34,9 @@ Attachment_Entity_AttachmentEntity:
         code:
           type: string
           description: Код(Тип) владельца
-    metadata:
+    link:
       type: object
-      description: JSON-метаданные
+      description: JSON-метаданные ссылки
       required:
         - url
         - resource

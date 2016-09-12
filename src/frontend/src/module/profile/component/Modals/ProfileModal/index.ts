@@ -4,7 +4,6 @@ import {Router} from '@angular/router';
 
 import {ProfileModalModel} from "./model";
 import {ProfileRESTService} from "../../../service/ProfileRESTService";
-import {ProfileService} from "../../../service/ProfileService";
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {AuthService} from "../../../../auth/service/AuthService";
 import {AccountRESTService} from "../../../../account/service/AccountRESTService";
@@ -29,7 +28,6 @@ enum ProfileModalTab
         AccountRESTService,
         ProfileModalModel,
         ProfileRESTService,
-        ProfileService,
         ThemeService
     ]
 })

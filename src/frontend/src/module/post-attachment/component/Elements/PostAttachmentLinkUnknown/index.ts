@@ -1,9 +1,7 @@
 import {Component, Input} from "@angular/core";
 
-import {LinkAttachment} from "../../../definitions/entity/attachment/LinkAttachment";
 import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
-import {PageLinkMetadata} from "../../../definitions/entity/attachment/link/PageLinkMetaData";
-import {UnknownLinkMetadata} from "../../../definitions/entity/attachment/link/UnknownLinkMetadata";
+import {UnknownAttachmentMetadata} from "../../../definitions/entity/metadata/UnknownAttachmentMetadata";
 
 @Component({
     selector: 'cass-post-attachment-link-unknown',
@@ -14,9 +12,9 @@ import {UnknownLinkMetadata} from "../../../definitions/entity/attachment/link/U
 })
 export class PostAttachmentLinkUnknown
 {
-    @Input('attachment') link: PostAttachmentEntity<LinkAttachment<UnknownLinkMetadata>>;
+    @Input('attachment') attachment: PostAttachmentEntity<UnknownAttachmentMetadata>;
     
     getURL(): string {
-        return this.link.attachment.url;
+        return this.attachment.link.url
     }
 }

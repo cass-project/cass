@@ -1,10 +1,8 @@
 import {Component, Input, EventEmitter, Output} from "@angular/core";
 
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
-import {CommunityImage} from "../CommunityImage/index";
 import {CommunityRouteService} from "../../../route/CommunityRoute/service";
 import {CommunityModals} from "../../../modals";
-import {CommunityRouteService} from "../../../route/CommunityRoute/service";
 import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
 
 @Component({
