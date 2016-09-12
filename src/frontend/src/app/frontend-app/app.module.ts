@@ -109,6 +109,7 @@ import {CommunityRoute} from "../../module/community/route/CommunityRoute/index"
 import {PublicComponent} from "../../module/public/index";
 import {FrontlineService} from "../../module/frontline/service";
 import {AuthToken} from "../../module/auth/service/AuthToken";
+import {Nothing} from "../../module/common/component/Nothing/index";
 
 @Injectable()
 export class NoSanitizationService {
@@ -223,7 +224,8 @@ export class NoSanitizationService {
         AccountComponent,
         ProfileRoute,
         CommunityRoute,
-        PublicComponent
+        PublicComponent,
+        Nothing
 
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

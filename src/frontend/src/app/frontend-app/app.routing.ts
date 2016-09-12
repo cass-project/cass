@@ -6,6 +6,9 @@ import {PublicComponent} from "../../module/public/index";
 
 const appRoutes: Routes = [
     {
+        path: '**', redirectTo: '/public'
+    },
+    {
         path: 'profile/:id',
         component: ProfileRoute
     },
@@ -14,7 +17,7 @@ const appRoutes: Routes = [
         component: CommunityRoute
     },
     {
-        path: 'public/',
+        path: 'public',
         component: PublicComponent
     },
 ];
