@@ -5,19 +5,16 @@ import {CommunityRoute} from "../CommunityRoute/index";
 import {CommunityNotFoundRoute} from "../CommunityNotFoundRoute/index";
 
 const communityRootRoutes: Routes =[
+    // TODO:: USE AS DEFAULT
     {
-        name: 'Root',
         path: '/',
         component: Nothing,
-        useAsDefault: true
     },
     {
-        name: 'Community',
         path: '/:sid/...',
         component: CommunityRoute
     },
     {
-        name: 'NotFound',
         path: '/not-found',
         component: CommunityNotFoundRoute
     },

@@ -17,10 +17,10 @@ export class ContentTypeCriteria
     private criteria: Criteria<ContentTypeCriteriaParams>;
 
     constructor(
-        private criteria: FeedCriteriaService,
+        feedCriteriaService: FeedCriteriaService,
         private service: PublicService
     ) {
-        this.criteria = criteria.criteria.contentType;
+        this.criteria = feedCriteriaService.criteria.contentType;
     }
 
     ngOnDestroy() {

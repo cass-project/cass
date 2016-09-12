@@ -5,19 +5,16 @@ import {ProfileRoute} from "../ProfileRoute/index";
 import {ProfileNotFoundRoute} from "../ProfileNotFoundRoute/index";
 
 const profileRootRoutes: Routes = [
+    // TODO:: USE AS DEFAULT
     {
-        name: 'Root',
         path: '/',
         component: Nothing,
-        useAsDefault: true
     },
     {
-        name: 'Profile',
         path: '/:id/...',
         component: ProfileRoute
     },
     {
-        name: 'NotFound',
         path: '/not-found',
         component: ProfileNotFoundRoute
     },

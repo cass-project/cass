@@ -5,19 +5,16 @@ import {FeedbackComponent} from "../../index";
 import {AccessDeniedComponent} from "../../../access-denied/index";
 
 const feedbackRoutes: Routes = [
+    // TODO:: USE AS DEFAULT
     {
-        name: 'Feedback',
         path: '/',
         component: FeedbackComponent,
-        useAsDefault: true
     },
     {
-        name: 'FeedbackPage',
         path: '/page/:page',
         component: FeedbackComponent,
     },
     {
-        name: 'AccessDenied',
         path: '/access-denied',
         component: AccessDeniedComponent,
     },

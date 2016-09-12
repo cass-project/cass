@@ -23,10 +23,10 @@ export class ThemeCriteria
     constructor(
         private service: PublicService,
         private themes: ThemeService,
-        private criteria: FeedCriteriaService
+        feedCriteriaService: FeedCriteriaService
     ) {
         this.root = themes.getRoot();
-        this.criteria = criteria.criteria.theme;
+        this.criteria = feedCriteriaService.criteria.theme;
     }
 
     getTitle() {

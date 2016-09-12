@@ -12,15 +12,13 @@ import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 import {Session} from "../../../session/Session";
 
 const profileRoutes: Routes = [
+    // TODO:: USE AS DEFAULT
     {
         path: '/',
-        name: 'Dashboard',
         component: ProfileDashboardRoute,
-        useAsDefault: true
     },
     {
         path: '/collections/...',
-        name: 'Collections',
         component: ProfileCollectionsRoute
     },
 ];

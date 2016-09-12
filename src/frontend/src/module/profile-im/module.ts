@@ -10,7 +10,6 @@ export = new Module({
     ],
     routes: [
         {
-            name: 'ProfileIM',
             path: '/im/...',
             component: ProfileIMRoute
         },

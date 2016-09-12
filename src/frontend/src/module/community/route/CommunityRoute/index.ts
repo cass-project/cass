@@ -10,15 +10,13 @@ import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 
 const communityRoutes: Routes = [
+    // TODO:: USE AS DEFAULT
     {
         path: '/',
-        name: 'Dashboard',
         component: CommunityDashboardRoute,
-        useAsDefault: true
     },
     {
         path: '/collections/...',
-        name: 'Collections',
         component: CommunityCollectionsRoute
     },
 ];

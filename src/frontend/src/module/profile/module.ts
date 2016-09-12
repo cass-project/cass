@@ -23,7 +23,6 @@ export = new Module({
     ],
     routes: [
         {
-            name: 'Profile',
             path: '/profile/...',
             component: ProfileRootRoute
         },

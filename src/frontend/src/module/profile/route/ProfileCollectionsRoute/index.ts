@@ -8,18 +8,14 @@ import {ProfileCollectionNotFoundRoute} from "../ProfileCollectionNotFoundRoute/
 const profileCollectionRoutes: Routes = [
     {
         path: '/',
-        name: 'List',
         component: ProfileCollectionsListRoute,
-        useAsDefault: true
     },
     {
         path: '/not-found',
-        name: 'NotFound',
         component: ProfileCollectionNotFoundRoute
     },
     {
         path: '/:sid',
-        name: 'View',
         component: ProfileCollectionRoute
     },
 ];

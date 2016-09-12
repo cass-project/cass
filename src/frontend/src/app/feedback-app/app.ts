@@ -14,11 +14,10 @@ import {MessageBusService} from "../../module/message/service/MessageBusService/
 import {MessageBusNotifications} from "../../module/message/component/MessageBusNotifications/index";
 
 const feedbackAdminRoutes: Routes = [
+    // TODO:: USE AS DEFAULT
     {
-        name: 'FeedbackRoute',
         path: '/feedback-admin/...',
         component: FeedbackRoute,
-        useAsDefault: true
     }
 ];
 

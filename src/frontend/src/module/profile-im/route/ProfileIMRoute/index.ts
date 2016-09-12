@@ -7,13 +7,10 @@ import {ProfileIMSidebar} from "../../component/Elements/ProfileIMSidebar";
 
 const profileIMRoutes: Routes = [
     {
-        name: 'Contacts',
         path: '/contacts',
         component: ProfileIMContacts,
-        useAsDefault: true
     },
     {
-        name: 'Messages',
         path: '/messages/:id',
         component: ProfileIMChat
     }

@@ -11,20 +11,17 @@ import {CommunityCollectionNotFoundRoute} from "../CommunityCollectionNotFoundRo
     ]
 })
 const communityCollectionsRoutes: Routes = [
+    // TODO:: USE AS DEFAULT
     {
         path: '/',
-        name: 'List',
         component: CommunityCollectionsListRoute,
-        useAsDefault: true
     },
     {
         path: '/not-found',
-        name: 'NotFound',
         component: CommunityCollectionNotFoundRoute
     },
     {
         path: '/:sid',
-        name: 'View',
         component: CommunityCollectionRoute
     },
 ];
