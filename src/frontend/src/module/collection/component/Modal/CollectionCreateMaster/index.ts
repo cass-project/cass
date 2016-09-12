@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Component, Input, Output, EventEmitter, Directive} from "@angular/core";
 
 import {ModalComponent} from "../../../../modal/component/index";
 import {ThemeSelect} from "../../../../theme/component/ThemeSelect/index";
@@ -22,9 +22,9 @@ enum CreateCollectionMasterStage
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    selector: "cass-collection-create-master"
+    ]
 })
+@Directive({selector: 'cass-collection-create-master'})
 export class CollectionCreateMaster
 {
     constructor(

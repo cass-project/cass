@@ -1,4 +1,4 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, Input, EventEmitter, Output, Directive} from "@angular/core";
 
 import {CommunityImage} from "../CommunityImage/index";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
@@ -8,12 +8,12 @@ import {CommunityEntity} from "../../../definitions/entity/Community";
 var moment = require('moment');
 
 @Component({
-    selector: 'cass-community-card-header',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-community-card'})
 export class CommunityCardHeader
 {
     @Input('community') entity: CommunityEntity;

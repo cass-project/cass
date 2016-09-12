@@ -1,15 +1,16 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 
 import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
 import {PageAttachmentMetadata} from "../../../definitions/entity/metadata/PageAttachmentMetadata";
 
 @Component({
-    selector: 'cass-post-attachment-link-page',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-post-attachment-link-page'})
+
 export class PostAttachmentLinkPage
 {
     @Input('attachment') attachment: PostAttachmentEntity<PageAttachmentMetadata>;

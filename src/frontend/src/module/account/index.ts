@@ -1,11 +1,11 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 import {AccountDeleteWarning} from "./component/AccountDeleteWarning/index";
 
 @Component({
-    selector: 'cass-account',
     template: require('./template.jade'),
 })
+@Directive({selector: 'cass-account'})
 export class AccountComponent
 {
 }

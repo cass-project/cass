@@ -1,16 +1,17 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 import {AuthService} from "../../../auth/service/AuthService";
 import {ProfileModals} from "../../../profile/modals";
 import {Router} from '@angular/router';
 
 @Component({
-    selector: 'cass-sidebar-profile-icon',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-sidebar-profile-icon'})
+
 export class SidebarProfileIcon
 {
     private isProfileMenuSwitched: boolean = false;

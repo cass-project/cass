@@ -1,6 +1,5 @@
-import {Component, ModuleWithProviders} from "@angular/core";
+import {Component, ModuleWithProviders, Directive} from "@angular/core";
 import {Routes, RouterModule} from "@angular/router";
-
 import {ContentRoute} from "./route/ContentRoute/index";
 import {PublicService} from "./service";
 import {CollectionsRoute} from "./route/CollectionsRoute/index";
@@ -37,7 +36,6 @@ const publicRoutes: Routes = [
 export const publicRouting: ModuleWithProviders = RouterModule.forChild(publicRoutes);
 
 @Component({
-    selector: 'cass-public',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
@@ -48,6 +46,7 @@ export const publicRouting: ModuleWithProviders = RouterModule.forChild(publicRo
         FeedOptionsService,
     ]
 })
+@Directive({selector: 'cass-public'})
 
 export class PublicComponent
 {

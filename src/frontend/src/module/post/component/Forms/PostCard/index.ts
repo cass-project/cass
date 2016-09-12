@@ -1,4 +1,4 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, Input, EventEmitter, Output, Directive} from "@angular/core";
 
 import {PostEntity} from "../../../definitions/entity/Post";
 import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
@@ -9,12 +9,13 @@ import {Session} from "../../../../session/Session";
 import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
 
 @Component({
-    selector: 'cass-post-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-post-card'})
+
 export class PostCard
 {
     @Input('post') post: PostEntity;

@@ -1,16 +1,17 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {AccountEntity} from "../../../../../../account/definitions/entity/Account";
 import {ProfileModalModel} from "../../model";
 
 @Component({
-    selector: 'cass-profile-modal-tab-account',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-profile-modal-tab-account'})
+
 export class AccountTab
 {
     private requestButtonDisabled: boolean = false;

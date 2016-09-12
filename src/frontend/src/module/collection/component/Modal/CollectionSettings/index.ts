@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 
 import {ModalComponent} from "../../../../modal/component/index";
 import {ModalBoxComponent} from "../../../../modal/component/box/index";
@@ -14,9 +14,9 @@ import {ColorPicker} from "../../../../form/component/ColorPicker/index";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    selector: "cass-collection-settings"
+    ]
 })
+@Directive({selector: 'cass-collection-settings'})
 export class CollectionSettings
 {
 

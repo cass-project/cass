@@ -1,4 +1,4 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, Input, EventEmitter, Output, Directive} from "@angular/core";
 
 import {ProfileEntity} from "../../../definitions/entity/Profile";
 import {ThemeSelect} from "../../../../theme/component/ThemeSelect/index";
@@ -7,12 +7,13 @@ import {ProfileRESTService} from "../../../service/ProfileRESTService";
 import {ProfileModalModel} from "../ProfileModal/model";
 
 @Component({
-    selector: 'cass-profile-interests-modal',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-profile-interests-modal'})
+
 export class ProfileInterestsModal {
     private loading:boolean = false;
     private canSave:boolean = false;

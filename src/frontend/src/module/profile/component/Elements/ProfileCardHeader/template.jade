@@ -6,5 +6,5 @@ article.component.component-profile-card-header((click)='goProfile()')
       .profile-name
         h1 {{ getProfileName() }}
       .profile-settings
-        time(*ngIf="hasTime()")
+        div(*ngIf="hasTime()")
           span {{ getTime() }}

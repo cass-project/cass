@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 import {PostCard} from "../../../../post/component/Forms/PostCard/index";
 import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
@@ -9,12 +9,13 @@ import {PostIndexedEntity} from "../../../../post/definitions/entity/Post";
 import {AppService} from "../../../../../app/frontend-app/service";
 
 @Component({
-    selector: 'cass-feed-post-stream',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-feed-post-stream'})
+
 export class FeedPostStream
 {
     constructor(

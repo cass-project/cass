@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 @Component({
-    selector: 'work-in-progress',
     template: require('./template.html')
 })
+@Directive({selector: 'work-in-progress'})
 export class WorkInProgress {}

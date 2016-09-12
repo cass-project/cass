@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 import {Router} from '@angular/router';
 
 import {ProfileEntity} from "../../../definitions/entity/Profile";
@@ -7,12 +7,13 @@ import {ThemeService} from "../../../../theme/service/ThemeService";
 import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
 
 @Component({
-    selector: 'cass-profile-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'profile-im-route'})
+
 export class ProfileCard
 {
     @Input('profile') entity: ProfileEntity;

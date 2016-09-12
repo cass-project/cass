@@ -1,13 +1,13 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 import {AuthService} from "../../../auth/service/AuthService";
 
 @Component({
-    selector: 'cass-account-delete-warning',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-account-delete-warning'})
 export class AccountDeleteWarning
 {
     private enabled: boolean = false;

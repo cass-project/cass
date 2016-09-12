@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from "@angular/core";
+import {Component, EventEmitter, Output, Directive} from "@angular/core";
 
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
 import {ModalComponent} from "../../../../modal/component/index";
@@ -16,7 +16,6 @@ enum CommunityJoinScreen
 }
 
 @Component({
-    selector: 'cass-community-join-modal',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
@@ -25,6 +24,7 @@ enum CommunityJoinScreen
         CommunityJoinModalModel
     ]
 })
+@Directive({selector: 'cass-community-join-modal'})
 export class CommunityJoinModal
 {
     @Output("close") closeEvent = new EventEmitter<CommunityJoinModal>();

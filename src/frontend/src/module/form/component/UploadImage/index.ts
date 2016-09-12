@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 import {Output, Input} from "@angular/core";
 import {EventEmitter} from "@angular/core";
 import {ModalComponent} from "../../../modal/component/index";
@@ -15,7 +15,6 @@ enum UploadImageScreen {
 }
 
 @Component({
-    selector: 'cass-upload-image-modal',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
@@ -24,6 +23,8 @@ enum UploadImageScreen {
         ImageCropperService,
     ]
 })
+@Directive({selector: 'cass-upload-image-modal'})
+
 export class UploadImageModal
 {
     public progress = new UploadProgress();

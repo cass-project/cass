@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         platformBrowserDynamic().bootstrapModule(AppModule, [
             {provide: FrontlineService, useValue: frontline},
-            {provide: FrontlineService, useValue: frontline},
             {provide: DomSanitizer, useClass: NoSanitizationService},
             {provide: Window, useValue: session},
             {provide: AuthToken, useFactory: () => {

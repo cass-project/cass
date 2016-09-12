@@ -1,10 +1,11 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 @Component({
-    selector: 'cass-form-progress-lock',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-form-progress-lock'})
+
 export class ProgressLock {}

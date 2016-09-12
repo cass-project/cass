@@ -1,4 +1,4 @@
-import {Component, ViewChild} from "@angular/core";
+import {Component, ViewChild, Directive} from "@angular/core";
 
 import {CommunitySettingsModalModel} from "../../model";
 import {CommunityImage} from "../../../../Elements/CommunityImage/index";
@@ -8,12 +8,12 @@ import {CommunityRESTService} from "../../../../../service/CommunityRESTService"
 import {CommunityImageDeleteRequest} from "../../../../../definitions/paths/image-delete";
 
 @Component({
-    selector: 'cass-community-settings-modal-tab-image',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-community-settings-modal-tab-image'})
 
 export class CommunityImageTab {
     @ViewChild('communityImageUploadInput') communityImageUploadInput;

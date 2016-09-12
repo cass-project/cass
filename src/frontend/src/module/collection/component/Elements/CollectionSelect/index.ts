@@ -1,12 +1,12 @@
-import {Input, Component} from "@angular/core";
+import {Input, Component, Directive} from "@angular/core";
 
 @Component({
-    selector: 'cass-collection-select',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-collection-select'})
 export class CollectionSelect
 {
     @Input("collections") collections: string;

@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 import {SidebarSignInButton} from "./component/SidebarSignInButton/index";
 import {SidebarProfileIcon} from "./component/SidebarProfileIcon/index";
@@ -9,9 +9,9 @@ import {SidebarMessages} from "./component/SidebarMessages/index";
 require('./style.head.scss');
 
 @Component({
-    selector: 'cass-sidebar',
     template: require('./template.jade'),
 })
+@Directive({selector: 'cass-sidebar'})
 export class SidebarComponent
 {
     constructor(private authService: AuthService) {}

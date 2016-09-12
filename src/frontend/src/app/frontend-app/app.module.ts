@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from "@angular/http";
@@ -104,6 +104,9 @@ import {AuthDev} from "../../module/auth-dev/component/index";
 import {OAuth2Component} from "../../module/auth/component/OAuth2/index";
 import {AccountDeleteWarning} from "../../module/account/component/AccountDeleteWarning/index";
 import {AccountComponent} from "../../module/account/index";
+import {ProfileRoute} from "../../module/profile/route/ProfileRoute/index";
+import {CommunityRoute} from "../../module/community/route/CommunityRoute/index";
+import {PublicComponent} from "../../module/public/index";
 
 
 @NgModule({
@@ -210,8 +213,12 @@ import {AccountComponent} from "../../module/account/index";
         OAuth2Component,
         AccountDeleteWarning,
         AccountComponent,
+        ProfileRoute,
+        CommunityRoute,
+        PublicComponent
 
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     imports: [
         BrowserModule,
         routing,

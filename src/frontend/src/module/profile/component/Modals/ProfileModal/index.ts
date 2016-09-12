@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from "@angular/core";
+import {Component, Output, EventEmitter, Directive} from "@angular/core";
 import {Router} from '@angular/router';
 
 
@@ -19,7 +19,6 @@ enum ProfileModalTab
 }
 
 @Component({
-    selector: 'cass-profile-settings',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
@@ -31,6 +30,8 @@ enum ProfileModalTab
         ThemeService
     ]
 })
+@Directive({selector: 'cass-profile-settings'})
+
 
 export class ProfileModal
 {

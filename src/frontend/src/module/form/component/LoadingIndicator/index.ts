@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 @Component({
-    selector: 'cass-loading-indicator',
     template: require('./template.html')
 })
+@Directive({selector: 'cass-loading-indicator'})
 export class LoadingIndicator {}

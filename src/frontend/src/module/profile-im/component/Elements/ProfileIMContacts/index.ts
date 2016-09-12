@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 import {ContactEntity} from "../../../../contact/definitions/entity/Contact";
 import {ContactService} from "../../../../contact/service/ContactService";
@@ -6,12 +6,12 @@ import {ProfileImage} from "../../../../profile/component/Elements/ProfileImage/
 import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
 
 @Component({
-    selector: 'cass-profile-im-messages',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-profile-im-messages'})
 
 export class ProfileIMContacts
 {

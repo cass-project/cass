@@ -1,4 +1,4 @@
-import {Component, ElementRef} from "@angular/core";
+import {Component, ElementRef, Directive} from "@angular/core";
 
 import {CommunityCreateModalModel} from "../../model";
 import {Screen} from "../../screen";
@@ -6,9 +6,9 @@ import {CommunityCreateModalForm} from "../../Form";
 import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
 
 @Component({
-    selector: 'cass-community-create-modal-screen-general',
     template: require('./template.jade')
 })
+@Directive({selector: 'cass-community-create-modal-screen-general'})
 export class ScreenGeneral extends Screen
 {
     constructor(public model: CommunityCreateModalModel, private elementRef: ElementRef) {

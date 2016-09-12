@@ -1,16 +1,16 @@
-import {Component, EventEmitter, Output} from "@angular/core";
+import {Component, EventEmitter, Output, Directive} from "@angular/core";
 
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
 import {ModalComponent} from "../../../../modal/component/index";
 import {ModalBoxComponent} from "../../../../modal/component/box/index";
 
 @Component({
-    selector: 'cass-community-route-modal',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-community-route-modal'})
 export class CommunityRouteModal
 {
     @Output("close") close = new EventEmitter<CommunityRouteModal>();

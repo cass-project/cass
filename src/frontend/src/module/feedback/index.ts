@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 import {FeedbackCreateModal} from "./component/Modal/FeedbackCreateModal/index";
 import {FeedbackCreateButton} from "./component/Elements/FeedbackCreateButton/index";
@@ -9,7 +9,6 @@ import {FeedbackService} from "./service/FeedbackService";
 import {FeedbackRESTService} from "./service/FeedbackRESTService";
 
 @Component({
-    selector: 'cass-feedback',
     template: require('./template.jade'),
     providers:[
         FeedbackCreateModalModel,
@@ -18,6 +17,7 @@ import {FeedbackRESTService} from "./service/FeedbackRESTService";
         FeedbackTypesService
     ]
 })
+@Directive({selector: 'cass-feedback'})
 
 export class FeedbackComponent
 {

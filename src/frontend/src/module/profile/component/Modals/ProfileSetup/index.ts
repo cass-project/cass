@@ -1,4 +1,4 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, Input, EventEmitter, Output, Directive} from "@angular/core";
 import {Router} from '@angular/router';
 
 import {ModalComponent} from "../../../../modal/component/index";
@@ -30,7 +30,6 @@ enum ProfileSetupScreen {
 }
 
 @Component({
-    selector: 'cass-profile-setup',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
@@ -41,6 +40,7 @@ enum ProfileSetupScreen {
         ProfileRouteService
     ]
 })
+@Directive({selector: 'cass-profile-setup'})
 
 export class ProfileSetup
 {

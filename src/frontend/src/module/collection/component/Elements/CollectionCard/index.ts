@@ -1,16 +1,16 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 import {CollectionEntity} from "../../../definitions/entity/collection";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {Router} from '@angular/router';
 
 @Component({
-    selector: 'cass-collection-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-collection-card'})
 export class CollectionCard
 {
     @Input('entity') entity: CollectionEntity;

@@ -1,15 +1,16 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 
 import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
 import {UnknownAttachmentMetadata} from "../../../definitions/entity/metadata/UnknownAttachmentMetadata";
 
 @Component({
-    selector: 'cass-post-attachment-link-unknown',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
 })
+@Directive({selector: 'cass-post-attachment-link-unknown'})
+
 export class PostAttachmentLinkUnknown
 {
     @Input('attachment') attachment: PostAttachmentEntity<UnknownAttachmentMetadata>;

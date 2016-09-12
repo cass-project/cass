@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from "@angular/core";
+import {Component, Output, EventEmitter, Directive} from "@angular/core";
 
 import {ProfileSetupModel} from "../../model";
 import {ProgressLock} from "../../../../../../form/component/ProgressLock/index";
@@ -7,12 +7,12 @@ import {EditPersonalResponse200} from "../../../../../definitions/paths/edit-per
 import {Session} from "../../../../../../session/Session";
 
 @Component({
-    selector: 'cass-profile-setup-screen-greetings',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-profile-setup-screen-greetings'})
 
 export class ProfileSetupScreenGreetings
 {

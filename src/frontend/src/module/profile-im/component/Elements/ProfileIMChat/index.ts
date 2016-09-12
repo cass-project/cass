@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ElementRef, EventEmitter} from "@angular/core";
+import {Component, OnInit, ViewChild, ElementRef, EventEmitter, Directive} from "@angular/core";
 import {ActivatedRoute} from '@angular/router';
 
 import {ProfileIMService} from "../../../service/ProfileIMService";
@@ -12,12 +12,12 @@ import {IMMessageSourceEntityType} from "../../../../im/definitions/entity/IMMes
 import {Observable} from "rxjs/Observable";
 
 @Component({
-    selector: 'cass-profile-im-messages',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-profile-im-messages'})
 
 export class ProfileIMChat implements OnInit
 {

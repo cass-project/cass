@@ -1,15 +1,15 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 import {CommunityFeaturesService} from "../../../../../service/CommunityFeaturesService";
 import {CommunitySettingsModalModel} from "../../model";
 
 @Component({
-    selector: 'cass-community-settings-modal-tab-features',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-community-settings-modal-tab-features'})
 
 export class FeaturesTab {
 

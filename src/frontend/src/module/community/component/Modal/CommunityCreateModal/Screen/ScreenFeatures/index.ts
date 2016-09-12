@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 import {CommunityCreateModalModel, CommunityFeaturesModel} from "../../model";
 import {CommunityFeaturesService} from "../../../../../service/CommunityFeaturesService";
@@ -6,13 +6,13 @@ import {Screen} from "../../screen";
 import {CommunityCreateModalForm} from "../../Form";
 
 @Component({
-    selector: 'cass-community-create-modal-screen-features',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
     providers: [CommunityFeaturesService]
 })
+@Directive({selector: 'cass-community-create-modal-screen-features'})
 export class ScreenFeatures extends Screen
 {
     private features: CommunityFeaturesModel[] = [];

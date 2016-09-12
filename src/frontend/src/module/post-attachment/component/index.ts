@@ -1,12 +1,12 @@
-import {Component, Input, Output, EventEmitter, Injectable} from "@angular/core";
+import {Component, Input, Output, EventEmitter, Injectable, Directive} from "@angular/core";
 
 @Component({
-    selector: 'cass-post-attachment',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-post-attachment'})
 
 @Injectable()
 export class PostAttachment

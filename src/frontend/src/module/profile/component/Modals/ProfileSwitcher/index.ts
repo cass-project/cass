@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from "@angular/core";
+import {Component, Output, EventEmitter, Directive} from "@angular/core";
 import {Router} from '@angular/router';
 
 import {ProfileImage} from "../../Elements/ProfileImage/index";
@@ -14,12 +14,12 @@ enum ProfileSwitcherStage
 }
 
 @Component({
-    selector: 'cass-profile-switcher',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-profile-switcher'})
 
 export class ProfileSwitcher
 {

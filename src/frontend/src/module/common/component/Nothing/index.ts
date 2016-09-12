@@ -1,9 +1,9 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 @Component({
-    selector: 'nothing',
     template: '<div></div>'
 })
+@Directive({selector: 'nothing'})
 export class Nothing
 {
 }

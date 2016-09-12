@@ -1,4 +1,4 @@
-import {Component, ModuleWithProviders} from "@angular/core";
+import {Component, ModuleWithProviders, Directive} from "@angular/core";
 import {Routes, RouterModule, RouterOutlet} from '@angular/router';
 
 import {ProfileIMChat} from "../../component/Elements/ProfileIMChat";
@@ -19,12 +19,12 @@ const profileIMRoutes: Routes = [
 export const profileIMRouting: ModuleWithProviders = RouterModule.forChild(profileIMRoutes);
 
 @Component({
-    selector:'profile-im-route',
     template: require('./template.jade'),
     styles: [
     require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'profile-im-route'})
 
 export class ProfileIMRoute
 {

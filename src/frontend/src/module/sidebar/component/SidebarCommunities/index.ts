@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 import {CommunityModalService} from "../../../community/service/CommunityModalService";
 import {Router} from '@angular/router';
@@ -8,12 +8,13 @@ import {queryImage, QueryTarget} from "../../../avatar/functions/query";
 import {ProfileCommunityBookmarksService} from "../../../profile-communities/service/ProfileCommunityBookmarksService";
 
 @Component({
-    selector: 'cass-sidebar-communities',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-sidebar-communities'})
+
 export class SidebarCommunities
 {
     private isSwitchedCommunityBookmarks: boolean = true;

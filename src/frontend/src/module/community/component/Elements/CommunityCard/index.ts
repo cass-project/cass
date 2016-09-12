@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Component, Input, Output, EventEmitter, Directive} from "@angular/core";
 
 import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
 import {CommunityImage} from "../CommunityImage/index";
@@ -8,12 +8,12 @@ import {ThemeService} from "../../../../theme/service/ThemeService";
 import {Router} from '@angular/router';
 
 @Component({
-    selector: 'cass-community-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-community-card'})
 export class CommunityCard
 {
     @Input('community') entity: CommunityEntity;

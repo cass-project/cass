@@ -1,12 +1,13 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 
 @Component({
-    selector: 'cass-profile-image',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-profile-image'})
+
 export class ProfileImage
 {
     @Input('url') url: string;

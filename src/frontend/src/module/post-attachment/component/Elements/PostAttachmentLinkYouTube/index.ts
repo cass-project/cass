@@ -1,15 +1,16 @@
-import {Component, Input, ViewChild, ElementRef} from "@angular/core";
+import {Component, Input, ViewChild, ElementRef, Directive} from "@angular/core";
 
 import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
 import {YoutubeAttachmentMetadata} from "../../../definitions/entity/metadata/YoutubeAttachmentMetadata";
 
 @Component({
-    selector: 'cass-post-attachment-link-youtube',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
+@Directive({selector: 'cass-post-attachment-link-youtube'})
+
 export class PostAttachmentLinkYouTube
 {
     private preview: boolean = true;

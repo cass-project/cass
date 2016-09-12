@@ -1,10 +1,11 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 import {TabModal} from "../../index";
 
 @Component({
-    selector: 'cass-tab-modal-tab',
     template: require('./template.jade')
 })
+@Directive({selector: 'cass-tab-modal-tab'})
+
 export class TabModalTab
 {
     public active: boolean = false;
