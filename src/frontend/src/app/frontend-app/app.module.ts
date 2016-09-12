@@ -1,5 +1,5 @@
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA, SecurityContext, Injectable} from '@angular/core';
+import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from "@angular/http";
 import {App}   from './app.component';
@@ -107,7 +107,15 @@ import {AccountComponent} from "../../module/account/index";
 import {ProfileRoute} from "../../module/profile/route/ProfileRoute/index";
 import {CommunityRoute} from "../../module/community/route/CommunityRoute/index";
 import {PublicComponent} from "../../module/public/index";
+import {FrontlineService} from "../../module/frontline/service";
+import {AuthToken} from "../../module/auth/service/AuthToken";
 
+@Injectable()
+export class NoSanitizationService {
+    sanitize(ctx: SecurityContext, value: any): string {
+        return value;
+    }
+}
 
 @NgModule({
     declarations: [
@@ -227,7 +235,25 @@ import {PublicComponent} from "../../module/public/index";
         HttpModule
     ],
     providers: [
-        appRoutingProviders
+        appRoutingProviders,
+        {provide: DomSanitizer, useClass: NoSanitizationService},
+        {provide: FrontlineService, useFactory: function() {
+            return window['frontline'];
+        }},
+        {provide: AuthToken, useFactory: () => {
+            let frontline = window['frontline'];
+            let token = new AuthToken();
+            let hasAuth = frontline.session.auth
+                && (typeof frontline.session.auth.api_key == "string")
+                && (frontline.session.auth.api_key.length > 0);
+
+            if (hasAuth) {
+                let auth = frontline.session.auth;
+                token.setToken(frontline.session.auth.api_key);
+            }
+
+            return token;}
+        }
     ],
     bootstrap: [App]
 })

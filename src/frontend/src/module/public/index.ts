@@ -35,6 +35,9 @@ const publicRoutes: Routes = [
 
 export const publicRouting: ModuleWithProviders = RouterModule.forChild(publicRoutes);
 
+@Directive({
+    selector: 'cass-public'
+})
 @Component({
     template: require('./template.jade'),
     styles: [
@@ -46,8 +49,6 @@ export const publicRouting: ModuleWithProviders = RouterModule.forChild(publicRo
         FeedOptionsService,
     ]
 })
-@Directive({selector: 'cass-public'})
-
 export class PublicComponent
 {
     constructor(private service: PublicService,
