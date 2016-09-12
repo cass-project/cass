@@ -12,9 +12,6 @@ class CreatePostParameters
     /** @var int */
     private $collectionId;
 
-    /** @var \DateTime */
-    private $dateCreatedOn;
-
     /** @var string */
     private $content;
 
@@ -25,14 +22,12 @@ class CreatePostParameters
         int $postTypeCode,
         int $profileId,
         int $collectionId,
-        \DateTime $dateCreatedOn,
         string $content,
         array $attachmentIds
     ) {
         $this->postTypeCode = $postTypeCode;
         $this->profileId = $profileId;
         $this->collectionId = $collectionId;
-        $this->dateCreatedOn = $dateCreatedOn;
         $this->content = $content;
         $this->attachmentIds = $attachmentIds;
     }
@@ -48,11 +43,6 @@ class CreatePostParameters
 
     public function getCollectionId(): int {
         return $this->collectionId;
-    }
-
-    public function getDateCreatedOn(): \DateTime
-    {
-        return $this->dateCreatedOn;
     }
 
     public function getContent(): string {
