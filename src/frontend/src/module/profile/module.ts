@@ -18,6 +18,6 @@ export = new Module({
         ProfileSwitcherService,
         ProfileCachedIdentityMap,
         ProfileModals,
-        ProfileModalModel, // @deprecated
+        ProfileModalModel // @deprecated
     ],
 });

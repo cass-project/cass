@@ -1,4 +1,4 @@
-import {Component, Renderer, Directive} from "@angular/core";
+import {Component, Renderer} from "@angular/core";
 
 import {ModalComponent} from "../../../modal/component/index";
 import {SignInComponent} from "../SignIn/index";
@@ -8,12 +8,14 @@ import {ModalBoxComponent} from "../../../modal/component/box/index";
 import {AuthDev} from "../../../auth-dev/component/index";
 
 @Component({
+    selector: 'cass-auth',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
+    ],
+    providers: [ModalComponent, SignInComponent, SignUpComponent, ModalBoxComponent, AuthDev]
 })
-@Directive({selector: 'cass-auth'})
+
 export class AuthComponent
 {
     constructor(private service: AuthComponentService, renderer: Renderer) {

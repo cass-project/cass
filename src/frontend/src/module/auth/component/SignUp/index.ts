@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter, ElementRef, ViewChild, Directive} from "@angular/core";
+import {Component, Output, EventEmitter, ElementRef, ViewChild} from "@angular/core";
 
 import {OAuth2Component} from "../OAuth2/index";
 import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
@@ -9,9 +9,11 @@ import {NgForm} from "@angular/forms";
 import {AuthService} from "../../service/AuthService";
 
 @Component({
-    template: require('./template.jade')
+    selector: 'cass-auth-sign-up',
+    template: require('./template.jade'),
+    providers: [OAuth2Component, LoadingIndicator, ProgressLock]
 })
-@Directive({selector: 'cass-auth-sign-up'})
+
 export class SignUpComponent
 {
     @ViewChild('form') form: NgForm;

@@ -1,4 +1,4 @@
-import {Component, Directive} from "@angular/core";
+import {Component} from "@angular/core";
 
 import {AuthService} from "../../../auth/service/AuthService";
 import {ProfileModals} from "../../../profile/modals";

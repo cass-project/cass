@@ -1,12 +1,12 @@
-import {Component, Directive} from "@angular/core";
+import {Component} from "@angular/core";
 
 @Component({
+    selector: 'cass-auth-oauth2',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
-@Directive({selector: 'cass-auth-oauth2'})
 
 export class OAuth2Component
 {

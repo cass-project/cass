@@ -1,16 +1,18 @@
-import {Component, Input, Output, EventEmitter, Directive} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 
 import {Collection} from "../../../definitions/entity/collection";
 import {CollectionCard} from "../CollectionCard/index";
 import {CreateCollectionCard} from "../CreateCollectionCard/index";
 
 @Component({
+    selector: 'cass-collections-list',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
+    ],
+    providers: [CollectionCard, CreateCollectionCard]
 })
-@Directive({selector: 'cass-collections-list'})
+
 export class CollectionsList
 {
     @Input('is-own') isOwn: boolean = false;

@@ -1,4 +1,4 @@
-import {Component, Directive} from "@angular/core";
+import {Component} from "@angular/core";
 
 import {CommunityModalService} from "../../../community/service/CommunityModalService";
 import {Router} from '@angular/router';

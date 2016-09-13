@@ -6,9 +6,10 @@ import {SignInRequest, SignInResponse200} from "../../definitions/paths/sign-in"
 
 
 @Component({
+    selector: 'cass-auth-sign-in',
     template: require('./template.jade')
 })
-@Directive({selector: 'cass-auth-sign-in'})
+
 export class SignInComponent
 {
     @ViewChild('emailInput') emailInput: ElementRef;

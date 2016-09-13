@@ -8,7 +8,7 @@ import {MessageBusNotifications} from "../../module/message/component/MessageBus
 import {AuthComponent} from "../../module/auth/component/Auth/index";
 import {ProgressLock} from "../../module/form/component/ProgressLock/index";
 import {CommunityHeader} from "../../module/community/component/Elements/CommunityHeader/index";
-import {SidebarSignInButton} from "../../module/sidebar/component/SidebarSignInButton/index";
+
 import {SidebarProfileIcon} from "../../module/sidebar/component/SidebarProfileIcon/index";
 import {SidebarCommunities} from "../../module/sidebar/component/SidebarCommunities/index";
 import {SidebarMessages} from "../../module/sidebar/component/SidebarMessages/index";
@@ -111,6 +111,7 @@ import {FrontlineService} from "../../module/frontline/service";
 import {AuthToken} from "../../module/auth/service/AuthToken";
 import {Nothing} from "../../module/common/component/Nothing/index";
 import {SidebarComponent} from "../../module/sidebar/index";
+import {SidebarSignInButton} from "../../module/sidebar/component/SidebarSignInButton/index";
 
 @Injectable()
 export class NoSanitizationService {
