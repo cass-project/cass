@@ -110,6 +110,7 @@ import {PublicComponent} from "../../module/public/index";
 import {FrontlineService} from "../../module/frontline/service";
 import {AuthToken} from "../../module/auth/service/AuthToken";
 import {Nothing} from "../../module/common/component/Nothing/index";
+import {SidebarComponent} from "../../module/sidebar/index";
 
 @Injectable()
 export class NoSanitizationService {
@@ -218,6 +219,7 @@ export class NoSanitizationService {
         CollectionSelect,
         SignInComponent,
         SignUpComponent,
+        SidebarComponent,
         AuthDev,
         OAuth2Component,
         AccountDeleteWarning,
