@@ -8,9 +8,12 @@ import {SidebarMessages} from "./component/SidebarMessages/index";
 
 require('./style.head.scss');
 
-@Directive({selector: 'cass-sidebar'})
 @Component({
+    selector: 'cass-sidebar',
     template: require('./template.jade'),
+    styles: [
+        require('./style.head.scss')
+    ]
 })
 export class SidebarComponent
 {

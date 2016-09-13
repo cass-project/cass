@@ -5,12 +5,12 @@ import {ProfileModals} from "../../../profile/modals";
 import {Router} from '@angular/router';
 
 @Component({
+    selector: 'cass-sidebar-profile-icon',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
-@Directive({selector: 'cass-sidebar-profile-icon'})
 
 export class SidebarProfileIcon
 {

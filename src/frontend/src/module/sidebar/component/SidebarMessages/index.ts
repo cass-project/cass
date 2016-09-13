@@ -5,12 +5,12 @@ import {ProfileImage} from "../../../profile/component/Elements/ProfileImage/ind
 import {IMUnreadResponseEntity} from "../../../im/definitions/paths/im-unread";
 
 @Component({
+    selector: 'cass-sidebar-messages',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
-@Directive({selector: 'cass-sidebar-messages'})
 
 export class SidebarMessages
 {

@@ -2,12 +2,12 @@ import {Component, Directive} from "@angular/core";
 import {AuthComponentService} from "../../../auth/component/Auth/service";
 
 @Component({
+    selector: 'cass-sidebar-sign-in-button',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
     ]
 })
-@Directive({selector: 'cass-sidebar-sign-in-button'})
 
 export class SidebarSignInButton
 {
