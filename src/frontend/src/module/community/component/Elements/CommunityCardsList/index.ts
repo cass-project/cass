@@ -1,24 +1,17 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 
 import {CommunityCard} from "../CommunityCard/index";
 import {CommunityCreateCollectionCard} from "../CommunityCreateCollectionCard/index";
 import {CommunitySettingsCard} from "../CommunitySettingsCard/index";
 
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
 
 @Component({
-    selector: 'cass-community-cards-list',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        CommunityCard,
-        CommunityCreateCollectionCard,
-        CommunitySettingsCard,
-    ]
-})
+    ],selector: 'cass-community-cards-list'})
 export class CommunityCardsList
 {
     @Input('community') entity: CommunityExtendedEntity;

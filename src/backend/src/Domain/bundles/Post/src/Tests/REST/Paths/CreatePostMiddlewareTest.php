@@ -28,11 +28,6 @@ class CreatePostMiddlewareTest extends PostMiddlewareTest
             ->expectAuthError();
     }
 
-    public function testPostCreate400PostTypeNotFound()
-    {
-
-    }
-
     public function testPostCreateProfile404()
     {
         $account = DemoAccountFixture::getAccount();
@@ -204,7 +199,7 @@ class CreatePostMiddlewareTest extends PostMiddlewareTest
                                 }),
                                 'code' => PostAttachmentOwner::OWNER_CODE,
                             ],
-                            'metadata' => [
+                            'link' => [
                                 'source' => [
                                     'source' => 'local',
                                     'public_path' => $this->expectString(),

@@ -8,6 +8,7 @@ import {AuthComponentService} from "../../../auth/component/Auth/service";
         require('./style.shadow.scss')
     ]
 })
+
 export class SidebarSignInButton
 {
     constructor(private service: AuthComponentService) {}

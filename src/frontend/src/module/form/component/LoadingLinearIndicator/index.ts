@@ -1,10 +1,8 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 @Component({
-    selector: 'cass-loading-linear-indicator',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
+    ],selector: 'cass-loading-linear-indicator'})
 export class LoadingLinearIndicator {}

@@ -1,23 +1,17 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, Input, EventEmitter, Output, Directive} from "@angular/core";
 
 import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {ProfileImage} from "../ProfileImage/index";
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {ProfileModals} from "../../../modals";
 import {ProfileRouteService} from "../../../route/ProfileRoute/service";
 
 @Component({
-    selector: 'cass-profile-header',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ProfileImage,
-        ROUTER_DIRECTIVES,
-    ]
-})
+    ],selector: 'cass-profile-header'})
+
 export class ProfileHeader
 {
     @Output('go-profile') goProfileEvent: EventEmitter<string> = new EventEmitter<string>();

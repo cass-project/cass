@@ -12,7 +12,7 @@ export = new Module({
     ],
     providers: [
         AuthService,
-        AuthComponentService,
+        AuthComponentService
     ],
     directives: [
         AuthComponent,

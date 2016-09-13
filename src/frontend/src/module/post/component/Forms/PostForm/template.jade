@@ -6,7 +6,7 @@ article.component.component-post-form([ngClass]="{ 'component-post-form--extende
         textarea.content(
           #contentTextArea,
           placeholder="Новый пост…",
-          [(ngModel)]="model.content",
+          [ngModelOptions]="{standalone: true}", [(ngModel)]="model.content",
           (focus)="focus()",
           (blur)="blur()"
         )

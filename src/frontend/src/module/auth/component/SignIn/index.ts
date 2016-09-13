@@ -1,20 +1,15 @@
-import {Component, Output, EventEmitter, ViewChild, ElementRef} from "@angular/core";
+import {Component, Output, EventEmitter, ViewChild, ElementRef, Directive} from "@angular/core";
 
-import {OAuth2Component} from "../OAuth2/index";
-import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
+
 import {AuthService} from "../../service/AuthService";
 import {SignInRequest, SignInResponse200} from "../../definitions/paths/sign-in";
-import {ProgressLock} from "../../../form/component/ProgressLock/index";
+
 
 @Component({
-    template: require('./template.jade'),
     selector: 'cass-auth-sign-in',
-    directives: [
-        OAuth2Component,
-        LoadingIndicator,
-        ProgressLock
-    ]
+    template: require('./template.jade')
 })
+
 export class SignInComponent
 {
     @ViewChild('emailInput') emailInput: ElementRef;

@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef, EventEmitter, Output} from "@angular/core";
+import {Component, Input, ViewChild, ElementRef, EventEmitter, Output, Directive} from "@angular/core";
 
 import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {CollectionEntity} from "../../../../collection/definitions/entity/collection";
@@ -13,17 +13,11 @@ import {LoadingManager} from "../../../../common/classes/LoadingStatus";
 import {PostFormModel} from "./model";
 
 @Component({
-    selector: 'cass-post-form',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ProgressLock,
-        PostFormLinkInput,
-        PostAttachment,
-    ]
-})
+    ],selector: 'cass-post-form'})
+
 export class PostForm
 {
     static DEFAULT_POST_TYPE = 'default';

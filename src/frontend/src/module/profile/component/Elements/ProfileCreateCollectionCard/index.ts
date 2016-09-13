@@ -1,13 +1,12 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 import {ProfileModals} from "../../../modals";
 
 @Component({
-    selector: 'cass-profile-create-collection-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
+    ],selector: 'cass-profile-create-collection-card'})
+
 export class ProfileCreateCollectionCard
 {
     constructor(private modals: ProfileModals) {}

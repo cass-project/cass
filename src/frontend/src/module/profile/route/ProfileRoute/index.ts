@@ -1,8 +1,6 @@
-import {Component} from "@angular/core";
-
-import {Router, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
-import {RouteConfig, RouteParams} from "@angular/router-deprecated";
-
+import {Component, ModuleWithProviders, OnInit, OnDestroy} from "@angular/core";
+import {Router, Routes, RouterModule, ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
 import {ProgressLock} from "../../../form/component/ProgressLock/index";
 import {ProfileCollectionsRoute} from "../ProfileCollectionsRoute/index";
 import {ProfileRouteService} from "./service";
@@ -13,15 +11,24 @@ import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 import {Session} from "../../../session/Session";
 
+const profileRoutes: Routes = [
+    // TODO:: USE AS DEFAULT
+    {
+        path: '/',
+        component: ProfileDashboardRoute,
+    },
+    {
+        path: '/collections/...',
+        component: ProfileCollectionsRoute
+    },
+];
+
+export const profileRouting: ModuleWithProviders = RouterModule.forChild(profileRoutes);
+
 @Component({
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ROUTER_DIRECTIVES,
-        ProgressLock,
-        ProfileHeader,
     ],
     providers: [
         ProfileRouteService,
@@ -29,29 +36,52 @@ import {Session} from "../../../session/Session";
         FeedOptionsService,
     ]
 })
-@RouteConfig([
-    {
-        path: '/',
-        name: 'Dashboard',
-        component: ProfileDashboardRoute,
-        useAsDefault: true
-    },
-    {
-        path: '/collections/...',
-        name: 'Collections',
-        component: ProfileCollectionsRoute
-    },
-])
-export class ProfileRoute
+
+export class ProfileRoute implements OnInit, OnDestroy
 {
+    private sub: Subscription;
+    
     constructor(
-        private params: RouteParams,
+        private route: ActivatedRoute,
         private router: Router,
         private service: ProfileRouteService,
         private session: Session,
         private authService: AuthService
-    ) {
-        let id = params.get('id');
+    ) {}
+    
+    ngOnInit(){
+        this.sub = this.route.params.subscribe(params => {
+            let id = params['sid'];
+            if (this.authService.isSignedIn() && (id === 'current' || id === this.session.getCurrentProfile().getId().toString())) {
+                this.service.loadCurrentProfile();
+            } else if (Number(id)) {
+                this.service.loadProfileById(Number(id));
+            } else {
+                this.router.navigate(['/Profile/NotFound']);
+                return;
+            }
+
+            if (this.service.getObservable() !== undefined) {
+                this.service.getObservable().subscribe(
+                    (response) => {
+                    },
+                    (error) => {
+                        this.router.navigate(['/Profile/NotFound']);
+                    }
+                )
+            } else {
+                this.router.navigate(['/Public']);
+            }
+        })
+    }
+
+    ngOnDestroy(){
+        this.sub.unsubscribe();
+    }
+        
+    
+    
+    /*let id = params.get('id');
 
         if (authService.isSignedIn() && (id === 'current' || id === this.session.getCurrentProfile().getId().toString())) {
                 service.loadCurrentProfile();
@@ -73,5 +103,5 @@ export class ProfileRoute
         } else {
             router.navigate(['/Public']);
         }
-    }
+    }*/
 }

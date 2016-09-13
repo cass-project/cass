@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 
 import {ProfileRESTService} from "../../../service/ProfileRESTService";
 import {Session} from "../../../../session/Session";

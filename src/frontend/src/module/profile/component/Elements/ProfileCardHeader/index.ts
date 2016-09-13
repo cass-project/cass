@@ -1,22 +1,17 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 
-import {ProfileImage} from "../ProfileImage/index";
 import {ProfileEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 
 var moment = require('moment');
 
 @Component({
-    selector: 'cass-profile-card-header',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ProfileImage,
-    ]
-})
+    ],selector: 'cass-profile-card-header'})
+
 export class ProfileCardHeader
 {
     @Input('profile') profile: ProfileEntity;

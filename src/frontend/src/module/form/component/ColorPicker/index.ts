@@ -1,15 +1,13 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 import {FrontlineService} from "../../../frontline/service";
 import {Palette} from "../../../colors/definitions/entity/Palette";
 
-
 @Component({
-    selector: 'cass-color-picker',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
+    ],selector: 'cass-color-picker'})
+
 export class ColorPicker
 {
     

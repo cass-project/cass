@@ -18,7 +18,6 @@ export interface AccountDisabledEntity {
 }
 
 export class Account {
-    public entity: AccountEntity;
     public profiles: AccountProfiles;
 
     constructor(public entity: AccountEntity, profiles: Array<ProfileExtendedEntity>) {

@@ -17,7 +17,7 @@ export class FeedbackRESTService extends AbstractRESTService {
         super(http, token, messages)
     }
 
-    public create(request: FeedbackCreateRequest): Observable<Response> {
+    public create(request: FeedbackCreateRequest) {
         let authHeader = new Headers();
 
         if (this.token.hasToken()) {

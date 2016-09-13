@@ -1,19 +1,14 @@
-import {Component, Output, EventEmitter} from "@angular/core";
-
+import {Component, Output, EventEmitter, Directive} from "@angular/core";
 import {ModalComponent} from "../../modal/component/index";
 import {ModalBoxComponent} from "../../modal/component/box/index";
 import {ProgressLock} from "../../form/component/ProgressLock/index";
 import {AuthService} from "../../auth/service/AuthService";
 
 @Component({
-    template: require('./template.jade'),
-    selector: "cass-auth-dev",
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ProgressLock
-    ]
+    selector: 'cass-auth-dev',
+    template: require('./template.jade')
 })
+
 export class AuthDev
 {
     constructor(

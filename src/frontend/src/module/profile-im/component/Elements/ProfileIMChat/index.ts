@@ -1,6 +1,5 @@
-import {Component, ViewChild, ElementRef, EventEmitter} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
-import {RouteParams} from "@angular/router-deprecated";
+import {Component, OnInit, ViewChild, ElementRef, EventEmitter, Directive} from "@angular/core";
+import {ActivatedRoute} from '@angular/router';
 
 import {ProfileIMService} from "../../../service/ProfileIMService";
 import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
@@ -10,56 +9,54 @@ import {IMMessagesBodyRequest} from "../../../../im/definitions/paths/im-message
 import {IMAttachments} from "../../../../im/component/IMAttachments/index";
 import {Session} from "../../../../session/Session";
 import {IMMessageSourceEntityType} from "../../../../im/definitions/entity/IMMessageSource";
+import {Observable} from "rxjs/Observable";
 
 @Component({
-    selector: 'cass-profile-im-messages',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ROUTER_DIRECTIVES,
-        IMAttachments,
-        IMChat,
-        IMTextarea,
-        LoadingLinearIndicator
-    ]
-})
+    ],selector: 'cass-profile-im-messages'})
 
-export class ProfileIMChat
+export class ProfileIMChat implements OnInit
 {
     @ViewChild('content') content:ElementRef;
     private isLoading = true;
     private listerInterval = 5000/*ms*/;
     private scroll = new EventEmitter<boolean>();
     private source:IMMessageSourceEntityType;
+    private sidChat: number;
     
     constructor(
-        private params: RouteParams, 
+        private route: ActivatedRoute,
         private service: ProfileIMService, 
         private session: Session
-    ) {
-        let profileId = session.getCurrentProfile().getId();
+    ) {}
+
+    ngOnInit(){
+        let profileId = this.session.getCurrentProfile().getId();
 
         this.listen(profileId);
 
-        service.createStream("profile", parseInt(params.get('id')))
+        this.route.params.map(params => {
+            this.sidChat = parseInt(params['id']);
+        });
+
+        this.service.createStream("profile", this.sidChat)
             .subscribe(() => this.scroll.emit(true));
-        
+
         this.scroll.subscribe(force => {
             let offsetBottom = this.content.nativeElement.scrollHeight - this.content.nativeElement.scrollTop - this.content.nativeElement.clientHeight;
             if(offsetBottom < 300 || force) {
                 this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
             }
-        })
-    }
+        })}
     
     listen(profileId:number) {
         let loadHistoryBody:IMMessagesBodyRequest = {criteria: {seek: {
             limit: 0
         }}};
         
-        let history = this.service.getHistory(parseInt(this.params.get('id')));
+        let history = this.service.getHistory(this.sidChat);
 
         if(history.length > 0) {
             history = history.filter(message => {
@@ -71,7 +68,7 @@ export class ProfileIMChat
         this.service.read(
             profileId,
             "profile",
-            parseInt(this.params.get('id')),
+            this.sidChat,
             loadHistoryBody
         ).subscribe(data => {
             this.source = data.source.entity;

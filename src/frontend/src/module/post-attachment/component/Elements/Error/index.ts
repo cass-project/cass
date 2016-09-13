@@ -1,11 +1,10 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 @Component({
-    selector: 'cass-attachment-error',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss'),
-    ]
-})
+    ],selector: 'cass-attachment-error'})
+
 export class AttachmentError
 {}

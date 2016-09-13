@@ -1,14 +1,12 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 import {MessageBusService} from "../../service/MessageBusService/index";
 
 @Component({
-    selector: "cass-message-bus-notifications",
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
+    ],selector: 'cass-message-bus-notifications'})
 export class MessageBusNotifications
 {
     constructor(private messageBusService: MessageBusService){}

@@ -1,17 +1,14 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
-import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
-import {ProfileService} from "../../../../../service/ProfileService";
 import {ProfileModalModel} from "../../model";
 
 
 @Component({
-    selector: 'cass-profile-modal-tab-personal',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
+    ],selector: 'cass-profile-modal-tab-personal'})
+
 export class PersonalTab
 {
     constructor(private model: ProfileModalModel){}

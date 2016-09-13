@@ -11,12 +11,6 @@ require('./style.head.scss');
 @Component({
     selector: 'cass-sidebar',
     template: require('./template.jade'),
-    directives: [
-        SidebarSignInButton,
-        SidebarProfileIcon,
-        SidebarCommunities,
-        SidebarMessages,
-    ]
 })
 export class SidebarComponent
 {

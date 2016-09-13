@@ -1,4 +1,4 @@
-import {PostAttachmentEntity} from "../../../post-attachment/definitions/entity/PostAttachment";
+import {PostAttachmentEntity, AttachmentMetadata} from "../../../post-attachment/definitions/entity/PostAttachment";
 import {ProfileEntity} from "../../../profile/definitions/entity/Profile";
 import {FeedEntity} from "../../../feed/service/FeedService/entity";
 
@@ -9,7 +9,7 @@ export interface PostEntity extends FeedEntity
     profile_id: number;
     collection_id: number;
     content: string;
-    attachments: PostAttachmentEntity<any>[];
+    attachments: PostAttachmentEntity<AttachmentMetadata>[];
     attachment_ids: number[];
     profile: ProfileEntity;
 }

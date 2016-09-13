@@ -9,8 +9,7 @@ cass-community-create-modal-form((abort)="abort()", (next)="next()")
           minlength="3",
           maxlength="30",
           placeholder="Название, заголовок сообщества",
-          [(ngModel)] = "model.title",
-          #ngControlTitle="ngForm"
+          [ngModelOptions]="{standalone: true}", [(ngModel)] = "model.title"
         )
     .input-group
       label.form-label
@@ -18,7 +17,7 @@ cass-community-create-modal-form((abort)="abort()", (next)="next()")
         input.form-input(
           type="text",
           placeholder="(Опционально) В одну строку про сообщество",
-          [(ngModel)]="model.description"
+          [ngModelOptions]="{standalone: true}", [(ngModel)]="model.description"
         )
     .input-group
       label.form-label

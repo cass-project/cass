@@ -17,7 +17,7 @@ form.form.form-auth-sign-in((ngSubmit)='submit()', (keyup.escape)='close()')
           placeholder='Адрес электронного ящика, указанного при регистрации',
           autocomplete='off', autofocus='autofocus',
           tabindex='1',
-          [(ngModel)]='model.email',
+          [ngModelOptions]="{standalone: true}", [(ngModel)]='model.email',
           [disabled]='status.loading'
         )
     .input-group
@@ -29,7 +29,7 @@ form.form.form-auth-sign-in((ngSubmit)='submit()', (keyup.escape)='close()')
           placeholder='**********',
           autocomplete='off',
           tabindex='2',
-          [(ngModel)]='model.password',
+          [ngModelOptions]="{standalone: true}", [(ngModel)]='model.password',
           [disabled]='status.loading'
         )
   footer.form-footer

@@ -1,27 +1,23 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 
-import {LinkAttachment} from "../../../definitions/entity/attachment/LinkAttachment";
 import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
-import {PageLinkMetadata} from "../../../definitions/entity/attachment/link/PageLinkMetaData";
-import {UnknownLinkMetadata} from "../../../definitions/entity/attachment/link/UnknownLinkMetadata";
-import {WebmLinkMetadata} from "../../../definitions/entity/attachment/link/WebmLinkMetadata";
+import {WebmAttachmentMetadata} from "../../../definitions/entity/metadata/WebmAttachmentMetadata";
 
 @Component({
-    selector: 'cass-post-attachment-link-webm',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-})
+    ],selector:  'cass-post-attachment-link-webm'})
+
 export class PostAttachmentLinkWebm
 {
-    @Input('attachment') link: PostAttachmentEntity<LinkAttachment<WebmLinkMetadata>>;
+    @Input('attachment') attachment: PostAttachmentEntity<WebmAttachmentMetadata>;
     
     getType(): string {
-        return this.link.attachment.metadata.type;
+        return this.attachment.link.metadata.type;
     }
 
     getURL(): string {
-        return this.link.attachment.url;
+        return this.attachment.link.url;
     }
 }

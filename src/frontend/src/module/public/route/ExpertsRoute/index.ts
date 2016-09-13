@@ -16,10 +16,6 @@ import {ProfileIndexedEntity} from "../../../profile/definitions/entity/Profile"
     providers: [
         FeedService,
         PublicExpertsSource,
-    ],
-    directives: [
-        FeedProfileStream,
-        NothingFound,
     ]
 })
 export class ExpertsRoute

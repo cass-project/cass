@@ -45,12 +45,12 @@ export class CommunityService {
         });
     }
 
-    public edit(id:number, body: EditCommunityRequest): Observable<Response>
+    public edit(id:number, body: EditCommunityRequest)
     {
         return this.communityRESTService.edit(id, body);
     }
 
-    public imageUpload(request:CommunityImageUploadRequestModel): Observable<Response>
+    public imageUpload(request:CommunityImageUploadRequestModel)
     {
         return this.communityRESTService.imageUpload(request);
     }
@@ -73,12 +73,12 @@ export class CommunityService {
         )[0];
     }
 
-    public imageDelete(request:CommunityImageDeleteRequest): Observable<Response>
+    public imageDelete(request:CommunityImageDeleteRequest)
     {
         return this.communityRESTService.imageDelete(request);
     }
 
-    public activateFeature(reqeust: CommunityControlFeatureRequestModel) : Observable<Response>
+    public activateFeature(reqeust: CommunityControlFeatureRequestModel)
     {
         return this.communityRESTService.activateFeature(reqeust);
     };
@@ -88,7 +88,7 @@ export class CommunityService {
         return this.communityRESTService.deactivateFeature(reqeust);
     };
 
-    public setPublicOptions(communityId:number, body: SetPublicOptionsCommunityRequest): Observable<Response>
+    public setPublicOptions(communityId:number, body: SetPublicOptionsCommunityRequest)
     {
         return this.communityRESTService.setPublicOptions(communityId, body);
     }

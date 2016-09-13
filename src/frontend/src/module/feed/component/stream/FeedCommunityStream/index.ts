@@ -1,4 +1,4 @@
-import {Component, ViewChild, ElementRef} from "@angular/core";
+import {Component, ViewChild, ElementRef, Directive} from "@angular/core";
 
 import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
 import {FeedService} from "../../../service/FeedService/index";
@@ -9,17 +9,11 @@ import {CommunityIndexedEntity} from "../../../../community/definitions/entity/C
 import {AppService} from "../../../../../app/frontend-app/service";
 
 @Component({
-    selector: 'cass-feed-community-stream',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        CommunityCard,
-        LoadingIndicator,
-        FeedScrollDetector
-    ]
-})
+    ],selector: 'cass-feed-community-stream'})
+
 export class FeedCommunityStream
 {
     constructor(

@@ -16,10 +16,6 @@ import {PostIndexedEntity} from "../../../post/definitions/entity/Post";
     providers: [
         FeedService,
         PublicContentSource,
-    ],
-    directives: [
-        FeedPostStream,
-        NothingFound,
     ]
 })
 export class ContentRoute

@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Directive} from "@angular/core";
 
 import {ProfileModal} from "./component/Modals/ProfileModal/index";
 import {ModalComponent} from "../modal/component/index";
@@ -14,19 +14,9 @@ import {CollectionCreateMaster} from "../collection/component/Modal/CollectionCr
 import {Session} from "../session/Session";
 
 @Component({
-    selector: 'cass-profile',
     template: require('./template.jade'),
-    providers: [],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ProfileModal,
-        ProfileSwitcher,
-        ProfileInterestsModal,
-        ProfileSetup,
-        CollectionCreateMaster
-    ]
-})
+    providers: [],selector: 'cass-profile'})
+
 export class ProfileComponent
 {
     constructor(private authService: AuthService, private session: Session, private modals: ProfileModals, protected messages: MessageBusService) {}

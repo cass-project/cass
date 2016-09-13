@@ -1,4 +1,4 @@
-import {Component, Injectable, Output, EventEmitter} from "@angular/core";
+import {Component, Injectable, Output, EventEmitter, Directive} from "@angular/core";
 
 import {UploadImageService} from "../../../../../../form/component/UploadImage/service";
 import {UploadProfileImageStrategy} from "../../../../../common/UploadProfileImageStrategy";
@@ -11,19 +11,13 @@ import {DeleteProfileImageResponse200} from "../../../../../definitions/paths/im
 import {AuthToken} from "../../../../../../auth/service/AuthToken";
 
 @Component({
-    selector: 'cass-profile-setup-screen-image',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
     providers: [
         UploadImageService,
-    ],
-    directives: [
-        ProfileImage,
-        UploadImageModal,
-    ]
-})
+    ],selector: 'cass-profile-setup-screen-image'})
 
 @Injectable()
 export class ProfileSetupScreenImage

@@ -1,5 +1,5 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
-import {Router} from '@angular/router-deprecated';
+import {Component, Input, EventEmitter, Output, Directive} from "@angular/core";
+import {Router} from '@angular/router';
 
 import {ModalComponent} from "../../../../modal/component/index";
 import {ProfileSetupModel} from "./model";
@@ -30,7 +30,6 @@ enum ProfileSetupScreen {
 }
 
 @Component({
-    selector: 'cass-profile-setup',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
@@ -39,18 +38,7 @@ enum ProfileSetupScreen {
         ProfileSetupModel,
         ProfileRESTService,
         ProfileRouteService
-    ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        LoadingLinearIndicator,
-        ProfileSetupScreenGreetings,
-        ProfileSetupScreenGender,
-        ProfileSetupScreenImage,
-        ProfileSetupScreenInterests,
-        ProfileSetupScreenExpertIn
-    ]
-})
+    ],selector: 'cass-profile-setup'})
 
 export class ProfileSetup
 {

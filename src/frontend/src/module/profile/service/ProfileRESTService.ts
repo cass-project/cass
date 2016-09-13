@@ -3,8 +3,7 @@ import {Http, Headers} from "@angular/http"
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {EditPersonalRequest} from "../definitions/paths/edit-personal";
-import {SetGenderRequest, SetGenderResponse200} from "../definitions/paths/set-gender";
-import {ExpertInRequest, ExpertInResponse200} from "../definitions/paths/expert-in-ids";
+import {SetGenderRequest} from "../definitions/paths/set-gender";
 import {AuthToken} from "../../auth/service/AuthToken";
 import {Observable} from "rxjs/Observable";
 import {DeleteProfileImageResponse200} from "../definitions/paths/image-delete";
