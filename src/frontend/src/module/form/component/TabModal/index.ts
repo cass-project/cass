@@ -10,9 +10,7 @@ import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-tab-modal'})
+    ],selector: 'cass-tab-modal'})
 
 export class TabModal
 {

@@ -5,9 +5,7 @@ import {Input} from "@angular/core";
     template: '<div class="cass-modal-box" [ngStyle]="getStyle()"><ng-content></ng-content></div>',
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-modal-box'})
+    ],selector: 'cass-modal-box'})
 
 export class ModalBoxComponent {
     @Input('width') width: string = 'auto';

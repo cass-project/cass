@@ -7,9 +7,7 @@ import {AuthService} from "../../auth/service/AuthService";
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-modal'})
+    ],selector: 'cass-modal'})
 export class ModalComponent
 {
     private id = Math.random().toString(36).substring(7);

@@ -7,9 +7,7 @@ import {ProfileModalModel} from "../../model";
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-modal-tab-personal'})
+    ],selector: 'cass-profile-modal-tab-personal'})
 
 export class PersonalTab
 {

@@ -11,9 +11,7 @@ import {Router} from '@angular/router';
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-community-card'})
+    ],selector: 'cass-community-card'})
 export class CommunityCard
 {
     @Input('community') entity: CommunityEntity;

@@ -6,9 +6,7 @@ import {Palette} from "../../../colors/definitions/entity/Palette";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-color-picker'})
+    ],selector: 'cass-color-picker'})
 
 export class ColorPicker
 {

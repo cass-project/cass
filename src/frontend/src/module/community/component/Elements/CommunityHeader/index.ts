@@ -9,9 +9,7 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-community-header'})
+    ],selector: 'cass-community-header'})
 export class CommunityHeader
 {
     @Output('go-community') goCommunityEvent: EventEmitter<string> = new EventEmitter<string>();

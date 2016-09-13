@@ -10,9 +10,7 @@ var validUrl = require('valid-url');
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-post-form-link-input'})
+    ],selector: 'cass-post-form-link-input'})
 
 export class PostFormLinkInput
 {

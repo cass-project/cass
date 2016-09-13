@@ -16,9 +16,7 @@ import {PostFormModel} from "./model";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-post-form'})
+    ],selector: 'cass-post-form'})
 
 export class PostForm
 {

@@ -11,9 +11,7 @@ import {ThemeIdCriteriaParams} from "../../../../feed/definitions/request/criter
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-public-search-criteria-theme'})
+    ],selector: 'cass-public-search-criteria-theme'})
 
 export class ThemeCriteria
 {

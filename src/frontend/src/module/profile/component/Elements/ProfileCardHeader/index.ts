@@ -10,9 +10,7 @@ var moment = require('moment');
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-card-header'})
+    ],selector: 'cass-profile-card-header'})
 
 export class ProfileCardHeader
 {

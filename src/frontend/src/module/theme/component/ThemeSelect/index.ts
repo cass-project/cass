@@ -12,9 +12,7 @@ import {Theme} from "../../definitions/entity/Theme";
     ],
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-theme-select'})
+    ],selector: 'cass-theme-select'})
 
 @Injectable()
 export class ThemeSelect

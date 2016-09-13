@@ -4,9 +4,7 @@ import {Component, Input, Directive} from "@angular/core";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-community-image'})
+    ],selector: 'cass-community-image'})
 export class CommunityImage
 {
     @Input('url') url: string;

@@ -12,8 +12,7 @@ import {AuthDev} from "../../../auth-dev/component/index";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    providers: [ModalComponent, SignInComponent, SignUpComponent, ModalBoxComponent, AuthDev]
+    ]
 })
 
 export class AuthComponent

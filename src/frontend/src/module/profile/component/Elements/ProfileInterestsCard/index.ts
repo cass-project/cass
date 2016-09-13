@@ -5,9 +5,7 @@ import {ProfileModals} from "../../../modals";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-interests-card'})
+    ],selector: 'cass-profile-interests-card'})
 
 export class ProfileInterestsCard
 {

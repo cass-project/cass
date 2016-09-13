@@ -28,9 +28,7 @@ enum CreateStage {
     ],
     providers: [
         CommunityCreateModalModel,
-    ]
-})
-@Directive({selector: 'cass-community-create-modal'})
+    ],selector: 'cass-community-create-modal'})
 
 export class CommunityCreateModal
 {

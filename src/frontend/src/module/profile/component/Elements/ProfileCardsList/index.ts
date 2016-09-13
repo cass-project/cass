@@ -11,9 +11,7 @@ import {Router} from '@angular/router';
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-cards-list'})
+    ],selector: 'cass-profile-cards-list'})
 
 export class ProfileCardsList
 {

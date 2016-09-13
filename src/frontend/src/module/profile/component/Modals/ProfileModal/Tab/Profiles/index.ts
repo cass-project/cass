@@ -13,9 +13,7 @@ import {ProfileModalModel} from "../../model";
     ],
     providers: [
         ProfilesTabService
-    ]
-})
-@Directive({selector: 'cass-profile-modal-tab-profiles'})
+    ],selector: 'cass-profile-modal-tab-profiles'})
 
 export class ProfilesTab
 {

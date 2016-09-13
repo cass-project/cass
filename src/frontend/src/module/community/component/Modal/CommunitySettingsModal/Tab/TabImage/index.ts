@@ -11,9 +11,7 @@ import {CommunityImageDeleteRequest} from "../../../../../definitions/paths/imag
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-community-settings-modal-tab-image'})
+    ],selector: 'cass-community-settings-modal-tab-image'})
 
 export class CommunityImageTab {
     @ViewChild('communityImageUploadInput') communityImageUploadInput;

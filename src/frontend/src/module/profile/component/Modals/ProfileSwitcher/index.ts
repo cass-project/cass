@@ -17,9 +17,7 @@ enum ProfileSwitcherStage
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-switcher'})
+    ],selector: 'cass-profile-switcher'})
 
 export class ProfileSwitcher
 {

@@ -9,9 +9,7 @@ import {PublicService} from "../../../service";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-public-criteria-content-type'})
+    ],selector: 'cass-public-criteria-content-type'})
 
 export class ContentTypeCriteria
 {

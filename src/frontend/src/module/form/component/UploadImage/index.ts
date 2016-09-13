@@ -21,9 +21,7 @@ enum UploadImageScreen {
     ],
     providers: [
         ImageCropperService,
-    ]
-})
-@Directive({selector: 'cass-upload-image-modal'})
+    ],selector: 'cass-upload-image-modal'})
 
 export class UploadImageModal
 {

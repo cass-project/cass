@@ -11,9 +11,7 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-community-cards-list'})
+    ],selector: 'cass-community-cards-list'})
 export class CommunityCardsList
 {
     @Input('community') entity: CommunityExtendedEntity;

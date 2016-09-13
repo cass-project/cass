@@ -15,9 +15,7 @@ import {Session} from "../session/Session";
 
 @Component({
     template: require('./template.jade'),
-    providers: []
-})
-@Directive({selector: 'cass-profile'})
+    providers: [],selector: 'cass-profile'})
 
 export class ProfileComponent
 {

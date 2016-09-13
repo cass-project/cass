@@ -5,9 +5,7 @@ import {IMMessageExtendedEntity} from "../../definitions/entity/IMMessage";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-im-chat'})
+    ],selector: 'cass-im-chat'})
 
 export class IMChat
 {

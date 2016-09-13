@@ -38,9 +38,7 @@ enum ProfileSetupScreen {
         ProfileSetupModel,
         ProfileRESTService,
         ProfileRouteService
-    ]
-})
-@Directive({selector: 'cass-profile-setup'})
+    ],selector: 'cass-profile-setup'})
 
 export class ProfileSetup
 {

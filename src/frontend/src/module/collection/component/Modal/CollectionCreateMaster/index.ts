@@ -22,9 +22,7 @@ enum CreateCollectionMasterStage
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-collection-create-master'})
+    ],selector: 'cass-collection-create-master'})
 export class CollectionCreateMaster
 {
     constructor(

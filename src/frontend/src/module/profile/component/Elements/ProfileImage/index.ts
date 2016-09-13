@@ -4,9 +4,7 @@ import {Component, Input, Directive} from "@angular/core";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-image'})
+    ],selector: 'cass-profile-image'})
 
 export class ProfileImage
 {

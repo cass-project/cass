@@ -6,9 +6,7 @@ import {PostAttachmentEntity, AttachmentMetadata} from "../../../definitions/ent
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-post-attachment'})
+    ],selector: 'cass-post-attachment'})
 
 export class PostAttachment
 {

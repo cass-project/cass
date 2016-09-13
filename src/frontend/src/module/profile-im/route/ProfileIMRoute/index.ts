@@ -22,9 +22,7 @@ export const profileIMRouting: ModuleWithProviders = RouterModule.forChild(profi
     template: require('./template.jade'),
     styles: [
     require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'profile-im-route'})
+    ],selector: 'profile-im-route'})
 
 export class ProfileIMRoute
 {

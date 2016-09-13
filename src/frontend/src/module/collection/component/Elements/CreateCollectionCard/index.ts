@@ -6,9 +6,7 @@ import {CollectionModals} from "../../../modals";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-create-collection-card'})
+    ],selector: 'cass-create-collection-card'})
 export class CreateCollectionCard
 {
     @Output('click') clickEvent = new EventEmitter<Event>();

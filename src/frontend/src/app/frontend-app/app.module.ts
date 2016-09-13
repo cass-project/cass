@@ -8,7 +8,6 @@ import {MessageBusNotifications} from "../../module/message/component/MessageBus
 import {AuthComponent} from "../../module/auth/component/Auth/index";
 import {ProgressLock} from "../../module/form/component/ProgressLock/index";
 import {CommunityHeader} from "../../module/community/component/Elements/CommunityHeader/index";
-
 import {SidebarProfileIcon} from "../../module/sidebar/component/SidebarProfileIcon/index";
 import {SidebarCommunities} from "../../module/sidebar/component/SidebarCommunities/index";
 import {SidebarMessages} from "../../module/sidebar/component/SidebarMessages/index";
@@ -112,6 +111,19 @@ import {AuthToken} from "../../module/auth/service/AuthToken";
 import {Nothing} from "../../module/common/component/Nothing/index";
 import {SidebarComponent} from "../../module/sidebar/index";
 import {SidebarSignInButton} from "../../module/sidebar/component/SidebarSignInButton/index";
+import {AuthService} from "../../module/auth/service/AuthService";
+import {AuthRESTService} from "../../module/auth/service/AuthRESTService";
+import {MessageBusService} from "../../module/message/service/MessageBusService/index";
+import {Session} from "../../module/session/Session";
+import {CommunityModalService} from "../../module/community/service/CommunityModalService";
+import {ProfileCommunityBookmarksService} from "../../module/profile-communities/service/ProfileCommunityBookmarksService";
+import {CommunityCreateModalNotifier} from "../../module/community/component/Modal/CommunityCreateModal/notify";
+import {IMRESTService} from "../../module/im/service/IMRESTService";
+import {AuthComponentService} from "../../module/auth/component/Auth/service";
+import {ProfileModals} from "../../module/profile/modals";
+import {ThemeService} from "../../module/theme/service/ThemeService";
+import {ProfileCachedIdentityMap} from "../../module/profile/service/ProfileCachedIdentityMap";
+import {ProfileRESTService} from "../../module/profile/service/ProfileRESTService";
 
 @Injectable()
 export class NoSanitizationService {
@@ -240,6 +252,19 @@ export class NoSanitizationService {
         HttpModule
     ],
     providers: [
+        AuthService,
+        AuthRESTService,
+        MessageBusService,
+        Session,
+        CommunityModalService,
+        ProfileCommunityBookmarksService,
+        CommunityCreateModalNotifier,
+        IMRESTService,
+        ProfileModals,
+        ThemeService,
+        ProfileCachedIdentityMap,
+        ProfileRESTService,
+        AuthComponentService,
         appRoutingProviders,
         {provide: DomSanitizer, useClass: NoSanitizationService},
         {provide: FrontlineService, useFactory: function() {

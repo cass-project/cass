@@ -10,9 +10,7 @@ import {CommunityCreateModalForm} from "../../Form";
     styles: [
         require('./style.shadow.scss')
     ],
-    providers: [CommunityFeaturesService]
-})
-@Directive({selector: 'cass-community-create-modal-screen-features'})
+    providers: [CommunityFeaturesService],selector: 'cass-community-create-modal-screen-features'})
 export class ScreenFeatures extends Screen
 {
     private features: CommunityFeaturesModel[] = [];

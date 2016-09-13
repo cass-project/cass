@@ -13,9 +13,7 @@ enum InterestsTabScreen
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-modal-tab-interests'})
+    ],selector: 'cass-profile-modal-tab-interests'})
 
 
 export class InterestsTab

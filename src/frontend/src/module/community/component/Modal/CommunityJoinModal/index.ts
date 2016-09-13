@@ -22,9 +22,7 @@ enum CommunityJoinScreen
     ],
     providers: [
         CommunityJoinModalModel
-    ]
-})
-@Directive({selector: 'cass-community-join-modal'})
+    ],selector: 'cass-community-join-modal'})
 export class CommunityJoinModal
 {
     @Output("close") closeEvent = new EventEmitter<CommunityJoinModal>();

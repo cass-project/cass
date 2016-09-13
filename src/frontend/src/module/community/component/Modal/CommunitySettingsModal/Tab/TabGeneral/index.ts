@@ -7,9 +7,7 @@ import {CommunitySettingsModalModel} from "../../model";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-community-settings-modal-tab-general'})
+    ],selector: 'cass-community-settings-modal-tab-general'})
 
 export class GeneralTab {
 

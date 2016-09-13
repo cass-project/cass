@@ -7,8 +7,6 @@ import {LoadingLinearIndicator} from "../../../../../../form/component/LoadingLi
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-community-join-modal-screen-sid'})
+    ],selector: 'cass-community-join-modal-screen-sid'})
 export class ScreenSID extends Screen
 {}

@@ -5,9 +5,7 @@ import {Component, Input, Directive} from "@angular/core";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-im-attachments'})
+    ],selector: 'cass-im-attachments'})
 
 export class IMAttachments
 {

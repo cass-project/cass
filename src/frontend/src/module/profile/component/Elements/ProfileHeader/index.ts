@@ -7,13 +7,10 @@ import {ProfileModals} from "../../../modals";
 import {ProfileRouteService} from "../../../route/ProfileRoute/service";
 
 @Component({
-    
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-create-collection-card'})
+    ],selector: 'cass-profile-header'})
 
 export class ProfileHeader
 {

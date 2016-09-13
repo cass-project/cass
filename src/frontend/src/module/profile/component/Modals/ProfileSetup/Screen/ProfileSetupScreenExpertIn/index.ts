@@ -7,9 +7,7 @@ import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-setup'})
+    ],selector: 'cass-profile-setup-screen-expert-in'})
 
 export class ProfileSetupScreenExpertIn
 {

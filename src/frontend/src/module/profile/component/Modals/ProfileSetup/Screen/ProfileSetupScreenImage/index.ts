@@ -17,9 +17,7 @@ import {AuthToken} from "../../../../../../auth/service/AuthToken";
     ],
     providers: [
         UploadImageService,
-    ]
-})
-@Directive({selector: 'cass-profile-setup-screen-image'})
+    ],selector: 'cass-profile-setup-screen-image'})
 
 @Injectable()
 export class ProfileSetupScreenImage

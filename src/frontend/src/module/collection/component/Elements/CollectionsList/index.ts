@@ -9,8 +9,7 @@ import {CreateCollectionCard} from "../CreateCollectionCard/index";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    providers: [CollectionCard, CreateCollectionCard]
+    ]
 })
 
 export class CollectionsList

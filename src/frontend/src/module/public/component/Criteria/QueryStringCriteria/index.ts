@@ -10,9 +10,7 @@ import {QueryStringCriteriaParams} from "../../../../feed/definitions/request/cr
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-public-search-criteria-query-string'})
+    ],selector: 'cass-public-search-criteria-query-string'})
 
 export class QueryStringCriteria
 {

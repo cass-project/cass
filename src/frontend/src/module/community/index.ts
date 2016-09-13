@@ -6,8 +6,7 @@ import {CommunityExtendedEntity} from "./definitions/entity/CommunityExtended";
 
 @Component({
     template: require('./template.jade')
-})
-@Directive({selector: 'cass-community'})
+,selector: 'cass-community'})
 export class CommunityComponent
 {
     constructor(

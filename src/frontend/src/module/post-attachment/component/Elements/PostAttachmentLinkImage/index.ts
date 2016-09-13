@@ -7,9 +7,7 @@ import {ImageAttachmentMetadata} from "../../../definitions/entity/metadata/Imag
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-})
-@Directive({selector: 'cass-post-attachment-link-image'})
+    ],selector:  'cass-post-attachment-link-image'})
 
 export class PostAttachmentLinkImage
 {

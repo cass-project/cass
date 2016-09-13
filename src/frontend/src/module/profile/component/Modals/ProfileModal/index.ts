@@ -28,9 +28,7 @@ enum ProfileModalTab
         ProfileModalModel,
         ProfileRESTService,
         ThemeService
-    ]
-})
-@Directive({selector: 'cass-profile-settings'})
+    ],selector: 'cass-profile-settings'})
 
 
 export class ProfileModal

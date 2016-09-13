@@ -12,9 +12,7 @@ import {AppService} from "../../../../../app/frontend-app/service";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-feed-profile-stream'})
+    ],selector: 'cass-feed-profile-stream'})
 
 export class FeedProfileStream
 {

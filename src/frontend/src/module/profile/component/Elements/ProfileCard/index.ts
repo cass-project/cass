@@ -10,9 +10,7 @@ import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'profile-im-route'})
+    ],selector: 'profile-im-route'})
 
 export class ProfileCard
 {

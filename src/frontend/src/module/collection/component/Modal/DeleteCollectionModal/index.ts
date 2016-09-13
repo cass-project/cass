@@ -7,8 +7,6 @@ import {CollectionSelect} from "../../Elements/CollectionSelect/index";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-collection-delete-modal'})
+    ],selector: 'cass-collection-delete-modal'})
 export class DeleteCollectionModal
 {}

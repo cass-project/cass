@@ -5,8 +5,7 @@ import {PostEntity} from "../../../post/definitions/entity/Post";
 
 @Component({
     template: require('./template.jade')
-})
-@Directive({selector: 'cass-feed-scroll-detector'})
+,selector: 'cass-feed-scroll-detector'})
 
 export class FeedScrollDetector
 {

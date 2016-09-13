@@ -7,9 +7,7 @@ import {ProfileGender} from "../../../../../definitions/entity/Profile";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-setup-screen-gender'})
+    ],selector: 'cass-profile-setup-screen-gender'})
 
 export class ProfileSetupScreenGender
 {

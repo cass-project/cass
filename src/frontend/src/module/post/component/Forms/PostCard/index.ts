@@ -12,9 +12,7 @@ import {ViewOptionValue} from "../../../../feed/service/FeedService/options/View
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-post-card'})
+    ],selector: 'cass-post-card'})
 
 export class PostCard
 {

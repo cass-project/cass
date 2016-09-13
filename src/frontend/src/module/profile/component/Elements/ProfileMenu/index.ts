@@ -6,9 +6,7 @@ import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-menu'})
+    ],selector: 'cass-profile-menu'})
 
 export class ProfileMenuComponent
 {

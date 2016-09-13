@@ -4,9 +4,7 @@ import {Component, Directive} from "@angular/core";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-})
-@Directive({selector: 'cass-public-nothing-found'})
+    ],selector:  'cass-public-nothing-found'})
 
 export class NothingFound
 {}

@@ -10,9 +10,7 @@ import {ContentTypeCriteriaParams, ContentType} from "../../../../feed/definitio
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-public-option-view'})
+    ],selector: 'cass-public-option-view'})
 
 export class OptionView
 {

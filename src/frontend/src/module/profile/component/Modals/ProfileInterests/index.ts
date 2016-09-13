@@ -10,9 +10,7 @@ import {ProfileModalModel} from "../ProfileModal/model";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-interests-modal'})
+    ],selector: 'cass-profile-interests-modal'})
 
 export class ProfileInterestsModal {
     private loading:boolean = false;

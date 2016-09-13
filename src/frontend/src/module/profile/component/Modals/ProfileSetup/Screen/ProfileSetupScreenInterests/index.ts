@@ -6,9 +6,7 @@ import {ProfileSetupModel} from "../../model";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-setup-screen-interests'})
+    ],selector: 'cass-profile-setup-screen-interests'})
 
 export class ProfileSetupScreenInterests
 {

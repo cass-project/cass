@@ -5,9 +5,7 @@ import {CommunityModals} from "../../../modals";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-community-cards-list'})
+    ],selector: 'cass-community-cards-list'})
 export class CommunityCreateCollectionCard
 {
     constructor(private modals: CommunityModals) {}

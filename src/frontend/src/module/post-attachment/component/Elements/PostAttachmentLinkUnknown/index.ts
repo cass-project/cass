@@ -7,9 +7,7 @@ import {UnknownAttachmentMetadata} from "../../../definitions/entity/metadata/Un
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-})
-@Directive({selector: 'cass-post-attachment-link-unknown'})
+    ],selector:  'cass-post-attachment-link-unknown'})
 
 export class PostAttachmentLinkUnknown
 {

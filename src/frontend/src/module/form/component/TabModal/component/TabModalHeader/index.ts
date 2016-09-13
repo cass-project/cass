@@ -5,8 +5,7 @@ import {Component, Input, Directive} from "@angular/core";
     styles: [
         require('./style.shadow.scss')
     ] 
-})
-@Directive({selector: 'cass-tab-modal-header'})
+,selector: 'cass-tab-modal-header'})
 
 export class TabModalHeader
 {

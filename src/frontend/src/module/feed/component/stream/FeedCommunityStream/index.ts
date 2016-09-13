@@ -12,9 +12,7 @@ import {AppService} from "../../../../../app/frontend-app/service";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-feed-community-stream'})
+    ],selector: 'cass-feed-community-stream'})
 
 export class FeedCommunityStream
 {

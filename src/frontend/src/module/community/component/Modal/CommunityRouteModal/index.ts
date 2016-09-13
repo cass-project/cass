@@ -8,9 +8,7 @@ import {ModalBoxComponent} from "../../../../modal/component/box/index";
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-community-route-modal'})
+    ],selector: 'cass-community-route-modal'})
 export class CommunityRouteModal
 {
     @Output("close") close = new EventEmitter<CommunityRouteModal>();

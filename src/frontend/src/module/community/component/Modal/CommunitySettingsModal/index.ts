@@ -29,9 +29,7 @@ import {SetPublicOptionsCommunityRequest} from "../../../definitions/paths/set-p
     providers: [
         CommunityFeaturesService,
         ImageCropperService
-    ]
-})
-@Directive({selector: 'cass-community-settings-modal'})
+    ],selector: 'cass-community-settings-modal'})
 
 export class CommunitySettingsModal
 {

@@ -6,9 +6,7 @@ import {MessageBusService} from "../../service/MessageBusService/index";
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-message-bus-notifications'})
+    ],selector: 'cass-message-bus-notifications'})
 export class MessageBusNotifications
 {
     constructor(private messageBusService: MessageBusService){}

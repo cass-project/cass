@@ -8,8 +8,7 @@ import {IMMessageSourceEntityType} from "../../definitions/entity/IMMessageSourc
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]})
-@Directive({selector: 'cass-im-textarea'})
+    ],selector: 'cass-im-textarea'})
 
 export class IMTextarea
 {

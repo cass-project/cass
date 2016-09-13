@@ -7,9 +7,7 @@ import {PageAttachmentMetadata} from "../../../definitions/entity/metadata/PageA
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-post-attachment-link-page'})
+    ],selector: 'cass-post-attachment-link-page'})
 
 export class PostAttachmentLinkPage
 {

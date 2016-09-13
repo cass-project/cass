@@ -17,9 +17,7 @@ import {Session} from "../../../../../../session/Session";
     ],
     providers: [
         UploadImageService,
-    ]
-})
-@Directive({selector: 'cass-profile-modal-tab-image'})
+    ],selector: 'cass-profile-modal-tab-image'})
 
 
 @Injectable()

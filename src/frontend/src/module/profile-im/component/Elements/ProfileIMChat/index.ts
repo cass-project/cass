@@ -15,9 +15,7 @@ import {Observable} from "rxjs/Observable";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-im-messages'})
+    ],selector: 'cass-profile-im-messages'})
 
 export class ProfileIMChat implements OnInit
 {

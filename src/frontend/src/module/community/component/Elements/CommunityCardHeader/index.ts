@@ -11,9 +11,7 @@ var moment = require('moment');
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-community-card'})
+    ],selector: 'cass-community-card'})
 export class CommunityCardHeader
 {
     @Input('community') entity: CommunityEntity;

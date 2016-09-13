@@ -10,9 +10,7 @@ import {Session} from "../../../../../../session/Session";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-setup-screen-greetings'})
+    ],selector: 'cass-profile-setup-screen-greetings'})
 
 export class ProfileSetupScreenGreetings
 {

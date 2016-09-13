@@ -3,8 +3,7 @@ import {TabModal} from "../../index";
 
 @Component({
     template: require('./template.jade')
-})
-@Directive({selector: 'cass-tab-modal-tab'})
+,selector: 'cass-tab-modal-tab'})
 
 export class TabModalTab
 {

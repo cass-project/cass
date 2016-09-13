@@ -10,9 +10,7 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
     ],
     providers: [
         CommunityComponent
-    ]
-})
-@Directive({selector: 'cass-community-menu'})
+    ],selector: 'cass-community-menu'})
 export class communityMenuComponent
 {
     @Input('community') community: CommunityExtendedEntity;

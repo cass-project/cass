@@ -65,9 +65,7 @@ export class ImageCropperService
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-image-cropper'})
+    ],selector: 'cass-image-cropper'})
 
 export class ImageCropper implements OnInit, OnDestroy
 {

@@ -7,9 +7,7 @@ import {ContactService} from "../../../../contact/service/ContactService";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-profile-im-sidebar'})
+    ],selector: 'cass-profile-im-sidebar'})
 
 
 export class ProfileIMSidebar

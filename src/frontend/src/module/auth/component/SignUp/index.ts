@@ -10,8 +10,7 @@ import {AuthService} from "../../service/AuthService";
 
 @Component({
     selector: 'cass-auth-sign-up',
-    template: require('./template.jade'),
-    providers: [OAuth2Component, LoadingIndicator, ProgressLock]
+    template: require('./template.jade')
 })
 
 export class SignUpComponent

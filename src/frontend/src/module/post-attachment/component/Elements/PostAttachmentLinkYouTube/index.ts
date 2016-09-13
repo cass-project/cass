@@ -7,9 +7,7 @@ import {YoutubeAttachmentMetadata} from "../../../definitions/entity/metadata/Yo
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-post-attachment-link-youtube'})
+    ],selector: 'cass-post-attachment-link-youtube'})
 
 export class PostAttachmentLinkYouTube
 {

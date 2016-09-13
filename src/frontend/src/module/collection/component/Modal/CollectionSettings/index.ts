@@ -14,9 +14,7 @@ import {ColorPicker} from "../../../../form/component/ColorPicker/index";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-collection-settings'})
+    ],selector: 'cass-collection-settings'})
 export class CollectionSettings
 {
 

@@ -6,9 +6,7 @@ import {PublicService} from "../../../service";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
-@Directive({selector: 'cass-public-search-criteria-seek'})
+    ],selector: 'cass-public-search-criteria-seek'})
 
 export class SeekCriteria
 {
