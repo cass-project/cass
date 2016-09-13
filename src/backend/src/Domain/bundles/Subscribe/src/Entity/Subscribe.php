@@ -1,5 +1,6 @@
 <?php
 namespace CASS\Domain\Bundles\Subscribe\Entity;
+use CASS\Util\Entity\IdEntity\IdTrait;
 
 /**
  * @Entity(repositoryClass="CASS\Domain\Bundles\Subscribe\Repository\SubscribeRepository")
@@ -12,9 +13,29 @@ class Subscribe
     const TYPE_COLLECTION = 3;
     const TYPE_COMMUNITY = 4;
 
+
+    use IdTrait;
+    /**
+     * @var int
+     * @Column(type="integer", name="profile_id")
+     */
     private $profileId;
+    /**
+     * @var int
+     * @Column(type="integer", name="subscribe_id")
+     */
     private $subscribeId;
+    /**
+     * @var int
+     * @Column(type="integer", name="subscribe_type")
+     */
     private $subscribeType;
+
+    /**
+     * @var string
+     * @Column(type="text", name="options")
+     */
+    private $options;
 
     public function getProfileId()
     {
@@ -46,6 +67,17 @@ class Subscribe
     public function setSubscribeType(int $subscribeType):self
     {
         $this->subscribeType = $subscribeType;
+        return $this;
+    }
+
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    public function setOptions($options):self
+    {
+        $this->options = $options;
         return $this;
     }
 }
