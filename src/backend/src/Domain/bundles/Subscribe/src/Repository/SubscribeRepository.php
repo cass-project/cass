@@ -45,6 +45,10 @@ class SubscribeRepository extends EntityRepository
 
     public function getSubscribe(array $criteria): Subscribe
     {
+        if (!isset($criteria['profile_id'])) throw new \Exception("required option: profile_id missing");
+        if (!isset($criteria['subscribe_id'])) throw new \Exception("required option: subscribe_id missing");
+        if (!isset($criteria['type'])) throw new \Exception("required option: type missing");
+
         $subscribe = $this->getEntityManager()->getRepository(Subscribe::class)->findOneBy($criteria);
         if ($subscribe === null)
             throw new UnknownSubscribeException(
@@ -97,7 +101,7 @@ class SubscribeRepository extends EntityRepository
 
     public function unSubscribeCollection(Profile $profile, Collection $collection)
     {
-        $criteria = ['profile_id' => $profile->getId(), 'subscribe_id' => $collection->getId(), 'type' => Subscribe::TYPE_COLLECTION ];
+        
         $subscribe = $this->getSubscribe($criteria);
 
         $em = $this->getEntityManager();
@@ -119,9 +123,9 @@ class SubscribeRepository extends EntityRepository
         return $subscribe;
     }
 
-    public function unSubscribeCommunity(Profile $profile, Community $community)
+    public function unSubscribeByCriteria(array $criteria)
     {
-        $criteria = ['profile_id' => $profile->getId(), 'subscribe_id' => $community->getId(), 'type' => Subscribe::TYPE_COMMUNITY ];
+
         $subscribe = $this->getSubscribe($criteria);
 
         $em = $this->getEntityManager();

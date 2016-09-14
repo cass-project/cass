@@ -7,6 +7,8 @@ use CASS\Domain\Bundles\Profile\Entity\Profile;
 use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
 use CASS\Domain\Bundles\Subscribe\Repository\SubscribeRepository;
 use CASS\Domain\Bundles\Theme\Entity\Theme;
+use CASS\Util\Seek;
+use phpDocumentor\Reflection\DocBlock\Tags\See;
 
 class SubscribeService
 {
@@ -22,16 +24,23 @@ class SubscribeService
         return $this->subscribeRepository->subscribeTheme($profile, $theme, $options);
     }
 
-    public function unSubscribeTheme(Profile $profile, Theme $theme){
-        return $this->subscribeRepository->unSubscribeTheme($profile, $theme);
+    public function unSubscribeTheme(Profile $profile, Theme $subscribe)
+    {
+        $criteria = ['profile_id' => $profile->getId(), 'subscribe_id' => $subscribe->getId(), 'type' => Subscribe::TYPE_THEME ];
+        return $this->subscribeRepository->unSubscribeByCriteria($criteria);
     }
 
-    public function listSubscribedThemes(Profile $profile): array
+    public function listSubscribedThemes(Profile $profile, Seek $seek): array
     {
-        return $this->subscribeRepository->findBy([
-            'profile_id' => $profile->getId(),
-            'type'       => Subscribe::TYPE_THEME
-        ]);
+        return $this->subscribeRepository->findBy(
+            [
+                'profile_id' => $profile->getId(),
+                'type' => Subscribe::TYPE_THEME,
+            ],
+            ['id' => 'DESC'],
+            $seek->getLimit(),
+            $seek->getOffset()
+        );
     }
 
     public function subscribeProfile(Profile $profile1, Profile $profile2, $options): Subscribe
@@ -39,15 +48,22 @@ class SubscribeService
         return $this->subscribeRepository->subscribeProfile($profile1, $profile2, $options);
     }
 
-    public function UnSubscribeProfile(Profile $profile1, Profile $profile2){
-        return $this->subscribeRepository->unSubscribeProfile($profile1, $profile2);
+    public function unSubscribeProfile(Profile $profile, Profile $subscribe)
+    {
+        $criteria = ['profile_id' => $profile->getId(), 'subscribe_id' => $subscribe->getId(), 'type' => Subscribe::TYPE_PROFILE ];
+        return $this->subscribeRepository->unSubscribeByCriteria($criteria);
     }
 
-    public function listSubscribedProfiles(Profile $profile){
-        return $this->subscribeRepository->findBy([
-            'profile_id' => $profile->getId(),
-            'type'       => Subscribe::TYPE_PROFILE
-        ]);
+    public function listSubscribedProfiles(Profile $profile, Seek $seek){
+        return $this->subscribeRepository->findBy(
+            [
+                'profile_id' => $profile->getId(),
+                'type'       => Subscribe::TYPE_PROFILE
+            ],
+            ['id' => 'DESC'],
+            $seek->getLimit(),
+            $seek->getOffset()
+        );
     }
 
     public function subscribeCollection(Profile $profile, Collection $collection, $options): Subscribe
@@ -55,16 +71,23 @@ class SubscribeService
         return $this->subscribeRepository->subscribeCollection($profile, $collection, $options);
     }
 
-    public function unSubscribeCollection(Profile $profile, Collection $collection){
-        return $this->subscribeRepository->unSubscribeCollection($profile, $collection);
+    public function unSubscribeCollection(Profile $profile, Collection $collection)
+    {
+        $criteria = ['profile_id' => $profile->getId(), 'subscribe_id' => $collection->getId(), 'type' => Subscribe::TYPE_COLLECTION ];
+        return $this->subscribeRepository->unSubscribeByCriteria($criteria);
     }
 
-    public function listSubscribedCollections(Profile $profile): array
+    public function listSubscribedCollections(Profile $profile, Seek $seek): array
     {
-        return $this->subscribeRepository->findBy([
-            'profile_id' => $profile->getId(),
-            'type'       => Subscribe::TYPE_COLLECTION
-        ]);
+        return $this->subscribeRepository->findBy(
+            [
+                'profile_id' => $profile->getId(),
+                'type'       => Subscribe::TYPE_COLLECTION
+            ],
+            ['id' => 'DESC'],
+            $seek->getLimit(),
+            $seek->getOffset()
+        );
     }
 
     public function subscribeCommunity(Profile $profile, Community $community, $options = null): Subscribe
@@ -72,15 +95,23 @@ class SubscribeService
         return $this->subscribeRepository->subscribeCommunity($profile, $community, $options);
     }
 
-    public function unSubscribeCommunity(Profile $profile, Community $community){
-        return $this->subscribeRepository->unSubscribeCommunity($profile, $community);
+    public function unSubscribeCommunity(Profile $profile, Community $community)
+    {
+        $criteria = ['profile_id' => $profile->getId(), 'subscribe_id' => $community->getId(), 'type' => Subscribe::TYPE_COMMUNITY ];
+        return $this->subscribeRepository->unSubscribeByCriteria($criteria);
     }
 
-    public function listSubscribedCommunities(Profile $profile){
-        return $this->subscribeRepository->findBy([
-            'profile_id' => $profile->getId(),
-            'type'       => Subscribe::TYPE_COMMUNITY
-        ]);
+    public function listSubscribedCommunities(Profile $profile, Seek $seek): array
+    {
+        return $this->subscribeRepository->findBy(
+            [
+                'profile_id' => $profile->getId(),
+                'type'       => Subscribe::TYPE_COMMUNITY
+            ],
+            ['id' => 'DESC'],
+            $seek->getLimit(),
+            $seek->getOffset()
+        );
     }
 
     public function getSubscribe(int $id):Subscribe
