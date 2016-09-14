@@ -1,6 +1,8 @@
 <?php
 namespace CASS\Domain\Bundles\Subscribe\Repository;
 
+use CASS\Domain\Bundles\Collection\Entity\Collection;
+use CASS\Domain\Bundles\Community\Entity\Community;
 use CASS\Domain\Bundles\Profile\Entity\Profile;
 use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
 use CASS\Domain\Bundles\Subscribe\Exception\UnknownSubscribeException;
@@ -34,7 +36,7 @@ class SubscribeRepository extends EntityRepository
 
     }
 
-    public function getSubscribeById(int $id):Subscribe
+    public function getSubscribeById(int $id): Subscribe
     {   
         $subscribe = $this->getEntityManager()->getRepository(Subscribe::class)->find($id);
         if ($subscribe === null) throw new UnknownSubscribeException(sprintf("Subscribe id:%s not found", $id));
@@ -53,5 +55,77 @@ class SubscribeRepository extends EntityRepository
                 )
             );
         return $subscribe;
+    }
+
+    public function subscribeProfile(Profile $profile1, Profile $profile2, $options = null): Subscribe
+    {
+        $subscribe =  new Subscribe();
+        $subscribe->setProfileId($profile1->getId())
+            ->setOptions($options)
+            ->setSubscribeId($profile2->getId())
+            ->setSubscribeType(Subscribe::TYPE_PROFILE);
+
+        $em = $this->getEntityManager();
+        $em->persist($subscribe);
+        $em->flush();
+        return $subscribe;
+    }
+
+    public function unSubscribeProfile(Profile $profile, Profile $subscribe)
+    {
+        $criteria = ['profile_id' => $profile->getId(), 'subscribe_id' => $subscribe->getId(), 'type' => Subscribe::TYPE_PROFILE ];
+        $subscribe = $this->getSubscribe($criteria);
+
+        $em = $this->getEntityManager();
+        $em->remove($subscribe);
+        $em->flush();
+    }
+
+    public function subscribeCollection(Profile $profile, Collection $collection, $options = null): Subscribe
+    {
+        $subscribe =  new Subscribe();
+        $subscribe->setProfileId($profile->getId())
+            ->setOptions($options)
+            ->setSubscribeId($collection->getId())
+            ->setSubscribeType(Subscribe::TYPE_COLLECTION);
+
+        $em = $this->getEntityManager();
+        $em->persist($subscribe);
+        $em->flush();
+        return $subscribe;
+    }
+
+    public function unSubscribeCollection(Profile $profile, Collection $collection)
+    {
+        $criteria = ['profile_id' => $profile->getId(), 'subscribe_id' => $collection->getId(), 'type' => Subscribe::TYPE_COLLECTION ];
+        $subscribe = $this->getSubscribe($criteria);
+
+        $em = $this->getEntityManager();
+        $em->remove($subscribe);
+        $em->flush();
+    }
+
+    public function subscribeCommunity(Profile $profile, Community $community, $options = null ): Subscribe
+    {
+        $subscribe =  new Subscribe();
+        $subscribe->setProfileId($profile->getId())
+            ->setOptions($options)
+            ->setSubscribeId($community->getId())
+            ->setSubscribeType(Subscribe::TYPE_COLLECTION);
+
+        $em = $this->getEntityManager();
+        $em->persist($subscribe);
+        $em->flush();
+        return $subscribe;
+    }
+
+    public function unSubscribeCommunity(Profile $profile, Community $community)
+    {
+        $criteria = ['profile_id' => $profile->getId(), 'subscribe_id' => $community->getId(), 'type' => Subscribe::TYPE_COMMUNITY ];
+        $subscribe = $this->getSubscribe($criteria);
+
+        $em = $this->getEntityManager();
+        $em->remove($subscribe);
+        $em->flush();
     }
 }

@@ -26,44 +26,61 @@ class SubscribeService
         return $this->subscribeRepository->unSubscribeTheme($profile, $theme);
     }
 
-    public function listSubscribedThemes(Profile $profile){
-
+    public function listSubscribedThemes(Profile $profile): array
+    {
+        return $this->subscribeRepository->findBy([
+            'profile_id' => $profile->getId(),
+            'type'       => Subscribe::TYPE_THEME
+        ]);
     }
 
-    public function subscribeProfile(Profile $profile1, Profile $profile2){
-
+    public function subscribeProfile(Profile $profile1, Profile $profile2, $options): Subscribe
+    {
+        return $this->subscribeRepository->subscribeProfile($profile1, $profile2, $options);
     }
 
-    public function unSubscribeProfile(Profile $profile1, Profile $profile2){
-
+    public function UnSubscribeProfile(Profile $profile1, Profile $profile2){
+        return $this->subscribeRepository->unSubscribeProfile($profile1, $profile2);
     }
 
     public function listSubscribedProfiles(Profile $profile){
-
+        return $this->subscribeRepository->findBy([
+            'profile_id' => $profile->getId(),
+            'type'       => Subscribe::TYPE_PROFILE
+        ]);
     }
 
-    public function subscribeCollection(Profile $profile, Collection $collection){
-
+    public function subscribeCollection(Profile $profile, Collection $collection, $options): Subscribe
+    {
+        return $this->subscribeRepository->subscribeCollection($profile, $collection, $options);
     }
 
     public function unSubscribeCollection(Profile $profile, Collection $collection){
-
+        return $this->subscribeRepository->unSubscribeCollection($profile, $collection);
     }
 
-    public function listSubscribedCollections(Profile $profile){
-
+    public function listSubscribedCollections(Profile $profile): array
+    {
+        return $this->subscribeRepository->findBy([
+            'profile_id' => $profile->getId(),
+            'type'       => Subscribe::TYPE_COLLECTION
+        ]);
     }
 
-    public function subscribeCommunity(Profile $profile, Community $community){
-
+    public function subscribeCommunity(Profile $profile, Community $community, $options = null): Subscribe
+    {
+        return $this->subscribeRepository->subscribeCommunity($profile, $community, $options);
     }
 
     public function unSubscribeCommunity(Profile $profile, Community $community){
-
+        return $this->subscribeRepository->unSubscribeCommunity($profile, $community);
     }
 
     public function listSubscribedCommunities(Profile $profile){
-
+        return $this->subscribeRepository->findBy([
+            'profile_id' => $profile->getId(),
+            'type'       => Subscribe::TYPE_COMMUNITY
+        ]);
     }
 
     public function getSubscribe(int $id):Subscribe
