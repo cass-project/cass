@@ -35,7 +35,7 @@ class SubscribeRepository extends EntityRepository
     }
 
     public function getSubscribeById(int $id):Subscribe
-    {
+    {   
         $subscribe = $this->getEntityManager()->getRepository(Subscribe::class)->find($id);
         if ($subscribe === null) throw new UnknownSubscribeException(sprintf("Subscribe id:%s not found", $id));
         return $subscribe;
