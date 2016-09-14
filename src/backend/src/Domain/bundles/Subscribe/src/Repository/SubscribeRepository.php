@@ -36,12 +36,6 @@ class SubscribeRepository extends EntityRepository
 
     }
 
-    public function getSubscribeById(int $id): Subscribe
-    {   
-        $subscribe = $this->getEntityManager()->getRepository(Subscribe::class)->find($id);
-        if ($subscribe === null) throw new UnknownSubscribeException(sprintf("Subscribe id:%s not found", $id));
-        return $subscribe;
-    }
 
     public function getSubscribe(array $criteria): Subscribe
     {
@@ -99,16 +93,6 @@ class SubscribeRepository extends EntityRepository
         return $subscribe;
     }
 
-    public function unSubscribeCollection(Profile $profile, Collection $collection)
-    {
-        
-        $subscribe = $this->getSubscribe($criteria);
-
-        $em = $this->getEntityManager();
-        $em->remove($subscribe);
-        $em->flush();
-    }
-
     public function subscribeCommunity(Profile $profile, Community $community, $options = null ): Subscribe
     {
         $subscribe =  new Subscribe();
@@ -125,11 +109,12 @@ class SubscribeRepository extends EntityRepository
 
     public function unSubscribeByCriteria(array $criteria)
     {
-
         $subscribe = $this->getSubscribe($criteria);
 
         $em = $this->getEntityManager();
         $em->remove($subscribe);
         $em->flush();
+
+        return $subscribe;
     }
 }

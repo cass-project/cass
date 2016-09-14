@@ -8,7 +8,6 @@ use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
 use CASS\Domain\Bundles\Subscribe\Repository\SubscribeRepository;
 use CASS\Domain\Bundles\Theme\Entity\Theme;
 use CASS\Util\Seek;
-use phpDocumentor\Reflection\DocBlock\Tags\See;
 
 class SubscribeService
 {
@@ -43,9 +42,9 @@ class SubscribeService
         );
     }
 
-    public function subscribeProfile(Profile $profile1, Profile $profile2, $options): Subscribe
+    public function subscribeProfile(Profile $profile, Profile $subscribe, $options = null): Subscribe
     {
-        return $this->subscribeRepository->subscribeProfile($profile1, $profile2, $options);
+        return $this->subscribeRepository->subscribeProfile($profile, $subscribe, $options);
     }
 
     public function unSubscribeProfile(Profile $profile, Profile $subscribe)
@@ -66,7 +65,7 @@ class SubscribeService
         );
     }
 
-    public function subscribeCollection(Profile $profile, Collection $collection, $options): Subscribe
+    public function subscribeCollection(Profile $profile, Collection $collection, $options = null): Subscribe
     {
         return $this->subscribeRepository->subscribeCollection($profile, $collection, $options);
     }
@@ -112,10 +111,5 @@ class SubscribeService
             $seek->getLimit(),
             $seek->getOffset()
         );
-    }
-
-    public function getSubscribe(int $id):Subscribe
-    {
-        return $this->subscribeRepository->getSubscribeById($id);
     }
 }
