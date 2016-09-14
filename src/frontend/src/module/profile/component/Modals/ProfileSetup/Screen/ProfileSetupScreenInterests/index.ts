@@ -1,18 +1,13 @@
-import {Component, Output, EventEmitter} from "@angular/core";
+import {Component, Output, EventEmitter, Directive} from "@angular/core";
 
 import {ProfileSetupModel} from "../../model";
-import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
 
 @Component({
-    selector: 'cass-profile-setup-screen-interests',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ThemeSelect,
-    ]
-})
+    ],selector: 'cass-profile-setup-screen-interests'})
+
 export class ProfileSetupScreenInterests
 {
     @Output('back') backEvent = new EventEmitter<ProfileSetupModel>();

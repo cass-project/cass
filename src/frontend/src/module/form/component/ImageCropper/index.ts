@@ -1,6 +1,6 @@
 declare var Cropper;
 
-import {Injectable, Output, EventEmitter, OnDestroy, OnInit} from "@angular/core";
+import {Injectable, Output, EventEmitter, OnDestroy, OnInit, Directive} from "@angular/core";
 import {Component} from "@angular/core";
 import {ViewChild} from "@angular/core";
 import {ElementRef} from "@angular/core";
@@ -62,12 +62,11 @@ export class ImageCropperService
 }
 
 @Component({
-    selector: 'cass-image-cropper',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
+    ],selector: 'cass-image-cropper'})
+
 export class ImageCropper implements OnInit, OnDestroy
 {
     private fileReader: FileReader;

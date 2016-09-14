@@ -1,9 +1,7 @@
 import {Success200} from "../../../common/definitions/common";
-import {PostAttachmentEntity} from "../entity/PostAttachment";
-import {FileAttachment} from "../entity/attachment/FileAttachment";
-import {LinkAttachment} from "../entity/attachment/LinkAttachment";
+import {PostAttachmentEntity, AttachmentMetadata} from "../entity/PostAttachment";
 
 export interface LinkPostAttachmentResponse200 extends Success200
 {
-    entity: PostAttachmentEntity<LinkAttachment<any>>;
+    entity: PostAttachmentEntity<AttachmentMetadata>;
 }

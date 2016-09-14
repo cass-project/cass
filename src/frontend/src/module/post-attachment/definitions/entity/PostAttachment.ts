@@ -1,14 +1,23 @@
-export interface PostAttachmentEntity<T>
+export interface PostAttachmentEntity<T extends AttachmentMetadata>
 {
     id: number;
-    post_id: number;
-    attachment_type: string;
+    sid: string;
     date_created_on: string;
-    is_attached_to_post: boolean;
-    attachment: T;
+    is_attached: boolean;
+    link: {
+        url: string;
+        resource: string;
+        source: {
+            source: string;
+            origURL: string;
+        };
+        metadata: T;
+    }
+    date_attached_on?: string;
+    owner?: {
+        id: number;
+        code: string;
+    }
 }
 
-export interface PostAttachmentType
-{
-    attachment_type: string;
-}
+export interface AttachmentMetadata {}

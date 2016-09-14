@@ -1,9 +1,9 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 
 @Component({
-    selector: 'cass-progress-bar',
     template: require('./template.html')
-})
+,selector: 'cass-progress-bar'})
+
 export class ProgressBar
 {
     @Input ('percent') percent: number = 0;

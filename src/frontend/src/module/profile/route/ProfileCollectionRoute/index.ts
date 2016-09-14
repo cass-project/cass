@@ -1,18 +1,14 @@
-import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES, Router} from '@angular/router-deprecated';
-import {RouteParams} from "@angular/router-deprecated";
-
-import {CollectionsList} from "../../../collection/component/Elements/CollectionsList/index";
+import {Component, OnInit} from "@angular/core";
+import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Observable} from "rxjs/Observable";
 import {ProfileRouteService} from "../ProfileRoute/service";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
-import {PostForm} from "../../../post/component/Forms/PostForm/index";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
 import {PostTypeService} from "../../../post/service/PostTypeService";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {Stream} from "../../../feed/service/FeedService/stream";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
-import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/index";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 
@@ -26,45 +22,46 @@ import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
         CollectionSource,
         FeedCriteriaService,
         FeedOptionsService,
-    ],
-    directives: [
-        ROUTER_DIRECTIVES,
-        CollectionsList,
-        PostForm,
-        FeedPostStream,
     ]
 })
-export class ProfileCollectionRoute
+export class ProfileCollectionRoute implements OnInit
 {
     collection: CollectionEntity;
     postType: PostTypeEntity;
 
     constructor(
         private router: Router,
-        private params: RouteParams,
+        private route: ActivatedRoute,
         private service: ProfileRouteService,
         private types: PostTypeService,
         private feed: FeedService<PostEntity>,
-        private feedSource: CollectionSource
-    ) {
-        this.postType = types.getTypeByStringCode('default');
+        private feedSource: CollectionSource,
+        private sidCollection: string
+    ) {}
+    
+    ngOnInit(){
+        this.postType = this.types.getTypeByStringCode('default');
 
-        service.getObservable().subscribe(
+        this.route.params.map(params => {
+            this.sidCollection = params['sid'];
+        });
+
+        this.service.getObservable().subscribe(
             (response) => {
-                let sid = params.get('sid');
+                let sid = this.sidCollection;
                 let collections = response.entity.collections.filter((entity: CollectionEntity) => {
                     return entity.sid === sid;
                 });
-                
+
                 if(! collections.length) {
-                    router.navigate(['NotFound']);
+                    this.router.navigate(['NotFound']);
                 }
-                
+
                 this.collection = collections[0];
 
-                feedSource.collectionId = this.collection.id;
-                feed.provide(feedSource, new Stream<PostEntity>());
-                feed.update();
+                this.feedSource.collectionId = this.collection.id;
+                this.feed.provide(this.feedSource, new Stream<PostEntity>());
+                this.feed.update();
             },
             (error) => {}
         );

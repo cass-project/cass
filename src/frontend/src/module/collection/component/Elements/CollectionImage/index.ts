@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 
 @Component({
     selector: 'cass-collection-image',
@@ -7,6 +7,7 @@ import {Component, Input} from "@angular/core";
         require('./style.shadow.scss')
     ]
 })
+
 export class CollectionImage
 {
     @Input('url') url: string;

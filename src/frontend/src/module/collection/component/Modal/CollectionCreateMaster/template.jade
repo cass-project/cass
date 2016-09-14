@@ -11,7 +11,7 @@ cass-modal
               label.form-label
                 span Название
                 input.form-input(
-                  [(ngModel)]= 'collection.title',
+                  [ngModelOptions]="{standalone: true}", [(ngModel)]= 'collection.title',
                   type="text",
                   placeholder="Название, заголовок подборки"
                 )
@@ -19,7 +19,7 @@ cass-modal
               label.form-label
                 span Описание
                 input.form-input(
-                  [(ngModel)]= 'collection.description',
+                  [ngModelOptions]="{standalone: true}", [(ngModel)]= 'collection.description',
                   type="text",
                   placeholder="Подзаголовок, пару строк о контенте"
                 )
@@ -38,7 +38,7 @@ cass-modal
                         p  Если вы укажите тематику у своей подборки, то другие люди смогут найти вас в поисках контента по выбранной вами тематике
                     .modal-list-controls
                       div.form-switch-button
-                        input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", [(ngModel)]='haveThemesSwitcher',  [checked]='collection.hasThemeIds()')
+                        input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", [ngModelOptions]="{standalone: true}", [(ngModel)]='haveThemesSwitcher',  [checked]='collection.hasThemeIds()')
                         label.form-switch-button-label(for="collectionCreateMasterEnableTheme")
             div.theme-select-container(*ngIf="haveThemesSwitcher")
               cass-theme-select([value]='collection.theme_ids')

@@ -2,7 +2,7 @@ import {Component, Input} from "@angular/core";
 import {CollectionEntity} from "../../../definitions/entity/collection";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {ThemeService} from "../../../../theme/service/ThemeService";
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'cass-collection-card',
@@ -11,6 +11,7 @@ import {Router} from '@angular/router-deprecated';
         require('./style.shadow.scss')
     ]
 })
+
 export class CollectionCard
 {
     @Input('entity') entity: CollectionEntity;

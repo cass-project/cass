@@ -22,11 +22,6 @@ import {Session} from "../../../session/Session";
     providers: [
         FeedService,
         CollectionSource
-    ],
-    directives: [
-        ProfileCardsList,
-        FeedPostStream,
-        PostForm
     ]
 })
 export class ProfileDashboardRoute

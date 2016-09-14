@@ -1,24 +1,15 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, Input, EventEmitter, Output, Directive} from "@angular/core";
 
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
-import {CommunityImage} from "../CommunityImage/index";
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {CommunityRouteService} from "../../../route/CommunityRoute/service";
 import {CommunityModals} from "../../../modals";
-import {CommunityRouteService} from "../../../route/CommunityRoute/service";
 import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
 
 @Component({
-    selector: 'cass-community-header',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        CommunityImage,
-        ROUTER_DIRECTIVES,
-    ]
-})
+    ],selector: 'cass-community-header'})
 export class CommunityHeader
 {
     @Output('go-community') goCommunityEvent: EventEmitter<string> = new EventEmitter<string>();

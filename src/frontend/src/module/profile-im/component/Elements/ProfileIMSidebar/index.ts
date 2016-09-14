@@ -1,21 +1,14 @@
-import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
-
+import {Component, Directive} from "@angular/core";
 import {ProfileImage} from "../../../../profile/component/Elements/ProfileImage/index";
 import {ContactEntity} from "../../../../contact/definitions/entity/Contact";
 import {ContactService} from "../../../../contact/service/ContactService";
 
 @Component({
-    selector: 'cass-profile-im-sidebar',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives:[
-        ROUTER_DIRECTIVES,
-        ProfileImage
-    ]
-})
+    ],selector: 'cass-profile-im-sidebar'})
+
 
 export class ProfileIMSidebar
 {

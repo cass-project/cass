@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Component, Input, Output, EventEmitter, Directive} from "@angular/core";
 
 import {FeedbackCreateModalModel} from "./model";
 import {FeedbackService} from "../../../service/FeedbackService";
@@ -13,17 +13,12 @@ import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {AuthService} from "../../../../auth/service/AuthService";
 
 @Component({
-    selector: 'cass-feedback-create-modal',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ProgressLock
     ]
 })
+@Directive({selector: 'cass-feedback-create-modal'})
 
 export class FeedbackCreateModal
 {

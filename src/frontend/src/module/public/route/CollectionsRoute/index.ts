@@ -17,10 +17,6 @@ import {CollectionIndexEntity} from "../../../collection/definitions/entity/coll
     providers: [
         FeedService,
         PublicCollectionsSource,
-    ],
-    directives: [
-        FeedCollectionStream,
-        NothingFound,
     ]
 })
 export class CollectionsRoute

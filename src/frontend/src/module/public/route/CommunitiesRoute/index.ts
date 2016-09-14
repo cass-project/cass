@@ -16,10 +16,6 @@ import {PublicCommunitiesSource} from "../../../feed/service/FeedService/source/
     providers: [
         FeedService,
         PublicCommunitiesSource,
-    ],
-    directives: [
-        FeedCommunityStream,
-        NothingFound,
     ]
 })
 export class CommunitiesRoute

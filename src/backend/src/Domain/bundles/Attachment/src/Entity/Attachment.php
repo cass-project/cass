@@ -64,7 +64,7 @@ class Attachment implements JSONSerializable, IdEntity, SIDEntity
             'id' => $this->isPersisted() ? $this->getId() : '#NEW_ATTACHMENT',
             'sid' => $this->getSID(),
             'date_created_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),
-            'metadata' => $this->getMetadata(),
+            'link' => $this->getMetadata(),
             'is_attached' => $this->isAttached(),
         ];
 

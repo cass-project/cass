@@ -15,7 +15,7 @@ cass-modal
             span.label-text
             i.fa.fa-caret-down.fa-fw(aria-hidden="true")
             select.form-input(
-              [(ngModel)]="model.type_feedback"
+              [ngModelOptions]="{standalone: true}", [(ngModel)]="model.type_feedback"
             )
               option(
                 *ngFor="let feedback of feedbackTypesService.getFeedbackTypes()",
@@ -27,8 +27,7 @@ cass-modal
           input.form-input(
             required,
             type="email",
-            [(ngModel)]="model.email",
-            #ngControlEmail="ngForm"
+            [ngModelOptions]="{standalone: true}", [(ngModel)]="model.email"
           )
           .input-error([hidden]="ngControlEmail.valid || ngControlEmail.pristine")
             i.fa.fa-fw.fa-exclamation-triangle(aria-hidden="true")  
@@ -39,8 +38,7 @@ cass-modal
             span.label-text Ваше сообщение      
           textarea.form-input(
             required,
-            [(ngModel)]="model.description",
-            #ngControlDescription="ngForm"
+            [ngModelOptions]="{standalone: true}", [(ngModel)]="model.description"
           )
           .input-error([hidden]="ngControlDescription.valid || ngControlDescription.pristine")
             i.fa.fa-fw.fa-exclamation-triangle(aria-hidden="true")

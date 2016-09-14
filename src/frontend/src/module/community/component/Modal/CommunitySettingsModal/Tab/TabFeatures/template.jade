@@ -12,7 +12,7 @@
         .modal-list-controls
           .form-switch-button
             input.form-switch-button-checkbox(
-              [(ngModel)]="feature.is_activated",
+              [ngModelOptions]="{standalone: true}", [(ngModel)]="feature.is_activated",
               type="checkbox",
               id="communityCreateModalFeature{{feature.code}}Checkbox",
               [disabled]="feature.disabled",

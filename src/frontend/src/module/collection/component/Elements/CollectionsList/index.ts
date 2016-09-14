@@ -9,12 +9,9 @@ import {CreateCollectionCard} from "../CreateCollectionCard/index";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        CollectionCard,
-        CreateCollectionCard,
     ]
 })
+
 export class CollectionsList
 {
     @Input('is-own') isOwn: boolean = false;

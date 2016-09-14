@@ -9,8 +9,7 @@ import {ProfileRootRoute} from "./route/ProfileRootRoute/index";
 import {ProfileModalModel} from "./component/Modals/ProfileModal/model";
 import {Session} from "../session/Session";
 
-export = new Module({ 
-    name: 'profile',
+export = new Module({
     RESTServices: [
         ProfileRESTService,
     ],
@@ -19,16 +18,6 @@ export = new Module({
         ProfileSwitcherService,
         ProfileCachedIdentityMap,
         ProfileModals,
-        ProfileModalModel, // @deprecated
+        ProfileModalModel // @deprecated
     ],
-    directives: [
-        ProfileComponent,
-    ],
-    routes: [
-        {
-            name: 'Profile',
-            path: '/profile/...',
-            component: ProfileRootRoute
-        },
-    ]
 });

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from "@angular/core";
+import {Component, EventEmitter, Output, Directive} from "@angular/core";
 
 import {CommunityCreateModalModel} from "./model";
 
@@ -22,22 +22,13 @@ enum CreateStage {
 }
 
 @Component({
-    selector: 'cass-community-create-modal',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
     providers: [
         CommunityCreateModalModel,
-    ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ScreenGeneral,
-        ScreenFeatures,
-        ProgressLock,
-    ]
-})
+    ],selector: 'cass-community-create-modal'})
 
 export class CommunityCreateModal
 {

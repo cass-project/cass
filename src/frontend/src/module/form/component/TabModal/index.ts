@@ -1,4 +1,4 @@
-import {Component, ContentChildren, QueryList, Input} from "@angular/core";
+import {Component, ContentChildren, QueryList, Input, Directive} from "@angular/core";
 
 import {ModalComponent} from "../../../modal/component/index";
 import {ModalBoxComponent} from "../../../modal/component/box/index";
@@ -7,18 +7,11 @@ import {TabModalHeader} from "./component/TabModalHeader/index";
 import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
 
 @Component({
-    selector: 'cass-tab-modal',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        TabModalTab,
-        ThemeSelect,
-    ]
-})
+    ],selector: 'cass-tab-modal'})
+
 export class TabModal
 {
     @Input('min-height') minHeight: string = '200';

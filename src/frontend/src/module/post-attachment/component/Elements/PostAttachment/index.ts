@@ -1,32 +1,18 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Directive} from "@angular/core";
 
-import {LinkAttachment} from "../../../definitions/entity/attachment/LinkAttachment";
-import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
-import {PostAttachmentLinkYouTube} from "../PostAttachmentLinkYouTube/index";
-import {PostAttachmentLinkImage} from "../PostAttachmentLinkImage/index";
-import {PostAttachmentLinkPage} from "../PostAttachmentLinkPage/index";
-import {PostAttachmentLinkUnknown} from "../PostAttachmentLinkUnknown/index";
-import {PostAttachmentLinkWebm} from "../PostAttachmentLinkWebm/index";
+import {PostAttachmentEntity, AttachmentMetadata} from "../../../definitions/entity/PostAttachment";
 
 @Component({
-    selector: 'cass-post-attachment',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        PostAttachmentLinkYouTube,
-        PostAttachmentLinkImage,
-        PostAttachmentLinkPage,
-        PostAttachmentLinkWebm,
-        PostAttachmentLinkUnknown,
-    ]
-})
+    ],selector: 'cass-post-attachment'})
+
 export class PostAttachment
 {
-    @Input('attachment') link: PostAttachmentEntity<LinkAttachment<any>>;
+    @Input('attachment') attachment: PostAttachmentEntity<AttachmentMetadata>;
     
     is(resource: string) {
-        return this.link.attachment.resource === resource;
+        return this.attachment.link.resource === resource;
     }
 }

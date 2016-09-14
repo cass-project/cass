@@ -16,7 +16,7 @@ article.component.component-collection-settings-modal
                       input.form-input(
                         type="text",
                         placeholder="Название, заголовок подборки",
-                      [(ngModel)]='collection.title'
+                      [ngModelOptions]="{standalone: true}", [(ngModel)]='collection.title'
                       )
                   .input-group
                     label.form-label
@@ -24,7 +24,7 @@ article.component.component-collection-settings-modal
                       input.form-input(
                         type="text",
                         placeholder="Подзаголовок, одна строка про подборку",
-                      [(ngModel)]='collection.description'
+                      [ngModelOptions]="{standalone: true}", [(ngModel)]='collection.description'
                       )
                   .modal-list
                     ul.collection-options-list
@@ -39,7 +39,7 @@ article.component.component-collection-settings-modal
                             cass-theme-select([value]='collection.theme_ids')
                           .modal-list-controls
                             div.form-switch-button
-                              input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", [checked]='collection.theme.has', [(ngModel)]='collection.theme.has')
+                              input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterEnableTheme", [checked]='collection.theme.has', [ngModelOptions]="{standalone: true}", [(ngModel)]='collection.theme.has')
                               label.form-switch-button-label(for="collectionCreateMasterEnableTheme")
                 .form-section
                   cass-tab-modal-header(level="2")
@@ -76,7 +76,7 @@ article.component.component-collection-settings-modal
                           div.form-switch-button
                             input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterIsPrivate",
                             [checked]='collection.public_options.is_private',
-                            [(ngModel)]='collection.public_options.is_private')
+                            [ngModelOptions]="{standalone: true}", [(ngModel)]='collection.public_options.is_private')
                             label.form-switch-button-label(for="collectionCreateMasterIsPrivate")
                     li
                       section.modal-list-item
@@ -90,7 +90,7 @@ article.component.component-collection-settings-modal
                           div.form-switch-button
                             input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterPublicEnabled",
                             [checked]='collection.public_options.public_enabled',
-                            [(ngModel)]='collection.public_options.public_enabled')
+                            [ngModelOptions]="{standalone: true}", [(ngModel)]='collection.public_options.public_enabled')
                             label.form-switch-button-label(for="collectionCreateMasterPublicEnabled")
                     li
                       section.modal-list-item
@@ -104,7 +104,7 @@ article.component.component-collection-settings-modal
                           div.form-switch-button
                             input.form-switch-button-checkbox(type="checkbox" id="collectionCreateMasterModerationContact",
                             [checked]='collection.public_options.moderation_contract',
-                            [(ngModel)]='collection.public_options.moderation_contract')
+                            [ngModelOptions]="{standalone: true}", [(ngModel)]='collection.public_options.moderation_contract')
                             label.form-switch-button-label(for="collectionCreateMasterModerationContact")
           cass-tab-modal-tab(title="Изображение")
             form.form.form-image

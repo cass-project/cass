@@ -12,7 +12,7 @@ article.component.component-auth-sign-up
             placeholder='Адрес электронного ящика',
             autocomplete='off', autofocus='autofocus',
             tabindex='1',
-            [(ngModel)]='model.email',
+            [ngModelOptions]="{standalone: true}", [(ngModel)]='model.email',
             [disabled]="status.loading",
             #emailInput
           )
@@ -27,7 +27,7 @@ article.component.component-auth-sign-up
             required,
             minlength='6',
             maxlength='32',
-            [(ngModel)]='model.password',
+            [ngModelOptions]="{standalone: true}", [(ngModel)]='model.password',
             [disabled]="status.loading"
           )
       .input-group
@@ -41,7 +41,7 @@ article.component.component-auth-sign-up
             required,
             minlength='6',
             maxlength='32',
-            [(ngModel)]='model.repeat',
+            [ngModelOptions]="{standalone: true}", [(ngModel)]='model.repeat',
             [disabled]="status.loading"
           )
     footer.form-footer

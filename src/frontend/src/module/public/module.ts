@@ -8,14 +8,5 @@ export = new Module({
     RESTServices: [],
     providers: [
         PublicService,
-    ],
-    directives: [],
-    routes: [
-        {
-            name: 'Public',
-            path: '/public/...',
-            component: PublicComponent,
-            useAsDefault: true
-        }
     ]
 });

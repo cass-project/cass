@@ -1,6 +1,6 @@
-import {CommunityEnityImage} from "../definitions/entity/Community";
+import {ImageCollection} from "../../avatar/definitions/ImageCollection";
 
 export interface CommunityImageDeleteResponseModel {
-    image: CommunityEnityImage,
-    "success": boolean,
+    image: ImageCollection,
+    success: boolean,
 }

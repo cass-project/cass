@@ -1,4 +1,4 @@
-import {Input, Component} from "@angular/core";
+import {Input, Component, Directive} from "@angular/core";
 
 @Component({
     selector: 'cass-collection-select',
@@ -7,6 +7,7 @@ import {Input, Component} from "@angular/core";
         require('./style.shadow.scss')
     ]
 })
+
 export class CollectionSelect
 {
     @Input("collections") collections: string;

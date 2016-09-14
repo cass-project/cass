@@ -1,12 +1,11 @@
-import {Component, ViewChild, ElementRef} from "@angular/core";
+import {Component, ViewChild, ElementRef, Directive} from "@angular/core";
 import {AppService} from "../../../../app/frontend-app/service";
 import {FeedService} from "../../service/FeedService/index";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 
 @Component({
-    selector: 'cass-feed-scroll-detector',
     template: require('./template.jade')
-})
+,selector: 'cass-feed-scroll-detector'})
 
 export class FeedScrollDetector
 {

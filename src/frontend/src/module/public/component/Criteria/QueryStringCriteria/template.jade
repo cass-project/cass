@@ -5,7 +5,7 @@ article.component-public-criteria-query-string
         .query-string-input-container
           input.query-string-input(
             type="search",
-            [(ngModel)]="queryString",
+            [ngModelOptions]="{standalone: true}", [(ngModel)]="queryString",
             placeholder="Поиск"
           )
       .flex-container-section-submit

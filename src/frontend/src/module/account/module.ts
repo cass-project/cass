@@ -10,8 +10,5 @@ export = new Module({
     ],
     providers: [
         Session,
-    ],
-    directives: [
-        AccountComponent,
     ]
 });
