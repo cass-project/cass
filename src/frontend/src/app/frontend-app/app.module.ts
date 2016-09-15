@@ -124,6 +124,28 @@ import {ProfileModals} from "../../module/profile/modals";
 import {ThemeService} from "../../module/theme/service/ThemeService";
 import {ProfileCachedIdentityMap} from "../../module/profile/service/ProfileCachedIdentityMap";
 import {ProfileRESTService} from "../../module/profile/service/ProfileRESTService";
+import {ProfileSwitcherService} from "../../module/profile/component/Modals/ProfileSwitcher/service";
+import {ProfileNotFoundRoute} from "../../module/profile/route/ProfileNotFoundRoute/index";
+import {ProfileDashboardRoute} from "../../module/profile/route/ProfileDashboardRoute/index";
+import {ProfileCollectionsRoute} from "../../module/profile/route/ProfileCollectionsRoute/index";
+import {ProfileCollectionsListRoute} from "../../module/profile/route/ProfileCollectionsListRoute/index";
+import {ProfileCollectionNotFoundRoute} from "../../module/profile/route/ProfileCollectionNotFoundRoute/index";
+import {ProfileCollectionRoute} from "../../module/profile/route/ProfileCollectionRoute/index";
+import {FeedRESTService} from "../../module/feed/service/FeedRESTService";
+import {PostTypeService} from "../../module/post/service/PostTypeService";
+import {PostRESTService} from "../../module/post/service/PostRESTService";
+import {PostAttachmentRESTService} from "../../module/post-attachment/service/PostAttachmentRESTService";
+import {CommunityCollectionRoute} from "../../module/community/route/CommunityCollectionRoute/index";
+import {CommunityCollectionNotFoundRoute} from "../../module/community/route/CommunityCollectionNotFoundRoute/index";
+import {CommunityCollectionsRoute} from "../../module/community/route/CommunityCollectionsRoute/index";
+import {CommunityCollectionsListRoute} from "../../module/community/route/CommunityCollectionsListRoute/index";
+import {CommunityDashboardRoute} from "../../module/community/route/CommunityDashboardRoute/index";
+import {CommunityNotFoundRoute} from "../../module/community/route/CommunityNotFoundRoute/index";
+import {ContentRoute} from "../../module/public/route/ContentRoute/index";
+import {CollectionsRoute} from "../../module/public/route/CollectionsRoute/index";
+import {CommunitiesRoute} from "../../module/public/route/CommunitiesRoute/index";
+import {ExpertsRoute} from "../../module/public/route/ExpertsRoute/index";
+import {ProfilesRoute} from "../../module/public/route/ProfilesRoute/index";
 
 @Injectable()
 export class NoSanitizationService {
@@ -240,7 +262,24 @@ export class NoSanitizationService {
         ProfileRoute,
         CommunityRoute,
         PublicComponent,
-        Nothing
+        Nothing,
+        ProfileNotFoundRoute,
+        ProfileDashboardRoute,
+        ProfileCollectionRoute,
+        ProfileCollectionsRoute,
+        ProfileCollectionsListRoute,
+        ProfileCollectionNotFoundRoute,
+        CommunityCollectionNotFoundRoute,
+        CommunityCollectionRoute,
+        CommunityCollectionsRoute,
+        CommunityCollectionsListRoute,
+        CommunityDashboardRoute,
+        CommunityNotFoundRoute,
+        ContentRoute,
+        CollectionsRoute,
+        CommunitiesRoute,
+        ExpertsRoute,
+        ProfilesRoute
 
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -264,7 +303,12 @@ export class NoSanitizationService {
         ThemeService,
         ProfileCachedIdentityMap,
         ProfileRESTService,
+        ProfileSwitcherService,
         AuthComponentService,
+        FeedRESTService,
+        PostTypeService,
+        PostRESTService,
+        PostAttachmentRESTService,
         appRoutingProviders,
         {provide: DomSanitizer, useClass: NoSanitizationService},
         {provide: FrontlineService, useFactory: function() {

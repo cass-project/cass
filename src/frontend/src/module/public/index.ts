@@ -10,31 +10,6 @@ import {FeedCriteriaService} from "../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../feed/service/FeedOptionsService";
 import {AppService} from "../../app/frontend-app/service";
 
-const publicRoutes: Routes = [
-    {
-        path: '/content',
-        component: ContentRoute
-    },
-    {
-        path: '/collections',
-        component: CollectionsRoute
-    },
-    {
-        path: '/communities',
-        component: CommunitiesRoute
-    },
-    {
-        path: '/experts',
-        component: ExpertsRoute
-    },
-    {
-        path: '/profiles',
-        component: ProfilesRoute
-    },
-];
-
-export const publicRouting: ModuleWithProviders = RouterModule.forChild(publicRoutes);
-
 @Directive({
     selector: 'cass-public'
 })

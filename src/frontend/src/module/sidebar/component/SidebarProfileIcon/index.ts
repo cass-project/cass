@@ -23,7 +23,7 @@ export class SidebarProfileIcon
     ) {}
 
     goToProfile() {
-        this.router.navigate(['/Profile/Profile', { 'id': 'current' }]);
+        this.router.navigate(['/profile', 'current' ]);
     }
 
     openProfileSettings() {
