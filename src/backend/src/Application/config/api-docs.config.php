@@ -23,7 +23,6 @@ return [
         'config.api-docs.excluded-bundles' => [
             AttachmentBundle::class,
             AuthBundle::class,
-            AvatarBundle::class,
             CollectionBundle::class,
             ColorsBundle::class,
             CommunityBundle::class,

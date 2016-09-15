@@ -13,28 +13,20 @@ Avatar_ImageCollection:
       description: Является автосгенерированной
     variants:
       type: object
-      schema:
-        required:
-          - default
-        properties:
-          default:
-            schema:
-              $ref: '#/definitions/Avatar_Image'
-          16:
-            schema:
-              $ref: '#/definitions/Avatar_Image'
-          32:
-            schema:
-              $ref: '#/definitions/Avatar_Image'
-          64:
-            schema:
-              $ref: '#/definitions/Avatar_Image'
-          128:
-            schema:
-              $ref: '#/definitions/Avatar_Image'
-          256:
-            schema:
-              $ref: '#/definitions/Avatar_Image'
-          512:
-            schema:
-              $ref: '#/definitions/Avatar_Image'
+      required:
+        - default
+      properties:
+        default:
+          $ref: '#/definitions/Avatar_Image'
+        16:
+          $ref: '#/definitions/Avatar_Image'
+        32:
+          $ref: '#/definitions/Avatar_Image'
+        64:
+          $ref: '#/definitions/Avatar_Image'
+        128:
+          $ref: '#/definitions/Avatar_Image'
+        256:
+          $ref: '#/definitions/Avatar_Image'
+        512:
+          $ref: '#/definitions/Avatar_Image'
