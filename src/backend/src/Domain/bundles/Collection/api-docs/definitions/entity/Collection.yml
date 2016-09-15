@@ -27,17 +27,16 @@ Collection_Entity_Collection:
       description: OwnerSID ("community:#ID", "profile:#ID")
     owner:
       type: object
-      schema:
-        required:
-          - id
-          - type
-        properties:
-          id:
-            type: string
-            description: ID владельца
-          type:
-            type: string
-            description: Тип владельца ("community", "profile")
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+          description: ID владельца
+        type:
+          type: string
+          description: Тип владельца ("community", "profile")
     date_created_on:
       type: string
       description: Дата создания коллекции
@@ -48,27 +47,25 @@ Collection_Entity_Collection:
       type: string
       description: Описание коллекции
     image:
-      schema:
-        $ref: '#/definitions/Avatar_ImageCollection'
+      $ref: '#/definitions/Avatar_ImageCollection'
     public_options:
       type: object
-      schema:
-        description:
-          Опции для публичного каталога / публичного доступа
-        required:
-          - is_private
-          - public-enabled
-          - moderation_contract
-        properties:
-          is_private:
-            type: boolean
-            description: Коллекция является приватной
-          public_enabled:
-            type: boolean
-            description: Включить обнаружение коллекции аггрегатором
-          moderation_contract:
-            type: boolean
-            description: Владелец обязуется модерировать содержимое коллекции
+      description:
+        Опции для публичного каталога / публичного доступа
+      required:
+        - is_private
+        - public-enabled
+        - moderation_contract
+      properties:
+        is_private:
+          type: boolean
+          description: Коллекция является приватной
+        public_enabled:
+          type: boolean
+          description: Включить обнаружение коллекции аггрегатором
+        moderation_contract:
+          type: boolean
+          description: Владелец обязуется модерировать содержимое коллекции
     is_protected:
       type: boolean
       description: Коллекция является защищенной от удаления, т.е. главной лентой профиля / коммунити
@@ -78,5 +75,5 @@ Collection_Entity_Collection:
     children:
       type: array
       items:
-        schema:
-          $ref: '#/definitions/Collection_Entity_Collection'
+        type: object
+        $ref: '#/definitions/Collection_Entity_Collection'

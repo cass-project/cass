@@ -19,15 +19,12 @@
           ID коллекции
     responses:
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       409:
         description: Попытка удалить защищенную от удаления коллекцию
-        schema:
-          $ref: '#/responses/error'
+        $ref: '#/responses/error'
       404:
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'
       200:
-        schema:
-          $ref: '#/responses/success'
+        description: 200 OK
+        $ref: '#/responses/success'

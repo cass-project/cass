@@ -36,16 +36,16 @@
         type: file
         required: true
         in: formData
-        allowMultiple: false
     responses:
       403:
         $ref: '#/responses/Unauthorized'
       404:
         $ref: '#/responses/NotFound'
       422:
-        description:
+        description: |
           Ошибка обработки входного файла (слишком большой, неправильный аспект ратио и.т.д..)
         schema:
+          type: object
           required:
             - success
             - error
@@ -57,7 +57,9 @@
               type: string
               description: Сообщение об ошибке
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - image
@@ -69,6 +71,4 @@
               type: array
               description: Изображения
               items:
-                type: object
-                schema:
-                  $ref: '#/definitions/Avatar_ImageCollection'
+                $ref: '#/definitions/Avatar_ImageCollection'
