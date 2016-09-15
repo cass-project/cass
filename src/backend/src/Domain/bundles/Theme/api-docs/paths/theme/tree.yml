@@ -15,5 +15,5 @@
             success:
               type: boolean
               description: "= true"
-            entities:
+            tree:
               $ref: "#/definitions/Theme_Entity_ThemeComposition"

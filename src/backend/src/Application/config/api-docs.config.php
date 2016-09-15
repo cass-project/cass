@@ -29,7 +29,6 @@ return [
             IndexBundle::class,
             OpenGraphBundle::class,
             PostBundle::class,
-            ThemeBundle::class,
         ]
     ]
 ];

@@ -12,19 +12,15 @@
           $ref: '#/definitions/PUT_Theme_Request'
     responses:
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       409:
         description: Дубликат тематики с указанным ID
-        schema:
-          $ref: '#/responses/error'
+        $ref: '#/responses/error'
       200:
-        description: |
-          Successfull response
+        description: 200 OK
         schema:
           type: object
           required:
-            - id
             - success
             - entity
           properties:
