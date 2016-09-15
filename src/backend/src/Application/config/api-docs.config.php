@@ -33,7 +33,6 @@ return [
             IndexBundle::class,
             OpenGraphBundle::class,
             PostBundle::class,
-            ProfileCommunitiesBundle::class,
             ThemeBundle::class,
         ]
     ]

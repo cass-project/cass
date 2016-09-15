@@ -21,11 +21,11 @@
       403:
         $ref: '#/responses/Unauthorized'
       409:
-        description:
+        description: |
           Пользователь уже заджойнился к этому коммунити
-        schema:
-          $ref: '#/responses/error'
+        $ref: '#/responses/error'
       200:
+        description: 200 OK
         schema:
           required:
             - success
