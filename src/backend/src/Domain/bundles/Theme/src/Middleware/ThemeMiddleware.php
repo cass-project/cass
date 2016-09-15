@@ -1,8 +1,8 @@
 <?php
 namespace CASS\Domain\Bundles\Theme\Middleware;
 
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Domain\Bundles\Theme\Middleware\Command\CreateCommand;
 use CASS\Domain\Bundles\Theme\Middleware\Command\DeleteCommand;
 use CASS\Domain\Bundles\Theme\Middleware\Command\GetCommand;
@@ -26,7 +26,7 @@ class ThemeMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect('create', CreateCommand::class)

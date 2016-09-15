@@ -12,9 +12,13 @@ class APIDocsService
      */
     private $bundlesService;
 
-    public function __construct(BundleService $bundlesService)
+    /** @var string[] */
+    private $excludedBundles = [];
+
+    public function __construct(BundleService $bundlesService, array $excludedBundles = [])
     {
         $this->bundlesService = $bundlesService;
+        $this->excludedBundles = $excludedBundles;
     }
 
     public function buildAPIDocs() {
@@ -29,6 +33,10 @@ class APIDocsService
         $apiDocsBuilderRequest = new APIDocsBuilderRequest();
 
         foreach ($this->bundlesService->getBundles() as $bundle) {
+            if(in_array(get_class($bundle), $this->excludedBundles)) {
+                continue;
+            }
+
             if ($bundle->hasAPIDocsDir()) {
                 $apiDocsBuilderRequest->addDirectory($bundle->getAPIDocsDir());
             }

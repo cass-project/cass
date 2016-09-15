@@ -1,8 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Auth\Middleware;
 
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
-use CASS\Application\Bundles\Frontline\Service\FrontlineService;
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
 use CASS\Domain\Bundles\Account\Exception\AccountNotFoundException;
 use CASS\Domain\Bundles\Auth\Middleware\Command\OAuth\BattleNetCommand;
@@ -40,7 +39,7 @@ class AuthMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect('sign-in', SignInCommand::class)

@@ -1,5 +1,5 @@
 success:
-  description: Success
+  description: 200 OK
   schema:
     type: object
     required:

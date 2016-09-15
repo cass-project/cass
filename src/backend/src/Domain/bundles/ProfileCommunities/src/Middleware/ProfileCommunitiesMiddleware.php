@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\ProfileCommunities\Middleware;
 
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
 use CASS\Domain\Bundles\ProfileCommunities\Middleware\Command\JoinCommand;
 use CASS\Domain\Bundles\ProfileCommunities\Middleware\Command\LeaveCommand;
@@ -21,7 +21,7 @@ class ProfileCommunitiesMiddleware implements MiddlewareInterface
     }
 
     public function __invoke(Request $request, Response $response, callable $out = null) {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect('join', JoinCommand::class)

@@ -16,6 +16,7 @@
       "CASS\\Application\\Bundles\\Console\\": "src/Application/bundles/Console/src",
       "CASS\\Application\\Bundles\\Stage\\": "src/Application/bundles/Stage/src",
       "CASS\\Application\\Bundles\\PHPUnit\\": "src/Application/bundles/PHPUnit/src",
+      "CASS\\Application\\Bundles\\Swagger\\": "src/Application/bundles/Swagger/src",
       "CASS\\Domain\\": "src/Domain/src",
       "CASS\\Domain\\Bundles\\Account\\": "src/Domain/bundles/Account/src",
       "CASS\\Domain\\Bundles\\Auth\\": "src/Domain/bundles/Auth/src",

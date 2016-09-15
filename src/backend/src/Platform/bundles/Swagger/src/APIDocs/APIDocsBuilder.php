@@ -24,7 +24,7 @@ class APIDocsBuilder
     public function build() {
         $request = $this->apiDocsBuildRequest;
 
-        return Chain::create($request->getDirectories())
+        $result = Chain::create($request->getDirectories())
             ->filter(function /* list only existing directories */ ($directory) {
                 return is_dir($directory);
             })
@@ -92,6 +92,12 @@ class APIDocsBuilder
                 'responses' => []
             ])
         ;
+
+        if(! count($result['paths'])) unset($result['paths']);
+        if(! count($result['definitions'])) unset($result['definitions']);
+        if(! count($result['responses'])) unset($result['responses']);
+
+        return $result;
     }
 
     private function recursiveListYAMLFiles($directory) {

@@ -12,6 +12,7 @@
         description: Теги скриптов через запятую.
     responses:
       200:
+        description: 200 OK
         schema:
           type: object
           required:
@@ -28,75 +29,67 @@
                 $ref: "#/definitions/Profile_Entity_Profile"
             config:
               type: object
-              schema:
-                properties:
-                  auth:
-                    type: object
-                    schema:
+              properties:
+                auth:
+                  type: object
+                  required:
+                    - account
+                    - profile
+                    - feedback
+                  properties:
+                    account:
+                      type: object
                       required:
-                        - account
-                        - profile
-                        - feedback
+                        - delete_account_request_days
                       properties:
-                        account:
-                          type: object
-                          schema:
-                            required:
-                              - delete_account_request_days
-                            properties:
-                              delete_account_request_days:
-                                type: number
-                                description: Количество дней, после которых удовлетворяется запрос на удаление аккаунта
-                        feedback:
-                          type: object
-                          schema:
-                            required:
-                              - types
-                            properties:
-                              types:
-                                type: array
-                                items:
-                                  schema:
-                                    $ref: '#/definitions/Feedback_Entity_FeedbackType'
-                        profile:
-                          type: object
-                          schema:
-                            required:
-                              - max_profiles
-                            properties:
-                              max_profiles:
-                                type: number
-                                description: Максимальное количество профилей, которые могут быть созданы на этом аккаунте.
-                  community:
-                    type: object
-                    schema:
-                      required:
-                        - features
-                      properties:
-                        features:
-                          type: array
-                          description: Список доступных в проекте фич
-                          items:
+                        delete_account_request_days:
+                          type: number
+                          description: Количество дней, после которых удовлетворяется запрос на удаление аккаунта
+                feedback:
+                  type: object
+                  required:
+                    - types
+                  properties:
+                    types:
+                      type: array
+                      items:
+                        $ref: '#/definitions/Feedback_Entity_FeedbackType'
+                profile:
+                  type: object
+                  required:
+                    - max_profiles
+                  properties:
+                    max_profiles:
+                      type: number
+                      description: Максимальное количество профилей, которые могут быть созданы на этом аккаунте.
+                community:
+                  type: object
+                  required:
+                    - features
+                  properties:
+                    features:
+                      type: array
+                      description: Список доступных в проекте фич
+                      items:
+                        type: string
+                        description: Фича (строковой код)
+                post:
+                  type: object
+                  required:
+                    - types
+                  properties:
+                    types:
+                      type: array
+                      description: Типы постов
+                      items:
+                        type: object
+                        required:
+                          - int
+                          - string
+                        properties:
+                          int:
+                            description: Код (int)
+                            type: number
+                          string:
                             type: string
-                            description: Фича (строковой код
-                  post:
-                    type: object
-                    schema:
-                      required:
-                        - types
-                      properties:
-                        types:
-                          type: array
-                          description: Типы постов
-                          items:
-                            type: object
-                            schema:
-                              required:
-                                - int
-                                - string
-                              int:
-                                description: Код (int)
-                                type: number
-                              string:
-                                type: string
-                                description: Код (string)
+                            description: Код (string)

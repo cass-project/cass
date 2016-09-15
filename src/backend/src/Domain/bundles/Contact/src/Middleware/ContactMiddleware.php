@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Contact\Middleware;
 
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
 use CASS\Domain\Bundles\Contact\Middleware\Command\CreateCommand;
 use CASS\Domain\Bundles\Contact\Middleware\Command\DeleteCommand;
@@ -24,7 +24,7 @@ final class ContactMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null): Response
     {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect('create', CreateCommand::class)

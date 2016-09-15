@@ -1,7 +1,7 @@
 <?php
-namespace CASS\Application;
+namespace CASS\Application\Bundles\Swagger;
 
-use ZEA2\Platform\Bundles\Swagger\Middleware\APIDocsMiddleware;
+use CASS\Application\Bundles\Swagger\Middleware\APIDocsMiddleware;
 
 return [
     'common' => [

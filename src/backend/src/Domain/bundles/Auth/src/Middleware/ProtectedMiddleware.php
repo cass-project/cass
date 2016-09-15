@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Auth\Middleware;
 
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Domain\Bundles\Auth\Middleware\AuthStrategy\HeaderStrategy;
 use CASS\Domain\Bundles\Auth\Middleware\AuthStrategy\JSONBodyStrategy;
 use CASS\Domain\Bundles\Auth\Middleware\AuthStrategy\SessionStrategy;
@@ -33,7 +33,7 @@ class ProtectedMiddleware implements MiddlewareInterface
             ]);
         }catch(NotAuthenticatedException $e) {
             if($isURLProtected) {
-                $responseBuilder = new GenericResponseBuilder($response);
+                $responseBuilder = new CASSResponseBuilder($response);
 
                 return $responseBuilder
                     ->setStatusNotAllowed()

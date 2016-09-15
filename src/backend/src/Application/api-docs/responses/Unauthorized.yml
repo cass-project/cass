@@ -1,5 +1,5 @@
 Unauthorized:
-  description: Not authorized
+  description: 403 Not authorized
   schema:
     required:
       - success

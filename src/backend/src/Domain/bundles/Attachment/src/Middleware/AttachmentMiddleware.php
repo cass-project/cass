@@ -1,8 +1,8 @@
 <?php
 namespace CASS\Domain\Bundles\Attachment\Middleware;
 
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Domain\Bundles\Attachment\Middleware\Command\LinkCommand;
 use CASS\Domain\Bundles\Attachment\Middleware\Command\UploadCommand;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -21,7 +21,7 @@ class AttachmentMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect('upload', UploadCommand::class)

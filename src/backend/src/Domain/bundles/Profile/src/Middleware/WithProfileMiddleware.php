@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Profile\Middleware;
 
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use CASS\Domain\Bundles\Profile\Service\WithProfileService;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -25,7 +25,7 @@ final class WithProfileMiddleware implements MiddlewareInterface
 
             return $out($request, $response);
         }catch(ProfileNotFoundException $e){
-            $responseBuilder = new GenericResponseBuilder($response);
+            $responseBuilder = new CASSResponseBuilder($response);
 
             return $responseBuilder
                 ->setStatusNotAllowed()

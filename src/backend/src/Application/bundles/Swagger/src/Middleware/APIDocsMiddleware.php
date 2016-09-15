@@ -1,7 +1,7 @@
 <?php
-namespace ZEA2\Platform\Bundles\Swagger\Middleware;
+namespace CASS\Application\Bundles\Swagger\Middleware;
 
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\CASSResponseBuilder;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use ZEA2\Platform\Bundles\Swagger\Service\APIDocsService;
@@ -25,7 +25,8 @@ class APIDocsMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $restResponseBuilder = new GenericResponseBuilder($response);
+        $restResponseBuilder = new CASSResponseBuilder($response);
+        $restResponseBuilder->getDecorators()->clear();
         $restResponseBuilder->setJson($this->apiDocsService->buildAPIDocs());
         $restResponseBuilder->setStatusSuccess();
 

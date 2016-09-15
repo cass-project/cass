@@ -10,8 +10,10 @@ namespace PhpUnitBootstrap
     use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
     use CASS\Util\UtilBundle;
     use CASS\Domain\DomainBundle;
+    use ZEA2\Platform\PlatformBundle;
 
     $app = (new AppBuilder([
+        new PlatformBundle(),
         new ApplicationBundle(),
         new DomainBundle(),
         new UtilBundle(),

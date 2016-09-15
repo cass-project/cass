@@ -1,4 +1,5 @@
 NotFound:
+  description: 404 Not Found
   schema:
     required:
       - success
@@ -6,6 +7,7 @@ NotFound:
     properties:
       success:
         type: boolean
+        description: '=false'
         default: false
       error:
         type: string

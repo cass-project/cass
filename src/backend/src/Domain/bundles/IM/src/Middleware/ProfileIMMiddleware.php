@@ -1,8 +1,8 @@
 <?php
 namespace CASS\Domain\Bundles\IM\Middleware;
 
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use CASS\Domain\Bundles\IM\Middleware\Command\MessagesCommand;
 use CASS\Domain\Bundles\IM\Middleware\Command\SendCommand;
 use CASS\Domain\Bundles\IM\Middleware\Command\UnreadCommand;
@@ -22,7 +22,7 @@ class ProfileIMMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect('send', SendCommand::class)
