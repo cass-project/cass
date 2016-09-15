@@ -1,5 +1,6 @@
 import {Component} from "@angular/core";
 import {AuthService} from "../auth/service/AuthService";
+import {Router} from "@angular/router";
 
 require('./style.head.scss');
 
@@ -9,9 +10,15 @@ require('./style.head.scss');
 })
 export class SidebarComponent
 {
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private router: Router) {}
 
     isSignedIn() {
         return this.authService.isSignedIn();
+    }
+
+    signOut(){
+        this.authService.signOut().subscribe(() => {
+            this.router.navigate(['home']);
+        });
     }
 }
