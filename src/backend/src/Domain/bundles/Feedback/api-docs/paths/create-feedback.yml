@@ -11,7 +11,9 @@
           $ref: '#/definitions/Feedback_Request_CreateFeedback'
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - entity
@@ -22,6 +24,4 @@
             entity:
               $ref: '#/definitions/Feedback_Entity_Feedback'
       404:
-        description: Профиль не найден
-        schema:
-          $ref: '#/definitions/NotFound'
+        $ref: '#/definitions/NotFound'

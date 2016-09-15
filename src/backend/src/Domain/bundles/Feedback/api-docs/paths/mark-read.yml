@@ -10,10 +10,12 @@
         in: path
         required: true
         description: ID фидбека
-        type: numeric
+        type: number
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
           properties:
@@ -21,5 +23,4 @@
               type: boolean
               description: '=true'
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'

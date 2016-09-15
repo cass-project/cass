@@ -2,10 +2,10 @@ Feedback_Entity_FeedbackResponse:
   type: object
   properties:
     id:
-      type: numeric
+      type: number
       description: feedback response ID
     feedback_id:
-      type: numeric
+      type: number
       description: feedback ID
     created_at:
       type: object

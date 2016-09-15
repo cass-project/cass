@@ -25,7 +25,6 @@ return [
             AuthBundle::class,
             ContactBundle::class,
             FeedBundle::class,
-            FeedbackBundle::class,
             IMBundle::class,
             IndexBundle::class,
             OpenGraphBundle::class,

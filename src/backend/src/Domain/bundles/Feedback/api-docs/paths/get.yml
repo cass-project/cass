@@ -10,10 +10,12 @@
         in: path
         required: true
         description: ID фидбека
-        type: numeric
+        type: number
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - entity
@@ -24,5 +26,4 @@
             entity:
               $ref: '#/definitions/Feedback_Entity_Feedback'
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'

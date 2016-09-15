@@ -7,12 +7,12 @@
       - x_api_key: []
     parameters:
       - name: offset
-        type: numeric
+        type: number
         in: path
         required: true
         description: offset
       - name: limit
-        type: numeric
+        type: number
         in: path
         required: true
         description: limit
@@ -30,7 +30,9 @@
         description: Если установлен, то получить только отзывы, на которые дан ответ
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           properties:
             success:
               type: boolean
@@ -38,11 +40,9 @@
             entities:
               type: array
               items:
-                schema:
-                  $ref: '#/definitions/Feedback_Entity_Feedback'
+                $ref: '#/definitions/Feedback_Entity_Feedback'
           required:
             - success
             - entities
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'

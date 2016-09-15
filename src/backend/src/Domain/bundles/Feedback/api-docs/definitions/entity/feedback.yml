@@ -16,15 +16,14 @@ Feedback_Entity_Feedback:
     profile:
       type: object
       description: Информация об авторе отзыва (опционально)
-      schema:
-        required:
-          - has
-        properties:
-          has:
-            type: boolean
-            description: Если FALSE, то отзыв анонимный
-          entity:
-            $ref: '#/definitions/Profile_Entity_Profile'
+      required:
+        - has
+      properties:
+        has:
+          type: boolean
+          description: Если FALSE, то отзыв анонимный
+        entity:
+          $ref: '#/definitions/Profile_Entity_Profile'
     created_at:
       type: string
       description: Дата создания
