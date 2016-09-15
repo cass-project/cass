@@ -54,7 +54,7 @@ Collection_Entity_Collection:
         Опции для публичного каталога / публичного доступа
       required:
         - is_private
-        - public-enabled
+        - public_enabled
         - moderation_contract
       properties:
         is_private:

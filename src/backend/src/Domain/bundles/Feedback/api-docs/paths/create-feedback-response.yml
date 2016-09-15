@@ -24,6 +24,6 @@
               type: boolean
               default: true
             entity:
-              $ref: '#/definitions/Feedback_Entity_Feedbackesponse'
+              $ref: '#/definitions/Feedback_Entity_FeedbackResponse'
       403:
         $ref: '#/responses/Unauthorized'

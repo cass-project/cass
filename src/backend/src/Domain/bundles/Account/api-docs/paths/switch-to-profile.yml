@@ -20,7 +20,7 @@
             - entity
             - success
           properties:
-            profile:
+            entity:
               $ref: '#/definitions/Profile_Entity_Profile'
             success:
               type: boolean

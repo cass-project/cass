@@ -15,7 +15,7 @@
             version:
               type: string
               description: Версия (semver) Backend REST API
-            version:
+            blacklist:
               type: array
               description: Версии (semver) Frontend SPA, которые были отозваны по причинам безопасности
               items:

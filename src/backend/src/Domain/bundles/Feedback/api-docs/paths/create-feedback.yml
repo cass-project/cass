@@ -24,4 +24,4 @@
             entity:
               $ref: '#/definitions/Feedback_Entity_Feedback'
       404:
-        $ref: '#/definitions/NotFound'
+        $ref: '#/responses/NotFound'

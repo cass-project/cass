@@ -45,23 +45,23 @@
                         delete_account_request_days:
                           type: number
                           description: Количество дней, после которых удовлетворяется запрос на удаление аккаунта
-                feedback:
-                  type: object
-                  required:
-                    - types
-                  properties:
-                    types:
-                      type: array
-                      items:
-                        $ref: '#/definitions/Feedback_Entity_FeedbackType'
-                profile:
-                  type: object
-                  required:
-                    - max_profiles
-                  properties:
-                    max_profiles:
-                      type: number
-                      description: Максимальное количество профилей, которые могут быть созданы на этом аккаунте.
+                    feedback:
+                      type: object
+                      required:
+                        - types
+                      properties:
+                        types:
+                          type: array
+                          items:
+                            $ref: '#/definitions/Feedback_Entity_FeedbackType'
+                    profile:
+                      type: object
+                      required:
+                        - max_profiles
+                      properties:
+                        max_profiles:
+                          type: number
+                          description: Максимальное количество профилей, которые могут быть созданы на этом аккаунте.
                 community:
                   type: object
                   required:

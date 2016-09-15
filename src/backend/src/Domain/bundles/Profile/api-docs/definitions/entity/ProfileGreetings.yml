@@ -24,6 +24,6 @@ Profile_Entity_ProfileGreetings:
     middle_name:
       type: string
       description: Отчество
-    nickname:
+    nick_name:
       type: string
       description: Ник

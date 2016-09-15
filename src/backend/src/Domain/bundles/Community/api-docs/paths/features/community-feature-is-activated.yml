@@ -33,6 +33,6 @@
             success:
               type: boolean
               description: '=true'
-            is_feature_actived:
+            is_feature_activated:
               type: boolean
               description: Результат
