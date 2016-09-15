@@ -4,9 +4,9 @@
       li(*ngIf="!isSignedIn()")
         cass-sidebar-sign-in-button
       li(*ngIf="isSignedIn()")
-       cass-sidebar-profile-icon
         a(routerLink='profile/current') Profile
-       a((click)='signOut()') Sign Out
+        cass-sidebar-profile-icon
+        a((click)='signOut()') Sign Out
     cass-sidebar-communities
     cass-sidebar-messages
     a(routerLink='home') Home
