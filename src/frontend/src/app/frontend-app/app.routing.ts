@@ -22,7 +22,7 @@ import {ProfilesRoute} from "../../module/public/route/ProfilesRoute/index";
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'public',
+        redirectTo: 'home',
         pathMatch: 'full'
     },
     {
@@ -100,6 +100,22 @@ const appRoutes: Routes = [
         ]
     },
     {
+        path: 'home',
+        component: ContentRoute
+    },
+    {
+        path: 'people',
+        component: ProfilesRoute
+    },
+    {
+        path: 'collections',
+        component: CollectionsRoute
+    },
+    {
+        path: 'communities',
+        component: CommunitiesRoute
+    }
+    /*{
         path: 'public',
         children: [
             {
@@ -127,7 +143,8 @@ const appRoutes: Routes = [
                 component: ProfilesRoute
             }
         ]
-    },
+    },*/
+    //deprecated version of public routes
 ];
 
 export const appRoutingProviders: any[] = [];

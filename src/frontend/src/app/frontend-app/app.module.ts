@@ -146,6 +146,9 @@ import {CollectionsRoute} from "../../module/public/route/CollectionsRoute/index
 import {CommunitiesRoute} from "../../module/public/route/CommunitiesRoute/index";
 import {ExpertsRoute} from "../../module/public/route/ExpertsRoute/index";
 import {ProfilesRoute} from "../../module/public/route/ProfilesRoute/index";
+import {FeedCriteriaService} from "../../module/feed/service/FeedCriteriaService";
+import {FeedOptionsService} from "../../module/feed/service/FeedOptionsService";
+import {PublicService} from "../../module/public/service";
 
 @Injectable()
 export class NoSanitizationService {
@@ -309,6 +312,9 @@ export class NoSanitizationService {
         PostTypeService,
         PostRESTService,
         PostAttachmentRESTService,
+        FeedCriteriaService,
+        FeedOptionsService,
+        PublicService,
         appRoutingProviders,
         {provide: DomSanitizer, useClass: NoSanitizationService},
         {provide: FrontlineService, useFactory: function() {
