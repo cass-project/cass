@@ -7,7 +7,9 @@
       - x_api_key: []
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - entity
@@ -18,5 +20,4 @@
             entity:
               $ref: '#/definitions/Profile_Entity_Profile'
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'

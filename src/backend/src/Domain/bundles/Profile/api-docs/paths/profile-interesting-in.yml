@@ -18,7 +18,9 @@
           $ref: '#/definitions/Profile_InterestingIn_Request'
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - interesting_in_ids
@@ -32,9 +34,7 @@
                 description: ID тематики
                 type: number
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       404:
         description: Profile not found
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'

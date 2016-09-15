@@ -13,7 +13,9 @@
         description: ID профиля
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - image
@@ -23,12 +25,9 @@
               description: '=true'
             image:
               type: object
-              schema:
-                $ref: '#/definitions/Avatar_ImageCollection'
+              $ref: '#/definitions/Avatar_ImageCollection'
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       404:
         description: Profile not found
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'

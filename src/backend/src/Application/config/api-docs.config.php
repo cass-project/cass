@@ -34,7 +34,6 @@ return [
             IndexBundle::class,
             OpenGraphBundle::class,
             PostBundle::class,
-            ProfileBundle::class,
             ProfileCommunitiesBundle::class,
             ThemeBundle::class,
         ]

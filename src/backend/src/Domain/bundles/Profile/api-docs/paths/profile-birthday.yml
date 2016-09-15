@@ -18,21 +18,12 @@
           $ref: '#/definitions/Profile_SetBirthday_Request'
     responses:
       200:
-        schema:
-          required:
-            - success
-          properties:
-            success:
-              type: boolean
-              default: true
+        $ref: '#/responses/success'
       404:
         description: Профиль не найден
-        schema:
-            $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       409:
         description: Переданная дата не является валидной
-        schema:
-          $ref: '#/responses/error'
+        $ref: '#/responses/error'

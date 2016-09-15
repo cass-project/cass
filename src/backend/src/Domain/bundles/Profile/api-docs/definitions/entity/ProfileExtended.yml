@@ -7,18 +7,15 @@ Profile_Entity_ProfileExtended:
   properties:
     profile:
       type: object
-      schema:
-        $ref: '#/definitions/Profile_Entity_Profile'
+      $ref: '#/definitions/Profile_Entity_Profile'
     collections:
       type: array
       items:
-        schema:
-          $ref: '#/definitions/Collection_Entity_Collection'
+        $ref: '#/definitions/Collection_Entity_Collection'
     bookmarks:
       type: array
       items:
-        schema:
-          $ref: '#/definitions/ProfileCommunities_Entity_ProfileCommunityEQEntity'
+        $ref: '#/definitions/ProfileCommunities_Entity_ProfileCommunityEQEntity'
     is_own:
       type: boolean
       description: TRUE, если является профилем текущего аутентифицированного аккаунта
