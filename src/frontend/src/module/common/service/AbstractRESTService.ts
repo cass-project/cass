@@ -1,7 +1,6 @@
-import {Injectable} from "@angular/core"
+import {Injectable} from "@angular/core";
 import {Http, Response, Headers} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
 import {AuthToken} from "../../auth/service/AuthToken";

@@ -1,29 +1,21 @@
 import {Component, Injectable} from "@angular/core";
-
-import {ProfileImage} from "../../../../Elements/ProfileImage/index";
 import {ModalControl} from "../../../../../../common/classes/ModalControl";
 import {UploadProfileImageStrategy} from "../../../../../common/UploadProfileImageStrategy";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {AuthService} from "../../../../../../auth/service/AuthService";
-import {UploadImageModal} from "../../../../../../form/component/UploadImage/index";
 import {UploadImageService} from "../../../../../../form/component/UploadImage/service";
 import {AuthToken} from "../../../../../../auth/service/AuthToken";
 import {Session} from "../../../../../../session/Session";
 
 @Component({
-    selector: 'cass-profile-modal-tab-image',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
     ],
-    directives: [
-        ProfileImage,
-        UploadImageModal,
-    ],
     providers: [
         UploadImageService,
-    ]
-})
+    ],selector: 'cass-profile-modal-tab-image'})
+
 
 @Injectable()
 export class ImageTab

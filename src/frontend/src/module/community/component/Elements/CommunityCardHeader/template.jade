@@ -6,5 +6,5 @@ article.component.component-community-card-header
       .community-name
         h1 {{ getCommunityTitle() }}
       .community-settings
-        time(*ngIf="hasTime()")
+        div(*ngIf="hasTime()")
           span {{ getTime() }}

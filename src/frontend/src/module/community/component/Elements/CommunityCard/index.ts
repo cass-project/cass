@@ -1,23 +1,14 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
-
+import {Component, Input} from "@angular/core";
 import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
-import {CommunityImage} from "../CommunityImage/index";
-import {PostCard} from "../../../../post/component/Forms/PostCard/index";
 import {CommunityEntity} from "../../../definitions/entity/Community";
 import {ThemeService} from "../../../../theme/service/ThemeService";
-import {Router} from '@angular/router-deprecated';
+import {Router} from "@angular/router";
 
 @Component({
-    selector: 'cass-community-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        CommunityImage,
-        PostCard,
-    ]
-})
+    ],selector: 'cass-community-card'})
 export class CommunityCard
 {
     @Input('community') entity: CommunityEntity;

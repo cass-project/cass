@@ -1,8 +1,5 @@
 import {Component} from "@angular/core";
-
-import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
 import {ThemeService} from "../../../../../../theme/service/ThemeService";
-import {ProfileService} from "../../../../../service/ProfileService";
 import {ProfileModalModel} from "../../model";
 
 enum InterestsTabScreen
@@ -12,18 +9,15 @@ enum InterestsTabScreen
 }
 
 @Component({
-    selector: 'cass-profile-modal-tab-interests',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ThemeSelect
-    ]
-})
+    ],selector: 'cass-profile-modal-tab-interests'})
+
+
 export class InterestsTab
 {
-    constructor(private themeService: ThemeService, private profileService: ProfileService, private model: ProfileModalModel){}
+    constructor(private themeService: ThemeService, private model: ProfileModalModel){}
 
     screen: Screens = new Screens();
 }

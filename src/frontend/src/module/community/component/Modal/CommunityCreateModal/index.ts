@@ -1,17 +1,9 @@
 import {Component, EventEmitter, Output} from "@angular/core";
-
 import {CommunityCreateModalModel} from "./model";
-
-import {ScreenGeneral} from "./Screen/ScreenGeneral";
-import {ScreenFeatures} from "./Screen/ScreenFeatures";
-
-import {ModalComponent} from "../../../../modal/component";
-import {ModalBoxComponent} from "../../../../modal/component/box";
 import {ScreenControls} from "../../../../common/classes/ScreenControls";
 import {AuthService} from "../../../../auth/service/AuthService";
 import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
-import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {LoadingManager} from "../../../../common/classes/LoadingStatus";
 import {Observable} from "rxjs/Observable";
 import {CommunityCreateModalNotifier} from "./notify";
@@ -22,22 +14,13 @@ enum CreateStage {
 }
 
 @Component({
-    selector: 'cass-community-create-modal',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
     providers: [
         CommunityCreateModalModel,
-    ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ScreenGeneral,
-        ScreenFeatures,
-        ProgressLock,
-    ]
-})
+    ],selector: 'cass-community-create-modal'})
 
 export class CommunityCreateModal
 {

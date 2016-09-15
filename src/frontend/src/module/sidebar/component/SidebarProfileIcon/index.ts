@@ -1,8 +1,7 @@
 import {Component} from "@angular/core";
-
 import {AuthService} from "../../../auth/service/AuthService";
 import {ProfileModals} from "../../../profile/modals";
-import {Router} from '@angular/router-deprecated';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'cass-sidebar-profile-icon',
@@ -11,6 +10,7 @@ import {Router} from '@angular/router-deprecated';
         require('./style.shadow.scss')
     ]
 })
+
 export class SidebarProfileIcon
 {
     private isProfileMenuSwitched: boolean = false;
@@ -22,7 +22,7 @@ export class SidebarProfileIcon
     ) {}
 
     goToProfile() {
-        this.router.navigate(['/Profile/Profile', { 'id': 'current' }]);
+        this.router.navigate(['/profile', 'current' ]);
     }
 
     openProfileSettings() {

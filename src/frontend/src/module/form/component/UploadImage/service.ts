@@ -1,7 +1,5 @@
 import {Injectable} from "@angular/core";
-
-import {UploadImageStrategy} from "./strategy";
-import {UploadImageCropModel} from "./strategy";
+import {UploadImageStrategy, UploadImageCropModel} from "./strategy";
 import {UploadImageModal} from "./index";
 
 @Injectable()

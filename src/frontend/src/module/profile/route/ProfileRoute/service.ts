@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-
 import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
 import {ProfileRESTService} from "../../service/ProfileRESTService";
 import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
@@ -12,8 +11,6 @@ import {Session} from "../../../session/Session";
 export class  ProfileRouteService
 {
     private request: string;
-    private cache: ProfileCachedIdentityMap;
-
     private profile: ProfileExtendedEntity;
     private loading: boolean = false;
     private observable: Observable<GetProfileByIdResponse200>;

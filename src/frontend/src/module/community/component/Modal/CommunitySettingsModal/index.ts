@@ -1,15 +1,7 @@
 import {Component, EventEmitter, Output} from "@angular/core";
-
-import {ModalBoxComponent} from "../../../../modal/component/box";
-import {ModalComponent} from "../../../../modal/component";
 import {ScreenControls} from "../../../../common/classes/ScreenControls";
-
 import {CommunityService} from "../../../service/CommunityService";
 import {CommunityFeaturesService} from "../../../service/CommunityFeaturesService";
-
-import {FeaturesTab} from "./Tab/TabFeatures";
-import {GeneralTab} from "./Tab/TabGeneral";
-import {ImageTab} from "./Tab/TabImage";
 import {CommunitySettingsModalModel} from "./model";
 import {EditCommunityRequest} from "../../../definitions/paths/edit";
 import {CommunityControlFeatureRequestModel} from "../../../model/CommunityActivateFeatureModel";
@@ -22,23 +14,14 @@ import {SetPublicOptionsCommunityRequest} from "../../../definitions/paths/set-p
 
 
 @Component({
-    selector: 'cass-community-settings-modal',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        GeneralTab,
-        ImageTab,
-        FeaturesTab
-    ],
     providers: [
         CommunityFeaturesService,
         ImageCropperService
-    ]
-})
+    ],selector: 'cass-community-settings-modal'})
 
 export class CommunitySettingsModal
 {

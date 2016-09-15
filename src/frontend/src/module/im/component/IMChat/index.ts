@@ -2,12 +2,10 @@ import {Component, Input} from "@angular/core";
 import {IMMessageExtendedEntity} from "../../definitions/entity/IMMessage";
 
 @Component({
-    selector: 'cass-im-chat',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
+    ],selector: 'cass-im-chat'})
 
 export class IMChat
 {

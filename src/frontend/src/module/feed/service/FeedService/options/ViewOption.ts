@@ -9,10 +9,6 @@ export class ViewOption
 {
     current: ViewOptionValue = ViewOptionValue.Feed;
 
-    current() {
-        return this.current;
-    }
-    
     setAsCurrent(value: ViewOptionValue) {
         this.current = value;
     }

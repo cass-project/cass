@@ -1,15 +1,12 @@
 import {Component, ElementRef, ViewChild, Input, EventEmitter, Output} from "@angular/core";
-
 import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 import {MessageBusService} from "../../../message/service/MessageBusService/index";
-import {IMMessageSourceEntityType} from "../../definitions/entity/IMMessageSource";
 
 @Component({
-    selector: 'cass-im-textarea',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]})
+    ],selector: 'cass-im-textarea'})
 
 export class IMTextarea
 {

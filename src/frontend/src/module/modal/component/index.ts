@@ -1,15 +1,10 @@
-import {Component, Injectable} from "@angular/core";
-
-import {ModalService} from "./service";
-import {AuthService} from "../../auth/service/AuthService";
+import {Component} from "@angular/core";
 
 @Component({
-    selector: 'cass-modal',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
+    ],selector: 'cass-modal'})
 export class ModalComponent
 {
     private id = Math.random().toString(36).substring(7);

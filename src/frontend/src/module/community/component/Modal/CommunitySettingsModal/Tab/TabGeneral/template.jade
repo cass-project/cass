@@ -6,7 +6,7 @@
       label.form-label
         span Название
         input.form-input(
-          [(ngModel)]="model.title",
+          [ngModelOptions]="{standalone: true}", [(ngModel)]="model.title",
           type="text",
           placeholder="Название, заголовок коммунити"
         )
@@ -14,7 +14,7 @@
       label.form-label
         span Описание
         input.form-input(
-          [(ngModel)]="model.description",
+          [ngModelOptions]="{standalone: true}", [(ngModel)]="model.description",
           type="text",
           placeholder="Подзаголовок коммунити"
         )
@@ -39,7 +39,7 @@
         .modal-list-controls
           div.form-switch-button
             input.form-switch-button-checkbox(
-              type="checkbox", id="communitySettingsModalThemeEnabled", checked="", [(ngModel)]="isCommunitySettingsModalThemeEnabled",
+              type="checkbox", id="communitySettingsModalThemeEnabled", checked="", [ngModelOptions]="{standalone: true}", [(ngModel)]="isCommunitySettingsModalThemeEnabled",
               (ngModelChange)="communitySettingsModalThemeEnabledChange($event)"
             )
             label.form-switch-button-label(for="communitySettingsModalThemeEnabled")
@@ -56,7 +56,7 @@
               input.form-switch-button-checkbox(
                 type="checkbox",
                 id="communitySettingsModalThemeEnablePublic",
-                [(ngModel)]="model.public_options.public_enabled",
+                [ngModelOptions]="{standalone: true}", [(ngModel)]="model.public_options.public_enabled",
                 (ngModelChange)="communitySettingsModalThemeEnablePublicChange($event)"
               )
               label.form-switch-button-label(for="communitySettingsModalThemeEnablePublic")
@@ -73,7 +73,7 @@
               input.form-switch-button-checkbox(
                 type="checkbox",
                 id="communitySettingsModalThemeWillModerate",
-                [(ngModel)]="model.public_options.moderation_contract"
+                [ngModelOptions]="{standalone: true}", [(ngModel)]="model.public_options.moderation_contract"
               )
               label.form-switch-button-label(for="communitySettingsModalThemeWillModerate")
   .form-section

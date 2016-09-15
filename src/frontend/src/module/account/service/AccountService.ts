@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Rx";
-
 import {AccountRESTService} from "./AccountRESTService";
 import {AppAccessResponse200} from "../definitions/paths/app-access";
 

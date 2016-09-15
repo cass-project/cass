@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Rx";
-
 import {FeedbackRESTService} from "./FeedbackRESTService";
 import {FeedbackCreateRequest, FeedbackCreateResponse200} from "../definitions/paths/create";
 import {ListFeedbackResponse200, ListFeedbackQueryParams} from "../definitions/paths/list";

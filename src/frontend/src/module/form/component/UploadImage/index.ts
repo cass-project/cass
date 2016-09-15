@@ -1,12 +1,8 @@
-import {Component} from "@angular/core";
-import {Output, Input} from "@angular/core";
-import {EventEmitter} from "@angular/core";
-import {ModalComponent} from "../../../modal/component/index";
+import {Component, Output, EventEmitter} from "@angular/core";
 import {ScreenControls} from "../../../common/classes/ScreenControls";
 import {UploadImageService} from "./service";
 import {UploadImageCropModel} from "./strategy";
-import {ModalBoxComponent} from "../../../modal/component/box/index";
-import {ImageCropperService, ImageCropper} from "../../../form/component/ImageCropper/index";
+import {ImageCropperService} from "../../../form/component/ImageCropper/index";
 
 enum UploadImageScreen {
     File = <any>"File",
@@ -15,20 +11,14 @@ enum UploadImageScreen {
 }
 
 @Component({
-    selector: 'cass-upload-image-modal',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
     ],
     providers: [
         ImageCropperService,
-    ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ImageCropper,
-    ]
-})
+    ],selector: 'cass-upload-image-modal'})
+
 export class UploadImageModal
 {
     public progress = new UploadProgress();

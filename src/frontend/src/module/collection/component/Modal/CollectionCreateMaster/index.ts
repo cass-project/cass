@@ -1,15 +1,10 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
-
-import {ModalComponent} from "../../../../modal/component/index";
-import {ThemeSelect} from "../../../../theme/component/ThemeSelect/index";
 import {CollectionRESTService} from "../../../service/CollectionRESTService";
 import {CollectionEntity, Collection} from "../../../definitions/entity/collection";
-import {ModalBoxComponent} from "../../../../modal/component/box/index";
 import {ScreenControls} from "../../../../common/classes/ScreenControls";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
-import {ProgressLock} from "../../../../form/component/ProgressLock/index";
-import {Router} from '@angular/router-deprecated';
+import {Router} from "@angular/router";
 import {Session} from "../../../../session/Session";
 
 enum CreateCollectionMasterStage
@@ -22,15 +17,7 @@ enum CreateCollectionMasterStage
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    selector: "cass-collection-create-master",
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ThemeSelect,
-        ProgressLock
-    ]
-})
+    ],selector: 'cass-collection-create-master'})
 export class CollectionCreateMaster
 {
     constructor(

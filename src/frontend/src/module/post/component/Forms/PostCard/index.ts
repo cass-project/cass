@@ -1,8 +1,6 @@
 import {Component, Input, EventEmitter, Output} from "@angular/core";
-
 import {PostEntity} from "../../../definitions/entity/Post";
 import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
-import {ProfileCardHeader} from "../../../../profile/component/Elements/ProfileCardHeader/index";
 import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
 import {PostRESTService} from "../../../service/PostRESTService";
 import {LoadingManager} from "../../../../common/classes/LoadingStatus";
@@ -10,16 +8,11 @@ import {Session} from "../../../../session/Session";
 import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
 
 @Component({
-    selector: 'cass-post-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        PostAttachment,
-        ProfileCardHeader,
-    ]
-})
+    ],selector: 'cass-post-card'})
+
 export class PostCard
 {
     @Input('post') post: PostEntity;

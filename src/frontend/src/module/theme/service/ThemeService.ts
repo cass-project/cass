@@ -1,8 +1,6 @@
-import {Injectable} from '@angular/core';
-
+import {Injectable} from "@angular/core";
 import {FrontlineService} from "../../frontline/service";
 import {Theme} from "../definitions/entity/Theme";
-import {ThemeSelect} from "../component/ThemeSelect/index";
 
 @Injectable()
 export class ThemeService

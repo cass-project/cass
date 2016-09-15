@@ -1,12 +1,12 @@
 import {Component, Input} from "@angular/core";
 
 @Component({
-    selector: 'cass-tab-modal-header',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
+    ] 
+,selector: 'cass-tab-modal-header'})
+
 export class TabModalHeader
 {
     @Input("level") level: string = "1";

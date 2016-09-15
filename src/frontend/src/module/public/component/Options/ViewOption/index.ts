@@ -1,18 +1,19 @@
 import {Component} from "@angular/core";
-
 import {ViewOption, ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
 import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
 import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
 import {Criteria} from "../../../../feed/definitions/request/Criteria";
-import {ContentTypeCriteriaParams, ContentType} from "../../../../feed/definitions/request/criteria/ContentTypeCriteriaParams";
+import {
+    ContentTypeCriteriaParams,
+    ContentType
+} from "../../../../feed/definitions/request/criteria/ContentTypeCriteriaParams";
 
 @Component({
-    selector: 'cass-public-option-view',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ]
-})
+    ],selector: 'cass-public-option-view'})
+
 export class OptionView
 {
     private option: ViewOption;

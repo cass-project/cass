@@ -1,5 +1,4 @@
 import {ModalComponent} from "./index";
-
 import {Injectable} from "@angular/core";
 
 @Injectable()

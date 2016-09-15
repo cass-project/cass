@@ -1,22 +1,16 @@
-import {Component, EventEmitter, Output, Input, ViewChild, ElementRef} from "@angular/core";
+import {Component, Input, ViewChild, ElementRef, Injectable} from "@angular/core";
 import {ThemeService} from "../../service/ThemeService";
-import {Injectable} from '@angular/core';
-import {ControlValueAccessor} from "@angular/common";
 import {Theme} from "../../definitions/entity/Theme";
 
 
 @Component({
-    selector: 'cass-theme-select',
     template: require('./template.html'),
     providers: [
         ThemeService
     ],
-    directives: [
-    ],
     styles: [
         require('./style.shadow.scss')
-    ]
-})
+    ],selector: 'cass-theme-select'})
 
 @Injectable()
 export class ThemeSelect

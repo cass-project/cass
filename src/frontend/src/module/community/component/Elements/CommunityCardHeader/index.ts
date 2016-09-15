@@ -1,22 +1,15 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
-
-import {CommunityImage} from "../CommunityImage/index";
+import {Component, Input} from "@angular/core";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
-import {Router} from '@angular/router-deprecated';
+import {Router} from "@angular/router";
 import {CommunityEntity} from "../../../definitions/entity/Community";
 
 var moment = require('moment');
 
 @Component({
-    selector: 'cass-community-card-header',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        CommunityImage,
-    ]
-})
+    ],selector: 'cass-community-card'})
 export class CommunityCardHeader
 {
     @Input('community') entity: CommunityEntity;
@@ -39,10 +32,7 @@ export class CommunityCardHeader
     getImageURL(): string {
         return queryImage(QueryTarget.Avatar, this.entity.image).public_path;
     }
-
-    getCommunityLink(): string {
-        return this.router.generate(['/Community', 'Community', { 'id': this.entity.id }]).toLinkUrl();
-    }
+    
 
     goCommunity() {
         this.router.navigate(['/Community', 'Community', { 'id': this.entity.id }]);

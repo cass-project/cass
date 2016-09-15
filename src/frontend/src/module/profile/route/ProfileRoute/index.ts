@@ -1,13 +1,7 @@
-import {Component} from "@angular/core";
-
-import {Router, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
-import {RouteConfig, RouteParams} from "@angular/router-deprecated";
-
-import {ProgressLock} from "../../../form/component/ProgressLock/index";
-import {ProfileCollectionsRoute} from "../ProfileCollectionsRoute/index";
+import {Component, OnInit, OnDestroy} from "@angular/core";
+import {Router, ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs/Subscription";
 import {ProfileRouteService} from "./service";
-import {ProfileDashboardRoute} from "../ProfileDashboardRoute/index";
-import {ProfileHeader} from "../../component/Elements/ProfileHeader/index";
 import {AuthService} from "../../../auth/service/AuthService";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
@@ -18,40 +12,58 @@ import {Session} from "../../../session/Session";
     styles: [
         require('./style.shadow.scss')
     ],
-    directives: [
-        ROUTER_DIRECTIVES,
-        ProgressLock,
-        ProfileHeader,
-    ],
     providers: [
         ProfileRouteService,
         FeedCriteriaService,
         FeedOptionsService,
     ]
 })
-@RouteConfig([
-    {
-        path: '/',
-        name: 'Dashboard',
-        component: ProfileDashboardRoute,
-        useAsDefault: true
-    },
-    {
-        path: '/collections/...',
-        name: 'Collections',
-        component: ProfileCollectionsRoute
-    },
-])
-export class ProfileRoute
+
+export class ProfileRoute implements OnInit, OnDestroy
 {
+    private sub: Subscription;
+    
     constructor(
-        private params: RouteParams,
+        private route: ActivatedRoute,
         private router: Router,
         private service: ProfileRouteService,
         private session: Session,
         private authService: AuthService
-    ) {
-        let id = params.get('id');
+    ) {}
+    
+    ngOnInit(){
+        this.sub = this.route.params.subscribe(params => {
+            let id = params['id'];
+            if (this.authService.isSignedIn() && (id === 'current' || id === this.session.getCurrentProfile().getId().toString())) {
+                this.service.loadCurrentProfile();
+            } else if (Number(id)) {
+                this.service.loadProfileById(Number(id));
+            } else {
+                this.router.navigate(['/profile/not-found']);
+                return;
+            }
+
+            if (this.service.getObservable() !== undefined) {
+                this.service.getObservable().subscribe(
+                    (response) => {
+                    },
+                    (error) => {
+                        this.router.navigate(['/profile/not-found']);
+                    }
+                )
+            } else {
+                this.router.navigate(['/public']);
+            }
+        })
+    }
+
+    ngOnDestroy(){
+        this.sub.unsubscribe();
+    }
+        
+    
+    
+    /*let id = params.get('id');
 
         if (authService.isSignedIn() && (id === 'current' || id === this.session.getCurrentProfile().getId().toString())) {
                 service.loadCurrentProfile();
@@ -73,5 +85,5 @@ export class ProfileRoute
         } else {
             router.navigate(['/Public']);
         }
-    }
+    }*/
 }

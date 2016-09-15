@@ -1,25 +1,15 @@
 import {Component} from "@angular/core";
-
-import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
 import {FeedService} from "../../../service/FeedService/index";
-import {ProfileCard} from "../../../../profile/component/Elements/ProfileCard/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
-import {FeedScrollDetector} from "../../FeedScrollDetector/index";
 import {ProfileIndexedEntity} from "../../../../profile/definitions/entity/Profile";
 import {AppService} from "../../../../../app/frontend-app/service";
 
 @Component({
-    selector: 'cass-feed-profile-stream',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ProfileCard,
-        LoadingIndicator,
-        FeedScrollDetector
-    ]
-})
+    ],selector: 'cass-feed-profile-stream'})
+
 export class FeedProfileStream
 {
     constructor(

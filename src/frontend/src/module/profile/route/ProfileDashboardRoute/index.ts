@@ -1,13 +1,9 @@
 import {Component} from "@angular/core";
-
-import {ProfileCardsList} from "../../component/Elements/ProfileCardsList/index";
 import {ProfileRouteService} from "../ProfileRoute/service";
-import {FeedPostStream} from "../../../feed/component/stream/FeedPostStream/index";
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 import {Stream} from "../../../feed/service/FeedService/stream";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
-import {PostForm} from "../../../post/component/Forms/PostForm/index";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
 import {PostTypeService} from "../../../post/service/PostTypeService";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
@@ -22,11 +18,6 @@ import {Session} from "../../../session/Session";
     providers: [
         FeedService,
         CollectionSource
-    ],
-    directives: [
-        ProfileCardsList,
-        FeedPostStream,
-        PostForm
     ]
 })
 export class ProfileDashboardRoute

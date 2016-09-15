@@ -1,5 +1,4 @@
 import {Injectable} from "@angular/core";
-
 import {PostEntity} from "../../../post/definitions/entity/Post";
 
 @Injectable()

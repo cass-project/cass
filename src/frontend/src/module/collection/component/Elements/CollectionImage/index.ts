@@ -7,6 +7,7 @@ import {Component, Input} from "@angular/core";
         require('./style.shadow.scss')
     ]
 })
+
 export class CollectionImage
 {
     @Input('url') url: string;

@@ -1,21 +1,15 @@
 import {Component, EventEmitter, Output, ViewChild, ElementRef} from "@angular/core";
-
-import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
 import {PostAttachmentEntity} from "../../../../post-attachment/definitions/entity/PostAttachment";
 
 var validUrl = require('valid-url');
 
 @Component({
-    selector: 'cass-post-form-link-input',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        ProgressLock,
-    ]
-})
+    ],selector: 'cass-post-form-link-input'})
+
 export class PostFormLinkInput
 {
     static FADEOUT_TIME_SEC = 5;

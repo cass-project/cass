@@ -1,5 +1,4 @@
 import {Observable} from "rxjs/Observable";
-
 import {FeedEntity} from "./entity";
 import {FeedRequest} from "../../definitions/request/FeedRequest";
 import {Success200} from "../../../common/definitions/common";

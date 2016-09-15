@@ -4,9 +4,8 @@ import {FeedService} from "../../service/FeedService/index";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 
 @Component({
-    selector: 'cass-feed-scroll-detector',
     template: require('./template.jade')
-})
+,selector: 'cass-feed-scroll-detector'})
 
 export class FeedScrollDetector
 {

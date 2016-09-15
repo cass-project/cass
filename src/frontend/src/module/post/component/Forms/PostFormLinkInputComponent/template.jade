@@ -7,7 +7,7 @@ article.component.component-post-form-link-input
           #urlInput,
           type="text",
           placeholder="Вставьте сюда ссылку",
-          [(ngModel)]="url",
+          [ngModelOptions]="{standalone: true}", [(ngModel)]="url",
           (change)="fetch()",
           (paste)="fetch()",
           [disabled]="loading"

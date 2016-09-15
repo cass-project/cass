@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-
 import {CommunityExtendedEntity} from "../../definitions/entity/Community";
 import {GetCommunityBySIDResponse200} from "../../definitions/paths/get-by-sid";
 import {CommunityRESTService} from "../../service/CommunityRESTService";

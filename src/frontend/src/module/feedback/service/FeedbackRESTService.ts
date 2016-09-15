@@ -1,7 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http, Response, Headers, URLSearchParams} from "@angular/http";
-import {Observable} from "rxjs/Rx";
-
+import {Http, Headers, URLSearchParams} from "@angular/http";
 import {FeedbackCreateRequest} from "../definitions/paths/create";
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {AuthToken} from "../../auth/service/AuthToken";
@@ -17,7 +15,7 @@ export class FeedbackRESTService extends AbstractRESTService {
         super(http, token, messages)
     }
 
-    public create(request: FeedbackCreateRequest): Observable<Response> {
+    public create(request: FeedbackCreateRequest) {
         let authHeader = new Headers();
 
         if (this.token.hasToken()) {

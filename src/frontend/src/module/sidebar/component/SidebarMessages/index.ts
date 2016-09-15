@@ -1,8 +1,6 @@
 import {Component} from "@angular/core";
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {Session} from "../../../session/Session";
 import {IMRESTService} from "../../../im/service/IMRESTService";
-import {ProfileImage} from "../../../profile/component/Elements/ProfileImage/index";
 import {IMUnreadResponseEntity} from "../../../im/definitions/paths/im-unread";
 
 @Component({
@@ -10,10 +8,6 @@ import {IMUnreadResponseEntity} from "../../../im/definitions/paths/im-unread";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives:[
-        ROUTER_DIRECTIVES,
-        ProfileImage
     ]
 })
 

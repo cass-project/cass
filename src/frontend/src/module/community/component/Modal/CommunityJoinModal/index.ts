@@ -1,12 +1,7 @@
 import {Component, EventEmitter, Output} from "@angular/core";
-
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
-import {ModalComponent} from "../../../../modal/component/index";
 import {CommunityJoinModalModel} from "./model";
-import {ScreenProcessing} from "./Screen/ScreenProcessing/index";
-import {ScreenSID} from "./Screen/ScreenSID/index";
 import {ScreenControls} from "../../../../common/classes/ScreenControls";
-import {ModalBoxComponent} from "../../../../modal/component/box/index";
 
 enum CommunityJoinScreen
 {
@@ -16,21 +11,13 @@ enum CommunityJoinScreen
 }
 
 @Component({
-    selector: 'cass-community-join-modal',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
     ],
-    directives: [
-        ModalComponent,
-        ModalBoxComponent,
-        ScreenProcessing,
-        ScreenSID,
-    ],
     providers: [
         CommunityJoinModalModel
-    ]
-})
+    ],selector: 'cass-community-join-modal'})
 export class CommunityJoinModal
 {
     @Output("close") closeEvent = new EventEmitter<CommunityJoinModal>();

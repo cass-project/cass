@@ -1,7 +1,5 @@
 import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
-
-import {ProfileExtendedEntity} from "../definitions/entity/Profile";
 import {ProfileRESTService} from "./ProfileRESTService";
 import {GetProfileByIdResponse200} from "../definitions/paths/get-by-id";
 
