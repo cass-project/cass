@@ -1,7 +1,6 @@
 <?php
 namespace CASS\Application;
 
-use CASS\Domain\Bundles\Account\AccountBundle;
 use CASS\Domain\Bundles\Attachment\AttachmentBundle;
 use CASS\Domain\Bundles\Auth\AuthBundle;
 use CASS\Domain\Bundles\Avatar\AvatarBundle;
@@ -22,7 +21,6 @@ use CASS\Domain\Bundles\Theme\ThemeBundle;
 return [
     'php-di' => [
         'config.api-docs.excluded-bundles' => [
-            AccountBundle::class,
             AttachmentBundle::class,
             AuthBundle::class,
             AvatarBundle::class,

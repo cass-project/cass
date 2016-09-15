@@ -22,5 +22,4 @@ Account_Entity_AppAccess:
           description: Доступ к CASS.Reports
     account:
       type: object
-      schema:
-        $ref: '#/definitions/Account_Entity_Account'
+      $ref: '#/definitions/Account_Entity_Account'
