@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import {Subscription} from "rxjs/Subscription";
-
 import {Source} from "./source";
 import {Stream} from "./stream";
 import {LoadingManager} from "../../../common/classes/LoadingStatus";

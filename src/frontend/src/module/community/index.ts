@@ -1,6 +1,5 @@
-import {Component, Directive} from "@angular/core";
-import {Router} from '@angular/router';
-
+import {Component} from "@angular/core";
+import {Router} from "@angular/router";
 import {CommunityModalService} from "./service/CommunityModalService";
 import {CommunityExtendedEntity} from "./definitions/entity/CommunityExtended";
 

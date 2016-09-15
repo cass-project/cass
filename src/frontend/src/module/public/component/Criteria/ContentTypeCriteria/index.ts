@@ -1,8 +1,10 @@
-import {Component, Directive} from "@angular/core";
-
+import {Component} from "@angular/core";
 import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
 import {Criteria} from "../../../../feed/definitions/request/Criteria";
-import {ContentTypeCriteriaParams, ContentType} from "../../../../feed/definitions/request/criteria/ContentTypeCriteriaParams";
+import {
+    ContentTypeCriteriaParams,
+    ContentType
+} from "../../../../feed/definitions/request/criteria/ContentTypeCriteriaParams";
 import {PublicService} from "../../../service";
 
 @Component({

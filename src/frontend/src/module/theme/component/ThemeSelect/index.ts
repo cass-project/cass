@@ -1,7 +1,5 @@
-import {Component, Input, ViewChild, ElementRef, Directive} from "@angular/core";
+import {Component, Input, ViewChild, ElementRef, Injectable} from "@angular/core";
 import {ThemeService} from "../../service/ThemeService";
-import {Injectable} from '@angular/core';
-import {ControlValueAccessor} from "@angular/forms";
 import {Theme} from "../../definitions/entity/Theme";
 
 

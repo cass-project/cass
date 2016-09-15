@@ -1,11 +1,7 @@
-import {Component, ModuleWithProviders, OnInit, OnDestroy} from "@angular/core";
-import {Router, Routes, RouterModule, ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
-import {ProgressLock} from "../../../form/component/ProgressLock/index";
-import {ProfileCollectionsRoute} from "../ProfileCollectionsRoute/index";
+import {Component, OnInit, OnDestroy} from "@angular/core";
+import {Router, ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs/Subscription";
 import {ProfileRouteService} from "./service";
-import {ProfileDashboardRoute} from "../ProfileDashboardRoute/index";
-import {ProfileHeader} from "../../component/Elements/ProfileHeader/index";
 import {AuthService} from "../../../auth/service/AuthService";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";

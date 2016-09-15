@@ -1,7 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-
 import {CommunityRESTService} from "./CommunityRESTService";
 import {CommunityCreateResponseModel} from "../model/CommunityCreateResponseModel";
 import {CommunityEntity} from "../definitions/entity/Community";

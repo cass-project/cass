@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http"
-
+import {Http} from "@angular/http";
 import {SignInRequest} from "../definitions/paths/sign-in";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {SignUpRequest} from "../definitions/paths/sign-up";

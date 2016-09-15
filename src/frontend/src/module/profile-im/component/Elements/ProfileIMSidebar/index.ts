@@ -1,5 +1,4 @@
-import {Component, Directive} from "@angular/core";
-import {ProfileImage} from "../../../../profile/component/Elements/ProfileImage/index";
+import {Component} from "@angular/core";
 import {ContactEntity} from "../../../../contact/definitions/entity/Contact";
 import {ContactService} from "../../../../contact/service/ContactService";
 

@@ -1,7 +1,4 @@
 import {Component, Directive} from "@angular/core";
-
-import {FeedbackCreateModal} from "./component/Modal/FeedbackCreateModal/index";
-import {FeedbackCreateButton} from "./component/Elements/FeedbackCreateButton/index";
 import {FeedbackTypeEntity} from "./definitions/entity/FeedbackType";
 import {FeedbackTypesService} from "./service/FeedbackTypesService";
 import {FeedbackCreateModalModel} from "./component/Modal/FeedbackCreateModal/model";

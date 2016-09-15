@@ -1,11 +1,8 @@
 import {Component} from "@angular/core";
-
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {Stream} from "../../../feed/service/FeedService/stream";
 import {PublicService} from "../../service";
-import {NothingFound} from "../../component/Elements/NothingFound/index";
 import {PublicCollectionsSource} from "../../../feed/service/FeedService/source/public/PublicCollectionsSource";
-import {FeedCollectionStream} from "../../../feed/component/stream/FeedCollectionStream/index";
 import {CollectionIndexEntity} from "../../../collection/definitions/entity/collection";
 
 

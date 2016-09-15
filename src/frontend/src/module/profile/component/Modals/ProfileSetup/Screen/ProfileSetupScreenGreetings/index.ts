@@ -1,7 +1,5 @@
-import {Component, Output, EventEmitter, Directive} from "@angular/core";
-
+import {Component, Output, EventEmitter} from "@angular/core";
 import {ProfileSetupModel} from "../../model";
-import {ProgressLock} from "../../../../../../form/component/ProgressLock/index";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {EditPersonalResponse200} from "../../../../../definitions/paths/edit-personal";
 import {Session} from "../../../../../../session/Session";

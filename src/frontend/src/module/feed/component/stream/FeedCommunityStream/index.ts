@@ -1,10 +1,6 @@
-import {Component, ViewChild, ElementRef, Directive} from "@angular/core";
-
-import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
+import {Component} from "@angular/core";
 import {FeedService} from "../../../service/FeedService/index";
-import {CommunityCard} from "../../../../community/component/Elements/CommunityCard/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
-import {FeedScrollDetector} from "../../FeedScrollDetector/index";
 import {CommunityIndexedEntity} from "../../../../community/definitions/entity/Community";
 import {AppService} from "../../../../../app/frontend-app/service";
 

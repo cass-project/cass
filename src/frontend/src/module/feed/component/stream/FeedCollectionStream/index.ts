@@ -1,11 +1,7 @@
-import {Component, Directive} from "@angular/core";
-
-import {CollectionCard} from "../../../../collection/component/Elements/CollectionCard/index";
-import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
+import {Component} from "@angular/core";
 import {CollectionIndexEntity} from "../../../../collection/definitions/entity/collection";
 import {FeedService} from "../../../service/FeedService/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
-import {FeedScrollDetector} from "../../FeedScrollDetector/index";
 import {AppService} from "../../../../../app/frontend-app/service";
 
 @Component({

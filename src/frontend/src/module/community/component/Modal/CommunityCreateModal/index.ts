@@ -1,17 +1,9 @@
-import {Component, EventEmitter, Output, Directive} from "@angular/core";
-
+import {Component, EventEmitter, Output} from "@angular/core";
 import {CommunityCreateModalModel} from "./model";
-
-import {ScreenGeneral} from "./Screen/ScreenGeneral";
-import {ScreenFeatures} from "./Screen/ScreenFeatures";
-
-import {ModalComponent} from "../../../../modal/component";
-import {ModalBoxComponent} from "../../../../modal/component/box";
 import {ScreenControls} from "../../../../common/classes/ScreenControls";
 import {AuthService} from "../../../../auth/service/AuthService";
 import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
-import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {LoadingManager} from "../../../../common/classes/LoadingStatus";
 import {Observable} from "rxjs/Observable";
 import {CommunityCreateModalNotifier} from "./notify";

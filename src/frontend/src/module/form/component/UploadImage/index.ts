@@ -1,12 +1,8 @@
-import {Component, Directive} from "@angular/core";
-import {Output, Input} from "@angular/core";
-import {EventEmitter} from "@angular/core";
-import {ModalComponent} from "../../../modal/component/index";
+import {Component, Output, EventEmitter} from "@angular/core";
 import {ScreenControls} from "../../../common/classes/ScreenControls";
 import {UploadImageService} from "./service";
 import {UploadImageCropModel} from "./strategy";
-import {ModalBoxComponent} from "../../../modal/component/box/index";
-import {ImageCropperService, ImageCropper} from "../../../form/component/ImageCropper/index";
+import {ImageCropperService} from "../../../form/component/ImageCropper/index";
 
 enum UploadImageScreen {
     File = <any>"File",

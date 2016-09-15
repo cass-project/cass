@@ -1,7 +1,4 @@
-import {Component, Output, EventEmitter, Directive} from "@angular/core";
-import {ModalComponent} from "../../modal/component/index";
-import {ModalBoxComponent} from "../../modal/component/box/index";
-import {ProgressLock} from "../../form/component/ProgressLock/index";
+import {Component, Output, EventEmitter} from "@angular/core";
 import {AuthService} from "../../auth/service/AuthService";
 
 @Component({

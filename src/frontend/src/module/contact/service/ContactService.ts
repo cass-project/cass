@@ -1,5 +1,4 @@
 import {Injectable} from "@angular/core";
-
 import {ContactRESTService} from "./ContactRESTService";
 import {Observable, Observer} from "rxjs/Rx";
 import {ContactListResponse200} from "../definitions/path/contact-list";

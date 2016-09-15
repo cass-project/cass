@@ -1,7 +1,4 @@
-import {Component, Directive} from "@angular/core";
-import {ModalComponent} from "../../../../modal/component/index";
-import {ModalBoxComponent} from "../../../../modal/component/box/index";
-import {CollectionSelect} from "../../Elements/CollectionSelect/index";
+import {Component} from "@angular/core";
 
 @Component({
     template: require('./template.jade'),

@@ -1,4 +1,4 @@
-import {Component, Input, Directive} from "@angular/core";
+import {Component, Input} from "@angular/core";
 
 @Component({
     template: require('./template.jade'),

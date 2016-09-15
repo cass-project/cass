@@ -1,5 +1,4 @@
-import {Component, Directive} from "@angular/core";
-
+import {Component} from "@angular/core";
 import {MessageBusService} from "../../service/MessageBusService/index";
 
 @Component({

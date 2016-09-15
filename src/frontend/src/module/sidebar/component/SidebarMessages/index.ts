@@ -1,7 +1,6 @@
-import {Component, Directive} from "@angular/core";
+import {Component} from "@angular/core";
 import {Session} from "../../../session/Session";
 import {IMRESTService} from "../../../im/service/IMRESTService";
-import {ProfileImage} from "../../../profile/component/Elements/ProfileImage/index";
 import {IMUnreadResponseEntity} from "../../../im/definitions/paths/im-unread";
 
 @Component({

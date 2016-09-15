@@ -1,5 +1,4 @@
-import {Component, Directive} from "@angular/core";
-
+import {Component} from "@angular/core";
 import {CommunityFeaturesService} from "../../../../../service/CommunityFeaturesService";
 import {CommunitySettingsModalModel} from "../../model";
 

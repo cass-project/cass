@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Response, ResponseType, ResponseOptions, Headers} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-
 import {CommunityCreateRequestModel} from "../model/CommunityCreateRequestModel";
 import {CommunityImageUploadRequestModel} from "../model/CommunityImageUploadRequestModel";
 import {CommunityControlFeatureRequestModel} from "../model/CommunityActivateFeatureModel";

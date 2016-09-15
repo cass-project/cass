@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http"
+import {Http} from "@angular/http";
 import {Observable} from "rxjs/Rx";
-
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {AuthToken} from "../../auth/service/AuthToken";
 import {MessageBusService} from "../../message/service/MessageBusService/index";

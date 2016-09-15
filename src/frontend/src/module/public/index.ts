@@ -1,11 +1,5 @@
-import {Component, ModuleWithProviders, Directive} from "@angular/core";
-import {Routes, RouterModule} from "@angular/router";
-import {ContentRoute} from "./route/ContentRoute/index";
+import {Component, Directive} from "@angular/core";
 import {PublicService} from "./service";
-import {CollectionsRoute} from "./route/CollectionsRoute/index";
-import {CommunitiesRoute} from "./route/CommunitiesRoute/index";
-import {ExpertsRoute} from "./route/ExpertsRoute/index";
-import {ProfilesRoute} from "./route/ProfilesRoute/index";
 import {FeedCriteriaService} from "../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../feed/service/FeedOptionsService";
 import {AppService} from "../../app/frontend-app/service";

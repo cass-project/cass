@@ -1,8 +1,6 @@
-import {Component, ElementRef, ViewChild, Input, EventEmitter, Output, Directive} from "@angular/core";
-
+import {Component, ElementRef, ViewChild, Input, EventEmitter, Output} from "@angular/core";
 import {MessageBusNotificationsLevel} from "../../../message/component/MessageBusNotifications/model";
 import {MessageBusService} from "../../../message/service/MessageBusService/index";
-import {IMMessageSourceEntityType} from "../../definitions/entity/IMMessageSource";
 
 @Component({
     template: require('./template.jade'),

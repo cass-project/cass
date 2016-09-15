@@ -1,10 +1,6 @@
 import {Component, Output, EventEmitter, ElementRef, ViewChild} from "@angular/core";
-
-import {OAuth2Component} from "../OAuth2/index";
-import {LoadingIndicator} from "../../../form/component/LoadingIndicator/index";
 import {SignInRequest} from "../../definitions/paths/sign-in";
 import {SignUpRequest} from "../../definitions/paths/sign-up";
-import {ProgressLock} from "../../../form/component/ProgressLock/index";
 import {NgForm} from "@angular/forms";
 import {AuthService} from "../../service/AuthService";
 

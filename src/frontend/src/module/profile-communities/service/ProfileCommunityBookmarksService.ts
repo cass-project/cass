@@ -1,5 +1,4 @@
 import {Injectable} from "@angular/core";
-
 import {ProfileCommunityBookmarkEntity} from "../definitions/ProfileCommunityBookmark";
 import {CommunityEntity} from "../../community/definitions/entity/Community";
 import {Session} from "../../session/Session";

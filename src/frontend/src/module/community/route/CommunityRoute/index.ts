@@ -1,11 +1,9 @@
 import {Component, ModuleWithProviders, OnInit, OnDestroy} from "@angular/core";
-import {Subscription} from 'rxjs/Subscription';
-import {Router, Routes, RouterModule, ActivatedRoute} from '@angular/router';
-import {ProgressLock} from "../../../form/component/ProgressLock/index";
+import {Subscription} from "rxjs/Subscription";
+import {Router, Routes, RouterModule, ActivatedRoute} from "@angular/router";
 import {CommunityCollectionsRoute} from "../CommunityCollectionsRoute/index";
 import {CommunityRouteService} from "./service";
 import {CommunityDashboardRoute} from "../CommunityDashboardRoute/index";
-import {CommunityHeader} from "../../component/Elements/CommunityHeader/index";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 

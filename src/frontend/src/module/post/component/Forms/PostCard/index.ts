@@ -1,5 +1,4 @@
-import {Component, Input, EventEmitter, Output, Directive} from "@angular/core";
-
+import {Component, Input, EventEmitter, Output} from "@angular/core";
 import {PostEntity} from "../../../definitions/entity/Post";
 import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
 import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";

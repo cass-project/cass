@@ -1,9 +1,7 @@
-import {Component, ModuleWithProviders, Directive} from "@angular/core";
-import {Routes, RouterModule, RouterOutlet} from '@angular/router';
-
+import {Component, ModuleWithProviders} from "@angular/core";
+import {Routes, RouterModule} from "@angular/router";
 import {ProfileIMChat} from "../../component/Elements/ProfileIMChat";
 import {ProfileIMContacts} from "../../component/Elements/ProfileIMContacts";
-import {ProfileIMSidebar} from "../../component/Elements/ProfileIMSidebar";
 
 const profileIMRoutes: Routes = [
     {

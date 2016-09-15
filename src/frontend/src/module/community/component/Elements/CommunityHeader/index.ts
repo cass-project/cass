@@ -1,5 +1,4 @@
-import {Component, Input, EventEmitter, Output, Directive} from "@angular/core";
-
+import {Component, Input, EventEmitter, Output} from "@angular/core";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {CommunityRouteService} from "../../../route/CommunityRoute/service";
 import {CommunityModals} from "../../../modals";

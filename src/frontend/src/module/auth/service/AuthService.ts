@@ -1,8 +1,7 @@
-import {Injectable} from '@angular/core';
-
+import {Injectable} from "@angular/core";
 import {AuthRESTService} from "./AuthRESTService";
 import {FrontlineService} from "../../frontline/service";
-import {Account} from './../../account/definitions/entity/Account';
+import {Account} from "./../../account/definitions/entity/Account";
 import {SignInRequest, SignInResponse200} from "../definitions/paths/sign-in";
 import {SignUpRequest, SignUpResponse200} from "../definitions/paths/sign-up";
 import {AuthToken} from "./AuthToken";

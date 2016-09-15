@@ -1,10 +1,5 @@
 import {Component} from "@angular/core";
-
-import {SidebarSignInButton} from "./component/SidebarSignInButton/index";
-import {SidebarProfileIcon} from "./component/SidebarProfileIcon/index";
-import {SidebarCommunities} from "./component/SidebarCommunities/index";
 import {AuthService} from "../auth/service/AuthService";
-import {SidebarMessages} from "./component/SidebarMessages/index";
 
 require('./style.head.scss');
 

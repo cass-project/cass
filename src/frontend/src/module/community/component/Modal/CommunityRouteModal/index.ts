@@ -1,8 +1,5 @@
-import {Component, EventEmitter, Output, Directive} from "@angular/core";
-
+import {Component, EventEmitter, Output} from "@angular/core";
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
-import {ModalComponent} from "../../../../modal/component/index";
-import {ModalBoxComponent} from "../../../../modal/component/box/index";
 
 @Component({
     template: require('./template.html'),

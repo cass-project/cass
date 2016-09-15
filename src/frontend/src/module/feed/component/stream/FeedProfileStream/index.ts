@@ -1,10 +1,6 @@
-import {Component, Directive} from "@angular/core";
-
-import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
+import {Component} from "@angular/core";
 import {FeedService} from "../../../service/FeedService/index";
-import {ProfileCard} from "../../../../profile/component/Elements/ProfileCard/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
-import {FeedScrollDetector} from "../../FeedScrollDetector/index";
 import {ProfileIndexedEntity} from "../../../../profile/definitions/entity/Profile";
 import {AppService} from "../../../../../app/frontend-app/service";
 

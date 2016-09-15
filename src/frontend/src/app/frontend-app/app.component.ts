@@ -1,6 +1,4 @@
-import {Component, ViewChild, ElementRef, Renderer} from "@angular/core";
-import {RouterOutlet} from '@angular/router';
-import {Module} from "../../module/common/classes/Module";
+import {Component, ViewChild, ElementRef} from "@angular/core";
 import {AppService} from "./service";
 
 

@@ -1,5 +1,4 @@
-import {Component, Input, Directive} from "@angular/core";
-
+import {Component, Input} from "@angular/core";
 import {PostAttachmentEntity, AttachmentMetadata} from "../../../definitions/entity/PostAttachment";
 
 @Component({

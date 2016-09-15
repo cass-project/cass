@@ -1,8 +1,4 @@
-import {Component, Input, EventEmitter, Output, Directive} from "@angular/core";
-
-import {ProfileEntity} from "../../../definitions/entity/Profile";
-import {ThemeSelect} from "../../../../theme/component/ThemeSelect/index";
-import {ProgressLock} from "../../../../form/component/ProgressLock/index";
+import {Component, EventEmitter, Output} from "@angular/core";
 import {ProfileRESTService} from "../../../service/ProfileRESTService";
 import {ProfileModalModel} from "../ProfileModal/model";
 

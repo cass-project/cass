@@ -1,5 +1,4 @@
-import {Component, Output, EventEmitter, Directive} from "@angular/core";
-
+import {Component, Output, EventEmitter} from "@angular/core";
 import {PublicService} from "../../../service";
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";

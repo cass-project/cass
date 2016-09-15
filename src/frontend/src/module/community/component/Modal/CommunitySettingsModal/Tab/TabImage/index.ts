@@ -1,8 +1,6 @@
-import {Component, ViewChild, Directive} from "@angular/core";
-
+import {Component, ViewChild} from "@angular/core";
 import {CommunitySettingsModalModel} from "../../model";
-import {CommunityImage} from "../../../../Elements/CommunityImage/index";
-import {ImageCropperService, ImageCropper} from "../../../../../../form/component/ImageCropper/index";
+import {ImageCropperService} from "../../../../../../form/component/ImageCropper/index";
 import {UploadImageCropModel} from "../../../../../../form/component/UploadImage/strategy";
 import {CommunityRESTService} from "../../../../../service/CommunityRESTService";
 import {CommunityImageDeleteRequest} from "../../../../../definitions/paths/image-delete";

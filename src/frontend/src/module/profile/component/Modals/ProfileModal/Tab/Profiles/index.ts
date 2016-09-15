@@ -1,9 +1,6 @@
-import {Component, Directive} from "@angular/core";
-import {ProfileImage} from "../../../../Elements/ProfileImage/index";
-import {ModalComponent} from "../../../../../../modal/component/index";
+import {Component} from "@angular/core";
 import {ProfilesTabService} from "./service";
 import {ThemeService} from "../../../../../../theme/service/ThemeService";
-import {ModalBoxComponent} from "../../../../../../modal/component/box/index";
 import {ProfileModalModel} from "../../model";
 
 @Component({

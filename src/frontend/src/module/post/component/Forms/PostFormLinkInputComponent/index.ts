@@ -1,6 +1,4 @@
-import {Component, EventEmitter, Output, ViewChild, ElementRef, Directive} from "@angular/core";
-
-import {ProgressLock} from "../../../../form/component/ProgressLock/index";
+import {Component, EventEmitter, Output, ViewChild, ElementRef} from "@angular/core";
 import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
 import {PostAttachmentEntity} from "../../../../post-attachment/definitions/entity/PostAttachment";
 

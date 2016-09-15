@@ -1,7 +1,4 @@
-import {Component, Injectable, Directive} from "@angular/core";
-
-import {ModalService} from "./service";
-import {AuthService} from "../../auth/service/AuthService";
+import {Component} from "@angular/core";
 
 @Component({
     template: require('./template.html'),

@@ -1,9 +1,10 @@
 import {Injectable} from "@angular/core";
-
-import {MessageBusNotificationsModel} from "../../component/MessageBusNotifications/model";
+import {
+    MessageBusNotificationsModel,
+    MessageBusNotificationsLevel,
+    MessageBusNotificationsStates
+} from "../../component/MessageBusNotifications/model";
 import {MessageBusInterface} from "./interface";
-import {MessageBusNotificationsLevel} from "../../component/MessageBusNotifications/model";
-import {MessageBusNotificationsStates} from "../../component/MessageBusNotifications/model";
 
 @Injectable()
 export class MessageBusService implements MessageBusInterface

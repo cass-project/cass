@@ -1,6 +1,4 @@
-import {Component, Output, EventEmitter, ViewChild, ElementRef, Directive} from "@angular/core";
-
-
+import {Component, Output, EventEmitter, ViewChild, ElementRef} from "@angular/core";
 import {AuthService} from "../../service/AuthService";
 import {SignInRequest, SignInResponse200} from "../../definitions/paths/sign-in";
 

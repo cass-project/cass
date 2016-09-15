@@ -1,12 +1,7 @@
-import {Component, EventEmitter, Output, Directive} from "@angular/core";
-
+import {Component, EventEmitter, Output} from "@angular/core";
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
-import {ModalComponent} from "../../../../modal/component/index";
 import {CommunityJoinModalModel} from "./model";
-import {ScreenProcessing} from "./Screen/ScreenProcessing/index";
-import {ScreenSID} from "./Screen/ScreenSID/index";
 import {ScreenControls} from "../../../../common/classes/ScreenControls";
-import {ModalBoxComponent} from "../../../../modal/component/box/index";
 
 enum CommunityJoinScreen
 {

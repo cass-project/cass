@@ -1,17 +1,8 @@
-import {Component, Input, EventEmitter, Output, Directive} from "@angular/core";
-import {Router} from '@angular/router';
-
-import {ModalComponent} from "../../../../modal/component/index";
+import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Router} from "@angular/router";
 import {ProfileSetupModel} from "./model";
-import {ProfileSetupScreenGreetings} from "./Screen/ProfileSetupScreenGreetings/index";
-import {ProfileSetupScreenGender} from "./Screen/ProfileSetupScreenGender/index";
-import {ProfileSetupScreenImage} from "./Screen/ProfileSetupScreenImage/index";
-import {ProfileSetupScreenInterests} from "./Screen/ProfileSetupScreenInterests/index";
-import {ProfileSetupScreenExpertIn} from "./Screen/ProfileSetupScreenExpertIn/index";
 import {ScreenControls} from "../../../../common/classes/ScreenControls";
 import {ProfileRESTService} from "../../../service/ProfileRESTService";
-import {ModalBoxComponent} from "../../../../modal/component/box/index";
-import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
 import {ProfileEntity} from "../../../definitions/entity/Profile";
 import {Observable} from "rxjs/Observable";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";

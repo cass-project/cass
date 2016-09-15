@@ -1,5 +1,4 @@
 import {Component, Input, Output, EventEmitter, Directive} from "@angular/core";
-
 import {FeedbackCreateModalModel} from "./model";
 import {FeedbackService} from "../../../service/FeedbackService";
 import {FeedbackTypesService} from "../../../service/FeedbackTypesService";
@@ -7,9 +6,6 @@ import {FeedbackCreateRequest} from "../../../definitions/paths/create";
 import {FeedbackTypeEntity} from "../../../definitions/entity/FeedbackType";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
-import {ModalComponent} from "../../../../modal/component/index";
-import {ModalBoxComponent} from "../../../../modal/component/box/index";
-import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {AuthService} from "../../../../auth/service/AuthService";
 
 @Component({

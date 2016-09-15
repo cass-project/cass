@@ -1,4 +1,4 @@
-import {Component, Input, Directive} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {IMMessageExtendedEntity} from "../../definitions/entity/IMMessage";
 
 @Component({

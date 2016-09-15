@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import {Observable} from "rxjs/Observable";
+import {Router, ActivatedRoute} from "@angular/router";
 import {ProfileRouteService} from "../ProfileRoute/service";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";

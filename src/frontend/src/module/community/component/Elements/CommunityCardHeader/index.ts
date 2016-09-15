@@ -1,8 +1,6 @@
-import {Component, Input, EventEmitter, Output, Directive} from "@angular/core";
-
-import {CommunityImage} from "../CommunityImage/index";
+import {Component, Input} from "@angular/core";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
-import {Router} from '@angular/router';
+import {Router} from "@angular/router";
 import {CommunityEntity} from "../../../definitions/entity/Community";
 
 var moment = require('moment');

@@ -1,9 +1,6 @@
-import {Component, Injectable, Output, EventEmitter, Directive} from "@angular/core";
-
+import {Component, Injectable, Output, EventEmitter} from "@angular/core";
 import {UploadImageService} from "../../../../../../form/component/UploadImage/service";
 import {UploadProfileImageStrategy} from "../../../../../common/UploadProfileImageStrategy";
-import {ProfileImage} from "../../../../Elements/ProfileImage/index";
-import {UploadImageModal} from "../../../../../../form/component/UploadImage/index";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {ModalControl} from "../../../../../../common/classes/ModalControl";
 import {ProfileSetupModel} from "../../model";

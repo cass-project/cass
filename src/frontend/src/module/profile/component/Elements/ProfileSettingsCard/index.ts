@@ -1,4 +1,4 @@
-import {Component, Directive} from "@angular/core";
+import {Component} from "@angular/core";
 import {ProfileModals} from "../../../modals";
 
 @Component({

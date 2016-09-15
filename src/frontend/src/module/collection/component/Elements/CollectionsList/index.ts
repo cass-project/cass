@@ -1,8 +1,5 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
-
 import {Collection} from "../../../definitions/entity/collection";
-import {CollectionCard} from "../CollectionCard/index";
-import {CreateCollectionCard} from "../CreateCollectionCard/index";
 
 @Component({
     selector: 'cass-collections-list',

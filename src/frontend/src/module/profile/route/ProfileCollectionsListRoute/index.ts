@@ -1,5 +1,4 @@
 import {Component} from "@angular/core";
-
 import {ProfileRouteService} from "../ProfileRoute/service";
 
 @Component({

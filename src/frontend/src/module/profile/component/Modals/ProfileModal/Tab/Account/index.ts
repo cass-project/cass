@@ -1,7 +1,5 @@
-import {Component, Input, Directive} from "@angular/core";
-
+import {Component} from "@angular/core";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
-import {AccountEntity} from "../../../../../../account/definitions/entity/Account";
 import {ProfileModalModel} from "../../model";
 
 @Component({

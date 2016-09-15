@@ -1,7 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http, Response, Headers, URLSearchParams} from "@angular/http";
-import {Observable} from "rxjs/Rx";
-
+import {Http, Headers, URLSearchParams} from "@angular/http";
 import {FeedbackCreateRequest} from "../definitions/paths/create";
 import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {AuthToken} from "../../auth/service/AuthToken";

@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Output, Directive} from "@angular/core";
-
+import {Component, EventEmitter, Output} from "@angular/core";
 import {CollectionModals} from "../../../modals";
 
 @Component({

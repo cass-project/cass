@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import {Observable, Observer} from "rxjs/Rx";
-
 import {IMMessageExtendedEntity, IMMessageEntity} from "../../im/definitions/entity/IMMessage";
 import {IMUnreadResponse200} from "../../im/definitions/paths/im-unread";
 import {IMRESTService} from "../../im/service/IMRESTService";

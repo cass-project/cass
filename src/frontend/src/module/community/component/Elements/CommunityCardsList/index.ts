@@ -1,10 +1,5 @@
-import {Component, Input, Directive} from "@angular/core";
-
-import {CommunityCard} from "../CommunityCard/index";
-import {CommunityCreateCollectionCard} from "../CommunityCreateCollectionCard/index";
-import {CommunitySettingsCard} from "../CommunitySettingsCard/index";
-
-import {Router} from '@angular/router';
+import {Component, Input} from "@angular/core";
+import {Router} from "@angular/router";
 import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
 
 @Component({

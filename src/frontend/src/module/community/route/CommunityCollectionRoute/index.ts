@@ -1,7 +1,6 @@
 import {OnInit, OnDestroy, Component} from "@angular/core";
-import {Router, ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
-
+import {Router, ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs/Subscription";
 import {CommunityRouteService} from "../CommunityRoute/service";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";

@@ -1,15 +1,9 @@
-import {Component, OnInit, ViewChild, ElementRef, EventEmitter, Directive} from "@angular/core";
-import {ActivatedRoute} from '@angular/router';
-
+import {Component, OnInit, ViewChild, ElementRef, EventEmitter} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
 import {ProfileIMService} from "../../../service/ProfileIMService";
-import {LoadingLinearIndicator} from "../../../../form/component/LoadingLinearIndicator/index";
-import {IMChat} from "../../../../im/component/IMChat/index";
-import {IMTextarea} from "../../../../im/component/IMTextarea/index";
 import {IMMessagesBodyRequest} from "../../../../im/definitions/paths/im-messages";
-import {IMAttachments} from "../../../../im/component/IMAttachments/index";
 import {Session} from "../../../../session/Session";
 import {IMMessageSourceEntityType} from "../../../../im/definitions/entity/IMMessageSource";
-import {Observable} from "rxjs/Observable";
 
 @Component({
     template: require('./template.jade'),

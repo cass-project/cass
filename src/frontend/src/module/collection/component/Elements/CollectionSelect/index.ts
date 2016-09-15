@@ -1,4 +1,4 @@
-import {Input, Component, Directive} from "@angular/core";
+import {Input, Component} from "@angular/core";
 
 @Component({
     selector: 'cass-collection-select',

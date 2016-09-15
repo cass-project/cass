@@ -1,11 +1,8 @@
-import {Component, Input, Output, EventEmitter, Directive} from "@angular/core";
-
+import {Component, Input} from "@angular/core";
 import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
-import {CommunityImage} from "../CommunityImage/index";
-import {PostCard} from "../../../../post/component/Forms/PostCard/index";
 import {CommunityEntity} from "../../../definitions/entity/Community";
 import {ThemeService} from "../../../../theme/service/ThemeService";
-import {Router} from '@angular/router';
+import {Router} from "@angular/router";
 
 @Component({
     template: require('./template.jade'),

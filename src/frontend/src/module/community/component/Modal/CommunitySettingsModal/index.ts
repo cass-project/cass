@@ -1,15 +1,7 @@
-import {Component, EventEmitter, Output, Directive} from "@angular/core";
-
-import {ModalBoxComponent} from "../../../../modal/component/box";
-import {ModalComponent} from "../../../../modal/component";
+import {Component, EventEmitter, Output} from "@angular/core";
 import {ScreenControls} from "../../../../common/classes/ScreenControls";
-
 import {CommunityService} from "../../../service/CommunityService";
 import {CommunityFeaturesService} from "../../../service/CommunityFeaturesService";
-
-import {FeaturesTab} from "./Tab/TabFeatures";
-import {GeneralTab} from "./Tab/TabGeneral";
-import {CommunityImageTab} from "./Tab/TabImage";
 import {CommunitySettingsModalModel} from "./model";
 import {EditCommunityRequest} from "../../../definitions/paths/edit";
 import {CommunityControlFeatureRequestModel} from "../../../model/CommunityActivateFeatureModel";

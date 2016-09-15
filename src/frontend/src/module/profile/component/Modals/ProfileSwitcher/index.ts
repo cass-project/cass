@@ -1,11 +1,8 @@
-import {Component, Output, EventEmitter, Directive} from "@angular/core";
-import {Router} from '@angular/router';
-
-import {ProfileImage} from "../../Elements/ProfileImage/index";
+import {Component, Output, EventEmitter} from "@angular/core";
+import {Router} from "@angular/router";
 import {ComponentStages} from "../../../../common/classes/ComponentStages";
 import {ProfileSwitcherService} from "./service";
 import {AuthService} from "../../../../auth/service/AuthService";
-import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 
 enum ProfileSwitcherStage
 {

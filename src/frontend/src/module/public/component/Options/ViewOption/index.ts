@@ -1,10 +1,12 @@
-import {Component, Directive} from "@angular/core";
-
+import {Component} from "@angular/core";
 import {ViewOption, ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
 import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
 import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
 import {Criteria} from "../../../../feed/definitions/request/Criteria";
-import {ContentTypeCriteriaParams, ContentType} from "../../../../feed/definitions/request/criteria/ContentTypeCriteriaParams";
+import {
+    ContentTypeCriteriaParams,
+    ContentType
+} from "../../../../feed/definitions/request/criteria/ContentTypeCriteriaParams";
 
 @Component({
     template: require('./template.jade'),

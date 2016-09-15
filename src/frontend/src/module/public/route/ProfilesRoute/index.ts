@@ -1,11 +1,8 @@
 import {Component} from "@angular/core";
-
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {Stream} from "../../../feed/service/FeedService/stream";
 import {PublicService} from "../../service";
-import {FeedProfileStream} from "../../../feed/component/stream/FeedProfileStream/index";
 import {PublicProfilesSource} from "../../../feed/service/FeedService/source/public/PublicProfilesSource";
-import {NothingFound} from "../../component/Elements/NothingFound/index";
 import {ProfileIndexedEntity} from "../../../profile/definitions/entity/Profile";
 
 @Component({

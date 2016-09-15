@@ -1,10 +1,6 @@
-import {Component, Directive} from "@angular/core";
-
-import {PostCard} from "../../../../post/component/Forms/PostCard/index";
-import {LoadingIndicator} from "../../../../form/component/LoadingIndicator/index";
+import {Component} from "@angular/core";
 import {FeedService} from "../../../service/FeedService/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
-import {FeedScrollDetector} from "../../FeedScrollDetector/index";
 import {PostIndexedEntity} from "../../../../post/definitions/entity/Post";
 import {AppService} from "../../../../../app/frontend-app/service";
 

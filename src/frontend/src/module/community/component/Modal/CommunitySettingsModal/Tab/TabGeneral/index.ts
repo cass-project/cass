@@ -1,6 +1,4 @@
-import {Component, Directive} from "@angular/core";
-
-import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect";
+import {Component} from "@angular/core";
 import {CommunitySettingsModalModel} from "../../model";
 
 @Component({

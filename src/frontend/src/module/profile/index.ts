@@ -1,16 +1,8 @@
-import {Component, Directive} from "@angular/core";
-
-import {ProfileModal} from "./component/Modals/ProfileModal/index";
-import {ModalComponent} from "../modal/component/index";
-import {ProfileSwitcher} from "./component/Modals/ProfileSwitcher/index";
-import {ProfileSetup} from "./component/Modals/ProfileSetup/index";
-import {ModalBoxComponent} from "../modal/component/box/index";
+import {Component} from "@angular/core";
 import {AuthService} from "../auth/service/AuthService";
 import {ProfileModals} from "./modals";
-import {ProfileInterestsModal} from "./component/Modals/ProfileInterests/index";
 import {MessageBusService} from "../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../message/component/MessageBusNotifications/model";
-import {CollectionCreateMaster} from "../collection/component/Modal/CollectionCreateMaster/index";
 import {Session} from "../session/Session";
 
 @Component({

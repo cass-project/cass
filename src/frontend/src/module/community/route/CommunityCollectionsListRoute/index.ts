@@ -1,6 +1,4 @@
 import {Component} from "@angular/core";
-
-import {CollectionsList} from "../../../collection/component/Elements/CollectionsList/index";
 import {CommunityRouteService} from "../CommunityRoute/service";
 
 @Component({

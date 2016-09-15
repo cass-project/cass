@@ -1,10 +1,6 @@
-import {Component, ContentChildren, QueryList, Input, Directive} from "@angular/core";
-
-import {ModalComponent} from "../../../modal/component/index";
-import {ModalBoxComponent} from "../../../modal/component/box/index";
+import {Component, ContentChildren, QueryList, Input} from "@angular/core";
 import {TabModalTab} from "./component/TabModalTab/index";
 import {TabModalHeader} from "./component/TabModalHeader/index";
-import {ThemeSelect} from "../../../theme/component/ThemeSelect/index";
 
 @Component({
     template: require('./template.jade'),

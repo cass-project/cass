@@ -1,5 +1,4 @@
 import {Injectable} from "@angular/core";
-
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {AuthService} from "../../../../../../auth/service/AuthService";
 import {Session} from "../../../../../../session/Session";
