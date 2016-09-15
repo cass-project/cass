@@ -11,20 +11,6 @@ import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 import {Session} from "../../../session/Session";
 
-const profileRoutes: Routes = [
-    // TODO:: USE AS DEFAULT
-    {
-        path: '/',
-        component: ProfileDashboardRoute,
-    },
-    {
-        path: '/collections/...',
-        component: ProfileCollectionsRoute
-    },
-];
-
-export const profileRouting: ModuleWithProviders = RouterModule.forChild(profileRoutes);
-
 @Component({
     template: require('./template.jade'),
     styles: [
@@ -51,13 +37,13 @@ export class ProfileRoute implements OnInit, OnDestroy
     
     ngOnInit(){
         this.sub = this.route.params.subscribe(params => {
-            let id = params['sid'];
+            let id = params['id'];
             if (this.authService.isSignedIn() && (id === 'current' || id === this.session.getCurrentProfile().getId().toString())) {
                 this.service.loadCurrentProfile();
             } else if (Number(id)) {
                 this.service.loadProfileById(Number(id));
             } else {
-                this.router.navigate(['/Profile/NotFound']);
+                this.router.navigate(['/profile/not-found']);
                 return;
             }
 
@@ -66,11 +52,11 @@ export class ProfileRoute implements OnInit, OnDestroy
                     (response) => {
                     },
                     (error) => {
-                        this.router.navigate(['/Profile/NotFound']);
+                        this.router.navigate(['/profile/not-found']);
                     }
                 )
             } else {
-                this.router.navigate(['/Public']);
+                this.router.navigate(['/public']);
             }
         })
     }
