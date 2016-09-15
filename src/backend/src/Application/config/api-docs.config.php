@@ -25,7 +25,6 @@ return [
             AuthBundle::class,
             CollectionBundle::class,
             ColorsBundle::class,
-            CommunityBundle::class,
             ContactBundle::class,
             FeedBundle::class,
             FeedbackBundle::class,

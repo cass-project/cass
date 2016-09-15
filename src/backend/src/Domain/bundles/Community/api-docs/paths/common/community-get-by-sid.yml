@@ -10,14 +10,15 @@
       - name: communitySID
         in: path
         required: true
-        type: string:
+        type: string
         description: SID коммунити
     responses:
       404:
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - entity

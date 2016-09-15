@@ -10,23 +10,22 @@
       - name: communityId
         in: path
         required: true
-        type: number:
+        type: number
         description: ID коммунити
       - name: body
         in: body
         required: true
-        description:
         schema:
           $ref: '#/definitions/Community_Request_EditCommunity'
     responses:
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       404:
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - entity
