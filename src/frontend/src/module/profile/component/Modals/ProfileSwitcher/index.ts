@@ -34,7 +34,7 @@ export class ProfileSwitcher
     signOut(){
         this.authService.signOut().subscribe(() => {
             this.closeProfileSwitcher();
-            this.router.navigate(['Public']);
+            this.router.navigate(['home']);
         });
     }
 }
