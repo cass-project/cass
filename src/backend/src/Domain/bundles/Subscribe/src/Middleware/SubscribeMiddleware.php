@@ -32,7 +32,7 @@ class SubscribeMiddleware implements MiddlewareInterface
         $responseBuilder = new GenericResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
-            ->attachDirect("theme-subscribe", SubscribeThemeCommand::class, 'GET')
+            ->attachDirect("subscribe-theme", SubscribeThemeCommand::class, 'PUT')
             ->attachDirect("unsubscribe-theme", UnSubscribeThemeCommand::class, 'GET')
             ->attachDirect("list-themes", ListSubscribedThemesCommand::class, 'GET')
             ->attachDirect("subscribe-profile", SubscribeProfileCommand::class, 'GET')

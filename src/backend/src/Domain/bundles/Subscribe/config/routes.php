@@ -7,14 +7,14 @@ return [
     'auth' => [
         [
             'type'       => 'route',
-            'method'     => 'get',
+            'method'     => 'PUT',
             'url'        => '/protected/subscribe/{command:subscribe-theme}/{themeId}[/]',
             'middleware' => SubscribeMiddleware::class,
             'name'       => 'subscribe-theme-subscribe'
         ],
         [
             'type'       => 'route',
-            'method'     => 'get',
+            'method'     => 'DELETE',
             'url'        => '/protected/subscribe/{command:unsubscribe-theme}/{themeId}[/]',
             'middleware' => SubscribeMiddleware::class,
             'name'       => 'subscribe-theme-unsubscribe'

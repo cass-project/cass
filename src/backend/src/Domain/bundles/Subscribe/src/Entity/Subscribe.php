@@ -27,7 +27,7 @@ class Subscribe
     private $subscribeId;
     /**
      * @var int
-     * @Column(type="integer", name="subscribe_type")
+     * @Column(type="integer", name="type")
      */
     private $subscribeType;
 
