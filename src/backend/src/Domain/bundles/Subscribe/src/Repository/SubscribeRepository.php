@@ -39,11 +39,12 @@ class SubscribeRepository extends EntityRepository
 
     public function getSubscribe(array $criteria): Subscribe
     {
-        if (!isset($criteria['profile_id'])) throw new \Exception("required option: profile_id missing");
-        if (!isset($criteria['subscribe_id'])) throw new \Exception("required option: subscribe_id missing");
-        if (!isset($criteria['type'])) throw new \Exception("required option: type missing");
-
+        if (!isset($criteria['profileId'])) throw new \Exception("required option: profile_id missing");
+        if (!isset($criteria['subscribeId'])) throw new \Exception("required option: subscribe_id missing");
+        if (!isset($criteria['subscribeType'])) throw new \Exception("required option: type missing");
         $subscribe = $this->getEntityManager()->getRepository(Subscribe::class)->findOneBy($criteria);
+
+
         if ($subscribe === null)
             throw new UnknownSubscribeException(
                 sprintf("Subscribe not found - (profile_id: %s, subscribe_id: %s, subscribe_type): %s",

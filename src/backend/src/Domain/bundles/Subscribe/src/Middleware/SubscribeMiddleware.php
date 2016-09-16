@@ -33,17 +33,17 @@ class SubscribeMiddleware implements MiddlewareInterface
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect("subscribe-theme", SubscribeThemeCommand::class, 'PUT')
-            ->attachDirect("unsubscribe-theme", UnSubscribeThemeCommand::class, 'GET')
-            ->attachDirect("list-themes", ListSubscribedThemesCommand::class, 'GET')
-            ->attachDirect("subscribe-profile", SubscribeProfileCommand::class, 'GET')
-            ->attachDirect("unsubscribe-profile", UnSubscribeProfileCommand::class, 'GET')
-            ->attachDirect("list-profiles", ListSubscribedProfilesCommand::class, 'GET')
-            ->attachDirect("subscribe-collection", SubscribeCollectionCommand::class, 'GET')
-            ->attachDirect("unsubscribe-collection", UnSubscribeCollectionCommand::class, 'GET')
-            ->attachDirect("list-collections", ListSubscribedCollectionsCommand::class, 'GET')
-            ->attachDirect("subscribe-community", SubscribeCommunityCommand::class, 'GET')
-            ->attachDirect("unsubscribe-community", UnSubscribeCommunityCommand::class, 'GET')
-            ->attachDirect("list-communities", UnSubscribeCommunityCommand::class, 'GET')
+            ->attachDirect("unsubscribe-theme", UnSubscribeThemeCommand::class, 'DELETE')
+            ->attachDirect("list-themes", ListSubscribedThemesCommand::class, 'POST')
+            ->attachDirect("subscribe-profile", SubscribeProfileCommand::class, 'PUT')
+            ->attachDirect("unsubscribe-profile", UnSubscribeProfileCommand::class, 'DELETE')
+            ->attachDirect("list-profiles", ListSubscribedProfilesCommand::class, 'POST')
+            ->attachDirect("subscribe-collection", SubscribeCollectionCommand::class, 'PUT')
+            ->attachDirect("unsubscribe-collection", UnSubscribeCollectionCommand::class, 'DELETE')
+            ->attachDirect("list-collections", ListSubscribedCollectionsCommand::class, 'POST')
+            ->attachDirect("subscribe-community", SubscribeCommunityCommand::class, 'PUT')
+            ->attachDirect("unsubscribe-community", UnSubscribeCommunityCommand::class, 'DELETE')
+            ->attachDirect("list-communities", UnSubscribeCommunityCommand::class, 'POST')
             ->resolve($request);
 
         return $resolver->run($request, $responseBuilder);

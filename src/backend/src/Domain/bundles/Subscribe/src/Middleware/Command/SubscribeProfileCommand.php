@@ -1,8 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Subscribe\Middleware\Command;
 
-use CASS\Application\Exception\BadCommandCallException;
-use CASS\Domain\Bundles\Theme\Exception\ThemeNotFoundException;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
@@ -21,8 +20,10 @@ class SubscribeProfileCommand extends Command
             return $responseBuilder
                 ->setStatusSuccess()
                 ->build();
-        } catch (ThemeNotFoundException $e) {
-            throw new BadCommandCallException($e->getMessage());
+        } catch (ProfileNotFoundException $e) {
+            return $responseBuilder
+                ->setStatusNotFound()
+                ->build();
         }
     }
 }

@@ -25,7 +25,7 @@ class SubscribeService
 
     public function unSubscribeTheme(Profile $profile, Theme $subscribe)
     {
-        $criteria = ['profile_id' => $profile->getId(), 'subscribe_id' => $subscribe->getId(), 'type' => Subscribe::TYPE_THEME ];
+        $criteria = ['profileId' => $profile->getId(), 'subscribeId' => $subscribe->getId(), 'subscribeType' => Subscribe::TYPE_THEME ];
         return $this->subscribeRepository->unSubscribeByCriteria($criteria);
     }
 

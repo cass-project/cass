@@ -1,7 +1,6 @@
 <?php
 namespace CASS\Domain\Bundles\Subscribe\Middleware\Command;
 
-use CASS\Application\Exception\BadCommandCallException;
 use CASS\Domain\Bundles\Theme\Exception\ThemeNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -21,7 +20,9 @@ class SubscribeThemeCommand extends Command
                 ->setStatusSuccess()
                 ->build();
         } catch (ThemeNotFoundException $e) {
-            throw new BadCommandCallException($e->getMessage());
+            return $responseBuilder
+                ->setStatusNotFound()
+                ->build();
         }
     }
 }

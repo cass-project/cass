@@ -1,19 +1,19 @@
 <?php
 namespace CASS\Domain\Bundles\Subscribe\Tests;
-
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
+
 /**
  * @backupGlobals disabled
  */
-class SubscribeThemeMiddlewareTest extends SubscribeMiddlewareTestCase
+class UnSubscribeThemeMiddlewareTest extends SubscribeMiddlewareTestCase
 {
-    public function testSubscribeTheme200()
+    public function testUnSubscribeThemeSuccess200()
     {
         $account = DemoAccountFixture::getAccount();
-
         $theme = SampleThemesFixture::getTheme(1);
-        $this->requestSubscribeTheme($theme->getId())
+
+        $this->requestUnSubscribeTheme($theme->getId())
             ->auth($account->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
@@ -23,23 +23,22 @@ class SubscribeThemeMiddlewareTest extends SubscribeMiddlewareTestCase
             ]);
     }
 
-    public function testSubscrubeThemeUnAuth404()
+    public function testUnSubscribeThemeNotAuth403()
     {
         $theme = SampleThemesFixture::getTheme(1);
-        $this->requestSubscribeTheme($theme->getId())
+
+        $this->requestUnSubscribeTheme($theme->getId())
             ->execute()
-            ->expectStatusCode(403)
-            ->expectJSONContentType()
-            ;
+            ->expectStatusCode(403);
     }
 
-    public function testSubscribeThemeNotFound404()
+    public function testUnSubscribeThemeNotFound404()
     {
         $account = DemoAccountFixture::getAccount();
-        $this->requestSubscribeTheme(99999)
+
+        $this->requestUnSubscribeTheme(9999)
             ->auth($account->getAPIKey())
             ->execute()
-            ->expectStatusCode(404)
-            ;
+            ->expectStatusCode(404);
     }
 }
