@@ -14,7 +14,6 @@ export interface AttachmentEntity<T extends AttachmentMetadata>
         };
         metadata: T;
     }
-    date_attached_on?: string;
     owner?: {
         id: number;
         code: string;

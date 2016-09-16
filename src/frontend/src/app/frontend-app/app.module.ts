@@ -10,7 +10,6 @@ import {ProgressLock} from "../../module/form/component/ProgressLock/index";
 import {CommunityHeader} from "../../module/community/component/Elements/CommunityHeader/index";
 import {SidebarProfileIcon} from "../../module/sidebar/component/SidebarProfileIcon/index";
 import {SidebarCommunities} from "../../module/sidebar/component/SidebarCommunities/index";
-import {SidebarMessages} from "../../module/sidebar/component/SidebarMessages/index";
 import {ProfileImage} from "../../module/profile/component/Elements/ProfileImage/index";
 import {ProfileHeader} from "../../module/profile/component/Elements/ProfileHeader/index";
 import {FeedProfileStream} from "../../module/feed/component/stream/FeedProfileStream/index";
@@ -52,10 +51,6 @@ import {ProfileCard} from "../../module/profile/component/Elements/ProfileCard/i
 import {ProfileSettingsCard} from "../../module/profile/component/Elements/ProfileSettingsCard/index";
 import {ProfileCreateCollectionCard} from "../../module/profile/component/Elements/ProfileCreateCollectionCard/index";
 import {ProfileInterestsCard} from "../../module/profile/component/Elements/ProfileInterestsCard/index";
-import {IMAttachments} from "../../module/im/component/IMAttachments/index";
-import {IMChat} from "../../module/im/component/IMChat/index";
-import {IMTextarea} from "../../module/im/component/IMTextarea/index";
-import {ProfileIMSidebar} from "../../module/profile-im/component/Elements/ProfileIMSidebar/index";
 import {ProfileCardHeader} from "../../module/profile/component/Elements/ProfileCardHeader/index";
 import {Attachment} from "../../module/attachment/component/Elements/Attachment/index";
 import {PostFormLinkInput} from "../../module/post/component/Forms/PostFormLinkInputComponent/index";
@@ -118,7 +113,6 @@ import {Session} from "../../module/session/Session";
 import {CommunityModalService} from "../../module/community/service/CommunityModalService";
 import {ProfileCommunityBookmarksService} from "../../module/profile-communities/service/ProfileCommunityBookmarksService";
 import {CommunityCreateModalNotifier} from "../../module/community/component/Modal/CommunityCreateModal/notify";
-import {IMRESTService} from "../../module/im/service/IMRESTService";
 import {AuthComponentService} from "../../module/auth/component/Auth/service";
 import {ProfileModals} from "../../module/profile/modals";
 import {ThemeService} from "../../module/theme/service/ThemeService";
@@ -167,7 +161,6 @@ export class NoSanitizationService {
         SidebarSignInButton,
         SidebarProfileIcon,
         SidebarCommunities,
-        SidebarMessages,
         ProfileImage,
         ProfileHeader,
         FeedProfileStream,
@@ -209,10 +202,6 @@ export class NoSanitizationService {
         ProfileInterestsCard,
         ProfileCreateCollectionCard,
         ProfileSettingsCard,
-        IMAttachments,
-        IMChat,
-        IMTextarea,
-        ProfileIMSidebar,
         Attachment,
         ProfileCardHeader,
         PostFormLinkInput,
@@ -301,7 +290,6 @@ export class NoSanitizationService {
         CommunityModalService,
         ProfileCommunityBookmarksService,
         CommunityCreateModalNotifier,
-        IMRESTService,
         ProfileModals,
         ThemeService,
         ProfileCachedIdentityMap,
