@@ -34,7 +34,6 @@
       "CASS\\Domain\\Bundles\\Feedback\\": "src/Domain/bundles/Feedback/src",
       "CASS\\Domain\\Bundles\\Feed\\": "src/Domain/bundles/Feed/src",
       "CASS\\Domain\\Bundles\\OpenGraph\\": "src/Domain/bundles/OpenGraph/src",
-      "CASS\\Domain\\Bundles\\Contact\\": "src/Domain/bundles/Contact/src",
       "CASS\\Domain\\Bundles\\Index\\": "src/Domain/bundles/Index/src"
     }
   },
