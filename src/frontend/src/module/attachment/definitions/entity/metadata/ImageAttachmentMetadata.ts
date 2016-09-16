@@ -1,3 +1,3 @@
-import {AttachmentMetadata} from "../PostAttachment";
+import {AttachmentMetadata} from "../AttachmentEntity";
 
 export interface ImageAttachmentMetadata extends AttachmentMetadata {}

@@ -1,6 +1,6 @@
 import {Component, Input, EventEmitter, Output} from "@angular/core";
 import {PostEntity} from "../../../definitions/entity/Post";
-import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
+import {Attachment} from "../../../../attachment/component/Elements/Attachment/index";
 import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
 import {PostRESTService} from "../../../service/PostRESTService";
 import {LoadingManager} from "../../../../common/classes/LoadingStatus";
@@ -18,7 +18,7 @@ export class PostCard
     @Input('post') post: PostEntity;
     @Input('view-option') viewOption: ViewOptionValue = ViewOptionValue.Feed;
 
-    @Output('attachment') attachmentEvent: EventEmitter<PostAttachment> = new EventEmitter<PostAttachment>();
+    @Output('attachment') attachmentEvent: EventEmitter<Attachment> = new EventEmitter<Attachment>();
     @Output('delete') deleteEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
     private dateCreatedOn: Date;

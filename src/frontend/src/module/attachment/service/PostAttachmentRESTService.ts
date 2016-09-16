@@ -4,9 +4,9 @@ import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {AuthToken} from "../../auth/service/AuthToken";
 import {Observable} from "rxjs/Observable";
-import {UploadPostAttachmentResponse200} from "../definitions/paths/upload";
+import {UploadAttachmentResponse200} from "../definitions/paths/upload";
 import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
-import {LinkPostAttachmentResponse200} from "../definitions/paths/link";
+import {LinkAttachmentResponse200} from "../definitions/paths/link";
 
 
 @Injectable()
@@ -18,7 +18,7 @@ export class PostAttachmentRESTService extends AbstractRESTService
         protected messages: MessageBusService
     ) { super(http, token, messages); }
 
-    public link(url: string): Observable<LinkPostAttachmentResponse200> {
+    public link(url: string): Observable<LinkAttachmentResponse200> {
         let params = new URLSearchParams();
         params.set('url', url);
 
@@ -28,15 +28,15 @@ export class PostAttachmentRESTService extends AbstractRESTService
             headers.append('Authorization', `${this.token.apiKey}`);
         }
 
-        return this.handle(this.http.put('/backend/api/protected/post-attachment/link/', '', {
+        return this.handle(this.http.put('/backend/api/protected/attachment/link/', '', {
             search: params,
             headers: headers
         }));
     }
     
-    public upload(file: Blob): Observable<UploadPostAttachmentResponse200> {
+    public upload(file: Blob): Observable<UploadAttachmentResponse200> {
         let observable = new Observable((observer) => {
-            let url = '/backend/api/protected/post-attachment/upload/';
+            let url = '/backend/api/protected/attachment/upload/';
             let xhr = new XMLHttpRequest();
 
             let formData = new FormData();

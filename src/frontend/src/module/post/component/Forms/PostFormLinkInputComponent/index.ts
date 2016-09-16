@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output, ViewChild, ElementRef} from "@angular/core";
-import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
-import {PostAttachmentEntity} from "../../../../post-attachment/definitions/entity/PostAttachment";
+import {PostAttachmentRESTService} from "../../../../attachment/service/PostAttachmentRESTService";
+import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
 
 var validUrl = require('valid-url');
 
@@ -18,13 +18,13 @@ export class PostFormLinkInput
 
     @Output('cancel') cancelEvent = new EventEmitter<string>();
     @Output('detach-link') detachEvent = new EventEmitter<string>();
-    @Output('attach-link') attachEvent: EventEmitter<PostAttachmentEntity<any>> = new EventEmitter<PostAttachmentEntity<any>>();
+    @Output('attach-link') attachEvent: EventEmitter<AttachmentEntity<any>> = new EventEmitter<AttachmentEntity<any>>();
 
     private loading: boolean = false;
     private url: string = '';
     private error: string;
     private interval;
-    private current: PostAttachmentEntity<any>;
+    private current: AttachmentEntity<any>;
 
     constructor(private service: PostAttachmentRESTService) {}
 
@@ -66,7 +66,7 @@ export class PostFormLinkInput
         }
     }
 
-    private attach(attachment: PostAttachmentEntity<any>) {
+    private attach(attachment: AttachmentEntity<any>) {
         this.current = attachment;
 
         this.attachEvent.emit(this.current);

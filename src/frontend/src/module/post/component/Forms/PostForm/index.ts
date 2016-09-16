@@ -2,7 +2,7 @@ import {Component, Input, ViewChild, ElementRef, EventEmitter, Output} from "@an
 import {CollectionEntity} from "../../../../collection/definitions/entity/collection";
 import {PostRESTService} from "../../../service/PostRESTService";
 import {PostTypeEntity} from "../../../definitions/entity/PostType";
-import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
+import {PostAttachmentRESTService} from "../../../../attachment/service/PostAttachmentRESTService";
 import {PostEntity} from "../../../definitions/entity/Post";
 import {Session} from "../../../../session/Session";
 import {LoadingManager} from "../../../../common/classes/LoadingStatus";

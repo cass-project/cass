@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
+import {AttachmentEntity} from "../../../definitions/entity/AttachmentEntity";
 import {WebmAttachmentMetadata} from "../../../definitions/entity/metadata/WebmAttachmentMetadata";
 
 @Component({
@@ -8,9 +8,9 @@ import {WebmAttachmentMetadata} from "../../../definitions/entity/metadata/WebmA
         require('./style.shadow.scss')
     ],selector:  'cass-post-attachment-link-webm'})
 
-export class PostAttachmentLinkWebm
+export class AttachmentLinkWebm
 {
-    @Input('attachment') attachment: PostAttachmentEntity<WebmAttachmentMetadata>;
+    @Input('attachment') attachment: AttachmentEntity<WebmAttachmentMetadata>;
     
     getType(): string {
         return this.attachment.link.metadata.type;

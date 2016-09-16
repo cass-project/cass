@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {PostAttachmentEntity, AttachmentMetadata} from "../../../definitions/entity/PostAttachment";
+import {AttachmentEntity, AttachmentMetadata} from "../../../definitions/entity/AttachmentEntity";
 
 @Component({
     template: require('./template.jade'),
@@ -7,9 +7,9 @@ import {PostAttachmentEntity, AttachmentMetadata} from "../../../definitions/ent
         require('./style.shadow.scss')
     ],selector: 'cass-post-attachment'})
 
-export class PostAttachment
+export class Attachment
 {
-    @Input('attachment') attachment: PostAttachmentEntity<AttachmentMetadata>;
+    @Input('attachment') attachment: AttachmentEntity<AttachmentMetadata>;
     
     is(resource: string) {
         return this.attachment.link.resource === resource;

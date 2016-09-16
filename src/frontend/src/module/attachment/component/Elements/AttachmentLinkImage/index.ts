@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
+import {AttachmentEntity} from "../../../definitions/entity/AttachmentEntity";
 import {ImageAttachmentMetadata} from "../../../definitions/entity/metadata/ImageAttachmentMetadata";
 
 @Component({
@@ -8,9 +8,9 @@ import {ImageAttachmentMetadata} from "../../../definitions/entity/metadata/Imag
         require('./style.shadow.scss')
     ],selector:  'cass-post-attachment-link-image'})
 
-export class PostAttachmentLinkImage
+export class AttachmentLinkImage
 {
-    @Input('attachment') attachment: PostAttachmentEntity<ImageAttachmentMetadata>;
+    @Input('attachment') attachment: AttachmentEntity<ImageAttachmentMetadata>;
 
     getImageURL(): string {
         return this.attachment.link.url;

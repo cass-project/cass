@@ -7,7 +7,7 @@ import {Component, Input, Injectable} from "@angular/core";
     ],selector: 'cass-post-attachment'})
 
 @Injectable()
-export class PostAttachment
+export class RootAttachment
 {
     @Input('attachments') AttachmentInterface;
 }

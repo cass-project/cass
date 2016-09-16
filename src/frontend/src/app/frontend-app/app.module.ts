@@ -57,16 +57,16 @@ import {IMChat} from "../../module/im/component/IMChat/index";
 import {IMTextarea} from "../../module/im/component/IMTextarea/index";
 import {ProfileIMSidebar} from "../../module/profile-im/component/Elements/ProfileIMSidebar/index";
 import {ProfileCardHeader} from "../../module/profile/component/Elements/ProfileCardHeader/index";
-import {PostAttachment} from "../../module/post-attachment/component/Elements/PostAttachment/index";
+import {Attachment} from "../../module/attachment/component/Elements/Attachment/index";
 import {PostFormLinkInput} from "../../module/post/component/Forms/PostFormLinkInputComponent/index";
 import {TabModalTab} from "../../module/form/component/TabModal/component/TabModalTab/index";
 import {ImageCropper} from "../../module/form/component/ImageCropper/index";
-import {PostAttachmentLinkYouTube} from "../../module/post-attachment/component/Elements/PostAttachmentLinkYouTube/index";
-import {PostAttachmentLinkImage} from "../../module/post-attachment/component/Elements/PostAttachmentLinkImage/index";
-import {PostAttachmentLinkPage} from "../../module/post-attachment/component/Elements/PostAttachmentLinkPage/index";
-import {PostAttachmentLinkWebm} from "../../module/post-attachment/component/Elements/PostAttachmentLinkWebm/index";
-import {PostAttachmentLinkUnknown} from "../../module/post-attachment/component/Elements/PostAttachmentLinkUnknown/index";
-import {AttachmentError} from "../../module/post-attachment/component/Elements/Error/index";
+import {AttachmentLinkYouTube} from "../../module/attachment/component/Elements/AttachmentLinkYouTube/index";
+import {AttachmentLinkImage} from "../../module/attachment/component/Elements/AttachmentLinkImage/index";
+import {AttachmentLinkPage} from "../../module/attachment/component/Elements/AttachmentLinkPage/index";
+import {AttachmentLinkWebm} from "../../module/attachment/component/Elements/AttachmentLinkWebm/index";
+import {AttachmentLinkUnknown} from "../../module/attachment/component/Elements/AttachmentLinkUnknown/index";
+import {AttachmentError} from "../../module/attachment/component/Elements/Error/index";
 import {FeedbackCreateModal} from "../../module/feedback/component/Modal/FeedbackCreateModal/index";
 import {FeedbackCreateButton} from "../../module/feedback/component/Elements/FeedbackCreateButton/index";
 import {CollectionCard} from "../../module/collection/component/Elements/CollectionCard/index";
@@ -134,7 +134,7 @@ import {ProfileCollectionRoute} from "../../module/profile/route/ProfileCollecti
 import {FeedRESTService} from "../../module/feed/service/FeedRESTService";
 import {PostTypeService} from "../../module/post/service/PostTypeService";
 import {PostRESTService} from "../../module/post/service/PostRESTService";
-import {PostAttachmentRESTService} from "../../module/post-attachment/service/PostAttachmentRESTService";
+import {PostAttachmentRESTService} from "../../module/attachment/service/PostAttachmentRESTService";
 import {CommunityCollectionRoute} from "../../module/community/route/CommunityCollectionRoute/index";
 import {CommunityCollectionNotFoundRoute} from "../../module/community/route/CommunityCollectionNotFoundRoute/index";
 import {CommunityCollectionsRoute} from "../../module/community/route/CommunityCollectionsRoute/index";
@@ -213,16 +213,16 @@ export class NoSanitizationService {
         IMChat,
         IMTextarea,
         ProfileIMSidebar,
-        PostAttachment,
+        Attachment,
         ProfileCardHeader,
         PostFormLinkInput,
         TabModalTab,
         ImageCropper,
-        PostAttachmentLinkYouTube,
-        PostAttachmentLinkImage,
-        PostAttachmentLinkPage,
-        PostAttachmentLinkWebm,
-        PostAttachmentLinkUnknown,
+        AttachmentLinkYouTube,
+        AttachmentLinkImage,
+        AttachmentLinkPage,
+        AttachmentLinkWebm,
+        AttachmentLinkUnknown,
         AttachmentError,
         FeedbackCreateModal,
         FeedbackCreateButton,

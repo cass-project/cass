@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
+import {AttachmentEntity} from "../../../definitions/entity/AttachmentEntity";
 import {PageAttachmentMetadata} from "../../../definitions/entity/metadata/PageAttachmentMetadata";
 
 @Component({
@@ -8,9 +8,9 @@ import {PageAttachmentMetadata} from "../../../definitions/entity/metadata/PageA
         require('./style.shadow.scss')
     ],selector: 'cass-post-attachment-link-page'})
 
-export class PostAttachmentLinkPage
+export class AttachmentLinkPage
 {
-    @Input('attachment') attachment: PostAttachmentEntity<PageAttachmentMetadata>;
+    @Input('attachment') attachment: AttachmentEntity<PageAttachmentMetadata>;
 
     private markedAsError: boolean = false;
     

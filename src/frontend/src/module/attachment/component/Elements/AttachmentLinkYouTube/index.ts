@@ -1,5 +1,5 @@
 import {Component, Input, ViewChild, ElementRef} from "@angular/core";
-import {PostAttachmentEntity} from "../../../definitions/entity/PostAttachment";
+import {AttachmentEntity} from "../../../definitions/entity/AttachmentEntity";
 import {YoutubeAttachmentMetadata} from "../../../definitions/entity/metadata/YoutubeAttachmentMetadata";
 
 @Component({
@@ -8,14 +8,14 @@ import {YoutubeAttachmentMetadata} from "../../../definitions/entity/metadata/Yo
         require('./style.shadow.scss')
     ],selector: 'cass-post-attachment-link-youtube'})
 
-export class PostAttachmentLinkYouTube
+export class AttachmentLinkYouTube
 {
     private preview: boolean = true;
     
     static DEFAULT_ORIG_WIDTH = 1280;
     static DEFAULT_ORIG_HEIGHT = 720;
 
-    @Input('attachment') attachment: PostAttachmentEntity<YoutubeAttachmentMetadata>;
+    @Input('attachment') attachment: AttachmentEntity<YoutubeAttachmentMetadata>;
     @ViewChild('container') container: ElementRef;
 
     getURL(): string {
@@ -54,7 +54,7 @@ export class PostAttachmentLinkYouTube
             }
         }
 
-        return PostAttachmentLinkYouTube.DEFAULT_ORIG_WIDTH;
+        return AttachmentLinkYouTube.DEFAULT_ORIG_WIDTH;
     }
 
     getOrigHeight(): number {
@@ -68,7 +68,7 @@ export class PostAttachmentLinkYouTube
             }
         }
 
-        return PostAttachmentLinkYouTube.DEFAULT_ORIG_HEIGHT;
+        return AttachmentLinkYouTube.DEFAULT_ORIG_HEIGHT;
     }
 
     getPreviewImageURL(): string {

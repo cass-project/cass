@@ -1,8 +1,9 @@
-export interface PostAttachmentEntity<T extends AttachmentMetadata>
+export interface AttachmentEntity<T extends AttachmentMetadata>
 {
     id: number;
     sid: string;
     date_created_on: string;
+    date_attached_on?: string;
     is_attached: boolean;
     link: {
         url: string;
