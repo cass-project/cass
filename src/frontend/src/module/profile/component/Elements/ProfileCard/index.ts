@@ -9,7 +9,7 @@ import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'profile-im-route'})
+    ],selector: 'cass-profile-card'})
 
 export class ProfileCard
 {

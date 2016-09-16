@@ -143,6 +143,9 @@ import {ProfilesRoute} from "../../module/public/route/ProfilesRoute/index";
 import {FeedCriteriaService} from "../../module/feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../module/feed/service/FeedOptionsService";
 import {PublicService} from "../../module/public/service";
+import {FeedService} from "../../module/feed/service/FeedService/index";
+import {PublicProfilesSource} from "../../module/feed/service/FeedService/source/public/PublicProfilesSource";
+import {AppService} from "./service";
 
 @Injectable()
 export class NoSanitizationService {
@@ -285,7 +288,10 @@ export class NoSanitizationService {
     providers: [
         AuthService,
         AuthRESTService,
+        AppService,
+        FeedService,
         MessageBusService,
+        PublicProfilesSource,
         Session,
         CommunityModalService,
         ProfileCommunityBookmarksService,

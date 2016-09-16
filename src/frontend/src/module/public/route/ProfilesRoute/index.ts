@@ -9,10 +9,6 @@ import {ProfileIndexedEntity} from "../../../profile/definitions/entity/Profile"
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    providers: [
-        FeedService,
-        PublicProfilesSource,
     ]
 })
 export class ProfilesRoute
