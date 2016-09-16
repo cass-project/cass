@@ -21,7 +21,6 @@ use CASS\Domain\Bundles\Theme\ThemeBundle;
 return [
     'php-di' => [
         'config.api-docs.excluded-bundles' => [
-            AttachmentBundle::class,
             AuthBundle::class,
             ContactBundle::class,
             FeedBundle::class,

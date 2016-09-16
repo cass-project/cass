@@ -10,14 +10,15 @@
         type: file
         required: true
         in: formData
-        allowMultiple: false
     security:
       - x_api_key: []
     responses:
       403:
         $ref: '#/responses/Unauthorized'
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - entity

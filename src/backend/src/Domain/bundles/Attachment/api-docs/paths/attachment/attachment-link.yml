@@ -15,7 +15,9 @@
       403:
         $ref: '#/responses/Unauthorized'
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - entity
@@ -24,4 +26,4 @@
               type: boolean
               description: '=true'
             entity:
-              $ref: '#/definitions/Attachment_Attachment_Link'
+              $ref: '#/definitions/Attachment_Entity_AttachmentEntity'
