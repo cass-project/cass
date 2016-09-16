@@ -22,7 +22,6 @@ return [
     'php-di' => [
         'config.api-docs.excluded-bundles' => [
             ContactBundle::class,
-            FeedBundle::class,
             IMBundle::class,
             IndexBundle::class,
             OpenGraphBundle::class,

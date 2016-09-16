@@ -6,14 +6,13 @@ Feed_Request_FeedRequest:
       type: array
       items:
         type: object
-        schema:
-          required:
-            - code
-            - params
-          properties:
-            code:
-              type: string
-              description: Код критерия
-            params:
-              type: object
-              description: Параметры критерия
+        required:
+          - code
+          - params
+        properties:
+          code:
+            type: string
+            description: Код критерия
+          params:
+            type: object
+            description: Параметры критерия
