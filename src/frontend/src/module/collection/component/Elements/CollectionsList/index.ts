@@ -1,4 +1,5 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
+
 import {Collection} from "../../../definitions/entity/collection";
 
 @Component({

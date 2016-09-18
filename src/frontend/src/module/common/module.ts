@@ -4,4 +4,4 @@ import {NgModule} from '@angular/core';
     declarations: [],
     providers: []
 })
-export class CASSAccountModule {}
+export class CASSCommonModule {}

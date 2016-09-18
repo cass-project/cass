@@ -20,7 +20,6 @@ import {CommunityRESTService} from "../../../service/CommunityRESTService";
         ImageCropperService
     ]
 })
-
 export class CommunitySettingsModal
 {
     @Output('close') closeEvent = new EventEmitter<CommunitySettingsModal>();

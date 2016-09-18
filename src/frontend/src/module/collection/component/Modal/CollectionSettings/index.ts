@@ -1,4 +1,5 @@
 import {Component, Input} from "@angular/core";
+
 import {ModalControl} from "../../../../common/classes/ModalControl";
 import {CollectionRESTService} from "../../../service/CollectionRESTService";
 
@@ -14,13 +15,11 @@ export class CollectionSettings
 
     private deleteProcessVisible: boolean = false;
 
-    constructor(private collectionRESTService: CollectionRESTService) {
-    }
+    constructor(private collectionRESTService: CollectionRESTService) {}
 
     avatarDeletingProcess(){
         this.deleteProcessVisible = true;
         this.collectionRESTService.deleteImageCollection(this.collection.id).subscribe(data => {
-            /*this.collection.image = TODO: set default image*/
             this.deleteProcessVisible = false;
         });
     }
