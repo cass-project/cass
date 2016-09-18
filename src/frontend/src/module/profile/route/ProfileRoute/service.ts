@@ -1,11 +1,12 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
+
 import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
 import {ProfileRESTService} from "../../service/ProfileRESTService";
 import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
 import {ProfileCachedIdentityMap} from "../../service/ProfileCachedIdentityMap";
-import {ProfileModals} from "../../modals";
 import {Session} from "../../../session/Session";
+import {ProfileModals} from "../../component/Elements/Profile/modals";
 
 @Injectable()
 export class  ProfileRouteService

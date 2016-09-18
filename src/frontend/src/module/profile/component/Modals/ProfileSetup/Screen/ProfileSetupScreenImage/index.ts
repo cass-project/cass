@@ -31,7 +31,7 @@ export class ProfileSetupScreenImage
         private profileRESTService: ProfileRESTService,
         private authToken: AuthToken
     ) {
-        uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(model.getProfile(), authToken.getAPIKey()));
+        uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(model.getProfile(), profileRESTService));
     }
 
     next() {
@@ -54,7 +54,7 @@ export class ProfileSetupScreenImage
         this.isDeleting = true;
         
         this.profileRESTService
-            .deleteAvatar(this.model.getProfile().id)
+            .imageDelete(this.model.getProfile().id)
             .subscribe(
                 (response: DeleteProfileImageResponse200) => {
                     this.isDeleting = false;

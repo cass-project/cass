@@ -1,5 +1,6 @@
 import {Component, OnInit, OnDestroy} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
+
 import {Subscription} from "rxjs/Subscription";
 import {ProfileRouteService} from "./service";
 import {AuthService} from "../../../auth/service/AuthService";
@@ -60,30 +61,4 @@ export class ProfileRoute implements OnInit, OnDestroy
     ngOnDestroy(){
         this.sub.unsubscribe();
     }
-        
-    
-    
-    /*let id = params.get('id');
-
-        if (authService.isSignedIn() && (id === 'current' || id === this.session.getCurrentProfile().getId().toString())) {
-                service.loadCurrentProfile();
-        } else if (Number(id)) {
-            service.loadProfileById(Number(id));
-        } else {
-            router.navigate(['/Profile/NotFound']);
-            return;
-        }
-
-        if (service.getObservable() !== undefined) {
-            service.getObservable().subscribe(
-                (response) => {
-                },
-                (error) => {
-                    router.navigate(['/Profile/NotFound']);
-                }
-            )
-        } else {
-            router.navigate(['/Public']);
-        }
-    }*/
 }

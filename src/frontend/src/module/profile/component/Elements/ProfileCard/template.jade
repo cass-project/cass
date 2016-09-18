@@ -19,5 +19,5 @@ article.component.component-profile-card((click)='goProfile()')
             a(href="javascript.void(0)")
               span {{ theme.title }}
       .profile-open-chat(*ngIf="!isOwn")
-        button.form-button.form-button-primary((click)="goChat()")
+        button.form-button.form-button-primary()
           | Отправить сообщение

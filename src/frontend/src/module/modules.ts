@@ -14,6 +14,7 @@ import {CASSOpenGraphModule} from "./opengraph/module";
 import {CASSPostModule} from "./post/module";
 import {CASSFeedModule} from "./feed/module";
 import {CASSPublicComponent} from "./public/module";
+import {CASSProfileModule} from "./profile/module";
 
 export const CASS_MODULES = [
     CASSAccountModule,
@@ -32,4 +33,5 @@ export const CASS_MODULES = [
     CASSPostModule,
     CASSFeedModule,
     CASSPublicComponent,
+    CASSProfileModule,
 ];

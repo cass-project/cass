@@ -32,7 +32,7 @@ export class ImageTab
     ) {
         uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(
             session.getCurrentProfile().entity.profile,
-            authToken.getAPIKey()
+            this.profileRESTService
         ));
     }
 
@@ -46,7 +46,7 @@ export class ImageTab
         this.deleteProcessVisible = true;
         let profileId = this.session.getCurrentProfile().entity.profile.id;
         
-        this.profileRESTService.deleteAvatar(profileId).subscribe(response => {
+        this.profileRESTService.imageDelete(profileId).subscribe(response => {
             this.session.getCurrentProfile().entity.profile.image = response.image;
             this.deleteProcessVisible = false;
         });
