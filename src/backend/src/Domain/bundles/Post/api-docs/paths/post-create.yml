@@ -17,7 +17,6 @@
       403:
         $ref: '#/responses/Unauthorized'
       404:
-        description: Профиль/коллекция не найдены
         $ref: '#/responses/NotFound'
       200:
         description: 200 OK

@@ -23,7 +23,6 @@
               type: boolean
               default: true
       404:
-        description: Профиль не найден
         $ref: '#/responses/NotFound'
       403:
         $ref: '#/responses/Unauthorized'

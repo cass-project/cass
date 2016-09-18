@@ -20,10 +20,8 @@
       200:
         $ref: '#/responses/success'
       404:
-        description: Профиль не найден
         $ref: '#/responses/NotFound'
       403:
         $ref: '#/responses/Unauthorized'
       409:
-        description: Переданная дата не является валидной
         $ref: '#/responses/error'

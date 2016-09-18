@@ -21,5 +21,4 @@ Account_Entity_AppAccess:
           type: boolean
           description: Доступ к CASS.Reports
     account:
-      type: object
       $ref: '#/definitions/Account_Entity_Account'

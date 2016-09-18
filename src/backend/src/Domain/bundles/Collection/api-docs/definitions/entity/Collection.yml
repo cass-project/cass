@@ -75,5 +75,4 @@ Collection_Entity_Collection:
     children:
       type: array
       items:
-        type: object
         $ref: '#/definitions/Collection_Entity_Collection'

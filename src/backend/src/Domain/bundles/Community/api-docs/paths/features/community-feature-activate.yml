@@ -23,7 +23,6 @@
       404:
         $ref: '#/responses/NotFound'
       409:
-        description: Данная фича уже активирована
         $ref: '#/responses/error'
       200:
         $ref: '#/responses/success'

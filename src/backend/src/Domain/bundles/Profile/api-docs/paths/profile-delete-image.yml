@@ -24,10 +24,8 @@
               type: boolean
               description: '=true'
             image:
-              type: object
               $ref: '#/definitions/Avatar_ImageCollection'
       403:
         $ref: '#/responses/Unauthorized'
       404:
-        description: Profile not found
         $ref: '#/responses/NotFound'

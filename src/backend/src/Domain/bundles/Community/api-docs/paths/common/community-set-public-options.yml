@@ -24,7 +24,6 @@
       404:
         $ref: '#/responses/NotFound'
       409:
-        description: Коммунити не имеет тематики
         $ref: '#/responses/error'
       200:
         $ref: '#/responses/success'

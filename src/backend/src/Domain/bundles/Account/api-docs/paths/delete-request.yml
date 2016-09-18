@@ -10,7 +10,6 @@
       403:
         $ref: '#/responses/Unauthorized'
       409:
-        description: Аккаунт уже имеет запрос на удаление
         $ref: '#/responses/error'
       200:
         description: 200 OK

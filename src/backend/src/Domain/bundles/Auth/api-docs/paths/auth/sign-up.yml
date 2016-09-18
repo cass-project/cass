@@ -19,6 +19,4 @@
       404:
         $ref: '#/responses/NotFound'
       409:
-        description: |
-          Аккаунт с таким e-mail уже существует
         $ref: '#/responses/error'

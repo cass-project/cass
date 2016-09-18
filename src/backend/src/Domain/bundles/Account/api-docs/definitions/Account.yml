@@ -17,7 +17,6 @@ Account_Entity_Account:
     profiles:
       type: array
       items:
-        type: object
         $ref: '#/definitions/Profile_Entity_Profile'
     disabled:
       type: object

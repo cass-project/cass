@@ -7,14 +7,8 @@ Colors_Entity_Palette:
     - border
   properties:
     background:
-      type: object
-      description: Цвет 1, Background (depth 500)
       $ref: '#/definitions/Colors_Entity_Color'
     foreground:
-      type: object
-      description: Цвет 2, Foreground (depth 50)
       $ref: '#/definitions/Colors_Entity_Color'
     border:
-      type: object
-      description: Цвет 3, Border (depth 900)
       $ref: '#/definitions/Colors_Entity_Color'

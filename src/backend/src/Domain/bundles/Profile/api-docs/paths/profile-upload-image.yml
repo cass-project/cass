@@ -53,5 +53,4 @@
       403:
         $ref: '#/responses/Unauthorized'
       404:
-        description: Profile not found
         $ref: '#/responses/NotFound'

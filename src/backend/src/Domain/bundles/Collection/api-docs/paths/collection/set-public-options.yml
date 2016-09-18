@@ -19,13 +19,10 @@
           $ref: '#/definitions/Collection_Request_SetPublicOptionsRequest'
     responses:
       200:
-        description: 200 OK
         $ref: '#/responses/success'
       403:
         $ref: '#/responses/Unauthorized'
       404:
         $ref: '#/responses/NotFound'
       409:
-        description: |
-          Невалидный набор опций
         $ref: '#/responses/error'

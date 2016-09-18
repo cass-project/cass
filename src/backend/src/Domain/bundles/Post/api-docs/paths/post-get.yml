@@ -14,7 +14,6 @@
         description: ID поста
     responses:
       404:
-        description: Пост не найден
         $ref: '#/responses/NotFound'
       200:
         description: 200 OK
