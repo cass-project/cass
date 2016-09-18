@@ -1,72 +1,48 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
-import {AbstractRESTService} from "../../common/service/AbstractRESTService";
-import {MessageBusService} from "../../message/service/MessageBusService/index";
-import {AuthToken} from "../../auth/service/AuthToken";
 import {Observable} from "rxjs/Observable";
+
 import {FeedRequest} from "../definitions/request/FeedRequest";
 import {FeedResponse} from "./FeedService/source";
+import {RESTService} from "../../common/service/RESTService";
 
 @Injectable()
-export class FeedRESTService extends AbstractRESTService
+export class FeedRESTService
 {
-    constructor(
-        protected http: Http,
-        protected token: AuthToken,
-        protected messages: MessageBusService
-    ) { super(http, token, messages); }
+    constructor(private rest: RESTService) {}
 
     getProfileFeed(profileId: number, request: FeedRequest): Observable<FeedResponse> {
-        let url = `/backend/api/feed/get/profile/${profileId}`;
-
-        return this.handle(this.http.post(url, JSON.stringify(request)));
+        return this.rest.post(`/backend/api/feed/get/profile/${profileId}`, request);
     }
 
     getCommunityFeed(communityId: number, request: FeedRequest): Observable<FeedResponse> {
-        let url = `/backend/api/feed/get/community/${communityId}`;
-
-        return this.handle(this.http.post(url, JSON.stringify(request)));
+        return this.rest.post(`/backend/api/feed/get/community/${communityId}`, request);
     }
 
     getCollectionFeed(collectionId: number, request: FeedRequest): Observable<FeedResponse> {
-        let url = `/backend/api/feed/get/collection/${collectionId}`;
-
-        return this.handle(this.http.post(url, JSON.stringify(request)));
+        return this.rest.post(`/backend/api/feed/get/collection/${collectionId}`, request);
     }
 
     getPublicCollectionsFeed(request: FeedRequest): Observable<FeedResponse> {
-        let url = `/backend/api/feed/get/public-collections/`;
-
-        return this.handle(this.http.post(url, JSON.stringify(request)));
+        return this.rest.post(`/backend/api/feed/get/public-collections/`, request);
     }
 
     getPublicCommunitiesFeed(request: FeedRequest): Observable<FeedResponse> {
-        let url = `/backend/api/feed/get/public-communities/`;
-
-        return this.handle(this.http.post(url, JSON.stringify(request)));
+        return this.rest.post(`/backend/api/feed/get/public-communities/`, request);
     }
 
     getPublicContentFeed(request: FeedRequest): Observable<FeedResponse> {
-        let url = `/backend/api/feed/get/public-content/`;
-
-        return this.handle(this.http.post(url, JSON.stringify(request)));
+        return this.rest.post(`/backend/api/feed/get/public-content/`, request);
     }
 
     getPublicDiscussionsFeed(request: FeedRequest): Observable<FeedResponse> {
-        let url = `/backend/api/feed/get/public-discussions/`;
-
-        return this.handle(this.http.post(url, JSON.stringify(request)));
+        return this.rest.post(`/backend/api/feed/get/public-discussions/`, request);
     }
 
     getPublicExpertsFeed(request: FeedRequest): Observable<FeedResponse> {
-        let url = `/backend/api/feed/get/public-experts/`;
-
-        return this.handle(this.http.post(url, JSON.stringify(request)));
+        return this.rest.post(`/backend/api/feed/get/public-experts/`, request);
     }
 
     getPublicProfilesFeed(request: FeedRequest): Observable<FeedResponse> {
-        let url = `/backend/api/feed/get/public-profiles/`;
-
-        return this.handle(this.http.post(url, JSON.stringify(request)));
+        return this.rest.post(`/backend/api/feed/get/public-profiles/`, request);
     }
 }

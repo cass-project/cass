@@ -5,11 +5,12 @@ import {FeedOptionsService} from "../../../service/FeedOptionsService";
 import {AppService} from "../../../../../app/frontend-app/service";
 
 @Component({
+    selector: 'cass-feed-collection-stream',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-feed-collection-stream'})
-
+    ]
+})
 export class FeedCollectionStream
 {
     constructor(

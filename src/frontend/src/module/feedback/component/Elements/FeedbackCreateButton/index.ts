@@ -1,4 +1,5 @@
 import {Component, Output, EventEmitter, Directive} from "@angular/core";
+
 import {FeedbackTypeEntity} from "../../../definitions/entity/FeedbackType";
 import {FeedbackTypesService} from "../../../service/FeedbackTypesService";
 

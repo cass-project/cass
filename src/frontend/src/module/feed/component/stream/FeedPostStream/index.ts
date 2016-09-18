@@ -5,11 +5,12 @@ import {PostIndexedEntity} from "../../../../post/definitions/entity/Post";
 import {AppService} from "../../../../../app/frontend-app/service";
 
 @Component({
+    selector: 'cass-feed-post-stream',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-feed-post-stream'})
-
+    ]
+})
 export class FeedPostStream
 {
     constructor(

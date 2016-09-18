@@ -15,8 +15,7 @@ export class AppService {
             this.scrollObserver = observer;
         })
     }
-    
-    
+
     onScroll($event){
         if(this.content && this.scrollObserver) {
             this.scrollObserver.next({

@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Criteria} from "../definitions/request/Criteria";
+
 import {SeekCriteriaParams} from "../definitions/request/criteria/SeekCriteriaParams";
 import {SortCriteriaParams} from "../definitions/request/criteria/SortCriteriaParams";
 import {ThemeIdCriteriaParams} from "../definitions/request/criteria/ThemeIdCriteriaParams";

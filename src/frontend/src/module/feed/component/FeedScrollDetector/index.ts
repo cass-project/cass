@@ -1,19 +1,22 @@
 import {Component, ViewChild, ElementRef} from "@angular/core";
+
 import {AppService} from "../../../../app/frontend-app/service";
 import {FeedService} from "../../service/FeedService/index";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 
 @Component({
+    selector: 'cass-feed-scroll-detector',
     template: require('./template.jade')
-,selector: 'cass-feed-scroll-detector'})
+})
 
 export class FeedScrollDetector
 {
-    constructor(private appService: AppService,
-                private feed: FeedService<PostEntity>){}
-
-
     @ViewChild('feedUpdateButton') feedUpdateButton: ElementRef;
+
+    constructor(
+        private appService: AppService,
+        private feed: FeedService<PostEntity>
+    ) {}
 
     ngOnInit(){
         this.appService.scrollObservable.subscribe((scrollEvent) => {
@@ -22,7 +25,6 @@ export class FeedScrollDetector
             }
         })
     }
-
 
     detectElem(html) {
         if(this.feed.shouldLoad){

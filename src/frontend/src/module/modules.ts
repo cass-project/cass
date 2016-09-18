@@ -10,6 +10,7 @@ import {CASSFrontlineModule} from "./frontline/module";
 import {CASSSessionModule} from "./session/module";
 import {CASSAuthModule} from "./auth/module";
 import {CASSThemeModule} from "./theme/module";
+import {CASSOpenGraphModule} from "./opengraph/module";
 
 export const CASS_MODULES = [
     CASSAccountModule,
@@ -24,4 +25,5 @@ export const CASS_MODULES = [
     CASSFrontlineModule,
     CASSSessionModule,
     CASSThemeModule,
+    CASSOpenGraphModule,
 ];

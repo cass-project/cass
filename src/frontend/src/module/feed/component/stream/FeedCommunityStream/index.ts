@@ -5,11 +5,12 @@ import {CommunityIndexedEntity} from "../../../../community/definitions/entity/C
 import {AppService} from "../../../../../app/frontend-app/service";
 
 @Component({
+    selector: 'cass-feed-community-stream',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-feed-community-stream'})
-
+    ]
+})
 export class FeedCommunityStream
 {
     constructor(
