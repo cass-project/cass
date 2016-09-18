@@ -1,0 +1,19 @@
+.color-picker
+  ul.palette-list
+    // Отсутствует выбор цвета
+    li.palette
+      button.palette-button.palette-button-none(type='button')
+        i.fa.fa-ban
+    // Отсутствует выбор цвета - active
+    li.palette
+      button.palette-button.palette-button-none.palette-button-none-active(type='button')
+        i.fa.fa-ban
+    // Список цветов
+    li.palette(*ngFor='let palette of palettes')
+      button.palette-button(
+        type='button',
+        [ngClass]="{'palette-button-inactive': palette !== value}",
+        [style.background-color]='palette.background.hexCode',
+        [style.border-color]='palette.border.hexCode',
+        (click)='select(palette)'
+      )

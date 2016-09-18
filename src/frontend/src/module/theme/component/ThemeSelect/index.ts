@@ -1,17 +1,18 @@
 import {Component, Input, ViewChild, ElementRef, Injectable} from "@angular/core";
+
 import {ThemeService} from "../../service/ThemeService";
 import {Theme} from "../../definitions/entity/Theme";
 
-
 @Component({
+    selector: 'cass-theme-select',
     template: require('./template.html'),
     providers: [
         ThemeService
     ],
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-theme-select'})
-
+    ]
+})
 @Injectable()
 export class ThemeSelect
 {
@@ -27,7 +28,6 @@ export class ThemeSelect
     constructor(private service: ThemeService) {
         this.browser.scrolling = this.scrolling;
     }
-    
 
     isMultiple(): boolean {
         return this.multiple === "1" || this.multiple === "true";

@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+
 import {Theme} from "../definitions/entity/Theme";
 import {FrontlineService} from "../../frontline/service/FrontlineService";
 
@@ -9,8 +10,7 @@ export class ThemeService
     themes: Theme[];
     themesMap = {};
 
-    
-    constructor(public frontlineService: FrontlineService) {
+    constructor(private frontlineService: FrontlineService) {
         this.themes = frontlineService.session.themes;
 
         var convertTreeToMap = (themes: Array<Theme>) => {

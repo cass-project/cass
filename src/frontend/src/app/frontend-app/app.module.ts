@@ -27,9 +27,6 @@ import {ProfileCardsList} from "../../module/profile/component/Elements/ProfileC
 import {PostForm} from "../../module/post/component/Forms/PostForm/index";
 import {CollectionsList} from "../../module/collection/component/Elements/CollectionsList/index";
 import {ProfileComponent} from "../../module/profile/index";
-import {ModalComponent} from "../../module/modal/component/index";
-import {ModalBoxComponent} from "../../module/modal/component/box/index";
-import {LoadingLinearIndicator} from "../../module/form/component/LoadingLinearIndicator/index";
 import {ProfileSetupScreenGreetings} from "../../module/profile/component/Modals/ProfileSetup/Screen/ProfileSetupScreenGreetings/index";
 import {ProfileSetupScreenGender} from "../../module/profile/component/Modals/ProfileSetup/Screen/ProfileSetupScreenGender/index";
 import {ProfileSetupScreenImage} from "../../module/profile/component/Modals/ProfileSetup/Screen/ProfileSetupScreenImage/index";
@@ -41,7 +38,6 @@ import {ProfileSwitcher} from "../../module/profile/component/Modals/ProfileSwit
 import {ProfileInterestsModal} from "../../module/profile/component/Modals/ProfileInterests/index";
 import {ProfileSetup} from "../../module/profile/component/Modals/ProfileSetup/index";
 import {CollectionCreateMaster} from "../../module/collection/component/Modal/CollectionCreateMaster/index";
-import {UploadImageModal} from "../../module/form/component/UploadImage/index";
 import {AccountTab} from "../../module/profile/component/Modals/ProfileModal/Tab/Account/index";
 import {PersonalTab} from "../../module/profile/component/Modals/ProfileModal/Tab/Personal/index";
 import {ImageTab} from "../../module/profile/component/Modals/ProfileModal/Tab/Image/index";

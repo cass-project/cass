@@ -3,7 +3,7 @@ import {ModalControl} from "../../../../../../common/classes/ModalControl";
 import {UploadProfileImageStrategy} from "../../../../../common/UploadProfileImageStrategy";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {AuthService} from "../../../../../../auth/service/AuthService";
-import {UploadImageService} from "../../../../../../form/component/UploadImage/service";
+import {UploadImageService} from "../../../../../../common/component/UploadImage/service";
 import {AuthToken} from "../../../../../../auth/service/AuthToken";
 import {Session} from "../../../../../../session/Session";
 

@@ -8,7 +8,7 @@ import {AuthModalsService} from "../Auth/modals";
     template: require('./template.jade')
 })
 
-export class AuthDev
+export class SignInByAPIKeyComponent
 {
     constructor(
         private auth: AuthService, renderer: Renderer,

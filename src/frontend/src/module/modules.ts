@@ -9,6 +9,7 @@ import {CASSSidebarModule} from "./sidebar/module";
 import {CASSFrontlineModule} from "./frontline/module";
 import {CASSSessionModule} from "./session/module";
 import {CASSAuthModule} from "./auth/module";
+import {CASSThemeModule} from "./theme/module";
 
 export const CASS_MODULES = [
     CASSAccountModule,
@@ -22,4 +23,5 @@ export const CASS_MODULES = [
     CASSSidebarModule,
     CASSFrontlineModule,
     CASSSessionModule,
+    CASSThemeModule,
 ];

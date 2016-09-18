@@ -1,86 +1,58 @@
 import {Injectable} from "@angular/core";
-import {Http, Headers} from "@angular/http";
-import {AbstractRESTService} from "../../common/service/AbstractRESTService";
-import {MessageBusService} from "../../message/service/MessageBusService/index";
-import {AuthToken} from "../../auth/service/AuthToken";
+
+import {RESTService} from "../../common/service/RESTService";
+import {Observable} from "rxjs/Rx";
+import {ListTreeResponse200} from "../definitions/paths/list-tree";
+import {ListAllThemesResponse200} from "../definitions/paths/list-all";
+import {GetThemeResponse200} from "../definitions/paths/get";
+import {UpdateThemeRequest, UpdateThemeResponse200} from "../definitions/paths/update";
+import {MoveThemeRequest, MoveThemeResponse200} from "../definitions/paths/move";
+import {CreateThemeRequest, CreateThemeResponse200} from "../definitions/paths/create";
+import {DeleteThemeResponse200} from "../definitions/paths/delete";
+
+export interface ThemeRESTServiceInterface
+{
+    getThemeTree(): Observable<ListTreeResponse200>;
+    getThemeList(): Observable<ListAllThemesResponse200>;
+    getTheme(themeId:number): Observable<GetThemeResponse200>;
+    updateTheme(themeId:number, request: UpdateThemeRequest): Observable<UpdateThemeResponse200>;
+    moveTheme(themeId:number, request: MoveThemeRequest): Observable<MoveThemeResponse200>;
+    createTheme(request: CreateThemeRequest): Observable<CreateThemeResponse200>;
+    deleteTheme(themeId:number): Observable<DeleteThemeResponse200>;
+}
 
 @Injectable()
-export class ThemeRESTService extends AbstractRESTService
+export class ThemeRESTService implements ThemeRESTServiceInterface
 {
-    constructor(protected http:Http,
-                protected token:AuthToken,
-                protected messages:MessageBusService) {
-        super(http, token, messages);
+    constructor(
+        private rest: RESTService
+    ) {}
+
+    getThemeTree(): Observable<ListTreeResponse200> {
+        return this.rest.get(`/backend/api/theme/get/tree`);
     }
 
-    getThemeTree() {
-        let authHeader = new Headers();
-        if(this.token.isAvailable()){
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-
-        return this.handle(this.http.get(`/backend/api/theme/get/tree`, {headers: authHeader}));
+    getThemeList(): Observable<ListAllThemesResponse200> {
+        return this.rest.get(`/backend/api/theme/get/list-all`);
     }
 
-    getThemeList() {
-        let authHeader = new Headers();
-        if(this.token.isAvailable()){
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-
-        return this.handle(this.http.get(`/backend/api/theme/get/list-all`, {headers: authHeader}));
+    getTheme(themeId:number): Observable<GetThemeResponse200> {
+        return this.rest.get(`/backend/api/theme/${themeId}/get`);
     }
 
-    getTheme(themeId:number) {
-        let authHeader = new Headers();
-        if(this.token.isAvailable()){
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-
-        return this.handle(this.http.get(`/backend/api/theme/${themeId}/get`, {headers: authHeader}));
+    updateTheme(themeId:number, request: UpdateThemeRequest): Observable<UpdateThemeResponse200> {
+        return this.rest.post(`/backend/apiPOST /protected/theme/${themeId}/update`, request);
     }
 
-    updateTheme(themeId:number, title:string, description:string) {
-        let authHeader = new Headers();
-        if(this.token.isAvailable()){
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-
-        return this.handle(this.http.post(`/backend/apiPOST /protected/theme/${themeId}/update`, JSON.stringify({
-            title: title,
-            description: description
-        }), {headers: authHeader}))
+    moveTheme(themeId:number, request: MoveThemeRequest): Observable<MoveThemeResponse200> {
+        return this.rest.post(`/backend/api/protected/theme/${themeId}/move/under/${request.parent_theme_id}/in-position/${request.position}`, {});
     }
 
-    moveTheme(themeId:number, parentThemeId:number, position:number) {
-        let authHeader = new Headers();
-        if(this.token.isAvailable()){
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-
-        return this.handle(this.http.post(`/backend/api/protected/theme/${themeId}/move/under/${parentThemeId}/in-position/${position}`, '', {headers: authHeader}))
+    createTheme(request: CreateThemeRequest): Observable<CreateThemeResponse200> {
+        return this.rest.put(`/backend/api/protected/theme/create`, request);
     }
 
-    createTheme(parent_id:number, title:string, description:string) {
-        let authHeader = new Headers();
-        if(this.token.isAvailable()){
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-
-        return this.handle(this.http.put(`/backend/api/protected/theme/create`, JSON.stringify({
-            parent_id: parent_id,
-            title: title,
-            description: description
-        }), {headers: authHeader}));
+    deleteTheme(themeId:number): Observable<DeleteThemeResponse200> {
+        return this.rest.delete(`/backend/api/protected/theme/${themeId}/delete`);
     }
-
-    deleteTheme(themeId:number) {
-        let authHeader = new Headers();
-        if(this.token.isAvailable()){
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-
-        return this.handle(this.http.delete(`/backend/api/protected/theme/${themeId}/delete`, {headers: authHeader}));
-    }
-
 }

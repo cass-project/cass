@@ -4,7 +4,7 @@ import {Observable} from "rxjs/Rx";
 import {ScreenControls} from "../../../../common/classes/ScreenControls";
 import {CommunityFeaturesService} from "../../../service/CommunityFeaturesService";
 import {CommunitySettingsModalModel} from "./model";
-import {ImageCropperService} from "../../../../form/component/ImageCropper/index";
+import {ImageCropperService} from "../../../../common/component/ImageCropper/index";
 import {CommunityFeaturesModel} from "../CommunityCreateModal/model";
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
 

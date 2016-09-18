@@ -1,5 +1,5 @@
-import {UploadImageStrategy, UploadImageCropModel} from "../../form/component/UploadImage/strategy";
-import {UploadImageModal} from "../../form/component/UploadImage/index";
+import {UploadImageStrategy, UploadImageCropModel} from "../../common/component/UploadImage/strategy";
+import {UploadImageModal} from "../../common/component/UploadImage/index";
 import {ProfileEntity} from "../definitions/entity/Profile";
 import {UploadProfileImageResponse200} from "../definitions/paths/image-upload";
 
