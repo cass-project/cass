@@ -1,23 +1,27 @@
 import {Profile, ProfileExtendedEntity} from "../../../profile/definitions/entity/Profile";
 
-export interface AccountEntity {
+export interface AccountEntity
+{
     id: string;
     email: string;
     disabled: AccountDisabledEntity,
     delete_request: AccountDeleteRequestEntity;
 }
 
-export interface AccountDeleteRequestEntity {
+export interface AccountDeleteRequestEntity
+{
     has: boolean;
     date: string;
 }
 
-export interface AccountDisabledEntity {
+export interface AccountDisabledEntity
+{
     is_disabled: boolean;
     reason: string
 }
 
-export class Account {
+export class Account
+{
     public profiles: AccountProfiles;
 
     constructor(public entity: AccountEntity, profiles: Array<ProfileExtendedEntity>) {
@@ -32,7 +36,8 @@ export class Account {
     }
 }
 
-export class AccountProfiles {
+export class AccountProfiles
+{
     constructor(public profiles: Array<Profile>) {}
 
     getCurrent(): Profile {

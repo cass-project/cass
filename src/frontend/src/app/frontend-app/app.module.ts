@@ -96,8 +96,6 @@ import {SignInComponent} from "../../module/auth/component/SignIn/index";
 import {SignUpComponent} from "../../module/auth/component/SignUp/index";
 import {AuthDev} from "../../module/auth-dev/component/index";
 import {OAuth2Component} from "../../module/auth/component/OAuth2/index";
-import {AccountDeleteWarning} from "../../module/account/component/AccountDeleteWarning/index";
-import {AccountComponent} from "../../module/account/index";
 import {ProfileRoute} from "../../module/profile/route/ProfileRoute/index";
 import {CommunityRoute} from "../../module/community/route/CommunityRoute/index";
 import {PublicComponent} from "../../module/public/index";
@@ -146,6 +144,7 @@ import {PublicService} from "../../module/public/service";
 import {FeedService} from "../../module/feed/service/FeedService/index";
 import {PublicProfilesSource} from "../../module/feed/service/FeedService/source/public/PublicProfilesSource";
 import {AppService} from "./service";
+import {CASS_MODULES} from "./../../module/modules.ts";
 
 @Injectable()
 export class NoSanitizationService {
@@ -252,8 +251,6 @@ export class NoSanitizationService {
         SidebarComponent,
         AuthDev,
         OAuth2Component,
-        AccountDeleteWarning,
-        AccountComponent,
         ProfileRoute,
         CommunityRoute,
         PublicComponent,
@@ -283,7 +280,8 @@ export class NoSanitizationService {
         routing,
         FormsModule, 
         ReactiveFormsModule,
-        HttpModule
+        HttpModule,
+        CASS_MODULES,
     ],
     providers: [
         AuthService,
