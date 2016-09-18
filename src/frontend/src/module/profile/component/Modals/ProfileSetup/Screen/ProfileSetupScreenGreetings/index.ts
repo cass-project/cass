@@ -1,15 +1,17 @@
 import {Component, Output, EventEmitter} from "@angular/core";
+
 import {ProfileSetupModel} from "../../model";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {EditPersonalResponse200} from "../../../../../definitions/paths/edit-personal";
 import {Session} from "../../../../../../session/Session";
 
 @Component({
+    selector: 'cass-profile-setup-screen-greetings',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-profile-setup-screen-greetings'})
-
+    ]
+})
 export class ProfileSetupScreenGreetings
 {
     private saving: boolean = false;

@@ -8,14 +8,15 @@ import {DeleteProfileImageResponse200} from "../../../../../definitions/paths/im
 import {AuthToken} from "../../../../../../auth/service/AuthToken";
 
 @Component({
+    selector: 'cass-profile-setup-screen-image',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
     providers: [
         UploadImageService,
-    ],selector: 'cass-profile-setup-screen-image'})
-
+    ]
+})
 @Injectable()
 export class ProfileSetupScreenImage
 {
@@ -28,8 +29,7 @@ export class ProfileSetupScreenImage
     constructor(
         private model: ProfileSetupModel,
         private uploadImageService: UploadImageService, 
-        private profileRESTService: ProfileRESTService,
-        private authToken: AuthToken
+        private profileRESTService: ProfileRESTService
     ) {
         uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(model.getProfile(), profileRESTService));
     }

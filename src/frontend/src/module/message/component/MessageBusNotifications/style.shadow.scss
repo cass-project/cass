@@ -1,0 +1,82 @@
+@import "./../../../../styles/globals";
+
+@keyframes showing {
+    from {
+      opacity: 0;
+      transform:scale(0);
+    }
+    to {
+      opacity: 1;
+      transform:scale(1);
+    }
+}
+
+@keyframes hidding {
+  from {
+    opacity: 1;
+    transform: scale(1);
+    visibility:  visible;
+  }
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+.container-notifications {
+  text-align: center;
+  position: fixed;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  z-index: 999999;
+
+  .notifications {
+    width: 100%;
+
+    li {
+      display: block;
+    }
+  }
+
+  .message {
+    @include card(3);
+
+    animation: showing 300ms;
+    display: inline-block;
+    padding: 10px 30px;
+    margin: 10px;
+    font-size: 16px;
+    font-weight: 500;
+
+    &.hidding{
+      animation: hidding 300ms;
+      visibility:  hidden;
+    }
+
+    &.critical {
+      color: material-color('red', '50');
+      background: material-color('red', '900');
+    }
+
+    &.warning {
+      color: material-color('amber', '900');
+      background: material-color('amber', '50');
+    }
+
+    &.info {
+      color: material-color('blue-grey', '900');
+      background: material-color('blue-grey', '50');
+    }
+
+    &.debug {
+      color: material-color('grey', '900');
+      background: material-color('grey', '50');
+    }
+    
+    &.success {
+      color: material-color('light-green', '900');
+      background: material-color('light-green', '50');
+    }
+  }
+}

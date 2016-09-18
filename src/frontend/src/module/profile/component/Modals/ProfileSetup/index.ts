@@ -1,10 +1,11 @@
 import {Component, Input, EventEmitter, Output} from "@angular/core";
 import {Router} from "@angular/router";
+import {Observable} from "rxjs/Observable";
+
 import {ProfileSetupModel} from "./model";
 import {ScreenControls} from "../../../../common/classes/ScreenControls";
 import {ProfileRESTService} from "../../../service/ProfileRESTService";
 import {ProfileEntity} from "../../../definitions/entity/Profile";
-import {Observable} from "rxjs/Observable";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
 import {ProfileRouteService} from "../../../route/ProfileRoute/service";
@@ -21,20 +22,18 @@ enum ProfileSetupScreen {
 }
 
 @Component({
+    selector: 'cass-profile-setup',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
     ],
     providers: [
-        ProfileSetupModel,
-        ProfileRESTService,
-        ProfileRouteService
-    ],selector: 'cass-profile-setup'})
-
+        ProfileSetupModel
+    ]
+})
 export class ProfileSetup
 {
     @Input('profile') profile: ProfileEntity;
-
     @Output('success') successEvent = new EventEmitter<ProfileEntity>();
 
     public screens: ScreenControls<ProfileSetupScreen> = new ScreenControls<ProfileSetupScreen>(ProfileSetupScreen.Welcome, (sc: ScreenControls<ProfileSetupScreen>) => {

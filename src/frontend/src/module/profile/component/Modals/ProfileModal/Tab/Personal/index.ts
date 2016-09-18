@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
-import {ProfileModalModel} from "../../model";
 
+import {ProfileModalModel} from "../../model";
 
 @Component({
     template: require('./template.html'),
@@ -12,20 +12,19 @@ export class PersonalTab
 {
     constructor(private model: ProfileModalModel){}
 
-
-    getActiveSex(value){
+    isGender(value) {
         return (value === this.model.profile.gender.string)
     }
 
-    chooseGender(value){
+    selectGender(value){
         this.model.profile.gender.string = value;
     }
 
-    getActiveGreetings(value){
+    isGreetings(value){
         return (value === this.model.profile.greetings.method);
     }
 
-    chooseGreetings(greetMethod){
+    selectGreetings(greetMethod){
         this.model.profile.greetings.method = greetMethod;
     }
 }

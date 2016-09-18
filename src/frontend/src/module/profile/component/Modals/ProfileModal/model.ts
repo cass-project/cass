@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
+import {Observable} from "rxjs/Observable";
+
 import {ProfileRESTService} from "../../../service/ProfileRESTService";
 import {AccountRESTService} from "../../../../account/service/AccountRESTService";
-import {AuthToken} from "../../../../auth/service/AuthToken";
+import {Session} from "../../../../session/Session";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
-import {Observable} from "rxjs/Observable";
-import {Session} from "../../../../session/Session";
 
 @Injectable()
 export class ProfileModalModel
@@ -14,10 +14,10 @@ export class ProfileModalModel
                 private accountRESTService: AccountRESTService,
                 private session: Session,
                 protected messages: MessageBusService,
-                protected authToken: AuthToken){}
+    ) {}
 
-    profile = JSON.parse(JSON.stringify(this.session.getCurrentProfile().entity.profile));
-    account = JSON.parse(JSON.stringify(this.session.getCurrentAccount().entity));
+    public profile = JSON.parse(JSON.stringify(this.session.getCurrentProfile().entity.profile));
+    public account = JSON.parse(JSON.stringify(this.session.getCurrentAccount().entity));
 
     loading: boolean = false;
 
@@ -45,7 +45,12 @@ export class ProfileModalModel
     }
 
     canSave(){
-        return (this.checkAccountChanges() || this.checkExpertListChanges() || this.checkInterestListChanges() || this.checkPersonalChanges());
+        return (
+            this.checkAccountChanges() ||
+            this.checkExpertListChanges() ||
+            this.checkInterestListChanges() ||
+            this.checkPersonalChanges()
+        );
     }
 
     performSaveChanges(){

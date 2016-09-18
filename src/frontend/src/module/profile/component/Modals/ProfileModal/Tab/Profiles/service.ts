@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
+
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {AuthService} from "../../../../../../auth/service/AuthService";
 import {Session} from "../../../../../../session/Session";
-
 
 @Injectable()
 export class ProfilesTabService
@@ -22,11 +22,11 @@ export class ProfilesTabService
 
     buttonActivate: boolean = false;
 
-    getActiveCreateNewProfileButton(): boolean{
+    getActiveCreateNewProfileButton(): boolean {
         return this.createNewProfileButton;
     }
 
-    switchProfile(profileId){
+    switchProfile(profileId) {
         this.buttonActivate = true;
         this.profileRESTService.switchProfile(profileId).subscribe(data => {
             window.location.reload();
@@ -40,7 +40,7 @@ export class ProfilesTabService
         });
     }
 
-    requestDeleteProfile(profileId){
+    requestDeleteProfile(profileId) {
         this.buttonActivate = true;
         this.profileRESTService.deleteProfile(profileId).subscribe(data => {
             this.session.getCurrentAccount().profiles.profiles.splice(this.pickedElem, 1);
@@ -50,7 +50,7 @@ export class ProfilesTabService
         });
     }
 
-    getProfile(){
+    getProfile() {
         for(let i = 0; i < this.authService.getCurrentAccount().profiles.profiles.length; i++){
             if(this.pickedId === this.authService.getCurrentAccount().profiles.profiles[i].entity.profile.id){
                 this.pickedElem = i;
@@ -59,15 +59,15 @@ export class ProfilesTabService
         }
     }
     
-    getProfiles(){
+    getProfiles() {
         return this.authService.getCurrentAccount().profiles.profiles;
     }
 
-    closeModalDeleteProfile(){
+    closeModalDeleteProfile() {
         this.modalDeleteActive = false;
     }
 
-    openModalDeleteProfile(profileId){
+    openModalDeleteProfile(profileId) {
         this.modalDeleteActive = true;
         this.pickedId = profileId;
     }

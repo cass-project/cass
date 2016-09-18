@@ -1,14 +1,15 @@
 import {Component} from "@angular/core";
-import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
+
 import {ProfileModalModel} from "../../model";
 import {AccountRESTService} from "../../../../../../account/service/AccountRESTService";
 
 @Component({
+    selector: 'cass-profile-modal-tab-account',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-profile-modal-tab-account'})
-
+    ]
+})
 export class AccountTab
 {
     private requestButtonDisabled: boolean = false;

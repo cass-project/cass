@@ -1,12 +1,14 @@
 import {Component, EventEmitter, Output} from "@angular/core";
+
 import {ProfileSetupModel} from "../../model";
 
 @Component({
+    selector: 'cass-profile-setup-screen-expert-in',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-profile-setup-screen-expert-in'})
-
+    ]
+})
 export class ProfileSetupScreenExpertIn
 {
     @Output('back') backEvent = new EventEmitter<ProfileSetupModel>();
