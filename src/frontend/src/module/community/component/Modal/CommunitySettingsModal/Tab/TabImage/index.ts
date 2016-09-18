@@ -1,4 +1,5 @@
 import {Component, ViewChild} from "@angular/core";
+
 import {CommunitySettingsModalModel} from "../../model";
 import {ImageCropperService} from "../../../../../../form/component/ImageCropper/index";
 import {UploadImageCropModel} from "../../../../../../form/component/UploadImage/strategy";
@@ -6,16 +7,14 @@ import {CommunityRESTService} from "../../../../../service/CommunityRESTService"
 import {CommunityImageDeleteRequest} from "../../../../../definitions/paths/image-delete";
 
 @Component({
+    selector: 'cass-community-settings-modal-tab-image',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-community-settings-modal-tab-image'})
-
-export class CommunityImageTab {
-    @ViewChild('communityImageUploadInput') communityImageUploadInput;
-
-    private loading:boolean = false;
-
+    ]
+})
+export class CommunityImageTab
+{
     constructor(
         public model: CommunitySettingsModalModel,
         public cropper: ImageCropperService,
@@ -24,6 +23,10 @@ export class CommunityImageTab {
     ) {
         this.setImage();
     }
+
+    @ViewChild('communityImageUploadInput') communityImageUploadInput;
+
+    private loading:boolean = false;
 
     setImage() {
         if(this.model.new_image) {
@@ -55,7 +58,7 @@ export class CommunityImageTab {
         this.cropper.reset();
     }
 
-    delete_image() {
+    deleteImage() {
         this.loading = true;
         this.service.imageDelete(<CommunityImageDeleteRequest>{communityId:this.model.id})
             .map(data=>data.json())

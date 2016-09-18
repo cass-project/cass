@@ -1,27 +1,30 @@
 import {Component} from "@angular/core";
+
 import {CommunitySettingsModalModel} from "../../model";
 
 @Component({
+    selector: 'cass-community-settings-modal-tab-general',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-community-settings-modal-tab-general'})
-
-export class GeneralTab {
-
-    private deleteRequest: CommunityDeleteRequestControls = new CommunityDeleteRequestControls();
-    private isCommunitySettingsModalThemeEnabled: boolean;
-    private selectedThemeId:number[] = [];
-
+    ]
+})
+export class GeneralTab
+{
     constructor(public model: CommunitySettingsModalModel) {
         this.isCommunitySettingsModalThemeEnabled = !!model.theme_id;
         if(this.isCommunitySettingsModalThemeEnabled)
             this.selectedThemeId.push(model.theme_id);
     }
 
+    private deleteRequest: CommunityDeleteRequestControls = new CommunityDeleteRequestControls();
+    private isCommunitySettingsModalThemeEnabled: boolean;
+    private selectedThemeId: number[] = [];
+
     communitySettingsModalThemeEnabledChange($event: boolean) {
-        if($event===false) {
+        if($event === false) {
             delete this.model['theme_id'];
+
             this.model.public_options.public_enabled = false;
             this.model.public_options.moderation_contract = false;
         }

@@ -1,4 +1,4 @@
-div
+div.community-component
   div(*ngIf="service.modals.route.isOpened()")
     cass-community-route-modal(
       (close)="service.modals.route.close()",
@@ -11,6 +11,3 @@ div
 
   div(*ngIf="service.modals.create.isOpened()")
     cass-community-create-modal((close)="service.modals.create.close()", (success)="goCommunity($event)")
-
-  div(*ngIf="service.modals.settings.isOpened()")
-    cass-community-settings-modal((close)="service.modals.settings.close()")

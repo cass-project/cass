@@ -1,7 +1,7 @@
 import {OnInit, OnDestroy, Component} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
-import {CommunityRouteService} from "../CommunityRoute/service";
+
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
 import {PostTypeService} from "../../../post/service/PostTypeService";
@@ -11,6 +11,7 @@ import {Stream} from "../../../feed/service/FeedService/stream";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
+import {CurrentCommunityService} from "../CommunityRoute/service";
 
 @Component({
     template: require('./template.jade'),
@@ -34,7 +35,7 @@ export class CommunityCollectionRoute implements OnInit, OnDestroy
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private service: CommunityRouteService,
+        private service: CurrentCommunityService,
         private types: PostTypeService,
         private feed: FeedService<PostEntity>,
         private feedSource: CollectionSource

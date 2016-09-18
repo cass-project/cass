@@ -1,10 +1,12 @@
 import {Component} from "@angular/core";
+
 import {Screen} from "../../screen";
 
 @Component({
+    selector: 'cass-community-join-modal-screen-sid',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-community-join-modal-screen-sid'})
-export class ScreenSID extends Screen
-{}
+    ]
+})
+export class ScreenSID extends Screen {}

@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
-import {CommunityCreateRequestModel} from "../../../model/CommunityCreateRequestModel";
+
+import {CreateCommunityRequest} from "../../../definitions/paths/create";
 
 @Injectable()
 export class CommunityCreateModalModel
@@ -10,7 +11,7 @@ export class CommunityCreateModalModel
     theme_ids: Array<number> = [];
     features: CommunityFeaturesModel[] = [];
     
-    createRequest(): CommunityCreateRequestModel {
+    createRequest(): CreateCommunityRequest {
         return {
             title: this.title,
             description: this.description,

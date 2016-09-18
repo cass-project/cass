@@ -1,22 +1,27 @@
 import {Component, Input} from "@angular/core";
+import {Router} from "@angular/router";
+
 import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
 import {CommunityEntity} from "../../../definitions/entity/Community";
 import {ThemeService} from "../../../../theme/service/ThemeService";
-import {Router} from "@angular/router";
 
 @Component({
+    selector: 'cass-community-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-community-card'})
+    ],
+})
 export class CommunityCard
 {
     @Input('community') entity: CommunityEntity;
 
-    constructor(private themeService: ThemeService,
-                private router: Router) {}
+    constructor(
+        private themeService: ThemeService,
+        private router: Router
+    ) {}
     
-    getTheme(){
+    getTheme() {
        return this.themeService.findById(this.entity.theme.id);
     }
 

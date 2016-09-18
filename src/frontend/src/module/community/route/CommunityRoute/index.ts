@@ -1,14 +1,14 @@
-import {Component, ModuleWithProviders, OnInit, OnDestroy} from "@angular/core";
+import {Component, OnInit, OnDestroy} from "@angular/core";
 import {Subscription} from "rxjs/Subscription";
-import {Router, Routes, RouterModule, ActivatedRoute} from "@angular/router";
+import {Router, RouterModule, ActivatedRoute} from "@angular/router";
+
 import {CommunityCollectionsRoute} from "../CommunityCollectionsRoute/index";
-import {CommunityRouteService} from "./service";
 import {CommunityDashboardRoute} from "../CommunityDashboardRoute/index";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
+import {CurrentCommunityService} from "./service";
 
-const communityRoutes: Routes = [
-    // TODO:: USE AS DEFAULT
+RouterModule.forChild([
     {
         path: '/',
         component: CommunityDashboardRoute,
@@ -17,9 +17,7 @@ const communityRoutes: Routes = [
         path: '/collections/...',
         component: CommunityCollectionsRoute
     },
-];
-
-export const publicRouting: ModuleWithProviders = RouterModule.forChild(communityRoutes);
+]);
 
 @Component({
     template: require('./template.jade'),
@@ -27,12 +25,11 @@ export const publicRouting: ModuleWithProviders = RouterModule.forChild(communit
         require('./style.shadow.scss')
     ],
     providers: [
-        CommunityRouteService,
+        CurrentCommunityService,
         FeedCriteriaService,
         FeedOptionsService,
     ]
 })
-
 export class CommunityRoute implements OnInit, OnDestroy
 {
     private sub: Subscription;
@@ -40,33 +37,33 @@ export class CommunityRoute implements OnInit, OnDestroy
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: CommunityRouteService) {}
+        private service: CurrentCommunityService
+    ) {}
 
-    ngOnInit(){
+    ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             let sid = params['sid'];
             if (sid){
                 this.service.loadCommunityBySID(sid);
-            } else {
+            }else{
                 this.router.navigate(['/Community/NotFound']);
                 return;
             }
 
             if (this.service.getObservable() !== undefined) {
                 this.service.getObservable().subscribe(
-                    (response) => {
-                    },
+                    (response) => {},
                     (error) => {
                         this.router.navigate(['/Community/NotFound']);
                     }
                 )
-            } else {
+            }else{
                 this.router.navigate(['/Community/NotFound']);
             }
         })
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
         this.sub.unsubscribe();
     }
 }

@@ -1,16 +1,19 @@
 import {Component} from "@angular/core";
-import {CommunityModals} from "../../../modals";
+
+import {CurrentCommunityService} from "../../../route/CommunityRoute/service";
 
 @Component({
+    selector: 'cass-community-create-collection-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-community-create-collection-card'})
+    ]
+})
 export class CommunityCreateCollectionCard
 {
-    constructor(private modals: CommunityModals) {}
+    constructor(private service: CurrentCommunityService) {}
 
     openCreateCollectionMaster() {
-        this.modals.createCollection.open();
+        this.service.modals.createCollection.open();
     }
 }

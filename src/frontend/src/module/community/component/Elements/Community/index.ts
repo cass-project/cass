@@ -1,11 +1,13 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
-import {CommunityModalService} from "./service/CommunityModalService";
-import {CommunityExtendedEntity} from "./definitions/entity/CommunityExtended";
+
+import {CommunityModalService} from "../../../service/CommunityModalService";
+import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
 
 @Component({
-    template: require('./template.jade')
-,selector: 'cass-community'})
+    selector: 'cass-community',
+    template: require('./template.jade'),
+})
 export class CommunityComponent
 {
     constructor(

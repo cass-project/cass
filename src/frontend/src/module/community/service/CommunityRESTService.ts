@@ -1,109 +1,92 @@
 import {Injectable} from "@angular/core";
 import {Http, Response, ResponseType, ResponseOptions, Headers} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {CommunityCreateRequestModel} from "../model/CommunityCreateRequestModel";
-import {CommunityImageUploadRequestModel} from "../model/CommunityImageUploadRequestModel";
-import {CommunityControlFeatureRequestModel} from "../model/CommunityActivateFeatureModel";
-import {CommunityImageDeleteRequest} from "../definitions/paths/image-delete";
+
+import {CommunityImageDeleteRequest, DeleteCommunityImageResponse200} from "../definitions/paths/image-delete";
 import {EditCommunityRequest, EditCommunityResponse200} from "../definitions/paths/edit";
 import {SetPublicOptionsCommunityRequest} from "../definitions/paths/set-public-options";
-import {AbstractRESTService} from "../../common/service/AbstractRESTService";
 import {AuthToken} from "../../auth/service/AuthToken";
-import {MessageBusService} from "../../message/service/MessageBusService/index";
-import {CreateCommunityResponse200} from "../definitions/paths/create";
+import {CreateCommunityResponse200, CreateCommunityRequest} from "../definitions/paths/create";
 import {GetCommunityResponse200} from "../definitions/paths/get";
 import {GetCommunityBySIDResponse200} from "../definitions/paths/get-by-sid";
 import {SetPublicOptionsResponse200} from "../../collection/definitions/paths/set-public-optionts";
-import {CommunityActivateFeatureResponse200} from "../../community-features/definitions/paths/activate";
-import {CommunityDectivateFeatureResponse200} from "../../community-features/definitions/paths/deactivate";
+import {RESTService} from "../../common/service/RESTService";
+import {CommunityActivateFeatureResponse200, CommunityActivateFeatureRequest} from "../definitions/paths/feature-activate";
+import {CommunityDeactivateFeatureResponse200, CommunityDeactivateFeatureRequest} from "../definitions/paths/feature-deactivate";
+import {CommunityIsActivatedFeatureRequest, CommunityIsActivatedFeatureResponse200} from "../definitions/paths/feature-is-activated";
+import {UploadCommunityImageResponse200, UploadCommunityImageRequest} from "../definitions/paths/image-upload";
+
+export interface CommunityRESTServiceInterface
+{
+    create(request: CreateCommunityRequest): Observable<CreateCommunityResponse200>;
+    edit(communityId: number, request: EditCommunityRequest): Observable<EditCommunityResponse200>
+    getCommunityById(id: string): Observable<GetCommunityResponse200>;
+    getCommunityBySid(sid: string): Observable<GetCommunityBySIDResponse200>;
+    setPublicOptions(communityId: number, request: SetPublicOptionsCommunityRequest): Observable<SetPublicOptionsResponse200>;
+    activateFeature(request: CommunityActivateFeatureRequest): Observable<CommunityActivateFeatureResponse200>
+    deactivateFeature(request: CommunityDeactivateFeatureRequest): Observable<CommunityDeactivateFeatureResponse200>;
+    isFeatureActivated(request: CommunityIsActivatedFeatureRequest): Observable<CommunityIsActivatedFeatureResponse200>;
+    imageUpload(communityId: number, request: UploadCommunityImageRequest): Observable<UploadCommunityImageResponse200>;
+    imageDelete(request: CommunityImageDeleteRequest): Observable<DeleteCommunityImageResponse200>;
+}
 
 @Injectable()
-export class CommunityRESTService extends AbstractRESTService
+export class CommunityRESTService implements CommunityRESTServiceInterface
 {
-    constructor(protected http: Http,
-                protected token: AuthToken,
-                protected messages: MessageBusService) {
-        super(http, token, messages);
+    constructor(
+        private service: RESTService,
+        private token: AuthToken
+    ) {}
+
+    create(request: CreateCommunityRequest): Observable<CreateCommunityResponse200>
+    {
+        return this.service.put("/backend/api/protected/community/create", request);
     }
 
-    public create(request: CommunityCreateRequestModel): Observable<CreateCommunityResponse200> {
-        let url = "/backend/api/protected/community/create";
-
-        return this.handle(
-            this.http.put(url, JSON.stringify(request), {
-                headers: this.getAuthHeaders()
-            })
-        );
+    edit(communityId: number, request: EditCommunityRequest): Observable<EditCommunityResponse200>
+    {
+        return this.service.post(`/backend/api/protected/community/${communityId}/edit`, request);
     }
 
-    public edit(communityId: number, body: EditCommunityRequest): Observable<EditCommunityResponse200> {
-        let url = `/backend/api/protected/community/${communityId}/edit`;
-
-        return this.handle(
-            this.http.post(url, JSON.stringify(body), {
-                headers: this.getAuthHeaders()
-            })
-        );
+    getCommunityById(id: string): Observable<GetCommunityResponse200>
+    {
+        return this.service.get(`/backend/api/community/${id}/get-by-id`);
     }
 
-    public getCommunityById(id: string): Observable<GetCommunityResponse200> {
-        let url = `/backend/api/community/${id}/get-by-id`;
-
-        return this.handle(
-            this.http.get(url, {
-                headers: this.getAuthHeaders()
-            })
-        );
+    getCommunityBySid(sid: string): Observable<GetCommunityBySIDResponse200>
+    {
+        return this.service.get(`/backend/api/community/${sid}/get-by-sid`);
     }
 
-    public getCommunityBySid(sid: string): Observable<GetCommunityBySIDResponse200> {
-        let url = `/backend/api/community/${sid}/get-by-sid`;
-
-        return this.handle(
-            this.http.get(url, {
-                headers: this.getAuthHeaders()
-            })
-        );
+    setPublicOptions(communityId: number, request: SetPublicOptionsCommunityRequest): Observable<SetPublicOptionsResponse200>
+    {
+        return this.service.post(`/backend/api/protected/community/${communityId}/set-public-options`, request);
     }
 
-    public setPublicOptions(communityId: number, body: SetPublicOptionsCommunityRequest): Observable<SetPublicOptionsResponse200> {
-        let url = `/backend/api/protected/community/${communityId}/set-public-options`;
-
-        return this.handle(
-            this.http.post(url, JSON.stringify(body), {
-                headers: this.getAuthHeaders()
-            })
-        );
-    }
-
-    public activateFeature(request: CommunityControlFeatureRequestModel): Observable<CommunityActivateFeatureResponse200> {
-        let url = `/backend/api/protected/community/${request.communityId}/feature/${request.feature}/activate`;
-
-        return this.handle(
-            this.http.put(url, "{}", {
-                headers: this.getAuthHeaders()
-            })
-        );
+    activateFeature(request: CommunityActivateFeatureRequest): Observable<CommunityActivateFeatureResponse200>
+    {
+        return this.service.put(`/backend/api/protected/community/${request.communityId}/feature/${request.feature}/activate`, {});
     };
 
-    public deactivateFeature(request: CommunityControlFeatureRequestModel): Observable<CommunityDectivateFeatureResponse200> {
-        let url = `/backend/api/protected/community/${request.communityId}/feature/${request.feature}/deactivate`;
-
-        return this.handle(
-            this.http.delete(url, {
-                headers: this.getAuthHeaders()
-            })
-        );
+    deactivateFeature(request: CommunityDeactivateFeatureRequest): Observable<CommunityDeactivateFeatureResponse200>
+    {
+        return this.service.delete(`/backend/api/protected/community/${request.communityId}/feature/${request.feature}/deactivate`);
     };
 
-    public imageUpload(request: CommunityImageUploadRequestModel): Observable<Response> {
+    isFeatureActivated(request: CommunityIsActivatedFeatureRequest): Observable<CommunityIsActivatedFeatureResponse200>
+    {
+        return this.service.get(`/backend/api/protected/community/${request.communityId}/feature/${request.feature}/is-activated`);
+    }
+
+    imageUpload(communityId: number, request: UploadCommunityImageRequest): Observable<UploadCommunityImageResponse200>
+    {
         var progressBar: number = 0;
 
         return Observable.create(observer => {
             let formData: FormData = new FormData(),
                 xhr: XMLHttpRequest = new XMLHttpRequest();
 
-            formData.append("file", request.uploadImage);
+            formData.append("file", request.file);
 
             xhr.upload.onprogress = (e) => {
                 if (e.lengthComputable) {
@@ -128,19 +111,15 @@ export class CommunityRESTService extends AbstractRESTService
                 }
             };
 
-            xhr.open("POST", `/backend/api/protected/community/${request.communityId}/image-upload/` +
-                `crop-start/${request.x1}/${request.y1}/crop-end/${request.x2}/${request.y2}`);
+            xhr.open("POST", `/backend/api/protected/community/${communityId}/image-upload/` +
+                `crop-start/${request.crop.x1}/${request.crop.y1}/crop-end/${request.crop.x2}/${request.crop.y2}`);
             xhr.setRequestHeader('Authorization', this.token.apiKey);
             xhr.send(formData);
         });
     }
 
-    public imageDelete(request: CommunityImageDeleteRequest): Observable<Response> {
-        let authHeader = new Headers();
-        if (this.token.hasToken()) {
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-
-        return this.handle(this.http.delete(`/backend/api/protected/community/${request.communityId}/image-delete`, {headers: authHeader}));
+    imageDelete(request: CommunityImageDeleteRequest): Observable<DeleteCommunityImageResponse200>
+    {
+        return this.service.delete(`/backend/api/protected/community/${request.communityId}/image-delete`);
     }
 }
