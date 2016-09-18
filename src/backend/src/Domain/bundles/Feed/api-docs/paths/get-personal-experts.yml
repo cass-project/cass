@@ -1,9 +1,11 @@
-"/feed/get/public-discussions":
+"/protected/feed/get/public-experts":
   post:
     tags:
       - feed
     description: |
-      Возвращает ленту паблика, раздел "Обсуждения"
+      Возвращает персонализированную ленту паблика, раздел "Эксперты"
+    security:
+      - x_api_key: []
     parameters:
       - name: body
         in: body

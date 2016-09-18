@@ -3,7 +3,7 @@
     tags:
       - feed
     description: |
-      Возвращает ленту паблика
+      Возвращает ленту паблика, раздел "Контент"
     parameters:
       - name: body
         in: body
