@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+
 import {CurrentCommunityService} from "../CommunityRoute/service";
 
 @Component({

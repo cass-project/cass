@@ -5,8 +5,21 @@ import {FeedRequest} from "../definitions/request/FeedRequest";
 import {FeedResponse} from "./FeedService/source";
 import {RESTService} from "../../common/service/RESTService";
 
+export interface FeedRESTServiceInterface
+{
+    getProfileFeed(profileId: number, request: FeedRequest): Observable<FeedResponse>;
+    getCommunityFeed(communityId: number, request: FeedRequest): Observable<FeedResponse>;
+    getCollectionFeed(collectionId: number, request: FeedRequest): Observable<FeedResponse>;
+    getPublicCollectionsFeed(request: FeedRequest): Observable<FeedResponse>;
+    getPublicCommunitiesFeed(request: FeedRequest): Observable<FeedResponse>;
+    getPublicContentFeed(request: FeedRequest): Observable<FeedResponse>;
+    getPublicDiscussionsFeed(request: FeedRequest): Observable<FeedResponse>;
+    getPublicExpertsFeed(request: FeedRequest): Observable<FeedResponse>;
+    getPublicProfilesFeed(request: FeedRequest): Observable<FeedResponse>;
+}
+
 @Injectable()
-export class FeedRESTService
+export class FeedRESTService implements FeedRESTServiceInterface
 {
     constructor(private rest: RESTService) {}
 

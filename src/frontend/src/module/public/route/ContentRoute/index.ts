@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {PublicContentSource} from "../../../feed/service/FeedService/source/public/PublicContentSource";
 import {Stream} from "../../../feed/service/FeedService/stream";

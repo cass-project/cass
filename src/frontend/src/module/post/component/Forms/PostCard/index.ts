@@ -1,4 +1,5 @@
 import {Component, Input, EventEmitter, Output} from "@angular/core";
+
 import {PostEntity} from "../../../definitions/entity/Post";
 import {Attachment} from "../../../../attachment/component/Elements/Attachment/index";
 import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";

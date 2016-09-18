@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+
 import {FeedService} from "../feed/service/FeedService/index";
 
 @Injectable()

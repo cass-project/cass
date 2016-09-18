@@ -1,18 +1,17 @@
 import {Component} from "@angular/core";
+
 import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
 import {Criteria} from "../../../../feed/definitions/request/Criteria";
-import {
-    ContentTypeCriteriaParams,
-    ContentType
-} from "../../../../feed/definitions/request/criteria/ContentTypeCriteriaParams";
+import {ContentTypeCriteriaParams, ContentType} from "../../../../feed/definitions/request/criteria/ContentTypeCriteriaParams";
 import {PublicService} from "../../../service";
 
 @Component({
+    selector: 'cass-public-criteria-content-type',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-public-criteria-content-type'})
-
+    ]
+})
 export class ContentTypeCriteria
 {
     private criteria: Criteria<ContentTypeCriteriaParams>;

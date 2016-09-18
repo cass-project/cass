@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {Theme} from "../../../../theme/definitions/entity/Theme";
 import {PublicService} from "../../../service";
@@ -7,11 +8,12 @@ import {Criteria} from "../../../../feed/definitions/request/Criteria";
 import {ThemeIdCriteriaParams} from "../../../../feed/definitions/request/criteria/ThemeIdCriteriaParams";
 
 @Component({
+    selector: 'cass-public-search-criteria-theme',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-public-search-criteria-theme'})
-
+    ]
+})
 export class ThemeCriteria
 {
     private root: Theme;
