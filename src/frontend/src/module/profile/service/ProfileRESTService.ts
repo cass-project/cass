@@ -20,7 +20,7 @@ export class ProfileRESTService extends AbstractRESTService
     getProfileById(profileId: number) {
         let authHeader = new Headers();
 
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -30,7 +30,7 @@ export class ProfileRESTService extends AbstractRESTService
     getProfileBySID(profileSID: string) {
         let authHeader = new Headers();
         
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -40,7 +40,7 @@ export class ProfileRESTService extends AbstractRESTService
     createNewProfile() {
         let authHeader = new Headers();
         
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -50,7 +50,7 @@ export class ProfileRESTService extends AbstractRESTService
     setGender(profileId: number, request: SetGenderRequest) {
         let authHeader = new Headers();
 
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -60,7 +60,7 @@ export class ProfileRESTService extends AbstractRESTService
     setInterestingIn(profileId: number, request) {
         let authHeader = new Headers();
 
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -70,7 +70,7 @@ export class ProfileRESTService extends AbstractRESTService
     setExpertIn(profileId: number, request) {
         let authHeader = new Headers();
 
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -80,7 +80,7 @@ export class ProfileRESTService extends AbstractRESTService
     editPersonal(profileId: number, request: EditPersonalRequest) {
         let authHeader = new Headers();
 
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -92,7 +92,7 @@ export class ProfileRESTService extends AbstractRESTService
     switchProfile(profileId) {
         let authHeader = new Headers();
 
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -102,7 +102,7 @@ export class ProfileRESTService extends AbstractRESTService
     deleteProfile(profileId) {
         let authHeader = new Headers();
 
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -112,7 +112,7 @@ export class ProfileRESTService extends AbstractRESTService
     requestAccountDeleteCancel() {
         let authHeader = new Headers();
 
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -122,7 +122,7 @@ export class ProfileRESTService extends AbstractRESTService
     requestAccountDelete() {
         let authHeader = new Headers();
 
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -132,7 +132,7 @@ export class ProfileRESTService extends AbstractRESTService
     deleteAvatar(profileId: number): Observable<DeleteProfileImageResponse200> {
         let authHeader = new Headers();
 
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 

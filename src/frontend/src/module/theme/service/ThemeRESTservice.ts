@@ -15,7 +15,7 @@ export class ThemeRESTService extends AbstractRESTService
 
     getThemeTree() {
         let authHeader = new Headers();
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -24,7 +24,7 @@ export class ThemeRESTService extends AbstractRESTService
 
     getThemeList() {
         let authHeader = new Headers();
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -33,7 +33,7 @@ export class ThemeRESTService extends AbstractRESTService
 
     getTheme(themeId:number) {
         let authHeader = new Headers();
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -42,7 +42,7 @@ export class ThemeRESTService extends AbstractRESTService
 
     updateTheme(themeId:number, title:string, description:string) {
         let authHeader = new Headers();
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -54,7 +54,7 @@ export class ThemeRESTService extends AbstractRESTService
 
     moveTheme(themeId:number, parentThemeId:number, position:number) {
         let authHeader = new Headers();
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -63,7 +63,7 @@ export class ThemeRESTService extends AbstractRESTService
 
     createTheme(parent_id:number, title:string, description:string) {
         let authHeader = new Headers();
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -76,7 +76,7 @@ export class ThemeRESTService extends AbstractRESTService
 
     deleteTheme(themeId:number) {
         let authHeader = new Headers();
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 

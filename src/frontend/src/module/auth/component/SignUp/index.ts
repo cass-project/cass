@@ -1,8 +1,9 @@
 import {Component, Output, EventEmitter, ElementRef, ViewChild} from "@angular/core";
+
 import {SignInRequest} from "../../definitions/paths/sign-in";
 import {SignUpRequest} from "../../definitions/paths/sign-up";
-import {NgForm} from "@angular/forms";
 import {AuthService} from "../../service/AuthService";
+import {LoadingManager} from "../../../common/classes/LoadingStatus";
 
 @Component({
     selector: 'cass-auth-sign-up',
@@ -11,17 +12,13 @@ import {AuthService} from "../../service/AuthService";
 
 export class SignUpComponent
 {
-    @ViewChild('form') form: NgForm;
     @ViewChild('emailInput') emailInput: ElementRef;
     
     @Output('back') backEvent = new EventEmitter<SignInRequest>();
     @Output('close') closeEvent = new EventEmitter<SignUpRequest>();
     @Output('success') successEvent = new EventEmitter();
 
-    private status: SignUpStatus = {
-        loading: false
-    };
-
+    private status: LoadingManager = new LoadingManager();
     private model: SignUpRequest = {
         email: '',
         password: '',
@@ -35,15 +32,15 @@ export class SignUpComponent
     }
 
     submit() {
-        this.status.loading = true;
+        let loading = this.status.addLoading();
 
         this.authService.signUp(this.model).subscribe(
             response =>{
                 this.successEvent.emit(response);
-                this.status.loading = false;
+                loading.is = false;
             },
             () => {
-                this.status.loading = false;
+                loading.is = false;
             });
     }
 
@@ -51,7 +48,7 @@ export class SignUpComponent
         let testHasEmail = this.model.email.length > 0;
         let testHasPassword = this.model.password.length > 0;
         let testPasswordMatches = this.model.password === this.model.repeat;
-        let testNotIsLoading = this.status.loading === false;
+        let testNotIsLoading = this.status.isLoading();
 
         return !! (testNotIsLoading && testHasEmail && testHasPassword && testPasswordMatches);
     }
@@ -63,9 +60,4 @@ export class SignUpComponent
     back() {
         this.backEvent.emit(this.model);
     }
-}
-
-interface SignUpStatus
-{
-    loading: boolean;
 }

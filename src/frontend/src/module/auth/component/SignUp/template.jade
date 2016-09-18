@@ -1,6 +1,6 @@
 article.component.component-auth-sign-up
   form.form((ngSubmit)='submit()', (keyup.escape)='close()', #form="ngForm")
-    cass-form-progress-lock(*ngIf="status.loading")
+    cass-form-progress-lock(*ngIf="status.isLoading()")
     header.form-header
       h1 Регистрация
     .cass-padding-box-10
@@ -13,7 +13,6 @@ article.component.component-auth-sign-up
             autocomplete='off', autofocus='autofocus',
             tabindex='1',
             [ngModelOptions]="{standalone: true}", [(ngModel)]='model.email',
-            [disabled]="status.loading",
             #emailInput
           )
       .input-group
@@ -28,7 +27,6 @@ article.component.component-auth-sign-up
             minlength='6',
             maxlength='32',
             [ngModelOptions]="{standalone: true}", [(ngModel)]='model.password',
-            [disabled]="status.loading"
           )
       .input-group
         label.form-label
@@ -42,17 +40,16 @@ article.component.component-auth-sign-up
             minlength='6',
             maxlength='32',
             [ngModelOptions]="{standalone: true}", [(ngModel)]='model.repeat',
-            [disabled]="status.loading"
           )
     footer.form-footer
       .form-footer-section
         .cass-padding-box-5
-          button.form-text-button(type='button', tabindex='4', (click)='back()', [disabled]="status.loading")
+          button.form-text-button(type='button', tabindex='4', (click)='back()')
             span Назад
       .form-footer-section
         .form-footer-item
           .cass-padding-box-5
-            button.form-text-button(type='button', tabindex='5', (click)='close()', [disabled]="status.loading")
+            button.form-text-button(type='button', tabindex='5', (click)='close()')
               span Закрыть
             button.form-button.form-button-primary(
                 type='submit',

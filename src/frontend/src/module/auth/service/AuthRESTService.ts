@@ -1,29 +1,34 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
-import {SignInRequest} from "../definitions/paths/sign-in";
-import {MessageBusService} from "../../message/service/MessageBusService/index";
-import {SignUpRequest} from "../definitions/paths/sign-up";
-import {AuthToken} from "./AuthToken";
-import {AbstractRESTService} from "../../common/service/AbstractRESTService";
+import {Observable} from "rxjs/Rx";
+
+import {RESTService} from "../../common/service/RESTService";
+import {SignInRequest, SignInResponse200} from "../definitions/paths/sign-in";
+import {SignUpRequest, SignUpResponse200} from "../definitions/paths/sign-up";
+import {SignOutResponse200} from "../definitions/paths/sign-out";
+
+export interface AuthRESTServiceInterface
+{
+    signIn(request: SignInRequest): Observable<SignInResponse200>;
+    signUp(request: SignUpRequest): Observable<SignUpResponse200>;
+    signOut(): Observable<SignOutResponse200>;
+}
 
 @Injectable()
-export class AuthRESTService extends AbstractRESTService
+export class AuthRESTService implements AuthRESTServiceInterface
 {
     constructor(
-        protected http: Http,
-        protected token: AuthToken,
-        protected messages: MessageBusService
-    ) { super(http, token, messages); }
+        private rest: RESTService
+    ) {}
 
-    signIn(request: SignInRequest) {
-        return this.handle(this.http.post("/backend/api/auth/sign-in", JSON.stringify(request)));
+    signIn(request: SignInRequest): Observable<SignInResponse200> {
+        return this.rest.post("/backend/api/auth/sign-in", request);
     }
 
-    signOut() {
-        return this.handle(this.http.get("/backend/api/auth/sign-out"));
+    signUp(request: SignUpRequest): Observable<SignUpResponse200> {
+        return this.rest.put("/backend/api/auth/sign-up", request);
     }
 
-    signUp(request: SignUpRequest) {
-        return this.handle(this.http.put("/backend/api/auth/sign-up", JSON.stringify(request)));
+    signOut(): Observable<SignOutResponse200> {
+        return this.rest.get("/backend/api/auth/sign-out");
     }
 }

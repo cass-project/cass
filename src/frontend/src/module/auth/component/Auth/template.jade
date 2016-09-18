@@ -1,21 +1,21 @@
-div(*ngIf="service.modals.authDev.isOpened()")
+div(*ngIf="modals..authDev.isOpened()")
   cass-modal
     cass-modal-box(width="550px")
-      cass-auth-sign-in-by-api-key((close)='service.closeAllModals()')
+      cass-auth-sign-in-by-api-key((close)='modals.closeAllModals()')
 div
-  .sign-in-modal(*ngIf='service.modals.signIn.isOpened()')
+  .sign-in-modal(*ngIf='modals..signIn.isOpened()')
     cass-modal
       cass-modal-box(width='500px')
         cass-auth-sign-in(
-          (sign-up)='service.signUp()',
-          (success)='service.closeAllModals()',
-          (close)='service.closeAllModals()'
+          (sign-up)='modals.signUp()',
+          (success)='modals.closeAllModals()',
+          (close)='modals.closeAllModals()'
         )
-  .sign-up-modal(*ngIf='service.modals.signUp.isOpened()')
+  .sign-up-modal(*ngIf='modals..signUp.isOpened()')
     cass-modal
       cass-modal-box(width='450px')
         cass-auth-sign-up(
-          (success)='service.closeAllModals()',
-          (close)='service.closeAllModals()',
-          (back)='service.signIn()'
+          (success)='modals.closeAllModals()',
+          (close)='modals.closeAllModals()',
+          (back)='modals.signIn()'
         )

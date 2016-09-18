@@ -16,7 +16,7 @@ export class RESTService
     ) {}
 
     public get(url: string, options: RequestOptionsArgs = {}) {
-        if(this.token.hasToken()) {
+        if(this.token.isAvailable()) {
             options['headers'] = this.getAuthHeaders();
         }
 
@@ -25,7 +25,7 @@ export class RESTService
 
     public put(url: string, json: any, options: RequestOptionsArgs = {})
     {
-        if(this.token.hasToken()) {
+        if(this.token.isAvailable()) {
             options['headers'] = this.getAuthHeaders();
         }
 
@@ -34,7 +34,7 @@ export class RESTService
 
     public post(url: string, json: any, options: RequestOptionsArgs = {})
     {
-        if(this.token.hasToken()) {
+        if(this.token.isAvailable()) {
             options['headers'] = this.getAuthHeaders();
         }
 
@@ -43,7 +43,7 @@ export class RESTService
 
     public delete(url: string, options: RequestOptionsArgs = {})
     {
-        if(this.token.hasToken()) {
+        if(this.token.isAvailable()) {
             options['headers'] = this.getAuthHeaders();
         }
 
@@ -57,7 +57,7 @@ export class RESTService
     public getAuthHeaders(): Headers {
         let authHeader = new Headers();
 
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 

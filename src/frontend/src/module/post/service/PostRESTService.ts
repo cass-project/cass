@@ -21,7 +21,7 @@ export class PostRESTService extends AbstractRESTService
     createPost(request: CreatePostRequest): Observable<CreatePostResponse200> {
         let authHeader = new Headers();
 
-        if(this.token.hasToken()){
+        if(this.token.isAvailable()){
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -34,7 +34,7 @@ export class PostRESTService extends AbstractRESTService
     editPost(postId: number, collectionId: number, content: string) {
         let authHeader = new Headers();
 
-        if (this.token.hasToken()) {
+        if (this.token.isAvailable()) {
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -47,7 +47,7 @@ export class PostRESTService extends AbstractRESTService
     deletePost(postId: number) {
         let authHeader = new Headers();
 
-        if (this.token.hasToken()) {
+        if (this.token.isAvailable()) {
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 

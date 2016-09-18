@@ -1,7 +1,11 @@
 import {NgModule} from '@angular/core';
 
+import {CollectionRESTService} from "./service/CollectionRESTService";
+
 @NgModule({
     declarations: [],
-    providers: []
+    providers: [
+        CollectionRESTService,
+    ]
 })
 export class CASSCollectionModule {}

@@ -1,5 +1,5 @@
 form.form.form-auth-sign-in((ngSubmit)='submit()', (keyup.escape)='close()')
-  cass-form-progress-lock(*ngIf="status.loading")
+  cass-form-progress-lock(*ngIf="status.isLoading()")
   header.form-header
     h1 Авторизация
   .cass-padding-box-10
@@ -18,7 +18,6 @@ form.form.form-auth-sign-in((ngSubmit)='submit()', (keyup.escape)='close()')
           autocomplete='off', autofocus='autofocus',
           tabindex='1',
           [ngModelOptions]="{standalone: true}", [(ngModel)]='model.email',
-          [disabled]='status.loading'
         )
     .input-group
       label.form-label
@@ -30,17 +29,16 @@ form.form.form-auth-sign-in((ngSubmit)='submit()', (keyup.escape)='close()')
           autocomplete='off',
           tabindex='2',
           [ngModelOptions]="{standalone: true}", [(ngModel)]='model.password',
-          [disabled]='status.loading'
         )
   footer.form-footer
     .form-footer-section
       .cass-padding-box-5
-        button.form-text-button(type='button', tabindex='4', (click)='signUp()', [disabled]='status.loading')
+        button.form-text-button(type='button', tabindex='4', (click)='signUp()')
           span Создать аккаунт
     .form-footer-section
       .form-footer-item
         .cass-padding-box-5
-          button.form-text-button(type='button', tabindex='5', (click)='close()', [disabled]='status.loading')
+          button.form-text-button(type='button', tabindex='5', (click)='close()')
             span Закрыть
-          button.form-button.form-button-primary(type='submit', tabindex='3', [disabled]='status.loading')
+          button.form-button.form-button-primary(type='submit', tabindex='3)
             span Войти

@@ -1,5 +1,5 @@
 import {Component, Renderer} from "@angular/core";
-import {AuthComponentService} from "./service";
+import {AuthModalsService} from "./modals";
 
 @Component({
     selector: 'cass-auth',
@@ -11,15 +11,5 @@ import {AuthComponentService} from "./service";
 
 export class AuthComponent
 {
-    constructor(private service: AuthComponentService, renderer: Renderer) {
-        renderer.listenGlobal('document', 'keyup', (event:KeyboardEvent) => {
-            if (event.shiftKey && event.altKey && event.keyCode === 77 /* M */) {
-                if (this.service.modals.authDev.isOpened()) {
-                    this.service.closeAllModals();
-                } else {
-                    this.service.authDev();
-                }
-            }
-        })
-    }
+    constructor(private modals: AuthModalsService) {}
 }

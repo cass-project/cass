@@ -18,7 +18,7 @@ export class FeedbackRESTService extends AbstractRESTService {
     public create(request: FeedbackCreateRequest) {
         let authHeader = new Headers();
 
-        if (this.token.hasToken()) {
+        if (this.token.isAvailable()) {
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -28,7 +28,7 @@ export class FeedbackRESTService extends AbstractRESTService {
     public createResponse(request: FeedbackCreateResponseRequest ) {
         let authHeader = new Headers();
 
-        if (this.token.hasToken()) {
+        if (this.token.isAvailable()) {
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -38,7 +38,7 @@ export class FeedbackRESTService extends AbstractRESTService {
     public cancel(feedbackId: number) {
         let authHeader = new Headers();
 
-        if (this.token.hasToken()) {
+        if (this.token.isAvailable()) {
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -48,7 +48,7 @@ export class FeedbackRESTService extends AbstractRESTService {
     public getById(feedbackId: number) {
         let authHeader = new Headers();
 
-        if (this.token.hasToken()) {
+        if (this.token.isAvailable()) {
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -59,7 +59,7 @@ export class FeedbackRESTService extends AbstractRESTService {
         let params = new URLSearchParams();
         let authHeader = new Headers();
 
-        if (this.token.hasToken()) {
+        if (this.token.isAvailable()) {
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 
@@ -76,7 +76,7 @@ export class FeedbackRESTService extends AbstractRESTService {
     public markAsRead(feedbackId: number) {
         let authHeader = new Headers();
 
-        if (this.token.hasToken()) {
+        if (this.token.isAvailable()) {
             authHeader.append('Authorization', `${this.token.apiKey}`);
         }
 

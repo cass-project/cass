@@ -1,7 +1,11 @@
 import {NgModule} from '@angular/core';
 
+import {RESTService} from "./service/RESTService";
+
 @NgModule({
     declarations: [],
-    providers: []
+    providers: [
+        RESTService,
+    ]
 })
 export class CASSCommonModule {}

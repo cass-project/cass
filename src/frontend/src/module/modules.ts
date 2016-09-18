@@ -8,9 +8,11 @@ import {CASSCommonModule} from "./common/module";
 import {CASSSidebarModule} from "./sidebar/module";
 import {CASSFrontlineModule} from "./frontline/module";
 import {CASSSessionModule} from "./session/module";
+import {CASSAuthModule} from "./auth/module";
 
 export const CASS_MODULES = [
     CASSAccountModule,
+    CASSAuthModule,
     CASSAttachmentModule,
     CASSAvatarModule,
     CASSCommunityModal,
