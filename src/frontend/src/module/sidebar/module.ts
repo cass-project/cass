@@ -1,7 +1,11 @@
 import {NgModule} from '@angular/core';
 
+import {SidebarComponent} from "./component/Sidebar/index";
+
 @NgModule({
-    declarations: [],
+    declarations: [
+        SidebarComponent,
+    ],
     providers: []
 })
-export class CASSAccountModule {}
+export class CASSSidebarModule {}

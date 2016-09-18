@@ -1,6 +1,6 @@
 import {Component, Input} from "@angular/core";
-import {FrontlineService} from "../../../frontline/service";
 import {Palette} from "../../../colors/definitions/entity/Palette";
+import {FrontlineService} from "../../../frontline/service/FrontlineService";
 
 @Component({
     template: require('./template.jade'),

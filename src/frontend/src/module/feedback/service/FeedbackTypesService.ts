@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
-import {FrontlineService} from "../../frontline/service";
 import {FrontlineEntity} from "../../frontline/definitions/entity/Frontline";
 import {FeedbackTypeEntity} from "../definitions/entity/FeedbackType";
+import {FrontlineService} from "../../frontline/service/FrontlineService";
 
 @Injectable()
 export class FeedbackTypesService

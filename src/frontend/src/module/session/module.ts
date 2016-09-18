@@ -1,7 +1,10 @@
 import {NgModule} from '@angular/core';
+import {Session} from "./Session";
 
 @NgModule({
     declarations: [],
-    providers: []
+    providers: [
+        Session,
+    ]
 })
-export class CASSAccountModule {}
+export class CASSSessionModule {}
