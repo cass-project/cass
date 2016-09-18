@@ -1,40 +1,41 @@
 import {Injectable} from "@angular/core";
-import {Http, URLSearchParams, Headers} from "@angular/http";
-import {AbstractRESTService} from "../../common/service/AbstractRESTService";
-import {MessageBusService} from "../../message/service/MessageBusService/index";
-import {AuthToken} from "../../auth/service/AuthToken";
+import {Http, URLSearchParams} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {UploadAttachmentResponse200} from "../definitions/paths/upload";
-import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
-import {LinkAttachmentResponse200} from "../definitions/paths/link";
 
+import {UploadAttachmentResponse200} from "../definitions/paths/upload";
+import {LinkAttachmentResponse200} from "../definitions/paths/link";
+import {RESTService} from "../../common/service/RESTService";
+import {AuthToken} from "../../auth/service/AuthToken";
+import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
+import {MessageBusService} from "../../message/service/MessageBusService/index";
+
+export interface AttachmentRESTServiceInterface
+{
+    link(url: string): Observable<LinkAttachmentResponse200>;
+    upload(file: Blob): Observable<UploadAttachmentResponse200>;
+}
 
 @Injectable()
-export class PostAttachmentRESTService extends AbstractRESTService
+export class AttachmentRESTService implements AttachmentRESTServiceInterface
 {
     constructor(
-        protected http: Http,
-        protected token: AuthToken,
-        protected messages: MessageBusService
-    ) { super(http, token, messages); }
+        private service: RESTService,
+        private token: AuthToken,
+        private messages: MessageBusService
+    ) {}
 
-    public link(url: string): Observable<LinkAttachmentResponse200> {
+    link(url: string): Observable<LinkAttachmentResponse200>
+    {
         let params = new URLSearchParams();
         params.set('url', url);
 
-        let headers = new Headers();
-
-        if(this.token.hasToken()){
-            headers.append('Authorization', `${this.token.apiKey}`);
-        }
-
-        return this.handle(this.http.put('/backend/api/protected/attachment/link/', '', {
+        return this.service.put('/backend/api/protected/attachment/link/', {}, {
             search: params,
-            headers: headers
-        }));
+        });
     }
     
-    public upload(file: Blob): Observable<UploadAttachmentResponse200> {
+    upload(file: Blob): Observable<UploadAttachmentResponse200>
+    {
         let observable = new Observable((observer) => {
             let url = '/backend/api/protected/attachment/upload/';
             let xhr = new XMLHttpRequest();

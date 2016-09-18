@@ -8,8 +8,17 @@ import {RequestDeleteResponse200} from "../definitions/paths/request-delete";
 import {CancelRequestDeleteResponse200} from "../definitions/paths/cancel-delete-request";
 import {CurrentAccountResponse200} from "../definitions/paths/current-account";
 
+export interface AccountRESTServiceInterface
+{
+    appAccess(): Observable<AppAccessResponse200>;
+    changePassword(old_password: string, new_password: string): Observable<ChangePasswordResponse200>;
+    getCurrentAccount(): Observable<CurrentAccountResponse200>;
+    requestDelete(): Observable<RequestDeleteResponse200>;
+    cancelRequestDelete(): Observable<CancelRequestDeleteResponse200>;
+}
+
 @Injectable()
-export class AccountRESTService
+export class AccountRESTService implements AccountRESTServiceInterface
 {
     constructor(private service: RESTService) {}
 

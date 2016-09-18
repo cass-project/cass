@@ -4,7 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
 import {AuthToken} from "../../auth/service/AuthToken";
-
+import {parseError} from "../functions/parseError";
 
 @Injectable()
 export class RESTService
@@ -21,6 +21,15 @@ export class RESTService
         }
 
         return this.handle(this.http.get(url, options));
+    }
+
+    public put(url: string, json: any, options: RequestOptionsArgs = {})
+    {
+        if(this.token.hasToken()) {
+            options['headers'] = this.getAuthHeaders();
+        }
+
+        return this.handle(this.http.put(url, JSON.stringify(json), options));
     }
 
     public post(url: string, json: any, options: RequestOptionsArgs = {})
@@ -42,15 +51,7 @@ export class RESTService
     }
 
     public parseError(error): string {
-        if(typeof error === "object") {
-            if(error.error && typeof error.error === 'string') {
-                return error.error;
-            }else{
-                return 'Unknown error';
-            }
-        }else{
-            return 'Failed to parse JSON';
-        }
+        return parseError(error);
     }
 
     public getAuthHeaders(): Headers {

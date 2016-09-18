@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Output, ViewChild, ElementRef} from "@angular/core";
-import {PostAttachmentRESTService} from "../../../../attachment/service/PostAttachmentRESTService";
+
 import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
+import {AttachmentRESTService} from "../../../../attachment/service/AttachmentRESTService";
+import {parseError} from "../../../../common/functions/parseError";
 
 var validUrl = require('valid-url');
 
@@ -26,7 +28,7 @@ export class PostFormLinkInput
     private interval;
     private current: AttachmentEntity<any>;
 
-    constructor(private service: PostAttachmentRESTService) {}
+    constructor(private service: AttachmentRESTService) {}
 
     ngAfterViewInit() {
         this.urlInput.nativeElement.focus();
@@ -49,8 +51,7 @@ export class PostFormLinkInput
                         this.loading = false;
                     },
                     (error) => {
-
-                        this.displayError(this.service.parseError(error));
+                        this.displayError(parseError(error));
                         this.loading = false;
                     }
                 );

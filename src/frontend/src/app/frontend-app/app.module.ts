@@ -61,7 +61,6 @@ import {AttachmentLinkImage} from "../../module/attachment/component/Elements/At
 import {AttachmentLinkPage} from "../../module/attachment/component/Elements/AttachmentLinkPage/index";
 import {AttachmentLinkWebm} from "../../module/attachment/component/Elements/AttachmentLinkWebm/index";
 import {AttachmentLinkUnknown} from "../../module/attachment/component/Elements/AttachmentLinkUnknown/index";
-import {AttachmentError} from "../../module/attachment/component/Elements/Error/index";
 import {FeedbackCreateModal} from "../../module/feedback/component/Modal/FeedbackCreateModal/index";
 import {FeedbackCreateButton} from "../../module/feedback/component/Elements/FeedbackCreateButton/index";
 import {CollectionCard} from "../../module/collection/component/Elements/CollectionCard/index";
@@ -126,7 +125,6 @@ import {ProfileCollectionRoute} from "../../module/profile/route/ProfileCollecti
 import {FeedRESTService} from "../../module/feed/service/FeedRESTService";
 import {PostTypeService} from "../../module/post/service/PostTypeService";
 import {PostRESTService} from "../../module/post/service/PostRESTService";
-import {PostAttachmentRESTService} from "../../module/attachment/service/PostAttachmentRESTService";
 import {CommunityCollectionRoute} from "../../module/community/route/CommunityCollectionRoute/index";
 import {CommunityCollectionNotFoundRoute} from "../../module/community/route/CommunityCollectionNotFoundRoute/index";
 import {CommunityCollectionsRoute} from "../../module/community/route/CommunityCollectionsRoute/index";
@@ -209,12 +207,6 @@ export class NoSanitizationService {
         PostFormLinkInput,
         TabModalTab,
         ImageCropper,
-        AttachmentLinkYouTube,
-        AttachmentLinkImage,
-        AttachmentLinkPage,
-        AttachmentLinkWebm,
-        AttachmentLinkUnknown,
-        AttachmentError,
         FeedbackCreateModal,
         FeedbackCreateButton,
         CollectionCard,
@@ -303,7 +295,6 @@ export class NoSanitizationService {
         FeedRESTService,
         PostTypeService,
         PostRESTService,
-        PostAttachmentRESTService,
         FeedCriteriaService,
         FeedOptionsService,
         PublicService,

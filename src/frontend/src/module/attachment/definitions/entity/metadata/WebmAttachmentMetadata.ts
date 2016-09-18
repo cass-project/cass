@@ -1,5 +1,6 @@
 import {AttachmentMetadata} from "../AttachmentEntity";
 
-export interface WebmAttachmentMetadata extends AttachmentMetadata  {
+export interface WebmAttachmentMetadata extends AttachmentMetadata
+{
     type: string;
 }
