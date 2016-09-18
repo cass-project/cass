@@ -10,7 +10,6 @@ import {ProgressLock} from "../../module/form/component/ProgressLock/index";
 import {CommunityHeader} from "../../module/community/component/Elements/CommunityHeader/index";
 import {SidebarProfileIcon} from "../../module/sidebar/component/SidebarProfileIcon/index";
 import {SidebarCommunities} from "../../module/sidebar/component/SidebarCommunities/index";
-import {SidebarMessages} from "../../module/sidebar/component/SidebarMessages/index";
 import {ProfileImage} from "../../module/profile/component/Elements/ProfileImage/index";
 import {ProfileHeader} from "../../module/profile/component/Elements/ProfileHeader/index";
 import {FeedProfileStream} from "../../module/feed/component/stream/FeedProfileStream/index";
@@ -52,21 +51,17 @@ import {ProfileCard} from "../../module/profile/component/Elements/ProfileCard/i
 import {ProfileSettingsCard} from "../../module/profile/component/Elements/ProfileSettingsCard/index";
 import {ProfileCreateCollectionCard} from "../../module/profile/component/Elements/ProfileCreateCollectionCard/index";
 import {ProfileInterestsCard} from "../../module/profile/component/Elements/ProfileInterestsCard/index";
-import {IMAttachments} from "../../module/im/component/IMAttachments/index";
-import {IMChat} from "../../module/im/component/IMChat/index";
-import {IMTextarea} from "../../module/im/component/IMTextarea/index";
-import {ProfileIMSidebar} from "../../module/profile-im/component/Elements/ProfileIMSidebar/index";
 import {ProfileCardHeader} from "../../module/profile/component/Elements/ProfileCardHeader/index";
-import {PostAttachment} from "../../module/post-attachment/component/Elements/PostAttachment/index";
+import {Attachment} from "../../module/attachment/component/Elements/Attachment/index";
 import {PostFormLinkInput} from "../../module/post/component/Forms/PostFormLinkInputComponent/index";
 import {TabModalTab} from "../../module/form/component/TabModal/component/TabModalTab/index";
 import {ImageCropper} from "../../module/form/component/ImageCropper/index";
-import {PostAttachmentLinkYouTube} from "../../module/post-attachment/component/Elements/PostAttachmentLinkYouTube/index";
-import {PostAttachmentLinkImage} from "../../module/post-attachment/component/Elements/PostAttachmentLinkImage/index";
-import {PostAttachmentLinkPage} from "../../module/post-attachment/component/Elements/PostAttachmentLinkPage/index";
-import {PostAttachmentLinkWebm} from "../../module/post-attachment/component/Elements/PostAttachmentLinkWebm/index";
-import {PostAttachmentLinkUnknown} from "../../module/post-attachment/component/Elements/PostAttachmentLinkUnknown/index";
-import {AttachmentError} from "../../module/post-attachment/component/Elements/Error/index";
+import {AttachmentLinkYouTube} from "../../module/attachment/component/Elements/AttachmentLinkYouTube/index";
+import {AttachmentLinkImage} from "../../module/attachment/component/Elements/AttachmentLinkImage/index";
+import {AttachmentLinkPage} from "../../module/attachment/component/Elements/AttachmentLinkPage/index";
+import {AttachmentLinkWebm} from "../../module/attachment/component/Elements/AttachmentLinkWebm/index";
+import {AttachmentLinkUnknown} from "../../module/attachment/component/Elements/AttachmentLinkUnknown/index";
+import {AttachmentError} from "../../module/attachment/component/Elements/Error/index";
 import {FeedbackCreateModal} from "../../module/feedback/component/Modal/FeedbackCreateModal/index";
 import {FeedbackCreateButton} from "../../module/feedback/component/Elements/FeedbackCreateButton/index";
 import {CollectionCard} from "../../module/collection/component/Elements/CollectionCard/index";
@@ -118,7 +113,6 @@ import {Session} from "../../module/session/Session";
 import {CommunityModalService} from "../../module/community/service/CommunityModalService";
 import {ProfileCommunityBookmarksService} from "../../module/profile-communities/service/ProfileCommunityBookmarksService";
 import {CommunityCreateModalNotifier} from "../../module/community/component/Modal/CommunityCreateModal/notify";
-import {IMRESTService} from "../../module/im/service/IMRESTService";
 import {AuthComponentService} from "../../module/auth/component/Auth/service";
 import {ProfileModals} from "../../module/profile/modals";
 import {ThemeService} from "../../module/theme/service/ThemeService";
@@ -134,7 +128,7 @@ import {ProfileCollectionRoute} from "../../module/profile/route/ProfileCollecti
 import {FeedRESTService} from "../../module/feed/service/FeedRESTService";
 import {PostTypeService} from "../../module/post/service/PostTypeService";
 import {PostRESTService} from "../../module/post/service/PostRESTService";
-import {PostAttachmentRESTService} from "../../module/post-attachment/service/PostAttachmentRESTService";
+import {PostAttachmentRESTService} from "../../module/attachment/service/PostAttachmentRESTService";
 import {CommunityCollectionRoute} from "../../module/community/route/CommunityCollectionRoute/index";
 import {CommunityCollectionNotFoundRoute} from "../../module/community/route/CommunityCollectionNotFoundRoute/index";
 import {CommunityCollectionsRoute} from "../../module/community/route/CommunityCollectionsRoute/index";
@@ -149,6 +143,9 @@ import {ProfilesRoute} from "../../module/public/route/ProfilesRoute/index";
 import {FeedCriteriaService} from "../../module/feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../module/feed/service/FeedOptionsService";
 import {PublicService} from "../../module/public/service";
+import {FeedService} from "../../module/feed/service/FeedService/index";
+import {PublicProfilesSource} from "../../module/feed/service/FeedService/source/public/PublicProfilesSource";
+import {AppService} from "./service";
 
 @Injectable()
 export class NoSanitizationService {
@@ -167,7 +164,6 @@ export class NoSanitizationService {
         SidebarSignInButton,
         SidebarProfileIcon,
         SidebarCommunities,
-        SidebarMessages,
         ProfileImage,
         ProfileHeader,
         FeedProfileStream,
@@ -209,20 +205,16 @@ export class NoSanitizationService {
         ProfileInterestsCard,
         ProfileCreateCollectionCard,
         ProfileSettingsCard,
-        IMAttachments,
-        IMChat,
-        IMTextarea,
-        ProfileIMSidebar,
-        PostAttachment,
+        Attachment,
         ProfileCardHeader,
         PostFormLinkInput,
         TabModalTab,
         ImageCropper,
-        PostAttachmentLinkYouTube,
-        PostAttachmentLinkImage,
-        PostAttachmentLinkPage,
-        PostAttachmentLinkWebm,
-        PostAttachmentLinkUnknown,
+        AttachmentLinkYouTube,
+        AttachmentLinkImage,
+        AttachmentLinkPage,
+        AttachmentLinkWebm,
+        AttachmentLinkUnknown,
         AttachmentError,
         FeedbackCreateModal,
         FeedbackCreateButton,
@@ -296,12 +288,14 @@ export class NoSanitizationService {
     providers: [
         AuthService,
         AuthRESTService,
+        AppService,
+        FeedService,
         MessageBusService,
+        PublicProfilesSource,
         Session,
         CommunityModalService,
         ProfileCommunityBookmarksService,
         CommunityCreateModalNotifier,
-        IMRESTService,
         ProfileModals,
         ThemeService,
         ProfileCachedIdentityMap,

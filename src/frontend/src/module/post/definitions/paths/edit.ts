@@ -1,6 +1,6 @@
 import {Success200} from "../../../common/definitions/common";
 import {PostEntity} from "../entity/Post";
-import {PostAttachmentEntity, AttachmentMetadata} from "../../../post-attachment/definitions/entity/PostAttachment";
+import {AttachmentEntity, AttachmentMetadata} from "../../../attachment/definitions/entity/AttachmentEntity";
 
 export interface EditPostRequest
 {
@@ -8,7 +8,7 @@ export interface EditPostRequest
     collection_id: number;
     content: string;
     attachments: Array<number>;
-    links: PostAttachmentEntity<AttachmentMetadata>[];
+    links: AttachmentEntity<AttachmentMetadata>[];
 }
 
 export interface EditPostResponse200 extends Success200

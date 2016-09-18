@@ -196,6 +196,12 @@ export class UploadImageModal { /// ... }
 - Если сущность описана в виде интерфейса, то ее название: `{EntityName}Entity`. Пример: `interface AccountEntity`
 - Если сущность описана в виде класса, то ее название: `{EntityName}`. Пример: `class Account`
 
+Модули
+------
+
+– Каждая директория в `app/module/` должна содержать файл module.ts
+- Каждый модуль должен иметь префикс `CASS`: `CASSAccountModule`, `CASSAttachmentModuke`
+
 Проблемы
 --------
 
