@@ -1,7 +1,4 @@
-import {NgModule} from '@angular/core';
-
-@NgModule({
+export const CASSColorsModule = {
     declarations: [],
-    providers: []
-})
-export class CASSColorsModule {}
+    providers: [],
+};

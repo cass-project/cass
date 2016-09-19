@@ -1,7 +1,4 @@
-import {NgModule} from '@angular/core';
-
-@NgModule({
+export const CASSFrontlineModule = {
     declarations: [],
-    providers: []
-})
-export class CASSFrontlineModule {}
+    providers: [],
+};

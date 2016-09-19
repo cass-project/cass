@@ -1,11 +1,8 @@
-import {NgModule} from '@angular/core';
+import {SidebarComponent} from "./component/Sidebar/index"
 
-import {SidebarComponent} from "./component/Sidebar/index";
-
-@NgModule({
+export const CASSSidebarModule = {
     declarations: [
         SidebarComponent,
     ],
-    providers: []
-})
-export class CASSSidebarModule {}
+    providers: [],
+};

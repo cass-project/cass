@@ -1,5 +1,3 @@
-import {NgModule} from '@angular/core';
-
 import {CollectionRESTService} from "./service/CollectionRESTService";
 import {CollectionCard} from "./component/Elements/CollectionCard/index";
 import {CollectionImage} from "./component/Elements/CollectionImage/index";
@@ -10,7 +8,7 @@ import {CollectionCreateMaster} from "./component/Modal/CollectionCreateMaster/i
 import {CollectionSettings} from "./component/Modal/CollectionSettings/index";
 import {DeleteCollectionModal} from "./component/Modal/DeleteCollectionModal/index";
 
-@NgModule({
+export const CASSCollectionModule = {
     declarations: [
         CollectionCard,
         CollectionImage,
@@ -24,5 +22,4 @@ import {DeleteCollectionModal} from "./component/Modal/DeleteCollectionModal/ind
     providers: [
         CollectionRESTService,
     ]
-})
-export class CASSCollectionModule {}
+};

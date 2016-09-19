@@ -1,10 +1,8 @@
-import {NgModule} from '@angular/core';
-
 import {ThemeRESTService} from "./service/ThemeRESTservice";
 import {ThemeService} from "./service/ThemeService";
 import {ThemeSelect} from "./component/ThemeSelect/index";
 
-@NgModule({
+export const CASSThemeModule = {
     declarations: [
         ThemeSelect,
     ],
@@ -12,5 +10,4 @@ import {ThemeSelect} from "./component/ThemeSelect/index";
         ThemeRESTService,
         ThemeService,
     ]
-})
-export class CASSThemeModule {}
+};

@@ -15,7 +15,7 @@ export class NoSanitizationService {
     }
 }
 
-@NgModule({
+let moduleDeclaration = {
     declarations: [
         App,
     ],
@@ -23,10 +23,9 @@ export class NoSanitizationService {
     imports: [
         BrowserModule,
         routing,
-        FormsModule, 
+        FormsModule,
         ReactiveFormsModule,
         HttpModule,
-        CASS_MODULES,
     ],
     providers: [
         appRoutingProviders,
@@ -50,7 +49,15 @@ export class NoSanitizationService {
         }
     ],
     bootstrap: [App]
-})
+};
 
+for(let module of CASS_MODULES) {
+    if(module['declarations']) moduleDeclaration.declarations.push(<any>module['declarations']);
+    if(module['routes']) moduleDeclaration.declarations.push(<any>module['routes']);
+    if(module['providers']) moduleDeclaration.providers.push(<any>module['providers']);
+    if(module['imports']) moduleDeclaration.imports.push(<any>module['imports']);
+}
+
+@NgModule(moduleDeclaration)
 export class AppModule {}
 

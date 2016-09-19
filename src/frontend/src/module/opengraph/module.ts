@@ -1,7 +1,4 @@
-import {NgModule} from '@angular/core';
-
-@NgModule({
+export const CASSOpenGraphModule = {
     declarations: [],
-    providers: []
-})
-export class CASSOpenGraphModule {}
+    providers: [],
+};

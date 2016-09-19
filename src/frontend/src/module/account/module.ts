@@ -1,10 +1,8 @@
-import {NgModule} from '@angular/core';
-
 import {AccountComponent} from "./component/Account/index";
 import {AccountRESTService} from "./service/AccountRESTService";
 import {AccountDeleteWarning} from "./component/AccountDeleteWarning/index";
 
-@NgModule({
+export const CASSAccountModule = {
     declarations: [
         AccountComponent,
         AccountDeleteWarning,
@@ -12,5 +10,4 @@ import {AccountDeleteWarning} from "./component/AccountDeleteWarning/index";
     providers: [
         AccountRESTService,
     ]
-})
-export class CASSAccountModule {}
+};

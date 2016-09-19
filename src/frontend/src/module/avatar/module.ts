@@ -1,7 +1,4 @@
-import {NgModule} from '@angular/core';
-
-@NgModule({
+export const CASSAvatarModule = {
     declarations: [],
-    providers: []
-})
-export class CASSAvatarModule {}
+    providers: [],
+};

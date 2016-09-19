@@ -1,14 +1,11 @@
-import {NgModule} from '@angular/core';
-
 import {MessageBusService} from "./service/MessageBusService/index";
 import {MessageBusNotifications} from "./component/MessageBusNotifications/index";
 
-@NgModule({
+export const CASSMessageModule = {
     declarations: [
         MessageBusNotifications,
     ],
     providers: [
         MessageBusService,
     ]
-})
-export class CASSMessageModule {}
+};

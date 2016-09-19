@@ -1,5 +1,3 @@
-import {NgModule} from '@angular/core';
-
 import {CommunityRESTService} from "./service/CommunityRESTService";
 import {CommunityFeaturesService} from "./service/CommunityFeaturesService";
 import {CommunityModalService} from "./service/CommunityModalService";
@@ -16,8 +14,15 @@ import {CommunityCreateModal} from "./component/Modal/CommunityCreateModal/index
 import {CommunityJoinModal} from "./component/Modal/CommunityJoinModal/index";
 import {CommunityRouteModal} from "./component/Modal/CommunityRouteModal/index";
 import {CommunitySettingsModal} from "./component/Modal/CommunitySettingsModal/index";
+import {CommunityRoute} from "./route/CommunityRoute/index";
+import {CommunityNotFoundRoute} from "./route/CommunityNotFoundRoute/index";
+import {CommunityDashboardRoute} from "./route/CommunityDashboardRoute/index";
+import {CommunityCollectionsRoute} from "./route/CommunityCollectionsRoute/index";
+import {CommunityCollectionsListRoute} from "./route/CommunityCollectionsListRoute/index";
+import {CommunityCollectionNotFoundRoute} from "./route/CommunityCollectionNotFoundRoute/index";
+import {CommunityCollectionRoute} from "./route/CommunityCollectionRoute/index";
 
-@NgModule({
+export const CASSCommunityModal = {
     declarations: [
         CommunityComponent,
         CommunityCard,
@@ -33,10 +38,18 @@ import {CommunitySettingsModal} from "./component/Modal/CommunitySettingsModal/i
         CommunityRouteModal,
         CommunitySettingsModal,
     ],
+    routes: [
+        CommunityRoute,
+        CommunityNotFoundRoute,
+        CommunityDashboardRoute,
+        CommunityCollectionsRoute,
+        CommunityCollectionsListRoute,
+        CommunityCollectionRoute,
+        CommunityCollectionNotFoundRoute,
+    ],
     providers: [
         CommunityRESTService,
         CommunityFeaturesService,
         CommunityModalService,
-    ]
-})
-export class CASSCommunityModal {}
+    ],
+};

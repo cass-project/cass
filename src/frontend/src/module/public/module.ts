@@ -1,15 +1,17 @@
-import {NgModule} from '@angular/core';
-
 import {ContentTypeCriteria} from "./component/Criteria/ContentTypeCriteria/index";
 import {QueryStringCriteria} from "./component/Criteria/QueryStringCriteria/index";
 import {SeekCriteria} from "./component/Criteria/SeekCriteria/index";
 import {ThemeCriteria} from "./component/Criteria/ThemeCriteria/index";
 import {PublicComponent} from "./component/Public/index";
-import {ViewOption} from "../feed/service/FeedService/options/ViewOption";
 import {SourceSelector} from "./component/Elements/SourceSelector/index";
 import {NothingFound} from "./component/Elements/NothingFound/index";
+import {CollectionsRoute} from "./route/CollectionsRoute/index";
+import {CommunitiesRoute} from "./route/CommunitiesRoute/index";
+import {ContentRoute} from "./route/ContentRoute/index";
+import {ExpertsRoute} from "./route/ExpertsRoute/index";
+import {ProfilesRoute} from "./route/ProfilesRoute/index";
 
-@NgModule({
+export const CASSPublicComponent = {
     declarations: [
         PublicComponent,
         ContentTypeCriteria,
@@ -18,8 +20,13 @@ import {NothingFound} from "./component/Elements/NothingFound/index";
         ThemeCriteria,
         NothingFound,
         SourceSelector,
-        ViewOption,
     ],
-    providers: []
-})
-export class CASSPublicComponent {}
+    routes: [
+        CollectionsRoute,
+        CommunitiesRoute,
+        ContentRoute,
+        ExpertsRoute,
+        ProfilesRoute,
+    ],
+    providers: [],
+};

@@ -1,5 +1,3 @@
-import {NgModule} from '@angular/core';
-
 import {AuthModalsService} from "./component/Auth/modals";
 import {AuthRESTService} from "./service/AuthRESTService";
 import {AuthService} from "./service/AuthService";
@@ -9,7 +7,7 @@ import {SignInComponent} from "./component/SignIn/index";
 import {SignUpComponent} from "./component/SignUp/index";
 import {SignInByAPIKeyComponent} from "./component/SignInByAPIKey/index";
 
-@NgModule({
+export const CASSAuthModule = {
     declarations: [
         AuthComponent,
         OAuth2Component,
@@ -22,5 +20,4 @@ import {SignInByAPIKeyComponent} from "./component/SignInByAPIKey/index";
         AuthRESTService,
         AuthService,
     ]
-})
-export class CASSAuthModule {}
+};

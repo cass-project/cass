@@ -1,10 +1,8 @@
-import {NgModule} from '@angular/core';
 import {Session} from "./Session";
 
-@NgModule({
+export const CASSSessionModule = {
     declarations: [],
     providers: [
         Session,
-    ]
-})
-export class CASSSessionModule {}
+    ],
+};
