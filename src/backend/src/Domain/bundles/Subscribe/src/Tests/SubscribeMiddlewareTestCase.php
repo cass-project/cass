@@ -58,6 +58,11 @@ class SubscribeMiddlewareTestCase extends CASSMiddlewareTestCase
         return $this->request('PUT', sprintf('/protected/subscribe/subscribe-collection/%s', $collectionId));
     }
 
+    protected function requestUnSubscribeCollection(int $collectionId): RESTRequest
+    {
+        return $this->request('DELETE', sprintf('/protected/subscribe/unsubscribe-collection/%s', $collectionId));
+    }
+
     // COMMUNITY
 
 }

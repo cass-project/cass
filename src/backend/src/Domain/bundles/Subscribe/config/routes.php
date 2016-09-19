@@ -22,14 +22,14 @@ return [
         // profile
         [
             'type'       => 'route',
-            'method'     => 'get',
+            'method'     => 'PUT',
             'url'        => '/protected/subscribe/{command:subscribe-profile}/{profileId}[/]',
             'middleware' => SubscribeMiddleware::class,
             'name'       => 'subscribe-profile-subscribe'
         ],
         [
             'type'       => 'route',
-            'method'     => 'get',
+            'method'     => 'DELETE',
             'url'        => '/protected/subscribe/{command:unsubscribe-profile}/{profileId}[/]',
             'middleware' => SubscribeMiddleware::class,
             'name'       => 'subscribe-profile-unsubscribe'
@@ -37,14 +37,14 @@ return [
         // collections
         [
             'type'       => 'route',
-            'method'     => 'get',
+            'method'     => 'PUT',
             'url'        => '/protected/subscribe/{command:subscribe-collection}/{collectionId}[/]',
             'middleware' => SubscribeMiddleware::class,
             'name'       => 'subscribe-collection-subscribe'
         ],
         [
             'type'       => 'route',
-            'method'     => 'get',
+            'method'     => 'DELETE',
             'url'        => '/protected/subscribe/{command:unsubscribe-collection}/{collectionId}[/]',
             'middleware' => SubscribeMiddleware::class,
             'name'       => 'subscribe-collection-unsubscribe'
@@ -52,14 +52,14 @@ return [
         // community
         [
             'type'       => 'route',
-            'method'     => 'get',
+            'method'     => 'PUT',
             'url'        => '/protected/subscribe/{command:subscribe-community}/{communityId}[/]',
             'middleware' => SubscribeMiddleware::class,
             'name'       => 'subscribe-community-subscribe'
         ],
         [
             'type'       => 'route',
-            'method'     => 'get',
+            'method'     => 'DELETE',
             'url'        => '/protected/subscribe/{command:unsubscribe-community}/{communityId}[/]',
             'middleware' => SubscribeMiddleware::class,
             'name'       => 'subscribe-community-unsubscribe'

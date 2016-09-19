@@ -23,7 +23,7 @@ class SubscribeThemeMiddlewareTest extends SubscribeMiddlewareTestCase
             ]);
     }
 
-    public function testSubscrubeThemeUnAuth404()
+    public function testSubscrubeThemeUnAuth403()
     {
         $theme = SampleThemesFixture::getTheme(1);
         $this->requestSubscribeTheme($theme->getId())

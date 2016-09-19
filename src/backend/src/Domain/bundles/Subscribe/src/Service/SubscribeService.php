@@ -49,15 +49,15 @@ class SubscribeService
 
     public function unSubscribeProfile(Profile $profile, Profile $subscribe)
     {
-        $criteria = ['profile_id' => $profile->getId(), 'subscribe_id' => $subscribe->getId(), 'type' => Subscribe::TYPE_PROFILE ];
+        $criteria = ['profileId' => $profile->getId(), 'subscribeId' => $subscribe->getId(), 'subscribeType' => Subscribe::TYPE_PROFILE ];
         return $this->subscribeRepository->unSubscribeByCriteria($criteria);
     }
 
     public function listSubscribedProfiles(Profile $profile, Seek $seek){
         return $this->subscribeRepository->findBy(
             [
-                'profile_id' => $profile->getId(),
-                'type'       => Subscribe::TYPE_PROFILE
+                'profileId' => $profile->getId(),
+                'subscribeType' => Subscribe::TYPE_PROFILE
             ],
             ['id' => 'DESC'],
             $seek->getLimit(),
@@ -72,7 +72,7 @@ class SubscribeService
 
     public function unSubscribeCollection(Profile $profile, Collection $collection)
     {
-        $criteria = ['profile_id' => $profile->getId(), 'subscribe_id' => $collection->getId(), 'type' => Subscribe::TYPE_COLLECTION ];
+        $criteria = ['profileId' => $profile->getId(), 'subscribeId' => $collection->getId(), 'subscribeType' => Subscribe::TYPE_COLLECTION ];
         return $this->subscribeRepository->unSubscribeByCriteria($criteria);
     }
 
@@ -80,8 +80,8 @@ class SubscribeService
     {
         return $this->subscribeRepository->findBy(
             [
-                'profile_id' => $profile->getId(),
-                'type'       => Subscribe::TYPE_COLLECTION
+                'profileId' => $profile->getId(),
+                'subscribeType' => Subscribe::TYPE_COLLECTION
             ],
             ['id' => 'DESC'],
             $seek->getLimit(),
@@ -96,7 +96,7 @@ class SubscribeService
 
     public function unSubscribeCommunity(Profile $profile, Community $community)
     {
-        $criteria = ['profile_id' => $profile->getId(), 'subscribe_id' => $community->getId(), 'type' => Subscribe::TYPE_COMMUNITY ];
+        $criteria = ['profileId' => $profile->getId(), 'subscribeId' => $community->getId(), 'subscribeType' => Subscribe::TYPE_COMMUNITY ];
         return $this->subscribeRepository->unSubscribeByCriteria($criteria);
     }
 
@@ -104,8 +104,8 @@ class SubscribeService
     {
         return $this->subscribeRepository->findBy(
             [
-                'profile_id' => $profile->getId(),
-                'type'       => Subscribe::TYPE_COMMUNITY
+                'profileId' => $profile->getId(),
+                'subscribeType'       => Subscribe::TYPE_COMMUNITY
             ],
             ['id' => 'DESC'],
             $seek->getLimit(),
