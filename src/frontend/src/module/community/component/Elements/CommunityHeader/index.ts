@@ -1,7 +1,6 @@
 import {Component, Input, EventEmitter, Output} from "@angular/core";
 
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
-import {CommunityRouteService} from "../../../route/CommunityRoute/service";
 import {CommunityModals} from "../Community/modals";
 import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
 
@@ -15,8 +14,7 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExte
 export class CommunityHeader
 {
     constructor(
-        private modals: CommunityModals,
-        private service: CommunityRouteService
+        private modals: CommunityModals
     ) {}
 
     @Output('go-community') goCommunityEvent: EventEmitter<string> = new EventEmitter<string>();

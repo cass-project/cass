@@ -16,7 +16,7 @@ export class SignInByAPIKeyComponent
     ) {
         renderer.listenGlobal('document', 'keyup', (event:KeyboardEvent) => {
             if (event.shiftKey && event.altKey && event.keyCode === 77 /* M */) {
-                if (this.modals.authDev.isOpened()) {
+                if (this.modals.signInWithAPIKeyModal.isOpened()) {
                     this.modals.closeAllModals();
                 } else {
                     this.modals.signInWithAPIKey();

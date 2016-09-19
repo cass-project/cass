@@ -77,7 +77,7 @@ export class CollectionRESTService implements CollectionRESTServiceInterface
                     if (xmlRequest.status === 200) {
                         observer.complete(JSON.parse(xmlRequest.response));
                     }else{
-                        observer.error(xmlRequest.responseBody);
+                        observer.error(xmlRequest.response);
                     }
                 }
             }
