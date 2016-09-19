@@ -7,7 +7,6 @@ import {CommunityDashboardRoute} from "../CommunityDashboardRoute/index";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 import {CurrentCommunityService} from "./service";
-import {CommunitySettingsModal} from "../../component/Modal/CommunitySettingsModal/index";
 
 RouterModule.forChild([
     {
@@ -24,9 +23,6 @@ RouterModule.forChild([
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    directives: [
-        CommunitySettingsModal,
     ],
     providers: [
         CurrentCommunityService,

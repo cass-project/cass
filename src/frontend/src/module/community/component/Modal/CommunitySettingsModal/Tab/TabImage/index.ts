@@ -60,15 +60,17 @@ export class CommunityImageTab
 
     deleteImage() {
         this.loading = true;
-        this.service.imageDelete(<CommunityImageDeleteRequest>{communityId:this.model.id})
-            .map(data=>data.json())
-            .subscribe(
-                data => {
-                    this.loading = false;
-                    this.model.image = JSON.parse(JSON.stringify(data.image));
-                    this.modelUnmodified.image = JSON.parse(JSON.stringify(data.image));
-                    this.setImage();
-                }
-            )
+
+        this.service.imageDelete(<CommunityImageDeleteRequest>{communityId:this.model.id}).subscribe(
+            response => {
+                this.loading = false;
+                this.model.image = response.image;
+                this.modelUnmodified.image = response.image;
+                this.setImage();
+            },
+            error => {
+                this.loading = false;
+            }
+        )
     }
 }

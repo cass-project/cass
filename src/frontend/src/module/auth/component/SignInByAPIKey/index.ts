@@ -19,7 +19,7 @@ export class SignInByAPIKeyComponent
                 if (this.modals.authDev.isOpened()) {
                     this.modals.closeAllModals();
                 } else {
-                    this.modals.authDev();
+                    this.modals.signInWithAPIKey();
                 }
             }
         });

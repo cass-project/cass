@@ -1,8 +1,9 @@
 import {Component} from "@angular/core";
 
-import {CommunityCreateModalModel, CommunityFeaturesModel} from "../../model";
+import {CommunityCreateModalModel} from "../../model";
 import {CommunityFeaturesService} from "../../../../../service/CommunityFeaturesService";
 import {Screen} from "../../screen";
+import {CommunityFeatureEntity} from "../../../../../definitions/entity/CommunityFeature";
 
 @Component({
     template: require('./template.jade'),
@@ -16,7 +17,7 @@ import {Screen} from "../../screen";
 })
 export class ScreenFeatures extends Screen
 {
-    private features: CommunityFeaturesModel[] = [];
+    private features: CommunityFeatureEntity[] = [];
 
     constructor(
         public model: CommunityCreateModalModel,
@@ -24,7 +25,7 @@ export class ScreenFeatures extends Screen
     ) {
         super();
 
-        this.features = featuresService.getFeatures();
+        this.features = featuresService.getAllFeatures();
 
         for(let feature of this.features) {
             this.model.features.push({

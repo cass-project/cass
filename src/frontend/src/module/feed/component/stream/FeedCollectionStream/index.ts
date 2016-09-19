@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
+
 import {CollectionIndexEntity} from "../../../../collection/definitions/entity/collection";
 import {FeedService} from "../../../service/FeedService/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
-import {AppService} from "../../../../../app/frontend-app/service";
 
 @Component({
     selector: 'cass-feed-collection-stream',
@@ -15,8 +15,7 @@ export class FeedCollectionStream
 {
     constructor(
         private feed: FeedService<CollectionIndexEntity>,
-        private options: FeedOptionsService,
-        private appService: AppService
+        private options: FeedOptionsService
     ) {}
 
     getViewOption() {
@@ -24,9 +23,6 @@ export class FeedCollectionStream
     }
 
     hasStream() {
-        if(!this.feed.isLoading()){
-            this.appService.onScroll(true);
-        }
         return typeof this.feed.stream === "object";
     }
 }

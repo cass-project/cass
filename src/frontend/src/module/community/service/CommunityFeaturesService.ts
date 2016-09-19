@@ -14,6 +14,11 @@ export class CommunityFeaturesService
         this.features = frontline.session.config.community.features;
     }
 
+    getAllFeatures(): CommunityFeatureEntity[]
+    {
+        return this.features;
+    }
+
     findFeature(code: string): CommunityFeatureEntity {
         return this.features.filter(feature => {
             return feature.code === code;

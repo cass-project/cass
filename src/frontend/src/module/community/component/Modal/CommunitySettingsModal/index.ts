@@ -8,7 +8,6 @@ import {ImageCropperService} from "../../../../common/component/ImageCropper/ind
 import {CommunityFeaturesModel} from "../CommunityCreateModal/model";
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
 
-
 @Component({
     selector: 'cass-community-settings-modal',
     template: require('./template.jade'),
@@ -103,7 +102,6 @@ export class CommunitySettingsModal
 
                 if(this.isImageModified()) {
                     this.attemptSaveImage()
-                        .map(response=>response.json())
                         .subscribe(response => {
                             this.model.image = response.image;
                             delete this.model['new_image'];

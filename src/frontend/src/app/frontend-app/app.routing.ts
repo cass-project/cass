@@ -1,8 +1,8 @@
 import {ModuleWithProviders} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+
 import {ProfileRoute} from "../../module/profile/route/ProfileRoute/index";
 import {CommunityRoute} from "../../module/community/route/CommunityRoute/index";
-import {PublicComponent} from "../../module/public/index";
 import {ProfileNotFoundRoute} from "../../module/profile/route/ProfileNotFoundRoute/index";
 import {ProfileDashboardRoute} from "../../module/profile/route/ProfileDashboardRoute/index";
 import {ProfileCollectionsRoute} from "../../module/profile/route/ProfileCollectionsRoute/index";
@@ -16,7 +16,6 @@ import {CommunityCollectionRoute} from "../../module/community/route/CommunityCo
 import {ContentRoute} from "../../module/public/route/ContentRoute/index";
 import {CollectionsRoute} from "../../module/public/route/CollectionsRoute/index";
 import {CommunitiesRoute} from "../../module/public/route/CommunitiesRoute/index";
-import {ExpertsRoute} from "../../module/public/route/ExpertsRoute/index";
 import {ProfilesRoute} from "../../module/public/route/ProfilesRoute/index";
 
 const appRoutes: Routes = [
@@ -115,36 +114,6 @@ const appRoutes: Routes = [
         path: 'communities',
         component: CommunitiesRoute
     }
-    /*{
-        path: 'public',
-        children: [
-            {
-                path: '',
-                component: PublicComponent,
-            },
-            {
-                path: 'content',
-                component: ContentRoute
-            },
-            {
-                path: 'collections',
-                component: CollectionsRoute
-            },
-            {
-                path: 'communities',
-                component: CommunitiesRoute
-            },
-            {
-                path: 'experts',
-                component: ExpertsRoute
-            },
-            {
-                path: 'profiles',
-                component: ProfilesRoute
-            }
-        ]
-    },*/
-    //deprecated version of public routes
 ];
 
 export const appRoutingProviders: any[] = [];
