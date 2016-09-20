@@ -5,6 +5,8 @@ import {PublicContentSource} from "../../../feed/service/FeedService/source/publ
 import {Stream} from "../../../feed/service/FeedService/stream";
 import {PublicService} from "../../service";
 import {PostIndexedEntity} from "../../../post/definitions/entity/Post";
+import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
+import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 
 @Component({
     template: require('./template.jade'),
@@ -12,8 +14,11 @@ import {PostIndexedEntity} from "../../../post/definitions/entity/Post";
         require('./style.shadow.scss')
     ],
     providers: [
+        PublicService,
         FeedService,
         PublicContentSource,
+        FeedCriteriaService,
+        FeedOptionsService,
     ]
 })
 export class ContentRoute

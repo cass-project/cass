@@ -1,13 +1,13 @@
 div.community-component
-  div(*ngIf="service.modals.route.isOpened()")
+  div(*ngIf="service.route.isOpened()")
     cass-community-route-modal(
-      (close)="service.modals.route.close()",
-      (join)="service.modals.route.close(); service.modals.join.open()",
-      (create)="service.modals.route.close(); service.modals.create.open()"
+      (close)="service.route.close()",
+      (join)="service.route.close(); service.modals.join.open()",
+      (create)="service.route.close(); service.modals.create.open()"
     )
 
-  div(*ngIf="service.modals.join.isOpened()")
-    cass-community-join-modal((close)="service.modals.join.close()")
+  div(*ngIf="service.join.isOpened()")
+    cass-community-join-modal((close)="service.join.close()")
 
-  div(*ngIf="service.modals.create.isOpened()")
-    cass-community-create-modal((close)="service.modals.create.close()", (success)="goCommunity($event)")
+  div(*ngIf="service.create.isOpened()")
+    cass-community-create-modal((close)="service.create.close()", (success)="goCommunity($event)")

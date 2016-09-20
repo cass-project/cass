@@ -16,6 +16,7 @@ import {CASSFeedModule} from "./feed/module";
 import {CASSPublicComponent} from "./public/module";
 import {CASSProfileModule} from "./profile/module";
 import {CASSMessageModule} from "./message/module";
+import {CASSI18nModule} from "./i18n/module";
 
 export const CASS_MODULES = [
     CASSAccountModule,
@@ -36,4 +37,5 @@ export const CASS_MODULES = [
     CASSPublicComponent,
     CASSProfileModule,
     CASSMessageModule,
+    CASSI18nModule,
 ];
