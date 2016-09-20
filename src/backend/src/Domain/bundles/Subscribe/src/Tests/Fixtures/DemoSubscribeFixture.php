@@ -3,6 +3,7 @@ namespace CASS\Domain\Bundles\Subscribe\Tests\Fixtures;
 
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 use CASS\Domain\Bundles\Collection\Tests\Fixtures\SampleCollectionsFixture;
+use CASS\Domain\Bundles\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
 use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
 use CASS\Domain\Bundles\Subscribe\Service\SubscribeService;
@@ -36,6 +37,8 @@ class DemoSubscribeFixture implements Fixture
         $collection = array_shift($collections);
         self::$subscribes['collection'][0] = $subscribeService->subscribeCollection($profile, $collection);
 
+        $community = SampleCommunitiesFixture::getCommunity(1);
+        self::$subscribes['community'][0] = $subscribeService->subscribeCommunity($profile, $community);
     }
 
 }

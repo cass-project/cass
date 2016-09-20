@@ -29,6 +29,7 @@ class SubscribeMiddlewareTestCase extends CASSMiddlewareTestCase
         ];
     }
 
+    // Theme
     protected function requestSubscribeTheme(int $themeId): RESTRequest
     {
         return $this->request('PUT', sprintf('/protected/subscribe/subscribe-theme/%s', $themeId));
@@ -39,8 +40,13 @@ class SubscribeMiddlewareTestCase extends CASSMiddlewareTestCase
         return $this->request('DELETE', sprintf('/protected/subscribe/unsubscribe-theme/%s', $themeId));
     }
 
-    // Profile
+    protected function requestListSubscribedThemes(int $profileId, array  $json): RESTRequest
+    {
+        return $this->request('POST', sprintf('/subscribe/profile/%s/list-themes', $profileId))
+            ->setParameters($json);
+    }
 
+    // Profile
     protected function requestSubscribeProfile(int $profileId): RESTRequest
     {
         return $this->request('PUT', sprintf('/protected/subscribe/subscribe-profile/%s', $profileId));
@@ -51,8 +57,13 @@ class SubscribeMiddlewareTestCase extends CASSMiddlewareTestCase
         return $this->request('DELETE', sprintf('/protected/subscribe/unsubscribe-profile/%s', $profileId));
     }
 
-    // Collection
+    protected function requestListSubscribedProfiles(int $profileId, array $json)
+    {
+        return $this->request('POST', sprintf('/subscribe/profile/%s/list-profiles', $profileId))
+            ->setParameters($json);
+    }
 
+    // Collection
     protected function requestSubscribeCollection(int $collectionId): RESTRequest
     {
         return $this->request('PUT', sprintf('/protected/subscribe/subscribe-collection/%s', $collectionId));
@@ -63,6 +74,27 @@ class SubscribeMiddlewareTestCase extends CASSMiddlewareTestCase
         return $this->request('DELETE', sprintf('/protected/subscribe/unsubscribe-collection/%s', $collectionId));
     }
 
+    protected function requestListSubscribedCollections(int $profileId, array $json)
+    {
+        return $this->request('POST', sprintf('/subscribe/profile/%s/list-collections', $profileId))
+            ->setParameters($json);
+    }
+
     // COMMUNITY
+    protected function requestSubscribeCommunity(int $communityId): RESTRequest
+    {
+        return $this->request('PUT', sprintf('/protected/subscribe/subscribe-community/%d', $communityId));
+    }
+
+    protected function requestUnSubscribeCommunity(int $communityId): RESTRequest
+    {
+        return $this->request('DELETE', sprintf('/protected/subscribe/unsubscribe-community/%d', $communityId));
+    }
+
+    protected function requestListSubscribedCommunities(int $profileId, array $json)
+    {
+        return $this->request('POST', sprintf('/subscribe/profile/%s/list-communities', $profileId))
+            ->setParameters($json);
+    }
 
 }

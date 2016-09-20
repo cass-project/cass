@@ -3,6 +3,7 @@ namespace CASS\Domain\Bundles\Subscribe\Middleware;
 
 use CASS\Application\Service\CommandService;
 use CASS\Domain\Bundles\Subscribe\Middleware\Command\ListSubscribedCollectionsCommand;
+use CASS\Domain\Bundles\Subscribe\Middleware\Command\ListSubscribedCommunitiesCommand;
 use CASS\Domain\Bundles\Subscribe\Middleware\Command\ListSubscribedProfilesCommand;
 use CASS\Domain\Bundles\Subscribe\Middleware\Command\ListSubscribedThemesCommand;
 use CASS\Domain\Bundles\Subscribe\Middleware\Command\SubscribeCollectionCommand;
@@ -43,7 +44,7 @@ class SubscribeMiddleware implements MiddlewareInterface
             ->attachDirect("list-collections", ListSubscribedCollectionsCommand::class, 'POST')
             ->attachDirect("subscribe-community", SubscribeCommunityCommand::class, 'PUT')
             ->attachDirect("unsubscribe-community", UnSubscribeCommunityCommand::class, 'DELETE')
-            ->attachDirect("list-communities", UnSubscribeCommunityCommand::class, 'POST')
+            ->attachDirect("list-communities", ListSubscribedCommunitiesCommand::class, 'POST')
             ->resolve($request);
 
         return $resolver->run($request, $responseBuilder);

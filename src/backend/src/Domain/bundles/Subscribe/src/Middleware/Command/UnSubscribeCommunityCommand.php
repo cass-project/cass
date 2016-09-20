@@ -1,8 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Subscribe\Middleware\Command;
 
-use CASS\Application\Exception\BadCommandCallException;
-use CASS\Domain\Bundles\Theme\Exception\ThemeNotFoundException;
+use CASS\Domain\Bundles\Community\Exception\CommunityNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
@@ -15,14 +14,15 @@ class UnSubscribeCommunityCommand extends Command
 
         try {
             $community = $this->communityService->getCommunityById($request->getAttribute('communityId'));
-
             $this->subscribeService->unSubscribeCommunity($currentProfile, $community);
 
             return $responseBuilder
                 ->setStatusSuccess()
                 ->build();
-        } catch (ThemeNotFoundException $e) {
-            throw new BadCommandCallException($e->getMessage());
+        } catch (CommunityNotFoundException $e) {
+            return $responseBuilder
+                ->setStatusNotFound()
+                ->build();
         }
     }
 

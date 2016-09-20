@@ -33,7 +33,6 @@ class SubscribeRepository extends EntityRepository
         $em = $this->getEntityManager();
         $em->remove($subscribe);
         $em->flush();
-
     }
 
 
@@ -44,13 +43,12 @@ class SubscribeRepository extends EntityRepository
         if (!isset($criteria['subscribeType'])) throw new \Exception("required option: type missing");
         $subscribe = $this->getEntityManager()->getRepository(Subscribe::class)->findOneBy($criteria);
 
-
         if ($subscribe === null)
             throw new UnknownSubscribeException(
-                sprintf("Subscribe not found - (profile_id: %s, subscribe_id: %s, subscribe_type): %s",
-                    $criteria['profile_id'],
-                    $criteria['subscribe_id'],
-                    $criteria['type']
+                sprintf("Subscribe not found - (profileId: %s, subscribeId: %s, subscribeType): %s",
+                    $criteria['profileId'],
+                    $criteria['subscribeId'],
+                    $criteria['subscribeType']
                 )
             );
         return $subscribe;
@@ -100,7 +98,7 @@ class SubscribeRepository extends EntityRepository
         $subscribe->setProfileId($profile->getId())
             ->setOptions($options)
             ->setSubscribeId($community->getId())
-            ->setSubscribeType(Subscribe::TYPE_COLLECTION);
+            ->setSubscribeType(Subscribe::TYPE_COMMUNITY);
 
         $em = $this->getEntityManager();
         $em->persist($subscribe);
@@ -110,6 +108,7 @@ class SubscribeRepository extends EntityRepository
 
     public function unSubscribeByCriteria(array $criteria)
     {
+
         $subscribe = $this->getSubscribe($criteria);
 
         $em = $this->getEntityManager();

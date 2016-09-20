@@ -69,32 +69,32 @@ return [
     'common' => [
         [
             'type'       => 'route',
-            'method'     => 'get',
-            'url'        => '/subscribe/{command:list-themes}/{profileId}[/]',
+            'method'     => 'POST',
+            'url'        => '/subscribe/profile/{profileId}/{command:list-themes}[/]',
             'middleware' => SubscribeMiddleware::class,
             'name'       => 'subscribe-theme-list'
         ],
         // profile
         [
             'type'       => 'route',
-            'method'     => 'get',
-            'url'        => '/subscribe/{command:list-profiles}/{profileId}[/]',
+            'method'     => 'POST',
+            'url'        => '/subscribe/profile/{profileId}/{command:list-profiles}[/]',
             'middleware' => SubscribeMiddleware::class,
             'name'       => 'subscribe-profile-list'
         ],
         // collections
         [
             'type'       => 'route',
-            'method'     => 'get',
-            'url'        => '/subscribe/{command:list-collections}/{collectionId}[/]',
+            'method'     => 'POST',
+            'url'        => '/subscribe/profile/{profileId}/{command:list-collections}[/]',
             'middleware' => SubscribeMiddleware::class,
             'name'       => 'subscribe-collection-list'
         ],
         // community
         [
             'type'       => 'route',
-            'method'     => 'get',
-            'url'        => '/subscribe/{command:list-communities}/{communityId}[/]',
+            'method'     => 'POST',
+            'url'        => '/subscribe/profile/{profileId}/{command:list-communities}[/]',
             'middleware' => SubscribeMiddleware::class,
             'name'       => 'subscribe-community-list'
         ],

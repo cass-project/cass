@@ -33,8 +33,8 @@ class SubscribeService
     {
         return $this->subscribeRepository->findBy(
             [
-                'profile_id' => $profile->getId(),
-                'type' => Subscribe::TYPE_THEME,
+                'profileId' => $profile->getId(),
+                'subscribeType' => Subscribe::TYPE_THEME,
             ],
             ['id' => 'DESC'],
             $seek->getLimit(),

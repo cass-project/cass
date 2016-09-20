@@ -1,8 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Subscribe\Middleware\Command;
 
-use CASS\Application\Exception\BadCommandCallException;
-use CASS\Domain\Bundles\Theme\Exception\ThemeNotFoundException;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use CASS\Util\Seek;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -12,18 +11,21 @@ class ListSubscribedCollectionsCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $currentProfile = $this->currentAccountService->getCurrentAccount()->getCurrentProfile();
-
         try {
-            $seek = new Seek(100, 0, 100);
+            $body = $request->getParsedBody();
+            $profileId = $request->getAttribute('profileId');
+            $profile = $this->profileService->getProfileById($profileId);
 
-            $this->subscribeService->listSubscribedCollections($currentProfile, $seek);
+            $seek = new Seek(100, (int)$body['offset'], (int)$body['limit']);
+            $this->subscribeService->listSubscribedCollections($profile, $seek);
 
             return $responseBuilder
                 ->setStatusSuccess()
                 ->build();
-        } catch (ThemeNotFoundException $e) {
-            throw new BadCommandCallException($e->getMessage());
+        } catch (ProfileNotFoundException $e) {
+            return $responseBuilder
+                ->setStatusNotFound()
+                ->build();
         }
     }
 }
