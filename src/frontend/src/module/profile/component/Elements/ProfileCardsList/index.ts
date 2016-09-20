@@ -1,18 +1,15 @@
-import {Component, Input, Directive} from "@angular/core";
+import {Component, Input} from "@angular/core";
 
-import {ProfileCard} from "../ProfileCard/index";
-import {ProfileInterestsCard} from "../ProfileInterestsCard/index";
-import {ProfileCreateCollectionCard} from "../ProfileCreateCollectionCard/index";
-import {ProfileSettingsCard} from "../ProfileSettingsCard/index";
 import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
-import {Router} from '@angular/router';
+import {Router} from "@angular/router";
 
 @Component({
+    selector: 'cass-profile-cards-list',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-profile-cards-list'})
-
+    ]
+})
 export class ProfileCardsList
 {
     @Input('profile') entity: ProfileExtendedEntity;

@@ -1,14 +1,13 @@
-import {Module} from "../common/classes/Module";
-import {AccountComponent} from "./index";
+import {AccountComponent} from "./component/Account/index";
 import {AccountRESTService} from "./service/AccountRESTService";
-import {Session} from "../session/Session";
+import {AccountDeleteWarning} from "./component/AccountDeleteWarning/index";
 
-export = new Module({
-    name: 'account',
-    RESTServices: [
-        AccountRESTService,
+export const CASSAccountModule = {
+    declarations: [
+        AccountComponent,
+        AccountDeleteWarning,
     ],
     providers: [
-        Session,
+        AccountRESTService,
     ]
-});
+};

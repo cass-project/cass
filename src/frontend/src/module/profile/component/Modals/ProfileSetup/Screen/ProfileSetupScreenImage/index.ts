@@ -1,9 +1,6 @@
-import {Component, Injectable, Output, EventEmitter, Directive} from "@angular/core";
-
-import {UploadImageService} from "../../../../../../form/component/UploadImage/service";
+import {Component, Injectable, Output, EventEmitter} from "@angular/core";
+import {UploadImageService} from "../../../../../../common/component/UploadImage/service";
 import {UploadProfileImageStrategy} from "../../../../../common/UploadProfileImageStrategy";
-import {ProfileImage} from "../../../../Elements/ProfileImage/index";
-import {UploadImageModal} from "../../../../../../form/component/UploadImage/index";
 import {ProfileRESTService} from "../../../../../service/ProfileRESTService";
 import {ModalControl} from "../../../../../../common/classes/ModalControl";
 import {ProfileSetupModel} from "../../model";
@@ -11,14 +8,15 @@ import {DeleteProfileImageResponse200} from "../../../../../definitions/paths/im
 import {AuthToken} from "../../../../../../auth/service/AuthToken";
 
 @Component({
+    selector: 'cass-profile-setup-screen-image',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
     providers: [
         UploadImageService,
-    ],selector: 'cass-profile-setup-screen-image'})
-
+    ]
+})
 @Injectable()
 export class ProfileSetupScreenImage
 {
@@ -31,10 +29,9 @@ export class ProfileSetupScreenImage
     constructor(
         private model: ProfileSetupModel,
         private uploadImageService: UploadImageService, 
-        private profileRESTService: ProfileRESTService,
-        private authToken: AuthToken
+        private profileRESTService: ProfileRESTService
     ) {
-        uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(model.getProfile(), authToken.getAPIKey()));
+        uploadImageService.setUploadStrategy(new UploadProfileImageStrategy(model.getProfile(), profileRESTService));
     }
 
     next() {
@@ -57,7 +54,7 @@ export class ProfileSetupScreenImage
         this.isDeleting = true;
         
         this.profileRESTService
-            .deleteAvatar(this.model.getProfile().id)
+            .imageDelete(this.model.getProfile().id)
             .subscribe(
                 (response: DeleteProfileImageResponse200) => {
                     this.isDeleting = false;

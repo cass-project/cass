@@ -3,7 +3,7 @@
     tags:
       - feed
     description: |
-      Возвращает ленту паблика
+      Возвращает ленту паблика, раздел "Сообщества"
     parameters:
       - name: body
         in: body
@@ -13,7 +13,9 @@
           $ref: '#/definitions/Feed_Request_FeedRequest'
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - entities

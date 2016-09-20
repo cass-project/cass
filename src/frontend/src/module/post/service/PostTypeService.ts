@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 
-import {FrontlineService} from "../../frontline/service";
 import {PostTypeEntity} from "../definitions/entity/PostType";
+import {FrontlineService} from "../../frontline/service/FrontlineService";
 
 @Injectable()
 export class PostTypeService

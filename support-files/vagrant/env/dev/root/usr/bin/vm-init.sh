@@ -108,6 +108,7 @@ cd /opt/swagger
 sudo rm -rf swagger-ui/
 sudo git clone https://github.com/swagger-api/swagger-ui.git
 cd swagger-ui
+sudo git checkout v2.2.3
 sudo npm install
 sudo npm run build
 sudo mv dist api-docs

@@ -12,10 +12,8 @@ require('./../../styles/index.head.scss');
 
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
 import {enableProdMode} from '@angular/core';
-
-import {FrontlineService, frontline} from "../../module/frontline/service";
-import {AuthToken} from "../../module/auth/service/AuthToken";
 import {AppModule} from "./app.module";
+import {FrontlineService, frontline} from "../../module/frontline/service/FrontlineService";
 
 enableProdMode();
 

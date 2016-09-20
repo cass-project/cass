@@ -13,7 +13,9 @@
           $ref: '#/definitions/Feedback_Request_CreateFeedbackResponse'
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - entity
@@ -22,7 +24,6 @@
               type: boolean
               default: true
             entity:
-              $ref: '#/definitions/Feedback_Entity_Feedbackesponse'
+              $ref: '#/definitions/Feedback_Entity_FeedbackResponse'
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'

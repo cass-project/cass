@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {UploadImageCropModel} from "../../../../form/component/UploadImage/strategy";
+import {UploadImageCropModel} from "../../../../common/component/UploadImage/strategy";
 import {ImageCollection} from "../../../../avatar/definitions/ImageCollection";
 
 @Injectable()

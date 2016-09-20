@@ -1,0 +1,31 @@
+"/protected/feed/get/public-experts":
+  post:
+    tags:
+      - feed
+    description: |
+      Возвращает персонализированную ленту паблика, раздел "Эксперты"
+    security:
+      - x_api_key: []
+    parameters:
+      - name: body
+        in: body
+        required: true
+        description: JSON Body
+        schema:
+          $ref: '#/definitions/Feed_Request_FeedRequest'
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entities
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entities:
+              type: array
+              items:
+                $ref: '#/definitions/Post_Entity_Post'

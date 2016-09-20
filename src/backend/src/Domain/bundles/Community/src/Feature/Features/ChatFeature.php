@@ -17,6 +17,16 @@ final class ChatFeature extends AbstractFeature
         return 'fa-bookmark';
     }
 
+    public function getTranslatedName(): string
+    {
+        return 'Чат';
+    }
+
+    public function getTranslatedDescription(): string
+    {
+        return 'Добавляет возможность вести коллективные чаты в ваше сообщество';
+    }
+
     public function isProductionReady(): bool
     {
         return false;

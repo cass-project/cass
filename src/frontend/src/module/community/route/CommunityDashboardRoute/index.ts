@@ -3,12 +3,12 @@ import {Component} from "@angular/core";
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 import {Stream} from "../../../feed/service/FeedService/stream";
-import {CommunityRouteService} from "../CommunityRoute/service";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {PostTypeService} from "../../../post/service/PostTypeService";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
 import {AuthService} from "../../../auth/service/AuthService";
+import {CurrentCommunityService} from "../CommunityRoute/service";
 
 @Component({
     template: require('./template.jade'),
@@ -27,7 +27,7 @@ export class CommunityDashboardRoute
     
     constructor(
         private authService: AuthService,
-        private service: CommunityRouteService,
+        private service: CurrentCommunityService,
         private feed: FeedService<PostEntity>,
         private feedSource: CollectionSource,
         private types: PostTypeService
@@ -53,7 +53,6 @@ export class CommunityDashboardRoute
             );
         }
     }
-
 
     canPost(): boolean{
        return this.authService.isSignedIn();

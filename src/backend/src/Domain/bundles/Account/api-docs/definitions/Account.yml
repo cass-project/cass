@@ -17,27 +17,26 @@ Account_Entity_Account:
     profiles:
       type: array
       items:
-        schema:
-          $ref: '#/definitions/Profile_Entity_Profile'
+        $ref: '#/definitions/Profile_Entity_Profile'
     disabled:
       type: object
       description: Информация о блокировке аккаунта
-      schema:
-        required:
-          - is_disabled
-          - reason
-        properties:
-          is_disabled:
-            type: boolean
-            description: Флаг "заблокирован ли аккаунт"
-          reason:
-            type: string
-            description: Причина блокировки. Может содержать значение NULL.
+      required:
+        - is_disabled
+        - reason
+      properties:
+        is_disabled:
+          type: boolean
+          description: Флаг "заблокирован ли аккаунт"
+        reason:
+          type: string
+          description: Причина блокировки. Может содержать значение NULL.
     delete_request:
-      schema:
-        required:
-          - has
-          - date
+      type: object
+      required:
+        - has
+        - date
+      properties:
         has:
           type: boolean
           description: Существует ли запрос на удаление аккаунта?

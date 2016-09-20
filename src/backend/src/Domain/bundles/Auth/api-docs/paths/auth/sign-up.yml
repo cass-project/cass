@@ -15,13 +15,8 @@
       200:
         $ref: '#/responses/Auth_Response_SignInResponse'
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       404:
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'
       409:
-        description: |
-          Аккаунт с таким e-mail уже существует
-        schema:
-          $ref: '#/responses/error'
+        $ref: '#/responses/error'

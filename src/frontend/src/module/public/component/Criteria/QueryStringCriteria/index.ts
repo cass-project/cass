@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter, Directive} from "@angular/core";
+import {Component, Output, EventEmitter} from "@angular/core";
 
 import {PublicService} from "../../../service";
 import {ThemeService} from "../../../../theme/service/ThemeService";
@@ -7,10 +7,12 @@ import {Criteria} from "../../../../feed/definitions/request/Criteria";
 import {QueryStringCriteriaParams} from "../../../../feed/definitions/request/criteria/QueryStringCriteriaParams";
 
 @Component({
+    selector: 'cass-public-search-criteria-query-string',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-public-search-criteria-query-string'})
+    ]
+})
 
 export class QueryStringCriteria
 {

@@ -1,16 +1,13 @@
-import {Component, Input, ViewChild, ElementRef, EventEmitter, Output, Directive} from "@angular/core";
+import {Component, Input, ViewChild, ElementRef, EventEmitter, Output} from "@angular/core";
 
-import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {CollectionEntity} from "../../../../collection/definitions/entity/collection";
 import {PostRESTService} from "../../../service/PostRESTService";
 import {PostTypeEntity} from "../../../definitions/entity/PostType";
-import {PostAttachmentRESTService} from "../../../../post-attachment/service/PostAttachmentRESTService";
-import {PostFormLinkInput} from "../PostFormLinkInputComponent/index";
-import {PostAttachment} from "../../../../post-attachment/component/Elements/PostAttachment/index";
 import {PostEntity} from "../../../definitions/entity/Post";
 import {Session} from "../../../../session/Session";
 import {LoadingManager} from "../../../../common/classes/LoadingStatus";
 import {PostFormModel} from "./model";
+import {AttachmentRESTService} from "../../../../attachment/service/AttachmentRESTService";
 
 @Component({
     template: require('./template.jade'),
@@ -37,7 +34,7 @@ export class PostForm
     constructor(
         private session: Session,
         private service: PostRESTService,
-        private attachments: PostAttachmentRESTService
+        private attachments: AttachmentRESTService
     ) {}
 
     ngOnInit() {

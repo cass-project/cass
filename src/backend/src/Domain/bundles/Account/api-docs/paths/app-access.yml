@@ -8,9 +8,9 @@
       - x_api_key: []
     responses:
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       200:
+        description: 200 OK
         schema:
           required:
             - success

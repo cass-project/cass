@@ -1,15 +1,11 @@
-import {Component, Input, Output, EventEmitter, Directive} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Router} from "@angular/router";
 
-import {ModalComponent} from "../../../../modal/component/index";
-import {ThemeSelect} from "../../../../theme/component/ThemeSelect/index";
 import {CollectionRESTService} from "../../../service/CollectionRESTService";
 import {CollectionEntity, Collection} from "../../../definitions/entity/collection";
-import {ModalBoxComponent} from "../../../../modal/component/box/index";
 import {ScreenControls} from "../../../../common/classes/ScreenControls";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
-import {ProgressLock} from "../../../../form/component/ProgressLock/index";
-import {Router} from '@angular/router';
 import {Session} from "../../../../session/Session";
 
 enum CreateCollectionMasterStage
@@ -19,10 +15,12 @@ enum CreateCollectionMasterStage
 }
 
 @Component({
+    selector: 'cass-collection-create-master',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-collection-create-master'})
+    ]
+})
 export class CollectionCreateMaster
 {
     constructor(
@@ -75,7 +73,14 @@ export class CollectionCreateMaster
     createForProfile() {
         this.loading = true;
 
-        this.collectionRESTService.createCollection(this.collection).subscribe(
+        let request = {
+            owner_sid: this.collection.owner_sid,
+            theme_ids: this.collection.theme_ids,
+            title: this.collection.title,
+            description: this.collection.description
+        };
+
+        this.collectionRESTService.createCollection(request).subscribe(
             (data) => {
                 let profileId;
                 if(data.entity.owner.id === this.session.getCurrentProfile().getId().toString()){

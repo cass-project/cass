@@ -8,10 +8,11 @@
       - x_api_key: []
     responses:
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - account
@@ -20,6 +21,4 @@
               type: boolean
               description: '=true'
             account:
-              type: object
-              schema:
-                $ref: '#/definitions/Account_Entity_Account'
+              $ref: '#/definitions/Account_Entity_Account'

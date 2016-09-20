@@ -1,0 +1,21 @@
+article.component.component-profile
+  div(*ngIf="isSetupRequired()")
+    cass-modal
+      cass-modal-box(width="550px")
+        cass-profile-setup([profile]="session.getCurrentProfile().entity.profile")
+  div(*ngIf="modals.settings.isOpened()")
+    cass-modal
+      cass-modal-box(width="760px")
+        cass-profile-settings((close)='modals.settings.close($event)')
+  div(*ngIf="modals.switcher.isOpened()")
+    cass-modal
+      cass-modal-box(width="360px")
+        cass-profile-switcher((close)='modals.switcher.close($event)')
+  div(*ngIf="modals.interests.isOpened()")
+    cass-modal
+      cass-modal-box(width="550px")
+        cass-profile-interests-modal((close)='modals.interests.close()', (success)='modals.interests.close()')
+  div(*ngIf="modals.createCollection.isOpened()")
+    cass-modal
+      cass-modal-box(width="550px")
+        cass-collection-create-master([for]='"profile"', [for_id]='session.getCurrentProfile().getId()', (close)='modals.createCollection.close()')

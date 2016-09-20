@@ -6,7 +6,9 @@
       Список всех доступных цветов
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - colors

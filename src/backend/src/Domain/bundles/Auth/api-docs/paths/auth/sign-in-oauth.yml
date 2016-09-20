@@ -11,6 +11,7 @@
         in: path
         type: string
         description: Oauth2-провайдер
+        required: true
     responses:
       200:
         description:

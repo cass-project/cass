@@ -3,8 +3,6 @@ import {Component} from "@angular/core";
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {Stream} from "../../../feed/service/FeedService/stream";
 import {PublicService} from "../../service";
-import {NothingFound} from "../../component/Elements/NothingFound/index";
-import {FeedCommunityStream} from "../../../feed/component/stream/FeedCommunityStream/index";
 import {CommunityIndexedEntity} from "../../../community/definitions/entity/Community";
 import {PublicCommunitiesSource} from "../../../feed/service/FeedService/source/public/PublicCommunitiesSource";
 

@@ -1,4 +1,4 @@
-import {Component, Directive} from "@angular/core";
+import {Component} from "@angular/core";
 
 import {ThemeService} from "../../../../../../theme/service/ThemeService";
 import {ProfileModalModel} from "../../model";
@@ -10,17 +10,17 @@ enum InterestsTabScreen
 }
 
 @Component({
+    selector: 'cass-profile-modal-tab-interests',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-profile-modal-tab-interests'})
-
-
+    ]
+})
 export class InterestsTab
 {
-    constructor(private themeService: ThemeService, private model: ProfileModalModel){}
+    constructor(private model: ProfileModalModel){}
 
-    screen: Screens = new Screens();
+    private screen: Screens = new Screens();
 }
 
 class Screens

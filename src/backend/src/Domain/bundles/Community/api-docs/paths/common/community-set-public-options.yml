@@ -10,25 +10,20 @@
       - name: communityId
         in: path
         required: true
-        type: number:
+        type: number
         description: ID коммунити
       - name: body
         in: body
         required: true
-        description:
+        description: Public Options
         schema:
           $ref: '#/definitions/Community_Request_SetPublicOptions'
     responses:
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       404:
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'
       409:
-        description: Коммунити не имеет тематики
-        schema:
-          $ref: '#/responses/error'
+        $ref: '#/responses/error'
       200:
-        schema:
-          $ref: '#/responses/success'
+        $ref: '#/responses/success'

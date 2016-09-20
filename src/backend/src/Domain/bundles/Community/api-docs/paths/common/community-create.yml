@@ -10,15 +10,15 @@
       - name: body
         in: body
         required: true
-        description:
         schema:
           $ref: '#/definitions/Community_Request_CreateCommunity'
     responses:
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - entity

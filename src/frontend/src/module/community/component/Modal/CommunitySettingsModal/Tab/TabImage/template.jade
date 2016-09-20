@@ -14,7 +14,7 @@
     .community-image-container
       cass-community-image(border="square", url="{{model.image.variants[64].public_path}}")
     .community-image-controls
-      button.form-text-button.form-button-text-remove((click)="delete_image()", *ngIf="!loading")
+      button.form-text-button.form-button-text-remove((click)="deleteImage()", *ngIf="!loading")
         i.fa.fa-fw.fa-trash
         span Удалить
       button.form-text-button.form-button-text-remove(disabled="", *ngIf="loading")

@@ -1,9 +1,8 @@
 Community_Definitions_CommunityAccess:
   description: Права доступа
-  schema:
-    required:
-      - admin
-    properties:
-      admin:
-        type: boolean
-        description: Права администратора коммунити
+  required:
+    - admin
+  properties:
+    admin:
+      type: boolean
+      description: Права администратора коммунити

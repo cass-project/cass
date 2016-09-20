@@ -21,11 +21,9 @@
       403:
         $ref: '#/responses/Unauthorized'
       409:
-        description:
-          Пользователь уже ливнул из этого коммунити либо никогда к нему не джойнился
-        schema:
-          $ref: '#/responses/error'
+        $ref: '#/responses/error'
       200:
+        description: 200 OK
         schema:
           required:
             - success

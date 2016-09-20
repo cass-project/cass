@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+
 import {PROFILE_GENDER_LIST, ProfileGender, ProfileEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {Image} from "../../../../avatar/definitions/Image";
@@ -46,15 +47,6 @@ export class ProfileSetupModel
 
     setGreetingsMethod(method: string) {
         this.greetings.method = method;
-    }
-
-    normalizeGreetings() {
-        let notReset = this.greetings.method.split('');
-
-        if (!~notReset.indexOf('f')) this.greetings.firstName = '';
-        if (!~notReset.indexOf('l')) this.greetings.lastName = '';
-        if (!~notReset.indexOf('m')) this.greetings.middleName = '';
-        if (!~notReset.indexOf('n')) this.greetings.nickName = '';
     }
     
     useGender(gender: ProfileGender) {

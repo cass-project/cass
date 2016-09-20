@@ -6,8 +6,6 @@ import {Stream} from "./stream";
 import {LoadingManager} from "../../../common/classes/LoadingStatus";
 import {FeedRequest} from "../../definitions/request/FeedRequest";
 import {FeedCriteriaService} from "../FeedCriteriaService";
-import {FeedOptionsService} from "../FeedOptionsService";
-import {AppService} from "../../../../app/frontend-app/service";
 import {FeedEntity} from "./entity";
 
 @Injectable()
@@ -24,9 +22,7 @@ export class FeedService<T extends FeedEntity>
     public source: Source;
     
     constructor(
-        private criteria: FeedCriteriaService,
-        private options: FeedOptionsService,
-        private appService: AppService
+        private criteria: FeedCriteriaService
     ) {}
 
     public provide(source: Source, stream: Stream<T>) {

@@ -17,10 +17,10 @@
         description: ID тематики
     responses:
       '200':
+        description: 200 OK
         schema:
           type: object
           required:
-            - id
             - success
             - entity
           properties:

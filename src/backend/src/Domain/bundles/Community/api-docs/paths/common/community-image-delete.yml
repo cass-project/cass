@@ -10,11 +10,13 @@
       - name: communityId
         in: path
         required: true
-        type: number:
+        type: number
         description: ID коммунити
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - image
@@ -25,8 +27,6 @@
             image:
               $ref: '#/definitions/Avatar_ImageCollection'
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       404:
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'

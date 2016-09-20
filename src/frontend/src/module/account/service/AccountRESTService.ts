@@ -1,48 +1,50 @@
 import {Injectable} from "@angular/core";
-import {Http, Headers} from "@angular/http"
+import {Observable} from "rxjs/Rx";
 
-import {AbstractRESTService} from "../../common/service/AbstractRESTService";
-import {MessageBusService} from "../../message/service/MessageBusService/index";
-import {AuthToken} from "../../auth/service/AuthToken";
+import {RESTService} from "../../common/service/RESTService";
+import {AppAccessResponse200} from "../definitions/paths/app-access";
+import {ChangePasswordResponse200} from "../definitions/paths/change-password-request";
+import {RequestDeleteResponse200} from "../definitions/paths/request-delete";
+import {CancelRequestDeleteResponse200} from "../definitions/paths/cancel-delete-request";
+import {CurrentAccountResponse200} from "../definitions/paths/current-account";
+
+export interface AccountRESTServiceInterface
+{
+    appAccess(): Observable<AppAccessResponse200>;
+    changePassword(old_password: string, new_password: string): Observable<ChangePasswordResponse200>;
+    getCurrentAccount(): Observable<CurrentAccountResponse200>;
+    requestDelete(): Observable<RequestDeleteResponse200>;
+    cancelRequestDelete(): Observable<CancelRequestDeleteResponse200>;
+}
 
 @Injectable()
-export class AccountRESTService extends AbstractRESTService
+export class AccountRESTService implements AccountRESTServiceInterface
 {
-    constructor(
-        protected http: Http,
-        protected token: AuthToken,
-        protected messages: MessageBusService
-    ) { super(http, token, messages); }
+    constructor(private service: RESTService) {}
 
-    appAccess() {
-        let authHeader = new Headers();
-        if(this.token.hasToken()) {
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-        return this.handle(this.http.get('/backend/api/protected/account/app-access', {headers: authHeader}));
+    appAccess(): Observable<AppAccessResponse200> {
+        return this.service.get('/backend/api/protected/account/app-access');
     }
 
-    changePassword(old_password: string, new_password: string) {
-        let authHeader = new Headers();
-        if(this.token.hasToken()) {
-            authHeader.append('Authorization', `${this.token.apiKey}`);
-        }
-
-        return this.handle(this.http.post('/backend/api/protected/account/change-password', JSON.stringify({
+    changePassword(old_password: string, new_password: string): Observable<ChangePasswordResponse200> {
+        let url = '/backend/api/protected/account/change-password';
+        let params = {
             old_password: old_password,
             new_password: new_password
-        }), {headers: authHeader}));
+        };
+
+        return this.service.post(url, params);
     }
 
-    getCurrentAccount() {
-        return this.handle(this.http.get(`/backend/api/protected/account/current`));
+    getCurrentAccount(): Observable<CurrentAccountResponse200> {
+        return this.service.get(`/backend/api/protected/account/current`);
     }
 
-    requestDelete() {
-        return this.handle(this.http.put(`/backend/api/protected/account/request-delete`, ''));
+    requestDelete(): Observable<RequestDeleteResponse200> {
+        return this.service.delete(`/backend/api/protected/account/request-delete`);
     }
 
-    cancelRequestDelete() {
-        return this.handle(this.http.delete(`/backend/api/protected/account/cancel-request-delete`));
+    cancelRequestDelete(): Observable<CancelRequestDeleteResponse200> {
+        return this.service.delete(`/backend/api/protected/account/cancel-request-delete`);
     }
 }

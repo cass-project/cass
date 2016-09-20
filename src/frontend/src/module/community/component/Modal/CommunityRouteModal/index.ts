@@ -1,22 +1,22 @@
-import {Component, EventEmitter, Output, Directive} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
-import {ModalComponent} from "../../../../modal/component/index";
-import {ModalBoxComponent} from "../../../../modal/component/box/index";
 
 @Component({
+    selector: 'cass-community-route-modal',
     template: require('./template.html'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-community-route-modal'})
+    ]
+})
 export class CommunityRouteModal
 {
+    constructor(private service: CommunityRESTService) {}
+
     @Output("close") close = new EventEmitter<CommunityRouteModal>();
     @Output("create") create = new EventEmitter<CommunityRouteModal>();
     @Output("join") join = new EventEmitter<CommunityRouteModal>();
     @Output("destroy") destroy = new EventEmitter<CommunityRouteModal>();
-
-    constructor(private service: CommunityRESTService) {}
 
     closeModal() {
         this.close.emit(this);

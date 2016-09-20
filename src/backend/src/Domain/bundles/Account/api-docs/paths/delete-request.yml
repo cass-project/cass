@@ -8,14 +8,13 @@
       - x_api_key: []
     responses:
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       409:
-        description: Аккаунт уже имеет запрос на удаление
-        schema:
-          $ref: '#/responses/error'
+        $ref: '#/responses/error'
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - date_account_delete_request

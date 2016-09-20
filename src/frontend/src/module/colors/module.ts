@@ -1,8 +1,4 @@
-import {Module} from "../common/classes/Module";
-
-export = new Module({ 
-    name: 'colors',
-    RESTServices: [],
+export const CASSColorsModule = {
+    declarations: [],
     providers: [],
-    directives: []
-});
+};

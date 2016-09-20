@@ -24,17 +24,14 @@ Profile_Entity_Profile:
       type: boolean
       description: Флаг "данный профиль является текущим"
     greetings:
-      schema:
-        $ref: '#/definitions/Profile_Entity_ProfileGreetings'
+      $ref: '#/definitions/Profile_Entity_ProfileGreetings'
     birthday:
       type: string
       description: Дата рождения. Может отсутствовать.
     image:
-      schema:
-        $ref: '#/definitions/Avatar_ImageCollection'
+      $ref: '#/definitions/Avatar_ImageCollection'
     gender:
-      schema:
-        $ref: '#/definitions/Profile_Entity_Gender'
+      $ref: '#/definitions/Profile_Entity_Gender'
     expert_in:
       type: array
       items:

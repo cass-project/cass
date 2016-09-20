@@ -1,4 +1,5 @@
 error:
+  description: Error
   schema:
     required:
       - success

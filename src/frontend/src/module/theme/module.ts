@@ -1,15 +1,13 @@
-import {Module} from "../common/classes/Module";
-
-import {ThemeService} from "./service/ThemeService";
 import {ThemeRESTService} from "./service/ThemeRESTservice";
+import {ThemeService} from "./service/ThemeService";
+import {ThemeSelect} from "./component/ThemeSelect/index";
 
-export = new Module({ 
-    name: 'theme',
-    RESTServices: [
-        ThemeRESTService,
+export const CASSThemeModule = {
+    declarations: [
+        ThemeSelect,
     ],
     providers: [
+        ThemeRESTService,
         ThemeService,
-    ],
-    directives: []
-});
+    ]
+};

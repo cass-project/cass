@@ -1,4 +1,5 @@
-button(#feedUpdateButton, class="form-button form-button-remove", *ngIf='feed.shouldLoad', disabled)
-    i(class="fa fa-retweet", aria-hidden="true")
-button(class="form-button form-button-remove", *ngIf='!feed.shouldLoad', disabled)
-    i(class='fa fa-check', aria-hidden="true")
+div.component.component-feed-scroll-detector
+    button(#feedUpdateButton, class="form-button form-button-remove", *ngIf='feed.shouldLoad', disabled)
+        i(class="fa fa-retweet", aria-hidden="true")
+    button(class="form-button form-button-remove", *ngIf='!feed.shouldLoad', disabled)
+        i(class='fa fa-check', aria-hidden="true")

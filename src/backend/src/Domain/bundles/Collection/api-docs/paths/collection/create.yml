@@ -10,17 +10,16 @@
         required: true
         description: JSON Request
         schema:
-          schema:
-            $ref: '#/definitions/Collection_Entity_Request'
+          $ref: '#/definitions/Collection_Entity_Request'
     responses:
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       404:
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - entity
@@ -29,5 +28,4 @@
               type: boolean
               description: '=true'
             entity:
-              schema:
-                $ref: '#/definitions/Collection_Entity_Collection'
+              $ref: '#/definitions/Collection_Entity_Collection'

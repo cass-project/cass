@@ -10,7 +10,7 @@
       - in: path
         name: communityId
         required: true
-        type: number:
+        type: number
         description: ID коммунити
       - in: path
         name: feature
@@ -19,15 +19,10 @@
         description: Фича (строковой код)
     responses:
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       404:
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'
       409:
-        description: Данная фича уже деактивирована / не была ранее активирована
-        schema:
-          $ref: '#/responses/error'
+        $ref: '#/responses/error'
       200:
-        schema:
-          $ref: '#/responses/success'
+        $ref: '#/responses/success'

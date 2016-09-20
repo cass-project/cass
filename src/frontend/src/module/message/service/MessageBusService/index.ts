@@ -1,9 +1,10 @@
 import {Injectable} from "@angular/core";
-
-import {MessageBusNotificationsModel} from "../../component/MessageBusNotifications/model";
+import {
+    MessageBusNotificationsModel,
+    MessageBusNotificationsLevel,
+    MessageBusNotificationsStates
+} from "../../component/MessageBusNotifications/model";
 import {MessageBusInterface} from "./interface";
-import {MessageBusNotificationsLevel} from "../../component/MessageBusNotifications/model";
-import {MessageBusNotificationsStates} from "../../component/MessageBusNotifications/model";
 
 @Injectable()
 export class MessageBusService implements MessageBusInterface
@@ -14,8 +15,8 @@ export class MessageBusService implements MessageBusInterface
     private maxNotifications:number = 3;
     private notificationDelay:number = 12 /*sec*/ * 1000 /*ms*/;
 
-    push(level: MessageBusNotificationsLevel, message: string) {
-
+    push(level: MessageBusNotificationsLevel, message: string)
+    {
         let notification:MessageBusNotificationsModel = {
             id: this.autoIncrementIndex++,
             level: level,

@@ -1,14 +1,31 @@
-import {Component, Directive} from "@angular/core";
+import {Component} from "@angular/core";
 
-import {CommunityService} from "../../service/CommunityService";
-import {CommunityModalService} from "../../service/CommunityModalService";
+import {CurrentCommunityService} from "../../route/CommunityRoute/service";
 
 @Component({
+    selector: 'cass-community-menu',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-community-menu'})
+    ]
+})
 export class CommunityMenuComponent
 {
-    constructor(private service: CommunityService, private modalsService: CommunityModalService){}
+    constructor(
+        private current: CurrentCommunityService,
+    ) {}
+
+    isAdmin() {
+        let community = this.current.getCommunity();
+
+        if(community) {
+            return this.current.getCommunity().is_own;
+        }else{
+            return false;
+        }
+    }
+
+    openSettings() {
+        this.current.modals.settings.open();
+    }
 }

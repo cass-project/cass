@@ -1,8 +1,8 @@
-import {Component, Input, Directive} from "@angular/core";
+import {Component, Input} from "@angular/core";
 
 import {ProfileEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
-import {Router} from '@angular/router';
+import {Router} from "@angular/router";
 
 var moment = require('moment');
 

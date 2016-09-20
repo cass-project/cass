@@ -3,7 +3,7 @@ namespace ZEA2\Platform\Bundles\REST\Response;
 
 use Psr\Http\Message\ResponseInterface;
 
-class ResponseBuilder
+abstract class ResponseBuilder
 {
     const CODE_SUCCESS = 200;
     const CODE_BAD_REQUEST = 400;
@@ -25,10 +25,18 @@ class ResponseBuilder
     /** @var string|null|\Exception */
     private $error;
 
+    /** @var ResponseDecoratorsManager */
+    private $decorators;
+
     public final function __construct(ResponseInterface $response)
     {
         $this->response = $response;
+        $this->decorators = new ResponseDecoratorsManager();
+
+        $this->initDecorators($this->decorators);
     }
+
+    protected abstract function initDecorators(ResponseDecoratorsManager $decoratorsManager);
 
     public final function setStatus($status): self
     {
@@ -42,51 +50,58 @@ class ResponseBuilder
         return $this->status;
     }
 
-    public function setStatusSuccess(): self {
+    public function getDecorators(): ResponseDecoratorsManager
+    {
+        return $this->decorators;
+    }
+
+    public function setStatusSuccess(): self
+    {
         $this->setStatus(self::CODE_SUCCESS);
 
         return $this;
     }
 
-    public function setStatusNotFound(): self {
+    public function setStatusNotFound(): self
+    {
         $this->setStatus(self::CODE_NOT_FOUND);
 
         return $this;
     }
 
-    public function setStatusNotProcessable(): self {
+    public function setStatusNotProcessable(): self
+    {
         $this->setStatus(self::CODE_UN_PROCESSABLE);
 
         return $this;
     }
 
-    public function setStatusNotAllowed(): self {
+    public function setStatusNotAllowed(): self
+    {
         $this->setStatus(self::CODE_NOT_ALLOWED);
 
         return $this;
     }
 
-    public function setStatusBadRequest(): self {
+    public function setStatusBadRequest(): self
+    {
         $this->setStatus(self::CODE_BAD_REQUEST);
 
         return $this;
     }
 
-    public function setStatusConflict(): self {
+    public function setStatusConflict(): self
+    {
         $this->setStatus(self::CODE_CONFLICT);
 
         return $this;
     }
 
-    public function setStatusInternalError(): self {
+    public function setStatusInternalError(): self
+    {
         $this->setStatus(self::CODE_INTERNAL_ERROR);
 
         return $this;
-    }
-
-    public function isSuccess(): bool
-    {
-        return !$this->getError() && ($this->getStatus() === self::CODE_SUCCESS);
     }
 
     public final function getJson(): array
@@ -106,7 +121,12 @@ class ResponseBuilder
         return $this->error;
     }
 
-    public final function setError( $error): self
+    public function hasError()
+    {
+        return $this->error !== null;
+    }
+
+    public final function setError($error): self
     {
         $this->error = $error;
 
@@ -121,45 +141,18 @@ class ResponseBuilder
 
         return $this->response
             ->withStatus($this->status)
-            ->withHeader('Content-Type', 'application/json')
-        ;
+            ->withHeader('Content-Type', 'application/json');
     }
 
     public function checkRequirements()
     {
-        if ($this->status === null) {
+        if($this->status === null) {
             throw new \Exception('No status code provided');
         }
     }
 
-
     private function makeJSONResponse(): array
     {
-        $json = $this->json;
-        $json['success'] = $this->isSuccess();
-
-        if(!$json['success']) {
-            if($this->error instanceof \Exception) {
-                $errorMessage = $this->error->getMessage();
-                $json['error_stack'] = $this->error->getTrace();
-            }else if($this->error instanceof \TypeError) {
-                $errorMessage = $this->error->getMessage();
-                $json['error_stack'] = $this->error->getTrace();
-            }else if(is_string($this->error)) {
-                $errorMessage = $this->error;
-            }else if($this->error === null){
-                $errorMessage = 'No error message available';
-            }else{
-                $errorMessage = (string) $this->error;
-            }
-
-            $json['error'] = $errorMessage;
-        }
-
-        if(defined('APP_TIMER_START')) {
-            $json['time'] = (microtime(true) - APP_TIMER_START).'ms';
-        }
-
-        return $json;
+        return $this->decorators->decorate($this, $this->json);
     }
 }

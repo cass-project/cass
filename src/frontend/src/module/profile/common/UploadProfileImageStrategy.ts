@@ -1,13 +1,20 @@
-import {UploadImageStrategy, UploadImageCropModel} from "../../form/component/UploadImage/strategy";
-import {UploadImageModal} from "../../form/component/UploadImage/index";
+import {Observable} from "rxjs/Rx";
+
+import {UploadImageStrategy, UploadImageCropModel} from "../../common/component/UploadImage/strategy";
+import {UploadImageModal} from "../../common/component/UploadImage/index";
+import {UploadProfileImageResponse200, UploadProfileImageProgress} from "../definitions/paths/image-upload";
+import {ProfileRESTService} from "../service/ProfileRESTService";
 import {ProfileEntity} from "../definitions/entity/Profile";
-import {UploadProfileImageResponse200} from "../definitions/paths/image-upload";
 
 export class UploadProfileImageStrategy implements UploadImageStrategy
 {
-    private xhrRequest: XMLHttpRequest;
+    private observable: Observable<UploadProfileImageProgress|UploadProfileImageResponse200>;
+    private last: UploadProfileImageResponse200;
 
-    constructor(private profile: ProfileEntity, private apiKey: string) {}
+    constructor(
+        private profile: ProfileEntity,
+        private service: ProfileRESTService
+    ) {}
 
     getCropperOptions() {
         return {
@@ -30,53 +37,38 @@ export class UploadProfileImageStrategy implements UploadImageStrategy
     }
 
     abort(file: Blob, modal: UploadImageModal) {
-        if(this.xhrRequest) {
-            this.xhrRequest.abort();
-        }
-
         modal.progress.abort();
     }
 
     process(file: Blob, model: UploadImageCropModel, modal: UploadImageModal) {
-        this.xhrRequest = new XMLHttpRequest();
+        this.observable = this.service.imageUpload(this.profile.id, {
+            file: file,
+            crop: {
+                x1: model.x,
+                y1: model.y,
+                x2: model.width + model.x,
+                y2: model.height + model.y,
+            }
+        });
 
-        let crop = {
-            start: {
-                x: model.x,
-                y: model.y
+        this.observable.subscribe(
+            (response) => {
+                if(response['progress']) {
+                    modal.progress.update(response['progress']);
+                }
+
+                this.last = <UploadProfileImageResponse200>response;
             },
-            end: {
-                x: model.width + model.x,
-                y: model.height + model.y
-            }
-        };
+            (error) => {
+                modal.abort();
+            },
+            () => {
+                this.profile.image = this.last.image;
 
-        let url = `/backend/api/protected/profile/${this.profile.id}/image-upload`
-            + `/crop-start/${crop.start.x}/${crop.start.y}`
-            + `/crop-end/${crop.end.x}/${crop.end.y}`;
-
-        let formData = new FormData();
-        formData.append("file", file);
-
-        this.xhrRequest.open("POST", url);
-        this.xhrRequest.setRequestHeader('Authorization', this.apiKey);
-
-        this.xhrRequest.onprogress = (e) => {
-            if (e.lengthComputable) {
-                modal.progress.update(Math.floor((e.loaded / e.total) * 100));
-            }
-        };
-
-        this.xhrRequest.onreadystatechange = () => {
-            if (this.xhrRequest.readyState === 4) {
                 modal.progress.complete();
                 modal.close();
-                let response: UploadProfileImageResponse200 = JSON.parse(this.xhrRequest.responseText);
-                this.profile.image = response.image;
             }
-        };
-
-        this.xhrRequest.send(formData);
+        );
 
         modal.progress.reset();
     }

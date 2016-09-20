@@ -1,24 +1,31 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 
-import {CommunityExtendedEntity} from "../../definitions/entity/Community";
 import {GetCommunityBySIDResponse200} from "../../definitions/paths/get-by-sid";
+import {CommunityExtendedEntity} from "../../definitions/entity/CommunityExtended";
+import {ModalControl} from "../../../common/classes/ModalControl";
 import {CommunityRESTService} from "../../service/CommunityRESTService";
-import {CommunityModals} from "../../modals";
 
 @Injectable()
-export class  CommunityRouteService
+export class  CurrentCommunityService
 {
+    constructor(
+        private api: CommunityRESTService,
+    ) {}
+
     private request: string;
+
+    public modals: {
+        settings: ModalControl,
+        createCollection: ModalControl
+    } = {
+        settings: new ModalControl(),
+        createCollection: new ModalControl()
+    };
 
     private community: CommunityExtendedEntity;
     private loading: boolean = false;
     private observable: Observable<GetCommunityBySIDResponse200>;
-
-    constructor(
-        private api: CommunityRESTService,
-        public modals: CommunityModals
-    ) {}
 
     public getCommunity(): CommunityExtendedEntity {
         if(!this.community) {
@@ -36,7 +43,7 @@ export class  CommunityRouteService
         return this.loading;
     }
     
-    public getObservable(): Observable<GetCommunityBySIDResponse200> {
+    public getObservable() {
         return this.observable;
     }
 

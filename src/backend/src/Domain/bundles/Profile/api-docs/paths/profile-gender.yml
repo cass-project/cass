@@ -18,7 +18,9 @@
           $ref: '#/definitions/Profile_SetGender_Request'
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - gender
@@ -27,8 +29,6 @@
               type: boolean
               description: '=true'
             gender:
-              schema:
-                $ref: '#/definitions/Profile_Entity_Gender'
+              $ref: '#/definitions/Profile_Entity_Gender'
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'

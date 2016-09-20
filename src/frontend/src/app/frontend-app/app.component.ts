@@ -1,8 +1,4 @@
-import {Component, ViewChild, ElementRef, Renderer} from "@angular/core";
-import {RouterOutlet} from '@angular/router';
-import {Module} from "../../module/common/classes/Module";
-import {AppService} from "./service";
-
+import {Component, ViewChild, ElementRef} from "@angular/core";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -10,21 +6,12 @@ import {AppService} from "./service";
     styles: [
         require('./style.shadow.scss')
     ],
-    providers: [AppService]
+    providers: []
 })
 export class App
 {
     static version(): string {
         return require('./../../../package.json').version;
-    }
-
-    @ViewChild('content') content: ElementRef;
-    
-    constructor(private appService: AppService){}
-
-    
-    ngAfterViewInit(){
-        this.appService.content = this.content;
     }
 }
 

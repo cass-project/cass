@@ -2,6 +2,7 @@ Auth_Response_SignInResponse:
   description:
     Sign In Response
   schema:
+    type: object
     required:
       - api_key
       - profiles

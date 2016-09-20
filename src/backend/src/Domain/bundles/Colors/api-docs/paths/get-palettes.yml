@@ -6,7 +6,9 @@
       Список всех доступных палитр
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - palettes

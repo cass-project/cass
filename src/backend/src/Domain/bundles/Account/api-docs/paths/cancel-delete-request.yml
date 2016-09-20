@@ -8,8 +8,6 @@
       - x_api_key: []
     responses:
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       200:
-        schema:
-          $ref: '#/responses/success'
+        $ref: '#/responses/success'

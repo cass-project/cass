@@ -14,11 +14,11 @@
         description: ID поста
     responses:
       404:
-        description: Пост не найден
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
             - entity

@@ -4,7 +4,7 @@ namespace CASS\Application\Bootstrap;
 use CASS\Application\Exception\EntityNotFoundException;
 use CASS\Application\Exception\BadCommandCallException;
 use CASS\Application\Exception\PermissionsDeniedException;
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\CASSResponseBuilder;
 use ZEA2\Platform\Bundles\REST\Request\Params\InvalidJSONSchema;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -14,7 +14,7 @@ class FinalHandler
 {
     public function __invoke(Request $request, Response $response, $error)
     {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
         $responseBuilder->setStatusBadRequest();
 
         if($error === null) {

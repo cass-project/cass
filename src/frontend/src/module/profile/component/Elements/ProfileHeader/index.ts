@@ -1,10 +1,9 @@
-import {Component, Input, EventEmitter, Output, Directive} from "@angular/core";
+import {Component, Input, EventEmitter, Output} from "@angular/core";
 
 import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
-import {ProfileImage} from "../ProfileImage/index";
-import {ProfileModals} from "../../../modals";
 import {ProfileRouteService} from "../../../route/ProfileRoute/service";
+import {ProfileModals} from "../Profile/modals";
 
 @Component({
     template: require('./template.jade'),

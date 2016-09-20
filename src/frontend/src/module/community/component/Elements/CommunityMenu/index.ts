@@ -1,16 +1,17 @@
-import {Component, Input, Directive} from "@angular/core";
+import {Component, Input} from "@angular/core";
 
-import {CommunityComponent} from "../../../index";
-import {CommunityExtendedEntity} from "../../../definitions/entity/Community";
+import {CommunityComponent} from "../Community/index";
+import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
 
 @Component({
+    selector: 'cass-community-menu',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
     providers: [
         CommunityComponent
-    ],selector: 'cass-community-menu'})
+    ]})
 export class communityMenuComponent
 {
     @Input('community') community: CommunityExtendedEntity;

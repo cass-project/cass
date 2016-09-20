@@ -1,79 +1,47 @@
 import {Injectable} from "@angular/core";
 
-import {FrontlineService} from "../../frontline/service";
+import {CommunityFeatureEntity} from "../definitions/entity/CommunityFeature";
+import {FrontlineService} from "../../frontline/service/FrontlineService";
 
 @Injectable()
 export class CommunityFeaturesService
 {
-    private featuresInfo:FeaturesInfo[] = [
-        {
-            "code":"collections",
-            "name": "Коллекции",
-            "description":"Активировав этот модуль, участники и/или модераторы этого коммунити могут создавать подборки контента, постить видео, ссылки, изображения и любые другие материалы."
-        },
-        {
-            "code":"boards",
-            "name": "Форум",
-            "description":"Доска объявлений, система форумов для вашего коммунити."
-        },
-        {
-            "code":"chat",
-            "name": "Чат",
-            "description":"Добавить коллективные чаты в ваше коммунити."}
-    ];
-    private features;
+    private features: CommunityFeatureEntity[] = [];
 
-    constructor(private frontline: FrontlineService)
-    {
+    constructor(
+        private frontline: FrontlineService
+    ) {
         this.features = frontline.session.config.community.features;
     }
 
-    getFeatures()
+    getAllFeatures(): CommunityFeatureEntity[]
     {
         return this.features;
     }
 
-    getName(code) : string
-    {
-        return this.getFeatureInfo(code).name;
+    findFeature(code: string): CommunityFeatureEntity {
+        return this.features.filter(feature => {
+            return feature.code === code;
+        })[0];
     }
 
-    getIcon(code) : string
-    {
-        for(let feature of this.features) {
-            if(feature.code===code) {
-                return feature.fa_icon;
-            }
-        }
+    getFeatures() {
+        return this.features;
     }
 
-    getDescription(code) : string
-    {
-        return this.getFeatureInfo(code).description;
+    getName(code) : string {
+        return this.findFeature(code).code;
     }
 
-    getFeatureInfo(code) : FeaturesInfo
-    {
-        for(let featureInfo of this.featuresInfo) {
-            if(featureInfo.code === code) {
-                return featureInfo;
-            }
-        }
+    getIcon(code) : string {
+        return this.findFeature(code).fa_icon;
     }
 
-    isDisabled(code) : boolean
-    {
-        for(let feature of this.features) {
-            if(feature.code===code) {
-                return !feature.is_production_ready;
-            }
-        }
+    getDescription(code) : string {
+        return this.findFeature(code).code;
     }
-}
 
-export interface FeaturesInfo
-{
-    code:string;
-    name:string;
-    description?:string;
+    isDisabled(code) : boolean {
+        return this.findFeature(code).is_production_ready;
+    }
 }

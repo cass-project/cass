@@ -1,8 +1,0 @@
-textarea.form-input(
-  placeholder="Введите ваше сообщение для {{greetings||'пользователя'}}",
-  (input)="adjust(textarea.value)",
-  (keydown.enter)="submit($event)",
-  [ngModelOptions]="{standalone: true}", [(ngModel)]="model.content",
-  [disabled]="disabled",
-  #textarea
-)

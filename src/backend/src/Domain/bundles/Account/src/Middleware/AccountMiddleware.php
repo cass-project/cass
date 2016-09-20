@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Account\Middleware;
 
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
 use CASS\Domain\Bundles\Account\Exception\AccountNotFoundException;
 use CASS\Domain\Bundles\Account\Middleware\Command\CancelDeleteRequestCommand;
@@ -25,7 +25,7 @@ class AccountMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect('change-password', ChangePasswordCommand::class)

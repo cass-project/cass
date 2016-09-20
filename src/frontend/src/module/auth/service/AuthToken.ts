@@ -12,7 +12,8 @@ export class AuthToken
     getAPIKey(): string {
         return this.apiKey;
     }
-    hasToken(): boolean {
+
+    isAvailable(): boolean {
         return !! this.apiKey;
     }
 

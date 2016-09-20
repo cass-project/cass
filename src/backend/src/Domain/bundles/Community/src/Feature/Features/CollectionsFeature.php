@@ -17,6 +17,16 @@ final class CollectionsFeature extends AbstractFeature
         return 'fa-bookmark';
     }
 
+    public function getTranslatedName(): string
+    {
+        return 'Ленты и подборки';
+    }
+
+    public function getTranslatedDescription(): string
+    {
+        return 'Активировав этот модуль, участники и/или модераторы этого коммунити могут создавать подборки контента, постить видео, ссылки, изображения и любые другие материалы.';
+    }
+
     public function isProductionReady(): bool
     {
         return true;

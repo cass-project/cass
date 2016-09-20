@@ -1,14 +1,15 @@
-import {Component, EventEmitter, Output, Directive} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 
 import {ProfileSetupModel} from "../../model";
 import {ProfileGender} from "../../../../../definitions/entity/Profile";
 
 @Component({
+    selector: 'cass-profile-setup-screen-gender',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-profile-setup-screen-gender'})
-
+    ]
+})
 export class ProfileSetupScreenGender
 {
     @Output('next') nextEvent = new EventEmitter<ProfileSetupModel>();

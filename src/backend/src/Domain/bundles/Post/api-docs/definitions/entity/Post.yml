@@ -1,4 +1,5 @@
 Post_Entity_Post:
+  type: object
   required:
     - id
     - post_type
@@ -14,10 +15,10 @@ Post_Entity_Post:
     post_type:
       type: object
       description: Тип поста
-      schema:
-        required:
-          - int
-          - string
+      required:
+        - int
+        - string
+      properties:
         int:
           type: number
           description: Код (int)

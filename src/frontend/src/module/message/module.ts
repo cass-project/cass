@@ -1,15 +1,11 @@
-import {Module} from "../common/classes/Module";
-
 import {MessageBusService} from "./service/MessageBusService/index";
 import {MessageBusNotifications} from "./component/MessageBusNotifications/index";
 
-export = new Module({ 
-    name: 'message',
-    RESTServices: [],
+export const CASSMessageModule = {
+    declarations: [
+        MessageBusNotifications,
+    ],
     providers: [
         MessageBusService,
-    ],
-    directives: [
-        MessageBusNotifications,
     ]
-});
+};

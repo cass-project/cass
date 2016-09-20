@@ -6,6 +6,7 @@ export interface ChangePasswordRequest
     new_password: string;
 }
 
-export interface ChangePasswordResponse200 extends Success200 {
+export interface ChangePasswordResponse200 extends Success200
+{
     api_key: string;
 }

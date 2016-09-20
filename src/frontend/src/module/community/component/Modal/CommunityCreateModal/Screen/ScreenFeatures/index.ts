@@ -1,23 +1,31 @@
-import {Component, Directive} from "@angular/core";
+import {Component} from "@angular/core";
 
-import {CommunityCreateModalModel, CommunityFeaturesModel} from "../../model";
+import {CommunityCreateModalModel} from "../../model";
 import {CommunityFeaturesService} from "../../../../../service/CommunityFeaturesService";
 import {Screen} from "../../screen";
-import {CommunityCreateModalForm} from "../../Form";
+import {CommunityFeatureEntity} from "../../../../../definitions/entity/CommunityFeature";
 
 @Component({
     template: require('./template.jade'),
+    selector: 'cass-community-create-modal-screen-features',
     styles: [
         require('./style.shadow.scss')
     ],
-    providers: [CommunityFeaturesService],selector: 'cass-community-create-modal-screen-features'})
+    providers: [
+        CommunityFeaturesService
+    ]
+})
 export class ScreenFeatures extends Screen
 {
-    private features: CommunityFeaturesModel[] = [];
+    private features: CommunityFeatureEntity[] = [];
 
-    constructor(public model: CommunityCreateModalModel, private featuresService: CommunityFeaturesService) {
+    constructor(
+        public model: CommunityCreateModalModel,
+        private featuresService: CommunityFeaturesService
+    ) {
         super();
-        this.features = featuresService.getFeatures();
+
+        this.features = featuresService.getAllFeatures();
 
         for(let feature of this.features) {
             this.model.features.push({

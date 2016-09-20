@@ -1,11 +1,8 @@
-import {Module} from "../common/classes/Module";
-import {SidebarComponent} from "./index";
+import {SidebarComponent} from "./component/Sidebar/index"
 
-export = new Module({ 
-    name: 'sidebar',
-    RESTServices: [],
-    providers: [],
-    directives: [
+export const CASSSidebarModule = {
+    declarations: [
         SidebarComponent,
-    ]
-});
+    ],
+    providers: [],
+};

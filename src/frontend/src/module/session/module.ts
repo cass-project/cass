@@ -1,10 +1,8 @@
-import {Module} from "../common/classes/Module";
-
 import {Session} from "./Session";
 
-export = new Module({ 
-    name: 'session',
+export const CASSSessionModule = {
+    declarations: [],
     providers: [
         Session,
     ],
-});
+};

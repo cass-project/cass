@@ -1,8 +1,4 @@
-import {Module} from "../common/classes/Module";
-
-export = new Module({ 
-    name: 'opengraph',
-    RESTServices: [],
+export const CASSOpenGraphModule = {
+    declarations: [],
     providers: [],
-    directives: []
-});
+};

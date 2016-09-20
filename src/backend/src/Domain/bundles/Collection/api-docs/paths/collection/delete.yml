@@ -5,12 +5,6 @@
     description:
       Удаляет коллекцию с указанным ID
     parameters:
-      - name: profileId
-        in: path
-        required: true
-        type: number
-        description:
-          ID профиля (владельца коллекции)
       - name: collectionId
         in: path
         required: true
@@ -19,15 +13,10 @@
           ID коллекции
     responses:
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       409:
-        description: Попытка удалить защищенную от удаления коллекцию
-        schema:
-          $ref: '#/responses/error'
+        $ref: '#/responses/error'
       404:
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'
       200:
-        schema:
-          $ref: '#/responses/success'
+        $ref: '#/responses/success'

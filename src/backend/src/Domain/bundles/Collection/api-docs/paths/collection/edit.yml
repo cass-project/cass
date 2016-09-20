@@ -16,15 +16,11 @@
         required: true
         description: JSON Request
         schema:
-          schema:
-            $ref: '#/definitions/Collection_Update_Request'
+          $ref: '#/definitions/Collection_Update_Request'
     responses:
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       404:
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'
       200:
-        schema:
-          $ref: '#/responses/success'
+        $ref: '#/responses/success'

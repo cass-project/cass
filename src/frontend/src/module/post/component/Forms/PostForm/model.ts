@@ -1,10 +1,10 @@
-import {PostAttachmentEntity} from "../../../../post-attachment/definitions/entity/PostAttachment";
+import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
 import {CreatePostRequest} from "../../../definitions/paths/create";
 
 export class PostFormModel
 {
     public content: string = '';
-    public attachments: PostAttachmentEntity<any>[] = [];
+    public attachments: AttachmentEntity<any>[] = [];
 
     constructor(
         public postType: number,
@@ -46,17 +46,17 @@ export class PostFormModel
         return this.attachments.length > 0;
     }
 
-    getAllAttachments(): PostAttachmentEntity<any>[]
+    getAllAttachments(): AttachmentEntity<any>[]
     {
         return this.attachments;
     }
 
-    getAttachment(): PostAttachmentEntity<any>
+    getAttachment(): AttachmentEntity<any>
     {
         return this.attachments[0];
     }
 
-    addAttachment(attachment: PostAttachmentEntity<any>) {
+    addAttachment(attachment: AttachmentEntity<any>) {
         this.attachments = [];
         this.attachments.push(attachment);
     }

@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Feed\Middleware;
 
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
 use CASS\Domain\Bundles\Feed\Exception\AbstractFeedException;
 use CASS\Domain\Bundles\Feed\Middleware\Command\CollectionCommand;
@@ -30,7 +30,7 @@ final class FeedMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null): ResponseInterface
     {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
 
         try {
             $resolver = $this->commandService->createResolverBuilder()

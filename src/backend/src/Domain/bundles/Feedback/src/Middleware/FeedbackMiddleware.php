@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Feedback\Middleware;
 
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
 use CASS\Domain\Bundles\Feedback\Middleware\Command\CreateCommand;
 use CASS\Domain\Bundles\Feedback\Middleware\Command\CreateFeedbackResponseCommand;
@@ -26,7 +26,7 @@ class FeedbackMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = NULL)
     {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect("create", CreateCommand::class)

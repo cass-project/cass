@@ -23,12 +23,12 @@
         description: Желаемая позиция в дереве тематики.
     responses:
       '200':
+        description: 200 OK
         schema:
           type: object
           required:
             - success
-            - total
-            - entities
+            - entity
           properties:
             success:
               type: boolean

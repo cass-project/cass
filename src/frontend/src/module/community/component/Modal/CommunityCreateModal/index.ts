@@ -1,19 +1,12 @@
-import {Component, EventEmitter, Output, Directive} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
+import {Observable} from "rxjs/Observable";
 
 import {CommunityCreateModalModel} from "./model";
-
-import {ScreenGeneral} from "./Screen/ScreenGeneral";
-import {ScreenFeatures} from "./Screen/ScreenFeatures";
-
-import {ModalComponent} from "../../../../modal/component";
-import {ModalBoxComponent} from "../../../../modal/component/box";
 import {ScreenControls} from "../../../../common/classes/ScreenControls";
 import {AuthService} from "../../../../auth/service/AuthService";
 import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
-import {ProgressLock} from "../../../../form/component/ProgressLock/index";
 import {LoadingManager} from "../../../../common/classes/LoadingStatus";
-import {Observable} from "rxjs/Observable";
 import {CommunityCreateModalNotifier} from "./notify";
 
 enum CreateStage {
@@ -22,25 +15,17 @@ enum CreateStage {
 }
 
 @Component({
+    selector: 'cass-community-create-modal',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ],
     providers: [
         CommunityCreateModalModel,
-    ],selector: 'cass-community-create-modal'})
-
+    ]
+})
 export class CommunityCreateModal
 {
-    private loading: LoadingManager = new LoadingManager();
-    
-    public screens: ScreenControls<CreateStage> = new ScreenControls<CreateStage>(CreateStage.General, (sc: ScreenControls<CreateStage>) => {
-        sc.add({ from: CreateStage.General, to: CreateStage.Features });
-    });
-
-    @Output('success') successEvent = new EventEmitter<CommunityExtendedEntity>();
-    @Output('close') closeEvent = new EventEmitter<CommunityCreateModal>();
-    
     constructor(
         private model: CommunityCreateModalModel,
         private authService: AuthService,
@@ -48,14 +33,19 @@ export class CommunityCreateModal
         private notifier: CommunityCreateModalNotifier
     ) {}
 
+    @Output('success') successEvent = new EventEmitter<CommunityExtendedEntity>();
+    @Output('close') closeEvent = new EventEmitter<CommunityCreateModal>();
+
+    private loading: LoadingManager = new LoadingManager();
+
+    public screens: ScreenControls<CreateStage> = new ScreenControls<CreateStage>(CreateStage.General, (sc: ScreenControls<CreateStage>) => {
+        sc.add({ from: CreateStage.General, to: CreateStage.Features });
+    });
+
     ngOnInit() {
         if(! this.authService.isSignedIn()) {
             this.closeEvent.emit(this);
         }
-    }
-
-    isHeaderVisible() {
-        return true;
     }
 
     next() {

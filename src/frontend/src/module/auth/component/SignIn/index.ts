@@ -1,15 +1,13 @@
-import {Component, Output, EventEmitter, ViewChild, ElementRef, Directive} from "@angular/core";
-
+import {Component, Output, EventEmitter, ViewChild, ElementRef} from "@angular/core";
 
 import {AuthService} from "../../service/AuthService";
 import {SignInRequest, SignInResponse200} from "../../definitions/paths/sign-in";
-
+import {LoadingManager} from "../../../common/classes/LoadingStatus";
 
 @Component({
     selector: 'cass-auth-sign-in',
     template: require('./template.jade')
 })
-
 export class SignInComponent
 {
     @ViewChild('emailInput') emailInput: ElementRef;
@@ -18,9 +16,7 @@ export class SignInComponent
     @Output('close') closeEvent = new EventEmitter<SignInModel>();
     @Output('sign-up') signUpEvent = new EventEmitter<SignInModel>();
 
-    private status: SignInStatus = {
-        loading: false
-    };
+    private status: LoadingManager = new LoadingManager();
 
     private model: SignInModel = {
         email: '',
@@ -34,7 +30,7 @@ export class SignInComponent
     }
 
     submit() {
-        this.status.loading = true;
+        let loading = this.status.addLoading();
 
         this.service.signIn(this.model).subscribe(
             (response: SignInResponse200) => {
@@ -42,10 +38,10 @@ export class SignInComponent
                     this.successEvent.emit(response);
                 }
 
-                this.status.loading = false;
+                loading.is = false;
             },
             error => {
-                this.status.loading = false;
+                loading.is = false;
             });
     }
 

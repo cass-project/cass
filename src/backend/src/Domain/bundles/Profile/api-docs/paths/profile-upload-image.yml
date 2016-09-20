@@ -36,10 +36,9 @@
         type: file
         required: true
         in: formData
-        allowMultiple: false
     responses:
       200:
-        description: Success
+        description: 200 OK
         schema:
           type: object
           required:
@@ -50,12 +49,8 @@
               type: boolean
               description: '=true'
             image:
-              schema:
-                $ref: '#/definitions/Avatar_ImageCollection'
+              $ref: '#/definitions/Avatar_ImageCollection'
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       404:
-        description: Profile not found
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'

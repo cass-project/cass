@@ -17,6 +17,16 @@ final class BoardsFeature extends AbstractFeature
         return 'fa-bookmark';
     }
 
+    public function getTranslatedName(): string
+    {
+        return 'Форум';
+    }
+
+    public function getTranslatedDescription(): string
+    {
+        return 'Доска объявлений, система форумов для вашего сообщества';
+    }
+
     public function isProductionReady(): bool
     {
         return false;

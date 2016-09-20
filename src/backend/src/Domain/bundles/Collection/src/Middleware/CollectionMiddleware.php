@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Collection\Middleware;
 
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
 use CASS\Domain\Bundles\Collection\Exception\CollectionNotFoundException;
 use CASS\Domain\Bundles\Collection\Middleware\Command\CreateCommand;
@@ -26,7 +26,7 @@ class CollectionMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
 
         try {
             $resolver = $this->commandService->createResolverBuilder()

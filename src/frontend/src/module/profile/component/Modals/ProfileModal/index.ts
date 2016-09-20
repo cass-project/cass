@@ -1,6 +1,5 @@
-import {Component, Output, EventEmitter, Directive} from "@angular/core";
-import {Router} from '@angular/router';
-
+import {Component, Output, EventEmitter} from "@angular/core";
+import {Router} from "@angular/router";
 
 import {ProfileModalModel} from "./model";
 import {ProfileRESTService} from "../../../service/ProfileRESTService";

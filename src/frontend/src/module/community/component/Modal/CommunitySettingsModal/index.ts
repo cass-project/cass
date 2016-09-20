@@ -1,27 +1,15 @@
-import {Component, EventEmitter, Output, Directive} from "@angular/core";
-
-import {ModalBoxComponent} from "../../../../modal/component/box";
-import {ModalComponent} from "../../../../modal/component";
-import {ScreenControls} from "../../../../common/classes/ScreenControls";
-
-import {CommunityService} from "../../../service/CommunityService";
-import {CommunityFeaturesService} from "../../../service/CommunityFeaturesService";
-
-import {FeaturesTab} from "./Tab/TabFeatures";
-import {GeneralTab} from "./Tab/TabGeneral";
-import {CommunityImageTab} from "./Tab/TabImage";
-import {CommunitySettingsModalModel} from "./model";
-import {EditCommunityRequest} from "../../../definitions/paths/edit";
-import {CommunityControlFeatureRequestModel} from "../../../model/CommunityActivateFeatureModel";
-import {CommunityImageUploadRequestModel} from "../../../model/CommunityImageUploadRequestModel";
-import {ImageCropperService} from "../../../../form/component/ImageCropper/index";
+import {Component, EventEmitter, Output} from "@angular/core";
 import {Observable} from "rxjs/Rx";
-import {Response} from "@angular/http";
-import {CommunityFeaturesModel} from "../CommunityCreateModal/model";
-import {SetPublicOptionsCommunityRequest} from "../../../definitions/paths/set-public-options";
 
+import {ScreenControls} from "../../../../common/classes/ScreenControls";
+import {CommunityFeaturesService} from "../../../service/CommunityFeaturesService";
+import {CommunitySettingsModalModel} from "./model";
+import {ImageCropperService} from "../../../../common/component/ImageCropper/index";
+import {CommunityFeaturesModel} from "../CommunityCreateModal/model";
+import {CommunityRESTService} from "../../../service/CommunityRESTService";
 
 @Component({
+    selector: 'cass-community-settings-modal',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
@@ -29,34 +17,33 @@ import {SetPublicOptionsCommunityRequest} from "../../../definitions/paths/set-p
     providers: [
         CommunityFeaturesService,
         ImageCropperService
-    ],selector: 'cass-community-settings-modal'})
-
+    ]
+})
 export class CommunitySettingsModal
 {
-    public screens: ScreenControls<SettingsStage> = new ScreenControls<SettingsStage>(SettingsStage.General);
-
     @Output('close') closeEvent = new EventEmitter<CommunitySettingsModal>();
 
+    public screens: ScreenControls<SettingsStage> = new ScreenControls<SettingsStage>(SettingsStage.General);
     private loading = false;
 
     constructor(
         public model:CommunitySettingsModalModel,
         public modelUnmodified:CommunitySettingsModalModel,
-        private service: CommunityService,
         private cropper: ImageCropperService,
-        private featuresService: CommunityFeaturesService
+        private featuresService: CommunityFeaturesService,
+        private rest: CommunityRESTService
     ) {
-        service.getBySid(model.sid).subscribe(data => {
-            model.id = data.entity.id;
-            model.title = data.entity.title;
-            model.description = data.entity.description;
-            model.theme_id = data.entity.theme.id;
+        rest.getCommunityBySid(model.sid).subscribe(data => {
+            model.id = data.entity.community.id;
+            model.title = data.entity.community.title;
+            model.description = data.entity.community.description;
+            model.theme_id = data.entity.community.theme.id;
             model.public_options = {
-                moderation_contract: data.entity.public_options.moderation_contract,
-                public_enabled: data.entity.public_options.public_enabled
+                moderation_contract: data.entity.community.public_options.moderation_contract,
+                public_enabled: data.entity.community.public_options.public_enabled
             };
-            model.image = data.entity.image;
-            
+            model.image = data.entity.community.image;
+
             this.model.features = [];
             for(let feature of featuresService.getFeatures()) {
                 this.model.features.push({
@@ -91,7 +78,8 @@ export class CommunitySettingsModal
 
     saveAllChanges() {
         this.loading = true;
-        let requests:Promise<Response>[] = [];
+
+        let requests: Observable<any>[] = [];
 
         if (this.isGeneralModified()) {
             requests.push(this.attemptSaveGeneral());
@@ -107,64 +95,67 @@ export class CommunitySettingsModal
             }
         }
 
-        Promise.all(requests).then(() => {
-            this.loading = false;
-            this.modelUnmodified = JSON.parse(JSON.stringify(this.model));
+        Observable.forkJoin(requests).subscribe(
+            success => {
+                this.loading = false;
+                this.modelUnmodified = JSON.parse(JSON.stringify(this.model));
 
-            if(this.isImageModified()) {
-                this.attemptSaveImage()
-                    .map(response=>response.json())
-                    .subscribe(response => {
-                        this.model.image = response.image;
-                        delete this.model['new_image'];
-                        this.cropper.reset();
-                        this.modelUnmodified = JSON.parse(JSON.stringify(this.model));
-                    });
+                if(this.isImageModified()) {
+                    this.attemptSaveImage()
+                        .subscribe(response => {
+                            this.model.image = response.image;
+                            delete this.model['new_image'];
+                            this.cropper.reset();
+                            this.modelUnmodified = JSON.parse(JSON.stringify(this.model));
+                        });
+                }
+            },
+            error => {
+                throw new Error('Something went wrong while saving changes');
             }
-        });
-
+        );
     }
 
-    attemptSaveGeneral(): Promise<Response> {
-        return this.service.edit(this.model.id, <EditCommunityRequest> {
+    attemptSaveGeneral() {
+        return this.rest.edit(this.model.id, {
             title: this.model.title,
             description: this.model.description,
             theme_id: this.model.theme_id
-        }).toPromise();
+        });
     }
 
-    attemptSavePublicOptions(): Promise<Response> {
-        return this.service.setPublicOptions(this.model.id, <SetPublicOptionsCommunityRequest> {
+    attemptSavePublicOptions() {
+        return this.rest.setPublicOptions(this.model.id, {
             public_enabled: this.model.public_options.public_enabled,
             moderation_contract: this.model.public_options.moderation_contract
-        }).toPromise();
+        });
     }
 
-    attemptSaveFeature(feature: CommunityFeaturesModel): Promise<Response> {
-        let communityFeatureRequest = <CommunityControlFeatureRequestModel> {
+    attemptSaveFeature(feature: CommunityFeaturesModel) {
+        let request = {
             communityId: this.model.id,
             feature: feature.code
         };
-        if (feature.is_activated) {
-            return this.service.activateFeature(communityFeatureRequest).toPromise();
-        } else {
-            return this.service.deactivateFeature(communityFeatureRequest).toPromise();
-        }
+
+        return feature.is_activated
+            ? this.rest.activateFeature(request)
+            : this.rest.deactivateFeature(request);
     }
 
-    attemptSaveImage(): Observable<Response> {
-        return this.service.imageUpload(<CommunityImageUploadRequestModel>{
-            communityId: this.model.id,
-            uploadImage: this.model.new_image.uploadImage,
-            x1: this.model.new_image.uploadImageCrop.x,
-            y1: this.model.new_image.uploadImageCrop.y,
-            x2: this.model.new_image.uploadImageCrop.width + this.model.new_image.uploadImageCrop.x,
-            y2: this.model.new_image.uploadImageCrop.height + this.model.new_image.uploadImageCrop.y
+    attemptSaveImage() {
+        return this.rest.imageUpload(this.model.id, {
+            file: this.model.new_image.uploadImage,
+            crop: {
+                x1: this.model.new_image.uploadImageCrop.x,
+                y1: this.model.new_image.uploadImageCrop.y,
+                x2: this.model.new_image.uploadImageCrop.width + this.model.new_image.uploadImageCrop.x,
+                y2: this.model.new_image.uploadImageCrop.height + this.model.new_image.uploadImageCrop.y
+            }
         })
     }
 
     isImageModified(): boolean {
-        return !!this.model.new_image
+        return !! this.model.new_image
     }
 
     isFeaturesModified(): boolean {

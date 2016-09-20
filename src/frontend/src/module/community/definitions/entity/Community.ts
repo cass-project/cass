@@ -1,11 +1,4 @@
 import {ImageCollection} from "../../../avatar/definitions/ImageCollection";
-import {CollectionEntity} from "../../../collection/definitions/entity/collection";
-
-export interface CommunityExtendedEntity {
-    collections: CollectionEntity[];
-    community: CommunityEntity;
-    is_own: boolean;
-}
 
 export interface CommunityEntity
 {

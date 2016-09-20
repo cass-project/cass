@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Colors\Middleware;
 
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
 use CASS\Domain\Bundles\Colors\Middleware\Command\GetColorsCommand;
 use CASS\Domain\Bundles\Colors\Middleware\Command\GetPalettesCommand;
@@ -19,7 +19,7 @@ class ColorsMiddleware implements MiddlewareInterface
     }
 
     public function __invoke(Request $request, Response $response, callable $out = null) {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect('get-colors', GetColorsCommand::class)

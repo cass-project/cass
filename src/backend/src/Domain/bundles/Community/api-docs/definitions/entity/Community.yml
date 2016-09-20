@@ -29,7 +29,7 @@ Community_Entity_Community:
     theme:
       type: object
       required:
-        - has_theme
+        - has
       properties:
         has:
           type: boolean
@@ -40,7 +40,7 @@ Community_Entity_Community:
     public_options:
       type: object
       required:
-        - enable_public
+        - public_enabled
         - moderation_contract
       properties:
         public_enabled:

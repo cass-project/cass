@@ -1,11 +1,14 @@
-import {Component, Directive} from "@angular/core";
-import {CommunityModals} from "../../../modals";
+import {Component} from "@angular/core";
+
+import {CommunityModals} from "../Community/modals";
 
 @Component({
+    selector: 'cass-community-settings-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-community-settings-card'})
+    ]
+})
 export class CommunitySettingsCard
 {
     constructor(private modals: CommunityModals) {}

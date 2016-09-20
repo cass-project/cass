@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Account\Middleware;
 
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Domain\Bundles\Account\Service\AccountAppAccessService;
 use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -31,7 +31,7 @@ final class AccountAppAccessMiddleware implements MiddlewareInterface
             ? $this->accountAppAccessService->getAppAccess($account)
             : $this->accountAppAccessService->getDefaultAppAccess($account);
 
-        return (new GenericResponseBuilder($response))
+        return (new CASSResponseBuilder($response))
             ->setStatusSuccess()
             ->setJson([
                 'access' => $access->toJSON()

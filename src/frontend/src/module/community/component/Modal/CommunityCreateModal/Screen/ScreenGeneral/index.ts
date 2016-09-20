@@ -1,24 +1,23 @@
-import {Component, ElementRef, Directive} from "@angular/core";
+import {Component, ElementRef} from "@angular/core";
 
 import {CommunityCreateModalModel} from "../../model";
 import {Screen} from "../../screen";
-import {CommunityCreateModalForm} from "../../Form";
-import {ThemeSelect} from "../../../../../../theme/component/ThemeSelect/index";
 
 @Component({
+    selector: 'cass-community-create-modal-screen-general',
     template: require('./template.jade')
-,selector: 'cass-community-create-modal-screen-general'})
+})
 export class ScreenGeneral extends Screen
 {
-    constructor(public model: CommunityCreateModalModel, private elementRef: ElementRef) {
-        super();
+    constructor(
+        public model: CommunityCreateModalModel,
+        private elementRef: ElementRef) { super(); }
+
+    ngAfterViewInit() {
+        this.elementRef.nativeElement.getElementsByClassName('form-input')[0].focus();
     }
 
     abort() {
         this.abortEvent.emit(this);
-    }
-
-    ngAfterViewInit() {
-        this.elementRef.nativeElement.getElementsByClassName('form-input')[0].focus();
     }
 }

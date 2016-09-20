@@ -13,7 +13,9 @@
         description: ID профиля
     responses:
       200:
+        description: 200 OK
         schema:
+          type: object
           required:
             - success
           properties:
@@ -21,9 +23,6 @@
               type: boolean
               default: true
       404:
-        description: Профиль не найден
-        schema:
-            $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'

@@ -19,6 +19,7 @@
           $ref: '#/definitions/Profile_GreetingsAsFL_Request'
     responses:
       200:
+        description: 200 OK
         schema:
           required:
             - success
@@ -30,9 +31,6 @@
             greetings:
               $ref: '#/definitions/Profile_Entity_ProfileGreetings'
       403:
-        schema:
-          $ref: '#/responses/Unauthorized'
+        $ref: '#/responses/Unauthorized'
       404:
-        description: Profile not found
-        schema:
-          $ref: '#/responses/NotFound'
+        $ref: '#/responses/NotFound'

@@ -5,6 +5,7 @@
     description: Возвращает версию бэкенда
     responses:
       200:
+        description: 200 OK
         schema:
           type: object
           required:
@@ -14,7 +15,7 @@
             version:
               type: string
               description: Версия (semver) Backend REST API
-            version:
+            blacklist:
               type: array
               description: Версии (semver) Frontend SPA, которые были отозваны по причинам безопасности
               items:

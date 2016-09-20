@@ -13,13 +13,12 @@
       '404':
         $ref: '#/responses/Theme_Response_404_NotFound'
       '200':
-        description: Тематика
+        description: 200 OK
         schema:
           type: object
           required:
             - success
-            - total
-            - entities
+            - entity
           properties:
             success:
               type: boolean

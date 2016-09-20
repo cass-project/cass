@@ -10,6 +10,6 @@ Collection_Request_SetPublicOptionsRequest:
     public_enabled:
       type: boolean
       description: Включить/выключить индексация в публичный каталог
-    moderation_enabled:
+    moderation_contract:
       type: boolean
       description: Обязательства по модерированию коллекции

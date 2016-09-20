@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Community\Middleware;
 
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
 use CASS\Domain\Bundles\Community\Middleware\Command\Feature\ActivateFeatureCommand;
 use CASS\Domain\Bundles\Community\Middleware\Command\Feature\DeactivateFeatureCommand;
@@ -21,7 +21,7 @@ class CommunityFeaturesMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect('activate', ActivateFeatureCommand::class)
