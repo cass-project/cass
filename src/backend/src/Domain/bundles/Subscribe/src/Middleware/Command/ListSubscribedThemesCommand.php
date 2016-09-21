@@ -17,9 +17,12 @@ class ListSubscribedThemesCommand extends Command
             $profile = $this->profileService->getProfileById($profileId);
 
             $seek = new Seek(100, (int)$body['offset'], (int)$body['limit']);
-            $this->subscribeService->listSubscribedThemes($profile, $seek);
+            $entities = $this->subscribeService->listSubscribedThemes($profile, $seek);
 
             return $responseBuilder
+                ->setJson([
+                    'entities' => $entities
+                ])
                 ->setStatusSuccess()
                 ->build();
         } catch (ProfileNotFoundException $e) {

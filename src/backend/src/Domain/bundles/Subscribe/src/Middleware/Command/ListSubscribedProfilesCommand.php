@@ -17,9 +17,12 @@ class ListSubscribedProfilesCommand extends Command
             $profile = $this->profileService->getProfileById($profileId);
 
             $seek = new Seek(100, (int)$body['offset'], (int)$body['limit']);
-            $this->subscribeService->listSubscribedProfiles($profile, $seek);
+            $entities = $this->subscribeService->listSubscribedProfiles($profile, $seek);
 
             return $responseBuilder
+                ->setJson([
+                    'entities' => $entities
+                ])
                 ->setStatusSuccess()
                 ->build();
         } catch (ProfileNotFoundException $e) {
