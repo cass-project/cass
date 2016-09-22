@@ -1,14 +1,16 @@
-"/subscribe/profile/{profileId}/list-profiles":
+"/subscribe/profile/{profileId}/list-communities":
   post:
     tags:
       - subscribe
-    description: получить список подписаных профилей
+    description: список подписок коллекций
+    security:
+      - x_api_key: []
     parameters:
       - name: profileId
         type: number
         in: path
         required: true
-        description: ID профиля
+        description: ID темы
       - name: body
         in: body
         required: true
