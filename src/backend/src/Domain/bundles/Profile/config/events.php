@@ -5,7 +5,6 @@ use CASS\Domain\Bundles\Profile\Events\LinkCollectionEvents;
 use CASS\Domain\Bundles\Profile\Events\ProfileDashboardCollectionEvents;
 use CASS\Domain\Bundles\Profile\Events\ProfileExpertInEQEvents;
 use CASS\Domain\Bundles\Profile\Events\ProfileInterestingInEQEvents;
-use Evenement\EventEmitterInterface;
 
 return function(): array
 {

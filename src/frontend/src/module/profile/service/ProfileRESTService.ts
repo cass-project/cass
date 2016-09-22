@@ -52,11 +52,11 @@ export class ProfileRESTService implements ProfileRESTServiceInterface
     }
 
     setInterestingIn(profileId: number, request: InterestingInRequest): Observable<InterestingInResponse200> {
-        return this.rest.post(`/backend/api/protected/profile/${profileId}/interesting-in/`, request);
+        return this.rest.put(`/backend/api/protected/profile/${profileId}/interesting-in/`, request);
     }
 
     setExpertIn(profileId: number, request: ExpertInRequest): Observable<ExpertInResponse200> {
-        return this.rest.post(`/backend/api/protected/profile/${profileId}/expert-in/`, request);
+        return this.rest.put(`/backend/api/protected/profile/${profileId}/expert-in/`, request);
     }
 
     editPersonal(profileId: number, request: EditPersonalRequest): Observable<EditPersonalResponse200> {
@@ -97,11 +97,17 @@ export class ProfileRESTService implements ProfileRESTServiceInterface
 
             xhrRequest.onreadystatechange = () => {
                 if (xhrRequest.readyState === 4) {
-                    if(xhrRequest.status === 200) {
-                        observer.next(xhrRequest.response);
-                        observer.complete();
-                    }else{
-                        observer.error(xhrRequest.response);
+                    try {
+                        let json = JSON.parse(xhrRequest.response);
+
+                        if (xhrRequest.status === 200) {
+                            observer.next(json);
+                            observer.complete();
+                        } else {
+                            observer.error(json);
+                        }
+                    } catch (e) {
+                        observer.error('Failed to parse JSON');
                     }
                 }
             };
