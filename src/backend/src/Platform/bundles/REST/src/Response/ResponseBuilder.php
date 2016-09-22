@@ -20,7 +20,7 @@ abstract class ResponseBuilder
     private $status = null;
 
     /** @var array */
-    private $json;
+    private $json = [];
 
     /** @var string|null|\Exception */
     private $error;

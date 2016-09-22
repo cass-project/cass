@@ -71,9 +71,7 @@ export class RESTService
             .catch(error => {
                 return Observable.throw(this.handleError(error));
             })
-            .subscribe(() => {}, error => {
-                this.handleError(error);
-            });
+            .subscribe(() => {});
 
         return fork.map(res => res.json());
     }

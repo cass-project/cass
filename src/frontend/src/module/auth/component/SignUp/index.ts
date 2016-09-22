@@ -48,7 +48,7 @@ export class SignUpComponent
         let testHasEmail = this.model.email.length > 0;
         let testHasPassword = this.model.password.length > 0;
         let testPasswordMatches = this.model.password === this.model.repeat;
-        let testNotIsLoading = this.status.isLoading();
+        let testNotIsLoading = ! this.status.isLoading();
 
         return !! (testNotIsLoading && testHasEmail && testHasPassword && testPasswordMatches);
     }

@@ -8,6 +8,7 @@ export class AuthModalsService
     public signInModal: ModalControl = new ModalControl();
     public signUpModal: ModalControl = new ModalControl();
     public signInWithAPIKeyModal: ModalControl = new ModalControl();
+    public signOutModal: ModalControl = new ModalControl();
     
     signUp() {
         this.closeAllModals();
@@ -19,6 +20,11 @@ export class AuthModalsService
         this.signInModal.open();
     }
 
+    signOut() {
+        this.closeAllModals();
+        this.signOutModal.open();
+    }
+
     signInWithAPIKey(){
         this.closeAllModals();
         this.signInWithAPIKeyModal.open();
@@ -28,5 +34,6 @@ export class AuthModalsService
         this.signInModal.close();
         this.signUpModal.close();
         this.signInWithAPIKeyModal.close();
+        this.signOutModal.close();
     }
 }

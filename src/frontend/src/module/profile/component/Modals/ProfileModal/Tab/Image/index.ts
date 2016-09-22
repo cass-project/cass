@@ -18,7 +18,7 @@ import {queryImage, QueryTarget} from "../../../../../../avatar/functions/query"
     ]
 })
 @Injectable()
-export class ImageTab
+export class ProfileModalImageTab
 {
     private upload: UploadImageModalControl = new UploadImageModalControl();
     private deleting = false;

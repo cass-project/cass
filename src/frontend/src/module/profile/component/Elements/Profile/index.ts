@@ -15,6 +15,12 @@ export class ProfileComponent
         private modals: ProfileModals
     ) {}
 
+    ngOnInit() {
+        if(this.isSetupRequired()) {
+            this.modals.setup.open();
+        }
+    }
+
     isSetupRequired() {
         if(this.session.isSignedIn()) {
             let testProfileIsInitialized = ! this.session.getCurrentProfile().entity.profile.is_initialized;

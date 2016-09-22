@@ -27,8 +27,6 @@ export class SidebarComponent
     }
 
     private signOut(){
-        this.authService.signOut().subscribe(() => {
-            this.router.navigate(['home']);
-        });
+        this.authModals.signOut();
     }
 }

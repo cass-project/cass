@@ -10,11 +10,45 @@ import {ProfileCollectionsRoute} from "./route/ProfileCollectionsRoute/index";
 import {ProfileCollectionsListRoute} from "./route/ProfileCollectionsListRoute/index";
 import {ProfileCollectionRoute} from "./route/ProfileCollectionRoute/index";
 import {ProfileCollectionNotFoundRoute} from "./route/ProfileCollectionNotFoundRoute/index";
+import {ProfileSetup} from "./component/Modals/ProfileSetup/index";
+import {ProfileInterestsModal} from "./component/Modals/ProfileInterests/index";
+import {ProfileModal} from "./component/Modals/ProfileModal/index";
+import {ProfileSwitcher} from "./component/Modals/ProfileSwitcher/index";
+import {ProfileSetupScreenGreetings} from "./component/Modals/ProfileSetup/Screen/ProfileSetupScreenGreetings/index";
+import {ProfileSetupScreenGender} from "./component/Modals/ProfileSetup/Screen/ProfileSetupScreenGender/index";
+import {ProfileSetupScreenImage} from "./component/Modals/ProfileSetup/Screen/ProfileSetupScreenImage/index";
+import {ProfileSetupScreenInterests} from "./component/Modals/ProfileSetup/Screen/ProfileSetupScreenInterests/index";
+import {ProfileSetupScreenExpertIn} from "./component/Modals/ProfileSetup/Screen/ProfileSetupScreenExpertIn/index";
+import {ProfileImage} from "./component/Elements/ProfileImage/index";
+import {ProfileModuleAccountTab} from "./component/Modals/ProfileModal/Tab/Account/index";
+import {ProfileModalImageTab} from "./component/Modals/ProfileModal/Tab/Image/index";
+import {ProfileModalInterestsTab} from "./component/Modals/ProfileModal/Tab/Interests/index";
+import {ProfileModalPersonalTab} from "./component/Modals/ProfileModal/Tab/Personal/index";
+import {ProfileModalProfilesTab} from "./component/Modals/ProfileModal/Tab/Profiles/index";
 
 export const CASSProfileModule = {
     declarations: [
         ProfileComponent,
         ProfileCard,
+        ProfileSetup,
+        [
+            ProfileSetupScreenGreetings,
+            ProfileSetupScreenGender,
+            ProfileSetupScreenImage,
+            ProfileSetupScreenInterests,
+            ProfileSetupScreenExpertIn,
+        ],
+        ProfileInterestsModal,
+        ProfileModal,
+        [
+            ProfileModuleAccountTab,
+            ProfileModalImageTab,
+            ProfileModalInterestsTab,
+            ProfileModalPersonalTab,
+            ProfileModalProfilesTab,
+        ],
+        ProfileSwitcher,
+        ProfileImage,
     ],
     routes: [
         ProfileRoute,

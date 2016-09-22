@@ -1,0 +1,7 @@
+@mixin yoozerVerticalGradient {
+  background: linear-gradient(to bottom, rgba(66, 88, 132, 1) 0%,rgba(81,75,139,1) 40%,rgba(78,24,84,1) 100%);
+}
+
+@mixin yoozerHorizontalGradient {
+  background: linear-gradient(to right, rgba(66, 88, 132, 1) 0%,rgba(81,75,139,1) 40%,rgba(78,24,84,1) 100%);
+}
