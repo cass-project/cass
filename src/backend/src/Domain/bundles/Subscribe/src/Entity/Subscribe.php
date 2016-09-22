@@ -80,4 +80,13 @@ class Subscribe
         $this->options = $options;
         return $this;
     }
+
+    public function toJSON(): array
+    {
+        return [
+            'profileId'     => $this->profileId,
+            'subscribeId'   => $this->subscribeId,
+            'subscribeType' => $this->subscribeType
+        ];
+    }
 }

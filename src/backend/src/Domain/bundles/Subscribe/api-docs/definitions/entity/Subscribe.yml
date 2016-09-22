@@ -1,0 +1,20 @@
+Subscribe_Entity_Subscribe:
+  type: object
+  required:
+    - id
+    - profile_id
+    - subscribe_id
+    - subscribe_type
+  properties:
+    id:
+      type: number
+      description: ID
+    profile_id:
+      type: number
+      description: ID профайла, которому принадлежит подписка
+    subscribe_id:
+      type: number
+      description: ID ресурса на который произведена подписка
+    subscribe_type:
+      type: number
+      description: тип ресурса на который произведена подписка

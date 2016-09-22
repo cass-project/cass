@@ -13,7 +13,18 @@
         description: ID темы
     responses:
       200:
-        $ref: '#/responses/success'
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Subscribe_Entity_Subscribe'
       404:
         $ref: '#/responses/NotFound'
       403:

@@ -14,9 +14,13 @@ class SubscribeThemeCommand extends Command
 
         try {
             $theme = $this->themeService->getThemeById($request->getAttribute('themeId'));
-            $this->subscribeService->subscribeTheme($currentProfile, $theme);
+            $entity = $this->subscribeService->subscribeTheme($currentProfile, $theme);
 
             return $responseBuilder
+                ->setJson([ 
+                    'success'=> true,
+                    'entity' => $entity
+                ])
                 ->setStatusSuccess()
                 ->build();
         } catch (ThemeNotFoundException $e) {

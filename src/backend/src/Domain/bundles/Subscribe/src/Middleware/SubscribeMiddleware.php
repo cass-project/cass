@@ -1,6 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Subscribe\Middleware;
 
+use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
 use CASS\Domain\Bundles\Subscribe\Middleware\Command\ListSubscribedCollectionsCommand;
 use CASS\Domain\Bundles\Subscribe\Middleware\Command\ListSubscribedCommunitiesCommand;
@@ -14,7 +15,6 @@ use CASS\Domain\Bundles\Subscribe\Middleware\Command\UnSubscribeCollectionComman
 use CASS\Domain\Bundles\Subscribe\Middleware\Command\UnSubscribeCommunityCommand;
 use CASS\Domain\Bundles\Subscribe\Middleware\Command\UnSubscribeProfileCommand;
 use CASS\Domain\Bundles\Subscribe\Middleware\Command\UnSubscribeThemeCommand;
-use ZEA2\Platform\Bundles\REST\Response\GenericResponseBuilder;
 use Zend\Stratigility\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -30,7 +30,7 @@ class SubscribeMiddleware implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $out = NULL)
     {
-        $responseBuilder = new GenericResponseBuilder($response);
+        $responseBuilder = new CASSResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect("subscribe-theme", SubscribeThemeCommand::class, 'PUT')
