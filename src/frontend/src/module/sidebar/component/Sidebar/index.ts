@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 
 import {AuthService} from "../../../auth/service/AuthService";
+import {AuthModalsService} from "../../../auth/component/Auth/modals";
 
 require('./style.head.scss');
 
@@ -13,11 +14,16 @@ export class SidebarComponent
 {
     constructor(
         private authService: AuthService,
+        private authModals: AuthModalsService,
         private router: Router
     ) {}
 
     private isSignedIn() {
         return this.authService.isSignedIn();
+    }
+
+    private signIn() {
+        this.authModals.signIn();
     }
 
     private signOut(){

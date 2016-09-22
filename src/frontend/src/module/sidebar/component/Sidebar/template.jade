@@ -1,9 +1,15 @@
 .cass-sidebar
   .sidebar-contents
     ul.sidebar-items
+      li.sidebar-item(*ngIf="isSignedIn() === false")
+        a.title(href='javascript:void(0);', (click)="signIn()")
+          span {{ "sidebar.item.sign-in.title" | translate }}
       li.sidebar-item
         a.title(routerLink='home')
           span {{ "sidebar.item.home.title" | translate }}
+      li.sidebar-item(*ngIf="isSignedIn()")
+        a.title(routerLink='profile')
+          span {{ "sidebar.item.profile.title" | translate }}
       li.sidebar-item
         a.title(routerLink='people')
           span {{ "sidebar.item.people.title" | translate }}
@@ -13,4 +19,7 @@
       li.sidebar-item
         a.title(routerLink='communities')
           span {{ "sidebar.item.communities.title" | translate }}
+      li.sidebar-item(*ngIf="isSignedIn() === false")
+        a.title
+          span {{ "sidebar.item.sign-out.title" | translate }}
   .backdrop

@@ -1,10 +1,17 @@
-main#cassAppContainer.cass-app-container.component.component-frontend-app
-  .sidebar
-    cass-sidebar
-  .content
-    cass-message-bus-notifications
-    cass-auth
-    cass-account
-    cass-profile
-    cass-community
-    router-outlet
+main#cassAppContainer.cass-app-container.component.component-frontend-app([ngClass]="{ 'has-content-player': isPlayerEnabled() }")
+  .flexbox
+    .message-bus
+      cass-message-bus-notifications
+    .modals
+      cass-auth
+      cass-account
+      cass-profile
+      cass-community
+    .header
+      cass-header
+    .content-player-area(*ngIf="isPlayerEnabled()")
+    .content-area
+      .sidebar
+        cass-sidebar
+      .router-content
+        router-outlet
