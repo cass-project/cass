@@ -203,23 +203,6 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
         return $this;
     }
 
-    public function getBackdropJSON(): array
-    {
-        if(! $this->backdrop) {
-            $this->backdrop = $this->getDefaultBackdrop()->toJSON();
-        }
-
-        return $this->backdrop;
-    }
-
-    private function getDefaultBackdrop(): Backdrop {
-        return new Backdrop(
-            'preset',
-            self::DEFAULT_BACKDROP_PUBLIC,
-            self::DEFAULT_BACKDROP_STORAGE
-        );
-    }
-
     public function getGender(): Gender
     {
         return Gender::createFromIntCode($this->gender);
@@ -295,5 +278,22 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
         $this->expertInIds = array_unique(array_filter($themeIds, 'is_int'));
 
         return $this;
+    }
+
+    public function getBackdropPublicPath(): string
+    {
+        if(! $this->backdrop) {
+            $this->backdrop = $this->getDefaultBackdrop()->toJSON();
+        }
+
+        return $this->extractBackdrop()->getPublic();
+    }
+
+    private function getDefaultBackdrop(): Backdrop {
+        return new Backdrop(
+            'preset',
+            self::DEFAULT_BACKDROP_PUBLIC,
+            self::DEFAULT_BACKDROP_STORAGE
+        );
     }
 }

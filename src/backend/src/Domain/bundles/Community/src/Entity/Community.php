@@ -1,6 +1,9 @@
 <?php
 namespace CASS\Domain\Bundles\Community\Entity;
 
+use CASS\Domain\Bundles\Backdrop\Entity\Backdrop;
+use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
+use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
@@ -24,6 +27,9 @@ use CASS\Domain\Bundles\Theme\Entity\Theme;
  */
 class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, CollectionAwareEntity, IndexedEntity
 {
+    const DEFAULT_BACKDROP_PUBLIC = '/storage/entity/community/defaults/default-backdrop.jpg';
+    const DEFAULT_BACKDROP_STORAGE = '/storage/entity/community/defaults/default-backdrop.jpg';
+
     use IdTrait;
     use SIDEntityTrait;
     use CollectionAwareEntityTrait;
@@ -121,6 +127,7 @@ class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, C
                 'has' => $this->hasTheme(),
             ],
             'image' => $this->image,
+            'backdrop' => self::DEFAULT_BACKDROP_PUBLIC,
             'description' => $this->getDescription(),
             'collections' => $this->collections->toJSON(),
             'features' => $this->getFeatures()->listFeatures(),

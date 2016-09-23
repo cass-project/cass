@@ -7,5 +7,5 @@ interface BackdropEntityAware extends IdEntity
 {
     public function exportBackdrop(Backdrop $backdrop);
     public function extractBackdrop(): Backdrop;
-    public function getBackdropJSON(): array;
+    public function getBackdropPublicPath(): string;
 }

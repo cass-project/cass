@@ -1,6 +1,9 @@
 <?php
 namespace CASS\Domain\Bundles\Collection\Entity;
 
+use CASS\Domain\Bundles\Backdrop\Entity\Backdrop;
+use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
+use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
@@ -9,10 +12,8 @@ use CASS\Util\JSONSerializable;
 use CASS\Domain\Bundles\Avatar\Entity\ImageEntity;
 use CASS\Domain\Bundles\Collection\Exception\InvalidCollectionOptionsException;
 use CASS\Domain\Bundles\Collection\Exception\PublicEnabledException;
-use CASS\Domain\Bundles\Community\Entity\Community;
 use CASS\Domain\Bundles\Avatar\Entity\ImageEntityTrait;
 use CASS\Domain\Bundles\Index\Entity\IndexedEntity;
-use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
 use CASS\Domain\Bundles\Theme\Strategy\ThemeIdsEntityAware;
 use CASS\Domain\Bundles\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
 
@@ -22,6 +23,9 @@ use CASS\Domain\Bundles\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  */
 class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, ThemeIdsEntityAware, IndexedEntity
 {
+    const DEFAULT_BACKDROP_PUBLIC = '/storage/entity/collection/defaults/default-backdrop.jpg';
+    const DEFAULT_BACKDROP_STORAGE = '/storage/entity/collection/defaults/default-backdrop.jpg';
+
     use IdTrait;
     use SIDEntityTrait;
     use ImageEntityTrait;
@@ -108,6 +112,7 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
                 'moderation_contract' => $this->isModerationContractEnabled(),
             ],
             'image' => $this->getImages()->toJSON(),
+            'backdrop' => self::DEFAULT_BACKDROP_PUBLIC,
             'is_protected' => $this->isProtected(),
             'is_main' => $this->isMain(),
         ];

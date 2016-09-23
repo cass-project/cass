@@ -15,7 +15,7 @@ class BackdropMigration extends AbstractMigration
             ->save();
 
         $this->table('communities')
-            ->addColumn('backdrop', 'text', [])
+            ->addColumn('backdrop', 'text')
             ->save();
     }
 }
