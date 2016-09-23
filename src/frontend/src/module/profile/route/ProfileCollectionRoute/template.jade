@@ -2,6 +2,7 @@ article.component.component-profile-collection
   div(*ngIf="isLoaded()")
     .post-form
       .post-form-container
+        a(name="newPost")
         cass-post-form([collection]="collection", [post-type]="postType", (success)="unshiftEntity($event)")
     .posts
       cass-feed-post-stream

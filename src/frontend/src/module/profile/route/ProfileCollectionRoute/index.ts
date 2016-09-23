@@ -69,4 +69,6 @@ export class ProfileCollectionRoute implements OnInit
     isLoaded(): boolean {
         return typeof this.collection === "object";
     }
+
+    doNothing() {}
 }

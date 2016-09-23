@@ -29,6 +29,7 @@ import {ProfileCardHeader} from "./component/Elements/ProfileCardHeader/index";
 import {ProfileMenuOther} from "./component/Elements/ProfileMenuOther/index";
 import {ProfileMenuOwn} from "./component/Elements/ProfileMenuOwn/index";
 import {ProfileResolve} from "./resolve/ProfileResolve";
+import {ProfileHeader} from "./component/Elements/ProfileHeader/index";
 
 export const CASSProfileModule = {
     declarations: [
@@ -56,6 +57,7 @@ export const CASSProfileModule = {
         ProfileImage,
         ProfileMenuOther,
         ProfileMenuOwn,
+        ProfileHeader,
     ],
     routes: [
         ProfileRoute,

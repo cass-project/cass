@@ -15,5 +15,8 @@
   "view-option.type.grid": "Сетка",
   "view-option.type.list": "Список",
   "view-option.type.table": "Таблица",
-  "sidebar.right.item.toggle-content-player.title": "Включить/отключить TV"
+  "sidebar.right.item.toggle-content-player.title": "Включить/отключить TV",
+  "profile.header.change-cover": "Сменить подложку",
+  "collections": "Подборки",
+  "post.write-new": "Создать пост"
 }

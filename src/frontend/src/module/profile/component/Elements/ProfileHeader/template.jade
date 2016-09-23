@@ -1,0 +1,21 @@
+div.component.component-profile-header([ngClass]="{ 'fixed': isFixed() }")
+  div.sticky([style.margin-top.px]="marginTop")
+    div.backdrop(style="background-image: url('{{ profile.profile.backdrop }}')")
+    div.profile-header
+      div.profile-image
+        div.profile-image-container
+          cass-profile-image([url]="getImageURL()")
+      div.profile-name
+        h1 {{ profile.profile.greetings.greetings }}
+        h2
+          span 165 Подписчиков
+          i.fa.fa-dot-circle-o
+          span Yoozer
+      div.profile-actions
+        ul
+          li
+            a.action-link(routerLink="./collections")
+              span.title {{ "collections" | translate }}
+          li(*ngIf="isOwnProfile()")
+            a.action-link(href="javascript:void(0)", (click)="changeCover()")
+              span.title {{ "profile.header.change-cover" | translate }}

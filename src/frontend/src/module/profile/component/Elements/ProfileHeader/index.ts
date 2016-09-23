@@ -1,4 +1,8 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
+
+import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
+import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
+import {ProfileModals} from "../Profile/modals";
 
 @Component({
     selector: 'cass-profile-header',
@@ -9,5 +13,23 @@ import {Component} from "@angular/core";
 })
 export class ProfileHeader
 {
+    @Input('profile') profile: ProfileExtendedEntity;
 
+    constructor(private modals: ProfileModals) {}
+
+    getImageURL(): string {
+        return queryImage(QueryTarget.Card, this.profile.profile.image).public_path;
+    }
+
+    isOwnProfile(): boolean {
+        return this.profile.is_own;
+    }
+
+    changeCover() {
+        this.modals.backdrop.open();
+    }
+
+    isFixed(): boolean {
+        return false;
+    }
 }

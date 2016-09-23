@@ -56,6 +56,7 @@ export class NavigationObservable
             scrollTotal: scrollTotal,
             scrollTop: scrollTop,
             scrollBottom: scrollBottom,
+            clientHeight: elem.nativeElement.clientHeight,
             maybe: {
                 top: scrollTop <= NavigationObservable.SCROLL_THRESHOLD,
                 bottom: (scrollTop + clientHeight - scrollTotal) <= NavigationObservable.SCROLL_THRESHOLD,
@@ -93,6 +94,7 @@ export interface ScrollEvent
     scrollTop: number;
     scrollBottom: number;
     scrollTotal: number;
+    clientHeight: number;
     percent: number;
     maybe: {
         top: boolean;

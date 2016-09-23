@@ -15,5 +15,8 @@
   "view-option.type.grid": "Grid",
   "view-option.type.list": "List",
   "view-option.type.table": "Table",
-  "sidebar.right.item.toggle-content-player.title": "Enable/Disable TV"
+  "sidebar.right.item.toggle-content-player.title": "Enable/Disable TV",
+  "profile.header.change-cover": "Change cover",
+  "collections": "Collections",
+  "post.write-new": "Write new post"
 }

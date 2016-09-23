@@ -12,7 +12,7 @@
             i.fa.fa-user
           span.title {{ "sidebar.item.profile.title" | translate }}
       li(*ngIf="isSignedIn()")
-        a.sidebar-item(routerLink='profile', routerLinkActive="active")
+        a.sidebar-item(routerLink='/profile/current', routerLinkActive="active")
           div.image
             i.fa.fa-user
           span.title {{ "sidebar.item.profile.title" | translate }}

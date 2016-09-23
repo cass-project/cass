@@ -10,4 +10,5 @@ export class ProfileModals
     switcher: ModalControl = new ModalControl();
     interests: ModalControl = new ModalControl();
     createCollection: ModalControl = new ModalControl();
+    backdrop: ModalControl = new ModalControl();
 }
