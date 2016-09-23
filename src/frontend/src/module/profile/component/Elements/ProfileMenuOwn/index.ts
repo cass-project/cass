@@ -17,10 +17,6 @@ export class ProfileMenuOwn
         private modals: ProfileModals
     ) {}
 
-    ngOnInit() {
-        console.log('ProfileMenuInit!');
-    }
-
     getCollections() {
         return this.service.getCollections().filter(collection => {
             return collection.is_main !== true;

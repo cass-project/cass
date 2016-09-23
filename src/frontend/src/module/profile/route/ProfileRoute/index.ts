@@ -41,6 +41,6 @@ export class ProfileRoute implements OnInit
     }
 
     isOtherProfile() {
-        return ! (!!this.profile && this.profile.is_own);
+        return ! this.isOwnProfile();
     }
 }

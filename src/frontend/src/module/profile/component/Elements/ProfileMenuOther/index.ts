@@ -12,4 +12,16 @@ import {ProfileRouteService} from "../../../route/ProfileRoute/service";
 export class ProfileMenuOther
 {
     constructor(private service: ProfileRouteService) {}
+
+    getCollections() {
+        return this.service.getCollections().filter(collection => {
+            return collection.is_main !== true;
+        });
+    }
+
+    hasCollections() {
+        return this.service.getCollections().filter(collection => {
+            return collection.is_main !== true;
+        }).length > 0;
+    }
 }

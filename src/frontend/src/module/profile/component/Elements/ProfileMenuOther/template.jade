@@ -1,1 +1,14 @@
 div.component.component-profile-menu-other
+  div.yoozer-left-menu
+    ul.yoozer-left-menu-list
+      li.yoozer-left-menu-item
+        a([routerLink]="['/profile', service.getProfile().id]")
+          span.title Профиль
+  div.yoozer-left-menu(*ngIf="hasCollections()")
+    ul.yoozer-left-menu-list
+      li.yoozer-left-menu-item
+        a([routerLink]="['/profile', service.getProfile().id, 'collections']")
+          span.title Все подборки
+      li.yoozer-left-menu-item(*ngFor="let collection of getCollections()")
+        a([routerLink]="['/profile/current/collections/', collection.sid]")
+          span.title {{ collection.title }}
