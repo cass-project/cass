@@ -6,5 +6,13 @@
   "sidebar.item.sign-in.title": "Вход",
   "sidebar.item.sign-out.title": "Выход",
   "sidebar.item.profile.title": "Профиль",
-  "sidebar.item.search.title": "Поиск"
+  "sidebar.item.search.title": "Поиск",
+  "sidebar.right.item.top.title": "Наверх",
+  "sidebar.right.item.prev.title": "Предыдущий элемент",
+  "sidebar.right.item.next.title": "Следующий элемент",
+  "sidebar.right.item.bottom.title": "На самый низ",
+  "view-option.type.feed": "Лента",
+  "view-option.type.grid": "Сетка",
+  "view-option.type.list": "Список",
+  "view-option.type.table": "Таблица"
 }

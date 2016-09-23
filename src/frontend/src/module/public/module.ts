@@ -10,6 +10,7 @@ import {CommunitiesRoute} from "./route/CommunitiesRoute/index";
 import {ContentRoute} from "./route/ContentRoute/index";
 import {ExpertsRoute} from "./route/ExpertsRoute/index";
 import {ProfilesRoute} from "./route/ProfilesRoute/index";
+import {ViewOptionService} from "./component/Options/ViewOption/service";
 
 export const CASSPublicComponent = {
     declarations: [
@@ -28,5 +29,7 @@ export const CASSPublicComponent = {
         ExpertsRoute,
         ProfilesRoute,
     ],
-    providers: [],
+    providers: [
+        ViewOptionService,
+    ],
 };

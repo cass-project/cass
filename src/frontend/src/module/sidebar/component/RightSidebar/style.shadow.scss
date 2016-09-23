@@ -1,0 +1,53 @@
+div.component-right-sidebar {
+  height: 100%;
+
+  div.flexbox-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+
+    .top {
+      height: 100%;
+    }
+  }
+
+  ul.list {
+    margin: 10px;
+
+    li.list-item {
+      margin-bottom: 4px;
+
+      a {
+        display: block;
+        border-radius: 4px;
+        background-color: #fff;
+        border: 1px solid #EAEAEA;
+        color: #333;
+
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+
+        i.fa {
+          font-size: 12px;
+        }
+
+        &:hover {
+          background: #E6EBF7;
+          border-color: #E6EBF7;
+        }
+
+        &:active, &.active {
+          color: #fff;
+          background-color: #667FB2;
+
+          &:hover {
+            background-color: darken(#667FB2, 20%);
+          }
+        }
+      }
+    }
+  }
+}

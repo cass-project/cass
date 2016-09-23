@@ -19,6 +19,7 @@ import {CASSMessageModule} from "./message/module";
 import {CASSI18nModule} from "./i18n/module";
 import {CASSPlayerModule} from "./player/module";
 import {CASSSearchModule} from "./search/module";
+import {CASSNavigatorModule} from "./navigator/module";
 
 export const CASS_MODULES = [
     CASSAccountModule,
@@ -42,4 +43,5 @@ export const CASS_MODULES = [
     CASSI18nModule,
     CASSPlayerModule,
     CASSSearchModule,
+    CASSNavigatorModule,
 ];

@@ -2,7 +2,8 @@ export enum ViewOptionValue
 {
     Feed = <any>"feed",
     Grid = <any>"grid",
-    Table = <any>"table"
+    Table = <any>"table",
+    List = <any>"list"
 }
 
 export class ViewOption

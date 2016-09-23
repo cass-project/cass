@@ -6,5 +6,13 @@
   "sidebar.item.sign-in.title": "Sign In",
   "sidebar.item.sign-out.title": "Sign Out",
   "sidebar.item.profile.title": "Profile",
-  "sidebar.item.search.title": "Search"
+  "sidebar.item.search.title": "Search",
+  "sidebar.right.item.top.title": "To the top of page",
+  "sidebar.right.item.prev.title": "Previous item",
+  "sidebar.right.item.next.title": "Next item",
+  "sidebar.right.item.bottom.title": "To the bottom of page",
+  "view-option.type.feed": "Feed",
+  "view-option.type.grid": "Grid",
+  "view-option.type.list": "List",
+  "view-option.type.table": "Table"
 }
