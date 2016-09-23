@@ -1,6 +1,9 @@
 <?php
 namespace CASS\Domain\Bundles\Profile\Entity;
 
+use CASS\Domain\Bundles\Backdrop\Entity\Backdrop;
+use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
+use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
@@ -25,12 +28,13 @@ use CASS\Domain\Bundles\Profile\Exception\InvalidBirthdayGuestFromTheFutureExcep
  * @Entity(repositoryClass="CASS\Domain\Bundles\Profile\Repository\ProfileRepository")
  * @Table(name="profile")
  */
-class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, CollectionAwareEntity, IndexedEntity
+class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, BackdropEntityAware, CollectionAwareEntity, IndexedEntity
 {
     const MIN_AGE = 3;
     const MAX_AGE = 130;
 
-    const DEFAULT_BACKDROP = '/storage/entity/profile/defaults/default-backdrop.jpg';
+    const DEFAULT_BACKDROP_PUBLIC = '/storage/entity/profile/defaults/default-backdrop.jpg';
+    const DEFAULT_BACKDROP_STORAGE = '/storage/entity/profile/defaults/default-backdrop.jpg';
 
     const EXCEPTION_GUEST_FUTURE = "Hello stranger, does nuclear war happen?";
     const EXCEPTION_YOUNG = "You're too young, where are your parents?";
@@ -40,6 +44,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
     use SIDEntityTrait;
     use CollectionAwareEntityTrait;
     use ImageEntityTrait;
+    use BackdropEntityAwareTrait;
 
     /**
      * @ManyToOne(targetEntity="CASS\Domain\Bundles\Account\Entity\Account")
@@ -70,12 +75,6 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
      * @var Greetings
      */
     private $greetings;
-
-    /**
-     * @Column(type="string", name="backdrop")
-     * @var string
-     */
-    private $backdrop = self::DEFAULT_BACKDROP;
 
     /**
      * @Column(type="integer")
@@ -116,7 +115,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
             'greetings' => $this->getGreetings()->toJSON(),
             'gender' => $this->getGender()->toJSON(),
             'image' => $this->getImages()->toJSON(),
-            'backdrop' => $this->getBackdrop(),
+            'backdrop' => self::DEFAULT_BACKDROP_PUBLIC,
             'expert_in_ids' => $this->expertInIds,
             'interesting_in_ids' => $this->interestingInIds,
             'collections' => $this->getCollections()->toJSON(),
@@ -143,6 +142,8 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
         $this->greetings = new GreetingsAnonymous();
         $this->gender = (new GenderNotSpecified())->getIntCode();
         $this->dateCreatedOn = new \DateTime();
+
+        $this->backdrop = $this->getDefaultBackdrop()->toJSON();
 
         $this->regenerateSID();
         $this->setImages(new ImageCollection());
@@ -202,9 +203,21 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
         return $this;
     }
 
-    public function getBackdrop(): string
+    public function getBackdropJSON(): array
     {
+        if(! $this->backdrop) {
+            $this->backdrop = $this->getDefaultBackdrop()->toJSON();
+        }
+
         return $this->backdrop;
+    }
+
+    private function getDefaultBackdrop(): Backdrop {
+        return new Backdrop(
+            'preset',
+            self::DEFAULT_BACKDROP_PUBLIC,
+            self::DEFAULT_BACKDROP_STORAGE
+        );
     }
 
     public function getGender(): Gender

@@ -1,0 +1,36 @@
+'/protected/profile/{profileId}/backdtop/preset/{presetId}/':
+  post:
+    tags:
+      - profile
+    description: Устанавливает фоновую картинку профиля из указанного шаблона
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
+      - name: presetId
+        type: string
+        in: path
+        required: true
+        description: ID пресета
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - backdrop
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            backdrop:
+              $ref: '#/definitions/Backdrop'
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        $ref: '#/responses/NotFound'

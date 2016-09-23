@@ -1,0 +1,12 @@
+Backdrop:
+  type: object
+  required:
+    - public
+    - storage
+  properties:
+    public:
+      type: string
+      description: Путь к картинке (www)
+    storage:
+      type: string
+      description: Путь к картинке (storage)

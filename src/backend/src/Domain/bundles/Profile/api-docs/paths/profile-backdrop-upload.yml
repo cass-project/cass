@@ -1,0 +1,36 @@
+'/protected/profile/{profileId}/backdtop/upload/':
+  post:
+    tags:
+      - profile
+    description: Устанавливает фоновую картинку
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
+      - name: file
+        description: Файл
+        type: file
+        required: true
+        in: formData
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - backdrop
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            backdrop:
+              $ref: '#/definitions/Backdrop'
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        $ref: '#/responses/NotFound'
