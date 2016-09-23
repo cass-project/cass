@@ -11,6 +11,7 @@ import {Stream} from "../../../feed/service/FeedService/stream";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
+import {ProfileEntity} from "../../definitions/entity/Profile";
 
 @Component({
     template: require('./template.jade'),
@@ -26,8 +27,10 @@ import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 })
 export class ProfileCollectionRoute implements OnInit
 {
-    collection: CollectionEntity;
-    postType: PostTypeEntity;
+    private sid: string;
+    private profile: ProfileEntity;
+    private collection: CollectionEntity;
+    private postType: PostTypeEntity;
 
     constructor(
         private router: Router,
@@ -35,26 +38,23 @@ export class ProfileCollectionRoute implements OnInit
         private service: ProfileRouteService,
         private types: PostTypeService,
         private feed: FeedService<PostEntity>,
-        private feedSource: CollectionSource,
-        private sidCollection: string
+        private feedSource: CollectionSource
     ) {}
     
     ngOnInit(){
         this.postType = this.types.getTypeByStringCode('default');
-
-        this.route.params.map(params => {
-            this.sidCollection = params['sid'];
-        });
+        this.sid = this.route.snapshot.params['sid'];
+        this.profile = this.service.getProfile().profile;
 
         this.service.getObservable().subscribe(
             (response) => {
-                let sid = this.sidCollection;
+                let sid = this.sid;
                 let collections = response.entity.collections.filter((entity: CollectionEntity) => {
                     return entity.sid === sid;
                 });
 
                 if(! collections.length) {
-                    this.router.navigate(['NotFound']);
+                    this.router.navigate(['/profile/collections/not-found']);
                 }
 
                 this.collection = collections[0];

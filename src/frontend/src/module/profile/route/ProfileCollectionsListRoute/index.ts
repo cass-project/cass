@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 
 import {ProfileRouteService} from "../ProfileRoute/service";
+import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 
 @Component({
     template: require('./template.jade'),
@@ -10,8 +11,16 @@ import {ProfileRouteService} from "../ProfileRoute/service";
 })
 export class ProfileCollectionsListRoute
 {
-    constructor(private service: ProfileRouteService) {}
-    
+    private collections: CollectionEntity[];
+
+    constructor(
+        private service: ProfileRouteService,
+    ) {}
+
+    ngOnInit() {
+        this.collections = this.service.getProfile().collections;
+    }
+
     openCreateCollectionModal() {
         this.service.modals.createCollection.open();
     }

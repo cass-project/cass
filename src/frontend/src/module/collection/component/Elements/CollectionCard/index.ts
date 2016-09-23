@@ -1,5 +1,4 @@
 import {Component, Input} from "@angular/core";
-import {Router} from "@angular/router";
 
 import {CollectionEntity} from "../../../definitions/entity/collection";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
@@ -16,24 +15,16 @@ import {ThemeService} from "../../../../theme/service/ThemeService";
 export class CollectionCard
 {
     @Input('entity') entity: CollectionEntity;
+    @Input('params') params;
 
     constructor(
-        private theme: ThemeService,
-        private router: Router
+        private theme: ThemeService
     ) {}
 
     getImageURL(): string {
         let image = queryImage(QueryTarget.Card, this.entity.image).public_path;
 
         return `url('${image}')`;
-    }
-
-    goCollection() {
-        if(this.entity.owner.type === 'community'){
-            this.router.navigate(['/Community', 'Community', {sid: this.entity.owner_sid}, 'Collections', 'View', { sid: this.entity.sid }]);
-        } else if(this.entity.owner.type === 'profile'){
-            this.router.navigate(['/Profile', 'Profile', {id: this.entity.owner.id}, 'Collections', 'View', { sid: this.entity.sid }]);
-        }
     }
 
     hasTheme(): boolean {

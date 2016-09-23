@@ -1,0 +1,38 @@
+.yoozer-left-menu {
+  font-family: "PT Sans", "Arial", sans-serif;
+  margin: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  ul.yoozer-left-menu-list {
+    li.yoozer-left-menu-item {
+      > a {
+        display: block;
+        color: #111;
+        text-decoration: none;
+        padding: 6px 10px;
+        font-size: 14px;
+        line-height: 1.2;
+        border-radius: 2px;
+        overflow: hidden;
+
+        &:hover {
+          background-color: #E6EBF7;
+        }
+
+        &.active, &:active {
+          background-color: #667FB2;
+          color: white;
+
+          &:hover {
+            background-color: darken(#667FB2, 20%);
+          }
+        }
+      }
+    }
+  }
+}

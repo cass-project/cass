@@ -29,4 +29,12 @@ export class SidebarComponent
     private signOut(){
         this.authModals.signOut();
     }
+
+    private isSearchActive() {
+        return false;
+    }
+
+    private openSearchModal() {
+
+    }
 }

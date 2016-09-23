@@ -1,8 +1,11 @@
-article.component.component-profile-collections-list-route
+.component.component-profile-collections-list-route
   div(*ngIf="service.isProfileLoaded()")
     h1 Подборки
-    cass-collections-list(
-      [collections]="service.getProfile().collections",
-      [is-own]="service.getProfile().is_own",
-      (create)="openCreateCollectionModal($event)"
-    )
+    .component.component-collections-list
+      .collection-cards-container
+        .list-items
+          .collection-card-item(*ngFor="let collection of collections")
+            div(*ngIf="! collection.is_main")
+              cass-collection-card([entity]="collection", [params]="['./', collection.sid]")
+          .collection-card-item(*ngIf="isOwn")
+            cass-create-collection-card((click)="openCreateCollectionModal()")

@@ -1,8 +1,11 @@
 @import "./../../../../../styles/globals";
 
-article.component-collection-card {
+section.component-collection-card {
   .card {
     @include card(1);
+    display: block;
+    text-decoration: none;
+    color: black;
     width: 256px;
     height: 430px;
     background-color: white;

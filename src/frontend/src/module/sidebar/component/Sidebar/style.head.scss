@@ -1,29 +1,29 @@
 @import "./../../../../styles/globals";
 
 .cass-sidebar {
-  @include card(2);
+  @include card(4);
   @include yoozerVerticalGradient();
 
   font-family: "PT Sans", "Arial", sans-serif;
-  border-right: 1px solid rgba(255, 255, 255, 0.12);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-sizing: border-box;
   overflow: hidden;
   height: 100%;
 
-  ul.sidebar-items > li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.13)
+  ul.sidebar-items>li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
   }
 
   a.sidebar-item {
     display: block;
     text-align: center;
     text-decoration: none;
-    color: white;
+    color: #fff;
     padding: 5px 0;
 
     div.image {
       padding: 7px 0;
-      font-size: 16px;
+      font-size: 20px;
     }
 
     span.title {
@@ -33,6 +33,16 @@
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    &.active {
+      background-color: white;
+      color: #4E5F81;
+
+      &:hover {
+        background-color: white;
+        color: darken(#4E5F81, 20%);
+      }
     }
   }
 }

@@ -25,11 +25,16 @@ import {ProfileModalImageTab} from "./component/Modals/ProfileModal/Tab/Image/in
 import {ProfileModalInterestsTab} from "./component/Modals/ProfileModal/Tab/Interests/index";
 import {ProfileModalPersonalTab} from "./component/Modals/ProfileModal/Tab/Personal/index";
 import {ProfileModalProfilesTab} from "./component/Modals/ProfileModal/Tab/Profiles/index";
+import {ProfileCardHeader} from "./component/Elements/ProfileCardHeader/index";
+import {ProfileMenuOther} from "./component/Elements/ProfileMenuOther/index";
+import {ProfileMenuOwn} from "./component/Elements/ProfileMenuOwn/index";
+import {ProfileResolve} from "./resolve/ProfileResolve";
 
 export const CASSProfileModule = {
     declarations: [
         ProfileComponent,
         ProfileCard,
+        ProfileCardHeader,
         ProfileSetup,
         [
             ProfileSetupScreenGreetings,
@@ -49,6 +54,8 @@ export const CASSProfileModule = {
         ],
         ProfileSwitcher,
         ProfileImage,
+        ProfileMenuOther,
+        ProfileMenuOwn,
     ],
     routes: [
         ProfileRoute,
@@ -63,5 +70,6 @@ export const CASSProfileModule = {
         ProfileModals,
         ProfileCachedIdentityMap,
         ProfileRESTService,
+        ProfileResolve,
     ]
 };

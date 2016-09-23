@@ -30,6 +30,8 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
     const MIN_AGE = 3;
     const MAX_AGE = 130;
 
+    const DEFAULT_BACKDROP = '/storage/entity/profile/defaults/default-backdrop.jpg';
+
     const EXCEPTION_GUEST_FUTURE = "Hello stranger, does nuclear war happen?";
     const EXCEPTION_YOUNG = "You're too young, where are your parents?";
     const EXCEPTION_OLD = "You're too old, where is your grave?";
@@ -70,6 +72,12 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
     private $greetings;
 
     /**
+     * @Column(type="string", name="backdrop")
+     * @var string
+     */
+    private $backdrop = self::DEFAULT_BACKDROP;
+
+    /**
      * @Column(type="integer")
      * @var int
      */
@@ -108,6 +116,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
             'greetings' => $this->getGreetings()->toJSON(),
             'gender' => $this->getGender()->toJSON(),
             'image' => $this->getImages()->toJSON(),
+            'backdrop' => $this->getBackdrop(),
             'expert_in_ids' => $this->expertInIds,
             'interesting_in_ids' => $this->interestingInIds,
             'collections' => $this->getCollections()->toJSON(),
@@ -191,6 +200,11 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
         $this->greetings = $greetings;
 
         return $this;
+    }
+
+    public function getBackdrop(): string
+    {
+        return $this->backdrop;
     }
 
     public function getGender(): Gender

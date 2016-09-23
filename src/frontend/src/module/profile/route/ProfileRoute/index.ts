@@ -1,12 +1,12 @@
 import {Component, OnInit, OnDestroy} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
 
-import {Subscription} from "rxjs/Subscription";
 import {ProfileRouteService} from "./service";
-import {AuthService} from "../../../auth/service/AuthService";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 import {Session} from "../../../session/Session";
+import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
+import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
 
 @Component({
     template: require('./template.jade'),
@@ -22,43 +22,28 @@ import {Session} from "../../../session/Session";
 
 export class ProfileRoute implements OnInit, OnDestroy
 {
-    private sub: Subscription;
-    
+    private profile: ProfileExtendedEntity;
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: ProfileRouteService,
         private session: Session,
-        private authService: AuthService
     ) {}
     
-    ngOnInit(){
-        this.sub = this.route.params.subscribe(params => {
-            let id = params['id'];
-            if (this.authService.isSignedIn() && (id === 'current' || id === this.session.getCurrentProfile().getId().toString())) {
-                this.service.loadCurrentProfile();
-            } else if (Number(id)) {
-                this.service.loadProfileById(Number(id));
-            } else {
-                this.router.navigate(['/profile/not-found']);
-                return;
-            }
+    ngOnInit() {
+        this.route.data.forEach((data: { profile: GetProfileByIdResponse200 }) => {
 
-            if (this.service.getObservable() !== undefined) {
-                this.service.getObservable().subscribe(
-                    (response) => {
-                    },
-                    (error) => {
-                        this.router.navigate(['/profile/not-found']);
-                    }
-                )
-            } else {
-                this.router.navigate(['/public']);
-            }
-        })
+        });
     }
 
-    ngOnDestroy(){
-        this.sub.unsubscribe();
+    ngOnDestroy() {
+    }
+
+    isOwnProfile() {
+        return !!this.profile && this.profile.is_own;
+    }
+
+    isOtherProfile() {
+        return ! (!!this.profile && this.profile.is_own);
     }
 }

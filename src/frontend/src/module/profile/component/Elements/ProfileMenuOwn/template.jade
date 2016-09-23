@@ -1,0 +1,22 @@
+div.component.component-profile-menu-own
+  div.yoozer-left-menu
+    ul.yoozer-left-menu-list
+      li.yoozer-left-menu-item
+        a(routerLink="/profile/current")
+          span.title Мои профиль
+  div.yoozer-left-menu
+    ul.yoozer-left-menu-list
+      li.yoozer-left-menu-item
+        a(href="javascript:void(0)", (click)="openCreateCollectionMaster()")
+          span.title Создать подборку
+      li.yoozer-left-menu-item
+        a(routerLink="/profile/current/collections")
+          span.title Мои подборки
+      li.yoozer-left-menu-item(*ngFor="let collection of getCollections()")
+        a([routerLink]="['/profile/current/collections/', collection.sid]")
+          span.title {{ collection.title }}
+  div.yoozer-left-menu
+    ul.yoozer-left-menu-list
+      li.yoozer-left-menu-item
+        a(href="javascript:void(0)", (click)="openSettings()")
+          span.title Настройки

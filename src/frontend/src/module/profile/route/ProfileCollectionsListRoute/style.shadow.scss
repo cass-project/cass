@@ -1,6 +1,6 @@
 @import "./../../../../styles/globals";
 
-article.component.component-profile-collections-list-route {
+.component.component-profile-collections-list-route {
   h1 {
     font-family: $FONT_FAMILY;
     text-align: center;
@@ -9,5 +9,20 @@ article.component.component-profile-collections-list-route {
     font-weight: 400;
     text-transform: uppercase;
     color: material-color("grey", "900");
+  }
+}
+
+.component.component-collections-list {
+  .collection-cards-container {
+    .list-items {
+      text-align: center;
+
+      .collection-card-item {
+        vertical-align: top;
+        display: inline-block;
+        text-align: left;
+        margin: 15px 10px;
+      }
+    }
   }
 }

@@ -10,6 +10,7 @@ import {PostTypeService} from "../../../post/service/PostTypeService";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
 import {AuthService} from "../../../auth/service/AuthService";
 import {Session} from "../../../session/Session";
+import {ProfileEntity} from "../../definitions/entity/Profile";
 
 @Component({
     template: require('./template.jade'),
@@ -23,9 +24,9 @@ import {Session} from "../../../session/Session";
 })
 export class ProfileDashboardRoute
 {
-
-    main_collection: CollectionEntity;
-    postType: PostTypeEntity;
+    private profile: ProfileEntity;
+    private main_collection: CollectionEntity;
+    private postType: PostTypeEntity;
 
     constructor(
         private authService: AuthService,
@@ -40,6 +41,8 @@ export class ProfileDashboardRoute
         if (service.getObservable() !== undefined) {
             service.getObservable().subscribe(
                 (response) => {
+                    this.profile = response.entity.profile;
+
                     for(let collection of response.entity.collections){
                         if(collection.is_main){
                             this.main_collection = collection;
@@ -50,13 +53,12 @@ export class ProfileDashboardRoute
                     feed.provide(feedSource, new Stream<PostEntity>());
                     feed.update();
                 },
-                (error) => {
-                }
+                (error) => {}
             );
         }
     }
 
-    canPost(): boolean{
+    canPost(): boolean {
         if(this.authService.isSignedIn()) {
             return this.service.getProfile().is_own && this.service.getProfile().profile.id === this.session.getCurrentProfile().getId();
         } else {

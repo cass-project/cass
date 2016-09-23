@@ -6,18 +6,23 @@ import {AccountRESTService} from "../../../../account/service/AccountRESTService
 import {Session} from "../../../../session/Session";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
+import {ProfileEntity} from "../../../definitions/entity/Profile";
+import {AccountEntity} from "../../../../account/definitions/entity/Account";
 
 @Injectable()
 export class ProfileModalModel
 {
-    constructor(private profileRESTService: ProfileRESTService,
-                private accountRESTService: AccountRESTService,
-                private session: Session,
-                protected messages: MessageBusService,
-    ) {}
+    public profile: ProfileEntity;
+    public account: AccountEntity;
 
-    public profile = JSON.parse(JSON.stringify(this.session.getCurrentProfile().entity.profile));
-    public account = JSON.parse(JSON.stringify(this.session.getCurrentAccount().entity));
+    constructor(
+        private profileRESTService: ProfileRESTService,
+        private accountRESTService: AccountRESTService,
+        private session: Session,
+        private messages: MessageBusService,
+    ) {
+        this.reset();
+    }
 
     loading: boolean = false;
 
@@ -35,7 +40,8 @@ export class ProfileModalModel
         return this.session.getCurrentProfile().entity.profile;
     }
 
-    reset(){
+    reset() {
+        this.account = JSON.parse(JSON.stringify(this.session.getCurrentProfile().entity.profile));
         this.profile = JSON.parse(JSON.stringify(this.session.getCurrentProfile().entity.profile));
         this.password = {
             old: '',
@@ -154,4 +160,8 @@ export class ProfileModalModel
             }
         }
     }
+}
+
+interface ChangeDetectorHandler {
+
 }

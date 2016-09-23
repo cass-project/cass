@@ -18,7 +18,7 @@ import {CASSProfileModule} from "./profile/module";
 import {CASSMessageModule} from "./message/module";
 import {CASSI18nModule} from "./i18n/module";
 import {CASSPlayerModule} from "./player/module";
-import {CASSHeaderModule} from "./header/module";
+import {CASSSearchModule} from "./search/module";
 
 export const CASS_MODULES = [
     CASSAccountModule,
@@ -41,5 +41,5 @@ export const CASS_MODULES = [
     CASSMessageModule,
     CASSI18nModule,
     CASSPlayerModule,
-    CASSHeaderModule,
+    CASSSearchModule,
 ];

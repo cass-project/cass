@@ -3,6 +3,7 @@ import {Component, Output, EventEmitter, ViewChild, ElementRef} from "@angular/c
 import {AuthService} from "../../service/AuthService";
 import {SignInRequest, SignInResponse200} from "../../definitions/paths/sign-in";
 import {LoadingManager} from "../../../common/classes/LoadingStatus";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'cass-auth-sign-in',
@@ -23,7 +24,10 @@ export class SignInComponent
         password: ''
     };
 
-    constructor(private service: AuthService) {}
+    constructor(
+        private service: AuthService,
+        private router: Router
+    ) {}
 
     ngAfterViewInit() {
         this.emailInput.nativeElement.focus();
@@ -35,6 +39,7 @@ export class SignInComponent
         this.service.signIn(this.model).subscribe(
             (response: SignInResponse200) => {
                 if (this.service.isSignedIn()) {
+                    this.router.navigate(['/profile/current']);
                     this.successEvent.emit(response);
                 }
 

@@ -2,7 +2,7 @@
   .sidebar-contents
     ul.sidebar-items
       li
-        a.sidebar-item(routerLink='home')
+        a.sidebar-item(routerLink='home', routerLinkActive="active")
           div.image
             i.fa.fa-home
           span.title {{ "sidebar.item.home.title" | translate }}
@@ -12,25 +12,30 @@
             i.fa.fa-user
           span.title {{ "sidebar.item.profile.title" | translate }}
       li(*ngIf="isSignedIn()")
-        a.sidebar-item(routerLink='profile')
+        a.sidebar-item(routerLink='profile', routerLinkActive="active")
           div.image
             i.fa.fa-user
           span.title {{ "sidebar.item.profile.title" | translate }}
       li
-        a.sidebar-item(routerLink='people')
+        a.sidebar-item(routerLink='people', routerLinkActive="active")
           div.image
             i.fa.fa-users
           span.title {{ "sidebar.item.people.title" | translate }}
       li
-        a.sidebar-item(routerLink='collections')
+        a.sidebar-item(routerLink='collections', routerLinkActive="active")
           div.image
               i.fa.fa-th-large
           span.title {{ "sidebar.item.collections.title" | translate }}
       li
-        a.sidebar-item(routerLink='communities')
+        a.sidebar-item(routerLink='communities', routerLinkActive="active")
           div.image
             i.fa.fa-hashtag
           span.title {{ "sidebar.item.communities.title" | translate }}
+      li
+        a.sidebar-item(href="javascript:void(0)", [ngClass]="{ active: isSearchActive() }", (click)="openSearchModal()")
+          div.image
+            i.fa.fa-search
+          span.title {{ "sidebar.item.search.title" | translate }}
       li(*ngIf="isSignedIn()")
         a.sidebar-item(href="javascript:void(0)", (click)="signOut()")
           div.image

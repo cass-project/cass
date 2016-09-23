@@ -30,6 +30,7 @@ export interface ProfileEntity {
     interesting_in_ids: Array<number>;
     expert_in_ids: Array<number>;
     image: ImageCollection;
+    backdrop: string;
     greetings: ProfileGreetingsEntity;
     gender: ProfileGenderEntity;
     disabled: ProfileDisabledEntity;
