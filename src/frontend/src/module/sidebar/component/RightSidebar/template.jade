@@ -26,6 +26,14 @@ div.component.component-right-sidebar
             (click)="viewOption.switchTo('list')"
           )
             i.fa.fa-bars
+      hr.list-separator
+      ul.list
+        li.list-item
+          a(href="javascript:void(0);", title="{{ 'sidebar.right.item.toggle-content-player.title' | translate }}",
+            [ngClass]="{ 'active': player.isEnabled() }",
+            (click)="player.toggle()"
+          )
+            i.fa.fa-tv
     div.bottom
       ul.list
         li.list-item

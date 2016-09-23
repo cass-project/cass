@@ -12,6 +12,12 @@ div.component-right-sidebar {
     }
   }
 
+  hr.list-separator {
+    width: 60%;
+    border: 0;
+    border-top: 1px solid #d0d0d0;
+  }
+
   ul.list {
     margin: 10px;
 
@@ -36,7 +42,7 @@ div.component-right-sidebar {
 
         &:hover {
           background: #E6EBF7;
-          border-color: #E6EBF7;
+          border-color: darken(#E6EBF7, 10%);
         }
 
         &:active, &.active {

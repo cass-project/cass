@@ -14,5 +14,6 @@
   "view-option.type.feed": "Лента",
   "view-option.type.grid": "Сетка",
   "view-option.type.list": "Список",
-  "view-option.type.table": "Таблица"
+  "view-option.type.table": "Таблица",
+  "sidebar.right.item.toggle-content-player.title": "Включить/отключить TV"
 }

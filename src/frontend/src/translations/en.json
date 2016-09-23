@@ -14,5 +14,6 @@
   "view-option.type.feed": "Feed",
   "view-option.type.grid": "Grid",
   "view-option.type.list": "List",
-  "view-option.type.table": "Table"
+  "view-option.type.table": "Table",
+  "sidebar.right.item.toggle-content-player.title": "Enable/Disable TV"
 }
