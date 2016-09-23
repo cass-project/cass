@@ -1,6 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Attachment\Service;
 
+use CASS\Domain\Bundles\Attachment\LinkMetadata\Properties\HasPreview;
 use CASS\Util\FileNameFilter;
 use CASS\Util\GenerateRandomString;
 use CASS\Domain\Bundles\Attachment\Entity\AttachmentOwner;
@@ -33,33 +34,61 @@ class AttachmentService
     /** @var LinkMetadataFactory */
     private $linkMetadataFactory;
 
+    /** @var AttachmentPreviewService */
+    private $previewService;
+
     /** @var string */
     private $wwwDir;
+
+    /** @var bool */
+    private $generatePreviews = false;
 
     public function __construct(
         FilesystemInterface $fileSystem,
         AttachmentRepository $attachmentRepository,
         FetchResourceService $fetchResourceService,
         LinkMetadataFactory $linkMetadataFactory,
-        string $wwwDir
+        AttachmentPreviewService $attachmentPreviewService,
+        string $wwwDir,
+        bool $generatePreviews
     )
     {
         $this->fileSystem = $fileSystem;
         $this->attachmentRepository = $attachmentRepository;
         $this->fetchResourceService = $fetchResourceService;
         $this->linkMetadataFactory = $linkMetadataFactory;
+        $this->previewService = $attachmentPreviewService;
         $this->wwwDir = $wwwDir;
+        $this->generatePreviews = $generatePreviews;
     }
 
-    public function linkAttachment(string $url, Result $result, Source $source): Attachment
+    public function linkAttachment(
+        string $url,
+        string $dir,
+        string $file,
+        Result $result,
+        Source $source): Attachment
     {
-        $linkMetadata = $this->linkMetadataFactory->createLinkMetadata($url, $result->getContentType(),
-            $result->getContent());
+        $linkMetadata = $this->linkMetadataFactory->createLinkMetadata(
+            $url,
+            $result->getContentType(),
+            $result->getContent()
+        );
+
+        if($this->generatePreviews && ($linkMetadata instanceof HasPreview)) {
+            $preview = $this->previewService->generatePreview($dir, $file, $source, $linkMetadata);
+
+            $linkMetadata->setPreview(
+                sprintf('%s/%s', $dir, $preview),
+                sprintf('%s/%s/%s', $this->wwwDir, $dir, $preview)
+            );
+        }
 
         $metadata = [
             'url' => $linkMetadata->getURL(),
             'resource' => $linkMetadata->getResourceType(),
             'metadata' => $linkMetadata->toJSON(),
+            'version' => $linkMetadata->getVersion(),
             'source' => array_merge(['source' => $source->getCode()], $source->toJSON()),
         ];
 
@@ -96,7 +125,7 @@ class AttachmentService
         $result = new Result($publicPath, $content, $contentType);
         $source = new LocalSource($publicPath, $storagePath);
 
-        return $this->linkAttachment($publicPath, $result, $source);
+        return $this->linkAttachment($publicPath, $subDirectory, $desiredFileName, $result, $source);
     }
 
     public function attach(AttachmentOwner $owner, Attachment $attachment): Attachment

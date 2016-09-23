@@ -19,4 +19,12 @@ export class AttachmentLinkWebm
     getURL(): string {
         return this.attachment.link.url;
     }
+
+    getCover(): string {
+        if(this.attachment.link.version >= 2) {
+            return this.attachment.link.metadata.preview.public;
+        }else{
+            return '';
+        }
+    }
 }

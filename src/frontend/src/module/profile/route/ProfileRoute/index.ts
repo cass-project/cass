@@ -1,4 +1,4 @@
-import {Component, OnInit, ElementRef, ViewChild} from "@angular/core";
+import {Component, OnInit, ElementRef, ViewChild, OnDestroy} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs/Rx";
 
@@ -20,7 +20,7 @@ import {NavigationObservable} from "../../../navigator/service/NavigationObserva
     ]
 })
 
-export class ProfileRoute implements OnInit
+export class ProfileRoute implements OnInit, OnDestroy
 {
     @ViewChild('content') private content: ElementRef;
 
@@ -50,6 +50,12 @@ export class ProfileRoute implements OnInit
         ];
 
         this.profile = this.service.getEntity();
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.forEach((subscription) => {
+            subscription.unsubscribe();
+        });
     }
 
     isOwnProfile() {

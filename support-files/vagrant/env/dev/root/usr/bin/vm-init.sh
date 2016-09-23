@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# FFMPEG
+sudo add-apt-repository ppa:mc3man/trusty-media -y
+
 # Locale issues
 sudo apt-get update
 sudo apt-get install language-pack-en language-pack-en-base -y
@@ -20,7 +23,7 @@ sudo apt-get update
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password 1234'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 1234'
 
-sudo apt-get install -y curl php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server php-pear php7.0-dev pkg-config libssl-dev libsslcommon2-dev php7.0-intl
+sudo apt-get install -y ffmpreg curl php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server php-pear php7.0-dev pkg-config libssl-dev libsslcommon2-dev php7.0-intl
 
 # ######
 # XDEBUG

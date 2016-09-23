@@ -5,6 +5,7 @@ use CASS\Domain\Bundles\Attachment\LinkMetadata\LinkMetadata;
 
 final class ImageLinkMetadata implements LinkMetadata
 {
+    const VERSION = 1;
     const RESOURCE_TYPE = 'image';
 
     /** @var string */
@@ -13,6 +14,11 @@ final class ImageLinkMetadata implements LinkMetadata
     public function __construct(string $url)
     {
         $this->url = $url;
+    }
+
+    public function getVersion(): int
+    {
+        return self::VERSION;
     }
 
     public function getURL(): string

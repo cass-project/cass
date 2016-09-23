@@ -5,6 +5,7 @@ use CASS\Domain\Bundles\Attachment\LinkMetadata\LinkMetadata;
 
 final class YoutubeLinkMetadata implements LinkMetadata
 {
+    const VERSION = 1;
     const RESOURCE_TYPE = 'youtube';
 
     /** @var string */
@@ -21,6 +22,11 @@ final class YoutubeLinkMetadata implements LinkMetadata
         $this->youTubeId = $youTubeId;
         $this->url = $url;
         $this->openGraph = $openGraph;
+    }
+
+    public function getVersion(): int
+    {
+        return self::VERSION;
     }
 
     public function getURL(): string
