@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 
 import {ProfileRouteService} from "../ProfileRoute/service";
-import {CollectionEntity} from "../../../collection/definitions/entity/collection";
+import {ProfileModals} from "../../component/Elements/Profile/modals";
 
 @Component({
     template: require('./template.jade'),
@@ -11,17 +11,12 @@ import {CollectionEntity} from "../../../collection/definitions/entity/collectio
 })
 export class ProfileCollectionsListRoute
 {
-    private collections: CollectionEntity[];
-
     constructor(
         private service: ProfileRouteService,
+        private modals: ProfileModals
     ) {}
 
-    ngOnInit() {
-        this.collections = this.service.getProfile().collections;
-    }
-
     openCreateCollectionModal() {
-        this.service.modals.createCollection.open();
+        this.modals.createCollection.open();
     }
 }

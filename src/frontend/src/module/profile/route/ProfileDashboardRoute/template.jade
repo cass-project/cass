@@ -1,8 +1,8 @@
 article.component.component-profile-dashboard-route
-  div.dashboard(*ngIf="service.isProfileLoaded()")
+  div.dashboard
     .dashboard-header
     .dashboard-content
-      .backdrop(style="background-image: url('{{ profile.backdrop }}')")
+      .backdrop(style="background-image: url('{{ service.getProfile().backdrop }}')")
       .post-form(*ngIf='canPost()')
         .post-form-container
           cass-post-form([collection]="main_collection", [post-type] = "postType", (success) = "unshiftEntity($event)")

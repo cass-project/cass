@@ -17,8 +17,12 @@ export class ProfileMenuOwn
         private modals: ProfileModals
     ) {}
 
+    ngOnInit() {
+        console.log('ProfileMenuInit!');
+    }
+
     getCollections() {
-        return this.service.getProfile().collections.filter(collection => {
+        return this.service.getCollections().filter(collection => {
             return collection.is_main !== true;
         });
     }

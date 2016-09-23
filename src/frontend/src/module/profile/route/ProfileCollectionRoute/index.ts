@@ -44,27 +44,22 @@ export class ProfileCollectionRoute implements OnInit
     ngOnInit(){
         this.postType = this.types.getTypeByStringCode('default');
         this.sid = this.route.snapshot.params['sid'];
-        this.profile = this.service.getProfile().profile;
+        this.profile = this.service.getProfile();
 
-        this.service.getObservable().subscribe(
-            (response) => {
-                let sid = this.sid;
-                let collections = response.entity.collections.filter((entity: CollectionEntity) => {
-                    return entity.sid === sid;
-                });
+        let sid = this.sid;
+        let collections = this.service.getCollections().filter((entity: CollectionEntity) => {
+            return entity.sid === sid;
+        });
 
-                if(! collections.length) {
-                    this.router.navigate(['/profile/collections/not-found']);
-                }
+        if(! collections.length) {
+            this.router.navigate(['/profile/collections/not-found']);
+        }
 
-                this.collection = collections[0];
+        this.collection = collections[0];
 
-                this.feedSource.collectionId = this.collection.id;
-                this.feed.provide(this.feedSource, new Stream<PostEntity>());
-                this.feed.update();
-            },
-            (error) => {}
-        );
+        this.feedSource.collectionId = this.collection.id;
+        this.feed.provide(this.feedSource, new Stream<PostEntity>());
+        this.feed.update();
     }
 
     unshiftEntity(entity: PostEntity) {

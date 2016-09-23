@@ -1,12 +1,11 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
+import {Component, OnInit} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
 
-import {ProfileRouteService} from "./service";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
-import {Session} from "../../../session/Session";
 import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
 import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
+import {ProfileRouteService} from "./service";
 
 @Component({
     template: require('./template.jade'),
@@ -20,23 +19,21 @@ import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
     ]
 })
 
-export class ProfileRoute implements OnInit, OnDestroy
+export class ProfileRoute implements OnInit
 {
     private profile: ProfileExtendedEntity;
 
     constructor(
         private route: ActivatedRoute,
-        private router: Router,
-        private session: Session,
+        private service: ProfileRouteService
     ) {}
     
     ngOnInit() {
-        this.route.data.forEach((data: { profile: GetProfileByIdResponse200 }) => {
+        this.service.exportResponse(
+            this.route.snapshot.data['profile']
+        );
 
-        });
-    }
-
-    ngOnDestroy() {
+        this.profile = this.service.getEntity();
     }
 
     isOwnProfile() {
