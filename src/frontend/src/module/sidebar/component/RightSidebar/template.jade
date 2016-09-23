@@ -37,14 +37,14 @@ div.component.component-right-sidebar
     div.bottom
       ul.list
         li.list-item
-          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.top.title' | translate }}")
+          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.top.title' | translate }}", (click)="navigator.emitTop()")
             i.fa.fa-step-forward.fa-rotate-270
         li.list-item
-          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.prev.title' | translate }}")
+          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.prev.title' | translate }}", (click)="navigator.emitPrev(1)")
             i.fa.fa-arrow-up
         li.list-item
-          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.next.title' | translate }}")
+          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.next.title' | translate }}", (click)="navigator.emitNext(1)")
             i.fa.fa-arrow-up.fa-rotate-180
         li.list-item
-          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.bottom.title' | translate }}")
+          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.bottom.title' | translate }}", (click)="navigator.emitBottom()")
             i.fa.fa-step-forward.fa-rotate-90

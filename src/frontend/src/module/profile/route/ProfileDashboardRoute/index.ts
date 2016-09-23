@@ -6,9 +6,9 @@ import {Stream} from "../../../feed/service/FeedService/stream";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
 import {PostTypeService} from "../../../post/service/PostTypeService";
-import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
 import {Session} from "../../../session/Session";
 import {ProfileRouteService} from "../ProfileRoute/service";
+import {ProfileSource} from "../../../feed/service/FeedService/source/ProfileSource";
 
 @Component({
     template: require('./template.jade'),
@@ -17,7 +17,7 @@ import {ProfileRouteService} from "../ProfileRoute/service";
     ],
     providers: [
         FeedService,
-        CollectionSource
+        ProfileSource,
     ]
 })
 export class ProfileDashboardRoute
@@ -29,7 +29,7 @@ export class ProfileDashboardRoute
         private session: Session,
         private service: ProfileRouteService,
         private feed: FeedService<PostEntity>,
-        private feedSource: CollectionSource,
+        private feedSource: ProfileSource,
         private types: PostTypeService
     ) {
         this.postType = types.getTypeByStringCode('default');
@@ -40,7 +40,7 @@ export class ProfileDashboardRoute
             }
         }
 
-        feedSource.collectionId = this.main_collection.id;
+        feedSource.profileId = service.getProfile().id;
         feed.provide(feedSource, new Stream<PostEntity>());
         feed.update();
     }

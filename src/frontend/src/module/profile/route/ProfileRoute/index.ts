@@ -1,11 +1,12 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ElementRef, ViewChild} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs/Rx";
 
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
-import {GetProfileByIdResponse200} from "../../definitions/paths/get-by-id";
 import {ProfileRouteService} from "./service";
+import {NavigationObservable} from "../../../navigator/service/NavigationObservable";
 
 @Component({
     template: require('./template.jade'),
@@ -21,17 +22,32 @@ import {ProfileRouteService} from "./service";
 
 export class ProfileRoute implements OnInit
 {
+    @ViewChild('content') private content: ElementRef;
+
     private profile: ProfileExtendedEntity;
+    private subscriptions: Subscription[];
 
     constructor(
         private route: ActivatedRoute,
-        private service: ProfileRouteService
+        private service: ProfileRouteService,
+        private navigator: NavigationObservable
     ) {}
     
     ngOnInit() {
+        let elem = this.content.nativeElement;
+
         this.service.exportResponse(
             this.route.snapshot.data['profile']
         );
+
+        this.subscriptions = [
+            this.navigator.top.subscribe(() => {
+                elem.scrollTop = 0;
+            }),
+            this.navigator.bottom.subscribe(() => {
+                elem.scrollTop = elem.scrollHeight - elem.clientHeight;
+            }),
+        ];
 
         this.profile = this.service.getEntity();
     }
@@ -42,5 +58,9 @@ export class ProfileRoute implements OnInit
 
     isOtherProfile() {
         return ! this.isOwnProfile();
+    }
+
+    emitScroll($event) {
+        this.navigator.emitScroll(this.content);
     }
 }
