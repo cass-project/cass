@@ -12,6 +12,7 @@ export interface CollectionEntity
     theme_ids: Array<number>;
     public_options: CollectionPublicOptionsEntity;
     image: ImageCollection;
+    backdrop: string;
     is_protected: boolean;
     is_main: boolean;
     children?: CollectionEntity[];
@@ -53,6 +54,7 @@ export class Collection implements CollectionEntity
     theme_ids: Array<number>;
     public_options: CollectionPublicOptionsEntity;
     image: ImageCollection;
+    backdrop: string;
     children: CollectionEntity[] = [];
 
     constructor(ownerType: string, ownerId: string) {

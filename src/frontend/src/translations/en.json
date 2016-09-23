@@ -18,5 +18,6 @@
   "sidebar.right.item.toggle-content-player.title": "Enable/Disable TV",
   "profile.header.change-cover": "Change cover",
   "collections": "Collections",
-  "post.write-new": "Write new post"
+  "post.write-new": "Write new post",
+  "settings": "Settings"
 }

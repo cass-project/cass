@@ -6,6 +6,7 @@ import {CreateCollectionCard} from "./component/Elements/CreateCollectionCard/in
 import {CollectionCreateMaster} from "./component/Modal/CollectionCreateMaster/index";
 import {CollectionSettings} from "./component/Modal/CollectionSettings/index";
 import {DeleteCollectionModal} from "./component/Modal/DeleteCollectionModal/index";
+import {CollectionHeader} from "./component/Elements/CollectionHeader/index";
 
 export const CASSCollectionModule = {
     declarations: [
@@ -16,6 +17,7 @@ export const CASSCollectionModule = {
         CollectionCreateMaster,
         CollectionSettings,
         DeleteCollectionModal,
+        CollectionHeader,
     ],
     providers: [
         CollectionRESTService,

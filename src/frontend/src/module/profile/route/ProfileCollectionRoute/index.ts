@@ -70,5 +70,9 @@ export class ProfileCollectionRoute implements OnInit
         return typeof this.collection === "object";
     }
 
+    isOwn(): boolean {
+        return this.service.isOwnProfile();
+    }
+
     doNothing() {}
 }

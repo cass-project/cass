@@ -1,0 +1,16 @@
+div.component.component-collection-header
+  div.sticky
+    div.backdrop(style="background-image: url('{{ getBackdrop() }}')")
+    div.properties
+      div.collection-image
+        div.collection-image-container
+          cass-collection-image([url]="getImageURL()")
+      div.collection-name
+        h1 {{ entity.title }}
+        p {{ entity.description }}
+      div.collection-controls(*ngIf="isOwn")
+        a.action-link(href="javascript:void(0)", (click)="openSettings()")
+          span.title {{ "settings" | translate }}
+        a.action-link(href="javascript:void(0)", (click)="openPublicSettings()")
+          i(*ngIf="isPublished()").fa.fa-bullhorn
+          i(*ngIf="! isPublished()").fa.fa-ban

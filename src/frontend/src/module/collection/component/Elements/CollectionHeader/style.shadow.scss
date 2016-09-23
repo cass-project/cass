@@ -1,0 +1,82 @@
+@import "./../../../../../styles/globals";
+
+div.component-collection-header {
+  div.sticky {
+    background-color: #000;
+    width: 100%;
+    height: 60vh;
+    margin-bottom: 35px;
+    position: relative;
+  }
+
+  div.backdrop {
+    @include card(2);
+
+    position: absolute;
+    top: 0; height: 100%;
+    left: 0; width: 100%;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+  }
+
+  div.properties {
+    position: absolute;
+    left: 0; width: 100%;
+    bottom: 35px;
+    text-align: center;
+
+    div.collection-image {
+      div.collection-image-container {
+        display: inline-block;
+        width: 128px;
+        height: 128px;
+        border-radius: 100%;
+        border: 3px solid rgba(255,255,255,0.3);
+        margin-bottom: 15px;
+      }
+    }
+
+    div.collection-name {
+      h1 {
+        line-height: 55px;
+        color: #fff;
+        font-size: 24px;
+        font-weight: 400;
+      }
+
+      p {
+        color: rgba(255,255,255,0.7);
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+
+    div.collection-controls {
+      margin-top: 20px;
+
+      a.action-link {
+        color: rgba(255,255,255,0.5);
+        display: inline-block;
+        padding: 0 6px;
+        margin: 3px 5px;
+        transition: color 0.2s;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 16px;
+        font-weight: 500;
+
+        &:hover {
+          color: rgba(255,255,255,1);
+        }
+      }
+
+      a.action-link-enabled {
+        color: rgba(255,255,255,0.8);
+      }
+    }
+  }
+}
