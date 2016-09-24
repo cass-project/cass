@@ -103,5 +103,26 @@ return [
             'middleware' => ProfileMiddleware::class,
             'name' => 'profile-backdrop-upload',
         ],
+        [
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/profile/{profileId}/{command:backdrop-none}[/]',
+            'middleware' => ProfileMiddleware::class,
+            'name' => 'profile-backdrop-none',
+        ],
+        [
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/profile/{profileId}/{command:backdrop-preset}/textColor/{textColor}[/]',
+            'middleware' => ProfileMiddleware::class,
+            'name' => 'profile-backdrop-preset',
+        ]
+        ,[
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/profile/{profileId}/{command:backdrop-color}[/]',
+            'middleware' => ProfileMiddleware::class,
+            'name' => 'profile-backdrop-color',
+        ]
     ],
 ];

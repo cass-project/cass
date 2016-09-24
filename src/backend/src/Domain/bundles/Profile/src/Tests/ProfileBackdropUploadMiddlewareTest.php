@@ -2,7 +2,6 @@
 namespace CASS\Domain\Bundles\Profile\Tests;
 
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
-use CASS\Domain\Bundles\Profile\Entity\Profile\Gender\GenderFemale;
 use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**
@@ -41,7 +40,21 @@ class ProfileBackdropUploadMiddlewareTest extends ProfileMiddlewareTestCase
 
         $localFile = __DIR__ . '/Resources/grid500x500.png';
 
-        $this->requestBackdropUpload($profile->getId(), $localFile, 'ffffff')
+        $this->requestGetProfile($profile->getId())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'entity' => [
+                    'profile' => [
+                        'backdrop' => [
+                            'type' => 'none'
+                        ]
+                    ]
+                ]
+            ]);
+
+        $backdropJSON = $this->requestBackdropUpload($profile->getId(), $localFile, 'ffffff')
             ->auth($account->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
@@ -54,6 +67,22 @@ class ProfileBackdropUploadMiddlewareTest extends ProfileMiddlewareTestCase
                         'public_path' => $this->expectString(),
                         'storage_path' => $this->expectString(),
                         'text_color' => 'ffffff'
+                    ]
+                ]
+            ])
+            ->fetch(function(array $json) {
+                return $json['backdrop'];
+            })
+        ;
+
+        $this->requestGetProfile($profile->getId())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'entity' => [
+                    'profile' => [
+                        'backdrop' => $backdropJSON
                     ]
                 ]
             ]);

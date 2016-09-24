@@ -109,6 +109,11 @@ abstract class ProfileMiddlewareTestCase extends CASSMiddlewareTestCase
             ]);
     }
 
+    protected function requestBackdropNone(int $profileId): RESTRequest
+    {
+        return $this->request('POST', sprintf('/protected/profile/%d/backdrop-none', $profileId));
+    }
+
     protected function fromNow(int $years): \DateTime
     {
         if($years > 0) {

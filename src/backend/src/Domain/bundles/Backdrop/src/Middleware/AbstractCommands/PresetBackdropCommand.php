@@ -1,16 +1,15 @@
 <?php
 namespace CASS\Domain\Bundles\Backdrop\Middleware\AbstractCommands;
 
+use CASS\Domain\Bundles\Backdrop\Entity\Backdrop;
 use CASS\Domain\Bundles\Backdrop\Factory\PresetFactory;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 
 abstract class PresetBackdropCommand extends AbstractBackdropCommand
 {
     protected abstract function getPresetFactory(): PresetFactory;
 
-    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
+    protected function perform(ServerRequestInterface $request): Backdrop
     {
         // REQUIRES: parameter "presetId" in path
 
@@ -21,10 +20,6 @@ abstract class PresetBackdropCommand extends AbstractBackdropCommand
 
         $this->saveBackdropAwareEntityChanges($entity);
 
-        $responseBuilder
-            ->setStatusSuccess()
-            ->setJson([
-                'backdrop' => $entity->getBackdrop()->toJSON(),
-            ]);
+        return $entity->getBackdrop();
     }
 }

@@ -3,6 +3,9 @@ namespace CASS\Domain\Bundles\Profile\Middleware;
 
 use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
+use CASS\Domain\Bundles\Profile\Middleware\Command\Backdrop\BackdropColorCommand;
+use CASS\Domain\Bundles\Profile\Middleware\Command\Backdrop\BackdropNoneCommand;
+use CASS\Domain\Bundles\Profile\Middleware\Command\Backdrop\BackdropPresetCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\Backdrop\BackdropUploadCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\CreateCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\DeleteCommand;
@@ -49,6 +52,9 @@ class ProfileMiddleware implements MiddlewareInterface
             ->attachDirect('birthday', SetBirthdayCommand::class, 'POST')
             ->attachDirect('birthday', UnsetBirthdayCommand::class, 'DELETE')
             ->attachDirect('backdrop-upload', BackdropUploadCommand::class, 'POST')
+            ->attachDirect('backdrop-none', BackdropNoneCommand::class, 'POST')
+            ->attachDirect('backdrop-preset', BackdropPresetCommand::class, 'POST')
+            ->attachDirect('backdrop-color', BackdropColorCommand::class, 'POST')
             ->resolve($request);
 
         return $resolver->run($request, $responseBuilder);

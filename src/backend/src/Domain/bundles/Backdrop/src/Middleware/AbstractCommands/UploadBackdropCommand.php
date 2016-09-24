@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Backdrop\Middleware\AbstractCommands;
 
-use CASS\Domain\Bundles\Backdrop\Entity\Backdrop\UploadedBackdrop;
+use CASS\Domain\Bundles\Backdrop\Entity\Backdrop;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
 use CASS\Domain\Bundles\Backdrop\Strategy\BackdropUploadStrategy;
 use CASS\Domain\Bundles\Colors\Repository\ColorsRepository;
@@ -13,7 +13,7 @@ abstract class UploadBackdropCommand extends AbstractBackdropCommand
     abstract protected function getBackdropUploadStrategy(ServerRequestInterface $request, BackdropEntityAware $entity): BackdropUploadStrategy;
     abstract protected function getColorRepository(): ColorsRepository;
 
-    protected function upload(ServerRequestInterface $request): UploadedBackdrop
+    protected function perform(ServerRequestInterface $request): Backdrop
     {
         // REQUIRES: POST request
         // REQUIRES: file in POST
