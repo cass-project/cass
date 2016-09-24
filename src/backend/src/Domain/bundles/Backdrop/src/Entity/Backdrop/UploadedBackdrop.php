@@ -14,10 +14,10 @@ final class UploadedBackdrop implements Backdrop
     /** @var string */
     private $publicPath;
 
-    /** @var Color */
+    /** @var string */
     private $textColor;
 
-    public function __construct(string $storagePath, string $publicPath, Color $textColor)
+    public function __construct(string $storagePath, string $publicPath, string $textColor)
     {
         $this->storagePath = $storagePath;
         $this->publicPath = $publicPath;
@@ -39,7 +39,7 @@ final class UploadedBackdrop implements Backdrop
         return $this->publicPath;
     }
 
-    public function getTextColor(): Color
+    public function getTextColor(): string
     {
         return $this->textColor;
     }
@@ -51,7 +51,7 @@ final class UploadedBackdrop implements Backdrop
             'metadata' => [
                 'storage_path' => $this->getStoragePath(),
                 'public_path' => $this->getPublicPath(),
-                'text_color' => $this->getTextColor()->toJSON(),
+                'text_color' => $this->getTextColor(),
             ],
         ];
     }

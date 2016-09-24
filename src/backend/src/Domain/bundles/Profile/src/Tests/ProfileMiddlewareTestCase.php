@@ -99,6 +99,16 @@ abstract class ProfileMiddlewareTestCase extends CASSMiddlewareTestCase
         return $this->request('DELETE', sprintf('/protected/profile/%d/birthday', $profileId));
     }
 
+    protected function requestBackdropUpload(int $profileId, string $localFile, string $textColor): RESTRequest
+    {
+        $url = sprintf('/protected/profile/%d/backdrop-upload/textColor/%s', $profileId, $textColor);
+
+        return $this->request('POST', $url)
+            ->setUploadedFiles([
+                'file' => new UploadedFile($localFile, filesize($localFile), 0)
+            ]);
+    }
+
     protected function fromNow(int $years): \DateTime
     {
         if($years > 0) {

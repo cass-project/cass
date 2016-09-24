@@ -7,6 +7,7 @@ use CASS\Domain\Bundles\Backdrop\Entity\Backdrop\UploadedBackdrop;
 use CASS\Domain\Bundles\Backdrop\Factory\PresetFactory;
 use CASS\Domain\Bundles\Colors\Entity\Color;
 use CASS\Domain\Bundles\Colors\Entity\Palette;
+use CASS\Util\GenerateRandomString;
 use Intervention\Image\ImageManager;
 use CASS\Util\FileNameFilter;
 use CASS\Domain\Bundles\Backdrop\Entity\Backdrop\NoneBackdrop;
@@ -19,6 +20,11 @@ final class BackdropService
 {
     /** @var ImageManager */
     private $imageManager;
+
+    public function __construct(ImageManager $imageManager)
+    {
+        $this->imageManager = $imageManager;
+    }
 
     public function backdropNone(BackdropEntityAware $entity): NoneBackdrop
     {
@@ -47,13 +53,20 @@ final class BackdropService
         return $backdrop;
     }
 
-    public function backdropUpload(BackdropEntityAware $entity, BackdropUploadStrategy $strategy, Color $textColor, string $tmpFile): UploadedBackdrop
+    public function backdropUpload(
+        BackdropEntityAware $entity,
+        BackdropUploadStrategy $strategy,
+        string $textColor,
+        string $tmpFile
+    ): UploadedBackdrop
     {
         $this->validateFile($strategy, $tmpFile);
 
-        $fileName = FileNameFilter::filter(basename($tmpFile));
-        $storagePath = sprintf('%s/%s', $strategy->getStoragePath(), $fileName);
-        $publicPath = sprintf('%s/%s', $strategy->getPublicPath(), $fileName);
+        $uid = join('/', str_split($entity->getSID(), 2));
+
+        $fileName = GenerateRandomString::gen(8) .'_'. FileNameFilter::filter(basename($tmpFile));
+        $storagePath = sprintf('%s/%s/%s', $strategy->getStoragePath(), $uid, $fileName);
+        $publicPath = sprintf('%s/%s/%s', $strategy->getPublicPath(), $uid, $fileName);
 
         $strategy->getFileSystem()->write($fileName, $tmpFile);
 

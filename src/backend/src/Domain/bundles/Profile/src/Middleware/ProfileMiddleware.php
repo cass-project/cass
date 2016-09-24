@@ -3,6 +3,7 @@ namespace CASS\Domain\Bundles\Profile\Middleware;
 
 use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
+use CASS\Domain\Bundles\Profile\Middleware\Command\Backdrop\BackdropUploadCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\CreateCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\DeleteCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\EditPersonalCommand;
@@ -47,6 +48,7 @@ class ProfileMiddleware implements MiddlewareInterface
             ->attachDirect('set-gender', SetGenderCommand::class)
             ->attachDirect('birthday', SetBirthdayCommand::class, 'POST')
             ->attachDirect('birthday', UnsetBirthdayCommand::class, 'DELETE')
+            ->attachDirect('backdrop-upload', BackdropUploadCommand::class, 'POST')
             ->resolve($request);
 
         return $resolver->run($request, $responseBuilder);

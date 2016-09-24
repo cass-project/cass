@@ -56,19 +56,13 @@ trait BackdropEntityAwareTrait
                     $json['metadata']['preset_id'],
                     $json['metadata']['storage_path'],
                     $json['metadata']['public_path'],
-                    new Color(
-                        $json['metadata']['text_color']['code'],
-                        $json['metadata']['text_color']['hexCode']
-                    )
+                    $json['metadata']['text_color']
                 );
             case UploadedBackdrop::TYPE_ID:
                 return new UploadedBackdrop(
                     $json['metadata']['storage_path'],
                     $json['metadata']['public_path'],
-                    new Color(
-                        $json['metadata']['text_color']['code'],
-                        $json['metadata']['text_color']['hexCode']
-                    )
+                    $json['metadata']['text_color']
                 );
         }
     }

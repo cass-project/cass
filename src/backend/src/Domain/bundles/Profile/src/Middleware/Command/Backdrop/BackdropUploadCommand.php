@@ -2,14 +2,18 @@
 namespace CASS\Domain\Bundles\Profile\Middleware\Command\Backdrop;
 
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
+use CASS\Domain\Bundles\Backdrop\Exception\BackdropUploadException;
 use CASS\Domain\Bundles\Backdrop\Middleware\AbstractCommands\UploadBackdropCommand;
 use CASS\Domain\Bundles\Backdrop\Service\BackdropService;
 use CASS\Domain\Bundles\Backdrop\Strategy\BackdropUploadStrategy;
 use CASS\Domain\Bundles\Colors\Repository\ColorsRepository;
 use CASS\Domain\Bundles\Profile\Backdrop\Upload\ProfileBackdropUploadStrategyFactory;
 use CASS\Domain\Bundles\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use CASS\Domain\Bundles\Profile\Service\ProfileService;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 
 final class BackdropUploadCommand extends UploadBackdropCommand
 {
@@ -38,6 +42,29 @@ final class BackdropUploadCommand extends UploadBackdropCommand
         $this->profileService = $profileService;
         $this->colorRepository = $colorRepository;
         $this->strategyFactory = $strategyFactory;
+    }
+
+    public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
+    {
+        try {
+            $backdrop = $this->upload($request);
+
+            $responseBuilder
+                ->setStatusSuccess()
+                ->setJson([
+                    'backdrop' => $backdrop->toJSON(),
+                ]);
+        }catch(ProfileNotFoundException $e) {
+            $responseBuilder
+                ->setStatusNotFound()
+                ->setError($e);
+        }catch(BackdropUploadException $e) {
+            $responseBuilder
+                ->setStatusConflict()
+                ->setError($e);
+        }
+
+        return $responseBuilder->build();
     }
 
     protected function getBackdropAwareEntity(ServerRequestInterface $request): BackdropEntityAware

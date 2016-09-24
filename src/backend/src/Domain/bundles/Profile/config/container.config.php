@@ -46,8 +46,8 @@ $configTest = [
 return [
     'php-di' => [
         'config.paths.profile.backdrop.presets.json' => factory(function(Container $container) {
-            return json_encode(
-                file_get_contents(sprintf('%s/presets/profile/presets.json', $container->get('config.storage.dir')))
+            return json_decode(
+                file_get_contents(sprintf('%s/presets/profile/presets.json', $container->get('config.storage.dir'))), true
             );
         }),
         'config.paths.profile.avatar.dir' => factory(function(Container $container) {
@@ -57,10 +57,10 @@ return [
             return sprintf('%s/entity/profile/by-sid/avatar/', $container->get('config.storage.www'));
         }),
         'config.paths.profile.backdrop.dir' => factory(function(Container $container) {
-            return sprintf('%s/entity/profile/by-sid/backdrop/', $container->get('config.storage.dir'));
+            return sprintf('%s/entity/profile/by-sid/backdrop', $container->get('config.storage.dir'));
         }),
         'config.paths.profile.backdrop.www' => factory(function(Container $container) {
-            return sprintf('%s/entity/profile/by-sid/backdrop/', $container->get('config.storage.www'));
+            return sprintf('%s/entity/profile/by-sid/backdrop', $container->get('config.storage.www'));
         }),
         ProfileRepository::class => factory(new DoctrineRepositoryFactory(Profile::class)),
         ProfileExpertInEQRepository::class => factory(new DoctrineRepositoryFactory(ProfileExpertInEQ::class)),

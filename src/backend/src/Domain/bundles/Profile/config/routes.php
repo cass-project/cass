@@ -96,5 +96,12 @@ return [
             'middleware' => ProfileMiddleware::class,
             'name' => 'profile-unset-birthday',
         ],
+        [
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/profile/{profileId}/{command:backdrop-upload}/textColor/{textColor}[/]',
+            'middleware' => ProfileMiddleware::class,
+            'name' => 'profile-backdrop-upload',
+        ],
     ],
 ];
