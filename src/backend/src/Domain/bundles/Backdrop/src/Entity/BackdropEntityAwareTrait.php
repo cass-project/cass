@@ -47,9 +47,18 @@ trait BackdropEntityAwareTrait
             case ColorBackdrop::TYPE_ID:
                 return new ColorBackdrop(new Palette(
                     $json['metadata']['palette']['code'],
-                    $json['metadata']['palette']['background'],
-                    $json['metadata']['palette']['foreground'],
-                    $json['metadata']['palette']['color']
+                    new Color(
+                        $json['metadata']['palette']['background']['code'],
+                        $json['metadata']['palette']['background']['hexCode']
+                    ),
+                    new Color(
+                        $json['metadata']['palette']['foreground']['code'],
+                        $json['metadata']['palette']['foreground']['hexCode']
+                    ),
+                    new Color(
+                        $json['metadata']['palette']['border']['code'],
+                        $json['metadata']['palette']['border']['hexCode']
+                    )
                 ));
             case PresetBackdrop::TYPE_ID:
                 return new PresetBackdrop(

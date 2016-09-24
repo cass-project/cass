@@ -120,7 +120,7 @@ return [
         ,[
             'type' => 'route',
             'method' => 'post',
-            'url' => '/protected/profile/{profileId}/{command:backdrop-color}[/]',
+            'url' => '/protected/profile/{profileId}/{command:backdrop-color}/code/{code}[/]',
             'middleware' => ProfileMiddleware::class,
             'name' => 'profile-backdrop-color',
         ]

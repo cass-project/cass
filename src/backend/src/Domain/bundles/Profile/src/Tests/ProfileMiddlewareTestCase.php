@@ -114,6 +114,13 @@ abstract class ProfileMiddlewareTestCase extends CASSMiddlewareTestCase
         return $this->request('POST', sprintf('/protected/profile/%d/backdrop-none', $profileId));
     }
 
+    protected function requestBackdropColor(int $profileId, string $code): RESTRequest
+    {
+        $url = sprintf('/protected/profile/%d/backdrop-color/code/%s/', $profileId, $code);
+
+        return $this->request('POST', $url);
+    }
+
     protected function requestBackdropPreset(int $profileId, string $presetId): RESTRequest
     {
         $url = sprintf('/protected/profile/%d/backdrop-preset/presetId/%s/', $profileId, $presetId);
