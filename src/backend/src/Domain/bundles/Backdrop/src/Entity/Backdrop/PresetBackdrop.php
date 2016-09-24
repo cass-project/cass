@@ -66,7 +66,7 @@ final class PresetBackdrop implements Backdrop
                 'preset_id' => $this->getPresetId(),
                 'public_path' => $this->getPublicPath(),
                 'storage_path' => $this->getStoragePath(),
-                'text_color' => $this-$this->getTextColor(),
+                'text_color' => $this->getTextColor(),
             ],
         ];
     }

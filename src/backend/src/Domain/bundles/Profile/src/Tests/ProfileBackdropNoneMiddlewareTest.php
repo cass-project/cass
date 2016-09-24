@@ -9,7 +9,7 @@ use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
  */
 class ProfileBackdropNoneMiddlewareTest extends ProfileMiddlewareTestCase
 {
-    public function testNonePreset403()
+    public function testNone403()
     {
         $account = DemoAccountFixture::getAccount();
         $profile = DemoProfileFixture::getProfile();
@@ -19,7 +19,7 @@ class ProfileBackdropNoneMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectAuthError();
     }
 
-    public function testNonePreset404()
+    public function testNone404()
     {
         $account = DemoAccountFixture::getAccount();
         $profile = DemoProfileFixture::getProfile();
@@ -30,7 +30,7 @@ class ProfileBackdropNoneMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectNotFoundError();
     }
 
-    public function testNonePreset200()
+    public function testNone200()
     {
         $account = DemoAccountFixture::getAccount();
         $profile = DemoProfileFixture::getProfile();
