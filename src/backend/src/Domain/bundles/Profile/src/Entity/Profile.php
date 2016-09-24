@@ -2,6 +2,7 @@
 namespace CASS\Domain\Bundles\Profile\Entity;
 
 use CASS\Domain\Bundles\Backdrop\Entity\Backdrop;
+use CASS\Domain\Bundles\Backdrop\Entity\Backdrop\NoneBackdrop;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
 use CASS\Util\Entity\IdEntity\IdEntity;
@@ -32,9 +33,6 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
 {
     const MIN_AGE = 3;
     const MAX_AGE = 130;
-
-    const DEFAULT_BACKDROP_PUBLIC = '/storage/entity/profile/defaults/default-backdrop.jpg';
-    const DEFAULT_BACKDROP_STORAGE = '/storage/entity/profile/defaults/default-backdrop.jpg';
 
     const EXCEPTION_GUEST_FUTURE = "Hello stranger, does nuclear war happen?";
     const EXCEPTION_YOUNG = "You're too young, where are your parents?";
@@ -100,6 +98,19 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
      */
     private $expertInIds = [];
 
+    public function __construct(Account $account)
+    {
+        $this->account = $account;
+        $this->collections = new ImmutableCollectionTree();
+        $this->greetings = new GreetingsAnonymous();
+        $this->gender = (new GenderNotSpecified())->getIntCode();
+        $this->dateCreatedOn = new \DateTime();
+
+        $this->regenerateSID();
+        $this->setBackdrop(new NoneBackdrop());
+        $this->setImages(new ImageCollection());
+    }
+
     public function toJSON(): array
     {
         $result = [
@@ -115,7 +126,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
             'greetings' => $this->getGreetings()->toJSON(),
             'gender' => $this->getGender()->toJSON(),
             'image' => $this->getImages()->toJSON(),
-            'backdrop' => self::DEFAULT_BACKDROP_PUBLIC,
+            'backdrop' => $this->getBackdrop()->toJSON(),
             'expert_in_ids' => $this->expertInIds,
             'interesting_in_ids' => $this->interestingInIds,
             'collections' => $this->getCollections()->toJSON(),
@@ -133,20 +144,6 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
         return array_merge($this->toJSON(), [
             'date_created_on' => $this->getDateCreatedOn(),
         ]);
-    }
-
-    public function __construct(Account $account)
-    {
-        $this->account = $account;
-        $this->collections = new ImmutableCollectionTree();
-        $this->greetings = new GreetingsAnonymous();
-        $this->gender = (new GenderNotSpecified())->getIntCode();
-        $this->dateCreatedOn = new \DateTime();
-
-        $this->backdrop = $this->getDefaultBackdrop()->toJSON();
-
-        $this->regenerateSID();
-        $this->setImages(new ImageCollection());
     }
 
     public function getDateCreatedOn(): \DateTime
@@ -278,22 +275,5 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
         $this->expertInIds = array_unique(array_filter($themeIds, 'is_int'));
 
         return $this;
-    }
-
-    public function getBackdropPublicPath(): string
-    {
-        if(! $this->backdrop) {
-            $this->backdrop = $this->getDefaultBackdrop()->toJSON();
-        }
-
-        return $this->extractBackdrop()->getPublic();
-    }
-
-    private function getDefaultBackdrop(): Backdrop {
-        return new Backdrop(
-            'preset',
-            self::DEFAULT_BACKDROP_PUBLIC,
-            self::DEFAULT_BACKDROP_STORAGE
-        );
     }
 }

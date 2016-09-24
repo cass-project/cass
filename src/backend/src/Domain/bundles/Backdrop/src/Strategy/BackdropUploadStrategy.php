@@ -7,7 +7,8 @@ use League\Flysystem\Filesystem;
 
 interface BackdropUploadStrategy
 {
-    public function getEntity(): BackdropEntityAware;
+    public function getStoragePath(): string;
+    public function getPublicPath(): string;
     public function getFileSystem(): Filesystem;
     public function getPresetFactory(): PresetFactory;
     public function getMinImageWidth(): int;

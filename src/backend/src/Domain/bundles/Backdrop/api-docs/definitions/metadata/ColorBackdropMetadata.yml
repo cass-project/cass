@@ -1,0 +1,8 @@
+Backdrop_Entity_ColorBackdropMetadata:
+  type: object
+  description: Для данной сущности установлена цветовая палитра в качестве подложки
+  required:
+    - palette
+  properties:
+    palette:
+      $ref: '#/definitions/Colors_Entity_Palette'

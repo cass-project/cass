@@ -32,8 +32,7 @@ Profile_Entity_Profile:
     image:
       $ref: '#/definitions/Avatar_ImageCollection'
     backdrop:
-      type: string
-      description: URL до картинки-подложки
+      $ref: '#/definitions/Backdrop_Entity_Backdrop'
     gender:
       $ref: '#/definitions/Profile_Entity_Gender'
     expert_in:
