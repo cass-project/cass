@@ -1,8 +1,8 @@
-'/protected/profile/{profileId}/backdtop-preset/presetId/{presetId}/':
+'/protected/profile/{profileId}/backdtop-color/code/{code}':
   post:
     tags:
       - profile
-    description: Устанавливает фоновую картинку профиля из указанного шаблона
+    description: Устанавливает палитру в качестве подложки для данного профиля
     security:
       - x_api_key: []
     parameters:
@@ -11,11 +11,11 @@
         in: path
         required: true
         description: ID профиля
-      - name: presetId
+      - name: code
         type: string
         in: path
         required: true
-        description: ID пресета
+        description: Код палитры
     responses:
       200:
         description: 200 OK
@@ -39,7 +39,7 @@
                   type: string
                   description: Тип подложки (код)
                 metadata:
-                  $ref: '#/definitions/Backdrop_Entity_PresetBackdropMetadata'
+                  $ref: '#/definitions/Backdrop_Entity_ColorBackdropMetadata'
       403:
         $ref: '#/responses/Unauthorized'
       404:

@@ -1,4 +1,4 @@
-'/protected/profile/{profileId}/backdtop/upload/':
+'/protected/profile/{profileId}/backdtop-upload/textColor/{textColor}':
   post:
     tags:
       - profile
@@ -11,6 +11,11 @@
         in: path
         required: true
         description: ID профиля
+      - name: textColor
+        type: string
+        in: path
+        required: true
+        description: Цвет текста на подложке
       - name: file
         description: Файл
         type: file
@@ -29,9 +34,31 @@
               type: boolean
               description: '=true'
             backdrop:
-              type: string
-              description: www-путь к подложке
+              type: object
+              description: Подложка
+              required:
+                - type
+                - metadata
+              properties:
+                type:
+                  type: string
+                  description: Тип подложки (код)
+                metadata:
+                  $ref: '#/definitions/Backdrop_Entity_UploadBackdropMetadata'
       403:
         $ref: '#/responses/Unauthorized'
       404:
         $ref: '#/responses/NotFound'
+      409:
+        description: Ошибки при загрузке файла либо неправильные размеры картинки
+          type: object
+          required:
+            - success
+            - error
+          properties:
+            success:
+              type: boolean
+              description: '=false'
+            error:
+              type: string
+              description: 'Текст ошибки'

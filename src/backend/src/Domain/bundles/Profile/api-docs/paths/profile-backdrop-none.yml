@@ -1,8 +1,8 @@
-'/protected/profile/{profileId}/backdtop-preset/presetId/{presetId}/':
+'/protected/profile/{profileId}/backdtop-none':
   post:
     tags:
       - profile
-    description: Устанавливает фоновую картинку профиля из указанного шаблона
+    description: Отключает отображение подложки для данного профиля
     security:
       - x_api_key: []
     parameters:
@@ -11,11 +11,6 @@
         in: path
         required: true
         description: ID профиля
-      - name: presetId
-        type: string
-        in: path
-        required: true
-        description: ID пресета
     responses:
       200:
         description: 200 OK
@@ -39,7 +34,7 @@
                   type: string
                   description: Тип подложки (код)
                 metadata:
-                  $ref: '#/definitions/Backdrop_Entity_PresetBackdropMetadata'
+                  $ref: '#/definitions/Backdrop_Entity_NoneBackdropMetadata'
       403:
         $ref: '#/responses/Unauthorized'
       404:
