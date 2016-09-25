@@ -25,5 +25,6 @@
   "backdrop.change.title": "Change cover",
   "cancel": "Cancel",
   "save-changes": "Save changes",
-  "backdrop.textColor": "Text color"
+  "backdrop.textColor": "Text color",
+  "backdrop.image": "Image"
 }

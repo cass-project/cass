@@ -24,7 +24,7 @@ article.component.component-profile
           (close)='modals.createCollection.close()',
           (complete)='goCollection($event)'
         )
-  div
+  div(*ngIf="modals.backdrop.isOpened()")
     cass-modal
       cass-modal-box(width="550px")
-        cass-change-backdrop-modal
+        cass-profile-backdrop-modal([profile]="session.getCurrentProfile().entity.profile")

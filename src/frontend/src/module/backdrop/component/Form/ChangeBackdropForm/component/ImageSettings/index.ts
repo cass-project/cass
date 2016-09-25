@@ -1,5 +1,6 @@
 import {Component} from "@angular/core";
 import {ChangeBackdropModel} from "../../model";
+import {Backdrop} from "../../../../../definitions/Backdrop";
 
 @Component({
     selector: 'cass-change-backdrop-cmp-image-settings',
@@ -10,7 +11,16 @@ import {ChangeBackdropModel} from "../../model";
 })
 export class ImageSettings
 {
+    private backdrop: Backdrop<any>;
+
     constructor(
         private model: ChangeBackdropModel
-    ) {}
+    ) {
+        this.backdrop = model.backdrop;
+        console.log(this.backdrop);
+    }
+
+    getBackdrop() {
+        return this.model.backdrop;
+    }
 }

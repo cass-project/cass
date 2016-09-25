@@ -25,5 +25,6 @@
   "backdrop.change.title": "Подложка",
   "cancel": "Отмена",
   "save-changes": "Сохранить изменения",
-  "backdrop.textColor": "Цвет текста на подложке"
+  "backdrop.textColor": "Цвет текста на подложке",
+  "backdrop.image": "Фото"
 }

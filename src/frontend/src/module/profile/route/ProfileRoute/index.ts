@@ -7,6 +7,7 @@ import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
 import {ProfileRouteService} from "./service";
 import {NavigationObservable} from "../../../navigator/service/NavigationObservable";
+import {ChangeBackdropModel} from "../../../backdrop/component/Form/ChangeBackdropForm/model";
 
 @Component({
     template: require('./template.jade'),

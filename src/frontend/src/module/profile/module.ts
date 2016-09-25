@@ -30,6 +30,7 @@ import {ProfileMenuOther} from "./component/Elements/ProfileMenuOther/index";
 import {ProfileMenuOwn} from "./component/Elements/ProfileMenuOwn/index";
 import {ProfileResolve} from "./resolve/ProfileResolve";
 import {ProfileHeader} from "./component/Elements/ProfileHeader/index";
+import {ProfileBackdrop} from "./component/Modals/ProfileBackdrop/index";
 
 export const CASSProfileModule = {
     declarations: [
@@ -58,6 +59,7 @@ export const CASSProfileModule = {
         ProfileMenuOther,
         ProfileMenuOwn,
         ProfileHeader,
+        ProfileBackdrop,
     ],
     routes: [
         ProfileRoute,

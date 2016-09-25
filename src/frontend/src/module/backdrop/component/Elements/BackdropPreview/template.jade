@@ -1,0 +1,9 @@
+div.component.component-backdrop-preview
+  div.preview-backdrop.preview-backdrop-none(*ngIf="is.None()")
+  div.preview-backdrop.preview-backdrop-none(*ngIf="is.Color()")
+  div.preview-backdrop.preview-backdrop-none(*ngIf="is.Preset()")
+    div.image-container
+      div.image(style="background-image: url('{{ getBackdropImage() }}')")
+      div.sample(style="color: {{ sampleColor }}")
+        span {{ sampleText }}
+  div.preview-backdrop.preview-backdrop-none(*ngIf="is.Uploaded()")

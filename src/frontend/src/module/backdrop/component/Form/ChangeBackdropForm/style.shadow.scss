@@ -1,6 +1,6 @@
 @import "./../../../../../styles/globals";
 
-div.component-change-backdrop-modal {
+div.component-change-backdrop-form {
   nav.cbm-navigation {
     ul {
       display: flex;
@@ -38,9 +38,5 @@ div.component-change-backdrop-modal {
         }
       }
     }
-  }
-
-  footer.form-footer {
-    border-top: 1px solid material-color("grey", "300");
   }
 }

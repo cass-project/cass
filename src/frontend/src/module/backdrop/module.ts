@@ -1,14 +1,18 @@
-import {PresetBrowser} from "./component/Modals/ChangeBackdropModal/component/PresetBrowser/index";
-import {ImageSettings} from "./component/Modals/ChangeBackdropModal/component/ImageSettings/index";
-import {PaletteBrowser} from "./component/Modals/ChangeBackdropModal/component/PaletteBrowser/index";
-import {ChangeBackdropModal} from "./component/Modals/ChangeBackdropModal/index";
+import {BackdropPreview} from "./component/Elements/BackdropPreview/index";
+import {ImageSettings} from "./component/Form/ChangeBackdropForm/component/ImageSettings/index";
+import {ChangeBackdropForm} from "./component/Form/ChangeBackdropForm/index";
+import {PaletteBrowser} from "./component/Form/ChangeBackdropForm/component/PaletteBrowser/index";
+import {PresetBrowser} from "./component/Form/ChangeBackdropForm/component/PresetBrowser/index";
+import {BackdropComponent} from "./component/Elements/Backdrop/index";
 
 export const CASSBackdropModule = {
     declarations: [
-        ChangeBackdropModal,
+        BackdropComponent,
+        ChangeBackdropForm,
         ImageSettings,
         PaletteBrowser,
         PresetBrowser,
+        BackdropPreview,
     ],
     providers: []
 };

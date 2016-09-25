@@ -17,12 +17,11 @@ div.component-color-picker {
     display: inline-block;
     width: 24px;
     height: 24px;
-    border: 1px solid transparent;
-    outline: 1px solid #ccc;
   }
 
   div.preview {
     div.color-box {
+      border: 1px solid #ccc;
       width: 48px;
       height: 48px;
     }
@@ -38,8 +37,8 @@ div.component-color-picker {
         cursor: pointer;
 
         &:hover {
-          filter: brightness(125%);
-          -webkit-filter: brightness(125%);
+          filter: brightness(140%);
+          -webkit-filter: brightness(140%);
         }
       }
     }

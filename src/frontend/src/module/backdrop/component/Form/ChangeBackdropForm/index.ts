@@ -1,23 +1,16 @@
-import {Component, Output, EventEmitter} from "@angular/core";
+import {Component} from "@angular/core";
 
 import {Backdrop} from "../../../definitions/Backdrop";
-import {ChangeBackdropModel} from "./model";
 
 @Component({
-    selector: 'cass-change-backdrop-modal',
+    selector: 'cass-change-backdrop-form',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
-    providers: [
-        ChangeBackdropModel,
     ]
 })
-export class ChangeBackdropModal
+export class ChangeBackdropForm
 {
-    @Output('close') closeEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
-    @Output('complete') completeEvent: EventEmitter<Backdrop<any>> = new EventEmitter<Backdrop<any>>();
-
     private tab: ChangeBackdropModalTab = ChangeBackdropModalTab.Image;
 
     switchTab(tab: ChangeBackdropModalTab) {
@@ -26,10 +19,6 @@ export class ChangeBackdropModal
 
     isOn(tab: ChangeBackdropModalTab) {
         return this.tab === tab;
-    }
-
-    close() {
-        this.closeEvent.emit(true);
     }
 }
 

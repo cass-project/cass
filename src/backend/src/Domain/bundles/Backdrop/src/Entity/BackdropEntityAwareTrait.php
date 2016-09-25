@@ -63,8 +63,8 @@ trait BackdropEntityAwareTrait
             case PresetBackdrop::TYPE_ID:
                 return new PresetBackdrop(
                     $json['metadata']['preset_id'],
-                    $json['metadata']['storage_path'],
                     $json['metadata']['public_path'],
+                    $json['metadata']['storage_path'],
                     $json['metadata']['text_color']
                 );
             case UploadedBackdrop::TYPE_ID:

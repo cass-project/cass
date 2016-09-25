@@ -1,6 +1,6 @@
 div.component.component-profile-header([ngClass]="{ 'fixed': isFixed() }")
   div.sticky
-    div.backdrop(style="background-image: url('{{ profile.profile.backdrop }}')")
+    cass-backdrop([backdrop]="profile.profile.backdrop")
     div.profile-header
       div.profile-image
         div.profile-image-container
