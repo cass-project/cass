@@ -2,6 +2,7 @@
 namespace CASS\Domain\Bundles\Collection\Entity;
 
 use CASS\Domain\Bundles\Backdrop\Entity\Backdrop;
+use CASS\Domain\Bundles\Backdrop\Entity\Backdrop\NoneBackdrop;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
 use CASS\Util\Entity\IdEntity\IdEntity;
@@ -21,15 +22,13 @@ use CASS\Domain\Bundles\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  * @Entity(repositoryClass="CASS\Domain\Bundles\Collection\Repository\CollectionRepository")
  * @Table(name="collection")
  */
-class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, ThemeIdsEntityAware, IndexedEntity
+class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, BackdropEntityAware, ThemeIdsEntityAware, IndexedEntity
 {
-    const DEFAULT_BACKDROP_PUBLIC = '/storage/entity/collection/defaults/default-backdrop.jpg';
-    const DEFAULT_BACKDROP_STORAGE = '/storage/entity/collection/defaults/default-backdrop.jpg';
-
     use IdTrait;
     use SIDEntityTrait;
     use ImageEntityTrait;
     use ThemeIdsAwareEntityTrait;
+    use BackdropEntityAwareTrait;
 
     /**
      * @Column(type="datetime", name="date_created_on")
@@ -89,6 +88,7 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
     {
         $this->ownerSID = $ownerSID;
         $this->dateCreatedOn = new \DateTime();
+        $this->setBackdrop(new NoneBackdrop());
         $this->regenerateSID();
     }
 
@@ -112,7 +112,7 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
                 'moderation_contract' => $this->isModerationContractEnabled(),
             ],
             'image' => $this->getImages()->toJSON(),
-            'backdrop' => self::DEFAULT_BACKDROP_PUBLIC,
+            'backdrop' => $this->getBackdrop()->toJSON(),
             'is_protected' => $this->isProtected(),
             'is_main' => $this->isMain(),
         ];

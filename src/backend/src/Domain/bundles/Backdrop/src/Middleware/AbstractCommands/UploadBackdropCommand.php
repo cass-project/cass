@@ -11,7 +11,6 @@ use Zend\Diactoros\UploadedFile;
 abstract class UploadBackdropCommand extends AbstractBackdropCommand
 {
     abstract protected function getBackdropUploadStrategy(ServerRequestInterface $request, BackdropEntityAware $entity): BackdropUploadStrategy;
-    abstract protected function getColorRepository(): ColorsRepository;
 
     protected function perform(ServerRequestInterface $request): Backdrop
     {

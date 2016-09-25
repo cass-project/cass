@@ -47,7 +47,6 @@ final class CreateCommunityCollectionTest extends CollectionRESTTestCase
         $this->requestCreateCollection($json)
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
-            ->dump()
             ->expectStatusCode(404);
     }
 

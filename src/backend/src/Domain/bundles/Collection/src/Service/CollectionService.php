@@ -150,6 +150,11 @@ class CollectionService implements EventEmitterAwareService
         return $collection->getImages();
     }
 
+    public function updateBackdrop(Collection $entity)
+    {
+        $this->collectionRepository->saveCollection($entity);
+    }
+
     public function protectCollection(int $collectionId): Collection
     {
         $collection = $this->collectionRepository->getCollectionById($collectionId);
@@ -185,6 +190,11 @@ class CollectionService implements EventEmitterAwareService
     public function getCollectionById(int $collectionId): Collection
     {
         return $this->collectionRepository->getCollectionById($collectionId);
+    }
+
+    public function getCollectionBySID(string $collectionSID): Collection
+    {
+        return $this->collectionRepository->getCollectionBySID($collectionSID);
     }
 
     public function getCollectionsById(array $collectionIds): array

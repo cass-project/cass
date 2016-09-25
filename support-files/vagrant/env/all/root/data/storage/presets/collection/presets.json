@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1",
+    "public_path": "/storage/presets/collection/backdrop/1.jpg",
+    "storage_path": "/presets/collection/backdrop/1.jpg",
+    "preview": "/storage/presets/collection/backdrop/preview/1.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "2",
+    "public_path": "/storage/presets/collection/backdrop/2.jpg",
+    "storage_path": "/presets/collection/backdrop/2.jpg",
+    "preview": "/storage/presets/collection/backdrop/preview/2.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "3",
+    "public_path": "/storage/presets/collection/backdrop/3.jpg",
+    "storage_path": "/storage/presets/collection/backdrop/3.jpg",
+    "preview": "/storage/presets/collection/backdrop/preview/3.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "4",
+    "public_path": "/storage/presets/collection/backdrop/4.jpg",
+    "storage_path": "/storage/presets/collection/backdrop/4.jpg",
+    "preview": "/storage/presets/collection/backdrop/preview/4.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "5",
+    "public_path": "/storage/presets/collection/backdrop/5.jpg",
+    "storage_path": "/storage/presets/collection/backdrop/5.jpg",
+    "preview": "/storage/presets/collection/backdrop/preview/5.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "6",
+    "public_path": "/storage/presets/collection/backdrop/6.jpg",
+    "storage_path": "/storage/presets/collection/backdrop/6.jpg",
+    "preview": "/storage/presets/collection/backdrop/preview/6.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "7",
+    "public_path": "/storage/presets/collection/backdrop/7.jpg",
+    "storage_path": "/storage/presets/collection/backdrop/7.jpg",
+    "preview": "/storage/presets/collection/backdrop/preview/7.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "8",
+    "public_path": "/storage/presets/collection/backdrop/8.jpg",
+    "storage_path": "/storage/presets/collection/backdrop/8.jpg",
+    "preview": "/storage/presets/collection/backdrop/preview/9.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "10",
+    "public_path": "/storage/presets/collection/backdrop/11.jpg",
+    "storage_path": "/storage/presets/collection/backdrop/11.jpg",
+    "preview": "/storage/presets/collection/backdrop/preview/11.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "12",
+    "public_path": "/storage/presets/collection/backdrop/12.jpg",
+    "storage_path": "/storage/presets/collection/backdrop/12.jpg",
+    "preview": "/storage/presets/collection/backdrop/preview/12.jpg",
+    "text_color": "#ffffff"
+  }
+]

@@ -11,7 +11,7 @@ final class BackdropColorCommand extends ColorBackdropCommand
     use RunMixin;
 
     /** @var PaletteRepository */
-    private $paletterRepository;
+    private $paletteRepository;
 
     public function __construct(
         BackdropService $backdropService,
@@ -20,11 +20,11 @@ final class BackdropColorCommand extends ColorBackdropCommand
     ) {
         $this->backdropService = $backdropService;
         $this->profileService = $profileService;
-        $this->paletterRepository = $paletteRepository;
+        $this->paletteRepository = $paletteRepository;
     }
 
     protected function getPaletteRepository(): PaletteRepository
     {
-        return $this->paletterRepository;
+        return $this->paletteRepository;
     }
 }
