@@ -6,6 +6,9 @@ use CASS\Application\Service\EventEmitterAware\EventEmitterAwareTrait;
 use CASS\Domain\Bundles\Avatar\Image\ImageCollection;
 use CASS\Domain\Bundles\Avatar\Parameters\UploadImageParameters;
 use CASS\Domain\Bundles\Avatar\Service\AvatarService;
+use CASS\Domain\Bundles\Backdrop\Factory\PresetFactory;
+use CASS\Domain\Bundles\Backdrop\Service\BackdropService;
+use CASS\Domain\Bundles\Collection\Backdrop\Preset\CollectionBackdropPresetFactory;
 use CASS\Domain\Bundles\Collection\Entity\Collection;
 use CASS\Domain\Bundles\Collection\Exception\CollectionIsProtectedException;
 use CASS\Domain\Bundles\Collection\Image\CollectionImageStrategy;
@@ -35,6 +38,12 @@ class CollectionService implements EventEmitterAwareService
     /** @var AvatarService */
     private $avatarService;
 
+    /** @var BackdropService */
+    private $backdropService;
+
+    /** @var PresetFactory */
+    private $presetFactory;
+
     /** @var FilesystemInterface */
     private $images;
 
@@ -45,10 +54,14 @@ class CollectionService implements EventEmitterAwareService
         CollectionRepository $collectionRepository,
         AvatarService $avatarService,
         FilesystemInterface $imagesFlySystem,
+        BackdropService $backdropService,
+        CollectionBackdropPresetFactory $presetFactory,
         string $wwwImagesDir
     ) {
         $this->collectionRepository = $collectionRepository;
         $this->avatarService = $avatarService;
+        $this->backdropService = $backdropService;
+        $this->presetFactory = $presetFactory;
         $this->images = $imagesFlySystem;
         $this->wwwImagesDir = $wwwImagesDir;
     }
@@ -69,6 +82,8 @@ class CollectionService implements EventEmitterAwareService
         $this->collectionRepository->createCollection($collection);
         $this->avatarService->generateImage(new CollectionImageStrategy($collection, $this->images, $this->wwwImagesDir));
         $this->collectionRepository->saveCollection($collection);
+
+        $this->backdropService->backdropPreset($collection, $this->presetFactory, $this->presetFactory->getListIds()[array_rand($this->presetFactory->getListIds())]);
 
         $this->getEventEmitter()->emit(self::EVENT_COLLECTION_CREATED, [$collection]);
 

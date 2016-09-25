@@ -50,7 +50,7 @@ final class CollectionBackdropColorMiddlewareTest extends CollectionRESTTestCase
             ->expectJSONBody([
                 'entity' => [
                     'backdrop' => [
-                        'type' => 'none'
+                        'type' => 'preset'
                     ]
                 ]
             ]);

@@ -58,7 +58,7 @@ final class CollectionBackdropUploadMiddlewareTest extends CollectionRESTTestCas
             ->expectJSONBody([
                 'entity' => [
                     'backdrop' => [
-                        'type' => 'none'
+                        'type' => 'preset'
                     ]
                 ]
             ]);

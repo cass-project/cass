@@ -15,6 +15,11 @@ final class CommunityBackdropPresetFactory implements PresetFactory
         $this->json = $json;
     }
 
+    public function getListIds(): array
+    {
+        return array_column($this->json, 'id');
+    }
+
     public function createPreset(string $id): PresetBackdrop
     {
         $json = $this->findPresetJSON($id);
