@@ -56,6 +56,9 @@ final class CreateCommunityTest extends CommunityMiddlewareTestCase
                             'id' => $theme->getId()
                         ],
                         'image' => $this->expectImageCollection(),
+                        'backdrop' => [
+                            'type' => 'preset'
+                        ],
                         'public_options' => [
                             'public_enabled' => true,
                             'moderation_contract' => false

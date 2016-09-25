@@ -54,7 +54,7 @@ final class CommunityBackdropPresetMiddlewareTest extends CommunityMiddlewareTes
                 'entity' => [
                     'community' => [
                         'backdrop' => [
-                            'type' => 'none'
+                            'type' => 'preset'
                         ]
                     ]
                 ]
