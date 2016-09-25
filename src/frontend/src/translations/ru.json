@@ -19,5 +19,11 @@
   "profile.header.change-cover": "Сменить подложку",
   "collections": "Подборки",
   "post.write-new": "Создать пост",
-  "settings": "Настройки"
+  "settings": "Настройки",
+  "backdrop.change-modal.tab.image": "Изображение",
+  "backdrop.change-modal.tab.palette": "Палитра",
+  "backdrop.change.title": "Подложка",
+  "cancel": "Отмена",
+  "save-changes": "Сохранить изменения",
+  "backdrop.textColor": "Цвет текста на подложке"
 }

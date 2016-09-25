@@ -20,6 +20,7 @@ import {CASSI18nModule} from "./i18n/module";
 import {CASSPlayerModule} from "./player/module";
 import {CASSSearchModule} from "./search/module";
 import {CASSNavigatorModule} from "./navigator/module";
+import {CASSBackdropModule} from "./backdrop/module";
 
 export const CASS_MODULES = [
     CASSAccountModule,
@@ -44,4 +45,5 @@ export const CASS_MODULES = [
     CASSPlayerModule,
     CASSSearchModule,
     CASSNavigatorModule,
+    CASSBackdropModule,
 ];

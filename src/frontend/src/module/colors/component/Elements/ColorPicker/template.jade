@@ -1,0 +1,10 @@
+div.component.component-color-picker
+  div.flexbox-container
+    div.preview
+      div.color-box([ngStyle]="{ 'background-color': getValue().hexCode }")
+    ul.variants
+      li(*ngFor="let color of variants")
+        div.color-box(
+          (click)="setValue(color)",
+          [ngStyle]="{ 'background-color': color.hexCode }"
+        )

@@ -19,5 +19,11 @@
   "profile.header.change-cover": "Change cover",
   "collections": "Collections",
   "post.write-new": "Write new post",
-  "settings": "Settings"
+  "settings": "Settings",
+  "backdrop.change-modal.tab.image": "Image",
+  "backdrop.change-modal.tab.palette": "Palette",
+  "backdrop.change.title": "Change cover",
+  "cancel": "Cancel",
+  "save-changes": "Save changes",
+  "backdrop.textColor": "Text color"
 }

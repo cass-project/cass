@@ -1,0 +1,46 @@
+@import "./../../../../../styles/globals";
+
+div.component-change-backdrop-modal {
+  nav.cbm-navigation {
+    ul {
+      display: flex;
+      align-items: baseline;
+      align-content: space-around;
+
+      li.tab {
+        width: 100%;
+
+        >button {
+          display: block;
+          width: 100%;
+          cursor: pointer;
+          border: 0;
+          background-color: transparent;
+          line-height: 40px;
+          border-bottom: 3px solid white;
+          font-size: 14px;
+          font-weight: 500;
+          text-align: center;
+
+          &.active {
+            color: material-color("light-blue", "600");
+            border-color: material-color("light-blue", "500");
+
+            &:hover {
+              color: material-color("light-blue", "700");
+              border-color: material-color("light-blue", "600");
+            }
+          }
+
+          &:hover {
+            color: material-color("light-blue", "500");
+          }
+        }
+      }
+    }
+  }
+
+  footer.form-footer {
+    border-top: 1px solid material-color("grey", "300");
+  }
+}

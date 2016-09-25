@@ -24,7 +24,7 @@ export interface FrontlineEntity extends Success200
         themes: {
             www: string;
         },
-        palettes: Palette[],
+        palettes: { [code: string]: Palette },
         community: {
             features: CommunityFeatureEntity[]
         },
