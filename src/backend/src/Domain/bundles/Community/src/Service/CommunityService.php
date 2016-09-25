@@ -150,6 +150,11 @@ class CommunityService implements EventEmitterAwareService
         return $community;
     }
 
+    public function updateBackdrop(Community $community)
+    {
+        $this->communityRepository->saveCommunity($community);
+    }
+
     public function linkCollection(int $communityId, int $collectionId): ImmutableCollectionTree
     {
         $community = $this->getCommunityById($communityId);

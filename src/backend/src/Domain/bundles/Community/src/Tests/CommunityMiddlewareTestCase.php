@@ -35,7 +35,7 @@ abstract class CommunityMiddlewareTestCase extends CASSMiddlewareTestCase
     protected function requestUploadImage(int $communityId, Point $start, Point $end): RESTRequest
     {
         $uri = "/protected/community/{$communityId}/image-upload/crop-start/{$start->getX()}/{$start->getY()}/crop-end/{$end->getX()}/{$end->getY()}/";
-        $fileName = __DIR__ . '/resources/grid-example.png';
+        $fileName = __DIR__ . '/REST/Resources/grid-example.png';
 
         return $this->request('POST', $uri)
             ->setUploadedFiles([
@@ -81,5 +81,35 @@ abstract class CommunityMiddlewareTestCase extends CASSMiddlewareTestCase
     protected function requestGetProfile(int $profileId): RESTRequest
     {
         return $this->request('GET', sprintf('/profile/%d/get', $profileId));
+    }
+
+
+    protected function requestBackdropUpload(int $communityId, string $localFile, string $textColor): RESTRequest
+    {
+        $url = sprintf('/protected/community/%d/backdrop-upload/textColor/%s', $communityId, $textColor);
+
+        return $this->request('POST', $url)
+            ->setUploadedFiles([
+                'file' => new UploadedFile($localFile, filesize($localFile), 0)
+            ]);
+    }
+
+    protected function requestBackdropNone(int $communityId): RESTRequest
+    {
+        return $this->request('POST', sprintf('/protected/community/%d/backdrop-none', $communityId));
+    }
+
+    protected function requestBackdropColor(int $communityId, string $code): RESTRequest
+    {
+        $url = sprintf('/protected/community/%d/backdrop-color/code/%s/', $communityId, $code);
+
+        return $this->request('POST', $url);
+    }
+
+    protected function requestBackdropPreset(int $communityId, string $presetId): RESTRequest
+    {
+        $url = sprintf('/protected/community/%d/backdrop-preset/presetId/%s/', $communityId, $presetId);
+
+        return $this->request('POST', $url);
     }
 }

@@ -1,8 +1,6 @@
 <?php
 namespace CASS\Domain\Bundles\Collection;
 
-use CASS\Domain\Bundles\Collection\Backdrop\Preset\CollectionBackdropPresetFactory;
-use CASS\Domain\Bundles\Collection\Backdrop\Upload\UploadStrategyFactory;
 use function DI\object;
 use function DI\factory;
 use function DI\get;
@@ -14,6 +12,8 @@ use CASS\Domain\Bundles\Collection\Repository\CollectionRepository;
 use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
 use CASS\Domain\Bundles\Collection\Repository\CollectionThemeEQRepository;
 use CASS\Domain\Bundles\Collection\Service\CollectionService;
+use CASS\Domain\Bundles\Collection\Backdrop\Preset\CollectionBackdropPresetFactory;
+use CASS\Domain\Bundles\Collection\Backdrop\Upload\CollectionBackdropUploadStrategyFactory;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Memory\MemoryAdapter;
@@ -56,7 +56,7 @@ return [
             ->constructorParameter('json', factory(function(Container $container) {
                 return $container->get('config.paths.collection.backdrop.presets.json');
             })),
-        UploadStrategyFactory::class => object()
+        CollectionBackdropUploadStrategyFactory::class => object()
             ->constructorParameter('wwwPath', factory(function(Container $container) {
                 return $container->get('config.paths.collection.backdrop.www');
             }))

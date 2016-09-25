@@ -1,25 +1,25 @@
 <?php
-namespace CASS\Domain\Bundles\Collection\Backdrop\Upload;
+namespace CASS\Domain\Bundles\Community\Backdrop\Upload;
 
 use CASS\Domain\Bundles\Backdrop\Factory\PresetFactory;
 use CASS\Domain\Bundles\Backdrop\Strategy\BackdropUploadStrategy;
-use CASS\Domain\Bundles\Collection\Backdrop\Preset\CollectionBackdropPresetFactory;
-use CASS\Domain\Bundles\Collection\Entity\Collection;
+use CASS\Domain\Bundles\Community\Backdrop\Preset\CommunityBackdropPresetFactory;
+use CASS\Domain\Bundles\Community\Entity\Community;
 use League\Flysystem\FilesystemInterface;
 
-final class UploadStrategy implements BackdropUploadStrategy
+final class CommunityBackdropUploadStrategy implements BackdropUploadStrategy
 {
     const IMAGE_MIN_SIZE = 400;
     const IMAGE_MAX_SIZE = 2048;
     const FILE_MAX_LENGTH = 3 /* mb */ * 1024 /* kb */ * 1024 /* b */;
 
-    /** @var Collection */
-    private $collection;
+    /** @var Community */
+    private $community;
 
     /** @var FilesystemInterface */
     private $fileSystem;
 
-    /** @var CollectionBackdropPresetFactory */
+    /** @var CommunityBackdropPresetFactory */
     private $presetsFactory;
 
     /** @var string */
@@ -29,13 +29,13 @@ final class UploadStrategy implements BackdropUploadStrategy
     private $storagePath;
 
     public function __construct(
-        Collection $collection,
+        Community $community,
         FilesystemInterface $fileSystem,
-        CollectionBackdropPresetFactory $presetsFactory,
+        CommunityBackdropPresetFactory $presetsFactory,
         string $publicPath,
         string $storagePath
     ) {
-        $this->collection = $collection;
+        $this->community = $community;
         $this->fileSystem = $fileSystem;
         $this->presetsFactory = $presetsFactory;
         $this->publicPath = $publicPath;

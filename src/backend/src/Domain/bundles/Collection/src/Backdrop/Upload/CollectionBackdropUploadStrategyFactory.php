@@ -5,7 +5,7 @@ use CASS\Domain\Bundles\Collection\Backdrop\Preset\CollectionBackdropPresetFacto
 use CASS\Domain\Bundles\Collection\Entity\Collection;
 use League\Flysystem\FilesystemInterface;
 
-final class UploadStrategyFactory
+final class CollectionBackdropUploadStrategyFactory
 {
     /** @var string */
     private $wwwPath;
@@ -31,9 +31,9 @@ final class UploadStrategyFactory
         $this->presetsFactory = $presetsFactory;
     }
 
-    public function createStreategyFor(Collection $collection)
+    public function createStrategyFor(Collection $collection)
     {
-        return new UploadStrategy(
+        return new CollectionBackdropUploadStrategy(
             $collection,
             $this->fileSystem,
             $this->presetsFactory,

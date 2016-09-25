@@ -2,6 +2,7 @@
 namespace CASS\Domain\Bundles\Community\Entity;
 
 use CASS\Domain\Bundles\Backdrop\Entity\Backdrop;
+use CASS\Domain\Bundles\Backdrop\Entity\Backdrop\NoneBackdrop;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
 use CASS\Util\Entity\IdEntity\IdEntity;
@@ -25,15 +26,13 @@ use CASS\Domain\Bundles\Theme\Entity\Theme;
  * @Entity(repositoryClass="CASS\Domain\Bundles\Community\Repository\CommunityRepository")
  * @Table(name="community")
  */
-class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, CollectionAwareEntity, IndexedEntity
+class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, BackdropEntityAware, CollectionAwareEntity, IndexedEntity
 {
-    const DEFAULT_BACKDROP_PUBLIC = '/storage/entity/community/defaults/default-backdrop.jpg';
-    const DEFAULT_BACKDROP_STORAGE = '/storage/entity/community/defaults/default-backdrop.jpg';
-
     use IdTrait;
     use SIDEntityTrait;
     use CollectionAwareEntityTrait;
     use ImageEntityTrait;
+    use BackdropEntityAwareTrait;
 
     /**
      * @OneToOne(targetEntity="CASS\Domain\Bundles\Account\Entity\Account")
@@ -109,6 +108,7 @@ class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, C
         $this->collections = new ImmutableCollectionTree();
         $this->setTitle($title)->setDescription($description);
         $this->setImages(new ImageCollection());
+        $this->setBackdrop(new NoneBackdrop());
 
         if($theme) {
             $this->setTheme($theme);
@@ -127,7 +127,7 @@ class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, C
                 'has' => $this->hasTheme(),
             ],
             'image' => $this->image,
-            'backdrop' => self::DEFAULT_BACKDROP_PUBLIC,
+            'backdrop' => $this->getBackdrop()->toJSON(),
             'description' => $this->getDescription(),
             'collections' => $this->collections->toJSON(),
             'features' => $this->getFeatures()->listFeatures(),
