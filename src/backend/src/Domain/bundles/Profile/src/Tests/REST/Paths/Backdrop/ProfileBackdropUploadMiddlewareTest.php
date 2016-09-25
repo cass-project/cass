@@ -48,7 +48,7 @@ class ProfileBackdropUploadMiddlewareTest extends ProfileMiddlewareTestCase
                 'entity' => [
                     'profile' => [
                         'backdrop' => [
-                            'type' => 'none'
+                            'type' => 'preset'
                         ]
                     ]
                 ]

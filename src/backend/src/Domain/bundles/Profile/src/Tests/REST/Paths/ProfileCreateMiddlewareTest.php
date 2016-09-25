@@ -24,7 +24,10 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
                     'id' => $this->expectId(),
                     'sid' => $this->expectString(),
                     'is_current' => true,
-                    'image' => $this->expectImageCollection()
+                    'image' => $this->expectImageCollection(),
+                    'backdrop' => [
+                        'type' => 'preset',
+                    ],
                 ]
             ])
             ->expect(function (array $result) {
