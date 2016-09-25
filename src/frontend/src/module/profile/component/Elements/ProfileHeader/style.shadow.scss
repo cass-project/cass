@@ -48,7 +48,6 @@ div.component-profile-header {
 
         h1 {
           line-height: 55px;
-          color: #fff;
           font-size: 24px;
           font-weight: 400;
         }
@@ -58,9 +57,12 @@ div.component-profile-header {
         }
 
         h2 {
-          color: rgba(255,255,255,0.7);
           font-size: 14px;
           font-weight: 400;
+
+          span.text {
+            opacity: 0.7;
+          }
         }
       }
 
@@ -74,18 +76,25 @@ div.component-profile-header {
         }
 
         a.action-link {
-          color: rgba(255,255,255,0.5);
           display: inline-block;
           padding: 0 6px;
           margin: 3px 5px;
-          transition: color 0.2s;
+          transition: opacity 0.2s;
           text-decoration: none;
           text-transform: uppercase;
           font-size: 16px;
           font-weight: 500;
 
+          span.title {
+            opacity: 0.5;
+          }
+
           &:hover {
             color: rgba(255,255,255,1);
+
+            span.title {
+              opacity: 1;
+            }
           }
         }
       }

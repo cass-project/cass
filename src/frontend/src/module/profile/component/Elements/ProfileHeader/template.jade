@@ -6,16 +6,18 @@ div.component.component-profile-header([ngClass]="{ 'fixed': isFixed() }")
         div.profile-image-container
           cass-profile-image([url]="getImageURL()")
       div.profile-name
-        h1 {{ profile.profile.greetings.greetings }}
-        h2
-          span 165 Подписчиков
-          i.fa.fa-dot-circle-o
-          span Yoozer
+        h1([ngStyle]="{ color: textColor }")
+          span.text {{ profile.profile.greetings.greetings }}
+        h2([ngStyle]="{ color: textColor }")
+          span.text 165 Подписчиков
+          span.text
+            i.fa.fa-dot-circle-o
+          span.text Yoozer
       div.profile-actions
         ul
           li
-            a.action-link(routerLink="./collections")
+            a.action-link(routerLink="./collections", [ngStyle]="{ color: textColor }")
               span.title {{ "collections" | translate }}
           li(*ngIf="isOwnProfile()")
-            a.action-link(href="javascript:void(0)", (click)="changeCover()")
+            a.action-link(href="javascript:void(0)", (click)="changeCover()", [ngStyle]="{ color: textColor }")
               span.title {{ "profile.header.change-cover" | translate }}

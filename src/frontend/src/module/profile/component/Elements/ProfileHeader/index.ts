@@ -1,8 +1,13 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 
 import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {ProfileModals} from "../Profile/modals";
+import {BackdropType} from "../../../../backdrop/definitions/Backdrop";
+import {BackdropColorMetadata} from "../../../../backdrop/definitions/metadata/BackdropColorMetadata";
+import {BackdropPresetMetadata} from "../../../../backdrop/definitions/metadata/BackdropPresetMetadata";
+import {BackdropUploadMetadata} from "../../../../backdrop/definitions/metadata/BackdropUploadMetadata";
+import {getBackdropTextColor} from "../../../../backdrop/functions/getBackdropTextColor";
 
 @Component({
     selector: 'cass-profile-header',
@@ -11,11 +16,17 @@ import {ProfileModals} from "../Profile/modals";
         require('./style.shadow.scss')
     ]
 })
-export class ProfileHeader
+export class ProfileHeader implements OnInit
 {
     @Input('profile') profile: ProfileExtendedEntity;
 
+    private textColor: string;
+
     constructor(private modals: ProfileModals) {}
+
+    ngOnInit(): void {
+        this.textColor = getBackdropTextColor(this.profile.profile.backdrop);
+    }
 
     getImageURL(): string {
         return queryImage(QueryTarget.Card, this.profile.profile.image).public_path;
