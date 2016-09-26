@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 
 import {ContentPlayerService} from "../../module/player/service/ContentPlayerService";
+import {UIService} from "../../module/ui/service/ui";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -13,7 +14,8 @@ import {ContentPlayerService} from "../../module/player/service/ContentPlayerSer
 export class App
 {
     constructor(
-        private player: ContentPlayerService
+        private ui: UIService,
+        private player: ContentPlayerService,
     ) {}
 
     isPlayerEnabled(): boolean {

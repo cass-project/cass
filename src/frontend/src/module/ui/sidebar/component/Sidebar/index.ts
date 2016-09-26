@@ -1,8 +1,9 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
+import {AuthService} from "../../../../auth/service/AuthService";
+import {AuthModalsService} from "../../../../auth/component/Auth/modals";
+import {UIService} from "../../../service/ui";
 
-import {AuthService} from "../../../auth/service/AuthService";
-import {AuthModalsService} from "../../../auth/component/Auth/modals";
 
 require('./style.head.scss');
 
@@ -15,6 +16,7 @@ export class SidebarComponent
     constructor(
         private authService: AuthService,
         private authModals: AuthModalsService,
+        private uiService: UIService,
         private router: Router
     ) {}
 
@@ -31,10 +33,10 @@ export class SidebarComponent
     }
 
     private isSearchActive() {
-        return false;
+        return this.uiService.panels.header.isEnabled();
     }
 
-    private openSearchModal() {
-
+    private toggleSearch() {
+        this.uiService.panels.header.toggle();
     }
 }

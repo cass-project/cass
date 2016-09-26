@@ -1,0 +1,21 @@
+div.component.component-cass-header
+  div.flexbox-container
+    div.section-main-menu
+      ul.sidebar-items
+        li
+          a.search-sidebar-item.active(href="javascript:void(0)", (click)="toggleSearch()")
+            div.image
+              i.fa.fa-search
+    div.section-right-sidebar
+      cass-header-switcher([controls]="this.ui.panels.viewModes")
+    div.mode-container
+      div.section-search-box
+        input.search-box(
+          #searchBox,
+          type="text",
+          placeholder="{{ 'search.placeholder' | translate }}"
+        )
+      div.section-yoozer-logo
+        span.brand Yoozer
+      div.section-extended
+        cass-header-switcher-extended([controls]="this.ui.panels.extended", [title]="'cass.module.header.filter.title' | translate")

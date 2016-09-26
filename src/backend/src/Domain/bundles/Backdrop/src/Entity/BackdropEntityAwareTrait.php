@@ -17,7 +17,7 @@ trait BackdropEntityAwareTrait
      * @Column(type="json_array", name="backdrop")
      * @var string
      */
-    private $backdrop = [];
+    private $backdrop;
 
     public function setBackdrop(Backdrop $backdrop)
     {

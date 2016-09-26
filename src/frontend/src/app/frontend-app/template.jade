@@ -7,13 +7,13 @@ main#cassAppContainer.cass-app-container.component.component-frontend-app([ngCla
       cass-account
       cass-profile
       cass-community
-    .header
+    .header(*ngIf="ui.panels.header.isEnabled()")
       cass-header
     .content-player-area(*ngIf="player.shouldBeVisible()")
     .content-area
       .sidebar
         cass-sidebar
-      .right-sidebar
+      .right-sidebar(*ngIf="ui.panels.viewModes.isEnabled()")
         cass-right-sidebar
       .router-content
         router-outlet

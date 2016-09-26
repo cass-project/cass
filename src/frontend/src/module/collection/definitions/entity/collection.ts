@@ -1,4 +1,5 @@
 import {ImageCollection} from "../../../avatar/definitions/ImageCollection";
+import {Backdrop} from "../../../backdrop/definitions/Backdrop";
 
 export interface CollectionEntity
 {
@@ -12,7 +13,7 @@ export interface CollectionEntity
     theme_ids: Array<number>;
     public_options: CollectionPublicOptionsEntity;
     image: ImageCollection;
-    backdrop: string;
+    backdrop: Backdrop<any>;
     is_protected: boolean;
     is_main: boolean;
     children?: CollectionEntity[];
@@ -54,7 +55,7 @@ export class Collection implements CollectionEntity
     theme_ids: Array<number>;
     public_options: CollectionPublicOptionsEntity;
     image: ImageCollection;
-    backdrop: string;
+    backdrop: Backdrop<any>;
     children: CollectionEntity[] = [];
 
     constructor(ownerType: string, ownerId: string) {

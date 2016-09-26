@@ -81,9 +81,8 @@ class CollectionService implements EventEmitterAwareService
 
         $this->collectionRepository->createCollection($collection);
         $this->avatarService->generateImage(new CollectionImageStrategy($collection, $this->images, $this->wwwImagesDir));
-        $this->collectionRepository->saveCollection($collection);
-
         $this->backdropService->backdropPreset($collection, $this->presetFactory, $this->presetFactory->getListIds()[array_rand($this->presetFactory->getListIds())]);
+        $this->collectionRepository->saveCollection($collection);
 
         $this->getEventEmitter()->emit(self::EVENT_COLLECTION_CREATED, [$collection]);
 

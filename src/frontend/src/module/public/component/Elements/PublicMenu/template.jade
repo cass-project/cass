@@ -1,0 +1,59 @@
+div.component.component-public-menu([ngClass]='{"component-public-menu-extended": isExtended}')
+  div.flexbox-container
+    div.top
+      div.menu-list
+        ul.menu-list-ui
+          li
+            button.menu-list-item(
+              type="button",
+              title="{{ 'cass.module.public.menu.theme.title' | translate }}",
+              [ngClass]="{ 'active': swipe.isAtContentScreen() }",
+              (click)=" swipe.switchToContent() "
+            )
+              i.fa.fa-fw.fa-bookmark
+              span.title {{ 'cass.module.public.menu.theme.title' | translate }}
+          li
+            button.menu-list-item(
+              type="button",
+              title="{{ 'cass.module.public.menu.content.title' | translate }}",
+              [ngClass]="{ 'active': swipe.isAtThemeScreen() }",
+              (click)=" swipe.switchToTheme() "
+            )
+              i.fa.fa-fw.fa-navicon
+              span.title {{ 'cass.module.public.menu.content.title' | translate }}
+      hr
+      div.menu-list
+        ul.menu-list-ui
+          li
+            button.menu-list-item(
+              type="button",
+              title="{{ 'cass.module.public.menu.list-themes.title' | translate }}",
+              [ngClass]="{'active': ui.panels.themes.isEnabled()}",
+              (click)="ui.panels.themes.toggle()"
+            )
+              i.fa.fa-fw.fa-list
+              span.title {{ 'cass.module.public.menu.list-themes.title' | translate }}
+    div.bottom
+      hr
+      div.menu-list
+        ul.menu-list-ui
+          li
+            button.menu-list-item(type="button", title="{{ 'cass.module.public.content-type.all.title' | translate }}")
+              i.fa.fa-fw.fa-asterisk
+              span.title {{ 'cass.module.public.content-type.all.title' | translate }}
+          li
+              button.menu-list-item(type="button", title="{{ 'cass.module.public.content-type.video.title' | translate }}")
+                i.fa.fa-fw.fa-video-camera
+                span.title {{ 'cass.module.public.content-type.video.title' | translate }}
+            li
+              button.menu-list-item(type="button", title="{{ 'cass.module.public.content-type.image.title' | translate }}")
+                i.fa.fa-fw.fa-image
+                span.title {{ 'cass.module.public.content-type.image.title' | translate }}
+            li
+              button.menu-list-item(type="button", title="{{ 'cass.module.public.content-type.link.title' | translate }}")
+                i.fa.fa-fw.fa-link
+                span.title {{ 'cass.module.public.content-type.link.title' | translate }}
+            li
+              button.menu-list-item(type="button", title="{{ 'cass.module.public.content-type.text.title' | translate }}")
+                i.fa.fa-fw.fa-file-text
+                span.title {{ 'cass.module.public.content-type.text.title' | translate }}

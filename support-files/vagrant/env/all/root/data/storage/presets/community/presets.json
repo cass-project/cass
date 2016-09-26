@@ -56,17 +56,17 @@
     "text_color": "#ffffff"
   },
   {
-    "id": "10",
-    "public_path": "/storage/presets/community/backdrop/11.jpg",
-    "storage_path": "/storage/presets/community/backdrop/11.jpg",
-    "preview": "/storage/presets/community/backdrop/preview/11.jpg",
+    "id": "9",
+    "public_path": "/storage/presets/community/backdrop/9.jpg",
+    "storage_path": "/storage/presets/community/backdrop/9.jpg",
+    "preview": "/storage/presets/community/backdrop/preview/9.jpg",
     "text_color": "#ffffff"
   },
   {
-    "id": "12",
-    "public_path": "/storage/presets/community/backdrop/12.jpg",
-    "storage_path": "/storage/presets/community/backdrop/12.jpg",
-    "preview": "/storage/presets/community/backdrop/preview/12.jpg",
+    "id": "10",
+    "public_path": "/storage/presets/community/backdrop/10.jpg",
+    "storage_path": "/storage/presets/community/backdrop/10.jpg",
+    "preview": "/storage/presets/community/backdrop/preview/10.jpg",
     "text_color": "#ffffff"
   }
 ]

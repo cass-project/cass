@@ -11,6 +11,7 @@ import {ContentRoute} from "./route/ContentRoute/index";
 import {ExpertsRoute} from "./route/ExpertsRoute/index";
 import {ProfilesRoute} from "./route/ProfilesRoute/index";
 import {ViewOptionService} from "./component/Options/ViewOption/service";
+import {PublicMenu} from "./component/Elements/PublicMenu/index";
 
 export const CASSPublicComponent = {
     declarations: [
@@ -21,6 +22,7 @@ export const CASSPublicComponent = {
         ThemeCriteria,
         NothingFound,
         SourceSelector,
+        PublicMenu,
     ],
     routes: [
         CollectionsRoute,

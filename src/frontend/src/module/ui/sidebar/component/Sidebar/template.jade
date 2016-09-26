@@ -1,5 +1,10 @@
 .cass-sidebar
   .sidebar-contents
+    ul.sidebar-items(*ngIf="!uiService.panels.header.isEnabled()")
+      li
+        a.search-sidebar-item(href="javascript:void(0)", [ngClass]="{ active: isSearchActive() }", (click)="toggleSearch()")
+          div.image
+            i.fa.fa-search
     ul.sidebar-items
       li
         a.sidebar-item(routerLink='home', routerLinkActive="active")
@@ -31,11 +36,6 @@
           div.image
             i.fa.fa-hashtag
           span.title {{ "sidebar.item.communities.title" | translate }}
-      li
-        a.sidebar-item(href="javascript:void(0)", [ngClass]="{ active: isSearchActive() }", (click)="openSearchModal()")
-          div.image
-            i.fa.fa-search
-          span.title {{ "sidebar.item.search.title" | translate }}
       li(*ngIf="isSignedIn()")
         a.sidebar-item(href="javascript:void(0)", (click)="signOut()")
           div.image

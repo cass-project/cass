@@ -1,0 +1,17 @@
+@import "./../../../../../../../styles/globals";
+
+div.component-cass-header-switcher {
+  line-height: $CASS_HEADER_HEIGHT;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+
+  i.fa {
+    font-size: 16px;
+    color: #ffffff;
+  }
+
+  &:hover {
+    background-color: darken(#4E5F81, 25%);
+  }
+}

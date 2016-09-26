@@ -88,7 +88,11 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
     {
         $this->ownerSID = $ownerSID;
         $this->dateCreatedOn = new \DateTime();
-        $this->setBackdrop(new NoneBackdrop());
+
+        if($this->backdrop === null) {
+            $this->setBackdrop(new NoneBackdrop());
+        }
+
         $this->regenerateSID();
     }
 

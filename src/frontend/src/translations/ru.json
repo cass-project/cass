@@ -26,5 +26,15 @@
   "cancel": "Отмена",
   "save-changes": "Сохранить изменения",
   "backdrop.textColor": "Цвет текста на подложке",
-  "backdrop.image": "Фото"
+  "backdrop.image": "Фото",
+  "search.placeholder": "Поиск...",
+  "cass.module.public.menu.theme.title": "Тематики",
+  "cass.module.public.menu.content.title": "Контент",
+  "cass.module.public.menu.list-themes.title": "Список тематик",
+  "cass.module.public.content-type.all.title": "Весь контент",
+  "cass.module.public.content-type.video.title": "Видео",
+  "cass.module.public.content-type.image.title": "Картинки",
+  "cass.module.public.content-type.link.title": "Ссылки",
+  "cass.module.public.content-type.text.title": "Текст",
+  "cass.module.header.filter.title": "Фильтры"
 }

@@ -20,13 +20,26 @@
         border-radius: 2px;
         overflow: hidden;
 
+        i.fa {
+          color: #999;
+          margin-right: 7px;
+        }
+
         &:hover {
           background-color: #E6EBF7;
+
+          i.fa {
+            color: #667FB2;
+          }
         }
 
         &.active, &:active {
           background-color: #667FB2;
           color: white;
+
+          i.fa {
+            color: #ffffff;
+          }
 
           &:hover {
             background-color: darken(#667FB2, 20%);

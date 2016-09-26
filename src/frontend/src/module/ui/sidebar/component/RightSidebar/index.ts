@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
 
-import {ViewOptionService} from "../../../public/component/Options/ViewOption/service";
-import {ContentPlayerService} from "../../../player/service/ContentPlayerService";
-import {NavigationObservable} from "../../../navigator/service/NavigationObservable";
+import {ViewOptionService} from "../../../../public/component/Options/ViewOption/service";
+import {ContentPlayerService} from "../../../../player/service/ContentPlayerService";
+import {NavigationObservable} from "../../../../navigator/service/NavigationObservable";
 
 @Component({
     selector: 'cass-right-sidebar',

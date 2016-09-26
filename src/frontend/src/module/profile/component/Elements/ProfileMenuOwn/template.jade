@@ -6,26 +6,31 @@ div.component.component-profile-menu-own
           [routerLinkActiveOptions]="{ exact: true }",
           routerLinkActive="active",
         )
+          i.fa.fa-fw.fa-user
           span.title Мой профиль
   div.yoozer-left-menu
     ul.yoozer-left-menu-list
       li.yoozer-left-menu-item
         a(href="javascript:void(0)", (click)="openCreateCollectionMaster()")
+          i.fa.fa-fw.fa-plus
           span.title Создать подборку
       li.yoozer-left-menu-item
         a(routerLink="/profile/current/collections",
           routerLinkActive="active",
           [routerLinkActiveOptions]="{ exact: true }"
         )
+          i.fa.fa-fw.fa-bookmark
           span.title Мои подборки
       li.yoozer-left-menu-item(*ngFor="let collection of getCollections()")
         a([routerLink]="['/profile/current/collections/', collection.sid]",
           [routerLinkActiveOptions]="{ exact: false }",
           routerLinkActive="active"
         )
+          i.fa.fa-fw.fa-ellipsis-h
           span.title {{ collection.title }}
   div.yoozer-left-menu
     ul.yoozer-left-menu-list
       li.yoozer-left-menu-item
         a(href="javascript:void(0)", (click)="openSettings()")
+          i.fa.fa-fw.fa-cog
           span.title Настройки

@@ -88,9 +88,9 @@ class CommunityService implements EventEmitterAwareService
         $this->communityRepository->createCommunity($entity);
 
         $strategy = new CommunityImageStrategy($entity, $this->imageFileSystem, $this->wwwImageDir);
-
         $this->avatarService->generateImage($strategy);
         $this->backdropService->backdropPreset($entity, $this->backdropPresetFactory, $this->backdropPresetFactory->getListIds()[array_rand($this->backdropPresetFactory->getListIds())]);
+        $this->communityRepository->saveCommunity($entity);
 
         $this->getEventEmitter()->emit(self::EVENT_COMMUNITY_CREATED, [$entity]);
 

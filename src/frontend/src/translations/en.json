@@ -26,5 +26,15 @@
   "cancel": "Cancel",
   "save-changes": "Save changes",
   "backdrop.textColor": "Text color",
-  "backdrop.image": "Image"
+  "backdrop.image": "Image",
+  "search.placeholder": "Search...",
+  "cass.module.public.menu.theme.title": "Themes",
+  "cass.module.public.menu.content.title": "Content",
+  "cass.module.public.menu.list-themes.title": "List of themes",
+  "cass.module.public.content-type.all.title": "All",
+  "cass.module.public.content-type.video.title": "Video",
+  "cass.module.public.content-type.image.title": "Image",
+  "cass.module.public.content-type.link.title": "Link",
+  "cass.module.public.content-type.text.title": "Text",
+  "cass.module.header.filter.title": "Filters"
 }
