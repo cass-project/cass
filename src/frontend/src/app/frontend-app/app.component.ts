@@ -1,4 +1,7 @@
-import {Component, ViewChild, ElementRef} from "@angular/core";
+import {Component} from "@angular/core";
+
+import {ContentPlayerService} from "../../module/player/service/ContentPlayerService";
+import {UIService} from "../../module/ui/service/ui";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -10,6 +13,15 @@ import {Component, ViewChild, ElementRef} from "@angular/core";
 })
 export class App
 {
+    constructor(
+        private ui: UIService,
+        private player: ContentPlayerService,
+    ) {}
+
+    isPlayerEnabled(): boolean {
+        return this.player.isEnabled();
+    }
+
     static version(): string {
         return require('./../../../package.json').version;
     }

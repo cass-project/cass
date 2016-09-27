@@ -7,74 +7,102 @@ use CASS\Domain\Bundles\Community\Middleware\CommunityMiddleware;
 return [
     'common' => [
         [
-            'type'       => 'route',
-            'method'     => 'put',
-            'url'        => '/protected/community/{command:create}[/]',
+            'type' => 'route',
+            'method' => 'put',
+            'url' => '/protected/community/{command:create}[/]',
             'middleware' => CommunityMiddleware::class,
-            'name'       => 'community-create'
+            'name' => 'community-create',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'post',
-            'url'        => '/protected/community/{communityId}/{command:edit}[/]',
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/community/{communityId}/{command:edit}[/]',
             'middleware' => CommunityMiddleware::class,
-            'name'       => 'community-edit'
+            'name' => 'community-edit',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'post',
-            'url'        => '/protected/community/{communityId}/{command:image-upload}/crop-start/{x1}/{y1}/crop-end/{x2}/{y2}[/]',
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/community/{communityId}/{command:image-upload}/crop-start/{x1}/{y1}/crop-end/{x2}/{y2}[/]',
             'middleware' => CommunityMiddleware::class,
-            'name'       => 'community-image-upload'
+            'name' => 'community-image-upload',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'delete',
-            'url'        => '/protected/community/{communityId}/{command:image-delete}[/]',
+            'type' => 'route',
+            'method' => 'delete',
+            'url' => '/protected/community/{communityId}/{command:image-delete}[/]',
             'middleware' => CommunityMiddleware::class,
-            'name'       => 'community-delete-image'
+            'name' => 'community-delete-image',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'get',
-            'url'        => '/community/{communityId}/{command:get}[/]',
+            'type' => 'route',
+            'method' => 'get',
+            'url' => '/community/{communityId}/{command:get}[/]',
             'middleware' => CommunityMiddleware::class,
-            'name'       => 'community-get-by-id'
+            'name' => 'community-get-by-id',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'get',
-            'url'        => '/community/{communityId}/{command:get-by-sid}[/]',
+            'type' => 'route',
+            'method' => 'get',
+            'url' => '/community/{communityId}/{command:get-by-sid}[/]',
             'middleware' => CommunityMiddleware::class,
-            'name'       => 'community-get-by-sid'
+            'name' => 'community-get-by-sid',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'post',
-            'url'        => '/community/{communityId}/{command:set-public-options}[/]',
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/community/{communityId}/{command:set-public-options}[/]',
             'middleware' => CommunityMiddleware::class,
-            'name'       => 'community-set-public-options'
+            'name' => 'community-set-public-options',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'put',
-            'url'        => '/protected/community/{communityId}/feature/{feature}/{command:activate}[/]',
+            'type' => 'route',
+            'method' => 'put',
+            'url' => '/protected/community/{communityId}/feature/{feature}/{command:activate}[/]',
             'middleware' => CommunityFeaturesMiddleware::class,
-            'name'       => 'community-feature-activate'
+            'name' => 'community-feature-activate',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'delete',
-            'url'        => '/protected/community/{communityId}/feature/{feature}/{command:deactivate}[/]',
+            'type' => 'route',
+            'method' => 'delete',
+            'url' => '/protected/community/{communityId}/feature/{feature}/{command:deactivate}[/]',
             'middleware' => CommunityFeaturesMiddleware::class,
-            'name'       => 'community-feature-deactivate'
+            'name' => 'community-feature-deactivate',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'get',
-            'url'        => '/protected/community/{communityId}/feature/{feature}/{command:is-activated}[/]',
+            'type' => 'route',
+            'method' => 'get',
+            'url' => '/protected/community/{communityId}/feature/{feature}/{command:is-activated}[/]',
             'middleware' => CommunityFeaturesMiddleware::class,
-            'name'       => 'community-feature-is-activated'
+            'name' => 'community-feature-is-activated',
         ],
-    ]
+        [
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/community/{communityId}/{command:backdrop-upload}/textColor/{textColor}[/]',
+            'middleware' => CommunityMiddleware::class,
+            'name' => 'community-backdrop-upload',
+        ],
+        [
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/community/{communityId}/{command:backdrop-none}[/]',
+            'middleware' => CommunityMiddleware::class,
+            'name' => 'community-backdrop-none',
+        ],
+        [
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/community/{communityId}/{command:backdrop-preset}/presetId/{presetId}[/]',
+            'middleware' => CommunityMiddleware::class,
+            'name' => 'community-backdrop-preset',
+        ],
+        [
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/community/{communityId}/{command:backdrop-color}/code/{code}[/]',
+            'middleware' => CommunityMiddleware::class,
+            'name' => 'community-backdrop-color',
+        ],
+    ],
 ];

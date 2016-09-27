@@ -11,6 +11,7 @@ import {Stream} from "../../../feed/service/FeedService/stream";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
+import {ProfileEntity} from "../../definitions/entity/Profile";
 
 @Component({
     template: require('./template.jade'),
@@ -26,8 +27,10 @@ import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 })
 export class ProfileCollectionRoute implements OnInit
 {
-    collection: CollectionEntity;
-    postType: PostTypeEntity;
+    private sid: string;
+    private profile: ProfileEntity;
+    private collection: CollectionEntity;
+    private postType: PostTypeEntity;
 
     constructor(
         private router: Router,
@@ -35,36 +38,28 @@ export class ProfileCollectionRoute implements OnInit
         private service: ProfileRouteService,
         private types: PostTypeService,
         private feed: FeedService<PostEntity>,
-        private feedSource: CollectionSource,
-        private sidCollection: string
+        private feedSource: CollectionSource
     ) {}
     
     ngOnInit(){
         this.postType = this.types.getTypeByStringCode('default');
+        this.sid = this.route.snapshot.params['sid'];
+        this.profile = this.service.getProfile();
 
-        this.route.params.map(params => {
-            this.sidCollection = params['sid'];
+        let sid = this.sid;
+        let collections = this.service.getCollections().filter((entity: CollectionEntity) => {
+            return entity.sid === sid;
         });
 
-        this.service.getObservable().subscribe(
-            (response) => {
-                let sid = this.sidCollection;
-                let collections = response.entity.collections.filter((entity: CollectionEntity) => {
-                    return entity.sid === sid;
-                });
+        if(! collections.length) {
+            this.router.navigate(['/profile/collections/not-found']);
+        }
 
-                if(! collections.length) {
-                    this.router.navigate(['NotFound']);
-                }
+        this.collection = collections[0];
 
-                this.collection = collections[0];
-
-                this.feedSource.collectionId = this.collection.id;
-                this.feed.provide(this.feedSource, new Stream<PostEntity>());
-                this.feed.update();
-            },
-            (error) => {}
-        );
+        this.feedSource.collectionId = this.collection.id;
+        this.feed.provide(this.feedSource, new Stream<PostEntity>());
+        this.feed.update();
     }
 
     unshiftEntity(entity: PostEntity) {
@@ -74,4 +69,10 @@ export class ProfileCollectionRoute implements OnInit
     isLoaded(): boolean {
         return typeof this.collection === "object";
     }
+
+    isOwn(): boolean {
+        return this.service.isOwnProfile();
+    }
+
+    doNothing() {}
 }

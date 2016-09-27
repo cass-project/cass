@@ -1,0 +1,17 @@
+Backdrop_Entity_UploadBackdropMetadata:
+  type: object
+  description: Для данной сущности установлена подложка в виде загруженной картинки
+  required:
+    - public_path
+    - storage_path
+    - text_color
+  properties:
+    public_path:
+      type: string
+      description: Публичный путь к картинке
+    storage_path:
+      type: string
+      description: Путь к картинке (storage)
+    text_color:
+      type: string
+      description: Цвет текста для данной подложки

@@ -46,12 +46,6 @@
     </header>
     <div class="input-group">
       <label class="form-label">
-        <!-- Нужны ли эти плейсхолдеры? -->
-        <!-- По идеи минимизируем ошибки пользователей, а с другой стороны - какого х*я я Иванова Елена Ивановна? -->
-        <!--
-             >какого х*я я Иванова Елена Ивановна?
-             Ты забыл одну важную вещь -- В интернете тян нет.
-        -->
         <span class="label-text">Фамилия</span>
         <input class="form-input" [readonly]="model.loading" [ngModelOptions]="{standalone: true}" [(ngModel)]="model.profile.greetings.last_name" type="text" placeholder="Иванов|Иванова">
       </label>

@@ -12,6 +12,7 @@ import {UploadImageModal} from "./component/UploadImage/index";
 import {BrowserModule} from "@angular/platform-browser";
 import {ModalBoxComponent} from "./component/Modal/box/index";
 import {ModalComponent} from "./component/Modal/index";
+import {LoadingLinearIndicator} from "./component/LoadingLinearIndicator/index";
 
 export const CASSCommonModule = {
     declarations: [
@@ -27,6 +28,7 @@ export const CASSCommonModule = {
         UploadImageModal,
         ModalBoxComponent,
         ModalComponent,
+        LoadingLinearIndicator,
     ],
     providers: [
         RESTService,

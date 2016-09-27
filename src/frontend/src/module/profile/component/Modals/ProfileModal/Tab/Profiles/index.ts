@@ -14,7 +14,7 @@ import {ProfileModalModel} from "../../model";
         ProfilesTabService
     ]
 })
-export class ProfilesTab
+export class ProfileModalProfilesTab
 {
     constructor(private service: ProfilesTabService, private themeService: ThemeService, private model: ProfileModalModel) {}
 }

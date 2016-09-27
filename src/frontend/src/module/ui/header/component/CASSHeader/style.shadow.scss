@@ -1,0 +1,96 @@
+@import "./../../../../../styles/globals";
+
+div.component-cass-header {
+  a.search-sidebar-item {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    line-height: $CASS_HEADER_HEIGHT;
+    width: $CASS_SIDEBAR_WIDTH;
+
+    div.image {
+      font-size: 20px;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    &.active {
+      background-color: darken(#4E5F81, 20%);
+
+      &:hover {
+        background-color: darken(#4E5F81, 25%);
+      }
+    }
+  }
+
+  input.search-box {
+    color: #ffffff;
+    display: block;
+    line-height: $CASS_HEADER_HEIGHT - 17px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: $FONT_FAMILY;
+    background-color: transparent;
+    border: 0;
+    padding: 0 7px;
+    box-sizing: border-box;
+    width: 100%;
+    outline: 0!important;
+    border-radius: 4px;
+    margin: 0 5px;
+    max-width: 250px;
+
+    &:focus {
+      color: black;
+      background-color: #ffffff;
+    }
+  }
+
+  div.section-main-menu {
+    width: $CASS_SIDEBAR_WIDTH;
+  }
+
+  div.section-right-sidebar {
+    width: $CASS_VIEW_MODES_WIDTH + 5px;
+    border-right: 1px solid lighten(#4E5F81, 10%);
+  }
+
+  div.flexbox-container {
+    @include card(3);
+    background-color: #425884;
+    height: $CASS_HEADER_HEIGHT;
+    display: flex;
+  }
+
+  div.mode-container {
+    display: flex;
+    height: $CASS_HEADER_HEIGHT;
+    width: 100%;
+    align-items: center;
+
+    div.section-yoozer-logo {
+      width: 250px;
+      text-align: right;
+
+      span.brand {
+        margin:0 12px;
+        font-size: 18px;
+        line-height: $CASS_HEADER_HEIGHT;
+        font-weight: 500;
+        color: rgba(255,255,255, 0.6);
+      }
+    }
+
+    div.section-search-box {
+      width: 100%;
+    }
+
+    div.section-extended {
+      width: 120px;
+      border-left: 1px solid lighten(#4E5F81, 10%);
+    }
+  }
+}

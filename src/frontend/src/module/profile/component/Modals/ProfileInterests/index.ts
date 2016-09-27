@@ -30,8 +30,12 @@ export class ProfileInterestsModal
         let interestingInIds = this.model.profile.interesting_in_ids;
 
         Observable.forkJoin([
-            this.profileRESTService.setExpertIn(profileId, expertInIds),
-            this.profileRESTService.setInterestingIn(profileId, interestingInIds)
+            this.profileRESTService.setExpertIn(profileId, {
+                theme_ids: expertInIds
+            }),
+            this.profileRESTService.setInterestingIn(profileId, {
+                theme_ids: interestingInIds
+            })
         ]).subscribe(success => {
             this.successEvent.emit(true);
         }, error => {});

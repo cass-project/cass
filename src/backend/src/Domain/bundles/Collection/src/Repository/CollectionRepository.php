@@ -44,6 +44,21 @@ class CollectionRepository extends EntityRepository
         return $result;
     }
 
+    public function getCollectionBySID(string $collectionSID): Collection
+    {
+        /** @var Collection|null $result */
+        $result = $this->findOneBy([
+            'sid' => $collectionSID,
+        ]);
+
+        if($result === null) {
+            throw new CollectionNotFoundException(sprintf('Collection with SID `%d` not found', $collectionSID));
+        }
+
+        return $result;
+    }
+
+
     public function getCollectionsById(array $collectionIds): array
     {
         return $this->findBy(['id' => $collectionIds]);

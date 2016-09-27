@@ -3,12 +3,12 @@
 header.form-header
 {
   h1 {
+    @include yoozerHorizontalGradient();
+    font-family: "PT Sans", "Arial", sans-serif;
+    font-size: 15px;
     line-height: 50px;
     text-align: center;
-    color: material-color("blue-grey", "100");
-    background-color: material-color("blue-grey", "900");
-    font-size: 15px;
-    font-weight: 600;
+    color: #fff;
   }
 }
 

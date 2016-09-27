@@ -38,19 +38,11 @@ export class ProfileModal
 
     constructor(
         public model: ProfileModalModel,
-        private authService: AuthService,
         private router: Router
     ) {}
 
     closeProfileModal() {
         this.closeEvent.emit(true);
-    }
-
-    signOut() {
-        this.authService.signOut().subscribe(() => {
-            this.closeProfileModal();
-            this.router.navigate(['Public']);
-        });
     }
 }
 

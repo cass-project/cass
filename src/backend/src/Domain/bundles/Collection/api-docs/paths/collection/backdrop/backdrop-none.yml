@@ -1,0 +1,41 @@
+'/protected/collection/{collectionId}/backdtop-none':
+  post:
+    tags:
+      - collection
+    description: Отключает отображение подложки для данной подборки
+    security:
+      - x_api_key: []
+    parameters:
+      - name: collectionId
+        type: number
+        in: path
+        required: true
+        description: ID подборки
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - backdrop
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            backdrop:
+              type: object
+              description: Подложка
+              required:
+                - type
+                - metadata
+              properties:
+                type:
+                  type: string
+                  description: Тип подложки (код)
+                metadata:
+                  $ref: '#/definitions/Backdrop_Entity_NoneBackdropMetadata'
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        $ref: '#/responses/NotFound'

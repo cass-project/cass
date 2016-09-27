@@ -30,7 +30,6 @@ class ProfileCommunitiesAPITest extends CASSMiddlewareTestCase
         $this->requestJoin($profile->getId(), $community->getSID())
             ->auth(DemoAccountFixture::getSecondAccount()->getAPIKey())
             ->execute()
-            ->dump()
             ->expectJSONContentType()
             ->expectStatusCode(200)
             ->expectJSONBody([

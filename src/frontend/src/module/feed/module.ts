@@ -4,6 +4,7 @@ import {FeedPostStream} from "./component/stream/FeedPostStream/index";
 import {FeedProfileStream} from "./component/stream/FeedProfileStream/index";
 import {FeedScrollDetector} from "./component/FeedScrollDetector/index";
 import {FeedRESTService} from "./service/FeedRESTService";
+import {FeedScrollService} from "./component/FeedScrollDetector/service";
 
 export const CASSFeedModule = {
     declarations: [
@@ -15,5 +16,6 @@ export const CASSFeedModule = {
     ],
     providers: [
         FeedRESTService,
+        FeedScrollService,
     ]
 };

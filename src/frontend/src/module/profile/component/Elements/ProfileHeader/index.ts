@@ -1,42 +1,46 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 
 import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
 import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
-import {ProfileRouteService} from "../../../route/ProfileRoute/service";
 import {ProfileModals} from "../Profile/modals";
+import {BackdropType} from "../../../../backdrop/definitions/Backdrop";
+import {BackdropColorMetadata} from "../../../../backdrop/definitions/metadata/BackdropColorMetadata";
+import {BackdropPresetMetadata} from "../../../../backdrop/definitions/metadata/BackdropPresetMetadata";
+import {BackdropUploadMetadata} from "../../../../backdrop/definitions/metadata/BackdropUploadMetadata";
+import {getBackdropTextColor} from "../../../../backdrop/functions/getBackdropTextColor";
 
 @Component({
+    selector: 'cass-profile-header',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-profile-header'})
-
-export class ProfileHeader
+    ]
+})
+export class ProfileHeader implements OnInit
 {
-    @Output('go-profile') goProfileEvent: EventEmitter<string> = new EventEmitter<string>();
-    @Output('go-collection') goCollectionEvent: EventEmitter<string> = new EventEmitter<string>();
+    @Input('profile') profile: ProfileExtendedEntity;
 
-    @Input('profile') entity: ProfileExtendedEntity;
+    private textColor: string;
 
-    constructor(private modals: ProfileModals, private service: ProfileRouteService) {}
-    
-    getProfileGreetings(): string {
-        return this.entity.profile.greetings.greetings;
+    constructor(private modals: ProfileModals) {}
+
+    ngOnInit(): void {
+        this.textColor = getBackdropTextColor(this.profile.profile.backdrop);
     }
 
-    getProfileURL(): string {
-        return queryImage(QueryTarget.Avatar, this.entity.profile.image).public_path;
-    }
-    
-    goProfile() {
-        this.goProfileEvent.emit('go-profile');
-    }
-    
-    goCollection(sid: string) {
-        this.goCollectionEvent.emit(sid);
+    getImageURL(): string {
+        return queryImage(QueryTarget.Card, this.profile.profile.image).public_path;
     }
 
     isOwnProfile(): boolean {
-        return this.entity.is_own;
+        return this.profile.is_own;
+    }
+
+    changeCover() {
+        this.modals.backdrop.open();
+    }
+
+    isFixed(): boolean {
+        return false;
     }
 }

@@ -1,0 +1,3 @@
+Backdrop_Entity_NoneBackdropMetadata:
+  type: object
+  description: Для данной сущности не установлена подложка

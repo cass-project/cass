@@ -1,6 +1,10 @@
 <?php
 namespace CASS\Domain\Bundles\Profile\Entity;
 
+use CASS\Domain\Bundles\Backdrop\Entity\Backdrop;
+use CASS\Domain\Bundles\Backdrop\Entity\Backdrop\NoneBackdrop;
+use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
+use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
@@ -25,7 +29,7 @@ use CASS\Domain\Bundles\Profile\Exception\InvalidBirthdayGuestFromTheFutureExcep
  * @Entity(repositoryClass="CASS\Domain\Bundles\Profile\Repository\ProfileRepository")
  * @Table(name="profile")
  */
-class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, CollectionAwareEntity, IndexedEntity
+class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, BackdropEntityAware, CollectionAwareEntity, IndexedEntity
 {
     const MIN_AGE = 3;
     const MAX_AGE = 130;
@@ -38,6 +42,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
     use SIDEntityTrait;
     use CollectionAwareEntityTrait;
     use ImageEntityTrait;
+    use BackdropEntityAwareTrait;
 
     /**
      * @ManyToOne(targetEntity="CASS\Domain\Bundles\Account\Entity\Account")
@@ -93,6 +98,19 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
      */
     private $expertInIds = [];
 
+    public function __construct(Account $account)
+    {
+        $this->account = $account;
+        $this->collections = new ImmutableCollectionTree();
+        $this->greetings = new GreetingsAnonymous();
+        $this->gender = (new GenderNotSpecified())->getIntCode();
+        $this->dateCreatedOn = new \DateTime();
+
+        $this->regenerateSID();
+        $this->setBackdrop(new NoneBackdrop());
+        $this->setImages(new ImageCollection());
+    }
+
     public function toJSON(): array
     {
         $result = [
@@ -108,6 +126,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
             'greetings' => $this->getGreetings()->toJSON(),
             'gender' => $this->getGender()->toJSON(),
             'image' => $this->getImages()->toJSON(),
+            'backdrop' => $this->getBackdrop()->toJSON(),
             'expert_in_ids' => $this->expertInIds,
             'interesting_in_ids' => $this->interestingInIds,
             'collections' => $this->getCollections()->toJSON(),
@@ -125,18 +144,6 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Col
         return array_merge($this->toJSON(), [
             'date_created_on' => $this->getDateCreatedOn(),
         ]);
-    }
-
-    public function __construct(Account $account)
-    {
-        $this->account = $account;
-        $this->collections = new ImmutableCollectionTree();
-        $this->greetings = new GreetingsAnonymous();
-        $this->gender = (new GenderNotSpecified())->getIntCode();
-        $this->dateCreatedOn = new \DateTime();
-
-        $this->regenerateSID();
-        $this->setImages(new ImageCollection());
     }
 
     public function getDateCreatedOn(): \DateTime

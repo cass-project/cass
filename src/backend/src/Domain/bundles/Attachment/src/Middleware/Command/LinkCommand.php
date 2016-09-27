@@ -21,7 +21,7 @@ final class LinkCommand extends Command
             }
 
             $result = $this->fetchResourceService->fetchResource($url);
-            $entity = $this->attachmentService->linkAttachment($url, $result, $source);
+            $entity = $this->attachmentService->linkAttachment($url, '', '', $result, $source);
 
             $responseBuilder
                 ->setStatusSuccess()

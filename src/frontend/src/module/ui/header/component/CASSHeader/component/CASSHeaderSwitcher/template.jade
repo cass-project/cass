@@ -1,0 +1,4 @@
+div.component.component-cass-header-switcher
+  div((click)="controls.toggle()")
+    i.fa.fa-square-o(*ngIf="!controls.isEnabled()")
+    i.fa.fa-check-square(*ngIf="controls.isEnabled()")

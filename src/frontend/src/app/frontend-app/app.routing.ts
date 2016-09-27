@@ -17,6 +17,7 @@ import {ContentRoute} from "../../module/public/route/ContentRoute/index";
 import {CollectionsRoute} from "../../module/public/route/CollectionsRoute/index";
 import {CommunitiesRoute} from "../../module/public/route/CommunitiesRoute/index";
 import {ProfilesRoute} from "../../module/public/route/ProfilesRoute/index";
+import {ProfileResolve} from "../../module/profile/resolve/ProfileResolve";
 
 const appRoutes: Routes = [
     {
@@ -35,6 +36,9 @@ const appRoutes: Routes = [
             {
                 path: ':id',
                 component: ProfileRoute,
+                resolve: {
+                    profile: ProfileResolve
+                },
                 children: [
                     {
                         path: '',
@@ -54,6 +58,7 @@ const appRoutes: Routes = [
                             },
                             {
                                 path: ':sid',
+                                pathMatch: 'full',
                                 component: ProfileCollectionRoute
                             }
                         ]

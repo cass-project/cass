@@ -1,0 +1,29 @@
+"/collection/by-sid/{collectionSID}/":
+  get:
+    tags:
+      - collection
+    description:
+      Возвращает данные о коллекции с указанным SID
+    parameters:
+      - name: collectionSID
+        in: path
+        required: true
+        type: string
+        description:
+          SID коллекции
+    responses:
+      404:
+        $ref: '#/responses/NotFound'
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Collection_Entity_Collection'

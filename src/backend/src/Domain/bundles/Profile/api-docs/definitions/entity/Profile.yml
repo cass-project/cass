@@ -8,6 +8,7 @@ Profile_Entity_Profile:
     - greetings
     - gender
     - image
+    - backdrop
     - expert_in
     - interesting_in
   properties:
@@ -30,6 +31,8 @@ Profile_Entity_Profile:
       description: Дата рождения. Может отсутствовать.
     image:
       $ref: '#/definitions/Avatar_ImageCollection'
+    backdrop:
+      $ref: '#/definitions/Backdrop_Entity_Backdrop'
     gender:
       $ref: '#/definitions/Profile_Entity_Gender'
     expert_in:

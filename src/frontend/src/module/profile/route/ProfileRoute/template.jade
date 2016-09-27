@@ -1,10 +1,10 @@
 article.component.component-profile-route
-  cass-form-progress-lock(*ngIf="service.isLoading()")
-  div(*ngIf="service.isProfileLoaded()").profile-page
-    cass-profile-header(
-      [profile]="service.getProfile()",
-      (go-profile)="goDashboard()",
-      (go-collection)="goCollection($event)"
-    )
-  .profile-page
-    router-outlet
+  .profile-page-container
+    .profile-menu
+      div(*ngIf="isOwnProfile()")
+        cass-profile-menu-own
+      div(*ngIf="isOtherProfile()")
+        cass-profile-menu-other
+    .profile-page
+      .profile-page-content(#content, (scroll)="emitScroll($event)")
+        router-outlet

@@ -1,15 +1,14 @@
 import {Component} from "@angular/core";
 
-import {ProfileRouteService} from "../ProfileRoute/service";
 import {FeedService} from "../../../feed/service/FeedService/index";
 import {PostEntity} from "../../../post/definitions/entity/Post";
 import {Stream} from "../../../feed/service/FeedService/stream";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
 import {PostTypeService} from "../../../post/service/PostTypeService";
-import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
-import {AuthService} from "../../../auth/service/AuthService";
 import {Session} from "../../../session/Session";
+import {ProfileRouteService} from "../ProfileRoute/service";
+import {ProfileSource} from "../../../feed/service/FeedService/source/ProfileSource";
 
 @Component({
     template: require('./template.jade'),
@@ -18,47 +17,41 @@ import {Session} from "../../../session/Session";
     ],
     providers: [
         FeedService,
-        CollectionSource
+        ProfileSource,
     ]
 })
 export class ProfileDashboardRoute
 {
-
-    main_collection: CollectionEntity;
-    postType: PostTypeEntity;
+    private main_collection: CollectionEntity;
+    private postType: PostTypeEntity;
 
     constructor(
-        private authService: AuthService,
         private session: Session,
         private service: ProfileRouteService,
         private feed: FeedService<PostEntity>,
-        private feedSource: CollectionSource,
+        private feedSource: ProfileSource,
         private types: PostTypeService
     ) {
         this.postType = types.getTypeByStringCode('default');
 
-        if (service.getObservable() !== undefined) {
-            service.getObservable().subscribe(
-                (response) => {
-                    for(let collection of response.entity.collections){
-                        if(collection.is_main){
-                            this.main_collection = collection;
-                        }
-                    }
-
-                    feedSource.collectionId = this.main_collection.id;
-                    feed.provide(feedSource, new Stream<PostEntity>());
-                    feed.update();
-                },
-                (error) => {
-                }
-            );
+        for(let collection of service.getCollections()){
+            if(collection.is_main){
+                this.main_collection = collection;
+            }
         }
+
+        feedSource.profileId = service.getProfile().id;
+        feed.provide(feedSource, new Stream<PostEntity>());
+        feed.update();
     }
 
-    canPost(): boolean{
-        if(this.authService.isSignedIn()) {
-            return this.service.getProfile().is_own && this.service.getProfile().profile.id === this.session.getCurrentProfile().getId();
+    canPost(): boolean {
+        if(this.session.isSignedIn()) {
+            let testIsOwnProfile = () => { return this.service.isOwnProfile() };
+            let testIsCurrentProfile = () => { return this.service.getProfile().id === this.session.getCurrentProfile().getId(); };
+
+            return testIsOwnProfile()
+                && testIsCurrentProfile();
         } else {
             return false
         }

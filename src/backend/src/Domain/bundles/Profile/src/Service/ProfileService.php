@@ -9,8 +9,10 @@ use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
 use CASS\Domain\Bundles\Avatar\Image\ImageCollection;
 use CASS\Domain\Bundles\Avatar\Parameters\UploadImageParameters;
 use CASS\Domain\Bundles\Avatar\Service\AvatarService;
+use CASS\Domain\Bundles\Backdrop\Service\BackdropService;
 use CASS\Domain\Bundles\Collection\Collection\CollectionTree\ImmutableCollectionTree;
 use CASS\Domain\Bundles\Collection\Service\CollectionService;
+use CASS\Domain\Bundles\Profile\Backdrop\Preset\ProfileBackdropPresetFactory;
 use CASS\Domain\Bundles\Profile\Entity\Profile;
 use CASS\Domain\Bundles\Profile\Entity\Profile\Gender\Gender;
 use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings\Greetings;
@@ -42,20 +44,28 @@ class ProfileService implements EventEmitterAwareService
     /** @var CollectionService */
     private $collectionService;
 
+    /** @var AvatarService */
+    private $avatarService;
+
+    /** @var BackdropService */
+    private $backdropService;
+
+    /** @var ProfileBackdropPresetFactory */
+    private $backdropPresetFactory;
+
     /** @var FilesystemInterface */
     private $imagesFlySystem;
     
     /** @var string */
     private $wwwImagesDir;
 
-    /** @var AvatarService */
-    private $avatarService;
-
     public function __construct(
         CurrentAccountService $currentAccountService,
         ProfileRepository $profileRepository,
         CollectionService $collectionService,
         AvatarService $avatarService,
+        BackdropService $backdropService,
+        ProfileBackdropPresetFactory $presetFactory,
         FilesystemInterface $imagesFlySystem,
         string $wwwImagesDir
     )
@@ -63,6 +73,8 @@ class ProfileService implements EventEmitterAwareService
         $this->profileRepository = $profileRepository;
         $this->collectionService = $collectionService;
         $this->avatarService = $avatarService;
+        $this->backdropService = $backdropService;
+        $this->backdropPresetFactory = $presetFactory;
         $this->imagesFlySystem = $imagesFlySystem;
         $this->wwwImagesDir = $wwwImagesDir;
     }
@@ -111,6 +123,8 @@ class ProfileService implements EventEmitterAwareService
         $this->accountService->switchToProfile($account, $profile->getId());
 
         $this->generateProfileImage($profile->getId());
+        $this->backdropService->backdropPreset($profile, $this->backdropPresetFactory, $this->backdropPresetFactory->getListIds()[array_rand($this->backdropPresetFactory->getListIds())]);
+
         $this->getEventEmitter()->emit(self::EVENT_PROFILE_CREATED, [$profile]);
 
         return $profile;

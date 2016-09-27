@@ -1,6 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Attachment;
 
+use CASS\Domain\Bundles\Attachment\Service\AttachmentPreviewService;
 use function DI\object;
 use function DI\factory;
 use function DI\get;
@@ -27,6 +28,9 @@ return [
             ->constructorParameter('wwwDir', factory(function(Container $container) {
                 return $container->get('config.paths.attachment.www');
             }))
+            ->constructorParameter('generatePreviews', factory(function(Container $container) {
+                return $container->get('config.env') !== 'test';
+            }))
             ->constructorParameter('fileSystem', factory(function(Container $container) {
                 $env = $container->get('config.env');
 
@@ -36,5 +40,10 @@ return [
                     return new Filesystem(new Local($container->get('config.paths.attachment.dir')));
                 }
             })),
+        AttachmentPreviewService::class => object()
+            ->constructorParameter('attachmentsRealPath', factory(function(Container $container) {
+                return $container->get('config.paths.attachment.dir');
+            }))
+        ,
     ],
 ];

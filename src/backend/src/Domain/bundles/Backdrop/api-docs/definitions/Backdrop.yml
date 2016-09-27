@@ -1,0 +1,13 @@
+Backdrop_Entity_Backdrop:
+  type: object
+  description: Подложка
+  required:
+    - type
+    - metadata
+  properties:
+    type:
+      type: string
+      description: Тип подложки
+    metadata:
+      type: object
+      description: Метаданные подложки

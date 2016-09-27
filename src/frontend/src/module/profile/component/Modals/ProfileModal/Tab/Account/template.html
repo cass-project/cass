@@ -6,11 +6,6 @@
     <input type="email" disabled [value]="model.account.email" class="form-input account-email-input">
     <ul class="email-info">
       <li>К этому почтовому ящику привязан ваш аккаунт.</li>
-      <li>Вы можете сделать запрос на то, чтобы <a href="javascript:void(0);">привязать аккаунт к другому почтовому ящику</a>.</li>
-      <!--
-        Могли бы. Но мы это еще не реализовали.
-        Потому что мы стартап, а разработчиков всего две целых и примерно 0.25 сотых.
-      -->
     </ul>
   </div>
   <div class="account-change-password">
@@ -32,7 +27,7 @@
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Повторите пароль</span>
-        <input class="form-input" [readonly]="model.loading" [ngModelOptions]="{standalone: true}" [(ngModel)]="model.password.repeat" type="password" placeholder="Введите то же самое – мы защищаем вас от ошибок!">
+        <input class="form-input" [readonly]="model.loading" [ngModelOptions]="{standalone: true}" [(ngModel)]="model.password.repeat" type="password" placeholder="*********">
       </label>
     </div>
   </div>

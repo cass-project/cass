@@ -11,8 +11,6 @@ import {FeedEntity} from "./entity";
 @Injectable()
 export class FeedService<T extends FeedEntity>
 {
-    static DEFAULT_PAGE_SIZE = 30;
-    
     public shouldLoad: boolean = true;
 
     private status: LoadingManager = new LoadingManager();
@@ -75,6 +73,10 @@ export class FeedService<T extends FeedEntity>
                 status.is = false;
             }
         )
+    }
+
+    public hasMoreEntities(): boolean {
+        return this.shouldLoad;
     }
 
     public next() {

@@ -44,19 +44,17 @@ export class CollectionCreateMaster
     private haveThemesSwitcher: boolean = false;
     private loading: boolean;
 
-    cancel(){
+    cancel() {
         this.close.emit(true);
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.collection = new Collection(this.ownerType, this.ownerId);
     }
-
 
     checkFields() {
         return (this.collection.title.length > 0);
     }
-
 
     create(){
         if(this.ownerType === 'profile'){
@@ -92,6 +90,7 @@ export class CollectionCreateMaster
                 this.session.getCurrentProfile().entity.collections.push(data.entity);
                 this.messages.push(MessageBusNotificationsLevel.Info, `Создана коллекция "${data.entity.title}"`);
                 this.router.navigate(['Profile/Profile', {id: profileId}, 'Collections/View', { sid: data.entity.sid }]);
+                this.complete.emit(data.entity);
                 this.close.emit(true);
             },
             (error) => {

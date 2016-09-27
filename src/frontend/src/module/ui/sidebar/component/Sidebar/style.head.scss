@@ -1,0 +1,73 @@
+@import "./../../../../../styles/globals";
+
+.cass-sidebar {
+  @include card(4);
+  @include yoozerVerticalGradient();
+
+  font-family: "PT Sans", "Arial", sans-serif;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-sizing: border-box;
+  overflow: hidden;
+  height: 100%;
+  width: $CASS_SIDEBAR_WIDTH;
+
+  ul.sidebar-items>li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+  }
+
+  a.sidebar-item {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    padding: 5px 0;
+
+    div.image {
+      padding: 7px 0;
+      font-size: 20px;
+    }
+
+    span.title {
+      display: block;
+      font-size: 11px;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    &.active {
+      background-color: white;
+      color: #4E5F81;
+
+      &:hover {
+        background-color: white;
+        color: darken(#4E5F81, 20%);
+      }
+    }
+  }
+
+  a.search-sidebar-item {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    line-height: $CASS_HEADER_HEIGHT;
+
+    div.image {
+      font-size: 20px;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    &.active {
+      background-color: darken(#4E5F81, 20%);
+
+      &:hover {
+        background-color: darken(#4E5F81, 25%);
+      }
+    }
+  }
+}

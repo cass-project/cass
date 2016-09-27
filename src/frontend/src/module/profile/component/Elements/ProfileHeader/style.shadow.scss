@@ -1,115 +1,114 @@
 @import "./../../../../../styles/globals";
 
-$HEADER_HEIGHT: 64px;
+div.component-profile-header {
+  div.sticky {
+    background-color: #000;
+    width: 100%;
+    height: 100vh;
+    margin-bottom: 35px;
+    position: relative;
 
-article.component-profile-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    div.backdrop {
+      @include card(2);
 
-  .profile-header-section {
-    display: flex;
-    align-items: center;
-  }
+      position: absolute;
+      top: 0; height: 100%;
+      left: 0; width: 100%;
 
-  .profile-brand-container {
-    display: flex;
-    align-items: center;
-    max-width: 300px;
-
-    .profile-image-container {
-      width: 48px;
-      height: 48px;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      background-color: #464646;
     }
 
-    .profile-greetings {
-      font-family: $FONT_FAMILY;
-      font-size: 20px;
-      font-weight: 400;
-      line-height: $HEADER_HEIGHT;
-      color: material-color("grey", "900");
-      margin-left: 15px;
-    }
-  }
+    div.profile-header {
+      @include card(1);
 
-  .collection-list-container {
-    margin-left: 50px;
+      position: absolute;
+      bottom: 0; height: 100px;
+      left: 0; width: 100%;
+      display: flex;
 
-    ul.collection-links {
-      border-radius: 7px;
-      overflow: hidden;
-      border: 1px solid material-color("grey", "400");
+      div.profile-image {
+        padding: 10px;
 
-      li {
-        display: inline-block;
+        div.profile-image-container {
+          position: relative;
+          border-radius: 100%;
+          border: 3px solid rgba(255,255,255,0.3);
+          margin-left: 10px;
+          height: 64px;
+          width: 64px;
+        }
+      }
 
-        a.collection-link {
-          display: inline-block;
-          font-family: $FONT_FAMILY;
+      div.profile-name {
+        width: 100%;
+        padding: 5px;
+        padding-left: 15px;
+
+        h1 {
+          line-height: 55px;
+          font-size: 24px;
+          font-weight: 400;
+        }
+
+        i.fa {
+          margin: 0 5px;
+        }
+
+        h2 {
           font-size: 14px;
           font-weight: 400;
-          color: material-color("grey", "900");
-          background-color: material-color("grey", "50");
-          border-right: 1px solid material-color("grey", "300");
+
+          span.text {
+            opacity: 0.7;
+          }
+        }
+      }
+
+      div.profile-actions {
+        white-space: nowrap;
+        margin-right: 20px;
+
+        ul li {
+          display: inline-block;
+          line-height: 100px;
+        }
+
+        a.action-link {
+          display: inline-block;
+          padding: 0 6px;
+          margin: 3px 5px;
+          transition: opacity 0.2s;
           text-decoration: none;
-          line-height: 30px;
-          padding: 0 10px;
-          transition: background-color 0.1s;
+          text-transform: uppercase;
+          font-size: 16px;
+          font-weight: 500;
+
+          span.title {
+            opacity: 0.5;
+          }
 
           &:hover {
-            background-color: material-color("blue-grey", "50");
-          }
-        }
+            color: rgba(255,255,255,1);
 
-        a.collection-link-icon {
-          background-color: material-color("blue-grey", "50");
-
-          &:hover {
-            background-color: material-color("blue-grey", "100");
-          }
-        }
-
-        a.collection-link-active {
-          color: material-color("blue-grey", "50");
-          background-color: material-color("blue-grey", "500");
-          border-right: 1px solid material-color("blue-grey", "500");
-        }
-
-        &:last-child {
-          a.collection-link {
-            border-right: 0;
+            span.title {
+              opacity: 1;
+            }
           }
         }
       }
     }
   }
+}
 
-  .profile-buttons-container {
-    ul.profile-buttons {
-      li {
-        display: inline-block;
-        margin-left: 5px;
-
-        .profile-button {
-          cursor: pointer;
-          display: inline-block;
-          font-family: $FONT_FAMILY;
-          font-size: 14px;
-          font-weight: 500;
-          line-height: $HEADER_HEIGHT;
-          color: material-color("grey", "600");
-          text-decoration: none;
-          transition: color 0.2s;
-
-          &:hover {
-            color: material-color("grey", "800");
-          }
-
-          span {
-            margin-right: 5px;
-          }
-        }
-      }
-    }
+div.fixed {
+  div.sticky {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    height: 100px;
   }
 }

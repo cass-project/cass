@@ -1,0 +1,46 @@
+'/protected/community/{communityId}/backdtop-preset/presetId/{presetId}/':
+  post:
+    tags:
+      - community
+    description: Устанавливает фоновую картинку сообщества из указанного шаблона
+    security:
+      - x_api_key: []
+    parameters:
+      - name: communityId
+        type: number
+        in: path
+        required: true
+        description: ID сообщества
+      - name: presetId
+        type: string
+        in: path
+        required: true
+        description: ID пресета
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - backdrop
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            backdrop:
+              type: object
+              description: Подложка
+              required:
+                - type
+                - metadata
+              properties:
+                type:
+                  type: string
+                  description: Тип подложки (код)
+                metadata:
+                  $ref: '#/definitions/Backdrop_Entity_PresetBackdropMetadata'
+      403:
+        $ref: '#/responses/Unauthorized'
+      404:
+        $ref: '#/responses/NotFound'

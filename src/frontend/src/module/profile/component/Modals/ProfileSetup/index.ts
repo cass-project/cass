@@ -8,7 +8,6 @@ import {ProfileRESTService} from "../../../service/ProfileRESTService";
 import {ProfileEntity} from "../../../definitions/entity/Profile";
 import {MessageBusService} from "../../../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../../../message/component/MessageBusNotifications/model";
-import {ProfileRouteService} from "../../../route/ProfileRoute/service";
 
 enum ProfileSetupScreen {
     Welcome = <any>"Welcome",
@@ -29,7 +28,7 @@ enum ProfileSetupScreen {
     ],
     providers: [
         ProfileSetupModel
-    ]
+    ],
 })
 export class ProfileSetup
 {
@@ -47,7 +46,6 @@ export class ProfileSetup
     });
 
     constructor(
-        private test: ProfileRouteService,
         private model: ProfileSetupModel,
         private service: ProfileRESTService,
         private messages: MessageBusService,
@@ -115,7 +113,6 @@ export class ProfileSetup
                 this.profile.is_initialized = true;
                 this.messages.push(MessageBusNotificationsLevel.Info, 'Ваши данные сохранены');
                 this.router.navigate(['Profile/Profile', {id: 'current'}]);
-                this.test.getProfile().is_own = true;
             },
             error => {
                 this.screens.goto(ProfileSetupScreen.ExpertIn);

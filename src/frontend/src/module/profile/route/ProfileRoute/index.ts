@@ -1,12 +1,13 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
+import {Component, OnInit, ElementRef, ViewChild, OnDestroy} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs/Rx";
 
-import {Subscription} from "rxjs/Subscription";
-import {ProfileRouteService} from "./service";
-import {AuthService} from "../../../auth/service/AuthService";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
-import {Session} from "../../../session/Session";
+import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
+import {ProfileRouteService} from "./service";
+import {NavigationObservable} from "../../../navigator/service/NavigationObservable";
+import {ChangeBackdropModel} from "../../../backdrop/component/Form/ChangeBackdropForm/model";
 
 @Component({
     template: require('./template.jade'),
@@ -22,43 +23,51 @@ import {Session} from "../../../session/Session";
 
 export class ProfileRoute implements OnInit, OnDestroy
 {
-    private sub: Subscription;
-    
+    @ViewChild('content') private content: ElementRef;
+
+    private profile: ProfileExtendedEntity;
+    private subscriptions: Subscription[];
+
     constructor(
         private route: ActivatedRoute,
-        private router: Router,
         private service: ProfileRouteService,
-        private session: Session,
-        private authService: AuthService
+        private navigator: NavigationObservable
     ) {}
     
-    ngOnInit(){
-        this.sub = this.route.params.subscribe(params => {
-            let id = params['id'];
-            if (this.authService.isSignedIn() && (id === 'current' || id === this.session.getCurrentProfile().getId().toString())) {
-                this.service.loadCurrentProfile();
-            } else if (Number(id)) {
-                this.service.loadProfileById(Number(id));
-            } else {
-                this.router.navigate(['/profile/not-found']);
-                return;
-            }
+    ngOnInit() {
+        let elem = this.content.nativeElement;
 
-            if (this.service.getObservable() !== undefined) {
-                this.service.getObservable().subscribe(
-                    (response) => {
-                    },
-                    (error) => {
-                        this.router.navigate(['/profile/not-found']);
-                    }
-                )
-            } else {
-                this.router.navigate(['/public']);
-            }
-        })
+        this.service.exportResponse(
+            this.route.snapshot.data['profile']
+        );
+
+        this.subscriptions = [
+            this.navigator.top.subscribe(() => {
+                elem.scrollTop = 0;
+            }),
+            this.navigator.bottom.subscribe(() => {
+                elem.scrollTop = elem.scrollHeight - elem.clientHeight;
+            }),
+        ];
+
+        this.profile = this.service.getEntity();
     }
 
-    ngOnDestroy(){
-        this.sub.unsubscribe();
+    ngOnDestroy() {
+        this.subscriptions.forEach((subscription) => {
+            subscription.unsubscribe();
+        });
+    }
+
+    isOwnProfile() {
+        return !!this.profile && this.profile.is_own;
+    }
+
+    isOtherProfile() {
+        return ! this.isOwnProfile();
+    }
+
+    emitScroll($event) {
+        this.navigator.emitScroll(this.content);
     }
 }

@@ -18,4 +18,13 @@ article.component.component-profile
   div(*ngIf="modals.createCollection.isOpened()")
     cass-modal
       cass-modal-box(width="550px")
-        cass-collection-create-master([for]='"profile"', [for_id]='session.getCurrentProfile().getId()', (close)='modals.createCollection.close()')
+        cass-collection-create-master(
+          [for]='"profile"',
+          [for_id]='session.getCurrentProfile().getId()',
+          (close)='modals.createCollection.close()',
+          (complete)='goCollection($event)'
+        )
+  div(*ngIf="modals.backdrop.isOpened()")
+    cass-modal
+      cass-modal-box(width="550px")
+        cass-profile-backdrop-modal([profile]="session.getCurrentProfile().entity.profile")

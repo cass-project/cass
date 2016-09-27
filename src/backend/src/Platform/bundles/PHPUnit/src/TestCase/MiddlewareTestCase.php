@@ -19,6 +19,7 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
     use AllExpectationsTrait;
 
     const NOT_FOUND_ID = 9999999;
+    const NOT_FOUND_SID = 'aabbccddee';
 
     /** @var Application */
     public static $app;

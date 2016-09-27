@@ -5,6 +5,8 @@ import {Stream} from "../../../feed/service/FeedService/stream";
 import {PublicService} from "../../service";
 import {PublicCollectionsSource} from "../../../feed/service/FeedService/source/public/PublicCollectionsSource";
 import {CollectionIndexEntity} from "../../../collection/definitions/entity/collection";
+import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
+import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 
 @Component({
     template: require('./template.jade'),
@@ -12,8 +14,11 @@ import {CollectionIndexEntity} from "../../../collection/definitions/entity/coll
         require('./style.shadow.scss')
     ],
     providers: [
+        PublicService,
         FeedService,
         PublicCollectionsSource,
+        FeedCriteriaService,
+        FeedOptionsService,
     ]
 })
 export class CollectionsRoute

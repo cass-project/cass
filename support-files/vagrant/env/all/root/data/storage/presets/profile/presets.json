@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1",
+    "public_path": "/storage/presets/profile/backdrop/1.jpg",
+    "storage_path": "/presets/profile/backdrop/1.jpg",
+    "preview": "/storage/presets/profile/backdrop/preview/1.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "2",
+    "public_path": "/storage/presets/profile/backdrop/2.jpg",
+    "storage_path": "/presets/profile/backdrop/2.jpg",
+    "preview": "/storage/presets/profile/backdrop/preview/2.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "3",
+    "public_path": "/storage/presets/profile/backdrop/3.jpg",
+    "storage_path": "/storage/presets/profile/backdrop/3.jpg",
+    "preview": "/storage/presets/profile/backdrop/preview/3.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "4",
+    "public_path": "/storage/presets/profile/backdrop/4.jpg",
+    "storage_path": "/storage/presets/profile/backdrop/4.jpg",
+    "preview": "/storage/presets/profile/backdrop/preview/4.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "5",
+    "public_path": "/storage/presets/profile/backdrop/5.jpg",
+    "storage_path": "/storage/presets/profile/backdrop/5.jpg",
+    "preview": "/storage/presets/profile/backdrop/preview/5.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "6",
+    "public_path": "/storage/presets/profile/backdrop/6.jpg",
+    "storage_path": "/storage/presets/profile/backdrop/6.jpg",
+    "preview": "/storage/presets/profile/backdrop/preview/6.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "7",
+    "public_path": "/storage/presets/profile/backdrop/7.jpg",
+    "storage_path": "/storage/presets/profile/backdrop/7.jpg",
+    "preview": "/storage/presets/profile/backdrop/preview/7.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "8",
+    "public_path": "/storage/presets/profile/backdrop/8.jpg",
+    "storage_path": "/storage/presets/profile/backdrop/8.jpg",
+    "preview": "/storage/presets/profile/backdrop/preview/9.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "9",
+    "public_path": "/storage/presets/profile/backdrop/9.jpg",
+    "storage_path": "/storage/presets/profile/backdrop/9.jpg",
+    "preview": "/storage/presets/profile/backdrop/preview/9.jpg",
+    "text_color": "#ffffff"
+  },
+  {
+    "id": "10",
+    "public_path": "/storage/presets/profile/backdrop/10.jpg",
+    "storage_path": "/storage/presets/profile/backdrop/10.jpg",
+    "preview": "/storage/presets/profile/backdrop/preview/10.jpg",
+    "text_color": "#ffffff"
+  }
+]

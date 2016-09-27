@@ -1,29 +1,23 @@
-article.component-profile-header
-  .profile-header-section
-    .profile-brand-container
-      .profile-image-container
-        cass-profile-image([url]="getProfileURL()", border = "circle")
-      .profile-greetings
-        span {{ getProfileGreetings() }}
-    .collection-list-container
-        ul.collection-links
+div.component.component-profile-header([ngClass]="{ 'fixed': isFixed() }")
+  div.sticky
+    cass-backdrop([backdrop]="profile.profile.backdrop")
+    div.profile-header
+      div.profile-image
+        div.profile-image-container
+          cass-profile-image([url]="getImageURL()")
+      div.profile-name
+        h1([ngStyle]="{ color: textColor }")
+          span.text {{ profile.profile.greetings.greetings }}
+        h2([ngStyle]="{ color: textColor }")
+          span.text 165 Подписчиков
+          span.text
+            i.fa.fa-dot-circle-o
+          span.text Yoozer
+      div.profile-actions
+        ul
           li
-            a([routerLink]="['./Dashboard']", class="collection-link")
-              span Профиль
-          li(*ngFor="let collection of entity.collections")
-            a([routerLink]="['./Collections/View', { sid: collection.sid }]", class="collection-link", title="{{ collection.description }}", *ngIf='!collection.is_main')
-              span {{ collection.title }}
-          li((click)='modals.createCollection.open()')
-            a(*ngIf="isOwnProfile()", class="collection-link collection-link-icon")
-              i.fa.fa-plus-circle
-  .profile-header-section
-    .profile-buttons-container
-      ul.profile-buttons
-        li
-          a.profile-button([routerLink]="['./Collections']")
-            i.fa.fa-fw.fa-bookmark
-            span Подборки
-        li(*ngIf="isOwnProfile()")
-          .profile-button((click)='modals.settings.open()')
-            i.fa.fa-fw.fa-cog
-            span Настройки
+            a.action-link(routerLink="./collections", [ngStyle]="{ color: textColor }")
+              span.title {{ "collections" | translate }}
+          li(*ngIf="isOwnProfile()")
+            a.action-link(href="javascript:void(0)", (click)="changeCover()", [ngStyle]="{ color: textColor }")
+              span.title {{ "profile.header.change-cover" | translate }}

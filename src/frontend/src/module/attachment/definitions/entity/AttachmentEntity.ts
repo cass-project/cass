@@ -8,6 +8,7 @@ export interface AttachmentEntity<T extends AttachmentMetadata>
     link: {
         url: string;
         resource: string;
+        version: number;
         source: {
             source: string;
             origURL: string;

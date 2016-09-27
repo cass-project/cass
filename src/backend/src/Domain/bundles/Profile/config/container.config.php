@@ -6,9 +6,10 @@ use function DI\factory;
 use function DI\get;
 
 use DI\Container;
+use CASS\Domain\Bundles\Profile\Backdrop\Preset\ProfileBackdropPresetFactory;
+use CASS\Domain\Bundles\Profile\Backdrop\Upload\ProfileBackdropUploadStrategyFactory;
 use CASS\Application\Bundles\Doctrine2\Factory\DoctrineRepositoryFactory;
 use CASS\Domain\Bundles\Profile\Entity\Profile;
-use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
 use CASS\Domain\Bundles\Profile\Entity\ProfileExpertInEQ;
 use CASS\Domain\Bundles\Profile\Entity\ProfileInterestingInEQ;
 use CASS\Domain\Bundles\Profile\Repository\ProfileExpertInEQRepository;
@@ -44,15 +45,47 @@ $configTest = [
 
 return [
     'php-di' => [
+        'config.paths.profile.backdrop.presets.json' => factory(function(Container $container) {
+            return json_decode(
+                file_get_contents(sprintf('%s/presets/profile/presets.json', $container->get('config.storage.dir'))), true
+            );
+        }),
         'config.paths.profile.avatar.dir' => factory(function(Container $container) {
             return sprintf('%s/entity/profile/by-sid/avatar/', $container->get('config.storage.dir'));
         }),
         'config.paths.profile.avatar.www' => factory(function(Container $container) {
             return sprintf('%s/entity/profile/by-sid/avatar/', $container->get('config.storage.www'));
         }),
+        'config.paths.profile.backdrop.dir' => factory(function(Container $container) {
+            return sprintf('%s/entity/profile/by-sid/backdrop', $container->get('config.storage.dir'));
+        }),
+        'config.paths.profile.backdrop.www' => factory(function(Container $container) {
+            return sprintf('%s/entity/profile/by-sid/backdrop', $container->get('config.storage.www'));
+        }),
         ProfileRepository::class => factory(new DoctrineRepositoryFactory(Profile::class)),
         ProfileExpertInEQRepository::class => factory(new DoctrineRepositoryFactory(ProfileExpertInEQ::class)),
         ProfileInterestingInEQRepository::class => factory(new DoctrineRepositoryFactory(ProfileInterestingInEQ::class)),
+        ProfileBackdropPresetFactory::class => object()
+            ->constructorParameter('json', factory(function(Container $container) {
+                return $container->get('config.paths.profile.backdrop.presets.json');
+            })),
+        ProfileBackdropUploadStrategyFactory::class => object()
+            ->constructorParameter('wwwPath', factory(function(Container $container) {
+                return $container->get('config.paths.profile.backdrop.www');
+            }))
+            ->constructorParameter('storagePath', factory(function(Container $container) {
+                return $container->get('config.paths.profile.backdrop.dir');
+            }))
+            ->constructorParameter('fileSystem', factory(function(Container $container) {
+                $env = $container->get('config.env');
+                $dir = $container->get('config.paths.profile.backdrop.dir');
+
+                if($env === 'test') {
+                    return new Filesystem(new MemoryAdapter($dir));
+                }else{
+                    return new Filesystem(new Local($dir));
+                }
+            }))
     ],
     'env' => [
         'development' => $configDefault,

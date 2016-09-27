@@ -1,0 +1,31 @@
+@import "./../../../../../styles/globals";
+
+div.component-backdrop-preview {
+  div.image-container {
+    width: 100%;
+    border: 1px solid material-color("grey", "400");
+    position: relative;
+
+    div.image {
+      width: 100%;
+      min-height: 250px;
+      box-sizing: border-box;
+
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100%;
+      background-color: #ffffff;
+
+      overflow: hidden;
+    }
+
+    div.sample {
+      position: absolute;
+      left: 10px; right: 10px;
+      bottom: 15px;
+      overflow: hidden;
+      font-size: 24px;
+    }
+  }
+}

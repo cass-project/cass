@@ -5,7 +5,6 @@ import {CASSAvatarModule} from "./avatar/module";
 import {CASSCollectionModule} from "./collection/module";
 import {CASSColorsModule} from "./colors/module";
 import {CASSCommonModule} from "./common/module";
-import {CASSSidebarModule} from "./sidebar/module";
 import {CASSFrontlineModule} from "./frontline/module";
 import {CASSSessionModule} from "./session/module";
 import {CASSAuthModule} from "./auth/module";
@@ -16,6 +15,14 @@ import {CASSFeedModule} from "./feed/module";
 import {CASSPublicComponent} from "./public/module";
 import {CASSProfileModule} from "./profile/module";
 import {CASSMessageModule} from "./message/module";
+import {CASSI18nModule} from "./i18n/module";
+import {CASSPlayerModule} from "./player/module";
+import {CASSSearchModule} from "./search/module";
+import {CASSNavigatorModule} from "./navigator/module";
+import {CASSBackdropModule} from "./backdrop/module";
+import {CASSUIModule} from "./ui/module";
+import {CASSBrandModule} from "./brand/module";
+import {CASSSwipeModule} from "./swipe/module";
 
 export const CASS_MODULES = [
     CASSAccountModule,
@@ -26,7 +33,7 @@ export const CASS_MODULES = [
     CASSCollectionModule,
     CASSColorsModule,
     CASSCommonModule,
-    CASSSidebarModule,
+    CASSUIModule,
     CASSFrontlineModule,
     CASSSessionModule,
     CASSThemeModule,
@@ -36,4 +43,11 @@ export const CASS_MODULES = [
     CASSPublicComponent,
     CASSProfileModule,
     CASSMessageModule,
+    CASSI18nModule,
+    CASSPlayerModule,
+    CASSSearchModule,
+    CASSNavigatorModule,
+    CASSBackdropModule,
+    CASSBrandModule,
+    CASSSwipeModule,
 ];

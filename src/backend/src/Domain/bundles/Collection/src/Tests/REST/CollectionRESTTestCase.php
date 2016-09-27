@@ -24,8 +24,19 @@ abstract class CollectionRESTTestCase extends CASSMiddlewareTestCase
 
     protected function requestCreateCollection(array $json): RESTRequest
     {
-        return $this->request('PUT', '/protected/collection/create')
+        return $this
+            ->request('PUT', '/protected/collection/create')
             ->setParameters($json);
+    }
+
+    protected function requestGetById(int $collectionId): RESTRequest
+    {
+        return $this->request('GET', sprintf('/collection/by-id/%s', $collectionId));
+    }
+
+    protected function requestGetBySID(string $collectionSID): RESTRequest
+    {
+        return $this->request('GET', sprintf('/collection/by-sid/%s', $collectionSID));
     }
 
     protected function requestGetCommunity(int $communityId): RESTRequest
@@ -77,5 +88,34 @@ abstract class CollectionRESTTestCase extends CASSMiddlewareTestCase
     protected function requestDeleteImage(int $collectionId): RESTRequest
     {
         return $this->request('DELETE', sprintf('/protected/collection/%d/image-delete', $collectionId));
+    }
+
+    protected function requestBackdropUpload(int $collectionId, string $localFile, string $textColor): RESTRequest
+    {
+        $url = sprintf('/protected/collection/%d/backdrop-upload/textColor/%s', $collectionId, $textColor);
+
+        return $this->request('POST', $url)
+            ->setUploadedFiles([
+                'file' => new UploadedFile($localFile, filesize($localFile), 0)
+            ]);
+    }
+
+    protected function requestBackdropNone(int $collectionId): RESTRequest
+    {
+        return $this->request('POST', sprintf('/protected/collection/%d/backdrop-none', $collectionId));
+    }
+
+    protected function requestBackdropColor(int $collectionId, string $code): RESTRequest
+    {
+        $url = sprintf('/protected/collection/%d/backdrop-color/code/%s/', $collectionId, $code);
+
+        return $this->request('POST', $url);
+    }
+
+    protected function requestBackdropPreset(int $collectionId, string $presetId): RESTRequest
+    {
+        $url = sprintf('/protected/collection/%d/backdrop-preset/presetId/%s/', $collectionId, $presetId);
+
+        return $this->request('POST', $url);
     }
 }

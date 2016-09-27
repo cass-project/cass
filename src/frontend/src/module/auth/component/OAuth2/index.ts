@@ -9,7 +9,7 @@ import {Component} from "@angular/core";
 })
 export class OAuth2Component
 {
-    private getOAuth2Url(provider){
+    private getOAuth2Url(provider) {
         let url = '/backend/api/auth/oauth';
 
         return `${url}/${provider}`

@@ -2,9 +2,11 @@
 namespace CASS\Domain\Bundles\Attachment\LinkMetadata\Types;
 
 use CASS\Domain\Bundles\Attachment\LinkMetadata\LinkMetadata;
+use CASS\Domain\Bundles\Attachment\LinkMetadata\Properties\HasPreview;
 
-final class WebmLinkMetadata implements LinkMetadata
+final class WebmLinkMetadata implements LinkMetadata, HasPreview
 {
+    const VERSION = 2;
     const RESOURCE_TYPE = 'webm';
 
     /** @var string */
@@ -13,10 +15,23 @@ final class WebmLinkMetadata implements LinkMetadata
     /** @var string */
     private $type;
 
-    public function __construct(string $url, string $contentType)
-    {
+    /** @var string */
+    private $previewStoragePath;
+
+    /** @var string */
+    private $previewPublicPath;
+
+    public function __construct(
+        string $url,
+        string $type
+    ) {
         $this->url = $url;
-        $this->type = $contentType;
+        $this->type = $type;
+    }
+
+    public function getVersion(): int
+    {
+        return self::VERSION;
     }
 
     public function getURL(): string
@@ -29,10 +44,30 @@ final class WebmLinkMetadata implements LinkMetadata
         return self::RESOURCE_TYPE;
     }
 
+    public function setPreview(string $storage, string $public)
+    {
+        $this->previewStoragePath = $storage;
+        $this->previewPublicPath = $public;
+    }
+
+    public function getPreviewStoragePath(): string
+    {
+        return $this->previewStoragePath;
+    }
+
+    public function getPreviewPublicPath(): string
+    {
+        return $this->previewPublicPath;
+    }
+
     public function toJSON(): array
     {
         return [
             'type' => $this->type,
+            'preview' => [
+                'public' => $this->previewPublicPath,
+                'storage' => $this->previewStoragePath,
+            ]
         ];
     }
 }

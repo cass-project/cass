@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http, Response, Headers, RequestOptionsArgs} from "@angular/http";
 import {Observable} from "rxjs/Observable";
+
 import {MessageBusService} from "../../message/service/MessageBusService/index";
 import {MessageBusNotificationsLevel} from "../../message/component/MessageBusNotifications/model";
 import {AuthToken} from "../../auth/service/AuthToken";
@@ -71,9 +72,7 @@ export class RESTService
             .catch(error => {
                 return Observable.throw(this.handleError(error));
             })
-            .subscribe(() => {}, error => {
-                this.handleError(error);
-            });
+            .subscribe(() => {});
 
         return fork.map(res => res.json());
     }

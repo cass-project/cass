@@ -1,6 +1,7 @@
 import {ImageCollection} from "../../../avatar/definitions/ImageCollection";
 import {Account} from "../../../account/definitions/entity/Account";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
+import {Backdrop} from "../../../backdrop/definitions/Backdrop";
 
 export enum ProfileGender {
     None = <any> "none",
@@ -30,6 +31,7 @@ export interface ProfileEntity {
     interesting_in_ids: Array<number>;
     expert_in_ids: Array<number>;
     image: ImageCollection;
+    backdrop: Backdrop<any>;
     greetings: ProfileGreetingsEntity;
     gender: ProfileGenderEntity;
     disabled: ProfileDisabledEntity;

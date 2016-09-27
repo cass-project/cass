@@ -25,7 +25,6 @@ class AuthMiddlewareTest extends CASSMiddlewareTestCase
 
         $this->requestSignUp($json)
             ->execute()
-            ->dump()
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([

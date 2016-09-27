@@ -8,6 +8,9 @@
 @import "./mixins/is-mobile";
 @import "./mixins/media-target";
 
+@import "./yoozer/components/left-menu";
+@import "./yoozer/mixins/gradients";
+
 $FONT_FAMILY: 'Roboto', Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
 $FONT_SIZE_INFO: 12px;
 $FONT_SIZE_SMALL: 14px;

@@ -1,26 +1,94 @@
+/* @mobileFirst */
+
 @import "./../../styles/globals";
 
 main.component.component-frontend-app {
-  position: absolute;
-  top: 0; height: 100%;
-  left: 0; width: 100%;
-  overflow: hidden;
-
-  >.sidebar {
-    display: block;
+  div.flexbox {
     position: absolute;
     top: 0; height: 100%;
-    left: 0; width: $CASS_SIDEBAR_WIDTH;
-    z-index: 300;
-    @include card(3);
+    left: 0; width: 100%;
+    overflow: hidden;
+
+    div.modals {
+      z-index: 110;
+    }
+
+    div.message-bus {
+      z-index: 999999;
+    }
+
+    .content-player-area {
+      z-index: 100;
+      display: none;
+      width: 100%;
+      height: 100%;
+      background-color: material-color("grey", "900");
+      overflow: hidden;
+    }
+
+    .header {
+      z-index: 101;
+    }
+
+    .content-area {
+      z-index: 100;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+
+      .sidebar {
+        width: $CASS_SIDEBAR_WIDTH;
+        height: 100%;
+      }
+
+      .router-content {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+      }
+    }
+
+    &.has-content-player {
+      .content-player-area {
+        display: block;
+      }
+
+      .content-area {
+        display: none;
+      }
+    }
   }
+}
 
-  >.content {
-    display: block;
-    position: absolute;
-    top: 0; height: 100%;
-    left: $CASS_SIDEBAR_WIDTH; right: 0;
-    z-index: 299;
-    overflow: auto;
+@include isDesktop() {
+  main.component.component-frontend-app {
+    div.flexbox {
+      display: flex;
+      flex-direction: column;
+
+      .content-player-area {
+        display: block;
+        height: 600px;
+      }
+
+      .content-area {
+        height: 100%;
+      }
+
+      .teemo-here {
+        display: none;
+      }
+
+      &.has-content-player {
+        .content-player-area {
+          display: block;
+        }
+
+        .content-area {
+          display: block;
+        }
+      }
+    }
   }
 }

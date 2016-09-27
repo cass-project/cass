@@ -1,0 +1,20 @@
+div.component.component-auth-sign-out
+  cass-form-progress-lock(*ngIf="status.isLoading()")
+  form.form
+    header.form-header
+      h1 Выход из сервиса
+    .cass-padding-box-10
+      p.form-text Вы действительно хотите выйти из сервиса?
+    footer.form-footer
+      .form-footer-section
+        .form-footer-item
+          .cass-padding-box-5
+            button.form-text-button(type='button', tabindex='3', (click)='cancel()')
+              span Отмена
+      .form-footer-section
+        .form-footer-item
+          .cass-padding-box-5
+            button.form-text-button(type='button', tabindex='2', (click)='no()')
+              span Нет
+            button.form-button.form-button-primary(#yesButton, type='button', tabindex='1', (click)='yes()')
+              span Да

@@ -1,0 +1,14 @@
+div.component.component-change-backdrop-cmp--image-settings
+  div.form-section
+    h1.form-section-header {{ "backdrop.image" | translate }}
+    cass-backdrop-preview(
+      [backdrop]="backdrop",
+      [sample-text]="model.sampleText",
+      [sample-color]="model.textColor.hexCode"
+    )
+  div.form-section
+    h1.form-section-header {{ "backdrop.textColor" | translate }}
+    cass-color-picker(
+      [variants]="model.getTextColors()",
+      (change)="model.setTextColor($event)"
+    )

@@ -1,0 +1,50 @@
+div.component.component-right-sidebar
+  div.flexbox-container
+    div.top
+      ul.list
+        li.list-item
+          a(href="javascript:void(0);", title="{{ 'view-option.type.feed' | translate }}",
+            [ngClass]="{ 'active': viewOption.isOn('feed') }",
+            (click)="viewOption.switchTo('feed')"
+          )
+            i.fa-square
+        li.list-item
+          a(href="javascript:void(0);", title="{{ 'view-option.type.grid' | translate }}",
+            [ngClass]="{ 'active': viewOption.isOn('grid') }",
+            (click)="viewOption.switchTo('grid')"
+          )
+            i.fa.fa-th-large
+        li.list-item
+          a(href="javascript:void(0);", title="{{ 'view-option.type.table' | translate }}",
+            [ngClass]="{ 'active': viewOption.isOn('table') }",
+            (click)="viewOption.switchTo('table')"
+          )
+            i.fa.fa-th-list
+        li.list-item
+          a(href="javascript:void(0);", title="{{ 'view-option.type.list' | translate }}",
+            [ngClass]="{ 'active': viewOption.isOn('list') }",
+            (click)="viewOption.switchTo('list')"
+          )
+            i.fa.fa-bars
+      hr.list-separator
+      ul.list
+        li.list-item
+          a(href="javascript:void(0);", title="{{ 'sidebar.right.item.toggle-content-player.title' | translate }}",
+            [ngClass]="{ 'active': player.isEnabled() }",
+            (click)="player.toggle()"
+          )
+            i.fa.fa-tv
+    div.bottom
+      ul.list
+        li.list-item
+          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.top.title' | translate }}", (click)="navigator.emitTop()")
+            i.fa.fa-step-forward.fa-rotate-270
+        li.list-item
+          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.prev.title' | translate }}", (click)="navigator.emitPrev(1)")
+            i.fa.fa-arrow-up
+        li.list-item
+          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.next.title' | translate }}", (click)="navigator.emitNext(1)")
+            i.fa.fa-arrow-up.fa-rotate-180
+        li.list-item
+          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.bottom.title' | translate }}", (click)="navigator.emitBottom()")
+            i.fa.fa-step-forward.fa-rotate-90

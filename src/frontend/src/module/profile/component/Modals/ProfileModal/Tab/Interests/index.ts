@@ -16,7 +16,7 @@ enum InterestsTabScreen
         require('./style.shadow.scss')
     ]
 })
-export class InterestsTab
+export class ProfileModalInterestsTab
 {
     constructor(private model: ProfileModalModel){}
 

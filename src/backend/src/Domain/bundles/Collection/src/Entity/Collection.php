@@ -1,6 +1,10 @@
 <?php
 namespace CASS\Domain\Bundles\Collection\Entity;
 
+use CASS\Domain\Bundles\Backdrop\Entity\Backdrop;
+use CASS\Domain\Bundles\Backdrop\Entity\Backdrop\NoneBackdrop;
+use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
+use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
 use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
@@ -9,10 +13,8 @@ use CASS\Util\JSONSerializable;
 use CASS\Domain\Bundles\Avatar\Entity\ImageEntity;
 use CASS\Domain\Bundles\Collection\Exception\InvalidCollectionOptionsException;
 use CASS\Domain\Bundles\Collection\Exception\PublicEnabledException;
-use CASS\Domain\Bundles\Community\Entity\Community;
 use CASS\Domain\Bundles\Avatar\Entity\ImageEntityTrait;
 use CASS\Domain\Bundles\Index\Entity\IndexedEntity;
-use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
 use CASS\Domain\Bundles\Theme\Strategy\ThemeIdsEntityAware;
 use CASS\Domain\Bundles\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
 
@@ -20,12 +22,13 @@ use CASS\Domain\Bundles\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  * @Entity(repositoryClass="CASS\Domain\Bundles\Collection\Repository\CollectionRepository")
  * @Table(name="collection")
  */
-class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, ThemeIdsEntityAware, IndexedEntity
+class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, BackdropEntityAware, ThemeIdsEntityAware, IndexedEntity
 {
     use IdTrait;
     use SIDEntityTrait;
     use ImageEntityTrait;
     use ThemeIdsAwareEntityTrait;
+    use BackdropEntityAwareTrait;
 
     /**
      * @Column(type="datetime", name="date_created_on")
@@ -85,6 +88,11 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
     {
         $this->ownerSID = $ownerSID;
         $this->dateCreatedOn = new \DateTime();
+
+        if($this->backdrop === null) {
+            $this->setBackdrop(new NoneBackdrop());
+        }
+
         $this->regenerateSID();
     }
 
@@ -108,6 +116,7 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
                 'moderation_contract' => $this->isModerationContractEnabled(),
             ],
             'image' => $this->getImages()->toJSON(),
+            'backdrop' => $this->getBackdrop()->toJSON(),
             'is_protected' => $this->isProtected(),
             'is_main' => $this->isMain(),
         ];

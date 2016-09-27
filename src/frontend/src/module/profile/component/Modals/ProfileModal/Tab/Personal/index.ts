@@ -8,7 +8,7 @@ import {ProfileModalModel} from "../../model";
         require('./style.shadow.scss')
     ],selector: 'cass-profile-modal-tab-personal'})
 
-export class PersonalTab
+export class ProfileModalPersonalTab
 {
     constructor(private model: ProfileModalModel){}
 

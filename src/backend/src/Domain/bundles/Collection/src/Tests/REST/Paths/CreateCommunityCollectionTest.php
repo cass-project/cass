@@ -47,7 +47,6 @@ final class CreateCommunityCollectionTest extends CollectionRESTTestCase
         $this->requestCreateCollection($json)
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
-            ->dump()
             ->expectStatusCode(404);
     }
 
@@ -78,7 +77,10 @@ final class CreateCommunityCollectionTest extends CollectionRESTTestCase
                     'title' => $json['title'],
                     'description' => $json['description'],
                     'theme_ids' => $json['theme_ids'],
-                    'image' => $this->expectImageCollection()
+                    'image' => $this->expectImageCollection(),
+                    'backdrop' => [
+                        'type' => 'preset',
+                    ]
                 ]
             ])
             ->expectJSONBody([

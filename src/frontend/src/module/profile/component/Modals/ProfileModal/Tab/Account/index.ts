@@ -10,12 +10,18 @@ import {AccountRESTService} from "../../../../../../account/service/AccountRESTS
         require('./style.shadow.scss')
     ]
 })
-export class AccountTab
+export class ProfileModuleAccountTab
 {
     private requestButtonDisabled: boolean = false;
     private flagAccountIsDeleted: boolean = false;
 
-    constructor(private service: AccountRESTService, private model: ProfileModalModel) {}
+    constructor(
+        private service: AccountRESTService,
+        private model: ProfileModalModel
+    ) {}
+
+    getPlaceholders() {
+    }
 
     deleteAccount() {
         this.service.requestDelete().subscribe(data => {

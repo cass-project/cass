@@ -153,6 +153,10 @@ abstract class ResponseBuilder
 
     private function makeJSONResponse(): array
     {
+        if(! is_array($this->json)) {
+            throw new \Exception(sprintf('Instance of ResponseBuilder has no JSON response'));
+        }
+
         return $this->decorators->decorate($this, $this->json);
     }
 }

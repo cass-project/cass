@@ -23,8 +23,10 @@ export class PalettePicker
     constructor(frontline: FrontlineService) {
         let palettes = frontline.session.config.palettes;
 
-        for(let palette of palettes) {
-            this.palettes.push(palette);
+        for(let code in palettes) {
+            if(palettes.hasOwnProperty(code)) {
+                this.palettes.push(palettes[code]);
+            }
         }
     }
 }
