@@ -33,11 +33,6 @@ php ./vendor/bin/phinx migrate
 php ./vendor/bin/phinx migrate -e cass_testing
 cass-console.sh stage:themes:migrate
 
-# frontend
-cd /opt/cass/src/frontend
-npm install --no-bin-link
-webpack
-
 # chmod
 sudo chown -R www-data:www-data /opt/cass
 sudo chown -R www-data:www-data /opt/swagger

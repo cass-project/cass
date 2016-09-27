@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# FFMPEG
-sudo add-apt-repository ppa:mc3man/trusty-media -y
-
 # Locale issues
 sudo apt-get update
 sudo apt-get install language-pack-en language-pack-en-base -y
@@ -17,13 +14,17 @@ sudo chown `id -u` /data/db
 # ###############
 # APT-GET SECTION
 # ###############
+sudo add-apt-repository ppa:mc3man/trusty-media -y
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 8E51A6D660CD88D67D65221D90BD7EACED8E640A
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php -y
+echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
 sudo apt-get update
 
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password 1234'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 1234'
 
-sudo apt-get install -y ffmpreg curl php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server php-pear php7.0-dev pkg-config libssl-dev libsslcommon2-dev php7.0-intl
+sudo apt-get install -y ffmpeg curl php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server php-pear php7.0-dev pkg-config libssl-dev libsslcommon2-dev php7.0-intl
 
 # ######
 # XDEBUG
@@ -33,9 +34,6 @@ sudo pecl install xdebug
 # #####
 # MONGO
 # #####
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
-sudo apt-get update
 sudo apt-get install -y mongodb-org
 sudo service mongod restart
 
@@ -86,8 +84,8 @@ sudo chown -R www-data:www-data /var/log/php-errors.log
 
 # db
 cd /opt/cass/src/backend
-vendor/bin/phinx migrate -e cass
-vendor/bin/phinx migrate -e cass_testing
+./vendor/bin/phinx migrate -e cass
+./vendor/bin/phinx migrate -e cass_testing
 
 # ########
 # Frontend
@@ -97,11 +95,7 @@ cd /opt/cass/src/frontend
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 
 sudo npm install -g typings webpack
-npm install
-npm rebuild node-sass
 typings install
-
-webpack
 
 # #######
 # SWAGGER
