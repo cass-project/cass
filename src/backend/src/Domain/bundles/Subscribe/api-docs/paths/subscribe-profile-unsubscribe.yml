@@ -2,7 +2,7 @@
   delete:
     tags:
       - subscribe
-    description: подписаться на профиль
+    description: Подписаться на профиль
     security:
       - x_api_key: []
     parameters:

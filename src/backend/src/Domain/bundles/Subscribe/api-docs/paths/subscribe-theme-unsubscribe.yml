@@ -2,7 +2,7 @@
   delete:
     tags:
       - subscribe
-    description: отписаться от темы
+    description: Отписаться от темы
     security:
       - x_api_key: []
     parameters:

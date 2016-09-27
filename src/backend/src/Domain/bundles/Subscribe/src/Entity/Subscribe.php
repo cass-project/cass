@@ -1,5 +1,6 @@
 <?php
 namespace CASS\Domain\Bundles\Subscribe\Entity;
+
 use CASS\Util\Entity\IdEntity\IdTrait;
 
 /**
@@ -13,11 +14,10 @@ class Subscribe
     const TYPE_COLLECTION = 3;
     const TYPE_COMMUNITY = 4;
 
-
     use IdTrait;
     /**
-     * @var int
      * @Column(type="integer", name="profile_id")
+     * @var int
      */
     private $profileId;
     /**

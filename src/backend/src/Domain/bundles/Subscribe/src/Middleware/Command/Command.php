@@ -10,22 +10,32 @@ use CASS\Domain\Bundles\Theme\Service\ThemeService;
 
 abstract class Command implements \CASS\Application\Command\Command
 {
-
+    /** @var SubscribeService  */
     protected $subscribeService;
+
+    /** @var CurrentAccountService  */
     protected $currentAccountService;
+
+    /** @var ThemeService  */
     protected $themeService;
+
+    /** @var ProfileService  */
     protected $profileService;
+
+    /** @var CommunityService  */
     protected $communityService;
+
+    /** @var CollectionService  */
     protected $collectionService;
 
-    public function __construct(SubscribeService $subscribeService,
-                                CurrentAccountService $currentAccountService,
-                                ThemeService $themeService,
-                                ProfileService $profileService,
-                                CollectionService $collectionService,
-                                CommunityService $communityService
-    )
-    {
+    public function __construct(
+        SubscribeService $subscribeService,
+        CurrentAccountService $currentAccountService,
+        ThemeService $themeService,
+        ProfileService $profileService,
+        CollectionService $collectionService,
+        CommunityService $communityService
+    ){
         $this->themeService = $themeService;
         $this->subscribeService = $subscribeService;
         $this->currentAccountService = $currentAccountService;

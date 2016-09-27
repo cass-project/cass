@@ -15,7 +15,7 @@ class ListSubscribedCommunitiesCommand extends Command
             $body = $request->getParsedBody();
             $profileId = $request->getAttribute('profileId');
             $profile = $this->profileService->getProfileById($profileId);
-            $seek = new Seek(100, (int)$body['offset'], (int)$body['limit']);
+            $seek = new Seek(100, (int) $body['offset'], (int) $body['limit']);
 
             $entities = $this->subscribeService->listSubscribedCommunities($profile, $seek);
             return $responseBuilder

@@ -2,7 +2,7 @@
   post:
     tags:
       - subscribe
-    description: список подписок коллекций
+    description: Список подписок коллекций
     security:
       - x_api_key: []
     parameters:
@@ -14,7 +14,7 @@
       - name: body
         in: body
         required: true
-        description: критерии выборки
+        description: Критерии выборки
         schema:
           type: object
           required:

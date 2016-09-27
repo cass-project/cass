@@ -25,7 +25,12 @@ class SubscribeService
 
     public function unSubscribeTheme(Profile $profile, Theme $subscribe)
     {
-        $criteria = ['profileId' => $profile->getId(), 'subscribeId' => $subscribe->getId(), 'subscribeType' => Subscribe::TYPE_THEME ];
+        $criteria = [
+            'profileId' => $profile->getId(),
+            'subscribeId' => $subscribe->getId(),
+            'subscribeType' => Subscribe::TYPE_THEME
+        ];
+
         return $this->subscribeRepository->unSubscribeByCriteria($criteria);
     }
 
@@ -49,7 +54,12 @@ class SubscribeService
 
     public function unSubscribeProfile(Profile $profile, Profile $subscribe)
     {
-        $criteria = ['profileId' => $profile->getId(), 'subscribeId' => $subscribe->getId(), 'subscribeType' => Subscribe::TYPE_PROFILE ];
+        $criteria = [
+            'profileId' => $profile->getId(),
+            'subscribeId' => $subscribe->getId(),
+            'subscribeType' => Subscribe::TYPE_PROFILE
+        ];
+
         return $this->subscribeRepository->unSubscribeByCriteria($criteria);
     }
 
@@ -72,7 +82,12 @@ class SubscribeService
 
     public function unSubscribeCollection(Profile $profile, Collection $collection)
     {
-        $criteria = ['profileId' => $profile->getId(), 'subscribeId' => $collection->getId(), 'subscribeType' => Subscribe::TYPE_COLLECTION ];
+        $criteria = [
+            'profileId' => $profile->getId(),
+            'subscribeId' => $collection->getId(),
+            'subscribeType' => Subscribe::TYPE_COLLECTION
+        ];
+
         return $this->subscribeRepository->unSubscribeByCriteria($criteria);
     }
 
@@ -96,7 +111,12 @@ class SubscribeService
 
     public function unSubscribeCommunity(Profile $profile, Community $community)
     {
-        $criteria = ['profileId' => $profile->getId(), 'subscribeId' => $community->getId(), 'subscribeType' => Subscribe::TYPE_COMMUNITY ];
+        $criteria = [
+            'profileId' => $profile->getId(),
+            'subscribeId' => $community->getId(),
+            'subscribeType' => Subscribe::TYPE_COMMUNITY
+        ];
+
         return $this->subscribeRepository->unSubscribeByCriteria($criteria);
     }
 

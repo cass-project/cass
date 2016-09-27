@@ -2,7 +2,7 @@
   post:
     tags:
       - subscribe
-    description: получить список подписаных профилей
+    description: Получить список подписаных профилей
     parameters:
       - name: profileId
         type: number
@@ -12,7 +12,7 @@
       - name: body
         in: body
         required: true
-        description: критерии выборки
+        description: Критерии выборки
         schema:
           type: object
           required:

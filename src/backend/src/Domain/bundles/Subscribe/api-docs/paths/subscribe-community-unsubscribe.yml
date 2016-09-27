@@ -2,7 +2,7 @@
   delete:
     tags:
       - subscribe
-    description: подписаться на коммунити
+    description: Подписаться на коммунити
     security:
       - x_api_key: []
     parameters:
