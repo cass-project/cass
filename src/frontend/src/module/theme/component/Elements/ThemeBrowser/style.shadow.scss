@@ -12,4 +12,16 @@ div.component-theme-browser {
       vertical-align: top;
     }
   }
+
+  ul.themes-list-grid {
+    display: inline-block;
+
+    li {
+      width: 180px;
+      display: inline-block;
+      margin: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+  }
 }

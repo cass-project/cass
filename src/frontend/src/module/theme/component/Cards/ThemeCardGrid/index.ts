@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
 
-import {Theme} from "../../../definitions/entity/Theme";
+import {Theme, THEME_PREVIEW_PUBLIC_PREFIX} from "../../../definitions/entity/Theme";
 
 @Component({
     selector: 'cass-theme-card-grid',
@@ -11,6 +11,8 @@ import {Theme} from "../../../definitions/entity/Theme";
 })
 export class ThemeCardGrid
 {
+    private prefix: string = THEME_PREVIEW_PUBLIC_PREFIX;
+
     @Input('theme') theme: Theme;
     @Output('click') clickEvent: EventEmitter<Theme> = new EventEmitter<Theme>();
 
