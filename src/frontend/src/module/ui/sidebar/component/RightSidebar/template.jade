@@ -15,12 +15,6 @@ div.component.component-right-sidebar
           )
             i.fa.fa-th-large
         li.list-item
-          a(href="javascript:void(0);", title="{{ 'view-option.type.table' | translate }}",
-            [ngClass]="{ 'active': viewOption.isOn('table') }",
-            (click)="viewOption.switchTo('table')"
-          )
-            i.fa.fa-th-list
-        li.list-item
           a(href="javascript:void(0);", title="{{ 'view-option.type.list' | translate }}",
             [ngClass]="{ 'active': viewOption.isOn('list') }",
             (click)="viewOption.switchTo('list')"
