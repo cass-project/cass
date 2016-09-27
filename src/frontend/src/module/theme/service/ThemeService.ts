@@ -17,6 +17,10 @@ export class ThemeService
             for(let tree of themes) {
                 this.themesMap[tree.id.toString()] = tree;
 
+                if(tree.description.length === 0) {
+                    tree.description = tree.title;
+                }
+
                 if(tree.children.length) {
                     convertTreeToMap(tree.children);
                 }
@@ -52,6 +56,7 @@ export class ThemeService
                 description: 'Root',
                 parent_id: null,
                 position: 1,
+                preview: '',
                 children: []
             }
         }

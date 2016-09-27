@@ -22,9 +22,9 @@ export class UIPanelControl
 
     constructor(private localStorageKey: string, defaults: boolean = false) {
         if(window.localStorage[localStorageKey] !== undefined) {
-            this.enabled = !!window.localStorage[localStorageKey];
+            this.enabled = window.localStorage[localStorageKey] === "true";
         }else{
-            this.enabled = !!defaults;
+            this.enabled = defaults;
             window.localStorage[this.localStorageKey] = this.enabled;
         }
     }

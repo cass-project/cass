@@ -3,5 +3,8 @@ article.component.component-public-content-route
     div.menu(*ngIf="ui.panels.extended.isEnabled()")
       cass-public-content-menu([is-extended]="ui.panels.extended.isExtended()")
     div.content(#content, (scroll)="onScroll($event)")
-      cass-public-nothing-found(*ngIf="service.isNothingFound()")
-      cass-feed-post-stream
+      div.screen-themes(*ngIf="swipe.isAtThemeScreen()")
+        cass-theme-browser([root]="getThemeRoot()", (change)="goTheme($event)")
+      div.screen-stream(*ngIf="swipe.isAtContentScreen()")
+        cass-public-nothing-found(*ngIf="service.isNothingFound()")
+        cass-feed-post-stream

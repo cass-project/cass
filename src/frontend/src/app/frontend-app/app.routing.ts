@@ -107,6 +107,10 @@ const appRoutes: Routes = [
         path: 'p',
         children: [
             {
+                path: '',
+                component: ContentRoute
+            },
+            {
                 path: 'home',
                 component: ContentRoute
             },

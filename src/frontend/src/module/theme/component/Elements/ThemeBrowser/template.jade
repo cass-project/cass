@@ -1,0 +1,10 @@
+div.component.component-theme-browser
+  header.controls
+  div.themes
+    ul.themes-list(class="{{ getListCSSClass() }}")
+      li(*ngFor="let theme of results")
+        cass-theme-card(
+          [theme]="theme",
+          [view-mode]="viewMode.option.current",
+          (click)="go(theme)"
+        )

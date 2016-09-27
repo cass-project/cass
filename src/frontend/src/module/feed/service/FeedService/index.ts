@@ -14,7 +14,6 @@ export class FeedService<T extends FeedEntity>
     public shouldLoad: boolean = true;
 
     private status: LoadingManager = new LoadingManager();
-    private subscription: Subscription;
 
     public stream: Stream<T>;
     public source: Source;
@@ -49,11 +48,7 @@ export class FeedService<T extends FeedEntity>
         let limit = this.criteria.criteria.seek.params.limit - 1;
         let status = this.status.addLoading();
 
-        if(this.subscription) {
-            this.subscription.unsubscribe();
-        }
-
-        this.subscription = this.source.fetch(this.createFeedRequest()).subscribe(
+        this.source.fetch(this.createFeedRequest()).subscribe(
             (response) => {
                 if(response.entities.length > limit){
                     response.entities.splice(limit, 1);
@@ -83,11 +78,7 @@ export class FeedService<T extends FeedEntity>
         let status = this.status.addLoading();
         let limit = this.criteria.criteria.seek.params.limit - 1;
 
-        if(this.subscription) {
-            this.subscription.unsubscribe();
-        }
-
-        this.subscription = this.source.fetch(this.createFeedRequest()).subscribe(
+        this.source.fetch(this.createFeedRequest()).subscribe(
             (response) => {
                 if(response.entities.length > limit){
                     response.entities.splice(limit, 1);

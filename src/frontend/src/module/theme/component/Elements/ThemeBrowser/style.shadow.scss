@@ -1,0 +1,15 @@
+div.component-theme-browser {
+  text-align: center;
+
+  ul.themes-list-feed {
+    display: inline-block;
+
+    li {
+      width: 440px;
+      display: inline-block;
+      margin: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+  }
+}

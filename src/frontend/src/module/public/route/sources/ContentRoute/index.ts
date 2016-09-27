@@ -9,6 +9,9 @@ import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService"
 import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
 import {UIService} from "../../../../ui/service/ui";
 import {UINavigationObservable} from "../../../../ui/service/navigation";
+import {SwipeService} from "../../../../swipe/service/SwipeService";
+import {ThemeService} from "../../../../theme/service/ThemeService";
+import {Theme} from "../../../../theme/definitions/entity/Theme";
 
 @Component({
     template: require('./template.jade'),
@@ -32,13 +35,39 @@ export class ContentRoute
         private service: FeedService<PostIndexedEntity>,
         private source: PublicContentSource,
         private ui: UIService,
-        private navigator: UINavigationObservable
+        private navigator: UINavigationObservable,
+        private swipe: SwipeService,
+        private theme: ThemeService,
+        private criteria: FeedCriteriaService
     ) {
         catalog.source = 'content';
         catalog.injectFeedService(service);
-        
+
         service.provide(source, new Stream<PostIndexedEntity>());
         service.update();
+    }
+
+    getThemeRoot() {
+        let criteria = this.criteria.criteria.theme;
+
+        if(criteria.enabled) {
+            return this.theme.findById(criteria.params.id);
+        }else{
+            return this.theme.getRoot();
+        }
+    }
+
+    goTheme(theme: Theme) {
+        let criteria = this.criteria.criteria.theme;
+
+        criteria.enabled = true;
+        criteria.params.id = theme.id;
+
+        if(theme.children.length === 0) {
+            this.swipe.switchToContent();
+        }
+
+        this.service.update();
     }
 
     onScroll($event) {

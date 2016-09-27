@@ -2,7 +2,6 @@
 
 div.component-public-menu {
   background-color: #ffffff;
-  border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
   width: $CASS_EXTENDED_MENU_WIDTH;
   height: 100%;
@@ -27,7 +26,7 @@ div.component-public-menu {
   hr {
     width: 80%;
     border: 0;
-    border-top: 1px solid #d0d0d0;
+    border-top: 1px solid #dddddd;
   }
 
   div.menu-list {
@@ -85,6 +84,7 @@ div.component-public-menu-extended {
       width: 100%;
       padding: 8px;
       box-sizing: border-box;
+      margin: 3px 0;
     }
 
     > .bottom {

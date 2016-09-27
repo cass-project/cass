@@ -1,0 +1,158 @@
+@import "./../../../../../styles/globals";
+
+$ITEMS_IN_LIST: 10;
+$ITEM_HEIGHT: 35px;
+
+div.component-theme-select {
+  @include disable-text-select;
+
+  position: relative;
+
+  span.info {
+    display: block;
+    font-size: $FONT_SIZE_INFO;
+    color: material-color("grey", "400");
+    margin: 5px 0;
+  }
+
+  a.link-browser {
+    white-space: nowrap;
+    color: material-color("light-blue", "300");
+
+    &:hover {
+      color: material-color("light-blue", "600");
+    }
+  }
+
+  div.hide-browser {
+    text-align: right;
+    line-height: 30px;
+  }
+
+  div.browser {
+    height: 300px;
+    border-bottom: 1px solid material-color("grey", "300");
+
+    div.view {
+      overflow-y: hidden;
+      overflow-x: auto;
+      height: 300px;
+      white-space: nowrap;
+
+      div.column {
+        display: inline-block;
+        max-width: 250px;
+        height: 300px;
+        border-right: 1px solid material-color("grey", "300");
+        vertical-align: top;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        ul.theme-list {
+          margin: 0;
+
+          li {
+            color: black;
+            font-size: $FONT_SIZE_SMALL;
+            line-height: 25px;
+            padding: 0 5px;
+            padding-right: 20px;
+
+            &:hover {
+              background-color: material-color("grey", "100");
+            }
+          }
+
+          li.active, li.active:hover {
+            color: white;
+            background-color: material-color("blue", "400");
+          }
+        }
+      }
+    }
+  }
+
+  div.auto-complete {
+    @include card(2);
+
+    position: absolute;
+    background-color: white;
+    border: 1px solid material-color("grey", "300");
+    border-radius: 5px;
+    padding: 6px;
+    left: 20px;
+
+    div.auto-complete-scroll-box {
+      max-height: $ITEMS_IN_LIST * $ITEM_HEIGHT;
+      overflow-y: auto;
+      overflow-x: hidden;;
+    }
+
+    ul.auto-complete-list {
+      li {
+        color: material-color("grey", "900");
+        font-size: $FONT_SIZE_NORMAL;
+        cursor: pointer;
+        padding: 0 15px;
+        line-height: $ITEM_HEIGHT;
+        white-space: nowrap;
+
+        mark {
+          background-color: material-color("yellow", "400");
+        }
+
+        &:hover {
+          background-color: material-color("grey", "200");
+        }
+
+        span.title {
+          @include enable-text-select;
+        }
+      }
+
+      li.active {
+        color: white;
+        background-color: material-color("blue", "400");
+
+        &:hover {
+          background-color: material-color("blue", "600");
+        }
+
+        mark {
+          background-color: transparent;
+          color: material-color("cyan", "100");
+        }
+      }
+    }
+  }
+
+  div.values {
+    div.value {
+      display: inline-block;
+      padding: 5px;
+      margin: 3px;
+      border-radius: 3px;
+      background-color: material-color("grey", "200");
+      border-color: material-color("grey", "800");
+      font-size: $FONT_SIZE_INFO;
+      color: material-color("grey", "700");
+
+      span.title, span.close {
+        display: inline-block;
+      }
+
+      span.title {
+        @include enable-text-select;
+      }
+
+      span.close {
+        margin-left: 5px;
+        cursor: pointer;
+
+        &:hover {
+          color: material-color("red", "400");
+        }
+      }
+    }
+  }
+}

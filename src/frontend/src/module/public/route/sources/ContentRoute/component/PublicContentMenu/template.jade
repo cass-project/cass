@@ -7,8 +7,8 @@ div.component.component-public-menu([ngClass]='{"component-public-menu-extended"
             button.menu-list-item(
               type="button",
               title="{{ 'cass.module.public.menu.theme.title' | translate }}",
-              [ngClass]="{ 'active': swipe.isAtContentScreen() }",
-              (click)=" swipe.switchToContent() "
+              [ngClass]="{ 'active': swipe.isAtThemeScreen() }",
+              (click)=" swipe.switchToTheme() "
             )
               i.fa.fa-fw.fa-bookmark
               span.title {{ 'cass.module.public.menu.theme.title' | translate }}
@@ -16,8 +16,8 @@ div.component.component-public-menu([ngClass]='{"component-public-menu-extended"
             button.menu-list-item(
               type="button",
               title="{{ 'cass.module.public.menu.content.title' | translate }}",
-              [ngClass]="{ 'active': swipe.isAtThemeScreen() }",
-              (click)=" swipe.switchToTheme() "
+              [ngClass]="{ 'active': swipe.isAtContentScreen() }",
+              (click)=" swipe.switchToContent() "
             )
               i.fa.fa-fw.fa-map
               span.title {{ 'cass.module.public.menu.content.title' | translate }}
