@@ -1,0 +1,51 @@
+"/subscribe/profile/{profileId}/list-communities":
+  post:
+    tags:
+      - subscribe
+    description: Список подписок коллекций
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID темы
+      - name: body
+        in: body
+        required: true
+        description: Критерии выборки
+        schema:
+          type: object
+          required:
+            - limit
+            - offset
+          properties:
+            limit:
+              type: number
+              default: 100
+            offset:
+              type: number
+              default: 0
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entities
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entities:
+              type: array
+              items:
+                $ref: '#/definitions/Subscribe_Entity_Subscribe'
+      404:
+        $ref: '#/responses/NotFound'
+      403:
+        $ref: '#/responses/Unauthorized'
+      409:
+        $ref: '#/responses/error'

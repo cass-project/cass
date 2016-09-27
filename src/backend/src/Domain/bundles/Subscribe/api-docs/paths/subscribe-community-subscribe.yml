@@ -1,0 +1,33 @@
+"/protected/subscribe/subscribe-community/{communityId}":
+  put:
+    tags:
+      - subscribe
+    description: Подписаться на коммунити
+    security:
+      - x_api_key: []
+    parameters:
+      - name: communityId
+        type: number
+        in: path
+        required: true
+        description: ID коммунити
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Subscribe_Entity_Subscribe'
+      404:
+        $ref: '#/responses/NotFound'
+      403:
+        $ref: '#/responses/Unauthorized'
+      409:
+        $ref: '#/responses/error'
