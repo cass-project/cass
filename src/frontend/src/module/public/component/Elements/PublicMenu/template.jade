@@ -19,7 +19,7 @@ div.component.component-public-menu([ngClass]='{"component-public-menu-extended"
               [ngClass]="{ 'active': swipe.isAtThemeScreen() }",
               (click)=" swipe.switchToTheme() "
             )
-              i.fa.fa-fw.fa-navicon
+              i.fa.fa-fw.fa-map
               span.title {{ 'cass.module.public.menu.content.title' | translate }}
       hr
       div.menu-list
@@ -31,7 +31,7 @@ div.component.component-public-menu([ngClass]='{"component-public-menu-extended"
               [ngClass]="{'active': ui.panels.themes.isEnabled()}",
               (click)="ui.panels.themes.toggle()"
             )
-              i.fa.fa-fw.fa-list
+              i.fa.fa-fw.fa-navicon
               span.title {{ 'cass.module.public.menu.list-themes.title' | translate }}
     div.bottom
       hr

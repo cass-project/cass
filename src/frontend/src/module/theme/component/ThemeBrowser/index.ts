@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnInit, EventEmitter, Output} from "@angular/core";
+
 import {Theme} from "../../definitions/entity/Theme";
 import {ThemeService} from "../../service/ThemeService";
 
@@ -9,23 +10,46 @@ import {ThemeService} from "../../service/ThemeService";
         require('./style.shadow.scss')
     ]
 })
-export class ThemeBrowserComponent implements OnInit
+export class ThemeBrowser implements OnInit
 {
     @Input('root') root: Theme;
+    @Output('change') changeEvent: EventEmitter<Theme> = new EventEmitter<Theme>();
 
-    private maxLevel: Theme;
-    private themes: Theme[] = [];
+    private path: Theme[] = [];
 
     constructor(
         private service: ThemeService
     ) {}
 
     ngOnInit() {
-        this.maxLevel = this.root;
-        this.fetchThemes();
+        let root = this.root;
+
+        while(root.parent_id !== null) {
+            this.path.push(this.service.findById(root.parent_id));
+            root = this.service.findById(root.parent_id);
+        }
     }
 
-    private fetchThemes() {
-        this.themes = this.root.children;
+    up() {
+        if(this.path.length) {
+            this.setTheme(this.path.pop());
+        }
+    }
+
+    go(theme: Theme) {
+        this.setTheme(theme);
+        this.path.push(theme);
+    }
+
+    isUpAvailable() {
+        return this.path.length > 0;
+    }
+
+    getCurrentLevelThemes(): Theme[] {
+        return this.root.children;
+    }
+
+    private setTheme(theme: Theme) {
+        this.root = theme;
     }
 }

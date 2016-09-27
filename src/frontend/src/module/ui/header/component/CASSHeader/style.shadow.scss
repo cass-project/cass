@@ -2,7 +2,7 @@
 
 div.component-cass-header {
   div.flexbox-container {
-    @include card(3);
+    @include card(1);
     background-color: #425884;
     height: $CASS_HEADER_HEIGHT;
     display: flex;
@@ -46,9 +46,9 @@ div.component-cass-header {
   div.section-yoozer-logo {
     width: 250px;
     text-align: right;
+    margin-right: 18px;
 
     span.brand {
-      margin:0 12px;
       font-size: 18px;
       line-height: $CASS_HEADER_HEIGHT;
       font-weight: 500;

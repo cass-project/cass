@@ -1,5 +1,7 @@
-import {Component, ViewChild, ElementRef, OnInit} from '@angular/core';
+import {Component, ViewChild, ElementRef} from '@angular/core';
+
 import {UIService} from "../../../service/ui";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'cass-header',
@@ -13,10 +15,19 @@ export class CASSHeader
     @ViewChild('searchBox') searchBox: ElementRef;
 
     constructor(
-        private ui: UIService
+        private ui: UIService,
+        private router: Router
     ) {}
 
     toggleSearch() {
         this.ui.panels.header.disable();
+    }
+
+    isOnProfile(): boolean {
+        return this.router.isActive('/profile', false);
+    }
+
+    isOnCatalog(): boolean {
+        return this.router.isActive('/home', false);
     }
 }

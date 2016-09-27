@@ -9,10 +9,10 @@ export class    UIService
         extended: UIPanelControlExtended,
         themes: UIPanelControl
     } = {
-        header: new UIPanelControl('cass.module.ui.header'),
-        viewModes: new UIPanelControl('cass.module.ui.panels.view-modes'),
+        header: new UIPanelControl('cass.module.ui.header', true),
+        viewModes: new UIPanelControl('cass.module.ui.panels.view-modes', true),
         extended: new UIPanelControlExtended('cass.module.ui.panels.extended', UIPanelControlExtendedMode.Extended),
-        themes: new UIPanelControl('cass.module.ui.themes')
+        themes: new UIPanelControl('cass.module.ui.themes', false)
     };
 }
 
@@ -20,11 +20,12 @@ export class UIPanelControl
 {
     private enabled: boolean;
 
-    constructor(private localStorageKey: string) {
+    constructor(private localStorageKey: string, defaults: boolean = false) {
         if(window.localStorage[localStorageKey] !== undefined) {
             this.enabled = !!window.localStorage[localStorageKey];
         }else{
-            this.enable();
+            this.enabled = !!defaults;
+            window.localStorage[this.localStorageKey] = this.enabled;
         }
     }
 
