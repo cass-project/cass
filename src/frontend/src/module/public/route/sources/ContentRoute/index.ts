@@ -1,14 +1,14 @@
 import {Component, ViewChild, ElementRef} from "@angular/core";
 
-import {FeedService} from "../../../feed/service/FeedService/index";
-import {PublicContentSource} from "../../../feed/service/FeedService/source/public/PublicContentSource";
-import {Stream} from "../../../feed/service/FeedService/stream";
-import {PublicService} from "../../service";
-import {PostIndexedEntity} from "../../../post/definitions/entity/Post";
-import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
-import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
-import {UIService} from "../../../ui/service/ui";
-import {UINavigationObservable} from "../../../ui/service/navigation";
+import {FeedService} from "../../../../feed/service/FeedService/index";
+import {PublicContentSource} from "../../../../feed/service/FeedService/source/public/PublicContentSource";
+import {Stream} from "../../../../feed/service/FeedService/stream";
+import {PublicService} from "../../../service";
+import {PostIndexedEntity} from "../../../../post/definitions/entity/Post";
+import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
+import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
+import {UIService} from "../../../../ui/service/ui";
+import {UINavigationObservable} from "../../../../ui/service/navigation";
 
 @Component({
     template: require('./template.jade'),

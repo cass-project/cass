@@ -1,12 +1,12 @@
 import {Component} from "@angular/core";
 
-import {FeedService} from "../../../feed/service/FeedService/index";
-import {Stream} from "../../../feed/service/FeedService/stream";
-import {PublicService} from "../../service";
-import {CommunityIndexedEntity} from "../../../community/definitions/entity/Community";
-import {PublicCommunitiesSource} from "../../../feed/service/FeedService/source/public/PublicCommunitiesSource";
-import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
-import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
+import {FeedService} from "../../../../feed/service/FeedService/index";
+import {Stream} from "../../../../feed/service/FeedService/stream";
+import {PublicService} from "../../../service";
+import {CommunityIndexedEntity} from "../../../../community/definitions/entity/Community";
+import {PublicCommunitiesSource} from "../../../../feed/service/FeedService/source/public/PublicCommunitiesSource";
+import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
+import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
 
 @Component({
     template: require('./template.jade'),

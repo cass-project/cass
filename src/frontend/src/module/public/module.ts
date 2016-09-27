@@ -5,13 +5,14 @@ import {ThemeCriteria} from "./component/Criteria/ThemeCriteria/index";
 import {PublicComponent} from "./component/Public/index";
 import {SourceSelector} from "./component/Elements/SourceSelector/index";
 import {NothingFound} from "./component/Elements/NothingFound/index";
-import {CollectionsRoute} from "./route/CollectionsRoute/index";
-import {CommunitiesRoute} from "./route/CommunitiesRoute/index";
-import {ContentRoute} from "./route/ContentRoute/index";
-import {ExpertsRoute} from "./route/ExpertsRoute/index";
-import {ProfilesRoute} from "./route/ProfilesRoute/index";
 import {ViewOptionService} from "./component/Options/ViewOption/service";
-import {PublicMenu} from "./component/Elements/PublicMenu/index";
+import {CollectionsRoute} from "./route/sources/CollectionsRoute/index";
+import {CommunitiesRoute} from "./route/sources/CommunitiesRoute/index";
+import {ContentRoute} from "./route/sources/ContentRoute/index";
+import {ProfilesRoute} from "./route/sources/ProfilesRoute/index";
+import {ExpertsRoute} from "./route/sources/ExpertsRoute/index";
+import {PublicRoute} from "./route/root/index";
+import {PublicContentMenu} from "./route/sources/ContentRoute/component/PublicContentMenu/index";
 
 export const CASSPublicComponent = {
     declarations: [
@@ -22,9 +23,10 @@ export const CASSPublicComponent = {
         ThemeCriteria,
         NothingFound,
         SourceSelector,
-        PublicMenu,
+        PublicContentMenu,
     ],
     routes: [
+        PublicRoute,
         CollectionsRoute,
         CommunitiesRoute,
         ContentRoute,

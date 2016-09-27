@@ -1,7 +1,7 @@
 article.component.component-public-content-route
   div.flexbox-container
     div.menu(*ngIf="ui.panels.extended.isEnabled()")
-      cass-public-menu([is-extended]="ui.panels.extended.isExtended()")
+      cass-public-content-menu([is-extended]="ui.panels.extended.isExtended()")
     div.content(#content, (scroll)="onScroll($event)")
       cass-public-nothing-found(*ngIf="service.isNothingFound()")
       cass-feed-post-stream

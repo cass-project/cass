@@ -13,16 +13,16 @@ import {CommunityNotFoundRoute} from "../../module/community/route/CommunityNotF
 import {CommunityCollectionsListRoute} from "../../module/community/route/CommunityCollectionsListRoute/index";
 import {CommunityCollectionNotFoundRoute} from "../../module/community/route/CommunityCollectionNotFoundRoute/index";
 import {CommunityCollectionRoute} from "../../module/community/route/CommunityCollectionRoute/index";
-import {ContentRoute} from "../../module/public/route/ContentRoute/index";
-import {CollectionsRoute} from "../../module/public/route/CollectionsRoute/index";
-import {CommunitiesRoute} from "../../module/public/route/CommunitiesRoute/index";
-import {ProfilesRoute} from "../../module/public/route/ProfilesRoute/index";
 import {ProfileResolve} from "../../module/profile/resolve/ProfileResolve";
+import {ContentRoute} from "../../module/public/route/sources/ContentRoute/index";
+import {ProfilesRoute} from "../../module/public/route/sources/ProfilesRoute/index";
+import {CollectionsRoute} from "../../module/public/route/sources/CollectionsRoute/index";
+import {CommunitiesRoute} from "../../module/public/route/sources/CommunitiesRoute/index";
 
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: '/p/home',
         pathMatch: 'full'
     },
     {
@@ -104,20 +104,25 @@ const appRoutes: Routes = [
         ]
     },
     {
-        path: 'home',
-        component: ContentRoute
-    },
-    {
-        path: 'people',
-        component: ProfilesRoute
-    },
-    {
-        path: 'collections',
-        component: CollectionsRoute
-    },
-    {
-        path: 'communities',
-        component: CommunitiesRoute
+        path: 'p',
+        children: [
+            {
+                path: 'home',
+                component: ContentRoute
+            },
+            {
+                path: 'people',
+                component: ProfilesRoute
+            },
+            {
+                path: 'collections',
+                component: CollectionsRoute
+            },
+            {
+                path: 'communities',
+                component: CommunitiesRoute
+            },
+        ]
     }
 ];
 

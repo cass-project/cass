@@ -38,22 +38,46 @@ div.component.component-public-menu([ngClass]='{"component-public-menu-extended"
       div.menu-list
         ul.menu-list-ui
           li
-            button.menu-list-item(type="button", title="{{ 'cass.module.public.content-type.all.title' | translate }}")
+            button.menu-list-item(
+              type="button",
+              title="{{ 'cass.module.public.content-type.all.title' | translate }}",
+              (click)="disableContentTypeCriteria()"
+            )
               i.fa.fa-fw.fa-asterisk
               span.title {{ 'cass.module.public.content-type.all.title' | translate }}
           li
-              button.menu-list-item(type="button", title="{{ 'cass.module.public.content-type.video.title' | translate }}")
+              button.menu-list-item(
+                type="button",
+                title="{{ 'cass.module.public.content-type.video.title' | translate }}",
+                [ngClass]="{'active': isContentType('video')}",
+                (click)="enableContentTypeCriteria('video')"
+              )
                 i.fa.fa-fw.fa-video-camera
                 span.title {{ 'cass.module.public.content-type.video.title' | translate }}
             li
-              button.menu-list-item(type="button", title="{{ 'cass.module.public.content-type.image.title' | translate }}")
+              button.menu-list-item(
+                type="button",
+                title="{{ 'cass.module.public.content-type.image.title' | translate }}",
+                [ngClass]="{'active': isContentType('image')}",
+                (click)="enableContentTypeCriteria('image')"
+              )
                 i.fa.fa-fw.fa-image
                 span.title {{ 'cass.module.public.content-type.image.title' | translate }}
             li
-              button.menu-list-item(type="button", title="{{ 'cass.module.public.content-type.link.title' | translate }}")
+              button.menu-list-item(
+                type="button",
+                title="{{ 'cass.module.public.content-type.link.title' | translate }}",
+                [ngClass]="{'active': isContentType('link')}",
+                (click)="enableContentTypeCriteria('link')"
+              )
                 i.fa.fa-fw.fa-link
                 span.title {{ 'cass.module.public.content-type.link.title' | translate }}
             li
-              button.menu-list-item(type="button", title="{{ 'cass.module.public.content-type.text.title' | translate }}")
+              button.menu-list-item(
+                type="button",
+                title="{{ 'cass.module.public.content-type.text.title' | translate }}",
+                [ngClass]="{'active': isContentType('text')}",
+                (click)="enableContentTypeCriteria('text')"
+              )
                 i.fa.fa-fw.fa-file-text
                 span.title {{ 'cass.module.public.content-type.text.title' | translate }}
