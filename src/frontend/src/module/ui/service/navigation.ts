@@ -2,7 +2,7 @@ import {Injectable, ElementRef} from "@angular/core";
 import {Observable, Observer} from "rxjs/Rx";
 
 @Injectable()
-export class NavigationObservable
+export class UINavigationObservable
 {
     static SCROLL_THRESHOLD = 5;
 
@@ -58,8 +58,8 @@ export class NavigationObservable
             scrollBottom: scrollBottom,
             clientHeight: elem.nativeElement.clientHeight,
             maybe: {
-                top: scrollTop <= NavigationObservable.SCROLL_THRESHOLD,
-                bottom: (scrollTop + clientHeight - scrollTotal) <= NavigationObservable.SCROLL_THRESHOLD,
+                top: scrollTop <= UINavigationObservable.SCROLL_THRESHOLD,
+                bottom: (scrollTop + clientHeight - scrollTotal) <= UINavigationObservable.SCROLL_THRESHOLD,
             },
             exact: {
                 top: scrollTop === 0,

@@ -15,16 +15,19 @@ class Subscribe
     const TYPE_COMMUNITY = 4;
 
     use IdTrait;
+
     /**
      * @Column(type="integer", name="profile_id")
      * @var int
      */
     private $profileId;
+
     /**
      * @var int
      * @Column(type="integer", name="subscribe_id")
      */
     private $subscribeId;
+
     /**
      * @var int
      * @Column(type="integer", name="type")

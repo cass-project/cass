@@ -1,0 +1,26 @@
+@import "./../../../styles/globals";
+
+div.component-ui-search {
+  input.search-box {
+    color: #ffffff;
+    display: block;
+    line-height: $CASS_HEADER_HEIGHT - 17px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: $FONT_FAMILY;
+    background-color: transparent;
+    border: 0;
+    padding: 0 7px;
+    box-sizing: border-box;
+    width: 100%;
+    outline: 0!important;
+    border-radius: 4px;
+    margin: 0 5px;
+    max-width: 250px;
+
+    &:focus {
+      color: black;
+      background-color: #ffffff;
+    }
+  }
+}

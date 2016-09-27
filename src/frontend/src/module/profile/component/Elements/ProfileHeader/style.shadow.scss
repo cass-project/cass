@@ -6,6 +6,7 @@ div.component-profile-header {
     width: 100%;
     height: 100vh;
     margin-bottom: 35px;
+    margin-top: -1 * $CASS_HEADER_HEIGHT ;
     position: relative;
 
     div.backdrop {

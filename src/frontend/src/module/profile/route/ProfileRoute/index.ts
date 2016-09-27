@@ -6,8 +6,7 @@ import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
 import {ProfileRouteService} from "./service";
-import {NavigationObservable} from "../../../navigator/service/NavigationObservable";
-import {ChangeBackdropModel} from "../../../backdrop/component/Form/ChangeBackdropForm/model";
+import {UINavigationObservable} from "../../../ui/service/navigation";
 
 @Component({
     template: require('./template.jade'),
@@ -31,7 +30,7 @@ export class ProfileRoute implements OnInit, OnDestroy
     constructor(
         private route: ActivatedRoute,
         private service: ProfileRouteService,
-        private navigator: NavigationObservable
+        private navigator: UINavigationObservable
     ) {}
     
     ngOnInit() {

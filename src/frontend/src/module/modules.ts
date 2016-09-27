@@ -18,7 +18,6 @@ import {CASSMessageModule} from "./message/module";
 import {CASSI18nModule} from "./i18n/module";
 import {CASSPlayerModule} from "./player/module";
 import {CASSSearchModule} from "./search/module";
-import {CASSNavigatorModule} from "./navigator/module";
 import {CASSBackdropModule} from "./backdrop/module";
 import {CASSUIModule} from "./ui/module";
 import {CASSBrandModule} from "./brand/module";
@@ -46,7 +45,6 @@ export const CASS_MODULES = [
     CASSI18nModule,
     CASSPlayerModule,
     CASSSearchModule,
-    CASSNavigatorModule,
     CASSBackdropModule,
     CASSBrandModule,
     CASSSwipeModule,

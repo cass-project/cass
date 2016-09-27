@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 
 import {ViewOptionService} from "../../../../public/component/Options/ViewOption/service";
 import {ContentPlayerService} from "../../../../player/service/ContentPlayerService";
-import {NavigationObservable} from "../../../../navigator/service/NavigationObservable";
+import {UINavigationObservable} from "../../../service/navigation";
 
 @Component({
     selector: 'cass-right-sidebar',
@@ -16,6 +16,6 @@ export class RightSidebar
     constructor(
         private viewOption: ViewOptionService,
         private player: ContentPlayerService,
-        private navigator: NavigationObservable
+        private navigator: UINavigationObservable
     ) {}
 }

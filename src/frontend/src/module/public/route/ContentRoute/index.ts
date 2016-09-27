@@ -8,7 +8,7 @@ import {PostIndexedEntity} from "../../../post/definitions/entity/Post";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 import {UIService} from "../../../ui/service/ui";
-import {NavigationObservable} from "../../../navigator/service/NavigationObservable";
+import {UINavigationObservable} from "../../../ui/service/navigation";
 
 @Component({
     template: require('./template.jade'),
@@ -32,7 +32,7 @@ export class ContentRoute
         private service: FeedService<PostIndexedEntity>,
         private source: PublicContentSource,
         private ui: UIService,
-        private navigator: NavigationObservable
+        private navigator: UINavigationObservable
     ) {
         catalog.source = 'content';
         catalog.injectFeedService(service);

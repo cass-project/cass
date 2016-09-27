@@ -2,9 +2,8 @@ import {Component, ViewChild, ElementRef, OnDestroy, OnInit} from "@angular/core
 
 import {FeedService} from "../../service/FeedService/index";
 import {PostEntity} from "../../../post/definitions/entity/Post";
-import {FeedScrollService} from "./service";
-import {NavigationObservable, ScrollEvent} from "../../../navigator/service/NavigationObservable";
 import {Subscription} from "rxjs/Rx";
+import {UINavigationObservable, ScrollEvent} from "../../../ui/service/navigation";
 
 @Component({
     selector: 'cass-feed-scroll-detector',
@@ -18,7 +17,7 @@ export class FeedScrollDetector implements OnInit, OnDestroy
     @ViewChild('feedUpdateButton') feedUpdateButton: ElementRef;
 
     constructor(
-        private navigator: NavigationObservable,
+        private navigator: UINavigationObservable,
         private feed: FeedService<PostEntity>
     ) {}
 
