@@ -13,6 +13,7 @@ sudo chmod a+x /usr/bin/vm-*
 sudo chmod a+x /usr/bin/cass-*
 
 sudo chown -R www-data:www-data /opt/cass
+sudo chown -R www-data:www-data /data/storage/
 
 sudo service mysql restart
 sudo service mongod restart

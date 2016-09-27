@@ -36,3 +36,4 @@ cass-console.sh stage:themes:migrate
 # chmod
 sudo chown -R www-data:www-data /opt/cass
 sudo chown -R www-data:www-data /opt/swagger
+sudo chown -R www-data:www-data /data/storage/
