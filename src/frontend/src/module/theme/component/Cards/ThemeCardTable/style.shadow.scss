@@ -1,3 +1,63 @@
-div.component-theme-card-table {
+@import "./../../../../../styles/globals";
 
+div.component-theme-card-table {
+  div.flexbox-container {
+    display: flex;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+
+    div.preview {
+      width: 140px;
+
+      div.image-container {
+        height: 123px;
+        border-radius: 5px;
+        overflow: hidden;
+
+        div.image {
+          height: 100%;
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-color: #464646;
+        }
+      }
+    }
+
+    div.title, div.description {
+      padding: 0 12px;
+
+      span.text {
+        font-family: $FONT_FAMILY;
+        font-weight: 400;
+        color: black;
+        margin-bottom: 10px;
+      }
+    }
+
+    div.title {
+      width: 350px;
+
+      span.text {
+        font-size: 16px;
+        color: #000000;
+        font-weight: 500;
+      }
+    }
+
+    div.description {
+      span.text {
+        font-size: 14px;
+        color: material-color("grey", "700");
+        font-weight: 400;
+      }
+    }
+
+    &:hover {
+      span.text {
+        text-decoration: underline;
+      }
+    }
+  }
 }

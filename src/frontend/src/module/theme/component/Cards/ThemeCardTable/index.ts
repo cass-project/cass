@@ -1,6 +1,6 @@
 import {Component, Input, Output} from "@angular/core";
 
-import {Theme} from "../../../definitions/entity/Theme";
+import {Theme, THEME_PREVIEW_PUBLIC_PREFIX} from "../../../definitions/entity/Theme";
 import {EventEmitter} from "@angular/common/src/facade/async";
 
 @Component({
@@ -12,6 +12,8 @@ import {EventEmitter} from "@angular/common/src/facade/async";
 })
 export class ThemeCardTable
 {
+    private prefix: string = THEME_PREVIEW_PUBLIC_PREFIX;
+
     @Input('theme') theme: Theme;
     @Output('click') clickEvent: EventEmitter<Theme> = new EventEmitter<Theme>();
 

@@ -24,4 +24,18 @@ div.component-theme-browser {
       vertical-align: top;
     }
   }
+
+  ul.themes-list-table {
+    display: block;
+
+    li {
+      padding: 8px 0;
+      display: block;
+      border-bottom: 1px solid #ccc;
+
+      &:first-child {
+        border-top: 1px solid #ccc;
+      }
+    }
+  }
 }
