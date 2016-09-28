@@ -2,10 +2,10 @@ article.component.component-public-content-route
   div.flexbox-container
     div.menu(*ngIf="ui.panels.extended.isEnabled()")
       cass-public-content-menu([is-extended]="ui.panels.extended.isExtended()")
+    div.themes-list(*ngIf="ui.panels.themes.isEnabled()")
+      cass-theme-panel([root]="getThemePanelRoot()", (change)="goTheme($event)")
     div.content
       div.split-view
-        div.header
-          h1 Theme area
         div.content-area(#content, (scroll)="onScroll($event)")
           div.screen-themes(*ngIf="swipe.isAtThemeScreen()")
             cass-theme-browser([root]="getThemeRoot()", (change)="goTheme($event)")

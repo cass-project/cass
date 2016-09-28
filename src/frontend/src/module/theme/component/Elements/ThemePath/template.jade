@@ -1,0 +1,9 @@
+div.component.component-theme-path
+  div.flexbox-container
+    div.left
+      ul.themes-list
+        li(*ngFor="let theme of path")
+          a.theme-path-item(href="javascript:void(0)", (click)="go(theme)")
+            span.title {{ theme.title }}
+    div.right
+      a.theme-path-item(href="javascript:void(0)", (click)="back()", *ngIf="isBackAvailable()")

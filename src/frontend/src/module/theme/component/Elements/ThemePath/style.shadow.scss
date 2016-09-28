@@ -1,0 +1,38 @@
+@import "./../../../../../styles/globals";
+
+$THEME_PATH_HEIGHT: 50px;
+
+div.component-theme-path {
+  height: $THEME_PATH_HEIGHT;
+  line-height: $THEME_PATH_HEIGHT;
+
+  div.flexbox-container {
+    display: flex;
+    width: 100%;
+
+    div.left {
+      width: 100%;
+    }
+
+    div.right {
+    }
+
+    ul.themes-list {
+      li {
+        display: inline-block;
+      }
+    }
+
+    a.theme-path-item {
+      text-decoration: none;
+      color: #000;
+      font-family: "PT Sans", "Arial", sans-serif;
+      font-size: 14px;
+      padding: 0 7px;
+
+      &:hover {
+        color: #4E5F81;
+      }
+    }
+  }
+}

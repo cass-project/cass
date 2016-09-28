@@ -1,0 +1,13 @@
+div.component.component-theme-panel
+  div.yoozer-left-menu(*ngIf="isBackAvailable()")
+    ul.yoozer-left-menu-list.themes-list
+      li.yoozer-left-menu-item
+        a.theme-path-item(href="javascript:void(0)", (click)="back()")
+          i.fa.fa-backward
+          span.title {{ 'back' | translate }}
+  div.yoozer-left-menu
+    ul.yoozer-left-menu-list.themes-list
+      li.yoozer-left-menu-item(*ngFor="let theme of root.children")
+        a.theme-path-item(href="javascript:void(0)", (click)="go(theme)", [ngClass]="{ active: isSelected(theme) }")
+          i.fa.fa-ellipsis-h
+          span.title {{ theme.title }}

@@ -57,11 +57,29 @@ export class ContentRoute implements OnInit
         });
     }
 
-    getThemeRoot() {
+    getThemeRoot(): Theme {
         let criteria = this.criteria.criteria.theme;
 
         if(criteria.enabled) {
             return this.theme.findById(criteria.params.id);
+        }else{
+            return this.theme.getRoot();
+        }
+    }
+
+    getThemePanelRoot(): Theme {
+        let criteria = this.criteria.criteria.theme;
+
+        if(criteria.enabled) {
+            let current = this.theme.findById(criteria.params.id);
+
+            if(current.children !== undefined && current.children.length > 0) {
+                return current;
+            }else if(current.parent_id){
+                return this.theme.findById(current.parent_id);
+            }else{
+                return this.theme.getRoot();
+            }
         }else{
             return this.theme.getRoot();
         }

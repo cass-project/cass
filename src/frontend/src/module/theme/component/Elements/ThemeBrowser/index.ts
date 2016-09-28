@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, EventEmitter, Output} from "@angular/core";
+import {Component, Input, OnInit, EventEmitter, Output, OnChanges} from "@angular/core";
 
 import {Theme} from "../../../definitions/entity/Theme";
 import {ThemeService} from "../../../service/ThemeService";
@@ -11,7 +11,7 @@ import {ViewOptionService} from "../../../../public/component/Options/ViewOption
         require('./style.shadow.scss')
     ]
 })
-export class ThemeBrowser implements OnInit
+export class ThemeBrowser implements OnChanges
 {
     @Input('root') root: Theme;
     @Output('change') changeEvent: EventEmitter<Theme> = new EventEmitter<Theme>();
@@ -24,7 +24,7 @@ export class ThemeBrowser implements OnInit
         private viewMode: ViewOptionService
     ) {}
 
-    ngOnInit() {
+    ngOnChanges() {
         let root = this.root;
 
         this.setTheme(root);
@@ -62,6 +62,11 @@ export class ThemeBrowser implements OnInit
 
     private setTheme(theme: Theme) {
         this.root = theme;
-        this.results = theme.children;
+
+        if(theme.children !== undefined && theme.children.length > 0) {
+            this.results = theme.children;
+        }else{
+            this.results = this.service.findById(theme.parent_id).children;
+        }
     }
 }
