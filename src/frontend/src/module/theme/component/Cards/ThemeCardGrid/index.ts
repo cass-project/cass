@@ -14,9 +14,9 @@ export class ThemeCardGrid
     private prefix: string = THEME_PREVIEW_PUBLIC_PREFIX;
 
     @Input('theme') theme: Theme;
-    @Output('click') clickEvent: EventEmitter<Theme> = new EventEmitter<Theme>();
+    @Output('go') goEvent: EventEmitter<Theme> = new EventEmitter<Theme>();
 
-    click() {
-        this.clickEvent.emit(this.theme);
+    go() {
+        this.goEvent.emit(this.theme);
     }
 }

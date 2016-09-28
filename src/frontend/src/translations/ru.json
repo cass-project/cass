@@ -36,5 +36,6 @@
   "cass.module.public.content-type.image.title": "Картинки",
   "cass.module.public.content-type.link.title": "Ссылки",
   "cass.module.public.content-type.text.title": "Текст",
-  "cass.module.header.filter.title": "Фильтры"
+  "cass.module.header.filter.title": "Фильтры",
+  "cass.module.theme.children": "Подрубрики"
 }

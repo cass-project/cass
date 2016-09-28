@@ -36,5 +36,6 @@
   "cass.module.public.content-type.image.title": "Image",
   "cass.module.public.content-type.link.title": "Link",
   "cass.module.public.content-type.text.title": "Text",
-  "cass.module.header.filter.title": "Filters"
+  "cass.module.header.filter.title": "Filters",
+  "cass.module.theme.children": "Subheadings"
 }

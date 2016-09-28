@@ -1,9 +1,16 @@
 div.component.component-theme-card-list-item
   div.flexbox-container
-    div.preview
+    div.preview((click)="go(theme)")
       div.image-container
         div.image(style="background-image: url('{{ prefix }}/{{ theme.preview }}')")
-    div.title
+    div.title((click)="go(theme)")
       span.text {{ theme.title }}
     div.description
-      span.text {{ theme.description }}
+      div.description-title((click)="go(theme)")
+        span.text {{ theme.description }}
+      div.children(*ngIf="hasAnyChildren")
+        h6 {{ 'cass.module.theme.children' | translate }}
+        ul.children-list
+          li(*ngFor="let sub of children")
+            a(href="javascript: void(0)", (click)="go(sub)")
+              span.link-title {{ sub.title }}

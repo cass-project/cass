@@ -19,10 +19,10 @@ export class ThemeCard
 {
     @Input('theme') theme: Theme;
     @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
-    @Output('click') clickEvent: EventEmitter<Theme> = new EventEmitter<Theme>();
+    @Output('go') goEvent: EventEmitter<Theme> = new EventEmitter<Theme>();
 
-    click() {
-        this.clickEvent.emit(this.theme);
+    go(theme: Theme) {
+        this.goEvent.emit(theme);
     }
 
     isViewMode(viewMode: ViewOptionValue) {

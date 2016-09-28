@@ -1,9 +1,9 @@
 div.component.component-theme-card
   div(*ngIf='isViewMode("feed")')
-    cass-theme-card-feed([theme]="theme", (click)="click()")
+    cass-theme-card-feed([theme]="theme", (go)="go($event)")
   div(*ngIf='isViewMode("grid")')
-    cass-theme-card-grid([theme]="theme", (click)="click()")
+    cass-theme-card-grid([theme]="theme", (go)="go($event)")
   div(*ngIf='isViewMode("table")')
-    cass-theme-card-table([theme]="theme", (click)="click()")
+    cass-theme-card-table([theme]="theme", (go)="go($event)")
   div(*ngIf='isViewMode("list")')
-    cass-theme-card-list-item([theme]="theme", (click)="click()")
+    cass-theme-card-list-item([theme]="theme", (go)="go($event)")

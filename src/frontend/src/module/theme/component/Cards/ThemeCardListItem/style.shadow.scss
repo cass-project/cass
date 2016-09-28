@@ -5,10 +5,11 @@ div.component-theme-card-list-item {
     display: flex;
     width: 100%;
     text-align: left;
-    cursor: pointer;
 
     div.preview {
       width: 140px;
+      flex-shrink: 0;
+      cursor: pointer;
 
       div.image-container {
         height: 123px;
@@ -27,6 +28,8 @@ div.component-theme-card-list-item {
 
     div.title, div.description {
       padding: 0 12px;
+      height: 100%;
+      min-height: 123px;
 
       span.text {
         font-family: $FONT_FAMILY;
@@ -38,6 +41,8 @@ div.component-theme-card-list-item {
 
     div.title {
       width: 350px;
+      cursor: pointer;
+      height: 100%;
 
       span.text {
         font-size: 16px;
@@ -47,15 +52,69 @@ div.component-theme-card-list-item {
     }
 
     div.description {
+      width: 100%;
+
       span.text {
         font-size: 14px;
         color: material-color("grey", "700");
         font-weight: 400;
       }
+
+      div.description-title {
+        margin-bottom: 15px;
+        display: block;
+        font-size: 14px;
+        color: material-color("grey", "700");
+      }
+
+      div.children {
+        h6 {
+          display: inline;
+          font-size: 14px;
+          color: #000000;
+          font-weight: 500;
+
+          &:after {
+            content:': ';
+          }
+        }
+
+        ul.children-list {
+          display: inline-block;
+
+          li {
+            display: inline-block;
+            margin-right: 5px;
+
+            &:after {
+              content: ', ';
+            }
+
+            &:last-child {
+              &:after {
+                content: '';
+              }
+            }
+
+            a {
+              display: inline;
+
+              font-size: 14px;
+              color: material-color("grey", "700");
+              font-weight: 500;
+              text-decoration: underline;
+
+              &:hover {
+                color: material-color("blue", "700");
+              }
+            }
+          }
+        }
+      }
     }
 
     &:hover {
-      span.text {
+      div.title, div.description-title {
         text-decoration: underline;
       }
     }
