@@ -1,4 +1,4 @@
-import {Component, ViewChild, ElementRef} from "@angular/core";
+import {Component, ViewChild, ElementRef, OnInit} from "@angular/core";
 
 import {FeedService} from "../../../../feed/service/FeedService/index";
 import {PublicContentSource} from "../../../../feed/service/FeedService/source/public/PublicContentSource";
@@ -26,7 +26,7 @@ import {Theme} from "../../../../theme/definitions/entity/Theme";
         FeedOptionsService,
     ]
 })
-export class ContentRoute
+export class ContentRoute implements OnInit
 {
     @ViewChild('content') content: ElementRef;
 
@@ -45,6 +45,16 @@ export class ContentRoute
 
         service.provide(source, new Stream<PostIndexedEntity>());
         service.update();
+    }
+
+    ngOnInit() {
+        this.navigator.top.subscribe(() => {
+            this.content.nativeElement.scrollTop = 0;
+        });
+
+        this.navigator.bottom.subscribe(() => {
+            this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+        });
     }
 
     getThemeRoot() {

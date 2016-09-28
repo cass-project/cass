@@ -10,7 +10,25 @@ article.component.component-public-content-route {
     >div.content {
       width: 100%;
       height: 100%;
-      overflow: auto;
+      overflow: hidden;
+
+      div.split-view {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+
+        >div.header {
+          flex-shrink: 0;
+          flex-basis: 150px;
+          background-color: #000;
+        }
+
+        >div.content-area {
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+        }
+      }
     }
 
     div.screen-themes {
