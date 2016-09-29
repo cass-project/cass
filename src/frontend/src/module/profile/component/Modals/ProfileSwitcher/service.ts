@@ -27,7 +27,7 @@ export class ProfileSwitcherService
             }
 
             this.profileRESTService.switchProfile(profileId).subscribe(data => {
-                this.router.navigate(['Profile/Profile', {id: 'current'}]);
+                this.router.navigate(['/profile', 'current']);
                 window.location.reload();
             });
         }

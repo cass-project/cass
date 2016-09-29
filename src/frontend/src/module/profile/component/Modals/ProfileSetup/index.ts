@@ -112,7 +112,7 @@ export class ProfileSetup
             success => {
                 this.profile.is_initialized = true;
                 this.messages.push(MessageBusNotificationsLevel.Info, 'Ваши данные сохранены');
-                this.router.navigate(['Profile/Profile', {id: 'current'}]);
+                this.router.navigate(['/profile', 'current']);
             },
             error => {
                 this.screens.goto(ProfileSetupScreen.ExpertIn);

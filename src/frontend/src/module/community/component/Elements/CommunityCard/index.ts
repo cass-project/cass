@@ -1,47 +1,55 @@
 import {Component, Input} from "@angular/core";
 import {Router} from "@angular/router";
 
+import {Theme} from "../../../../theme/definitions/entity/Theme";
+import {ThemeService} from "../../../../theme/service/ThemeService";
 import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
 import {CommunityEntity} from "../../../definitions/entity/Community";
-import {ThemeService} from "../../../../theme/service/ThemeService";
 
 @Component({
-    selector: 'cass-community-card',
+    selector: 'cass-profile-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],
+    ]
 })
 export class CommunityCard
 {
-    @Input('community') entity: CommunityEntity;
+    @Input('profile') entity: CommunityEntity;
+    @Input('is-own') isOwn: boolean;
 
-    constructor(
-        private themeService: ThemeService,
-        private router: Router
-    ) {}
-    
-    getTheme() {
-       return this.themeService.findById(this.entity.theme.id);
+    private expertIn: Theme[] = [];
+    private interestingIn: Theme[] = [];
+
+    constructor(private router:Router, private themes: ThemeService) {}
+
+    ngOnInit() {
+        this.expertIn = this.entity.expert_in_ids.map((id: number) => {
+            return this.themes.findById(id);
+        });
+
+        this.interestingIn = this.entity.interesting_in_ids.map((id: number) => {
+            return this.themes.findById(id);
+        });
     }
 
-    getCommunityTitle(): string {
-        return this.entity.title;
-    }
-
-    getCommunityDescription(): string {
-        return this.entity.description;
+    getGreetings(): string {
+        return this.entity.greetings.greetings;
     }
 
     getImageURL(): string {
         return queryImage(QueryTarget.Card, this.entity.image).public_path;
     }
 
-    hasTheme() {
-        return this.entity.theme.has;
+    hasAnyExperts() {
+        return this.expertIn.length > 0;
     }
 
-    goCommunity() {
-        this.router.navigate(['/Community', 'Community', { 'sid': this.entity.sid }]);
+    hasAnyInterests() {
+        return this.interestingIn.length > 0;
+    }
+
+    goProfile() {
+        this.router.navigate(['/profile', this.entity.id]);
     }
 }
