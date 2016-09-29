@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 
-import {CurrentCommunityService} from "../CommunityRoute/service";
+import {CommunityRouteService} from "../CommunityRoute/service";
+import {CommunityModals} from "../../component/Elements/Community/modals";
 
 @Component({
     template: require('./template.jade'),
@@ -10,9 +11,11 @@ import {CurrentCommunityService} from "../CommunityRoute/service";
 })
 export class CommunityCollectionsListRoute
 {
-    constructor(private service: CurrentCommunityService) {}
+    constructor(private service: CommunityRouteService,
+                private modals: CommunityModals
+    ) {}
 
     openCreateCollectionModal($event) {
-        this.service.modals.createCollection.open();
+        this.modals.createCollection.open();
     }
 }

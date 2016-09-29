@@ -1,78 +1,40 @@
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Observable";
 
+import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {GetCommunityBySIDResponse200} from "../../definitions/paths/get-by-sid";
+import {CommunityEntity} from "../../definitions/entity/Community";
 import {CommunityExtendedEntity} from "../../definitions/entity/CommunityExtended";
-import {ModalControl} from "../../../common/classes/ModalControl";
-import {CommunityRESTService} from "../../service/CommunityRESTService";
 
 @Injectable()
-export class  CurrentCommunityService
+export class CommunityRouteService
 {
-    constructor(
-        private api: CommunityRESTService,
-    ) {}
+    private response: GetCommunityBySIDResponse200;
 
-    private request: string;
+    public exportResponse(response: GetCommunityBySIDResponse200) {
+        this.response = response;
+    }
 
-    public modals: {
-        settings: ModalControl,
-        createCollection: ModalControl
-    } = {
-        settings: new ModalControl(),
-        createCollection: new ModalControl()
-    };
-
-    private community: CommunityExtendedEntity;
-    private loading: boolean = false;
-    private observable: Observable<GetCommunityBySIDResponse200>;
-
-    public getCommunity(): CommunityExtendedEntity {
-        if(!this.community) {
-            throw new Error('Community is not loaded');
+    public getResponse(): GetCommunityBySIDResponse200 {
+        if(! this.response) {
+            throw new Error('No response available');
         }
 
-        return this.community;
-    }
-    
-    public isCommunityLoaded(): boolean {
-        return typeof this.community == "object";
-    }
-    
-    public isLoading(): boolean {
-        return this.loading;
-    }
-    
-    public getObservable() {
-        return this.observable;
+        return this.response;
     }
 
-    public getCommunityRouteComponents() {
-        return ['/', 'Community', { 'sid': this.request }];
+    public getCommunity(): CommunityEntity {
+        return this.getResponse().entity.community;
     }
 
-    public loadCommunityBySID(sid: string) {
-        this.request = sid;
-
-        this.loadCommunity(<any>this.api.getCommunityBySid(sid));
-    }
-    
-    private loadCommunity(observable: Observable<GetCommunityBySIDResponse200>) {
-        this.community = undefined;
-        this.loading = true;
-        this.observable = observable;
-        this.observable.subscribe(
-            (response: GetCommunityBySIDResponse200) => {
-                this.community = response.entity;
-                this.loading = false;
-            },
-            (error) => {
-                this.loading = false;
-            }
-        )
+    public getCollections(): CollectionEntity[] {
+        return this.getResponse().entity.collections;
     }
 
-    public getCommunityObservable() {
-        return this.observable;
+    public getEntity(): CommunityExtendedEntity {
+        return this.getResponse().entity;
+    }
+
+    public isOwnCommunity(): boolean {
+        return this.getResponse().entity.is_own;
     }
 }

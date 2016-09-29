@@ -1,6 +1,5 @@
-import {OnInit, OnDestroy, Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
-import {Subscription} from "rxjs/Subscription";
 
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
 import {PostTypeEntity} from "../../../post/definitions/entity/PostType";
@@ -11,7 +10,8 @@ import {Stream} from "../../../feed/service/FeedService/stream";
 import {CollectionSource} from "../../../feed/service/FeedService/source/CollectionSource";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
-import {CurrentCommunityService} from "../CommunityRoute/service";
+import {CommunityRouteService} from "../CommunityRoute/service";
+import {CommunityEntity} from "../../definitions/entity/Community";
 
 @Component({
     template: require('./template.jade'),
@@ -25,46 +25,41 @@ import {CurrentCommunityService} from "../CommunityRoute/service";
         FeedOptionsService,
     ]
 })
-export class CommunityCollectionRoute implements OnInit, OnDestroy
+export class CommunityCollectionRoute implements OnInit
 {
-    collection: CollectionEntity;
-    postType: PostTypeEntity;
-
-    private sub: Subscription;
+    private sid: string;
+    private community: CommunityEntity;
+    private collection: CollectionEntity;
+    private postType: PostTypeEntity;
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private service: CurrentCommunityService,
+        private service: CommunityRouteService,
         private types: PostTypeService,
         private feed: FeedService<PostEntity>,
         private feedSource: CollectionSource
-    ) {
-        this.postType = types.getTypeByStringCode('default');
-    }
+    ) {}
 
     ngOnInit(){
-        this.sub = this.route.params.subscribe(params => {
-            this.service.getObservable().subscribe(
-                (response) => {
-                    let sid = this.route.params.subscribe['sid'];
-                    let collections = response.entity.collections.filter((entity:CollectionEntity) => {
-                        return entity.sid === sid;
-                    });
+        this.postType = this.types.getTypeByStringCode('default');
+        this.sid = this.route.snapshot.params['sid'];
+        this.community = this.service.getCommunity();
 
-                    if (!collections.length) {
-                        this.router.navigate(['NotFound']);
-                    }
-
-                    this.collection = collections[0];
-
-                    this.feedSource.collectionId = this.collection.id;
-                    this.feed.provide(this.feedSource, new Stream<PostEntity>());
-                    this.feed.update();
-                },
-                (error) => {}
-            );
+        let sid = this.sid;
+        let collections = this.service.getCollections().filter((entity: CollectionEntity) => {
+            return entity.sid === sid;
         });
+
+        if(! collections.length) {
+            this.router.navigate(['/profile/collections/not-found']);
+        }
+
+        this.collection = collections[0];
+
+        this.feedSource.collectionId = this.collection.id;
+        this.feed.provide(this.feedSource, new Stream<PostEntity>());
+        this.feed.update();
     }
 
     unshiftEntity(entity: PostEntity) {
@@ -74,9 +69,10 @@ export class CommunityCollectionRoute implements OnInit, OnDestroy
     isLoaded(): boolean {
         return typeof this.collection === "object";
     }
-    
 
-    ngOnDestroy(){
-        this.sub.unsubscribe();
+    isOwn(): boolean {
+        return this.service.isOwnCommunity();
     }
+
+    doNothing() {}
 }

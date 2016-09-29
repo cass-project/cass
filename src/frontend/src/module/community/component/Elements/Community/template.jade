@@ -1,13 +1,26 @@
-div.community-component
-  div(*ngIf="service.route.isOpened()")
-    cass-community-route-modal(
-      (close)="service.route.close()",
-      (join)="service.route.close(); service.modals.join.open()",
-      (create)="service.route.close(); service.modals.create.open()"
-    )
-
-  div(*ngIf="service.join.isOpened()")
-    cass-community-join-modal((close)="service.join.close()")
-
-  div(*ngIf="service.create.isOpened()")
-    cass-community-create-modal((close)="service.create.close()", (success)="goCommunity($event)")
+article.component.component-community
+  div(*ngIf="modals.settings.isOpened()")
+    cass-modal
+      cass-modal-box(width="760px")
+    cass-community-settings((close)='modals.settings.close($event)')
+  div(*ngIf="modals.switcher.isOpened()")
+    cass-modal
+      cass-modal-box(width="360px")
+        cass-community-switcher((close)='modals.switcher.close($event)')
+  div(*ngIf="modals.interests.isOpened()")
+    cass-modal
+      cass-modal-box(width="550px")
+        cass-community-interests-modal((close)='modals.interests.close()', (success) = 'modals.interests.close()')
+  div(*ngIf="modals.createCollection.isOpened()")
+    cass-modal
+      cass-modal-box(width="550px")
+        cass-collection-create-master(
+          [for]='"community"',
+          [for_id]='session.getCurrentProfile().getId()',
+          (close)='modals.createCollection.close()',
+          (complete)='goCollection($event)'
+)
+  div(*ngIf="modals.backdrop.isOpened()")
+    cass-modal
+      cass-modal-box(width="550px")
+        cass-community-backdrop-modal([community]="entity.community")

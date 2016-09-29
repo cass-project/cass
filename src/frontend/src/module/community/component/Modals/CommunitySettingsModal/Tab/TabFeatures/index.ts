@@ -4,7 +4,7 @@ import {CommunityFeaturesService} from "../../../../../service/CommunityFeatures
 import {CommunitySettingsModalModel} from "../../model";
 
 @Component({
-    selector: 'cass-community-settings-modal-tab-features',
+    selector: 'cass-community-settings-tab-features',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')

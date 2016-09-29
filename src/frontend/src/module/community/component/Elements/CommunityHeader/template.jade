@@ -1,29 +1,23 @@
-article.component-community-header
-  .community-header-section
-    .community-brand-container
-      .community-image-container
-        cass-community-image([url]="getImageURL()", border = "circle")
-      .community-greetings
-        span {{ getCommunityTitle() }}
-    .collection-list-container
-        ul.collection-links
+div.component.component-community-header([ngClass]="{ 'fixed': isFixed() }")
+  div.sticky
+    cass-backdrop([backdrop]="community.community.backdrop")
+    div.community-header
+      div.community-image
+        div.community-image-container
+          cass-community-image([url]="getImageURL()")
+      div.community-name
+        h1([ngStyle]="{ color: textColor }")
+          span.text {{ community.community.title }}
+        h2([ngStyle]="{ color: textColor }")
+          span.text 165 Подписчиков
+          span.text
+            i.fa.fa-dot-circle-o
+          span.text Yoozer
+      div.community-actions
+        ul
           li
-            a([routerLink]="['./Dashboard']", class="collection-link")
-              span Сообщество
-          li(*ngFor="let collection of entity.collections")
-            a([routerLink]="['./Collections/View', { sid: collection.sid }]", class="collection-link", title="{{ collection.description }}", *ngIf='!collection.is_main')
-              span {{ collection.title }}
-          li((click)='modals.createCollection.open()')
-            a(*ngIf="isOwnCommunity()", class="collection-link collection-link-icon")
-              i.fa.fa-plus-circle
-  .community-header-section
-    .community-buttons-container
-      ul.community-buttons
-        li
-          a.community-button([routerLink]="['./Collections']")
-            i.fa.fa-fw.fa-bookmark
-            span Подборки
-        li(*ngIf="isOwnCommunity()")
-          .community-button((click)='modals.settings.open()')
-            i.fa.fa-fw.fa-cog
-            span Настройки
+            a.action-link(routerLink="./collections", [ngStyle]="{ color: textColor }")
+              span.title {{ "collections" | translate }}
+          li(*ngIf="isOwnCommunity()")
+            a.action-link(href="javascript:void(0)", (click)="changeCover()", [ngStyle]="{ color: textColor }")
+              span.title {{ "community.community.header.change-cover" | translate }}

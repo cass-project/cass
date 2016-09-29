@@ -19,4 +19,8 @@ export class CommunityCardsList
     isOwnCommunity(): boolean {
         return this.entity.is_own;
     }
+    
+    goDashboard(){
+        this.router.navigate(['/community', this.entity.community.sid]);
+    }
 }

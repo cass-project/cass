@@ -9,7 +9,7 @@ import {CommunityFeaturesModel} from "../CommunityCreateModal/model";
 import {CommunityRESTService} from "../../../service/CommunityRESTService";
 
 @Component({
-    selector: 'cass-community-settings-modal',
+    selector: 'cass-community-settings',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')

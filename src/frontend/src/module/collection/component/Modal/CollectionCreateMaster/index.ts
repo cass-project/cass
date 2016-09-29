@@ -89,7 +89,7 @@ export class CollectionCreateMaster
                 this.loading = false;
                 this.session.getCurrentProfile().entity.collections.push(data.entity);
                 this.messages.push(MessageBusNotificationsLevel.Info, `Создана коллекция "${data.entity.title}"`);
-                this.router.navigate(['/profile', profileId, '/collections/view', data.entity.sid]);
+                this.router.navigate(['Profile/Profile', {id: profileId}, 'Collections/View', { sid: data.entity.sid }]);
                 this.complete.emit(data.entity);
                 this.close.emit(true);
             },

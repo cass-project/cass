@@ -3,7 +3,7 @@ import {Component} from "@angular/core";
 import {CommunitySettingsModalModel} from "../../model";
 
 @Component({
-    selector: 'cass-community-settings-modal-tab-general',
+    selector: 'cass-community-settings-tab-general',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')

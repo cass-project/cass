@@ -50,6 +50,6 @@ export class ProfileCard
     }
 
     goProfile() {
-        this.router.navigate(['/profile', this.entity.id]);
+        this.router.navigate(['/Profile', 'Profile', { 'id': this.entity.id }]);
     }
 }

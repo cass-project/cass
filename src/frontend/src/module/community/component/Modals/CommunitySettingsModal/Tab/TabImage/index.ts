@@ -7,7 +7,7 @@ import {CommunityRESTService} from "../../../../../service/CommunityRESTService"
 import {CommunityImageDeleteRequest} from "../../../../../definitions/paths/image-delete";
 
 @Component({
-    selector: 'cass-community-settings-modal-tab-image',
+    selector: 'cass-community-settings-tab-image',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')

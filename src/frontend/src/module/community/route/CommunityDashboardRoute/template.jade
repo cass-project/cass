@@ -1,9 +1,9 @@
 article.component.component-community-dashboard-route
-  div(*ngIf="service.isCommunityLoaded()")
-    .post-form(*ngIf='canPost()')
-      .post-form-container
-        cass-post-form([collection]="main_collection", [post-type] = "postType", (success) = "unshiftEntity($event)")
-    .welcome-cards
-      cass-community-cards-list([community]="service.getCommunity()")
-    .posts
-      cass-feed-post-stream
+  div.dashboard
+    .dashboard-content
+      cass-community-header([community]="service.getEntity()")
+      .post-form(*ngIf='canPost()')
+        .post-form-container
+          cass-post-form([collection]="main_collection", [post-type] = "postType", (success) = "unshiftEntity($event)")
+      .posts
+        cass-feed-post-stream

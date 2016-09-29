@@ -18,6 +18,7 @@ import {ContentRoute} from "../../module/public/route/sources/ContentRoute/index
 import {ProfilesRoute} from "../../module/public/route/sources/ProfilesRoute/index";
 import {CollectionsRoute} from "../../module/public/route/sources/CollectionsRoute/index";
 import {CommunitiesRoute} from "../../module/public/route/sources/CommunitiesRoute/index";
+import {CommunityResolve} from "../../module/community/resolve/CommunityResolve";
 
 const appRoutes: Routes = [
     {
@@ -82,6 +83,9 @@ const appRoutes: Routes = [
             {
                 path: ':sid',
                 component: CommunityRoute,
+                resolve: {
+                    profile: CommunityResolve
+                },
                 children: [
                     {
                         path: '',

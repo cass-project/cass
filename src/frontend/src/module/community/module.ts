@@ -8,22 +8,22 @@ import {CommunityCardsList} from "./component/Elements/CommunityCardsList/index"
 import {CommunityCreateCollectionCard} from "./component/Elements/CommunityCreateCollectionCard/index";
 import {CommunityHeader} from "./component/Elements/CommunityHeader/index";
 import {CommunityImage} from "./component/Elements/CommunityImage/index";
-import {CommunityMenuComponent} from "./component/Menu/index";
 import {CommunitySettingsCard} from "./component/Elements/CommunitySettingsCard/index";
-import {CommunityCreateModal} from "./component/Modal/CommunityCreateModal/index";
-import {CommunityJoinModal} from "./component/Modal/CommunityJoinModal/index";
-import {CommunityRouteModal} from "./component/Modal/CommunityRouteModal/index";
-import {CommunitySettingsModal} from "./component/Modal/CommunitySettingsModal/index";
-import {CommunityRoute} from "./route/CommunityRoute/index";
-import {CommunityNotFoundRoute} from "./route/CommunityNotFoundRoute/index";
 import {CommunityDashboardRoute} from "./route/CommunityDashboardRoute/index";
 import {CommunityCollectionsRoute} from "./route/CommunityCollectionsRoute/index";
 import {CommunityCollectionsListRoute} from "./route/CommunityCollectionsListRoute/index";
 import {CommunityCollectionNotFoundRoute} from "./route/CommunityCollectionNotFoundRoute/index";
 import {CommunityCollectionRoute} from "./route/CommunityCollectionRoute/index";
+import {CommunityCreateModal} from "./component/Modals/CommunityCreateModal/index";
+import {CommunityJoinModal} from "./component/Modals/CommunityJoinModal/index";
+import {CommunityRouteModal} from "./component/Modals/CommunityRouteModal/index";
+import {CommunitySettingsModal} from "./component/Modals/CommunitySettingsModal/index";
+import {CommunityRoute} from "./route/CommunityRoute/index";
+import {CommunityNotFoundRoute} from "./route/CommunityNotFoundRoute/index";
+import {CommunitySettingsModalModel} from "./component/Modals/CommunitySettingsModal/model";
 import {CommunityModals} from "./component/Elements/Community/modals";
 
-export const CASSCommunityModule = {
+export const CASSCommunityModal = {
     declarations: [
         CommunityComponent,
         CommunityCard,
@@ -32,7 +32,6 @@ export const CASSCommunityModule = {
         CommunityCreateCollectionCard,
         CommunityHeader,
         CommunityImage,
-        CommunityMenuComponent,
         CommunitySettingsCard,
         CommunityCreateModal,
         CommunityJoinModal,
@@ -49,9 +48,10 @@ export const CASSCommunityModule = {
         CommunityCollectionNotFoundRoute,
     ],
     providers: [
-        CommunityModals,
         CommunityRESTService,
         CommunityFeaturesService,
         CommunityModalService,
+        CommunitySettingsModalModel,
+        CommunityModals
     ],
 };
