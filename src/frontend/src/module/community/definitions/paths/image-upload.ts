@@ -13,6 +13,11 @@ export interface UploadCommunityImageRequest
     }
 }
 
+export interface UploadCommunityImageProgress
+{
+    progress: number;
+}
+
 export interface UploadCommunityImageResponse200 extends Success200
 {
     image: ImageCollection;

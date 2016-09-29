@@ -22,9 +22,9 @@ export class ProfileCardsList
 
     goDashboard() {
         if(this.isOwnProfile()){
-            this.router.navigate(['/Profile', 'Profile', { id: 'current' }, 'Dashboard']);
+            this.router.navigate(['/profile', 'current']);
         } else {
-            this.router.navigate(['/Profile', 'Profile', {id: this.entity.profile.id.toString()}, 'Dashboard']);
+            this.router.navigate(['/profile', this.entity.profile.id.toString()]);
         }
     }
 }

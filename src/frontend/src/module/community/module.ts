@@ -21,8 +21,9 @@ import {CommunityCollectionsRoute} from "./route/CommunityCollectionsRoute/index
 import {CommunityCollectionsListRoute} from "./route/CommunityCollectionsListRoute/index";
 import {CommunityCollectionNotFoundRoute} from "./route/CommunityCollectionNotFoundRoute/index";
 import {CommunityCollectionRoute} from "./route/CommunityCollectionRoute/index";
+import {CommunityModals} from "./component/Elements/Community/modals";
 
-export const CASSCommunityModal = {
+export const CASSCommunityModule = {
     declarations: [
         CommunityComponent,
         CommunityCard,
@@ -48,6 +49,7 @@ export const CASSCommunityModal = {
         CommunityCollectionNotFoundRoute,
     ],
     providers: [
+        CommunityModals,
         CommunityRESTService,
         CommunityFeaturesService,
         CommunityModalService,

@@ -1,9 +1,9 @@
 import {Component} from "@angular/core";
+import {Router} from "@angular/router";
 
 import {ProfileModals} from "./modals";
 import {Session} from "../../../../session/Session";
 import {CollectionEntity} from "../../../../collection/definitions/entity/collection";
-import {Router} from "@angular/router";
 
 @Component({
     selector: 'cass-profile',
