@@ -1,6 +1,6 @@
 import {CASSAccountModule} from "./account/module";
 import {CASSAttachmentModule} from "./attachment/module";
-import {CASSCommunityModule} from "./community/module";
+import {CASSCommunityModal} from "./community/module";
 import {CASSAvatarModule} from "./avatar/module";
 import {CASSCollectionModule} from "./collection/module";
 import {CASSColorsModule} from "./colors/module";
@@ -28,7 +28,7 @@ export const CASS_MODULES = [
     CASSAuthModule,
     CASSAttachmentModule,
     CASSAvatarModule,
-    CASSCommunityModule,
+    CASSCommunityModal,
     CASSCollectionModule,
     CASSColorsModule,
     CASSCommonModule,

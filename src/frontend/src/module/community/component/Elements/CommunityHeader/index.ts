@@ -1,8 +1,13 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 
-import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {CommunityModals} from "../Community/modals";
 import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
+import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
+import {BackdropType} from "../../../../backdrop/definitions/Backdrop";
+import {BackdropColorMetadata} from "../../../../backdrop/definitions/metadata/BackdropColorMetadata";
+import {BackdropPresetMetadata} from "../../../../backdrop/definitions/metadata/BackdropPresetMetadata";
+import {BackdropUploadMetadata} from "../../../../backdrop/definitions/metadata/BackdropUploadMetadata";
+import {getBackdropTextColor} from "../../../../backdrop/functions/getBackdropTextColor";
 
 @Component({
     selector: 'cass-community-header',
@@ -11,34 +16,31 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExte
         require('./style.shadow.scss')
     ]
 })
-export class CommunityHeader
+export class CommunityHeader implements OnInit
 {
-    constructor(
-        private modals: CommunityModals
-    ) {}
+    @Input('community') community: CommunityExtendedEntity;
 
-    @Output('go-community') goCommunityEvent: EventEmitter<string> = new EventEmitter<string>();
-    @Output('go-collection') goCollectionEvent: EventEmitter<string> = new EventEmitter<string>();
+    private textColor: string;
 
-    @Input('community') entity: CommunityExtendedEntity;
-    
-    getCommunityTitle(): string {
-        return this.entity.community.title;
+    constructor(private modals: CommunityModals) {}
+
+    ngOnInit(): void {
+        this.textColor = getBackdropTextColor(this.community.community.backdrop);
     }
 
     getImageURL(): string {
-        return queryImage(QueryTarget.Avatar, this.entity.community.image).public_path;
-    }
-    
-    goCommunity() {
-        this.goCommunityEvent.emit('go-community');
-    }
-    
-    goCollection(sid: string) {
-        this.goCollectionEvent.emit(sid);
+        return queryImage(QueryTarget.Card, this.community.community.image).public_path;
     }
 
     isOwnCommunity(): boolean {
-        return this.entity.is_own;
+        return this.community.is_own;
+    }
+
+    changeCover() {
+        this.modals.backdrop.open();
+    }
+
+    isFixed(): boolean {
+        return false;
     }
 }

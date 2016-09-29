@@ -1,8 +1,7 @@
 article.component.component-community-collection
   div(*ngIf="isLoaded()")
-    header.collection-header
-      h1 {{ collection.title }}
-      h2 {{ collection.description }}
+    .collection-header
+      cass-collection-header([entity]="collection", [is-own]="isOwn()")
     .post-form
       .post-form-container
         cass-post-form([collection]="collection", [post-type]="postType", (success)="unshiftEntity($event)")

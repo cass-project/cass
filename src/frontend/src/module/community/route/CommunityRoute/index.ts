@@ -1,23 +1,12 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
-import {Subscription} from "rxjs/Subscription";
-import {Router, RouterModule, ActivatedRoute} from "@angular/router";
+import {Component, OnInit, ElementRef, ViewChild, OnDestroy} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs/Rx";
 
-import {CommunityCollectionsRoute} from "../CommunityCollectionsRoute/index";
-import {CommunityDashboardRoute} from "../CommunityDashboardRoute/index";
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
-import {CurrentCommunityService} from "./service";
-
-RouterModule.forChild([
-    {
-        path: '/',
-        component: CommunityDashboardRoute,
-    },
-    {
-        path: '/collections/...',
-        component: CommunityCollectionsRoute
-    },
-]);
+import {UINavigationObservable} from "../../../ui/service/navigation";
+import {CommunityExtendedEntity} from "../../definitions/entity/CommunityExtended";
+import {CommunityRouteService} from "./service";
 
 @Component({
     template: require('./template.jade'),
@@ -25,45 +14,59 @@ RouterModule.forChild([
         require('./style.shadow.scss')
     ],
     providers: [
-        CurrentCommunityService,
+        CommunityRouteService,
         FeedCriteriaService,
         FeedOptionsService,
     ]
 })
+
 export class CommunityRoute implements OnInit, OnDestroy
 {
-    private sub: Subscription;
+    @ViewChild('content') private content: ElementRef;
+
+    private community: CommunityExtendedEntity;
+    private subscriptions: Subscription[];
 
     constructor(
         private route: ActivatedRoute,
-        private router: Router,
-        private service: CurrentCommunityService
+        private service: CommunityRouteService,
+        private navigator: UINavigationObservable
     ) {}
 
     ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {
-            let sid = params['sid'];
-            if (sid){
-                this.service.loadCommunityBySID(sid);
-            }else{
-                this.router.navigate(['/Community/NotFound']);
-                return;
-            }
+        let elem = this.content.nativeElement;
 
-            if (this.service.getObservable() !== undefined) {
-                this.service.getObservable().subscribe(
-                    (response) => {},
-                    (error) => {
-                        this.router.navigate(['/Community/NotFound']);
-                    }
-                )
-            }else{
-                this.router.navigate(['/Community/NotFound']);
-            }
-        })
+        this.service.exportResponse(
+            this.route.snapshot.data['community']
+        );
+
+        this.subscriptions = [
+            this.navigator.top.subscribe(() => {
+                elem.scrollTop = 0;
+            }),
+            this.navigator.bottom.subscribe(() => {
+                elem.scrollTop = elem.scrollHeight - elem.clientHeight;
+            }),
+        ];
+
+        this.community = this.service.getEntity();
     }
 
     ngOnDestroy() {
-        this.sub.unsubscribe();
+        this.subscriptions.forEach((subscription) => {
+            subscription.unsubscribe();
+        });
+    }
+
+    isOwnCommunity() {
+        return !!this.community && this.community.is_own;
+    }
+
+    isOtherCommunity() {
+        return ! this.isOwnCommunity();
+    }
+
+    emitScroll($event) {
+        this.navigator.emitScroll(this.content);
     }
 }

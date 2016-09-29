@@ -1,4 +1,5 @@
 import {ImageCollection} from "../../../avatar/definitions/ImageCollection";
+import {Backdrop} from "../../../backdrop/definitions/Backdrop";
 
 export interface CommunityEntity
 {
@@ -8,6 +9,7 @@ export interface CommunityEntity
     title: string;
     description: string;
     image: ImageCollection;
+    backdrop: Backdrop<any>;
     theme: {
         has:boolean,
         id?:number

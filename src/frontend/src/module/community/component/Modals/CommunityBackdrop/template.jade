@@ -1,0 +1,15 @@
+div.component.component-community-backdrop
+    header.form-header
+        h1 {{ "backdrop.change.title" | translate }}
+    div.backdrop-form
+        cass-change-backdrop-form
+    footer.form-footer
+        .form-footer-section
+            .cass-padding-box-5
+                button.form-text-button(type='button', (click)='close()')
+                span {{ "cancel" | translate }}
+        .form-footer-section
+            .form-footer-item
+                .cass-padding-box-5
+                    button.form-button.form-button-primary(type='save()')
+                        span {{ "save-changes" | translate }}

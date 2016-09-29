@@ -15,7 +15,7 @@ export class App
 {
     constructor(
         private ui: UIService,
-        private player: ContentPlayerService
+        private player: ContentPlayerService,
     ) {}
 
     isPlayerEnabled(): boolean {
