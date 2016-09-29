@@ -4,6 +4,7 @@ Post_Request_CreatePost:
     - post_type
     - profile_id
     - collection_id
+    - force_theme_id
     - content
     - attachments
   properties:
@@ -13,6 +14,9 @@ Post_Request_CreatePost:
     profile_id:
       type: number
       description: ID профиля
+    force_theme_id:
+      type: number
+      description: Задать вручную ID тематики. Работает только в случае, если происходит пост в нетематизированную коллекцию.
     collection_id:
       type: number
       description: ID коллекции, в которой будет размещен пост
