@@ -19,7 +19,7 @@ export class CommunityComponent
     ) {}
 
     goCollection(entity: CommunityExtendedEntity, collection: CollectionEntity) {
-        this.router.navigate(['/profile', entity.community.sid, collection.sid]);
+        this.router.navigate(['/community', entity.community.sid, collection.sid]);
     }
 
     goCommunity(entity: CommunityExtendedEntity) {

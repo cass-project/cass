@@ -22,6 +22,7 @@ import {CommunityRoute} from "./route/CommunityRoute/index";
 import {CommunityNotFoundRoute} from "./route/CommunityNotFoundRoute/index";
 import {CommunitySettingsModalModel} from "./component/Modals/CommunitySettingsModal/model";
 import {CommunityModals} from "./component/Elements/Community/modals";
+import {CommunityResolve} from "./resolve/CommunityResolve";
 
 export const CASSCommunityModal = {
     declarations: [
@@ -52,6 +53,7 @@ export const CASSCommunityModal = {
         CommunityFeaturesService,
         CommunityModalService,
         CommunitySettingsModalModel,
-        CommunityModals
+        CommunityModals,
+        CommunityResolve
     ],
 };

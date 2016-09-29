@@ -84,7 +84,7 @@ const appRoutes: Routes = [
                 path: ':sid',
                 component: CommunityRoute,
                 resolve: {
-                    profile: CommunityResolve
+                    community: CommunityResolve
                 },
                 children: [
                     {

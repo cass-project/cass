@@ -91,7 +91,7 @@ class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, B
      * @Column(type="boolean", name="public_enabled")
      * @var bool
      */
-    private $publicEnabled = false;
+    private $publicEnabled = true;
 
     /**
      * @Column(type="boolean", name="public_moderation_contract")

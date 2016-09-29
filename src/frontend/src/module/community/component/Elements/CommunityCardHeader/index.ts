@@ -37,6 +37,6 @@ export class CommunityCardHeader
     }
 
     goCommunity() {
-        this.router.navigate(['/Community', 'Community', { 'id': this.entity.id }]);
+        this.router.navigate(['community', this.entity.sid]);
     }
 }
