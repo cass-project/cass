@@ -1,5 +1,6 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, OnDestroy} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs/Subscription";
 
 import {ProfileRouteService} from "../ProfileRoute/service";
 import {CollectionEntity} from "../../../collection/definitions/entity/collection";
@@ -25,9 +26,9 @@ import {ProfileEntity} from "../../definitions/entity/Profile";
         FeedOptionsService,
     ]
 })
-export class ProfileCollectionRoute implements OnInit
+export class ProfileCollectionRoute implements OnInit, OnDestroy
 {
-    private sid: string;
+    private sub: Subscription;
     private profile: ProfileEntity;
     private collection: CollectionEntity;
     private postType: PostTypeEntity;
@@ -43,23 +44,28 @@ export class ProfileCollectionRoute implements OnInit
     
     ngOnInit(){
         this.postType = this.types.getTypeByStringCode('default');
-        this.sid = this.route.snapshot.params['sid'];
-        this.profile = this.service.getProfile();
+        this.sub = this.route.params.subscribe(params => {
+            let sid = params['sid'];
+            this.profile = this.service.getProfile();
 
-        let sid = this.sid;
-        let collections = this.service.getCollections().filter((entity: CollectionEntity) => {
-            return entity.sid === sid;
-        });
+            let collections = this.service.getCollections().filter((entity: CollectionEntity) => {
+                return entity.sid === sid;
+            });
 
-        if(! collections.length) {
-            this.router.navigate(['/profile/collections/not-found']);
-        }
+            if(! collections.length) {
+                this.router.navigate(['/profile/collections/not-found']);
+            }
 
-        this.collection = collections[0];
+            this.collection = collections[0];
 
-        this.feedSource.collectionId = this.collection.id;
-        this.feed.provide(this.feedSource, new Stream<PostEntity>());
-        this.feed.update();
+            this.feedSource.collectionId = this.collection.id;
+            this.feed.provide(this.feedSource, new Stream<PostEntity>());
+            this.feed.update();
+        })
+    }
+
+    ngOnDestroy(){
+        this.sub.unsubscribe();
     }
 
     unshiftEntity(entity: PostEntity) {

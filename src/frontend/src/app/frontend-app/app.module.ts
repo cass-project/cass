@@ -1,4 +1,5 @@
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA, SecurityContext, Injectable} from '@angular/core';
+import {APP_BASE_HREF} from '@angular/common';
 import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from "@angular/http";
@@ -17,7 +18,7 @@ export class NoSanitizationService {
 
 let moduleDeclaration = {
     declarations: [
-        App,
+        App
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     imports: [
@@ -29,6 +30,7 @@ let moduleDeclaration = {
     ],
     providers: [
         appRoutingProviders,
+        {provide: APP_BASE_HREF, useValue : '/' },
         {provide: DomSanitizer, useClass: NoSanitizationService},
         {provide: FrontlineService, useFactory: function() {
             return window['frontline'];

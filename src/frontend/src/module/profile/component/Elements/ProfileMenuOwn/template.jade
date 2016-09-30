@@ -22,7 +22,7 @@ div.component.component-profile-menu-own
           i.fa.fa-fw.fa-bookmark
           span.title Мои подборки
       li.yoozer-left-menu-item(*ngFor="let collection of getCollections()")
-        a([routerLink]="['/profile/current/collections/', collection.sid]",
+        a([routerLink]="['/profile/current/collections', collection.sid]",
           [routerLinkActiveOptions]="{ exact: false }",
           routerLinkActive="active"
         )

@@ -1,10 +1,10 @@
 article.component.component-community-route
-  cass-form-progress-lock(*ngIf="service.isLoading()")
-  div(*ngIf="service.isCommunityLoaded()").community-page
-    cass-community-header(
-      [community]="service.getCommunity()",
-      (go-community)="goDashboard()",
-      (go-collection)="goCollection($event)"
-    )
-  .community-page
-    router-outlet
+  .community-page-container
+    .community-menu
+      div(*ngIf="isOwnCommunity()")
+        cass-community-menu-own
+      div(*ngIf="isOtherCommunity()")
+        cass-community-menu-other
+      .community-page
+        .community-page-content(#content, (scroll)="emitScroll($event)")
+          router-outlet

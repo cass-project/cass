@@ -28,16 +28,6 @@ export class CommunityResolve implements Resolve<CommunityExtendedEntity>
         return false;
     }
 
-    public loadCurrentProfile() {
-        return new Observable<GetCommunityBySIDResponse200>(observer => {
-            observer.next({
-                success: true,
-                entity: this.session.getCurrentProfile().entity
-            });
-            observer.complete();
-        });
-    }
-
     public loadCommunityById(id: number) {
         return this.api.getCommunityById(id);
     }
