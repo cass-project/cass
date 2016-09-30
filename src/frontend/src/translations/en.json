@@ -39,5 +39,6 @@
   "cass.module.header.filter.title": "Filters",
   "cass.module.theme.children": "Subheadings",
   "back": "Back",
-  "profile.profile.header.change-cover": "Change-Cover"
+  "profile.profile.header.change-cover": "Change-Cover",
+  "themes": "Themes"
 }

@@ -15,7 +15,6 @@ export class ThemePanel
     @Input('root') root: Theme;
     @Output('change') changeEvent: EventEmitter<Theme> = new EventEmitter<Theme>();
 
-    private path: Theme[] = [];
     private selected: Theme;
 
     constructor(
@@ -24,7 +23,6 @@ export class ThemePanel
 
     ngOnInit() {
         this.selected = this.root;
-        this.generatePath();
     }
 
     go(theme: Theme) {
@@ -34,40 +32,30 @@ export class ThemePanel
 
         if(theme.children !== undefined && theme.children.length > 0) {
             this.root = theme;
-            this.generatePath();
         }
     }
 
-    back(theme: Theme) {
-        if(this.path.length > 1) {
-            this.root = this.path.pop();
+    home() {
+        this.go(this.service.getRoot());
+    }
+
+    back() {
+        if(this.isBackAvailable()) {
+            this.root = this.service.findById(this.root.parent_id);
             this.changeEvent.emit(this.root);
             this.selected = this.root;
-            this.generatePath();
         }
+    }
+
+    isAtHome() {
+        return this.root === this.service.getRoot();
     }
 
     isBackAvailable() {
-        return this.path.length > 1;
+        return !! this.root.parent_id;
     }
 
     isSelected(compare: Theme): boolean {
         return this.selected === compare;
-    }
-
-    private generatePath() {
-        if(this.root === undefined) {
-            this.root = this.service.getRoot();
-        }
-
-        this.path = [];
-        this.path.push(this.root);
-
-        let root = this.root;
-
-        while(root.parent_id !== null) {
-            this.path.push(this.service.findById(root.parent_id));
-            root = this.service.findById(root.parent_id);
-        }
     }
 }

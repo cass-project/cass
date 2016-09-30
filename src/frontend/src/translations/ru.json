@@ -39,5 +39,6 @@
   "cass.module.header.filter.title": "Фильтры",
   "cass.module.theme.children": "Подрубрики",
   "back": "Назад",
-  "profile.profile.header.change-cover": "Сменить подложку"
+  "profile.profile.header.change-cover": "Сменить подложку",
+  "themes": "Тематики"
 }

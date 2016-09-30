@@ -1,0 +1,33 @@
+@import "./../../../../../../../styles/globals.scss";
+
+div.component-post-card-feed {
+  .post-card {
+    @include card(1);
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: white;
+    width: 550px;
+
+    .card-header {
+      margin-top: 8px;
+      margin-bottom: 15px;
+    }
+
+    .content-container {
+      padding: 20px 13px;
+      cursor: text;
+      user-select: text;
+      -moz-user-select: text;
+      -webkit-user-select: text;
+      -ms-user-select: text;
+
+      p {
+        font-family: $FONT_FAMILY;
+        font-size: 16px;
+        font-weight: 400;
+        color: black;
+        line-height: 20px;
+      }
+    }
+  }
+}

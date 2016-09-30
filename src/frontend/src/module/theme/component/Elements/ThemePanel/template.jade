@@ -1,7 +1,11 @@
 div.component.component-theme-panel
-  div.yoozer-left-menu(*ngIf="isBackAvailable()")
+  div.yoozer-left-menu
     ul.yoozer-left-menu-list.themes-list
       li.yoozer-left-menu-item
+        a.theme-path-item(hreg="javascript:void(0)", (click)="home()", [ngClass]="{ active: isAtHome() }")
+          i.fa.fa-home
+          span.title {{ 'themes' | translate }}
+      li.yoozer-left-menu-item(*ngIf="isBackAvailable()")
         a.theme-path-item(href="javascript:void(0)", (click)="back()")
           i.fa.fa-backward
           span.title {{ 'back' | translate }}

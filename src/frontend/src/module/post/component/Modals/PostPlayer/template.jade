@@ -1,0 +1,19 @@
+div.component.component-post-player
+  div(*ngIf="service.isOpened()")
+    cass-modal
+      cass-modal-box(width="550px")
+        .post-card
+          .card-header
+            cass-profile-card-header([profile]="getProfile()", [time]="getPostDateCreatedOn()")
+            .card-controls(*ngIf='isOwnPost()')
+              button(class="form-button form-button-remove")
+                i(class='fa fa-pencil', aria-hidden='true')
+              button(*ngIf="status.notLoading()" class="form-button form-button-remove", (click)='deletePost()')
+                i(class='fa fa-times', aria-hidden='true')
+              button(*ngIf="status" class="form-button form-button-remove" disabled)
+                i(class="fa fa-spinner fa-pulse fa-fw", aria-hidden='true')
+          .card-content
+            .content-container(*ngIf="hasContent()")
+              p {{ getContent() }}
+            .attachment-container(*ngIf="hasAttachment()")
+              cass-post-attachment([attachment]="getAttachment()")

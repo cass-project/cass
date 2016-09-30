@@ -1,24 +1,25 @@
-import {Component, Input} from "@angular/core";
+import {Component, EventEmitter} from "@angular/core";
 
-import {PostEntity} from "../../../definitions/entity/Post";
-import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
-import {Session} from "../../../../session/Session";
-import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
-import {PostCardFeed} from "./view-modes/PostCardFeed/index";
-import {PostCardGrid} from "./view-modes/PostCardGrid/index";
-import {PostCardListItem} from "./view-modes/PostCardListItem/index";
+import {Input, Output} from "@angular/core/src/metadata/directives";
+import {PostEntity} from "../../../../../definitions/entity/Post";
+import {ViewOptionValue} from "../../../../../../feed/service/FeedService/options/ViewOption";
+import {PostCard} from "../../index";
+import {Session} from "../../../../../../session/Session";
+import {ProfileEntity} from "../../../../../../profile/definitions/entity/Profile";
 
 @Component({
+    selector: 'cass-post-card-feed',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-post-card'})
-
-export class PostCard
+    ]
+})
+export class PostCardFeed
 {
     @Input('post') post: PostEntity;
     @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Input('content-player-enabled') contentPlayerEnabled: boolean = false;
+    @Output('go') goEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
     private dateCreatedOn: Date;
 
@@ -63,15 +64,12 @@ export class PostCard
     hasAttachment(): boolean {
         return this.post.attachments.length > 0;
     }
-    
+
     getAttachment() {
         return this.post.attachments[0];
     }
-}
 
-export const POST_CARD_DIRECTIVES = [
-    PostCard,
-    PostCardFeed,
-    PostCardGrid,
-    PostCardListItem,
-];
+    go() {
+        this.goEvent.emit(this.post);
+    }
+}

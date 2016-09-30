@@ -1,6 +1,8 @@
 @import "./../../../../../styles/globals";
 
 div.component-profile-header {
+  @include card(1);
+
   div.sticky {
     background-color: #000;
     width: 100%;
@@ -10,8 +12,6 @@ div.component-profile-header {
     position: relative;
 
     div.backdrop {
-      @include card(2);
-
       position: absolute;
       top: 0; height: 100%;
       left: 0; width: 100%;
@@ -24,8 +24,6 @@ div.component-profile-header {
     }
 
     div.profile-header {
-      @include card(1);
-
       position: absolute;
       bottom: 0; height: 100px;
       left: 0; width: 100%;
