@@ -4,7 +4,6 @@ Post_Request_CreatePost:
     - post_type
     - profile_id
     - collection_id
-    - force_theme_id
     - content
     - attachments
   properties:
