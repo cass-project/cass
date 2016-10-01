@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 
-import {ContentPlayerService} from "../../module/player/service/ContentPlayerService";
 import {UIService} from "../../module/ui/service/ui";
+import {ContentPlayerService} from "../../module/player/service/ContentPlayerService/service";
 
 @Component({
     selector: 'cass-frontend-app',
@@ -19,7 +19,8 @@ export class App
     ) {}
 
     isPlayerEnabled(): boolean {
-        return this.player.isEnabled();
+        return this.player.shouldBeVisible()
+            && this.player.isEnabled();
     }
 
     static version(): string {

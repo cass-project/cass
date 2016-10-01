@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 
 import {ViewOptionService} from "../../../../public/component/Options/ViewOption/service";
-import {ContentPlayerService} from "../../../../player/service/ContentPlayerService";
+import {ContentPlayerService} from "../../../../player/service/ContentPlayerService/service";
 import {UINavigationObservable} from "../../../service/navigation";
 
 @Component({

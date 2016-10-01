@@ -5,7 +5,7 @@ import {AttachmentEntity} from "../../../../../definitions/entity/AttachmentEnti
 import {ViewOptionValue} from "../../../../../../feed/service/FeedService/options/ViewOption";
 import {AttachmentYoutubeHelper} from "../../helper";
 import {YoutubeAttachmentMetadata} from "../../../../../definitions/entity/metadata/YoutubeAttachmentMetadata";
-import {ContentPlayerService} from "../../../../../../player/service/ContentPlayerService";
+import {ContentPlayerService} from "../../../../../../player/service/ContentPlayerService/service";
 import {AttachmentYoutubeNotifier} from "../../notify";
 import {AttachmentWebmNotifier} from "../../../AttachmentWebm/notify";
 

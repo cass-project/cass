@@ -1,0 +1,7 @@
+div.component.component-content-player-playlist-item-youtube
+  div.playlist-item
+    div.preview
+      div.image(style="background-image: url(' {{ getPreview() }}')")
+    div.about
+      h1 {{ getTitle() }}
+      h2 {{ getDate() }}

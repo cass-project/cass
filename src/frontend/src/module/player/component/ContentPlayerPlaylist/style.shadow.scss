@@ -1,0 +1,8 @@
+@import "./../../../../styles/globals.scss";
+
+div.component-content-player-playlist {
+  width: $CASS_CONTENT_PLAYER_PLAYLIST_WIDTH;
+  background-color: material-color("grey", "800");
+  height: 100%;
+  overflow: auto;
+}

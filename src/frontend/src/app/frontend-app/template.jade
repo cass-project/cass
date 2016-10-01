@@ -8,9 +8,10 @@ main#cassAppContainer.cass-app-container.component.component-frontend-app([ngCla
       cass-profile
       cass-community
       cass-post
+    .content-player-area(*ngIf="player.isEnabled() && player.shouldBeVisible()")
+      cass-content-player
     .header(*ngIf="ui.panels.header.isEnabled()")
       cass-header
-    .content-player-area(*ngIf="player.shouldBeVisible()")
     .content-area
       .sidebar
         cass-sidebar

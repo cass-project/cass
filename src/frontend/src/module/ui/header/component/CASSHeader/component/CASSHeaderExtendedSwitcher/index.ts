@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {UIPanelControl, UIPanelControlExtended} from "../../../../../service/ui";
+import {UIPanelControlExtended} from "../../../../../service/ui";
 
 @Component({
     selector: 'cass-header-switcher-extended',

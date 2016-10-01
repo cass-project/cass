@@ -1,0 +1,10 @@
+div.component.component-content-player-playlist
+  div.flexbox-container
+    div.top
+      ul.playlist-items
+        li(*ngFor="let attachment of playlist.getPlaylist()")
+          div(*ngIf="isItem('webm', attachment)")
+            cass-content-player-playlist-item-webm([attachment]="attachment", [is-current]="isCurrent(attachment)")
+          div(*ngIf="isItem('youtube', attachment)")
+            cass-content-player-playlist-item-youtube([attachment]="attachment", [is-current]="isCurrent(attachment)")
+    div.bottom

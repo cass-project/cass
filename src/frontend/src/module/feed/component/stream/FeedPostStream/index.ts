@@ -1,10 +1,12 @@
-import {Component} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {Subscription} from "rxjs";
 
 import {FeedService} from "../../../service/FeedService/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
 import {PostIndexedEntity, PostEntity} from "../../../../post/definitions/entity/Post";
-import {ContentPlayerService} from "../../../../player/service/ContentPlayerService";
+import {ContentPlayerService} from "../../../../player/service/ContentPlayerService/service";
 import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
+import {PostPlayerService} from "../../../../post/component/Modals/PostPlayer/service";
 
 @Component({
     selector: 'cass-feed-post-stream',
@@ -13,13 +15,38 @@ import {AttachmentEntity} from "../../../../attachment/definitions/entity/Attach
         require('./style.shadow.scss')
     ]
 })
-export class FeedPostStream
+export class FeedPostStream implements OnDestroy, OnInit
 {
+    private subscription: Subscription;
+
     constructor(
         private feed: FeedService<PostIndexedEntity>,
         private contentPlayer: ContentPlayerService,
+        private postPlayer: PostPlayerService,
         private options: FeedOptionsService
     ) {}
+
+    ngOnInit() {
+        this.subscription = this.feed.observable.subscribe(entities => {
+            entities.forEach(entity => {
+                if(entity.attachments && entity.attachments.length > 0) {
+                    for(let attachment of entity.attachments) {
+                        if(this.contentPlayer.isSupported(attachment)) {
+                            this.contentPlayer.playlist.push(attachment);
+                        }
+                    }
+                }
+            });
+        })
+    }
+
+    ngOnDestroy() {
+        if(! this.contentPlayer.shouldBeVisible()) {
+            this.contentPlayer.playlist.empty();
+        }
+
+        this.subscription.unsubscribe();
+    }
     
     getViewOption() {
         return this.options.view.current;
@@ -34,10 +61,10 @@ export class FeedPostStream
     }
 
     openPost(post: PostEntity) {
-        console.log('open post', post);
+        this.postPlayer.openPost(post);
     }
 
     openAttachment(attachment: AttachmentEntity<any>) {
-        console.log('open attachment', attachment);
+        this.contentPlayer.open(attachment);
     }
 }

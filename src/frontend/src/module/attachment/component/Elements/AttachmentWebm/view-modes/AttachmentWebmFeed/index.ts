@@ -6,7 +6,7 @@ import {ViewOptionValue} from "../../../../../../feed/service/FeedService/option
 import {AttachmentWebmHelper} from "../../helper";
 import {AttachmentWebmNotifier} from "../../notify";
 import {AttachmentYoutubeNotifier} from "../../../AttachmentYouTube/notify";
-import {ContentPlayerService} from "../../../../../../player/service/ContentPlayerService";
+import {ContentPlayerService} from "../../../../../../player/service/ContentPlayerService/service";
 import {Subscription} from "rxjs";
 
 @Component({

@@ -7,6 +7,7 @@ import {LoadingManager} from "../../../common/classes/LoadingStatus";
 import {FeedRequest} from "../../definitions/request/FeedRequest";
 import {FeedCriteriaService} from "../FeedCriteriaService";
 import {FeedEntity} from "./entity";
+import {Observable, Observer} from "rxjs";
 
 @Injectable()
 export class FeedService<T extends FeedEntity>
@@ -18,10 +19,17 @@ export class FeedService<T extends FeedEntity>
 
     public stream: Stream<T>;
     public source: Source;
+
+    public observable: Observable<T[]>;
+    private observer: Observer<T[]>;
     
     constructor(
         private criteria: FeedCriteriaService
-    ) {}
+    ) {
+        this.observable = Observable.create(observer => {
+            this.observer = observer;
+        }).publish().refCount();
+    }
 
     public provide(source: Source, stream: Stream<T>) {
         this.source = source;
@@ -63,9 +71,12 @@ export class FeedService<T extends FeedEntity>
                 }
 
                 this.stream.replace(<any>response.entities);
+
                 if(response.entities.length > 1){
                     this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
                 }
+
+                this.observer.next(<any>response.entities);
 
                 status.is = false;
             },

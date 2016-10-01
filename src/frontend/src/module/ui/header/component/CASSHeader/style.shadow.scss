@@ -39,7 +39,8 @@ div.component-cass-header {
   }
 
   div.section-right-sidebar {
-    width: 73px;
+    flex-shrink: 0;
+    flex-basis: $CASS_VIEW_MODES_WIDTH;
     border-left: 1px solid lighten(#4E5F81, 10%);
   }
 
