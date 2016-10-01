@@ -1,6 +1,6 @@
-import {AttachmentLinkYouTube} from "./index";
 import {AttachmentEntity} from "../../../definitions/entity/AttachmentEntity";
 import {YoutubeAttachmentMetadata} from "../../../definitions/entity/metadata/YoutubeAttachmentMetadata";
+import {AttachmentYouTube} from "./index";
 
 export class AttachmentYoutubeHelper
 {
@@ -46,7 +46,7 @@ export class AttachmentYoutubeHelper
             }
         }
 
-        return AttachmentLinkYouTube.DEFAULT_ORIG_WIDTH;
+        return AttachmentYouTube.DEFAULT_ORIG_WIDTH;
     }
 
     getOrigHeight(): number {
@@ -60,7 +60,7 @@ export class AttachmentYoutubeHelper
             }
         }
 
-        return AttachmentLinkYouTube.DEFAULT_ORIG_HEIGHT;
+        return AttachmentYouTube.DEFAULT_ORIG_HEIGHT;
     }
 
     getPreviewImageURL(): string {

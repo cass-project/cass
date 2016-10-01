@@ -8,7 +8,7 @@ import {AttachmentPageGrid} from "./view-modes/AttachmentPageGrid/index";
 import {AttachmentPageList} from "./view-modes/AttachmentPageList/index";
 
 @Component({
-    selector: 'cass-post-attachment-link-page',
+    selector: 'cass-attachment-page',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')

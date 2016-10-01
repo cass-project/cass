@@ -8,7 +8,7 @@ import {AttachmentYouTubeGrid} from "./view-modes/AttachmentYoutubeGrid/index";
 import {AttachmentYouTubeList} from "./view-modes/AttachmentYouTubeList/index";
 
 @Component({
-    selector: 'cass-attachment-link-youtube',
+    selector: 'cass-attachment-youtube',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
