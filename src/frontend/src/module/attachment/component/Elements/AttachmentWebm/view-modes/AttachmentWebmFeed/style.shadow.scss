@@ -1,4 +1,35 @@
 div.component-attachment-webm-feed {
+  .preview-image-container {
+    position: relative;
+    cursor: pointer;
+    color: #fff;
+
+    .play-button-container {
+      font-size: 78px;
+      color: material-color("grey", "100");
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      opacity: 0.8;
+      justify-content: center;
+      text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
+
+      &:hover {
+        color: white;
+        opacity: 0.9;
+      }
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
   .video-container {
     video {
       width: 100% !important;

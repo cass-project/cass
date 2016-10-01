@@ -6,6 +6,8 @@ import {ATTACHMENT_LINK_DIRECTIVES} from "./component/Elements/AttachmentLink/in
 import {ATTACHMENT_WEBM_DIRECTIVES} from "./component/Elements/AttachmentWebm/index";
 import {ATTACHMENT_YOUTUBE_DIRECTIVES} from "./component/Elements/AttachmentYouTube/index";
 import {ATTACHMENT_PAGE_DIRECTIVES} from "./component/Elements/AttachmentPage/index";
+import {AttachmentWebmNotifier} from "./component/Elements/AttachmentWebm/notify";
+import {AttachmentYoutubeNotifier} from "./component/Elements/AttachmentYouTube/notify";
 
 export const CASSAttachmentModule = {
     declarations: [
@@ -19,5 +21,7 @@ export const CASSAttachmentModule = {
     ],
     providers: [
         AttachmentRESTService,
+        AttachmentWebmNotifier,
+        AttachmentYoutubeNotifier,
     ]
 };

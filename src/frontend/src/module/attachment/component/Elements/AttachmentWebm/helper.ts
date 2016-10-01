@@ -3,6 +3,8 @@ import {AttachmentEntity} from "../../../definitions/entity/AttachmentEntity";
 
 export class AttachmentWebmHelper
 {
+    public enabled: boolean = false;
+
     constructor(
         public attachment: AttachmentEntity<WebmAttachmentMetadata>
     ) {}
@@ -17,5 +19,13 @@ export class AttachmentWebmHelper
 
     getCover(): string {
         return this.attachment.link.metadata.preview.public;
+    }
+
+    rewindAndStop() {
+        this.enabled = false;
+    }
+
+    rewindAndStart() {
+        this.enabled = true;
     }
 }

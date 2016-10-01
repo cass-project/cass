@@ -4,6 +4,8 @@ article.component.component-feed-post-stream
       cass-post-list(
         [posts]="feed.stream.all()",
         [view-mode]="getViewOption()",
+        (open-post)="openPost($event)",
+        (open-attachment)="openAttachment($event)"
       )
     .loading-indicator
       cass-loading-indicator(*ngIf="feed.isLoading()")
