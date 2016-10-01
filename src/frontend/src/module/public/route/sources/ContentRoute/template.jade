@@ -10,5 +10,8 @@ article.component.component-public-content-route
           div.screen-themes(*ngIf="swipe.isAtThemeScreen()")
             cass-theme-browser([root]="getThemeRoot()", (change)="goTheme($event)")
           div.screen-stream(*ngIf="swipe.isAtContentScreen()")
+            .post-form(*ngIf='canPost()')
+              .post-form-container
+                cass-post-form([collection]="main_collection", [post-type] = "postType", (success) = "unshiftEntity($event)")
             cass-public-nothing-found(*ngIf="service.isNothingFound()")
             cass-feed-post-stream
