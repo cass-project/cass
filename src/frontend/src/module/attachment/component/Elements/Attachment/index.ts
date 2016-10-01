@@ -13,7 +13,7 @@ import {ViewOptionValue} from "../../../../feed/service/FeedService/options/View
 export class Attachment
 {
     @Input('attachment') attachment: AttachmentEntity<AttachmentMetadata>;
-    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
+    @Input('view-mode') viewMode: ViewOptionValue;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<any>> = new EventEmitter<AttachmentEntity<any>>();
 
     is(resource: string) {

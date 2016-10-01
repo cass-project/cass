@@ -14,7 +14,7 @@ import {AttachmentErrorList} from "./view-modes/AttachmentErrorList/index";
 })
 export class AttachmentError
 {
-    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
+    @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
 
     isViewMode(viewMode: ViewOptionValue): boolean {
         return viewMode === this.viewMode;

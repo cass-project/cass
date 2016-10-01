@@ -16,6 +16,8 @@ export class ContentPlayerNotifier
     }
 
     notifyAppAboutNewOpenedAttachment(attachment: AttachmentEntity<any>) {
-        this.playObserver.next(attachment);
+        if(this.playObserver) {
+            this.playObserver.next(attachment);
+        }
     }
 }

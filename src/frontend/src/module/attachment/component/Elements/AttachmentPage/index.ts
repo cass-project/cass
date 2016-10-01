@@ -17,7 +17,7 @@ import {AttachmentPageList} from "./view-modes/AttachmentPageList/index";
 export class AttachmentPage
 {
     @Input('attachment') attachment: AttachmentEntity<PageAttachmentMetadata>;
-    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
+    @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<PageAttachmentMetadata>> = new EventEmitter<AttachmentEntity<PageAttachmentMetadata>>();
 
     isViewMode(viewMode: ViewOptionValue): boolean {

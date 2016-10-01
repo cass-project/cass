@@ -1,1 +1,5 @@
-div.component.component-attachment-webm-grid
+div.component.component-attachment-webm-grid((click)="open(helper.attachment)")
+  div.attachment-type-icon
+    div.fa-icon-container
+      i.fa.fa-film
+  div.cover(style="background-image: url('{{ helper.getCover() }}')")

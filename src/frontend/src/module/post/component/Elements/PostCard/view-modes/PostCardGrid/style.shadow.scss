@@ -5,5 +5,24 @@
 }
 
 div.component-post-card-grid {
+  width: 100%;
+  height: 100%;
 
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+    .profile-image-container {
+      display: inline-block;
+      width: 64px;
+      height: 64px;
+      margin-top: 20px;
+    }
+  }
+
+  .attachment-container {
+    width: 100%;
+    height: 100%;
+  }
 }

@@ -17,7 +17,7 @@ import {AttachmentWebmList} from "./view-modes/AttachmentWebmList/index";
 export class AttachmentWebm
 {
     @Input('attachment') attachment: AttachmentEntity<WebmAttachmentMetadata>;
-    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
+    @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<WebmAttachmentMetadata>> = new EventEmitter<AttachmentEntity<WebmAttachmentMetadata>>();
 
     isViewMode(viewMode: ViewOptionValue): boolean {

@@ -1,3 +1,41 @@
 div.component-attachment-page-grid {
+  position: relative;
+  width: 100%;
+  height: 113px;
 
+  div.attachment-type-icon {
+    position: absolute;
+    top: 0; width: 100%;
+    bottom: 0; height: 100%;
+    text-align: center;
+
+    color: #fff;
+    border-radius: 3px;
+
+    div.fa-icon-container {
+      margin-top: 48px;
+
+      padding: 5px;
+      background-color: rgba(0,0,0,0.3);
+      border-radius: 3px;
+      display: inline-block;
+
+      i.fa {
+        font-size: 24px;
+      }
+    }
+  }
+
+  div.cover {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &:hover {
+    div.attachment-type-icon {
+      background-color: rgba(255,255,255,0.3);
+    }
+  }
 }

@@ -1,7 +1,7 @@
 div.component.component-post-player-card
   .post-card
     .attachment-container(*ngIf="helper.hasAttachment()")
-      cass-attachment([attachment]="helper.getAttachment()", (open)="helper.openAttachment($event)")
+      cass-attachment([attachment]="helper.getAttachment()", (open)="helper.openAttachment($event)", view-mode="feed")
     .post-about
       .header
         cass-profile-card-header([profile]="helper.getProfile()", [time]="helper.getPostDateCreatedOn()")

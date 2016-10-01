@@ -1,3 +1,11 @@
-div.component.component-attachment-link-grid {
+div.component-attachment-link-grid {
+  background-color: #f0f0f0;
+  height: 113px;
 
+  .icon {
+    text-align: center;
+    color: #999;
+    line-height: 113px;
+    font-size: 32px;
+  }
 }

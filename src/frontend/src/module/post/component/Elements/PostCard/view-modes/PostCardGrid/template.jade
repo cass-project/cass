@@ -1,1 +1,6 @@
 div.component.component-post-card-grid.x-feed-entity
+  .profile-image(*ngIf="! helper.hasAttachment()", (click)="openPost(post)")
+    .profile-image-container
+      cass-profile-image([url]="getProfileImageURL()")
+  .attachment-container(*ngIf="helper.hasAttachment()")
+    cass-attachment([attachment]="helper.getAttachment()", (open)="helper.openAttachment($event)", view-mode="grid")

@@ -66,7 +66,7 @@ export class FeedPostStream implements OnDestroy, OnInit
     }
 
     openAttachment(event: PostListOpenAttachmentEvent) {
-        if(this.contentPlayer.isSupported(event.attachment)) {
+        if(this.contentPlayer.isEnabled() && this.contentPlayer.isSupported(event.attachment)) {
             this.contentPlayer.open(event.attachment);
 
             return false;

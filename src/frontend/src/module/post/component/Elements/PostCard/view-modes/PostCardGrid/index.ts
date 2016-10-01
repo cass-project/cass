@@ -5,6 +5,7 @@ import {PostCardHelper} from "../../helper";
 import {PostEntity} from "../../../../../definitions/entity/Post";
 import {ViewOptionValue} from "../../../../../../feed/service/FeedService/options/ViewOption";
 import {AttachmentEntity} from "../../../../../../attachment/definitions/entity/AttachmentEntity";
+import {QueryTarget, queryImage} from "../../../../../../avatar/functions/query";
 
 @Component({
     selector: 'cass-post-card-grid',
@@ -34,5 +35,13 @@ export class PostCardGrid implements OnChanges
             this.openPostEvent,
             this.openAttachmentEvent
         );
+    }
+
+    getProfileImageURL(): string {
+        return queryImage(QueryTarget.Avatar, this.post.profile.image).public_path;
+    }
+
+    openPost(post: PostEntity) {
+        this.openPostEvent.emit(post);
     }
 }

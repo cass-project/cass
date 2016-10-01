@@ -17,7 +17,7 @@ import {AttachmentLinkList} from "./view-modes/AttachmentLinkList/index";
 export class AttachmentLink
 {
     @Input('attachment') attachment: AttachmentEntity<UnknownAttachmentMetadata>;
-    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
+    @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<UnknownAttachmentMetadata>> = new EventEmitter<AttachmentEntity<UnknownAttachmentMetadata>>();
 
     isViewMode(viewMode: ViewOptionValue): boolean {
