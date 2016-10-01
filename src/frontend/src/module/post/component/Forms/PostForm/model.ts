@@ -1,5 +1,6 @@
 import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
 import {CreatePostRequest} from "../../../definitions/paths/create";
+import {TextParser} from "../../../../common/component/TextParser/index";
 
 export class PostFormModel
 {
