@@ -1,4 +1,6 @@
 import {Injectable} from "@angular/core";
+import {PostEntity} from "../../post/definitions/entity/Post";
+import {AttachmentEntity} from "../../attachment/definitions/entity/AttachmentEntity";
 
 @Injectable()
 export class ContentPlayerService
@@ -27,4 +29,14 @@ export class ContentPlayerService
     shouldBeVisible(): boolean {
         return this.visible;
     }
+
+    isSupported(playItem: PlayItem): boolean {
+        return false;
+    }
+}
+
+export interface PlayItem
+{
+    post: PostEntity;
+    attachment: AttachmentEntity<any>;
 }

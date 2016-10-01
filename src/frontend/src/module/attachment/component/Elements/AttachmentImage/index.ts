@@ -17,8 +17,6 @@ import {AttachmentImageList} from "./view-modes/AttachmentImageList/index";
 export class AttachmentImage
 {
     @Input('attachment') attachment: AttachmentEntity<ImageAttachmentMetadata>;
-
-    @Input('attachment') attachment: AttachmentEntity<ImageAttachmentMetadata>;
     @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<ImageAttachmentMetadata>> = new EventEmitter<AttachmentEntity<ImageAttachmentMetadata>>();
 

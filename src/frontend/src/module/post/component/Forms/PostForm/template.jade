@@ -25,7 +25,7 @@ article.component.component-post-form([ngClass]="{ 'component-post-form--extende
             span Разместить
     .post-form-section(*ngIf="hasAttachments()")
       .attachment(*ngIf="model.getAttachment()")
-        cass-post-attachment([attachment]="model.getAttachment()")
+        cass-attachment([attachment]="model.getAttachment()", view-mode="feed")
       .attachment-actions
         .attachment-actions-section
         .attachment-actions-section

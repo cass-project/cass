@@ -21,9 +21,7 @@ export class PostForm
 
     @Input('post-type') postType: PostTypeEntity;
     @Input('collection') collection: CollectionEntity;
-    
     @Output('success') successEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
-
     @ViewChild('contentTextArea') contentTextArea: ElementRef;
 
     private status: LoadingManager = new LoadingManager();

@@ -15,7 +15,7 @@ import {enableProdMode} from '@angular/core';
 import {AppModule} from "./app.module";
 import {FrontlineService, frontline} from "../../module/frontline/service/FrontlineService";
 
-enableProdMode();
+// enableProdMode();
 
 document.addEventListener('DOMContentLoaded', () => {
     frontline(session => {

@@ -1,9 +1,0 @@
-div.component.component-post-card-feed
-  .post-card
-    .card-header
-      cass-profile-card-header([profile]="getProfile()", [time]="getPostDateCreatedOn()")
-    .card-content
-      .content-container(*ngIf="hasContent()")
-        p {{ getContent() }}
-      .attachment-container(*ngIf="hasAttachment()")
-        cass-post-attachment([attachment]="getAttachment()", (open)="open()")
