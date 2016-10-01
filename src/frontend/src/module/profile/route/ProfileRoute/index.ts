@@ -7,13 +7,6 @@ import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
 import {ProfileRouteService} from "./service";
 import {UINavigationObservable} from "../../../ui/service/navigation";
-import {UIService} from "../../../ui/service/ui";
-import {Theme} from "../../../theme/definitions/entity/Theme";
-import {ThemeService} from "../../../theme/service/ThemeService";
-import {SwipeService} from "../../../swipe/service/SwipeService";
-import {FeedService} from "../../../feed/service/FeedService/index";
-import {PostIndexedEntity} from "../../../post/definitions/entity/Post";
-import {PublicService} from "../../../public/service";
 
 @Component({
     template: require('./template.jade'),
@@ -24,8 +17,6 @@ import {PublicService} from "../../../public/service";
         ProfileRouteService,
         FeedCriteriaService,
         FeedOptionsService,
-        FeedService,
-        PublicService
     ]
 })
 
@@ -39,12 +30,7 @@ export class ProfileRoute implements OnInit, OnDestroy
     constructor(
         private route: ActivatedRoute,
         private service: ProfileRouteService,
-        private navigator: UINavigationObservable,
-        private ui: UIService,
-        private criteria: FeedCriteriaService,
-        private theme: ThemeService,
-        private swipe: SwipeService,
-        private feedService: FeedService<PostIndexedEntity>
+        private navigator: UINavigationObservable
     ) {}
     
     ngOnInit() {
@@ -70,47 +56,6 @@ export class ProfileRoute implements OnInit, OnDestroy
         this.subscriptions.forEach((subscription) => {
             subscription.unsubscribe();
         });
-    }
-
-    getThemeRoot(): Theme {
-        let criteria = this.criteria.criteria.theme;
-
-        if(criteria.enabled) {
-            return this.theme.findById(criteria.params.id);
-        }else{
-            return this.theme.getRoot();
-        }
-    }
-
-    getThemePanelRoot(): Theme {
-        let criteria = this.criteria.criteria.theme;
-
-        if(criteria.enabled) {
-            let current = this.theme.findById(criteria.params.id);
-
-            if(current.children !== undefined && current.children.length > 0) {
-                return current;
-            }else if(current.parent_id){
-                return this.theme.findById(current.parent_id);
-            }else{
-                return this.theme.getRoot();
-            }
-        }else{
-            return this.theme.getRoot();
-        }
-    }
-
-    goTheme(theme: Theme) {
-        let criteria = this.criteria.criteria.theme;
-
-        criteria.enabled = true;
-        criteria.params.id = theme.id;
-
-        if(theme.children.length === 0) {
-            this.swipe.switchToContent();
-        }
-
-        this.feedService.update();
     }
 
     isOwnProfile() {
