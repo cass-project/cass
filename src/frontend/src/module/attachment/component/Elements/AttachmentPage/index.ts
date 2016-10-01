@@ -20,6 +20,10 @@ export class AttachmentPage
     @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<PageAttachmentMetadata>> = new EventEmitter<AttachmentEntity<PageAttachmentMetadata>>();
 
+    isViewMode(viewMode: ViewOptionValue): boolean {
+        return viewMode === this.viewMode;
+    }
+
     open(attachment: AttachmentEntity<PageAttachmentMetadata>): boolean {
         this.openEvent.emit(attachment);
 

@@ -20,6 +20,10 @@ export class AttachmentWebm
     @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<WebmAttachmentMetadata>> = new EventEmitter<AttachmentEntity<WebmAttachmentMetadata>>();
 
+    isViewMode(viewMode: ViewOptionValue): boolean {
+        return viewMode === this.viewMode;
+    }
+
     open(attachment: AttachmentEntity<WebmAttachmentMetadata>): boolean {
         this.openEvent.emit(attachment);
 

@@ -23,6 +23,10 @@ export class AttachmentYouTube
     @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Grid;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<YoutubeAttachmentMetadata>> = new EventEmitter<AttachmentEntity<YoutubeAttachmentMetadata>>();
 
+    isViewMode(viewMode: ViewOptionValue): boolean {
+        return viewMode === this.viewMode;
+    }
+
     open(attachment: AttachmentEntity<YoutubeAttachmentMetadata>): boolean {
         this.openEvent.emit(attachment);
 

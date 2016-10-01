@@ -1,7 +1,7 @@
 import {Attachment} from "./component/Elements/Attachment/index";
 import {AttachmentError} from "./component/Elements/AttachmentError/index";
 import {AttachmentLinkImage} from "./component/Elements/AttachmentLinkImage/index";
-import {AttachmentLinkUnknown} from "./component/Elements/AttachmentLinkUnknown/index";
+import {ATTACHMENT_LINK_DIRECTIVES} from "./component/Elements/AttachmentLink/index";
 import {ATTACHMENT_WEBM_DIRECTIVES} from "./component/Elements/AttachmentWebm/index";
 import {ATTACHMENT_YOUTUBE_DIRECTIVES} from "./component/Elements/AttachmentYouTube/index";
 import {AttachmentRESTService} from "./service/AttachmentRESTService";
@@ -13,7 +13,7 @@ export const CASSAttachmentModule = {
         AttachmentError,
         AttachmentLinkImage,
         ATTACHMENT_PAGE_DIRECTIVES,
-        AttachmentLinkUnknown,
+        ATTACHMENT_LINK_DIRECTIVES,
         ATTACHMENT_WEBM_DIRECTIVES,
         ATTACHMENT_YOUTUBE_DIRECTIVES,
     ],
