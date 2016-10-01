@@ -1,0 +1,8 @@
+div.component.component-content-player-area-video-webm
+  video(
+    [src]="getURL()",
+    [attr.type]="getType()",
+    controls,
+    [poster]="getCover()",
+    autoplay="1"
+  )

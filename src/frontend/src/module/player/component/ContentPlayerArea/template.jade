@@ -1,0 +1,5 @@
+div.component.component-content-player-area
+  div.video(*ngIf="is('webm')")
+    cass-content-player-area-video-webm([current]="service.playlist.getCurrent()")
+  div.video(*ngIf="is('youtube')")
+    cass-content-player-area-video-youtube([current]="service.playlist.getCurrent()")

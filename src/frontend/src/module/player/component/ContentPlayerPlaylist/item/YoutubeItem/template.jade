@@ -1,5 +1,5 @@
-div.component.component-content-player-playlist-item-youtube
-  div.content-player-playlist-item
+div.component.component-content-player-playlist-item-youtube((click)="play()")
+  div.content-player-playlist-item([ngClass]="{ 'active': isCurrent }")
     div.preview
       div.image(style="background-image: url(' {{ getPreview() }}')")
     div.about

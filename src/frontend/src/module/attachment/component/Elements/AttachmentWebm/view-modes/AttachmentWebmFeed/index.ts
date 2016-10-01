@@ -8,6 +8,7 @@ import {AttachmentWebmNotifier} from "../../notify";
 import {AttachmentYoutubeNotifier} from "../../../AttachmentYouTube/notify";
 import {ContentPlayerService} from "../../../../../../player/service/ContentPlayerService/service";
 import {Subscription} from "rxjs";
+import {ContentPlayerNotifier} from "../../../../../../player/service/ContentPlayerService/notify";
 
 @Component({
     selector: 'cass-attachment-webm-feed',
@@ -27,10 +28,12 @@ export class AttachmentWebmFeed implements OnChanges, OnInit, OnDestroy
 
     private subscriptionY: Subscription;
     private subscriptionW: Subscription;
+    private subscriptionC: Subscription;
 
     constructor(
         private notifyW: AttachmentWebmNotifier,
         private notifyY: AttachmentYoutubeNotifier,
+        private notifyC: ContentPlayerNotifier,
         private contentPlayer: ContentPlayerService
     ) {}
 
@@ -42,6 +45,10 @@ export class AttachmentWebmFeed implements OnChanges, OnInit, OnDestroy
         });
 
         this.subscriptionY = this.notifyY.open.subscribe(attachment => {
+            this.helper.rewindAndStop();
+        });
+
+        this.subscriptionC = this.notifyC.play.subscribe(attachment => {
             this.helper.rewindAndStop();
         })
     }

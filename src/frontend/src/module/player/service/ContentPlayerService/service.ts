@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 
 import {Playlist} from "./playlist";
 import {AttachmentEntity} from "../../../attachment/definitions/entity/AttachmentEntity";
+import {Controls} from "./controls";
 
 @Injectable()
 export class ContentPlayerService
@@ -11,11 +12,12 @@ export class ContentPlayerService
     private enabled: boolean = false;
     private visible: boolean = false;
 
+    public controls: Controls = new Controls(this);
     public playlist: Playlist = new Playlist();
 
     constructor() {
         if(window.localStorage.hasOwnProperty(ContentPlayerService.LOCAL_STORAGE_KEY)) {
-            this.enabled = !! window.localStorage[ContentPlayerService.LOCAL_STORAGE_KEY];
+            this.enabled = window.localStorage[ContentPlayerService.LOCAL_STORAGE_KEY] === "true";
         }
     }
 

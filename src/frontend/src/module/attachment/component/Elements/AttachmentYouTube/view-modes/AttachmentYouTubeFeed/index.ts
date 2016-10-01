@@ -8,6 +8,7 @@ import {YoutubeAttachmentMetadata} from "../../../../../definitions/entity/metad
 import {ContentPlayerService} from "../../../../../../player/service/ContentPlayerService/service";
 import {AttachmentYoutubeNotifier} from "../../notify";
 import {AttachmentWebmNotifier} from "../../../AttachmentWebm/notify";
+import {ContentPlayerNotifier} from "../../../../../../player/service/ContentPlayerService/notify";
 
 @Component({
     selector: 'cass-attachment-youtube-feed',
@@ -23,6 +24,7 @@ export class AttachmentYouTubeFeed implements OnChanges, OnInit, OnDestroy
 
     private subscriptionY: Subscription;
     private subscriptionW: Subscription;
+    private subscriptionC: Subscription;
 
     private viewMode: ViewOptionValue = ViewOptionValue.Feed;
     private helper: AttachmentYoutubeHelper;
@@ -30,6 +32,7 @@ export class AttachmentYouTubeFeed implements OnChanges, OnInit, OnDestroy
     constructor(
         private notifyY: AttachmentYoutubeNotifier,
         private notifyW: AttachmentWebmNotifier,
+        private notifyC: ContentPlayerNotifier,
         private contentPlayer: ContentPlayerService
     ) {}
 
@@ -41,6 +44,10 @@ export class AttachmentYouTubeFeed implements OnChanges, OnInit, OnDestroy
         });
 
         this.subscriptionW = this.notifyW.open.subscribe(attachment => {
+            this.helper.enablePreview();
+        });
+
+        this.subscriptionC = this.notifyC.play.subscribe(attachment => {
             this.helper.enablePreview();
         })
     }

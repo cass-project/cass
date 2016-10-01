@@ -3,12 +3,25 @@
 div.component-content-player {
   width: 100%;
   height: 100%;
-  text-align: center;
 
   div.everything {
     height: 100%;
-    display: inline-block;
-    text-align: left;
-    margin-left: -1 * $CASS_CONTENT_PLAYER_PLAYLIST_WIDTH;
+    display: flex;
+
+    div.left, div.right {
+      width: 100%;
+    }
+
+    div.content-area, div.content-playlist {
+      flex-shrink: 0;
+    }
+
+    div.content-area {
+      width: 960px;
+    }
+
+    div.content-playlist {
+      width: $CASS_CONTENT_PLAYER_PLAYLIST_WIDTH;
+    }
   }
 }
