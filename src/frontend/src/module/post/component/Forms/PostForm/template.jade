@@ -21,8 +21,6 @@ article.component.component-post-form([ngClass]="{ 'component-post-form--extende
           button(type="button", (click)="cancel()").form-text-button
             span Отмена
         .form-section
-          select
-        .form-section
           button(type="submit", [disabled]="! model.isValid()").form-button.form-button-green
             span Разместить
     .post-form-section(*ngIf="hasAttachments()")
