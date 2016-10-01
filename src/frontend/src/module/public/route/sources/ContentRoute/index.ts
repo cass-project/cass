@@ -4,7 +4,7 @@ import {FeedService} from "../../../../feed/service/FeedService/index";
 import {PublicContentSource} from "../../../../feed/service/FeedService/source/public/PublicContentSource";
 import {Stream} from "../../../../feed/service/FeedService/stream";
 import {PublicService} from "../../../service";
-import {PostIndexedEntity} from "../../../../post/definitions/entity/Post";
+import {PostIndexedEntity, PostEntity} from "../../../../post/definitions/entity/Post";
 import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
 import {UIService} from "../../../../ui/service/ui";
@@ -12,6 +12,10 @@ import {UINavigationObservable} from "../../../../ui/service/navigation";
 import {SwipeService} from "../../../../swipe/service/SwipeService";
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {Theme} from "../../../../theme/definitions/entity/Theme";
+import {CollectionEntity} from "../../../../collection/definitions/entity/collection";
+import {PostTypeEntity} from "../../../../post/definitions/entity/PostType";
+import {PostTypeService} from "../../../../post/service/PostTypeService";
+import {Session} from "../../../../session/Session";
 
 @Component({
     template: require('./template.jade'),
@@ -23,14 +27,18 @@ import {Theme} from "../../../../theme/definitions/entity/Theme";
         FeedService,
         PublicContentSource,
         FeedCriteriaService,
-        FeedOptionsService,
+        FeedOptionsService
     ]
 })
 export class ContentRoute implements OnInit
 {
     @ViewChild('content') content: ElementRef;
+    
+    private main_collection: CollectionEntity;
+    private postType: PostTypeEntity;
 
     constructor(
+        private session: Session,
         private catalog: PublicService,
         private service: FeedService<PostIndexedEntity>,
         private source: PublicContentSource,
@@ -38,10 +46,20 @@ export class ContentRoute implements OnInit
         private navigator: UINavigationObservable,
         private swipe: SwipeService,
         private theme: ThemeService,
-        private criteria: FeedCriteriaService
+        private criteria: FeedCriteriaService,
+        private types: PostTypeService,
+        private feed: FeedService<PostEntity>
     ) {
         catalog.source = 'content';
         catalog.injectFeedService(service);
+
+        this.postType = types.getTypeByStringCode('default');
+
+        for(let collection of session.getCurrentProfile().entity.collections) {
+            if (collection.is_main) {
+                this.main_collection = collection;
+            }
+        }
 
         service.provide(source, new Stream<PostIndexedEntity>());
         service.update();
@@ -57,6 +75,10 @@ export class ContentRoute implements OnInit
         });
     }
 
+    unshiftEntity(entity: PostEntity) {
+        this.feed.stream.insertBefore(entity);
+    }
+    
     getThemeRoot(): Theme {
         let criteria = this.criteria.criteria.theme;
 
@@ -96,6 +118,10 @@ export class ContentRoute implements OnInit
         }
 
         this.service.update();
+    }
+
+    canPost(): boolean {
+        return this.session.isSignedIn();
     }
 
     onScroll($event) {

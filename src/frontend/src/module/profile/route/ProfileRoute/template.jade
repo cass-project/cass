@@ -5,6 +5,11 @@ article.component.component-profile-route
         cass-profile-menu-own
       div(*ngIf="isOtherProfile()")
         cass-profile-menu-other
+      div.flexbox-container
+        div.menu(*ngIf="ui.panels.extended.isEnabled()")
+          cass-public-content-menu([is-extended]="ui.panels.extended.isExtended()")
+        div.themes-list(*ngIf="ui.panels.themes.isEnabled()")
+          cass-theme-panel([root]="getThemePanelRoot()", (change) = "goTheme($event)")
     .profile-page
       .profile-page-content(#content, (scroll)="emitScroll($event)")
         router-outlet
