@@ -30,10 +30,22 @@ article.component.component-public-content-route {
           overflow: auto;
         }
       }
+
+      .post-form {
+        display: flex;
+        margin-top: 20px;
+        margin-bottom: 40px;
+
+        .post-form-container {
+          width: 550px;
+          margin: 0 auto;
+        }
+      }
     }
 
     div.screen-themes {
       padding: 3px 10px;
     }
   }
+
 }
