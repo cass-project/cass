@@ -15,9 +15,9 @@ import {AttachmentImageHelper} from "../../helper";
 export class AttachmentImageList implements OnChanges
 {
     @Input('attachment') attachment: AttachmentEntity<ImageAttachmentMetadata>;
-    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<ImageAttachmentMetadata>> = new EventEmitter<AttachmentEntity<ImageAttachmentMetadata>>();
 
+    private viewMode: ViewOptionValue = ViewOptionValue.List;
     private helper: AttachmentImageHelper;
 
     ngOnChanges() {

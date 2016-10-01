@@ -1,7 +1,7 @@
 article.component.component-attachment-link-webm
   div(*ngIf="isViewMode('feed')")
-    cass-attachment-webm-feed([attachment]="attachment", (open)="open($event)", [view-mode]="viewMode")
+    cass-attachment-webm-feed([attachment]="attachment", (open)="open($event)")
   div(*ngIf="isViewMode('grid')")
-    cass-attachment-webm-grid([attachment]="attachment", (open)="open($event)", [view-mode]="viewMode")
+    cass-attachment-webm-grid([attachment]="attachment", (open)="open($event)")
   div(*ngIf="isViewMode('list')")
-    cass-attachment-webm-list([attachment]="attachment", (open)="open($event)", [view-mode]="viewMode")
+    cass-attachment-webm-list([attachment]="attachment", (open)="open($event)")

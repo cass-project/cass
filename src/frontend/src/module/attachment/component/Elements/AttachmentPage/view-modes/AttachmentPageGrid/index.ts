@@ -15,9 +15,9 @@ import {ViewOptionValue} from "../../../../../../feed/service/FeedService/option
 export class AttachmentPageGrid implements OnChanges
 {
     @Input('attachment') attachment: AttachmentEntity<PageAttachmentMetadata>;
-    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<PageAttachmentMetadata>> = new EventEmitter<AttachmentEntity<PageAttachmentMetadata>>();
 
+    private viewMode: ViewOptionValue = ViewOptionValue.Grid;
     private helper: AttachmentLinkPageHelper;
 
     ngOnChanges() {

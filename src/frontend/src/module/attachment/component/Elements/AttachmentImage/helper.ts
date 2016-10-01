@@ -7,6 +7,10 @@ export class AttachmentImageHelper
         public attachment: AttachmentEntity<ImageAttachmentMetadata>
     ) {}
 
+    getPreviewImageURL(): string {
+        return this.attachment.link.metadata.preview;
+    }
+
     getImageURL(): string {
         return this.attachment.link.url;
     }

@@ -33,6 +33,8 @@ final class ImageLinkMetadata implements LinkMetadata
 
     public function toJSON(): array
     {
-        return [];
+        return [
+            'preview' => $this->getURL(),
+        ];
     }
 }

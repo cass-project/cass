@@ -15,9 +15,9 @@ import {ViewOptionValue} from "../../../../../../feed/service/FeedService/option
 export class AttachmentYouTubeGrid implements OnChanges
 {
     @Input('attachment') attachment: AttachmentEntity<YoutubeAttachmentMetadata>;
-    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Grid;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<YoutubeAttachmentMetadata>> = new EventEmitter<AttachmentEntity<YoutubeAttachmentMetadata>>();
 
+    private viewMode: ViewOptionValue = ViewOptionValue.Grid;
     private helper: AttachmentYoutubeHelper;
 
     ngOnChanges() {

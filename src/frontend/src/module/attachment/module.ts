@@ -1,6 +1,6 @@
 import {Attachment} from "./component/Elements/Attachment/index";
 import {AttachmentRESTService} from "./service/AttachmentRESTService";
-import {AttachmentError} from "./component/Elements/AttachmentError/index";
+import {ATTACHMENT_ERROR_DIRECTIVES} from "./component/Elements/AttachmentError/index";
 import {ATTACHMENT_IMAGE_DIRECTIVES} from "./component/Elements/AttachmentImage/index";
 import {ATTACHMENT_LINK_DIRECTIVES} from "./component/Elements/AttachmentLink/index";
 import {ATTACHMENT_WEBM_DIRECTIVES} from "./component/Elements/AttachmentWebm/index";
@@ -10,7 +10,7 @@ import {ATTACHMENT_PAGE_DIRECTIVES} from "./component/Elements/AttachmentPage/in
 export const CASSAttachmentModule = {
     declarations: [
         Attachment,
-        AttachmentError,
+        ATTACHMENT_ERROR_DIRECTIVES,
         ATTACHMENT_IMAGE_DIRECTIVES,
         ATTACHMENT_PAGE_DIRECTIVES,
         ATTACHMENT_LINK_DIRECTIVES,

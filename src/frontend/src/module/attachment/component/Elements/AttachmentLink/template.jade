@@ -1,7 +1,7 @@
 article.component.component-post-attachment-link-unknown
   div(*ngIf="isViewMode('feed')")
-    cass-attachment-link-feed([attachment]="attachment", (open)="open($event)", [view-mode]="viewMode")
+    cass-attachment-link-feed([attachment]="attachment", (open)="open($event)")
   div(*ngIf="isViewMode('grid')")
-    cass-attachment-link-grid([attachment]="attachment", (open)="open($event)", [view-mode]="viewMode")
+    cass-attachment-link-grid([attachment]="attachment", (open)="open($event)")
   div(*ngIf="isViewMode('list')")
-    cass-attachment-link-list([attachment]="attachment", (open)="open($event)", [view-mode]="viewMode")
+    cass-attachment-link-list([attachment]="attachment", (open)="open($event)")

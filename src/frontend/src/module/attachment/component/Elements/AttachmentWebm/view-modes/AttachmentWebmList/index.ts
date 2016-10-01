@@ -15,9 +15,9 @@ import {AttachmentWebmHelper} from "../../helper";
 export class AttachmentWebmList implements OnChanges
 {
     @Input('attachment') attachment: AttachmentEntity<WebmAttachmentMetadata>;
-    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<WebmAttachmentMetadata>> = new EventEmitter<AttachmentEntity<WebmAttachmentMetadata>>();
 
+    private viewMode: ViewOptionValue = ViewOptionValue.List;
     private helper: AttachmentWebmHelper;
 
     ngOnChanges() {

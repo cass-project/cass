@@ -15,9 +15,9 @@ import {YoutubeAttachmentMetadata} from "../../../../../definitions/entity/metad
 export class AttachmentYouTubeFeed implements OnChanges
 {
     @Input('attachment') attachment: AttachmentEntity<YoutubeAttachmentMetadata>;
-    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<YoutubeAttachmentMetadata>> = new EventEmitter<AttachmentEntity<YoutubeAttachmentMetadata>>();
 
+    private viewMode: ViewOptionValue = ViewOptionValue.Feed;
     private helper: AttachmentYoutubeHelper;
 
     ngOnChanges() {

@@ -15,9 +15,9 @@ import {AttachmentLinkHelper} from "../../helper";
 export class AttachmentLinkFeed implements OnChanges
 {
     @Input('attachment') attachment: AttachmentEntity<UnknownAttachmentMetadata>;
-    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<UnknownAttachmentMetadata>> = new EventEmitter<AttachmentEntity<UnknownAttachmentMetadata>>();
 
+    private viewMode: ViewOptionValue = ViewOptionValue.Feed;
     private helper: AttachmentLinkHelper;
 
     ngOnChanges() {

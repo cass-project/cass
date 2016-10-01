@@ -1,7 +1,7 @@
 article.component.component-post-attachment-link-image
   div(*ngIf="isViewMode('feed')")
-    cass-attachment-image-feed([attachment]="attachment", (open)="open($event)", [view-mode]="viewMode")
+    cass-attachment-image-feed([attachment]="attachment", (open)="open($event)")
   div(*ngIf="isViewMode('grid')")
-    cass-attachment-image-grid([attachment]="attachment", (open)="open($event)", [view-mode]="viewMode")
+    cass-attachment-image-grid([attachment]="attachment", (open)="open($event)")
   div(*ngIf="isViewMode('list')")
-    cass-attachment-image-list([attachment]="attachment", (open)="open($event)", [view-mode]="viewMode")
+    cass-attachment-image-list([attachment]="attachment", (open)="open($event)")

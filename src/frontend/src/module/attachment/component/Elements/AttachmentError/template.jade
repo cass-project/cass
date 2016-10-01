@@ -1,4 +1,7 @@
-article.component.component-attachment-error
-  .error-container
-    i.fa.fa-ban
-    span Извините, но по каким-то причинам мы не можем отобразить этот контент
+div.component.component-attachment-error
+  div(*ngIf="isViewMode('feed')")
+    cass-attachment-error-feed([attachment]="attachment", (open)="open($event)")
+  div(*ngIf="isViewMode('grid')")
+    cass-attachment-error-grid([attachment]="attachment", (open)="open($event)")
+  div(*ngIf="isViewMode('list')")
+    cass-attachment-error-list([attachment]="attachment", (open)="open($event)")

@@ -15,9 +15,9 @@ import {ViewOptionValue} from "../../../../../../feed/service/FeedService/option
 export class AttachmentYouTubeList implements OnChanges
 {
     @Input('attachment') attachment: AttachmentEntity<YoutubeAttachmentMetadata>;
-    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.List;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<YoutubeAttachmentMetadata>> = new EventEmitter<AttachmentEntity<YoutubeAttachmentMetadata>>();
 
+    private viewMode: ViewOptionValue = ViewOptionValue.List;
     private helper: AttachmentYoutubeHelper;
 
     ngOnChanges() {
