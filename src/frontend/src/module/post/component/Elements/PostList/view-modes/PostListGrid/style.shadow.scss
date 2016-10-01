@@ -1,3 +1,32 @@
-div.component-post-list-grid {
+@import "./../../../../../../../styles/globals";
 
+div.component-post-list-grid {
+  display: inline-block;
+
+  ul.post-list {
+    li.post-list-item {
+      width: 200px;
+      height: 113px;
+
+      display: inline-block;
+      margin: 5px;
+      text-align: left;
+      vertical-align: top;
+
+      div.post-card-container {
+        @include card(1);
+        cursor: pointer;
+        overflow: hidden;
+
+        width: 100%;
+        height: 100%;
+        border-radius: 3px;
+        background-color: #fff;
+
+        &:hover {
+          outline: 3px solid material-color("blue", "100");
+        }
+      }
+    }
+  }
 }
