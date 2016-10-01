@@ -1,7 +1,7 @@
 article.component.component-attachment-youtube
   div(*ngIf="isViewMode('feed')")
-    cass-attachment-youtube-feed([attachment]="attachment", (open)="open($event)")
+    cass-attachment-youtube-feed([attachment]="attachment", [view-mode]="viewMode", (open)="open($event)")
   div(*ngIf="isViewMode('grid')")
-    cass-attachment-youtube-grid([attachment]="attachment", (open)="open($event)")
+    cass-attachment-youtube-grid([attachment]="attachment", [view-mode]="viewMode", (open)="open($event)")
   div(*ngIf="isViewMode('list')")
-    cass-attachment-youtube-list([attachment]="attachment", (open)="open($event)")
+    cass-attachment-youtube-list([attachment]="attachment", [view-mode]="viewMode", (open)="open($event)")

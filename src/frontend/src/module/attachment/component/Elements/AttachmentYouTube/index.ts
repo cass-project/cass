@@ -20,7 +20,7 @@ export class AttachmentYouTube
     static DEFAULT_ORIG_HEIGHT = 720;
 
     @Input('attachment') attachment: AttachmentEntity<YoutubeAttachmentMetadata>;
-    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Grid;
+    @Input('viewMode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open') openEvent: EventEmitter<AttachmentEntity<YoutubeAttachmentMetadata>> = new EventEmitter<AttachmentEntity<YoutubeAttachmentMetadata>>();
 
     isViewMode(viewMode: ViewOptionValue): boolean {

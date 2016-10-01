@@ -24,7 +24,7 @@ article.component.component-post-form([ngClass]="{ 'component-post-form--extende
           button(type="submit", [disabled]="! model.isValid()").form-button.form-button-green
             span Разместить
     .post-form-section(*ngIf="hasAttachments()")
-      .attachment(*ngIf="model.getAttachment()")
+      .attachment
         cass-attachment([attachment]="model.getAttachment()", view-mode="feed")
       .attachment-actions
         .attachment-actions-section

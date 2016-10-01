@@ -4,11 +4,12 @@ import {AttachmentEntity, AttachmentMetadata} from "../../../definitions/entity/
 import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
 
 @Component({
+    selector: 'cass-attachment',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-post-attachment'})
-
+    ]
+})
 export class Attachment
 {
     @Input('attachment') attachment: AttachmentEntity<AttachmentMetadata>;
