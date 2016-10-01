@@ -1,9 +1,11 @@
 article.component.component-feed-post-stream
   div(*ngIf="hasStream()")
-    .entities
-      .post-card-container(*ngFor="let post of feed.stream.all()")
-        cass-post-card([post]="post", [view-mode]="getViewOption()", [content-player-enabled]="isContentPlayerEnabled()")
-      .loading-indicator
-        cass-loading-indicator(*ngIf="feed.isLoading()")
+    .posts
+      cass-post-list(
+        [posts]="feed.stream.all()",
+        [view-mode]="getViewOption()",
+      )
+    .loading-indicator
+      cass-loading-indicator(*ngIf="feed.isLoading()")
   div(*ngIf="!feed.isLoading()")
     cass-feed-scroll-detector
