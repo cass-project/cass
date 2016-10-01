@@ -7,6 +7,7 @@ import {PostIndexedEntity, PostEntity} from "../../../../post/definitions/entity
 import {ContentPlayerService} from "../../../../player/service/ContentPlayerService/service";
 import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
 import {PostPlayerService} from "../../../../post/component/Modals/PostPlayer/service";
+import {PostListOpenAttachmentEvent} from "../../../../post/component/Elements/PostList/index";
 
 @Component({
     selector: 'cass-feed-post-stream',
@@ -64,7 +65,15 @@ export class FeedPostStream implements OnDestroy, OnInit
         this.postPlayer.openPost(post);
     }
 
-    openAttachment(attachment: AttachmentEntity<any>) {
-        this.contentPlayer.open(attachment);
+    openAttachment(event: PostListOpenAttachmentEvent) {
+        if(this.contentPlayer.isSupported(event.attachment)) {
+            this.contentPlayer.open(event.attachment);
+
+            return false;
+        }else{
+            this.postPlayer.openPost(event.post);
+
+            return false;
+        }
     }
 }

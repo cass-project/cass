@@ -21,6 +21,6 @@ export class Attachment
     }
 
     open(attachment: AttachmentEntity<any>) {
-        this.openEvent.emit(attachment);
+        return this.openEvent.emit(attachment);
     }
 }

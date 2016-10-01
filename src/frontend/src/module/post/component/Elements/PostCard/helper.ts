@@ -59,6 +59,6 @@ export class PostCardHelper
     }
 
     openAttachment(attachment: AttachmentEntity<any>) {
-        this.openAttachmentEvent.emit(attachment);
+        return this.openAttachmentEvent.emit(attachment);
     }
 }

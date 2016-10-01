@@ -2,15 +2,33 @@
 
 @mixin zDepth($level) {
   div.cass-modal {
-    z-index: 9000 + 3*$level;
+    z-index: 9000 + 4*$level;
   }
 
   div.modal-backdrop {
-    z-index: 9001 + 3*$level;
+    z-index: 9001 + 4*$level;
   }
 
   div.modal-flex-container {
-    z-index: 9002 + 3*$level;
+    z-index: 9002 + 4*$level;
+  }
+
+  div.modal-content {
+    z-index: 9003 + 4*$level;
+  }
+}
+
+div.component-cass-modal-light {
+  div.modal-backdrop {
+    background-color: #f0f0f0;
+    opacity: 0.8;
+  }
+}
+
+div.component-cass-modal-dark {
+  div.modal-backdrop {
+    background-color: #333;
+    opacity: 0.8;
   }
 }
 
@@ -21,8 +39,6 @@
       position: fixed;
       top: 0; height: 100%;
       left: 0; width: 100%;
-      background-color: $BACKDROP_COLOR;
-      opacity: $BACKDROP_OPACITY;
     }
 
     div.modal-flex-container {
@@ -66,7 +82,7 @@
   }
 }
 
-/* Don't look at this. */
+/* Don't look at this shit. */
 
 div.component-cass-modal {
   @include zDepth(1);

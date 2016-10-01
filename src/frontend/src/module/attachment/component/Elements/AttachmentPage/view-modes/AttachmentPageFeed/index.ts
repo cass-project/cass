@@ -24,9 +24,7 @@ export class AttachmentPageFeed implements OnChanges
         this.helper = new AttachmentLinkPageHelper(this.attachment);
     }
 
-    open(attachment: AttachmentEntity<PageAttachmentMetadata>): boolean {
-        this.openEvent.emit(attachment);
-
-        return false;
+    open(attachment: AttachmentEntity<PageAttachmentMetadata>) {
+        return this.openEvent.emit(attachment);
     }
 }

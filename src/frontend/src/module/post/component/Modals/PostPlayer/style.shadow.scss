@@ -1,32 +1,5 @@
 @import "./../../../../../styles/globals";
 
 div.component-post-player {
-  .post-player-card {
-    @include card(1);
-    border-radius: 3px;
-    overflow: hidden;
-    background-color: white;
-    width: 550px;
 
-    .card-header {
-      margin-top: 8px;
-      margin-bottom: 15px;
-    }
-
-    .card-backdrop {
-      display: none;
-    }
-
-    .content-container {
-      padding: 20px 13px;
-
-      p {
-        font-family: $FONT_FAMILY;
-        font-size: 16px;
-        font-weight: 400;
-        color: black;
-        line-height: 20px;
-      }
-    }
-  }
 }

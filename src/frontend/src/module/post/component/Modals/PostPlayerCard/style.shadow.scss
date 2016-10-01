@@ -1,0 +1,43 @@
+@import "./../../../../../styles/globals";
+
+div.component-post-player-card {
+  .post-card {
+    @include card(1);
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: white;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .attachment-container {
+      background-color: material-color("grey", "900");
+      width: 600px;
+      flex-shrink: 0;
+    }
+
+    .post-about {
+      .header {
+        margin-top: 8px;
+        margin-bottom: 15px;
+      }
+
+      .content {
+        margin-left: 5px;
+        .content-container {
+          padding: 20px 13px;
+          max-height: 350px;
+          overflow: auto;
+
+          p {
+            font-family: $FONT_FAMILY;
+            font-size: 16px;
+            font-weight: 400;
+            color: black;
+            line-height: 20px;
+          }
+        }
+      }
+    }
+  }
+}

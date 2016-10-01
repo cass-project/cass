@@ -1,11 +1,11 @@
 @import "./../../../../../styles/globals";
 
 div.cass-modal-box {
+  background-color: #fff;
 }
 
 @include isMobile {
   div.cass-modal-box {
-    background-color: white;
     position: absolute;
     top: 0; height: 100%;
     left: 0; width: 100%!important;
@@ -15,8 +15,6 @@ div.cass-modal-box {
 @include isDesktop {
   div.cass-modal-box {
     @include card(2);
-
-    background-color: white;
     border-radius: 3px;
   }
 }

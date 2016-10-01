@@ -8,6 +8,7 @@ import {PostComponent} from "./component/Elements/Post/index";
 import {POST_CARD_DIRECTIVES} from "./component/Elements/PostCard/index";
 import {TextParser} from "../common/component/TextParser/index";
 import {POST_LIST_DIRECTIVES} from "./component/Elements/PostList/index";
+import {PostPlayerCard} from "./component/Modals/PostPlayerCard/index";
 
 export const CASSPostModule = {
     declarations: [
@@ -17,6 +18,7 @@ export const CASSPostModule = {
         PostForm,
         PostFormLinkInput,
         PostPlayer,
+        PostPlayerCard,
     ],
     providers: [
         PostRESTService,

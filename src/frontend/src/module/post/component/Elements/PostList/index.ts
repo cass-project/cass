@@ -19,7 +19,7 @@ export class PostList
     @Input('posts') posts: PostEntity[] = [];
     @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open-post') openPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
-    @Output('open-attachment') openAttachmentEvent: EventEmitter<AttachmentEntity<any>> = new EventEmitter<AttachmentEntity<any>>();
+    @Output('open-attachment') openAttachmentEvent: EventEmitter<PostListOpenAttachmentEvent> = new EventEmitter<PostListOpenAttachmentEvent>();
 
     isViewMode(viewMode: ViewOptionValue): boolean {
         return this.viewMode === viewMode;
@@ -30,8 +30,27 @@ export class PostList
     }
 
     openAttachment(attachment: AttachmentEntity<any>) {
-        this.openAttachmentEvent.emit(attachment);
+        let post: PostEntity;
+
+        for(let compare of this.posts) {
+            if(compare.attachments && compare.attachments.length) {
+                if(compare.attachments[0].id === attachment.id) {
+                    post = compare;
+                }
+            }
+        }
+
+        this.openAttachmentEvent.emit({
+            post: post,
+            attachment: attachment
+        });
     }
+}
+
+export interface PostListOpenAttachmentEvent
+{
+    post: PostEntity;
+    attachment: AttachmentEntity<any>;
 }
 
 export const POST_LIST_DIRECTIVES = [

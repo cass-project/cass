@@ -3,11 +3,11 @@ div.component.component-attachment-page-feed
     cass-attachment-error([attachment]="attachment", [view-mode]="viewMode")
   div(*ngIf=" helper.isValid()")
     .image-container(*ngIf="helper.hasImage()")
-      a(target="__top", [href]="helper.getURL()", (click)="open(attachment)")
+      a(target="__top", [href]="helper.getURL()")
         img([src]="helper.getImageURL()")
     .link-description
       h1
-        a(target="__top", [href]="helper.getURL()", (click)="open(attachment)")
+        a(target="__top", [href]="helper.getURL()")
           span.title {{ helper.getTitle() }}
       div.url
         i.fa.fa-link

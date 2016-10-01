@@ -24,8 +24,10 @@ export class AttachmentImageFeed implements OnChanges
         this.helper = new AttachmentImageHelper(this.attachment);
     }
 
-    open(attachment: AttachmentEntity<ImageAttachmentMetadata>): boolean {
-        this.openEvent.emit(attachment);
+    open($event): boolean {
+        $event.preventDefault();
+
+        this.openEvent.emit(this.attachment);
 
         return false;
     }
