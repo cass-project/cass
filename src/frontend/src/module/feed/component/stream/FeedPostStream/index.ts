@@ -2,8 +2,9 @@ import {Component} from "@angular/core";
 
 import {FeedService} from "../../../service/FeedService/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
-import {PostIndexedEntity} from "../../../../post/definitions/entity/Post";
+import {PostIndexedEntity, PostEntity} from "../../../../post/definitions/entity/Post";
 import {ContentPlayerService} from "../../../../player/service/ContentPlayerService";
+import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
 
 @Component({
     selector: 'cass-feed-post-stream',
@@ -30,5 +31,13 @@ export class FeedPostStream
 
     hasStream() {
         return typeof this.feed.stream === "object";
+    }
+
+    openPost(post: PostEntity) {
+        console.log('open post', post);
+    }
+
+    openAttachment(attachment: AttachmentEntity<any>) {
+        console.log('open attachment', attachment);
     }
 }

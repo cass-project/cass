@@ -75,6 +75,10 @@ export class AttachmentYoutubeHelper
         return `http://img.youtube.com/vi/${this.attachment.link.metadata.youtubeId}/hqdefault.jpg`;
     }
 
+    enablePreview() {
+        this.preview = true;
+    }
+
     disablePreview() {
         this.preview = false;
     }

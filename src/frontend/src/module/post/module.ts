@@ -7,11 +7,13 @@ import {PostPlayer} from "./component/Modals/PostPlayer/index";
 import {PostComponent} from "./component/Elements/Post/index";
 import {POST_CARD_DIRECTIVES} from "./component/Elements/PostCard/index";
 import {TextParser} from "../common/component/TextParser/index";
+import {POST_LIST_DIRECTIVES} from "./component/Elements/PostList/index";
 
 export const CASSPostModule = {
     declarations: [
         PostComponent,
         POST_CARD_DIRECTIVES,
+        POST_LIST_DIRECTIVES,
         PostForm,
         PostFormLinkInput,
         PostPlayer,

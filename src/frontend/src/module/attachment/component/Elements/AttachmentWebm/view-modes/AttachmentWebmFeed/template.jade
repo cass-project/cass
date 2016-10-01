@@ -1,3 +1,8 @@
 div.component.component-attachment-webm-feed
-  .video-container
-    video([src]="helper.getURL()", [attr.type]="helper.getType()", controls, [poster]="helper.getCover()")
+  .preview-image-container(*ngIf="! helper.enabled", (click)="open(helper.attachment)")
+    .play-button-container
+      i.fa.fa-play
+    .image-container
+      img([src]="helper.getCover()")
+  .video-container(*ngIf="helper.enabled", )
+    video([src]="helper.getURL()", [attr.type]="helper.getType()", controls, [poster]="helper.getCover()", autoplay="1")

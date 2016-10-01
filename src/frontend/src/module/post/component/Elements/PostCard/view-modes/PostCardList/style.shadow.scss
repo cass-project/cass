@@ -1,3 +1,9 @@
+@import "./../../../../../../../styles/globals.scss";
+
+.x-feed-entity-active {
+  outline: 5px solid material-color("blue", "100");
+}
+
 div.component-post-card-list {
 
 }

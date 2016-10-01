@@ -1,0 +1,10 @@
+div.component.component-post-list-feed
+  ul.post-list
+    li.post-list-item(*ngFor="let post of posts")
+      div.post-card-container
+        cass-post-card(
+          [post]="post",
+          [view-mode]="viewMode",
+          (open-post)="openPost($event)",
+          (open-attachment)="openAttachment($event)",
+        )
