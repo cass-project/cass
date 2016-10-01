@@ -1,22 +1,14 @@
-import {Component, Input, ViewChild, ElementRef} from "@angular/core";
+import {AttachmentLinkYouTube} from "./index";
 import {AttachmentEntity} from "../../../definitions/entity/AttachmentEntity";
 import {YoutubeAttachmentMetadata} from "../../../definitions/entity/metadata/YoutubeAttachmentMetadata";
 
-@Component({
-    template: require('./template.jade'),
-    styles: [
-        require('./style.shadow.scss')
-    ],selector: 'cass-post-attachment-link-youtube'})
-
-export class AttachmentLinkYouTube
+export class AttachmentYoutubeHelper
 {
-    private preview: boolean = true;
-    
-    static DEFAULT_ORIG_WIDTH = 1280;
-    static DEFAULT_ORIG_HEIGHT = 720;
+    public preview: boolean = true;
 
-    @Input('attachment') attachment: AttachmentEntity<YoutubeAttachmentMetadata>;
-    @ViewChild('container') container: ElementRef;
+    constructor(
+        public attachment: AttachmentEntity<YoutubeAttachmentMetadata>
+    ) {}
 
     getURL(): string {
         let ogMetadata = this.attachment.link.metadata.og.og.videos;
@@ -82,7 +74,7 @@ export class AttachmentLinkYouTube
 
         return `http://img.youtube.com/vi/${this.attachment.link.metadata.youtubeId}/hqdefault.jpg`;
     }
-    
+
     disablePreview() {
         this.preview = false;
     }

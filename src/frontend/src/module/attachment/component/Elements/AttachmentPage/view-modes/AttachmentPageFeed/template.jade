@@ -1,0 +1,16 @@
+div.component.component-attachment-page-feed
+  div(*ngIf="! helper.isValid()")
+    cass-attachment-error([attachment]="attachment", [view-mode]="viewMode")
+  div(*ngIf=" helper.isValid()")
+    .image-container(*ngIf="helper.hasImage()")
+      a(target="__top", [href]="helper.getURL()", (click)="open(attachment)")
+        img([src]="helper.getImageURL()")
+    .link-description
+      h1
+        a(target="__top", [href]="helper.getURL()", (click)="open(attachment)")
+          span.title {{ helper.getTitle() }}
+      div.url
+        i.fa.fa-link
+        span {{ helper.getURL() }}
+      p.description(*ngIf="helper.hasDescription()")
+        span {{ helper.getDescription() }}

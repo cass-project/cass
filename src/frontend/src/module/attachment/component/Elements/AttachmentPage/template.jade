@@ -1,0 +1,3 @@
+article.component.component-attachment-link-page
+  div(*ngIf="isViewMode('feed')")
+    cass-attachment-page-feed([attachment]="attachment", (open)="open($event)", [view-mode]="viewMode")

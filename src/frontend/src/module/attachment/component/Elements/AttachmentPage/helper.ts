@@ -1,19 +1,14 @@
-import {Component, Input} from "@angular/core";
 import {AttachmentEntity} from "../../../definitions/entity/AttachmentEntity";
 import {PageAttachmentMetadata} from "../../../definitions/entity/metadata/PageAttachmentMetadata";
 
-@Component({
-    template: require('./template.jade'),
-    styles: [
-        require('./style.shadow.scss')
-    ],selector: 'cass-post-attachment-link-page'})
-
-export class AttachmentLinkPage
+export class AttachmentLinkPageHelper
 {
-    @Input('attachment') attachment: AttachmentEntity<PageAttachmentMetadata>;
-
     private markedAsError: boolean = false;
-    
+
+    constructor(
+        public attachment: AttachmentEntity<PageAttachmentMetadata>
+    ) {}
+
     isValid(): boolean {
         if(this.markedAsError) {
             return false;

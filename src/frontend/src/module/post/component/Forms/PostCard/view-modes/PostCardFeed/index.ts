@@ -20,6 +20,7 @@ export class PostCardFeed
     @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Input('content-player-enabled') contentPlayerEnabled: boolean = false;
     @Output('go') goEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
+    @Output('open') openEvent: EventEmitter<PostEntity>  = new EventEmitter<PostEntity>();
 
     private dateCreatedOn: Date;
 
@@ -71,5 +72,9 @@ export class PostCardFeed
 
     go() {
         this.goEvent.emit(this.post);
+    }
+
+    open() {
+        this.openEvent.emit(this.post);
     }
 }

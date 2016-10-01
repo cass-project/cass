@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 
 import {PostEntity} from "../../../definitions/entity/Post";
 import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
@@ -19,6 +19,7 @@ export class PostCard
     @Input('post') post: PostEntity;
     @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Input('content-player-enabled') contentPlayerEnabled: boolean = false;
+    @Output('open') openEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
     private dateCreatedOn: Date;
 
@@ -66,6 +67,10 @@ export class PostCard
     
     getAttachment() {
         return this.post.attachments[0];
+    }
+
+    open() {
+        this.openEvent.emit(this.post);
     }
 }
 

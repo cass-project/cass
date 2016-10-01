@@ -1,0 +1,13 @@
+div.component.component-attachment-youtube-feed
+  div.youtube-container([ngClass]="{ 'youtube-container-with-video': !helper.preview }")
+    .preview-image-container((click)="helper.disablePreview()")
+      .play-button-container
+        i.fa.fa-play
+      .image-container
+        img([src]="helper.getPreviewImageURL()")
+    .iframe-container(*ngIf="! helper.preview")
+      iframe(
+        [attr.src]="helper.getURL()",
+        frameborder="0",
+        allowfullscreen
+      )
