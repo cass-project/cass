@@ -33,8 +33,7 @@ import {Session} from "../../../../session/Session";
 export class ContentRoute implements OnInit
 {
     @ViewChild('content') content: ElementRef;
-    
-    private main_collection: CollectionEntity;
+
     private postType: PostTypeEntity;
 
     constructor(
@@ -52,14 +51,6 @@ export class ContentRoute implements OnInit
     ) {
         catalog.source = 'content';
         catalog.injectFeedService(service);
-
-        this.postType = types.getTypeByStringCode('default');
-
-        for(let collection of session.getCurrentProfile().entity.collections) {
-            if (collection.is_main) {
-                this.main_collection = collection;
-            }
-        }
 
         service.provide(source, new Stream<PostIndexedEntity>());
         service.update();
@@ -118,6 +109,18 @@ export class ContentRoute implements OnInit
         }
 
         this.service.update();
+    }
+
+    getMainCollection(): CollectionEntity {
+        this.postType = this.types.getTypeByStringCode('default');
+
+        for(let collection of this.session.getCurrentProfile().entity.collections) {
+            if (collection.is_main) {
+                return collection;
+            }
+        }
+
+        throw new Error('No main collection found');
     }
 
     canPost(): boolean {

@@ -23,3 +23,11 @@ export const CASSAuthModule = {
         AuthService,
     ]
 };
+
+const AUTH_VERSION = "1";
+const LOCAL_STORAGE_API_KEY = 'cass.module.auth.check';
+
+if(window.localStorage['cass.module.auth.check'] === undefined) {
+    delete window.localStorage['api_key'];
+           window.localStorage['cass.module.auth.check'] = AUTH_VERSION;
+}
