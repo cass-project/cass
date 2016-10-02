@@ -32,6 +32,11 @@ export class PublicContentMenu
         if(this.criteria.criteria.contentType.enabled) {
             this.criteria.criteria.contentType.enabled = false;
             this.criteria.criteria.contentType.params.type = undefined;
+
+            if(this.swipe.isAtThemeScreen()) {
+                this.swipe.switchToContent();
+            }
+
             this.service.update();
         }
     }
