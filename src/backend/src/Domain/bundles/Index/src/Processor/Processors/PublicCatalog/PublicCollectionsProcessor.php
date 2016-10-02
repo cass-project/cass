@@ -14,6 +14,9 @@ final class PublicCollectionsProcessor extends AbstractCollectionProcessor
 
     protected function isIndexable(Collection $entity): bool
     {
-        return count($entity->getThemeIds()) > 0;
+        $hasTheme = count($entity->getThemeIds()) > 0;
+        $notProfileCollection = ! $entity->isMain();
+
+        return $hasTheme && $notProfileCollection;
     }
 }

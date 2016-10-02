@@ -38,6 +38,10 @@ export class ThemeService
         }
     }
 
+    hasWithId(themeId: number): boolean {
+        return this.themesMap.hasOwnProperty(themeId.toString());
+    }
+
     findById(themeId: number): Theme {
         if(this.themesMap.hasOwnProperty(themeId.toString())) {
             return this.themesMap[themeId.toString()];

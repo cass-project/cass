@@ -3,14 +3,14 @@ div.component.component-profile-cards-list
     ul.profiles-list
       li(*ngFor="let profile of profiles")
         .profile-card-container
-          cass-profile-card([profile]="profile", (click)="open($event)", view-mode="feed")
+          cass-profile-card([profile]="profile", (open)="open($event)", [theme-list-mode]="themeListMode", view-mode="feed")
   div.view-mode-grid(*ngIf="isViewMode('grid')")
     ul.profiles-list
       li(*ngFor="let profile of profiles")
         .profile-card-container
-          cass-profile-card([profile]="profile", (click)="open($event)", view-mode="grid")
+          cass-profile-card([profile]="profile", (open)="open($event)", [theme-list-mode]="themeListMode", view-mode="grid")
   div.view-mode-list(*ngIf="isViewMode('list')")
     ul.profiles-list
       li(*ngFor="let profile of profiles")
         .profile-card-container
-          cass-profile-card([profile]="profile", (click)="open($event)", view-mode="list")
+          cass-profile-card([profile]="profile", (open)="open($event)", [theme-list-mode]="themeListMode", view-mode="list")

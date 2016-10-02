@@ -1,7 +1,7 @@
-article.component.component-profile-card((click)='goProfile()')
+article.component.component-profile-card
   div(*ngIf="isViewMode('feed')")
-    cass-profile-card-feed([profile]="profile", (open)="open()")
+    cass-profile-card-feed([profile]="profile", [theme-list-mode]="themeListMode", (open)="open()")
   div(*ngIf="isViewMode('grid')")
-    cass-profile-card-grid([profile]="profile", (open)="open()")
+    cass-profile-card-grid([profile]="profile", [theme-list-mode]="themeListMode", (open)="open()")
   div(*ngIf="isViewMode('list')")
-    cass-profile-card-list([profile]="profile", (open)="open()")
+    cass-profile-card-list([profile]="profile", [theme-list-mode]="themeListMode", (open)="open()")
