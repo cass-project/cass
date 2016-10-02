@@ -40,6 +40,11 @@ export class PublicContentMenu
         if(! this.isContentType(contentType)) {
             this.criteria.criteria.contentType.enabled = true;
             this.criteria.criteria.contentType.params.type = contentType;
+
+            if(this.swipe.isAtThemeScreen()) {
+                this.swipe.switchToContent();
+            }
+
             this.service.update();
         }
     }
