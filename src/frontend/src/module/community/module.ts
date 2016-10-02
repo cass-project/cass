@@ -23,6 +23,10 @@ import {CommunityNotFoundRoute} from "./route/CommunityNotFoundRoute/index";
 import {CommunitySettingsModalModel} from "./component/Modals/CommunitySettingsModal/model";
 import {CommunityModals} from "./component/Elements/Community/modals";
 import {CommunityResolve} from "./resolve/CommunityResolve";
+import {CommunityCreateModalNotifier} from "./component/Modals/CommunityCreateModal/notify";
+import {ScreenFeatures} from "./component/Modals/CommunityCreateModal/Screen/ScreenFeatures/index";
+import {ScreenGeneral} from "./component/Modals/CommunityCreateModal/Screen/ScreenGeneral/index";
+import {CommunityCreateModalForm} from "./component/Modals/CommunityCreateModal/Form/index";
 
 export const CASSCommunityModal = {
     declarations: [
@@ -38,6 +42,9 @@ export const CASSCommunityModal = {
         CommunityJoinModal,
         CommunityRouteModal,
         CommunitySettingsModal,
+        ScreenFeatures,
+        ScreenGeneral,
+        CommunityCreateModalForm,
     ],
     routes: [
         CommunityRoute,
@@ -54,6 +61,7 @@ export const CASSCommunityModal = {
         CommunityModalService,
         CommunitySettingsModalModel,
         CommunityModals,
-        CommunityResolve
+        CommunityResolve,
+        CommunityCreateModalNotifier,
     ],
 };

@@ -10,7 +10,9 @@ export class CommunityCreateModalNotifier
     public observable: Observable<CommunityExtendedEntity>;
 
     publish(entity: CommunityExtendedEntity) {
-        this.observer.next(entity);
+        if(this.observer) {
+            this.observer.next(entity);
+        }
     }
     
     constructor() {
