@@ -26,7 +26,7 @@ export class FeedScrollDetector implements OnInit, OnDestroy
             let testTumblrIsTriggered = () => { return event.scrollTotal - event.scrollBottom < 30 };
             let testIsNotFeedLoading = () => { return ! this.feed.isLoading(); };
             let testFeedHasMoreRecords = () => { return this.feed.hasMoreEntities(); };
-            let testNearEnd = () => { return (event.scrollTotal - event.scrollBottom) < 50; }
+            let testNearEnd = () => { return (event.scrollTotal - event.scrollTop) < (event.clientHeight + 50); };
 
             if(testTumblrIsTriggered() && testIsNotFeedLoading() && testFeedHasMoreRecords() && testNearEnd()) {
                 this.feed.next();
