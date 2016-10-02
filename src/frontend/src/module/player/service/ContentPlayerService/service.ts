@@ -9,7 +9,7 @@ export class ContentPlayerService
 {
     static LOCAL_STORAGE_KEY = 'cass.module.player.service';
 
-    private enabled: boolean = false;
+    private enabled: boolean = true;
     private visible: boolean = false;
 
     public controls: Controls = new Controls(this);
