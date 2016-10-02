@@ -1,3 +1,60 @@
-div.component-profile-card-feed {
+@import "./../../../../../../../styles/globals";
 
+div.component-profile-card-feed {
+  .profile-card {
+    @include card(1);
+    background-color: #fff;
+    width: 350px;
+    height: 600px;
+    overflow: hidden;
+  }
+
+  .profile-image-container {
+    cursor: pointer;
+  }
+
+  .profile-about {
+    padding: 15px 10px;
+
+    > h1 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    ul.profile-info {
+      li {
+        padding-left: 30px;
+        margin-bottom: 10px;
+
+        > div {
+          display: flex;
+        }
+
+        div.icon {
+          width: 50px;
+          flex-shrink: 0;
+          text-align: center;
+        }
+
+        div.desc {
+          width: 100%;
+
+          > h1 {
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 10px;
+          }
+
+          > span {
+            color: material-color("grey", "700");
+          }
+
+          i.fa {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
 }

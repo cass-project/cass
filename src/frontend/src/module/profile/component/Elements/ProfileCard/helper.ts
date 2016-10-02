@@ -5,6 +5,8 @@ import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
 import {Theme} from "../../../../theme/definitions/entity/Theme";
 import {ProfileThemeListMode} from "./index";
 import {ThemeService} from "../../../../theme/service/ThemeService";
+import {TranslationService} from "../../../../i18n/service/TranslationService";
+import moment = require("moment");
 
 @Injectable()
 export class ProfileCardHelper
@@ -23,21 +25,9 @@ export class ProfileCardHelper
         this.themesMode = themesMode;
 
         if(themesMode === ProfileThemeListMode.ExpertIn) {
-            this.themes = [];
-
-            for(let id of profile.expert_in_ids) {
-                if(this.themeService.hasWithId(id)) {
-                    this.themes.push(this.themeService.findById(id));
-                }
-            }
+            this.themes = this.themeService.getThemesNoFault(profile.expert_in_ids);
         }else if(themesMode === ProfileThemeListMode.InterestingIn) {
-            this.themes = [];
-
-            for(let id of profile.interesting_in_ids) {
-                if(this.themeService.hasWithId(id)) {
-                    this.themes.push(this.themeService.findById(id));
-                }
-            }
+            this.themes = this.themeService.getThemesNoFault(profile.interesting_in_ids);
         }else{
             throw new Error(`Unknown themes mode '${themesMode}'`)
         }
@@ -57,5 +47,43 @@ export class ProfileCardHelper
 
     getThemes(): Theme[] {
         return this.themes;
+    }
+
+    getDescription(): string {
+        return this.themesMode === ProfileThemeListMode.ExpertIn
+            ? this.getExpertInDescription()
+            : this.getInterestingInDescription();
+    }
+
+    hasInterests(): boolean {
+        return this.profile.interesting_in_ids.length > 0;
+    }
+
+    hasExpertsIn(): boolean {
+        return this.profile.expert_in_ids.length > 0;
+    }
+
+    getExpertInDescription(): string {
+        let themes = this.themeService.getThemesNoFault(this.profile.expert_in_ids);
+
+        if(themes.length) {
+            return themes.map(theme => theme.title).join(', ');
+        }else{
+            return '';
+        }
+    }
+
+    getInterestingInDescription(): string {
+        let themes = this.themeService.getThemesNoFault(this.profile.interesting_in_ids);
+
+        if(themes.length) {
+            return themes.map(theme => theme.title).join(', ');
+        }else{
+            return '';
+        }
+    }
+
+    getRegistrationDate(): string {
+        return moment(new Date(this.profile.date_created_on)).format();
     }
 }

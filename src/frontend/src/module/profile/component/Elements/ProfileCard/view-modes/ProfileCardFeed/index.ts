@@ -25,4 +25,16 @@ export class ProfileCardFeed
     open() {
         this.openProfile.emit(this.profile);
     }
+
+    isFemale(): boolean {
+        return this.profile.gender.string === 'female';
+    }
+
+    isMale(): boolean {
+        return this.profile.gender.string === 'male';
+    }
+
+    notSpecifiedGender(): boolean {
+        return this.profile.gender.string === 'not-specified';
+    }
 }

@@ -45,5 +45,12 @@
   "content-player.controls.next": "Next",
   "content-player.controls.shuffle": "Shuffle",
   "content-player.controls.empty": "Empty",
-  "content-player.controls.hide": "Hide"
+  "content-player.controls.hide": "Hide",
+  "expert-in": "Expert In",
+  "interesting-in": "Interesting In",
+  "gender.female": "Female",
+  "gender.male": "Male",
+  "gender.not-specified": "Not specified",
+  "registered": "Registered",
+  "gender": "Sex"
 }

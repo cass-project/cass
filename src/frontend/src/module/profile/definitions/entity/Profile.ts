@@ -24,6 +24,7 @@ export interface ProfileExtendedEntity {
 export interface ProfileEntity {
     id: number;
     sid: string;
+    date_created_on: string;
     account_id: number;
     is_current: boolean;
     is_initialized: boolean;
@@ -53,12 +54,6 @@ export interface ProfileGreetingsEntity {
 export interface ProfileGenderEntity {
     int: number;
     string: string;
-}
-
-export interface ProfileGenderEntity {
-    id: string;
-    profile_id: number;
-    public_path: string;
 }
 
 export interface ProfileDisabledEntity {

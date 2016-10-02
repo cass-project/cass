@@ -50,6 +50,18 @@ export class ThemeService
         }
     }
 
+    getThemesNoFault(themeIds: number[]): Theme[] {
+        let result = [];
+
+        for(let id of themeIds) {
+            if(this.hasWithId(id)) {
+                result.push(this.findById(id));
+            }
+        }
+
+        return result;
+    }
+
     getRoot(): Theme {
         if(this.themes.length > 0) {
             return this.themes[0];
