@@ -8,7 +8,7 @@ export enum ViewOptionValue
 
 export class ViewOption
 {
-    current: ViewOptionValue = ViewOptionValue.Feed;
+    current: ViewOptionValue = ViewOptionValue.Grid;
 
     setAsCurrent(value: ViewOptionValue) {
         this.current = value;
