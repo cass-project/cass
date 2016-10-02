@@ -54,6 +54,8 @@ export class ContentRoute implements OnInit
 
         service.provide(source, new Stream<PostIndexedEntity>());
         service.update();
+
+        this.postType = this.types.getTypeByStringCode('default');
     }
 
     ngOnInit() {
@@ -112,8 +114,6 @@ export class ContentRoute implements OnInit
     }
 
     getMainCollection(): CollectionEntity {
-        this.postType = this.types.getTypeByStringCode('default');
-
         for(let collection of this.session.getCurrentProfile().entity.collections) {
             if (collection.is_main) {
                 return collection;
