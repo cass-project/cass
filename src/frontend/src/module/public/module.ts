@@ -13,6 +13,8 @@ import {ProfilesRoute} from "./route/sources/ProfilesRoute/index";
 import {ExpertsRoute} from "./route/sources/ExpertsRoute/index";
 import {PublicRoute} from "./route/root/index";
 import {PublicContentMenu} from "./route/sources/ContentRoute/component/PublicContentMenu/index";
+import {NotEnoughCommunities} from "./route/sources/CommunitiesRoute/component/NotEnoughCommunities/index";
+import {NotEnoughCollections} from "./route/sources/CollectionsRoute/component/NotEnoughCollections/index";
 
 export const CASSPublicComponent = {
     declarations: [
@@ -24,6 +26,8 @@ export const CASSPublicComponent = {
         NothingFound,
         SourceSelector,
         PublicContentMenu,
+        NotEnoughCommunities,
+        NotEnoughCollections,
     ],
     routes: [
         PublicRoute,
