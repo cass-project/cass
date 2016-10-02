@@ -5,5 +5,45 @@
 }
 
 div.component-post-card-list {
+  text-align: left;
+  padding: 15px;
+  background-color: #fff;
 
+  div.flexbox-container {
+    display: flex;
+
+    div.attachment {
+      width: 300px;
+      height: 100%;
+      flex-basis: 300px;
+      flex-shrink: 0;
+    }
+
+    div.content {
+      width: 100%;
+      margin-left: 25px;
+
+      div.profile-info {
+        line-height: 32px;
+
+        font-size: 16px;
+        color: material-color("blue-grey", "900");
+        margin-bottom: 15px;
+
+        div.profile-image-container {
+          vertical-align: middle;
+          display: inline-block;
+          width: 24px;
+          height: 24px;
+          margin-right: 10px;
+        }
+
+        span.date-created-on {
+          font-size: 13px;
+          margin-left: 15px;
+          color: material-color("grey", "500");
+        }
+      }
+    }
+  }
 }

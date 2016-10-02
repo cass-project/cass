@@ -1,1 +1,16 @@
-div.component.component-attachment-page-list
+div.component.component-attachment-page-list((click)="open(helper.attachment)")
+  div(*ngIf="! helper.isValid()")
+    cass-attachment-error([attachment]="attachment", [view-mode]="viewMode")
+  div(*ngIf=" helper.isValid()")
+    .image-container(*ngIf="helper.hasImage()")
+      a(target="__top", [href]="helper.getURL()", (click)="preventDefault($event)")
+        img([src]="helper.getImageURL()")
+    .link-description
+      h1
+        a(target="__top", [href]="helper.getURL()", (click)="preventDefault($event)")
+          span.title {{ helper.getTitle() }}
+      div.url
+        i.fa.fa-link
+        span {{ helper.getURL() }}
+      p.description(*ngIf="helper.hasDescription()", (click)="preventDefault($event)")
+        span {{ helper.getDescription() }}

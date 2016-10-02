@@ -1,1 +1,2 @@
-div.component.component-attachment-image-list
+div.component.component-attachment-image-list((click)="open(helper.attachment)")
+  div.cover(style="background-image: url('{{ helper.getPreviewImageURL() }}')")

@@ -29,4 +29,8 @@ export class AttachmentPageList implements OnChanges
 
         return false;
     }
+
+    preventDefault($event) {
+        $event.preventDefault();
+    }
 }

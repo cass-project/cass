@@ -1,1 +1,15 @@
 div.component.component-post-card-list.x-feed-entity
+  div.flexbox-container
+    div.attachment
+      div(*ngIf="helper.hasAttachment()")
+        cass-attachment([attachment]="helper.getAttachment()", (open)="helper.openAttachment($event)", view-mode="list")
+    div.content
+      div.profile-info
+        div.profile-image-container
+          cass-profile-image([url]="getProfileImageURL()")
+        span.profile-name {{ getProfileGreetings() }}
+        span.date-created-on {{ getDateCreatedOn() }}
+      div(*ngIf="helper.hasContent()")
+        div([innerHTML]='helper.getContent()')
+      div(*ngIf="! helper.hasContent()")
+        span –

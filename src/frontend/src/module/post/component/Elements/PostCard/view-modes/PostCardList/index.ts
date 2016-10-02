@@ -5,6 +5,8 @@ import {PostCardHelper} from "../../helper";
 import {PostEntity} from "../../../../../definitions/entity/Post";
 import {ViewOptionValue} from "../../../../../../feed/service/FeedService/options/ViewOption";
 import {AttachmentEntity} from "../../../../../../attachment/definitions/entity/AttachmentEntity";
+import moment = require("moment");
+import {queryImage, QueryTarget} from "../../../../../../avatar/functions/query";
 
 @Component({
     selector: 'cass-post-card-list',
@@ -34,5 +36,17 @@ export class PostCardList implements OnChanges
             this.openPostEvent,
             this.openAttachmentEvent
         );
+    }
+
+    getProfileImageURL(): string {
+        return queryImage(QueryTarget.Avatar, this.post.profile.image).public_path;
+    }
+
+    getProfileGreetings(): string {
+        return this.post.profile.greetings.greetings;
+    }
+
+    getDateCreatedOn(): string {
+        return moment(this.post.date_created_on).format();
     }
 }

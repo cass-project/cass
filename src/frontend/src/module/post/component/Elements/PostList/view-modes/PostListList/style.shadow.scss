@@ -1,3 +1,11 @@
 div.component-post-list-list {
+  ul.post-list {
+    > li {
+      border-bottom: 1px solid #ddd;
 
+      &:first-child {
+        border-top: 1px solid #ddd;
+      }
+    }
+  }
 }
