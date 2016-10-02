@@ -1,11 +1,9 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {Subscription} from "rxjs";
+import {Component} from "@angular/core";
 
 import {FeedService} from "../../../service/FeedService/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
 import {PostIndexedEntity, PostEntity} from "../../../../post/definitions/entity/Post";
 import {ContentPlayerService} from "../../../../player/service/ContentPlayerService/service";
-import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
 import {PostPlayerService} from "../../../../post/component/Modals/PostPlayer/service";
 import {PostListOpenAttachmentEvent} from "../../../../post/component/Elements/PostList/index";
 
@@ -16,38 +14,14 @@ import {PostListOpenAttachmentEvent} from "../../../../post/component/Elements/P
         require('./style.shadow.scss')
     ]
 })
-export class FeedPostStream implements OnDestroy, OnInit
+export class FeedPostStream
 {
-    private subscription: Subscription;
-
     constructor(
         private feed: FeedService<PostIndexedEntity>,
         private contentPlayer: ContentPlayerService,
         private postPlayer: PostPlayerService,
         private options: FeedOptionsService
     ) {}
-
-    ngOnInit() {
-        this.subscription = this.feed.observable.subscribe(entities => {
-            entities.forEach(entity => {
-                if(entity.attachments && entity.attachments.length > 0) {
-                    for(let attachment of entity.attachments) {
-                        if(this.contentPlayer.isSupported(attachment)) {
-                            this.contentPlayer.playlist.push(attachment);
-                        }
-                    }
-                }
-            });
-        })
-    }
-
-    ngOnDestroy() {
-        if(! this.contentPlayer.shouldBeVisible()) {
-            this.contentPlayer.playlist.empty();
-        }
-
-        this.subscription.unsubscribe();
-    }
     
     getViewOption() {
         return this.options.view.current;

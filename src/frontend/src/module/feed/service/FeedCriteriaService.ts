@@ -10,7 +10,7 @@ import {ContentTypeCriteriaParams} from "../definitions/request/criteria/Content
 @Injectable()
 export class FeedCriteriaService
 {
-    static DEFAULT_LIMIT = 16;
+    static DEFAULT_LIMIT = 81;
 
     public criteria: FeedCriteriaList = {
         seek: {
