@@ -11,18 +11,18 @@ div.component.component-profile-switcher
           cass-profile-switcher-create-profile-placeholder((create)="createNewProfile()")
       div.item
         div(*ngIf="  hasProfile(1)")
-          cass-profile-card-grid((open)="switchToProfile($event)", [profile]="getProfile(1)")
+          cass-profile-card(open)="switchToProfile($event)", [profile]="getProfile(1)")
         div(*ngIf="! hasProfile(1)")
           cass-profile-switcher-create-profile-placeholder((create)="createNewProfile()")
     div.row
       div.item
         div(*ngIf="  hasProfile(2)")
-          cass-profile-card-grid((open)="switchToProfile($event)", [profile]="getProfile(2)")
+          cass-profile-card((open)="switchToProfile($event)", [profile]="getProfile(2)")
         div(*ngIf="! hasProfile(2)")
           cass-profile-switcher-create-profile-placeholder((create)="createNewProfile()")
       div.item
         div(*ngIf="  hasProfile(3)")
-          cass-profile-card-grid((open)="switchToProfile($event)", [profile]="getProfile(3)")
+          cass-profile-card((open)="switchToProfile($event)", [profile]="getProfile(3)")
         div(*ngIf="! hasProfile(3)")
           cass-profile-switcher-create-profile-placeholder((create)="createNewProfile()")
   footer.form-footer
