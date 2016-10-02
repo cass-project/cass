@@ -1,10 +1,16 @@
-article.component.component-profile-cards-list
-  ul.profile-cards
-    li
-      cass-profile-card([profile]="entity.profile", [is-own]="isOwnProfile()")
-    li(*ngIf="isOwnProfile()")
-      cass-profile-interests-card
-    li(*ngIf="isOwnProfile()")
-      cass-profile-create-collection-card
-    li(*ngIf="isOwnProfile()")
-      cass-profile-settings-card
+div.component.component-profile-cards-list
+  div.view-mode-feed(*ngIf="isViewMode('feed')")
+    ul.profiles-list
+      li(*ngFor="let profile of profiles")
+        .profile-card-container
+          cass-profile-card([profile]="profile", (click)="open($event)", view-mode="feed")
+  div.view-mode-grid(*ngIf="isViewMode('grid')")
+    ul.profiles-list
+      li(*ngFor="let profile of profiles")
+        .profile-card-container
+          cass-profile-card([profile]="profile", (click)="open($event)", view-mode="grid")
+  div.view-mode-list(*ngIf="isViewMode('list')")
+    ul.profiles-list
+      li(*ngFor="let profile of profiles")
+        .profile-card-container
+          cass-profile-card([profile]="profile", (click)="open($event)", view-mode="list")

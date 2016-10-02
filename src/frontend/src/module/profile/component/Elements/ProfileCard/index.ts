@@ -1,10 +1,10 @@
-import {Component, Input} from "@angular/core";
-import {Router} from "@angular/router";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 
+import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
 import {ProfileEntity} from "../../../definitions/entity/Profile";
-import {Theme} from "../../../../theme/definitions/entity/Theme";
-import {ThemeService} from "../../../../theme/service/ThemeService";
-import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
+import {ProfileCardFeed} from "./view-modes/ProfileCardFeed/index";
+import {ProfileCardGrid} from "./view-modes/ProfileCardGrid/index";
+import {ProfileCardList} from "./view-modes/ProfileCardList/index";
 
 @Component({
     selector: 'cass-profile-card',
@@ -13,43 +13,23 @@ import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
         require('./style.shadow.scss')
     ]
 })
-export class ProfileCard
-{
-    @Input('profile') entity: ProfileEntity;
-    @Input('is-own') isOwn: boolean;
+export class ProfileCard {
+    @Input('profile') profile: ProfileEntity;
+    @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
+    @Output('open') openProfile: EventEmitter<ProfileEntity> = new EventEmitter<ProfileEntity>();
 
-    private expertIn: Theme[] = [];
-    private interestingIn: Theme[] = [];
-
-    constructor(private router:Router, private themes: ThemeService) {}
-
-    ngOnInit() {
-        this.expertIn = this.entity.expert_in_ids.map((id: number) => {
-            return this.themes.findById(id);
-        });
-
-        this.interestingIn = this.entity.interesting_in_ids.map((id: number) => {
-            return this.themes.findById(id);
-        });
+    isViewMode(viewMode: ViewOptionValue): boolean {
+        return this.viewMode === viewMode;
     }
 
-    getGreetings(): string {
-        return this.entity.greetings.greetings;
-    }
-
-    getImageURL(): string {
-        return queryImage(QueryTarget.Card, this.entity.image).public_path;
-    }
-
-    hasAnyExperts() {
-        return this.expertIn.length > 0;
-    }
-
-    hasAnyInterests() {
-        return this.interestingIn.length > 0;
-    }
-
-    goProfile() {
-        this.router.navigate(['/Profile', 'Profile', { 'id': this.entity.id }]);
+    open() {
+        this.openProfile.emit(this.profile);
     }
 }
+
+export const PROFILE_CARD_DIRECTIVES = [
+    ProfileCard,
+    ProfileCardFeed,
+    ProfileCardGrid,
+    ProfileCardList,
+];

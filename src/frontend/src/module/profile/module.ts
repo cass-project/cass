@@ -1,6 +1,6 @@
 import {ProfileComponent} from "./component/Elements/Profile/index";
 import {ProfileModals} from "./component/Elements/Profile/modals";
-import {ProfileCard} from "./component/Elements/ProfileCard/index";
+import {PROFILE_CARD_DIRECTIVES} from "./component/Elements/ProfileCard/index";
 import {ProfileCachedIdentityMap} from "./service/ProfileCachedIdentityMap";
 import {ProfileRESTService} from "./service/ProfileRESTService";
 import {ProfileRoute} from "./route/ProfileRoute/index";
@@ -31,11 +31,13 @@ import {ProfileMenuOwn} from "./component/Elements/ProfileMenuOwn/index";
 import {ProfileResolve} from "./resolve/ProfileResolve";
 import {ProfileHeader} from "./component/Elements/ProfileHeader/index";
 import {ProfileBackdrop} from "./component/Modals/ProfileBackdrop/index";
+import {ProfileCardsList} from "./component/Elements/ProfileCardsList/index";
 
 export const CASSProfileModule = {
     declarations: [
         ProfileComponent,
-        ProfileCard,
+        PROFILE_CARD_DIRECTIVES,
+        ProfileCardsList,
         ProfileCardHeader,
         ProfileSetup,
         [

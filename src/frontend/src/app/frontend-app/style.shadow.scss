@@ -41,6 +41,7 @@ main.component.component-frontend-app {
         flex-shrink: 0;
         flex-basis: $CASS_SIDEBAR_WIDTH;
         height: 100%;
+        z-index: 1000;
       }
 
       .router-content {

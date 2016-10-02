@@ -1,7 +1,7 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 
-import {ProfileExtendedEntity} from "../../../definitions/entity/Profile";
-import {Router} from "@angular/router";
+import {ProfileEntity} from "../../../definitions/entity/Profile";
+import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
 
 @Component({
     selector: 'cass-profile-cards-list',
@@ -12,19 +12,15 @@ import {Router} from "@angular/router";
 })
 export class ProfileCardsList
 {
-    @Input('profile') entity: ProfileExtendedEntity;
+    @Input('profiles') profiles: ProfileEntity[] = [];
+    @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
+    @Output('open') openProfile: EventEmitter<ProfileEntity> = new EventEmitter<ProfileEntity>();
 
-    constructor(private router: Router) {}
-
-    isOwnProfile(): boolean {
-        return this.entity.is_own;
+    isViewMode(viewMode: ViewOptionValue): boolean {
+        return this.viewMode === viewMode;
     }
 
-    goDashboard() {
-        if(this.isOwnProfile()){
-            this.router.navigate(['/profile', 'current']);
-        } else {
-            this.router.navigate(['/profile', this.entity.profile.id.toString()]);
-        }
+    open(profile: ProfileEntity) {
+        this.openProfile.emit(profile);
     }
 }

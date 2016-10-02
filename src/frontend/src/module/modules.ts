@@ -22,6 +22,7 @@ import {CASSBackdropModule} from "./backdrop/module";
 import {CASSUIModule} from "./ui/module";
 import {CASSBrandModule} from "./brand/module";
 import {CASSSwipeModule} from "./swipe/module";
+import {CASSSubscribeModule} from "./subscribe/module";
 
 export const CASS_MODULES = [
     CASSAccountModule,
@@ -48,4 +49,5 @@ export const CASS_MODULES = [
     CASSBackdropModule,
     CASSBrandModule,
     CASSSwipeModule,
+    CASSSubscribeModule,
 ];

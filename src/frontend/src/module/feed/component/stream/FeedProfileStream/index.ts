@@ -2,7 +2,8 @@ import {Component} from "@angular/core";
 
 import {FeedService} from "../../../service/FeedService/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
-import {ProfileIndexedEntity} from "../../../../profile/definitions/entity/Profile";
+import {ProfileIndexedEntity, ProfileEntity} from "../../../../profile/definitions/entity/Profile";
+import {Router} from "@angular/router";
 
 @Component({
     template: require('./template.jade'),
@@ -15,6 +16,7 @@ export class FeedProfileStream
     constructor(
         private feed: FeedService<ProfileIndexedEntity>,
         private options: FeedOptionsService,
+        private router: Router
     ) {}
 
     getViewOption() {
@@ -23,5 +25,9 @@ export class FeedProfileStream
 
     hasStream() {
         return typeof this.feed.stream === "object";
+    }
+
+    openProfile(profile: ProfileEntity) {
+        this.router.navigate(['/profile', profile.id]);
     }
 }

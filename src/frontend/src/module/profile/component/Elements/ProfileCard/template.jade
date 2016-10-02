@@ -1,23 +1,7 @@
 article.component.component-profile-card((click)='goProfile()')
-  .card-content
-    .profile-image
-      .profile-image-container
-          cass-profile-image([url]="getImageURL()", border = "circle")
-    .profile-about
-      h1.profile-greetings
-        span {{ getGreetings() }}
-      .profile-expert-in(*ngIf="hasAnyExperts()")
-        .profile-expert-in-title Эксперт в
-        ul.themes
-          li(*ngFor="let theme of expertIn")
-            a(href="javascript.void(0)")
-              span {{ theme.title }}
-      .profile-interesting-in(*ngIf="!hasAnyExperts() && hasAnyInterests()")
-        .profile-interesting-in-title Интересуется
-        ul.themes
-          li(*ngFor="let theme of interestingIn")
-            a(href="javascript.void(0)")
-              span {{ theme.title }}
-      .profile-open-chat(*ngIf="!isOwn")
-        button.form-button.form-button-primary()
-          | Отправить сообщение
+  div(*ngIf="isViewMode('feed')")
+    cass-profile-card-feed([profile]="profile", (open)="open()")
+  div(*ngIf="isViewMode('grid')")
+    cass-profile-card-grid([profile]="profile", (open)="open()")
+  div(*ngIf="isViewMode('list')")
+    cass-profile-card-list([profile]="profile", (open)="open()")
