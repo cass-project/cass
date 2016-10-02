@@ -52,5 +52,6 @@
   "gender.male": "Male",
   "gender.not-specified": "Not specified",
   "registered": "Registered",
-  "gender": "Sex"
+  "gender": "Sex",
+  "cass.module.public.menu.people.title": "People"
 }

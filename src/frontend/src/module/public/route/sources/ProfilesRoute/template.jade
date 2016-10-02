@@ -1,3 +1,14 @@
 article.component.component-public-profiles-route
-  cass-public-nothing-found(*ngIf="service.isNothingFound()")
-  cass-feed-profile-stream
+  div.flexbox-container
+    div.menu(*ngIf="ui.panels.extended.isEnabled()")
+      cass-profile-catalog-menu([is-extended]="ui.panels.extended.isExtended()")
+    div.themes-list(*ngIf="ui.panels.themes.isEnabled()")
+      cass-theme-panel([root]="getThemePanelRoot()", (change)="goTheme($event)")
+    div.content
+      div.split-view
+        div.content-area(#content, (scroll)="onScroll($event)")
+          div.screen-themes(*ngIf="swipe.isAtThemeScreen()")
+            cass-theme-browser([root]="getThemeRoot()", (change)="goTheme($event)")
+          div.screen-stream(*ngIf="swipe.isAtContentScreen()")
+            cass-public-nothing-found(*ngIf="service.isNothingFound()")
+            cass-feed-profile-stream

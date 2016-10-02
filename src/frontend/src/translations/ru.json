@@ -52,5 +52,6 @@
   "gender.male": "Мужской",
   "gender.not-specified": "Не указан",
   "registered": "Дата регистрации",
-  "gender": "Пол"
+  "gender": "Пол",
+  "cass.module.public.menu.people.title": "Люди"
 }
