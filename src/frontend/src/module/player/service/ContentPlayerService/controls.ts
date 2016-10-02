@@ -16,4 +16,16 @@ export class Controls
     prev() {
         this.service.playlist.prev();
     }
+
+    shuffle() {
+        this.service.playlist.shuffle();
+    }
+
+    empty() {
+        this.service.playlist.emptyExlcudeCurrent();
+    }
+
+    hide() {
+        this.service.hide();
+    }
 }

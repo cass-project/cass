@@ -4,5 +4,21 @@ div.component-content-player-playlist {
   width: $CASS_CONTENT_PLAYER_PLAYLIST_WIDTH;
   background-color: material-color("grey", "800");
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
+
+  div.flexbox-container {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid material-color("grey", "700");
+    height: 100%;
+
+    >.top {
+      flex-basis: 100%;
+      overflow: auto;
+    }
+
+    >.bottom {
+      flex-shrink: 0;
+    }
+  }
 }

@@ -23,6 +23,14 @@ export class Playlist
         this.playlist = [];
     }
 
+    public emptyExlcudeCurrent() {
+        if(! this.isEmpty()) {
+            this.playlist = this.playlist.filter(item => {
+                return item === this.current;
+            })
+        }
+    }
+
     public isEmpty(): boolean {
         return this.playlist.length === 0;
     }
@@ -61,10 +69,12 @@ export class Playlist
         if(! this.isEmpty()) {
             let currentIndex = this.getOrderNum(this.current);
 
+            console.log(currentIndex);
+
             if(this.getTotalEntries() === currentIndex) {
                 this.current = this.playlist[0];
             }else{
-                this.current = this.playlist[currentIndex];
+                this.current = this.playlist[currentIndex + 1];
             }
         }
     }
@@ -73,12 +83,31 @@ export class Playlist
         if(! this.isEmpty()) {
             let currentIndex = this.getOrderNum(this.current);
 
+            console.log(currentIndex);
+
             if(currentIndex === 0) {
                 this.current = this.playlist[this.getTotalEntries() - 1];
             }else{
-                this.current = this.playlist[currentIndex - 2];
+                this.current = this.playlist[currentIndex - 1];
             }
         }
+    }
+
+    public shuffle() {
+        let counter = this.playlist.length;
+
+        while (counter > 0) {
+            let index = Math.floor(Math.random() * counter);
+
+            counter--;
+
+            // And swap the last element with it
+            let temp = this.playlist[counter];
+            this.playlist[counter] = this.playlist[index];
+            this.playlist[index] = temp;
+        }
+
+        return this.playlist;
     }
 
     public getTotalEntries(): number {
@@ -88,7 +117,9 @@ export class Playlist
     public getOrderNum(attachment: AttachmentEntity<any>): number {
         for(let index = 0; index < this.playlist.length; index++) {
             if(this.playlist.hasOwnProperty(index)) {
-                return index + 1;
+                if(this.playlist[index] === attachment) {
+                    return index;
+                }
             }
         }
 

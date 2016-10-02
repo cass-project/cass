@@ -51,39 +51,43 @@ export class FeedService<T extends FeedEntity>
     };
 
     public update() {
-        this.stream.empty();
-        delete this.criteria.criteria.seek.params.last_id;
-
-        let limit = this.criteria.criteria.seek.params.limit - 1;
-        let status = this.status.addLoading();
-
         if(this.subscription) {
             this.subscription.unsubscribe();
         }
 
-        this.subscription = this.source.fetch(this.createFeedRequest()).subscribe(
-            (response) => {
-                if(response.entities.length > limit){
-                    response.entities.splice(limit, 1);
-                    this.shouldLoad = true;
-                } else {
-                    this.shouldLoad = false;
+        if(this.source) {
+            this.stream.empty();
+            delete this.criteria.criteria.seek.params.last_id;
+
+            let limit = this.criteria.criteria.seek.params.limit - 1;
+            let status = this.status.addLoading();
+
+            this.subscription = this.source.fetch(this.createFeedRequest()).subscribe(
+                (response) => {
+                    if(response.entities.length > limit){
+                        response.entities.splice(limit, 1);
+                        this.shouldLoad = true;
+                    } else {
+                        this.shouldLoad = false;
+                    }
+
+                    this.stream.replace(<any>response.entities);
+
+                    if(response.entities.length > 1){
+                        this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
+                    }
+
+                    if(this.observer) {
+                        this.observer.next(<any>response.entities);
+                    }
+
+                    status.is = false;
+                },
+                (error) => {
+                    status.is = false;
                 }
-
-                this.stream.replace(<any>response.entities);
-
-                if(response.entities.length > 1){
-                    this.criteria.criteria.seek.params.last_id = this.stream.all()[this.stream.all().length - 1]._id;
-                }
-
-                this.observer.next(<any>response.entities);
-
-                status.is = false;
-            },
-            (error) => {
-                status.is = false;
-            }
-        )
+            )
+        }
     }
 
     public hasMoreEntities(): boolean {

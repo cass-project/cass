@@ -1,0 +1,17 @@
+div.component.component-content-player-controls
+  ul.controls.flexbox-container
+    li
+      button.control-button((click)="prev()", title="{{ 'content-player.controls.prev' | translate }}")
+        i.fa.fa-chevron-left
+    li
+      button.control-button((click)="next()", title="{{ 'content-player.controls.next' | translate }}")
+        i.fa.fa-chevron-right
+    li
+      button.control-button((click)="shuffle()", title="{{ 'content-player.controls.shuffle' | translate }}")
+        i.fa.fa-random
+    li
+      button.control-button((click)="empty()", title="{{ 'content-player.controls.empty' | translate }}")
+        i.fa.fa-bars
+    li
+      button.control-button((click)="hide()", title="{{ 'content-player.controls.hide' | translate }}")
+        i.fa.fa-eject

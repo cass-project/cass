@@ -40,5 +40,10 @@
   "cass.module.theme.children": "Subheadings",
   "back": "Back",
   "profile.profile.header.change-cover": "Change-Cover",
-  "themes": "Themes"
+  "themes": "Themes",
+  "content-player.controls.prev": "Previous",
+  "content-player.controls.next": "Next",
+  "content-player.controls.shuffle": "Shuffle",
+  "content-player.controls.empty": "Empty",
+  "content-player.controls.hide": "Hide"
 }

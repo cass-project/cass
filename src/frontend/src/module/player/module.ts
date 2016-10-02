@@ -7,6 +7,7 @@ import {ContentPlayerArea} from "./component/ContentPlayerArea/index";
 import {ContentPlayerAreaWebmVideo} from "./component/ContentPlayerArea/type/WebmVideo/index";
 import {ContentPlayerAreaYoutubeVideo} from "./component/ContentPlayerArea/type/YoutubeVideo/index";
 import {ContentPlayerNotifier} from "./service/ContentPlayerService/notify";
+import {ControlPlayerControls} from "./component/ContentPlayerControls/index";
 
 export const CASSPlayerModule = {
     declarations: [
@@ -17,6 +18,7 @@ export const CASSPlayerModule = {
         ContentPlayerArea,
         ContentPlayerAreaWebmVideo,
         ContentPlayerAreaYoutubeVideo,
+        ControlPlayerControls,
     ],
     providers: [
         ContentPlayerService,

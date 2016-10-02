@@ -22,9 +22,10 @@ div.component-post-list-grid {
         height: 100%;
         border-radius: 3px;
         background-color: #fff;
+        border: 3px solid transparent;
 
         &:hover {
-          outline: 3px solid material-color("blue", "100");
+          border: 3px solid material-color("blue", "400");
         }
       }
     }

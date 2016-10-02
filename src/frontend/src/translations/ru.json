@@ -40,5 +40,10 @@
   "cass.module.theme.children": "Подрубрики",
   "back": "Назад",
   "profile.profile.header.change-cover": "Сменить подложку",
-  "themes": "Тематики"
+  "themes": "Тематики",
+  "content-player.controls.prev": "Предыдущее видео",
+  "content-player.controls.next": "Следующее видео",
+  "content-player.controls.shuffle": "Перемешать плейлист",
+  "content-player.controls.empty": "Очистить плейлист",
+  "content-player.controls.hide": "Скрыть плеер"
 }
