@@ -1,0 +1,44 @@
+@import "./../../../../../styles/globals";
+
+div.component-theme-header {
+  font-family: $FONT_FAMILY;
+  text-align: center;
+  padding: 20px 0;
+  color: material-color("grey", "700");
+
+  h1 {
+    line-height: 60px;
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: material-color("grey", "900");
+  }
+
+  ul.path {
+    margin-top: 10px;
+
+    > li {
+      display: inline-block;
+      margin-right: 10px;
+
+      &:after {
+        content: ' / ';
+      }
+
+      &:last-child:after {
+        content: '';
+      }
+
+      a {
+        font-size: 16px;
+        text-transform: uppercase;
+
+        color: material-color("grey", "700");
+
+        &:hover {
+          color: material-color("indigo", "500");
+        }
+      }
+    }
+  }
+}

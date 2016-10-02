@@ -1,0 +1,6 @@
+div.component.component-theme-header
+  h1 {{ getTitle() }}
+  ul.path(*ngIf="! isRoot()")
+    li(*ngFor="let theme of getPath()")
+      a(href="javascript:void(0)", (click)="go(theme)")
+        span.title {{ theme.title }}

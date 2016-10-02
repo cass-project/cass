@@ -5,6 +5,8 @@ article.component.component-public-profiles-route
     div.themes-list(*ngIf="ui.panels.themes.isEnabled()")
       cass-theme-panel([root]="getThemePanelRoot()", (change)="goTheme($event)")
     div.content
+      div.theme-header
+        cass-theme-header([theme]="getThemeRoot()", (go)="goTheme($event)")
       div.split-view
         div.content-area(#content, (scroll)="onScroll($event)")
           div.screen-themes(*ngIf="swipe.isAtThemeScreen()")

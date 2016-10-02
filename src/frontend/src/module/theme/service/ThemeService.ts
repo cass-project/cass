@@ -68,8 +68,8 @@ export class ThemeService
         }else{
             return {
                 id: 1,
-                title: 'ROOT',
-                description: 'Root',
+                title: 'Yoozer',
+                description: 'Yoozer',
                 parent_id: null,
                 position: 1,
                 preview: '',
