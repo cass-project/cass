@@ -1,1 +1,10 @@
-div.component.component-profile-card-grid
+div.component.component-profile-card-grid((click)="open()")
+  .cover-profile-image
+    .profile-image-container(style="background-image: url('{{ helper.getProfileImageURL() }}');")
+  .cover-profile-about
+    .profile-name
+      h1 {{ helper.getProfileName() }}
+    .profile-themes
+      ul.themes-list(*ngIf="helper.hasThemes()")
+        li(*ngFor="let theme of helper.getThemes()")
+          span.title {{ theme.title }}

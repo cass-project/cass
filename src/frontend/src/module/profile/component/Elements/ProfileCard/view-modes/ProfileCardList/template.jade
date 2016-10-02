@@ -5,7 +5,7 @@ div.component.component-profile-card-list
         cass-profile-image([url]="helper.getProfileImageURL()", border="square")
     div.profile-info
       h1 {{ helper.getProfileName() }}
-    div.profile-themes
-      ul.themes-list(*ngIf="helper.hasThemes()")
+    div.profile-themes(*ngIf="helper.hasThemes()")
+      ul.themes-list
         li(*ngFor="let theme of helper.getThemes()")
           span.title {{ theme.title }}

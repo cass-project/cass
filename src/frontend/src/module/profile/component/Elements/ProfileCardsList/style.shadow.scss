@@ -13,13 +13,9 @@ div.component-profile-cards-list {
 
   div.view-mode-grid {
     ul.profiles-list {
-      width: 200px;
-      height: 113px;
-
-      display: inline-block;
-      margin: 5px;
-      text-align: left;
-      vertical-align: top;
+      > li {
+        display: inline-block;
+      }
 
       div.post-card-container {
         @include card(1);

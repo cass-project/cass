@@ -1,3 +1,67 @@
-div.component-profile-card-grid {
+@import "./../../../../../../../styles/globals";
 
+div.component-profile-card-grid {
+  @include card(1);
+
+  cursor: pointer;
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid transparent;
+
+  &:hover {
+    border-color: material-color("indigo", "500");
+  }
+
+  .cover-profile-image {
+    position: absolute;
+    top: 0; height: 100%;
+    left: 0; width: 100%;
+
+    .profile-image-container {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .cover-profile-about {
+    position: absolute;
+    left: 0; width: 100%;
+    bottom: 0;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.6);
+    box-sizing: border-box;
+    text-align: center;
+
+    .profile-name {
+      h1 {
+        font-size: 16px;
+        color: #fff;
+      }
+    }
+
+    .profile-themes {
+      margin-top: 7px;
+
+      ul.themes-list {
+        li {
+          font-size: 14px;
+          color: rgba(255,255,255,0.8);
+          display: inline-block;
+
+          &:after {
+            content: ', ';
+          }
+
+          &:last-child:after {
+            content: '';
+          }
+        }
+      }
+    }
+  }
 }
