@@ -5,6 +5,7 @@
   "sidebar.item.communities.title": "Сообщества",
   "sidebar.item.sign-in.title": "Вход",
   "sidebar.item.sign-out.title": "Выход",
+  "sidebar.item.switch-profile.title": "Сменить профиль",
   "sidebar.item.profile.title": "Профиль",
   "sidebar.item.search.title": "Поиск",
   "sidebar.right.item.top.title": "Наверх",
@@ -53,5 +54,7 @@
   "gender.not-specified": "Не указан",
   "registered": "Дата регистрации",
   "gender": "Пол",
-  "cass.module.public.menu.people.title": "Люди"
+  "cass.module.public.menu.people.title": "Люди",
+  "switch-profile": "Сменить профиль",
+  "create-profile": "Создать новый профиль"
 }

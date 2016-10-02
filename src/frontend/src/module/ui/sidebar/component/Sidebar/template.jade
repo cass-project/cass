@@ -37,6 +37,11 @@
             i.fa.fa-hashtag
           span.title {{ "sidebar.item.communities.title" | translate }}
       li(*ngIf="isSignedIn()")
+        a.sidebar-item(href="javascript:void(0)", (click)="switchProfile()")
+          div.image
+            i.fa.fa-sign-in
+          span.title {{ "sidebar.item.switch-profile.title" | translate }}
+      li(*ngIf="isSignedIn()")
         a.sidebar-item(href="javascript:void(0)", (click)="signOut()")
           div.image
             i.fa.fa-power-off

@@ -1,19 +1,12 @@
 import {Component, Output, EventEmitter} from "@angular/core";
-import {Router} from "@angular/router";
-
-import {ComponentStages} from "../../../../common/classes/ComponentStages";
-import {ProfileSwitcherService} from "./service";
-import {AuthService} from "../../../../auth/service/AuthService";
-
-enum ProfileSwitcherStage
-{
-    Choice = <any>"Choice",
-    Processing = <any>"Processing"
-}
+import {Session} from "../../../../session/Session";
+import {ProfileEntity} from "../../../definitions/entity/Profile";
+import {ProfileRESTService} from "../../../service/ProfileRESTService";
+import {LoadingManager} from "../../../../common/classes/LoadingStatus";
 
 @Component({
     selector: 'cass-profile-switcher',
-    template: require('./template.html'),
+    template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
     ]
@@ -22,21 +15,60 @@ export class ProfileSwitcher
 {
     @Output('close') closeEvent = new EventEmitter<boolean>();
 
-    stage: ComponentStages<ProfileSwitcherStage> = new ComponentStages<ProfileSwitcherStage>(ProfileSwitcherStage.Choice);
+    private status: LoadingManager = new LoadingManager();
 
-    constructor(private service: ProfileSwitcherService,
-                private router: Router,
-                private authService: AuthService           
-    ) {}
+    constructor(
+        private session: Session,
+        private rest: ProfileRESTService
+    ) {
+        if(! session.isSignedIn()) {
+            this.close();
+        }
+    }
 
-    closeProfileSwitcher() {
+    hasProfile(index: number) {
+        return this.session.getCurrentAccount().profiles.profiles[index] !== undefined;
+    }
+
+    getProfile(index: number) {
+        if(this.hasProfile(index)) {
+            return this.session.getCurrentAccount().profiles.profiles[index].entity.profile;
+        }else{
+            throw new Error(`Profile with index '${index}' is not available`)
+        }
+    }
+
+    createNewProfile() {
+        let status = this.status.addLoading();
+
+        this.rest.createNewProfile().subscribe(
+            response => {
+                window.location.href = '/';
+            },
+            error => {
+                status.is = false;
+            }
+        );
+    }
+
+    switchToProfile(profile: ProfileEntity) {
+        let status = this.status.addLoading();
+
+        this.rest.switchProfile(profile.id).subscribe(
+            response => {
+                window.location.href = '/';
+            },
+            error => {
+                status.is = false;
+            }
+        )
+    }
+
+    close() {
        this.closeEvent.emit(true); 
     }
 
-    signOut() {
-        this.authService.signOut().subscribe(() => {
-            this.closeProfileSwitcher();
-            this.router.navigate(['home']);
-        });
+    canCreateMoreProfiles() {
+        return this.session.getCurrentAccount().profiles.profiles.length < 4;
     }
 }

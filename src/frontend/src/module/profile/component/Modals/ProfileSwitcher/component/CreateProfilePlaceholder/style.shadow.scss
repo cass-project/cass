@@ -1,0 +1,28 @@
+@import "./../../../../../../../styles/globals";
+
+div.component-profile-switcher-create-profile-placeholder {
+  div.create-profile-card {
+    @include card(1);
+
+    background-color: material-color("grey", "100");
+
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid transparent;
+    text-align: center;
+
+    &:hover {
+      border-color: material-color("indigo", "500");
+    }
+
+    i.fa {
+      line-height: 200px;
+      color: material-color("grey", "500");
+      font-size: 32px;
+    }
+  }
+}

@@ -5,6 +5,7 @@
   "sidebar.item.communities.title": "Communities",
   "sidebar.item.sign-in.title": "Sign In",
   "sidebar.item.sign-out.title": "Sign Out",
+  "sidebar.item.switch-profile.title": "Switch profile",
   "sidebar.item.profile.title": "Profile",
   "sidebar.item.search.title": "Search",
   "sidebar.right.item.top.title": "To the top of page",
@@ -53,5 +54,7 @@
   "gender.not-specified": "Not specified",
   "registered": "Registered",
   "gender": "Sex",
-  "cass.module.public.menu.people.title": "People"
+  "cass.module.public.menu.people.title": "People",
+  "switch-profile": "Switch Profile",
+  "create-profile": "Create Profile"
 }

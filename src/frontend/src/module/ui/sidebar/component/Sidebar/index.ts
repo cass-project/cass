@@ -1,9 +1,10 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
+
 import {AuthService} from "../../../../auth/service/AuthService";
 import {AuthModalsService} from "../../../../auth/component/Auth/modals";
 import {UIService} from "../../../service/ui";
-
+import {ProfileModals} from "../../../../profile/component/Elements/Profile/modals";
 
 require('./style.head.scss');
 
@@ -16,6 +17,7 @@ export class SidebarComponent
     constructor(
         private authService: AuthService,
         private authModals: AuthModalsService,
+        private profileModals: ProfileModals,
         private uiService: UIService,
         private router: Router
     ) {}
@@ -30,6 +32,10 @@ export class SidebarComponent
 
     private signOut(){
         this.authModals.signOut();
+    }
+
+    private switchProfile() {
+        this.profileModals.switcher.open();
     }
 
     private isSearchActive() {

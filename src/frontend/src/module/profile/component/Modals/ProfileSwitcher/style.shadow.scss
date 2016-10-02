@@ -1,54 +1,18 @@
 @import "./../../../../../styles/globals";
 
-div.component-profile-switcher
-{
-  div.processing-container {
-    margin: 10px;
-    height: 10px;
-  }
+div.component-profile-switcher {
+  position: relative;
+  width: 100%;
 
-  ul.profiles-list {
-    li {
-      cursor: pointer;
-      background-color: material-color("grey", "100");
-      border: 0 solid material-color("grey", "400");
-      border-bottom-width: 1px;
+  div.profiles {
+    width: 440px;
 
-      &:first-child {
-        border-top-width: 1px;
-      }
-
-      &:nth-child(odd) {
-        background-color: material-color("grey", "200");
-      }
-
-      &:hover {
-        background-color: material-color("yellow", "100");
-      }
-
-      &.current-profile {
-        cursor: default;
-        background-color: material-color("yellow", "100");
-      }
-
-      section.profile-option {
-        padding: 5px;
-        text-align: center;
-
-        div.profile-image-container {
-          vertical-align: middle;
-          display: inline-block;
-          width: 64px;
-          height: 64px;
-        }
-
-        div.greetings {
-          vertical-align: middle;
-          display: inline-block;
-          font-size: 20px;
-          margin-left: 20px;
-          color: material-color("grey", "900")
-        }
+    div.row {
+      div.item {
+        margin: 0 10px;
+        display: inline-block;
+        width: 200px;
+        height: 200px;
       }
     }
   }

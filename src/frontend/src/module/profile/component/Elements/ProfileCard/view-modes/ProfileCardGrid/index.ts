@@ -15,7 +15,7 @@ import {ProfileThemeListMode} from "../../index";
 export class ProfileCardGrid
 {
     @Input('profile') profile: ProfileEntity;
-    @Input('theme-list-mode') themeListMode: ProfileThemeListMode = ProfileThemeListMode.InterestingIn;
+    @Input('theme-list-mode') themeListMode: ProfileThemeListMode = ProfileThemeListMode.ExpertIn;
     @Output('open') openProfile: EventEmitter<ProfileEntity> = new EventEmitter<ProfileEntity>();
 
     private viewMode: ViewOptionValue = ViewOptionValue.Grid;
