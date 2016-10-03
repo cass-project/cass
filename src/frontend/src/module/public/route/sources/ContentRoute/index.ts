@@ -77,6 +77,8 @@ export class ContentRoute implements OnInit
         if(window.localStorage[ContentRoute.LOCAL_STORAGE_KEY] === undefined) {
             this.criteria.criteria.contentType.enabled = true;
             this.criteria.criteria.contentType.params.type = ContentType.Video;
+
+            window.localStorage[ContentRoute.LOCAL_STORAGE_KEY] = ContentType.Video;
         }else{
             let setUp = window.localStorage[ContentRoute.LOCAL_STORAGE_KEY];
 
@@ -88,8 +90,6 @@ export class ContentRoute implements OnInit
                 window.localStorage[ContentRoute.LOCAL_STORAGE_KEY] = setUp;
             }
         }
-
-        window.localStorage[ContentRoute.LOCAL_STORAGE_KEY] = this.criteria.criteria.contentType.params.type;
     }
 
     unshiftEntity(entity: PostEntity) {
