@@ -33,7 +33,7 @@ import {ContentType} from "../../../../feed/definitions/request/criteria/Content
 })
 export class ContentRoute implements OnInit
 {
-    static LOCAL_STORAGE_VISITED_KEY = 'cass.module.feed.stream.post.visited';
+    static LOCAL_STORAGE_KEY = 'cass.module.feed.stream.post.content-type.key';
 
     @ViewChild('content') content: ElementRef;
 
@@ -55,12 +55,7 @@ export class ContentRoute implements OnInit
         catalog.source = 'content';
         catalog.injectFeedService(service);
 
-        if(window.localStorage[ContentRoute.LOCAL_STORAGE_VISITED_KEY] === undefined) {
-            this.criteria.criteria.contentType.enabled = true;
-            this.criteria.criteria.contentType.params.type = ContentType.Video;
-
-            window.localStorage[ContentRoute.LOCAL_STORAGE_VISITED_KEY] = "visited";
-        }
+        this.initContentType();
 
         service.provide(source, new Stream<PostIndexedEntity>());
         service.update();
@@ -76,6 +71,25 @@ export class ContentRoute implements OnInit
         this.navigator.bottom.subscribe(() => {
             this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
         });
+    }
+
+    private initContentType() {
+        if(window.localStorage[ContentRoute.LOCAL_STORAGE_KEY] === undefined) {
+            this.criteria.criteria.contentType.enabled = true;
+            this.criteria.criteria.contentType.params.type = ContentType.Video;
+        }else{
+            let setUp = window.localStorage[ContentRoute.LOCAL_STORAGE_KEY];
+
+            if(setUp === ContentType.None) {
+                this.criteria.criteria.contentType.enabled = false;
+                window.localStorage[ContentRoute.LOCAL_STORAGE_KEY] = ContentType.None;
+            }else{
+                this.criteria.criteria.contentType.enabled = false;
+                window.localStorage[ContentRoute.LOCAL_STORAGE_KEY] = setUp;
+            }
+        }
+
+        window.localStorage[ContentRoute.LOCAL_STORAGE_KEY] = this.criteria.criteria.contentType.params.type;
     }
 
     unshiftEntity(entity: PostEntity) {
