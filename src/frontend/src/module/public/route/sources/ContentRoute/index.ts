@@ -16,6 +16,7 @@ import {CollectionEntity} from "../../../../collection/definitions/entity/collec
 import {PostTypeEntity} from "../../../../post/definitions/entity/PostType";
 import {PostTypeService} from "../../../../post/service/PostTypeService";
 import {Session} from "../../../../session/Session";
+import {ContentType} from "../../../../feed/definitions/request/criteria/ContentTypeCriteriaParams";
 
 @Component({
     template: require('./template.jade'),
@@ -32,6 +33,8 @@ import {Session} from "../../../../session/Session";
 })
 export class ContentRoute implements OnInit
 {
+    static LOCAL_STORAGE_VISITED_KEY = 'cass.module.feed.stream.post.visited';
+
     @ViewChild('content') content: ElementRef;
 
     private postType: PostTypeEntity;
@@ -51,6 +54,13 @@ export class ContentRoute implements OnInit
     ) {
         catalog.source = 'content';
         catalog.injectFeedService(service);
+
+        if(window.localStorage[ContentRoute.LOCAL_STORAGE_VISITED_KEY] === undefined) {
+            this.criteria.criteria.contentType.enabled = true;
+            this.criteria.criteria.contentType.params.type = ContentType.Video;
+
+            window.localStorage[ContentRoute.LOCAL_STORAGE_VISITED_KEY] = "visited";
+        }
 
         service.provide(source, new Stream<PostIndexedEntity>());
         service.update();
