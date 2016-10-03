@@ -19,7 +19,7 @@ export class ProfileResolve implements Resolve<ProfileExtendedEntity>
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<GetProfileByIdResponse200>|boolean {
         let id = route.params['id'];
 
-        if (id === 'current' || id === this.session.getCurrentProfile().getId().toString()) {
+        if (id === 'current' || (this.session.isSignedIn() && id === this.session.getCurrentProfile().getId().toString())) {
             if(this.session.isSignedIn()) {
                 return this.loadCurrentProfile();
             }else{
