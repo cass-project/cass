@@ -86,7 +86,8 @@ export class ContentRoute implements OnInit
                 this.criteria.criteria.contentType.enabled = false;
                 window.localStorage[ContentRoute.LOCAL_STORAGE_KEY] = ContentType.None;
             }else{
-                this.criteria.criteria.contentType.enabled = false;
+                this.criteria.criteria.contentType.enabled = true;
+                this.criteria.criteria.contentType.params.type = setUp;
                 window.localStorage[ContentRoute.LOCAL_STORAGE_KEY] = setUp;
             }
         }
