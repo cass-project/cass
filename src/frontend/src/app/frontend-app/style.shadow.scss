@@ -100,21 +100,3 @@ main.component.component-frontend-app {
     }
   }
 }
-
-@media all and (max-height: 1000px) {
-  main.has-content-player {
-    .content-player-area {
-      display: block;
-      height: 100%;
-      flex-shrink: 0;
-    }
-
-    .header, .content-area {
-      display: none!important;
-    }
-
-    .content-player-area {
-      height: 100%!important;
-    }
-  }
-}
