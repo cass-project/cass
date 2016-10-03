@@ -17,6 +17,8 @@
       "CASS\\Application\\Bundles\\Stage\\": "src/Application/bundles/Stage/src",
       "CASS\\Application\\Bundles\\PHPUnit\\": "src/Application/bundles/PHPUnit/src",
       "CASS\\Application\\Bundles\\Swagger\\": "src/Application/bundles/Swagger/src",
+      "CASS\\Chat\\": "src/Chat/src",
+      "CASS\\Chat\\Bundles\\Contact": "src/Chat/bundles/Contact/src",
       "CASS\\Domain\\": "src/Domain/src",
       "CASS\\Domain\\Bundles\\Account\\": "src/Domain/bundles/Account/src",
       "CASS\\Domain\\Bundles\\Attachment\\": "src/Domain/bundles/Attachment/src",
