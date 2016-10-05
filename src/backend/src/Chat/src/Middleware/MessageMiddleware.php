@@ -1,14 +1,14 @@
 <?php
-namespace CASS\Chat\Bundles\Contact\Middleware;
+namespace CASS\Chat\Middleware;
 
 use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
-use CASS\Chat\Bundles\Contact\Middleware\Command\ListContactsCommand;
+use CASS\Chat\Middleware\Command\SendMessageCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
 
-class ContactMiddleware implements MiddlewareInterface
+class MessageMiddleware implements MiddlewareInterface
 {
     /** @var CommandService */
     private $commandService;
@@ -22,11 +22,10 @@ class ContactMiddleware implements MiddlewareInterface
         $responseBuilder = new CASSResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
-            ->attachDirect("list", ListContactsCommand::class, 'GET')
-            ->attachDirect("add", ListContactsCommand::class, 'PUT')
-            ->attachDirect("remove", ListContactsCommand::class, 'DELETE')
+            ->attachDirect("send", SendMessageCommand::class, 'PUT')
             ->resolve($request);
 
         return $resolver->run($request, $responseBuilder);
     }
+
 }

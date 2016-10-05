@@ -1,0 +1,30 @@
+"/protected/chat/message/send/profile/{profileId}":
+  put:
+    tags:
+      - chat
+    description: написать сообщение
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+      404:
+        $ref: '#/responses/NotFound'
+      403:
+        $ref: '#/responses/Unauthorized'
+      409:
+        $ref: '#/responses/error'
