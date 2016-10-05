@@ -23,6 +23,8 @@ class ContactMiddleware implements MiddlewareInterface
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect("list", ListContactsCommand::class, 'GET')
+            ->attachDirect("add", ListContactsCommand::class, 'PUT')
+            ->attachDirect("remove", ListContactsCommand::class, 'DELETE')
             ->resolve($request);
 
         return $resolver->run($request, $responseBuilder);
