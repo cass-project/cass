@@ -70,7 +70,7 @@ export class RESTService
 
         fork
             .catch(error => {
-                return Observable.throw(this.handleError(error));
+                return Observable.onErrorResumeNext(Observable.throw(this.handleError(error)));
             })
             .subscribe(() => {});
 
@@ -107,7 +107,7 @@ export class RESTService
         } else {
             this.unknownError();
         }
-
+        
         return response;
     }
 
