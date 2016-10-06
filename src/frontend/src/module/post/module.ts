@@ -19,11 +19,11 @@ export const CASSPostModule = {
         PostFormLinkInput,
         PostPlayer,
         PostPlayerCard,
+        TextParser
     ],
     providers: [
         PostRESTService,
         PostTypeService,
-        PostPlayerService,
-        TextParser
+        PostPlayerService
     ],
 };

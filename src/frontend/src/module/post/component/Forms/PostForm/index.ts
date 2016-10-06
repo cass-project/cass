@@ -8,7 +8,6 @@ import {Session} from "../../../../session/Session";
 import {LoadingManager} from "../../../../common/classes/LoadingStatus";
 import {PostFormModel} from "./model";
 import {AttachmentRESTService} from "../../../../attachment/service/AttachmentRESTService";
-import {TextParser} from "../../../../common/component/TextParser/index";
 
 @Component({
     template: require('./template.jade'),
@@ -34,8 +33,7 @@ export class PostForm
     constructor(
         private session: Session,
         private service: PostRESTService,
-        private attachments: AttachmentRESTService,
-        private parser: TextParser
+        private attachments: AttachmentRESTService
     ) {}
 
     ngOnInit() {
@@ -111,7 +109,7 @@ export class PostForm
     submit() {
         var status = this.status.addLoading();
         var request = this.model.createRequest();
-        request.content = this.parser.parseText(this.model.createRequest().content);
+        request.content = this.model.createRequest().content;
 
 
         this.service.createPost(request).subscribe(

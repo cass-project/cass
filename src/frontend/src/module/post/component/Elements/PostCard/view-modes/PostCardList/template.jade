@@ -10,6 +10,6 @@ div.component.component-post-card-list.x-feed-entity
         span.profile-name {{ getProfileGreetings() }}
         span.date-created-on {{ getDateCreatedOn() }}
       div(*ngIf="helper.hasContent()")
-        div([innerHTML]='helper.getContent()')
+        cass-text-parser([text]='helper.getContent()')
       div(*ngIf="! helper.hasContent()")
         span –
