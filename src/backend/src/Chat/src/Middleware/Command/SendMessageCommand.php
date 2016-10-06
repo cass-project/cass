@@ -11,15 +11,28 @@ class SendMessageCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $profile = $this->currentAccountService->getCurrentAccount()->getCurrentProfile();
 
-        $targetProfle = $this->profileService->getProfileById($request->getAttribute('profileId'));
+//        $profile = $this->currentAccountService->getCurrentAccount()->getCurrentProfile();
+
+        $body = $request->getBody();
+        $targetProfleId = (int) $body['profile_id'];
+        $targetProfle = $this->profileService->getProfileById($targetProfleId);
+
+
+
+
 
         try {
 
             $message = new Message();
-            $message->setSourceProfile($profile);
-            $message->setTargetProfile($targetProfle);
+            $message
+                ->setSourceId($profile->getId())
+                ->setSourceType(Message::SOURCE_TYPE_PROFILE)
+                ->setTargetId($targetProfle->getId())
+                ->setTargetType(Message::TARGET_TYPE_PROFILE)
+                ->setContent($content)
+            ;
+
 
             $message = $this->messageService->createMessage($message);
 

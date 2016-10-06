@@ -1,4 +1,4 @@
-"/protected/chat/message/send/profile/{profileId}":
+"/protected/chat/message/send":
   put:
     tags:
       - chat
@@ -6,11 +6,27 @@
     security:
       - x_api_key: []
     parameters:
-      - name: profileId
-        type: number
-        in: path
+      - name: body
+        in: body
         required: true
-        description: ID профиля
+        description: параметры сообщения
+        schema:
+          type: object
+          required:
+            - target_type
+            - target_id
+            - content
+          properties:
+            source_type:
+              type: number
+            source_id:
+              type: number
+            target_type:
+              type: number
+            target_id:
+              type: number
+            content:
+              type: string
     responses:
       200:
         description: 200 OK
@@ -18,10 +34,14 @@
           type: object
           required:
             - success
+            - entity
           properties:
             success:
               type: boolean
               description: '=true'
+            entity:
+              schema:
+                $ref: '#/definitions/Chat_Entity_Message'
       404:
         $ref: '#/responses/NotFound'
       403:
