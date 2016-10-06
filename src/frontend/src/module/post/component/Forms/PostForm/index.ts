@@ -128,7 +128,7 @@ export class PostForm
 
     reset() {
         this.model.reset();
-        this.focused = false;
+        this.focused = false; ``
         this.linkRequested = false;
         this.contentTextArea.nativeElement.blur();
     }
