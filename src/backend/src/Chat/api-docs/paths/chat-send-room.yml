@@ -1,32 +1,16 @@
-"/protected/chat/message/send":
+"/protected/chat/send/room/{roomId}":
   put:
     tags:
       - chat
-    description: написать сообщение
+    description: написать сообщение в комнату
     security:
       - x_api_key: []
     parameters:
-      - name: body
-        in: body
+      - name: roomId
+        in: path
         required: true
-        description: параметры сообщения
-        schema:
-          type: object
-          required:
-            - target_type
-            - target_id
-            - content
-          properties:
-            source_type:
-              type: number
-            source_id:
-              type: number
-            target_type:
-              type: number
-            target_id:
-              type: number
-            content:
-              type: string
+        type: number
+        description: Id комнаты
     responses:
       200:
         description: 200 OK
