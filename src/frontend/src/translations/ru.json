@@ -56,5 +56,6 @@
   "gender": "Пол",
   "cass.module.public.menu.people.title": "Люди",
   "switch-profile": "Сменить профиль",
-  "create-profile": "Создать новый профиль"
+  "create-profile": "Создать новый профиль",
+  "cass.module.public.menu.collection.title": "Подборки"
 }

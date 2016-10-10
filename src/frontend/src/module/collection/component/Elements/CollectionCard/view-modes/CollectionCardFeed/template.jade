@@ -3,10 +3,10 @@ div.component.component-collection-card-feed
     .flex-container
       .top-section
         .collection-image
-          .image-container([ngStyle]="{'background-image': getImageURL() }")
+          .image-container([ngStyle]="{'background-image': helper.getImageURL() }")
         .collection-about
           h1 {{ entity.title }}
           p {{ entity.description }}
       .bottom-section
-        footer.theme(*ngIf="hasTheme()")
-          span.theme {{ getThemeTitle() }}
+        footer.theme(*ngIf="helper.hasTheme()")
+          span.theme {{ helper.getThemeTitle() }}

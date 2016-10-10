@@ -1,9 +1,10 @@
 import {Component, Input} from "@angular/core";
 
-import {SwipeService} from "../../../../swipe/service/SwipeService";
-import {UIService} from "../../../../ui/service/ui";
-import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
-import {PublicService} from "../../../../public/service";
+import {SwipeService} from "../../../../../../swipe/service/SwipeService";
+import {UIService} from "../../../../../../ui/service/ui";
+import {FeedCriteriaService} from "../../../../../../feed/service/FeedCriteriaService";
+import {PublicService} from "../../../../../service";
+
 
 @Component({
     selector: 'cass-profile-catalog-menu',

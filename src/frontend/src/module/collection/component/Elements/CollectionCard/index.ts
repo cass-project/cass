@@ -10,9 +10,6 @@ import {CollectionCardGrid} from "./view-modes/CollectionCardGrid/index";
 @Component({
     selector: 'cass-collection-card',
     template: require('./template.jade'),
-    styles: [
-        require('./style.shadow.scss')
-    ],
     providers: [
         CollectionCardHelper,
     ]
@@ -21,12 +18,16 @@ import {CollectionCardGrid} from "./view-modes/CollectionCardGrid/index";
 export class CollectionCard implements OnChanges
 {
     @Input('entity') entity: CollectionEntity;
-    @Input('view-option') viewOption: ViewOptionValue = ViewOptionValue.Feed;
+    @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open') openEvent: EventEmitter<CollectionEntity> = new EventEmitter<CollectionEntity>();
 
     constructor(
         private helper: CollectionCardHelper
     ) {}
+
+    isViewMode(viewMode: ViewOptionValue): boolean {
+        return this.viewMode === viewMode;
+    }
 
     ngOnChanges() {
         this.helper.setCollection(this.entity);

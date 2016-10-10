@@ -15,6 +15,8 @@ import {PublicRoute} from "./route/root/index";
 import {PublicContentMenu} from "./route/sources/ContentRoute/component/PublicContentMenu/index";
 import {NotEnoughCommunities} from "./route/sources/CommunitiesRoute/component/NotEnoughCommunities/index";
 import {NotEnoughCollections} from "./route/sources/CollectionsRoute/component/NotEnoughCollections/index";
+import {ProfileCatalogMenu} from "./route/sources/ProfilesRoute/component/ProfileCatalogMenu/index";
+import {CollectionCatalogMenu} from "./route/sources/CollectionsRoute/component/CollectionCatalogMenu/index";
 
 export const CASSPublicComponent = {
     declarations: [
@@ -28,6 +30,8 @@ export const CASSPublicComponent = {
         PublicContentMenu,
         NotEnoughCommunities,
         NotEnoughCollections,
+        ProfileCatalogMenu,
+        CollectionCatalogMenu,
     ],
     routes: [
         PublicRoute,

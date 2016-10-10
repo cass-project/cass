@@ -1,8 +1,9 @@
 import {Component} from "@angular/core";
 
-import {CollectionIndexEntity} from "../../../../collection/definitions/entity/collection";
+import {CollectionIndexEntity, CollectionEntity} from "../../../../collection/definitions/entity/collection";
 import {FeedService} from "../../../service/FeedService/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
+import {CollectionService} from "../../../../collection/service/CollectionService";
 
 @Component({
     selector: 'cass-feed-collection-stream',
@@ -15,7 +16,8 @@ export class FeedCollectionStream
 {
     constructor(
         private feed: FeedService<CollectionIndexEntity>,
-        private options: FeedOptionsService
+        private options: FeedOptionsService,
+        private collection: CollectionService
     ) {}
 
     getViewOption() {
@@ -24,5 +26,9 @@ export class FeedCollectionStream
 
     hasStream() {
         return typeof this.feed.stream === "object";
+    }
+
+    open($event: CollectionEntity) {
+        this.collection.navigateCollection($event);
     }
 }

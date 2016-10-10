@@ -8,10 +8,12 @@ import {CollectionSettings} from "./component/Modal/CollectionSettings/index";
 import {DeleteCollectionModal} from "./component/Modal/DeleteCollectionModal/index";
 import {CollectionHeader} from "./component/Elements/CollectionHeader/index";
 import {CollectionService} from "./service/CollectionService";
+import {CollectionCardsList} from "./component/Elements/CollectionCardsList/index";
 
 export const CASSCollectionModule = {
     declarations: [
         COLLECTION_CARD_DIRECTIVES,
+        CollectionCardsList,
         CollectionImage,
         CollectionSelect,
         CreateCollectionCard,

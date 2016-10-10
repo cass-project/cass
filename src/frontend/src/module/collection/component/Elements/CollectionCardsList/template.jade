@@ -1,0 +1,28 @@
+div.component.component-collection-cards-list
+  div.view-mode-feed(*ngIf="isViewMode('feed')")
+    ul.collections-list
+      li(*ngFor="let collection of entities")
+        .collection-card-container
+          cass-collection-card(
+            [entity]="entity",
+            (open)="open($event)",
+            view-mode="feed"
+          )
+  div.view-mode-grid(*ngIf="isViewMode('grid')")
+    ul.collections-list
+      li(*ngFor="let collection of entities")
+        .collection-card-container
+          cass-collection-card(
+          [entity]="entity",
+          (open)="open($event)",
+          view-mode="grid"
+        )
+  div.view-mode-list(*ngIf="isViewMode('list')")
+    ul.collections-list
+      li(*ngFor="let collection of entities")
+        .collection-card-container
+          cass-collection-card(
+          [entity]="entity",
+          (open)="open($event)",
+          view-mode="list"
+        )

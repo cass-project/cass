@@ -19,7 +19,9 @@ export class CollectionCardFeed
         private helper: CollectionCardHelper
     ) {}
 
-    open() {
+    open($event) {
+        $event.preventDefault();
+
         this.openEvent.emit(this.entity);
     }
 }

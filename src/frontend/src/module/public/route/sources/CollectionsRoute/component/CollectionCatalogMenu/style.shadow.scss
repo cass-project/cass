@@ -1,6 +1,6 @@
-@import "./../../../../../styles/globals";
+@import "./../../../../../../../styles/globals";
 
-div.component-profile-catalog-menu {
+div.component-collection-catalog-menu {
   background-color: #ffffff;
   border-right: 1px solid #ddd;
   width: $CASS_EXTENDED_MENU_WIDTH;
@@ -76,7 +76,7 @@ div.component-profile-catalog-menu {
   }
 }
 
-div.component-profile-catalog-menu-extended {
+div.component-collection-catalog-menu-extended {
   width: $CASS_EXTENDED_LONG_MENU_WIDTH;
 
   div.flexbox-container {

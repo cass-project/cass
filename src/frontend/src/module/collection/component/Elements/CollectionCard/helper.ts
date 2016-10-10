@@ -15,6 +15,7 @@ export class CollectionCardHelper
     ) {}
 
     setCollection(collection: CollectionEntity) {
+        console.log('ng changes', collection);
         this.collection = collection;
     }
 

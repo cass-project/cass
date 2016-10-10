@@ -1,8 +1,7 @@
 article.component.component-feed-collection-stream
   div(*ngIf="hasStream()")
-  .entities
-    .collection-card-container(*ngFor="let collection of feed.stream.all()")
-      cass-collection-card([entity]="collection", [view-option]="getViewOption()")
+    .entities
+        cass-collection-cards-list([entities]="feed.stream.all()", [view-mode]="getViewOption()", (open)="open($event)")
     .loading-indicator
       cass-loading-indicator(*ngIf="feed.isLoading()")
   div(*ngIf="!feed.isLoading()")

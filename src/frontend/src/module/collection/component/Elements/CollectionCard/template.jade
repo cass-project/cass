@@ -1,1 +1,7 @@
-section.component.component-collection-card
+div.component.component-collection-card
+  div(*ngIf="isViewMode('feed')")
+    cass-collection-card-feed([entity]="entity", (open)="open($event)")
+  div(*ngIf="isViewMode('grid')")
+    cass-collection-card-grid([entity]="entity", (open)="open($event)")
+  div(*ngIf="isViewMode('list')")
+    cass-collection-card-list([entity]="entity", (open)="open($event)")

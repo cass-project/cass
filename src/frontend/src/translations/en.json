@@ -56,5 +56,6 @@
   "gender": "Sex",
   "cass.module.public.menu.people.title": "People",
   "switch-profile": "Switch Profile",
-  "create-profile": "Create Profile"
+  "create-profile": "Create Profile",
+  "cass.module.public.menu.collection.title": "Collections"
 }
