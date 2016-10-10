@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, HostListener} from "@angular/core";
 
 import {ViewOptionService} from "../../../../public/component/Options/ViewOption/service";
 import {ContentPlayerService} from "../../../../player/service/ContentPlayerService/service";
@@ -18,4 +18,31 @@ export class RightSidebar
         private player: ContentPlayerService,
         private navigator: UINavigationObservable
     ) {}
+    
+    
+
+    @HostListener('document:keydown', ['$event']) globalKeyDown($event){
+
+        if($event.key === 'ArrowUp'){
+            $event.preventDefault();
+            this.navigator.emitUp();
+        }
+
+        if($event.key === 'ArrowDown'){
+            $event.preventDefault();
+            this.navigator.emitDown();
+        }
+
+        if($event.key === 'ArrowLeft'){
+            $event.preventDefault();
+            this.navigator.emitLeft();
+        }
+
+        if($event.key === 'ArrowRight'){
+            $event.preventDefault();
+            this.navigator.emitRight();
+        }
+
+        console.log($event);
+    }
 }

@@ -12,20 +12,20 @@ export class UINavigationObservable
     public prev: Observable<number>;
     public next: Observable<number>;
     public bottom: Observable<boolean>;
-    public up: Observable<number>;
-    public down: Observable<number>;
-    public left: Observable<number>;
-    public right: Observable<number>;
+    public up: Observable<boolean>;
+    public down: Observable<boolean>;
+    public left: Observable<boolean>;
+    public right: Observable<boolean>;
 
     public observerScroll: Observer<ScrollEvent>;
     public observerTop: Observer<boolean>;
     public observerPrev: Observer<number>;
     public observerNext: Observer<number>;
     public observerBottom: Observer<boolean>;
-    public observerUp: Observer<number>;
-    public observerDown: Observer<number>;
-    public observerLeft: Observer<number>;
-    public observerRight: Observer<number>;
+    public observerUp: Observer<boolean>;
+    public observerDown: Observer<boolean>;
+    public observerLeft: Observer<boolean>;
+    public observerRight: Observer<boolean>;
 
     constructor() {
         this.scroll = Observable.create(observer => {
@@ -107,20 +107,20 @@ export class UINavigationObservable
         this.observerNext.next(num);
     }
 
-    public emitUp(num: number){
-        this.observerUp.next(num);
+    public emitUp(){
+        this.observerUp.next(true);
     }
 
-    public emitDown(num: number){
-        this.observerDown.next(num);
+    public emitDown(){
+        this.observerDown.next(true);
     }
 
-    public emitLeft(num: number){
-        this.observerLeft.next(num);
+    public emitLeft(){
+        this.observerLeft.next(true);
     }
 
-    public emitRight(num: number){
-        this.observerRight.next(num);
+    public emitRight(){
+        this.observerRight.next(true);
     }
 
     public emitBottom() {
