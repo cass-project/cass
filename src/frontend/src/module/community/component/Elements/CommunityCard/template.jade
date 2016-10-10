@@ -14,3 +14,6 @@ article.component.component-community-card((click)="goCommunity()")
           li()
             a(href="javascript.void(0)")
               span {{ getTheme().title }}
+
+  div(*ngIf="isViewMode('feed')")
+    cass-community-card-feed

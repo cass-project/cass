@@ -1,9 +1,7 @@
-import {Component, Input} from "@angular/core";
-import {Router} from "@angular/router";
+import {Component, Input, OnChanges} from "@angular/core";
 
-import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
 import {CommunityEntity} from "../../../definitions/entity/Community";
-import {ThemeService} from "../../../../theme/service/ThemeService";
+import {CommunityCardHelper} from "./helper";
 
 @Component({
     selector: 'cass-community-card',
@@ -12,36 +10,15 @@ import {ThemeService} from "../../../../theme/service/ThemeService";
         require('./style.shadow.scss')
     ],
 })
-export class CommunityCard
+export class CommunityCard implements OnChanges
 {
-    @Input('community') entity: CommunityEntity;
+    @Input('community') community: CommunityEntity;
 
     constructor(
-        private themeService: ThemeService,
-        private router: Router
+        private helper: CommunityCardHelper
     ) {}
 
-    getTheme() {
-        return this.themeService.findById(this.entity.theme.id);
-    }
-
-    getCommunityTitle(): string {
-        return this.entity.title;
-    }
-
-    getCommunityDescription(): string {
-        return this.entity.description;
-    }
-
-    getImageURL(): string {
-        return queryImage(QueryTarget.Card, this.entity.image).public_path;
-    }
-
-    hasTheme() {
-        return this.entity.theme.has;
-    }
-
-    goCommunity() {
-        this.router.navigate(['community', this.entity.sid]);
+    ngOnChanges() {
+        this.helper.setCommunity(this.community);
     }
 }
