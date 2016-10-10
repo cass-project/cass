@@ -1,12 +1,18 @@
-div.component.component-collection-card-feed
-  a.card((click)="open($event)", routerLink="helper.getRouterParams(entity)")
-    .flex-container
-      .top-section
-        .collection-image
-          .image-container([ngStyle]="{'background-image': helper.getImageURL() }")
-        .collection-about
-          h1 {{ entity.title }}
-          p {{ entity.description }}
-      .bottom-section
-        footer.theme(*ngIf="helper.hasTheme()")
-          span.theme {{ helper.getThemeTitle() }}
+div.component.component-community-card-feed
+  .card-content
+    .community-image
+      .community-image-container
+          cass-community-image([url]="helper.getImageURL()", border="square")
+    .community-about
+      h1.community-title
+        span {{ helper.getCommunityTitle() }}
+      h2.community-description
+        span {{ helper.getCommunityDescription() }}
+      .community-expert-in(*ngIf="helper.hasTheme()")
+        .community-expert-in-title Сообщество специализируется на
+        ul.themes
+          li()
+            a(href="javascript.void(0)")
+              span {{ helper.getTheme().title }}
+
+  
