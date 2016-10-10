@@ -1,41 +1,45 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Output, OnChanges, EventEmitter} from "@angular/core";
 
 import {CollectionEntity} from "../../../definitions/entity/collection";
-import {queryImage, QueryTarget} from "../../../../avatar/functions/query";
-import {ThemeService} from "../../../../theme/service/ThemeService";
+import {CollectionCardHelper} from "./helper";
+import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
+import {CollectionCardFeed} from "./view-modes/CollectionCardFeed/index";
+import {CollectionCardList} from "./view-modes/CollectionCardList/index";
+import {CollectionCardGrid} from "./view-modes/CollectionCardGrid/index";
 
 @Component({
     selector: 'cass-collection-card',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
+    ],
+    providers: [
+        CollectionCardHelper,
     ]
 })
 
-export class CollectionCard
+export class CollectionCard implements OnChanges
 {
     @Input('entity') entity: CollectionEntity;
-    @Input('params') params;
+    @Input('view-option') viewOption: ViewOptionValue = ViewOptionValue.Feed;
+    @Output('open') openEvent: EventEmitter<CollectionEntity> = new EventEmitter<CollectionEntity>();
 
     constructor(
-        private theme: ThemeService
+        private helper: CollectionCardHelper
     ) {}
 
-    getImageURL(): string {
-        let image = queryImage(QueryTarget.Card, this.entity.image).public_path;
-
-        return `url('${image}')`;
+    ngOnChanges() {
+        this.helper.setCollection(this.entity);
     }
 
-    hasTheme(): boolean {
-        return this.entity.theme_ids.length > 0;
-    }
-
-    getThemeTitle(): string {
-        if(this.hasTheme()) {
-            return this.theme.findById(this.entity.theme_ids[0]).title;
-        }else{
-            return 'N/A';
-        }
+    open($event: CollectionEntity) {
+        this.openEvent.emit($event);
     }
 }
+
+export const COLLECTION_CARD_DIRECTIVES = [
+    CollectionCard,
+    CollectionCardFeed,
+    CollectionCardList,
+    CollectionCardGrid,
+];

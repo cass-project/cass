@@ -1,0 +1,12 @@
+div.component.component-collection-card-feed
+  a.card((click)="open($event)", routerLink="helper.getRouterParams(entity)")
+    .flex-container
+      .top-section
+        .collection-image
+          .image-container([ngStyle]="{'background-image': getImageURL() }")
+        .collection-about
+          h1 {{ entity.title }}
+          p {{ entity.description }}
+      .bottom-section
+        footer.theme(*ngIf="hasTheme()")
+          span.theme {{ getThemeTitle() }}

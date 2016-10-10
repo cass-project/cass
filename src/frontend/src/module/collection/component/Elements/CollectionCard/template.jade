@@ -1,12 +1,1 @@
 section.component.component-collection-card
-  a.card([routerLink]="params")
-    .flex-container
-      .top-section
-        .collection-image
-          .image-container([ngStyle]="{'background-image': getImageURL() }")
-        .collection-about
-          h1 {{ entity.title }}
-          p {{ entity.description }}
-      .bottom-section
-        footer.theme(*ngIf="hasTheme()")
-          span.theme {{ getThemeTitle() }}
