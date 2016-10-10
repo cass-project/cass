@@ -44,3 +44,8 @@ div.component.component-right-sidebar
         li.list-item
           a(href="javascript:void(0)", title="{{ 'sidebar.right.item.next.title' | translate }}", (click)="navigator.emitNext(1)")
             i.fa.fa-arrow-up.fa-rotate-180
+        li.list-item
+          a((keydown.ArrowUp)="navigator.emitUp(1)")
+          a((keydown.ArrowDown)="navigator.emitDown(1)")
+          a((keydown.ArrowLeft)="navigator.emitLeft(1)")
+          a((keydown.ArrowRight)="navigator.emitRight(1)")

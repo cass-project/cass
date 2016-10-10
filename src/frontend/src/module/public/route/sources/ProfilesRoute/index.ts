@@ -26,6 +26,7 @@ import {PublicThemeHelper} from "../../theme-helper";
         PublicThemeHelper,
     ]
 })
+
 export class ProfilesRoute implements OnInit
 {
     @ViewChild('content') content: ElementRef;
@@ -49,6 +50,10 @@ export class ProfilesRoute implements OnInit
     ngOnInit() {
         this.navigator.top.subscribe(() => {
             this.content.nativeElement.scrollTop = 0;
+        });
+
+        this.navigator.up.subscribe(() => {
+           console.log(this.content.nativeElement);
         });
 
         this.navigator.bottom.subscribe(() => {

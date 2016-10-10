@@ -12,12 +12,20 @@ export class UINavigationObservable
     public prev: Observable<number>;
     public next: Observable<number>;
     public bottom: Observable<boolean>;
+    public up: Observable<number>;
+    public down: Observable<number>;
+    public left: Observable<number>;
+    public right: Observable<number>;
 
     public observerScroll: Observer<ScrollEvent>;
     public observerTop: Observer<boolean>;
     public observerPrev: Observer<number>;
     public observerNext: Observer<number>;
     public observerBottom: Observer<boolean>;
+    public observerUp: Observer<number>;
+    public observerDown: Observer<number>;
+    public observerLeft: Observer<number>;
+    public observerRight: Observer<number>;
 
     constructor() {
         this.scroll = Observable.create(observer => {
@@ -36,11 +44,27 @@ export class UINavigationObservable
             this.observerNext = observer;
         }).publish().refCount();
 
+        this.up = Observable.create(observer => {
+            this.observerUp = observer;
+        }).publush().refCount();
+
+        this.down = Observable.create(observer => {
+            this.observerDown = observer;
+        }).publush().refCount();
+
+        this.left = Observable.create(observer => {
+            this.observerLeft = observer;
+        }).publush().refCount();
+
+        this.right = Observable.create(observer => {
+            this.observerRight = observer;
+        }).publush().refCount();
+
         this.bottom = Observable.create(observer => {
             this.observerBottom = observer;
         }).publish().refCount();
 
-        [this.scroll, this.top, this.prev, this.next].forEach((observable: Observable<any>) => {
+        [this.scroll, this.top, this.prev, this.next, this.up, this.down, this.left, this.right, this.bottom].forEach((observable: Observable<any>) => {
             observable.subscribe(() => {}, () => {});
         });
     }
@@ -81,6 +105,22 @@ export class UINavigationObservable
 
     public emitNext(num: number) {
         this.observerNext.next(num);
+    }
+
+    public emitUp(num: number){
+        this.observerUp.next(num);
+    }
+
+    public emitDown(num: number){
+        this.observerDown.next(num);
+    }
+
+    public emitLeft(num: number){
+        this.observerLeft.next(num);
+    }
+
+    public emitRight(num: number){
+        this.observerRight.next(num);
     }
 
     public emitBottom() {
