@@ -1,9 +1,9 @@
 div.component.component-collection-card-feed
-  a.card((click)="open($event)", routerLink="helper.getRouterParams(entity)")
+  a.card((click)="open($event)", [routerLink]="helper.getRouterParams(entity)")
     .flex-container
       .top-section
         .collection-image
-          .image-container([ngStyle]="{'background-image': helper.getImageURL() }")
+          .image-container([ngStyle]="{'background-image': 'url(' + helper.getImageURL() + ')' }")
         .collection-about
           h1 {{ entity.title }}
           p {{ entity.description }}

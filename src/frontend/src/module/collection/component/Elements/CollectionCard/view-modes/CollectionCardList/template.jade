@@ -1,2 +1,11 @@
 div.component.component-collection-card-list
-  
+  div.flexbox-container
+    div.collection-image
+      a.collection-image-container((click)="open($event)", [routerLink]="helper.getRouterParams(entity)")
+        cass-collection-image([url]="helper.getImageURL()", border="square")
+    div.collection-info
+      h1 {{ helper.getCollectionName() }}
+    div.collection-themes(*ngIf="helper.hasTheme()")
+      ul.themes-list
+        li(*ngFor="let theme of helper.getThemes()")
+          span.title {{ theme.title }}

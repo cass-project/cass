@@ -3,6 +3,7 @@ import {CollectionEntity} from "../../../definitions/entity/collection";
 import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {CollectionService} from "../../../service/CollectionService";
+import {Theme} from "../../../../theme/definitions/entity/Theme";
 
 @Injectable()
 export class CollectionCardHelper
@@ -15,18 +16,31 @@ export class CollectionCardHelper
     ) {}
 
     setCollection(collection: CollectionEntity) {
-        console.log('ng changes', collection);
         this.collection = collection;
     }
 
-    getImageURL(): string {
-        let image = queryImage(QueryTarget.Card, this.collection.image).public_path;
+    getCollectionName(): string {
+        return this.collection.title;
+    }
 
-        return `url('${image}')`;
+    getImageURL(): string {
+        return queryImage(QueryTarget.Card, this.collection.image).public_path;
     }
 
     hasTheme(): boolean {
         return this.collection.theme_ids.length > 0;
+    }
+
+    getThemes(): Theme[] {
+        let result = [];
+
+        this.collection.theme_ids.forEach(id => {
+            if(this.theme.hasWithId(id)) {
+                result.push(this.theme.findById(id));
+            }
+        });
+
+        return result;
     }
 
     getThemeTitle(): string {
