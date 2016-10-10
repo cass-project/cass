@@ -14,7 +14,10 @@ class FetchResourceService
         list($ch, $result) = $this->curl($url);
 
         if($result === false) {
-            throw new NotFoundException('Page not found');
+            $errorCode = curl_errno( $ch );
+            $errorMessage = curl_error( $ch );
+
+            throw new NotFoundException(sprintf('Page not found (CURL: %s: %s)', $errorCode, $errorMessage));
         }
 
         $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
