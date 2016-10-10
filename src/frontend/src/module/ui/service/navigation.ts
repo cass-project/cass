@@ -46,19 +46,19 @@ export class UINavigationObservable
 
         this.up = Observable.create(observer => {
             this.observerUp = observer;
-        }).publush().refCount();
+        }).publish().refCount();
 
         this.down = Observable.create(observer => {
             this.observerDown = observer;
-        }).publush().refCount();
+        }).publish().refCount();
 
         this.left = Observable.create(observer => {
             this.observerLeft = observer;
-        }).publush().refCount();
+        }).publish().refCount();
 
         this.right = Observable.create(observer => {
             this.observerRight = observer;
-        }).publush().refCount();
+        }).publish().refCount();
 
         this.bottom = Observable.create(observer => {
             this.observerBottom = observer;
