@@ -1,16 +1,8 @@
 article.component.component-community-card((click)="goCommunity()")
-  .card-content
-    .community-image
-      .community-image-container
-          cass-community-image([url]="getImageURL()", border="square")
-    .community-about
-      h1.community-title
-        span {{ getCommunityTitle() }}
-      h2.community-description
-        span {{ getCommunityDescription() }}
-      .community-expert-in(*ngIf="hasTheme()")
-        .community-expert-in-title Сообщество специализируется на
-        ul.themes
-          li()
-            a(href="javascript.void(0)")
-              span {{ getTheme().title }}
+  div(*ngIf="isViewMode('feed')")
+    cass-community-card-feed
+  div(*ngIf="isViewMode('grid')")
+    span In progress
+  div(*ngIf="isViewMode('list')")
+    span In progress
+  
