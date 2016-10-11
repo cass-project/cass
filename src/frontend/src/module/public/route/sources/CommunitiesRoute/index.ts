@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, ViewChild, OnInit, ElementRef} from "@angular/core";
 
 import {FeedService} from "../../../../feed/service/FeedService/index";
 import {Stream} from "../../../../feed/service/FeedService/stream";
@@ -7,6 +7,10 @@ import {CommunityIndexedEntity} from "../../../../community/definitions/entity/C
 import {PublicCommunitiesSource} from "../../../../feed/service/FeedService/source/public/PublicCommunitiesSource";
 import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
+import {UINavigationObservable} from "../../../../ui/service/navigation";
+import {PublicThemeHelper} from "../../theme-helper";
+import {UIService} from "../../../../ui/service/ui";
+import {SwipeService} from "../../../../swipe/service/SwipeService";
 
 @Component({
     template: require('./template.jade'),
@@ -19,14 +23,21 @@ import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
         PublicCommunitiesSource,
         FeedCriteriaService,
         FeedOptionsService,
+        PublicThemeHelper
     ]
 })
-export class CommunitiesRoute
+export class CommunitiesRoute implements OnInit
 {
+    @ViewChild('content') content: ElementRef;
+    
     constructor(
         private catalog: PublicService,
         private service: FeedService<CommunityIndexedEntity>,
-        private source: PublicCommunitiesSource
+        private source: PublicCommunitiesSource,
+        private themeHelper: PublicThemeHelper,
+        private navigator: UINavigationObservable,
+        private ui: UIService,
+        private swipe: SwipeService
     ) {
         catalog.source = 'communities';
         catalog.injectFeedService(service);
@@ -34,4 +45,18 @@ export class CommunitiesRoute
         service.provide(source, new Stream<CommunityIndexedEntity>());
         service.update();
     }
+
+    ngOnInit() {
+        this.navigator.top.subscribe(() => {
+            this.content.nativeElement.scrollTop = 0;
+        });
+
+        this.navigator.bottom.subscribe(() => {
+            this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+        });
+    }
+
+    onScroll($event) {
+        this.navigator.emitScroll(this.content);
+    }    
 }

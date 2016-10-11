@@ -1,0 +1,12 @@
+div.component.component-community-card-feed
+  a.card((click)="open($event)", [routerLink]="helper.getRouterParams()")
+    .flex-container
+      .top-section
+        .community-image
+          .image-container([ngStyle]="{'background-image': 'url(' + helper.getImageURL() + ')' }")
+        .community-about
+          h1 {{ community.title }}
+          p {{ community.description }}
+      .bottom-section
+        footer.theme(*ngIf="helper.hasTheme()")
+          span.theme {{ helper.getThemeTitle() }}

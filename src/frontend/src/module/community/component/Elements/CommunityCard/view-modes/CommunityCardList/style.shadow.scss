@@ -1,0 +1,50 @@
+@import "./../../../../../../../styles/globals";
+
+div.component-community-card-list {
+  width: 100%;
+
+  div.flexbox-container {
+    width: 100%;
+    display: flex;
+    align-content: center;
+
+    div.community-image {
+      flex-basis: 128px;
+      flex-shrink: 0;
+
+      a.community-image-container {
+        cursor: pointer;
+        display: block;
+        @include card(1);
+
+        width: 128px;
+        height: 128px;
+        overflow: hidden;
+        border-radius: 3px;
+        border: 3px solid #fff;
+        outline: 1px solid material-color("grey", "300");
+
+        &:hover {
+          border-color: material-color("indigo", "500");
+          outline: 0;
+        }
+      }
+    }
+
+    div.community-info {
+      width: 100%;
+      margin-left: 20px;
+      text-align: left;
+    }
+
+    div.community-themes {
+      text-align: center;
+      align-items: center;
+      flex-basis: 300px;
+      flex-shrink: 0;
+      margin-left: 20px;
+      font-size: 14px;
+      color: material-color("grey", "600");
+    }
+  }
+}
