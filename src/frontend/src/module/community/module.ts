@@ -2,7 +2,7 @@ import {CommunityRESTService} from "./service/CommunityRESTService";
 import {CommunityFeaturesService} from "./service/CommunityFeaturesService";
 import {CommunityModalService} from "./service/CommunityModalService";
 import {CommunityComponent} from "./component/Elements/Community/index";
-import {CommunityCard, COMMUNITY_CARD_DIRECTIVES} from "./component/Elements/CommunityCard/index";
+import {COMMUNITY_CARD_DIRECTIVES} from "./component/Elements/CommunityCard/index";
 import {CommunityCardHeader} from "./component/Elements/CommunityCardHeader/index";
 import {CommunityCardsList} from "./component/Elements/CommunityCardsList/index";
 import {CommunityCreateCollectionCard} from "./component/Elements/CommunityCreateCollectionCard/index";
@@ -33,7 +33,6 @@ export const CASSCommunityModal = {
     declarations: [
         COMMUNITY_CARD_DIRECTIVES,
         CommunityComponent,
-        CommunityCard,
         CommunityCardHeader,
         CommunityCardsList,
         CommunityCreateCollectionCard,

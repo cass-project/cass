@@ -41,6 +41,7 @@ export class CommunityCard implements OnChanges
 }
 
 export const COMMUNITY_CARD_DIRECTIVES = [
+    CommunityCard,
     CommunityCardFeed,
     CommunityCardList,
     CommunityCardGrid,
