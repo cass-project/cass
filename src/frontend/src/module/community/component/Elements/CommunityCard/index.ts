@@ -1,9 +1,11 @@
-import {Component, Input} from "@angular/core";
-import {Router} from "@angular/router";
+import {Component, Input, OnChanges, EventEmitter, Output} from "@angular/core";
 
-import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
 import {CommunityEntity} from "../../../definitions/entity/Community";
-import {ThemeService} from "../../../../theme/service/ThemeService";
+import {CommunityCardHelper} from "./helper";
+import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
+import {CommunityCardFeed} from "./view-modes/CommunityCardFeed/index";
+import {CommunityCardList} from "./view-modes/CommunityCardList/index";
+import {CommunityCardGrid} from "./view-modes/CommunityCardGrid/index";
 
 @Component({
     selector: 'cass-community-card',
@@ -11,37 +13,36 @@ import {ThemeService} from "../../../../theme/service/ThemeService";
     styles: [
         require('./style.shadow.scss')
     ],
+    providers:[
+        CommunityCardHelper
+    ]
 })
-export class CommunityCard
+export class CommunityCard implements OnChanges
 {
-    @Input('community') entity: CommunityEntity;
-
+    @Input('community') community: CommunityEntity;
+    @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
+    @Output('open') openEvent: EventEmitter<CommunityEntity> = new EventEmitter<CommunityEntity>();
+    
     constructor(
-        private themeService: ThemeService,
-        private router: Router
+        private helper: CommunityCardHelper
     ) {}
 
-    getTheme() {
-        return this.themeService.findById(this.entity.theme.id);
+    isViewMode(viewMode: ViewOptionValue): boolean {
+        return this.viewMode === viewMode;
+    }
+    
+    ngOnChanges() {
+        this.helper.setCommunity(this.community);
     }
 
-    getCommunityTitle(): string {
-        return this.entity.title;
-    }
-
-    getCommunityDescription(): string {
-        return this.entity.description;
-    }
-
-    getImageURL(): string {
-        return queryImage(QueryTarget.Card, this.entity.image).public_path;
-    }
-
-    hasTheme() {
-        return this.entity.theme.has;
-    }
-
-    goCommunity() {
-        this.router.navigate(['community', this.entity.sid]);
+    open($event) {
+        this.openEvent.emit($event);
     }
 }
+
+export const COMMUNITY_CARD_DIRECTIVES = [
+    CommunityCard,
+    CommunityCardFeed,
+    CommunityCardList,
+    CommunityCardGrid,
+];

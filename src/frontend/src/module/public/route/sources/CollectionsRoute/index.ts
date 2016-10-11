@@ -37,7 +37,7 @@ export class CollectionsRoute implements OnInit
         private themeHelper: PublicThemeHelper,
         private navigator: UINavigationObservable,
         private ui: UIService,
-        private swipe: SwipeService,
+        private swipe: SwipeService
     ) {
         catalog.source = 'collections';
         catalog.injectFeedService(service);
