@@ -1,37 +1,69 @@
-@import "./../../../../../../../styles/globals.scss";
+@import "./../../../../../../../styles/globals";
 
-.x-feed-entity-active {
-  outline: 5px solid material-color("blue", "100");
-}
-
-div.component-post-card-feed {
-  .post-card {
+div.component-community-card-feed {
+  .card {
     @include card(1);
-    border-radius: 3px;
-    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    color: black;
+    width: 256px;
+    height: 430px;
     background-color: white;
-    width: 550px;
+    cursor: pointer;
+    transition: all 0.1s;
 
-    .card-header {
-      margin-top: 8px;
-      margin-bottom: 15px;
+    .flex-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
     }
 
-    .content-container {
-      padding: 20px 13px;
-      cursor: text;
-      user-select: text;
-      -moz-user-select: text;
-      -webkit-user-select: text;
-      -ms-user-select: text;
-
-      p {
-        font-family: $FONT_FAMILY;
-        font-size: 16px;
-        font-weight: 400;
-        color: black;
-        line-height: 20px;
+    &:hover {
+      .community-image {
+        filter: brightness(110%);
+        -webkit-filter: brightness(110%);
       }
+    }
+  }
+
+  .community-image {
+    height: 256px;
+
+    .image-container {
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+  }
+
+  .community-about {
+    padding: 20px 13px;
+    height: 80px;
+    overflow: hidden;
+
+    h1 {
+      font-family: $FONT_FAMILY;
+      font-size: 20px;
+      font-weight: 400;
+      color: black;
+      margin-bottom: 10px;
+    }
+
+    p {
+      display: block;
+      color: material-color("grey", "700");
+    }
+  }
+
+  footer.theme {
+    padding: 15px;
+
+    span.theme {
+      font-family: $FONT_FAMILY;
+      font-size: 14px;
+      font-weight: 400;
+      color: material-color("grey", "500");
     }
   }
 }

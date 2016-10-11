@@ -2,7 +2,7 @@ import {CommunityRESTService} from "./service/CommunityRESTService";
 import {CommunityFeaturesService} from "./service/CommunityFeaturesService";
 import {CommunityModalService} from "./service/CommunityModalService";
 import {CommunityComponent} from "./component/Elements/Community/index";
-import {CommunityCard} from "./component/Elements/CommunityCard/index";
+import {CommunityCard, COMMUNITY_CARD_DIRECTIVES} from "./component/Elements/CommunityCard/index";
 import {CommunityCardHeader} from "./component/Elements/CommunityCardHeader/index";
 import {CommunityCardsList} from "./component/Elements/CommunityCardsList/index";
 import {CommunityCreateCollectionCard} from "./component/Elements/CommunityCreateCollectionCard/index";
@@ -27,9 +27,11 @@ import {CommunityCreateModalNotifier} from "./component/Modals/CommunityCreateMo
 import {ScreenFeatures} from "./component/Modals/CommunityCreateModal/Screen/ScreenFeatures/index";
 import {ScreenGeneral} from "./component/Modals/CommunityCreateModal/Screen/ScreenGeneral/index";
 import {CommunityCreateModalForm} from "./component/Modals/CommunityCreateModal/Form/index";
+import {CommunityService} from "./service/CommunityService";
 
 export const CASSCommunityModal = {
     declarations: [
+        COMMUNITY_CARD_DIRECTIVES,
         CommunityComponent,
         CommunityCard,
         CommunityCardHeader,
@@ -56,6 +58,7 @@ export const CASSCommunityModal = {
         CommunityCollectionNotFoundRoute,
     ],
     providers: [
+        CommunityService,
         CommunityRESTService,
         CommunityFeaturesService,
         CommunityModalService,

@@ -1,16 +1,12 @@
-div.component.component-post-card-feed.x-feed-entity.x-feed-entity
-  .card-content
-    .community-image
-      .community-image-container
-          cass-community-image([url]="helper.getImageURL()", border="square")
-    .community-about
-      h1.community-title
-        span {{ helper.getCommunityTitle() }}
-      h2.community-description
-        span {{ helper.getCommunityDescription() }}
-      .community-expert-in(*ngIf="helper.hasTheme()")
-        .community-expert-in-title Сообщество специализируется на
-        ul.themes
-          li()
-            a(href="javascript.void(0)")
-              span {{ helper.getTheme().title }}        
+div.component.component-community-card-feed
+  a.card((click)="open($event)", [routerLink]="helper.getRouterParams()")
+    .flex-container
+      .top-section
+        .community-image
+          .image-container([ngStyle]="{'background-image': 'url(' + helper.getImageURL() + ')' }")
+        .community-about
+          h1 {{ community.title }}
+          p {{ community.description }}
+      .bottom-section
+        footer.theme(*ngIf="helper.hasTheme()")
+          span.theme {{ helper.getThemeTitle() }}

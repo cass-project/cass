@@ -1,8 +1,7 @@
-article.component.component-community-card((click)="goCommunity()")
+div.component.component-community-card
   div(*ngIf="isViewMode('feed')")
-    cass-community-card-feed
+    cass-community-card-feed([community]="community", (open)="open($event)")
   div(*ngIf="isViewMode('grid')")
-    span In progress
+    cass-community-card-grid([community]="community", (open)="open($event)")
   div(*ngIf="isViewMode('list')")
-    span In progress
-  
+    cass-community-card-list([community]="community", (open)="open($event)")

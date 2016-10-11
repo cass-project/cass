@@ -1,9 +1,10 @@
 import {Injectable} from "@angular/core";
-import {Router} from "@angular/router";
 
 import {ThemeService} from "../../../../theme/service/ThemeService";
 import {CommunityEntity} from "../../../definitions/entity/Community";
 import {QueryTarget, queryImage} from "../../../../avatar/functions/query";
+import {CommunityService} from "../../../service/CommunityService";
+import {Theme} from "../../../../theme/definitions/entity/Theme";
 
 @Injectable()
 export class CommunityCardHelper
@@ -12,11 +13,11 @@ export class CommunityCardHelper
     
     constructor(
         private theme: ThemeService,
-        private router: Router
+        private service: CommunityService
     ) {}
 
-    setCommunity(collection: CommunityEntity) {
-        this.community = collection;
+    setCommunity(community: CommunityEntity) {
+        this.community = community;
     }
     
     getTheme() {
@@ -39,7 +40,7 @@ export class CommunityCardHelper
         return this.community.theme.has;
     }
 
-    goCommunity() {
-        this.router.navigate(['community', this.community.sid]);
-    }
+    getRouterParams() {
+        return this.service.getRouterParams(this.community);
+    }    
 }

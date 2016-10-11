@@ -1,0 +1,11 @@
+div.component.component-community-card-list
+  div.flexbox-container
+    div.community-image
+      a.community-image-container((click)="open($event)", [routerLink]="helper.getRouterParams()")
+        cass-community-image([url]="helper.getImageURL()", border="square")
+    div.community-info
+      h1 {{ helper.getCommunityTitle() }}
+    div.community-themes(*ngIf="helper.hasTheme()")
+      ul.themes-list
+        li
+          span.title {{ helper.getThemeTitle() }}

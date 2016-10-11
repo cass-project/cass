@@ -2,7 +2,8 @@ import {Component} from "@angular/core";
 
 import {FeedService} from "../../../service/FeedService/index";
 import {FeedOptionsService} from "../../../service/FeedOptionsService";
-import {CommunityIndexedEntity} from "../../../../community/definitions/entity/Community";
+import {CommunityIndexedEntity, CommunityEntity} from "../../../../community/definitions/entity/Community";
+import {CommunityService} from "../../../../community/service/CommunityService";
 
 @Component({
     selector: 'cass-feed-community-stream',
@@ -15,7 +16,8 @@ export class FeedCommunityStream
 {
     constructor(
         private feed: FeedService<CommunityIndexedEntity>,
-        private options: FeedOptionsService
+        private options: FeedOptionsService,
+        private community: CommunityService
     ) {}
 
     getViewOption() {
@@ -24,5 +26,9 @@ export class FeedCommunityStream
 
     hasStream() {
         return typeof this.feed.stream === "object";
+    }
+
+    open($event: CommunityEntity) {
+        this.community.navigateCommunity($event);
     }
 }
