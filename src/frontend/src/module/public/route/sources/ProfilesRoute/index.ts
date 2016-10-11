@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild, OnInit} from "@angular/core";
+import {Component, ElementRef, ViewChild, OnInit, OnDestroy} from "@angular/core";
 
 import {FeedService} from "../../../../feed/service/FeedService/index";
 import {Stream} from "../../../../feed/service/FeedService/stream";
@@ -11,6 +11,13 @@ import {UIService} from "../../../../ui/service/ui";
 import {UINavigationObservable} from "../../../../ui/service/navigation";
 import {SwipeService} from "../../../../swipe/service/SwipeService";
 import {PublicThemeHelper} from "../../theme-helper";
+import {Observable, Observer} from "rxjs/Rx";
+import {ViewOptionService} from "../../../component/Options/ViewOption/service";
+import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
+import {FeedStrategy} from "../../../../ui/strategy/NavigationStrategy/feed.strategy";
+import {NoneStrategy} from "../../../../ui/strategy/NavigationStrategy/none.strategy";
+import {GridStrategy} from "../../../../ui/strategy/NavigationStrategy/grid.strategy";
+import {ListStrategy} from "../../../../ui/strategy/NavigationStrategy/list.strategy";
 
 @Component({
     template: require('./template.jade'),
@@ -27,7 +34,7 @@ import {PublicThemeHelper} from "../../theme-helper";
     ]
 })
 
-export class ProfilesRoute implements OnInit
+export class ProfilesRoute implements OnInit, OnDestroy
 {
     @ViewChild('content') content: ElementRef;
 
@@ -38,7 +45,8 @@ export class ProfilesRoute implements OnInit
         private ui: UIService,
         private navigator: UINavigationObservable,
         private swipe: SwipeService,
-        private themeHelper: PublicThemeHelper
+        private themeHelper: PublicThemeHelper,
+        private viewOptionService: ViewOptionService
     ) {
         catalog.source = 'profiles';
         catalog.injectFeedService(service);
@@ -48,17 +56,24 @@ export class ProfilesRoute implements OnInit
     }
 
     ngOnInit() {
-        this.navigator.top.subscribe(() => {
-            this.content.nativeElement.scrollTop = 0;
+        this.viewOptionService.viewMode.subscribe(() => {
+           if(this.viewOptionService.isOn(ViewOptionValue.Feed)){
+               console.log(ViewOptionValue.Feed);
+               this.navigator.setStrategy(new FeedStrategy(this.content));
+           } else if(this.viewOptionService.isOn(ViewOptionValue.Grid)){
+               console.log(ViewOptionValue.Grid);
+               this.navigator.setStrategy(new GridStrategy(this.content));
+           } else if(this.viewOptionService.isOn(ViewOptionValue.List)){
+               console.log(ViewOptionValue.List);
+               this.navigator.setStrategy(new ListStrategy(this.content));
+           } else {
+               throw new Error('this.viewOptionService.isOn get wrong parameter')
+           }
         });
+    }
 
-        this.navigator.up.subscribe(() => {
-           console.log(this.content.nativeElement);
-        });
-
-        this.navigator.bottom.subscribe(() => {
-            this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
-        });
+    ngOnDestroy(){
+        this.navigator.setStrategy(new NoneStrategy(this.content));
     }
 
     onScroll($event) {

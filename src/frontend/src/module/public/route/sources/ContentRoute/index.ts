@@ -64,13 +64,7 @@ export class ContentRoute implements OnInit
     }
 
     ngOnInit() {
-        this.navigator.top.subscribe(() => {
-            this.content.nativeElement.scrollTop = 0;
-        });
 
-        this.navigator.bottom.subscribe(() => {
-            this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
-        });
     }
 
     private initContentType() {

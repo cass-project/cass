@@ -1,9 +1,12 @@
 import {Injectable, ElementRef} from "@angular/core";
 import {Observable, Observer} from "rxjs/Rx";
+import {UIStrategy} from "../strategy/NavigationStrategy/ui.strategy";
 
 @Injectable()
 export class UINavigationObservable
 {
+    private strategy: UIStrategy;
+
     static SCROLL_THRESHOLD = 5;
 
     public scroll: Observable<ScrollEvent>;
@@ -16,16 +19,18 @@ export class UINavigationObservable
     public down: Observable<boolean>;
     public left: Observable<boolean>;
     public right: Observable<boolean>;
+    public enter: Observable<boolean>;
 
     public observerScroll: Observer<ScrollEvent>;
     public observerTop: Observer<boolean>;
-    public observerPrev: Observer<number>;
-    public observerNext: Observer<number>;
+    public observerPrev: Observer<boolean>;
+    public observerNext: Observer<boolean>;
     public observerBottom: Observer<boolean>;
     public observerUp: Observer<boolean>;
     public observerDown: Observer<boolean>;
     public observerLeft: Observer<boolean>;
     public observerRight: Observer<boolean>;
+    public observerEnter: Observer<boolean>;
 
     constructor() {
         this.scroll = Observable.create(observer => {
@@ -34,7 +39,11 @@ export class UINavigationObservable
 
         this.top = Observable.create(observer => {
             this.observerTop = observer;
-        }).publish().refCount();
+        }).publish().refCount().subscribe(() => {
+            if(this.strategy){
+                this.strategy.top();
+            }
+        });
 
         this.prev = Observable.create(observer => {
             this.observerPrev = observer;
@@ -46,26 +55,50 @@ export class UINavigationObservable
 
         this.up = Observable.create(observer => {
             this.observerUp = observer;
-        }).publish().refCount();
+        }).publish().refCount().subscribe(() => {
+            if(this.strategy){
+                this.strategy.up();
+            }
+        });
 
         this.down = Observable.create(observer => {
             this.observerDown = observer;
-        }).publish().refCount();
+        }).publish().refCount().subscribe(() => {
+            if(this.strategy){
+                this.strategy.down();
+            }
+        });
 
         this.left = Observable.create(observer => {
             this.observerLeft = observer;
-        }).publish().refCount();
+        }).publish().refCount().subscribe(() => {
+            if(this.strategy){
+                this.strategy.left();
+            }
+        });
 
         this.right = Observable.create(observer => {
             this.observerRight = observer;
-        }).publish().refCount();
+        }).publish().refCount().subscribe(() => {
+            if(this.strategy){
+                this.strategy.right();
+            }
+        });
 
         this.bottom = Observable.create(observer => {
             this.observerBottom = observer;
-        }).publish().refCount();
+        }).publish().refCount().subscribe(() => {
+            if(this.strategy){
+                this.strategy.bottom();
+            }
+        });
 
-        [this.scroll, this.top, this.prev, this.next, this.up, this.down, this.left, this.right, this.bottom].forEach((observable: Observable<any>) => {
-            observable.subscribe(() => {}, () => {});
+        this.enter = Observable.create(observer => {
+            this.observerEnter = observer;
+        }).publish().refCount().subscribe(() => {
+            if(this.strategy){
+                this.strategy.enter();
+            }
         });
     }
 
@@ -95,16 +128,20 @@ export class UINavigationObservable
         });
     }
 
+    public setStrategy(strategy: UIStrategy){
+        this.strategy = strategy;
+    }
+
     public emitTop() {
         this.observerTop.next(true);
     }
 
-    public emitPrev(num: number) {
-        this.observerPrev.next(num);
+    public emitPrev() {
+        this.observerPrev.next(true);
     }
 
-    public emitNext(num: number) {
-        this.observerNext.next(num);
+    public emitNext() {
+        this.observerNext.next(true);
     }
 
     public emitUp(){

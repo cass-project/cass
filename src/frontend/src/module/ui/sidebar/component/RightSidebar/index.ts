@@ -42,7 +42,5 @@ export class RightSidebar
             $event.preventDefault();
             this.navigator.emitRight();
         }
-
-        console.log($event);
     }
 }
