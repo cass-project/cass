@@ -56,6 +56,19 @@ export class ProfilesRoute implements OnInit, OnDestroy
     }
 
     ngOnInit() {
+        if(this.viewOptionService.isOn(ViewOptionValue.Feed)){
+            console.log(ViewOptionValue.Feed);
+            this.navigator.setStrategy(new FeedStrategy(this.content));
+        } else if(this.viewOptionService.isOn(ViewOptionValue.Grid)){
+            console.log(ViewOptionValue.Grid);
+            this.navigator.setStrategy(new GridStrategy(this.content));
+        } else if(this.viewOptionService.isOn(ViewOptionValue.List)){
+            console.log(ViewOptionValue.List);
+            this.navigator.setStrategy(new ListStrategy(this.content));
+        } else {
+            throw new Error('this.viewOptionService.isOn get wrong parameter')
+        }
+
         this.viewOptionService.viewMode.subscribe(() => {
            if(this.viewOptionService.isOn(ViewOptionValue.Feed)){
                console.log(ViewOptionValue.Feed);
@@ -69,6 +82,8 @@ export class ProfilesRoute implements OnInit, OnDestroy
            } else {
                throw new Error('this.viewOptionService.isOn get wrong parameter')
            }
+
+            //ToDo: Выделить весь ngOnInit, в отдельную фабрику
         });
     }
 

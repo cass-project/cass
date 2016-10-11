@@ -37,7 +37,7 @@ export class ListStrategy implements UIStrategy
 
     bottom()
     {
-        this.content.nativeElement.scrollBottom = this.content.nativeElement.scrollHeight;
+        this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
     }
 
     enter()
