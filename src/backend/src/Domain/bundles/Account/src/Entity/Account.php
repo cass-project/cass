@@ -2,7 +2,7 @@
 namespace CASS\Domain\Bundles\Account\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\IdEntity\IdEntityTrait;
 use CASS\Util\Entity\JSONMetadata\JSONMetadataEntity;
 use CASS\Util\Entity\JSONMetadata\JSONMetadataEntityTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
@@ -22,7 +22,7 @@ use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
  */
 class Account implements JSONSerializable, IdEntity, SIDEntity, JSONMetadataEntity
 {
-    use IdTrait;
+    use IdEntityTrait;
     use SIDEntityTrait;
     use JSONMetadataEntityTrait;
 

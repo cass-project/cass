@@ -6,7 +6,7 @@ use CASS\Domain\Bundles\Backdrop\Entity\Backdrop\NoneBackdrop;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
 use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\IdEntity\IdEntityTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
 use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
 use CASS\Util\JSONSerializable;
@@ -28,7 +28,7 @@ use CASS\Domain\Bundles\Theme\Entity\Theme;
  */
 class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, BackdropEntityAware, CollectionAwareEntity, IndexedEntity
 {
-    use IdTrait;
+    use IdEntityTrait;
     use SIDEntityTrait;
     use CollectionAwareEntityTrait;
     use ImageEntityTrait;

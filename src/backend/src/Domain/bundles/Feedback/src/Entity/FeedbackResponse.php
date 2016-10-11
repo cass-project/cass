@@ -2,7 +2,7 @@
 namespace CASS\Domain\Bundles\Feedback\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\IdEntity\IdEntityTrait;
 use CASS\Util\JSONSerializable;
 
 /**
@@ -11,7 +11,7 @@ use CASS\Util\JSONSerializable;
  */
 class FeedbackResponse implements IdEntity, JSONSerializable
 {
-    use IdTrait;
+    use IdEntityTrait;
 
     /**
      * @OneToOne(targetEntity="CASS\Domain\Bundles\Feedback\Entity\Feedback")

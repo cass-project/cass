@@ -2,7 +2,7 @@
 namespace CASS\Domain\Bundles\Theme\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\IdEntity\IdEntityTrait;
 use CASS\Util\JSONSerializable;
 use CASS\Util\SerialManager\SerialEntity;
 use CASS\Util\SerialManager\SerialManager;
@@ -16,7 +16,7 @@ class Theme implements JSONSerializable, IdEntity, SerialEntity
 {
     const DEFAULT_PREVIEW = 'default.png';
 
-    use IdTrait;
+    use IdEntityTrait;
 
     /**
      * @OneToMany(targetEntity="CASS\Domain\Bundles\Theme\Entity\Theme", mappedBy="parent")

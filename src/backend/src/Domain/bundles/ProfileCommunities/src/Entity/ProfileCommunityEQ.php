@@ -2,7 +2,7 @@
 namespace CASS\Domain\Bundles\ProfileCommunities\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\IdEntity\IdEntityTrait;
 use CASS\Util\JSONSerializable;
 use CASS\Domain\Bundles\Community\Entity\Community;
 use CASS\Domain\Bundles\Profile\Entity\Profile;
@@ -14,7 +14,7 @@ use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
  */
 class ProfileCommunityEQ implements JSONSerializable, IdEntity
 {
-    use IdTrait;
+    use IdEntityTrait;
 
     /**
      * @Column(type="string", name="community_sid")

@@ -2,7 +2,7 @@
 namespace CASS\Domain\Bundles\Collection\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\IdEntity\IdEntityTrait;
 use CASS\Util\JSONSerializable;
 
 /**
@@ -11,7 +11,7 @@ use CASS\Util\JSONSerializable;
  */
 final class CollectionThemeEQEntity implements IdEntity, JSONSerializable
 {
-    use IdTrait;
+    use IdEntityTrait;
 
     /**
      * @Column(type="integer", name="collection_id")

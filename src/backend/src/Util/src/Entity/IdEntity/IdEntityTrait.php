@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Util\Entity\IdEntity;
 
-trait IdTrait
+trait IdEntityTrait
 {
     /**
      * @Id
