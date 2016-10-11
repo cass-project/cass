@@ -14,7 +14,10 @@ class FetchResourceService
         list($ch, $result) = $this->curl($url);
 
         if($result === false) {
-            throw new NotFoundException('Page not found');
+            $errorCode = curl_errno( $ch );
+            $errorMessage = curl_error( $ch );
+
+            throw new NotFoundException(sprintf('Page not found (CURL: %s: %s)', $errorCode, $errorMessage));
         }
 
         $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
@@ -35,9 +38,9 @@ class FetchResourceService
         curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
         curl_setopt($ch, CURLOPT_SAFE_UPLOAD, true);
         curl_setopt($ch, CURLOPT_UPLOAD, false);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
         $result = curl_exec($ch);

@@ -2,7 +2,7 @@
 namespace CASS\Domain\Bundles\Account\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\IdEntity\IdEntityTrait;
 
 /**
  * @Entity(repositoryClass="CASS\Domain\Bundles\Account\Repository\OAuthAccountRepository")
@@ -10,7 +10,7 @@ use CASS\Util\Entity\IdEntity\IdTrait;
  */
 class OAuthAccount implements IdEntity
 {
-    use IdTrait;
+    use IdEntityTrait;
 
     /**
      * @ManyToOne(targetEntity="CASS\Domain\Bundles\Account\Entity\Account",cascade={"persist"})

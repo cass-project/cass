@@ -2,7 +2,7 @@
 namespace CASS\Domain\Bundles\Feedback\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\IdEntity\IdEntityTrait;
 use CASS\Util\JSONSerializable;
 use CASS\Domain\Bundles\Feedback\Exception\EmptyDescriptionException;
 use CASS\Domain\Bundles\Feedback\FeedbackType\FeedbackType;
@@ -14,7 +14,7 @@ use CASS\Domain\Bundles\Profile\Entity\Profile;
  */
 class Feedback implements JSONSerializable, IdEntity
 {
-    use IdTrait;
+    use IdEntityTrait;
 
     const TYPE_COMMON_QUESTIONS = 1;
     const TYPE_REQUEST_ADD_THEMATIC = 2;

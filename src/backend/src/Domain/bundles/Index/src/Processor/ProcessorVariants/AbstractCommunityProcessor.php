@@ -39,8 +39,6 @@ abstract class AbstractCommunityProcessor implements Processor
             $collection = $this->mongoDB->selectCollection($source->getMongoDBCollection());
 
             if($entity->hasTheme()) {
-                $this->exclude($entity);
-            }else{
                 $indexed = array_merge($entity->toIndexedEntityJSON(), [
                     'theme_ids' => $this->getThemeIdsWeight($entity),
                 ]);
@@ -50,6 +48,8 @@ abstract class AbstractCommunityProcessor implements Processor
                     ['$set' => $indexed],
                     ['upsert' => true]
                 );
+            }else{
+                $this->exclude($entity);
             }
         }
     }

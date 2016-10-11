@@ -2,7 +2,7 @@
 namespace CASS\Domain\Bundles\Attachment\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\IdEntity\IdEntityTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
 use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
 use CASS\Util\JSONSerializable;
@@ -13,7 +13,7 @@ use CASS\Util\JSONSerializable;
  */
 class Attachment implements JSONSerializable, IdEntity, SIDEntity
 {
-    use IdTrait;
+    use IdEntityTrait;
     use SIDEntityTrait;
 
     /**

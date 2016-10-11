@@ -19,7 +19,9 @@ export class CollectionCardGrid
         private helper: CollectionCardHelper
     ) {}
 
-    open() {
+    open($event) {
+        $event.preventDefault();
+
         this.openEvent.emit(this.entity);
     }
 }

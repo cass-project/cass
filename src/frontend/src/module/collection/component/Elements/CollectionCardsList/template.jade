@@ -4,7 +4,7 @@ div.component.component-collection-cards-list
       li(*ngFor="let collection of entities")
         .collection-card-container
           cass-collection-card(
-            [entity]="entity",
+            [entity]="collection",
             (open)="open($event)",
             view-mode="feed"
           )
@@ -13,7 +13,7 @@ div.component.component-collection-cards-list
       li(*ngFor="let collection of entities")
         .collection-card-container
           cass-collection-card(
-          [entity]="entity",
+          [entity]="collection",
           (open)="open($event)",
           view-mode="grid"
         )
@@ -22,7 +22,7 @@ div.component.component-collection-cards-list
       li(*ngFor="let collection of entities")
         .collection-card-container
           cass-collection-card(
-          [entity]="entity",
+          [entity]="collection",
           (open)="open($event)",
           view-mode="list"
         )

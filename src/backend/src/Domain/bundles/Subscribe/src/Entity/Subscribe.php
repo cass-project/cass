@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Subscribe\Entity;
 
-use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\IdEntity\IdEntityTrait;
 
 /**
  * @Entity(repositoryClass="CASS\Domain\Bundles\Subscribe\Repository\SubscribeRepository")
@@ -14,7 +14,7 @@ class Subscribe
     const TYPE_COLLECTION = 3;
     const TYPE_COMMUNITY = 4;
 
-    use IdTrait;
+    use IdEntityTrait;
 
     /**
      * @Column(type="integer", name="profile_id")

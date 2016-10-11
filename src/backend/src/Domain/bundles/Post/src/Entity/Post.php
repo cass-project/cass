@@ -2,7 +2,7 @@
 namespace CASS\Domain\Bundles\Post\Entity;
 
 use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\IdEntity\IdEntityTrait;
 use CASS\Util\JSONSerializable;
 use CASS\Domain\Bundles\Collection\Entity\Collection;
 use CASS\Domain\Bundles\Index\Entity\IndexedEntity;
@@ -18,7 +18,7 @@ use CASS\Domain\Bundles\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  */
 class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEntity
 {
-    use IdTrait;
+    use IdEntityTrait;
     use ThemeIdsAwareEntityTrait;
 
     /**

@@ -6,7 +6,7 @@ use CASS\Domain\Bundles\Backdrop\Entity\Backdrop\NoneBackdrop;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
 use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdTrait;
+use CASS\Util\Entity\IdEntity\IdEntityTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
 use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
 use CASS\Util\JSONSerializable;
@@ -38,7 +38,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
     const EXCEPTION_YOUNG = "You're too young, where are your parents?";
     const EXCEPTION_OLD = "You're too old, where is your grave?";
 
-    use IdTrait;
+    use IdEntityTrait;
     use SIDEntityTrait;
     use CollectionAwareEntityTrait;
     use ImageEntityTrait;
