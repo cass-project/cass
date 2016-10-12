@@ -40,6 +40,14 @@ export class CommunityCardHelper
         return this.community.theme.has;
     }
 
+    getThemeTitle() : string {
+        if(this.hasTheme()) {
+            return this.theme.findById(this.community.theme.id).title;
+        }else{
+            return 'N/A';
+        }
+    }
+
     getRouterParams() {
         return this.service.getRouterParams(this.community);
     }    

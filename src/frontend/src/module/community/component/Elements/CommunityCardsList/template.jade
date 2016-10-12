@@ -1,8 +1,28 @@
-article.component.component-community-cards-list
-  ul.community-cards
-    li
-      cass-community-card([community]="entity.community")
-    li(*ngIf="isOwnCommunity()")
-      cass-community-create-collection-card
-    li(*ngIf="isOwnCommunity()")
-      cass-community-settings-card
+div.component.component-community-cards-list
+  div.view-mode-feed(*ngIf="isViewMode('feed')")
+    ul.community-list
+      li(*ngFor="let community of entities")
+        .community-card-container
+          cass-community-card(
+            [community]="community",
+            (open)="open($event)",
+            view-mode="feed"
+          )
+  div.view-mode-grid(*ngIf="isViewMode('grid')")
+    ul.community-list
+      li(*ngFor="let community of entities")
+        .community-card-container
+          cass-community-card(
+          [community]="community",
+          (open)="open($event)",
+          view-mode="grid"
+        )
+  div.view-mode-list(*ngIf="isViewMode('list')")
+    ul.community-list
+      li(*ngFor="let community of entities")
+        .community-card-container
+          cass-community-card(
+          [community]="community",
+          (open)="open($event)",
+          view-mode="list"
+        )

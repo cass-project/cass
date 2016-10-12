@@ -1,7 +1,7 @@
-import {Component, Input} from "@angular/core";
-import {Router} from "@angular/router";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 
-import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExtended";
+import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
+import {CommunityEntity} from "../../../definitions/entity/Community";
 
 @Component({
     selector: 'cass-community-cards-list',
@@ -12,15 +12,15 @@ import {CommunityExtendedEntity} from "../../../definitions/entity/CommunityExte
 })
 export class CommunityCardsList
 {
-    @Input('community') entity: CommunityExtendedEntity;
+    @Input('entities') entities: CommunityEntity[];
+    @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
+    @Output('open') openEvent: EventEmitter<CommunityEntity> = new EventEmitter<CommunityEntity>();
 
-    constructor(private router: Router) {}
-
-    isOwnCommunity(): boolean {
-        return this.entity.is_own;
+    isViewMode(viewMode: ViewOptionValue): boolean {
+        return this.viewMode === viewMode;
     }
-    
-    goDashboard(){
-        this.router.navigate(['/community', this.entity.community.sid]);
+
+    open($event: CommunityEntity) {
+        this.openEvent.emit($event);
     }
 }
