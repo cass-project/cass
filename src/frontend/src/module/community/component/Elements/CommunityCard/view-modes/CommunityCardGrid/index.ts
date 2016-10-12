@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
 
-import {CommunityEntity} from "../../../../../definitions/entity/community";
+import {CommunityEntity} from "../../../../../definitions/entity/Community";
 import {CommunityCardHelper} from "../../helper";
 
 @Component({
