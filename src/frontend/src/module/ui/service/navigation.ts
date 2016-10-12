@@ -128,7 +128,7 @@ export class UINavigationObservable
         });
     }
 
-    public setStrategy(strategy: UIStrategy){
+    public setStrategy(strategy){
         this.strategy = strategy;
     }
 

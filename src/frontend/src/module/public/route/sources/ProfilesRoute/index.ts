@@ -30,7 +30,7 @@ import {ListStrategy} from "../../../../ui/strategy/NavigationStrategy/list.stra
         PublicProfilesSource,
         FeedCriteriaService,
         FeedOptionsService,
-        PublicThemeHelper,
+        PublicThemeHelper
     ]
 })
 
@@ -56,31 +56,31 @@ export class ProfilesRoute implements OnInit, OnDestroy
     }
 
     ngOnInit() {
-        if(this.viewOptionService.isOn(ViewOptionValue.Feed)){
-            console.log(ViewOptionValue.Feed);
-            this.navigator.setStrategy(new FeedStrategy(this.content));
-        } else if(this.viewOptionService.isOn(ViewOptionValue.Grid)){
-            console.log(ViewOptionValue.Grid);
-            this.navigator.setStrategy(new GridStrategy(this.content));
-        } else if(this.viewOptionService.isOn(ViewOptionValue.List)){
-            console.log(ViewOptionValue.List);
-            this.navigator.setStrategy(new ListStrategy(this.content));
-        } else {
-            throw new Error('this.viewOptionService.isOn get wrong parameter')
-        }
+            if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'feed'){
+                console.log(ViewOptionValue.Feed);
+                this.navigator.setStrategy(new FeedStrategy(this.content));
+            } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'grid'){
+                console.log(ViewOptionValue.Grid);
+                this.navigator.setStrategy(new GridStrategy(this.content));
+            } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'list'){
+                console.log(ViewOptionValue.List);
+                this.navigator.setStrategy(new ListStrategy(this.content));
+            } else {
+                throw new Error('ViewOptionService.LOCAL_STORAGE_KEY] unknown view')
+            }
 
         this.viewOptionService.viewMode.subscribe(() => {
-           if(this.viewOptionService.isOn(ViewOptionValue.Feed)){
+           if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'feed'){
                console.log(ViewOptionValue.Feed);
                this.navigator.setStrategy(new FeedStrategy(this.content));
-           } else if(this.viewOptionService.isOn(ViewOptionValue.Grid)){
+           } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'grid'){
                console.log(ViewOptionValue.Grid);
                this.navigator.setStrategy(new GridStrategy(this.content));
-           } else if(this.viewOptionService.isOn(ViewOptionValue.List)){
+           } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'list'){
                console.log(ViewOptionValue.List);
                this.navigator.setStrategy(new ListStrategy(this.content));
            } else {
-               throw new Error('this.viewOptionService.isOn get wrong parameter')
+               throw new Error('ViewOptionService.LOCAL_STORAGE_KEY] unknown view')
            }
 
             //ToDo: Выделить весь ngOnInit, в отдельную фабрику
@@ -88,7 +88,7 @@ export class ProfilesRoute implements OnInit, OnDestroy
     }
 
     ngOnDestroy(){
-        this.navigator.setStrategy(new NoneStrategy(this.content));
+        this.navigator.setStrategy(new NoneStrategy());
     }
 
     onScroll($event) {

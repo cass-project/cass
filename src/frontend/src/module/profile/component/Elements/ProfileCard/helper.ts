@@ -33,6 +33,10 @@ export class ProfileCardHelper
         }
     }
 
+    getProfileId(): number {
+        return this.profile.id;
+    }
+
     getProfileName(): string {
         return this.profile.greetings.greetings;
     }
