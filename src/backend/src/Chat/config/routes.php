@@ -8,9 +8,9 @@ return [
         [
             'type'       => 'route',
             'method'     => 'PUT',
-            'url'        => '/protected/chat/message/{command:send}[/]',
+            'url'        => '/protected/chat/{command:profile-send}/profile/{profileId}[/]',
             'middleware' => MessageMiddleware::class,
-            'name'       => 'chat-message-send'
+            'name'       => 'chat-profile-send'
         ],
     ]
 ];

@@ -1,10 +1,10 @@
-"/protected/chat/send/profile/{profileId}":
+"/protected/chat/profile-send/profile/{profileId}":
   put:
     tags:
       - chat
     description: написать сообщение профилю
-    security:
-      - x_api_key: []
+    #security:
+    #  - x_api_key: []
     parameters:
       - name: profileId
         in: path

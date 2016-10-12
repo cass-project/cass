@@ -4,6 +4,7 @@ namespace CASS\Chat\Middleware;
 use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
 use CASS\Chat\Middleware\Command\SendMessageCommand;
+use CASS\Chat\Middleware\Command\SendProfileMessage;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
@@ -22,7 +23,7 @@ class MessageMiddleware implements MiddlewareInterface
         $responseBuilder = new CASSResponseBuilder($response);
 
         $resolver = $this->commandService->createResolverBuilder()
-            ->attachDirect("send", SendMessageCommand::class, 'PUT')
+            ->attachDirect("profile-send", SendProfileMessage::class, 'PUT')
             ->resolve($request);
 
         return $resolver->run($request, $responseBuilder);

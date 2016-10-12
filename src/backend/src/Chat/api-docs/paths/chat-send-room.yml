@@ -3,8 +3,8 @@
     tags:
       - chat
     description: написать сообщение в комнату
-    security:
-      - x_api_key: []
+    #security:
+    #  - x_api_key: []
     parameters:
       - name: roomId
         in: path

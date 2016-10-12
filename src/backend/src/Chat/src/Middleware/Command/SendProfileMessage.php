@@ -1,20 +1,21 @@
 <?php
+
 namespace CASS\Chat\Middleware\Command;
 
-use CASS\Chat\Entity\Message;
-use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
+use Zend\Stratigility\Http\ResponseInterface;
 
-class SendMessageCommand extends Command
+class SendProfileMessage extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-
-//        $profile = $this->currentAccountService->getCurrentAccount()->getCurrentProfile();
+        $profile = $this->currentAccountService->getCurrentAccount()->getCurrentProfile();
 
         $body = $request->getBody();
+
+        print_r($body);
+        die();
         $targetProfleId = (int) $body['profile_id'];
         $targetProfle = $this->profileService->getProfileById($targetProfleId);
 
@@ -32,8 +33,8 @@ class SendMessageCommand extends Command
                 return $responseBuilder
                     ->setStatusSuccess()
                     ->setJson(['success' => true])
-                ->build();
-            
+                    ->build();
+
         }catch(ProfileNotFoundException $e){
             return $responseBuilder
                 ->setStatusNotFound()
