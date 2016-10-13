@@ -3,14 +3,23 @@
     tags:
       - chat
     description: написать сообщение профилю
-    #security:
-    #  - x_api_key: []
+    security:
+      - x_api_key: []
     parameters:
       - name: profileId
         in: path
         required: true
         type: number
         description: Id профиля
+      - name: body
+        in: body
+        required: false
+        description: Сообщение
+        schema:
+          type: object
+          properties:
+            content:
+              type: string
     responses:
       200:
         description: 200 OK
