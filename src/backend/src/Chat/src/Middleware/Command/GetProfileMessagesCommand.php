@@ -2,18 +2,18 @@
 
 namespace CASS\Chat\Middleware\Command;
 
-use CASS\Chat\Entity\Message;
-use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 
-class SendProfileMessageCommand extends Command
+class GetProfileMessagesCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         $body = json_decode($request->getBody()->getContents(), true);
-        $content = $body['content'];
+        $offset = $body['offset'];
+        $limitt = $body['limit'];
+
 
         $sourceProfile = $this->currentAccountService->getCurrentAccount()->getCurrentProfile();
         $targetProfileId = $request->getAttribute('profileId');

@@ -12,5 +12,12 @@ return [
             'middleware' => MessageMiddleware::class,
             'name'       => 'chat-profile-send'
         ],
+        [
+            'type'       => 'route',
+            'method'     => 'POST',
+            'url'        => '/protected/chat/{command:get-messages}/profile/{profileId}[/]',
+            'middleware' => MessageMiddleware::class,
+            'name'       => 'chat-profile-get-messages'
+        ],
     ]
 ];

@@ -1,8 +1,8 @@
-"/protected/chat/profile-send/profile/{profileId}":
-  put:
+"/protected/chat/get-messages/profile/{profileId}":
+  post:
     tags:
       - chat
-    description: Написать сообщение профилю
+    description: Получить сообщения с профилем
     security:
       - x_api_key: []
     parameters:
@@ -13,14 +13,19 @@
         description: Id профиля
       - name: body
         in: body
-        required: false
-        description: Сообщение
+        required: true
         schema:
           type: object
+          required:
+            - offset
+            - limit
           properties:
-            content:
-              type: string
-              description: Содержимое сообщения
+            offset:
+              type: number
+              default: 0
+            limit:
+              type: number
+              default: 10
     responses:
       200:
         description: 200 OK
@@ -28,14 +33,16 @@
           type: object
           required:
             - success
-            - entity
+            - entities
           properties:
             success:
               type: boolean
               description: '=true'
-            entity:
-              schema:
-                $ref: '#/definitions/Chat_Entity_Message'
+            entities:
+              type: array
+              items:
+                schema:
+                  $ref: '#/definitions/Chat_Entity_Message'
       404:
         $ref: '#/responses/NotFound'
       403:

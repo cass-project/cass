@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 
-class SendProfileMessageCommand extends Command
+class SendRoomMessageCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
@@ -16,17 +16,16 @@ class SendProfileMessageCommand extends Command
         $content = $body['content'];
 
         $sourceProfile = $this->currentAccountService->getCurrentAccount()->getCurrentProfile();
-        $targetProfileId = $request->getAttribute('profileId');
+        $roomId = $request->getAttribute('roomId');
 
         try {
-            $targetProfile = $this->profileService->getProfileById($targetProfileId);
 
             $message = new Message();
             $message
                 ->setSourceType(Message::SOURCE_TYPE_PROFILE)
                 ->setSourceId($sourceProfile->getId())
-                ->setTargetType(Message::TARGET_TYPE_PROFILE)
-                ->setTargetId($targetProfile->getId())
+                ->setTargetType(Message::TARGET_TYPE_ROOM)
+                ->setTargetId($roomId)
                 ->setContent($content)
             ;
 

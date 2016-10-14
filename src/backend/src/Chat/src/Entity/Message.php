@@ -16,6 +16,7 @@ class Message implements IdEntity, JSONSerializable
 
     const SOURCE_TYPE_PROFILE = 1;
     const TARGET_TYPE_PROFILE = 1;
+    const TARGET_TYPE_ROOM = 2;
 
     /**
      * @Column(type="integer", name="source_type")
@@ -157,7 +158,11 @@ class Message implements IdEntity, JSONSerializable
     public function toJSON(): array
     {
         return [
-
+            'id' => $this->id,
+            'source_id' => $this->sourceId,
+            'source_type' => $this->sourceType,
+            'target_id' => $this->targetId,
+            'target_type' => $this->targetType,
         ];
     }
 }
