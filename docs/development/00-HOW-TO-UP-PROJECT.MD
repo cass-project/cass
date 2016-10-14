@@ -1,6 +1,7 @@
 00-HOW-TO-UP-PROJECT.MD
 =======================
 
+### Создание виртуальной машины
 1. `git pull && git submodule init && git submodule update && git submodule status`
 2. Установите Vagrant: [https://www.vagrantup.com/]()
 3. Установите VirtualBox: [https://www.virtualbox.org/]()
@@ -13,7 +14,25 @@
     - Если вы используете Windows и используете файл `Vagrantfile.windows.dist`, то необходимо запускать эту команду от администратора
 6. Зайдите на виртуальную машину: `vagrant ssh dev`
 7. Выполните команду: `sudo -i`, `vm-init.sh`
-8. После выполнения проверьте работоспособность, открыв в браузере:
+
+### Сборка фронтенда
+
+Сборка фронтенда производится в отдельном порядке на хостовой (реальной) машине.
+
+1. Установите Node.JS (Latest): [https://nodejs.org/en/]()
+2. Установить `n`: 
+```
+    sudo npm install -g n
+    sudo n 5.11.1
+```
+3. Установить webpack, typings: `sudo npm install -g typings webpack`
+4. Перейдите в директорию фронтенда: `{PROJECT_ROOT}/src/frontend`
+5. Выполните установку тайпингсов: `typings install`
+6. Соберите фронтенд: `webpack --progress`
+
+### Проверка работоспобности
+
+1. После выполнения проверьте работоспособность, открыв в браузере:
  - Проект: [http://127.0.0.1:8080/]()
  - Backend-документацию: [http://127.0.0.1:8080/api-docs/]()
 

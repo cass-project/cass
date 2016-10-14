@@ -8,7 +8,8 @@ use CASS\Domain\Bundles\Post\PostBundle;
 
 class EditPostRequest extends SchemaParams
 {
-    public function getParameters(): EditPostParameters {
+    public function getParameters(): EditPostParameters
+    {
         $request = $this->getRequest();
         $data = $this->getData();
 
@@ -18,8 +19,8 @@ class EditPostRequest extends SchemaParams
         );
     }
 
-    protected function getSchema(): JSONSchema {
+    protected function getSchema(): JSONSchema
+    {
         return self::getSchemaService()->getSchema(PostBundle::class, './definitions/request/EditPost.yml');
     }
-
 }

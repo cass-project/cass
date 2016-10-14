@@ -8,8 +8,8 @@ use CASS\Domain\Bundles\Post\PostBundle;
 
 class CreatePostRequest extends SchemaParams
 {
-    public function getParameters(): CreatePostParameters {
-
+    public function getParameters(): CreatePostParameters
+    {
         $data = $this->getData();
 
         return new CreatePostParameters(
@@ -21,7 +21,8 @@ class CreatePostRequest extends SchemaParams
         );
     }
 
-    protected function getSchema(): JSONSchema {
+    protected function getSchema(): JSONSchema
+    {
         return self::getSchemaService()->getSchema(PostBundle::class, './definitions/request/CreatePost.yml');
     }
 }
