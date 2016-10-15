@@ -39,11 +39,7 @@ export class UINavigationObservable
 
         this.top = Observable.create(observer => {
             this.observerTop = observer;
-        }).publish().refCount().subscribe(() => {
-            if(this.strategy){
-                this.strategy.top();
-            }
-        });
+        }).publish().refCount();
 
         this.prev = Observable.create(observer => {
             this.observerPrev = observer;
@@ -55,50 +51,30 @@ export class UINavigationObservable
 
         this.up = Observable.create(observer => {
             this.observerUp = observer;
-        }).publish().refCount().subscribe(() => {
-            if(this.strategy){
-                this.strategy.up();
-            }
-        });
+        }).publish().refCount();
 
         this.down = Observable.create(observer => {
             this.observerDown = observer;
-        }).publish().refCount().subscribe(() => {
-            if(this.strategy){
-                this.strategy.down();
-            }
-        });
+        }).publish().refCount();
 
         this.left = Observable.create(observer => {
             this.observerLeft = observer;
-        }).publish().refCount().subscribe(() => {
-            if(this.strategy){
-                this.strategy.left();
-            }
-        });
+        }).publish().refCount();
 
         this.right = Observable.create(observer => {
             this.observerRight = observer;
-        }).publish().refCount().subscribe(() => {
-            if(this.strategy){
-                this.strategy.right();
-            }
-        });
+        }).publish().refCount();
 
         this.bottom = Observable.create(observer => {
             this.observerBottom = observer;
-        }).publish().refCount().subscribe(() => {
-            if(this.strategy){
-                this.strategy.bottom();
-            }
-        });
+        }).publish().refCount();
 
         this.enter = Observable.create(observer => {
             this.observerEnter = observer;
-        }).publish().refCount().subscribe(() => {
-            if(this.strategy){
-                this.strategy.enter();
-            }
+        }).publish().refCount();
+
+        [this.scroll, this.top, this.prev, this.next, this.up, this.down, this.left, this.right, this.bottom, this.enter].forEach((observable: Observable<any>) => {
+            observable.subscribe(() => {}, () => {});
         });
     }
 
