@@ -34,6 +34,7 @@
     "jquery": "^3.0.0",
     "json-loader": "^0.5.4",
     "less": "^2.3.1",
+    "markdown-css-themes": "1.0.1",
     "markdown-it": "^8.0.0",
     "merge": "^1.2.0",
     "moment": "^2.14.1",
