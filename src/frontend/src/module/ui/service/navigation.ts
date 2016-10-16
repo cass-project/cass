@@ -99,11 +99,19 @@ export class UINavigationObservable
 
         this.subscriptions = [
             this.top.subscribe(() => {
-                content.scrollTop = 0;
+                this.strategy.top();
             }),
 
             this.bottom.subscribe(() => {
-                content.scrollTop = content.scrollHeight - content.clientHeight;
+                this.strategy.bottom();
+            }),
+
+            this.left.subscribe(() => {
+                this.strategy.left();
+            }),
+
+            this.right.subscribe(() => {
+                this.strategy.right();
             }),
 
 
