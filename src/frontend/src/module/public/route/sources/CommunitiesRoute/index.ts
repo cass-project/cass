@@ -1,4 +1,4 @@
-import {Component, ViewChild, OnInit, ElementRef} from "@angular/core";
+import {Component, ViewChild, OnInit, OnDestroy, ElementRef} from "@angular/core";
 
 import {FeedService} from "../../../../feed/service/FeedService/index";
 import {Stream} from "../../../../feed/service/FeedService/stream";
@@ -26,7 +26,7 @@ import {SwipeService} from "../../../../swipe/service/SwipeService";
         PublicThemeHelper
     ]
 })
-export class CommunitiesRoute implements OnInit
+export class CommunitiesRoute implements OnInit, OnDestroy
 {
     @ViewChild('content') content: ElementRef;
     
@@ -47,15 +47,13 @@ export class CommunitiesRoute implements OnInit
     }
 
     ngOnInit() {
-        this.navigator.top.subscribe(() => {
-            this.content.nativeElement.scrollTop = 0;
-        });
-
-        this.navigator.bottom.subscribe(() => {
-            this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
-        });
+        this.navigator.initNavigation(this.content);
     }
 
+    ngOnDestroy(){
+        this.navigator.destroyNavigation();
+    }
+    
     onScroll($event) {
         this.navigator.emitScroll(this.content);
     }    

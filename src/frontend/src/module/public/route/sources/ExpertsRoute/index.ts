@@ -7,6 +7,7 @@ import {PublicExpertsSource} from "../../../../feed/service/FeedService/source/p
 import {ProfileIndexedEntity} from "../../../../profile/definitions/entity/Profile";
 import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
+import {NavigationService} from "../../../../ui/service/service";
 
 @Component({
     template: require('./template.jade'),

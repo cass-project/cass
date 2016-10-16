@@ -1,11 +1,19 @@
 import {Injectable, ElementRef} from "@angular/core";
 import {Observable, Observer} from "rxjs/Rx";
 import {UIStrategy} from "../strategy/NavigationStrategy/ui.strategy";
+import {ViewOptionService} from "../../public/component/Options/ViewOption/service";
+import {ViewOptionValue} from "../../feed/service/FeedService/options/ViewOption";
+import {FeedStrategy} from "../strategy/NavigationStrategy/feed.strategy";
+import {GridStrategy} from "../strategy/NavigationStrategy/grid.strategy";
+import {ListStrategy} from "../strategy/NavigationStrategy/list.strategy";
+import {Subscription} from "rxjs/Rx";
+import {NoneStrategy} from "../strategy/NavigationStrategy/none.strategy";
 
 @Injectable()
 export class UINavigationObservable
 {
     private strategy: UIStrategy;
+    private subscriptions: Subscription[];
 
     static SCROLL_THRESHOLD = 5;
 
@@ -32,7 +40,7 @@ export class UINavigationObservable
     public observerRight: Observer<boolean>;
     public observerEnter: Observer<boolean>;
 
-    constructor() {
+    constructor(private viewOptionService: ViewOptionService) {
         this.scroll = Observable.create(observer => {
             this.observerScroll = observer;
         }).publish().refCount();
@@ -72,12 +80,58 @@ export class UINavigationObservable
         this.enter = Observable.create(observer => {
             this.observerEnter = observer;
         }).publish().refCount();
-
-        [this.scroll, this.top, this.prev, this.next, this.up, this.down, this.left, this.right, this.bottom, this.enter].forEach((observable: Observable<any>) => {
-            observable.subscribe(() => {}, () => {});
-        });
+        
     }
 
+    initNavigation(content){
+        if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'feed'){
+            console.log(ViewOptionValue.Feed);
+            this.setStrategy(new FeedStrategy(content));
+        } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'grid'){
+            console.log(ViewOptionValue.Grid);
+            this.setStrategy(new GridStrategy(content));
+        } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'list'){
+            console.log(ViewOptionValue.List);
+            this.setStrategy(new ListStrategy(content));
+        } else {
+            throw new Error('ViewOptionService.LOCAL_STORAGE_KEY] unknown view')
+        }
+
+        this.subscriptions = [
+            this.top.subscribe(() => {
+                content.scrollTop = 0;
+            }),
+
+            this.bottom.subscribe(() => {
+                content.scrollTop = content.scrollHeight - content.clientHeight;
+            }),
+
+
+            this.viewOptionService.viewMode.subscribe(() => {
+                if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'feed'){
+                    console.log(ViewOptionValue.Feed);
+                    this.setStrategy(new FeedStrategy(content));
+                } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'grid'){
+                    console.log(ViewOptionValue.Grid);
+                    this.setStrategy(new GridStrategy(content));
+                } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'list'){
+                    console.log(ViewOptionValue.List);
+                    this.setStrategy(new ListStrategy(content));
+                } else {
+                    throw new Error('ViewOptionService.LOCAL_STORAGE_KEY] unknown view')
+                }
+            })
+        ];
+    }
+
+    destroyNavigation(){
+        this.setStrategy(new NoneStrategy());
+        this.subscriptions.forEach((subscription) => {
+            subscription.unsubscribe();
+        });
+    }
+    
+    
     public emitScroll(elem: ElementRef) {
         let scrollTop = elem.nativeElement.scrollTop;
         let scrollBottom = elem.nativeElement.scrollTop + elem.nativeElement.scrollHeight;
