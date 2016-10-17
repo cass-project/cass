@@ -11,13 +11,6 @@ import {UIService} from "../../../../ui/service/ui";
 import {UINavigationObservable} from "../../../../ui/service/navigation";
 import {SwipeService} from "../../../../swipe/service/SwipeService";
 import {PublicThemeHelper} from "../../theme-helper";
-import {Observable, Observer} from "rxjs/Rx";
-import {ViewOptionService} from "../../../component/Options/ViewOption/service";
-import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
-import {FeedStrategy} from "../../../../ui/strategy/NavigationStrategy/feed.strategy";
-import {NoneStrategy} from "../../../../ui/strategy/NavigationStrategy/none.strategy";
-import {GridStrategy} from "../../../../ui/strategy/NavigationStrategy/grid.strategy";
-import {ListStrategy} from "../../../../ui/strategy/NavigationStrategy/list.strategy";
 
 @Component({
     template: require('./template.jade'),
@@ -45,8 +38,7 @@ export class ProfilesRoute implements OnInit, OnDestroy
         private ui: UIService,
         private navigator: UINavigationObservable,
         private swipe: SwipeService,
-        private themeHelper: PublicThemeHelper,
-        private viewOptionService: ViewOptionService
+        private themeHelper: PublicThemeHelper
     ) {
         catalog.source = 'profiles';
         catalog.injectFeedService(service);
@@ -56,39 +48,11 @@ export class ProfilesRoute implements OnInit, OnDestroy
     }
 
     ngOnInit() {
-            if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'feed'){
-                console.log(ViewOptionValue.Feed);
-                this.navigator.setStrategy(new FeedStrategy(this.content));
-            } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'grid'){
-                console.log(ViewOptionValue.Grid);
-                this.navigator.setStrategy(new GridStrategy(this.content));
-            } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'list'){
-                console.log(ViewOptionValue.List);
-                this.navigator.setStrategy(new ListStrategy(this.content));
-            } else {
-                throw new Error('ViewOptionService.LOCAL_STORAGE_KEY] unknown view')
-            }
-
-        this.viewOptionService.viewMode.subscribe(() => {
-           if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'feed'){
-               console.log(ViewOptionValue.Feed);
-               this.navigator.setStrategy(new FeedStrategy(this.content));
-           } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'grid'){
-               console.log(ViewOptionValue.Grid);
-               this.navigator.setStrategy(new GridStrategy(this.content));
-           } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'list'){
-               console.log(ViewOptionValue.List);
-               this.navigator.setStrategy(new ListStrategy(this.content));
-           } else {
-               throw new Error('ViewOptionService.LOCAL_STORAGE_KEY] unknown view')
-           }
-
-            //ToDo: Выделить весь ngOnInit, в отдельную фабрику
-        });
+        this.navigator.initNavigation(this.content);
     }
 
     ngOnDestroy(){
-        this.navigator.setStrategy(new NoneStrategy());
+        this.navigator.destroyNavigation();
     }
 
     onScroll($event) {

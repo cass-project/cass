@@ -40,22 +40,13 @@ export class CommunityRoute implements OnInit, OnDestroy
             this.route.snapshot.data['community']
         );
 
-        this.subscriptions = [
-            this.navigator.top.subscribe(() => {
-                elem.scrollTop = 0;
-            }),
-            this.navigator.bottom.subscribe(() => {
-                elem.scrollTop = elem.scrollHeight - elem.clientHeight;
-            }),
-        ];
+       this.navigator.initNavigation(this.content);
 
         this.community = this.service.getEntity();
     }
 
     ngOnDestroy() {
-        this.subscriptions.forEach((subscription) => {
-            subscription.unsubscribe();
-        });
+        this.navigator.destroyNavigation();
     }
 
     isOwnCommunity() {

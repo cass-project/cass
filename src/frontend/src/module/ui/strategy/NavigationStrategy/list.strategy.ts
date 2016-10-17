@@ -4,10 +4,12 @@ import {UIStrategy} from "./ui.strategy";
 export class ListStrategy implements UIStrategy
 {
     content: ElementRef;
+    elements;
 
     constructor(private elem: ElementRef)
     {
         this.content = elem;
+        this.elements = this.content.nativeElement.getElementsByClassName('x-navigation-entity');
     }
 
     up()
@@ -22,37 +24,33 @@ export class ListStrategy implements UIStrategy
 
     left()
     {
-        let elements = this.content.nativeElement.getElementsByClassName('x-navigation-entity');
-
-        if(elements.length > 0){
-            for(let index = 0; index < elements.length; index++){
-                if(elements[index].classList.contains('x-navigation-entity-active') && index !== 0){
-                    elements[index].classList.remove('x-navigation-entity-active');
-                    elements[index-1].classList.add('x-navigation-entity-active');
-                    this.content.nativeElement.scrollTop = elements[index-1].getBoundingClientRect().top;
-                } else if(!elements[index].classList.contains('x-navigation-entity-active')){
-                    elements[0].classList.add('x-navigation-entity-active');
-                    this.content.nativeElement.scrollTop = elements[0].getBoundingClientRect().top;
+        if(this.elements.length > 0){
+            for(let index = 0; index < this.elements.length; index++){
+                if(this.elements[index].classList.contains('x-navigation-entity-active') && index !== 0){
+                    this.elements[index].classList.remove('x-navigation-entity-active');
+                    this.elements[index-1].classList.add('x-navigation-entity-active');
+                    this.content.nativeElement.scrollTop = this.elements[index-1].getBoundingClientRect().top;
+                } else if(!this.elements[index].classList.contains('x-navigation-entity-active')){
+                    this.elements[0].classList.add('x-navigation-entity-active');
+                    this.content.nativeElement.scrollTop = this.elements[0].getBoundingClientRect().top;
                 }
             }
         }
     }
 
     right() {
-        let elements = this.content.nativeElement.getElementsByClassName('x-navigation-entity');
-        let navActive:boolean = false;
-
-        if (elements.length > 0) {
-            for (let index = 0; index < elements.length; index++) {
-                if (elements[index].classList.contains('x-navigation-entity-active') && index !== elements.length - 1) {
-                    elements[index].classList.remove('x-navigation-entity-active');
-                    elements[index + 1].classList.add('x-navigation-entity-active');
-                    navActive = true;
-                    this.content.nativeElement.scrollTop = elements[index + 1].getBoundingClientRect().top;
-                } else if (!navActive && index === elements.length - 1) {
-                    elements[0].classList.add('x-navigation-entity-active');
-                    this.content.nativeElement.scrollTop = elements[0].getBoundingClientRect().top;
-                    console.log(elements[0].getBoundingClientRect().top)
+        if (this.elements.length > 0) {
+            for (let index = 0; index < this.elements.length; index++) {
+                if (this.elements[index].classList.contains('x-navigation-entity-active') && index !== this.elements.length - 1) {
+                    this.elements[index].classList.remove('x-navigation-entity-active');
+                    this.elements[index + 1].classList.add('x-navigation-entity-active');
+                    this.content.nativeElement.scrollTop = this.elements[index + 1].getBoundingClientRect().top;
+                    console.log(this.elements[index + 1].getBoundingClientRect().top);
+                    break;
+                } else if (index === this.elements.length - 1) {
+                    this.elements[0].classList.add('x-navigation-entity-active');
+                    this.content.nativeElement.scrollTop = this.elements[0].getBoundingClientRect().top;
+                    console.log(this.elements[0].getBoundingClientRect().top)
                 }
             }
         }
