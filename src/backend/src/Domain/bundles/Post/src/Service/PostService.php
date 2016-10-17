@@ -10,6 +10,7 @@ use CASS\Domain\Bundles\Post\Parameters\EditPostParameters;
 use CASS\Domain\Bundles\Post\PostType\PostTypeFactory;
 use CASS\Domain\Bundles\Post\Repository\PostRepository;
 use CASS\Domain\Bundles\Profile\Service\ProfileService;
+use CASS\Util\Seek;
 
 class PostService implements EventEmitterAwareService
 {
@@ -95,6 +96,11 @@ class PostService implements EventEmitterAwareService
     public function getPostsByIds(array $postIds): array 
     {
         return $this->postRepository->getPostsByIds($postIds);
+    }
+
+    public function listPost(Seek $criteria): array
+    {
+        return $this->postRepository->listPost($criteria);
     }
 
     public function loadPostsByIds(array $postIds)

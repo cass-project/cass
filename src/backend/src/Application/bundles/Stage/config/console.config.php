@@ -2,6 +2,7 @@
 namespace CASS\Application\Bundles\Stage;
 
 use CASS\Application\Bundles\Stage\Command\StageDemoCommand;
+use CASS\Application\Bundles\Stage\Command\StageDemoSyncCommand;
 use CASS\Application\Bundles\Stage\Command\StageThemesCommand;
 
 return [
@@ -11,6 +12,7 @@ return [
                 'Stage' => [
                     StageDemoCommand::class,
                     StageThemesCommand::class,
+                    StageDemoSyncCommand::class,
                 ]
             ]
         ]

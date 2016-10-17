@@ -1,6 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Attachment\Repository;
 
+use CASS\Util\Seek;
 use Doctrine\ORM\EntityRepository;
 use CASS\Domain\Bundles\Attachment\Entity\Attachment;
 use CASS\Domain\Bundles\Attachment\Exception\AttachmentFactoryException;
@@ -26,6 +27,19 @@ class AttachmentRepository extends EntityRepository
         }
         $this->getEntityManager()->flush();
     }
+
+    public function listAttachments(Seek $criteria): array
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->setFirstResult($criteria->getOffset());
+        $qb->setMaxResults($criteria->getLimit());
+
+        /** @var Attachment[] $result */
+        $result = $qb->getQuery()->execute();
+
+        return $result;
+    }
+
 
     public function getById(int $attachmentId): Attachment
     {

@@ -21,6 +21,8 @@ use CASS\Domain\Bundles\Profile\Entity\Profile;
 use CASS\Domain\Bundles\Profile\Entity\Profile\Gender\Gender;
 use CASS\Domain\Bundles\Profile\Parameters\EditPersonalParameters;
 use CASS\Domain\Bundles\Profile\Service\ProfileService;
+use CASS\Util\Seek;
+use Cocur\Chain\Chain;
 use Symfony\Component\Console\Output\OutputInterface;
 
 final class DemoFixture
@@ -90,6 +92,14 @@ final class DemoFixture
 
         $this->upAccountsFixture();
         $this->upFeedFixture();
+    }
+
+    public function sync(OutputInterface $output)
+    {
+        $this->output = $output;
+
+        $this->fetchJSONSources();
+        $this->syncFeedFixture();
     }
 
     private function upAccountsFixture()
@@ -388,6 +398,54 @@ final class DemoFixture
                     $json['description'] ?? '',
                     [$linkAttachment->getId()]
                 );
+        }
+    }
+
+    private function syncFeedFixture()
+    {
+        $step = 200;
+        $offset = 0;
+        $limit = $step;
+
+        $this->output->writeln('[*] Creating link&youtube videos map');
+
+        $linkMap = Chain::create($this->jsonFeed)
+            ->filter(function($input) {
+                return $input["typeId"] === 2 || $input["typeId"] === 3;
+            })
+            ->map(function($input) {
+                return [
+                    'meta' => [
+                        'title' => $input['title'] ?? '',
+                        'description' => $input['description'] ?? '',
+                    ],
+                    'url' => $input['url']
+                ];
+            })
+            ->array;
+
+        $linkMap = array_combine(
+            array_column($linkMap, 'url'),
+            array_column($linkMap, 'meta')
+        );
+
+        while(count($result = $this->attachmentRepository->listAttachments(new Seek($step, $offset, $limit)))) {
+            $this->output->writeln(sprintf('[*] Fetch attachments (%d - %d)', $offset, $offset+$step));
+
+            array_map(function(Attachment $attachment) use($linkMap) {
+                $url =  $attachment->getMetadata()['url'];
+
+                if(isset($linkMap[$url])) {
+                    $title = $linkMap[$url]['title'];
+                    $description = $linkMap[$url]['description'];
+
+                    $this->output->writeln(sprintf('[*] Specify link("%s"), metadata("%s", "%s")', $url, $title, $description));
+
+                    $this->attachmentService->specifyTitleAndDescriptionFor($attachment, $title, $description);
+                }
+            }, $result);
+
+            $offset += $step;
         }
     }
 }

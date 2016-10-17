@@ -142,6 +142,15 @@ class AttachmentService
         $this->attachmentRepository->deleteAttachment([$attachment]);
     }
 
+    public function specifyTitleAndDescriptionFor(Attachment $attachment, string $title, string $description)
+    {
+        $attachment
+            ->setTitle($title)
+            ->setDescription($description);
+
+        $this->attachmentRepository->saveAttachment($attachment);
+    }
+
     public function getById(int $id): Attachment
     {
         return $this->attachmentRepository->getById($id);
