@@ -5,6 +5,8 @@ export interface AttachmentEntity<T extends AttachmentMetadata>
     date_created_on: string;
     date_attached_on?: string;
     is_attached: boolean;
+    title: string;
+    description: string;
     link: {
         url: string;
         resource: string;

@@ -23,7 +23,9 @@ export class PostForm
     @Input('collection') collection: CollectionEntity;
     @Input('force-theme-id') forceThemeId: number;
     @Output('success') successEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
+
     @ViewChild('contentTextArea') contentTextArea: ElementRef;
+    @ViewChild('titleTextArea') titleTextArea: ElementRef;
 
     private status: LoadingManager = new LoadingManager();
     private model: PostFormModel;
@@ -102,6 +104,11 @@ export class PostForm
         this.focused = true;
     }
 
+    focusTitleBox() {
+        this.titleTextArea.nativeElement.focus();
+        this.focus();
+    }
+
     blur() {
         this.focused = false;
     }
@@ -126,7 +133,7 @@ export class PostForm
 
     reset() {
         this.model.reset();
-        this.focused = false; ``
+        this.focused = false; ``;
         this.linkRequested = false;
         this.contentTextArea.nativeElement.blur();
     }

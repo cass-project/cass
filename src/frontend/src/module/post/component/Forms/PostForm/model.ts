@@ -1,11 +1,13 @@
 import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
 import {CreatePostRequest} from "../../../definitions/paths/create";
-import {TextParser} from "../../../../common/component/TextParser/index";
 
 export class PostFormModel
 {
+    public title: string = '';
     public content: string = '';
     public attachments: AttachmentEntity<any>[] = [];
+
+    private titleWasProvidedByAttachment: boolean = true;
 
     constructor(
         public postType: number,
@@ -20,6 +22,7 @@ export class PostFormModel
             profile_id: this.profileId,
             collection_id: this.collectionId,
             content: this.content,
+            title: this.title,
             attachments: this.attachments.map((attachment) => {
                 return attachment.id;
             }),
@@ -42,6 +45,11 @@ export class PostFormModel
         return ! this.isEmpty();
     }
 
+    hasTitle(): boolean {
+        return (typeof this.title === "string")
+            && this.title.length > 0;
+    }
+
     hasAttachments(): boolean
     {
         return this.attachments.length > 0;
@@ -60,9 +68,23 @@ export class PostFormModel
     addAttachment(attachment: AttachmentEntity<any>) {
         this.attachments = [];
         this.attachments.push(attachment);
+
+        if(! this.hasTitle()) {
+            this.title = attachment.title;
+            this.titleWasProvidedByAttachment = true;
+        }
     }
 
     deleteAttachments() {
+        if(this.attachments.length > 0) {
+            let attachment = this.attachments[0];
+
+            if(this.titleWasProvidedByAttachment && this.title === attachment.title) {
+                this.title = '';
+                this.titleWasProvidedByAttachment = false;
+            }
+        }
+
         this.attachments = [];
     }
 }

@@ -2,11 +2,23 @@ article.component.component-post-form([ngClass]="{ 'component-post-form--extende
   cass-form-progress-lock(*ngIf="isLoading()")
   form.form.card((ngSubmit)="submit()")
     .post-form-section
+      .post-title-container
+        textarea(
+          #titleTextArea,
+          placeholder="Заголовок",
+          [(ngModel)]="model.title",
+          [ngModelOptions]="{standalone: true}",
+          (focus)="focus()",
+          (blur)="blur()"
+        )
+        button.edit-title-button(title="Редактировать заголовок", (click)="focusTitleBox()")
+          i.fa.fa-pencil
       .post-content-container
         textarea.content(
           #contentTextArea,
           placeholder="Новый пост…",
-          [ngModelOptions]="{standalone: true}", [(ngModel)]="model.content",
+          [(ngModel)]="model.content",
+          [ngModelOptions]="{standalone: true}",
           (focus)="focus()",
           (blur)="blur()"
         )

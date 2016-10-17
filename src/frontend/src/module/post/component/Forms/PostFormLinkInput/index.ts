@@ -7,11 +7,12 @@ import {parseError} from "../../../../common/functions/parseError";
 var validUrl = require('valid-url');
 
 @Component({
+    selector: 'cass-post-form-link-input',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-post-form-link-input'})
-
+    ]
+})
 export class PostFormLinkInput
 {
     static FADEOUT_TIME_SEC = 5;
