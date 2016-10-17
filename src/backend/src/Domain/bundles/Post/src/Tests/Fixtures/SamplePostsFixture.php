@@ -31,6 +31,7 @@ class SamplePostsFixture implements Fixture
                 DefaultPostType::CODE_INT,
                 DemoAccountFixture::getAccount()->getCurrentProfile()->getId(),
                 SampleCollectionsFixture::getProfileCollection(1)->getId(),
+                'Demo post',
                 'Demo Post Content',
                 []
             ));

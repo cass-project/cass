@@ -19,9 +19,12 @@ Post_Request_CreatePost:
     collection_id:
       type: number
       description: ID коллекции, в которой будет размещен пост
+    title:
+      type: string
+      description: Заголовок поста
     content:
       type: string
-      description: Содержание сообщения
+      description: Содержание поста
     attachments:
       type: array
       items:

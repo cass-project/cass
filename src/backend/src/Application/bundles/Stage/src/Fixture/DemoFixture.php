@@ -231,7 +231,8 @@ final class DemoFixture
                     DefaultPostType::CODE_INT,
                     $profile->getId(),
                     $collection->getId(),
-                    $json['description'],
+                    $json['title'] ?? '',
+                    $json['description'] ?? '',
                     []
                 );
 
@@ -310,6 +311,7 @@ final class DemoFixture
                     DefaultPostType::CODE_INT,
                     $profile->getId(),
                     $collection->getId(),
+                    $json['title'] ?? '',
                     $json['description'] ?? '',
                     [$linkAttachment->getId()]
                 );
@@ -382,6 +384,7 @@ final class DemoFixture
                     DefaultPostType::CODE_INT,
                     $profile->getId(),
                     $collection->getId(),
+                    $json['title'] ?? '',
                     $json['description'] ?? '',
                     [$linkAttachment->getId()]
                 );

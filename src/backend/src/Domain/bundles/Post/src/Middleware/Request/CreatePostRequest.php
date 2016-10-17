@@ -16,6 +16,7 @@ class CreatePostRequest extends SchemaParams
             (int) $data['post_type'],
             (int) $data['profile_id'],
             (int) $data['collection_id'],
+            $data['title'] ?? null,
             (string) $data['content'],
             $data['attachments']
         );

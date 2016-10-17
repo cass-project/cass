@@ -51,6 +51,12 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEn
      * @Column(type="text")
      * @var string
      */
+    private $title;
+
+    /**
+     * @Column(type="text")
+     * @var string
+     */
     private $content;
 
     /**
@@ -63,27 +69,38 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEn
         PostType $postType,
         Profile $authorProfile,
         Collection $collection,
+        /* TODO: PHP7.1 ?string*/ $title,
         string $content
     ) {
         $this->postTypeCode = $postType->getIntCode();
         $this->authorProfile = $authorProfile;
         $this->collection = $collection;
+        $this->title = $title;
         $this->content = $content;
         $this->dateCreatedOn = new \DateTime();
     }
 
     public function toJSON(): array
     {
-        return [
+        $result = [
             'id' => $this->getId(),
             'post_type' => $this->postTypeCode,
             'date_created_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),
             'profile_id' => $this->getAuthorProfile()->getId(),
             'collection_id' => $this->getCollection()->getId(),
+            'title' => [
+                'has' => $this->hasTitle()
+            ],
             'content' => $this->getContent(),
             'theme_ids' => $this->getThemeIds(),
             'attachment_ids' => $this->getAttachmentIds(),
         ];
+
+        if($this->hasTitle()) {
+            $result['title']['value'] = $this->getTitle();
+        }
+
+        return $result;
     }
 
     public function toIndexedEntityJSON(): array
@@ -113,6 +130,16 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEn
         $this->collection = $collection;
 
         return $this;
+    }
+
+    public function hasTitle(): bool
+    {
+        return $this->title !== null;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
     }
 
     public function getContent(): string

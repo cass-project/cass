@@ -6,6 +6,7 @@ Post_Entity_Post:
     - profile_id
     - date_created_on
     - collection_id
+    - title
     - content
     - attachments
   properties:
@@ -34,6 +35,18 @@ Post_Entity_Post:
     collection_id:
       type: number
       description: ID коллекции, к которому относится пост
+    title:
+      type: object
+      description: Заголовок сообщения
+      required:
+        - has
+      properties:
+        has:
+          type: boolean
+          description: Есть ли заголовок?
+        value:
+          type: string
+          description: Значение
     content:
       type: string
       description: Содержание поста

@@ -130,7 +130,7 @@ final class CreateCommunityTest extends CommunityMiddlewareTestCase
                         ],
                         'image' => $this->expectImageCollection(),
                         'public_options' => [
-                            'public_enabled' => false,
+                            'public_enabled' => true,
                             'moderation_contract' => false
                         ],
                         'collections' => [

@@ -3,6 +3,9 @@ Post_Request_EditPost:
   required:
     - content
   properties:
+    title:
+      type: string
+      description: Заголовок поста
     content:
       type: string
-      description: Содержание сообщения
+      description: Содержание поста

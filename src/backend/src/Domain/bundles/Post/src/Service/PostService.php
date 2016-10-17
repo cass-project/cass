@@ -102,14 +102,20 @@ class PostService implements EventEmitterAwareService
         $this->postRepository->getPostsByIds($postIds);
     }
     
-    private function createPostFromParameters(CreatePostParameters $createPostParameters): Post
+    private function createPostFromParameters(CreatePostParameters $parameters): Post
     {
-        $postType = $this->postTypeFactory->createPostTypeByIntCode($createPostParameters->getPostTypeCode());
-        $collection = $this->collectionService->getCollectionById($createPostParameters->getCollectionId());
-        $profile = $this->profileService->getProfileById($createPostParameters->getProfileId());
+        $postType = $this->postTypeFactory->createPostTypeByIntCode($parameters->getPostTypeCode());
+        $collection = $this->collectionService->getCollectionById($parameters->getCollectionId());
+        $profile = $this->profileService->getProfileById($parameters->getProfileId());
 
-        $post = new Post($postType, $profile, $collection, $createPostParameters->getContent());
-        $post->setAttachmentIds($createPostParameters->getAttachmentIds());
+        $post = new Post(
+            $postType,
+            $profile,
+            $collection,
+            $parameters->hasTitle() ? $parameters->getTitle() : null,
+            $parameters->getContent()
+        );
+        $post->setAttachmentIds($parameters->getAttachmentIds());
         $post->setThemeIds($collection->getThemeIds());
 
         $this->postRepository->createPost($post);
