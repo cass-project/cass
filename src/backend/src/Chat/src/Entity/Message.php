@@ -163,6 +163,7 @@ class Message implements IdEntity, JSONSerializable
             'source_type' => $this->sourceType,
             'target_id' => $this->targetId,
             'target_type' => $this->targetType,
+            'content' => $this->content
         ];
     }
 }

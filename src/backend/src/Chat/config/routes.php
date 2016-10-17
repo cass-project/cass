@@ -14,6 +14,13 @@ return [
         ],
         [
             'type'       => 'route',
+            'method'     => 'PUT',
+            'url'        => '/protected/chat/{command:profile-send-profile}/source-profile/{sourceId}/target-profile/{targetId}[/]',
+            'middleware' => MessageMiddleware::class,
+            'name'       => 'chat-profile-profile'
+        ],
+        [
+            'type'       => 'route',
             'method'     => 'POST',
             'url'        => '/protected/chat/{command:get-messages}/profile/{profileId}[/]',
             'middleware' => MessageMiddleware::class,

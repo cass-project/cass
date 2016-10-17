@@ -1,0 +1,49 @@
+"/protected/chat/profile-send-profile/source-profile/{sourceId}/target-profile/{targetId}":
+  put:
+    tags:
+      - chat
+    description: Написать сообщение профилю от профиля
+    security:
+      - x_api_key: []
+    parameters:
+      - name: sourceId
+        in: path
+        required: true
+        type: number
+        description: Id профиля отправителя
+      - name: targetId
+        in: path
+        required: true
+        type: number
+        description: Id профиля получателя
+      - name: body
+        in: body
+        required: false
+        description: Сообщение
+        schema:
+          type: object
+          properties:
+            content:
+              type: string
+              description: Содержимое сообщения
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              schema:
+                $ref: '#/definitions/Chat_Entity_Message'
+      404:
+        $ref: '#/responses/NotFound'
+      403:
+        $ref: '#/responses/Unauthorized'
+      409:
+        $ref: '#/responses/error'

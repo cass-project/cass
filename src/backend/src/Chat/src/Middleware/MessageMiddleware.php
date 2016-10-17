@@ -4,6 +4,7 @@ namespace CASS\Chat\Middleware;
 use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
 use CASS\Chat\Middleware\Command\GetProfileMessagesCommand;
+use CASS\Chat\Middleware\Command\ProfileSendProfileMessageCommand;
 use CASS\Chat\Middleware\Command\SendProfileMessageCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -24,6 +25,7 @@ class MessageMiddleware implements MiddlewareInterface
 
         $resolver =  $this->commandService->createResolverBuilder()
             ->attachDirect('profile-send', SendProfileMessageCommand::class, 'PUT')
+            ->attachDirect('profile-send-profile', ProfileSendProfileMessageCommand::class, 'PUT')
             ->attachDirect('get-messages', GetProfileMessagesCommand::class, 'POST')
             ->resolve($request);
 

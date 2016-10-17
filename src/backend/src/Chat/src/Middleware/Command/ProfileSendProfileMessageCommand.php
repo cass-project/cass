@@ -3,36 +3,41 @@
 namespace CASS\Chat\Middleware\Command;
 
 use CASS\Chat\Entity\Message;
-use CASS\Chat\Repository\MessageRepository;
 use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
-use CASS\Util\Seek;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 
-class GetProfileMessagesCommand extends Command
+class ProfileSendProfileMessageCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
-        $bodyJson = json_decode($request->getBody()->getContents(), true);
+        $body = json_decode($request->getBody()->getContents(), true);
+        $content = $body['content'];
 
-        $seek = new Seek(MessageRepository::MAX_MESSAGES_LIMIT, $bodyJson['offset'], $bodyJson['limit']);
-
-        $sourceProfile = $this->currentAccountService->getCurrentAccount()->getCurrentProfile();
-        $targetProfileId = $request->getAttribute('profileId');
+        $sourceProfileId = $request->getAttribute('sourceId');
+        $targetProfileId = $request->getAttribute('targetId');
 
         try {
+            $sourceProfile = $this->profileService->getProfileById($sourceProfileId);
             $targetProfile = $this->profileService->getProfileById($targetProfileId);
-            $messages = $this->messageService->getMessagesToProfile($sourceProfile, $targetProfile, $seek);
+
+            $message = new Message();
+            $message
+                ->setSourceType(Message::SOURCE_TYPE_PROFILE)
+                ->setSourceId($sourceProfile->getId())
+                ->setTargetType(Message::TARGET_TYPE_PROFILE)
+                ->setTargetId($targetProfile->getId())
+                ->setContent($content)
+            ;
+
+            $message2 = $this->messageService->createMessage($message);
 
             return $responseBuilder
                 ->setStatusSuccess()
                 ->setJson([
                     'success' => true,
-                    'total' => count($messages),
-                    'entities' => array_map(function(Message $message){
-                        return $message->toJSON();
-                    }, $messages),
+                    'entity' => $message2->toJSON()
                 ])
                 ->build();
 
@@ -45,10 +50,9 @@ class GetProfileMessagesCommand extends Command
         }catch(\Exception $e) {
             return $responseBuilder
                 ->setStatusInternalError()
-                ->setError($e->getMessage())
+                ->setError($e)
                 ->setJson(['success' => false])
                 ->build();
         }
     }
-
 }
