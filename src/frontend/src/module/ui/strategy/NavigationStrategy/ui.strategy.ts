@@ -4,11 +4,11 @@ export interface UIStrategy
 {
     content: ElementRef;
 
-    up?();
-    down?();
+    up();
+    down();
     left?();
     right?();
-    top?();
-    bottom?();
-    enter?();
+    top();
+    bottom();
+    enter();
 }

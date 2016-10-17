@@ -64,7 +64,11 @@ export class ContentRoute implements OnInit
     }
 
     ngOnInit() {
+        this.navigator.initNavigation(this.content);
+    }
 
+    ngOnDestroy(){
+        this.navigator.destroyNavigation();
     }
 
     private initContentType() {
