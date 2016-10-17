@@ -29,6 +29,16 @@ final class WebmLinkMetadata implements LinkMetadata, HasPreview
         $this->type = $type;
     }
 
+    public function getTitle(): string
+    {
+        return basename($this->url);
+    }
+
+    public function getDescription(): string
+    {
+        return '';
+    }
+
     public function getVersion(): int
     {
         return self::VERSION;

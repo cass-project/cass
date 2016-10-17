@@ -16,6 +16,16 @@ final class ImageLinkMetadata implements LinkMetadata
         $this->url = $url;
     }
 
+    public function getTitle(): string
+    {
+        return basename($this->url);
+    }
+
+    public function getDescription(): string
+    {
+        return '';
+    }
+
     public function getVersion(): int
     {
         return self::VERSION;

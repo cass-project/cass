@@ -5,6 +5,8 @@ Attachment_Entity_AttachmentEntity:
     - date_created_on
     - is_attached
     - link
+    - title
+    - description
   properties:
     id:
       type: number
@@ -21,6 +23,12 @@ Attachment_Entity_AttachmentEntity:
     is_attached:
       type: boolean
       description: Аттачмент имеет владельца?
+    title:
+      type: string
+      description: Заголовок
+    description:
+      type: string
+      description: Описание
     owner:
       type: object
       description: Информация о владельце

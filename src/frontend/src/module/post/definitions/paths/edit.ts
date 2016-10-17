@@ -6,6 +6,7 @@ export interface EditPostRequest
 {
     profile_id: number;
     collection_id: number;
+    title?: string;
     content: string;
     attachments: Array<number>;
     links: AttachmentEntity<AttachmentMetadata>[];

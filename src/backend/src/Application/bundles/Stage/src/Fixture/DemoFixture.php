@@ -254,7 +254,7 @@ final class DemoFixture
                     }
                 }
 
-                $linkAttachment = new Attachment();
+                $linkAttachment = new Attachment($json['title'] ?? '', $json['description'] ?? '');
                 $linkAttachment->setMetadata([
                    'url' => $url,
                    'resource' => 'youtube',
@@ -328,7 +328,7 @@ final class DemoFixture
                 $description =  $options['description'] ?? '';
                 $image = $options['image'] ?? '';
 
-                $linkAttachment = new Attachment();
+                $linkAttachment = new Attachment($title, $description);
                 $linkAttachment->setMetadata([
                    'url' => $url,
                    'resource' => 'page',

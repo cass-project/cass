@@ -29,6 +29,18 @@ class Attachment implements JSONSerializable, IdEntity, SIDEntity
     private $dateAttachedOn;
 
     /**
+     * @Column(type="string", name="title")
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @Column(type="string", name="description")
+     * @var string
+     */
+    private $description;
+
+    /**
      * @Column(type="boolean", name="is_attached")
      * @var bool
      */
@@ -52,8 +64,11 @@ class Attachment implements JSONSerializable, IdEntity, SIDEntity
      */
     private $metadata = [];
 
-    public function __construct()
+    public function __construct(string $title, string $description)
     {
+        $this->title = $title;
+        $this->description = $description;
+
         $this->regenerateSID();
         $this->dateCreatedOn = new \DateTime();
     }
@@ -64,6 +79,8 @@ class Attachment implements JSONSerializable, IdEntity, SIDEntity
             'id' => $this->isPersisted() ? $this->getId() : '#NEW_ATTACHMENT',
             'sid' => $this->getSID(),
             'date_created_on' => $this->getDateCreatedOn()->format(\DateTime::RFC2822),
+            'title' => $this->getTitle(),
+            'description' => $this->getDescription(),
             'link' => $this->getMetadata(),
             'is_attached' => $this->isAttached(),
         ];
@@ -107,6 +124,16 @@ class Attachment implements JSONSerializable, IdEntity, SIDEntity
     public function isAttached()
     {
         return $this->isAttached;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 
     public function getOwnerCode(): string

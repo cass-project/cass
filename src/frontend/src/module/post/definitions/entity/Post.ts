@@ -8,6 +8,10 @@ export interface PostEntity extends FeedEntity
     date_created_on: string;
     profile_id: number;
     collection_id: number;
+    title: {
+        has: boolean;
+        value?: string;
+    };
     content: string;
     attachments: AttachmentEntity<AttachmentMetadata>[];
     attachment_ids: number[];

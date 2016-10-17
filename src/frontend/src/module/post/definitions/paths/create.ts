@@ -7,6 +7,7 @@ export interface CreatePostRequest
     profile_id: number;
     collection_id: number;
     force_theme_id?: number;
+    title?: string;
     content: string;
     attachments: Array<number>;
 }

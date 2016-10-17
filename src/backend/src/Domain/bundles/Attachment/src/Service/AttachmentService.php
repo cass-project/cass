@@ -92,7 +92,7 @@ class AttachmentService
             'source' => array_merge(['source' => $source->getCode()], $source->toJSON()),
         ];
 
-        $attachment = new Attachment();
+        $attachment = new Attachment($linkMetadata->getTitle(), $linkMetadata->getDescription());
         $attachment->setMetadata($metadata);
 
         $this->attachmentRepository->createAttachment($attachment);
