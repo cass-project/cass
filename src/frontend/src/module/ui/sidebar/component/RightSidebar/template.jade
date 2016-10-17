@@ -39,8 +39,8 @@ div.component.component-right-sidebar
       hr.list-separator
       ul.list
         li.list-item
-          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.prev.title' | translate }}", (click)="navigator.emitPrev()")
+          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.prev.title' | translate }}", (click)="navigator.emitLeft()")
             i.fa.fa-arrow-up
         li.list-item
-          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.next.title' | translate }}", (click)="navigator.emitNext()")
+          a(href="javascript:void(0)", title="{{ 'sidebar.right.item.next.title' | translate }}", (click)="navigator.emitRight()")
             i.fa.fa-arrow-up.fa-rotate-180

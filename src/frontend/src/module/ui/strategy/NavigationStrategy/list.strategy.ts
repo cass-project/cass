@@ -14,46 +14,51 @@ export class ListStrategy implements UIStrategy
 
     up()
     {
-        console.log(this.content);
+        console.log("im in list up");
+        let prev = 0;
+        if(this.elements.length > 0){
+            for(let index = 0; index < this.elements.length; index++){
+                if(this.elements[index].classList.contains('x-navigation-entity-active') && index > 0){
+                    this.elements[index].classList.remove('x-navigation-entity-active');
+                    console.log("current " + index);
+                    prev = index - 1;
+                    break;
+                }
+            }
+        }
+        console.log("previous " + prev);
+        this.elements[prev].classList.add('x-navigation-entity-active');
+        console.log(this.elements[prev]);
+        this.scrollToElement(this.elements[prev])
     }
 
     down()
     {
-        console.log(this.content);
+        console.log("im in list down");
+        let next = 0;
+        if(this.elements.length > 0){
+            for(let index = 0; index < this.elements.length; index++){
+                if(this.elements[index].classList.contains('x-navigation-entity-active') && index < this.elements.length - 1){
+                    this.elements[index].classList.remove('x-navigation-entity-active');
+                    console.log("current " + index);
+                    next = index + 1;
+                    break;
+                }
+            }
+        }
+        console.log("next " + next);
+        this.elements[next].classList.add('x-navigation-entity-active');
+        console.log(this.elements[next]);
+        this.scrollToElement(this.elements[next])
     }
 
     left()
     {
-        if(this.elements.length > 0){
-            for(let index = 0; index < this.elements.length; index++){
-                if(this.elements[index].classList.contains('x-navigation-entity-active') && index !== 0){
-                    this.elements[index].classList.remove('x-navigation-entity-active');
-                    this.elements[index-1].classList.add('x-navigation-entity-active');
-                    this.content.nativeElement.scrollTop = this.elements[index-1].getBoundingClientRect().top;
-                } else if(!this.elements[index].classList.contains('x-navigation-entity-active')){
-                    this.elements[0].classList.add('x-navigation-entity-active');
-                    this.content.nativeElement.scrollTop = this.elements[0].getBoundingClientRect().top;
-                }
-            }
-        }
+        console.log("left scroll is not available on list")
     }
 
     right() {
-        if (this.elements.length > 0) {
-            for (let index = 0; index < this.elements.length; index++) {
-                if (this.elements[index].classList.contains('x-navigation-entity-active') && index !== this.elements.length - 1) {
-                    this.elements[index].classList.remove('x-navigation-entity-active');
-                    this.elements[index + 1].classList.add('x-navigation-entity-active');
-                    this.content.nativeElement.scrollTop = this.elements[index + 1].getBoundingClientRect().top;
-                    console.log(this.elements[index + 1].getBoundingClientRect().top);
-                    break;
-                } else if (index === this.elements.length - 1) {
-                    this.elements[0].classList.add('x-navigation-entity-active');
-                    this.content.nativeElement.scrollTop = this.elements[0].getBoundingClientRect().top;
-                    console.log(this.elements[0].getBoundingClientRect().top)
-                }
-            }
-        }
+        console.log("right scroll is not available on list")
     }
 
     top()
@@ -71,4 +76,12 @@ export class ListStrategy implements UIStrategy
         console.log(this.content);
     }
 
+    scrollToElement(element) {
+        let top = element.getBoundingClientRect().top;
+        let bottom = element.getBoundingClientRect().bottom;
+        let midY = (top + bottom) / 2;
+        if (midY < 0 || midY >= this.content.nativeElement.clientHeight) {
+            this.content.nativeElement.scrollTop += top;
+        }
+    }
 }

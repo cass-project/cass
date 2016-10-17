@@ -20,8 +20,6 @@ export class UINavigationObservable
     public scroll: Observable<ScrollEvent>;
 
     public top: Observable<boolean>;
-    public prev: Observable<number>;
-    public next: Observable<number>;
     public bottom: Observable<boolean>;
     public up: Observable<boolean>;
     public down: Observable<boolean>;
@@ -31,8 +29,6 @@ export class UINavigationObservable
 
     public observerScroll: Observer<ScrollEvent>;
     public observerTop: Observer<boolean>;
-    public observerPrev: Observer<boolean>;
-    public observerNext: Observer<boolean>;
     public observerBottom: Observer<boolean>;
     public observerUp: Observer<boolean>;
     public observerDown: Observer<boolean>;
@@ -47,14 +43,6 @@ export class UINavigationObservable
 
         this.top = Observable.create(observer => {
             this.observerTop = observer;
-        }).publish().refCount();
-
-        this.prev = Observable.create(observer => {
-            this.observerPrev = observer;
-        }).publish().refCount();
-
-        this.next = Observable.create(observer => {
-            this.observerNext = observer;
         }).publish().refCount();
 
         this.up = Observable.create(observer => {
@@ -94,7 +82,7 @@ export class UINavigationObservable
             console.log(ViewOptionValue.List);
             this.setStrategy(new ListStrategy(content));
         } else {
-            throw new Error('ViewOptionService.LOCAL_STORAGE_KEY] unknown view')
+            throw new Error('ViewOptionService.LOCAL_STORAGE_KEY unknown view')
         }
 
         this.subscriptions = [
@@ -114,6 +102,14 @@ export class UINavigationObservable
                 this.strategy.right();
             }),
 
+            this.up.subscribe(() => {
+                this.strategy.up();
+            }),
+
+            this.down.subscribe(() => {
+                this.strategy.down();
+            }),
+
             this.scroll.subscribe(() => {}),
 
             this.viewOptionService.viewMode.subscribe(() => {
@@ -127,7 +123,7 @@ export class UINavigationObservable
                     console.log(ViewOptionValue.List);
                     this.setStrategy(new ListStrategy(content));
                 } else {
-                    throw new Error('ViewOptionService.LOCAL_STORAGE_KEY] unknown view')
+                    throw new Error('ViewOptionService.LOCAL_STORAGE_KEY unknown view')
                 }
             })
         ];
@@ -173,14 +169,6 @@ export class UINavigationObservable
 
     public emitTop() {
         this.observerTop.next(true);
-    }
-
-    public emitPrev() {
-        this.observerPrev.next(true);
-    }
-
-    public emitNext() {
-        this.observerNext.next(true);
     }
 
     public emitUp(){
