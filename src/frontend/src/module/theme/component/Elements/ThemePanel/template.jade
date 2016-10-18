@@ -8,7 +8,7 @@ div.component.component-theme-panel
       li.yoozer-left-menu-item(*ngIf="isBackAvailable()")
         a.theme-path-item(href="javascript:void(0)", (click)="back()")
           i.fa.fa-backward
-          span.title {{ 'back' | translate }}
+          span.title {{ 'theme.panel.home' | translate }}
   div.yoozer-left-menu
     ul.yoozer-left-menu-list.themes-list
       li.yoozer-left-menu-item(*ngFor="let theme of root.children")
