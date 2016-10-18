@@ -31,7 +31,14 @@ export class YoutubeItem
     }
 
     getTitle(): string {
-        return basename(this.attachment.link.url);
+        let hasTitle = (typeof this.attachment.title === "string")
+            && (this.attachment.title.length > 0);
+
+        if(hasTitle) {
+            return this.attachment.title;
+        }else{
+            return basename(this.attachment.link.url);
+        }
     }
 
     getDate(): string {
