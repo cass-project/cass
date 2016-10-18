@@ -6,15 +6,23 @@
 
 div.component-post-card-feed {
   .post-card {
+    background-color: white;
     @include card(1);
     border-radius: 3px;
     overflow: hidden;
-    background-color: white;
     width: 550px;
+    height: 100%;
 
     .card-header {
       margin-top: 8px;
       margin-bottom: 15px;
+    }
+
+    .title-container {
+      font-size: 20px;
+      font-weight: 400;
+      color: #000;
+      margin-bottom: 25px;
     }
 
     .content-container {

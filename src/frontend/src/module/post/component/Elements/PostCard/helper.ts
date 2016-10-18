@@ -42,6 +42,26 @@ export class PostCardHelper
         return this.dateCreatedOn;
     }
 
+    hasTitle(): boolean {
+        let hasPostTitle = this.post.title.has;
+        let hasAttachmentTitle = (this.post.attachments.length > 0) && (this.post.attachments[0].title.length > 0);
+
+        return hasPostTitle || hasAttachmentTitle;
+    }
+
+    getTitle(): string {
+        let hasPostTitle = this.post.title.has;
+        let hasAttachmentTitle = (this.post.attachments.length > 0) && (this.post.attachments[0].title.length > 0);
+
+        if(hasPostTitle) {
+            return this.post.title.value;
+        }else if(hasAttachmentTitle) {
+            return this.post.attachments[0].title;
+        }else{
+            return '';
+        }
+    }
+
     getContent(): string {
         return this.post.content;
     }

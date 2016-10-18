@@ -18,7 +18,6 @@ div.component-collection-cards-list {
       }
 
       div.post-card-container {
-        @include card(1);
         cursor: pointer;
         overflow: hidden;
 
