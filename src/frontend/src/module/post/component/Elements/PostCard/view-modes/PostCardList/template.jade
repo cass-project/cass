@@ -9,6 +9,9 @@ div.component.component-post-card-list.x-feed-entity.x-navigation-entity
           cass-profile-image([url]="getProfileImageURL()")
         span.profile-name {{ getProfileGreetings() }}
         span.date-created-on {{ getDateCreatedOn() }}
+      .post-title-container(*ngIf="helper.hasTitle()")
+        h1
+          span.text {{ helper.getTitle() }}
       div(*ngIf="helper.hasContent()")
         cass-text-parser([text]='helper.getContent()')
       div(*ngIf="! helper.hasContent()")

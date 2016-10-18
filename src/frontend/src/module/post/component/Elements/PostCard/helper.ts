@@ -43,19 +43,24 @@ export class PostCardHelper
     }
 
     hasTitle(): boolean {
-        let hasPostTitle = this.post.title.has;
-        let hasAttachmentTitle = (this.post.attachments.length > 0) && (this.post.attachments[0].title.length > 0);
+        let hasPostTitle = this.post.title.has && this.post.title.value.length > 0;
+        let hasAttachmentTitle = (this.post.attachments.length > 0)
+            && (typeof this.post.attachments[0].title === "string")
+            && (this.post.attachments[0].title.length > 0);
 
         return hasPostTitle || hasAttachmentTitle;
     }
 
     getTitle(): string {
-        let hasPostTitle = this.post.title.has;
-        let hasAttachmentTitle = (this.post.attachments.length > 0) && (this.post.attachments[0].title.length > 0);
+        let hasPostTitle = this.post.title.has && this.post.title.value.length > 0;
+        let hasAttachmentTitle = (this.post.attachments.length > 0)
+            && (typeof this.post.attachments[0].title === "string")
+            && (this.post.attachments[0].title.length > 0);
 
         if(hasPostTitle) {
             return this.post.title.value;
         }else if(hasAttachmentTitle) {
+            console.log(this.post.title.value, hasPostTitle, hasAttachmentTitle, this.post.attachments[0].title);
             return this.post.attachments[0].title;
         }else{
             return '';

@@ -485,8 +485,6 @@ final class DemoFixture
             array_map(function(Attachment $attachment) use($linkMap, &$specified)  {
                 $url =  $attachment->getMetadata()['url'];
 
-                var_dump($url);
-
                 if(isset($linkMap[$url])) {
                     $title = $linkMap[$url]['title'];
                     $description = $linkMap[$url]['description'];
