@@ -1,10 +1,10 @@
-article.component.component-profile-card-header((click)='goProfile()')
+article.component.component-profile-card-header()
   .profile-image
     .profile-image-container
-      cass-profile-image(border="circle", [url]="getImageURL()")
+      cass-profile-image(border="circle", [url]="getImageURL()", (click)='goProfile()')
   .profile-about
-      .profile-name
+      .profile-name((click)='goProfile()')
         h1 {{ getProfileName() }}
       .profile-settings
-        div(*ngIf="hasTime()")
+        div(*ngIf="hasTime()", (click)='goProfile()')
           span {{ getTime() }}

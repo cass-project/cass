@@ -1,6 +1,6 @@
-div.component.component-profile-card-feed
-  .x-navigation-entity.profile-card(data-index-number="helper.getProfileId()")
-    .profile-image-container((click)="open()")
+div.x-navigation-entity.component.component-profile-card-feed
+  .profile-card
+    .profile-image-container.x-navigation-click((click)="open()")
       cass-profile-image([url]="helper.getProfileImageURL()", border="square")
     .profile-about
       h1 {{ helper.getProfileName() }}

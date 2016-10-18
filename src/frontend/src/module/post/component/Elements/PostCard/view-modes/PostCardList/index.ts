@@ -38,6 +38,10 @@ export class PostCardList implements OnChanges
         );
     }
 
+    openPost(post: PostEntity) {
+        this.openPostEvent.emit(post);
+    }
+
     getProfileImageURL(): string {
         return queryImage(QueryTarget.Avatar, this.post.profile.image).public_path;
     }

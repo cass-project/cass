@@ -27,11 +27,6 @@ const appRoutes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: '',
-        redirectTo: '/p/home',
-        pathMatch: 'full'
-    },
-    {
         path: 'profile',
         children: [
             {

@@ -25,7 +25,7 @@ export class PostCardFeed implements OnChanges
 
     private helper: PostCardHelper;
     private viewMode: ViewOptionValue = ViewOptionValue.Feed;
-
+    
     ngOnChanges() {
         this.helper = new PostCardHelper(
             this.post,

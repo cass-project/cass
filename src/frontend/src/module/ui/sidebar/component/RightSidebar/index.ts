@@ -23,6 +23,11 @@ export class RightSidebar
 
     @HostListener('document:keydown', ['$event']) globalKeyDown($event){
 
+        if($event.key === 'Enter'){
+            /*$event.preventDefault();*/
+            this.navigator.emitEnter();
+        }
+
         if($event.key === 'ArrowUp'){
             /*$event.preventDefault();*/
             this.navigator.emitUp();

@@ -188,6 +188,10 @@ export class UINavigationObservable
     public emitBottom() {
         this.observerBottom.next(true);
     }
+
+    public emitEnter() {
+        this.observerEnter.next(true);
+    }
 }
 
 export interface ScrollEvent

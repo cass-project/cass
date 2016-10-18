@@ -1,7 +1,7 @@
 @import "./../../../../../../../styles/globals.scss";
 
-.x-feed-entity-active {
-  outline: 5px solid material-color("blue", "100");
+.x-navigation-entity-active {
+    outline: 5px solid material-color("blue", "100");
 }
 
 div.component-post-card-feed {
@@ -41,5 +41,21 @@ div.component-post-card-feed {
         line-height: 20px;
       }
     }
+  }
+}
+
+.x-navigation-entity {
+  &:hover {
+    .profile-card {
+      border-color: material-color("indigo", "500");
+      outline: 0;
+    }
+  }
+}
+
+.x-navigation-entity-active {
+  .profile-card {
+    border-color: material-color("indigo", "500") !important;
+    outline: 0;
   }
 }

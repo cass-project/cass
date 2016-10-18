@@ -1,7 +1,7 @@
 div.component.component-profile-card-list
-  div.flexbox-container(data-index-number="helper.getProfileId()").x-navigation-entity
+  div.flexbox-container.x-navigation-entity
     div.profile-image
-      a.profile-image-container((click)="open($event)", [routerLink]="['/profile', profile.id]")
+      a.profile-image-container.x-navigation-click((click)="open($event)", [routerLink]="['/profile', profile.id]")
         cass-profile-image([url]="helper.getProfileImageURL()", border="square")
     div.profile-info
       h1 {{ helper.getProfileName() }}

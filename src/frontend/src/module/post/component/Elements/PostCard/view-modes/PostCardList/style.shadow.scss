@@ -54,3 +54,19 @@ div.component-post-card-list {
     }
   }
 }
+
+.x-navigation-entity {
+  &:hover {
+    .profile-card {
+      border-color: material-color("indigo", "500");
+      outline: 0;
+    }
+  }
+}
+
+.x-navigation-entity-active {
+  .profile-card {
+    border-color: material-color("indigo", "500") !important;
+    outline: 0;
+  }
+}

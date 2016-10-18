@@ -5,7 +5,7 @@ import {AccountDeleteWarning} from "./component/AccountDeleteWarning/index";
 export const CASSAccountModule = {
     declarations: [
         AccountComponent,
-        AccountDeleteWarning,
+        AccountDeleteWarning
     ],
     providers: [
         AccountRESTService,

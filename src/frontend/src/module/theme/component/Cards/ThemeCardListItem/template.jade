@@ -1,6 +1,6 @@
-div.component.component-theme-card-list-item
+div.component.component-theme-card-list-item.x-navigation-entity
   div.flexbox-container
-    div.preview((click)="go(theme)")
+    div.preview.x-navigation-click((click)="go(theme)")
       div.image-container
         div.image(style="background-image: url('{{ prefix }}/{{ theme.preview }}')")
     div.title((click)="go(theme)")

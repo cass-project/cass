@@ -40,6 +40,6 @@ export class ProfileCardHeader
     }
     
     goProfile() {
-        this.router.navigate(['/Profile', 'Profile', { 'id': this.profile.id }]);
+        this.router.navigate(['profile', this.profile.id]);
     }
 }

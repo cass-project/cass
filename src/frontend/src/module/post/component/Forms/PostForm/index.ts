@@ -1,3 +1,5 @@
+var autosize = require("autosize");
+
 import {Component, Input, ViewChild, ElementRef, EventEmitter, Output, OnInit, AfterViewInit} from "@angular/core";
 
 import {CollectionEntity} from "../../../../collection/definitions/entity/collection";
@@ -55,8 +57,6 @@ export class PostForm implements OnInit, AfterViewInit
     }
 
     ngAfterViewInit() {
-        var autosize = require("autosize");
-
         autosize(this.contentTextArea.nativeElement);
         autosize(this.titleTextArea.nativeElement);
     }

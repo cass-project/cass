@@ -1,6 +1,7 @@
-div.component.component-profile-card-grid((click)="open()")
-  .cover-profile-image(data-index-number="helper.getProfileId()").x-navigation-entity
-    .profile-image-container(style="background-image: url('{{ helper.getProfileImageURL() }}');")
+div.component.component-profile-card-grid.x-navigation-entity
+  .x-navigation-click((click)="open()")
+    .cover-profile-image
+      .profile-image-container(style="background-image: url('{{ helper.getProfileImageURL() }}');")
   .cover-profile-about
     .profile-name
       h1 {{ helper.getProfileName() }}

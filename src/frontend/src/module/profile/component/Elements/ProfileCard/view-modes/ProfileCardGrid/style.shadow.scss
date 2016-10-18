@@ -1,19 +1,19 @@
 @import "./../../../../../../../styles/globals";
 
 div.component-profile-card-grid {
+  @include card(1);
+
   .x-navigation-entity {
-      &:hover {
-        border-color: material-color("indigo", "500");
-        outline: 0;
-      }
+    &:hover {
+      border-color: material-color("indigo", "500");
+      outline: 0;
+    }
   }
 
   .x-navigation-entity-active {
-      border-color: material-color("indigo", "500");
-      outline: 0;
+    border-color: material-color("indigo", "500");
+    outline: 0;
   }
-
-  @include card(1);
 
   cursor: pointer;
   width: 200px;

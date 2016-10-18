@@ -2,7 +2,7 @@ div.component.component-post-card-grid
   .flexbox-container
     .top
       .card.x-feed-entity.x-navigation-entity
-        .profile-image(*ngIf="! helper.hasAttachment()", (click)="openPost(post)")
+        .profile-image.x-navigation-click(*ngIf="!helper.hasAttachment()", (click)="openPost(post)")
           .profile-image-container
             cass-profile-image([url]="getProfileImageURL()")
         .attachment-container(*ngIf="helper.hasAttachment()")

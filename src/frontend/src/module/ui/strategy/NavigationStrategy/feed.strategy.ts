@@ -3,6 +3,7 @@ import {UIStrategy} from "./ui.strategy";
 
 export class FeedStrategy implements UIStrategy
 {
+    private pickedElem;
     content: ElementRef;
     elements;
 
@@ -35,6 +36,7 @@ export class FeedStrategy implements UIStrategy
                 }
             }
             this.elements[prev].classList.add('x-navigation-entity-active');
+            this.pickedElem = this.elements[prev];
 
             this.scrollToElement(this.elements[prev])
         }
@@ -64,6 +66,7 @@ export class FeedStrategy implements UIStrategy
             }
 
             this.elements[next].classList.add('x-navigation-entity-active');
+            this.pickedElem = this.elements[next];
 
             this.scrollToElement(this.elements[next])
         }
@@ -82,6 +85,7 @@ export class FeedStrategy implements UIStrategy
             }
         }
         this.elements[prev].classList.add('x-navigation-entity-active');
+        this.pickedElem = this.elements[prev];
 
         this.scrollToElement(this.elements[prev])
     }
@@ -98,6 +102,7 @@ export class FeedStrategy implements UIStrategy
             }
         }
         this.elements[next].classList.add('x-navigation-entity-active');
+        this.pickedElem = this.elements[next];
 
         this.scrollToElement(this.elements[next])
     }
@@ -114,12 +119,10 @@ export class FeedStrategy implements UIStrategy
 
     enter()
     {
-        if (this.elements.length > 0) {
-            for (let index = 0; index < this.elements.length; index++) {
-                if (this.elements[index].classList.contains('x-navigation-entity-active')) {
-                    this.elements[index].click();
-                }
-            }}
+        console.log(this.pickedElem.getElementsByClassName('x-navigation-click'));
+        if(this.pickedElem.getElementsByClassName('x-navigation-click') > 0){
+           this.pickedElem.getElementsByClassName('x-navigation-click')[0].click();
+        }
     }
 
     scrollToElement(element) {
