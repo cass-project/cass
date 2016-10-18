@@ -57,5 +57,6 @@
   "cass.module.public.menu.people.title": "People",
   "switch-profile": "Switch Profile",
   "create-profile": "Create Profile",
-  "cass.module.public.menu.collection.title": "Collections"
+  "cass.module.public.menu.collection.title": "Collections",
+  "theme.panel.home": "Back to themes list"
 }
