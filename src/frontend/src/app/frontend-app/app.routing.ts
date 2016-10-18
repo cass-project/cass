@@ -22,6 +22,11 @@ import {CommunityResolve} from "../../module/community/resolve/CommunityResolve"
 
 const appRoutes: Routes = [
     {
+        path: '**',
+        redirectTo: '/p/home',
+        pathMatch: 'full'
+    },
+    {
         path: '',
         redirectTo: '/p/home',
         pathMatch: 'full'

@@ -72,6 +72,7 @@ export class UINavigationObservable
     }
 
     initNavigation(content){
+        console.log(ViewOptionService.LOCAL_STORAGE_KEY);
         if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'feed'){
             console.log(ViewOptionValue.Feed);
             this.setStrategy(new FeedStrategy(content));

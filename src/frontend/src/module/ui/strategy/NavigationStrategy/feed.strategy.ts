@@ -94,6 +94,7 @@ export class FeedStrategy implements UIStrategy
     }
 
     right() {
+        console.log(this.content, this.elements);
         let next = 0;
         if(this.elements.length > 0){
             for(let index = 0; index < this.elements.length; index++){
