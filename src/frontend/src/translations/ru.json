@@ -1,5 +1,5 @@
 {
-  "sidebar.item.home.title": "Каналы",
+  "sidebar.item.home.title": "Yoozer",
   "sidebar.item.people.title": "Люди",
   "sidebar.item.collections.title": "Подборки",
   "sidebar.item.communities.title": "Сообщества",
@@ -31,7 +31,7 @@
   "search.placeholder": "Поиск...",
   "cass.module.public.menu.theme.title": "Тематики",
   "cass.module.public.menu.content.title": "Контент",
-  "cass.module.public.menu.list-themes.title": "Список тематик",
+  "cass.module.public.menu.list-themes.title": "Список",
   "cass.module.public.content-type.all.title": "Весь контент",
   "cass.module.public.content-type.video.title": "Видео",
   "cass.module.public.content-type.image.title": "Картинки",

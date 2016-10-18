@@ -41,6 +41,7 @@ div.component.component-public-menu([ngClass]='{"component-public-menu-extended"
             button.menu-list-item(
               type="button",
               title="{{ 'cass.module.public.content-type.all.title' | translate }}",
+              [ngClass]="{'active': isContentTypeCriteriaNotActivated()}",
               (click)="disableContentTypeCriteria()"
             )
               i.fa.fa-fw.fa-asterisk

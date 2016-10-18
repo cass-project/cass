@@ -24,6 +24,11 @@ export class PublicContentMenu
         private service: PublicService
     ) { }
 
+    private isContentTypeCriteriaNotActivated(): boolean
+    {
+        return this.criteria.criteria.contentType.enabled === false;
+    }
+
     private isContentType(contentType: ContentType) {
         return this.criteria.criteria.contentType.params.type === contentType;
     }
