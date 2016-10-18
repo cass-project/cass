@@ -16,9 +16,58 @@ article.component.component-post-form {
     background-color: white;
   }
 
-  .post-form-section {
-    border-bottom: 1px solid material-color("grey", "300");
+  .post-form-title-container {
+    margin-bottom: 10px;
 
+    .flexbox-container {
+      display: flex;
+
+      .left {
+        flex-basis: 100%;
+      }
+
+      .right {
+        margin-left: 10px;
+        flex-basis: 40px;
+        flex-shrink: 0;
+        text-align: right;
+      }
+    }
+
+    textarea.post-title {
+      border: 1px dotted transparent;
+      width: 100%;
+      padding: 7px;
+      font-size: 18px;
+      font-weight: 400;
+      color: material-color("grey", "900");
+      background-color: transparent;
+      resize: none;
+      outline: 0;
+
+      &:hover, &:focus {
+        outline: 1px dotted material-color("grey", "500");
+      }
+
+      &:active {
+        border: 1px solid material-color("grey", "300");
+      }
+    }
+
+    button.edit-title-button {
+      border: 0;
+      background-color: transparent;
+      cursor: pointer;
+      color: material-color("grey", "400");
+      font-size: 16px;
+
+      &:hover {
+        color: material-color("grey", "700");
+      }
+    }
+  }
+
+  .post-form-section {
     &:last-child {
       border-bottom: 0;
     }
@@ -41,6 +90,10 @@ article.component.component-post-form {
       box-sizing: border-box;
       padding: 10px;
     }
+  }
+
+  .link-box {
+    border-top: 1px solid material-color("grey", "300");
   }
 
   .attachment-actions {
@@ -87,6 +140,7 @@ article.component.component-post-form {
   footer.post-form-footer {
     display: flex;
     justify-content: space-between;
+    border-top: 1px solid material-color("grey", "300");
     padding: 5px;
   }
 }
@@ -97,12 +151,16 @@ article.component.component-post-form--not-extended {
   }
 
   .post-content-container {
-    height: 70px;
+    min-height: 70px;
   }
 }
 
 article.component.component-post-form--extended {
   .post-content-container {
-    height: 200px;
+    min-height: 200px;
+  }
+
+  textarea.post-title {
+    border-color: material-color("grey", "500");
   }
 }

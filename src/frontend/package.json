@@ -18,6 +18,7 @@
     "@angular/platform-server": "2.0.0",
     "@angular/router": "3.0.0",
     "@angular/upgrade": "2.0.0",
+    "autosize": "^3.0.17",
     "bootstrap": "^4.0.0-alpha.2",
     "core-js": "^2.4.0",
     "cropperjs": "^0.7.0",

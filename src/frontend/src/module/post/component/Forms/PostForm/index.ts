@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef, EventEmitter, Output} from "@angular/core";
+import {Component, Input, ViewChild, ElementRef, EventEmitter, Output, OnInit, AfterViewInit} from "@angular/core";
 
 import {CollectionEntity} from "../../../../collection/definitions/entity/collection";
 import {PostRESTService} from "../../../service/PostRESTService";
@@ -15,7 +15,7 @@ import {AttachmentRESTService} from "../../../../attachment/service/AttachmentRE
         require('./style.shadow.scss')
     ],selector: 'cass-post-form'})
 
-export class PostForm
+export class PostForm implements OnInit, AfterViewInit
 {
     static DEFAULT_POST_TYPE = 'default';
 
@@ -54,6 +54,13 @@ export class PostForm
         );
     }
 
+    ngAfterViewInit() {
+        var autosize = require("autosize");
+
+        autosize(this.contentTextArea.nativeElement);
+        autosize(this.titleTextArea.nativeElement);
+    }
+
     onFileChange($event) {
         let files: FileList = $event.target.files;
 
@@ -63,7 +70,8 @@ export class PostForm
             
             this.attachments.upload(file).subscribe(
                 (response) => {
-                    this.model.attachments.push(response.entity);
+                    this.model.addAttachment(response.entity);
+
                     this.contentTextArea.nativeElement.focus();
                     this.focused = true;
 
@@ -107,6 +115,10 @@ export class PostForm
     focusTitleBox() {
         this.titleTextArea.nativeElement.focus();
         this.focus();
+    }
+
+    filterTitle() {
+        this.model.title = this.model.title.replace(/(\r\n|\n|\r)/gm,"");
     }
 
     blur() {

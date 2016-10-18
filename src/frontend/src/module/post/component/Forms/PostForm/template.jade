@@ -1,56 +1,63 @@
 article.component.component-post-form([ngClass]="{ 'component-post-form--extended': isExtended(), 'component-post-form--not-extended': !isExtended() }")
   cass-form-progress-lock(*ngIf="isLoading()")
-  form.form.card((ngSubmit)="submit()")
+  form.form((ngSubmit)="submit()")
     .post-form-section
-      .post-title-container
-        textarea(
-          #titleTextArea,
-          placeholder="Заголовок",
-          [(ngModel)]="model.title",
-          [ngModelOptions]="{standalone: true}",
-          (focus)="focus()",
-          (blur)="blur()"
-        )
-        button.edit-title-button(title="Редактировать заголовок", (click)="focusTitleBox()")
-          i.fa.fa-pencil
-      .post-content-container
-        textarea.content(
-          #contentTextArea,
-          placeholder="Новый пост…",
-          [(ngModel)]="model.content",
-          [ngModelOptions]="{standalone: true}",
-          (focus)="focus()",
-          (blur)="blur()"
-        )
-    .post-form-section(*ngIf="isLinkBoxRequested()")
-      cass-post-form-link-input(
-        (attach-link)="model.addAttachment($event)",
-        (detach-link)="deleteAttachments()"
-      )
-    .post-form-section(*ngIf="isExtended()")
-      footer.post-form-footer
-        .form-section
-          button(type="button", (click)="cancel()").form-text-button
-            span Отмена
-        .form-section
-          button(type="submit", [disabled]="! model.isValid()").form-button.form-button-green
-            span Разместить
-    .post-form-section(*ngIf="hasAttachments()")
-      .attachment
-        cass-attachment([attachment]="model.getAttachment()", view-mode="feed")
-      .attachment-actions
-        .attachment-actions-section
-        .attachment-actions-section
-          button(type="button", (click)="deleteAttachments()").form-text-button
-            span Удалить приложение
-  .attachment-controls(*ngIf="! hasAttachments()")
-    .attach-control.attach-link
-      button.attach-button((click)="requestLinkBox()")
-        i.fa.fa-link
-        span.title Прикрепить ссылку
-    .attach-control.attach-file
-      label(for="componentPostFormFileInput")
-        input#componentPostFormFileInput.file(type="file", (change)="onFileChange($event)")
-        div.attach-button
-          i.fa.fa-cloud-upload
-          span.title Прикрепить файл
+      .post-form-title-container
+        .flexbox-container
+          .left
+            textarea.post-title(
+              #titleTextArea,
+              placeholder="Заголовок",
+              [(ngModel)]="model.title",
+              [ngModelOptions]="{standalone: true}",
+              (focus)="focus()",
+              (blur)="blur()",
+              (change)="filterTitle()",
+              row="1"
+            )
+          .right
+            button.edit-title-button(title="Редактировать заголовок", (click)="focusTitleBox()", type="button")
+              i.fa.fa-pencil
+      .card
+        .post-content-container
+          textarea.content(
+            #contentTextArea,
+            placeholder="Новый пост…",
+            [(ngModel)]="model.content",
+            [ngModelOptions]="{standalone: true}",
+            (focus)="focus()",
+            (blur)="blur()"
+          )
+        .post-form-section.link-box(*ngIf="isLinkBoxRequested()")
+          cass-post-form-link-input(
+            (attach-link)="model.addAttachment($event)",
+            (detach-link)="deleteAttachments()"
+          )
+        .post-form-section(*ngIf="isExtended()")
+          footer.post-form-footer
+            .form-section
+              button(type="button", (click)="cancel()").form-text-button
+                span Отмена
+            .form-section
+              button(type="submit", [disabled]="! model.isValid()").form-button.form-button-green
+                span Разместить
+        .post-form-section(*ngIf="hasAttachments()")
+          .attachment
+            cass-attachment([attachment]="model.getAttachment()", view-mode="feed")
+          .attachment-actions
+            .attachment-actions-section
+            .attachment-actions-section
+              button(type="button", (click)="deleteAttachments()").form-text-button
+                span Удалить приложение
+      .post-form-section
+        .attachment-controls(*ngIf="! hasAttachments()")
+          .attach-control.attach-link
+            button.attach-button((click)="requestLinkBox()", type="button")
+              i.fa.fa-link
+              span.title Прикрепить ссылку
+          .attach-control.attach-file
+            label(for="componentPostFormFileInput")
+              input#componentPostFormFileInput.file(type="file", (change)="onFileChange($event)")
+              div.attach-button
+                i.fa.fa-cloud-upload
+                span.title Прикрепить файл
