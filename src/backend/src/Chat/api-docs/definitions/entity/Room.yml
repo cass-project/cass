@@ -1,0 +1,7 @@
+Chat_Entity_Room:
+  type: object
+  required:
+    - id
+    - created
+    - ownerId
+    - ownerType

@@ -2,6 +2,7 @@
 namespace CASS\Chat;
 
 use CASS\Chat\Middleware\MessageMiddleware;
+use CASS\Chat\Middleware\RoomMiddleware;
 
 return [
     'common' =>[
@@ -26,5 +27,17 @@ return [
             'middleware' => MessageMiddleware::class,
             'name'       => 'chat-profile-get-messages'
         ],
+
+
+        // создаём комнату
+        [
+            'type'      => 'route',
+            'method'    => 'PUT',
+            'url'       => '/protected/chat/room/{command:create}',
+            'middleware'=> RoomMiddleware::class,
+            'name'      => 'chat-room-create'
+        ]
+        // Удаляем комнату
+        // Добавляем пользователей в комнату
     ]
 ];
