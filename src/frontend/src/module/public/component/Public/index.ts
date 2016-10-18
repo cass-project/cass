@@ -30,8 +30,6 @@ export class PublicComponent
     ) { }
 
     onScroll($event: Event) {
-        console.log('SCROLL!', $event);
-
         this.scroll.emit({
             html: this.contentArea.nativeElement
         });

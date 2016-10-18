@@ -60,7 +60,6 @@ export class PostCardHelper
         if(hasPostTitle) {
             return this.post.title.value;
         }else if(hasAttachmentTitle) {
-            console.log(this.post.title.value, hasPostTitle, hasAttachmentTitle, this.post.attachments[0].title);
             return this.post.attachments[0].title;
         }else{
             return '';

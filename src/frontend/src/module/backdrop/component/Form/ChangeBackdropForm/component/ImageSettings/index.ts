@@ -17,7 +17,6 @@ export class ImageSettings
         private model: ChangeBackdropModel
     ) {
         this.backdrop = model.backdrop;
-        console.log(this.backdrop);
     }
 
     getBackdrop() {

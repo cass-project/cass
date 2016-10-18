@@ -19,7 +19,6 @@ export class ModalComponent
     }
 
     outClick() {
-        console.log('out click');
         this.outClickEvent.emit(true);
     }
 }

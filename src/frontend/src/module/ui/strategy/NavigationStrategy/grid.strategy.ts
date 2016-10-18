@@ -14,7 +14,6 @@ export class GridStrategy implements UIStrategy
 
     up()
     {
-        console.log("im in grid up");
         let cur = 0;
         let step = 0;
         if (this.elements.length > 0) {
@@ -23,7 +22,6 @@ export class GridStrategy implements UIStrategy
                     this.elements[index].classList.remove('x-navigation-entity-active');
                     cur = index;
                     step = cur - 1;
-                    console.log("current " + cur);
                     break;
                 }
             }
@@ -36,16 +34,13 @@ export class GridStrategy implements UIStrategy
                     break;
                 }
             }
-            console.log("previous " + prev);
             this.elements[prev].classList.add('x-navigation-entity-active');
-            console.log(this.elements[prev]);
             this.scrollToElement(this.elements[prev])
         }
     }
 
     down()
     {
-        console.log("im in grid down");
         let cur = 0;
         let step = 0;
         if (this.elements.length > 0) {
@@ -54,7 +49,6 @@ export class GridStrategy implements UIStrategy
                     this.elements[index].classList.remove('x-navigation-entity-active');
                     cur = index;
                     step = cur + 1;
-                    console.log("current " + cur);
                     break;
                 }
             }
@@ -68,49 +62,39 @@ export class GridStrategy implements UIStrategy
                 }
             }
 
-            console.log("next " + next);
             this.elements[next].classList.add('x-navigation-entity-active');
-            console.log(this.elements[next]);
             this.scrollToElement(this.elements[next])
         }
     }
 
     left()
     {
-        console.log("im in grid left");
         let prev = 0;
         if(this.elements.length > 0){
             for(let index = 0; index < this.elements.length; index++){
                 if(this.elements[index].classList.contains('x-navigation-entity-active') && index > 0) {
                     this.elements[index].classList.remove('x-navigation-entity-active');
-                    console.log("current " + index);
                     prev = index - 1;
                     break;
                 }
             }
         }
-        console.log("previous " + prev);
         this.elements[prev].classList.add('x-navigation-entity-active');
-        console.log(this.elements[prev]);
         this.scrollToElement(this.elements[prev])
     }
 
     right() {
-        console.log("im in grid right");
         let next = 0;
         if(this.elements.length > 0){
             for(let index = 0; index < this.elements.length; index++){
                 if(this.elements[index].classList.contains('x-navigation-entity-active') && index < this.elements.length - 1) {
                     this.elements[index].classList.remove('x-navigation-entity-active');
-                    console.log("current " + index);
                     next = index + 1;
                     break;
                 }
             }
         }
-        console.log("next " + next);
         this.elements[next].classList.add('x-navigation-entity-active');
-        console.log(this.elements[next]);
         this.scrollToElement(this.elements[next])
     }
 

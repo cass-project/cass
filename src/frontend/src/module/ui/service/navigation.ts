@@ -72,15 +72,11 @@ export class UINavigationObservable
     }
 
     initNavigation(content){
-        console.log(ViewOptionService.LOCAL_STORAGE_KEY);
         if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'feed'){
-            console.log(ViewOptionValue.Feed);
             this.setStrategy(new FeedStrategy(content));
         } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'grid'){
-            console.log(ViewOptionValue.Grid);
             this.setStrategy(new GridStrategy(content));
         } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'list'){
-            console.log(ViewOptionValue.List);
             this.setStrategy(new ListStrategy(content));
         } else {
             throw new Error('ViewOptionService.LOCAL_STORAGE_KEY unknown view')
@@ -119,13 +115,10 @@ export class UINavigationObservable
 
             this.viewOptionService.viewMode.subscribe(() => {
                 if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'feed'){
-                    console.log(ViewOptionValue.Feed);
                     this.setStrategy(new FeedStrategy(content));
                 } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'grid'){
-                    console.log(ViewOptionValue.Grid);
                     this.setStrategy(new GridStrategy(content));
                 } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'list'){
-                    console.log(ViewOptionValue.List);
                     this.setStrategy(new ListStrategy(content));
                 } else {
                     throw new Error('ViewOptionService.LOCAL_STORAGE_KEY unknown view')

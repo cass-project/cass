@@ -63,8 +63,6 @@ export class UIPanelControlExtended
     }
 
     cycle() {
-        console.log(this.mode, this.isExtended());
-
         if(this.isHidden()) {
             this.small();
         }else if(this.isSmall()) {

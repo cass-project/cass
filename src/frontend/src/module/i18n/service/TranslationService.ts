@@ -14,7 +14,7 @@ export class TranslationService
         if(this.dictionaries[this.target][key] !== undefined) {
             return this.dictionaries[this.target][key];
         }else if(this.dictionaries[this.fallback][key] !== undefined) {
-            console.log(`TranslationService: Using fallback for ${key}`);
+            console.log(`TranslationService: Using fallback for ${key}`); /* DO NOT REMOVE FKING BITCH */
 
             return this.dictionaries[this.fallback][key];
         }else{

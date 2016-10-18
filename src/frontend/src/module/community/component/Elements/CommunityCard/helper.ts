@@ -24,10 +24,6 @@ export class CommunityCardHelper
         return this.theme.findById(this.community.theme.id);
     }
 
-    getThemeTitle(): string {
-        return this.getTheme().title;
-    }
-
     getCommunityTitle(): string {
         return this.community.title;
     }

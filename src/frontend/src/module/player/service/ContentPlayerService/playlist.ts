@@ -69,8 +69,6 @@ export class Playlist
         if(! this.isEmpty()) {
             let currentIndex = this.getOrderNum(this.current);
 
-            console.log(currentIndex);
-
             if(this.getTotalEntries() === currentIndex) {
                 this.current = this.playlist[0];
             }else{
@@ -82,8 +80,6 @@ export class Playlist
     public prev() {
         if(! this.isEmpty()) {
             let currentIndex = this.getOrderNum(this.current);
-
-            console.log(currentIndex);
 
             if(currentIndex === 0) {
                 this.current = this.playlist[this.getTotalEntries() - 1];
