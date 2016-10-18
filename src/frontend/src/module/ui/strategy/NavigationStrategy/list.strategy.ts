@@ -73,7 +73,12 @@ export class ListStrategy implements UIStrategy
 
     enter()
     {
-        console.log(this.content);
+        if (this.elements.length > 0) {
+            for (let index = 0; index < this.elements.length; index++) {
+                if (this.elements[index].classList.contains('x-navigation-entity-active')) {
+                    this.elements[index].click();
+                }
+            }}
     }
 
     scrollToElement(element) {

@@ -14,7 +14,6 @@ export class FeedStrategy implements UIStrategy
 
     up()
     {
-        console.log("im in feed up");
         let cur = 0;
         let step = 0;
         if (this.elements.length > 0) {
@@ -46,7 +45,6 @@ export class FeedStrategy implements UIStrategy
 
     down()
     {
-        console.log("im in feed down");
         let cur = 0;
         let step = 0;
         if (this.elements.length > 0) {
@@ -69,7 +67,6 @@ export class FeedStrategy implements UIStrategy
                 }
             }
 
-            console.log("next " + next);
             this.elements[next].classList.add('x-navigation-entity-active');
             console.log(this.elements[next]);
 
@@ -79,7 +76,6 @@ export class FeedStrategy implements UIStrategy
 
     left()
     {
-        console.log("im in feed left");
         let prev = 0;
         if(this.elements.length > 0){
             for(let index = 0; index < this.elements.length; index++){
@@ -91,7 +87,6 @@ export class FeedStrategy implements UIStrategy
                 }
             }
         }
-        console.log("previous " + prev);
         this.elements[prev].classList.add('x-navigation-entity-active');
         console.log(this.content.nativeElement.scrollTop, this.elements[prev].getBoundingClientRect().top, this.elements[prev].getBoundingClientRect().bottom);
 
@@ -99,8 +94,6 @@ export class FeedStrategy implements UIStrategy
     }
 
     right() {
-        console.log(this.content);
-        console.log("im in feed right");
         let next = 0;
         if(this.elements.length > 0){
             for(let index = 0; index < this.elements.length; index++){
@@ -112,9 +105,7 @@ export class FeedStrategy implements UIStrategy
                 }
             }
         }
-        console.log("next " + next);
         this.elements[next].classList.add('x-navigation-entity-active');
-        console.log(this.content.nativeElement.scrollTop, this.elements[next].getBoundingClientRect().top, this.elements[next].getBoundingClientRect().bottom);
 
         this.scrollToElement(this.elements[next])
     }
@@ -131,7 +122,12 @@ export class FeedStrategy implements UIStrategy
 
     enter()
     {
-        console.log(this.content);
+        if (this.elements.length > 0) {
+            for (let index = 0; index < this.elements.length; index++) {
+                if (this.elements[index].classList.contains('x-navigation-entity-active')) {
+                    this.elements[index].click();
+                }
+            }}
     }
 
     scrollToElement(element) {

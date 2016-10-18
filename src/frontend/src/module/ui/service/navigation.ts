@@ -109,6 +109,10 @@ export class UINavigationObservable
             this.down.subscribe(() => {
                 this.strategy.down();
             }),
+            
+            this.enter.subscribe(() => {
+               this.strategy.enter(); 
+            }),
 
             this.scroll.subscribe(() => {}),
 
