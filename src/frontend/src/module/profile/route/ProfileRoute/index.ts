@@ -39,23 +39,14 @@ export class ProfileRoute implements OnInit, OnDestroy
         this.service.exportResponse(
             this.route.snapshot.data['profile']
         );
-
-        this.subscriptions = [
-            this.navigator.top.subscribe(() => {
-                elem.scrollTop = 0;
-            }),
-            this.navigator.bottom.subscribe(() => {
-                elem.scrollTop = elem.scrollHeight - elem.clientHeight;
-            }),
-        ];
-
+            
+        this.navigator.initNavigation(this.content);
+        
         this.profile = this.service.getEntity();
     }
 
     ngOnDestroy() {
-        this.subscriptions.forEach((subscription) => {
-            subscription.unsubscribe();
-        });
+        this.navigator.destroyNavigation();
     }
 
     isOwnProfile() {

@@ -24,22 +24,22 @@ export class RightSidebar
     @HostListener('document:keydown', ['$event']) globalKeyDown($event){
 
         if($event.key === 'ArrowUp'){
-            $event.preventDefault();
+            /*$event.preventDefault();*/
             this.navigator.emitUp();
         }
 
         if($event.key === 'ArrowDown'){
-            $event.preventDefault();
+            /*$event.preventDefault();*/
             this.navigator.emitDown();
         }
 
         if($event.key === 'ArrowLeft'){
-            $event.preventDefault();
+            /*$event.preventDefault();*/
             this.navigator.emitLeft();
         }
 
         if($event.key === 'ArrowRight'){
-            $event.preventDefault();
+            /*$event.preventDefault();*/
             this.navigator.emitRight();
         }
     }

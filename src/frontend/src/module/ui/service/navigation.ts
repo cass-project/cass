@@ -1,19 +1,25 @@
 import {Injectable, ElementRef} from "@angular/core";
 import {Observable, Observer} from "rxjs/Rx";
 import {UIStrategy} from "../strategy/NavigationStrategy/ui.strategy";
+import {ViewOptionService} from "../../public/component/Options/ViewOption/service";
+import {ViewOptionValue} from "../../feed/service/FeedService/options/ViewOption";
+import {FeedStrategy} from "../strategy/NavigationStrategy/feed.strategy";
+import {GridStrategy} from "../strategy/NavigationStrategy/grid.strategy";
+import {ListStrategy} from "../strategy/NavigationStrategy/list.strategy";
+import {Subscription} from "rxjs/Rx";
+import {NoneStrategy} from "../strategy/NavigationStrategy/none.strategy";
 
 @Injectable()
 export class UINavigationObservable
 {
     private strategy: UIStrategy;
+    private subscriptions: Subscription[];
 
     static SCROLL_THRESHOLD = 5;
 
     public scroll: Observable<ScrollEvent>;
 
     public top: Observable<boolean>;
-    public prev: Observable<number>;
-    public next: Observable<number>;
     public bottom: Observable<boolean>;
     public up: Observable<boolean>;
     public down: Observable<boolean>;
@@ -23,8 +29,6 @@ export class UINavigationObservable
 
     public observerScroll: Observer<ScrollEvent>;
     public observerTop: Observer<boolean>;
-    public observerPrev: Observer<boolean>;
-    public observerNext: Observer<boolean>;
     public observerBottom: Observer<boolean>;
     public observerUp: Observer<boolean>;
     public observerDown: Observer<boolean>;
@@ -32,21 +36,13 @@ export class UINavigationObservable
     public observerRight: Observer<boolean>;
     public observerEnter: Observer<boolean>;
 
-    constructor() {
+    constructor(private viewOptionService: ViewOptionService) {
         this.scroll = Observable.create(observer => {
             this.observerScroll = observer;
         }).publish().refCount();
 
         this.top = Observable.create(observer => {
             this.observerTop = observer;
-        }).publish().refCount();
-
-        this.prev = Observable.create(observer => {
-            this.observerPrev = observer;
-        }).publish().refCount();
-
-        this.next = Observable.create(observer => {
-            this.observerNext = observer;
         }).publish().refCount();
 
         this.up = Observable.create(observer => {
@@ -72,12 +68,75 @@ export class UINavigationObservable
         this.enter = Observable.create(observer => {
             this.observerEnter = observer;
         }).publish().refCount();
-
-        [this.scroll, this.top, this.prev, this.next, this.up, this.down, this.left, this.right, this.bottom, this.enter].forEach((observable: Observable<any>) => {
-            observable.subscribe(() => {}, () => {});
-        });
+        
     }
 
+    initNavigation(content){
+        if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'feed'){
+            console.log(ViewOptionValue.Feed);
+            this.setStrategy(new FeedStrategy(content));
+        } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'grid'){
+            console.log(ViewOptionValue.Grid);
+            this.setStrategy(new GridStrategy(content));
+        } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'list'){
+            console.log(ViewOptionValue.List);
+            this.setStrategy(new ListStrategy(content));
+        } else {
+            throw new Error('ViewOptionService.LOCAL_STORAGE_KEY unknown view')
+        }
+
+        this.subscriptions = [
+            this.top.subscribe(() => {
+                this.strategy.top();
+            }),
+
+            this.bottom.subscribe(() => {
+                this.strategy.bottom();
+            }),
+
+            this.left.subscribe(() => {
+                this.strategy.left();
+            }),
+
+            this.right.subscribe(() => {
+                this.strategy.right();
+            }),
+
+            this.up.subscribe(() => {
+                this.strategy.up();
+            }),
+
+            this.down.subscribe(() => {
+                this.strategy.down();
+            }),
+
+            this.scroll.subscribe(() => {}),
+
+            this.viewOptionService.viewMode.subscribe(() => {
+                if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'feed'){
+                    console.log(ViewOptionValue.Feed);
+                    this.setStrategy(new FeedStrategy(content));
+                } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'grid'){
+                    console.log(ViewOptionValue.Grid);
+                    this.setStrategy(new GridStrategy(content));
+                } else if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] === 'list'){
+                    console.log(ViewOptionValue.List);
+                    this.setStrategy(new ListStrategy(content));
+                } else {
+                    throw new Error('ViewOptionService.LOCAL_STORAGE_KEY unknown view')
+                }
+            })
+        ];
+    }
+
+    destroyNavigation(){
+        this.setStrategy(new NoneStrategy());
+        this.subscriptions.forEach((subscription) => {
+            subscription.unsubscribe();
+        });
+    }
+    
+    
     public emitScroll(elem: ElementRef) {
         let scrollTop = elem.nativeElement.scrollTop;
         let scrollBottom = elem.nativeElement.scrollTop + elem.nativeElement.scrollHeight;
@@ -110,14 +169,6 @@ export class UINavigationObservable
 
     public emitTop() {
         this.observerTop.next(true);
-    }
-
-    public emitPrev() {
-        this.observerPrev.next(true);
-    }
-
-    public emitNext() {
-        this.observerNext.next(true);
     }
 
     public emitUp(){

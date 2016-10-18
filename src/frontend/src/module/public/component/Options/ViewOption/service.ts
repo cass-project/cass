@@ -20,7 +20,7 @@ export class ViewOptionService
 
         this.viewMode = Observable.create(observer => {
             this.viewModeObserver = observer;
-        }).publish().refCount();
+        }).publish().refCount()
     }
 
     switchTo(value: ViewOptionValue) {
@@ -28,6 +28,7 @@ export class ViewOptionService
         this.viewModeObserver.next(value);
         this.option.setAsCurrent(value);
     }
+    
 
     isOn(value: ViewOptionValue) {
         return this.option.isOn(value);
