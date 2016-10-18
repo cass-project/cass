@@ -100,6 +100,9 @@ final class DemoFixture
 
         $this->fetchJSONSources();
         $this->syncFeedFixture();
+
+        $this->jsonFeed = $this->fetchJSON(self::JSON_DIR.'/feed2.json');
+        $this->syncFeedFixture();
     }
 
     private function upAccountsFixture()
@@ -411,29 +414,78 @@ final class DemoFixture
 
         $linkMap = Chain::create($this->jsonFeed)
             ->filter(function($input) {
-                return $input["typeId"] === 2 || $input["typeId"] === 3;
+                return (int) $input["typeId"] === 2 || (int) $input["typeId"] === 3;
             })
             ->map(function($input) {
-                return [
-                    'meta' => [
-                        'title' => $input['title'] ?? '',
-                        'description' => $input['description'] ?? '',
-                    ],
-                    'url' => $input['url']
-                ];
+                if(isset($input['video_title'])) {
+                    return [
+                        'meta' => [
+                            'title' => $input['video_title'] ?? '',
+                            'description' => $input['video_description'] ?? '',
+                        ],
+                        'url' => $input['url']
+                    ];
+                }else if(isset($input['options']) && strlen(isset($input['options']))) {
+                    $option = $input['options'];
+
+                    if(is_string($option)) {
+                        $option = json_decode($input['options'], true);
+                    }
+
+                    if(count(array_keys($option))) {
+                        return [
+                            'meta' => [
+                                'title' => $option['title'] ?? '',
+                                'description' => $option['description'] ?? '',
+                            ],
+                            'url' => $option['url']
+                        ];
+                    }else{
+                        return [
+                            'meta' => [
+                                'title' => $input['title'] ?? '',
+                                'description' => $input['description'] ?? '',
+                            ],
+                            'url' => $input['url']
+                        ];
+                    }
+
+                }else{
+                    return [
+                        'meta' => [
+                            'title' => $input['title'] ?? '',
+                            'description' => $input['description'] ?? '',
+                        ],
+                        'url' => $input['url']
+                    ];
+                }
             })
             ->array;
+
+        foreach($this->jsonVideos as $video) {
+            $linkMap[] = [
+                'meta' => [
+                    'title' => $video['name'],
+                    'description' => ''
+                ],
+                'url' => $video['url']
+            ];
+        }
 
         $linkMap = array_combine(
             array_column($linkMap, 'url'),
             array_column($linkMap, 'meta')
         );
 
+        $specified = 0;
+
         while(count($result = $this->attachmentRepository->listAttachments(new Seek($step, $offset, $limit)))) {
             $this->output->writeln(sprintf('[*] Fetch attachments (%d - %d)', $offset, $offset+$step));
 
-            array_map(function(Attachment $attachment) use($linkMap) {
+            array_map(function(Attachment $attachment) use($linkMap, &$specified)  {
                 $url =  $attachment->getMetadata()['url'];
+
+                var_dump($url);
 
                 if(isset($linkMap[$url])) {
                     $title = $linkMap[$url]['title'];
@@ -442,10 +494,14 @@ final class DemoFixture
                     $this->output->writeln(sprintf('[*] Specify link("%s"), metadata("%s", "%s")', $url, $title, $description));
 
                     $this->attachmentService->specifyTitleAndDescriptionFor($attachment, $title, $description);
+
+                    ++$specified;
                 }
             }, $result);
 
             $offset += $step;
         }
+
+        var_dump($specified);
     }
 }
