@@ -1,6 +1,7 @@
 @import "./../../../../../../../styles/globals";
 
 div.component-collection-card-feed {
+
   .card {
     @include card(1);
     display: block;
@@ -11,6 +12,13 @@ div.component-collection-card-feed {
     background-color: white;
     cursor: pointer;
     transition: all 0.1s;
+
+    .collection-card-content {
+      border: 3px solid transparent;
+      padding: 1px;
+      height: 100%;
+      box-sizing: border-box;
+    }
 
     .flex-container {
       display: flex;

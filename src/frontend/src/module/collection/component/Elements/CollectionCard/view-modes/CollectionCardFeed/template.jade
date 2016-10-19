@@ -1,12 +1,13 @@
-div.component.component-collection-card-feed
+div.component.component-collection-card-feed.x-navigation-entity
   a.card((click)="open($event)", [routerLink]="helper.getRouterParams(entity)")
-    .flex-container
-      .top-section
-        .collection-image
-          .image-container([ngStyle]="{'background-image': 'url(' + helper.getImageURL() + ')' }")
-        .collection-about
-          h1 {{ entity.title }}
-          p {{ entity.description }}
-      .bottom-section
-        footer.theme(*ngIf="helper.hasTheme()")
-          span.theme {{ helper.getThemeTitle() }}
+    .collection-card-content
+      .flex-container
+        .top-section
+          .collection-image
+            .image-container([ngStyle]="{'background-image': 'url(' + helper.getImageURL() + ')' }")
+          .collection-about
+            h1 {{ entity.title }}
+            p {{ entity.description }}
+        .bottom-section
+          footer.theme(*ngIf="helper.hasTheme()")
+            span.theme {{ helper.getThemeTitle() }}

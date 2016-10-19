@@ -1,7 +1,7 @@
-@import "./../../../../../../../styles/globals.scss";
+@import "./../../../../../../../styles/globals";
 
 .x-navigation-entity {
-  .post-card-content {
+  .collection-card-content {
     &:hover {
       border-color: $CASS_NAVIGATION_ENTITY_HOVER_COLOR !important;
     }
@@ -9,7 +9,7 @@
 }
 
 .x-navigation-entity-active {
-  .post-card-content {
+  .collection-card-content {
     border-color: $CASS_NAVIGATION_ENTITY_ACTIVE_COLOR!important;
 
     &:hover {
