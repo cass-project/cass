@@ -1,4 +1,4 @@
-@import "./../../../../../styles/globals";
+@import "./../../../../../../../styles/globals";
 
 div.component-theme-card-grid {
   display: inline-block;
@@ -6,15 +6,24 @@ div.component-theme-card-grid {
   div.card {
     @include card(1);
 
-    width: 180px;
-    height: 123px;
+    width: 160px;
+    height: 114px;
     background-color: white;
     border-radius: 5px;
     overflow: hidden;
     cursor: pointer;
 
+    div.theme-card-content {
+      height: 100%;
+      border: 3px solid transparent;
+      padding: 1px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
     div.image-container {
-      height: 123px;
+      height: 106px;
+      overflow: hidden;
 
       div.image {
         height: 100%;
@@ -35,7 +44,7 @@ div.component-theme-card-grid {
 
 
   div.about {
-    padding: 20px 13px;
+    padding: 10px;
     height: 25px;
     overflow: hidden;
     text-align: center;

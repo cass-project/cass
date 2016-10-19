@@ -1,16 +1,16 @@
-import {Component, Input, Output} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 
-import {Theme, THEME_PREVIEW_PUBLIC_PREFIX} from "../../../definitions/entity/Theme";
-import {EventEmitter} from "@angular/common/src/facade/async";
+import {Theme, THEME_PREVIEW_PUBLIC_PREFIX} from "../../../../../definitions/entity/Theme";
 
 @Component({
-    selector: 'cass-theme-card-table',
+    selector: 'cass-theme-card-grid',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss'),
+        require('./style.navigation.shadow.scss'),
     ]
 })
-export class ThemeCardTable
+export class ThemeCardGrid
 {
     private prefix: string = THEME_PREVIEW_PUBLIC_PREFIX;
 

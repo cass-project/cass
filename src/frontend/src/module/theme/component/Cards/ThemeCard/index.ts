@@ -2,11 +2,10 @@ import {Component, Input, Output} from "@angular/core";
 
 import {Theme} from "../../../definitions/entity/Theme";
 import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
-import {ThemeCardFeed} from "../ThemeCardFeed/index";
-import {ThemeCardGrid} from "../ThemeCardGrid/index";
-import {ThemeCardTable} from "../ThemeCardTable/index";
-import {ThemeCardlistItem} from "../ThemeCardListItem/index";
 import {EventEmitter} from "@angular/common/src/facade/async";
+import {ThemeCardFeed} from "./view-modes/ThemeCardFeed/index";
+import {ThemeCardGrid} from "./view-modes/ThemeCardGrid/index";
+import {ThemeCardList} from "./view-modes/ThemeCardList/index";
 
 @Component({
     selector: 'cass-theme-card',
@@ -34,6 +33,5 @@ export const THEME_CARD_DIRECTIVES = [
     ThemeCard,
     ThemeCardFeed,
     ThemeCardGrid,
-    ThemeCardTable,
-    ThemeCardlistItem,
+    ThemeCardList,
 ];
