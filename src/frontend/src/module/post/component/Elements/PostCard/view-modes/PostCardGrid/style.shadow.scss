@@ -27,7 +27,6 @@ div.component-post-card-grid {
   .card {
     @include card(1);
     background-color: white;
-    height: 100%;
   }
 
   .profile-image {

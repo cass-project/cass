@@ -9,7 +9,8 @@ import {ProfileThemeListMode} from "../../index";
     selector: 'cass-profile-card-grid',
     template: require('./template.jade'),
     styles: [
-        require('./style.shadow.scss')
+        require('./style.shadow.scss'),
+        require('./style.navigation.shadow.scss'),
     ]
 })
 export class ProfileCardGrid

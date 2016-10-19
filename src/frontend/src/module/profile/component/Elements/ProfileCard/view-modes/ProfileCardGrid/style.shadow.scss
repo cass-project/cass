@@ -3,30 +3,25 @@
 div.component-profile-card-grid {
   @include card(1);
 
-  .x-navigation-entity {
-    &:hover {
-      border-color: material-color("indigo", "500");
-      outline: 0;
-    }
-  }
-
-  .x-navigation-entity-active {
-    border-color: material-color("indigo", "500");
-    outline: 0;
-  }
-
   cursor: pointer;
   width: 200px;
   height: 200px;
   margin: 10px;
   position: relative;
   overflow: hidden;
-  border: 3px solid transparent;
+
+  .profile-card-content {
+    border: 3px solid transparent;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
 
   .cover-profile-image {
     position: absolute;
-    top: 0; height: 100%;
-    left: 0; width: 100%;
+    top: 1px; bottom: 1px;
+    left: 1px; right: 1px;
 
     .profile-image-container {
       width: 100%;
@@ -39,7 +34,7 @@ div.component-profile-card-grid {
   .cover-profile-about {
     position: absolute;
     left: 0; width: 100%;
-    bottom: 0;
+    bottom: 1px;
     padding: 10px;
     background-color: rgba(0,0,0,0.6);
     box-sizing: border-box;
