@@ -1,13 +1,11 @@
 02-ARRAYS
 =========
 
-В проекте доступны две "сахарные" библиотеки для работы с массивами, объектами, строками и.т.д..:
-
-- [http://anahkiasen.github.io/underscore-php/](http://anahkiasen.github.io/underscore-php/)
+В проекте доступна "сахарная" библиотека для работы с массивами, объектами, строками и.т.д..:
 
 - [https://github.com/cocur/chain)](https://github.com/cocur/chain)
 
-Используйте их, например, для Map-Reduce:
+Используйте ее, например, для Map-Reduce:
 
 ```
             Chain::create(scandir($dir))

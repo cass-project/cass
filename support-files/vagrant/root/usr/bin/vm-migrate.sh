@@ -3,8 +3,7 @@
 cd /opt/cass
 
 # server software
-sudo cp -R /support-files/vagrant/env/all/root/* /
-sudo cp -R /support-files/vagrant/env/dev/root/* /
+sudo cp -R /support-files/vagrant/root/* /
 
 sudo sed -i 's/\r$//' /usr/bin/vm-*
 sudo sed -i 's/\r$//' /usr/bin/cass-*

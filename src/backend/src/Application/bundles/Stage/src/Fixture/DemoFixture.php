@@ -92,6 +92,7 @@ final class DemoFixture
 
         $this->upAccountsFixture();
         $this->upFeedFixture();
+        $this->syncFeedFixture();
     }
 
     public function sync(OutputInterface $output)

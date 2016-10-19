@@ -24,7 +24,7 @@ sudo apt-get update
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password 1234'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 1234'
 
-sudo apt-get install -y ffmpeg curl php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server php-pear php7.0-dev pkg-config libssl-dev libsslcommon2-dev php7.0-intl
+sudo apt-get install -y ffmpeg htop curl php7.0 php7.0-fpm php7.0-mysql php7.0-zip php7.0-curl php7.0-xml php7.0-gd php7.0-bcmath php7.0-mbstring php7.0-dom git npm nginx nginx-extras sphinxsearch rabbitmq-server sendmail mysql-client mysql-server php-pear php7.0-dev pkg-config libssl-dev libsslcommon2-dev php7.0-intl
 
 # ######
 # XDEBUG
@@ -57,10 +57,7 @@ mysql -uroot -p"1234" -e "CREATE DATABASE cass_testing"
 # #####
 # CLONE
 # #####
-cd /opt/cass
-git pull && git submodule init && git submodule update && git submodule status
-sudo cp -R /support-files/vagrant/env/all/root/* /
-sudo cp -R /support-files/vagrant/env/dev/root/* /
+sudo cp -R /support-files/vagrant/root/* /
 
 # #######
 # Backend
