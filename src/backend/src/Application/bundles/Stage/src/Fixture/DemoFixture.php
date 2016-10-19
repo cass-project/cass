@@ -99,6 +99,8 @@ final class DemoFixture
     {
         $this->output = $output;
 
+        $this->profileService->disableAutoImageGeneration();
+
         $this->fetchJSONSources();
         $this->syncFeedFixture();
     }
@@ -226,6 +228,8 @@ final class DemoFixture
 
                     $this->profileService->uploadImage($profile->getId(), $parameters);
                 }
+            }else{
+                $this->profileService->generateProfileImage($profile->getId());
             }
 
             return $account;
