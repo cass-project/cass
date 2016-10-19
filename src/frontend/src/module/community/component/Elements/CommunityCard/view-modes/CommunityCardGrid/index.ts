@@ -8,6 +8,7 @@ import {CommunityCardHelper} from "../../helper";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss'),
+        require('./style.navigation.shadow.scss'),
     ]
 })
 export class CommunityCardGrid

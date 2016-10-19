@@ -12,6 +12,14 @@ div.component-community-card-feed {
     cursor: pointer;
     transition: all 0.1s;
 
+    .community-card-content {
+      height: 100%;
+      border: 3px solid transparent;
+      padding: 1px;
+      position: relative;
+      box-sizing: border-box;
+    }
+
     .flex-container {
       display: flex;
       flex-direction: column;
