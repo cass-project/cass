@@ -9,7 +9,7 @@ composer.lock
 
 # Vagrant
 .vagrant
-Vagrantfile
+/Vagrantfile
 
 # Windows image file caches
 Thumbs.db
