@@ -27,8 +27,8 @@ export class ListStrategy implements UIStrategy
         }
         this.elements[prev].classList.add('x-navigation-entity-active');
         this.pickedElem = this.elements[prev];
-        
-        this.scrollToElement(this.elements[prev])
+
+        this.scrollIntoView(this.elements[prev]);
     }
 
     down()
@@ -45,15 +45,8 @@ export class ListStrategy implements UIStrategy
         }
         this.elements[next].classList.add('x-navigation-entity-active');
         this.pickedElem = this.elements[next];
-        
-        this.scrollToElement(this.elements[next])
-    }
 
-    left()
-    {
-    }
-
-    right() {
+        this.scrollIntoView(this.elements[next]);
     }
 
     top()
@@ -61,8 +54,7 @@ export class ListStrategy implements UIStrategy
         this.content.nativeElement.scrollTop = 0;
     }
 
-    bottom()
-    {
+    bottom() {
         this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
     }
 
@@ -73,12 +65,9 @@ export class ListStrategy implements UIStrategy
             this.pickedElem.getElementsByClassName('x-navigation-click')[0].click();
         }
     }
-    scrollToElement(element) {
-        let top = element.getBoundingClientRect().top;
-        let bottom = element.getBoundingClientRect().bottom;
-        let midY = (top + bottom) / 2;
-        if (midY < 0 || midY >= this.content.nativeElement.clientHeight) {
-            this.content.nativeElement.scrollTop += top;
-        }
+
+    scrollIntoView(elem){
+        elem.scrollIntoView();
+        this.content.nativeElement.scrollTop -= 10;
     }
 }
