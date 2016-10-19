@@ -37,8 +37,8 @@ export class GridStrategy implements UIStrategy
             }
             this.elements[prev].classList.add('x-navigation-entity-active');
             this.pickedElem = this.elements[prev];
-            
-            this.scrollToElement(this.elements[prev])
+
+            this.scrollIntoView(this.elements[prev]);
         }
     }
 
@@ -67,8 +67,8 @@ export class GridStrategy implements UIStrategy
 
             this.elements[next].classList.add('x-navigation-entity-active');
             this.pickedElem = this.elements[next];
-            
-            this.scrollToElement(this.elements[next])
+
+            this.scrollIntoView(this.elements[next]);
         }
     }
 
@@ -86,8 +86,8 @@ export class GridStrategy implements UIStrategy
         }
         this.elements[prev].classList.add('x-navigation-entity-active');
         this.pickedElem = this.elements[prev];
-        
-        this.scrollToElement(this.elements[prev])
+
+        this.scrollIntoView(this.elements[prev]);
     }
 
     right() {
@@ -104,7 +104,7 @@ export class GridStrategy implements UIStrategy
         this.elements[next].classList.add('x-navigation-entity-active');
         this.pickedElem = this.elements[next];
         
-        this.scrollToElement(this.elements[next])
+        this.scrollIntoView(this.elements[next]);
     }
 
     top()
@@ -125,12 +125,8 @@ export class GridStrategy implements UIStrategy
         }
     }
 
-    scrollToElement(element) {
-        let top = element.getBoundingClientRect().top;
-        let bottom = element.getBoundingClientRect().bottom;
-        let midY = (top + bottom) / 2;
-        if (midY < 0 || midY >= this.content.nativeElement.clientHeight) {
-            this.content.nativeElement.scrollTop += top;
-        }
+    scrollIntoView(elem){
+        elem.scrollIntoView();
+        this.content.nativeElement.scrollTop -= 10;
     }
 }
