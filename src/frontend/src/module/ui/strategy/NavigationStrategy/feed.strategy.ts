@@ -120,7 +120,7 @@ export class FeedStrategy implements UIStrategy
     enter()
     {
         console.log(this.pickedElem.getElementsByClassName('x-navigation-click'));
-        if(this.pickedElem.getElementsByClassName('x-navigation-click') > 0){
+        if(this.pickedElem.getElementsByClassName('x-navigation-click').length > 0){
            this.pickedElem.getElementsByClassName('x-navigation-click')[0].click();
         }
     }
