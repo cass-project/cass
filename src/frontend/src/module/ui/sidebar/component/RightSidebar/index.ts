@@ -22,30 +22,42 @@ export class RightSidebar
     
 
     @HostListener('document:keydown', ['$event']) globalKeyDown($event){
-
         if($event.key === 'Enter'){
-            /*$event.preventDefault();*/
-            this.navigator.emitEnter();
+            if($event.target.nodeName.toLowerCase() != 'textarea' &&  $event.target.nodeName.toLowerCase() != 'input' && $event.target.nodeName.toLowerCase() != 'select'){
+                this.navigator.emitEnter();
+            }
         }
 
         if($event.key === 'ArrowUp'){
-            /*$event.preventDefault();*/
-            this.navigator.emitUp();
+            $event.stopPropagation();
+
+            if($event.target.nodeName.toLowerCase() != 'textarea' &&  $event.target.nodeName.toLowerCase() != 'input' && $event.target.nodeName.toLowerCase() != 'select'){
+                this.navigator.emitUp();
+            }
         }
 
         if($event.key === 'ArrowDown'){
-            /*$event.preventDefault();*/
-            this.navigator.emitDown();
+            $event.stopPropagation();
+
+            if($event.target.nodeName.toLowerCase() != 'textarea' &&  $event.target.nodeName.toLowerCase() != 'input' && $event.target.nodeName.toLowerCase() != 'select'){
+                this.navigator.emitDown();
+            }
         }
 
         if($event.key === 'ArrowLeft'){
-            /*$event.preventDefault();*/
-            this.navigator.emitLeft();
+            $event.stopPropagation();
+
+            if($event.target.nodeName.toLowerCase() != 'textarea' &&  $event.target.nodeName.toLowerCase() != 'input' && $event.target.nodeName.toLowerCase() != 'select') {
+                this.navigator.emitLeft();
+            }
         }
 
         if($event.key === 'ArrowRight'){
-            /*$event.preventDefault();*/
-            this.navigator.emitRight();
+            $event.stopPropagation();
+
+            if($event.target.nodeName.toLowerCase() != 'textarea' &&  $event.target.nodeName.toLowerCase() != 'input' && $event.target.nodeName.toLowerCase() != 'select') {
+                this.navigator.emitRight();
+            }
         }
     }
 }
