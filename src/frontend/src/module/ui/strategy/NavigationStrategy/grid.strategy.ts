@@ -38,7 +38,7 @@ export class GridStrategy implements UIStrategy
             this.elements[prev].classList.add('x-navigation-entity-active');
             this.pickedElem = this.elements[prev];
 
-            this.scrollIntoView(this.elements[prev]);
+            this.scrollIntoView(this.elements[prev], true, -10);
         }
     }
 
@@ -62,13 +62,13 @@ export class GridStrategy implements UIStrategy
                 if (this.elements[index].getBoundingClientRect().left == this.elements[cur].getBoundingClientRect().left) {
                     next = index;
                     break;
-                }
+                } 
             }
 
             this.elements[next].classList.add('x-navigation-entity-active');
             this.pickedElem = this.elements[next];
 
-            this.scrollIntoView(this.elements[next]);
+            this.scrollIntoView(this.elements[next], false, 10);
         }
     }
 
@@ -87,7 +87,7 @@ export class GridStrategy implements UIStrategy
         this.elements[prev].classList.add('x-navigation-entity-active');
         this.pickedElem = this.elements[prev];
 
-        this.scrollIntoView(this.elements[prev]);
+        this.scrollIntoView(this.elements[prev], true, -10);
     }
 
     right() {
@@ -104,7 +104,7 @@ export class GridStrategy implements UIStrategy
         this.elements[next].classList.add('x-navigation-entity-active');
         this.pickedElem = this.elements[next];
         
-        this.scrollIntoView(this.elements[next]);
+        this.scrollIntoView(this.elements[next], false, 10);
     }
 
     top()
@@ -124,8 +124,12 @@ export class GridStrategy implements UIStrategy
         }
     }
 
-    scrollIntoView(elem){
-        elem.scrollIntoView();
-        this.content.nativeElement.scrollTop -= 10;
+    scrollIntoView(elem, pozition, px){
+        console.log(elem.offsetTop, elem.offsetHeight, this.content.nativeElement.scrollTop, this.content.nativeElement.offsetHeight);
+        let offset = (elem.offsetTop + elem.offsetHeight) - this.content.nativeElement.scrollTop;
+        if(offset > this.content.nativeElement.offsetHeight || elem.offsetTop < this.content.nativeElement.scrollTop) {
+            elem.scrollIntoView(pozition);
+            this.content.nativeElement.scrollTop = this.content.nativeElement.scrollTop + px;
+        }
     }
 }
