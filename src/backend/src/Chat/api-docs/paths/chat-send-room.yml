@@ -1,0 +1,34 @@
+"/protected/chat/send/room/{roomId}":
+  put:
+    tags:
+      - chat
+    description: Написать сообщение в комнату
+    security:
+      - x_api_key: []
+    parameters:
+      - name: roomId
+        in: path
+        required: true
+        type: number
+        description: Id комнаты
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              schema:
+                $ref: '#/definitions/Chat_Entity_Message'
+      404:
+        $ref: '#/responses/NotFound'
+      403:
+        $ref: '#/responses/Unauthorized'
+      409:
+        $ref: '#/responses/error'

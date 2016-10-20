@@ -8,4 +8,5 @@ return (new \CASS\Application\Bootstrap\AppBuilder([
     new \CASS\Application\ApplicationBundle(),
     new \CASS\Domain\DomainBundle(),
     new \CASS\Util\UtilBundle(),
+    new CASS\Chat\ChatBundle()
 ]))->build();

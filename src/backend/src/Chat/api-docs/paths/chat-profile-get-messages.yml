@@ -1,0 +1,51 @@
+"/protected/chat/get-messages/profile/{profileId}":
+  post:
+    tags:
+      - chat
+    description: Получить сообщения с профилем
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        in: path
+        required: true
+        type: number
+        description: Id профиля
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          required:
+            - offset
+            - limit
+          properties:
+            offset:
+              type: number
+              default: 0
+            limit:
+              type: number
+              default: 10
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entities
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entities:
+              type: array
+              items:
+                schema:
+                  $ref: '#/definitions/Chat_Entity_Message'
+      404:
+        $ref: '#/responses/NotFound'
+      403:
+        $ref: '#/responses/Unauthorized'
+      409:
+        $ref: '#/responses/error'

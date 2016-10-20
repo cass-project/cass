@@ -1,0 +1,37 @@
+Chat_Entity_Message:
+  type: object
+  required:
+    - id
+    - source_type
+    - source_id
+    - target_type
+    - target_id
+    - content
+    - mark_as_read
+    - created
+  properties:
+    id:
+      type: number
+      description: ID
+    source_type:
+      type: number
+      description: Тип источника сообщения
+    source_id:
+      type: number
+      description: ID источника сообщения
+    target_type:
+      type: number
+      description: Тип назначения сообщения
+    target_id:
+      type: number
+      description: ID назначения сообщения
+    content:
+      type: string
+      description: Содержимое сообщения
+    mark_as_read:
+      type: boolean
+      default: false
+      description: Помечено как прочитано
+    created:
+      type: string
+      description: Дата создания

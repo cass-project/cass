@@ -1,0 +1,37 @@
+"/protected/chat/room/create":
+  put:
+    tags:
+      - chat
+    description: Создать комнату
+    security:
+          - x_api_key: []
+        parameters:
+          - name: body
+            in: body
+            required: true
+            description: Параметры комнаты
+            schema:
+              type: object
+              properties:
+
+        responses:
+          200:
+            description: 200 OK
+            schema:
+              type: object
+              required:
+                - success
+                - entity
+              properties:
+                success:
+                  type: boolean
+                  description: '=true'
+                entity:
+                  schema:
+                    $ref: '#/definitions/Chat_Entity_Message'
+          404:
+            $ref: '#/responses/NotFound'
+          403:
+            $ref: '#/responses/Unauthorized'
+          409:
+            $ref: '#/responses/error'
