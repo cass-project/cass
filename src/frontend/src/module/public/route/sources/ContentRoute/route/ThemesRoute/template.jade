@@ -1,0 +1,5 @@
+.component.component-public-content-themes-route
+  div.theme-header
+    cass-theme-header([theme]="helper.getThemeRoot()", (go)="goTheme($event)")
+  div.theme-list
+    cass-theme-browser([root]="helper.getThemeRoot()", (change)="goTheme($event)")

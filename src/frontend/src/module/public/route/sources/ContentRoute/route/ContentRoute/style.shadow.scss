@@ -1,0 +1,23 @@
+@import "./../../../../../../../styles/globals";
+
+div.component-public-content-route {
+  width: 100%;
+  height: 100%;
+
+  >div.content-area {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .post-form {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 40px;
+
+    .post-form-container {
+      width: 550px;
+      margin: 0 auto;
+    }
+  }
+}

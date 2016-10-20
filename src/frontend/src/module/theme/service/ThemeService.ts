@@ -62,6 +62,28 @@ export class ThemeService
         return result;
     }
 
+    getThemeByURL(root: Theme, url: string): Theme {
+        for(let theme of root.children) {
+            if(theme.url === url) {
+                return theme;
+            }
+        }
+
+        throw new Error(`Theme with URL "${url}" not found`);
+    }
+
+    getPath(root: Theme): Theme[] {
+        let path = [root];
+
+        while(root.parent_id) {
+            root = this.findById(root.parent_id);
+
+            path.push(root);
+        }
+
+        return path;
+    }
+
     getRoot(): Theme {
         if(this.themes.length > 0) {
             return this.themes[0];
@@ -73,6 +95,7 @@ export class ThemeService
                 parent_id: null,
                 position: 1,
                 preview: '',
+                url: '',
                 children: []
             }
         }

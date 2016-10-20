@@ -6,6 +6,7 @@ import {THEME_CARD_DIRECTIVES} from "./component/Cards/ThemeCard/index";
 import {ThemePath} from "./component/Elements/ThemePath/index";
 import {ThemePanel} from "./component/Elements/ThemePanel/index";
 import {ThemeHeader} from "./component/Elements/ThemeHeader/index";
+import {CurrentThemeService} from "./service/CurrentThemeService";
 
 export const CASSThemeModule = {
     declarations: [
@@ -19,5 +20,6 @@ export const CASSThemeModule = {
     providers: [
         ThemeRESTService,
         ThemeService,
+        CurrentThemeService,
     ]
 };
