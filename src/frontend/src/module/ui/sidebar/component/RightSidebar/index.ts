@@ -24,38 +24,35 @@ export class RightSidebar
     @HostListener('document:keydown', ['$event']) globalKeyDown($event){
         if($event.key === 'Enter'){
             if($event.target.nodeName.toLowerCase() != 'textarea' &&  $event.target.nodeName.toLowerCase() != 'input' && $event.target.nodeName.toLowerCase() != 'select'){
+                $event.preventDefault();
                 this.navigator.emitEnter();
             }
         }
 
         if($event.key === 'ArrowUp'){
-            $event.stopPropagation();
-
             if($event.target.nodeName.toLowerCase() != 'textarea' &&  $event.target.nodeName.toLowerCase() != 'input' && $event.target.nodeName.toLowerCase() != 'select'){
+                $event.preventDefault();
                 this.navigator.emitUp();
             }
         }
 
         if($event.key === 'ArrowDown'){
-            $event.stopPropagation();
-
             if($event.target.nodeName.toLowerCase() != 'textarea' &&  $event.target.nodeName.toLowerCase() != 'input' && $event.target.nodeName.toLowerCase() != 'select'){
+                $event.preventDefault();
                 this.navigator.emitDown();
             }
         }
 
         if($event.key === 'ArrowLeft'){
-            $event.stopPropagation();
-
             if($event.target.nodeName.toLowerCase() != 'textarea' &&  $event.target.nodeName.toLowerCase() != 'input' && $event.target.nodeName.toLowerCase() != 'select') {
+                $event.preventDefault();
                 this.navigator.emitLeft();
             }
         }
 
         if($event.key === 'ArrowRight'){
-            $event.stopPropagation();
-
             if($event.target.nodeName.toLowerCase() != 'textarea' &&  $event.target.nodeName.toLowerCase() != 'input' && $event.target.nodeName.toLowerCase() != 'select') {
+                $event.preventDefault();
                 this.navigator.emitRight();
             }
         }
