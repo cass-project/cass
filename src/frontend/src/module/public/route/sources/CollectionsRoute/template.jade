@@ -1,6 +1,6 @@
 article.component.component-public-collections-route
   div.flexbox-container
-    div.menu(
+    div.menu
       cass-collection-catalog-menu([is-extended]="true")
     div.themes-list(*ngIf="ui.panels.themes.isEnabled()")
       cass-theme-panel([root]="themeHelper.getThemePanelRoot()", (change)="themeHelper.goTheme($event)")
