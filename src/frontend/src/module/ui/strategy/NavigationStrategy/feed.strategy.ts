@@ -16,25 +16,46 @@ export class FeedStrategy implements UIStrategy
     up()
     {
         let cur = 0;
-        let step = 0;
+        let isFirst = true;
         if (this.elements.length > 0) {
             for (let index = 0; index < this.elements.length; index++) {
                 if (this.elements[index].classList.contains('x-navigation-entity-active')) {
                     this.elements[index].classList.remove('x-navigation-entity-active');
                     cur = index;
-                    step = cur - 1;
+                    isFirst = false;
                     break;
                 }
             }
             let prev = cur;
-            for (let index = step; index >= 0; index--) {
+            if (!isFirst) {
+                let currentItemRect = this.elements[cur].getBoundingClientRect();
+                let prevRowY = currentItemRect.top;
+                let nearestX = 0;
+                for (let index = cur; index >= 0; index--) {
+                    let stepItemRect = this.elements[index].getBoundingClientRect();
 
-                // Previous item with same X.
-                if (this.elements[index].getBoundingClientRect().left == this.elements[cur].getBoundingClientRect().left) {
-                    prev = index;
-                    break;
+                    // Handle only previous row.
+                    if (stepItemRect.top < currentItemRect.top) {
+                        if (prevRowY == currentItemRect.top) { // First item in the previous row.
+                            prev = index;
+                            prevRowY = stepItemRect.top;
+                            nearestX = Math.abs(stepItemRect.left - currentItemRect.left);
+                        } else {
+                            if (stepItemRect.top < prevRowY) {
+                                break;
+                            }
+
+                            // Find the nearest item.
+                            let offsetX = Math.abs(stepItemRect.left - currentItemRect.left);
+                            if (offsetX < nearestX) {
+                                prev = index;
+                                nearestX = offsetX;
+                            }
+                        }
+                    }
                 }
             }
+
             this.elements[prev].classList.add('x-navigation-entity-active');
             this.pickedElem = this.elements[prev];
 
@@ -45,23 +66,43 @@ export class FeedStrategy implements UIStrategy
     down()
     {
         let cur = 0;
-        let step = 0;
+        let isFirst = true;
         if (this.elements.length > 0) {
             for (let index = 0; index < this.elements.length; index++) {
                 if (this.elements[index].classList.contains('x-navigation-entity-active')) {
                     this.elements[index].classList.remove('x-navigation-entity-active');
                     cur = index;
-                    step = cur + 1;
+                    isFirst = false;
                     break;
                 }
             }
             let next = cur;
-            for (let index = step; index < this.elements.length; index++) {
+            if (!isFirst) {
+                let currentItemRect = this.elements[cur].getBoundingClientRect();
+                let nextRowY = currentItemRect.top;
+                let nearestX = 0;
+                for (let index = cur; index < this.elements.length; index++) {
+                    let stepItemRect = this.elements[index].getBoundingClientRect();
 
-                // Next item with same X.
-                if (this.elements[index].getBoundingClientRect().left == this.elements[cur].getBoundingClientRect().left) {
-                    next = index;
-                    break;
+                    // Handle only next row.
+                    if (stepItemRect.top > currentItemRect.top) {
+                        if (nextRowY == currentItemRect.top) { // First item in the next row.
+                            next = index;
+                            nextRowY = stepItemRect.top;
+                            nearestX = Math.abs(stepItemRect.left - currentItemRect.left);
+                        } else {
+                            if (stepItemRect.top > nextRowY) {
+                                break;
+                            }
+
+                            // Find the nearest item.
+                            let offsetX = Math.abs(stepItemRect.left - currentItemRect.left);
+                            if (offsetX < nearestX) {
+                                next = index;
+                                nearestX = offsetX;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -75,36 +116,36 @@ export class FeedStrategy implements UIStrategy
     left()
     {
         let prev = 0;
-        if(this.elements.length > 0){
-            for(let index = 0; index < this.elements.length; index++){
-                if(this.elements[index].classList.contains('x-navigation-entity-active') && index > 0) {
+        if(this.elements.length > 0) {
+            for (let index = 0; index < this.elements.length; index++) {
+                if (this.elements[index].classList.contains('x-navigation-entity-active')) {
                     this.elements[index].classList.remove('x-navigation-entity-active');
-                    prev = index - 1;
+                    prev = (index > 0) ? index - 1 : index;
                     break;
                 }
             }
-        }
-        this.elements[prev].classList.add('x-navigation-entity-active');
-        this.pickedElem = this.elements[prev];
+            this.elements[prev].classList.add('x-navigation-entity-active');
+            this.pickedElem = this.elements[prev];
 
-        this.scrollIntoView(this.elements[prev], true, -10);
+            this.scrollIntoView(this.elements[prev], true, -10);
+        }
     }
 
     right() {
         let next = 0;
-        if(this.elements.length > 0){
-            for(let index = 0; index < this.elements.length; index++){
-                if(this.elements[index].classList.contains('x-navigation-entity-active') && index < this.elements.length - 1) {
+        if(this.elements.length > 0) {
+            for (let index = 0; index < this.elements.length; index++) {
+                if (this.elements[index].classList.contains('x-navigation-entity-active')) {
                     this.elements[index].classList.remove('x-navigation-entity-active');
-                    next = index + 1;
+                    next = (index < this.elements.length - 1) ? index + 1 : index;
                     break;
                 }
             }
+            this.elements[next].classList.add('x-navigation-entity-active');
+            this.pickedElem = this.elements[next];
+
+            this.scrollIntoView(this.elements[next], false, 10)
         }
-        this.elements[next].classList.add('x-navigation-entity-active');
-        this.pickedElem = this.elements[next];
-        
-        this.scrollIntoView(this.elements[next], false, 10)
     }
 
     top()
