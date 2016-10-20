@@ -11,6 +11,9 @@ import {Session} from "../../../../../../session/Session";
 import {CurrentThemeService} from "../../../../../../theme/service/CurrentThemeService";
 import {ThemeRouteHelper} from "../../../../theme-route-helper";
 import {FeedCriteriaService} from "../../../../../../feed/service/FeedCriteriaService";
+import {UIPathService} from "../../../../../../ui/path/service";
+import {TranslationService} from "../../../../../../i18n/service/TranslationService";
+import {Theme} from "../../../../../../theme/definitions/entity/Theme";
 
 @Component({
     template: require('./template.jade'),
@@ -35,10 +38,13 @@ export class ContentRoute implements OnInit
         private feed: FeedService<PostEntity>,
         private helper: ThemeRouteHelper,
         private criteria: FeedCriteriaService,
+        private path: UIPathService,
+        private translate: TranslationService,
     ) {
         route.params.forEach(params => {
             let contentType =  params['type'];
 
+            current.provideTheme(route);
             helper.provideBaseURL('/p/home/content/' + contentType);
 
             if(contentType === 'all') {
@@ -48,7 +54,27 @@ export class ContentRoute implements OnInit
                 this.criteria.criteria.contentType.params.type = contentType;
             }
 
-            current.provideTheme(route);
+            this.path.setPath([
+                {name: 'Yoozer', route: ['/p/home']},
+                {name: translate.translate(`cass.module.public.content-type.${contentType}.title`), route: ['/p/home/content/' + contentType]}
+            ]);
+
+            let collect: Theme[] = [];
+
+            for(let theme of this.current.getPath()) {
+                collect.push(theme);
+                let route = ['/p/home/content/' + contentType];
+
+                for(let sub of collect) {
+                    route.push(sub.url);
+                }
+
+                this.path.pushPath({
+                    name: theme.title,
+                    route: route
+                })
+            }
+
             service.update();
         });
 

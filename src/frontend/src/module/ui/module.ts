@@ -7,6 +7,8 @@ import {CASSHeaderExtendedSwitcher} from "./header/component/CASSHeader/componen
 import {UISearchComponent} from "./search/index";
 import {UINavigationObservable} from "./service/navigation";
 import {UISearchObservable} from "./search/observable";
+import {UIPathComponent} from "./path/component/index";
+import {UIPathService} from "./path/service";
 
 export const CASSUIModule = {
     declarations: [
@@ -18,10 +20,12 @@ export const CASSUIModule = {
             CASSHeaderExtendedSwitcher,
         ],
         UISearchComponent,
+        UIPathComponent,
     ],
     providers: [
         UIService,
         UINavigationObservable,
         UISearchObservable,
+        UIPathService
     ],
 };

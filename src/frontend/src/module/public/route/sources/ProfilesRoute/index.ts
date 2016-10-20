@@ -11,6 +11,7 @@ import {UIService} from "../../../../ui/service/ui";
 import {UINavigationObservable} from "../../../../ui/service/navigation";
 import {SwipeService} from "../../../../swipe/service/SwipeService";
 import {PublicThemeHelper} from "../../theme-helper";
+import {UIPathService} from "../../../../ui/path/service";
 
 @Component({
     template: require('./template.jade'),
@@ -38,8 +39,14 @@ export class ProfilesRoute implements OnInit, OnDestroy
         private ui: UIService,
         private navigator: UINavigationObservable,
         private swipe: SwipeService,
-        private themeHelper: PublicThemeHelper
+        private themeHelper: PublicThemeHelper,
+        private path: UIPathService,
     ) {
+        path.setPath([{
+            name: 'Люди',
+            route: ['/p/people']
+        }]);
+
         catalog.source = 'profiles';
         catalog.injectFeedService(service);
         

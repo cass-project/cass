@@ -1,0 +1,10 @@
+.component.component-ui-path
+  ul.path(*ngIf="path.hasPath()")
+    li.path-item(*ngFor="let item of path.getPath()")
+      a.route(
+        [routerLink]="item.route",
+        routerLinkActive="active",
+        [routerLinkActiveOptions]="{ exact: true }",
+      )
+        span.text {{ item.name }}
+        .triangle

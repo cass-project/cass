@@ -25,7 +25,7 @@ import {ThemesRoute} from "../../module/public/route/sources/ContentRoute/route/
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: '/p/home',
+        redirectTo: '/p/home/themes',
         pathMatch: 'full'
     },
     {
@@ -116,6 +116,11 @@ const appRoutes: Routes = [
                 path: 'home',
                 component: ContentGatewayRoute,
                 children: [
+                    {
+                        path: '',
+                        redirectTo: 'themes',
+                        pathMatch: 'full'
+                    },
                     {
                         path: 'themes',
                         component: ThemesRoute,

@@ -10,13 +10,13 @@ div.component-public-content-gateway-route {
     height: 100%;
 
     >div.menu {
-      flex-basis: $CASS_ADDITIONAL_MENU;
+      flex-basis: 170px;
       flex-shrink: 0;
       border-right: 1px solid material-color("grey", "200");
     }
 
     >div.themes-list {
-      flex-basis: 100px;
+      flex-basis: 200px;
       flex-shrink: 0;
     }
 
