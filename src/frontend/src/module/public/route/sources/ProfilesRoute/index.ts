@@ -40,7 +40,7 @@ export class ProfilesRoute implements OnInit, OnDestroy
         private navigator: UINavigationObservable,
         private swipe: SwipeService,
         private themeHelper: PublicThemeHelper,
-        private path: UIPathService,
+        private path: UIPathService
     ) {
         path.setPath([{
             name: 'Люди',

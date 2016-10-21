@@ -175,7 +175,6 @@ export class GridStrategy implements UIStrategy
     }
 
     scrollIntoView(elem, pozition, px){
-        console.log(elem.offsetTop, elem.offsetHeight, this.content.nativeElement.scrollTop, this.content.nativeElement.offsetHeight);
         let offset = (elem.offsetTop + elem.offsetHeight) - this.content.nativeElement.scrollTop;
         if(offset > this.content.nativeElement.offsetHeight || elem.offsetTop < this.content.nativeElement.scrollTop) {
             elem.scrollIntoView(pozition);

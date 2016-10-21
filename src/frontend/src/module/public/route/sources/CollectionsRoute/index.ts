@@ -39,7 +39,7 @@ export class CollectionsRoute implements OnInit, OnDestroy
         private navigator: UINavigationObservable,
         private ui: UIService,
         private swipe: SwipeService,
-        private path: UIPathService,
+        private path: UIPathService
     ) {
         path.setPath([{
             name: 'Подборки',

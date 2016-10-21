@@ -184,7 +184,7 @@ export class FeedStrategy implements UIStrategy
     }
 
     scrollIntoView(elem, pozition, px){
-        console.log(elem.offsetTop, elem.offsetHeight, this.content.nativeElement.scrollTop, this.content.nativeElement.offsetHeight);
+        console.log(elem.offsetTop, elem.offsetHeight, this.content.nativeElement.scrollTop, this.content.nativeElement.offsetHeight, this.content);
         let offset = (elem.offsetTop + elem.offsetHeight) - this.content.nativeElement.scrollTop;
         if(offset > this.content.nativeElement.offsetHeight || elem.offsetTop < this.content.nativeElement.scrollTop) {
             elem.scrollIntoView(pozition);
