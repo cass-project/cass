@@ -119,7 +119,7 @@ export class FeedStrategy implements UIStrategy
             this.elements[next].classList.add('x-navigation-entity-active');
             this.pickedElem = this.elements[next];
 
-            this.scrollIntoView(this.elements[next], false, 10);
+            this.scrollIntoView(this.elements[next], true, -10);
         }
     }
 
