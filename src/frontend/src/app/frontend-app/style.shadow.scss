@@ -68,6 +68,12 @@ main.component.component-frontend-app {
   }
 }
 
+@include isMobile() {
+  html {
+    zoom: 0.4;
+  }
+}
+
 @include isDesktop() {
   main.component.component-frontend-app {
     div.flexbox {
