@@ -69,7 +69,7 @@ main.component.component-frontend-app {
 }
 
 @include isMobile() {
-  html {
+  main.component-frontend-app {
     zoom: 0.4;
   }
 }
