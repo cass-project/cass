@@ -16,19 +16,19 @@ export class ListStrategy implements UIStrategy
     up()
     {
         let prev = 0;
-        if(this.elements.length > 0){
-            for(let index = 0; index < this.elements.length; index++){
-                if(this.elements[index].classList.contains('x-navigation-entity-active') && index > 0){
+        if(this.elements.length > 0) {
+            for (let index = 0; index < this.elements.length; index++) {
+                if (this.elements[index].classList.contains('x-navigation-entity-active')) {
                     this.elements[index].classList.remove('x-navigation-entity-active');
-                    prev = index - 1;
+                    prev = (index > 0) ? index - 1 : index;
                     break;
                 }
             }
-        }
-        this.elements[prev].classList.add('x-navigation-entity-active');
-        this.pickedElem = this.elements[prev];
+            this.elements[prev].classList.add('x-navigation-entity-active');
+            this.pickedElem = this.elements[prev];
 
-        this.scrollIntoView(this.elements[prev], true, -10);
+            this.scrollIntoView(this.elements[prev], true, -10);
+        }
     }
 
     down()
@@ -36,17 +36,23 @@ export class ListStrategy implements UIStrategy
         let next = 0;
         if(this.elements.length > 0){
             for(let index = 0; index < this.elements.length; index++){
-                if(this.elements[index].classList.contains('x-navigation-entity-active') && index < this.elements.length - 1){
-                    this.elements[index].classList.remove('x-navigation-entity-active');
-                    next = index + 1;
+                if(this.elements[index].classList.contains('x-navigation-entity-active')){
+
+                    if (index < this.elements.length - 1) {
+                        this.elements[index].classList.remove('x-navigation-entity-active');
+                        next = index + 1;
+                    } else {
+                        next = index;
+                        this.content.nativeElement.scrollTop += 50;
+                    }
                     break;
                 }
             }
-        }
-        this.elements[next].classList.add('x-navigation-entity-active');
-        this.pickedElem = this.elements[next];
+            this.elements[next].classList.add('x-navigation-entity-active');
+            this.pickedElem = this.elements[next];
 
-        this.scrollIntoView(this.elements[next], false, 10);
+            this.scrollIntoView(this.elements[next], false, 10);
+        }
     }
 
     top()
