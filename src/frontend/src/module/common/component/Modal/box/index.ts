@@ -10,10 +10,12 @@ import {Component, Input} from "@angular/core";
 
 export class ModalBoxComponent {
     @Input('width') width: string = 'auto';
+    @Input('height') height: string = 'auto';
 
     getStyle() {
         return {
-            width: this.width
+            width: this.width,
+            height: this.height
         };
     }
 }

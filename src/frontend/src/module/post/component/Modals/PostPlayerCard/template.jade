@@ -2,9 +2,70 @@ div.component.component-post-player-card
   .post-card
     .attachment-container(*ngIf="helper.hasAttachment()")
       cass-attachment([attachment]="helper.getAttachment()", (open)="helper.openAttachment($event)", view-mode="feed")
+      section.navigation-bar
+        .navigation-container
+          ul.navigation-button__left
+            li.navigation-button__item
+              button(type="button").button-like
+                i(class="fa fa-heart" aria-hidden="true")
+                span.sum-like 123
+                span.sum-like LIKE
+            li.navigation-button__item
+              button(type="button").button-share
+                i(class="fa fa-bullhorn fa-lg" aria-hidden="true")
+                span.share поделиться
+            li.navigation-button__item
+              button(type="button").button-complain
+                i(class="fa fa-bolt fa-lg" aria-hidden="true")
+                span.complain пожаловаться
+          ul.navigation-button__right
+            li.navigation-button__item
+              button(type="button").button-video
+                span видео
+            li.navigation-button__item
+              button(type="button").button-comment
+                span комментарии
+            li.navigation-button__item
+              button(type="button").button-menu
+                i(class="fa fa-align-justify fa-lg" aria-hidden="true")
+
+
     .post-about
-      .header
-        cass-profile-card-header([profile]="helper.getProfile()", [time]="helper.getPostDateCreatedOn()")
-      .content
+      section.header
+        .header__profile
+          cass-profile-card-header([profile]="helper.getProfile()", [time]="helper.getPostDateCreatedOn()")
+        .header__menu
+          a(href="#").header__menu-button
+            i(class="fa fa-align-justify fa-lg" aria-hidden="true")
+      section.content
         .content-container(*ngIf="helper.hasContent()")
           div([innerHTML]='helper.getContent()')
+          a(href="#").content__more-link Показать полностью ...
+        .content__breadcrumbs
+          - var nameTopic = ['Природа','Горы']
+          ul.breadcrumbs
+            each item in nameTopic
+              li(class="breadcrumbs__item")
+                a(href="#").breadcrumbs__link= item
+        .content__title
+          h1 Самый лучший контент
+      section.comments
+        .comment-container
+          .comment-profile
+            cass-profile-card-header([profile]="helper.getProfile()", [time]="helper.getPostDateCreatedOn()")
+          .comment-text
+            p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
+            span.comment-more
+              a(href="#").comment-more_link читать далее
+        .comment-container
+          .comment-container
+            .comment-profile
+              cass-profile-card-header([profile]="helper.getProfile()", [time] = "helper.getPostDateCreatedOn()")
+            .comment-text
+              p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
+              span.comment-more
+                a(href="#").comment-more_link читать далее
+      section.create-comment
+        form(action="#" method="").create-comment__form
+          textarea(placeholder="Ваш комментарий" name="comment").comment-textarea
+          button(type="submit").comment-submit Отправить

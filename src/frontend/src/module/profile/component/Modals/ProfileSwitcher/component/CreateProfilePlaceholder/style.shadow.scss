@@ -26,3 +26,13 @@ div.component-profile-switcher-create-profile-placeholder {
     }
   }
 }
+div.component-profile-card {
+  div.compoment.component-profile-card-grid {
+    &:hover {
+      border: 1px solid red;
+    }
+    .cover-profile-image.x-navigation-entity{
+      border: none;
+    }
+  }
+}

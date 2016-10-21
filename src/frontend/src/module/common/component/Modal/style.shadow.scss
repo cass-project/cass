@@ -19,6 +19,7 @@
 }
 
 div.component-cass-modal-light {
+
   div.modal-backdrop {
     background-color: #f0f0f0;
     opacity: 0.8;
@@ -34,26 +35,31 @@ div.component-cass-modal-dark {
 
 @include isDesktop {
   div.modal {
+
     div.modal-backdrop {
       display: block;
       position: fixed;
       top: 0; height: 100%;
       left: 0; width: 100%;
+
     }
 
     div.modal-flex-container {
       display: flex;
       position: fixed;
-      top: 0; height: 100%;
-      left: 0; width: 100%;
-      align-items: center;
+      top: 0;
+      left:0;
+      width: 100%;
+      height: 100%;
+      align-items: stretch;
       justify-content: center;
-
       overflow: auto;
 
       div.modal-content {
+
       }
     }
+
   }
 }
 
