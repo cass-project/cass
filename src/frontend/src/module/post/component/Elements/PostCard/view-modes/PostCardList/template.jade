@@ -1,18 +1,19 @@
-div.component.component-post-card-list.x-feed-entity.x-navigation-entity
-  div.flexbox-container
-    div.attachment
-      div(*ngIf="helper.hasAttachment()")
-        cass-attachment([attachment]="helper.getAttachment()", (open)="helper.openAttachment($event)", view-mode="list")
-    div.content
-      div.profile-info
-        div.profile-image-container
-          cass-profile-image([url]="getProfileImageURL()")
-        span.profile-name {{ getProfileGreetings() }}
-        span.date-created-on {{ getDateCreatedOn() }}
-      .post-title-container(*ngIf="helper.hasTitle()")
-        h1
-          span.text {{ helper.getTitle() }}
-      div(*ngIf="helper.hasContent()")
-        cass-text-parser([text]='helper.getContent()')
-      div(*ngIf="! helper.hasContent()")
-        span –
+div.component.component-post-card-list.x-navigation-entity
+  div.post-card-content
+    div.flexbox-container
+      div.attachment
+        div(*ngIf="helper.hasAttachment()")
+          cass-attachment([attachment]="helper.getAttachment()", (open)="helper.openAttachment($event)", view-mode="list")
+      div.content
+        div.profile-info
+          div.profile-image-container
+            cass-profile-image([url]="getProfileImageURL()")
+          span.profile-name {{ getProfileGreetings() }}
+          span.date-created-on {{ getDateCreatedOn() }}
+        .post-title-container(*ngIf="helper.hasTitle()")
+          h1
+            span.text {{ helper.getTitle() }}
+        div(*ngIf="helper.hasContent()")
+          cass-text-parser([text]='helper.getContent()')
+        div(*ngIf="! helper.hasContent()")
+          span –

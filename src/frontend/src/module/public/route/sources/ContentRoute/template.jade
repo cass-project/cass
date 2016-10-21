@@ -1,21 +1,8 @@
-article.component.component-public-content-route
-  div.flexbox-container
-    div.menu(*ngIf="ui.panels.extended.isEnabled()")
-      cass-public-content-menu([is-extended]="ui.panels.extended.isExtended()")
-    div.themes-list(*ngIf="ui.panels.themes.isEnabled()")
-      cass-theme-panel([root]="getThemePanelRoot()", (change)="goTheme($event)")
-    div.content
-      div.split-view
-        div.content-area(#content, (scroll)="onScroll($event)")
-          div.screen-themes(*ngIf="swipe.isAtThemeScreen()")
-            div.theme-header
-              cass-theme-header([theme]="getThemeRoot()", (go)="goTheme($event)")
-            cass-theme-browser([root]="getThemeRoot()", (change)="goTheme($event)")
-          div.screen-stream(*ngIf="swipe.isAtContentScreen()")
-            div.theme-header
-              cass-theme-header([theme]="getThemeRoot()", (go)="goTheme($event)")
-            .post-form(*ngIf='canPost()')
-              .post-form-container
-                cass-post-form([collection]="getMainCollection()", [post-type] = "postType", (success) = "unshiftEntity($event)")
-            cass-public-nothing-found(*ngIf="service.isNothingFound()")
-            cass-feed-post-stream
+div.component.component-public-content-gateway-route
+  .flexbox-container
+    .themes-list
+      cass-theme-panel([root]="helper.getThemePanelRoot()", (change)="helper.goTheme($event)")
+    .menu
+      cass-public-content-menu
+    .content
+      router-outlet

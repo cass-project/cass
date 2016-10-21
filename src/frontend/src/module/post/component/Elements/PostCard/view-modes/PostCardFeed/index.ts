@@ -10,7 +10,8 @@ import {AttachmentEntity} from "../../../../../../attachment/definitions/entity/
     selector: 'cass-post-card-feed',
     template: require('./template.jade'),
     styles: [
-        require('./style.shadow.scss')
+        require('./style.shadow.scss'),
+        require('./style.navigation.shadow.scss'),
     ]
 })
 export class PostCardFeed implements OnChanges

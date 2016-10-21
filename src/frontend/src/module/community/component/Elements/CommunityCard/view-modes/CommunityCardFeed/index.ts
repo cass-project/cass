@@ -8,6 +8,7 @@ import {CommunityEntity} from "../../../../../definitions/entity/Community";
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss'),
+        require('./style.navigation.shadow.scss'),
     ]
 })
 export class CommunityCardFeed

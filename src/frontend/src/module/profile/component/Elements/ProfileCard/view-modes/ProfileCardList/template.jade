@@ -1,11 +1,12 @@
 div.component.component-profile-card-list
-  div.flexbox-container.x-navigation-entity
-    div.profile-image
-      a.profile-image-container.x-navigation-click((click)="open($event)", [routerLink]="['/profile', profile.id]")
-        cass-profile-image([url]="helper.getProfileImageURL()", border="square")
-    div.profile-info
-      h1 {{ helper.getProfileName() }}
-    div.profile-themes(*ngIf="helper.hasThemes()")
-      ul.themes-list
-        li(*ngFor="let theme of helper.getThemes()")
-          span.title {{ theme.title }}
+  .profile-card-content
+    div.flexbox-container.x-navigation-entity
+      div.profile-image
+        a.profile-image-container.x-navigation-click((click)="open($event)", [routerLink]="['/profile', profile.id]")
+          cass-profile-image([url]="helper.getProfileImageURL()", border="square")
+      div.profile-info
+        h1 {{ helper.getProfileName() }}
+      div.profile-themes(*ngIf="helper.hasThemes()")
+        ul.themes-list
+          li(*ngFor="let theme of helper.getThemes()")
+            span.title {{ theme.title }}

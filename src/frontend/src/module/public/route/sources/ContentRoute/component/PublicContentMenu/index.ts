@@ -1,10 +1,8 @@
 import {Component, Input} from '@angular/core';
 
-import {SwipeService} from "../../../../../../swipe/service/SwipeService";
-import {UIService} from "../../../../../../ui/service/ui";
-import {FeedCriteriaService} from "../../../../../../feed/service/FeedCriteriaService";
-import {ContentType} from "../../../../../../feed/definitions/request/criteria/ContentTypeCriteriaParams";
-import {PublicService} from "../../../../../service";
+import {Router} from "@angular/router";
+import {CurrentThemeService} from "../../../../../../theme/service/CurrentThemeService";
+
 
 @Component({
     selector: 'cass-public-content-menu',
@@ -18,44 +16,27 @@ export class PublicContentMenu
     @Input('is-extended') isExtended: boolean = false;
 
     constructor(
-        private swipe: SwipeService,
-        private ui: UIService,
-        private criteria: FeedCriteriaService,
-        private service: PublicService
+        private router: Router,
+        private current: CurrentThemeService
     ) { }
 
-    private isContentTypeCriteriaNotActivated(): boolean
-    {
-        return this.criteria.criteria.contentType.enabled === false;
+    getThemesRoute() {
+        let path = ['/p/home/themes'];
+
+        this.current.getPath().forEach(theme => {
+            path.push(theme.url);
+        });
+
+        return path;
     }
 
-    private isContentType(contentType: ContentType) {
-        return this.criteria.criteria.contentType.params.type === contentType;
-    }
+    getContentRoute(type: string) {
+        let path = ['/p/home/content', type];
 
-    disableContentTypeCriteria() {
-        if(this.criteria.criteria.contentType.enabled) {
-            this.criteria.criteria.contentType.enabled = false;
-            this.criteria.criteria.contentType.params.type = undefined;
+        this.current.getPath().forEach(theme => {
+            path.push(theme.url);
+        });
 
-            if(this.swipe.isAtThemeScreen()) {
-                this.swipe.switchToContent();
-            }
-
-            this.service.update();
-        }
-    }
-
-    enableContentTypeCriteria(contentType: ContentType) {
-        if(! this.isContentType(contentType)) {
-            this.criteria.criteria.contentType.enabled = true;
-            this.criteria.criteria.contentType.params.type = contentType;
-
-            if(this.swipe.isAtThemeScreen()) {
-                this.swipe.switchToContent();
-            }
-
-            this.service.update();
-        }
+        return path;
     }
 }

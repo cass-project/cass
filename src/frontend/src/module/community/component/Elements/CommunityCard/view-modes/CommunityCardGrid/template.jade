@@ -1,11 +1,12 @@
-div.component.component-community-card-grid
+div.component.component-community-card-grid.x-navigation-entity
   a((click)="open($event)", [routerLink]="helper.getRouterParams()")
-    .cover-community-image
-      .community-image-container(style="background-image: url('{{ helper.getImageURL() }}');")
-    .cover-community-about
-      .community-name
-        h1 {{ helper.getCommunityTitle() }}
-      .community-themes
-        ul.themes-list(*ngIf="helper.hasTheme()")
-          li
-            span.title {{ helper.getThemeTitle() }}
+    .community-card-content
+      .cover-community-image
+        .community-image-container(style="background-image: url('{{ helper.getImageURL() }}');")
+      .cover-community-about
+        .community-name
+          h1 {{ helper.getCommunityTitle() }}
+        .community-themes
+          ul.themes-list(*ngIf="helper.hasTheme()")
+            li
+              span.title {{ helper.getThemeTitle() }}

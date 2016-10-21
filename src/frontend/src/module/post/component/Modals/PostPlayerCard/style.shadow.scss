@@ -39,7 +39,7 @@ div.component-post-player-card {
       }
     }
 
-    /* ----------------------------------------------------- */
+    /* -----------------------navigation------------------------------ */
 
     .navigation-container {
       display: flex;
@@ -54,6 +54,10 @@ div.component-post-player-card {
       .navigation-button__item {
         border-right: 1px solid #fff;
         font-size: 20px;
+
+        &:last-child {
+          border-right: none;
+        }
       }
     }
 
@@ -96,10 +100,15 @@ div.component-post-player-card {
 
       .fa-bullhorn {
         color: #fff;
+
+        &:active {
+          color: red;
+        }
       }
 
       .share {
         margin-left: 5px;
+
       }
 
     }
@@ -108,6 +117,10 @@ div.component-post-player-card {
 
       .fa-bolt {
         color: #fff;
+
+        &:active {
+          color: red;
+        }
       }
 
       .complain {
@@ -144,13 +157,52 @@ div.component-post-player-card {
         color: coral;
       }
     }
-  }
+
     .navigation-bar {
       position: absolute;
       bottom: 0;
       width: 100%;
 
     }
+     /*--------------.navigation-bar_left0 класс-модификатор на .navigation-bar------------------------------*/
+
+    .navigation-bar_left0 {
+      left: 0;
+      height: 100%;
+      width: 40px;
+
+      .navigation-button__left {
+        flex-direction: column;
+      }
+
+      .navigation-button__right {
+        flex-direction: column;
+        margin-left: 0px;
+      }
+
+      .navigation-container {
+        padding: 0;
+      }
+
+      .navigation-container {
+        flex-direction: column;
+      }
+
+      .navigation-button__item {
+        padding: 0;
+        margin-top: 10px;
+        border-left: none;
+        border-right: none;
+
+      }
+
+      .sum-like , .share, .complain, .button-video, .button-comment {
+        display: none;
+      }
+    }
+  }
+
+  /* ------------------------------- */
 
     .attachment-container {
       background-color: #f5f5f5;
@@ -162,8 +214,49 @@ div.component-post-player-card {
       align-items: center;
 
   }
+
+
+  /* ---------------------- меню для гамбургера ---------------------------------------------- */
+
+  .popup {
+   display: flex;
+    .popup-menu {
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      background: #2e2e2e;
+      border-radius: 5px;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 15px;
+        bottom: -16px;
+        border: 8px solid transparent;
+        border-top: 8px solid #2e2e2e;
+      }
+    }
+
+    .popup__item {
+      margin-bottom: 5px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .popup__link {
+      text-decoration: none;
+      font-size: 14px;
+      color: #fff;
+    }
+  }
 }
-    /*---------------------- desktop ----------------------------------------------*/
+    /* ---------------------- desktop ---------------------------------------------- */
 
 @include isDesktop {
 
@@ -199,7 +292,7 @@ div.component-post-player-card {
         margin-right: auto;
       }
 
-    /* ------------------------------------ */
+    /* ----------------- section_content ------------------- */
 
       .content {
         @include borderBottom(darkgrey);
@@ -218,8 +311,6 @@ div.component-post-player-card {
         }
 
         .content-container {
-          max-height: 350px;
-          overflow: hidden;
           margin-bottom: 20px;
         }
 
@@ -230,13 +321,13 @@ div.component-post-player-card {
         }
 
         .breadcrumbs__item {
+
           &:before {
             content: ">";
             align-items: center;
             margin-left: 5px;
             margin-right: 5px;
             color: #757575;
-
           }
 
           &:first-child {
@@ -251,44 +342,84 @@ div.component-post-player-card {
           font-size: 14px;
           text-decoration: none;
 
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
 
-    /* ------------------------------------ */
+    /* -------------- section_comments---------------------- */
 
     .comments {
-      margin-bottom: 40px;
+      margin-bottom: 30px;
+    }
 
+    .comment-number {
+      margin-bottom: 15px;
+    }
 
-      .comment-container {
-        margin-bottom: 10px;
-      }
-      .comment-profile {
-        margin-bottom: 10px;
-      }
+    .profile-card {
+      display: flex;
+      margin-bottom: 10px;
 
-      .comment-text {
-        padding-right: 10px;
-        padding-left: 10px;
-
-        p {
-          font-size: 14px;
-          line-height: 1.3;
-        }
+      .profile-card__img {
+        max-height: 100%;
+        max-width: 100%;
+        display: block;
+        border-radius: 50%;
       }
 
-      .comment-more {
-        float: right;
+      .profile-card__avatar {
+        width: 48px;
+        height: 48px;
+        margin-right: 15px;
+      }
+
+      .profile-card__avatar-link {
+        display: block;
+      }
+
+      .profile-card__name {
+        margin-top: 5px;
+      }
+
+      .profile-card__name-link  {
+        display: block;
+        font-size: 16px;
+        text-decoration: none;
+        color: #111;
+      }
+
+      .profile-card__time {
+        font-size: 12px;
+        color: #757575;
+        margin-top: 8px;
 
       }
 
-      .comment-more_link {
-        font-size: 13px;
-        color: #514A8A;
-        padding-left: 5px;
+    }
+
+    .comment-text {
+      padding-right: 10px;
+      padding-left: 10px;
+
+      p {
+        font-size: 14px;
+        line-height: 1.3;
       }
     }
-     /* ------------------------------------ */
+
+    .comment-more {
+      float: right;
+    }
+
+    .comment-more_link {
+      font-size: 13px;
+      color: #514A8A;
+      padding-left: 5px;
+    }
+
+     /* --------------- section_create-comment--------------------- */
 
     .create-comment {
 
@@ -337,9 +468,7 @@ div.component-post-player-card {
 
   div.component-post-player-card {
 
-
-
-      .post-about {
+     .post-about {
         display: none;
       }
 

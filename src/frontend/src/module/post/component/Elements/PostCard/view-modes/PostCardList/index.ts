@@ -12,7 +12,8 @@ import {queryImage, QueryTarget} from "../../../../../../avatar/functions/query"
     selector: 'cass-post-card-list',
     template: require('./template.jade'),
     styles: [
-        require('./style.shadow.scss')
+        require('./style.shadow.scss'),
+        require('./style.navigation.shadow.scss'),
     ]
 })
 export class PostCardList implements OnChanges

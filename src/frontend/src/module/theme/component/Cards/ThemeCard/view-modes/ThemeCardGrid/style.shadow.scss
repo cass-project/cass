@@ -1,0 +1,65 @@
+@import "./../../../../../../../styles/globals";
+
+div.component-theme-card-grid {
+  display: inline-block;
+
+  div.card {
+    @include card(1);
+
+    width: 160px;
+    height: 114px;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+
+    div.theme-card-content {
+      height: 100%;
+      border: 3px solid transparent;
+      padding: 1px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    div.image-container {
+      height: 106px;
+      overflow: hidden;
+
+      div.image {
+        height: 100%;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: #464646;
+      }
+    }
+
+    &:hover {
+      div.image {
+        filter: brightness(125%);
+        -webkit-filter: brightness(125%);
+      }
+    }
+  }
+
+
+  div.about {
+    padding: 10px;
+    height: 25px;
+    overflow: hidden;
+    text-align: center;
+
+    h1 {
+      font-family: $FONT_FAMILY;
+      font-size: 16px;
+      font-weight: 400;
+      color: black;
+      margin-bottom: 10px;
+    }
+
+    p {
+      display: block;
+      color: material-color("grey", "700");
+    }
+  }
+}

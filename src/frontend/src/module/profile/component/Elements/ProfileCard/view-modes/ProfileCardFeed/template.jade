@@ -1,48 +1,49 @@
-div.x-navigation-entity.component.component-profile-card-feed
+div.component.component-profile-card-feed.x-navigation-entity.x-navigation-click((click)="open()")
   .profile-card
-    .profile-image-container.x-navigation-click((click)="open()")
-      cass-profile-image([url]="helper.getProfileImageURL()", border="square")
-    .profile-about
-      h1 {{ helper.getProfileName() }}
-      ul.profile-info
-        li
-          div(*ngIf="isFemale()")
-            div.icon
-              i.fa.fa-fw.fa-female
-            div.desc
-              h1 {{ 'gender' | translate }}
-              span {{ 'gender.female' | translate }}
-          div(*ngIf="isMale()")
-            div.icon
-              i.fa.fa-fw.fa-male
-            div.desc
-              h1 {{ 'gender' | translate }}
-              span {{ 'gender.male' | translate }}
-          div(*ngIf="notSpecifiedGender()")
-            div.icon
-              i.fa.fa-fw.fa-male
-            div.desc
-              h1 {{ 'gender' | translate }}
-              span {{ 'gender.not-specified' | translate }}
-        li(*ngIf="helper.hasInterests()")
-          div
-            div.icon
-              i.fa.fa-fw.fa-bookmark-o
-            div.desc
-              h1 {{ 'interesting-in' | translate }}
-              span {{ helper.getInterestingInDescription() }}
-        li(*ngIf="helper.hasExpertsIn()")
-          div
-            div.icon
-              i.fa.fa-fw.fa-bookmark
-            div.desc
-              h1 {{ 'expert-in' | translate }}
-              span {{ helper.getExpertInDescription() }}
-        li
-          div
-            div.icon
-              i.fa.fa-fw.fa-calendar
-            div.desc
-              h1 {{ 'registered' | translate }}
-              span {{ helper.getRegistrationDate() }}
-    .profile-actions
+    .profile-card-content
+      .profile-image-container
+        cass-profile-image([url]="helper.getProfileImageURL()", border="square")
+      .profile-about
+        h1 {{ helper.getProfileName() }}
+        ul.profile-info
+          li
+            div(*ngIf="isFemale()")
+              div.icon
+                i.fa.fa-fw.fa-female
+              div.desc
+                h1 {{ 'gender' | translate }}
+                span {{ 'gender.female' | translate }}
+            div(*ngIf="isMale()")
+              div.icon
+                i.fa.fa-fw.fa-male
+              div.desc
+                h1 {{ 'gender' | translate }}
+                span {{ 'gender.male' | translate }}
+            div(*ngIf="notSpecifiedGender()")
+              div.icon
+                i.fa.fa-fw.fa-male
+              div.desc
+                h1 {{ 'gender' | translate }}
+                span {{ 'gender.not-specified' | translate }}
+          li(*ngIf="helper.hasInterests()")
+            div
+              div.icon
+                i.fa.fa-fw.fa-bookmark-o
+              div.desc
+                h1 {{ 'interesting-in' | translate }}
+                span {{ helper.getInterestingInDescription() }}
+          li(*ngIf="helper.hasExpertsIn()")
+            div
+              div.icon
+                i.fa.fa-fw.fa-bookmark
+              div.desc
+                h1 {{ 'expert-in' | translate }}
+                span {{ helper.getExpertInDescription() }}
+          li
+            div
+              div.icon
+                i.fa.fa-fw.fa-calendar
+              div.desc
+                h1 {{ 'registered' | translate }}
+                span {{ helper.getRegistrationDate() }}
+      .profile-actions

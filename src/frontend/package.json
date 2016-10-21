@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.4",
-  "description": "App Frontend",
+  "description": "CASS Frontend",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -60,11 +60,7 @@
     "url-loader": "^0.5.7",
     "valid-url": "^1.0.9",
     "webpack": "2.1.0-beta.22",
-    "zone.js": "0.6.24"
-  },
-  "devDependencies": {
-    "awesome-typescript-loader": "^2.0.1",
-    "sass-material-colors": "0.0.5",
-    "webpack": "2.1.0-beta.22"
+    "zone.js": "0.6.24",
+    "awesome-typescript-loader": "^2.0.1"
   }
 }

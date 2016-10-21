@@ -1,3 +1,6 @@
 [submodule "src/backend/src/Application/bundles/Stage/src/Resources"]
 	path = src/backend/src/Application/bundles/Stage/src/Resources
 	url = https://github.com/cass-project/cass-stage-data
+[submodule "stage"]
+	path = src/backend/src/Application/bundles/Stage/src/Resources
+	url = git@gitlab.com:yoozer/cass-stage-data.git

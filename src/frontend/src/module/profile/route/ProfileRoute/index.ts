@@ -7,6 +7,7 @@ import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
 import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
 import {ProfileRouteService} from "./service";
 import {UINavigationObservable} from "../../../ui/service/navigation";
+import {UIPathService} from "../../../ui/path/service";
 
 @Component({
     template: require('./template.jade'),
@@ -30,8 +31,14 @@ export class ProfileRoute implements OnInit, OnDestroy
     constructor(
         private route: ActivatedRoute,
         private service: ProfileRouteService,
-        private navigator: UINavigationObservable
-    ) {}
+        private navigator: UINavigationObservable,
+        private path: UIPathService
+    ) {
+        path.setPath([{
+            name: 'Профиль',
+            route: ['/profile']
+        }]);
+    }
     
     ngOnInit() {
         let elem = this.content.nativeElement;

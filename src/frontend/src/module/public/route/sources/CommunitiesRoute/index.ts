@@ -11,6 +11,7 @@ import {UINavigationObservable} from "../../../../ui/service/navigation";
 import {PublicThemeHelper} from "../../theme-helper";
 import {UIService} from "../../../../ui/service/ui";
 import {SwipeService} from "../../../../swipe/service/SwipeService";
+import {UIPathService} from "../../../../ui/path/service";
 
 @Component({
     template: require('./template.jade'),
@@ -37,8 +38,14 @@ export class CommunitiesRoute implements OnInit, OnDestroy
         private themeHelper: PublicThemeHelper,
         private navigator: UINavigationObservable,
         private ui: UIService,
-        private swipe: SwipeService
+        private swipe: SwipeService,
+        private path: UIPathService,
     ) {
+        path.setPath([{
+            name: 'Сообщества',
+            route: ['/p/communities']
+        }]);
+
         catalog.source = 'communities';
         catalog.injectFeedService(service);
         

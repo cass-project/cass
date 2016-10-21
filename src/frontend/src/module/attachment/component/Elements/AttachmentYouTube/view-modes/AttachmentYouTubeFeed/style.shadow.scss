@@ -6,6 +6,10 @@ div.component-attachment-youtube-feed {
       position: relative;
       cursor: pointer;
 
+      .image-container {
+        font-size: 0;
+      }
+
       .play-button-container {
         font-size: 78px;
         color: material-color("grey", "100");

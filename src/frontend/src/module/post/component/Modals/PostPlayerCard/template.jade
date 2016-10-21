@@ -6,6 +6,9 @@ div.component.component-post-player-card
         .navigation-container
           ul.navigation-button__left
             li.navigation-button__item
+              button(type="button")
+                i(class="fa fa-angle-double-up fa-lg" aria-hidden="true")
+            li.navigation-button__item
               button(type="button").button-like
                 i(class="fa fa-heart" aria-hidden="true")
                 span.sum-like 123
@@ -50,22 +53,84 @@ div.component.component-post-player-card
         .content__title
           h1 Самый лучший контент
       section.comments
-        .comment-container
-          .comment-profile
-            cass-profile-card-header([profile]="helper.getProfile()", [time]="helper.getPostDateCreatedOn()")
+        .comment-number
+          .profile-card
+            .profile-card__avatar
+              a(href="#").profile-card__avatar-link
+                img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
+
+            .profile-card__about
+              .profile-card__name
+                a(href="#").profile-card__name-link Demo Comment
+              .profile-card__time 21/09/2016 at 13:45
           .comment-text
             p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
-            span.comment-more
-              a(href="#").comment-more_link читать далее
-        .comment-container
-          .comment-container
-            .comment-profile
-              cass-profile-card-header([profile]="helper.getProfile()", [time] = "helper.getPostDateCreatedOn()")
-            .comment-text
-              p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
               span.comment-more
                 a(href="#").comment-more_link читать далее
+        .comment-number
+          .profile-card
+            .profile-card__avatar
+              a(href="#").profile-card__avatar-link
+                img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
+
+            .profile-card__about
+              .profile-card__name
+                a(href="#").profile-card__name-link Demo Comment
+              .profile-card__time 21/09/2016 at 13:45
+          .comment-text
+            p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
+              span.comment-more
+                a(href="#").comment-more_link читать далее
+        .comment-number
+          .profile-card
+            .profile-card__avatar
+              a(href="#").profile-card__avatar-link
+                img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
+
+            .profile-card__about
+              .profile-card__name
+                a(href="#").profile-card__name-link Demo Comment
+              .profile-card__time 21/09/2016 at 13:45
+          .comment-text
+            p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
+              span.comment-more
+                a(href="#").comment-more_link читать далее
+        .comment-number
+          .profile-card
+            .profile-card__avatar
+              a(href="#").profile-card__avatar-link
+                img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
+
+            .profile-card__about
+              .profile-card__name
+                a(href="#").profile-card__name-link Demo Comment
+              .profile-card__time 21/09/2016 at 13:45
+          .comment-text
+            p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
+              span.comment-more
+                a(href="#").comment-more_link читать далее
+        .comment-number
+          .profile-card
+            .profile-card__avatar
+              a(href="#").profile-card__avatar-link
+                img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
+
+            .profile-card__about
+              .profile-card__name
+                a(href="#").profile-card__name-link Demo Comment
+              .profile-card__time 21/09/2016 at 13:45
+          .comment-text
+            p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
+              span.comment-more
+                a(href="#").comment-more_link читать далее
+
       section.create-comment
         form(action="#" method="").create-comment__form
           textarea(placeholder="Ваш комментарий" name="comment").comment-textarea
           button(type="submit").comment-submit Отправить
+      .popup
+        - var popupMenu = ['item1fgfgfgf','item2','item3']
+        ul.popup-menu
+          each item in popupMenu
+            li.popup__item
+              a(href="#").popup__link= item

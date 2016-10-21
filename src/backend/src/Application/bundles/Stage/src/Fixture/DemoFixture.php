@@ -92,16 +92,16 @@ final class DemoFixture
 
         $this->upAccountsFixture();
         $this->upFeedFixture();
+        $this->syncFeedFixture();
     }
 
     public function sync(OutputInterface $output)
     {
         $this->output = $output;
 
-        $this->fetchJSONSources();
-        $this->syncFeedFixture();
+        $this->profileService->disableAutoImageGeneration();
 
-        $this->jsonFeed = $this->fetchJSON(self::JSON_DIR.'/feed2.json');
+        $this->fetchJSONSources();
         $this->syncFeedFixture();
     }
 
@@ -151,13 +151,13 @@ final class DemoFixture
     private function fetchJSONSources()
     {
         $this->jsonProfiles = $this->fetchJSON(self::JSON_DIR.'/profile.json');
-        $this->jsonFeed = $this->fetchJSON(self::JSON_DIR.'/feed.json');
+        $this->jsonFeed = $this->fetchJSONGlob(self::JSON_DIR.'/feed_*.json');
         $this->jsonVideos = $this->fetchJSON(self::JSON_DIR.'/video.json');
     }
 
     private function fetchJSON(string $path): array
     {
-        $this->output->writeln(sprintf('Fetch JSON: %s', $path));
+        $this->output->writeln(sprintf('[*] Fetch JSON: %s', $path));
 
         if(! ($source = file_get_contents($path))) {
             throw new \Exception(sprintf('Failed to read JSON file `%s`', $path));
@@ -172,6 +172,21 @@ final class DemoFixture
         if($result === null) {
             throw new \Exception(sprintf('Failed to parse JSON(%s) : %s', $path, json_last_error_msg()));
         }
+
+        return $result;
+    }
+
+    private function fetchJSONGlob(string $pattern): array
+    {
+        $result = [];
+
+        $this->output->writeln(sprintf('[***] Fetch JSON (glob): %s', $pattern));
+
+        array_map(function(string $path) use(&$result) {
+            foreach($this->fetchJSON($path) as $entity) {
+                $result[] = $entity;
+            }
+        }, glob($pattern));
 
         return $result;
     }
@@ -213,6 +228,8 @@ final class DemoFixture
 
                     $this->profileService->uploadImage($profile->getId(), $parameters);
                 }
+            }else{
+                $this->profileService->generateProfileImage($profile->getId());
             }
 
             return $account;
@@ -432,7 +449,7 @@ final class DemoFixture
                         $option = json_decode($input['options'], true);
                     }
 
-                    if(count(array_keys($option))) {
+                    if(is_array($option) && count(array_keys($option))) {
                         return [
                             'meta' => [
                                 'title' => $option['title'] ?? '',
@@ -489,7 +506,9 @@ final class DemoFixture
                     $title = $linkMap[$url]['title'];
                     $description = $linkMap[$url]['description'];
 
-                    $this->output->writeln(sprintf('[*] Specify link("%s"), metadata("%s", "%s")', $url, $title, $description));
+                    $percent = round(100/count($linkMap) * $specified, 2);
+
+                    $this->output->writeln(sprintf('[*] [%s%%] Specify link("%s"), metadata("%s", "%s")', $percent, $url, $title, $description));
 
                     $this->attachmentService->specifyTitleAndDescriptionFor($attachment, $title, $description);
 

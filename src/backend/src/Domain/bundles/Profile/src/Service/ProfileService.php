@@ -23,7 +23,7 @@ use CASS\Domain\Bundles\Profile\Repository\ProfileRepository;
 use CASS\Domain\Bundles\Profile\Image\ProfileImageStrategy;
 use League\Flysystem\FilesystemInterface;
 
-class ProfileService implements EventEmitterAwareService
+final class ProfileService implements EventEmitterAwareService
 {
     use EventEmitterAwareTrait;
 
@@ -34,6 +34,8 @@ class ProfileService implements EventEmitterAwareService
     const EVENT_PROFILE_DELETED = 'domain.profile.deleted';
 
     const MAX_PROFILES_PER_ACCOUNT = 10;
+
+    private $disableAutoImageGeneration = false;
 
     /** @var ProfileRepository */
     private $profileRepository;
@@ -79,6 +81,11 @@ class ProfileService implements EventEmitterAwareService
         $this->wwwImagesDir = $wwwImagesDir;
     }
 
+    public function disableAutoImageGeneration()
+    {
+        $this->disableAutoImageGeneration = true;
+    }
+
     public function worksWithAccountService(AccountService $accountService)
     {
         $this->accountService = $accountService;
@@ -122,7 +129,10 @@ class ProfileService implements EventEmitterAwareService
         $this->profileRepository->createProfile($profile);
         $this->accountService->switchToProfile($account, $profile->getId());
 
-        $this->generateProfileImage($profile->getId());
+        if(! $this->disableAutoImageGeneration) {
+            $this->generateProfileImage($profile->getId());
+        }
+
         $this->backdropService->backdropPreset($profile, $this->backdropPresetFactory, $this->backdropPresetFactory->getListIds()[array_rand($this->backdropPresetFactory->getListIds())]);
 
         $this->getEventEmitter()->emit(self::EVENT_PROFILE_CREATED, [$profile]);
@@ -243,7 +253,7 @@ class ProfileService implements EventEmitterAwareService
         return $profile->getImages();
     }
 
-    private function generateProfileImage(int $profileId): ImageCollection
+    public function generateProfileImage(int $profileId): ImageCollection
     {
         $profile = $this->getProfileById($profileId);
         $strategy = new ProfileImageStrategy($profile, $this->imagesFlySystem, $this->wwwImagesDir);

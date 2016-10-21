@@ -1,0 +1,19 @@
+@import "./../../../../../../../styles/globals";
+
+.x-navigation-entity {
+  .theme-card-content {
+    &:hover {
+      border-color: $CASS_NAVIGATION_ENTITY_HOVER_COLOR !important;
+    }
+  }
+}
+
+.x-navigation-entity-active {
+  .theme-card-content {
+    border-color: $CASS_NAVIGATION_ENTITY_ACTIVE_COLOR!important;
+
+    &:hover {
+      border-color: $CASS_NAVIGATION_ENTITY_HOVER_AND_ACTIVE_COLOR!important;
+    }
+  }
+}

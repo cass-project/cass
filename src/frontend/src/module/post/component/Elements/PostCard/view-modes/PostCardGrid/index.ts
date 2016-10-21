@@ -11,7 +11,8 @@ import {QueryTarget, queryImage} from "../../../../../../avatar/functions/query"
     selector: 'cass-post-card-grid',
     template: require('./template.jade'),
     styles: [
-        require('./style.shadow.scss')
+        require('./style.shadow.scss'),
+        require('./style.navigation.shadow.scss'),
     ]
 })
 export class PostCardGrid implements OnChanges

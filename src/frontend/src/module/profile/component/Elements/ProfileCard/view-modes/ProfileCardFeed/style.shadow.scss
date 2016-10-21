@@ -8,8 +8,14 @@ div.component-profile-card-feed {
     height: 620px;
     overflow: hidden;
     border-radius: 3px;
-    border: 3px solid #fff;
     outline: 1px solid material-color("grey", "300");
+    cursor: pointer;
+  }
+
+  .profile-card-content {
+    border: 3px solid transparent;
+    padding: 1px;
+    height: 100%;
   }
 
   .profile-image-container {

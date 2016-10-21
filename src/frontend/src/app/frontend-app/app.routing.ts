@@ -14,16 +14,18 @@ import {CommunityCollectionsListRoute} from "../../module/community/route/Commun
 import {CommunityCollectionNotFoundRoute} from "../../module/community/route/CommunityCollectionNotFoundRoute/index";
 import {CommunityCollectionRoute} from "../../module/community/route/CommunityCollectionRoute/index";
 import {ProfileResolve} from "../../module/profile/resolve/ProfileResolve";
-import {ContentRoute} from "../../module/public/route/sources/ContentRoute/index";
+import {ContentGatewayRoute} from "../../module/public/route/sources/ContentRoute/index";
 import {ProfilesRoute} from "../../module/public/route/sources/ProfilesRoute/index";
 import {CollectionsRoute} from "../../module/public/route/sources/CollectionsRoute/index";
 import {CommunitiesRoute} from "../../module/public/route/sources/CommunitiesRoute/index";
 import {CommunityResolve} from "../../module/community/resolve/CommunityResolve";
+import {ContentRoute} from "../../module/public/route/sources/ContentRoute/route/ContentRoute/index";
+import {ThemesRoute} from "../../module/public/route/sources/ContentRoute/route/ThemesRoute/index";
 
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: '/p/home',
+        redirectTo: '/p/home/themes',
         pathMatch: 'full'
     },
     {
@@ -111,12 +113,113 @@ const appRoutes: Routes = [
         path: 'p',
         children: [
             {
-                path: '',
-                component: ContentRoute
-            },
-            {
                 path: 'home',
-                component: ContentRoute
+                component: ContentGatewayRoute,
+                children: [
+                    {
+                        path: '',
+                        redirectTo: 'themes',
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'themes',
+                        component: ThemesRoute,
+                    },
+                    {
+                        path: 'themes/:theme_lvl1',
+                        component: ThemesRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'themes/:theme_lvl1/:theme_lvl2',
+                        component: ThemesRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3',
+                        component: ThemesRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl4',
+                        component: ThemesRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5',
+                        component: ThemesRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6',
+                        component: ThemesRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6/:theme_lvl7',
+                        component: ThemesRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6/:theme_lvl7/:theme_lvl8',
+                        component: ThemesRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6/:theme_lvl7/:theme_lvl8/:theme_lvl9',
+                        component: ThemesRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'content/:type',
+                        component: ContentRoute,
+                    },
+                    {
+                        path: 'content/:type/:theme_lvl1',
+                        component: ContentRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'content/:type/:theme_lvl1/:theme_lvl2',
+                        component: ContentRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3',
+                        component: ContentRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl4',
+                        component: ContentRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5',
+                        component: ContentRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6',
+                        component: ContentRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6/:theme_lvl7',
+                        component: ContentRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6/:theme_lvl7/:theme_lvl8',
+                        component: ContentRoute,
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6/:theme_lvl7/:theme_lvl8/:theme_lvl9',
+                        component: ContentRoute,
+                        pathMatch: 'full'
+                    },
+                ]
             },
             {
                 path: 'people',

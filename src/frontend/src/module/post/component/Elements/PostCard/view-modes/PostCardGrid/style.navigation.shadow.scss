@@ -1,0 +1,19 @@
+@import "./../../../../../../../styles/globals.scss";
+
+.x-navigation-entity {
+  .post-card-content {
+    &:hover {
+      border-color: $CASS_NAVIGATION_ENTITY_HOVER_COLOR !important;
+    }
+  }
+}
+
+.x-navigation-entity-active {
+  .post-card-content {
+    border-color: $CASS_NAVIGATION_ENTITY_ACTIVE_COLOR!important;
+
+    &:hover {
+      border-color: $CASS_NAVIGATION_ENTITY_HOVER_AND_ACTIVE_COLOR!important;
+    }
+  }
+}
