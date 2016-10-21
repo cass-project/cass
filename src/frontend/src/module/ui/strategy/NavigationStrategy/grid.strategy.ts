@@ -104,6 +104,10 @@ export class GridStrategy implements UIStrategy
                         }
                     }
                 }
+                // Find last row.
+                if(nextRowY === currentItemRect.top){
+                    this.content.nativeElement.scrollTop += 50;
+                }
             }
 
             this.elements[next].classList.add('x-navigation-entity-active');
@@ -136,8 +140,13 @@ export class GridStrategy implements UIStrategy
         if(this.elements.length > 0) {
             for (let index = 0; index < this.elements.length; index++) {
                 if (this.elements[index].classList.contains('x-navigation-entity-active')) {
-                    this.elements[index].classList.remove('x-navigation-entity-active');
-                    next = (index < this.elements.length - 1) ? index + 1 : index;
+                    if (index < this.elements.length - 1) {
+                        this.elements[index].classList.remove('x-navigation-entity-active');
+                        next = index + 1;
+                    } else {
+                        next = index;
+                        this.content.nativeElement.scrollTop += 50;
+                    }
                     break;
                 }
             }

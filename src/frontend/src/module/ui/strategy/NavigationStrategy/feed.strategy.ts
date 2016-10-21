@@ -17,6 +17,7 @@ export class FeedStrategy implements UIStrategy
     {
         let cur = 0;
         let isFirst = true;
+        
         if (this.elements.length > 0) {
             for (let index = 0; index < this.elements.length; index++) {
                 if (this.elements[index].classList.contains('x-navigation-entity-active')) {
@@ -26,7 +27,9 @@ export class FeedStrategy implements UIStrategy
                     break;
                 }
             }
+            
             let prev = cur;
+            
             if (!isFirst) {
                 let currentItemRect = this.elements[cur].getBoundingClientRect();
                 let prevRowY = currentItemRect.top;
@@ -67,6 +70,7 @@ export class FeedStrategy implements UIStrategy
     {
         let cur = 0;
         let isFirst = true;
+        
         if (this.elements.length > 0) {
             for (let index = 0; index < this.elements.length; index++) {
                 if (this.elements[index].classList.contains('x-navigation-entity-active')) {
@@ -76,7 +80,9 @@ export class FeedStrategy implements UIStrategy
                     break;
                 }
             }
+            
             let next = cur;
+            
             if (!isFirst) {
                 let currentItemRect = this.elements[cur].getBoundingClientRect();
                 let nextRowY = currentItemRect.top;
@@ -104,6 +110,10 @@ export class FeedStrategy implements UIStrategy
                         }
                     }
                 }
+                // Find last row.
+                if(nextRowY === currentItemRect.top){
+                    this.content.nativeElement.scrollTop += 50;
+                }
             }
 
             this.elements[next].classList.add('x-navigation-entity-active');
@@ -116,6 +126,7 @@ export class FeedStrategy implements UIStrategy
     left()
     {
         let prev = 0;
+        
         if(this.elements.length > 0) {
             for (let index = 0; index < this.elements.length; index++) {
                 if (this.elements[index].classList.contains('x-navigation-entity-active')) {
@@ -133,14 +144,21 @@ export class FeedStrategy implements UIStrategy
 
     right() {
         let next = 0;
+        
         if(this.elements.length > 0) {
             for (let index = 0; index < this.elements.length; index++) {
                 if (this.elements[index].classList.contains('x-navigation-entity-active')) {
-                    this.elements[index].classList.remove('x-navigation-entity-active');
-                    next = (index < this.elements.length - 1) ? index + 1 : index;
+                    if (index < this.elements.length - 1) {
+                        this.elements[index].classList.remove('x-navigation-entity-active');
+                        next = index + 1;
+                    } else {
+                        next = index;
+                        this.content.nativeElement.scrollTop += 50;
+                    }
                     break;
                 }
             }
+            
             this.elements[next].classList.add('x-navigation-entity-active');
             this.pickedElem = this.elements[next];
 
