@@ -17,7 +17,7 @@ export class ViewOptionService
         if(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY]) {
             this.option.setAsCurrent(window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY]);
         } else {
-            window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] = 'grid'
+            window.localStorage[ViewOptionService.LOCAL_STORAGE_KEY] = ViewOptionValue.Grid;
         }
 
         this.viewMode = Observable.create(observer => {
