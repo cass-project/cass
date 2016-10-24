@@ -2,6 +2,48 @@ div.component.component-post-player-card
   .post-card
     .attachment-container(*ngIf="helper.hasAttachment()")
       cass-attachment([attachment]="helper.getAttachment()", (open)="helper.openAttachment($event)", view-mode="feed")
+      section.all-comments
+        section.about-post
+          .header__profile
+            cass-profile-card-header([profile]="helper.getProfile()", [time] = "helper.getPostDateCreatedOn()")
+            .content-container(*ngIf="helper.hasContent()")
+              div([innerHTML]='helper.getContent()')
+              a(href="#").content__more-link Показать полностью ...
+        section.comments
+          .comment-number
+            .profile-comment-header
+              .profile-card
+                .profile-card__avatar
+                  a(href="#").profile-card__avatar-link
+                    img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
+                .profile-card__about
+                  .profile-card__name
+                    a(href="#").profile-card__name-link Demo Comment
+                  .profile-card__time 21/09/2016 at 13:45
+              .profile-card-menu
+                button(type="button").profile-card__button
+                  i(class="fa fa-sort-desc fa-lg" aria-hidden="true")
+            .comment-text
+              p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
+                span.comment-more
+                  a(href="#").comment-more_link читать далее
+          .comment-number
+            .profile-comment-header
+              .profile-card
+                .profile-card__avatar
+                  a(href="#").profile-card__avatar-link
+                    img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
+                .profile-card__about
+                  .profile-card__name
+                    a(href="#").profile-card__name-link Demo Comment
+                  .profile-card__time 21/09/2016 at 13:45
+              .profile-card-menu
+                button(type="button").profile-card__button
+                  i(class="fa fa-sort-desc fa-lg" aria-hidden="true")
+            .comment-text
+              p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
+                span.comment-more
+                  a(href="#").comment-more_link читать далее
       section.navigation-bar
         .navigation-container
           ul.navigation-button__left
@@ -54,71 +96,86 @@ div.component.component-post-player-card
           h1 Самый лучший контент
       section.comments
         .comment-number
-          .profile-card
-            .profile-card__avatar
-              a(href="#").profile-card__avatar-link
-                img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
-
-            .profile-card__about
-              .profile-card__name
-                a(href="#").profile-card__name-link Demo Comment
-              .profile-card__time 21/09/2016 at 13:45
+          .profile-comment-header
+            .profile-card
+              .profile-card__avatar
+                a(href="#").profile-card__avatar-link
+                  img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
+              .profile-card__about
+                .profile-card__name
+                  a(href="#").profile-card__name-link Demo Comment
+                .profile-card__time 21/09/2016 at 13:45
+            .profile-card-menu
+              button(type="button").profile-card__button
+                i(class="fa fa-sort-desc fa-lg" aria-hidden="true")
           .comment-text
             p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
               span.comment-more
                 a(href="#").comment-more_link читать далее
         .comment-number
-          .profile-card
-            .profile-card__avatar
-              a(href="#").profile-card__avatar-link
-                img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
-
-            .profile-card__about
-              .profile-card__name
-                a(href="#").profile-card__name-link Demo Comment
-              .profile-card__time 21/09/2016 at 13:45
+          .profile-comment-header
+            .profile-card
+              .profile-card__avatar
+                a(href="#").profile-card__avatar-link
+                  img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
+              .profile-card__about
+                .profile-card__name
+                  a(href="#").profile-card__name-link Demo Comment
+                .profile-card__time 21/09/2016 at 13:45
+            .profile-card-menu
+              button(type="button").profile-card__button
+                i(class="fa fa-sort-desc fa-lg" aria-hidden="true")
           .comment-text
             p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
               span.comment-more
                 a(href="#").comment-more_link читать далее
         .comment-number
-          .profile-card
-            .profile-card__avatar
-              a(href="#").profile-card__avatar-link
-                img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
-
-            .profile-card__about
-              .profile-card__name
-                a(href="#").profile-card__name-link Demo Comment
-              .profile-card__time 21/09/2016 at 13:45
+          .profile-comment-header
+            .profile-card
+              .profile-card__avatar
+                a(href="#").profile-card__avatar-link
+                  img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
+              .profile-card__about
+                .profile-card__name
+                  a(href="#").profile-card__name-link Demo Comment
+                .profile-card__time 21/09/2016 at 13:45
+            .profile-card-menu
+              button(type="button").profile-card__button
+                i(class="fa fa-sort-desc fa-lg" aria-hidden="true")
           .comment-text
             p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
               span.comment-more
                 a(href="#").comment-more_link читать далее
         .comment-number
-          .profile-card
-            .profile-card__avatar
-              a(href="#").profile-card__avatar-link
-                img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
-
-            .profile-card__about
-              .profile-card__name
-                a(href="#").profile-card__name-link Demo Comment
-              .profile-card__time 21/09/2016 at 13:45
+          .profile-comment-header
+            .profile-card
+              .profile-card__avatar
+                a(href="#").profile-card__avatar-link
+                  img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
+              .profile-card__about
+                .profile-card__name
+                  a(href="#").profile-card__name-link Demo Comment
+                .profile-card__time 21/09/2016 at 13:45
+            .profile-card-menu
+              button(type="button").profile-card__button
+                i(class="fa fa-sort-desc fa-lg" aria-hidden="true")
           .comment-text
             p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
               span.comment-more
                 a(href="#").comment-more_link читать далее
         .comment-number
-          .profile-card
-            .profile-card__avatar
-              a(href="#").profile-card__avatar-link
-                img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
-
-            .profile-card__about
-              .profile-card__name
-                a(href="#").profile-card__name-link Demo Comment
-              .profile-card__time 21/09/2016 at 13:45
+          .profile-comment-header
+            .profile-card
+              .profile-card__avatar
+                a(href="#").profile-card__avatar-link
+                  img(src="/storage/entity/profile/by-sid/avatar//290u0up6ivuz/kz7rx/64/sx9s51qy.png" alt="avatar").profile-card__img
+              .profile-card__about
+                .profile-card__name
+                  a(href="#").profile-card__name-link Demo Comment
+                .profile-card__time 21/09/2016 at 13:45
+            .profile-card-menu
+              button(type="button").profile-card__button
+                i(class="fa fa-sort-desc fa-lg" aria-hidden="true")
           .comment-text
             p Не следует, однако забывать, что укрепление и развитие структуры требуют от нас анализа существенных финансовых и административных условий. Равным образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.
               span.comment-more
