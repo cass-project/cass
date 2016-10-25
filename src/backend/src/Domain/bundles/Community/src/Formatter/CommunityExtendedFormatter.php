@@ -35,6 +35,7 @@ final class CommunityExtendedFormatter
             'community' => $community->toJSON(),
             'collections' => $this->formatCollections($community->getCollections()),
             'is_own' => $isOwn,
+            'subscribed' => false,
         ];
     }
 

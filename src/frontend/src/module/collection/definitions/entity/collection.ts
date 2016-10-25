@@ -17,6 +17,7 @@ export interface CollectionEntity
     is_protected: boolean;
     is_main: boolean;
     children?: CollectionEntity[];
+    subscribed: boolean;
 }
 
 export interface CollectionIndexEntity extends CollectionEntity
@@ -57,6 +58,7 @@ export class Collection implements CollectionEntity
     image: ImageCollection;
     backdrop: Backdrop<any>;
     children: CollectionEntity[] = [];
+    subscribed: boolean;
 
     constructor(ownerType: string, ownerId: string) {
         if(!~Collection.OWNER_TYPES.indexOf(ownerType)) {

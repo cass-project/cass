@@ -19,6 +19,7 @@ export interface ProfileExtendedEntity {
     collections: CollectionEntity[];
     profile: ProfileEntity;
     is_own: boolean;
+    subscribed: boolean;
 }
 
 export interface ProfileEntity {

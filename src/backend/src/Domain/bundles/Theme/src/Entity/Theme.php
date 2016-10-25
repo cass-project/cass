@@ -68,6 +68,7 @@ class Theme implements JSONSerializable, IdEntity, SerialEntity
             'parent_id' => $this->hasParent() ? $this->getParent()->getId() : null,
             'position' => $this->getPosition(),
             'preview' => $this->getPreview(),
+            'subscribed' => false,
         ];
     }
 

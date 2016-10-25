@@ -13,6 +13,7 @@ Collection_Entity_Collection:
     - public_options
     - is_protected
     - children
+    - subscribed
   properties:
     id:
       type: number
@@ -76,3 +77,6 @@ Collection_Entity_Collection:
       type: array
       items:
         $ref: '#/definitions/Collection_Entity_Collection'
+    subscribed:
+      type: boolean
+      description: Подписан ли текущий пользователь на эту сущность?

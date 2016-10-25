@@ -8,6 +8,7 @@ Theme_Entity_Theme:
     - description
     - url
     - preview
+    - subscribed
   properties:
     id:
       type: number
@@ -30,3 +31,6 @@ Theme_Entity_Theme:
     preview:
       type: string
       description: Изображение
+    subscribed:
+      type: boolean
+      description: Подписан ли текущий пользователь на эту сущность?

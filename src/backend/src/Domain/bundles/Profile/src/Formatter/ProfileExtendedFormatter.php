@@ -9,6 +9,7 @@ use CASS\Domain\Bundles\Profile\Entity\Profile;
 use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
 use CASS\Domain\Bundles\ProfileCommunities\Entity\ProfileCommunityEQ;
 use CASS\Domain\Bundles\ProfileCommunities\Service\ProfileCommunitiesService;
+use CASS\Domain\Bundles\Subscribe\Service\SubscribeService;
 
 final class ProfileExtendedFormatter
 {
@@ -21,14 +22,19 @@ final class ProfileExtendedFormatter
     /** @var ProfileCommunitiesService */
     private $communityBookmarksService;
 
+    /** @var SubscribeService */
+    private $subscribeService;
+
     public function __construct(
         CollectionService $collectionService,
         CurrentAccountService $currentAccountService,
-        ProfileCommunitiesService $communityBookmarksService
+        ProfileCommunitiesService $communityBookmarksService,
+        SubscribeService $subscribeService
     ) {
         $this->collectionService = $collectionService;
         $this->currentAccountService = $currentAccountService;
         $this->communityBookmarksService = $communityBookmarksService;
+        $this->subscribeService = $subscribeService;
     }
 
     public function format(Profile $profile): array {
@@ -40,7 +46,8 @@ final class ProfileExtendedFormatter
             }, $this->communityBookmarksService->getBookmarksOfProfile($profile->getId())),
             'is_own' => $this->currentAccountService->isAvailable()
                 ? $this->currentAccountService->getCurrentAccount()->getProfiles()->contains($profile)
-                : false
+                : false,
+            'subscribed' => false,
         ];
     }
 
@@ -53,6 +60,8 @@ final class ProfileExtendedFormatter
             }else{
                 $json['children'] = [];
             }
+
+            $json['subscribed'] = false;
 
             return $json;
         }, $tree->getItems());

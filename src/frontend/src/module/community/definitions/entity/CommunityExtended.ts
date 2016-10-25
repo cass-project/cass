@@ -6,4 +6,5 @@ export interface CommunityExtendedEntity
     community: CommunityEntity;
     collections: CollectionEntity[];
     is_own: boolean;
+    subscribed: boolean;
 }
