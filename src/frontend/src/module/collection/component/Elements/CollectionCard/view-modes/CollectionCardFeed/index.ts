@@ -4,7 +4,7 @@ import {CollectionEntity} from "../../../../../definitions/entity/collection";
 import {CollectionCardHelper} from "../../helper";
 import {SubscribeRESTService} from "../../../../../../subscribe/service/SubscribeRESTService";
 import {LoadingManager} from "../../../../../../common/classes/LoadingStatus";
-import {ProfileEntity} from "../../../../../../profile/definitions/entity/Profile";
+
 
 
 @Component({
@@ -19,7 +19,7 @@ export class CollectionCardFeed
 {
     @Input('entity') entity: CollectionEntity;
     @Output('open') openEvent: EventEmitter<CollectionEntity> = new EventEmitter<CollectionEntity>();
-    @Input('profile') profile: ProfileEntity;
+
 
     private isSubscribed: boolean = false;
     private subscribeLoading: LoadingManager = new LoadingManager();
