@@ -65,13 +65,18 @@ div.component-community-card-feed {
   }
 
   footer.theme {
-    padding: 15px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
 
     span.theme {
       font-family: $FONT_FAMILY;
       font-size: 14px;
       font-weight: 400;
       color: material-color("grey", "500");
+      margin-right: auto;
     }
   }
 }

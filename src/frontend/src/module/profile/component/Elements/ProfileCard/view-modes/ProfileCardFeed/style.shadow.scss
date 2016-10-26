@@ -5,11 +5,12 @@ div.component-profile-card-feed {
     @include card(1);
     background-color: #fff;
     width: 350px;
-    height: 620px;
+    height: 640px;
     overflow: hidden;
     border-radius: 3px;
     outline: 1px solid material-color("grey", "300");
     cursor: pointer;
+    position: relative;
   }
 
   .profile-card-content {
@@ -24,6 +25,7 @@ div.component-profile-card-feed {
 
   .profile-about {
     padding: 15px 10px;
+    margin-bottom: 15px;
 
     > h1 {
       font-size: 20px;
@@ -32,6 +34,7 @@ div.component-profile-card-feed {
     }
 
     ul.profile-info {
+
       li {
         padding-left: 30px;
         margin-bottom: 10px;
@@ -65,6 +68,12 @@ div.component-profile-card-feed {
         }
       }
     }
+  }
+
+  .profile-actions {
+    position: absolute;
+    right: 15px;
+    bottom: 20px;
   }
 }
 

@@ -64,14 +64,33 @@ div.component-collection-card-feed {
     }
   }
 
-  footer.theme {
-    padding: 15px;
+  .bottom-section {
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
 
+    &:after {
+      content: '.';
+      display: block;
+      visibility: hidden;
+      height: 0;
+      clear: both;
+    }
+  }
+
+  .subscrible-button {
+    float: right;
+  }
+
+  footer.theme {
+    float: left;
+    margin-top: 15px;
     span.theme {
       font-family: $FONT_FAMILY;
       font-size: 14px;
       font-weight: 400;
       color: material-color("grey", "500");
+
     }
   }
 }

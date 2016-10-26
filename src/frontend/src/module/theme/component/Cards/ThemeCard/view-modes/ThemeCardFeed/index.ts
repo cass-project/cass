@@ -1,6 +1,8 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
 
 import {THEME_PREVIEW_PUBLIC_PREFIX, Theme} from "../../../../../definitions/entity/Theme";
+import {LoadingManager} from "../../../../../../common/classes/LoadingStatus";
+import {SubscribeRESTService} from "../../../../../../subscribe/service/SubscribeRESTService";
 
 @Component({
     selector: 'cass-theme-card-feed',
@@ -17,7 +19,32 @@ export class ThemeCardFeed
     @Input('theme') theme: Theme;
     @Output('go') goEvent: EventEmitter<Theme> = new EventEmitter<Theme>();
 
+    private isSubscribed: boolean = false;
+    private subscribeLoading: LoadingManager = new LoadingManager();
+
+    constructor(
+        private subscribeService: SubscribeRESTService
+    ) {}
+
     go() {
         this.goEvent.emit(this.theme);
+    }
+
+    subscribe() {
+        let loading = this.subscribeLoading.addLoading();
+
+        this.subscribeService.subscribeTheme(this.theme.id).subscribe(response => {
+            this.isSubscribed = true;
+            loading.is = false;
+        });
+    }
+
+    unsubscribe() {
+        let loading = this.subscribeLoading.addLoading();
+
+        this.subscribeService.unsubscribeTheme(this.theme.id).subscribe(response => {
+            this.isSubscribed = false;
+            loading.is = false;
+        });
     }
 }

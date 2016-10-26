@@ -1,7 +1,7 @@
-div.component.component-profile-card-feed.x-navigation-entity.x-navigation-click((click)="open()")
+div.component.component-profile-card-feed.x-navigation-entity.x-navigation-click
   .profile-card
     .profile-card-content
-      .profile-image-container
+      .profile-image-container((click)="open()")
         cass-profile-image([url]="helper.getProfileImageURL()", border="square")
       .profile-about
         h1 {{ helper.getProfileName() }}
@@ -47,3 +47,9 @@ div.component.component-profile-card-feed.x-navigation-entity.x-navigation-click
                 h1 {{ 'registered' | translate }}
                 span {{ helper.getRegistrationDate() }}
       .profile-actions
+        cass-subscribe-button(
+          [subscribed]="isSubscribed",
+          [is-loading]="subscribeLoading.isLoading()",
+          (subscribe)="subscribe()",
+          (unsubscribe)="unsubscribe()"
+        )

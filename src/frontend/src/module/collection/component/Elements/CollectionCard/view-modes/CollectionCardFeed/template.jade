@@ -1,9 +1,9 @@
 div.component.component-collection-card-feed.x-navigation-entity
-  a.card((click)="open($event)", [routerLink]="helper.getRouterParams(entity)")
+  a.card(href="javascript:void(0);")
     .collection-card-content
       .flex-container
         .top-section
-          .collection-image
+          .collection-image((click)="open($event)")
             .image-container([ngStyle]="{'background-image': 'url(' + helper.getImageURL() + ')' }")
           .collection-about
             h1 {{ entity.title }}
@@ -11,3 +11,9 @@ div.component.component-collection-card-feed.x-navigation-entity
         .bottom-section
           footer.theme(*ngIf="helper.hasTheme()")
             span.theme {{ helper.getThemeTitle() }}
+          .subscrible-button
+            cass-subscribe-button(
+            [subscribed]="isSubscribed",
+            [is-loading]="subscribeLoading.isLoading()",
+            (subscribe)="subscribe()",
+            (unsubscribe)="unsubscribe()")

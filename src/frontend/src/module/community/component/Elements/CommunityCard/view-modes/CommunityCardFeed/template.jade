@@ -1,9 +1,9 @@
 div.component.component-community-card-feed.x-navigation-entity
-  a.card((click)="open($event)", [routerLink]="helper.getRouterParams()")
+  a.card()
     .community-card-content
       .flex-container
         .top-section
-          .community-image
+          .community-image((click)="open($event)", [routerLink]="helper.getRouterParams()")
             .image-container([ngStyle]="{'background-image': 'url(' + helper.getImageURL() + ')' }")
           .community-about
             h1 {{ community.title }}
@@ -11,3 +11,8 @@ div.component.component-community-card-feed.x-navigation-entity
         .bottom-section
           footer.theme(*ngIf="helper.hasTheme()")
             span.theme {{ helper.getThemeTitle() }}
+            cass-subscribe-button(
+            [subscribed]="isSubscribed",
+            [is-loading]="subscribeLoading.isLoading()",
+            (subscribe)="subscribe()",
+            (unsubscribe)="unsubscribe()")

@@ -1,0 +1,9 @@
+div.component.component-subscribe-button
+  .state.state-unsubscribed(*ngIf="! isSubscribed()")
+    button(type="button", (click)="subscribe()" , [disabled]="isLoading")
+      i.fa.fa-check
+      span.title Подписаться
+  .state.state-subscribed(*ngIf="isSubscribed()")
+    button(type="button", (click)="unsubscribe()" , [disabled]="isLoading")
+      i.fa.fa-ban
+      span.title Отменить подписку

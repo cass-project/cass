@@ -4,8 +4,8 @@ div.component-theme-card-feed {
   @include card(1);
 
   width: 440px;
-  height: 400px;
   display: inline-block;
+
 
   div.card {
     width: 100%;
@@ -37,7 +37,6 @@ div.component-theme-card-feed {
 
     div.about {
       padding: 20px 13px;
-      height: 80px;
       overflow: hidden;
       text-align: center;
 
@@ -52,6 +51,7 @@ div.component-theme-card-feed {
       p {
         display: block;
         color: material-color("grey", "700");
+        margin-bottom: 15px;
       }
     }
 
