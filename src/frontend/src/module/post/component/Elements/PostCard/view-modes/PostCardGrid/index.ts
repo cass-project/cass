@@ -20,6 +20,8 @@ export class PostCardGrid implements OnChanges
     @Input('post') private post: PostEntity;
     @Output('open-post') private openPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     @Output('open-attachment') private openAttachmentEvent: EventEmitter<AttachmentEntity<any>> = new EventEmitter<AttachmentEntity<any>>();
+    @Output('edit-post') private editPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
+    @Output('delete-post') private deletePostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
     constructor(
         private session: Session
@@ -34,7 +36,9 @@ export class PostCardGrid implements OnChanges
             this.viewMode,
             this.session,
             this.openPostEvent,
-            this.openAttachmentEvent
+            this.openAttachmentEvent,
+            this.editPostEvent, 
+            this.deletePostEvent
         );
     }
 

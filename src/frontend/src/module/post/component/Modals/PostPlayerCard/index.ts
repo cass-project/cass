@@ -18,6 +18,8 @@ export class PostPlayerCard implements OnChanges
     private helper: PostCardHelper;
     private openPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     private openAttachmentEvent: EventEmitter<AttachmentEntity<any>> = new EventEmitter<AttachmentEntity<any>>();
+    private editPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
+    private deletePostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
     @Input('post') post: PostEntity;
 
@@ -31,7 +33,9 @@ export class PostPlayerCard implements OnChanges
             ViewOptionValue.Feed,
             this.session,
             this.openPostEvent,
-            this.openAttachmentEvent
+            this.openAttachmentEvent,
+            this.editPostEvent,
+            this.deletePostEvent
         );
     }
 }

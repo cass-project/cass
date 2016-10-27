@@ -13,7 +13,9 @@ export class PostCardHelper
         public viewMode: ViewOptionValue,
         public session: Session,
         private openPostEvent: EventEmitter<PostEntity>,
-        private openAttachmentEvent: EventEmitter<AttachmentEntity<any>>
+        private openAttachmentEvent: EventEmitter<AttachmentEntity<any>>,
+        private editPostEvent: EventEmitter<PostEntity>,
+        private deletePostEvent: EventEmitter<PostEntity>
     ) {}
 
     private dateCreatedOn: Date;
@@ -84,5 +86,13 @@ export class PostCardHelper
 
     openAttachment(attachment: AttachmentEntity<any>) {
         return this.openAttachmentEvent.emit(attachment);
+    }
+
+    editPost(post: PostEntity){
+        
+    }
+
+    deletePost(post: PostEntity){
+
     }
 }
