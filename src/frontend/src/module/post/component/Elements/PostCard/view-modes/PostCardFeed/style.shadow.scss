@@ -9,6 +9,18 @@ div.component-post-card-feed {
     width: 550px;
     height: 100%;
 
+    .left {
+      flex-basis: 100%;
+    }
+
+    .right {
+      margin-left: 10px;
+      flex-basis: 40px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+
     .post-card-content {
       border-radius: 3px;
       border: 3px solid transparent;
@@ -18,6 +30,7 @@ div.component-post-card-feed {
     .card-header {
       margin-top: 8px;
       margin-bottom: 15px;
+      display: flex;
     }
 
     .title-container {
