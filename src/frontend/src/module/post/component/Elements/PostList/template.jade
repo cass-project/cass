@@ -4,6 +4,9 @@ div.component.component-post-list
       [posts]="posts",
       (open-post)="openPost($event)",
       (open-attachment)="openAttachment($event)",
+      (edit-post)="editPost($event)",
+      (delete-post)="deletePost($event)",
+      (pin-post)="deletePost($event)"
     )
   div(*ngIf="isViewMode('grid')")
     cass-post-list-grid(

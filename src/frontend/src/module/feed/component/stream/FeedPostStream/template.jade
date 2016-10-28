@@ -5,7 +5,10 @@ article.component.component-feed-post-stream
         [posts]="feed.stream.all()",
         [view-mode]="getViewOption()",
         (open-post)="openPost($event)",
-        (open-attachment)="openAttachment($event)"
+        (open-attachment)="openAttachment($event)",
+        (edit-post)="editPost($event)",
+        (delete-post)="deletePost($event)",
+        (pin-post)="deletePost($event)"
       )
     .loading-indicator
       cass-loading-indicator(*ngIf="feed.isLoading()")

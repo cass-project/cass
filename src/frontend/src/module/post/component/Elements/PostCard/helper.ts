@@ -17,7 +17,8 @@ export class PostCardHelper
         private openPostEvent: EventEmitter<PostEntity>,
         private openAttachmentEvent: EventEmitter<AttachmentEntity<any>>,
         private editPostEvent: EventEmitter<PostEntity>,
-        private deletePostEvent: EventEmitter<PostEntity>
+        private deletePostEvent: EventEmitter<PostEntity>,
+        private pinPostEvent: EventEmitter<PostEntity>
     ) {}
 
     private dateCreatedOn: Date;
@@ -93,12 +94,16 @@ export class PostCardHelper
     openAttachment(attachment: AttachmentEntity<any>) {
         return this.openAttachmentEvent.emit(attachment);
     }
-
-    editPost(post: PostEntity){
-        
-    }
-
-    deletePost(post: PostEntity){
-
+    
+    dropDownMenuAction(event: MenuEntity){
+        if(event.action === 'Edit'){
+            this.editPostEvent.emit(this.post);
+        } else
+        if(event.action === 'Delete'){
+            this.deletePostEvent.emit(this.post);
+        } else
+        if(event.action === 'Pin'){
+            this.pinPostEvent.emit(this.post);
+        }
     }
 }

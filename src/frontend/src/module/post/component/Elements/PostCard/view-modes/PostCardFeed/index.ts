@@ -6,6 +6,7 @@ import {ViewOptionValue} from "../../../../../../feed/service/FeedService/option
 import {PostEntity} from "../../../../../definitions/entity/Post";
 import {AttachmentEntity} from "../../../../../../attachment/definitions/entity/AttachmentEntity";
 import {MenuEntity} from "../../../../../../common/component/DropDownMenu/index";
+import {TranslationService} from "../../../../../../i18n/service/TranslationService";
 
 @Component({
     selector: 'cass-post-card-feed',
@@ -15,6 +16,7 @@ import {MenuEntity} from "../../../../../../common/component/DropDownMenu/index"
         require('./style.navigation.shadow.scss'),
     ]
 })
+
 export class PostCardFeed implements OnChanges
 {
     @Input('post') private post: PostEntity;
@@ -22,11 +24,17 @@ export class PostCardFeed implements OnChanges
     @Output('open-attachment') private openAttachmentEvent: EventEmitter<AttachmentEntity<any>> = new EventEmitter<AttachmentEntity<any>>();
     @Output('edit-post') private editPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     @Output('delete-post') private deletePostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
+    @Output('pin-post') private pinPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     
-    private menu: Array<MenuEntity> = [];
+    private menu: Array<MenuEntity> = [
+        {title: this.translation.translate('dropdown.menu.my.post.card.edit'), action: 'Edit'},
+        {title: this.translation.translate('dropdown.menu.my.post.card.delete'), action: 'Delete'},
+        {title: this.translation.translate('dropdown.menu.my.post.card.pin'), action: 'Pin'}
+    ];
 
     constructor(
-        private session: Session
+        private session: Session,
+        private translation: TranslationService
     ) {}
     
     private helper: PostCardHelper;
@@ -42,7 +50,8 @@ export class PostCardFeed implements OnChanges
             this.openPostEvent,
             this.openAttachmentEvent,
             this.editPostEvent,
-            this.deletePostEvent
+            this.deletePostEvent,
+            this.pinPostEvent
         );
     }
 }

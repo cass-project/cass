@@ -5,6 +5,9 @@ article.component.component-post-card
       [view-mode]="viewMode",
       (open-post)="openPost($event)",
       (open-attachment)="openAttachment($event)",
+      (edit-post)="editPost($event)",
+      (delete-post)="deletePost($event)",
+      (pin-post)="deletePost($event)"
     )
     cass-post-card-grid(
       *ngIf="isViewMode('grid')",

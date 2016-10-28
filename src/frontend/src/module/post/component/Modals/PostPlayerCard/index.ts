@@ -21,6 +21,9 @@ export class PostPlayerCard implements OnChanges
     private openAttachmentEvent: EventEmitter<AttachmentEntity<any>> = new EventEmitter<AttachmentEntity<any>>();
     private editPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     private deletePostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
+    private pinPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
+
+
 
     @Input('post') post: PostEntity;
 
@@ -39,7 +42,8 @@ export class PostPlayerCard implements OnChanges
             this.openPostEvent,
             this.openAttachmentEvent,
             this.editPostEvent,
-            this.deletePostEvent
+            this.deletePostEvent,
+            this.pinPostEvent
         );
     }
 }

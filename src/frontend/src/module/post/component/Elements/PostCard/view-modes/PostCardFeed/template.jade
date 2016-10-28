@@ -5,7 +5,7 @@ div.component.component-post-card-feed.x-navigation-entity.x-navigation-click
         .left
           cass-profile-card-header([profile]="helper.getProfile()", [time]="helper.getPostDateCreatedOn()")
         .right
-          cass-dropdown-menu([menu]='helper.getMenu()')
+          cass-dropdown-menu([menu]='helper.getMenu()', (clickInMenu)="helper.dropDownMenuAction($event)")
       .card-content
         .content-container(*ngIf="helper.hasContent()")
           .title-container(*ngIf="helper.hasTitle()")

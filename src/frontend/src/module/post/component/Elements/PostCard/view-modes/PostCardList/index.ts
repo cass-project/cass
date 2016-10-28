@@ -24,6 +24,7 @@ export class PostCardList implements OnChanges
     @Output('open-attachment') private openAttachmentEvent: EventEmitter<AttachmentEntity<any>> = new EventEmitter<AttachmentEntity<any>>();
     @Output('edit-post') private editPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     @Output('delete-post') private deletePostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
+    @Output('pin-post') private pinPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
     private menu: Array<MenuEntity> = [];
 
@@ -43,7 +44,8 @@ export class PostCardList implements OnChanges
             this.openPostEvent,
             this.openAttachmentEvent,
             this.editPostEvent,
-            this.deletePostEvent
+            this.deletePostEvent,
+            this.pinPostEvent
         );
     }
 

@@ -11,7 +11,7 @@ import {Component, Input, Output, EventEmitter, ViewChild, ElementRef} from "@an
 export class DropDownMenu
 {
     @Input('menu') private menu: Array<MenuEntity>;
-    @Output('clickInMenu') private clickInMenu: EventEmitter<MenuEntity>; 
+    @Output('clickInMenu') private clickInMenu: EventEmitter<MenuEntity> = new EventEmitter<MenuEntity>();
     @ViewChild('dropDownMenu') private dropDownMenu: ElementRef;
     
     private dropDownMenuExpanded: boolean = false;
@@ -20,6 +20,10 @@ export class DropDownMenu
 
     hideDropDownMenu(){
         this.dropDownMenuExpanded = false;
+    }
+
+    clickOnElement(menuElement: MenuEntity){
+        this.clickInMenu.emit(menuElement);
     }
 
     handleClick(event:any) {
@@ -43,5 +47,5 @@ export class DropDownMenu
 export interface MenuEntity
 {
     title: string;
-    event: void;
+    action: string;
 }

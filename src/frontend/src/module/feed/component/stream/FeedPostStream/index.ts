@@ -6,6 +6,7 @@ import {PostIndexedEntity, PostEntity} from "../../../../post/definitions/entity
 import {ContentPlayerService} from "../../../../player/service/ContentPlayerService/service";
 import {PostPlayerService} from "../../../../post/component/Modals/PostPlayer/service";
 import {PostListOpenAttachmentEvent} from "../../../../post/component/Elements/PostList/index";
+import {PostRESTService} from "../../../../post/service/PostRESTService";
 
 @Component({
     selector: 'cass-feed-post-stream',
@@ -20,7 +21,8 @@ export class FeedPostStream
         private feed: FeedService<PostIndexedEntity>,
         private contentPlayer: ContentPlayerService,
         private postPlayer: PostPlayerService,
-        private options: FeedOptionsService
+        private options: FeedOptionsService,
+        private postRESTService: PostRESTService
     ) {}
     
     getViewOption() {
@@ -33,6 +35,18 @@ export class FeedPostStream
 
     hasStream() {
         return typeof this.feed.stream === "object";
+    }
+
+    editPost(post: PostEntity){
+        console.log(post)
+    }
+
+    deletePost(post: PostEntity){
+        console.log(post)
+    }
+
+    pinPost(post: PostEntity){
+        console.log(post)
     }
 
     openPost(post: PostEntity) {

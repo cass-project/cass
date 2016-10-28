@@ -20,6 +20,9 @@ export class PostCard
     @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open-post') private openPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     @Output('open-attachment') private openAttachmentEvent: EventEmitter<AttachmentEntity<any>> = new EventEmitter<AttachmentEntity<any>>();
+    @Output('edit-post') private editPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
+    @Output('delete-post') private deletePostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
+    @Output('pin-post') private pinPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
     isViewMode(viewMode: ViewOptionValue): boolean {
         return this.viewMode === viewMode;
@@ -31,6 +34,18 @@ export class PostCard
 
     openAttachment(attachment: AttachmentEntity<any>) {
         this.openAttachmentEvent.emit(attachment);
+    }
+
+    editPost(post: PostEntity){
+        this.editPostEvent.emit(post);
+    }
+
+    deletePost(post: PostEntity){
+        this.deletePostEvent.emit(post)
+    }
+
+    pinPost(post: PostEntity){
+        this.pinPostEvent.emit(post)
     }
 }
 

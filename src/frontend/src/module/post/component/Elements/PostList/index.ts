@@ -20,6 +20,9 @@ export class PostList
     @Input('view-mode') viewMode: ViewOptionValue = ViewOptionValue.Feed;
     @Output('open-post') openPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     @Output('open-attachment') openAttachmentEvent: EventEmitter<PostListOpenAttachmentEvent> = new EventEmitter<PostListOpenAttachmentEvent>();
+    @Output('edit-post') private editPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
+    @Output('delete-post') private deletePostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
+    @Output('pin-post') private pinPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
     isViewMode(viewMode: ViewOptionValue): boolean {
         return this.viewMode === viewMode;
@@ -29,6 +32,18 @@ export class PostList
         this.openPostEvent.emit(post);
     }
 
+    editPost(post: PostEntity){
+        this.editPostEvent.emit(post);
+    }
+
+    deletePost(post: PostEntity){
+        this.deletePostEvent.emit(post)
+    }
+
+    pinPost(post: PostEntity){
+        this.pinPostEvent.emit(post)
+    }
+    
     openAttachment(attachment: AttachmentEntity<any>) {
         let post: PostEntity;
 
