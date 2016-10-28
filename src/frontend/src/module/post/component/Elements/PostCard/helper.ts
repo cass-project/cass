@@ -5,12 +5,14 @@ import {PostEntity} from "../../../definitions/entity/Post";
 import {Session} from "../../../../session/Session";
 import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
 import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
+import {MenuEntity} from "../../../../common/component/DropDownMenu/index";
 
 export class PostCardHelper
 {
     constructor(
         public post: PostEntity,
         public viewMode: ViewOptionValue,
+        public menu: Array<MenuEntity>,
         public session: Session,
         private openPostEvent: EventEmitter<PostEntity>,
         private openAttachmentEvent: EventEmitter<AttachmentEntity<any>>,
@@ -66,6 +68,10 @@ export class PostCardHelper
         }else{
             return '';
         }
+    }
+
+    getMenu(){
+        return this.menu;
     }
 
     getContent(): string {

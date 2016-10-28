@@ -9,18 +9,6 @@ div.component-post-card-feed {
     width: 550px;
     height: 100%;
 
-    button.fa-ellipsis-button {
-      border: 0;
-      background-color: transparent;
-      cursor: pointer;
-      color: material-color("grey", "400");
-      font-size: 16px;
-
-      &:hover {
-        color: material-color("grey", "700");
-      }
-    }
-
     .left {
       flex-basis: 100%;
     }

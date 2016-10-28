@@ -7,7 +7,7 @@ div.component.component-post-card-list.x-navigation-entity
       div.content
         div.profile-info
           div.profile-image-container
-            cass-profile-image([url]="getProfileImageURL()")
+              cass-profile-image([url]="getProfileImageURL()")
           span.profile-name {{ getProfileGreetings() }}
           span.date-created-on {{ getDateCreatedOn() }}
         .post-title-container(*ngIf="helper.hasTitle()")

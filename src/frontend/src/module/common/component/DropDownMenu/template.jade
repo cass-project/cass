@@ -1,0 +1,10 @@
+div.dropdown(#dropDownMenu)
+    button.fa-ellipsis-button.dropdown-menu((click)="dropDownMenuExpanded = !dropDownMenuExpanded", type = "button")
+        i.fa.fa-ellipsis-v
+    ul.dropdown-content(*ngIf='dropDownMenuExpanded')
+        li
+            a(href="javascript:void(0)") HTML
+        li
+            a(href="javascript:void(0)") HTML
+        li
+            a(href="javascript:void(0)") HTML

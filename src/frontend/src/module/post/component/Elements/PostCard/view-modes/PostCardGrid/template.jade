@@ -5,6 +5,7 @@ div.component.component-post-card-grid.x-navigation-entity
         .profile-image.x-navigation-click(*ngIf="!helper.hasAttachment()", (click)="openPost(post)")
           .profile-image-container
             cass-profile-image([url]="getProfileImageURL()")
+        i.fa.fa-ellipsis-v
         .attachment-container(*ngIf="helper.hasAttachment()")
           cass-attachment([attachment]="helper.getAttachment()", (open)="helper.openAttachment($event)", view-mode="grid")
     .bottom

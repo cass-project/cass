@@ -5,8 +5,7 @@ div.component.component-post-card-feed.x-navigation-entity.x-navigation-click
         .left
           cass-profile-card-header([profile]="helper.getProfile()", [time]="helper.getPostDateCreatedOn()")
         .right
-          button.fa-ellipsis-button((click)="helper.deletePost(post)", type = "button")
-            i.fa.fa-ellipsis-v
+          cass-dropdown-menu([menu]='helper.getMenu()')
       .card-content
         .content-container(*ngIf="helper.hasContent()")
           .title-container(*ngIf="helper.hasTitle()")

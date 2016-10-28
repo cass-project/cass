@@ -13,6 +13,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {ModalBoxComponent} from "./component/Modal/box/index";
 import {ModalComponent} from "./component/Modal/index";
 import {LoadingLinearIndicator} from "./component/LoadingLinearIndicator/index";
+import {DropDownMenu} from "./component/DropDownMenu/index";
 
 export const CASSCommonModule = {
     declarations: [
@@ -29,6 +30,7 @@ export const CASSCommonModule = {
         ModalBoxComponent,
         ModalComponent,
         LoadingLinearIndicator,
+        DropDownMenu
     ],
     providers: [
         RESTService,

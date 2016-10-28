@@ -7,6 +7,7 @@ import {ViewOptionValue} from "../../../../../../feed/service/FeedService/option
 import {AttachmentEntity} from "../../../../../../attachment/definitions/entity/AttachmentEntity";
 import moment = require("moment");
 import {queryImage, QueryTarget} from "../../../../../../avatar/functions/query";
+import {MenuEntity} from "../../../../../../common/component/DropDownMenu/index";
 
 @Component({
     selector: 'cass-post-card-list',
@@ -24,6 +25,8 @@ export class PostCardList implements OnChanges
     @Output('edit-post') private editPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     @Output('delete-post') private deletePostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
+    private menu: Array<MenuEntity> = [];
+
     constructor(
         private session: Session
     ) {}
@@ -35,6 +38,7 @@ export class PostCardList implements OnChanges
         this.helper = new PostCardHelper(
             this.post,
             this.viewMode,
+            this.menu,
             this.session,
             this.openPostEvent,
             this.openAttachmentEvent,

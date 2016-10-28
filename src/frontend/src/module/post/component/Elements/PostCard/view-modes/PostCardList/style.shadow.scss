@@ -5,6 +5,29 @@ div.component-post-card-list {
   padding: 15px;
   background-color: #fff;
 
+  button.fa-ellipsis-button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    color: material-color("grey", "400");
+    font-size: 16px;
+
+    &:hover {
+      color: material-color("grey", "700");
+    }
+  }
+
+  .left {
+    flex-basis: 100%;
+  }
+
+  .right {
+    margin-left: 10px;
+    flex-basis: 40px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
   .post-card-content {
   }
 

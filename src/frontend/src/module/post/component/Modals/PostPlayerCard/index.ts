@@ -5,6 +5,7 @@ import {PostCardHelper} from "../../Elements/PostCard/helper";
 import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
 import {Session} from "../../../../session/Session";
 import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
+import {MenuEntity} from "../../../../common/component/DropDownMenu/index";
 
 @Component({
     selector: 'cass-post-player-card',
@@ -23,6 +24,8 @@ export class PostPlayerCard implements OnChanges
 
     @Input('post') post: PostEntity;
 
+    private menu: Array<MenuEntity> = [];
+
     constructor(
         private session: Session
     ) {}
@@ -31,6 +34,7 @@ export class PostPlayerCard implements OnChanges
         this.helper = new PostCardHelper(
             this.post,
             ViewOptionValue.Feed,
+            this.menu,
             this.session,
             this.openPostEvent,
             this.openAttachmentEvent,
