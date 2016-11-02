@@ -13,11 +13,14 @@ class ListSubscribedThemesCommand extends Command
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
-            $bodyJson = json_decode($request->getBody()->getContents(), true);
+            $bodyJson = $request->getParsedBody();
+            if(empty($bodyJson)){
+                $bodyJson = json_decode($request->getBody()->getContents(), true);
+            }
             $profileId = $request->getAttribute('profileId');
             $profile = $this->profileService->getProfileById($profileId);
 
-            $seek = new Seek(100, $bodyJson['offset'], $bodyJson['limit']);
+            $seek = new Seek(100, (int) $bodyJson['offset'], (int) $bodyJson['limit']);
             $entities = $this->subscribeService->listSubscribedThemes($profile, $seek);
 
             return $responseBuilder
