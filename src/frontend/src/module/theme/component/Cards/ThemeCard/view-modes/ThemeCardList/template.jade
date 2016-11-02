@@ -3,7 +3,7 @@ div.component.component-theme-card-list-item.x-navigation-entity
     .flexbox-container
       .preview.x-navigation-click((click)="go(theme)")
         .image-container
-          .image(style="background-image: url('{{ prefix }}/{{ theme.preview }}')")
+          .image([ngStyle]="{'background-image': 'url(' + prefix + '/' + theme.preview + ')' }")
       .title((click)="go(theme)")
         span.text {{ theme.title }}
       .description

@@ -53,11 +53,11 @@ let moduleDeclaration = {
     bootstrap: [App]
 };
 
-for(let module of CASS_MODULES) {
-    if(module['declarations']) moduleDeclaration.declarations.push(<any>module['declarations']);
-    if(module['routes']) moduleDeclaration.declarations.push(<any>module['routes']);
-    if(module['providers']) moduleDeclaration.providers.push(<any>module['providers']);
-    if(module['imports']) moduleDeclaration.imports.push(<any>module['imports']);
+for(let cassModule of CASS_MODULES) {
+    if(cassModule['declarations']) moduleDeclaration.declarations.push(<any>cassModule['declarations']);
+    if(cassModule['routes']) moduleDeclaration.declarations.push(<any>cassModule['routes']);
+    if(cassModule['providers']) moduleDeclaration.providers.push(<any>cassModule['providers']);
+    if(cassModule['imports']) moduleDeclaration.imports.push(<any>cassModule['imports']);
 }
 
 @NgModule(moduleDeclaration)

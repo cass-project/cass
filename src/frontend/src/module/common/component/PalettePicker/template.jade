@@ -13,7 +13,6 @@
       button.palette-button(
         type='button',
         [ngClass]="{'palette-button-inactive': palette !== value}",
-        [style.background-color]='palette.background.hexCode',
-        [style.border-color]='palette.border.hexCode',
+        [ngStyle]="{'background-color': 'palette.background.hexCode', 'border-color': 'palette.border.hexCode'}",
         (click)='select(palette)'
       )

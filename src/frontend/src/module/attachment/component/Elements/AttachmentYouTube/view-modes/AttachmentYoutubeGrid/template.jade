@@ -1,4 +1,4 @@
 div.component.component-attachment-youtube-grid((click)="open(helper.attachment)")
   div.attachment-type-icon
     div.fa-icon-container &nbsp;
-  div.cover(style="background-image: url('{{ helper.getPreviewImageURL() }}')")
+  div.cover([ngStyle]="{'background-image': 'url(helper.getPreviewImageURL())'}")

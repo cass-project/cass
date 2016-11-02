@@ -1,2 +1,2 @@
 div.component.component-attachment-image-grid((click)="open(helper.attachment)")
-  div.cover(style="background-image: url('{{ helper.getPreviewImageURL() }}')")
+  div.cover([ngStyle]="{'background-image': 'url(helper.getPreviewImageURL())'}")

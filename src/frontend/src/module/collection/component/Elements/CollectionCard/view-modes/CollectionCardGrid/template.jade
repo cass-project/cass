@@ -2,7 +2,7 @@ div.component.component-collection-card-grid.x-navigation-entity
   a((click)="open($event)", [routerLink]="helper.getRouterParams(entity)")
     .collection-card-content
       .cover-collection-image
-        .collection-image-container(style="background-image: url('{{ helper.getImageURL() }}');")
+        .collection-image-container([ngStyle]="{'background-image': 'url(helper.getImageURL())'}")
       .cover-collection-about
         .collection-name
           h1 {{ helper.getCollectionName() }}
