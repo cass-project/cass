@@ -4,7 +4,7 @@ div.component.component-collection-card-feed.x-navigation-entity
       .flex-container
         .top-section
           .collection-image((click)="open($event)")
-            .image-container([ngStyle]="{'background-image': 'url(helper.getImageURL())' }")
+            .image-container([ngStyle]="{'background-image': 'url(' + helper.getImageURL() + ')' }")
           .collection-about
             h1 {{ entity.title }}
             p {{ entity.description }}

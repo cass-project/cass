@@ -2,7 +2,7 @@ div.component.component-profile-card-grid.x-navigation-entity
   .profile-card-content
     .x-navigation-click((click)="open()")
       .cover-profile-image
-        .profile-image-container([ngStyle]="{'background-image': 'url(helper.getProfileImageURL())'}")
+        .profile-image-container([ngStyle]="{'background-image': 'url(' + helper.getProfileImageURL() + ')'}")
     .cover-profile-about
       .profile-name
         h1 {{ helper.getProfileName() }}
