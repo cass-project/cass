@@ -2,6 +2,6 @@ div.component.component-theme-card-grid.x-navigation-entity
     .card.x-navigation-click((click)="go()")
       .theme-card-content
         .image-container
-          .image(style="background-image: url('{{prefix}}/{{ theme.preview }}')")
+          .image([ngStyle]="{'background-image': 'url(' + prefix + '/' + theme.preview + ')' }")
     .about
       h1 {{ theme.title }}

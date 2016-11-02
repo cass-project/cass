@@ -2,4 +2,4 @@ div.component.component-backdrop
   div.preview-backdrop.preview-backdrop-none(*ngIf="is.None()")
   div.preview-backdrop.preview-backdrop-none(*ngIf="is.Color()")
   div.preview-backdrop.preview-backdrop-image(*ngIf="is.Preset() || is.Uploaded()")
-    div.image(style="background-image: url('{{ getBackdropImage() }}')")
+    div.image([ngStyle]="{'background-image': 'url(' + getBackdropImage() + ')'}")

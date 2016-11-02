@@ -2,4 +2,4 @@ div.component.component-attachment-page-grid((click)="open(helper.attachment)")
   div.attachment-type-icon
     div.fa-icon-container
       i.fa.fa-external-link
-  div.cover(*ngIf="helper.hasImage()", style="background-image: url('{{ helper.getImageURL() }}')")
+  div.cover(*ngIf="helper.hasImage()", [ngStyle]="{'background-image': 'url(' + helper.getImageURL() + ')'}")

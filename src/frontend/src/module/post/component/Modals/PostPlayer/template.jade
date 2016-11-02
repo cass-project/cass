@@ -1,5 +1,5 @@
 div.component.component-post-player
   div(*ngIf="service.isOpened()")
-    cass-modal(style="dark", (out-click)="service.close()")
+    cass-modal([ngStyle]="dark", (out-click)="service.close()")
       cass-modal-box(width="90%",height="900px")
         cass-post-player-card(*ngIf="service.hasPost()", [post]="service.getPost()")

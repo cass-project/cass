@@ -2,7 +2,7 @@ div.component.component-community-card-grid.x-navigation-entity
   a((click)="open($event)", [routerLink]="helper.getRouterParams()")
     .community-card-content
       .cover-community-image
-        .community-image-container(style="background-image: url('{{ helper.getImageURL() }}');")
+        .community-image-container([ngStyle]="{'background-image': 'url(' + helper.getImageURL() + ')'}")
       .cover-community-about
         .community-name
           h1 {{ helper.getCommunityTitle() }}

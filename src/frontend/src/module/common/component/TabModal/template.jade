@@ -18,5 +18,5 @@ article.component.component-tab-modal
             )
               span {{tab.title}}
     .tab-content
-      .tab-content-container([style.min-height.px]="minHeight")
+      .tab-content-container([ngStyle]="{'min-height.px': 'minHeight'}")
         ng-content
