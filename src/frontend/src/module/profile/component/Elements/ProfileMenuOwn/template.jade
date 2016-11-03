@@ -28,6 +28,14 @@ div.component.component-profile-menu-own
         )
           i.fa.fa-fw.fa-ellipsis-h
           span.title {{ collection.title }}
+
+      li.yoozer-left-menu-item
+        a([routerLink]='["/profile/current/subscriptions"]',
+        routerLinkActive="active",
+        [routerLinkActiveOptions]="{ exact: true }"
+        )
+          i.fa.fa-fw.fa-check-square-o
+          span.title Мои подписки
   div.yoozer-left-menu
     ul.yoozer-left-menu-list
       li.yoozer-left-menu-item

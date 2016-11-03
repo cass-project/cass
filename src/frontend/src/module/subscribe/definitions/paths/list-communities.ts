@@ -6,7 +6,7 @@ export interface ListCommunities extends Success200
     entities: SubscriptionEntity[];
 }
 
-export interface ListCommunitiesRequest extends Success200
+export interface ListCommunitiesRequest
 {
     limit: number,
     offset: number

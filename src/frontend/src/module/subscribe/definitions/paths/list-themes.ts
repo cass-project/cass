@@ -6,7 +6,7 @@ export interface ListThemes extends Success200
     entities: SubscriptionEntity[];
 }
 
-export interface ListThemesRequest extends Success200
+export interface ListThemesRequest
 {
     limit: number,
     offset: number

@@ -33,6 +33,12 @@ import {ProfileHeader} from "./component/Elements/ProfileHeader/index";
 import {ProfileBackdrop} from "./component/Modals/ProfileBackdrop/index";
 import {ProfileCardsList} from "./component/Elements/ProfileCardsList/index";
 import {CreateProfilePlaceholder} from "./component/Modals/ProfileSwitcher/component/CreateProfilePlaceholder/index";
+import {ProfileSubscriptionsRoute} from "./route/ProfileSubscriptionsRoute/index";
+import {ThemesSubscriptionsRoute} from "./route/ProfileSubscriptionsRoute/routes/ThemesSubscriptionsRoute/index";
+import {CollectionSubscriptionsRoute} from "./route/ProfileSubscriptionsRoute/routes/CollectionSubscriptionsRoute/index";
+import {CommunitiesSubscriptionsRoute} from "./route/ProfileSubscriptionsRoute/routes/CommunitiesSubscriptionsRoute/index";
+import {ProfilesSubscriptionsRoute} from "./route/ProfileSubscriptionsRoute/routes/ProfilesSubscriptionsRoute/index";
+import {ProfileSubscriptionsDashboardRoute} from "./route/ProfileSubscriptionsRoute/routes/ProfileSubscriptionsDashboardRoute/index";
 
 export const CASSProfileModule = {
     declarations: [
@@ -73,6 +79,15 @@ export const CASSProfileModule = {
         ProfileCollectionsListRoute,
         ProfileCollectionRoute,
         ProfileCollectionNotFoundRoute,
+        ProfileSubscriptionsRoute,
+        ThemesSubscriptionsRoute,
+        CollectionSubscriptionsRoute,
+        CommunitiesSubscriptionsRoute,
+        ProfilesSubscriptionsRoute,
+        ProfileSubscriptionsDashboardRoute
+
+
+
     ],
     providers: [
         ProfileModals,

@@ -21,6 +21,13 @@ import {CommunitiesRoute} from "../../module/public/route/sources/CommunitiesRou
 import {CommunityResolve} from "../../module/community/resolve/CommunityResolve";
 import {ContentRoute} from "../../module/public/route/sources/ContentRoute/route/ContentRoute/index";
 import {ThemesRoute} from "../../module/public/route/sources/ContentRoute/route/ThemesRoute/index";
+import {ProfileSubscriptionsRoute} from "../../module/profile/route/ProfileSubscriptionsRoute/index";
+import {ThemesSubscriptionsRoute} from "../../module/profile/route/ProfileSubscriptionsRoute/routes/ThemesSubscriptionsRoute/index";
+import {CollectionSubscriptionsRoute} from "../../module/profile/route/ProfileSubscriptionsRoute/routes/CollectionSubscriptionsRoute/index";
+import {CommunitiesSubscriptionsRoute} from "../../module/profile/route/ProfileSubscriptionsRoute/routes/CommunitiesSubscriptionsRoute/index";
+import {ProfilesSubscriptionsRoute} from "../../module/profile/route/ProfileSubscriptionsRoute/routes/ProfilesSubscriptionsRoute/index";
+import {ProfileSubscriptionsDashboardRoute} from "../../module/profile/route/ProfileSubscriptionsRoute/routes/ProfileSubscriptionsDashboardRoute/index";
+
 
 const appRoutes: Routes = [
     {
@@ -47,6 +54,38 @@ const appRoutes: Routes = [
                         path: '',
                         component: ProfileDashboardRoute
                     },
+                    {
+                        path: 'subscriptions',
+                        component: ProfileSubscriptionsRoute,
+                        children: [
+
+                            {
+                                path: '',
+                                component: ProfileSubscriptionsDashboardRoute
+                            },
+
+                            {
+                                path: 'themes',
+                                component: ThemesSubscriptionsRoute,
+                            },
+
+                            {
+                                path: 'collections',
+                                component: CollectionSubscriptionsRoute,
+                            },
+
+                            {
+                                path: 'communities',
+                                component: CommunitiesSubscriptionsRoute,
+                            },
+
+                            {
+                                path: 'profiles',
+                                component: ProfilesSubscriptionsRoute,
+                            }
+                        ]
+                    },
+
                     {
                         path: 'collections',
                         component: ProfileCollectionsRoute,

@@ -1,0 +1,6 @@
+.component.component-profile-profiles-subscriptions-route
+  div
+    h1 Люди
+      .profile-card-container
+        div(*ngFor = "let response of listProfiles")
+          cass-profile-card([response]="response")
