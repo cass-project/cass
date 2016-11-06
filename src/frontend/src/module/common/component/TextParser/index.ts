@@ -18,6 +18,7 @@ import {Component, Input, ViewEncapsulation} from "@angular/core";
 export class TextParser
 {
     @Input('text') text: string;
+
     private whiteList = [
         "p\/home.*"  
     ];

@@ -12,11 +12,12 @@ import {PostFormModel} from "./model";
 import {AttachmentRESTService} from "../../../../attachment/service/AttachmentRESTService";
 
 @Component({
+    selector: 'cass-post-form',
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
-    ],selector: 'cass-post-form'})
-
+    ],
+})
 export class PostForm implements OnInit, AfterViewInit
 {
     static DEFAULT_POST_TYPE = 'default';
@@ -145,9 +146,15 @@ export class PostForm implements OnInit, AfterViewInit
 
     reset() {
         this.model.reset();
-        this.focused = false; ``;
+        this.focused = false;
         this.linkRequested = false;
         this.contentTextArea.nativeElement.blur();
+
+        console.log('wtf');
+
+        [this.contentTextArea.nativeElement, this.titleTextArea.nativeElement].forEach(elem => {
+            elem.style.height = 'auto';
+        });
     }
 
     hasAttachments(): boolean {

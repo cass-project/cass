@@ -7,8 +7,13 @@ import {ProfileEntity} from "../../../../profile/definitions/entity/Profile";
 import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
 import {MenuEntity} from "../../../../common/component/DropDownMenu/index";
 
+var truncate = require('truncate');
+
 export class PostCardHelper
 {
+    public static STR_LENGTH_TITLE = 32;
+    public static STR_LENGTH_MARKDOWN_PREVIEW = 600;
+
     constructor(
         public post: PostEntity,
         public viewMode: ViewOptionValue,
@@ -48,12 +53,7 @@ export class PostCardHelper
     }
 
     hasTitle(): boolean {
-        let hasPostTitle = this.post.title.has && this.post.title.value.length > 0;
-        let hasAttachmentTitle = (this.post.attachments.length > 0)
-            && (typeof this.post.attachments[0].title === "string")
-            && (this.post.attachments[0].title.length > 0);
-
-        return hasPostTitle || hasAttachmentTitle;
+        return this.getTitle().length > 0;
     }
 
     getTitle(): string {
@@ -67,16 +67,20 @@ export class PostCardHelper
         }else if(hasAttachmentTitle) {
             return this.post.attachments[0].title;
         }else{
-            return '';
+            return truncate(String(this.post.content), PostCardHelper.STR_LENGTH_TITLE, { ellipsis: '...' });
         }
     }
 
-    getMenu(){
+    getMenu() {
         return this.menu;
     }
 
     getContent(): string {
         return this.post.content;
+    }
+
+    getContentMarkdownPreview(): string {
+        return truncate(String(this.getContent()), PostCardHelper.STR_LENGTH_MARKDOWN_PREVIEW, { ellipsis: '...' });
     }
 
     hasContent(): boolean {

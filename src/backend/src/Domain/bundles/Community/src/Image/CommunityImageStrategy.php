@@ -47,7 +47,7 @@ final class CommunityImageStrategy extends SquareImageStrategy
             throw new \Exception('No title available');
         }
 
-        return substr($this->community->getTitle(), 0, 1);
+        return mb_substr($this->community->getTitle(), 0, 1);
     }
 
     public function getFilesystem(): FilesystemInterface

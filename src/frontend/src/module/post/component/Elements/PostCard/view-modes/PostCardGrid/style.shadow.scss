@@ -36,6 +36,7 @@ div.component-post-card-grid {
 
     .top {
       flex-basis: 100%;
+      position: relative;
     }
 
     .bottom {
@@ -73,29 +74,41 @@ div.component-post-card-grid {
     position: relative;
     overflow: hidden;
 
-    .attachment-controls {
-      position: absolute;
-      bottom: 5px;
-      right: 5px;
-      z-index: 1;
-
-      .attachment-icon {
-        $ICON_SIZE: 16px;
-
-        display: inline-block;
-        height: $ICON_SIZE;
-        font-size: $ICON_SIZE;
-        text-align: center;
-        color: rgba(255, 255, 255, 0.9);
-        background-color: rgba(0, 0, 0, 0.7);
-        border: 3px solid rgba(0, 0, 0, 0.2);
-        padding: 3px;
-        border-radius: 3px;
-      }
-    }
-
     .attachment {
       z-index: 0;
+    }
+  }
+
+  .text-container {
+    width: 100%;
+    height: 113px;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+
+    .contents {
+      zoom: 0.3;
+    }
+  }
+
+  .post-controls {
+    position: absolute;
+    bottom: 7px;
+    right: 7px;
+    z-index: 1;
+
+    .post-icon {
+      $ICON_SIZE: 16px;
+
+      display: inline-block;
+      height: $ICON_SIZE;
+      font-size: $ICON_SIZE;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 3px solid rgba(0, 0, 0, 0.2);
+      padding: 3px;
+      border-radius: 3px;
     }
   }
 

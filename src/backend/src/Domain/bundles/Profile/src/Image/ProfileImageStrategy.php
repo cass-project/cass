@@ -40,7 +40,7 @@ final class ProfileImageStrategy extends SquareImageStrategy
 
     public function getLetter(): string
     {
-        return substr($this->profile->getGreetings()->__toString(), 0, 1);
+        return mb_substr($this->profile->getGreetings()->__toString(), 0, 1);
     }
 
     public function getFilesystem(): FilesystemInterface

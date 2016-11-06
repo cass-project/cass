@@ -53,7 +53,7 @@ export class PostCardGrid implements OnChanges
                 return 'fa fa-file-o';
             }
         }else{
-            return 'fa fa-file-o';
+            return 'fa fa-file-text-o';
         }
     }
 

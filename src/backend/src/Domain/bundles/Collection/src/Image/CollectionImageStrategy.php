@@ -40,7 +40,7 @@ final class CollectionImageStrategy extends SquareImageStrategy
 
     public function getLetter(): string
     {
-        return substr($this->collection->getTitle(), 0, 1);
+        return mb_substr($this->collection->getTitle(), 0, 1);
     }
 
     public function getFilesystem(): FilesystemInterface

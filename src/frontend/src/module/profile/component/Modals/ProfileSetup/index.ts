@@ -109,10 +109,11 @@ export class ProfileSetup
             requests.interestingIn,
             requests.expertIn,
         ]).subscribe(
-            success => {
+            response => {
                 this.profile.is_initialized = true;
                 this.messages.push(MessageBusNotificationsLevel.Info, 'Ваши данные сохранены');
                 this.router.navigate(['/profile/current']);
+                this.successEvent.emit(this.profile);
             },
             error => {
                 this.screens.goto(ProfileSetupScreen.ExpertIn);
