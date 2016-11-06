@@ -21,7 +21,8 @@ WebpackConfigBuilder.prototype = {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
       },
       watchOptions: {
-        poll: true
+        pull: true,
+        ignored: /node_modules/
       },
       module: {
         loaders: [

@@ -20,6 +20,7 @@ import {MenuEntity} from "../../../../../../common/component/DropDownMenu/index"
 export class PostCardGrid implements OnChanges
 {
     @Input('post') private post: PostEntity;
+    @Input('show-controls') showControls: boolean = true;
     @Output('open-post') private openPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     @Output('open-attachment') private openAttachmentEvent: EventEmitter<AttachmentEntity<any>> = new EventEmitter<AttachmentEntity<any>>();
     @Output('edit-post') private editPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
@@ -28,12 +29,33 @@ export class PostCardGrid implements OnChanges
 
     private menu: Array<MenuEntity> = [];
 
+    private static ICONS_MAP = {
+        'image': 'fa fa-camera-retro',
+        'youtube': 'fa fa-film',
+        'webm': 'fa fa-film',
+        'page': 'fa fa-external-link',
+    };
+
     constructor(
         private session: Session
     ) {}
 
     private helper: PostCardHelper;
     private viewMode: ViewOptionValue = ViewOptionValue.Grid;
+
+    getFAIcon(): string {
+        if(this.helper.hasAttachment()) {
+            let resource = this.post.attachments[0].link.resource;
+
+            if(PostCardGrid.ICONS_MAP.hasOwnProperty(resource)) {
+                return PostCardGrid.ICONS_MAP[resource];
+            }else{
+                return 'fa fa-file-o';
+            }
+        }else{
+            return 'fa fa-file-o';
+        }
+    }
 
     ngOnChanges() {
         this.helper = new PostCardHelper(

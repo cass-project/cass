@@ -1,6 +1,7 @@
 @import "./../../../../../../../styles/globals.scss";
 
 div.component-post-card-grid {
+  position: relative;
   width: 100%;
   height: 100%;
 
@@ -31,6 +32,7 @@ div.component-post-card-grid {
     display: flex;
     flex-direction: column;
     height: 100%;
+    z-index: 0;
 
     .top {
       flex-basis: 100%;
@@ -68,6 +70,33 @@ div.component-post-card-grid {
   .attachment-container {
     width: 100%;
     height: 100%;
+    position: relative;
+    overflow: hidden;
+
+    .attachment-controls {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      z-index: 1;
+
+      .attachment-icon {
+        $ICON_SIZE: 16px;
+
+        display: inline-block;
+        height: $ICON_SIZE;
+        font-size: $ICON_SIZE;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.9);
+        background-color: rgba(0, 0, 0, 0.7);
+        border: 3px solid rgba(0, 0, 0, 0.2);
+        padding: 3px;
+        border-radius: 3px;
+      }
+    }
+
+    .attachment {
+      z-index: 0;
+    }
   }
 
   .card-title {

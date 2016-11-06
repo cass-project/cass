@@ -2,12 +2,12 @@ div.component.component-post-card-grid.x-navigation-entity
   .flexbox-container
     .top
       .card.post-card-content
-        .profile-image.x-navigation-click(*ngIf="!helper.hasAttachment()", (click)="openPost(post)")
-          .profile-image-container
-            cass-profile-image([url]="getProfileImageURL()")
-        i.fa.fa-ellipsis-v
         .attachment-container(*ngIf="helper.hasAttachment()")
-          cass-attachment([attachment]="helper.getAttachment()", (open)="helper.openAttachment($event)", view-mode="grid")
+          .attachment-controls(*ngIf="showControls")
+              .attachment-icon
+                i.fa([class]="getFAIcon()")
+          .attachment
+            cass-attachment([attachment]="helper.getAttachment()", (open)="helper.openAttachment($event)", view-mode="grid")
     .bottom
       .card-title(*ngIf="helper.hasTitle()")
         h1
