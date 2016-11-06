@@ -1,0 +1,7 @@
+div.route.route-public-content-feed
+  .post-form(*ngIf='canPost()')
+    .post-form-container
+      cass-post-form([collection]="getMainCollection()", [post-type] = "postType", (success) = "unshiftEntity($event)")
+  .content
+    cass-public-nothing-found(*ngIf="service.isNothingFound()")
+    cass-feed-post-stream

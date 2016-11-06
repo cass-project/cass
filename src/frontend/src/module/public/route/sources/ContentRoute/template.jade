@@ -1,8 +1,10 @@
-div.component.component-public-content-gateway-route
+div.route.route-public-content
   .flexbox-container
     .themes-list
-      cass-theme-panel([root]="helper.themes.getThemePanelRoot()", (change)="helper.goTheme($event)")
+      cass-theme-panel([root]="helper.themes.getCurrentTheme()", (change)="helper.goTheme($event)")
     .menu
       cass-public-content-menu
-    .content
+    .content(#content, (scroll)="onScroll($event)")
+      div.theme-header
+        cass-theme-header([theme]="helper.themes.getThemeRoot()", (go)="helper.goTheme($event)")
       router-outlet

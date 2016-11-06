@@ -1,8 +1,9 @@
 @import "./../../../../../styles/globals";
 
-div.component-public-content-gateway-route {
+div.route-public-content {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 
   div.flexbox-container {
     display: flex;
@@ -19,17 +20,11 @@ div.component-public-content-gateway-route {
       flex-basis: 200px;
       flex-shrink: 0;
       height: 100%;
-
     }
 
     >div.content {
       flex-basis: 100%;
+      overflow: auto;
     }
-  }
-
-  >div.content {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
   }
 }

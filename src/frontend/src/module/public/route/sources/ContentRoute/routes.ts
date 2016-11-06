@@ -1,10 +1,10 @@
-import {ContentGatewayRoute} from "./index";
-import {ThemesRoute} from "./route/ThemesRoute/index";
-import {ContentRoute} from "./route/ContentRoute/index";
+import {ContentRoute} from "./index";
+import {ContentThemesRoute} from "./route/ContentThemesRoute/index";
+import {ContentFeedRoute} from "./route/ContentFeedRoute/index";
 
 export const PUBLIC_CONTENT_ROUTES = {
     path: 'home',
-    component: ContentGatewayRoute,
+    component: ContentRoute,
     children: [
         {
             path: '',
@@ -13,100 +13,100 @@ export const PUBLIC_CONTENT_ROUTES = {
         },
         {
             path: 'themes',
-            component: ThemesRoute,
+            component: ContentThemesRoute,
         },
         {
             path: 'themes/:theme_lvl1',
-            component: ThemesRoute,
+            component: ContentThemesRoute,
             pathMatch: 'full'
         },
         {
             path: 'themes/:theme_lvl1/:theme_lvl2',
-            component: ThemesRoute,
+            component: ContentThemesRoute,
             pathMatch: 'full'
         },
         {
             path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3',
-            component: ThemesRoute,
+            component: ContentThemesRoute,
             pathMatch: 'full'
         },
         {
             path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl4',
-            component: ThemesRoute,
+            component: ContentThemesRoute,
             pathMatch: 'full'
         },
         {
             path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5',
-            component: ThemesRoute,
+            component: ContentThemesRoute,
             pathMatch: 'full'
         },
         {
             path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6',
-            component: ThemesRoute,
+            component: ContentThemesRoute,
             pathMatch: 'full'
         },
         {
             path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6/:theme_lvl7',
-            component: ThemesRoute,
+            component: ContentThemesRoute,
             pathMatch: 'full'
         },
         {
             path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6/:theme_lvl7/:theme_lvl8',
-            component: ThemesRoute,
+            component: ContentThemesRoute,
             pathMatch: 'full'
         },
         {
             path: 'themes/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6/:theme_lvl7/:theme_lvl8/:theme_lvl9',
-            component: ThemesRoute,
+            component: ContentThemesRoute,
             pathMatch: 'full'
         },
         {
             path: 'content/:type',
-            component: ContentRoute,
+            component: ContentFeedRoute,
         },
         {
             path: 'content/:type/:theme_lvl1',
-            component: ContentRoute,
+            component: ContentFeedRoute,
             pathMatch: 'full'
         },
         {
             path: 'content/:type/:theme_lvl1/:theme_lvl2',
-            component: ContentRoute,
+            component: ContentFeedRoute,
             pathMatch: 'full'
         },
         {
             path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3',
-            component: ContentRoute,
+            component: ContentFeedRoute,
             pathMatch: 'full'
         },
         {
             path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl4',
-            component: ContentRoute,
+            component: ContentFeedRoute,
             pathMatch: 'full'
         },
         {
             path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5',
-            component: ContentRoute,
+            component: ContentFeedRoute,
             pathMatch: 'full'
         },
         {
             path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6',
-            component: ContentRoute,
+            component: ContentFeedRoute,
             pathMatch: 'full'
         },
         {
             path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6/:theme_lvl7',
-            component: ContentRoute,
+            component: ContentFeedRoute,
             pathMatch: 'full'
         },
         {
             path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6/:theme_lvl7/:theme_lvl8',
-            component: ContentRoute,
+            component: ContentFeedRoute,
             pathMatch: 'full'
         },
         {
             path: 'content/:type/:theme_lvl1/:theme_lvl2/:theme_lvl3/:theme_lvl5/:theme_lvl6/:theme_lvl7/:theme_lvl8/:theme_lvl9',
-            component: ContentRoute,
+            component: ContentFeedRoute,
             pathMatch: 'full'
         },
     ]

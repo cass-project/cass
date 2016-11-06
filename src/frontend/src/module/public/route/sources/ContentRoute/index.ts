@@ -1,6 +1,5 @@
-import {Component} from "@angular/core";
+import {Component, ElementRef, ViewChild} from "@angular/core";
 
-import {UIService} from "../../../../ui/service/ui";
 import {ThemeRouteHelper} from "../../theme-route-helper";
 import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
 import {PostIndexedEntity} from "../../../../post/definitions/entity/Post";
@@ -9,6 +8,8 @@ import {PublicService} from "../../../service";
 import {PublicContentSource} from "../../../../feed/service/FeedService/source/public/PublicContentSource";
 import {Stream} from "../../../../feed/service/FeedService/stream";
 import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
+import {ContentRouteHelper} from "./helper";
+import {UINavigationObservable} from "../../../../ui/service/navigation";
 
 @Component({
     template: require('./template.jade'),
@@ -16,27 +17,42 @@ import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
         require('./style.shadow.scss'),
     ],
     providers: [
-        ThemeRouteHelper,
         PublicService,
         FeedService,
         PublicContentSource,
         FeedCriteriaService,
         FeedCriteriaService,
         FeedOptionsService,
+        ContentRouteHelper,
+        ThemeRouteHelper,
     ]
 })
-export class ContentGatewayRoute
+export class ContentRoute
 {
+    @ViewChild('content') content: ElementRef;
+
     constructor(
-        private ui: UIService,
-        private helper: ThemeRouteHelper,
         private catalog: PublicService,
         private service: FeedService<PostIndexedEntity>,
         private source: PublicContentSource,
+        private helper: ContentRouteHelper,
+        private navigator: UINavigationObservable,
     ) {
-        catalog.source = 'content';
+        catalog.source = 'profiles';
         catalog.injectFeedService(service);
 
         service.provide(source, new Stream<PostIndexedEntity>());
+    }
+
+    ngOnInit() {
+        this.navigator.initNavigation(this.content);
+    }
+
+    ngOnDestroy(){
+        this.navigator.destroyNavigation();
+    }
+
+    onScroll($event) {
+        this.navigator.emitScroll(this.content);
     }
 }

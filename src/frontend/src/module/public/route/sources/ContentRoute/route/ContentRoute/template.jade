@@ -1,9 +1,0 @@
-div.component.component-public-content-route
-  div.content-area(#content, (scroll)="onScroll($event)")
-    div.theme-header
-      cass-theme-header([theme]="helper.getThemeRoot()", (go)="helper.goTheme($event)")
-    .post-form(*ngIf='canPost()')
-      .post-form-container
-        cass-post-form([collection]="getMainCollection()", [post-type] = "postType", (success) = "unshiftEntity($event)")
-    cass-public-nothing-found(*ngIf="service.isNothingFound()")
-    cass-feed-post-stream
