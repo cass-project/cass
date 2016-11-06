@@ -3,6 +3,8 @@ import {PageAttachmentMetadata} from "../../../definitions/entity/metadata/PageA
 
 export class AttachmentLinkPageHelper
 {
+    public static DEFAULT_IMAGE = '/dist/assets/entity/attachment/default-web-page-image-bg.png';
+
     private markedAsError: boolean = false;
 
     constructor(
@@ -86,31 +88,32 @@ export class AttachmentLinkPageHelper
     }
 
     hasImage(): boolean {
-        try {
-            return this.getImageURL().length > 0;
-        }catch(error) {
-            this.markedAsError = true;
+        let basic = this.attachment.link.metadata.og.og.basic;
+        let images = this.attachment.link.metadata.og.og.images;
 
-            return false;
-        }
+        return images.length > 0 || basic['og:image'].length.length > 0;
     }
 
     getImageURL(): string {
-        try {
-            let basic = this.attachment.link.metadata.og.og.basic;
-            let images = this.attachment.link.metadata.og.og.images;
+        if(this.hasImage()) {
+            let result = (() => {
+                let basic = this.attachment.link.metadata.og.og.basic;
+                let images = this.attachment.link.metadata.og.og.images;
 
-            if(images.length) {
-                return images[0]['og:image:url'];
-            }else if(basic['og:image'].length) {
-                return basic['og:image'];
-            }else{
-                return '';
-            }
-        }catch(error) {
-            this.markedAsError = true;
+                if(images.length) {
+                    return images[0]['og:image:url'];
+                }else if(basic['og:image'].length) {
+                    return basic['og:image'];
+                }else{
+                    return AttachmentLinkPageHelper.DEFAULT_IMAGE;
+                }
+            })();
 
-            return '';
+            return typeof result === 'string'
+                ? result
+                : AttachmentLinkPageHelper.DEFAULT_IMAGE;
+        }else{
+            return AttachmentLinkPageHelper.DEFAULT_IMAGE;
         }
     }
 }

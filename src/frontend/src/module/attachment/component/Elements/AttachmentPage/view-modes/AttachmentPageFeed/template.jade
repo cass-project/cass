@@ -2,7 +2,7 @@ div.component.component-attachment-page-feed
   div(*ngIf="! helper.isValid()")
     cass-attachment-error([attachment]="attachment", [view-mode]="viewMode")
   div(*ngIf=" helper.isValid()")
-    .image-container(*ngIf="helper.hasImage()")
+    .image-container
       a(target="__top", [href]="helper.getURL()")
         img([src]="helper.getImageURL()")
     .link-description
