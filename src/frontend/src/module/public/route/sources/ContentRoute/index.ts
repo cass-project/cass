@@ -21,7 +21,6 @@ import {UINavigationObservable} from "../../../../ui/service/navigation";
         FeedService,
         PublicContentSource,
         FeedCriteriaService,
-        FeedCriteriaService,
         FeedOptionsService,
         ContentRouteHelper,
         ThemeRouteHelper,
@@ -38,7 +37,7 @@ export class ContentRoute
         private helper: ContentRouteHelper,
         private navigator: UINavigationObservable,
     ) {
-        catalog.source = 'profiles';
+        catalog.source = 'content';
         catalog.injectFeedService(service);
 
         service.provide(source, new Stream<PostIndexedEntity>());

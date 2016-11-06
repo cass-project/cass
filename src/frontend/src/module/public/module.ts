@@ -13,13 +13,14 @@ import {ProfilesRoute} from "./route/sources/ProfilesRoute/index";
 import {PublicRoute} from "./route/root/index";
 import {PublicContentMenu} from "./route/sources/ContentRoute/component/PublicContentMenu/index";
 import {NotEnoughCommunities} from "./route/sources/CommunitiesRoute/component/NotEnoughCommunities/index";
-import {NotEnoughCollections} from "./route/sources/CollectionsRoute/component/NotEnoughCollections/index";
-import {CollectionCatalogMenu} from "./route/sources/CollectionsRoute/component/CollectionCatalogMenu/index";
 import {ProfilesThemesRoute} from "./route/sources/ProfilesRoute/route/ProfilesThemesRoute/index";
 import {ProfilesFeedRoute} from "./route/sources/ProfilesRoute/route/ProfilesFeedRoute/index";
 import {PublicProfilesMenu} from "./route/sources/ProfilesRoute/component/PublicProfilesMenu/index";
 import {ContentThemesRoute} from "./route/sources/ContentRoute/route/ContentThemesRoute/index";
 import {ContentFeedRoute} from "./route/sources/ContentRoute/route/ContentFeedRoute/index";
+import {CollectionThemesRoute} from "./route/sources/CollectionsRoute/routes/CollectionThemesRoute/index";
+import {CollectionFeedRoute} from "./route/sources/CollectionsRoute/routes/CollectionFeedRoute/index";
+import {PublicCollectionsMenu} from "./route/sources/CollectionsRoute/component/PublicCollectionsMenu/index";
 
 export const CASSPublicComponent = {
     declarations: [
@@ -32,17 +33,22 @@ export const CASSPublicComponent = {
         SourceSelector,
         PublicContentMenu,
         NotEnoughCommunities,
-        NotEnoughCollections,
-        CollectionCatalogMenu,
         PublicProfilesMenu,
+        PublicCollectionsMenu,
     ],
     routes: [
         PublicRoute,
+
         ContentRoute,
         ContentThemesRoute,
         ContentFeedRoute,
+
         CollectionsRoute,
+        CollectionFeedRoute,
+        CollectionThemesRoute,
+
         CommunitiesRoute,
+
         ProfilesRoute,
         ProfilesThemesRoute,
         ProfilesFeedRoute,

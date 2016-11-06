@@ -14,7 +14,6 @@ import {CommunityCollectionsListRoute} from "../../module/community/route/Commun
 import {CommunityCollectionNotFoundRoute} from "../../module/community/route/CommunityCollectionNotFoundRoute/index";
 import {CommunityCollectionRoute} from "../../module/community/route/CommunityCollectionRoute/index";
 import {ProfileResolve} from "../../module/profile/resolve/ProfileResolve";
-import {CollectionsRoute} from "../../module/public/route/sources/CollectionsRoute/index";
 import {CommunitiesRoute} from "../../module/public/route/sources/CommunitiesRoute/index";
 import {CommunityResolve} from "../../module/community/resolve/CommunityResolve";
 import {ProfileSubscriptionsRoute} from "../../module/profile/route/ProfileSubscriptionsRoute/index";
@@ -25,6 +24,7 @@ import {ProfilesSubscriptionsRoute} from "../../module/profile/route/ProfileSubs
 import {ProfileSubscriptionsDashboardRoute} from "../../module/profile/route/ProfileSubscriptionsRoute/routes/ProfileSubscriptionsDashboardRoute/index";
 import {PUBLIC_CONTENT_ROUTES} from "../../module/public/route/sources/ContentRoute/routes";
 import {PUBLIC_PROFILES_ROUTES} from "../../module/public/route/sources/ProfilesRoute/routes";
+import {PUBLIC_COLLECTION_ROUTES} from "../../module/public/route/sources/CollectionsRoute/routes";
 
 
 const appRoutes: Routes = [
@@ -151,10 +151,7 @@ const appRoutes: Routes = [
         children: [
             PUBLIC_CONTENT_ROUTES,
             PUBLIC_PROFILES_ROUTES,
-            {
-                path: 'collections',
-                component: CollectionsRoute
-            },
+            PUBLIC_COLLECTION_ROUTES,
             {
                 path: 'communities',
                 component: CommunitiesRoute
