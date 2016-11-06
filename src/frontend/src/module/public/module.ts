@@ -12,7 +12,6 @@ import {ContentRoute} from "./route/sources/ContentRoute/index";
 import {ProfilesRoute} from "./route/sources/ProfilesRoute/index";
 import {PublicRoute} from "./route/root/index";
 import {PublicContentMenu} from "./route/sources/ContentRoute/component/PublicContentMenu/index";
-import {NotEnoughCommunities} from "./route/sources/CommunitiesRoute/component/NotEnoughCommunities/index";
 import {ProfilesThemesRoute} from "./route/sources/ProfilesRoute/route/ProfilesThemesRoute/index";
 import {ProfilesFeedRoute} from "./route/sources/ProfilesRoute/route/ProfilesFeedRoute/index";
 import {PublicProfilesMenu} from "./route/sources/ProfilesRoute/component/PublicProfilesMenu/index";
@@ -21,6 +20,9 @@ import {ContentFeedRoute} from "./route/sources/ContentRoute/route/ContentFeedRo
 import {CollectionThemesRoute} from "./route/sources/CollectionsRoute/routes/CollectionThemesRoute/index";
 import {CollectionFeedRoute} from "./route/sources/CollectionsRoute/routes/CollectionFeedRoute/index";
 import {PublicCollectionsMenu} from "./route/sources/CollectionsRoute/component/PublicCollectionsMenu/index";
+import {PublicCommunitiesMenu} from "./route/sources/CommunitiesRoute/component/PublicCommunitiesMenu/index";
+import {CommunityFeedRoute} from "./route/sources/CommunitiesRoute/routes/CommunityFeedRoute/index";
+import {CommunityThemesRoute} from "./route/sources/CommunitiesRoute/routes/CommunityThemesRoute/index";
 
 export const CASSPublicComponent = {
     declarations: [
@@ -32,9 +34,9 @@ export const CASSPublicComponent = {
         NothingFound,
         SourceSelector,
         PublicContentMenu,
-        NotEnoughCommunities,
         PublicProfilesMenu,
         PublicCollectionsMenu,
+        PublicCommunitiesMenu,
     ],
     routes: [
         PublicRoute,
@@ -48,6 +50,8 @@ export const CASSPublicComponent = {
         CollectionThemesRoute,
 
         CommunitiesRoute,
+        CommunityFeedRoute,
+        CommunityThemesRoute,
 
         ProfilesRoute,
         ProfilesThemesRoute,

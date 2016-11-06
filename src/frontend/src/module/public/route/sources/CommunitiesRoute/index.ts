@@ -3,15 +3,13 @@ import {Component, ViewChild, OnInit, OnDestroy, ElementRef} from "@angular/core
 import {FeedService} from "../../../../feed/service/FeedService/index";
 import {Stream} from "../../../../feed/service/FeedService/stream";
 import {PublicService} from "../../../service";
-import {CommunityIndexedEntity} from "../../../../community/definitions/entity/Community";
 import {PublicCommunitiesSource} from "../../../../feed/service/FeedService/source/public/PublicCommunitiesSource";
+import {CommunityIndexedEntity} from "../../../../community/definitions/entity/community";
 import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
 import {UINavigationObservable} from "../../../../ui/service/navigation";
-import {PublicThemeHelper} from "../../theme-helper";
-import {UIService} from "../../../../ui/service/ui";
-import {SwipeService} from "../../../../swipe/service/SwipeService";
-import {UIPathService} from "../../../../ui/path/service";
+import {CommunityRouteHelper} from "./helper";
+import {ThemeRouteHelper} from "../../theme-route-helper";
 
 @Component({
     template: require('./template.jade'),
@@ -24,33 +22,25 @@ import {UIPathService} from "../../../../ui/path/service";
         PublicCommunitiesSource,
         FeedCriteriaService,
         FeedOptionsService,
-        PublicThemeHelper
+        CommunityRouteHelper,
+        ThemeRouteHelper,
     ]
 })
 export class CommunitiesRoute implements OnInit, OnDestroy
 {
     @ViewChild('content') content: ElementRef;
-    
+
     constructor(
         private catalog: PublicService,
         private service: FeedService<CommunityIndexedEntity>,
         private source: PublicCommunitiesSource,
-        private themeHelper: PublicThemeHelper,
+        private helper: CommunityRouteHelper,
         private navigator: UINavigationObservable,
-        private ui: UIService,
-        private swipe: SwipeService,
-        private path: UIPathService,
     ) {
-        path.setPath([{
-            name: 'Сообщества',
-            route: ['/p/communities']
-        }]);
-
         catalog.source = 'communities';
         catalog.injectFeedService(service);
-        
+
         service.provide(source, new Stream<CommunityIndexedEntity>());
-        service.update();
     }
 
     ngOnInit() {
@@ -60,8 +50,8 @@ export class CommunitiesRoute implements OnInit, OnDestroy
     ngOnDestroy(){
         this.navigator.destroyNavigation();
     }
-    
+
     onScroll($event) {
         this.navigator.emitScroll(this.content);
-    }    
+    }
 }

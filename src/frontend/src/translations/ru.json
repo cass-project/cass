@@ -63,5 +63,6 @@
   "theme.panel.home": "В начало",
   "dropdown.menu.my.post.card.edit": "Редактировать",
   "dropdown.menu.my.post.card.delete": "Удалить",
-  "dropdown.menu.my.post.card.pin": "Закрепить"
+  "dropdown.menu.my.post.card.pin": "Закрепить",
+  "cass.module.public.menu.community.title": "Сообщества"
 }

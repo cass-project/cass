@@ -1,0 +1,24 @@
+div.component.component-public-communities-menu
+  div.flexbox-container
+    div.top
+      div.menu-list
+        ul.menu-list-ui
+          li
+            a.menu-list-item(
+              type="button",
+              title="{{ 'cass.module.public.menu.theme.title' | translate }}",
+              [routerLink]="getThemesRoute()",
+              [routerLinkActive]="['active']"
+            )
+              i.fa.fa-fw.fa-bookmark
+              span.title {{ 'cass.module.public.menu.theme.title' | translate }}
+          li
+            a.menu-list-item(
+              type="button",
+              title="{{ 'cass.module.public.menu.community.title' | translate }}",
+              [routerLink]="getContentRoute()",
+              [routerLinkActive]="['active']"
+            )
+              i.fa.fa-ellipsis-h
+              span.title {{ 'cass.module.public.menu.community.title' | translate }}
+    div.bottom
