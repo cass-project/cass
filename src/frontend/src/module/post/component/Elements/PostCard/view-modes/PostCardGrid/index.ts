@@ -6,7 +6,6 @@ import {PostEntity} from "../../../../../definitions/entity/Post";
 import {ViewOptionValue} from "../../../../../../feed/service/FeedService/options/ViewOption";
 import {AttachmentEntity} from "../../../../../../attachment/definitions/entity/AttachmentEntity";
 import {QueryTarget, queryImage} from "../../../../../../avatar/functions/query";
-import {MenuEntity} from "../../../../../../common/component/DropDownMenu/index";
 
 @Component({
     selector: 'cass-post-card-grid',
@@ -27,8 +26,6 @@ export class PostCardGrid implements OnChanges
     @Output('delete-post') private deletePostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     @Output('pin-post') private pinPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
-    private menu: Array<MenuEntity> = [];
-
     private static ICONS_MAP = {
         'image': 'fa fa-camera-retro',
         'youtube': 'fa fa-film',
@@ -36,12 +33,24 @@ export class PostCardGrid implements OnChanges
         'page': 'fa fa-external-link',
     };
 
+    private viewMode: ViewOptionValue = ViewOptionValue.Grid;
+
     constructor(
-        private session: Session
+        private helper: PostCardHelper,
+        private session: Session,
     ) {}
 
-    private helper: PostCardHelper;
-    private viewMode: ViewOptionValue = ViewOptionValue.Grid;
+    ngOnChanges() {
+        this.helper.setup({
+            post: this.post,
+            viewMode: this.viewMode,
+            openPostEvent: this.openPostEvent,
+            openAttachmentEvent: this.openAttachmentEvent,
+            editPostEvent: this.editPostEvent,
+            deletePostEvent: this.deletePostEvent,
+            pinPostEvent: this.pinPostEvent
+        });
+    }
 
     getFAIcon(): string {
         if(this.helper.hasAttachment()) {
@@ -55,20 +64,6 @@ export class PostCardGrid implements OnChanges
         }else{
             return 'fa fa-file-text-o';
         }
-    }
-
-    ngOnChanges() {
-        this.helper = new PostCardHelper(
-            this.post,
-            this.viewMode,
-            this.menu,
-            this.session,
-            this.openPostEvent,
-            this.openAttachmentEvent,
-            this.editPostEvent, 
-            this.deletePostEvent,
-            this.pinPostEvent
-        );
     }
 
     getProfileImageURL(): string {

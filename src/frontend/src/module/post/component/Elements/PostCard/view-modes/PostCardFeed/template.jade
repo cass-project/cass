@@ -3,14 +3,22 @@ div.component.component-post-card-feed.x-navigation-entity.x-navigation-click
     .post-card-content
       .card-header
         .left
-          cass-profile-card-header([profile]="helper.getProfile()", [time]="helper.getPostDateCreatedOn()")
-        .right
-          cass-dropdown-menu([menu]='helper.getMenu()', (clickInMenu)="helper.dropDownMenuAction($event)")
-      .card-content
-        .content-container(*ngIf="helper.hasContent()")
           .title-container(*ngIf="helper.hasTitle()")
             h1
               span.text {{ helper.getTitle() }}
+        .right
+      .card-content
+        .content-container(*ngIf="helper.hasContent()")
           cass-text-parser([text]='helper.getContent()')
         .attachment-container(*ngIf="helper.hasAttachment()")
           cass-attachment([attachment]="helper.getAttachment()", (open)="helper.openAttachment($event)", view-mode="feed")
+      .card-footer
+        .left
+          a.profile-link([routerLink]="helper.getProfileRouteParams()")
+            .profile-image-container
+              cass-profile-image([url]="helper.getProfileImage()", border="square")
+            span.text {{ helper.getProfileGreetings() }}
+          i.fa.fa-dot-circle-o
+          span.date-created-at {{ helper.getPostDateCreatedOn() }}
+        .right
+          cass-dropdown-menu([menu]='helper.getMenu()', (clickInMenu)="helper.dropDownMenuAction($event)")

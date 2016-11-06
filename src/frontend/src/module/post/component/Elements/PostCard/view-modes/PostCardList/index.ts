@@ -7,7 +7,6 @@ import {ViewOptionValue} from "../../../../../../feed/service/FeedService/option
 import {AttachmentEntity} from "../../../../../../attachment/definitions/entity/AttachmentEntity";
 import moment = require("moment");
 import {queryImage, QueryTarget} from "../../../../../../avatar/functions/query";
-import {MenuEntity} from "../../../../../../common/component/DropDownMenu/index";
 
 @Component({
     selector: 'cass-post-card-list',
@@ -26,27 +25,23 @@ export class PostCardList implements OnChanges
     @Output('delete-post') private deletePostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     @Output('pin-post') private pinPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
-    private menu: Array<MenuEntity> = [];
-
-    constructor(
-        private session: Session
-    ) {}
-
-    private helper: PostCardHelper;
     private viewMode: ViewOptionValue = ViewOptionValue.List;
 
+    constructor(
+        private helper: PostCardHelper,
+        private session: Session,
+    ) {}
+
     ngOnChanges() {
-        this.helper = new PostCardHelper(
-            this.post,
-            this.viewMode,
-            this.menu,
-            this.session,
-            this.openPostEvent,
-            this.openAttachmentEvent,
-            this.editPostEvent,
-            this.deletePostEvent,
-            this.pinPostEvent
-        );
+        this.helper.setup({
+            post: this.post,
+            viewMode: this.viewMode,
+            openPostEvent: this.openPostEvent,
+            openAttachmentEvent: this.openAttachmentEvent,
+            editPostEvent: this.editPostEvent,
+            deletePostEvent: this.deletePostEvent,
+            pinPostEvent: this.pinPostEvent
+        });
     }
 
     openPost(post: PostEntity) {

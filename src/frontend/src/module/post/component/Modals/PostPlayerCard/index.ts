@@ -5,7 +5,6 @@ import {PostCardHelper} from "../../Elements/PostCard/helper";
 import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
 import {Session} from "../../../../session/Session";
 import {ViewOptionValue} from "../../../../feed/service/FeedService/options/ViewOption";
-import {MenuEntity} from "../../../../common/component/DropDownMenu/index";
 
 @Component({
     selector: 'cass-post-player-card',
@@ -16,34 +15,28 @@ import {MenuEntity} from "../../../../common/component/DropDownMenu/index";
 })
 export class PostPlayerCard implements OnChanges
 {
-    private helper: PostCardHelper;
+    @Input('post') post: PostEntity;
+
     private openPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     private openAttachmentEvent: EventEmitter<AttachmentEntity<any>> = new EventEmitter<AttachmentEntity<any>>();
     private editPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     private deletePostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
     private pinPostEvent: EventEmitter<PostEntity> = new EventEmitter<PostEntity>();
 
-
-
-    @Input('post') post: PostEntity;
-
-    private menu: Array<MenuEntity> = [];
-
     constructor(
-        private session: Session
+        private session: Session,
+        private helper: PostCardHelper,
     ) {}
 
     ngOnChanges() {
-        this.helper = new PostCardHelper(
-            this.post,
-            ViewOptionValue.Feed,
-            this.menu,
-            this.session,
-            this.openPostEvent,
-            this.openAttachmentEvent,
-            this.editPostEvent,
-            this.deletePostEvent,
-            this.pinPostEvent
-        );
+        this.helper.setup({
+            post: this.post,
+            viewMode: ViewOptionValue.Feed,
+            openPostEvent: this.openPostEvent,
+            openAttachmentEvent: this.openAttachmentEvent,
+            editPostEvent: this.editPostEvent,
+            deletePostEvent: this.deletePostEvent,
+            pinPostEvent: this.pinPostEvent
+        });
     }
 }

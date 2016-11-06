@@ -24,6 +24,7 @@
     "core-js": "^2.4.0",
     "cropperjs": "^0.7.0",
     "css-loader": "0.23.1",
+    "debounce": "^1.0.0",
     "domurl": "^2.1.1",
     "es6-promise": "3.0.2",
     "es6-shim": "0.35.0",

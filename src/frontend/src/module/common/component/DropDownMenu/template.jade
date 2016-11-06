@@ -1,6 +1,10 @@
-div.dropdown(#dropDownMenu)
-    button.fa-ellipsis-button.dropdown-menu((click)="dropDownMenuExpanded = !dropDownMenuExpanded", type = "button")
-        i.fa.fa-ellipsis-v
-    ul.dropdown-content(*ngIf='dropDownMenuExpanded')
+div.component.component-drop-down-menu
+  .drop-down-menu(#dropDownMenu, [class]="getCSSClassName()")
+    button.fa-ellipsis-button.drop-down-menu-button((click)="dropDownMenuExpanded = !dropDownMenuExpanded", type = "button")
+      i.fa.fa-ellipsis-v
+    div.drop-down-content(*ngIf='dropDownMenuExpanded')
+      ul.menu-items
         li(*ngFor="let item of menu")
-            a((click)="clickOnElement(item)", href="javascript:void(0)") {{ item.title }}
+          a.menu-item((click)="clickOnElement(item)", href="javascript:void(0)")
+            i.fa.fw([class]="getIconCSSClass(item)")
+            span.text {{ item.title }}
