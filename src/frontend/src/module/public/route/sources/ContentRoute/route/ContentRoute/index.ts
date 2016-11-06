@@ -45,7 +45,7 @@ export class ContentRoute implements OnInit
             let contentType =  params['type'];
 
             current.provideTheme(route);
-            helper.provideBaseURL('/p/home/content/' + contentType);
+            // helper.provideBaseURL('/p/home/content/' + contentType);
 
             if(contentType === 'all') {
                 this.criteria.criteria.contentType.enabled = false;

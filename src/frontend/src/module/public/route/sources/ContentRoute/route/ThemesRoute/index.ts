@@ -24,7 +24,7 @@ export class ThemesRoute implements OnInit, OnDestroy
         private path: UIPathService,
         private navigator: UINavigationObservable
     ) {
-        helper.provideBaseURL('/p/home/themes');
+        // helper.provideBaseURL('/p/home/themes');
         current.provideTheme(route);
 
 
@@ -64,9 +64,9 @@ export class ThemesRoute implements OnInit, OnDestroy
     
     goTheme(theme: Theme) {
         if(theme.children.length === 0) {
-            this.helper.provideBaseURL('/p/home/content/all/');
+            // this.helper.provideBaseURL('/p/home/content/all/');
         }
 
-        this.helper.goTheme(theme);
+        // this.helper.goTheme(theme);
     }
 }

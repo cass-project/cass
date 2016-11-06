@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core"
+import {Component, Input, Output, EventEmitter, OnChanges} from "@angular/core"
 
 import {Theme} from "../../../definitions/entity/Theme";
 import {ThemeService} from "../../../service/ThemeService";
@@ -10,7 +10,7 @@ import {ThemeService} from "../../../service/ThemeService";
         require('./style.shadow.scss')
     ]
 })
-export class ThemePanel
+export class ThemePanel implements OnChanges
 {
     @Input('root') root: Theme;
     @Output('change') changeEvent: EventEmitter<Theme> = new EventEmitter<Theme>();
@@ -21,7 +21,7 @@ export class ThemePanel
         private service: ThemeService
     ) {}
 
-    ngOnInit() {
+    ngOnChanges() {
         this.selected = this.root;
     }
 
@@ -32,6 +32,14 @@ export class ThemePanel
 
         if(theme.children !== undefined && theme.children.length > 0) {
             this.root = theme;
+        }
+    }
+
+    getChildren(): Theme[] {
+        if(this.selected.children.length > 0) {
+            return this.selected.children;
+        }else{
+            return this.service.findById(this.selected.parent_id).children;
         }
     }
 

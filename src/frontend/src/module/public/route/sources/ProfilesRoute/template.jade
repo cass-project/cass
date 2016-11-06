@@ -1,18 +1,10 @@
-article.component.component-public-profiles-route
-  div.flexbox-container
-    div.menu
-      cass-profile-catalog-menu([is-extended]="true")
-    div.themes-list(*ngIf="ui.panels.themes.isEnabled()")
-      cass-theme-panel([root]="themeHelper.getThemePanelRoot()", (change)="themeHelper.goTheme($event)")
-    div.content
-      div.split-view
-        div.content-area(#content, (scroll)="onScroll($event)")
-          div.screen-themes(*ngIf="swipe.isAtThemeScreen()")
-            div.theme-header
-              cass-theme-header([theme]="themeHelper.getThemeRoot()", (go)="themeHelper.goTheme($event)")
-            cass-theme-browser([root]="themeHelper.getThemeRoot()", (change)="themeHelper.goTheme($event)")
-          div.screen-stream(*ngIf="swipe.isAtContentScreen()")
-            div.theme-header
-              cass-theme-header([theme]="themeHelper.getThemeRoot()", (go)="themeHelper.goTheme($event)")
-            cass-public-nothing-found(*ngIf="service.isNothingFound()")
-            cass-feed-profile-stream
+article.route.route-public-profiles
+  .flexbox-container
+    .themes-list
+      cass-theme-panel([root]="helper.themes.getCurrentTheme()", (change)="helper.goTheme($event)")
+    .menu
+      cass-public-profiles-menu
+    .content(#content, (scroll)="onScroll($event)")
+      div.theme-header
+        cass-theme-header([theme]="helper.themes.getThemeRoot()", (go)="helper.goTheme($event)")
+      router-outlet

@@ -1,7 +1,7 @@
 div.component.component-public-content-gateway-route
   .flexbox-container
     .themes-list
-      cass-theme-panel([root]="helper.getThemePanelRoot()", (change)="helper.goTheme($event)")
+      cass-theme-panel([root]="helper.themes.getThemePanelRoot()", (change)="helper.goTheme($event)")
     .menu
       cass-public-content-menu
     .content

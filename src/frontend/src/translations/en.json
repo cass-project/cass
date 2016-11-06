@@ -55,6 +55,8 @@
   "registered": "Registered",
   "gender": "Sex",
   "cass.module.public.menu.people.title": "People",
+  "cass.module.public.menu.people.profiles.title": "Interesting In",
+  "cass.module.public.menu.people.experts.title": "Experts",
   "switch-profile": "Switch Profile",
   "create-profile": "Create Profile",
   "cass.module.public.menu.collection.title": "Collections",

@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild, OnInit, OnDestroy} from "@angular/core";
+import {Component, OnInit, OnDestroy, ViewChild, ElementRef} from "@angular/core";
 
 import {FeedService} from "../../../../feed/service/FeedService/index";
 import {Stream} from "../../../../feed/service/FeedService/stream";
@@ -7,11 +7,10 @@ import {PublicProfilesSource} from "../../../../feed/service/FeedService/source/
 import {ProfileIndexedEntity} from "../../../../profile/definitions/entity/Profile";
 import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
-import {UIService} from "../../../../ui/service/ui";
-import {UINavigationObservable} from "../../../../ui/service/navigation";
-import {SwipeService} from "../../../../swipe/service/SwipeService";
 import {PublicThemeHelper} from "../../theme-helper";
-import {UIPathService} from "../../../../ui/path/service";
+import {ThemeRouteHelper} from "../../theme-route-helper";
+import {PublicProfilesRouteHelper} from "./helper";
+import {UINavigationObservable} from "../../../../ui/service/navigation";
 
 @Component({
     template: require('./template.jade'),
@@ -24,7 +23,9 @@ import {UIPathService} from "../../../../ui/path/service";
         PublicProfilesSource,
         FeedCriteriaService,
         FeedOptionsService,
-        PublicThemeHelper
+        PublicThemeHelper,
+        ThemeRouteHelper,
+        PublicProfilesRouteHelper,
     ]
 })
 
@@ -36,22 +37,13 @@ export class ProfilesRoute implements OnInit, OnDestroy
         private catalog: PublicService,
         private service: FeedService<ProfileIndexedEntity>,
         private source: PublicProfilesSource,
-        private ui: UIService,
+        private helper: PublicProfilesRouteHelper,
         private navigator: UINavigationObservable,
-        private swipe: SwipeService,
-        private themeHelper: PublicThemeHelper,
-        private path: UIPathService
     ) {
-        path.setPath([{
-            name: 'Люди',
-            route: ['/p/people']
-        }]);
-
         catalog.source = 'profiles';
         catalog.injectFeedService(service);
         
         service.provide(source, new Stream<ProfileIndexedEntity>());
-        service.update();
     }
 
     ngOnInit() {

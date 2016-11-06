@@ -13,8 +13,6 @@ import {CurrentThemeService} from "../../../../../../theme/service/CurrentThemeS
 })
 export class PublicContentMenu
 {
-    @Input('is-extended') isExtended: boolean = false;
-
     constructor(
         private router: Router,
         private current: CurrentThemeService

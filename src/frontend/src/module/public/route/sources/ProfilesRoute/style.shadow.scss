@@ -1,39 +1,30 @@
 @import "./../../../../../styles/globals";
 
-article.component.component-public-profiles-route {
+article.route-public-profiles {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 
   div.flexbox-container {
     display: flex;
     width: 100%;
     height: 100%;
 
-    >div.content {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-
-      div.split-view {
-        display: flex;
-        height: 100%;
-        flex-direction: column;
-
-        >div.header {
-          flex-shrink: 0;
-          @include card(1);
-        }
-
-        >div.content-area {
-          width: 100%;
-          height: 100%;
-          overflow: auto;
-        }
-      }
+    >div.menu {
+      flex-basis: 170px;
+      flex-shrink: 0;
+      border-right: 1px solid material-color("grey", "200");
     }
 
-    div.screen-themes {
-      padding: 3px 10px;
+    >div.themes-list {
+      flex-basis: 200px;
+      flex-shrink: 0;
+      height: 100%;
+    }
+
+    >div.content {
+      flex-basis: 100%;
+      overflow: auto;
     }
   }
 }

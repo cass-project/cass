@@ -55,6 +55,8 @@
   "registered": "Дата регистрации",
   "gender": "Пол",
   "cass.module.public.menu.people.title": "Люди",
+  "cass.module.public.menu.people.profiles.title": "Интересующиеся",
+  "cass.module.public.menu.people.experts.title": "Эксперты",
   "switch-profile": "Сменить профиль",
   "create-profile": "Создать новый профиль",
   "cass.module.public.menu.collection.title": "Подборки",

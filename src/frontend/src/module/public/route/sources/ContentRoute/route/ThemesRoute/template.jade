@@ -1,9 +1,4 @@
 article.component.component-public-themes-route
-  div.flexbox-container
-    div.content
-      div.split-view
-        div.content-area(#content, (scroll)="onScroll($event)")
-          div.screen-themes
-            div.theme-header
-              cass-theme-header([theme]="helper.getThemeRoot()", (go)="goTheme($event)")
-            cass-theme-browser([root]="helper.getThemeRoot()", (change)="goTheme($event)")
+  div.theme-header
+    cass-theme-header([theme]="helper.themes.getThemeRoot()", (go)="goTheme($event)")
+  cass-theme-browser([root]="helper.themes.getThemeRoot()", (change)="goTheme($event)")

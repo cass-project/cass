@@ -10,15 +10,16 @@ import {CollectionsRoute} from "./route/sources/CollectionsRoute/index";
 import {CommunitiesRoute} from "./route/sources/CommunitiesRoute/index";
 import {ContentGatewayRoute} from "./route/sources/ContentRoute/index";
 import {ProfilesRoute} from "./route/sources/ProfilesRoute/index";
-import {ExpertsRoute} from "./route/sources/ExpertsRoute/index";
 import {PublicRoute} from "./route/root/index";
 import {PublicContentMenu} from "./route/sources/ContentRoute/component/PublicContentMenu/index";
 import {NotEnoughCommunities} from "./route/sources/CommunitiesRoute/component/NotEnoughCommunities/index";
 import {NotEnoughCollections} from "./route/sources/CollectionsRoute/component/NotEnoughCollections/index";
-import {ProfileCatalogMenu} from "./route/sources/ProfilesRoute/component/ProfileCatalogMenu/index";
 import {CollectionCatalogMenu} from "./route/sources/CollectionsRoute/component/CollectionCatalogMenu/index";
 import {ContentRoute} from "./route/sources/ContentRoute/route/ContentRoute/index";
 import {ThemesRoute} from "./route/sources/ContentRoute/route/ThemesRoute/index";
+import {ProfilesThemesRoute} from "./route/sources/ProfilesRoute/route/ProfilesThemesRoute/index";
+import {ProfilesFeedRoute} from "./route/sources/ProfilesRoute/route/ProfilesFeedRoute/index";
+import {PublicProfilesMenu} from "./route/sources/ProfilesRoute/component/PublicProfilesMenu/index";
 
 export const CASSPublicComponent = {
     declarations: [
@@ -32,18 +33,19 @@ export const CASSPublicComponent = {
         PublicContentMenu,
         NotEnoughCommunities,
         NotEnoughCollections,
-        ProfileCatalogMenu,
         CollectionCatalogMenu,
-        ThemesRoute,
+        PublicProfilesMenu,
     ],
     routes: [
         PublicRoute,
+        ThemesRoute,
         CollectionsRoute,
         CommunitiesRoute,
         ContentRoute,
         ContentGatewayRoute,
-        ExpertsRoute,
         ProfilesRoute,
+        ProfilesThemesRoute,
+        ProfilesFeedRoute,
     ],
     providers: [
         ViewOptionService,
