@@ -3,7 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 
 import {CommunityRouteHelper, COMMUNITY_ROUTE_MODE} from "../../helper";
 import {TranslationService} from "../../../../../../i18n/service/TranslationService";
-import {CommunityIndexedEntity} from "../../../../../../community/definitions/entity/community";
+import {CommunityIndexedEntity} from "../../../../../../community/definitions/entity/Community";
 import {FeedService} from "../../../../../../feed/service/FeedService/index";
 
 @Component({

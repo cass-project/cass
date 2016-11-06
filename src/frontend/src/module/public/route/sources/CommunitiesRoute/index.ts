@@ -4,7 +4,7 @@ import {FeedService} from "../../../../feed/service/FeedService/index";
 import {Stream} from "../../../../feed/service/FeedService/stream";
 import {PublicService} from "../../../service";
 import {PublicCommunitiesSource} from "../../../../feed/service/FeedService/source/public/PublicCommunitiesSource";
-import {CommunityIndexedEntity} from "../../../../community/definitions/entity/community";
+import {CommunityIndexedEntity} from "../../../../community/definitions/entity/Community";
 import {FeedCriteriaService} from "../../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
 import {UINavigationObservable} from "../../../../ui/service/navigation";
