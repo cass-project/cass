@@ -14,3 +14,5 @@ article.component.component-feed-post-stream
       cass-loading-indicator(*ngIf="feed.isLoading()")
   div(*ngIf="!feed.isLoading()")
     cass-feed-scroll-detector
+  div(*ngIf="editPostModal.isOpened()")
+      cass-edit-post([post]='currentPost')

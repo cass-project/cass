@@ -7,6 +7,7 @@ import {ContentPlayerService} from "../../../../player/service/ContentPlayerServ
 import {PostPlayerService} from "../../../../post/component/Modals/PostPlayer/service";
 import {PostListOpenAttachmentEvent} from "../../../../post/component/Elements/PostList/index";
 import {PostRESTService} from "../../../../post/service/PostRESTService";
+import {ModalControl} from "../../../../common/classes/ModalControl";
 
 @Component({
     selector: 'cass-feed-post-stream',
@@ -24,6 +25,12 @@ export class FeedPostStream
         private options: FeedOptionsService,
         private postRESTService: PostRESTService
     ) {}
+
+    private currentPost: PostEntity;
+
+    editPostModal: ModalControl = new ModalControl();
+    deletePostModal: ModalControl = new ModalControl();
+    reportPostModal: ModalControl = new ModalControl();
     
     getViewOption() {
         return this.options.view.current;
@@ -38,7 +45,9 @@ export class FeedPostStream
     }
 
     editPost(post: PostEntity){
-        console.log(post)
+        this.editPostModal.open();
+        this.currentPost = post;
+
     }
 
     deletePost(post: PostEntity){
