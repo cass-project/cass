@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+import {Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 
 import {ProfileRESTService} from "../../../service/ProfileRESTService";
@@ -20,6 +21,7 @@ export class ProfileModalModel
         private accountRESTService: AccountRESTService,
         private session: Session,
         private messages: MessageBusService,
+        private router: Router
     ) {
         this.reset();
     }
@@ -41,7 +43,7 @@ export class ProfileModalModel
     }
 
     reset() {
-        this.account = JSON.parse(JSON.stringify(this.session.getCurrentProfile().entity.profile));
+        this.account = JSON.parse(JSON.stringify(this.session.getCurrentAccount().entity));
         this.profile = JSON.parse(JSON.stringify(this.session.getCurrentProfile().entity.profile));
         this.password = {
             old: '',
@@ -117,8 +119,9 @@ export class ProfileModalModel
             }
 
             this.profileRESTService.editPersonal(this.getProfileOriginal().id, personalRequest).subscribe(data => {
-                this.getProfileOriginal().greetings = JSON.parse(JSON.stringify(this.profile.greetings));
-                this.getProfileOriginal().gender.string = this.profile.gender.string;
+                this.getProfileOriginal().greetings = JSON.parse(JSON.stringify(data.entity.greetings));
+                this.getProfileOriginal().gender.string = data.entity.gender.string;
+                this.profile.greetings = JSON.parse(JSON.stringify(data.entity.greetings));
                 if(personalRequest.avatar){
                     this.getProfileOriginal().image = JSON.parse(JSON.stringify(data.entity.image));
                 }
@@ -130,6 +133,7 @@ export class ProfileModalModel
             success => {
                 this.loading = false;
                 this.messages.push(MessageBusNotificationsLevel.Info, 'Ваши данные сохранены');
+
             },
             error => {
                 this.messages.push(MessageBusNotificationsLevel.Warning, 'Ваши данные не были сохранены')
@@ -159,6 +163,7 @@ export class ProfileModalModel
                 return true;
             }
         }
+        return false;
     }
 }
 

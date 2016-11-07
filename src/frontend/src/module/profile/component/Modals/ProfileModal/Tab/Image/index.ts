@@ -35,7 +35,7 @@ export class ProfileModalImageTab
     }
 
     getImageProfile() {
-        return queryImage(QueryTarget.Biggest, this.session.getCurrentProfile().entity.profile.image);
+        return queryImage(QueryTarget.Biggest, this.session.getCurrentProfile().entity.profile.image).public_path;
     }
 
     deleteProfileImage() {
