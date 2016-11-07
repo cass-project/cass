@@ -15,15 +15,19 @@ class SubscribeProfileCommand extends Command
         try {
             $profile = $this->profileService->getProfileById($request->getAttribute('profileId'));
 
-            $this->subscribeService->subscribeProfile($currentProfile, $profile);
+            $entity = $this->subscribeService->subscribeProfile($currentProfile, $profile);
 
-            return $responseBuilder
-                ->setStatusSuccess()
-                ->build();
+            $responseBuilder
+                ->setJson([
+                    'entity' => $entity->toJSON(),
+                ])
+                ->setStatusSuccess();
         } catch (ProfileNotFoundException $e) {
-            return $responseBuilder
-                ->setStatusNotFound()
-                ->build();
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         }
+
+        return $responseBuilder->build();
     }
 }

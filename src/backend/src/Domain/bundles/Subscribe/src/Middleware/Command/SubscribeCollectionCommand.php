@@ -15,15 +15,19 @@ class SubscribeCollectionCommand extends Command
         try {
             $collection = $this->collectionService->getCollectionById($request->getAttribute('collectionId'));
 
-            $this->subscribeService->subscribeCollection($currentProfile, $collection);
+            $entity = $this->subscribeService->subscribeCollection($currentProfile, $collection);
 
-            return $responseBuilder
-                ->setStatusSuccess()
-                ->build();
+            $responseBuilder
+                ->setJson([
+                    'entity' => $entity->toJSON(),
+                ])
+                ->setStatusSuccess();
         } catch (CollectionNotFoundException $e) {
-            return $responseBuilder
-                ->setStatusNotFound()
-                ->build();
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         }
+
+        return $responseBuilder->build();
     }
 }

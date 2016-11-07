@@ -80,7 +80,7 @@ class SubscribeRepository extends EntityRepository
 
     public function subscribeCollection(Profile $profile, Collection $collection, $options = null): Subscribe
     {
-        $subscribe =  new Subscribe();
+        $subscribe = new Subscribe();
         $subscribe->setProfileId($profile->getId())
             ->setOptions($options)
             ->setSubscribeId($collection->getId())
@@ -89,6 +89,7 @@ class SubscribeRepository extends EntityRepository
         $em = $this->getEntityManager();
         $em->persist($subscribe);
         $em->flush();
+
         return $subscribe;
     }
 

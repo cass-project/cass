@@ -15,15 +15,19 @@ class SubscribeCommunityCommand extends Command
         try {
             $community = $this->communityService->getCommunityById($request->getAttribute('communityId'));
 
-            $this->subscribeService->subscribeCommunity($currentProfile, $community);
+            $entity = $this->subscribeService->subscribeCommunity($currentProfile, $community);
 
-            return $responseBuilder
-                ->setStatusSuccess()
-                ->build();
+            $responseBuilder
+                ->setJson([
+                    'entity' => $entity->toJSON(),
+                ])
+                ->setStatusSuccess();
         } catch (CommunityNotFoundException $e) {
-            return $responseBuilder
-                ->setStatusNotFound()
-                ->build();
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         }
+
+        return $responseBuilder->build();
     }
 }

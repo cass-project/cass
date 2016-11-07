@@ -17,13 +17,14 @@ class UnSubscribeCollectionCommand extends Command
 
             $this->subscribeService->unSubscribeCollection($currentProfile, $collection);
 
-            return $responseBuilder
-                ->setStatusSuccess()
-                ->build();
+            $responseBuilder
+                ->setStatusSuccess();
         } catch (CollectionNotFoundException $e) {
-            return $responseBuilder
-                ->setStatusNotFound()
-                ->build();
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         }
+
+        return $responseBuilder->build();
     }
 }

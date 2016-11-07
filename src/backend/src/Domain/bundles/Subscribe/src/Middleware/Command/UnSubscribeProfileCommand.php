@@ -17,13 +17,14 @@ class UnSubscribeProfileCommand extends Command
 
             $this->subscribeService->unSubscribeProfile($currentProfile, $profile);
 
-            return $responseBuilder
-                ->setStatusSuccess()
-                ->build();
+            $responseBuilder
+                ->setStatusSuccess();
         } catch (ProfileNotFoundException $e) {
-            return $responseBuilder
-                ->setStatusNotFound()
-                ->build();
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         }
+
+        return $responseBuilder->build();
     }
 }

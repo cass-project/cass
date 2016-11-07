@@ -24,7 +24,7 @@ class ListSubscribedCollectionsCommand extends Command
             $seek = new Seek(100, (int) $bodyJson['offset'], (int) $bodyJson['limit']);
             $entities = $this->subscribeService->listSubscribedCollections($profile, $seek);
 
-            return $responseBuilder
+            $responseBuilder
                 ->setJson([
                     'success' => true,
                     'total' => count($entities),
@@ -32,12 +32,13 @@ class ListSubscribedCollectionsCommand extends Command
                         return $subscribe->toJSON();
                     }, $entities)
                 ])
-                ->setStatusSuccess()
-                ->build();
+                ->setStatusSuccess();
         } catch (ProfileNotFoundException $e) {
-            return $responseBuilder
-                ->setStatusNotFound()
-                ->build();
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         }
+
+        return $responseBuilder->build();
     }
 }

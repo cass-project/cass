@@ -1,8 +1,11 @@
 <?php
-namespace CASS\Domain\Bundles\Subscribe\Tests;
+namespace CASS\Domain\Bundles\Subscribe\Tests\Paths;
 
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
+use CASS\Domain\Bundles\Subscribe\Tests\SubscribeMiddlewareTestCase;
 use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
+
 /**
  * @backupGlobals disabled
  */
@@ -11,8 +14,8 @@ class SubscribeThemeMiddlewareTest extends SubscribeMiddlewareTestCase
     public function testSubscribeTheme200()
     {
         $account = DemoAccountFixture::getAccount();
-
         $theme = SampleThemesFixture::getTheme(1);
+
         $this->requestSubscribeTheme($theme->getId())
             ->auth($account->getAPIKey())
             ->execute()
@@ -20,26 +23,28 @@ class SubscribeThemeMiddlewareTest extends SubscribeMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
+                'entity' => [
+                    'profileId' => $account->getCurrentProfile()->getId(),
+                    'subscribeId' => $theme->getId(),
+                    'subscribeType' => Subscribe::TYPE_THEME,
+                ]
             ]);
     }
 
-    public function testSubscrubeThemeUnAuth403()
+    public function test403()
     {
         $theme = SampleThemesFixture::getTheme(1);
         $this->requestSubscribeTheme($theme->getId())
             ->execute()
-            ->expectStatusCode(403)
-            ->expectJSONContentType()
-            ;
+            ->expectAuthError();
     }
 
     public function testSubscribeThemeNotFound404()
     {
         $account = DemoAccountFixture::getAccount();
-        $this->requestSubscribeTheme(99999)
+        $this->requestSubscribeTheme(self::NOT_FOUND_ID)
             ->auth($account->getAPIKey())
             ->execute()
-            ->expectStatusCode(404)
-            ;
+            ->expectNotFoundError();
     }
 }

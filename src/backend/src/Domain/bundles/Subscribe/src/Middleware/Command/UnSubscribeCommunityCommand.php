@@ -16,14 +16,15 @@ class UnSubscribeCommunityCommand extends Command
             $community = $this->communityService->getCommunityById($request->getAttribute('communityId'));
             $this->subscribeService->unSubscribeCommunity($currentProfile, $community);
 
-            return $responseBuilder
-                ->setStatusSuccess()
-                ->build();
+            $responseBuilder
+                ->setStatusSuccess();
         } catch (CommunityNotFoundException $e) {
-            return $responseBuilder
-                ->setStatusNotFound()
-                ->build();
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         }
+
+        return $responseBuilder->build();
     }
 
 }

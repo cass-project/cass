@@ -23,20 +23,22 @@ class ListSubscribedCommunitiesCommand extends Command
             $seek = new Seek(100, (int) $bodyJson['offset'], (int) $bodyJson['limit']);
 
             $entities = $this->subscribeService->listSubscribedCommunities($profile, $seek);
-            return $responseBuilder
+
+            $responseBuilder
                 ->setJson([
                     'success' => true,
                     'total' => count($entities),
                     'entities' => array_map(function (Subscribe $subscribe) {
                         return $subscribe->toJSON();
                     }, $entities)
-                ])->setStatusSuccess()
-                ->build();
+                ])
+                ->setStatusSuccess();
         } catch (ProfileNotFoundException $e) {
-            return $responseBuilder
-                ->setStatusNotFound()
-                ->build();
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         }
-    }
 
+        return $responseBuilder->build();
+    }
 }

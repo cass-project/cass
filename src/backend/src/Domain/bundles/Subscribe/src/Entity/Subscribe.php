@@ -1,13 +1,14 @@
 <?php
 namespace CASS\Domain\Bundles\Subscribe\Entity;
 
+use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdEntityTrait;
 
 /**
  * @Entity(repositoryClass="CASS\Domain\Bundles\Subscribe\Repository\SubscribeRepository")
  * @Table(name="subscribe")
  */
-class Subscribe
+class Subscribe implements IdEntity
 {
     const TYPE_THEME = 1;
     const TYPE_PROFILE = 2;

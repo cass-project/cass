@@ -2,17 +2,18 @@
 namespace CASS\Domain\Bundles\Subscribe\Tests;
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 use CASS\Domain\Bundles\Community\Tests\Fixtures\SampleCommunitiesFixture;
+use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
 
 /**
  * @backupGlobals disabled
  */
 class SubscribeCommunityMiddlewareTest extends SubscribeMiddlewareTestCase
 {
-    public function testSubscribeCommunitySuccess200()
+    public function test200()
     {
-        $community = SampleCommunitiesFixture::getCommunity(1);
-        
         $account = DemoAccountFixture::getAccount();
+        $community = SampleCommunitiesFixture::getCommunity(1);
+
         $this->requestSubscribeCommunity($community->getId())
             ->auth($account->getAPIKey())
             ->execute()
@@ -20,23 +21,30 @@ class SubscribeCommunityMiddlewareTest extends SubscribeMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
+                'entity' => [
+                    'profileId' => $account->getCurrentProfile()->getId(),
+                    'subscribeId' => $community->getId(),
+                    'subscribeType' => Subscribe::TYPE_COMMUNITY,
+                ]
             ]);
     }
 
-    public function testSubscribeCommunityNotAuth403()
+    public function test403()
     {
         $community = SampleCommunitiesFixture::getCommunity(1);
+
         $this->requestSubscribeCommunity($community->getId())
             ->execute()
-            ->expectStatusCode(403);
+            ->expectAuthError();
     }
 
-    public function testSubscribeCommunityNotFound404()
+    public function test404()
     {
         $account = DemoAccountFixture::getAccount();
-        $this->requestSubscribeCommunity(999999)
+
+        $this->requestSubscribeCommunity(self::NOT_FOUND_ID)
             ->auth($account->getAPIKey())
             ->execute()
-            ->expectStatusCode(404);
+            ->expectNotFoundError();
     }
 }

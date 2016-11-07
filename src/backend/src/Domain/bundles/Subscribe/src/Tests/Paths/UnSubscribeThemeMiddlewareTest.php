@@ -1,7 +1,9 @@
 <?php
-namespace CASS\Domain\Bundles\Subscribe\Tests;
+namespace CASS\Domain\Bundles\Subscribe\Tests\Paths;
+
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
-use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
+use CASS\Domain\Bundles\Subscribe\Tests\Fixtures\DemoSubscribeFixture;
+use CASS\Domain\Bundles\Subscribe\Tests\SubscribeMiddlewareTestCase;
 
 /**
  * @backupGlobals disabled
@@ -10,10 +12,12 @@ class UnSubscribeThemeMiddlewareTest extends SubscribeMiddlewareTestCase
 {
     public function testUnSubscribeThemeSuccess200()
     {
-        $account = DemoAccountFixture::getAccount();
-        $theme = SampleThemesFixture::getTheme(1);
+        $this->upFixture($fixture = new DemoSubscribeFixture());
 
-        $this->requestUnSubscribeTheme($theme->getId())
+        $subscribe = $fixture->getSubscribe('theme', 1);
+        $account = DemoAccountFixture::getAccount();
+
+        $this->requestUnSubscribeTheme($subscribe->getSubscribeId())
             ->auth($account->getAPIKey())
             ->execute()
             ->expectStatusCode(200)
@@ -25,20 +29,24 @@ class UnSubscribeThemeMiddlewareTest extends SubscribeMiddlewareTestCase
 
     public function testUnSubscribeThemeNotAuth403()
     {
-        $theme = SampleThemesFixture::getTheme(1);
+        $this->upFixture($fixture = new DemoSubscribeFixture());
 
-        $this->requestUnSubscribeTheme($theme->getId())
+        $subscribe = $fixture->getSubscribe('theme', 1);
+
+        $this->requestUnSubscribeTheme($subscribe->getSubscribeId())
             ->execute()
-            ->expectStatusCode(403);
+            ->expectAuthError();
     }
 
     public function testUnSubscribeThemeNotFound404()
     {
+        $this->upFixture($fixture = new DemoSubscribeFixture());
+
         $account = DemoAccountFixture::getAccount();
 
-        $this->requestUnSubscribeTheme(9999)
+        $this->requestUnSubscribeTheme(self::NOT_FOUND_ID)
             ->auth($account->getAPIKey())
             ->execute()
-            ->expectStatusCode(404);
+            ->expectNotFoundError();
     }
 }

@@ -16,13 +16,14 @@ class UnSubscribeThemeCommand extends Command
             $theme = $this->themeService->getThemeById($request->getAttribute('themeId'));
             $this->subscribeService->unSubscribeTheme($currentProfile, $theme);
 
-            return $responseBuilder
-                ->setStatusSuccess()
-                ->build();
+            $responseBuilder
+                ->setStatusSuccess();
         } catch (ThemeNotFoundException $e) {
-            return $responseBuilder
-                ->setStatusNotFound()
-                ->build();
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         }
+
+        return $responseBuilder->build();
     }
 }

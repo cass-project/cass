@@ -23,7 +23,7 @@ class ListSubscribedThemesCommand extends Command
             $seek = new Seek(100, (int) $bodyJson['offset'], (int) $bodyJson['limit']);
             $entities = $this->subscribeService->listSubscribedThemes($profile, $seek);
 
-            return $responseBuilder
+            $responseBuilder
                 ->setJson([
                     'success' => true,
                     'total' => count($entities),
@@ -31,12 +31,13 @@ class ListSubscribedThemesCommand extends Command
                         return $subscribe->toJSON();
                     }, $entities)
                 ])
-                ->setStatusSuccess()
-                ->build();
+                ->setStatusSuccess();
         } catch (ProfileNotFoundException $e) {
-            return $responseBuilder
-                ->setStatusNotFound()
-                ->build();
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         }
+
+        return $responseBuilder->build();
     }
 }

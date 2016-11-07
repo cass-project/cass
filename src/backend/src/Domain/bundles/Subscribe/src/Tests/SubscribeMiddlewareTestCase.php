@@ -6,7 +6,6 @@ use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 use CASS\Domain\Bundles\Collection\Tests\Fixtures\SampleCollectionsFixture;
 use CASS\Domain\Bundles\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
-use CASS\Domain\Bundles\Subscribe\Tests\Fixtures\DemoSubscribeFixture;
 use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
 use ZEA2\Platform\Bundles\PHPUnit\RESTRequest\RESTRequest;
 
@@ -21,15 +20,11 @@ class SubscribeMiddlewareTestCase extends CASSMiddlewareTestCase
             new DemoAccountFixture(),
             new SampleThemesFixture(),
             new DemoProfileFixture(),
-            
             new SampleCommunitiesFixture(),
             new SampleCollectionsFixture(),
-
-            new DemoSubscribeFixture()
         ];
     }
 
-    // Theme
     protected function requestSubscribeTheme(int $themeId): RESTRequest
     {
         return $this->request('PUT', sprintf('/protected/subscribe/subscribe-theme/%s', $themeId));
@@ -46,7 +41,6 @@ class SubscribeMiddlewareTestCase extends CASSMiddlewareTestCase
             ->setParameters($json);
     }
 
-    // Profile
     protected function requestSubscribeProfile(int $profileId): RESTRequest
     {
         return $this->request('PUT', sprintf('/protected/subscribe/subscribe-profile/%s', $profileId));
@@ -63,7 +57,6 @@ class SubscribeMiddlewareTestCase extends CASSMiddlewareTestCase
             ->setParameters($json);
     }
 
-    // Collection
     protected function requestSubscribeCollection(int $collectionId): RESTRequest
     {
         return $this->request('PUT', sprintf('/protected/subscribe/subscribe-collection/%s', $collectionId));
@@ -80,7 +73,6 @@ class SubscribeMiddlewareTestCase extends CASSMiddlewareTestCase
             ->setParameters($json);
     }
 
-    // COMMUNITY
     protected function requestSubscribeCommunity(int $communityId): RESTRequest
     {
         return $this->request('PUT', sprintf('/protected/subscribe/subscribe-community/%d', $communityId));
@@ -96,5 +88,4 @@ class SubscribeMiddlewareTestCase extends CASSMiddlewareTestCase
         return $this->request('POST', sprintf('/subscribe/profile/%s/list-communities', $profileId))
             ->setParameters($json);
     }
-
 }
