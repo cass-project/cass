@@ -20,8 +20,8 @@ class EditPersonalRequest extends SchemaParams
             $data['nick_name']
         );
 
-        if(isset($data->gender) && is_string($data->gender)) {
-            $parameters->specifyGender($data->gender);
+        if(isset($data['gender']) && is_string($data['gender'])) {
+            $parameters->specifyGender($data['gender']);
         }
 
         return $parameters;
