@@ -9,6 +9,7 @@ use CASS\Util\Entity\IdEntity\IdEntity;
 use CASS\Util\Entity\IdEntity\IdEntityTrait;
 use CASS\Util\Entity\SIDEntity\SIDEntity;
 use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
+use CASS\Util\GenerateRandomString;
 use CASS\Util\JSONSerializable;
 use CASS\Domain\Bundles\Account\Entity\Account;
 use CASS\Domain\Bundles\Avatar\Entity\ImageEntity;
@@ -116,6 +117,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
         $result = [
             'id' => $this->isPersisted() ? $this->getId() : '#NEW_PROFILE',
             'sid' => $this->getSID(),
+            'rsid' => GenerateRandomString::gen(32),
             'account_id' => $this->getAccount()->isPersisted()
                 ? $this->getAccount()->getId()
                 : '#NEW_ACCOUNT'
