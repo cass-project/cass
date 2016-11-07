@@ -14,6 +14,9 @@ import {queryImage, QueryTarget} from "../../../../../../avatar/functions/query"
     styles: [
         require('./style.shadow.scss'),
         require('./style.navigation.shadow.scss'),
+    ],
+    providers: [
+        PostCardHelper,
     ]
 })
 export class PostCardList implements OnChanges

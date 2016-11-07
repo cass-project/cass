@@ -13,6 +13,9 @@ import {TranslationService} from "../../../../../../i18n/service/TranslationServ
     styles: [
         require('./style.shadow.scss'),
         require('./style.navigation.shadow.scss'),
+    ],
+    providers: [
+        PostCardHelper,
     ]
 })
 

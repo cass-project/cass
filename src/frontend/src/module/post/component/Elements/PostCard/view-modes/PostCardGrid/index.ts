@@ -13,6 +13,9 @@ import {QueryTarget, queryImage} from "../../../../../../avatar/functions/query"
     styles: [
         require('./style.shadow.scss'),
         require('./style.navigation.shadow.scss'),
+    ],
+    providers: [
+        PostCardHelper,
     ]
 })
 
