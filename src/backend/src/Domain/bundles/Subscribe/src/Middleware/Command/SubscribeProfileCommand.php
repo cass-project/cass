@@ -19,7 +19,7 @@ class SubscribeProfileCommand extends Command
 
             $responseBuilder
                 ->setJson([
-                    'entity' => $entity->toJSON(),
+                    'subscribe' => $this->subscribeFormatter->formatSingle($entity),
                 ])
                 ->setStatusSuccess();
         } catch (ProfileNotFoundException $e) {

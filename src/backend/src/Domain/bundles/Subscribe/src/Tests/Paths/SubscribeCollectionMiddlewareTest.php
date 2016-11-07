@@ -24,10 +24,13 @@ class SubscribeCollectionMiddlewareTest extends SubscribeMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'entity' => [
-                    'profileId' => $account->getCurrentProfile()->getId(),
-                    'subscribeId' => $collection->getId(),
-                    'subscribeType' => Subscribe::TYPE_COLLECTION,
+                'subscribe' => [
+                    'profile_id' => $account->getCurrentProfile()->getId(),
+                    'subscribe_id' => $collection->getId(),
+                    'subscribe_type' => Subscribe::TYPE_COLLECTION,
+                    'entity' => [
+                        'id' => $collection->getId(),
+                    ],
                 ]
             ]);
     }

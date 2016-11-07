@@ -24,7 +24,7 @@ class ListSubscribedThemesTest extends SubscribeMiddlewareTestCase
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'entities' => array_map(function(Subscribe $subscribe) {
+                'subscribes' => array_map(function(Subscribe $subscribe) {
                     return $subscribe->toJSON();
                 }, $fixture->getSubscribes('theme')),
                 'total' => count($fixture->getSubscribes('theme')),

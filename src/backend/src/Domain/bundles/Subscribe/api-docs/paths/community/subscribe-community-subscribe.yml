@@ -1,16 +1,16 @@
-"/protected/subscribe/subscribe-collection/{collectionId}":
+"/protected/subscribe/subscribe-community/{communityId}":
   put:
     tags:
       - subscribe
-    description: Подписаться на коллекцию
+    description: Подписаться на коммунити
     security:
       - x_api_key: []
     parameters:
-      - name: collectionId
+      - name: communityId
         type: number
         in: path
         required: true
-        description: ID коллекции
+        description: ID коммунити
     responses:
       200:
         description: 200 OK
@@ -18,12 +18,12 @@
           type: object
           required:
             - success
-            - entity
+            - subscribe
           properties:
             success:
               type: boolean
               description: '=true'
-            entity:
+            subscribe:
               $ref: '#/definitions/Subscribe_Entity_Subscribe'
       404:
         $ref: '#/responses/NotFound'

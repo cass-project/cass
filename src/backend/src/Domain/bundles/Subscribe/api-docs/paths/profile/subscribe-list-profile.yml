@@ -32,12 +32,12 @@
           type: object
           required:
             - success
-            - entities
+            - subscribes
           properties:
             success:
               type: boolean
               description: '=true'
-            entities:
+            subscribes:
               type: array
               items:
                 $ref: '#/definitions/Subscribe_Entity_Subscribe'
