@@ -11,6 +11,7 @@ import {UINavigationObservable} from "../../../../ui/service/navigation";
 import {CommunityRouteHelper} from "./helper";
 import {ThemeRouteHelper} from "../../theme-route-helper";
 
+
 @Component({
     template: require('./template.jade'),
     styles: [

@@ -11,6 +11,9 @@ import {ViewOptionValue} from "../../../../feed/service/FeedService/options/View
     template: require('./template.jade'),
     styles: [
         require('./style.shadow.scss')
+    ],
+    providers: [
+        PostCardHelper,
     ]
 })
 export class PostPlayerCard implements OnChanges
