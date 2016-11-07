@@ -54,4 +54,6 @@ class SubscribeCollectionMiddlewareTest extends SubscribeMiddlewareTestCase
             ->execute()
             ->expectNotFoundError();
     }
+
+    
 }

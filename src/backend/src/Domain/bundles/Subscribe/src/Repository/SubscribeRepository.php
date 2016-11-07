@@ -5,6 +5,7 @@ use CASS\Domain\Bundles\Collection\Entity\Collection;
 use CASS\Domain\Bundles\Community\Entity\Community;
 use CASS\Domain\Bundles\Profile\Entity\Profile;
 use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
+use CASS\Domain\Bundles\Subscribe\Exception\ConflictSubscribe;
 use CASS\Domain\Bundles\Subscribe\Exception\UnknownSubscribeException;
 use CASS\Domain\Bundles\Theme\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
@@ -18,6 +19,10 @@ class SubscribeRepository extends EntityRepository
             ->setOptions($options)
             ->setSubscribeId($theme->getId())
             ->setSubscribeType(Subscribe::TYPE_THEME);
+
+        if($this->getSubscribeByEntity($subscribe)) {
+            throw new ConflictSubscribe(sprintf("subscribe already exists "));
+        }
 
         $em = $this->getEntityManager();
         $em->persist($subscribe);
@@ -36,7 +41,19 @@ class SubscribeRepository extends EntityRepository
     }
 
 
-    public function getSubscribe(array $criteria): Subscribe
+    public function getSubscribe( $criteria): Subscribe
+    {
+        $subscribe = null;
+        if(is_array($criteria)){
+            $subscribe = $this->getSubscribeByCriteria($criteria);
+        } elseif($criteria instanceof Subscribe){
+            $subscribe = $this->getSubscribeByEntity($criteria);
+        }
+
+        return $subscribe;
+    }
+
+    public function getSubscribeByCriteria(array $criteria): Subscribe
     {
         if (!isset($criteria['profileId'])) throw new \Exception("required option: profile_id missing");
         if (!isset($criteria['subscribeId'])) throw new \Exception("required option: subscribe_id missing");
@@ -54,6 +71,15 @@ class SubscribeRepository extends EntityRepository
         return $subscribe;
     }
 
+    private function getSubscribeByEntity(Subscribe $subscribe): Subscribe
+    {
+        return $this->getSubscribeByCriteria([
+            'profileId' => $subscribe->getProfileId(),
+            'subscribeId' => $subscribe->getSubscribeId(),
+            'subscribeType' => $subscribe->getSubscribeType(),
+        ]);
+    }
+
     public function subscribeProfile(Profile $profile1, Profile $profile2, $options = null): Subscribe
     {
         $subscribe =  new Subscribe();
@@ -61,6 +87,10 @@ class SubscribeRepository extends EntityRepository
             ->setOptions($options)
             ->setSubscribeId($profile2->getId())
             ->setSubscribeType(Subscribe::TYPE_PROFILE);
+
+        if($this->getSubscribeByEntity($subscribe)) {
+            throw new ConflictSubscribe(sprintf("subscribe already exists "));
+        }
 
         $em = $this->getEntityManager();
         $em->persist($subscribe);
@@ -86,6 +116,13 @@ class SubscribeRepository extends EntityRepository
             ->setSubscribeId($collection->getId())
             ->setSubscribeType(Subscribe::TYPE_COLLECTION);
 
+
+
+        if($this->getSubscribeByEntity($subscribe)) {
+            throw new ConflictSubscribe(sprintf("subscribe already exists "));
+        }
+
+
         $em = $this->getEntityManager();
         $em->persist($subscribe);
         $em->flush();
@@ -100,6 +137,10 @@ class SubscribeRepository extends EntityRepository
             ->setOptions($options)
             ->setSubscribeId($community->getId())
             ->setSubscribeType(Subscribe::TYPE_COMMUNITY);
+
+        if($this->getSubscribeByEntity($subscribe)) {
+            throw new ConflictSubscribe(sprintf("subscribe already exists "));
+        }
 
         $em = $this->getEntityManager();
         $em->persist($subscribe);

@@ -2,6 +2,7 @@
 namespace CASS\Domain\Bundles\Subscribe\Middleware\Command;
 
 use CASS\Domain\Bundles\Theme\Exception\ThemeNotFoundException;
+use CASS\Domain\Bundles\Subscribe\Exception\ConflictSubscribe;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
@@ -21,6 +22,10 @@ class SubscribeThemeCommand extends Command
                     'subscribe' => $this->subscribeFormatter->formatSingle($entity),
                 ])
                 ->setStatusSuccess();
+        } catch (ConflictSubscribe $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setStatusConflict();
         } catch (ThemeNotFoundException $e) {
             $responseBuilder
                 ->setError($e)
