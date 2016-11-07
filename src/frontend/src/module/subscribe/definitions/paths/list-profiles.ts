@@ -1,12 +1,13 @@
 import {Success200} from "../../../common/definitions/common";
 import {SubscriptionEntity} from "../entity/Subscription";
+import {ProfileEntity} from "../../../profile/definitions/entity/Profile";
 
-export interface ListProfiles extends Success200
+export interface ListSubscribeProfiles extends Success200
 {
-    entities: SubscriptionEntity[];
+    subscribes: SubscriptionEntity<ProfileEntity>[];
 }
 
-export interface ListProfileRequest
+export interface ListSubscribeProfileRequest
 {
     limit: number,
     offset: number
