@@ -45,6 +45,14 @@ export class ProfileDashboardRoute
         feed.update();
     }
 
+    getEntity(){
+        if(this.service.getEntity().is_own){
+            return this.session.getCurrentProfile().entity;
+        } else {
+            return this.service.getEntity();
+        }
+    }
+    
     canPost(): boolean {
         if(this.session.isSignedIn()) {
             let testIsOwnProfile = () => { return this.service.isOwnProfile() };

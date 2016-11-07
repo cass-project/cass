@@ -25,6 +25,7 @@ export interface ProfileExtendedEntity {
 export interface ProfileEntity {
     id: number;
     sid: string;
+    rsid: string;
     date_created_on: string;
     account_id: number;
     is_current: boolean;

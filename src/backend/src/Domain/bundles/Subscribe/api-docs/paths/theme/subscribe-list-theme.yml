@@ -1,20 +1,18 @@
-"/subscribe/profile/{profileId}/list-communities":
+"/subscribe/profile/{profileId}/list-themes":
   post:
     tags:
       - subscribe
-    description: Список подписок коллекций
-    security:
-      - x_api_key: []
+    description: Получить список подписаных тем
     parameters:
       - name: profileId
         type: number
         in: path
         required: true
-        description: ID темы
+        description: ID профиля
       - name: body
         in: body
         required: true
-        description: Критерии выборки
+        description: Персональные данные
         schema:
           type: object
           required:
@@ -34,12 +32,12 @@
           type: object
           required:
             - success
-            - entities
+            - subscribes
           properties:
             success:
               type: boolean
               description: '=true'
-            entities:
+            subscribes:
               type: array
               items:
                 $ref: '#/definitions/Subscribe_Entity_Subscribe'

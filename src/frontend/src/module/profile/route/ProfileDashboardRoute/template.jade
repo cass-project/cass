@@ -1,7 +1,7 @@
 article.component.component-profile-dashboard-route
   div.dashboard
     .dashboard-content
-      cass-profile-header([profile]="service.getEntity()")
+      cass-profile-header([profile]="getEntity()")
       .post-form(*ngIf='canPost()')
         .post-form-container
           cass-post-form([collection]="main_collection", [post-type] = "postType", (success) = "unshiftEntity($event)")

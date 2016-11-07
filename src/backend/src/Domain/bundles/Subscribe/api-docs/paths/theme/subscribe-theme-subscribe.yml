@@ -1,16 +1,16 @@
-"/protected/subscribe/subscribe-profile/{profileId}":
+"/protected/subscribe/subscribe-theme/{themeId}":
   put:
     tags:
       - subscribe
-    description: Подписаться на профиль
+    description: Подписаться на тему
     security:
       - x_api_key: []
     parameters:
-      - name: profileId
+      - name: themeId
         type: number
         in: path
         required: true
-        description: ID профиля
+        description: ID темы
     responses:
       200:
         description: 200 OK
@@ -18,12 +18,12 @@
           type: object
           required:
             - success
-            - entity
+            - subscribe
           properties:
             success:
               type: boolean
               description: '=true'
-            entity:
+            subscribe:
               $ref: '#/definitions/Subscribe_Entity_Subscribe'
       404:
         $ref: '#/responses/NotFound'

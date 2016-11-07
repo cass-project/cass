@@ -3,6 +3,7 @@ namespace CASS\Domain\Bundles\Profile\Tests\REST\Paths;
 
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 use CASS\Domain\Bundles\Profile\Entity\Profile\Gender\GenderFemale;
+use CASS\Domain\Bundles\Profile\Entity\Profile\Gender\GenderNotSpecified;
 use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**
@@ -10,7 +11,7 @@ use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
  */
 class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
 {
-    public function testEditPersonal403()
+    public function test403()
     {
         $profile = DemoProfileFixture::getProfile();
 
@@ -27,7 +28,7 @@ class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
             ->expectAuthError();
     }
 
-    public function testEditPersonal()
+    public function test200EditPersonal()
     {
         $account = DemoAccountFixture::getAccount();
         $profile = DemoProfileFixture::getProfile();
@@ -58,7 +59,7 @@ class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
             ]);
     }
 
-    public function editPersonalWithGender()
+    public function test200EditPersonalWithGender()
     {
         $account = DemoAccountFixture::getAccount();
         $profile = DemoProfileFixture::getProfile();
@@ -80,7 +81,7 @@ class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
                 'entity' => [
                     'id' => $profile->getId(),
                     'greetings' => [
-                        'method' => $json['greetings_method'],
+                        'method' => $json['method'],
                         'greetings' => sprintf('%s % s', $json['first_name'], $json['last_name']),
                         'first_name' => $json['first_name'],
                         'last_name' => $json['last_name'],
@@ -89,6 +90,73 @@ class ProfileEditPersonalMiddlewareTest extends ProfileMiddlewareTestCase
                     'gender' => [
                         'int' => GenderFemale::INT_CODE,
                         'string' => GenderFemale::STRING_CODE
+                    ]
+                ]
+            ]);
+    }
+
+
+    public function testEditPersonalUnsetGender()
+    {
+        $account = DemoAccountFixture::getAccount();
+        $profile = DemoProfileFixture::getProfile();
+
+        $json = [
+            'method' => 'fl',
+            'first_name' => 'Annie',
+            'middle_name' => 'the Best',
+            'last_name' => 'Mage',
+            'nick_name' => 'annie_bears',
+            'gender' => 'female'
+        ];
+
+        $this->requestEditPersonal($profile->getId(), $json)
+            ->auth($account->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONBody([
+                'entity' => [
+                    'id' => $profile->getId(),
+                    'greetings' => [
+                        'method' => $json['method'],
+                        'greetings' => sprintf('%s % s', $json['first_name'], $json['last_name']),
+                        'first_name' => $json['first_name'],
+                        'last_name' => $json['last_name'],
+                        'middle_name' => $json['middle_name'],
+                    ],
+                    'gender' => [
+                        'int' => GenderFemale::INT_CODE,
+                        'string' => GenderFemale::STRING_CODE
+                    ]
+                ]
+            ]);
+
+        $json = [
+            'method' => 'fl',
+            'first_name' => 'Annie',
+            'middle_name' => 'the Best',
+            'last_name' => 'Mage',
+            'nick_name' => 'annie_bears',
+            'gender' => 'not-specified'
+        ];
+
+        $this->requestEditPersonal($profile->getId(), $json)
+            ->auth($account->getAPIKey())
+            ->execute()
+            ->expectStatusCode(200)
+            ->expectJSONBody([
+                'entity' => [
+                    'id' => $profile->getId(),
+                    'greetings' => [
+                        'method' => $json['method'],
+                        'greetings' => sprintf('%s % s', $json['first_name'], $json['last_name']),
+                        'first_name' => $json['first_name'],
+                        'last_name' => $json['last_name'],
+                        'middle_name' => $json['middle_name'],
+                    ],
+                    'gender' => [
+                        'int' => GenderNotSpecified::INT_CODE,
+                        'string' => GenderNotSpecified::STRING_CODE
                     ]
                 ]
             ]);

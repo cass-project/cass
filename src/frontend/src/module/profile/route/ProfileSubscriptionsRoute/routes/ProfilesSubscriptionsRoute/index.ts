@@ -2,8 +2,8 @@ import {Component} from "@angular/core";
 import {SubscribeRESTService} from "../../../../../subscribe/service/SubscribeRESTService";
 import {ProfileRouteService} from "../../../ProfileRoute/service";
 import {ProfileEntity} from "../../../../definitions/entity/Profile";
-import {ListProfiles} from "../../../../../subscribe/definitions/paths/list-profiles";
-import {ListProfileRequest} from "../../../../../subscribe/definitions/paths/list-profiles";
+import {ListSubscribeProfiles} from "../../../../../subscribe/definitions/paths/list-profiles";
+import {ListSubscribeProfileRequest} from "../../../../../subscribe/definitions/paths/list-profiles";
 
 @Component({
     template: require('./template.jade'),
@@ -14,8 +14,8 @@ import {ListProfileRequest} from "../../../../../subscribe/definitions/paths/lis
 export class ProfilesSubscriptionsRoute
 { /*
     private profile: ProfileEntity;
-    private response: ListProfiles;
-    private request: ListProfileRequest = {
+    private response: ListSubscribeProfiles;
+    private request: ListSubscribeProfileRequest = {
         limit: 50,
         offset: 0
     };

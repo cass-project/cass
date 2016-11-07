@@ -5,6 +5,7 @@ Subscribe_Entity_Subscribe:
     - profile_id
     - subscribe_id
     - subscribe_type
+    - entity
   properties:
     id:
       type: number
@@ -18,3 +19,6 @@ Subscribe_Entity_Subscribe:
     subscribe_type:
       type: number
       description: тип ресурса на который произведена подписка
+    entity:
+      type: object
+      description: Сущность, на которую подписались (профиль, тематика, подборка, сообщество)

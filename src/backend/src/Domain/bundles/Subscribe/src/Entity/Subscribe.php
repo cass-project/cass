@@ -88,9 +88,9 @@ class Subscribe implements IdEntity
     public function toJSON(): array
     {
         return [
-            'profileId'     => $this->profileId,
-            'subscribeId'   => $this->subscribeId,
-            'subscribeType' => $this->subscribeType
+            'profile_id'     => $this->profileId,
+            'subscribe_id'   => $this->subscribeId,
+            'subscribe_type' => $this->subscribeType
         ];
     }
 }

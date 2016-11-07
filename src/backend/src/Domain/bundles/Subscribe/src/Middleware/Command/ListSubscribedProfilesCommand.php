@@ -27,9 +27,7 @@ class ListSubscribedProfilesCommand extends Command
                 ->setJson([
                     'success' => true,
                     'total' => count($entities),
-                    'entities' => array_map(function (Subscribe $subscribe) {
-                        return $subscribe->toJSON();
-                    }, $entities)
+                    'subscribes' => $this->subscribeFormatter->formatMany($entities),
                 ])
                 ->setStatusSuccess();
         } catch (ProfileNotFoundException $e) {

@@ -20,12 +20,11 @@ class ListSubscribedCollectionsTest extends SubscribeMiddlewareTestCase
 
         $this->requestListSubscribedCollections($profileId, $json)
             ->execute()
-            ->dump()
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([
                 'success' => true,
-                'entities' => array_map(function(Subscribe $subscribe) {
+                'subscribes' => array_map(function(Subscribe $subscribe) {
                     return $subscribe->toJSON();
                 }, $fixture->getSubscribes('collection')),
                 'total' => count($fixture->getSubscribes('collection')),

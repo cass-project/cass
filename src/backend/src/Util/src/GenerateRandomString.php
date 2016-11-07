@@ -5,7 +5,7 @@ class GenerateRandomString
 {
     static public function gen(int $length = 10) {
         /** @see http://stackoverflow.com/questions/4356289/php-random-string-generator */
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+        $characters = '0123456789abcdef';
         $charactersLength = strlen($characters);
         $randomString = '';
 

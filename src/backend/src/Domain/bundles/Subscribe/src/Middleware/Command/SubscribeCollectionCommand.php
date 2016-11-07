@@ -19,7 +19,7 @@ class SubscribeCollectionCommand extends Command
 
             $responseBuilder
                 ->setJson([
-                    'entity' => $entity->toJSON(),
+                    'subscribe' => $this->subscribeFormatter->formatSingle($entity),
                 ])
                 ->setStatusSuccess();
         } catch (CollectionNotFoundException $e) {

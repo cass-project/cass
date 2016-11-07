@@ -1,12 +1,13 @@
 import {Success200} from "../../../common/definitions/common";
 import {SubscriptionEntity} from "../entity/Subscription";
+import {CommunityEntity} from "../../../community/definitions/entity/Community";
 
-export interface ListCommunities extends Success200
+export interface ListSubscribeCommunities extends Success200
 {
-    entities: SubscriptionEntity[];
+    subscribes: SubscriptionEntity<CommunityEntity>[];
 }
 
-export interface ListCommunitiesRequest
+export interface ListSubscribeCommunitiesRequest
 {
     limit: number,
     offset: number
