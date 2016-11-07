@@ -16,6 +16,7 @@ class ProfileCreateMiddlewareTest extends ProfileMiddlewareTestCase
         $this->requestCreateProfile()
             ->auth($account->getAPIKey())
             ->execute()
+            ->dump()
             ->expectStatusCode(200)
             ->expectJSONContentType()
             ->expectJSONBody([

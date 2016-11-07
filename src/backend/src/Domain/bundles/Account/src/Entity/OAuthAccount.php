@@ -1,8 +1,8 @@
 <?php
 namespace CASS\Domain\Bundles\Account\Entity;
 
-use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdEntityTrait;
+use ZEA2\Platform\Markers\IdEntity\IdEntity;
+use ZEA2\Platform\Markers\IdEntity\IdEntityTrait;
 
 /**
  * @Entity(repositoryClass="CASS\Domain\Bundles\Account\Repository\OAuthAccountRepository")

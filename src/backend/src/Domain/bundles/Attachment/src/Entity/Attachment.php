@@ -1,10 +1,10 @@
 <?php
 namespace CASS\Domain\Bundles\Attachment\Entity;
 
-use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdEntityTrait;
-use CASS\Util\Entity\SIDEntity\SIDEntity;
-use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
+use ZEA2\Platform\Markers\IdEntity\IdEntity;
+use ZEA2\Platform\Markers\IdEntity\IdEntityTrait;
+use ZEA2\Platform\Markers\SIDEntity\SIDEntity;
+use ZEA2\Platform\Markers\SIDEntity\SIDEntityTrait;
 use CASS\Util\JSONSerializable;
 
 /**

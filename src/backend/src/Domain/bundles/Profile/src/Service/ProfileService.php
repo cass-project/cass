@@ -40,6 +40,9 @@ final class ProfileService implements EventEmitterAwareService
     /** @var ProfileRepository */
     private $profileRepository;
 
+    /** @var ProfileCardService */
+    private $profileCardService;
+
     /** @var AccountService */
     private $accountService;
 
@@ -64,6 +67,7 @@ final class ProfileService implements EventEmitterAwareService
     public function __construct(
         CurrentAccountService $currentAccountService,
         ProfileRepository $profileRepository,
+        ProfileCardService $profileCardService,
         CollectionService $collectionService,
         AvatarService $avatarService,
         BackdropService $backdropService,
@@ -73,6 +77,7 @@ final class ProfileService implements EventEmitterAwareService
     )
     {
         $this->profileRepository = $profileRepository;
+        $this->profileCardService = $profileCardService;
         $this->collectionService = $collectionService;
         $this->avatarService = $avatarService;
         $this->backdropService = $backdropService;

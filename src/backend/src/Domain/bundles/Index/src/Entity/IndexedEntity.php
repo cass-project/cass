@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Index\Entity;
 
-use CASS\Util\Entity\IdEntity\IdEntity;
+use ZEA2\Platform\Markers\IdEntity\IdEntity;
 
 interface IndexedEntity extends IdEntity
 {

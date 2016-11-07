@@ -5,7 +5,8 @@ use CASS\Application\Bundle\GenericBundle;
 
 class DomainBundle extends GenericBundle
 {
-    public function getDir() {
+    public function getDir()
+    {
         return __DIR__;
     }
 }

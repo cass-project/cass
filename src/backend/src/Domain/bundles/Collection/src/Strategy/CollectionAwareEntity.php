@@ -1,7 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Collection\Strategy;
 
-use CASS\Util\Entity\IdEntity\IdEntity;
+use ZEA2\Platform\Markers\IdEntity\IdEntity;
 use CASS\Domain\Bundles\Collection\Collection\CollectionTree\ImmutableCollectionTree;
 
 interface CollectionAwareEntity extends IdEntity

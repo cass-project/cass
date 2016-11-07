@@ -42,9 +42,11 @@ abstract class CASSMiddlewareTestCase extends MiddlewareTestCase
      */
     protected function setUp()
     {
-        $transactionService = $this->container()->get(TransactionService::class);
-        /** @var TransactionService $transactionService */
+        $transactionService = $this->container()->get(TransactionService::class); /** @var TransactionService $transactionService */
         $transactionService->beginTransaction();
+
+        $currentAccountService = $this->container()->get(CurrentAccountService::class); /** @var CurrentAccountService $currentAccountService */
+        $currentAccountService->emptyToken();
 
         $app = $this->app();
         $em = $this->container()->get(EntityManager::class);
@@ -63,8 +65,7 @@ abstract class CASSMiddlewareTestCase extends MiddlewareTestCase
      */
     protected function tearDown()
     {
-        $transactionService = $this->container()->get(TransactionService::class);
-        /** @var TransactionService $transactionService */
+        $transactionService = $this->container()->get(TransactionService::class); /** @var TransactionService $transactionService */
         $transactionService->rollback();
 
         /** @var Database $mongoDB */

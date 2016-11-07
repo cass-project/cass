@@ -1,8 +1,8 @@
 <?php
 namespace CASS\Domain\Bundles\Backdrop\Entity;
 
-use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\SIDEntity\SIDEntity;
+use ZEA2\Platform\Markers\IdEntity\IdEntity;
+use ZEA2\Platform\Markers\SIDEntity\SIDEntity;
 
 interface BackdropEntityAware extends IdEntity, SIDEntity
 {

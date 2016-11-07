@@ -1,8 +1,8 @@
 <?php
 namespace CASS\Domain\Bundles\Feedback\Entity;
 
-use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdEntityTrait;
+use ZEA2\Platform\Markers\IdEntity\IdEntity;
+use ZEA2\Platform\Markers\IdEntity\IdEntityTrait;
 use CASS\Util\JSONSerializable;
 use CASS\Domain\Bundles\Feedback\Exception\EmptyDescriptionException;
 use CASS\Domain\Bundles\Feedback\FeedbackType\FeedbackType;

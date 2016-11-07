@@ -7,7 +7,7 @@ use CASS\Domain\Bundles\Profile\Middleware\Request\EditPersonalRequest;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class EditPersonalCommand extends Command
+final class EditPersonalCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {

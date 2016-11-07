@@ -250,6 +250,7 @@ abstract class MiddlewareTestCase extends PHPUnit_Framework_TestCase
                     $value
                 ));
             }else if(is_array($value)) {
+                $this->assertTrue(is_array($actual[$key]));
                 $this->recursiveAssertEquals($value, $actual[$key], $level . '- ');
             }else if(is_object($value) && ($value instanceof \Closure)) {
                 $value($actual[$key]);

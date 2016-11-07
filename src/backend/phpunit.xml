@@ -18,6 +18,9 @@
         <testsuite name="domain_profile">
             <directory>src/Domain/bundles/Profile/src/Tests</directory>
         </testsuite>
+        <testsuite name="domain_profile_card">
+            <directory>src/Domain/bundles/Profile/src/Tests/REST/Paths/Card</directory>
+        </testsuite>
         <testsuite name="domain_attachment">
             <directory>src/Domain/bundles/Attachment/src/Tests</directory>
         </testsuite>
@@ -35,9 +38,6 @@
         </testsuite>
         <testsuite name="domain_post">
             <directory>src/Domain/bundles/Post/src/Tests</directory>
-        </testsuite>
-        <testsuite name="domain_profile_communities">
-            <directory>src/Domain/bundles/ProfileCommunities/src/Tests</directory>
         </testsuite>
         <testsuite name="domain_colors">
             <directory>src/Domain/bundles/Colors/src/Tests</directory>
