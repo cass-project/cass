@@ -128,6 +128,22 @@ abstract class ProfileMiddlewareTestCase extends CASSMiddlewareTestCase
         return $this->request('POST', $url);
     }
 
+    protected function requestExportCard(int $profileId): RESTRequest
+    {
+        $url = sprintf('/profile/%d/export-card/', $profileId);
+
+        return $this->request('GET', $url);
+    }
+
+    protected function requestImportCard(int $profileId, array $json): RESTRequest
+    {
+        $url = sprintf('/protected/profile/%d/import-card/', $profileId);
+
+        return $this->request('POST', $url)
+            ->setParameters($json);
+    }
+
+
     protected function fromNow(int $years): \DateTime
     {
         if($years > 0) {

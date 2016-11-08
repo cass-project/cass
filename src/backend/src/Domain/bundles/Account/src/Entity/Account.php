@@ -1,18 +1,17 @@
 <?php
 namespace CASS\Domain\Bundles\Account\Entity;
 
-use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdEntityTrait;
-use CASS\Util\Entity\JSONMetadata\JSONMetadataEntity;
-use CASS\Util\Entity\JSONMetadata\JSONMetadataEntityTrait;
-use CASS\Util\Entity\SIDEntity\SIDEntity;
-use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
+use ZEA2\Platform\Markers\IdEntity\IdEntity;
+use ZEA2\Platform\Markers\IdEntity\IdEntityTrait;
+use ZEA2\Platform\Markers\JSONMetadataEntity\JSONMetadataEntity;
+use ZEA2\Platform\Markers\JSONMetadataEntity\JSONMetadataEntityTrait;
+use ZEA2\Platform\Markers\SIDEntity\SIDEntity;
+use ZEA2\Platform\Markers\SIDEntity\SIDEntityTrait;
 use CASS\Util\GenerateRandomString;
 use CASS\Util\JSONSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use CASS\Domain\Bundles\Profile\Entity\Profile;
-use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
 use CASS\Domain\Bundles\Profile\Exception\NoCurrentProfileException;
 use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 
@@ -22,9 +21,7 @@ use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
  */
 class Account implements JSONSerializable, IdEntity, SIDEntity, JSONMetadataEntity
 {
-    use IdEntityTrait;
-    use SIDEntityTrait;
-    use JSONMetadataEntityTrait;
+    use IdEntityTrait, SIDEntityTrait, JSONMetadataEntityTrait;
 
     /**
      * @Column(type="string", name="api_key")
@@ -83,8 +80,14 @@ class Account implements JSONSerializable, IdEntity, SIDEntity, JSONMetadataEnti
     public function __construct()
     {
         $this->profiles = new ArrayCollection();
+
         $this->regenerateAPIKey();
         $this->regenerateSID();
+    }
+
+    public function getMetadataVersion(): string
+    {
+        return "1.0.0";
     }
 
     public function regenerateAPIKey(): string
@@ -155,9 +158,10 @@ class Account implements JSONSerializable, IdEntity, SIDEntity, JSONMetadataEnti
         return $this->password;
     }
 
-    public function setPassword($password)
+    public function setPassword(string $password): self
     {
         $this->password = $password;
+
         return $this;
     }
 
@@ -166,9 +170,10 @@ class Account implements JSONSerializable, IdEntity, SIDEntity, JSONMetadataEnti
         return $this->email;
     }
 
-    public function setEmail($email)
+    public function setEmail($email): self
     {
         $this->email = $email;
+
         return $this;
     }
 

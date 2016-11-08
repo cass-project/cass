@@ -1,14 +1,14 @@
 <?php
 namespace CASS\Domain\Bundles\Profile\Entity;
 
-use CASS\Domain\Bundles\Backdrop\Entity\Backdrop;
 use CASS\Domain\Bundles\Backdrop\Entity\Backdrop\NoneBackdrop;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
-use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdEntityTrait;
-use CASS\Util\Entity\SIDEntity\SIDEntity;
-use CASS\Util\Entity\SIDEntity\SIDEntityTrait;
+use CASS\Domain\Bundles\Profile\Entity\Card\ProfileCard;
+use ZEA2\Platform\Markers\IdEntity\IdEntity;
+use ZEA2\Platform\Markers\IdEntity\IdEntityTrait;
+use ZEA2\Platform\Markers\SIDEntity\SIDEntity;
+use ZEA2\Platform\Markers\SIDEntity\SIDEntityTrait;
 use CASS\Util\GenerateRandomString;
 use CASS\Util\JSONSerializable;
 use CASS\Domain\Bundles\Account\Entity\Account;
@@ -70,6 +70,12 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
     private $isCurrent = false;
 
     /**
+     * @Column(name="profile_card", type="cass_domain_profile_card")
+     * @var ProfileCard
+     */
+    private $card;
+
+    /**
      * @Column(type="object", name="greetings")
      * @var Greetings
      */
@@ -102,6 +108,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
     public function __construct(Account $account)
     {
         $this->account = $account;
+        $this->card = new ProfileCard();
         $this->collections = new ImmutableCollectionTree();
         $this->greetings = new GreetingsAnonymous();
         $this->gender = (new GenderNotSpecified())->getIntCode();
@@ -117,7 +124,6 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
         $result = [
             'id' => $this->isPersisted() ? $this->getId() : '#NEW_PROFILE',
             'sid' => $this->getSID(),
-            'rsid' => GenerateRandomString::gen(32),
             'account_id' => $this->getAccount()->isPersisted()
                 ? $this->getAccount()->getId()
                 : '#NEW_ACCOUNT'
@@ -156,6 +162,18 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
     public function getAccount(): Account
     {
         return $this->account;
+    }
+
+    public function replaceCard(ProfileCard $newProfileCard): self
+    {
+        $this->card = $newProfileCard;
+
+        return $this;
+    }
+
+    public function getCard(): ProfileCard
+    {
+        return $this->card;
     }
 
     public function setAsInitialized(): self

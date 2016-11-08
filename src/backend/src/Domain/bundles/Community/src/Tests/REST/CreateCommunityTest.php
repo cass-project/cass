@@ -74,21 +74,6 @@ final class CreateCommunityTest extends CommunityMiddlewareTestCase
             ->fetch(function(array $json) {
                 return $json['entity']['community']['id'];
             });
-
-        $this->requestGetProfile(DemoAccountFixture::getAccount()->getCurrentProfile()->getId())
-            ->execute()
-            ->expectJSONContentType()
-            ->expectStatusCode(200)
-            ->expectJSONBody([
-                'entity' => [
-                    'bookmarks' => [
-                        0 => [
-                            'id' => $this->expectId(),
-                            'community_id' => $communityId
-                        ]
-                    ]
-                ]
-            ]);
     }
 
     public function testCreateCommunityWithoutTheme()

@@ -5,10 +5,9 @@ use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
 use CASS\Domain\Bundles\Collection\Collection\CollectionItem;
 use CASS\Domain\Bundles\Collection\Collection\CollectionTree;
 use CASS\Domain\Bundles\Collection\Service\CollectionService;
+use CASS\Domain\Bundles\Profile\Entity\Card\Access\ProfileCardAccess;
 use CASS\Domain\Bundles\Profile\Entity\Profile;
-use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
-use CASS\Domain\Bundles\ProfileCommunities\Entity\ProfileCommunityEQ;
-use CASS\Domain\Bundles\ProfileCommunities\Service\ProfileCommunitiesService;
+use CASS\Domain\Bundles\Profile\Service\ProfileCardService;
 use CASS\Domain\Bundles\Subscribe\Service\SubscribeService;
 
 final class ProfileExtendedFormatter
@@ -19,39 +18,46 @@ final class ProfileExtendedFormatter
     /** @var CurrentAccountService */
     private $currentAccountService;
 
-    /** @var ProfileCommunitiesService */
-    private $communityBookmarksService;
-
     /** @var SubscribeService */
     private $subscribeService;
+
+    /** @var ProfileCardService */
+    private $profileCardService;
 
     public function __construct(
         CollectionService $collectionService,
         CurrentAccountService $currentAccountService,
-        ProfileCommunitiesService $communityBookmarksService,
-        SubscribeService $subscribeService
-    ) {
+        SubscribeService $subscribeService,
+        ProfileCardService $profileCardService
+    )
+    {
         $this->collectionService = $collectionService;
         $this->currentAccountService = $currentAccountService;
-        $this->communityBookmarksService = $communityBookmarksService;
         $this->subscribeService = $subscribeService;
+        $this->profileCardService = $profileCardService;
     }
 
-    public function format(Profile $profile): array {
+    public function format(Profile $profile): array
+    {
+        $isOwn = $this->currentAccountService->isAvailable()
+            ? $this->currentAccountService->getCurrentAccount()->getProfiles()->contains($profile)
+            : false;
+
+        $accessLevel = $this->currentAccountService->isAvailable()
+            ? $this->profileCardService->resoluteAccessLevel($profile, $this->currentAccountService->getCurrentAccount()->getCurrentProfile())
+            : [ProfileCardAccess::ACCESS_PUBLIC];
+
         return [
             'profile' => $profile->toJSON(),
+            'card' => $this->profileCardService->exportProfileCard($profile, $accessLevel)->toJSON(),
             'collections' => $this->formatCollections($profile->getCollections()),
-            'bookmarks' => array_map(function(ProfileCommunityEQ $eq) {
-                return $eq->toJSON();
-            }, $this->communityBookmarksService->getBookmarksOfProfile($profile->getId())),
-            'is_own' => $this->currentAccountService->isAvailable()
-                ? $this->currentAccountService->getCurrentAccount()->getProfiles()->contains($profile)
-                : false,
+            'is_own' => $isOwn,
             'subscribed' => false,
         ];
     }
 
-    private function formatCollections(CollectionTree $tree): array {
+    private function formatCollections(CollectionTree $tree): array
+    {
         return array_map(function(CollectionItem $item) {
             $json = $this->collectionService->getCollectionById($item->getCollectionId())->toJSON();
 

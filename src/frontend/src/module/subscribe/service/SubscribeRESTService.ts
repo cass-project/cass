@@ -4,19 +4,19 @@ import {Observable} from "rxjs/Observable";
 import {SubscribeCollection} from "../definitions/paths/subscribe-collection";
 import {RESTService} from "../../common/service/RESTService";
 import {SubscribeProfile} from "../definitions/paths/subscribe-profile";
-import {ListProfiles} from "../definitions/paths/list-profiles";
-import {ListProfileRequest} from "../definitions/paths/list-profiles";
+import {ListSubscribeProfiles} from "../definitions/paths/list-profiles";
+import {ListSubscribeProfileRequest} from "../definitions/paths/list-profiles";
 import {SubscribeCommunity} from "../definitions/paths/subscribe-community";
 import {SubscribeTheme} from "../definitions/paths/subscribe-theme";
 import {UnsubscribeCommunity} from "../definitions/paths/unsubscribe-community";
 import {UnsubscribeProfile} from "../definitions/paths/unsubscribe-profile";
 import {UnsubscribeTheme} from "../definitions/paths/unsubscribe-theme";
-import {ListCommunities} from "../definitions/paths/list-communities";
-import {ListCommunitiesRequest} from "../definitions/paths/list-communities";
-import {ListCollections} from "../definitions/paths/list-collections";
-import {ListCollectionsRequest} from "../definitions/paths/list-collections";
-import {ListThemesRequest} from "../definitions/paths/list-themes";
-import {ListThemes} from "../definitions/paths/list-themes";
+import {ListSubscribeCommunities} from "../definitions/paths/list-communities";
+import {ListSubscribeCommunitiesRequest} from "../definitions/paths/list-communities";
+import {ListSubscribeCollections} from "../definitions/paths/list-collections";
+import {ListSubscribeCollectionsRequest} from "../definitions/paths/list-collections";
+import {ListSubscribeThemesRequest} from "../definitions/paths/list-themes";
+import {ListSubscribeThemes} from "../definitions/paths/list-themes";
 import {UnsubscribeCollection} from "../definitions/paths/unsubscribe-collection";
 
 export interface SubscribeRESTServiceInterface
@@ -29,10 +29,10 @@ export interface SubscribeRESTServiceInterface
     unsubscribeProfile(profileID: number): Observable<UnsubscribeProfile>;
     unsubscribeTheme(themeID: number): Observable<UnsubscribeTheme>;
     unsubscribeCollection(collectionID: number): Observable<UnsubscribeCollection>;
-    listCommunities(communityID: number, request: ListCommunitiesRequest): Observable<ListCommunities>;
-    listProfiles(profileID: number, request: ListProfileRequest): Observable<ListProfiles>;
-    listTheme(themeID: number, request: ListThemesRequest): Observable<ListThemes>;
-    listCollections(collectionId: number, request: ListCollectionsRequest): Observable<ListCollections>;
+    listCommunities(communityID: number, request: ListSubscribeCommunitiesRequest): Observable<ListSubscribeCommunities>;
+    listProfiles(profileID: number, request: ListSubscribeProfileRequest): Observable<ListSubscribeProfiles>;
+    listTheme(themeID: number, request: ListSubscribeThemesRequest): Observable<ListSubscribeThemes>;
+    listCollections(collectionId: number, request: ListSubscribeCollectionsRequest): Observable<ListSubscribeCollections>;
 }
 
 @Injectable()
@@ -80,22 +80,22 @@ export class SubscribeRESTService implements SubscribeRESTServiceInterface
         return this.rest.delete(`/backend/api/protected/subscribe/unsubscribe-collection${collectionID}`, {});
     }
 
-    listCommunities(communityID: number, request: ListCommunitiesRequest): Observable<ListCommunities>
+    listCommunities(communityID: number, request: ListSubscribeCommunitiesRequest): Observable<ListSubscribeCommunities>
     {
         return this.rest.post(`/backend/api/subscribe/profile/${communityID}/list-communities`, request);
     }
 
-    listProfiles(profileID: number, request: ListProfileRequest): Observable<ListProfiles>
+    listProfiles(profileID: number, request: ListSubscribeProfileRequest): Observable<ListSubscribeProfiles>
     {
         return this.rest.post(`/backend/api/subscribe/profile/${profileID}/list-profiles`, request);
     }
 
-    listTheme(themeID: number, request: ListThemesRequest): Observable<ListThemes>
+    listTheme(themeID: number, request: ListSubscribeThemesRequest): Observable<ListSubscribeThemes>
     {
         return this.rest.post(`/backend/api/subscribe/profile/${themeID}/list-themes`, request);
     }
 
-    listCollections(collectionId: number, request: ListCollectionsRequest): Observable<ListCollections>
+    listCollections(collectionId: number, request: ListSubscribeCollectionsRequest): Observable<ListSubscribeCollections>
     {
         return this.rest.post(`/backend/api/subscribe/profile/${collectionId}/list-collections`, request);
     }

@@ -8,11 +8,15 @@ div.component-profile-switcher {
     width: 440px;
 
     div.row {
+      margin-bottom: 10px;
+
       div.item {
-        margin: 0 10px;
+        margin: 0px 10px;
         display: inline-block;
+        vertical-align: top;
         width: 200px;
         height: 200px;
+        margin-bottom: 10px;
 
       }
     }

@@ -5,6 +5,7 @@ use CASS\Domain\Bundles\Account\Service\AccountService;
 use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
 use CASS\Domain\Bundles\Profile\Entity\Profile\Greetings;
 use CASS\Domain\Bundles\Profile\Formatter\ProfileExtendedFormatter;
+use CASS\Domain\Bundles\Profile\Service\ProfileCardService;
 use CASS\Domain\Bundles\Profile\Service\ProfileService;
 use CASS\Domain\Bundles\Profile\Validation\ProfileValidationService;
 
@@ -19,6 +20,9 @@ abstract class Command implements \CASS\Application\Command\Command
     /** @var ProfileService */
     protected $profileService;
 
+    /** @var ProfileCardService */
+    protected $profileCardService;
+
     /** @var ProfileExtendedFormatter */
     protected $profileExtendedFormatter;
 
@@ -30,12 +34,14 @@ abstract class Command implements \CASS\Application\Command\Command
         AccountService $accountService,
         ProfileService $profileService,
         ProfileExtendedFormatter $profileExtendedFormatter,
-        ProfileValidationService $validationService
+        ProfileValidationService $validationService,
+        ProfileCardService $profileCardService
     ) {
         $this->currentAccountService = $currentAccountService;
         $this->accountService = $accountService;
         $this->profileService = $profileService;
         $this->profileExtendedFormatter = $profileExtendedFormatter;
+        $this->profileCardService = $profileCardService;
         $this->validation = $validationService;
     }
 }

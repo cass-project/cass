@@ -1,0 +1,37 @@
+"/protected/profile/{profileId}/import-card/":
+  post:
+    tags:
+      - profile
+    description: |
+      Сохраняет карточку профиля
+    security:
+      - x_api_key: []
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Profile_SetProfileCard_Request'
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - card
+          properties:
+            success:
+              type: boolean
+              default: true
+            card:
+              $ref: '#/definitions/Profile_Entity_ProfileCard'
+      404:
+        $ref: '#/responses/NotFound'
+      403:
+        $ref: '#/responses/Unauthorized'

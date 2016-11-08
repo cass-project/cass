@@ -6,53 +6,53 @@ use CASS\Domain\Bundles\Theme\Middleware\ThemeMiddleware;
 return [
     'common' => [
         [
-            'type'       => 'route',
-            'method'     => 'put',
-            'url'        => '/protected/theme/{command:create}',
+            'type' => 'route',
+            'method' => 'put',
+            'url' => '/protected/theme/{command:create}',
             'middleware' => ThemeMiddleware::class,
-            'name'       => 'theme-create'
+            'name' => 'theme-create',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'delete',
-            'url'        => '/protected/theme/{themeId}/{command:delete}',
+            'type' => 'route',
+            'method' => 'delete',
+            'url' => '/protected/theme/{themeId}/{command:delete}',
             'middleware' => ThemeMiddleware::class,
-            'name'       => 'theme-delete'
+            'name' => 'theme-delete',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'get',
-            'url'        => '/theme/{themeId}/{command:get}',
+            'type' => 'route',
+            'method' => 'get',
+            'url' => '/theme/{themeId}/{command:get}',
             'middleware' => ThemeMiddleware::class,
-            'name'       => 'theme-get'
+            'name' => 'theme-get',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'get',
-            'url'        => '/theme/get/{command:list-all}',
+            'type' => 'route',
+            'method' => 'get',
+            'url' => '/theme/get/{command:list-all}',
             'middleware' => ThemeMiddleware::class,
-            'name'       => 'theme-list-all'
+            'name' => 'theme-list-all',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'post',
-            'url'        => '/protected/theme/{themeId}/{command:move}/under/{parentThemeId}/in-position/{position}',
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/theme/{themeId}/{command:move}/under/{parentThemeId}/in-position/{position}',
             'middleware' => ThemeMiddleware::class,
-            'name'       => 'theme-move'
+            'name' => 'theme-move',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'get',
-            'url'        => '/theme/get/{command:tree}',
+            'type' => 'route',
+            'method' => 'get',
+            'url' => '/theme/get/{command:tree}',
             'middleware' => ThemeMiddleware::class,
-            'name'       => 'theme-tree'
+            'name' => 'theme-tree',
         ],
         [
-            'type'       => 'route',
-            'method'     => 'post',
-            'url'        => '/protected/theme/{themeId}/{command:update}',
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/theme/{themeId}/{command:update}',
             'middleware' => ThemeMiddleware::class,
-            'name'       => 'theme-update'
-        ]
-    ]
+            'name' => 'theme-update',
+        ],
+    ],
 ];

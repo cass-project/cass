@@ -5,7 +5,6 @@ use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 use CASS\Domain\Bundles\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
-use CASS\Domain\Bundles\ProfileCommunities\Tests\Fixtures\SamplePCBookmarksFixture;
 use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
 
 /**
@@ -20,7 +19,6 @@ class IsFrontlineAliveTest extends CASSMiddlewareTestCase
             new DemoProfileFixture(),
             new SampleThemesFixture(),
             new SampleCommunitiesFixture(),
-            new SamplePCBookmarksFixture(),
         ];
     }
 

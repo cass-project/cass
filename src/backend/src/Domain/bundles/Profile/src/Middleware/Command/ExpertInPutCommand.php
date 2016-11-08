@@ -7,7 +7,7 @@ use CASS\Domain\Bundles\Profile\Middleware\Request\ExpertInRequest;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class ExpertInPutCommand extends Command
+final class ExpertInPutCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {

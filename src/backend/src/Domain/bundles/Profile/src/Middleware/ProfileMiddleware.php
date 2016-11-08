@@ -7,6 +7,8 @@ use CASS\Domain\Bundles\Profile\Middleware\Command\Backdrop\BackdropColorCommand
 use CASS\Domain\Bundles\Profile\Middleware\Command\Backdrop\BackdropNoneCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\Backdrop\BackdropPresetCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\Backdrop\BackdropUploadCommand;
+use CASS\Domain\Bundles\Profile\Middleware\Command\Card\ExportProfileCardCommand;
+use CASS\Domain\Bundles\Profile\Middleware\Command\Card\ImportProfileCardCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\CreateCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\DeleteCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\EditPersonalCommand;
@@ -14,8 +16,8 @@ use CASS\Domain\Bundles\Profile\Middleware\Command\ExpertInPutCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\GetBySIDCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\GetCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\GreetingsAsCommand;
-use CASS\Domain\Bundles\Profile\Middleware\Command\ImageDeleteCommand;
-use CASS\Domain\Bundles\Profile\Middleware\Command\ImageUploadCommand;
+use CASS\Domain\Bundles\Profile\Middleware\Command\Avatar\ImageDeleteCommand;
+use CASS\Domain\Bundles\Profile\Middleware\Command\Avatar\ImageUploadCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\InterestingInPutCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\SetBirthdayCommand;
 use CASS\Domain\Bundles\Profile\Middleware\Command\SetGenderCommand;
@@ -55,6 +57,8 @@ class ProfileMiddleware implements MiddlewareInterface
             ->attachDirect('backdrop-none', BackdropNoneCommand::class, 'POST')
             ->attachDirect('backdrop-preset', BackdropPresetCommand::class, 'POST')
             ->attachDirect('backdrop-color', BackdropColorCommand::class, 'POST')
+            ->attachDirect('export-card', ExportProfileCardCommand::class)
+            ->attachDirect('import-card', ImportProfileCardCommand::class)
             ->resolve($request);
 
         return $resolver->run($request, $responseBuilder);

@@ -11,7 +11,7 @@ use CASS\Domain\Bundles\Profile\Middleware\Request\GreetingsLFMRequest;
 use CASS\Domain\Bundles\Profile\Middleware\Request\GreetingsNRequest;
 use Psr\Http\Message\ResponseInterface;
 
-class GreetingsAsCommand extends Command
+final class GreetingsAsCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {

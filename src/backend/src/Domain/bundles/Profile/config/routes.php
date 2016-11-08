@@ -123,6 +123,20 @@ return [
             'url' => '/protected/profile/{profileId}/{command:backdrop-color}/code/{code}[/]',
             'middleware' => ProfileMiddleware::class,
             'name' => 'profile-backdrop-color',
-        ]
+        ],
+        [
+            'type' => 'route',
+            'method' => 'get',
+            'url' => '/profile/{profileId}/{command:export-card}[/]',
+            'middleware' => ProfileMiddleware::class,
+            'name' => 'profile-export-card',
+        ],
+        [
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/profile/{profileId}/{command:import-card}[/]',
+            'middleware' => ProfileMiddleware::class,
+            'name' => 'profile-import-card',
+        ],
     ],
 ];

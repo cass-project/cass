@@ -7,7 +7,7 @@ use CASS\Domain\Bundles\Profile\Middleware\Request\InterestingInRequest;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class InterestingInPutCommand extends Command
+final class InterestingInPutCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {

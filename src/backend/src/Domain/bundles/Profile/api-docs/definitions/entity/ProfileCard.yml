@@ -1,0 +1,37 @@
+Profile_Entity_ProfileCard:
+  type: object
+  required:
+    - access
+    - values
+  properties:
+    access:
+      type: array
+      description: |
+        Права доступа к полям карточки
+      items:
+        type: object
+        required:
+          - key
+          - level
+        properties:
+          key:
+            type: string
+            description: Ключ
+          level:
+            type: string
+            description: |
+              Уровень доступа. Допустимые значений: "private", "protected", "public"
+    values:
+      type: array
+      description: Значения полей карточек
+      items:
+        type: object
+        required:
+          - key
+          - value
+        properties:
+          key:
+            type: string
+            description: Ключ
+          value:
+            description: Значение

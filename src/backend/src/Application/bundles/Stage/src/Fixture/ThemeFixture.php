@@ -98,7 +98,8 @@ final class ThemeFixture
 
             $theme = $this->themeService->createTheme($parameters);
 
-            if($themeJSON['image']) {
+            if(is_string($themeJSON['image']) && strlen($themeJSON['image'])) {
+                $this->output->writeln(sprintf('   [#] Upload image: %s', $themeJSON['image']));
                 $this->themeService->uploadImagePreview($theme->getId(), sprintf('%s/%s', self::THEMES_PREVIEW_DIR, $themeJSON['image']));
             }
         }

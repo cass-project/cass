@@ -2,20 +2,19 @@ Profile_Entity_ProfileExtended:
   type: object
   required:
     - profile
+    - card
     - collections
     - is_own
     - subscribed
   properties:
     profile:
       $ref: '#/definitions/Profile_Entity_Profile'
+    card:
+      $ref: '#/definitions/Profile_Entity_ProfileCard'
     collections:
       type: array
       items:
         $ref: '#/definitions/Collection_Entity_Collection'
-    bookmarks:
-      type: array
-      items:
-        $ref: '#/definitions/ProfileCommunities_Entity_ProfileCommunityEQEntity'
     is_own:
       type: boolean
       description: TRUE, если является профилем текущего аутентифицированного аккаунта

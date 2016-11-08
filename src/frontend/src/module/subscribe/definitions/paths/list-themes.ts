@@ -1,12 +1,13 @@
 import {Success200} from "../../../common/definitions/common";
 import {SubscriptionEntity} from "../entity/Subscription";
+import {Theme} from "../../../theme/definitions/entity/Theme";
 
-export interface ListThemes extends Success200
+export interface ListSubscribeThemes extends Success200
 {
-    entities: SubscriptionEntity[];
+    subscribes: SubscriptionEntity<Theme>[];
 }
 
-export interface ListThemesRequest
+export interface ListSubscribeThemesRequest
 {
     limit: number,
     offset: number

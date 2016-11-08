@@ -1,8 +1,8 @@
 <?php
 namespace CASS\Domain\Bundles\Theme\Entity;
 
-use CASS\Util\Entity\IdEntity\IdEntity;
-use CASS\Util\Entity\IdEntity\IdEntityTrait;
+use ZEA2\Platform\Markers\IdEntity\IdEntity;
+use ZEA2\Platform\Markers\IdEntity\IdEntityTrait;
 use CASS\Util\JSONSerializable;
 use CASS\Util\SerialManager\SerialEntity;
 use CASS\Util\SerialManager\SerialManager;

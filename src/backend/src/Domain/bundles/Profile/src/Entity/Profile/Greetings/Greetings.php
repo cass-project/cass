@@ -120,4 +120,24 @@ abstract class Greetings implements JSONSerializable, \Serializable
     {
         return strlen($this->nickName) > 0;
     }
+
+    public function setFirstName(string $firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function setLastName(string $lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function setMiddleName(string $middleName)
+    {
+        $this->middleName = $middleName;
+    }
+
+    public function setNickName(string $nickName)
+    {
+        $this->nickName = $nickName;
+    }
 }

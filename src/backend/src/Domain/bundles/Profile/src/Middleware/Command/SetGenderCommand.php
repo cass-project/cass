@@ -8,7 +8,7 @@ use CASS\Domain\Bundles\Profile\Middleware\Request\SetGenderRequest;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class SetGenderCommand extends Command
+final class SetGenderCommand extends Command
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): Response
     {
