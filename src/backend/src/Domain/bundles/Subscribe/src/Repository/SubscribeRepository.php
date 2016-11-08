@@ -21,7 +21,7 @@ class SubscribeRepository extends EntityRepository
             ->setSubscribeId($theme->getId())
             ->setSubscribeType(Subscribe::TYPE_THEME);
 
-        if($this->getSubscribeByEntity($subscribe)) {
+        if($this->isSubscribeExist($subscribe)) {
             throw new ConflictSubscribe(sprintf("subscribe already exists "));
         }
 
@@ -43,7 +43,7 @@ class SubscribeRepository extends EntityRepository
         $em->flush();
     }
 
-    public function getSubscribe($criteria)
+    public function getSubscribe($criteria): Subscribe
     {
         $subscribe = null;
         if(is_array($criteria)) {
@@ -55,7 +55,7 @@ class SubscribeRepository extends EntityRepository
         return $subscribe;
     }
 
-    public function getSubscribeByCriteria(array $criteria)
+    private function getSubscribeByCriteria(array $criteria): Subscribe
     {
         if(! isset($criteria['profileId'])) {
             throw new SubscribeException("required option: profile_id missing");
@@ -67,7 +67,18 @@ class SubscribeRepository extends EntityRepository
             throw new SubscribeException("required option: type missing");
         }
 
-        return $this->getEntityManager()->getRepository(Subscribe::class)->findOneBy($criteria);
+        $subscribe = $this->getEntityManager()->getRepository(Subscribe::class)->findOneBy($criteria);
+        if($subscribe === null) {
+            throw new UnknownSubscribeException(
+                sprintf("Subscribe not found - (profileId: %s, subscribeId: %s, subscribeType): %s",
+                    $criteria['profileId'],
+                    $criteria['subscribeId'],
+                    $criteria['subscribeType']
+                )
+            );
+        }
+
+        return $subscribe;
     }
 
     private function getSubscribeByEntity(Subscribe $subscribe)
@@ -79,6 +90,19 @@ class SubscribeRepository extends EntityRepository
         ]);
     }
 
+    public function isSubscribeExist(Subscribe $subscribe): bool
+    {
+        $criteria = [
+            'profileId' => $subscribe->getProfileId(),
+            'subscribeId' => $subscribe->getSubscribeId(),
+            'subscribeType' => $subscribe->getSubscribeType(),
+        ];
+
+        $subscribe = $this->getEntityManager()->getRepository(Subscribe::class)->findOneBy($criteria);
+
+        return $subscribe !== null;
+    }
+
     public function subscribeProfile(Profile $profile1, Profile $profile2, $options = null): Subscribe
     {
         $subscribe = new Subscribe();
@@ -87,7 +111,7 @@ class SubscribeRepository extends EntityRepository
             ->setSubscribeId($profile2->getId())
             ->setSubscribeType(Subscribe::TYPE_PROFILE);
 
-        if($this->getSubscribeByEntity($subscribe)) {
+        if($this->isSubscribeExist($subscribe)) {
             throw new ConflictSubscribe(sprintf("subscribe already exists "));
         }
 
@@ -116,7 +140,7 @@ class SubscribeRepository extends EntityRepository
             ->setSubscribeId($collection->getId())
             ->setSubscribeType(Subscribe::TYPE_COLLECTION);
 
-        if($this->getSubscribeByEntity($subscribe)) {
+        if($this->isSubscribeExist($subscribe)) {
             throw new ConflictSubscribe(sprintf("subscribe already exists "));
         }
 
@@ -135,7 +159,7 @@ class SubscribeRepository extends EntityRepository
             ->setSubscribeId($community->getId())
             ->setSubscribeType(Subscribe::TYPE_COMMUNITY);
 
-        if($this->getSubscribeByEntity($subscribe)) {
+        if($this->isSubscribeExist($subscribe)) {
             throw new ConflictSubscribe(sprintf("subscribe already exists "));
         }
 
@@ -150,16 +174,6 @@ class SubscribeRepository extends EntityRepository
     {
 
         $subscribe = $this->getSubscribe($criteria);
-
-        if($subscribe === null) {
-            throw new UnknownSubscribeException(
-                sprintf("Subscribe not found - (profileId: %s, subscribeId: %s, subscribeType): %s",
-                    $criteria['profileId'],
-                    $criteria['subscribeId'],
-                    $criteria['subscribeType']
-                )
-            );
-        }
 
         $em = $this->getEntityManager();
         $em->remove($subscribe);
