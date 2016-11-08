@@ -3,6 +3,7 @@ namespace CASS\Domain\Bundles\Subscribe\Tests\Paths;
 
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
+use CASS\Domain\Bundles\Subscribe\Tests\Fixtures\DemoSubscribeFixture;
 use CASS\Domain\Bundles\Subscribe\Tests\SubscribeMiddlewareTestCase;
 use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
 
@@ -49,5 +50,20 @@ class SubscribeThemeMiddlewareTest extends SubscribeMiddlewareTestCase
             ->auth($account->getAPIKey())
             ->execute()
             ->expectNotFoundError();
+    }
+
+    public function test409()
+    {
+        $this->upFixture( $fixture = new DemoSubscribeFixture() );
+        $account = DemoAccountFixture::getAccount();
+        $subscribedTheme = $fixture->getSubscribe('theme', 1);
+        $this->requestSubscribeTheme($subscribedTheme->getSubscribeId())
+            ->auth($account->getAPIKey())
+            ->execute()
+            ->expectStatusCode(409)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => false,
+            ]);
     }
 }

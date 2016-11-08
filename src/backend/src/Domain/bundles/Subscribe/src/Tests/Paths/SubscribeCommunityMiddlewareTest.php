@@ -3,6 +3,7 @@ namespace CASS\Domain\Bundles\Subscribe\Tests;
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 use CASS\Domain\Bundles\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
+use CASS\Domain\Bundles\Subscribe\Tests\Fixtures\DemoSubscribeFixture;
 
 /**
  * @backupGlobals disabled
@@ -49,5 +50,20 @@ class SubscribeCommunityMiddlewareTest extends SubscribeMiddlewareTestCase
             ->auth($account->getAPIKey())
             ->execute()
             ->expectNotFoundError();
+    }
+
+    public function test409()
+    {
+        $this->upFixture( $fixture = new DemoSubscribeFixture() );
+        $account = DemoAccountFixture::getAccount();
+        $subscribedCommunity = $fixture->getSubscribe('community', 1);
+        $this->requestSubscribeCommunity($subscribedCommunity->getSubscribeId())
+            ->auth($account->getAPIKey())
+            ->execute()
+            ->expectStatusCode(409)
+            ->expectJSONContentType()
+            ->expectJSONBody([
+                'success' => false,
+            ]);
     }
 }

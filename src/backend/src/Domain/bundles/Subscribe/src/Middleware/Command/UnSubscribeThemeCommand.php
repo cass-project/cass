@@ -1,6 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Subscribe\Middleware\Command;
 
+use CASS\Domain\Bundles\Subscribe\Exception\UnknownSubscribeException;
 use CASS\Domain\Bundles\Theme\Exception\ThemeNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -18,6 +19,10 @@ class UnSubscribeThemeCommand extends Command
 
             $responseBuilder
                 ->setStatusSuccess();
+        } catch (UnknownSubscribeException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setStatusNotFound();
         } catch (ThemeNotFoundException $e) {
             $responseBuilder
                 ->setError($e)
