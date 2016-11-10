@@ -9,14 +9,18 @@
   .delete-post-button {
     display: flex;
     padding: 10px;
+    padding-bottom: 15px;
   }
 
   .button-save-wrap {
     margin-left: auto;
-    padding: 10px;
   }
 
   .delete-text {
+    margin-top: 20px;
+    display: inline-block;
+    text-align: center;
+    font-size: 17px;
     margin-bottom: auto;
   }
 

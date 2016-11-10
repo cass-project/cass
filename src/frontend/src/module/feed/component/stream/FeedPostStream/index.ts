@@ -60,6 +60,11 @@ export class FeedPostStream
         this.currentPost = post;
     }
 
+    closeDeletePost(post: PostEntity){
+        this.deletePostModal.close();
+        this.currentPost = undefined;
+    }
+
     pinPost(post: PostEntity){
         console.log(post)
     }

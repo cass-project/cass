@@ -17,4 +17,4 @@ article.component.component-feed-post-stream
   div(*ngIf="editPostModal.isOpened()")
     cass-edit-post([post]='currentPost', (close)='closeEditPostModal()')
   div(*ngIf="deletePostModal.isOpened()")
-    cass-delete-post([post]='currentPost')
+    cass-delete-post([post]='currentPost' , (close)='closeDeletePost()')

@@ -1,24 +1,25 @@
 @import "./../../../../../styles/globals";
 
 div.component-right-sidebar {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), -5px -9px 8px rgba(0, 0, 0, 0.05);
-
   height: 100%;
-  width: $CASS_VIEW_MODES_WIDTH;
-  background-color: #f5f5f5;
 
   div.flexbox-container {
-    height: 100%;
+
     display: flex;
     flex-direction: column;
-
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), -5px -9px 8px rgba(0, 0, 0, 0.05);
+    height: 100%;
+    width: $CASS_VIEW_MODES_WIDTH;
+    background-color: #f5f5f5;
+    justify-content: space-between;
 
     .top {
-      margin-bottom: auto;
+
+
     }
 
     .bottom {
-      min-height: 220px;
+
     }
   }
 
@@ -31,8 +32,10 @@ div.component-right-sidebar {
   ul.list {
     margin: 10px;
 
+
     li.list-item {
       margin-bottom: 4px;
+
 
       a {
         display: block;

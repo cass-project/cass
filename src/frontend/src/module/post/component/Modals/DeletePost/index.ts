@@ -13,4 +13,10 @@ import {PostEntity} from "../../../definitions/entity/Post";
 export class DeletePost
 {
     @Input('post') post: PostEntity;
+    @Output('close') close: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+
+    closeModal(){
+        this.close.emit(true);
+    }
 }
