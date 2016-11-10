@@ -11,10 +11,14 @@ div.component-right-sidebar {
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-content: space-between;
+
 
     .top {
-      height: 100%;
+      margin-bottom: auto;
+    }
+
+    .bottom {
+      min-height: 220px;
     }
   }
 

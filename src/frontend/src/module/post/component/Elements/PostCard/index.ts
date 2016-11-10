@@ -8,6 +8,7 @@ import {PostCardList} from "./view-modes/PostCardList/index";
 import {AttachmentEntity} from "../../../../attachment/definitions/entity/AttachmentEntity";
 import {PostCardHelper} from "./helper";
 import {EditPost} from "../../Modals/EditPost/index";
+import {DeletePost} from "../../Modals/DeletePost/index";
 
 @Component({
     selector: 'cass-post-card',
@@ -73,5 +74,6 @@ export const POST_CARD_DIRECTIVES = [
     PostCardFeed,
     PostCardGrid,
     PostCardList,
-    EditPost
+    EditPost,
+    DeletePost
 ];

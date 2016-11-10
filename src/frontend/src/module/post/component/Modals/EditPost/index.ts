@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {PostEntity} from "../../../definitions/entity/Post";
 
 
@@ -13,4 +13,15 @@ import {PostEntity} from "../../../definitions/entity/Post";
 export class EditPost
 {
     @Input('post') post: PostEntity;
+    @Output('close') close: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+
+    getAttachmentURL(): string{
+        return this.post.attachments[0].link.url;
+    }
+
+    closeModal(){
+        this.close.emit(true);
+    }
+
 }

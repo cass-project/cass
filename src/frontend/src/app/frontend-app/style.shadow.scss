@@ -53,6 +53,7 @@ main.component.component-frontend-app {
       .right-sidebar {
         flex-shrink: 0;
         flex-basis: $CASS_VIEW_MODES_WIDTH;
+        height: 100%;
       }
     }
 

@@ -6,7 +6,7 @@ article.component.component-feed-post-stream
         [view-mode]="getViewOption()",
         (open-post)="openPost($event)",
         (open-attachment)="openAttachment($event)",
-        (edit-post)="editPost($event)",
+        (edit-post)="openEditPostModal($event)",
         (delete-post)="deletePost($event)",
         (pin-post)="deletePost($event)"
       )
@@ -15,4 +15,6 @@ article.component.component-feed-post-stream
   div(*ngIf="!feed.isLoading()")
     cass-feed-scroll-detector
   div(*ngIf="editPostModal.isOpened()")
-      cass-edit-post([post]='currentPost')
+    cass-edit-post([post]='currentPost', (close)='closeEditPostModal()')
+  div(*ngIf="deletePostModal.isOpened()")
+    cass-delete-post([post]='currentPost')

@@ -44,14 +44,20 @@ export class FeedPostStream
         return typeof this.feed.stream === "object";
     }
 
-    editPost(post: PostEntity){
+    openEditPostModal(post: PostEntity){
         this.editPostModal.open();
         this.currentPost = post;
-
     }
 
+    closeEditPostModal(){
+        this.editPostModal.close();
+        this.currentPost = undefined;
+    }
+
+
     deletePost(post: PostEntity){
-        console.log(post)
+        this.deletePostModal.open();
+        this.currentPost = post;
     }
 
     pinPost(post: PostEntity){
