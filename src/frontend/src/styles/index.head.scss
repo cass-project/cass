@@ -10,10 +10,12 @@ html {
 
   font-family: $FONT_FAMILY;
   font-size: $FONT_SIZE_NORMAL;
+  height: 100%;
 }
 
 body {
   background-color: $MATERIAL_BACKGROUND;
+  height: 100%;
 }
 
 a, button {

@@ -1,10 +1,21 @@
 .component-subscribe-route-menu {
+   .flex-box-container {
+     -webkit-display: flex;
+     display: flex;
+   }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+  }
 
   .menu-subscribtion {
     margin: 20px;
     width: 150px;
     box-sizing: border-box;
+    height: 100%;
   }
+
   .menu-subscribtion__item {
     margin-bottom: 8px;
     background: #fff;
@@ -35,6 +46,21 @@
     background: #667FB2;
     color: #fff;
     border-radius: 4px;
+  }
+
+  .subscribe {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+  }
+
+  .subscribe-content {
+     margin-top: 35px;
+     height: 100%;
+     width: 100%;
+  }
+  .component-profile-card-feed {
+    display: inline-block;
   }
 }
 

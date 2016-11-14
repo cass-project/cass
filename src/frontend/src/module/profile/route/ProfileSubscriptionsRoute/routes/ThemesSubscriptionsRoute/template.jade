@@ -1,5 +1,8 @@
 .component.component-profile-themes-subscriptions-route
-  div
+  .themes
     h1 Тематики
-    div(*ngFor = "let theme of listTheme")
-      cass-profile-card([profile]="theme")
+  cass-form-progress-lock(*ngIf="status.isLoading()")
+  .theme-container
+    div(*ngIf="! status.isLoading()").theme-card-wrap
+      div(*ngFor ="let subscription of subscribes").theme-card
+        cass-theme-card-list-item([theme]="subscription.entity")

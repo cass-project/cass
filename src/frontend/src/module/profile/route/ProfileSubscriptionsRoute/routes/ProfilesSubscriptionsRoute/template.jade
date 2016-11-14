@@ -1,6 +1,8 @@
 .component.component-profile-profiles-subscriptions-route
-  div
+  .people
     h1 Люди
-      .profile-card-container
-        div(*ngFor = "let response of listProfiles")
-          cass-profile-card([response]="response")
+  cass-form-progress-lock(*ngIf="status.isLoading()")
+  .profile-card-container
+    div(*ngIf="! status.isLoading()").profile-card-wrap
+      div(*ngFor="let subscription of subscribes").profile-card
+        cass-profile-card([profile]="subscription.entity")

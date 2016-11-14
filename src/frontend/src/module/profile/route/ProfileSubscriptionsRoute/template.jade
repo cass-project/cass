@@ -1,24 +1,27 @@
 div.component.component-subscribe-route-menu
-  ul.menu-subscribtion
-    li.menu-subscribtion__item
-      a(routerLink="/profile/current/subscriptions/themes",routerLinkActive="active",
-      [routerLinkActiveOptions]="{ exact: true }").menu-subscribtion__link
-        i(class="fa fa-fw fa-bookmark")
-        span.subscribtion-text Тематики
-    li.menu-subscribtion__item
-      a(routerLink="/profile/current/subscriptions/profiles",routerLinkActive="active",
-      [routerLinkActiveOptions]="{ exact: true }").menu-subscribtion__link
-        i(class="fa fa-fw fa-users")
-        span.subscribtion-text Люди
-    li.menu-subscribtion__item
-      a(routerLink="/profile/current/subscriptions/collections",routerLinkActive="active",
-      [routerLinkActiveOptions]="{ exact: true }").menu-subscribtion__link
-        i(class="fa fa-fw fa-th-large")
-        span.subscribtion-text Подборки
-    li.menu-subscribtion__item
-      a(routerLink="/profile/current/subscriptions/communities",routerLinkActive="active",
-      [routerLinkActiveOptions]="{ exact: true }").menu-subscribtion__link
-        i(class="fa fa-fw fa-hashtag")
-        span.subscribtion-text Сообщества
-.subscribe-content
-  router-outlet
+  .flex-box-container
+    .menu
+      ul.menu-subscribtion
+        li.menu-subscribtion__item
+          a(routerLink="/profile/current/subscriptions/themes",routerLinkActive="active",
+          [routerLinkActiveOptions]="{ exact: true }").menu-subscribtion__link
+            i(class="fa fa-fw fa-bookmark")
+            span.subscribtion-text Тематики
+        li.menu-subscribtion__item
+          a(routerLink="/profile/current/subscriptions/profiles",routerLinkActive="active",
+          [routerLinkActiveOptions]="{ exact: true }").menu-subscribtion__link
+            i(class="fa fa-fw fa-users")
+            span.subscribtion-text Люди
+        li.menu-subscribtion__item
+          a(routerLink="/profile/current/subscriptions/collections",routerLinkActive="active",
+          [routerLinkActiveOptions]="{ exact: true }").menu-subscribtion__link
+            i(class="fa fa-fw fa-th-large")
+            span.subscribtion-text Подборки
+        li.menu-subscribtion__item
+          a(routerLink="/profile/current/subscriptions/communities",routerLinkActive="active",
+          [routerLinkActiveOptions]="{ exact: true }").menu-subscribtion__link
+            i(class="fa fa-fw fa-hashtag")
+            span.subscribtion-text Сообщества
+    .subscribe
+      .subscribe-content
+        router-outlet
