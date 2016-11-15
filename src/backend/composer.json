@@ -29,6 +29,7 @@
       "CASS\\Domain\\Bundles\\Feed\\": "src/Domain/bundles/Feed/src",
       "CASS\\Domain\\Bundles\\Feedback\\": "src/Domain/bundles/Feedback/src",
       "CASS\\Domain\\Bundles\\Index\\": "src/Domain/bundles/Index/src",
+      "CASS\\Domain\\Bundles\\Like\\": "src/Domain/bundles/Like/src",
       "CASS\\Domain\\Bundles\\OpenGraph\\": "src/Domain/bundles/OpenGraph/src",
       "CASS\\Domain\\Bundles\\Post\\": "src/Domain/bundles/Post/src",
       "CASS\\Domain\\Bundles\\Profile\\": "src/Domain/bundles/Profile/src",
