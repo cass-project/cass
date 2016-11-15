@@ -13,6 +13,6 @@ abstract class Command implements \CASS\Application\Command\Command
     public function __construct(
         ProfileService $profileService
     ){
-
+        $this->profileService = $profileService;
     }
 }
