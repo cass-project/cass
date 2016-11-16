@@ -1,31 +1,20 @@
 <?php
+namespace CASS\Domain\Bundles\Like\Service;
 
-namespace Domain\bundles\Like\src\Service;
 
-
-use CASS\Domain\Bundles\Like\Service\LikeService;
+use CASS\Domain\Bundles\Like\Entity\Attitude;
 use ZEA2\Platform\Markers\LikeEntity\LikeableEntity;
 
 class LikeProfileService extends LikeService
 {
-    public function addLike(LikeableEntity $profile){
-        $this->likeProfileRepository->addLike($profile);
+    
+    
 
+    public function addLike(LikeableEntity $entity, Attitude $attitude)
+    {
 
-        return $this->profileRepository->saveProfile($profile);
+        print_r("chot to rabotaet");
+//        $this->likeProfileRepository->addLike($attitude);
     }
-
-    public function removeLike(LikeableEntity $profile){
-        // TODO: Implement removeLike() method.
-    }
-
-    public function addDislike(LikeableEntity $profile){
-        // TODO: Implement addDislike() method.
-    }
-
-    public function removeDislike(LikeableEntity $profile){
-        // TODO: Implement removeDislike() method.
-    }
-
 
 }

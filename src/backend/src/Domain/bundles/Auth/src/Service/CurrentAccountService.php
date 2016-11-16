@@ -43,7 +43,7 @@ class CurrentAccountService
         throw new NotAuthenticatedException('No API Key available');
     }
 
-    public function isAvailable()
+    public function isAvailable(): bool
     {
         return $this->account !== null;
     }
