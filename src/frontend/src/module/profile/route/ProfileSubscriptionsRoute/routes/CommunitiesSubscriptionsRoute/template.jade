@@ -1,3 +1,8 @@
 .component.component-profile-communities-subscriptions-route
-  div
+  .community
     h1 Сообщества
+  cass-form-progress-lock(*ngIf="status.isLoading()")
+  .community-container
+    div(*ngIf="! status.isLoading()").community-card-wrap
+      div(*ngFor="let subscription of subscribes").community-card
+        cass-community-cards-list([entities]="getCommunities()")

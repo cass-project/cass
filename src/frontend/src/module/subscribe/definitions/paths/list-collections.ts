@@ -4,7 +4,7 @@ import {CollectionEntity} from "../../../collection/definitions/entity/collectio
 
 export interface ListSubscribeCollections extends Success200
 {
-    subscribes: SubscriptionEntity<CollectionEntity>;
+    subscribes: SubscriptionEntity<CollectionEntity>[];
     total: number;
 }
 

@@ -1,0 +1,21 @@
+.component-profile-collection-subscriptions-route {
+  .collection {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 18px;
+  }
+
+  .collection-card-wrap{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .collection-card {
+    margin-left: 15px;
+
+    &:first-child {
+      margin-left: 0px;
+    }
+  }
+}

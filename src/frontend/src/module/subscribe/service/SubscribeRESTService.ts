@@ -80,9 +80,9 @@ export class SubscribeRESTService implements SubscribeRESTServiceInterface
         return this.rest.delete(`/backend/api/protected/subscribe/unsubscribe-collection${collectionID}`, {});
     }
 
-    listCommunities(communityID: number, request: ListSubscribeCommunitiesRequest): Observable<ListSubscribeCommunities>
+    listCommunities(profileID: number, request: ListSubscribeCommunitiesRequest): Observable<ListSubscribeCommunities>
     {
-        return this.rest.post(`/backend/api/subscribe/profile/${communityID}/list-communities`, request);
+        return this.rest.post(`/backend/api/subscribe/profile/${profileID}/list-communities`, request);
     }
 
     listProfiles(profileID: number, request: ListSubscribeProfileRequest): Observable<ListSubscribeProfiles>
@@ -95,8 +95,8 @@ export class SubscribeRESTService implements SubscribeRESTServiceInterface
         return this.rest.post(`/backend/api/subscribe/profile/${themeID}/list-themes`, request);
     }
 
-    listCollections(collectionId: number, request: ListSubscribeCollectionsRequest): Observable<ListSubscribeCollections>
+    listCollections(profileId: number, request: ListSubscribeCollectionsRequest): Observable<ListSubscribeCollections>
     {
-        return this.rest.post(`/backend/api/subscribe/profile/${collectionId}/list-collections`, request);
+        return this.rest.post(`/backend/api/subscribe/profile/${profileId}/list-collections`, request);
     }
 }
