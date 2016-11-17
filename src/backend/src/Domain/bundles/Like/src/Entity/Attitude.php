@@ -9,7 +9,7 @@ use ZEA2\Platform\Markers\IdEntity\IdEntityTrait;
 
 /**
  * @Entity(repositoryClass="CASS\Domain\Bundles\Like\Repository\LikeRepository\LikeRepository")
- * @Table(name="subscribe")
+ * @Table(name="like_attitude_log")
  */
 class Attitude implements IdEntity, JSONSerializable
 {
@@ -110,7 +110,7 @@ class Attitude implements IdEntity, JSONSerializable
         return $this;
     }
 
-    public function getProfileId(): int
+    public function getProfileId()
     {
         return $this->profileId;
     }
@@ -122,7 +122,7 @@ class Attitude implements IdEntity, JSONSerializable
         return $this;
     }
 
-    public function getIpAddress(): string
+    public function getIpAddress()
     {
         return $this->ipAddress;
     }

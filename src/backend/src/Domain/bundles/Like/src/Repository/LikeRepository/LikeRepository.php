@@ -2,13 +2,29 @@
 
 namespace CASS\Domain\Bundles\Like\Repository\LikeRepository;
 
+use CASS\Domain\Bundles\Like\Entity\Attitude;
 use Doctrine\ORM\EntityRepository;
 
 class LikeRepository extends EntityRepository
 {
-//    abstract function addLike(Attitude $entity);
+    // Profile
+    public function createProfileAddLike(Attitude $attitude){
+        $em = $this->getEntityManager();
+        $em->persist($attitude);
+        $em->flush();
+    }
 
-//    abstract function removeLike(LikeableEntity $entity);
-//    abstract function addDislike(LikeableEntity $entity);
-//    abstract function removeDislike(LikeableEntity $entity);
+    public function removeAttitude(Attitude $attitude)
+    {
+        $em = $this->getEntityManager();
+        if($attitude->isPersisted()){
+            $em->remove($attitude);
+            $em->flush();
+        }
+    }
+
+    // Collection
+    // Community
+    // Theme
+
 }
