@@ -5,8 +5,6 @@ import {CollectionCardHelper} from "../../helper";
 import {SubscribeRESTService} from "../../../../../../subscribe/service/SubscribeRESTService";
 import {LoadingManager} from "../../../../../../common/classes/LoadingStatus";
 
-
-
 @Component({
     selector: 'cass-collection-card-feed',
     template: require('./template.jade'),
