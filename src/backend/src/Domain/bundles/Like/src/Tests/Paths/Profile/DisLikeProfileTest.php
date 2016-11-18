@@ -8,20 +8,20 @@ use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
 /**
  * @backupGlobals disabled
  */
-class LikeProfileTest extends LikeProfileMiddlewareTestCase
+class DisLikeProfileTest extends LikeProfileMiddlewareTestCase
 {
 
     public function testAuth200()
     {
-        $this->requestLikeProfile(DemoProfileFixture::getProfile()->getId())
+        $this->requestDisLikeProfile(DemoProfileFixture::getProfile()->getId())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
                     'id' => $this->expectId(),
-                    'likes' => 1,
-                    'dislikes' => 0,
+                    'likes' => 0,
+                    'dislikes' => 1,
                 ],
             ])
             ->expectStatusCode(200);
@@ -29,14 +29,14 @@ class LikeProfileTest extends LikeProfileMiddlewareTestCase
 
     public function testUnAuth200()
     {
-        $this->requestLikeProfile(DemoProfileFixture::getProfile()->getId())
+        $this->requestDisLikeProfile(DemoProfileFixture::getProfile()->getId())
             ->execute()
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
                     'id' => $this->expectId(),
-                    'likes' => 1,
-                    'dislikes' => 0,
+                    'likes' => 0,
+                    'dislikes' => 1,
                 ],
             ])
             ->expectStatusCode(200);
@@ -44,7 +44,7 @@ class LikeProfileTest extends LikeProfileMiddlewareTestCase
 
     public function testProfile404()
     {
-        $this->requestLikeProfile(self::NOT_FOUND_ID)
+        $this->requestDisLikeProfile(self::NOT_FOUND_ID)
             ->execute()
             ->expectNotFoundError();
     }

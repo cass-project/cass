@@ -2,6 +2,7 @@
 namespace CASS\Domain\Bundles\Like\Service;
 
 use CASS\Domain\Bundles\Like\Entity\Attitude;
+use CASS\Domain\Bundles\Like\Exception\AttitudeAlreadyExistsException;
 use ZEA2\Platform\Markers\LikeEntity\LikeableEntity;
 
 class LikeProfileService extends LikeService implements LikeableService
@@ -9,38 +10,27 @@ class LikeProfileService extends LikeService implements LikeableService
 
     public function addLike(LikeableEntity $entity, Attitude $attitude)
     {
+        $attitude->setAttitudeType(Attitude::ATTITUDE_TYPE_LIKE);
 
-        // save log
-        if($this->getAttitudeByEntity($attitude)) {
-            print_r("its shit we already have attitude");
-            die();
+        if($this->likeRepository->isLikeAttitudeExists($attitude)) {
+            throw new AttitudeAlreadyExistsException(sprintf("Сurrent LIKE attitude already exists"));
         }
 
         $this->likeRepository->createProfileAddLike($attitude);
-        // increase entity
-        // save Entity
+        $this->profileRepository->saveProfile($entity->increaseLikes());
 
-        print_r("chot to rabotaet");
-        die();
     }
 
-    public function removeLike(LikeableEntity $entity)
+    public function addDislike(LikeableEntity $entity, Attitude $attitude)
     {
-        $this->likeRepository->removeAttitude();
-    }
+        $attitude->setAttitudeType(Attitude::ATTITUDE_TYPE_DISLIKE);
 
-    public function getAttitudeByEntity(Attitude $attitude): Attitude
-    {
-        return $this->likeRepository->findOneBy([
-            'attitudeOwnerType' => $attitude->getAttitudeOwnerType(),
-            'profileId' => $attitude->getProfileId(),
-            'ipAddress' => $attitude->getIpAddress(),
-            'attitudeType' => $attitude->getAttitudeType(),
-            'resourceId' => $attitude->getResourceId(),
-            'resourceType' => $attitude->getResourceType(),
-            //            'id' => $attitude->isPersisted() !== true ? null : $attitude->getId(),
-            //            'created' => $attitude->getCreated(),
-        ]);
+        if($this->likeRepository->isDislikeAttitudeExists($attitude)) {
+            throw new AttitudeAlreadyExistsException(sprintf("Current dislike Attitude already exists"));
+        }
+        
+        $this->likeRepository->createProfileAddLike($attitude);
+        $this->profileRepository->saveProfile($entity->increaseDislikes());
     }
 
 }

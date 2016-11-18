@@ -3,13 +3,12 @@
 namespace CASS\Domain\Bundles\Like\Middleware\Command\ProfileCommand;
 
 use CASS\Domain\Bundles\Like\Entity\Attitude;
-use CASS\Domain\Bundles\Like\Exception\AttitudeAlreadyExistsException;
 use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 
-class AddLikeProfileCommand extends ProfileCommand
+class RemoveProfileAttitude extends ProfileCommand
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
@@ -39,11 +38,6 @@ class AddLikeProfileCommand extends ProfileCommand
                     ]
                 );
 
-        } catch(AttitudeAlreadyExistsException $e){
-            $responseBuilder
-                ->setError($e)
-                ->setJson(['success'=> false])
-                ->setStatusConflict();
         } catch(ProfileNotFoundException $e){
             $responseBuilder
                 ->setError($e)
@@ -58,5 +52,4 @@ class AddLikeProfileCommand extends ProfileCommand
 
         return $responseBuilder->build();
     }
-
 }
