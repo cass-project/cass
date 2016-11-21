@@ -26,6 +26,14 @@ export class Stream<T extends FeedEntity>
         })
     }
 
+    deleteElement(id: number){
+        for(let i = 0; i < this.entities.length; i++){
+            if(id === this.entities[i].id){
+                this.entities.splice(i, 1);
+            }
+        }
+    }
+    
     insertBefore(entity: T) {
         this.entities.unshift(entity);
     }

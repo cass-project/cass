@@ -31,7 +31,8 @@ export class FeedPostStream
     editPostModal: ModalControl = new ModalControl();
     deletePostModal: ModalControl = new ModalControl();
     reportPostModal: ModalControl = new ModalControl();
-    
+
+
     getViewOption() {
         return this.options.view.current;
     }
@@ -54,10 +55,14 @@ export class FeedPostStream
         this.currentPost = undefined;
     }
 
-
-    deletePost(post: PostEntity){
+    openDeletePostModal(post: PostEntity){
         this.deletePostModal.open();
         this.currentPost = post;
+    }
+
+    deletePost(id){
+        console.log('delete?');
+        this.feed.stream.deleteElement(id);
     }
 
     closeDeletePost(post: PostEntity){
