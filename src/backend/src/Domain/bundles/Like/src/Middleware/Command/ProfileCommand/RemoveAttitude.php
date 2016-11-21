@@ -24,8 +24,7 @@ class RemoveAttitude extends ProfileCommand
                 Attitude::anonymousAttitudeFactory($request->getServerParams()['REMOTE_ADDR']);
 
             // устанавливаем свойства
-            $attitude->setResourceId($profile->getId())
-                ->setResourceType(Attitude::RESOURCE_TYPE_PROFILE);
+            $attitude->setResource($profile);
 
             switch($attitude->getAttitudeType()) {
                 case Attitude::ATTITUDE_TYPE_LIKE:

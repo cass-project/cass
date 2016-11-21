@@ -24,8 +24,7 @@ class AddDislikeProfileCommand extends ProfileCommand
                 Attitude::anonymousAttitudeFactory($request->getServerParams()['REMOTE_ADDR']);
 
             // устанавливаем свойства
-            $attitude->setResourceId($profile->getId())
-                ->setResourceType(Attitude::RESOURCE_TYPE_PROFILE);
+            $attitude->setResource($profile);
 
             $this->likeProfileService->addDislike($profile, $attitude);
 

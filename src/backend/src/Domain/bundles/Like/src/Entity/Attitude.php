@@ -2,8 +2,11 @@
 
 namespace CASS\Domain\Bundles\Like\Entity;
 
+use CASS\Domain\Bundles\Community\Entity\Community;
 use CASS\Domain\Bundles\Profile\Entity\Profile;
+use CASS\Domain\Bundles\Theme\Entity\Theme;
 use CASS\Util\JSONSerializable;
+use Doctrine\Common\Collections\Collection;
 use ZEA2\Platform\Markers\IdEntity\IdEntity;
 use ZEA2\Platform\Markers\IdEntity\IdEntityTrait;
 use ZEA2\Platform\Markers\LikeEntity\LikeableEntity;
@@ -163,11 +166,26 @@ class Attitude implements IdEntity, JSONSerializable
     public function setResource(LikeableEntity $entity): self
     {
         switch(get_class($entity)){
-            case Profile::class:{
-                /** Profile  $entity */
-                $this->setResourceId($entity);
+            case Profile::class :{
+                /** @var Profile $entity */
+                $this->setResourceId($entity->getId())->setResourceType(self::RESOURCE_TYPE_PROFILE);
+                break;
             }
-
+            case Theme::class :{
+                /** @var Theme $entity */
+                $this->setResourceId($entity->getId())->setResourceType(self::RESOURCE_TYPE_THEME);
+                break;
+            }
+            case Collection::class :{
+                /** @var Collection $entity */
+                $this->setResourceId($entity->getId())->setResourceType(self::RESOURCE_TYPE_COLLECTION);
+                break;
+            }
+            case Community::class :{
+                /** @var Community $entity */
+                $this->setResourceId($entity->getId())->setResourceType(self::RESOURCE_TYPE_COMMUNITY);
+                break;
+            }
         }
 
         return $this;

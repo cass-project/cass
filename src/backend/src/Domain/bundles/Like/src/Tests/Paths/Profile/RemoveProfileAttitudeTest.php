@@ -27,18 +27,17 @@ class RemoveProfileAttitudeTest extends LikeProfileMiddlewareTestCase
         ;
     }
 
-    /*public function test403()
+    public function test403()
     {
         $this->upFixture($demoAttitudes = new DemoAttitudeFixture());
-        $profileId = DemoProfileFixture::getProfile()->getId();
 
-        $this->requestRemoveProfileAttitude($profileId)
+        $this->requestRemoveProfileAttitude(self::NOT_FOUND_ID)
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectJSONBody([
                 'success' => false
             ])
-            ->expectStatusCode(403)
+            ->expectStatusCode(404)
         ;
-    }*/
+    }
 }

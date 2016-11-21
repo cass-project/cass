@@ -25,8 +25,8 @@ class DemoAttitudeFixture implements Fixture
         $profile = DemoAccountFixture::getAccount()->getCurrentProfile();
 
         $profileLike = Attitude::profileAttitudeFactory($profile);
-        $profileLike->setResourceType(Attitude::RESOURCE_TYPE_PROFILE)
-        ->setResourceId($profile->getId());
+        $profileLike
+            ->setResource($profile);
 
         $this->attitudes['like'][] = $likeProfileService->addLike($profile, $profileLike);
     }
