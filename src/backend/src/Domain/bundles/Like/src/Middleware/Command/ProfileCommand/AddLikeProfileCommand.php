@@ -34,25 +34,25 @@ class AddLikeProfileCommand extends ProfileCommand
                 ->setStatusSuccess()
                 ->setJson(
                     [
-                        'success' => TRUE,
-                        'entity' => $profile->toJSON()
+                        'success' => true,
+                        'entity' => $profile->toJSON(),
                     ]
                 );
 
-        } catch(AttitudeAlreadyExistsException $e){
+        } catch(AttitudeAlreadyExistsException $e) {
             $responseBuilder
                 ->setError($e)
-                ->setJson(['success'=> false])
+                ->setJson(['success' => false])
                 ->setStatusConflict();
-        } catch(ProfileNotFoundException $e){
+        } catch(ProfileNotFoundException $e) {
             $responseBuilder
                 ->setError($e)
-                ->setJson(['success'=> false])
+                ->setJson(['success' => false])
                 ->setStatusNotFound();
-        } catch(\Exception $e){
+        } catch(\Exception $e) {
             $responseBuilder
                 ->setError($e)
-                ->setJson(['success'=> false])
+                ->setJson(['success' => false])
                 ->setStatusNotFound();
         }
 

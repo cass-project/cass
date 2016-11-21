@@ -16,7 +16,8 @@ abstract class ProfileCommand extends Command
         ProfileService $profileService,
         CurrentAccountService $currentAccountService
         , LikeProfileService $likeProfileService
-    ){
+    )
+    {
         parent::__construct($profileService, $currentAccountService);
         $this->likeProfileService = $likeProfileService;
     }

@@ -6,6 +6,7 @@ use CASS\Domain\Bundles\Profile\Entity\Profile;
 use CASS\Util\JSONSerializable;
 use ZEA2\Platform\Markers\IdEntity\IdEntity;
 use ZEA2\Platform\Markers\IdEntity\IdEntityTrait;
+use ZEA2\Platform\Markers\LikeEntity\LikeableEntity;
 
 /**
  * @Entity(repositoryClass="CASS\Domain\Bundles\Like\Repository\LikeRepository\LikeRepository")
@@ -154,6 +155,20 @@ class Attitude implements IdEntity, JSONSerializable
     public function setResourceType(int $resourceType): self
     {
         $this->resourceType = $resourceType;
+
+        return $this;
+    }
+
+
+    public function setResource(LikeableEntity $entity): self
+    {
+        switch(get_class($entity)){
+            case Profile::class:{
+                /** Profile  $entity */
+                $this->setResourceId($entity);
+            }
+
+        }
 
         return $this;
     }

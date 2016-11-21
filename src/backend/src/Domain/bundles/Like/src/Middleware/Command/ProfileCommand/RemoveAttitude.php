@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 
-class RemoveProfileAttitude extends ProfileCommand
+class RemoveAttitude extends ProfileCommand
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
@@ -27,16 +27,20 @@ class RemoveProfileAttitude extends ProfileCommand
             $attitude->setResourceId($profile->getId())
                 ->setResourceType(Attitude::RESOURCE_TYPE_PROFILE);
 
-            $this->likeProfileService->addLike($profile, $attitude);
+            switch($attitude->getAttitudeType()) {
+                case Attitude::ATTITUDE_TYPE_LIKE:
+                    $this->likeProfileService->removeLike($profile, $attitude);
+                    break;
+                case Attitude::ATTITUDE_TYPE_DISLIKE:
+                    $this->likeProfileService->removeDislike($profile, $attitude);
+                    break;
+            }
 
             $responseBuilder
                 ->setStatusSuccess()
-                ->setJson(
-                    [
-                        'success' => true,
-                        'entity' => $profile->toJSON(),
-                    ]
-                );
+                ->setJson([
+                    'success' => true,
+                ]);
 
         } catch(ProfileNotFoundException $e) {
             $responseBuilder
@@ -44,12 +48,10 @@ class RemoveProfileAttitude extends ProfileCommand
                 ->setJson(['success' => false])
                 ->setStatusNotFound();
         } catch(\Exception $e) {
-            $responseBuilder
-                ->setError($e)
-                ->setJson(['success' => false])
-                ->setStatusNotFound();
+
         }
 
         return $responseBuilder->build();
     }
+
 }

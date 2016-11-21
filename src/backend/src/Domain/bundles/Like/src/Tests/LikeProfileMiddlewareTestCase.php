@@ -25,4 +25,8 @@ class LikeProfileMiddlewareTestCase extends CASSMiddlewareTestCase
         return $this->request('PUT', sprintf('/like/profile/%d/add-dislike', $profileId));
     }
 
+    public function requestRemoveProfileAttitude(int $profileId){
+        return $this->request('DELETE', sprintf('/like/profile/%d/remove-attitude', $profileId));
+    }
+
 }

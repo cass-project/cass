@@ -27,28 +27,28 @@ class AddDislikeProfileCommand extends ProfileCommand
             $attitude->setResourceId($profile->getId())
                 ->setResourceType(Attitude::RESOURCE_TYPE_PROFILE);
 
-
             $this->likeProfileService->addDislike($profile, $attitude);
 
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson(
                     [
-                        'success' => TRUE,
-                        'entity' => $profile->toJSON()
+                        'success' => true,
+                        'entity' => $profile->toJSON(),
                     ]
                 );
-        } catch(ProfileNotFoundException $e){
+        } catch(ProfileNotFoundException $e) {
             $responseBuilder
                 ->setError($e)
-                ->setJson(['success'=> false])
+                ->setJson(['success' => false])
                 ->setStatusNotFound();
         } catch(\Exception $e) {
             $responseBuilder
                 ->setError($e)
-                ->setJson(['success'=> false])
+                ->setJson(['success' => false])
                 ->setStatusNotFound();
         }
+
         return $responseBuilder->build();
     }
 
