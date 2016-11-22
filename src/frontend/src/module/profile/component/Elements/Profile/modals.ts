@@ -14,7 +14,7 @@ export class ProfileModals
     createCollection: ModalControl = new ModalControl();
     backdrop: ModalControl = new ModalControl();
 
-    openCreateCollection(themeId?: number) {
+    openCreateCollectionModal(themeId?: number) {
         this.themeId = themeId || undefined;
         this.createCollection.open();
     };

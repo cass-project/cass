@@ -61,12 +61,12 @@ export class CollectionsRoute implements OnInit, OnDestroy
         this.navigator.emitScroll(this.content);
     }
 
-    createCollections(){
+    openCreateCollectionModal(){
         let currentTheme = this.helper.themes.getCurrentTheme();
         let themeId: number = this.helper.themes.isRoot(currentTheme) ? undefined : currentTheme.id;
 
         if(this.session.isSignedIn()){
-            this.profileModals.openCreateCollection(themeId);
+            this.profileModals.openCreateCollectionModal(themeId);
         }else {
             this.authModals.signUpModal.open();
         }

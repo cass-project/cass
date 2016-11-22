@@ -24,7 +24,7 @@ export class ProfileMenuOwn
     }
 
     openCreateCollectionMaster() {
-        this.modals.openCreateCollection();
+        this.modals.openCreateCollectionModal();
     }
 
     openSettings() {
