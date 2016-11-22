@@ -11,6 +11,8 @@ Profile_Entity_Profile:
     - backdrop
     - expert_in
     - interesting_in
+    - likes
+    - dislikes
   properties:
     id:
       type: number

@@ -9,16 +9,18 @@ use CASS\Domain\Bundles\Profile\Service\ProfileService;
 
 abstract class ProfileCommand extends Command
 {
-
+    /** @var  ProfileService */
+    protected $profileService;
+    /** @var LikeProfileService  */
     protected $likeProfileService;
 
     public function __construct(
+        CurrentAccountService $currentAccountService,
         ProfileService $profileService,
-        CurrentAccountService $currentAccountService
-        , LikeProfileService $likeProfileService
-    )
-    {
-        parent::__construct($profileService, $currentAccountService);
+        LikeProfileService $likeProfileService
+    ){
+        parent::__construct( $currentAccountService);
+        $this->profileService  = $profileService;
         $this->likeProfileService = $likeProfileService;
     }
 }

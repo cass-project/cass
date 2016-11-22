@@ -2,6 +2,7 @@
 namespace CASS\Domain\Bundles\Like;
 
 use CASS\Domain\Bundles\Like\Middleware\LikeProfileMiddleware;
+use CASS\Domain\Bundles\Like\Middleware\LikeThemeMiddleware;
 
 return [
 
@@ -27,6 +28,14 @@ return [
             'url'        => '/like/profile/{profileId}/{command:remove-attitude}[/]',
             'middleware' => LikeProfileMiddleware::class,
             'name'       => 'like-profile-remove-attitude'
+        ],
+        // theme
+        [
+            'type'       => 'route',
+            'method'     => 'PUT',
+            'url'        => '/like/theme/{themeId}/{command:add-like}[/]',
+            'middleware' => LikeThemeMiddleware::class,
+            'name'       => 'like-theme-add-like'
         ],
 
     ]

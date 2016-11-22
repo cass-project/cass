@@ -9,6 +9,8 @@ Theme_Entity_Theme:
     - url
     - preview
     - subscribed
+    - likes
+    - dislikes
   properties:
     id:
       type: number
@@ -34,3 +36,9 @@ Theme_Entity_Theme:
     subscribed:
       type: boolean
       description: Подписан ли текущий пользователь на эту сущность?
+    likes:
+      type: number
+      description: Количество лайков
+    dislikes:
+      type: number
+      description: Количество дизлайков
