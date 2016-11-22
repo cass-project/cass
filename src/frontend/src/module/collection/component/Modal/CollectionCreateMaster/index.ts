@@ -36,6 +36,7 @@ export class CollectionCreateMaster
 
     @Input ('for') ownerType: string;
     @Input ('for_id') ownerId: string;
+    @Input ('theme_id') themeId: number;
     @Output('complete') complete = new EventEmitter<CollectionEntity>();
     @Output('close') close = new EventEmitter<boolean>();
     @Output('error') error = new EventEmitter();
@@ -48,8 +49,12 @@ export class CollectionCreateMaster
         this.close.emit(true);
     }
 
+    ngOnChanges() {
+        this.haveThemesSwitcher = !!this.themeId;
+    }
+
     ngOnInit() {
-        this.collection = new Collection(this.ownerType, this.ownerId);
+        this.collection = new Collection(this.ownerType, this.ownerId, this.themeId);
     }
 
     checkFields() {

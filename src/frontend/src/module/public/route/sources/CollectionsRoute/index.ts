@@ -10,6 +10,9 @@ import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
 import {UINavigationObservable} from "../../../../ui/service/navigation";
 import {CollectionRouteHelper} from "./helper";
 import {ThemeRouteHelper} from "../../theme-route-helper";
+import {ProfileModals} from "../../../../profile/component/Elements/Profile/modals";
+import {AuthModalsService} from "../../../../auth/component/Auth/modals";
+import {Session} from "../../../../session/Session";
 
 @Component({
     template: require('./template.jade'),
@@ -36,6 +39,9 @@ export class CollectionsRoute implements OnInit, OnDestroy
         private source: PublicCollectionsSource,
         private helper: CollectionRouteHelper,
         private navigator: UINavigationObservable,
+        private profileModals: ProfileModals,
+        private authModals: AuthModalsService,
+        private session: Session
     ) {
         catalog.source = 'collections';
         catalog.injectFeedService(service);
@@ -47,11 +53,22 @@ export class CollectionsRoute implements OnInit, OnDestroy
         this.navigator.initNavigation(this.content);
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
         this.navigator.destroyNavigation();
     }
 
     onScroll($event) {
         this.navigator.emitScroll(this.content);
+    }
+
+    openCreateCollectionModal(){
+        let currentTheme = this.helper.themes.getCurrentTheme();
+        let themeId: number = this.helper.themes.isRoot(currentTheme) ? undefined : currentTheme.id;
+
+        if(this.session.isSignedIn()){
+            this.profileModals.openCreateCollectionModal(themeId);
+        }else {
+            this.authModals.signUpModal.open();
+        }
     }
 }
