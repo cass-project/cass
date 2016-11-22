@@ -17,6 +17,6 @@ export class ProfileCollectionsListRoute
     ) {}
 
     openCreateCollectionModal() {
-        this.modals.createCollection.open();
+        this.modals.openCreateCollection();
     }
 }
