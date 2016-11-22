@@ -3,7 +3,7 @@
 namespace CASS\Domain\Bundles\Like\Tests\Fixtures;
 
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
-use CASS\Domain\Bundles\Like\Entity\Attitude;
+use CASS\Domain\Bundles\Like\Entity\AttitudeFactory;
 use CASS\Domain\Bundles\Like\Service\LikeProfileService;
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
@@ -24,7 +24,7 @@ class DemoAttitudeFixture implements Fixture
 
         $profile = DemoAccountFixture::getAccount()->getCurrentProfile();
 
-        $profileLike = Attitude::profileAttitudeFactory($profile);
+        $profileLike = AttitudeFactory::profileAttitudeFactory($profile);
         $profileLike
             ->setResource($profile);
 

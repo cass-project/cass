@@ -1,8 +1,8 @@
-"/like/profile/{profileId}/add-like":
-  put:
+"/like/profile/{profileId}/remove-attitude":
+  delete:
     tags:
       - like
-    description: Лайкнуть профиль
+    description: Удалить отношение(лайк/дизлайк) к профилю
     parameters:
       - name: profileId
         type: number

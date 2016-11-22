@@ -1,8 +1,8 @@
-"/like/profile/{profileId}/add-like":
+"/like/profile/{profileId}/add-dislike":
   put:
     tags:
       - like
-    description: Лайкнуть профиль
+    description: Дизлайкнуть профиль
     parameters:
       - name: profileId
         type: number

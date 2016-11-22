@@ -76,20 +76,6 @@ class Attitude implements IdEntity, JSONSerializable
         $this->created = new \DateTime();
     }
 
-    static public function anonymousAttitudeFactory(string $ipAddress)
-    {
-        return (new self)
-            ->setIpAddress($ipAddress)
-            ->setAttitudeOwnerType(self::ATTITUDE_OWNER_TYPE_ANONYMOUS);
-    }
-
-    static public function profileAttitudeFactory(Profile $profile): self
-    {
-        return (new self)
-            ->setProfileId($profile->getId())
-            ->setAttitudeOwnerType(self::ATTITUDE_OWNER_TYPE_PROFILE);
-    }
-
     public function getAttitudeType(): int
     {
         return $this->attitudeType;
@@ -143,7 +129,7 @@ class Attitude implements IdEntity, JSONSerializable
         return $this->resourceId;
     }
 
-    public function setResourceId(int $resourceId): self
+    protected function setResourceId(int $resourceId): self
     {
         $this->resourceId = $resourceId;
 
@@ -155,7 +141,7 @@ class Attitude implements IdEntity, JSONSerializable
         return $this->resourceType;
     }
 
-    public function setResourceType(int $resourceType): self
+    protected function setResourceType(int $resourceType): self
     {
         $this->resourceType = $resourceType;
 
@@ -176,14 +162,14 @@ class Attitude implements IdEntity, JSONSerializable
                 $this->setResourceId($entity->getId())->setResourceType(self::RESOURCE_TYPE_THEME);
                 break;
             }
-            case Collection::class :{
-                /** @var Collection $entity */
-                $this->setResourceId($entity->getId())->setResourceType(self::RESOURCE_TYPE_COLLECTION);
-                break;
-            }
             case Community::class :{
                 /** @var Community $entity */
                 $this->setResourceId($entity->getId())->setResourceType(self::RESOURCE_TYPE_COMMUNITY);
+                break;
+            }
+            case Collection::class :{
+                /** @var Collection $entity */
+//                $this->setResourceId($entity->getId())->setResourceType(self::RESOURCE_TYPE_COLLECTION);
                 break;
             }
         }

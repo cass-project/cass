@@ -45,3 +45,9 @@ Profile_Entity_Profile:
       items:
         type: number
         description: ID тематики
+    likes:
+      type: number
+      description: Количество лайков
+    dislikes:
+      type: number
+      description: Количество дизлайков

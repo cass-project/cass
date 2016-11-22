@@ -53,6 +53,11 @@ class LikeProfileService extends LikeService
         return $attitude;
     }
 
+    public function getAttitude(Attitude $attitude): Attitude
+    {
+        return $this->likeRepository->getAttitude($attitude);
+    }
+
 
     
 
