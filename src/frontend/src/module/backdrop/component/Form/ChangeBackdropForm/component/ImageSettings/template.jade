@@ -1,11 +1,17 @@
 div.component.component-change-backdrop-cmp--image-settings
   div.form-section
     h1.form-section-header {{ "backdrop.image" | translate }}
-    cass-backdrop-preview(
-      [backdrop]="backdrop",
-      [sample-text]="model.sampleText",
-      [sample-color]="model.textColor.hexCode"
-    )
+    .backdrop-preview-container
+      .backdrop-preview
+        cass-backdrop-preview(
+          [backdrop]="backdrop",
+          [sample-text]="model.sampleText",
+          [sample-color]="model.textColor.hexCode"
+        )
+      .backdrop-preview-button
+        .button-change-preview-button
+          input(type="file")
+          span.text {{ "Change cover | backdrop" | translate }}
   div.form-section
     h1.form-section-header {{ "backdrop.textColor" | translate }}
     cass-color-picker(

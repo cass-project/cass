@@ -62,5 +62,6 @@
   "cass.module.public.menu.collection.title": "Collections",
   "theme.panel.home": "Back to themes list",
   "cass.module.public.menu.community.title": "Communities",
-  "Create collection": "Create collection"
+  "Create collection": "Create collection",
+  "Change cover | backdrop": "Change cover"
 }
