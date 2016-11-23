@@ -34,10 +34,12 @@ class AddLikeProfileCommand extends ProfileCommand
 
         } catch(AttitudeAlreadyExistsException $e) {
             $responseBuilder
+                ->setError($e)
                 ->setJson(['success' => false])
                 ->setStatusConflict();
         } catch(ProfileNotFoundException $e) {
             $responseBuilder
+                ->setError($e)
                 ->setJson(['success' => false])
                 ->setStatusNotFound();
         } catch(\Exception $e) {
