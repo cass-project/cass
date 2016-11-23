@@ -2,9 +2,10 @@ div.component.component-delete-post
   cass-modal
     cass-modal-box(width="400px",height="130px")
       .delete-post
+        cass-form-progress-lock(*ngIf="isLoading()")
         .delete-text Вы действительно хотите удалить пост?
         .delete-post-button
           .button-cancel-wrap
             button(type="button" , (click)="closeModal()").form-text-button Отмена
           .button-save-wrap
-            button(type="button").form-button.form-button-red Удалить
+            button(type="button", (click)='submit()').form-button.form-button-red Удалить

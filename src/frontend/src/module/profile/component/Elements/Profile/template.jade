@@ -24,6 +24,7 @@ article.component.component-profile
         cass-collection-create-master(
           [for]='"profile"',
           [for_id]='session.getCurrentProfile().getId()',
+          [theme_id]='modals.themeId',
           (close)='modals.createCollection.close()',
           (complete)='goCollection($event)'
         )

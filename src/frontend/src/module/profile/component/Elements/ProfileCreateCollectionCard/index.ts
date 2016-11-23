@@ -14,6 +14,6 @@ export class ProfileCreateCollectionCard
     constructor(private modals: ProfileModals) {}
 
     openCreateCollectionMaster() {
-        this.modals.createCollection.open();
+        this.modals.openCreateCollectionModal();
     }
 }
