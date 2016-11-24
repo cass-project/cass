@@ -10,6 +10,9 @@ import {FeedOptionsService} from "../../../../feed/service/FeedOptionsService";
 import {UINavigationObservable} from "../../../../ui/service/navigation";
 import {CommunityRouteHelper} from "./helper";
 import {ThemeRouteHelper} from "../../theme-route-helper";
+import {CommunityModalService} from "../../../../community/service/CommunityModalService";
+import {AuthModalsService} from "../../../../auth/component/Auth/modals";
+import {Session} from "../../../../session/Session";
 
 
 @Component({
@@ -37,6 +40,9 @@ export class CommunitiesRoute implements OnInit, OnDestroy
         private source: PublicCommunitiesSource,
         private helper: CommunityRouteHelper,
         private navigator: UINavigationObservable,
+        private communityModals: CommunityModalService,
+        private authModals: AuthModalsService,
+        private session: Session
     ) {
         catalog.source = 'communities';
         catalog.injectFeedService(service);
@@ -54,5 +60,16 @@ export class CommunitiesRoute implements OnInit, OnDestroy
 
     onScroll($event) {
         this.navigator.emitScroll(this.content);
+    }
+
+    openCreateCommunityModal(){
+        let currentTheme = this.helper.themes.getCurrentTheme();
+        let themeId: number = this.helper.themes.isRoot(currentTheme) ? undefined : currentTheme.id;
+
+        if(this.session.isSignedIn()){
+            this.communityModals.openCreateCommunityModal(themeId);
+        }else {
+            this.authModals.signUpModal.open();
+        }
     }
 }

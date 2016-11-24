@@ -25,6 +25,10 @@ div.route-public-communities {
     >div.content {
       flex-basis: 100%;
       overflow: auto;
+      >div.container-button-right{
+        display: flex;
+        justify-content: flex-end;
+      }
     }
   }
 }
