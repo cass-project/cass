@@ -25,5 +25,6 @@ export class ChangeBackdropForm
 enum ChangeBackdropModalTab
 {
     Image = <any>"image",
-    Palette = <any>"palette"
+    Palette = <any>"palette",
+    Preset = <any>"preset"
 }
