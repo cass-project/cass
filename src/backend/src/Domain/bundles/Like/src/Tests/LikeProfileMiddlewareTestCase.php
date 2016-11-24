@@ -4,6 +4,7 @@ namespace CASS\Domain\Bundles\Like\Tests;
 use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
+use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
 
 /**
  * @backupGlobals disabled
@@ -14,6 +15,7 @@ class LikeProfileMiddlewareTestCase extends CASSMiddlewareTestCase
         return [
             new DemoAccountFixture(),
             new DemoProfileFixture(),
+            new SampleThemesFixture(),
         ];
     }
 

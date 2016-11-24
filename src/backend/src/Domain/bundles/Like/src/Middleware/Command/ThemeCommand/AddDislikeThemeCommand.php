@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 
-class AddLikeThemeCommand extends ThemeCommand
+class AddDislikeThemeCommand extends ThemeCommand
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
@@ -21,13 +21,14 @@ class AddLikeThemeCommand extends ThemeCommand
             $attitude = $attitudeFactory->getAttitude();
             $attitude->setResource($theme);
 
-            $this->likeThemeService->addLike($theme, $attitude);
+            $this->likeThemeService->addDislike($theme, $attitude);
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson([
                     'success' => true,
                     'entity' => $theme->toJSON(),
                 ]);
+
         } catch(ThemeNotFoundException $e) {
             $responseBuilder
                 ->setJson(['success' => false])

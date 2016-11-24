@@ -8,20 +8,20 @@ use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
 /**
  * @backupGlobals disabled
  */
-class AddLikeThemeTest extends LikeThemeMiddlewareTestCase
+class AddDisLikeThemeTest extends LikeThemeMiddlewareTestCase
 {
     public function test200()
     {
         $theme = SampleThemesFixture::getTheme(1);
-        $this->requestLikeTheme($theme->getId())
+        $this->requestDisLikeTheme($theme->getId())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
                     'id' => $this->expectId(),
-                    'likes' => 1,
-                    'dislikes' => 0,
+                    'likes' => 0,
+                    'dislikes' => 1,
                 ],
             ])
             ->expectStatusCode(200);
@@ -30,21 +30,22 @@ class AddLikeThemeTest extends LikeThemeMiddlewareTestCase
     public function testUnAuth200()
     {
         $theme = SampleThemesFixture::getTheme(1);
-        $this->requestLikeTheme($theme->getId())
+        $this->requestDisLikeTheme($theme->getId())
             ->execute()
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
                     'id' => $this->expectId(),
-                    'likes' => 1,
-                    'dislikes' => 0,
+                    'likes' => 0,
+                    'dislikes' => 1,
                 ],
             ])
             ->expectStatusCode(200);
     }
+
     public function test404()
     {
-        $this->requestLikeTheme(self::NOT_FOUND_ID)
+        $this->requestDisLikeTheme(self::NOT_FOUND_ID)
             ->execute()
             ->expectNotFoundError();
     }

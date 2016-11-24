@@ -11,6 +11,7 @@ use ZEA2\Platform\Markers\LikeEntity\LikeableEntity;
 class LikeThemeService extends LikeService
 {
     protected $themeRepository;
+
     public function __construct(LikeRepository $likeRepository, ThemeRepository $themeRepository)
     {
         parent::__construct($likeRepository);
@@ -36,22 +37,43 @@ class LikeThemeService extends LikeService
 
         $attitude = $this->likeRepository->saveAttitude($attitude);
         $this->themeRepository->saveTheme($entity->increaseLikes());
+
         return $attitude;
     }
 
     public function addDislike(LikeableEntity $entity, Attitude $attitude): Attitude
     {
-        // TODO: Implement addDislike() method.
+        $attitude->setAttitudeType(Attitude::ATTITUDE_TYPE_LIKE);
+
+        if($this->likeRepository->isAttitudeExists($attitude)) {
+            $existAttitude = $this->likeRepository->getAttitude($attitude);
+            switch($existAttitude->getAttitudeType()) {
+                case Attitude::ATTITUDE_TYPE_LIKE:
+                    $this->likeRepository->removeAttitude($existAttitude);
+                    $entity->decreaseLikes();
+                    break;
+                case Attitude::ATTITUDE_TYPE_DISLIKE:
+                    throw new AttitudeAlreadyExistsException(sprintf("Сurrent LIKE attitude already exists"));
+                    break;
+            }
+        }
+
+        $attitude = $this->likeRepository->saveAttitude($attitude);
+        $this->themeRepository->saveTheme($entity->increaseDislikes());
+
+        return $attitude;
     }
 
     public function removeLike(LikeableEntity $entity, Attitude $attitude)
     {
-        // TODO: Implement removeLike() method.
+        parent::removeLike($entity, $attitude);
+        $this->themeRepository->saveTheme($entity->decreaseLikes());
     }
 
     public function removeDislike(LikeableEntity $entity, Attitude $attitude)
     {
-        // TODO: Implement removeDislike() method.
+        parent::removeDislike($entity, $attitude);
+        $this->themeRepository->saveTheme($entity->decreaseDislikes());
     }
 
 }

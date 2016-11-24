@@ -10,6 +10,7 @@ use ZEA2\Platform\Markers\LikeEntity\LikeableEntity;
 class LikeProfileService extends LikeService
 {
     protected $profileRepository;
+
     public function __construct(LikeRepository $likeRepository, ProfileRepository $profileRepository)
     {
         parent::__construct($likeRepository);
@@ -35,6 +36,7 @@ class LikeProfileService extends LikeService
 
         $attitude = $this->likeRepository->saveAttitude($attitude);
         $this->profileRepository->saveProfile($entity->increaseLikes());
+
         return $attitude;
     }
 
@@ -58,37 +60,20 @@ class LikeProfileService extends LikeService
 
         $attitude = $this->likeRepository->saveAttitude($attitude);
         $this->profileRepository->saveProfile($entity->increaseDislikes());
-        return $attitude;
-    }
 
-    public function getAttitude(Attitude $attitude): Attitude
-    {
-        return $this->likeRepository->getAttitude($attitude);
+        return $attitude;
     }
 
     public function removeLike(LikeableEntity $entity, Attitude $attitude)
     {
-
-        if(! $attitude->isPersisted()) {
-            $attitude = $this->likeRepository->getLikeAttitude($attitude);
-        }
-
-        $this->likeRepository->removeAttitude($attitude);
+        parent::removeLike($entity, $attitude);
         $this->profileRepository->saveProfile($entity->decreaseLikes());
-
     }
 
     public function removeDislike(LikeableEntity $entity, Attitude $attitude)
     {
-        if(! $attitude->isPersisted()) {
-            $attitude = $this->likeRepository->getDisLikeAttitude($attitude);
-        }
-
-        $this->likeRepository->removeAttitude($attitude);
+        parent::removeDislike($entity, $attitude);
         $this->profileRepository->saveProfile($entity->decreaseDislikes());
     }
-
-
-    
 
 }

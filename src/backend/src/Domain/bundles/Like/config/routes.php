@@ -37,6 +37,20 @@ return [
             'middleware' => LikeThemeMiddleware::class,
             'name'       => 'like-theme-add-like'
         ],
+        [
+            'type'       => 'route',
+            'method'     => 'PUT',
+            'url'        => '/like/theme/{themeId}/{command:add-dislike}[/]',
+            'middleware' => LikeThemeMiddleware::class,
+            'name'       => 'like-theme-add-add-dislike'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'DELETE',
+            'url'        => '/like/theme/{themeId}/{command:remove-attitude}[/]',
+            'middleware' => LikeThemeMiddleware::class,
+            'name'       => 'like-theme-remove-attitude'
+        ],
 
     ]
 ];

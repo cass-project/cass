@@ -19,7 +19,27 @@ abstract class LikeService
 
     abstract public function addDislike(LikeableEntity $entity, Attitude $attitude): Attitude;
 
-    abstract public function removeLike(LikeableEntity $entity, Attitude $attitude);
+    public function removeLike(LikeableEntity $entity, Attitude $attitude)
+    {
 
-    abstract public function removeDislike(LikeableEntity $entity, Attitude $attitude);
+        if(! $attitude->isPersisted()) {
+            $attitude = $this->likeRepository->getLikeAttitude($attitude);
+        }
+
+        $this->likeRepository->removeAttitude($attitude);
+    }
+
+    public function removeDislike(LikeableEntity $entity, Attitude $attitude)
+    {
+        if(! $attitude->isPersisted()) {
+            $attitude = $this->likeRepository->getDisLikeAttitude($attitude);
+        }
+
+        $this->likeRepository->removeAttitude($attitude);
+    }
+
+    public function getAttitude(Attitude $attitude): Attitude
+    {
+        return $this->likeRepository->getAttitude($attitude);
+    }
 }
