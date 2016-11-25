@@ -1,0 +1,31 @@
+"/like/theme/{themeId}/remove-attitude":
+  put:
+    tags:
+      - like
+    description: Удалить отзыв по теме
+    parameters:
+      - name: themeId
+        type: number
+        in: path
+        required: true
+        description: ID темы
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Theme_Entity_Theme'
+      404:
+        $ref: '#/responses/NotFound'
+      403:
+        $ref: '#/responses/Unauthorized'
+      409:
+        $ref: '#/responses/error'
