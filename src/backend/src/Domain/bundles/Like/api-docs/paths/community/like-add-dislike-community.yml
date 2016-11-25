@@ -1,14 +1,14 @@
-"/like/theme/{themeId}/remove-attitude":
-  delete:
+"/like/community/{communityId}/add-dislike":
+  put:
     tags:
       - like
-    description: Удалить отзыв по теме
+    description: Дизлайкнуть communityId
     parameters:
-      - name: themeId
+      - name: communityId
         type: number
         in: path
         required: true
-        description: ID темы
+        description: ID communityId
     responses:
       200:
         description: 200 OK
@@ -22,7 +22,7 @@
               type: boolean
               description: '=true'
             entity:
-              $ref: '#/definitions/Theme_Entity_Theme'
+              $ref: '#/definitions/Community_Entity_Community'
       404:
         $ref: '#/responses/NotFound'
       403:

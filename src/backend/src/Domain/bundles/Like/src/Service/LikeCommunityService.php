@@ -15,7 +15,8 @@ class LikeCommunityService extends LikeService
     public function __construct(
         LikeRepository $likeRepository,
         CommunityRepository $communityRepository
-    ){
+    )
+    {
         parent::__construct($likeRepository);
         $this->communityRepository = $communityRepository;
     }
@@ -47,10 +48,11 @@ class LikeCommunityService extends LikeService
 
     public function addDislike(LikeableEntity $entity, Attitude $attitude): Attitude
     {
-        $attitude->setAttitudeType(Attitude::ATTITUDE_TYPE_LIKE);
+        $attitude->setAttitudeType(Attitude::ATTITUDE_TYPE_DISLIKE);
 
         if($this->likeRepository->isAttitudeExists($attitude)) {
             $existAttitude = $this->likeRepository->getAttitude($attitude);
+
             switch($existAttitude->getAttitudeType()) {
                 case Attitude::ATTITUDE_TYPE_LIKE:
                     $this->likeRepository->removeAttitude($existAttitude);

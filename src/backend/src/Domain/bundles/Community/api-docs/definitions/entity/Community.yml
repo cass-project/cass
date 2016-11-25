@@ -10,6 +10,8 @@ Community_Entity_Community:
     - image
     - collections
     - features
+    - likes
+    - dislikes
   properties:
     id:
       type: number
@@ -60,3 +62,9 @@ Community_Entity_Community:
       items:
         type: string
         description: Фича (строковой код)
+    likes:
+      type: number
+      description: Количество лайков
+    dislikes:
+      type: number
+      description: Количество дизлайков
