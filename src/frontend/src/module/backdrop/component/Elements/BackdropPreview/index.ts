@@ -21,7 +21,7 @@ export class BackdropPreview
         None: () => { return this.backdrop.type === BackdropType.None },
         Color: () => { return this.backdrop.type === BackdropType.Color },
         Preset: () => { return this.backdrop.type === BackdropType.Preset },
-        Uploaded: () => { return this.backdrop.type === BackdropType.None },
+        Uploaded: () => { return this.backdrop.type === BackdropType.Uploaded },
     };
 
     private getBackdropImage(): string {

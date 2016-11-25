@@ -1,7 +1,5 @@
 div.component.component-change-backdrop-form
   div.current-screen
     div(*ngIf="isOn('image')")
-      cass-change-backdrop-cmp-image-settings
-    div(*ngIf="isOn('palette')")
-      cass-change-backdrop-cmp-palette-browser
+      cass-change-backdrop-cmp-image-settings((submit)='submitEvent($event)', (updateTextColor)='changeTextColorEvent($event)')
 

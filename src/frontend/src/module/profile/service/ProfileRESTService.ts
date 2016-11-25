@@ -12,7 +12,13 @@ import {InterestingInRequest, InterestingInResponse200} from "../definitions/pat
 import {ExpertInRequest, ExpertInResponse200} from "../definitions/paths/expert-in-ids";
 import {SwitchToProfileResponse200} from "../../account/definitions/paths/switch-to-profile";
 import {DeleteProfileResponse200} from "../definitions/paths/delete";
-import {UploadProfileImageRequest, UploadProfileImageProgress, UploadProfileImageResponse200} from "../definitions/paths/image-upload";
+import {
+    UploadProfileImageRequest,
+    UploadProfileImageProgress,
+    UploadProfileImageResponse200,
+    UploadProfileBackdropImageRequest,
+    UploadProfileBackdropImageResponse200
+} from "../definitions/paths/image-upload";
 import {AuthToken} from "../../auth/service/AuthToken";
 
 export interface ProfileRESTServiceInterface
@@ -69,6 +75,40 @@ export class ProfileRESTService implements ProfileRESTServiceInterface
 
     deleteProfile(profileId: number): Observable<DeleteProfileResponse200> {
         return this.rest.delete(`/backend/api/protected/profile/${profileId}/delete`);
+    }
+
+    imageBackdropUpload(profileId: number, request: UploadProfileBackdropImageRequest): Observable<UploadProfileBackdropImageResponse200>
+    {
+        return Observable.create(observer => {
+            let xhrRequest = new XMLHttpRequest();
+            let formData = new FormData();
+            let url = `/backend/api/protected/profile/${profileId}/backdrop-upload/textColor/${request.textColor.code}`;
+
+
+            formData.append("file", request.file);
+
+            xhrRequest.open("POST", url);
+            xhrRequest.setRequestHeader('Authorization', this.token.getAPIKey());
+            xhrRequest.send(formData);
+            
+
+            xhrRequest.onreadystatechange = () => {
+                if (xhrRequest.readyState === 4) {
+                    try {
+                        let json = JSON.parse(xhrRequest.response);
+
+                        if (xhrRequest.status === 200) {
+                            observer.next(json);
+                            observer.complete();
+                        } else {
+                            observer.error(json);
+                        }
+                    } catch (e) {
+                        observer.error('Failed to parse JSON');
+                    }
+                }
+            };
+        });
     }
 
     imageUpload(profileId: number, request: UploadProfileImageRequest): Observable<UploadProfileImageProgress|UploadProfileImageResponse200>
