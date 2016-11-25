@@ -10,8 +10,6 @@ class LikeMiddleware implements MiddlewareInterface
 {
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        print_r("Fdsfdsfs");
-        die();
     }
 
 }

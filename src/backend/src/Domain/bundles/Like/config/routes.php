@@ -1,6 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Like;
 
+use CASS\Domain\Bundles\Like\Middleware\LikeCommunityMiddleware;
 use CASS\Domain\Bundles\Like\Middleware\LikeProfileMiddleware;
 use CASS\Domain\Bundles\Like\Middleware\LikeThemeMiddleware;
 
@@ -50,6 +51,30 @@ return [
             'url'        => '/like/theme/{themeId}/{command:remove-attitude}[/]',
             'middleware' => LikeThemeMiddleware::class,
             'name'       => 'like-theme-remove-attitude'
+        ],
+            
+        // Community
+        [
+            'type'       => 'route',
+            'method'     => 'PUT',
+            'url'        => '/like/community/{communityId}/{command:add-like}[/]',
+            'middleware' => LikeCommunityMiddleware::class,
+            'name'       => 'like-community-add-like'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'PUT',
+            'url'        => '/like/community/{communityId}/{command:add-dislike}[/]',
+            'middleware' => LikeCommunityMiddleware::class,
+            'name'       => 'like-community-add-dislike'
+        ],
+
+        [
+            'type'       => 'route',
+            'method'     => 'DELETE',
+            'url'        => '/like/community/{communityId}/{command:remove-attitude}[/]',
+            'middleware' => LikeCommunityMiddleware::class,
+            'name'       => 'like-community-remove-attitude'
         ],
 
     ]

@@ -3,7 +3,9 @@
 namespace CASS\Domain\Bundles\Like\Tests\Fixtures;
 
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Bundles\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use CASS\Domain\Bundles\Like\Entity\AttitudeFactory;
+use CASS\Domain\Bundles\Like\Service\LikeCommunityService;
 use CASS\Domain\Bundles\Like\Service\LikeProfileService;
 use CASS\Domain\Bundles\Like\Service\LikeThemeService;
 use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
@@ -28,8 +30,7 @@ class DemoAttitudeFixture implements Fixture
         $profile = DemoAccountFixture::getAccount()->getCurrentProfile();
 
         $profileLike = AttitudeFactory::profileAttitudeFactory($profile);
-        $profileLike
-            ->setResource($profile);
+        $profileLike->setResource($profile);
 
         $this->attitudes['like'][] = $likeProfileService->addLike($profile, $profileLike);
 
@@ -42,5 +43,13 @@ class DemoAttitudeFixture implements Fixture
         $themeLike
             ->setResource($theme);
         $this->attitudes['like'][] = $likeThemeService->addLike($theme, $themeLike);
+
+        // Community
+        $likeCommunityService =  $app->getContainer()->get(LikeCommunityService::class);
+        $community = SampleCommunitiesFixture::getCommunity(2);
+        $communityLike = AttitudeFactory::profileAttitudeFactory($profile);
+        $communityLike->setResource($community);
+
+        $this->attitudes['like'][] = $likeCommunityService->addLike($community, $communityLike);
     }
 }

@@ -1,27 +1,27 @@
 <?php
 
-namespace CASS\Domain\Bundles\Like\Middleware\Command\ProfileCommand;
+namespace CASS\Domain\Bundles\Like\Middleware\Command\CommunityCommand;
 
 use CASS\Domain\Bundles\Like\Entity\AttitudeFactory;
 use CASS\Domain\Bundles\Like\Exception\AttitudeAlreadyExistsException;
-use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Theme\Exception\ThemeNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 
-class AddLikeProfileCommand extends ProfileCommand
+class AddDisLikeCommunityCommand extends CommunityCommand
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
-            $profileId = $request->getAttribute('profileId');
-            $profile = $this->profileService->getProfileById($profileId);
+            $communityId = $request->getAttribute('communityId');
+            $profile = $this->communityService->getCommunityById($communityId);
 
             $attitudeFactory = new AttitudeFactory($request, $this->currentAccountService);
             $attitude = $attitudeFactory->getAttitude();
             $attitude->setResource($profile);
 
-            $this->likeProfileService->addLike($profile, $attitude);
+            $this->likeCommunityService->addDislike($profile, $attitude);
 
             $responseBuilder
                 ->setStatusSuccess()
@@ -35,7 +35,7 @@ class AddLikeProfileCommand extends ProfileCommand
                 ->setError($e)
                 ->setJson(['success' => false])
                 ->setStatusConflict();
-        } catch(ProfileNotFoundException $e) {
+        } catch(ThemeNotFoundException $e) {
             $responseBuilder
                 ->setError($e)
                 ->setJson(['success' => false])
