@@ -3,6 +3,8 @@ import {Component, Input, Output, EventEmitter, OnInit} from "@angular/core";
 import {ProfileEntity} from "../../../definitions/entity/Profile";
 import {Backdrop} from "../../../../backdrop/definitions/Backdrop";
 import {ChangeBackdropModel} from "../../../../backdrop/component/Form/ChangeBackdropForm/model";
+import { ProfileRESTService } from "../../../service/ProfileRESTService";
+import {Session} from "../../../../session/Session";
 
 @Component({
     selector: 'cass-profile-backdrop-modal',
@@ -20,11 +22,33 @@ export class ProfileBackdrop implements OnInit
     @Output('close') closeEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output('complete') completeEvent: EventEmitter<Backdrop<any>> = new EventEmitter<Backdrop<any>>();
 
-    constructor(private model: ChangeBackdropModel) {}
+    private request: any;
+
+    constructor(private model: ChangeBackdropModel,
+                private profileRESTService: ProfileRESTService,
+                private session: Session
+
+    ) {}
+    
+    completeChangeImageBackdrop(event){
+        this.request = event;
+    }
+    
+    changeTextColorBackdrop(event){
+        this.request.textColor = event;
+    }
 
     ngOnInit() {
         this.model.exportBackdrop(this.profile.backdrop);
         this.model.exportSampleText(this.profile.greetings.greetings);
+        this.model.exportProfile(this.profile);
+    }
+    
+    save(){
+        this.profileRESTService.imageBackdropUpload(this.profile.id, this.request).subscribe(response => {
+            this.session.getCurrentProfile().entity.profile.backdrop = response.backdrop;
+            this.close();
+        });
     }
 
     close() {
