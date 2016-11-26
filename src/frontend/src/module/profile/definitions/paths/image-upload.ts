@@ -13,7 +13,7 @@ export interface UploadProfileImageRequest
     }
 }
 
-export interface UploadProfileBackdropImageRequest
+export class UploadProfileBackdropImageRequest
 {
     file: Blob;
     textColor: {
