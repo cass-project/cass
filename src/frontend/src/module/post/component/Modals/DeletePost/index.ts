@@ -28,13 +28,11 @@ export class DeletePost
         let loading = this.status.addLoading();
 
         this.service.deletePost(this.post.id).subscribe(success => {
-            console.log('test');
             this.submitDelete.emit(this.post.id);
             loading.is = false;
             this.closeModal();
         }, error => {
             loading.is = false;
-            this.closeModal();
         });
     }
 
@@ -43,7 +41,6 @@ export class DeletePost
     }
 
     closeModal(){
-        console.log('close');
         this.close.emit(true);
     }
 }
