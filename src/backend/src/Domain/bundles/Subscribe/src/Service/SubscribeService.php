@@ -132,4 +132,9 @@ class SubscribeService
             $seek->getOffset()
         );
     }
+
+    public function hasSubscribe(int $targetProfileId, int $subscribeType, int $subscribeId): bool
+    {
+        return $this->subscribeRepository->hasSubscribe($targetProfileId, $subscribeType, $subscribeId);
+    }
 }

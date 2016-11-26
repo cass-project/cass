@@ -79,7 +79,8 @@ WebpackConfigBuilder.prototype = {
           jQuery: "jquery",
           "window.jQuery": "jquery",
           Tether: 'tether',
-          "window.Tether": 'tether'
+          "window.Tether": 'tether',
+          'Promise': 'bluebird'
         })
       ]      
     }

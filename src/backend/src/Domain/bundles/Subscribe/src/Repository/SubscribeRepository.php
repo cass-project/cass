@@ -181,4 +181,13 @@ class SubscribeRepository extends EntityRepository
 
         return $subscribe;
     }
+
+    public function hasSubscribe(int $targetProfileId, int $subscribeType, int $subscribeId): bool
+    {
+        return $this->findOneBy([
+            'profileId' => $targetProfileId,
+            'subscribeId' => $subscribeId,
+            'subscribeType' => $subscribeType,
+        ]) !== null;
+    }
 }

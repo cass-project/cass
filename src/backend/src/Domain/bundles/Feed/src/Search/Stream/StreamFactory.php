@@ -1,6 +1,7 @@
 <?php
 namespace CASS\Domain\Bundles\Feed\Search\Stream;
 
+use CASS\Domain\Bundles\Collection\Formatter\CollectionFormatter;
 use CASS\Domain\Bundles\Collection\Service\CollectionService;
 use CASS\Domain\Bundles\Community\Service\CommunityService;
 use CASS\Domain\Bundles\Feed\Search\Stream\Streams\CollectionStream;
@@ -35,6 +36,9 @@ final class StreamFactory
 
     /** @var CollectionService */
     private $collectionService;
+
+    /** @var CollectionFormatter */
+    private $collectionFormatter;
 
     /** @var CommunityService */
     private $communityService;
@@ -80,6 +84,7 @@ final class StreamFactory
         ])) {
             $stream = new CollectionStream($source);
             $stream->setCollectionService($this->collectionService);
+            $stream->setCollectionFormatter($this->collectionFormatter);
 
             return $stream;
         }else if(in_array($sourceName, [
