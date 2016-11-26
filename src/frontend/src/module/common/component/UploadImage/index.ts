@@ -50,7 +50,6 @@ export class UploadImageModal
         } else {
             this.service.process($event.target.files[0], this);
             this.complete.emit($event.target.files[0]);
-            this.service.process($event.target.files[0], this)
         }
     }
 

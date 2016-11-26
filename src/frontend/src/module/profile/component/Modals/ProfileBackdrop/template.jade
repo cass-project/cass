@@ -1,4 +1,5 @@
 div.component.component-profile-backdrop
+  cass-form-progress-lock(*ngIf="isLoading()")
   header.form-header
     h1 {{ "backdrop.change.title" | translate }}
   div.backdrop-form

@@ -83,8 +83,7 @@ export class ProfileRESTService implements ProfileRESTServiceInterface
             let xhrRequest = new XMLHttpRequest();
             let formData = new FormData();
             let url = `/backend/api/protected/profile/${profileId}/backdrop-upload/textColor/${request.textColor.code}`;
-
-
+            
             formData.append("file", request.file);
 
             xhrRequest.open("POST", url);
