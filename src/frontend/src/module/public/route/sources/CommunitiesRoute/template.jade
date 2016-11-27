@@ -7,4 +7,7 @@ div.route.route-public-communities
     .content(#content, (scroll)="onScroll($event)")
       div.theme-header
         cass-theme-header([theme]="helper.themes.getThemeRoot()", (go)="helper.goTheme($event)")
+      div.container-button-right((click)="openCreateCommunityModal()")
+        button.form-button.form-button-green
+          span.title {{ "Create thematic community" | translate }}
       router-outlet
