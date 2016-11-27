@@ -8,9 +8,11 @@ use CASS\Domain\Bundles\Post\PostType\Types\DiscussionPostType;
 
 final class PublicDiscussionsProcessor extends AbstractPostProcessor
 {
-    protected function getSource(Post $entity): Source
+    protected function getSources(Post $entity): array
     {
-        return $this->sourceFactory->getPublicDiscussionsSource();
+        return [
+            $this->sourceFactory->getPublicDiscussionsSource(),
+        ];
     }
 
     protected function isIndexable(Post $entity): bool

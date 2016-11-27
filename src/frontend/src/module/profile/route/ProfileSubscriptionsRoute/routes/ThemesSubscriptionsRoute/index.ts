@@ -27,7 +27,6 @@ export class ThemesSubscriptionsRoute
                 private service: ThemeService
     ){}
 
-
     ngOnInit() {
 
         this.theme = this.service.getRoot();

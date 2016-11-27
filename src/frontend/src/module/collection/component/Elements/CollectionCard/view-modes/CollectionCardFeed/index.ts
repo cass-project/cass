@@ -18,8 +18,6 @@ export class CollectionCardFeed
     @Input('entity') entity: CollectionEntity;
     @Output('open') openEvent: EventEmitter<CollectionEntity> = new EventEmitter<CollectionEntity>();
 
-
-    private isSubscribed: boolean = false;
     private subscribeLoading: LoadingManager = new LoadingManager();
 
 
@@ -38,7 +36,7 @@ export class CollectionCardFeed
         let loading = this.subscribeLoading.addLoading();
 
         this.subscribeService.subscribeCollection(this.entity.id).subscribe(response => {
-            this.isSubscribed = true;
+            this.entity.subscribed = true;
             loading.is = false;
         });
     }
@@ -47,7 +45,7 @@ export class CollectionCardFeed
         let loading = this.subscribeLoading.addLoading();
 
         this.subscribeService.unsubscribeCollection(this.entity.id).subscribe(response => {
-            this.isSubscribed = false;
+            this.entity.subscribed = false;
             loading.is = false;
         });
     }

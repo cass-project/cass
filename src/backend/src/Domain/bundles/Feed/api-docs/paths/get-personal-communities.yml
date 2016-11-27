@@ -1,4 +1,4 @@
-"/protected/feed/get/public-communities":
+"/protected/feed/get/personal-communities":
   post:
     tags:
       - feed

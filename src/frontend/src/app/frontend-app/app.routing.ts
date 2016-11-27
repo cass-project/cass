@@ -56,10 +56,10 @@ const appRoutes: Routes = [
                         path: 'subscriptions',
                         component: ProfileSubscriptionsRoute,
                         children: [
-
                             {
                                 path: '',
-                                component: ProfileSubscriptionsDashboardRoute
+                                redirectTo: 'themes',
+                                pathMatch: 'full'
                             },
 
                             {

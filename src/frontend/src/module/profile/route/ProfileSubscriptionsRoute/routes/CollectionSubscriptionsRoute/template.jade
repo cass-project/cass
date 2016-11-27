@@ -4,8 +4,6 @@
   cass-form-progress-lock(*ngIf="status.isLoading()")
   .collection-container
     div(*ngIf="! status.isLoading()").collection-card-wrap
-      div(*ngFor="let subscription of subscribes").collection-card
+      div(ngIf="()")
         cass-collection-cards-list([entities]="getCollection()")
-
-
 

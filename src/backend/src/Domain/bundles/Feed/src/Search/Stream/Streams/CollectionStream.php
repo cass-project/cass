@@ -22,16 +22,14 @@ final class CollectionStream extends Stream
     /** @var CollectionFormatter */
     private $collectionFormatter;
 
-    public function setCollectionService($collectionService)
-    {
+    public function __construct(
+        CollectionService $collectionService,
+        CollectionFormatter $collectionFormatter
+    ) {
         $this->collectionService = $collectionService;
-    }
-
-    public function setCollectionFormatter(CollectionFormatter $collectionFormatter)
-    {
         $this->collectionFormatter = $collectionFormatter;
     }
-    
+
     public function fetch(CriteriaManager $criteriaManager, Collection $collection): array
     {
         $order = 1;

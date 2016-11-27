@@ -3,6 +3,10 @@ namespace CASS\Domain\Bundles\Feed\Factory;
 
 use CASS\Domain\Bundles\Index\Source\Sources\CollectionSource;
 use CASS\Domain\Bundles\Index\Source\Sources\CommunitySource;
+use CASS\Domain\Bundles\Index\Source\Sources\PersonalFeeds\PersonalCollectionsSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PersonalFeeds\PersonalCommunitiesSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PersonalFeeds\PersonalPeopleSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PersonalFeeds\PersonalThemesSource;
 use CASS\Domain\Bundles\Index\Source\Sources\ProfileSource;
 use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicCollectionsSource;
 use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicCommunitiesSource;
@@ -56,5 +60,25 @@ final class FeedSourceFactory
     public function getPublicProfilesSource(): PublicProfilesSource
     {
         return new PublicProfilesSource();
+    }
+
+    public function getPersonalCollectionsSource(int $profileId): PersonalCollectionsSource
+    {
+        return new PersonalCollectionsSource($profileId);
+    }
+
+    public function getPersonalPeopleSource(int $profileId): PersonalPeopleSource
+    {
+        return new PersonalPeopleSource($profileId);
+    }
+
+    public function getPersonalThemesSource(int $profileId): PersonalThemesSource
+    {
+        return new PersonalThemesSource($profileId);
+    }
+
+    public function getPersonalCommunitiesSource(int $profileId): PersonalCommunitiesSource
+    {
+        return new PersonalCommunitiesSource($profileId);
     }
 }

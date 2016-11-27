@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+
 import {LoadingManager} from "../../../../../common/classes/LoadingStatus";
 import {SubscriptionEntity} from "../../../../../subscribe/definitions/entity/Subscription";
 import {ListSubscribeCollectionsRequest} from "../../../../../subscribe/definitions/paths/list-collections";
@@ -15,7 +16,6 @@ import {CollectionEntity} from "../../../../../collection/definitions/entity/col
 })
 export class CollectionSubscriptionsRoute
 {
-
     private status: LoadingManager = new LoadingManager();
     private profile: ProfileEntity;
     private subscribes: SubscriptionEntity<CollectionEntity>[];
@@ -24,12 +24,12 @@ export class CollectionSubscriptionsRoute
         offset: 0
     };
 
-    constructor(private subscribe: SubscribeRESTService,
-                private service: ProfileRouteService
-    ){}
+    constructor(
+        private subscribe: SubscribeRESTService,
+        private service: ProfileRouteService
+    ) {}
 
     ngOnInit() {
-
         this.profile = this.service.getProfile();
 
         let loading = this.status.addLoading();
@@ -47,8 +47,11 @@ export class CollectionSubscriptionsRoute
         )
     }
 
-    getCollection() {
+    hasSubscribes(): boolean {
+        return this.subscribes.length > 0;
+    }
+
+    getCollection(): CollectionEntity[] {
         return this.subscribes.map(subscription => subscription.entity);
     }
 }
-

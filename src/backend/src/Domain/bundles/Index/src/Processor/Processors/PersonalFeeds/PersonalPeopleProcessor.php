@@ -1,19 +1,23 @@
 <?php
-namespace CASS\Domain\Bundles\Index\Processor\Processors\PersonalPeopleProcessor;
+namespace CASS\Domain\Bundles\Index\Processor\Processors\PersonalFeeds;
 
-use CASS\Domain\Bundles\Collection\Entity\Collection;
-use CASS\Domain\Bundles\Index\Processor\ProcessorVariants\AbstractCollectionProcessor;
-use CASS\Domain\Bundles\Index\Source\Source;
+use CASS\Domain\Bundles\Post\Entity\Post;
+use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
+use Cocur\Chain\Chain;
 
-final class PersonalPeopleProcessor extends AbstractCollectionProcessor
+final class PersonalPeopleProcessor extends AbstractPersonalFeedProcessor
 {
-    protected function getSource(Collection $entity): Source
+    protected function getSources(Post $entity): array
     {
-        // TODO: Implement getSource() method.
+        return Chain::create($this->subscriptionService->listWhoSubscribedToProfile($entity->getAuthorProfile()->getId()))
+            ->map(function(Subscribe $subscribe) {
+                return $this->sourceFactory->getPersonalPeopleSource($subscribe->getProfileId());
+            })
+            ->array;
     }
 
-    protected function isIndexable(Collection $entity): bool
+    protected function isIndexable(Post $entity): bool
     {
-        // TODO: Implement isIndexable() method.
+        return true;
     }
 }

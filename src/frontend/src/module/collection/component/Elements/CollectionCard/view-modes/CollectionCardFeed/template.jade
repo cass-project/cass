@@ -13,7 +13,8 @@ div.component.component-collection-card-feed.x-navigation-entity
             span.theme {{ helper.getThemeTitle() }}
           .subscrible-button
             cass-subscribe-button(
-            [subscribed]="isSubscribed",
-            [is-loading]="subscribeLoading.isLoading()",
-            (subscribe)="subscribe()",
-            (unsubscribe)="unsubscribe()")
+              [subscribed]="entity.subscribed",
+              [is-loading]="subscribeLoading.isLoading()",
+              (subscribe)="subscribe()",
+              (unsubscribe)="unsubscribe()"
+            )

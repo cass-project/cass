@@ -21,7 +21,6 @@ export class ProfileCardFeed
     @Input('theme-list-mode') themeListMode: ProfileThemeListMode = ProfileThemeListMode.InterestingIn;
     @Output('open') openProfile: EventEmitter<ProfileEntity> = new EventEmitter<ProfileEntity>();
 
-    private isSubscribed: boolean = false;
     private subscribeLoading: LoadingManager = new LoadingManager();
     private viewMode: ViewOptionValue = ViewOptionValue.Feed;
 
@@ -50,7 +49,7 @@ export class ProfileCardFeed
         let loading = this.subscribeLoading.addLoading();
         
         this.subscribeService.subscribeProfile(this.profile.id).subscribe(response => {
-            this.isSubscribed = true;
+            this.profile.subscribed = true;
             loading.is = false;
         });
     }
@@ -59,7 +58,7 @@ export class ProfileCardFeed
         let loading = this.subscribeLoading.addLoading();
         
         this.subscribeService.unsubscribeProfile(this.profile.id).subscribe(response => {
-            this.isSubscribed = false;
+            this.profile.subscribed = false;
             loading.is = false;
         });
     }

@@ -1,9 +1,6 @@
 <?php
 namespace CASS\Domain\Bundles\Feed\Search\Stream;
 
-use CASS\Domain\Bundles\Collection\Formatter\CollectionFormatter;
-use CASS\Domain\Bundles\Collection\Service\CollectionService;
-use CASS\Domain\Bundles\Community\Service\CommunityService;
 use CASS\Domain\Bundles\Feed\Search\Stream\Streams\CollectionStream;
 use CASS\Domain\Bundles\Feed\Search\Stream\Streams\CommunityStream;
 use CASS\Domain\Bundles\Feed\Search\Stream\Streams\PostStream;
@@ -18,84 +15,57 @@ use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicContentSource;
 use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicDiscussionsSource;
 use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicProfilesSource;
 use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicExpertsSource;
-use CASS\Domain\Bundles\Post\Formatter\PostFormatter;
-use CASS\Domain\Bundles\Post\Service\PostService;
-use CASS\Domain\Bundles\Profile\Service\ProfileService;
+use Interop\Container\ContainerInterface;
 use Zend\I18n\Exception\OutOfBoundsException;
 
 final class StreamFactory
 {
-    /** @var PostFormatter */
-    private $postFormatter;
+    /** @var ContainerInterface */
+    private $container;
 
-    /** @var PostService */
-    private $postService;
-
-    /** @var ProfileService */
-    private $profileService;
-
-    /** @var CollectionService */
-    private $collectionService;
-
-    /** @var CollectionFormatter */
-    private $collectionFormatter;
-
-    /** @var CommunityService */
-    private $communityService;
-
-    public function __construct(
-        PostFormatter $postFormatter,
-        PostService $postService,
-        ProfileService $profileService,
-        CollectionService $collectionService,
-        CommunityService $communityService
-    ) {
-        $this->postFormatter = $postFormatter;
-        $this->postService = $postService;
-        $this->profileService = $profileService;
-        $this->collectionService = $collectionService;
-        $this->communityService = $communityService;
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
     }
 
-    public function getStreamForSource(Source $source) {
+    public function getStreamForSource(Source $source)
+    {
         $sourceName = get_class($source);
 
-        if(in_array($sourceName, [
+        if (in_array($sourceName, [
             PublicProfilesSource::class,
             PublicExpertsSource::class,
         ])) {
-            $stream = new ProfileStream($source);
-            $stream->setProfileService($this->profileService);
+            $stream = $this->container->get(ProfileStream::class);
+            $stream->setSource($source);
 
             return $stream;
-        }else if(in_array($sourceName, [
+        } else if (in_array($sourceName, [
             PublicContentSource::class,
             PublicDiscussionsSource::class,
             ProfileSource::class,
             CollectionSource::class,
         ])) {
-            $stream = new PostStream($source);
-            $stream->setPostFormatter($this->postFormatter);
-            $stream->setPostService($this->postService);
+            $stream = $this->container->get(PostStream::class);
+            $stream->setSource($source);
 
             return $stream;
-        }else if(in_array($sourceName, [
+        } else if (in_array($sourceName, [
             PublicCollectionsSource::class
         ])) {
-            $stream = new CollectionStream($source);
-            $stream->setCollectionService($this->collectionService);
-            $stream->setCollectionFormatter($this->collectionFormatter);
+            $stream = $this->container->get(CollectionStream::class);
+            $stream->setSource($source);
 
             return $stream;
-        }else if(in_array($sourceName, [
+        } else if (in_array($sourceName, [
             PublicCommunitiesSource::class,
             CommunitySource::class,
         ])) {
-            $stream = new CommunityStream($source);
-            $stream->setCommunityService($this->communityService);
+            $stream = $this->container->get(CommunityStream::class);
+            $stream->setSource($source);
 
             return $stream;
-        }else{
+        } else {
             throw new OutOfBoundsException(sprintf('Cannot create stream for source `%s`', $sourceName));
         }
     }

@@ -137,4 +137,24 @@ class SubscribeService
     {
         return $this->subscribeRepository->hasSubscribe($targetProfileId, $subscribeType, $subscribeId);
     }
+
+    public function listWhoSubscribedToTheme(int $themeId): array
+    {
+        return $this->subscribeRepository->listWhoSubscribedToTheme($themeId);
+    }
+
+    public function listWhoSubscribedToProfile(int $profileId): array
+    {
+        return $this->subscribeRepository->listWhoSubscribedToProfile($profileId);
+    }
+
+    public function listWhoSubscribedToCollection(int $collectionId): array
+    {
+        return $this->subscribeRepository->listWhoSubscribedToCollection($collectionId);
+    }
+
+    public function listWhoSubscribedToCommunity(int $communityId): array
+    {
+        return $this->subscribeRepository->listWhoSubscribedToCommunity($communityId);
+    }
 }
