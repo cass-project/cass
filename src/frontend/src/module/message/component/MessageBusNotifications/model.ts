@@ -1,9 +1,11 @@
+import Timer = NodeJS.Timer;
+
 export class MessageBusNotificationsModel {
-    id:number;
-    level:MessageBusNotificationsLevel;
-    state:MessageBusNotificationsStates = MessageBusNotificationsStates.Showing;
-    timeout:number;
-    message:string;
+    id: number;
+    level: MessageBusNotificationsLevel;
+    state: MessageBusNotificationsStates = MessageBusNotificationsStates.Showing;
+    timeout: Timer;
+    message: string;
 }
 
 export enum MessageBusNotificationsLevel {
@@ -16,5 +18,5 @@ export enum MessageBusNotificationsLevel {
 
 export enum MessageBusNotificationsStates {
     Showing = <any>"showing",
-    Hidding = <any>"hidding"
+    Hiding = <any>"hidding"
 }

@@ -1,10 +1,4 @@
 {
-  "dependencies": {
-    "webpack": "github:tkqubo/typed-webpack#10d2cc44a01602b87f8e999eec90192e7e6b3edc"
-  },
-  "globalDependencies": {
-    "require": "github:DefinitelyTyped/DefinitelyTyped/requirejs/require.d.ts"
-  },
   "resolution": {
     "main": "typings/main"
   }

@@ -11,6 +11,13 @@
     "suppressImplicitAnyIndexErrors": true,
     "typeRoots": [
       "./node_modules/@types/"
+    ],
+    "types": [
+      "node",
+      "source-map",
+      "uglify-js",
+      "webpack",
+      "core-js"
     ]
   },
   "compileOnSave": true,
