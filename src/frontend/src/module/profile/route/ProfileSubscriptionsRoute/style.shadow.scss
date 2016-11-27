@@ -1,4 +1,4 @@
-.component-subscribe-route-menu {
+.route-subscribe-route-menu {
    .flex-box-container {
      -webkit-display: flex;
      display: flex;
@@ -10,7 +10,7 @@
   }
 
   .menu-subscribtion {
-    margin: 20px;
+    margin: 0 20px;
     width: 150px;
     box-sizing: border-box;
     height: 100%;
@@ -55,7 +55,6 @@
   }
 
   .subscribe-content {
-     margin-top: 35px;
      height: 100%;
      width: 100%;
   }

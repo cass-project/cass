@@ -7,6 +7,9 @@ import {SubscribeRESTService} from "../../../../../subscribe/service/SubscribeRE
 import {ProfileRouteService} from "../../../ProfileRoute/service";
 import {ProfileEntity} from "../../../../definitions/entity/Profile";
 import {CollectionEntity} from "../../../../../collection/definitions/entity/collection";
+import {Router} from "@angular/router";
+import {ViewOptionValue} from "../../../../../feed/service/FeedService/options/ViewOption";
+import {ViewOptionService} from "../../../../../public/component/Options/ViewOption/service";
 
 @Component({
     template: require('./template.jade'),
@@ -26,7 +29,9 @@ export class CollectionSubscriptionsRoute
 
     constructor(
         private subscribe: SubscribeRESTService,
-        private service: ProfileRouteService
+        private service: ProfileRouteService,
+        private router: Router,
+        private viewOptions: ViewOptionService
     ) {}
 
     ngOnInit() {
@@ -51,7 +56,15 @@ export class CollectionSubscriptionsRoute
         return this.subscribes.length > 0;
     }
 
-    getCollection(): CollectionEntity[] {
+    getCollections(): CollectionEntity[] {
         return this.subscribes.map(subscription => subscription.entity);
+    }
+
+    openCollection(collection: CollectionEntity) {
+        this.router.navigate(['/profile/', collection.owner.id, 'collections', collection.id]);
+    }
+
+    getViewMode(): ViewOptionValue {
+        return this.viewOptions.option.current;
     }
 }

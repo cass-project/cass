@@ -8,6 +8,10 @@ use CASS\Domain\Bundles\Feed\Search\Stream\Streams\ProfileStream;
 use CASS\Domain\Bundles\Index\Source\Source;
 use CASS\Domain\Bundles\Index\Source\Sources\CollectionSource;
 use CASS\Domain\Bundles\Index\Source\Sources\CommunitySource;
+use CASS\Domain\Bundles\Index\Source\Sources\PersonalFeeds\PersonalCollectionsSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PersonalFeeds\PersonalCommunitiesSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PersonalFeeds\PersonalPeopleSource;
+use CASS\Domain\Bundles\Index\Source\Sources\PersonalFeeds\PersonalThemesSource;
 use CASS\Domain\Bundles\Index\Source\Sources\ProfileSource;
 use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicCollectionsSource;
 use CASS\Domain\Bundles\Index\Source\Sources\PublicCatalog\PublicCommunitiesSource;
@@ -45,6 +49,10 @@ final class StreamFactory
             PublicDiscussionsSource::class,
             ProfileSource::class,
             CollectionSource::class,
+            PersonalThemesSource::class,
+            PersonalCollectionsSource::class,
+            PersonalCommunitiesSource::class,
+            PersonalPeopleSource::class,
         ])) {
             $stream = $this->container->get(PostStream::class);
             $stream->setSource($source);

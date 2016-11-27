@@ -16,7 +16,8 @@ class SubscribeRepository extends EntityRepository
     public function subscribeTheme(Profile $profile, Theme $theme, $options = null): Subscribe
     {
         $subscribe = new Subscribe();
-        $subscribe->setProfileId($profile->getId())
+        $subscribe
+            ->setProfileId($profile->getId())
             ->setOptions($options)
             ->setSubscribeId($theme->getId())
             ->setSubscribeType(Subscribe::TYPE_THEME);
