@@ -1,6 +1,6 @@
 export class Loader
 {
-    private progressBar: any;
+    private progressBar: Element;
     private loader: any;
     private currentProgress: number = 0;
 
@@ -15,7 +15,6 @@ export class Loader
     }
 
     done() {
-        console.log('done')
         this.setWidth(100);
         this.loader.remove();
         this.loader = null;
