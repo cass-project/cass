@@ -1,4 +1,6 @@
+import {FormButton} from "./component/FormButton/index";
+
 export const CASSFormModule = {
-    declarations: [],
+    declarations: [FormButton],
     providers: [],
 };

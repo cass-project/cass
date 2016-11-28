@@ -9,12 +9,10 @@ div.component.component-auth-sign-out
       .form-footer-section
         .form-footer-item
           .cass-padding-box-5
-            button.form-text-button(type='button', tabindex='3', (click)='cancel()')
-              span Отмена
+            cass-form-button(styles="text", type="button", title="ОТМЕНА", tabindex='3',(click)='cancel()')
       .form-footer-section
         .form-footer-item
           .cass-padding-box-5
-            button.form-text-button(type='button', tabindex='2', (click)='no()')
-              span Нет
-            button.form-button.form-button-primary(#yesButton, type='button', tabindex='1', (click)='yes()')
-              span Да
+            cass-form-button(styles="text", type="button", title="HEТ", tabindex='2',(click)='no()')
+            cass-form-button(#yesButton,styles="solid", type="button", title="ДА", tabindex='1',(click)='yes()',color="#2196F3")
+

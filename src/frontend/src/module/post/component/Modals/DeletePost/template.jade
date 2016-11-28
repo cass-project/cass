@@ -6,6 +6,6 @@ div.component.component-delete-post
         .delete-text Вы действительно хотите удалить пост?
         .delete-post-button
           .button-cancel-wrap
-            button(type="button" , (click)="closeModal()").form-text-button Отмена
+            cass-form-button(title="ОТМЕНА",type="button",styles="text", (click)="closeModal()")
           .button-save-wrap
-            button(type="button", (click)='submit()').form-button.form-button-red Удалить
+            cass-form-button(title="УДАЛИТЬ",type="button",styles="solid",color="#9d223c", (click)='submit()')

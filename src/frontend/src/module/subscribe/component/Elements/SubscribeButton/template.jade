@@ -1,9 +1,5 @@
 div.component.component-subscribe-button
   .state.state-unsubscribed(*ngIf="! isSubscribed()")
-    button(type="button", (click)="subscribe()" , [disabled]="isLoading")
-      i.fa.fa-check
-      span.title Подписаться
+    cass-form-button(type="button", title="Подписаться", icon="'fa fa-check'", styles="solid",color="#2196F3",(click)="subscribe()" , [disabled]="isLoading")
   .state.state-subscribed(*ngIf="isSubscribed()")
-    button(type="button", (click)="unsubscribe()" , [disabled]="isLoading")
-      i.fa.fa-ban
-      span.title Отменить подписку
+    cass-form-button(type="button", title="Отменить подписку", icon="'fa fa-ban'", styles="solid",color="#2196F3",(click)="unsubscribe()" , [disabled]="isLoading")

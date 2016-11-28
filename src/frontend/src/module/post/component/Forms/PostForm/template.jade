@@ -36,19 +36,15 @@ article.component.component-post-form([ngClass]="{ 'component-post-form--extende
         .post-form-section(*ngIf="isExtended()")
           footer.post-form-footer
             .form-section
-              button(type="button", (click)="cancel()").form-text-button
-                span Отмена
+              cass-form-button(title="ОТМЕНА",type="button",styles="text",(click)='cancel()')
             .form-section
-              button(type="submit", [disabled]="! model.isValid()").form-button.form-button-green
-                span Разместить
+              cass-form-button(title="РАЗМЕСТИТЬ",type="submit",styles="solid",color="green",[disabled]="! model.isValid()")
         .post-form-section(*ngIf="hasAttachments()")
           .attachment
             cass-attachment([attachment]="model.getAttachment()", view-mode="feed")
           .attachment-actions
             .attachment-actions-section
-            .attachment-actions-section
-              button(type="button", (click)="deleteAttachments()").form-text-button
-                span Удалить приложение
+              cass-form-button(title="УДАЛИТЬ ПРИЛОЖЕНИЕ",type="button",styles="text",(click)='deleteAttachments()')
       .post-form-section
         .attachment-controls(*ngIf="! hasAttachments()")
           .attach-control.attach-link

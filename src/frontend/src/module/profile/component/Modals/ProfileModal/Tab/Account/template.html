@@ -35,16 +35,10 @@
     <header class="tab-modal-header">
       <h2>Действия</h2>
     </header>
-    <button class="form-text-button" *ngIf="!isDeleteAccountRequested()" [disabled]="requestButtonDisabled" (click)="requestDeleteAccount()">
-      <i class="fa fa-fw fa-trash"></i>
-      <span>Я хочу удалить этот аккаунт</span>
-    </button>
+    <cass-form-button *ngIf="!isDeleteAccountRequested()" styles="text" type="button" title="Я хочу удалить этот аккаунт" icon="'fa fa-fw fa-trash'" [disabled]="requestButtonDisabled" (click)="requestDeleteAccount()"></cass-form-button>
     <div *ngIf="isDeleteAccountRequested()">
-      <button class="form-button form-button-red" (click)="deleteAccount()">
-        <i class="fa fa-fw fa-trash"></i>
-        <span>Удалить мой аккаунт через 7 дней</span>
-      </button>
-      <button class="form-text-button" (click)="cancelDeleteAccountRequest()">Отмена</button>
+      <cass-form-button styles="solid" color="red" type="button" title="Удалить мой аккаунт через 7 дней" icon="'fa fa-fw fa-trash'"  (click)="deleteAccount()"></cass-form-button>
+      <cass-form-button styles="text" type="button" title="ОТМЕНА" (click)="cancelDeleteAccountRequest()"></cass-form-button>
     </div>
   </div>
 </div>

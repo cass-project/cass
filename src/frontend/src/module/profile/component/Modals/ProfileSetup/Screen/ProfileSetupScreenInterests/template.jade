@@ -5,9 +5,7 @@ article.component.component-profile-setup-screen-interests
     footer.form-footer
       .form-footer-section
         .form-footer-item
-          button.form-text-button(type="button", (click)="back()")
-            span Назад
+          cass-form-button(type="button", (click)="back()",title="НАЗАД",styles="text")
       .form-footer-section
         .form-footer-item
-          button.form-text-button(type="button", (click)="skip()")
-            span Далее
+          cass-form-button(type="button", (click)="skip()",title="ДАЛЕЕ",styles="text")

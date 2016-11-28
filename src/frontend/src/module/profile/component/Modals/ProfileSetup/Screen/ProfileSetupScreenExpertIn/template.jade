@@ -5,9 +5,9 @@ article.component.component-profile-setup-screen-expert-in
     footer.form-footer
       .form-footer-section
         .form-footer-item
-          button.form-text-button(type="button", (click)="back()")
+          cass-form-button(type="button", (click)="back()",title="НАЗАД",styles="text")
             span Назад
       .form-footer-section
         .form-footer-item
-          button.form-button.form-button-primary(type="button", (click)="finish()")
+          cass-form-button(type="button", (click)="finish()",title="ЗАВЕРШИТЬ",styles="solid",color="#2196F3")
             span Завершить

@@ -4,18 +4,9 @@
       <cass-profile-image border="square" [url]='getImageProfile()'></cass-profile-image>
     </div>
     <div class="profile-image-controls">
-      <button *ngIf="!deleting" (click)="deleteProfileImage()" class="form-text-button form-button-text-remove">
-        <i class="fa fa-fw fa-trash"></i>
-        <span>Удалить</span>
-      </button>
-       <button *ngIf="deleting" class="form-text-button form-button-text-remove" disabled>
-        <i class="fa fa-spinner fa-pulse fa-fw"></i>
-        <span>Удалить</span>
-      </button>
-      <button class="form-button form-button-primary" (click)="uploadProfileImage()">
-        <i class="fa fa-fw fa-upload"></i>
-        <span>Загрузить другое изображение</span>
-      </button>
+      <cass-form-button *ngIf="!deleting" styles="text" type="button" title="УДАЛИТЬ" icon="'fa fa-fw fa-trash'" (click)="deleteProfileImage()"></cass-form-button>
+      <cass-form-button *ngIf="deleting" styles="text" type="button" title="УДАЛИТЬ" icon="'fa fa-spinner fa-pulse fa-fw'" (click)="deleteProfileImage()" disabled></cass-form-button>
+      <cass-form-button  styles="solid" color="#2196F3" type="button" title="Загрузить другое изображение" icon="'fa fa-fw fa-upload'" (click)="uploadProfileImage()"></cass-form-button>
     </div>
   </div>
   <div *ngIf="upload.isOpened()">

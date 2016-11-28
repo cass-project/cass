@@ -6,7 +6,7 @@
           <div class="container">
             <h1>Вы создали новый профиль!</h1>
             <p>Но перед тем, как начать пользоваться нашим сервисом, нам нужно задать вам парочку вопросов.</p>
-            <button (click)="nextScreen()" type="submit" class="form-button form-button-primary">Продолжить</button>
+            <cass-form-button (click)="nextScreen()" type="submit" styles="solid" color="#2196F3" title="ПРОДОЛЖИТЬ"></cass-form-button>
           </div>
         </div>
         <div class="stage-gender" *ngIf="screens.isOn('Gender')">
