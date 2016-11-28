@@ -63,5 +63,20 @@
   "theme.panel.home": "Back to themes list",
   "cass.module.public.menu.community.title": "Communities",
   "Create collection": "Create collection",
-  "Change cover | backdrop": "Change cover"
+  "Create thematic community": "Create a thematic community",
+  "Change cover | backdrop": "Change cover",
+  "No subscriptions available | subscribe": "No subscriptions available",
+  "You're not subscribed to any themes | subscribe": "You're not subscribed to any themes",
+  "You're not subscribed to any people | subscribe": "You're not subscribed to any people",
+  "You're not subscribed to any collections | subscribe": "You're not subscribed to any collections",
+  "You're not subscribed to any communities | subscribe": "You're not subscribed to any communities",
+  "Themes | profile-subscriptions": "Themes",
+  "People | profile-subscriptions": "People",
+  "Collections | profile-subscriptions": "Collections",
+  "Communities | profile-subscriptions": "Communities",
+  "No subscriptions available | profile-subscribe": "",
+  "Nothing here. Subscribe to themes to view something here! | profile-subscribe": "Nothing here. Subscribe to themes to view something here!",
+  "Nothing here. Subscribe to people to view something here! | profile-subscribe": "Nothing here. Subscribe to people to view something here!",
+  "Nothing here. Subscribe to collections to view something here! | profile-subscribe": "Nothing here. Subscribe to collections to view something here!",
+  "Nothing here. Subscribe to communities to view something here! | profile-subscribe": "Nothing here. Subscribe to communities to view something here!"
 }

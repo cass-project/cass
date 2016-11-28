@@ -1,8 +1,5 @@
 .component.component-profile-profiles-subscriptions-route
-  .people
-    h1 Люди
   cass-form-progress-lock(*ngIf="status.isLoading()")
   .profile-card-container
     div(*ngIf="! status.isLoading()").profile-card-wrap
-      div(*ngFor="let subscription of subscribes").profile-card
-        cass-profile-card([profile]="subscription.entity")
+        cass-profile-cards-list([profiles]="getProfiles()", [viewMode]="getViewMode()", (open)="openProfile($event)")

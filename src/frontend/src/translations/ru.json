@@ -66,5 +66,19 @@
   "dropdown.menu.my.post.card.pin": "Закрепить",
   "cass.module.public.menu.community.title": "Сообщества",
   "Create collection": "Создать тематическую подборку",
-  "Change cover | backdrop": "Сменить подложку"
+  "Create thematic community": "Создать тематическое сообщество",
+  "Change cover | backdrop": "Сменить подложку",
+  "Themes | profile-subscriptions": "Тематики",
+  "People | profile-subscriptions": "Люди",
+  "Collections | profile-subscriptions": "Подборки",
+  "Communities | profile-subscriptions": "Сообщества",
+  "Nothing here. Subscribe to themes to view something here! | profile-subscribe": "Ничего не найдено. Подпишитесь на что-нибудь, чтобы увидеть персональный контент!",
+  "Nothing here. Subscribe to people to view something here! | profile-subscribe": "Ничего не найдено. Подпишитесь на кого-нибудь, чтобы увидеть персональный контент!",
+  "Nothing here. Subscribe to collections to view something here! | profile-subscribe": "Ничего не найдено. Подпишитесь на подборки, чтобы увидеть персональный контент!",
+  "Nothing here. Subscribe to communities to view something here! | profile-subscribe": "Ничего не найдено. Подпишитесь на сообщества, чтобы увидеть персональный контент!",
+  "You're not subscribed to any themes | subscribe": "Вы не подписаны ни на одну тематику",
+  "You're not subscribed to any people | subscribe": "Вы ни на кого не подписаны",
+  "You're not subscribed to any collections | subscribe": "Вы не подписаны ни на одну подборку",
+  "You're not subscribed to any communities | subscribe": "Вы не подписаны ни на одно сообщество",
+  "No subscriptions available | profile-subscribe": "Нет подписок в этом разделе!"
 }

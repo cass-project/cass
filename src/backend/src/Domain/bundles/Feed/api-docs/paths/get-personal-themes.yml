@@ -1,9 +1,9 @@
-"/protected/feed/get/public-content":
+"/protected/feed/get/personal-themes":
   post:
     tags:
       - feed
     description: |
-      Возвращает персонализированную ленту паблика, раздел "Контент"
+      Возвращает персонализированную ленту паблика, раздел "Тематики"
     security:
       - x_api_key: []
     parameters:

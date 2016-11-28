@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from "@angular/core";
+import {Component, Output, EventEmitter, Input} from "@angular/core";
 
 import {ScreenControls} from "../../../common/classes/ScreenControls";
 import {UploadImageService} from "./service";
@@ -24,6 +24,8 @@ export class UploadImageModal
 {
     public progress = new UploadProgress();
 
+    @Input('needToCrop') needToCrop: boolean = true;
+
     private screen: ScreenControls<UploadImageScreen> = new ScreenControls<UploadImageScreen>(UploadImageScreen.File, (sc: ScreenControls<UploadImageScreen>) => {
         sc.add({ from: UploadImageScreen.File, to: UploadImageScreen.Crop });
         sc.add({ from: UploadImageScreen.Crop, to: UploadImageScreen.Processing });
@@ -33,6 +35,7 @@ export class UploadImageModal
     @Output('crop') cropEvent   = new EventEmitter<UploadImageModal>();
     @Output('processing') processingEvent = new EventEmitter<UploadImageModal>();
     @Output('abort') abortEvent = new EventEmitter<UploadImageModal>();
+    @Output('complete') complete = new EventEmitter<any>();
 
     constructor(
         public cropper: ImageCropperService,
@@ -40,9 +43,14 @@ export class UploadImageModal
     ) {}
 
     private onFileChange($event) : void {
-        this.cropper.setFile($event.target.files[0]);
-        this.screen.goto(UploadImageScreen.Crop);
-        this.cropEvent.emit(this);
+        if(this.needToCrop){
+            this.cropper.setFile($event.target.files[0]);
+            this.screen.goto(UploadImageScreen.Crop);
+            this.cropEvent.emit(this);
+        } else {
+            this.service.process($event.target.files[0], this);
+            this.complete.emit($event.target.files[0]);
+        }
     }
 
     process() {
@@ -55,7 +63,7 @@ export class UploadImageModal
 
         this.processingEvent.emit(this);
 
-        this.service.process(this.cropper.getFile(), model, this);
+        this.service.process(this.cropper.getFile(), this, model);
         this.screen.goto(UploadImageScreen.Processing);
     }
 

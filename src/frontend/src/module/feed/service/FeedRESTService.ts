@@ -16,6 +16,10 @@ export interface FeedRESTServiceInterface
     getPublicDiscussionsFeed(request: FeedRequest): Observable<FeedResponse>;
     getPublicExpertsFeed(request: FeedRequest): Observable<FeedResponse>;
     getPublicProfilesFeed(request: FeedRequest): Observable<FeedResponse>;
+    getPersonalPeopleFeed(request: FeedRequest): Observable<FeedResponse>;
+    getPersonalThemesFeed(request: FeedRequest): Observable<FeedResponse>;
+    getPersonalCollectionsFeed(request: FeedRequest): Observable<FeedResponse>;
+    getPersonalCommunitiesFeed(request: FeedRequest): Observable<FeedResponse>;
 }
 
 @Injectable()
@@ -57,5 +61,21 @@ export class FeedRESTService implements FeedRESTServiceInterface
 
     getPublicProfilesFeed(request: FeedRequest): Observable<FeedResponse> {
         return this.rest.post(`/backend/api/feed/get/public-profiles/`, request);
+    }
+
+    getPersonalPeopleFeed(request: FeedRequest): Observable<FeedResponse> {
+        return this.rest.post(`/backend/api/protected/feed/get/personal-people/`, request);
+    }
+
+    getPersonalThemesFeed(request: FeedRequest): Observable<FeedResponse> {
+        return this.rest.post(`/backend/api/protected/feed/get/personal-themes/`, request);
+    }
+
+    getPersonalCollectionsFeed(request: FeedRequest): Observable<FeedResponse> {
+        return this.rest.post(`/backend/api/protected/feed/get/personal-collections/`, request);
+    }
+
+    getPersonalCommunitiesFeed(request: FeedRequest): Observable<FeedResponse> {
+        return this.rest.post(`/backend/api/protected/feed/get/personal-communities/`, request);
     }
 }

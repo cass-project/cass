@@ -8,7 +8,7 @@ div.component.component-theme-card-feed.x-navigation-entity
         p {{ theme.description }}
         .subscribe-button
           cass-subscribe-button(
-          [subscribed]="isSubscribed",
+          [subscribed]="theme.subscribed",
           [is-loading]="subscribeLoading.isLoading()",
           (subscribe)="subscribe()",
           (unsubscribe)="unsubscribe()")

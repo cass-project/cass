@@ -1,11 +1,6 @@
 .component.component-profile-collection-subscriptions-route
-  .collection
-    h1 Подборки
   cass-form-progress-lock(*ngIf="status.isLoading()")
   .collection-container
     div(*ngIf="! status.isLoading()").collection-card-wrap
-      div(*ngFor="let subscription of subscribes").collection-card
-        cass-collection-cards-list([entities]="getCollection()")
-
-
+      cass-collection-cards-list([entities]="getCollections()", [view-mode]="getViewMode()", (open)="openCollection($event)")
 

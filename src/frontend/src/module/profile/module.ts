@@ -85,9 +85,6 @@ export const CASSProfileModule = {
         CommunitiesSubscriptionsRoute,
         ProfilesSubscriptionsRoute,
         ProfileSubscriptionsDashboardRoute
-
-
-
     ],
     providers: [
         ProfileModals,

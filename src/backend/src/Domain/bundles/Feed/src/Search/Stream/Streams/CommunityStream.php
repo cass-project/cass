@@ -18,8 +18,8 @@ final class CommunityStream extends Stream
 {
     /** @var CommunityService */
     private $communityService;
-    
-    public function setCommunityService(CommunityService $communityService)
+
+    public function __construct(CommunityService $communityService)
     {
         $this->communityService = $communityService;
     }

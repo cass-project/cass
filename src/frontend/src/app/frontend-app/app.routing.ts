@@ -25,6 +25,8 @@ import {PUBLIC_CONTENT_ROUTES} from "../../module/public/route/sources/ContentRo
 import {PUBLIC_PROFILES_ROUTES} from "../../module/public/route/sources/ProfilesRoute/routes";
 import {PUBLIC_COLLECTION_ROUTES} from "../../module/public/route/sources/CollectionsRoute/routes";
 import {PUBLIC_COMMUNITY_ROUTES} from "../../module/public/route/sources/CommunitiesRoute/routes";
+import {PROFILE_SUBSCRIPTION_ROUTES} from "../../module/profile-subscriptions/routes";
+import {SubscriptionsRoute} from "../../module/profile-subscriptions/routes/SubscriptionsRoute/index";
 
 
 const appRoutes: Routes = [
@@ -56,10 +58,10 @@ const appRoutes: Routes = [
                         path: 'subscriptions',
                         component: ProfileSubscriptionsRoute,
                         children: [
-
                             {
                                 path: '',
-                                component: ProfileSubscriptionsDashboardRoute
+                                redirectTo: 'themes',
+                                pathMatch: 'full'
                             },
 
                             {
@@ -76,14 +78,12 @@ const appRoutes: Routes = [
                                 path: 'communities',
                                 component: CommunitiesSubscriptionsRoute,
                             },
-
                             {
                                 path: 'profiles',
                                 component: ProfilesSubscriptionsRoute,
                             }
                         ]
                     },
-
                     {
                         path: 'collections',
                         component: ProfileCollectionsRoute,
@@ -102,7 +102,12 @@ const appRoutes: Routes = [
                                 component: ProfileCollectionRoute
                             }
                         ]
-                    }
+                    },
+                    {
+                        path: 'personal',
+                        component: SubscriptionsRoute,
+                        children: PROFILE_SUBSCRIPTION_ROUTES,
+                    },
                 ]
             },
             {

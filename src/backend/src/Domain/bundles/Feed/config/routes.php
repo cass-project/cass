@@ -69,6 +69,33 @@ return [
             'middleware' => FeedMiddleware::class,
             'name' => 'feed-get-public-collections',
         ],
-
+        [
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/feed/get/{command:personal-themes}[/]',
+            'middleware' => FeedMiddleware::class,
+            'name' => 'feed-get-personal-themes',
+        ],
+        [
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/feed/get/{command:personal-communities}[/]',
+            'middleware' => FeedMiddleware::class,
+            'name' => 'feed-get-personal-communities',
+        ],
+        [
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/feed/get/{command:personal-collections}[/]',
+            'middleware' => FeedMiddleware::class,
+            'name' => 'feed-get-personal-collections',
+        ],
+        [
+            'type' => 'route',
+            'method' => 'post',
+            'url' => '/protected/feed/get/{command:personal-people}[/]',
+            'middleware' => FeedMiddleware::class,
+            'name' => 'feed-get-personal-people',
+        ],
     ],
 ];

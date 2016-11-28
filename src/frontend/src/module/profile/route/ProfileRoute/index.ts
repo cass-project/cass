@@ -1,6 +1,6 @@
-import {Component, OnInit, ElementRef, ViewChild, OnDestroy} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs/Rx";
+import {Component, OnInit, ElementRef, ViewChild, OnDestroy} from "@angular/core";
 
 import {FeedCriteriaService} from "../../../feed/service/FeedCriteriaService";
 import {FeedOptionsService} from "../../../feed/service/FeedOptionsService";
@@ -8,6 +8,7 @@ import {ProfileExtendedEntity} from "../../definitions/entity/Profile";
 import {ProfileRouteService} from "./service";
 import {UINavigationObservable} from "../../../ui/service/navigation";
 import {UIPathService} from "../../../ui/path/service";
+import {ProfileSubscriptionsHelper} from "../../../profile-subscriptions/routes/helper";
 
 @Component({
     template: require('./template.jade'),
@@ -18,6 +19,7 @@ import {UIPathService} from "../../../ui/path/service";
         ProfileRouteService,
         FeedCriteriaService,
         FeedOptionsService,
+        ProfileSubscriptionsHelper,
     ]
 })
 
@@ -32,6 +34,7 @@ export class ProfileRoute implements OnInit, OnDestroy
         private route: ActivatedRoute,
         private service: ProfileRouteService,
         private navigator: UINavigationObservable,
+        private helper: ProfileSubscriptionsHelper,
         private path: UIPathService
     ) {
         path.setPath([{
@@ -48,6 +51,7 @@ export class ProfileRoute implements OnInit, OnDestroy
         );
             
         this.navigator.initNavigation(this.content);
+        this.helper.current = this.service.getEntity();
         
         this.profile = this.service.getEntity();
     }

@@ -13,7 +13,7 @@ abstract class Stream
     /** @var Source */
     protected $source;
 
-    public function __construct(Source $source)
+    public function setSource(Source $source)
     {
         $this->source = $source;
     }

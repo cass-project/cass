@@ -8,6 +8,7 @@ use CASS\Domain\Bundles\Backdrop\Factory\PresetFactory;
 use CASS\Domain\Bundles\Colors\Entity\Color;
 use CASS\Domain\Bundles\Colors\Entity\Palette;
 use CASS\Util\GenerateRandomString;
+use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 use CASS\Util\FileNameFilter;
 use CASS\Domain\Bundles\Backdrop\Entity\Backdrop\NoneBackdrop;
@@ -60,15 +61,17 @@ final class BackdropService
         string $tmpFile
     ): UploadedBackdrop
     {
-        $this->validateFile($strategy, $tmpFile);
+        $image = $this->validateFile($strategy, $tmpFile);
 
         $uid = join('/', str_split($entity->getSID(), 2));
 
-        $fileName = GenerateRandomString::gen(8) .'_'. FileNameFilter::filter(basename($tmpFile));
-        $storagePath = sprintf('%s/%s/%s', $strategy->getStoragePath(), $uid, $fileName);
+        $pathInfo = pathinfo($tmpFile);
+
+        $fileName = GenerateRandomString::gen(8) .'_'. FileNameFilter::filter($pathInfo['basename']).'.png';
+        $storagePath = sprintf('%s/%s', $uid, $fileName);
         $publicPath = sprintf('%s/%s/%s', $strategy->getPublicPath(), $uid, $fileName);
 
-        $strategy->getFileSystem()->write($fileName, $tmpFile);
+        $strategy->getFileSystem()->write($storagePath, $image->encode('png'));
 
         $backdrop = new UploadedBackdrop(
             $storagePath,
@@ -81,7 +84,7 @@ final class BackdropService
         return $backdrop;
     }
 
-    private function validateFile(BackdropUploadStrategy $strategy, string $tmpFile)
+    private function validateFile(BackdropUploadStrategy $strategy, string $tmpFile): Image
     {
         if(filesize($tmpFile) > $strategy->getMaxFileSize()) {
             throw new TooBigFileException(sprintf('File is too big'));
@@ -100,5 +103,7 @@ final class BackdropService
         ) {
             throw new InvalidSizeException('Image is too big');
         }
+
+        return $image;
     }
 }

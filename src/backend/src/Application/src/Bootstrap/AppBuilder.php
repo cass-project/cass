@@ -9,6 +9,7 @@ use CASS\Application\Bootstrap\Scripts\Bootstrap\BundleServiceScript;
 use CASS\Application\Bootstrap\Scripts\Bootstrap\BootstrapDIContainerScript;
 use CASS\Application\Bootstrap\Scripts\Bootstrap\InjectSchemaServiceScript;
 use CASS\Application\Bootstrap\Scripts\Bootstrap\ReadAppConfigScript;
+use Interop\Container\ContainerInterface;
 use ZEA2\Platform\Bundles\PHPUnit\PHPUnitEmitter;
 use CASS\Application\Service\BundleService;
 use CASS\Application\Service\ConfigService;
@@ -94,6 +95,7 @@ class AppBuilder
         }
 
         $this->container->set(Application::class, $app);
+        $this->container->set(ContainerInterface::class, $this->container);
 
         return $app;
     }

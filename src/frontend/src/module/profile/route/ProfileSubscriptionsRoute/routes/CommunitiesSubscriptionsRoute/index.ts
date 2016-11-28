@@ -6,6 +6,9 @@ import {ListSubscribeCommunitiesRequest} from "../../../../../subscribe/definiti
 import {SubscribeRESTService} from "../../../../../subscribe/service/SubscribeRESTService";
 import {ProfileEntity} from "../../../../definitions/entity/Profile";
 import {ProfileRouteService} from "../../../ProfileRoute/service";
+import {ViewOptionValue} from "../../../../../feed/service/FeedService/options/ViewOption";
+import {ViewOptionService} from "../../../../../public/component/Options/ViewOption/service";
+import {Router} from "@angular/router";
 
 
 
@@ -27,8 +30,11 @@ export class CommunitiesSubscriptionsRoute
         offset: 0
     };
 
-    constructor(private subscribe: SubscribeRESTService,
-                private service: ProfileRouteService
+    constructor(
+        private subscribe: SubscribeRESTService,
+        private service: ProfileRouteService,
+        private viewOptions: ViewOptionService,
+        private router: Router,
     ){}
 
     ngOnInit() {
@@ -52,5 +58,13 @@ export class CommunitiesSubscriptionsRoute
 
     getCommunities() {
         return this.subscribes.map(subscription => subscription.entity);
+    }
+
+    openCommunity(community: CommunityEntity) {
+        this.router.navigate(['/community/',  community.id]);
+    }
+
+    getViewMode(): ViewOptionValue {
+        return this.viewOptions.option.current;
     }
 }

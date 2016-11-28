@@ -5,5 +5,10 @@ article.component.component-community-create-modal
       header.form-header
         h1 Новое сообщество
       .form.community-modal.community-modal-create
-        cass-community-create-modal-screen-general(*ngIf='screens.isOn("General")', (abort)="close()", (next)="next()")
+        cass-community-create-modal-screen-general(
+          *ngIf='screens.isOn("General")',
+          (abort)="close()",
+          (next)="next()",
+          [themeId]="themeId"
+        )
         cass-community-create-modal-screen-features(*ngIf='screens.isOn("Features")', (abort)="close()", (next)="next()")

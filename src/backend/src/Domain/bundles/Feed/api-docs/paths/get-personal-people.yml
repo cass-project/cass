@@ -1,9 +1,9 @@
-"/protected/feed/get/public-experts":
+"/protected/feed/get/personal-people":
   post:
     tags:
       - feed
     description: |
-      Возвращает персонализированную ленту паблика, раздел "Эксперты"
+      Возвращает персонализированную ленту паблика, раздел "Люди"
     security:
       - x_api_key: []
     parameters:

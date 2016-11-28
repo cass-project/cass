@@ -2,10 +2,12 @@ import {Component,Input} from "@angular/core";
 import {SubscribeRESTService} from "../../../../../subscribe/service/SubscribeRESTService";
 import {ProfileRouteService} from "../../../ProfileRoute/service";
 import {ProfileEntity} from "../../../../definitions/entity/Profile";
-import {ListSubscribeProfiles} from "../../../../../subscribe/definitions/paths/list-profiles";
 import {ListSubscribeProfileRequest} from "../../../../../subscribe/definitions/paths/list-profiles";
 import {SubscriptionEntity} from "../../../../../subscribe/definitions/entity/Subscription";
 import {LoadingManager} from "../../../../../common/classes/LoadingStatus";
+import {ViewOptionValue} from "../../../../../feed/service/FeedService/options/ViewOption";
+import {ViewOptionService} from "../../../../../public/component/Options/ViewOption/service";
+import {Router} from "@angular/router";
 
 @Component({
     template: require('./template.jade'),
@@ -24,13 +26,14 @@ export class ProfilesSubscriptionsRoute
         offset: 0
     };
 
-    constructor(private subscribe: SubscribeRESTService,
-                private service: ProfileRouteService
+    constructor(
+        private subscribe: SubscribeRESTService,
+        private service: ProfileRouteService,
+        private viewOptions: ViewOptionService,
+        private router: Router,
     ){}
 
-
     ngOnInit() {
-
         this.profile = this.service.getProfile();
 
         let loading = this.status.addLoading();
@@ -47,5 +50,16 @@ export class ProfilesSubscriptionsRoute
             }
         )
     }
-}
 
+    getProfiles() {
+        return this.subscribes.map(subscription => subscription.entity);
+    }
+
+    openCommunity(profile: ProfileEntity) {
+        this.router.navigate(['/profile/', profile.id]);
+    }
+
+    getViewMode(): ViewOptionValue {
+        return this.viewOptions.option.current;
+    }
+}

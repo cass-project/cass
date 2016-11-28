@@ -1,14 +1,14 @@
 <?php
 namespace CASS\Domain\Bundles\Feed\Search\Stream\Streams;
 
+use CASS\Domain\Bundles\Feed\Search\Stream\Stream;
 use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\QueryStringCriteria;
 use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SeekCriteria;
 use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SortCriteria;
 use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
 use CASS\Domain\Bundles\Feed\Search\Criteria\CriteriaManager;
-use CASS\Domain\Bundles\Feed\Search\Stream\Stream;
-
 use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
+use CASS\Domain\Bundles\Profile\Formatter\ProfileFeedFormatter;
 use CASS\Domain\Bundles\Profile\Service\ProfileService;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
@@ -18,12 +18,16 @@ final class ProfileStream extends Stream
 {
     /** @var ProfileService */
     private $profileService;
-    
-    public function setProfileService(ProfileService $profileService)
+
+    /** @var ProfileFeedFormatter */
+    private $profileFeedFormatter;
+
+    public function __construct(ProfileService $profileService, ProfileFeedFormatter $profileFeedFormatter)
     {
         $this->profileService = $profileService;
+        $this->profileFeedFormatter = $profileFeedFormatter;
     }
-    
+
     public function fetch(CriteriaManager $criteriaManager, Collection $collection): array
     {
         $order = 1;
@@ -85,7 +89,7 @@ final class ProfileStream extends Stream
 
                     return array_merge([
                         '_id' => (string) $document['_id']
-                    ], $profile->toJSON());
+                    ], $this->profileFeedFormatter->formatOne($profile));
                 }catch(ProfileNotFoundException $e) {
                     return null;
                 }

@@ -16,7 +16,8 @@ class SubscribeRepository extends EntityRepository
     public function subscribeTheme(Profile $profile, Theme $theme, $options = null): Subscribe
     {
         $subscribe = new Subscribe();
-        $subscribe->setProfileId($profile->getId())
+        $subscribe
+            ->setProfileId($profile->getId())
             ->setOptions($options)
             ->setSubscribeId($theme->getId())
             ->setSubscribeType(Subscribe::TYPE_THEME);
@@ -180,5 +181,46 @@ class SubscribeRepository extends EntityRepository
         $em->flush();
 
         return $subscribe;
+    }
+
+    public function hasSubscribe(int $targetProfileId, int $subscribeType, int $subscribeId): bool
+    {
+        return $this->findOneBy([
+            'profileId' => $targetProfileId,
+            'subscribeId' => $subscribeId,
+            'subscribeType' => $subscribeType,
+        ]) !== null;
+    }
+
+    public function listWhoSubscribedToTheme(int $themeId): array
+    {
+        return $this->findBy([
+            'subscribeId' => $themeId,
+            'subscribeType' => Subscribe::TYPE_THEME,
+        ]);
+    }
+
+    public function listWhoSubscribedToProfile(int $profileId): array
+    {
+        return $this->findBy([
+            'subscribeId' => $profileId,
+            'subscribeType' => Subscribe::TYPE_PROFILE,
+        ]);
+    }
+
+    public function listWhoSubscribedToCollection(int $collectionId): array
+    {
+        return $this->findBy([
+            'subscribeId' => $collectionId,
+            'subscribeType' => Subscribe::TYPE_COLLECTION,
+        ]);
+    }
+
+    public function listWhoSubscribedToCommunity(int $communityId): array
+    {
+        return $this->findBy([
+            'subscribeId' => $communityId,
+            'subscribeType' => Subscribe::TYPE_COMMUNITY,
+        ]);
     }
 }

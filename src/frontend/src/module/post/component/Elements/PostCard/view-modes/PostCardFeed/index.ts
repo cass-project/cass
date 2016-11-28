@@ -32,7 +32,7 @@ export class PostCardFeed implements OnChanges
 
     constructor(
         private helper: PostCardHelper,
-        private session: Session,
+        private session: Session
     ) {}
 
     ngOnChanges() {

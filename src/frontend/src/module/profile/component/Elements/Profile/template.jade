@@ -31,4 +31,4 @@ article.component.component-profile
   div(*ngIf="modals.backdrop.isOpened()")
     cass-modal
       cass-modal-box(width="550px")
-        cass-profile-backdrop-modal([profile]="session.getCurrentProfile().entity.profile")
+        cass-profile-backdrop-modal([profile]="session.getCurrentProfile().entity.profile", (close)='modals.backdrop.close()', (complete)='modals.backdrop.close()')

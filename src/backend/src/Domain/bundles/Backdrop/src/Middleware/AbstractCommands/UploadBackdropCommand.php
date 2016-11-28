@@ -32,6 +32,8 @@ abstract class UploadBackdropCommand extends AbstractBackdropCommand
             $tmpF
         );
 
+        $this->saveBackdropAwareEntityChanges($entity);
+
         return $entity->getBackdrop();
     }
 }

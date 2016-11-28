@@ -11,7 +11,7 @@ export class UploadImageService
         this.strategy = strategy;
     }
 
-    public process(file: Blob, model: UploadImageCropModel, modal: UploadImageModal) {
+    public process(file: Blob, modal: UploadImageModal, model?: UploadImageCropModel) {
         if(!this.strategy) {
             throw new Error('No strategy available');
         }

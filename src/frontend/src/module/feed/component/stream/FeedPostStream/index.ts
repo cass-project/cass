@@ -61,7 +61,6 @@ export class FeedPostStream
     }
 
     deletePost(id){
-        console.log('delete?');
         this.feed.stream.deleteElement(id);
     }
 

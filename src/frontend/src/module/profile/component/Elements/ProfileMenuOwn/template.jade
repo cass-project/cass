@@ -2,7 +2,7 @@ div.component.component-profile-menu-own
   div.yoozer-left-menu
     ul.yoozer-left-menu-list
       li.yoozer-left-menu-item
-        a(routerLink="/profile/current",
+        a([routerLink]='["/profile/current"]',
           [routerLinkActiveOptions]="{ exact: true }",
           routerLinkActive="active",
         )
@@ -30,12 +30,30 @@ div.component.component-profile-menu-own
           span.title {{ collection.title }}
 
       li.yoozer-left-menu-item
-        a([routerLink]='["/profile/current/subscriptions"]',
-        routerLinkActive="active",
-        [routerLinkActiveOptions]="{ exact: true }"
-        )
+        a([routerLink]='["/profile/current/subscriptions"]', routerLinkActive="active")
           i.fa.fa-fw.fa-check-square-o
           span.title Мои подписки
+  div.yoozer-left-menu
+    ul.yoozer-left-menu-list
+      li.yoozer-left-menu-item
+        a([routerLink]='["/profile/current/personal/themes"]', routerLinkActive="active")
+          i.fa.fa-fw.fa-bookmark
+          span.title {{ "Themes | profile-subscriptions" | translate }}
+      ul.yoozer-left-menu-list
+        li.yoozer-left-menu-item
+          a([routerLink]='["/profile/current/personal/people"]', routerLinkActive="active")
+            i.fa.fa-fw.fa-users
+            span.title {{ "People | profile-subscriptions" | translate }}
+      ul.yoozer-left-menu-list
+        li.yoozer-left-menu-item
+          a([routerLink]='["/profile/current/personal/collections"]', routerLinkActive="active")
+            i.fa.fa-fw.fa-th-large
+            span.title {{ "Collections | profile-subscriptions" | translate }}
+      ul.yoozer-left-menu-list
+        li.yoozer-left-menu-item
+          a([routerLink]='["/profile/current/personal/communities"]', routerLinkActive="active")
+            i.fa.fa-fw.fa-hashtag
+            span.title {{ "Communities | profile-subscriptions" | translate }}
   div.yoozer-left-menu
     ul.yoozer-left-menu-list
       li.yoozer-left-menu-item

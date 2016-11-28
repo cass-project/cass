@@ -40,19 +40,22 @@ abstract class AbstractPostProcessor implements Processor
     {
         /** @var Post $entity */
         if($this->isIndexable($entity)) {
-            $source = $this->getSource($entity);
-            $collection = $this->mongoDB->selectCollection($source->getMongoDBCollection());
+            $sources = $this->getSources($entity);
 
-            $indexed = array_merge($entity->toIndexedEntityJSON(), [
-                'theme_ids' => $this->getThemeIdsWeight($entity),
-                'content_type' => $this->getContentType($entity),
-            ]);
+            array_map(function(Source $source) use ($entity) {
+                $collection = $this->mongoDB->selectCollection($source->getMongoDBCollection());
 
-            $collection->updateOne(
-                ['id' => $entity->getId()],
-                ['$set' => $indexed],
-                ['upsert' => true]
-            );
+                $indexed = array_merge($entity->toIndexedEntityJSON(), [
+                    'theme_ids' => $this->getThemeIdsWeight($entity),
+                    'content_type' => $this->getContentType($entity),
+                ]);
+
+                $collection->updateOne(
+                    ['id' => $entity->getId()],
+                    ['$set' => $indexed],
+                    ['upsert' => true]
+                );
+            }, $sources);
         }
     }
 
@@ -60,14 +63,17 @@ abstract class AbstractPostProcessor implements Processor
     {
         /** @var Post $entity */
         if($this->isIndexable($entity)) {
-            $source = $this->getSource($entity);
-            $collection = $this->mongoDB->selectCollection($source->getMongoDBCollection());
+            $sources = $this->getSources($entity);
 
-            $collection->deleteOne(['id' => $entity->getId()]);
+            array_map(function(Source $source) use ($entity) {
+                $collection = $this->mongoDB->selectCollection($source->getMongoDBCollection());
+
+                $collection->deleteOne(['id' => $entity->getId()]);
+            }, $sources);
         }
     }
 
-    abstract protected function getSource(Post $entity): Source;
+    abstract protected function getSources(Post $entity): array;
     abstract protected function isIndexable(Post $entity): bool ;
 
     protected function getThemeIdsWeight(Post $entity): array

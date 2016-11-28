@@ -24,13 +24,11 @@ final class PostStream extends Stream
     /** @var PostService */
     private $postService;
 
-    public function setPostFormatter(PostFormatter $postFormatter)
-    {
+    public function __construct(
+        PostFormatter $postFormatter,
+        PostService $postService
+    ) {
         $this->postFormatter = $postFormatter;
-    }
-
-    public function setPostService(PostService $postService)
-    {
         $this->postService = $postService;
     }
 
