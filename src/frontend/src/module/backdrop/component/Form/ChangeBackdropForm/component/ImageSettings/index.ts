@@ -31,6 +31,7 @@ export class ImageSettings
         private uploadImageService: UploadImageService
     ) {
         this.backdrop = model.backdrop;
+        console.log(model);
         uploadImageService.setUploadStrategy(new UploadProfileBackdropImageStrategy(model, this.submit));
     }
     
