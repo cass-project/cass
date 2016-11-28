@@ -9,6 +9,10 @@ use CASS\Domain\Bundles\Index\Exception\NoProcessorForEntityException;
 use CASS\Domain\Bundles\Index\Processor\Processors\CollectionProcessor;
 use CASS\Domain\Bundles\Index\Processor\Processors\CommunityProcessor;
 use CASS\Domain\Bundles\Index\Processor\Processors\ProfileProcessor;
+use CASS\Domain\Bundles\Index\Processor\Processors\PersonalFeeds\PersonalCollectionsProcessor;
+use CASS\Domain\Bundles\Index\Processor\Processors\PersonalFeeds\PersonalCommunitiesProcessor;
+use CASS\Domain\Bundles\Index\Processor\Processors\PersonalFeeds\PersonalPeopleProcessor;
+use CASS\Domain\Bundles\Index\Processor\Processors\PersonalFeeds\PersonalThemesProcessor;
 use CASS\Domain\Bundles\Index\Processor\Processors\PublicCatalog\PublicCollectionsProcessor;
 use CASS\Domain\Bundles\Index\Processor\Processors\PublicCatalog\PublicCommunitiesProcessor;
 use CASS\Domain\Bundles\Index\Processor\Processors\PublicCatalog\PublicContentProcessor;
@@ -57,6 +61,10 @@ final class ProcessorFactory
                     $this->container->get(CommunityProcessor::class),
                     $this->container->get(PublicContentProcessor::class),
                     $this->container->get(PublicDiscussionsProcessor::class),
+                    $this->container->get(PersonalPeopleProcessor::class),
+                    $this->container->get(PersonalCollectionsProcessor::class),
+                    $this->container->get(PersonalCommunitiesProcessor::class),
+                    $this->container->get(PersonalThemesProcessor::class),
                 ];
         }
     }

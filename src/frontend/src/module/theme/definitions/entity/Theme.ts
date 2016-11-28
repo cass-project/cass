@@ -8,6 +8,7 @@ export interface Theme
     preview: string;
     children?: Theme[];
     url: string;
+    subscribed?: boolean;
 }
 
 export const THEME_PREVIEW_PUBLIC_PREFIX = '/storage/entity/themes/preview';

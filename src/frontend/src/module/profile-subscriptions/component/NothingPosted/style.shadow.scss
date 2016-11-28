@@ -1,0 +1,13 @@
+@import "./../../../../styles/globals";
+
+.component-profile-subscriptions-nothing-found {
+  margin: 20px 0;
+  text-align: center;
+
+  p {
+    font-size: 15px;
+    font-weight: 400;
+    color: material-color("grey", "500");
+    margin-bottom: 10px;
+  }
+}

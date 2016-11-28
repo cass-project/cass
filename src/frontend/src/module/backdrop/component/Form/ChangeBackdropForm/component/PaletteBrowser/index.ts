@@ -1,4 +1,5 @@
-import {Component} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
+import { ChangeBackdropModel } from "../../model";
 
 @Component({
     selector: 'cass-change-backdrop-cmp-palette-browser',

@@ -1,0 +1,7 @@
+.route.route-profile-subscriptions.route-profile-subscriptions-people
+  .profile-header
+    cass-profile-header([profile]="helper.getCurrentProfileEntity()")
+  .posts
+    div(*ngIf="feed.isNothingFound()")
+      cass-profile-subscriptions-nothing-posted(type="people")
+    cass-feed-post-stream

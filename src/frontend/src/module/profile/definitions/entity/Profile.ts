@@ -38,6 +38,7 @@ export interface ProfileEntity {
     greetings: ProfileGreetingsEntity;
     gender: ProfileGenderEntity;
     disabled: ProfileDisabledEntity;
+    subscribed: boolean;
 }
 
 export interface ProfileIndexedEntity extends ProfileEntity {

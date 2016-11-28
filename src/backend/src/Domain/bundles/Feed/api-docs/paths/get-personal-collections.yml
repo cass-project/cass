@@ -1,4 +1,4 @@
-"/protected/feed/get/public-collections":
+"/protected/feed/get/personal-collections":
   post:
     tags:
       - feed

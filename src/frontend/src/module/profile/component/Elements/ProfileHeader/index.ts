@@ -25,9 +25,19 @@ export class ProfileHeader implements OnInit
     constructor(private modals: ProfileModals) {}
 
     ngOnInit(): void {
-        this.textColor = getBackdropTextColor(this.profile.profile.backdrop);
+        this.initTextColor();
+    }
+    
+    getTextColor(){
+        this.initTextColor();
+        return this.textColor;
     }
 
+    initTextColor(){
+        this.textColor = getBackdropTextColor(this.profile.profile.backdrop);
+        this.textColor = this.textColor.replace(/(\.\d+)/, '');
+    }
+    
     getImageURL(): string {
         return queryImage(QueryTarget.Card, this.profile.profile.image).public_path;
     }

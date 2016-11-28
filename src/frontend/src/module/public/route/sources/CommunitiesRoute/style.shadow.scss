@@ -25,9 +25,11 @@ div.route-public-communities {
     >div.content {
       flex-basis: 100%;
       overflow: auto;
+
       >div.container-button-right{
+        padding: 10px 0;
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
       }
     }
   }

@@ -16,7 +16,6 @@ export class PostFormModel
     ) {}
 
     createRequest(): CreatePostRequest {
-        // ...
         return {
             post_type: this.postType,
             profile_id: this.profileId,

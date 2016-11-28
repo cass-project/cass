@@ -2,6 +2,7 @@
 namespace CASS\Domain\Bundles\Feed\Middleware\Command;
 
 use CASS\Application\Command\Command;
+use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 use CASS\Domain\Bundles\Feed\Factory\FeedSourceFactory;
 use CASS\Domain\Bundles\Feed\Middleware\Request\FeedMiddlewareRequest;
@@ -23,14 +24,19 @@ abstract class AbstractCommand implements Command
     /** @var CriteriaFactory */
     protected $criteriaFactory;
 
+    /** @var CurrentAccountService */
+    protected $currentAccountService;
+
     public function __construct(
         FeedService $feedService,
         FeedSourceFactory $sourceFactory,
-        CriteriaFactory $criteriaFactory
+        CriteriaFactory $criteriaFactory,
+        CurrentAccountService $currentAccountService
     ) {
         $this->feedService = $feedService;
         $this->sourceFactory = $sourceFactory;
         $this->criteriaFactory = $criteriaFactory;
+        $this->currentAccountService = $currentAccountService;
     }
 
     protected function createFeedRequest(ServerRequestInterface $request): FeedRequest

@@ -1,4 +1,4 @@
-'/protected/profile/{profileId}/backdtop-upload/textColor/{textColor}':
+'/protected/profile/{profileId}/backdrop-upload/textColor/{textColor}':
   post:
     tags:
       - profile

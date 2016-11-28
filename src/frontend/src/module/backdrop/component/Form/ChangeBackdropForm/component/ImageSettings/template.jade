@@ -9,12 +9,13 @@ div.component.component-change-backdrop-cmp--image-settings
           [sample-color]="model.textColor.hexCode"
         )
       .backdrop-preview-button
-        .button-change-preview-button
-          input(type="file")
+        .button-change-preview-button((click)='uploadBackdropImage()')
           span.text {{ "Change cover | backdrop" | translate }}
+    div(*ngIf='upload.isOpened()')
+      cass-upload-image-modal((close)='upload.close()', (complete)='updateBackdropImage($event)', [needToCrop]='false')
   div.form-section
     h1.form-section-header {{ "backdrop.textColor" | translate }}
     cass-color-picker(
       [variants]="model.getTextColors()",
-      (change)="model.setTextColor($event)"
+      (change)="updateTextColorEvent($event)"
     )

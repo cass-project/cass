@@ -19,7 +19,6 @@ export class ThemeCardFeed
     @Input('theme') theme: Theme;
     @Output('go') goEvent: EventEmitter<Theme> = new EventEmitter<Theme>();
 
-    private isSubscribed: boolean = false;
     private subscribeLoading: LoadingManager = new LoadingManager();
 
     constructor(
@@ -34,7 +33,7 @@ export class ThemeCardFeed
         let loading = this.subscribeLoading.addLoading();
 
         this.subscribeService.subscribeTheme(this.theme.id).subscribe(response => {
-            this.isSubscribed = true;
+            this.theme.subscribed = true;
             loading.is = false;
         });
     }
@@ -43,7 +42,7 @@ export class ThemeCardFeed
         let loading = this.subscribeLoading.addLoading();
 
         this.subscribeService.unsubscribeTheme(this.theme.id).subscribe(response => {
-            this.isSubscribed = false;
+            this.theme.subscribed = false;
             loading.is = false;
         });
     }

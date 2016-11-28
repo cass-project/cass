@@ -18,7 +18,7 @@ class CreateCommand extends Command
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson([
-                    'entity' => $collection->toJSON()
+                    'entity' => $this->collectionFormatter->formatOne($collection),
                 ]);
         }catch(CommunityNotFoundException $e){
             $responseBuilder

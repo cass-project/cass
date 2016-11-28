@@ -5,6 +5,7 @@ import {PostRESTService} from "../../../service/PostRESTService";
 import {Session} from "../../../../session/Session";
 import {PostFormModel} from "../../Forms/PostForm/model";
 import {LoadingManager} from "../../../../common/classes/LoadingStatus";
+import { AttachmentEntity } from "../../../../attachment/definitions/entity/AttachmentEntity";
 
 
 @Component({
@@ -19,8 +20,9 @@ export class EditPost
 {
     @Input('post') post: PostEntity;
     @Output('close') close: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output('submitEdit') submitEdit: EventEmitter<number> = new EventEmitter<number>();
 
-    private model: PostFormModel;
+    private model: PostFormModel = new PostFormModel(undefined, undefined, undefined);
     private status: LoadingManager = new LoadingManager();
 
     constructor(

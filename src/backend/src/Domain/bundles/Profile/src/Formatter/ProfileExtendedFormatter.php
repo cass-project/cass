@@ -8,6 +8,7 @@ use CASS\Domain\Bundles\Collection\Service\CollectionService;
 use CASS\Domain\Bundles\Profile\Entity\Card\Access\ProfileCardAccess;
 use CASS\Domain\Bundles\Profile\Entity\Profile;
 use CASS\Domain\Bundles\Profile\Service\ProfileCardService;
+use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
 use CASS\Domain\Bundles\Subscribe\Service\SubscribeService;
 
 final class ProfileExtendedFormatter
@@ -47,12 +48,20 @@ final class ProfileExtendedFormatter
             ? $this->profileCardService->resoluteAccessLevel($profile, $this->currentAccountService->getCurrentAccount()->getCurrentProfile())
             : [ProfileCardAccess::ACCESS_PUBLIC];
 
+        $isSubscribedTo = $this->currentAccountService->isAvailable()
+            ? $this->subscribeService->hasSubscribe(
+                $this->currentAccountService->getCurrentAccount()->getCurrentProfile()->getId(),
+                Subscribe::TYPE_PROFILE,
+                $profile->getId()
+            )
+            : false;
+
         return [
             'profile' => $profile->toJSON(),
             'card' => $this->profileCardService->exportProfileCard($profile, $accessLevel)->toJSON(),
             'collections' => $this->formatCollections($profile->getCollections()),
             'is_own' => $isOwn,
-            'subscribed' => false,
+            'subscribed' => $isSubscribedTo,
         ];
     }
 

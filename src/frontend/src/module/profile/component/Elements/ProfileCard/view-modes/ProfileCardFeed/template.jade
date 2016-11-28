@@ -48,7 +48,7 @@ div.component.component-profile-card-feed.x-navigation-entity.x-navigation-click
                 span {{ helper.getRegistrationDate() }}
       .profile-actions
         cass-subscribe-button(
-          [subscribed]="isSubscribed",
+          [subscribed]="profile.subscribed",
           [is-loading]="subscribeLoading.isLoading()",
           (subscribe)="subscribe()",
           (unsubscribe)="unsubscribe()"
