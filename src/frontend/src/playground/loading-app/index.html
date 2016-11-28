@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loading App</title>
+  <link rel="stylesheet" href="demo.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+  <style>
+    @keyframes demo-animation-do-not-add-it-to-project {
+      0% {
+        width: 0
+      }
+
+      30% {
+        width: 35%;
+      }
+
+      65% {
+        width: 35%;
+      }
+
+      70% {
+        width: 60%
+      }
+
+      100% {
+        width: 100%
+      }
+    }
+
+    div.component-loading-status div.bar-complete {
+      animation: demo-animation-do-not-add-it-to-project 5s cubic-bezier(0.4, 0.0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="component-loading-status">
+    <div class="container">
+      <h1>Yoozer</h1>
+      <div class="loading-indicator">
+        <div class="bar">
+          <div class="bar-complete" style="width: 33%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

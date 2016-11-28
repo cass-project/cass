@@ -1,6 +1,6 @@
 @import "./../../../../styles/globals";
 
-.component.component-profile-collections-list-route {
+.route.route-profile-collections-list-route {
   h1 {
     font-family: $FONT_FAMILY;
     text-align: center;
@@ -10,9 +10,7 @@
     text-transform: uppercase;
     color: material-color("grey", "900");
   }
-}
 
-.component.component-collections-list {
   .collection-cards-container {
     .list-items {
       text-align: center;

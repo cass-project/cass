@@ -1,4 +1,4 @@
-import {Component, ElementRef} from "@angular/core";
+import {Component, ElementRef, EventEmitter, Output, Input} from "@angular/core";
 
 import {CommunityCreateModalModel} from "../../model";
 import {Screen} from "../../screen";
@@ -9,9 +9,17 @@ import {Screen} from "../../screen";
 })
 export class ScreenGeneral extends Screen
 {
+    @Input('themeId') themeId: number;
+    @Output('abort') abortEvent: EventEmitter<Screen> = new EventEmitter<Screen>();
+    @Output('next') nextEvent: EventEmitter<Screen> = new EventEmitter<Screen>();
+
     constructor(
         public model: CommunityCreateModalModel,
         private elementRef: ElementRef) { super(); }
+
+    ngOnChanges(){
+        this.model.theme_ids = this.themeId ? [this.themeId] : [];
+    }
 
     ngAfterViewInit() {
         this.elementRef.nativeElement.getElementsByClassName('form-input')[0].focus();
@@ -19,5 +27,9 @@ export class ScreenGeneral extends Screen
 
     abort() {
         this.abortEvent.emit(this);
+    }
+
+    next() {
+        this.nextEvent.emit(this)
     }
 }

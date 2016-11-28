@@ -1,0 +1,5 @@
+div.component.component-form-button
+  .button-wrap((click)="click($event)")
+    button([type]="getTypeButton()" , [ngClass]="getCSSClasses()" ,[disabled]="getDisabled()", [ngStyle]="getBgColor()")
+      span([innerHTML]="getIcon()")
+      span {{title}}

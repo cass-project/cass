@@ -7,4 +7,6 @@ div.route.route-public-collections
     .content(#content, (scroll)="onScroll($event)")
       div.theme-header
         cass-theme-header([theme]="helper.themes.getThemeRoot()", (go)="helper.goTheme($event)")
+      div.container-button-right
+        cass-form-button(styles="solid",type="button" ,title="Создать тематическую подборку", color="green",(click)="openCreateCollectionModal()" )
       router-outlet

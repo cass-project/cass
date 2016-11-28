@@ -60,7 +60,7 @@ export class Collection implements CollectionEntity
     children: CollectionEntity[] = [];
     subscribed: boolean;
 
-    constructor(ownerType: string, ownerId: string) {
+    constructor(ownerType: string, ownerId: string, themeId?: number) {
         if(!~Collection.OWNER_TYPES.indexOf(ownerType)) {
             throw new Error(`Unknown owner "${ownerType}"`)
         }
@@ -72,7 +72,7 @@ export class Collection implements CollectionEntity
             id: ownerId,
             type: ownerType
         };
-        this.theme_ids = [];
+        this.theme_ids = !!themeId ? [themeId] : [];
     }
 
     hasThemeIds(): boolean {

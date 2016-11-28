@@ -57,15 +57,16 @@
       </div>
       <footer class="tab-content-footer">
         <div class="left">
-          <button (click)="closeProfileModal()" class="form-text-button">Закрыть</button>
+          <cass-form-button type="button" (click)="closeProfileModal()" title="ЗАКРЫТЬ" styles="text"></cass-form-button>
         </div>
         <div class="right">
           <!-- Кнопка отображается в тот момент, когда были сделаны изменения в модели -->
-          <button class="form-text-button" *ngIf="model.canSave()" (click)="model.reset()">Отменить изменения</button>
+          <cass-form-button *ngIf="model.canSave()" type="button" (click)="model.reset()" title="Отменить изменения" styles="text"></cass-form-button>
 
           <!-- Кнопка задизеблена, если нет изменений в модели. -->
           <!-- После сохранения окно должно закрываться -->
-          <button class="form-button form-button-green" [disabled]="!model.canSave()" (click)="model.performSaveChanges()">Сохранить</button>
+          <!--<button class="form-button form-button-green" [disabled]="!model.canSave()" (click)="model.performSaveChanges()">Сохранить</button>-->
+          <cass-form-button type="button" (click)="model.performSaveChanges()" title="СОХРАНИТЬ" styles="solid" color="green" [disabled]="!model.canSave()"></cass-form-button>
         </div>
       </footer>
     </div>

@@ -51,7 +51,9 @@ final class ProfileCardService
             );
         }, $copyCard->getAccessManager()->getAll());
 
-        array_map(function(ProfileCardValue $profileCardValue) use ($profile, $manager, $copyCard) {
+        $greetings = clone $profile->getGreetings();
+
+        array_map(function(ProfileCardValue $profileCardValue) use ($profile, $manager, $copyCard, $greetings) {
             $key = $profileCardValue->getKey();
             $value = $profileCardValue->getValue();
 
@@ -61,15 +63,15 @@ final class ProfileCardService
                     break;
 
                 case 'profile.first_name':
-                    $profile->getGreetings()->setFirstName($value);
+                    $greetings->setFirstName($value);
                     break;
 
                 case 'profile.last_name':
-                    $profile->getGreetings()->setLastName($value);
+                    $greetings->setLastName($value);
                     break;
 
                 case 'profile.middle_name':
-                    $profile->getGreetings()->setMiddleName($value);
+                    $greetings->setMiddleName($value);
                     break;
 
                 case 'profile.gender':
@@ -85,6 +87,8 @@ final class ProfileCardService
                     break;
             }
         }, $copyCard->getValuesManager()->getAll());
+
+        $profile->setGreetings($greetings);
 
         $this->saveProfileCard($profile, $profile->getCard());
 

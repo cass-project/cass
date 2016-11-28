@@ -2,14 +2,14 @@ div.component.component-edit-post
   cass-modal
     cass-modal-box(width="800px",height="600px")
       .edit-post
-        .edit-post__img-wrap
+        .edit-post__img-wrap(*ngIf='haveAttachment()')
           img([src]="getAttachmentURL()").edit-post__img
-        .edit-post__name
+        .edit-post__name([ngStyle]="getStyle()")
           .edit-post-text
             .edit-post__title-wrap(*ngIf='post.title.has')
-              input([ngModel]='post.title.value').edit-post__title
+              input([ngModel]='model.title.value').edit-post__title
             .edit-post__description-wrap
-              textarea([ngModel]='post.content').edit-post__description
+              textarea([ngModel]='model.content').edit-post__description
           .edit-post__button
             .button-cancel-wrap
               button(type="button" , (click)="closeModal()").form-text-button  Отмена

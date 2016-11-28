@@ -28,9 +28,7 @@ div.component.component-profile-switcher
   footer.form-footer
     .form-footer-section
       .cass-padding-box-5
-        button.form-text-button((click)="close()")
-          span.title {{ "cancel" | translate }}
+        cass-form-button(styles="text", type="button", title="ОТМЕНА", (click)="close()")
     .form-footer-section
       .cass-padding-box-5
-        button.form-button.form-button-green([disabled]="! canCreateMoreProfiles()")
-          span.title {{ "create-profile" | translate }}
+        cass-form-button(styles="solid", type="button", title="СОЗДАТЬ НОВЫЙ ПРОФИЛЬ", color="#2196F3", [disabled]="! canCreateMoreProfiles()")

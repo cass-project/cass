@@ -2,6 +2,7 @@
 namespace CASS\Domain\Bundles\Feed\Search\Stream\Streams;
 
 use CASS\Domain\Bundles\Collection\Exception\CollectionNotFoundException;
+use CASS\Domain\Bundles\Collection\Formatter\CollectionFormatter;
 use CASS\Domain\Bundles\Collection\Service\CollectionService;
 use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\QueryStringCriteria;
 use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SeekCriteria;
@@ -18,11 +19,17 @@ final class CollectionStream extends Stream
     /** @var CollectionService */
     private $collectionService;
 
-    public function setCollectionService($collectionService)
-    {
+    /** @var CollectionFormatter */
+    private $collectionFormatter;
+
+    public function __construct(
+        CollectionService $collectionService,
+        CollectionFormatter $collectionFormatter
+    ) {
         $this->collectionService = $collectionService;
+        $this->collectionFormatter = $collectionFormatter;
     }
-    
+
     public function fetch(CriteriaManager $criteriaManager, Collection $collection): array
     {
         $order = 1;
@@ -81,7 +88,7 @@ final class CollectionStream extends Stream
             try {
                 return array_merge([
                     '_id' => (string) $document['_id']
-                ], $this->collectionService->getCollectionById((int) $document['id'])->toJSON());
+                ], $this->collectionFormatter->formatOne($this->collectionService->getCollectionById((int) $document['id'])));
             }catch(CollectionNotFoundException $e) {
                 return null;
             }

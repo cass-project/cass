@@ -46,22 +46,9 @@ cass-modal
           .form-footer-section
             .form-footer-item
               .cass-padding-box-5
-                button.form-text-button(
-                  type="button",
-                  (click)='cancel()'
-                )
-                  span Отмена
+                cass-form-button(title="ОТМЕНА",type="button",styles="text",(click)='cancel()')
           .form-footer-section
             .form-footer-item
               .cass-padding-box-5
-                button.form-text-button(
-                  *ngIf="buttons.isBackButtonAvailable()"
-                  type="button"
-                )
-                  span Назад
-                button.form-button.form-button-primary(
-                  (click)='create()',
-                  type="submut",
-                  [disabled]='!checkFields()'
-                )
-                  span Создать подборку
+                cass-form-button(*ngIf="buttons.isBackButtonAvailable()", title = "НАЗАД", type = "button", styles = "text" , (click) = 'cancel()')
+                cass-form-button(title="СОЗДАТЬ ПОДБОРКУ",type="submit",styles="solid",color="#2196F3", [disabled]='!checkFields()', (click) = 'create()')

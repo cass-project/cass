@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {ProfileRouteService} from "../ProfileRoute/service";
 
 
 @Component({
@@ -9,5 +10,7 @@ import {Component} from "@angular/core";
 })
 export class ProfileSubscriptionsRoute
 {
-
+    constructor(
+        private service: ProfileRouteService
+    ) {}
 }

@@ -1,0 +1,155 @@
+@import '~sass-material-colors';
+@import "./../../../../styles/globals";
+
+@mixin form-button-default-hover {
+  background-color: material-color('grey', '200');
+}
+
+@mixin form-button-color($color) {
+  color: white;
+  background-color: material-color($color, '600');
+
+  &:hover, &:focus {
+    background-color: material-color($color, '700');
+  }
+
+  &:active {
+    background-color: material-color($color, '800');
+  }
+}
+
+@each $color in $ALL_COLORS {
+  .form-button-#{$color} {
+    @include form-button-color($color);
+  }
+}
+
+.form-button-primary {
+  @include form-button-color("blue")
+}
+
+.form-button-green {
+  @include form-button-color("green")
+}
+
+.form-button-red {
+  @include form-button-color("red")
+}
+
+.form-button-remove {
+  $color: "red";
+
+  &:hover, &:focus {
+    color: white;
+    background-color: material-color($color, '700');
+  }
+
+  &:active {
+    color: white;
+    background-color: material-color($color, '700');
+  }
+}
+
+.form-button-text-remove {
+  $color: "red";
+
+  &:hover, &:focus {
+    color: material-color($color, '700');
+  }
+
+  &:active {
+    color: material-color($color, '800');
+  }
+}
+
+.form-text-button {
+  color: material-color('grey', '900');
+  box-sizing: border-box;
+  outline: 0;
+  border: 0;
+  background: transparent;
+  display: inline-block;
+  align-items: center;
+  padding: 0 6px;
+  margin: 3px 5px;
+  line-height: 36px;
+  min-height: 36px;
+  white-space: nowrap;
+  min-width: 90px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: box-shadow .4s cubic-bezier(.25,.8,.25,1), background-color .4s cubic-bezier(.25,.8,.25,1);
+
+  &:disabled {
+    cursor: not-allowed;
+    color: material-color('grey', '600');
+    background-color: transparent!important;
+  }
+
+  &:hover, &:focus {
+    background-color: material-color("grey", "200") !important;
+    border-radius: 3px;
+  }
+
+  &:active {
+    background-color: material-color("grey", "300");
+  }
+}
+
+.form-button {
+  @include card(1);
+  @include disable-text-select;
+  color: #fff;
+  transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1);
+  box-sizing: border-box;
+  border-radius: 3px;
+  outline: 0;
+  border: 0;
+  display: inline-block;
+  align-items: center;
+  padding: 0 12px;
+  margin: 3px 5px;
+  line-height: 36px;
+  min-height: 36px;
+  white-space: nowrap;
+  min-width: 90px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+
+  &:focus, &:disabled{
+    background-color: material-color('grey', '300') !important;
+    transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1);
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 10px rgba(0,0,0,.7);
+  }
+
+  &:disabled {
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+  &:active {
+    background-color: material-color('blue', '700');
+  }
+}
+
+.component-form-button {
+  display: inline-block;
+  line-height: 36px;
+
+  button{
+    display: inline-block;
+  }
+
+}

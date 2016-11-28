@@ -5,6 +5,9 @@ import {ListSubscribeThemesRequest} from "../../../../../subscribe/definitions/p
 import {SubscribeRESTService} from "../../../../../subscribe/service/SubscribeRESTService";
 import {ThemeService} from "../../../../../theme/service/ThemeService";
 import {LoadingManager} from "../../../../../common/classes/LoadingStatus";
+import {ViewOptionValue} from "../../../../../feed/service/FeedService/options/ViewOption";
+import {ViewOptionService} from "../../../../../public/component/Options/ViewOption/service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -23,10 +26,12 @@ export class ThemesSubscriptionsRoute
         offset: 0
     };
 
-    constructor(private subscribe: SubscribeRESTService,
-                private service: ThemeService
-    ){}
-
+    constructor(
+        private subscribe: SubscribeRESTService,
+        private service: ThemeService,
+        private viewOptions: ViewOptionService,
+        private router: Router,
+    ) {}
 
     ngOnInit() {
 
@@ -47,4 +52,15 @@ export class ThemesSubscriptionsRoute
         )
     }
 
+    getThemes() {
+        return this.subscribes.map(subscription => subscription.entity);
+    }
+
+    openCommunity(theme: Theme) {
+        this.router.navigate(['/profile/current/personal/themes']);
+    }
+
+    getViewMode(): ViewOptionValue {
+        return this.viewOptions.option.current;
+    }
 }

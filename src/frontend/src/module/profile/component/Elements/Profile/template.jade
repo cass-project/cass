@@ -24,10 +24,11 @@ article.component.component-profile
         cass-collection-create-master(
           [for]='"profile"',
           [for_id]='session.getCurrentProfile().getId()',
+          [theme_id]='modals.themeId',
           (close)='modals.createCollection.close()',
           (complete)='goCollection($event)'
         )
   div(*ngIf="modals.backdrop.isOpened()")
     cass-modal
       cass-modal-box(width="550px")
-        cass-profile-backdrop-modal([profile]="session.getCurrentProfile().entity.profile")
+        cass-profile-backdrop-modal([profile]="session.getCurrentProfile().entity.profile", (close)='modals.backdrop.close()', (complete)='modals.backdrop.close()')

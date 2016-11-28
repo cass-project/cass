@@ -10,4 +10,35 @@ div.component-change-backdrop-cmp--image-settings {
       margin-bottom: 10px;
     }
   }
+
+  .backdrop-preview-container {
+    position: relative;
+
+    .backdrop-preview-button {
+      .button-change-preview-button {
+        position: absolute;
+        bottom: 5px; right: 5px;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.6);
+        font-weight: 500;
+        color: #fff;
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 3px;
+        overflow: hidden;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        input {
+          position: absolute;
+          right: 0; bottom: 0;
+          font-size: 9999px;
+          opacity: 0;
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }

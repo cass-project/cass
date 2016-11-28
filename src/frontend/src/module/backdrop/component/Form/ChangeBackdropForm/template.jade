@@ -1,14 +1,5 @@
 div.component.component-change-backdrop-form
-  nav.cbm-navigation
-    ul.tabs
-      li.tab
-        button.active(type="button", (click)="switchTab('image')", [ngClass]="{'active': isOn('image')}")
-          span.title {{ "backdrop.change-modal.tab.image" | translate }}
-      li.tab
-        button(type="button", (click)="switchTab('palette')", [ngClass]="{'active': isOn('palette')}")
-          span.title {{ "backdrop.change-modal.tab.palette" | translate }}
   div.current-screen
     div(*ngIf="isOn('image')")
-      cass-change-backdrop-cmp-image-settings
-    div(*ngIf="isOn('palette')")
-      cass-change-backdrop-cmp-palette-browser
+      cass-change-backdrop-cmp-image-settings((submit)='submitEvent($event)', (updateTextColor)='changeTextColorEvent($event)')
+

@@ -132,12 +132,7 @@ article.component.component-profile-setup-greetings
     footer.form-footer
       .form-footer-section
         .form-footer-item
-          button.form-text-button(type="button", (click)="back()")
-            span Назад
+          cass-form-button(type="button",title="НАЗАД",styles="text",(click)="back()")
       .form-footer-section
         .form-footer-item
-          button.form-button.form-button-primary(
-            type="submit",
-            [disabled]="! setupForm.form.valid"
-          )
-            span Следующий шаг
+          cass-form-button(type="submit",title="СЛЕДУЮЩИЙ ШАГ",styles="solid",color="#2196F3",[disabled]="! setupForm.form.valid")

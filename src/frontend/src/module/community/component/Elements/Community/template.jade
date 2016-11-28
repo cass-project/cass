@@ -1,6 +1,10 @@
 article.component.component-community
   div(*ngIf="service.create.isOpened()")
-    cass-community-create-modal((close)="service.create.close()", (success)="goCommunity($event)")
+    cass-community-create-modal(
+      (close)="service.create.close()",
+      (success)="goCommunity($event)",
+      [themeId]="service.themeId"
+    )
   div(*ngIf="modals.createCollection.isOpened()")
     cass-modal
       cass-modal-box(width="550px")

@@ -33,12 +33,9 @@ form.form.form-auth-sign-in((ngSubmit)='submit()', (keyup.escape)='close()')
   footer.form-footer
     .form-footer-section
       .cass-padding-box-5
-        button.form-text-button(type='button', tabindex='4', (click)='signUp()')
-          span Создать аккаунт
+        cass-form-button(styles="text", type="button", title="СОЗДАТЬ АККАУНТ", tabindex='4', (click)='signUp()')
     .form-footer-section
       .form-footer-item
         .cass-padding-box-5
-          button.form-text-button(type='button', tabindex='5', (click)='close()')
-            span Закрыть
-          button.form-button.form-button-primary(type='submit', tabindex='3')
-            span Войти
+          cass-form-button(styles="text", type="button", title="ЗАКРЫТЬ", tabindex='5', (click)='close()')
+          cass-form-button(styles="solid",color="#2196F3", type="submit", title="ВОЙТИ", tabindex='3')

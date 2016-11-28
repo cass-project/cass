@@ -7,14 +7,12 @@
           <p>
             <span>Перетащите сюда картинку или</span>
             <label for="uploadModalImageFile">
-              <div class="form-button form-button-primary">Выберите файл</div>
+              <div class="form-button">Выберите файл</div>
             </label>
           </p>
         </div>
         <div class="form-footer-section">
-          <button class="form-text-button" (click)="close()">
-            <span>Отмена</span>
-          </button>
+            <cass-form-button styles="solid" type="button" title="ОТМЕНА" color="#2196F3" (click)="close()"></cass-form-button>
         </div>
       </div>
       <div class="form stage-crop" *ngIf="screen.isOn('Crop') || screen.isOn('Processing')">
@@ -24,14 +22,10 @@
           </div>
           <footer class="form-footer">
             <div class="form-footer-section">
-              <button class="form-text-button" (click)="screen.goto('File')">
-                <span>Отмена</span>
-              </button>
+              <cass-form-button styles="text" type="button" title="ОТМЕНА"  (click)="screen.goto('File')"></cass-form-button>
             </div>
             <div class="form-footer-section">
-              <button class="form-button form-button-green" (click)="process()">
-                <span>Загрузить картинку</span>
-              </button>
+              <cass-form-button styles="solid" type="button" title="ЗАГРУЗИТЬ КАРТИНКУ" color="green" (click)="process()"></cass-form-button>
             </div>
           </footer>
         </div>
@@ -45,10 +39,7 @@
           </div>
           <div class="controls">
             <p class="info">Ваша картинка загружается на сервер</p>
-            <button class="form-text-button" (click)="abort()">
-              <i class="fa fa-fw fa-stop"></i>
-              <span>Отмена</span>
-            </button>
+            <cass-form-button styles="text" type="button" title="ОТМЕНА" (click)="abort()" icon="'fa fa-fw fa-stop'"></cass-form-button>
           </div>
         </div>
       </div>

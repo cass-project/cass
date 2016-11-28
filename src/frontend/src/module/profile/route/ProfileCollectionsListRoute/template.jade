@@ -1,11 +1,12 @@
-.component.component-profile-collections-list-route
-  div
+.route.route-profile-collections-list-route
+  .profile-header
+    cass-profile-header([profile]="service.getEntity()")
+  .header
     h1 Подборки
-    .component.component-collections-list
-      .collection-cards-container
-        .list-items
-          .collection-card-item(*ngFor="let collection of this.service.getCollections()")
-            div(*ngIf="! collection.is_main")
-              cass-collection-card([entity]="collection", [params]="['./', collection.sid]")
-          .collection-card-item(*ngIf="this.service.isOwnProfile()")
-            cass-create-collection-card((click)="openCreateCollectionModal()")
+  .collection-cards-container
+    .list-items
+      .collection-card-item(*ngFor="let collection of this.service.getCollections()")
+        div(*ngIf="! collection.is_main")
+          cass-collection-card([entity]="collection", [params]="['./', collection.sid]")
+      .collection-card-item(*ngIf="this.service.isOwnProfile()")
+        cass-create-collection-card((click)="openCreateCollectionModal()")

@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    position: relative;
   }
 
   .delete-post-button {
@@ -23,9 +24,4 @@
     font-size: 17px;
     margin-bottom: auto;
   }
-
-  .form-button-red {
-    background: #9d223c;
-  }
-
 }

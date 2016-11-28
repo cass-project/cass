@@ -7,9 +7,11 @@ use CASS\Domain\Bundles\Post\Entity\Post;
 
 final class ProfileProcessor extends AbstractPostProcessor
 {
-    protected function getSource(Post $entity): Source
+    protected function getSources(Post $entity): array
     {
-        return $source = $this->sourceFactory->getProfileSource($entity->getCollection()->getOwnerId());
+        return [
+            $this->sourceFactory->getProfileSource($entity->getCollection()->getOwnerId()),
+        ];
     }
 
     protected function isIndexable(Post $entity): bool

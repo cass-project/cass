@@ -45,7 +45,7 @@ export class ProfileDashboardRoute
         feed.update();
     }
 
-    getEntity(){
+    getEntity() {
         if(this.service.getEntity().is_own){
             return this.session.getCurrentProfile().entity;
         } else {

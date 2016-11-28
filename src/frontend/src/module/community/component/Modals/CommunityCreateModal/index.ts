@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from "@angular/core";
+import {Component, EventEmitter, Output, Input} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 
 import {CommunityCreateModalModel} from "./model";
@@ -26,21 +26,22 @@ enum CreateStage {
 })
 export class CommunityCreateModal
 {
+    private loading: LoadingManager = new LoadingManager();
+
+    public screens: ScreenControls<CreateStage> = new ScreenControls<CreateStage>(CreateStage.General, (sc: ScreenControls<CreateStage>) => {
+        sc.add({ from: CreateStage.General, to: CreateStage.Features });
+    });
+
+    @Output('success') successEvent = new EventEmitter<CommunityExtendedEntity>();
+    @Output('close') closeEvent = new EventEmitter<CommunityCreateModal>();
+    @Input('themeId') themeId: number;
+
     constructor(
         private model: CommunityCreateModalModel,
         private authService: AuthService,
         private communityRESTService: CommunityRESTService,
         private notifier: CommunityCreateModalNotifier
     ) {}
-
-    @Output('success') successEvent = new EventEmitter<CommunityExtendedEntity>();
-    @Output('close') closeEvent = new EventEmitter<CommunityCreateModal>();
-
-    private loading: LoadingManager = new LoadingManager();
-
-    public screens: ScreenControls<CreateStage> = new ScreenControls<CreateStage>(CreateStage.General, (sc: ScreenControls<CreateStage>) => {
-        sc.add({ from: CreateStage.General, to: CreateStage.Features });
-    });
 
     ngOnInit() {
         if(! this.authService.isSignedIn()) {

@@ -6,13 +6,17 @@ use CASS\Application\Service\CommandService;
 use CASS\Domain\Bundles\Feed\Exception\AbstractFeedException;
 use CASS\Domain\Bundles\Feed\Middleware\Command\CollectionCommand;
 use CASS\Domain\Bundles\Feed\Middleware\Command\CommunityCommand;
+use CASS\Domain\Bundles\Feed\Middleware\Command\PersonalFeeds\PersonalCollectionsCommand;
+use CASS\Domain\Bundles\Feed\Middleware\Command\PersonalFeeds\PersonalCommunitiesCommand;
+use CASS\Domain\Bundles\Feed\Middleware\Command\PersonalFeeds\PersonalPeopleCommand;
+use CASS\Domain\Bundles\Feed\Middleware\Command\PersonalFeeds\PersonalThemesCommand;
 use CASS\Domain\Bundles\Feed\Middleware\Command\ProfileCommand;
-use CASS\Domain\Bundles\Feed\Middleware\Command\PublicCommunitiesCommand;
-use CASS\Domain\Bundles\Feed\Middleware\Command\PublicContentCommand;
-use CASS\Domain\Bundles\Feed\Middleware\Command\PublicExpertsCommand;
-use CASS\Domain\Bundles\Feed\Middleware\Command\PublicProfilesCommand;
-use CASS\Domain\Bundles\Feed\Middleware\Command\PublicDiscussionsCommand;
-use CASS\Domain\Bundles\Feed\Middleware\Command\PublicCollectionsCommand;
+use CASS\Domain\Bundles\Feed\Middleware\Command\PublicCatalog\PublicCommunitiesCommand;
+use CASS\Domain\Bundles\Feed\Middleware\Command\PublicCatalog\PublicContentCommand;
+use CASS\Domain\Bundles\Feed\Middleware\Command\PublicCatalog\PublicExpertsCommand;
+use CASS\Domain\Bundles\Feed\Middleware\Command\PublicCatalog\PublicProfilesCommand;
+use CASS\Domain\Bundles\Feed\Middleware\Command\PublicCatalog\PublicDiscussionsCommand;
+use CASS\Domain\Bundles\Feed\Middleware\Command\PublicCatalog\PublicCollectionsCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -43,6 +47,10 @@ final class FeedMiddleware implements MiddlewareInterface
                 ->attachDirect('public-discussions', PublicDiscussionsCommand::class)
                 ->attachDirect('public-communities', PublicCommunitiesCommand::class)
                 ->attachDirect('public-collections', PublicCollectionsCommand::class)
+                ->attachDirect('personal-collections', PersonalCollectionsCommand::class)
+                ->attachDirect('personal-communities', PersonalCommunitiesCommand::class)
+                ->attachDirect('personal-people', PersonalPeopleCommand::class)
+                ->attachDirect('personal-themes', PersonalThemesCommand::class)
                 ->resolve($request)
             ;
 

@@ -21,16 +21,11 @@ export class BackdropPreview
         None: () => { return this.backdrop.type === BackdropType.None },
         Color: () => { return this.backdrop.type === BackdropType.Color },
         Preset: () => { return this.backdrop.type === BackdropType.Preset },
-        Uploaded: () => { return this.backdrop.type === BackdropType.None },
+        Uploaded: () => { return this.backdrop.type === BackdropType.Uploaded },
     };
 
-    private getBackdropImage(): string {
-        if(this.backdrop.type === BackdropType.Preset) {
-            return (<BackdropPresetMetadata> this.backdrop.metadata).public_path;
-        }else if(this.backdrop.type === BackdropType.Uploaded) {
-            return (<BackdropUploadMetadata> this.backdrop.metadata).public_path;
-        }else{
-            throw new Error('No way to get image from this backdrop');
-        }
+    private getBackdropImage(): string
+    {
+        return this.backdrop.metadata.public_path;
     }
 }

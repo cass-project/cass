@@ -1,6 +1,6 @@
-import {Component} from "@angular/core";
-
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {Backdrop} from "../../../definitions/Backdrop";
+import { UploadProfileImageStrategy } from "../../../../profile/common/UploadProfileImageStrategy";
 
 @Component({
     selector: 'cass-change-backdrop-form',
@@ -13,6 +13,17 @@ export class ChangeBackdropForm
 {
     private tab: ChangeBackdropModalTab = ChangeBackdropModalTab.Image;
 
+    @Output('changeTextColor') changeTextColor: EventEmitter<string> = new EventEmitter<string>();
+    @Output('submit') submit: EventEmitter<any> = new EventEmitter<any>();
+
+    submitEvent(event){
+        this.submit.emit(event);
+    }
+
+    changeTextColorEvent(event){
+        this.changeTextColor.emit(event);
+    }
+    
     switchTab(tab: ChangeBackdropModalTab) {
         this.tab = tab;
     }
@@ -25,5 +36,6 @@ export class ChangeBackdropForm
 enum ChangeBackdropModalTab
 {
     Image = <any>"image",
-    Palette = <any>"palette"
+    Palette = <any>"palette",
+    Preset = <any>"preset"
 }

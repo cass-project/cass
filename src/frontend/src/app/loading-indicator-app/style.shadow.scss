@@ -1,0 +1,40 @@
+$COLOR: #425884;
+$WIDTH: 200px;
+
+.component-loading-status {
+  display: flex;
+  position: fixed;
+  top: 0; height: 100%;
+  left: 0; width: 100%;
+  background-color: $COLOR;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+
+  .container {
+    width: $WIDTH;
+
+    >h1 {
+      font-size: 24px;
+      line-height: 45px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+    }
+
+    .bar {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      height: 10px;
+      border-radius: 2px;
+      overflow: hidden;
+
+      .bar-complete {
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.7);
+        transition: width 0.05s;
+      }
+    }
+  }
+}
