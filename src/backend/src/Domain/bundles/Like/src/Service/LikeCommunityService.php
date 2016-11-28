@@ -43,7 +43,6 @@ class LikeCommunityService extends LikeService
         $this->communityRepository->saveCommunity($entity->increaseLikes());
 
         return $attitude;
-
     }
 
     public function addDislike(LikeableEntity $entity, Attitude $attitude): Attitude

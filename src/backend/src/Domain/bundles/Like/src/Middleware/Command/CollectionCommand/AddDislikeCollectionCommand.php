@@ -1,32 +1,33 @@
 <?php
 
-namespace CASS\Domain\Bundles\Like\Middleware\Command\ThemeCommand;
+namespace CASS\Domain\Bundles\Like\Middleware\Command\CollectionCommand;
 
+use CASS\Domain\Bundles\Collection\Exception\CollectionNotFoundException;
 use CASS\Domain\Bundles\Like\Entity\AttitudeFactory;
 use CASS\Domain\Bundles\Like\Exception\AttitudeAlreadyExistsException;
-use CASS\Domain\Bundles\Theme\Exception\ThemeNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
 
-class AddDislikeThemeCommand extends ThemeCommand
+class AddDislikeCollectionCommand extends CollectionCommand
 {
     public function run(ServerRequestInterface $request, ResponseBuilder $responseBuilder): ResponseInterface
     {
         try {
-            $themeId = $request->getAttribute('themeId');
-            $theme = $this->themeService->getThemeById($themeId);
+            $collectionId = $request->getAttribute('collectionId');
+            $collection = $this->collectionService->getCollectionById($collectionId);
 
             $attitudeFactory = new AttitudeFactory($request, $this->currentAccountService);
             $attitude = $attitudeFactory->getAttitude();
-            $attitude->setResource($theme);
+            $attitude->setResource($collection);
 
-            $this->likeThemeService->addDislike($theme, $attitude);
+            $this->likeCollectionService->addDislike($collection, $attitude);
+
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson([
                     'success' => true,
-                    'entity' => $theme->toJSON(),
+                    'entity' => $collection->toJSON(),
                 ]);
 
         } catch(AttitudeAlreadyExistsException $e) {
@@ -34,17 +35,16 @@ class AddDislikeThemeCommand extends ThemeCommand
                 ->setError($e)
                 ->setJson(['success' => false])
                 ->setStatusConflict();
-        } catch(ThemeNotFoundException $e) {
+        } catch(CollectionNotFoundException $e) {
             $responseBuilder
-                ->setJson(['success' => false])
                 ->setError($e)
+                ->setJson(['success' => false])
                 ->setStatusNotFound();
         } catch(\Exception $e) {
             $responseBuilder
-                ->setJson([
-                    'success' => false,
-                ])
-                ->setError($e);
+                ->setError($e)
+                ->setJson(['success' => false])
+                ->setStatusNotFound();
         }
 
         return $responseBuilder->build();

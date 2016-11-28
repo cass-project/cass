@@ -20,7 +20,6 @@ class RemoveAttitudeCommunityTest extends LikeCommunityMiddlewareTestCase
         $this->requestRemoveCommunityAttitude($communityId)
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
-            ->dump()
             ->expectJSONBody([
                 'success' => true,
             ])

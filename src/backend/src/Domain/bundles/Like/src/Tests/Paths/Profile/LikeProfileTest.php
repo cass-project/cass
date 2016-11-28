@@ -2,6 +2,7 @@
 namespace CASS\Domain\Bundles\Like\Tests\Paths\Profile;
 
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Bundles\Like\Tests\Fixtures\DemoAttitudeFixture;
 use CASS\Domain\Bundles\Like\Tests\LikeProfileMiddlewareTestCase;
 use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
 
@@ -47,5 +48,16 @@ class LikeProfileTest extends LikeProfileMiddlewareTestCase
         $this->requestLikeProfile(self::NOT_FOUND_ID)
             ->execute()
             ->expectNotFoundError();
+    }
+
+    public function test409()
+    {
+        $profileId = DemoProfileFixture::getProfile()->getId();
+        $this->upFixture(new DemoAttitudeFixture());
+
+        $this->requestLikeProfile($profileId)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(409);
     }
 }

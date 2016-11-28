@@ -3,6 +3,7 @@
 namespace CASS\Domain\Bundles\Like\Tests\Paths\Theme;
 
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Bundles\Like\Tests\Fixtures\DemoAttitudeFixture;
 use CASS\Domain\Bundles\Like\Tests\LikeThemeMiddlewareTestCase;
 use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
 /**
@@ -50,5 +51,14 @@ class AddDisLikeThemeTest extends LikeThemeMiddlewareTestCase
             ->expectNotFoundError();
     }
 
+    public function test409()
+    {
+        $themeId = SampleThemesFixture::getTheme(2)->getId();
+        $this->upFixture(new DemoAttitudeFixture());
 
+        $this->requestDisLikeTheme($themeId)
+            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+            ->execute()
+            ->expectStatusCode(409);
+    }
 }

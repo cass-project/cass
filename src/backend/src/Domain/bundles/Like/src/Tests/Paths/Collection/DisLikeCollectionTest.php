@@ -1,28 +1,28 @@
 <?php
 
-namespace CASS\Domain\Bundles\Like\Tests\Paths\Theme;
+namespace CASS\Domain\Bundles\Like\Tests\Paths\Collection;
 
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
+use CASS\Domain\Bundles\Collection\Tests\Fixtures\SampleCollectionsFixture;
 use CASS\Domain\Bundles\Like\Tests\Fixtures\DemoAttitudeFixture;
-use CASS\Domain\Bundles\Like\Tests\LikeThemeMiddlewareTestCase;
-use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
+use CASS\Domain\Bundles\Like\Tests\LikeCollectionMiddlewareTestCase;
+
 /**
  * @backupGlobals disabled
  */
-class AddLikeThemeTest extends LikeThemeMiddlewareTestCase
+class DisLikeCollectionTest extends LikeCollectionMiddlewareTestCase
 {
     public function test200()
     {
-        $theme = SampleThemesFixture::getTheme(1);
-        $this->requestLikeTheme($theme->getId())
+        $this->requestDisLikeCollection(SampleCollectionsFixture::getCommunityCollection(1)->getId())
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
                     'id' => $this->expectId(),
-                    'likes' => 1,
-                    'dislikes' => 0,
+                    'likes' => 0,
+                    'dislikes' => 1,
                 ],
             ])
             ->expectStatusCode(200);
@@ -30,34 +30,35 @@ class AddLikeThemeTest extends LikeThemeMiddlewareTestCase
 
     public function testUnAuth200()
     {
-        $theme = SampleThemesFixture::getTheme(1);
-        $this->requestLikeTheme($theme->getId())
+        $this->requestDisLikeCollection(SampleCollectionsFixture::getCommunityCollection(1)->getId())
             ->execute()
             ->expectJSONBody([
                 'success' => true,
                 'entity' => [
                     'id' => $this->expectId(),
-                    'likes' => 1,
-                    'dislikes' => 0,
+                    'likes' => 0,
+                    'dislikes' => 1,
                 ],
             ])
             ->expectStatusCode(200);
     }
-    public function test404()
+
+    public function test403()
     {
-        $this->requestLikeTheme(self::NOT_FOUND_ID)
+        $this->requestDisLikeCollection(self::NOT_FOUND_ID)
             ->execute()
             ->expectNotFoundError();
     }
 
     public function test409()
     {
-        $themeId = SampleThemesFixture::getTheme(1)->getId();
-        $this->upFixture(new DemoAttitudeFixture());
+        $collectionId = SampleCollectionsFixture::getCommunityCollection(2)->getId();
+        $this->upFixture($demoAttitudes = new DemoAttitudeFixture());
 
-        $this->requestLikeTheme($themeId)
+        $this->requestDisLikeCollection($collectionId)
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(409);
     }
+
 }

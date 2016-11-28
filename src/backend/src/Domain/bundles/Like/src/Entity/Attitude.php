@@ -2,11 +2,11 @@
 
 namespace CASS\Domain\Bundles\Like\Entity;
 
+use CASS\Domain\Bundles\Collection\Entity\Collection;
 use CASS\Domain\Bundles\Community\Entity\Community;
 use CASS\Domain\Bundles\Profile\Entity\Profile;
 use CASS\Domain\Bundles\Theme\Entity\Theme;
 use CASS\Util\JSONSerializable;
-use Doctrine\Common\Collections\Collection;
 use ZEA2\Platform\Markers\IdEntity\IdEntity;
 use ZEA2\Platform\Markers\IdEntity\IdEntityTrait;
 use ZEA2\Platform\Markers\LikeEntity\LikeableEntity;
@@ -169,7 +169,7 @@ class Attitude implements IdEntity, JSONSerializable
             }
             case Collection::class :{
                 /** @var Collection $entity */
-//                $this->setResourceId($entity->getId())->setResourceType(self::RESOURCE_TYPE_COLLECTION);
+                $this->setResourceId($entity->getId())->setResourceType(self::RESOURCE_TYPE_COLLECTION);
                 break;
             }
         }

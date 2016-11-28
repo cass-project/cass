@@ -28,15 +28,16 @@ class AddLikeThemeCommand extends ThemeCommand
                     'success' => true,
                     'entity' => $theme->toJSON(),
                 ]);
+        } catch(AttitudeAlreadyExistsException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setJson(['success' => false])
+                ->setStatusConflict();
         } catch(ThemeNotFoundException $e) {
             $responseBuilder
                 ->setJson(['success' => false])
                 ->setError($e)
                 ->setStatusNotFound();
-        } catch(AttitudeAlreadyExistsException $e) {
-            $responseBuilder
-                ->setJson(['success' => false])
-                ->setStatusConflict();
         } catch(\Exception $e) {
             $responseBuilder
                 ->setJson([
