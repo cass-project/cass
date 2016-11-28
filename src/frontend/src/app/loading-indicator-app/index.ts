@@ -47,15 +47,15 @@ function runLoader(){
         completeFrontline = currentComplete;
     }
 
-    function appComplete(event: ProgressEvent) {
-        if(frontlineXHR.readyState === 4){
+    function appComplete() {
+        if(frontlineXHR.readyState === 4 && frontlineXHR.status === 200){
             appendApp()
         }
     }
 
-    function frontlineComplete(event: ProgressEvent) {
+    function frontlineComplete() {
         window['response_frontline'] = JSON.parse(frontlineXHR.responseText);
-        if(appXHR.readyState === 4){
+        if(appXHR.readyState === 4 && appXHR.status === 200){
             appendApp()
         }
     }

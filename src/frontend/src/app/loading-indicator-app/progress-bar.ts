@@ -15,7 +15,6 @@ export class Loader
     }
 
     done() {
-        console.log('done')
         this.setWidth(100);
         this.loader.remove();
         this.loader = null;
