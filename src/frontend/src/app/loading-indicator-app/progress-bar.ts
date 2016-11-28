@@ -1,6 +1,6 @@
 export class Loader
 {
-    private progressBar: Element;
+    private progressBar: any;
     private loader: any;
     private currentProgress: number = 0;
 
