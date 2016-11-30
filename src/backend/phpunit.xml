@@ -48,5 +48,8 @@
         <testsuite name="domain_subscribe">
             <directory>src/Domain/bundles/Subscribe/src/Tests</directory>
         </testsuite>
+        <testsuite name="domain_like">
+            <directory>src/Domain/bundles/Like/src/Tests</directory>
+        </testsuite>
     </testsuites>
 </phpunit>

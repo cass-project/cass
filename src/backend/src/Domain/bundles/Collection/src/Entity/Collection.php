@@ -7,6 +7,8 @@ use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
 use ZEA2\Platform\Markers\IdEntity\IdEntity;
 use ZEA2\Platform\Markers\IdEntity\IdEntityTrait;
+use ZEA2\Platform\Markers\LikeEntity\LikeableEntity;
+use ZEA2\Platform\Markers\LikeEntity\LikeableEntityTrait;
 use ZEA2\Platform\Markers\SIDEntity\SIDEntity;
 use ZEA2\Platform\Markers\SIDEntity\SIDEntityTrait;
 use CASS\Util\JSONSerializable;
@@ -22,13 +24,14 @@ use CASS\Domain\Bundles\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
  * @Entity(repositoryClass="CASS\Domain\Bundles\Collection\Repository\CollectionRepository")
  * @Table(name="collection")
  */
-class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, BackdropEntityAware, ThemeIdsEntityAware, IndexedEntity
+class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, BackdropEntityAware, ThemeIdsEntityAware, IndexedEntity, LikeableEntity
 {
     use IdEntityTrait;
     use SIDEntityTrait;
     use ImageEntityTrait;
     use ThemeIdsAwareEntityTrait;
     use BackdropEntityAwareTrait;
+    use LikeableEntityTrait;
 
     /**
      * @Column(type="datetime", name="date_created_on")
@@ -119,6 +122,8 @@ class Collection implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, 
             'backdrop' => $this->getBackdrop()->toJSON(),
             'is_protected' => $this->isProtected(),
             'is_main' => $this->isMain(),
+            'likes' => $this->getLikes(),
+            'dislikes' => $this->getDislikes(),
         ];
         return $result;
     }
