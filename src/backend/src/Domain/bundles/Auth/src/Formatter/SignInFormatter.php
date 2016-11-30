@@ -19,7 +19,7 @@ class SignInFormatter
     public function format(Account $account, array $frontline)
     {
         $profiles = array_map(function(Profile $profile) {
-            return $this->profileFormatter->format($profile);
+            return $this->profileFormatter->formatOne($profile);
         }, $account->getProfiles()->toArray());
 
         return [
