@@ -1,0 +1,31 @@
+"/like/community/{communityId}/add-like":
+  put:
+    tags:
+      - like
+    description: Лайкнуть communityId
+    parameters:
+      - name: communityId
+        type: number
+        in: path
+        required: true
+        description: ID communityId
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Community_Entity_Community'
+      404:
+        $ref: '#/responses/NotFound'
+      403:
+        $ref: '#/responses/Unauthorized'
+      409:
+        $ref: '#/responses/error'

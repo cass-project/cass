@@ -11,6 +11,8 @@ Profile_Entity_Profile:
     - backdrop
     - expert_in
     - interesting_in
+    - likes
+    - dislikes
   properties:
     id:
       type: number
@@ -45,3 +47,9 @@ Profile_Entity_Profile:
       items:
         type: number
         description: ID тематики
+    likes:
+      type: number
+      description: Количество лайков
+    dislikes:
+      type: number
+      description: Количество дизлайков

@@ -1,0 +1,31 @@
+"/like/collection/{collectionId}/remove-attitude":
+  delete:
+    tags:
+      - like
+    description: Удалить отзыв о collection
+    parameters:
+      - name: collectionId
+        type: number
+        in: path
+        required: true
+        description: ID collectionId
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Community_Entity_Community'
+      404:
+        $ref: '#/responses/NotFound'
+      403:
+        $ref: '#/responses/Unauthorized'
+      409:
+        $ref: '#/responses/error'
