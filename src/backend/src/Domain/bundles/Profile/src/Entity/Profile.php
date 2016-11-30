@@ -166,7 +166,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
 
     public function replaceCard(ProfileCard $newProfileCard): self
     {
-        $this->card = $newProfileCard;
+        $this->card = clone $newProfileCard;
 
         return $this;
     }
