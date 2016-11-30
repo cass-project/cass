@@ -71,7 +71,6 @@
     "url-loader": "^0.5.7",
     "valid-url": "^1.0.9",
     "webpack": "2.1.0-beta.22",
-    "webpack-dev-server": "2.1.0-beta.10",
     "webpack-merge": "^1.0.1",
     "zone.js": "0.6.24"
   },

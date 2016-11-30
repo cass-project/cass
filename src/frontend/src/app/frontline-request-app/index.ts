@@ -8,4 +8,3 @@ xhr.send();
 xhr.addEventListener('load', () => {
     window['response_frontline'] = JSON.parse(xhr.responseText);
 });
-

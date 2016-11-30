@@ -16,23 +16,10 @@ function WebpackConfigBuilder() {
 WebpackConfigBuilder.prototype = {
     build: function () {
         return {
+            context: __dirname + '/../src/app',
             entry: {
-                main: './src/app/frontend-app/app.ts',
-                frontline: './src/app/frontline-request-app/index.ts'
-            },
-            output: {
-                filename: '[name].js',
-                path: this.publicPath + '/' + this.bundlesDir
-            },
-            devServer: {
-                port: METADATA.PORT,
-                host: METADATA.HOST,
-                watchOptions: {
-                    aggregateTimeout: 300,
-                    poll: 1000
-                },
-                inline: true,
-                contentBase: this.publicPath + '/../'
+                main: './frontend-app/app.ts',
+                frontline: './frontline-request-app/index.ts'
             },
             devtool: 'cheap-module-source-map'
         }
