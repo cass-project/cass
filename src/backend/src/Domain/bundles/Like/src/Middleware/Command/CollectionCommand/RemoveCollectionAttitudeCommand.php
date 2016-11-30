@@ -5,6 +5,7 @@ namespace CASS\Domain\Bundles\Like\Middleware\Command\CollectionCommand;
 use CASS\Domain\Bundles\Collection\Exception\CollectionNotFoundException;
 use CASS\Domain\Bundles\Like\Entity\Attitude;
 use CASS\Domain\Bundles\Like\Entity\AttitudeFactory;
+use CASS\Domain\Bundles\Like\Exception\AttitudeNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
@@ -42,6 +43,11 @@ class RemoveCollectionAttitudeCommand extends CollectionCommand
                     'entity' => $collection->toJSON(),
                 ]);
 
+        } catch(AttitudeNotFoundException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setJson(['success' => false])
+                ->setStatusNotFound();
         } catch(CollectionNotFoundException $e) {
             $responseBuilder
                 ->setError($e)

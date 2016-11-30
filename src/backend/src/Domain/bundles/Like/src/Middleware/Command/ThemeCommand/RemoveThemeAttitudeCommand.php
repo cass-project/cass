@@ -4,6 +4,7 @@ namespace CASS\Domain\Bundles\Like\Middleware\Command\ThemeCommand;
 
 use CASS\Domain\Bundles\Like\Entity\Attitude;
 use CASS\Domain\Bundles\Like\Entity\AttitudeFactory;
+use CASS\Domain\Bundles\Like\Exception\AttitudeNotFoundException;
 use CASS\Domain\Bundles\Theme\Exception\ThemeNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -38,13 +39,16 @@ class RemoveThemeAttitudeCommand extends ThemeCommand
 
             $responseBuilder
                 ->setStatusSuccess()
-                ->setJson(
-                    [
-                        'success' => true,
-                        'entity' => $theme->toJSON(),
-                    ]
-                );
+                ->setJson([
+                    'success' => true,
+                    'entity' => $theme->toJSON(),
+                ]);
 
+        } catch(AttitudeNotFoundException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setJson(['success' => false])
+                ->setStatusNotFound();
         } catch(ThemeNotFoundException $e) {
             $responseBuilder
                 ->setError($e)

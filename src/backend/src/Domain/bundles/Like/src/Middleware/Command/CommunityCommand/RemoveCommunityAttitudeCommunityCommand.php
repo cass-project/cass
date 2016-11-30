@@ -5,6 +5,7 @@ namespace CASS\Domain\Bundles\Like\Middleware\Command\CommunityCommand;
 use CASS\Domain\Bundles\Community\Exception\CommunityNotFoundException;
 use CASS\Domain\Bundles\Like\Entity\Attitude;
 use CASS\Domain\Bundles\Like\Entity\AttitudeFactory;
+use CASS\Domain\Bundles\Like\Exception\AttitudeNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use ZEA2\Platform\Bundles\REST\Response\ResponseBuilder;
@@ -42,6 +43,11 @@ class RemoveCommunityAttitudeCommunityCommand extends CommunityCommand
                     'entity' => $community->toJSON(),
                 ]);
 
+        } catch(AttitudeNotFoundException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setJson(['success' => false])
+                ->setStatusNotFound();
         } catch(CommunityNotFoundException $e) {
             $responseBuilder
                 ->setError($e)

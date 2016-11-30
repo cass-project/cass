@@ -4,6 +4,7 @@ namespace CASS\Domain\Bundles\Like\Middleware\Command\ProfileCommand;
 
 use CASS\Domain\Bundles\Like\Entity\Attitude;
 use CASS\Domain\Bundles\Like\Entity\AttitudeFactory;
+use CASS\Domain\Bundles\Like\Exception\AttitudeNotFoundException;
 use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -45,6 +46,11 @@ class RemoveProfileAttitude extends ProfileCommand
                     ]
                 );
 
+        } catch(AttitudeNotFoundException $e) {
+            $responseBuilder
+                ->setError($e)
+                ->setJson(['success' => false])
+                ->setStatusNotFound();
         } catch(ProfileNotFoundException $e) {
             $responseBuilder
                 ->setError($e)
