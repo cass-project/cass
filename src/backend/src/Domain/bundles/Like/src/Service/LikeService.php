@@ -42,4 +42,9 @@ abstract class LikeService
     {
         return $this->likeRepository->getAttitude($attitude);
     }
+
+    public function isAttitudeExists(Attitude $attitude): bool
+    {
+        return $this->likeRepository->isAttitudeExists($attitude);
+    }
 }

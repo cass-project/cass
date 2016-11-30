@@ -3,8 +3,11 @@ namespace CASS\Domain\Bundles\Collection\Formatter;
 
 use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
 use CASS\Domain\Bundles\Collection\Entity\Collection;
+use CASS\Domain\Bundles\Like\Service\LikeCollectionService;
+use CASS\Domain\Bundles\Like\Service\LikeService;
 use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
 use CASS\Domain\Bundles\Subscribe\Service\SubscribeService;
+use CASS\Domain\Service\CurrentIPService\CurrentIPServiceInterface;
 
 final class CollectionFormatter
 {
@@ -14,10 +17,22 @@ final class CollectionFormatter
     /** @var SubscribeService */
     private $subscribeService;
 
-    public function __construct(CurrentAccountService $currentAccountService, SubscribeService $subscribeService)
-    {
+    /** @var LikeCollectionService  */
+    private $likeCollectionService;
+
+    /** @var CurrentIPServiceInterface  */
+    private $currentIPService;
+
+    public function __construct(
+        CurrentAccountService $currentAccountService,
+        SubscribeService $subscribeService,
+        LikeCollectionService $likeCollectionService,
+        CurrentIPServiceInterface $currentIPService
+    ){
         $this->currentAccountService = $currentAccountService;
         $this->subscribeService = $subscribeService;
+        $this->likeCollectionService = $likeCollectionService;
+        $this->currentIPService = $currentIPService;
     }
 
     public function formatMany(array $collections)
@@ -36,8 +51,16 @@ final class CollectionFormatter
                 $collection->getId())
             : false;
 
+        $attitudeState = null;
+
+
         return array_merge($collection->toJSON(), [
-            'subscribed' => $isSubscribedTo
+            'subscribed' => $isSubscribedTo,
+            'likes' => [
+                'state' => $attitudeState,
+                'likes' => $collection->getLikes(),
+                'dislikes' => $collection->getDislikes()
+            ]
         ]);
     }
 }
