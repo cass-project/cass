@@ -1,29 +1,19 @@
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
 
-const METADATA = {
-    ENV: process.env.ENV = process.env.NODE_ENV = 'development',
-    HOST: process.env.HOST || 'localhost',
-    PORT: process.env.PORT || 3000
-};
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-function WebpackConfigBuilder() {
-    this.publicPath = __dirname + '/../../dev/app/dist';
-    this.wwwPath = '/dist';
-    this.bundlesDir = 'bundles';
-}
-
-WebpackConfigBuilder.prototype = {
-    build: function () {
-        return {
-            context: __dirname + '/../src/app',
-            entry: {
-                main: './frontend-app/app.ts',
-                frontline: './frontline-request-app/index.ts'
+module.exports = webpackMerge(commonConfig, {
+    devtool: 'cheap-module-source-map',
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './frontend-app/index.html',
+            filename: '../../frontend.html',
+            inject: 'head',
+            metadata: {
+                isProduction: false
             },
-            devtool: 'cheap-module-source-map'
-        }
-    }
-};
-
-module.exports = webpackMerge(commonConfig, (new WebpackConfigBuilder()).build());
+            excludeChunks: ['main']
+        })
+    ]
+});

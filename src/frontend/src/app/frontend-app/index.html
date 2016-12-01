@@ -9,10 +9,13 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,100&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="/dist/legacy/cropperjs/cropper.min.js"></script>
-    <script src="/dist/bundles/loader.js"></script>
 </head>
 <body>
+
+<% if (htmlWebpackPlugin.options.metadata.isProduction) { %>
 <div class="yoozer-screen-loading" style="width: 100%; height: 100%; position: relative; z-index: 300;"></div>
+<% } %>
+
 <cass-frontend-app></cass-frontend-app>
 </body>
 </html>

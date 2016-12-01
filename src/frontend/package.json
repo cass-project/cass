@@ -4,8 +4,9 @@
   "description": "CASS Frontend",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server:dev": "webpack-dev-server --config config/webpack.dev.js --progress --watch",
-    "start": "npm run server:dev"
+    "watch:dev": "webpack --config config/webpack.dev.js --progress --watch",
+    "watch:prod": "webpack --config config/webpack.prod.js --progress --watch",
+    "start": "npm run watch:dev"
   },
   "license": "ISC",
   "dependencies": {
@@ -38,6 +39,7 @@
     "file-loader": "^0.8.5",
     "font-awesome": "^4.6.3",
     "font-awesome-webpack": "0.0.4",
+    "html-webpack-plugin": "^2.24.1",
     "jade": "^1.11.0",
     "jade-html-loader": "0.0.3",
     "jade-loader": "^0.8.0",

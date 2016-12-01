@@ -12,13 +12,18 @@ function WebpackConfigBuilder() {
 WebpackConfigBuilder.prototype = {
     build: function () {
         return {
-            resolve: {
-                extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
+            context: __dirname + '/../src/app',
+            entry: {
+                main: './frontend-app/app.ts',
+                loader: './loading-indicator-app/index.ts'
             },
             output: {
                 filename: '[name].js',
                 path: this.publicPath + '/' + this.bundlesDir,
                 publicPath: this.wwwPath + '/' + this.bundlesDir + '/'
+            },
+            resolve: {
+                extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
             },
             watchOptions: {
                 pull: true,
@@ -44,7 +49,10 @@ WebpackConfigBuilder.prototype = {
                     },
                     {
                         test: /\.html$/,
-                        loader: 'raw-loader'
+                        loader: 'raw-loader',
+                        exclude: [
+                            '/Users/artem/Desktop/cass/src/frontend/src/app/frontend-app/index.html'
+                        ]
                     },
                     {
                         test: /\.head.scss$/,
@@ -82,12 +90,7 @@ WebpackConfigBuilder.prototype = {
                     "window.Tether": 'tether',
                     'Promise': 'bluebird'
                 }),
-                new webpack.NoErrorsPlugin(),
-                new HtmlWebpackPlugin({
-                    template: '/index.html',
-                    filename: 'frontend.html',
-                    inject: 'head'
-                })
+                new webpack.NoErrorsPlugin()
             ]
         }
     }
