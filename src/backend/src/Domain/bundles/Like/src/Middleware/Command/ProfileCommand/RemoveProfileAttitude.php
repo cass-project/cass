@@ -19,7 +19,7 @@ class RemoveProfileAttitude extends ProfileCommand
             $profile = $this->profileService->getProfileById($profileId);
 
             // устанавливаем владельца
-            $attitudeFactory = new AttitudeFactory($request, $this->currentAccountService);
+            $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
             $attitude = $attitudeFactory->getAttitude();
             $attitude->setResource($profile);
 

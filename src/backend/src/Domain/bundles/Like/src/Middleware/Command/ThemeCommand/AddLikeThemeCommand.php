@@ -17,7 +17,7 @@ class AddLikeThemeCommand extends ThemeCommand
             $themeId = $request->getAttribute('themeId');
             $theme = $this->themeService->getThemeById($themeId);
 
-            $attitudeFactory = new AttitudeFactory($request, $this->currentAccountService);
+            $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
             $attitude = $attitudeFactory->getAttitude();
             $attitude->setResource($theme);
 

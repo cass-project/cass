@@ -19,7 +19,7 @@ class RemoveThemeAttitudeCommand extends ThemeCommand
             $theme = $this->themeService->getThemeById($themeId);
 
             // устанавливаем владельца
-            $attitudeFactory = new AttitudeFactory($request, $this->currentAccountService);
+            $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
             $attitude = $attitudeFactory->getAttitude();
             $attitude->setResource($theme);
 

@@ -9,12 +9,12 @@ use Psr\Http\Message\ServerRequestInterface;
 class AttitudeFactory
 {
     protected $currentAccountService;
-    protected $request;
+    protected $currentIp;
 
-    public function __construct(ServerRequestInterface $request, CurrentAccountService $currentAccountService)
+    public function __construct(string $currentIp, CurrentAccountService $currentAccountService)
     {
         $this->currentAccountService = $currentAccountService;
-        $this->request = $request;
+        $this->currentIp = $currentIp;
     }
 
     public function getAttitude(): Attitude
@@ -23,7 +23,7 @@ class AttitudeFactory
             ?
             $this->profileAttitudeFactory($this->currentAccountService->getCurrentAccount()->getCurrentProfile())
             :
-            $this->anonymousAttitudeFactory($this->request->getServerParams()['REMOTE_ADDR']);
+            $this->anonymousAttitudeFactory($this->currentIp);
     }
 
     static public function anonymousAttitudeFactory(string $ipAddress): Attitude

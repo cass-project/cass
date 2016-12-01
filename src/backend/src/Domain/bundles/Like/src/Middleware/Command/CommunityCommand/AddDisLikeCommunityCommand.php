@@ -17,7 +17,7 @@ class AddDisLikeCommunityCommand extends CommunityCommand
             $communityId = $request->getAttribute('communityId');
             $profile = $this->communityService->getCommunityById($communityId);
 
-            $attitudeFactory = new AttitudeFactory($request, $this->currentAccountService);
+            $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
             $attitude = $attitudeFactory->getAttitude();
             $attitude->setResource($profile);
 

@@ -17,7 +17,7 @@ class AddLikeProfileCommand extends ProfileCommand
             $profileId = $request->getAttribute('profileId');
             $profile = $this->profileService->getProfileById($profileId);
 
-            $attitudeFactory = new AttitudeFactory($request, $this->currentAccountService);
+            $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
             $attitude = $attitudeFactory->getAttitude();
             $attitude->setResource($profile);
 

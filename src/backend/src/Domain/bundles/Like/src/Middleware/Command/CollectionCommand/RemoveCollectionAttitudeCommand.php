@@ -19,7 +19,7 @@ class RemoveCollectionAttitudeCommand extends CollectionCommand
             $collection = $this->collectionService->getCollectionById($collectionId);
 
             // устанавливаем владельца
-            $attitudeFactory = new AttitudeFactory($request, $this->currentAccountService);
+            $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
             $attitude = $attitudeFactory->getAttitude();
             $attitude->setResource($collection);
 
