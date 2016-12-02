@@ -1,0 +1,31 @@
+"/like/collection/{collectionId}/add-like":
+  put:
+    tags:
+      - like
+    description: Лайкнуть collection
+    parameters:
+      - name: collectionId
+        type: number
+        in: path
+        required: true
+        description: ID collectionId
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Collection_Entity_Collection'
+      404:
+        $ref: '#/responses/NotFound'
+      403:
+        $ref: '#/responses/Unauthorized'
+      409:
+        $ref: '#/responses/error'

@@ -7,6 +7,8 @@ use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAware;
 use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
 use ZEA2\Platform\Markers\IdEntity\IdEntity;
 use ZEA2\Platform\Markers\IdEntity\IdEntityTrait;
+use ZEA2\Platform\Markers\LikeEntity\LikeableEntity;
+use ZEA2\Platform\Markers\LikeEntity\LikeableEntityTrait;
 use ZEA2\Platform\Markers\SIDEntity\SIDEntity;
 use ZEA2\Platform\Markers\SIDEntity\SIDEntityTrait;
 use CASS\Util\JSONSerializable;
@@ -26,13 +28,14 @@ use CASS\Domain\Bundles\Theme\Entity\Theme;
  * @Entity(repositoryClass="CASS\Domain\Bundles\Community\Repository\CommunityRepository")
  * @Table(name="community")
  */
-class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, BackdropEntityAware, CollectionAwareEntity, IndexedEntity
+class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, BackdropEntityAware, CollectionAwareEntity, IndexedEntity, LikeableEntity
 {
     use IdEntityTrait;
     use SIDEntityTrait;
     use CollectionAwareEntityTrait;
     use ImageEntityTrait;
     use BackdropEntityAwareTrait;
+    use LikeableEntityTrait;
 
     /**
      * @OneToOne(targetEntity="CASS\Domain\Bundles\Account\Entity\Account")
@@ -135,6 +138,8 @@ class Community implements IdEntity, SIDEntity, JSONSerializable, ImageEntity, B
                 'public_enabled' => $this->isPublicEnabled(),
                 'moderation_contract' => $this->isModerationContractEnabled(),
             ],
+            'likes' => $this->getLikes(),
+            'dislikes' => $this->getDislikes()
         ];
 
         if($this->hasTheme()) {

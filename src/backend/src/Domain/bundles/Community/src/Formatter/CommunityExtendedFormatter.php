@@ -9,6 +9,9 @@ use CASS\Domain\Bundles\Community\Entity\Community;
 
 final class CommunityExtendedFormatter
 {
+    /** @var CommunityFormatter */
+    private $formatter;
+
     /** @var CollectionService */
     private $collectionService;
 
@@ -16,9 +19,11 @@ final class CommunityExtendedFormatter
     private $currentAccountService;
 
     public function __construct(
+        CommunityFormatter $communityFormatter,
         CollectionService $collectionService,
         CurrentAccountService $currentAccountService
     ) {
+        $this->formatter = $communityFormatter;
         $this->collectionService = $collectionService;
         $this->currentAccountService = $currentAccountService;
     }
@@ -32,7 +37,7 @@ final class CommunityExtendedFormatter
         }
         
         return [
-            'community' => $community->toJSON(),
+            'community' => $this->formatter->formatOne($community),
             'collections' => $this->formatCollections($community->getCollections()),
             'is_own' => $isOwn,
             'subscribed' => false,

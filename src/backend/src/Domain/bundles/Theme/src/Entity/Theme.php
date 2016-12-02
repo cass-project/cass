@@ -7,16 +7,19 @@ use CASS\Util\JSONSerializable;
 use CASS\Util\SerialManager\SerialEntity;
 use CASS\Util\SerialManager\SerialManager;
 use Doctrine\ORM\PersistentCollection;
+use ZEA2\Platform\Markers\LikeEntity\LikeableEntity;
+use ZEA2\Platform\Markers\LikeEntity\LikeableEntityTrait;
 
 /**
  * @Entity(repositoryClass="CASS\Domain\Bundles\Theme\Repository\ThemeRepository")
  * @Table(name="theme")
  */
-class Theme implements JSONSerializable, IdEntity, SerialEntity
+class Theme implements JSONSerializable, IdEntity, SerialEntity, LikeableEntity
 {
     const DEFAULT_PREVIEW = 'default.png';
 
     use IdEntityTrait;
+    use LikeableEntityTrait;
 
     /**
      * @OneToMany(targetEntity="CASS\Domain\Bundles\Theme\Entity\Theme", mappedBy="parent")
@@ -69,6 +72,8 @@ class Theme implements JSONSerializable, IdEntity, SerialEntity
             'position' => $this->getPosition(),
             'preview' => $this->getPreview(),
             'subscribed' => false,
+            'likes' => $this->likes,
+            'dislikes' => $this->dislikes
         ];
     }
 

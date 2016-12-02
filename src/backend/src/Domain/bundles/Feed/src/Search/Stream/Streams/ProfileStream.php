@@ -8,7 +8,7 @@ use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\SortCriteria;
 use CASS\Domain\Bundles\Feed\Search\Criteria\Criteria\ThemeIdCriteria;
 use CASS\Domain\Bundles\Feed\Search\Criteria\CriteriaManager;
 use CASS\Domain\Bundles\Profile\Exception\ProfileNotFoundException;
-use CASS\Domain\Bundles\Profile\Formatter\ProfileFeedFormatter;
+use CASS\Domain\Bundles\Profile\Formatter\ProfileFormatter;
 use CASS\Domain\Bundles\Profile\Service\ProfileService;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection;
@@ -19,10 +19,10 @@ final class ProfileStream extends Stream
     /** @var ProfileService */
     private $profileService;
 
-    /** @var ProfileFeedFormatter */
+    /** @var ProfileFormatter */
     private $profileFeedFormatter;
 
-    public function __construct(ProfileService $profileService, ProfileFeedFormatter $profileFeedFormatter)
+    public function __construct(ProfileService $profileService, ProfileFormatter $profileFeedFormatter)
     {
         $this->profileService = $profileService;
         $this->profileFeedFormatter = $profileFeedFormatter;

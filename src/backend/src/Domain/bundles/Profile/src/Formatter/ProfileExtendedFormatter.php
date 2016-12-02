@@ -13,6 +13,9 @@ use CASS\Domain\Bundles\Subscribe\Service\SubscribeService;
 
 final class ProfileExtendedFormatter
 {
+    /** @var ProfileFormatter */
+    private $profileFormatter;
+
     /** @var CollectionService */
     private $collectionService;
 
@@ -26,19 +29,21 @@ final class ProfileExtendedFormatter
     private $profileCardService;
 
     public function __construct(
+        ProfileFormatter $profileFormatter,
         CollectionService $collectionService,
         CurrentAccountService $currentAccountService,
         SubscribeService $subscribeService,
         ProfileCardService $profileCardService
     )
     {
+        $this->profileFormatter = $profileFormatter;
         $this->collectionService = $collectionService;
         $this->currentAccountService = $currentAccountService;
         $this->subscribeService = $subscribeService;
         $this->profileCardService = $profileCardService;
     }
 
-    public function format(Profile $profile): array
+    public function formatOne(Profile $profile): array
     {
         $isOwn = $this->currentAccountService->isAvailable()
             ? $this->currentAccountService->getCurrentAccount()->getProfiles()->contains($profile)
@@ -57,7 +62,7 @@ final class ProfileExtendedFormatter
             : false;
 
         return [
-            'profile' => $profile->toJSON(),
+            'profile' => $this->profileFormatter->formatOne($profile),
             'card' => $this->profileCardService->exportProfileCard($profile, $accessLevel)->toJSON(),
             'collections' => $this->formatCollections($profile->getCollections()),
             'is_own' => $isOwn,

@@ -1,0 +1,31 @@
+"/like/profile/{profileId}/add-like":
+  put:
+    tags:
+      - like
+    description: Лайкнуть профиль
+    parameters:
+      - name: profileId
+        type: number
+        in: path
+        required: true
+        description: ID профиля
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Profile_Entity_Profile'
+      404:
+        $ref: '#/responses/NotFound'
+      403:
+        $ref: '#/responses/Unauthorized'
+      409:
+        $ref: '#/responses/error'
