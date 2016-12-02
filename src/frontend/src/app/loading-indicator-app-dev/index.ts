@@ -64,6 +64,7 @@ function runLoader() {
         let appElement: HTMLElement = document.createElement('script');
 
         appElement.setAttribute('type', 'text/javascript');
+        appElement.setAttribute('src', '/dist/bundles/main.js');
         appElement.innerHTML = appXHR.responseText;
         document.getElementsByTagName('head')[0].appendChild(appElement);
 
