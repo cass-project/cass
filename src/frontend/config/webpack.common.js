@@ -13,10 +13,6 @@ WebpackConfigBuilder.prototype = {
     build: function () {
         return {
             context: __dirname + '/../src/app',
-            entry: {
-                main: './frontend-app/app.ts',
-                loader: './loading-indicator-app/index.ts'
-            },
             output: {
                 filename: '[name].js',
                 path: this.publicPath + '/' + this.bundlesDir,
@@ -90,7 +86,13 @@ WebpackConfigBuilder.prototype = {
                     "window.Tether": 'tether',
                     'Promise': 'bluebird'
                 }),
-                new webpack.NoErrorsPlugin()
+                new webpack.NoErrorsPlugin(),
+                new HtmlWebpackPlugin({
+                    template: './frontend-app/index.html',
+                    filename: '../../frontend.html',
+                    inject: 'head',
+                    excludeChunks: ['main']
+                })
             ]
         }
     }
