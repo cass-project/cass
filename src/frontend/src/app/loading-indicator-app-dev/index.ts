@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     runLoader();
 });
 
-function runLoader(){
+function runLoader() {
     let kFrontline: number = 14;
     let kApp: number = 80;
     let completeApp: number = 0;
@@ -48,27 +48,25 @@ function runLoader(){
     }
 
     function appComplete() {
-        if(frontlineXHR.readyState === 4 && frontlineXHR.status === 200){
+        if (frontlineXHR.readyState === 4 && frontlineXHR.status === 200) {
             appendApp()
         }
     }
 
     function frontlineComplete() {
         window['response_frontline'] = JSON.parse(frontlineXHR.responseText);
-        if(appXHR.readyState === 4 && appXHR.status === 200){
+        if (appXHR.readyState === 4 && appXHR.status === 200) {
             appendApp()
         }
     }
 
-    function appendApp(){
-        setTimeout(() => {
-            let appElement: HTMLElement = document.createElement('script');
+    function appendApp() {
+        let appElement: HTMLElement = document.createElement('script');
 
-            appElement.setAttribute('type', 'text/javascript');
-            appElement.innerHTML = appXHR.responseText;
-            document.getElementsByTagName('head')[0].appendChild(appElement);
+        appElement.setAttribute('type', 'text/javascript');
+        appElement.innerHTML = appXHR.responseText;
+        document.getElementsByTagName('head')[0].appendChild(appElement);
 
-            loader.done();
-        }, 100)
+        loader.done();
     }
 }

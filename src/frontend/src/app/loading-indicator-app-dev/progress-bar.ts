@@ -4,7 +4,7 @@ export class Loader
     private loader: any;
     private currentProgress: number = 0;
 
-    constructor(){
+    constructor() {
         this.progressBar = document.getElementsByClassName('bar-complete')[0];
         this.loader = document.getElementsByClassName('yoozer-screen-loading')[0];
     }
