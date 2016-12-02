@@ -8,13 +8,27 @@ use function DI\object;
 use function DI\factory;
 use function DI\get;
 
-return [
+$configDefault = [
     'php-di' => [
         CurrentIPServiceInterface::class => get(CurrentIPService::class),
     ],
+];
+
+$configMock = [
+    'php-di' => [
+        CurrentIPServiceInterface::class => get(MockCurrentIPService::class),
+    ],
+];
+
+return [
+    'php-di' => [
+
+    ],
+
     'env' => [
-        'test' => [
-            CurrentIPServiceInterface::class => get(MockCurrentIPService::class),
-        ]
-    ]
+        'development' => $configDefault,
+        'production' => $configDefault,
+        'stage' => $configDefault,
+        'test' => $configMock,
+    ],
 ];
