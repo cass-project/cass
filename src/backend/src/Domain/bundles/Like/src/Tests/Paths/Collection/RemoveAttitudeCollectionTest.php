@@ -1,6 +1,7 @@
 <?php
 
 namespace CASS\Domain\Bundles\Like\Tests\Paths\Collection;
+
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 use CASS\Domain\Bundles\Collection\Tests\Fixtures\SampleCollectionsFixture;
 use CASS\Domain\Bundles\Like\Tests\Fixtures\DemoAttitudeFixture;
@@ -13,17 +14,21 @@ class RemoveAttitudeCollectionTest extends LikeCollectionMiddlewareTestCase
 {
     public function test200()
     {
-        $this->upFixture($demoAttitudes = new DemoAttitudeFixture()); 
+        $this->upFixture($demoAttitudes = new DemoAttitudeFixture());
         $collectionId = SampleCollectionsFixture::getCommunityCollection(1)->getId();
 
         $this->requestRemoveCollectionAttitude($collectionId)
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectJSONBody([
-                'success' => true
+                'success' => true,
+                'entity' => [
+                    'attitude' => [
+                        'state' => 'none',
+                    ],
+                ],
             ])
-            ->expectStatusCode(200)
-        ;
+            ->expectStatusCode(200);
     }
 
     public function test404()
@@ -33,7 +38,6 @@ class RemoveAttitudeCollectionTest extends LikeCollectionMiddlewareTestCase
         $this->requestRemoveCollectionAttitude(self::NOT_FOUND_ID)
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
-            ->expectNotFoundError()
-        ;
+            ->expectNotFoundError();
     }
 }

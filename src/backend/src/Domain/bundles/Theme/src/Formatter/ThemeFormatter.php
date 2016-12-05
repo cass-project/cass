@@ -2,9 +2,13 @@
 namespace CASS\Domain\Bundles\Theme\Formatter;
 
 use CASS\Domain\Bundles\Auth\Service\CurrentAccountService;
+use CASS\Domain\Bundles\Like\Entity\Attitude;
+use CASS\Domain\Bundles\Like\Entity\AttitudeFactory;
+use CASS\Domain\Bundles\Like\Service\LikeThemeService;
 use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
 use CASS\Domain\Bundles\Subscribe\Service\SubscribeService;
 use CASS\Domain\Bundles\Theme\Entity\Theme;
+use CASS\Domain\Service\CurrentIPService\CurrentIPServiceInterface;
 
 final class ThemeFormatter
 {
@@ -14,12 +18,22 @@ final class ThemeFormatter
     /** @var SubscribeService */
     private $subscribeService;
 
+    /** @var LikeThemeService  */
+    private $likeThemeService;
+
+    /** @var CurrentIPServiceInterface  */
+    private $currentIPService;
+
     public function __construct(
         CurrentAccountService $currentAccountService,
-        SubscribeService $subscribeService
+        SubscribeService $subscribeService,
+        LikeThemeService $likeThemeService,
+        CurrentIPServiceInterface $currentIPService
     ) {
         $this->currentAccountService = $currentAccountService;
         $this->subscribeService = $subscribeService;
+        $this->likeThemeService = $likeThemeService;
+        $this->currentIPService = $currentIPService;
     }
 
     public function formatMany(array $themes)
@@ -38,8 +52,23 @@ final class ThemeFormatter
                 $theme->getId())
             : false;
 
+        $attitudeFactory = new AttitudeFactory($this->currentIPService, $this->currentAccountService);
+        $attitude = $attitudeFactory->getAttitude();
+        $attitude->setResource($theme);
+
+        $attitudeState = 'none';
+        if($this->likeThemeService->isAttitudeExists($attitude)) {
+            $attitude = $this->likeThemeService->getAttitude($attitude);
+            $attitudeState = $attitude->getAttitudeType() === Attitude::ATTITUDE_TYPE_LIKE ? 'liked' : 'disliked';
+        }
+
         return array_merge($theme->toJSON(), [
-            'subscribed' => $isSubscribedTo
+            'subscribed' => $isSubscribedTo,
+            'attitude' => [
+                'state' => $attitudeState,
+                'likes' => $theme->getLikes(),
+                'dislikes' => $theme->getDislikes(),
+            ],
         ]);
     }
 }

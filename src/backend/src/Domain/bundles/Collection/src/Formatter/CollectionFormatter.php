@@ -29,8 +29,7 @@ final class CollectionFormatter
         SubscribeService $subscribeService,
         LikeCollectionService $likeCollectionService,
         CurrentIPServiceInterface $currentIPService
-    )
-    {
+    ) {
         $this->currentAccountService = $currentAccountService;
         $this->subscribeService = $subscribeService;
         $this->likeCollectionService = $likeCollectionService;
@@ -53,11 +52,11 @@ final class CollectionFormatter
                 $collection->getId())
             : false;
 
-        $attitudeFactory = new AttitudeFactory($this->currentIPService, $this->currentAccountService);
+        $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
         $attitude = $attitudeFactory->getAttitude();
         $attitude->setResource($collection);
 
-        $attitudeState = false;
+        $attitudeState = 'none';
         if($this->likeCollectionService->isAttitudeExists($attitude)) {
             $attitude = $this->likeCollectionService->getAttitude($attitude);
             $attitudeState = $attitude->getAttitudeType() === Attitude::ATTITUDE_TYPE_LIKE ? 'liked' : 'disliked';

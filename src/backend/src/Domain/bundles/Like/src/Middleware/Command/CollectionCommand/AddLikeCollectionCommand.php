@@ -27,7 +27,7 @@ class AddLikeCollectionCommand extends CollectionCommand
                 ->setStatusSuccess()
                 ->setJson([
                     'success' => true,
-                    'entity' => $collection->toJSON(),
+                    'entity' => $this->collectionFormatter->formatOne($collection),
                 ]);
 
         } catch(AttitudeAlreadyExistsException $e) {
