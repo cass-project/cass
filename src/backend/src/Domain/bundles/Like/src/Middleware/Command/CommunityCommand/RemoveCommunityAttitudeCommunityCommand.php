@@ -40,7 +40,7 @@ class RemoveCommunityAttitudeCommunityCommand extends CommunityCommand
                 ->setStatusSuccess()
                 ->setJson([
                     'success' => true,
-                    'entity' => $community->toJSON(),
+                    'entity' => $this->communityFormatter->formatOne($community),
                 ]);
 
         } catch(AttitudeNotFoundException $e) {

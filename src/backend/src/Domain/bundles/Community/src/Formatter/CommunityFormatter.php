@@ -33,7 +33,7 @@ final class CommunityFormatter
 
     public function formatOne(Community $community): array
     {
-        $attitudeFactory = new AttitudeFactory($this->currentIPService, $this->currentAccountService);
+        $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
         $attitude = $attitudeFactory->getAttitude();
         $attitude->setResource($community);
 
