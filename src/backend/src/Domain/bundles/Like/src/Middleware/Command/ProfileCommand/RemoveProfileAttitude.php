@@ -19,10 +19,10 @@ class RemoveProfileAttitude extends ProfileCommand
             $profile = $this->profileService->getProfileById($profileId);
 
             // устанавливаем владельца
-            $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
+            $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(),
+                $this->currentAccountService);
             $attitude = $attitudeFactory->getAttitude();
             $attitude->setResource($profile);
-
 
             // устанавливаем свойства
             $attitude->setResource($profile);
@@ -39,12 +39,10 @@ class RemoveProfileAttitude extends ProfileCommand
 
             $responseBuilder
                 ->setStatusSuccess()
-                ->setJson(
-                    [
-                        'success' => true,
-                        'entity' => $profile->toJSON(),
-                    ]
-                );
+                ->setJson([
+                    'success' => true,
+                    'entity' => $this->profileFormatter->formatOne($profile),
+                ]);
 
         } catch(AttitudeNotFoundException $e) {
             $responseBuilder

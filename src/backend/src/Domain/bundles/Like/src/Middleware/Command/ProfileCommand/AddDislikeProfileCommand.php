@@ -27,7 +27,7 @@ class AddDislikeProfileCommand extends ProfileCommand
                 ->setStatusSuccess()
                 ->setJson([
                     'success' => true,
-                    'entity' => $profile->toJSON(),
+                    'entity' => $this->profileFormatter->formatOne($profile),
                 ]);
         } catch(AttitudeAlreadyExistsException $e) {
             $responseBuilder
