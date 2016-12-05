@@ -23,6 +23,11 @@ class AddDisLikeThemeTest extends LikeThemeMiddlewareTestCase
                     'id' => $this->expectId(),
                     'likes' => 0,
                     'dislikes' => 1,
+                    'attitude' => [
+                        'state' => 'disliked',
+                        'likes' => 0,
+                        'dislikes' => 1,
+                    ]
                 ],
             ])
             ->expectStatusCode(200);
@@ -39,6 +44,11 @@ class AddDisLikeThemeTest extends LikeThemeMiddlewareTestCase
                     'id' => $this->expectId(),
                     'likes' => 0,
                     'dislikes' => 1,
+                    'attitude' => [
+                        'state' => 'disliked',
+                        'likes' => 0,
+                        'dislikes' => 1,
+                    ]
                 ],
             ])
             ->expectStatusCode(200);

@@ -41,7 +41,7 @@ class RemoveThemeAttitudeCommand extends ThemeCommand
                 ->setStatusSuccess()
                 ->setJson([
                     'success' => true,
-                    'entity' => $theme->toJSON(),
+                    'entity' => $this->themeFormatter->formatOne($theme),
                 ]);
 
         } catch(AttitudeNotFoundException $e) {

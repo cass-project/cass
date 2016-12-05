@@ -52,7 +52,7 @@ final class ThemeFormatter
                 $theme->getId())
             : false;
 
-        $attitudeFactory = new AttitudeFactory($this->currentIPService, $this->currentAccountService);
+        $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
         $attitude = $attitudeFactory->getAttitude();
         $attitude->setResource($theme);
 

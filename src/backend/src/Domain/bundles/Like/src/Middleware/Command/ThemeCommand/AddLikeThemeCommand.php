@@ -26,7 +26,7 @@ class AddLikeThemeCommand extends ThemeCommand
                 ->setStatusSuccess()
                 ->setJson([
                     'success' => true,
-                    'entity' => $theme->toJSON(),
+                    'entity' => $this->themeFormatter->formatOne($theme),
                 ]);
         } catch(AttitudeAlreadyExistsException $e) {
             $responseBuilder
