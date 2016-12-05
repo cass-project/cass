@@ -47,7 +47,7 @@ WebpackConfigBuilder.prototype = {
                         test: /\.html$/,
                         loader: 'raw-loader',
                         exclude: [
-                            '/Users/artem/Desktop/cass/src/frontend/src/app/frontend-app/index.html'
+                            '/frontend\-app\/index\.html$/'
                         ]
                     },
                     {
