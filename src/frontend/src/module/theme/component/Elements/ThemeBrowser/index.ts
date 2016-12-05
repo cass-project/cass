@@ -1,8 +1,9 @@
-import {Component, Input, OnInit, EventEmitter, Output, OnChanges} from "@angular/core";
+import {Component, Input, OnInit, EventEmitter, Output, OnChanges, ViewChild} from "@angular/core";
 
 import {Theme} from "../../../definitions/entity/Theme";
 import {ThemeService} from "../../../service/ThemeService";
 import {ViewOptionService} from "../../../../public/component/Options/ViewOption/service";
+import {FormInput} from "../../../../form/component/FormInput/index";
 
 @Component({
     selector: 'cass-theme-browser',
@@ -59,6 +60,8 @@ export class ThemeBrowser implements OnChanges
     getCurrentLevelThemes(): Theme[] {
         return this.root.children;
     }
+
+
 
     private setTheme(theme: Theme) {
         this.root = theme;

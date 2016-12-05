@@ -14,10 +14,8 @@ article.comonent.component-profile-interests-modal([ngClass]="{'.component-profi
       .form-footer-section
         .form-footer-item
           .cass-padding-box-5
-            button.form-text-button((click)='closeModal()')
-              span Отмена
+            cass-form-button(title="ОТМЕНА",styles="text",(click)='closeModal()')
       .form-footer-section
         .form-footer-item
           .cass-padding-box-5
-            button.form-button.form-button-primary([disabled]='!canSaveStatement()', (click)='saveChanges()')
-              span Сохранить выбор
+            cass-form-button(title="Сохранить выбор",styles="solid",color="blue",[disabled]='!canSaveStatement()', (click)='saveChanges()')

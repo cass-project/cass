@@ -5,19 +5,11 @@
     .input-group
       label.form-label
         span Название
-        input.form-input(
-          [ngModelOptions]="{standalone: true}", [(ngModel)]="model.title",
-          type="text",
-          placeholder="Название, заголовок коммунити"
-        )
+        cass-form-input(type="text",placeholder="Название, заголовок коммунити",[(value)]="model.title")
     .input-group
       label.form-label
         span Описание
-        input.form-input(
-          [ngModelOptions]="{standalone: true}", [(ngModel)]="model.description",
-          type="text",
-          placeholder="Подзаголовок коммунити"
-        )
+        cass-form-input(type="text",placeholder="Подзаголовок коммунити",[(value)]="model.description")
   .form-section.modal-list
     header.tab-modal-header
       h2 Тематика
@@ -81,24 +73,11 @@
       h2 Действия
     .delete-community-form
       div(*ngIf="! (deleteRequest.isRequested() || deleteRequest.isConfirmed())")
-        button.form-text-button(
-          (click)="deleteRequest.request()",
-          [disabled]="deleteRequest.isButtonDisabled()"
-        )
-          i.fa.fa-fw.fa-trash
-          span Я хочу удалить это коммунити
+        cass-form-button(title="Я хочу удалить это коммунити",styles="text",icon="'fa fa-fw fa-trash'",(click)="deleteRequest.request()",[disabled]="deleteRequest.isButtonDisabled()")
       div(*ngIf="  deleteRequest.isRequested()")
-        button.form-button.form-button-red(
-          (click)="deleteRequest.confirm()"
-        )
-          i.fa.fa-fw.fa-trash
-          span Отправить запрос на удаление коммунити
-        button.form-button(
-          (click)="deleteRequest.cancel()"
-        )
-          span Отмена
+        cass-form-button(title="Отправить запрос на удаление коммунити",styles="solid",color="red",icon="'fa fa-fw fa-trash'",(click)="deleteRequest.confirm()")
+        cass-form-button(title="ОТМЕНА",styles="text",(click)="deleteRequest.cancel()")
       div(*ngIf="deleteRequest.isConfirmed()")
         p.request-sent Запрос на удаление коммунити отправлен.
-        button.form-text-button
-          i.fa.fa-fw.fa-ban
-          span Отозвать запрос
+        cass-form-button(title="Отозвать запрос",icon="'fa fa-fw fa-ban'",styles="text",(click)="deleteRequest.cancel()")
+

@@ -14,14 +14,8 @@
     .community-image-container
       cass-community-image(border="square", url="{{model.image.variants[64].public_path}}")
     .community-image-controls
-      button.form-text-button.form-button-text-remove((click)="deleteImage()", *ngIf="!loading")
-        i.fa.fa-fw.fa-trash
-        span Удалить
-      button.form-text-button.form-button-text-remove(disabled="", *ngIf="loading")
-        i.fa.fa-spinner.fa-pulse.fa-fw
-        span Удалить
-
+      cass-form-button(*ngIf="!loading",type="button",title="УДАЛИТЬ",styles="solid",color="red",icon="'fa fa-fw fa-trash'",(click)="deleteImage()")
+      cass-form-button(*ngIf="loading",type="button",title="УДАЛИТЬ",styles="solid",color="red",icon="'fa fa-fw fa-spinner fa-pulse'",(click)="deleteImage()")
       label(for="CommunityImageUpload")
-        .form-button.form-button-primary
-          i.fa.fa-fw.fa-upload
-          span Загрузить другое изображение
+        cass-form-button(type="button",title="Загрузить другое изображение",styles="solid",color="blue",icon="'fa fa-fw fa-upload'")
+

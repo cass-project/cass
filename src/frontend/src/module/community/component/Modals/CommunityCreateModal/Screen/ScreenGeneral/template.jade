@@ -3,22 +3,11 @@ cass-community-create-modal-form((abort)="abort()", (next)="next()")
     .input-group
       label.form-label
         span.label-text Название
-        input.form-input(
-          type="text",
-          required="",
-          minlength="3",
-          maxlength="30",
-          placeholder="Название, заголовок сообщества",
-          [ngModelOptions]="{standalone: true}", [(ngModel)] = "model.title"
-        )
+        cass-form-input(type="text",#input ,placeholder="Название, заголовок сообщества",[(value)]="model.title",minlength="3", maxlength = "30")
     .input-group
       label.form-label
         span.label-text Описание
-        input.form-input(
-          type="text",
-          placeholder="(Опционально) В одну строку про сообщество",
-          [ngModelOptions]="{standalone: true}", [(ngModel)]="model.description"
-        )
+        cass-form-input(type="text",#input ,placeholder="(Опционально) В одну строку про сообщество",[(value)]="model.description")
     .input-group
       label.form-label
         span.label-text Тематика

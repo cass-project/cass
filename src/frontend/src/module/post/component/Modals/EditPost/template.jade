@@ -12,6 +12,6 @@ div.component.component-edit-post
               textarea([ngModel]='model.content').edit-post__description
           .edit-post__button
             .button-cancel-wrap
-              button(type="button" , (click)="closeModal()").form-text-button  Отмена
+              cass-form-button(type="button",title="ОТМЕНА",styles="text",(click)="closeModal()")
             .button-save-wrap
-              button(type="button").form-button.form-button-green Сохранить
+              cass-form-button(type="button",title="СОХРАНИТЬ",styles="solid",color="green")

@@ -2,6 +2,7 @@ import {Component, Input, ViewChild, ElementRef, Injectable} from "@angular/core
 
 import {ThemeService} from "../../../service/ThemeService";
 import {Theme} from "../../../definitions/entity/Theme";
+import {FormInput} from "../../../../form/component/FormInput/index";
 
 @Component({
     selector: 'cass-theme-select',
@@ -19,7 +20,7 @@ export class ThemeSelect
     private browser: ThemeSelectBrowser = new ThemeSelectBrowser(this, this.service);
     private search: ThemeSelectSearch = new ThemeSelectSearch(this, this.service);
 
-    @ViewChild('searchInput') searchInput: ElementRef;
+    @ViewChild('input') input: FormInput;
     @ViewChild('scrolling') scrolling: ElementRef;
 
     @Input('value') value;
@@ -49,7 +50,7 @@ export class ThemeSelect
         if(!~this.value.indexOf(themeId)) {
             if(this.isMultiple()) {
                 this.value.push(themeId);
-                this.searchInput.nativeElement.value = '';
+                this.input.value = '';
                 this.search.disable();
             }else{
                 this.value = [themeId];

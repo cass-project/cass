@@ -1,0 +1,37 @@
+@import "./../../../../styles/globals";
+
+.form-input {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #bbb;
+  padding: 2px 2px 1px;
+  line-height: 26px;
+  height: 30px;
+  box-sizing: border-box;
+  color: #000;
+  font-family: $FONT_FAMILY;
+  font-size: $FONT_SIZE_NORMAL;
+  outline: 0!important;
+
+  &input:focus {
+    border-width: 0 0 2px;
+    padding-bottom: 0;
+  }
+
+  &:focus {
+      border-bottom-color: material-color('light-blue', '400');
+    }
+
+  &:disabled {
+    color: material-color('grey', '400');
+  }
+
+  &.ng-invalid + &.ng-touched {
+    border-bottom-color: material-color('red', 'a700')!important;
+  }
+}
+input.account-email-input:disabled {
+  color: #2196F3;
+  cursor: not-allowed;
+}

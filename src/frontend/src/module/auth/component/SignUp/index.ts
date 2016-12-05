@@ -4,6 +4,7 @@ import {SignInRequest} from "../../definitions/paths/sign-in";
 import {SignUpRequest} from "../../definitions/paths/sign-up";
 import {AuthService} from "../../service/AuthService";
 import {LoadingManager} from "../../../common/classes/LoadingStatus";
+import {FormInput} from "../../../form/component/FormInput/index";
 
 @Component({
     selector: 'cass-auth-sign-up',
@@ -12,7 +13,7 @@ import {LoadingManager} from "../../../common/classes/LoadingStatus";
 
 export class SignUpComponent
 {
-    @ViewChild('emailInput') emailInput: ElementRef;
+    @ViewChild('input') input: FormInput;
     
     @Output('back') backEvent = new EventEmitter<SignInRequest>();
     @Output('close') closeEvent = new EventEmitter<SignUpRequest>();
@@ -28,7 +29,7 @@ export class SignUpComponent
     constructor(private authService: AuthService) {}
 
     ngAfterViewInit() {
-        this.emailInput.nativeElement.focus();
+        this.input.putFocus();
     }
 
     submit() {

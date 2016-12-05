@@ -13,19 +13,11 @@ article.component.component-collection-settings-modal
                   .input-group
                     label.form-label
                       span Название
-                      input.form-input(
-                        type="text",
-                        placeholder="Название, заголовок подборки",
-                      [ngModelOptions]="{standalone: true}", [(ngModel)]='collection.title'
-                      )
+                      cass-form-input(type="text", placeholder="Название, заголовок подборки",#input ,[(value)]="collection.title")
                   .input-group
                     label.form-label
                       span Описание
-                      input.form-input(
-                        type="text",
-                        placeholder="Подзаголовок, одна строка про подборку",
-                      [ngModelOptions]="{standalone: true}", [(ngModel)]='collection.description'
-                      )
+                      cass-form-input(type="text", placeholder="Подзаголовок, одна строка про подборку",#input ,[(value)]="collection.description")
                   .modal-list
                     ul.collection-options-list
                       li
@@ -51,11 +43,7 @@ article.component.component-collection-settings-modal
                   cass-tab-modal-header(level="2")
                     span Действия
                   .delete-collection-form
-                    button.form-button.form-button-remove(
-                      (click)="requestDeleteCollection()"
-                    )
-                      i.fa.fa-fw.fa-trash
-                      span Удалить подборку
+                    cass-form-button(type="button",title="Удалить подборку",styles="solid",color="red",icon="'fa fa-fw fa-trash'",(click)="requestDeleteCollection()")
           cass-tab-modal-tab(title="Доступ")
             form.form.tab-theme
               .cass-padding-box-15
@@ -116,20 +104,11 @@ article.component.component-collection-settings-modal
                     cass-collection-image(border="square")
                     //[url]="collection.image.small.public_path")
                   .collection-image-controls
-                    button.form-text-button.form-button-text-remove(
-                    *ngIf="!deleteProcessVisible", (click)="avatarDeletingProcess()")
-                      i.fa.fa-fw.fa-trash
-                      span Удалить
-                    button.form-text-button.form-button-text-remove(*ngIf="isDeleting", disabled)
-                      i.fa.fa-spinner.fa-pulse.fa-fw
-                      span Удалить
-                    button.form-button.form-button-primary
-                      i.fa.fa-fw.fa-upload
-                      span Загрузить другое изображение
+                    cass-form-button(*ngIf="!deleteProcessVisible",type="button",title="УДАЛИТЬ",styles="text",icon="'fa fa-fw fa-trash'",(click)="avatarDeletingProcess()")
+                    cass-form-button(*ngIf="isDeleting",type="button",title="УДАЛИТЬ",styles="text",icon="'fa fa-spinner fa-pulse fa-fw'",(click)="avatarDeletingProcess()",disabled)
+                    cass-form-button(type="button",title="Загрузить другое изображение",styles="solid",color="red",icon="'fa fa-fw fa-upload'")
           footer.tab-content-footer
             .left
-              button.form-text-button((click)='pService.modals.collectionSettings.close()')
-                span Закрыть
+              cass-form-button(type="button",title="ЗАКРЫТЬ",styles="text",icon="'fa fa-fw fa-upload'",(click)='pService.modals.collectionSettings.close()')
             .right
-              button.form-button.form-button-green
-                span Сохранить
+              cass-form-button(type="button",title="СОХРАНИТЬ",styles="solid",color="green")

@@ -36,7 +36,7 @@
     </header>
     <div class="input-group">
       <label class="form-label">
-        <input class="form-input" [readonly]="model.loading" [ngModelOptions]="{standalone: true}" [(ngModel)]="model.profile.greetings.nick_name" type="text" placeholder="Любое имя, из латинских, русских букв, цифр или знака `_`">
+        <cass-form-input [readonly]="model.loading"  [(value)]="model.profile.greetings.nick_name" type="text" placeholder="Любое имя, из латинских, русских букв, цифр или знака `_`"></cass-form-input>
       </label>
     </div>
   </div>
@@ -47,19 +47,19 @@
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Фамилия</span>
-        <input class="form-input" [readonly]="model.loading" [ngModelOptions]="{standalone: true}" [(ngModel)]="model.profile.greetings.last_name" type="text" placeholder="Иванов|Иванова">
+        <cass-form-input  [readonly]="model.loading"  [(value)]="model.profile.greetings.last_name" type="text" placeholder="Иванов|Иванова"></cass-form-input>
       </label>
     </div>
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Имя</span>
-        <input class="form-input" [readonly]="model.loading" [ngModelOptions]="{standalone: true}" [(ngModel)]="model.profile.greetings.first_name" type="text" placeholder="Иван|Елена">
+        <cass-form-input [readonly]="model.loading"  [(value)]="model.profile.greetings.first_name" type="text" placeholder="Иван|Елена"></cass-form-input>
       </label>
     </div>
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Отчество</span>
-        <input class="form-input" [readonly]="model.loading" [ngModelOptions]="{standalone: true}" [(ngModel)]="model.profile.greetings.middle_name" type="text" placeholder="Ивановыч|Ивановна">
+        <cass-form-input  [readonly]="model.loading" [(value)]="model.profile.greetings.middle_name" type="text" placeholder="Ивановыч|Ивановна"></cass-form-input>
       </label>
     </div>
   </div>

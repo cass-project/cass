@@ -35,17 +35,8 @@ cass-modal
               cass-community-settings-tab-image
           footer.tab-content-footer
             .left
-              button.form-text-button(
-                (click)="close()"
-              ) Закрыть
+              cass-form-button(type="button",title="ЗАКРЫТЬ",styles="text",(click)='close()')
             .right
-              button.form-text-button(
-                *ngIf='canSave()',
-                (click) = 'reset()'
-              ) Отменить изменения
-              button.form-button.form-button-green(
-                [disabled]='!canSave()',
-                (click) = 'saveAllChanges()'
-              )
-                i.fa.fa-spinner.fa-pulse.fa-fw(*ngIf="loading")
-                span Сохранить
+              cass-form-button(*ngIf='canSave()',type="button",title="Отменить изменения",styles="text",(click)='reset()')
+              cass-form-button(title="СОХРАНИТЬ",type="button",styles="solid",color="green",(click)='saveAllChanges()',[disabled]='!canSave()')
+              cass-form-button(*ngIf="loading",type="button",title="СОХРАНИТЬ",styles="solid",icon="'fa fa-spinner fa-pulse fa-fw'",color="green",(click)='saveAllChanges()',[disabled]='!canSave()')

@@ -3,7 +3,7 @@
     <h1>Аккаунт</h1>
   </header>
   <div class="account-email">
-    <input type="email" disabled [value]="model.account.email" class="form-input account-email-input">
+    <cass-form-input type="email" disabled="true" [value]="model.account.email" class="account-email-input"></cass-form-input>
     <ul class="email-info">
       <li>К этому почтовому ящику привязан ваш аккаунт.</li>
     </ul>
@@ -15,19 +15,19 @@
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Текущий пароль</span>
-        <input class="form-input" [readonly]="model.loading" [ngModelOptions]="{standalone: true}" [(ngModel)]="model.password.old" type="password" placeholder="Пароль, который вы используете сейчас">
+        <cass-form-input  [readonly]="model.loading" [(value)]="model.password.old" type="password" placeholder="Пароль, который вы используете сейчас" autocomplete="off"></cass-form-input>
       </label>
     </div>
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Новый пароль</span>
-        <input class="form-input" [readonly]="model.loading" [ngModelOptions]="{standalone: true}" [(ngModel)]="model.password.new" type="password" placeholder="*********">
+        <cass-form-input [readonly]="model.loading"  [(value)]="model.password.new" type="password" placeholder="*********"></cass-form-input>
       </label>
     </div>
     <div class="input-group">
       <label class="form-label">
         <span class="label-text">Повторите пароль</span>
-        <input class="form-input" [readonly]="model.loading" [ngModelOptions]="{standalone: true}" [(ngModel)]="model.password.repeat" type="password" placeholder="*********">
+        <cass-form-input [readonly]="model.loading" [(value)]="model.password.repeat" type="password" placeholder="*********"></cass-form-input>
       </label>
     </div>
   </div>
