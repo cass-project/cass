@@ -6,7 +6,7 @@ use CASS\Domain\Bundles\Profile\Entity\Profile;
 use CASS\Domain\Bundles\Subscribe\Entity\Subscribe;
 use CASS\Domain\Bundles\Subscribe\Service\SubscribeService;
 
-final class ProfileFeedFormatter
+final class ProfileFormatter
 {
     /** @var CurrentAccountService */
     private $currentAccountService;

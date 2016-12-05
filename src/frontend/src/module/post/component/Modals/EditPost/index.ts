@@ -19,11 +19,13 @@ import { AttachmentEntity } from "../../../../attachment/definitions/entity/Atta
 export class EditPost
 {
     @Input('post') post: PostEntity;
+    @Input('force-theme-id') forceThemeId: number;
     @Output('close') close: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output('submitEdit') submitEdit: EventEmitter<number> = new EventEmitter<number>();
 
-    private model: PostFormModel = new PostFormModel(undefined, undefined, undefined);
+    private model: PostFormModel;
     private status: LoadingManager = new LoadingManager();
+    private linkRequested: boolean = false;
 
     constructor(
         private session: Session,
@@ -37,6 +39,12 @@ export class EditPost
     }
 
     initPost(){
+        this.model = new PostFormModel(
+            this.post.post_type.int,
+            this.session.getCurrentProfile().getId(),
+            this.post.collection_id
+        );
+
         if(this.post.title.has){
             this.model.title = this.post.title.value;
         }
@@ -48,21 +56,8 @@ export class EditPost
     }
 
     getStyle(){
-        if(!this.haveAttachment()){
+        if(!this.hasAttachments()){
             return {'width': '100%'};
-        }
-    }
-
-    haveAttachment(){
-        return this.post.attachments.length > 0;
-    }
-
-
-    deleteAttachments() {
-        this.model.deleteAttachments();
-
-        if(this.model.isEmpty()) {
-            this.initPost();
         }
     }
 
@@ -90,6 +85,27 @@ export class EditPost
         return this.model.attachments[0].link.url;
     }
 
+    requestLinkBox() {
+        this.linkRequested = true;
+    }
+
+    isLinkBoxRequested(): boolean {
+        return this.linkRequested && ! this.hasAttachments();
+    }
+
+    hasAttachments(): boolean {
+        return this.model.attachments.length > 0;
+    }
+
+    deleteAttachments() {
+        this.model.deleteAttachments();
+        this.linkRequested = false;
+
+        if(this.model.isEmpty()) {
+            this.initPost();
+        }
+    }
+    
     closeModal(){
         this.close.emit(true);
     }

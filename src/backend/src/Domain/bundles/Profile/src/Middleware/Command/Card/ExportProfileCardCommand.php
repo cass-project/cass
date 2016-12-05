@@ -24,7 +24,7 @@ final class ExportProfileCardCommand extends Command
 
             $responseBuilder
                 ->setJson([
-                    'card' => $this->profileExtendedFormatter->format($profile)['card'],
+                    'card' => $this->profileExtendedFormatter->formatOne($profile)['card'],
                 ])
                 ->setStatusSuccess();
         }catch(ProfileNotFoundException $e) {

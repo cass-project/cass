@@ -14,6 +14,8 @@ Collection_Entity_Collection:
     - is_protected
     - children
     - subscribed
+    - likes
+    - dislikes
   properties:
     id:
       type: number
@@ -80,3 +82,9 @@ Collection_Entity_Collection:
     subscribed:
       type: boolean
       description: Подписан ли текущий пользователь на эту сущность?
+    likes:
+      type: number
+      description: Количество лайков
+    dislikes:
+      type: number
+      description: Количество дизлайков

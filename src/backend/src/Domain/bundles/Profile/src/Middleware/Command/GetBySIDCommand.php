@@ -13,7 +13,7 @@ final class GetBySIDCommand extends Command
         try {
             $responseBuilder
                 ->setJson([
-                    'entity' => $this->profileExtendedFormatter->format(
+                    'entity' => $this->profileExtendedFormatter->formatOne(
                         $this->profileService->getProfileBySID($request->getAttribute('sid'))
                     )
                 ])

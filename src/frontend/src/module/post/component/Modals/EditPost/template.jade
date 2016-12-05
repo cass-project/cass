@@ -1,17 +1,38 @@
 div.component.component-edit-post
   cass-modal
-    cass-modal-box(width="800px",height="600px")
+    cass-modal-box(width='600px')
       .edit-post
-        .edit-post__img-wrap(*ngIf='haveAttachment()')
-          img([src]="getAttachmentURL()").edit-post__img
         .edit-post__name([ngStyle]="getStyle()")
           .edit-post-text
             .edit-post__title-wrap(*ngIf='post.title.has')
-              input([ngModel]='model.title.value').edit-post__title
+              input([(ngModel)]='model.title').edit-post__title
             .edit-post__description-wrap
-              textarea([ngModel]='model.content').edit-post__description
+              textarea([(ngModel)]='model.content').edit-post__description
+            .post-form-section.link-box(*ngIf="isLinkBoxRequested()")
+              cass-post-form-link-input(
+                (attach-link)="model.addAttachment($event)",
+                (detach-link)="deleteAttachments()"
+              )
+            .post-form-section(*ngIf="hasAttachments()")
+              .attachment
+                cass-attachment([attachment]="model.getAttachment()", view-mode="feed")
+              .attachment-actions
+                .attachment-actions-section
+                  cass-form-button(title="УДАЛИТЬ ПРИЛОЖЕНИЕ", type="button", styles="text",(click)='deleteAttachments()')
+            .post-form-section
+          .attachment-controls(*ngIf="! hasAttachments()")
+            .attach-control.attach-link
+              button.attach-button((click)="requestLinkBox()", type = "button")
+                i.fa.fa-link
+                span.title Прикрепить ссылку
+            .attach-control.attach-file
+              label(for="componentEditPostFileInput")
+                input#componentEditPostFileInput.file(type="file", (change)="model.addAttachment($event)")
+                div.attach-button
+                  i.fa.fa-cloud-upload
+                  span.title Прикрепить файл
           .edit-post__button
             .button-cancel-wrap
-              cass-form-button(type="button",title="ОТМЕНА",styles="text",(click)="closeModal()")
+              button(type="button", (click)="closeModal()").form-text-button  Отмена
             .button-save-wrap
-              cass-form-button(type="button",title="СОХРАНИТЬ",styles="solid",color="green")
+              button(type="button").form-button.form-button-green Сохранить

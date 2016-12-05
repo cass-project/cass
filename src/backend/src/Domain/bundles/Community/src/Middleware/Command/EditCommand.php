@@ -18,7 +18,7 @@ final class EditCommand extends Command
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson([
-                    'entity' => $this->communityFormatter->format($community),
+                    'entity' => $this->communityExtendedFormatter->format($community),
                 ]);
         }catch(CommunityNotFoundException $e) {
             $responseBuilder

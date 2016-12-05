@@ -7,6 +7,8 @@ use CASS\Domain\Bundles\Backdrop\Entity\BackdropEntityAwareTrait;
 use CASS\Domain\Bundles\Profile\Entity\Card\ProfileCard;
 use ZEA2\Platform\Markers\IdEntity\IdEntity;
 use ZEA2\Platform\Markers\IdEntity\IdEntityTrait;
+use ZEA2\Platform\Markers\LikeEntity\LikeableEntity;
+use ZEA2\Platform\Markers\LikeEntity\LikeableEntityTrait;
 use ZEA2\Platform\Markers\SIDEntity\SIDEntity;
 use ZEA2\Platform\Markers\SIDEntity\SIDEntityTrait;
 use CASS\Util\GenerateRandomString;
@@ -30,7 +32,7 @@ use CASS\Domain\Bundles\Profile\Exception\InvalidBirthdayGuestFromTheFutureExcep
  * @Entity(repositoryClass="CASS\Domain\Bundles\Profile\Repository\ProfileRepository")
  * @Table(name="profile")
  */
-class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, BackdropEntityAware, CollectionAwareEntity, IndexedEntity
+class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, BackdropEntityAware, CollectionAwareEntity, IndexedEntity, LikeableEntity
 {
     const MIN_AGE = 3;
     const MAX_AGE = 130;
@@ -44,6 +46,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
     use CollectionAwareEntityTrait;
     use ImageEntityTrait;
     use BackdropEntityAwareTrait;
+    use LikeableEntityTrait;
 
     /**
      * @ManyToOne(targetEntity="CASS\Domain\Bundles\Account\Entity\Account")
@@ -138,6 +141,8 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
             'expert_in_ids' => $this->expertInIds,
             'interesting_in_ids' => $this->interestingInIds,
             'collections' => $this->getCollections()->toJSON(),
+            'likes' => $this->getLikes(),
+            'dislikes' => $this->getDislikes()
         ];
 
         if($this->isBirthdaySpecified()) {
@@ -166,7 +171,7 @@ class Profile implements JSONSerializable, IdEntity, SIDEntity, ImageEntity, Bac
 
     public function replaceCard(ProfileCard $newProfileCard): self
     {
-        $this->card = $newProfileCard;
+        $this->card = clone $newProfileCard;
 
         return $this;
     }

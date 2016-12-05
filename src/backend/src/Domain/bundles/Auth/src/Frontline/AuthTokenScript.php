@@ -38,7 +38,7 @@ class AuthTokenScript implements FrontlineScript
                     'api_key' => $currentAccountService->getCurrentAccount()->getAPIKey(),
                     'account' => $currentAccountService->getCurrentAccount()->toJSON(),
                     'profiles' => array_map(function(Profile $profile) {
-                        return $this->profileExtendedFormatter->format($profile);
+                        return $this->profileExtendedFormatter->formatOne($profile);
                     }, $currentAccountService->getCurrentAccount()->getProfiles()->toArray())
                 ]
             ];

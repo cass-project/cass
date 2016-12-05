@@ -1,4 +1,45 @@
+@import "./../../../../../styles/globals";
+
 .component-edit-post {
+
+  input#componentPostFormFileInput {
+    display: none;
+  }
+
+  .attachment-controls {
+    display: flex;
+    margin-top: 10px;
+
+    .attach-control {
+      width: 100%;
+    }
+
+    .attach-button {
+      text-align: center;
+      width: 100%;
+      background-color: transparent;
+      display: block;
+      border: 0;
+      outline: 0;
+      cursor: pointer;
+      line-height: 30px;
+      font-family: $FONT_FAMILY;
+      font-size: 14px;
+      font-weight: 500;
+      color: material-color("grey", "700");
+      transition: color 0.1s;
+      text-transform: uppercase;
+      text-decoration: none;
+
+      i.fa {
+        margin-right: 6px;
+      }
+
+      &:hover {
+        color: material-color("grey", "800");
+      }
+    }
+  }
 
   .edit-post {
     display: flex;
