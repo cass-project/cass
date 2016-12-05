@@ -59,8 +59,8 @@
               <h1>Готово!</h1>
               <p>Мы можем сразу вас направить в ваш профиль.</p>
               <div class="buttons">
-                <button type="button" class="form-text-button" (click)="close()">Нет, просто закройте это окно</button>
-                <button type="button" class="form-button form-button-primary" (click)="close(); modals.modals.settings.open()">В профиль</button>
+                <cass-form-button type="button" styles="text" title="Нет, просто закройте это окно" (click)="close()"></cass-form-button>
+                <cass-form-button type="button" styles="solid" color="blue" title="В ПРОФИЛЬ" (click)="close(); modals.modals.settings.open()"></cass-form-button>
               </div>
             </div>
           </div>

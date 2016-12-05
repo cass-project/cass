@@ -10,19 +10,11 @@ cass-modal
             div.input-group
               label.form-label
                 span Название
-                input.form-input(
-                  [ngModelOptions]="{standalone: true}", [(ngModel)]= 'collection.title',
-                  type="text",
-                  placeholder="Название, заголовок подборки"
-                )
+                cass-form-input(type="text", placeholder="Название, заголовок подборки",#input ,[(value)]="collection.title")
             div.input-group
               label.form-label
                 span Описание
-                input.form-input(
-                  [ngModelOptions]="{standalone: true}", [(ngModel)]= 'collection.description',
-                  type="text",
-                  placeholder="Подзаголовок, пару строк о контенте"
-                )
+                cass-form-input(type="text", placeholder="Подзаголовок, пару строк о контенте",#input ,[(value)]="collection.description")
           p.options-info Мы настоятельно рекомендуем указать тематику вашей подборки, если вы собираетесь постить тематический контент
           div.form-section.cass-padding-box-15
             .modal-list

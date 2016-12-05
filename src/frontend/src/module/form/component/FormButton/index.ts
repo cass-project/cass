@@ -15,14 +15,14 @@ export class FormButton {
 
     @Input('title') title:string;
     @Input('type') type:FormButtonType;
-    @Input('styles') styles: FormButtonStyles;
-    @Input('color') color: string;
+    @Input('styles') styles:FormButtonStyles;
+    @Input('color') color: FormButtonColor;
     @Input('icon') icon:string;
-    @Input('disabled') disabled: boolean;
-    @Output('click') clickEvent: EventEmitter<any> = new EventEmitter<any>();
+    @Input('disabled') disabled:boolean;
+    @Output('click') clickEvent:EventEmitter<any> = new EventEmitter<any>();
 
 
-    getCSSClasses(): any {
+    getCSSClasses():any {
 
         if (this.styles === FormButtonStyles.Text) {
             return {
@@ -30,37 +30,37 @@ export class FormButton {
                 'form-button': false
             }
         } else {
-           return {
-               'form-button': true,
-               'form-text-button': false
-           }
+            return {
+                'form-button': true,
+                'form-text-button': false
+            }
         }
 
     }
 
-    getTypeButton(): string {
+    getTypeButton():string {
         return <any>this.type;
     }
 
     getIcon() {
         let icon = this.icon;
 
-        if(icon) {
-            return "<i class =" + icon + "aria-hidden='true'"+"></i>";
+        if (icon) {
+            return "<i class =" + icon + "aria-hidden='true'" + "></i>";
         } else {
             return "";
         }
 
     }
 
-    getDisabled(): boolean {
+    getDisabled():boolean {
         return this.disabled;
     }
 
     click($event) {
         $event.stopPropagation();
 
-        if(!this.disabled) {
+        if (!this.disabled) {
             this.clickEvent.emit($event);
         }
 
@@ -68,13 +68,15 @@ export class FormButton {
 
     getBgColor():any {
 
-     let bgColor = {
-         'backgroundColor': this.color
-     };
+        let color = this.color;
 
-        return bgColor;
+        if (FormButtonColor[color]) {
+            return {
+                'backgroundColor': FormButtonColor[color]
+            }
+        }
+
     }
-
 }
 
 enum FormButtonType {
@@ -87,4 +89,29 @@ enum FormButtonStyles {
     Solid = <any>"solid",
 }
 
-
+enum FormButtonColor {
+    Тransparent = <any>"primary",
+    '#81C784'= <any>"success",//зеленый
+    '#9E9E9E'= <any>"default",// серый
+    '#D32F2F' = <any>"error", // красный
+    '#FDD835' = <any>"warning",// желтый
+    Green = <any>"green",
+    '#2196F3' = <any>"#2196F3", // голубой
+    Red = <any>"red",
+    Pink = <any>"pink",
+    Purple = <any>"purple",
+    '#7E57C2'= <any>"deep-purple",
+    LightBlue = <any>"light-blue",
+    '#3F51B5' = <any>"indigo",
+    '#42A5F5' = <any>"blue",
+    '#00BCD4' = <any> "cyan",
+    Teal = <any>"teal",
+    LightGreen = <any>"light-green",
+    '#CDDC39' = <any>"lime",
+    '#FFEE58'= <any>"yellow",
+    Orange = <any>"orange",
+    Brown = <any>"brown",
+    '#FFC107' = <any>"amber",
+    Grey = <any>"grey",
+    '#9d223c'= <any>'#9d223c'//бордовый на кнопке удалить
+}

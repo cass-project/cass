@@ -4,6 +4,7 @@ import {AuthService} from "../../service/AuthService";
 import {SignInRequest, SignInResponse200} from "../../definitions/paths/sign-in";
 import {LoadingManager} from "../../../common/classes/LoadingStatus";
 import {Router} from "@angular/router";
+import {FormInput} from "../../../form/component/FormInput/index";
 
 @Component({
     selector: 'cass-auth-sign-in',
@@ -11,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class SignInComponent
 {
-    @ViewChild('emailInput') emailInput: ElementRef;
+    @ViewChild('input') input: FormInput;
 
     @Output('success') successEvent = new EventEmitter();
     @Output('close') closeEvent = new EventEmitter<SignInModel>();
@@ -30,7 +31,7 @@ export class SignInComponent
     ) {}
 
     ngAfterViewInit() {
-        this.emailInput.nativeElement.focus();
+        this.input.putFocus();
     }
 
     submit() {

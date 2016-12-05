@@ -22,9 +22,6 @@
         color: material-color("grey", "900");
       }
 
-      button {
-        @include form-button-default-hover;
-      }
     }
 
     span.icon {

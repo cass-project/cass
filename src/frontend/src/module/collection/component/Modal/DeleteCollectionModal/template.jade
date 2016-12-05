@@ -48,15 +48,8 @@ article.component.component-delete-collection-modal
         .form-footer-section
           .form-footer-item
             .cass-padding-box-5
-              button.form-text-button(
-              type="button"
-              )
-                span Отмена
+              cass-form-button(type="button",title="ОТМЕНА",styles="text",(click)='close()')
         .form-footer-section
           .form-footer-item
             .cass-padding-box-5
-              button.form-button.form-button-red(
-                type="button"
-              )
-                i.fa.fa-fw.fa-trash
-                span Удалить
+              cass-form-button(type="button",title="УДАЛИТЬ",styles="solid",color="red",icon="'fa fa-fw fa-trash'")

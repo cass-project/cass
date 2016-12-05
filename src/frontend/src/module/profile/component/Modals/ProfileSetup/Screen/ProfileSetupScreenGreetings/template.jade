@@ -21,12 +21,12 @@ article.component.component-profile-setup-greetings
             label
               span.form-label Имя
               object
-                input.form-input(type='text', [ngModelOptions]="{standalone: true}", [(ngModel)]='model.greetings.firstName')
+                cass-form-input(type="text",#input ,[(value)]="model.greetings.firstName")
           .input-group
             label
               span.form-label Фамилия
               object
-                input.form-input(type='text', [ngModelOptions]="{standalone: true}", [(ngModel)]='model.greetings.lastName')
+                cass-form-input(type="text",#input ,[(value)]="model.greetings.lastName")
 
       li([ngClass]="{'active': model.isGreetingsChecked('n')}")
         label.greetings-radio-view
@@ -47,7 +47,7 @@ article.component.component-profile-setup-greetings
             label
               span.form-label Никнейм
               object
-                input.form-input(type='text', [ngModelOptions]="{standalone: true}", [(ngModel)]='model.greetings.nickName')
+                cass-form-input(type="text",#input ,[(value)]="model.greetings.nickName")
 
       li([ngClass]="{'active': model.isGreetingsChecked('fm')}")
         label.greetings-radio-view
@@ -65,24 +65,12 @@ article.component.component-profile-setup-greetings
             label
               span.form-label Имя
               object
-                input.form-input(
-                  type='text',
-                  [ngModelOptions]="{standalone: true}", [(ngModel)]='model.greetings.firstName',
-                  required,
-                  minlength="1",
-                  maxlength="30",
-                )
+              cass-form-input(type="text",#input ,[(value)]="model.greetings.firstName", required="true", minlength = "1",maxlength="30")
           .input-group
             label
               span.form-label Отчество
               object
-                input.form-input(
-                  type='text',
-                  [ngModelOptions]="{standalone: true}", [(ngModel)]='model.greetings.middleName',
-                  required,
-                  minlength="1",
-                  maxlength="30",
-                )
+                cass-form-input(type="text",#input ,[(value)]="model.greetings.middleName", required="true", minlength = "1",maxlength="30")
 
       li([ngClass]="{'active': model.isGreetingsChecked('lfm')}")
         label.greetings-radio-view
@@ -100,35 +88,17 @@ article.component.component-profile-setup-greetings
             label
               span.form-label Фамилия
               object
-                input.form-input(
-                  type='text',
-                  [ngModelOptions]="{standalone: true}", [(ngModel)]='model.greetings.lastName',
-                  required,
-                  minlength="1",
-                  maxlength="30",
-                )
+                cass-form-input(type="text",#input ,[(value)]="model.greetings.lastName", required="true", minlength = "1",maxlength="30")
           .input-group
             label
               span.form-label Имя
               object
-                input.form-input(
-                  type='text',
-                  [ngModelOptions]="{standalone: true}", [(ngModel)]='model.greetings.firstName',
-                  required,
-                  minlength="1",
-                  maxlength="30",
-                )
+                cass-form-input(type="text",#input ,[(value)]="model.greetings.firstName", required="true", minlength = "1",maxlength="30")
           .input-group
             label
               span.form-label Отчество
               object
-                input.form-input(
-                  type='text',
-                  [ngModelOptions]="{standalone: true}", [(ngModel)]='model.greetings.middleName',
-                  required,
-                  minlength="1",
-                  maxlength="30",
-                )
+                cass-form-input(type="text",#input ,[(value)]="model.greetings.middleName", required="true", minlength = "1",maxlength="30")
     footer.form-footer
       .form-footer-section
         .form-footer-item

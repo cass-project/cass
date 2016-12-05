@@ -3,8 +3,7 @@ article.component.component-community-create-modal-form
     ng-content
     footer.form-footer
       .form-footer-section
-        button.form-text-button(type="button", (click)="abort()")
-          span Отмена
+        cass-form-button(type="button",styles="text",title="ОТМЕНА", (click)="abort()")
       .form-footer-section
-        button.form-button.form-button-primary(type="submit")
-          span Далее
+        cass-form-button(type="submit",styles="solid",color="blue",title="ДАЛЕЕ")
+

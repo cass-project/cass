@@ -5,20 +5,13 @@ article.component.component-auth-dev-modal
         h1 Вход по API-ключу
       .form.cass-padding-box-15
         .input-group
-          input.form-input(
-            type="text",
-            placeholder="Введите API-ключ",
-            minlength='1',
-            [ngModelOptions]="{standalone: true}", [(ngModel)]='apiKey'
-          )
+          cass-form-input(type="text",placeholder="Введите API-ключ",[(value)]="apiKey",minlength='1')
       footer.form-footer
         .form-footer-section
           .form-footer-item
-            button.form-text-button((click)='cancel()')
-              span Отмена
+            cass-form-button(title="ОТМЕНА",styles="text",(click)='cancel()')
         .form-footer-section
           .form-footer-item
-            button.form-text-button((click)='enter()')
-              i.fa.fa-sign-in.fa-fw
-              span Войти
+            cass-form-button(title="ВОЙТИ",styles="text",icon="'fa fa-sign-in fa-fw'",(click)='enter()')
+
 

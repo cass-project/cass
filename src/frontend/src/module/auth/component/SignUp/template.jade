@@ -7,40 +7,15 @@ article.component.component-auth-sign-up
       .input-group
         label.form-label
           span.label-text E-mail:
-          input.form-input(
-            type='email',
-            placeholder='Адрес электронного ящика',
-            autocomplete='off', autofocus='autofocus',
-            tabindex='1',
-            [ngModelOptions]="{standalone: true}", [(ngModel)]='model.email',
-            #emailInput
-          )
+          cass-form-input(type="email", placeholder="Адрес электронного ящика",#input ,tabindex='1',[(value)]="model.email",autocomplete='off')
       .input-group
         label.form-label
           span.label-text Пароль
-          input.form-input(
-            type='password',
-            placeholder='**********',
-            autocomplete='off',
-            tabindex='2',
-            required,
-            minlength='6',
-            maxlength='32',
-            [ngModelOptions]="{standalone: true}", [(ngModel)]='model.password',
-          )
+          cass-form-input(type="password", placeholder="**********",#input ,tabindex='2',[(value)]="model.password",autocomplete='off',required="true",minlength='6',maxlength='32')
       .input-group
         label.form-label
           span.label-text Повторите пароль
-          input.form-input(
-            type='password',
-            placeholder='**********',
-            autocomplete='off',
-            tabindex='3',
-            required,
-            minlength='6',
-            maxlength='32',
-            [ngModelOptions]="{standalone: true}", [(ngModel)]='model.repeat',
-          )
+          cass-form-input(type="password", placeholder="**********",#input ,tabindex='3',[(value)]="model.repeat",autocomplete='off',required="true",minlength='6',maxlength='32')
     footer.form-footer
       .form-footer-section
         .cass-padding-box-5

@@ -8,13 +8,7 @@
         </div>
       </div>
       <div class="search">
-        <input type="text"
-               #searchInput
-               (keyup)="search.update(searchInput.value)"
-               (focus)="search.enable()"
-
-               class="form-input"
-               placeholder="Поиск тематики">
+        <cass-form-input type="text" #input (keyup)="search.update(input.value)" (focus)="search.enable()" placeholder="Поиск тематики"></cass-form-input>
         <span class="info" *ngIf="! browser.visible">
           <span>Начните набирать название тематики или попробуйте ее выбрать из</span>
           <a class="link-browser" (click)="browser.show()">списка<i class="fa fa-fw fa-angle-down"></i></a>
