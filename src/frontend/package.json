@@ -3,7 +3,17 @@
   "version": "0.1.4",
   "description": "CASS Frontend",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run build:dev",
+    "build:dev": "webpack --config config/webpack.dev.js --progress",
+    "build:prod": "webpack --config config/webpack.prod.js --progress",
+    "clean": "rimraf ../www/app/frontend.html ../www/app/dist/bundles/*",
+    "prebuild:dev": "npm run clean",
+    "prebuild:prod": "npm run clean",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npm run watch:dev",
+    "watch:dev": "npm run build:dev -- --watch",
+    "watch:prod": "npm run build:prod -- --watch",
+    "start": "npm run watch:dev"
   },
   "license": "ISC",
   "dependencies": {
@@ -36,6 +46,7 @@
     "file-loader": "^0.8.5",
     "font-awesome": "^4.6.3",
     "font-awesome-webpack": "0.0.4",
+    "html-webpack-plugin": "^2.24.1",
     "jade": "^1.11.0",
     "jade-html-loader": "0.0.3",
     "jade-loader": "^0.8.0",
@@ -55,6 +66,7 @@
     "raw-loader": "0.5.1",
     "reflect-metadata": "^0.1.3",
     "reset.css": "^2.0.2",
+    "rimraf": "^2.5.4",
     "rxjs": "5.0.0-beta.12",
     "sass-loader": "^3.1.2",
     "sass-material-colors": "0.0.5",
@@ -69,6 +81,7 @@
     "url-loader": "^0.5.7",
     "valid-url": "^1.0.9",
     "webpack": "2.1.0-beta.22",
+    "webpack-merge": "^1.0.1",
     "zone.js": "0.6.24"
   },
   "devDependencies": {
