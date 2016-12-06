@@ -1,0 +1,17 @@
+Attitude_Traits_Attitude:
+  type: object
+  description: Отношение пользователя
+  required:
+    - state
+    - likes
+    - dislikes
+  properties:
+    state:
+      type: string
+      description: Состояние - лайк дизлай ещё не лайкнут
+    likes:
+      type: number
+      description: Количество лайков
+    dislikes:
+      type: number
+      description: Количество дизлайков

@@ -15,19 +15,19 @@ class AddLikeCommunityCommand extends CommunityCommand
     {
         try {
             $communityId = $request->getAttribute('communityId');
-            $profile = $this->communityService->getCommunityById($communityId);
+            $community = $this->communityService->getCommunityById($communityId);
 
-            $attitudeFactory = new AttitudeFactory($request, $this->currentAccountService);
+            $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
             $attitude = $attitudeFactory->getAttitude();
-            $attitude->setResource($profile);
+            $attitude->setResource($community);
 
-            $this->likeCommunityService->addLike($profile, $attitude);
+            $this->likeCommunityService->addLike($community, $attitude);
 
             $responseBuilder
                 ->setStatusSuccess()
                 ->setJson([
                     'success' => true,
-                    'entity' => $profile->toJSON(),
+                    'entity' => $this->communityFormatter->formatOne($community),
                 ]);
 
         } catch(AttitudeAlreadyExistsException $e) {

@@ -22,6 +22,11 @@ class DisLikeProfileTest extends LikeProfileMiddlewareTestCase
                     'id' => $this->expectId(),
                     'likes' => 0,
                     'dislikes' => 1,
+                    'attitude' => [
+                        'state' => 'disliked',
+                        'likes' => 0,
+                        'dislikes' => 1,
+                    ]
                 ],
             ])
             ->expectStatusCode(200);
@@ -37,6 +42,11 @@ class DisLikeProfileTest extends LikeProfileMiddlewareTestCase
                     'id' => $this->expectId(),
                     'likes' => 0,
                     'dislikes' => 1,
+                    'attitude' => [
+                        'state' => 'disliked',
+                        'likes' => 0,
+                        'dislikes' => 1,
+                    ]
                 ],
             ])
             ->expectStatusCode(200);

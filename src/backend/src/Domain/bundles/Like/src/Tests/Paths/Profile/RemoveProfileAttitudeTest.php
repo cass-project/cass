@@ -21,7 +21,13 @@ class RemoveProfileAttitudeTest extends LikeProfileMiddlewareTestCase
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectJSONBody([
-                'success' => true
+                'success' => true,
+                'entity' => [
+                    'id' => $this->expectId(),
+                    'attitude' => [
+                        'state' => 'none',
+                    ]
+                ],
             ])
             ->expectStatusCode(200)
         ;

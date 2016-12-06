@@ -19,7 +19,7 @@ class RemoveCollectionAttitudeCommand extends CollectionCommand
             $collection = $this->collectionService->getCollectionById($collectionId);
 
             // устанавливаем владельца
-            $attitudeFactory = new AttitudeFactory($request, $this->currentAccountService);
+            $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
             $attitude = $attitudeFactory->getAttitude();
             $attitude->setResource($collection);
 
@@ -40,7 +40,7 @@ class RemoveCollectionAttitudeCommand extends CollectionCommand
                 ->setStatusSuccess()
                 ->setJson([
                     'success' => true,
-                    'entity' => $collection->toJSON(),
+                    'entity' => $this->collectionFormatter->formatOne($collection),
                 ]);
 
         } catch(AttitudeNotFoundException $e) {

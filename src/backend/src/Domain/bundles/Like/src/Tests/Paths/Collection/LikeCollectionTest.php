@@ -23,6 +23,11 @@ class LikeCollectionTest extends LikeCollectionMiddlewareTestCase
                     'id' => $this->expectId(),
                     'likes' => 1,
                     'dislikes' => 0,
+                    'attitude' => [
+                        'state' => 'liked',
+                        'likes' => 1,
+                        'dislikes' => 0,
+                    ],
                 ],
             ])
             ->expectStatusCode(200);
@@ -38,6 +43,11 @@ class LikeCollectionTest extends LikeCollectionMiddlewareTestCase
                     'id' => $this->expectId(),
                     'likes' => 1,
                     'dislikes' => 0,
+                    'attitude' => [
+                        'state' => 'liked',
+                        'likes' => 1,
+                        'dislikes' => 0,
+                    ],
                 ],
             ])
             ->expectStatusCode(200);

@@ -43,6 +43,7 @@ trait LikeableEntityTrait
     public function decreaseLikes()
     {
         $this->likes--;
+        $this->likes = $this->likes < 0 ? 0 : $this->likes;
 
         return $this;
     }
@@ -50,7 +51,7 @@ trait LikeableEntityTrait
     public function decreaseDislikes()
     {
         $this->dislikes--;
-
+        $this->dislikes = $this->dislikes < 0 ? 0 : $this->dislikes;
         return $this;
     }
 

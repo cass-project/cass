@@ -22,6 +22,12 @@ class RemoveAttitudeCommunityTest extends LikeCommunityMiddlewareTestCase
             ->execute()
             ->expectJSONBody([
                 'success' => true,
+                'entity' => [
+                    'id' => $this->expectId(),
+                    'attitude' => [
+                        'state' => 'none',
+                    ],
+                ],
             ])
             ->expectStatusCode(200);
     }

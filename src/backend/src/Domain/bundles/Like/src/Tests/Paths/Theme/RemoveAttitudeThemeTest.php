@@ -22,6 +22,12 @@ class RemoveAttitudeThemeTest extends LikeThemeMiddlewareTestCase
             ->execute()
             ->expectJSONBody([
                 'success' => true,
+                'entity' => [
+                    'id' => $this->expectId(),
+                    'attitude' => [
+                        'state' => 'none',
+                    ]
+                ],
             ])
             ->expectStatusCode(200);
     }

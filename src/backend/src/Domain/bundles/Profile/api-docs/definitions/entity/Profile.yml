@@ -13,6 +13,7 @@ Profile_Entity_Profile:
     - interesting_in
     - likes
     - dislikes
+    - attitude
   properties:
     id:
       type: number
@@ -53,3 +54,5 @@ Profile_Entity_Profile:
     dislikes:
       type: number
       description: Количество дизлайков
+    attitude:
+      $ref: '#/definitions/Attitude_Traits_Attitude'

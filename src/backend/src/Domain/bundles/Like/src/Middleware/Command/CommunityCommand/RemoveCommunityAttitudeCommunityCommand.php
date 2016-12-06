@@ -19,7 +19,7 @@ class RemoveCommunityAttitudeCommunityCommand extends CommunityCommand
             $community = $this->communityService->getCommunityById($communityId);
 
             // устанавливаем владельца
-            $attitudeFactory = new AttitudeFactory($request, $this->currentAccountService);
+            $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
             $attitude = $attitudeFactory->getAttitude();
             $attitude->setResource($community);
 
@@ -40,7 +40,7 @@ class RemoveCommunityAttitudeCommunityCommand extends CommunityCommand
                 ->setStatusSuccess()
                 ->setJson([
                     'success' => true,
-                    'entity' => $community->toJSON(),
+                    'entity' => $this->communityFormatter->formatOne($community),
                 ]);
 
         } catch(AttitudeNotFoundException $e) {

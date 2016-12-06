@@ -17,7 +17,7 @@ class AddLikeCollectionCommand extends CollectionCommand
             $collectionId = $request->getAttribute('collectionId');
             $collection = $this->collectionService->getCollectionById($collectionId);
 
-            $attitudeFactory = new AttitudeFactory($request, $this->currentAccountService);
+            $attitudeFactory = new AttitudeFactory($this->currentIPService->getCurrentIP(), $this->currentAccountService);
             $attitude = $attitudeFactory->getAttitude();
             $attitude->setResource($collection);
 
@@ -27,7 +27,7 @@ class AddLikeCollectionCommand extends CollectionCommand
                 ->setStatusSuccess()
                 ->setJson([
                     'success' => true,
-                    'entity' => $collection->toJSON(),
+                    'entity' => $this->collectionFormatter->formatOne($collection),
                 ]);
 
         } catch(AttitudeAlreadyExistsException $e) {
