@@ -4,6 +4,7 @@ namespace CASS\Domain\Bundles\Like\Entity;
 
 use CASS\Domain\Bundles\Collection\Entity\Collection;
 use CASS\Domain\Bundles\Community\Entity\Community;
+use CASS\Domain\Bundles\Post\Entity\Post;
 use CASS\Domain\Bundles\Profile\Entity\Profile;
 use CASS\Domain\Bundles\Theme\Entity\Theme;
 use CASS\Util\JSONSerializable;
@@ -29,6 +30,7 @@ class Attitude implements IdEntity, JSONSerializable
     const RESOURCE_TYPE_THEME = 2;
     const RESOURCE_TYPE_COLLECTION = 3;
     const RESOURCE_TYPE_COMMUNITY = 4;
+    const RESOURCE_TYPE_POST = 5;
 
     /**
      * @Column(type="integer", name="owner_type")
@@ -170,6 +172,11 @@ class Attitude implements IdEntity, JSONSerializable
             case Collection::class :{
                 /** @var Collection $entity */
                 $this->setResourceId($entity->getId())->setResourceType(self::RESOURCE_TYPE_COLLECTION);
+                break;
+            }
+            case Post::class :{
+                /** @var Post $entity */
+                $this->setResourceId($entity->getId())->setResourceType(self::RESOURCE_TYPE_POST);
                 break;
             }
         }

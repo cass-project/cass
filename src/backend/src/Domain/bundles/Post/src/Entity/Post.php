@@ -11,15 +11,18 @@ use CASS\Domain\Bundles\Post\PostType\PostType;
 use CASS\Domain\Bundles\Profile\Entity\Profile;
 use CASS\Domain\Bundles\Theme\Strategy\ThemeIdsEntityAware;
 use CASS\Domain\Bundles\Theme\Strategy\Traits\ThemeIdsAwareEntityTrait;
+use ZEA2\Platform\Markers\LikeEntity\LikeableEntity;
+use ZEA2\Platform\Markers\LikeEntity\LikeableEntityTrait;
 
 /**
  * @Entity(repositoryClass="CASS\Domain\Bundles\Post\Repository\PostRepository")
  * @Table(name="post")
  */
-class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEntity
+class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEntity, LikeableEntity
 {
     use IdEntityTrait;
     use ThemeIdsAwareEntityTrait;
+    use LikeableEntityTrait;
 
     /**
      * @Column(type="integer", name="post_type")

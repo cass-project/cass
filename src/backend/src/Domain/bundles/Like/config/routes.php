@@ -3,6 +3,7 @@ namespace CASS\Domain\Bundles\Like;
 
 use CASS\Domain\Bundles\Like\Middleware\LikeCollectionMiddleware;
 use CASS\Domain\Bundles\Like\Middleware\LikeCommunityMiddleware;
+use CASS\Domain\Bundles\Like\Middleware\LikePostMiddleware;
 use CASS\Domain\Bundles\Like\Middleware\LikeProfileMiddleware;
 use CASS\Domain\Bundles\Like\Middleware\LikeThemeMiddleware;
 
@@ -99,6 +100,28 @@ return [
             'url'        => '/like/collection/{collectionId}/{command:remove-attitude}[/]',
             'middleware' => LikeCollectionMiddleware::class,
             'name'       => 'like-collection-remove-attitude'
+        ],
+        // POST
+        [
+            'type'       => 'route',
+            'method'     => 'PUT',
+            'url'        => '/like/post/{postId}/{command:add-like}[/]',
+            'middleware' => LikePostMiddleware::class,
+            'name'       => 'like-post-add-like'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'PUT',
+            'url'        => '/like/post/{postId}/{command:add-dislike}[/]',
+            'middleware' => LikePostMiddleware::class,
+            'name'       => 'like-post-add-dislike'
+        ],
+        [
+            'type'       => 'route',
+            'method'     => 'DELETE',
+            'url'        => '/like/post/{postId}/{command:remove-attitude}[/]',
+            'middleware' => LikePostMiddleware::class,
+            'name'       => 'like-post-remove-attitude'
         ],
 
     ]
