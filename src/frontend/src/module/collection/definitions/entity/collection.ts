@@ -18,6 +18,11 @@ export interface CollectionEntity
     is_main: boolean;
     children?: CollectionEntity[];
     subscribed: boolean;
+    attitude: {
+        state: string,
+        likes: number,
+        dislikes: number
+    };
 }
 
 export interface CollectionIndexEntity extends CollectionEntity
@@ -59,6 +64,11 @@ export class Collection implements CollectionEntity
     backdrop: Backdrop<any>;
     children: CollectionEntity[] = [];
     subscribed: boolean;
+    attitude: {
+        state: string,
+        likes: number,
+        dislikes: number
+    }
 
     constructor(ownerType: string, ownerId: string, themeId?: number) {
         if(!~Collection.OWNER_TYPES.indexOf(ownerType)) {

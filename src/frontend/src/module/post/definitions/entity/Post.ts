@@ -18,6 +18,11 @@ export interface PostEntity extends FeedEntity
     attachment_ids: number[];
     profile: ProfileEntity;
     post_type: PostTypeEntity;
+    attitude: {
+        state: string,
+        likes: number,
+        dislikes: number
+    };
 }
 
 export interface PostIndexedEntity extends PostEntity
