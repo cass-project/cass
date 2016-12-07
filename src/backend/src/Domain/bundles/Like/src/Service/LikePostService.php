@@ -64,4 +64,16 @@ class LikePostService extends LikeService
         return $attitude;
     }
 
+    public function removeLike(LikeableEntity $entity, Attitude $attitude)
+    {
+        parent::removeLike($entity, $attitude);
+        $this->postRepository->savePost($entity->decreaseLikes());
+    }
+
+    public function removeDislike(LikeableEntity $entity, Attitude $attitude)
+    {
+        parent::removeDislike($entity, $attitude);
+        $this->postRepository->savePost($entity->decreaseDislikes());
+    }
+
 }

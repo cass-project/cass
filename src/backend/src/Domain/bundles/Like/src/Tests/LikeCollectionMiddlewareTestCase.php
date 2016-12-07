@@ -5,6 +5,7 @@ use CASS\Application\Bundles\PHPUnit\TestCase\CASSMiddlewareTestCase;
 use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 use CASS\Domain\Bundles\Collection\Tests\Fixtures\SampleCollectionsFixture;
 use CASS\Domain\Bundles\Community\Tests\Fixtures\SampleCommunitiesFixture;
+use CASS\Domain\Bundles\Post\Tests\Fixtures\SamplePostsFixture;
 use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
 use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
 
@@ -19,7 +20,8 @@ class LikeCollectionMiddlewareTestCase extends CASSMiddlewareTestCase
             new DemoProfileFixture(),
             new SampleThemesFixture(),
             new SampleCommunitiesFixture(),
-            new SampleCollectionsFixture()
+            new SampleCollectionsFixture(),
+            new SamplePostsFixture()
         ];
     }
 

@@ -8,8 +8,10 @@ use CASS\Domain\Bundles\Community\Tests\Fixtures\SampleCommunitiesFixture;
 use CASS\Domain\Bundles\Like\Entity\AttitudeFactory;
 use CASS\Domain\Bundles\Like\Service\LikeCollectionService;
 use CASS\Domain\Bundles\Like\Service\LikeCommunityService;
+use CASS\Domain\Bundles\Like\Service\LikePostService;
 use CASS\Domain\Bundles\Like\Service\LikeProfileService;
 use CASS\Domain\Bundles\Like\Service\LikeThemeService;
+use CASS\Domain\Bundles\Post\Tests\Fixtures\SamplePostsFixture;
 use CASS\Domain\Bundles\Theme\Tests\Fixtures\SampleThemesFixture;
 use ZEA2\Platform\Bundles\PHPUnit\Fixture;
 use Doctrine\ORM\EntityManager;
@@ -74,5 +76,19 @@ class DemoAttitudeFixture implements Fixture
         $collectionAttitude->setResource($collection2);
 
         $this->attitudes['dislike'][] = $likeCollectionService->addDislike($collection2, $collectionAttitude);
+
+        // POST
+        $likePostService = $app->getContainer()->get(LikePostService::class);
+        $post = SamplePostsFixture::getPost(1);
+        $postAttitude = AttitudeFactory::profileAttitudeFactory($profile);
+        $postAttitude->setResource($post);
+
+        $this->attitudes['like'][] = $likePostService->addLike($post, $postAttitude);
+        // Dislike
+        $post2 = SamplePostsFixture::getPost(2);
+        $postAttitude = AttitudeFactory::profileAttitudeFactory($profile);
+        $postAttitude->setResource($post2);
+
+        $this->attitudes['dislike'][] = $likePostService->addDislike($post2, $postAttitude);
     }
 }

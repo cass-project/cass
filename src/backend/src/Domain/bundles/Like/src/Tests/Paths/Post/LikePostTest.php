@@ -5,6 +5,7 @@ use CASS\Domain\Bundles\Account\Tests\Fixtures\DemoAccountFixture;
 use CASS\Domain\Bundles\Like\Tests\Fixtures\DemoAttitudeFixture;
 use CASS\Domain\Bundles\Like\Tests\LikePostMiddlewareTestCase;
 use CASS\Domain\Bundles\Post\Tests\Fixtures\SamplePostsFixture;
+use CASS\Domain\Bundles\Profile\Tests\Fixtures\DemoProfileFixture;
 
 /**
  * @backupGlobals disabled
@@ -14,8 +15,11 @@ class LikePostTest extends LikePostMiddlewareTestCase
     public function test200()
     {
 
-        $this->requestLikePost(SamplePostsFixture::getPost(1)->getId())
-            ->auth(DemoAccountFixture::getAccount()->getAPIKey())
+        $postId = SamplePostsFixture::getPost(1)->getId();
+        $account = DemoProfileFixture::getProfile()->getAccount();
+
+        $this->requestLikePost($postId)
+            ->auth($account->getAPIKey())
             ->execute()
             ->expectJSONBody([
                 'success' => true,
@@ -23,17 +27,17 @@ class LikePostTest extends LikePostMiddlewareTestCase
                     'id' => $this->expectId(),
                     'likes' => 1,
                     'dislikes' => 0,
-                    /*'attitude' => [
+                    'attitude' => [
                         'state' => 'liked',
                         'likes' => 1,
                         'dislikes' => 0,
-                    ],*/
+                    ],
                 ],
             ])
             ->expectStatusCode(200);
     }
 
-    /*public function testUnAuth200()
+    public function testUnAuth200()
     {
         $this->requestLikePost(SamplePostsFixture::getPost(1)->getId())
             ->execute()
@@ -51,23 +55,23 @@ class LikePostTest extends LikePostMiddlewareTestCase
                 ],
             ])
             ->expectStatusCode(200);
-    }*/
+    }
 
-    /*public function test403()
+    public function test403()
     {
         $this->requestLikePost(self::NOT_FOUND_ID)
             ->execute()
             ->expectNotFoundError();
-    }*/
+    }
 
-    /*public function test409()
+    public function test409()
     {
         $collectionId = SamplePostsFixture::getPost(1)->getId();
-        $this->upFixture($demoAttitudes = new DemoAttitudeFixture());
+        $this->upFixture(new DemoAttitudeFixture());
 
         $this->requestLikePost($collectionId)
             ->auth(DemoAccountFixture::getAccount()->getAPIKey())
             ->execute()
             ->expectStatusCode(409);
-    }*/
+    }
 }

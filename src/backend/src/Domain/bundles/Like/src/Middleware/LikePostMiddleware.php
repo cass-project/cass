@@ -4,7 +4,9 @@ namespace CASS\Domain\Bundles\Like\Middleware;
 
 use CASS\Application\REST\CASSResponseBuilder;
 use CASS\Application\Service\CommandService;
+use CASS\Domain\Bundles\Like\Middleware\Command\PostCommand\AddDislikePostCommand;
 use CASS\Domain\Bundles\Like\Middleware\Command\PostCommand\AddLikePostCommand;
+use CASS\Domain\Bundles\Like\Middleware\Command\PostCommand\RemovePostAttitudeCommand;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Stratigility\MiddlewareInterface;
@@ -25,8 +27,8 @@ class LikePostMiddleware implements MiddlewareInterface
 
         $resolver = $this->commandService->createResolverBuilder()
             ->attachDirect('add-like', AddLikePostCommand::class, 'PUT')
-//            ->attachDirect('add-dislike', AddDisLikeCommunityCommand::class, 'PUT')
-//            ->attachDirect('remove-attitude', RemoveCommunityAttitudeCommunityCommand::class, 'DELETE')
+            ->attachDirect('add-dislike', AddDislikePostCommand::class, 'PUT')
+            ->attachDirect('remove-attitude', RemovePostAttitudeCommand::class, 'DELETE')
             ->resolve($request);
 
         return $resolver->run($request, $responseBuilder);

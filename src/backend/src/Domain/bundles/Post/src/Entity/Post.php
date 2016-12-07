@@ -97,6 +97,8 @@ class Post implements IdEntity, JSONSerializable, ThemeIdsEntityAware, IndexedEn
             'content' => $this->getContent(),
             'theme_ids' => $this->getThemeIds(),
             'attachment_ids' => $this->getAttachmentIds(),
+            'likes' => $this->likes,
+            'dislikes' => $this->dislikes
         ];
 
         if($this->hasTitle()) {

@@ -1,0 +1,31 @@
+"/like/post/{postId}/remove-attitude":
+  delete:
+    tags:
+      - like
+    description: Удалить отзыв по посту
+    parameters:
+      - name: postId
+        type: number
+        in: path
+        required: true
+        description: ID поста
+    responses:
+      200:
+        description: 200 OK
+        schema:
+          type: object
+          required:
+            - success
+            - entity
+          properties:
+            success:
+              type: boolean
+              description: '=true'
+            entity:
+              $ref: '#/definitions/Post_Entity_Post'
+      404:
+        $ref: '#/responses/NotFound'
+      403:
+        $ref: '#/responses/Unauthorized'
+      409:
+        $ref: '#/responses/error'
