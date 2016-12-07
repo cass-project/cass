@@ -21,6 +21,11 @@ export interface CommunityEntity
     }[];
     public_options: CommunityPublicOptionsEntity;
     features: string[];
+    attitude: {
+        state: string,
+        likes: number,
+        dislikes: number
+    };
 }
 
 export interface CommunityIndexedEntity extends CommunityEntity

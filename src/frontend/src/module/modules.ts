@@ -25,6 +25,7 @@ import {CASSSwipeModule} from "./swipe/module";
 import {CASSSubscribeModule} from "./subscribe/module";
 import {CASSFormModule} from "./form/module";
 import {CASSProfileSubscriptionsModule} from "./profile-subscriptions/module";
+import {CASSLikeModule} from "./like/module";
 
 export const CASS_MODULES = [
     CASSAccountModule,
@@ -54,4 +55,5 @@ export const CASS_MODULES = [
     CASSSubscribeModule,
     CASSFormModule,
     CASSProfileSubscriptionsModule,
+    CASSLikeModule,
 ];
